@@ -547,7 +547,7 @@ class SetSecurityGroupForLoadbalancersRequest extends  AbstractModel {
         super();
 
         /**
-         * Security group ID, such as sg-12345678. can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.comom/document/product/215/15808?from_cn_redirect=1).
+         * Security group ID, such as sg-12345678. can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.com/document/product/215/15808?from_cn_redirect=1).
          * @type {string || null}
          */
         this.SecurityGroup = null;
@@ -560,7 +560,7 @@ DEL: unbind a security group
         this.OperationType = null;
 
         /**
-         * ID array of the clb instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
+         * ID array of the clb instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
 Specifies the maximum length supported by the list is 20.
          * @type {Array.<string> || null}
          */
@@ -679,7 +679,7 @@ Note: If the specified VIP is occupied or is not within the IP range of the spec
         this.Vip = null;
 
         /**
-         * BANDWIDTH PACKAGE ID, which can be obtained through the [DescribeBandwidthPackages](https://www.tencentcloud.comom/document/api/215/19209?from_cn_redirect=1) api. specifies the BANDWIDTH PACKAGE ID. when this parameter is specified, the network billing mode (InternetAccessible.InternetChargeType) supports only billing by BANDWIDTH PACKAGE (BANDWIDTH_PACKAGE). the attributes of the BANDWIDTH PACKAGE determine the settlement method. for IPv6 clb instances purchased by non-promoted users, if the operator type is not BGP, the BANDWIDTH PACKAGE ID cannot be specified.
+         * BANDWIDTH PACKAGE ID, which can be obtained through the [DescribeBandwidthPackages](https://www.tencentcloud.com/document/api/215/19209?from_cn_redirect=1) api. specifies the BANDWIDTH PACKAGE ID. when this parameter is specified, the network billing mode (InternetAccessible.InternetChargeType) supports only billing by BANDWIDTH PACKAGE (BANDWIDTH_PACKAGE). the attributes of the BANDWIDTH PACKAGE determine the settlement method. for IPv6 clb instances purchased by non-promoted users, if the operator type is not BGP, the BANDWIDTH PACKAGE ID cannot be specified.
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
@@ -728,13 +728,13 @@ Note: If the specified VIP is occupied or is not within the IP range of the spec
 
         /**
          * Applicable only to public network IPv4 clb instances. specifies the secondary AZ ID for cross-az disaster recovery. both AZ ID and name are supported, such as 100001 or ap-guangzhou-1.
-Note: The secondary AZ sustains traffic when the primary AZ encounters faults. You can call the [DescribeResources](https://www.tencentcloud.comom/document/api/214/70213?from_cn_redirect=1) API to query the list of primary/secondary AZs in a region. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+Note: The secondary AZ sustains traffic when the primary AZ encounters faults. You can call the [DescribeResources](https://www.tencentcloud.com/document/api/214/70213?from_cn_redirect=1) API to query the list of primary/secondary AZs in a region. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
          * @type {string || null}
          */
         this.SlaveZoneId = null;
 
         /**
-         * The unique ID of EIP, which can be queried through the DescribeAddresses API (https://www.tencentcloud.comom/document/product/215/16702?from_cn_redirect=1). format: EIP-qhx8udkc. applicable only to private network clb binding EIP.
+         * The unique ID of EIP, which can be queried through the DescribeAddresses API (https://www.tencentcloud.com/document/product/215/16702?from_cn_redirect=1). format: EIP-qhx8udkc. applicable only to private network clb binding EIP.
          * @type {string || null}
          */
         this.EipAddressId = null;
@@ -921,37 +921,37 @@ class DeleteRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to query the ID.
+         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * ID of the CLB instance listener. You can call the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) API to query the ID.
+         * ID of the CLB instance listener. You can call the [DescribeListeners](https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * Array of ids of forwarding rules to be deleted, can be accessed through the [DescribeLoadBalancersDetail](https://www.tencentcloud.comom/document/api/214/46916?from_cn_redirect=1) api.
+         * Array of ids of forwarding rules to be deleted, can be accessed through the [DescribeLoadBalancersDetail](https://www.tencentcloud.com/document/api/214/46916?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.LocationIds = null;
 
         /**
-         * Domain name of the forwarding rule to be deleted. if it is multiple domains, you can specify any one of the domain name list. it can be accessed through the [DescribeLoadBalancersDetail](https://www.tencentcloud.comom/document/api/214/46916?from_cn_redirect=1) api.
+         * Domain name of the forwarding rule to be deleted. if it is multiple domains, you can specify any one of the domain name list. it can be accessed through the [DescribeLoadBalancersDetail](https://www.tencentcloud.com/document/api/214/46916?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Forwarding path of the forwarding rule to be deleted can be accessed through the DescribeLoadBalancersDetail api (https://www.tencentcloud.comom/document/api/214/46916?from_cn_redirect=1).
+         * Forwarding path of the forwarding rule to be deleted can be accessed through the DescribeLoadBalancersDetail api (https://www.tencentcloud.com/document/api/214/46916?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * A default domain name must be configured under the listener. when you need to delete the default domain name, you can specify another domain name as the new default domain name. if the new default domain name is multiple domains, you can specify any one of the domain name list. it can be accessed through the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) api.
+         * A default domain name must be configured under the listener. when you need to delete the default domain name, you can specify another domain name as the new default domain name. if the new default domain name is multiple domains, you can specify any one of the domain name list. it can be accessed through the [DescribeListeners](https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.NewDefaultServerDomain = null;
@@ -984,7 +984,7 @@ class CloneLoadBalancerRequest extends  AbstractModel {
         super();
 
         /**
-         * Specifies the clb ID. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to obtain the ID.
+         * Specifies the clb ID. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1) API to obtain the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -1017,7 +1017,7 @@ Note: A secondary AZ will load traffic if the primary AZ is faulty. You can use 
         this.SlaveZoneId = null;
 
         /**
-         * Applicable only to public network clb. AZ ID, both availability zone ID and name are supported. specify availability zone to create a load balancing instance, for example: 100001 or ap-guangzhou-1. if not passed, queries CVM instances in all azs. if needed, call the API for the query DescribeZones (https://www.tencentcloud.comom/document/product/213/15707?from_cn_redirect=1) to specify availability zone.
+         * Applicable only to public network clb. AZ ID, both availability zone ID and name are supported. specify availability zone to create a load balancing instance, for example: 100001 or ap-guangzhou-1. if not passed, queries CVM instances in all azs. if needed, call the API for the query DescribeZones (https://www.tencentcloud.com/document/product/213/15707?from_cn_redirect=1) to specify availability zone.
          * @type {string || null}
          */
         this.ZoneId = null;
@@ -1053,7 +1053,7 @@ Note: A secondary AZ will load traffic if the primary AZ is faulty. You can use 
         this.ExclusiveCluster = null;
 
         /**
-         * BANDWIDTH PACKAGE ID, which can be obtained through the [DescribeBandwidthPackages](https://www.tencentcloud.comom/document/api/215/19209?from_cn_redirect=1) api. specifies this parameter indicates the network billing mode (InternetAccessible.InternetChargeType) supports only billing by BANDWIDTH PACKAGE (BANDWIDTH_PACKAGE).
+         * BANDWIDTH PACKAGE ID, which can be obtained through the [DescribeBandwidthPackages](https://www.tencentcloud.com/document/api/215/19209?from_cn_redirect=1) api. specifies this parameter indicates the network billing mode (InternetAccessible.InternetChargeType) supports only billing by BANDWIDTH PACKAGE (BANDWIDTH_PACKAGE).
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
@@ -1071,7 +1071,7 @@ Note: A secondary AZ will load traffic if the primary AZ is faulty. You can use 
         this.SnatIps = null;
 
         /**
-         * Public network exclusive cluster ID or CDCId. can be obtained through the [DescribeExclusiveClusters](https://www.tencentcloud.comom/document/product/214/49278?from_cn_redirect=1) api.
+         * Public network exclusive cluster ID or CDCId. can be obtained through the [DescribeExclusiveClusters](https://www.tencentcloud.com/document/product/214/49278?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.ClusterIds = null;
@@ -1089,13 +1089,13 @@ Note: A secondary AZ will load traffic if the primary AZ is faulty. You can use 
         this.ClusterTag = null;
 
         /**
-         * Applicable only to private network clb. when connected to nearby, select availability zone for deployment. you can call DescribeZones (https://www.tencentcloud.comom/document/product/213/15707?from_cn_redirect=1) to query the availability zone list.
+         * Applicable only to private network clb. when connected to nearby, select availability zone for deployment. you can call DescribeZones (https://www.tencentcloud.com/document/product/213/15707?from_cn_redirect=1) to query the availability zone list.
          * @type {Array.<string> || null}
          */
         this.Zones = null;
 
         /**
-         * The unique ID of EIP, such as EIP-qhx8udkc, applicable only to private network clb binding EIP, can be queried through the DescribeAddresses API (https://www.tencentcloud.comom/document/product/215/16702?from_cn_redirect=1).
+         * The unique ID of EIP, such as EIP-qhx8udkc, applicable only to private network clb binding EIP, can be queried through the DescribeAddresses API (https://www.tencentcloud.com/document/product/215/16702?from_cn_redirect=1).
          * @type {string || null}
          */
         this.EipAddressId = null;
@@ -1413,7 +1413,7 @@ class RsTagRule extends  AbstractModel {
         this.LocationId = null;
 
         /**
-         * Modified Tag of the backend service. this parameter has a lower priority than the Tag parameter in the aforementioned [Target](https://www.tencentcloud.comom/document/api/214/30694?from_cn_redirect=1#Target). the final Tag value is based on the Tag parameter in the Target. the Tag parameter in RsTagRule will be used only when the Tag parameter in the Target is empty.
+         * Modified Tag of the backend service. this parameter has a lower priority than the Tag parameter in the aforementioned [Target](https://www.tencentcloud.com/document/api/214/30694?from_cn_redirect=1#Target). the final Tag value is based on the Tag parameter in the Target. the Tag parameter in RsTagRule will be used only when the Tag parameter in the Target is empty.
          * @type {string || null}
          */
         this.Tag = null;
@@ -1452,19 +1452,19 @@ class ModifyRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to obtain the ID.
+         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1) API to obtain the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * ID of the clb listener. can be obtained through the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) api.
+         * ID of the clb listener. can be obtained through the [DescribeListeners](https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * Specifies the rule ID of the forwarding rule to be modified, which can be obtained through the DescribeListeners API (https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1).
+         * Specifies the rule ID of the forwarding rule to be modified, which can be obtained through the DescribeListeners API (https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1).
          * @type {string || null}
          */
         this.LocationId = null;
@@ -2317,7 +2317,7 @@ class InquiryPriceModifyLoadBalancerRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -2870,19 +2870,19 @@ class ModifyDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to query the ID.
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * ID of the clb listener. you can call the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) API to query the ID.
+         * ID of the clb listener. you can call the [DescribeListeners](https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * An existing domain under the listener, can be queried through the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) api.
+         * An existing domain under the listener, can be queried through the [DescribeListeners](https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Domain = null;
@@ -3430,13 +3430,13 @@ class DeleteLoadBalancerListenersRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to query the ID.
+         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Specifies the listener ID array to be deleted, with a maximum of 20 elements. if left blank, all listeners of the clb will be deleted. can be obtained through the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) api.
+         * Specifies the listener ID array to be deleted, with a maximum of 20 elements. if left blank, all listeners of the clb will be deleted. can be obtained through the [DescribeListeners](https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.ListenerIds = null;
@@ -3655,7 +3655,7 @@ class DescribeCustomizedConfigListRequest extends  AbstractModel {
         this.ConfigName = null;
 
         /**
-         * Configuration ID, can be accessed through the [DescribeCustomizedConfigList](https://www.tencentcloud.comom/document/api/214/60009?from_cn_redirect=1) api.
+         * Configuration ID, can be accessed through the [DescribeCustomizedConfigList](https://www.tencentcloud.com/document/api/214/60009?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.UconfigIds = null;
@@ -3666,12 +3666,12 @@ class DescribeCustomizedConfigListRequest extends  AbstractModel {
 Filter by [cloud load balancer ID]. instance billing mode such as lb-9vxezxza.
 Type: String.
 Required: No
-Method for obtaining: [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1).
+Method for obtaining: [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/1108/48459?from_cn_redirect=1).
 - vip
 Filter by [clb VIP]. network billing mode such as "1.1.1.1", "2204::22:3".
 Type: String.
 Required: No
-Method for obtaining: [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1).
+Method for obtaining: [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/1108/48459?from_cn_redirect=1).
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4195,7 +4195,7 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * Specifies the unique ID of the cloud load balancer. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to obtain the ID.
+         * Specifies the unique ID of the cloud load balancer. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1) API to obtain the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -4246,7 +4246,7 @@ Specifies no modification if left blank.
         this.ModifyClassicDomain = null;
 
         /**
-         * The associated endpoint Id, which can be queried via the [DescribeVpcEndPoint](https://www.tencentcloud.comom/document/product/215/54679?from_cn_redirect=1) api. input an empty string to unbind.
+         * The associated endpoint Id, which can be queried via the [DescribeVpcEndPoint](https://www.tencentcloud.com/document/product/215/54679?from_cn_redirect=1) api. input an empty string to unbind.
          * @type {string || null}
          */
         this.AssociateEndpoint = null;
@@ -4369,7 +4369,7 @@ class SlaUpdateParam extends  AbstractModel {
 
         /**
          * CLB instance ID.
-Can be queried through the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) api.
+Can be queried through the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/1108/48459?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -5704,7 +5704,7 @@ class RegisterTargetsRequest extends  AbstractModel {
         this.Targets = null;
 
         /**
-         * Specifies the forwarding rule ID, which can be obtained through the DescribeListeners API (https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1). you must provide this parameter or either Domain or Url when binding a backend service to a layer-7 forwarding rule.
+         * Specifies the forwarding rule ID, which can be obtained through the DescribeListeners API (https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1). you must provide this parameter or either Domain or Url when binding a backend service to a layer-7 forwarding rule.
          * @type {string || null}
          */
         this.LocationId = null;
@@ -5886,13 +5886,13 @@ class DeleteListenerRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to query the ID.
+         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * The listener ID to be deleted, can be accessed through the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) api.
+         * The listener ID to be deleted, can be accessed through the [DescribeListeners](https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.ListenerId = null;
@@ -5977,7 +5977,7 @@ class DescribeCustomizedConfigAssociateListRequest extends  AbstractModel {
         super();
 
         /**
-         * Specifies the configuration ID, which can be obtained through the [DescribeCustomizedConfigList](https://www.tencentcloud.comom/document/product/214/60009?from_cn_redirect=1) api.
+         * Specifies the configuration ID, which can be obtained through the [DescribeCustomizedConfigList](https://www.tencentcloud.com/document/product/214/60009?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.UconfigId = null;
@@ -5995,7 +5995,7 @@ class DescribeCustomizedConfigAssociateListRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Search Domain. can be queried through the `Domain` field in the [DescribeLoadBalancersDetail](https://www.tencentcloud.comom/document/product/214/46916?from_cn_redirect=1) API return value.
+         * Search Domain. can be queried through the `Domain` field in the [DescribeLoadBalancersDetail](https://www.tencentcloud.com/document/product/214/46916?from_cn_redirect=1) API return value.
          * @type {string || null}
          */
         this.Domain = null;
@@ -6123,12 +6123,12 @@ class DescribeLoadBalancersDetailRequest extends  AbstractModel {
 Filter by [clb ID], for example: lb-rbw5skde.
 Type: String.
 Required: No
-Method for obtaining: [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1).
+Method for obtaining: [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/1108/48459?from_cn_redirect=1).
 - project-id
 Filters by [project ID]. for example: "0", "123".
 Type: String.
 Required: No
-Method for obtaining: [DescribeProject](https://www.tencentcloud.comom/document/api/651/78725?from_cn_redirect=1).
+Method for obtaining: [DescribeProject](https://www.tencentcloud.com/document/api/651/78725?from_cn_redirect=1).
 - network
 Filters by [clb network type]. for example: Public.
 Type: String.
@@ -6142,7 +6142,7 @@ Required: No
 Filter by the vpc to which the cloud load balancer belongs, such as "vpc-12345678".
 Type: String.
 Required: No
-Method for obtaining: [DescribeZones](https://www.tencentcloud.comom/document/product/213/15707?from_cn_redirect=1).
+Method for obtaining: [DescribeZones](https://www.tencentcloud.com/document/product/213/15707?from_cn_redirect=1).
 - target-ip
 Filters by the private network IP of the backend destination. for example: "1.1.1.1", "2203::214:4".
 Type: String.
@@ -6151,17 +6151,17 @@ Required: No
 Filter by [availability zone of the cloud load balancer]. for example: "ap-guangzhou-1".
 Type: String.
 Required: No
-Method for obtaining: [DescribeZones](https://www.tencentcloud.comom/document/product/213/15707?from_cn_redirect=1).
+Method for obtaining: [DescribeZones](https://www.tencentcloud.com/document/product/213/15707?from_cn_redirect=1).
 - tag-key
 Filters by [tag key of the cloud load balancer tag], for example: "name".
 Type: String.
 Required: No
-Method for obtaining: [DescribeTags](https://www.tencentcloud.comom/document/api/651/35316?from_cn_redirect=1).
+Method for obtaining: [DescribeTags](https://www.tencentcloud.com/document/api/651/35316?from_cn_redirect=1).
 - tag:*
 Filter by [cloud load balancer tag], where ':' is followed by the tag key. for example, to filter by tag key 'name' with tag Values 'zhangsan' and 'lisi', use {"name": "tag:name","Values": ["zhangsan", "lisi"]}.
 Type: String.
 Required: No
-Method for obtaining: [DescribeTagKeys](https://www.tencentcloud.comom/document/api/651/35318?from_cn_redirect=1).
+Method for obtaining: [DescribeTagKeys](https://www.tencentcloud.com/document/api/651/35318?from_cn_redirect=1).
 - fuzzy-search
 Searches by [clb VIP, clb name] using fuzzy search, for example: "1.1".
 Type: String.
@@ -7041,13 +7041,13 @@ class DescribeListenersRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/api/214/30685?from_cn_redirect=1) api to obtain the ID.
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/30685?from_cn_redirect=1) api to obtain the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Specifies the array of clb listener ids to query, with a maximum of 100. you can call the [DescribeListeners](https://www.tencentcloud.comom/document/api/214/30686?from_cn_redirect=1) api to obtain the ids.
+         * Specifies the array of clb listener ids to query, with a maximum of 100. you can call the [DescribeListeners](https://www.tencentcloud.com/document/api/214/30686?from_cn_redirect=1) api to obtain the ids.
          * @type {Array.<string> || null}
          */
         this.ListenerIds = null;
@@ -7329,7 +7329,7 @@ class ModifyLoadBalancersProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * One or more load balancing instance ids to be operated. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ids.
+         * One or more load balancing instance ids to be operated. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/1108/48459?from_cn_redirect=1) API to query the ids.
 Specifies the maximum length supported by the list is 20.
          * @type {Array.<string> || null}
          */
@@ -7528,14 +7528,14 @@ class SetLoadBalancerSecurityGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
          * Specifies an array of security group ids. a load balancing instance supports a maximum binding of 50 security groups. to unbind all security groups, omit this parameter.
-Can be queried through the [DescribeSecurityGroups](https://www.tencentcloud.comom/document/product/215/15808?from_cn_redirect=1) api.
+Can be queried through the [DescribeSecurityGroups](https://www.tencentcloud.com/document/product/215/15808?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.SecurityGroups = null;
@@ -7632,7 +7632,7 @@ class SetCustomizedConfigForLoadBalancerRequest extends  AbstractModel {
 
         /**
          * Specifies the personalized configuration content. this field is required when creating or modifying custom configuration.
-Specifies specific restrictions. view layer-7 personalized configuration (https://www.tencentcloud.comom/document/product/214/15171?from_cn_redirect=1).
+Specifies specific restrictions. view layer-7 personalized configuration (https://www.tencentcloud.com/document/product/214/15171?from_cn_redirect=1).
          * @type {string || null}
          */
         this.ConfigContent = null;
@@ -7645,7 +7645,7 @@ Specifies specific restrictions. view layer-7 personalized configuration (https:
 
         /**
          * CLB instance ID. this field is required for bind/unbind operations.
-Can be queried through the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) api.
+Can be queried through the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/1108/48459?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
@@ -8010,13 +8010,13 @@ class CreateRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to obtain the ID.
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1) API to obtain the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Specifies the listener ID, which can be obtained through the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) api.
+         * Specifies the listener ID, which can be obtained through the [DescribeListeners](https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.ListenerId = null;
@@ -8089,14 +8089,14 @@ class LbRsItem extends  AbstractModel {
 
         /**
          * VPC ID in string format. Only string format is supported.
-Can be queried through the [DescribeVpcs](https://www.tencentcloud.comom/document/api/215/15778?from_cn_redirect=1) api.
+Can be queried through the [DescribeVpcs](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
          * Specifies the private IP address for backend querying, which can be CVM or eni.
-Can be queried through the [DescribeAddresses](https://www.tencentcloud.comom/document/product/215/16702?from_cn_redirect=1) api.
+Can be queried through the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.PrivateIp = null;
@@ -8341,7 +8341,7 @@ class InquiryPriceRefundLoadBalancerRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -9372,7 +9372,7 @@ Defaults to CreateTime.
         this.SearchKey = null;
 
         /**
-         * Project ID of the cloud load balancer instance. you can call the [DescribeProject](https://www.tencentcloud.comom/document/api/651/78725?from_cn_redirect=1) api to obtain the ID. defaults to all projects if not passed.
+         * Project ID of the cloud load balancer instance. you can call the [DescribeProject](https://www.tencentcloud.com/document/api/651/78725?from_cn_redirect=1) api to obtain the ID. defaults to all projects if not passed.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -9384,14 +9384,14 @@ Defaults to CreateTime.
         this.WithRs = null;
 
         /**
-         * Specifies the unique vpc ID of the load balancing instance, such as vpc-bhqkbhdx. you can call the [DescribeVpcs](https://www.tencentcloud.comom/document/api/215/15778?from_cn_redirect=1) api to obtain it.
+         * Specifies the unique vpc ID of the load balancing instance, such as vpc-bhqkbhdx. you can call the [DescribeVpcs](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1) api to obtain it.
 Searches for cloud load balancer of basic network type. allows input '0'.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Security group ID, such as sg-m1cc****, can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.comom/document/product/215/15808?from_cn_redirect=1).
+         * Security group ID, such as sg-m1cc****, can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.com/document/product/215/15808?from_cn_redirect=1).
          * @type {string || null}
          */
         this.SecurityGroup = null;
@@ -10542,7 +10542,7 @@ class DescribeLoadBalancerListByCertIdRequest extends  AbstractModel {
         super();
 
         /**
-         * Specifies the server certificate ID or client certificate ID. can be accessed through the [DescribeCertificate](https://www.tencentcloud.comom/document/api/400/41674?from_cn_redirect=1) api.
+         * Specifies the server certificate ID or client certificate ID. can be accessed through the [DescribeCertificate](https://www.tencentcloud.com/document/api/400/41674?from_cn_redirect=1) api.
 Specifies the maximum length of the array is 20.
          * @type {Array.<string> || null}
          */
@@ -10876,19 +10876,19 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to query the ID.
+         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * ID of the CLB instance listener. You can call the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) API to query the ID.
+         * ID of the CLB instance listener. You can call the [DescribeListeners](https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * Domain name (must be a domain name under a created forwarding rule). if it is multiple domains, you can specify any one of the domain name list. it can be accessed through the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) api.
+         * Domain name (must be a domain name under a created forwarding rule). if it is multiple domains, you can specify any one of the domain name list. it can be accessed through the [DescribeListeners](https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Domain = null;
@@ -11098,13 +11098,13 @@ class CreateLoadBalancerSnatIpsRequest extends  AbstractModel {
         super();
 
         /**
-         * Specifies the unique ID of the cloud load balancer. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to query the ID, such as lb-12345678.
+         * Specifies the unique ID of the cloud load balancer. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1) API to query the ID, such as lb-12345678.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Added SnatIp information. specify IP for request or designated subnet for automatic application. can be accessed through [DescribeSubnets](https://www.tencentcloud.comom/document/api/215/15784?from_cn_redirect=1) to query and retrieve. the default upper limit for one CLB instance is 10.
+         * Added SnatIp information. specify IP for request or designated subnet for automatic application. can be accessed through [DescribeSubnets](https://www.tencentcloud.com/document/api/215/15784?from_cn_redirect=1) to query and retrieve. the default upper limit for one CLB instance is 10.
          * @type {Array.<SnatIp> || null}
          */
         this.SnatIps = null;
@@ -12406,14 +12406,14 @@ class SetLoadBalancerClsLogRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
          * Log set ID of cloud log service (CLS).
-<li>Specifies the logset ID that can be obtained by calling the [DescribeLogsets](https://www.tencentcloud.comom/document/product/614/58624?from_cn_redirect=1) API when adding or updating a log topic.</li>.
+<li>Specifies the logset ID that can be obtained by calling the [DescribeLogsets](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1) API when adding or updating a log topic.</li>.
 <Li>When deleting a log topic, set this parameter to an empty string.</li>.
          * @type {string || null}
          */
@@ -12421,7 +12421,7 @@ class SetLoadBalancerClsLogRequest extends  AbstractModel {
 
         /**
          * Specifies the log topic ID of cloud log service (CLS).
-<li>Specifies the log topic ID can be obtained by calling the [DescribeTopics](https://www.tencentcloud.comom/document/product/614/56454?from_cn_redirect=1) API when adding or updating a log topic.</li>.
+<li>Specifies the log topic ID can be obtained by calling the [DescribeTopics](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1) API when adding or updating a log topic.</li>.
 <Li>When deleting a log topic, set this parameter to an empty string.</li>.
          * @type {string || null}
          */
@@ -12587,7 +12587,7 @@ class DescribeIdleLoadBalancersRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * The Region of the cloud load balancer can be obtained through the `RegionSet.Region` field in the API return value of [DescribeRegions](https://www.tencentcloud.comom/document/product/1596/77930?from_cn_redirect=1).
+         * The Region of the cloud load balancer can be obtained through the `RegionSet.Region` field in the API return value of [DescribeRegions](https://www.tencentcloud.com/document/product/1596/77930?from_cn_redirect=1).
          * @type {string || null}
          */
         this.LoadBalancerRegion = null;
@@ -12617,7 +12617,7 @@ class DeleteLoadBalancerSnatIpsRequest extends  AbstractModel {
         super();
 
         /**
-         * Specifies the unique ID of the cloud load balancer. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID, such as lb-12345678.
+         * Specifies the unique ID of the cloud load balancer. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/1108/48459?from_cn_redirect=1) API to query the ID, such as lb-12345678.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -13286,7 +13286,7 @@ class InquiryPriceRenewLoadBalancerRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -13472,7 +13472,7 @@ class SetLoadBalancerStartStatusRequest extends  AbstractModel {
         this.OperationType = null;
 
         /**
-         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -13839,7 +13839,7 @@ class LoadBalancer extends  AbstractModel {
 
         /**
          * Network type of the load balancing instance.
-OPEN: public network attribute. INTERNAL: private network attribute. for a cloud load balancer with private network attribute, you can bind an EIP for public network access. for details, see the EIP document on binding elastic IP (https://www.tencentcloud.comom/document/product/215/16700?from_cn_redirect=1).
+OPEN: public network attribute. INTERNAL: private network attribute. for a cloud load balancer with private network attribute, you can bind an EIP for public network access. for details, see the EIP document on binding elastic IP (https://www.tencentcloud.com/document/product/215/16700?from_cn_redirect=1).
          * @type {string || null}
          */
         this.LoadBalancerType = null;
@@ -13957,7 +13957,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AddressIPVersion = null;
 
         /**
-         * Specifies the VPC ID in numerical form, obtainable through the DescribeVpcs API (https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1).
+         * Specifies the VPC ID in numerical form, obtainable through the DescribeVpcs API (https://www.tencentcloud.com/document/product/215/15778?from_cn_redirect=1).
          * @type {number || null}
          */
         this.NumericalVpcId = null;

@@ -130,7 +130,7 @@ class CreateMessageEnrichmentRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -208,7 +208,7 @@ class DescribeClientListRequest extends  AbstractModel {
         super();
 
         /**
-         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -250,13 +250,13 @@ class DeleteAuthorizationPolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the authorization policy rule id, which can be obtained from the DescribeAuthorizationPolicies api (https://www.tencentcloud.comom/document/api/1778/111074?from_cn_redirect=1).
+         * Specifies the authorization policy rule id, which can be obtained from the DescribeAuthorizationPolicies api (https://www.tencentcloud.com/document/api/1778/111074?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Id = null;
@@ -285,7 +285,7 @@ class DescribeAuthorizationPoliciesRequest extends  AbstractModel {
         super();
 
         /**
-         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -404,7 +404,7 @@ class CreateUserRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -453,7 +453,7 @@ class ModifyInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -640,7 +640,7 @@ class CreateAuthorizationPolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -658,7 +658,7 @@ class CreateAuthorizationPolicyRequest extends  AbstractModel {
         this.PolicyVersion = null;
 
         /**
-         * Policy priority. a smaller value indicates higher priority and must be unique. a smaller priority ID means the policy takes effect with higher priority. see [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+         * Policy priority. a smaller value indicates higher priority and must be unique. a smaller priority ID means the policy takes effect with higher priority. see [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Priority = null;
@@ -667,13 +667,13 @@ class CreateAuthorizationPolicyRequest extends  AbstractModel {
          * Specifies the decision.
 allow specifies permission for access requests from devices that match this policy.
 deny: denies access requests to the device that override the policy.
-Refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+Refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Effect = null;
 
         /**
-         * Operation, supports multiple selections separated by commas. see the data plane policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+         * Operation, supports multiple selections separated by commas. see the data plane policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 Specifies the connection.
 Specifies the publish action.
 Sub. specifies the subscription.
@@ -682,7 +682,7 @@ Sub. specifies the subscription.
         this.Actions = null;
 
         /**
-         * Condition - message retention. refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+         * Condition - message retention. refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 Matches message retention.
 Matches non-retention messages.
 3. match retained and non-retained messages.
@@ -695,13 +695,13 @@ Matches non-retention messages.
 0: at most once.
 Minimum once.
 2: exactly once.
-Refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+Refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Qos = null;
 
         /**
-         * Specifies the resource and subscription to match. supports configuration of multiple match rules, separated by commas. see the data plane authorization policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+         * Specifies the resource and subscription to match. supports configuration of multiple match rules, separated by commas. see the data plane authorization policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 
          * @type {string || null}
          */
@@ -720,7 +720,7 @@ Refer to the [data plane authorization policy description](https://www.tencentcl
         this.ClientId = null;
 
         /**
-         * Specifies the client IP address, supporting IP or CIDR. refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+         * Specifies the client IP address, supporting IP or CIDR. refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Ip = null;
@@ -981,7 +981,7 @@ class ModifyMessageEnrichmentRuleRequest extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * Tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 
          * @type {string || null}
          */
@@ -1060,7 +1060,7 @@ class DescribeMessageByTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1133,7 +1133,7 @@ class AuthorizationPolicyItem extends  AbstractModel {
         this.Version = null;
 
         /**
-         * Policy priority. a smaller priority ID indicates the policy takes effect with higher priority. see [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+         * Policy priority. a smaller priority ID indicates the policy takes effect with higher priority. see [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Priority = null;
@@ -1142,7 +1142,7 @@ class AuthorizationPolicyItem extends  AbstractModel {
          * Specifies the decision.
 allow specifies permission for access requests from devices that match this policy.
 deny: denies access requests to the device that override the policy.
-Refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+Refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Effect = null;
@@ -1152,43 +1152,43 @@ Refer to the [data plane authorization policy description](https://www.tencentcl
 Specifies the connection.
 Publishes an mqtt message.
 Sub. specifies the subscription to mqtt messages.
-Refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+Refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Actions = null;
 
         /**
-         * Resource. see the data plane authorization policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+         * Resource. see the data plane authorization policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Resources = null;
 
         /**
-         * Specifies the device ID for connection. refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+         * Specifies the device ID for connection. refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
          * @type {string || null}
          */
         this.ClientId = null;
 
         /**
-         * Condition - username. refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+         * Condition - username. refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Username = null;
 
         /**
-         * Specifies the client IP address. see the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+         * Specifies the client IP address. see the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Ip = null;
 
         /**
-         * Condition - service quality. see the data plane authorization policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+         * Condition - service quality. see the data plane authorization policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Qos = null;
 
         /**
-         * Condition - message retention. refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+         * Condition - message retention. refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 Indicates the match of retain messages.
 2: indicates non-retain messages.
 3: indicates matching retain and non-retain messages.
@@ -1323,7 +1323,7 @@ class AuthorizationPolicyPriority extends  AbstractModel {
         super();
 
         /**
-         * Specifies the authorization policy rule id, which can be obtained from the DescribeAuthorizationPolicies api (https://www.tencentcloud.comom/document/api/1778/111074?from_cn_redirect=1).
+         * Specifies the authorization policy rule id, which can be obtained from the DescribeAuthorizationPolicies api (https://www.tencentcloud.com/document/api/1778/111074?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Id = null;
@@ -1393,7 +1393,7 @@ class CreateInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance type, which needs to correspond to SkuCode. for details, see the [get MQTT product sales spec](https://www.tencentcloud.comom/document/api/1778/116232?from_cn_redirect=1) api.
+         * Instance type, which needs to correspond to SkuCode. for details, see the [get MQTT product sales spec](https://www.tencentcloud.com/document/api/1778/116232?from_cn_redirect=1) api.
 BASIC: basic edition.
 PRO edition.
 PLATINUM version.
@@ -1409,7 +1409,7 @@ PLATINUM version.
         this.Name = null;
 
         /**
-         * Product specification, which must correspond to InstanceType. see the [get MQTT product sales spec](https://www.tencentcloud.comom/document/api/1778/116232?from_cn_redirect=1) api to obtain details.
+         * Product specification, which must correspond to InstanceType. see the [get MQTT product sales spec](https://www.tencentcloud.com/document/api/1778/116232?from_cn_redirect=1) api to obtain details.
          * @type {string || null}
          */
         this.SkuCode = null;
@@ -1800,7 +1800,7 @@ class DeleteMessageEnrichmentRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2714,7 +2714,7 @@ class UpdateMessageEnrichmentRulePriorityRequest extends  AbstractModel {
         super();
 
         /**
-         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2891,7 +2891,7 @@ class DescribeMessageDetailsRequest extends  AbstractModel {
         super();
 
         /**
-         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2961,7 +2961,7 @@ class DeleteInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2989,13 +2989,13 @@ class ModifyAuthorizationPolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * Specifies the authorization policy ID, which can be obtained from the query authorization policy API (https://www.tencentcloud.comom/document/product/1778/111074?from_cn_redirect=1).
+         * Specifies the authorization policy ID, which can be obtained from the query authorization policy API (https://www.tencentcloud.com/document/product/1778/111074?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Id = null;
 
         /**
-         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 
          * @type {string || null}
          */
@@ -3028,7 +3028,7 @@ Denies.
         this.Effect = null;
 
         /**
-         * Operation, supports multiple selections separated by commas. see the data plane policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+         * Operation, supports multiple selections separated by commas. see the data plane policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 Specifies the connection.
 Specifies the publish action.
 Sub. specifies the subscription.
@@ -3037,7 +3037,7 @@ Sub. specifies the subscription.
         this.Actions = null;
 
         /**
-         * Specifies the resource and subscription to match. supports configuration of multiple match rules, separated by commas. see the data plane authorization policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+         * Specifies the resource and subscription to match. supports configuration of multiple match rules, separated by commas. see the data plane authorization policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 
          * @type {string || null}
          */
@@ -3121,7 +3121,7 @@ class DescribeInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -3192,7 +3192,7 @@ class DescribeUserListRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -3250,7 +3250,7 @@ class ModifyUserRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -3397,7 +3397,7 @@ class UpdateAuthorizationPolicyPriorityRequest extends  AbstractModel {
         super();
 
         /**
-         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+         * tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
          * @type {string || null}
          */
         this.InstanceId = null;

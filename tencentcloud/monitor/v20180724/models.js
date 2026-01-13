@@ -8180,7 +8180,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Duration = null;
 
         /**
-         * Alert expression. see <a href="https://www.tencentcloud.comom/document/product/1416/56008?from_cn_redirect=1">alert rule description</a>.
+         * Alert expression. see <a href="https://www.tencentcloud.com/document/product/1416/56008?from_cn_redirect=1">alert rule description</a>.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */

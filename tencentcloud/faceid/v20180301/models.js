@@ -847,7 +847,10 @@ The default value is blink. The different action types passed in this parameter 
         this.ActionList = null;
 
         /**
-         * BASIC: Basic Version (Default).
+         * BASIC: Basic version (Default).
+ENHANCE: Enhance version, enable additional output of device risk level field.
+PLUS: Plus version, enable additional output of device risk level and attack type fields.
+Please contact us to access enhance version & plus version.	
          * @type {string || null}
          */
         this.SdkVersion = null;
@@ -1106,6 +1109,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.CurrentIssueDate = null;
 
+        /**
+         * Hong kong identity card version.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HKIDVersion = null;
+
     }
 
     /**
@@ -1125,6 +1135,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Symbol = 'Symbol' in params ? params.Symbol : null;
         this.IssuedDate = 'IssuedDate' in params ? params.IssuedDate : null;
         this.CurrentIssueDate = 'CurrentIssueDate' in params ? params.CurrentIssueDate : null;
+        this.HKIDVersion = 'HKIDVersion' in params ? params.HKIDVersion : null;
 
     }
 }
@@ -2301,7 +2312,10 @@ Optional alarm codes are: -9101 (occlusion or incomplete border), -9102 (photoco
         this.Extra = null;
 
         /**
-         * BASIC: Basic Version (default).
+         * BASIC: Basic version (Default).
+ENHANCE: Enhance version, enable additional output of device risk level field.
+PLUS: Plus version, enable additional output of device risk level and attack type fields.
+Please contact us to access enhance version & plus version.	
          * @type {string || null}
          */
         this.SdkVersion = null;
@@ -5492,6 +5506,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Address = null;
 
+        /**
+         * Localized name.
+         * @type {string || null}
+         */
+        this.FullNameLocal = null;
+
+        /**
+         * Localization.
+         * @type {string || null}
+         */
+        this.FirstNameLocal = null;
+
+        /**
+         * Localized surname.
+         * @type {string || null}
+         */
+        this.LastNameLocal = null;
+
     }
 
     /**
@@ -5525,6 +5557,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Address)
             this.Address = obj;
         }
+        this.FullNameLocal = 'FullNameLocal' in params ? params.FullNameLocal : null;
+        this.FirstNameLocal = 'FirstNameLocal' in params ? params.FirstNameLocal : null;
+        this.LastNameLocal = 'LastNameLocal' in params ? params.LastNameLocal : null;
 
     }
 }
@@ -6421,6 +6456,25 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.RequestId = null;
 
+        /**
+         * Describes the detailed reason for the current liveness detection failure. Output only when SdkVersion is PLUS. Details are as follows:
+01 - User kept eyes closed throughout the process.
+02 - User failed to complete the specified action.
+03 - Suspected photo replay attack.
+04 - Suspected synthetic image.
+05 - Suspected synthetic video.
+06 - Suspected synthetic action.
+07 - Suspected fraud template.
+08 - Suspected watermark existence.
+09 - Light verification failed.
+10 - Face verification failed.
+11 - Poor face quality.
+12 - Unqualified collection quality.
+13 - Suspected adversarial sample attack.
+         * @type {Array.<string> || null}
+         */
+        this.LivenessInfoTag = null;
+
     }
 
     /**
@@ -6475,6 +6529,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.CardInfoInputJson = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LivenessInfoTag = 'LivenessInfoTag' in params ? params.LivenessInfoTag : null;
 
     }
 }

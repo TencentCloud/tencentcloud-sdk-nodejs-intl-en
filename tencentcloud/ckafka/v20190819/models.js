@@ -210,7 +210,7 @@ class DeleteAclRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -383,7 +383,7 @@ class BatchCreateAclRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -395,13 +395,13 @@ class BatchCreateAclRequest extends  AbstractModel {
         this.ResourceType = null;
 
         /**
-         * Resource list array, obtainable through the DescribeTopic API (https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1).
+         * Resource list array, obtainable through the DescribeTopic API (https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.ResourceNames = null;
 
         /**
-         * Specifies the set ACL rule list, which can be obtained through the DescribeAclRule API (https://www.tencentcloud.comom/document/product/597/89217?from_cn_redirect=1).
+         * Specifies the set ACL rule list, which can be obtained through the DescribeAclRule API (https://www.tencentcloud.com/document/product/597/89217?from_cn_redirect=1).
          * @type {Array.<AclRuleInfo> || null}
          */
         this.RuleList = null;
@@ -440,13 +440,13 @@ class DeleteUserRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the username, which can be obtained through the [DescribeUser](https://www.tencentcloud.comom/document/product/597/40855?from_cn_redirect=1) api.
+         * Specifies the username, which can be obtained through the [DescribeUser](https://www.tencentcloud.com/document/product/597/40855?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Name = null;
@@ -510,7 +510,7 @@ class DescribeACLRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -650,13 +650,13 @@ class DescribeTopicAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
+         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.TopicName = null;
@@ -685,7 +685,7 @@ class DescribeInstanceAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1095,7 +1095,7 @@ class CreateRouteRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Specifies the ckafka cluster instance id. obtain through the API <a href="https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1">DescribeInstances</a>.</p>.
+         * <p>Specifies the ckafka cluster instance id. obtain through the API <a href="https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1">DescribeInstances</a>.</p>.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1440,7 +1440,7 @@ class InstanceScalingDownRequest extends  AbstractModel {
         super();
 
         /**
-         * ckafka cluster instance Id. can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * ckafka cluster instance Id. can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1454,7 +1454,7 @@ class InstanceScalingDownRequest extends  AbstractModel {
 
         /**
          * Specifies the disk capacity in GB. value range: maximum value 500000, step length 100.
-The specifications and limitations can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
+The specifications and limitations can be viewed through the following link: https://www.tencentcloud.com/document/product/597/122562.?from_cn_redirect=1
 
 
          * @type {number || null}
@@ -1463,14 +1463,14 @@ The specifications and limitations can be viewed through the following link: htt
 
         /**
          * Peak bandwidth in MB/s.
-Specifies the url (https://www.tencentcloud.comom/document/product/597/11745?from_cn_redirect=1) to view specification limits and corresponding step length.
+Specifies the url (https://www.tencentcloud.com/document/product/597/11745?from_cn_redirect=1) to view specification limits and corresponding step length.
          * @type {number || null}
          */
         this.BandWidth = null;
 
         /**
          * Partition upper limit maximum value of 40000, step length 100.
-Specification limits can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
+Specification limits can be viewed through the following link: https://www.tencentcloud.com/document/product/597/122563.?from_cn_redirect=1
 
          * @type {number || null}
          */
@@ -1655,14 +1655,14 @@ class ModifyInstancePreRequest extends  AbstractModel {
         super();
 
         /**
-         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
          * Specifies the disk capacity in GB. value range: 100 to 500000 with a step length of 100.
-Specification limits can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
+Specification limits can be viewed through the following link: https://www.tencentcloud.com/document/product/597/122562.?from_cn_redirect=1
 
          * @type {number || null}
          */
@@ -1670,7 +1670,7 @@ Specification limits can be viewed through the following link: https://www.tence
 
         /**
          * Peak bandwidth in MB/s.
-Specifies the specification limits and corresponding step length through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1
+Specifies the specification limits and corresponding step length through the following link: https://www.tencentcloud.com/document/product/597/11745.?from_cn_redirect=1
 
          * @type {number || null}
          */
@@ -1678,7 +1678,7 @@ Specifies the specification limits and corresponding step length through the fol
 
         /**
          * Partition upper bound. maximum value of 40000. step length of 100.
-Specifies the specifications and limits that can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
+Specifies the specifications and limits that can be viewed through the following link: https://www.tencentcloud.com/document/product/597/122563.?from_cn_redirect=1
          * @type {number || null}
          */
         this.Partition = null;
@@ -1709,7 +1709,7 @@ class CreateAclRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2045,7 +2045,7 @@ class DescribeAclRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2315,7 +2315,7 @@ class InquireCkafkaPriceRequest extends  AbstractModel {
         /**
          * Number of partitions for instance purchase, unit: unit (required when purchased; bandwidth information required for pro edition/advanced edition inquiry).
 Partition upper limit. maximum value of 40000. step length of 100.
-Specifies the specifications and limits that can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
+Specifies the specifications and limits that can be viewed through the following link: https://www.tencentcloud.com/document/product/597/122563.?from_cn_redirect=1
 
          * @type {number || null}
          */
@@ -3163,7 +3163,7 @@ class DescribeConsumerGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -3219,7 +3219,7 @@ class DescribeCvmInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -3287,13 +3287,13 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>VPC Id, can be obtained through the <a href="https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1">DescribeVpcs</a> api.</p>.
+         * <p>VPC Id, can be obtained through the <a href="https://www.tencentcloud.com/document/product/215/15778?from_cn_redirect=1">DescribeVpcs</a> api.</p>.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * <p>Subnet Id, which can be obtained through the <a href="https://www.tencentcloud.comom/document/product/215/15784?from_cn_redirect=1">DescribeSubnets</a> api.</p>.
+         * <p>Subnet Id, which can be obtained through the <a href="https://www.tencentcloud.com/document/product/215/15784?from_cn_redirect=1">DescribeSubnets</a> api.</p>.
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -3341,19 +3341,19 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
         this.DiskType = null;
 
         /**
-         * <p>The peak bandwidth of the instance private network. the default value is 40 MB/s. for standard edition, input the peak bandwidth corresponding to the current instance specifications. note that if the instance created is a pro edition instance, parameter configurations such as peak bandwidth and number of partitions should meet the billing specification of the pro edition. you can view the billing specification through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1</p>.
+         * <p>The peak bandwidth of the instance private network. the default value is 40 MB/s. for standard edition, input the peak bandwidth corresponding to the current instance specifications. note that if the instance created is a pro edition instance, parameter configurations such as peak bandwidth and number of partitions should meet the billing specification of the pro edition. you can view the billing specification through the following link: https://www.tencentcloud.com/document/product/597/11745.?from_cn_redirect=1</p>.
          * @type {number || null}
          */
         this.BandWidth = null;
 
         /**
-         * <P>Instance disk size. default value is 500. step length is set to 100. should meet the billing specification of the current instance. can be accessed through the following link to view billing specifications: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1</p>.
+         * <P>Instance disk size. default value is 500. step length is set to 100. should meet the billing specification of the current instance. can be accessed through the following link to view billing specifications: https://www.tencentcloud.com/document/product/597/122562.?from_cn_redirect=1</p>.
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * <P>Specifies the maximum number of partitions for the instance, which should meet the billing specification of the current instance. default value is 800 with a step length of 100. the billing specification can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1</p>.
+         * <P>Specifies the maximum number of partitions for the instance, which should meet the billing specification of the current instance. default value is 800 with a step length of 100. the billing specification can be viewed through the following link: https://www.tencentcloud.com/document/product/597/122563.?from_cn_redirect=1</p>.
          * @type {number || null}
          */
         this.Partition = null;
@@ -3365,7 +3365,7 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
         this.TopicNum = null;
 
         /**
-         * Specifies the availability zone where the instance is located. when creating a multi-az instance, this parameter indicates the availability zone id of the subnet where the default access point is created. ZoneId and ZoneIds cannot be empty at the same time. you can obtain this information through the API <a href="https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1">DescribeCkafkaZone</a>.
+         * Specifies the availability zone where the instance is located. when creating a multi-az instance, this parameter indicates the availability zone id of the subnet where the default access point is created. ZoneId and ZoneIds cannot be empty at the same time. you can obtain this information through the API <a href="https://www.tencentcloud.com/document/product/597/55246?from_cn_redirect=1">DescribeCkafkaZone</a>.
          * @type {number || null}
          */
         this.ZoneId = null;
@@ -3377,7 +3377,7 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
         this.MultiZoneFlag = null;
 
         /**
-         * <p>Specifies the multi-availability zone id list when the instance is a multi-az instance. note the corresponding multi-availability zone for parameter ZoneId must be included in the parameter array. ZoneId and ZoneIds cannot be empty at the same time. obtain through the API <a href="https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1">DescribeCkafkaZone</a>.</p>.
+         * <p>Specifies the multi-availability zone id list when the instance is a multi-az instance. note the corresponding multi-availability zone for parameter ZoneId must be included in the parameter array. ZoneId and ZoneIds cannot be empty at the same time. obtain through the API <a href="https://www.tencentcloud.com/document/product/597/55246?from_cn_redirect=1">DescribeCkafkaZone</a>.</p>.
          * @type {Array.<number> || null}
          */
         this.ZoneIds = null;
@@ -3407,7 +3407,7 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
         this.ElasticBandwidthSwitch = null;
 
         /**
-         * <p>Specifies the custom certificate Id. this parameter is valid only when SpecificationsType is profession. supports custom certificate capacity.</p><p>can be obtained through the <a href="https://www.tencentcloud.comom/document/product/400/41673?from_cn_redirect=1">DescribeCertificateDetail</a> api.</p>.
+         * <p>Specifies the custom certificate Id. this parameter is valid only when SpecificationsType is profession. supports custom certificate capacity.</p><p>can be obtained through the <a href="https://www.tencentcloud.com/document/product/400/41673?from_cn_redirect=1">DescribeCertificateDetail</a> api.</p>.
          * @type {string || null}
          */
         this.CustomSSLCertId = null;
@@ -3539,7 +3539,7 @@ class DeleteAclRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance id information. you can obtain it through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * Instance id information. you can obtain it through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4160,13 +4160,13 @@ class DeleteGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id. can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id. can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Consumer group name, which can be obtained through the DescribeConsumerGroup API (https://www.tencentcloud.comom/document/product/597/40841?from_cn_redirect=1).
+         * Consumer group name, which can be obtained through the DescribeConsumerGroup API (https://www.tencentcloud.com/document/product/597/40841?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Group = null;
@@ -4195,7 +4195,7 @@ class DeleteInstancePostRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4263,13 +4263,13 @@ class DescribeTopicProduceConnectionRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
+         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.TopicName = null;
@@ -4298,7 +4298,7 @@ class CreateAclRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5173,7 +5173,7 @@ class DeleteRouteTriggerTimeRequest extends  AbstractModel {
         super();
 
         /**
-         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5374,13 +5374,13 @@ class FetchMessageByOffsetRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
+         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Topic = null;
@@ -6021,13 +6021,13 @@ class CreatePartitionRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
+         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.TopicName = null;
@@ -6452,7 +6452,7 @@ class ModifyRoutineMaintenanceTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * Specifies the ckafka cluster instance id. can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * Specifies the ckafka cluster instance id. can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -6722,7 +6722,7 @@ class DeleteInstancePreRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -6871,13 +6871,13 @@ class ModifyPasswordRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance Id. you can obtain it by calling the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * Instance Id. you can obtain it by calling the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the username, which can be obtained through the [DescribeUser](https://www.tencentcloud.comom/document/product/597/40855?from_cn_redirect=1) api.
+         * Specifies the username, which can be obtained through the [DescribeUser](https://www.tencentcloud.com/document/product/597/40855?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Name = null;
@@ -6920,7 +6920,7 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8406,7 +8406,7 @@ class CreateUserRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8491,13 +8491,13 @@ class DeleteRouteRequest extends  AbstractModel {
         super();
 
         /**
-         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Route id, obtain through the API [DescribeRoute](https://www.tencentcloud.comom/document/product/597/45484?from_cn_redirect=1).
+         * Route id, obtain through the API [DescribeRoute](https://www.tencentcloud.com/document/product/597/45484?from_cn_redirect=1).
          * @type {number || null}
          */
         this.RouteId = null;
@@ -8886,7 +8886,7 @@ class CreateConsumerRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -9695,13 +9695,13 @@ class DescribeGroupInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Kafka group list. obtain through the API [DescribeConsumerGroup](https://www.tencentcloud.comom/document/product/597/40841?from_cn_redirect=1).
+         * Kafka group list. obtain through the API [DescribeConsumerGroup](https://www.tencentcloud.com/document/product/597/40841?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.GroupList = null;
@@ -10341,7 +10341,7 @@ class DescribeTopicDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -10582,13 +10582,13 @@ class ModifyGroupOffsetsRequest extends  AbstractModel {
         super();
 
         /**
-         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Consumer group name. obtain through the API [DescribeConsumerGroup](https://www.tencentcloud.comom/document/product/597/40841?from_cn_redirect=1).
+         * Consumer group name. obtain through the API [DescribeConsumerGroup](https://www.tencentcloud.com/document/product/597/40841?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Group = null;
@@ -10659,13 +10659,13 @@ class BatchModifyTopicAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the topic attribute list (a maximum of 10 per batch), which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
+         * Specifies the topic attribute list (a maximum of 10 per batch), which can be obtained through the [DescribeTopic](https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1) api.
          * @type {Array.<BatchModifyTopicInfo> || null}
          */
         this.Topic = null;
@@ -10742,13 +10742,13 @@ class CreateTopicIpWhiteListRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
+         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.TopicName = null;
@@ -11328,7 +11328,7 @@ class CreateInstancePreRequest extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * <P>Availability zone. when purchasing a multi-availability zone instance, this parameter specifies the primary az. <a href="https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1">view availability zones</a></p>.
+         * <P>Availability zone. when purchasing a multi-availability zone instance, this parameter specifies the primary az. <a href="https://www.tencentcloud.com/document/product/597/55246?from_cn_redirect=1">view availability zones</a></p>.
          * @type {number || null}
          */
         this.ZoneId = null;
@@ -11388,19 +11388,19 @@ class CreateInstancePreRequest extends  AbstractModel {
         this.SpecificationsType = null;
 
         /**
-         * <P>Disk size. if it does not match the console specification ratio, creation cannot succeed. default value is 500. step length is set to 100. can be accessed through the following link to view billing specifications: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1</p>.
+         * <P>Disk size. if it does not match the console specification ratio, creation cannot succeed. default value is 500. step length is set to 100. can be accessed through the following link to view billing specifications: https://www.tencentcloud.com/document/product/597/122562.?from_cn_redirect=1</p>.
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * <p>Instance bandwidth, default value is 40, unit MB/s. minimum value: 20MB/s. advanced edition maximum value: 360MB/s. professional edition maximum value: 100000MB/s. standard version fixed bandwidth specifications: 40MB/s, 100MB/s, 150MB/s. billing specifications can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1</p>.
+         * <p>Instance bandwidth, default value is 40, unit MB/s. minimum value: 20MB/s. advanced edition maximum value: 360MB/s. professional edition maximum value: 100000MB/s. standard version fixed bandwidth specifications: 40MB/s, 100MB/s, 150MB/s. billing specifications can be viewed through the following link: https://www.tencentcloud.com/document/product/597/11745.?from_cn_redirect=1</p>.
          * @type {number || null}
          */
         this.BandWidth = null;
 
         /**
-         * <P>Specifies the partition size. if it does not match the console specification ratio, the creation cannot succeed. default value is 800 with a step length of 100. view billing specifications through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1</p>.
+         * <P>Specifies the partition size. if it does not match the console specification ratio, the creation cannot succeed. default value is 800 with a step length of 100. view billing specifications through the following link: https://www.tencentcloud.com/document/product/597/122563.?from_cn_redirect=1</p>.
          * @type {number || null}
          */
         this.Partition = null;
@@ -11454,7 +11454,7 @@ class CreateInstancePreRequest extends  AbstractModel {
         this.ElasticBandwidthSwitch = null;
 
         /**
-         * <p>Specifies the custom certificate Id. this parameter is valid only when SpecificationsType is profession. supports custom certificate capacity.</p><p>can be obtained through the <a href="https://www.tencentcloud.comom/document/product/400/41673?from_cn_redirect=1">DescribeCertificateDetail</a> api.</p>.
+         * <p>Specifies the custom certificate Id. this parameter is valid only when SpecificationsType is profession. supports custom certificate capacity.</p><p>can be obtained through the <a href="https://www.tencentcloud.com/document/product/400/41673?from_cn_redirect=1">DescribeCertificateDetail</a> api.</p>.
          * @type {string || null}
          */
         this.CustomSSLCertId = null;
@@ -11512,13 +11512,13 @@ class DeleteTopicIpWhiteListRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
+         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.TopicName = null;

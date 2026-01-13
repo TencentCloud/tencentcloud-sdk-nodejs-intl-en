@@ -31,13 +31,13 @@ class UpgradeProxyVersionRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Current proxy version. Call the [DescribeInstances](https://www.tencentcloud.comom/document/product/239/20018?from_cn_redirect=1) API to obtain the current proxy version for the instance.
+         * Current proxy version. Call the [DescribeInstances](https://www.tencentcloud.com/document/product/239/20018?from_cn_redirect=1) API to obtain the current proxy version for the instance.
          * @type {string || null}
          */
         this.CurrentProxyVersion = null;
 
         /**
-         * Upgradable Redis version. Call the [DescribeInstances](https://www.tencentcloud.comom/document/product/239/20018?from_cn_redirect=1) API to obtain the upgradable Redis version for the instance.
+         * Upgradable Redis version. Call the [DescribeInstances](https://www.tencentcloud.com/document/product/239/20018?from_cn_redirect=1) API to obtain the upgradable Redis version for the instance.
          * @type {string || null}
          */
         this.UpgradeProxyVersion = null;
@@ -549,13 +549,13 @@ class RestoreInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the instance to be operated, which can be obtained through the response parameter InstanceId of the [DescribeInstances](https://www.tencentcloud.comom/document/product/239/20018?from_cn_redirect=1) API.
+         * ID of the instance to be operated, which can be obtained through the response parameter InstanceId of the [DescribeInstances](https://www.tencentcloud.com/document/product/239/20018?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Backup ID, which can be obtained through the response parameter RedisBackupSet of the [DescribeInstanceBackups](https://www.tencentcloud.comom/document/product/239/20011?from_cn_redirect=1) API.
+         * Backup ID, which can be obtained through the response parameter RedisBackupSet of the [DescribeInstanceBackups](https://www.tencentcloud.com/document/product/239/20011?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.BackupId = null;
@@ -626,7 +626,7 @@ class ApplyParamsTemplateRequest extends  AbstractModel {
 
         /**
          * ID of the applied parameter template.
-- The parameter template ID can be obtained through the response parameter **TemplateId** of the API [DescribeParamTemplateInfo](https://www.tencentcloud.comom/document/product/239/58748?from_cn_redirect=1).
+- The parameter template ID can be obtained through the response parameter **TemplateId** of the API [DescribeParamTemplateInfo](https://www.tencentcloud.com/document/product/239/58748?from_cn_redirect=1).
 - The operation can only be successfully performed when the parameter template version matches the architecture version of the target instance. A version mismatch will trigger an execution error.
          * @type {string || null}
          */
@@ -6955,7 +6955,7 @@ class ModifyInstanceEventRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Event ID. Call the [DescribeInstanceEvents](https://www.tencentcloud.comom/document/product/239/104779?from_cn_redirect=1) API to obtain the ID of the event to be modified.
+         * Event ID. Call the [DescribeInstanceEvents](https://www.tencentcloud.com/document/product/239/104779?from_cn_redirect=1) API to obtain the ID of the event to be modified.
          * @type {number || null}
          */
         this.EventId = null;
@@ -7308,7 +7308,7 @@ class CloneInstancesRequest extends  AbstractModel {
         this.Period = null;
 
         /**
-         * Security group ID. Call the [DescribeInstanceSecurityGroup](https://www.tencentcloud.comom/document/product/239/34447?from_cn_redirect=1) API to obtain the security group ID for the instance.
+         * Security group ID. Call the [DescribeInstanceSecurityGroup](https://www.tencentcloud.com/document/product/239/34447?from_cn_redirect=1) API to obtain the security group ID for the instance.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIdList = null;
@@ -7877,7 +7877,7 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
 
         /**
          * Replaces with the new security group ID list, which is an array of one or more security group IDs.
-- To configure a security group for an instance for the first time, call the API [AssociateSecurityGroups](https://www.tencentcloud.comom/document/product/239/41260?from_cn_redirect=1) to bind a security group first.
+- To configure a security group for an instance for the first time, call the API [AssociateSecurityGroups](https://www.tencentcloud.com/document/product/239/41260?from_cn_redirect=1) to bind a security group first.
 - To replace the security group, obtain the security group ID on the [security group](https://console.tencentcloud.com/vpc/security-group) page of the console.
 
 **Note:** This input parameter performs a full replacement on all existing collections but not an incremental update. To modify it, import the expected full collections.
@@ -11819,7 +11819,7 @@ If `TypeId` indicates the standard architecture, `MemSize` indicates the total m
         this.BillingMode = null;
 
         /**
-         * ID of the AZ to which the instance belongs. See [Regions and AZs](https://www.tencentcloud.comom/document/product/239/4106?from_cn_redirect=1).
+         * ID of the AZ to which the instance belongs. See [Regions and AZs](https://www.tencentcloud.com/document/product/239/4106?from_cn_redirect=1).
 **Note**: Specify at least one parameter from **ZoneId** and **ZoneName**.
          * @type {number || null}
          */
@@ -11848,7 +11848,7 @@ If `TypeId` indicates the standard architecture, `MemSize` indicates the total m
         this.ReplicasReadonly = null;
 
         /**
-         * Name of the AZ to which the instance belongs. See [Regions and AZs](https://www.tencentcloud.comom/document/product/239/4106?from_cn_redirect=1).
+         * Name of the AZ to which the instance belongs. See [Regions and AZs](https://www.tencentcloud.com/document/product/239/4106?from_cn_redirect=1).
 **Note**: Specify at least one parameter from **ZoneId** and **ZoneName**.
          * @type {string || null}
          */
@@ -12360,7 +12360,7 @@ class AddReplicationInstanceRequest extends  AbstractModel {
 
         /**
          * Instance ID.
-- There are region and AZ limitations for adding a replication group instance. For detailed information, see [Use Limits](https://www.tencentcloud.comom/document/product/239/71934?from_cn_redirect=1).
+- There are region and AZ limitations for adding a replication group instance. For detailed information, see [Use Limits](https://www.tencentcloud.com/document/product/239/71934?from_cn_redirect=1).
 - Currently, only Redis 4.0 and 5.0 cluster architecture instances support being added to the replication groups.
 - Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy the ID of the instance that needs to be added to the replication group in the instance list.
          * @type {string || null}
@@ -13137,7 +13137,7 @@ class SwitchProxyRequest extends  AbstractModel {
         this.ProxyID = null;
 
         /**
-         * Instance proxy ID list. Call the API [DescribeInstanceNodeInfo](https://www.tencentcloud.comom/document/product/239/48603?from_cn_redirect=1) to obtain IDs from **NodeId** in the **Proxy** response parameter.
+         * Instance proxy ID list. Call the API [DescribeInstanceNodeInfo](https://www.tencentcloud.com/document/product/239/48603?from_cn_redirect=1) to obtain IDs from **NodeId** in the **Proxy** response parameter.
          * @type {Array.<string> || null}
          */
         this.ProxyIDList = null;

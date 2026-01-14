@@ -92,6 +92,134 @@ class ModifySampleSnapshotTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * Output media file configuration for AIGC video task.
+ * @class
+ */
+class AigcVideoOutputConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage mode. valid values: <li>Permanent: Permanent storage. the generated video file will be stored in vod, and the FileId can be obtained from the event notification.</li> <li>Temporary: Temporary storage. the generated video file will not be stored in vod, and a Temporary access URL can be obtained from the event notification.</li>
+Default value: Temporary.
+         * @type {string || null}
+         */
+        this.StorageMode = null;
+
+        /**
+         * Output media filename, longest 64 characters. default filename is specified by the system.
+         * @type {string || null}
+         */
+        this.MediaName = null;
+
+        /**
+         * Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
+<Li>Default value: 0, indicate other categories.</li>.
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Video duration, unit: seconds. <li>when ModelName is Kling, optional values: 5, 10, defaults to 5;</li> <li>when ModelName is Hailuo, optional values: 6, 10, defaults to 6;</li> <li>when ModelName is Vidu, specify 1-10;</li> <li>when ModelName is GV, optional values: 8, defaults to 8;</li> <li>when ModelName is OS, optional values: 4, 8, 12, defaults to 8;</li>
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Generated video resolution.
+<li>When ModelName is Kling, available values are 720P and 1080P, with a default value of 720P.</li>
+<li>When ModelName is Hailuo, optional values are 768P and 1080P, with a default value of 768P.</li>
+<li>When ModelName is Vidu, optional values are 720P, 1080P, defaults to 720P.</li>
+<li>When ModelName is GV, optional values are 720P, 1080P, with a default value of 720P.</li>
+<li>When ModelName is OS, the optional values are 720P.</li>
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
+        /**
+         * Specify the aspect ratio of the generated video.
+<li>When ModelName is Kling, for text-to-video, the optional values are 16:9, 9:16, 1:1, default is 16:9.</li>
+<li>When ModelName is Vidu, the optional values for video generation and image generation usage reference are 16:9, 9:16, 4:3, 3:4, and 1:1. among them, only version q2 supports 4:3 and 3:4.</li>
+<li>When ModelName is GV, optional values are 16:9 and 9:16, with a default value of 16:9.</li>
+<li>When ModelName is OS, for text-to-video, optional values are 16:9, 9:16, default is 16:9;</li>
+<li>When ModelName is Hailuo, it is not currently supported.</li>
+         * @type {string || null}
+         */
+        this.AspectRatio = null;
+
+        /**
+         * Whether to generate audio. supported models include GV, OS, Vidu. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>
+Default value: Disabled.
+         * @type {string || null}
+         */
+        this.AudioGeneration = null;
+
+        /**
+         * Whether to allow figure or human face generation. valid values: <li>AllowAdult: allow adult generation.</li> <li>Disallowed: forbid including figures or human faces in images.</li>
+         * @type {string || null}
+         */
+        this.PersonGeneration = null;
+
+        /**
+         * Whether to enable compliance check for input content. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>
+         * @type {string || null}
+         */
+        this.InputComplianceCheck = null;
+
+        /**
+         * Whether to enable compliance check for output content. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>
+         * @type {string || null}
+         */
+        this.OutputComplianceCheck = null;
+
+        /**
+         * Whether to enable video enhancement. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>
+Note:
+1. when the selected resolution exceeds the resolution the model can generate, enhancement is enabled by default.
+2. for resolutions that the model can directly output, you can also proactively select the model to directly output low-resolution images and use enhancement to obtain the specified resolution.
+         * @type {string || null}
+         */
+        this.EnhanceSwitch = null;
+
+        /**
+         * Whether to enable vidu intelligent frame interpolation. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>
+         * @type {string || null}
+         */
+        this.FrameInterpolate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageMode = 'StorageMode' in params ? params.StorageMode : null;
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.AspectRatio = 'AspectRatio' in params ? params.AspectRatio : null;
+        this.AudioGeneration = 'AudioGeneration' in params ? params.AudioGeneration : null;
+        this.PersonGeneration = 'PersonGeneration' in params ? params.PersonGeneration : null;
+        this.InputComplianceCheck = 'InputComplianceCheck' in params ? params.InputComplianceCheck : null;
+        this.OutputComplianceCheck = 'OutputComplianceCheck' in params ? params.OutputComplianceCheck : null;
+        this.EnhanceSwitch = 'EnhanceSwitch' in params ? params.EnhanceSwitch : null;
+        this.FrameInterpolate = 'FrameInterpolate' in params ? params.FrameInterpolate : null;
+
+    }
+}
+
+/**
  * ForbidMediaDistribution response structure.
  * @class
  */
@@ -236,6 +364,53 @@ class ModifyWatermarkTemplateRequest extends  AbstractModel {
             obj.deserialize(params.SvgTemplate)
             this.SvgTemplate = obj;
         }
+
+    }
+}
+
+/**
+ * Screencapturing output information (v2017)
+ * @class
+ */
+class SnapshotByTimeOffset2017 extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Error code
+<li>0: success;</li>
+<li>Other values: failure.</li>
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Specific time point of screenshot in milliseconds.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TimeOffset = null;
+
+        /**
+         * Address of output screenshot file.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.TimeOffset = 'TimeOffset' in params ? params.TimeOffset : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -529,6 +704,42 @@ class DescribeAllClassRequest extends  AbstractModel {
             return;
         }
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class AigcImageTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * File information of the out image for the AIGC image generation task.
+         * @type {Array.<AigcImageTaskOutputFileInfo> || null}
+         */
+        this.FileInfos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FileInfos) {
+            this.FileInfos = new Array();
+            for (let z in params.FileInfos) {
+                let obj = new AigcImageTaskOutputFileInfo();
+                obj.deserialize(params.FileInfos[z]);
+                this.FileInfos.push(obj);
+            }
+        }
 
     }
 }
@@ -1777,6 +1988,46 @@ class AiReviewProhibitedOcrTaskOutput extends  AbstractModel {
 }
 
 /**
+ * Path cache configuration follows the origin server configuration.
+ * @class
+ */
+class CacheConfigFollowOrigin extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The path cache follows the origin site configuration switch. The values u200bu200bare: <li>on: on; </li> <li>off: off. </li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Heuristic cache configuration
+         * @type {HeuristicCache || null}
+         */
+        this.HeuristicCache = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.HeuristicCache) {
+            let obj = new HeuristicCache();
+            obj.deserialize(params.HeuristicCache)
+            this.HeuristicCache = obj;
+        }
+
+    }
+}
+
+/**
  *  
  * @class
  */
@@ -2726,49 +2977,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Information of file generated by video clipping (v2017)
+ * DescribeImageReviewUsageData response structure.
  * @class
  */
-class ClipFileInfo2017 extends  AbstractModel {
+class DescribeImageReviewUsageDataResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Error code
-<li>0: success;</li>
-<li>Other values: failure.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * The image recognition usage statistics (the number of times the image recognition feature is used in the time period specified).
+         * @type {Array.<ImageReviewUsageDataItem> || null}
          */
-        this.ErrCode = null;
+        this.ImageReviewUsageDataSet = null;
 
         /**
-         * Error description.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Message = null;
-
-        /**
-         * Output target file ID.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.FileId = null;
-
-        /**
-         * Output target file address.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.FileUrl = null;
-
-        /**
-         * Output target file type.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.FileType = null;
+        this.RequestId = null;
 
     }
 
@@ -2779,11 +3005,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
-        this.FileType = 'FileType' in params ? params.FileType : null;
+
+        if (params.ImageReviewUsageDataSet) {
+            this.ImageReviewUsageDataSet = new Array();
+            for (let z in params.ImageReviewUsageDataSet) {
+                let obj = new ImageReviewUsageDataItem();
+                obj.deserialize(params.ImageReviewUsageDataSet[z]);
+                this.ImageReviewUsageDataSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2833,6 +3064,239 @@ class TempCertificate extends  AbstractModel {
         this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
         this.Token = 'Token' in params ? params.Token : null;
         this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+
+    }
+}
+
+/**
+ * RebuildMedia request structure.
+ * @class
+ */
+class RebuildMediaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The file ID.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The start offset (seconds). If you do not specify this, the segment will start from the beginning of the video.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * The end offset (seconds). If you do not specify this, the segment will end at the end of the video.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * The video quality remastering parameters.
+         * @type {RepairInfo || null}
+         */
+        this.RepairInfo = null;
+
+        /**
+         * The smart frame interpolation parameters.
+         * @type {VideoFrameInterpolationInfo || null}
+         */
+        this.VideoFrameInterpolationInfo = null;
+
+        /**
+         * The super resolution parameters.
+         * @type {SuperResolutionInfo || null}
+         */
+        this.SuperResolutionInfo = null;
+
+        /**
+         * The high dynamic range (HDR) parameters.
+         * @type {HDRInfo || null}
+         */
+        this.HDRInfo = null;
+
+        /**
+         * The image noise removal parameters.
+         * @type {VideoDenoiseInfo || null}
+         */
+        this.VideoDenoiseInfo = null;
+
+        /**
+         * The noise removal parameters.
+         * @type {AudioDenoiseInfo || null}
+         */
+        this.AudioDenoiseInfo = null;
+
+        /**
+         * The color enhancement parameters.
+         * @type {ColorEnhanceInfo || null}
+         */
+        this.ColorInfo = null;
+
+        /**
+         * The detail enhancement parameters.
+         * @type {SharpEnhanceInfo || null}
+         */
+        this.SharpInfo = null;
+
+        /**
+         * The face enhancement parameters.
+         * @type {FaceEnhanceInfo || null}
+         */
+        this.FaceInfo = null;
+
+        /**
+         * The low-light enhancement parameters.
+         * @type {LowLightEnhanceInfo || null}
+         */
+        this.LowLightInfo = null;
+
+        /**
+         * The banding removal parameters.
+         * @type {ScratchRepairInfo || null}
+         */
+        this.ScratchRepairInfo = null;
+
+        /**
+         * The artifact removal (smoothing) parameters.
+         * @type {ArtifactRepairInfo || null}
+         */
+        this.ArtifactRepairInfo = null;
+
+        /**
+         * The output parameters of the file.
+         * @type {RebuildMediaTargetInfo || null}
+         */
+        this.TargetInfo = null;
+
+        /**
+         * The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * The task priority, which can be a value from -10 to 10. The higher the value, the higher the priority. If this parameter is left empty, 0 will be used.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * A reserved parameter.
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+
+        if (params.RepairInfo) {
+            let obj = new RepairInfo();
+            obj.deserialize(params.RepairInfo)
+            this.RepairInfo = obj;
+        }
+
+        if (params.VideoFrameInterpolationInfo) {
+            let obj = new VideoFrameInterpolationInfo();
+            obj.deserialize(params.VideoFrameInterpolationInfo)
+            this.VideoFrameInterpolationInfo = obj;
+        }
+
+        if (params.SuperResolutionInfo) {
+            let obj = new SuperResolutionInfo();
+            obj.deserialize(params.SuperResolutionInfo)
+            this.SuperResolutionInfo = obj;
+        }
+
+        if (params.HDRInfo) {
+            let obj = new HDRInfo();
+            obj.deserialize(params.HDRInfo)
+            this.HDRInfo = obj;
+        }
+
+        if (params.VideoDenoiseInfo) {
+            let obj = new VideoDenoiseInfo();
+            obj.deserialize(params.VideoDenoiseInfo)
+            this.VideoDenoiseInfo = obj;
+        }
+
+        if (params.AudioDenoiseInfo) {
+            let obj = new AudioDenoiseInfo();
+            obj.deserialize(params.AudioDenoiseInfo)
+            this.AudioDenoiseInfo = obj;
+        }
+
+        if (params.ColorInfo) {
+            let obj = new ColorEnhanceInfo();
+            obj.deserialize(params.ColorInfo)
+            this.ColorInfo = obj;
+        }
+
+        if (params.SharpInfo) {
+            let obj = new SharpEnhanceInfo();
+            obj.deserialize(params.SharpInfo)
+            this.SharpInfo = obj;
+        }
+
+        if (params.FaceInfo) {
+            let obj = new FaceEnhanceInfo();
+            obj.deserialize(params.FaceInfo)
+            this.FaceInfo = obj;
+        }
+
+        if (params.LowLightInfo) {
+            let obj = new LowLightEnhanceInfo();
+            obj.deserialize(params.LowLightInfo)
+            this.LowLightInfo = obj;
+        }
+
+        if (params.ScratchRepairInfo) {
+            let obj = new ScratchRepairInfo();
+            obj.deserialize(params.ScratchRepairInfo)
+            this.ScratchRepairInfo = obj;
+        }
+
+        if (params.ArtifactRepairInfo) {
+            let obj = new ArtifactRepairInfo();
+            obj.deserialize(params.ArtifactRepairInfo)
+            this.ArtifactRepairInfo = obj;
+        }
+
+        if (params.TargetInfo) {
+            let obj = new RebuildMediaTargetInfo();
+            obj.deserialize(params.TargetInfo)
+            this.TargetInfo = obj;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }
@@ -3152,6 +3616,50 @@ Note: This field may return null, indicating that no valid value can be obtained
             obj.deserialize(params.FollowOrigin)
             this.FollowOrigin = obj;
         }
+
+    }
+}
+
+/**
+ * Parameters for OCR-based recognition of politically sensitive content
+ * @class
+ */
+class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable OCR-based recognition of politically sensitive content. Valid values:
+<li>ON</li>
+<li>OFF</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -3613,6 +4121,90 @@ Note: This field may return `null`, indicating that no valid value can be found.
         this.ScreenshotInterval = 'ScreenshotInterval' in params ? params.ScreenshotInterval : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * AIGC image task output file information.
+ * @class
+ */
+class AigcImageTaskOutputFileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage mode. valid values: <li>Permanent: Permanent storage. the generated image file will be stored in VOD (video on demand).</li> <li>Temporary: Temporary storage. the generated image file will not be stored in vod.</li>.
+Default value: Temporary.
+         * @type {string || null}
+         */
+        this.StorageMode = null;
+
+        /**
+         * Output filename, up to 64 characters. default filename is assigned by the system.
+         * @type {string || null}
+         */
+        this.MediaName = null;
+
+        /**
+         * Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create classification](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
+<Li>Default value: 0, indicating other categories.</li>.
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * File Type.
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * File Url.
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+        /**
+         * File ID.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Meta Data.
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageMode = 'StorageMode' in params ? params.StorageMode : null;
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
 
     }
 }
@@ -6388,6 +6980,57 @@ Default: `declick`.
 }
 
 /**
+ * Output of full text recognition.
+ * @class
+ */
+class AiRecognitionTaskOcrFullTextResultOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Full-text recognition result set
+<font color=red>Note</font>: this list displays up to the first 100 results. You can get all the results from the file whose URL is `SegmentSetFileUrl`.
+         * @type {Array.<AiRecognitionTaskOcrFullTextSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+        /**
+         * URL to the file of the full-text recognition result set. The file format is JSON, and the data structure is the same as `SegmentSet`. The file will be deleted upon the expiration time `SegmentSetFileUrlExpireTime`, instead of being stored permanently.
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file of the full-text recognition result set, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new AiRecognitionTaskOcrFullTextSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
+
+    }
+}
+
+/**
  * ModifyTranscodeTemplate request structure.
  * @class
  */
@@ -6566,7 +7209,7 @@ class RuleCache extends  AbstractModel {
 }
 
 /**
- * 
+ * MPS media processing task information.
  * @class
  */
 class ProcessMediaByMPS extends  AbstractModel {
@@ -6574,31 +7217,31 @@ class ProcessMediaByMPS extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The task ID.
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * 
+         * Task status, value: <li>PROCESSING: processing;</li><li>FINISH: completed.</li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Error code. A non-zero error code is returned when the source is abnormal. If 0 is returned, use the ErrCode of each specific task.
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * 
+         * Error message. If the source is abnormal, the corresponding exception message is returned. Otherwise, use the message of each specific task.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * 
+         * MPS media processing tasks.
          * @type {Array.<MPSSubTaskResult> || null}
          */
         this.SubTaskSet = null;
@@ -6995,6 +7638,90 @@ class AiRecognitionTaskOcrWordsResultInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * Scene AIGC image task output file information.
+ * @class
+ */
+class SceneAigcImageTaskOutputFileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage mode. valid values: <li>Permanent: Permanent storage. the generated image file will be stored in VOD (video on demand).</li> <li>Temporary: Temporary storage. the generated image file will not be stored in vod.</li>.
+Default value: Temporary.
+         * @type {string || null}
+         */
+        this.StorageMode = null;
+
+        /**
+         * Output filename, up to 64 characters. default filename is assigned by the system.
+         * @type {string || null}
+         */
+        this.MediaName = null;
+
+        /**
+         * Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create classification](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
+<Li>Default value: 0, indicating other categories.</li>.
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * File Type.
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * File Url.
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+        /**
+         * File ID.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Meta Data.
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageMode = 'StorageMode' in params ? params.StorageMode : null;
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
 
     }
 }
@@ -7404,7 +8131,7 @@ class DescribeMediaProcessUsageDataRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Used to describe the returned file results in ProcessMediaByMPS tasks.
  * @class
  */
 class MPSOutputFile extends  AbstractModel {
@@ -7412,31 +8139,31 @@ class MPSOutputFile extends  AbstractModel {
         super();
 
         /**
-         * 
+         * File type. Used to identify the specific file returned in the ProcessMediaByMPS task execution results. Values: <li>AiAnalysis.DeLogo.Video: The erased video file generated by the smart erase task;</li><li>AiAnalysis.DeLogo.OriginSubtitle: The subtitle file extracted based on the screen in the smart erase task;</li><li>AiAnalysis.DeLogo.TranslateSubtitle: The subtitle translation file extracted based on the screen in the smart erase task.</li>
          * @type {string || null}
          */
         this.FileType = null;
 
         /**
-         * 
+         * Storage mode. It is used to indicate the storage mode of the result file. The possible values are: <li> Permanent: permanent storage; </li><li> Temporary: temporary storage. </li>
          * @type {string || null}
          */
         this.StorageMode = null;
 
         /**
-         * 
+         * Media file ID. Valid when Type is Permanent, indicating that the result file is stored in the VOD platform as a video media asset. The field value is the FileId of the video media asset.
          * @type {string || null}
          */
         this.FileId = null;
 
         /**
-         * 
+         * Downloadable URL for the result file.
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 
+         * Expiration time. Valid when StorageMode is Temporary. It indicates the expiration time of the URL in seconds.
          * @type {number || null}
          */
         this.ExpiredTime = null;
@@ -8844,31 +9571,32 @@ class ImportMediaKnowledgeRequest extends  AbstractModel {
 }
 
 /**
- * Output of full text recognition.
+ * Scenario-Based AIGC image generation configuration.
  * @class
  */
-class AiRecognitionTaskOcrFullTextResultOutput extends  AbstractModel {
+class AigcImageSceneInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Full-text recognition result set
-<font color=red>Note</font>: this list displays up to the first 100 results. You can get all the results from the file whose URL is `SegmentSetFileUrl`.
-         * @type {Array.<AiRecognitionTaskOcrFullTextSegmentItem> || null}
-         */
-        this.SegmentSet = null;
-
-        /**
-         * URL to the file of the full-text recognition result set. The file format is JSON, and the data structure is the same as `SegmentSet`. The file will be deleted upon the expiration time `SegmentSetFileUrlExpireTime`, instead of being stored permanently.
+         * AI image generation scenario type. valid values:
+-change_clothes: AI clothing change.
+-product_image: AI-generated product image.
          * @type {string || null}
          */
-        this.SegmentSetFileUrl = null;
+        this.Type = null;
 
         /**
-         * Expiration time of the URL to the file of the full-text recognition result set, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
-         * @type {string || null}
+         * Valid when Type is change_clothes. this item is required and indicates the AI clothes-changing image generation config.
+         * @type {ChangeClothesConfig || null}
          */
-        this.SegmentSetFileUrlExpireTime = null;
+        this.ChangeClothesConfig = null;
+
+        /**
+         * Valid when Type is product_image. indicates the AI-generated product image config.
+         * @type {ProductImageConfig || null}
+         */
+        this.ProductImageConfig = null;
 
     }
 
@@ -8879,17 +9607,19 @@ class AiRecognitionTaskOcrFullTextResultOutput extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Type = 'Type' in params ? params.Type : null;
 
-        if (params.SegmentSet) {
-            this.SegmentSet = new Array();
-            for (let z in params.SegmentSet) {
-                let obj = new AiRecognitionTaskOcrFullTextSegmentItem();
-                obj.deserialize(params.SegmentSet[z]);
-                this.SegmentSet.push(obj);
-            }
+        if (params.ChangeClothesConfig) {
+            let obj = new ChangeClothesConfig();
+            obj.deserialize(params.ChangeClothesConfig)
+            this.ChangeClothesConfig = obj;
         }
-        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
-        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
+
+        if (params.ProductImageConfig) {
+            let obj = new ProductImageConfig();
+            obj.deserialize(params.ProductImageConfig)
+            this.ProductImageConfig = obj;
+        }
 
     }
 }
@@ -9036,6 +9766,41 @@ class SetVodDomainCertificateRequest extends  AbstractModel {
         this.Operation = 'Operation' in params ? params.Operation : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.CertID = 'CertID' in params ? params.CertID : null;
+
+    }
+}
+
+/**
+ * CreateAigcVideoTask response structure.
+ * @class
+ */
+class CreateAigcVideoTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11917,6 +12682,62 @@ class EnhanceMediaQualityRequest extends  AbstractModel {
 }
 
 /**
+ * AI product image parameter configuration.
+ * @class
+ */
+class ProductImageConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Prompt content for image generation background. if this field is default, inspiration is automatically generated internally.
+         * @type {string || null}
+         */
+        this.Prompt = null;
+
+        /**
+         * Prevent the model from generating image prompts.
+         * @type {string || null}
+         */
+        this.NegativePrompt = null;
+
+        /**
+         * Product description describes in detail, helping generate images that meet requirements.
+         * @type {string || null}
+         */
+        this.ProductDesc = null;
+
+        /**
+         * Special requirements. if any, import them through this field.
+         * @type {string || null}
+         */
+        this.MoreRequirement = null;
+
+        /**
+         * Specifies the number of images to generate. defaults to 1 if left empty. valid value: 10.
+         * @type {number || null}
+         */
+        this.OutputImageCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Prompt = 'Prompt' in params ? params.Prompt : null;
+        this.NegativePrompt = 'NegativePrompt' in params ? params.NegativePrompt : null;
+        this.ProductDesc = 'ProductDesc' in params ? params.ProductDesc : null;
+        this.MoreRequirement = 'MoreRequirement' in params ? params.MoreRequirement : null;
+        this.OutputImageCount = 'OutputImageCount' in params ? params.OutputImageCount : null;
+
+    }
+}
+
+/**
  * 
  * @class
  */
@@ -12544,6 +13365,92 @@ Note: This field may return `null`, indicating that no valid value can be found.
 }
 
 /**
+ * Output media file configuration for the AIGC image generation task.
+ * @class
+ */
+class AigcImageOutputConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage mode. valid values: <li>Permanent: Permanent storage. the generated image file will be stored in VOD (video on demand), and the FileId can be obtained in the event notification.</li> <li>Temporary: Temporary storage. the generated image file will not be stored in vod, and the Temporary access URL can be obtained in the event notification.</li>.
+Default value: Temporary.
+         * @type {string || null}
+         */
+        this.StorageMode = null;
+
+        /**
+         * Output filename, up to 64 characters. default filename is assigned by the system.
+         * @type {string || null}
+         */
+        this.MediaName = null;
+
+        /**
+         * Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create classification](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
+<Li>Default value: 0, indicating other categories.</li>.
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Image generation resolution. available values are 720P, 1080P, 2K, 4K, 1024x1024, 2048x2048, 2304x1728, 2496x1664, 2560x1440, 3024x1296, 4096x4096, 4694x3520, 4992x3328, 5404x3040, 6198x2656.
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
+        /**
+         * Specify the aspect ratio of the generated image. <li>when ModelName is GEM, the available values are 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, and 21:9.</li> <li>when ModelName is Qwen, it is not currently supported.</li>.
+         * @type {string || null}
+         */
+        this.AspectRatio = null;
+
+        /**
+         * Whether to allow figure or human face generation. valid values: <li>AllowAdult: allow adult generation.</li> <li>Disallowed: forbid including figures or human faces in images.</li>.
+         * @type {string || null}
+         */
+        this.PersonGeneration = null;
+
+        /**
+         * Whether to enable compliance check for input content. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>.
+         * @type {string || null}
+         */
+        this.InputComplianceCheck = null;
+
+        /**
+         * Whether to enable compliance check for output content. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>.
+         * @type {string || null}
+         */
+        this.OutputComplianceCheck = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageMode = 'StorageMode' in params ? params.StorageMode : null;
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.AspectRatio = 'AspectRatio' in params ? params.AspectRatio : null;
+        this.PersonGeneration = 'PersonGeneration' in params ? params.PersonGeneration : null;
+        this.InputComplianceCheck = 'InputComplianceCheck' in params ? params.InputComplianceCheck : null;
+        this.OutputComplianceCheck = 'OutputComplianceCheck' in params ? params.OutputComplianceCheck : null;
+
+    }
+}
+
+/**
  * Just In Time transcoding watermark template update configuration.
  * @class
  */
@@ -12846,6 +13753,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CreateAigcImageTask response structure.
+ * @class
+ */
+class CreateAigcImageTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Control parameters for video jitter and ghost detection.
  * @class
  */
@@ -13115,6 +14057,41 @@ class ModifyAnimatedGraphicsTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSceneAigcImageTask response structure.
+ * @class
+ */
+class CreateSceneAigcImageTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -13732,46 +14709,66 @@ class RequestHeader extends  AbstractModel {
 }
 
 /**
- * Subtitle information.
+ * AIGC image task information.
  * @class
  */
-class AiRecognitionTaskAsrFullTextResultOutputSubtitleItem extends  AbstractModel {
+class AigcImageTask extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Media asset subtitle ID, used for media asset subtitle management, only valid when Format is vtt.
-<font color=red>Note:</font> Tasks before 2024-11-01T10:00:00Z return this field as invalid.
+         * The task ID.
          * @type {string || null}
          */
-        this.Id = null;
+        this.TaskId = null;
 
         /**
-         * Media asset subtitle name, used for player display, only valid when Format is vtt.
-<font color=red>Note:</font> Tasks before 2024-11-01T10:00:00Z return this field as invalid.
+         * Task status, value: <li>PROCESSING: processing;</li><li>FINISH: completed.</li>
          * @type {string || null}
          */
-        this.Name = null;
+        this.Status = null;
 
         /**
-         * Subtitle Language.
-         * @type {string || null}
+         * Error code. A non-zero error code is returned when the source is abnormal. If 0 is returned, use the ErrCode of each specific task.
+         * @type {number || null}
          */
-        this.Language = null;
+        this.ErrCode = null;
 
         /**
-         * The format of the subtitle files. Valid values:
-<li>vtt</li>
-<li>srt</li>
+         * Error message. If the source is abnormal, the corresponding exception message is returned. Otherwise, use the message of each specific task.
          * @type {string || null}
          */
-        this.Format = null;
+        this.Message = null;
 
         /**
-         * The URL of a subtitle file.
+         * The execution progress of a single adaptive bitrate stream. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Input of AIGC image task.
+         * @type {AigcImageTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of AIGC image task.
+         * @type {AigcImageTaskOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is not carried or is left empty, no deduplication will be performed.
          * @type {string || null}
          */
-        this.Url = null;
+        this.SessionId = null;
+
+        /**
+         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
 
     }
 
@@ -13782,11 +14779,25 @@ class AiRecognitionTaskAsrFullTextResultOutputSubtitleItem extends  AbstractMode
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Language = 'Language' in params ? params.Language : null;
-        this.Format = 'Format' in params ? params.Format : null;
-        this.Url = 'Url' in params ? params.Url : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+
+        if (params.Input) {
+            let obj = new AigcImageTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AigcImageTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
 
     }
 }
@@ -13848,6 +14859,90 @@ class SimpleHlsClipResponse extends  AbstractModel {
         this.FileId = 'FileId' in params ? params.FileId : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AIGC video task output file information.
+ * @class
+ */
+class AigcVideoTaskOutputFileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage mode. valid values: <li>Permanent: Permanent storage. the generated video file will be stored in vod.</li> <li>Temporary: Temporary storage. the generated video file will not be stored in vod.</li>
+Default value: Temporary.
+         * @type {string || null}
+         */
+        this.StorageMode = null;
+
+        /**
+         * Output media filename, longest 64 characters. default filename is specified by the system.
+         * @type {string || null}
+         */
+        this.MediaName = null;
+
+        /**
+         * Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
+<Li>Default value: 0, indicate other categories.</li>.
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * File Type.
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * File Url.
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+        /**
+         * File ID.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Meta Data.
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageMode = 'StorageMode' in params ? params.StorageMode : null;
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
 
     }
 }
@@ -15897,53 +16992,42 @@ class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * CreateHeadTailTemplate request structure.
+ * AIGC image generation task input file information.
  * @class
  */
-class CreateHeadTailTemplateRequest extends  AbstractModel {
+class AigcImageTaskInputFileInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Template name, length limit is 64 characters.
+         * Input video File type. valid values: <li>File: on-demand media File;</li> <li>Url: accessible Url;</li>.
          * @type {string || null}
          */
-        this.Name = null;
+        this.Type = null;
 
         /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
-         * Template description information, length limit is 256 characters.
+         * The media File ID of the image File, which is the globally unique identifier of the File in vod, is assigned by the vod backend after successful upload. you can get this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media). this parameter is valid when the Type value is File.
+Description:.
+1. recommended for use: image less than 7 mb.
+2. Valid values of image format: jpeg, jpg, png, and webp.
          * @type {string || null}
          */
-        this.Comment = null;
+        this.FileId = null;
 
         /**
-         * Title candidate list, fill in the FileId of the video. When transcoding, the title closest to the aspect ratio of the feature film will be automatically selected (when the aspect ratio is the same, the front candidate will take precedence). Supports up to 5 candidate titles.
-         * @type {Array.<string> || null}
-         */
-        this.HeadCandidateSet = null;
-
-        /**
-         * Ending candidate list, fill in the FileId of the video. When transcoding, the ending with the aspect ratio closest to the feature film will be automatically selected (when the aspect ratio is the same, the front candidate will take precedence). Supports up to 5 candidate endings.
-         * @type {Array.<string> || null}
-         */
-        this.TailCandidateSet = null;
-
-        /**
-         * Padding method. When the video stream configuration width and height parameters are inconsistent with the aspect ratio of the original video, the transcoding processing method is "padding". Optional filling method:
-<li> stretch: stretch, stretch each frame to fill the entire screen, which may cause the transcoded video to be "squashed" or "stretched";</li> 
-<li> gauss: Gaussian blur, keep the video aspect ratio unchanged, use Gaussian blur for the remaining edges; </li>
-<li> white: leave blank, keep the video aspect ratio unchanged, use the remaining edges for the edge Use white filling; </li>
-<li> black: Leave black, keep the video aspect ratio unchanged, and fill the remaining edges with black. </li>
-Default value: stretch.
+         * Accessible file URL. this parameter is valid when the Type value is URL.
+Description:.
+1. recommended for use: image less than 7 mb.
+2. Valid values of image format: jpeg, jpg, png, and webp.
          * @type {string || null}
          */
-        this.FillType = null;
+        this.Url = null;
+
+        /**
+         * Description of the input image, used to help the model understand the image. valid for GEM 2.5 and GEM 3.0 only.
+         * @type {string || null}
+         */
+        this.Text = null;
 
     }
 
@@ -15954,12 +17038,10 @@ Default value: stretch.
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.HeadCandidateSet = 'HeadCandidateSet' in params ? params.HeadCandidateSet : null;
-        this.TailCandidateSet = 'TailCandidateSet' in params ? params.TailCandidateSet : null;
-        this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Text = 'Text' in params ? params.Text : null;
 
     }
 }
@@ -16221,24 +17303,58 @@ class RefererRule extends  AbstractModel {
 }
 
 /**
- * Path cache configuration follows the origin server configuration.
+ * Image file info for AIGC video task input.
  * @class
  */
-class CacheConfigFollowOrigin extends  AbstractModel {
+class AigcVideoTaskInputFileInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The path cache follows the origin site configuration switch. The values u200bu200bare: <li>on: on; </li> <li>off: off. </li>
+         * Input video File type. valid values: <li>File: on-demand media File;</li> <li>Url: accessible Url;</li>
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Type = null;
 
         /**
-         * Heuristic cache configuration
-         * @type {HeuristicCache || null}
+         * The media File ID, which is the globally unique identifier (guid) of the File in vod, is assigned by the vod backend after successful upload. you can retrieve this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media). this parameter is valid when the Type value is File. description:.
+1. recommended image size: less than 10 mb.
+2. image format value is jpeg, jpg, png.
+         * @type {string || null}
          */
-        this.HeuristicCache = null;
+        this.FileId = null;
+
+        /**
+         * Accessible file URL. this parameter is valid when Type value is URL.
+Note:.
+1. recommended image size: less than 10 mb.
+2. image format value is jpeg, jpg, png.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Reference type. Used for the GV model.
+Note:
+When using the GV model, can be used as a reference method, selectable asset (material), style.
+         * @type {string || null}
+         */
+        this.ReferenceType = null;
+
+        /**
+         * Object id.
+Applicable model: Vidu-q2.
+When an image identifier is required, each image must have a subject id. the subject id can be used via @subject id in subsequent generation.
+         * @type {string || null}
+         */
+        this.ObjectId = null;
+
+        /**
+         * Suitable for the Vidu-q2 model.
+When all images carry object ids, you can set the timbre id for the object. timbre list: https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg.
+         * @type {string || null}
+         */
+        this.VoiceId = null;
 
     }
 
@@ -16249,13 +17365,12 @@ class CacheConfigFollowOrigin extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.HeuristicCache) {
-            let obj = new HeuristicCache();
-            obj.deserialize(params.HeuristicCache)
-            this.HeuristicCache = obj;
-        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.ReferenceType = 'ReferenceType' in params ? params.ReferenceType : null;
+        this.ObjectId = 'ObjectId' in params ? params.ObjectId : null;
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
 
     }
 }
@@ -16521,6 +17636,122 @@ This parameter is <font color=red>\*no longer recommended</font>. Please use [Re
 }
 
 /**
+ * The information of a bitrate reduction task.
+ * @class
+ */
+class ReduceMediaBitrateTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The task flow status. Valid values:
+<li>PROCESSING</li>
+<li>FINISH</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The ID of the media file.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * The name of the media file.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * The address of the media file.
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+        /**
+         * The metadata of the source video.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+        /**
+         * The execution status and result of the bitrate reduction task.
+         * @type {Array.<ReduceMediaBitrateMediaProcessTaskResult> || null}
+         */
+        this.MediaProcessResultSet = null;
+
+        /**
+         * The task priority, which can be a value from -10 to 10.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * The notification mode for the change of task status. Valid values:
+<li>Finish: Send a notification after the task is completed.</li>
+<li>None: Do not send status change notifications for this task.</li>
+         * @type {string || null}
+         */
+        this.TasksNotifyMode = null;
+
+        /**
+         * The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
+
+        if (params.MediaProcessResultSet) {
+            this.MediaProcessResultSet = new Array();
+            for (let z in params.MediaProcessResultSet) {
+                let obj = new ReduceMediaBitrateMediaProcessTaskResult();
+                obj.deserialize(params.MediaProcessResultSet[z]);
+                this.MediaProcessResultSet.push(obj);
+            }
+        }
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.TasksNotifyMode = 'TasksNotifyMode' in params ? params.TasksNotifyMode : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+
+    }
+}
+
+/**
  * DescribeMediaPlayStatDetails response structure.
  * @class
  */
@@ -16740,32 +17971,66 @@ Default value: hvc1.
 }
 
 /**
- * Parameters for OCR-based recognition of politically sensitive content
+ * AIGC video generation task.
  * @class
  */
-class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
+class AigcVideoTask extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable OCR-based recognition of politically sensitive content. Valid values:
-<li>ON</li>
-<li>OFF</li>
+         * The task ID.
          * @type {string || null}
          */
-        this.Switch = null;
+        this.TaskId = null;
 
         /**
-         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
-         * @type {number || null}
+         * Task status, value: <li>PROCESSING: processing;</li><li>FINISH: completed.</li>
+         * @type {string || null}
          */
-        this.BlockConfidence = null;
+        this.Status = null;
 
         /**
-         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
+         * Error code. A non-zero error code is returned when the source is abnormal. If 0 is returned, use the ErrCode of each specific task.
          * @type {number || null}
          */
-        this.ReviewConfidence = null;
+        this.ErrCode = null;
+
+        /**
+         * Error message. If the source is abnormal, the corresponding exception message is returned. Otherwise, use the message of each specific task.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The execution progress of a single adaptive bitrate stream. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Input of AIGC video task.
+         * @type {AigcVideoTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of AIGC video task.
+         * @type {AigcVideoTaskOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is not carried or is left empty, no deduplication will be performed.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
 
     }
 
@@ -16776,9 +18041,25 @@ class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
-        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+
+        if (params.Input) {
+            let obj = new AigcVideoTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AigcVideoTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
 
     }
 }
@@ -19540,7 +20821,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * MPS specific subtask query result type.
  * @class
  */
 class MPSSubTaskResult extends  AbstractModel {
@@ -19548,37 +20829,37 @@ class MPSSubTaskResult extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Task type. Specific subtask type in the MPS WorkflowTask structure. Value: <li>AiAnalysis.DeLogo: Intelligent erasure task.</li>
          * @type {string || null}
          */
         this.TaskType = null;
 
         /**
-         * 
+         * Task status. There are three types: PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Error code. Returns 0 for success, other values for failure.
          * @type {string || null}
          */
         this.ErrCode = null;
 
         /**
-         * 
+         * Error message.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * 
+         * MPS media processing task input. This field corresponds to the Input result in the MPS task response and is returned in JSON format.
          * @type {string || null}
          */
         this.Input = null;
 
         /**
-         * 
+         * MPS media processing task output.
          * @type {MPSTaskOutput || null}
          */
         this.Output = null;
@@ -19990,6 +21271,162 @@ class CreateJustInTimeTranscodeTemplateRequest extends  AbstractModel {
             this.WatermarkConfigure = obj;
         }
         this.Comment = 'Comment' in params ? params.Comment : null;
+
+    }
+}
+
+/**
+ * CreateAigcVideoTask request structure.
+ * @class
+ */
+class CreateAigcVideoTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Model name. valid values: <li>Hailuo: conch;</li><li>Kling: Kling;</li><li>Jimeng: Jimeng;</li><li>Vidu;</li><li>Hunyuan: Hunyuan;</li><li>Mingmou: bright eyes;</li>
+         * @type {string || null}
+         */
+        this.ModelName = null;
+
+        /**
+         * Model version. parameter value: <li>when ModelName is Hailuo, optional values are 02, 2.3, 2.3-fast;</li><li>when ModelName is Kling, optional values are 1.6, 2.0, 2.1, 2.5, O1;</li><li>when ModelName is Jimeng, optional values are 3.0pro;</li><li>when ModelName is Vidu, optional values are q2, q2-pro, q2-turbo;</li><li>when ModelName is GV, optional values are 3.1, 3.1-fast;</li><li>when ModelName is OS, optional values are 2.0;</li><li>when ModelName is Hunyuan, optional values are 1.5;</li><li>when ModelName is Mingmou, optional values are 1.0;</li>
+         * @type {string || null}
+         */
+        this.ModelVersion = null;
+
+        /**
+         * List of up to three material resources for description of resource images to be used by the model in video generation.
+
+Video generation with first and last frame: use the first table in FileInfos to represent the first frame (FileInfos contains at most one image at this point). LastFrameFileId or LastFrameUrl represents the last frame.
+
+Model supporting multi-image input.
+1. GV, when entering multiple images, LastFrameFileId and LastFrameUrl are unavailable.
+2. Vidu supports multi-image reference for video generation. the q2 model accepts 1-7 images. use the ObjectId in FileInfos as the subject id for input.
+
+Note:.
+1. Image size: the size should not exceed 10 mb.
+2. supported image formats: jpeg, png.
+         * @type {Array.<AigcVideoTaskInputFileInfo> || null}
+         */
+        this.FileInfos = null;
+
+        /**
+         * The media file ID used as the end frame to generate video. this file has a globally unique ID on vod, assigned by the vod backend after successful upload. you can get this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media). description:.
+1. only models GV, Kling, and Vidu are supported. other models are not currently supported. when ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the first frame of the video to be generated. when ModelName is Kling and ModelVersion is 2.1 and specify output Resolution Resolution as 1080P, you can specify this parameter. when ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.
+2. Image size: the size should be less than 5 mb.
+3. image format value is jpeg, jpg, png, webp.
+         * @type {string || null}
+         */
+        this.LastFrameFileId = null;
+
+        /**
+         * Media file URL used as frames to generate video. description:.
+1. only models GV, Kling, and Vidu are supported. other models are not currently supported. when ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the first frame of the video to be generated. when ModelName is Kling and ModelVersion is 2.1 and specify output Resolution Resolution as 1080P, you can specify this parameter. when ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.
+2. Image size: the size should be less than 5 mb.
+3. image format value is jpeg, jpg, png, webp.
+         * @type {string || null}
+         */
+        this.LastFrameUrl = null;
+
+        /**
+         * Prompt content for video generation. this parameter is required when FileInfos is empty.
+Example value: move the picture.
+         * @type {string || null}
+         */
+        this.Prompt = null;
+
+        /**
+         * Prevent the model from generating video prompts.
+         * @type {string || null}
+         */
+        this.NegativePrompt = null;
+
+        /**
+         * Whether to optimize Prompt content automatically. when Enabled, the passed-in Prompt will be optimized automatically to enhance generation quality. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>.
+         * @type {string || null}
+         */
+        this.EnhancePrompt = null;
+
+        /**
+         * Specifies the output media file configuration for the video task.
+         * @type {AigcVideoOutputConfig || null}
+         */
+        this.OutputConfig = null;
+
+        /**
+         * An identifier for deduplication. if there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. the maximum length is 50 characters. leaving it blank or using an empty string indicates no deduplication.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Source context, used to pass through user request information. the audio and video quality revival complete callback will return the value of this field, up to 1000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * Task priority. the higher the value, the higher the priority. the value range is from -10 to 10. if left blank, the default value is 0.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * Reserved field, used for special purpose.
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+        /**
+         * Specifies the region information of the input image. when the image url is a foreign address, selectable Oversea. default Mainland.
+         * @type {string || null}
+         */
+        this.InputRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.ModelVersion = 'ModelVersion' in params ? params.ModelVersion : null;
+
+        if (params.FileInfos) {
+            this.FileInfos = new Array();
+            for (let z in params.FileInfos) {
+                let obj = new AigcVideoTaskInputFileInfo();
+                obj.deserialize(params.FileInfos[z]);
+                this.FileInfos.push(obj);
+            }
+        }
+        this.LastFrameFileId = 'LastFrameFileId' in params ? params.LastFrameFileId : null;
+        this.LastFrameUrl = 'LastFrameUrl' in params ? params.LastFrameUrl : null;
+        this.Prompt = 'Prompt' in params ? params.Prompt : null;
+        this.NegativePrompt = 'NegativePrompt' in params ? params.NegativePrompt : null;
+        this.EnhancePrompt = 'EnhancePrompt' in params ? params.EnhancePrompt : null;
+
+        if (params.OutputConfig) {
+            let obj = new AigcVideoOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
+        this.InputRegion = 'InputRegion' in params ? params.InputRegion : null;
 
     }
 }
@@ -22245,7 +23682,7 @@ class IpFilter extends  AbstractModel {
 }
 
 /**
- * 
+ * The MPS subtask output returns the result.
  * @class
  */
 class MPSTaskOutput extends  AbstractModel {
@@ -22253,7 +23690,7 @@ class MPSTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The file type in the task's return result. For example, in a smart erase, the erased video file will be stored in the media asset and its FileId will be given in this field. The URL of the subtitle file extracted based on the image will also be given in this field.
          * @type {Array.<MPSOutputFile> || null}
          */
         this.OutputFiles = null;
@@ -22533,6 +23970,66 @@ class ModifyImageSpriteTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Output media file configuration for the scenario-based AIGC image generation task.
+ * @class
+ */
+class SceneAigcImageOutputConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage mode. valid values: <li>Permanent: Permanent storage. the generated image file will be stored in vod, and the FileId can be obtained from the event notification.</li> <li>Temporary: Temporary storage. the generated image file will not be stored in vod, and the Temporary access URL can be obtained from the event notification.</li>
+Default value: Temporary.
+         * @type {string || null}
+         */
+        this.StorageMode = null;
+
+        /**
+         * Output filename, longest 64 characters. default filename is specified by the system.
+         * @type {string || null}
+         */
+        this.MediaName = null;
+
+        /**
+         * Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
+<Li>Default value: 0, indicate other categories.</li>
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Specify the aspect ratio of the generated image. input format is W:H.
+
+Only valid for product_image scenarios. available values are: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 16:9, 9:16, 21:9.
+         * @type {string || null}
+         */
+        this.AspectRatio = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageMode = 'StorageMode' in params ? params.StorageMode : null;
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.AspectRatio = 'AspectRatio' in params ? params.AspectRatio : null;
 
     }
 }
@@ -24873,6 +26370,100 @@ When SrcLanguage is fr (French), value range:
             this.SubtitleFormatsOperation = obj;
         }
         this.SubtitleName = 'SubtitleName' in params ? params.SubtitleName : null;
+
+    }
+}
+
+/**
+ * Scenario-based AIGC Image Generation Task Information
+ * @class
+ */
+class SceneAigcImageTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Task status, value: <li>PROCESSING: processing;</li><li>FINISH: completed.</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. A non-zero error code is returned when the source is abnormal. If 0 is returned, use the ErrCode of each specific task.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message. If the source is abnormal, the corresponding exception message is returned. Otherwise, use the message of each specific task.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The execution progress of a single adaptive bitrate stream. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Input of AIGC image task.
+         * @type {SceneAigcImageTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of AIGC image task.
+         * @type {SceneAigcImageTaskOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is not carried or is left empty, no deduplication will be performed.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+
+        if (params.Input) {
+            let obj = new SceneAigcImageTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new SceneAigcImageTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
 
     }
 }
@@ -27864,6 +29455,42 @@ military:
 }
 
 /**
+ * AIGC video task output.
+ * @class
+ */
+class AigcVideoTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * File information of the output video for the AIGC video generation task.
+         * @type {Array.<AigcVideoTaskOutputFileInfo> || null}
+         */
+        this.FileInfos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FileInfos) {
+            this.FileInfos = new Array();
+            for (let z in params.FileInfos) {
+                let obj = new AigcVideoTaskOutputFileInfo();
+                obj.deserialize(params.FileInfos[z]);
+                this.FileInfos.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeletePersonSample response structure.
  * @class
  */
@@ -27887,6 +29514,71 @@ class DeletePersonSampleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Moderation details.
+ * @class
+ */
+class ReviewInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The moderation template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The suggestion. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * The moderation type in the format of `Form.Label`. This parameter is valid if `Suggestion` is `review` or `block`.
+`Form` indicates the type of inappropriate content detected. Valid values:
+<li>`Image` (people or icons in images)</li>
+<li>`OCR` (text in images)</li>
+<li>`ASR` (speech)</li>
+<li>`Voice`</li>
+`Label` indicates the violation label. Valid values:
+<li>`Porn` (pornographic content)</li>
+<li>`Terror` (terrorist content)</li>
+<li>`Polity` (politically sensitive content)</li>
+<li>`Ad` (advertisement)</li>
+<li>`Illegal` (illegal content)</li>
+<li>`Abuse`</li>
+<li>`Moan`</li>
+         * @type {Array.<string> || null}
+         */
+        this.TypeSet = null;
+
+        /**
+         * The moderation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.ReviewTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.TypeSet = 'TypeSet' in params ? params.TypeSet : null;
+        this.ReviewTime = 'ReviewTime' in params ? params.ReviewTime : null;
 
     }
 }
@@ -32604,24 +34296,49 @@ class HeadTailTaskInput extends  AbstractModel {
 }
 
 /**
- * DescribeImageReviewUsageData response structure.
+ * Information of file generated by video clipping (v2017)
  * @class
  */
-class DescribeImageReviewUsageDataResponse extends  AbstractModel {
+class ClipFileInfo2017 extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The image recognition usage statistics (the number of times the image recognition feature is used in the time period specified).
-         * @type {Array.<ImageReviewUsageDataItem> || null}
+         * Error code
+<li>0: success;</li>
+<li>Other values: failure.</li>
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.ImageReviewUsageDataSet = null;
+        this.ErrCode = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Error description.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Message = null;
+
+        /**
+         * Output target file ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Output target file address.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+        /**
+         * Output target file type.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FileType = null;
 
     }
 
@@ -32632,16 +34349,11 @@ class DescribeImageReviewUsageDataResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.ImageReviewUsageDataSet) {
-            this.ImageReviewUsageDataSet = new Array();
-            for (let z in params.ImageReviewUsageDataSet) {
-                let obj = new ImageReviewUsageDataItem();
-                obj.deserialize(params.ImageReviewUsageDataSet[z]);
-                this.ImageReviewUsageDataSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
 
     }
 }
@@ -33250,6 +34962,26 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.ComplexAdaptiveDynamicStreamingCompleteEvent = null;
 
+        /**
+         * 
+         * @type {ProcessMediaByMPS || null}
+         */
+        this.ProcessMediaByMPSCompleteEvent = null;
+
+        /**
+         * AIGC image task completion event, valid when the event type is AigcImageTaskComplete.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {AigcImageTask || null}
+         */
+        this.AigcImageCompleteEvent = null;
+
+        /**
+         * AIGC video task completion event, valid when the event type is AigcVideoTaskComplete.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {AigcVideoTask || null}
+         */
+        this.AigcVideoCompleteEvent = null;
+
     }
 
     /**
@@ -33422,6 +35154,24 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new ComplexAdaptiveDynamicStreamingTask();
             obj.deserialize(params.ComplexAdaptiveDynamicStreamingCompleteEvent)
             this.ComplexAdaptiveDynamicStreamingCompleteEvent = obj;
+        }
+
+        if (params.ProcessMediaByMPSCompleteEvent) {
+            let obj = new ProcessMediaByMPS();
+            obj.deserialize(params.ProcessMediaByMPSCompleteEvent)
+            this.ProcessMediaByMPSCompleteEvent = obj;
+        }
+
+        if (params.AigcImageCompleteEvent) {
+            let obj = new AigcImageTask();
+            obj.deserialize(params.AigcImageCompleteEvent)
+            this.AigcImageCompleteEvent = obj;
+        }
+
+        if (params.AigcVideoCompleteEvent) {
+            let obj = new AigcVideoTask();
+            obj.deserialize(params.AigcVideoCompleteEvent)
+            this.AigcVideoCompleteEvent = obj;
         }
 
     }
@@ -33793,6 +35543,54 @@ class QRCodeConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * Input file information for the scenario-based AIGC image generation task.
+ * @class
+ */
+class SceneAigcImageTaskInputFileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Input video File type. valid values: <li>File: on-demand media File;</li> <li>Url: accessible Url;</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The media File ID of the image File, which is the globally unique identifier of the File in vod, is assigned by the vod backend after successful upload. you can obtain this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media). this parameter is valid when the Type value is File.
+Note:
+1. recommended for use with images less than 7 mb.
+2. image format value is jpeg, jpg, png, webp.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Accessible file URL. this parameter is valid when Type value is Url.
+Note:
+1. recommended for use with images less than 7 MB.
+2. image format value is jpeg, jpg, png, webp.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * Statistics of task with specified specification.
  * @class
  */
@@ -33866,6 +35664,42 @@ class TEHDConfigForUpdate extends  AbstractModel {
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.MaxVideoBitrate = 'MaxVideoBitrate' in params ? params.MaxVideoBitrate : null;
+
+    }
+}
+
+/**
+ * Scene AIGC image task output.
+ * @class
+ */
+class SceneAigcImageTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * File information of the out image for the AIGC image generation task.
+         * @type {Array.<SceneAigcImageTaskOutputFileInfo> || null}
+         */
+        this.FileInfos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FileInfos) {
+            this.FileInfos = new Array();
+            for (let z in params.FileInfos) {
+                let obj = new SceneAigcImageTaskOutputFileInfo();
+                obj.deserialize(params.FileInfos[z]);
+                this.FileInfos.push(obj);
+            }
+        }
 
     }
 }
@@ -36429,6 +38263,96 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Input of AIGC image task.
+ * @class
+ */
+class AigcImageTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Model name. 
+         * @type {string || null}
+         */
+        this.ModelName = null;
+
+        /**
+         * Model version. 
+         * @type {string || null}
+         */
+        this.ModelVersion = null;
+
+        /**
+         * File information of the input image for the AIGC image generation task.
+         * @type {Array.<AigcImageTaskInputFileInfo> || null}
+         */
+        this.FileInfos = null;
+
+        /**
+         * The prompt content for image generation.
+         * @type {string || null}
+         */
+        this.Prompt = null;
+
+        /**
+         * Prevent the model from generating image generation prompts.
+         * @type {string || null}
+         */
+        this.NegativePrompt = null;
+
+        /**
+         * Whether to optimize Prompt content automatically. when Enabled, it will optimize the passed in Prompt automatically to enhance generation quality. valid values: <li>Enabled: turn on;</li> <li>Disabled: turn off;</li>
+         * @type {string || null}
+         */
+        this.EnhancePrompt = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.GenerationMode = null;
+
+        /**
+         * Output media file configuration for the task.
+         * @type {AigcImageOutputConfig || null}
+         */
+        this.OutputConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.ModelVersion = 'ModelVersion' in params ? params.ModelVersion : null;
+
+        if (params.FileInfos) {
+            this.FileInfos = new Array();
+            for (let z in params.FileInfos) {
+                let obj = new AigcImageTaskInputFileInfo();
+                obj.deserialize(params.FileInfos[z]);
+                this.FileInfos.push(obj);
+            }
+        }
+        this.Prompt = 'Prompt' in params ? params.Prompt : null;
+        this.NegativePrompt = 'NegativePrompt' in params ? params.NegativePrompt : null;
+        this.EnhancePrompt = 'EnhancePrompt' in params ? params.EnhancePrompt : null;
+        this.GenerationMode = 'GenerationMode' in params ? params.GenerationMode : null;
+
+        if (params.OutputConfig) {
+            let obj = new AigcImageOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
+
+    }
+}
+
+/**
  * Video stream configuration parameter
  * @class
  */
@@ -36881,6 +38805,104 @@ class DescribeImageSpriteTemplatesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSceneAigcImageTask request structure.
+ * @class
+ */
+class CreateSceneAigcImageTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Scenario-Based image generation parameter configuration.
+         * @type {AigcImageSceneInfo || null}
+         */
+        this.SceneInfo = null;
+
+        /**
+         * Input image list. supported image formats: jpg, jpeg, png, webp. different scenarios require different input data.
+
+- AI clothing change scenario: input only 1 model image.
+- AI product image scenario: manually input 1-10 images of different angles per product.
+         * @type {Array.<SceneAigcImageTaskInputFileInfo> || null}
+         */
+        this.FileInfos = null;
+
+        /**
+         * Specifies the output media file configuration for the scenario-based image task.
+         * @type {SceneAigcImageOutputConfig || null}
+         */
+        this.OutputConfig = null;
+
+        /**
+         * An identifier for deduplication. if there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. the maximum length is 50 characters. leaving it blank or using an empty string indicates no deduplication.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Source context, used to pass through user request information. the audio and video quality revival complete callback will return the value of this field, up to 1000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * Task priority. the higher the value, the higher the priority. the value range is from -10 to 10. if left blank, the default value is 0.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * Reserved field, used for special purpose.
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+        if (params.SceneInfo) {
+            let obj = new AigcImageSceneInfo();
+            obj.deserialize(params.SceneInfo)
+            this.SceneInfo = obj;
+        }
+
+        if (params.FileInfos) {
+            this.FileInfos = new Array();
+            for (let z in params.FileInfos) {
+                let obj = new SceneAigcImageTaskInputFileInfo();
+                obj.deserialize(params.FileInfos[z]);
+                this.FileInfos.push(obj);
+            }
+        }
+
+        if (params.OutputConfig) {
+            let obj = new SceneAigcImageOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }
@@ -37407,138 +39429,46 @@ class Https extends  AbstractModel {
 }
 
 /**
- * RebuildMedia request structure.
+ * Subtitle information.
  * @class
  */
-class RebuildMediaRequest extends  AbstractModel {
+class AiRecognitionTaskAsrFullTextResultOutputSubtitleItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The file ID.
+         * Media asset subtitle ID, used for media asset subtitle management, only valid when Format is vtt.
+<font color=red>Note:</font> Tasks before 2024-11-01T10:00:00Z return this field as invalid.
          * @type {string || null}
          */
-        this.FileId = null;
+        this.Id = null;
 
         /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
-         * The start offset (seconds). If you do not specify this, the segment will start from the beginning of the video.
-         * @type {number || null}
-         */
-        this.StartTimeOffset = null;
-
-        /**
-         * The end offset (seconds). If you do not specify this, the segment will end at the end of the video.
-         * @type {number || null}
-         */
-        this.EndTimeOffset = null;
-
-        /**
-         * The video quality remastering parameters.
-         * @type {RepairInfo || null}
-         */
-        this.RepairInfo = null;
-
-        /**
-         * The smart frame interpolation parameters.
-         * @type {VideoFrameInterpolationInfo || null}
-         */
-        this.VideoFrameInterpolationInfo = null;
-
-        /**
-         * The super resolution parameters.
-         * @type {SuperResolutionInfo || null}
-         */
-        this.SuperResolutionInfo = null;
-
-        /**
-         * The high dynamic range (HDR) parameters.
-         * @type {HDRInfo || null}
-         */
-        this.HDRInfo = null;
-
-        /**
-         * The image noise removal parameters.
-         * @type {VideoDenoiseInfo || null}
-         */
-        this.VideoDenoiseInfo = null;
-
-        /**
-         * The noise removal parameters.
-         * @type {AudioDenoiseInfo || null}
-         */
-        this.AudioDenoiseInfo = null;
-
-        /**
-         * The color enhancement parameters.
-         * @type {ColorEnhanceInfo || null}
-         */
-        this.ColorInfo = null;
-
-        /**
-         * The detail enhancement parameters.
-         * @type {SharpEnhanceInfo || null}
-         */
-        this.SharpInfo = null;
-
-        /**
-         * The face enhancement parameters.
-         * @type {FaceEnhanceInfo || null}
-         */
-        this.FaceInfo = null;
-
-        /**
-         * The low-light enhancement parameters.
-         * @type {LowLightEnhanceInfo || null}
-         */
-        this.LowLightInfo = null;
-
-        /**
-         * The banding removal parameters.
-         * @type {ScratchRepairInfo || null}
-         */
-        this.ScratchRepairInfo = null;
-
-        /**
-         * The artifact removal (smoothing) parameters.
-         * @type {ArtifactRepairInfo || null}
-         */
-        this.ArtifactRepairInfo = null;
-
-        /**
-         * The output parameters of the file.
-         * @type {RebuildMediaTargetInfo || null}
-         */
-        this.TargetInfo = null;
-
-        /**
-         * The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+         * Media asset subtitle name, used for player display, only valid when Format is vtt.
+<font color=red>Note:</font> Tasks before 2024-11-01T10:00:00Z return this field as invalid.
          * @type {string || null}
          */
-        this.SessionId = null;
+        this.Name = null;
 
         /**
-         * The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+         * Subtitle Language.
          * @type {string || null}
          */
-        this.SessionContext = null;
+        this.Language = null;
 
         /**
-         * The task priority, which can be a value from -10 to 10. The higher the value, the higher the priority. If this parameter is left empty, 0 will be used.
-         * @type {number || null}
-         */
-        this.TasksPriority = null;
-
-        /**
-         * A reserved parameter.
+         * The format of the subtitle files. Valid values:
+<li>vtt</li>
+<li>srt</li>
          * @type {string || null}
          */
-        this.ExtInfo = null;
+        this.Format = null;
+
+        /**
+         * The URL of a subtitle file.
+         * @type {string || null}
+         */
+        this.Url = null;
 
     }
 
@@ -37549,92 +39479,11 @@ class RebuildMediaRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
-
-        if (params.RepairInfo) {
-            let obj = new RepairInfo();
-            obj.deserialize(params.RepairInfo)
-            this.RepairInfo = obj;
-        }
-
-        if (params.VideoFrameInterpolationInfo) {
-            let obj = new VideoFrameInterpolationInfo();
-            obj.deserialize(params.VideoFrameInterpolationInfo)
-            this.VideoFrameInterpolationInfo = obj;
-        }
-
-        if (params.SuperResolutionInfo) {
-            let obj = new SuperResolutionInfo();
-            obj.deserialize(params.SuperResolutionInfo)
-            this.SuperResolutionInfo = obj;
-        }
-
-        if (params.HDRInfo) {
-            let obj = new HDRInfo();
-            obj.deserialize(params.HDRInfo)
-            this.HDRInfo = obj;
-        }
-
-        if (params.VideoDenoiseInfo) {
-            let obj = new VideoDenoiseInfo();
-            obj.deserialize(params.VideoDenoiseInfo)
-            this.VideoDenoiseInfo = obj;
-        }
-
-        if (params.AudioDenoiseInfo) {
-            let obj = new AudioDenoiseInfo();
-            obj.deserialize(params.AudioDenoiseInfo)
-            this.AudioDenoiseInfo = obj;
-        }
-
-        if (params.ColorInfo) {
-            let obj = new ColorEnhanceInfo();
-            obj.deserialize(params.ColorInfo)
-            this.ColorInfo = obj;
-        }
-
-        if (params.SharpInfo) {
-            let obj = new SharpEnhanceInfo();
-            obj.deserialize(params.SharpInfo)
-            this.SharpInfo = obj;
-        }
-
-        if (params.FaceInfo) {
-            let obj = new FaceEnhanceInfo();
-            obj.deserialize(params.FaceInfo)
-            this.FaceInfo = obj;
-        }
-
-        if (params.LowLightInfo) {
-            let obj = new LowLightEnhanceInfo();
-            obj.deserialize(params.LowLightInfo)
-            this.LowLightInfo = obj;
-        }
-
-        if (params.ScratchRepairInfo) {
-            let obj = new ScratchRepairInfo();
-            obj.deserialize(params.ScratchRepairInfo)
-            this.ScratchRepairInfo = obj;
-        }
-
-        if (params.ArtifactRepairInfo) {
-            let obj = new ArtifactRepairInfo();
-            obj.deserialize(params.ArtifactRepairInfo)
-            this.ArtifactRepairInfo = obj;
-        }
-
-        if (params.TargetInfo) {
-            let obj = new RebuildMediaTargetInfo();
-            obj.deserialize(params.TargetInfo)
-            this.TargetInfo = obj;
-        }
-        this.SessionId = 'SessionId' in params ? params.SessionId : null;
-        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
-        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
-        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Language = 'Language' in params ? params.Language : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -37855,6 +39704,30 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.ProcessMediaByMPSTask = null;
 
         /**
+         * AIGC image task information. This field contains a value only when TaskType is AigcImageTask.
+         * @type {AigcImageTask || null}
+         */
+        this.AigcImageTask = null;
+
+        /**
+         * AIGC video task information. This field contains a value only when TaskType is AigcVideoTask.
+         * @type {AigcVideoTask || null}
+         */
+        this.AigcVideoTask = null;
+
+        /**
+         * 
+         * @type {ImportMediaKnowledgeTask || null}
+         */
+        this.ImportMediaKnowledge = null;
+
+        /**
+         * Scenario-based AIGC image task information. This field contains a value only when TaskType is SceneAigcImageTask.
+         * @type {SceneAigcImageTask || null}
+         */
+        this.SceneAigcImageTask = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -38011,6 +39884,30 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new ProcessMediaByMPS();
             obj.deserialize(params.ProcessMediaByMPSTask)
             this.ProcessMediaByMPSTask = obj;
+        }
+
+        if (params.AigcImageTask) {
+            let obj = new AigcImageTask();
+            obj.deserialize(params.AigcImageTask)
+            this.AigcImageTask = obj;
+        }
+
+        if (params.AigcVideoTask) {
+            let obj = new AigcVideoTask();
+            obj.deserialize(params.AigcVideoTask)
+            this.AigcVideoTask = obj;
+        }
+
+        if (params.ImportMediaKnowledge) {
+            let obj = new ImportMediaKnowledgeTask();
+            obj.deserialize(params.ImportMediaKnowledge)
+            this.ImportMediaKnowledge = obj;
+        }
+
+        if (params.SceneAigcImageTask) {
+            let obj = new SceneAigcImageTask();
+            obj.deserialize(params.SceneAigcImageTask)
+            this.SceneAigcImageTask = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -39207,18 +41104,36 @@ Note: This field may return `null`, indicating that no valid value can be found.
 }
 
 /**
- * ModifySubAppIdStatus response structure.
+ * 
  * @class
  */
-class ModifySubAppIdStatusResponse extends  AbstractModel {
+class ImportMediaKnowledgeTask extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * 
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.TaskId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Message = null;
 
     }
 
@@ -39229,7 +41144,46 @@ class ModifySubAppIdStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
+ * AI outfit change parameter configuration.
+ * @class
+ */
+class ChangeClothesConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Manually input the image list of **clothing** that needs to be replaced. currently support a maximum of 4 images.
+         * @type {Array.<SceneAigcImageTaskInputFileInfo> || null}
+         */
+        this.ClothesFileInfos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClothesFileInfos) {
+            this.ClothesFileInfos = new Array();
+            for (let z in params.ClothesFileInfos) {
+                let obj = new SceneAigcImageTaskInputFileInfo();
+                obj.deserialize(params.ClothesFileInfos[z]);
+                this.ClothesFileInfos.push(obj);
+            }
+        }
 
     }
 }
@@ -41095,35 +43049,18 @@ class AiRecognitionTaskAsrWordsResultInput extends  AbstractModel {
 }
 
 /**
- * Screencapturing output information (v2017)
+ * ModifySubAppIdStatus response structure.
  * @class
  */
-class SnapshotByTimeOffset2017 extends  AbstractModel {
+class ModifySubAppIdStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Error code
-<li>0: success;</li>
-<li>Other values: failure.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ErrCode = null;
-
-        /**
-         * Specific time point of screenshot in milliseconds.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TimeOffset = null;
-
-        /**
-         * Address of output screenshot file.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Url = null;
+        this.RequestId = null;
 
     }
 
@@ -41134,9 +43071,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.TimeOffset = 'TimeOffset' in params ? params.TimeOffset : null;
-        this.Url = 'Url' in params ? params.Url : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -43003,83 +44938,90 @@ Note: This field may return `null`, indicating that no valid value can be found.
 }
 
 /**
- * The information of a bitrate reduction task.
+ * CreateAigcImageTask request structure.
  * @class
  */
-class ReduceMediaBitrateTask extends  AbstractModel {
+class CreateAigcImageTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The task ID.
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The task flow status. Valid values:
-<li>PROCESSING</li>
-<li>FINISH</li>
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * The ID of the media file.
-         * @type {string || null}
-         */
-        this.FileId = null;
-
-        /**
-         * The name of the media file.
-         * @type {string || null}
-         */
-        this.FileName = null;
-
-        /**
-         * The address of the media file.
-         * @type {string || null}
-         */
-        this.FileUrl = null;
-
-        /**
-         * The metadata of the source video.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {MediaMetaData || null}
-         */
-        this.MetaData = null;
-
-        /**
-         * The execution status and result of the bitrate reduction task.
-         * @type {Array.<ReduceMediaBitrateMediaProcessTaskResult> || null}
-         */
-        this.MediaProcessResultSet = null;
-
-        /**
-         * The task priority, which can be a value from -10 to 10.
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
          * @type {number || null}
          */
-        this.TasksPriority = null;
+        this.SubAppId = null;
 
         /**
-         * The notification mode for the change of task status. Valid values:
-<li>Finish: Send a notification after the task is completed.</li>
-<li>None: Do not send status change notifications for this task.</li>
+         * Model name. valid values:.
+<li>GEM:Gemini;</li>
+<Li>Qwen: qianwen.</li>
+<Li>Hunyuan: hunyuan.</li>
          * @type {string || null}
          */
-        this.TasksNotifyMode = null;
+        this.ModelName = null;
 
         /**
-         * The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+         * Model version. valid values:.
+<li>When ModelName is GEM, optional values are 2.5, 3.0;</li>
+<li>When ModelName is Qwen, optional values are 0925.</li>
+<li>When ModelName is Hunyuan, the optional values are 3.0.</li>
+         * @type {string || null}
+         */
+        this.ModelVersion = null;
+
+        /**
+         * File information of the input image for the AIGC image generation task. By default only one image can be specified; when using the GEM model, version 2.5 supports up to 3 images and version 3.0 supports up to 14 images.
+         * @type {Array.<AigcImageTaskInputFileInfo> || null}
+         */
+        this.FileInfos = null;
+
+        /**
+         * The prompt content for image generation. this parameter is required when FileInfos is empty.
+         * @type {string || null}
+         */
+        this.Prompt = null;
+
+        /**
+         * Prevent the model from generating image generation prompts.
+         * @type {string || null}
+         */
+        this.NegativePrompt = null;
+
+        /**
+         * Whether to optimize Prompt content automatically. when Enabled, it will optimize the passed in Prompt automatically to enhance generation quality. valid values: <li>Enabled: turn on;</li> <li>Disabled: turn off;</li>
+         * @type {string || null}
+         */
+        this.EnhancePrompt = null;
+
+        /**
+         * Output media file configuration for the task.
+         * @type {AigcImageOutputConfig || null}
+         */
+        this.OutputConfig = null;
+
+        /**
+         * An identifier for deduplication. if there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. the maximum length is 50 characters. leaving it blank or using an empty string indicates no deduplication.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Source context, used to pass through user request information. the audio and video quality revival complete callback will return the value of this field. longest 1000 characters.
          * @type {string || null}
          */
         this.SessionContext = null;
 
         /**
-         * The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+         * Task priority. the higher the value, the higher the priority. value range is from -10 to 10. if left blank, the default value is 0.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * Reserved field, used when special purpose.
          * @type {string || null}
          */
-        this.SessionId = null;
+        this.ExtInfo = null;
 
     }
 
@@ -43090,30 +45032,31 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.FileName = 'FileName' in params ? params.FileName : null;
-        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.ModelVersion = 'ModelVersion' in params ? params.ModelVersion : null;
 
-        if (params.MetaData) {
-            let obj = new MediaMetaData();
-            obj.deserialize(params.MetaData)
-            this.MetaData = obj;
-        }
-
-        if (params.MediaProcessResultSet) {
-            this.MediaProcessResultSet = new Array();
-            for (let z in params.MediaProcessResultSet) {
-                let obj = new ReduceMediaBitrateMediaProcessTaskResult();
-                obj.deserialize(params.MediaProcessResultSet[z]);
-                this.MediaProcessResultSet.push(obj);
+        if (params.FileInfos) {
+            this.FileInfos = new Array();
+            for (let z in params.FileInfos) {
+                let obj = new AigcImageTaskInputFileInfo();
+                obj.deserialize(params.FileInfos[z]);
+                this.FileInfos.push(obj);
             }
         }
-        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
-        this.TasksNotifyMode = 'TasksNotifyMode' in params ? params.TasksNotifyMode : null;
-        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.Prompt = 'Prompt' in params ? params.Prompt : null;
+        this.NegativePrompt = 'NegativePrompt' in params ? params.NegativePrompt : null;
+        this.EnhancePrompt = 'EnhancePrompt' in params ? params.EnhancePrompt : null;
+
+        if (params.OutputConfig) {
+            let obj = new AigcImageOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }
@@ -47672,52 +49615,24 @@ class SnapshotByTimeOffsetTask2017 extends  AbstractModel {
 }
 
 /**
- * Moderation details.
+ * Control parameter of prohibited information detection task
  * @class
  */
-class ReviewInfo extends  AbstractModel {
+class ProhibitedConfigureInfoForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The moderation template ID.
-         * @type {number || null}
+         * Control parameter of prohibited information detection in speech.
+         * @type {ProhibitedAsrReviewTemplateInfoForUpdate || null}
          */
-        this.Definition = null;
+        this.AsrReviewInfo = null;
 
         /**
-         * The suggestion. Valid values:
-<li>pass</li>
-<li>review</li>
-<li>block</li>
-         * @type {string || null}
+         * Control parameter of prohibited information detection in text.
+         * @type {ProhibitedOcrReviewTemplateInfoForUpdate || null}
          */
-        this.Suggestion = null;
-
-        /**
-         * The moderation type in the format of `Form.Label`. This parameter is valid if `Suggestion` is `review` or `block`.
-`Form` indicates the type of inappropriate content detected. Valid values:
-<li>`Image` (people or icons in images)</li>
-<li>`OCR` (text in images)</li>
-<li>`ASR` (speech)</li>
-<li>`Voice`</li>
-`Label` indicates the violation label. Valid values:
-<li>`Porn` (pornographic content)</li>
-<li>`Terror` (terrorist content)</li>
-<li>`Polity` (politically sensitive content)</li>
-<li>`Ad` (advertisement)</li>
-<li>`Illegal` (illegal content)</li>
-<li>`Abuse`</li>
-<li>`Moan`</li>
-         * @type {Array.<string> || null}
-         */
-        this.TypeSet = null;
-
-        /**
-         * The moderation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
-         * @type {string || null}
-         */
-        this.ReviewTime = null;
+        this.OcrReviewInfo = null;
 
     }
 
@@ -47728,10 +49643,18 @@ class ReviewInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.TypeSet = 'TypeSet' in params ? params.TypeSet : null;
-        this.ReviewTime = 'ReviewTime' in params ? params.ReviewTime : null;
+
+        if (params.AsrReviewInfo) {
+            let obj = new ProhibitedAsrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.AsrReviewInfo)
+            this.AsrReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new ProhibitedOcrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
+        }
 
     }
 }
@@ -48826,6 +50749,66 @@ class PoliticalAsrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
+ * Scene AIGC image task input.
+ * @class
+ */
+class SceneAigcImageTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scenario-based Image Generation Parameter Configuration.
+         * @type {AigcImageSceneInfo || null}
+         */
+        this.SceneInfo = null;
+
+        /**
+         * File information of the input image.
+         * @type {Array.<SceneAigcImageTaskInputFileInfo> || null}
+         */
+        this.FileInfos = null;
+
+        /**
+         * Output media file configuration for the task.
+         * @type {SceneAigcImageOutputConfig || null}
+         */
+        this.OutputConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SceneInfo) {
+            let obj = new AigcImageSceneInfo();
+            obj.deserialize(params.SceneInfo)
+            this.SceneInfo = obj;
+        }
+
+        if (params.FileInfos) {
+            this.FileInfos = new Array();
+            for (let z in params.FileInfos) {
+                let obj = new SceneAigcImageTaskInputFileInfo();
+                obj.deserialize(params.FileInfos[z]);
+                this.FileInfos.push(obj);
+            }
+        }
+
+        if (params.OutputConfig) {
+            let obj = new SceneAigcImageOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
+
+    }
+}
+
+/**
  * CreateAnimatedGraphicsTemplate response structure.
  * @class
  */
@@ -48905,6 +50888,103 @@ class HwPrivateAccess extends  AbstractModel {
         this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
         this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
         this.Bucket = 'Bucket' in params ? params.Bucket : null;
+
+    }
+}
+
+/**
+ * Aigc video task input.
+ * @class
+ */
+class AigcVideoTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Model name.
+         * @type {string || null}
+         */
+        this.ModelName = null;
+
+        /**
+         * Model version. 
+         * @type {string || null}
+         */
+        this.ModelVersion = null;
+
+        /**
+         * File information of the input video for the AIGC video generation task. 
+         * @type {Array.<AigcVideoTaskInputFileInfo> || null}
+         */
+        this.FileInfos = null;
+
+        /**
+         * The media file ID used as the end frame to generate video. 
+         * @type {string || null}
+         */
+        this.LastFrameFileId = null;
+
+        /**
+         * Prompt content for video generation. 
+         * @type {string || null}
+         */
+        this.Prompt = null;
+
+        /**
+         * Prevent the model from generating video prompts.
+         * @type {string || null}
+         */
+        this.NegativePrompt = null;
+
+        /**
+         * Whether to optimize Prompt content automatically. when Enabled, the passed-in Prompt will be optimized automatically to enhance generation quality. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>.
+         * @type {string || null}
+         */
+        this.EnhancePrompt = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.GenerationMode = null;
+
+        /**
+         * Specifies the output media file configuration for the video task.
+         * @type {AigcVideoOutputConfig || null}
+         */
+        this.OutputConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.ModelVersion = 'ModelVersion' in params ? params.ModelVersion : null;
+
+        if (params.FileInfos) {
+            this.FileInfos = new Array();
+            for (let z in params.FileInfos) {
+                let obj = new AigcVideoTaskInputFileInfo();
+                obj.deserialize(params.FileInfos[z]);
+                this.FileInfos.push(obj);
+            }
+        }
+        this.LastFrameFileId = 'LastFrameFileId' in params ? params.LastFrameFileId : null;
+        this.Prompt = 'Prompt' in params ? params.Prompt : null;
+        this.NegativePrompt = 'NegativePrompt' in params ? params.NegativePrompt : null;
+        this.EnhancePrompt = 'EnhancePrompt' in params ? params.EnhancePrompt : null;
+        this.GenerationMode = 'GenerationMode' in params ? params.GenerationMode : null;
+
+        if (params.OutputConfig) {
+            let obj = new AigcVideoOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
 
     }
 }
@@ -50320,24 +52400,53 @@ class SearchMediaBySemanticsRequest extends  AbstractModel {
 }
 
 /**
- * Control parameter of prohibited information detection task
+ * CreateHeadTailTemplate request structure.
  * @class
  */
-class ProhibitedConfigureInfoForUpdate extends  AbstractModel {
+class CreateHeadTailTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Control parameter of prohibited information detection in speech.
-         * @type {ProhibitedAsrReviewTemplateInfoForUpdate || null}
+         * Template name, length limit is 64 characters.
+         * @type {string || null}
          */
-        this.AsrReviewInfo = null;
+        this.Name = null;
 
         /**
-         * Control parameter of prohibited information detection in text.
-         * @type {ProhibitedOcrReviewTemplateInfoForUpdate || null}
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * @type {number || null}
          */
-        this.OcrReviewInfo = null;
+        this.SubAppId = null;
+
+        /**
+         * Template description information, length limit is 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Title candidate list, fill in the FileId of the video. When transcoding, the title closest to the aspect ratio of the feature film will be automatically selected (when the aspect ratio is the same, the front candidate will take precedence). Supports up to 5 candidate titles.
+         * @type {Array.<string> || null}
+         */
+        this.HeadCandidateSet = null;
+
+        /**
+         * Ending candidate list, fill in the FileId of the video. When transcoding, the ending with the aspect ratio closest to the feature film will be automatically selected (when the aspect ratio is the same, the front candidate will take precedence). Supports up to 5 candidate endings.
+         * @type {Array.<string> || null}
+         */
+        this.TailCandidateSet = null;
+
+        /**
+         * Padding method. When the video stream configuration width and height parameters are inconsistent with the aspect ratio of the original video, the transcoding processing method is "padding". Optional filling method:
+<li> stretch: stretch, stretch each frame to fill the entire screen, which may cause the transcoded video to be "squashed" or "stretched";</li> 
+<li> gauss: Gaussian blur, keep the video aspect ratio unchanged, use Gaussian blur for the remaining edges; </li>
+<li> white: leave blank, keep the video aspect ratio unchanged, use the remaining edges for the edge Use white filling; </li>
+<li> black: Leave black, keep the video aspect ratio unchanged, and fill the remaining edges with black. </li>
+Default value: stretch.
+         * @type {string || null}
+         */
+        this.FillType = null;
 
     }
 
@@ -50348,18 +52457,12 @@ class ProhibitedConfigureInfoForUpdate extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.AsrReviewInfo) {
-            let obj = new ProhibitedAsrReviewTemplateInfoForUpdate();
-            obj.deserialize(params.AsrReviewInfo)
-            this.AsrReviewInfo = obj;
-        }
-
-        if (params.OcrReviewInfo) {
-            let obj = new ProhibitedOcrReviewTemplateInfoForUpdate();
-            obj.deserialize(params.OcrReviewInfo)
-            this.OcrReviewInfo = obj;
-        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.HeadCandidateSet = 'HeadCandidateSet' in params ? params.HeadCandidateSet : null;
+        this.TailCandidateSet = 'TailCandidateSet' in params ? params.TailCandidateSet : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -50729,14 +52832,17 @@ Note: this field may return null, indicating that no valid values can be obtaine
 module.exports = {
     Canvas: Canvas,
     ModifySampleSnapshotTemplateResponse: ModifySampleSnapshotTemplateResponse,
+    AigcVideoOutputConfig: AigcVideoOutputConfig,
     ForbidMediaDistributionResponse: ForbidMediaDistributionResponse,
     ModifyWatermarkTemplateRequest: ModifyWatermarkTemplateRequest,
+    SnapshotByTimeOffset2017: SnapshotByTimeOffset2017,
     CreateStorageRegionRequest: CreateStorageRegionRequest,
     AiRecognitionTaskAsrFullTextSegmentItem: AiRecognitionTaskAsrFullTextSegmentItem,
     DescribeFileAttributesTask: DescribeFileAttributesTask,
     QualityEvaluationConfigureInfo: QualityEvaluationConfigureInfo,
     ReviewAudioVideoTaskInput: ReviewAudioVideoTaskInput,
     DescribeAllClassRequest: DescribeAllClassRequest,
+    AigcImageTaskOutput: AigcImageTaskOutput,
     UserAgentFilterRule: UserAgentFilterRule,
     DescribeRoundPlaysRequest: DescribeRoundPlaysRequest,
     AiAnalysisTaskClassificationInput: AiAnalysisTaskClassificationInput,
@@ -50755,6 +52861,7 @@ module.exports = {
     AiReviewTaskProhibitedOcrResult: AiReviewTaskProhibitedOcrResult,
     AiRecognitionTaskAsrFullTextResultOutput: AiRecognitionTaskAsrFullTextResultOutput,
     AiReviewProhibitedOcrTaskOutput: AiReviewProhibitedOcrTaskOutput,
+    CacheConfigFollowOrigin: CacheConfigFollowOrigin,
     MediaMiniProgramReviewElem: MediaMiniProgramReviewElem,
     ManageTaskResponse: ManageTaskResponse,
     CreateImageProcessingTemplateRequest: CreateImageProcessingTemplateRequest,
@@ -50772,18 +52879,21 @@ module.exports = {
     EnhanceConfig: EnhanceConfig,
     MediaInputInfo: MediaInputInfo,
     CreateImageSpriteTask2017: CreateImageSpriteTask2017,
-    ClipFileInfo2017: ClipFileInfo2017,
+    DescribeImageReviewUsageDataResponse: DescribeImageReviewUsageDataResponse,
     TempCertificate: TempCertificate,
+    RebuildMediaRequest: RebuildMediaRequest,
     AiReviewTaskPoliticalOcrResult: AiReviewTaskPoliticalOcrResult,
     QualityEnhanceTask: QualityEnhanceTask,
     AiSampleWord: AiSampleWord,
     RuleCacheConfig: RuleCacheConfig,
+    PoliticalOcrReviewTemplateInfo: PoliticalOcrReviewTemplateInfo,
     CreateImageSpriteTemplateRequest: CreateImageSpriteTemplateRequest,
     MediaSnapshotByTimePicInfoItem: MediaSnapshotByTimePicInfoItem,
     PornOcrReviewTemplateInfoForUpdate: PornOcrReviewTemplateInfoForUpdate,
     RefreshUrlCacheRequest: RefreshUrlCacheRequest,
     FaceConfigureInfoForUpdate: FaceConfigureInfoForUpdate,
     ContentReviewTemplateItem: ContentReviewTemplateItem,
+    AigcImageTaskOutputFileInfo: AigcImageTaskOutputFileInfo,
     DeleteAIRecognitionTemplateResponse: DeleteAIRecognitionTemplateResponse,
     VideoEnhanceConfig: VideoEnhanceConfig,
     DeleteContentReviewTemplateRequest: DeleteContentReviewTemplateRequest,
@@ -50830,6 +52940,7 @@ module.exports = {
     ModifyEnhanceMediaTemplateRequest: ModifyEnhanceMediaTemplateRequest,
     TerrorismImgReviewTemplateInfoForUpdate: TerrorismImgReviewTemplateInfoForUpdate,
     AudioBeautifyInfo: AudioBeautifyInfo,
+    AiRecognitionTaskOcrFullTextResultOutput: AiRecognitionTaskOcrFullTextResultOutput,
     ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
     RuleCache: RuleCache,
     ProcessMediaByMPS: ProcessMediaByMPS,
@@ -50842,6 +52953,7 @@ module.exports = {
     DeleteSuperPlayerConfigRequest: DeleteSuperPlayerConfigRequest,
     AiReviewTerrorismOcrTaskInput: AiReviewTerrorismOcrTaskInput,
     AiRecognitionTaskOcrWordsResultInput: AiRecognitionTaskOcrWordsResultInput,
+    SceneAigcImageTaskOutputFileInfo: SceneAigcImageTaskOutputFileInfo,
     ModifyMediaStorageClassResponse: ModifyMediaStorageClassResponse,
     AiReviewPornTaskInput: AiReviewPornTaskInput,
     JitterConfigureInfoForUpdate: JitterConfigureInfoForUpdate,
@@ -50876,9 +52988,10 @@ module.exports = {
     FileDeleteTask: FileDeleteTask,
     ResourceTag: ResourceTag,
     ImportMediaKnowledgeRequest: ImportMediaKnowledgeRequest,
-    AiRecognitionTaskOcrFullTextResultOutput: AiRecognitionTaskOcrFullTextResultOutput,
+    AigcImageSceneInfo: AigcImageSceneInfo,
     AiAnalysisTaskHighlightResult: AiAnalysisTaskHighlightResult,
     SetVodDomainCertificateRequest: SetVodDomainCertificateRequest,
+    CreateAigcVideoTaskResponse: CreateAigcVideoTaskResponse,
     CreateRebuildMediaTemplateResponse: CreateRebuildMediaTemplateResponse,
     AiRecognitionTaskOcrWordsResultOutput: AiRecognitionTaskOcrWordsResultOutput,
     AiSampleFaceInfo: AiSampleFaceInfo,
@@ -50929,6 +53042,7 @@ module.exports = {
     SuperResolutionInfo: SuperResolutionInfo,
     MediaImageSpriteInfo: MediaImageSpriteInfo,
     EnhanceMediaQualityRequest: EnhanceMediaQualityRequest,
+    ProductImageConfig: ProductImageConfig,
     PersistenceCompleteTask: PersistenceCompleteTask,
     AiRecognitionTaskFaceSegmentItem: AiRecognitionTaskFaceSegmentItem,
     ProcessMediaResponse: ProcessMediaResponse,
@@ -50944,15 +53058,18 @@ module.exports = {
     AiSampleFaceOperation: AiSampleFaceOperation,
     SvgWatermarkInputForUpdate: SvgWatermarkInputForUpdate,
     AiReviewTaskTerrorismOcrResult: AiReviewTaskTerrorismOcrResult,
+    AigcImageOutputConfig: AigcImageOutputConfig,
     WatermarkConfigureInfoForUpdate: WatermarkConfigureInfoForUpdate,
     AiRecognitionTaskOcrWordsResult: AiRecognitionTaskOcrWordsResult,
     PornAsrReviewTemplateInfo: PornAsrReviewTemplateInfo,
     AiRecognitionTaskSegmentResult: AiRecognitionTaskSegmentResult,
+    CreateAigcImageTaskResponse: CreateAigcImageTaskResponse,
     JitterConfigureInfo: JitterConfigureInfo,
     MediaSubtitleItem: MediaSubtitleItem,
     ReviewAudioVideoTaskOutput: ReviewAudioVideoTaskOutput,
     ProhibitedAsrReviewTemplateInfoForUpdate: ProhibitedAsrReviewTemplateInfoForUpdate,
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
+    CreateSceneAigcImageTaskResponse: CreateSceneAigcImageTaskResponse,
     AiRecognitionTaskAsrTranslateSegmentItem: AiRecognitionTaskAsrTranslateSegmentItem,
     ModifyAIAnalysisTemplateResponse: ModifyAIAnalysisTemplateResponse,
     LiveRealTimeClipRequest: LiveRealTimeClipRequest,
@@ -50964,8 +53081,9 @@ module.exports = {
     SplitMediaTaskSegmentInfo: SplitMediaTaskSegmentInfo,
     AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
     RequestHeader: RequestHeader,
-    AiRecognitionTaskAsrFullTextResultOutputSubtitleItem: AiRecognitionTaskAsrFullTextResultOutputSubtitleItem,
+    AigcImageTask: AigcImageTask,
     SimpleHlsClipResponse: SimpleHlsClipResponse,
+    AigcVideoTaskOutputFileInfo: AigcVideoTaskOutputFileInfo,
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     VideoFrameInterpolationInfo: VideoFrameInterpolationInfo,
     EditMediaRequest: EditMediaRequest,
@@ -51000,21 +53118,22 @@ module.exports = {
     CreateContentReviewTemplateResponse: CreateContentReviewTemplateResponse,
     ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
     DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
-    CreateHeadTailTemplateRequest: CreateHeadTailTemplateRequest,
+    AigcImageTaskInputFileInfo: AigcImageTaskInputFileInfo,
     MediaSampleSnapshotItem: MediaSampleSnapshotItem,
     TagConfigureInfoForUpdate: TagConfigureInfoForUpdate,
     DeleteWordSamplesRequest: DeleteWordSamplesRequest,
     FastEditMediaResponse: FastEditMediaResponse,
     EmptyTrackItem: EmptyTrackItem,
     RefererRule: RefererRule,
-    CacheConfigFollowOrigin: CacheConfigFollowOrigin,
+    AigcVideoTaskInputFileInfo: AigcVideoTaskInputFileInfo,
     StickerTrackItem: StickerTrackItem,
     ModifyEventConfigResponse: ModifyEventConfigResponse,
     ProcessMediaRequest: ProcessMediaRequest,
+    ReduceMediaBitrateTask: ReduceMediaBitrateTask,
     DescribeMediaPlayStatDetailsResponse: DescribeMediaPlayStatDetailsResponse,
     FaceEnhanceInfo: FaceEnhanceInfo,
     VideoTemplateInfo: VideoTemplateInfo,
-    PoliticalOcrReviewTemplateInfo: PoliticalOcrReviewTemplateInfo,
+    AigcVideoTask: AigcVideoTask,
     ModifyCDNDomainConfigResponse: ModifyCDNDomainConfigResponse,
     AiReviewTaskPornOcrResult: AiReviewTaskPornOcrResult,
     ModifyContentReviewTemplateResponse: ModifyContentReviewTemplateResponse,
@@ -51074,6 +53193,7 @@ module.exports = {
     ModifyWordSampleResponse: ModifyWordSampleResponse,
     EnhanceMediaByTemplateResponse: EnhanceMediaByTemplateResponse,
     CreateJustInTimeTranscodeTemplateRequest: CreateJustInTimeTranscodeTemplateRequest,
+    CreateAigcVideoTaskRequest: CreateAigcVideoTaskRequest,
     ComplexAdaptiveDynamicStreamingTaskAudioInput: ComplexAdaptiveDynamicStreamingTaskAudioInput,
     ManageTaskRequest: ManageTaskRequest,
     AudioVolumeBalanceInfo: AudioVolumeBalanceInfo,
@@ -51123,6 +53243,7 @@ module.exports = {
     CopyRightWatermarkInput: CopyRightWatermarkInput,
     AiRecognitionTaskHeadTailResultOutput: AiRecognitionTaskHeadTailResultOutput,
     ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
+    SceneAigcImageOutputConfig: SceneAigcImageOutputConfig,
     SetVodDomainCertificateResponse: SetVodDomainCertificateResponse,
     ExtractTraceWatermarkTaskOutput: ExtractTraceWatermarkTaskOutput,
     MediaProcessTaskCoverBySnapshotResult: MediaProcessTaskCoverBySnapshotResult,
@@ -51160,6 +53281,7 @@ module.exports = {
     CreateEnhanceMediaTemplateRequest: CreateEnhanceMediaTemplateRequest,
     MediaKeyFrameDescItem: MediaKeyFrameDescItem,
     AsrTranslateConfigureInfoForUpdate: AsrTranslateConfigureInfoForUpdate,
+    SceneAigcImageTask: SceneAigcImageTask,
     RebuildMediaByTemplateRequest: RebuildMediaByTemplateRequest,
     ModifyVodDomainConfigRequest: ModifyVodDomainConfigRequest,
     AiSampleTagOperation: AiSampleTagOperation,
@@ -51210,7 +53332,9 @@ module.exports = {
     DescribeEventConfigResponse: DescribeEventConfigResponse,
     DescribeCdnLogsResponse: DescribeCdnLogsResponse,
     MediaContentReviewPoliticalSegmentItem: MediaContentReviewPoliticalSegmentItem,
+    AigcVideoTaskOutput: AigcVideoTaskOutput,
     DeletePersonSampleResponse: DeletePersonSampleResponse,
+    ReviewInfo: ReviewInfo,
     CreateSnapshotByTimeOffsetTemplateResponse: CreateSnapshotByTimeOffsetTemplateResponse,
     VoiceConfigureInfoForUpdate: VoiceConfigureInfoForUpdate,
     ModifyContentReviewTemplateRequest: ModifyContentReviewTemplateRequest,
@@ -51287,7 +53411,7 @@ module.exports = {
     WechatPublishTask: WechatPublishTask,
     DescribeCDNStatDetailsRequest: DescribeCDNStatDetailsRequest,
     HeadTailTaskInput: HeadTailTaskInput,
-    DescribeImageReviewUsageDataResponse: DescribeImageReviewUsageDataResponse,
+    ClipFileInfo2017: ClipFileInfo2017,
     DeleteRoundPlayResponse: DeleteRoundPlayResponse,
     StatDataItem: StatDataItem,
     CreateStorageRegionResponse: CreateStorageRegionResponse,
@@ -51307,8 +53431,10 @@ module.exports = {
     OutputAudioStream: OutputAudioStream,
     ModifyClassRequest: ModifyClassRequest,
     QRCodeConfigureInfoForUpdate: QRCodeConfigureInfoForUpdate,
+    SceneAigcImageTaskInputFileInfo: SceneAigcImageTaskInputFileInfo,
     SpecificationDataItem: SpecificationDataItem,
     TEHDConfigForUpdate: TEHDConfigForUpdate,
+    SceneAigcImageTaskOutput: SceneAigcImageTaskOutput,
     ComposeMediaTaskOutput: ComposeMediaTaskOutput,
     DescribeQualityInspectTemplatesRequest: DescribeQualityInspectTemplatesRequest,
     DescribeMediaInfosRequest: DescribeMediaInfosRequest,
@@ -51353,12 +53479,14 @@ module.exports = {
     DeleteRebuildMediaTemplateRequest: DeleteRebuildMediaTemplateRequest,
     CreateDomainVerifyRecordRequest: CreateDomainVerifyRecordRequest,
     MediaInfo: MediaInfo,
+    AigcImageTaskInput: AigcImageTaskInput,
     VideoTemplateInfoForUpdate: VideoTemplateInfoForUpdate,
     CreateContentReviewTemplateRequest: CreateContentReviewTemplateRequest,
     DescribeContentReviewTemplatesRequest: DescribeContentReviewTemplatesRequest,
     CreateComplexAdaptiveDynamicStreamingTaskResponse: CreateComplexAdaptiveDynamicStreamingTaskResponse,
     AdaptiveDynamicStreamingTaskInput: AdaptiveDynamicStreamingTaskInput,
     DescribeImageSpriteTemplatesResponse: DescribeImageSpriteTemplatesResponse,
+    CreateSceneAigcImageTaskRequest: CreateSceneAigcImageTaskRequest,
     InspectMediaQualityRequest: InspectMediaQualityRequest,
     TransitionOperation: TransitionOperation,
     WatermarkConfigureInfo: WatermarkConfigureInfo,
@@ -51369,7 +53497,7 @@ module.exports = {
     RebuildMediaTaskOutput: RebuildMediaTaskOutput,
     EnhanceMediaQualityOutputConfig: EnhanceMediaQualityOutputConfig,
     Https: Https,
-    RebuildMediaRequest: RebuildMediaRequest,
+    AiRecognitionTaskAsrFullTextResultOutputSubtitleItem: AiRecognitionTaskAsrFullTextResultOutputSubtitleItem,
     DescribeTaskDetailResponse: DescribeTaskDetailResponse,
     MediaKeyFrameDescInfo: MediaKeyFrameDescInfo,
     DeleteImageSpriteTemplateRequest: DeleteImageSpriteTemplateRequest,
@@ -51398,7 +53526,8 @@ module.exports = {
     RebuildMediaOutputConfig: RebuildMediaOutputConfig,
     AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
     AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
-    ModifySubAppIdStatusResponse: ModifySubAppIdStatusResponse,
+    ImportMediaKnowledgeTask: ImportMediaKnowledgeTask,
+    ChangeClothesConfig: ChangeClothesConfig,
     ReviewImageResponse: ReviewImageResponse,
     DescribeStorageRegionsResponse: DescribeStorageRegionsResponse,
     SampleSnapshotTemplate: SampleSnapshotTemplate,
@@ -51420,7 +53549,7 @@ module.exports = {
     CreateTranscodeTemplateResponse: CreateTranscodeTemplateResponse,
     CDNDomainConfigForUpdate: CDNDomainConfigForUpdate,
     AiRecognitionTaskAsrWordsResultInput: AiRecognitionTaskAsrWordsResultInput,
-    SnapshotByTimeOffset2017: SnapshotByTimeOffset2017,
+    ModifySubAppIdStatusResponse: ModifySubAppIdStatusResponse,
     CreateAIAnalysisTemplateRequest: CreateAIAnalysisTemplateRequest,
     AiReviewTerrorismTaskInput: AiReviewTerrorismTaskInput,
     Quic: Quic,
@@ -51451,7 +53580,7 @@ module.exports = {
     AuthenticationTypeB: AuthenticationTypeB,
     AuthenticationTypeA: AuthenticationTypeA,
     AiContentReviewResult: AiContentReviewResult,
-    ReduceMediaBitrateTask: ReduceMediaBitrateTask,
+    CreateAigcImageTaskRequest: CreateAigcImageTaskRequest,
     TerrorismImgReviewTemplateInfo: TerrorismImgReviewTemplateInfo,
     ApplyUploadResponse: ApplyUploadResponse,
     ReviewAudioVideoResponse: ReviewAudioVideoResponse,
@@ -51525,7 +53654,7 @@ module.exports = {
     CommitUploadRequest: CommitUploadRequest,
     WatermarkCycleConfigForUpdate: WatermarkCycleConfigForUpdate,
     SnapshotByTimeOffsetTask2017: SnapshotByTimeOffsetTask2017,
-    ReviewInfo: ReviewInfo,
+    ProhibitedConfigureInfoForUpdate: ProhibitedConfigureInfoForUpdate,
     MediaClassInfo: MediaClassInfo,
     AiAnalysisTaskInput: AiAnalysisTaskInput,
     DeleteAnimatedGraphicsTemplateRequest: DeleteAnimatedGraphicsTemplateRequest,
@@ -51544,8 +53673,10 @@ module.exports = {
     HandleCurrentPlaylistRequest: HandleCurrentPlaylistRequest,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
+    SceneAigcImageTaskInput: SceneAigcImageTaskInput,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
     HwPrivateAccess: HwPrivateAccess,
+    AigcVideoTaskInput: AigcVideoTaskInput,
     AiRecognitionTaskHeadTailResult: AiRecognitionTaskHeadTailResult,
     AudioEnhanceConfig: AudioEnhanceConfig,
     AiRecognitionTaskFaceResultItem: AiRecognitionTaskFaceResultItem,
@@ -51573,7 +53704,7 @@ module.exports = {
     ModifyWatermarkTemplateResponse: ModifyWatermarkTemplateResponse,
     DescribeJustInTimeTranscodeTemplatesRequest: DescribeJustInTimeTranscodeTemplatesRequest,
     SearchMediaBySemanticsRequest: SearchMediaBySemanticsRequest,
-    ProhibitedConfigureInfoForUpdate: ProhibitedConfigureInfoForUpdate,
+    CreateHeadTailTemplateRequest: CreateHeadTailTemplateRequest,
     FrameTagConfigureInfoForUpdate: FrameTagConfigureInfoForUpdate,
     CreateImageSpriteTemplateResponse: CreateImageSpriteTemplateResponse,
     DescribeAIRecognitionTemplatesRequest: DescribeAIRecognitionTemplatesRequest,

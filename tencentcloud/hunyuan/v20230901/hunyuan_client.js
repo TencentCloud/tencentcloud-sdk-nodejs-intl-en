@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const Convert3DFormatRequest = models.Convert3DFormatRequest;
 const ViewImage = models.ViewImage;
 const SubmitHunyuanTo3DRapidJobRequest = models.SubmitHunyuanTo3DRapidJobRequest;
 const SubmitHunyuanTo3DProJobResponse = models.SubmitHunyuanTo3DProJobResponse;
@@ -27,6 +28,7 @@ const QueryHunyuanTo3DRapidJobResponse = models.QueryHunyuanTo3DRapidJobResponse
 const QueryHunyuan3DPartJobResponse = models.QueryHunyuan3DPartJobResponse;
 const QueryHunyuanTo3DProJobResponse = models.QueryHunyuanTo3DProJobResponse;
 const SubmitHunyuan3DPartJobRequest = models.SubmitHunyuan3DPartJobRequest;
+const Convert3DFormatResponse = models.Convert3DFormatResponse;
 const QueryHunyuan3DPartJobRequest = models.QueryHunyuan3DPartJobRequest;
 const SubmitHunyuanTo3DRapidJobResponse = models.SubmitHunyuanTo3DRapidJobResponse;
 const InputFile3D = models.InputFile3D;
@@ -79,6 +81,18 @@ This API is used to provide 1 concurrent task by default, which means only 1 sub
     }
 
     /**
+     * This API is used to intelligently generate 3D content based on the HunYuan Large Model with input text descriptions or images.
+This API is used to provide 1 concurrent task by default, which means only 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+     * @param {SubmitHunyuanTo3DRapidJobRequest} req
+     * @param {function(string, SubmitHunyuanTo3DRapidJobResponse):void} cb
+     * @public
+     */
+    SubmitHunyuanTo3DRapidJob(req, cb) {
+        let resp = new SubmitHunyuanTo3DRapidJobResponse();
+        this.request("SubmitHunyuanTo3DRapidJob", req, resp, cb);
+    }
+
+    /**
      * This API is used to intelligently generate 3D content based on the HunYuan Large Model and input text descriptions/images.
 This API is used to provide 3 concurrent tasks by default, which can process 3 submitted tasks simultaneously. The next task can be processed only after the previous task is completed.
      * @param {QueryHunyuanTo3DProJobRequest} req
@@ -91,15 +105,14 @@ This API is used to provide 3 concurrent tasks by default, which can process 3 s
     }
 
     /**
-     * This API is used to intelligently generate 3D content based on the HunYuan Large Model with input text descriptions or images.
-This API is used to provide 1 concurrent task by default, which means only 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
-     * @param {SubmitHunyuanTo3DRapidJobRequest} req
-     * @param {function(string, SubmitHunyuanTo3DRapidJobResponse):void} cb
+     * After inputting a 3D model file, the 3D model file format can be switched.
+     * @param {Convert3DFormatRequest} req
+     * @param {function(string, Convert3DFormatResponse):void} cb
      * @public
      */
-    SubmitHunyuanTo3DRapidJob(req, cb) {
-        let resp = new SubmitHunyuanTo3DRapidJobResponse();
-        this.request("SubmitHunyuanTo3DRapidJob", req, resp, cb);
+    Convert3DFormat(req, cb) {
+        let resp = new Convert3DFormatResponse();
+        this.request("Convert3DFormat", req, resp, cb);
     }
 
     /**

@@ -371,7 +371,7 @@ class GetSdkVerificationResultResponse extends  AbstractModel {
 3 - Medium Risk
 4 - High Risk
 Empty - Risk level not obtained.
-Only returned for the ENHANCED version, with the default value being empty.
+Only returned for the Enhance and Plus version, with the default value being empty.
          * @type {string || null}
          */
         this.DeviceInfoLevel = null;
@@ -2171,7 +2171,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 3 - Medium Risk
 4 - High Risk
 Empty - Risk level not obtained.
-Only returned for the ENHANCED version, with the default value being empty.
+Only returned for the Enhance and Plus version, with the default value being empty.
          * @type {string || null}
          */
         this.DeviceInfoLevel = null;

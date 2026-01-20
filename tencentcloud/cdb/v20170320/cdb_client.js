@@ -25,13 +25,16 @@ const CreateCdbProxyResponse = models.CreateCdbProxyResponse;
 const InstanceRollbackRangeTime = models.InstanceRollbackRangeTime;
 const DescribeTablesResponse = models.DescribeTablesResponse;
 const ModifyBackupDownloadRestrictionResponse = models.ModifyBackupDownloadRestrictionResponse;
+const InstanceDbAuditStatus = models.InstanceDbAuditStatus;
 const ModifyTimeWindowResponse = models.ModifyTimeWindowResponse;
 const ParamRecord = models.ParamRecord;
 const ModifyTimeWindowRequest = models.ModifyTimeWindowRequest;
 const DescribeRollbackRangeTimeRequest = models.DescribeRollbackRangeTimeRequest;
 const DescribeBackupOverviewRequest = models.DescribeBackupOverviewRequest;
+const DescribeAuditInstanceListResponse = models.DescribeAuditInstanceListResponse;
 const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
 const DescribeDataBackupOverviewResponse = models.DescribeDataBackupOverviewResponse;
+const DeleteAuditPolicyRequest = models.DeleteAuditPolicyRequest;
 const BackupSummaryItem = models.BackupSummaryItem;
 const CreateDatabaseRequest = models.CreateDatabaseRequest;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
@@ -40,6 +43,7 @@ const DescribeSupportedPrivilegesRequest = models.DescribeSupportedPrivilegesReq
 const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
 const ModifyCdbProxyAddressVipAndVPortResponse = models.ModifyCdbProxyAddressVipAndVPortResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
+const CreateRotationPasswordResponse = models.CreateRotationPasswordResponse;
 const ModifyCdbProxyAddressDescRequest = models.ModifyCdbProxyAddressDescRequest;
 const CdbRegionSellConf = models.CdbRegionSellConf;
 const DescribeRoGroupsRequest = models.DescribeRoGroupsRequest;
@@ -47,7 +51,7 @@ const DescribeBackupDecryptionKeyRequest = models.DescribeBackupDecryptionKeyReq
 const CreateCdbProxyAddressResponse = models.CreateCdbProxyAddressResponse;
 const RollbackTableName = models.RollbackTableName;
 const CloseWanServiceRequest = models.CloseWanServiceRequest;
-const OpenAuditServiceResponse = models.OpenAuditServiceResponse;
+const DescribeAuditConfigRequest = models.DescribeAuditConfigRequest;
 const CreateRoInstanceIpResponse = models.CreateRoInstanceIpResponse;
 const CreateAuditPolicyResponse = models.CreateAuditPolicyResponse;
 const LogRuleTemplateInfo = models.LogRuleTemplateInfo;
@@ -55,7 +59,7 @@ const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsR
 const StopRollbackResponse = models.StopRollbackResponse;
 const CreateCdbProxyAddressRequest = models.CreateCdbProxyAddressRequest;
 const AnalyzeAuditLogsRequest = models.AnalyzeAuditLogsRequest;
-const StopReplicationResponse = models.StopReplicationResponse;
+const ModifyBackupEncryptionStatusResponse = models.ModifyBackupEncryptionStatusResponse;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const DescribeRoMinScaleResponse = models.DescribeRoMinScaleResponse;
 const StopDBImportJobResponse = models.StopDBImportJobResponse;
@@ -63,7 +67,6 @@ const ProxyAllocation = models.ProxyAllocation;
 const StopCpuExpandRequest = models.StopCpuExpandRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const TagInfoUnit = models.TagInfoUnit;
-const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
 const DescribeAuditRulesRequest = models.DescribeAuditRulesRequest;
 const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVersionResponse;
 const ErrlogItem = models.ErrlogItem;
@@ -77,14 +80,16 @@ const DescribeCdbZoneConfigResponse = models.DescribeCdbZoneConfigResponse;
 const DescribeTablesRequest = models.DescribeTablesRequest;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
-const StartReplicationResponse = models.StartReplicationResponse;
+const OpenAuditServiceResponse = models.OpenAuditServiceResponse;
 const DescribeBinlogBackupOverviewResponse = models.DescribeBinlogBackupOverviewResponse;
 const DescribeDBInstanceLogToCLSResponse = models.DescribeDBInstanceLogToCLSResponse;
 const SwitchDBInstanceMasterSlaveRequest = models.SwitchDBInstanceMasterSlaveRequest;
 const ModifyCdbProxyAddressVipAndVPortRequest = models.ModifyCdbProxyAddressVipAndVPortRequest;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
+const DescribeAuditConfigResponse = models.DescribeAuditConfigResponse;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const OpenWanServiceRequest = models.OpenWanServiceRequest;
+const DeleteAuditPolicyResponse = models.DeleteAuditPolicyResponse;
 const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const UploadInfo = models.UploadInfo;
@@ -96,18 +101,22 @@ const DescribeDeviceMonitorInfoResponse = models.DescribeDeviceMonitorInfoRespon
 const DescribeRollbackRangeTimeResponse = models.DescribeRollbackRangeTimeResponse;
 const ModifyRoGroupInfoRequest = models.ModifyRoGroupInfoRequest;
 const ReleaseResult = models.ReleaseResult;
+const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
 const AuditRule = models.AuditRule;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
 const DescribeCdbProxyInfoRequest = models.DescribeCdbProxyInfoRequest;
 const RollbackDBName = models.RollbackDBName;
 const RuleFilters = models.RuleFilters;
+const ModifyAuditRuleTemplatesRequest = models.ModifyAuditRuleTemplatesRequest;
 const ModifyRemoteBackupConfigResponse = models.ModifyRemoteBackupConfigResponse;
 const DescribeDBInstanceInfoResponse = models.DescribeDBInstanceInfoResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const StartReplicationResponse = models.StartReplicationResponse;
 const DescribeDBFeaturesResponse = models.DescribeDBFeaturesResponse;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
 const DescribeRoMinScaleRequest = models.DescribeRoMinScaleRequest;
 const DescribeDefaultParamsRequest = models.DescribeDefaultParamsRequest;
+const AuditInstanceInfo = models.AuditInstanceInfo;
 const CustomConfig = models.CustomConfig;
 const SwitchDBInstanceMasterSlaveResponse = models.SwitchDBInstanceMasterSlaveResponse;
 const DescribeBackupsRequest = models.DescribeBackupsRequest;
@@ -124,11 +133,14 @@ const CreateDatabaseResponse = models.CreateDatabaseResponse;
 const DescribeErrorLogDataResponse = models.DescribeErrorLogDataResponse;
 const AddTimeWindowRequest = models.AddTimeWindowRequest;
 const ImportRecord = models.ImportRecord;
+const DeleteAuditLogFileResponse = models.DeleteAuditLogFileResponse;
 const Parameter = models.Parameter;
 const SlaveInfo = models.SlaveInfo;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const DescribeDBSwitchRecordsResponse = models.DescribeDBSwitchRecordsResponse;
 const Tag = models.Tag;
+const RuleTemplateInfo = models.RuleTemplateInfo;
+const CreateAuditLogFileResponse = models.CreateAuditLogFileResponse;
 const ModifyCdbProxyParamResponse = models.ModifyCdbProxyParamResponse;
 const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
 const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
@@ -160,7 +172,7 @@ const DescribeBackupOverviewResponse = models.DescribeBackupOverviewResponse;
 const DescribeLocalBinlogConfigRequest = models.DescribeLocalBinlogConfigRequest;
 const TagsInfoOfInstance = models.TagsInfoOfInstance;
 const DescribeDeviceMonitorInfoRequest = models.DescribeDeviceMonitorInfoRequest;
-const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
+const StopDBImportJobRequest = models.StopDBImportJobRequest;
 const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
 const SlaveConfig = models.SlaveConfig;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
@@ -168,8 +180,12 @@ const StopRollbackRequest = models.StopRollbackRequest;
 const LogToCLSConfig = models.LogToCLSConfig;
 const ResetRootAccountRequest = models.ResetRootAccountRequest;
 const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
+const ModifyAuditServiceRequest = models.ModifyAuditServiceRequest;
 const DescribeProxyCustomConfResponse = models.DescribeProxyCustomConfResponse;
+const ModifyAuditConfigResponse = models.ModifyAuditConfigResponse;
+const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
+const RuleTemplateRecordInfo = models.RuleTemplateRecordInfo;
 const DescribeCloneListResponse = models.DescribeCloneListResponse;
 const DescribeDBInstanceLogToCLSRequest = models.DescribeDBInstanceLogToCLSRequest;
 const AnalysisNodeInfo = models.AnalysisNodeInfo;
@@ -179,7 +195,7 @@ const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest
 const ModifyInstancePasswordComplexityResponse = models.ModifyInstancePasswordComplexityResponse;
 const DeviceMemInfo = models.DeviceMemInfo;
 const AuditLogAggregationResult = models.AuditLogAggregationResult;
-const SlowLogItem = models.SlowLogItem;
+const DatabasesWithCharacterLists = models.DatabasesWithCharacterLists;
 const DescribeRemoteBackupConfigRequest = models.DescribeRemoteBackupConfigRequest;
 const TagInfo = models.TagInfo;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
@@ -189,6 +205,8 @@ const ReloadBalanceProxyNodeRequest = models.ReloadBalanceProxyNodeRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackTimeRange = models.RollbackTimeRange;
 const AuditLog = models.AuditLog;
+const DescribeAuditRuleTemplateModifyHistoryResponse = models.DescribeAuditRuleTemplateModifyHistoryResponse;
+const DescribeAuditLogFilesRequest = models.DescribeAuditLogFilesRequest;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const AggregationCondition = models.AggregationCondition;
@@ -201,6 +219,7 @@ const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
 const RoVipInfo = models.RoVipInfo;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeErrorLogDataRequest = models.DescribeErrorLogDataRequest;
+const DescribeAuditLogFilesResponse = models.DescribeAuditLogFilesResponse;
 const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
 const Inbound = models.Inbound;
 const CreateAccountsResponse = models.CreateAccountsResponse;
@@ -220,20 +239,23 @@ const ParameterDetail = models.ParameterDetail;
 const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const DescribeBackupDownloadRestrictionResponse = models.DescribeBackupDownloadRestrictionResponse;
-const DatabasesWithCharacterLists = models.DatabasesWithCharacterLists;
 const CloneItem = models.CloneItem;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const CreateAccountsRequest = models.CreateAccountsRequest;
+const DeleteAuditRuleTemplatesRequest = models.DeleteAuditRuleTemplatesRequest;
+const CreateAuditRuleTemplateResponse = models.CreateAuditRuleTemplateResponse;
 const BackupInfo = models.BackupInfo;
 const CloseWanServiceResponse = models.CloseWanServiceResponse;
 const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
 const SlowLogInfo = models.SlowLogInfo;
 const ModifyLocalBinlogConfigResponse = models.ModifyLocalBinlogConfigResponse;
+const CreateRotationPasswordRequest = models.CreateRotationPasswordRequest;
 const DescribeCloneListRequest = models.DescribeCloneListRequest;
 const ModifyInstanceTagRequest = models.ModifyInstanceTagRequest;
 const DescribeProxySupportParamRequest = models.DescribeProxySupportParamRequest;
 const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
 const RollbackTask = models.RollbackTask;
+const StartReplicationRequest = models.StartReplicationRequest;
 const ProxyInst = models.ProxyInst;
 const ReloadBalanceProxyNodeResponse = models.ReloadBalanceProxyNodeResponse;
 const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
@@ -241,7 +263,9 @@ const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
 const BackupItem = models.BackupItem;
 const AuditFilter = models.AuditFilter;
 const DescribeProxySupportParamResponse = models.DescribeProxySupportParamResponse;
+const CloseAuditServiceResponse = models.CloseAuditServiceResponse;
 const DescribeRollbackTaskDetailRequest = models.DescribeRollbackTaskDetailRequest;
+const AdjustCdbProxyResponse = models.AdjustCdbProxyResponse;
 const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
 const BalanceRoGroupLoadResponse = models.BalanceRoGroupLoadResponse;
 const DeviceNetInfo = models.DeviceNetInfo;
@@ -254,11 +278,13 @@ const DescribeDefaultParamsResponse = models.DescribeDefaultParamsResponse;
 const SwitchCDBProxyRequest = models.SwitchCDBProxyRequest;
 const DescribeTagsOfInstanceIdsResponse = models.DescribeTagsOfInstanceIdsResponse;
 const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse;
+const CreateAuditRuleTemplateRequest = models.CreateAuditRuleTemplateRequest;
 const DatabasePrivilege = models.DatabasePrivilege;
 const DescribeAuditPoliciesRequest = models.DescribeAuditPoliciesRequest;
 const AdjustCdbProxyAddressRequest = models.AdjustCdbProxyAddressRequest;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DescribeRoGroupsResponse = models.DescribeRoGroupsResponse;
+const CloseCdbProxyAddressResponse = models.CloseCdbProxyAddressResponse;
 const DescribeAuditRulesResponse = models.DescribeAuditRulesResponse;
 const RoInstanceInfo = models.RoInstanceInfo;
 const DeviceCpuRateInfo = models.DeviceCpuRateInfo;
@@ -267,14 +293,14 @@ const CreateBackupRequest = models.CreateBackupRequest;
 const AccountInfo = models.AccountInfo;
 const DescribeRemoteBackupConfigResponse = models.DescribeRemoteBackupConfigResponse;
 const AdjustCdbProxyAddressResponse = models.AdjustCdbProxyAddressResponse;
-const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
+const CreateAuditLogFileRequest = models.CreateAuditLogFileRequest;
 const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
 const DescribeTagsOfInstanceIdsRequest = models.DescribeTagsOfInstanceIdsRequest;
 const StartCpuExpandRequest = models.StartCpuExpandRequest;
 const DescribeCpuExpandStrategyRequest = models.DescribeCpuExpandStrategyRequest;
 const CloseCDBProxyResponse = models.CloseCDBProxyResponse;
-const ModifyBackupEncryptionStatusResponse = models.ModifyBackupEncryptionStatusResponse;
+const StopReplicationResponse = models.StopReplicationResponse;
 const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
 const DescribeDataBackupOverviewRequest = models.DescribeDataBackupOverviewRequest;
 const DescribeDBInstanceInfoRequest = models.DescribeDBInstanceInfoRequest;
@@ -285,13 +311,15 @@ const SwitchForUpgradeResponse = models.SwitchForUpgradeResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const CdbSellConfig = models.CdbSellConfig;
 const DescribeSupportedPrivilegesResponse = models.DescribeSupportedPrivilegesResponse;
-const StopDBImportJobRequest = models.StopDBImportJobRequest;
+const SlowLogItem = models.SlowLogItem;
 const DescribeLocalBinlogConfigResponse = models.DescribeLocalBinlogConfigResponse;
+const ModifyAuditServiceResponse = models.ModifyAuditServiceResponse;
 const ModifyInstancePasswordComplexityRequest = models.ModifyInstancePasswordComplexityRequest;
 const OpenWanServiceResponse = models.OpenWanServiceResponse;
 const DescribeDBInstanceGTIDRequest = models.DescribeDBInstanceGTIDRequest;
 const DescribeBackupEncryptionStatusResponse = models.DescribeBackupEncryptionStatusResponse;
 const DescribeCdbProxyInfoResponse = models.DescribeCdbProxyInfoResponse;
+const ModifyAuditConfigRequest = models.ModifyAuditConfigRequest;
 const DeviceDiskInfo = models.DeviceDiskInfo;
 const RoWeightValue = models.RoWeightValue;
 const DescribeSlowLogDataResponse = models.DescribeSlowLogDataResponse;
@@ -305,6 +333,7 @@ const CloseCdbProxyAddressRequest = models.CloseCdbProxyAddressRequest;
 const ModifyRoGroupInfoResponse = models.ModifyRoGroupInfoResponse;
 const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
 const DBSwitchInfo = models.DBSwitchInfo;
+const DescribeAuditRuleTemplateModifyHistoryRequest = models.DescribeAuditRuleTemplateModifyHistoryRequest;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DescribeAuditLogsResponse = models.DescribeAuditLogsResponse;
 const DescribeAuditPoliciesResponse = models.DescribeAuditPoliciesResponse;
@@ -312,30 +341,33 @@ const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const AdjustCdbProxyRequest = models.AdjustCdbProxyRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const ProxyAddress = models.ProxyAddress;
-const DescribeBackupSummariesRequest = models.DescribeBackupSummariesRequest;
+const CommonTimeWindow = models.CommonTimeWindow;
 const ModifyAccountMaxUserConnectionsRequest = models.ModifyAccountMaxUserConnectionsRequest;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const ModifyBackupEncryptionStatusRequest = models.ModifyBackupEncryptionStatusRequest;
 const DescribeRollbackTaskDetailResponse = models.DescribeRollbackTaskDetailResponse;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
+const DescribeAuditRuleTemplatesResponse = models.DescribeAuditRuleTemplatesResponse;
 const RollbackInstancesInfo = models.RollbackInstancesInfo;
 const CreateCloneInstanceRequest = models.CreateCloneInstanceRequest;
 const ClusterInfo = models.ClusterInfo;
 const CloseCDBProxyRequest = models.CloseCDBProxyRequest;
 const DeleteBackupResponse = models.DeleteBackupResponse;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
-const CommonTimeWindow = models.CommonTimeWindow;
+const DescribeBackupSummariesRequest = models.DescribeBackupSummariesRequest;
 const AnalyzeAuditLogsResponse = models.AnalyzeAuditLogsResponse;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
-const StartReplicationRequest = models.StartReplicationRequest;
+const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
 const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetResponse;
 const DescribeDBFeaturesRequest = models.DescribeDBFeaturesRequest;
 const DescribeBackupSummariesResponse = models.DescribeBackupSummariesResponse;
 const DescribeBinlogBackupOverviewRequest = models.DescribeBinlogBackupOverviewRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
+const CloseAuditServiceRequest = models.CloseAuditServiceRequest;
 const AutoStrategy = models.AutoStrategy;
 const ModifyAccountMaxUserConnectionsResponse = models.ModifyAccountMaxUserConnectionsResponse;
 const Outbound = models.Outbound;
+const AuditInstanceFilters = models.AuditInstanceFilters;
 const ParamInfo = models.ParamInfo;
 const DescribeBackupDecryptionKeyResponse = models.DescribeBackupDecryptionKeyResponse;
 const SecurityGroup = models.SecurityGroup;
@@ -358,14 +390,17 @@ const InstanceRebootTime = models.InstanceRebootTime;
 const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const TablePrivilege = models.TablePrivilege;
 const AddTimeWindowResponse = models.AddTimeWindowResponse;
-const AdjustCdbProxyResponse = models.AdjustCdbProxyResponse;
+const DescribeAuditInstanceListRequest = models.DescribeAuditInstanceListRequest;
 const DescribeBackupEncryptionStatusRequest = models.DescribeBackupEncryptionStatusRequest;
 const ModifyDBInstanceLogToCLSResponse = models.ModifyDBInstanceLogToCLSResponse;
-const CloseCdbProxyAddressResponse = models.CloseCdbProxyAddressResponse;
+const AuditLogFile = models.AuditLogFile;
+const DescribeAuditRuleTemplatesRequest = models.DescribeAuditRuleTemplatesRequest;
 const RollbackTables = models.RollbackTables;
+const AuditRuleTemplateInfo = models.AuditRuleTemplateInfo;
 const LocalBinlogConfigDefault = models.LocalBinlogConfigDefault;
 const DescribeSlowLogDataRequest = models.DescribeSlowLogDataRequest;
 const ReleaseIsolatedDBInstancesResponse = models.ReleaseIsolatedDBInstancesResponse;
+const DeleteAuditLogFileRequest = models.DeleteAuditLogFileRequest;
 const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const DeleteTimeWindowRequest = models.DeleteTimeWindowRequest;
 const SwitchCDBProxyResponse = models.SwitchCDBProxyResponse;
@@ -375,6 +410,8 @@ const DeleteBackupRequest = models.DeleteBackupRequest;
 const ModifyNameOrDescByDpIdRequest = models.ModifyNameOrDescByDpIdRequest;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const UpgradeCDBProxyVersionRequest = models.UpgradeCDBProxyVersionRequest;
+const DeleteAuditRuleTemplatesResponse = models.DeleteAuditRuleTemplatesResponse;
+const ModifyAuditRuleTemplatesResponse = models.ModifyAuditRuleTemplatesResponse;
 
 
 /**
@@ -432,14 +469,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the data backup overview of a user in the current region.
-     * @param {DescribeDataBackupOverviewRequest} req
-     * @param {function(string, DescribeDataBackupOverviewResponse):void} cb
+     * This API is used to create an audit rule template.
+     * @param {CreateAuditRuleTemplateRequest} req
+     * @param {function(string, CreateAuditRuleTemplateResponse):void} cb
      * @public
      */
-    DescribeDataBackupOverview(req, cb) {
-        let resp = new DescribeDataBackupOverviewResponse();
-        this.request("DescribeDataBackupOverview", req, resp, cb);
+    CreateAuditRuleTemplate(req, cb) {
+        let resp = new CreateAuditRuleTemplateResponse();
+        this.request("CreateAuditRuleTemplate", req, resp, cb);
     }
 
     /**
@@ -568,6 +605,17 @@ Note:
     }
 
     /**
+     * This API is used to disable the audit service for an instance.
+     * @param {CloseAuditServiceRequest} req
+     * @param {function(string, CloseAuditServiceResponse):void} cb
+     * @public
+     */
+    CloseAuditService(req, cb) {
+        let resp = new CloseAuditServiceResponse();
+        this.request("CloseAuditService", req, resp, cb);
+    }
+
+    /**
      * This API is used to cancel a rollback task in progress, and returns an async task ID. You can use the `DescribeAsyncRequestInfo` API to query the result of cancellation.
      * @param {StopRollbackRequest} req
      * @param {function(string, StopRollbackResponse):void} cb
@@ -594,14 +642,14 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API is used to set the encryption status of an instance backup.
-     * @param {ModifyBackupEncryptionStatusRequest} req
-     * @param {function(string, ModifyBackupEncryptionStatusResponse):void} cb
+     * This API is used to create an audit log file for a TencentDB instance.
+     * @param {CreateAuditLogFileRequest} req
+     * @param {function(string, CreateAuditLogFileResponse):void} cb
      * @public
      */
-    ModifyBackupEncryptionStatus(req, cb) {
-        let resp = new ModifyBackupEncryptionStatusResponse();
-        this.request("ModifyBackupEncryptionStatus", req, resp, cb);
+    CreateAuditLogFile(req, cb) {
+        let resp = new CreateAuditLogFileResponse();
+        this.request("CreateAuditLogFile", req, resp, cb);
     }
 
     /**
@@ -770,6 +818,17 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
+     * This API is used to create a database in a TencentDB instance.
+     * @param {CreateDatabaseRequest} req
+     * @param {function(string, CreateDatabaseResponse):void} cb
+     * @public
+     */
+    CreateDatabase(req, cb) {
+        let resp = new CreateDatabaseResponse();
+        this.request("CreateDatabase", req, resp, cb);
+    }
+
+    /**
      * This API (DisassociateSecurityGroups) is used to unbind security groups from instances in batches.
      * @param {DisassociateSecurityGroupsRequest} req
      * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
@@ -803,17 +862,6 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
-     * This API (DeleteTimeWindow) is used to delete a maintenance time window for a TencentDB instance. After it is deleted, the default maintenance time window will be 03:00-04:00, i.e., switch to a new instance will be performed during 03:00-04:00 by default.
-     * @param {DeleteTimeWindowRequest} req
-     * @param {function(string, DeleteTimeWindowResponse):void} cb
-     * @public
-     */
-    DeleteTimeWindow(req, cb) {
-        let resp = new DeleteTimeWindowResponse();
-        this.request("DeleteTimeWindow", req, resp, cb);
-    }
-
-    /**
      * This API (DescribeAccountPrivileges) is used to query the information of TencentDB account permissions.
      * @param {DescribeAccountPrivilegesRequest} req
      * @param {function(string, DescribeAccountPrivilegesResponse):void} cb
@@ -822,6 +870,17 @@ Note: the HTTP response packet will be very large if it contain a single large e
     DescribeAccountPrivileges(req, cb) {
         let resp = new DescribeAccountPrivilegesResponse();
         this.request("DescribeAccountPrivileges", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the data backup overview of a user in the current region.
+     * @param {DescribeDataBackupOverviewRequest} req
+     * @param {function(string, DescribeDataBackupOverviewResponse):void} cb
+     * @public
+     */
+    DescribeDataBackupOverview(req, cb) {
+        let resp = new DescribeDataBackupOverviewResponse();
+        this.request("DescribeDataBackupOverview", req, resp, cb);
     }
 
     /**
@@ -844,6 +903,17 @@ Note: the HTTP response packet will be very large if it contain a single large e
     CreateCloneInstance(req, cb) {
         let resp = new CreateCloneInstanceResponse();
         this.request("CreateCloneInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the service configurations for a TencentDB audit policy, including the audit log retention period.
+     * @param {ModifyAuditConfigRequest} req
+     * @param {function(string, ModifyAuditConfigResponse):void} cb
+     * @public
+     */
+    ModifyAuditConfig(req, cb) {
+        let resp = new ModifyAuditConfigResponse();
+        this.request("ModifyAuditConfig", req, resp, cb);
     }
 
     /**
@@ -880,14 +950,14 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
-     * This API is used to delete a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
-     * @param {DeleteParamTemplateRequest} req
-     * @param {function(string, DeleteParamTemplateResponse):void} cb
+     * This API is used to delete audit rule templates.
+     * @param {DeleteAuditRuleTemplatesRequest} req
+     * @param {function(string, DeleteAuditRuleTemplatesResponse):void} cb
      * @public
      */
-    DeleteParamTemplate(req, cb) {
-        let resp = new DeleteParamTemplateResponse();
-        this.request("DeleteParamTemplate", req, resp, cb);
+    DeleteAuditRuleTemplates(req, cb) {
+        let resp = new DeleteAuditRuleTemplatesResponse();
+        this.request("DeleteAuditRuleTemplates", req, resp, cb);
     }
 
     /**
@@ -899,6 +969,17 @@ Note: the HTTP response packet will be very large if it contain a single large e
     DescribeBackups(req, cb) {
         let resp = new DescribeBackupsResponse();
         this.request("DescribeBackups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of a database proxy.
+     * @param {DescribeCdbProxyInfoRequest} req
+     * @param {function(string, DescribeCdbProxyInfoResponse):void} cb
+     * @public
+     */
+    DescribeCdbProxyInfo(req, cb) {
+        let resp = new DescribeCdbProxyInfoResponse();
+        this.request("DescribeCdbProxyInfo", req, resp, cb);
     }
 
     /**
@@ -1009,14 +1090,14 @@ This is an async API. You can also use the [DescribeDBInstances](https://intl.cl
     }
 
     /**
-     * This API is used to create a database in a TencentDB instance.
-     * @param {CreateDatabaseRequest} req
-     * @param {function(string, CreateDatabaseResponse):void} cb
+     * This API is used to delete an audit policy.
+     * @param {DeleteAuditPolicyRequest} req
+     * @param {function(string, DeleteAuditPolicyResponse):void} cb
      * @public
      */
-    CreateDatabase(req, cb) {
-        let resp = new CreateDatabaseResponse();
-        this.request("CreateDatabase", req, resp, cb);
+    DeleteAuditPolicy(req, cb) {
+        let resp = new DeleteAuditPolicyResponse();
+        this.request("DeleteAuditPolicy", req, resp, cb);
     }
 
     /**
@@ -1169,6 +1250,17 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     UpgradeDBInstanceEngineVersion(req, cb) {
         let resp = new UpgradeDBInstanceEngineVersionResponse();
         this.request("UpgradeDBInstanceEngineVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the audit log files of a TencentDB instance.
+     * @param {DescribeAuditLogFilesRequest} req
+     * @param {function(string, DescribeAuditLogFilesResponse):void} cb
+     * @public
+     */
+    DescribeAuditLogFiles(req, cb) {
+        let resp = new DescribeAuditLogFilesResponse();
+        this.request("DescribeAuditLogFiles", req, resp, cb);
     }
 
     /**
@@ -1337,14 +1429,25 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
-     * This API is used to query the details of a database proxy.
-     * @param {DescribeCdbProxyInfoRequest} req
-     * @param {function(string, DescribeCdbProxyInfoResponse):void} cb
+     * This API is used to obtain the list of audit instances.
+     * @param {DescribeAuditInstanceListRequest} req
+     * @param {function(string, DescribeAuditInstanceListResponse):void} cb
      * @public
      */
-    DescribeCdbProxyInfo(req, cb) {
-        let resp = new DescribeCdbProxyInfoResponse();
-        this.request("DescribeCdbProxyInfo", req, resp, cb);
+    DescribeAuditInstanceList(req, cb) {
+        let resp = new DescribeAuditInstanceListResponse();
+        this.request("DescribeAuditInstanceList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the service configurations for a TencentDB audit policy, including the audit log retention period.
+     * @param {DescribeAuditConfigRequest} req
+     * @param {function(string, DescribeAuditConfigResponse):void} cb
+     * @public
+     */
+    DescribeAuditConfig(req, cb) {
+        let resp = new DescribeAuditConfigResponse();
+        this.request("DescribeAuditConfig", req, resp, cb);
     }
 
     /**
@@ -1367,6 +1470,17 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     CloseCDBProxy(req, cb) {
         let resp = new CloseCDBProxyResponse();
         this.request("CloseCDBProxy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the maximum connections of one or more TencentDB instance accounts.
+     * @param {ModifyAccountMaxUserConnectionsRequest} req
+     * @param {function(string, ModifyAccountMaxUserConnectionsResponse):void} cb
+     * @public
+     */
+    ModifyAccountMaxUserConnections(req, cb) {
+        let resp = new ModifyAccountMaxUserConnectionsResponse();
+        this.request("ModifyAccountMaxUserConnections", req, resp, cb);
     }
 
     /**
@@ -1426,14 +1540,14 @@ This API is used to return the availability zone (AZ) status during purchase, wh
     }
 
     /**
-     * This API is used to query the list of SQL files imported by users. The common request parameter `Region` must be `ap-shanghai`.
-     * @param {DescribeUploadedFilesRequest} req
-     * @param {function(string, DescribeUploadedFilesResponse):void} cb
+     * This API (DescribeDBInstanceCharset) is used to query the character set and its name of a TencentDB instance.
+     * @param {DescribeDBInstanceCharsetRequest} req
+     * @param {function(string, DescribeDBInstanceCharsetResponse):void} cb
      * @public
      */
-    DescribeUploadedFiles(req, cb) {
-        let resp = new DescribeUploadedFilesResponse();
-        this.request("DescribeUploadedFiles", req, resp, cb);
+    DescribeDBInstanceCharset(req, cb) {
+        let resp = new DescribeDBInstanceCharsetResponse();
+        this.request("DescribeDBInstanceCharset", req, resp, cb);
     }
 
     /**
@@ -1497,6 +1611,17 @@ Note that when modifying account permissions, you need to pass in the full permi
     }
 
     /**
+     * This API is used to enable password rotation.
+     * @param {CreateRotationPasswordRequest} req
+     * @param {function(string, CreateRotationPasswordResponse):void} cb
+     * @public
+     */
+    CreateRotationPassword(req, cb) {
+        let resp = new CreateRotationPasswordResponse();
+        this.request("CreateRotationPassword", req, resp, cb);
+    }
+
+    /**
      * This API (CreateDBImportJob) is used to create a data import task for a TencentDB instance.
 
 Note that the files for a data import task must be uploaded to Tencent Cloud in advance. You need to do so in the console.
@@ -1543,6 +1668,17 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
+     * This API is used to set the encryption status of an instance backup.
+     * @param {ModifyBackupEncryptionStatusRequest} req
+     * @param {function(string, ModifyBackupEncryptionStatusResponse):void} cb
+     * @public
+     */
+    ModifyBackupEncryptionStatus(req, cb) {
+        let resp = new ModifyBackupEncryptionStatusResponse();
+        this.request("ModifyBackupEncryptionStatus", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the restrictions of downloading backups in a region.
      * @param {DescribeBackupDownloadRestrictionRequest} req
      * @param {function(string, DescribeBackupDownloadRestrictionResponse):void} cb
@@ -1565,6 +1701,17 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
+     * This API is used to modify audit rule templates.
+     * @param {ModifyAuditRuleTemplatesRequest} req
+     * @param {function(string, ModifyAuditRuleTemplatesResponse):void} cb
+     * @public
+     */
+    ModifyAuditRuleTemplates(req, cb) {
+        let resp = new ModifyAuditRuleTemplatesResponse();
+        this.request("ModifyAuditRuleTemplates", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyAccountPassword) is used to modify the password of a TencentDB instance account.
      * @param {ModifyAccountPasswordRequest} req
      * @param {function(string, ModifyAccountPasswordResponse):void} cb
@@ -1576,14 +1723,14 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API (DescribeDBInstanceCharset) is used to query the character set and its name of a TencentDB instance.
-     * @param {DescribeDBInstanceCharsetRequest} req
-     * @param {function(string, DescribeDBInstanceCharsetResponse):void} cb
+     * This API is used to query the list of SQL files imported by users. The common request parameter `Region` must be `ap-shanghai`.
+     * @param {DescribeUploadedFilesRequest} req
+     * @param {function(string, DescribeUploadedFilesResponse):void} cb
      * @public
      */
-    DescribeDBInstanceCharset(req, cb) {
-        let resp = new DescribeDBInstanceCharsetResponse();
-        this.request("DescribeDBInstanceCharset", req, resp, cb);
+    DescribeUploadedFiles(req, cb) {
+        let resp = new DescribeUploadedFilesResponse();
+        this.request("DescribeUploadedFiles", req, resp, cb);
     }
 
     /**
@@ -1618,6 +1765,28 @@ Note: the HTTP response packet will be very large if it contain a single large s
     OpenAuditService(req, cb) {
         let resp = new OpenAuditServiceResponse();
         this.request("OpenAuditService", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an audit log file of a TencentDB instance.
+     * @param {DeleteAuditLogFileRequest} req
+     * @param {function(string, DeleteAuditLogFileResponse):void} cb
+     * @public
+     */
+    DeleteAuditLogFile(req, cb) {
+        let resp = new DeleteAuditLogFileResponse();
+        this.request("DeleteAuditLogFile", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of audit rule templates.
+     * @param {DescribeAuditRuleTemplatesRequest} req
+     * @param {function(string, DescribeAuditRuleTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeAuditRuleTemplates(req, cb) {
+        let resp = new DescribeAuditRuleTemplatesResponse();
+        this.request("DescribeAuditRuleTemplates", req, resp, cb);
     }
 
     /**
@@ -1676,6 +1845,17 @@ Note: the HTTP response packet will be very large if it contain a single large s
     }
 
     /**
+     * This API is used to query the change history of rule templates.
+     * @param {DescribeAuditRuleTemplateModifyHistoryRequest} req
+     * @param {function(string, DescribeAuditRuleTemplateModifyHistoryResponse):void} cb
+     * @public
+     */
+    DescribeAuditRuleTemplateModifyHistory(req, cb) {
+        let resp = new DescribeAuditRuleTemplateModifyHistoryResponse();
+        this.request("DescribeAuditRuleTemplateModifyHistory", req, resp, cb);
+    }
+
+    /**
      * This API is used create a database proxy for a source instance.
      * @param {CreateCdbProxyRequest} req
      * @param {function(string, CreateCdbProxyResponse):void} cb
@@ -1706,6 +1886,17 @@ Note: the HTTP response packet will be very large if it contain a single large s
     SwitchCDBProxy(req, cb) {
         let resp = new SwitchCDBProxyResponse();
         this.request("SwitchCDBProxy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the service configurations for a TencentDB instance, including the audit log retention period and the audit rules.
+     * @param {ModifyAuditServiceRequest} req
+     * @param {function(string, ModifyAuditServiceResponse):void} cb
+     * @public
+     */
+    ModifyAuditService(req, cb) {
+        let resp = new ModifyAuditServiceResponse();
+        this.request("ModifyAuditService", req, resp, cb);
     }
 
     /**
@@ -1799,6 +1990,17 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
+     * This API is used to delete a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
+     * @param {DeleteParamTemplateRequest} req
+     * @param {function(string, DeleteParamTemplateResponse):void} cb
+     * @public
+     */
+    DeleteParamTemplate(req, cb) {
+        let resp = new DeleteParamTemplateResponse();
+        this.request("DeleteParamTemplate", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of binlog files of a TencentDB instance.
      * @param {DescribeBinlogsRequest} req
      * @param {function(string, DescribeBinlogsResponse):void} cb
@@ -1887,14 +2089,14 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API is used to modify the maximum connections of one or more TencentDB instance accounts.
-     * @param {ModifyAccountMaxUserConnectionsRequest} req
-     * @param {function(string, ModifyAccountMaxUserConnectionsResponse):void} cb
+     * This API (DeleteTimeWindow) is used to delete a maintenance time window for a TencentDB instance. After it is deleted, the default maintenance time window will be 03:00-04:00, i.e., switch to a new instance will be performed during 03:00-04:00 by default.
+     * @param {DeleteTimeWindowRequest} req
+     * @param {function(string, DeleteTimeWindowResponse):void} cb
      * @public
      */
-    ModifyAccountMaxUserConnections(req, cb) {
-        let resp = new ModifyAccountMaxUserConnectionsResponse();
-        this.request("ModifyAccountMaxUserConnections", req, resp, cb);
+    DeleteTimeWindow(req, cb) {
+        let resp = new DeleteTimeWindowResponse();
+        this.request("DeleteTimeWindow", req, resp, cb);
     }
 
 

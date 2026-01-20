@@ -675,6 +675,172 @@ class ModifyBackupDownloadRestrictionResponse extends  AbstractModel {
 }
 
 /**
+ * Instance audit details.
+ * @class
+ */
+class InstanceDbAuditStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Audit status. ON - Audit is enabled, OFF - Audit is disabled.
+         * @type {string || null}
+         */
+        this.AuditStatus = null;
+
+        /**
+         * Task status. Valid values: 0 - No task; 1 - Enabling audit; 2 - Disabling audit.
+         * @type {number || null}
+         */
+        this.AuditTask = null;
+
+        /**
+         * Log retention period. Valid values:7 - One week;30 - One month;90 - Three months;180 - Six months;365 - One year;1095 - Three years;1825 - Five years.
+         * @type {number || null}
+         */
+        this.LogExpireDay = null;
+
+        /**
+         * High-frequency storage period. Valid values:3 - 3 days;7 - One week;30 - One month;90 - Three months;180 - Six months;365 - One year;1095 - Three years;1825 - Five years.
+         * @type {number || null}
+         */
+        this.HighLogExpireDay = null;
+
+        /**
+         * Low-frequency storage period (in days). This equals the log retention period minus the high-frequency storage period.
+         * @type {number || null}
+         */
+        this.LowLogExpireDay = null;
+
+        /**
+         * Log storage volume (in GB).
+         * @type {number || null}
+         */
+        this.BillingAmount = null;
+
+        /**
+         * High-frequency storage volume (in GB).
+         * @type {number || null}
+         */
+        this.HighRealStorage = null;
+
+        /**
+         * Low-frequency storage volume (in GB).
+         * @type {number || null}
+         */
+        this.LowRealStorage = null;
+
+        /**
+         * Whether full audit is enabled. true - Full audit.
+         * @type {boolean || null}
+         */
+        this.AuditAll = null;
+
+        /**
+         * Time when the audit service was activated.
+         * @type {string || null}
+         */
+        this.CreateAt = null;
+
+        /**
+         * Related information about the instance.
+         * @type {AuditInstanceInfo || null}
+         */
+        this.InstanceInfo = null;
+
+        /**
+         * Total storage volume (in GB).
+         * @type {number || null}
+         */
+        this.RealStorage = null;
+
+        /**
+         * Whether an audit policy is configured.
+         * @type {boolean || null}
+         */
+        this.OldRule = null;
+
+        /**
+         * Rule template applied to the instance.
+         * @type {Array.<string> || null}
+         */
+        this.RuleTemplateIds = null;
+
+        /**
+         * Trial status.
+         * @type {string || null}
+         */
+        this.TrialStatus = null;
+
+        /**
+         * Trial start time.
+         * @type {number || null}
+         */
+        this.TrialStartTime = null;
+
+        /**
+         * Trial duration.
+         * @type {number || null}
+         */
+        this.TrialDuration = null;
+
+        /**
+         * Trial end time.
+         * @type {number || null}
+         */
+        this.TrialCloseTime = null;
+
+        /**
+         * Log query time limit during the trial period.
+         * @type {number || null}
+         */
+        this.TrialDescribeLogHours = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.AuditTask = 'AuditTask' in params ? params.AuditTask : null;
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+        this.HighLogExpireDay = 'HighLogExpireDay' in params ? params.HighLogExpireDay : null;
+        this.LowLogExpireDay = 'LowLogExpireDay' in params ? params.LowLogExpireDay : null;
+        this.BillingAmount = 'BillingAmount' in params ? params.BillingAmount : null;
+        this.HighRealStorage = 'HighRealStorage' in params ? params.HighRealStorage : null;
+        this.LowRealStorage = 'LowRealStorage' in params ? params.LowRealStorage : null;
+        this.AuditAll = 'AuditAll' in params ? params.AuditAll : null;
+        this.CreateAt = 'CreateAt' in params ? params.CreateAt : null;
+
+        if (params.InstanceInfo) {
+            let obj = new AuditInstanceInfo();
+            obj.deserialize(params.InstanceInfo)
+            this.InstanceInfo = obj;
+        }
+        this.RealStorage = 'RealStorage' in params ? params.RealStorage : null;
+        this.OldRule = 'OldRule' in params ? params.OldRule : null;
+        this.RuleTemplateIds = 'RuleTemplateIds' in params ? params.RuleTemplateIds : null;
+        this.TrialStatus = 'TrialStatus' in params ? params.TrialStatus : null;
+        this.TrialStartTime = 'TrialStartTime' in params ? params.TrialStartTime : null;
+        this.TrialDuration = 'TrialDuration' in params ? params.TrialDuration : null;
+        this.TrialCloseTime = 'TrialCloseTime' in params ? params.TrialCloseTime : null;
+        this.TrialDescribeLogHours = 'TrialDescribeLogHours' in params ? params.TrialDescribeLogHours : null;
+
+    }
+}
+
+/**
  * ModifyTimeWindow response structure.
  * @class
  */
@@ -892,6 +1058,56 @@ class DescribeBackupOverviewRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAuditInstanceList response structure.
+ * @class
+ */
+class DescribeAuditInstanceListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of eligible instances.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of audit instance details.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<InstanceDbAuditStatus> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new InstanceDbAuditStatus();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceProject response structure.
  * @class
  */
@@ -1027,6 +1243,41 @@ class DescribeDataBackupOverviewResponse extends  AbstractModel {
         this.DataBackupStandbyVolume = 'DataBackupStandbyVolume' in params ? params.DataBackupStandbyVolume : null;
         this.DataBackupStandbyCount = 'DataBackupStandbyCount' in params ? params.DataBackupStandbyCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAuditPolicy request structure.
+ * @class
+ */
+class DeleteAuditPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audit policy ID.
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -1681,6 +1932,34 @@ Note that tags cannot be queried for instances being created.
 }
 
 /**
+ * CreateRotationPassword response structure.
+ * @class
+ */
+class CreateRotationPasswordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyCdbProxyAddressDesc request structure.
  * @class
  */
@@ -1950,18 +2229,18 @@ class CloseWanServiceRequest extends  AbstractModel {
 }
 
 /**
- * OpenAuditService response structure.
+ * DescribeAuditConfig request structure.
  * @class
  */
-class OpenAuditServiceResponse extends  AbstractModel {
+class DescribeAuditConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Instance ID, in the format such as cdb-c1nl9rpv or cdbro-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
 
     }
 
@@ -1972,7 +2251,7 @@ class OpenAuditServiceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -2452,19 +2731,12 @@ class AnalyzeAuditLogsRequest extends  AbstractModel {
 }
 
 /**
- * StopReplication response structure.
+ * ModifyBackupEncryptionStatus response structure.
  * @class
  */
-class StopReplicationResponse extends  AbstractModel {
+class ModifyBackupEncryptionStatusResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Async task ID.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AsyncRequestId = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2481,7 +2753,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2729,77 +3000,6 @@ class TagInfoUnit extends  AbstractModel {
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
-
-    }
-}
-
-/**
- * OpenAuditService request structure.
- * @class
- */
-class OpenAuditServiceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * TencentDB for MySQL instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Retention period of the audit log. Valid values:  `7` (one week), `30` (one month), `90` (three months), `180` (six months), `365` (one year), `1095` (three years), `1825` (five years).
-         * @type {number || null}
-         */
-        this.LogExpireDay = null;
-
-        /**
-         * Retention period of high-frequency audit logs. Valid values:  `7` (one week), `30` (one month).
-         * @type {number || null}
-         */
-        this.HighLogExpireDay = null;
-
-        /**
-         * Audit rule If both this parameter and `RuleTemplateIds` are left empty, full audit will be applied.
-         * @type {Array.<AuditRuleFilters> || null}
-         */
-        this.AuditRuleFilters = null;
-
-        /**
-         * Rule template ID. If both this parameter and AuditRuleFilters are not specified, all SQL statements will be recorded.
-         * @type {Array.<string> || null}
-         */
-        this.RuleTemplateIds = null;
-
-        /**
-         * Audit type. Valid values: true: Record all; false: Record by rules (default value).
-         * @type {boolean || null}
-         */
-        this.AuditAll = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
-        this.HighLogExpireDay = 'HighLogExpireDay' in params ? params.HighLogExpireDay : null;
-
-        if (params.AuditRuleFilters) {
-            this.AuditRuleFilters = new Array();
-            for (let z in params.AuditRuleFilters) {
-                let obj = new AuditRuleFilters();
-                obj.deserialize(params.AuditRuleFilters[z]);
-                this.AuditRuleFilters.push(obj);
-            }
-        }
-        this.RuleTemplateIds = 'RuleTemplateIds' in params ? params.RuleTemplateIds : null;
-        this.AuditAll = 'AuditAll' in params ? params.AuditAll : null;
 
     }
 }
@@ -3600,19 +3800,12 @@ class ModifyParamTemplateRequest extends  AbstractModel {
 }
 
 /**
- * StartReplication response structure.
+ * OpenAuditService response structure.
  * @class
  */
-class StartReplicationResponse extends  AbstractModel {
+class OpenAuditServiceResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Async task ID.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AsyncRequestId = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3629,7 +3822,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3928,6 +4120,69 @@ class ModifyAutoRenewFlagRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAuditConfig response structure.
+ * @class
+ */
+class DescribeAuditConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audit log retention period. Valid values: [0, 7, 30, 180, 365, 1095, 1825].
+         * @type {number || null}
+         */
+        this.LogExpireDay = null;
+
+        /**
+         * Audit log storage type. Valid value: "storage" - Storage type.
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * Whether the audit service is being disabled. Valid values: "false" - No, "true" - Yes.
+         * @type {string || null}
+         */
+        this.IsClosing = null;
+
+        /**
+         * Whether the audit service is being enabled. Valid values: "false" - No, "true" - Yes.
+         * @type {string || null}
+         */
+        this.IsOpening = null;
+
+        /**
+         * Time when the audit service was activated.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.IsClosing = 'IsClosing' in params ? params.IsClosing : null;
+        this.IsOpening = 'IsOpening' in params ? params.IsOpening : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyBackupConfig response structure.
  * @class
  */
@@ -3979,6 +4234,34 @@ class OpenWanServiceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DeleteAuditPolicy response structure.
+ * @class
+ */
+class DeleteAuditPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4212,8 +4495,7 @@ class AuditRuleFilters extends  AbstractModel {
         super();
 
         /**
-         * Audit rule 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * A single audit rule.
          * @type {Array.<RuleFilters> || null}
          */
         this.RuleFilters = null;
@@ -4555,6 +4837,69 @@ class ReleaseResult extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceVipVport request structure.
+ * @class
+ */
+class ModifyDBInstanceVipVportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv, cdbro-c2nl9rpv, or cdbrg-c3nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872) API to query the ID, which is the value of the `InstanceId` output parameter.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Target IP. Either this parameter or `DstPort` must be passed in.
+         * @type {string || null}
+         */
+        this.DstIp = null;
+
+        /**
+         * Target port number. Value range: 1024-65535. Either this parameter or `DstIp` must be passed in.
+         * @type {number || null}
+         */
+        this.DstPort = null;
+
+        /**
+         * Unified VPC ID
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Unified subnet ID
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * Repossession duration in hours for old IP in the original network when changing from classic network to VPC or changing the VPC subnet. Value range: 0–168. Default value: `24`.
+         * @type {number || null}
+         */
+        this.ReleaseDuration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DstIp = 'DstIp' in params ? params.DstIp : null;
+        this.DstPort = 'DstPort' in params ? params.DstPort : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.ReleaseDuration = 'ReleaseDuration' in params ? params.ReleaseDuration : null;
+
+    }
+}
+
+/**
  * Audit rule
  * @class
  */
@@ -4806,6 +5151,77 @@ class RuleFilters extends  AbstractModel {
 }
 
 /**
+ * ModifyAuditRuleTemplates request structure.
+ * @class
+ */
+class ModifyAuditRuleTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API.
+         * @type {Array.<string> || null}
+         */
+        this.RuleTemplateIds = null;
+
+        /**
+         * Modified audit rule.
+         * @type {Array.<RuleFilters> || null}
+         */
+        this.RuleFilters = null;
+
+        /**
+         * Modified rule template name.
+         * @type {string || null}
+         */
+        this.RuleTemplateName = null;
+
+        /**
+         * Modified rule template description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Alarm level. Valid values: 1 - Low risk, 2 - Medium risk, 3 - High risk.
+         * @type {number || null}
+         */
+        this.AlarmLevel = null;
+
+        /**
+         * Alarm policy. Valid values: 0 - Alarm disabled, 1 - Alarm enabled.
+         * @type {number || null}
+         */
+        this.AlarmPolicy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleTemplateIds = 'RuleTemplateIds' in params ? params.RuleTemplateIds : null;
+
+        if (params.RuleFilters) {
+            this.RuleFilters = new Array();
+            for (let z in params.RuleFilters) {
+                let obj = new RuleFilters();
+                obj.deserialize(params.RuleFilters[z]);
+                this.RuleFilters.push(obj);
+            }
+        }
+        this.RuleTemplateName = 'RuleTemplateName' in params ? params.RuleTemplateName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.AlarmLevel = 'AlarmLevel' in params ? params.AlarmLevel : null;
+        this.AlarmPolicy = 'AlarmPolicy' in params ? params.AlarmPolicy : null;
+
+    }
+}
+
+/**
  * ModifyRemoteBackupConfig response structure.
  * @class
  */
@@ -4944,6 +5360,42 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
         this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.ForReadonlyInstance = 'ForReadonlyInstance' in params ? params.ForReadonlyInstance : null;
+
+    }
+}
+
+/**
+ * StartReplication response structure.
+ * @class
+ */
+class StartReplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5162,6 +5614,63 @@ class DescribeDefaultParamsRequest extends  AbstractModel {
         this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
         this.TemplateType = 'TemplateType' in params ? params.TemplateType : null;
         this.EngineType = 'EngineType' in params ? params.EngineType : null;
+
+    }
+}
+
+/**
+ * Audit instance details.
+ * @class
+ */
+class AuditInstanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Tag information.
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.TagList = null;
+
+        /**
+         * Database engine type.
+         * @type {string || null}
+         */
+        this.DbType = null;
+
+        /**
+         * Database engine version.
+         * @type {string || null}
+         */
+        this.DbVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+        this.DbType = 'DbType' in params ? params.DbType : null;
+        this.DbVersion = 'DbVersion' in params ? params.DbVersion : null;
 
     }
 }
@@ -6050,6 +6559,34 @@ class ImportRecord extends  AbstractModel {
 }
 
 /**
+ * DeleteAuditLogFile response structure.
+ * @class
+ */
+class DeleteAuditLogFileResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Database instance parameter
  * @class
  */
@@ -6245,6 +6782,112 @@ class Tag extends  AbstractModel {
         }
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * Rule template content.
+ * @class
+ */
+class RuleTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule template ID.
+         * @type {string || null}
+         */
+        this.RuleTemplateId = null;
+
+        /**
+         * Rule template name.
+         * @type {string || null}
+         */
+        this.RuleTemplateName = null;
+
+        /**
+         * Rule content.
+         * @type {Array.<RuleFilters> || null}
+         */
+        this.RuleFilters = null;
+
+        /**
+         * Alarm level. Valid values: 1 - Low risk, 2 - Medium risk, 3 - High risk.
+         * @type {number || null}
+         */
+        this.AlarmLevel = null;
+
+        /**
+         * Alarm policy. Valid values: 0 - Alarm disabled, 1 - Alarm enabled.
+         * @type {number || null}
+         */
+        this.AlarmPolicy = null;
+
+        /**
+         * Rule description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleTemplateId = 'RuleTemplateId' in params ? params.RuleTemplateId : null;
+        this.RuleTemplateName = 'RuleTemplateName' in params ? params.RuleTemplateName : null;
+
+        if (params.RuleFilters) {
+            this.RuleFilters = new Array();
+            for (let z in params.RuleFilters) {
+                let obj = new RuleFilters();
+                obj.deserialize(params.RuleFilters[z]);
+                this.RuleFilters.push(obj);
+            }
+        }
+        this.AlarmLevel = 'AlarmLevel' in params ? params.AlarmLevel : null;
+        this.AlarmPolicy = 'AlarmPolicy' in params ? params.AlarmPolicy : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * CreateAuditLogFile response structure.
+ * @class
+ */
+class CreateAuditLogFileResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audit log file name.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7706,24 +8349,18 @@ class DescribeDeviceMonitorInfoRequest extends  AbstractModel {
 }
 
 /**
- * SwitchDrInstanceToMaster response structure.
+ * StopDBImportJob request structure.
  * @class
  */
-class SwitchDrInstanceToMasterResponse extends  AbstractModel {
+class StopDBImportJobRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task request ID, which can be used to query the execution result of an async task
+         * Async task request ID.
          * @type {string || null}
          */
         this.AsyncRequestId = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -7735,7 +8372,6 @@ class SwitchDrInstanceToMasterResponse extends  AbstractModel {
             return;
         }
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8022,6 +8658,77 @@ class DescribeDBInstanceConfigRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyAuditService request structure.
+ * @class
+ */
+class ModifyAuditServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Log retention period. Valid values:7 - One week;30 - One month;90 - Three months;180 - Six months;365 - One year;1095 - Three years;1825 - Five years.
+         * @type {number || null}
+         */
+        this.LogExpireDay = null;
+
+        /**
+         * High-frequency log retention period. Default value: 7. This value must be less than or equal to LogExpireDay. Valid values include:3 - 3 days;7 - One week;30 - One month;90 - Three months;180 - Six months;365 - One year;1095 - Three years;1825 - Five years.
+         * @type {number || null}
+         */
+        this.HighLogExpireDay = null;
+
+        /**
+         * Modifies the instance audit rule to Full audit.
+         * @type {boolean || null}
+         */
+        this.AuditAll = null;
+
+        /**
+         * Deprecated.
+         * @type {Array.<AuditRuleFilters> || null}
+         */
+        this.AuditRuleFilters = null;
+
+        /**
+         * Rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API.
+         * @type {Array.<string> || null}
+         */
+        this.RuleTemplateIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+        this.HighLogExpireDay = 'HighLogExpireDay' in params ? params.HighLogExpireDay : null;
+        this.AuditAll = 'AuditAll' in params ? params.AuditAll : null;
+
+        if (params.AuditRuleFilters) {
+            this.AuditRuleFilters = new Array();
+            for (let z in params.AuditRuleFilters) {
+                let obj = new AuditRuleFilters();
+                obj.deserialize(params.AuditRuleFilters[z]);
+                this.AuditRuleFilters.push(obj);
+            }
+        }
+        this.RuleTemplateIds = 'RuleTemplateIds' in params ? params.RuleTemplateIds : null;
+
+    }
+}
+
+/**
  * DescribeProxyCustomConf response structure.
  * @class
  */
@@ -8084,6 +8791,69 @@ Note: this field may return `null`, indicating that no valid value can be found.
 }
 
 /**
+ * ModifyAuditConfig response structure.
+ * @class
+ */
+class ModifyAuditConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SwitchDrInstanceToMaster response structure.
+ * @class
+ */
+class SwitchDrInstanceToMasterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task request ID, which can be used to query the execution result of an async task
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceName response structure.
  * @class
  */
@@ -8107,6 +8877,79 @@ class ModifyDBInstanceNameResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Rule template change history.
+ * @class
+ */
+class RuleTemplateRecordInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Details of the original rule template.
+         * @type {RuleTemplateInfo || null}
+         */
+        this.ModifyBeforeInfo = null;
+
+        /**
+         * Details of the modified rule template.
+         * @type {RuleTemplateInfo || null}
+         */
+        this.ModifyAfterInfo = null;
+
+        /**
+         * Affected instances.
+         * @type {Array.<string> || null}
+         */
+        this.AffectedInstances = null;
+
+        /**
+         * Operator (account UIN).
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * Time of the change.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.ModifyBeforeInfo) {
+            let obj = new RuleTemplateInfo();
+            obj.deserialize(params.ModifyBeforeInfo)
+            this.ModifyBeforeInfo = obj;
+        }
+
+        if (params.ModifyAfterInfo) {
+            let obj = new RuleTemplateInfo();
+            obj.deserialize(params.ModifyAfterInfo)
+            this.ModifyAfterInfo = obj;
+        }
+        this.AffectedInstances = 'AffectedInstances' in params ? params.AffectedInstances : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -8488,89 +9331,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Structured slow log details
+ * Database name and character set
  * @class
  */
-class SlowLogItem extends  AbstractModel {
+class DatabasesWithCharacterLists extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * SQL execution time.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Timestamp = null;
-
-        /**
-         * SQL execution duration in seconds.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.QueryTime = null;
-
-        /**
-         * SQL statement.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Database name
          * @type {string || null}
          */
-        this.SqlText = null;
+        this.DatabaseName = null;
 
         /**
-         * Client address.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Character set
          * @type {string || null}
          */
-        this.UserHost = null;
-
-        /**
-         * Username.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UserName = null;
-
-        /**
-         * Database name.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Database = null;
-
-        /**
-         * Lock duration in seconds.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.LockTime = null;
-
-        /**
-         * Number of scanned rows.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RowsExamined = null;
-
-        /**
-         * Number of rows in result set.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RowsSent = null;
-
-        /**
-         * SQL template.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SqlTemplate = null;
-
-        /**
-         * SQL statement MD5.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Md5 = null;
+        this.CharacterSet = null;
 
     }
 
@@ -8581,17 +9359,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
-        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
-        this.SqlText = 'SqlText' in params ? params.SqlText : null;
-        this.UserHost = 'UserHost' in params ? params.UserHost : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Database = 'Database' in params ? params.Database : null;
-        this.LockTime = 'LockTime' in params ? params.LockTime : null;
-        this.RowsExamined = 'RowsExamined' in params ? params.RowsExamined : null;
-        this.RowsSent = 'RowsSent' in params ? params.RowsSent : null;
-        this.SqlTemplate = 'SqlTemplate' in params ? params.SqlTemplate : null;
-        this.Md5 = 'Md5' in params ? params.Md5 : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.CharacterSet = 'CharacterSet' in params ? params.CharacterSet : null;
 
     }
 }
@@ -9065,6 +9834,105 @@ Note: The return value may be null, indicating that no valid data can be obtaine
                 this.TemplateInfo.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeAuditRuleTemplateModifyHistory response structure.
+ * @class
+ */
+class DescribeAuditRuleTemplateModifyHistoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of entries.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Change details.
+         * @type {Array.<RuleTemplateRecordInfo> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new RuleTemplateRecordInfo();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAuditLogFiles request structure.
+ * @class
+ */
+class DescribeAuditLogFilesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, in the format such as cdb-c1nl9rpv or cdbro-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Page size. Default value: 20; minimum value: 1; maximum value: 300.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Pagination offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Audit log file name.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
 
     }
 }
@@ -10064,6 +10932,56 @@ class DescribeErrorLogDataRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.InstType = 'InstType' in params ? params.InstType : null;
+
+    }
+}
+
+/**
+ * DescribeAuditLogFiles response structure.
+ * @class
+ */
+class DescribeAuditLogFilesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible audit log files.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Audit log file details.
+         * @type {Array.<AuditLogFile> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new AuditLogFile();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11235,41 +12153,6 @@ class DescribeBackupDownloadRestrictionResponse extends  AbstractModel {
 }
 
 /**
- * Database name and character set
- * @class
- */
-class DatabasesWithCharacterLists extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Database name
-         * @type {string || null}
-         */
-        this.DatabaseName = null;
-
-        /**
-         * Character set
-         * @type {string || null}
-         */
-        this.CharacterSet = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
-        this.CharacterSet = 'CharacterSet' in params ? params.CharacterSet : null;
-
-    }
-}
-
-/**
  * Clone task information.
  * @class
  */
@@ -11448,6 +12331,69 @@ class CreateAccountsRequest extends  AbstractModel {
         this.Password = 'Password' in params ? params.Password : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
+
+    }
+}
+
+/**
+ * DeleteAuditRuleTemplates request structure.
+ * @class
+ */
+class DeleteAuditRuleTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API. A maximum of 5 rule templates can be deleted per request.
+         * @type {Array.<string> || null}
+         */
+        this.RuleTemplateIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleTemplateIds = 'RuleTemplateIds' in params ? params.RuleTemplateIds : null;
+
+    }
+}
+
+/**
+ * CreateAuditRuleTemplate response structure.
+ * @class
+ */
+class CreateAuditRuleTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Generated rule template ID.
+         * @type {string || null}
+         */
+        this.RuleTemplateId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleTemplateId = 'RuleTemplateId' in params ? params.RuleTemplateId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11791,6 +12737,49 @@ class ModifyLocalBinlogConfigResponse extends  AbstractModel {
 }
 
 /**
+ * CreateRotationPassword request structure.
+ * @class
+ */
+class CreateRotationPasswordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, in the format of cdb-c1nl9rpv, which is the same as the instance ID displayed on the TencentDB for MySQL console page.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Information about the account for which password rotation needs to be enabled. The account and host names are included.
+         * @type {Array.<Account> || null}
+         */
+        this.Accounts = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Accounts) {
+            this.Accounts = new Array();
+            for (let z in params.Accounts) {
+                let obj = new Account();
+                obj.deserialize(params.Accounts[z]);
+                this.Accounts.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeCloneList request structure.
  * @class
  */
@@ -12014,6 +13003,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.Detail.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * StartReplication request structure.
+ * @class
+ */
+class StartReplicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Read-Only instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -12363,6 +13380,34 @@ class DescribeProxySupportParamResponse extends  AbstractModel {
 }
 
 /**
+ * CloseAuditService response structure.
+ * @class
+ */
+class CloseAuditServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRollbackTaskDetail request structure.
  * @class
  */
@@ -12407,6 +13452,41 @@ class DescribeRollbackTaskDetailRequest extends  AbstractModel {
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * AdjustCdbProxy response structure.
+ * @class
+ */
+class AdjustCdbProxyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13309,6 +14389,70 @@ class OfflineIsolatedInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * CreateAuditRuleTemplate request structure.
+ * @class
+ */
+class CreateAuditRuleTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audit rule.
+         * @type {Array.<RuleFilters> || null}
+         */
+        this.RuleFilters = null;
+
+        /**
+         * Rule template name. Up to 30 characters are allowed.
+         * @type {string || null}
+         */
+        this.RuleTemplateName = null;
+
+        /**
+         * Rule template description. Up to 200 characters are allowed.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Alarm level. Valid values: 1 - Low risk, 2 - Medium risk, 3 - High risk. Default value: 1.
+         * @type {number || null}
+         */
+        this.AlarmLevel = null;
+
+        /**
+         * Alarm policy. Valid values: 0 - Alarm disabled, 1 - Alarm enabled. Default value: 0.
+         * @type {number || null}
+         */
+        this.AlarmPolicy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RuleFilters) {
+            this.RuleFilters = new Array();
+            for (let z in params.RuleFilters) {
+                let obj = new RuleFilters();
+                obj.deserialize(params.RuleFilters[z]);
+                this.RuleFilters.push(obj);
+            }
+        }
+        this.RuleTemplateName = 'RuleTemplateName' in params ? params.RuleTemplateName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.AlarmLevel = 'AlarmLevel' in params ? params.AlarmLevel : null;
+        this.AlarmPolicy = 'AlarmPolicy' in params ? params.AlarmPolicy : null;
+
+    }
+}
+
+/**
  * Database permission
  * @class
  */
@@ -13635,6 +14779,34 @@ class DescribeRoGroupsResponse extends  AbstractModel {
                 obj.deserialize(params.RoGroups[z]);
                 this.RoGroups.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CloseCdbProxyAddress response structure.
+ * @class
+ */
+class CloseCdbProxyAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -14249,48 +15421,60 @@ class AdjustCdbProxyAddressResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceVipVport request structure.
+ * CreateAuditLogFile request structure.
  * @class
  */
-class ModifyDBInstanceVipVportRequest extends  AbstractModel {
+class CreateAuditLogFileRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv, cdbro-c2nl9rpv, or cdbrg-c3nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872) API to query the ID, which is the value of the `InstanceId` output parameter.
+         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Target IP. Either this parameter or `DstPort` must be passed in.
+         * Start time. We recommend that the interval between start and end time does not exceed 7 days.
          * @type {string || null}
          */
-        this.DstIp = null;
+        this.StartTime = null;
 
         /**
-         * Target port number. Value range: 1024-65535. Either this parameter or `DstIp` must be passed in.
-         * @type {number || null}
-         */
-        this.DstPort = null;
-
-        /**
-         * Unified VPC ID
+         * End time. We recommend that the interval between start and end time does not exceed 7 days.
          * @type {string || null}
          */
-        this.UniqVpcId = null;
+        this.EndTime = null;
 
         /**
-         * Unified subnet ID
+         * Sort order. Valid values: "ASC" - Ascending order, "DESC" - Descending order. Default value: "DESC".
          * @type {string || null}
          */
-        this.UniqSubnetId = null;
+        this.Order = null;
 
         /**
-         * Repossession duration in hours for old IP in the original network when changing from classic network to VPC or changing the VPC subnet. Value range: 0–168. Default value: `24`.
-         * @type {number || null}
+         * Field to sort by. Valid values: "timestamp" - Timestamp; "affectRows" - Number of affected rows; "execTime" - Execution time. Default value: "timestamp".
+         * @type {string || null}
          */
-        this.ReleaseDuration = null;
+        this.OrderBy = null;
+
+        /**
+         * Deprecated.
+         * @type {AuditLogFilter || null}
+         */
+        this.Filter = null;
+
+        /**
+         * Filter conditions. You can filter logs based on these conditions.
+         * @type {Array.<InstanceAuditLogFilters> || null}
+         */
+        this.LogFilter = null;
+
+        /**
+         * Columns to include in the download.
+         * @type {Array.<string> || null}
+         */
+        this.ColumnFilter = null;
 
     }
 
@@ -14302,11 +15486,26 @@ class ModifyDBInstanceVipVportRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.DstIp = 'DstIp' in params ? params.DstIp : null;
-        this.DstPort = 'DstPort' in params ? params.DstPort : null;
-        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
-        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
-        this.ReleaseDuration = 'ReleaseDuration' in params ? params.ReleaseDuration : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+
+        if (params.Filter) {
+            let obj = new AuditLogFilter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+        if (params.LogFilter) {
+            this.LogFilter = new Array();
+            for (let z in params.LogFilter) {
+                let obj = new InstanceAuditLogFilters();
+                obj.deserialize(params.LogFilter[z]);
+                this.LogFilter.push(obj);
+            }
+        }
+        this.ColumnFilter = 'ColumnFilter' in params ? params.ColumnFilter : null;
 
     }
 }
@@ -14556,12 +15755,19 @@ class CloseCDBProxyResponse extends  AbstractModel {
 }
 
 /**
- * ModifyBackupEncryptionStatus response structure.
+ * StopReplication response structure.
  * @class
  */
-class ModifyBackupEncryptionStatusResponse extends  AbstractModel {
+class StopReplicationResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Async task ID.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -14578,6 +15784,7 @@ class ModifyBackupEncryptionStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -15027,18 +16234,89 @@ class DescribeSupportedPrivilegesResponse extends  AbstractModel {
 }
 
 /**
- * StopDBImportJob request structure.
+ * Structured slow log details
  * @class
  */
-class StopDBImportJobRequest extends  AbstractModel {
+class SlowLogItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task request ID.
+         * SQL execution time.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * SQL execution duration in seconds.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.QueryTime = null;
+
+        /**
+         * SQL statement.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.AsyncRequestId = null;
+        this.SqlText = null;
+
+        /**
+         * Client address.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserHost = null;
+
+        /**
+         * Username.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Database name.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Lock duration in seconds.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LockTime = null;
+
+        /**
+         * Number of scanned rows.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RowsExamined = null;
+
+        /**
+         * Number of rows in result set.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RowsSent = null;
+
+        /**
+         * SQL template.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SqlTemplate = null;
+
+        /**
+         * SQL statement MD5.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Md5 = null;
 
     }
 
@@ -15049,7 +16327,17 @@ class StopDBImportJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
+        this.SqlText = 'SqlText' in params ? params.SqlText : null;
+        this.UserHost = 'UserHost' in params ? params.UserHost : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.LockTime = 'LockTime' in params ? params.LockTime : null;
+        this.RowsExamined = 'RowsExamined' in params ? params.RowsExamined : null;
+        this.RowsSent = 'RowsSent' in params ? params.RowsSent : null;
+        this.SqlTemplate = 'SqlTemplate' in params ? params.SqlTemplate : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
 
     }
 }
@@ -15100,6 +16388,34 @@ class DescribeLocalBinlogConfigResponse extends  AbstractModel {
             let obj = new LocalBinlogConfigDefault();
             obj.deserialize(params.LocalBinlogConfigDefault)
             this.LocalBinlogConfigDefault = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAuditService response structure.
+ * @class
+ */
+class ModifyAuditServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -15293,6 +16609,55 @@ class DescribeCdbProxyInfoResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAuditConfig request structure.
+ * @class
+ */
+class ModifyAuditConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Audit log retention period. Valid values:7 - One week;30 - One month;180 - Six months;365 - One year;1095 - Three years;1825 - Five years.
+         * @type {number || null}
+         */
+        this.LogExpireDay = null;
+
+        /**
+         * Whether to disable the audit service. Valid values: true - Disable; false - Do not disable. Default value: false.Notes:1. When the audit service is disabled, your audit logs and files will be deleted, and all audit policies for this instance will be removed.2. At least one of CloseAudit and LogExpireDay must be provided. If both are provided, CloseAudit takes priority.3. You can use this parameter to disable the audit service. Once disabled, the audit service cannot be re-enabled via this API.
+         * @type {boolean || null}
+         */
+        this.CloseAudit = null;
+
+        /**
+         * High-frequency audit log retention period. Valid values:7 - One week;30 - One month;180 - Six months;365 - One year;1095 - Three years;1825 - Five years.
+         * @type {number || null}
+         */
+        this.HighLogExpireDay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+        this.CloseAudit = 'CloseAudit' in params ? params.CloseAudit : null;
+        this.HighLogExpireDay = 'HighLogExpireDay' in params ? params.HighLogExpireDay : null;
 
     }
 }
@@ -15827,6 +17192,69 @@ class DBSwitchInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeAuditRuleTemplateModifyHistory request structure.
+ * @class
+ */
+class DescribeAuditRuleTemplateModifyHistoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API.
+         * @type {Array.<string> || null}
+         */
+        this.RuleTemplateIds = null;
+
+        /**
+         * Start time of the query range.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the query range.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Number of entries to return. Default value: 20. Maximum value: 1000.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sort order. DESC - Sorted by modification time in descending order, ASC - Ascending order. Default value: DESC.
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleTemplateIds = 'RuleTemplateIds' in params ? params.RuleTemplateIds : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
  * DescribeTasks response structure.
  * @class
  */
@@ -16255,42 +17683,72 @@ class ProxyAddress extends  AbstractModel {
 }
 
 /**
- * DescribeBackupSummaries request structure.
+ * Common time window
  * @class
  */
-class DescribeBackupSummariesRequest extends  AbstractModel {
+class CommonTimeWindow extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * TencentDB product type to be queried. Currently, only `mysql` is supported.
+         * Time window on Monday in the format of 02:00-06:00
          * @type {string || null}
          */
-        this.Product = null;
+        this.Monday = null;
 
         /**
-         * Paginated query offset. Default value: `0`.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Maximum entries returned per page, which ranges from 1 to 100. Default value: `20`.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Sorting criterion. Valid values: `BackupVolume` (backup capacity), `DataBackupVolume` (data backup capacity), `BinlogBackupVolume` (log backup capacity), `AutoBackupVolume` (automatic backup capacity), `ManualBackupVolume` (manual backup capacity). Default value: `BackupVolume`.
+         * Time window on Tuesday in the format of 02:00-06:00
          * @type {string || null}
          */
-        this.OrderBy = null;
+        this.Tuesday = null;
 
         /**
-         * Sorting order. Valid values: `ASC` (ascending), `DESC` (descending). Default value: `ASC`.
+         * Time window on Wednesday in the format of 02:00-06:00
          * @type {string || null}
          */
-        this.OrderDirection = null;
+        this.Wednesday = null;
+
+        /**
+         * Time window on Thursday in the format of 02:00-06:00
+         * @type {string || null}
+         */
+        this.Thursday = null;
+
+        /**
+         * Time window on Friday in the format of 02:00-06:00
+         * @type {string || null}
+         */
+        this.Friday = null;
+
+        /**
+         * Time window on Saturday in the format of 02:00-06:00
+         * @type {string || null}
+         */
+        this.Saturday = null;
+
+        /**
+         * Time window on Sunday in the format of 02:00-06:00
+         * @type {string || null}
+         */
+        this.Sunday = null;
+
+        /**
+         * Non-archive backup retention policy. Valid values: `weekly` (back up by week), monthly (back up by month), default value: `weekly`.
+         * @type {string || null}
+         */
+        this.BackupPeriodStrategy = null;
+
+        /**
+         * If `BackupPeriodStrategy` is `monthly`, you need to pass in the specific backup dates. The time interval between any two adjacent dates cannot exceed 2 days, for example, [1,4,7,9,11,14,17,19,22,25,28,30,31].
+         * @type {Array.<number> || null}
+         */
+        this.Days = null;
+
+        /**
+         * Backup time by month in the format of 02:00–06:00, which is required when `BackupPeriodStrategy` is `monthly`.
+         * @type {string || null}
+         */
+        this.BackupPeriodTime = null;
 
     }
 
@@ -16301,11 +17759,16 @@ class DescribeBackupSummariesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Product = 'Product' in params ? params.Product : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+        this.Monday = 'Monday' in params ? params.Monday : null;
+        this.Tuesday = 'Tuesday' in params ? params.Tuesday : null;
+        this.Wednesday = 'Wednesday' in params ? params.Wednesday : null;
+        this.Thursday = 'Thursday' in params ? params.Thursday : null;
+        this.Friday = 'Friday' in params ? params.Friday : null;
+        this.Saturday = 'Saturday' in params ? params.Saturday : null;
+        this.Sunday = 'Sunday' in params ? params.Sunday : null;
+        this.BackupPeriodStrategy = 'BackupPeriodStrategy' in params ? params.BackupPeriodStrategy : null;
+        this.Days = 'Days' in params ? params.Days : null;
+        this.BackupPeriodTime = 'BackupPeriodTime' in params ? params.BackupPeriodTime : null;
 
     }
 }
@@ -16845,6 +18308,56 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAuditRuleTemplates response structure.
+ * @class
+ */
+class DescribeAuditRuleTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of eligible instances.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of rule template details.
+         * @type {Array.<AuditRuleTemplateInfo> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new AuditRuleTemplateInfo();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Details of the instance for rollback
  * @class
  */
@@ -17259,72 +18772,42 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
- * Common time window
+ * DescribeBackupSummaries request structure.
  * @class
  */
-class CommonTimeWindow extends  AbstractModel {
+class DescribeBackupSummariesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Time window on Monday in the format of 02:00-06:00
+         * TencentDB product type to be queried. Currently, only `mysql` is supported.
          * @type {string || null}
          */
-        this.Monday = null;
+        this.Product = null;
 
         /**
-         * Time window on Tuesday in the format of 02:00-06:00
+         * Paginated query offset. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum entries returned per page, which ranges from 1 to 100. Default value: `20`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Sorting criterion. Valid values: `BackupVolume` (backup capacity), `DataBackupVolume` (data backup capacity), `BinlogBackupVolume` (log backup capacity), `AutoBackupVolume` (automatic backup capacity), `ManualBackupVolume` (manual backup capacity). Default value: `BackupVolume`.
          * @type {string || null}
          */
-        this.Tuesday = null;
+        this.OrderBy = null;
 
         /**
-         * Time window on Wednesday in the format of 02:00-06:00
+         * Sorting order. Valid values: `ASC` (ascending), `DESC` (descending). Default value: `ASC`.
          * @type {string || null}
          */
-        this.Wednesday = null;
-
-        /**
-         * Time window on Thursday in the format of 02:00-06:00
-         * @type {string || null}
-         */
-        this.Thursday = null;
-
-        /**
-         * Time window on Friday in the format of 02:00-06:00
-         * @type {string || null}
-         */
-        this.Friday = null;
-
-        /**
-         * Time window on Saturday in the format of 02:00-06:00
-         * @type {string || null}
-         */
-        this.Saturday = null;
-
-        /**
-         * Time window on Sunday in the format of 02:00-06:00
-         * @type {string || null}
-         */
-        this.Sunday = null;
-
-        /**
-         * Non-archive backup retention policy. Valid values: `weekly` (back up by week), monthly (back up by month), default value: `weekly`.
-         * @type {string || null}
-         */
-        this.BackupPeriodStrategy = null;
-
-        /**
-         * If `BackupPeriodStrategy` is `monthly`, you need to pass in the specific backup dates. The time interval between any two adjacent dates cannot exceed 2 days, for example, [1,4,7,9,11,14,17,19,22,25,28,30,31].
-         * @type {Array.<number> || null}
-         */
-        this.Days = null;
-
-        /**
-         * Backup time by month in the format of 02:00–06:00, which is required when `BackupPeriodStrategy` is `monthly`.
-         * @type {string || null}
-         */
-        this.BackupPeriodTime = null;
+        this.OrderDirection = null;
 
     }
 
@@ -17335,16 +18818,11 @@ class CommonTimeWindow extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Monday = 'Monday' in params ? params.Monday : null;
-        this.Tuesday = 'Tuesday' in params ? params.Tuesday : null;
-        this.Wednesday = 'Wednesday' in params ? params.Wednesday : null;
-        this.Thursday = 'Thursday' in params ? params.Thursday : null;
-        this.Friday = 'Friday' in params ? params.Friday : null;
-        this.Saturday = 'Saturday' in params ? params.Saturday : null;
-        this.Sunday = 'Sunday' in params ? params.Sunday : null;
-        this.BackupPeriodStrategy = 'BackupPeriodStrategy' in params ? params.BackupPeriodStrategy : null;
-        this.Days = 'Days' in params ? params.Days : null;
-        this.BackupPeriodTime = 'BackupPeriodTime' in params ? params.BackupPeriodTime : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -17444,18 +18922,48 @@ class CreateDBInstanceResponse extends  AbstractModel {
 }
 
 /**
- * StartReplication request structure.
+ * OpenAuditService request structure.
  * @class
  */
-class StartReplicationRequest extends  AbstractModel {
+class OpenAuditServiceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Read-Only instance ID.
+         * TencentDB for MySQL instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * Retention period of the audit log. Valid values:  `7` (one week), `30` (one month), `90` (three months), `180` (six months), `365` (one year), `1095` (three years), `1825` (five years).
+         * @type {number || null}
+         */
+        this.LogExpireDay = null;
+
+        /**
+         * Retention period of high-frequency audit logs. Valid values:  `7` (one week), `30` (one month).
+         * @type {number || null}
+         */
+        this.HighLogExpireDay = null;
+
+        /**
+         * Audit rule If both this parameter and `RuleTemplateIds` are left empty, full audit will be applied.
+         * @type {Array.<AuditRuleFilters> || null}
+         */
+        this.AuditRuleFilters = null;
+
+        /**
+         * Rule template ID. If both this parameter and AuditRuleFilters are not specified, all SQL statements will be recorded.
+         * @type {Array.<string> || null}
+         */
+        this.RuleTemplateIds = null;
+
+        /**
+         * Audit type. Valid values: true: Record all; false: Record by rules (default value).
+         * @type {boolean || null}
+         */
+        this.AuditAll = null;
 
     }
 
@@ -17467,6 +18975,19 @@ class StartReplicationRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+        this.HighLogExpireDay = 'HighLogExpireDay' in params ? params.HighLogExpireDay : null;
+
+        if (params.AuditRuleFilters) {
+            this.AuditRuleFilters = new Array();
+            for (let z in params.AuditRuleFilters) {
+                let obj = new AuditRuleFilters();
+                obj.deserialize(params.AuditRuleFilters[z]);
+                this.AuditRuleFilters.push(obj);
+            }
+        }
+        this.RuleTemplateIds = 'RuleTemplateIds' in params ? params.RuleTemplateIds : null;
+        this.AuditAll = 'AuditAll' in params ? params.AuditAll : null;
 
     }
 }
@@ -17655,6 +19176,34 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * CloseAuditService request structure.
+ * @class
+ */
+class CloseAuditServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * Automatic scale-out policy for elastic CPU scale-out.
  * @class
  */
@@ -17804,6 +19353,48 @@ class Outbound extends  AbstractModel {
         this.Dir = 'Dir' in params ? params.Dir : null;
         this.AddressModule = 'AddressModule' in params ? params.AddressModule : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
+ * Filter conditions for querying audit instances.
+ * @class
+ */
+class AuditInstanceFilters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter condition name. Valid values: InstanceId - Instance ID, InstanceName - Instance name, ProjectId - Project ID, TagKey - Tag key, Tag - Tag (using a vertical bar as separator, for example: TagKey|Tagvalue).
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * true indicates exact matching; false indicates fuzzy matching.
+         * @type {boolean || null}
+         */
+        this.ExactMatch = null;
+
+        /**
+         * Filter value.
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ExactMatch = 'ExactMatch' in params ? params.ExactMatch : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -18847,24 +20438,42 @@ class AddTimeWindowResponse extends  AbstractModel {
 }
 
 /**
- * AdjustCdbProxy response structure.
+ * DescribeAuditInstanceList request structure.
  * @class
  */
-class AdjustCdbProxyResponse extends  AbstractModel {
+class DescribeAuditInstanceListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task ID Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Whether audit is enabled for the instance. Valid values: 1 - Enabled; 0 - Disabled.
+         * @type {number || null}
          */
-        this.AsyncRequestId = null;
+        this.AuditSwitch = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
+         * Filter conditions for querying the instance list.
+         * @type {Array.<AuditInstanceFilters> || null}
          */
-        this.RequestId = null;
+        this.Filters = null;
+
+        /**
+         * Audit rule mode for the instance. Valid values: 1 - Rule-based audit; 0 - Full audit.
+         * @type {number || null}
+         */
+        this.AuditMode = null;
+
+        /**
+         * Number of entries to return per request. Default value: 30. Maximum value: 20000.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -18875,8 +20484,19 @@ class AdjustCdbProxyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.AuditSwitch = 'AuditSwitch' in params ? params.AuditSwitch : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AuditInstanceFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.AuditMode = 'AuditMode' in params ? params.AuditMode : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -18938,18 +20558,48 @@ class ModifyDBInstanceLogToCLSResponse extends  AbstractModel {
 }
 
 /**
- * CloseCdbProxyAddress response structure.
+ * Audit log file.
  * @class
  */
-class CloseCdbProxyAddressResponse extends  AbstractModel {
+class AuditLogFile extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Audit log file name.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.FileName = null;
+
+        /**
+         * Creation time of the audit log file, in the format: "2019-03-20 17:09:13".
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * File status. Possible return values:"creating" - Generating;"failed" - Creation failed;"success" - Generated.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * File size in KB.
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * Download URL for the audit log.
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
 
     }
 
@@ -18960,7 +20610,75 @@ class CloseCdbProxyAddressResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+
+    }
+}
+
+/**
+ * DescribeAuditRuleTemplates request structure.
+ * @class
+ */
+class DescribeAuditRuleTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule template ID.
+         * @type {Array.<string> || null}
+         */
+        this.RuleTemplateIds = null;
+
+        /**
+         * Rule template name.
+         * @type {Array.<string> || null}
+         */
+        this.RuleTemplateNames = null;
+
+        /**
+         * Number of entries to return per request. Default value: 20. Maximum value: 1000.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Alarm level. Valid values: 1 - Low risk, 2 - Medium risk, 3 - High risk.
+         * @type {number || null}
+         */
+        this.AlarmLevel = null;
+
+        /**
+         * Alarm policy. Valid values: 0 - Alarm disabled, 1 - Alarm enabled.
+         * @type {number || null}
+         */
+        this.AlarmPolicy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleTemplateIds = 'RuleTemplateIds' in params ? params.RuleTemplateIds : null;
+        this.RuleTemplateNames = 'RuleTemplateNames' in params ? params.RuleTemplateNames : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.AlarmLevel = 'AlarmLevel' in params ? params.AlarmLevel : null;
+        this.AlarmPolicy = 'AlarmPolicy' in params ? params.AlarmPolicy : null;
 
     }
 }
@@ -19006,6 +20724,105 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.Table.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Details of an audit rule template.
+ * @class
+ */
+class AuditRuleTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule template ID.
+         * @type {string || null}
+         */
+        this.RuleTemplateId = null;
+
+        /**
+         * Rule template name.
+         * @type {string || null}
+         */
+        this.RuleTemplateName = null;
+
+        /**
+         * Filter conditions of the rule template.
+         * @type {Array.<RuleFilters> || null}
+         */
+        this.RuleFilters = null;
+
+        /**
+         * Rule template description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Rule template creation time.
+         * @type {string || null}
+         */
+        this.CreateAt = null;
+
+        /**
+         * Alarm level. Valid values: 1 - Low risk, 2 - Medium risk, 3 - High risk.
+         * @type {number || null}
+         */
+        this.AlarmLevel = null;
+
+        /**
+         * Alarm policy. Valid values: 0 - Alarm disabled, 1 - Alarm enabled.
+         * @type {number || null}
+         */
+        this.AlarmPolicy = null;
+
+        /**
+         * Instances to which this rule template is applied.
+         * @type {Array.<string> || null}
+         */
+        this.AffectedInstances = null;
+
+        /**
+         * Template status. Valid values: 0 - No task, 1 - modifying.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Template update time.
+         * @type {string || null}
+         */
+        this.UpdateAt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleTemplateId = 'RuleTemplateId' in params ? params.RuleTemplateId : null;
+        this.RuleTemplateName = 'RuleTemplateName' in params ? params.RuleTemplateName : null;
+
+        if (params.RuleFilters) {
+            this.RuleFilters = new Array();
+            for (let z in params.RuleFilters) {
+                let obj = new RuleFilters();
+                obj.deserialize(params.RuleFilters[z]);
+                this.RuleFilters.push(obj);
+            }
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CreateAt = 'CreateAt' in params ? params.CreateAt : null;
+        this.AlarmLevel = 'AlarmLevel' in params ? params.AlarmLevel : null;
+        this.AlarmPolicy = 'AlarmPolicy' in params ? params.AlarmPolicy : null;
+        this.AffectedInstances = 'AffectedInstances' in params ? params.AffectedInstances : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.UpdateAt = 'UpdateAt' in params ? params.UpdateAt : null;
 
     }
 }
@@ -19182,6 +20999,41 @@ class ReleaseIsolatedDBInstancesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAuditLogFile request structure.
+ * @class
+ */
+class DeleteAuditLogFileRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audit log file name, which can be obtained through the [DescribeAuditLogFiles](https://www.tencentcloud.comom/document/api/236/45454?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -19551,6 +21403,62 @@ class UpgradeCDBProxyVersionRequest extends  AbstractModel {
     }
 }
 
+/**
+ * DeleteAuditRuleTemplates response structure.
+ * @class
+ */
+class DeleteAuditRuleTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAuditRuleTemplates response structure.
+ * @class
+ */
+class ModifyAuditRuleTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     TaskDetail: TaskDetail,
     CdbZoneSellConf: CdbZoneSellConf,
@@ -19561,13 +21469,16 @@ module.exports = {
     InstanceRollbackRangeTime: InstanceRollbackRangeTime,
     DescribeTablesResponse: DescribeTablesResponse,
     ModifyBackupDownloadRestrictionResponse: ModifyBackupDownloadRestrictionResponse,
+    InstanceDbAuditStatus: InstanceDbAuditStatus,
     ModifyTimeWindowResponse: ModifyTimeWindowResponse,
     ParamRecord: ParamRecord,
     ModifyTimeWindowRequest: ModifyTimeWindowRequest,
     DescribeRollbackRangeTimeRequest: DescribeRollbackRangeTimeRequest,
     DescribeBackupOverviewRequest: DescribeBackupOverviewRequest,
+    DescribeAuditInstanceListResponse: DescribeAuditInstanceListResponse,
     ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
     DescribeDataBackupOverviewResponse: DescribeDataBackupOverviewResponse,
+    DeleteAuditPolicyRequest: DeleteAuditPolicyRequest,
     BackupSummaryItem: BackupSummaryItem,
     CreateDatabaseRequest: CreateDatabaseRequest,
     ModifyInstanceParamRequest: ModifyInstanceParamRequest,
@@ -19576,6 +21487,7 @@ module.exports = {
     DescribeParamTemplateInfoRequest: DescribeParamTemplateInfoRequest,
     ModifyCdbProxyAddressVipAndVPortResponse: ModifyCdbProxyAddressVipAndVPortResponse,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
+    CreateRotationPasswordResponse: CreateRotationPasswordResponse,
     ModifyCdbProxyAddressDescRequest: ModifyCdbProxyAddressDescRequest,
     CdbRegionSellConf: CdbRegionSellConf,
     DescribeRoGroupsRequest: DescribeRoGroupsRequest,
@@ -19583,7 +21495,7 @@ module.exports = {
     CreateCdbProxyAddressResponse: CreateCdbProxyAddressResponse,
     RollbackTableName: RollbackTableName,
     CloseWanServiceRequest: CloseWanServiceRequest,
-    OpenAuditServiceResponse: OpenAuditServiceResponse,
+    DescribeAuditConfigRequest: DescribeAuditConfigRequest,
     CreateRoInstanceIpResponse: CreateRoInstanceIpResponse,
     CreateAuditPolicyResponse: CreateAuditPolicyResponse,
     LogRuleTemplateInfo: LogRuleTemplateInfo,
@@ -19591,7 +21503,7 @@ module.exports = {
     StopRollbackResponse: StopRollbackResponse,
     CreateCdbProxyAddressRequest: CreateCdbProxyAddressRequest,
     AnalyzeAuditLogsRequest: AnalyzeAuditLogsRequest,
-    StopReplicationResponse: StopReplicationResponse,
+    ModifyBackupEncryptionStatusResponse: ModifyBackupEncryptionStatusResponse,
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
     DescribeRoMinScaleResponse: DescribeRoMinScaleResponse,
     StopDBImportJobResponse: StopDBImportJobResponse,
@@ -19599,7 +21511,6 @@ module.exports = {
     StopCpuExpandRequest: StopCpuExpandRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     TagInfoUnit: TagInfoUnit,
-    OpenAuditServiceRequest: OpenAuditServiceRequest,
     DescribeAuditRulesRequest: DescribeAuditRulesRequest,
     UpgradeDBInstanceEngineVersionResponse: UpgradeDBInstanceEngineVersionResponse,
     ErrlogItem: ErrlogItem,
@@ -19613,14 +21524,16 @@ module.exports = {
     DescribeTablesRequest: DescribeTablesRequest,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     ModifyParamTemplateRequest: ModifyParamTemplateRequest,
-    StartReplicationResponse: StartReplicationResponse,
+    OpenAuditServiceResponse: OpenAuditServiceResponse,
     DescribeBinlogBackupOverviewResponse: DescribeBinlogBackupOverviewResponse,
     DescribeDBInstanceLogToCLSResponse: DescribeDBInstanceLogToCLSResponse,
     SwitchDBInstanceMasterSlaveRequest: SwitchDBInstanceMasterSlaveRequest,
     ModifyCdbProxyAddressVipAndVPortRequest: ModifyCdbProxyAddressVipAndVPortRequest,
     ModifyAutoRenewFlagRequest: ModifyAutoRenewFlagRequest,
+    DescribeAuditConfigResponse: DescribeAuditConfigResponse,
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
     OpenWanServiceRequest: OpenWanServiceRequest,
+    DeleteAuditPolicyResponse: DeleteAuditPolicyResponse,
     DescribeParamTemplateInfoResponse: DescribeParamTemplateInfoResponse,
     DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
     UploadInfo: UploadInfo,
@@ -19632,18 +21545,22 @@ module.exports = {
     DescribeRollbackRangeTimeResponse: DescribeRollbackRangeTimeResponse,
     ModifyRoGroupInfoRequest: ModifyRoGroupInfoRequest,
     ReleaseResult: ReleaseResult,
+    ModifyDBInstanceVipVportRequest: ModifyDBInstanceVipVportRequest,
     AuditRule: AuditRule,
     DescribeBinlogsRequest: DescribeBinlogsRequest,
     DescribeCdbProxyInfoRequest: DescribeCdbProxyInfoRequest,
     RollbackDBName: RollbackDBName,
     RuleFilters: RuleFilters,
+    ModifyAuditRuleTemplatesRequest: ModifyAuditRuleTemplatesRequest,
     ModifyRemoteBackupConfigResponse: ModifyRemoteBackupConfigResponse,
     DescribeDBInstanceInfoResponse: DescribeDBInstanceInfoResponse,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
+    StartReplicationResponse: StartReplicationResponse,
     DescribeDBFeaturesResponse: DescribeDBFeaturesResponse,
     DescribeBinlogsResponse: DescribeBinlogsResponse,
     DescribeRoMinScaleRequest: DescribeRoMinScaleRequest,
     DescribeDefaultParamsRequest: DescribeDefaultParamsRequest,
+    AuditInstanceInfo: AuditInstanceInfo,
     CustomConfig: CustomConfig,
     SwitchDBInstanceMasterSlaveResponse: SwitchDBInstanceMasterSlaveResponse,
     DescribeBackupsRequest: DescribeBackupsRequest,
@@ -19660,11 +21577,14 @@ module.exports = {
     DescribeErrorLogDataResponse: DescribeErrorLogDataResponse,
     AddTimeWindowRequest: AddTimeWindowRequest,
     ImportRecord: ImportRecord,
+    DeleteAuditLogFileResponse: DeleteAuditLogFileResponse,
     Parameter: Parameter,
     SlaveInfo: SlaveInfo,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     DescribeDBSwitchRecordsResponse: DescribeDBSwitchRecordsResponse,
     Tag: Tag,
+    RuleTemplateInfo: RuleTemplateInfo,
+    CreateAuditLogFileResponse: CreateAuditLogFileResponse,
     ModifyCdbProxyParamResponse: ModifyCdbProxyParamResponse,
     ModifyInstanceTagResponse: ModifyInstanceTagResponse,
     DescribeDBSwitchRecordsRequest: DescribeDBSwitchRecordsRequest,
@@ -19696,7 +21616,7 @@ module.exports = {
     DescribeLocalBinlogConfigRequest: DescribeLocalBinlogConfigRequest,
     TagsInfoOfInstance: TagsInfoOfInstance,
     DescribeDeviceMonitorInfoRequest: DescribeDeviceMonitorInfoRequest,
-    SwitchDrInstanceToMasterResponse: SwitchDrInstanceToMasterResponse,
+    StopDBImportJobRequest: StopDBImportJobRequest,
     DescribeDBInstanceConfigResponse: DescribeDBInstanceConfigResponse,
     SlaveConfig: SlaveConfig,
     ModifyAccountPrivilegesResponse: ModifyAccountPrivilegesResponse,
@@ -19704,8 +21624,12 @@ module.exports = {
     LogToCLSConfig: LogToCLSConfig,
     ResetRootAccountRequest: ResetRootAccountRequest,
     DescribeDBInstanceConfigRequest: DescribeDBInstanceConfigRequest,
+    ModifyAuditServiceRequest: ModifyAuditServiceRequest,
     DescribeProxyCustomConfResponse: DescribeProxyCustomConfResponse,
+    ModifyAuditConfigResponse: ModifyAuditConfigResponse,
+    SwitchDrInstanceToMasterResponse: SwitchDrInstanceToMasterResponse,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
+    RuleTemplateRecordInfo: RuleTemplateRecordInfo,
     DescribeCloneListResponse: DescribeCloneListResponse,
     DescribeDBInstanceLogToCLSRequest: DescribeDBInstanceLogToCLSRequest,
     AnalysisNodeInfo: AnalysisNodeInfo,
@@ -19715,7 +21639,7 @@ module.exports = {
     ModifyInstancePasswordComplexityResponse: ModifyInstancePasswordComplexityResponse,
     DeviceMemInfo: DeviceMemInfo,
     AuditLogAggregationResult: AuditLogAggregationResult,
-    SlowLogItem: SlowLogItem,
+    DatabasesWithCharacterLists: DatabasesWithCharacterLists,
     DescribeRemoteBackupConfigRequest: DescribeRemoteBackupConfigRequest,
     TagInfo: TagInfo,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
@@ -19725,6 +21649,8 @@ module.exports = {
     DescribeAccountsResponse: DescribeAccountsResponse,
     RollbackTimeRange: RollbackTimeRange,
     AuditLog: AuditLog,
+    DescribeAuditRuleTemplateModifyHistoryResponse: DescribeAuditRuleTemplateModifyHistoryResponse,
+    DescribeAuditLogFilesRequest: DescribeAuditLogFilesRequest,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     AggregationCondition: AggregationCondition,
@@ -19737,6 +21663,7 @@ module.exports = {
     RoVipInfo: RoVipInfo,
     DescribeAccountsRequest: DescribeAccountsRequest,
     DescribeErrorLogDataRequest: DescribeErrorLogDataRequest,
+    DescribeAuditLogFilesResponse: DescribeAuditLogFilesResponse,
     DescribeDBInstanceRebootTimeRequest: DescribeDBInstanceRebootTimeRequest,
     Inbound: Inbound,
     CreateAccountsResponse: CreateAccountsResponse,
@@ -19756,20 +21683,23 @@ module.exports = {
     SwitchForUpgradeRequest: SwitchForUpgradeRequest,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     DescribeBackupDownloadRestrictionResponse: DescribeBackupDownloadRestrictionResponse,
-    DatabasesWithCharacterLists: DatabasesWithCharacterLists,
     CloneItem: CloneItem,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     CreateAccountsRequest: CreateAccountsRequest,
+    DeleteAuditRuleTemplatesRequest: DeleteAuditRuleTemplatesRequest,
+    CreateAuditRuleTemplateResponse: CreateAuditRuleTemplateResponse,
     BackupInfo: BackupInfo,
     CloseWanServiceResponse: CloseWanServiceResponse,
     RenewDBInstanceRequest: RenewDBInstanceRequest,
     SlowLogInfo: SlowLogInfo,
     ModifyLocalBinlogConfigResponse: ModifyLocalBinlogConfigResponse,
+    CreateRotationPasswordRequest: CreateRotationPasswordRequest,
     DescribeCloneListRequest: DescribeCloneListRequest,
     ModifyInstanceTagRequest: ModifyInstanceTagRequest,
     DescribeProxySupportParamRequest: DescribeProxySupportParamRequest,
     ModifyAutoRenewFlagResponse: ModifyAutoRenewFlagResponse,
     RollbackTask: RollbackTask,
+    StartReplicationRequest: StartReplicationRequest,
     ProxyInst: ProxyInst,
     ReloadBalanceProxyNodeResponse: ReloadBalanceProxyNodeResponse,
     DescribeTimeWindowRequest: DescribeTimeWindowRequest,
@@ -19777,7 +21707,9 @@ module.exports = {
     BackupItem: BackupItem,
     AuditFilter: AuditFilter,
     DescribeProxySupportParamResponse: DescribeProxySupportParamResponse,
+    CloseAuditServiceResponse: CloseAuditServiceResponse,
     DescribeRollbackTaskDetailRequest: DescribeRollbackTaskDetailRequest,
+    AdjustCdbProxyResponse: AdjustCdbProxyResponse,
     ModifyParamTemplateResponse: ModifyParamTemplateResponse,
     BalanceRoGroupLoadResponse: BalanceRoGroupLoadResponse,
     DeviceNetInfo: DeviceNetInfo,
@@ -19790,11 +21722,13 @@ module.exports = {
     SwitchCDBProxyRequest: SwitchCDBProxyRequest,
     DescribeTagsOfInstanceIdsResponse: DescribeTagsOfInstanceIdsResponse,
     OfflineIsolatedInstancesResponse: OfflineIsolatedInstancesResponse,
+    CreateAuditRuleTemplateRequest: CreateAuditRuleTemplateRequest,
     DatabasePrivilege: DatabasePrivilege,
     DescribeAuditPoliciesRequest: DescribeAuditPoliciesRequest,
     AdjustCdbProxyAddressRequest: AdjustCdbProxyAddressRequest,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     DescribeRoGroupsResponse: DescribeRoGroupsResponse,
+    CloseCdbProxyAddressResponse: CloseCdbProxyAddressResponse,
     DescribeAuditRulesResponse: DescribeAuditRulesResponse,
     RoInstanceInfo: RoInstanceInfo,
     DeviceCpuRateInfo: DeviceCpuRateInfo,
@@ -19803,14 +21737,14 @@ module.exports = {
     AccountInfo: AccountInfo,
     DescribeRemoteBackupConfigResponse: DescribeRemoteBackupConfigResponse,
     AdjustCdbProxyAddressResponse: AdjustCdbProxyAddressResponse,
-    ModifyDBInstanceVipVportRequest: ModifyDBInstanceVipVportRequest,
+    CreateAuditLogFileRequest: CreateAuditLogFileRequest,
     DescribeDBImportRecordsRequest: DescribeDBImportRecordsRequest,
     CreateDBImportJobResponse: CreateDBImportJobResponse,
     DescribeTagsOfInstanceIdsRequest: DescribeTagsOfInstanceIdsRequest,
     StartCpuExpandRequest: StartCpuExpandRequest,
     DescribeCpuExpandStrategyRequest: DescribeCpuExpandStrategyRequest,
     CloseCDBProxyResponse: CloseCDBProxyResponse,
-    ModifyBackupEncryptionStatusResponse: ModifyBackupEncryptionStatusResponse,
+    StopReplicationResponse: StopReplicationResponse,
     UpgradeDBInstanceEngineVersionRequest: UpgradeDBInstanceEngineVersionRequest,
     DescribeDataBackupOverviewRequest: DescribeDataBackupOverviewRequest,
     DescribeDBInstanceInfoRequest: DescribeDBInstanceInfoRequest,
@@ -19821,13 +21755,15 @@ module.exports = {
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     CdbSellConfig: CdbSellConfig,
     DescribeSupportedPrivilegesResponse: DescribeSupportedPrivilegesResponse,
-    StopDBImportJobRequest: StopDBImportJobRequest,
+    SlowLogItem: SlowLogItem,
     DescribeLocalBinlogConfigResponse: DescribeLocalBinlogConfigResponse,
+    ModifyAuditServiceResponse: ModifyAuditServiceResponse,
     ModifyInstancePasswordComplexityRequest: ModifyInstancePasswordComplexityRequest,
     OpenWanServiceResponse: OpenWanServiceResponse,
     DescribeDBInstanceGTIDRequest: DescribeDBInstanceGTIDRequest,
     DescribeBackupEncryptionStatusResponse: DescribeBackupEncryptionStatusResponse,
     DescribeCdbProxyInfoResponse: DescribeCdbProxyInfoResponse,
+    ModifyAuditConfigRequest: ModifyAuditConfigRequest,
     DeviceDiskInfo: DeviceDiskInfo,
     RoWeightValue: RoWeightValue,
     DescribeSlowLogDataResponse: DescribeSlowLogDataResponse,
@@ -19841,6 +21777,7 @@ module.exports = {
     ModifyRoGroupInfoResponse: ModifyRoGroupInfoResponse,
     DeleteParamTemplateResponse: DeleteParamTemplateResponse,
     DBSwitchInfo: DBSwitchInfo,
+    DescribeAuditRuleTemplateModifyHistoryRequest: DescribeAuditRuleTemplateModifyHistoryRequest,
     DescribeTasksResponse: DescribeTasksResponse,
     DescribeAuditLogsResponse: DescribeAuditLogsResponse,
     DescribeAuditPoliciesResponse: DescribeAuditPoliciesResponse,
@@ -19848,30 +21785,33 @@ module.exports = {
     AdjustCdbProxyRequest: AdjustCdbProxyRequest,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     ProxyAddress: ProxyAddress,
-    DescribeBackupSummariesRequest: DescribeBackupSummariesRequest,
+    CommonTimeWindow: CommonTimeWindow,
     ModifyAccountMaxUserConnectionsRequest: ModifyAccountMaxUserConnectionsRequest,
     DescribeTasksRequest: DescribeTasksRequest,
     ModifyBackupEncryptionStatusRequest: ModifyBackupEncryptionStatusRequest,
     DescribeRollbackTaskDetailResponse: DescribeRollbackTaskDetailResponse,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
+    DescribeAuditRuleTemplatesResponse: DescribeAuditRuleTemplatesResponse,
     RollbackInstancesInfo: RollbackInstancesInfo,
     CreateCloneInstanceRequest: CreateCloneInstanceRequest,
     ClusterInfo: ClusterInfo,
     CloseCDBProxyRequest: CloseCDBProxyRequest,
     DeleteBackupResponse: DeleteBackupResponse,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
-    CommonTimeWindow: CommonTimeWindow,
+    DescribeBackupSummariesRequest: DescribeBackupSummariesRequest,
     AnalyzeAuditLogsResponse: AnalyzeAuditLogsResponse,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
-    StartReplicationRequest: StartReplicationRequest,
+    OpenAuditServiceRequest: OpenAuditServiceRequest,
     DescribeDBInstanceCharsetResponse: DescribeDBInstanceCharsetResponse,
     DescribeDBFeaturesRequest: DescribeDBFeaturesRequest,
     DescribeBackupSummariesResponse: DescribeBackupSummariesResponse,
     DescribeBinlogBackupOverviewRequest: DescribeBinlogBackupOverviewRequest,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
+    CloseAuditServiceRequest: CloseAuditServiceRequest,
     AutoStrategy: AutoStrategy,
     ModifyAccountMaxUserConnectionsResponse: ModifyAccountMaxUserConnectionsResponse,
     Outbound: Outbound,
+    AuditInstanceFilters: AuditInstanceFilters,
     ParamInfo: ParamInfo,
     DescribeBackupDecryptionKeyResponse: DescribeBackupDecryptionKeyResponse,
     SecurityGroup: SecurityGroup,
@@ -19894,14 +21834,17 @@ module.exports = {
     RenewDBInstanceResponse: RenewDBInstanceResponse,
     TablePrivilege: TablePrivilege,
     AddTimeWindowResponse: AddTimeWindowResponse,
-    AdjustCdbProxyResponse: AdjustCdbProxyResponse,
+    DescribeAuditInstanceListRequest: DescribeAuditInstanceListRequest,
     DescribeBackupEncryptionStatusRequest: DescribeBackupEncryptionStatusRequest,
     ModifyDBInstanceLogToCLSResponse: ModifyDBInstanceLogToCLSResponse,
-    CloseCdbProxyAddressResponse: CloseCdbProxyAddressResponse,
+    AuditLogFile: AuditLogFile,
+    DescribeAuditRuleTemplatesRequest: DescribeAuditRuleTemplatesRequest,
     RollbackTables: RollbackTables,
+    AuditRuleTemplateInfo: AuditRuleTemplateInfo,
     LocalBinlogConfigDefault: LocalBinlogConfigDefault,
     DescribeSlowLogDataRequest: DescribeSlowLogDataRequest,
     ReleaseIsolatedDBInstancesResponse: ReleaseIsolatedDBInstancesResponse,
+    DeleteAuditLogFileRequest: DeleteAuditLogFileRequest,
     DescribeSlowLogsResponse: DescribeSlowLogsResponse,
     DeleteTimeWindowRequest: DeleteTimeWindowRequest,
     SwitchCDBProxyResponse: SwitchCDBProxyResponse,
@@ -19911,5 +21854,7 @@ module.exports = {
     ModifyNameOrDescByDpIdRequest: ModifyNameOrDescByDpIdRequest,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     UpgradeCDBProxyVersionRequest: UpgradeCDBProxyVersionRequest,
+    DeleteAuditRuleTemplatesResponse: DeleteAuditRuleTemplatesResponse,
+    ModifyAuditRuleTemplatesResponse: ModifyAuditRuleTemplatesResponse,
 
 }

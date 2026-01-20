@@ -231,6 +231,15 @@ class SubmitHunyuanTo3DProJobRequest extends  AbstractModel {
         super();
 
         /**
+         * Tencent HY 3D Global model version
+Defaults to 3.0, with optional choices: 3.0, 3.1
+When selecting version 3.1, the LowPoly parameter is unavailable
+Example value:3.0
+         * @type {string || null}
+         */
+        this.Model = null;
+
+        /**
          * Generates 3D content, describes 3D content.
 Supports up to 1024 utf-8 characters.
 Text-To-3D. Specifies either ImageBase64/ImageUrl or Prompt is required. Prompt and ImageBase64/ImageUrl cannot coexist.
@@ -268,9 +277,13 @@ Specifies either ImageBase64/ImageUrl or Prompt is required. Prompt and ImageBas
 
         /**
          * Multi-Perspective model image. reference value for viewing angle:.
-left view.
-right view.
-back view.
+left: Left view;
+right: Right view;
+back: Rear view;
+top: Top view (only supported in Model 3.1);
+bottom: Bottom view (only supported in Model 3.1);
+left_front: Left front 45 degree view (only supported in Model 3.1);
+right_front: Right front 45 degree view (only supported in Model 3.1);
 
 Each perspective is limited to one image.
 Image size limit. the value must not exceed 8 mb after encoding.
@@ -322,6 +335,7 @@ quadrilateral: mix quadrangle and triangle faces to generate.
         if (!params) {
             return;
         }
+        this.Model = 'Model' in params ? params.Model : null;
         this.Prompt = 'Prompt' in params ? params.Prompt : null;
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;

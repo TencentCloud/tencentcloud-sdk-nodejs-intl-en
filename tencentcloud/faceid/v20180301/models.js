@@ -849,6 +849,7 @@ The default value is blink. The different action types passed in this parameter 
         /**
          * BASIC: Basic version (Default).
 ENHANCE: Enhance version, enable additional output of device risk level field.
+PRO: Pro version, enable additional output of attack type fields.
 PLUS: Plus version, enable additional output of device risk level and attack type fields.
 Please contact us to access enhance version & plus version.	
          * @type {string || null}
@@ -2314,6 +2315,7 @@ Optional alarm codes are: -9101 (occlusion or incomplete border), -9102 (photoco
         /**
          * BASIC: Basic version (Default).
 ENHANCE: Enhance version, enable additional output of device risk level field.
+PRO: Pro version, enable additional output of attack type fields.
 PLUS: Plus version, enable additional output of device risk level and attack type fields.
 Please contact us to access enhance version & plus version.	
          * @type {string || null}

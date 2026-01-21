@@ -16,16 +16,19 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const Describe3DSmartTopologyJobResponse = models.Describe3DSmartTopologyJobResponse;
 const Convert3DFormatRequest = models.Convert3DFormatRequest;
 const ViewImage = models.ViewImage;
 const SubmitHunyuanTo3DRapidJobRequest = models.SubmitHunyuanTo3DRapidJobRequest;
-const SubmitHunyuanTo3DProJobResponse = models.SubmitHunyuanTo3DProJobResponse;
+const Submit3DSmartTopologyJobRequest = models.Submit3DSmartTopologyJobRequest;
+const Submit3DSmartTopologyJobResponse = models.Submit3DSmartTopologyJobResponse;
 const SubmitHunyuan3DPartJobResponse = models.SubmitHunyuan3DPartJobResponse;
 const SubmitHunyuanTo3DProJobRequest = models.SubmitHunyuanTo3DProJobRequest;
 const QueryHunyuanTo3DProJobRequest = models.QueryHunyuanTo3DProJobRequest;
 const File3D = models.File3D;
 const QueryHunyuanTo3DRapidJobResponse = models.QueryHunyuanTo3DRapidJobResponse;
 const QueryHunyuan3DPartJobResponse = models.QueryHunyuan3DPartJobResponse;
+const SubmitHunyuanTo3DProJobResponse = models.SubmitHunyuanTo3DProJobResponse;
 const QueryHunyuanTo3DProJobResponse = models.QueryHunyuanTo3DProJobResponse;
 const SubmitHunyuan3DPartJobRequest = models.SubmitHunyuan3DPartJobRequest;
 const Convert3DFormatResponse = models.Convert3DFormatResponse;
@@ -33,6 +36,7 @@ const QueryHunyuan3DPartJobRequest = models.QueryHunyuan3DPartJobRequest;
 const SubmitHunyuanTo3DRapidJobResponse = models.SubmitHunyuanTo3DRapidJobResponse;
 const InputFile3D = models.InputFile3D;
 const QueryHunyuanTo3DRapidJobRequest = models.QueryHunyuanTo3DRapidJobRequest;
+const Describe3DSmartTopologyJobRequest = models.Describe3DSmartTopologyJobRequest;
 
 
 /**
@@ -60,6 +64,41 @@ This API is used to provide 3 concurrent tasks by default. Up to 3 submitted tas
     /**
      * This API is used to intelligently generate 3D content based on the HunYuan Large Model with input text descriptions or images.
 This API is used to provide 1 concurrent task by default, which means only 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+     * @param {SubmitHunyuanTo3DRapidJobRequest} req
+     * @param {function(string, SubmitHunyuanTo3DRapidJobResponse):void} cb
+     * @public
+     */
+    SubmitHunyuanTo3DRapidJob(req, cb) {
+        let resp = new SubmitHunyuanTo3DRapidJobResponse();
+        this.request("SubmitHunyuanTo3DRapidJob", req, resp, cb);
+    }
+
+    /**
+     * The SmartTopoly API uses the Polygon 1.5 model. After manually inputting a 3D high-poly model, it can generate a neat 3D model with lower polygon count.
+1 concurrent is provided by default, which means 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+     * @param {Submit3DSmartTopologyJobRequest} req
+     * @param {function(string, Submit3DSmartTopologyJobResponse):void} cb
+     * @public
+     */
+    Submit3DSmartTopologyJob(req, cb) {
+        let resp = new Submit3DSmartTopologyJobResponse();
+        this.request("Submit3DSmartTopologyJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to automatically perform component identification and generation based on the model structure after inputting a 3D model file.
+     * @param {SubmitHunyuan3DPartJobRequest} req
+     * @param {function(string, SubmitHunyuan3DPartJobResponse):void} cb
+     * @public
+     */
+    SubmitHunyuan3DPartJob(req, cb) {
+        let resp = new SubmitHunyuan3DPartJobResponse();
+        this.request("SubmitHunyuan3DPartJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to intelligently generate 3D content based on the HunYuan Large Model with input text descriptions or images.
+This API is used to provide 1 concurrent task by default, which means only 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
      * @param {QueryHunyuanTo3DRapidJobRequest} req
      * @param {function(string, QueryHunyuanTo3DRapidJobResponse):void} cb
      * @public
@@ -81,15 +120,15 @@ This API is used to provide 1 concurrent task by default, which means only 1 sub
     }
 
     /**
-     * This API is used to intelligently generate 3D content based on the HunYuan Large Model with input text descriptions or images.
-This API is used to provide 1 concurrent task by default, which means only 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
-     * @param {SubmitHunyuanTo3DRapidJobRequest} req
-     * @param {function(string, SubmitHunyuanTo3DRapidJobResponse):void} cb
+     * The SmartTopoly API uses the Polygon 1.5 model. After manually inputting a 3D high-poly model, it can generate a neat 3D model with lower polygon count.
+1 concurrent is provided by default, which means 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+     * @param {Describe3DSmartTopologyJobRequest} req
+     * @param {function(string, Describe3DSmartTopologyJobResponse):void} cb
      * @public
      */
-    SubmitHunyuanTo3DRapidJob(req, cb) {
-        let resp = new SubmitHunyuanTo3DRapidJobResponse();
-        this.request("SubmitHunyuanTo3DRapidJob", req, resp, cb);
+    Describe3DSmartTopologyJob(req, cb) {
+        let resp = new Describe3DSmartTopologyJobResponse();
+        this.request("Describe3DSmartTopologyJob", req, resp, cb);
     }
 
     /**
@@ -113,17 +152,6 @@ This API is used to provide 3 concurrent tasks by default, which can process 3 s
     Convert3DFormat(req, cb) {
         let resp = new Convert3DFormatResponse();
         this.request("Convert3DFormat", req, resp, cb);
-    }
-
-    /**
-     * This API is used to automatically perform component identification and generation based on the model structure after inputting a 3D model file.
-     * @param {SubmitHunyuan3DPartJobRequest} req
-     * @param {function(string, SubmitHunyuan3DPartJobResponse):void} cb
-     * @public
-     */
-    SubmitHunyuan3DPartJob(req, cb) {
-        let resp = new SubmitHunyuan3DPartJobResponse();
-        this.request("SubmitHunyuan3DPartJob", req, resp, cb);
     }
 
 

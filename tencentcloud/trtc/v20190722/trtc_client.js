@@ -161,6 +161,7 @@ const MixUserInfo = models.MixUserInfo;
 const EventMessage = models.EventMessage;
 const DescribeTRTCMarketQualityDataRequest = models.DescribeTRTCMarketQualityDataRequest;
 const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
+const InvokeLLM = models.InvokeLLM;
 const SliceStorageParams = models.SliceStorageParams;
 const MaxVideoUser = models.MaxVideoUser;
 const UpdateStreamIngestRequest = models.UpdateStreamIngestRequest;
@@ -825,7 +826,7 @@ Note:
     }
 
     /**
-     * Provides server-side control of AI Conversation
+     * This API is used to provide service for server-side robot control.
      * @param {ControlAIConversationRequest} req
      * @param {function(string, ControlAIConversationResponse):void} cb
      * @public

@@ -321,7 +321,7 @@ class AudioEncodeParams extends  AbstractModel {
 }
 
 /**
- * The server controls the AI conversation robot to broadcast the specified text
+ * The server controls the chatbot to broadcast the specified text.
  * @class
  */
 class ServerPushText extends  AbstractModel {
@@ -329,22 +329,63 @@ class ServerPushText extends  AbstractModel {
         super();
 
         /**
-         * Server push broadcast text
+         * Server push broadcast text.
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * Allow this text to interrupt the robot
+         * Whether to allow the text to interrupt the robot's speaking.
          * @type {boolean || null}
          */
         this.Interrupt = null;
 
         /**
-         * After the text is finished, whether to automatically close the conversation task
+         * Broadcast the text and automatically close the dialogue task.
          * @type {boolean || null}
          */
         this.StopAfterPlay = null;
+
+        /**
+         * Server push broadcast audio.
+Format description: audio must be mono, sampling rate must be consistent with the corresponding TTS sampling rate, and coded as a Base64 string.
+Input rule: when the Audio field is provided, the system will not accept user-submitted input in the Text field. the system will play the Audio content in the Audio field directly.
+         * @type {string || null}
+         */
+        this.Audio = null;
+
+        /**
+         * Defaults to 0. valid at that time only when Interrupt is false.
+-0 means drop messages with Interrupt set to false during the occurrence of interaction.
+-1 indicates that during the occurrence of an interaction, messages with Interrupt as false will not be dropped but cached, waiting to be processed when finished.
+
+Note: if DropMode is 1, multiple messages can be cached. if an interruption occurs subsequently, the cache of messages will be cleared.
+         * @type {number || null}
+         */
+        this.DropMode = null;
+
+        /**
+         * The message priority of ServerPushText. 0 means interruptible, 1 means not interruptible. currently only support 0. if you need to input 1, submit a ticket to contact us to grant permission.
+Note: after receiving a message with Priority=1, any other messages will be ignored (including messages with Priority=1) until the message processing of Priority=1 is complete. this field can be used together with the Interrupt and DropMode fields.
+Example:.
+-Priority=1, Interrupt=true, interrupts existing interaction and broadcasts immediately. the broadcast will not be interrupted during the process.
+-Priority=1, Interrupt=false, DropMode=1. wait for the current interaction to complete before broadcasting. the broadcast will not be interrupted during the process.
+
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * Whether to add the text to the llm history context.
+         * @type {boolean || null}
+         */
+        this.AddHistory = null;
+
+        /**
+         * If filled, it will be bound to the subtitle and sent to the terminal. note that the content must be a json string.
+         * @type {string || null}
+         */
+        this.MetaInfo = null;
 
     }
 
@@ -358,6 +399,11 @@ class ServerPushText extends  AbstractModel {
         this.Text = 'Text' in params ? params.Text : null;
         this.Interrupt = 'Interrupt' in params ? params.Interrupt : null;
         this.StopAfterPlay = 'StopAfterPlay' in params ? params.StopAfterPlay : null;
+        this.Audio = 'Audio' in params ? params.Audio : null;
+        this.DropMode = 'DropMode' in params ? params.DropMode : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.AddHistory = 'AddHistory' in params ? params.AddHistory : null;
+        this.MetaInfo = 'MetaInfo' in params ? params.MetaInfo : null;
 
     }
 }
@@ -6994,23 +7040,28 @@ class ControlAIConversationRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of the task
+         * Task unique identifier.
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * Control commands, currently supported commands are as follows:
-- ServerPushText, the server sends text to the AI robot, and the AI robot will play the text
+         * Control command. currently supports the following commands: - ServerPushText: server sends text to the AI robot, and the AI robot will broadcast the text. - InvokeLLM: server sends text to the large model to trigger dialogue.
          * @type {string || null}
          */
         this.Command = null;
 
         /**
-         * The server sends a text broadcast command. This is required when Command is ServerPushText.
+         * Server-Sent broadcast text Command. required when Command is ServerPushText.
          * @type {ServerPushText || null}
          */
         this.ServerPushText = null;
+
+        /**
+         * The server sends a Command to proactively request the large model. when Command is InvokeLLM, it sends the content request to the large model and adds X-Invoke-LLM="1" to the header.
+         * @type {InvokeLLM || null}
+         */
+        this.InvokeLLM = null;
 
     }
 
@@ -7028,6 +7079,12 @@ class ControlAIConversationRequest extends  AbstractModel {
             let obj = new ServerPushText();
             obj.deserialize(params.ServerPushText)
             this.ServerPushText = obj;
+        }
+
+        if (params.InvokeLLM) {
+            let obj = new InvokeLLM();
+            obj.deserialize(params.InvokeLLM)
+            this.InvokeLLM = obj;
         }
 
     }
@@ -7718,6 +7775,41 @@ class UpdatePublishCdnStreamRequest extends  AbstractModel {
                 this.FeedBackRoomParams.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Service calling actively initiates requests to the LLM.
+ * @class
+ */
+class InvokeLLM extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Request the content of LLM.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Whether to allow the text to interrupt the robot's speaking.
+         * @type {boolean || null}
+         */
+        this.Interrupt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Interrupt = 'Interrupt' in params ? params.Interrupt : null;
 
     }
 }
@@ -9270,6 +9362,7 @@ module.exports = {
     EventMessage: EventMessage,
     DescribeTRTCMarketQualityDataRequest: DescribeTRTCMarketQualityDataRequest,
     UpdatePublishCdnStreamRequest: UpdatePublishCdnStreamRequest,
+    InvokeLLM: InvokeLLM,
     SliceStorageParams: SliceStorageParams,
     MaxVideoUser: MaxVideoUser,
     UpdateStreamIngestRequest: UpdateStreamIngestRequest,

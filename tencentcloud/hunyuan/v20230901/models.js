@@ -89,14 +89,16 @@ class Convert3DFormatRequest extends  AbstractModel {
         super();
 
         /**
-         * 3D file url address. model file size ≤60 mb. supports fbx, obj, and glb format 3d file input.
+         * 3D file url address. model file size not greater than 60 mb
+Supports fbx, obj, and glb format 3d file input
          * @type {string || null}
          */
         this.File3D = null;
 
         /**
-         * Returns the 3D file format. valid values: STL, USDZ, FBX, MP4, GIF.
-Recommended input models below 50W, may timeout when selecting USDZ, MP4, or GIF format.
+         * Returns the 3D file format. valid values: 
+STL, USDZ, FBX, MP4, GIF
+Recommended input models below 50W, may timeout when selecting USDZ, MP4, or GIF format
 Example value: STL.
          * @type {string || null}
          */
@@ -169,19 +171,27 @@ class SubmitHunyuanTo3DRapidJobRequest extends  AbstractModel {
         super();
 
         /**
-         * Text-To-3D, description of 3D content, forward Prompt content. supports up to 200 utf-8 characters. either ImageBase64, ImageUrl, or Prompt is required, and Prompt cannot coexist with ImageBase64/ImageUrl.	
+         * Text-To-3D, description of 3D content, forward Prompt content
+Supports up to 200 utf-8 characters
+Either ImageBase64, ImageUrl, or Prompt is required, and Prompt cannot coexist with ImageBase64/ImageUrl
          * @type {string || null}
          */
         this.Prompt = null;
 
         /**
-         * Input image Base64 data. size: unilateral resolution requirement not less than 128, not greater than 5000, size ≤6m (after encoding, size increases by approximately 30%). format: jpg, png, jpeg, webp. imagebase64, imageurl, and Prompt are required, but Prompt and imagebase64/imageurl cannot coexist.	
+         * Input image Base64 data
+Size: unilateral resolution requirement not less than 128, not greater than 5000, size not greater than 6mb (after encoding, size increases by approximately 30%). format:
+jpg, png, jpeg, webp
+Imagebase64, imageurl, and Prompt are required, but Prompt and imagebase64/imageurl cannot coexist
          * @type {string || null}
          */
         this.ImageBase64 = null;
 
         /**
-         * Input image Url. size: unilateral resolution requirement not less than 128, not greater than 5000. size ≤8m. format: jpg, png, jpeg, webp. imagebase64, imageurl, and Prompt are required, and Prompt cannot coexist with imagebase64/imageurl.	
+         * Input image Url size: 
+Unilateral resolution requirement not less than 128, not greater than 5000. size not greater than 8mb
+Format: jpg, png, jpeg, webp
+Imagebase64, imageurl, and Prompt are required, and Prompt cannot coexist with imagebase64/imageurl	
          * @type {string || null}
          */
         this.ImageUrl = null;
@@ -193,7 +203,10 @@ class SubmitHunyuanTo3DRapidJobRequest extends  AbstractModel {
         this.EnablePBR = null;
 
         /**
-         * Specifies whether to enable the single geometry generation option. when enabled, it generates a 3D model without textures (white model). enabled, the generative model does not support OBJ format. default model file format is GLB.	
+         * Specifies whether to enable the single geometry generation option
+When enabled, it generates a 3D model without textures (white model)
+When enabled, the generative model does not support OBJ format
+Default model file format is GLB
          * @type {boolean || null}
          */
         this.EnableGeometry = null;
@@ -315,7 +328,7 @@ class SubmitHunyuan3DPartJobResponse extends  AbstractModel {
         super();
 
         /**
-         * Task id (valid period: 24 hours).
+         * Task id (valid period: 24 hours)
          * @type {string || null}
          */
         this.JobId = null;
@@ -413,34 +426,34 @@ Supported image format: JPG or PNG
         this.MultiViewImages = null;
 
         /**
-         * Specifies whether PBR material generation is enabled. default false.
+         * Specifies whether PBR material generation is enabled. default false
          * @type {boolean || null}
          */
         this.EnablePBR = null;
 
         /**
          * Specifies the face count for 3D model generation. default value is 500000.
-Specifies the supported face count generation range. value range: 40000-1500000.
+Specifies the supported face count generation range. value range: 40000-1500000
          * @type {number || null}
          */
         this.FaceCount = null;
 
         /**
-         * Generation task type. default: Normal. valid values:.
-Normal: generates a geometric model with textures.
+         * Generation task type. default: Normal. valid values:
+Normal: generates a geometric model with textures
 LowPoly: specifies the model generated after intelligent polygon reduction.
-Geometry: specifies whether to generate a Geometry model without textures (white model). when this task is selected, the EnablePBR parameter does not take effect.
-Specifies the Sketch for the generative model, allowing input of a Sketch or line drawing. in this mode, both prompt and ImageUrl/ImageBase64 can be entered together.
+Geometry: specifies whether to generate a Geometry model without textures (white model). when this task is selected, the EnablePBR parameter does not take effect
+Specifies the Sketch for the generative model, allowing input of a Sketch or line drawing. in this mode, both prompt and ImageUrl/ImageBase64 can be entered together
          * @type {string || null}
          */
         this.GenerateType = null;
 
         /**
-         * This parameter only takes effect when LowPoly mode is selected from GenerateType.
+         * This parameter only takes effect when LowPoly mode is selected from GenerateType
 
-Polygon type, indicates the number of sides in the model's surface grid, defaults to triangle. valid values:.
-triangle. specifies the triangular face.
-quadrilateral: mix quadrangle and triangle faces to generate.
+Polygon type, indicates the number of sides in the model's surface grid, defaults to triangle. valid values:
+triangle. specifies the triangular face
+quadrilateral: mix quadrangle and triangle faces to generate
          * @type {string || null}
          */
         this.PolygonType = null;
@@ -554,7 +567,11 @@ class QueryHunyuanTo3DRapidJobResponse extends  AbstractModel {
         super();
 
         /**
-         * Task status. WAIT: waiting; RUN: running; FAIL: failed; DONE: successful.	
+         * Task status:
+WAIT: waiting
+RUN: running
+FAIL: failed
+DONE: successful	
          * @type {string || null}
          */
         this.Status = null;
@@ -572,7 +589,7 @@ class QueryHunyuanTo3DRapidJobResponse extends  AbstractModel {
         this.ErrorMessage = null;
 
         /**
-         * Specifies the generated 3D file array.	
+         * Specifies the generated 3D file array
          * @type {Array.<File3D> || null}
          */
         this.ResultFile3Ds = null;
@@ -618,25 +635,30 @@ class QueryHunyuan3DPartJobResponse extends  AbstractModel {
         super();
 
         /**
-         * Task status. WAIT: waiting; RUN: running; FAIL: failed; DONE: successful. example value: RUN.	
+         * Task status:
+WAIT: waiting
+RUN: running
+FAIL: failed
+DONE: successful
+Example value: RUN
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code.	
+         * Error code
          * @type {string || null}
          */
         this.ErrorCode = null;
 
         /**
-         * Error message.	
+         * Error message
          * @type {string || null}
          */
         this.ErrorMessage = null;
 
         /**
-         * Generates the file URL with a valid period of 1 day.	
+         * Generates the file URL with a valid period of 1 day
          * @type {Array.<File3D> || null}
          */
         this.ResultFile3Ds = null;
@@ -717,7 +739,10 @@ class QueryHunyuanTo3DProJobResponse extends  AbstractModel {
         super();
 
         /**
-         * Task status. WAIT: waiting; RUN: running; FAIL: failed; DONE: successful.
+         * Task status:
+WAIT: waiting
+RUN: running; FAIL: failed
+DONE: successful
          * @type {string || null}
          */
         this.Status = null;
@@ -735,7 +760,7 @@ class QueryHunyuanTo3DProJobResponse extends  AbstractModel {
         this.ErrorMessage = null;
 
         /**
-         * Describes the generated 3d file array.
+         * Describes the generated 3d file array
          * @type {Array.<File3D> || null}
          */
         this.ResultFile3Ds = null;
@@ -781,7 +806,10 @@ class SubmitHunyuan3DPartJobRequest extends  AbstractModel {
         super();
 
         /**
-         * Recommends inputting 3D models generated by AIGC. recommended file size ≤100MB. face count ≤1,500,000. only supports FBX format.
+         * Recommends inputting 3D models generated by AIGC
+Recommended file size not greater than 100MB
+Face count not greater than 30,000
+Only supports FBX format
          * @type {InputFile3D || null}
          */
         this.File = null;
@@ -814,7 +842,7 @@ class Convert3DFormatResponse extends  AbstractModel {
         super();
 
         /**
-         * 3D file address.
+         * 3D file address
          * @type {string || null}
          */
         this.ResultFile3D = null;
@@ -849,7 +877,7 @@ class QueryHunyuan3DPartJobRequest extends  AbstractModel {
         super();
 
         /**
-         * Task ID.	
+         * Task ID
          * @type {string || null}
          */
         this.JobId = null;
@@ -877,7 +905,7 @@ class SubmitHunyuanTo3DRapidJobResponse extends  AbstractModel {
         super();
 
         /**
-         * Task ID (valid period: 24 hours).	
+         * Task ID (valid period: 24 hours)
          * @type {string || null}
          */
         this.JobId = null;

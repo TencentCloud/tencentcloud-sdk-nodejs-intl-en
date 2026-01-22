@@ -8276,7 +8276,7 @@ Offline product deduction
 
         /**
          * Product code
-Note: To query the product codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
+Note: To query the product codes used in the current month, call <a href="https://www.tencentcloud.com/document/product/555/32374">DescribeBillSummaryByProduct</a>.
          * @type {string || null}
          */
         this.BusinessCode = null;

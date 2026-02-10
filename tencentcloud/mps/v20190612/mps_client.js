@@ -39,6 +39,7 @@ const DescribeAnimatedGraphicsTemplatesRequest = models.DescribeAnimatedGraphics
 const ExtractBlindWatermarkTask = models.ExtractBlindWatermarkTask;
 const AiReviewTaskProhibitedAsrResult = models.AiReviewTaskProhibitedAsrResult;
 const AdaptiveDynamicStreamingTemplate = models.AdaptiveDynamicStreamingTemplate;
+const AiAnalysisTaskReelOutput = models.AiAnalysisTaskReelOutput;
 const MediaAiAnalysisDescriptionItem = models.MediaAiAnalysisDescriptionItem;
 const DeleteAnimatedGraphicsTemplateResponse = models.DeleteAnimatedGraphicsTemplateResponse;
 const AiReviewTaskProhibitedOcrResult = models.AiReviewTaskProhibitedOcrResult;
@@ -63,6 +64,7 @@ const CreateWorkflowRequest = models.CreateWorkflowRequest;
 const OcrWordsConfigureInfo = models.OcrWordsConfigureInfo;
 const DescribeAsrHotwordsRequest = models.DescribeAsrHotwordsRequest;
 const AudioTrackChannelInfo = models.AudioTrackChannelInfo;
+const AiAnalysisTaskCutoutOutput = models.AiAnalysisTaskCutoutOutput;
 const DiagnoseResult = models.DiagnoseResult;
 const SmartEraseTaskInput = models.SmartEraseTaskInput;
 const RawWatermarkParameter = models.RawWatermarkParameter;
@@ -99,6 +101,7 @@ const AiAnalysisTaskFrameTagResult = models.AiAnalysisTaskFrameTagResult;
 const AudioTemplateInfo = models.AudioTemplateInfo;
 const DescribeBatchTaskDetailResponse = models.DescribeBatchTaskDetailResponse;
 const CoverConfigureInfo = models.CoverConfigureInfo;
+const RecognizeAudioResponse = models.RecognizeAudioResponse;
 const AIRecognitionTemplateItem = models.AIRecognitionTemplateItem;
 const AiReviewPornAsrTaskInput = models.AiReviewPornAsrTaskInput;
 const AiRecognitionTaskFaceResult = models.AiRecognitionTaskFaceResult;
@@ -114,12 +117,14 @@ const SubtitleTransResultItem = models.SubtitleTransResultItem;
 const AiReviewTerrorismOcrTaskInput = models.AiReviewTerrorismOcrTaskInput;
 const AiRecognitionTaskOcrWordsResultInput = models.AiRecognitionTaskOcrWordsResultInput;
 const CreateQualityControlTemplateResponse = models.CreateQualityControlTemplateResponse;
+const AiAnalysisTaskReelInput = models.AiAnalysisTaskReelInput;
 const QualityControlResult = models.QualityControlResult;
 const AiReviewPornTaskInput = models.AiReviewPornTaskInput;
 const HdrConfig = models.HdrConfig;
 const ScheduleTask = models.ScheduleTask;
 const CreatePersonSampleRequest = models.CreatePersonSampleRequest;
 const ImageTaskInput = models.ImageTaskInput;
+const RecognizeAudioRequest = models.RecognizeAudioRequest;
 const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
 const CosInputInfo = models.CosInputInfo;
 const DescribeBlindWatermarkTemplatesRequest = models.DescribeBlindWatermarkTemplatesRequest;
@@ -190,7 +195,7 @@ const PornAsrReviewTemplateInfo = models.PornAsrReviewTemplateInfo;
 const CreateAigcImageTaskResponse = models.CreateAigcImageTaskResponse;
 const ComposeVideoStream = models.ComposeVideoStream;
 const ProhibitedAsrReviewTemplateInfoForUpdate = models.ProhibitedAsrReviewTemplateInfoForUpdate;
-const DisableScheduleResponse = models.DisableScheduleResponse;
+const AiAnalysisTaskCutoutInput = models.AiAnalysisTaskCutoutInput;
 const ModifyAnimatedGraphicsTemplateResponse = models.ModifyAnimatedGraphicsTemplateResponse;
 const DeleteSmartSubtitleTemplateRequest = models.DeleteSmartSubtitleTemplateRequest;
 const DeleteAdaptiveDynamicStreamingTemplateRequest = models.DeleteAdaptiveDynamicStreamingTemplateRequest;
@@ -367,6 +372,7 @@ const CreateScheduleResponse = models.CreateScheduleResponse;
 const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesRequest;
 const AigcStoreCosParam = models.AigcStoreCosParam;
 const AiRecognitionTaskOcrWordsResultItem = models.AiRecognitionTaskOcrWordsResultItem;
+const AiAnalysisTaskReelResult = models.AiAnalysisTaskReelResult;
 const ProcessImageRequest = models.ProcessImageRequest;
 const DeleteSampleSnapshotTemplateResponse = models.DeleteSampleSnapshotTemplateResponse;
 const AiAnalysisTaskTagInput = models.AiAnalysisTaskTagInput;
@@ -420,6 +426,7 @@ const DescribeMediaMetaDataResponse = models.DescribeMediaMetaDataResponse;
 const SmartSubtitleTaskAsrFullTextResultOutput = models.SmartSubtitleTaskAsrFullTextResultOutput;
 const TerrorismOcrReviewTemplateInfo = models.TerrorismOcrReviewTemplateInfo;
 const ExtractBlindWatermarkTaskConfig = models.ExtractBlindWatermarkTaskConfig;
+const RecognizeAudioSentence = models.RecognizeAudioSentence;
 const SharpEnhanceConfig = models.SharpEnhanceConfig;
 const ImageEncodeConfig = models.ImageEncodeConfig;
 const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
@@ -442,6 +449,7 @@ const AdaptiveStreamTemplate = models.AdaptiveStreamTemplate;
 const SmartSubtitleTaskFullTextResult = models.SmartSubtitleTaskFullTextResult;
 const TranscodeTaskInput = models.TranscodeTaskInput;
 const SmartSubtitleTemplateItem = models.SmartSubtitleTemplateItem;
+const DisableScheduleResponse = models.DisableScheduleResponse;
 const ModifyAIRecognitionTemplateRequest = models.ModifyAIRecognitionTemplateRequest;
 const ParseNotificationResponse = models.ParseNotificationResponse;
 const ComposeImageOperation = models.ComposeImageOperation;
@@ -660,6 +668,7 @@ const AiRecognitionTaskTransTextResult = models.AiRecognitionTaskTransTextResult
 const EditMediaTaskOutput = models.EditMediaTaskOutput;
 const ProcessImageTemplate = models.ProcessImageTemplate;
 const HighlightSegmentItem = models.HighlightSegmentItem;
+const AiAnalysisTaskCutoutResult = models.AiAnalysisTaskCutoutResult;
 const SmartEraseTemplateItem = models.SmartEraseTemplateItem;
 const DeleteWatermarkTemplateResponse = models.DeleteWatermarkTemplateResponse;
 const ModifyImageSpriteTemplateRequest = models.ModifyImageSpriteTemplateRequest;
@@ -774,7 +783,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create an AIGC image generation task.
+     * This API is used to create AIGC image generation tasks.
      * @param {CreateAigcImageTaskRequest} req
      * @param {function(string, CreateAigcImageTaskResponse):void} cb
      * @public
@@ -1281,6 +1290,17 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
+     * This API is used to return the speech recognition results synchronously.
+     * @param {RecognizeAudioRequest} req
+     * @param {function(string, RecognizeAudioResponse):void} cb
+     * @public
+     */
+    RecognizeAudio(req, cb) {
+        let resp = new RecognizeAudioResponse();
+        this.request("RecognizeAudio", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a custom smart subtitle template.
      * @param {CreateSmartSubtitleTemplateRequest} req
      * @param {function(string, CreateSmartSubtitleTemplateResponse):void} cb
@@ -1490,7 +1510,7 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
-     * This API is used to create an AIGC video generation task.
+     * This API is used to create AI video generation tasks.
      * @param {CreateAigcVideoTaskRequest} req
      * @param {function(string, CreateAigcVideoTaskResponse):void} cb
      * @public
@@ -1523,7 +1543,7 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
-     * This API is used to query the details of the AIGC video task execution status and results by task ID (tasks submitted within the last 7 days can be queried).
+     * This API is used to query the progress of AIGC video generation tasks and obtain the generation results.
      * @param {DescribeAigcVideoTaskRequest} req
      * @param {function(string, DescribeAigcVideoTaskResponse):void} cb
      * @public
@@ -1651,7 +1671,7 @@ This API is used to create an orchestration, which is in disable status by defau
     }
 
     /**
-     * This API is used to query the details of the AIGC image task execution status and results by task ID (tasks submitted within the last 7 days can be queried).
+     * This API is used to query the progress of AIGC image generation tasks and obtain the generation results.
      * @param {DescribeAigcImageTaskRequest} req
      * @param {function(string, DescribeAigcImageTaskResponse):void} cb
      * @public

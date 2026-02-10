@@ -4796,7 +4796,7 @@ class DescribeGeneralMetricDataRequest extends  AbstractModel {
 - if 1 is filled in, the aggregation granularity will be selected according to the time span from the start time to the deadline:.
  -If the time span is (0,12) hours, it is aggregated by one-minute granularity.
  -If the time span is [12,48] hours, it is aggregated at a five-minute granularity.
- -If the time span is (48, +∞) hours, it is aggregated at an hourly granularity.
+ -If the time span is (48, +inf) hours, it is aggregated at an hourly granularity.
          * @type {number || null}
          */
         this.Period = null;

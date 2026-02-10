@@ -18,9 +18,11 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeStrategiesResponse = models.DescribeStrategiesResponse;
 const DescribeTaskStrategyRisksRequest = models.DescribeTaskStrategyRisksRequest;
+const CreateAdvisorAuthorizationResponse = models.CreateAdvisorAuthorizationResponse;
+const RiskFieldsDesc = models.RiskFieldsDesc;
 const DescribeTaskStrategyRisksResponse = models.DescribeTaskStrategyRisksResponse;
 const KeyValue = models.KeyValue;
-const RiskFieldsDesc = models.RiskFieldsDesc;
+const CreateAdvisorAuthorizationRequest = models.CreateAdvisorAuthorizationRequest;
 const Strategies = models.Strategies;
 const Conditions = models.Conditions;
 const DescribeStrategiesRequest = models.DescribeStrategiesRequest;
@@ -45,6 +47,17 @@ class AdvisorClient extends AbstractClient {
     DescribeTaskStrategyRisks(req, cb) {
         let resp = new DescribeTaskStrategyRisksResponse();
         this.request("DescribeTaskStrategyRisks", req, resp, cb);
+    }
+
+    /**
+     * Enable Tencent Cloud Smart Advisor authorization. This will synchronously enable report interpretation and cloud architecture collaboration permissions.
+     * @param {CreateAdvisorAuthorizationRequest} req
+     * @param {function(string, CreateAdvisorAuthorizationResponse):void} cb
+     * @public
+     */
+    CreateAdvisorAuthorization(req, cb) {
+        let resp = new CreateAdvisorAuthorizationResponse();
+        this.request("CreateAdvisorAuthorization", req, resp, cb);
     }
 
     /**

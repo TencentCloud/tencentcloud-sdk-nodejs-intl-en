@@ -1834,7 +1834,6 @@ The names of availability zones across the network are as follows:
 <li> ap-shanghai-fsi-3 </li>
 <li> ap-bangkok-1 </li>
 <li> ap-bangkok-2 </li>
-<li> ap-shanghai-1 (sold out)</li>
 <li> ap-shanghai-2 </li>
 <li> ap-shanghai-3 </li>
 <li> ap-shanghai-4 </li>
@@ -1843,7 +1842,6 @@ The names of availability zones across the network are as follows:
 <li> ap-mumbai-1 </li>
 <li> ap-mumbai-2 </li>
 <li> ap-beijing-1 (sold out)</li>
-<li> ap-beijing-2 </li>
 <li> ap-beijing-3 </li>
 <li> ap-beijing-4 </li>
 <li> ap-beijing-5 </li>
@@ -5829,7 +5827,7 @@ class CreateImageRequest extends  AbstractModel {
         super();
 
         /**
-         * Image name
+         * Image name.
          * @type {string || null}
          */
         this.ImageName = null;
@@ -5841,7 +5839,7 @@ class CreateImageRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Image description
+         * Image description.
          * @type {string || null}
          */
         this.ImageDescription = null;

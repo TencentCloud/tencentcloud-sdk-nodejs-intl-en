@@ -17,6 +17,54 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeRiskCenterPortViewPortRiskList request structure.
+ * @class
+ */
+class DescribeRiskCenterPortViewPortRiskListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter conditions
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+        /**
+         * Asset tags
+         * @type {Array.<AssetTag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new AssetTag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeDbAssetInfo response structure.
  * @class
  */
@@ -219,6 +267,329 @@ class DescribeRiskCenterAssetViewWeakPasswordRiskListResponse extends  AbstractM
 }
 
 /**
+ * Vulnerability details
+ * @class
+ */
+class BugInfoDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Vulnerability ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * POC ID of the vulnerability
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PatchId = null;
+
+        /**
+         * Vulnerability name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VULName = null;
+
+        /**
+         * Vulnerability severity: `high`, `middle`, `low`, `info`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * CVSS score
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CVSSScore = null;
+
+        /**
+         * CVE number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CVEId = null;
+
+        /**
+         * Vulnerability tag
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Tag = null;
+
+        /**
+         * Vulnerability category: `1`: Web application vulnerabilities, `2`: System component vulnerabilities, `3`: Configuration risks
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VULCategory = null;
+
+        /**
+         * Operating systems affected by the vulnerability 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImpactOs = null;
+
+        /**
+         * Components affected by the vulnerability 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImpactCOMPENT = null;
+
+        /**
+         * Versions affected by the vulnerability
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImpactVersion = null;
+
+        /**
+         * Reference information of the vulnerability
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Reference = null;
+
+        /**
+         * Vulnerability description
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VULDescribe = null;
+
+        /**
+         * Fix suggestion
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Fix = null;
+
+        /**
+         * Product support status. The real-time status is returned.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProSupport = null;
+
+        /**
+         * Specify whether the vulnerability is published as an emergency vulnerability. `1`: Published as an emergency vulnerability; `0`: Not an emergency vulnerability.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsPublish = null;
+
+        /**
+         * Disclosure time of the vulnerability. 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ReleaseTime = null;
+
+        /**
+         * The time when the vulnerability is added to the vulnerability database.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The last update time of the vulnerability in the database
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Sub-category of the vulnerability
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubCategory = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.PatchId = 'PatchId' in params ? params.PatchId : null;
+        this.VULName = 'VULName' in params ? params.VULName : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.CVSSScore = 'CVSSScore' in params ? params.CVSSScore : null;
+        this.CVEId = 'CVEId' in params ? params.CVEId : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.VULCategory = 'VULCategory' in params ? params.VULCategory : null;
+        this.ImpactOs = 'ImpactOs' in params ? params.ImpactOs : null;
+        this.ImpactCOMPENT = 'ImpactCOMPENT' in params ? params.ImpactCOMPENT : null;
+        this.ImpactVersion = 'ImpactVersion' in params ? params.ImpactVersion : null;
+        this.Reference = 'Reference' in params ? params.Reference : null;
+        this.VULDescribe = 'VULDescribe' in params ? params.VULDescribe : null;
+        this.Fix = 'Fix' in params ? params.Fix : null;
+        this.ProSupport = 'ProSupport' in params ? params.ProSupport : null;
+        this.IsPublish = 'IsPublish' in params ? params.IsPublish : null;
+        this.ReleaseTime = 'ReleaseTime' in params ? params.ReleaseTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.SubCategory = 'SubCategory' in params ? params.SubCategory : null;
+
+    }
+}
+
+/**
+ * Risk center risk overview statistics.
+ * @class
+ */
+class CsipRiskCenterStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total Number of Port Risks
+         * @type {number || null}
+         */
+        this.PortTotal = null;
+
+        /**
+         * High Port Risk Count
+         * @type {number || null}
+         */
+        this.PortHighLevel = null;
+
+        /**
+         * 	Total number of weak password risks.
+         * @type {number || null}
+         */
+        this.WeakPasswordTotal = null;
+
+        /**
+         * High Weak Password Risk Count
+         * @type {number || null}
+         */
+        this.WeakPasswordHighLevel = null;
+
+        /**
+         * Website Risk Count
+         * @type {number || null}
+         */
+        this.WebsiteTotal = null;
+
+        /**
+         * Number of High Risks on Websites
+         * @type {number || null}
+         */
+        this.WebsiteHighLevel = null;
+
+        /**
+         * Time of the Latest Scan
+         * @type {string || null}
+         */
+        this.LastScanTime = null;
+
+        /**
+         * Number of vulnerability risks.
+         * @type {number || null}
+         */
+        this.VULTotal = null;
+
+        /**
+         * Number of High-Risk Vulnerability Risks
+         * @type {number || null}
+         */
+        this.VULHighLevel = null;
+
+        /**
+         * Number of Configuration Item Risks
+         * @type {number || null}
+         */
+        this.CFGTotal = null;
+
+        /**
+         * Number of High-Risk Configuration Item Risks
+         * @type {number || null}
+         */
+        this.CFGHighLevel = null;
+
+        /**
+         * Mapping Service Risk Count
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ServerTotal = null;
+
+        /**
+         * High Mapping Service Risk Count
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ServerHighLevel = null;
+
+        /**
+         * Number of host baseline risks.
+         * @type {number || null}
+         */
+        this.HostBaseLineRiskTotal = null;
+
+        /**
+         * Number of high-risk risks.
+         * @type {number || null}
+         */
+        this.HostBaseLineRiskHighLevel = null;
+
+        /**
+         * Baseline risk count of the container.
+         * @type {number || null}
+         */
+        this.PodBaseLineRiskTotal = null;
+
+        /**
+         * Number of high-risk baseline risks in the container.
+         * @type {number || null}
+         */
+        this.PodBaseLineRiskHighLevel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PortTotal = 'PortTotal' in params ? params.PortTotal : null;
+        this.PortHighLevel = 'PortHighLevel' in params ? params.PortHighLevel : null;
+        this.WeakPasswordTotal = 'WeakPasswordTotal' in params ? params.WeakPasswordTotal : null;
+        this.WeakPasswordHighLevel = 'WeakPasswordHighLevel' in params ? params.WeakPasswordHighLevel : null;
+        this.WebsiteTotal = 'WebsiteTotal' in params ? params.WebsiteTotal : null;
+        this.WebsiteHighLevel = 'WebsiteHighLevel' in params ? params.WebsiteHighLevel : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.VULTotal = 'VULTotal' in params ? params.VULTotal : null;
+        this.VULHighLevel = 'VULHighLevel' in params ? params.VULHighLevel : null;
+        this.CFGTotal = 'CFGTotal' in params ? params.CFGTotal : null;
+        this.CFGHighLevel = 'CFGHighLevel' in params ? params.CFGHighLevel : null;
+        this.ServerTotal = 'ServerTotal' in params ? params.ServerTotal : null;
+        this.ServerHighLevel = 'ServerHighLevel' in params ? params.ServerHighLevel : null;
+        this.HostBaseLineRiskTotal = 'HostBaseLineRiskTotal' in params ? params.HostBaseLineRiskTotal : null;
+        this.HostBaseLineRiskHighLevel = 'HostBaseLineRiskHighLevel' in params ? params.HostBaseLineRiskHighLevel : null;
+        this.PodBaseLineRiskTotal = 'PodBaseLineRiskTotal' in params ? params.PodBaseLineRiskTotal : null;
+        this.PodBaseLineRiskHighLevel = 'PodBaseLineRiskHighLevel' in params ? params.PodBaseLineRiskHighLevel : null;
+
+    }
+}
+
+/**
  * DescribeVULRiskAdvanceCFGList response structure.
  * @class
  */
@@ -318,24 +689,32 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * Advanced weak password check configuration
+ * Access key asset Alarm information.
  * @class
  */
-class TaskCenterWeakPwdRiskInputParam extends  AbstractModel {
+class AccessKeyAlarmInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Check item ID
+         * Alarm type/risktype.
+Alarm type:.
+Abnormal calls.
+Leakage detection.
+2 custom.
+
+Risk type:.
+Configuration risk.
+Custom risk.
          * @type {number || null}
          */
-        this.CheckItemId = null;
+        this.Type = null;
 
         /**
-         * Whether to enable. `0`: no, `1`: yes.
+         * Alarm count/number of risks.
          * @type {number || null}
          */
-        this.Enable = null;
+        this.Count = null;
 
     }
 
@@ -346,8 +725,48 @@ class TaskCenterWeakPwdRiskInputParam extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CheckItemId = 'CheckItemId' in params ? params.CheckItemId : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
+ * DescribeRepositoryImageAssets request structure.
+ * @class
+ */
+class DescribeRepositoryImageAssetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filters
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
 
     }
 }
@@ -400,30 +819,30 @@ class DescribeOrganizationUserInfoRequest extends  AbstractModel {
 }
 
 /**
- * ModifyRiskCenterRiskStatus request structure.
+ * UpdateAccessKeyAlarmStatus response structure.
  * @class
  */
-class ModifyRiskCenterRiskStatusRequest extends  AbstractModel {
+class UpdateAccessKeyAlarmStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Data of risk assets
-         * @type {Array.<RiskCenterStatusKey> || null}
-         */
-        this.RiskStatusKeys = null;
-
-        /**
-         * Specify how you want to change the risk status. `1`: Change to Handled, `2`: Change to Ignored; `3`: Remove from Handled; `4`: Remove from Ignored
+         * 0: Success; 1: Failure
          * @type {number || null}
          */
-        this.Status = null;
+        this.Code = null;
 
         /**
-         * Risk type. `0`: Port risk; `1`: Vulnerability; `2`: Weak password; `3`: Website content risk; `4`: Configuration risk; `5`: Risk services
-         * @type {number || null}
+         * Error message
+         * @type {string || null}
          */
-        this.Type = null;
+        this.Msg = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -434,17 +853,44 @@ class ModifyRiskCenterRiskStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.RiskStatusKeys) {
-            this.RiskStatusKeys = new Array();
-            for (let z in params.RiskStatusKeys) {
-                let obj = new RiskCenterStatusKey();
-                obj.deserialize(params.RiskStatusKeys[z]);
-                this.RiskStatusKeys.push(obj);
-            }
+    }
+}
+
+/**
+ * Filter condition
+ * @class
+ */
+class FilterDataObject extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * Filter name
+         * @type {string || null}
+         */
+        this.Text = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Type = 'Type' in params ? params.Type : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Text = 'Text' in params ? params.Text : null;
 
     }
 }
@@ -473,6 +919,34 @@ class ReportItemKey extends  AbstractModel {
             return;
         }
         this.TaskLogList = 'TaskLogList' in params ? params.TaskLogList : null;
+
+    }
+}
+
+/**
+ * CreateAccessKeySyncTask request structure.
+ * @class
+ */
+class CreateAccessKeySyncTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
 
     }
 }
@@ -914,6 +1388,303 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
+ * Emergency vulnerability basic data.
+ * @class
+ */
+class VULBaseInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Risk level.
+High - high risk, middle - medium risk, low - low risk, info - Note.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Component.
+         * @type {string || null}
+         */
+        this.Component = null;
+
+        /**
+         * Release date.
+         * @type {string || null}
+         */
+        this.PublishTime = null;
+
+        /**
+         * Last scan time
+         * @type {string || null}
+         */
+        this.LastScanTime = null;
+
+        /**
+         * Number of Affected Assets
+         * @type {number || null}
+         */
+        this.AffectAssetCount = null;
+
+        /**
+         * Risk ID
+         * @type {string || null}
+         */
+        this.RiskId = null;
+
+        /**
+         * Vulnerability type.
+         * @type {string || null}
+         */
+        this.VULType = null;
+
+        /**
+         * Vulnerability name
+         * @type {string || null}
+         */
+        this.VULName = null;
+
+        /**
+         * cve
+         * @type {string || null}
+         */
+        this.CVE = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Describe = null;
+
+        /**
+         * Vulnerability Payload
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+        /**
+         * Vulnerability impact component.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * Technology reference.
+         * @type {string || null}
+         */
+        this.References = null;
+
+        /**
+         * Vulnerability impact version.
+         * @type {string || null}
+         */
+        this.AppVersion = null;
+
+        /**
+         * Risks.
+         * @type {string || null}
+         */
+        this.VULURL = null;
+
+        /**
+         * User Nickname
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Nick = null;
+
+        /**
+         * User appid.
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * User UIN
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Fixing suggestion
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Fix = null;
+
+        /**
+         * Emergency Vulnerability Type. 1-Emergency Vulnerability; 0-Non-emergency Vulnerability.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EMGCVulType = null;
+
+        /**
+         * CVSS score
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CVSS = null;
+
+        /**
+         * Attack intensity.
+0/1/2/3 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AttackHeat = null;
+
+        /**
+         * Detection status 0 unscanned 1 scan in progress 2 scan complete.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ScanStatus = null;
+
+        /**
+         * 1/0 whether compulsory.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsSuggest = null;
+
+        /**
+         * Tag.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.VulTag = null;
+
+        /**
+         * Support products: "cfw_waf_virtual", "cwp_detect", "cwp_defense", "cwp_fix" (comma-separated).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SupportProduct = null;
+
+        /**
+         * Vulnerability detection task id.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Primary key
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Index = null;
+
+        /**
+         * Vulnerability id old version.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PcmgrID = null;
+
+        /**
+         * Vulnerability id new version.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TvdID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Component = 'Component' in params ? params.Component : null;
+        this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.AffectAssetCount = 'AffectAssetCount' in params ? params.AffectAssetCount : null;
+        this.RiskId = 'RiskId' in params ? params.RiskId : null;
+        this.VULType = 'VULType' in params ? params.VULType : null;
+        this.VULName = 'VULName' in params ? params.VULName : null;
+        this.CVE = 'CVE' in params ? params.CVE : null;
+        this.Describe = 'Describe' in params ? params.Describe : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.References = 'References' in params ? params.References : null;
+        this.AppVersion = 'AppVersion' in params ? params.AppVersion : null;
+        this.VULURL = 'VULURL' in params ? params.VULURL : null;
+        this.Nick = 'Nick' in params ? params.Nick : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Fix = 'Fix' in params ? params.Fix : null;
+        this.EMGCVulType = 'EMGCVulType' in params ? params.EMGCVulType : null;
+        this.CVSS = 'CVSS' in params ? params.CVSS : null;
+        this.AttackHeat = 'AttackHeat' in params ? params.AttackHeat : null;
+        this.ScanStatus = 'ScanStatus' in params ? params.ScanStatus : null;
+        this.IsSuggest = 'IsSuggest' in params ? params.IsSuggest : null;
+        this.VulTag = 'VulTag' in params ? params.VulTag : null;
+        this.SupportProduct = 'SupportProduct' in params ? params.SupportProduct : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Index = 'Index' in params ? params.Index : null;
+        this.PcmgrID = 'PcmgrID' in params ? params.PcmgrID : null;
+        this.TvdID = 'TvdID' in params ? params.TvdID : null;
+
+    }
+}
+
+/**
+ * DescribeCallRecord response structure.
+ * @class
+ */
+class DescribeCallRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Invocation record list.
+         * @type {Array.<CallRecord> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Total number of records.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new CallRecord();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Details of a configuration risk
  * @class
  */
@@ -1077,270 +1848,21 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * Details of a vulnerability
+ * DescribeSubUserInfo request structure.
  * @class
  */
-class AssetViewVULRisk extends  AbstractModel {
+class DescribeSubUserInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Affected assets
-         * @type {string || null}
+         * Member ID of the group account
+         * @type {Array.<string> || null}
          */
-        this.AffectAsset = null;
+        this.MemberId = null;
 
         /**
-         * Risk level
-         * @type {string || null}
-         */
-        this.Level = null;
-
-        /**
-         * Asset type
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * Components
-         * @type {string || null}
-         */
-        this.Component = null;
-
-        /**
-         * Service
-         * @type {string || null}
-         */
-        this.Service = null;
-
-        /**
-         * Last detected 
-         * @type {string || null}
-         */
-        this.RecentTime = null;
-
-        /**
-         * First detected
-         * @type {string || null}
-         */
-        this.FirstTime = null;
-
-        /**
-         * Status of the risk. `0`: Not handled, `1`: Handled; `2`: Ignored
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Unique ID of the asset
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * Frontend index
-         * @type {string || null}
-         */
-        this.Index = null;
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Instance name
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * User `appid`
-         * @type {string || null}
-         */
-        this.AppId = null;
-
-        /**
-         * User name.
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Nick = null;
-
-        /**
-         * User `uin`
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-        /**
-         * Vulnerability type
-         * @type {string || null}
-         */
-        this.VULType = null;
-
-        /**
-         * Port
-         * @type {string || null}
-         */
-        this.Port = null;
-
-        /**
-         * Description
-         * @type {string || null}
-         */
-        this.Describe = null;
-
-        /**
-         * Components affected by the vulnerability 
-         * @type {string || null}
-         */
-        this.AppName = null;
-
-        /**
-         * Reference information about the vulnerability
-         * @type {string || null}
-         */
-        this.References = null;
-
-        /**
-         * Version
-         * @type {string || null}
-         */
-        this.AppVersion = null;
-
-        /**
-         * Vulnerability URL
-         * @type {string || null}
-         */
-        this.VULURL = null;
-
-        /**
-         * Vulnerability name
-         * @type {string || null}
-         */
-        this.VULName = null;
-
-        /**
-         * CVE number
-         * @type {string || null}
-         */
-        this.CVE = null;
-
-        /**
-         * Fix suggestion
-         * @type {string || null}
-         */
-        this.Fix = null;
-
-        /**
-         * POC ID
-         * @type {string || null}
-         */
-        this.POCId = null;
-
-        /**
-         * Source of the task
-         * @type {string || null}
-         */
-        this.From = null;
-
-        /**
-         * CWPP edition
-         * @type {number || null}
-         */
-        this.CWPVersion = null;
-
-        /**
-         * Whether it can be fixed 
-         * @type {boolean || null}
-         */
-        this.IsSupportRepair = null;
-
-        /**
-         * Whether it can be detected
-         * @type {boolean || null}
-         */
-        this.IsSupportDetect = null;
-
-        /**
-         * Instance UUID
-         * @type {string || null}
-         */
-        this.InstanceUUID = null;
-
-        /**
-         * Pay load
-         * @type {string || null}
-         */
-        this.Payload = null;
-
-        /**
-         * Whether it's an emergency vulnerability. Values: `1` (emergency vulnerability); `0` (non-emergency vulnerability
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.EMGCVulType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AffectAsset = 'AffectAsset' in params ? params.AffectAsset : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.Component = 'Component' in params ? params.Component : null;
-        this.Service = 'Service' in params ? params.Service : null;
-        this.RecentTime = 'RecentTime' in params ? params.RecentTime : null;
-        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Index = 'Index' in params ? params.Index : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.AppId = 'AppId' in params ? params.AppId : null;
-        this.Nick = 'Nick' in params ? params.Nick : null;
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.VULType = 'VULType' in params ? params.VULType : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Describe = 'Describe' in params ? params.Describe : null;
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.References = 'References' in params ? params.References : null;
-        this.AppVersion = 'AppVersion' in params ? params.AppVersion : null;
-        this.VULURL = 'VULURL' in params ? params.VULURL : null;
-        this.VULName = 'VULName' in params ? params.VULName : null;
-        this.CVE = 'CVE' in params ? params.CVE : null;
-        this.Fix = 'Fix' in params ? params.Fix : null;
-        this.POCId = 'POCId' in params ? params.POCId : null;
-        this.From = 'From' in params ? params.From : null;
-        this.CWPVersion = 'CWPVersion' in params ? params.CWPVersion : null;
-        this.IsSupportRepair = 'IsSupportRepair' in params ? params.IsSupportRepair : null;
-        this.IsSupportDetect = 'IsSupportDetect' in params ? params.IsSupportDetect : null;
-        this.InstanceUUID = 'InstanceUUID' in params ? params.InstanceUUID : null;
-        this.Payload = 'Payload' in params ? params.Payload : null;
-        this.EMGCVulType = 'EMGCVulType' in params ? params.EMGCVulType : null;
-
-    }
-}
-
-/**
- * DescribeScanReportList request structure.
- * @class
- */
-class DescribeScanReportListRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Filter conditions
+         * Filter content
          * @type {Filter || null}
          */
         this.Filter = null;
@@ -1354,12 +1876,108 @@ class DescribeScanReportListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
 
         if (params.Filter) {
             let obj = new Filter();
             obj.deserialize(params.Filter)
             this.Filter = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeRiskCenterPortViewPortRiskList response structure.
+ * @class
+ */
+class DescribeRiskCenterPortViewPortRiskListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of entries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of port risks by assets
+         * @type {Array.<PortViewPortRisk> || null}
+         */
+        this.Data = null;
+
+        /**
+         * List of risk levels
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.LevelLists = null;
+
+        /**
+         * List of suggestions
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.SuggestionLists = null;
+
+        /**
+         * List of check source
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.FromLists = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new PortViewPortRisk();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+        if (params.LevelLists) {
+            this.LevelLists = new Array();
+            for (let z in params.LevelLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.LevelLists[z]);
+                this.LevelLists.push(obj);
+            }
+        }
+
+        if (params.SuggestionLists) {
+            this.SuggestionLists = new Array();
+            for (let z in params.SuggestionLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.SuggestionLists[z]);
+                this.SuggestionLists.push(obj);
+            }
+        }
+
+        if (params.FromLists) {
+            this.FromLists = new Array();
+            for (let z in params.FromLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.FromLists[z]);
+                this.FromLists.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1454,6 +2072,56 @@ class DescribeVpcAssetsResponse extends  AbstractModel {
                 this.AppIdList.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAccessKeyAlarm response structure.
+ * @class
+ */
+class DescribeAccessKeyAlarmResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Alarm list.
+         * @type {Array.<AccessKeyAlarm> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Total number.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new AccessKeyAlarm();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1598,103 +2266,36 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * List of advanced vulnerability scan configurations
+ * Port Risk Advanced Configuration Item
  * @class
  */
-class VULRiskAdvanceCFGList extends  AbstractModel {
+class PortRiskAdvanceCFGParamItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Risk ID
+         * Port Collection, separated by commas.
          * @type {string || null}
          */
-        this.RiskId = null;
+        this.PortSets = null;
 
         /**
-         * Vulnerability name
+         * Detection Item Type. 0-System-Defined; 1-User-Defined.
+         * @type {number || null}
+         */
+        this.CheckType = null;
+
+        /**
+         * Detection item description
          * @type {string || null}
          */
-        this.VULName = null;
+        this.Detail = null;
 
         /**
-         * Risk level
-         * @type {string || null}
-         */
-        this.RiskLevel = null;
-
-        /**
-         * Source of the check task
-         * @type {string || null}
-         */
-        this.CheckFrom = null;
-
-        /**
-         * Whether it's enabled. `1`: Enable; `0`: Disabled
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Enable/Disable. 1-Enable; 0-Disable.
          * @type {number || null}
          */
         this.Enable = null;
-
-        /**
-         * Risk type.
-         * @type {string || null}
-         */
-        this.VULType = null;
-
-        /**
-         * Affected versions
-         * @type {string || null}
-         */
-        this.ImpactVersion = null;
-
-        /**
-         * CVE number
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CVE = null;
-
-        /**
-         * Vulnerability tag
-         * @type {Array.<string> || null}
-         */
-        this.VULTag = null;
-
-        /**
-         * Fix solution
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.FixMethod = null;
-
-        /**
-         * Disclosure time
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ReleaseTime = null;
-
-        /**
-         * Whether it's an emergency vulnerability. Values: `1` (emergency vulnerability); `0` (non-emergency vulnerability
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.EMGCVulType = null;
-
-        /**
-         * Vulnerability description
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.VULDescribe = null;
-
-        /**
-         * Affected components
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ImpactComponent = null;
 
     }
 
@@ -1705,37 +2306,305 @@ Note: This field may return·null, indicating that no valid values can be obtain
         if (!params) {
             return;
         }
-        this.RiskId = 'RiskId' in params ? params.RiskId : null;
-        this.VULName = 'VULName' in params ? params.VULName : null;
-        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
-        this.CheckFrom = 'CheckFrom' in params ? params.CheckFrom : null;
+        this.PortSets = 'PortSets' in params ? params.PortSets : null;
+        this.CheckType = 'CheckType' in params ? params.CheckType : null;
+        this.Detail = 'Detail' in params ? params.Detail : null;
         this.Enable = 'Enable' in params ? params.Enable : null;
-        this.VULType = 'VULType' in params ? params.VULType : null;
-        this.ImpactVersion = 'ImpactVersion' in params ? params.ImpactVersion : null;
-        this.CVE = 'CVE' in params ? params.CVE : null;
-        this.VULTag = 'VULTag' in params ? params.VULTag : null;
-        this.FixMethod = 'FixMethod' in params ? params.FixMethod : null;
-        this.ReleaseTime = 'ReleaseTime' in params ? params.ReleaseTime : null;
-        this.EMGCVulType = 'EMGCVulType' in params ? params.EMGCVulType : null;
-        this.VULDescribe = 'VULDescribe' in params ? params.VULDescribe : null;
-        this.ImpactComponent = 'ImpactComponent' in params ? params.ImpactComponent : null;
 
     }
 }
 
 /**
- * StopRiskCenterTask request structure.
+ * Details of server assets
  * @class
  */
-class StopRiskCenterTaskRequest extends  AbstractModel {
+class AssetBaseInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of task IDs
-         * @type {Array.<TaskIdListKey> || null}
+         * 
+         * @type {string || null}
          */
-        this.TaskIdList = null;
+        this.VpcId = null;
+
+        /**
+         * vpc-name
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * Asset name
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AssetName = null;
+
+        /**
+         * Operating system
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Os = null;
+
+        /**
+         * Public IP
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PublicIp = null;
+
+        /**
+         * Private IP
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PrivateIp = null;
+
+        /**
+         * Region
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Asset type
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AssetType = null;
+
+        /**
+         * Asset ID
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * Total number of accounts
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AccountNum = null;
+
+        /**
+         * Number of ports
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PortNum = null;
+
+        /**
+         * Number of processes
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProcessNum = null;
+
+        /**
+         * Numbernumb of software applications
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SoftApplicationNum = null;
+
+        /**
+         * Number of databases
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DatabaseNum = null;
+
+        /**
+         * Number of web applications
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.WebApplicationNum = null;
+
+        /**
+         * Number of services
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ServiceNum = null;
+
+        /**
+         * Number of web frameworks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.WebFrameworkNum = null;
+
+        /**
+         * Number of websites
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.WebSiteNum = null;
+
+        /**
+         * Number of JAR packages
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.JarPackageNum = null;
+
+        /**
+         * Number of enabled services
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StartServiceNum = null;
+
+        /**
+         * Number of scheduled tasks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ScheduledTaskNum = null;
+
+        /**
+         * Number of environment variables
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EnvironmentVariableNum = null;
+
+        /**
+         * Number of kernel modules
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.KernelModuleNum = null;
+
+        /**
+         * Number of system installation packages
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SystemInstallationPackageNum = null;
+
+        /**
+         * Remaining service validity in days
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SurplusProtectDay = null;
+
+        /**
+         * Whether the CWPP agent is installed. Values: `1` (installed) and `0` (not installed)
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CWPStatus = null;
+
+        /**
+         * Tags
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
+        /**
+         * Protection level
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProtectLevel = null;
+
+        /**
+         * Usage of CWPP service in days
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProtectedDay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.AssetName = 'AssetName' in params ? params.AssetName : null;
+        this.Os = 'Os' in params ? params.Os : null;
+        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.PrivateIp = 'PrivateIp' in params ? params.PrivateIp : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.AccountNum = 'AccountNum' in params ? params.AccountNum : null;
+        this.PortNum = 'PortNum' in params ? params.PortNum : null;
+        this.ProcessNum = 'ProcessNum' in params ? params.ProcessNum : null;
+        this.SoftApplicationNum = 'SoftApplicationNum' in params ? params.SoftApplicationNum : null;
+        this.DatabaseNum = 'DatabaseNum' in params ? params.DatabaseNum : null;
+        this.WebApplicationNum = 'WebApplicationNum' in params ? params.WebApplicationNum : null;
+        this.ServiceNum = 'ServiceNum' in params ? params.ServiceNum : null;
+        this.WebFrameworkNum = 'WebFrameworkNum' in params ? params.WebFrameworkNum : null;
+        this.WebSiteNum = 'WebSiteNum' in params ? params.WebSiteNum : null;
+        this.JarPackageNum = 'JarPackageNum' in params ? params.JarPackageNum : null;
+        this.StartServiceNum = 'StartServiceNum' in params ? params.StartServiceNum : null;
+        this.ScheduledTaskNum = 'ScheduledTaskNum' in params ? params.ScheduledTaskNum : null;
+        this.EnvironmentVariableNum = 'EnvironmentVariableNum' in params ? params.EnvironmentVariableNum : null;
+        this.KernelModuleNum = 'KernelModuleNum' in params ? params.KernelModuleNum : null;
+        this.SystemInstallationPackageNum = 'SystemInstallationPackageNum' in params ? params.SystemInstallationPackageNum : null;
+        this.SurplusProtectDay = 'SurplusProtectDay' in params ? params.SurplusProtectDay : null;
+        this.CWPStatus = 'CWPStatus' in params ? params.CWPStatus : null;
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
+        this.ProtectLevel = 'ProtectLevel' in params ? params.ProtectLevel : null;
+        this.ProtectedDay = 'ProtectedDay' in params ? params.ProtectedDay : null;
+
+    }
+}
+
+/**
+ * DescribeRepositoryImageAssets response structure.
+ * @class
+ */
+class DescribeRepositoryImageAssetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Repository Image List
+         * @type {Array.<RepositoryImageVO> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Total number.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Region List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.RegionList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1747,14 +2616,25 @@ class StopRiskCenterTaskRequest extends  AbstractModel {
             return;
         }
 
-        if (params.TaskIdList) {
-            this.TaskIdList = new Array();
-            for (let z in params.TaskIdList) {
-                let obj = new TaskIdListKey();
-                obj.deserialize(params.TaskIdList[z]);
-                this.TaskIdList.push(obj);
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new RepositoryImageVO();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
             }
         }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.RegionList) {
+            this.RegionList = new Array();
+            for (let z in params.RegionList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.RegionList[z]);
+                this.RegionList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2057,15 +2937,13 @@ class AssetTag extends  AbstractModel {
         super();
 
         /**
-         * Tag key. It supports alphanumeric characters and underscores (_).
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Tag Key, can be letters, digits, and underscores.
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * Tag value. It supports alphanumeric characters and underscores (_).
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Tag Value, can be letters, digits, and underscores.
          * @type {string || null}
          */
         this.TagValue = null;
@@ -2086,21 +2964,65 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * DescribeVULRiskAdvanceCFGList request structure.
+ * DescribeRiskCallRecord response structure.
  * @class
  */
-class DescribeVULRiskAdvanceCFGListRequest extends  AbstractModel {
+class DescribeRiskCallRecordResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID
-         * @type {string || null}
+         * Risk call record list.
+         * @type {Array.<RiskCallRecord> || null}
          */
-        this.TaskId = null;
+        this.Data = null;
 
         /**
-         * Filter conditions.
+         * Total number of records.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new RiskCallRecord();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeScanReportList request structure.
+ * @class
+ */
+class DescribeScanReportListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter conditions
          * @type {Filter || null}
          */
         this.Filter = null;
@@ -2114,7 +3036,6 @@ class DescribeVULRiskAdvanceCFGListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
         if (params.Filter) {
             let obj = new Filter();
@@ -2126,24 +3047,431 @@ class DescribeVULRiskAdvanceCFGListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRiskCenterAssetViewCFGRiskList request structure.
+ * List of IPs
  * @class
  */
-class DescribeRiskCenterAssetViewCFGRiskListRequest extends  AbstractModel {
+class IpAssetListVO extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter conditions
+         * Asset ID
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * Asset name
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AssetName = null;
+
+        /**
+         * Asset type
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AssetType = null;
+
+        /**
+         * Region
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * CFW status
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CFWStatus = null;
+
+        /**
+         * Asset creation time
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AssetCreateTime = null;
+
+        /**
+         * Public IP
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PublicIp = null;
+
+        /**
+         * Public IP type
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PublicIpType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC name
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * appid
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * User `uin`
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Name
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NickName = null;
+
+        /**
+         * Whether it's a critical asset
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsCore = null;
+
+        /**
+         * Whether it's a cloud asset
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsCloud = null;
+
+        /**
+         * Number of network attacks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Attack = null;
+
+        /**
+         * Number of network access requests
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Access = null;
+
+        /**
+         * Number of blocked attacks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Intercept = null;
+
+        /**
+         * Inbound bandwidth
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InBandwidth = null;
+
+        /**
+         * Outbound bandwidthtraffic peak bandwidth (bps)
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OutBandwidth = null;
+
+        /**
+         * Inbound traffic
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InFlow = null;
+
+        /**
+         * Outbound traffic
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OutFlow = null;
+
+        /**
+         * Last scan time
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastScanTime = null;
+
+        /**
+         * Port risks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PortRisk = null;
+
+        /**
+         * Vulnerabilities
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VulnerabilityRisk = null;
+
+        /**
+         * Configuration risks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ConfigurationRisk = null;
+
+        /**
+         * Scan tasks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ScanTask = null;
+
+        /**
+         * Weak passwords
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.WeakPassword = null;
+
+        /**
+         * Content risks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.WebContentRisk = null;
+
+        /**
+         * Tags
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
+        /**
+         * EIP ID
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AddressId = null;
+
+        /**
+         * Member ID
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Risk exposure
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RiskExposure = null;
+
+        /**
+         * Whether it's a newly-added asset. Values: `1` (Yes), `0` (No)
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsNewAsset = null;
+
+        /**
+         * Asset ownership verification status. `0`: Pending verification; `1`: Verified; `2`: Verifying; `3` and above: Verification failed
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VerifyStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.AssetName = 'AssetName' in params ? params.AssetName : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.CFWStatus = 'CFWStatus' in params ? params.CFWStatus : null;
+        this.AssetCreateTime = 'AssetCreateTime' in params ? params.AssetCreateTime : null;
+        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.PublicIpType = 'PublicIpType' in params ? params.PublicIpType : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.NickName = 'NickName' in params ? params.NickName : null;
+        this.IsCore = 'IsCore' in params ? params.IsCore : null;
+        this.IsCloud = 'IsCloud' in params ? params.IsCloud : null;
+        this.Attack = 'Attack' in params ? params.Attack : null;
+        this.Access = 'Access' in params ? params.Access : null;
+        this.Intercept = 'Intercept' in params ? params.Intercept : null;
+        this.InBandwidth = 'InBandwidth' in params ? params.InBandwidth : null;
+        this.OutBandwidth = 'OutBandwidth' in params ? params.OutBandwidth : null;
+        this.InFlow = 'InFlow' in params ? params.InFlow : null;
+        this.OutFlow = 'OutFlow' in params ? params.OutFlow : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.PortRisk = 'PortRisk' in params ? params.PortRisk : null;
+        this.VulnerabilityRisk = 'VulnerabilityRisk' in params ? params.VulnerabilityRisk : null;
+        this.ConfigurationRisk = 'ConfigurationRisk' in params ? params.ConfigurationRisk : null;
+        this.ScanTask = 'ScanTask' in params ? params.ScanTask : null;
+        this.WeakPassword = 'WeakPassword' in params ? params.WeakPassword : null;
+        this.WebContentRisk = 'WebContentRisk' in params ? params.WebContentRisk : null;
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
+        this.AddressId = 'AddressId' in params ? params.AddressId : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.RiskExposure = 'RiskExposure' in params ? params.RiskExposure : null;
+        this.IsNewAsset = 'IsNewAsset' in params ? params.IsNewAsset : null;
+        this.VerifyStatus = 'VerifyStatus' in params ? params.VerifyStatus : null;
+
+    }
+}
+
+/**
+ * DescribeClusterAssets request structure.
+ * @class
+ */
+class DescribeClusterAssetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filter.
          * @type {Filter || null}
          */
         this.Filter = null;
 
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+    }
+}
+
+/**
+ * Advanced weak password check configuration
+ * @class
+ */
+class TaskCenterWeakPwdRiskInputParam extends  AbstractModel {
+    constructor(){
+        super();
+
         /**
-         * Asset tags
-         * @type {Array.<AssetTag> || null}
+         * Check item ID
+         * @type {number || null}
          */
-        this.Tags = null;
+        this.CheckItemId = null;
+
+        /**
+         * Whether to enable. `0`: no, `1`: yes.
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CheckItemId = 'CheckItemId' in params ? params.CheckItemId : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+
+    }
+}
+
+/**
+ * DescribeVULRiskDetail response structure.
+ * @class
+ */
+class DescribeVULRiskDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Security product support.
+         * @type {Array.<ServiceSupport> || null}
+         */
+        this.ServiceSupport = null;
+
+        /**
+         * Vulnerability trends.
+         * @type {Array.<VulTrend> || null}
+         */
+        this.VulTrend = null;
+
+        /**
+         * Vulnerability supplementary information.
+         * @type {VULRiskInfo || null}
+         */
+        this.VulData = null;
+
+        /**
+         * Assistant q&a id.
+         * @type {string || null}
+         */
+        this.QuestionId = null;
+
+        /**
+         * Session ID
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2155,20 +3483,32 @@ class DescribeRiskCenterAssetViewCFGRiskListRequest extends  AbstractModel {
             return;
         }
 
-        if (params.Filter) {
-            let obj = new Filter();
-            obj.deserialize(params.Filter)
-            this.Filter = obj;
-        }
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new AssetTag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
+        if (params.ServiceSupport) {
+            this.ServiceSupport = new Array();
+            for (let z in params.ServiceSupport) {
+                let obj = new ServiceSupport();
+                obj.deserialize(params.ServiceSupport[z]);
+                this.ServiceSupport.push(obj);
             }
         }
+
+        if (params.VulTrend) {
+            this.VulTrend = new Array();
+            for (let z in params.VulTrend) {
+                let obj = new VulTrend();
+                obj.deserialize(params.VulTrend[z]);
+                this.VulTrend.push(obj);
+            }
+        }
+
+        if (params.VulData) {
+            let obj = new VULRiskInfo();
+            obj.deserialize(params.VulData)
+            this.VulData = obj;
+        }
+        this.QuestionId = 'QuestionId' in params ? params.QuestionId : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2222,6 +3562,205 @@ class DescribeDomainAssetsRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyRiskCenterScanTask response structure.
+ * @class
+ */
+class ModifyRiskCenterScanTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 0: Modification succeeded; others: Failed; -1: Unauthenticated assets exist.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Unauthenticated Asset List
+         * @type {Array.<string> || null}
+         */
+        this.UnAuthAsset = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.UnAuthAsset = 'UnAuthAsset' in params ? params.UnAuthAsset : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNICAssets request structure.
+ * @class
+ */
+class DescribeNICAssetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filter parameters.
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeRiskCenterWebsiteRiskList response structure.
+ * @class
+ */
+class DescribeRiskCenterWebsiteRiskListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of entries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of content risks
+         * @type {Array.<WebsiteRisk> || null}
+         */
+        this.Data = null;
+
+        /**
+         * List of risk handling status
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.StatusLists = null;
+
+        /**
+         * List of risk levels
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.LevelLists = null;
+
+        /**
+         * List of asset types
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.InstanceTypeLists = null;
+
+        /**
+         * List of risk types
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.DetectEngineLists = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new WebsiteRisk();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+        if (params.StatusLists) {
+            this.StatusLists = new Array();
+            for (let z in params.StatusLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.StatusLists[z]);
+                this.StatusLists.push(obj);
+            }
+        }
+
+        if (params.LevelLists) {
+            this.LevelLists = new Array();
+            for (let z in params.LevelLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.LevelLists[z]);
+                this.LevelLists.push(obj);
+            }
+        }
+
+        if (params.InstanceTypeLists) {
+            this.InstanceTypeLists = new Array();
+            for (let z in params.InstanceTypeLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.InstanceTypeLists[z]);
+                this.InstanceTypeLists.push(obj);
+            }
+        }
+
+        if (params.DetectEngineLists) {
+            this.DetectEngineLists = new Array();
+            for (let z in params.DetectEngineLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.DetectEngineLists[z]);
+                this.DetectEngineLists.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Tags
  * @class
  */
@@ -2257,128 +3796,48 @@ class Tag extends  AbstractModel {
 }
 
 /**
- * Details of a content risk
+ * Alarm count for access key.
  * @class
  */
-class WebsiteRisk extends  AbstractModel {
+class AccessKeyAlarmCount extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Affected assets
-         * @type {string || null}
-         */
-        this.AffectAsset = null;
-
-        /**
-         * Risk level
-         * @type {string || null}
-         */
-        this.Level = null;
-
-        /**
-         * Last detected
-         * @type {string || null}
-         */
-        this.RecentTime = null;
-
-        /**
-         * First detected
-         * @type {string || null}
-         */
-        this.FirstTime = null;
-
-        /**
-         * Status of the risk. `0`: Not handled, `1`: Handled; `2`: Ignored
+         * Access key ID.
          * @type {number || null}
          */
-        this.Status = null;
+        this.ID = null;
 
         /**
-         * Unique ID of the asset
+         * Access key.
          * @type {string || null}
          */
-        this.Id = null;
+        this.AccessKey = null;
 
         /**
-         * Frontend index
-         * @type {string || null}
+         * Alarm count.
+         * @type {number || null}
          */
-        this.Index = null;
+        this.AlarmCount = null;
 
         /**
-         * Instance ID
-         * @type {string || null}
+         * Security credentials status. valid values: 0 (disabled), 1 (enabled), 2 (deleted).
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.AccessKeyStatus = null;
 
         /**
-         * Instance name
+         * AK creation time.
          * @type {string || null}
          */
-        this.InstanceName = null;
+        this.AccessKeyCreateTime = null;
 
         /**
-         * User `appid`
+         * AK last usage time. returns "-" if never used.
          * @type {string || null}
          */
-        this.AppId = null;
-
-        /**
-         * User name.
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Nick = null;
-
-        /**
-         * User `uin`
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-        /**
-         * URL of the risk
-         * @type {string || null}
-         */
-        this.URL = null;
-
-        /**
-         * URL of the risk file
-         * @type {string || null}
-         */
-        this.URLPath = null;
-
-        /**
-         * Instance type
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * Check type.
-         * @type {string || null}
-         */
-        this.DetectEngine = null;
-
-        /**
-         * Result description.
-         * @type {string || null}
-         */
-        this.ResultDescribe = null;
-
-        /**
-         * Source URL
-         * @type {string || null}
-         */
-        this.SourceURL = null;
-
-        /**
-         * Source file URL
-         * @type {string || null}
-         */
-        this.SourceURLPath = null;
+        this.LastAccessTime = null;
 
     }
 
@@ -2389,25 +3848,615 @@ Note: This field may return·null, indicating that no valid values can be obtain
         if (!params) {
             return;
         }
-        this.AffectAsset = 'AffectAsset' in params ? params.AffectAsset : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.AlarmCount = 'AlarmCount' in params ? params.AlarmCount : null;
+        this.AccessKeyStatus = 'AccessKeyStatus' in params ? params.AccessKeyStatus : null;
+        this.AccessKeyCreateTime = 'AccessKeyCreateTime' in params ? params.AccessKeyCreateTime : null;
+        this.LastAccessTime = 'LastAccessTime' in params ? params.LastAccessTime : null;
+
+    }
+}
+
+/**
+ * DescribeRiskCenterCFGViewCFGRiskList request structure.
+ * @class
+ */
+class DescribeRiskCenterCFGViewCFGRiskListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filtered Content
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeAssetProcessList request structure.
+ * @class
+ */
+class DescribeAssetProcessListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filtered Content
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Pagination size.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting type
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sorting field.
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * Cloud service provider.
+         * @type {string || null}
+         */
+        this.Provider = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.Provider = 'Provider' in params ? params.Provider : null;
+
+    }
+}
+
+/**
+ * DescribeAssetProcessList response structure.
+ * @class
+ */
+class DescribeAssetProcessListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Process quantity.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Process list.
+         * @type {Array.<AssetProcessItem> || null}
+         */
+        this.AssetProcessList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AssetProcessList) {
+            this.AssetProcessList = new Array();
+            for (let z in params.AssetProcessList) {
+                let obj = new AssetProcessItem();
+                obj.deserialize(params.AssetProcessList[z]);
+                this.AssetProcessList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAbnormalCallRecord request structure.
+ * @class
+ */
+class DescribeAbnormalCallRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Alarm rule ID.
+         * @type {number || null}
+         */
+        this.AlarmRuleID = null;
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Access key.
+         * @type {string || null}
+         */
+        this.AccessKey = null;
+
+        /**
+         * Source IP of the call.
+         * @type {string || null}
+         */
+        this.SourceIP = null;
+
+        /**
+         * Filter.
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AlarmRuleID = 'AlarmRuleID' in params ? params.AlarmRuleID : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.SourceIP = 'SourceIP' in params ? params.SourceIP : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+    }
+}
+
+/**
+ * UpdateAccessKeyAlarmStatus request structure.
+ * @class
+ */
+class UpdateAccessKeyAlarmStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Status  0: unprocessed 1: fixed 2: ignored.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Alarm ID list.
+         * @type {Array.<number> || null}
+         */
+        this.AlarmIDList = null;
+
+        /**
+         * Risk ID list.
+         * @type {Array.<number> || null}
+         */
+        this.RiskIDList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.AlarmIDList = 'AlarmIDList' in params ? params.AlarmIDList : null;
+        this.RiskIDList = 'RiskIDList' in params ? params.RiskIDList : null;
+
+    }
+}
+
+/**
+ * DescribeCSIPRiskStatistics response structure.
+ * @class
+ */
+class DescribeCSIPRiskStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Asset Overview Data
+         * @type {CsipRiskCenterStatistics || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new CsipRiskCenterStatistics();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAccessKeyUserList request structure.
+ * @class
+ */
+class DescribeAccessKeyUserListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filter.
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+    }
+}
+
+/**
+ * Vulnerability Risk Objects from Vulnerability's Perspective
+ * @class
+ */
+class VULViewVULRiskData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Port.
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * Impact assets.
+         * @type {number || null}
+         */
+        this.NoHandleCount = null;
+
+        /**
+         * Risk level: low - low risk, high - high risk, middle - medium risk, info - note, extreme - critical.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Component.
+         * @type {string || null}
+         */
+        this.Component = null;
+
+        /**
+         * Latest Recognition Time
+         * @type {string || null}
+         */
+        this.RecentTime = null;
+
+        /**
+         * First Recognition Time
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * Number of Affected Assets
+         * @type {number || null}
+         */
+        this.AffectAssetCount = null;
+
+        /**
+         * Risk ID
+         * @type {string || null}
+         */
+        this.RiskId = null;
+
+        /**
+         * Scan Source. See API Return Enumeration Type for details.
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * Front-end Index
+         * @type {string || null}
+         */
+        this.Index = null;
+
+        /**
+         * Vulnerability type.
+         * @type {string || null}
+         */
+        this.VULType = null;
+
+        /**
+         * Vulnerability name
+         * @type {string || null}
+         */
+        this.VULName = null;
+
+        /**
+         * cve
+         * @type {string || null}
+         */
+        this.CVE = null;
+
+        /**
+         * Vulnerability Payload
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+        /**
+         * Vulnerability impact component.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * Vulnerability impact version.
+         * @type {string || null}
+         */
+        this.AppVersion = null;
+
+        /**
+         * Risks.
+         * @type {string || null}
+         */
+        this.VULURL = null;
+
+        /**
+         * User Nickname
+         * @type {string || null}
+         */
+        this.Nick = null;
+
+        /**
+         * User appid.
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * User UIN
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Emergency Vulnerability Type. 1-Emergency Vulnerability; 0-Non-emergency Vulnerability.
+         * @type {number || null}
+         */
+        this.EMGCVulType = null;
+
+        /**
+         * CVSS score
+         * @type {number || null}
+         */
+        this.CVSS = null;
+
+        /**
+         * PCMGRId
+         * @type {string || null}
+         */
+        this.PCMGRId = null;
+
+        /**
+         * Vulnerability tag. during searching, emergency mandatory parameter VulTag=SuggestRepair/EMGCVul.
+         * @type {Array.<string> || null}
+         */
+        this.VulTag = null;
+
+        /**
+         * Vulnerability disclosure time.
+         * @type {string || null}
+         */
+        this.DisclosureTime = null;
+
+        /**
+         * Attack intensity.
+         * @type {number || null}
+         */
+        this.AttackHeat = null;
+
+        /**
+         * Whether a mandatory vulnerability: 1 - yes; 0 - no.
+         * @type {number || null}
+         */
+        this.IsSuggest = null;
+
+        /**
+         * Disposal task id.
+         * @type {string || null}
+         */
+        this.HandleTaskId = null;
+
+        /**
+         * Engine source.
+         * @type {string || null}
+         */
+        this.EngineSource = null;
+
+        /**
+         * New vulnerability risk id.
+         * @type {string || null}
+         */
+        this.VulRiskId = null;
+
+        /**
+         * New version vulnerability id.
+         * @type {string || null}
+         */
+        this.TvdID = null;
+
+        /**
+         * Is it possible to perform a one-click physical examination. valid values: 1-yes, 0-not allowed.
+         * @type {number || null}
+         */
+        this.IsOneClick = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Port = 'Port' in params ? params.Port : null;
+        this.NoHandleCount = 'NoHandleCount' in params ? params.NoHandleCount : null;
         this.Level = 'Level' in params ? params.Level : null;
+        this.Component = 'Component' in params ? params.Component : null;
         this.RecentTime = 'RecentTime' in params ? params.RecentTime : null;
         this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Id = 'Id' in params ? params.Id : null;
+        this.AffectAssetCount = 'AffectAssetCount' in params ? params.AffectAssetCount : null;
+        this.RiskId = 'RiskId' in params ? params.RiskId : null;
+        this.From = 'From' in params ? params.From : null;
         this.Index = 'Index' in params ? params.Index : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.VULType = 'VULType' in params ? params.VULType : null;
+        this.VULName = 'VULName' in params ? params.VULName : null;
+        this.CVE = 'CVE' in params ? params.CVE : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.AppVersion = 'AppVersion' in params ? params.AppVersion : null;
+        this.VULURL = 'VULURL' in params ? params.VULURL : null;
         this.Nick = 'Nick' in params ? params.Nick : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
         this.Uin = 'Uin' in params ? params.Uin : null;
-        this.URL = 'URL' in params ? params.URL : null;
-        this.URLPath = 'URLPath' in params ? params.URLPath : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.DetectEngine = 'DetectEngine' in params ? params.DetectEngine : null;
-        this.ResultDescribe = 'ResultDescribe' in params ? params.ResultDescribe : null;
-        this.SourceURL = 'SourceURL' in params ? params.SourceURL : null;
-        this.SourceURLPath = 'SourceURLPath' in params ? params.SourceURLPath : null;
+        this.EMGCVulType = 'EMGCVulType' in params ? params.EMGCVulType : null;
+        this.CVSS = 'CVSS' in params ? params.CVSS : null;
+        this.PCMGRId = 'PCMGRId' in params ? params.PCMGRId : null;
+        this.VulTag = 'VulTag' in params ? params.VulTag : null;
+        this.DisclosureTime = 'DisclosureTime' in params ? params.DisclosureTime : null;
+        this.AttackHeat = 'AttackHeat' in params ? params.AttackHeat : null;
+        this.IsSuggest = 'IsSuggest' in params ? params.IsSuggest : null;
+        this.HandleTaskId = 'HandleTaskId' in params ? params.HandleTaskId : null;
+        this.EngineSource = 'EngineSource' in params ? params.EngineSource : null;
+        this.VulRiskId = 'VulRiskId' in params ? params.VulRiskId : null;
+        this.TvdID = 'TvdID' in params ? params.TvdID : null;
+        this.IsOneClick = 'IsOneClick' in params ? params.IsOneClick : null;
 
     }
 }
@@ -2533,6 +4582,248 @@ class DescribeScanTaskListRequest extends  AbstractModel {
 }
 
 /**
+ * Vulnerability impact component information.
+ * @class
+ */
+class VulImpactComponentInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Component name
+         * @type {string || null}
+         */
+        this.Component = null;
+
+        /**
+         * Version name.
+         * @type {string || null}
+         */
+        this.Version = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Component = 'Component' in params ? params.Component : null;
+        this.Version = 'Version' in params ? params.Version : null;
+
+    }
+}
+
+/**
+ * CreateAccessKeyCheckTask response structure.
+ * @class
+ */
+class CreateAccessKeyCheckTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 0 indicates success. 1 indicates failure.
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * Error message
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Subnet assets
+ * @class
+ */
+class SubnetAsset extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * appid
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * UIN
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Asset ID
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * Asset name
+         * @type {string || null}
+         */
+        this.AssetName = null;
+
+        /**
+         * Region
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC name
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * Tags
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
+        /**
+         * User name
+         * @type {string || null}
+         */
+        this.Nick = null;
+
+        /**
+         * CIDR block
+         * @type {string || null}
+         */
+        this.CIDR = null;
+
+        /**
+         * Availability zone
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Number of CVMs
+         * @type {number || null}
+         */
+        this.CVM = null;
+
+        /**
+         * Number of available IPs
+         * @type {number || null}
+         */
+        this.AvailableIp = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Configuration risks
+         * @type {number || null}
+         */
+        this.ConfigureRisk = null;
+
+        /**
+         * Number of tasks.
+         * @type {number || null}
+         */
+        this.ScanTask = null;
+
+        /**
+         * Last scan time
+         * @type {string || null}
+         */
+        this.LastScanTime = null;
+
+        /**
+         * Whether it's a critical asset
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsCore = null;
+
+        /**
+         * Whether it's a newly-added asset. Values: `1` (Yes), `0` (No)
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsNewAsset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.AssetName = 'AssetName' in params ? params.AssetName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
+        this.Nick = 'Nick' in params ? params.Nick : null;
+        this.CIDR = 'CIDR' in params ? params.CIDR : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.CVM = 'CVM' in params ? params.CVM : null;
+        this.AvailableIp = 'AvailableIp' in params ? params.AvailableIp : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ConfigureRisk = 'ConfigureRisk' in params ? params.ConfigureRisk : null;
+        this.ScanTask = 'ScanTask' in params ? params.ScanTask : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.IsCore = 'IsCore' in params ? params.IsCore : null;
+        this.IsNewAsset = 'IsNewAsset' in params ? params.IsNewAsset : null;
+
+    }
+}
+
+/**
  * DescribeOrganizationInfo request structure.
  * @class
  */
@@ -2589,48 +4880,379 @@ class TaskIdListKey extends  AbstractModel {
 }
 
 /**
- * DescribeRiskCenterWebsiteRiskList response structure.
+ * Record details.
  * @class
  */
-class DescribeRiskCenterWebsiteRiskListResponse extends  AbstractModel {
+class UserCallRecord extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of entries
+         * Source IP of the call.
+         * @type {string || null}
+         */
+        this.SourceIP = null;
+
+        /**
+         * Invocation type.
+0: console invocation.
+1:API
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.EventType = null;
 
         /**
-         * List of content risks
-         * @type {Array.<WebsiteRisk> || null}
+         * Number of calls.
+         * @type {number || null}
          */
-        this.Data = null;
+        this.CallCount = null;
 
         /**
-         * List of risk handling status
-         * @type {Array.<FilterDataObject> || null}
+         * Error code.
+0: Successful
+         * @type {number || null}
          */
-        this.StatusLists = null;
+        this.Code = null;
 
         /**
-         * List of risk levels
-         * @type {Array.<FilterDataObject> || null}
+         * First time call time.
+         * @type {string || null}
          */
-        this.LevelLists = null;
+        this.FirstCallTime = null;
 
         /**
-         * List of asset types
-         * @type {Array.<FilterDataObject> || null}
+         * Call time.
+         * @type {string || null}
          */
-        this.InstanceTypeLists = null;
+        this.LastCallTime = null;
 
         /**
-         * List of risk types
-         * @type {Array.<FilterDataObject> || null}
+         * Source IP of the call remark.
+         * @type {string || null}
          */
-        this.DetectEngineLists = null;
+        this.SourceIPRemark = null;
+
+        /**
+         * Source IP region of the call.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * User/Role name.
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Aggregate date.
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * appid
+         * @type {number || null}
+         */
+        this.AppID = null;
+
+        /**
+         * Carrier.
+         * @type {string || null}
+         */
+        this.ISP = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceIP = 'SourceIP' in params ? params.SourceIP : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.CallCount = 'CallCount' in params ? params.CallCount : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.FirstCallTime = 'FirstCallTime' in params ? params.FirstCallTime : null;
+        this.LastCallTime = 'LastCallTime' in params ? params.LastCallTime : null;
+        this.SourceIPRemark = 'SourceIPRemark' in params ? params.SourceIPRemark : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.AppID = 'AppID' in params ? params.AppID : null;
+        this.ISP = 'ISP' in params ? params.ISP : null;
+
+    }
+}
+
+/**
+ * Gateway asset.
+ * @class
+ */
+class GateWayAsset extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * appid
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * uin
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Asset ID.
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * Asset name.
+         * @type {string || null}
+         */
+        this.AssetName = null;
+
+        /**
+         * Asset type.
+         * @type {string || null}
+         */
+        this.AssetType = null;
+
+        /**
+         * VPC IP
+         * @type {string || null}
+         */
+        this.PrivateIp = null;
+
+        /**
+         * Public IP address
+         * @type {string || null}
+         */
+        this.PublicIp = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * VPC id.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC Name
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * Tag.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
+        /**
+         * Outbound peak bandwidth.
+         * @type {string || null}
+         */
+        this.OutboundPeakBandwidth = null;
+
+        /**
+         * Inbound peak bandwidth.
+         * @type {string || null}
+         */
+        this.InboundPeakBandwidth = null;
+
+        /**
+         * Cumulative Outbound Traffic
+         * @type {string || null}
+         */
+        this.OutboundCumulativeFlow = null;
+
+        /**
+         * Cumulative Inbound Traffic
+         * @type {string || null}
+         */
+        this.InboundCumulativeFlow = null;
+
+        /**
+         * Network attack.
+         * @type {number || null}
+         */
+        this.NetworkAttack = null;
+
+        /**
+         * Expose ports.
+         * @type {number || null}
+         */
+        this.ExposedPort = null;
+
+        /**
+         * Exposed vulnerability.
+         * @type {number || null}
+         */
+        this.ExposedVUL = null;
+
+        /**
+         * Configuration risk.
+         * @type {number || null}
+         */
+        this.ConfigureRisk = null;
+
+        /**
+         * Creation time.
+
+
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Number of tasks.
+         * @type {number || null}
+         */
+        this.ScanTask = null;
+
+        /**
+         * Last scan time
+         * @type {string || null}
+         */
+        this.LastScanTime = null;
+
+        /**
+         * Nickname.
+         * @type {string || null}
+         */
+        this.Nick = null;
+
+        /**
+         * IPv6 address
+         * @type {string || null}
+         */
+        this.AddressIPV6 = null;
+
+        /**
+         * Core or Not
+         * @type {number || null}
+         */
+        this.IsCore = null;
+
+        /**
+         * Risk service exposure.
+         * @type {number || null}
+         */
+        this.RiskExposure = null;
+
+        /**
+         * New Asset or Not. 1: New
+         * @type {number || null}
+         */
+        this.IsNewAsset = null;
+
+        /**
+         * Gateway Status
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * TSE's Actual Gateway Region
+         * @type {string || null}
+         */
+        this.EngineRegion = null;
+
+        /**
+         * Weak password risk.
+         * @type {number || null}
+         */
+        this.WeakPasswordRisk = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.AssetName = 'AssetName' in params ? params.AssetName : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.PrivateIp = 'PrivateIp' in params ? params.PrivateIp : null;
+        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
+        this.OutboundPeakBandwidth = 'OutboundPeakBandwidth' in params ? params.OutboundPeakBandwidth : null;
+        this.InboundPeakBandwidth = 'InboundPeakBandwidth' in params ? params.InboundPeakBandwidth : null;
+        this.OutboundCumulativeFlow = 'OutboundCumulativeFlow' in params ? params.OutboundCumulativeFlow : null;
+        this.InboundCumulativeFlow = 'InboundCumulativeFlow' in params ? params.InboundCumulativeFlow : null;
+        this.NetworkAttack = 'NetworkAttack' in params ? params.NetworkAttack : null;
+        this.ExposedPort = 'ExposedPort' in params ? params.ExposedPort : null;
+        this.ExposedVUL = 'ExposedVUL' in params ? params.ExposedVUL : null;
+        this.ConfigureRisk = 'ConfigureRisk' in params ? params.ConfigureRisk : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ScanTask = 'ScanTask' in params ? params.ScanTask : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.Nick = 'Nick' in params ? params.Nick : null;
+        this.AddressIPV6 = 'AddressIPV6' in params ? params.AddressIPV6 : null;
+        this.IsCore = 'IsCore' in params ? params.IsCore : null;
+        this.RiskExposure = 'RiskExposure' in params ? params.RiskExposure : null;
+        this.IsNewAsset = 'IsNewAsset' in params ? params.IsNewAsset : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.EngineRegion = 'EngineRegion' in params ? params.EngineRegion : null;
+        this.WeakPasswordRisk = 'WeakPasswordRisk' in params ? params.WeakPasswordRisk : null;
+
+    }
+}
+
+/**
+ * CreateAccessKeySyncTask response structure.
+ * @class
+ */
+class CreateAccessKeySyncTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Initiate a sync task.
+         * @type {number || null}
+         */
+        this.TaskID = null;
+
+        /**
+         * 0: success; 1: failure.
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * Error message
+         * @type {string || null}
+         */
+        this.Msg = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2647,52 +5269,59 @@ class DescribeRiskCenterWebsiteRiskListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TaskID = 'TaskID' in params ? params.TaskID : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSourceIPAsset response structure.
+ * @class
+ */
+class DescribeSourceIPAssetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Access key asset list.
+         * @type {Array.<SourceIPAsset> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Total quantity.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
         if (params.Data) {
             this.Data = new Array();
             for (let z in params.Data) {
-                let obj = new WebsiteRisk();
+                let obj = new SourceIPAsset();
                 obj.deserialize(params.Data[z]);
                 this.Data.push(obj);
             }
         }
-
-        if (params.StatusLists) {
-            this.StatusLists = new Array();
-            for (let z in params.StatusLists) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.StatusLists[z]);
-                this.StatusLists.push(obj);
-            }
-        }
-
-        if (params.LevelLists) {
-            this.LevelLists = new Array();
-            for (let z in params.LevelLists) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.LevelLists[z]);
-                this.LevelLists.push(obj);
-            }
-        }
-
-        if (params.InstanceTypeLists) {
-            this.InstanceTypeLists = new Array();
-            for (let z in params.InstanceTypeLists) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.InstanceTypeLists[z]);
-                this.InstanceTypeLists.push(obj);
-            }
-        }
-
-        if (params.DetectEngineLists) {
-            this.DetectEngineLists = new Array();
-            for (let z in params.DetectEngineLists) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.DetectEngineLists[z]);
-                this.DetectEngineLists.push(obj);
-            }
-        }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2942,6 +5571,451 @@ class DescribeOrganizationUserInfoResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVULRiskDetail request structure.
+ * @class
+ */
+class DescribeVULRiskDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Risk id.
+         * @type {string || null}
+         */
+        this.RiskId = null;
+
+        /**
+         * pcMgrId
+         * @type {string || null}
+         */
+        this.PCMGRId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.RiskId = 'RiskId' in params ? params.RiskId : null;
+        this.PCMGRId = 'PCMGRId' in params ? params.PCMGRId : null;
+
+    }
+}
+
+/**
+ * Network interface card asset.
+ * @class
+ */
+class NICAsset extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * appid
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * uin
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Asset ID.
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * Asset name.
+         * @type {string || null}
+         */
+        this.AssetName = null;
+
+        /**
+         * Asset type.
+         * @type {string || null}
+         */
+        this.AssetType = null;
+
+        /**
+         * VPC IP
+         * @type {string || null}
+         */
+        this.PrivateIp = null;
+
+        /**
+         * Public IP address
+         * @type {string || null}
+         */
+        this.PublicIp = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * VPC id.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC Name
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * Tag.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
+        /**
+         * Outbound peak bandwidth.
+         * @type {string || null}
+         */
+        this.OutboundPeakBandwidth = null;
+
+        /**
+         * Inbound peak bandwidth.
+         * @type {string || null}
+         */
+        this.InboundPeakBandwidth = null;
+
+        /**
+         * Cumulative Outbound Traffic
+         * @type {string || null}
+         */
+        this.OutboundCumulativeFlow = null;
+
+        /**
+         * Cumulative Inbound Traffic
+         * @type {string || null}
+         */
+        this.InboundCumulativeFlow = null;
+
+        /**
+         * Network attack.
+         * @type {number || null}
+         */
+        this.NetworkAttack = null;
+
+        /**
+         * Expose ports.
+         * @type {number || null}
+         */
+        this.ExposedPort = null;
+
+        /**
+         * Exposed vulnerability.
+         * @type {number || null}
+         */
+        this.ExposedVUL = null;
+
+        /**
+         * Configuration risk.
+         * @type {number || null}
+         */
+        this.ConfigureRisk = null;
+
+        /**
+         * Creation time.
+
+
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Number of tasks.
+         * @type {number || null}
+         */
+        this.ScanTask = null;
+
+        /**
+         * Last scan time
+         * @type {string || null}
+         */
+        this.LastScanTime = null;
+
+        /**
+         * Nickname.
+         * @type {string || null}
+         */
+        this.Nick = null;
+
+        /**
+         * Core or Not
+         * @type {number || null}
+         */
+        this.IsCore = null;
+
+        /**
+         * New Asset or Not. 1: New
+         * @type {number || null}
+         */
+        this.IsNewAsset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.AssetName = 'AssetName' in params ? params.AssetName : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.PrivateIp = 'PrivateIp' in params ? params.PrivateIp : null;
+        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
+        this.OutboundPeakBandwidth = 'OutboundPeakBandwidth' in params ? params.OutboundPeakBandwidth : null;
+        this.InboundPeakBandwidth = 'InboundPeakBandwidth' in params ? params.InboundPeakBandwidth : null;
+        this.OutboundCumulativeFlow = 'OutboundCumulativeFlow' in params ? params.OutboundCumulativeFlow : null;
+        this.InboundCumulativeFlow = 'InboundCumulativeFlow' in params ? params.InboundCumulativeFlow : null;
+        this.NetworkAttack = 'NetworkAttack' in params ? params.NetworkAttack : null;
+        this.ExposedPort = 'ExposedPort' in params ? params.ExposedPort : null;
+        this.ExposedVUL = 'ExposedVUL' in params ? params.ExposedVUL : null;
+        this.ConfigureRisk = 'ConfigureRisk' in params ? params.ConfigureRisk : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ScanTask = 'ScanTask' in params ? params.ScanTask : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.Nick = 'Nick' in params ? params.Nick : null;
+        this.IsCore = 'IsCore' in params ? params.IsCore : null;
+        this.IsNewAsset = 'IsNewAsset' in params ? params.IsNewAsset : null;
+
+    }
+}
+
+/**
+ * Access key risk record.
+ * @class
+ */
+class AccessKeyRisk extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Risk name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Risk level.
+0 - unavailable 1 - Note 2 - low risk 3 - medium risk 4 - high risk 5 - critical.
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * Risk record ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Risk rule ID.
+         * @type {number || null}
+         */
+        this.RiskRuleID = null;
+
+        /**
+         * Risk type.
+Configuration risk.
+         * @type {number || null}
+         */
+        this.RiskType = null;
+
+        /**
+         * Access key.
+         * @type {string || null}
+         */
+        this.AccessKey = null;
+
+        /**
+         * Access key ID.
+         * @type {number || null}
+         */
+        this.AccessKeyID = null;
+
+        /**
+         * Access key remark.
+         * @type {string || null}
+         */
+        this.AccessKeyRemark = null;
+
+        /**
+         * Detection time of risk.
+         * @type {string || null}
+         */
+        this.RiskTime = null;
+
+        /**
+         * Risk status.
+0 - unprocessed 2 - ignored 3 - converged.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Risk Tag.
+         * @type {Array.<string> || null}
+         */
+        this.Tag = null;
+
+        /**
+         * Risk evidence.
+         * @type {string || null}
+         */
+        this.Evidence = null;
+
+        /**
+         * Risk description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Account associate Uin belonging to main account.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Nickname of the main account.
+         * @type {string || null}
+         */
+        this.Nickname = null;
+
+        /**
+         * Sub-Account Uin belonging to.
+         * @type {string || null}
+         */
+        this.SubUin = null;
+
+        /**
+         * Sub-Account nickname.
+         * @type {string || null}
+         */
+        this.SubNickname = null;
+
+        /**
+         * Account type.
+0 root account AK 1 sub-account AK.
+2 temporary key.
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Detection status.
+0: detected.
+1 indicates detecting.
+         * @type {number || null}
+         */
+        this.CheckStatus = null;
+
+        /**
+         * App ID
+         * @type {number || null}
+         */
+        this.AppID = null;
+
+        /**
+         * Query parameter corresponding to the risk.
+         * @type {string || null}
+         */
+        this.QueryParam = null;
+
+        /**
+         * Cloud type 0 for tencent cloud 4 for alibaba cloud.
+         * @type {number || null}
+         */
+        this.CloudType = null;
+
+        /**
+         * Related AK list, including AK name and remark.
+         * @type {Array.<AKInfo> || null}
+         */
+        this.RelatedAK = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.RiskRuleID = 'RiskRuleID' in params ? params.RiskRuleID : null;
+        this.RiskType = 'RiskType' in params ? params.RiskType : null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.AccessKeyID = 'AccessKeyID' in params ? params.AccessKeyID : null;
+        this.AccessKeyRemark = 'AccessKeyRemark' in params ? params.AccessKeyRemark : null;
+        this.RiskTime = 'RiskTime' in params ? params.RiskTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Evidence = 'Evidence' in params ? params.Evidence : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Nickname = 'Nickname' in params ? params.Nickname : null;
+        this.SubUin = 'SubUin' in params ? params.SubUin : null;
+        this.SubNickname = 'SubNickname' in params ? params.SubNickname : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.CheckStatus = 'CheckStatus' in params ? params.CheckStatus : null;
+        this.AppID = 'AppID' in params ? params.AppID : null;
+        this.QueryParam = 'QueryParam' in params ? params.QueryParam : null;
+        this.CloudType = 'CloudType' in params ? params.CloudType : null;
+
+        if (params.RelatedAK) {
+            this.RelatedAK = new Array();
+            for (let z in params.RelatedAK) {
+                let obj = new AKInfo();
+                obj.deserialize(params.RelatedAK[z]);
+                this.RelatedAK.push(obj);
+            }
+        }
 
     }
 }
@@ -3217,6 +6291,185 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
+ * Advanced task configuration
+ * @class
+ */
+class TaskAdvanceCFG extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Port Risk Advanced Configuration
+         * @type {Array.<PortRiskAdvanceCFGParamItem> || null}
+         */
+        this.PortRisk = null;
+
+        /**
+         * Advanced vulnerability scan configuration
+         * @type {Array.<TaskCenterVulRiskInputParam> || null}
+         */
+        this.VulRisk = null;
+
+        /**
+         * Advanced weak password check configuration
+         * @type {Array.<TaskCenterWeakPwdRiskInputParam> || null}
+         */
+        this.WeakPwdRisk = null;
+
+        /**
+         * Advanced configuration risk scan configuration
+         * @type {Array.<TaskCenterCFGRiskInputParam> || null}
+         */
+        this.CFGRisk = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PortRisk) {
+            this.PortRisk = new Array();
+            for (let z in params.PortRisk) {
+                let obj = new PortRiskAdvanceCFGParamItem();
+                obj.deserialize(params.PortRisk[z]);
+                this.PortRisk.push(obj);
+            }
+        }
+
+        if (params.VulRisk) {
+            this.VulRisk = new Array();
+            for (let z in params.VulRisk) {
+                let obj = new TaskCenterVulRiskInputParam();
+                obj.deserialize(params.VulRisk[z]);
+                this.VulRisk.push(obj);
+            }
+        }
+
+        if (params.WeakPwdRisk) {
+            this.WeakPwdRisk = new Array();
+            for (let z in params.WeakPwdRisk) {
+                let obj = new TaskCenterWeakPwdRiskInputParam();
+                obj.deserialize(params.WeakPwdRisk[z]);
+                this.WeakPwdRisk.push(obj);
+            }
+        }
+
+        if (params.CFGRisk) {
+            this.CFGRisk = new Array();
+            for (let z in params.CFGRisk) {
+                let obj = new TaskCenterCFGRiskInputParam();
+                obj.deserialize(params.CFGRisk[z]);
+                this.CFGRisk.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Host process content.
+ * @class
+ */
+class AssetProcessItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud account ID.
+         * @type {string || null}
+         */
+        this.CloudAccountID = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Tenant ID.
+         * @type {number || null}
+         */
+        this.AppID = null;
+
+        /**
+         * Account name.
+         * @type {string || null}
+         */
+        this.CloudAccountName = null;
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * Public IP address
+         * @type {string || null}
+         */
+        this.PublicIp = null;
+
+        /**
+         * Private IP address
+         * @type {string || null}
+         */
+        this.PrivateIp = null;
+
+        /**
+         * Process ID
+         * @type {string || null}
+         */
+        this.ProcessID = null;
+
+        /**
+         * Process name
+         * @type {string || null}
+         */
+        this.ProcessName = null;
+
+        /**
+         * Command line
+         * @type {string || null}
+         */
+        this.CmdLine = null;
+
+        /**
+         * Listening port list.
+         * @type {string || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CloudAccountID = 'CloudAccountID' in params ? params.CloudAccountID : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.AppID = 'AppID' in params ? params.AppID : null;
+        this.CloudAccountName = 'CloudAccountName' in params ? params.CloudAccountName : null;
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.PrivateIp = 'PrivateIp' in params ? params.PrivateIp : null;
+        this.ProcessID = 'ProcessID' in params ? params.ProcessID : null;
+        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
+        this.CmdLine = 'CmdLine' in params ? params.CmdLine : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
  * Details of a database asset
  * @class
  */
@@ -3226,159 +6479,138 @@ class DBAssetVO extends  AbstractModel {
 
         /**
          * Asset ID
-Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AssetId = null;
 
         /**
-         * Asset name
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Asset name.
          * @type {string || null}
          */
         this.AssetName = null;
 
         /**
-         * Asset type
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Asset type.
          * @type {string || null}
          */
         this.AssetType = null;
 
         /**
-         * 
+         * vpcid
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * VPC tags
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * vpc Tag.
          * @type {string || null}
          */
         this.VpcName = null;
 
         /**
-         * Region
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Region.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * Domain name
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Domain
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Asset creation time
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Asset creation time.
          * @type {string || null}
          */
         this.AssetCreateTime = null;
 
         /**
          * Last scan time
-Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LastScanTime = null;
 
         /**
-         * Configuration risks
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Configuration risk.
          * @type {number || null}
          */
         this.ConfigurationRisk = null;
 
         /**
-         * Network attacks
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Network attack.
          * @type {number || null}
          */
         this.Attack = null;
 
         /**
-         * 
+         * Network access.
          * @type {number || null}
          */
         this.Access = null;
 
         /**
-         * Scan tasks
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Scan Task
          * @type {number || null}
          */
         this.ScanTask = null;
 
         /**
-         * User `appid`
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * User appid.
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
          * User UIN
-Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Uin = null;
 
         /**
-         * User name
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Nickname Alias
          * @type {string || null}
          */
         this.NickName = null;
 
         /**
-         * Port
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Port.
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Tags
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Tag.
          * @type {Array.<Tag> || null}
          */
         this.Tag = null;
 
         /**
-         * Private IP
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Private IP address
          * @type {string || null}
          */
         this.PrivateIp = null;
 
         /**
-         * Public IP
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Public IP address
          * @type {string || null}
          */
         this.PublicIp = null;
 
         /**
-         * Status
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Status.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Whether it's a critical asset
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Core or Not
          * @type {number || null}
          */
         this.IsCore = null;
 
         /**
-         * Whether it's a newly-added asset. Values: `1` (Yes), `0` (No)
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * New Asset or Not. 1: New
          * @type {number || null}
          */
         this.IsNewAsset = null;
@@ -3529,129 +6761,30 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * Subnet assets
+ * DescribeAccessKeyAsset response structure.
  * @class
  */
-class SubnetAsset extends  AbstractModel {
+class DescribeAccessKeyAssetResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * appid
-         * @type {string || null}
+         * Access key asset list.
+         * @type {Array.<AccessKeyAsset> || null}
          */
-        this.AppId = null;
+        this.Data = null;
 
         /**
-         * UIN
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-        /**
-         * Asset ID
-         * @type {string || null}
-         */
-        this.AssetId = null;
-
-        /**
-         * Asset name
-         * @type {string || null}
-         */
-        this.AssetName = null;
-
-        /**
-         * Region
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * VPC ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * VPC name
-         * @type {string || null}
-         */
-        this.VpcName = null;
-
-        /**
-         * Tags
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tag = null;
-
-        /**
-         * User name
-         * @type {string || null}
-         */
-        this.Nick = null;
-
-        /**
-         * CIDR block
-         * @type {string || null}
-         */
-        this.CIDR = null;
-
-        /**
-         * Availability zone
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * Number of CVMs
+         * Total quantity.
          * @type {number || null}
          */
-        this.CVM = null;
+        this.Total = null;
 
         /**
-         * Number of available IPs
-         * @type {number || null}
-         */
-        this.AvailableIp = null;
-
-        /**
-         * Creation time
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.CreateTime = null;
-
-        /**
-         * Configuration risks
-         * @type {number || null}
-         */
-        this.ConfigureRisk = null;
-
-        /**
-         * Number of tasks.
-         * @type {number || null}
-         */
-        this.ScanTask = null;
-
-        /**
-         * Last scan time
-         * @type {string || null}
-         */
-        this.LastScanTime = null;
-
-        /**
-         * Whether it's a critical asset
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsCore = null;
-
-        /**
-         * Whether it's a newly-added asset. Values: `1` (Yes), `0` (No)
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsNewAsset = null;
+        this.RequestId = null;
 
     }
 
@@ -3662,33 +6795,107 @@ Note: This field may return·null, indicating that no valid values can be obtain
         if (!params) {
             return;
         }
-        this.AppId = 'AppId' in params ? params.AppId : null;
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.AssetId = 'AssetId' in params ? params.AssetId : null;
-        this.AssetName = 'AssetName' in params ? params.AssetName : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.VpcName = 'VpcName' in params ? params.VpcName : null;
 
-        if (params.Tag) {
-            this.Tag = new Array();
-            for (let z in params.Tag) {
-                let obj = new Tag();
-                obj.deserialize(params.Tag[z]);
-                this.Tag.push(obj);
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new AccessKeyAsset();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
             }
         }
-        this.Nick = 'Nick' in params ? params.Nick : null;
-        this.CIDR = 'CIDR' in params ? params.CIDR : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.CVM = 'CVM' in params ? params.CVM : null;
-        this.AvailableIp = 'AvailableIp' in params ? params.AvailableIp : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.ConfigureRisk = 'ConfigureRisk' in params ? params.ConfigureRisk : null;
-        this.ScanTask = 'ScanTask' in params ? params.ScanTask : null;
-        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
-        this.IsCore = 'IsCore' in params ? params.IsCore : null;
-        this.IsNewAsset = 'IsNewAsset' in params ? params.IsNewAsset : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAccessKeyRiskDetail response structure.
+ * @class
+ */
+class DescribeAccessKeyRiskDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Risk list.
+         * @type {AccessKeyRisk || null}
+         */
+        this.RiskInfo = null;
+
+        /**
+         * Total number of CAM policies.
+         * @type {number || null}
+         */
+        this.CamCount = null;
+
+        /**
+         * Number of associated alarms for the account.
+         * @type {number || null}
+         */
+        this.AlarmCount = null;
+
+        /**
+         * Access method 0 API 1 console and API.
+         * @type {number || null}
+         */
+        this.AccessType = null;
+
+        /**
+         * Access key Alarm count list.
+         * @type {Array.<AccessKeyAlarmCount> || null}
+         */
+        this.AccessKeyAlarmCount = null;
+
+        /**
+         * Whether operation protection is enabled. valid values: 0 (not enabled), 1 (enabled).
+         * @type {number || null}
+         */
+        this.ActionFlag = null;
+
+        /**
+         * Whether login protection is enabled. valid values: 0 (not enabled), 1 (enabled).
+         * @type {number || null}
+         */
+        this.LoginFlag = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RiskInfo) {
+            let obj = new AccessKeyRisk();
+            obj.deserialize(params.RiskInfo)
+            this.RiskInfo = obj;
+        }
+        this.CamCount = 'CamCount' in params ? params.CamCount : null;
+        this.AlarmCount = 'AlarmCount' in params ? params.AlarmCount : null;
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+
+        if (params.AccessKeyAlarmCount) {
+            this.AccessKeyAlarmCount = new Array();
+            for (let z in params.AccessKeyAlarmCount) {
+                let obj = new AccessKeyAlarmCount();
+                obj.deserialize(params.AccessKeyAlarmCount[z]);
+                this.AccessKeyAlarmCount.push(obj);
+            }
+        }
+        this.ActionFlag = 'ActionFlag' in params ? params.ActionFlag : null;
+        this.LoginFlag = 'LoginFlag' in params ? params.LoginFlag : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4027,22 +7234,19 @@ class TaskAssetObject extends  AbstractModel {
         super();
 
         /**
-         * Asset name
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Asset name.
          * @type {string || null}
          */
         this.AssetName = null;
 
         /**
-         * 	Asset category
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Asset type.
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * Asset sub-category
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Asset category.
          * @type {string || null}
          */
         this.AssetType = null;
@@ -4054,15 +7258,13 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.Asset = null;
 
         /**
-         * Region
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Region.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * The ID specific for an asset synched from another cloud platform
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Unique ID of Multi-Cloud Assets
          * @type {string || null}
          */
         this.Arn = null;
@@ -4087,40 +7289,12 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * List of IPs
+ * Details of a database asset. 
  * @class
  */
-class IpAssetListVO extends  AbstractModel {
+class DbAssetInfo extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Asset ID
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AssetId = null;
-
-        /**
-         * Asset name
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AssetName = null;
-
-        /**
-         * Asset type
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AssetType = null;
-
-        /**
-         * Region
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Region = null;
 
         /**
          * CFW status
@@ -4130,11 +7304,25 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.CFWStatus = null;
 
         /**
-         * Asset creation time
+         * Asset ID
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.AssetCreateTime = null;
+        this.AssetId = null;
+
+        /**
+         * VPC information
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * Asset type
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AssetType = null;
 
         /**
          * Public IP
@@ -4144,11 +7332,18 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.PublicIp = null;
 
         /**
-         * Public IP type
+         * Private IP
 Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * @type {string || null}
          */
-        this.PublicIpType = null;
+        this.PrivateIp = null;
+
+        /**
+         * Region
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
 
         /**
          * 
@@ -4157,186 +7352,25 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.VpcId = null;
 
         /**
-         * VPC name
+         * Asset name
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.VpcName = null;
+        this.AssetName = null;
 
         /**
-         * appid
+         * CFW edition
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.AppId = null;
+        this.CFWProtectLevel = null;
 
         /**
-         * User `uin`
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-        /**
-         * Name
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NickName = null;
-
-        /**
-         * Whether it's a critical asset
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsCore = null;
-
-        /**
-         * Whether it's a cloud asset
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsCloud = null;
-
-        /**
-         * Number of network attacks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Attack = null;
-
-        /**
-         * Number of network access requests
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Access = null;
-
-        /**
-         * Number of blocked attacks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Intercept = null;
-
-        /**
-         * Inbound bandwidth
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InBandwidth = null;
-
-        /**
-         * Outbound bandwidthtraffic peak bandwidth (bps)
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OutBandwidth = null;
-
-        /**
-         * Inbound traffic
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InFlow = null;
-
-        /**
-         * Outbound traffic
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OutFlow = null;
-
-        /**
-         * Last scan time
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LastScanTime = null;
-
-        /**
-         * Port risks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.PortRisk = null;
-
-        /**
-         * Vulnerabilities
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.VulnerabilityRisk = null;
-
-        /**
-         * Configuration risks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ConfigurationRisk = null;
-
-        /**
-         * Scan tasks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ScanTask = null;
-
-        /**
-         * Weak passwords
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.WeakPassword = null;
-
-        /**
-         * Content risks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.WebContentRisk = null;
-
-        /**
-         * Tags
+         * Tag information
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {Array.<Tag> || null}
          */
         this.Tag = null;
-
-        /**
-         * EIP ID
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AddressId = null;
-
-        /**
-         * Member ID
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MemberId = null;
-
-        /**
-         * Risk exposure
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RiskExposure = null;
-
-        /**
-         * Whether it's a newly-added asset. Values: `1` (Yes), `0` (No)
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsNewAsset = null;
-
-        /**
-         * Asset ownership verification status. `0`: Pending verification; `1`: Verified; `2`: Verifying; `3` and above: Verification failed
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.VerifyStatus = null;
 
     }
 
@@ -4347,35 +7381,16 @@ Note: This field may return·null, indicating that no valid values can be obtain
         if (!params) {
             return;
         }
-        this.AssetId = 'AssetId' in params ? params.AssetId : null;
-        this.AssetName = 'AssetName' in params ? params.AssetName : null;
-        this.AssetType = 'AssetType' in params ? params.AssetType : null;
-        this.Region = 'Region' in params ? params.Region : null;
         this.CFWStatus = 'CFWStatus' in params ? params.CFWStatus : null;
-        this.AssetCreateTime = 'AssetCreateTime' in params ? params.AssetCreateTime : null;
-        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
-        this.PublicIpType = 'PublicIpType' in params ? params.PublicIpType : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
-        this.AppId = 'AppId' in params ? params.AppId : null;
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.NickName = 'NickName' in params ? params.NickName : null;
-        this.IsCore = 'IsCore' in params ? params.IsCore : null;
-        this.IsCloud = 'IsCloud' in params ? params.IsCloud : null;
-        this.Attack = 'Attack' in params ? params.Attack : null;
-        this.Access = 'Access' in params ? params.Access : null;
-        this.Intercept = 'Intercept' in params ? params.Intercept : null;
-        this.InBandwidth = 'InBandwidth' in params ? params.InBandwidth : null;
-        this.OutBandwidth = 'OutBandwidth' in params ? params.OutBandwidth : null;
-        this.InFlow = 'InFlow' in params ? params.InFlow : null;
-        this.OutFlow = 'OutFlow' in params ? params.OutFlow : null;
-        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
-        this.PortRisk = 'PortRisk' in params ? params.PortRisk : null;
-        this.VulnerabilityRisk = 'VulnerabilityRisk' in params ? params.VulnerabilityRisk : null;
-        this.ConfigurationRisk = 'ConfigurationRisk' in params ? params.ConfigurationRisk : null;
-        this.ScanTask = 'ScanTask' in params ? params.ScanTask : null;
-        this.WeakPassword = 'WeakPassword' in params ? params.WeakPassword : null;
-        this.WebContentRisk = 'WebContentRisk' in params ? params.WebContentRisk : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.PrivateIp = 'PrivateIp' in params ? params.PrivateIp : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.AssetName = 'AssetName' in params ? params.AssetName : null;
+        this.CFWProtectLevel = 'CFWProtectLevel' in params ? params.CFWProtectLevel : null;
 
         if (params.Tag) {
             this.Tag = new Array();
@@ -4385,34 +7400,35 @@ Note: This field may return·null, indicating that no valid values can be obtain
                 this.Tag.push(obj);
             }
         }
-        this.AddressId = 'AddressId' in params ? params.AddressId : null;
-        this.MemberId = 'MemberId' in params ? params.MemberId : null;
-        this.RiskExposure = 'RiskExposure' in params ? params.RiskExposure : null;
-        this.IsNewAsset = 'IsNewAsset' in params ? params.IsNewAsset : null;
-        this.VerifyStatus = 'VerifyStatus' in params ? params.VerifyStatus : null;
 
     }
 }
 
 /**
- * Filter condition
+ * ModifyRiskCenterRiskStatus request structure.
  * @class
  */
-class FilterDataObject extends  AbstractModel {
+class ModifyRiskCenterRiskStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter value
-         * @type {string || null}
+         * Data of risk assets
+         * @type {Array.<RiskCenterStatusKey> || null}
          */
-        this.Value = null;
+        this.RiskStatusKeys = null;
 
         /**
-         * Filter name
-         * @type {string || null}
+         * Specify how you want to change the risk status. `1`: Change to Handled, `2`: Change to Ignored; `3`: Remove from Handled; `4`: Remove from Ignored
+         * @type {number || null}
          */
-        this.Text = null;
+        this.Status = null;
+
+        /**
+         * Risk type. `0`: Port risk; `1`: Vulnerability; `2`: Weak password; `3`: Website content risk; `4`: Configuration risk; `5`: Risk services
+         * @type {number || null}
+         */
+        this.Type = null;
 
     }
 
@@ -4423,8 +7439,73 @@ class FilterDataObject extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Value = 'Value' in params ? params.Value : null;
-        this.Text = 'Text' in params ? params.Text : null;
+
+        if (params.RiskStatusKeys) {
+            this.RiskStatusKeys = new Array();
+            for (let z in params.RiskStatusKeys) {
+                let obj = new RiskCenterStatusKey();
+                obj.deserialize(params.RiskStatusKeys[z]);
+                this.RiskStatusKeys.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * DescribeExposePath request structure.
+ * @class
+ */
+class DescribeExposePathRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Asset ID.
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * Asset IP.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Asset domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Port or port range.
+         * @type {string || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Port = 'Port' in params ? params.Port : null;
 
     }
 }
@@ -4474,6 +7555,333 @@ class RiskCenterStatusKey extends  AbstractModel {
         this.AppId = 'AppId' in params ? params.AppId : null;
         this.PublicIPDomain = 'PublicIPDomain' in params ? params.PublicIPDomain : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * Exposed assets.
+ * @class
+ */
+class ExposesItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud service provider.
+         * @type {string || null}
+         */
+        this.Provider = null;
+
+        /**
+         * Account name.
+         * @type {string || null}
+         */
+        this.CloudAccountName = null;
+
+        /**
+         * Cloud account.
+         * @type {string || null}
+         */
+        this.CloudAccountId = null;
+
+        /**
+         * Domain
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * IP
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Port or port range.
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * Open.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Risk type.
+         * @type {string || null}
+         */
+        this.RiskType = null;
+
+        /**
+         * acl type.
+         * @type {string || null}
+         */
+        this.AclType = null;
+
+        /**
+         * ACL list.
+         * @type {string || null}
+         */
+        this.AclList = null;
+
+        /**
+         * Asset ID.
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Asset type.
+         * @type {string || null}
+         */
+        this.AssetType = null;
+
+        /**
+         * Port service quantity.
+         * @type {number || null}
+         */
+        this.PortServiceCount = null;
+
+        /**
+         * Number of high-risk ports.
+         * @type {number || null}
+         */
+        this.HighRiskPortServiceCount = null;
+
+        /**
+         * Number of web applications.
+         * @type {number || null}
+         */
+        this.WebAppCount = null;
+
+        /**
+         * Number of web applications at risk.
+         * @type {number || null}
+         */
+        this.RiskWebAppCount = null;
+
+        /**
+         * Number of Weak Passwords
+         * @type {number || null}
+         */
+        this.WeakPasswordCount = null;
+
+        /**
+         * Number of vulnerabilities
+         * @type {number || null}
+         */
+        this.VulCount = null;
+
+        /**
+         * First detection time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Latest update time.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Instance Type Name
+         * @type {string || null}
+         */
+        this.AssetTypeName = null;
+
+        /**
+         * Open status.
+         * @type {string || null}
+         */
+        this.DisplayStatus = null;
+
+        /**
+         * Port status.
+         * @type {string || null}
+         */
+        this.DisplayRiskType = null;
+
+        /**
+         * Scan task status.
+         * @type {string || null}
+         */
+        this.ScanTaskStatus = null;
+
+        /**
+         * uuid
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * Whether a security check has been performed.
+         * @type {string || null}
+         */
+        this.HasScan = null;
+
+        /**
+         * Tenant ID.
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Tenant ID string.
+         * @type {string || null}
+         */
+        this.AppIdStr = null;
+
+        /**
+         * Record ID
+         * @type {number || null}
+         */
+        this.ExposureID = null;
+
+        /**
+         * Number of ports open.
+         * @type {number || null}
+         */
+        this.PortDetectCount = null;
+
+        /**
+         * Port exposure result.
+         * @type {string || null}
+         */
+        this.PortDetectResult = null;
+
+        /**
+         * Tag.
+         * @type {string || null}
+         */
+        this.Tag = null;
+
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Number of risks to be governed.
+         * @type {number || null}
+         */
+        this.ToGovernedRiskCount = null;
+
+        /**
+         * Risk content to be governed.
+         * @type {string || null}
+         */
+        this.ToGovernedRiskContent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Provider = 'Provider' in params ? params.Provider : null;
+        this.CloudAccountName = 'CloudAccountName' in params ? params.CloudAccountName : null;
+        this.CloudAccountId = 'CloudAccountId' in params ? params.CloudAccountId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RiskType = 'RiskType' in params ? params.RiskType : null;
+        this.AclType = 'AclType' in params ? params.AclType : null;
+        this.AclList = 'AclList' in params ? params.AclList : null;
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.PortServiceCount = 'PortServiceCount' in params ? params.PortServiceCount : null;
+        this.HighRiskPortServiceCount = 'HighRiskPortServiceCount' in params ? params.HighRiskPortServiceCount : null;
+        this.WebAppCount = 'WebAppCount' in params ? params.WebAppCount : null;
+        this.RiskWebAppCount = 'RiskWebAppCount' in params ? params.RiskWebAppCount : null;
+        this.WeakPasswordCount = 'WeakPasswordCount' in params ? params.WeakPasswordCount : null;
+        this.VulCount = 'VulCount' in params ? params.VulCount : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.AssetTypeName = 'AssetTypeName' in params ? params.AssetTypeName : null;
+        this.DisplayStatus = 'DisplayStatus' in params ? params.DisplayStatus : null;
+        this.DisplayRiskType = 'DisplayRiskType' in params ? params.DisplayRiskType : null;
+        this.ScanTaskStatus = 'ScanTaskStatus' in params ? params.ScanTaskStatus : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.HasScan = 'HasScan' in params ? params.HasScan : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AppIdStr = 'AppIdStr' in params ? params.AppIdStr : null;
+        this.ExposureID = 'ExposureID' in params ? params.ExposureID : null;
+        this.PortDetectCount = 'PortDetectCount' in params ? params.PortDetectCount : null;
+        this.PortDetectResult = 'PortDetectResult' in params ? params.PortDetectResult : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.ToGovernedRiskCount = 'ToGovernedRiskCount' in params ? params.ToGovernedRiskCount : null;
+        this.ToGovernedRiskContent = 'ToGovernedRiskContent' in params ? params.ToGovernedRiskContent : null;
+
+    }
+}
+
+/**
+ * DescribeAccessKeyRisk request structure.
+ * @class
+ */
+class DescribeAccessKeyRiskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter.
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Access key ID.
+         * @type {number || null}
+         */
+        this.AccessKeyID = null;
+
+        /**
+         * Account UIN
+         * @type {string || null}
+         */
+        this.SubUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.AccessKeyID = 'AccessKeyID' in params ? params.AccessKeyID : null;
+        this.SubUin = 'SubUin' in params ? params.SubUin : null;
 
     }
 }
@@ -4550,6 +7958,53 @@ class PublicIpDomainListKey extends  AbstractModel {
             return;
         }
         this.Asset = 'Asset' in params ? params.Asset : null;
+
+    }
+}
+
+/**
+ * DescribeUserCallRecord request structure.
+ * @class
+ */
+class DescribeUserCallRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account UIN
+         * @type {string || null}
+         */
+        this.SubUin = null;
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filter.
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubUin = 'SubUin' in params ? params.SubUin : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
 
     }
 }
@@ -4751,88 +8206,30 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * Details of a database asset. 
+ * UpdateAccessKeyRemark response structure.
  * @class
  */
-class DbAssetInfo extends  AbstractModel {
+class UpdateAccessKeyRemarkResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CFW status
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * 0: success; 1: failure.
          * @type {number || null}
          */
-        this.CFWStatus = null;
+        this.Code = null;
 
         /**
-         * Asset ID
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Error message
          * @type {string || null}
          */
-        this.AssetId = null;
+        this.Msg = null;
 
         /**
-         * VPC information
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.VpcName = null;
-
-        /**
-         * Asset type
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AssetType = null;
-
-        /**
-         * Public IP
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PublicIp = null;
-
-        /**
-         * Private IP
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PrivateIp = null;
-
-        /**
-         * Region
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Asset name
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AssetName = null;
-
-        /**
-         * CFW edition
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.CFWProtectLevel = null;
-
-        /**
-         * Tag information
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tag = null;
+        this.RequestId = null;
 
     }
 
@@ -4843,144 +8240,111 @@ Note: This field may return·null, indicating that no valid values can be obtain
         if (!params) {
             return;
         }
-        this.CFWStatus = 'CFWStatus' in params ? params.CFWStatus : null;
-        this.AssetId = 'AssetId' in params ? params.AssetId : null;
-        this.VpcName = 'VpcName' in params ? params.VpcName : null;
-        this.AssetType = 'AssetType' in params ? params.AssetType : null;
-        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
-        this.PrivateIp = 'PrivateIp' in params ? params.PrivateIp : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.AssetName = 'AssetName' in params ? params.AssetName : null;
-        this.CFWProtectLevel = 'CFWProtectLevel' in params ? params.CFWProtectLevel : null;
-
-        if (params.Tag) {
-            this.Tag = new Array();
-            for (let z in params.Tag) {
-                let obj = new Tag();
-                obj.deserialize(params.Tag[z]);
-                this.Tag.push(obj);
-            }
-        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * 
+ * List of advanced vulnerability scan configurations
  * @class
  */
-class SubUserInfo extends  AbstractModel {
+class VULRiskAdvanceCFGList extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 
-         * @type {number || null}
-         */
-        this.ID = null;
-
-        /**
-         * 
+         * Risk ID
          * @type {string || null}
          */
-        this.AppID = null;
+        this.RiskId = null;
 
         /**
-         * 
+         * Vulnerability name
          * @type {string || null}
          */
-        this.Uin = null;
+        this.VULName = null;
 
         /**
-         * 
+         * Risk level
          * @type {string || null}
          */
-        this.NickName = null;
+        this.RiskLevel = null;
 
         /**
-         * 
+         * Source of the check task
          * @type {string || null}
          */
-        this.OwnerAppID = null;
+        this.CheckFrom = null;
 
         /**
-         * 
+         * Whether it's enabled. `1`: Enable; `0`: Disabled
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * Risk type.
          * @type {string || null}
          */
-        this.OwnerUin = null;
+        this.VULType = null;
 
         /**
-         * 
+         * Affected versions
          * @type {string || null}
          */
-        this.OwnerNickName = null;
+        this.ImpactVersion = null;
 
         /**
-         * 
+         * CVE number
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.OwnerMemberID = null;
+        this.CVE = null;
 
         /**
-         * 
+         * Vulnerability tag
+         * @type {Array.<string> || null}
+         */
+        this.VULTag = null;
+
+        /**
+         * Fix solution
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.FixMethod = null;
+
+        /**
+         * Disclosure time
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ReleaseTime = null;
+
+        /**
+         * Whether it's an emergency vulnerability. Values: `1` (emergency vulnerability); `0` (non-emergency vulnerability
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.CloudType = null;
+        this.EMGCVulType = null;
 
         /**
-         * 
-         * @type {number || null}
+         * Vulnerability description
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.ServiceCount = null;
+        this.VULDescribe = null;
 
         /**
-         * 
-         * @type {number || null}
+         * Affected components
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.InterfaceCount = null;
-
-        /**
-         * 
-         * @type {number || null}
-         */
-        this.AssetCount = null;
-
-        /**
-         * 
-         * @type {number || null}
-         */
-        this.LogCount = null;
-
-        /**
-         * 
-         * @type {number || null}
-         */
-        this.ConfigRiskCount = null;
-
-        /**
-         * 
-         * @type {number || null}
-         */
-        this.ActionRiskCount = null;
-
-        /**
-         * 
-         * @type {boolean || null}
-         */
-        this.IsAccessCloudAudit = null;
-
-        /**
-         * 
-         * @type {boolean || null}
-         */
-        this.IsAccessCheck = null;
-
-        /**
-         * 
-         * @type {boolean || null}
-         */
-        this.IsAccessUeba = null;
+        this.ImpactComponent = null;
 
     }
 
@@ -4991,24 +8355,233 @@ class SubUserInfo extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RiskId = 'RiskId' in params ? params.RiskId : null;
+        this.VULName = 'VULName' in params ? params.VULName : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
+        this.CheckFrom = 'CheckFrom' in params ? params.CheckFrom : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.VULType = 'VULType' in params ? params.VULType : null;
+        this.ImpactVersion = 'ImpactVersion' in params ? params.ImpactVersion : null;
+        this.CVE = 'CVE' in params ? params.CVE : null;
+        this.VULTag = 'VULTag' in params ? params.VULTag : null;
+        this.FixMethod = 'FixMethod' in params ? params.FixMethod : null;
+        this.ReleaseTime = 'ReleaseTime' in params ? params.ReleaseTime : null;
+        this.EMGCVulType = 'EMGCVulType' in params ? params.EMGCVulType : null;
+        this.VULDescribe = 'VULDescribe' in params ? params.VULDescribe : null;
+        this.ImpactComponent = 'ImpactComponent' in params ? params.ImpactComponent : null;
+
+    }
+}
+
+/**
+ * Access key Alarm record.
+ * @class
+ */
+class AccessKeyAlarm extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Alarm name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Alarm level.
+0 - unavailable 1 - Note 2 - low risk 3 - medium risk 4 - high risk 5 - critical.
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * Alarm record ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Alarm rule ID.
+         * @type {number || null}
+         */
+        this.AlarmRuleID = null;
+
+        /**
+         * Alarm type
+Abnormal call.
+Leak monitoring.
+         * @type {number || null}
+         */
+        this.AlarmType = null;
+
+        /**
+         * Access key.
+         * @type {string || null}
+         */
+        this.AccessKey = null;
+
+        /**
+         * Access key ID.
+         * @type {number || null}
+         */
+        this.AccessKeyID = null;
+
+        /**
+         * Access key remark.
+         * @type {string || null}
+         */
+        this.AccessKeyRemark = null;
+
+        /**
+         * Last Alarm Time
+         * @type {string || null}
+         */
+        this.LastAlarmTime = null;
+
+        /**
+         * Alarm status.
+0 - unprocessed 1 - processed 2 - ignored.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Aggregate date.
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * Alarm Tag.
+         * @type {Array.<string> || null}
+         */
+        this.Tag = null;
+
+        /**
+         * Account associate Uin belonging to main account.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Nickname of the main account.
+         * @type {string || null}
+         */
+        this.Nickname = null;
+
+        /**
+         * Sub-Account Uin belonging to.
+         * @type {string || null}
+         */
+        this.SubUin = null;
+
+        /**
+         * Sub-Account nickname.
+         * @type {string || null}
+         */
+        this.SubNickname = null;
+
+        /**
+         * Account type.
+0 root account AK 1 sub-account AK 2 temporary key.
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * App ID
+         * @type {number || null}
+         */
+        this.AppID = null;
+
+        /**
+         * Leakage evidence.
+         * @type {Array.<string> || null}
+         */
+        this.LeakEvidence = null;
+
+        /**
+         * Whether editing a trusted account is supported.
+         * @type {boolean || null}
+         */
+        this.IsSupportEditWhiteAccount = null;
+
+        /**
+         * Alarm evidence.
+         * @type {string || null}
+         */
+        this.Evidence = null;
+
+        /**
+         * Alarm rule flag.
+         * @type {string || null}
+         */
+        this.RuleKey = null;
+
+        /**
+         * Cloud vendor type 0: tencent cloud 1: amazon web services 2: microsoft azure 3: google cloud 4: alibaba cloud 5: huawei cloud.
+         * @type {number || null}
+         */
+        this.CloudType = null;
+
+        /**
+         * Alarm AI analysis status.
+-Analysis failed.
+0 not analyzed.
+Under analysis.
+2 analysis successful, real Alarm.
+3 analysis successful, suspicious Alarm.
+         * @type {number || null}
+         */
+        this.AIStatus = null;
+
+        /**
+         * First Alarm timestamp (in seconds).
+         * @type {number || null}
+         */
+        this.FirstAlarmTimestamp = null;
+
+        /**
+         * Last Alarm timestamp (in seconds).
+         * @type {number || null}
+         */
+        this.LastAlarmTimestamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Level = 'Level' in params ? params.Level : null;
         this.ID = 'ID' in params ? params.ID : null;
-        this.AppID = 'AppID' in params ? params.AppID : null;
+        this.AlarmRuleID = 'AlarmRuleID' in params ? params.AlarmRuleID : null;
+        this.AlarmType = 'AlarmType' in params ? params.AlarmType : null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.AccessKeyID = 'AccessKeyID' in params ? params.AccessKeyID : null;
+        this.AccessKeyRemark = 'AccessKeyRemark' in params ? params.AccessKeyRemark : null;
+        this.LastAlarmTime = 'LastAlarmTime' in params ? params.LastAlarmTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
         this.Uin = 'Uin' in params ? params.Uin : null;
-        this.NickName = 'NickName' in params ? params.NickName : null;
-        this.OwnerAppID = 'OwnerAppID' in params ? params.OwnerAppID : null;
-        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
-        this.OwnerNickName = 'OwnerNickName' in params ? params.OwnerNickName : null;
-        this.OwnerMemberID = 'OwnerMemberID' in params ? params.OwnerMemberID : null;
+        this.Nickname = 'Nickname' in params ? params.Nickname : null;
+        this.SubUin = 'SubUin' in params ? params.SubUin : null;
+        this.SubNickname = 'SubNickname' in params ? params.SubNickname : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AppID = 'AppID' in params ? params.AppID : null;
+        this.LeakEvidence = 'LeakEvidence' in params ? params.LeakEvidence : null;
+        this.IsSupportEditWhiteAccount = 'IsSupportEditWhiteAccount' in params ? params.IsSupportEditWhiteAccount : null;
+        this.Evidence = 'Evidence' in params ? params.Evidence : null;
+        this.RuleKey = 'RuleKey' in params ? params.RuleKey : null;
         this.CloudType = 'CloudType' in params ? params.CloudType : null;
-        this.ServiceCount = 'ServiceCount' in params ? params.ServiceCount : null;
-        this.InterfaceCount = 'InterfaceCount' in params ? params.InterfaceCount : null;
-        this.AssetCount = 'AssetCount' in params ? params.AssetCount : null;
-        this.LogCount = 'LogCount' in params ? params.LogCount : null;
-        this.ConfigRiskCount = 'ConfigRiskCount' in params ? params.ConfigRiskCount : null;
-        this.ActionRiskCount = 'ActionRiskCount' in params ? params.ActionRiskCount : null;
-        this.IsAccessCloudAudit = 'IsAccessCloudAudit' in params ? params.IsAccessCloudAudit : null;
-        this.IsAccessCheck = 'IsAccessCheck' in params ? params.IsAccessCheck : null;
-        this.IsAccessUeba = 'IsAccessUeba' in params ? params.IsAccessUeba : null;
+        this.AIStatus = 'AIStatus' in params ? params.AIStatus : null;
+        this.FirstAlarmTimestamp = 'FirstAlarmTimestamp' in params ? params.FirstAlarmTimestamp : null;
+        this.LastAlarmTimestamp = 'LastAlarmTimestamp' in params ? params.LastAlarmTimestamp : null;
 
     }
 }
@@ -5478,60 +9051,128 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * DescribeDbAssets response structure.
+ * Details of a content risk
  * @class
  */
-class DescribeDbAssetsResponse extends  AbstractModel {
+class WebsiteRisk extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of results
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * Total of assets
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<DBAssetVO> || null}
-         */
-        this.Data = null;
-
-        /**
-         * List of regions
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<FilterDataObject> || null}
-         */
-        this.RegionList = null;
-
-        /**
-         * List of asset types
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<FilterDataObject> || null}
-         */
-        this.AssetTypeList = null;
-
-        /**
-         * List of VPCs
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<FilterDataObject> || null}
-         */
-        this.VpcList = null;
-
-        /**
-         * List of users (AppId)
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<FilterDataObject> || null}
-         */
-        this.AppIdList = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Affected assets
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AffectAsset = null;
+
+        /**
+         * Risk level
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Last detected
+         * @type {string || null}
+         */
+        this.RecentTime = null;
+
+        /**
+         * First detected
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * Status of the risk. `0`: Not handled, `1`: Handled; `2`: Ignored
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Unique ID of the asset
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Frontend index
+         * @type {string || null}
+         */
+        this.Index = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * User `appid`
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * User name.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Nick = null;
+
+        /**
+         * User `uin`
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * URL of the risk
+         * @type {string || null}
+         */
+        this.URL = null;
+
+        /**
+         * URL of the risk file
+         * @type {string || null}
+         */
+        this.URLPath = null;
+
+        /**
+         * Instance type
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Check type.
+         * @type {string || null}
+         */
+        this.DetectEngine = null;
+
+        /**
+         * Result description.
+         * @type {string || null}
+         */
+        this.ResultDescribe = null;
+
+        /**
+         * Source URL
+         * @type {string || null}
+         */
+        this.SourceURL = null;
+
+        /**
+         * Source file URL
+         * @type {string || null}
+         */
+        this.SourceURLPath = null;
 
     }
 
@@ -5542,53 +9183,223 @@ Note: This field may return·null, indicating that no valid values can be obtain
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
+        this.AffectAsset = 'AffectAsset' in params ? params.AffectAsset : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.RecentTime = 'RecentTime' in params ? params.RecentTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Index = 'Index' in params ? params.Index : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Nick = 'Nick' in params ? params.Nick : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.URL = 'URL' in params ? params.URL : null;
+        this.URLPath = 'URLPath' in params ? params.URLPath : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.DetectEngine = 'DetectEngine' in params ? params.DetectEngine : null;
+        this.ResultDescribe = 'ResultDescribe' in params ? params.ResultDescribe : null;
+        this.SourceURL = 'SourceURL' in params ? params.SourceURL : null;
+        this.SourceURLPath = 'SourceURLPath' in params ? params.SourceURLPath : null;
 
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new DBAssetVO();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
+    }
+}
 
-        if (params.RegionList) {
-            this.RegionList = new Array();
-            for (let z in params.RegionList) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.RegionList[z]);
-                this.RegionList.push(obj);
-            }
-        }
+/**
+ * Configuration Risk Objects from Configuration's Perspective
+ * @class
+ */
+class CFGViewCFGRisk extends  AbstractModel {
+    constructor(){
+        super();
 
-        if (params.AssetTypeList) {
-            this.AssetTypeList = new Array();
-            for (let z in params.AssetTypeList) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.AssetTypeList[z]);
-                this.AssetTypeList.push(obj);
-            }
-        }
+        /**
+         * Impact assets.
+         * @type {number || null}
+         */
+        this.NoHandleCount = null;
 
-        if (params.VpcList) {
-            this.VpcList = new Array();
-            for (let z in params.VpcList) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.VpcList[z]);
-                this.VpcList.push(obj);
-            }
-        }
+        /**
+         * Risk level: low - low risk, high - high risk, middle - medium risk, info - note, extreme - critical.
+         * @type {string || null}
+         */
+        this.Level = null;
 
-        if (params.AppIdList) {
-            this.AppIdList = new Array();
-            for (let z in params.AppIdList) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.AppIdList[z]);
-                this.AppIdList.push(obj);
-            }
+        /**
+         * Latest Recognition Time
+         * @type {string || null}
+         */
+        this.RecentTime = null;
+
+        /**
+         * First Recognition Time
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * Status. 0-Unprocessed; 1-Disposed; 2-Ignored.
+         * @type {number || null}
+         */
+        this.AffectAssetCount = null;
+
+        /**
+         * Unique ID of Asset
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Asset Subtype
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * Front-end Index
+         * @type {string || null}
+         */
+        this.Index = null;
+
+        /**
+         * User appid.
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * User Nickname
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Nick = null;
+
+        /**
+         * User UIN
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Configuration name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CFGName = null;
+
+        /**
+         * Check type.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CheckType = null;
+
+        /**
+         * -
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CFGSTD = null;
+
+        /**
+         * Description
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CFGDescribe = null;
+
+        /**
+         * Fixing suggestion
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CFGFix = null;
+
+        /**
+         * Help documentation.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CFGHelpURL = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.NoHandleCount = 'NoHandleCount' in params ? params.NoHandleCount : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.RecentTime = 'RecentTime' in params ? params.RecentTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.AffectAssetCount = 'AffectAssetCount' in params ? params.AffectAssetCount : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.From = 'From' in params ? params.From : null;
+        this.Index = 'Index' in params ? params.Index : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Nick = 'Nick' in params ? params.Nick : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.CFGName = 'CFGName' in params ? params.CFGName : null;
+        this.CheckType = 'CheckType' in params ? params.CheckType : null;
+        this.CFGSTD = 'CFGSTD' in params ? params.CFGSTD : null;
+        this.CFGDescribe = 'CFGDescribe' in params ? params.CFGDescribe : null;
+        this.CFGFix = 'CFGFix' in params ? params.CFGFix : null;
+        this.CFGHelpURL = 'CFGHelpURL' in params ? params.CFGHelpURL : null;
+
+    }
+}
+
+/**
+ * Product support.
+ * @class
+ */
+class ServiceSupport extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Product name.
+"cfw_waf_virtual", "cwp_detect", "cwp_defense", "cwp_fix"
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * Total number of processed assets.
+         * @type {number || null}
+         */
+        this.SupportHandledCount = null;
+
+        /**
+         * Total number of supported assets.
+         * @type {number || null}
+         */
+        this.SupportTotalCount = null;
+
+        /**
+         * Whether the product is supported: 1 for supported; 0 for unsupported.
+         * @type {boolean || null}
+         */
+        this.IsSupport = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.SupportHandledCount = 'SupportHandledCount' in params ? params.SupportHandledCount : null;
+        this.SupportTotalCount = 'SupportTotalCount' in params ? params.SupportTotalCount : null;
+        this.IsSupport = 'IsSupport' in params ? params.IsSupport : null;
 
     }
 }
@@ -5945,6 +9756,46 @@ class DescribeRiskCenterVULViewVULRiskListResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAccessKeyAsset request structure.
+ * @class
+ */
+class DescribeAccessKeyAssetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filter.
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeRiskCenterVULViewVULRiskList request structure.
  * @class
  */
@@ -6028,30 +9879,18 @@ class TaskCenterVulRiskInputParam extends  AbstractModel {
 }
 
 /**
- * Advanced task configuration
+ * StopRiskCenterTask request structure.
  * @class
  */
-class TaskAdvanceCFG extends  AbstractModel {
+class StopRiskCenterTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Advanced vulnerability scan configuration
-         * @type {Array.<TaskCenterVulRiskInputParam> || null}
+         * List of task IDs
+         * @type {Array.<TaskIdListKey> || null}
          */
-        this.VulRisk = null;
-
-        /**
-         * Advanced weak password check configuration
-         * @type {Array.<TaskCenterWeakPwdRiskInputParam> || null}
-         */
-        this.WeakPwdRisk = null;
-
-        /**
-         * Advanced configuration risk scan configuration
-         * @type {Array.<TaskCenterCFGRiskInputParam> || null}
-         */
-        this.CFGRisk = null;
+        this.TaskIdList = null;
 
     }
 
@@ -6063,30 +9902,12 @@ class TaskAdvanceCFG extends  AbstractModel {
             return;
         }
 
-        if (params.VulRisk) {
-            this.VulRisk = new Array();
-            for (let z in params.VulRisk) {
-                let obj = new TaskCenterVulRiskInputParam();
-                obj.deserialize(params.VulRisk[z]);
-                this.VulRisk.push(obj);
-            }
-        }
-
-        if (params.WeakPwdRisk) {
-            this.WeakPwdRisk = new Array();
-            for (let z in params.WeakPwdRisk) {
-                let obj = new TaskCenterWeakPwdRiskInputParam();
-                obj.deserialize(params.WeakPwdRisk[z]);
-                this.WeakPwdRisk.push(obj);
-            }
-        }
-
-        if (params.CFGRisk) {
-            this.CFGRisk = new Array();
-            for (let z in params.CFGRisk) {
-                let obj = new TaskCenterCFGRiskInputParam();
-                obj.deserialize(params.CFGRisk[z]);
-                this.CFGRisk.push(obj);
+        if (params.TaskIdList) {
+            this.TaskIdList = new Array();
+            for (let z in params.TaskIdList) {
+                let obj = new TaskIdListKey();
+                obj.deserialize(params.TaskIdList[z]);
+                this.TaskIdList.push(obj);
             }
         }
 
@@ -6287,6 +10108,125 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
+ * DescribeScanStatistic response structure.
+ * @class
+ */
+class DescribeScanStatisticResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Port service quantity.
+         * @type {number || null}
+         */
+        this.PortServiceCount = null;
+
+        /**
+         * Number of Web services.
+         * @type {number || null}
+         */
+        this.WebAppCount = null;
+
+        /**
+         * Weak Password Risk Count
+         * @type {number || null}
+         */
+        this.WeakPasswordCount = null;
+
+        /**
+         * Vulnerability risk quantity.
+         * @type {number || null}
+         */
+        this.VulCount = null;
+
+        /**
+         * High-Risk port service quantity.
+         * @type {number || null}
+         */
+        this.HighRiskPortServiceCount = null;
+
+        /**
+         * Number of Web services at risk.
+         * @type {number || null}
+         */
+        this.RiskWebAppCount = null;
+
+        /**
+         * Newly-Added port services in the last 7 days.
+         * @type {number || null}
+         */
+        this.PortServiceIncrement = null;
+
+        /**
+         * Newly-Added Web services in the last 7 days.
+         * @type {number || null}
+         */
+        this.WebAppIncrement = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PortServiceCount = 'PortServiceCount' in params ? params.PortServiceCount : null;
+        this.WebAppCount = 'WebAppCount' in params ? params.WebAppCount : null;
+        this.WeakPasswordCount = 'WeakPasswordCount' in params ? params.WeakPasswordCount : null;
+        this.VulCount = 'VulCount' in params ? params.VulCount : null;
+        this.HighRiskPortServiceCount = 'HighRiskPortServiceCount' in params ? params.HighRiskPortServiceCount : null;
+        this.RiskWebAppCount = 'RiskWebAppCount' in params ? params.RiskWebAppCount : null;
+        this.PortServiceIncrement = 'PortServiceIncrement' in params ? params.PortServiceIncrement : null;
+        this.WebAppIncrement = 'WebAppIncrement' in params ? params.WebAppIncrement : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAccessKeyAlarmDetail request structure.
+ * @class
+ */
+class DescribeAccessKeyAlarmDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Alarm record ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+    }
+}
+
+/**
  * Server tag information
  * @class
  */
@@ -6319,6 +10259,34 @@ Note: This field may return·null, indicating that no valid values can be obtain
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * ModifyRiskCenterRiskStatus response structure.
+ * @class
+ */
+class ModifyRiskCenterRiskStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6652,6 +10620,63 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
+ * Vulnerability risk information.
+ * @class
+ */
+class VULRiskInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Fixing suggestion
+         * @type {string || null}
+         */
+        this.Fix = null;
+
+        /**
+         * Technology reference/reference link.
+         * @type {string || null}
+         */
+        this.References = null;
+
+        /**
+         * Vulnerability description
+         * @type {string || null}
+         */
+        this.Describe = null;
+
+        /**
+         * Affected component.
+         * @type {Array.<VulImpactComponentInfo> || null}
+         */
+        this.ImpactComponent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Fix = 'Fix' in params ? params.Fix : null;
+        this.References = 'References' in params ? params.References : null;
+        this.Describe = 'Describe' in params ? params.Describe : null;
+
+        if (params.ImpactComponent) {
+            this.ImpactComponent = new Array();
+            for (let z in params.ImpactComponent) {
+                let obj = new VulImpactComponentInfo();
+                obj.deserialize(params.ImpactComponent[z]);
+                this.ImpactComponent.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeClusterPodAssets request structure.
  * @class
  */
@@ -6880,6 +10905,61 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
+ * DescribeVulViewVulRiskList request structure.
+ * @class
+ */
+class DescribeVulViewVulRiskListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filtered Content
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+        /**
+         * Asset tag
+         * @type {Array.<AssetTag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new AssetTag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeTaskLogURL response structure.
  * @class
  */
@@ -6923,6 +11003,370 @@ class DescribeTaskLogURLResponse extends  AbstractModel {
 }
 
 /**
+ * Vulnerability trends, attack trend, users affected, affect assets.
+ * @class
+ */
+class VulTrend extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of affected assets.
+         * @type {number || null}
+         */
+        this.AffectAssetCount = null;
+
+        /**
+         * Number of users affected.
+         * @type {number || null}
+         */
+        this.AffectUserCount = null;
+
+        /**
+         * Number of attacks.
+         * @type {number || null}
+         */
+        this.AttackCount = null;
+
+        /**
+         * Time
+         * @type {string || null}
+         */
+        this.Date = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AffectAssetCount = 'AffectAssetCount' in params ? params.AffectAssetCount : null;
+        this.AffectUserCount = 'AffectUserCount' in params ? params.AffectUserCount : null;
+        this.AttackCount = 'AttackCount' in params ? params.AttackCount : null;
+        this.Date = 'Date' in params ? params.Date : null;
+
+    }
+}
+
+/**
+ * DescribeSourceIPAsset request structure.
+ * @class
+ */
+class DescribeSourceIPAssetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filter.
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeVulRiskList request structure.
+ * @class
+ */
+class DescribeVulRiskListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filtered Content
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Pagination size.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting type
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sorting field.
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * Cloud account ID.
+         * @type {string || null}
+         */
+        this.CloudAccountID = null;
+
+        /**
+         * Cloud service provider.
+         * @type {string || null}
+         */
+        this.Provider = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.CloudAccountID = 'CloudAccountID' in params ? params.CloudAccountID : null;
+        this.Provider = 'Provider' in params ? params.Provider : null;
+
+    }
+}
+
+/**
+ * DescribeVULList response structure.
+ * @class
+ */
+class DescribeVULListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Vulnerability list
+         * @type {Array.<VULBaseInfo> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Vulnerability Type List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.VULTypeLists = null;
+
+        /**
+         * Risk level list.
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.RiskLevels = null;
+
+        /**
+         * Tag.
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Product support.
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.ProductSupport = null;
+
+        /**
+         * Product support.
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.CheckStatus = null;
+
+        /**
+         * Attack intensity enumeration.
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.AttackHeat = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new VULBaseInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+        if (params.VULTypeLists) {
+            this.VULTypeLists = new Array();
+            for (let z in params.VULTypeLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.VULTypeLists[z]);
+                this.VULTypeLists.push(obj);
+            }
+        }
+
+        if (params.RiskLevels) {
+            this.RiskLevels = new Array();
+            for (let z in params.RiskLevels) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.RiskLevels[z]);
+                this.RiskLevels.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.ProductSupport) {
+            this.ProductSupport = new Array();
+            for (let z in params.ProductSupport) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.ProductSupport[z]);
+                this.ProductSupport.push(obj);
+            }
+        }
+
+        if (params.CheckStatus) {
+            this.CheckStatus = new Array();
+            for (let z in params.CheckStatus) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.CheckStatus[z]);
+                this.CheckStatus.push(obj);
+            }
+        }
+
+        if (params.AttackHeat) {
+            this.AttackHeat = new Array();
+            for (let z in params.AttackHeat) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.AttackHeat[z]);
+                this.AttackHeat.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAccessKeyRisk response structure.
+ * @class
+ */
+class DescribeAccessKeyRiskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Risk list.
+         * @type {Array.<AccessKeyRisk> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Total number.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new AccessKeyRisk();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDbAssetInfo request structure.
  * @class
  */
@@ -6946,6 +11390,222 @@ class DescribeDbAssetInfoRequest extends  AbstractModel {
             return;
         }
         this.AssetId = 'AssetId' in params ? params.AssetId : null;
+
+    }
+}
+
+/**
+ * DescribeUserCallRecord response structure.
+ * @class
+ */
+class DescribeUserCallRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account call record list.
+         * @type {Array.<UserCallRecord> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Total number of records.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new UserCallRecord();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVulViewVulRiskList response structure.
+ * @class
+ */
+class DescribeVulViewVulRiskListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of entries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Vulnerability Risk List from Vulnerability Asset's Perspective
+         * @type {Array.<VULViewVULRiskData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Danger Level List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.LevelLists = null;
+
+        /**
+         * Source List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.FromLists = null;
+
+        /**
+         * Vulnerability Type List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.VULTypeLists = null;
+
+        /**
+         * tag enumeration.
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new VULViewVULRiskData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+        if (params.LevelLists) {
+            this.LevelLists = new Array();
+            for (let z in params.LevelLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.LevelLists[z]);
+                this.LevelLists.push(obj);
+            }
+        }
+
+        if (params.FromLists) {
+            this.FromLists = new Array();
+            for (let z in params.FromLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.FromLists[z]);
+                this.FromLists.push(obj);
+            }
+        }
+
+        if (params.VULTypeLists) {
+            this.VULTypeLists = new Array();
+            for (let z in params.VULTypeLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.VULTypeLists[z]);
+                this.VULTypeLists.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAccessKeyCheckTask request structure.
+ * @class
+ */
+class CreateAccessKeyCheckTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Risk list.
+         * @type {Array.<number> || null}
+         */
+        this.RiskIDList = null;
+
+        /**
+         * Access key list.
+         * @type {Array.<string> || null}
+         */
+        this.AccessKeyList = null;
+
+        /**
+         * Account uin list.
+         * @type {Array.<string> || null}
+         */
+        this.SubUinList = null;
+
+        /**
+         * Risk rule id list.
+         * @type {Array.<number> || null}
+         */
+        this.RiskRuleIDList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.RiskIDList = 'RiskIDList' in params ? params.RiskIDList : null;
+        this.AccessKeyList = 'AccessKeyList' in params ? params.AccessKeyList : null;
+        this.SubUinList = 'SubUinList' in params ? params.SubUinList : null;
+        this.RiskRuleIDList = 'RiskRuleIDList' in params ? params.RiskRuleIDList : null;
 
     }
 }
@@ -7029,6 +11689,180 @@ class Filter extends  AbstractModel {
 }
 
 /**
+ * Access key asset information.
+ * @class
+ */
+class AccessKeyAsset extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AK id.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * AK name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Account associate APPID.
+         * @type {number || null}
+         */
+        this.AppID = null;
+
+        /**
+         * Account associate Uin belonging to main account.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Nickname of the main account.
+         * @type {string || null}
+         */
+        this.Nickname = null;
+
+        /**
+         * Sub-Account Uin belonging to.
+         * @type {string || null}
+         */
+        this.SubUin = null;
+
+        /**
+         * Sub-Account nickname.
+         * @type {string || null}
+         */
+        this.SubNickname = null;
+
+        /**
+         * Root account AK.
+Sub-Account AK.
+2 temporary key.
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Security advice enumeration.
+Normal.
+Process now.
+2 recommend reinforcement.
+         * @type {number || null}
+         */
+        this.Advice = null;
+
+        /**
+         * Alarm information list.
+         * @type {Array.<AccessKeyAlarmInfo> || null}
+         */
+        this.AccessKeyAlarmList = null;
+
+        /**
+         * Risk information list.
+         * @type {Array.<AccessKeyAlarmInfo> || null}
+         */
+        this.AccessKeyRiskList = null;
+
+        /**
+         * Source IP quantity.
+         * @type {number || null}
+         */
+        this.IPCount = null;
+
+        /**
+         * Creation time.
+
+
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last access Time
+         * @type {string || null}
+         */
+        this.LastAccessTime = null;
+
+        /**
+         * AK status. 
+0: disabled.
+1: enabled.
+2: deleted (deleted in cam, the security center still retains the previous log).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 0 means detected.
+1 indicates detecting.
+         * @type {number || null}
+         */
+        this.CheckStatus = null;
+
+        /**
+         * Cloud vendor type 0: tencent cloud 1: amazon web services 2: microsoft azure 3: google cloud 4: alibaba cloud 5: huawei cloud.
+         * @type {number || null}
+         */
+        this.CloudType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.AppID = 'AppID' in params ? params.AppID : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Nickname = 'Nickname' in params ? params.Nickname : null;
+        this.SubUin = 'SubUin' in params ? params.SubUin : null;
+        this.SubNickname = 'SubNickname' in params ? params.SubNickname : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Advice = 'Advice' in params ? params.Advice : null;
+
+        if (params.AccessKeyAlarmList) {
+            this.AccessKeyAlarmList = new Array();
+            for (let z in params.AccessKeyAlarmList) {
+                let obj = new AccessKeyAlarmInfo();
+                obj.deserialize(params.AccessKeyAlarmList[z]);
+                this.AccessKeyAlarmList.push(obj);
+            }
+        }
+
+        if (params.AccessKeyRiskList) {
+            this.AccessKeyRiskList = new Array();
+            for (let z in params.AccessKeyRiskList) {
+                let obj = new AccessKeyAlarmInfo();
+                obj.deserialize(params.AccessKeyRiskList[z]);
+                this.AccessKeyRiskList.push(obj);
+            }
+        }
+        this.IPCount = 'IPCount' in params ? params.IPCount : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.LastAccessTime = 'LastAccessTime' in params ? params.LastAccessTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CheckStatus = 'CheckStatus' in params ? params.CheckStatus : null;
+        this.CloudType = 'CloudType' in params ? params.CloudType : null;
+
+    }
+}
+
+/**
  * DescribeRiskCenterWebsiteRiskList request structure.
  * @class
  */
@@ -7077,6 +11911,363 @@ class DescribeRiskCenterWebsiteRiskListRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeCallRecord request structure.
+ * @class
+ */
+class DescribeCallRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Access key ID.
+         * @type {number || null}
+         */
+        this.AccessKeyID = null;
+
+        /**
+         * ID of the source IP for the call.
+         * @type {number || null}
+         */
+        this.SourceIPID = null;
+
+        /**
+         * Access account uin.
+         * @type {string || null}
+         */
+        this.AccUin = null;
+
+        /**
+         * Filter.
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.AccessKeyID = 'AccessKeyID' in params ? params.AccessKeyID : null;
+        this.SourceIPID = 'SourceIPID' in params ? params.SourceIPID : null;
+        this.AccUin = 'AccUin' in params ? params.AccUin : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+    }
+}
+
+/**
+ * Host vulnerability risk content.
+ * @class
+ */
+class VulRiskItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud account ID.
+         * @type {string || null}
+         */
+        this.CloudAccountID = null;
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.AssetID = null;
+
+        /**
+         * Instance status
+         * @type {string || null}
+         */
+        this.InstanceStatus = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Creation time.
+
+
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Update time
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Vulnerability name
+         * @type {string || null}
+         */
+        this.VulName = null;
+
+        /**
+         * Vulnerability type.
+         * @type {string || null}
+         */
+        this.VulCategory = null;
+
+        /**
+         * Vulnerability level
+         * @type {string || null}
+         */
+        this.VulLevel = null;
+
+        /**
+         * CVE id.
+         * @type {string || null}
+         */
+        this.CveID = null;
+
+        /**
+         * Vulnerability description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Container ID.
+         * @type {string || null}
+         */
+        this.ContainerID = null;
+
+        /**
+         * Vulnerability risk remediation recommendation.
+         * @type {string || null}
+         */
+        this.Fix = null;
+
+        /**
+         * Linux vulnerability.
+         * @type {string || null}
+         */
+        this.VulCategoryName = null;
+
+        /**
+         * Vulnerability level name.
+         * @type {string || null}
+         */
+        this.VulLevelName = null;
+
+        /**
+         * Instance status chinese information.
+         * @type {string || null}
+         */
+        this.InstanceStatusName = null;
+
+        /**
+         * Tenant ID.
+         * @type {number || null}
+         */
+        this.AppID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CloudAccountID = 'CloudAccountID' in params ? params.CloudAccountID : null;
+        this.AssetID = 'AssetID' in params ? params.AssetID : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.VulCategory = 'VulCategory' in params ? params.VulCategory : null;
+        this.VulLevel = 'VulLevel' in params ? params.VulLevel : null;
+        this.CveID = 'CveID' in params ? params.CveID : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.ContainerID = 'ContainerID' in params ? params.ContainerID : null;
+        this.Fix = 'Fix' in params ? params.Fix : null;
+        this.VulCategoryName = 'VulCategoryName' in params ? params.VulCategoryName : null;
+        this.VulLevelName = 'VulLevelName' in params ? params.VulLevelName : null;
+        this.InstanceStatusName = 'InstanceStatusName' in params ? params.InstanceStatusName : null;
+        this.AppID = 'AppID' in params ? params.AppID : null;
+
+    }
+}
+
+/**
+ * Repository Image List
+ * @class
+ */
+class RepositoryImageVO extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User appid.
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * User UIN
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Nickname.
+         * @type {string || null}
+         */
+        this.NickName = null;
+
+        /**
+         * Mirror id.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Image name.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Image creation time.
+         * @type {string || null}
+         */
+        this.InstanceCreateTime = null;
+
+        /**
+         * Image Size with Unit
+         * @type {string || null}
+         */
+        this.InstanceSize = null;
+
+        /**
+         * Build times.
+         * @type {number || null}
+         */
+        this.BuildCount = null;
+
+        /**
+         * Image type.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Authorization status.
+         * @type {number || null}
+         */
+        this.AuthStatus = null;
+
+        /**
+         * Mirror version.
+         * @type {string || null}
+         */
+        this.InstanceVersion = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Repository address.
+         * @type {string || null}
+         */
+        this.RepositoryUrl = null;
+
+        /**
+         * Repository name.
+         * @type {string || null}
+         */
+        this.RepositoryName = null;
+
+        /**
+         * Core or Not
+         * @type {number || null}
+         */
+        this.IsCore = null;
+
+        /**
+         * Vulnerability risk.
+         * @type {number || null}
+         */
+        this.VulRisk = null;
+
+        /**
+         * Check task.
+         * @type {number || null}
+         */
+        this.CheckCount = null;
+
+        /**
+         * Health Checkup Time
+         * @type {string || null}
+         */
+        this.CheckTime = null;
+
+        /**
+         * New Asset or Not. 1: New
+         * @type {number || null}
+         */
+        this.IsNewAsset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.NickName = 'NickName' in params ? params.NickName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceCreateTime = 'InstanceCreateTime' in params ? params.InstanceCreateTime : null;
+        this.InstanceSize = 'InstanceSize' in params ? params.InstanceSize : null;
+        this.BuildCount = 'BuildCount' in params ? params.BuildCount : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.AuthStatus = 'AuthStatus' in params ? params.AuthStatus : null;
+        this.InstanceVersion = 'InstanceVersion' in params ? params.InstanceVersion : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.RepositoryUrl = 'RepositoryUrl' in params ? params.RepositoryUrl : null;
+        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
+        this.IsCore = 'IsCore' in params ? params.IsCore : null;
+        this.VulRisk = 'VulRisk' in params ? params.VulRisk : null;
+        this.CheckCount = 'CheckCount' in params ? params.CheckCount : null;
+        this.CheckTime = 'CheckTime' in params ? params.CheckTime : null;
+        this.IsNewAsset = 'IsNewAsset' in params ? params.IsNewAsset : null;
+
+    }
+}
+
+/**
  * Risk details
  * @class
  */
@@ -7114,18 +12305,211 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * DescribeSubnetAssets request structure.
+ * Details of a vulnerability
  * @class
  */
-class DescribeSubnetAssetsRequest extends  AbstractModel {
+class AssetViewVULRisk extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter parameters
-         * @type {Filter || null}
+         * Affected assets
+         * @type {string || null}
          */
-        this.Filter = null;
+        this.AffectAsset = null;
+
+        /**
+         * Risk level: low - low risk, high - high risk, middle - medium risk, info - note, extreme - critical.
+
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Asset type
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Components
+         * @type {string || null}
+         */
+        this.Component = null;
+
+        /**
+         * Service
+         * @type {string || null}
+         */
+        this.Service = null;
+
+        /**
+         * Last detected 
+         * @type {string || null}
+         */
+        this.RecentTime = null;
+
+        /**
+         * First detected
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * Status of the risk. `0`: Not handled, `1`: Handled; `2`: Ignored
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Risk ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Frontend index
+         * @type {string || null}
+         */
+        this.Index = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * User `appid`
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * User Nickname
+         * @type {string || null}
+         */
+        this.Nick = null;
+
+        /**
+         * User UIN
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Vulnerability type
+         * @type {string || null}
+         */
+        this.VULType = null;
+
+        /**
+         * Port
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * Vulnerability description
+         * @type {string || null}
+         */
+        this.Describe = null;
+
+        /**
+         * Vulnerability impact component.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * Technology reference.
+         * @type {string || null}
+         */
+        this.References = null;
+
+        /**
+         * Vulnerability impact version.
+         * @type {string || null}
+         */
+        this.AppVersion = null;
+
+        /**
+         * Risks.
+         * @type {string || null}
+         */
+        this.VULURL = null;
+
+        /**
+         * Vulnerability name
+         * @type {string || null}
+         */
+        this.VULName = null;
+
+        /**
+         * CVE number
+         * @type {string || null}
+         */
+        this.CVE = null;
+
+        /**
+         * Fixing solution
+         * @type {string || null}
+         */
+        this.Fix = null;
+
+        /**
+         * POC ID
+         * @type {string || null}
+         */
+        this.POCId = null;
+
+        /**
+         * Scan Source
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * CWPP edition
+         * @type {number || null}
+         */
+        this.CWPVersion = null;
+
+        /**
+         * Whether it can be fixed 
+         * @type {boolean || null}
+         */
+        this.IsSupportRepair = null;
+
+        /**
+         * Whether it can be detected
+         * @type {boolean || null}
+         */
+        this.IsSupportDetect = null;
+
+        /**
+         * Instance UUID
+         * @type {string || null}
+         */
+        this.InstanceUUID = null;
+
+        /**
+         * Payload
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+        /**
+         * Emergency Vulnerability Type. 1-Emergency Vulnerability; 0-Non-emergency Vulnerability.
+         * @type {number || null}
+         */
+        this.EMGCVulType = null;
 
     }
 
@@ -7136,12 +12520,39 @@ class DescribeSubnetAssetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Filter) {
-            let obj = new Filter();
-            obj.deserialize(params.Filter)
-            this.Filter = obj;
-        }
+        this.AffectAsset = 'AffectAsset' in params ? params.AffectAsset : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Component = 'Component' in params ? params.Component : null;
+        this.Service = 'Service' in params ? params.Service : null;
+        this.RecentTime = 'RecentTime' in params ? params.RecentTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Index = 'Index' in params ? params.Index : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Nick = 'Nick' in params ? params.Nick : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.VULType = 'VULType' in params ? params.VULType : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Describe = 'Describe' in params ? params.Describe : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.References = 'References' in params ? params.References : null;
+        this.AppVersion = 'AppVersion' in params ? params.AppVersion : null;
+        this.VULURL = 'VULURL' in params ? params.VULURL : null;
+        this.VULName = 'VULName' in params ? params.VULName : null;
+        this.CVE = 'CVE' in params ? params.CVE : null;
+        this.Fix = 'Fix' in params ? params.Fix : null;
+        this.POCId = 'POCId' in params ? params.POCId : null;
+        this.From = 'From' in params ? params.From : null;
+        this.CWPVersion = 'CWPVersion' in params ? params.CWPVersion : null;
+        this.IsSupportRepair = 'IsSupportRepair' in params ? params.IsSupportRepair : null;
+        this.IsSupportDetect = 'IsSupportDetect' in params ? params.IsSupportDetect : null;
+        this.InstanceUUID = 'InstanceUUID' in params ? params.InstanceUUID : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+        this.EMGCVulType = 'EMGCVulType' in params ? params.EMGCVulType : null;
 
     }
 }
@@ -7257,214 +12668,84 @@ class DescribeClusterPodAssetsResponse extends  AbstractModel {
 }
 
 /**
- * Details of server assets
+ * DescribeCFWAssetStatistics response structure.
  * @class
  */
-class AssetBaseInfoResponse extends  AbstractModel {
+class DescribeCFWAssetStatisticsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 
+         * Total number of network assets
+         * @type {number || null}
+         */
+        this.NetworkTotal = null;
+
+        /**
+         * Asset CLB Quantity
+         * @type {number || null}
+         */
+        this.ClbTotal = null;
+
+        /**
+         * Number of NATs
+         * @type {number || null}
+         */
+        this.NatTotal = null;
+
+        /**
+         * Number of Public IP Addresses
+         * @type {number || null}
+         */
+        this.PublicAssetTotal = null;
+
+        /**
+         * Number of hosts
+         * @type {number || null}
+         */
+        this.CVMAssetTotal = null;
+
+        /**
+         * Configuration risk.
+         * @type {number || null}
+         */
+        this.CFGTotal = null;
+
+        /**
+         * Port risk.
+         * @type {number || null}
+         */
+        this.PortTotal = null;
+
+        /**
+         * Content risk.
+         * @type {number || null}
+         */
+        this.WebsiteTotal = null;
+
+        /**
+         * Risk service exposure.
+         * @type {number || null}
+         */
+        this.ServerTotal = null;
+
+        /**
+         * Weak password risk.
+         * @type {number || null}
+         */
+        this.WeakPasswordTotal = null;
+
+        /**
+         * Vulnerability risk.
+         * @type {number || null}
+         */
+        this.VULTotal = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.VpcId = null;
-
-        /**
-         * vpc-name
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.VpcName = null;
-
-        /**
-         * Asset name
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AssetName = null;
-
-        /**
-         * Operating system
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Os = null;
-
-        /**
-         * Public IP
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PublicIp = null;
-
-        /**
-         * Private IP
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PrivateIp = null;
-
-        /**
-         * Region
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * Asset type
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AssetType = null;
-
-        /**
-         * Asset ID
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AssetId = null;
-
-        /**
-         * Total number of accounts
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.AccountNum = null;
-
-        /**
-         * Number of ports
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.PortNum = null;
-
-        /**
-         * Number of processes
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ProcessNum = null;
-
-        /**
-         * Numbernumb of software applications
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.SoftApplicationNum = null;
-
-        /**
-         * Number of databases
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.DatabaseNum = null;
-
-        /**
-         * Number of web applications
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.WebApplicationNum = null;
-
-        /**
-         * Number of services
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ServiceNum = null;
-
-        /**
-         * Number of web frameworks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.WebFrameworkNum = null;
-
-        /**
-         * Number of websites
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.WebSiteNum = null;
-
-        /**
-         * Number of JAR packages
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.JarPackageNum = null;
-
-        /**
-         * Number of enabled services
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.StartServiceNum = null;
-
-        /**
-         * Number of scheduled tasks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ScheduledTaskNum = null;
-
-        /**
-         * Number of environment variables
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.EnvironmentVariableNum = null;
-
-        /**
-         * Number of kernel modules
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.KernelModuleNum = null;
-
-        /**
-         * Number of system installation packages
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.SystemInstallationPackageNum = null;
-
-        /**
-         * Remaining service validity in days
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.SurplusProtectDay = null;
-
-        /**
-         * Whether the CWPP agent is installed. Values: `1` (installed) and `0` (not installed)
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.CWPStatus = null;
-
-        /**
-         * Tags
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tag = null;
-
-        /**
-         * Protection level
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProtectLevel = null;
-
-        /**
-         * Usage of CWPP service in days
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ProtectedDay = null;
+        this.RequestId = null;
 
     }
 
@@ -7475,43 +12756,128 @@ Note: This field may return·null, indicating that no valid values can be obtain
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.VpcName = 'VpcName' in params ? params.VpcName : null;
-        this.AssetName = 'AssetName' in params ? params.AssetName : null;
-        this.Os = 'Os' in params ? params.Os : null;
-        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
-        this.PrivateIp = 'PrivateIp' in params ? params.PrivateIp : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.AssetType = 'AssetType' in params ? params.AssetType : null;
-        this.AssetId = 'AssetId' in params ? params.AssetId : null;
-        this.AccountNum = 'AccountNum' in params ? params.AccountNum : null;
-        this.PortNum = 'PortNum' in params ? params.PortNum : null;
-        this.ProcessNum = 'ProcessNum' in params ? params.ProcessNum : null;
-        this.SoftApplicationNum = 'SoftApplicationNum' in params ? params.SoftApplicationNum : null;
-        this.DatabaseNum = 'DatabaseNum' in params ? params.DatabaseNum : null;
-        this.WebApplicationNum = 'WebApplicationNum' in params ? params.WebApplicationNum : null;
-        this.ServiceNum = 'ServiceNum' in params ? params.ServiceNum : null;
-        this.WebFrameworkNum = 'WebFrameworkNum' in params ? params.WebFrameworkNum : null;
-        this.WebSiteNum = 'WebSiteNum' in params ? params.WebSiteNum : null;
-        this.JarPackageNum = 'JarPackageNum' in params ? params.JarPackageNum : null;
-        this.StartServiceNum = 'StartServiceNum' in params ? params.StartServiceNum : null;
-        this.ScheduledTaskNum = 'ScheduledTaskNum' in params ? params.ScheduledTaskNum : null;
-        this.EnvironmentVariableNum = 'EnvironmentVariableNum' in params ? params.EnvironmentVariableNum : null;
-        this.KernelModuleNum = 'KernelModuleNum' in params ? params.KernelModuleNum : null;
-        this.SystemInstallationPackageNum = 'SystemInstallationPackageNum' in params ? params.SystemInstallationPackageNum : null;
-        this.SurplusProtectDay = 'SurplusProtectDay' in params ? params.SurplusProtectDay : null;
-        this.CWPStatus = 'CWPStatus' in params ? params.CWPStatus : null;
+        this.NetworkTotal = 'NetworkTotal' in params ? params.NetworkTotal : null;
+        this.ClbTotal = 'ClbTotal' in params ? params.ClbTotal : null;
+        this.NatTotal = 'NatTotal' in params ? params.NatTotal : null;
+        this.PublicAssetTotal = 'PublicAssetTotal' in params ? params.PublicAssetTotal : null;
+        this.CVMAssetTotal = 'CVMAssetTotal' in params ? params.CVMAssetTotal : null;
+        this.CFGTotal = 'CFGTotal' in params ? params.CFGTotal : null;
+        this.PortTotal = 'PortTotal' in params ? params.PortTotal : null;
+        this.WebsiteTotal = 'WebsiteTotal' in params ? params.WebsiteTotal : null;
+        this.ServerTotal = 'ServerTotal' in params ? params.ServerTotal : null;
+        this.WeakPasswordTotal = 'WeakPasswordTotal' in params ? params.WeakPasswordTotal : null;
+        this.VULTotal = 'VULTotal' in params ? params.VULTotal : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.Tag) {
-            this.Tag = new Array();
-            for (let z in params.Tag) {
-                let obj = new Tag();
-                obj.deserialize(params.Tag[z]);
-                this.Tag.push(obj);
+    }
+}
+
+/**
+ * DescribeGatewayAssets response structure.
+ * @class
+ */
+class DescribeGatewayAssetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List
+         * @type {Array.<GateWayAsset> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Total number.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Region list
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.RegionList = null;
+
+        /**
+         * Asset Type List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.AssetTypeList = null;
+
+        /**
+         * VPC List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.VpcList = null;
+
+        /**
+         * AppID List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.AppIdList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new GateWayAsset();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
             }
         }
-        this.ProtectLevel = 'ProtectLevel' in params ? params.ProtectLevel : null;
-        this.ProtectedDay = 'ProtectedDay' in params ? params.ProtectedDay : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RegionList) {
+            this.RegionList = new Array();
+            for (let z in params.RegionList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.RegionList[z]);
+                this.RegionList.push(obj);
+            }
+        }
+
+        if (params.AssetTypeList) {
+            this.AssetTypeList = new Array();
+            for (let z in params.AssetTypeList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.AssetTypeList[z]);
+                this.AssetTypeList.push(obj);
+            }
+        }
+
+        if (params.VpcList) {
+            this.VpcList = new Array();
+            for (let z in params.VpcList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.VpcList[z]);
+                this.VpcList.push(obj);
+            }
+        }
+
+        if (params.AppIdList) {
+            this.AppIdList = new Array();
+            for (let z in params.AppIdList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.AppIdList[z]);
+                this.AppIdList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7673,12 +13039,165 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * DescribeRiskCenterPortViewPortRiskList request structure.
+ * 
  * @class
  */
-class DescribeRiskCenterPortViewPortRiskListRequest extends  AbstractModel {
+class SubUserInfo extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AppID = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.NickName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OwnerAppID = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OwnerNickName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OwnerMemberID = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.CloudType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ServiceCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.InterfaceCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AssetCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.LogCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ConfigRiskCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ActionRiskCount = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsAccessCloudAudit = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsAccessCheck = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsAccessUeba = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.AppID = 'AppID' in params ? params.AppID : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.NickName = 'NickName' in params ? params.NickName : null;
+        this.OwnerAppID = 'OwnerAppID' in params ? params.OwnerAppID : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.OwnerNickName = 'OwnerNickName' in params ? params.OwnerNickName : null;
+        this.OwnerMemberID = 'OwnerMemberID' in params ? params.OwnerMemberID : null;
+        this.CloudType = 'CloudType' in params ? params.CloudType : null;
+        this.ServiceCount = 'ServiceCount' in params ? params.ServiceCount : null;
+        this.InterfaceCount = 'InterfaceCount' in params ? params.InterfaceCount : null;
+        this.AssetCount = 'AssetCount' in params ? params.AssetCount : null;
+        this.LogCount = 'LogCount' in params ? params.LogCount : null;
+        this.ConfigRiskCount = 'ConfigRiskCount' in params ? params.ConfigRiskCount : null;
+        this.ActionRiskCount = 'ActionRiskCount' in params ? params.ActionRiskCount : null;
+        this.IsAccessCloudAudit = 'IsAccessCloudAudit' in params ? params.IsAccessCloudAudit : null;
+        this.IsAccessCheck = 'IsAccessCheck' in params ? params.IsAccessCheck : null;
+        this.IsAccessUeba = 'IsAccessUeba' in params ? params.IsAccessUeba : null;
+
+    }
+}
+
+/**
+ * DescribeRiskCenterAssetViewCFGRiskList request structure.
+ * @class
+ */
+class DescribeRiskCenterAssetViewCFGRiskListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group account member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
 
         /**
          * Filter conditions
@@ -7701,6 +13220,7 @@ class DescribeRiskCenterPortViewPortRiskListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
 
         if (params.Filter) {
             let obj = new Filter();
@@ -7721,48 +13241,18 @@ class DescribeRiskCenterPortViewPortRiskListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRiskCenterPortViewPortRiskList response structure.
+ * DescribeSubnetAssets request structure.
  * @class
  */
-class DescribeRiskCenterPortViewPortRiskListResponse extends  AbstractModel {
+class DescribeSubnetAssetsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of entries
-         * @type {number || null}
+         * Filter parameters
+         * @type {Filter || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * List of port risks by assets
-         * @type {Array.<PortViewPortRisk> || null}
-         */
-        this.Data = null;
-
-        /**
-         * List of risk levels
-         * @type {Array.<FilterDataObject> || null}
-         */
-        this.LevelLists = null;
-
-        /**
-         * List of suggestions
-         * @type {Array.<FilterDataObject> || null}
-         */
-        this.SuggestionLists = null;
-
-        /**
-         * List of check source
-         * @type {Array.<FilterDataObject> || null}
-         */
-        this.FromLists = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Filter = null;
 
     }
 
@@ -7773,44 +13263,262 @@ class DescribeRiskCenterPortViewPortRiskListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new PortViewPortRisk();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
         }
 
-        if (params.LevelLists) {
-            this.LevelLists = new Array();
-            for (let z in params.LevelLists) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.LevelLists[z]);
-                this.LevelLists.push(obj);
-            }
-        }
+    }
+}
 
-        if (params.SuggestionLists) {
-            this.SuggestionLists = new Array();
-            for (let z in params.SuggestionLists) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.SuggestionLists[z]);
-                this.SuggestionLists.push(obj);
-            }
-        }
+/**
+ * DescribeAccessKeyUserDetail request structure.
+ * @class
+ */
+class DescribeAccessKeyUserDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
 
-        if (params.FromLists) {
-            this.FromLists = new Array();
-            for (let z in params.FromLists) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.FromLists[z]);
-                this.FromLists.push(obj);
+        /**
+         * Account uin itself.
+         * @type {string || null}
+         */
+        this.SubUin = null;
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubUin = 'SubUin' in params ? params.SubUin : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+    }
+}
+
+/**
+ * Record details.
+ * @class
+ */
+class CallRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Invocation record ID.
+         * @type {string || null}
+         */
+        this.CallID = null;
+
+        /**
+         * Access key.
+         * @type {string || null}
+         */
+        this.AccessKey = null;
+
+        /**
+         * Access key remark.
+         * @type {string || null}
+         */
+        this.AccessKeyRemark = null;
+
+        /**
+         * Access key ID.
+         * @type {number || null}
+         */
+        this.AccessKeyID = null;
+
+        /**
+         * Source IP of the call.
+         * @type {string || null}
+         */
+        this.SourceIP = null;
+
+        /**
+         * Source IP of the call remark.
+         * @type {string || null}
+         */
+        this.SourceIPRemark = null;
+
+        /**
+         * Source IP region of the call.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * IP type 0: within the account (unremarked) 1: outside the account (unremarked) 2: within the account (remarked) 3: outside the account (remarked).
+         * @type {number || null}
+         */
+        this.IPType = null;
+
+        /**
+         * Call interface name.
+         * @type {string || null}
+         */
+        this.EventName = null;
+
+        /**
+         * Call the product name.
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * Invocation type.
+0: console invocation.
+1:API
+         * @type {number || null}
+         */
+        this.EventType = null;
+
+        /**
+         * Type of user: CAMUser/root/AssumedRole.
+
+         * @type {string || null}
+         */
+        this.UserType = null;
+
+        /**
+         * User/Role name.
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Policy List
+         * @type {Array.<string> || null}
+         */
+        this.PolicySet = null;
+
+        /**
+         * Number of calls.
+         * @type {number || null}
+         */
+        this.CallCount = null;
+
+        /**
+         * Error code.
+0: Successful
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * First time call time.
+         * @type {string || null}
+         */
+        this.FirstCallTime = null;
+
+        /**
+         * Call time.
+         * @type {string || null}
+         */
+        this.LastCallTime = null;
+
+        /**
+         * IP associated asset ID. if an empty string, means not associated with.
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * Associated asset name of the IP.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Aggregate date.
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * appid
+         * @type {number || null}
+         */
+        this.AppID = null;
+
+        /**
+         * Display status.
+         * @type {boolean || null}
+         */
+        this.ShowStatus = null;
+
+        /**
+         * Carrier.
+         * @type {string || null}
+         */
+        this.ISP = null;
+
+        /**
+         * vpc information list outside the account.
+         * @type {Array.<SourceIPVpcInfo> || null}
+         */
+        this.VpcInfo = null;
+
+        /**
+         * Request client list.
+         * @type {Array.<string> || null}
+         */
+        this.ReqClient = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CallID = 'CallID' in params ? params.CallID : null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.AccessKeyRemark = 'AccessKeyRemark' in params ? params.AccessKeyRemark : null;
+        this.AccessKeyID = 'AccessKeyID' in params ? params.AccessKeyID : null;
+        this.SourceIP = 'SourceIP' in params ? params.SourceIP : null;
+        this.SourceIPRemark = 'SourceIPRemark' in params ? params.SourceIPRemark : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.IPType = 'IPType' in params ? params.IPType : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.UserType = 'UserType' in params ? params.UserType : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.PolicySet = 'PolicySet' in params ? params.PolicySet : null;
+        this.CallCount = 'CallCount' in params ? params.CallCount : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.FirstCallTime = 'FirstCallTime' in params ? params.FirstCallTime : null;
+        this.LastCallTime = 'LastCallTime' in params ? params.LastCallTime : null;
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.AppID = 'AppID' in params ? params.AppID : null;
+        this.ShowStatus = 'ShowStatus' in params ? params.ShowStatus : null;
+        this.ISP = 'ISP' in params ? params.ISP : null;
+
+        if (params.VpcInfo) {
+            this.VpcInfo = new Array();
+            for (let z in params.VpcInfo) {
+                let obj = new SourceIPVpcInfo();
+                obj.deserialize(params.VpcInfo[z]);
+                this.VpcInfo.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ReqClient = 'ReqClient' in params ? params.ReqClient : null;
 
     }
 }
@@ -8108,6 +13816,49 @@ class ReportTaskIdList extends  AbstractModel {
 }
 
 /**
+ * DescribeExposeAssetCategory response structure.
+ * @class
+ */
+class DescribeExposeAssetCategoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud boundary analytics asset classification list.
+         * @type {Array.<ExposeAssetTypeItem> || null}
+         */
+        this.ExposeAssetTypeList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ExposeAssetTypeList) {
+            this.ExposeAssetTypeList = new Array();
+            for (let z in params.ExposeAssetTypeList) {
+                let obj = new ExposeAssetTypeItem();
+                obj.deserialize(params.ExposeAssetTypeList[z]);
+                this.ExposeAssetTypeList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AddNewBindRoleUser response structure.
  * @class
  */
@@ -8143,6 +13894,396 @@ class AddNewBindRoleUserResponse extends  AbstractModel {
 }
 
 /**
+ * Domain assets 
+ * @class
+ */
+class DomainAssetVO extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Asset ID
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * Asset name
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.AssetName = null;
+
+        /**
+         * Asset type
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.AssetType = null;
+
+        /**
+         * Region
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Region = null;
+
+        /**
+         * WAF status
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.WAFStatus = null;
+
+        /**
+         * Asset creation time
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AssetCreateTime = null;
+
+        /**
+         * Appid
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Account ID
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Account name
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NickName = null;
+
+        /**
+         * Whether it's a critical asset
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsCore = null;
+
+        /**
+         * Whether it's a cloud asset
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsCloud = null;
+
+        /**
+         * Network attacks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Attack = null;
+
+        /**
+         * Network access
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Access = null;
+
+        /**
+         * Number of blocked attacks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Intercept = null;
+
+        /**
+         * Inbound peak bandwidth
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InBandwidth = null;
+
+        /**
+         * Outbound peak bandwidth
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OutBandwidth = null;
+
+        /**
+         * Total inbound traffic
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InFlow = null;
+
+        /**
+         * Total outbound traffic
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OutFlow = null;
+
+        /**
+         * Last scan time
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastScanTime = null;
+
+        /**
+         * Port risks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PortRisk = null;
+
+        /**
+         * Vulnerabilities
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VulnerabilityRisk = null;
+
+        /**
+         * Configuration risks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ConfigurationRisk = null;
+
+        /**
+         * Scan tasks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ScanTask = null;
+
+        /**
+         * Domain name
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubDomain = null;
+
+        /**
+         * Resolved IP
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SeverIp = null;
+
+        /**
+         * Bot access requests
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BotCount = null;
+
+        /**
+         * Weak password risks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.WeakPassword = null;
+
+        /**
+         * Content risks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.WebContentRisk = null;
+
+        /**
+         * Tags
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
+        /**
+         * The type of associated instances.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * Member ID
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * CC attacks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CCAttack = null;
+
+        /**
+         * Web attack
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.WebAttack = null;
+
+        /**
+         * Services exposed to risks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ServiceRisk = null;
+
+        /**
+         * Whether it's a newly-added asset. Values: `1` (Yes), `0` (No)
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsNewAsset = null;
+
+        /**
+         * Random third-level domain name of the asset pending ownership verification
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VerifyDomain = null;
+
+        /**
+         * TXT record of the asset pending ownership verification
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VerifyTXTRecord = null;
+
+        /**
+         * Ownership verification status of the asset. `0`: Pending verification; `1`: Verified; `2`: Verifying; `3`: TXT record verification failed; `4`: Human verification failed.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VerifyStatus = null;
+
+        /**
+         * u200cNumber of bot attacks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BotAccessCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.AssetName = 'AssetName' in params ? params.AssetName : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.WAFStatus = 'WAFStatus' in params ? params.WAFStatus : null;
+        this.AssetCreateTime = 'AssetCreateTime' in params ? params.AssetCreateTime : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.NickName = 'NickName' in params ? params.NickName : null;
+        this.IsCore = 'IsCore' in params ? params.IsCore : null;
+        this.IsCloud = 'IsCloud' in params ? params.IsCloud : null;
+        this.Attack = 'Attack' in params ? params.Attack : null;
+        this.Access = 'Access' in params ? params.Access : null;
+        this.Intercept = 'Intercept' in params ? params.Intercept : null;
+        this.InBandwidth = 'InBandwidth' in params ? params.InBandwidth : null;
+        this.OutBandwidth = 'OutBandwidth' in params ? params.OutBandwidth : null;
+        this.InFlow = 'InFlow' in params ? params.InFlow : null;
+        this.OutFlow = 'OutFlow' in params ? params.OutFlow : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.PortRisk = 'PortRisk' in params ? params.PortRisk : null;
+        this.VulnerabilityRisk = 'VulnerabilityRisk' in params ? params.VulnerabilityRisk : null;
+        this.ConfigurationRisk = 'ConfigurationRisk' in params ? params.ConfigurationRisk : null;
+        this.ScanTask = 'ScanTask' in params ? params.ScanTask : null;
+        this.SubDomain = 'SubDomain' in params ? params.SubDomain : null;
+        this.SeverIp = 'SeverIp' in params ? params.SeverIp : null;
+        this.BotCount = 'BotCount' in params ? params.BotCount : null;
+        this.WeakPassword = 'WeakPassword' in params ? params.WeakPassword : null;
+        this.WebContentRisk = 'WebContentRisk' in params ? params.WebContentRisk : null;
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.CCAttack = 'CCAttack' in params ? params.CCAttack : null;
+        this.WebAttack = 'WebAttack' in params ? params.WebAttack : null;
+        this.ServiceRisk = 'ServiceRisk' in params ? params.ServiceRisk : null;
+        this.IsNewAsset = 'IsNewAsset' in params ? params.IsNewAsset : null;
+        this.VerifyDomain = 'VerifyDomain' in params ? params.VerifyDomain : null;
+        this.VerifyTXTRecord = 'VerifyTXTRecord' in params ? params.VerifyTXTRecord : null;
+        this.VerifyStatus = 'VerifyStatus' in params ? params.VerifyStatus : null;
+        this.BotAccessCount = 'BotAccessCount' in params ? params.BotAccessCount : null;
+
+    }
+}
+
+/**
+ * AK brief information.
+ * @class
+ */
+class AKInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ak id.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * ak specific value. returns temporary key when temporary key is used.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Associated account.
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
  * Filter conditions.
  * @class
  */
@@ -8163,9 +14304,9 @@ class WhereFilter extends  AbstractModel {
         this.Values = null;
 
         /**
-         *  
-`1`: =; `2`: >; `3`: <; `4`: ≥; `5`: ≤; `6`: ≠;
-`7`: Exact match; `9`: Fuzzy match; `13`: Non-fuzzy match; `14`: AND
+         * Central platform definition:.
+1 equal 2 larger than 3 less than 4 greater than or equal to 5 less than or equal to 6 not equal to 9 fuzzy matching 13 non-fuzzy matching 14 bitwise and.
+Exact match fills 7. fuzzy matching fills 9. 
 
          * @type {number || null}
          */
@@ -8183,6 +14324,90 @@ class WhereFilter extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
         this.OperatorType = 'OperatorType' in params ? params.OperatorType : null;
+
+    }
+}
+
+/**
+ * Exposed asset category.
+ * @class
+ */
+class ExposeAssetTypeItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud service provider.
+         * @type {string || null}
+         */
+        this.Provider = null;
+
+        /**
+         * Vendor name.
+         * @type {string || null}
+         */
+        this.ProviderName = null;
+
+        /**
+         * Asset type.
+         * @type {string || null}
+         */
+        this.AssetType = null;
+
+        /**
+         * Asset type name.
+         * @type {string || null}
+         */
+        this.AssetTypeName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Provider = 'Provider' in params ? params.Provider : null;
+        this.ProviderName = 'ProviderName' in params ? params.ProviderName : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.AssetTypeName = 'AssetTypeName' in params ? params.AssetTypeName : null;
+
+    }
+}
+
+/**
+ * ModifyOrganizationAccountStatus response structure.
+ * @class
+ */
+class ModifyOrganizationAccountStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * If the returned value is 0, the modification was successful.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8536,6 +14761,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeExposePath response structure.
+ * @class
+ */
+class DescribeExposePathResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud boundary analysis path within node.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDbAssets request structure.
  * @class
  */
@@ -8708,24 +14968,42 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * CreateDomainAndIp response structure.
+ * DescribeAccessKeyAlarm request structure.
  * @class
  */
-class CreateDomainAndIpResponse extends  AbstractModel {
+class DescribeAccessKeyAlarmRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of created assets
-         * @type {number || null}
+         * Filter.
+         * @type {Filter || null}
          */
-        this.Data = null;
+        this.Filter = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Access key ID.
+         * @type {number || null}
+         */
+        this.AccessKeyID = null;
+
+        /**
+         * ID of the source IP.
+         * @type {number || null}
+         */
+        this.SourceIPID = null;
+
+        /**
+         * Account UIN
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SubUin = null;
 
     }
 
@@ -8736,8 +15014,16 @@ class CreateDomainAndIpResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Data = 'Data' in params ? params.Data : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.AccessKeyID = 'AccessKeyID' in params ? params.AccessKeyID : null;
+        this.SourceIPID = 'SourceIPID' in params ? params.SourceIPID : null;
+        this.SubUin = 'SubUin' in params ? params.SubUin : null;
 
     }
 }
@@ -8749,6 +15035,12 @@ class CreateDomainAndIpResponse extends  AbstractModel {
 class DescribeRiskCenterAssetViewVULRiskListRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
 
         /**
          * Filter conditions
@@ -8771,6 +15063,7 @@ class DescribeRiskCenterAssetViewVULRiskListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
 
         if (params.Filter) {
             let obj = new Filter();
@@ -8833,6 +15126,313 @@ class TaskCenterCFGRiskInputParam extends  AbstractModel {
 }
 
 /**
+ * DescribeExposures request structure.
+ * @class
+ */
+class DescribeExposuresRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filtered Content
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Pagination size.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting type
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sorting field.
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * Access key asset information (source IP perspective).
+ * @class
+ */
+class SourceIPAsset extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * id of the source IP.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Source IP.
+         * @type {string || null}
+         */
+        this.SourceIP = null;
+
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Account associate APPID.
+         * @type {number || null}
+         */
+        this.AppID = null;
+
+        /**
+         * IP region.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * API call method.
+-1: uncounted.
+0: console invocation.
+1:API
+         * @type {number || null}
+         */
+        this.EventType = null;
+
+        /**
+         * IP type.
+0: within the account (unremarked).
+1: external accounts (unremarked).
+2: within the account (remarked).
+3: external account (remarked).
+         * @type {number || null}
+         */
+        this.IPType = null;
+
+        /**
+         * Alarm information list.
+         * @type {Array.<AccessKeyAlarmInfo> || null}
+         */
+        this.AccessKeyAlarmList = null;
+
+        /**
+         * ak information list.
+         * @type {Array.<AKInfo> || null}
+         */
+        this.AKInfo = null;
+
+        /**
+         * Number of API calls.
+         * @type {number || null}
+         */
+        this.ActionCount = null;
+
+        /**
+         * Last access Time
+         * @type {string || null}
+         */
+        this.LastAccessTime = null;
+
+        /**
+         * IP associated instance ID. if an empty string, represents an asset not within the account.
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * Associated instance name.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Account associate Uin.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Nickname.
+         * @type {string || null}
+         */
+        this.Nickname = null;
+
+        /**
+         * Display status.
+         * @type {boolean || null}
+         */
+        this.ShowStatus = null;
+
+        /**
+         * ISP field.
+         * @type {string || null}
+         */
+        this.ISP = null;
+
+        /**
+         * vpc information outside the account.
+         * @type {Array.<SourceIPVpcInfo> || null}
+         */
+        this.VpcInfo = null;
+
+        /**
+         * Cloud type.
+0 for tencent cloud.
+         * @type {number || null}
+         */
+        this.CloudType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.SourceIP = 'SourceIP' in params ? params.SourceIP : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.AppID = 'AppID' in params ? params.AppID : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.IPType = 'IPType' in params ? params.IPType : null;
+
+        if (params.AccessKeyAlarmList) {
+            this.AccessKeyAlarmList = new Array();
+            for (let z in params.AccessKeyAlarmList) {
+                let obj = new AccessKeyAlarmInfo();
+                obj.deserialize(params.AccessKeyAlarmList[z]);
+                this.AccessKeyAlarmList.push(obj);
+            }
+        }
+
+        if (params.AKInfo) {
+            this.AKInfo = new Array();
+            for (let z in params.AKInfo) {
+                let obj = new AKInfo();
+                obj.deserialize(params.AKInfo[z]);
+                this.AKInfo.push(obj);
+            }
+        }
+        this.ActionCount = 'ActionCount' in params ? params.ActionCount : null;
+        this.LastAccessTime = 'LastAccessTime' in params ? params.LastAccessTime : null;
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Nickname = 'Nickname' in params ? params.Nickname : null;
+        this.ShowStatus = 'ShowStatus' in params ? params.ShowStatus : null;
+        this.ISP = 'ISP' in params ? params.ISP : null;
+
+        if (params.VpcInfo) {
+            this.VpcInfo = new Array();
+            for (let z in params.VpcInfo) {
+                let obj = new SourceIPVpcInfo();
+                obj.deserialize(params.VpcInfo[z]);
+                this.VpcInfo.push(obj);
+            }
+        }
+        this.CloudType = 'CloudType' in params ? params.CloudType : null;
+
+    }
+}
+
+/**
+ * DescribeHighBaseLineRiskList response structure.
+ * @class
+ */
+class DescribeHighBaseLineRiskListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of high-risk risks.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * High-Risk baseline risk list.
+         * @type {Array.<HighBaseLineRiskItem> || null}
+         */
+        this.HighBaseLineRiskList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.HighBaseLineRiskList) {
+            this.HighBaseLineRiskList = new Array();
+            for (let z in params.HighBaseLineRiskList) {
+                let obj = new HighBaseLineRiskItem();
+                obj.deserialize(params.HighBaseLineRiskList[z]);
+                this.HighBaseLineRiskList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateDomainAndIp request structure.
  * @class
  */
@@ -8876,285 +15476,66 @@ class CreateDomainAndIpRequest extends  AbstractModel {
 }
 
 /**
- * Domain assets 
+ * DescribeRiskCenterCFGViewCFGRiskList response structure.
  * @class
  */
-class DomainAssetVO extends  AbstractModel {
+class DescribeRiskCenterCFGViewCFGRiskListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Asset ID
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.AssetId = null;
-
-        /**
-         * Asset name
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.AssetName = null;
-
-        /**
-         * Asset type
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.AssetType = null;
-
-        /**
-         * Region
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.Region = null;
-
-        /**
-         * WAF status
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Total number of entries
          * @type {number || null}
          */
-        this.WAFStatus = null;
+        this.TotalCount = null;
 
         /**
-         * Asset creation time
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Configuration Risk List from Asset's Perspective
+         * @type {Array.<CFGViewCFGRisk> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Status list
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.StatusLists = null;
+
+        /**
+         * Danger Level List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.LevelLists = null;
+
+        /**
+         * Configuration Name List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.CFGNameLists = null;
+
+        /**
+         * Check Type List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.CheckTypeLists = null;
+
+        /**
+         * Asset Type List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.InstanceTypeLists = null;
+
+        /**
+         * Source List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.FromLists = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.AssetCreateTime = null;
-
-        /**
-         * Appid
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.AppId = null;
-
-        /**
-         * Account ID
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-        /**
-         * Account name
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NickName = null;
-
-        /**
-         * Whether it's a critical asset
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsCore = null;
-
-        /**
-         * Whether it's a cloud asset
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsCloud = null;
-
-        /**
-         * Network attacks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Attack = null;
-
-        /**
-         * Network access
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Access = null;
-
-        /**
-         * Number of blocked attacks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Intercept = null;
-
-        /**
-         * Inbound peak bandwidth
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InBandwidth = null;
-
-        /**
-         * Outbound peak bandwidth
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OutBandwidth = null;
-
-        /**
-         * Total inbound traffic
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InFlow = null;
-
-        /**
-         * Total outbound traffic
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OutFlow = null;
-
-        /**
-         * Last scan time
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LastScanTime = null;
-
-        /**
-         * Port risks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.PortRisk = null;
-
-        /**
-         * Vulnerabilities
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.VulnerabilityRisk = null;
-
-        /**
-         * Configuration risks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ConfigurationRisk = null;
-
-        /**
-         * Scan tasks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ScanTask = null;
-
-        /**
-         * Domain name
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SubDomain = null;
-
-        /**
-         * Resolved IP
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.SeverIp = null;
-
-        /**
-         * Bot access requests
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.BotCount = null;
-
-        /**
-         * Weak password risks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.WeakPassword = null;
-
-        /**
-         * Content risks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.WebContentRisk = null;
-
-        /**
-         * Tags
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tag = null;
-
-        /**
-         * The type of associated instances.
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SourceType = null;
-
-        /**
-         * Member ID
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MemberId = null;
-
-        /**
-         * CC attacks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.CCAttack = null;
-
-        /**
-         * Web attack
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.WebAttack = null;
-
-        /**
-         * Services exposed to risks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ServiceRisk = null;
-
-        /**
-         * Whether it's a newly-added asset. Values: `1` (Yes), `0` (No)
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsNewAsset = null;
-
-        /**
-         * Random third-level domain name of the asset pending ownership verification
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.VerifyDomain = null;
-
-        /**
-         * TXT record of the asset pending ownership verification
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.VerifyTXTRecord = null;
-
-        /**
-         * Ownership verification status of the asset. `0`: Pending verification; `1`: Verified; `2`: Verifying; `3`: TXT record verification failed; `4`: Human verification failed.
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.VerifyStatus = null;
-
-        /**
-         * u200cNumber of bot attacks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.BotAccessCount = null;
+        this.RequestId = null;
 
     }
 
@@ -9165,53 +15546,111 @@ Note: This field may return·null, indicating that no valid values can be obtain
         if (!params) {
             return;
         }
-        this.AssetId = 'AssetId' in params ? params.AssetId : null;
-        this.AssetName = 'AssetName' in params ? params.AssetName : null;
-        this.AssetType = 'AssetType' in params ? params.AssetType : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.WAFStatus = 'WAFStatus' in params ? params.WAFStatus : null;
-        this.AssetCreateTime = 'AssetCreateTime' in params ? params.AssetCreateTime : null;
-        this.AppId = 'AppId' in params ? params.AppId : null;
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.NickName = 'NickName' in params ? params.NickName : null;
-        this.IsCore = 'IsCore' in params ? params.IsCore : null;
-        this.IsCloud = 'IsCloud' in params ? params.IsCloud : null;
-        this.Attack = 'Attack' in params ? params.Attack : null;
-        this.Access = 'Access' in params ? params.Access : null;
-        this.Intercept = 'Intercept' in params ? params.Intercept : null;
-        this.InBandwidth = 'InBandwidth' in params ? params.InBandwidth : null;
-        this.OutBandwidth = 'OutBandwidth' in params ? params.OutBandwidth : null;
-        this.InFlow = 'InFlow' in params ? params.InFlow : null;
-        this.OutFlow = 'OutFlow' in params ? params.OutFlow : null;
-        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
-        this.PortRisk = 'PortRisk' in params ? params.PortRisk : null;
-        this.VulnerabilityRisk = 'VulnerabilityRisk' in params ? params.VulnerabilityRisk : null;
-        this.ConfigurationRisk = 'ConfigurationRisk' in params ? params.ConfigurationRisk : null;
-        this.ScanTask = 'ScanTask' in params ? params.ScanTask : null;
-        this.SubDomain = 'SubDomain' in params ? params.SubDomain : null;
-        this.SeverIp = 'SeverIp' in params ? params.SeverIp : null;
-        this.BotCount = 'BotCount' in params ? params.BotCount : null;
-        this.WeakPassword = 'WeakPassword' in params ? params.WeakPassword : null;
-        this.WebContentRisk = 'WebContentRisk' in params ? params.WebContentRisk : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Tag) {
-            this.Tag = new Array();
-            for (let z in params.Tag) {
-                let obj = new Tag();
-                obj.deserialize(params.Tag[z]);
-                this.Tag.push(obj);
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new CFGViewCFGRisk();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
             }
         }
-        this.SourceType = 'SourceType' in params ? params.SourceType : null;
-        this.MemberId = 'MemberId' in params ? params.MemberId : null;
-        this.CCAttack = 'CCAttack' in params ? params.CCAttack : null;
-        this.WebAttack = 'WebAttack' in params ? params.WebAttack : null;
-        this.ServiceRisk = 'ServiceRisk' in params ? params.ServiceRisk : null;
-        this.IsNewAsset = 'IsNewAsset' in params ? params.IsNewAsset : null;
-        this.VerifyDomain = 'VerifyDomain' in params ? params.VerifyDomain : null;
-        this.VerifyTXTRecord = 'VerifyTXTRecord' in params ? params.VerifyTXTRecord : null;
-        this.VerifyStatus = 'VerifyStatus' in params ? params.VerifyStatus : null;
-        this.BotAccessCount = 'BotAccessCount' in params ? params.BotAccessCount : null;
+
+        if (params.StatusLists) {
+            this.StatusLists = new Array();
+            for (let z in params.StatusLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.StatusLists[z]);
+                this.StatusLists.push(obj);
+            }
+        }
+
+        if (params.LevelLists) {
+            this.LevelLists = new Array();
+            for (let z in params.LevelLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.LevelLists[z]);
+                this.LevelLists.push(obj);
+            }
+        }
+
+        if (params.CFGNameLists) {
+            this.CFGNameLists = new Array();
+            for (let z in params.CFGNameLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.CFGNameLists[z]);
+                this.CFGNameLists.push(obj);
+            }
+        }
+
+        if (params.CheckTypeLists) {
+            this.CheckTypeLists = new Array();
+            for (let z in params.CheckTypeLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.CheckTypeLists[z]);
+                this.CheckTypeLists.push(obj);
+            }
+        }
+
+        if (params.InstanceTypeLists) {
+            this.InstanceTypeLists = new Array();
+            for (let z in params.InstanceTypeLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.InstanceTypeLists[z]);
+                this.InstanceTypeLists.push(obj);
+            }
+        }
+
+        if (params.FromLists) {
+            this.FromLists = new Array();
+            for (let z in params.FromLists) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.FromLists[z]);
+                this.FromLists.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAccessKeyUserDetail response structure.
+ * @class
+ */
+class DescribeAccessKeyUserDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account detailed information.
+         * @type {AccessKeyUser || null}
+         */
+        this.User = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.User) {
+            let obj = new AccessKeyUser();
+            obj.deserialize(params.User)
+            this.User = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9272,40 +15711,339 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * DescribeTaskLogList response structure.
+ * DescribeAccessKeyRiskDetail request structure.
  * @class
  */
-class DescribeTaskLogListResponse extends  AbstractModel {
+class DescribeAccessKeyRiskDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of entries
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Risk record ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+    }
+}
+
+/**
+ * ModifyOrganizationAccountStatus request structure.
+ * @class
+ */
+class ModifyOrganizationAccountStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Modify Group Account Status. 1: Enabled; 2: Disabled.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterAssets response structure.
+ * @class
+ */
+class DescribeClusterAssetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List
+         * @type {Array.<AssetCluster> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Total number.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List of reports
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<TaskLogInfo> || null}
+         * Cluster Type Enumeration
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.ClusterTypeList = null;
+
+        /**
+         * Cluster Status Enumeration
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.ClusterStatusList = null;
+
+        /**
+         * Component Status Enumeration
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.ComponentStatusList = null;
+
+        /**
+         * VPC Enumeration
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.VpcList = null;
+
+        /**
+         * Region Enumeration
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.RegionList = null;
+
+        /**
+         * Tenant Enumeration
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.AppIdList = null;
+
+        /**
+         * Cluster protection status enumeration.
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.ProtectStatusList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new AssetCluster();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ClusterTypeList) {
+            this.ClusterTypeList = new Array();
+            for (let z in params.ClusterTypeList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.ClusterTypeList[z]);
+                this.ClusterTypeList.push(obj);
+            }
+        }
+
+        if (params.ClusterStatusList) {
+            this.ClusterStatusList = new Array();
+            for (let z in params.ClusterStatusList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.ClusterStatusList[z]);
+                this.ClusterStatusList.push(obj);
+            }
+        }
+
+        if (params.ComponentStatusList) {
+            this.ComponentStatusList = new Array();
+            for (let z in params.ComponentStatusList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.ComponentStatusList[z]);
+                this.ComponentStatusList.push(obj);
+            }
+        }
+
+        if (params.VpcList) {
+            this.VpcList = new Array();
+            for (let z in params.VpcList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.VpcList[z]);
+                this.VpcList.push(obj);
+            }
+        }
+
+        if (params.RegionList) {
+            this.RegionList = new Array();
+            for (let z in params.RegionList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.RegionList[z]);
+                this.RegionList.push(obj);
+            }
+        }
+
+        if (params.AppIdList) {
+            this.AppIdList = new Array();
+            for (let z in params.AppIdList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.AppIdList[z]);
+                this.AppIdList.push(obj);
+            }
+        }
+
+        if (params.ProtectStatusList) {
+            this.ProtectStatusList = new Array();
+            for (let z in params.ProtectStatusList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.ProtectStatusList[z]);
+                this.ProtectStatusList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeExposeAssetCategory request structure.
+ * @class
+ */
+class DescribeExposeAssetCategoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+    }
+}
+
+/**
+ * DescribeAbnormalCallRecord response structure.
+ * @class
+ */
+class DescribeAbnormalCallRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Invocation record list.
+         * @type {Array.<CallRecord> || null}
          */
         this.Data = null;
 
         /**
-         * Number of reports pending viewed
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Total number of records.
          * @type {number || null}
          */
-        this.NotViewNumber = null;
+        this.Total = null;
 
         /**
-         * Number of report templates
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new CallRecord();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSubUserInfo response structure.
+ * @class
+ */
+class DescribeSubUserInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * total
          * @type {number || null}
          */
-        this.ReportTemplateNumber = null;
+        this.TotalCount = null;
+
+        /**
+         * Sub-user list
+         * @type {Array.<SubUserInfo> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Manufacturer Enumeration List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.CloudTypeLst = null;
+
+        /**
+         * Enumeration of appid of the main account
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.OwnerAppIDLst = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -9327,165 +16065,59 @@ Note: This field may return·null, indicating that no valid values can be obtain
         if (params.Data) {
             this.Data = new Array();
             for (let z in params.Data) {
-                let obj = new TaskLogInfo();
+                let obj = new SubUserInfo();
                 obj.deserialize(params.Data[z]);
                 this.Data.push(obj);
             }
         }
-        this.NotViewNumber = 'NotViewNumber' in params ? params.NotViewNumber : null;
-        this.ReportTemplateNumber = 'ReportTemplateNumber' in params ? params.ReportTemplateNumber : null;
+
+        if (params.CloudTypeLst) {
+            this.CloudTypeLst = new Array();
+            for (let z in params.CloudTypeLst) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.CloudTypeLst[z]);
+                this.CloudTypeLst.push(obj);
+            }
+        }
+
+        if (params.OwnerAppIDLst) {
+            this.OwnerAppIDLst = new Array();
+            for (let z in params.OwnerAppIDLst) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.OwnerAppIDLst[z]);
+                this.OwnerAppIDLst.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * Vulnerability details
+ * DescribeVulRiskList response structure.
  * @class
  */
-class BugInfoDetail extends  AbstractModel {
+class DescribeVulRiskListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Vulnerability ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of vulnerabilities
          * @type {number || null}
          */
-        this.Id = null;
+        this.TotalCount = null;
 
         /**
-         * POC ID of the vulnerability
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Vulnerability list
+         * @type {Array.<VulRiskItem> || null}
+         */
+        this.VulRiskList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.PatchId = null;
-
-        /**
-         * Vulnerability name
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.VULName = null;
-
-        /**
-         * Vulnerability severity: `high`, `middle`, `low`, `info`
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Level = null;
-
-        /**
-         * CVSS score
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CVSSScore = null;
-
-        /**
-         * CVE number
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CVEId = null;
-
-        /**
-         * Vulnerability tag
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Tag = null;
-
-        /**
-         * Vulnerability category: `1`: Web application vulnerabilities, `2`: System component vulnerabilities, `3`: Configuration risks
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.VULCategory = null;
-
-        /**
-         * Operating systems affected by the vulnerability 
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ImpactOs = null;
-
-        /**
-         * Components affected by the vulnerability 
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ImpactCOMPENT = null;
-
-        /**
-         * Versions affected by the vulnerability
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ImpactVersion = null;
-
-        /**
-         * Reference information of the vulnerability
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Reference = null;
-
-        /**
-         * Vulnerability description
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.VULDescribe = null;
-
-        /**
-         * Fix suggestion
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Fix = null;
-
-        /**
-         * Product support status. The real-time status is returned.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ProSupport = null;
-
-        /**
-         * Specify whether the vulnerability is published as an emergency vulnerability. `1`: Published as an emergency vulnerability; `0`: Not an emergency vulnerability.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsPublish = null;
-
-        /**
-         * Disclosure time of the vulnerability. 
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ReleaseTime = null;
-
-        /**
-         * The time when the vulnerability is added to the vulnerability database.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * The last update time of the vulnerability in the database
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * Sub-category of the vulnerability
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SubCategory = null;
+        this.RequestId = null;
 
     }
 
@@ -9496,26 +16128,190 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.PatchId = 'PatchId' in params ? params.PatchId : null;
-        this.VULName = 'VULName' in params ? params.VULName : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.CVSSScore = 'CVSSScore' in params ? params.CVSSScore : null;
-        this.CVEId = 'CVEId' in params ? params.CVEId : null;
-        this.Tag = 'Tag' in params ? params.Tag : null;
-        this.VULCategory = 'VULCategory' in params ? params.VULCategory : null;
-        this.ImpactOs = 'ImpactOs' in params ? params.ImpactOs : null;
-        this.ImpactCOMPENT = 'ImpactCOMPENT' in params ? params.ImpactCOMPENT : null;
-        this.ImpactVersion = 'ImpactVersion' in params ? params.ImpactVersion : null;
-        this.Reference = 'Reference' in params ? params.Reference : null;
-        this.VULDescribe = 'VULDescribe' in params ? params.VULDescribe : null;
-        this.Fix = 'Fix' in params ? params.Fix : null;
-        this.ProSupport = 'ProSupport' in params ? params.ProSupport : null;
-        this.IsPublish = 'IsPublish' in params ? params.IsPublish : null;
-        this.ReleaseTime = 'ReleaseTime' in params ? params.ReleaseTime : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.VulRiskList) {
+            this.VulRiskList = new Array();
+            for (let z in params.VulRiskList) {
+                let obj = new VulRiskItem();
+                obj.deserialize(params.VulRiskList[z]);
+                this.VulRiskList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCSIPRiskStatistics request structure.
+ * @class
+ */
+class DescribeCSIPRiskStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filtered Content
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+    }
+}
+
+/**
+ * High-Risk baseline risk content.
+ * @class
+ */
+class HighBaseLineRiskItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud account ID.
+         * @type {string || null}
+         */
+        this.CloudAccountID = null;
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.AssetID = null;
+
+        /**
+         * Instance status
+         * @type {string || null}
+         */
+        this.InstanceStatus = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Risk name.
+         * @type {string || null}
+         */
+        this.RiskName = null;
+
+        /**
+         * Risk classification.
+         * @type {string || null}
+         */
+        this.RiskCategory = null;
+
+        /**
+         * Risk level.
+         * @type {string || null}
+         */
+        this.RiskLevel = null;
+
+        /**
+         * Risk description.
+         * @type {string || null}
+         */
+        this.RiskDesc = null;
+
+        /**
+         * Risk result.
+         * @type {string || null}
+         */
+        this.RiskResult = null;
+
+        /**
+         * Fixing suggestion
+         * @type {string || null}
+         */
+        this.FixAdvice = null;
+
+        /**
+         * Linux vulnerability.
+         * @type {string || null}
+         */
+        this.RiskCategoryName = null;
+
+        /**
+         * Risk name.
+         * @type {string || null}
+         */
+        this.RiskLevelName = null;
+
+        /**
+         * Instance status
+         * @type {string || null}
+         */
+        this.InstanceStatusName = null;
+
+        /**
+         * First detection time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last discovery time
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Tenant ID.
+         * @type {number || null}
+         */
+        this.AppID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CloudAccountID = 'CloudAccountID' in params ? params.CloudAccountID : null;
+        this.AssetID = 'AssetID' in params ? params.AssetID : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.RiskName = 'RiskName' in params ? params.RiskName : null;
+        this.RiskCategory = 'RiskCategory' in params ? params.RiskCategory : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
+        this.RiskDesc = 'RiskDesc' in params ? params.RiskDesc : null;
+        this.RiskResult = 'RiskResult' in params ? params.RiskResult : null;
+        this.FixAdvice = 'FixAdvice' in params ? params.FixAdvice : null;
+        this.RiskCategoryName = 'RiskCategoryName' in params ? params.RiskCategoryName : null;
+        this.RiskLevelName = 'RiskLevelName' in params ? params.RiskLevelName : null;
+        this.InstanceStatusName = 'InstanceStatusName' in params ? params.InstanceStatusName : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.SubCategory = 'SubCategory' in params ? params.SubCategory : null;
+        this.AppID = 'AppID' in params ? params.AppID : null;
 
     }
 }
@@ -9637,18 +16433,170 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * DescribeTaskLogList request structure.
+ * DescribeDbAssets response structure.
  * @class
  */
-class DescribeTaskLogListRequest extends  AbstractModel {
+class DescribeDbAssetsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter conditions
-         * @type {Filter || null}
+         * Total number of results
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.Filter = null;
+        this.Total = null;
+
+        /**
+         * Total of assets
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<DBAssetVO> || null}
+         */
+        this.Data = null;
+
+        /**
+         * List of regions
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.RegionList = null;
+
+        /**
+         * List of asset types
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.AssetTypeList = null;
+
+        /**
+         * List of VPCs
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.VpcList = null;
+
+        /**
+         * List of users (AppId)
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.AppIdList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DBAssetVO();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+        if (params.RegionList) {
+            this.RegionList = new Array();
+            for (let z in params.RegionList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.RegionList[z]);
+                this.RegionList.push(obj);
+            }
+        }
+
+        if (params.AssetTypeList) {
+            this.AssetTypeList = new Array();
+            for (let z in params.AssetTypeList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.AssetTypeList[z]);
+                this.AssetTypeList.push(obj);
+            }
+        }
+
+        if (params.VpcList) {
+            this.VpcList = new Array();
+            for (let z in params.VpcList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.VpcList[z]);
+                this.VpcList.push(obj);
+            }
+        }
+
+        if (params.AppIdList) {
+            this.AppIdList = new Array();
+            for (let z in params.AppIdList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.AppIdList[z]);
+                this.AppIdList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNICAssets response structure.
+ * @class
+ */
+class DescribeNICAssetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List
+         * @type {Array.<NICAsset> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Total number.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Region list
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.RegionList = null;
+
+        /**
+         * Asset Type List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.AssetTypeList = null;
+
+        /**
+         * VPC List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.VpcList = null;
+
+        /**
+         * AppID List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.AppIdList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -9660,11 +16608,52 @@ class DescribeTaskLogListRequest extends  AbstractModel {
             return;
         }
 
-        if (params.Filter) {
-            let obj = new Filter();
-            obj.deserialize(params.Filter)
-            this.Filter = obj;
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new NICAsset();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RegionList) {
+            this.RegionList = new Array();
+            for (let z in params.RegionList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.RegionList[z]);
+                this.RegionList.push(obj);
+            }
+        }
+
+        if (params.AssetTypeList) {
+            this.AssetTypeList = new Array();
+            for (let z in params.AssetTypeList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.AssetTypeList[z]);
+                this.AssetTypeList.push(obj);
+            }
+        }
+
+        if (params.VpcList) {
+            this.VpcList = new Array();
+            for (let z in params.VpcList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.VpcList[z]);
+                this.VpcList.push(obj);
+            }
+        }
+
+        if (params.AppIdList) {
+            this.AppIdList = new Array();
+            for (let z in params.AppIdList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.AppIdList[z]);
+                this.AppIdList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9876,6 +16865,359 @@ class DescribeRiskCenterServerRiskListRequest extends  AbstractModel {
 }
 
 /**
+ * Source IP of the call public account information.
+ * @class
+ */
+class SourceIPVpcInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * App ID of the VPC.
+         * @type {number || null}
+         */
+        this.AppID = null;
+
+        /**
+         * vpc id
+         * @type {string || null}
+         */
+        this.VpcID = null;
+
+        /**
+         * vpc name.
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.AppID = 'AppID' in params ? params.AppID : null;
+        this.VpcID = 'VpcID' in params ? params.VpcID : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+
+    }
+}
+
+/**
+ * DescribeTaskLogList request structure.
+ * @class
+ */
+class DescribeTaskLogListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter conditions
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeAccessKeyAlarmDetail response structure.
+ * @class
+ */
+class DescribeAccessKeyAlarmDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Alarm information.
+         * @type {AccessKeyAlarm || null}
+         */
+        this.AlarmInfo = null;
+
+        /**
+         * Number of CAM policies in the associated account.
+         * @type {number || null}
+         */
+        this.CamCount = null;
+
+        /**
+         * Number of AK risks.
+         * @type {number || null}
+         */
+        this.RiskCount = null;
+
+        /**
+         * Alarm policy description.
+         * @type {string || null}
+         */
+        this.AlarmDesc = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AlarmInfo) {
+            let obj = new AccessKeyAlarm();
+            obj.deserialize(params.AlarmInfo)
+            this.AlarmInfo = obj;
+        }
+        this.CamCount = 'CamCount' in params ? params.CamCount : null;
+        this.RiskCount = 'RiskCount' in params ? params.RiskCount : null;
+        this.AlarmDesc = 'AlarmDesc' in params ? params.AlarmDesc : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Filters
+ * @class
+ */
+class Filters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Instance ID content.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+        /**
+         * Fuzzy matching.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExactMatch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+        this.ExactMatch = 'ExactMatch' in params ? params.ExactMatch : null;
+
+    }
+}
+
+/**
+ * DescribeOtherCloudAssets request structure.
+ * @class
+ */
+class DescribeOtherCloudAssetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * -
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+        /**
+         * Asset type: MYSQL/MARIADB/REDIS/MONGODB/POSTGRES/CTS/ES/KAFKA/COS/CBS/CFS
+         * @type {Array.<string> || null}
+         */
+        this.AssetTypes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+        this.AssetTypes = 'AssetTypes' in params ? params.AssetTypes : null;
+
+    }
+}
+
+/**
+ * ModifyRiskCenterScanTask request structure.
+ * @class
+ */
+class ModifyRiskCenterScanTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task name.
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+        /**
+         * 0: Full Scan; 1: Specified Asset Scan; 2: Excluded Asset Scan; 3: Manual Entry Scan. 1 and 2 require the Assets field; 3 requires SelfDefiningAssets.
+         * @type {number || null}
+         */
+        this.ScanAssetType = null;
+
+        /**
+         * Scan items. port/poc/weakpass/webcontent/configrisk
+         * @type {Array.<string> || null}
+         */
+        this.ScanItem = null;
+
+        /**
+         * 0: Periodic Task; 1: Scan Now; 2: Scheduled Scan; 3: Custom. If 0, 2, 3, ScanPlanContent is required.
+         * @type {number || null}
+         */
+        this.ScanPlanType = null;
+
+        /**
+         * Task ID to be Modified
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Scanned Asset Information List
+         * @type {Array.<TaskAssetObject> || null}
+         */
+        this.Assets = null;
+
+        /**
+         * Scan Plan Details
+         * @type {string || null}
+         */
+        this.ScanPlanContent = null;
+
+        /**
+         * IP/Domain/URL Array
+         * @type {Array.<string> || null}
+         */
+        this.SelfDefiningAssets = null;
+
+        /**
+         * Advanced configuration.
+         * @type {TaskAdvanceCFG || null}
+         */
+        this.TaskAdvanceCFG = null;
+
+        /**
+         * Checkup Mode. 0: Standard Mode; 1: Quick Mode; 2: Advanced Mode. Standard Mode by default.
+         * @type {number || null}
+         */
+        this.TaskMode = null;
+
+        /**
+         * Task complete callback webhook url.
+         * @type {string || null}
+         */
+        this.FinishWebHook = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.ScanAssetType = 'ScanAssetType' in params ? params.ScanAssetType : null;
+        this.ScanItem = 'ScanItem' in params ? params.ScanItem : null;
+        this.ScanPlanType = 'ScanPlanType' in params ? params.ScanPlanType : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Assets) {
+            this.Assets = new Array();
+            for (let z in params.Assets) {
+                let obj = new TaskAssetObject();
+                obj.deserialize(params.Assets[z]);
+                this.Assets.push(obj);
+            }
+        }
+        this.ScanPlanContent = 'ScanPlanContent' in params ? params.ScanPlanContent : null;
+        this.SelfDefiningAssets = 'SelfDefiningAssets' in params ? params.SelfDefiningAssets : null;
+
+        if (params.TaskAdvanceCFG) {
+            let obj = new TaskAdvanceCFG();
+            obj.deserialize(params.TaskAdvanceCFG)
+            this.TaskAdvanceCFG = obj;
+        }
+        this.TaskMode = 'TaskMode' in params ? params.TaskMode : null;
+        this.FinishWebHook = 'FinishWebHook' in params ? params.FinishWebHook : null;
+
+    }
+}
+
+/**
  * CLB instance and listener information
  * @class
  */
@@ -10001,6 +17343,189 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
+ * Access key account information.
+ * @class
+ */
+class AccessKeyUser extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Account name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 0 root account 1 sub-account.
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Access method.
+0 API
+1 console and API.
+         * @type {number || null}
+         */
+        this.AccessType = null;
+
+        /**
+         * Security recommendation enumerate 0 normal 1 process immediately 2 recommend reinforcement.
+         * @type {number || null}
+         */
+        this.Advice = null;
+
+        /**
+         * Alarm information list.
+         * @type {Array.<AccessKeyAlarmInfo> || null}
+         */
+        this.AccessKeyAlarmList = null;
+
+        /**
+         * Risk information list.
+         * @type {Array.<AccessKeyAlarmInfo> || null}
+         */
+        this.AccessKeyRiskList = null;
+
+        /**
+         * Account associate APPID.
+         * @type {number || null}
+         */
+        this.AppID = null;
+
+        /**
+         * Nickname of the main account.
+         * @type {string || null}
+         */
+        this.Nickname = null;
+
+        /**
+         * Sub-Account nickname.
+         * @type {string || null}
+         */
+        this.SubNickname = null;
+
+        /**
+         * Account Uin belonging to main account.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Account self uin, same as root account uin when it is the root account.
+         * @type {string || null}
+         */
+        this.SubUin = null;
+
+        /**
+         * Login IP.
+         * @type {string || null}
+         */
+        this.LoginIP = null;
+
+        /**
+         * Login address.
+         * @type {string || null}
+         */
+        this.LoginLocation = null;
+
+        /**
+         * Log-In time.
+         * @type {string || null}
+         */
+        this.LoginTime = null;
+
+        /**
+         * ISP name
+         * @type {string || null}
+         */
+        this.ISP = null;
+
+        /**
+         * Whether operation protection is enabled.
+0 not enabled.
+1: enabled.
+         * @type {number || null}
+         */
+        this.ActionFlag = null;
+
+        /**
+         * Is login protection enabled?.
+0 not enabled.
+1: enabled.
+         * @type {number || null}
+         */
+        this.LoginFlag = null;
+
+        /**
+         * 0 means detected. 1 means detecting.
+         * @type {number || null}
+         */
+        this.CheckStatus = null;
+
+        /**
+         * Cloud vendor type 0: tencent cloud 1: amazon web services 2: microsoft azure 3: google cloud 4: alibaba cloud 5: huawei cloud.
+         * @type {number || null}
+         */
+        this.CloudType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+        this.Advice = 'Advice' in params ? params.Advice : null;
+
+        if (params.AccessKeyAlarmList) {
+            this.AccessKeyAlarmList = new Array();
+            for (let z in params.AccessKeyAlarmList) {
+                let obj = new AccessKeyAlarmInfo();
+                obj.deserialize(params.AccessKeyAlarmList[z]);
+                this.AccessKeyAlarmList.push(obj);
+            }
+        }
+
+        if (params.AccessKeyRiskList) {
+            this.AccessKeyRiskList = new Array();
+            for (let z in params.AccessKeyRiskList) {
+                let obj = new AccessKeyAlarmInfo();
+                obj.deserialize(params.AccessKeyRiskList[z]);
+                this.AccessKeyRiskList.push(obj);
+            }
+        }
+        this.AppID = 'AppID' in params ? params.AppID : null;
+        this.Nickname = 'Nickname' in params ? params.Nickname : null;
+        this.SubNickname = 'SubNickname' in params ? params.SubNickname : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.SubUin = 'SubUin' in params ? params.SubUin : null;
+        this.LoginIP = 'LoginIP' in params ? params.LoginIP : null;
+        this.LoginLocation = 'LoginLocation' in params ? params.LoginLocation : null;
+        this.LoginTime = 'LoginTime' in params ? params.LoginTime : null;
+        this.ISP = 'ISP' in params ? params.ISP : null;
+        this.ActionFlag = 'ActionFlag' in params ? params.ActionFlag : null;
+        this.LoginFlag = 'LoginFlag' in params ? params.LoginFlag : null;
+        this.CheckStatus = 'CheckStatus' in params ? params.CheckStatus : null;
+        this.CloudType = 'CloudType' in params ? params.CloudType : null;
+
+    }
+}
+
+/**
  * DescribeRiskCenterServerRiskList response structure.
  * @class
  */
@@ -10099,6 +17624,46 @@ class DescribeListenerListRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeVULList request structure.
+ * @class
+ */
+class DescribeVULListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Query condition.
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+    }
+}
+
+/**
  * DeleteRiskScanTask response structure.
  * @class
  */
@@ -10127,12 +17692,120 @@ class DeleteRiskScanTaskResponse extends  AbstractModel {
 }
 
 /**
- * ModifyRiskCenterRiskStatus response structure.
+ * DescribeScanStatistic request structure.
  * @class
  */
-class ModifyRiskCenterRiskStatusResponse extends  AbstractModel {
+class DescribeScanStatisticRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Health check task id.
+         * @type {string || null}
+         */
+        this.TaskLogId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.TaskLogId = 'TaskLogId' in params ? params.TaskLogId : null;
+
+    }
+}
+
+/**
+ * DescribeGatewayAssets request structure.
+ * @class
+ */
+class DescribeGatewayAssetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filter parameters.
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeCFWAssetStatistics request structure.
+ * @class
+ */
+class DescribeCFWAssetStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeAccessKeyUserList response structure.
+ * @class
+ */
+class DescribeAccessKeyUserListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account list.
+         * @type {Array.<AccessKeyUser> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Total number.
+         * @type {number || null}
+         */
+        this.Total = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -10149,42 +17822,541 @@ class ModifyRiskCenterRiskStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new AccessKeyUser();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeSubUserInfo response structure.
+ * DescribeRiskCallRecord request structure.
  * @class
  */
-class DescribeSubUserInfoResponse extends  AbstractModel {
+class DescribeRiskCallRecordRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * total
+         * Risk record ID.
+         * @type {number || null}
+         */
+        this.RiskID = null;
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filter.
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RiskID = 'RiskID' in params ? params.RiskID : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeOtherCloudAssets response structure.
+ * @class
+ */
+class DescribeOtherCloudAssetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Total number of assets
+         * @type {Array.<DBAssetVO> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Region Enumeration
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.RegionList = null;
+
+        /**
+         * Asset Type Enumeration
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.AssetTypeList = null;
+
+        /**
+         * VPC Enumeration
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.VpcList = null;
+
+        /**
+         * Appid Enumeration
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.AppIdList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DBAssetVO();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+        if (params.RegionList) {
+            this.RegionList = new Array();
+            for (let z in params.RegionList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.RegionList[z]);
+                this.RegionList.push(obj);
+            }
+        }
+
+        if (params.AssetTypeList) {
+            this.AssetTypeList = new Array();
+            for (let z in params.AssetTypeList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.AssetTypeList[z]);
+                this.AssetTypeList.push(obj);
+            }
+        }
+
+        if (params.VpcList) {
+            this.VpcList = new Array();
+            for (let z in params.VpcList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.VpcList[z]);
+                this.VpcList.push(obj);
+            }
+        }
+
+        if (params.AppIdList) {
+            this.AppIdList = new Array();
+            for (let z in params.AppIdList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.AppIdList[z]);
+                this.AppIdList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * This example shows you how to obtain the cluster list.
+
+Cluster protection status. enumerate on the left. display on the right.
+Cluster protection status. 
+Not connected.
+Unprotected. 
+2: partial protection. 
+3: under protection. 
+4: access exception. 
+5: accessing. 
+6: uninstalling. 
+7: uninstallation exception.
+ * @class
+ */
+class AssetCluster extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tenant ID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Tenant uin.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Tenant Nickname
+         * @type {string || null}
+         */
+        this.Nick = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Cluster ID.
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * Cluster name.
+         * @type {string || null}
+         */
+        this.AssetName = null;
+
+        /**
+         * Cluster type.
+         * @type {string || null}
+         */
+        this.AssetType = null;
+
+        /**
+         * Cluster Creation Time
+         * @type {string || null}
+         */
+        this.InstanceCreateTime = null;
+
+        /**
+         * Status.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Cluster protection status, enumerate on the left, display on the right.
+Protection status of the cluster. 
+0: not connected.
+Unprotected. 
+2: partial protection. 
+3: under protection. 
+4: access exception. 
+5: accessing. 
+Uninstalling. 
+7: uninstallation exception.
+         * @type {number || null}
+         */
+        this.ProtectStatus = null;
+
+        /**
+         * Access information, being empty indicates no access exception info.
+         * @type {string || null}
+         */
+        this.ProtectInfo = null;
+
+        /**
+         * VPC id.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC name.
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * kubernetes version.
+         * @type {string || null}
+         */
+        this.KubernetesVersion = null;
+
+        /**
+         * Runtime component.
+         * @type {string || null}
+         */
+        this.Component = null;
+
+        /**
+         * Runtime component version.
+         * @type {string || null}
+         */
+        this.ComponentVersion = null;
+
+        /**
+         * Component status.
+         * @type {string || null}
+         */
+        this.ComponentStatus = null;
+
+        /**
+         * Health Checkup Time
+         * @type {string || null}
+         */
+        this.CheckTime = null;
+
+        /**
+         * Associated hosts.
+         * @type {number || null}
+         */
+        this.MachineCount = null;
+
+        /**
+         * Associated Pod Count
+         * @type {number || null}
+         */
+        this.PodCount = null;
+
+        /**
+         * Associated Service Count
+         * @type {number || null}
+         */
+        this.ServiceCount = null;
+
+        /**
+         * Vulnerability risk.
+         * @type {number || null}
+         */
+        this.VulRisk = null;
+
+        /**
+         * Configuration risk.
+         * @type {number || null}
+         */
+        this.CFGRisk = null;
+
+        /**
+         * Health Checkup Count
+         * @type {number || null}
+         */
+        this.CheckCount = null;
+
+        /**
+         * Whether it is core. 1: Core; 2: Non-core.
+         * @type {number || null}
+         */
+        this.IsCore = null;
+
+        /**
+         * New Asset or Not. 1: New
+         * @type {number || null}
+         */
+        this.IsNewAsset = null;
+
+        /**
+         * Cloud asset type: 0: tencent cloud, 1: aws, 2: azure.
+         * @type {number || null}
+         */
+        this.CloudType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Nick = 'Nick' in params ? params.Nick : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.AssetName = 'AssetName' in params ? params.AssetName : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.InstanceCreateTime = 'InstanceCreateTime' in params ? params.InstanceCreateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ProtectStatus = 'ProtectStatus' in params ? params.ProtectStatus : null;
+        this.ProtectInfo = 'ProtectInfo' in params ? params.ProtectInfo : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.KubernetesVersion = 'KubernetesVersion' in params ? params.KubernetesVersion : null;
+        this.Component = 'Component' in params ? params.Component : null;
+        this.ComponentVersion = 'ComponentVersion' in params ? params.ComponentVersion : null;
+        this.ComponentStatus = 'ComponentStatus' in params ? params.ComponentStatus : null;
+        this.CheckTime = 'CheckTime' in params ? params.CheckTime : null;
+        this.MachineCount = 'MachineCount' in params ? params.MachineCount : null;
+        this.PodCount = 'PodCount' in params ? params.PodCount : null;
+        this.ServiceCount = 'ServiceCount' in params ? params.ServiceCount : null;
+        this.VulRisk = 'VulRisk' in params ? params.VulRisk : null;
+        this.CFGRisk = 'CFGRisk' in params ? params.CFGRisk : null;
+        this.CheckCount = 'CheckCount' in params ? params.CheckCount : null;
+        this.IsCore = 'IsCore' in params ? params.IsCore : null;
+        this.IsNewAsset = 'IsNewAsset' in params ? params.IsNewAsset : null;
+        this.CloudType = 'CloudType' in params ? params.CloudType : null;
+
+    }
+}
+
+/**
+ * CreateDomainAndIp response structure.
+ * @class
+ */
+class CreateDomainAndIpResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of created assets
+         * @type {number || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateAccessKeyRemark request structure.
+ * @class
+ */
+class UpdateAccessKeyRemarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Source IP name.
+         * @type {Array.<string> || null}
+         */
+        this.SourceIPList = null;
+
+        /**
+         * ak name.
+         * @type {Array.<string> || null}
+         */
+        this.AccessKeyList = null;
+
+        /**
+         * ID of the source IP.
+         * @type {Array.<number> || null}
+         */
+        this.SourceIPIDList = null;
+
+        /**
+         * AK ID.
+         * @type {Array.<number> || null}
+         */
+        this.AccessKeyIDList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.SourceIPList = 'SourceIPList' in params ? params.SourceIPList : null;
+        this.AccessKeyList = 'AccessKeyList' in params ? params.AccessKeyList : null;
+        this.SourceIPIDList = 'SourceIPIDList' in params ? params.SourceIPIDList : null;
+        this.AccessKeyIDList = 'AccessKeyIDList' in params ? params.AccessKeyIDList : null;
+
+    }
+}
+
+/**
+ * DescribeTaskLogList response structure.
+ * @class
+ */
+class DescribeTaskLogListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of entries
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Sub-user list
-         * @type {Array.<SubUserInfo> || null}
+         * List of reports
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<TaskLogInfo> || null}
          */
         this.Data = null;
 
         /**
-         * Manufacturer Enumeration List
-         * @type {Array.<FilterDataObject> || null}
+         * Number of reports pending viewed
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.CloudTypeLst = null;
+        this.NotViewNumber = null;
 
         /**
-         * Enumeration of appid of the main account
-         * @type {Array.<FilterDataObject> || null}
+         * Number of report templates
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.OwnerAppIDLst = null;
+        this.ReportTemplateNumber = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -10206,53 +18378,43 @@ class DescribeSubUserInfoResponse extends  AbstractModel {
         if (params.Data) {
             this.Data = new Array();
             for (let z in params.Data) {
-                let obj = new SubUserInfo();
+                let obj = new TaskLogInfo();
                 obj.deserialize(params.Data[z]);
                 this.Data.push(obj);
             }
         }
-
-        if (params.CloudTypeLst) {
-            this.CloudTypeLst = new Array();
-            for (let z in params.CloudTypeLst) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.CloudTypeLst[z]);
-                this.CloudTypeLst.push(obj);
-            }
-        }
-
-        if (params.OwnerAppIDLst) {
-            this.OwnerAppIDLst = new Array();
-            for (let z in params.OwnerAppIDLst) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.OwnerAppIDLst[z]);
-                this.OwnerAppIDLst.push(obj);
-            }
-        }
+        this.NotViewNumber = 'NotViewNumber' in params ? params.NotViewNumber : null;
+        this.ReportTemplateNumber = 'ReportTemplateNumber' in params ? params.ReportTemplateNumber : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeSubUserInfo request structure.
+ * DescribeExposures response structure.
  * @class
  */
-class DescribeSubUserInfoRequest extends  AbstractModel {
+class DescribeExposuresResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Member ID of the group account
-         * @type {Array.<string> || null}
+         * Cloud boundary analytics number of assets.
+         * @type {number || null}
          */
-        this.MemberId = null;
+        this.TotalCount = null;
 
         /**
-         * Filter content
-         * @type {Filter || null}
+         * Cloud boundary analytics asset list.
+         * @type {Array.<ExposesItem> || null}
          */
-        this.Filter = null;
+        this.ExposeList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -10263,13 +18425,80 @@ class DescribeSubUserInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Filter) {
-            let obj = new Filter();
-            obj.deserialize(params.Filter)
-            this.Filter = obj;
+        if (params.ExposeList) {
+            this.ExposeList = new Array();
+            for (let z in params.ExposeList) {
+                let obj = new ExposesItem();
+                obj.deserialize(params.ExposeList[z]);
+                this.ExposeList.push(obj);
+            }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Risk call record details.
+ * @class
+ */
+class RiskCallRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API name.
+         * @type {string || null}
+         */
+        this.EventName = null;
+
+        /**
+         * Chinese description of the API.
+         * @type {string || null}
+         */
+        this.EventDescCN = null;
+
+        /**
+         * Interface description.
+         * @type {string || null}
+         */
+        this.EventDescEN = null;
+
+        /**
+         * Product name
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * Product Chinese Name
+         * @type {string || null}
+         */
+        this.ProductNameCN = null;
+
+        /**
+         * Number of calls.
+         * @type {number || null}
+         */
+        this.CallCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.EventDescCN = 'EventDescCN' in params ? params.EventDescCN : null;
+        this.EventDescEN = 'EventDescEN' in params ? params.EventDescEN : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.ProductNameCN = 'ProductNameCN' in params ? params.ProductNameCN : null;
+        this.CallCount = 'CallCount' in params ? params.CallCount : null;
 
     }
 }
@@ -10400,6 +18629,131 @@ class DescribeRiskCenterAssetViewPortRiskListResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeVULRiskAdvanceCFGList request structure.
+ * @class
+ */
+class DescribeVULRiskAdvanceCFGListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Filter conditions.
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeHighBaseLineRiskList request structure.
+ * @class
+ */
+class DescribeHighBaseLineRiskListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group Account Member ID
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filtered Content
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Pagination size.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting type
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sorting field.
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * Cloud account ID.
+         * @type {string || null}
+         */
+        this.CloudAccountID = null;
+
+        /**
+         * Cloud service provider.
+         * @type {string || null}
+         */
+        this.Provider = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.CloudAccountID = 'CloudAccountID' in params ? params.CloudAccountID : null;
+        this.Provider = 'Provider' in params ? params.Provider : null;
+
+    }
+}
+
+/**
  * DescribeTaskLogURL request structure.
  * @class
  */
@@ -10458,45 +18812,82 @@ class DescribeTaskLogURLRequest extends  AbstractModel {
 }
 
 module.exports = {
+    DescribeRiskCenterPortViewPortRiskListRequest: DescribeRiskCenterPortViewPortRiskListRequest,
     DescribeDbAssetInfoResponse: DescribeDbAssetInfoResponse,
     DeleteRiskScanTaskRequest: DeleteRiskScanTaskRequest,
     DescribeRiskCenterAssetViewWeakPasswordRiskListResponse: DescribeRiskCenterAssetViewWeakPasswordRiskListResponse,
+    BugInfoDetail: BugInfoDetail,
+    CsipRiskCenterStatistics: CsipRiskCenterStatistics,
     DescribeVULRiskAdvanceCFGListResponse: DescribeVULRiskAdvanceCFGListResponse,
-    TaskCenterWeakPwdRiskInputParam: TaskCenterWeakPwdRiskInputParam,
+    AccessKeyAlarmInfo: AccessKeyAlarmInfo,
+    DescribeRepositoryImageAssetsRequest: DescribeRepositoryImageAssetsRequest,
     DescribeOrganizationUserInfoRequest: DescribeOrganizationUserInfoRequest,
-    ModifyRiskCenterRiskStatusRequest: ModifyRiskCenterRiskStatusRequest,
+    UpdateAccessKeyAlarmStatusResponse: UpdateAccessKeyAlarmStatusResponse,
+    FilterDataObject: FilterDataObject,
     ReportItemKey: ReportItemKey,
+    CreateAccessKeySyncTaskRequest: CreateAccessKeySyncTaskRequest,
     CVMAssetVO: CVMAssetVO,
+    VULBaseInfo: VULBaseInfo,
+    DescribeCallRecordResponse: DescribeCallRecordResponse,
     AssetViewCFGRisk: AssetViewCFGRisk,
-    AssetViewVULRisk: AssetViewVULRisk,
-    DescribeScanReportListRequest: DescribeScanReportListRequest,
+    DescribeSubUserInfoRequest: DescribeSubUserInfoRequest,
+    DescribeRiskCenterPortViewPortRiskListResponse: DescribeRiskCenterPortViewPortRiskListResponse,
     DescribeVpcAssetsResponse: DescribeVpcAssetsResponse,
+    DescribeAccessKeyAlarmResponse: DescribeAccessKeyAlarmResponse,
     Vpc: Vpc,
-    VULRiskAdvanceCFGList: VULRiskAdvanceCFGList,
-    StopRiskCenterTaskRequest: StopRiskCenterTaskRequest,
+    PortRiskAdvanceCFGParamItem: PortRiskAdvanceCFGParamItem,
+    AssetBaseInfoResponse: AssetBaseInfoResponse,
+    DescribeRepositoryImageAssetsResponse: DescribeRepositoryImageAssetsResponse,
     DataSearchBug: DataSearchBug,
     OrganizationUserInfo: OrganizationUserInfo,
     AssetTag: AssetTag,
-    DescribeVULRiskAdvanceCFGListRequest: DescribeVULRiskAdvanceCFGListRequest,
-    DescribeRiskCenterAssetViewCFGRiskListRequest: DescribeRiskCenterAssetViewCFGRiskListRequest,
+    DescribeRiskCallRecordResponse: DescribeRiskCallRecordResponse,
+    DescribeScanReportListRequest: DescribeScanReportListRequest,
+    IpAssetListVO: IpAssetListVO,
+    DescribeClusterAssetsRequest: DescribeClusterAssetsRequest,
+    TaskCenterWeakPwdRiskInputParam: TaskCenterWeakPwdRiskInputParam,
+    DescribeVULRiskDetailResponse: DescribeVULRiskDetailResponse,
     DescribeDomainAssetsRequest: DescribeDomainAssetsRequest,
+    ModifyRiskCenterScanTaskResponse: ModifyRiskCenterScanTaskResponse,
+    DescribeNICAssetsRequest: DescribeNICAssetsRequest,
+    DescribeRiskCenterWebsiteRiskListResponse: DescribeRiskCenterWebsiteRiskListResponse,
     Tag: Tag,
-    WebsiteRisk: WebsiteRisk,
+    AccessKeyAlarmCount: AccessKeyAlarmCount,
+    DescribeRiskCenterCFGViewCFGRiskListRequest: DescribeRiskCenterCFGViewCFGRiskListRequest,
+    DescribeAssetProcessListRequest: DescribeAssetProcessListRequest,
+    DescribeAssetProcessListResponse: DescribeAssetProcessListResponse,
+    DescribeAbnormalCallRecordRequest: DescribeAbnormalCallRecordRequest,
+    UpdateAccessKeyAlarmStatusRequest: UpdateAccessKeyAlarmStatusRequest,
+    DescribeCSIPRiskStatisticsResponse: DescribeCSIPRiskStatisticsResponse,
+    DescribeAccessKeyUserListRequest: DescribeAccessKeyUserListRequest,
+    VULViewVULRiskData: VULViewVULRiskData,
     DeleteDomainAndIpRequest: DeleteDomainAndIpRequest,
     DescribeScanTaskListRequest: DescribeScanTaskListRequest,
+    VulImpactComponentInfo: VulImpactComponentInfo,
+    CreateAccessKeyCheckTaskResponse: CreateAccessKeyCheckTaskResponse,
+    SubnetAsset: SubnetAsset,
     DescribeOrganizationInfoRequest: DescribeOrganizationInfoRequest,
     TaskIdListKey: TaskIdListKey,
-    DescribeRiskCenterWebsiteRiskListResponse: DescribeRiskCenterWebsiteRiskListResponse,
+    UserCallRecord: UserCallRecord,
+    GateWayAsset: GateWayAsset,
+    CreateAccessKeySyncTaskResponse: CreateAccessKeySyncTaskResponse,
+    DescribeSourceIPAssetResponse: DescribeSourceIPAssetResponse,
     DescribeScanReportListResponse: DescribeScanReportListResponse,
     DescribeSearchBugInfoRequest: DescribeSearchBugInfoRequest,
     TaskLogURL: TaskLogURL,
     AddNewBindRoleUserRequest: AddNewBindRoleUserRequest,
     DescribeOrganizationUserInfoResponse: DescribeOrganizationUserInfoResponse,
+    DescribeVULRiskDetailRequest: DescribeVULRiskDetailRequest,
+    NICAsset: NICAsset,
+    AccessKeyRisk: AccessKeyRisk,
     OrganizationInfo: OrganizationInfo,
     DescribeListenerListResponse: DescribeListenerListResponse,
+    TaskAdvanceCFG: TaskAdvanceCFG,
+    AssetProcessItem: AssetProcessItem,
     DBAssetVO: DBAssetVO,
     AssetInfoDetail: AssetInfoDetail,
-    SubnetAsset: SubnetAsset,
+    DescribeAccessKeyAssetResponse: DescribeAccessKeyAssetResponse,
+    DescribeAccessKeyRiskDetailResponse: DescribeAccessKeyRiskDetailResponse,
     CreateRiskCenterScanTaskResponse: CreateRiskCenterScanTaskResponse,
     DescribeSubnetAssetsResponse: DescribeSubnetAssetsResponse,
     DescribeRiskCenterAssetViewPortRiskListRequest: DescribeRiskCenterAssetViewPortRiskListRequest,
@@ -10504,74 +18895,140 @@ module.exports = {
     DescribeOrganizationInfoResponse: DescribeOrganizationInfoResponse,
     DescribeVpcAssetsRequest: DescribeVpcAssetsRequest,
     TaskAssetObject: TaskAssetObject,
-    IpAssetListVO: IpAssetListVO,
-    FilterDataObject: FilterDataObject,
+    DbAssetInfo: DbAssetInfo,
+    ModifyRiskCenterRiskStatusRequest: ModifyRiskCenterRiskStatusRequest,
+    DescribeExposePathRequest: DescribeExposePathRequest,
     RiskCenterStatusKey: RiskCenterStatusKey,
+    ExposesItem: ExposesItem,
+    DescribeAccessKeyRiskRequest: DescribeAccessKeyRiskRequest,
     DescribeRiskCenterAssetViewWeakPasswordRiskListRequest: DescribeRiskCenterAssetViewWeakPasswordRiskListRequest,
     PublicIpDomainListKey: PublicIpDomainListKey,
+    DescribeUserCallRecordRequest: DescribeUserCallRecordRequest,
     DescribeCVMAssetsResponse: DescribeCVMAssetsResponse,
-    DbAssetInfo: DbAssetInfo,
-    SubUserInfo: SubUserInfo,
+    UpdateAccessKeyRemarkResponse: UpdateAccessKeyRemarkResponse,
+    VULRiskAdvanceCFGList: VULRiskAdvanceCFGList,
+    AccessKeyAlarm: AccessKeyAlarm,
     CloudCountDesc: CloudCountDesc,
     DescribePublicIpAssetsRequest: DescribePublicIpAssetsRequest,
     AssetClusterPod: AssetClusterPod,
     DescribeCVMAssetInfoRequest: DescribeCVMAssetInfoRequest,
     AssetViewWeakPassRisk: AssetViewWeakPassRisk,
-    DescribeDbAssetsResponse: DescribeDbAssetsResponse,
+    WebsiteRisk: WebsiteRisk,
+    CFGViewCFGRisk: CFGViewCFGRisk,
+    ServiceSupport: ServiceSupport,
     CreateRiskCenterScanTaskRequest: CreateRiskCenterScanTaskRequest,
     DescribeRiskCenterAssetViewCFGRiskListResponse: DescribeRiskCenterAssetViewCFGRiskListResponse,
     DescribeRiskCenterVULViewVULRiskListResponse: DescribeRiskCenterVULViewVULRiskListResponse,
+    DescribeAccessKeyAssetRequest: DescribeAccessKeyAssetRequest,
     DescribeRiskCenterVULViewVULRiskListRequest: DescribeRiskCenterVULViewVULRiskListRequest,
     TaskCenterVulRiskInputParam: TaskCenterVulRiskInputParam,
-    TaskAdvanceCFG: TaskAdvanceCFG,
+    StopRiskCenterTaskRequest: StopRiskCenterTaskRequest,
     DescribeScanTaskListResponse: DescribeScanTaskListResponse,
     ScanTaskInfo: ScanTaskInfo,
+    DescribeScanStatisticResponse: DescribeScanStatisticResponse,
+    DescribeAccessKeyAlarmDetailRequest: DescribeAccessKeyAlarmDetailRequest,
     Tags: Tags,
+    ModifyRiskCenterRiskStatusResponse: ModifyRiskCenterRiskStatusResponse,
     VULViewVULRisk: VULViewVULRisk,
     PortViewPortRisk: PortViewPortRisk,
+    VULRiskInfo: VULRiskInfo,
     DescribeClusterPodAssetsRequest: DescribeClusterPodAssetsRequest,
     DescribeCVMAssetInfoResponse: DescribeCVMAssetInfoResponse,
     DescribePublicIpAssetsResponse: DescribePublicIpAssetsResponse,
+    DescribeVulViewVulRiskListRequest: DescribeVulViewVulRiskListRequest,
     DescribeTaskLogURLResponse: DescribeTaskLogURLResponse,
+    VulTrend: VulTrend,
+    DescribeSourceIPAssetRequest: DescribeSourceIPAssetRequest,
+    DescribeVulRiskListRequest: DescribeVulRiskListRequest,
+    DescribeVULListResponse: DescribeVULListResponse,
+    DescribeAccessKeyRiskResponse: DescribeAccessKeyRiskResponse,
     DescribeDbAssetInfoRequest: DescribeDbAssetInfoRequest,
+    DescribeUserCallRecordResponse: DescribeUserCallRecordResponse,
+    DescribeVulViewVulRiskListResponse: DescribeVulViewVulRiskListResponse,
+    CreateAccessKeyCheckTaskRequest: CreateAccessKeyCheckTaskRequest,
     Filter: Filter,
+    AccessKeyAsset: AccessKeyAsset,
     DescribeRiskCenterWebsiteRiskListRequest: DescribeRiskCenterWebsiteRiskListRequest,
+    DescribeCallRecordRequest: DescribeCallRecordRequest,
+    VulRiskItem: VulRiskItem,
+    RepositoryImageVO: RepositoryImageVO,
     ServerRiskSuggestion: ServerRiskSuggestion,
-    DescribeSubnetAssetsRequest: DescribeSubnetAssetsRequest,
+    AssetViewVULRisk: AssetViewVULRisk,
     DescribeClusterPodAssetsResponse: DescribeClusterPodAssetsResponse,
-    AssetBaseInfoResponse: AssetBaseInfoResponse,
+    DescribeCFWAssetStatisticsResponse: DescribeCFWAssetStatisticsResponse,
+    DescribeGatewayAssetsResponse: DescribeGatewayAssetsResponse,
     AssetViewPortRisk: AssetViewPortRisk,
-    DescribeRiskCenterPortViewPortRiskListRequest: DescribeRiskCenterPortViewPortRiskListRequest,
-    DescribeRiskCenterPortViewPortRiskListResponse: DescribeRiskCenterPortViewPortRiskListResponse,
+    SubUserInfo: SubUserInfo,
+    DescribeRiskCenterAssetViewCFGRiskListRequest: DescribeRiskCenterAssetViewCFGRiskListRequest,
+    DescribeSubnetAssetsRequest: DescribeSubnetAssetsRequest,
+    DescribeAccessKeyUserDetailRequest: DescribeAccessKeyUserDetailRequest,
+    CallRecord: CallRecord,
     DeleteDomainAndIpResponse: DeleteDomainAndIpResponse,
     ServerRisk: ServerRisk,
     ReportTaskIdList: ReportTaskIdList,
+    DescribeExposeAssetCategoryResponse: DescribeExposeAssetCategoryResponse,
     AddNewBindRoleUserResponse: AddNewBindRoleUserResponse,
+    DomainAssetVO: DomainAssetVO,
+    AKInfo: AKInfo,
     WhereFilter: WhereFilter,
+    ExposeAssetTypeItem: ExposeAssetTypeItem,
+    ModifyOrganizationAccountStatusResponse: ModifyOrganizationAccountStatusResponse,
     ScanTaskInfoList: ScanTaskInfoList,
+    DescribeExposePathResponse: DescribeExposePathResponse,
     DescribeDbAssetsRequest: DescribeDbAssetsRequest,
     TaskLogInfo: TaskLogInfo,
-    CreateDomainAndIpResponse: CreateDomainAndIpResponse,
+    DescribeAccessKeyAlarmRequest: DescribeAccessKeyAlarmRequest,
     DescribeRiskCenterAssetViewVULRiskListRequest: DescribeRiskCenterAssetViewVULRiskListRequest,
     TaskCenterCFGRiskInputParam: TaskCenterCFGRiskInputParam,
+    DescribeExposuresRequest: DescribeExposuresRequest,
+    SourceIPAsset: SourceIPAsset,
+    DescribeHighBaseLineRiskListResponse: DescribeHighBaseLineRiskListResponse,
     CreateDomainAndIpRequest: CreateDomainAndIpRequest,
-    DomainAssetVO: DomainAssetVO,
+    DescribeRiskCenterCFGViewCFGRiskListResponse: DescribeRiskCenterCFGViewCFGRiskListResponse,
+    DescribeAccessKeyUserDetailResponse: DescribeAccessKeyUserDetailResponse,
     DescribeSearchBugInfoResponse: DescribeSearchBugInfoResponse,
-    DescribeTaskLogListResponse: DescribeTaskLogListResponse,
-    BugInfoDetail: BugInfoDetail,
+    DescribeAccessKeyRiskDetailRequest: DescribeAccessKeyRiskDetailRequest,
+    ModifyOrganizationAccountStatusRequest: ModifyOrganizationAccountStatusRequest,
+    DescribeClusterAssetsResponse: DescribeClusterAssetsResponse,
+    DescribeExposeAssetCategoryRequest: DescribeExposeAssetCategoryRequest,
+    DescribeAbnormalCallRecordResponse: DescribeAbnormalCallRecordResponse,
+    DescribeSubUserInfoResponse: DescribeSubUserInfoResponse,
+    DescribeVulRiskListResponse: DescribeVulRiskListResponse,
+    DescribeCSIPRiskStatisticsRequest: DescribeCSIPRiskStatisticsRequest,
+    HighBaseLineRiskItem: HighBaseLineRiskItem,
     DescribeDomainAssetsResponse: DescribeDomainAssetsResponse,
-    DescribeTaskLogListRequest: DescribeTaskLogListRequest,
+    DescribeDbAssetsResponse: DescribeDbAssetsResponse,
+    DescribeNICAssetsResponse: DescribeNICAssetsResponse,
     DescribeRiskCenterAssetViewVULRiskListResponse: DescribeRiskCenterAssetViewVULRiskListResponse,
     DescribeCVMAssetsRequest: DescribeCVMAssetsRequest,
     DescribeRiskCenterServerRiskListRequest: DescribeRiskCenterServerRiskListRequest,
+    SourceIPVpcInfo: SourceIPVpcInfo,
+    DescribeTaskLogListRequest: DescribeTaskLogListRequest,
+    DescribeAccessKeyAlarmDetailResponse: DescribeAccessKeyAlarmDetailResponse,
+    Filters: Filters,
+    DescribeOtherCloudAssetsRequest: DescribeOtherCloudAssetsRequest,
+    ModifyRiskCenterScanTaskRequest: ModifyRiskCenterScanTaskRequest,
     ClbListenerListInfo: ClbListenerListInfo,
+    AccessKeyUser: AccessKeyUser,
     DescribeRiskCenterServerRiskListResponse: DescribeRiskCenterServerRiskListResponse,
     DescribeListenerListRequest: DescribeListenerListRequest,
+    DescribeVULListRequest: DescribeVULListRequest,
     DeleteRiskScanTaskResponse: DeleteRiskScanTaskResponse,
-    ModifyRiskCenterRiskStatusResponse: ModifyRiskCenterRiskStatusResponse,
-    DescribeSubUserInfoResponse: DescribeSubUserInfoResponse,
-    DescribeSubUserInfoRequest: DescribeSubUserInfoRequest,
+    DescribeScanStatisticRequest: DescribeScanStatisticRequest,
+    DescribeGatewayAssetsRequest: DescribeGatewayAssetsRequest,
+    DescribeCFWAssetStatisticsRequest: DescribeCFWAssetStatisticsRequest,
+    DescribeAccessKeyUserListResponse: DescribeAccessKeyUserListResponse,
+    DescribeRiskCallRecordRequest: DescribeRiskCallRecordRequest,
+    DescribeOtherCloudAssetsResponse: DescribeOtherCloudAssetsResponse,
+    AssetCluster: AssetCluster,
+    CreateDomainAndIpResponse: CreateDomainAndIpResponse,
+    UpdateAccessKeyRemarkRequest: UpdateAccessKeyRemarkRequest,
+    DescribeTaskLogListResponse: DescribeTaskLogListResponse,
+    DescribeExposuresResponse: DescribeExposuresResponse,
+    RiskCallRecord: RiskCallRecord,
     DescribeRiskCenterAssetViewPortRiskListResponse: DescribeRiskCenterAssetViewPortRiskListResponse,
+    DescribeVULRiskAdvanceCFGListRequest: DescribeVULRiskAdvanceCFGListRequest,
+    DescribeHighBaseLineRiskListRequest: DescribeHighBaseLineRiskListRequest,
     DescribeTaskLogURLRequest: DescribeTaskLogURLRequest,
 
 }

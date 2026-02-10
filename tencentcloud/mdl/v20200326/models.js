@@ -4860,7 +4860,7 @@ class QueryInputStreamStateRequest extends  AbstractModel {
         super();
 
         /**
-         * The StreamLive input ID.
+         * The StreamLive input ID.Currently, only RTMP_PUSH and RTMPS_PUSH are supported
          * @type {string || null}
          */
         this.Id = null;

@@ -16,80 +16,96 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const BatchSendEmailRequest = models.BatchSendEmailRequest;
-const GetEmailTemplateRequest = models.GetEmailTemplateRequest;
-const UpdateEmailTemplateRequest = models.UpdateEmailTemplateRequest;
-const ListSendTasksResponse = models.ListSendTasksResponse;
-const CreateReceiverResponse = models.CreateReceiverResponse;
-const CreateEmailTemplateRequest = models.CreateEmailTemplateRequest;
-const ListEmailAddressResponse = models.ListEmailAddressResponse;
-const ListEmailAddressRequest = models.ListEmailAddressRequest;
-const UpdateEmailSmtpPassWordResponse = models.UpdateEmailSmtpPassWordResponse;
-const ListReceiversRequest = models.ListReceiversRequest;
-const GetEmailIdentityResponse = models.GetEmailIdentityResponse;
-const ListBlackEmailAddressRequest = models.ListBlackEmailAddressRequest;
-const CreateAddressUnsubscribeConfigResponse = models.CreateAddressUnsubscribeConfigResponse;
+const SendTaskData = models.SendTaskData;
 const Template = models.Template;
-const ListSendTasksRequest = models.ListSendTasksRequest;
-const ListAddressUnsubscribeConfigResponse = models.ListAddressUnsubscribeConfigResponse;
-const Simple = models.Simple;
-const GetSendEmailStatusResponse = models.GetSendEmailStatusResponse;
-const SendEmailRequest = models.SendEmailRequest;
+const ListAddressUnsubscribeConfigRequest = models.ListAddressUnsubscribeConfigRequest;
 const EmailSender = models.EmailSender;
 const BatchSendEmailResponse = models.BatchSendEmailResponse;
 const DeleteEmailIdentityRequest = models.DeleteEmailIdentityRequest;
-const ListAddressUnsubscribeConfigRequest = models.ListAddressUnsubscribeConfigRequest;
-const UpdateEmailIdentityRequest = models.UpdateEmailIdentityRequest;
-const GetEmailIdentityRequest = models.GetEmailIdentityRequest;
-const DeleteEmailIdentityResponse = models.DeleteEmailIdentityResponse;
-const GetStatisticsReportRequest = models.GetStatisticsReportRequest;
-const DeleteBlackListRequest = models.DeleteBlackListRequest;
-const SendTaskData = models.SendTaskData;
-const TemplatesMetadata = models.TemplatesMetadata;
-const DeleteEmailTemplateResponse = models.DeleteEmailTemplateResponse;
-const Volume = models.Volume;
-const AddressUnsubscribeConfigData = models.AddressUnsubscribeConfigData;
-const CreateEmailIdentityRequest = models.CreateEmailIdentityRequest;
-const ListEmailIdentitiesRequest = models.ListEmailIdentitiesRequest;
-const CreateReceiverDetailResponse = models.CreateReceiverDetailResponse;
-const ReceiverData = models.ReceiverData;
-const UpdateEmailIdentityResponse = models.UpdateEmailIdentityResponse;
-const DeleteEmailTemplateRequest = models.DeleteEmailTemplateRequest;
-const DeleteBlackListResponse = models.DeleteBlackListResponse;
+const CreateCustomBlacklistResponse = models.CreateCustomBlacklistResponse;
 const UpdateAddressUnsubscribeConfigResponse = models.UpdateAddressUnsubscribeConfigResponse;
-const DeleteAddressUnsubscribeConfigRequest = models.DeleteAddressUnsubscribeConfigRequest;
-const SendEmailStatus = models.SendEmailStatus;
-const ListEmailTemplatesRequest = models.ListEmailTemplatesRequest;
 const CreateReceiverRequest = models.CreateReceiverRequest;
-const CreateAddressUnsubscribeConfigRequest = models.CreateAddressUnsubscribeConfigRequest;
-const ListEmailTemplatesResponse = models.ListEmailTemplatesResponse;
-const SendEmailResponse = models.SendEmailResponse;
-const ListBlackEmailAddressResponse = models.ListBlackEmailAddressResponse;
-const GetSendEmailStatusRequest = models.GetSendEmailStatusRequest;
-const DeleteAddressUnsubscribeConfigResponse = models.DeleteAddressUnsubscribeConfigResponse;
-const DeleteReceiverRequest = models.DeleteReceiverRequest;
-const ListEmailIdentitiesResponse = models.ListEmailIdentitiesResponse;
-const DeleteReceiverResponse = models.DeleteReceiverResponse;
 const TemplateContent = models.TemplateContent;
-const GetStatisticsReportResponse = models.GetStatisticsReportResponse;
-const UpdateEmailSmtpPassWordRequest = models.UpdateEmailSmtpPassWordRequest;
-const DeleteEmailAddressRequest = models.DeleteEmailAddressRequest;
-const EmailIdentity = models.EmailIdentity;
 const BlackEmailAddress = models.BlackEmailAddress;
-const DeleteEmailAddressResponse = models.DeleteEmailAddressResponse;
-const CycleEmailParam = models.CycleEmailParam;
-const CreateEmailIdentityResponse = models.CreateEmailIdentityResponse;
-const UpdateAddressUnsubscribeConfigRequest = models.UpdateAddressUnsubscribeConfigRequest;
+const Simple = models.Simple;
 const CreateEmailAddressRequest = models.CreateEmailAddressRequest;
 const CreateReceiverDetailRequest = models.CreateReceiverDetailRequest;
-const CreateEmailTemplateResponse = models.CreateEmailTemplateResponse;
-const ListReceiversResponse = models.ListReceiversResponse;
-const CreateEmailAddressResponse = models.CreateEmailAddressResponse;
 const UpdateEmailTemplateResponse = models.UpdateEmailTemplateResponse;
+const CreateReceiverDetailWithDataRequest = models.CreateReceiverDetailWithDataRequest;
 const TimedEmailParam = models.TimedEmailParam;
 const DNSAttributes = models.DNSAttributes;
 const GetEmailTemplateResponse = models.GetEmailTemplateResponse;
+const ListAddressUnsubscribeConfigResponse = models.ListAddressUnsubscribeConfigResponse;
+const SendEmailRequest = models.SendEmailRequest;
+const UpdateEmailIdentityRequest = models.UpdateEmailIdentityRequest;
+const DeleteEmailIdentityResponse = models.DeleteEmailIdentityResponse;
+const DeleteEmailTemplateResponse = models.DeleteEmailTemplateResponse;
+const ListCustomBlacklistRequest = models.ListCustomBlacklistRequest;
+const DeleteEmailTemplateRequest = models.DeleteEmailTemplateRequest;
+const SendEmailStatus = models.SendEmailStatus;
+const ListEmailTemplatesRequest = models.ListEmailTemplatesRequest;
+const DeleteBlackListRequest = models.DeleteBlackListRequest;
+const ReceiverInputData = models.ReceiverInputData;
+const ReceiverDetail = models.ReceiverDetail;
+const ListBlackEmailAddressResponse = models.ListBlackEmailAddressResponse;
+const ListEmailIdentitiesResponse = models.ListEmailIdentitiesResponse;
+const UpdateCustomBlackListRequest = models.UpdateCustomBlackListRequest;
+const UpdateEmailSmtpPassWordRequest = models.UpdateEmailSmtpPassWordRequest;
+const DeleteCustomBlackListRequest = models.DeleteCustomBlackListRequest;
+const UpdateAddressUnsubscribeConfigRequest = models.UpdateAddressUnsubscribeConfigRequest;
+const ListEmailIdentitiesRequest = models.ListEmailIdentitiesRequest;
+const CreateReceiverResponse = models.CreateReceiverResponse;
+const UpdateEmailSmtpPassWordResponse = models.UpdateEmailSmtpPassWordResponse;
+const ListReceiversRequest = models.ListReceiversRequest;
+const GetEmailIdentityResponse = models.GetEmailIdentityResponse;
 const Attachment = models.Attachment;
+const ListSendTasksRequest = models.ListSendTasksRequest;
+const ListReceiverDetailsResponse = models.ListReceiverDetailsResponse;
+const ListEmailTemplatesResponse = models.ListEmailTemplatesResponse;
+const GetEmailIdentityRequest = models.GetEmailIdentityRequest;
+const GetStatisticsReportRequest = models.GetStatisticsReportRequest;
+const GetSendEmailStatusResponse = models.GetSendEmailStatusResponse;
+const AddressUnsubscribeConfigData = models.AddressUnsubscribeConfigData;
+const CreateEmailIdentityRequest = models.CreateEmailIdentityRequest;
+const UpdateEmailTemplateRequest = models.UpdateEmailTemplateRequest;
+const CreateEmailTemplateRequest = models.CreateEmailTemplateRequest;
+const DeleteBlackListResponse = models.DeleteBlackListResponse;
+const DeleteCustomBlackListResponse = models.DeleteCustomBlackListResponse;
+const DeleteAddressUnsubscribeConfigRequest = models.DeleteAddressUnsubscribeConfigRequest;
+const CreateReceiverDetailResponse = models.CreateReceiverDetailResponse;
+const DeleteReceiverResponse = models.DeleteReceiverResponse;
+const SendEmailResponse = models.SendEmailResponse;
+const TemplatesMetadata = models.TemplatesMetadata;
+const BlackAddressDetail = models.BlackAddressDetail;
+const GetStatisticsReportResponse = models.GetStatisticsReportResponse;
+const DeleteEmailAddressResponse = models.DeleteEmailAddressResponse;
+const ListCustomBlacklistResponse = models.ListCustomBlacklistResponse;
+const ListReceiverDetailsRequest = models.ListReceiverDetailsRequest;
+const CreateEmailIdentityResponse = models.CreateEmailIdentityResponse;
+const CreateEmailAddressResponse = models.CreateEmailAddressResponse;
+const DeleteAddressUnsubscribeConfigResponse = models.DeleteAddressUnsubscribeConfigResponse;
+const BatchSendEmailRequest = models.BatchSendEmailRequest;
+const CreateCustomBlacklistRequest = models.CreateCustomBlacklistRequest;
+const ListEmailAddressRequest = models.ListEmailAddressRequest;
+const UpdateCustomBlackListResponse = models.UpdateCustomBlackListResponse;
+const ListBlackEmailAddressRequest = models.ListBlackEmailAddressRequest;
+const CreateReceiverDetailWithDataResponse = models.CreateReceiverDetailWithDataResponse;
+const GetEmailTemplateRequest = models.GetEmailTemplateRequest;
+const ListSendTasksResponse = models.ListSendTasksResponse;
+const Volume = models.Volume;
+const ReceiverData = models.ReceiverData;
+const CreateAddressUnsubscribeConfigRequest = models.CreateAddressUnsubscribeConfigRequest;
+const UpdateEmailIdentityResponse = models.UpdateEmailIdentityResponse;
+const CreateEmailTemplateResponse = models.CreateEmailTemplateResponse;
+const GetSendEmailStatusRequest = models.GetSendEmailStatusRequest;
+const ListEmailAddressResponse = models.ListEmailAddressResponse;
+const DeleteEmailAddressRequest = models.DeleteEmailAddressRequest;
+const EmailIdentity = models.EmailIdentity;
+const DeleteReceiverRequest = models.DeleteReceiverRequest;
+const CycleEmailParam = models.CycleEmailParam;
+const CreateAddressUnsubscribeConfigResponse = models.CreateAddressUnsubscribeConfigResponse;
+const ListReceiversResponse = models.ListReceiversResponse;
+const TagList = models.TagList;
 
 
 /**
@@ -125,8 +141,18 @@ class SesClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get email sending status. Only data within 30 days can be queried.
-Default API request rate limit: 1 request/sec.
+     * Add recipient addresses with Template parameters. Use this API to import Template parameters while adding recipient addresses, ensuring each recipient address uses Template variables with different values when sending emails. Users first call the CreateReceiver API to create a recipient list, then call this API to import recipient addresses and Template parameters for email sending, and finally use the BatchSendEmail API to complete batch email sending. Notably, after using this API, the Template parameter in the BatchSendEmail API does not need to be passed again. Users can also import recipient addresses, Template variables, and parameter values via the import file option in the console under Email Sending - Recipient List menu. This API limits the number of recipient addresses in a single request to 20,000 entries. It can also append recipient addresses to an already uploaded recipient list, but the total number of recipient addresses in the list must not exceed a certain limit, currently set at 50,000 entries. This API does not support removing duplicate recipient addresses. Users need to ensure uploaded and appended addresses are non-repeating and do not duplicate previously uploaded addresses.
+     * @param {CreateReceiverDetailWithDataRequest} req
+     * @param {function(string, CreateReceiverDetailWithDataResponse):void} cb
+     * @public
+     */
+    CreateReceiverDetailWithData(req, cb) {
+        let resp = new CreateReceiverDetailWithDataResponse();
+        this.request("CreateReceiverDetailWithData", req, resp, cb);
+    }
+
+    /**
+     * Search the email sending status. Only support querying data within 30 days.
      * @param {GetSendEmailStatusRequest} req
      * @param {function(string, GetSendEmailStatusResponse):void} cb
      * @public
@@ -134,6 +160,17 @@ Default API request rate limit: 1 request/sec.
     GetSendEmailStatus(req, cb) {
         let resp = new GetSendEmailStatusResponse();
         this.request("GetSendEmailStatus", req, resp, cb);
+    }
+
+    /**
+     * Query ALL recipient email addresses in the recipient list based on the recipient list id with paging query. Filter queries can be based on the recipient email address.
+     * @param {ListReceiverDetailsRequest} req
+     * @param {function(string, ListReceiverDetailsResponse):void} cb
+     * @public
+     */
+    ListReceiverDetails(req, cb) {
+        let resp = new ListReceiverDetailsResponse();
+        this.request("ListReceiverDetails", req, resp, cb);
     }
 
     /**
@@ -170,14 +207,25 @@ Default API request rate limit: 1 request/sec.
     }
 
     /**
-     * This API is used to get the email sending statistics over a recent period, including data on sent emails, delivery success rate, open rate, bounce rate, and so on.
-     * @param {GetStatisticsReportRequest} req
-     * @param {function(string, GetStatisticsReportResponse):void} cb
+     * Refresh custom blocklist.
+     * @param {UpdateCustomBlackListRequest} req
+     * @param {function(string, UpdateCustomBlackListResponse):void} cb
      * @public
      */
-    GetStatisticsReport(req, cb) {
-        let resp = new GetStatisticsReportResponse();
-        this.request("GetStatisticsReport", req, resp, cb);
+    UpdateCustomBlackList(req, cb) {
+        let resp = new UpdateCustomBlackListResponse();
+        this.request("UpdateCustomBlackList", req, resp, cb);
+    }
+
+    /**
+     * The API is used to get blocklisted addresses. In the case of a hard bounce, Tencent Cloud will blocklist the recipient address and do not allow any user to send emails to this address. If you confirm that this is a misjudgment, you can remove it from the blocklist.
+     * @param {ListBlackEmailAddressRequest} req
+     * @param {function(string, ListBlackEmailAddressResponse):void} cb
+     * @public
+     */
+    ListBlackEmailAddress(req, cb) {
+        let resp = new ListBlackEmailAddressResponse();
+        this.request("ListBlackEmailAddress", req, resp, cb);
     }
 
     /**
@@ -303,6 +351,17 @@ Note: Only an approved template can be used to send emails.
     }
 
     /**
+     * Add a custom blocklist.
+     * @param {CreateCustomBlacklistRequest} req
+     * @param {function(string, CreateCustomBlacklistResponse):void} cb
+     * @public
+     */
+    CreateCustomBlacklist(req, cb) {
+        let resp = new CreateCustomBlacklistResponse();
+        this.request("CreateCustomBlacklist", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete an email template.
      * @param {DeleteEmailTemplateRequest} req
      * @param {function(string, DeleteEmailTemplateResponse):void} cb
@@ -358,6 +417,17 @@ Note: Only an approved template can be used to send emails.
     }
 
     /**
+     * Delete a custom blocklist email address.
+     * @param {DeleteCustomBlackListRequest} req
+     * @param {function(string, DeleteCustomBlackListResponse):void} cb
+     * @public
+     */
+    DeleteCustomBlackList(req, cb) {
+        let resp = new DeleteCustomBlackListResponse();
+        this.request("DeleteCustomBlackList", req, resp, cb);
+    }
+
+    /**
      * This API is used to unblocklist email addresses. If you confirm that a blocklisted recipient address is valid and active, you can remove it from Tencent Cloud’s address blocklist database.
      * @param {DeleteBlackListRequest} req
      * @param {function(string, DeleteBlackListResponse):void} cb
@@ -380,14 +450,25 @@ Note: Only an approved template can be used to send emails.
     }
 
     /**
-     * The API is used to get blocklisted addresses. In the case of a hard bounce, Tencent Cloud will blocklist the recipient address and do not allow any user to send emails to this address. If you confirm that this is a misjudgment, you can remove it from the blocklist.
-     * @param {ListBlackEmailAddressRequest} req
-     * @param {function(string, ListBlackEmailAddressResponse):void} cb
+     * Retrieve the custom blocklist.
+     * @param {ListCustomBlacklistRequest} req
+     * @param {function(string, ListCustomBlacklistResponse):void} cb
      * @public
      */
-    ListBlackEmailAddress(req, cb) {
-        let resp = new ListBlackEmailAddressResponse();
-        this.request("ListBlackEmailAddress", req, resp, cb);
+    ListCustomBlacklist(req, cb) {
+        let resp = new ListCustomBlacklistResponse();
+        this.request("ListCustomBlacklist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the email sending statistics over a recent period, including data on sent emails, delivery success rate, open rate, bounce rate, and so on.
+     * @param {GetStatisticsReportRequest} req
+     * @param {function(string, GetStatisticsReportResponse):void} cb
+     * @public
+     */
+    GetStatisticsReport(req, cb) {
+        let resp = new GetStatisticsReportResponse();
+        this.request("GetStatisticsReport", req, resp, cb);
     }
 
     /**

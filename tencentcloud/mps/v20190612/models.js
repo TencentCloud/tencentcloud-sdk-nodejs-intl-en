@@ -1731,6 +1731,54 @@ Note: The HLS segment format for adaptive bitrate streaming is based on this fie
 }
 
 /**
+ * Intelligent video editing result.
+ * @class
+ */
+class AiAnalysisTaskReelOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Path of the edited video.
+         * @type {string || null}
+         */
+        this.VideoPath = null;
+
+        /**
+         * Script file path.
+
+         * @type {string || null}
+         */
+        this.ScriptPath = null;
+
+        /**
+         * Storage location of the edited video.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VideoPath = 'VideoPath' in params ? params.VideoPath : null;
+        this.ScriptPath = 'ScriptPath' in params ? params.ScriptPath : null;
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+
+    }
+}
+
+/**
  * Intelligent description information.
  * @class
  */
@@ -3234,6 +3282,46 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
+ * Video matting result information.
+ * @class
+ */
+class AiAnalysisTaskCutoutOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * File path for the intelligent video matting.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * Storage location for the intelligent video matting.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Path = 'Path' in params ? params.Path : null;
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+
+    }
+}
+
+/**
  * 
  * @class
  */
@@ -3881,7 +3969,7 @@ class DescribeAigcImageTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * AIGC image task processing task ID.
+         * ID of the created AIGC image generation task.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -4807,7 +4895,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 Unit: Hz.
 Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
 Note: This field may return null, indicating that no valid values can be obtained.
@@ -5141,7 +5229,7 @@ class SmartEraseTaskResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -5436,7 +5524,7 @@ Cannot be set to 0.
 
         /**
          * Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 Unit: Hz.
 Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
          * @type {number || null}
@@ -5639,6 +5727,63 @@ class CoverConfigureInfo extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * RecognizeAudio response structure.
+ * @class
+ */
+class RecognizeAudioResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Recognition result of the entire audio.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Audio duration, in seconds.
+         * @type {number || null}
+         */
+        this.AudioLength = null;
+
+        /**
+         * Recognition results of individual sentences.
+         * @type {Array.<RecognizeAudioSentence> || null}
+         */
+        this.Sentence = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.AudioLength = 'AudioLength' in params ? params.AudioLength : null;
+
+        if (params.Sentence) {
+            this.Sentence = new Array();
+            for (let z in params.Sentence) {
+                let obj = new RecognizeAudioSentence();
+                obj.deserialize(params.Sentence[z]);
+                this.Sentence.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5960,9 +6105,7 @@ This value only distinguishes template types. The task uses the values of Remove
         this.PureAudio = null;
 
         /**
-         * Segment type. Valid values: <li>ts-segment: HLS+TS segment</li>; <li>ts-byterange: HLS+TS byte range</li>; <li>mp4-segment: HLS+MP4 segment</li>; <li>mp4-byterange: HLS/DASH+MP4 byte range</li>; <li>ts-packed-audio: TS+Packed Audio</li>; <li>mp4-packed-audio: MP4+Packed Audio</li>. The default value is ts-segment.
- 
-Note: The segment format for the adaptive bitrate streaming is based on this field. The value of SegmentType can only be mp4-byterange in DASH format.
+         * Segment type. Valid values: <li>ts-segment: HLS+TS segment</li>; <li>ts-byterange: HLS+TS byte range</li>; <li>mp4-segment: HLS+MP4 segment</li>; <li>mp4-byterange: HLS/DASH+MP4 byte range</li>; <li>ts-packed-audio: HLS+TS+Packed Audio segment</li>; <li>mp4-packed-audio: HLS+MP4+Packed Audio segment</li>; <li>ts-ts-segment: HLS+TS+TS segment</li>; <li>ts-ts-byterange: HLS+TS+TS byte range</li>; <li>mp4-mp4-segment: HLS+MP4+MP4 segment</li>; <li>mp4-mp4-byterange: HLS/DASH+MP4+MP4 byte range</li>; <li>ts-packed-audio-byterange: HLS+TS+Packed Audio byte range</li>; <li>mp4-packed-audio-byterange: HLS+MP4+Packed Audio byte range</li>. Default value: ts-segment. Note: The segment format for adaptive bitrate streaming is determined by this field. For DASH format, SegmentType can only be mp4-byterange or mp4-mp4-byterange.
          * @type {string || null}
          */
         this.SegmentType = null;
@@ -6533,6 +6676,34 @@ class CreateQualityControlTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * Input type of the intelligent video editing task.
+ * @class
+ */
+class AiAnalysisTaskReelInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the intelligent video editing template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
  * The issues detected by quality control.
  * @class
  */
@@ -6877,6 +7048,64 @@ Note: This field may return null, indicating that no valid value can be obtained
             obj.deserialize(params.EraseConfig)
             this.EraseConfig = obj;
         }
+
+    }
+}
+
+/**
+ * RecognizeAudio request structure.
+ * @class
+ */
+class RecognizeAudioRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Base64-encoded audio data.
+         * @type {string || null}
+         */
+        this.AudioData = null;
+
+        /**
+         * Target language for recognition. If this is not specified, the language is automatically identified (auto).Note: If the automatic identification provides unsatisfactory results, you can specify the language to improve the accuracy.Supported languages:auto: automatic identification.zh: Simplified Chinese.en: English.ja: Japanese.ko: Korean.vi: Vietnamese.ms: Malay.id: Indonesian.fil: Filipino.th: Thai.pt: Portuguese.tr: Turkish.ar: Arabic.es: Spanish.hi: Hindi.fr: French.de: German.it: Italian.yue: Cantonese.ru: Russian.af: Afrikaans.sq: Albanian.am: Amharic.hy: Armenian.az: Azerbaijani.eu: Basque.bn: Bengali.bs: Bosnian.bg: Bulgarian.my: Burmese.ca: Catalan.hr: Croatian.cs: Czech.da: Danish.nl: Dutch.et: Estonian.fi: Finnish.gl: Galician.ka: Georgian.el: Greek.gu: Gujarati.iw: Hebrew.hu: Hungarian.is: Icelandic.jv: Javanese.kn: Kannada.kk: Kazakh.km: Khmer.rw: Kinyarwanda.lo: Lao.lv: Latvian.lt: Lithuanian.mk: Macedonian.ml: Malayalam.mr: Marathi.mn: Mongolian.ne: Nepali.no: Norwegian Bokmal.fa: Persian.pl: Polish.ro: Romanian.sr: Serbian.si: Sinhala.sk: Slovak.sl: Slovenian.st: Southern Sotho.su: Sundanese.sw: Swahili.sv: Swedish.ta: Tamil.te: Telugu.ts: Tsonga.uk: Ukrainian.ur: Urdu.uz: Uzbek.ve: Vendaxh: Xhosa.zu: Zulu.
+
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * Audio data format. Default value: pcm.Supported formats:pcm (mono 16-bit PCM data with a sample rate of 16000).ogg-opus (mono Opus-encoded Ogg data with sample rates of 16000, 24000, or 48000).
+         * @type {string || null}
+         */
+        this.AudioFormat = null;
+
+        /**
+         * Audio sample rate.Supported sample rates:pcm 16000
+ogg-opus 16000 / 24000 / 48000
+         * @type {number || null}
+         */
+        this.SampleRate = null;
+
+        /**
+         * Extended parameter. This is left empty by default. Use this parameter for special requirements.
+         * @type {string || null}
+         */
+        this.UserExtPara = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AudioData = 'AudioData' in params ? params.AudioData : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.AudioFormat = 'AudioFormat' in params ? params.AudioFormat : null;
+        this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
+        this.UserExtPara = 'UserExtPara' in params ? params.UserExtPara : null;
 
     }
 }
@@ -7397,7 +7626,7 @@ class EnableWorkflowRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Extended parameters used for AIGC image generation.
  * @class
  */
 class AigcImageExtraParam extends  AbstractModel {
@@ -7405,13 +7634,13 @@ class AigcImageExtraParam extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The aspect ratio of the generated video.Supported aspect ratios for different models:1. GEM: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, and 21:9.Note: For more information about the aspect ratios of specific models, see the model website.
          * @type {string || null}
          */
         this.AspectRatio = null;
 
         /**
-         * 
+         * Output resolution of the image.Models that support this parameter:Valid values: 720P, 1080P, 2K, and 4K.
          * @type {string || null}
          */
         this.Resolution = null;
@@ -7713,7 +7942,8 @@ class CreateAigcVideoTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * Upon successful task creation, the returned task ID can be used to invoke the query interface for polling task progress and retrieving generated results.
+         * ID of the successfully created task.
+The task progress and generation results can be obtained by calling the query API.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -7800,7 +8030,7 @@ class DescribeAigcVideoTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * AIGC video task processing task ID.
+         * Task ID returned when the AIGC video generation task is created.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -9108,6 +9338,12 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.OutputStorage = null;
 
+        /**
+         * Processing result of the image-to-text task.
+         * @type {string || null}
+         */
+        this.Content = null;
+
     }
 
     /**
@@ -9124,6 +9360,7 @@ Note: This field may return null, indicating that no valid value can be obtained
             obj.deserialize(params.OutputStorage)
             this.OutputStorage = obj;
         }
+        this.Content = 'Content' in params ? params.Content : null;
 
     }
 }
@@ -10520,7 +10757,7 @@ class CreateAigcImageTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * Returns the task ID.
+         * Returned task ID.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -10637,18 +10874,18 @@ class ProhibitedAsrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * DisableSchedule response structure.
+ * Input type of the intelligent video matting task.
  * @class
  */
-class DisableScheduleResponse extends  AbstractModel {
+class AiAnalysisTaskCutoutInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
+         * ID of the intelligent video matting template.
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.Definition = null;
 
     }
 
@@ -10659,7 +10896,7 @@ class DisableScheduleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -12680,7 +12917,7 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
         /**
          * Notification type:
 TDMQ-CMQ: message queue.
-"URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/product/862/39229?from_cn_redirect=1).
+"URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.comom/document/product/862/39229?from_cn_redirect=1).
 <Font color="red"> Note: if it is unspecified or left blank, no callback will be sent. To send a callback, fill in the corresponding type value. </font>
          * @type {string || null}
          */
@@ -14084,6 +14321,12 @@ class AiAnalysisTaskDubbingOutput extends  AbstractModel {
         this.SpeakerPath = null;
 
         /**
+         * Voice type ID.
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
          * Specifies the storage location of the transcoded video.
          * @type {TaskOutputStorage || null}
          */
@@ -14100,6 +14343,7 @@ class AiAnalysisTaskDubbingOutput extends  AbstractModel {
         }
         this.VideoPath = 'VideoPath' in params ? params.VideoPath : null;
         this.SpeakerPath = 'SpeakerPath' in params ? params.SpeakerPath : null;
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
 
         if (params.OutputStorage) {
             let obj = new TaskOutputStorage();
@@ -14189,8 +14433,7 @@ This value only distinguishes template types. The task uses the values of Remove
         this.PureAudio = null;
 
         /**
-         * Segment type. Valid values: <li>ts-segment: HLS+TS segment</li>; <li>ts-byterange: HLS+TS byte range</li>; <li>mp4-segment: HLS+MP4 segment</li>; <li>mp4-byterange: HLS/DASH+MP4 byte range</li>; <li>ts-packed-audio: TS+Packed Audio</li>; <li>mp4-packed-audio: MP4+Packed Audio</li>. The default value is ts-segment.
-Note: The HLS segment format for the adaptive bitrate streaming is based on this field. The value of SegmentType can only be mp4-byterange in DASH format.
+         * Segment type. Valid values: <li>ts-segment: HLS+TS segment</li>; <li>ts-byterange: HLS+TS byte range</li>; <li>mp4-segment: HLS+MP4 segment</li>; <li>mp4-byterange: HLS/DASH+MP4 byte range</li>; <li>ts-packed-audio: HLS+TS+Packed Audio segment</li>; <li>mp4-packed-audio: HLS+MP4+Packed Audio segment</li>; <li>ts-ts-segment: HLS+TS+TS segment</li>; <li>ts-ts-byterange: HLS+TS+TS byte range</li>; <li>mp4-mp4-segment: HLS+MP4+MP4 segment</li>; <li>mp4-mp4-byterange: HLS/DASH+MP4+MP4 byte range</li>; <li>ts-packed-audio-byterange: HLS+TS+Packed Audio byte range</li>; <li>mp4-packed-audio-byterange: HLS+MP4+Packed Audio byte range</li>. Default value: ts-segment. Note: The segment format for adaptive bitrate streaming is determined by this field. For DASH format, SegmentType can only be mp4-byterange or mp4-mp4-byterange.
          * @type {string || null}
          */
         this.SegmentType = null;
@@ -14678,18 +14921,13 @@ class DescribeAigcImageTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * Current task status:
-WAIT: Pending,
-RUN: In progress,
-FAIL: Task failed,
-DONE: Task completed successfully.
-
+         * Current task status. WAIT: waiting; RUN: running; FAIL: failed; DONE: successful.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * When the task status is DONE, the returned image URL list will be available for 12 hours. Please retrieve and utilize the images promptly.
+         * When the task status is DONE, the list of image URLs is returned. The images are stored for 12 hours. Please retrieve them as soon as possible.
          * @type {Array.<string> || null}
          */
         this.ImageUrls = null;
@@ -15991,111 +16229,91 @@ class CreateAigcVideoTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * Model Name. Currently supported models include: Hunyuan, Hailuo, Kling, Vidu, OS, GV
+         * Model name.
+Supported models:Hunyuan,
+Hailuo,
+Kling,
+Vidu,
+OS,
+GV.
          * @type {string || null}
          */
         this.ModelName = null;
 
         /**
-         * Specify the version number of a particular model. By default, the system uses the currently supported stable version of the model.  
-1. Hailuo: Available options [02, 2.3].  
-2. Kling: Available options [2.0, 2.1, 2.5, O1, 2.6].  
-3. Vidu: Available options [q2, q2-pro, q2-turbo].  
-4. GV: Available option [3.1].  
-5. OS: Available option [2.0].
+         * Specific version number of the model. By default, the system uses the supported stable version of the model.1. Hailuo: [02 and 2.3].2. Kling: [2.0, 2.1, 2.5, O1, and 2.6].3. Vidu: [q2, q2-pro, and q2-turbo].4. GV: [3.1].5. OS: [2.0].
          * @type {string || null}
          */
         this.ModelVersion = null;
 
         /**
-         * Generate video description. (Note: Maximum 2000 characters supported). This parameter is mandatory when no images are provided.
+         * Scenario for the generated video.Note: Not all models support scenarios.1. Kling supports motion control (motion_control).2. Mingmou supports landscape-to-portrait conversion (land2port).3. Vidu supports special effect templates (template_effect).
+         * @type {string || null}
+         */
+        this.SceneType = null;
+
+        /**
+         * Description of the generated video. (Note: A maximum of 2000 characters is supported.) This parameter is required when no reference image is specified.
          * @type {string || null}
          */
         this.Prompt = null;
 
         /**
-         * Used to specify the content you wish to prevent the model from generating.Note: Supported by select models.Examples:  
-Overhead lighting, vibrant colors  
-Human figures, animals  
-Multiple vehicles, wind
+         * Content you want to prevent the model from generating.Note: Not all models support this.For example:Top lighting and bright color.People and animals.Multiple vehicles and wind.
          * @type {string || null}
          */
         this.NegativePrompt = null;
 
         /**
-         * The default value is False, where the model strictly adheres to instructions. For optimal results with more refined prompts, setting this parameter to True will automatically optimize the input prompt to enhance generation quality.
+         * The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.
          * @type {boolean || null}
          */
         this.EnhancePrompt = null;
 
         /**
-         * The URL of the image used to guide video generation, which must be publicly accessible via the internet.  
-Notes:  
-1. The recommended image size should not exceed 10MB, though size limitations may vary across different models.  
-2. Supported image formats: JPEG, PNG.  
-3. When using the OS model, the input image dimensions must be either 1280x720 or 720x1280.
+         * Image URL for video generation. The URL must be accessible from the public network.Note:1. The recommended image size is no more than 10 MB. Different models have different size limits.2. Supported image formats: JPEG and PNG.3. If the OS model is used, the input image dimension should be 1280x720 or 720x1280.
          * @type {string || null}
          */
         this.ImageUrl = null;
 
         /**
-         * The model will utilize the image provided via this parameter as the ending frame for video generation.  
-Supported models for this parameter:  
-1. GV: When an ending frame image is provided, the ImageUrl parameter must also be specified as the starting frame.  
-2. Kling: Under Resolution: 1080P, version 2.1 supports both start&end frames.  
-3. Vidu, q2-pro, q2-turbo: Support start&end frames. 
-Notes:  
-1. It is recommended that the image size does not exceed 10MB, though specific model limitations may vary.  
-2. Supported image formats: JPEG, PNG.
+         * The model will generate a video using the image of this parameter as the ending frame.Models that support this parameter:1. GV. If the ending frame image is specified, ImageUrl is required as the starting frame.2. Kling. Version 2.1 supports starting and ending frames with a resolution of 1080P.3. Vidu. q2-pro and q2-turbo support starting and ending frames.Note:1. The recommended image size is no more than 10 MB. Different models have different limits.2. Supported image formats: JPEG and PNG.
          * @type {string || null}
          */
         this.LastImageUrl = null;
 
         /**
-         * A list comprising up to three material resource images, utilized to depict the reference images the model will employ for video generation.  
-Models supporting multi-image input:  
-1. GV: When utilizing multi-image input, neither ImageUrl nor LastImageUrl should be used.  
-2. Vidu: Supports video generation with multiple reference images. For model q2, 1-7 images can be provided, with the subject ID specified via ReferenceType within ImageInfos.
-Notes:  
-1. Each image must not exceed 10MB in size.  
-2. Supported image formats: JPEG, PNG.
+         * List of up to 3 asset images, used to describe the images the model should use for video generation.Model that supports multiple images:1. GV. If multiple images are specified, ImageUrl and LastImageUrl are unavailable.2. Vidu supports video generation with multiple reference images. The q2 model accepts 1 to 7 images. The ReferenceType in ImageInfos can be used to specify the subject ID for the input.Note:1. The image size cannot exceed 10 MB.2. Supported image formats: JPEG and PNG.
          * @type {Array.<AigcVideoReferenceImageInfo> || null}
          */
         this.ImageInfos = null;
 
         /**
-         * Duration of generated videos.  
-Notes:  
-1. Kling supports 5 and 10 seconds. Default: 5 seconds.  
-2. Hailuo's standard mode supports 6 and 10 seconds, while other modes only support 6 seconds. Default: 6 seconds.  
-3. Vidu supports 1 to 10 seconds.  
-4. GV supports 8 seconds. Default: 8 seconds.  
-5. OS supports 4, 8, and 12 seconds. Default: 8 seconds.
+         * Duration of the generated video.Note:1. Kling supports 5 and 10 seconds. Default value: 5 seconds.2. The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.3. Vidu supports 1 to 10 seconds.4. GV supports 8 seconds. Default value: 8 seconds.5. OS supports 4, 8, and 12 seconds. Default value: 8 seconds.
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
-         * Used to pass additional parameters.
+         * Additional parameters required.
          * @type {AigcVideoExtraParam || null}
          */
         this.ExtraParameters = null;
 
         /**
-         * The output files will be stored in the specified COS bucket. Note: COS service must be activated, and the MPS_QcsRole needs to be created and properly authorized.
+         * COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.
          * @type {AigcStoreCosParam || null}
          */
         this.StoreCosParam = null;
 
         /**
-         * 
-Used to pass specific scenario parameters required by the model, serialized into a JSON format string. Example: {"camera_control":{"type":"simple"}}
+         * Special scenario parameters required by the model, formatted as a JSON serialized string.Example:{\"camera_control\":{\"type\":\"simple\"}}
          * @type {string || null}
          */
         this.AdditionalParameters = null;
 
         /**
-         * Interface operator name.
+         * API operator name.
          * @type {string || null}
          */
         this.Operator = null;
@@ -16111,6 +16329,7 @@ Used to pass specific scenario parameters required by the model, serialized into
         }
         this.ModelName = 'ModelName' in params ? params.ModelName : null;
         this.ModelVersion = 'ModelVersion' in params ? params.ModelVersion : null;
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
         this.Prompt = 'Prompt' in params ? params.Prompt : null;
         this.NegativePrompt = 'NegativePrompt' in params ? params.NegativePrompt : null;
         this.EnhancePrompt = 'EnhancePrompt' in params ? params.EnhancePrompt : null;
@@ -16635,200 +16854,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Target language for subtitle translation.
-This field is valid when the value of TranslateSwitch is ON. List of translation languages:
-`ab`: Abkhaz language.
-`ace`: Acehnese.
-`ach`: Acholi.
-`af`: Afrikaans.
-`ak`: Twi (Akan).
-`am`: Amharic.
-`ar`: Arabic.
-`as`: Assamese.
-`ay`: Aymara.
-`az`: Azerbaijani.
-`ba`: Bashkir.
-`ban`: Balinese.
-`bbc`: Batak Toba.
-`bem`: Bemba.
-`bew`: Betawi.
-`bg`: Bulgarian.
-`bho`: Bhojpuri.
-`bik`: Bikol.
-`bm`: Bambara.
-`bn`: Bengali.
-`br`: Breton.
-`bs`: Bosnian.
-`btx`: Batak Karo.
-`bts`: Batak Simalungun.
-`bua`: Buryat.
-`ca`: Catalan.
-`ceb`: Cebuano.
-`cgg`: Kiga
-`chm`: Meadow Mari language.
-`ckb`: Kurdish (Sorani).
-`cnh`: Hakha Chin.
-`co`: Corsican.
-`crh`: Crimean Tatar.
-`crs`: Seychellois Creole.
-`cs`: Czech.
-`cv`: Chuvash.
-`cy`: Welsh.
-`da`: Danish.
-`de`: German.
-`din`: Dinka.
-`doi`: Dogri.
-`dov`: Dombe.
-`dv`: Divehi.
-`dz`: Dzongkha.
-`ee`: Ewe.
-`el`: Greek.
-`en`: English.
-`eo`: Esperanto.
-`es`: Spanish.
-`et`: Estonian.
-`eu`: Basque.
-`fa`: Persian.
-`ff`: Fula.
-`fi`: Finnish.
-`fil`: Filipino (Tagalog).
-`fj`: Fijian.
-`fr`: French.
-`fr-CA`: French (Canada).
-`fr-FR`: French (France).
-`fy`: Frisian.
-`ga`: Irish.
-`gaa`: Ga.
-`gd`: Scottish Gaelic.
-`gl`: Galician.
-`gn`: Guaraní.
-`gom`: Goan Konkani.
-`gu`: Gujarati.
-`gv`: Manx.
-`ha`: Hausa.
-`haw`: Hawaiian.
-`he`: Hebrew.
-`hi`: Hindi.
-`hil`: Hiligaynon.
-`hmn`: Hmong.
-`hr`: Croatian.
-`hrx`: Hunsrik.
-`ht`: Haitian Creole.
-`hu`: Hungarian.
-`hy`: Armenian.
-`id`: Indonesian.
-`ig`: Igbo.
-`ilo`: Iloko.
-`is`: Icelandic.
-`it`: Italian.
-`iw`: Hebrew.
-`ja`: Japanese.
-`jv`: Javanese.
-`jw`: Javanese.
-`ka`: Georgian.
-`kk`: Kazakh.
-`km`: Khmer.
-`kn`: Kannada.
-`ko`: Korean.
-`kri`: Krio.
-`ku`: Kurdish (Kurmanji).
-`ktu`: Kituba.
-`ky`: Kirghiz.
-`la`: Latin.
-`lb`: Luxembourgish.
-`lg`: Ganda (Luganda).
-`li`: Limburgish.
-`lij`: Ligurian.
-`lmo`: Lombard.
-`ln`: Lingala.
-`lo`: Lao.
-`lt`: Lithuanian.
-`ltg`: Latgalian.
-`luo`: Luo.
-`lus`: Mizo.
-`lv`: Latvian.
-`mai`: Maithili.
-`mak`: Makassar.
-`mg`: Malagasy.
-`mi`: Maori.
-`min`: Minangkabau.
-`mk`: Macedonian.
-`ml`: Malayalam.
-`mn`: Mongolian.
-`mr`: Marathi.
-`ms`: Malay.
-`mt`: Maltese.
-`my`: Burmese.
-`ne`: Nepali.
-`new`: Newar.
-`nl`: Dutch.
-`no`: Norwegian.
-`nr`: Ndebele (South).
-`nso`: Northern Sotho (Sepedi).
-`nus`: Nuer.
-`ny`: Chichewa (Nyanja).
-`oc`: Occitan.
-`om`: Oromo.
-`or`: Odia.
-`pa`: Punjabi.
-`pag`: Pangasinan.
-`pam`: Kapampangan.
-`pap`: Papiamento.
-`pl`: Polish.
-`ps`: Pashto.
-`pt`: Portuguese.
-`pt-BR`: Portuguese (Brazil).
-`pt-PT`: Portuguese (Portugal).
-`qu`: Quechuan.
-`ro`: Romanian.
-`rom`: Romani.
-`rn`: Rundi.
-`ru`: Russian.
-`rw`: Kinyarwanda.
-`sa`: Sanskrit.
-`scn`: Sicilian.
-`sd`: Sindhi.
-`sg`: Sango.
-`shn`: Shan.
-`si`: Sinhalese.
-`sk`: Slovak.
-`sl`: Slovene.
-`sm`: Samoan.
-`sn`: Shona.
-`so`: Somali.
-`sq`: Albanian.
-`sr`: Serbian.
-`ss`: Swati.
-`st`: Sesotho.
-`su`: Sundanese.
-`sv`: Swedish.
-`sw`: Swahili.
-`szl`: Silesian.
-`ta`: Tamil.
-`te`: Telugu.
-`tet`: Tetum.
-`tg`: Tajik.
-`th`: Thai.
-`ti`: Tigrinya.
-`tk`: Turkmen.
-`tl`: Filipino (Tagalog).
-`tn`: Tswana.
-`tr`: Turkish.
-`ts`: Tsonga.
-`tt`: Tatar.
-`ug`: Uyghur.
-`uk`: Ukrainian.
-`ur`: Urdu.
-`uz`: Uzbek.
-`vi`: Vietnamese.
-`xh`: Xhosa.
-`yi`: Yiddish.
-`yo`: Yoruba.
-`yua`: Yucatec Maya.
-`yue`: Cantonese.
-`zh`: Simplified Chinese.
-`zh-TW`: Chinese (Traditional).
-`zu`: Zulu.
-**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+This parameter takes effect when the value of TranslateSwitch is ON. Valid translation languages:`ab`: Abkhazian.`ace`: Acehnese.`ach`: Acholi.`af`: Afrikaans.`ak`: Twi (Akan).`am`: Amharic.`ar`: Arabic.`as`: Assamese.`ay`: Aymara.`az`: Azerbaijani.`ba`: Bashkir.`ban`: Balinese.`bbc`: Batak toba.`bem`: Bemba.`bew`: Betawi.`bg`: Bulgarian.`bho`: Bhojpuri.`bik`: Bikol.`bm`: Bambara.`bn`: Bengali.`br`: Breton.`bs`: Bosnian.`btx`: Batak Karo.`bts`: Batak Simalungun.`bua`: Buryat.`ca`: Catalan.`ceb`: Cebuano.`cgg`: Kiga.`chm`: Meadow Mari.`ckb`: Kurdish (Sorani).`cnh`: Hakha Chin.`co`: Corsican.`crh`: Crimean Tatar.`crs`: Seychellois Creole.`cs`: Czech.`cv`: Chuvash.`cy`: Welsh.`da`: Danish.`de`: German.`din`: Dinka.`doi`: Dogri.`dov`: Dombe.`dv`: Dhivehi.`dz`: Dzongkha.`ee`: Ewe.`el`: Greek.`en`: English.`eo`: Esperanto.`es`: Spanish.`et`: Estonian.`eu`: Basque.`fa`: Persian.`ff`: Fulah.`fi`: Finnish.`fil`: Filipino (Tagalog).`fj`: Fijian.`fr`: French.`fr-CA`: French (Canada).`fr-FR`: French (France).`fy`: Frisian.`ga`: Irish.`gaa`: Ga.
+`gd`: Scottish Gaelic.`gl`: Galician.`gn`: Guarani.`gom`: Konkani.`gu`: Gujarati.`gv`: Manx.`ha`: Hausa.`haw`: Hawaiian.`he`: Hebrew.`hi`: Hindi.`hil`: Hiligaynon.`hmn`: Hmong.`hr`: Croatian.`hrx`: Hunsrik.`ht`: Haitian Creole.`hu`: Hungarian.`hy`: Armenian.`id`: Indonesian.`ig`: Igbo.`ilo`: Iloko.`is`: Icelandic.`it`: Italian.`iw`: Hebrew.`ja`: Japanese.`jv`: Javanese.`ka`: Georgian.`kk`: Kazakh.`km`: Khmer.`kn`: Kannada.`ko`: Korean.`kri`: Krio.`ku`: Kurdish (Kurmanji).`ktu`: Kituba.`ky`: Kyrgyz.`la`: Latin.`lb`: Luxembourgish.`lg`: Ganda (Luganda).`li`: Limburgish.`lij`: Ligurian.`lmo`: Lombard.`ln`: Lingala.`lo`: Lao.`lt`: Lithuanian.`ltg`: Latgalian.`luo`: Luo.`lus`: Mizo.`lv`: Latvian.`mai`: Maithili.`mak`: Makasar.`mg`: Malagasy.`mi`: Maori.`min`: Minangkabau.`mk`: Macedonian.`ml`: Malayalam.`mn`: Mongolian.`mr`: Marathi.`ms`: Malay.`mt`: Maltese.`my`: Burmese.`ne`: Nepali.`new`: Newari.`nl`: Dutch.`no`: Norwegian.`nr`: Southern Ndebele.`nso`: Northern Sotho (Sepedi).`nus`: Nuer.`ny`: Chichewa (Nyanja).`oc`: Occitan.`om`: Oromo.`or`: Odia.`pa`: Punjabi.`pag`: Pangasinan.`pam`: Kapampangan.`pap`: Papiamento.`pl`: Polish.`ps`: Pashto.`pt`: Portuguese.`pt-BR`: Portuguese (Brazil).`pt-PT`: Portuguese (Portugal).`qu`: Quechua.`ro`: Romanian.`rom`: Romani.`rn`: Rundi.`ru`: Russian.`rw`: Kinyarwanda.`sa`: Sanskrit.`scn`: Sicilian.`sd`: Sindhi.`sg`: Sango.`shn`: Shan.`si`: Sinhala.`sk`: Slovak.`sl`: Slovenian.`sm`: Samoan.`sn`: Shona.`so`: Somali.`sq`: Albanian.`sr`: Serbian.`ss`: Swazi.`st`: Southern Sotho.`su`: Sundanese.`sv`: Swedish.`sw`: Swahili.`szl`: Silesian.`ta`: Tamil.`te`: Telugu.`tet`: Tetum.`tg`: Tajik.`th`: Thai.`ti`: Tigrinya.`tk`: Turkmen.`tn`: Tswana.`tr`: Turkish.`ts`: Tsonga.`tt`: Tatar.`ug`: Uyghur.`uk`: Ukrainian.`ur`: Urdu.`uz`: Uzbek.`vi`: Vietnamese.`xh`: Xhosa.`yi`: Yiddish.`yo`: Yoruba.`yua`: Yucatec Maya.`yue`: Cantonese.`zh`: Chinese (Simplified).`zh-TW`: Chinese (Traditional).`zu`: Zulu.**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -16858,7 +16885,7 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.ProcessType = null;
 
         /**
-         * 
+         * Area configurations for the subtitle OCR extraction box.Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SelectingSubtitleAreasConfig || null}
          */
         this.SelectingSubtitleAreasConfig = null;
@@ -17415,7 +17442,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Image information for AIGC generation.
  * @class
  */
 class AigcImageInfo extends  AbstractModel {
@@ -17423,13 +17450,14 @@ class AigcImageInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Image URL for video generation. The URL must be accessible from the public network and must be accessible to crawlers.
          * @type {string || null}
          */
         this.ImageUrl = null;
 
         /**
-         * 
+         * Reference type.
+Note:1. When the model uses Vidu's q2 multi-reference image generation, this can also be used to specify the subject ID.2. If the GV model is used, this serves as the reference method. Valid values are asset and style.
          * @type {string || null}
          */
         this.ReferenceType = null;
@@ -19687,10 +19715,7 @@ Default value: ON.
         this.Switch = null;
 
         /**
-         * Type. Valid values:
-<li>standard: standard super-resolution.</li>
-<li>super: advanced super-resolution.</li>
-Default value: standard.
+         * Type. Valid values:<li>standard: standard super-resolution.</li><li>super: super advanced super-resolution.</li><li>ultra: ultra advanced super-resolution.</li>Default value: standard.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -19707,25 +19732,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Mode = null;
 
         /**
-         * Magnification factor of super-resolution, which can be a decimal.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Scale factor of super-resolution, which can be a decimal.Note: This is used when Mode is percent.Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Percent = null;
 
         /**
-         * Width of the target image. The value cannot exceed 4096.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Width of the target image. The value cannot exceed 4096.Note: When Mode is aspect or fixed, this configuration takes priority.Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Height of the target image. The value cannot exceed 4096.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Height of the target image. The value cannot exceed 4096.Note: When Mode is aspect or fixed, this configuration takes priority.Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Height = null;
+
+        /**
+         * Long side length of the target image. The value cannot exceed 4096.Note: This configuration is used when Mode is aspect or fixed and the Width and Height fields are not specified.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LongSide = null;
+
+        /**
+         * Short side length of the target image. The value cannot exceed 4096.Note: This configuration is used when Mode is aspect or fixed and the Width and Height fields are not specified.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ShortSide = null;
 
     }
 
@@ -19742,6 +19776,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Percent = 'Percent' in params ? params.Percent : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.LongSide = 'LongSide' in params ? params.LongSide : null;
+        this.ShortSide = 'ShortSide' in params ? params.ShortSide : null;
 
     }
 }
@@ -19785,13 +19821,13 @@ class BlindWatermarkTemplate extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -20983,7 +21019,7 @@ class ScheduleExecRuleTaskResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
+         * Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -21531,17 +21567,8 @@ class AiAnalysisResult extends  AbstractModel {
         super();
 
         /**
-         * Task type. Valid values:
-<li>Classification: smart classification.</li>
-<li>Cover: smart cover.</li>
-<li>Tag: smart tag.</li>
-<li>FrameTag: smart frame tag.</li>
-<li>Highlight: smart highlights.</li>
-<li>DeLogo: smart erasing.</li>
-<li>Description: LLM summary.</li>
-<li>Dubbing: smart dubbing.</li>
-<li>VideoRemake: video deduplication.</li>
-<li>VideoComprehension: video (audio) recognition.</li>
+         * Task type. Valid values:<li>Classification: intelligent classification.</li><li>Cover: intelligent cover.</li><li>Tag: intelligent tagging.</li><li>FrameTag: intelligent frame-level tagging.</li><li>Highlight: intelligent highlights.</li><li>DeLogo: intelligent removal.</li><li>Description: LLM summarization.</li><li>Dubbing: intelligent dubbing.</li><li>VideoRemake: video recreation.</li><li>VideoComprehension: video (audio) recognition.</li>
+<li>Cutout: video matting.</li><li>Reel: intelligent video editing.</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -21633,6 +21660,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.VideoComprehensionTask = null;
 
+        /**
+         * Query result of a video matting task for video analysis, which is valid if the task type is Cutout.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AiAnalysisTaskCutoutResult || null}
+         */
+        this.CutoutTask = null;
+
+        /**
+         * Query result of a video editing task for video analysis, which is valid if the task type is Reel.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AiAnalysisTaskReelResult || null}
+         */
+        this.ReelTask = null;
+
     }
 
     /**
@@ -21720,6 +21759,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new AiAnalysisTaskVideoComprehensionResult();
             obj.deserialize(params.VideoComprehensionTask)
             this.VideoComprehensionTask = obj;
+        }
+
+        if (params.CutoutTask) {
+            let obj = new AiAnalysisTaskCutoutResult();
+            obj.deserialize(params.CutoutTask)
+            this.CutoutTask = obj;
+        }
+
+        if (params.ReelTask) {
+            let obj = new AiAnalysisTaskReelResult();
+            obj.deserialize(params.ReelTask)
+            this.ReelTask = obj;
         }
 
     }
@@ -21955,7 +22006,7 @@ class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Information required for uploading AIGC result files to COS. The LVB_QCSRole role needs to be created and authorized.
  * @class
  */
 class AigcStoreCosParam extends  AbstractModel {
@@ -21963,19 +22014,19 @@ class AigcStoreCosParam extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Name of the COS bucket to store to. This value is required if you need to store the results in COS. Example value: bucket.
          * @type {string || null}
          */
         this.CosBucketName = null;
 
         /**
-         * 
+         * Region of the COS bucket to store to. This is required if you need to upload the results to COS. Example value: ap-guangzhou.
          * @type {string || null}
          */
         this.CosBucketRegion = null;
 
         /**
-         * 
+         * Path of the COS bucket to store to.Optional.Example value: my_file.
          * @type {string || null}
          */
         this.CosBucketPath = null;
@@ -22035,6 +22086,102 @@ class AiRecognitionTaskOcrWordsResultItem extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Type of the intelligent video editing result.
+ * @class
+ */
+class AiAnalysisTaskReelResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. 0: Task successful. Other values: Task failed.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input of the intelligent video editing task.
+         * @type {AiAnalysisTaskReelInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of the intelligent video editing task.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AiAnalysisTaskReelOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of MPS error codes.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Task progress.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Task start time, in ISO date and time format.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * Task completion time, in ISO date and time format.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiAnalysisTaskReelInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiAnalysisTaskReelOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -23574,6 +23721,12 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.Wordlist = null;
 
+        /**
+         * Speaker ID (if speaker recognition is enabled).
+         * @type {string || null}
+         */
+        this.SpeakerId = null;
+
     }
 
     /**
@@ -23596,6 +23749,7 @@ Note: This field may return null, indicating that no valid value can be obtained
                 this.Wordlist.push(obj);
             }
         }
+        this.SpeakerId = 'SpeakerId' in params ? params.SpeakerId : null;
 
     }
 }
@@ -23660,7 +23814,7 @@ class TaskStatDataItem extends  AbstractModel {
         super();
 
         /**
-         * Start time of the time interval where the data resides. Use the [ISO date and time format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). For example, when the time granularity is day, 2018-12-01T00:00:00+08:00 indicates the interval from December 1, 2018 (inclusive) to December 2, 2018 (exclusive).
+         * Start time of the time interval where the data resides. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). For example, when the time granularity is day, 2018-12-01T00:00:00+08:00 indicates the interval from December 1, 2018 (inclusive) to December 2, 2018 (exclusive).
          * @type {string || null}
          */
         this.Time = null;
@@ -25158,6 +25312,63 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
+ * Result of the sentence recognition.
+ * @class
+ */
+class RecognizeAudioSentence extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time in the audio, in seconds.
+         * @type {number || null}
+         */
+        this.Start = null;
+
+        /**
+         * End time in the audio, in seconds.
+         * @type {number || null}
+         */
+        this.End = null;
+
+        /**
+         * Audio recognition result.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Word timestamp result.
+         * @type {Array.<WordResult> || null}
+         */
+        this.WordsInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Start = 'Start' in params ? params.Start : null;
+        this.End = 'End' in params ? params.End : null;
+        this.Text = 'Text' in params ? params.Text : null;
+
+        if (params.WordsInfo) {
+            this.WordsInfo = new Array();
+            for (let z in params.WordsInfo) {
+                let obj = new WordResult();
+                obj.deserialize(params.WordsInfo[z]);
+                this.WordsInfo.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Detail enhancement configuration.
  * @class
  */
@@ -25791,7 +26002,7 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.Status = null;
 
         /**
-         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrMsg = null;
@@ -26170,7 +26381,7 @@ class SmartSubtitleTaskFullTextResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -26499,12 +26710,8 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.VideoSrcLanguage = null;
 
         /**
-         * Smart subtitle file format:
-- vtt: WebVTT format.
-- srt: SRT format.
-- original: consistent with the source subtitle file (it is used for the pure subtitle translation template).
-- If this field is unspecified or left blank, no subtitle file will be generated.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Smart subtitle file format.
+- vtt: WebVTT.- srt: SRT.- original: same as the source subtitle file (for subtitle translation templates).- Not specified or empty: no subtitle file generated.Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SubtitleFormat = null;
@@ -26576,12 +26783,16 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.AliasName = null;
 
         /**
-         * Subtitle processing type.
-- 0: ASR recognition subtitle.
-- 1: pure subtitle translation.
+         * Subtitle processing type:- 0: ASR subtitle recognition.- 1: subtitle translation.- 2: OCR subtitle recognition.
          * @type {number || null}
          */
         this.ProcessType = null;
+
+        /**
+         * Area configurations for the subtitle OCR extraction box.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SelectingSubtitleAreasConfig || null}
+         */
+        this.SelectingSubtitleAreasConfig = null;
 
     }
 
@@ -26612,6 +26823,40 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.AliasName = 'AliasName' in params ? params.AliasName : null;
         this.ProcessType = 'ProcessType' in params ? params.ProcessType : null;
+
+        if (params.SelectingSubtitleAreasConfig) {
+            let obj = new SelectingSubtitleAreasConfig();
+            obj.deserialize(params.SelectingSubtitleAreasConfig)
+            this.SelectingSubtitleAreasConfig = obj;
+        }
+
+    }
+}
+
+/**
+ * DisableSchedule response structure.
+ * @class
+ */
+class DisableScheduleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -31570,7 +31815,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * 
+ * Area configurations for the subtitle OCR extraction box.
  * @class
  */
 class SelectingSubtitleAreasConfig extends  AbstractModel {
@@ -31578,19 +31823,19 @@ class SelectingSubtitleAreasConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Automatically selects custom areas.For the selected areas, the AI model is used to automatically detect and extract the target content.
          * @type {Array.<EraseArea> || null}
          */
         this.AutoAreas = null;
 
         /**
-         * 
+         * Width of the sample video or image, in pixels.
          * @type {number || null}
          */
         this.SampleWidth = null;
 
         /**
-         * 
+         * Height of the sample video or image, in pixels.
          * @type {number || null}
          */
         this.SampleHeight = null;
@@ -33817,7 +34062,7 @@ ASR recognition and pure subtitle translation currently support the following la
 `mr-IN`: Marathi (India).
 `mn-MN`: Mongolian (Mongolia).
 `ne-NP`: Nepali (Nepal).
-`no-NO`: Bokmål Norwegian (Norway).
+`no-NO`: Bokmal Norwegian (Norway).
 `fa-IR`: Persian (Iran).
 `pl-PL`: Polish (Poland).
 `pt-BR`: Portuguese (Brazil).
@@ -33869,7 +34114,6 @@ ASR recognition and pure subtitle translation currently support the following la
 `vi-VN`: Vietnamese (Vietnam).
 `xh-ZA`: Xhosa (South Africa).
 `zu-ZA`: Zulu (South Africa).
-
          * @type {string || null}
          */
         this.VideoSrcLanguage = null;
@@ -33928,200 +34172,8 @@ Length limit: 256 characters.
 
         /**
          * Target language for subtitle translation.
-This field is valid when the value of TranslateSwitch is ON. List of translation languages:
-`ab`: Abkhaz language.
-`ace`: Acehnese.
-`ach`: Acholi.
-`af`: Afrikaans.
-`ak`: Twi (Akan).
-`am`: Amharic.
-`ar`: Arabic.
-`as`: Assamese.
-`ay`: Aymara.
-`az`: Azerbaijani.
-`ba`: Bashkir.
-`ban`: Balinese.
-`bbc`: Batak Toba.
-`bem`:Bemba.
-`bew`:Betawi.
-`bg`: Bulgarian.
-`bho`: Bhojpuri.
-`bik`:Bikol.
-`bm`: Bambara.
-`bn`: Bengali.
-`br`: Breton.
-`bs`: Bosnian.
-`btx`: Batak Karo.
-`bts`: Batak Simalungun.
-`bua`: Buryat language.
-`ca`: Catalan.
-`ceb`: Cebuano.
-`cgg`:Kiga.
-`chm`: Meadow Mari language.
-`ckb`: Kurdish (Sorani).
-`cnh`: Hakha Chin.
-`co`: Corsican.
-`crh`: Crimean Tatar.
-`crs`: Seychellois Creole.
-`cs`: Czech.
-`cv`: Chuvash.
-`cy`: Welsh.
-`da`: Danish.
-`de`: German.
-`din`: Dinka
-`doi`: Dogri.
-`dov`: Dombe.
-`dv`: Divehi.
-`dz`: Dzongkha.
-`ee`: Ewe.
-`el`: Greek.
-`en`: English.
-`eo`: Esperanto.
-`es`: Spanish.
-`et`: Estonian.
-`eu`: Basque.
-`fa`: Persian.
-`ff`: Fula.
-`fi`: Finnish.
-`fil`: Filipino (Tagalog).
-`fj`: Fijian.
-`fr`: French.
-`fr-CA`: French (Canada).
-`fr-FR`: French (France).
-`fy`: Frisian.
-`ga`: Irish.
-`gaa`: Ga.
-`gd`: Scottish Gaelic.
-`gl`: Galician.
-`gn`: Guaraní.
-`gom`: Goan Konkani.
-`gu`: Gujarati.
-`gv`: Manx.
-`ha`: Hausa.
-`haw`: Hawaiian.
-`he`: Hebrew.
-`hi`: Hindi.
-`hil`: Hiligaynon.
-`hmn`: Hmong.
-`hr`: Croatian.
-`hrx`: Hunsrik.
-`ht`: Haitian Creole.
-`hu`: Hungarian.
-`hy`: Armenian.
-`id`: Indonesian.
-`ig`: Igbo.
-`ilo`: Iloko.
-`is`: Icelandic.
-`it`: Italian.
-`iw`: Hebrew
-`ja`: Japanese.
-`jv`: Javanese.
-`jw`: Javanese.
-`ka`: Georgian.
-`kk`: Kazakh.
-`km`: Khmer.
-`kn`: Kannada.
-`ko`: Korean.
-`kri`: Krio.
-`ku`: Kurdish (Kurmanji).
-`ktu`: Kituba.
-`ky`: Kirghiz.
-`la`: Latin.
-`lb`: Luxembourgish.
-`lg`: Ganda (Luganda).
-`li`: Limburgish.
-`lij`: Ligurian.
-`lmo`: Lombard.
-`ln`: Lingala.
-`lo`: Lao.
-`lt`: Lithuanian.
-`ltg`: Latgalian.
-`luo`: Luo.
-`lus`: Mizo.
-`lv`: Latvian.
-`mai`: Maithili.
-`mak`: Makassar.
-`mg`: Malagasy.
-`mi`: Maori.
-`min`: Minangkabau.
-`mk`: Macedonian.
-`ml`: Malayalam.
-`mn`: Mongolian.
-`mr`: Marathi.
-`ms`: Malay.
-`mt`: Maltese.
-`my`: Burmese.
-`ne`: Nepali.
-`new`: Newar.
-`nl`: Dutch.
-`no`: Norwegian.
-`nr`: Ndebele (South).
-`nso`: Northern Sotho (Sepedi).
-`nus`: Nuer.
-`ny`: Chichewa (Nyanja).
-`oc`: Occitan.
-`om`: Oromo.
-`or`: Odia.
-`pa`: Punjabi.
-`pag`: Pangasinan.
-`pam`: Kapampangan.
-`pap`: Papiamento.
-`pl`: Polish.
-`ps`: Pashto.
-`pt`: Portuguese.
-`pt-BR`: Portuguese (Brazil).
-`pt-PT`: Portuguese (Portugal).
-`qu`: Quechuan.
-`ro`: Romanian.
-`rom`: Romani.
-`rn`: Rundi.
-`ru`: Russian.
-`rw`: Kinyarwanda.
-`sa`: Sanskrit.
-`scn`: Sicilian.
-`sd`: Sindhi.
-`sg`: Sango.
-`shn`: Shan.
-`si`: Sinhalese.
-`sk`: Slovak.
-`sl`: Slovene.
-`sm`: Samoan.
-`sn`: Shona.
-`so`: Somali.
-`sq`: Albanian.
-`sr`: Serbian.
-`ss`: Swati.
-`st`: Sesotho.
-`su`: Sundanese.
-`sv`: Swedish.
-`sw`: Swahili.
-`szl`: Silesian.
-`ta`: Tamil.
-`te`: Telugu.
-`tet`: Tetum.
-`tg`: Tajik.
-`th`: Thai.
-`ti`: Tigrinya.
-`tk`: Turkmen.
-`tl`: Filipino (Tagalog).
-`tn`: Tswana.
-`tr`: Turkish.
-`ts`: Tsonga.
-`tt`: Tatar.
-`ug`: Uyghur.
-`uk`: Ukrainian.
-`ur`: Urdu.
-`uz`: Uzbek.
-`vi`: Vietnamese.
-`xh`: Xhosa.
-`yi`: Yiddish.
-`yo`: Yoruba.
-`yua`: Yucatec Maya.
-`yue`: Cantonese.
-`zh`: Simplified Chinese.
-`zh-TW`: Chinese (Traditional).
-`zu`: Zulu.
-**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+This parameter takes effect when the value of TranslateSwitch is ON. Valid translation languages:`ab`: Abkhazian.`ace`: Acehnese.`ach`: Acholi.`af`: Afrikaans.`ak`: Twi (Akan).`am`: Amharic.`ar`: Arabic.`as`: Assamese.`ay`: Aymara.`az`: Azerbaijani.`ba`: Bashkir.`ban`: Balinese.`bbc`: Batak toba.`bem`: Bemba.`bew`: Betawi.`bg`: Bulgarian.`bho`: Bhojpuri.`bik`: Bikol.`bm`: Bambara.`bn`: Bengali.`br`: Breton.`bs`: Bosnian.`btx`: Batak Karo.`bts`: Batak Simalungun.`bua`: Buryat.`ca`: Catalan.`ceb`: Cebuano.`cgg`: Kiga.`chm`: Meadow Mari.`ckb`: Kurdish (Sorani).`cnh`: Hakha Chin.`co`: Corsican.`crh`: Crimean Tatar.`crs`: Seychellois Creole.`cs`: Czech.`cv`: Chuvash.`cy`: Welsh.`da`: Danish.`de`: German.`din`: Dinka.`doi`: Dogri.`dov`: Dombe.`dv`: Dhivehi.`dz`: Dzongkha.`ee`: Ewe.`el`: Greek.`en`: English.`eo`: Esperanto.`es`: Spanish.`et`: Estonian.`eu`: Basque.`fa`: Persian.`ff`: Fulah.`fi`: Finnish.`fil`: Filipino (Tagalog).`fj`: Fijian.`fr`: French.`fr-CA`: French (Canada).`fr-FR`: French (France).`fy`: Frisian.`ga`: Irish.`gaa`: Ga.
+`gd`: Scottish Gaelic.`gl`: Galician.`gn`: Guarani.`gom`: Konkani.`gu`: Gujarati.`gv`: Manx.`ha`: Hausa.`haw`: Hawaiian.`he`: Hebrew.`hi`: Hindi.`hil`: Hiligaynon.`hmn`: Hmong.`hr`: Croatian.`hrx`: Hunsrik.`ht`: Haitian Creole.`hu`: Hungarian.`hy`: Armenian.`id`: Indonesian.`ig`: Igbo.`ilo`: Iloko.`is`: Icelandic.`it`: Italian.`iw`: Hebrew.`ja`: Japanese.`jv`: Javanese.`ka`: Georgian.`kk`: Kazakh.`km`: Khmer.`kn`: Kannada.`ko`: Korean.`kri`: Krio.`ku`: Kurdish (Kurmanji).`ktu`: Kituba.`ky`: Kyrgyz.`la`: Latin.`lb`: Luxembourgish.`lg`: Ganda (Luganda).`li`: Limburgish.`lij`: Ligurian.`lmo`: Lombard.`ln`: Lingala.`lo`: Lao.`lt`: Lithuanian.`ltg`: Latgalian.`luo`: Luo.`lus`: Mizo.`lv`: Latvian.`mai`: Maithili.`mak`: Makasar.`mg`: Malagasy.`mi`: Maori.`min`: Minangkabau.`mk`: Macedonian.`ml`: Malayalam.`mn`: Mongolian.`mr`: Marathi.`ms`: Malay.`mt`: Maltese.`my`: Burmese.`ne`: Nepali.`new`: Newari.`nl`: Dutch.`no`: Norwegian.`nr`: Southern Ndebele.`nso`: Northern Sotho (Sepedi).`nus`: Nuer.`ny`: Chichewa (Nyanja).`oc`: Occitan.`om`: Oromo.`or`: Odia.`pa`: Punjabi.`pag`: Pangasinan.`pam`: Kapampangan.`pap`: Papiamento.`pl`: Polish.`ps`: Pashto.`pt`: Portuguese.`pt-BR`: Portuguese (Brazil).`pt-PT`: Portuguese (Portugal).`qu`: Quechua.`ro`: Romanian.`rom`: Romani.`rn`: Rundi.`ru`: Russian.`rw`: Kinyarwanda.`sa`: Sanskrit.`scn`: Sicilian.`sd`: Sindhi.`sg`: Sango.`shn`: Shan.`si`: Sinhala.`sk`: Slovak.`sl`: Slovenian.`sm`: Samoan.`sn`: Shona.`so`: Somali.`sq`: Albanian.`sr`: Serbian.`ss`: Swazi.`st`: Southern Sotho.`su`: Sundanese.`sv`: Swedish.`sw`: Swahili.`szl`: Silesian.`ta`: Tamil.`te`: Telugu.`tet`: Tetum.`tg`: Tajik.`th`: Thai.`ti`: Tigrinya.`tk`: Turkmen.`tn`: Tswana.`tr`: Turkish.`ts`: Tsonga.`tt`: Tatar.`ug`: Uyghur.`uk`: Ukrainian.`ur`: Urdu.`uz`: Uzbek.`vi`: Vietnamese.`xh`: Xhosa.`yi`: Yiddish.`yo`: Yoruba.`yua`: Yucatec Maya.`yue`: Cantonese.`zh`: Chinese (Simplified).`zh-TW`: Chinese (Traditional).`zu`: Zulu.**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
          * @type {string || null}
          */
         this.TranslateDstLanguage = null;
@@ -34135,6 +34187,12 @@ This field is valid when the value of TranslateSwitch is ON. List of translation
          * @type {number || null}
          */
         this.ProcessType = null;
+
+        /**
+         * Area configurations for the subtitle OCR extraction box.
+         * @type {SelectingSubtitleAreasConfig || null}
+         */
+        this.SelectingSubtitleAreasConfig = null;
 
     }
 
@@ -34159,6 +34217,12 @@ This field is valid when the value of TranslateSwitch is ON. List of translation
         this.TranslateSwitch = 'TranslateSwitch' in params ? params.TranslateSwitch : null;
         this.TranslateDstLanguage = 'TranslateDstLanguage' in params ? params.TranslateDstLanguage : null;
         this.ProcessType = 'ProcessType' in params ? params.ProcessType : null;
+
+        if (params.SelectingSubtitleAreasConfig) {
+            let obj = new SelectingSubtitleAreasConfig();
+            obj.deserialize(params.SelectingSubtitleAreasConfig)
+            this.SelectingSubtitleAreasConfig = obj;
+        }
 
     }
 }
@@ -35412,66 +35476,58 @@ class CreateAigcImageTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * Model Name. Currently supported models include: Hunyuan,GEM,Qwen.
+         * Model name.
+Supported models:Hunyuan,
+GEM,
+Qwen.
          * @type {string || null}
          */
         this.ModelName = null;
 
         /**
-         * Specify the version number of a particular model. By default, the system utilizes the currently supported stable version of the model.  
-1. GEM, available options [2.5, 3.0].
-
+         * Specific version number of the model. By default, the system uses the supported stable version of the model.1. GEM: [2.5 and 3.0].
          * @type {string || null}
          */
         this.ModelVersion = null;
 
         /**
-         * 
-Generate a description of the image. (Note: The maximum supported length is 1000 characters.) This parameter is mandatory when no reference image is provided.
-
+         * Description of the generated image. (Note: A maximum of 1000 characters is supported.) This parameter is required when no reference image is specified.
          * @type {string || null}
          */
         this.Prompt = null;
 
         /**
-         * Used to specify the content you wish to prevent the model from generating.Note: Supported by select models.Examples:  
-Overhead lighting, vibrant colors  
-Human figures, animals  
-Multiple vehicles, wind
+         * Specifies the content you want to prevent the model from generating. Note: Not all models support this. For example: top lighting, bright colors, people, animals, multiple vehicles, and wind.
          * @type {string || null}
          */
         this.NegativePrompt = null;
 
         /**
-         * The default value is False, where the model strictly adheres to instructions. For optimal results with more refined prompts, setting this parameter to True will automatically optimize the input prompt to enhance generation quality.
-
+         * The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.
          * @type {boolean || null}
          */
         this.EnhancePrompt = null;
 
         /**
-         * 
-Supports single image input by default. Models supporting multi-image input include GEM (up to 3 images).  
-Recommended image size should be under 7MB, with support for JPEG, PNG, and WebP formats.
-
+         * Reference resource images. By default, one image can be specified.Model that supports multiple images:1. GEM supports up to 3 resource images.Note:1. The recommended image size is less than 7 MB. Different models have different limits.2. Supported image format: JPEG, PNG, and WebP.
          * @type {Array.<AigcImageInfo> || null}
          */
         this.ImageInfos = null;
 
         /**
-         * Used to pass additional parameters.
+         * Additional parameters required for the model.
          * @type {AigcImageExtraParam || null}
          */
         this.ExtraParameters = null;
 
         /**
-         * The output files will be stored in the specified COS bucket. Note: COS service must be activated, and the MPS_QcsRole needs to be created and properly authorized.
+         * COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.
          * @type {AigcStoreCosParam || null}
          */
         this.StoreCosParam = null;
 
         /**
-         * Interface operator name.
+         * API operator name.
          * @type {string || null}
          */
         this.Operator = null;
@@ -35898,32 +35954,20 @@ class DescribeUsageDataRequest extends  AbstractModel {
         super();
 
         /**
-         * Start date. Use the [ISO date and time format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Queries the MPS task type. The transcoding task is queried by default.
-<li>Transcode: transcoding.</li>
-<li>Enhance: enhancement.</li>
-<li>AIAnalysis: intelligent analysis.</li>
-<li>AIRecognition: intelligent recognition.</li>
-<li>AIReview: content moderation.</li>
-<li>Snapshot: screenshot.</li>
-<li>AnimatedGraphics: conversion to GIF.</li>
-<li>AiQualityControl: media quality inspection.</li>
-<li>Evaluation: video assessment.</li>
-<li>ImageProcess: image processing.</li>
-<li>AddBlindWatermark: add a basic copyright digital watermark.</li>
-<li>AddNagraWatermark: add a NAGRA digital watermark.</li>
-<li>ExtractBlindWatermark: extract a basic copyright digital watermark.</li>
+         * Type of MPS tasks to query. The transcoding tasks are queried by default.<li>Transcode: transcoding.</li><li>Enhance: enhancement.</li><li>AIAnalysis: intelligent analysis.</li><li>AIRecognition: intelligent identification.</li><li>AIReview: content moderation.</li><li>Snapshot: screenshot.</li><li>AnimatedGraphics: animated graphics.</li><li>AiQualityControl: quality inspection.</li><li>Evaluation: video evaluation.</li><li>ImageProcess: image processing.</li>
+<li>AddBlindWatermark: adding basic copyright digital watermarks.</li><li>AddNagraWatermark: adding NAGRA digital watermarks.</li><li>ExtractBlindWatermark: extracting basic copyright digital watermarks.</li><li>AIGC: AIGC</li>
          * @type {Array.<string> || null}
          */
         this.Types = null;
@@ -35942,7 +35986,7 @@ class DescribeUsageDataRequest extends  AbstractModel {
 <li>na-siliconvalley: Silicon Valley.</li>
 <li>na-ashburn: Virginia.</li>
 <li>na-toronto: Toronto.</li>
-<li>sa-saopaulo: São Paulo.</li>
+<li>sa-saopaulo: Sao Paulo.</li>
 <li>eu-frankfurt: Frankfurt.</li>
 <li>eu-moscow: Russia.</li>
 <li>aws: AWS.</li>
@@ -36763,7 +36807,7 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.ErrCode = null;
 
         /**
-         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrMsg = null;
@@ -37219,7 +37263,7 @@ class DescribeAIAnalysisTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Extended parameters used for AIGC video generation.
  * @class
  */
 class AigcVideoExtraParam extends  AbstractModel {
@@ -37227,16 +37271,35 @@ class AigcVideoExtraParam extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The resolution of the generated video, which is related to the selected model and set video duration.Supported resolution options for different models:1. Kling: 720P (default) and 1080P.2. Hailuo: 768P (default) and 1080P.3. Vidu: 720P (default) and 1080P.4. GV: 720P (default) and 1080P.5. OS: 720P. For images, only 1280x720 and 720x1280 are supported. Resolution cannot be specified.Note: In addition to the resolution supported by the model, 2K and 4K resolutions are also available.
          * @type {string || null}
          */
         this.Resolution = null;
 
         /**
-         * 
+         * The aspect ratio of the generated video.Support for this parameter by different models:1. Kling only supports this parameter for text-to-video, with aspect ratios of 16:9 (default), 9:16, and 1:1.2. Hailuo does not support this parameter.3. Vidu supports [16:9, 9:16, 4:3, 3:4, 1:1] for text-to-video and reference image-to-video only. Only q2 supports 4:3 and 3:4.4. GV supports 16:9 (default) and 9:16.5. OS only supports this parameter for text-to-video, with aspect ratios of 16:9 (default) and 9:16.Note: For more information about the supported aspect ratios of specific models, see the model website.
          * @type {string || null}
          */
         this.AspectRatio = null;
+
+        /**
+         * Indicates whether to add a logo watermark.1. Hailuo supports this parameter.2. Kling supports this parameter.
+3. Vidu supports this parameter.
+         * @type {number || null}
+         */
+        this.LogoAdd = null;
+
+        /**
+         * Indicates whether to generate audio for the video. Valid values: true or false.Models that support this parameter:1. GV. Default value: true.2. OS. Default value: true.
+         * @type {boolean || null}
+         */
+        this.EnableAudio = null;
+
+        /**
+         * Indicates whether to use the off-peak scheduling mode. Only Vidu supports this parameter.Tasks submitted in off-peak mode will be processed within 48 hours. Uncompleted tasks will be canceled.
+         * @type {boolean || null}
+         */
+        this.OffPeak = null;
 
     }
 
@@ -37249,6 +37312,9 @@ class AigcVideoExtraParam extends  AbstractModel {
         }
         this.Resolution = 'Resolution' in params ? params.Resolution : null;
         this.AspectRatio = 'AspectRatio' in params ? params.AspectRatio : null;
+        this.LogoAdd = 'LogoAdd' in params ? params.LogoAdd : null;
+        this.EnableAudio = 'EnableAudio' in params ? params.EnableAudio : null;
+        this.OffPeak = 'OffPeak' in params ? params.OffPeak : null;
 
     }
 }
@@ -37705,23 +37771,19 @@ class DescribeAigcVideoTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * Current task status:
-WAIT: Pending,
-RUN: In progress,
-FAIL: Task failed,
-DONE: Task completed successfully.
+         * Current task status. WAIT: waiting; RUN: running; FAIL: failed; DONE: successful.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * When the task status is DONE, the returned video URL list will be available for 12 hours. Please retrieve and utilize the video promptly.
+         * When the task status is DONE, the list of video URLs is returned. The videos are stored for 12 hours. Please retrieve them as soon as possible.
          * @type {Array.<string> || null}
          */
         this.VideoUrls = null;
 
         /**
-         * The resolution of the output video. Example: 1080*720.
+         * Output video resolution. Example: 1080*720.
          * @type {string || null}
          */
         this.Resolution = null;
@@ -38741,7 +38803,7 @@ ASR recognition and pure subtitle translation currently support the following la
 `mr-IN`: Marathi (India).
 `mn-MN`: Mongolian (Mongolia).
 `ne-NP`: Nepali (Nepal).
-`no-NO`: Bokmål Norwegian (Norway).
+`no-NO`: Bokmal Norwegian (Norway).
 `fa-IR`: Persian (Iran).
 `pl-PL`: Polish (Poland).
 `pt-BR`: Portuguese (Brazil).
@@ -38794,6 +38856,7 @@ ASR recognition and pure subtitle translation currently support the following la
 `xh-ZA`: Xhosa (South Africa).
 `zu-ZA`: Zulu (South Africa).
 
+
          * @type {string || null}
          */
         this.VideoSrcLanguage = null;
@@ -38836,200 +38899,8 @@ The value can only be 0 when TranslateSwitch is set to OFF. The value can only b
 
         /**
          * Target language for subtitle translation.
-This field is valid when the value of TranslateSwitch is ON. List of translation languages:
-`ab`: Abkhaz language.
-`ace`: Acehnese.
-`ach`: Acholi.
-`af`: Afrikaans.
-`ak`: Twi (Akan).
-`am`: Amharic.
-`ar`: Arabic.
-`as`: Assamese.
-`ay`: Aymara.
-`az`: Azerbaijani.
-`ba`: Bashkir.
-`ban`: Balinese.
-`bbc`: Batak Toba.
-`bem`: Bemba.
-`bew`: Betawi.
-`bg`: Bulgarian.
-`bho`: Bhojpuri.
-`bik`: Bikol.
-`bm`: Bambara.
-`bn`: Bengali.
-`br`: Breton.
-`bs`: Bosnian.
-`btx`: Batak Karo.
-`bts`: Batak Simalungun.
-`bua`: Buryat.
-`ca`: Catalan.
-`ceb`: Cebuano.
-`cgg`: Kiga
-`chm`: Meadow Mari language.
-`ckb`: Kurdish (Sorani).
-`cnh`: Hakha Chin.
-`co`: Corsican.
-`crh`: Crimean Tatar.
-`crs`: Seychellois Creole.
-`cs`: Czech.
-`cv`: Chuvash.
-`cy`: Welsh.
-`da`: Danish.
-`de`: German.
-`din`: Dinka.
-`doi`: Dogri.
-`dov`: Dombe.
-`dv`: Divehi.
-`dz`: Dzongkha.
-`ee`: Ewe.
-`el`: Greek.
-`en`: English.
-`eo`: Esperanto.
-`es`: Spanish.
-`et`: Estonian.
-`eu`: Basque.
-`fa`: Persian.
-`ff`: Fula.
-`fi`: Finnish.
-`fil`: Filipino (Tagalog).
-`fj`: Fijian.
-`fr`: French.
-`fr-CA`: French (Canada).
-`fr-FR`: French (France).
-`fy`: Frisian.
-`ga`: Irish.
-`gaa`: Ga.
-`gd`: Scottish Gaelic.
-`gl`: Galician.
-`gn`: Guaraní.
-`gom`: Goan Konkani.
-`gu`: Gujarati.
-`gv`: Manx.
-`ha`: Hausa.
-`haw`: Hawaiian.
-`he`: Hebrew.
-`hi`: Hindi.
-`hil`: Hiligaynon.
-`hmn`: Hmong.
-`hr`: Croatian.
-`hrx`: Hunsrik.
-`ht`: Haitian Creole.
-`hu`: Hungarian.
-`hy`: Armenian.
-`id`: Indonesian.
-`ig`: Igbo.
-`ilo`: Iloko.
-`is`: Icelandic.
-`it`: Italian.
-`iw`: Hebrew.
-`ja`: Japanese.
-`jv`: Javanese.
-`jw`: Javanese.
-`ka`: Georgian.
-`kk`: Kazakh.
-`km`: Khmer.
-`kn`: Kannada.
-`ko`: Korean.
-`kri`: Krio.
-`ku`: Kurdish (Kurmanji).
-`ktu`: Kituba.
-`ky`: Kirghiz.
-`la`: Latin.
-`lb`: Luxembourgish.
-`lg`: Ganda (Luganda).
-`li`: Limburgish.
-`lij`: Ligurian.
-`lmo`: Lombard.
-`ln`: Lingala.
-`lo`: Lao.
-`lt`: Lithuanian.
-`ltg`: Latgalian.
-`luo`: Luo.
-`lus`: Mizo.
-`lv`: Latvian.
-`mai`: Maithili.
-`mak`: Makassar.
-`mg`: Malagasy.
-`mi`: Maori.
-`min`: Minangkabau.
-`mk`: Macedonian.
-`ml`: Malayalam.
-`mn`: Mongolian.
-`mr`: Marathi.
-`ms`: Malay.
-`mt`: Maltese.
-`my`: Burnese.
-`ne`: Nepali.
-`new`: Newar.
-`nl`: Dutch.
-`no`: Norwegian.
-`nr`: Ndebele (South).
-`nso`: Northern Sotho (Sepedi).
-`nus`: Nuer.
-`ny`: Chichewa (Nyanja).
-`oc`: Occitan.
-`om`: Oromo.
-`or`: Odia.
-`pa`: Punjabi.
-`pag`: Pangasinan.
-`pam`: Kapampangan.
-`pap`: Papiamento.
-`pl`: Polish.
-`ps`: Pashto.
-`pt`: Portuguese.
-`pt-BR`: Portuguese (Brazil).
-`pt-PT`: Portuguese (Portugal).
-`qu`: Quechuan.
-`ro`: Romanian.
-`rom`: Romani.
-`rn`: Rundi.
-`ru`: Russian.
-`rw`: Kinyarwanda.
-`sa`: Sanskrit.
-`scn`: Sicilian.
-`sd`: Sindhi.
-`sg`: Sango.
-`shn`: Shan.
-`si`: Sinhalese.
-`sk`: Slovak.
-`sl`: Slovene.
-`sm`: Samoan.
-`sn`: Shona.
-`so`: Somali.
-`sq`: Albanian.
-`sr`: Serbian.
-`ss`: Swati.
-`st`: Sesotho.
-`su`: Sundanese.
-`sv`: Swedish.
-`sw`: Swahili.
-`szl`: Silesian.
-`ta`: Tamil.
-`te`: Telugu.
-`tet`: Tetum.
-`tg`: Tajik.
-`th`: Thai.
-`ti`: Tigrinya.
-`tk`: Turkmen.
-`tl`: Filipino (Tagalog).
-`tn`: Tswana.
-`tr`: Turkish.
-`ts`: Tsonga.
-`tt`: Tatar.
-`ug`: Uyghur.
-`uk`: Ukrainian.
-`ur`: Urdu.
-`uz`: Uzbek.
-`vi`: Vietnamese.
-`xh`: Xhosa.
-`yi`: Yiddish.
-`yo`: Yoruba.
-`yua`: Yucatec Maya.
-`yue`: Cantonese.
-`zh`: Simplified Chinese.
-`zh-TW`: Chinese (Traditional).
-`zu`: Zulu.
-**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+This parameter takes effect when the value of TranslateSwitch is ON. Valid translation languages:`ab`: Abkhazian.`ace`: Acehnese.`ach`: Acholi.`af`: Afrikaans.`ak`: Twi (Akan).`am`: Amharic.`ar`: Arabic.`as`: Assamese.`ay`: Aymara.`az`: Azerbaijani.`ba`: Bashkir.`ban`: Balinese.`bbc`: Batak toba.`bem`: Bemba.`bew`: Betawi.`bg`: Bulgarian.`bho`: Bhojpuri.`bik`: Bikol.`bm`: Bambara.`bn`: Bengali.`br`: Breton.`bs`: Bosnian.`btx`: Batak Karo.`bts`: Batak Simalungun.`bua`: Buryat.`ca`: Catalan.`ceb`: Cebuano.`cgg`: Kiga.`chm`: Meadow Mari.`ckb`: Kurdish (Sorani).`cnh`: Hakha Chin.`co`: Corsican.`crh`: Crimean Tatar.`crs`: Seychellois Creole.`cs`: Czech.`cv`: Chuvash.`cy`: Welsh.`da`: Danish.`de`: German.`din`: Dinka.`doi`: Dogri.`dov`: Dombe.`dv`: Dhivehi.`dz`: Dzongkha.`ee`: Ewe.`el`: Greek.`en`: English.`eo`: Esperanto.`es`: Spanish.`et`: Estonian.`eu`: Basque.`fa`: Persian.`ff`: Fulah.`fi`: Finnish.`fil`: Filipino (Tagalog).`fj`: Fijian.`fr`: French.`fr-CA`: French (Canada).`fr-FR`: French (France).`fy`: Frisian.`ga`: Irish.`gaa`: Ga.
+`gd`: Scottish Gaelic.`gl`: Galician.`gn`: Guarani.`gom`: Konkani.`gu`: Gujarati.`gv`: Manx.`ha`: Hausa.`haw`: Hawaiian.`he`: Hebrew.`hi`: Hindi.`hil`: Hiligaynon.`hmn`: Hmong.`hr`: Croatian.`hrx`: Hunsrik.`ht`: Haitian Creole.`hu`: Hungarian.`hy`: Armenian.`id`: Indonesian.`ig`: Igbo.`ilo`: Iloko.`is`: Icelandic.`it`: Italian.`iw`: Hebrew.`ja`: Japanese.`jv`: Javanese.`ka`: Georgian.`kk`: Kazakh.`km`: Khmer.`kn`: Kannada.`ko`: Korean.`kri`: Krio.`ku`: Kurdish (Kurmanji).`ktu`: Kituba.`ky`: Kyrgyz.`la`: Latin.`lb`: Luxembourgish.`lg`: Ganda (Luganda).`li`: Limburgish.`lij`: Ligurian.`lmo`: Lombard.`ln`: Lingala.`lo`: Lao.`lt`: Lithuanian.`ltg`: Latgalian.`luo`: Luo.`lus`: Mizo.`lv`: Latvian.`mai`: Maithili.`mak`: Makasar.`mg`: Malagasy.`mi`: Maori.`min`: Minangkabau.`mk`: Macedonian.`ml`: Malayalam.`mn`: Mongolian.`mr`: Marathi.`ms`: Malay.`mt`: Maltese.`my`: Burmese.`ne`: Nepali.`new`: Newari.`nl`: Dutch.`no`: Norwegian.`nr`: Southern Ndebele.`nso`: Northern Sotho (Sepedi).`nus`: Nuer.`ny`: Chichewa (Nyanja).`oc`: Occitan.`om`: Oromo.`or`: Odia.`pa`: Punjabi.`pag`: Pangasinan.`pam`: Kapampangan.`pap`: Papiamento.`pl`: Polish.`ps`: Pashto.`pt`: Portuguese.`pt-BR`: Portuguese (Brazil).`pt-PT`: Portuguese (Portugal).`qu`: Quechua.`ro`: Romanian.`rom`: Romani.`rn`: Rundi.`ru`: Russian.`rw`: Kinyarwanda.`sa`: Sanskrit.`scn`: Sicilian.`sd`: Sindhi.`sg`: Sango.`shn`: Shan.`si`: Sinhala.`sk`: Slovak.`sl`: Slovenian.`sm`: Samoan.`sn`: Shona.`so`: Somali.`sq`: Albanian.`sr`: Serbian.`ss`: Swazi.`st`: Southern Sotho.`su`: Sundanese.`sv`: Swedish.`sw`: Swahili.`szl`: Silesian.`ta`: Tamil.`te`: Telugu.`tet`: Tetum.`tg`: Tajik.`th`: Thai.`ti`: Tigrinya.`tk`: Turkmen.`tn`: Tswana.`tr`: Turkish.`ts`: Tsonga.`tt`: Tatar.`ug`: Uyghur.`uk`: Ukrainian.`ur`: Urdu.`uz`: Uzbek.`vi`: Vietnamese.`xh`: Xhosa.`yi`: Yiddish.`yo`: Yoruba.`yua`: Yucatec Maya.`yue`: Cantonese.`zh`: Chinese (Simplified).`zh-TW`: Chinese (Traditional).`zu`: Zulu.**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
          * @type {string || null}
          */
         this.TranslateDstLanguage = null;
@@ -39043,6 +38914,12 @@ This field is valid when the value of TranslateSwitch is ON. List of translation
          * @type {number || null}
          */
         this.ProcessType = null;
+
+        /**
+         * Area configurations for the subtitle OCR extraction box.
+         * @type {SelectingSubtitleAreasConfig || null}
+         */
+        this.SelectingSubtitleAreasConfig = null;
 
     }
 
@@ -39068,6 +38945,12 @@ This field is valid when the value of TranslateSwitch is ON. List of translation
         }
         this.TranslateDstLanguage = 'TranslateDstLanguage' in params ? params.TranslateDstLanguage : null;
         this.ProcessType = 'ProcessType' in params ? params.ProcessType : null;
+
+        if (params.SelectingSubtitleAreasConfig) {
+            let obj = new SelectingSubtitleAreasConfig();
+            obj.deserialize(params.SelectingSubtitleAreasConfig)
+            this.SelectingSubtitleAreasConfig = obj;
+        }
 
     }
 }
@@ -40217,7 +40100,7 @@ Note: This field may return null, indicating that no valid value can be obtained
 
         /**
          * Output path of the generated subtitle file, which can be a relative or absolute path.
-To define the output path, end the path with .{format}. For variable names, see the description of file name variables at https://www.tencentcloud.com/document/product/862/37039.?from_cn_redirect=1
+To define the output path, end the path with .{format}. For variable names, see the description of file name variables at https://www.tencentcloud.comom/document/product/862/37039.?from_cn_redirect=1
 
 Relative path example:
  - File name_{variable name}.{format}.
@@ -41219,6 +41102,93 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Data structure of the video matting result.
+ * @class
+ */
+class AiAnalysisTaskCutoutResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status. Valid values are `PROCESSING`, `SUCCESS`, and `FAIL`.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input of the video matting task.
+         * @type {AiAnalysisTaskCutoutInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of the video matting task.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AiAnalysisTaskCutoutOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * Task progress.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Task start time, in ISO date and time format.
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * Task completion time, in ISO date and time format.
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiAnalysisTaskCutoutInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiAnalysisTaskCutoutOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+
+    }
+}
+
+/**
  * Smart erasing template details.
  * @class
  */
@@ -41283,13 +41253,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ErasePrivacyConfig = null;
 
         /**
-         * Template creation time in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Template creation time in [ISO datetime format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modification time of the template in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Last modification time of the template in [ISO datetime format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -41557,7 +41527,7 @@ class DescribeMediaMetaDataRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Reference image information for AIGC video generation.
  * @class
  */
 class AigcVideoReferenceImageInfo extends  AbstractModel {
@@ -41565,13 +41535,14 @@ class AigcVideoReferenceImageInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Image URL for video generation. The URL must be accessible from the public network and must be accessible to crawlers.
          * @type {string || null}
          */
         this.ImageUrl = null;
 
         /**
-         * 
+         * Reference type.
+Note:1. If the GV model is used, this serves as the reference method. Valid values are asset and style.
          * @type {string || null}
          */
         this.ReferenceType = null;
@@ -41977,6 +41948,7 @@ module.exports = {
     ExtractBlindWatermarkTask: ExtractBlindWatermarkTask,
     AiReviewTaskProhibitedAsrResult: AiReviewTaskProhibitedAsrResult,
     AdaptiveDynamicStreamingTemplate: AdaptiveDynamicStreamingTemplate,
+    AiAnalysisTaskReelOutput: AiAnalysisTaskReelOutput,
     MediaAiAnalysisDescriptionItem: MediaAiAnalysisDescriptionItem,
     DeleteAnimatedGraphicsTemplateResponse: DeleteAnimatedGraphicsTemplateResponse,
     AiReviewTaskProhibitedOcrResult: AiReviewTaskProhibitedOcrResult,
@@ -42001,6 +41973,7 @@ module.exports = {
     OcrWordsConfigureInfo: OcrWordsConfigureInfo,
     DescribeAsrHotwordsRequest: DescribeAsrHotwordsRequest,
     AudioTrackChannelInfo: AudioTrackChannelInfo,
+    AiAnalysisTaskCutoutOutput: AiAnalysisTaskCutoutOutput,
     DiagnoseResult: DiagnoseResult,
     SmartEraseTaskInput: SmartEraseTaskInput,
     RawWatermarkParameter: RawWatermarkParameter,
@@ -42037,6 +42010,7 @@ module.exports = {
     AudioTemplateInfo: AudioTemplateInfo,
     DescribeBatchTaskDetailResponse: DescribeBatchTaskDetailResponse,
     CoverConfigureInfo: CoverConfigureInfo,
+    RecognizeAudioResponse: RecognizeAudioResponse,
     AIRecognitionTemplateItem: AIRecognitionTemplateItem,
     AiReviewPornAsrTaskInput: AiReviewPornAsrTaskInput,
     AiRecognitionTaskFaceResult: AiRecognitionTaskFaceResult,
@@ -42052,12 +42026,14 @@ module.exports = {
     AiReviewTerrorismOcrTaskInput: AiReviewTerrorismOcrTaskInput,
     AiRecognitionTaskOcrWordsResultInput: AiRecognitionTaskOcrWordsResultInput,
     CreateQualityControlTemplateResponse: CreateQualityControlTemplateResponse,
+    AiAnalysisTaskReelInput: AiAnalysisTaskReelInput,
     QualityControlResult: QualityControlResult,
     AiReviewPornTaskInput: AiReviewPornTaskInput,
     HdrConfig: HdrConfig,
     ScheduleTask: ScheduleTask,
     CreatePersonSampleRequest: CreatePersonSampleRequest,
     ImageTaskInput: ImageTaskInput,
+    RecognizeAudioRequest: RecognizeAudioRequest,
     MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
     CosInputInfo: CosInputInfo,
     DescribeBlindWatermarkTemplatesRequest: DescribeBlindWatermarkTemplatesRequest,
@@ -42128,7 +42104,7 @@ module.exports = {
     CreateAigcImageTaskResponse: CreateAigcImageTaskResponse,
     ComposeVideoStream: ComposeVideoStream,
     ProhibitedAsrReviewTemplateInfoForUpdate: ProhibitedAsrReviewTemplateInfoForUpdate,
-    DisableScheduleResponse: DisableScheduleResponse,
+    AiAnalysisTaskCutoutInput: AiAnalysisTaskCutoutInput,
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
     DeleteSmartSubtitleTemplateRequest: DeleteSmartSubtitleTemplateRequest,
     DeleteAdaptiveDynamicStreamingTemplateRequest: DeleteAdaptiveDynamicStreamingTemplateRequest,
@@ -42305,6 +42281,7 @@ module.exports = {
     DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
     AigcStoreCosParam: AigcStoreCosParam,
     AiRecognitionTaskOcrWordsResultItem: AiRecognitionTaskOcrWordsResultItem,
+    AiAnalysisTaskReelResult: AiAnalysisTaskReelResult,
     ProcessImageRequest: ProcessImageRequest,
     DeleteSampleSnapshotTemplateResponse: DeleteSampleSnapshotTemplateResponse,
     AiAnalysisTaskTagInput: AiAnalysisTaskTagInput,
@@ -42358,6 +42335,7 @@ module.exports = {
     SmartSubtitleTaskAsrFullTextResultOutput: SmartSubtitleTaskAsrFullTextResultOutput,
     TerrorismOcrReviewTemplateInfo: TerrorismOcrReviewTemplateInfo,
     ExtractBlindWatermarkTaskConfig: ExtractBlindWatermarkTaskConfig,
+    RecognizeAudioSentence: RecognizeAudioSentence,
     SharpEnhanceConfig: SharpEnhanceConfig,
     ImageEncodeConfig: ImageEncodeConfig,
     AiReviewTaskPornResult: AiReviewTaskPornResult,
@@ -42380,6 +42358,7 @@ module.exports = {
     SmartSubtitleTaskFullTextResult: SmartSubtitleTaskFullTextResult,
     TranscodeTaskInput: TranscodeTaskInput,
     SmartSubtitleTemplateItem: SmartSubtitleTemplateItem,
+    DisableScheduleResponse: DisableScheduleResponse,
     ModifyAIRecognitionTemplateRequest: ModifyAIRecognitionTemplateRequest,
     ParseNotificationResponse: ParseNotificationResponse,
     ComposeImageOperation: ComposeImageOperation,
@@ -42598,6 +42577,7 @@ module.exports = {
     EditMediaTaskOutput: EditMediaTaskOutput,
     ProcessImageTemplate: ProcessImageTemplate,
     HighlightSegmentItem: HighlightSegmentItem,
+    AiAnalysisTaskCutoutResult: AiAnalysisTaskCutoutResult,
     SmartEraseTemplateItem: SmartEraseTemplateItem,
     DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,
     ModifyImageSpriteTemplateRequest: ModifyImageSpriteTemplateRequest,

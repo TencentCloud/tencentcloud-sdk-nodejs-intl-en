@@ -1523,7 +1523,7 @@ class DeleteStreamPackageSourceRequest extends  AbstractModel {
         super();
 
         /**
-         * SourceLocation Id.
+         * Source Id.
          * @type {string || null}
          */
         this.Id = null;

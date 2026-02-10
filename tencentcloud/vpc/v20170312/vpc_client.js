@@ -49,7 +49,6 @@ const ResetAttachCcnInstancesResponse = models.ResetAttachCcnInstancesResponse;
 const CreateSnapshotPoliciesResponse = models.CreateSnapshotPoliciesResponse;
 const DescribeServiceTemplateGroupsResponse = models.DescribeServiceTemplateGroupsResponse;
 const DescribeVpcEndPointRequest = models.DescribeVpcEndPointRequest;
-const AssignPrivateIpAddressesRequest = models.AssignPrivateIpAddressesRequest;
 const ResourceStatisticsItem = models.ResourceStatisticsItem;
 const DeleteRoutePolicyEntriesRequest = models.DeleteRoutePolicyEntriesRequest;
 const DetachClassicLinkVpcRequest = models.DetachClassicLinkVpcRequest;
@@ -59,6 +58,7 @@ const ModifyNatGatewayAttributeRequest = models.ModifyNatGatewayAttributeRequest
 const DescribeLocalGatewayRequest = models.DescribeLocalGatewayRequest;
 const FlowLog = models.FlowLog;
 const ModifyDirectConnectGatewayAttributeRequest = models.ModifyDirectConnectGatewayAttributeRequest;
+const NatDirectConnectGatewayRoute = models.NatDirectConnectGatewayRoute;
 const IpField = models.IpField;
 const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
 const AddBandwidthPackageResourcesRequest = models.AddBandwidthPackageResourcesRequest;
@@ -71,6 +71,7 @@ const ModifyNetworkAclEntriesRequest = models.ModifyNetworkAclEntriesRequest;
 const ReplaceRoutePolicyAssociationsResponse = models.ReplaceRoutePolicyAssociationsResponse;
 const DescribeVpcPrivateIpAddressesRequest = models.DescribeVpcPrivateIpAddressesRequest;
 const AddressTemplate = models.AddressTemplate;
+const StopTrafficMirrorResponse = models.StopTrafficMirrorResponse;
 const ModifyTemplateMemberResponse = models.ModifyTemplateMemberResponse;
 const VpnGatewayQuota = models.VpnGatewayQuota;
 const DescribeBandwidthPackageBillUsageRequest = models.DescribeBandwidthPackageBillUsageRequest;
@@ -99,6 +100,7 @@ const RouteTableAssociation = models.RouteTableAssociation;
 const ModifyCustomerGatewayAttributeRequest = models.ModifyCustomerGatewayAttributeRequest;
 const DescribeRouteTablesResponse = models.DescribeRouteTablesResponse;
 const DeleteVpcEndPointServiceWhiteListRequest = models.DeleteVpcEndPointServiceWhiteListRequest;
+const DescribeTrafficMirrorsRequest = models.DescribeTrafficMirrorsRequest;
 const DetachSnapshotInstancesResponse = models.DetachSnapshotInstancesResponse;
 const ReplaceSecurityGroupPoliciesRequest = models.ReplaceSecurityGroupPoliciesRequest;
 const DeleteVpcEndPointServiceRequest = models.DeleteVpcEndPointServiceRequest;
@@ -126,6 +128,8 @@ const AcceptAttachCcnInstancesRequest = models.AcceptAttachCcnInstancesRequest;
 const CreateNetworkAclQuintupleEntriesResponse = models.CreateNetworkAclQuintupleEntriesResponse;
 const DescribeGatewayFlowMonitorDetailResponse = models.DescribeGatewayFlowMonitorDetailResponse;
 const IpGeolocationInfo = models.IpGeolocationInfo;
+const ResetTrafficMirrorTargetResponse = models.ResetTrafficMirrorTargetResponse;
+const RemoveBandwidthPackageResourcesResponse = models.RemoveBandwidthPackageResourcesResponse;
 const DeleteFlowLogRequest = models.DeleteFlowLogRequest;
 const NetDetectState = models.NetDetectState;
 const DescribeSnapshotFilesRequest = models.DescribeSnapshotFilesRequest;
@@ -202,11 +206,13 @@ const DescribeBandwidthPackagesRequest = models.DescribeBandwidthPackagesRequest
 const DeleteDirectConnectGatewayCcnRoutesResponse = models.DeleteDirectConnectGatewayCcnRoutesResponse;
 const DescribeAssistantCidrResponse = models.DescribeAssistantCidrResponse;
 const BackupPolicy = models.BackupPolicy;
+const UpdateTrafficMirrorDirectionResponse = models.UpdateTrafficMirrorDirectionResponse;
 const IpAddressStates = models.IpAddressStates;
 const InstanceStatistic = models.InstanceStatistic;
 const InternetPriceDetail = models.InternetPriceDetail;
 const CreateVpnConnectionRequest = models.CreateVpnConnectionRequest;
 const CcnRoute = models.CcnRoute;
+const ResetTrafficMirrorFilterResponse = models.ResetTrafficMirrorFilterResponse;
 const ModifyIpv6AddressesAttributeResponse = models.ModifyIpv6AddressesAttributeResponse;
 const DescribeTrafficPackagesRequest = models.DescribeTrafficPackagesRequest;
 const DeleteSecurityGroupPoliciesRequest = models.DeleteSecurityGroupPoliciesRequest;
@@ -252,6 +258,7 @@ const NatGateway = models.NatGateway;
 const ReplaceRoutesRequest = models.ReplaceRoutesRequest;
 const CreateCustomerGatewayResponse = models.CreateCustomerGatewayResponse;
 const TrafficPackage = models.TrafficPackage;
+const CreateTrafficMirrorResponse = models.CreateTrafficMirrorResponse;
 const WithdrawNotifyRoutesRequest = models.WithdrawNotifyRoutesRequest;
 const ResourceDashboard = models.ResourceDashboard;
 const DescribeSubnetResourceDashboardRequest = models.DescribeSubnetResourceDashboardRequest;
@@ -259,6 +266,7 @@ const CreateRoutePolicyEntriesRequest = models.CreateRoutePolicyEntriesRequest;
 const DeleteServiceTemplateGroupResponse = models.DeleteServiceTemplateGroupResponse;
 const DisassociateAddressRequest = models.DisassociateAddressRequest;
 const NetworkAclEntrySet = models.NetworkAclEntrySet;
+const StartTrafficMirrorResponse = models.StartTrafficMirrorResponse;
 const DeleteVpnConnectionResponse = models.DeleteVpnConnectionResponse;
 const ReleaseIPv6AddressesResponse = models.ReleaseIPv6AddressesResponse;
 const DescribeBandwidthPackageResourcesRequest = models.DescribeBandwidthPackageResourcesRequest;
@@ -311,13 +319,14 @@ const ModifyIp6AddressesBandwidthResponse = models.ModifyIp6AddressesBandwidthRe
 const CreateSubnetsRequest = models.CreateSubnetsRequest;
 const DescribeVpcEndPointServiceRequest = models.DescribeVpcEndPointServiceRequest;
 const DisableSnapshotPoliciesResponse = models.DisableSnapshotPoliciesResponse;
+const ResetTrafficMirrorSrcsResponse = models.ResetTrafficMirrorSrcsResponse;
 const AssociateAddressResponse = models.AssociateAddressResponse;
 const ModifyCcnAttachedInstancesAttributeResponse = models.ModifyCcnAttachedInstancesAttributeResponse;
 const UnassignIpv6SubnetCidrBlockRequest = models.UnassignIpv6SubnetCidrBlockRequest;
 const CreateNetworkAclRequest = models.CreateNetworkAclRequest;
 const DescribeAddressesRequest = models.DescribeAddressesRequest;
 const DescribeSecurityGroupPoliciesRequest = models.DescribeSecurityGroupPoliciesRequest;
-const ModifyNetworkInterfaceAttributeResponse = models.ModifyNetworkInterfaceAttributeResponse;
+const ModifyIPv6AddressesAttributesResponse = models.ModifyIPv6AddressesAttributesResponse;
 const InquiryPriceRenewAddressesRequest = models.InquiryPriceRenewAddressesRequest;
 const CreateSecurityGroupResponse = models.CreateSecurityGroupResponse;
 const DisassociateNetworkInterfaceSecurityGroupsResponse = models.DisassociateNetworkInterfaceSecurityGroupsResponse;
@@ -363,15 +372,17 @@ const DescribeVpnGatewayCcnRoutesResponse = models.DescribeVpnGatewayCcnRoutesRe
 const DetachCcnInstancesRequest = models.DetachCcnInstancesRequest;
 const ModifyVpcEndPointServiceWhiteListRequest = models.ModifyVpcEndPointServiceWhiteListRequest;
 const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
-const DescribeSnapshotAttachedInstancesRequest = models.DescribeSnapshotAttachedInstancesRequest;
+const DeleteDirectConnectGatewayRequest = models.DeleteDirectConnectGatewayRequest;
 const CreateNatGatewaySourceIpTranslationNatRuleResponse = models.CreateNatGatewaySourceIpTranslationNatRuleResponse;
 const DeleteNatGatewaySourceIpTranslationNatRuleResponse = models.DeleteNatGatewaySourceIpTranslationNatRuleResponse;
 const CcnAttachedInstance = models.CcnAttachedInstance;
 const SecurityPolicyDatabase = models.SecurityPolicyDatabase;
 const InquiryPriceModifyAddressesBandwidthRequest = models.InquiryPriceModifyAddressesBandwidthRequest;
 const CreateVpcEndPointServiceRequest = models.CreateVpcEndPointServiceRequest;
+const ResetTrafficMirrorFilterRequest = models.ResetTrafficMirrorFilterRequest;
 const Ipv6Address = models.Ipv6Address;
 const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
+const DeleteTrafficMirrorResponse = models.DeleteTrafficMirrorResponse;
 const BandwidthPackageBillBandwidth = models.BandwidthPackageBillBandwidth;
 const DeleteHaVipResponse = models.DeleteHaVipResponse;
 const DescribeFlowLogsResponse = models.DescribeFlowLogsResponse;
@@ -397,6 +408,7 @@ const CreateRoutePolicyAssociationsRequest = models.CreateRoutePolicyAssociation
 const RoutePolicy = models.RoutePolicy;
 const DescribeCcnRoutesRequest = models.DescribeCcnRoutesRequest;
 const GenerateVpnConnectionDefaultHealthCheckIpResponse = models.GenerateVpnConnectionDefaultHealthCheckIpResponse;
+const CheckTrafficMirrorResponse = models.CheckTrafficMirrorResponse;
 const CreateAndAttachNetworkInterfaceRequest = models.CreateAndAttachNetworkInterfaceRequest;
 const DeleteVpcEndPointResponse = models.DeleteVpcEndPointResponse;
 const DeleteNetDetectResponse = models.DeleteNetDetectResponse;
@@ -406,6 +418,9 @@ const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeR
 const UnassignIpv6CidrBlockRequest = models.UnassignIpv6CidrBlockRequest;
 const ModifyAssistantCidrRequest = models.ModifyAssistantCidrRequest;
 const CreateReserveIpAddressesResponse = models.CreateReserveIpAddressesResponse;
+const CheckTrafficMirrorRequest = models.CheckTrafficMirrorRequest;
+const ResetTrafficMirrorSrcsRequest = models.ResetTrafficMirrorSrcsRequest;
+const ModifyTrafficMirrorAttributeResponse = models.ModifyTrafficMirrorAttributeResponse;
 const ModifyGatewayFlowQosResponse = models.ModifyGatewayFlowQosResponse;
 const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttributeResponse;
 const AssociateDirectConnectGatewayNatGatewayRequest = models.AssociateDirectConnectGatewayNatGatewayRequest;
@@ -414,6 +429,7 @@ const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
 const AttachClassicLinkVpcRequest = models.AttachClassicLinkVpcRequest;
 const GatewayFlowMonitorDetail = models.GatewayFlowMonitorDetail;
 const ResetVpnConnectionResponse = models.ResetVpnConnectionResponse;
+const TrafficMirror = models.TrafficMirror;
 const ModifyAddressesRenewFlagResponse = models.ModifyAddressesRenewFlagResponse;
 const Subnet = models.Subnet;
 const DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse = models.DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse;
@@ -469,7 +485,7 @@ const InquirePriceCreateDirectConnectGatewayRequest = models.InquirePriceCreateD
 const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
 const DisassociateNatGatewayAddressRequest = models.DisassociateNatGatewayAddressRequest;
 const DescribeTrafficPackagesResponse = models.DescribeTrafficPackagesResponse;
-const DescribeServiceTemplatesResponse = models.DescribeServiceTemplatesResponse;
+const CreateSnapshotPoliciesRequest = models.CreateSnapshotPoliciesRequest;
 const DescribeRouteTablesRequest = models.DescribeRouteTablesRequest;
 const ResetAttachCcnInstancesRequest = models.ResetAttachCcnInstancesRequest;
 const CreateHaVipResponse = models.CreateHaVipResponse;
@@ -484,8 +500,10 @@ const DisassociateIPv6AddressResponse = models.DisassociateIPv6AddressResponse;
 const DescribeAddressTemplateGroupsResponse = models.DescribeAddressTemplateGroupsResponse;
 const ReleaseAddressesRequest = models.ReleaseAddressesRequest;
 const CreateDirectConnectGatewayCcnRoutesRequest = models.CreateDirectConnectGatewayCcnRoutesRequest;
+const StopTrafficMirrorRequest = models.StopTrafficMirrorRequest;
 const CreateDirectConnectGatewayCcnRoutesResponse = models.CreateDirectConnectGatewayCcnRoutesResponse;
 const CreateRouteTableRequest = models.CreateRouteTableRequest;
+const StartTrafficMirrorRequest = models.StartTrafficMirrorRequest;
 const MigrateNetworkInterfaceRequest = models.MigrateNetworkInterfaceRequest;
 const DescribeCustomerGatewaysRequest = models.DescribeCustomerGatewaysRequest;
 const DisableRoutesResponse = models.DisableRoutesResponse;
@@ -499,6 +517,7 @@ const EnableVpcEndPointConnectResponse = models.EnableVpcEndPointConnectResponse
 const CreateNetDetectResponse = models.CreateNetDetectResponse;
 const InquiryPriceAllocateAddressesResponse = models.InquiryPriceAllocateAddressesResponse;
 const DeleteCcnRequest = models.DeleteCcnRequest;
+const TrafficMirrorTargetResourceInfo = models.TrafficMirrorTargetResourceInfo;
 const ModifyLocalGatewayResponse = models.ModifyLocalGatewayResponse;
 const AssociateNetworkInterfaceSecurityGroupsResponse = models.AssociateNetworkInterfaceSecurityGroupsResponse;
 const EnableFlowLogsRequest = models.EnableFlowLogsRequest;
@@ -506,7 +525,6 @@ const ModifyVpnGatewayAttributeRequest = models.ModifyVpnGatewayAttributeRequest
 const CreateNatGatewayRequest = models.CreateNatGatewayRequest;
 const DeleteNetDetectRequest = models.DeleteNetDetectRequest;
 const IPSECOptionsSpecification = models.IPSECOptionsSpecification;
-const CreateSnapshotPoliciesRequest = models.CreateSnapshotPoliciesRequest;
 const UnassignIpv6AddressesRequest = models.UnassignIpv6AddressesRequest;
 const CreateAndAttachNetworkInterfaceResponse = models.CreateAndAttachNetworkInterfaceResponse;
 const ModifyCcnAttributeRequest = models.ModifyCcnAttributeRequest;
@@ -556,7 +574,8 @@ const CCN = models.CCN;
 const NetworkAclQuintupleEntry = models.NetworkAclQuintupleEntry;
 const InquirePriceCreateDirectConnectGatewayResponse = models.InquirePriceCreateDirectConnectGatewayResponse;
 const AdjustPublicAddressResponse = models.AdjustPublicAddressResponse;
-const RemoveBandwidthPackageResourcesResponse = models.RemoveBandwidthPackageResourcesResponse;
+const UpdateTrafficMirrorAllFilterRequest = models.UpdateTrafficMirrorAllFilterRequest;
+const DescribeTrafficMirrorsResponse = models.DescribeTrafficMirrorsResponse;
 const DestinationIpPortTranslationNatRule = models.DestinationIpPortTranslationNatRule;
 const CheckNetDetectStateResponse = models.CheckNetDetectStateResponse;
 const CreateDefaultVpcRequest = models.CreateDefaultVpcRequest;
@@ -564,6 +583,7 @@ const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
 const DescribeCustomerGatewaysResponse = models.DescribeCustomerGatewaysResponse;
 const CheckAssistantCidrResponse = models.CheckAssistantCidrResponse;
 const DescribeVpcTaskResultResponse = models.DescribeVpcTaskResultResponse;
+const TrafficMirrorFilter = models.TrafficMirrorFilter;
 const InquiryPriceRenewVpnGatewayRequest = models.InquiryPriceRenewVpnGatewayRequest;
 const EnableCcnRoutesResponse = models.EnableCcnRoutesResponse;
 const ModifyVpnGatewayCcnRoutesResponse = models.ModifyVpnGatewayCcnRoutesResponse;
@@ -590,7 +610,7 @@ const DeleteHaVipRequest = models.DeleteHaVipRequest;
 const CreateLocalGatewayResponse = models.CreateLocalGatewayResponse;
 const ServicesInfo = models.ServicesInfo;
 const MigratePrivateIpAddressRequest = models.MigratePrivateIpAddressRequest;
-const DescribeServiceTemplatesRequest = models.DescribeServiceTemplatesRequest;
+const AssignPrivateIpAddressesRequest = models.AssignPrivateIpAddressesRequest;
 const DescribeSnapshotAttachedInstancesResponse = models.DescribeSnapshotAttachedInstancesResponse;
 const RefreshDirectConnectGatewayRouteToNatGatewayResponse = models.RefreshDirectConnectGatewayRouteToNatGatewayResponse;
 const DeleteReserveIpAddressesResponse = models.DeleteReserveIpAddressesResponse;
@@ -599,6 +619,7 @@ const SnapshotInstance = models.SnapshotInstance;
 const CreateVpnGatewayRequest = models.CreateVpnGatewayRequest;
 const DescribeVpcInstancesRequest = models.DescribeVpcInstancesRequest;
 const DeleteVpcEndPointServiceWhiteListResponse = models.DeleteVpcEndPointServiceWhiteListResponse;
+const DescribeServiceTemplatesResponse = models.DescribeServiceTemplatesResponse;
 const DescribeSgSnapshotFileContentRequest = models.DescribeSgSnapshotFileContentRequest;
 const CreateBandwidthPackageResponse = models.CreateBandwidthPackageResponse;
 const ReplaceRoutesWithRoutePolicyRequest = models.ReplaceRoutesWithRoutePolicyRequest;
@@ -613,6 +634,7 @@ const ModifyPrivateIpAddressesAttributeResponse = models.ModifyPrivateIpAddresse
 const ModifyHaVipAttributeResponse = models.ModifyHaVipAttributeResponse;
 const CcnBandwidthInfo = models.CcnBandwidthInfo;
 const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
+const UpdateTrafficMirrorDirectionRequest = models.UpdateTrafficMirrorDirectionRequest;
 const DescribeReserveIpAddressesRequest = models.DescribeReserveIpAddressesRequest;
 const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
 const BatchModifySnapshotPolicy = models.BatchModifySnapshotPolicy;
@@ -626,14 +648,16 @@ const DescribeGatewayFlowQosRequest = models.DescribeGatewayFlowQosRequest;
 const ReplaceDirectConnectGatewayCcnRoutesResponse = models.ReplaceDirectConnectGatewayCcnRoutesResponse;
 const DownloadCustomerGatewayConfigurationResponse = models.DownloadCustomerGatewayConfigurationResponse;
 const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
+const DescribeServiceTemplatesRequest = models.DescribeServiceTemplatesRequest;
 const ServiceTemplateSpecification = models.ServiceTemplateSpecification;
+const ResetTrafficMirrorTargetRequest = models.ResetTrafficMirrorTargetRequest;
 const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
 const ModifyIPv6AddressesAttributesRequest = models.ModifyIPv6AddressesAttributesRequest;
 const ReserveIpAddressInfo = models.ReserveIpAddressInfo;
 const AttachClassicLinkVpcResponse = models.AttachClassicLinkVpcResponse;
 const CreateAddressTemplateRequest = models.CreateAddressTemplateRequest;
 const DescribeNatGatewaysResponse = models.DescribeNatGatewaysResponse;
-const NatDirectConnectGatewayRoute = models.NatDirectConnectGatewayRoute;
+const ModifyTrafficMirrorAttributeRequest = models.ModifyTrafficMirrorAttributeRequest;
 const NetworkAclQuintupleEntries = models.NetworkAclQuintupleEntries;
 const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
 const DescribeCcnRoutesResponse = models.DescribeCcnRoutesResponse;
@@ -664,16 +688,19 @@ const ModifyNetDetectResponse = models.ModifyNetDetectResponse;
 const CreateHaVipRequest = models.CreateHaVipRequest;
 const Ipv6SubnetCidrBlock = models.Ipv6SubnetCidrBlock;
 const EnableFlowLogsResponse = models.EnableFlowLogsResponse;
+const TrafficMirrorTarget = models.TrafficMirrorTarget;
 const DescribeAddressQuotaResponse = models.DescribeAddressQuotaResponse;
 const CreateCustomerGatewayRequest = models.CreateCustomerGatewayRequest;
 const DeleteSecurityGroupRequest = models.DeleteSecurityGroupRequest;
 const CrossBorderCompliance = models.CrossBorderCompliance;
+const CreateTrafficMirrorRequest = models.CreateTrafficMirrorRequest;
 const CreateRouteTableResponse = models.CreateRouteTableResponse;
 const CreateRoutePolicyEntriesResponse = models.CreateRoutePolicyEntriesResponse;
-const DeleteDirectConnectGatewayRequest = models.DeleteDirectConnectGatewayRequest;
+const DescribeSnapshotAttachedInstancesRequest = models.DescribeSnapshotAttachedInstancesRequest;
 const DescribeDirectConnectGatewayCcnRoutesResponse = models.DescribeDirectConnectGatewayCcnRoutesResponse;
 const ModifyPrivateIpAddressesAttributeRequest = models.ModifyPrivateIpAddressesAttributeRequest;
 const ResetNatGatewayConnectionResponse = models.ResetNatGatewayConnectionResponse;
+const UpdateTrafficMirrorAllFilterResponse = models.UpdateTrafficMirrorAllFilterResponse;
 const AssociateNetworkInterfaceSecurityGroupsRequest = models.AssociateNetworkInterfaceSecurityGroupsRequest;
 const DeleteVpnGatewayRoutesResponse = models.DeleteVpnGatewayRoutesResponse;
 const CreateSecurityGroupRequest = models.CreateSecurityGroupRequest;
@@ -696,7 +723,7 @@ const DeleteCustomerGatewayRequest = models.DeleteCustomerGatewayRequest;
 const DescribeAddressTemplatesResponse = models.DescribeAddressTemplatesResponse;
 const Quota = models.Quota;
 const WithdrawNotifyRoutesResponse = models.WithdrawNotifyRoutesResponse;
-const ModifyIPv6AddressesAttributesResponse = models.ModifyIPv6AddressesAttributesResponse;
+const DeleteTrafficMirrorRequest = models.DeleteTrafficMirrorRequest;
 const DescribeNetworkInterfacesResponse = models.DescribeNetworkInterfacesResponse;
 const DeleteNetworkAclResponse = models.DeleteNetworkAclResponse;
 const DeleteNetworkAclQuintupleEntriesResponse = models.DeleteNetworkAclQuintupleEntriesResponse;
@@ -714,6 +741,7 @@ const DeleteVpcResponse = models.DeleteVpcResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const CreateRoutePolicyAssociationsResponse = models.CreateRoutePolicyAssociationsResponse;
 const AddTemplateMemberRequest = models.AddTemplateMemberRequest;
+const ModifyNetworkInterfaceAttributeResponse = models.ModifyNetworkInterfaceAttributeResponse;
 const DescribeVpcEndPointServiceWhiteListResponse = models.DescribeVpcEndPointServiceWhiteListResponse;
 const AcceptAttachCcnInstancesResponse = models.AcceptAttachCcnInstancesResponse;
 const DescribeUsedIpAddressResponse = models.DescribeUsedIpAddressResponse;
@@ -852,6 +880,17 @@ class VpcClient extends AbstractClient {
     DescribeServiceTemplateGroups(req, cb) {
         let resp = new DescribeServiceTemplateGroupsResponse();
         this.request("DescribeServiceTemplateGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the filter rule or collection object of a traffic mirroring instance.
+     * @param {UpdateTrafficMirrorAllFilterRequest} req
+     * @param {function(string, UpdateTrafficMirrorAllFilterResponse):void} cb
+     * @public
+     */
+    UpdateTrafficMirrorAllFilter(req, cb) {
+        let resp = new UpdateTrafficMirrorAllFilterResponse();
+        this.request("UpdateTrafficMirrorAllFilter", req, resp, cb);
     }
 
     /**
@@ -1395,6 +1434,17 @@ Policies to modify must be in the same direction. `PolicyIndex` must be specifie
     }
 
     /**
+     * This API is used to check the collector and receiver for traffic mirroring (public IP address type).
+     * @param {CheckTrafficMirrorRequest} req
+     * @param {function(string, CheckTrafficMirrorResponse):void} cb
+     * @public
+     */
+    CheckTrafficMirror(req, cb) {
+        let resp = new CheckTrafficMirrorResponse();
+        this.request("CheckTrafficMirror", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a route table.
      * @param {DeleteRouteTableRequest} req
      * @param {function(string, DeleteRouteTableResponse):void} cb
@@ -1687,6 +1737,17 @@ This API is used to check the jumbo frame status before and after instance migra
     AllocateIp6AddressesBandwidth(req, cb) {
         let resp = new AllocateIp6AddressesBandwidthResponse();
         this.request("AllocateIp6AddressesBandwidth", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop a traffic mirroring instance.
+     * @param {StopTrafficMirrorRequest} req
+     * @param {function(string, StopTrafficMirrorResponse):void} cb
+     * @public
+     */
+    StopTrafficMirror(req, cb) {
+        let resp = new StopTrafficMirrorResponse();
+        this.request("StopTrafficMirror", req, resp, cb);
     }
 
     /**
@@ -2347,6 +2408,17 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
+     * This API is used to update the receiving destination information of a traffic mirroring instance.
+     * @param {ResetTrafficMirrorTargetRequest} req
+     * @param {function(string, ResetTrafficMirrorTargetResponse):void} cb
+     * @public
+     */
+    ResetTrafficMirrorTarget(req, cb) {
+        let resp = new ResetTrafficMirrorTargetResponse();
+        this.request("ResetTrafficMirrorTarget", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyServiceTemplateGroupAttribute) is used to modify a protocol port template group.
      * @param {ModifyServiceTemplateGroupAttributeRequest} req
      * @param {function(string, ModifyServiceTemplateGroupAttributeResponse):void} cb
@@ -2676,6 +2748,17 @@ If the IP is occupied, the resource type and ID associated with the are is retur
     }
 
     /**
+     * This API is used to adjust concurrent connection cap for the NAT gateway.
+     * @param {ResetNatGatewayConnectionRequest} req
+     * @param {function(string, ResetNatGatewayConnectionResponse):void} cb
+     * @public
+     */
+    ResetNatGatewayConnection(req, cb) {
+        let resp = new ResetNatGatewayConnectionResponse();
+        this.request("ResetNatGatewayConnection", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a VPC with default settings.
 
 To create a VPC with custom settings, such as VPC name, IP range, subnet IP range, and subnet availability zone, use `CreateVpc` instead.
@@ -2972,6 +3055,18 @@ Before taking actions on a NAT gateway, ensure that it has been successfully cre
     }
 
     /**
+     * This API is used to update a traffic mirroring instance filter rule.
+Note: A traffic mirroring instance cannot simultaneously support filtering based on NAT gateway and five tuple rules.
+     * @param {ResetTrafficMirrorFilterRequest} req
+     * @param {function(string, ResetTrafficMirrorFilterResponse):void} cb
+     * @public
+     */
+    ResetTrafficMirrorFilter(req, cb) {
+        let resp = new ResetTrafficMirrorFilterResponse();
+        this.request("ResetTrafficMirrorFilter", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the endpoint service allowlist.
      * @param {DescribeVpcEndPointServiceWhiteListRequest} req
      * @param {function(string, DescribeVpcEndPointServiceWhiteListResponse):void} cb
@@ -3027,6 +3122,17 @@ Before taking actions on a NAT gateway, ensure that it has been successfully cre
     CreateCustomerGateway(req, cb) {
         let resp = new CreateCustomerGatewayResponse();
         this.request("CreateCustomerGateway", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a traffic mirroring instance.
+     * @param {CreateTrafficMirrorRequest} req
+     * @param {function(string, CreateTrafficMirrorResponse):void} cb
+     * @public
+     */
+    CreateTrafficMirror(req, cb) {
+        let resp = new CreateTrafficMirrorResponse();
+        this.request("CreateTrafficMirror", req, resp, cb);
     }
 
     /**
@@ -3342,6 +3448,17 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
+     * This API is used to delete a traffic mirroring instance.
+     * @param {DeleteTrafficMirrorRequest} req
+     * @param {function(string, DeleteTrafficMirrorResponse):void} cb
+     * @public
+     */
+    DeleteTrafficMirror(req, cb) {
+        let resp = new DeleteTrafficMirrorResponse();
+        this.request("DeleteTrafficMirror", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeHaVips) is used to query the list of highly available virtual IPs (HAVIP).
      * @param {DescribeHaVipsRequest} req
      * @param {function(string, DescribeHaVipsResponse):void} cb
@@ -3481,6 +3598,17 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
+     * This API is used to update the collection direction of a traffic mirroring instance.
+     * @param {UpdateTrafficMirrorDirectionRequest} req
+     * @param {function(string, UpdateTrafficMirrorDirectionResponse):void} cb
+     * @public
+     */
+    UpdateTrafficMirrorDirection(req, cb) {
+        let resp = new UpdateTrafficMirrorDirectionResponse();
+        this.request("UpdateTrafficMirrorDirection", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeAddressQuota) is used to query the quota information of your [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) (EIP) in the current region. For more information, see [EIP product introduction](https://intl.cloud.tencent.com/document/product/213/5733?from_cn_redirect=1).
      * @param {DescribeAddressQuotaRequest} req
      * @param {function(string, DescribeAddressQuotaResponse):void} cb
@@ -3489,6 +3617,17 @@ This API is completed asynchronously. If you need to query the execution result 
     DescribeAddressQuota(req, cb) {
         let resp = new DescribeAddressQuotaResponse();
         this.request("DescribeAddressQuota", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start a traffic mirroring instance.
+     * @param {StartTrafficMirrorRequest} req
+     * @param {function(string, StartTrafficMirrorResponse):void} cb
+     * @public
+     */
+    StartTrafficMirror(req, cb) {
+        let resp = new StartTrafficMirrorResponse();
+        this.request("StartTrafficMirror", req, resp, cb);
     }
 
     /**
@@ -3719,6 +3858,17 @@ The API is used to verify whether the enabled route conflicts with existing rout
     DescribeNatGatewaySourceIpTranslationNatRules(req, cb) {
         let resp = new DescribeNatGatewaySourceIpTranslationNatRulesResponse();
         this.request("DescribeNatGatewaySourceIpTranslationNatRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to reset the collection object of a traffic mirroring instance.
+     * @param {ResetTrafficMirrorSrcsRequest} req
+     * @param {function(string, ResetTrafficMirrorSrcsResponse):void} cb
+     * @public
+     */
+    ResetTrafficMirrorSrcs(req, cb) {
+        let resp = new ResetTrafficMirrorSrcsResponse();
+        this.request("ResetTrafficMirrorSrcs", req, resp, cb);
     }
 
     /**
@@ -4115,14 +4265,26 @@ For parameters of `SecurityGroupPolicySet`,
     }
 
     /**
-     * This API is used to adjust concurrent connection cap for the NAT gateway.
-     * @param {ResetNatGatewayConnectionRequest} req
-     * @param {function(string, ResetNatGatewayConnectionResponse):void} cb
+     * This API is used to query the information of a traffic mirroring instance.
+     * @param {DescribeTrafficMirrorsRequest} req
+     * @param {function(string, DescribeTrafficMirrorsResponse):void} cb
      * @public
      */
-    ResetNatGatewayConnection(req, cb) {
-        let resp = new ResetNatGatewayConnectionResponse();
-        this.request("ResetNatGatewayConnection", req, resp, cb);
+    DescribeTrafficMirrors(req, cb) {
+        let resp = new DescribeTrafficMirrorsResponse();
+        this.request("DescribeTrafficMirrors", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the attributes of a traffic mirroring instance.
+Note: Only the name and description can be modified.
+     * @param {ModifyTrafficMirrorAttributeRequest} req
+     * @param {function(string, ModifyTrafficMirrorAttributeResponse):void} cb
+     * @public
+     */
+    ModifyTrafficMirrorAttribute(req, cb) {
+        let resp = new ModifyTrafficMirrorAttributeResponse();
+        this.request("ModifyTrafficMirrorAttribute", req, resp, cb);
     }
 
     /**

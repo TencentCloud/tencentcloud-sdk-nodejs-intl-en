@@ -25,6 +25,7 @@ const ModifyAllocationRuleRequest = models.ModifyAllocationRuleRequest;
 const DeleteAllocationRuleRequest = models.DeleteAllocationRuleRequest;
 const CreateAllocationRuleResponse = models.CreateAllocationRuleResponse;
 const BillTagInfo = models.BillTagInfo;
+const CreateInstanceResponse = models.CreateInstanceResponse;
 const ConditionBusiness = models.ConditionBusiness;
 const AnalyseActionTypeDetail = models.AnalyseActionTypeDetail;
 const DescribeCostExplorerSummaryRequest = models.DescribeCostExplorerSummaryRequest;
@@ -93,16 +94,19 @@ const PayDealsRequest = models.PayDealsRequest;
 const SummaryTotal = models.SummaryTotal;
 const BusinessSummaryTotal = models.BusinessSummaryTotal;
 const CostComponentSet = models.CostComponentSet;
+const RenewInstanceResponse = models.RenewInstanceResponse;
 const AnalyseHeaderDetail = models.AnalyseHeaderDetail;
 const AnalysePayModeDetail = models.AnalysePayModeDetail;
 const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
 const AnalyseOwnerUinDetail = models.AnalyseOwnerUinDetail;
 const Conditions = models.Conditions;
 const AnalyseTimeDetail = models.AnalyseTimeDetail;
+const RefundInstanceRequest = models.RefundInstanceRequest;
 const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
 const ConsumptionProjectSummaryDataItem = models.ConsumptionProjectSummaryDataItem;
 const AnalyseRegionDetail = models.AnalyseRegionDetail;
 const ProductInfo = models.ProductInfo;
+const CreateInstanceRequest = models.CreateInstanceRequest;
 const DescribeAllocationUnitDetailRequest = models.DescribeAllocationUnitDetailRequest;
 const DescribeBillSummaryForOrganizationRequest = models.DescribeBillSummaryForOrganizationRequest;
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
@@ -116,6 +120,7 @@ const ConsumptionResourceSummaryConditionValue = models.ConsumptionResourceSumma
 const DescribeCostSummaryByRegionResponse = models.DescribeCostSummaryByRegionResponse;
 const DescribeCostDetailRequest = models.DescribeCostDetailRequest;
 const GatherRuleSummary = models.GatherRuleSummary;
+const RenewInstanceRequest = models.RenewInstanceRequest;
 const DescribeTagListRequest = models.DescribeTagListRequest;
 const DescribeBillResourceSummaryForOrganizationResponse = models.DescribeBillResourceSummaryForOrganizationResponse;
 const DescribeAllocationTreeRequest = models.DescribeAllocationTreeRequest;
@@ -150,6 +155,7 @@ const DescribeDealsByCondRequest = models.DescribeDealsByCondRequest;
 const CreateAllocationUnitResponse = models.CreateAllocationUnitResponse;
 const DescribeDosageCosDetailByDateResponse = models.DescribeDosageCosDetailByDateResponse;
 const AnalyseHeaderTimeDetail = models.AnalyseHeaderTimeDetail;
+const RefundInstanceResponse = models.RefundInstanceResponse;
 const AllocationRuleExpression = models.AllocationRuleExpression;
 const DescribeBillSummaryForOrganizationResponse = models.DescribeBillSummaryForOrganizationResponse;
 const DeleteAllocationUnitResponse = models.DeleteAllocationUnitResponse;
@@ -239,6 +245,17 @@ class BillingClient extends AbstractClient {
     DeleteAllocationUnit(req, cb) {
         let resp = new DeleteAllocationUnitResponse();
         this.request("DeleteAllocationUnit", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the collection rule details.
+     * @param {DescribeGatherRuleDetailRequest} req
+     * @param {function(string, DescribeGatherRuleDetailResponse):void} cb
+     * @public
+     */
+    DescribeGatherRuleDetail(req, cb) {
+        let resp = new DescribeGatherRuleDetailResponse();
+        this.request("DescribeGatherRuleDetail", req, resp, cb);
     }
 
     /**
@@ -433,14 +450,15 @@ Note: The API request may fail due to network instability or other exceptions. I
     }
 
     /**
-     * This API is used to query the collection rule details.
-     * @param {DescribeGatherRuleDetailRequest} req
-     * @param {function(string, DescribeGatherRuleDetailResponse):void} cb
+     * Creating an instance resource will generate an order for the newly purchased instance resource and automatically complete the payment using the balance of the Tencent Cloud account. The account calling this API must be granted the finace:trade permission; otherwise, the payment will fail.
+Currently, the integrated and supported product for purchase includes: Cloud Firewall.
+     * @param {CreateInstanceRequest} req
+     * @param {function(string, CreateInstanceResponse):void} cb
      * @public
      */
-    DescribeGatherRuleDetail(req, cb) {
-        let resp = new DescribeGatherRuleDetailResponse();
-        this.request("DescribeGatherRuleDetail", req, resp, cb);
+    CreateInstance(req, cb) {
+        let resp = new CreateInstanceResponse();
+        this.request("CreateInstance", req, resp, cb);
     }
 
     /**
@@ -554,6 +572,18 @@ Note: The API request may fail due to network instability or other exceptions. I
     }
 
     /**
+     * Renewing an instance: when calling this API to renew a server, ensure that your Tencent Cloud account has sufficient balance; otherwise, the renewal will fail. The account calling this API must be granted the finace:tradepermission; otherwise, the renewal will fail.
+Currently, the integrated and supported product for renewal includes: Cloud Firewall.
+     * @param {RenewInstanceRequest} req
+     * @param {function(string, RenewInstanceResponse):void} cb
+     * @public
+     */
+    RenewInstance(req, cb) {
+        let resp = new RenewInstanceResponse();
+        this.request("RenewInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify cost allocation unit information.
      * @param {ModifyAllocationUnitRequest} req
      * @param {function(string, ModifyAllocationUnitResponse):void} cb
@@ -606,6 +636,18 @@ Note: The API request may fail due to network instability or other exceptions. I
     DescribeDealsByCond(req, cb) {
         let resp = new DescribeDealsByCondResponse();
         this.request("DescribeDealsByCond", req, resp, cb);
+    }
+
+    /**
+     * To unsubscribe from an unneeded instance, only the actual payment amount will be refunded, any used vouchers will not be returned. The refunded amount will be credited to your Tencent Cloud account balance by default.The account calling this API must be granted the finace:RefundInstance permission; otherwise, the refund process will fail.
+Currently, the integrated and supported product for this operation includes: Cloud Firewall.
+     * @param {RefundInstanceRequest} req
+     * @param {function(string, RefundInstanceResponse):void} cb
+     * @public
+     */
+    RefundInstance(req, cb) {
+        let resp = new RefundInstanceResponse();
+        this.request("RefundInstance", req, resp, cb);
     }
 
     /**

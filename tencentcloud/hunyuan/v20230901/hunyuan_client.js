@@ -16,25 +16,43 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const Describe3DSmartTopologyJobResponse = models.Describe3DSmartTopologyJobResponse;
 const Convert3DFormatRequest = models.Convert3DFormatRequest;
-const ViewImage = models.ViewImage;
-const SubmitHunyuanTo3DRapidJobRequest = models.SubmitHunyuanTo3DRapidJobRequest;
 const Submit3DSmartTopologyJobRequest = models.Submit3DSmartTopologyJobRequest;
+const ViewImage = models.ViewImage;
+const QueryHunyuanTo3DProJobRequest = models.QueryHunyuanTo3DProJobRequest;
+const QueryHunyuan3DPartJobResponse = models.QueryHunyuan3DPartJobResponse;
+const QueryHunyuanTo3DRapidJobResponse = models.QueryHunyuanTo3DRapidJobResponse;
+const TranslationChoice = models.TranslationChoice;
+const ChatTranslationsResponse = models.ChatTranslationsResponse;
+const SubmitHunyuanTo3DTextureEditJobRequest = models.SubmitHunyuanTo3DTextureEditJobRequest;
+const Usage = models.Usage;
+const SubmitHunyuanTo3DRapidJobResponse = models.SubmitHunyuanTo3DRapidJobResponse;
+const ChatTranslationsRequest = models.ChatTranslationsRequest;
+const PromptTokensDetails = models.PromptTokensDetails;
+const SubmitHunyuanTo3DUVJobRequest = models.SubmitHunyuanTo3DUVJobRequest;
 const Submit3DSmartTopologyJobResponse = models.Submit3DSmartTopologyJobResponse;
+const SubmitHunyuanTo3DTextureEditJobResponse = models.SubmitHunyuanTo3DTextureEditJobResponse;
+const File3D = models.File3D;
+const QueryHunyuanTo3DTextureEditJobResponse = models.QueryHunyuanTo3DTextureEditJobResponse;
+const InputFile3D = models.InputFile3D;
+const TranslationDelta = models.TranslationDelta;
+const SubmitHunyuanTo3DRapidJobRequest = models.SubmitHunyuanTo3DRapidJobRequest;
+const SubmitHunyuanTo3DUVJobResponse = models.SubmitHunyuanTo3DUVJobResponse;
 const SubmitHunyuan3DPartJobResponse = models.SubmitHunyuan3DPartJobResponse;
 const SubmitHunyuanTo3DProJobRequest = models.SubmitHunyuanTo3DProJobRequest;
-const QueryHunyuanTo3DProJobRequest = models.QueryHunyuanTo3DProJobRequest;
-const File3D = models.File3D;
-const QueryHunyuanTo3DRapidJobResponse = models.QueryHunyuanTo3DRapidJobResponse;
-const QueryHunyuan3DPartJobResponse = models.QueryHunyuan3DPartJobResponse;
-const SubmitHunyuanTo3DProJobResponse = models.SubmitHunyuanTo3DProJobResponse;
-const QueryHunyuanTo3DProJobResponse = models.QueryHunyuanTo3DProJobResponse;
-const SubmitHunyuan3DPartJobRequest = models.SubmitHunyuan3DPartJobRequest;
+const QueryHunyuanTo3DTextureEditJobRequest = models.QueryHunyuanTo3DTextureEditJobRequest;
 const Convert3DFormatResponse = models.Convert3DFormatResponse;
+const DescribeHunyuanTo3DUVJobRequest = models.DescribeHunyuanTo3DUVJobRequest;
+const SubmitHunyuan3DPartJobRequest = models.SubmitHunyuan3DPartJobRequest;
+const Describe3DSmartTopologyJobResponse = models.Describe3DSmartTopologyJobResponse;
+const DescribeHunyuanTo3DUVJobResponse = models.DescribeHunyuanTo3DUVJobResponse;
+const Reference = models.Reference;
+const ImageInfo = models.ImageInfo;
+const SubmitHunyuanTo3DProJobResponse = models.SubmitHunyuanTo3DProJobResponse;
+const ErrorMsg = models.ErrorMsg;
+const QueryHunyuanTo3DProJobResponse = models.QueryHunyuanTo3DProJobResponse;
 const QueryHunyuan3DPartJobRequest = models.QueryHunyuan3DPartJobRequest;
-const SubmitHunyuanTo3DRapidJobResponse = models.SubmitHunyuanTo3DRapidJobResponse;
-const InputFile3D = models.InputFile3D;
+const TranslationMessage = models.TranslationMessage;
 const QueryHunyuanTo3DRapidJobRequest = models.QueryHunyuanTo3DRapidJobRequest;
 const Describe3DSmartTopologyJobRequest = models.Describe3DSmartTopologyJobRequest;
 
@@ -74,7 +92,7 @@ This API is used to provide 1 concurrent task by default, which means only 1 sub
     }
 
     /**
-     * The SmartTopoly API uses the Polygon 1.5 model. After manually inputting a 3D high-poly model, it can generate a neat 3D model with lower polygon count.
+     * The SmartTopoly API uses the Polygen 1.5 model. After manually inputting a 3D high-poly model, it can generate a neat 3D model with lower polygon count.
 1 concurrent is provided by default, which means 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
      * @param {Submit3DSmartTopologyJobRequest} req
      * @param {function(string, Submit3DSmartTopologyJobResponse):void} cb
@@ -83,6 +101,17 @@ This API is used to provide 1 concurrent task by default, which means only 1 sub
     Submit3DSmartTopologyJob(req, cb) {
         let resp = new Submit3DSmartTopologyJobResponse();
         this.request("Submit3DSmartTopologyJob", req, resp, cb);
+    }
+
+    /**
+     * After inputting the model, UV unfolding can be performed based on the model texture to output the corresponding UV texture
+     * @param {SubmitHunyuanTo3DUVJobRequest} req
+     * @param {function(string, SubmitHunyuanTo3DUVJobResponse):void} cb
+     * @public
+     */
+    SubmitHunyuanTo3DUVJob(req, cb) {
+        let resp = new SubmitHunyuanTo3DUVJobResponse();
+        this.request("SubmitHunyuanTo3DUVJob", req, resp, cb);
     }
 
     /**
@@ -132,6 +161,44 @@ This API is used to provide 1 concurrent task by default, which means only 1 sub
     }
 
     /**
+     * Query 3D texture edit tasks.
+     * @param {QueryHunyuanTo3DTextureEditJobRequest} req
+     * @param {function(string, QueryHunyuanTo3DTextureEditJobResponse):void} cb
+     * @public
+     */
+    QueryHunyuanTo3DTextureEditJob(req, cb) {
+        let resp = new QueryHunyuanTo3DTextureEditJobResponse();
+        this.request("QueryHunyuanTo3DTextureEditJob", req, resp, cb);
+    }
+
+    /**
+     * Query component splitting tasks.
+     * @param {DescribeHunyuanTo3DUVJobRequest} req
+     * @param {function(string, DescribeHunyuanTo3DUVJobResponse):void} cb
+     * @public
+     */
+    DescribeHunyuanTo3DUVJob(req, cb) {
+        let resp = new DescribeHunyuanTo3DUVJobResponse();
+        this.request("DescribeHunyuanTo3DUVJob", req, resp, cb);
+    }
+
+    /**
+     * Tencent Hunyuan is a large language model (LLM) developed by Tencent R&D. It possesses powerful Chinese creation capacity, logical reasoning in complex context, and reliable task execution power. This API supports streaming or non-streaming calls. When using streaming calls, it follows the SSE protocol.
+
+1. This API does not currently support returning Image Content.
+2. By default, this API has account restrictions with a number of concurrencies of 5. 
+3. Please use the SDK to call this API. examples are provided in the Git repository examples/hunyuan/v20230901/ directory for each development language. The SDK link is provided in the "**Developer Resources - SDK**" part under the document.
+4. We recommend you use API Explorer for quick online debugging interface and download example code in languages, [click to open](https://console.cloud.tencent.com/api/explorer?Product=hunyuan&Version=2023-09-01&Action=ChatCompletions).
+     * @param {ChatTranslationsRequest} req
+     * @param {function(string, ChatTranslationsResponse):void} cb
+     * @public
+     */
+    ChatTranslations(req, cb) {
+        let resp = new ChatTranslationsResponse();
+        this.request("ChatTranslations", req, resp, cb);
+    }
+
+    /**
      * This API is used to intelligently generate 3D content based on the HunYuan Large Model and input text descriptions/images.
 This API is used to provide 3 concurrent tasks by default, which can process 3 submitted tasks simultaneously. The next task can be processed only after the previous task is completed.
      * @param {QueryHunyuanTo3DProJobRequest} req
@@ -152,6 +219,17 @@ This API is used to provide 3 concurrent tasks by default, which can process 3 s
     Convert3DFormat(req, cb) {
         let resp = new Convert3DFormatResponse();
         this.request("Convert3DFormat", req, resp, cb);
+    }
+
+    /**
+     * After inputting the 3D model, perform 3D model texture redrawing based on semantics or images.
+     * @param {SubmitHunyuanTo3DTextureEditJobRequest} req
+     * @param {function(string, SubmitHunyuanTo3DTextureEditJobResponse):void} cb
+     * @public
+     */
+    SubmitHunyuanTo3DTextureEditJob(req, cb) {
+        let resp = new SubmitHunyuanTo3DTextureEditJobResponse();
+        this.request("SubmitHunyuanTo3DTextureEditJob", req, resp, cb);
     }
 
 

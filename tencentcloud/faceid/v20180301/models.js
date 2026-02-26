@@ -2157,7 +2157,7 @@ class GetFaceIdResultIntlResponse extends  AbstractModel {
 
         /**
          * The similarity, with a value range of 0-100. A greater value indicates higher similarity. This parameter is returned only in the `compare` (selfie verification) mode.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+Note: The Similarity metric is exclusively valid for "compare" mode. In "liveness" mode, the returned Similarity value (0.0) is non-significant and should be ignored.
          * @type {number || null}
          */
         this.Similarity = null;

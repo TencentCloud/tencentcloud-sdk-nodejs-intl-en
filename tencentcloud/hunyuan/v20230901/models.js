@@ -860,7 +860,7 @@ class SubmitHunyuanTo3DTextureEditJobResponse extends  AbstractModel {
 }
 
 /**
- * 3D file.
+ * 3D model related files, files or textures.
  * @class
  */
 class File3D extends  AbstractModel {
@@ -868,7 +868,7 @@ class File3D extends  AbstractModel {
         super();
 
         /**
-         * 3D file format. valid values: GIF, OBJ.
+         * 3D model or texture. valid values: GIF or OBJ or Image.
          * @type {string || null}
          */
         this.Type = null;
@@ -933,7 +933,7 @@ Example value: RUN
         this.ErrorMessage = null;
 
         /**
-         * Generate the file URL with a valid period of 1 day
+         * The URL address for generating texture files is valid for 1 day.
          * @type {Array.<File3D> || null}
          */
         this.ResultFile3Ds = null;
@@ -1075,6 +1075,15 @@ Imagebase64, imageurl, and Prompt are required, and Prompt cannot coexist with i
         this.ImageUrl = null;
 
         /**
+         * Returns the 3D file format. valid values:
+OBJ, GLB, STL, USDZ, FBX, MP4, GIF
+Recommended input models below 50W, may timeout when selecting USDZ, MP4, or GIF format
+Example value: STL
+         * @type {string || null}
+         */
+        this.ResultFormat = null;
+
+        /**
          * Specifies whether PBR material generation is enabled, false by default.	
          * @type {boolean || null}
          */
@@ -1101,6 +1110,7 @@ Default model file format is GLB
         this.Prompt = 'Prompt' in params ? params.Prompt : null;
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ResultFormat = 'ResultFormat' in params ? params.ResultFormat : null;
         this.EnablePBR = 'EnablePBR' in params ? params.EnablePBR : null;
         this.EnableGeometry = 'EnableGeometry' in params ? params.EnableGeometry : null;
 

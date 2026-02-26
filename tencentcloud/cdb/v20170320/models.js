@@ -5639,13 +5639,13 @@ class AuditInstanceInfo extends  AbstractModel {
         this.TagList = null;
 
         /**
-         * Database engine type.
+         * Database kernel type.
          * @type {string || null}
          */
         this.DbType = null;
 
         /**
-         * Database engine version.
+         * Database kernel version.
          * @type {string || null}
          */
         this.DbVersion = null;

@@ -34,17 +34,18 @@ const UpdateEmailTemplateResponse = models.UpdateEmailTemplateResponse;
 const CreateReceiverDetailWithDataRequest = models.CreateReceiverDetailWithDataRequest;
 const TimedEmailParam = models.TimedEmailParam;
 const DNSAttributes = models.DNSAttributes;
-const GetEmailTemplateResponse = models.GetEmailTemplateResponse;
+const SendEmailStatus = models.SendEmailStatus;
 const ListAddressUnsubscribeConfigResponse = models.ListAddressUnsubscribeConfigResponse;
 const SendEmailRequest = models.SendEmailRequest;
 const UpdateEmailIdentityRequest = models.UpdateEmailIdentityRequest;
 const DeleteEmailIdentityResponse = models.DeleteEmailIdentityResponse;
+const DeleteBlackListRequest = models.DeleteBlackListRequest;
 const DeleteEmailTemplateResponse = models.DeleteEmailTemplateResponse;
 const ListCustomBlacklistRequest = models.ListCustomBlacklistRequest;
 const DeleteEmailTemplateRequest = models.DeleteEmailTemplateRequest;
-const SendEmailStatus = models.SendEmailStatus;
+const AbuseReport = models.AbuseReport;
 const ListEmailTemplatesRequest = models.ListEmailTemplatesRequest;
-const DeleteBlackListRequest = models.DeleteBlackListRequest;
+const GetAbuseReportResponse = models.GetAbuseReportResponse;
 const ReceiverInputData = models.ReceiverInputData;
 const ReceiverDetail = models.ReceiverDetail;
 const ListBlackEmailAddressResponse = models.ListBlackEmailAddressResponse;
@@ -54,6 +55,7 @@ const UpdateEmailSmtpPassWordRequest = models.UpdateEmailSmtpPassWordRequest;
 const DeleteCustomBlackListRequest = models.DeleteCustomBlackListRequest;
 const UpdateAddressUnsubscribeConfigRequest = models.UpdateAddressUnsubscribeConfigRequest;
 const ListEmailIdentitiesRequest = models.ListEmailIdentitiesRequest;
+const GetEmailTemplateResponse = models.GetEmailTemplateResponse;
 const CreateReceiverResponse = models.CreateReceiverResponse;
 const UpdateEmailSmtpPassWordResponse = models.UpdateEmailSmtpPassWordResponse;
 const ListReceiversRequest = models.ListReceiversRequest;
@@ -83,6 +85,7 @@ const ListCustomBlacklistResponse = models.ListCustomBlacklistResponse;
 const ListReceiverDetailsRequest = models.ListReceiverDetailsRequest;
 const CreateEmailIdentityResponse = models.CreateEmailIdentityResponse;
 const CreateEmailAddressResponse = models.CreateEmailAddressResponse;
+const GetAbuseReportRequest = models.GetAbuseReportRequest;
 const DeleteAddressUnsubscribeConfigResponse = models.DeleteAddressUnsubscribeConfigResponse;
 const BatchSendEmailRequest = models.BatchSendEmailRequest;
 const CreateCustomBlacklistRequest = models.CreateCustomBlacklistRequest;
@@ -218,14 +221,14 @@ class SesClient extends AbstractClient {
     }
 
     /**
-     * The API is used to get blocklisted addresses. In the case of a hard bounce, Tencent Cloud will blocklist the recipient address and do not allow any user to send emails to this address. If you confirm that this is a misjudgment, you can remove it from the blocklist.
-     * @param {ListBlackEmailAddressRequest} req
-     * @param {function(string, ListBlackEmailAddressResponse):void} cb
+     * This API is used to get the email sending statistics over a recent period, including data on sent emails, delivery success rate, open rate, bounce rate, and so on.
+     * @param {GetStatisticsReportRequest} req
+     * @param {function(string, GetStatisticsReportResponse):void} cb
      * @public
      */
-    ListBlackEmailAddress(req, cb) {
-        let resp = new ListBlackEmailAddressResponse();
-        this.request("ListBlackEmailAddress", req, resp, cb);
+    GetStatisticsReport(req, cb) {
+        let resp = new GetStatisticsReportResponse();
+        this.request("GetStatisticsReport", req, resp, cb);
     }
 
     /**
@@ -450,6 +453,17 @@ Note: Only an approved template can be used to send emails.
     }
 
     /**
+     * Retrieve reported spam data.
+     * @param {GetAbuseReportRequest} req
+     * @param {function(string, GetAbuseReportResponse):void} cb
+     * @public
+     */
+    GetAbuseReport(req, cb) {
+        let resp = new GetAbuseReportResponse();
+        this.request("GetAbuseReport", req, resp, cb);
+    }
+
+    /**
      * Retrieve the custom blocklist.
      * @param {ListCustomBlacklistRequest} req
      * @param {function(string, ListCustomBlacklistResponse):void} cb
@@ -461,14 +475,14 @@ Note: Only an approved template can be used to send emails.
     }
 
     /**
-     * This API is used to get the email sending statistics over a recent period, including data on sent emails, delivery success rate, open rate, bounce rate, and so on.
-     * @param {GetStatisticsReportRequest} req
-     * @param {function(string, GetStatisticsReportResponse):void} cb
+     * The API is used to get blocklisted addresses. In the case of a hard bounce, Tencent Cloud will blocklist the recipient address and do not allow any user to send emails to this address. If you confirm that this is a misjudgment, you can remove it from the blocklist.
+     * @param {ListBlackEmailAddressRequest} req
+     * @param {function(string, ListBlackEmailAddressResponse):void} cb
      * @public
      */
-    GetStatisticsReport(req, cb) {
-        let resp = new GetStatisticsReportResponse();
-        this.request("GetStatisticsReport", req, resp, cb);
+    ListBlackEmailAddress(req, cb) {
+        let resp = new ListBlackEmailAddressResponse();
+        this.request("ListBlackEmailAddress", req, resp, cb);
     }
 
     /**

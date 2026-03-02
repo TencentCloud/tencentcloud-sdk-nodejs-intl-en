@@ -37,6 +37,7 @@ const InitializeDisksResponse = models.InitializeDisksResponse;
 const DeleteDiskBackupsResponse = models.DeleteDiskBackupsResponse;
 const DescribeDiskBackupsResponse = models.DescribeDiskBackupsResponse;
 const SnapshotCopyResult = models.SnapshotCopyResult;
+const RenewDiskRequest = models.RenewDiskRequest;
 const InquirePriceModifyDiskExtraPerformanceResponse = models.InquirePriceModifyDiskExtraPerformanceResponse;
 const AdvancedRetentionPolicy = models.AdvancedRetentionPolicy;
 const CreateDisksRequest = models.CreateDisksRequest;
@@ -106,6 +107,7 @@ const GetSnapOverviewResponse = models.GetSnapOverviewResponse;
 const AutoMountConfiguration = models.AutoMountConfiguration;
 const CopySnapshotCrossRegionsRequest = models.CopySnapshotCrossRegionsRequest;
 const PrepayPrice = models.PrepayPrice;
+const RenewDiskResponse = models.RenewDiskResponse;
 const DescribeAutoSnapshotPoliciesResponse = models.DescribeAutoSnapshotPoliciesResponse;
 const UnbindAutoSnapshotPolicyRequest = models.UnbindAutoSnapshotPolicyRequest;
 const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
@@ -136,6 +138,19 @@ class CbsClient extends AbstractClient {
     ModifyDiskExtraPerformance(req, cb) {
         let resp = new ModifyDiskExtraPerformanceResponse();
         this.request("ModifyDiskExtraPerformance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to renew cloud disks.
+
+This API is used to support renewal along with mounted instances. The parameter specifies CurInstanceDeadline in [DiskChargePrepaid](https://www.tencentcloud.com/document/product/362/15669?from_cn_redirect=1#DiskChargePrepaid), and renewal will be at the expiry date after the instance is renewed.
+     * @param {RenewDiskRequest} req
+     * @param {function(string, RenewDiskResponse):void} cb
+     * @public
+     */
+    RenewDisk(req, cb) {
+        let resp = new RenewDiskResponse();
+        this.request("RenewDisk", req, resp, cb);
     }
 
     /**

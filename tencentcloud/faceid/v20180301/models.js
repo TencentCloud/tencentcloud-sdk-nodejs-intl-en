@@ -3687,14 +3687,14 @@ The default value is blink.
         this.ActionList = null;
 
         /**
-         * Control liveness retry number.The value range is 1-99.
+         * Maximum liveness verification attempts. Valid range: [1,99].
 The default value is 99.
          * @type {number || null}
          */
         this.LivenessRetryLimit = null;
 
         /**
-         * Specifies the liveness detection timeout period in seconds. value range: (0,600].
+         * Specifies the liveness detection timeout period in seconds. Value range: (0,600].
 The default value is 45.
          * @type {number || null}
          */
@@ -3844,7 +3844,7 @@ class Encryption extends  AbstractModel {
         this.EncryptList = null;
 
         /**
-         * Symmetric key after encryption. For the generation and usage of the key, please refer to the <a href="https://cloud.tencent.com/document/product/1007/47180">Data Encryption</a> document.
+         * Symmetric key after encryption. For the generation and usage of the key, please refer to the <a href="https://www.tencentcloud.com/document/product/1061/77849?lang=en&pg=">Data Encryption</a> document.
          * @type {string || null}
          */
         this.CiphertextBlob = null;

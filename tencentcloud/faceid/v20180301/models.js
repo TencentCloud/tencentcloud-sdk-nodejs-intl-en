@@ -227,100 +227,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Nigeria driving license
- * @class
- */
-class NigeriaDrivingLicense extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Last name.
-Note: This field may return null, indicating that no valid values can be obtained.
-
-         * @type {string || null}
-         */
-        this.LastName = null;
-
-        /**
-         * First name.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.FirstName = null;
-
-        /**
-         * License number.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LicenseNumber = null;
-
-        /**
-         * Age.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Age = null;
-
-        /**
-         * Birthday.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Birthday = null;
-
-        /**
-         * Issued country.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.IssuedCountry = null;
-
-        /**
-         * Expiration date.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ExpirationDate = null;
-
-        /**
-         * Issued date.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.IssuedDate = null;
-
-        /**
-         * Gender.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Sex = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LastName = 'LastName' in params ? params.LastName : null;
-        this.FirstName = 'FirstName' in params ? params.FirstName : null;
-        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
-        this.Age = 'Age' in params ? params.Age : null;
-        this.Birthday = 'Birthday' in params ? params.Birthday : null;
-        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
-        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
-        this.IssuedDate = 'IssuedDate' in params ? params.IssuedDate : null;
-        this.Sex = 'Sex' in params ? params.Sex : null;
-
-    }
-}
-
-/**
  * GetSdkVerificationResult response structure.
  * @class
  */
@@ -448,36 +354,42 @@ class GetSdkVerificationResultRequest extends  AbstractModel {
 }
 
 /**
- * DetectAIFakeFaces request structure.
+ * 
  * @class
  */
-class DetectAIFakeFacesRequest extends  AbstractModel {
+class Encryption extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Enter the image or video with a face to be detected, in base64 encoding. Base64 value of the image: The overall image resolution is recommended to be 480x640, and the face size is 100X100 or larger; The image data size after Base64 encoding does not exceed 3M, and only supports jpg and png formats. Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. Base64 value of the video: The size after Base64 encoding does not exceed 8M, and supports mp4, avi, and flv formats. Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. The maximum supported video length is 20s, and the recommended length is 2 to 5s. The recommended video resolution is 480x640, and the frame rate is between 25fps and 30fps.
+         * When using the encryption service, fill in the fields to be encrypted. One or more encrypted fields can be entered in this interface.
+         * @type {Array.<string> || null}
+         */
+        this.EncryptList = null;
+
+        /**
+         * Symmetric key after encryption. For the generation and usage of the key, please refer to the <a href="https://www.tencentcloud.com/document/product/1061/77849?lang=en&pg=">Data Encryption</a> document.
          * @type {string || null}
          */
-        this.FaceInput = null;
+        this.CiphertextBlob = null;
 
         /**
-         * The type of input is 1- The input type is a picture 2- The input type is a video Others - Return error code InvalidParameter
-         * @type {number || null}
-         */
-        this.FaceInputType = null;
-
-        /**
-         * Whether the request information needs to be fully encrypted; Supported encryption algorithms: AES-256-CBC, SM4-GCM; Users with encryption requirements can use this parameter, for details, please click the link on the left.
-         * @type {Encryption || null}
-         */
-        this.Encryption = null;
-
-        /**
-         * Encrypted ciphertext; The data format before encryption is as follows:{"FaceInput":"AAAAA","FaceInputType":1}
+         * initialization vector for CBC encryption (a customer-defined string with a length of 16 characters).
          * @type {string || null}
          */
-        this.EncryptedBody = null;
+        this.Iv = null;
+
+        /**
+         * Encryption algorithm (supports 'AES-256-CBC'/'SM4-GCM'); default: 'AES-256-CBC' if not specified.
+         * @type {string || null}
+         */
+        this.Algorithm = null;
+
+        /**
+         * Message digest generated by the SM4-GCM algorithm (used for verifying message integrity).
+         * @type {Array.<string> || null}
+         */
+        this.TagList = null;
 
     }
 
@@ -488,15 +400,11 @@ class DetectAIFakeFacesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FaceInput = 'FaceInput' in params ? params.FaceInput : null;
-        this.FaceInputType = 'FaceInputType' in params ? params.FaceInputType : null;
-
-        if (params.Encryption) {
-            let obj = new Encryption();
-            obj.deserialize(params.Encryption)
-            this.Encryption = obj;
-        }
-        this.EncryptedBody = 'EncryptedBody' in params ? params.EncryptedBody : null;
+        this.EncryptList = 'EncryptList' in params ? params.EncryptList : null;
+        this.CiphertextBlob = 'CiphertextBlob' in params ? params.CiphertextBlob : null;
+        this.Iv = 'Iv' in params ? params.Iv : null;
+        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
+        this.TagList = 'TagList' in params ? params.TagList : null;
 
     }
 }
@@ -698,36 +606,30 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ApplyCardVerification response structure.
+ * 
  * @class
  */
-class ApplyCardVerificationResponse extends  AbstractModel {
+class EditDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The token used to identify an verification process. It can be used to get the verification result after the process is completed.
+         * Modified Field Name
          * @type {string || null}
          */
-        this.CardVerificationToken = null;
+        this.FieldName = null;
 
         /**
-         * The maximum number of polls for calling the pull result interface polling.
-         * @type {number || null}
-         */
-        this.AsyncCardVerificationMaxPollingTimes = null;
-
-        /**
-         * The interval for polling when calling the pull result interface (in seconds).
-         * @type {number || null}
-         */
-        this.AsyncCardVerificationPollingWaitTime = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Value of the field before modification, the original OCR result
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.OriginalFieldValue = null;
+
+        /**
+         * Value of the field after modification,the user's manually entered result
+         * @type {string || null}
+         */
+        this.RevisedFieldValue = null;
 
     }
 
@@ -738,10 +640,9 @@ class ApplyCardVerificationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CardVerificationToken = 'CardVerificationToken' in params ? params.CardVerificationToken : null;
-        this.AsyncCardVerificationMaxPollingTimes = 'AsyncCardVerificationMaxPollingTimes' in params ? params.AsyncCardVerificationMaxPollingTimes : null;
-        this.AsyncCardVerificationPollingWaitTime = 'AsyncCardVerificationPollingWaitTime' in params ? params.AsyncCardVerificationPollingWaitTime : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FieldName = 'FieldName' in params ? params.FieldName : null;
+        this.OriginalFieldValue = 'OriginalFieldValue' in params ? params.OriginalFieldValue : null;
+        this.RevisedFieldValue = 'RevisedFieldValue' in params ? params.RevisedFieldValue : null;
 
     }
 }
@@ -949,177 +850,76 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Nigeria driving license
  * @class
  */
-class EditDetail extends  AbstractModel {
+class NigeriaDrivingLicense extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Modified Field Name
-         * @type {string || null}
-         */
-        this.FieldName = null;
-
-        /**
-         * Value of the field before modification, the original OCR result
-         * @type {string || null}
-         */
-        this.OriginalFieldValue = null;
-
-        /**
-         * Value of the field after modification,the user's manually entered result
-         * @type {string || null}
-         */
-        this.RevisedFieldValue = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FieldName = 'FieldName' in params ? params.FieldName : null;
-        this.OriginalFieldValue = 'OriginalFieldValue' in params ? params.OriginalFieldValue : null;
-        this.RevisedFieldValue = 'RevisedFieldValue' in params ? params.RevisedFieldValue : null;
-
-    }
-}
-
-/**
- * ApplyWebVerificationToken response structure.
- * @class
- */
-class ApplyWebVerificationTokenResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The verification URL to be opened with a browser to start the verification process.
-         * @type {string || null}
-         */
-        this.VerificationUrl = null;
-
-        /**
-         * The token used to identify a web-based verification process. It is valid for 7,200s and can be used to get the verification result after the process is completed.
-         * @type {string || null}
-         */
-        this.BizToken = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VerificationUrl = 'VerificationUrl' in params ? params.VerificationUrl : null;
-        this.BizToken = 'BizToken' in params ? params.BizToken : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Hong Kong (China) ID card.
- * @class
- */
-class NormalHKIDCard extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Chinese name
+         * Last name.
 Note: This field may return null, indicating that no valid values can be obtained.
 
          * @type {string || null}
          */
-        this.ChineseName = null;
+        this.LastName = null;
 
         /**
-         * English name
-Note: This field may return null, indicating that no valid values can be obtained.
-Example: SAN, Nan
-         * @type {string || null}
-         */
-        this.FullName = null;
-
-        /**
-         * Telex code correspondint to the Chinese name
+         * First name.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RegistrationNumber = null;
+        this.FirstName = null;
 
         /**
-         * Gender: "Male-M" or "Female-F"
+         * License number.
 Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Sex = null;
-
-        /**
-         * Birthday
-Note: This field may return null, indicating that no valid values can be obtained.
-Example: 01-01-2001
-         * @type {string || null}
-         */
-        this.Birthday = null;
-
-        /**
-         * Permanent resident ID card: 0-non-permanent; 1-permanent; -1-unknown
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Permanent = null;
-
-        /**
-         * ID card number
-Note: This field may return null, indicating that no valid values can be obtained.
-Example: C000000(E)
          * @type {string || null}
          */
         this.LicenseNumber = null;
 
         /**
-         * Lisence symbol, which is the symbol below Birthday. Example: "***AZ"
+         * Age.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Symbol = null;
+        this.Age = null;
 
         /**
-         * The first date of issue
+         * Birthday.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Issued country.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedCountry = null;
+
+        /**
+         * Expiration date.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpirationDate = null;
+
+        /**
+         * Issued date.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IssuedDate = null;
 
         /**
-         * The current date of issue
+         * Gender.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.CurrentIssueDate = null;
-
-        /**
-         * Hong kong identity card version.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.HKIDVersion = null;
+        this.Sex = null;
 
     }
 
@@ -1130,34 +930,68 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.ChineseName = 'ChineseName' in params ? params.ChineseName : null;
-        this.FullName = 'FullName' in params ? params.FullName : null;
-        this.RegistrationNumber = 'RegistrationNumber' in params ? params.RegistrationNumber : null;
-        this.Sex = 'Sex' in params ? params.Sex : null;
-        this.Birthday = 'Birthday' in params ? params.Birthday : null;
-        this.Permanent = 'Permanent' in params ? params.Permanent : null;
+        this.LastName = 'LastName' in params ? params.LastName : null;
+        this.FirstName = 'FirstName' in params ? params.FirstName : null;
         this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
-        this.Symbol = 'Symbol' in params ? params.Symbol : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
+        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
         this.IssuedDate = 'IssuedDate' in params ? params.IssuedDate : null;
-        this.CurrentIssueDate = 'CurrentIssueDate' in params ? params.CurrentIssueDate : null;
-        this.HKIDVersion = 'HKIDVersion' in params ? params.HKIDVersion : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
 
     }
 }
 
 /**
- * GetWebVerificationResult request structure.
+ * Pakistan driving license
  * @class
  */
-class GetWebVerificationResultRequest extends  AbstractModel {
+class PakistanDrivingLicense extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The token for the web-based verification, which is generated with the `ApplyWebVerificationToken` API.
+         * Last name.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.BizToken = null;
+        this.LastName = null;
+
+        /**
+         * First name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FirstName = null;
+
+        /**
+         * License number.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Age.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Age = null;
+
+        /**
+         * Birthday.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Gender.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedCountry = null;
 
     }
 
@@ -1168,7 +1002,12 @@ class GetWebVerificationResultRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BizToken = 'BizToken' in params ? params.BizToken : null;
+        this.LastName = 'LastName' in params ? params.LastName : null;
+        this.FirstName = 'FirstName' in params ? params.FirstName : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
 
     }
 }
@@ -2108,128 +1947,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * GetFaceIdResultIntl response structure.
- * @class
- */
-class GetFaceIdResultIntlResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The return code of the verification result.
-0: Succeeded.
-1001: System error.
-1004: Selfie verification comparison failed.
-2004: The image passed in is too large or too small.
-2012: Several faces were detected.
-2013: No face was detected, or the face detected was incomplete.
-2014: The image resolution is too low or the quality does not meet the requirements.
-2015: Face comparison failed.
-2016: The similarity did not reach the standard passing threshold.
--999: The verification process wasn't finished.
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * The description of the verification result.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * The best frame screenshot (in Base64) obtained during the verification.
-         * @type {string || null}
-         */
-        this.BestFrame = null;
-
-        /**
-         * The video file (Base64) for verification.Used for verification, contains specific color reflection effects.
-         * @type {string || null}
-         */
-        this.Video = null;
-
-        /**
-         * Records the specific action performed by the user, used for AI Face Shield analysis.
-         * @type {string || null}
-         */
-        this.ActionVideo = null;
-
-        /**
-         * The similarity, with a value range of 0-100. A greater value indicates higher similarity. This parameter is returned only in the `compare` (selfie verification) mode.
-Note: The Similarity metric is exclusively valid for "compare" mode. In "liveness" mode, the returned Similarity value (0.0) is non-significant and should be ignored.
-         * @type {number || null}
-         */
-        this.Similarity = null;
-
-        /**
-         * The pass-through parameter.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Extra = null;
-
-        /**
-         * Describe the risk level of the device where the current request is located, with a total of 4 levels. The details are as follows:
-1 - Secure
-2 - Low Risk
-3 - Medium Risk
-4 - High Risk
-Empty - Risk level not obtained.
-Only returned for the Enhance and Plus version, with the default value being empty.
-         * @type {string || null}
-         */
-        this.DeviceInfoLevel = null;
-
-        /**
-         * Describes the detailed reason for the current liveness detection failure. Output only when SdkVersion is PLUS. Details are as follows:
-01 - User kept eyes closed throughout the process.
-02 - User failed to complete the specified action.
-03 - Suspected photo replay attack.
-04 - Suspected synthetic image.
-05 - Suspected synthetic video.
-06 - Suspected synthetic action.
-07 - Suspected fraud template.
-08 - Suspected watermark existence.
-09 - Light verification failed.
-10 - Face verification failed.
-11 - Poor face quality.
-12 - Unqualified collection quality.
-13 - Suspected adversarial sample attack.
-         * @type {Array.<string> || null}
-         */
-        this.LivenessInfoTag = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.BestFrame = 'BestFrame' in params ? params.BestFrame : null;
-        this.Video = 'Video' in params ? params.Video : null;
-        this.ActionVideo = 'ActionVideo' in params ? params.ActionVideo : null;
-        this.Similarity = 'Similarity' in params ? params.Similarity : null;
-        this.Extra = 'Extra' in params ? params.Extra : null;
-        this.DeviceInfoLevel = 'DeviceInfoLevel' in params ? params.DeviceInfoLevel : null;
-        this.LivenessInfoTag = 'LivenessInfoTag' in params ? params.LivenessInfoTag : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ApplySdkVerificationToken request structure.
  * @class
  */
@@ -2484,68 +2201,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Age = 'Age' in params ? params.Age : null;
         this.Birthday = 'Birthday' in params ? params.Birthday : null;
         this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
-
-    }
-}
-
-/**
- * VideoLivenessCompare response structure.
- * @class
- */
-class VideoLivenessCompareResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The similarity. Value range: [0.00, 100.00]. As a recommendation, when the similarity is greater than or equal to 70, it can be determined that the two persons are of the same person. You can adjust the threshold according to your specific scenario (the FARs at the thresholds of 70 and 80 are 0.1% and 0.01%, respectively).
-         * @type {number || null}
-         */
-        this.Sim = null;
-
-        /**
-         * The service error code. `Success` will be returned for success. For error information, see the `FailedOperation` section in the error code list below.
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * The service result description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * The best video screenshot after successful verification
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {FileInfo || null}
-         */
-        this.BestFrame = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Sim = 'Sim' in params ? params.Sim : null;
-        this.Result = 'Result' in params ? params.Result : null;
-        this.Description = 'Description' in params ? params.Description : null;
-
-        if (params.BestFrame) {
-            let obj = new FileInfo();
-            obj.deserialize(params.BestFrame)
-            this.BestFrame = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2885,55 +2540,36 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * VideoLivenessCompare request structure.
+ * DetectAIFakeFaces request structure.
  * @class
  */
-class VideoLivenessCompareRequest extends  AbstractModel {
+class DetectAIFakeFacesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The URL of the photo for face comparison. The downloaded image after Base64 encoding can be up to 3 MB and must be in JPG or PNG.
-
-The image must be stored in a COS bucket in the region where the FaceID service resides to ensure a higher download speed and better stability. You can generate an image URL by using `CreateUploadUrl` or purchase the COS service.
+         * Enter the image or video with a face to be detected, in base64 encoding. Base64 value of the image: The overall image resolution is recommended to be 480x640, and the face size is 100X100 or larger; The image data size after Base64 encoding does not exceed 3M, and only supports jpg and png formats. Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. Base64 value of the video: The size after Base64 encoding does not exceed 8M, and supports mp4, avi, and flv formats. Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. The maximum supported video length is 20s, and the recommended length is 2 to 5s. The recommended video resolution is 480x640, and the frame rate is between 25fps and 30fps.
          * @type {string || null}
          */
-        this.ImageUrl = null;
+        this.FaceInput = null;
 
         /**
-         * The 32-bit MD5 checksum of the image for comparison
-         * @type {string || null}
+         * The type of input is 1- The input type is a picture 2- The input type is a video Others - Return error code InvalidParameter
+         * @type {number || null}
          */
-        this.ImageMd5 = null;
+        this.FaceInputType = null;
 
         /**
-         * The URL of the video for liveness detection. The downloaded video after Base64 encoding can be up to 8 MB and must be in MP4, AVI, or FLV. It takes no more than 4s to download the video.
-
-The video must be stored in a COS bucket in the region where the FaceID service resides to ensure a higher download speed and better stability. You can generate a video URL by using `CreateUploadUrl` or purchase the COS service.
-         * @type {string || null}
+         * Whether the request information needs to be fully encrypted; Supported encryption algorithms: AES-256-CBC, SM4-GCM; Users with encryption requirements can use this parameter, for details, please click the link on the left.
+         * @type {Encryption || null}
          */
-        this.VideoUrl = null;
+        this.Encryption = null;
 
         /**
-         * The 32-bit MD5 checksum of the video
+         * Encrypted ciphertext; The data format before encryption is as follows:{"FaceInput":"AAAAA","FaceInputType":1}
          * @type {string || null}
          */
-        this.VideoMd5 = null;
-
-        /**
-         * The liveness detection type. Valid values: `LIP`, `ACTION`, and `SILENT`.
-`LIP`: Numeric mode; `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
-         * @type {string || null}
-         */
-        this.LivenessType = null;
-
-        /**
-         * LIP parameter: Pass in a custom 4-digit verification code.
-ACTION parameter: Pass in a custom action sequence (`2,1` or `1,2`).
-SILENT parameter: Null.
-         * @type {string || null}
-         */
-        this.ValidateData = null;
+        this.EncryptedBody = null;
 
     }
 
@@ -2944,107 +2580,15 @@ SILENT parameter: Null.
         if (!params) {
             return;
         }
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.ImageMd5 = 'ImageMd5' in params ? params.ImageMd5 : null;
-        this.VideoUrl = 'VideoUrl' in params ? params.VideoUrl : null;
-        this.VideoMd5 = 'VideoMd5' in params ? params.VideoMd5 : null;
-        this.LivenessType = 'LivenessType' in params ? params.LivenessType : null;
-        this.ValidateData = 'ValidateData' in params ? params.ValidateData : null;
+        this.FaceInput = 'FaceInput' in params ? params.FaceInput : null;
+        this.FaceInputType = 'FaceInputType' in params ? params.FaceInputType : null;
 
-    }
-}
-
-/**
- * ApplyWebVerificationToken request structure.
- * @class
- */
-class ApplyWebVerificationTokenRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The web redirect URL after the verification is completed.
-         * @type {string || null}
-         */
-        this.RedirectUrl = null;
-
-        /**
-         * The COS URL of the image for face comparison, which can be obtained with one of the following methods:
-1. Call the `CreateUploadUrl` API to generate a URL and call it again after the image is successfully uploaded.
-2. Use an existing COS URL. For a private bucket, grant the download permission with a pre-signed URL. The corresponding COS bucket must be in the same region as the input parameter `Region`.
-         * @type {string || null}
-         */
-        this.CompareImageUrl = null;
-
-        /**
-         * The MD5 hash values of the image for face comparison (CompareImageUrl).
-         * @type {string || null}
-         */
-        this.CompareImageMd5 = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.Encryption) {
+            let obj = new Encryption();
+            obj.deserialize(params.Encryption)
+            this.Encryption = obj;
         }
-        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
-        this.CompareImageUrl = 'CompareImageUrl' in params ? params.CompareImageUrl : null;
-        this.CompareImageMd5 = 'CompareImageMd5' in params ? params.CompareImageMd5 : null;
-
-    }
-}
-
-/**
- * ApplyWebVerificationBizTokenIntl response structure.
- * @class
- */
-class ApplyWebVerificationBizTokenIntlResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The token identifying this web-based verification process, valid for 7,200s after issuance. It is required for getting the result after the verification process is completed.
-Example: https://intl.faceid.qq.com/reflect/?token=81EEF678-28EE-4759-A82E-6CBBBE6BC442
-         * @type {string || null}
-         */
-        this.VerificationUrl = null;
-
-        /**
-         * A token that identifies a Web verification process, with a validity time of 10 minutes. after the process is complete, the token can be used to obtain the verification result.
-         * @type {string || null}
-         */
-        this.BizToken = null;
-
-        /**
-         * The verification URL to be opened with a browser to start the verification process.
-Example: https://intl.faceid.qq.com/reflect/?token=81EEF678-28EE-4759-A82E-6CBBBE6BC442
-         * @type {string || null}
-         */
-        this.VerificationURL = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VerificationUrl = 'VerificationUrl' in params ? params.VerificationUrl : null;
-        this.BizToken = 'BizToken' in params ? params.BizToken : null;
-        this.VerificationURL = 'VerificationURL' in params ? params.VerificationURL : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.EncryptedBody = 'EncryptedBody' in params ? params.EncryptedBody : null;
 
     }
 }
@@ -3154,18 +2698,18 @@ class ApplyLivenessTokenResponse extends  AbstractModel {
 }
 
 /**
- * GetCardVerificationResult request structure.
+ * GetLivenessResult request structure.
  * @class
  */
-class GetCardVerificationResultRequest extends  AbstractModel {
+class GetLivenessResultRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The token used to identify an verification process. It can be used to get the verification result after the process is completed.
+         * The token used to identify an SDK-based verification process.
          * @type {string || null}
          */
-        this.CardVerificationToken = null;
+        this.SdkToken = null;
 
     }
 
@@ -3176,7 +2720,7 @@ class GetCardVerificationResultRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CardVerificationToken = 'CardVerificationToken' in params ? params.CardVerificationToken : null;
+        this.SdkToken = 'SdkToken' in params ? params.SdkToken : null;
 
     }
 }
@@ -3833,62 +3377,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
  * 
  * @class
  */
-class Encryption extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * When using the encryption service, fill in the fields to be encrypted. One or more encrypted fields can be entered in this interface.
-         * @type {Array.<string> || null}
-         */
-        this.EncryptList = null;
-
-        /**
-         * Symmetric key after encryption. For the generation and usage of the key, please refer to the <a href="https://www.tencentcloud.com/document/product/1061/77849?lang=en&pg=">Data Encryption</a> document.
-         * @type {string || null}
-         */
-        this.CiphertextBlob = null;
-
-        /**
-         * initialization vector for CBC encryption (a customer-defined string with a length of 16 characters).
-         * @type {string || null}
-         */
-        this.Iv = null;
-
-        /**
-         * Encryption algorithm (supports 'AES-256-CBC'/'SM4-GCM'); default: 'AES-256-CBC' if not specified.
-         * @type {string || null}
-         */
-        this.Algorithm = null;
-
-        /**
-         * Message digest generated by the SM4-GCM algorithm (used for verifying message integrity).
-         * @type {Array.<string> || null}
-         */
-        this.TagList = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EncryptList = 'EncryptList' in params ? params.EncryptList : null;
-        this.CiphertextBlob = 'CiphertextBlob' in params ? params.CiphertextBlob : null;
-        this.Iv = 'Iv' in params ? params.Iv : null;
-        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
-        this.TagList = 'TagList' in params ? params.TagList : null;
-
-    }
-}
-
-/**
- * 
- * @class
- */
 class Address extends  AbstractModel {
     constructor(){
         super();
@@ -4509,83 +3997,6 @@ class ApplySdkVerificationTokenResponse extends  AbstractModel {
 }
 
 /**
- * Exit/entry permit (card) for traveling to and from Hong Kong (China), Macao (China), or Taiwan (China)
- * @class
- */
-class HMTPermit extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * English name
-         * @type {string || null}
-         */
-        this.EnglishName = null;
-
-        /**
-         * License number
-         * @type {string || null}
-         */
-        this.Number = null;
-
-        /**
-         * Gender
-         * @type {string || null}
-         */
-        this.Sex = null;
-
-        /**
-         * Valid date
-         * @type {string || null}
-         */
-        this.ValidDate = null;
-
-        /**
-         * Issued authority
-         * @type {string || null}
-         */
-        this.IssueAuthority = null;
-
-        /**
-         * Issued address
-         * @type {string || null}
-         */
-        this.IssueAddress = null;
-
-        /**
-         * Birthday
-         * @type {string || null}
-         */
-        this.Birthday = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.EnglishName = 'EnglishName' in params ? params.EnglishName : null;
-        this.Number = 'Number' in params ? params.Number : null;
-        this.Sex = 'Sex' in params ? params.Sex : null;
-        this.ValidDate = 'ValidDate' in params ? params.ValidDate : null;
-        this.IssueAuthority = 'IssueAuthority' in params ? params.IssueAuthority : null;
-        this.IssueAddress = 'IssueAddress' in params ? params.IssueAddress : null;
-        this.Birthday = 'Birthday' in params ? params.Birthday : null;
-
-    }
-}
-
-/**
  * CreateUploadUrl request structure.
  * @class
  */
@@ -4679,67 +4090,93 @@ Example: {"AutoSkip": true,"CheckMode": 1,"IdCardType": "HKIDCard"}
 }
 
 /**
- * GetWebVerificationResult response structure.
+ * Hong Kong (China) ID card.
  * @class
  */
-class GetWebVerificationResultResponse extends  AbstractModel {
+class NormalHKIDCard extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The final result of this verification. `0` indicates that the person is the same as that in the photo.
+         * Chinese name
 Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+
+         * @type {string || null}
          */
-        this.ErrorCode = null;
+        this.ChineseName = null;
 
         /**
-         * The description of the final verification result.
+         * English name
+Note: This field may return null, indicating that no valid values can be obtained.
+Example: SAN, Nan
+         * @type {string || null}
+         */
+        this.FullName = null;
+
+        /**
+         * Telex code correspondint to the Chinese name
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.ErrorMsg = null;
+        this.RegistrationNumber = null;
 
         /**
-         * The temporary URL of the best face screenshot collected from the video stream. It is valid for 10 minutes. Download the image if needed.
+         * Gender: "Male-M" or "Female-F"
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.VideoBestFrameUrl = null;
+        this.Sex = null;
 
         /**
-         * The MD5 hash value of the best face screenshot collected from the video stream. It can be used to check whether the image content is consistent with the file content.
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+Example: 01-01-2001
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Permanent resident ID card: 0-non-permanent; 1-permanent; -1-unknown
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.VideoBestFrameMd5 = null;
+        this.Permanent = null;
 
         /**
-         * The details list of this verification process.
+         * ID card number
 Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<VerificationDetail> || null}
-         */
-        this.VerificationDetailList = null;
-
-        /**
-         * The temporary URL of the video collected from the video stream. It is valid for 10 minutes. Download the video if needed.
-Note: This field may return null, indicating that no valid values can be obtained.
+Example: C000000(E)
          * @type {string || null}
          */
-        this.VideoUrl = null;
+        this.LicenseNumber = null;
 
         /**
-         * The MD5 hash value of the video collected from the video stream. It can be used to check whether the video content is consistent with the file content.
+         * Lisence symbol, which is the symbol below Birthday. Example: "***AZ"
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.VideoMd5 = null;
+        this.Symbol = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * The first date of issue
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.IssuedDate = null;
+
+        /**
+         * The current date of issue
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CurrentIssueDate = null;
+
+        /**
+         * Hong kong identity card version.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HKIDVersion = null;
 
     }
 
@@ -4750,22 +4187,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
-        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
-        this.VideoBestFrameUrl = 'VideoBestFrameUrl' in params ? params.VideoBestFrameUrl : null;
-        this.VideoBestFrameMd5 = 'VideoBestFrameMd5' in params ? params.VideoBestFrameMd5 : null;
-
-        if (params.VerificationDetailList) {
-            this.VerificationDetailList = new Array();
-            for (let z in params.VerificationDetailList) {
-                let obj = new VerificationDetail();
-                obj.deserialize(params.VerificationDetailList[z]);
-                this.VerificationDetailList.push(obj);
-            }
-        }
-        this.VideoUrl = 'VideoUrl' in params ? params.VideoUrl : null;
-        this.VideoMd5 = 'VideoMd5' in params ? params.VideoMd5 : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ChineseName = 'ChineseName' in params ? params.ChineseName : null;
+        this.FullName = 'FullName' in params ? params.FullName : null;
+        this.RegistrationNumber = 'RegistrationNumber' in params ? params.RegistrationNumber : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.Permanent = 'Permanent' in params ? params.Permanent : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.Symbol = 'Symbol' in params ? params.Symbol : null;
+        this.IssuedDate = 'IssuedDate' in params ? params.IssuedDate : null;
+        this.CurrentIssueDate = 'CurrentIssueDate' in params ? params.CurrentIssueDate : null;
+        this.HKIDVersion = 'HKIDVersion' in params ? params.HKIDVersion : null;
 
     }
 }
@@ -4827,107 +4259,6 @@ SILENT is silent mode.
         this.VideoBase64 = 'VideoBase64' in params ? params.VideoBase64 : null;
         this.LivenessType = 'LivenessType' in params ? params.LivenessType : null;
         this.ValidateData = 'ValidateData' in params ? params.ValidateData : null;
-
-    }
-}
-
-/**
- * Macao (China) IDCard
- * @class
- */
-class MacaoIDCard extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * First name
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.FirstName = null;
-
-        /**
-         * Last name
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LastName = null;
-
-        /**
-         * Birthday
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Birthday = null;
-
-        /**
-         * Expiration date
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ExpirationDate = null;
-
-        /**
-         * License number
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LicenseNumber = null;
-
-        /**
-         * Sex
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Sex = null;
-
-        /**
-         * Age
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Age = null;
-
-        /**
-         * Issued country
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.IssuedCountry = null;
-
-        /**
-         * MRZ1 on card
-Note: This field may return null, indicating that no valid values can be obtained. 
-         * @type {string || null}
-         */
-        this.Field1 = null;
-
-        /**
-         * MRZ2 on card
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Field2 = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FirstName = 'FirstName' in params ? params.FirstName : null;
-        this.LastName = 'LastName' in params ? params.LastName : null;
-        this.Birthday = 'Birthday' in params ? params.Birthday : null;
-        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
-        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
-        this.Sex = 'Sex' in params ? params.Sex : null;
-        this.Age = 'Age' in params ? params.Age : null;
-        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
-        this.Field1 = 'Field1' in params ? params.Field1 : null;
-        this.Field2 = 'Field2' in params ? params.Field2 : null;
 
     }
 }
@@ -5201,67 +4532,97 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * GetCardVerificationResult response structure.
+ * GetFaceIdResultIntl response structure.
  * @class
  */
-class GetCardVerificationResultResponse extends  AbstractModel {
+class GetFaceIdResultIntlResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Pass status. When Warning and Rejected are returned, please check the specific reasons in the WarnInfo structure return. Example values are as follows:
-PASSED
-WARNING
-REJECTED
-PROCESSING
+         * The return code of the verification result.
+0: Succeeded.
+1001: System error.
+1004: Selfie verification comparison failed.
+2004: The image passed in is too large or too small.
+2012: Several faces were detected.
+2013: No face was detected, or the face detected was incomplete.
+2014: The image resolution is too low or the quality does not meet the requirements.
+2015: Face comparison failed.
+2016: The similarity did not reach the standard passing threshold.
+-999: The verification process wasn't finished.
          * @type {string || null}
          */
-        this.Status = null;
+        this.Result = null;
 
         /**
-         * Warning information returned by document verification.
+         * The description of the verification result.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * The best frame screenshot (in Base64) obtained during the verification.
+         * @type {string || null}
+         */
+        this.BestFrame = null;
+
+        /**
+         * The video file (Base64) for verification.Used for verification, contains specific color reflection effects.
+         * @type {string || null}
+         */
+        this.Video = null;
+
+        /**
+         * Records the specific action performed by the user, used for AI Face Shield analysis.
+         * @type {string || null}
+         */
+        this.ActionVideo = null;
+
+        /**
+         * The similarity, with a value range of 0-100. A greater value indicates higher similarity. This parameter is returned only in the `compare` (selfie verification) mode.
+Note: The Similarity metric is exclusively valid for "compare" mode. In "liveness" mode, the returned Similarity value (0.0) is non-significant and should be ignored.
+         * @type {number || null}
+         */
+        this.Similarity = null;
+
+        /**
+         * The pass-through parameter.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Extra = null;
+
+        /**
+         * Describe the risk level of the device where the current request is located, with a total of 4 levels. The details are as follows:
+1 - Secure
+2 - Low Risk
+3 - Medium Risk
+4 - High Risk
+Empty - Risk level not obtained.
+Only returned for the Enhance and Plus version, with the default value being empty.
+         * @type {string || null}
+         */
+        this.DeviceInfoLevel = null;
+
+        /**
+         * Describes the detailed reason for the current liveness detection failure. Output only when SdkVersion is PLUS. Details are as follows:
+01 - User kept eyes closed throughout the process.
+02 - User failed to complete the specified action.
+03 - Suspected photo replay attack.
+04 - Suspected synthetic image.
+05 - Suspected synthetic video.
+06 - Suspected synthetic action.
+07 - Suspected fraud template.
+08 - Suspected watermark existence.
+09 - Light verification failed.
+10 - Face verification failed.
+11 - Poor face quality.
+12 - Unqualified collection quality.
+13 - Suspected adversarial sample attack.
          * @type {Array.<string> || null}
          */
-        this.WarnInfo = null;
-
-        /**
-         * Nationality code. Complies with standard ISO 3166-1 alpha-3. 
-
-Example value: IDN
-         * @type {string || null}
-         */
-        this.Nationality = null;
-
-        /**
-         * Card Type. The supported options are:
-ID_CARD
-PASSPORT
-DRIVING_LICENSE
-AUTO
-
-Example value: ID_CARD
-         * @type {string || null}
-         */
-        this.CardType = null;
-
-        /**
-         * Subtype of the ID document.
-
-         * @type {string || null}
-         */
-        this.CardSubType = null;
-
-        /**
-         * Recognition results of the ID document.
-         * @type {CardInfo || null}
-         */
-        this.CardInfo = null;
-
-        /**
-         * The token used to identify an verification process. It can be used to get the verification result after the process is completed.
-         * @type {string || null}
-         */
-        this.IDVerificationToken = null;
+        this.LivenessInfoTag = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5278,18 +4639,15 @@ Example value: ID_CARD
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.WarnInfo = 'WarnInfo' in params ? params.WarnInfo : null;
-        this.Nationality = 'Nationality' in params ? params.Nationality : null;
-        this.CardType = 'CardType' in params ? params.CardType : null;
-        this.CardSubType = 'CardSubType' in params ? params.CardSubType : null;
-
-        if (params.CardInfo) {
-            let obj = new CardInfo();
-            obj.deserialize(params.CardInfo)
-            this.CardInfo = obj;
-        }
-        this.IDVerificationToken = 'IDVerificationToken' in params ? params.IDVerificationToken : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.BestFrame = 'BestFrame' in params ? params.BestFrame : null;
+        this.Video = 'Video' in params ? params.Video : null;
+        this.ActionVideo = 'ActionVideo' in params ? params.ActionVideo : null;
+        this.Similarity = 'Similarity' in params ? params.Similarity : null;
+        this.Extra = 'Extra' in params ? params.Extra : null;
+        this.DeviceInfoLevel = 'DeviceInfoLevel' in params ? params.DeviceInfoLevel : null;
+        this.LivenessInfoTag = 'LivenessInfoTag' in params ? params.LivenessInfoTag : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5338,18 +4696,60 @@ class GenerateReflectSequenceResponse extends  AbstractModel {
 }
 
 /**
- * GetWebVerificationResultIntl request structure.
+ * Exit/entry permit (card) for traveling to and from Hong Kong (China), Macao (China), or Taiwan (China)
  * @class
  */
-class GetWebVerificationResultIntlRequest extends  AbstractModel {
+class HMTPermit extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The token for the web-based verification, which is generated using the `ApplyWebVerificationBizTokenIntl` API.
+         * Name
          * @type {string || null}
          */
-        this.BizToken = null;
+        this.Name = null;
+
+        /**
+         * English name
+         * @type {string || null}
+         */
+        this.EnglishName = null;
+
+        /**
+         * License number
+         * @type {string || null}
+         */
+        this.Number = null;
+
+        /**
+         * Gender
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Valid date
+         * @type {string || null}
+         */
+        this.ValidDate = null;
+
+        /**
+         * Issued authority
+         * @type {string || null}
+         */
+        this.IssueAuthority = null;
+
+        /**
+         * Issued address
+         * @type {string || null}
+         */
+        this.IssueAddress = null;
+
+        /**
+         * Birthday
+         * @type {string || null}
+         */
+        this.Birthday = null;
 
     }
 
@@ -5360,7 +4760,65 @@ class GetWebVerificationResultIntlRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.EnglishName = 'EnglishName' in params ? params.EnglishName : null;
+        this.Number = 'Number' in params ? params.Number : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.ValidDate = 'ValidDate' in params ? params.ValidDate : null;
+        this.IssueAuthority = 'IssueAuthority' in params ? params.IssueAuthority : null;
+        this.IssueAddress = 'IssueAddress' in params ? params.IssueAddress : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+
+    }
+}
+
+/**
+ * ApplyWebVerificationBizTokenIntl response structure.
+ * @class
+ */
+class ApplyWebVerificationBizTokenIntlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The token identifying this web-based verification process, valid for 7,200s after issuance. It is required for getting the result after the verification process is completed.
+Example: https://intl.faceid.qq.com/reflect/?token=81EEF678-28EE-4759-A82E-6CBBBE6BC442
+         * @type {string || null}
+         */
+        this.VerificationUrl = null;
+
+        /**
+         * A token that identifies a Web verification process, with a validity time of 10 minutes. after the process is complete, the token can be used to obtain the verification result.
+         * @type {string || null}
+         */
+        this.BizToken = null;
+
+        /**
+         * The verification URL to be opened with a browser to start the verification process.
+Example: https://intl.faceid.qq.com/reflect/?token=81EEF678-28EE-4759-A82E-6CBBBE6BC442
+         * @type {string || null}
+         */
+        this.VerificationURL = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VerificationUrl = 'VerificationUrl' in params ? params.VerificationUrl : null;
         this.BizToken = 'BizToken' in params ? params.BizToken : null;
+        this.VerificationURL = 'VerificationURL' in params ? params.VerificationURL : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5634,36 +5092,82 @@ class LivenessCompareResponse extends  AbstractModel {
 }
 
 /**
- * DetectAIFakeFaces response structure.
+ * Macao (China) IDCard
  * @class
  */
-class DetectAIFakeFacesResponse extends  AbstractModel {
+class MacaoIDCard extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether the detected image is an attack: Low: No attack risk Mid: Moderately suspected attack High: Highly suspected attack
+         * First name
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.AttackRiskLevel = null;
+        this.FirstName = null;
 
         /**
-         * A list of suspected attack traces detected. Note: When no attack traces are detected, an empty array is returned. This parameter is only used as a reference for result judgment. In actual applications, it is still recommended to use the result of AttackRiskLevel.
-         * @type {Array.<AttackRiskDetail> || null}
-         */
-        this.AttackRiskDetailList = null;
-
-        /**
-         * Additional Information
-         * @type {ExtraInfo || null}
-         */
-        this.ExtraInfo = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Last name
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.LastName = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Expiration date
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpirationDate = null;
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Sex
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Age
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Age = null;
+
+        /**
+         * Issued country
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedCountry = null;
+
+        /**
+         * MRZ1 on card
+Note: This field may return null, indicating that no valid values can be obtained. 
+         * @type {string || null}
+         */
+        this.Field1 = null;
+
+        /**
+         * MRZ2 on card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Field2 = null;
 
     }
 
@@ -5674,23 +5178,16 @@ class DetectAIFakeFacesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AttackRiskLevel = 'AttackRiskLevel' in params ? params.AttackRiskLevel : null;
-
-        if (params.AttackRiskDetailList) {
-            this.AttackRiskDetailList = new Array();
-            for (let z in params.AttackRiskDetailList) {
-                let obj = new AttackRiskDetail();
-                obj.deserialize(params.AttackRiskDetailList[z]);
-                this.AttackRiskDetailList.push(obj);
-            }
-        }
-
-        if (params.ExtraInfo) {
-            let obj = new ExtraInfo();
-            obj.deserialize(params.ExtraInfo)
-            this.ExtraInfo = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FirstName = 'FirstName' in params ? params.FirstName : null;
+        this.LastName = 'LastName' in params ? params.LastName : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
+        this.Field1 = 'Field1' in params ? params.Field1 : null;
+        this.Field2 = 'Field2' in params ? params.Field2 : null;
 
     }
 }
@@ -5834,68 +5331,36 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ApplyCardVerification request structure.
+ * DetectAIFakeFaces response structure.
  * @class
  */
-class ApplyCardVerificationRequest extends  AbstractModel {
+class DetectAIFakeFacesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Please select the country code of ID document.
-IDN: Indonesia
-HKG: Hong Kong
-THA: Thailand
-MYS: Malaysia
-SGP: Singapore
-JPN: Japan
-TWN:Taiwan
-BGD:Bangladesh 
-NGA:Nigeria
-PAK:Pakistan
-AUTO: Automatic Identification
+         * Whether the detected image is an attack: Low: No attack risk Mid: Moderately suspected attack High: Highly suspected attack
          * @type {string || null}
          */
-        this.Nationality = null;
+        this.AttackRiskLevel = null;
 
         /**
-         * Please select the type of ID document. The supported options are:
-ID_CARD
-PASSPORT
-DRIVING_LICENSE
-AUTO
-         * @type {string || null}
+         * A list of suspected attack traces detected. Note: When no attack traces are detected, an empty array is returned. This parameter is only used as a reference for result judgment. In actual applications, it is still recommended to use the result of AttackRiskLevel.
+         * @type {Array.<AttackRiskDetail> || null}
          */
-        this.CardType = null;
+        this.AttackRiskDetailList = null;
 
         /**
-         * Base64 value for the front of the document. Supported image formats: PNG, JPEG. 
-GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding.
-The image download takes no more than 3 seconds. Supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64 Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
-         * @type {string || null}
+         * Additional Information
+         * @type {ExtraInfo || null}
          */
-        this.ImageBase64Front = null;
+        this.ExtraInfo = null;
 
         /**
-         * Base64 value of the reverse side of the document. Supported image formats: PNG, JPEG. 
-GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ImageBase64Back = null;
-
-        /**
-         * The URL value on the back of the certificate. Supported image formats: PNG, JPEG. 
-GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
-         * @type {string || null}
-         */
-        this.ImageUrlFront = null;
-
-        /**
-         * The URL value on the back of the certificate. Supported image formats: PNG, JPEG. 
-GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
-         * @type {string || null}
-         */
-        this.ImageUrlBack = null;
+        this.RequestId = null;
 
     }
 
@@ -5906,12 +5371,23 @@ GIF format is not supported yet. Supported image size: The downloaded image cann
         if (!params) {
             return;
         }
-        this.Nationality = 'Nationality' in params ? params.Nationality : null;
-        this.CardType = 'CardType' in params ? params.CardType : null;
-        this.ImageBase64Front = 'ImageBase64Front' in params ? params.ImageBase64Front : null;
-        this.ImageBase64Back = 'ImageBase64Back' in params ? params.ImageBase64Back : null;
-        this.ImageUrlFront = 'ImageUrlFront' in params ? params.ImageUrlFront : null;
-        this.ImageUrlBack = 'ImageUrlBack' in params ? params.ImageUrlBack : null;
+        this.AttackRiskLevel = 'AttackRiskLevel' in params ? params.AttackRiskLevel : null;
+
+        if (params.AttackRiskDetailList) {
+            this.AttackRiskDetailList = new Array();
+            for (let z in params.AttackRiskDetailList) {
+                let obj = new AttackRiskDetail();
+                obj.deserialize(params.AttackRiskDetailList[z]);
+                this.AttackRiskDetailList.push(obj);
+            }
+        }
+
+        if (params.ExtraInfo) {
+            let obj = new ExtraInfo();
+            obj.deserialize(params.ExtraInfo)
+            this.ExtraInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5962,7 +5438,7 @@ Silent mode: do not pass in this parameter.
         /**
          * Optional configuration (a JSON string)
 {
-"BestFrameNum": 2  // Return multiple best screenshots. Value range: 2−10
+"BestFrameNum": 2  // Return multiple best screenshots. Value range: [2 10]
 }
          * @type {string || null}
          */
@@ -6244,18 +5720,18 @@ class DetectReflectLivenessAndCompareResponse extends  AbstractModel {
 }
 
 /**
- * GetLivenessResult request structure.
+ * GetWebVerificationResultIntl request structure.
  * @class
  */
-class GetLivenessResultRequest extends  AbstractModel {
+class GetWebVerificationResultIntlRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The token used to identify an SDK-based verification process.
+         * The token for the web-based verification, which is generated using the `ApplyWebVerificationBizTokenIntl` API.
          * @type {string || null}
          */
-        this.SdkToken = null;
+        this.BizToken = null;
 
     }
 
@@ -6266,76 +5742,7 @@ class GetLivenessResultRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SdkToken = 'SdkToken' in params ? params.SdkToken : null;
-
-    }
-}
-
-/**
- * Pakistan driving license
- * @class
- */
-class PakistanDrivingLicense extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Last name.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LastName = null;
-
-        /**
-         * First name.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.FirstName = null;
-
-        /**
-         * License number.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LicenseNumber = null;
-
-        /**
-         * Age.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Age = null;
-
-        /**
-         * Birthday.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Birthday = null;
-
-        /**
-         * Gender.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.IssuedCountry = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LastName = 'LastName' in params ? params.LastName : null;
-        this.FirstName = 'FirstName' in params ? params.FirstName : null;
-        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
-        this.Age = 'Age' in params ? params.Age : null;
-        this.Birthday = 'Birthday' in params ? params.Birthday : null;
-        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
+        this.BizToken = 'BizToken' in params ? params.BizToken : null;
 
     }
 }
@@ -6544,22 +5951,19 @@ module.exports = {
     GetLivenessResultResponse: GetLivenessResultResponse,
     GetFaceIdTokenIntlResponse: GetFaceIdTokenIntlResponse,
     InternationalIDPassport: InternationalIDPassport,
-    NigeriaDrivingLicense: NigeriaDrivingLicense,
     GetSdkVerificationResultResponse: GetSdkVerificationResultResponse,
     GetSdkVerificationResultRequest: GetSdkVerificationResultRequest,
-    DetectAIFakeFacesRequest: DetectAIFakeFacesRequest,
+    Encryption: Encryption,
     AttackRiskDetail: AttackRiskDetail,
     ExtraInfo: ExtraInfo,
     CreateUploadUrlResponse: CreateUploadUrlResponse,
     NormalMLIDCard: NormalMLIDCard,
-    ApplyCardVerificationResponse: ApplyCardVerificationResponse,
+    EditDetail: EditDetail,
     DetectReflectLivenessAndCompareRequest: DetectReflectLivenessAndCompareRequest,
     GetFaceIdTokenIntlRequest: GetFaceIdTokenIntlRequest,
     JapanIDCard: JapanIDCard,
-    EditDetail: EditDetail,
-    ApplyWebVerificationTokenResponse: ApplyWebVerificationTokenResponse,
-    NormalHKIDCard: NormalHKIDCard,
-    GetWebVerificationResultRequest: GetWebVerificationResultRequest,
+    NigeriaDrivingLicense: NigeriaDrivingLicense,
+    PakistanDrivingLicense: PakistanDrivingLicense,
     ThailandIDCard: ThailandIDCard,
     VerificationDetail: VerificationDetail,
     GetWebVerificationResultIntlResponse: GetWebVerificationResultIntlResponse,
@@ -6569,25 +5973,20 @@ module.exports = {
     IndonesiaDrivingLicense: IndonesiaDrivingLicense,
     GetFaceIdResultIntlRequest: GetFaceIdResultIntlRequest,
     NormalCardInfo: NormalCardInfo,
-    GetFaceIdResultIntlResponse: GetFaceIdResultIntlResponse,
     ApplySdkVerificationTokenRequest: ApplySdkVerificationTokenRequest,
     GenerateReflectSequenceRequest: GenerateReflectSequenceRequest,
     BangladeshIDCard: BangladeshIDCard,
-    VideoLivenessCompareResponse: VideoLivenessCompareResponse,
     PhilippinesSSSID: PhilippinesSSSID,
     CardVerifyResult: CardVerifyResult,
     TaiWanIDCard: TaiWanIDCard,
-    VideoLivenessCompareRequest: VideoLivenessCompareRequest,
-    ApplyWebVerificationTokenRequest: ApplyWebVerificationTokenRequest,
-    ApplyWebVerificationBizTokenIntlResponse: ApplyWebVerificationBizTokenIntlResponse,
+    DetectAIFakeFacesRequest: DetectAIFakeFacesRequest,
     PakistanIDCard: PakistanIDCard,
     ApplyLivenessTokenResponse: ApplyLivenessTokenResponse,
-    GetCardVerificationResultRequest: GetCardVerificationResultRequest,
+    GetLivenessResultRequest: GetLivenessResultRequest,
     CardInfo: CardInfo,
     PhilippinesVoteID: PhilippinesVoteID,
     WebVerificationConfigIntl: WebVerificationConfigIntl,
     MainlandIDCard: MainlandIDCard,
-    Encryption: Encryption,
     Address: Address,
     RetrievalLivenessExtraInfo: RetrievalLivenessExtraInfo,
     NigeriaIDCard: NigeriaIDCard,
@@ -6595,30 +5994,28 @@ module.exports = {
     CompareFaceLivenessResponse: CompareFaceLivenessResponse,
     IndonesiaIDCard: IndonesiaIDCard,
     ApplySdkVerificationTokenResponse: ApplySdkVerificationTokenResponse,
-    HMTPermit: HMTPermit,
     CreateUploadUrlRequest: CreateUploadUrlRequest,
     ApplyWebVerificationBizTokenIntlRequest: ApplyWebVerificationBizTokenIntlRequest,
-    GetWebVerificationResultResponse: GetWebVerificationResultResponse,
+    NormalHKIDCard: NormalHKIDCard,
     CompareFaceLivenessRequest: CompareFaceLivenessRequest,
-    MacaoIDCard: MacaoIDCard,
     ApplyLivenessTokenRequest: ApplyLivenessTokenRequest,
     NormalThailandIDCard: NormalThailandIDCard,
     PhilippinesDrivingLicense: PhilippinesDrivingLicense,
-    GetCardVerificationResultResponse: GetCardVerificationResultResponse,
+    GetFaceIdResultIntlResponse: GetFaceIdResultIntlResponse,
     GenerateReflectSequenceResponse: GenerateReflectSequenceResponse,
-    GetWebVerificationResultIntlRequest: GetWebVerificationResultIntlRequest,
+    HMTPermit: HMTPermit,
+    ApplyWebVerificationBizTokenIntlResponse: ApplyWebVerificationBizTokenIntlResponse,
     GeneralCard: GeneralCard,
     LivenessCompareResponse: LivenessCompareResponse,
-    DetectAIFakeFacesResponse: DetectAIFakeFacesResponse,
+    MacaoIDCard: MacaoIDCard,
     PhilippinesUMID: PhilippinesUMID,
     PhilippinesTinID: PhilippinesTinID,
-    ApplyCardVerificationRequest: ApplyCardVerificationRequest,
+    DetectAIFakeFacesResponse: DetectAIFakeFacesResponse,
     LivenessCompareRequest: LivenessCompareRequest,
     MLIDCard: MLIDCard,
     OCRResult: OCRResult,
     DetectReflectLivenessAndCompareResponse: DetectReflectLivenessAndCompareResponse,
-    GetLivenessResultRequest: GetLivenessResultRequest,
-    PakistanDrivingLicense: PakistanDrivingLicense,
+    GetWebVerificationResultIntlRequest: GetWebVerificationResultIntlRequest,
     CompareResult: CompareResult,
 
 }

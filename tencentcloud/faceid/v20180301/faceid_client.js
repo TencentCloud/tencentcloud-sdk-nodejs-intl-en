@@ -19,22 +19,19 @@ const AbstractClient = require('../../common/abstract_client')
 const GetLivenessResultResponse = models.GetLivenessResultResponse;
 const GetFaceIdTokenIntlResponse = models.GetFaceIdTokenIntlResponse;
 const InternationalIDPassport = models.InternationalIDPassport;
-const NigeriaDrivingLicense = models.NigeriaDrivingLicense;
 const GetSdkVerificationResultResponse = models.GetSdkVerificationResultResponse;
 const GetSdkVerificationResultRequest = models.GetSdkVerificationResultRequest;
-const DetectAIFakeFacesRequest = models.DetectAIFakeFacesRequest;
+const Encryption = models.Encryption;
 const AttackRiskDetail = models.AttackRiskDetail;
 const ExtraInfo = models.ExtraInfo;
 const CreateUploadUrlResponse = models.CreateUploadUrlResponse;
 const NormalMLIDCard = models.NormalMLIDCard;
-const ApplyCardVerificationResponse = models.ApplyCardVerificationResponse;
+const EditDetail = models.EditDetail;
 const DetectReflectLivenessAndCompareRequest = models.DetectReflectLivenessAndCompareRequest;
 const GetFaceIdTokenIntlRequest = models.GetFaceIdTokenIntlRequest;
 const JapanIDCard = models.JapanIDCard;
-const EditDetail = models.EditDetail;
-const ApplyWebVerificationTokenResponse = models.ApplyWebVerificationTokenResponse;
-const NormalHKIDCard = models.NormalHKIDCard;
-const GetWebVerificationResultRequest = models.GetWebVerificationResultRequest;
+const NigeriaDrivingLicense = models.NigeriaDrivingLicense;
+const PakistanDrivingLicense = models.PakistanDrivingLicense;
 const ThailandIDCard = models.ThailandIDCard;
 const VerificationDetail = models.VerificationDetail;
 const GetWebVerificationResultIntlResponse = models.GetWebVerificationResultIntlResponse;
@@ -44,25 +41,20 @@ const SingaporeIDCard = models.SingaporeIDCard;
 const IndonesiaDrivingLicense = models.IndonesiaDrivingLicense;
 const GetFaceIdResultIntlRequest = models.GetFaceIdResultIntlRequest;
 const NormalCardInfo = models.NormalCardInfo;
-const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
 const ApplySdkVerificationTokenRequest = models.ApplySdkVerificationTokenRequest;
 const GenerateReflectSequenceRequest = models.GenerateReflectSequenceRequest;
 const BangladeshIDCard = models.BangladeshIDCard;
-const VideoLivenessCompareResponse = models.VideoLivenessCompareResponse;
 const PhilippinesSSSID = models.PhilippinesSSSID;
 const CardVerifyResult = models.CardVerifyResult;
 const TaiWanIDCard = models.TaiWanIDCard;
-const VideoLivenessCompareRequest = models.VideoLivenessCompareRequest;
-const ApplyWebVerificationTokenRequest = models.ApplyWebVerificationTokenRequest;
-const ApplyWebVerificationBizTokenIntlResponse = models.ApplyWebVerificationBizTokenIntlResponse;
+const DetectAIFakeFacesRequest = models.DetectAIFakeFacesRequest;
 const PakistanIDCard = models.PakistanIDCard;
 const ApplyLivenessTokenResponse = models.ApplyLivenessTokenResponse;
-const GetCardVerificationResultRequest = models.GetCardVerificationResultRequest;
+const GetLivenessResultRequest = models.GetLivenessResultRequest;
 const CardInfo = models.CardInfo;
 const PhilippinesVoteID = models.PhilippinesVoteID;
 const WebVerificationConfigIntl = models.WebVerificationConfigIntl;
 const MainlandIDCard = models.MainlandIDCard;
-const Encryption = models.Encryption;
 const Address = models.Address;
 const RetrievalLivenessExtraInfo = models.RetrievalLivenessExtraInfo;
 const NigeriaIDCard = models.NigeriaIDCard;
@@ -70,30 +62,28 @@ const NormalIndonesiaIDCard = models.NormalIndonesiaIDCard;
 const CompareFaceLivenessResponse = models.CompareFaceLivenessResponse;
 const IndonesiaIDCard = models.IndonesiaIDCard;
 const ApplySdkVerificationTokenResponse = models.ApplySdkVerificationTokenResponse;
-const HMTPermit = models.HMTPermit;
 const CreateUploadUrlRequest = models.CreateUploadUrlRequest;
 const ApplyWebVerificationBizTokenIntlRequest = models.ApplyWebVerificationBizTokenIntlRequest;
-const GetWebVerificationResultResponse = models.GetWebVerificationResultResponse;
+const NormalHKIDCard = models.NormalHKIDCard;
 const CompareFaceLivenessRequest = models.CompareFaceLivenessRequest;
-const MacaoIDCard = models.MacaoIDCard;
 const ApplyLivenessTokenRequest = models.ApplyLivenessTokenRequest;
 const NormalThailandIDCard = models.NormalThailandIDCard;
 const PhilippinesDrivingLicense = models.PhilippinesDrivingLicense;
-const GetCardVerificationResultResponse = models.GetCardVerificationResultResponse;
+const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
 const GenerateReflectSequenceResponse = models.GenerateReflectSequenceResponse;
-const GetWebVerificationResultIntlRequest = models.GetWebVerificationResultIntlRequest;
+const HMTPermit = models.HMTPermit;
+const ApplyWebVerificationBizTokenIntlResponse = models.ApplyWebVerificationBizTokenIntlResponse;
 const GeneralCard = models.GeneralCard;
 const LivenessCompareResponse = models.LivenessCompareResponse;
-const DetectAIFakeFacesResponse = models.DetectAIFakeFacesResponse;
+const MacaoIDCard = models.MacaoIDCard;
 const PhilippinesUMID = models.PhilippinesUMID;
 const PhilippinesTinID = models.PhilippinesTinID;
-const ApplyCardVerificationRequest = models.ApplyCardVerificationRequest;
+const DetectAIFakeFacesResponse = models.DetectAIFakeFacesResponse;
 const LivenessCompareRequest = models.LivenessCompareRequest;
 const MLIDCard = models.MLIDCard;
 const OCRResult = models.OCRResult;
 const DetectReflectLivenessAndCompareResponse = models.DetectReflectLivenessAndCompareResponse;
-const GetLivenessResultRequest = models.GetLivenessResultRequest;
-const PakistanDrivingLicense = models.PakistanDrivingLicense;
+const GetWebVerificationResultIntlRequest = models.GetWebVerificationResultIntlRequest;
 const CompareResult = models.CompareResult;
 
 
@@ -107,17 +97,6 @@ class FaceidClient extends AbstractClient {
         super("faceid.intl.tencentcloudapi.com", "2018-03-01", credential, region, profile);
     }
     
-    /**
-     * The interface supports obtaining the certificate authentication result based on the token.
-     * @param {GetCardVerificationResultRequest} req
-     * @param {function(string, GetCardVerificationResultResponse):void} cb
-     * @public
-     */
-    GetCardVerificationResult(req, cb) {
-        let resp = new GetCardVerificationResultResponse();
-        this.request("GetCardVerificationResult", req, resp, cb);
-    }
-
     /**
      * This API is used to apply for a token before calling the liveness detection service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
      * @param {ApplyLivenessTokenRequest} req
@@ -177,29 +156,6 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     }
 
     /**
-     * The types of national cards supported by the API and whether instructions on the back of the card are required are as follows:  
-<table> <thead> <tr> <td>Nationality</td> <td style="width:200px">CardType</td> <td style="width:200px">Back side required</td> </tr> </thead> <tbody> <tr> <td>Indonesia</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Indonesia</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Hongkong</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Thailand</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Thailand</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Japan</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Japan</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Taiwan</td> <td>ID Card</td> <td>Yes</td> </tr>  <tr> <td>Bangladesh</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Nigeria</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Nigeria</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Pakistan</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Pakistan</td> <td>Driving License</td> <td>Yes</td> </tr> </tbody> </table>
-     * @param {ApplyCardVerificationRequest} req
-     * @param {function(string, ApplyCardVerificationResponse):void} cb
-     * @public
-     */
-    ApplyCardVerification(req, cb) {
-        let resp = new ApplyCardVerificationResponse();
-        this.request("ApplyCardVerification", req, resp, cb);
-    }
-
-    /**
-     * This API is used to pass in URLs of a video and a photo, determine whether the person in the video is real, and if yes, then determine whether the person in the video is the same as that in the photo.
-     * @param {VideoLivenessCompareRequest} req
-     * @param {function(string, VideoLivenessCompareResponse):void} cb
-     * @public
-     */
-    VideoLivenessCompare(req, cb) {
-        let resp = new VideoLivenessCompareResponse();
-        this.request("VideoLivenessCompare", req, resp, cb);
-    }
-
-    /**
      * This API is used to obtain a BizToken before each call to the Web verification service. Save the BizToken to initiate the verification process and retrieve the result upon completion. The BizToken is valid for 10 minutes.
      * @param {ApplyWebVerificationBizTokenIntlRequest} req
      * @param {function(string, ApplyWebVerificationBizTokenIntlResponse):void} cb
@@ -241,17 +197,6 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     GetFaceIdTokenIntl(req, cb) {
         let resp = new GetFaceIdTokenIntlResponse();
         this.request("GetFaceIdTokenIntl", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the verification result with the corresponding token (BizToken) after the web-based verification is completed. The BizToken is valid for three days (3*24*3,600s) after issuance and can be called multiple times.
-     * @param {GetWebVerificationResultRequest} req
-     * @param {function(string, GetWebVerificationResultResponse):void} cb
-     * @public
-     */
-    GetWebVerificationResult(req, cb) {
-        let resp = new GetWebVerificationResultResponse();
-        this.request("GetWebVerificationResult", req, resp, cb);
     }
 
     /**
@@ -308,17 +253,6 @@ The data will be stored in a COS bucket in the region specified by the parameter
     GetLivenessResult(req, cb) {
         let resp = new GetLivenessResultResponse();
         this.request("GetLivenessResult", req, resp, cb);
-    }
-
-    /**
-     * This API is used to apply for a token before calling the web-based verification service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
-     * @param {ApplyWebVerificationTokenRequest} req
-     * @param {function(string, ApplyWebVerificationTokenResponse):void} cb
-     * @public
-     */
-    ApplyWebVerificationToken(req, cb) {
-        let resp = new ApplyWebVerificationTokenResponse();
-        this.request("ApplyWebVerificationToken", req, resp, cb);
     }
 
 

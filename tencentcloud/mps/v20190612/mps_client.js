@@ -29,7 +29,7 @@ const AiAnalysisTaskVideoComprehensionResult = models.AiAnalysisTaskVideoCompreh
 const OverrideTranscodeParameter = models.OverrideTranscodeParameter;
 const AiAnalysisTaskClassificationInput = models.AiAnalysisTaskClassificationInput;
 const SvgWatermarkInput = models.SvgWatermarkInput;
-const WorkflowInfo = models.WorkflowInfo;
+const LiveStreamAiSmartSubtitleResultInfo = models.LiveStreamAiSmartSubtitleResultInfo;
 const CreateTranscodeTemplateRequest = models.CreateTranscodeTemplateRequest;
 const ProcessLiveStreamResponse = models.ProcessLiveStreamResponse;
 const LiveStreamAiQualityControlResultInfo = models.LiveStreamAiQualityControlResultInfo;
@@ -75,6 +75,7 @@ const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest
 const SmartErasePrivacyConfig = models.SmartErasePrivacyConfig;
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
 const DescribeAigcImageTaskRequest = models.DescribeAigcImageTaskRequest;
+const SyncDubbingRequest = models.SyncDubbingRequest;
 const UserDefineFaceReviewTemplateInfo = models.UserDefineFaceReviewTemplateInfo;
 const ContentReviewTemplateItem = models.ContentReviewTemplateItem;
 const ModifySmartEraseTemplateResponse = models.ModifySmartEraseTemplateResponse;
@@ -90,6 +91,7 @@ const ClassificationConfigureInfo = models.ClassificationConfigureInfo;
 const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
 const ModifyWordSampleResponse = models.ModifyWordSampleResponse;
 const AudioTemplateInfoForUpdate = models.AudioTemplateInfoForUpdate;
+const WorkflowInfo = models.WorkflowInfo;
 const ModifyProcessImageTemplateRequest = models.ModifyProcessImageTemplateRequest;
 const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
 const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
@@ -168,6 +170,7 @@ const PornAsrReviewTemplateInfoForUpdate = models.PornAsrReviewTemplateInfoForUp
 const LiveRecordTemplate = models.LiveRecordTemplate;
 const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTimeOffsetTemplatesRequest;
 const ScheduleRecognitionTaskResult = models.ScheduleRecognitionTaskResult;
+const VideoComprehensionResultItem = models.VideoComprehensionResultItem;
 const ImageProcessTaskOutput = models.ImageProcessTaskOutput;
 const ComposeTargetInfo = models.ComposeTargetInfo;
 const TaskStatData = models.TaskStatData;
@@ -194,6 +197,7 @@ const AiRecognitionTaskOcrWordsResult = models.AiRecognitionTaskOcrWordsResult;
 const PornAsrReviewTemplateInfo = models.PornAsrReviewTemplateInfo;
 const CreateAigcImageTaskResponse = models.CreateAigcImageTaskResponse;
 const ComposeVideoStream = models.ComposeVideoStream;
+const LiveSmartSubtitleResult = models.LiveSmartSubtitleResult;
 const ProhibitedAsrReviewTemplateInfoForUpdate = models.ProhibitedAsrReviewTemplateInfoForUpdate;
 const AiAnalysisTaskCutoutInput = models.AiAnalysisTaskCutoutInput;
 const ModifyAnimatedGraphicsTemplateResponse = models.ModifyAnimatedGraphicsTemplateResponse;
@@ -342,6 +346,7 @@ const DeleteAdaptiveDynamicStreamingTemplateResponse = models.DeleteAdaptiveDyna
 const LiveStreamTagRecognitionResult = models.LiveStreamTagRecognitionResult;
 const ExecuteFunctionResponse = models.ExecuteFunctionResponse;
 const AnimatedGraphicTaskInput = models.AnimatedGraphicTaskInput;
+const LiveSmartSubtitlesTaskInput = models.LiveSmartSubtitlesTaskInput;
 const MosaicInput = models.MosaicInput;
 const LiveRecordTaskInput = models.LiveRecordTaskInput;
 const AIAnalysisTemplateItem = models.AIAnalysisTemplateItem;
@@ -471,6 +476,7 @@ const AiReviewPoliticalAsrTaskOutput = models.AiReviewPoliticalAsrTaskOutput;
 const SpecificationDataItem = models.SpecificationDataItem;
 const TEHDConfigForUpdate = models.TEHDConfigForUpdate;
 const ModifyPersonSampleRequest = models.ModifyPersonSampleRequest;
+const AigcVideoReferenceVideoInfo = models.AigcVideoReferenceVideoInfo;
 const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
 const AiAnalysisTaskVideoRemakeResult = models.AiAnalysisTaskVideoRemakeResult;
 const ArtifactRepairConfig = models.ArtifactRepairConfig;
@@ -537,6 +543,7 @@ const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
 const SelectingSubtitleAreasConfig = models.SelectingSubtitleAreasConfig;
 const AiRecognitionTaskTransTextResultOutput = models.AiRecognitionTaskTransTextResultOutput;
 const SmartSubtitlesResult = models.SmartSubtitlesResult;
+const SyncDubbingResponse = models.SyncDubbingResponse;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
 const AsrHotWordsConfigure = models.AsrHotWordsConfigure;
 const ImageAreaBoxInfo = models.ImageAreaBoxInfo;
@@ -1693,6 +1700,17 @@ This API is used to create an orchestration, which is in disable status by defau
     }
 
     /**
+     * This API is used to return the clone voice type Id or synthetic audio results synchronously.
+     * @param {SyncDubbingRequest} req
+     * @param {function(string, SyncDubbingResponse):void} cb
+     * @public
+     */
+    SyncDubbing(req, cb) {
+        let resp = new SyncDubbingResponse();
+        this.request("SyncDubbing", req, resp, cb);
+    }
+
+    /**
      * This API is used to query custom watermarking templates and supports paged queries by filters.
      * @param {DescribeWatermarkTemplatesRequest} req
      * @param {function(string, DescribeWatermarkTemplatesResponse):void} cb
@@ -1815,15 +1833,15 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
-     * This API is used to initiate live stream processing tasks. Such tasks may include the following:
+     * This API is used to initiate a processing task for live streaming. Features include:.
 
-* Intelligent content moderation (detection of pornographic content in images and audio, detection of sensitive information)
-* Intelligent content recognition (face, full text, text keyword, full speech, speech keyword, real-time speech translation, object recognition, game event tracking)
-* Intelligent content analysis (real-time news splitting)
-* Quality control, including recognizing live stream format, checking audio/video content for flickering, blur, low light, overexposure, black bars, white bars, black screen, white screen, noise, pixelation, QR code, etc., and no-reference scoring.
-* Recording
+Intelligent content moderation (porn detection in images, sensitive information detection, audio pornography detection);.
+* Smart content recognition (human faces, full texts, text keywords, full speech, speech keywords, real-time speech translation, object recognition, game tagging).
+Intelligent content analysis (clipping, highlights).
+Quality inspection (live stream format diagnosis, audio and video content detection (jitter, blur, low light, overexposure, black and white edges, black and white screens, screen glitch, noise, mosaic, QR code, and more), and no-reference scoring).
+recording.
 
-HTTP callbacks are supported for live stream processing events. Notifications can also be written in real time to and read from a CMQ queue. The output files of processing tasks are saved to the storage you specify.
+Live stream processing event notification supports HTTP callback and also supports real-time writing to user-specified TDMQ CMQ. Users obtain event notification results from TDMQ CMQ. Meanwhile, if output files exist during the process, they will be written to the target storage specified by the user.
      * @param {ProcessLiveStreamRequest} req
      * @param {function(string, ProcessLiveStreamResponse):void} cb
      * @public

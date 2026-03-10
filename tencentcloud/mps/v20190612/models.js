@@ -865,103 +865,18 @@ Default value: 0 px.
 }
 
 /**
- * Workflow information details.
+ * Smart subtitle task result for live stream.
  * @class
  */
-class WorkflowInfo extends  AbstractModel {
+class LiveStreamAiSmartSubtitleResultInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Workflow ID.
-         * @type {number || null}
+         * Live stream smart subtitling task result list.
+         * @type {Array.<LiveSmartSubtitleResult> || null}
          */
-        this.WorkflowId = null;
-
-        /**
-         * Workflow name.
-         * @type {string || null}
-         */
-        this.WorkflowName = null;
-
-        /**
-         * Workflow status. Valid values:
-<li>Enabled: Enabled,</li>
-<li>Disabled: Disabled.</li>
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Input rule bound to a workflow. If an uploaded video hits the rule for the object, the workflow will be triggered.
-         * @type {WorkflowTrigger || null}
-         */
-        this.Trigger = null;
-
-        /**
-         * The location to save the media processing output file.
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {TaskOutputStorage || null}
-         */
-        this.OutputStorage = null;
-
-        /**
-         * The media processing parameters to use.
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {MediaProcessTaskInput || null}
-         */
-        this.MediaProcessTask = null;
-
-        /**
-         * Type parameter of a video content audit task.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {AiContentReviewTaskInput || null}
-         */
-        this.AiContentReviewTask = null;
-
-        /**
-         * Video content analysis task parameter.
-         * @type {AiAnalysisTaskInput || null}
-         */
-        this.AiAnalysisTask = null;
-
-        /**
-         * Type parameter of a video content recognition task.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {AiRecognitionTaskInput || null}
-         */
-        this.AiRecognitionTask = null;
-
-        /**
-         * Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {TaskNotifyConfig || null}
-         */
-        this.TaskNotifyConfig = null;
-
-        /**
-         * Task flow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
-         * @type {number || null}
-         */
-        this.TaskPriority = null;
-
-        /**
-         * The directory to save the media processing output file, such as `/movie/201907/`.
-         * @type {string || null}
-         */
-        this.OutputDir = null;
-
-        /**
-         * Creation time of a workflow in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Last modified time of a workflow in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
+        this.SmartSubtitleResult = null;
 
     }
 
@@ -972,55 +887,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.WorkflowId = 'WorkflowId' in params ? params.WorkflowId : null;
-        this.WorkflowName = 'WorkflowName' in params ? params.WorkflowName : null;
-        this.Status = 'Status' in params ? params.Status : null;
 
-        if (params.Trigger) {
-            let obj = new WorkflowTrigger();
-            obj.deserialize(params.Trigger)
-            this.Trigger = obj;
+        if (params.SmartSubtitleResult) {
+            this.SmartSubtitleResult = new Array();
+            for (let z in params.SmartSubtitleResult) {
+                let obj = new LiveSmartSubtitleResult();
+                obj.deserialize(params.SmartSubtitleResult[z]);
+                this.SmartSubtitleResult.push(obj);
+            }
         }
-
-        if (params.OutputStorage) {
-            let obj = new TaskOutputStorage();
-            obj.deserialize(params.OutputStorage)
-            this.OutputStorage = obj;
-        }
-
-        if (params.MediaProcessTask) {
-            let obj = new MediaProcessTaskInput();
-            obj.deserialize(params.MediaProcessTask)
-            this.MediaProcessTask = obj;
-        }
-
-        if (params.AiContentReviewTask) {
-            let obj = new AiContentReviewTaskInput();
-            obj.deserialize(params.AiContentReviewTask)
-            this.AiContentReviewTask = obj;
-        }
-
-        if (params.AiAnalysisTask) {
-            let obj = new AiAnalysisTaskInput();
-            obj.deserialize(params.AiAnalysisTask)
-            this.AiAnalysisTask = obj;
-        }
-
-        if (params.AiRecognitionTask) {
-            let obj = new AiRecognitionTaskInput();
-            obj.deserialize(params.AiRecognitionTask)
-            this.AiRecognitionTask = obj;
-        }
-
-        if (params.TaskNotifyConfig) {
-            let obj = new TaskNotifyConfig();
-            obj.deserialize(params.TaskNotifyConfig)
-            this.TaskNotifyConfig = obj;
-        }
-        this.TaskPriority = 'TaskPriority' in params ? params.TaskPriority : null;
-        this.OutputDir = 'OutputDir' in params ? params.OutputDir : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -1151,7 +1026,7 @@ class ProcessLiveStreamResponse extends  AbstractModel {
         super();
 
         /**
-         * Task ID
+         * <p>Task ID.</p>
          * @type {string || null}
          */
         this.TaskId = null;
@@ -1731,7 +1606,7 @@ Note: The HLS segment format for adaptive bitrate streaming is based on this fie
 }
 
 /**
- * Intelligent video editing result.
+ * AI narration and video re-creation result info.
  * @class
  */
 class AiAnalysisTaskReelOutput extends  AbstractModel {
@@ -1739,10 +1614,20 @@ class AiAnalysisTaskReelOutput extends  AbstractModel {
         super();
 
         /**
-         * Path of the edited video.
+         * Path of the output video.
          * @type {string || null}
          */
         this.VideoPath = null;
+
+        /**
+         * Path list of the output videos.
+
+**Note**:.
+1. when returning a file, `VideoPath` returns a file path, and `VideoPaths` likewise populates an element with the same path.
+2. when multiple files are returned, `VideoPath` returns an empty string, and `VideoPaths` returns the file path list.
+         * @type {Array.<string> || null}
+         */
+        this.VideoPaths = null;
 
         /**
          * Script file path.
@@ -1752,7 +1637,7 @@ class AiAnalysisTaskReelOutput extends  AbstractModel {
         this.ScriptPath = null;
 
         /**
-         * Storage location of the edited video.
+         * Storage location of the output video.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -1767,6 +1652,7 @@ class AiAnalysisTaskReelOutput extends  AbstractModel {
             return;
         }
         this.VideoPath = 'VideoPath' in params ? params.VideoPath : null;
+        this.VideoPaths = 'VideoPaths' in params ? params.VideoPaths : null;
         this.ScriptPath = 'ScriptPath' in params ? params.ScriptPath : null;
 
         if (params.OutputStorage) {
@@ -3989,6 +3875,112 @@ class DescribeAigcImageTaskRequest extends  AbstractModel {
 }
 
 /**
+ * SyncDubbing request structure.
+ * @class
+ */
+class SyncDubbingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Text for the synthesis. This is required for text to speech. The text cannot exceed 2000 characters in length.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Text language. This defaults to zh (Chinese) if left empty.
+Supported languages:
+zh: Chinese.
+en: English.
+ja: Japanese.
+de: German.
+fr: French.
+ko: Korean.
+ru: Russian.
+uk: Ukrainian.
+pt: Portuguese.
+it: Italian.
+es: Spanish.
+id: Indonesian.
+nl: Dutch.
+tr: Turkish.
+fil: Filipino.
+ms: Malay.
+el: Greek.
+fi: Finnish.
+hr: Croatian.
+sk: Slovak.
+pl: Polish.
+sv: Swedish.
+hi: Hindi.
+bg: Bulgarian.
+ro: Romanian.
+ar: Arabic.
+cs: Czech.
+da: Danish.
+ta: Tamil.
+hun: Hungarian.
+vi: Vietnamese.
+no: Norwegian.
+yue: Cantonese.
+th: Thai.
+he: Hebrew.
+ca: Catalan.
+nn: Nynorsk.
+af: Afrikaans.
+fa: Persian.
+sl: Slovenian.
+
+         * @type {string || null}
+         */
+        this.TextLang = null;
+
+        /**
+         * Voice type ID. This is required for synthesis with a specific voice type. System voice types and voice type cloning are supported.
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
+         * Base64-encoded audio for cloning.
+         * @type {string || null}
+         */
+        this.AudioData = null;
+
+        /**
+         * Cloning audio language. The default language is Chinese.
+Supported languages are the same as those for TextLang.
+         * @type {string || null}
+         */
+        this.AudioLang = null;
+
+        /**
+         * Extended parameters in the format of a JSON string.
+         * @type {string || null}
+         */
+        this.ExtParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.TextLang = 'TextLang' in params ? params.TextLang : null;
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.AudioData = 'AudioData' in params ? params.AudioData : null;
+        this.AudioLang = 'AudioLang' in params ? params.AudioLang : null;
+        this.ExtParam = 'ExtParam' in params ? params.ExtParam : null;
+
+    }
+}
+
+/**
  * Control parameter of a custom figure audit task
  * @class
  */
@@ -4940,6 +4932,167 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Workflow information details.
+ * @class
+ */
+class WorkflowInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Workflow ID.
+         * @type {number || null}
+         */
+        this.WorkflowId = null;
+
+        /**
+         * Workflow name.
+         * @type {string || null}
+         */
+        this.WorkflowName = null;
+
+        /**
+         * Workflow status. Valid values:
+<li>Enabled: Enabled,</li>
+<li>Disabled: Disabled.</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Input rule bound to a workflow. If an uploaded video hits the rule for the object, the workflow will be triggered.
+         * @type {WorkflowTrigger || null}
+         */
+        this.Trigger = null;
+
+        /**
+         * The location to save the media processing output file.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * The media processing parameters to use.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {MediaProcessTaskInput || null}
+         */
+        this.MediaProcessTask = null;
+
+        /**
+         * Type parameter of a video content audit task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AiContentReviewTaskInput || null}
+         */
+        this.AiContentReviewTask = null;
+
+        /**
+         * Video content analysis task parameter.
+         * @type {AiAnalysisTaskInput || null}
+         */
+        this.AiAnalysisTask = null;
+
+        /**
+         * Type parameter of a video content recognition task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AiRecognitionTaskInput || null}
+         */
+        this.AiRecognitionTask = null;
+
+        /**
+         * Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {TaskNotifyConfig || null}
+         */
+        this.TaskNotifyConfig = null;
+
+        /**
+         * Task flow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+         * @type {number || null}
+         */
+        this.TaskPriority = null;
+
+        /**
+         * The directory to save the media processing output file, such as `/movie/201907/`.
+         * @type {string || null}
+         */
+        this.OutputDir = null;
+
+        /**
+         * Creation time of a workflow in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified time of a workflow in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WorkflowId = 'WorkflowId' in params ? params.WorkflowId : null;
+        this.WorkflowName = 'WorkflowName' in params ? params.WorkflowName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.Trigger) {
+            let obj = new WorkflowTrigger();
+            obj.deserialize(params.Trigger)
+            this.Trigger = obj;
+        }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+
+        if (params.MediaProcessTask) {
+            let obj = new MediaProcessTaskInput();
+            obj.deserialize(params.MediaProcessTask)
+            this.MediaProcessTask = obj;
+        }
+
+        if (params.AiContentReviewTask) {
+            let obj = new AiContentReviewTaskInput();
+            obj.deserialize(params.AiContentReviewTask)
+            this.AiContentReviewTask = obj;
+        }
+
+        if (params.AiAnalysisTask) {
+            let obj = new AiAnalysisTaskInput();
+            obj.deserialize(params.AiAnalysisTask)
+            this.AiAnalysisTask = obj;
+        }
+
+        if (params.AiRecognitionTask) {
+            let obj = new AiRecognitionTaskInput();
+            obj.deserialize(params.AiRecognitionTask)
+            this.AiRecognitionTask = obj;
+        }
+
+        if (params.TaskNotifyConfig) {
+            let obj = new TaskNotifyConfig();
+            obj.deserialize(params.TaskNotifyConfig)
+            this.TaskNotifyConfig = obj;
+        }
+        this.TaskPriority = 'TaskPriority' in params ? params.TaskPriority : null;
+        this.OutputDir = 'OutputDir' in params ? params.OutputDir : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
  * ModifyProcessImageTemplate request structure.
  * @class
  */
@@ -5072,12 +5225,13 @@ class ParseLiveStreamProcessNotificationResponse extends  AbstractModel {
         super();
 
         /**
-         * Live stream processing result type. Valid values:
-<li>AiReviewResult: content review result.</li>
-<li>AiRecognitionResult: content recognition result.</li>
-<li>LiveRecordResult: live streaming recording result.</li>
-<li>AiQualityControlResult: media live quality control result.</li>
-<li>AiAnalysisResult: content analysis result.</li>
+         * Live stream processing result type, including:.
+<Li>AiReviewResult: content moderation result;</li>.
+<Li>AiRecognitionResult: content recognition result;</li>.
+<Li>LiveRecordResult: live streaming result;</li>.
+<Li>AiQualityControlResult: media quality inspection result.</li>.
+<Li>AiAnalysisResult: content analysis result.</li>.
+<Li>AiSmartSubtitleResult: smart subtitle result.</li>.
 <li>ProcessEof: end of live stream processing.</li>
          * @type {string || null}
          */
@@ -5127,6 +5281,12 @@ Note: when this field return null, means no valid values can be obtained.
          * @type {LiveStreamRecordResultInfo || null}
          */
         this.LiveRecordResultInfo = null;
+
+        /**
+         * Smart subtitle result. valid when NotificationType is AiSmartSubtitleResult.
+         * @type {LiveStreamAiSmartSubtitleResultInfo || null}
+         */
+        this.AiSmartSubtitleResultInfo = null;
 
         /**
          * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
@@ -5204,6 +5364,12 @@ Note: when this field return null, means no valid values can be obtained.
             let obj = new LiveStreamRecordResultInfo();
             obj.deserialize(params.LiveRecordResultInfo)
             this.LiveRecordResultInfo = obj;
+        }
+
+        if (params.AiSmartSubtitleResultInfo) {
+            let obj = new LiveStreamAiSmartSubtitleResultInfo();
+            obj.deserialize(params.AiSmartSubtitleResultInfo)
+            this.AiSmartSubtitleResultInfo = obj;
         }
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
@@ -7942,8 +8108,7 @@ class CreateAigcVideoTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * ID of the successfully created task.
-The task progress and generation results can be obtained by calling the query API.
+         * <p>Returned task ID after the task is created successfully.<br>The task progress and generation results can be obtained by calling the query API.</p>
          * @type {string || null}
          */
         this.TaskId = null;
@@ -8263,6 +8428,15 @@ class CreateBlindWatermarkTemplateRequest extends  AbstractModel {
          */
         this.Comment = null;
 
+        /**
+         * Digital watermark strength.
+default: default, balance between high-definition quality and resilience.
+stronger: clear image quality, strong resilience.
+strongest: normal video quality, highest resilience.
+         * @type {string || null}
+         */
+        this.Strength = null;
+
     }
 
     /**
@@ -8276,6 +8450,7 @@ class CreateBlindWatermarkTemplateRequest extends  AbstractModel {
         this.TextContent = 'TextContent' in params ? params.TextContent : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Strength = 'Strength' in params ? params.Strength : null;
 
     }
 }
@@ -8863,7 +9038,7 @@ class EditMediaResponse extends  AbstractModel {
         super();
 
         /**
-         * Video editing task ID, which can be used to query the status of an editing task.
+         * <p>Video editing task ID. This can be used to query the task status.</p>
          * @type {string || null}
          */
         this.TaskId = null;
@@ -9312,6 +9487,63 @@ class ScheduleRecognitionTaskResult extends  AbstractModel {
         }
         this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
         this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+
+    }
+}
+
+/**
+ * Video shot understanding result.
+ * @class
+ */
+class VideoComprehensionResultItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Segment start time (unit: seconds).
+
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Segment end time (unit: s).
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Video clip title.
+         * @type {string || null}
+         */
+        this.Title = null;
+
+        /**
+         * Storyboard clip information description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Scene clip keywords.
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Title = 'Title' in params ? params.Title : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
 
     }
 }
@@ -10830,6 +11062,87 @@ If not set, the service will automatically adopt a suitable bitrate based on the
 }
 
 /**
+ * Smart subtitle task result for live stream.
+ * @class
+ */
+class LiveSmartSubtitleResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Recognized text.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Translate the starting PTS time of a segment, in seconds.
+         * @type {number || null}
+         */
+        this.StartPTSTime = null;
+
+        /**
+         * End PTS time of a translated segment, in seconds.
+         * @type {number || null}
+         */
+        this.EndPTSTime = null;
+
+        /**
+         * Translated text.
+         * @type {string || null}
+         */
+        this.Trans = null;
+
+        /**
+         * Translation started at UTC time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Translation ends at UTC time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Steady-State tag.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.SteadyState = null;
+
+        /**
+         * websocket and trtc real-time translation UserId.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.StartPTSTime = 'StartPTSTime' in params ? params.StartPTSTime : null;
+        this.EndPTSTime = 'EndPTSTime' in params ? params.EndPTSTime : null;
+        this.Trans = 'Trans' in params ? params.Trans : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SteadyState = 'SteadyState' in params ? params.SteadyState : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
  * Control parameter of prohibited information detection in speech task
  * @class
  */
@@ -11119,6 +11432,12 @@ class ScheduleQualityControlTaskResult extends  AbstractModel {
          */
         this.Output = null;
 
+        /**
+         * Task execution progress.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
     }
 
     /**
@@ -11144,6 +11463,7 @@ class ScheduleQualityControlTaskResult extends  AbstractModel {
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+        this.Progress = 'Progress' in params ? params.Progress : null;
 
     }
 }
@@ -11359,63 +11679,64 @@ class EditMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * Information of input video file.
+         * <p>Input video file information.</p>
          * @type {Array.<EditMediaFileInfo> || null}
          */
         this.FileInfos = null;
 
         /**
-         * The storage location of the media processing output file.
+         * <p>Target storage for the output file of the media processing task.</p>
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * The path to save the media processing output file.
-
-Note: For complex compositing tasks, the filename can be up to 64 characters long and can only contain digits, letters, and special characters -_
-
+         * <p>Target path for the output file of the media processing task.</p><p>Note: For a complex compositing task, the file name in the path can contain only digits, letters, hyphens (-), and underscores (_), with a maximum of 64 characters.</p>
          * @type {string || null}
          */
         this.OutputObjectPath = null;
 
         /**
-         * The output settings for a video clipping task.
+         * <p>Configuration of the file generated by the [editing] task.</p>
          * @type {EditMediaOutputConfig || null}
          */
         this.OutputConfig = null;
 
         /**
-         * The settings for a video compositing task.
-
-Note: If this parameter is not empty, the task is a video compositing task. Otherwise, the task is a video clipping task.
+         * <p>[Compositing] task configuration.</p><p>Note: If this is not empty, the task is a compositing task. Otherwise, the task is an editing task.</p>
          * @type {ComposeMediaConfig || null}
          */
         this.ComposeConfig = null;
 
         /**
-         * Event notification information of task. If this parameter is left empty, no event notifications will be obtained.
+         * <p>Event notification information of the task. If this is not specified, no event notification is obtained.</p>
          * @type {TaskNotifyConfig || null}
          */
         this.TaskNotifyConfig = null;
 
         /**
-         * Task priority. The higher the value, the higher the priority. Value range: -10 - 10. If this parameter is left empty, 0 will be used.
+         * <p>Task priority. The higher the value, the higher the priority. The value range is from -10 to 10. If this is not specified, the default value is 0.</p>
          * @type {number || null}
          */
         this.TasksPriority = null;
 
         /**
-         * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+         * <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
          * @type {string || null}
          */
         this.SessionId = null;
 
         /**
-         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+         * <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
          * @type {string || null}
          */
         this.SessionContext = null;
+
+        /**
+         * <p>Resource ID. The resource needs to be enabled. The default value is the account's primary resource ID.</p>
+         * @type {string || null}
+         */
+        this.ResourceId = null;
 
     }
 
@@ -11463,6 +11784,7 @@ Note: If this parameter is not empty, the task is a video compositing task. Othe
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }
@@ -13625,8 +13947,8 @@ class BatchProcessMediaRequest extends  AbstractModel {
         this.InputInfo = null;
 
         /**
-         * Storage bucket for the output file. If it is left blank, the storage location in InputInfo will be inherited.
-Note: When InputInfo.Type is URL, this parameter is required.
+         * Specifies the target storage for the output file of media processing service (mps). if left empty, it inherits the storage location in InputInfo.
+Note: when InputInfo.Type is URL, this parameter is required. currently only support COS output.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -13663,7 +13985,7 @@ If left blank, it indicates that the directory is the same as the one where the 
         this.SessionContext = null;
 
         /**
-         * Resource ID. Ensure the corresponding resource is in the enabled state. The default value is an account's primary resource ID.
+         * Resource ID. Ensure that the corresponding resource is enabled. The default value is the primary resource ID of the account.
          * @type {string || null}
          */
         this.ResourceId = null;
@@ -16229,91 +16551,91 @@ class CreateAigcVideoTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * Model name.
-Supported models:Hunyuan,
-Hailuo,
-Kling,
-Vidu,
-OS,
-GV.
+         * <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>OS.<br>GV.</p>
          * @type {string || null}
          */
         this.ModelName = null;
 
         /**
-         * Specific version number of the model. By default, the system uses the supported stable version of the model.1. Hailuo: [02 and 2.3].2. Kling: [2.0, 2.1, 2.5, O1, and 2.6].3. Vidu: [q2, q2-pro, and q2-turbo].4. GV: [3.1].5. OS: [2.0].
+         * <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hailuo: [02 and 2.3].</li><li>Kling: [2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, and q3-turbo].</li><li>GV: [3.1].</li><li>OS: [2.0].</li></ol>
          * @type {string || null}
          */
         this.ModelVersion = null;
 
         /**
-         * Scenario for the generated video.Note: Not all models support scenarios.1. Kling supports motion control (motion_control).2. Mingmou supports landscape-to-portrait conversion (land2port).3. Vidu supports special effect templates (template_effect).
+         * <p>Scenario for the generated video.<br>Note: Not all models support scenarios.</p><ol><li>Kling supports motion control (motion_control).</li><li>Mingmou supports landscape-to-portrait conversion (land2port).</li><li>Vidu supports special effect templates (template_effect).</li></ol>
          * @type {string || null}
          */
         this.SceneType = null;
 
         /**
-         * Description of the generated video. (Note: A maximum of 2000 characters is supported.) This parameter is required when no reference image is specified.
+         * <p>Description of the generated video. (Note: A maximum of 2000 characters is supported.) This parameter is required when no reference image is specified.</p>
          * @type {string || null}
          */
         this.Prompt = null;
 
         /**
-         * Content you want to prevent the model from generating.Note: Not all models support this.For example:Top lighting and bright color.People and animals.Multiple vehicles and wind.
+         * <p>Specifies the content you want to prevent the model from generating.<br>Note: Not all models support this.<br>For example:<br>Top lighting and bright colors.<br>People and animals.<br>Multiple vehicles and wind.</p>
          * @type {string || null}
          */
         this.NegativePrompt = null;
 
         /**
-         * The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.
+         * <p>The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
          * @type {boolean || null}
          */
         this.EnhancePrompt = null;
 
         /**
-         * Image URL for video generation. The URL must be accessible from the public network.Note:1. The recommended image size is no more than 10 MB. Different models have different size limits.2. Supported image formats: JPEG and PNG.3. If the OS model is used, the input image dimension should be 1280x720 or 720x1280.
+         * <p>Image URL for video generation. The URL must be accessible from the public network.<br>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different size limits.</li><li>Supported image formats: JPEG and PNG.</li><li>If the OS model is used, the input image dimension should be 1280x720 or 720x1280.</li></ol>
          * @type {string || null}
          */
         this.ImageUrl = null;
 
         /**
-         * The model will generate a video using the image of this parameter as the ending frame.Models that support this parameter:1. GV. If the ending frame image is specified, ImageUrl is required as the starting frame.2. Kling. Version 2.1 supports starting and ending frames with a resolution of 1080P.3. Vidu. q2-pro and q2-turbo support starting and ending frames.Note:1. The recommended image size is no more than 10 MB. Different models have different limits.2. Supported image formats: JPEG and PNG.
+         * <p>The model will generate a video using the image of this parameter as the ending frame.<br>Models that support this parameter:</p><ol><li>GV. If the ending frame image is specified, ImageUrl is required as the starting frame.</li><li>Kling. Version 2.1 supports starting and ending frames with a resolution of 1080P.</li><li>Vidu. q2-pro and q2-turbo support starting and ending frames.</li></ol><p>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different limits.</li><li>Supported image formats: JPEG and PNG.</li></ol>
          * @type {string || null}
          */
         this.LastImageUrl = null;
 
         /**
-         * List of up to 3 asset images, used to describe the images the model should use for video generation.Model that supports multiple images:1. GV. If multiple images are specified, ImageUrl and LastImageUrl are unavailable.2. Vidu supports video generation with multiple reference images. The q2 model accepts 1 to 7 images. The ReferenceType in ImageInfos can be used to specify the subject ID for the input.Note:1. The image size cannot exceed 10 MB.2. Supported image formats: JPEG and PNG.
+         * <p>List of up to 3 asset images, used to describe the images the model should use for video generation.</p><p>Model that supports multiple images:</p><ol><li>GV. If multiple images are specified, ImageUrl and LastImageUrl are unavailable.</li><li>Vidu supports video generation with multiple reference images. The q2 model accepts 1 to 7 images. The ReferenceType in ImageInfos can be used to specify the subject ID for the input.</li></ol><p>Note:</p><ol><li>The image size cannot exceed 10 MB.</li><li>Supported image formats: JPEG and PNG.</li></ol>
          * @type {Array.<AigcVideoReferenceImageInfo> || null}
          */
         this.ImageInfos = null;
 
         /**
-         * Duration of the generated video.Note:1. Kling supports 5 and 10 seconds. Default value: 5 seconds.2. The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.3. Vidu supports 1 to 10 seconds.4. GV supports 8 seconds. Default value: 8 seconds.5. OS supports 4, 8, and 12 seconds. Default value: 8 seconds.
+         * <p>Only Kling O1 supports reference video information.<br>This can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.</p>
+         * @type {Array.<AigcVideoReferenceVideoInfo> || null}
+         */
+        this.VideoInfos = null;
+
+        /**
+         * <p>Duration of the generated video.<br>Note:</p><ol><li>Kling supports 5 and 10 seconds. Default value: 5 seconds.</li><li>The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.</li><li>Vidu supports 1 to 10 seconds.</li><li>GV supports 8 seconds. Default value: 8 seconds.</li><li>OS supports 4, 8, and 12 seconds. Default value: 8 seconds.</li></ol>
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
-         * Additional parameters required.
+         * <p>Additional parameters required.</p>
          * @type {AigcVideoExtraParam || null}
          */
         this.ExtraParameters = null;
 
         /**
-         * COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.
+         * <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
          * @type {AigcStoreCosParam || null}
          */
         this.StoreCosParam = null;
 
         /**
-         * Special scenario parameters required by the model, formatted as a JSON serialized string.Example:{\"camera_control\":{\"type\":\"simple\"}}
+         * <p>Special scenario parameters required by the model, formatted as a JSON serialized string.<br>Example:<br>{"camera_control":{"type":"simple"}}.</p>
          * @type {string || null}
          */
         this.AdditionalParameters = null;
 
         /**
-         * API operator name.
+         * <p>API operator name.</p>
          * @type {string || null}
          */
         this.Operator = null;
@@ -16342,6 +16664,15 @@ GV.
                 let obj = new AigcVideoReferenceImageInfo();
                 obj.deserialize(params.ImageInfos[z]);
                 this.ImageInfos.push(obj);
+            }
+        }
+
+        if (params.VideoInfos) {
+            this.VideoInfos = new Array();
+            for (let z in params.VideoInfos) {
+                let obj = new AigcVideoReferenceVideoInfo();
+                obj.deserialize(params.VideoInfos[z]);
+                this.VideoInfos.push(obj);
             }
         }
         this.Duration = 'Duration' in params ? params.Duration : null;
@@ -16982,6 +17313,15 @@ class ModifyBlindWatermarkTemplateRequest extends  AbstractModel {
          */
         this.TextContent = null;
 
+        /**
+         * Digital watermark strength. 
+default: default, balance between high-definition quality and resilience. 
+stronger: clear image quality, strong resilience. 
+strongest: normal video quality, strongest resilience.
+         * @type {string || null}
+         */
+        this.Strength = null;
+
     }
 
     /**
@@ -16995,6 +17335,7 @@ class ModifyBlindWatermarkTemplateRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.TextContent = 'TextContent' in params ? params.TextContent : null;
+        this.Strength = 'Strength' in params ? params.Strength : null;
 
     }
 }
@@ -19832,6 +20173,15 @@ class BlindWatermarkTemplate extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * Digital watermark strength. 
+default: default, balance between hd video quality and resilience. 
+stronger: clear image quality, strong resilience. 
+strongest: normal video quality, strongest resilience.
+         * @type {string || null}
+         */
+        this.Strength = null;
+
     }
 
     /**
@@ -19848,6 +20198,7 @@ class BlindWatermarkTemplate extends  AbstractModel {
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Strength = 'Strength' in params ? params.Strength : null;
 
     }
 }
@@ -20235,6 +20586,41 @@ If left empty, a relative path is used by default: `{inputName}_animatedGraphic_
             this.OutputStorage = obj;
         }
         this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
+
+    }
+}
+
+/**
+ * Live stream smart subtitle input struct.
+ * @class
+ */
+class LiveSmartSubtitlesTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Smart subtitle template ID.	
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * User extension field, which does not need to be filled in for general scenarios.
+         * @type {string || null}
+         */
+        this.UserExtPara = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.UserExtPara = 'UserExtPara' in params ? params.UserExtPara : null;
 
     }
 }
@@ -21420,6 +21806,12 @@ class CreateProcessImageTemplateRequest extends  AbstractModel {
          */
         this.Comment = null;
 
+        /**
+         * Extended parameters for the image processing template.
+         * @type {string || null}
+         */
+        this.StdExtInfo = null;
+
     }
 
     /**
@@ -21437,6 +21829,7 @@ class CreateProcessImageTemplateRequest extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.StdExtInfo = 'StdExtInfo' in params ? params.StdExtInfo : null;
 
     }
 }
@@ -21661,13 +22054,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.VideoComprehensionTask = null;
 
         /**
-         * Query result of a video matting task for video analysis, which is valid if the task type is Cutout.Note: This field may return null, indicating that no valid values can be obtained.
+         * Query result of video content analysis intelligent image masking task. valid when task type is Cutout.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AiAnalysisTaskCutoutResult || null}
          */
         this.CutoutTask = null;
 
         /**
-         * Query result of a video editing task for video analysis, which is valid if the task type is Reel.Note: This field may return null, indicating that no valid values can be obtained.
+         * Query result of the video content analysis AI narration and video re-creation task. valid when the task type is Reel.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AiAnalysisTaskReelResult || null}
          */
         this.ReelTask = null;
@@ -22091,7 +22486,7 @@ class AiRecognitionTaskOcrWordsResultItem extends  AbstractModel {
 }
 
 /**
- * Type of the intelligent video editing result.
+ * AI narration and video re-creation result type.
  * @class
  */
 class AiAnalysisTaskReelResult extends  AbstractModel {
@@ -22117,13 +22512,14 @@ class AiAnalysisTaskReelResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of the intelligent video editing task.
+         * AI narration and video re-creation task input.
          * @type {AiAnalysisTaskReelInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of the intelligent video editing task.Note: This field may return null, indicating that no valid values can be obtained.
+         * AI narration and video re-creation task output.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AiAnalysisTaskReelOutput || null}
          */
         this.Output = null;
@@ -22246,6 +22642,12 @@ The image template feature is in beta testing. If you want to use it, submit a t
          */
         this.ImageTask = null;
 
+        /**
+         * Extended parameters for image processing.
+         * @type {string || null}
+         */
+        this.StdExtInfo = null;
+
     }
 
     /**
@@ -22277,6 +22679,7 @@ The image template feature is in beta testing. If you want to use it, submit a t
             obj.deserialize(params.ImageTask)
             this.ImageTask = obj;
         }
+        this.StdExtInfo = 'StdExtInfo' in params ? params.StdExtInfo : null;
 
     }
 }
@@ -23814,7 +24217,7 @@ class TaskStatDataItem extends  AbstractModel {
         super();
 
         /**
-         * Start time of the time interval where the data resides. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). For example, when the time granularity is day, 2018-12-01T00:00:00+08:00 indicates the interval from December 1, 2018 (inclusive) to December 2, 2018 (exclusive).
+         * The start time of the time interval where the data resides, using the ISO date format. for example, when the time granularity is day, 2018-12-01T00:00:00+08:00 indicates the interval from december 1, 2018 (inclusive) to december 2, 2018 (exclusive).
          * @type {string || null}
          */
         this.Time = null;
@@ -24839,34 +25242,50 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SubtitleFileInput = null;
 
         /**
-         * Font type. valid values:.
-<li>hei.ttf: simhei.</li>.
-<li>song.ttf: simsun.</li>.
-<Li>Kai.Ttf (recommend) or simkai.ttf: kaiti.</li>.
-<li>msyh.ttf: microsoft yahei</li>.
-<li>msyhbd.ttf: microsoft yahei in bold.</li>.
-<li>hkjgt.ttf: dynafont king gothic</li>.
-<li>dhttx.ttf: dianheitexiti.</li>.
-<li>xqgdzt.ttf: xiqueguzidianti</li>.
-<li>qpcyt.ttf: smart splice super round body.</li>.
-<li>arial.ttf: english only.</li>.
-<li>dinalternate.ttf:DIN Alternate Bold</li>
-<li>helveticalt.ttf:Helvetica</li>
-<li>helveticains.ttf:Helvetica Inserat</li>
-<li>trajanpro.ttf:TrajanPro-Bold</li>
-<li>korean.ttf: specifies the korean language.</li>.
-<li>japanese.ttf: specifies the japanese language.</li>.
-<li>thai.ttf: specifies the thai language.</li>.
-Default: hei.ttf (heiti). note: kaiti is recommended for use with kai.ttf.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Input information of the font file of the burned-in subtitle. URL and COS are supported. If both are specified, the URL information is used. If FontFileInput is specified, FontFileInput takes precedence over FontType.
+
+         * @type {MediaInputInfo || null}
+         */
+        this.FontFileInput = null;
+
+        /**
+         * Font type. Valid values:
+<li>hei.ttf: SimHei.</li>
+<li>song.ttf: SimSun.</li>
+<li>kai.ttf (recommend) or simkai.ttf: SimKai.</li>
+<li>msyh.ttf: Microsoft YaHei.</li>
+<li>msyhbd.ttf: Microsoft YaHei Bold.</li>
+<li>hkjgt.ttf: DynaFont King Gothic.</li>
+<li>dhttx.ttf: DianHei Extra Light.</li>
+<li>xqgdzt.ttf: XiQue GuZiDian.</li>
+<li>qpcyt.ttf: QiaoPin ChaoYuan.</li>
+<li>arial.ttf: English only.</li>
+<li>dinalternate.ttf: DIN Alternate Bold.</li>
+<li>helveticalt.ttf: Helvetica.</li>
+<li>helveticains.ttf: Helvetica Inserat.</li>
+<li>trajanpro.ttf: TrajanPro-Bold.</li>
+<li>korean.ttf: Korean.</li>
+<li>japanese.ttf: Japanese.</li>
+<li>thai.ttf: Thai.</li>
+Default value: hei.ttf.
+<br>Note:
+<li>kai.ttf is recommended for SimKai.</li>
+<li>FontFileInput takes precedence when specified.</li>
+
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FontType = null;
 
         /**
-         * Font size. Format: Npx, where N is a numerical value. If it is not specified, the font size of the subtitle file applies.
-It is 5% of the source video height by default.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Font size. If not specified, the font size of the subtitle file applies. Pixel and percentage formats are supported:
+
+- Pixel: Npx. Value range of N: (0,4096].
+- Percentage: N%. Value range of N: (0,100]. For example, 10% means the subtitle font size is 10% of the source video height.
+
+The default size is 5% of the source video height if this parameter is not specified or the font size is not configured in the subtitle file.
+
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FontSize = null;
@@ -24919,18 +25338,23 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.BoardY = null;
 
         /**
-         * Board width. Unit: pixels. Value range: [0,4096].
-It is 90% of the source video width by default.
+         * Background width. The value should be a positive integer.
+- Value range for pixels: [0,4096].
+- Value range for percentages: [0, 100].
+If background is enabled and this parameter is not specified, the default width is 90% of the source video width.
 
-Note: This field may return null, indicating that no valid value can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.BoardWidth = null;
 
         /**
-         * Board height. Unit: pixels. Value range: [0,4096].
-It is 15% of the source video height by default.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Background height. The value should be a positive integer.
+- Value range for pixels: [0,4096].
+- Value range for percentages: [0, 100].
+If background is enabled and this parameter is not specified, the default height is 15% of the source video height.
+
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.BoardHeight = null;
@@ -24954,60 +25378,103 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.BoardAlpha = null;
 
         /**
-         * Stroke width.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Stroke width. The value should be a floating-point number.
+- Value range for pixels: [0, 1000].
+- Value range for percentages: [0, 100].
+If this is not specified, the default width is 0.3% of the source video height.
+
          * @type {number || null}
          */
         this.OutlineWidth = null;
 
         /**
-         * Stroke color. The value should be a 6-digit hexadecimal RGB value.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Stroke color. The value should be a 6-digit hexadecimal RGB value. If this is not specified, the default color is black.
+
          * @type {string || null}
          */
         this.OutlineColor = null;
 
         /**
-         * Stroke transparency. The value should be a positive floating-point number in the range of (0, 1].
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Stroke transparency. The value should be a positive floating-point number in the range of (0, 1]. If this is not specified, the default value is 1, which means completely opaque.
+
          * @type {number || null}
          */
         this.OutlineAlpha = null;
 
         /**
-         * Shadow width. The value should be a floating-point number in the range of [0, 1000].
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Shadow width. The value should be a floating-point number.
+- Value range for pixels: [0, 1000].
+- Value range for percentages: [0, 100].
+If this is not specified, no shadow is applied by default.
+
          * @type {number || null}
          */
         this.ShadowWidth = null;
 
         /**
-         * Shadow color. The value should be a 6-digit hexadecimal RGB value.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Shadow color. The value should be a 6-digit hexadecimal RGB value. If this is not specified, the default color is black (with shadow configured).
+
          * @type {string || null}
          */
         this.ShadowColor = null;
 
         /**
-         * Shadow transparency. The value should be a positive floating-point number in the range of (0, 1].
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Shadow transparency. The value should be a positive floating-point number in the range of (0, 1]. If this is not specified, the default value is 1, which means completely opaque (with shadow configured).
+
          * @type {number || null}
          */
         this.ShadowAlpha = null;
 
         /**
-         * Line spacing. The value should be a positive integer in the range of [0, 1000].
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Line spacing. The value should be a positive integer.
+- Value range for pixels: [0, 1000].
+- Value range for percentages: [0, 100]. If this is not specified, the default value is 0.
+
          * @type {number || null}
          */
         this.LineSpacing = null;
 
         /**
-         * Alignment mode. Valid values: top alignment. The top position of subtitles is fixed, while the bottom position changes according to the number of lines. bottom: bottom alignment. The bottom position of subtitles is fixed, while the top position changes according to the number of lines.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Alignment mode. Valid values: top: The top position of the subtitle is fixed, while the bottom position changes according to the number of lines. bottom: The bottom position of the subtitle is fixed, while the top position changes according to the number of lines. If this is not specified, bottom alignment is used by default.
+
          * @type {string || null}
          */
         this.Alignment = null;
+
+        /**
+         * Default value is 0. If this is set to 1, the value of BoardWidth is a percentage based on the video width.
+
+         * @type {number || null}
+         */
+        this.BoardWidthUnit = null;
+
+        /**
+         * Default value is 0. If this is set to 1, the value of BoardHeight is a percentage based on the video height.
+
+         * @type {number || null}
+         */
+        this.BoardHeightUnit = null;
+
+        /**
+         * Default value is 0. If this is set to 1, the value of OutlineWidth is a percentage based on the video height.
+
+         * @type {number || null}
+         */
+        this.OutlineWidthUnit = null;
+
+        /**
+         * Default value is 0. If this is set to 1, the value of ShadowWidth is a percentage based on the video height.
+
+         * @type {number || null}
+         */
+        this.ShadowWidthUnit = null;
+
+        /**
+         * Default value is 0. If this is set to 1, the value of LineSpacing is a percentage based on the video height.
+
+         * @type {number || null}
+         */
+        this.LineSpacingUnit = null;
 
     }
 
@@ -25025,6 +25492,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new MediaInputInfo();
             obj.deserialize(params.SubtitleFileInput)
             this.SubtitleFileInput = obj;
+        }
+
+        if (params.FontFileInput) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.FontFileInput)
+            this.FontFileInput = obj;
         }
         this.FontType = 'FontType' in params ? params.FontType : null;
         this.FontSize = 'FontSize' in params ? params.FontSize : null;
@@ -25044,6 +25517,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ShadowAlpha = 'ShadowAlpha' in params ? params.ShadowAlpha : null;
         this.LineSpacing = 'LineSpacing' in params ? params.LineSpacing : null;
         this.Alignment = 'Alignment' in params ? params.Alignment : null;
+        this.BoardWidthUnit = 'BoardWidthUnit' in params ? params.BoardWidthUnit : null;
+        this.BoardHeightUnit = 'BoardHeightUnit' in params ? params.BoardHeightUnit : null;
+        this.OutlineWidthUnit = 'OutlineWidthUnit' in params ? params.OutlineWidthUnit : null;
+        this.ShadowWidthUnit = 'ShadowWidthUnit' in params ? params.ShadowWidthUnit : null;
+        this.LineSpacingUnit = 'LineSpacingUnit' in params ? params.LineSpacingUnit : null;
 
     }
 }
@@ -28089,6 +28567,51 @@ class ModifyPersonSampleRequest extends  AbstractModel {
 }
 
 /**
+ * Reference video asset for AIGC video generation.
+ * @class
+ */
+class AigcVideoReferenceVideoInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Reference video URL, which must be accessible from the public network.
+This can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.
+The ReferType parameter specifies the reference video type: feature indicates feature reference video, and base indicates video for editing.
+If the reference video is a video for editing, the first and last frames cannot be defined.
+         * @type {string || null}
+         */
+        this.VideoUrl = null;
+
+        /**
+         * The ReferType parameter specifies the reference video type: feature indicates feature reference video, and base indicates video for editing.
+         * @type {string || null}
+         */
+        this.ReferType = null;
+
+        /**
+         * The KeepOriginalSound parameter specifies whether to keep the original sound of the video. Valid values: yes (keep the original sound); no (remove the original sound). This parameter also applies to feature reference videos (feature).
+         * @type {string || null}
+         */
+        this.KeepOriginalSound = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VideoUrl = 'VideoUrl' in params ? params.VideoUrl : null;
+        this.ReferType = 'ReferType' in params ? params.ReferType : null;
+        this.KeepOriginalSound = 'KeepOriginalSound' in params ? params.KeepOriginalSound : null;
+
+    }
+}
+
+/**
  * Control parameter of a full speech recognition task.
  * @class
  */
@@ -28544,6 +29067,18 @@ class AiAnalysisTaskVideoComprehensionOutput extends  AbstractModel {
          */
         this.VideoComprehensionAnalysisResult = null;
 
+        /**
+         * Video (audio) extended information.
+         * @type {string || null}
+         */
+        this.VideoComprehensionExtInfo = null;
+
+        /**
+         * Video shot understanding result.
+         * @type {Array.<VideoComprehensionResultItem> || null}
+         */
+        this.VideoComprehensionResultList = null;
+
     }
 
     /**
@@ -28554,6 +29089,16 @@ class AiAnalysisTaskVideoComprehensionOutput extends  AbstractModel {
             return;
         }
         this.VideoComprehensionAnalysisResult = 'VideoComprehensionAnalysisResult' in params ? params.VideoComprehensionAnalysisResult : null;
+        this.VideoComprehensionExtInfo = 'VideoComprehensionExtInfo' in params ? params.VideoComprehensionExtInfo : null;
+
+        if (params.VideoComprehensionResultList) {
+            this.VideoComprehensionResultList = new Array();
+            for (let z in params.VideoComprehensionResultList) {
+                let obj = new VideoComprehensionResultItem();
+                obj.deserialize(params.VideoComprehensionResultList[z]);
+                this.VideoComprehensionResultList.push(obj);
+            }
+        }
 
     }
 }
@@ -31996,6 +32541,64 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * SyncDubbing response structure.
+ * @class
+ */
+class SyncDubbingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Error code. 0 is returned if the request is successful.
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * Error message. success is returned if the request is successful.
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * Synthetic audio in Base64 encoding and WAV format.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AudioData = null;
+
+        /**
+         * Cloned voice type ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.AudioData = 'AudioData' in params ? params.AudioData : null;
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifySnapshotByTimeOffsetTemplate request structure.
  * @class
  */
@@ -33362,80 +33965,82 @@ class ProcessLiveStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * Live stream URL. (It should be a live streaming file address. RTMP, HLS, FLV, and TRTC addresses are supported.)
-A TRTC address is as follows:
- trtc: //trtc.rtc.qq.com/mps/`<roomid>`?sdkappid=`<sdkappid>`&userid=`<userid>`&usersig=<`usersig>`
-`<roomid>` is the TRTC room ID, which is a number.
-`<sdkappid>` is the SDK app ID of TRTC.
-`<userid>` is the user ID for accessing a room, which can be used to distinguish robots.
-<`usersig>` is the TRTC user signature.
+         * <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID, which is a number.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.comom/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.comom/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * Event notification information of a task, which is used to specify the live stream processing result.
+         * <p>Event notification information of the task. This is used to specify the live stream processing result.</p>
          * @type {LiveStreamTaskNotifyConfig || null}
          */
         this.TaskNotifyConfig = null;
 
         /**
-         * Target bucket of a live stream processing output file. This parameter is required if a file will be output.
+         * <p>Target storage for the output file of the live stream processing task. This parameter is required if the processing task has an output file.</p>
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Target directory of a live stream processing output file, such as `/movie/201909/`. If this parameter is left empty, the `/` directory will be used.
+         * <p>Target output directory for the file generated by the live stream processing task, such as <code>/movie/201909/</code>. If this is not specified, the default directory is <code>/</code>.</p>
          * @type {string || null}
          */
         this.OutputDir = null;
 
         /**
-         * Type parameter of a video content audit task.
+         * <p>Parameters for the video content review task.</p>
          * @type {AiContentReviewTaskInput || null}
          */
         this.AiContentReviewTask = null;
 
         /**
-         * Type parameter of video content recognition task.
+         * <p>Parameters for the video content recognition task.</p>
          * @type {AiRecognitionTaskInput || null}
          */
         this.AiRecognitionTask = null;
 
         /**
-         * 
+         * <p>Parameters for the video content analysis task.</p>
          * @type {AiAnalysisTaskInput || null}
          */
         this.AiAnalysisTask = null;
 
         /**
-         * Media quality inspection type task parameters.
+         * <p>Parameters for the media quality inspection task.</p>
          * @type {AiQualityControlTaskInput || null}
          */
         this.AiQualityControlTask = null;
 
         /**
-         * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+         * <p>Parameters for the smart subtitle task.</p>
+         * @type {LiveSmartSubtitlesTaskInput || null}
+         */
+        this.SmartSubtitlesTask = null;
+
+        /**
+         * <p>Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
          * @type {string || null}
          */
         this.SessionId = null;
 
         /**
-         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+         * <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
          * @type {string || null}
          */
         this.SessionContext = null;
 
         /**
-         * The live scheme ID.
-Note 1:
-<li>If an output storage (`OutputStorage`) and directory (`OutputDir`) are specified for a subtask of the scheme, those output settings will be applied. </li>
-u200c<li>If an output storage (`OutputStorage`) and directory (`OutputDir`) are not specified for a subtask of the scheme, the output parameters specified for `ProcessLiveStream` (if any) will be applied. </li>
-Note 2: If `TaskNotifyConfig` is specified when `ProcessLiveStream` is called, the specified settings will be applied instead of the default callback settings of the scheme.
+         * <p>Live streaming orchestration ID.<br>Note 1: For the OutputStorage and OutputDir parameters:</p><li>If OutputStorage and OutputDir are configured in the subtask node of service orchestration, the output configured in the subtask node serves as the subtask output.</li><li>If OutputStorage and OutputDir are not configured in the subtask node of service orchestration and ProcessLiveStream has output, the default output of the original orchestration is overridden.</li>Note 2: For the TaskNotifyConfig parameter, if it has been configured in the task creation API (ProcessLiveStream), the default callback of the original orchestration is overridden.
          * @type {number || null}
          */
         this.ScheduleId = null;
+
+        /**
+         * <p>Resource ID. The resource needs to be enabled. The default value is the account's primary resource ID.</p>
+         * @type {string || null}
+         */
+        this.ResourceId = null;
 
     }
 
@@ -33484,9 +34089,16 @@ Note 2: If `TaskNotifyConfig` is specified when `ProcessLiveStream` is called, t
             obj.deserialize(params.AiQualityControlTask)
             this.AiQualityControlTask = obj;
         }
+
+        if (params.SmartSubtitlesTask) {
+            let obj = new LiveSmartSubtitlesTaskInput();
+            obj.deserialize(params.SmartSubtitlesTask)
+            this.SmartSubtitlesTask = obj;
+        }
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.ScheduleId = 'ScheduleId' in params ? params.ScheduleId : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }
@@ -35954,7 +36566,7 @@ class DescribeUsageDataRequest extends  AbstractModel {
         super();
 
         /**
-         * Start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Start date. use ISO date format.
          * @type {string || null}
          */
         this.StartTime = null;
@@ -37271,35 +37883,40 @@ class AigcVideoExtraParam extends  AbstractModel {
         super();
 
         /**
-         * The resolution of the generated video, which is related to the selected model and set video duration.Supported resolution options for different models:1. Kling: 720P (default) and 1080P.2. Hailuo: 768P (default) and 1080P.3. Vidu: 720P (default) and 1080P.4. GV: 720P (default) and 1080P.5. OS: 720P. For images, only 1280x720 and 720x1280 are supported. Resolution cannot be specified.Note: In addition to the resolution supported by the model, 2K and 4K resolutions are also available.
+         * <p>Resolution of the generated video. The resolution is related to the selected model and set video duration.</p><p>Supported resolution options for different models:</p><ol><li>Kling: 720P (default) and 1080P.</li><li>Hailuo: 768P (default) and 1080P.</li><li>Vidu: 720P (default) and 1080P.</li><li>GV: 720P (default) and 1080P.</li><li>OS: 720P. For images, only 1280x720 and 720x1280 are supported. Resolution cannot be specified.</li></ol><p>Note: In addition to the resolution supported by the model, 2K and 4K resolutions are also available.</p>
          * @type {string || null}
          */
         this.Resolution = null;
 
         /**
-         * The aspect ratio of the generated video.Support for this parameter by different models:1. Kling only supports this parameter for text-to-video, with aspect ratios of 16:9 (default), 9:16, and 1:1.2. Hailuo does not support this parameter.3. Vidu supports [16:9, 9:16, 4:3, 3:4, 1:1] for text-to-video and reference image-to-video only. Only q2 supports 4:3 and 3:4.4. GV supports 16:9 (default) and 9:16.5. OS only supports this parameter for text-to-video, with aspect ratios of 16:9 (default) and 9:16.Note: For more information about the supported aspect ratios of specific models, see the model website.
+         * <p>Aspect ratio of the generated video.</p><p>Support for this parameter by different models:</p><ol><li>Kling only supports this parameter for text-to-video, with aspect ratios of 16:9 (default), 9:16, and 1:1.</li><li>Hailuo does not support this parameter.</li><li>Vidu supports [16:9, 9:16, 4:3, 3:4, 1:1] for text-to-video and reference image-to-video only. Only q2 supports 4:3 and 3:4.</li><li>GV supports 16:9 (default) and 9:16.</li><li>OS only supports this parameter for text-to-video, with aspect ratios of 16:9 (default) and 9:16.</li></ol><p>Note: For more information about the supported aspect ratios of specific models, see the model website.</p>
          * @type {string || null}
          */
         this.AspectRatio = null;
 
         /**
-         * Indicates whether to add a logo watermark.1. Hailuo supports this parameter.2. Kling supports this parameter.
-3. Vidu supports this parameter.
+         * <p>Indicates whether to add a logo watermark.</p><ol><li>Hailuo supports this parameter.</li><li>Kling supports this parameter.</li><li>Vidu supports this parameter.</li></ol>
          * @type {number || null}
          */
         this.LogoAdd = null;
 
         /**
-         * Indicates whether to generate audio for the video. Valid values: true or false.Models that support this parameter:1. GV. Default value: true.2. OS. Default value: true.
+         * <p>Indicates whether to generate audio for the video. Valid values: true or false.</p><p>Models that support this parameter:</p><ol><li>GV. Default value: true.</li><li>OS. Default value: true.</li></ol>
          * @type {boolean || null}
          */
         this.EnableAudio = null;
 
         /**
-         * Indicates whether to use the off-peak scheduling mode. Only Vidu supports this parameter.Tasks submitted in off-peak mode will be processed within 48 hours. Uncompleted tasks will be canceled.
+         * <p>Indicates whether to use the off-peak scheduling mode. Only Vidu supports this parameter.<br>Tasks submitted in off-peak mode will be processed within 48 hours. Uncompleted tasks will be canceled.</p>
          * @type {boolean || null}
          */
         this.OffPeak = null;
+
+        /**
+         * <p>Indicates whether to add background music to the generated video. Default value: false. Valid values: true or false.<br>Note: Only some model versions support this.</p>
+         * @type {boolean || null}
+         */
+        this.EnableBgm = null;
 
     }
 
@@ -37315,6 +37932,7 @@ class AigcVideoExtraParam extends  AbstractModel {
         this.LogoAdd = 'LogoAdd' in params ? params.LogoAdd : null;
         this.EnableAudio = 'EnableAudio' in params ? params.EnableAudio : null;
         this.OffPeak = 'OffPeak' in params ? params.OffPeak : null;
+        this.EnableBgm = 'EnableBgm' in params ? params.EnableBgm : null;
 
     }
 }
@@ -41102,7 +41720,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Data structure of the video matting result.
+ * Data structure of the video intelligent image masking result.
  * @class
  */
 class AiAnalysisTaskCutoutResult extends  AbstractModel {
@@ -41938,7 +42556,7 @@ module.exports = {
     OverrideTranscodeParameter: OverrideTranscodeParameter,
     AiAnalysisTaskClassificationInput: AiAnalysisTaskClassificationInput,
     SvgWatermarkInput: SvgWatermarkInput,
-    WorkflowInfo: WorkflowInfo,
+    LiveStreamAiSmartSubtitleResultInfo: LiveStreamAiSmartSubtitleResultInfo,
     CreateTranscodeTemplateRequest: CreateTranscodeTemplateRequest,
     ProcessLiveStreamResponse: ProcessLiveStreamResponse,
     LiveStreamAiQualityControlResultInfo: LiveStreamAiQualityControlResultInfo,
@@ -41984,6 +42602,7 @@ module.exports = {
     SmartErasePrivacyConfig: SmartErasePrivacyConfig,
     MediaSnapshotByTimePicInfoItem: MediaSnapshotByTimePicInfoItem,
     DescribeAigcImageTaskRequest: DescribeAigcImageTaskRequest,
+    SyncDubbingRequest: SyncDubbingRequest,
     UserDefineFaceReviewTemplateInfo: UserDefineFaceReviewTemplateInfo,
     ContentReviewTemplateItem: ContentReviewTemplateItem,
     ModifySmartEraseTemplateResponse: ModifySmartEraseTemplateResponse,
@@ -41999,6 +42618,7 @@ module.exports = {
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
     ModifyWordSampleResponse: ModifyWordSampleResponse,
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
+    WorkflowInfo: WorkflowInfo,
     ModifyProcessImageTemplateRequest: ModifyProcessImageTemplateRequest,
     DeletePersonSampleRequest: DeletePersonSampleRequest,
     AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
@@ -42077,6 +42697,7 @@ module.exports = {
     LiveRecordTemplate: LiveRecordTemplate,
     DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
     ScheduleRecognitionTaskResult: ScheduleRecognitionTaskResult,
+    VideoComprehensionResultItem: VideoComprehensionResultItem,
     ImageProcessTaskOutput: ImageProcessTaskOutput,
     ComposeTargetInfo: ComposeTargetInfo,
     TaskStatData: TaskStatData,
@@ -42103,6 +42724,7 @@ module.exports = {
     PornAsrReviewTemplateInfo: PornAsrReviewTemplateInfo,
     CreateAigcImageTaskResponse: CreateAigcImageTaskResponse,
     ComposeVideoStream: ComposeVideoStream,
+    LiveSmartSubtitleResult: LiveSmartSubtitleResult,
     ProhibitedAsrReviewTemplateInfoForUpdate: ProhibitedAsrReviewTemplateInfoForUpdate,
     AiAnalysisTaskCutoutInput: AiAnalysisTaskCutoutInput,
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
@@ -42251,6 +42873,7 @@ module.exports = {
     LiveStreamTagRecognitionResult: LiveStreamTagRecognitionResult,
     ExecuteFunctionResponse: ExecuteFunctionResponse,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
+    LiveSmartSubtitlesTaskInput: LiveSmartSubtitlesTaskInput,
     MosaicInput: MosaicInput,
     LiveRecordTaskInput: LiveRecordTaskInput,
     AIAnalysisTemplateItem: AIAnalysisTemplateItem,
@@ -42380,6 +43003,7 @@ module.exports = {
     SpecificationDataItem: SpecificationDataItem,
     TEHDConfigForUpdate: TEHDConfigForUpdate,
     ModifyPersonSampleRequest: ModifyPersonSampleRequest,
+    AigcVideoReferenceVideoInfo: AigcVideoReferenceVideoInfo,
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
     AiAnalysisTaskVideoRemakeResult: AiAnalysisTaskVideoRemakeResult,
     ArtifactRepairConfig: ArtifactRepairConfig,
@@ -42446,6 +43070,7 @@ module.exports = {
     SelectingSubtitleAreasConfig: SelectingSubtitleAreasConfig,
     AiRecognitionTaskTransTextResultOutput: AiRecognitionTaskTransTextResultOutput,
     SmartSubtitlesResult: SmartSubtitlesResult,
+    SyncDubbingResponse: SyncDubbingResponse,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
     AsrHotWordsConfigure: AsrHotWordsConfigure,
     ImageAreaBoxInfo: ImageAreaBoxInfo,

@@ -19,14 +19,18 @@ const AbstractClient = require('../../common/abstract_client')
 const CreateMigrationTaskRequest = models.CreateMigrationTaskRequest;
 const ScaleUpFileSystemResponse = models.ScaleUpFileSystemResponse;
 const SnapshotStatistics = models.SnapshotStatistics;
+const CreateLifecycleDataTaskRequest = models.CreateLifecycleDataTaskRequest;
 const DescribeCfsPGroupsResponse = models.DescribeCfsPGroupsResponse;
+const ModifyDataFlowResponse = models.ModifyDataFlowResponse;
 const DescribeMountTargetsResponse = models.DescribeMountTargetsResponse;
 const DescribeSnapshotOperationLogsRequest = models.DescribeSnapshotOperationLogsRequest;
+const CreateLifecyclePolicyDownloadTaskRequest = models.CreateLifecyclePolicyDownloadTaskRequest;
 const MigrationTaskInfo = models.MigrationTaskInfo;
+const StopLifecycleDataTaskRequest = models.StopLifecycleDataTaskRequest;
 const FileSystemClient = models.FileSystemClient;
 const DescribeCfsFileSystemsResponse = models.DescribeCfsFileSystemsResponse;
-const CreateCfsFileSystemResponse = models.CreateCfsFileSystemResponse;
-const FileSystemInfo = models.FileSystemInfo;
+const CreateLifecycleDataTaskResponse = models.CreateLifecycleDataTaskResponse;
+const ApplyPathLifecyclePolicyRequest = models.ApplyPathLifecyclePolicyRequest;
 const BindAutoSnapshotPolicyRequest = models.BindAutoSnapshotPolicyRequest;
 const ModifyFileSystemAutoScaleUpRuleRequest = models.ModifyFileSystemAutoScaleUpRuleRequest;
 const ScaleUpFileSystemRequest = models.ScaleUpFileSystemRequest;
@@ -35,41 +39,58 @@ const DescribeMigrationTasksResponse = models.DescribeMigrationTasksResponse;
 const DescribeAutoSnapshotPoliciesRequest = models.DescribeAutoSnapshotPoliciesRequest;
 const DescribeAvailableZoneInfoRequest = models.DescribeAvailableZoneInfoRequest;
 const DescribeMountTargetsRequest = models.DescribeMountTargetsRequest;
-const BindAutoSnapshotPolicyResponse = models.BindAutoSnapshotPolicyResponse;
-const StopMigrationTaskResponse = models.StopMigrationTaskResponse;
+const CreateDataFlowResponse = models.CreateDataFlowResponse;
+const SignUpCfsServiceRequest = models.SignUpCfsServiceRequest;
 const SignUpCfsServiceResponse = models.SignUpCfsServiceResponse;
 const AutoSnapshotPolicyInfo = models.AutoSnapshotPolicyInfo;
+const CreateLifecyclePolicyDownloadTaskResponse = models.CreateLifecyclePolicyDownloadTaskResponse;
 const DescribeCfsRulesRequest = models.DescribeCfsRulesRequest;
 const UpdateCfsFileSystemNameRequest = models.UpdateCfsFileSystemNameRequest;
 const DeleteCfsPGroupRequest = models.DeleteCfsPGroupRequest;
+const DoDirectoryOperationResponse = models.DoDirectoryOperationResponse;
 const UpdateCfsPGroupResponse = models.UpdateCfsPGroupResponse;
+const DescribeLifecyclePoliciesRequest = models.DescribeLifecyclePoliciesRequest;
 const DeleteAutoSnapshotPolicyRequest = models.DeleteAutoSnapshotPolicyRequest;
-const DeleteCfsFileSystemResponse = models.DeleteCfsFileSystemResponse;
+const CreateLifecyclePolicyResponse = models.CreateLifecyclePolicyResponse;
 const UpdateCfsRuleRequest = models.UpdateCfsRuleRequest;
+const StopLifecycleDataTaskResponse = models.StopLifecycleDataTaskResponse;
 const DescribeAvailableZoneInfoResponse = models.DescribeAvailableZoneInfoResponse;
 const DeleteCfsSnapshotResponse = models.DeleteCfsSnapshotResponse;
 const DescribeCfsFileSystemClientsResponse = models.DescribeCfsFileSystemClientsResponse;
-const DeleteMountTargetResponse = models.DeleteMountTargetResponse;
+const DescribeLifecycleDataTaskResponse = models.DescribeLifecycleDataTaskResponse;
+const ModifyLifecyclePolicyResponse = models.ModifyLifecyclePolicyResponse;
 const CreateCfsSnapshotRequest = models.CreateCfsSnapshotRequest;
 const DescribeBucketListRequest = models.DescribeBucketListRequest;
 const DeleteCfsRuleRequest = models.DeleteCfsRuleRequest;
+const ApplyPathLifecyclePolicyResponse = models.ApplyPathLifecyclePolicyResponse;
 const UpdateCfsRuleResponse = models.UpdateCfsRuleResponse;
 const DeleteMigrationTaskResponse = models.DeleteMigrationTaskResponse;
+const DescribeLifecycleDataTaskRequest = models.DescribeLifecycleDataTaskRequest;
 const DescribeSnapshotOperationLogsResponse = models.DescribeSnapshotOperationLogsResponse;
-const UpdateCfsFileSystemPGroupResponse = models.UpdateCfsFileSystemPGroupResponse;
 const DeleteCfsFileSystemRequest = models.DeleteCfsFileSystemRequest;
+const DeleteLifecyclePolicyResponse = models.DeleteLifecyclePolicyResponse;
 const CreateCfsPGroupResponse = models.CreateCfsPGroupResponse;
 const DescribeCfsServiceStatusRequest = models.DescribeCfsServiceStatusRequest;
+const CheckResult = models.CheckResult;
 const DeleteMigrationTaskRequest = models.DeleteMigrationTaskRequest;
 const PGroup = models.PGroup;
 const CreateAutoSnapshotPolicyResponse = models.CreateAutoSnapshotPolicyResponse;
 const ModifyFileSystemAutoScaleUpRuleResponse = models.ModifyFileSystemAutoScaleUpRuleResponse;
+const DataFlowInfo = models.DataFlowInfo;
 const AvailableType = models.AvailableType;
+const LifecyclePolicy = models.LifecyclePolicy;
 const CreateCfsSnapshotResponse = models.CreateCfsSnapshotResponse;
-const DeleteMountTargetRequest = models.DeleteMountTargetRequest;
+const LifecycleRule = models.LifecycleRule;
 const CreateCfsRuleRequest = models.CreateCfsRuleRequest;
+const DeleteCfsFileSystemResponse = models.DeleteCfsFileSystemResponse;
+const CreateCfsFileSystemResponse = models.CreateCfsFileSystemResponse;
 const BucketInfo = models.BucketInfo;
+const DeleteDataFlowResponse = models.DeleteDataFlowResponse;
 const SnapshotOperateLog = models.SnapshotOperateLog;
+const LifecycleDataTaskInfo = models.LifecycleDataTaskInfo;
+const DescribeLifecyclePoliciesResponse = models.DescribeLifecyclePoliciesResponse;
+const FileSystemInfo = models.FileSystemInfo;
+const DescribeDataFlowRequest = models.DescribeDataFlowRequest;
 const DescribeBucketListResponse = models.DescribeBucketListResponse;
 const UpdateCfsFileSystemNameResponse = models.UpdateCfsFileSystemNameResponse;
 const DescribeCfsSnapshotOverviewResponse = models.DescribeCfsSnapshotOverviewResponse;
@@ -82,17 +103,19 @@ const AvailableRegion = models.AvailableRegion;
 const CreateCfsFileSystemRequest = models.CreateCfsFileSystemRequest;
 const AvailableZone = models.AvailableZone;
 const DescribeMigrationTasksRequest = models.DescribeMigrationTasksRequest;
+const PGroupRuleInfo = models.PGroupRuleInfo;
 const Filter = models.Filter;
 const UnbindAutoSnapshotPolicyRequest = models.UnbindAutoSnapshotPolicyRequest;
 const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
 const DescribeCfsServiceStatusResponse = models.DescribeCfsServiceStatusResponse;
-const PGroupRuleInfo = models.PGroupRuleInfo;
+const ExstraPerformanceInfo = models.ExstraPerformanceInfo;
+const BindAutoSnapshotPolicyResponse = models.BindAutoSnapshotPolicyResponse;
 const DescribeCfsSnapshotsRequest = models.DescribeCfsSnapshotsRequest;
 const UpdateCfsFileSystemSizeLimitResponse = models.UpdateCfsFileSystemSizeLimitResponse;
 const UpdateAutoSnapshotPolicyRequest = models.UpdateAutoSnapshotPolicyRequest;
 const UpdateCfsFileSystemSizeLimitRequest = models.UpdateCfsFileSystemSizeLimitRequest;
 const DescribeCfsRulesResponse = models.DescribeCfsRulesResponse;
-const SignUpCfsServiceRequest = models.SignUpCfsServiceRequest;
+const UpdateCfsFileSystemPGroupResponse = models.UpdateCfsFileSystemPGroupResponse;
 const UpdateAutoSnapshotPolicyResponse = models.UpdateAutoSnapshotPolicyResponse;
 const FileSystemByPolicy = models.FileSystemByPolicy;
 const SnapshotInfo = models.SnapshotInfo;
@@ -103,18 +126,28 @@ const DeleteAutoSnapshotPolicyResponse = models.DeleteAutoSnapshotPolicyResponse
 const DeleteCfsRuleResponse = models.DeleteCfsRuleResponse;
 const UpdateCfsSnapshotAttributeResponse = models.UpdateCfsSnapshotAttributeResponse;
 const UpdateCfsPGroupRequest = models.UpdateCfsPGroupRequest;
+const DeleteDataFlowRequest = models.DeleteDataFlowRequest;
+const PathInfo = models.PathInfo;
 const TagInfo = models.TagInfo;
 const DescribeCfsPGroupsRequest = models.DescribeCfsPGroupsRequest;
 const DeleteCfsPGroupResponse = models.DeleteCfsPGroupResponse;
 const UpdateCfsSnapshotAttributeRequest = models.UpdateCfsSnapshotAttributeRequest;
+const ModifyLifecyclePolicyRequest = models.ModifyLifecyclePolicyRequest;
+const DeleteLifecyclePolicyRequest = models.DeleteLifecyclePolicyRequest;
 const TieringDetailInfo = models.TieringDetailInfo;
+const CreateLifecyclePolicyRequest = models.CreateLifecyclePolicyRequest;
 const PGroupInfo = models.PGroupInfo;
 const CreateCfsRuleResponse = models.CreateCfsRuleResponse;
+const StopMigrationTaskResponse = models.StopMigrationTaskResponse;
 const DescribeCfsSnapshotsResponse = models.DescribeCfsSnapshotsResponse;
 const StopMigrationTaskRequest = models.StopMigrationTaskRequest;
 const DescribeAutoSnapshotPoliciesResponse = models.DescribeAutoSnapshotPoliciesResponse;
+const ModifyDataFlowRequest = models.ModifyDataFlowRequest;
 const DescribeCfsSnapshotOverviewRequest = models.DescribeCfsSnapshotOverviewRequest;
 const CreateAutoSnapshotPolicyRequest = models.CreateAutoSnapshotPolicyRequest;
+const CreateDataFlowRequest = models.CreateDataFlowRequest;
+const DescribeDataFlowResponse = models.DescribeDataFlowResponse;
+const DoDirectoryOperationRequest = models.DoDirectoryOperationRequest;
 
 
 /**
@@ -150,14 +183,14 @@ class CfsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to activate the CFS service.
-     * @param {SignUpCfsServiceRequest} req
-     * @param {function(string, SignUpCfsServiceResponse):void} cb
+     * This API is used to query the lifecycle task. It only supports querying task data within 3 months.
+     * @param {DescribeLifecycleDataTaskRequest} req
+     * @param {function(string, DescribeLifecycleDataTaskResponse):void} cb
      * @public
      */
-    SignUpCfsService(req, cb) {
-        let resp = new SignUpCfsServiceResponse();
-        this.request("SignUpCfsService", req, resp, cb);
+    DescribeLifecycleDataTask(req, cb) {
+        let resp = new DescribeLifecycleDataTaskResponse();
+        this.request("DescribeLifecycleDataTask", req, resp, cb);
     }
 
     /**
@@ -172,14 +205,37 @@ class CfsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of permission groups.
-     * @param {DescribeCfsPGroupsRequest} req
-     * @param {function(string, DescribeCfsPGroupsResponse):void} cb
+     * This API is used to delete a file system.
+     * @param {DeleteCfsFileSystemRequest} req
+     * @param {function(string, DeleteCfsFileSystemResponse):void} cb
      * @public
      */
-    DescribeCfsPGroups(req, cb) {
-        let resp = new DescribeCfsPGroupsResponse();
-        this.request("DescribeCfsPGroups", req, resp, cb);
+    DeleteCfsFileSystem(req, cb) {
+        let resp = new DeleteCfsFileSystemResponse();
+        this.request("DeleteCfsFileSystem", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the name and retention period of a file system snapshot.
+     * @param {UpdateCfsSnapshotAttributeRequest} req
+     * @param {function(string, UpdateCfsSnapshotAttributeResponse):void} cb
+     * @public
+     */
+    UpdateCfsSnapshotAttribute(req, cb) {
+        let resp = new UpdateCfsSnapshotAttributeResponse();
+        this.request("UpdateCfsSnapshotAttribute", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of migration tasks.
+To use this API, submit a ticket for us to add you to the allowlist.
+     * @param {DescribeMigrationTasksRequest} req
+     * @param {function(string, DescribeMigrationTasksResponse):void} cb
+     * @public
+     */
+    DescribeMigrationTasks(req, cb) {
+        let resp = new DescribeMigrationTasksResponse();
+        this.request("DescribeMigrationTasks", req, resp, cb);
     }
 
     /**
@@ -205,7 +261,18 @@ class CfsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a permission group.
+     * This API is used to create a data flow.
+     * @param {CreateDataFlowRequest} req
+     * @param {function(string, CreateDataFlowResponse):void} cb
+     * @public
+     */
+    CreateDataFlow(req, cb) {
+        let resp = new CreateDataFlowResponse();
+        this.request("CreateDataFlow", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a permission group. Only permission groups not bound to a file system can be deleted by this API.
      * @param {DeleteCfsPGroupRequest} req
      * @param {function(string, DeleteCfsPGroupResponse):void} cb
      * @public
@@ -213,6 +280,39 @@ class CfsClient extends AbstractClient {
     DeleteCfsPGroup(req, cb) {
         let resp = new DeleteCfsPGroupResponse();
         this.request("DeleteCfsPGroup", req, resp, cb);
+    }
+
+    /**
+     * Delete a lifecycle management policy.
+     * @param {DeleteLifecyclePolicyRequest} req
+     * @param {function(string, DeleteLifecyclePolicyResponse):void} cb
+     * @public
+     */
+    DeleteLifecyclePolicy(req, cb) {
+        let resp = new DeleteLifecyclePolicyResponse();
+        this.request("DeleteLifecyclePolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unbind a snapshot policy from a file system.
+     * @param {UnbindAutoSnapshotPolicyRequest} req
+     * @param {function(string, UnbindAutoSnapshotPolicyResponse):void} cb
+     * @public
+     */
+    UnbindAutoSnapshotPolicy(req, cb) {
+        let resp = new UnbindAutoSnapshotPolicyResponse();
+        this.request("UnbindAutoSnapshotPolicy", req, resp, cb);
+    }
+
+    /**
+     * Download the file list in a lifecycle task.
+     * @param {CreateLifecyclePolicyDownloadTaskRequest} req
+     * @param {function(string, CreateLifecyclePolicyDownloadTaskResponse):void} cb
+     * @public
+     */
+    CreateLifecyclePolicyDownloadTask(req, cb) {
+        let resp = new CreateLifecyclePolicyDownloadTaskResponse();
+        this.request("CreateLifecyclePolicyDownloadTask", req, resp, cb);
     }
 
     /**
@@ -238,8 +338,7 @@ class CfsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to stop a migration task.
-To use this API, submit a ticket for us to add you to the allowlist.
+     * This API is used to terminate a migration task, including tasks in the Waiting or Running status.
      * @param {StopMigrationTaskRequest} req
      * @param {function(string, StopMigrationTaskResponse):void} cb
      * @public
@@ -250,15 +349,14 @@ To use this API, submit a ticket for us to add you to the allowlist.
     }
 
     /**
-     * This API is used to get the list of migration tasks.
-To use this API, submit a ticket for us to add you to the allowlist.
-     * @param {DescribeMigrationTasksRequest} req
-     * @param {function(string, DescribeMigrationTasksResponse):void} cb
+     * To obtain the list of data source buckets.
+     * @param {DescribeBucketListRequest} req
+     * @param {function(string, DescribeBucketListResponse):void} cb
      * @public
      */
-    DescribeMigrationTasks(req, cb) {
-        let resp = new DescribeMigrationTasksResponse();
-        this.request("DescribeMigrationTasks", req, resp, cb);
+    DescribeBucketList(req, cb) {
+        let resp = new DescribeBucketListResponse();
+        this.request("DescribeBucketList", req, resp, cb);
     }
 
     /**
@@ -273,19 +371,29 @@ To use this API, submit a ticket for us to add you to the allowlist.
     }
 
     /**
-     * This API is used to update a file system name.
-     * @param {UpdateCfsFileSystemNameRequest} req
-     * @param {function(string, UpdateCfsFileSystemNameResponse):void} cb
+     * Support proactive settlement/preheat API.
+     * @param {CreateLifecycleDataTaskRequest} req
+     * @param {function(string, CreateLifecycleDataTaskResponse):void} cb
      * @public
      */
-    UpdateCfsFileSystemName(req, cb) {
-        let resp = new UpdateCfsFileSystemNameResponse();
-        this.request("UpdateCfsFileSystemName", req, resp, cb);
+    CreateLifecycleDataTask(req, cb) {
+        let resp = new CreateLifecycleDataTaskResponse();
+        this.request("CreateLifecycleDataTask", req, resp, cb);
     }
 
     /**
-     * This API is used to delete a migration task.
-To use this API, submit a ticket for us to add you to the allowlist.
+     * This API is used to activate the CFS service.
+     * @param {SignUpCfsServiceRequest} req
+     * @param {function(string, SignUpCfsServiceResponse):void} cb
+     * @public
+     */
+    SignUpCfsService(req, cb) {
+        let resp = new SignUpCfsServiceResponse();
+        this.request("SignUpCfsService", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete migration tasks. Deletion is not supported for tasks in the status of Waiting, creating, running, canceling, or terminating.
      * @param {DeleteMigrationTaskRequest} req
      * @param {function(string, DeleteMigrationTaskResponse):void} cb
      * @public
@@ -296,7 +404,7 @@ To use this API, submit a ticket for us to add you to the allowlist.
     }
 
     /**
-     * This API is used to scale up a Turbo file system.
+     * This API is used to expand the turbo file system. It only supports expansion and does not support scale-down. The scaling increment for the turbo standard type is 10240 GIB, and for the turbo performance type, it is 5120 GIB.
      * @param {ScaleUpFileSystemRequest} req
      * @param {function(string, ScaleUpFileSystemResponse):void} cb
      * @public
@@ -318,14 +426,14 @@ To use this API, submit a ticket for us to add you to the allowlist.
     }
 
     /**
-     * This API is used to delete a file system.
-     * @param {DeleteCfsFileSystemRequest} req
-     * @param {function(string, DeleteCfsFileSystemResponse):void} cb
+     * This API is used to create a file storage lifecycle policy.
+     * @param {CreateLifecyclePolicyRequest} req
+     * @param {function(string, CreateLifecyclePolicyResponse):void} cb
      * @public
      */
-    DeleteCfsFileSystem(req, cb) {
-        let resp = new DeleteCfsFileSystemResponse();
-        this.request("DeleteCfsFileSystem", req, resp, cb);
+    CreateLifecyclePolicy(req, cb) {
+        let resp = new CreateLifecyclePolicyResponse();
+        this.request("CreateLifecyclePolicy", req, resp, cb);
     }
 
     /**
@@ -340,14 +448,14 @@ To use this API, submit a ticket for us to add you to the allowlist.
     }
 
     /**
-     * This API is used to update the name and retention period of a file system snapshot.
-     * @param {UpdateCfsSnapshotAttributeRequest} req
-     * @param {function(string, UpdateCfsSnapshotAttributeResponse):void} cb
+     * This API is used to query the list of permission groups.
+     * @param {DescribeCfsPGroupsRequest} req
+     * @param {function(string, DescribeCfsPGroupsResponse):void} cb
      * @public
      */
-    UpdateCfsSnapshotAttribute(req, cb) {
-        let resp = new UpdateCfsSnapshotAttributeResponse();
-        this.request("UpdateCfsSnapshotAttribute", req, resp, cb);
+    DescribeCfsPGroups(req, cb) {
+        let resp = new DescribeCfsPGroupsResponse();
+        this.request("DescribeCfsPGroups", req, resp, cb);
     }
 
     /**
@@ -362,7 +470,29 @@ To use this API, submit a ticket for us to add you to the allowlist.
     }
 
     /**
-     * This API is used to modify the scaling policy of a file system.
+     * Query lifecycle management policies.
+     * @param {DescribeLifecyclePoliciesRequest} req
+     * @param {function(string, DescribeLifecyclePoliciesResponse):void} cb
+     * @public
+     */
+    DescribeLifecyclePolicies(req, cb) {
+        let resp = new DescribeLifecyclePoliciesResponse();
+        this.request("DescribeLifecyclePolicies", req, resp, cb);
+    }
+
+    /**
+     * Configure the directory list associated with the lifecycle policy.
+     * @param {ApplyPathLifecyclePolicyRequest} req
+     * @param {function(string, ApplyPathLifecyclePolicyResponse):void} cb
+     * @public
+     */
+    ApplyPathLifecyclePolicy(req, cb) {
+        let resp = new ApplyPathLifecyclePolicyResponse();
+        this.request("ApplyPathLifecyclePolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set the file system scaling policy. It supports only the turbo file system.
      * @param {ModifyFileSystemAutoScaleUpRuleRequest} req
      * @param {function(string, ModifyFileSystemAutoScaleUpRuleResponse):void} cb
      * @public
@@ -373,14 +503,14 @@ To use this API, submit a ticket for us to add you to the allowlist.
     }
 
     /**
-     * This API is used to update a scheduled snapshot policy.
-     * @param {UpdateAutoSnapshotPolicyRequest} req
-     * @param {function(string, UpdateAutoSnapshotPolicyResponse):void} cb
+     * Modify data flow parameters.
+     * @param {ModifyDataFlowRequest} req
+     * @param {function(string, ModifyDataFlowResponse):void} cb
      * @public
      */
-    UpdateAutoSnapshotPolicy(req, cb) {
-        let resp = new UpdateAutoSnapshotPolicyResponse();
-        this.request("UpdateAutoSnapshotPolicy", req, resp, cb);
+    ModifyDataFlow(req, cb) {
+        let resp = new ModifyDataFlowResponse();
+        this.request("ModifyDataFlow", req, resp, cb);
     }
 
     /**
@@ -417,6 +547,17 @@ To use this API, submit a ticket for us to add you to the allowlist.
     }
 
     /**
+     * Update a file storage lifecycle policy.
+     * @param {ModifyLifecyclePolicyRequest} req
+     * @param {function(string, ModifyLifecyclePolicyResponse):void} cb
+     * @public
+     */
+    ModifyLifecyclePolicy(req, cb) {
+        let resp = new ModifyLifecyclePolicyResponse();
+        this.request("ModifyLifecyclePolicy", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a permission group rule.
      * @param {DeleteCfsRuleRequest} req
      * @param {function(string, DeleteCfsRuleResponse):void} cb
@@ -428,20 +569,18 @@ To use this API, submit a ticket for us to add you to the allowlist.
     }
 
     /**
-     * This API is used to get the list of data source buckets.
-To use this API, submit a ticket for us to add you to the allowlist.
-     * @param {DescribeBucketListRequest} req
-     * @param {function(string, DescribeBucketListResponse):void} cb
+     * Delete a data flow.
+     * @param {DeleteDataFlowRequest} req
+     * @param {function(string, DeleteDataFlowResponse):void} cb
      * @public
      */
-    DescribeBucketList(req, cb) {
-        let resp = new DescribeBucketListResponse();
-        this.request("DescribeBucketList", req, resp, cb);
+    DeleteDataFlow(req, cb) {
+        let resp = new DeleteDataFlowResponse();
+        this.request("DeleteDataFlow", req, resp, cb);
     }
 
     /**
      * This API is used to create a migration task.
-To use this API, submit a ticket for us to add you to the allowlist.
      * @param {CreateMigrationTaskRequest} req
      * @param {function(string, CreateMigrationTaskResponse):void} cb
      * @public
@@ -449,17 +588,6 @@ To use this API, submit a ticket for us to add you to the allowlist.
     CreateMigrationTask(req, cb) {
         let resp = new CreateMigrationTaskResponse();
         this.request("CreateMigrationTask", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a mount target.
-     * @param {DeleteMountTargetRequest} req
-     * @param {function(string, DeleteMountTargetResponse):void} cb
-     * @public
-     */
-    DeleteMountTarget(req, cb) {
-        let resp = new DeleteMountTargetResponse();
-        this.request("DeleteMountTarget", req, resp, cb);
     }
 
     /**
@@ -496,6 +624,17 @@ To use this API, submit a ticket for us to add you to the allowlist.
     }
 
     /**
+     * This API is used to terminate a lifecycle task.
+     * @param {StopLifecycleDataTaskRequest} req
+     * @param {function(string, StopLifecycleDataTaskResponse):void} cb
+     * @public
+     */
+    StopLifecycleDataTask(req, cb) {
+        let resp = new StopLifecycleDataTaskResponse();
+        this.request("StopLifecycleDataTask", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a file system snapshot.
      * @param {CreateCfsSnapshotRequest} req
      * @param {function(string, CreateCfsSnapshotResponse):void} cb
@@ -507,14 +646,25 @@ To use this API, submit a ticket for us to add you to the allowlist.
     }
 
     /**
-     * This API is used to unbind a snapshot policy from a file system.
-     * @param {UnbindAutoSnapshotPolicyRequest} req
-     * @param {function(string, UnbindAutoSnapshotPolicyResponse):void} cb
+     * This API is used to update a scheduled snapshot policy.
+     * @param {UpdateAutoSnapshotPolicyRequest} req
+     * @param {function(string, UpdateAutoSnapshotPolicyResponse):void} cb
      * @public
      */
-    UnbindAutoSnapshotPolicy(req, cb) {
-        let resp = new UnbindAutoSnapshotPolicyResponse();
-        this.request("UnbindAutoSnapshotPolicy", req, resp, cb);
+    UpdateAutoSnapshotPolicy(req, cb) {
+        let resp = new UpdateAutoSnapshotPolicyResponse();
+        this.request("UpdateAutoSnapshotPolicy", req, resp, cb);
+    }
+
+    /**
+     * File system directory operation API. Currently, only the Turbo series file system supports calling this API to perform directory operations. The Universal Series file system (including the enhanced version) does not support calling.
+     * @param {DoDirectoryOperationRequest} req
+     * @param {function(string, DoDirectoryOperationResponse):void} cb
+     * @public
+     */
+    DoDirectoryOperation(req, cb) {
+        let resp = new DoDirectoryOperationResponse();
+        this.request("DoDirectoryOperation", req, resp, cb);
     }
 
     /**
@@ -526,6 +676,28 @@ To use this API, submit a ticket for us to add you to the allowlist.
     DescribeSnapshotOperationLogs(req, cb) {
         let resp = new DescribeSnapshotOperationLogsResponse();
         this.request("DescribeSnapshotOperationLogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update a file system name.
+     * @param {UpdateCfsFileSystemNameRequest} req
+     * @param {function(string, UpdateCfsFileSystemNameResponse):void} cb
+     * @public
+     */
+    UpdateCfsFileSystemName(req, cb) {
+        let resp = new UpdateCfsFileSystemNameResponse();
+        this.request("UpdateCfsFileSystemName", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query data flow information.
+     * @param {DescribeDataFlowRequest} req
+     * @param {function(string, DescribeDataFlowResponse):void} cb
+     * @public
+     */
+    DescribeDataFlow(req, cb) {
+        let resp = new DescribeDataFlowResponse();
+        this.request("DescribeDataFlow", req, resp, cb);
     }
 
     /**

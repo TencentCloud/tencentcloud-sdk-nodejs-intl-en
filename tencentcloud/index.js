@@ -116,6 +116,7 @@ module.exports = {
     tcss: require("./tcss"),
     tdid: require("./tdid"),
     tdmq: require("./tdmq"),
+    tdmysql: require("./tdmysql"),
     tem: require("./tem"),
     teo: require("./teo"),
     tione: require("./tione"),

@@ -36,6 +36,7 @@ const GetMyCodeMaxPermissionRequest = models.GetMyCodeMaxPermissionRequest;
 const DeleteResourceFolderResponse = models.DeleteResourceFolderResponse;
 const UpdateTaskRequest = models.UpdateTaskRequest;
 const KVMap = models.KVMap;
+const CreateTriggerWorkflowRunResponse = models.CreateTriggerWorkflowRunResponse;
 const ListResourceFilesResponse = models.ListResourceFilesResponse;
 const ListDownstreamTaskInstancesRequest = models.ListDownstreamTaskInstancesRequest;
 const UpdateProjectRequest = models.UpdateProjectRequest;
@@ -98,6 +99,7 @@ const DeleteCodePermissionsRequest = models.DeleteCodePermissionsRequest;
 const SQLScriptConfig = models.SQLScriptConfig;
 const CodeFile = models.CodeFile;
 const AddCalcEnginesToProjectRequest = models.AddCalcEnginesToProjectRequest;
+const UpdateTaskBaseAttribute = models.UpdateTaskBaseAttribute;
 const CreateWorkflowResult = models.CreateWorkflowResult;
 const TaskDataRegistry = models.TaskDataRegistry;
 const KillTriggerWorkflowRunsRequest = models.KillTriggerWorkflowRunsRequest;
@@ -332,6 +334,7 @@ const CreateWorkflowFolderResponse = models.CreateWorkflowFolderResponse;
 const GetDataSourceRelatedTasksRequest = models.GetDataSourceRelatedTasksRequest;
 const UpdateTriggerTaskBaseAttribute = models.UpdateTriggerTaskBaseAttribute;
 const ResourceFolderPage = models.ResourceFolderPage;
+const CreateTriggerWorkflowRunResult = models.CreateTriggerWorkflowRunResult;
 const ListDownstreamTasksResponse = models.ListDownstreamTasksResponse;
 const ListQualityRuleTemplatesRequest = models.ListQualityRuleTemplatesRequest;
 const AuthorizePrivilegesRsp = models.AuthorizePrivilegesRsp;
@@ -454,7 +457,7 @@ const ListResourceGroupsRequest = models.ListResourceGroupsRequest;
 const GetResourceFolderResponse = models.GetResourceFolderResponse;
 const WorkflowFolder = models.WorkflowFolder;
 const GetAlarmMessageResponse = models.GetAlarmMessageResponse;
-const UpdateTaskBaseAttribute = models.UpdateTaskBaseAttribute;
+const CreateTriggerWorkflowRunRequest = models.CreateTriggerWorkflowRunRequest;
 const GetOpsTaskCodeRequest = models.GetOpsTaskCodeRequest;
 const GetTaskFolderResponse = models.GetTaskFolderResponse;
 const GetDataBackfillPlanRequest = models.GetDataBackfillPlanRequest;
@@ -827,6 +830,17 @@ class WedataClient extends AbstractClient {
     GetMyWorkflowMaxPermission(req, cb) {
         let resp = new GetMyWorkflowMaxPermissionResponse();
         this.request("GetMyWorkflowMaxPermission", req, resp, cb);
+    }
+
+    /**
+     * Update workflow (including basic info and workflow parameters).
+     * @param {UpdateTriggerWorkflowPartiallyRequest} req
+     * @param {function(string, UpdateTriggerWorkflowPartiallyResponse):void} cb
+     * @public
+     */
+    UpdateTriggerWorkflowPartially(req, cb) {
+        let resp = new UpdateTriggerWorkflowPartiallyResponse();
+        this.request("UpdateTriggerWorkflowPartially", req, resp, cb);
     }
 
     /**
@@ -2172,14 +2186,14 @@ class WedataClient extends AbstractClient {
     }
 
     /**
-     * Update workflow (including basic info and workflow parameters).
-     * @param {UpdateTriggerWorkflowPartiallyRequest} req
-     * @param {function(string, UpdateTriggerWorkflowPartiallyResponse):void} cb
+     * Run workflow under workflow scheduling model.
+     * @param {CreateTriggerWorkflowRunRequest} req
+     * @param {function(string, CreateTriggerWorkflowRunResponse):void} cb
      * @public
      */
-    UpdateTriggerWorkflowPartially(req, cb) {
-        let resp = new UpdateTriggerWorkflowPartiallyResponse();
-        this.request("UpdateTriggerWorkflowPartially", req, resp, cb);
+    CreateTriggerWorkflowRun(req, cb) {
+        let resp = new CreateTriggerWorkflowRunResponse();
+        this.request("CreateTriggerWorkflowRun", req, resp, cb);
     }
 
     /**

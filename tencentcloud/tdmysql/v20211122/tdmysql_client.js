@@ -18,23 +18,17 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ArchiveLogInterval = models.ArchiveLogInterval;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
-const ModifyBinlogStatusResponse = models.ModifyBinlogStatusResponse;
 const DescribeFlowRequest = models.DescribeFlowRequest;
 const ModifyDBSBackupSetCommentResponse = models.ModifyDBSBackupSetCommentResponse;
 const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
-const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
-const DescribeDatabaseTableResponse = models.DescribeDatabaseTableResponse;
 const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
 const SecurityGroupBound = models.SecurityGroupBound;
 const CreateDBSBackupResponse = models.CreateDBSBackupResponse;
 const CreateDBSBackupRequest = models.CreateDBSBackupRequest;
-const DescribeBillingEnableResponse = models.DescribeBillingEnableResponse;
 const DestroyInstancesRequest = models.DestroyInstancesRequest;
-const DescribeBillingEnableRequest = models.DescribeBillingEnableRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
-const TableColumn = models.TableColumn;
 const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
 const ModifyInstanceNameRequest = models.ModifyInstanceNameRequest;
 const ParamDesc = models.ParamDesc;
@@ -65,7 +59,6 @@ const ModifyDBSBackupSetCommentRequest = models.ModifyDBSBackupSetCommentRequest
 const DatabaseProcedure = models.DatabaseProcedure;
 const DBParamValue = models.DBParamValue;
 const ParamConstraint = models.ParamConstraint;
-const ModifyBinlogStatusRequest = models.ModifyBinlogStatusRequest;
 const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const DeleteDBSBackupSetsRequest = models.DeleteDBSBackupSetsRequest;
@@ -91,19 +84,6 @@ class TdmysqlClient extends AbstractClient {
     DescribeDatabaseObjects(req, cb) {
         let resp = new DescribeDatabaseObjectsResponse();
         this.request("DescribeDatabaseObjects", req, resp, cb);
-    }
-
-    /**
-     * Redundant API, no API calls.
-
-This API is used to query table information of a cloud database instance.
-     * @param {DescribeDatabaseTableRequest} req
-     * @param {function(string, DescribeDatabaseTableResponse):void} cb
-     * @public
-     */
-    DescribeDatabaseTable(req, cb) {
-        let resp = new DescribeDatabaseTableResponse();
-        this.request("DescribeDatabaseTable", req, resp, cb);
     }
 
     /**
@@ -140,19 +120,6 @@ This API is used to query table information of a cloud database instance.
     }
 
     /**
-     * This API is used to entirely overwrite the API feature of ModifyInstanceCdc.
-
-Modify the binlog status.
-     * @param {ModifyBinlogStatusRequest} req
-     * @param {function(string, ModifyBinlogStatusResponse):void} cb
-     * @public
-     */
-    ModifyBinlogStatus(req, cb) {
-        let resp = new ModifyBinlogStatusResponse();
-        this.request("ModifyBinlogStatus", req, resp, cb);
-    }
-
-    /**
      * Query recoverable time.
      * @param {DescribeDBSAvailableRecoveryTimeRequest} req
      * @param {function(string, DescribeDBSAvailableRecoveryTimeResponse):void} cb
@@ -161,19 +128,6 @@ Modify the binlog status.
     DescribeDBSAvailableRecoveryTime(req, cb) {
         let resp = new DescribeDBSAvailableRecoveryTimeResponse();
         this.request("DescribeDBSAvailableRecoveryTime", req, resp, cb);
-    }
-
-    /**
-     * No place to call.
-
-This API is used to query whether billing is enabled.
-     * @param {DescribeBillingEnableRequest} req
-     * @param {function(string, DescribeBillingEnableResponse):void} cb
-     * @public
-     */
-    DescribeBillingEnable(req, cb) {
-        let resp = new DescribeBillingEnableResponse();
-        this.request("DescribeBillingEnable", req, resp, cb);
     }
 
     /**

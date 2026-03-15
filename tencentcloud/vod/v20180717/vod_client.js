@@ -80,6 +80,7 @@ const RefreshUrlCacheRequest = models.RefreshUrlCacheRequest;
 const FaceConfigureInfoForUpdate = models.FaceConfigureInfoForUpdate;
 const ContentReviewTemplateItem = models.ContentReviewTemplateItem;
 const AigcImageTaskOutputFileInfo = models.AigcImageTaskOutputFileInfo;
+const TaskSimpleInfo = models.TaskSimpleInfo;
 const DeleteAIRecognitionTemplateResponse = models.DeleteAIRecognitionTemplateResponse;
 const VideoEnhanceConfig = models.VideoEnhanceConfig;
 const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateRequest;
@@ -209,7 +210,7 @@ const PlayStatFileInfo = models.PlayStatFileInfo;
 const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
 const FrameRateWithDenInfo = models.FrameRateWithDenInfo;
 const TraceWatermarkInput = models.TraceWatermarkInput;
-const PornAsrReviewTemplateInfoForUpdate = models.PornAsrReviewTemplateInfoForUpdate;
+const ModifyPersonSampleRequest = models.ModifyPersonSampleRequest;
 const ReviewAudioVideoSegmentItem = models.ReviewAudioVideoSegmentItem;
 const MediaAnimatedGraphicsInfo = models.MediaAnimatedGraphicsInfo;
 const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTimeOffsetTemplatesRequest;
@@ -264,6 +265,7 @@ const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullT
 const ColorEnhanceInfo = models.ColorEnhanceInfo;
 const DeleteEnhanceMediaTemplateResponse = models.DeleteEnhanceMediaTemplateResponse;
 const EditMediaOutputConfig = models.EditMediaOutputConfig;
+const ModifyPersonSampleResponse = models.ModifyPersonSampleResponse;
 const SplitMediaTaskSegmentInfo = models.SplitMediaTaskSegmentInfo;
 const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
 const RequestHeader = models.RequestHeader;
@@ -354,6 +356,7 @@ const DeleteHeadTailTemplateRequest = models.DeleteHeadTailTemplateRequest;
 const AiAnalysisTaskTagResult = models.AiAnalysisTaskTagResult;
 const SearchMediaResponse = models.SearchMediaResponse;
 const ProcessMediaByMPSResponse = models.ProcessMediaByMPSResponse;
+const DescribeAigcApiTokensRequest = models.DescribeAigcApiTokensRequest;
 const Cache = models.Cache;
 const RemoveWaterMarkTaskOutput = models.RemoveWaterMarkTaskOutput;
 const ModifyMediaStorageClassRequest = models.ModifyMediaStorageClassRequest;
@@ -433,7 +436,7 @@ const SceneAigcImageOutputConfig = models.SceneAigcImageOutputConfig;
 const SetVodDomainCertificateResponse = models.SetVodDomainCertificateResponse;
 const ExtractTraceWatermarkTaskOutput = models.ExtractTraceWatermarkTaskOutput;
 const MediaProcessTaskCoverBySnapshotResult = models.MediaProcessTaskCoverBySnapshotResult;
-const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
+const DeleteAigcApiTokenResponse = models.DeleteAigcApiTokenResponse;
 const UserAgentFilter = models.UserAgentFilter;
 const ComplexAdaptiveDynamicStreamingTaskInput = models.ComplexAdaptiveDynamicStreamingTaskInput;
 const SortBy = models.SortBy;
@@ -448,8 +451,10 @@ const ComposeMediaTask = models.ComposeMediaTask;
 const HeadTailConfigureInfoForUpdate = models.HeadTailConfigureInfoForUpdate;
 const ImageScale = models.ImageScale;
 const ModifyJustInTimeTranscodeTemplateResponse = models.ModifyJustInTimeTranscodeTemplateResponse;
+const MediaVideoStreamItem = models.MediaVideoStreamItem;
 const TranscodePlayInfo2017 = models.TranscodePlayInfo2017;
 const SplitMediaTask = models.SplitMediaTask;
+const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
 const OthersPrivateAccess = models.OthersPrivateAccess;
 const ComposeMediaTaskInput = models.ComposeMediaTaskInput;
 const ModifyQualityInspectTemplateRequest = models.ModifyQualityInspectTemplateRequest;
@@ -624,7 +629,7 @@ const SceneAigcImageTaskOutput = models.SceneAigcImageTaskOutput;
 const ComposeMediaTaskOutput = models.ComposeMediaTaskOutput;
 const DescribeQualityInspectTemplatesRequest = models.DescribeQualityInspectTemplatesRequest;
 const DescribeMediaInfosRequest = models.DescribeMediaInfosRequest;
-const ModifyPersonSampleRequest = models.ModifyPersonSampleRequest;
+const CreateAigcApiTokenRequest = models.CreateAigcApiTokenRequest;
 const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
 const TerrorismImageResult = models.TerrorismImageResult;
 const DeleteVodDomainRequest = models.DeleteVodDomainRequest;
@@ -721,10 +726,10 @@ const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOff
 const ProcedureTask = models.ProcedureTask;
 const ExtractTraceWatermarkRequest = models.ExtractTraceWatermarkRequest;
 const CDNDomainConfig = models.CDNDomainConfig;
-const TaskSimpleInfo = models.TaskSimpleInfo;
+const DescribeAigcApiTokensResponse = models.DescribeAigcApiTokensResponse;
 const ReviewAudioVideoTask = models.ReviewAudioVideoTask;
 const DescribeSnapshotByTimeOffsetTemplatesResponse = models.DescribeSnapshotByTimeOffsetTemplatesResponse;
-const DomainQUICConfig = models.DomainQUICConfig;
+const DeleteAigcApiTokenRequest = models.DeleteAigcApiTokenRequest;
 const SetDrmKeyProviderInfoRequest = models.SetDrmKeyProviderInfoRequest;
 const SnapshotByTimeOffsetTemplate = models.SnapshotByTimeOffsetTemplate;
 const DeleteSnapshotByTimeOffsetTemplateResponse = models.DeleteSnapshotByTimeOffsetTemplateResponse;
@@ -735,6 +740,7 @@ const DescribeReviewDetailsResponse = models.DescribeReviewDetailsResponse;
 const CreateTranscodeTemplateResponse = models.CreateTranscodeTemplateResponse;
 const CDNDomainConfigForUpdate = models.CDNDomainConfigForUpdate;
 const AiRecognitionTaskAsrWordsResultInput = models.AiRecognitionTaskAsrWordsResultInput;
+const PornAsrReviewTemplateInfoForUpdate = models.PornAsrReviewTemplateInfoForUpdate;
 const ModifySubAppIdStatusResponse = models.ModifySubAppIdStatusResponse;
 const CreateAIAnalysisTemplateRequest = models.CreateAIAnalysisTemplateRequest;
 const AiReviewTerrorismTaskInput = models.AiReviewTerrorismTaskInput;
@@ -777,7 +783,7 @@ const ReviewTemplate = models.ReviewTemplate;
 const DescribeCurrentPlaylistRequest = models.DescribeCurrentPlaylistRequest;
 const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
 const DescribeCDNDomainsResponse = models.DescribeCDNDomainsResponse;
-const MediaVideoStreamItem = models.MediaVideoStreamItem;
+const DomainQUICConfig = models.DomainQUICConfig;
 const CreateRebuildMediaTemplateRequest = models.CreateRebuildMediaTemplateRequest;
 const ImageOperation = models.ImageOperation;
 const MediaSubStreamInfoItem = models.MediaSubStreamInfoItem;
@@ -791,7 +797,7 @@ const RemoveWatermarkRequest = models.RemoveWatermarkRequest;
 const ExecuteFunctionRequest = models.ExecuteFunctionRequest;
 const RebuildMediaTask = models.RebuildMediaTask;
 const ConfirmEventsResponse = models.ConfirmEventsResponse;
-const ModifyPersonSampleResponse = models.ModifyPersonSampleResponse;
+const CreateAigcApiTokenResponse = models.CreateAigcApiTokenResponse;
 const VideoTrackItem = models.VideoTrackItem;
 const VideoDenoiseInfo = models.VideoDenoiseInfo;
 const DescribeLicenseUsageDataRequest = models.DescribeLicenseUsageDataRequest;
@@ -1825,17 +1831,15 @@ If event notifications are used, the event type is [ReviewAudioVideoComplete](ht
     }
 
     /**
-     * This interface returns the image review usage information used every day within the query time range.
-   1. You can query the image review statistics for the last 365 days.
-   2. The query time span does not exceed 90 days.
-   3. If the query time span exceeds 1 day, data with a granularity of days will be returned. Otherwise, data with a granularity of 5 minutes will be returned.
-     * @param {DescribeImageReviewUsageDataRequest} req
-     * @param {function(string, DescribeImageReviewUsageDataResponse):void} cb
+     * We have <font color='red'>stopped updating</font> this API. Currently, you no longer need a player configuration to use player signatures. For details, see [Player Signature](https://intl.cloud.tencent.com/document/product/266/45554?from_cn_redirect=1).
+This API is used to create a player configuration. Up to 100 configurations can be created.
+     * @param {CreateSuperPlayerConfigRequest} req
+     * @param {function(string, CreateSuperPlayerConfigResponse):void} cb
      * @public
      */
-    DescribeImageReviewUsageData(req, cb) {
-        let resp = new DescribeImageReviewUsageDataResponse();
-        this.request("DescribeImageReviewUsageData", req, resp, cb);
+    CreateSuperPlayerConfig(req, cb) {
+        let resp = new CreateSuperPlayerConfigResponse();
+        this.request("CreateSuperPlayerConfig", req, resp, cb);
     }
 
     /**
@@ -1850,14 +1854,14 @@ If event notifications are used, the event type is [ReviewAudioVideoComplete](ht
     }
 
     /**
-     * This API is used to modify sample information according to the sample ID. You can modify the name and description, add, delete, and reset facial features or tags. Leave at least one image after deleting facial features. To leave no image, please use the reset operation.
-     * @param {ModifyPersonSampleRequest} req
-     * @param {function(string, ModifyPersonSampleResponse):void} cb
+     * This API is used to create a Token for invoking AIGC API. After creation, there is a delay in data sync. It becomes queryable or deletable after about 30 seconds.
+     * @param {CreateAigcApiTokenRequest} req
+     * @param {function(string, CreateAigcApiTokenResponse):void} cb
      * @public
      */
-    ModifyPersonSample(req, cb) {
-        let resp = new ModifyPersonSampleResponse();
-        this.request("ModifyPersonSample", req, resp, cb);
+    CreateAigcApiToken(req, cb) {
+        let resp = new CreateAigcApiTokenResponse();
+        this.request("CreateAigcApiToken", req, resp, cb);
     }
 
     /**
@@ -2011,15 +2015,17 @@ This API is used to delete a custom audio/video moderation template.
     }
 
     /**
-     * We have <font color='red'>stopped updating</font> this API. Currently, you no longer need a player configuration to use player signatures. For details, see [Player Signature](https://intl.cloud.tencent.com/document/product/266/45554?from_cn_redirect=1).
-This API is used to create a player configuration. Up to 100 configurations can be created.
-     * @param {CreateSuperPlayerConfigRequest} req
-     * @param {function(string, CreateSuperPlayerConfigResponse):void} cb
+     * This interface returns the image review usage information used every day within the query time range.
+   1. You can query the image review statistics for the last 365 days.
+   2. The query time span does not exceed 90 days.
+   3. If the query time span exceeds 1 day, data with a granularity of days will be returned. Otherwise, data with a granularity of 5 minutes will be returned.
+     * @param {DescribeImageReviewUsageDataRequest} req
+     * @param {function(string, DescribeImageReviewUsageDataResponse):void} cb
      * @public
      */
-    CreateSuperPlayerConfig(req, cb) {
-        let resp = new CreateSuperPlayerConfigResponse();
-        this.request("CreateSuperPlayerConfig", req, resp, cb);
+    DescribeImageReviewUsageData(req, cb) {
+        let resp = new DescribeImageReviewUsageDataResponse();
+        this.request("DescribeImageReviewUsageData", req, resp, cb);
     }
 
     /**
@@ -2130,15 +2136,14 @@ Currently supported MPS features:
     }
 
     /**
-     * We have <font color=red>stopped updating</font> this API. Our new moderation templates can moderate audio/video as well as images. For details, see [DescribeReviewTemplates](https://intl.cloud.tencent.com/document/api/266/84389?from_cn_redirect=1).
-This API is used to get the information of custom and [preset](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.AE.A1.E6.A0.B8.E6.A8.A1.E6.9D.BF) audio/video moderation templates based on template IDs.
-     * @param {DescribeContentReviewTemplatesRequest} req
-     * @param {function(string, DescribeContentReviewTemplatesResponse):void} cb
+     * This API is used to get the list of video content recognition templates based on unique template ID. The return result includes all eligible custom and [preset video content recognition templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E8.AF.86.E5.88.AB.E6.A8.A1.E6.9D.BF).
+     * @param {DescribeAIRecognitionTemplatesRequest} req
+     * @param {function(string, DescribeAIRecognitionTemplatesResponse):void} cb
      * @public
      */
-    DescribeContentReviewTemplates(req, cb) {
-        let resp = new DescribeContentReviewTemplatesResponse();
-        this.request("DescribeContentReviewTemplates", req, resp, cb);
+    DescribeAIRecognitionTemplates(req, cb) {
+        let resp = new DescribeAIRecognitionTemplatesResponse();
+        this.request("DescribeAIRecognitionTemplates", req, resp, cb);
     }
 
     /**
@@ -2323,6 +2328,17 @@ If using event notification, the event notification type is [task flow status ch
     }
 
     /**
+     * This API is used to modify sample information according to the sample ID. You can modify the name and description, add, delete, and reset facial features or tags. Leave at least one image after deleting facial features. To leave no image, please use the reset operation.
+     * @param {ModifyPersonSampleRequest} req
+     * @param {function(string, ModifyPersonSampleResponse):void} cb
+     * @public
+     */
+    ModifyPersonSample(req, cb) {
+        let resp = new ModifyPersonSampleResponse();
+        this.request("ModifyPersonSample", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of animated image generating templates and supports paged queries by filters.
      * @param {DescribeAnimatedGraphicsTemplatesRequest} req
      * @param {function(string, DescribeAnimatedGraphicsTemplatesResponse):void} cb
@@ -2415,6 +2431,17 @@ This API is used to modify a player configuration.
     CreateClass(req, cb) {
         let resp = new CreateClassResponse();
         this.request("CreateClass", req, resp, cb);
+    }
+
+    /**
+     * Query the AIGC API Token list. There is a delay in data sync after creation or deletion. The latest data is queryable after about 30 seconds.
+     * @param {DescribeAigcApiTokensRequest} req
+     * @param {function(string, DescribeAigcApiTokensResponse):void} cb
+     * @public
+     */
+    DescribeAigcApiTokens(req, cb) {
+        let resp = new DescribeAigcApiTokensResponse();
+        this.request("DescribeAigcApiTokens", req, resp, cb);
     }
 
     /**
@@ -2574,14 +2601,26 @@ The modification will only take effect for new playback requests. For ongoing pl
     }
 
     /**
-     * This API is used to get the list of video content recognition templates based on unique template ID. The return result includes all eligible custom and [preset video content recognition templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E8.AF.86.E5.88.AB.E6.A8.A1.E6.9D.BF).
-     * @param {DescribeAIRecognitionTemplatesRequest} req
-     * @param {function(string, DescribeAIRecognitionTemplatesResponse):void} cb
+     * Delete an AIGC API Token.
+     * @param {DeleteAigcApiTokenRequest} req
+     * @param {function(string, DeleteAigcApiTokenResponse):void} cb
      * @public
      */
-    DescribeAIRecognitionTemplates(req, cb) {
-        let resp = new DescribeAIRecognitionTemplatesResponse();
-        this.request("DescribeAIRecognitionTemplates", req, resp, cb);
+    DeleteAigcApiToken(req, cb) {
+        let resp = new DeleteAigcApiTokenResponse();
+        this.request("DeleteAigcApiToken", req, resp, cb);
+    }
+
+    /**
+     * We have <font color=red>stopped updating</font> this API. Our new moderation templates can moderate audio/video as well as images. For details, see [DescribeReviewTemplates](https://intl.cloud.tencent.com/document/api/266/84389?from_cn_redirect=1).
+This API is used to get the information of custom and [preset](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.AE.A1.E6.A0.B8.E6.A8.A1.E6.9D.BF) audio/video moderation templates based on template IDs.
+     * @param {DescribeContentReviewTemplatesRequest} req
+     * @param {function(string, DescribeContentReviewTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeContentReviewTemplates(req, cb) {
+        let resp = new DescribeContentReviewTemplatesResponse();
+        this.request("DescribeContentReviewTemplates", req, resp, cb);
     }
 
     /**

@@ -1486,6 +1486,18 @@ class DescribeBillSummaryRequest extends  AbstractModel {
          */
         this.TagKey = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OperateUin = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
     }
 
     /**
@@ -1498,6 +1510,8 @@ class DescribeBillSummaryRequest extends  AbstractModel {
         this.Month = 'Month' in params ? params.Month : null;
         this.GroupType = 'GroupType' in params ? params.GroupType : null;
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.OperateUin = 'OperateUin' in params ? params.OperateUin : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
 
     }
 }
@@ -3432,10 +3446,10 @@ Valid values: `1` (required), `0` (not required).
 
         /**
          * Transaction type. This parameter needs to be input using the `ActionTypeName` value. Valid values:
-Monthly subscription purchase
-Monthly subscription renewal
-Monthly subscription upgrade/downgrade
-Monthly subscription refund 
+Yearly/monthly subscription purchase
+Yearly/monthly subscription renewal
+Yearly/monthly subscription upgrade/downgrade
+Yearly/monthly subscription refund 
 Pay-as-you-go deduction 
 Offline project deduction 
 Offline product deduction 
@@ -3451,13 +3465,13 @@ Offer deduction
 Offer compensation 
 Pay-as-you-go resource migration in 
 Pay-as-you-go resource migration out 
-Monthly subscription resource migration in 
-Monthly subscription resource migration out 
+Yearly/monthly subscription resource migration in 
+Yearly/monthly subscription resource migration out 
 Prepaid 
 Hourly 
 RI refund 
 Pay-as-you-go reversal 
-Monthly subscription to pay-as-you-go 
+Yearly/monthly subscription to pay-as-you-go 
 Minimum spend deduction 
 Hourly savings plan fee
          * @type {string || null}
@@ -6014,7 +6028,7 @@ class ActionSummaryOverviewItem extends  AbstractModel {
         this.ActionType = null;
 
         /**
-         * Transaction type, which can be monthly subscription purchase, monthly subscription renewal, or pay-as-you-go deduction.
+         * Transaction type, which can be yearly/monthly subscription purchase, monthly subscription renewal, or pay-as-you-go deduction.
          * @type {string || null}
          */
         this.ActionTypeName = null;
@@ -6032,13 +6046,13 @@ class ActionSummaryOverviewItem extends  AbstractModel {
         this.RealTotalCost = null;
 
         /**
-         * Cash credit: The amount paid from the user’s cash account
+         * Cash credit: The amount paid from the user's cash account
          * @type {string || null}
          */
         this.CashPayAmount = null;
 
         /**
-         * Free credit: The amount paid with the user’s free credit
+         * Free credit: The amount paid with the user's free credit
          * @type {string || null}
          */
         this.IncentivePayAmount = null;
@@ -6050,7 +6064,7 @@ class ActionSummaryOverviewItem extends  AbstractModel {
         this.VoucherPayAmount = null;
 
         /**
-         * Commission credit: The amount paid with the user’s commission credit. Note: This field may return null, indicating that no valid values can be obtained.
+         * Commission credit: The amount paid with the user's commission credit. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TransferPayAmount = null;
@@ -6142,7 +6156,7 @@ Valid values: `1` (required), `0` (not required).
         this.NeedRecordNum = null;
 
         /**
-         * Billing mode, which can be `prePay` (monthly subscription) or `postPay` (pay-as-you-go).
+         * Billing mode, which can be `prePay` (yearly/monthly subscription) or `postPay` (pay-as-you-go).
          * @type {string || null}
          */
         this.PayMode = null;
@@ -6155,10 +6169,10 @@ Valid values: `1` (required), `0` (not required).
 
         /**
          * Transaction type. This parameter needs to be input using the `ActionTypeName` value. Valid values:
-Monthly subscription purchase
-Monthly subscription renewal
-Monthly subscription upgrade/downgrade
-Monthly subscription refund 
+Yearly/monthly subscription purchase
+Yearly/monthly subscription renewal
+Yearly/monthly subscription upgrade/downgrade
+Yearly/monthly subscription refund 
 Pay-as-you-go deduction 
 Offline project deduction 
 Offline product deduction 
@@ -6174,13 +6188,13 @@ Offer deduction
 Offer compensation 
 Pay-as-you-go resource migration in 
 Pay-as-you-go resource migration out 
-Monthly subscription resource migration in 
-Monthly subscription resource migration out 
+Yearly/monthly subscription resource migration in 
+Yearly/monthly subscription resource migration out 
 Prepaid 
 Hourly 
 RI refund 
 Pay-as-you-go reversal 
-Monthly subscription to pay-as-you-go 
+Yearly/monthly subscription to pay-as-you-go 
 Minimum spend deduction 
 Hourly savings plan fee
          * @type {string || null}
@@ -6323,12 +6337,12 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         /**
          * Hourly settlement
 Daily settlement
-Monthly settlement
+Yearly/monthly subscription
 Spot
 New monthly subscription
-Monthly subscription renewal
-Monthly subscription specification adjustment
-Monthly subscription refund
+Yearly/monthly subscription renewal
+Yearly/monthly subscription specification adjustment
+Yearly/monthly subscription refund
 Adjustment - deduction
 Adjustment - refund
 Hourly RI fee
@@ -8566,12 +8580,12 @@ ccli billing DescribeBillDetail --cli-unfold-argument --Offset 1 --Limit 100 --M
         /**
          * Hourly settlement
 Daily settlement
-Monthly settlement
+Yearly/monthly subscription
 Spot
 New monthly subscription
-Monthly subscription renewal
-Monthly subscription specification adjustment
-Monthly subscription refund
+Yearly/monthly subscription renewal
+Yearly/monthly subscription specification adjustment
+Yearly/monthly subscription refund
 Adjustment - deduction
 Adjustment - refund
 Hourly RI fee

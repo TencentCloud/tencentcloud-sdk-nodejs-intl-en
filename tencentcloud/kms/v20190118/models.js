@@ -36,6 +36,12 @@ class UpdateAliasRequest extends  AbstractModel {
          */
         this.KeyId = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -47,6 +53,12 @@ class UpdateAliasRequest extends  AbstractModel {
         }
         this.Alias = 'Alias' in params ? params.Alias : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -141,6 +153,12 @@ class EnableKeyRotationRequest extends  AbstractModel {
          */
         this.RotateDays = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -152,6 +170,12 @@ class EnableKeyRotationRequest extends  AbstractModel {
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.RotateDays = 'RotateDays' in params ? params.RotateDays : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -374,6 +398,12 @@ class UpdateDataKeyDescriptionRequest extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -385,6 +415,12 @@ class UpdateDataKeyDescriptionRequest extends  AbstractModel {
         }
         this.DataKeyId = 'DataKeyId' in params ? params.DataKeyId : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -471,6 +507,12 @@ class DescribeKeyRequest extends  AbstractModel {
          */
         this.KeyId = null;
 
+        /**
+         * Trusted service member account information.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -481,6 +523,12 @@ class DescribeKeyRequest extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -604,6 +652,12 @@ class DescribeDataKeysRequest extends  AbstractModel {
          */
         this.DataKeyIds = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -614,6 +668,12 @@ class DescribeDataKeysRequest extends  AbstractModel {
             return;
         }
         this.DataKeyIds = 'DataKeyIds' in params ? params.DataKeyIds : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -948,6 +1008,12 @@ class EnableKeyRequest extends  AbstractModel {
          */
         this.KeyId = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -958,6 +1024,12 @@ class EnableKeyRequest extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -976,6 +1048,12 @@ class GetKeyRotationStatusRequest extends  AbstractModel {
          */
         this.KeyId = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -986,6 +1064,12 @@ class GetKeyRotationStatusRequest extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -1012,24 +1096,25 @@ class ListAlgorithmsRequest extends  AbstractModel {
 }
 
 /**
- * Tag key and tag value
+ * Shared member account information.
  * @class
  */
-class Tag extends  AbstractModel {
+class MemberAccount extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag key
-         * @type {string || null}
+         * Member account appid.
+
+         * @type {number || null}
          */
-        this.TagKey = null;
+        this.MemberAppId = null;
 
         /**
-         * Tag value
-         * @type {string || null}
+         * Member account UIN
+         * @type {number || null}
          */
-        this.TagValue = null;
+        this.MemberUin = null;
 
     }
 
@@ -1040,8 +1125,8 @@ class Tag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+        this.MemberAppId = 'MemberAppId' in params ? params.MemberAppId : null;
+        this.MemberUin = 'MemberUin' in params ? params.MemberUin : null;
 
     }
 }
@@ -1369,6 +1454,12 @@ class UpdateDataKeyNameRequest extends  AbstractModel {
          */
         this.DataKeyName = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -1380,6 +1471,12 @@ class UpdateDataKeyNameRequest extends  AbstractModel {
         }
         this.DataKeyId = 'DataKeyId' in params ? params.DataKeyId : null;
         this.DataKeyName = 'DataKeyName' in params ? params.DataKeyName : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -1404,6 +1501,12 @@ class ScheduleDataKeyDeletionRequest extends  AbstractModel {
          */
         this.PendingWindowInDays = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -1415,6 +1518,12 @@ class ScheduleDataKeyDeletionRequest extends  AbstractModel {
         }
         this.DataKeyId = 'DataKeyId' in params ? params.DataKeyId : null;
         this.PendingWindowInDays = 'PendingWindowInDays' in params ? params.PendingWindowInDays : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -1433,6 +1542,12 @@ class DescribeKeysRequest extends  AbstractModel {
          */
         this.KeyIds = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -1443,6 +1558,12 @@ class DescribeKeysRequest extends  AbstractModel {
             return;
         }
         this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -1961,6 +2082,12 @@ class EnableKeysRequest extends  AbstractModel {
          */
         this.KeyIds = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -1971,6 +2098,12 @@ class EnableKeysRequest extends  AbstractModel {
             return;
         }
         this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -2342,6 +2475,12 @@ class DescribeDataKeyRequest extends  AbstractModel {
          */
         this.DataKeyId = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -2352,6 +2491,12 @@ class DescribeDataKeyRequest extends  AbstractModel {
             return;
         }
         this.DataKeyId = 'DataKeyId' in params ? params.DataKeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -2560,6 +2705,24 @@ class DataKeyMetadata extends  AbstractModel {
          */
         this.SourceHsmClusterId = null;
 
+        /**
+         * Member account appId.
+         * @type {number || null}
+         */
+        this.AccountAppId = null;
+
+        /**
+         * Member account UIN
+         * @type {number || null}
+         */
+        this.AccountUin = null;
+
+        /**
+         * Member account name.
+         * @type {string || null}
+         */
+        this.AccountName = null;
+
     }
 
     /**
@@ -2590,6 +2753,9 @@ class DataKeyMetadata extends  AbstractModel {
         this.SyncStartTime = 'SyncStartTime' in params ? params.SyncStartTime : null;
         this.SyncEndTime = 'SyncEndTime' in params ? params.SyncEndTime : null;
         this.SourceHsmClusterId = 'SourceHsmClusterId' in params ? params.SourceHsmClusterId : null;
+        this.AccountAppId = 'AccountAppId' in params ? params.AccountAppId : null;
+        this.AccountUin = 'AccountUin' in params ? params.AccountUin : null;
+        this.AccountName = 'AccountName' in params ? params.AccountName : null;
 
     }
 }
@@ -2825,6 +2991,12 @@ class ListKeyDetailRequest extends  AbstractModel {
          */
         this.HsmClusterId = null;
 
+        /**
+         * Array of trusted service member account information.
+         * @type {Array.<MemberAccount> || null}
+         */
+        this.MemberAccounts = null;
+
     }
 
     /**
@@ -2852,6 +3024,15 @@ class ListKeyDetailRequest extends  AbstractModel {
             }
         }
         this.HsmClusterId = 'HsmClusterId' in params ? params.HsmClusterId : null;
+
+        if (params.MemberAccounts) {
+            this.MemberAccounts = new Array();
+            for (let z in params.MemberAccounts) {
+                let obj = new MemberAccount();
+                obj.deserialize(params.MemberAccounts[z]);
+                this.MemberAccounts.push(obj);
+            }
+        }
 
     }
 }
@@ -3031,6 +3212,12 @@ class CancelKeyDeletionRequest extends  AbstractModel {
          */
         this.KeyId = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -3041,6 +3228,12 @@ class CancelKeyDeletionRequest extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -3158,6 +3351,12 @@ class EnableDataKeysRequest extends  AbstractModel {
          */
         this.DataKeyIds = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -3168,6 +3367,12 @@ class EnableDataKeysRequest extends  AbstractModel {
             return;
         }
         this.DataKeyIds = 'DataKeyIds' in params ? params.DataKeyIds : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -3278,6 +3483,12 @@ class DisableDataKeyRequest extends  AbstractModel {
          */
         this.DataKeyId = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -3288,6 +3499,12 @@ class DisableDataKeyRequest extends  AbstractModel {
             return;
         }
         this.DataKeyId = 'DataKeyId' in params ? params.DataKeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -3362,6 +3579,12 @@ class ArchiveKeyRequest extends  AbstractModel {
          */
         this.KeyId = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -3372,6 +3595,12 @@ class ArchiveKeyRequest extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -3663,6 +3892,12 @@ class GetDataKeyCiphertextBlobRequest extends  AbstractModel {
          */
         this.DataKeyId = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -3673,6 +3908,12 @@ class GetDataKeyCiphertextBlobRequest extends  AbstractModel {
             return;
         }
         this.DataKeyId = 'DataKeyId' in params ? params.DataKeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -4257,6 +4498,12 @@ class ListDataKeyDetailRequest extends  AbstractModel {
          */
         this.TagFilters = null;
 
+        /**
+         * Array of member account information.
+         * @type {Array.<MemberAccount> || null}
+         */
+        this.MemberAccounts = null;
+
     }
 
     /**
@@ -4283,6 +4530,15 @@ class ListDataKeyDetailRequest extends  AbstractModel {
                 let obj = new TagFilter();
                 obj.deserialize(params.TagFilters[z]);
                 this.TagFilters.push(obj);
+            }
+        }
+
+        if (params.MemberAccounts) {
+            this.MemberAccounts = new Array();
+            for (let z in params.MemberAccounts) {
+                let obj = new MemberAccount();
+                obj.deserialize(params.MemberAccounts[z]);
+                this.MemberAccounts.push(obj);
             }
         }
 
@@ -4587,6 +4843,24 @@ class KeyMetadata extends  AbstractModel {
          */
         this.SourceHsmClusterId = null;
 
+        /**
+         * Member account appId.
+         * @type {number || null}
+         */
+        this.AccountAppId = null;
+
+        /**
+         * Member account UIN
+         * @type {number || null}
+         */
+        this.AccountUin = null;
+
+        /**
+         * Member account name.
+         * @type {string || null}
+         */
+        this.AccountName = null;
+
     }
 
     /**
@@ -4621,6 +4895,9 @@ class KeyMetadata extends  AbstractModel {
         this.SyncStartTime = 'SyncStartTime' in params ? params.SyncStartTime : null;
         this.SyncEndTime = 'SyncEndTime' in params ? params.SyncEndTime : null;
         this.SourceHsmClusterId = 'SourceHsmClusterId' in params ? params.SourceHsmClusterId : null;
+        this.AccountAppId = 'AccountAppId' in params ? params.AccountAppId : null;
+        this.AccountUin = 'AccountUin' in params ? params.AccountUin : null;
+        this.AccountName = 'AccountName' in params ? params.AccountName : null;
 
     }
 }
@@ -4969,6 +5246,12 @@ class DisableKeysRequest extends  AbstractModel {
          */
         this.KeyIds = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -4979,6 +5262,12 @@ class DisableKeysRequest extends  AbstractModel {
             return;
         }
         this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -5466,6 +5755,12 @@ class ScheduleKeyDeletionRequest extends  AbstractModel {
          */
         this.PendingWindowInDays = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -5477,6 +5772,12 @@ class ScheduleKeyDeletionRequest extends  AbstractModel {
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.PendingWindowInDays = 'PendingWindowInDays' in params ? params.PendingWindowInDays : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -5495,6 +5796,12 @@ class CancelDataKeyDeletionRequest extends  AbstractModel {
          */
         this.DataKeyId = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -5505,6 +5812,12 @@ class CancelDataKeyDeletionRequest extends  AbstractModel {
             return;
         }
         this.DataKeyId = 'DataKeyId' in params ? params.DataKeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -5558,6 +5871,12 @@ class DisableKeyRequest extends  AbstractModel {
          */
         this.KeyId = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -5568,6 +5887,12 @@ class DisableKeyRequest extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -5614,6 +5939,12 @@ class EnableDataKeyRequest extends  AbstractModel {
          */
         this.DataKeyId = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -5624,6 +5955,12 @@ class EnableDataKeyRequest extends  AbstractModel {
             return;
         }
         this.DataKeyId = 'DataKeyId' in params ? params.DataKeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -5945,6 +6282,12 @@ class DisableDataKeysRequest extends  AbstractModel {
          */
         this.DataKeyIds = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -5955,6 +6298,12 @@ class DisableDataKeysRequest extends  AbstractModel {
             return;
         }
         this.DataKeyIds = 'DataKeyIds' in params ? params.DataKeyIds : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -5979,6 +6328,12 @@ class UpdateKeyDescriptionRequest extends  AbstractModel {
          */
         this.KeyId = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -5990,6 +6345,12 @@ class UpdateKeyDescriptionRequest extends  AbstractModel {
         }
         this.Description = 'Description' in params ? params.Description : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -6076,6 +6437,12 @@ class CancelKeyArchiveRequest extends  AbstractModel {
          */
         this.KeyId = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -6086,6 +6453,47 @@ class CancelKeyArchiveRequest extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
+
+    }
+}
+
+/**
+ * Tag key and tag value
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -6104,6 +6512,12 @@ class DisableKeyRotationRequest extends  AbstractModel {
          */
         this.KeyId = null;
 
+        /**
+         * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
     }
 
     /**
@@ -6114,6 +6528,12 @@ class DisableKeyRotationRequest extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
 
     }
 }
@@ -6145,7 +6565,7 @@ module.exports = {
     EnableKeyRequest: EnableKeyRequest,
     GetKeyRotationStatusRequest: GetKeyRotationStatusRequest,
     ListAlgorithmsRequest: ListAlgorithmsRequest,
-    Tag: Tag,
+    MemberAccount: MemberAccount,
     ListKeyDetailResponse: ListKeyDetailResponse,
     GenerateDataKeyRequest: GenerateDataKeyRequest,
     UpdateAliasResponse: UpdateAliasResponse,
@@ -6265,6 +6685,7 @@ module.exports = {
     UnbindCloudResourceResponse: UnbindCloudResourceResponse,
     DescribeKeyResponse: DescribeKeyResponse,
     CancelKeyArchiveRequest: CancelKeyArchiveRequest,
+    Tag: Tag,
     DisableKeyRotationRequest: DisableKeyRotationRequest,
 
 }

@@ -42,7 +42,7 @@ const ScheduleDataKeyDeletionResponse = models.ScheduleDataKeyDeletionResponse;
 const EnableKeyRequest = models.EnableKeyRequest;
 const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
 const ListAlgorithmsRequest = models.ListAlgorithmsRequest;
-const Tag = models.Tag;
+const MemberAccount = models.MemberAccount;
 const ListKeyDetailResponse = models.ListKeyDetailResponse;
 const GenerateDataKeyRequest = models.GenerateDataKeyRequest;
 const UpdateAliasResponse = models.UpdateAliasResponse;
@@ -162,6 +162,7 @@ const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
 const UnbindCloudResourceResponse = models.UnbindCloudResourceResponse;
 const DescribeKeyResponse = models.DescribeKeyResponse;
 const CancelKeyArchiveRequest = models.CancelKeyArchiveRequest;
+const Tag = models.Tag;
 const DisableKeyRotationRequest = models.DisableKeyRotationRequest;
 
 

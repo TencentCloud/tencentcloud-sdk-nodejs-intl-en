@@ -186,7 +186,7 @@ class CdbZoneSellConf extends  AbstractModel {
         this.IsBm = null;
 
         /**
-         * Supported billing method. Valid values: `0` (monthly subscribed), `1` (hourly billed), `2` (pay-as-you-go)
+         * Supported billing method. Valid values: `0` (yearly/monthly subscribed), `1` (hourly billed), `2` (pay-as-you-go)
          * @type {Array.<string> || null}
          */
         this.PayType = null;
@@ -269,6 +269,18 @@ class CdbZoneSellConf extends  AbstractModel {
          */
         this.EngineType = null;
 
+        /**
+         * Sales status of the cloud disk edition instance in the current availability zone. Possible returned values: 1-launched; 3-not available for sale; 4-not displayed.
+         * @type {number || null}
+         */
+        this.CloudNativeClusterStatus = null;
+
+        /**
+         * Cloud disk edition or single-node basic edition supported disk type.
+         * @type {Array.<DiskTypeConfigItem> || null}
+         */
+        this.DiskTypeConf = null;
+
     }
 
     /**
@@ -318,6 +330,16 @@ class CdbZoneSellConf extends  AbstractModel {
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.IsSupportIpv6 = 'IsSupportIpv6' in params ? params.IsSupportIpv6 : null;
         this.EngineType = 'EngineType' in params ? params.EngineType : null;
+        this.CloudNativeClusterStatus = 'CloudNativeClusterStatus' in params ? params.CloudNativeClusterStatus : null;
+
+        if (params.DiskTypeConf) {
+            this.DiskTypeConf = new Array();
+            for (let z in params.DiskTypeConf) {
+                let obj = new DiskTypeConfigItem();
+                obj.deserialize(params.DiskTypeConf[z]);
+                this.DiskTypeConf.push(obj);
+            }
+        }
 
     }
 }
@@ -2066,6 +2088,41 @@ class CdbRegionSellConf extends  AbstractModel {
 }
 
 /**
+ * Configuration of the cloud disk edition RW node.
+ * @class
+ */
+class ReadWriteNode extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Availability zone where the RW node is located.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * When upgrading a cloud disk edition instance, if you need to adjust the Availability Zone of Read-Only Nodes, you must specify the node ID.
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+
+    }
+}
+
+/**
  * DescribeRoGroups request structure.
  * @class
  */
@@ -3542,6 +3599,76 @@ class DescribeCdbZoneConfigResponse extends  AbstractModel {
             this.DataResult = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Account details
+ * @class
+ */
+class AccountInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account remarks
+         * @type {string || null}
+         */
+        this.Notes = null;
+
+        /**
+         * Account domain name
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * Account name
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Account information modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * Password modification time
+         * @type {string || null}
+         */
+        this.ModifyPasswordTime = null;
+
+        /**
+         * This parameter is deprecated.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The maximum number of instance connections supported by an account
+         * @type {number || null}
+         */
+        this.MaxUserConnections = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Notes = 'Notes' in params ? params.Notes : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.User = 'User' in params ? params.User : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.ModifyPasswordTime = 'ModifyPasswordTime' in params ? params.ModifyPasswordTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
 
     }
 }
@@ -9394,6 +9521,56 @@ class DescribeRemoteBackupConfigRequest extends  AbstractModel {
 }
 
 /**
+ * Topology configuration of nodes for cloud disk edition.
+ * @class
+ */
+class ClusterTopology extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RW node topology.
+Description: NodeId can be obtained through [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1).
+         * @type {ReadWriteNode || null}
+         */
+        this.ReadWriteNode = null;
+
+        /**
+         * RO node topology.
+Description: NodeId can be obtained through [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1).
+         * @type {Array.<ReadonlyNode> || null}
+         */
+        this.ReadOnlyNodes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ReadWriteNode) {
+            let obj = new ReadWriteNode();
+            obj.deserialize(params.ReadWriteNode)
+            this.ReadWriteNode = obj;
+        }
+
+        if (params.ReadOnlyNodes) {
+            this.ReadOnlyNodes = new Array();
+            for (let z in params.ReadOnlyNodes) {
+                let obj = new ReadonlyNode();
+                obj.deserialize(params.ReadOnlyNodes[z]);
+                this.ReadOnlyNodes.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Tag information
  * @class
  */
@@ -10104,6 +10281,41 @@ class ModifyBackupConfigRequest extends  AbstractModel {
 }
 
 /**
+ * Disk sale type
+ * @class
+ */
+class DiskTypeConfigItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type of instance corresponding to the disk. Only support single node (cloud disk) and cloud disk edition.
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * List of disk types to choose.
+         * @type {Array.<string> || null}
+         */
+        this.DiskType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+
+    }
+}
+
+/**
  * DisassociateSecurityGroups response structure.
  * @class
  */
@@ -10241,19 +10453,22 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.GoodsNum = null;
 
         /**
-         * AZ information. The system will automatically select an AZ by default. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported AZs.
+         * For AZ information, please use the [Obtain the Purchasable Specifications of Cloud Databases](https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1) API to obtain the availability zones that can be created.
+Description: If you create a single-node, two-node, or three-node instance, this parameter is required. Specify an availability zone. If you do not specify an availability zone, the system will automatically select one (possibly not the availability zone you want to deploy in). If you create a cloud disk edition instance, leave this parameter empty. Configure the availability zone for the read-write node and read-only node with parameter ClusterTopology.
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * VPC ID. If this parameter is not passed in, the basic network will be selected by default. You can use the [DescribeVpcs](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) API to query the VPCs.
+         * VPC ID. Please use [Querying VPC list](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1).
+Description: If a cloud disk edition instance is created, this item is required and must be a VPC type. If this item is left blank, the system will select the default VPC.
          * @type {string || null}
          */
         this.UniqVpcId = null;
 
         /**
-         * VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. You can use the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API to query the subnet lists.
+         * Subnet ID in the private network. If UniqVpcId is set up, UniqSubnetId is required. Please use [query subnet list](https://www.tencentcloud.com/document/api/215/15784?from_cn_redirect=1).
+Description: If this item is left empty, the system will select the default subnet in the Default VPC.
          * @type {string || null}
          */
         this.UniqSubnetId = null;
@@ -10265,25 +10480,28 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Custom port. Value range: 1024-65535.
+         * Custom port. Port range: 1024-65535.
+Description: If this item is left blank, it defaults to 3306.
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Instance typeA. Valid values: `master` (source instance), `dr` (disaster recovery instance), `ro` (read-only instance).
+         * Instance type. Supported values include: master - indicates the primary instance, dr - indicates the disaster recovery instance, ro - indicates the read-only instance.
+Description: Select instance type. The master type is selected by default if left empty.
          * @type {string || null}
          */
         this.InstanceRole = null;
 
         /**
-         * Instance ID. It is required when purchasing a read-only instance, which is the same as the source instance ID. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the instance ID.
+         * Instance ID, required when purchasing a read-only instance or disaster recovery instance. This field represents the primary instance ID of the read-only instance or disaster recovery instance. Please use the [Query Instance List](https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1) API to query the cloud database instance ID.
          * @type {string || null}
          */
         this.MasterInstanceId = null;
 
         /**
-         * MySQL version. Valid values: `5.5`, `5.6`, `5.7`, and `8.0`. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported instance versions.
+         * MySQL version, including 5.5, 5.6, 5.7, and 8.0. Please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1) API to get the version of the instance created.
+Description: When creating a non-cloud disk edition instance, specify the instance version as needed (recommend 5.7 or 8.0). If this parameter is left empty, the default value is 8.0. If creating a cloud disk edition instance, this parameter can only be set to 5.7 or 8.0.
          * @type {string || null}
          */
         this.EngineVersion = null;
@@ -10307,13 +10525,15 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.DeployMode = null;
 
         /**
-         * Information of replica AZ 1, which is the `Zone` value by default.
+         * AZ information of standby database 1.
+Description: For two-node and three-node instances, specify this parameter. If not specified, it defaults to the value of Zone. For cloud disk edition instances, this parameter is optional. Configure the availability zone for read-write nodes and read-only nodes with parameter ClusterTopology. Single-node instances are single availability zone and no need to specify this parameter.
          * @type {string || null}
          */
         this.SlaveZone = null;
 
         /**
-         * List of parameters in the format of ParamList.0.Name=auto_increment&ParamList.0.Value=1. You can use the [DescribeDefaultParams](https://intl.cloud.tencent.com/document/api/236/32662?from_cn_redirect=1) API to query the configurable parameters.
+         * Parameter list. The parameter format is ParamList.0.Name=auto_increment&ParamList.0.Value=1. You can query the configurable parameters by default by referring to [Querying the Default Configurable Parameter List](https://www.tencentcloud.com/document/api/236/32662?from_cn_redirect=1).
+Description: table name case sensitivity can be enabled or disabled with parameter lower_case_table_names. A parameter value of 0 means enabling, and 1 means disabling. If not set, the default value is 0. For MySQL 8.0 edition instances, you need to set the lower_case_table_names parameter when creating an instance to turn on or off table name case sensitivity. Once created, the parameter cannot be modified, meaning table name case sensitivity cannot be changed after creation. Other database versions support modifying the lower_case_table_names parameter after the instance is created. For the function invocation method to set table name case sensitivity when creating an instance, please see example 3 in this document.
          * @type {Array.<ParamInfo> || null}
          */
         this.ParamList = null;
@@ -10325,7 +10545,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.BackupZone = null;
 
         /**
-         * Auto-renewal flag. Valid values: `0` (auto-renewal not enabled), `1` (auto-renewal enabled).
+         * Auto-renewal flag. Available values are: 0 - no auto-renewal; 1 - auto-renewal. Default is 0.
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
@@ -10373,13 +10593,15 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.ClientToken = null;
 
         /**
-         * Instance isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.
+         * Instance isolation type. Supported values include "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC_V2" - ONTKE single-node instance, "CLOUD_NATIVE_CLUSTER" - standard type for cloud disk edition, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - enhanced for cloud disk edition. Default to general-purpose instance if not specified.
+Description: If a cloud disk edition instance is created, this parameter is required.
          * @type {string || null}
          */
         this.DeviceType = null;
 
         /**
-         * Parameter template ID
+         * Parameter template id.
+Remark: If you use a custom parameter template ID, you can input the custom parameter template ID. If you plan to use the default parameter template, inputting the parameter template ID is invalid, and you need to set ParamTemplateType.
          * @type {number || null}
          */
         this.ParamTemplateId = null;
@@ -10415,7 +10637,8 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.CageId = null;
 
         /**
-         * Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+         * Default parameter template type. Supported values include: "HIGH_STABILITY" - high-stability template, "HIGH_PERFORMANCE" - high-performance template.
+Remark: If you need to use the TencentDB for MySQL default parameter template, set up ParamTemplateType.
          * @type {string || null}
          */
         this.ParamTemplateType = null;
@@ -10427,7 +10650,8 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.AlarmPolicyIdList = null;
 
         /**
-         * Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
+         * Whether to only pre-check this request. true: Send a check request without creating an instance. Check items include whether required parameters are filled, request format, and service limit. If the check failed, return the corresponding error code; if the check passed, return RequestId. false: Send a normal request and create the instance directly after passing the check.
+Defaults to false.
          * @type {boolean || null}
          */
         this.DryRun = null;
@@ -10443,6 +10667,32 @@ class CreateDBInstanceRequest extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.Vips = null;
+
+        /**
+         * Data protection space size of the cloud disk edition instance in GB. Setting range is 1 - 10.
+         * @type {number || null}
+         */
+        this.DataProtectVolume = null;
+
+        /**
+         * Cloud disk edition node topology configuration.
+Description: If a cloud disk edition instance is purchased, this parameter is required. Set the RW and RO node topology for the cloud disk edition instance. The RO node scope is 1-5. Set at least 1 RO node.
+         * @type {ClusterTopology || null}
+         */
+        this.ClusterTopology = null;
+
+        /**
+         * Disk Type. This parameter can be specified for single-node (cloud disk edition) or cloud disk edition instance. CLOUD_SSD means SSD Cloud Block Storage, CLOUD_HSSD refers to enhanced SSD cloud disk, and CLOUD_PREMIUM indicates high-performance cloud block storage.
+Description: The supported regions for the hard disk type of single-node (cloud disk edition) and cloud disk edition instances vary slightly. For the specific support situation, refer to [Regions and Availability Zones](https://www.tencentcloud.com/document/product/236/8458?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Turn on or off instance destruction protection. on - enabled, off - disabled.
+         * @type {string || null}
+         */
+        this.DestroyProtect = null;
 
     }
 
@@ -10512,6 +10762,15 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
         this.EngineType = 'EngineType' in params ? params.EngineType : null;
         this.Vips = 'Vips' in params ? params.Vips : null;
+        this.DataProtectVolume = 'DataProtectVolume' in params ? params.DataProtectVolume : null;
+
+        if (params.ClusterTopology) {
+            let obj = new ClusterTopology();
+            obj.deserialize(params.ClusterTopology)
+            this.ClusterTopology = obj;
+        }
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DestroyProtect = 'DestroyProtect' in params ? params.DestroyProtect : null;
 
     }
 }
@@ -11128,7 +11387,13 @@ class CdbSellType extends  AbstractModel {
         super();
 
         /**
-         * Name of the purchasable instance. Valid values: `Z3` (High-availability instance. `DeviceType`:`UNIVERSAL`, `EXCLUSIVE`; `CVM` (basic instance. `DeviceType`: `BASIC`); `TKE` (basic v2 instance. `DeviceType`: `BASIC_V2`).
+         * Purchasable instance name.
+Z3: High-availability, corresponds to the specified specification DeviceType, including UNIVERSAL and EXCLUSIVE.
+CVM: It is a basic edition type, and the DeviceType in the corresponding specifications is BASIC (Offline).
+TKE: It is the basic version v2 type, and the DeviceType in the corresponding specifications is BASIC_V2.
+CLOUD_NATIVE_CLUSTER: Represents the standard type of cloud disk edition.
+CLOUD_NATIVE_CLUSTER_EXCLUSIVE: Indicates the enhanced cloud disk edition.
+ECONOMICAL: Means economical.
          * @type {string || null}
          */
         this.TypeName = null;
@@ -11773,98 +12038,97 @@ class RoGroup extends  AbstractModel {
         super();
 
         /**
-         * Read-only group mode. Valid values: `alone` (the system assigns a read-only group automatically), `allinone` (a new read-only group will be created), `join` (an existing read-only group will be used).
+         * <p>Read-only group mode. Available values are: alone-automatic allocation by the system; allinone-create a read-only group; join-use an existing read-only group.</p>
          * @type {string || null}
          */
         this.RoGroupMode = null;
 
         /**
-         * Read-only group ID.
-Note: If the data structure is used during instance purchase, this item is required only when the read-only group mode is set to join.
+         * <p>Read-only group ID.<br>Note: If the data structure is used during instance purchase, this item is required only when the read-only group mode is set to join.</p>
          * @type {string || null}
          */
         this.RoGroupId = null;
 
         /**
-         * Read-only group name.
+         * <p>Read-only group name.</p>
          * @type {string || null}
          */
         this.RoGroupName = null;
 
         /**
-         * Whether to enable the function of isolating an instance that exceeds the latency threshold. If it is enabled, when the latency between the read-only instance and the primary instance exceeds the latency threshold, the read-only instance will be isolated. Valid values: 1 (enabled), 0 (not enabled)
+         * <p>Whether to enable the feature to isolate an instance that exceeds the latency threshold. After enabling this feature, if the delay between a read-only instance and the primary instance exceeds the delay threshold, the read-only instance will be isolated. Available values: 1-enable; 0-disable.</p>
          * @type {number || null}
          */
         this.RoOfflineDelay = null;
 
         /**
-         * Delay threshold, in seconds. Value range: 1–10000. The value is an integer.
+         * <p>Delay threshold, in seconds. Value range: 1–10000. The value is an integer.</p>
          * @type {number || null}
          */
         this.RoMaxDelayTime = null;
 
         /**
-         * Minimum number of instances to be retained. If the number of the purchased read-only instances is smaller than the set value, they will not be removed.
+         * <p>Minimum number of instances to retain. If the number of read-only instances purchased is less than the set number, removal will not occur.</p>
          * @type {number || null}
          */
         this.MinRoInGroup = null;
 
         /**
-         * Read/write weight distribution mode. Valid values: `system` (weights are assigned by the system automatically), `custom` (weights are customized)
+         * <p>Read-write weight allocation mode. Available values: system-automatic allocation by the system; custom-customization.</p>
          * @type {string || null}
          */
         this.WeightMode = null;
 
         /**
-         * This field has been disused. To view the weight of a read-only instance, check the `Weight` value in the `RoInstances` field.
+         * <p>This field is deprecated and meaningless. To view the weight of a read-only instance, check the Weight value in the RoInstances field.</p>
          * @type {number || null}
          */
         this.Weight = null;
 
         /**
-         * Details of read-only instances in read-only group
+         * <p>Details of read-only instances in the read-only group.</p>
          * @type {Array.<RoInstanceInfo> || null}
          */
         this.RoInstances = null;
 
         /**
-         * Private IP of read-only group.
+         * <p>Private IP address of the read-only group.</p>
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
-         * Private network port number of read-only group.
+         * <p>Private network port number of the read-only group.</p>
          * @type {number || null}
          */
         this.Vport = null;
 
         /**
-         * Virtual Private Cloud (VPC) ID.
+         * <p>VPC ID.</p>
          * @type {string || null}
          */
         this.UniqVpcId = null;
 
         /**
-         * Subnet ID.
+         * <p>Subnet ID.</p>
          * @type {string || null}
          */
         this.UniqSubnetId = null;
 
         /**
-         * Region of the read-only group.
+         * <p>Region of the read-only group.</p>
          * @type {string || null}
          */
         this.RoGroupRegion = null;
 
         /**
-         * AZ of the read-only group.
+         * <p>AZ of the read-only group.</p>
          * @type {string || null}
          */
         this.RoGroupZone = null;
 
         /**
-         * Replication delay time, in seconds. Value range: 1–259200. The value is an integer.
+         * <p>Replication delay time, in seconds. Value range: 1–259200. The value is an integer.</p>
          * @type {number || null}
          */
         this.DelayReplicationTime = null;
@@ -12624,10 +12888,16 @@ class RenewDBInstanceRequest extends  AbstractModel {
         this.TimeSpan = null;
 
         /**
-         * To renew a pay-as-you-go instance to a monthly subscribed one, you need to set this parameter to `PREPAID`.
+         * To renew a pay-as-you-go instance to a yearly/monthly subscribed one, you need to set this parameter to `PREPAID`.
          * @type {string || null}
          */
         this.ModifyPayType = null;
+
+        /**
+         * Auto-renewal flag. 0 means no auto-renewal, 1 means auto-renewal.
+         * @type {number || null}
+         */
+        this.AutoRenew = null;
 
     }
 
@@ -12641,6 +12911,7 @@ class RenewDBInstanceRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
         this.ModifyPayType = 'ModifyPayType' in params ? params.ModifyPayType : null;
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
 
     }
 }
@@ -14903,7 +15174,7 @@ class RoInstanceInfo extends  AbstractModel {
         this.Region = null;
 
         /**
-         * Name of RO AZ, such as ap-shanghai-2
+         * Canonical name of the RO Availability Zone, for example ap-shanghai-2
          * @type {string || null}
          */
         this.Zone = null;
@@ -15253,54 +15524,30 @@ For example, if you want to backup tb1 and tb2 in db1 and the entire db2, you sh
 }
 
 /**
- * Account details
+ * RO node configuration for cloud disk edition.
  * @class
  */
-class AccountInfo extends  AbstractModel {
+class ReadonlyNode extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Account remarks
+         * Whether distributed in a random availability Zone. Import YES means random availability Zone. Otherwise used specified availability Zone.
          * @type {string || null}
          */
-        this.Notes = null;
+        this.IsRandomZone = null;
 
         /**
-         * Account domain name
+         * Specify the availability zone for node distribution.
          * @type {string || null}
          */
-        this.Host = null;
+        this.Zone = null;
 
         /**
-         * Account name
+         * When upgrading a cloud disk edition instance, if you need to adjust the Availability Zone of Read-Only Nodes, you must specify the node ID.
          * @type {string || null}
          */
-        this.User = null;
-
-        /**
-         * Account information modification time
-         * @type {string || null}
-         */
-        this.ModifyTime = null;
-
-        /**
-         * Password modification time
-         * @type {string || null}
-         */
-        this.ModifyPasswordTime = null;
-
-        /**
-         * This parameter is deprecated.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * The maximum number of instance connections supported by an account
-         * @type {number || null}
-         */
-        this.MaxUserConnections = null;
+        this.NodeId = null;
 
     }
 
@@ -15311,13 +15558,9 @@ class AccountInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Notes = 'Notes' in params ? params.Notes : null;
-        this.Host = 'Host' in params ? params.Host : null;
-        this.User = 'User' in params ? params.User : null;
-        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
-        this.ModifyPasswordTime = 'ModifyPasswordTime' in params ? params.ModifyPasswordTime : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
+        this.IsRandomZone = 'IsRandomZone' in params ? params.IsRandomZone : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
 
     }
 }
@@ -16135,8 +16378,7 @@ class CdbSellConfig extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Instance type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance), `BASIC_V2` (basic v2 instance).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance type, possible value ranges from UNIVERSAL (universal type), EXCLUSIVE (exclusive), BASIC (basic), to BASIC_V2 (basic v2).
          * @type {string || null}
          */
         this.DeviceType = null;
@@ -19744,13 +19986,13 @@ class DescribeDBPriceRequest extends  AbstractModel {
         this.GoodsNum = null;
 
         /**
-         * Instance memory size in MB. This parameter is required when `InstanceId` is empty.
+         * Instance memory size, unit: MB. This parameter is required when InstanceId is empty. To ensure the input value is valid, please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1) API to get the saleable instance memory size range.
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * Instance disk size in GB. This parameter is required when `InstanceId` is empty.
+         * Instance disk size, unit: GB. This parameter is required when InstanceId is empty. To ensure the input value is valid, please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1) API to get the saleable disk size range.
          * @type {number || null}
          */
         this.Volume = null;
@@ -19762,7 +20004,7 @@ class DescribeDBPriceRequest extends  AbstractModel {
         this.InstanceRole = null;
 
         /**
-         * Billing mode. Valid values: `PRE_PAID` (monthly subscribed), `HOUR_PAID` (pay-as-you-go). This parameter is required when `InstanceId` is empty.
+         * Billing mode. Valid values: `PRE_PAID` (yearly/monthly subscribed), `HOUR_PAID` (pay-as-you-go). This parameter is required when `InstanceId` is empty.
          * @type {string || null}
          */
         this.PayType = null;
@@ -19774,7 +20016,7 @@ class DescribeDBPriceRequest extends  AbstractModel {
         this.ProtectMode = null;
 
         /**
-         * Instance isolation types Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.  Default value: `UNIVERSAL`.
+         * Instance isolation type. Supported values include: "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC_V2" - single-node instance of cloud disk edition, "CLOUD_NATIVE_CLUSTER" - cluster version standard type, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - cluster version enhanced. Default to general-purpose instance if not specified.
          * @type {string || null}
          */
         this.DeviceType = null;
@@ -19804,7 +20046,7 @@ class DescribeDBPriceRequest extends  AbstractModel {
         this.Ladder = null;
 
         /**
-         * 
+         * Disk Type. Specify this parameter when querying the price of a cluster edition or single-node instance of cloud disk edition. Supported values include "CLOUD_SSD" - SSD cloud disk, "CLOUD_HSSD" - enhanced SSD cloud disk. Default is SSD cloud disk.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -21490,6 +21732,7 @@ module.exports = {
     CreateRotationPasswordResponse: CreateRotationPasswordResponse,
     ModifyCdbProxyAddressDescRequest: ModifyCdbProxyAddressDescRequest,
     CdbRegionSellConf: CdbRegionSellConf,
+    ReadWriteNode: ReadWriteNode,
     DescribeRoGroupsRequest: DescribeRoGroupsRequest,
     DescribeBackupDecryptionKeyRequest: DescribeBackupDecryptionKeyRequest,
     CreateCdbProxyAddressResponse: CreateCdbProxyAddressResponse,
@@ -21521,6 +21764,7 @@ module.exports = {
     AuditPolicy: AuditPolicy,
     ProxyNode: ProxyNode,
     DescribeCdbZoneConfigResponse: DescribeCdbZoneConfigResponse,
+    AccountInfo: AccountInfo,
     DescribeTablesRequest: DescribeTablesRequest,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     ModifyParamTemplateRequest: ModifyParamTemplateRequest,
@@ -21641,6 +21885,7 @@ module.exports = {
     AuditLogAggregationResult: AuditLogAggregationResult,
     DatabasesWithCharacterLists: DatabasesWithCharacterLists,
     DescribeRemoteBackupConfigRequest: DescribeRemoteBackupConfigRequest,
+    ClusterTopology: ClusterTopology,
     TagInfo: TagInfo,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     DescribeBackupDownloadRestrictionRequest: DescribeBackupDownloadRestrictionRequest,
@@ -21652,6 +21897,7 @@ module.exports = {
     DescribeAuditRuleTemplateModifyHistoryResponse: DescribeAuditRuleTemplateModifyHistoryResponse,
     DescribeAuditLogFilesRequest: DescribeAuditLogFilesRequest,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
+    DiskTypeConfigItem: DiskTypeConfigItem,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     AggregationCondition: AggregationCondition,
     LocalBinlogConfig: LocalBinlogConfig,
@@ -21734,7 +21980,7 @@ module.exports = {
     DeviceCpuRateInfo: DeviceCpuRateInfo,
     ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
     CreateBackupRequest: CreateBackupRequest,
-    AccountInfo: AccountInfo,
+    ReadonlyNode: ReadonlyNode,
     DescribeRemoteBackupConfigResponse: DescribeRemoteBackupConfigResponse,
     AdjustCdbProxyAddressResponse: AdjustCdbProxyAddressResponse,
     CreateAuditLogFileRequest: CreateAuditLogFileRequest,

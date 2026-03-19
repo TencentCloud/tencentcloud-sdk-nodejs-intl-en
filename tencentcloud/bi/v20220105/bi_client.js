@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const PageScreenVO = models.PageScreenVO;
 const DataId = models.DataId;
+const ClearEmbedTokenRequest = models.ClearEmbedTokenRequest;
 const DescribeUserRoleListResponse = models.DescribeUserRoleListResponse;
 const ExportScreenPageResponse = models.ExportScreenPageResponse;
 const ModifyProjectResponse = models.ModifyProjectResponse;
@@ -71,6 +72,7 @@ const CreateProjectResponse = models.CreateProjectResponse;
 const DescribeProjectInfoResponse = models.DescribeProjectInfoResponse;
 const ExportScreenPageRequest = models.ExportScreenPageRequest;
 const DescribeUserRoleListRequest = models.DescribeUserRoleListRequest;
+const ClearEmbedTokenResponse = models.ClearEmbedTokenResponse;
 const DeleteProjectResponse = models.DeleteProjectResponse;
 const ProjectListData = models.ProjectListData;
 const DescribeUserRoleProjectListRequest = models.DescribeUserRoleProjectListRequest;
@@ -287,6 +289,17 @@ class BiClient extends AbstractClient {
     ModifyDatasourceCloud(req, cb) {
         let resp = new ModifyDatasourceCloudResponse();
         this.request("ModifyDatasourceCloud", req, resp, cb);
+    }
+
+    /**
+     * Clean strong authentication tokens. Only enterprise admins can call this API.
+     * @param {ClearEmbedTokenRequest} req
+     * @param {function(string, ClearEmbedTokenResponse):void} cb
+     * @public
+     */
+    ClearEmbedToken(req, cb) {
+        let resp = new ClearEmbedTokenResponse();
+        this.request("ClearEmbedToken", req, resp, cb);
     }
 
     /**

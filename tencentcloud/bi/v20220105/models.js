@@ -83,6 +83,55 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ClearEmbedToken request structure.
+ * @class
+ */
+class ClearEmbedTokenRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID.
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Host Account ID
+         * @type {string || null}
+         */
+        this.UserCorpId = null;
+
+        /**
+         * panel , page
+         * @type {string || null}
+         */
+        this.Scope = null;
+
+        /**
+         * page id
+         * @type {string || null}
+         */
+        this.PageId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.UserCorpId = 'UserCorpId' in params ? params.UserCorpId : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.PageId = 'PageId' in params ? params.PageId : null;
+
+    }
+}
+
+/**
  * DescribeUserRoleList response structure.
  * @class
  */
@@ -309,6 +358,9 @@ class DeleteProjectRequest extends  AbstractModel {
 
         /**
          * Default dashboard.
+Value range:.
+1: project dashboard. 
+2: my dashboard.
          * @type {number || null}
          */
         this.DefaultPanelType = null;
@@ -427,6 +479,12 @@ class CreateDatasourceRequest extends  AbstractModel {
 
         /**
          * Drive.
+Value range:.
+MYSQL: MYSQL database.
+PRESTO: presto database.
+POSTGRE: PostgreSQL database.
+DLC: dlc database.
+MSSQL: microsoft SQL Server database.
          * @type {string || null}
          */
         this.DbType = null;
@@ -539,6 +597,18 @@ class CreateDatasourceRequest extends  AbstractModel {
          */
         this.RegionId = null;
 
+        /**
+         * Database schema.
+         * @type {string || null}
+         */
+        this.Schema = null;
+
+        /**
+         * Database version.
+         * @type {string || null}
+         */
+        this.DbVersion = null;
+
     }
 
     /**
@@ -570,6 +640,8 @@ class CreateDatasourceRequest extends  AbstractModel {
         this.OperationAuthLimit = 'OperationAuthLimit' in params ? params.OperationAuthLimit : null;
         this.UseVPC = 'UseVPC' in params ? params.UseVPC : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.Schema = 'Schema' in params ? params.Schema : null;
+        this.DbVersion = 'DbVersion' in params ? params.DbVersion : null;
 
     }
 }
@@ -752,7 +824,7 @@ class ApplyEmbedIntervalRequest extends  AbstractModel {
         super();
 
         /**
-         * Shares the project ID. Required.
+         * Shares the project ID.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -826,6 +898,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Configuration mode.
+Valid values:.
+
+-usable.
+-visible.
+-disabled: unavailable.
+-hidden: hide.
+
+Default value: disabled.
+Example value: disabled.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1944,6 +2025,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Transaction status.
+Value range:.
+Processing.
+2: processing is successful.
+3: processing failure.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -2333,6 +2418,9 @@ class DescribeProjectInfoRequest extends  AbstractModel {
 
         /**
          * Default dashboard.
+Value range:.
+1: project dashboard. 
+2: my dashboard.
          * @type {number || null}
          */
         this.DefaultPanelType = null;
@@ -2649,7 +2737,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ErrorInfo = null;
 
         /**
-         * Success No.
+         * None.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -2714,6 +2802,12 @@ class ModifyDatasourceCloudRequest extends  AbstractModel {
 
         /**
          * Drive.
+Value range:.
+MYSQL: MYSQL database.
+PRESTO: presto database.
+POSTGRE: PostgreSQL database.
+DLC: dlc database.
+MSSQL: microsoft SQL Server database.
          * @type {string || null}
          */
         this.DbType = null;
@@ -2832,6 +2926,18 @@ class ModifyDatasourceCloudRequest extends  AbstractModel {
          */
         this.ClusterId = null;
 
+        /**
+         * Database schema.
+         * @type {string || null}
+         */
+        this.Schema = null;
+
+        /**
+         * Database version.
+         * @type {string || null}
+         */
+        this.DbVersion = null;
+
     }
 
     /**
@@ -2862,6 +2968,8 @@ class ModifyDatasourceCloudRequest extends  AbstractModel {
         this.DataOriginProjectId = 'DataOriginProjectId' in params ? params.DataOriginProjectId : null;
         this.DataOriginDatasourceId = 'DataOriginDatasourceId' in params ? params.DataOriginDatasourceId : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Schema = 'Schema' in params ? params.Schema : null;
+        this.DbVersion = 'DbVersion' in params ? params.DbVersion : null;
 
     }
 }
@@ -2894,6 +3002,12 @@ class ModifyDatasourceRequest extends  AbstractModel {
 
         /**
          * Drive.
+Value range:.
+MYSQL: MYSQL database.
+PRESTO: presto database.
+POSTGRE: PostgreSQL database.
+DLC: dlc database.
+MSSQL: microsoft SQL Server database.
          * @type {string || null}
          */
         this.DbType = null;
@@ -3006,6 +3120,18 @@ class ModifyDatasourceRequest extends  AbstractModel {
          */
         this.RegionId = null;
 
+        /**
+         * Database schema.
+         * @type {string || null}
+         */
+        this.Schema = null;
+
+        /**
+         * Database version.
+         * @type {string || null}
+         */
+        this.DbVersion = null;
+
     }
 
     /**
@@ -3037,6 +3163,8 @@ class ModifyDatasourceRequest extends  AbstractModel {
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.UseVPC = 'UseVPC' in params ? params.UseVPC : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.Schema = 'Schema' in params ? params.Schema : null;
+        this.DbVersion = 'DbVersion' in params ? params.DbVersion : null;
 
     }
 }
@@ -3094,6 +3222,9 @@ class ModifyProjectRequest extends  AbstractModel {
 
         /**
          * Default dashboard.
+Value range:.
+1: project dashboard. 
+2: my dashboard.
          * @type {number || null}
          */
         this.DefaultPanelType = null;
@@ -4160,6 +4291,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.OwnerName = null;
 
+        /**
+         * Database schema.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Schema = null;
+
+        /**
+         * Database version.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DbVersion = null;
+
     }
 
     /**
@@ -4221,6 +4366,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.UseVPC = 'UseVPC' in params ? params.UseVPC : null;
         this.Owner = 'Owner' in params ? params.Owner : null;
         this.OwnerName = 'OwnerName' in params ? params.OwnerName : null;
+        this.Schema = 'Schema' in params ? params.Schema : null;
+        this.DbVersion = 'DbVersion' in params ? params.DbVersion : null;
 
     }
 }
@@ -4535,6 +4682,71 @@ class DescribeUserRoleListRequest extends  AbstractModel {
         this.Keyword = 'Keyword' in params ? params.Keyword : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.IsOnlyBindAppUser = 'IsOnlyBindAppUser' in params ? params.IsOnlyBindAppUser : null;
+
+    }
+}
+
+/**
+ * ClearEmbedToken response structure.
+ * @class
+ */
+class ClearEmbedTokenResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Custom error information object
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ErrorInfo || null}
+         */
+        this.ErrorInfo = null;
+
+        /**
+         * Additional message.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Extra = null;
+
+        /**
+         * Prompt message.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * Result
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ErrorInfo) {
+            let obj = new ErrorInfo();
+            obj.deserialize(params.ErrorInfo)
+            this.ErrorInfo = obj;
+        }
+        this.Extra = 'Extra' in params ? params.Extra : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5304,6 +5516,12 @@ class CreateDatasourceCloudRequest extends  AbstractModel {
 
         /**
          * Drive.
+Value range:.
+MYSQL: MYSQL database.
+PRESTO: presto database.
+POSTGRE: PostgreSQL database.
+DLC: dlc database.
+MSSQL: microsoft SQL Server database.
          * @type {string || null}
          */
         this.DbType = null;
@@ -5417,13 +5635,13 @@ class CreateDatasourceCloudRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * 
+         * Database schema.
          * @type {string || null}
          */
         this.Schema = null;
 
         /**
-         * 
+         * Database version.
          * @type {string || null}
          */
         this.DbVersion = null;
@@ -5649,14 +5867,21 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.LastLogin = null;
 
         /**
-         * Enabled/Disabled status.
+         * User status.
+Valid values:.
+
+-Enable.
+-0: disabled.
+
+The default value is 1.
+Example value: 1.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Whether to change the password during the first-time login.
+         * Whether to change password on first login.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -5705,14 +5930,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.UpdatedAt = null;
 
         /**
-         * Global role.
+         * System global role.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.GlobalUserName = null;
 
         /**
-         * Global role code.
+         * System global role code.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -5914,6 +6139,9 @@ class CreateProjectRequest extends  AbstractModel {
 
         /**
          * Default dashboard.
+Value range:.
+1: project dashboard. 
+2: my dashboard.
          * @type {number || null}
          */
         this.DefaultPanelType = null;
@@ -5960,7 +6188,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ModuleId = null;
 
         /**
-         * Visible/Available.
+         * Availability.
+Valid values:.
+
+-usable.
+-visible.
+-disabled: unavailable.
+-hidden: hide.
+
+Default value: disabled.
+Example value: disabled.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -6008,6 +6245,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 module.exports = {
     PageScreenVO: PageScreenVO,
     DataId: DataId,
+    ClearEmbedTokenRequest: ClearEmbedTokenRequest,
     DescribeUserRoleListResponse: DescribeUserRoleListResponse,
     ExportScreenPageResponse: ExportScreenPageResponse,
     ModifyProjectResponse: ModifyProjectResponse,
@@ -6061,6 +6299,7 @@ module.exports = {
     DescribeProjectInfoResponse: DescribeProjectInfoResponse,
     ExportScreenPageRequest: ExportScreenPageRequest,
     DescribeUserRoleListRequest: DescribeUserRoleListRequest,
+    ClearEmbedTokenResponse: ClearEmbedTokenResponse,
     DeleteProjectResponse: DeleteProjectResponse,
     ProjectListData: ProjectListData,
     DescribeUserRoleProjectListRequest: DescribeUserRoleProjectListRequest,

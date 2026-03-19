@@ -170,6 +170,7 @@ const CreateClusterDatabaseResponse = models.CreateClusterDatabaseResponse;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
+const ProxyConfig = models.ProxyConfig;
 const Addr = models.Addr;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const ServerlessZoneStockInfo = models.ServerlessZoneStockInfo;

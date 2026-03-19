@@ -5197,7 +5197,9 @@ Storage capacity in GB
         this.Port = null;
 
         /**
-         * Billing mode. `0`: pay-as-you-go; `1`: monthly subscription. Default value: `0`
+         * Billing mode. supported values: 0 and 1. default value: 0.
+Value is 0, indicating pay-as-you-go billing.
+Value is 1, which means yearly/monthly subscription.
          * @type {number || null}
          */
         this.PayMode = null;
@@ -5244,25 +5246,25 @@ Specified allowed time range for time point rollback
 
         /**
          * Storage upper limit of normal instance in GB
-If `DbType` is `MYSQL` and the storage billing mode is monthly subscription, the parameter value can’t exceed the maximum storage corresponding to the CPU and memory specifications.
+If `DbType` is `MYSQL` and the storage billing mode is yearly/monthly subscription, the parameter value can't exceed the maximum storage corresponding to the CPU and memory specifications.
          * @type {number || null}
          */
         this.StorageLimit = null;
 
         /**
-         * Purchase duration of monthly subscription plan
+         * Purchase duration of yearly/monthly subscription plan
          * @type {number || null}
          */
         this.TimeSpan = null;
 
         /**
-         * Duration unit of monthly subscription. Valid values: `s`, `d`, `m`, `y`
+         * Duration unit of yearly/monthly subscription. Valid values: `s`, `d`, `m`, `y`
          * @type {string || null}
          */
         this.TimeUnit = null;
 
         /**
-         * Specifies whether the annual/monthly subscription is auto-renewed. the default value is 0.
+         * Specifies whether the annual/yearly/monthly subscription is auto-renewed. the default value is 0.
 0 indicates the default renewal method. 1 means auto-renewal. 2 means no auto-renewal.
          * @type {number || null}
          */
@@ -5332,9 +5334,9 @@ Default value: `600`
         this.AutoPauseDelay = null;
 
         /**
-         * The billing mode of cluster storage. Valid values: `0` (pay-as-you-go), `1` (monthly subscription). Default value: `0`.
+         * The billing mode of cluster storage. Valid values: `0` (pay-as-you-go), `1` (yearly/monthly subscription). Default value: `0`.
 If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be pay-as-you-go.
-Clusters with storage billed in monthly subscription can’t be cloned or rolled back.
+Clusters with storage billed in yearly/monthly subscription can't be cloned or rolled back.
          * @type {number || null}
          */
         this.StoragePayMode = null;
@@ -5352,7 +5354,7 @@ Clusters with storage billed in monthly subscription can’t be cloned or rolled
         this.AlarmPolicyIds = null;
 
         /**
-         * Array of parameters. Valid values: `character_set_server` (utf8｜latin1｜gbk｜utf8mb4), `lower_case_table_names`. 0: case-sensitive; 1: case-insensitive).
+         * Array of parameters. Valid values: `character_set_server` (utf8/latin1/gbk/utf8mb4), `lower_case_table_names`. 0: case-sensitive; 1: case-insensitive).
          * @type {Array.<ParamItem> || null}
          */
         this.ClusterParams = null;
@@ -5364,7 +5366,7 @@ Clusters with storage billed in monthly subscription can’t be cloned or rolled
         this.DealMode = null;
 
         /**
-         * Parameter template ID, which can be obtained by querying parameter template information “DescribeParamTemplates”
+         * Parameter template ID, which can be obtained by querying parameter template information "DescribeParamTemplates"
          * @type {number || null}
          */
         this.ParamTemplateId = null;
@@ -5380,6 +5382,36 @@ Clusters with storage billed in monthly subscription can’t be cloned or rolled
          * @type {Array.<InstanceInitInfo> || null}
          */
         this.InstanceInitInfos = null;
+
+        /**
+         * Global database unique identifier.
+         * @type {string || null}
+         */
+        this.GdnId = null;
+
+        /**
+         * Database proxy configuration.
+         * @type {ProxyConfig || null}
+         */
+        this.ProxyConfig = null;
+
+        /**
+         * Automatically archive.
+         * @type {string || null}
+         */
+        this.AutoArchive = null;
+
+        /**
+         * Archiving processing time after pausing.
+         * @type {number || null}
+         */
+        this.AutoArchiveDelayHours = null;
+
+        /**
+         * Kernel minor version number.
+         * @type {string || null}
+         */
+        this.CynosVersion = null;
 
     }
 
@@ -5455,6 +5487,16 @@ Clusters with storage billed in monthly subscription can’t be cloned or rolled
                 this.InstanceInitInfos.push(obj);
             }
         }
+        this.GdnId = 'GdnId' in params ? params.GdnId : null;
+
+        if (params.ProxyConfig) {
+            let obj = new ProxyConfig();
+            obj.deserialize(params.ProxyConfig)
+            this.ProxyConfig = obj;
+        }
+        this.AutoArchive = 'AutoArchive' in params ? params.AutoArchive : null;
+        this.AutoArchiveDelayHours = 'AutoArchiveDelayHours' in params ? params.AutoArchiveDelayHours : null;
+        this.CynosVersion = 'CynosVersion' in params ? params.CynosVersion : null;
 
     }
 }
@@ -9095,6 +9137,91 @@ class DescribeParamTemplatesResponse extends  AbstractModel {
 }
 
 /**
+ * Access proxy configuration.
+ * @class
+ */
+class ProxyConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of database proxy group nodes. this parameter is no longer recommended. recommend using ProxyZones.
+         * @type {number || null}
+         */
+        this.ProxyCount = null;
+
+        /**
+         * Number of CPU cores
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Memory.
+         * @type {number || null}
+         */
+        this.Mem = null;
+
+        /**
+         * Connection pool type: SessionConnectionPool (session-level connection pool).
+         * @type {string || null}
+         */
+        this.ConnectionPoolType = null;
+
+        /**
+         * Whether to enable the connection pool. valid values: yes (enable), no (not enabled).
+         * @type {string || null}
+         */
+        this.OpenConnectionPool = null;
+
+        /**
+         * Connection pool threshold. measurement unit (seconds).
+         * @type {number || null}
+         */
+        this.ConnectionPoolTimeOut = null;
+
+        /**
+         * Description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Database node information (this parameter is used in combination with ProxyCount, either one must be manually input).
+         * @type {Array.<ProxyZone> || null}
+         */
+        this.ProxyZones = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProxyCount = 'ProxyCount' in params ? params.ProxyCount : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
+        this.ConnectionPoolType = 'ConnectionPoolType' in params ? params.ConnectionPoolType : null;
+        this.OpenConnectionPool = 'OpenConnectionPool' in params ? params.OpenConnectionPool : null;
+        this.ConnectionPoolTimeOut = 'ConnectionPoolTimeOut' in params ? params.ConnectionPoolTimeOut : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.ProxyZones) {
+            this.ProxyZones = new Array();
+            for (let z in params.ProxyZones) {
+                let obj = new ProxyZone();
+                obj.deserialize(params.ProxyZones[z]);
+                this.ProxyZones.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Database address
  * @class
  */
@@ -10528,6 +10655,12 @@ class SlaveZoneAttrItem extends  AbstractModel {
          */
         this.BinlogSyncWay = null;
 
+        /**
+         * Semi-Sync timeout period in milliseconds.
+         * @type {number || null}
+         */
+        this.SemiSyncTimeout = null;
+
     }
 
     /**
@@ -10539,6 +10672,7 @@ class SlaveZoneAttrItem extends  AbstractModel {
         }
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.BinlogSyncWay = 'BinlogSyncWay' in params ? params.BinlogSyncWay : null;
+        this.SemiSyncTimeout = 'SemiSyncTimeout' in params ? params.SemiSyncTimeout : null;
 
     }
 }
@@ -10875,7 +11009,7 @@ class ActivateInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * Task flow ID
+         * Task flow ID.
          * @type {number || null}
          */
         this.FlowId = null;
@@ -14635,6 +14769,30 @@ class Ability extends  AbstractModel {
          */
         this.IsSupportManualLogic = null;
 
+        /**
+         * Enable global encryption.
+         * @type {string || null}
+         */
+        this.IsSupportGlobalEncryption = null;
+
+        /**
+         * The causes for unsupported global encryption.
+         * @type {string || null}
+         */
+        this.NoSupportGlobalEncryptionReason = null;
+
+        /**
+         * Status code for unsupported tde reason.
+         * @type {string || null}
+         */
+        this.NoSupportTransparentDataEncryptionReasonCode = null;
+
+        /**
+         * Status code for unsupported global encryption.
+         * @type {string || null}
+         */
+        this.NoSupportGlobalEncryptionReasonCode = null;
+
     }
 
     /**
@@ -14652,6 +14810,10 @@ class Ability extends  AbstractModel {
         this.IsSupportTransparentDataEncryption = 'IsSupportTransparentDataEncryption' in params ? params.IsSupportTransparentDataEncryption : null;
         this.NoSupportTransparentDataEncryptionReason = 'NoSupportTransparentDataEncryptionReason' in params ? params.NoSupportTransparentDataEncryptionReason : null;
         this.IsSupportManualLogic = 'IsSupportManualLogic' in params ? params.IsSupportManualLogic : null;
+        this.IsSupportGlobalEncryption = 'IsSupportGlobalEncryption' in params ? params.IsSupportGlobalEncryption : null;
+        this.NoSupportGlobalEncryptionReason = 'NoSupportGlobalEncryptionReason' in params ? params.NoSupportGlobalEncryptionReason : null;
+        this.NoSupportTransparentDataEncryptionReasonCode = 'NoSupportTransparentDataEncryptionReasonCode' in params ? params.NoSupportTransparentDataEncryptionReasonCode : null;
+        this.NoSupportGlobalEncryptionReasonCode = 'NoSupportGlobalEncryptionReasonCode' in params ? params.NoSupportGlobalEncryptionReasonCode : null;
 
     }
 }
@@ -14712,6 +14874,14 @@ class InstanceInitInfo extends  AbstractModel {
          */
         this.MaxRoCpu = null;
 
+        /**
+         * Instance machine type.
+1. common: general.
+2. exclusive: exclusive.
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
     }
 
     /**
@@ -14729,6 +14899,7 @@ class InstanceInitInfo extends  AbstractModel {
         this.MaxRoCount = 'MaxRoCount' in params ? params.MaxRoCount : null;
         this.MinRoCpu = 'MinRoCpu' in params ? params.MinRoCpu : null;
         this.MaxRoCpu = 'MaxRoCpu' in params ? params.MaxRoCpu : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
 
     }
 }
@@ -16650,7 +16821,7 @@ deleted
         this.CreateTime = null;
 
         /**
-         * Payment mode. 0: pay-as-you-go; 1: monthly subscription.
+         * Payment mode. 0: pay-as-you-go; 1: yearly/monthly subscription.
          * @type {number || null}
          */
         this.PayMode = null;
@@ -16696,6 +16867,12 @@ deleted
          * @type {string || null}
          */
         this.CynosVersion = null;
+
+        /**
+         * cynos version tag.
+         * @type {string || null}
+         */
+        this.CynosVersionTag = null;
 
         /**
          * Specifies the storage capacity.
@@ -16754,7 +16931,7 @@ pause
         this.StorageId = null;
 
         /**
-         * Cluster storage payment mode. 0: pay-as-you-go; 1: monthly subscription.
+         * Cluster storage payment mode. 0: pay-as-you-go; 1: yearly/monthly subscription.
          * @type {number || null}
          */
         this.StoragePayMode = null;
@@ -16831,6 +17008,18 @@ pause
          */
         this.ResourcePackages = null;
 
+        /**
+         * Global database unique Id.
+         * @type {string || null}
+         */
+        this.GdnId = null;
+
+        /**
+         * Cluster role. primary cluster - primary, slave cluster - standby. if GdnId is empty, the field is invalid.
+         * @type {string || null}
+         */
+        this.GdnRole = null;
+
     }
 
     /**
@@ -16861,6 +17050,7 @@ pause
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.CynosVersion = 'CynosVersion' in params ? params.CynosVersion : null;
+        this.CynosVersionTag = 'CynosVersionTag' in params ? params.CynosVersionTag : null;
         this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
         this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
         this.ProcessingTask = 'ProcessingTask' in params ? params.ProcessingTask : null;
@@ -16920,6 +17110,8 @@ pause
                 this.ResourcePackages.push(obj);
             }
         }
+        this.GdnId = 'GdnId' in params ? params.GdnId : null;
+        this.GdnRole = 'GdnRole' in params ? params.GdnRole : null;
 
     }
 }
@@ -17870,7 +18062,16 @@ class CynosdbClusterDetail extends  AbstractModel {
         this.PhysicalZone = null;
 
         /**
-         * Status
+         * Status. supported values are as follows:.
+-Creating: creating.
+- running: running.
+-isolating.
+-Isolated: isolated.
+-activating: restore from recycle bin.
+-offlining: offline.
+-offlined: offline.
+- deleting: deleting.
+- deleted: deleted.
          * @type {string || null}
          */
         this.Status = null;
@@ -17916,7 +18117,7 @@ pausing
         this.MinStorageSize = null;
 
         /**
-         * Storage billing type. 1 indicates monthly subscription, and 0 indicates pay-as-you-go.
+         * Storage billing type. 1 indicates yearly/monthly subscription, and 0 indicates pay-as-you-go.
          * @type {number || null}
          */
         this.StoragePayMode = null;
@@ -18000,7 +18201,7 @@ pausing
         this.Vport = null;
 
         /**
-         * VIP and vport of the read-only instance in a cluster
+         * VIP and vport of the read-only instance in a cluster.
          * @type {Array.<Addr> || null}
          */
         this.RoAddr = null;
@@ -18149,6 +18350,45 @@ pausing
          */
         this.CynosVersionTag = null;
 
+        /**
+         * Global database network unique id.
+         * @type {string || null}
+         */
+        this.GdnId = null;
+
+        /**
+         * The role of clusters in the global data network.
+primary cluster.
+Slave cluster - standby.
+If empty, the field is invalid.
+         * @type {string || null}
+         */
+        this.GdnRole = null;
+
+        /**
+         * Secondary storage usage, unit: G.
+         * @type {number || null}
+         */
+        this.UsedArchiveStorage = null;
+
+        /**
+         * Archiving status, enumeration value <li>normal: normal</li><li>archiving: archiving</li><li>resuming: recovering</li><li>archived: archived</li>.
+         * @type {string || null}
+         */
+        this.ArchiveStatus = null;
+
+        /**
+         * Archive progress, percentage.
+         * @type {number || null}
+         */
+        this.ArchiveProgress = null;
+
+        /**
+         * Whether transparent encryption is enabled.
+         * @type {boolean || null}
+         */
+        this.IsOpenTDE = null;
+
     }
 
     /**
@@ -18262,6 +18502,12 @@ pausing
             }
         }
         this.CynosVersionTag = 'CynosVersionTag' in params ? params.CynosVersionTag : null;
+        this.GdnId = 'GdnId' in params ? params.GdnId : null;
+        this.GdnRole = 'GdnRole' in params ? params.GdnRole : null;
+        this.UsedArchiveStorage = 'UsedArchiveStorage' in params ? params.UsedArchiveStorage : null;
+        this.ArchiveStatus = 'ArchiveStatus' in params ? params.ArchiveStatus : null;
+        this.ArchiveProgress = 'ArchiveProgress' in params ? params.ArchiveProgress : null;
+        this.IsOpenTDE = 'IsOpenTDE' in params ? params.IsOpenTDE : null;
 
     }
 }
@@ -19224,12 +19470,15 @@ class ClusterInstanceDetail extends  AbstractModel {
 
         /**
          * Instance machine type.
+1. common: general.
+2. exclusive, dedicated.
          * @type {string || null}
          */
         this.InstanceDeviceType = null;
 
         /**
          * Instance storage type.
+Description: this parameter returns a value only when querying resources belonging to LibraDB.
          * @type {string || null}
          */
         this.InstanceStorageType = null;
@@ -19242,6 +19491,7 @@ class ClusterInstanceDetail extends  AbstractModel {
 
         /**
          * Node list
+Description: this parameter returns a value only when querying LibraDB resources.
          * @type {Array.<string> || null}
          */
         this.NodeList = null;
@@ -24331,6 +24581,7 @@ module.exports = {
     DescribeClustersResponse: DescribeClustersResponse,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
     DescribeParamTemplatesResponse: DescribeParamTemplatesResponse,
+    ProxyConfig: ProxyConfig,
     Addr: Addr,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     ServerlessZoneStockInfo: ServerlessZoneStockInfo,

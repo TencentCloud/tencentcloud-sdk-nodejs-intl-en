@@ -1759,7 +1759,7 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to query the upgrade prices of a monthly subscribed instance.
+     * This API is used to query the upgrade prices of a yearly/monthly subscribed instance.
 .
      * @param {InquiryPriceUpgradeDBInstanceRequest} req
      * @param {function(string, InquiryPriceUpgradeDBInstanceResponse):void} cb

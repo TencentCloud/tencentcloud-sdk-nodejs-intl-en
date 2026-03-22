@@ -11069,7 +11069,7 @@ class CreateCloudReadOnlyDBInstancesRequest extends  AbstractModel {
         this.ReadOnlyGroupMinInGroup = null;
 
         /**
-         * Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
+         * Billing mode. Valid values: `PREPAID` (yearly/monthly subscription), `POSTPAID` (pay-as-you-go).
          * @type {string || null}
          */
         this.InstanceChargeType = null;

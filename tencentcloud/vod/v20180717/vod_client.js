@@ -135,6 +135,7 @@ const EditMediaTaskInput = models.EditMediaTaskInput;
 const DescribeImageSpriteTemplatesRequest = models.DescribeImageSpriteTemplatesRequest;
 const DeleteImageProcessingTemplateRequest = models.DeleteImageProcessingTemplateRequest;
 const DescribeDailyPlayStatFileListResponse = models.DescribeDailyPlayStatFileListResponse;
+const SplitMediaOutputConfig = models.SplitMediaOutputConfig;
 const AbnormalLightingConfigureInfo = models.AbnormalLightingConfigureInfo;
 const TextWatermarkTemplateInputForUpdate = models.TextWatermarkTemplateInputForUpdate;
 const DeleteSuperPlayerConfigRequest = models.DeleteSuperPlayerConfigRequest;
@@ -147,7 +148,8 @@ const JitterConfigureInfoForUpdate = models.JitterConfigureInfoForUpdate;
 const UserDefineAsrTextReviewTemplateInfo = models.UserDefineAsrTextReviewTemplateInfo;
 const CreateProcedureTemplateRequest = models.CreateProcedureTemplateRequest;
 const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
-const DescribeMediaProcessUsageDataRequest = models.DescribeMediaProcessUsageDataRequest;
+const DescribeAigcUsageDataResponse = models.DescribeAigcUsageDataResponse;
+const AigcUsageDataItem = models.AigcUsageDataItem;
 const MPSOutputFile = models.MPSOutputFile;
 const CreatePersonSampleRequest = models.CreatePersonSampleRequest;
 const RemoveWatermarkTask = models.RemoveWatermarkTask;
@@ -705,7 +707,7 @@ const DescribeSuperPlayerConfigsRequest = models.DescribeSuperPlayerConfigsReque
 const ReduceMediaBitrateMediaProcessTaskResult = models.ReduceMediaBitrateMediaProcessTaskResult;
 const ImageQualityEnhanceInfo = models.ImageQualityEnhanceInfo;
 const AiRecognitionTaskOcrFullTextResultInput = models.AiRecognitionTaskOcrFullTextResultInput;
-const SplitMediaOutputConfig = models.SplitMediaOutputConfig;
+const DescribeAigcUsageDataRequest = models.DescribeAigcUsageDataRequest;
 const CreateVodDomainResponse = models.CreateVodDomainResponse;
 const ModifyVodDomainAccelerateConfigResponse = models.ModifyVodDomainAccelerateConfigResponse;
 const AiRecognitionTaskSegmentResultInput = models.AiRecognitionTaskSegmentResultInput;
@@ -855,6 +857,7 @@ const DescribeAnimatedGraphicsTemplatesResponse = models.DescribeAnimatedGraphic
 const ExtractCopyRightWatermarkTask = models.ExtractCopyRightWatermarkTask;
 const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
 const QualityInspectItem = models.QualityInspectItem;
+const DescribeMediaProcessUsageDataRequest = models.DescribeMediaProcessUsageDataRequest;
 const PullUploadTask = models.PullUploadTask;
 const DescribeImageProcessingTemplatesResponse = models.DescribeImageProcessingTemplatesResponse;
 const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
@@ -1317,6 +1320,20 @@ This API returns the video content duration for intelligent recognition in secon
     ResetProcedureTemplate(req, cb) {
         let resp = new ResetProcedureTemplateResponse();
         this.request("ResetProcedureTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to return statistical information of AIGC within a specified time range.
+1. AIGC stats from the last 365 days can be queried.
+   2. The query time span should not exceed 90 days.
+3. If the query time span exceeds 1 day, return data with day-level granularity. Otherwise, return data with 5-minute granularity.
+     * @param {DescribeAigcUsageDataRequest} req
+     * @param {function(string, DescribeAigcUsageDataResponse):void} cb
+     * @public
+     */
+    DescribeAigcUsageData(req, cb) {
+        let resp = new DescribeAigcUsageDataResponse();
+        this.request("DescribeAigcUsageData", req, resp, cb);
     }
 
     /**

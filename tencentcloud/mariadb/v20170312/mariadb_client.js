@@ -219,7 +219,7 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to terminate an isolated monthly subscribed instance.
+     * This API is used to terminate an isolated yearly/monthly subscribed instance.
      * @param {DestroyDBInstanceRequest} req
      * @param {function(string, DestroyDBInstanceResponse):void} cb
      * @public
@@ -363,7 +363,7 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to isolate a monthly subscribed TencentDB for MariaDB instance, which will no longer be accessible via IP and port.  The isolated instance can be started up in the recycle bin.  If it is isolated due to overdue payments, top up your account as soon as possible.
+     * This API is used to isolate a yearly/monthly subscribed TencentDB for MariaDB instance, which will no longer be accessible via IP and port.  The isolated instance can be started up in the recycle bin.  If it is isolated due to overdue payments, top up your account as soon as possible.
      * @param {IsolateDBInstanceRequest} req
      * @param {function(string, IsolateDBInstanceResponse):void} cb
      * @public
@@ -452,7 +452,7 @@ If no filter is specified, 20 instances will be returned by default. Up to 100 i
     }
 
     /**
-     * This API is used to create a monthly subscribed TencentDB for MariaDB instance by passing in information such as instance specifications, database version number, validity period, and quantity.
+     * This API is used to create a yearly/monthly subscribed TencentDB for MariaDB instance by passing in information such as instance specifications, database version number, validity period, and quantity.
      * @param {CreateDBInstanceRequest} req
      * @param {function(string, CreateDBInstanceResponse):void} cb
      * @public

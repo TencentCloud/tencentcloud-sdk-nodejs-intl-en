@@ -26222,7 +26222,7 @@ class CreateBuyBindTaskRequest extends  AbstractModel {
         this.DealName = null;
 
         /**
-         * Optional parameters. 1: Pro Edition-monthly subscription; 2: Ultimate Edition-monthly subscription
+         * Optional parameters. 1: Pro Edition-yearly/monthly subscription; 2: Ultimate Edition-yearly/monthly subscription
          * @type {number || null}
          */
         this.LicenseType = null;
@@ -27523,11 +27523,11 @@ class DescribeLicenseListRequest extends  AbstractModel {
          * Take the intersection when filtering with multiple conditions.
 <li> LicenseStatus authorization status information: 0 - not used; 1 - partially used; 2 - used up; 3 - unavailable; 4 - available</li>
 <li> BuyTime: time of purchase</li>
-<li> LicenseType authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2: Ultimate Edition-monthly subscription</li>
+<li> LicenseType authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-yearly/monthly subscription; 2: Ultimate Edition-yearly/monthly subscription</li>
 <li>DeadlineStatus expiration status: NotExpired -not expired; expire - expired (including terminated); nearexpiry - about to expire</li>
 <li>ResourceId resource ID</li>
 <li>Keywords IP filtering</li>
-<li>PayMode payment mode. 0: pay-as-you-go; 1: monthly subscription</li>
+<li>PayMode payment mode. 0: pay-as-you-go; 1: yearly/monthly subscription</li>
 <li>OrderStatus order status. 1: normal; 2: isolated; 3: terminated</li>
 <li>DealNames sub-order number, with a maximum length of 10, exceeding this will result in a failure.</li>
          * @type {Array.<Filters> || null}
@@ -27551,6 +27551,18 @@ class DescribeLicenseListRequest extends  AbstractModel {
          * @type {Array.<Tags> || null}
          */
         this.Tags = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.By = null;
 
     }
 
@@ -27581,6 +27593,8 @@ class DescribeLicenseListRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -29394,7 +29408,7 @@ class ExportLicenseDetailRequest extends  AbstractModel {
 
         /**
          * Take the intersection when filtering with multiple conditions: LicenseStatus, DeadlineStatus, ResourceId, and Keywords
-<li> LicenseType authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2: Ultimate Edition-monthly subscription</li>
+<li> LicenseType authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-yearly/monthly subscription; 2: Ultimate Edition-yearly/monthly subscription</li>
 <li>ResourceId resource ID</li>
          * @type {Array.<Filters> || null}
          */
@@ -29501,7 +29515,7 @@ class CreateLicenseOrderRequest extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2 - Ultimate Edition-monthly subscriptionThe default is 0.
+         * Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-yearly/monthly subscription; 2 - Ultimate Edition-yearly/monthly subscription default is 0.
          * @type {number || null}
          */
         this.LicenseType = null;
@@ -29536,7 +29550,7 @@ This parameter is only valid for monthly subscription.
 
         /**
          * Whether to auto-renew. The default is not to auto-renew.
-This parameter is only valid for monthly subscription.
+This parameter is only valid for yearly/monthly subscription.
          * @type {boolean || null}
          */
         this.AutoRenewFlag = null;
@@ -45743,6 +45757,18 @@ class Machine extends  AbstractModel {
         this.MachineStatus = null;
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.AgentStatus = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.InstanceStatus = null;
+
+        /**
          * Yunjing client UUID. If the client is offline for a long time, an empty string is returned.
          * @type {string || null}
          */
@@ -45783,7 +45809,7 @@ class Machine extends  AbstractModel {
         /**
          * Host status
 <li>POSTPAY: postpaid, indicating pay-as-you-go mode  </li>
-<li>PREPAY: prepaid, indicating monthly subscription mode</li>
+<li>PREPAY: prepaid, indicating yearly/monthly subscription mode</li>
          * @type {string || null}
          */
         this.PayMode = null;
@@ -45923,6 +45949,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Remark = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AgentVersion = null;
+
     }
 
     /**
@@ -45935,6 +45967,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MachineName = 'MachineName' in params ? params.MachineName : null;
         this.MachineOs = 'MachineOs' in params ? params.MachineOs : null;
         this.MachineStatus = 'MachineStatus' in params ? params.MachineStatus : null;
+        this.AgentStatus = 'AgentStatus' in params ? params.AgentStatus : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
         this.VulNum = 'VulNum' in params ? params.VulNum : null;
@@ -45989,6 +46023,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.AgentVersion = 'AgentVersion' in params ? params.AgentVersion : null;
 
     }
 }
@@ -46224,7 +46259,7 @@ class LicenseDetail extends  AbstractModel {
         this.LicenseId = null;
 
         /**
-         * Authorization type. 0: Pro Edition - pay-as-you-go; 1: Pro Edition - monthly subscription; 2: Ultimate Edition - monthly subscription.
+         * Authorization type. 0: Pro Edition - pay-as-you-go; 1: Pro Edition - yearly/monthly subscription; 2: Ultimate Edition - yearly/monthly subscription.
          * @type {number || null}
          */
         this.LicenseType = null;
@@ -55315,7 +55350,7 @@ CVM: Cloud Virtual Machine
 BM: BM
 ECM: Edge Computing Machine
 LH: Lighthouse
-Other: Hybrid Cloud Zone
+Other: Hybrid Cloud Zone
          * @type {string || null}
          */
         this.MachineType = null;
@@ -55341,7 +55376,7 @@ Other: Hybrid Cloud Zone
         /**
          * Filtering criteria
 <li>Keywords - String - required: no - keywords for querying </li>
-<li>Version - String required: no - current protection edition ( PRO_VERSION: Pro Edition | BASIC_VERSION: Basic Edition | Flagship: Ultimate Edition | ProtectedMachines: Pro + Ultimate Editions | UnFlagship: Non-Ultimate Edition | PRO_POST_PAY: Pro Edition in pay-as-you-go mode | PRO_PRE_PAY: Pro Edition in monthly subscription mode)</li>
+<li>Version - String required: no - current protection edition ( PRO_VERSION: Pro Edition | BASIC_VERSION: Basic Edition | Flagship: Ultimate Edition | ProtectedMachines: Pro + Ultimate Editions | UnFlagship: Non-Ultimate Edition | PRO_POST_PAY: Pro Edition in pay-as-you-go mode | PRO_PRE_PAY: Pro Edition in yearly/monthly subscription mode)</li>
 <li>TagId - String - required: no - tag ID </li>
          * @type {Array.<Filter> || null}
          */
@@ -56492,7 +56527,7 @@ class DestroyOrderRequest extends  AbstractModel {
         this.ResourceId = null;
 
         /**
-         * Authorization type. 0: Pro Edition - pay-as-you-go; 1: Pro Edition - monthly subscription; 2: Ultimate Edition - monthly subscription.
+         * Authorization type. 0: Pro Edition - pay-as-you-go; 1: Pro Edition - yearly/monthly subscription; 2: Ultimate Edition - yearly/monthly subscription.
          * @type {number || null}
          */
         this.LicenseType = null;

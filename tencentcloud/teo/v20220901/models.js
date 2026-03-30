@@ -17191,36 +17191,48 @@ class CreateAccelerationDomainRequest extends  AbstractModel {
         this.OriginInfo = null;
 
         /**
-         * Origin-pull protocol configuration. Values:
-<li>`FOLLOW`: Follow the protocol of origin</li>
-<li>`HTTP`: Send requests to the origin over HTTP</li>
-<li>`HTTPS`: Send requests to the origin over HTTPS</li>
-<li>Default: `FOLLOW`</li>
+         * Origin-Pull protocol. valid values:.
+<Li>FOLLOW: follow protocol;</li>.
+<Li>HTTP: http protocol for origin-pull;</li>.
+<li>HTTPS: the origin server uses the HTTPS protocol.</li>defaults to FOLLOW if left blank.
          * @type {string || null}
          */
         this.OriginProtocol = null;
 
         /**
-         * Ports for HTTP origin-pull requests. Range: 1-65535. It takes effect when `OriginProtocol=FOLLOW/HTTP`. Port 80 is used if it's not specified. 
+         * HTTP origin port. default value 80. value range: 1–65535.
+This parameter is valid only when OriginProtocol is FOLLOW or HTTP.
          * @type {number || null}
          */
         this.HttpOriginPort = null;
 
         /**
-         * Ports for HTTPS origin-pull requests. Range: 1-65535. It takes effect when `OriginProtocol=FOLLOW/HTTPS`. Port 443 is used if it's not specified. 
+         * HTTPS origin port. default value 443. value range: 1–65535.
+This parameter is valid only when OriginProtocol is FOLLOW or HTTPS.
          * @type {number || null}
          */
         this.HttpsOriginPort = null;
 
         /**
-         * IPv6 status. Values:
-<li>`follow`: Follow the IPv6 configuration of the site</li>
-<li>`on`: Enable</li>
-<li>`off`: Disable</li>
-<li>Default: `follow`</li>
+         * IPv6 status. valid values:.
+<li>follow: adhere to the site IPv6 configuration;</li>.
+<li>on: enabled status;</li>.
+<li>off: disabled.</li>if left empty, the default value is follow.
          * @type {string || null}
          */
         this.IPv6Status = null;
+
+        /**
+         * Specify the shared CNAME address for domain binding. use the default CNAME when not specified.
+Bind shared CNAME requires the scheduling policy of all domains to be consistent. the following configuration affects the scheduling policy. when inconsistent, bind shared CNAME will be processed as follows:.
+-IPv6 access: not allowed to create domain name. change IPv6Status to keep it configured the same as other domain names bound to the shared CNAME.
+-Anti-DDoS: if the selected shared CNAME has DDoS protection enabled, domain activation will enable DDoS protection by default.
+-Network optimization in the chinese mainland (international acceleration): not allowed to create a domain name. keep the network optimization in the chinese mainland (international acceleration) configuration of the current domain name consistent with the other domain names bound to the shared CNAME and try again after.
+
+Note: shared CNAME is currently in beta test. if you need to use it, contact us to enable it.
+         * @type {string || null}
+         */
+        this.SharedCNAME = null;
 
     }
 
@@ -17243,6 +17255,7 @@ class CreateAccelerationDomainRequest extends  AbstractModel {
         this.HttpOriginPort = 'HttpOriginPort' in params ? params.HttpOriginPort : null;
         this.HttpsOriginPort = 'HttpsOriginPort' in params ? params.HttpsOriginPort : null;
         this.IPv6Status = 'IPv6Status' in params ? params.IPv6Status : null;
+        this.SharedCNAME = 'SharedCNAME' in params ? params.SharedCNAME : null;
 
     }
 }
@@ -21088,27 +21101,27 @@ class OriginInfo extends  AbstractModel {
         super();
 
         /**
-         * Origin server type, with values:
-<li>IP_DOMAIN: IPv4, IPv6, or domain name type origin server;</li>
-<li>COS: Tencent Cloud COS origin server;</li>
-<li>AWS_S3: AWS S3 origin server;</li>
-<li>ORIGIN_GROUP: origin server group type origin server;</li>
- <li>VOD: Video on Demand;</li>
-<li>SPACE: origin server uninstallation. Currently only available to the allowlist;</li>
+         * Origin server type. Valid values:
+<li>IP_DOMAIN: IPV4, IPV6, or DOMAIN type origin server.</li>.
+<Li>COS: tencent cloud cos origin server;</li>.
+<Li>AWS_S3: aws s3 cos origin server;</li>.
+<Li>ORIGIN_GROUP: origin server group type origin server;</li>.
+<Li>VOD: video on demand;</li>.
+<Li>SPACE: origin server uninstallation. currently only available to the allowlist;</li>.
 <li>LB: load balancing. Currently only available to the allowlist. </li>
          * @type {string || null}
          */
         this.OriginType = null;
 
         /**
-         * Origin server address, which varies according to the value of OriginType:
-<li>When OriginType = IP_DOMAIN, fill in an IPv4 address, an IPv6 address, or a domain name;</li>
-<li>When OriginType = COS, fill in the access domain name of the COS bucket;</li>
-<li>When OriginType = AWS_S3, fill in the access domain name of the S3 bucket;</li>
-<li>When OriginType = ORIGIN_GROUP, fill in the origin server group ID;</li>
-<li>When OriginType = VOD, fill in the VOD application ID;</li>
-<li>When OriginType = LB, fill in the Cloud Load Balancer instance ID. This feature is currently only available to the allowlist;</li>
-<li>When OriginType = SPACE, fill in the origin server uninstallation space ID. This feature is currently only available to the allowlist.</li>
+         * Origin server address, which varies according to the value of OriginType:.
+<li>When OriginType = IP_DOMAIN, this parameter should be an IPv4 address, an IPv6 address, or a DOMAIN name;</li>.
+<li>When OriginType = COS, this parameter is the access domain of the COS bucket;</li>.
+<li>When OriginType = AWS_S3, this parameter is the access domain of the S3 bucket;</li>.
+<li>When OriginType = ORIGIN_GROUP, this parameter should be the ORIGIN server GROUP ID. if referencing an ORIGIN server GROUP from other sites, the format is {ORIGIN server GROUP ID}@{ZoneID}, such as og-testorigin@zone-38moq1z10wwwy;</li>.
+<li>When OriginType = VOD, this parameter is the VOD application ID;</li>.
+<li>When OriginType = LB, this parameter is the cloud load balancer instance ID. this feature is currently only available to the allowlist. if referencing a load balancer from other sites, the format is {cloud load balancer ID}@{ZoneID}, such as LB-2rxpamcyqfzg@zone-38moq1z10wwwy;</li>.
+<li>When OriginType = SPACE, this parameter specifies the origin server uninstallation SPACE ID. this feature is currently only available to the allowlist.</li>.
          * @type {string || null}
          */
         this.Origin = null;
@@ -21120,10 +21133,9 @@ class OriginInfo extends  AbstractModel {
         this.BackupOrigin = null;
 
         /**
-         * Whether access to the private Cloud Object Storage origin server is allowed. This parameter is valid only when OriginType is COS or AWS_S3. Valid values:
-<li>on: Enable private authentication;</li>
-<li>off: Disable private authentication.</li>
-If it is not specified, the default value is off.
+         * Whether access to the private object storage origin server is allowed. this parameter is valid only when the origin server type OriginType is COS or AWS_S3. valid values:.
+<Li>On: enable private authentication;</li>.
+<Li>Off: disable private authentication.</li>if left empty, the default value is off.
          * @type {string || null}
          */
         this.PrivateAccess = null;
@@ -21135,10 +21147,10 @@ If it is not specified, the default value is off.
         this.PrivateParameters = null;
 
         /**
-         * Custom origin server HOST header. this parameter is valid only when OriginType=IP_DOMAIN.If the OriginType is another type of origin, this parameter does not need to be passed in, otherwise an error will be reported.
-If OriginType is COS or AWS_S3, the HOST header for origin-pull will remain consistent with the origin server domain name.
-If OriginType is ORIGIN_GROUP, the HOST header follows the ORIGIN site GROUP configuration. if not configured, it defaults to the acceleration domain name.
-If OriginType is VOD or SPACE, no configuration is required for this header, and the domain name takes effect based on the corresponding origin.
+         * Custom origin server HOST header. this parameter is valid only when OriginType = IP_DOMAIN. when OriginType is other types, this parameter is not required, otherwise error will occur.
+When OriginType is COS or AWS_S3, the origin-pull HOST header will remain consistent with the origin server domain name.
+When OriginType is ORIGIN_GROUP, the HOST header follows the ORIGIN site GROUP configuration. if not configured, it defaults to the acceleration domain name.
+When OriginType is VOD or SPACE, no configuration required for this header, the corresponding domain name takes effect.
          * @type {string || null}
          */
         this.HostHeader = null;
@@ -21164,8 +21176,7 @@ If OriginType is VOD or SPACE, no configuration is required for this header, and
         this.VodeoBucketId = null;
 
         /**
-         * VOD origin-pull scope. this parameter is valid only when OriginType = VOD. valid values: <li>all: all files in the VOD application corresponding to the current origin server. the default value is all;</li> <li>bucket: files in a specified bucket under the VOD application corresponding to the current origin server. specify the bucket by the parameter VodBucketId.</li>.
-</li>
+         * VOD origin range. this parameter is valid only when OriginType = VOD. valid values: <li>all: all files in the VOD application corresponding to the current origin server.</li><li>bucket: files in a specified bucket under the VOD application corresponding to the current origin server. use parameter VodBucketId to specify the bucket.</li>default value is all if left empty.
          * @type {string || null}
          */
         this.VodOriginScope = null;

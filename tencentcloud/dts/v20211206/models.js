@@ -3131,7 +3131,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DatabaseNetEnv = null;
 
         /**
-         * 
+         * TDSQL connection method: proxy - access each set node via TDSQL proxy hosts. Note that this connection method is only available in self-developed cloud environments. Only proxy host information needs to be provided in Info. set - directly connect to set nodes. If selecting direct set connection, both proxy host information and all set node information must be correctly filled in Info. Mandatory when source is TDSQL MySQL type.
          * @type {string || null}
          */
         this.ConnectType = null;
@@ -3749,13 +3749,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AutoRetryTimeRangeMinutes = null;
 
         /**
-         * 
+         * Whether to filter out begin and commit messages when synchronizing to the kafka link. Currently only supported for MySQL-to-kafka links.
          * @type {boolean || null}
          */
         this.FilterBeginCommit = null;
 
         /**
-         * 
+         * Whether to filter out checkpoint messages when synchronizing to the kafka link. Currently only supported for MySQL-to-kafka links.
          * @type {boolean || null}
          */
         this.FilterCheckpoint = null;
@@ -4234,7 +4234,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ExtraAttr = null;
 
         /**
-         * 
+         * PostgreSQL migration types: logical (logical migration), physical (physical migration)
          * @type {string || null}
          */
         this.MigrateWay = null;
@@ -8993,13 +8993,13 @@ class EndpointItem extends  AbstractModel {
         this.ExtraAttr = null;
 
         /**
-         * 
+         * The ID of the sub-instance when the database is cynos and it is a sub-database instance within a cynos cluster
          * @type {string || null}
          */
         this.ChildInstanceId = null;
 
         /**
-         * 
+         * When the database is cynos and it is a sub-database instance within a cynos cluster, this parameter represents the type of the sub-instance, for example: pass 'ro' for read-only instances, 'rw' for read-write instances.
          * @type {string || null}
          */
         this.ChildInstanceType = null;
@@ -10204,19 +10204,19 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.CcnOwnerUin = null;
 
         /**
-         * 
+         * The ID of the sub-instance when the database is cynos and it is a sub-database instance within a cynos cluster
          * @type {string || null}
          */
         this.ChildInstanceId = null;
 
         /**
-         * 
+         * When the database is cynos and it is a sub-database instance within a cynos cluster, this parameter represents the type of the sub-instance, for example: pass 'ro' for read-only instances, 'rw' for read-write instances.
          * @type {string || null}
          */
         this.ChildInstanceType = null;
 
         /**
-         * 
+         * Shard id of tdsql. Mandatory when node type is set.
          * @type {string || null}
          */
         this.SetId = null;

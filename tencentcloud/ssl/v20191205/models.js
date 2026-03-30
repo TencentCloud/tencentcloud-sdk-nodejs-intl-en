@@ -6101,7 +6101,7 @@ class CreateCSRRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * 
+         * Tag List
          * @type {Array.<Tags> || null}
          */
         this.Tags = null;

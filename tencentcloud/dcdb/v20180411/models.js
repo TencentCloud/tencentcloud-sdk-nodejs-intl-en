@@ -2233,7 +2233,7 @@ class CreateDedicatedClusterDCDBInstanceRequest extends  AbstractModel {
         this.RollbackTime = null;
 
         /**
-         * 
+         * DCN synchronization mode: 0: asynchronous, 1: strong synchronization
          * @type {number || null}
          */
         this.DcnSyncMode = null;

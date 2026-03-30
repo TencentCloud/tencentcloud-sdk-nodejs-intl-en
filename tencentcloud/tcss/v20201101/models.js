@@ -6318,7 +6318,7 @@ class DeleteAbnormalProcessRulesResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Container Security Image Repository List
  * @class
  */
 class ImageRepoRegistryInfo extends  AbstractModel {
@@ -6326,103 +6326,103 @@ class ImageRepoRegistryInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Repository id
          * @type {number || null}
          */
         this.RegistryId = null;
 
         /**
-         * 
+         * Repository Name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Repository Type, list: harbor, tcr
          * @type {string || null}
          */
         this.RegistryType = null;
 
         /**
-         * 
+         * Repository url
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 
+         * Network Type, list: public
          * @type {string || null}
          */
         this.NetType = null;
 
         /**
-         * 
+         * Region, list: default
          * @type {string || null}
          */
         this.RegistryRegion = null;
 
         /**
-         * 
+         * Repository Version
          * @type {string || null}
          */
         this.RegistryVersion = null;
 
         /**
-         * 
+         * Repository connection error message (to be deprecated, use ConnDetectException instead)
          * @type {string || null}
          */
         this.ConnectMsg = null;
 
         /**
-         * 
+         * Connectivity Detection Method
          * @type {string || null}
          */
         this.ConnDetectType = null;
 
         /**
-         * 
+         * Connectivity Detection Host Count
          * @type {number || null}
          */
         this.ConnDetectHostCount = null;
 
         /**
-         * 
+         * Connectivity Detection Details
          * @type {Array.<RegistryConnDetectResult> || null}
          */
         this.ConnDetectDetail = null;
 
         /**
-         * 
+         * instance_id in tcr
          * @type {string || null}
          */
         this.InstanceID = null;
 
         /**
-         * 
+         * Latest Successful Synchronization Time
          * @type {string || null}
          */
         this.LatestSyncTime = null;
 
         /**
-         * 
+         * Synchronization Status
          * @type {string || null}
          */
         this.SyncStatus = null;
 
         /**
-         * 
+         * Synchronization Failure Reason
          * @type {string || null}
          */
         this.SyncFailReason = null;
 
         /**
-         * 
+         * Synchronization Failure Solution
          * @type {string || null}
          */
         this.SyncSolution = null;
 
         /**
-         * 
+         * Synchronization Failure Message
          * @type {string || null}
          */
         this.SyncMessage = null;
@@ -19634,7 +19634,7 @@ class DescribeAssetImageRegistrySummaryRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Filter Field
          * @type {Array.<AssetFilters> || null}
          */
         this.Filters = null;
@@ -19878,13 +19878,13 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.ClusterID = null;
 
         /**
-         * 
+         * Cluster Name
          * @type {string || null}
          */
         this.ClusterName = null;
 
         /**
-         * 
+         * Cluster Access Status
          * @type {string || null}
          */
         this.ClusterAccessedStatus = null;
@@ -20085,13 +20085,13 @@ class CreateRefreshTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Specify the cluster list. If empty, it indicates synchronization of all clusters.
          * @type {Array.<string> || null}
          */
         this.ClusterIDs = null;
 
         /**
-         * 
+         * Whether to synchronize only the list
          * @type {boolean || null}
          */
         this.IsSyncListOnly = null;
@@ -22475,31 +22475,31 @@ class UpdateImageRegistryTimingScanTaskRequest extends  AbstractModel {
         this.Latest = null;
 
         /**
-         * 
+         * Whether running containers exist
          * @type {boolean || null}
          */
         this.ContainerRunning = null;
 
         /**
-         * 
+         * Scan End Time
          * @type {string || null}
          */
         this.ScanEndTime = null;
 
         /**
-         * 
+         * Scan Scope: 0 All Images, 1 Custom Images, 2 Recommended Scan Images
          * @type {number || null}
          */
         this.ScanScope = null;
 
         /**
-         * 
+         * Repository Type tcr,ccr,harbor
          * @type {Array.<string> || null}
          */
         this.RegistryType = null;
 
         /**
-         * 
+         * Namespace
          * @type {Array.<string> || null}
          */
         this.Namespace = null;
@@ -23108,7 +23108,7 @@ class DescribeVulDetailResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Image Repository Connectivity Detection Result
  * @class
  */
 class RegistryConnDetectResult extends  AbstractModel {
@@ -23116,37 +23116,37 @@ class RegistryConnDetectResult extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Host quuid or backend for Connectivity Detection
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
-         * 
+         * Host uuid or backend for Connectivity Detection
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
-         * 
+         * Detection Result Status
          * @type {string || null}
          */
         this.ConnDetectStatus = null;
 
         /**
-         * 
+         * Detection Result Information
          * @type {string || null}
          */
         this.ConnDetectMessage = null;
 
         /**
-         * 
+         * Failure Resolution
          * @type {string || null}
          */
         this.Solution = null;
 
         /**
-         * 
+         * Failure Cause
          * @type {string || null}
          */
         this.FailReason = null;
@@ -28762,13 +28762,13 @@ class SyncAssetImageRegistryAssetRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether to synchronize all image repositories
          * @type {boolean || null}
          */
         this.All = null;
 
         /**
-         * 
+         * Partial image repositories requiring synchronization
          * @type {Array.<number> || null}
          */
         this.RegistryIds = null;
@@ -30812,13 +30812,13 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.ClusterName = null;
 
         /**
-         * 
+         * Namespace
          * @type {string || null}
          */
         this.Namespace = null;
 
         /**
-         * 
+         * Workload
          * @type {string || null}
          */
         this.WorkloadType = null;
@@ -30988,7 +30988,7 @@ class DescribeVulRegistryImageListRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 
+         * Offset, defaults to 0.
          * @type {number || null}
          */
         this.Offset = null;
@@ -31263,13 +31263,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.HostID = null;
 
         /**
-         * 
+         * Namespace
          * @type {string || null}
          */
         this.Namespace = null;
 
         /**
-         * 
+         * WorkloadType
          * @type {string || null}
          */
         this.WorkloadType = null;
@@ -44990,19 +44990,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PodMem = null;
 
         /**
-         * 
+         * Cluster Name
          * @type {string || null}
          */
         this.ClusterName = null;
 
         /**
-         * 
+         * Cluster ID
          * @type {string || null}
          */
         this.ClusterID = null;
 
         /**
-         * 
+         * pod uid
          * @type {string || null}
          */
         this.PodUid = null;

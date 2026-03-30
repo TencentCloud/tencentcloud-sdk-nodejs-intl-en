@@ -1410,7 +1410,7 @@ class CreateDatabaseRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 
+         * Database Name, up to 64 characters in length.
          * @type {string || null}
          */
         this.DBName = null;
@@ -2651,13 +2651,13 @@ class CreateCdbProxyAddressRequest extends  AbstractModel {
         this.ConnectionPoolType = null;
 
         /**
-         * 
+         * Whether to enable adaptive load balancing. Disabled by default.
          * @type {boolean || null}
          */
         this.AutoLoadBalance = null;
 
         /**
-         * 
+         * Access Mode. nearBy - nearby access, balance - balanced allocation. Default value: nearBy.
          * @type {string || null}
          */
         this.AccessMode = null;
@@ -5286,7 +5286,7 @@ class ModifyAuditRuleTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API.
+         * Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.com/document/api/236/101811?from_cn_redirect=1) API.
          * @type {Array.<string> || null}
          */
         this.RuleTemplateIds = null;
@@ -8793,7 +8793,7 @@ class ModifyAuditServiceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8823,7 +8823,7 @@ class ModifyAuditServiceRequest extends  AbstractModel {
         this.AuditRuleFilters = null;
 
         /**
-         * Rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API.
+         * Rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.com/document/api/236/101811?from_cn_redirect=1) API.
          * @type {Array.<string> || null}
          */
         this.RuleTemplateIds = null;
@@ -9867,7 +9867,7 @@ class AuditLog extends  AbstractModel {
         this.ErrCode = null;
 
         /**
-         * 
+         * SQL Type.
          * @type {string || null}
          */
         this.SqlType = null;
@@ -9879,13 +9879,13 @@ class AuditLog extends  AbstractModel {
         this.PolicyName = null;
 
         /**
-         * 
+         * Database Name.
          * @type {string || null}
          */
         this.DBName = null;
 
         /**
-         * 
+         * SQL Statement.
          * @type {string || null}
          */
         this.Sql = null;
@@ -11734,7 +11734,7 @@ class AuditLogFilter extends  AbstractModel {
         this.User = null;
 
         /**
-         * 
+         * Database Name.
          * @type {Array.<string> || null}
          */
         this.DBName = null;
@@ -11752,13 +11752,13 @@ class AuditLogFilter extends  AbstractModel {
         this.PolicyName = null;
 
         /**
-         * 
+         * SQL statement. Supports fuzzy matching.
          * @type {string || null}
          */
         this.Sql = null;
 
         /**
-         * 
+         * SQL Type. Currently supports: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "ALTER", "SET", "REPLACE", "EXECUTE".
          * @type {string || null}
          */
         this.SqlType = null;
@@ -12608,7 +12608,7 @@ class DeleteAuditRuleTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API. A maximum of 5 rule templates can be deleted per request.
+         * Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.com/document/api/236/101811?from_cn_redirect=1) API. A maximum of 5 rule templates can be deleted per request.
          * @type {Array.<string> || null}
          */
         this.RuleTemplateIds = null;
@@ -14910,13 +14910,13 @@ class AdjustCdbProxyAddressRequest extends  AbstractModel {
         this.ProxyAllocation = null;
 
         /**
-         * 
+         * Whether to enable adaptive load balancing. Disabled by default.
          * @type {boolean || null}
          */
         this.AutoLoadBalance = null;
 
         /**
-         * 
+         * Access Mode: nearby - nearby access, balance - balanced allocation. Default is nearby access.
          * @type {string || null}
          */
         this.AccessMode = null;
@@ -15672,7 +15672,7 @@ class CreateAuditLogFileRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -16864,7 +16864,7 @@ class ModifyAuditConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -17442,7 +17442,7 @@ class DescribeAuditRuleTemplateModifyHistoryRequest extends  AbstractModel {
         super();
 
         /**
-         * Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API.
+         * Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.com/document/api/236/101811?from_cn_redirect=1) API.
          * @type {Array.<string> || null}
          */
         this.RuleTemplateIds = null;
@@ -19426,7 +19426,7 @@ class CloseAuditServiceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -21254,13 +21254,13 @@ class DeleteAuditLogFileRequest extends  AbstractModel {
         super();
 
         /**
-         * Audit log file name, which can be obtained through the [DescribeAuditLogFiles](https://www.tencentcloud.comom/document/api/236/45454?from_cn_redirect=1) API.
+         * Audit log file name, which can be obtained through the [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/236/45454?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.FileName = null;
 
         /**
-         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.InstanceId = null;

@@ -158,7 +158,7 @@ class ModifyMaintainPeriodConfigRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Instance Parameter Modification Task Details
  * @class
  */
 class BizTaskModifyInstanceParam extends  AbstractModel {
@@ -166,7 +166,7 @@ class BizTaskModifyInstanceParam extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -949,7 +949,7 @@ class InquirePriceMultiSpecRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Rollback RO Group Information
  * @class
  */
 class RollbackRoGroupInfo extends  AbstractModel {
@@ -2847,7 +2847,7 @@ class DescribeClusterDatabasesResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Instance Resizing Task Information
  * @class
  */
 class ModifyInstanceData extends  AbstractModel {
@@ -2855,37 +2855,37 @@ class ModifyInstanceData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * CPU After Resizing
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * 
+         * Memory After Resizing
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 
+         * Storage Limit After Resizing
          * @type {number || null}
          */
         this.StorageLimit = null;
 
         /**
-         * 
+         * CPU Before Resizing
          * @type {number || null}
          */
         this.OldCpu = null;
 
         /**
-         * 
+         * Memory Before Resizing
          * @type {number || null}
          */
         this.OldMemory = null;
 
         /**
-         * 
+         * Storage Limit Before Resizing
          * @type {number || null}
          */
         this.OldStorageLimit = null;
@@ -2903,7 +2903,7 @@ class ModifyInstanceData extends  AbstractModel {
         this.DeviceType = null;
 
         /**
-         * 
+         * Upgrade Method. Switchover is performed after upgrade completion or during maintenance windows
          * @type {string || null}
          */
         this.UpgradeType = null;
@@ -3956,7 +3956,7 @@ class StartCLSDeliveryResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Parameter Change Information
  * @class
  */
 class ParamItemInfo extends  AbstractModel {
@@ -4524,7 +4524,7 @@ class ProxyNodeInfo extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 
+         * Database Proxy Node Name
          * @type {string || null}
          */
         this.OssProxyNodeName = null;
@@ -5885,7 +5885,7 @@ no
 }
 
 /**
- * 
+ * Instance Log Delivery Information
  * @class
  */
 class InstanceCLSDeliveryInfo extends  AbstractModel {
@@ -6394,7 +6394,7 @@ class DescribeServerlessInstanceSpecsResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Manual Backup Task Information
  * @class
  */
 class ManualBackupData extends  AbstractModel {
@@ -6402,19 +6402,19 @@ class ManualBackupData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Backup type. snapshot-snapshot backup
          * @type {string || null}
          */
         this.BackupType = null;
 
         /**
-         * 
+         * Backup method. auto-automatic backup, manual-manual
          * @type {string || null}
          */
         this.BackupMethod = null;
 
         /**
-         * 
+         * Backup Time
          * @type {string || null}
          */
         this.SnapshotTime = null;
@@ -6560,7 +6560,7 @@ class InquirePriceModifyResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Secondary AZ Inventory Information
  * @class
  */
 class SlaveZoneStockInfo extends  AbstractModel {
@@ -6903,7 +6903,7 @@ class ModifyAuditRuleTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Cluster Creation Task Information
  * @class
  */
 class CreateClustersData extends  AbstractModel {
@@ -6911,19 +6911,19 @@ class CreateClustersData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Instance CPU
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * 
+         * Instance Memory
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 
+         * Cluster storage limit
          * @type {number || null}
          */
         this.StorageLimit = null;
@@ -7226,7 +7226,7 @@ class DescribeBinlogsResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Audit instance details
  * @class
  */
 class AuditInstanceInfo extends  AbstractModel {
@@ -7877,7 +7877,7 @@ class UpgradeClusterVersionRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Database Kernel Version Modification Task Information
  * @class
  */
 class ModifyDbVersionData extends  AbstractModel {
@@ -7885,19 +7885,19 @@ class ModifyDbVersionData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * pre-modification version
          * @type {string || null}
          */
         this.OldVersion = null;
 
         /**
-         * 
+         * Post-modification Version
          * @type {string || null}
          */
         this.NewVersion = null;
 
         /**
-         * 
+         * Upgrade Method
          * @type {string || null}
          */
         this.UpgradeType = null;
@@ -8249,7 +8249,7 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Rollback Task Information
  * @class
  */
 class RollbackData extends  AbstractModel {
@@ -8257,43 +8257,43 @@ class RollbackData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Instance CPU
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * 
+         * Instance Memory
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 
+         * Cluster storage limit
          * @type {number || null}
          */
         this.StorageLimit = null;
 
         /**
-         * 
+         * Original Cluster id
          * @type {string || null}
          */
         this.OriginalClusterId = null;
 
         /**
-         * 
+         * Original Cluster Name
          * @type {string || null}
          */
         this.OriginalClusterName = null;
 
         /**
-         * 
+         * Rollback Method
          * @type {string || null}
          */
         this.RollbackStrategy = null;
 
         /**
-         * 
+         * Snapshot Time
          * @type {string || null}
          */
         this.SnapshotTime = null;
@@ -8317,13 +8317,13 @@ class RollbackData extends  AbstractModel {
         this.SnapShotId = null;
 
         /**
-         * 
+         * Rollback Database
          * @type {Array.<RollbackDatabase> || null}
          */
         this.RollbackDatabases = null;
 
         /**
-         * 
+         * Rollback Data Table
          * @type {Array.<RollbackTable> || null}
          */
         this.RollbackTables = null;
@@ -8636,7 +8636,7 @@ class Tag extends  AbstractModel {
 }
 
 /**
- * 
+ * Rule Template Content
  * @class
  */
 class RuleTemplateInfo extends  AbstractModel {
@@ -9523,7 +9523,7 @@ class DescribeBackupDownloadUrlRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Audit instance details
  * @class
  */
 class InstanceAuditStatus extends  AbstractModel {
@@ -9531,13 +9531,13 @@ class InstanceAuditStatus extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 
+         * Audit status. ON- Audit is enabled; OFF- Audit is disabled.
          * @type {string || null}
          */
         this.AuditStatus = null;
@@ -10045,7 +10045,9 @@ class InquirePriceCreateRequest extends  AbstractModel {
         this.StoragePayMode = null;
 
         /**
-         * device type:common, exclusive
+         * Instance device type. Supported values are as follows:
+- common: indicates the general type
+- exclusive: indicates the exclusive type.
          * @type {string || null}
          */
         this.DeviceType = null;
@@ -10636,7 +10638,7 @@ class StartCLSDeliveryRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * AZ Attribute Item
  * @class
  */
 class SlaveZoneAttrItem extends  AbstractModel {
@@ -10769,7 +10771,7 @@ class DescribeChangedParamsAfterUpgradeRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * CLS Log Delivery Configuration
  * @class
  */
 class CLSInfo extends  AbstractModel {
@@ -10777,43 +10779,49 @@ class CLSInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Log topic operation: optional create, reuse.
+create: create a new log topic using TopicName.
+reuse: use an existing log topic by specifying TopicId.
+Combining the use of an existing log topic and creating a new log set is not allowed.
          * @type {string || null}
          */
         this.TopicOperation = null;
 
         /**
-         * 
+         * Log set operation: optional create, reuse.
+create: create a new log set using GroupName.
+reuse: use an existing log set by specifying GroupId.
+Combining the use of an existing log topic and creating a new log set is not allowed.
          * @type {string || null}
          */
         this.GroupOperation = null;
 
         /**
-         * 
+         * Log Delivery Region
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 
+         * log topic id
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * 
+         * log topic name
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * 
+         * log set id
          * @type {string || null}
          */
         this.GroupId = null;
 
         /**
-         * 
+         * log set name
          * @type {string || null}
          */
         this.GroupName = null;
@@ -11509,7 +11517,7 @@ class DescribeBackupDownloadRestrictionRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Rollback Database and Tables
  * @class
  */
 class RollbackTable extends  AbstractModel {
@@ -11517,13 +11525,13 @@ class RollbackTable extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Database Name
          * @type {string || null}
          */
         this.Database = null;
 
         /**
-         * 
+         * Database Table
          * @type {Array.<RollbackTableInfo> || null}
          */
         this.Tables = null;
@@ -11608,7 +11616,7 @@ class DescribeInstanceErrorLogsRequest extends  AbstractModel {
         this.LogLevels = null;
 
         /**
-         * 
+         * Keywords, supports fuzzy search
          * @type {Array.<string> || null}
          */
         this.KeyWords = null;
@@ -12167,7 +12175,7 @@ class CreateProxyResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Parameter Modification Task Data
  * @class
  */
 class BizTaskModifyParamsData extends  AbstractModel {
@@ -12175,7 +12183,7 @@ class BizTaskModifyParamsData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Cluster ID
          * @type {string || null}
          */
         this.ClusterId = null;
@@ -12434,13 +12442,13 @@ class ModifyBackupConfigRequest extends  AbstractModel {
         this.BackupType = null;
 
         /**
-         * 
+         * Logical Backup Configuration
          * @type {LogicBackupConfigInfo || null}
          */
         this.LogicBackupConfig = null;
 
         /**
-         * 
+         * Whether to delete the automatic logical backup
          * @type {boolean || null}
          */
         this.DeleteAutoLogicBackup = null;
@@ -12549,7 +12557,7 @@ class RemoveClusterSlaveZoneRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Task information
  * @class
  */
 class BizTaskInfo extends  AbstractModel {
@@ -12557,19 +12565,19 @@ class BizTaskInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Task id
          * @type {number || null}
          */
         this.ID = null;
 
         /**
-         * 
+         * User appid
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * 
+         * cluster id
          * @type {string || null}
          */
         this.ClusterId = null;
@@ -12581,7 +12589,7 @@ class BizTaskInfo extends  AbstractModel {
         this.Region = null;
 
         /**
-         * 
+         * Task Creation Time
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -12599,115 +12607,115 @@ class BizTaskInfo extends  AbstractModel {
         this.ErrMsg = null;
 
         /**
-         * 
+         * asynchronous task flow id
          * @type {number || null}
          */
         this.FlowId = null;
 
         /**
-         * 
+         * task input information
          * @type {string || null}
          */
         this.Input = null;
 
         /**
-         * 
+         * instance group id
          * @type {string || null}
          */
         this.InstanceGrpId = null;
 
         /**
-         * 
+         * instance group id
          * @type {string || null}
          */
         this.InstanceGroupId = null;
 
         /**
-         * 
+         * Instance id
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 
+         * Task Operation Target id
          * @type {string || null}
          */
         this.ObjectId = null;
 
         /**
-         * 
+         * Task Operation Target Type
          * @type {string || null}
          */
         this.ObjectType = null;
 
         /**
-         * 
+         * Operator uin
          * @type {string || null}
          */
         this.Operator = null;
 
         /**
-         * 
+         * task output information
          * @type {string || null}
          */
         this.Output = null;
 
         /**
-         * 
+         * Task Status
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * task type
          * @type {string || null}
          */
         this.TaskType = null;
 
         /**
-         * 
+         * Parent Task ID that Triggered This Task
          * @type {number || null}
          */
         this.TriggerTaskId = null;
 
         /**
-         * 
+         * Update Time
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * 
+         * Task Start Time
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 
+         * Task End Time
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * 
+         * Cluster Name
          * @type {string || null}
          */
         this.ClusterName = null;
 
         /**
-         * 
+         * Instance Name
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * 
+         * Task Progress
          * @type {number || null}
          */
         this.Process = null;
 
         /**
-         * 
+         * Parameter Modification Task Information
          * @type {Array.<ModifyParamsData> || null}
          */
         this.ModifyParamsData = null;
@@ -12731,7 +12739,7 @@ class BizTaskInfo extends  AbstractModel {
         this.ModifyInstanceData = null;
 
         /**
-         * 
+         * Manual Backup Task Information
          * @type {ManualBackupData || null}
          */
         this.ManualBackupData = null;
@@ -12749,13 +12757,13 @@ class BizTaskInfo extends  AbstractModel {
         this.ClusterSlaveData = null;
 
         /**
-         * 
+         * Cluster Log Conversion
          * @type {SwitchClusterLogBin || null}
          */
         this.SwitchClusterLogBin = null;
 
         /**
-         * 
+         * Instance Parameter Modification
          * @type {BizTaskModifyParamsData || null}
          */
         this.ModifyInstanceParamsData = null;
@@ -13183,7 +13191,7 @@ class DescribeBackupConfigRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Exchange Instance Information
  * @class
  */
 class ExchangeInstanceInfo extends  AbstractModel {
@@ -14158,7 +14166,7 @@ class ExportInstanceErrorLogsRequest extends  AbstractModel {
         this.LogLevels = null;
 
         /**
-         * 
+         * Keywords
          * @type {Array.<string> || null}
          */
         this.KeyWords = null;
@@ -14298,7 +14306,7 @@ class DeleteClusterDatabaseRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * 
+         * Database Name
          * @type {Array.<string> || null}
          */
         this.DbNames = null;
@@ -14425,7 +14433,7 @@ class ModifyVipVportRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Allowed Operations List for Instances
  * @class
  */
 class InstanceAbility extends  AbstractModel {
@@ -15242,7 +15250,7 @@ class NewAccount extends  AbstractModel {
 }
 
 /**
- * 
+ * Parameter Modification Information
  * @class
  */
 class ModifyParamsData extends  AbstractModel {
@@ -15250,19 +15258,19 @@ class ModifyParamsData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Parameter Name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Parameter Value Before Modification
          * @type {string || null}
          */
         this.OldValue = null;
 
         /**
-         * 
+         * Parameter Value After Modification
          * @type {string || null}
          */
         this.CurValue = null;
@@ -16558,7 +16566,7 @@ class TradePrice extends  AbstractModel {
         super();
 
         /**
-         * Resource total price under prepaid mode, excluding discounts. unit: cent.
+         * Resource total price under prepaid mode, excluding discounts. unit: microCent. 1 US dollar equals 1e8 microCents.
          * @type {number || null}
          */
         this.TotalPrice = null;
@@ -16570,19 +16578,19 @@ class TradePrice extends  AbstractModel {
         this.Discount = null;
 
         /**
-         * Discounted total price under prepaid mode, unit: fen. for example, the user enjoys a Discount = TotalPrice × Discount.
+         * Discounted total price under prepaid mode, unit: cent. 1 US dollar equals 1e8 microCents. for example, the user enjoys a Discount = TotalPrice * Discount.
          * @type {number || null}
          */
         this.TotalPriceDiscount = null;
 
         /**
-         * Unit resource price in postpaid mode, excluding discounts. unit: cent.
+         * Unit resource price in postpaid mode, excluding discounts. unit: cent. 1 US dollar equals 1e2 cents
          * @type {number || null}
          */
         this.UnitPrice = null;
 
         /**
-         * Unit resource price in postpaid mode after Discount, unit: fen. for example, the user enjoys a Discount = unitprice × Discount.
+         * Unit resource price in postpaid mode after Discount, unit: cent. 1 US dollar equals 1e2 cents. for example, the user enjoys a Discount = unitprice * Discount.
          * @type {number || null}
          */
         this.UnitPriceDiscount = null;
@@ -16592,6 +16600,24 @@ class TradePrice extends  AbstractModel {
          * @type {string || null}
          */
         this.ChargeUnit = null;
+
+        /**
+         * Excludes discounted rates under high precision.
+         * @type {string || null}
+         */
+        this.UnitPriceHighPrecision = null;
+
+        /**
+         * Discounted price under high precision.
+         * @type {string || null}
+         */
+        this.UnitPriceDiscountHighPrecision = null;
+
+        /**
+         * Currency unit.
+         * @type {string || null}
+         */
+        this.AmountUnit = null;
 
     }
 
@@ -16608,6 +16634,9 @@ class TradePrice extends  AbstractModel {
         this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
         this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
         this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+        this.UnitPriceHighPrecision = 'UnitPriceHighPrecision' in params ? params.UnitPriceHighPrecision : null;
+        this.UnitPriceDiscountHighPrecision = 'UnitPriceDiscountHighPrecision' in params ? params.UnitPriceDiscountHighPrecision : null;
+        this.AmountUnit = 'AmountUnit' in params ? params.AmountUnit : null;
 
     }
 }
@@ -17865,7 +17894,7 @@ class ModifyClusterSlaveZoneRequest extends  AbstractModel {
         this.BinlogSyncWay = null;
 
         /**
-         * 
+         * Semi-sync timeout period in ms. To ensure business stability, the semi-synchronous replication includes a degradation mechanism. If the primary AZ cluster exceeds this timeout while waiting for transaction confirmation from the secondary AZ cluster, the replication mode will fall back to asynchronous replication. Minimum setting: 1000 ms; maximum support: 4294967295 ms; default: 10000 ms.
          * @type {number || null}
          */
         this.SemiSyncTimeout = null;
@@ -19011,7 +19040,7 @@ class InstanceAuditRule extends  AbstractModel {
 }
 
 /**
- * 
+ * Swap RO group information
  * @class
  */
 class ExchangeRoGroupInfo extends  AbstractModel {
@@ -19166,7 +19195,7 @@ class ModifyInstanceNameRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Rollback Instance Information
  * @class
  */
 class RollbackInstanceInfo extends  AbstractModel {
@@ -19536,7 +19565,7 @@ Description: this parameter returns a value only when querying LibraDB resources
 }
 
 /**
- * 
+ * Cluster AZ Information
  * @class
  */
 class ClusterSlaveData extends  AbstractModel {
@@ -19550,7 +19579,7 @@ class ClusterSlaveData extends  AbstractModel {
         this.OldMasterZone = null;
 
         /**
-         * 
+         * Standby AZ
          * @type {Array.<string> || null}
          */
         this.OldSlaveZone = null;
@@ -19562,7 +19591,7 @@ class ClusterSlaveData extends  AbstractModel {
         this.NewMasterZone = null;
 
         /**
-         * 
+         * New Standby AZ
          * @type {Array.<string> || null}
          */
         this.NewSlaveZone = null;
@@ -20156,7 +20185,7 @@ class AddClusterSlaveZoneRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Rollback Database Information
  * @class
  */
 class RollbackDatabase extends  AbstractModel {
@@ -20164,13 +20193,13 @@ class RollbackDatabase extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Old Database Name
          * @type {string || null}
          */
         this.OldDatabase = null;
 
         /**
-         * 
+         * New Database Name
          * @type {string || null}
          */
         this.NewDatabase = null;
@@ -20527,7 +20556,7 @@ class DescribeAuditRuleTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Logical Backup Configuration Information
  * @class
  */
 class LogicBackupConfigInfo extends  AbstractModel {
@@ -20565,7 +20594,7 @@ class LogicBackupConfigInfo extends  AbstractModel {
         this.LogicCrossRegionsEnable = null;
 
         /**
-         * 
+         * Logical Backup Cross-Region
          * @type {Array.<string> || null}
          */
         this.LogicCrossRegions = null;
@@ -21047,7 +21076,7 @@ class DescribeBackupListRequest extends  AbstractModel {
         this.BackupMethod = null;
 
         /**
-         * 
+         * Snapshot type. Optional values: full, full backup; increment, incremental backup
          * @type {string || null}
          */
         this.SnapShotType = null;
@@ -21065,7 +21094,7 @@ class DescribeBackupListRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 
+         * Backup file name, fuzzy search
          * @type {Array.<string> || null}
          */
         this.FileNames = null;
@@ -21165,7 +21194,7 @@ class IntegrateInstanceInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Toggle Cluster log bin Switch
  * @class
  */
 class SwitchClusterLogBin extends  AbstractModel {
@@ -21504,7 +21533,7 @@ class RenewClustersResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Rollback Table Information
  * @class
  */
 class RollbackTableInfo extends  AbstractModel {
@@ -21539,7 +21568,7 @@ class RollbackTableInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Rollback Progress Details
  * @class
  */
 class RollbackProcessInfo extends  AbstractModel {
@@ -21559,13 +21588,13 @@ class RollbackProcessInfo extends  AbstractModel {
         this.VipSwitchableTime = null;
 
         /**
-         * 
+         * Exchange Instance List
          * @type {Array.<ExchangeInstanceInfo> || null}
          */
         this.ExchangeInstanceInfoList = null;
 
         /**
-         * 
+         * Swap RO Group List
          * @type {Array.<ExchangeRoGroupInfo> || null}
          */
         this.ExchangeRoGroupInfoList = null;
@@ -21765,7 +21794,7 @@ class ModifyClusterPasswordComplexityResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Query filter conditions for audit instances
  * @class
  */
 class AuditInstanceFilters extends  AbstractModel {
@@ -21773,19 +21802,19 @@ class AuditInstanceFilters extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Filter condition values. Supports InstanceId-Instance ID, InstanceName-Instance Name, ProjectId-Project ID, TagKey-Tag Key, Tag-Tag (separated by a vertical bar, e.g.: Tagkey|Tagvalue).
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * true indicates exact match; false indicates fuzzy match.
          * @type {boolean || null}
          */
         this.ExactMatch = null;
 
         /**
-         * 
+         * Filter value
          * @type {Array.<string> || null}
          */
         this.Values = null;
@@ -23767,7 +23796,7 @@ class ModifiableInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether the parameter is modifiable. 1: Yes 0: No
          * @type {number || null}
          */
         this.IsModifiable = null;

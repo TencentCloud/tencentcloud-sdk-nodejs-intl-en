@@ -166,7 +166,10 @@ Note: This field may return "null", indicating that no valid value can be obtain
         this.OsImage = null;
 
         /**
-         * 
+         * **Instance ID corresponding to the native node**
+
+- ins-q47ofw6 indicates that this instance is a CVM instance
+- eks-f8mvyaep indicates that this instance is a CXM instance
          * @type {string || null}
          */
         this.InstanceId = null;

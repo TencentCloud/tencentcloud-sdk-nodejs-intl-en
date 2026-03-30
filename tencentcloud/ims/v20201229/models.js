@@ -73,7 +73,7 @@ class ImageModerationRequest extends  AbstractModel {
         this.Device = null;
 
         /**
-         * 
+         * This field indicates the input image auditing type, with values including: IMAGE (Content Security) and IMAGE_AIGC (AI-generated content recognition). The default value is IMAGE.
          * @type {string || null}
          */
         this.Type = null;

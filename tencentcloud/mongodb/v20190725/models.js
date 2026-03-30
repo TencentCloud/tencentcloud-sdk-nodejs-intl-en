@@ -3123,7 +3123,7 @@ class DescribeLogDownloadTasksRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * User permissions
  * @class
  */
 class Auth extends  AbstractModel {

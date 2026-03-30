@@ -3226,13 +3226,17 @@ class DescribeDataPvUrlStatisticsRequest extends  AbstractModel {
         this.Env = null;
 
         /**
-         * 
+         * group by parameter value enumeration: 1:1m
+   2:5m  3:30m 
+   4:1h
+ 5:1d
          * @type {number || null}
          */
         this.GroupByType = null;
 
         /**
-         * 
+         * 1: Query Intelligent Research
+0: Use old logic, already offline, do not use
          * @type {number || null}
          */
         this.IsNewData = null;

@@ -1476,7 +1476,7 @@ class ModifyDnsRecordRequest extends  AbstractModel {
         this.Content = null;
 
         /**
-         * 
+         * Time to Live Value
          * @type {number || null}
          */
         this.Ttl = null;
@@ -3685,7 +3685,7 @@ class CreateDnsRecordRequest extends  AbstractModel {
         this.Mode = null;
 
         /**
-         * 
+         * Time to Live Value
          * @type {number || null}
          */
         this.Ttl = null;
@@ -4171,7 +4171,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.ModifiedOn = null;
 
         /**
-         * 
+         * Site access region, with values:
+
+<li> global: Global;</li>
+
+<li> mainland: Chinese mainland;</li>
+
+<li> overseas: Overseas regions.</li>
          * @type {string || null}
          */
         this.Area = null;
@@ -5505,7 +5511,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.PrivateParameter = null;
 
         /**
-         * 
+         * When the origin site configuration type Type=proto, it indicates the client request protocol, values: http/https
          * @type {string || null}
          */
         this.Proto = null;
@@ -14982,7 +14988,11 @@ class Resource extends  AbstractModel {
         this.PlanId = null;
 
         /**
-         * 
+         * Region, with values:
+
+<li>mainland: Chinese mainland;</li>
+
+<li>overseas: Overseas.</li>
          * @type {string || null}
          */
         this.Area = null;

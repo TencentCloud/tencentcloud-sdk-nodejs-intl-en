@@ -5247,7 +5247,7 @@ class DescribeUpstreamBindApisResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Policy List
  * @class
  */
 class IPStrategiesStatus extends  AbstractModel {
@@ -5255,13 +5255,13 @@ class IPStrategiesStatus extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Number of policies.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 
+         * Policy List.
          * @type {Array.<IPStrategy> || null}
          */
         this.StrategySet = null;
@@ -13040,7 +13040,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * API Binding Policy List
  * @class
  */
 class ApiEnvironmentStrategyStatus extends  AbstractModel {
@@ -13048,13 +13048,13 @@ class ApiEnvironmentStrategyStatus extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The quantity of rate limiting policies bound to APIs.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 
+         * API Binding Rate Limiting Policy List.
          * @type {Array.<ApiEnvironmentStrategy> || null}
          */
         this.ApiEnvironmentStrategySet = null;
@@ -15518,7 +15518,7 @@ class CreateApiKeyRequest extends  AbstractModel {
         this.AccessKeySecret = null;
 
         /**
-         * 
+         * Tag
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;

@@ -11710,13 +11710,13 @@ class DisableTeamDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Domain Name ID
          * @type {number || null}
          */
         this.DomainId = null;
 
         /**
-         * 
+         * Platform ID
          * @type {string || null}
          */
         this.PlatformId = null;

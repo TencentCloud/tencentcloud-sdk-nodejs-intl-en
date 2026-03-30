@@ -62,13 +62,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.UserType = null;
 
         /**
-         * 
+         * Recent Login IP
          * @type {string || null}
          */
         this.LastLoginIp = null;
 
         /**
-         * 
+         * Recent login time; if the returned value is empty, it means the console has never been logged in to.
          * @type {string || null}
          */
         this.LastLoginTime = null;

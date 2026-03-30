@@ -1068,7 +1068,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.QualityControlResults = null;
 
         /**
-         * 
+         * Format diagnostic results list.
          * @type {Array.<DiagnoseResult> || null}
          */
         this.DiagnoseResults = null;
@@ -3208,7 +3208,7 @@ class AiAnalysisTaskCutoutOutput extends  AbstractModel {
 }
 
 /**
- * 
+ * Diagnosis result item.
  * @class
  */
 class DiagnoseResult extends  AbstractModel {
@@ -3278,19 +3278,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Type = null;
 
         /**
-         * 
+         * The PTS timestamp for the exception start.
          * @type {number || null}
          */
         this.Timestamp = null;
 
         /**
-         * 
+         * Diagnosed abnormal description.
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * 
+         * Abnormality detection time in Beijing time, using ISO date format.
          * @type {string || null}
          */
         this.DateTime = null;
@@ -4887,7 +4887,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 Unit: Hz.
 Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
 Note: This field may return null, indicating that no valid values can be obtained.
@@ -5395,7 +5395,7 @@ class SmartEraseTaskResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -5690,7 +5690,7 @@ Cannot be set to 0.
 
         /**
          * Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 Unit: Hz.
 Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
          * @type {number || null}
@@ -13239,7 +13239,7 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
         /**
          * Notification type:
 TDMQ-CMQ: message queue.
-"URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.comom/document/product/862/39229?from_cn_redirect=1).
+"URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/product/862/39229?from_cn_redirect=1).
 <Font color="red"> Note: if it is unspecified or left blank, no callback will be sent. To send a callback, fill in the corresponding type value. </font>
          * @type {string || null}
          */
@@ -20162,13 +20162,13 @@ class BlindWatermarkTemplate extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+         * Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+         * Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -20438,7 +20438,7 @@ class DeleteAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Live streaming AI tagging recognition results
  * @class
  */
 class LiveStreamTagRecognitionResult extends  AbstractModel {
@@ -20446,25 +20446,25 @@ class LiveStreamTagRecognitionResult extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Tagging events.
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * 
+         * Start PTS time of the recognition segment, unit: seconds.
          * @type {number || null}
          */
         this.StartPtsTime = null;
 
         /**
-         * 
+         * Termination PTS time of the recognition segment, unit: seconds.
          * @type {number || null}
          */
         this.EndPtsTime = null;
 
         /**
-         * 
+         * Recognition segment confidence. Range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -21405,7 +21405,7 @@ class ScheduleExecRuleTaskResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
+         * Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -23537,7 +23537,7 @@ class LiveStreamAiRecognitionResultItem extends  AbstractModel {
         this.ObjectRecognitionResultSet = null;
 
         /**
-         * 
+         * Tagging results are valid when Type is TagRecognition.
          * @type {Array.<LiveStreamTagRecognitionResult> || null}
          */
         this.TagRecognitionResultSet = null;
@@ -24283,19 +24283,19 @@ class LiveStreamAsrFullTextRecognitionResult extends  AbstractModel {
         this.Confidence = null;
 
         /**
-         * 
+         * Recognition start UTC time.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 
+         * Recognition end UTC time.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * 
+         * Steady state marker.
          * @type {boolean || null}
          */
         this.SteadyState = null;
@@ -24511,7 +24511,7 @@ class ProhibitedAsrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Smart segmentation clips.
  * @class
  */
 class SegmentRecognitionItem extends  AbstractModel {
@@ -24519,19 +24519,19 @@ class SegmentRecognitionItem extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Confidence.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 
+         * Segment start time offset.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * 
+         * Segment end time offset.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -24637,7 +24637,7 @@ class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
 }
 
 /**
- * 
+ * Live streaming analysis results
  * @class
  */
 class LiveStreamAiAnalysisResultInfo extends  AbstractModel {
@@ -25012,13 +25012,13 @@ class TranslateConfigureInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * 
+         * Video source language.
          * @type {string || null}
          */
         this.SourceLanguage = null;
 
         /**
-         * 
+         * Translated target language.
          * @type {string || null}
          */
         this.DestinationLanguage = null;
@@ -26480,7 +26480,7 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.Status = null;
 
         /**
-         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrMsg = null;
@@ -26859,7 +26859,7 @@ class SmartSubtitleTaskFullTextResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -29822,19 +29822,19 @@ class LiveStreamTransTextRecognitionResult extends  AbstractModel {
         this.Trans = null;
 
         /**
-         * 
+         * Translation start UTC time.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 
+         * Translation end UTC time.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * 
+         * Steady state marker.
          * @type {boolean || null}
          */
         this.SteadyState = null;
@@ -33166,7 +33166,7 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.HdrType = null;
 
         /**
-         * 
+         * Video Codecs.
          * @type {string || null}
          */
         this.Codecs = null;
@@ -33965,7 +33965,7 @@ class ProcessLiveStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID, which is a number.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.comom/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.comom/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
+         * <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID, which is a number.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
          * @type {string || null}
          */
         this.Url = null;
@@ -36572,7 +36572,7 @@ class DescribeUsageDataRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.EndTime = null;
@@ -37419,7 +37419,7 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.ErrCode = null;
 
         /**
-         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrMsg = null;
@@ -39744,7 +39744,9 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
         this.Tag = null;
 
         /**
-         * 
+         * Classification list of frame-level tags, where CategorySet.N represents the (N+1)th level classification.
+
+For example, when the Tag is "tower", CategorySet contains two elements: CategorySet.0 is "scene" and CategorySet.1 is "architecture", indicating the frame-level tag is "tower" with Level 1 classification as "scene" and Level 2 classification as "architecture".
          * @type {Array.<string> || null}
          */
         this.CategorySet = null;
@@ -40718,7 +40720,7 @@ Note: This field may return null, indicating that no valid value can be obtained
 
         /**
          * Output path of the generated subtitle file, which can be a relative or absolute path.
-To define the output path, end the path with .{format}. For variable names, see the description of file name variables at https://www.tencentcloud.comom/document/product/862/37039.?from_cn_redirect=1
+To define the output path, end the path with .{format}. For variable names, see the description of file name variables at https://www.tencentcloud.com/document/product/862/37039.?from_cn_redirect=1
 
 Relative path example:
  - File name_{variable name}.{format}.
@@ -41335,7 +41337,7 @@ class CreateSmartSubtitleTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Live streaming AI analysis results
  * @class
  */
 class LiveStreamAiAnalysisResultItem extends  AbstractModel {
@@ -41352,7 +41354,8 @@ class LiveStreamAiAnalysisResultItem extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 
+         * Segmentation results are valid when Type is
+SegmentRecognition.
          * @type {Array.<SegmentRecognitionItem> || null}
          */
         this.SegmentResultSet = null;
@@ -41734,7 +41737,7 @@ class AiAnalysisTaskCutoutResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -41871,13 +41874,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ErasePrivacyConfig = null;
 
         /**
-         * Template creation time in [ISO datetime format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+         * Template creation time in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modification time of the template in [ISO datetime format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+         * Last modification time of the template in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.UpdateTime = null;

@@ -937,7 +937,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Country = null;
 
         /**
-         * 
+         * Remarks
          * @type {string || null}
          */
         this.Comment = null;
@@ -2589,7 +2589,7 @@ true: enable; false: disable
 }
 
 /**
- * 
+ * VPC Private Network Rules
  * @class
  */
 class VpcRuleItem extends  AbstractModel {
@@ -2597,151 +2597,193 @@ class VpcRuleItem extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Access source example:
+
+net: IP/CIDR (192.168.0.2)
          * @type {string || null}
          */
         this.SourceContent = null;
 
         /**
-         * 
+         * Access source type, which can be: net
          * @type {string || null}
          */
         this.SourceType = null;
 
         /**
-         * 
+         * Access destination example:
+
+net: IP/CIDR (192.168.0.2)
+
+domain: domain name rules, for example *.qq.com
          * @type {string || null}
          */
         this.DestContent = null;
 
         /**
-         * 
+         * Access destination type, which can be: net, domain, dnsparse
          * @type {string || null}
          */
         this.DestType = null;
 
         /**
-         * 
+         * Protocol, optional values:
+
+TCP
+
+UDP
+
+ICMP
+
+ANY
+
+HTTP
+
+HTTPS
+
+HTTP/HTTPS
+
+SMTP
+
+SMTPS
+
+SMTP/SMTPS
+
+FTP
+
+DNS
+
+TLS/SSL
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * 
+         * How traffic set in the access control policy passes through CFW. Values:
+
+accept: allow
+
+drop: deny
+
+log: observe
          * @type {string || null}
          */
         this.RuleAction = null;
 
         /**
-         * 
+         * Access control policy ports. Values:
+
+-1/-1: all ports
+
+80: port 80
          * @type {string || null}
          */
         this.Port = null;
 
         /**
-         * 
+         * Description
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * 
+         * Rule order, where -1 indicates the lowest and 1 indicates the highest.
          * @type {number || null}
          */
         this.OrderIndex = null;
 
         /**
-         * 
+         * Rule status, where true indicates enabled and false indicates disabled.
          * @type {string || null}
          */
         this.Enable = null;
 
         /**
-         * 
+         * The scope of effect for the rule, specifying whether it applies between a specific pair of VPCs or across all VPCs.
          * @type {string || null}
          */
         this.EdgeId = null;
 
         /**
-         * 
+         * The unique id corresponding to the rule. This field is ignored when adding a rule; when modifying the rule, the Uuid needs to be filled in. This parameter will be returned in query results.
          * @type {number || null}
          */
         this.Uuid = null;
 
         /**
-         * 
+         * The hit count of the rule. This parameter does not need to be passed during CRUD operations and is mainly used for returning query result data.
          * @type {number || null}
          */
         this.DetectedTimes = null;
 
         /**
-         * 
+         * Description of the firewall between the pair of VPCs corresponding to EdgeId
          * @type {string || null}
          */
         this.EdgeName = null;
 
         /**
-         * 
+         * Internal-use uuid, generally not used
          * @type {number || null}
          */
         this.InternalUuid = null;
 
         /**
-         * 
+         * Rule deletion status: 1 indicates deleted; 0 indicates not deleted
          * @type {number || null}
          */
         this.Deleted = null;
 
         /**
-         * 
+         * The firewall instance ID where the rule takes effect
          * @type {string || null}
          */
         this.FwGroupId = null;
 
         /**
-         * 
+         * Firewall name
          * @type {string || null}
          */
         this.FwGroupName = null;
 
         /**
-         * 
+         * beta task details
          * @type {Array.<BetaInfoByACL> || null}
          */
         this.BetaList = null;
 
         /**
-         * 
+         * Port Protocol Group ID
          * @type {string || null}
          */
         this.ParamTemplateId = null;
 
         /**
-         * 
+         * Port Protocol Group Name
          * @type {string || null}
          */
         this.ParamTemplateName = null;
 
         /**
-         * 
+         * Access destination name
          * @type {string || null}
          */
         this.TargetName = null;
 
         /**
-         * 
+         * Access source name
          * @type {string || null}
          */
         this.SourceName = null;
 
         /**
-         * 
+         * Ip version, 0: IPv4, 1: IPv6, default is IPv4
          * @type {number || null}
          */
         this.IpVersion = null;
 
         /**
-         * 
+         * Whether the rule is invalid, where 0 indicates a valid rule and 1 indicates an invalid rule, used in output parameters.
          * @type {number || null}
          */
         this.Invalid = null;

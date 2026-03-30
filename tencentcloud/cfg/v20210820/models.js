@@ -3013,13 +3013,13 @@ class DescribeTaskListRequest extends  AbstractModel {
         this.TaskStatusList = null;
 
         /**
-         * 
+         * Architecture ID
          * @type {string || null}
          */
         this.ArchId = null;
 
         /**
-         * 
+         * Architecture Name
          * @type {string || null}
          */
         this.ArchName = null;

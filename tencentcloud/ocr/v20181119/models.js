@@ -5259,13 +5259,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TrainTicket = null;
 
         /**
-         * 
+         * Medical Outpatient Fee Invoice (Electronic).
          * @type {MedicalInvoice || null}
          */
         this.MedicalOutpatientInvoice = null;
 
         /**
-         * 
+         * Inpatient Medical Fee Invoice (Electronic).
          * @type {MedicalInvoice || null}
          */
         this.MedicalHospitalizedInvoice = null;
@@ -5670,19 +5670,19 @@ class VatInvoiceInfo extends  AbstractModel {
         this.Receiptor = null;
 
         /**
-         * 
+         * Whether fully electronic and paper tickets exist (0: No, 1: Yes).
          * @type {number || null}
          */
         this.ElectronicFullMark = null;
 
         /**
-         * 
+         * Fully Electronic Number
          * @type {string || null}
          */
         this.ElectronicFullNumber = null;
 
         /**
-         * 
+         * Co-branded Invoice.
          * @type {string || null}
          */
         this.FormName = null;
@@ -7087,7 +7087,7 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
 }
 
 /**
- * 
+ * Information Section Content.
  * @class
  */
 class PassportRecognizeInfos extends  AbstractModel {
@@ -7095,85 +7095,91 @@ class PassportRecognizeInfos extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Document Type (Passport Information Page Recognition Result).
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * Issuing Country (Passport Information Page Recognition Result).
          * @type {string || null}
          */
         this.IssuingCountry = null;
 
         /**
-         * 
+         * Passport Number (Passport Information Page Recognition Result).
          * @type {string || null}
          */
         this.PassportID = null;
 
         /**
-         * 
+         * Surname (Passport Information Page Recognition Result).
          * @type {string || null}
          */
         this.Surname = null;
 
         /**
-         * 
+         * Given Name (Passport Information Page Recognition Result).
          * @type {string || null}
          */
         this.GivenName = null;
 
         /**
-         * 
+         * Full Name (Passport Information Page Recognition Result).
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Nationality Information (Passport Information Page Recognition Result).
          * @type {string || null}
          */
         this.Nationality = null;
 
         /**
-         * 
+         * Date of Birth (Passport Information Page Recognition Result).
          * @type {string || null}
          */
         this.DateOfBirth = null;
 
         /**
-         * 
+         * Gender (Passport Information Page Recognition Result).
          * @type {string || null}
          */
         this.Sex = null;
 
         /**
-         * 
+         * Date of Issue (Passport Information Page Recognition Result).
          * @type {string || null}
          */
         this.DateOfIssuance = null;
 
         /**
-         * 
+         * Expiry Date (Passport Information Page Recognition Result).
          * @type {string || null}
          */
         this.DateOfExpiration = null;
 
         /**
-         * 
+         * Cardholder Signature (Passport Information Page Recognition Result)
+
+This field is only supported for Chinese mainland passports and not available for Hong Kong (China), Macao (China), and Taiwan (China) passports or foreign passports.
          * @type {string || null}
          */
         this.Signature = null;
 
         /**
-         * 
+         * Place of Issue (Passport Information Page Recognition Result)
+
+This field is only supported for Chinese mainland passports and not available for Hong Kong (China), Macao (China), and Taiwan (China) passports or foreign passports.
          * @type {string || null}
          */
         this.IssuePlace = null;
 
         /**
-         * 
+         * Issuing Authority (Passport Information Page Recognition Result)
+
+This field is only supported for Chinese mainland passports and not available for Hong Kong (China), Macao (China), and Taiwan (China) passports or foreign passports.
          * @type {string || null}
          */
         this.IssuingAuthority = null;
@@ -10701,7 +10707,7 @@ We recommend that you store the image in Tencent Cloud for higher download speed
 }
 
 /**
- * 
+ * Medical bill information.
  * @class
  */
 class MedicalInvoice extends  AbstractModel {
@@ -10709,55 +10715,55 @@ class MedicalInvoice extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Invoice name.
          * @type {string || null}
          */
         this.Title = null;
 
         /**
-         * 
+         * Invoice code.
          * @type {string || null}
          */
         this.Code = null;
 
         /**
-         * 
+         * Invoice number.
          * @type {string || null}
          */
         this.Number = null;
 
         /**
-         * 
+         * Total amount (in figures).
          * @type {string || null}
          */
         this.Total = null;
 
         /**
-         * 
+         * Total Amount (in words).
          * @type {string || null}
          */
         this.TotalCn = null;
 
         /**
-         * 
+         * Invoice date.
          * @type {string || null}
          */
         this.Date = null;
 
         /**
-         * 
+         * Verification code
          * @type {string || null}
          */
         this.CheckCode = null;
 
         /**
-         * 
+         * Place of Issue.
          * @type {string || null}
          */
         this.Place = null;
 
         /**
-         * 
+         * Reviewer.
          * @type {string || null}
          */
         this.Reviewer = null;

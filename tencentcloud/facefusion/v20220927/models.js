@@ -268,7 +268,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Face Fusion is not suitable for CR facial information.
  * @class
  */
 class FuseFaceReviewDetail extends  AbstractModel {
@@ -276,25 +276,37 @@ class FuseFaceReviewDetail extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Reserved Field
          * @type {string || null}
          */
         this.Field = null;
 
         /**
-         * 
+         * Tag name matched in audit
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 
+         * Confidence score corresponding to the identified label. A higher score indicates a higher probability of violation.
+
+0 to 70: Suggestion is PASS;
+
+70 to 80: Suggestion is REVIEW;
+
+80 to 100: Suggestion is BLOCK.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 
+         * Audit conclusion for identified scenarios:
+
+PASS: Normal
+
+REVIEW: Suspected
+
+BLOCK: Violation
          * @type {string || null}
          */
         this.Suggestion = null;
@@ -497,7 +509,7 @@ Width and height are no less than 30.
 }
 
 /**
- * 
+ * Face Fusion is not suitable for the returned parameter item in CR.
  * @class
  */
 class FuseFaceReviewResult extends  AbstractModel {
@@ -505,37 +517,37 @@ class FuseFaceReviewResult extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Reserved Field
          * @type {string || null}
          */
         this.Category = null;
 
         /**
-         * 
+         * Status code; 0 indicates successful processing, other values indicate processing failure
          * @type {string || null}
          */
         this.Code = null;
 
         /**
-         * 
+         * Description for the status code
          * @type {string || null}
          */
         this.CodeDescription = null;
 
         /**
-         * 
+         * Reserved Field
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 
+         * Reserved Field
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * 
+         * Audit Details
          * @type {Array.<FuseFaceReviewDetail> || null}
          */
         this.DetailSet = null;

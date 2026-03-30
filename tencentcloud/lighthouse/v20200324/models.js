@@ -5476,7 +5476,7 @@ class DescribeBundlesRequest extends  AbstractModel {
         super();
 
         /**
-         * List of bundle ids. the maximum is 100 per request for batch packages. you can get the BundleId in the return value from the API [DescribeBundles](https://www.tencentcloud.comom/document/product/1207/47575?from_cn_redirect=1).
+         * List of bundle ids. the maximum is 100 per request for batch packages. you can get the BundleId in the return value from the API [DescribeBundles](https://www.tencentcloud.com/document/product/1207/47575?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.BundleIds = null;
@@ -5517,7 +5517,7 @@ The maximum number of `Filters` per request is 10, and the maximum number of `Fi
 
         /**
          * AZ list. default to all availability zones.
-<li>AZs can be queried through the API [DescribeZones](https://www.tencentcloud.comom/document/product/1207/57513?from_cn_redirect=1)</li>.
+<li>AZs can be queried through the API [DescribeZones](https://www.tencentcloud.com/document/product/1207/57513?from_cn_redirect=1)</li>.
          * @type {Array.<string> || null}
          */
         this.Zones = null;
@@ -7749,7 +7749,7 @@ For Windows instances, the password must contain 12 to 30 characters of the foll
         this.Password = null;
 
         /**
-         * 
+         * Key ID list. You can specify up to 5 keys simultaneously. After associating keys, you can access the instance using the corresponding private key. Keys and passwords cannot be specified simultaneously. Additionally, the WINDOWS operating system does not support key specification. The key ID list can be obtained via the [DescribeKeyPairs](https://cloud.tencent.com/document/product/1207/55540) API.
          * @type {Array.<string> || null}
          */
         this.KeyIds = null;

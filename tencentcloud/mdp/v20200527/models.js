@@ -440,7 +440,7 @@ class DeleteStreamPackageLinearAssemblyChannelsRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Channel-associated domain information list.
  * @class
  */
 class CdnDomainInfo extends  AbstractModel {
@@ -1792,7 +1792,7 @@ The parameters can only contain digits, letters, underscores (_), and hyphens (-
 }
 
 /**
- * 
+ * Ad insertion channel configuration information.
  * @class
  */
 class SSAIChannelInfo extends  AbstractModel {
@@ -2005,7 +2005,7 @@ class DescribeStreamPackageLinearAssemblyProgramsRequest extends  AbstractModel 
 }
 
 /**
- * 
+ * Channel-associated domain record information.
  * @class
  */
 class DomainRecordInfo extends  AbstractModel {
@@ -5536,7 +5536,7 @@ class StartStreamPackageVodRemuxTaskRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * cos input information
  * @class
  */
 class CosInputInfo extends  AbstractModel {

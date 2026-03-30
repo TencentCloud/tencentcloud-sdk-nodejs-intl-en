@@ -354,7 +354,7 @@ class GetSdkVerificationResultRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Sensitive Data Encryption
  * @class
  */
 class Encryption extends  AbstractModel {
@@ -445,7 +445,7 @@ SuspectedWatermark: Suspected watermark
 }
 
 /**
- * 
+ * Additional Details
  * @class
  */
 class ExtraInfo extends  AbstractModel {
@@ -453,7 +453,7 @@ class ExtraInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Details of matched templates, only returns the template information with the highest similarity
          * @type {Array.<RetrievalLivenessExtraInfo> || null}
          */
         this.RetrievalLivenessExtraInfo = null;
@@ -606,7 +606,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * EKYC ID Document OCR Result Modification Details
  * @class
  */
 class EditDetail extends  AbstractModel {
@@ -3374,7 +3374,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Overseas Document Address
  * @class
  */
 class Address extends  AbstractModel {
@@ -3465,7 +3465,7 @@ class Address extends  AbstractModel {
 }
 
 /**
- * 
+ * Template search details
  * @class
  */
 class RetrievalLivenessExtraInfo extends  AbstractModel {
@@ -3473,19 +3473,19 @@ class RetrievalLivenessExtraInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Matched template types, where Common - public library; Auto - automatic clustering library; Owner - self-built template library.
          * @type {string || null}
          */
         this.HitGroup = null;
 
         /**
-         * 
+         * Matched Similarity
          * @type {number || null}
          */
         this.SimilarityScore = null;
 
         /**
-         * 
+         * Matched Template id
          * @type {string || null}
          */
         this.HitTemplate = null;

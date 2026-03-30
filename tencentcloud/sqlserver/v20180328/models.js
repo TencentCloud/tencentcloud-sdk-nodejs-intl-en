@@ -419,7 +419,7 @@ class CreateBusinessDBInstancesResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * This data structure represents two databases with a publish-subscribe relationship, along with the status information of that relationship between them.
  * @class
  */
 class DatabaseTupleStatus extends  AbstractModel {
@@ -427,25 +427,25 @@ class DatabaseTupleStatus extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Publish Database Name
          * @type {string || null}
          */
         this.PublishDatabase = null;
 
         /**
-         * 
+         * Subscription Database Name
          * @type {string || null}
          */
         this.SubscribeDatabase = null;
 
         /**
-         * 
+         * Latest Synchronization Time
          * @type {string || null}
          */
         this.LastSyncTime = null;
 
         /**
-         * 
+         * Publish/Subscribe Status Between Databases: running, success, fail, unknow
          * @type {string || null}
          */
         this.Status = null;
@@ -974,7 +974,7 @@ class RestoreInstanceResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Instance Asynchronous Task
  * @class
  */
 class InstanceTask extends  AbstractModel {
@@ -982,49 +982,49 @@ class InstanceTask extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Unique id
          * @type {number || null}
          */
         this.Id = null;
 
         /**
-         * 
+         * Job Type
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * Job Status
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Progress Percentage 0~100
          * @type {number || null}
          */
         this.Progress = null;
 
         /**
-         * 
+         * Start Time
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 
+         * End Time
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * 
+         * Error Code
          * @type {number || null}
          */
         this.ErrorCode = null;
 
         /**
-         * 
+         * Error Message Description
          * @type {string || null}
          */
         this.Message = null;
@@ -1101,7 +1101,7 @@ class ModifyInstanceParamRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * SSL Encryption Configuration
  * @class
  */
 class SSLConfig extends  AbstractModel {
@@ -1109,19 +1109,25 @@ class SSLConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * SSL Encryption Status
+enable - Enabled
+disable - Disabled
+enable_doing - Enabling
+disable_doing - Disabling
+renew_doing - Updating
+wait_doing - Waiting to be executed during maintenance window
          * @type {string || null}
          */
         this.Encryption = null;
 
         /**
-         * 
+         * SSL Certificates Validity Period, Time Format YYYY-MM-DD HH:MM:SS
          * @type {string || null}
          */
         this.SSLValidityPeriod = null;
 
         /**
-         * 
+         * SSL Certificates Validity: 0 - Invalid, 1 - Valid
          * @type {number || null}
          */
         this.SSLValidity = null;
@@ -2433,7 +2439,7 @@ class DBTDEEncrypt extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Database Name
          * @type {string || null}
          */
         this.DBName = null;
@@ -4453,7 +4459,7 @@ class TDEConfigAttribute extends  AbstractModel {
 }
 
 /**
- * 
+ * Backup Overview Real-Time Statistics
  * @class
  */
 class SummaryDetailRes extends  AbstractModel {
@@ -4461,85 +4467,95 @@ class SummaryDetailRes extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Region Identifier
          * @type {number || null}
          */
         this.RegionId = null;
 
         /**
-         * 
+         * Instance Status. Valid values:
+1: Creating
+2: Running
+3: Restricted Running (primary/secondary switching)
+4: Isolated
+5: Recycling
+6: Recycled
+7: Task Executing (performing instance backup, rollback, etc.)
+8: Offline
+9: Instance Scaling
+10: Instance Migrating
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 
+         * Instance Name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Backup Space
          * @type {number || null}
          */
         this.ActualUsedSpace = null;
 
         /**
-         * 
+         * Data Backup Space
          * @type {number || null}
          */
         this.DataBackupSpace = null;
 
         /**
-         * 
+         * Data Backup Total File Count
          * @type {number || null}
          */
         this.DataBackupCount = null;
 
         /**
-         * 
+         * Log Backup Space
          * @type {number || null}
          */
         this.LogBackupSpace = null;
 
         /**
-         * 
+         * Log Backup Total File Count
          * @type {number || null}
          */
         this.LogBackupCount = null;
 
         /**
-         * 
+         * Automatic Backup Space
          * @type {number || null}
          */
         this.AutoBackupSpace = null;
 
         /**
-         * 
+         * Automatic Backup Total File Count
          * @type {number || null}
          */
         this.AutoBackupCount = null;
 
         /**
-         * 
+         * Manual Backup Space
          * @type {number || null}
          */
         this.ManualBackupSpace = null;
 
         /**
-         * 
+         * Manual Backup Total File Count
          * @type {number || null}
          */
         this.ManualBackupCount = null;
 
         /**
-         * 
+         * Instance Region Code
          * @type {string || null}
          */
         this.Region = null;
@@ -5295,7 +5311,7 @@ class RunMigrationRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Security Group Policy
  * @class
  */
 class SecurityGroupPolicy extends  AbstractModel {
@@ -5303,31 +5319,31 @@ class SecurityGroupPolicy extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Policy, ACCEPT or DROP
          * @type {string || null}
          */
         this.Action = null;
 
         /**
-         * 
+         * Destination IP or IP range, for example 172.16.0.0/12
          * @type {string || null}
          */
         this.CidrIp = null;
 
         /**
-         * 
+         * port or port range
          * @type {string || null}
          */
         this.PortRange = null;
 
         /**
-         * 
+         * Network protocol supports UDP, TCP, etc.
          * @type {string || null}
          */
         this.IpProtocol = null;
 
         /**
-         * 
+         * Rule direction, OUTPUT - Outbound Rules, INPUT - Inbound Rules
          * @type {string || null}
          */
         this.Dir = null;
@@ -6252,7 +6268,7 @@ class ModifyBackupMigrationResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Read-Only Group Object
  * @class
  */
 class ReadOnlyGroup extends  AbstractModel {
@@ -6260,85 +6276,85 @@ class ReadOnlyGroup extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Read-Only Group ID
          * @type {string || null}
          */
         this.ReadOnlyGroupId = null;
 
         /**
-         * 
+         * Read-Only Group Name
          * @type {string || null}
          */
         this.ReadOnlyGroupName = null;
 
         /**
-         * 
+         * Region ID of the Read-Only Group, same as the Primary Instance
          * @type {string || null}
          */
         this.RegionId = null;
 
         /**
-         * 
+         * Read-Only Group's AZ ID, same as the Primary Instance
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * 
+         * Whether to enable the timeout culling feature; 0 - disabled, 1 - enabled
          * @type {number || null}
          */
         this.IsOfflineDelay = null;
 
         /**
-         * 
+         * Timeout threshold used after enabling the timeout culling feature
          * @type {number || null}
          */
         this.ReadOnlyMaxDelayTime = null;
 
         /**
-         * 
+         * Minimum number of read-only replicas retained in the read-only group after enabling the timeout culling feature
          * @type {number || null}
          */
         this.MinReadOnlyInGroup = null;
 
         /**
-         * 
+         * Read-Only Group vip
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
-         * 
+         * Read-Only Group vport
          * @type {number || null}
          */
         this.Vport = null;
 
         /**
-         * 
+         * Read-Only Group VPC ID
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 
+         * Read-Only Group VPC Subnet ID
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * 
+         * Read-Only Group Status: 1-Running, 5-Creating
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Primary instance ID, in the form of mssql-sgeshe3th
          * @type {string || null}
          */
         this.MasterInstanceId = null;
 
         /**
-         * 
+         * Read-Only Instance Replica Set
          * @type {Array.<ReadOnlyInstance> || null}
          */
         this.ReadOnlyInstanceSet = null;
@@ -6443,7 +6459,7 @@ class DescribeDBsNormalResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Progress Steps Details
  * @class
  */
 class StepDetail extends  AbstractModel {
@@ -6451,19 +6467,19 @@ class StepDetail extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Detailed Steps Return Information
          * @type {string || null}
          */
         this.Msg = null;
 
         /**
-         * 
+         * Current Step Status, 0 Success, -2 Not Started
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Step Name
          * @type {string || null}
          */
         this.Name = null;
@@ -6817,7 +6833,7 @@ class DBPrivilegeModifyInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Instance Resizing Inspection Items
  * @class
  */
 class CheckItem extends  AbstractModel {
@@ -6825,37 +6841,39 @@ class CheckItem extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Check item names: CK_CPU - Post-Resizing CPU Risk Check; CK_MASTER_STORAGE - During read-only replica resizing, verify that read-only replica storage space is not less than that of the primary instance; CK_MEMORY - Post-Resizing Memory Risk Check; CK_STORAGE - Post-Resizing Storage Space Risk Check; CK_UPGRATE - Resizing Migration Requirement Check;
          * @type {string || null}
          */
         this.CheckName = null;
 
         /**
-         * 
+         * Check item return values: CK_CPU - Maximum CPU utilization (%) in the last 7 days; CK_MASTER_STORAGE - Disk space of the primary instance (GB); CK_MEMORY - Maximum memory usage (GB) in the last 7 days;
+
+CK_STORAGE - Maximum disk usage (GB) in the last 7 days; CK_UPGRATE - Whether the current resizing check requires migration: MIGRATE indicates migration resizing is required, LOCAL indicates local resizing;
          * @type {string || null}
          */
         this.CurrentValue = null;
 
         /**
-         * 
+         * Check item pass status: 0 - Not passed, resizing not allowed; 1 - Passed, resizing allowed
          * @type {number || null}
          */
         this.Passed = null;
 
         /**
-         * 
+         * Whether this resizing item affects the instance: 0 - No impact; 1 - Impact exists
          * @type {number || null}
          */
         this.IsAffect = null;
 
         /**
-         * 
+         * Required description when impact exists or the check is not passed
          * @type {string || null}
          */
         this.Msg = null;
 
         /**
-         * 
+         * Describe the corresponding code
          * @type {number || null}
          */
         this.MsgCode = null;
@@ -7028,7 +7046,7 @@ class InquiryPriceUpgradeDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Offering Configuration Status
  * @class
  */
 class SpecSellStatus extends  AbstractModel {
@@ -7036,67 +7054,68 @@ class SpecSellStatus extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Sellable Specification Unique ID
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * 
+         * Instance Type ID
          * @type {number || null}
          */
         this.SpecId = null;
 
         /**
-         * 
+         * Supported payment modes for this specification: POST - only supports pay-as-you-go, PRE - only supports yearly/monthly subscription, ALL - supports all.
          * @type {string || null}
          */
         this.PayModeStatus = null;
 
         /**
-         * 
+         * Product type. Types of instances for purchase: HA - Local Disk High Availability (including dual-node high availability, alwaysOn cluster), RO - Local Disk Read-Only Replica, SI - Cloud Disk Edition Single Node, BI - Business Intelligence Service, cvmHA - Cloud Disk Edition High Availability, cvmRO - Cloud Disk Edition Read-Only Replica, MultiHA - Multi-node, cvmMultiHA - Cloud Disk Multi-node.
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * 
+         * Whether this specification supports cross-AZ deployment: MultiZones - only supports cross-AZ, SameZones - only supports same-AZ, ALL - supports all.
          * @type {string || null}
          */
         this.MultiZonesStatus = null;
 
         /**
-         * 
+         * Architecture Type, SINGLE - single node, DOUBLE - dual node, TRIPLE - three-node, MULTI - multi-node
+Example value: SINGLE
          * @type {string || null}
          */
         this.Architecture = null;
 
         /**
-         * 
+         * Type identifier, EXCLUSIVE - Dedicated, SHARED - Shared
          * @type {string || null}
          */
         this.Style = null;
 
         /**
-         * 
+         * Database Version Information
          * @type {string || null}
          */
         this.Version = null;
 
         /**
-         * 
+         * Sellable Status Set Per AZ
          * @type {Array.<ZoneStatus> || null}
          */
         this.ZoneStatusSet = null;
 
         /**
-         * 
+         * Reference price for specifications. The actual price is subject to the quotation API.
          * @type {Price || null}
          */
         this.Price = null;
 
         /**
-         * 
+         * Specification Sale Status: 1 - Normal, 2 - Sale disabled but upgradable, 3 - Sale completely disabled.
          * @type {number || null}
          */
         this.Status = null;
@@ -7851,7 +7870,7 @@ class DBInstance extends  AbstractModel {
         this.Style = null;
 
         /**
-         * 
+         * Multi-Node Instance Secondary AZ Information
          * @type {Array.<SlaveZones> || null}
          */
         this.MultiSlaveZones = null;
@@ -8765,7 +8784,7 @@ class DeletePublishSubscribeResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Reference price. This price covers CPU and memory specifications, excluding disk usage. The actual price is subject to the quotation API.
  * @class
  */
 class Price extends  AbstractModel {
@@ -8773,25 +8792,25 @@ class Price extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Reference price for yearly/monthly subscription, unit-cent
          * @type {number || null}
          */
         this.PrepaidPrice = null;
 
         /**
-         * 
+         * Price unit for yearly/monthly subscription, M-month
          * @type {string || null}
          */
         this.PrepaidPriceUnit = null;
 
         /**
-         * 
+         * Pay-as-you-go price, unit-cent
          * @type {number || null}
          */
         this.PostpaidPrice = null;
 
         /**
-         * 
+         * Pay-as-you-go price unit, H-hour
          * @type {string || null}
          */
         this.PostpaidPriceUnit = null;
@@ -9952,7 +9971,7 @@ class CreateBasicDBInstancesResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Database Account Permission Modification Information
  * @class
  */
 class DataBasePrivilegeModifyInfo extends  AbstractModel {
@@ -9960,13 +9979,13 @@ class DataBasePrivilegeModifyInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Database Name
          * @type {string || null}
          */
         this.DataBaseName = null;
 
         /**
-         * 
+         * Database Permission Modification Information
          * @type {Array.<AccountPrivilege> || null}
          */
         this.AccountPrivileges = null;
@@ -10044,7 +10063,7 @@ class DescribeMaintenanceSpanResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * This data structure represents two databases that have a publish-subscribe relationship.
  * @class
  */
 class DatabaseTuple extends  AbstractModel {
@@ -10052,13 +10071,13 @@ class DatabaseTuple extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Publish Database Name
          * @type {string || null}
          */
         this.PublishDatabase = null;
 
         /**
-         * 
+         * Subscription Database Name
          * @type {string || null}
          */
         this.SubscribeDatabase = null;
@@ -11807,7 +11826,7 @@ class DescribeCrossRegionsResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Read-Only Instance to Weight Mapping
  * @class
  */
 class ReadOnlyInstanceWeightPair extends  AbstractModel {
@@ -11815,13 +11834,13 @@ class ReadOnlyInstanceWeightPair extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Read-Only Instance ID, in the format of: mssqlro-3l3fgqn7
          * @type {string || null}
          */
         this.ReadOnlyInstanceId = null;
 
         /**
-         * 
+         * Read-Only Instance Weight, in the range of 0-100
          * @type {number || null}
          */
         this.ReadOnlyWeight = null;
@@ -12256,7 +12275,7 @@ class ModifyDatabaseCTResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Primary/Secondary Switchover Log
  * @class
  */
 class SwitchLog extends  AbstractModel {
@@ -12264,31 +12283,31 @@ class SwitchLog extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Switchover Event ID
          * @type {string || null}
          */
         this.EventId = null;
 
         /**
-         * 
+         * Switchover Mode 0-System Automatic Switchover, 1-Manual Switchover
          * @type {number || null}
          */
         this.SwitchType = null;
 
         /**
-         * 
+         * Switchover Start Time
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 
+         * Switchover End Time
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * 
+         * Machine failure causes automatic switchover.
          * @type {string || null}
          */
         this.Reason = null;
@@ -13875,7 +13894,7 @@ class CreateBusinessIntelligenceFileRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 
+         * COS_URL
          * @type {string || null}
          */
         this.FileURL = null;
@@ -15259,7 +15278,7 @@ class BusinessIntelligenceFile extends  AbstractModel {
 }
 
 /**
- * 
+ * Specification Sellable Status in a Specific Region's AZ
  * @class
  */
 class ZoneStatus extends  AbstractModel {
@@ -15267,19 +15286,19 @@ class ZoneStatus extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Specification AZ
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 
+         * Specification Region
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 
+         * Specification Sale Status in the AZ: 1 - Normal, 2 - Sale disabled but upgradable, 3 - Sale completely disabled.
          * @type {number || null}
          */
         this.Status = null;
@@ -15301,7 +15320,7 @@ class ZoneStatus extends  AbstractModel {
 }
 
 /**
- * 
+ * Pub/Sub Object
  * @class
  */
 class PublishSubscribe extends  AbstractModel {
@@ -15309,55 +15328,55 @@ class PublishSubscribe extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Pub/Sub ID
          * @type {number || null}
          */
         this.Id = null;
 
         /**
-         * 
+         * Pub/Sub Name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Published Instance ID
          * @type {string || null}
          */
         this.PublishInstanceId = null;
 
         /**
-         * 
+         * Published Instance Name
          * @type {string || null}
          */
         this.PublishInstanceName = null;
 
         /**
-         * 
+         * Published Instance IP
          * @type {string || null}
          */
         this.PublishInstanceIp = null;
 
         /**
-         * 
+         * Subscription Instance ID
          * @type {string || null}
          */
         this.SubscribeInstanceId = null;
 
         /**
-         * 
+         * Subscription Instance Name
          * @type {string || null}
          */
         this.SubscribeInstanceName = null;
 
         /**
-         * 
+         * Subscription Instance IP
          * @type {string || null}
          */
         this.SubscribeInstanceIp = null;
 
         /**
-         * 
+         * Publication-Subscription Relationship Collection of Database
          * @type {Array.<DatabaseTupleStatus> || null}
          */
         this.DatabaseTupleSet = null;
@@ -16094,7 +16113,7 @@ Note: this field may return ‘null’, indicating that no valid values can be o
 }
 
 /**
- * 
+ * Database Subscription Publication Relationship Collection to be Modified
  * @class
  */
 class ModifyDataBaseTuple extends  AbstractModel {
@@ -16102,19 +16121,19 @@ class ModifyDataBaseTuple extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Subscription Relationship to be Modified
          * @type {DatabaseTuple || null}
          */
         this.DatabaseTuple = null;
 
         /**
-         * 
+         * Modified subscription relationship. Takes effect when DeleteDataBasesTuple is false
          * @type {DatabaseTuple || null}
          */
         this.NewDatabaseTuple = null;
 
         /**
-         * 
+         * Whether to delete the subscription relationship. When this option is true, NewDatabaseTuple is invalid
          * @type {boolean || null}
          */
         this.DeleteDataBasesTuple = null;
@@ -16836,7 +16855,7 @@ class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Security Group
  * @class
  */
 class SecurityGroup extends  AbstractModel {
@@ -16844,43 +16863,43 @@ class SecurityGroup extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Project ID
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * 
+         * Creation Time, Time format: yyyy-mm-dd hh:mm:ss
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 
+         * Inbound Rules
          * @type {Array.<SecurityGroupPolicy> || null}
          */
         this.InboundSet = null;
 
         /**
-         * 
+         * Outbound Rules
          * @type {Array.<SecurityGroupPolicy> || null}
          */
         this.OutboundSet = null;
 
         /**
-         * 
+         * Security Group ID
          * @type {string || null}
          */
         this.SecurityGroupId = null;
 
         /**
-         * 
+         * Security Group Name
          * @type {string || null}
          */
         this.SecurityGroupName = null;
 
         /**
-         * 
+         * Security Group Remarks
          * @type {string || null}
          */
         this.SecurityGroupRemark = null;
@@ -16922,7 +16941,7 @@ class SecurityGroup extends  AbstractModel {
 }
 
 /**
- * 
+ * Read-Only Replica Instance
  * @class
  */
 class ReadOnlyInstance extends  AbstractModel {
@@ -16930,145 +16949,173 @@ class ReadOnlyInstance extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Read-Only Replica ID, in the format of: mssqlro-3l3fgqn7
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 
+         * Read-Only Replica Name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Read-Only Replica Unique UID
          * @type {string || null}
          */
         this.Uid = null;
 
         /**
-         * 
+         * Read-Only Replica Project ID
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * 
+         * Read-Only Replica Status: 1: Creating, 2: Running, 3: Delayed Removal, 4: Isolated, 5: Recycling, 6: Recycled, 7: Task Executing, 8: Offline, 9: Instance Scaling, 10: Instance Migrating, 12: Restarting
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Read-Only Replica Creation Time
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 
+         * Read-Only Replica Update Time
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * 
+         * Read-Only Replica Memory Size (Unit: GB)
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 
+         * Read-Only Replica Storage Space Size (Unit: GB)
          * @type {number || null}
          */
         this.Storage = null;
 
         /**
-         * 
+         * Read-Only Replica cpu Core Count
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * 
+         * Read-Only Replica Codenames
          * @type {string || null}
          */
         this.Version = null;
 
         /**
-         * 
+         * Host Machine Code
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * Read-Only Replica Mode, 2-Standalone
          * @type {number || null}
          */
         this.Model = null;
 
         /**
-         * 
+         * Read-Only Replica Billing Mode, 1-yearly/monthly subscription, 0-pay-as-you-go
          * @type {number || null}
          */
         this.PayMode = null;
 
         /**
-         * 
+         * Read-Only Replica Weight
          * @type {number || null}
          */
         this.Weight = null;
 
         /**
-         * 
+         * Read-Only Replica Latency Time (Unit: seconds)
          * @type {string || null}
          */
         this.DelayTime = null;
 
         /**
-         * 
+         * Synchronization status between the read-only replica and the primary instance.
+
+Init: Initializing
+
+DeployReadOnlyInPorgress: Deploying replica in progress
+
+DeployReadOnlySuccess: Replica deployment succeeded
+
+DeployReadOnlyFail: Replica deployment failed
+
+DeployMasterDBInPorgress: Adding replica database to primary node in progress
+
+DeployMasterDBSuccess: Successfully added replica database to primary node
+
+DeployMasterDBFail: Failed to add replica database to primary node
+
+DeployReadOnlyDBInPorgress: Replica restoration and database joining started
+
+DeployReadOnlyDBSuccess: Replica restoration and database joining succeeded
+
+DeployReadOnlyDBFail: Replica restoration and database joining failed
+
+SyncDelay: Synchronization delayed
+
+SyncFail: Synchronization failed
+
+SyncExcluded: Removed from read-only group
+
+SyncNormal: Normal
          * @type {string || null}
          */
         this.SynStatus = null;
 
         /**
-         * 
+         * Databases not synchronized between the read-only replica and the primary instance
          * @type {string || null}
          */
         this.DatabaseDifference = null;
 
         /**
-         * 
+         * Accounts not synchronized between the read-only replica and the primary instance
          * @type {string || null}
          */
         this.AccountDifference = null;
 
         /**
-         * 
+         * Read-Only Replica Billing Start Time
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 
+         * Read-Only Replica Billing End Time
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * 
+         * Read-Only Replica Isolation Time
          * @type {string || null}
          */
         this.IsolateTime = null;
 
         /**
-         * 
+         * Read-Only Replica Region Location
          * @type {string || null}
          */
         this.RegionId = null;
 
         /**
-         * 
+         * Read-Only Replica AZ Location
          * @type {string || null}
          */
         this.ZoneId = null;
@@ -17358,13 +17405,13 @@ class DescribeRestoreTimeRangeRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 
+         * Target instance ID for restoration; if left blank, defaults to restoring to the original instance.
          * @type {string || null}
          */
         this.TargetInstanceId = null;
@@ -17701,7 +17748,7 @@ class DescribeBackupMigrationResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Rollback Task Record
  * @class
  */
 class RestoreTask extends  AbstractModel {
@@ -17709,73 +17756,85 @@ class RestoreTask extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Target Instance ID
          * @type {string || null}
          */
         this.TargetInstanceId = null;
 
         /**
-         * 
+         * Target Instance Name
          * @type {string || null}
          */
         this.TargetInstanceName = null;
 
         /**
-         * 
+         * Target Instance Status. Valid values:
+1: Creating
+2: Running
+3: Restricted Running (primary/secondary switching)
+4: Isolated
+5: Recycling
+6: Recycled
+7: Task Executing (instance backup, rollback, etc.)
+8: Offline
+9: Instance Scaling
+10: Instance Migrating
+11: Read-Only
+12: Restarting
          * @type {number || null}
          */
         this.TargetInstanceStatus = null;
 
         /**
-         * 
+         * Target Instance Region
          * @type {string || null}
          */
         this.TargetRegion = null;
 
         /**
-         * 
+         * Rollback Record ID
          * @type {number || null}
          */
         this.RestoreId = null;
 
         /**
-         * 
+         * Restoration target instance type: 0 - current instance, 1 - existing instance, 2 - new instance
          * @type {number || null}
          */
         this.TargetType = null;
 
         /**
-         * 
+         * Rollback method: 0 - by point-in-time, 1 - by backup set
          * @type {number || null}
          */
         this.RestoreType = null;
 
         /**
-         * 
+         * Rollback Target Time
          * @type {string || null}
          */
         this.RestoreTime = null;
 
         /**
-         * 
+         * Start Time
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 
+         * End Time
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * 
+         * Rollback status: 0 - Initialization, 1 - Running, 2 - Success, 3 - Failure
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Rollback Asynchronous Task ID
          * @type {number || null}
          */
         this.FlowId = null;
@@ -17989,7 +18048,7 @@ class DescribeBackupCommandRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Cross-Region Backup Real-Time Statistics List Items
  * @class
  */
 class CrossSummaryDetailRes extends  AbstractModel {
@@ -17997,85 +18056,85 @@ class CrossSummaryDetailRes extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Instance Status
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Instance Region
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 
+         * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 
+         * Instance Name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Cross-Region Backup Status: enable - Enabled, disable - Disabled
          * @type {string || null}
          */
         this.CrossBackupEnabled = null;
 
         /**
-         * 
+         * Cross-Region Backup Target Region
          * @type {Array.<string> || null}
          */
         this.CrossRegions = null;
 
         /**
-         * 
+         * Latest Backup Start Time
          * @type {string || null}
          */
         this.LastBackupStartTime = null;
 
         /**
-         * 
+         * Cross-Region Backup Retention Days
          * @type {number || null}
          */
         this.CrossBackupSaveDays = null;
 
         /**
-         * 
+         * Cross-Region Data Backup Total Space
          * @type {number || null}
          */
         this.DataBackupSpace = null;
 
         /**
-         * 
+         * Cross-Region Data Backup Total File Count
          * @type {number || null}
          */
         this.DataBackupCount = null;
 
         /**
-         * 
+         * Cross-Region Log Backup Total Space
          * @type {number || null}
          */
         this.LogBackupSpace = null;
 
         /**
-         * 
+         * Cross-Region Log Backup Total File Count
          * @type {number || null}
          */
         this.LogBackupCount = null;
 
         /**
-         * 
+         * Cross-Region Backup Total Space
          * @type {number || null}
          */
         this.ActualUsedSpace = null;
 
         /**
-         * 
+         * Cross-Region Backup Total Count
          * @type {number || null}
          */
         this.ActualUsedCount = null;

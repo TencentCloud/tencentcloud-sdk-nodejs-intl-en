@@ -1162,7 +1162,7 @@ class SetUserBlockedResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Custom text watermark data structure
  * @class
  */
 class WaterMarkChar extends  AbstractModel {
@@ -2295,7 +2295,7 @@ class CloudStorage extends  AbstractModel {
         this.Vendor = null;
 
         /**
-         * [Region information](https://www.tencentcloud.comom/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of tencent cloud object storage.
+         * [Region information](https://www.tencentcloud.com/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of tencent cloud object storage.
 Example value: cn-shanghai-1.
 
 [Region information](https://docs.AWS.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions) of AWS S3.
@@ -2771,7 +2771,7 @@ Example value: test-secretkey.
 }
 
 /**
- * 
+ * Render mobile mode parameters. Do not set this parameter when not rendering the mobile mode.
  * @class
  */
 class EmulateMobileParams extends  AbstractModel {
@@ -2779,13 +2779,17 @@ class EmulateMobileParams extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Mobile device types,
+0: Phone
+1: Tablet
          * @type {number || null}
          */
         this.MobileDeviceType = null;
 
         /**
-         * 
+         * Screen orientation,
+0: Portrait,
+1: Landscape
          * @type {number || null}
          */
         this.ScreenOrientation = null;
@@ -3734,7 +3738,7 @@ Source URL. Example value: https://a.b/test.mp4
         this.SourceUrl = null;
 
         /**
-         * 
+         * Specify that the video plays from a specific second timestamp.
          * @type {number || null}
          */
         this.SeekSecond = null;
@@ -4719,7 +4723,7 @@ class WaterMark extends  AbstractModel {
 }
 
 /**
- * 
+ * Mcu relay recording; third-party storage parameters.
  * @class
  */
 class McuStorageParams extends  AbstractModel {
@@ -5713,7 +5717,7 @@ class CreateCloudRecordingRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * [RoomId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC, which is the RoomId corresponding to the TRTC room in the recording.
+         * [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC, which is the RoomId corresponding to the TRTC room in the recording.
 Note: the room id type defaults to integer. if the room id type is a string, specify it via RoomIdType.
 
          * @type {string || null}
@@ -6877,7 +6881,7 @@ class CreateCloudModerationRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Page recording control parameters
  * @class
  */
 class WebRecordVideoParams extends  AbstractModel {
@@ -6885,25 +6889,28 @@ class WebRecordVideoParams extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Recording screen width, defaults to 1280, value range [0, 1920]
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 
+         * Recording screen height, defaults to 720, value range [0, 1080]
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * 
+         * Specify the output format, optional hls, mp4. When storing to VOD, this parameter is invalid; please use the MediaType setting within TencentVod (https://cloud.tencent.com/document/api/647/44055#TencentVod).
+ 
          * @type {string || null}
          */
         this.Format = null;
 
         /**
-         * 
+         * If the file format is aac or mp4, the system will automatically split the video file when it exceeds the length limit. Unit: minutes. Default: 1440 min (24h), value range: 1-1440. [Single file size is limited to a maximum of 2G. Files will be automatically split if either condition is met: file size >2G or recording duration > 24h]
+This parameter does not take effect for Hls format recordings.
+Sample value: 1440
          * @type {number || null}
          */
         this.MaxMediaFileDuration = null;
@@ -8501,7 +8508,7 @@ class RecordParams extends  AbstractModel {
         /**
          * Output file format (valid when stored in third-party storage such as COS). 0: (default) output file is in hls format. 1: output file format is hls+mp4. 2: output file format is hls+aac. 3: output file format is mp4. 4: output file format is aac.
 
-This parameter is invalid when storing in VOD. when storing in VOD, set MediaType in TencentVod (https://www.tencentcloud.comom/document/api/647/44055?from_cn_redirect=1#TencentVod).
+This parameter is invalid when storing in VOD. when storing in VOD, set MediaType in TencentVod (https://www.tencentcloud.com/document/api/647/44055?from_cn_redirect=1#TencentVod).
          * @type {number || null}
          */
         this.OutputFormat = null;
@@ -8608,7 +8615,7 @@ class DescribeStreamIngestRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * TTS-related configurations
  * @class
  */
 class TTSConfig extends  AbstractModel {
@@ -8616,7 +8623,7 @@ class TTSConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Voice ID
          * @type {string || null}
          */
         this.VoiceId = null;
@@ -8811,7 +8818,7 @@ class StopAITranscriptionResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Timestamp watermark data structure
  * @class
  */
 class WaterMarkTimestamp extends  AbstractModel {
@@ -8846,7 +8853,7 @@ class WaterMarkTimestamp extends  AbstractModel {
 }
 
 /**
- * 
+ * Mcu relay recording; video on demand (VOD) related parameters.
  * @class
  */
 class McuCloudVod extends  AbstractModel {

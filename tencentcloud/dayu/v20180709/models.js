@@ -7880,7 +7880,7 @@ class SchedulingDomain extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * 
+         * ttl
          * @type {number || null}
          */
         this.TTL = null;

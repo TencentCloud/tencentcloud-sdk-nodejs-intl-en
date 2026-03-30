@@ -10724,7 +10724,7 @@ class BotUserRule extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Rule name can only consist of English letters, numbers, and underscores, and cannot start with an underscore.
          * @type {string || null}
          */
         this.RuleName = null;
@@ -23273,7 +23273,7 @@ class AscriptionInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Host record.
          * @type {string || null}
          */
         this.Subdomain = null;
@@ -34540,7 +34540,7 @@ class CreateSecurityAPIResourceResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Origin HTTPS configuration parameters.
  * @class
  */
 class OriginPullProtocolParameters extends  AbstractModel {
@@ -34548,7 +34548,10 @@ class OriginPullProtocolParameters extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Origin protocol configuration, with values:
+<li>http: Use HTTP protocol for origin pull;</li>
+<li>https: Use HTTPS protocol for origin pull;</li>
+<li>follow: Protocol following.</li>
          * @type {string || null}
          */
         this.Protocol = null;
@@ -35202,7 +35205,7 @@ class Quota extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Single batch submission quota limit.
          * @type {number || null}
          */
         this.Batch = null;
@@ -36701,7 +36704,7 @@ Note: this field may return null, which indicates a failure to obtain a valid va
         this.ForceRedirectHTTPSParameters = null;
 
         /**
-         * 
+         * Origin HTTPS configuration parameters. When Name is set to OriginPullProtocol, this parameter is required.
          * @type {OriginPullProtocolParameters || null}
          */
         this.OriginPullProtocolParameters = null;

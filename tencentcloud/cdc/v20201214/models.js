@@ -1784,43 +1784,43 @@ Note: The returned value of this field may be null, indicating that no valid val
         this.OrderType = null;
 
         /**
-         * 
+         * Acceptance Status
          * @type {string || null}
          */
         this.CheckStatus = null;
 
         /**
-         * 
+         * Expected Delivery Time
          * @type {string || null}
          */
         this.DeliverExpectTime = null;
 
         /**
-         * 
+         * Actual Delivery Completion Time
          * @type {string || null}
          */
         this.DeliverFinishTime = null;
 
         /**
-         * 
+         * Expected Acceptance Time
          * @type {string || null}
          */
         this.CheckExpectTime = null;
 
         /**
-         * 
+         * Actual Acceptance Completion Time
          * @type {string || null}
          */
         this.CheckFinishTime = null;
 
         /**
-         * 
+         * Order SLA
          * @type {string || null}
          */
         this.OrderSLA = null;
 
         /**
-         * 
+         * Order Payment Plan
          * @type {string || null}
          */
         this.OrderPayPlan = null;
@@ -2291,7 +2291,7 @@ class DescribeDedicatedClusterOrdersRequest extends  AbstractModel {
         this.ActionType = null;
 
         /**
-         * 
+         * Order Type List
          * @type {Array.<string> || null}
          */
         this.OrderTypes = null;
@@ -2499,7 +2499,7 @@ Note: The returned value of this field may be null, indicating that no valid val
 }
 
 /**
- * 
+ * Host Machine Resource Overview Details
  * @class
  */
 class HostDetailInfo extends  AbstractModel {
@@ -2507,31 +2507,31 @@ class HostDetailInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Type Family
          * @type {string || null}
          */
         this.HostTypeFamily = null;
 
         /**
-         * 
+         * Total CPU
          * @type {number || null}
          */
         this.CpuTotal = null;
 
         /**
-         * 
+         * Available CPU
          * @type {number || null}
          */
         this.CpuAvailable = null;
 
         /**
-         * 
+         * Total Memory
          * @type {number || null}
          */
         this.MemTotal = null;
 
         /**
-         * 
+         * Available Memory
          * @type {number || null}
          */
         this.MemAvailable = null;

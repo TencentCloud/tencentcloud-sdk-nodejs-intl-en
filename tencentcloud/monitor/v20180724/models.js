@@ -4496,7 +4496,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Periods = null;
 
         /**
-         * 
+         * Whether delay metrics
          * @type {number || null}
          */
         this.IsLatenessMetric = null;

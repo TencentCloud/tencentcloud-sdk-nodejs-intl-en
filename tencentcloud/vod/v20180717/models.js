@@ -120,7 +120,7 @@ Default value: Temporary.
         this.ClassId = null;
 
         /**
-         * The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+         * The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -709,7 +709,7 @@ class DescribeAllClassRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * AIGC image generation task output.
  * @class
  */
 class AigcImageTaskOutput extends  AbstractModel {
@@ -2028,7 +2028,7 @@ class CacheConfigFollowOrigin extends  AbstractModel {
 }
 
 /**
- *  
+ * Mini Program Audio-Video Review Summary Metadata
  * @class
  */
 class MediaMiniProgramReviewElem extends  AbstractModel {
@@ -4154,7 +4154,7 @@ Default value: Temporary.
         this.ClassId = null;
 
         /**
-         * The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+         * The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -7816,7 +7816,7 @@ Default value: Temporary.
         this.ClassId = null;
 
         /**
-         * The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+         * The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -11265,7 +11265,7 @@ class TaskOutputMediaInfo extends  AbstractModel {
         this.FileId = null;
 
         /**
-         * 
+         * Basic information of the media files generated after transcoding and pulling.
          * @type {MediaBasicInfo || null}
          */
         this.MediaBasicInfo = null;
@@ -12407,7 +12407,7 @@ class ModifyReviewTemplateResponse extends  AbstractModel {
 }
 
 /**
- *  
+ * Mini Program Audio-Video Review Information Unit
  * @class
  */
 class MediaMiniProgramReviewInfoItem extends  AbstractModel {
@@ -12941,7 +12941,7 @@ class ProductImageConfig extends  AbstractModel {
 }
 
 /**
- * 
+ * Finalized editing task information.
  * @class
  */
 class PersistenceCompleteTask extends  AbstractModel {
@@ -13596,7 +13596,7 @@ Default value: Temporary.
         this.ClassId = null;
 
         /**
-         * The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+         * The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -15151,7 +15151,7 @@ Default value: Temporary.
         this.ClassId = null;
 
         /**
-         * The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+         * The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -16106,13 +16106,13 @@ class CreateReviewTemplateRequest extends  AbstractModel {
         this.SubAppId = null;
 
         /**
-         * 
+         * Audit template name, length limit: 64 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Audit template description, length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
@@ -16313,7 +16313,7 @@ class DescribeAdaptiveDynamicStreamingTemplatesResponse extends  AbstractModel {
 }
 
 /**
- *  
+ * Mini Program Audio-Video Review Information
  * @class
  */
 class MediaMiniProgramReviewInfo extends  AbstractModel {
@@ -16636,7 +16636,13 @@ Default value: 0 px, which means that `Height` will be proportionally scaled acc
         this.RepeatType = null;
 
         /**
-         * 
+         * Image transparency, value range: [0, 100]
+
+<li>0: Completely opaque</li>
+
+<li>100: Completely transparent</li>
+
+Default value: 0.
          * @type {number || null}
          */
         this.Transparency = null;
@@ -20965,7 +20971,7 @@ class ModifyReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Audit template unique ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -20977,13 +20983,13 @@ class ModifyReviewTemplateRequest extends  AbstractModel {
         this.SubAppId = null;
 
         /**
-         * 
+         * Audit template name, length limit: 64 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Audit template description, length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
@@ -22762,7 +22768,11 @@ class ImageWatermarkTemplate extends  AbstractModel {
         this.RepeatType = null;
 
         /**
-         * 
+         * Image transparency, value range: [0, 100]
+
+<li>0: Completely opaque</li>
+
+<li>100: Completely transparent.</li>
          * @type {number || null}
          */
         this.Transparency = null;
@@ -23042,19 +23052,19 @@ This parameter is valid only if `IsPersistence` is `1`.
         this.SessionContext = null;
 
         /**
-         * 
+         * This field is deprecated.
          * @type {string || null}
          */
         this.Precision = null;
 
         /**
-         * 
+         * Output video type. Valid values are: <li>hls: outputs hls files.</li> Default value: hls.
          * @type {string || null}
          */
         this.OutputMediaType = null;
 
         /**
-         * 
+         * Reserved field, used for special purposes. Example value: ""
          * @type {string || null}
          */
         this.ExtInfo = null;
@@ -24290,7 +24300,7 @@ Default value: Temporary.
         this.ClassId = null;
 
         /**
-         * The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+         * The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -29260,7 +29270,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.QUICConfig = null;
 
         /**
-         * 
+         * IP access limit configuration information.
          * @type {IPFilterPolicy || null}
          */
         this.IPFilterPolicy = null;
@@ -35359,7 +35369,7 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.ComplexAdaptiveDynamicStreamingCompleteEvent = null;
 
         /**
-         * 
+         * MPS video processing task information, valid only when EventType is ProcessMediaByMPSComplete.
          * @type {ProcessMediaByMPS || null}
          */
         this.ProcessMediaByMPSCompleteEvent = null;
@@ -35604,7 +35614,7 @@ class HighlightsConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * 
+ * IP access restriction rules, currently supports configuring IP blocklist and allowlist.
  * @class
  */
 class IPFilterPolicy extends  AbstractModel {
@@ -35612,19 +35622,23 @@ class IPFilterPolicy extends  AbstractModel {
         super();
 
         /**
-         * 
+         * IP access restriction status. Optional values:
+<li>Enabled: enable;</li>
+<li>Disabled: disable.</li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * IP access restriction type:
+<li>Black: blocklist-based verification. Only IP requests from the IPList will be blocked.</li>
+<li>White: allowlist-based verification. Only IP requests from the IPList will be allowed.</li>When Status is set to Enabled, FilterType must be assigned.
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * 
+         * IP list, supporting IPV4 addresses in X.X.X.X format, IPV6 addresses in X:X:X:X:X:X:X:X format, or CIDR notation /N (IPV4: 1 ≤ N ≤ 32; IPV6: 1 ≤ N ≤ 128). A maximum of 200 IPs or CIDR blocks can be added. When Status is set to Enabled, IPList must be assigned.
          * @type {Array.<string> || null}
          */
         this.IPList = null;
@@ -37657,7 +37671,7 @@ class DeleteWordSamplesResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Media relay event notification message.
  * @class
  */
 class MediaCastEvent extends  AbstractModel {
@@ -37665,13 +37679,17 @@ class MediaCastEvent extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Media relay ID.
          * @type {string || null}
          */
         this.CastId = null;
 
         /**
-         * 
+         * Relay status. Valid values:
+<li>Working: Running;</li>
+<li>Scheduled: To be started after the scheduled time arrives;</li>
+<li>Stopped: Relay stopped;</li>
+<li>Idle: Idle.</li>
          * @type {string || null}
          */
         this.Status = null;
@@ -38648,7 +38666,7 @@ class AigcImageTaskInput extends  AbstractModel {
         this.EnhancePrompt = null;
 
         /**
-         * 
+         * Generation mode. Available values: <li>Standard: Standard mode;</li> <li>Professional: High-quality mode;</li>
          * @type {string || null}
          */
         this.GenerationMode = null;
@@ -41444,7 +41462,7 @@ Note: This field may return `null`, indicating that no valid value can be found.
 }
 
 /**
- * 
+ * Media import knowledge base task
  * @class
  */
 class ImportMediaKnowledgeTask extends  AbstractModel {
@@ -41452,25 +41470,25 @@ class ImportMediaKnowledgeTask extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Task ID.
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * 
+         * Task Status. Valid values: <li>PROCESSING: Processing;</li><li>FINISH: Completed.</li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Error code; 0 indicates success, other values indicate failure
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * 
+         * Error message.
          * @type {string || null}
          */
         this.Message = null;
@@ -47226,7 +47244,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DigitalWatermarkType = null;
 
         /**
-         * 
+         * Copyright information.
          * @type {string || null}
          */
         this.CopyRightWatermarkText = null;
@@ -48110,7 +48128,7 @@ class CreateSubAppIdRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 
+         * Application type. Available values: <li>AllInOne: All-in-one;</li><li>Professional: Professional.</li>Default value: AllInOne.
          * @type {string || null}
          */
         this.Type = null;
@@ -49023,7 +49041,11 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
         this.RepeatType = null;
 
         /**
-         * 
+         * Image transparency, value range: [0, 100]
+
+<li>0: Completely opaque</li>
+
+<li>100: Completely transparent.</li>
          * @type {number || null}
          */
         this.Transparency = null;
@@ -51267,7 +51289,7 @@ class AigcVideoTaskInput extends  AbstractModel {
         this.EnhancePrompt = null;
 
         /**
-         * 
+         * Generation mode. Available values: <li>Standard: Standard mode;</li> <li>Professional: High-quality mode;</li>
          * @type {string || null}
          */
         this.GenerationMode = null;

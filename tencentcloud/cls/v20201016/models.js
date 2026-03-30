@@ -2608,7 +2608,7 @@ class ModifyScheduledSqlResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Authentication-free condition information
  * @class
  */
 class ConditionInfo extends  AbstractModel {
@@ -2616,19 +2616,19 @@ class ConditionInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Condition attribute, currently supports only VpcID
          * @type {string || null}
          */
         this.Attributes = null;
 
         /**
-         * 
+         * Condition rule, 1: equal to, 2: not equal to
          * @type {number || null}
          */
         this.Rule = null;
 
         /**
-         * 
+         * Value of the corresponding condition attribute
          * @type {string || null}
          */
         this.ConditionValue = null;
@@ -4434,7 +4434,7 @@ class ModifyAlarmNoticeRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Log topic extended information
  * @class
  */
 class TopicExtendInfo extends  AbstractModel {
@@ -4442,7 +4442,7 @@ class TopicExtendInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Log topic authentication-free configuration information
          * @type {AnonymousInfo || null}
          */
         this.AnonymousAccess = null;
@@ -6640,7 +6640,7 @@ class DeleteIndexRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Authentication-free information
  * @class
  */
 class AnonymousInfo extends  AbstractModel {
@@ -6648,13 +6648,13 @@ class AnonymousInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Operation list supports trackLog (JS/HTTP log upload) and realtimeProducer (kafka protocol log upload).
          * @type {Array.<string> || null}
          */
         this.Operations = null;
 
         /**
-         * 
+         * Condition list
          * @type {Array.<ConditionInfo> || null}
          */
         this.Conditions = null;
@@ -9215,7 +9215,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsWebTracking = null;
 
         /**
-         * 
+         * Log topic extended information
          * @type {TopicExtendInfo || null}
          */
         this.Extends = null;

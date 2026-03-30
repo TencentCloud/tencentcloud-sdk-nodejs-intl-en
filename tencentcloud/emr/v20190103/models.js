@@ -3350,7 +3350,7 @@ class CreateSLInstanceRequest extends  AbstractModel {
         this.ClientToken = null;
 
         /**
-         * 
+         * Deployment Mode
          * @type {string || null}
          */
         this.DeploymentMode = null;
@@ -8703,7 +8703,7 @@ class DescribeInsightListRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 
+         * Whether it includes specific parameter suggestions and other information
          * @type {boolean || null}
          */
         this.MustHasContext = null;
@@ -12124,7 +12124,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TimeConsuming = null;
 
         /**
-         * 
+         * id, for frontend
          * @type {number || null}
          */
         this.Id = null;
@@ -13341,7 +13341,7 @@ Hadoop-Hbase
         this.ExternalService = null;
 
         /**
-         * 
+         * If the value is 0, MultiZone, MultiDeployStrategy, and MultiZoneSettings are disabled. If the value is 1, ResourceSpec is deprecated and MultiZoneSettings is used instead.
          * @type {number || null}
          */
         this.VersionID = null;
@@ -16201,7 +16201,7 @@ class ApplicationStatics extends  AbstractModel {
         this.SumMemorySeconds = null;
 
         /**
-         * 
+         * Total VCore Seconds
          * @type {number || null}
          */
         this.SumVCoreSeconds = null;
@@ -16430,7 +16430,7 @@ class InquiryPriceCreateInstanceRequest extends  AbstractModel {
         this.ExternalService = null;
 
         /**
-         * 
+         * The current default value is 0. After cross-AZ feature support is enabled, it becomes 1.
          * @type {number || null}
          */
         this.VersionID = null;
@@ -17031,13 +17031,13 @@ class UserInfoForUserManager extends  AbstractModel {
         this.UserGroup = null;
 
         /**
-         * 
+         * Password
          * @type {string || null}
          */
         this.PassWord = null;
 
         /**
-         * 
+         * Remarks
          * @type {string || null}
          */
         this.ReMark = null;

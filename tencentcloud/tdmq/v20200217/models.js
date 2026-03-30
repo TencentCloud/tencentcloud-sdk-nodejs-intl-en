@@ -1269,13 +1269,13 @@ class RabbitMQClusterInfo extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * 
+         * Cluster Name
          * @type {string || null}
          */
         this.ClusterName = null;
 
         /**
-         * 
+         * Region Information
          * @type {string || null}
          */
         this.Region = null;
@@ -1293,7 +1293,7 @@ class RabbitMQClusterInfo extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * 
+         * VPC and network information
          * @type {Array.<VpcEndpointInfo> || null}
          */
         this.Vpcs = null;
@@ -1305,25 +1305,25 @@ class RabbitMQClusterInfo extends  AbstractModel {
         this.ZoneIds = null;
 
         /**
-         * 
+         * Virtual Host Quantity
          * @type {number || null}
          */
         this.VirtualHostNumber = null;
 
         /**
-         * 
+         * Number of Queues
          * @type {number || null}
          */
         this.QueueNumber = null;
 
         /**
-         * 
+         * Number of messages produced per second Unit: messages/second
          * @type {number || null}
          */
         this.MessagePublishRate = null;
 
         /**
-         * 
+         * Number of backlogged messages Unit: messages
          * @type {number || null}
          */
         this.MessageStackNumber = null;
@@ -1335,25 +1335,25 @@ class RabbitMQClusterInfo extends  AbstractModel {
         this.ExpireTime = null;
 
         /**
-         * 
+         * Channel Count
          * @type {number || null}
          */
         this.ChannelNumber = null;
 
         /**
-         * 
+         * Connection Count
          * @type {number || null}
          */
         this.ConnectionNumber = null;
 
         /**
-         * 
+         * Consumer Count
          * @type {number || null}
          */
         this.ConsumerNumber = null;
 
         /**
-         * 
+         * Exchange Count
          * @type {number || null}
          */
         this.ExchangeNumber = null;
@@ -4536,7 +4536,7 @@ class DescribePulsarProInstancesRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * VPC Access Point Information
  * @class
  */
 class VpcEndpointInfo extends  AbstractModel {
@@ -4544,19 +4544,19 @@ class VpcEndpointInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * vpc id
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 
+         * subnet id
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * 
+         * vpc Access Point Information
          * @type {string || null}
          */
         this.VpcEndpoint = null;
@@ -5818,7 +5818,7 @@ class DetailedRolePerm extends  AbstractModel {
 }
 
 /**
- * 
+ * RabbitMQ Cluster Access Information
  * @class
  */
 class RabbitMQClusterAccessInfo extends  AbstractModel {
@@ -5826,49 +5826,49 @@ class RabbitMQClusterAccessInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Cluster Public Network Access Address
          * @type {string || null}
          */
         this.PublicAccessEndpoint = null;
 
         /**
-         * 
+         * Cluster Console Access Address
          * @type {string || null}
          */
         this.WebConsoleEndpoint = null;
 
         /**
-         * 
+         * Cluster Console Login Username
          * @type {string || null}
          */
         this.WebConsoleUsername = null;
 
         /**
-         * 
+         * Cluster Console Login Password
          * @type {string || null}
          */
         this.WebConsolePassword = null;
 
         /**
-         * 
+         * Deprecated
          * @type {boolean || null}
          */
         this.PublicAccessEndpointStatus = null;
 
         /**
-         * 
+         * Deprecated
          * @type {boolean || null}
          */
         this.PublicControlConsoleSwitchStatus = null;
 
         /**
-         * 
+         * Deprecated
          * @type {boolean || null}
          */
         this.VpcControlConsoleSwitchStatus = null;
 
         /**
-         * 
+         * Vpc management console access address, example value: http://1.1.1.1:15672
          * @type {string || null}
          */
         this.VpcWebConsoleEndpoint = null;
@@ -6866,7 +6866,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * exchange usage quota information
  * @class
  */
 class ExchangeQuota extends  AbstractModel {
@@ -6874,7 +6874,7 @@ class ExchangeQuota extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Maximum number of creatable exchanges
          * @type {number || null}
          */
         this.MaxExchange = null;
@@ -9154,7 +9154,7 @@ class RocketMQInstanceConfig extends  AbstractModel {
         this.TopicDistribution = null;
 
         /**
-         * 
+         * Maximum number of queues per topic
          * @type {number || null}
          */
         this.MaxQueuesPerTopic = null;
@@ -9468,7 +9468,7 @@ class CreateEnvironmentRoleResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * rabbitmq Prometheus Information
  * @class
  */
 class PrometheusEndpointInfo extends  AbstractModel {
@@ -9476,25 +9476,25 @@ class PrometheusEndpointInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Status of the Prometheus switch
          * @type {string || null}
          */
         this.PrometheusEndpointStatus = null;
 
         /**
-         * 
+         * prometheus Information
          * @type {Array.<string> || null}
          */
         this.VpcPrometheusEndpoint = null;
 
         /**
-         * 
+         * Node Information
          * @type {Array.<string> || null}
          */
         this.NodePrometheusAddress = null;
 
         /**
-         * 
+         * vpc information
          * @type {VpcEndpointInfo || null}
          */
         this.VpcEndpointInfo = null;
@@ -11465,7 +11465,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * RabbitMQ Cluster Allowlist Information
  * @class
  */
 class RabbitMQClusterWhiteListInfo extends  AbstractModel {
@@ -11491,13 +11491,13 @@ class RabbitMQClusterWhiteListInfo extends  AbstractModel {
         this.PublicDataStreamWhiteList = null;
 
         /**
-         * 
+         * Public Network Management Console Allowlist Status
          * @type {string || null}
          */
         this.PublicControlConsoleWhiteListStatus = null;
 
         /**
-         * 
+         * Public Network Data Flow Allowlist Status
          * @type {string || null}
          */
         this.PublicDataStreamWhiteListStatus = null;
@@ -14611,7 +14611,7 @@ class ModifyTopicResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * vhost usage quota information
  * @class
  */
 class VirtualHostQuota extends  AbstractModel {
@@ -14619,7 +14619,7 @@ class VirtualHostQuota extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Maximum number of vhosts allowed to be created
          * @type {number || null}
          */
         this.MaxVirtualHost = null;
@@ -15941,7 +15941,7 @@ class ModifyCmqQueueAttributeRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * RabbitMQ Cluster Specifications Information
  * @class
  */
 class RabbitMQClusterSpecInfo extends  AbstractModel {
@@ -15949,37 +15949,37 @@ class RabbitMQClusterSpecInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Cluster Specification Name
          * @type {string || null}
          */
         this.SpecName = null;
 
         /**
-         * 
+         * Number of Nodes
          * @type {number || null}
          */
         this.NodeCount = null;
 
         /**
-         * 
+         * Peak tps
          * @type {number || null}
          */
         this.MaxTps = null;
 
         /**
-         * 
+         * Peak bandwidth Unit: mbps
          * @type {number || null}
          */
         this.MaxBandWidth = null;
 
         /**
-         * 
+         * Storage capacity Unit: GB
          * @type {number || null}
          */
         this.MaxStorage = null;
 
         /**
-         * 
+         * public network bandwidth tps. Unit: Mbps
          * @type {number || null}
          */
         this.PublicNetworkTps = null;
@@ -16362,7 +16362,7 @@ class CmqDeadLetterPolicy extends  AbstractModel {
 }
 
 /**
- * 
+ * queue usage quota information
  * @class
  */
 class QueueQuota extends  AbstractModel {
@@ -16370,7 +16370,7 @@ class QueueQuota extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Maximum number of creatable queues
          * @type {number || null}
          */
         this.MaxQueue = null;

@@ -1926,7 +1926,7 @@ class CreateWaterPrintConfigResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * IP blocking records
  * @class
  */
 class IpBlockData extends  AbstractModel {
@@ -1934,37 +1934,37 @@ class IpBlockData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Status (Blocked: Blocked; UnBlocking: Unblocking; UnBlockFailed: Unblock failed)
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Resource IP
          * @type {string || null}
          */
         this.Ip = null;
 
         /**
-         * 
+         * Blocking Time
          * @type {string || null}
          */
         this.BlockTime = null;
 
         /**
-         * 
+         * Unblock Time (Estimated Unblock Time)
          * @type {string || null}
          */
         this.UnBlockTime = null;
 
         /**
-         * 
+         * Unblock type (user: self-service unblocking; auto: automatic unblocking; update: upgrade unblocking; bind: Anti-DDoS Pro binding unblocking)
          * @type {string || null}
          */
         this.ActionType = null;
 
         /**
-         * 
+         * Anti-DDoS flag, 0: non-Anti-DDoS, 1: Anti-DDoS
          * @type {number || null}
          */
         this.ProtectFlag = null;
@@ -5727,19 +5727,19 @@ class DescribeBasicDeviceStatusRequest extends  AbstractModel {
         this.IpList = null;
 
         /**
-         * 
+         * Pass id for domain-bound resources
          * @type {Array.<string> || null}
          */
         this.IdList = null;
 
         /**
-         * 
+         * region name
          * @type {number || null}
          */
         this.FilterRegion = null;
 
         /**
-         * 
+         * CNAME WAF resource
          * @type {Array.<string> || null}
          */
         this.CnameWafIdList = null;
@@ -5820,7 +5820,7 @@ class IPLineInfo extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 
+         * line IP
          * @type {string || null}
          */
         this.Eip = null;
@@ -6214,7 +6214,7 @@ class DDoSSpeedLimitConfig extends  AbstractModel {
         this.DstPortScopes = null;
 
         /**
-         * 
+         * Configuration ID is generated after the configuration is successfully added. When adding a new restriction configuration, this field does not need to be filled in; when modifying or deleting a rate limiting configuration, the Configuration ID needs to be filled in.
          * @type {string || null}
          */
         this.Id = null;
@@ -6524,7 +6524,7 @@ class CcGeoIpPolicyNew extends  AbstractModel {
         this.Ip = null;
 
         /**
-         * 
+         * domain name
          * @type {string || null}
          */
         this.Domain = null;

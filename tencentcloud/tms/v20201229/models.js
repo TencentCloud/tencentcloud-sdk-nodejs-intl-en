@@ -17,7 +17,7 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * 
+ * Sentiment analysis result
  * @class
  */
 class SentimentAnalysis extends  AbstractModel {
@@ -25,31 +25,31 @@ class SentimentAnalysis extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Sentiment Tag
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 
+         * Tag score, ranging from 0 to 100
          * @type {number || null}
          */
         this.Score = null;
 
         /**
-         * 
+         * Sentiment analysis details
          * @type {SentimentDetail || null}
          */
         this.Detail = null;
 
         /**
-         * 
+         * Response code; "OK" for success, "InternalError" for failure
          * @type {string || null}
          */
         this.Code = null;
 
         /**
-         * 
+         * Exception information
          * @type {string || null}
          */
         this.Message = null;
@@ -514,7 +514,7 @@ Note: Since the iOS14 update in 2021, Apple Inc. has allowed users to manually a
 }
 
 /**
- * 
+ * Sentiment analysis details
  * @class
  */
 class SentimentDetail extends  AbstractModel {
@@ -522,13 +522,13 @@ class SentimentDetail extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Positive score, ranging from 0 to 100
          * @type {number || null}
          */
         this.Positive = null;
 
         /**
-         * 
+         * Negative score, ranging from 0 to 100
          * @type {number || null}
          */
         this.Negative = null;

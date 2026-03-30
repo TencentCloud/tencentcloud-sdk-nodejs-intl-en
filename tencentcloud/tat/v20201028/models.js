@@ -186,7 +186,7 @@ class DisableInvokerRequest extends  AbstractModel {
         /**
          * ID of the executor to terminate.
 
-Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
          * @type {string || null}
          */
         this.InvokerId = null;
@@ -395,7 +395,7 @@ class DisableRegisterCodesRequest extends  AbstractModel {
         /**
          * Registration code ID.
 
-Call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+Call the [DescribeRegisterCodes](https://www.tencentcloud.com/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
          * @type {Array.<string> || null}
          */
         this.RegisterCodeIds = null;
@@ -463,7 +463,7 @@ Required: No
 
 - register-code-id
 
-Filter by [managed instance registration code ID]. call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+Filter by [managed instance registration code ID]. call the [DescribeRegisterCodes](https://www.tencentcloud.com/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
 Type: String.
 Required: No
 
@@ -546,7 +546,7 @@ class DeleteRegisterCodesRequest extends  AbstractModel {
         /**
          * Registration code ID list. limits the input registration code ID quantity to more than 0 and less than 100.
 
-Call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+Call the [DescribeRegisterCodes](https://www.tencentcloud.com/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
          * @type {Array.<string> || null}
          */
         this.RegisterCodeIds = null;
@@ -991,7 +991,7 @@ class InvokeCommandRequest extends  AbstractModel {
         super();
 
         /**
-         * Pending trigger command ID. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+         * Pending trigger command ID. call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
          * @type {string || null}
          */
         this.CommandId = null;
@@ -1010,7 +1010,7 @@ Instance ID can be obtained through the query instance interface of correspondin
         /**
          * Custom parameter of Command. field type is json encoded string. for example: {"varA": "222"}.
 The key is the custom parameter name, and the value is the default. both kv are string-type.
-This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
 If the parameter value is not provided, the DefaultParameters or DefaultParameterConfs of Command will be used to replace it.
 Custom parameters can be up to 20.
 The custom parameter name must meet the following standard: the number of characters has a cap of 64, and the optional range is [a-zA-Z0-9-_].
@@ -1091,9 +1091,9 @@ class DescribeInvocationTasksRequest extends  AbstractModel {
          * Filter conditions.<br>.
 
 -invocation-task-id - String - required: no - (filter condition) filter by executing task id.
-- invocation-id - String - required: no - (filter condition) filter by the execution activity id. you can obtain it through the [DescribeInvocations](https://www.tencentcloud.comom/document/api/1340/52679?from_cn_redirect=1) api.
+- invocation-id - String - required: no - (filter condition) filter by the execution activity id. you can obtain it through the [DescribeInvocations](https://www.tencentcloud.com/document/api/1340/52679?from_cn_redirect=1) api.
 -instance-id - String - required: no - (filtering conditions) filter by instance id. you can get the instance id through the query instance interface of corresponding cloud services. currently supported instance types: CVM, Lighthouse, and managed instances of TAT.
--command-id - String - required: no - (filter criteria) filter by command id. obtain through the api [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1).
+-command-id - String - required: no - (filter criteria) filter by command id. obtain through the api [DescribeCommands (query command details)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1).
 
 The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InvocationTaskIds` and `Filters` parameters cannot be specified at the same time.
          * @type {Array.<Filter> || null}
@@ -1401,7 +1401,7 @@ class ModifyInvokerRequest extends  AbstractModel {
         /**
          * Executor ID to be modified.
 
-Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
          * @type {string || null}
          */
         this.InvokerId = null;
@@ -1425,7 +1425,7 @@ Selectable values (currently only support one):.
         /**
          * Command ID to be modified.
 
-Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+Call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
          * @type {string || null}
          */
         this.CommandId = null;
@@ -1439,7 +1439,7 @@ Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/526
         /**
          * Custom parameters to be modified. field type is JSON encode string.
 
-This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Parameters = null;
@@ -1449,7 +1449,7 @@ This parameter can be set only when EnableParameter of the command specified by 
 
 You can get the instance ID through the query instance interface of corresponding cloud services. currently supports instance types: CVM, Lighthouse, and TAT managed instances.
 
-The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.comom/document/api/1340/52682?from_cn_redirect=1) api.
+The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.com/document/api/1340/52682?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1553,7 +1553,7 @@ class DeleteCommandsRequest extends  AbstractModel {
         super();
 
         /**
-         * Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+         * Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
          * @type {Array.<string> || null}
          */
         this.CommandIds = null;
@@ -1644,7 +1644,7 @@ class EnableInvokerRequest extends  AbstractModel {
         /**
          * Executor ID to be enabled.
 
-Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
          * @type {string || null}
          */
         this.InvokerId = null;
@@ -1964,7 +1964,7 @@ class DeleteRegisterInstanceRequest extends  AbstractModel {
         /**
          * Managed instance ID.
 
-Call the [DescribeRegisterInstances](https://www.tencentcloud.comom/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
+Call the [DescribeRegisterInstances](https://www.tencentcloud.com/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2179,7 +2179,7 @@ Selectable values (currently only support one):.
         /**
          * Remote command ID.
 
-Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+Call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
          * @type {string || null}
          */
         this.CommandId = null;
@@ -2189,7 +2189,7 @@ Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/526
 
 You can get the instance ID through the query instance interface of corresponding cloud services. currently supports instance types: CVM, Lighthouse, and TAT managed instances.
 
-The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.comom/document/api/1340/52682?from_cn_redirect=1) api.
+The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.com/document/api/1340/52682?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -2203,7 +2203,7 @@ The instance needs to have the TAT client installed, and the client must be in O
         /**
          * Command custom parameter. field type is JSON encode string.
 
-This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Parameters = null;
@@ -2367,7 +2367,7 @@ class ModifyCommandRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Command ID. call the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands</a> api to query command details.</p>.
+         * <p>Command ID. call the <a href="https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1">DescribeCommands</a> api to query command details.</p>.
          * @type {string || null}
          */
         this.CommandId = null;
@@ -2409,13 +2409,13 @@ class ModifyCommandRequest extends  AbstractModel {
         this.Timeout = null;
 
         /**
-         * <p>The default value of custom parameters when the custom parameter feature is enabled. the field type is a json-encoded string, for example: {"varA": "222"}.<br>parameters must not be specified simultaneously for <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>a comprehensive modification is applied, meaning all new default values must be provided when modifying.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings of the command through the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>the key is the custom parameter name, and the value is the default value of this parameter. both key and value are string-type.<br>there is an upper limit of 20 custom parameters.<br>custom parameter names must meet the following requirements: the upper limit of character quantity is 64, and the optional range is [a-zA-Z0-9-_].</p>.
+         * <p>The default value of custom parameters when the custom parameter feature is enabled. the field type is a json-encoded string, for example: {"varA": "222"}.<br>parameters must not be specified simultaneously for <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>a comprehensive modification is applied, meaning all new default values must be provided when modifying.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings of the command through the <a href="https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>the key is the custom parameter name, and the value is the default value of this parameter. both key and value are string-type.<br>there is an upper limit of 20 custom parameters.<br>custom parameter names must meet the following requirements: the upper limit of character quantity is 64, and the optional range is [a-zA-Z0-9-_].</p>.
          * @type {string || null}
          */
         this.DefaultParameters = null;
 
         /**
-         * <p>Custom parameter array. if no parameter value is provided when invoking the command, the default value here will be used to replace it.<br>parameters do not support specifying both <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings through the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>up to 20 custom parameters are allowed.</p>.
+         * <p>Custom parameter array. if no parameter value is provided when invoking the command, the default value here will be used to replace it.<br>parameters do not support specifying both <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings through the <a href="https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>up to 20 custom parameters are allowed.</p>.
          * @type {Array.<DefaultParameterConf> || null}
          */
         this.DefaultParameterConfs = null;
@@ -2494,7 +2494,7 @@ Parameters must not be specified simultaneously `InvokerIds` and `Filters`.
          * Filter criteria:.
 
 - invoker-id - String - required: no - (filter condition) filter by executor id.
--command-id - String - required: no - (filter condition) filters commands by id. you can obtain the id through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+-command-id - String - required: no - (filter condition) filters commands by id. you can obtain the id through the [DescribeCommands (query command details)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
 - invoker-type - String - required: no - (filter condition) filter by the executor type. currently only support SCHEDULE.
 
 The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InvokerIds` and `Filters` parameters cannot be specified at the same time.
@@ -2559,7 +2559,7 @@ class DescribeCommandsRequest extends  AbstractModel {
 - command-id - String - required: no - (filter condition) filter by the command id.
 - command-name - String - required: no - (filter condition) filter by the command name.
 -command-type - String - required: no - (filtering conditions) filters by command type. valid values: SHELL, POWERSHELL, BAT.
--scene-id - String - required: no - (filter condition) filter by scenario id. obtain scenario id through the [DescribeScenes (query scenario)](https://www.tencentcloud.comom/document/api/1340/109968?from_cn_redirect=1) api.
+-scene-id - String - required: no - (filter condition) filter by scenario id. obtain scenario id through the [DescribeScenes (query scenario)](https://www.tencentcloud.com/document/api/1340/109968?from_cn_redirect=1) api.
 -created-by - String - required: no - (filter condition) filter by command creator, value is TAT or USER. TAT represents public command, USER represents USER created command.
 - tag-key - String - required: no - (filter condition) filter by the tag key.
 - tag-value - String - required: no - (filter condition) filter by the tag value.
@@ -2703,7 +2703,7 @@ The maximum number of `Filters` per request is 10, and that of `Filter.Values` i
 - if there are multiple `Filter`s, the logical relationship between them is `AND`.
 - if there are multiple Values in the same Filter, the relationship between Values under the same Filter is logical OR.
 > 
-Take the `Filters` of the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api as an example. if we need to query commands with the `command-name` "print working directory" and the `command-type` "POWERSHELL" or "BAT", it can be implemented as follows:.
+Take the `Filters` of the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api as an example. if we need to query commands with the `command-name` "print working directory" and the `command-type` "POWERSHELL" or "BAT", it can be implemented as follows:.
 ```
 Filters.0.Name=command-name
 &Filters.0.Values.0=Print working directory.
@@ -3025,7 +3025,7 @@ class PreviewReplacedCommandContentRequest extends  AbstractModel {
 
         /**
          * The preview uses custom parameters. field type is json encoded string, for example: {"varA": "222"}.
-This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
 If DefaultParameters or DefaultParameterConfs has set, it will overlay with Parameters and prioritize the value of Parameters.
 
 key specifies the custom parameter name, and value specifies the parameter. both kv are string-type.
@@ -3038,7 +3038,7 @@ If the previewed CommandId has DefaultParameters set, this parameter can be empt
 
         /**
          * Perform the replace preview command.
-Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+Call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 CommandId and Content, you must provide one and can only provide one.
          * @type {string || null}
          */
@@ -3483,7 +3483,7 @@ class CancelInvocationRequest extends  AbstractModel {
         /**
          * Execution activity ID.
 
-Call the [DescribeInvocations](https://www.tencentcloud.comom/document/api/1340/52679?from_cn_redirect=1) api to query execution.
+Call the [DescribeInvocations](https://www.tencentcloud.com/document/api/1340/52679?from_cn_redirect=1) api to query execution.
          * @type {string || null}
          */
         this.InvocationId = null;
@@ -3569,7 +3569,7 @@ class DeleteCommandRequest extends  AbstractModel {
         super();
 
         /**
-         * Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+         * Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
          * @type {string || null}
          */
         this.CommandId = null;
@@ -3706,7 +3706,7 @@ The maximum number of `Filters` per request is 10, and that of `Filter.Values` i
         this.Filters = null;
 
         /**
-         * Number of returned results, defaults to 20 with a maximum value of 100. for further introduction about `Limit`, see relevant sections in the API [overview](https://www.tencentcloud.comom/document/API/213/15688?from_cn_redirect=1).
+         * Number of returned results, defaults to 20 with a maximum value of 100. for further introduction about `Limit`, see relevant sections in the API [overview](https://www.tencentcloud.com/document/API/213/15688?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Limit = null;
@@ -3781,7 +3781,7 @@ class DescribeInvokerRecordsRequest extends  AbstractModel {
         /**
          * Executor ID list. the list has a cap of 100.
 
-Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
          * @type {Array.<string> || null}
          */
         this.InvokerIds = null;
@@ -3825,7 +3825,7 @@ class DeleteInvokerRequest extends  AbstractModel {
         /**
          * Pending deletion executor ID.
 
-Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
          * @type {string || null}
          */
         this.InvokerId = null;
@@ -3855,7 +3855,7 @@ class ModifyRegisterInstanceRequest extends  AbstractModel {
         /**
          * Managed instance ID.
 
-Call the [DescribeRegisterInstances](https://www.tencentcloud.comom/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
+Call the [DescribeRegisterInstances](https://www.tencentcloud.com/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
          * @type {string || null}
          */
         this.InstanceId = null;

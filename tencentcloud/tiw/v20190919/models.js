@@ -3687,13 +3687,23 @@ MIX_STREAM - Stream mixing feature
         this.RecordControl = null;
 
         /**
-         * 
+         * Recording mode
+
+
+
+REALTIME_MODE - Real-time recording mode (default)
+
+VIDEO_GENERATION_MODE - Video generation mode (internal testing, requires email application to activate)
          * @type {string || null}
          */
         this.RecordMode = null;
 
         /**
-         * 
+         * Chat group ID. This field is only applicable to `video generation mode`.
+
+
+
+In `video generation mode`, non-whiteboard signaling messages in the whiteboard group are recorded by default. If `ChatGroupId` is specified, chat messages from the designated group ID will be recorded.
          * @type {string || null}
          */
         this.ChatGroupId = null;
@@ -4287,7 +4297,7 @@ class RoomUsageDataItem extends  AbstractModel {
         this.Value = null;
 
         /**
-         * 
+         * Interactive whiteboard room ID
          * @type {number || null}
          */
         this.RoomID = null;

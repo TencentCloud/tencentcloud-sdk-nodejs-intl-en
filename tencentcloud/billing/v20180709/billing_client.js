@@ -47,8 +47,10 @@ const DescribeGatherRuleDetailRequest = models.DescribeGatherRuleDetailRequest;
 const DistributionBillDetail = models.DistributionBillDetail;
 const DescribeDosageCosDetailByDateRequest = models.DescribeDosageCosDetailByDateRequest;
 const DescribeBillAdjustInfoResponse = models.DescribeBillAdjustInfoResponse;
+const OperateRsp = models.OperateRsp;
 const DescribeAllocationRuleDetailRequest = models.DescribeAllocationRuleDetailRequest;
 const DescribeAllocationUnitDetailResponse = models.DescribeAllocationUnitDetailResponse;
+const RenewInstance = models.RenewInstance;
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const AllocationUnit = models.AllocationUnit;
 const AllocationRationExpression = models.AllocationRationExpression;
@@ -72,6 +74,7 @@ const ModifyGatherRuleResponse = models.ModifyGatherRuleResponse;
 const CreateGatherRuleRequest = models.CreateGatherRuleRequest;
 const DescribeBillResourceSummaryForOrganizationRequest = models.DescribeBillResourceSummaryForOrganizationRequest;
 const DescribeCostSummaryByRegionRequest = models.DescribeCostSummaryByRegionRequest;
+const SetRenewalRequest = models.SetRenewalRequest;
 const ConsumptionSummaryTrend = models.ConsumptionSummaryTrend;
 const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
@@ -90,6 +93,7 @@ const DescribeBillSummaryByProjectResponse = models.DescribeBillSummaryByProject
 const DescribeBillAdjustInfoRequest = models.DescribeBillAdjustInfoRequest;
 const DeleteAllocationRuleResponse = models.DeleteAllocationRuleResponse;
 const TagDataInfo = models.TagDataInfo;
+const DescribeRenewInstancesRequest = models.DescribeRenewInstancesRequest;
 const PayDealsRequest = models.PayDealsRequest;
 const SummaryTotal = models.SummaryTotal;
 const BusinessSummaryTotal = models.BusinessSummaryTotal;
@@ -113,6 +117,7 @@ const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
 const DescribeBillDetailForOrganizationRequest = models.DescribeBillDetailForOrganizationRequest;
 const DescribeVoucherUsageDetailsRequest = models.DescribeVoucherUsageDetailsRequest;
 const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryRequest;
+const DescribeRenewInstancesResponse = models.DescribeRenewInstancesResponse;
 const BillDetailComponent = models.BillDetailComponent;
 const ConditionRegion = models.ConditionRegion;
 const TagSummaryOverviewItem = models.TagSummaryOverviewItem;
@@ -129,6 +134,7 @@ const CreateAllocationTagRequest = models.CreateAllocationTagRequest;
 const ExcludedProducts = models.ExcludedProducts;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const DescribeAllocationRuleDetailResponse = models.DescribeAllocationRuleDetailResponse;
+const SetRenewalResponse = models.SetRenewalResponse;
 const UsageDetails = models.UsageDetails;
 const AnalyseBusinessDetail = models.AnalyseBusinessDetail;
 const AnalyseConditions = models.AnalyseConditions;
@@ -181,6 +187,19 @@ class BillingClient extends AbstractClient {
         super("billing.intl.tencentcloudapi.com", "2018-07-09", credential, region, profile);
     }
     
+    /**
+     * Notes:
+1. This API supports querying annual and monthly subscription instances integrated into the renewal management page, including running and isolated instances (some products unsupported).
+2. When using this API, a sub-user should have the QcloudFinanceRenewManageFullAccess permission policy.
+     * @param {DescribeRenewInstancesRequest} req
+     * @param {function(string, DescribeRenewInstancesResponse):void} cb
+     * @public
+     */
+    DescribeRenewInstances(req, cb) {
+        let resp = new DescribeRenewInstancesResponse();
+        this.request("DescribeRenewInstances", req, resp, cb);
+    }
+
     /**
      * Delete a collection rule.
      * @param {DeleteGatherRuleRequest} req
@@ -336,6 +355,20 @@ Note:
     DescribeBillDetail(req, cb) {
         let resp = new DescribeBillDetailResponse();
         this.request("DescribeBillDetail", req, resp, cb);
+    }
+
+    /**
+     * Notes:
+1. This API supports setting auto-renewal mode and period for annual and monthly subscription instances.
+2. Obtain the product code and region code through an instance query API.
+3. When using this API, a sub-user must possess the QcloudFinanceRenewManageFullAccess permission policy.
+     * @param {SetRenewalRequest} req
+     * @param {function(string, SetRenewalResponse):void} cb
+     * @public
+     */
+    SetRenewal(req, cb) {
+        let resp = new SetRenewalResponse();
+        this.request("SetRenewal", req, resp, cb);
     }
 
     /**

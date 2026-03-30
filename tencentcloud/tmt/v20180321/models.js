@@ -140,13 +140,13 @@ hi: Hindi
         this.UntranslatedText = null;
 
         /**
-         * 
+         * Term base list to be used; obtain by creating your own term base via the [Term Base Operation Guide](https://cloud.tencent.com/document/product/551/107926).
          * @type {Array.<string> || null}
          */
         this.TermRepoIDList = null;
 
         /**
-         * 
+         * The list of example sentence libraries to be used; obtain by creating your own example sentence library via the [Example Sentence Library Operation Guide](https://cloud.tencent.com/document/product/551/107927).
          * @type {Array.<string> || null}
          */
         this.SentRepoIDList = null;

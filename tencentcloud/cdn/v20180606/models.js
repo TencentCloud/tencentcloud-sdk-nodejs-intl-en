@@ -3055,7 +3055,7 @@ Default value: `bandwidth`
         this.Product = null;
 
         /**
-         * 
+         * Specify the time zone for query time, default UTC+08:00
          * @type {string || null}
          */
         this.TimeZone = null;
@@ -7978,7 +7978,7 @@ If this parameter is left empty, edge server information will be returned by def
         this.Segment = null;
 
         /**
-         * 
+         * whether to query node IPV6 information.
          * @type {boolean || null}
          */
         this.ShowIpv6 = null;
@@ -12219,7 +12219,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.Metric = null;
 
         /**
-         * 
+         * Detection Cycle, Unit: Minutes, 60 or 1440
          * @type {number || null}
          */
         this.Cycle = null;

@@ -1437,19 +1437,19 @@ Note: This field may return null, indicating that no valid value was found.
         this.EnableDirectControl = null;
 
         /**
-         * 
+         * Enable Focus Mode. 0: View all participants (default) 1: View only teacher and TA
          * @type {number || null}
          */
         this.InteractionMode = null;
 
         /**
-         * 
+         * Landscape/Portrait. 0: Landscape broadcast (default); 1: Portrait broadcast. Currently supported only for video-only type on mobile devices.
          * @type {number || null}
          */
         this.VideoOrientation = null;
 
         /**
-         * 
+         * Enable post-class evaluation. 0: Disable (default) 1: Enable
          * @type {number || null}
          */
         this.IsGradingRequiredPostClass = null;
@@ -1461,43 +1461,43 @@ Note: This field may return null, indicating that no valid value was found.
         this.RoomType = null;
 
         /**
-         * 
+         * Overtime duration: Unit in minutes. 0: No limitation (default); -1: Overtime prohibited; Values >0: Overtime duration in minutes, maximum 120 minutes
          * @type {number || null}
          */
         this.EndDelayTime = null;
 
         /**
-         * 
+         * Live Streaming Type: 0: Regular (default) 1: Simulated Live
          * @type {number || null}
          */
         this.LiveType = null;
 
         /**
-         * 
+         * Simulated Live Playback Link
          * @type {string || null}
          */
         this.RecordLiveUrl = null;
 
         /**
-         * 
+         * Whether to auto-start class: 0: Do not auto-start (default) 1: Auto-start. Effective when live_type=1
          * @type {number || null}
          */
         this.EnableAutoStart = null;
 
         /**
-         * 
+         * Background image for recording files, supports png, jpg, jpeg, bmp formats. Alpha channel is currently not supported.
          * @type {string || null}
          */
         this.RecordBackground = null;
 
         /**
-         * 
+         * Recording custom scenes. This parameter is valid only when recordlayout=9. The data content consists of user-defined scene parameters in json key-value pair format, where the value is of string type.
          * @type {string || null}
          */
         this.RecordScene = null;
 
         /**
-         * 
+         * Recording custom language. This parameter is valid only when recordlayout=9.
          * @type {string || null}
          */
         this.RecordLang = null;
@@ -5539,7 +5539,7 @@ class DescribeRoomStatisticsRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Custom Message
  * @class
  */
 class CustomMsgContent extends  AbstractModel {

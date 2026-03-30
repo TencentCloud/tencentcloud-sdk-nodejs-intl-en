@@ -31,7 +31,7 @@ class DstInfo extends  AbstractModel {
         this.Region = null;
 
         /**
-         * 
+         * Migration destination Ip
          * @type {string || null}
          */
         this.Ip = null;
@@ -80,7 +80,7 @@ class SrcInfo extends  AbstractModel {
         this.Region = null;
 
         /**
-         * 
+         * Migration source Ip
          * @type {string || null}
          */
         this.Ip = null;

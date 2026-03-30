@@ -1778,7 +1778,7 @@ class AddLabelRequest extends  AbstractModel {
         this.LabelId = null;
 
         /**
-         * 
+         * tdid
          * @type {string || null}
          */
         this.Did = null;
@@ -2447,7 +2447,7 @@ class CreateTDidRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         *  
+         * Deployment mechanism: 1 for enabled, 0 for disabled
          * @type {number || null}
          */
         this.Relegation = null;

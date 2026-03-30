@@ -528,7 +528,7 @@ class ModifyWebHookPolicyRequest extends  AbstractModel {
         this.Quuids = null;
 
         /**
-         * 
+         * Machines to be excluded
          * @type {Array.<string> || null}
          */
         this.ExcludedQuuids = null;
@@ -12498,7 +12498,7 @@ class ModifyWarningHostConfigRequest extends  AbstractModel {
         this.ItemLabelIds = null;
 
         /**
-         * 
+         * Machines to be excluded
          * @type {Array.<string> || null}
          */
         this.ExcludedQuuids = null;
@@ -18686,7 +18686,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.FixTag = null;
 
         /**
-         * 
+         * Vulnerability categories: 1 web cms vulnerabilities, 2 application vulnerabilities, 4 linux software vulnerabilities, 5 windows system vulnerabilities
          * @type {number || null}
          */
         this.VulCategory = null;
@@ -24494,7 +24494,7 @@ class CreateVulFixTaskQuuids extends  AbstractModel {
         this.Quuids = null;
 
         /**
-         * 
+         * Repair method: 0 component update or patch installation, 1 disable service
          * @type {number || null}
          */
         this.FixMethod = null;
@@ -27662,7 +27662,7 @@ class CreateMalwareWhiteListRequest extends  AbstractModel {
         this.EventId = null;
 
         /**
-         * 
+         * Perform allowlisting operations on pending historical items; 0 indicates no action, 1 indicates processing
          * @type {number || null}
          */
         this.IsHandleHistoryEvents = null;
@@ -29686,7 +29686,7 @@ class EmergencyResponseInfo extends  AbstractModel {
         this.HostNum = null;
 
         /**
-         * 
+         * Service status: 0 not started, · in progress, 2 completed
          * @type {number || null}
          */
         this.Status = null;
@@ -35371,7 +35371,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.FixSuccessCnt = null;
 
         /**
-         * 
+         * Repair method: 0 component update or patch installation, 1 disable service
          * @type {number || null}
          */
         this.FixMethod = null;
@@ -46542,7 +46542,7 @@ class ScanVulSettingRequest extends  AbstractModel {
         this.Uuids = null;
 
         /**
-         * 
+         * 0 version comparison, 2 version comparison + poc
          * @type {number || null}
          */
         this.ScanMethod = null;
@@ -60768,7 +60768,7 @@ class ScanVulRequest extends  AbstractModel {
         this.VulIds = null;
 
         /**
-         * 
+         * 0 version comparison, 2 version comparison + poc
          * @type {number || null}
          */
         this.ScanMethod = null;

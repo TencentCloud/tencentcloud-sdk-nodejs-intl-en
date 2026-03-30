@@ -567,7 +567,7 @@ class DescribeQAResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Extended Information
  * @class
  */
 class ExtraInfo extends  AbstractModel {
@@ -575,7 +575,7 @@ class ExtraInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * ECharts Information
          * @type {Array.<string> || null}
          */
         this.EChartsInfo = null;
@@ -910,7 +910,7 @@ class RunNodeInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Agent Debugging Information
  * @class
  */
 class AgentDebugInfo extends  AbstractModel {
@@ -918,13 +918,13 @@ class AgentDebugInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Input Information for Tools and Large Models, json
          * @type {string || null}
          */
         this.Input = null;
 
         /**
-         * 
+         * Output Information for Tools and Large Models, json
          * @type {string || null}
          */
         this.Output = null;
@@ -1381,7 +1381,7 @@ class ExportAttributeLabelResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Workflow Information
  * @class
  */
 class WorkflowInfo extends  AbstractModel {
@@ -1389,37 +1389,37 @@ class WorkflowInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Workflow ID
          * @type {string || null}
          */
         this.WorkflowId = null;
 
         /**
-         * 
+         * Workflow Name
          * @type {string || null}
          */
         this.WorkflowName = null;
 
         /**
-         * 
+         * Workflow Run ID
          * @type {string || null}
          */
         this.WorkflowRunId = null;
 
         /**
-         * 
+         * Tab
          * @type {Array.<string> || null}
          */
         this.OptionCards = null;
 
         /**
-         * 
+         * Multi-bubble output results
          * @type {Array.<string> || null}
          */
         this.Outputs = null;
 
         /**
-         * 
+         * Workflow Publish Time, unix timestamp
          * @type {string || null}
          */
         this.WorkflowReleaseTime = null;
@@ -6202,13 +6202,13 @@ class DescribeTokenUsageGraphRequest extends  AbstractModel {
         this.AppBizIds = null;
 
         /**
-         * 
+         * Application type. Optional values: knowledge_qa(knowledge QA)/plugin_parsing_qa(plugin)/shared_knowledge(knowledge base)/evaluate_test(evaluation). If not filled, query all types.
          * @type {string || null}
          */
         this.AppType = null;
 
         /**
-         * 
+         * Filter Sub-scenarios
          * @type {Array.<string> || null}
          */
         this.SubScenes = null;
@@ -6270,7 +6270,7 @@ class RetryDocAuditRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Timbre Parameters
  * @class
  */
 class VoiceConfig extends  AbstractModel {
@@ -6278,19 +6278,19 @@ class VoiceConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Public Cloud Timbre ID
          * @type {number || null}
          */
         this.VoiceType = null;
 
         /**
-         * 
+         * Timbre Key
          * @type {string || null}
          */
         this.TimbreKey = null;
 
         /**
-         * 
+         * Timbre Name
          * @type {string || null}
          */
         this.VoiceName = null;
@@ -6423,25 +6423,119 @@ When the value is 1, the weburl field cannot be empty; otherwise, it will not ta
         this.CateBizId = null;
 
         /**
-         * 
+         * Whether it can be downloaded. This value is meaningful only when IsRefer is true and ReferUrlType is 0.
          * @type {boolean || null}
          */
         this.IsDownload = null;
 
         /**
-         * 
+         * Duplicate document handling method, processed by sequentially matching the first condition that is met
          * @type {Array.<DuplicateFileHandle> || null}
          */
         this.DuplicateFileHandles = null;
 
         /**
-         * 
+         * Custom Segmentation Rules
+
+The request parameter is a **JSON Object**. For specific format, refer to the interface sample value. It contains the following main fields:
+
+| Field Name          | Type     | Description                                  |
+|--------------------|----------|---------------------------------------------|
+| `xlsx_splitter`    | Object   | **Excel (xlsx) file segmentation policy configuration**, valid only when processing Excel files |
+| `common_splitter`  | Object   | **General file (e.g., txt, pdf) segmentation policy configuration**, segmented by page or tag |
+| `table_style`      | String   | Output format of table content, e.g., HTML or Markdown |
+
+---
+
+## `xlsx_splitter` (Excel Segmentation Policy)
+
+Used to configure **segmentation methods for spreadsheet files**.
+**Type: Object**
+
+```json
+"xlsx_splitter": {
+  "header_interval": [1, 2],
+  "content_start": 10,
+  "split_row": 2
+}
+```
+
+### Field Description:
+
+| Field Name         | Type          | Description                                                                
+   |
+|--------------------|---------------|-----------------------------------------------------------------------------|
+| `header_interval` | Array\<Number\> | Row range of headers, formatted as `[start_row, end_row]`, **row numbers start from 1**. E.g., `[1, 2]` indicates rows 1-2 are headers. |
+| `content_start`   | Number        | **Starting row number of table content (1-based)**.                        
+   |
+| `split_row`       | Number        | **Number of rows per segment**.                                            
+   |
+
+---
+## `common_splitter` (General File Segmentation Policy)
+
+Used to configure **segmentation methods for non-Excel files (e.g., TXT, PDF, DOCX)**, supporting two strategies: **by-page segmentation** or **by-tag segmentation**.
+
+**Type: Object**
+
+```json
+"common_splitter": {
+  "splitter": "page",
+  "page_splitter": {
+    "chunk_length": 1000,
+    "chunk_overlap_length": 100
+  }
+}
+```
+
+### Field Description:
+
+| Field Name                     | Type          | Description                                                                
+   |
+|--------------------------------|---------------|-----------------------------------------------------------------------------|
+| `splitter`                     | String        | Segmentation strategy type. Valid values: `"page"` (by-page) or `"tag"` (by-tag). |
+| `page_splitter`                | Object        | **By-page segmentation configuration**.                                     |
+| `page_splitter.chunk_length`   | Number        | **Maximum chunk length**.                                                  
+   |
+| `page_splitter.chunk_overlap_length` | Number | **Chunk overlap length**.                                                  
+   |
+| `tag_splitter`                 | Object        | **Custom segmentation configuration**.                                      |
+| `tag_splitter.tag`             | Array\<String\> | **Segmentation tags**.                                                     
+   |
+| `tag_splitter.chunk_length`    | Number        | **Maximum chunk length**.                                                  
+   |
+| `tag_splitter.chunk_overlap_length` | Number | **Chunk overlap length**.                                                  
+   |
+
+🔹 **Additional Notes:**
+
+- Valid values for `splitter`:
+    - `"page"`: Only use by-page segmentation logic. Only `page_splitter` fields are relevant.
+    - `"tag"`: Only use by-tag segmentation logic (e.g., using delimiters like semicolons or line breaks). Only `tag_splitter` fields are relevant.
+---
+
+## `table_style` (Table Output Style)
+
+Specifies **the format in which tabular content (e.g., tables extracted from Excel or CSV) is returned**, facilitating frontend display or subsequent processing.
+
+**Type: String**
+
+```json
+"table_style": "md"
+```
+
+### Field Description:
+
+| Field Name     | Type   | Description                                                                
+   |
+|----------------|--------|-----------------------------------------------------------------------------|
+| `table_style`  | String | Output format of table content. Valid values:<br>• `"html"`: Returns as HTML tables, suitable for web display.<br>• `"md"`: Returns in Markdown table syntax, suitable for documentation or Markdown rendering environments. |
          * @type {string || null}
          */
         this.SplitRule = null;
 
         /**
-         * 
+         * Document update frequency, default value is 0 (no updates)
          * @type {UpdatePeriodInfo || null}
          */
         this.UpdatePeriodInfo = null;
@@ -7462,7 +7556,7 @@ class CallDetail extends  AbstractModel {
 }
 
 /**
- * 
+ * Document list filter flag
  * @class
  */
 class DocFilterFlag extends  AbstractModel {
@@ -7470,13 +7564,13 @@ class DocFilterFlag extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Flag
          * @type {string || null}
          */
         this.Flag = null;
 
         /**
-         * 
+         * ID Value
          * @type {boolean || null}
          */
         this.Value = null;
@@ -7934,7 +8028,7 @@ class ModifyDocAttrRangeRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Digital Human Configuration
  * @class
  */
 class DigitalHumanConfig extends  AbstractModel {
@@ -7942,19 +8036,19 @@ class DigitalHumanConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Digital Human Asset key
          * @type {string || null}
          */
         this.AssetKey = null;
 
         /**
-         * 
+         * Digital Human Name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Image
          * @type {string || null}
          */
         this.Avatar = null;
@@ -8505,7 +8599,7 @@ class GroupQARequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Update Policy
  * @class
  */
 class UpdatePeriodInfo extends  AbstractModel {
@@ -8513,7 +8607,7 @@ class UpdatePeriodInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Document update frequency type: 0: No update, -H: Hourly granularity. Currently only supports 24 (1 day), 72 (3 days), 168 (7 days). Only valid for source=2 Tencent document type.
          * @type {number || null}
          */
         this.UpdatePeriodH = null;
@@ -11079,7 +11173,7 @@ class MsgRecordReference extends  AbstractModel {
 }
 
 /**
- * 
+ * Smart Conversation
  * @class
  */
 class AICallConfig extends  AbstractModel {
@@ -11087,31 +11181,31 @@ class AICallConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Enable voice interaction feature
          * @type {boolean || null}
          */
         this.EnableVoiceInteract = null;
 
         /**
-         * 
+         * Enable voice call
          * @type {boolean || null}
          */
         this.EnableVoiceCall = null;
 
         /**
-         * 
+         * Enable digital human
          * @type {boolean || null}
          */
         this.EnableDigitalHuman = null;
 
         /**
-         * 
+         * Timbre Configuration
          * @type {VoiceConfig || null}
          */
         this.Voice = null;
 
         /**
-         * 
+         * Digital Human Configuration
          * @type {DigitalHumanConfig || null}
          */
         this.DigitalHuman = null;
@@ -12049,7 +12143,7 @@ class KnowledgeQaPlugin extends  AbstractModel {
 }
 
 /**
- * 
+ * Intent Implementation Approach
  * @class
  */
 class IntentAchievement extends  AbstractModel {
@@ -12057,13 +12151,13 @@ class IntentAchievement extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Intent Implementation Approach, qa: Q&A response, doc: document-based response, workflow: workflow-based response, llm: LLM response
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Intent Implementation Approach Description
          * @type {string || null}
          */
         this.Desc = null;
@@ -13336,13 +13430,13 @@ class DescribeTokenUsageRequest extends  AbstractModel {
         this.SubScenes = null;
 
         /**
-         * 
+         * Application type (knowledge_qa application management, shared_knowlege shared knowledge base)
          * @type {string || null}
          */
         this.AppType = null;
 
         /**
-         * 
+         * Space ID, used to limit the query scope. When not filled, data from all spaces are queried.
          * @type {string || null}
          */
         this.SpaceId = null;
@@ -13442,7 +13536,7 @@ class CreateAttributeLabelResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Duplicate document handling method
  * @class
  */
 class DuplicateFileHandle extends  AbstractModel {
@@ -13450,13 +13544,13 @@ class DuplicateFileHandle extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Duplicate document identification method, 1: By document content, i.e., using the cos_hash field to determine whether duplicates exist
          * @type {number || null}
          */
         this.CheckType = null;
 
         /**
-         * 
+         * Duplicate document handling method, 1: Return an error, 2: Skip and return the business ID of the duplicate document
          * @type {number || null}
          */
         this.HandleType = null;

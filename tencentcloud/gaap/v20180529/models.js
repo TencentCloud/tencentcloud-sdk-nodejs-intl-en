@@ -11520,7 +11520,7 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         this.BanStatus = null;
 
         /**
-         * 
+         * IP List
          * @type {Array.<IPDetail> || null}
          */
         this.IPList = null;

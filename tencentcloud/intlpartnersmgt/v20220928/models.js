@@ -856,13 +856,13 @@ class CountryCodeItem extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 
+         * ISO2 standard country/region code
          * @type {string || null}
          */
         this.IOS2 = null;
 
         /**
-         * 
+         * ISO3 standard country/region code
          * @type {string || null}
          */
         this.IOS3 = null;

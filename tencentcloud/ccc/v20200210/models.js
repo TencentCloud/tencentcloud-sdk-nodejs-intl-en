@@ -165,6 +165,12 @@ class CreateIVRSessionRequest extends  AbstractModel {
          */
         this.UUI = null;
 
+        /**
+         * Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports this parameter.
+         * @type {number || null}
+         */
+        this.MaxRingTimeoutSecond = null;
+
     }
 
     /**
@@ -188,6 +194,7 @@ class CreateIVRSessionRequest extends  AbstractModel {
             }
         }
         this.UUI = 'UUI' in params ? params.UUI : null;
+        this.MaxRingTimeoutSecond = 'MaxRingTimeoutSecond' in params ? params.MaxRingTimeoutSecond : null;
 
     }
 }
@@ -1018,7 +1025,7 @@ If at any time the user showed anger or wanted a human agent, call transfer_call
 4. Tell Cindy to not eat or drink that day before the checkup. Also tell Cindy to give you a callback if there's any changes in health condition.
 5. Ask Cindy if she has any questions, and if so, answer them until there are no questions.
   - If user asks something you do not know, let them know you don't have the answer. Ask them if they have any other questions.
-  - If user do not have any questions, call function end_call to hang up.
+  - If user do not have any questions, call function call_end to hang up.
          * @type {string || null}
          */
         this.SystemPrompt = null;
@@ -1193,56 +1200,56 @@ Currently, the supported languages are as follows. The English name of the langu
         this.NotifyMaxCount = null;
 
         /**
-         * <p>Either the VoiceType field or a custom TTS is required. this uses your own custom TTS, while VoiceType provides some built-in voice types.</p>.
+         * <p>Either the VoiceType field or a custom TTS is required. this uses your own custom TTS, while VoiceType provides some built-in voice types.</p>
 <ul>
 <li>Tencent TTS<br>
-For configuration, see <a href="https://www.tencentcloud.comom/document/product/1073/92668?from_cn_redirect=1#55924b56-1a73-4663-a7a1-a8dd82d6e823" target="_blank">tencent cloud TTS documentation link</a></li>.
+For configuration, see <a href="https://www.tencentcloud.comom/document/product/1073/92668?from_cn_redirect=1#55924b56-1a73-4663-a7a1-a8dd82d6e823" target="_blank">tencent cloud TTS documentation link</a></li>
 </ul>
 <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{ 
 "TTSType": "tencent", // String TTS type. currently supports "tencent" and "minixmax". the rest manufacturers are under support.
-  "AppId": "your application ID", // String required.
-  "SecretId": "your key ID", // String required.
-  "SecretKey": "your Key", // String required.
-  "VoiceType": 101001, // Integer  required. the voice ID, including standard timbre and premium timbre. premium timbre has higher fidelity and different pricing from standard timbre. please refer to the text to speech billing overview. for the complete supported timbre list, see the text to speech timbre list.
-  "Speed": 1.25, // Integer optional, speaking rate, value range: [-2,6], respectively represent different speaking rates: -2: 0.6x -1: 0.8x 0: 1.0x (default) 1: 1.2x 2: 1.5x 6: 2.5x. if more refined speaking rates are needed, up to 2 decimal places can be retained, such as 0.5, 1.25, or 2.81. for parameter value to actual speech Speed conversion, refer to speech Speed switch.
-  "Volume": 5, // Integer optional. specifies the Volume level. value range: [0,10], corresponding to 11 severity levels respectively. default value: 0, which represents normal Volume.
-  "PrimaryLanguage": 1, // Integer option primary language 1-chinese (default) 2-english 3-japanese.
-"FastVoiceType": "xxxx"   //  optional parameter. parameters for quick voice clone. 
-  }
+"AppId": "your application ID", // String required.
+"SecretId": "your key ID", // String required.
+"SecretKey": "your Key", // String required.
+"VoiceType": 101001, // Integer required. the voice ID, including standard timbre and premium timbre. premium timbre has higher fidelity and different pricing from standard timbre. please refer to the text to speech billing overview. for the complete supported timbre list, see the text to speech timbre list.
+ "Speed": 1.25, // Integer optional, speaking rate, value range: [-2,6], respectively represent different speaking rates: -2: 0.6x -1: 0.8x 0: 1.0x (default) 1: 1.2x 2: 1.5x 6: 2.5x. if more refined speaking rates are needed, up to 2 decimal places can be retained, such as 0.5, 1.25, or 2.81. for parameter value to actual speech Speed conversion, refer to speech Speed switch.
+ "Volume": 5, // Integer optional. specifies the Volume level. value range: [0,10], corresponding to 11 severity levels respectively. default value: 0, which represents normal Volume.
+ "PrimaryLanguage": 1, // Integer option primary language 1-chinese (default) 2-english 3-japanese.
+"FastVoiceType": "xxxx"   // optional parameter. parameters for quick voice clone. 
+ }
 </code></pre>
  </div><ul>
 <li>Minimax TTS<br>
-For configuration, refer to the <a href="https://platform.minimaxi.com/document/T2a%20V2?key=66719005a427f0c8a5701643" target="_blank">Minimax TTS documentation link</a>. note that Minimax TTS has frequency limits. overfrequency may result in response delays. see the <a href="https://platform.minimaxi.com/document/Rate%20limits?key=66b19417290299a26b234572" target="_blank">Minimax TTS frequency limit documentation link</a>.</li>.
+For configuration, refer to the <a href="https://platform.minimaxi.com/document/T2a%20V2?key=66719005a427f0c8a5701643" target="_blank">Minimax TTS documentation link</a>. note that Minimax TTS has frequency limits. overfrequency may result in response delays. see the <a href="https://platform.minimaxi.com/document/Rate%20limits?key=66b19417290299a26b234572" target="_blank">Minimax TTS frequency limit documentation link</a>.</li>
 </ul>
 <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
 "TTSType": "minimax",  // String TTS type. 
-        &quot;Model&quot;: &quot;speech-01-turbo&quot;,
-        &quot;APIUrl&quot;: &quot;https://api.minimax.chat/v1/t2a_v2&quot;,
-        &quot;APIKey&quot;: &quot;eyxxxx&quot;,
-        &quot;GroupId&quot;: &quot;181000000000000&quot;,
-        &quot;VoiceType&quot;:&quot;female-tianmei&quot;,
-        &quot;Speed&quot;: 1.2
+"Model": "speech-01-turbo",
+"APIUrl": "https://api.minimax.chat/v1/t2a_v2",
+"APIKey": "eyxxxx",
+"GroupId": "181000000000000",
+"VoiceType":"female-tianmei",
+"Speed": 1.2
 }
 </code></pre>
 </div><ul>
-<li>Volcano TTS</li>.
+<li>Volcano TTS</li>
 </ul>
-<p>Configure the timbre type. see <a href="https://www.volcengine.com/docs/6561/162929" target="_blank">volcano TTS documentation link</a><br>.
+<p>Configure the timbre type. see <a href="https://www.volcengine.com/docs/6561/162929" target="_blank">volcano TTS documentation link</a><br>
 Text to speech timbre list - voice technology - volcano engine.
-Large model TTS timbre list - voice technology - volcano engine</p>.
+Large model TTS timbre list - voice technology - volcano engine</p>
 <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
 "TTSType": "volcengine",  // required: String TTS type.
 "AppId": "xxxxxxxx",   // required: String AppId assigned by volcano engine.
 "Token": "TY9d4sQXHxxxxxxx", // required: String type, access Token for volcano engine.
-"Speed": 1.0,            // optional parameter. speaking rate, defaults to 1.0.
-"Volume": 1.0,            // optional parameter, Volume, defaults to 1.0.
+"Speed": 1.0,  // optional parameter. speaking rate, defaults to 1.0.
+"Volume": 1.0,  // optional parameter, Volume, defaults to 1.0.
 "Cluster": "volcano_tts", // optional parameter, business Cluster, is selected by default.
 "VoiceType": "zh_male_aojiaobazong_moon_bigtts" // timbre type, defaults to the TTS voice type of the large model. if using ordinary text to speech, you need to fill in the corresponding voice type. input errors in voice type can cause no sound.
 }
 </code></pre>
 </div><ul>
 <li>Azure TTS<br>
-For configuration, refer to the <a href="https://docs.azure.cn/zh-cn/ai-services/speech-service/speech-synthesis-markup-voice" target="_blank">AzureTTS documentation link</a></li>.
+For configuration, refer to the <a href="https://docs.azure.cn/zh-cn/ai-services/speech-service/speech-synthesis-markup-voice" target="_blank">AzureTTS documentation link</a></li>
 </ul>
 <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
 "TTSType": "azure", // required: String TTS type.
@@ -1250,13 +1257,13 @@ For configuration, refer to the <a href="https://docs.azure.cn/zh-cn/ai-services
 "Region": "chinanorth3",  // required: String the Region to subscribe to.
 "VoiceName": "zh-CN-XiaoxiaoNeural", // required: String specifies the required VoiceName.
 "Language": "zh-CN", // required: String specifies the synthesis Language.  
-"Rate": 1 // optional: float, speech speed. value range: 0.5–2. default is 1.
+"Rate": 1 // optional: float, speech speed. value range: 0.5-2. default is 1.
 }
 </code></pre>
 </div><ul>
-<li>Custom TTS</li>.
+<li>Custom TTS</li>
 </ul>
-<p>For the specific protocol specification, refer to <a href="https://doc.weixin.qq.com/doc/w3_ANQAiAbdAFwHILbJBmtSqSbV1WZ3L?scode=AJEAIQdfAAo5a1xajYANQAiAbdAFw" target="_blank">tencent documentation</a></p>.
+<p>For the specific protocol specification, refer to <a href="https://doc.weixin.qq.com/doc/w3_ANQAiAbdAFwHILbJBmtSqSbV1WZ3L?scode=AJEAIQdfAAo5a1xajYANQAiAbdAFw " target="_blank">tencent documentation</a></p>
 <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
 "TTSType": "custom", // String required.
 "APIKey": "APIKey", // String required. be used to authenticate.
@@ -1267,6 +1274,7 @@ For configuration, refer to the <a href="https://docs.azure.cn/zh-cn/ai-services
 }
 </code></pre>
 </div>
+
          * @type {string || null}
          */
         this.CustomTTSConfig = null;
@@ -1363,6 +1371,20 @@ Our side fully acknowledges and understands that according to the laws and regul
          */
         this.MaxRingTimeoutSecond = null;
 
+        /**
+         * Ambient sound scenario. if so, leave it blank.
+Coffee_shops: chat in the coffee shop communication environment with background.
+busy_office: customer service center.
+         * @type {string || null}
+         */
+        this.AmbientSoundType = null;
+
+        /**
+         * Ambient sound volume. if AmbientSoundType is empty, this field is left blank. value ranges from [0,2]. the lower the value, the softer the ambient sound; the higher the value, the louder the ambient sound. if not set, use the default value 1.
+         * @type {number || null}
+         */
+        this.AmbientSoundVolume = null;
+
     }
 
     /**
@@ -1447,6 +1469,8 @@ Our side fully acknowledges and understands that according to the laws and regul
         this.LLMExtraBody = 'LLMExtraBody' in params ? params.LLMExtraBody : null;
         this.MaxCallDurationMs = 'MaxCallDurationMs' in params ? params.MaxCallDurationMs : null;
         this.MaxRingTimeoutSecond = 'MaxRingTimeoutSecond' in params ? params.MaxRingTimeoutSecond : null;
+        this.AmbientSoundType = 'AmbientSoundType' in params ? params.AmbientSoundType : null;
+        this.AmbientSoundVolume = 'AmbientSoundVolume' in params ? params.AmbientSoundVolume : null;
 
     }
 }
@@ -1576,6 +1600,12 @@ class AIAgentInfo extends  AbstractModel {
          */
         this.AIAgentName = null;
 
+        /**
+         * List of intelligent agent variable names.
+         * @type {Array.<string> || null}
+         */
+        this.VariableNames = null;
+
     }
 
     /**
@@ -1587,6 +1617,7 @@ class AIAgentInfo extends  AbstractModel {
         }
         this.AIAgentId = 'AIAgentId' in params ? params.AIAgentId : null;
         this.AIAgentName = 'AIAgentName' in params ? params.AIAgentName : null;
+        this.VariableNames = 'VariableNames' in params ? params.VariableNames : null;
 
     }
 }
@@ -1967,142 +1998,154 @@ class DescribeSessionDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Calling number.
+         * <P>Calling number</p>.
          * @type {string || null}
          */
         this.Caller = null;
 
         /**
-         * Called number.
+         * <P>Called number</p>.
          * @type {string || null}
          */
         this.Callee = null;
 
         /**
-         * Call type. valid values: 1 (outgoing call), 2 (incoming call), 3 (audio dial-in), 5 (predictive outbound call), 6 (internal call).
+         * <P>Call type 1 outgoing call 2 incoming call 3 audio dial-in 5 predictive outbound call 6 extension call</p>.
          * @type {number || null}
          */
         this.CallType = null;
 
         /**
-         * Start timestamp. Unix second-level timestamp.
+         * <p>Start timestamp, Unix second-level timestamp</p>.
          * @type {number || null}
          */
         this.StartTimeStamp = null;
 
         /**
-         * Ring timestamp. UNIX second-level timestamp.
+         * <p>Ring timestamp, UNIX second-level timestamp</p>.
          * @type {number || null}
          */
         this.RingTimestamp = null;
 
         /**
-         * Answer timestamp. UNIX second-level timestamp.
+         * <p>Answer timestamp, UNIX second-level timestamp</p>.
          * @type {number || null}
          */
         this.AcceptTimestamp = null;
 
         /**
-         * End timestamp, UNIX second-level timestamp.
+         * <p>End timestamp, UNIX second-level timestamp</p>.
          * @type {number || null}
          */
         this.EndedTimestamp = null;
 
         /**
-         * Queue entry time. Unix second-level timestamp.
+         * <p>Queue entry time, Unix second-level timestamp</p>.
          * @type {number || null}
          */
         this.QueuedTimestamp = null;
 
         /**
-         * Agent account.
+         * <P>Agent account</p>.
          * @type {string || null}
          */
         this.StaffUserId = null;
 
         /**
-         * Refers to the EndStatus field in the DescribeTelCdr api.
+         * <p>Refer to the EndStatus field in the DescribeTelCdr api.</p>.
          * @type {number || null}
          */
         this.EndStatus = null;
 
         /**
-         * Queue skill group ID.
+         * <p>Queue skill group ID</p>.
          * @type {number || null}
          */
         this.QueuedSkillGroupId = null;
 
         /**
-         * Queue skill group name.
+         * <P>Queue skill group name</p>.
          * @type {string || null}
          */
         this.QueuedSkillGroupName = null;
 
         /**
-         * Recording url with authentication and valid period. obtain and pull within a short time frame. do not persist this link.
+         * <P>The recording link comes with authentication and a valid period. after obtaining it, please retrieve the content within 24 hours. do not persist this link. if the link has expired, call this api again to get a new link.</p>.
          * @type {string || null}
          */
         this.RecordURL = null;
 
         /**
-         * Specifies the COS link for recording transfer to a third party.
+         * <p>Recording transfer to external COS link</p>.
          * @type {string || null}
          */
         this.CustomRecordURL = null;
 
         /**
-         * Recording text information link with authentication and valid period. retrieve it within a short time frame. do not persist this link.
+         * <P>Text information link of the voice recording, with authentication and valid period. please retrieve it within 24 hr after obtaining. do not persist this link. if the link has expired, call this api again to get a new link.</p>.
          * @type {string || null}
          */
         this.AsrURL = null;
 
         /**
-         * Voicemail recording url.
+         * <P>Voicemail recording link</p>.
          * @type {Array.<string> || null}
          */
         this.VoicemailRecordURL = null;
 
         /**
-         * Voicemail recording text information url. purchase the offline speech recognition package through the console and enable the offline speech recognition switch.
+         * <P>Voicemail voice recording text information link. you need to purchase an offline speech recognition package through the console and enable the offline speech recognition switch.</p>.
          * @type {Array.<string> || null}
          */
         this.VoicemailAsrURL = null;
 
         /**
-         * IVR key information.
+         * <P>IVR key information</p>.
          * @type {Array.<IVRKeyPressedElement> || null}
          */
         this.IVRKeyPressed = null;
 
         /**
-         * Satisfaction rate keystroke information.
+         * <P>Key information of satisfaction rate</p>.
          * @type {Array.<IVRKeyPressedElement> || null}
          */
         this.PostIVRKeyPressed = null;
 
         /**
-         * Hang-Up side. valid values: seat, user, system.
+         * <P>Hang-Up side seat agent user system</p>.
          * @type {string || null}
          */
         this.HungUpSide = null;
 
         /**
-         * Customer custom data (User-to-User Interface).
+         * <p>Customer custom data (User-to-User Interface)</p>.
          * @type {string || null}
          */
         this.UUI = null;
 
         /**
-         * List of events during a call.
+         * <P>Event list for calls in progress</p>.
          * @type {Array.<SessionEvent> || null}
          */
         this.Events = null;
 
         /**
-         * List of service participants.
+         * <P>Service participant list</p>.
          * @type {Array.<ServeParticipant> || null}
          */
         this.ServeParticipants = null;
+
+        /**
+         * <P>Status code for reason of system hang-up after connect.</p><p><a href="https://www.tencentcloud.com/document/product/679/123938?from_cn_redirect=1">details</a></p>.
+         * @type {number || null}
+         */
+        this.SysHangupReason = null;
+
+        /**
+         * <P>Reason for system hang up after connect.</p><p><a href="https://www.tencentcloud.com/document/product/679/123938?from_cn_redirect=1">details</a></p>.
+         * @type {string || null}
+         */
+        this.SysHangupReasonString = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2174,6 +2217,8 @@ class DescribeSessionDetailResponse extends  AbstractModel {
                 this.ServeParticipants.push(obj);
             }
         }
+        this.SysHangupReason = 'SysHangupReason' in params ? params.SysHangupReason : null;
+        this.SysHangupReasonString = 'SysHangupReasonString' in params ? params.SysHangupReasonString : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2260,7 +2305,11 @@ class ServeParticipant extends  AbstractModel {
         this.SkillGroupId = null;
 
         /**
-         * Ending status.
+         * End status.
+
+For chinese description, see [https://www.tencentcloud.com/zh/document/product/1229/71847](https://www.tencentcloud.com/zh/document/product/1229/71847).
+
+For english details, see [reference](https://www.tencentcloud.com/document/product/1229/71847?lang=en).
          * @type {string || null}
          */
         this.EndStatusString = null;
@@ -2322,6 +2371,34 @@ class ServeParticipant extends  AbstractModel {
         this.StartTimestamp = 'StartTimestamp' in params ? params.StartTimestamp : null;
         this.SkillGroupName = 'SkillGroupName' in params ? params.SkillGroupName : null;
         this.CustomRecordURL = 'CustomRecordURL' in params ? params.CustomRecordURL : null;
+
+    }
+}
+
+/**
+ * PlaySoundCall response structure.
+ * @class
+ */
+class PlaySoundCallResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2393,43 +2470,43 @@ class DescribeTelCallInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of minutes consumed by outbound package.
+         * <P>Minutes consumed by outbound package</p>.
          * @type {number || null}
          */
         this.TelCallOutCount = null;
 
         /**
-         * Number of minutes consumed by inbound package.
+         * <P>Minutes consumed by inbound package</p>.
          * @type {number || null}
          */
         this.TelCallInCount = null;
 
         /**
-         * Number of agent usage statistics.
+         * <P>Number of agent usage statistics</p>.
          * @type {number || null}
          */
         this.SeatUsedCount = null;
 
         /**
-         * Number of minutes consumed by audio package.
+         * <P>Minutes consumed by audio package</p>.
          * @type {number || null}
          */
         this.VoipCallInCount = null;
 
         /**
-         * Number of minutes consumed by audio package.
+         * <P>Minutes consumed by audio package</p>.
          * @type {number || null}
          */
         this.VOIPCallInCount = null;
 
         /**
-         * Number of minutes consumed by offline speech-to-text package.
+         * <P>Minutes consumed by offline speech-to-text package</p>.
          * @type {number || null}
          */
         this.AsrOfflineCount = null;
 
         /**
-         * Number of minutes consumed by real-time speech-to-text package.
+         * <P>Minutes consumed by real-time speech-to-text package</p>.
          * @type {number || null}
          */
         this.AsrRealtimeCount = null;
@@ -3623,13 +3700,13 @@ class DescribeStaffInfoListResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of agent users.
+         * <P>Total number of agent users</p>.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Agent user information list.
+         * <P>Agent user information list</p>.
          * @type {Array.<StaffInfo> || null}
          */
         this.StaffList = null;
@@ -3846,6 +3923,18 @@ class CreateAutoCalloutTaskRequest extends  AbstractModel {
          */
         this.AIAgentId = null;
 
+        /**
+         * Retry interval for task failure. value range: 600-86400 seconds.
+         * @type {number || null}
+         */
+        this.RetryInterval = null;
+
+        /**
+         * Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports this parameter.
+         * @type {number || null}
+         */
+        this.MaxRingTimeoutSecond = null;
+
     }
 
     /**
@@ -3894,6 +3983,8 @@ class CreateAutoCalloutTaskRequest extends  AbstractModel {
             }
         }
         this.AIAgentId = 'AIAgentId' in params ? params.AIAgentId : null;
+        this.RetryInterval = 'RetryInterval' in params ? params.RetryInterval : null;
+        this.MaxRingTimeoutSecond = 'MaxRingTimeoutSecond' in params ? params.MaxRingTimeoutSecond : null;
 
     }
 }
@@ -4022,16 +4113,16 @@ class CreateUserSigRequest extends  AbstractModel {
         this.Uid = null;
 
         /**
-         * Valid period, in seconds, no more than 1 hr.
-         * @type {number || null}
-         */
-        this.ExpiredTime = null;
-
-        /**
          * Signature data of the user. required field. standard JSON format.
          * @type {string || null}
          */
         this.ClientData = null;
+
+        /**
+         * Valid period, in seconds, no more than 1 hr.
+         * @type {number || null}
+         */
+        this.ExpiredTime = null;
 
     }
 
@@ -4044,8 +4135,8 @@ class CreateUserSigRequest extends  AbstractModel {
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.Uid = 'Uid' in params ? params.Uid : null;
-        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
         this.ClientData = 'ClientData' in params ? params.ClientData : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
 
     }
 }
@@ -4173,6 +4264,42 @@ class DeleteCCCSkillGroupRequest extends  AbstractModel {
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.SkillGroupId = 'SkillGroupId' in params ? params.SkillGroupId : null;
+
+    }
+}
+
+/**
+ * PauseAutoCalloutTask request structure.
+ * @class
+ */
+class PauseAutoCalloutTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Application ID (required). you can view it at https://console.cloud.tencent.com/ccc.
+
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
 
     }
 }
@@ -5195,37 +5322,37 @@ class DescribeStaffInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+         * <p>App ID (required). can check https://console.cloud.tencent.com/ccc</p>.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Page size, upper limit 9,999.
+         * <P>Pagination size. upper limit: 9999.</p>.
          * @type {number || null}
          */
         this.PageSize = null;
 
         /**
-         * Page number starting from 0.
+         * <P>Page number, starting from 0.</p>.
          * @type {number || null}
          */
         this.PageNumber = null;
 
         /**
-         * Agent account used when querying a single agent.
+         * <P>Agent account, used when query single agent.</p>.
          * @type {string || null}
          */
         this.StaffMail = null;
 
         /**
-         * Use when querying for agents with a modification time greater or equal to modifiedtime.
+         * <p>Use when querying for agents with modified time equal to or greater than ModifiedTime</p>.
          * @type {number || null}
          */
         this.ModifiedTime = null;
 
         /**
-         * Skill group id.
+         * <p>Skill group ID</p>.
          * @type {number || null}
          */
         this.SkillGroupId = null;
@@ -5297,11 +5424,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Task status:.
-0 initial: task creation, call not started.
-1 running.
-2 completed: all calls in the task are completed.
-3 ending: the task has expired, but there are still some calls not ended.
-4 ended: task terminated due to expiration.
+0 initial: task created, call not started.
+1: running.
+2 completed: all calls in the task are done.
+3 ending: the task expires, but some calls are not ended.
+4 stopped: the task expired and ended.
+5 paused: recoverable to continue execution.
          * @type {number || null}
          */
         this.State = null;
@@ -5311,6 +5439,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {number || null}
          */
         this.TaskId = null;
+
+        /**
+         * Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports this parameter.
+         * @type {number || null}
+         */
+        this.MaxRingTimeoutSecond = null;
 
     }
 
@@ -5329,6 +5463,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IvrId = 'IvrId' in params ? params.IvrId : null;
         this.State = 'State' in params ? params.State : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.MaxRingTimeoutSecond = 'MaxRingTimeoutSecond' in params ? params.MaxRingTimeoutSecond : null;
 
     }
 }
@@ -5392,6 +5527,34 @@ class DescribeIvrAudioListRequest extends  AbstractModel {
         this.CustomFileName = 'CustomFileName' in params ? params.CustomFileName : null;
         this.AudioFileName = 'AudioFileName' in params ? params.AudioFileName : null;
         this.FileId = 'FileId' in params ? params.FileId : null;
+
+    }
+}
+
+/**
+ * PauseAutoCalloutTask response structure.
+ * @class
+ */
+class PauseAutoCalloutTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5598,6 +5761,12 @@ dify-inputs-xxx specifies the inputs variable for dify.
          */
         this.Variables = null;
 
+        /**
+         * Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports current parameter.
+         * @type {number || null}
+         */
+        this.MaxRingTimeoutSecond = null;
+
     }
 
     /**
@@ -5629,6 +5798,7 @@ dify-inputs-xxx specifies the inputs variable for dify.
                 this.Variables.push(obj);
             }
         }
+        this.MaxRingTimeoutSecond = 'MaxRingTimeoutSecond' in params ? params.MaxRingTimeoutSecond : null;
 
     }
 }
@@ -6750,25 +6920,25 @@ class DescribeSessionDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * App ID (required). can be used to view https://console.cloud.tencent.com/ccc.
+         * <p>App ID (required). can check https://console.cloud.tencent.com/ccc</p>.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Specifies the session id of the call.
+         * <P>Call session id</p>.
          * @type {string || null}
          */
         this.SessionId = null;
 
         /**
-         * Start timestamp. Unix second-level timestamp. supports up to nearly 180 days.
+         * <p>Start timestamp, Unix second-level timestamp, supports up to the last 180 days.</p>.
          * @type {number || null}
          */
         this.StartTimestamp = null;
 
         /**
-         * End timestamp, Unix second-level timestamp. the interval range between end time and start time is less than 90 days.
+         * <p>End timestamp, Unix second-level timestamp. the interval range between end time and start time is less than 90 days.</p>.
          * @type {number || null}
          */
         this.EndTimestamp = null;
@@ -7143,19 +7313,19 @@ class DescribeTelCallInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * Start timestamp, unix timestamp (query dimension supports only daily. for example, to query may 1st, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-01 23:59:59" timestamp. to query may 1st and may 2nd, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-02 23:59:59" timestamp).
+         * <p>Start timestamp, Unix timestamp (query dimension only supports day, for example, to query may 1, you should pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59" timestamp; to query may 1 and may 2, you should pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59" timestamp)</p>.
          * @type {number || null}
          */
         this.StartTimeStamp = null;
 
         /**
-         * End timestamp, unix timestamp, the query time range is up to 90 days (query dimension supports only daily. for example, to query may 1st, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-01 23:59:59" timestamp. to query may 1st and may 2nd, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-02 23:59:59" timestamp).
+         * <p>End timestamp, Unix timestamp. the maximum query time range is 90 days (query dimension only supports day, for example, to query may 1, you should pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59" timestamp; to query may 1 and may 2, you should pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59" timestamp).</p>.
          * @type {number || null}
          */
         this.EndTimeStamp = null;
 
         /**
-         * Application id list, when having multiple ids, the returned value is the sum of all the ids.
+         * <p>Application ID list. for multiple ids, the return value is the sum of multiple ids.</p>.
          * @type {Array.<number> || null}
          */
         this.SdkAppIdList = null;
@@ -8104,79 +8274,81 @@ class TelCdrInfo extends  AbstractModel {
         /**
          * EndStatus corresponds one-to-one with EndStatusString. the specific enumeration is as follows:.
 
-**Scenario**	EndStatus	EndStatusString	Status description.
+**Scenario**  **EndStatus**  **EndStatusString**  **status description**.
 
-Incoming & outgoing calls. 1. ok. normal call.
+Call in & out    1        ok                        **normal call**.
 
-IVR period user give up.
+Inbound call    102    ivrGiveUp    **user give up during IVR period**.
 
-**User give up while in queue**.
+Inbound call 103 waitingGiveUp **user give up in queue**.
 
-Inbound call 104 ringingGiveUp. specifies the user gives up during ringing.
+Inbound call 104 ringingGiveUp **user gives up during ring**.
 
-Inbound call 105. specifies no agent online.
+Inbound call	105	noSeatOnline	**no agent online**.
 
-Inbound call notWorkTime **off hours**.   
+Inbound call              106	       notWorkTime	       **off hours**.   
 
-IVR ends automatically (no manual intervention).
+Inbound call    107    ivrEnd    **IVR ends automatically (no manual intervention)**.
 
-Inbound call. 100. blocklist (system side).
+Inbound calls    100    blocklist (system side).
 
-restrictedCallee. specifies the global outbound call risk number interception (system side).
+Outgoing call              108        restrictedCallee        **global outbound call risk number blocklist (system side)**.
 
-Outbound call 109 tooManyRequest **outbound call frequency control interception (system side)**.
+Outgoing call     109        tooManyRequest    **outbound call frequency control block (system side)**.
 
-Outbound call 110 restrictedArea **block outgoing calls by region (system side)**.
+Outbound call  110  restrictedArea  **outgoing call region block (system side)**.
 
-restrictedTime. specifies the outbound call interception period on the system side.
+Outgoing call 111 restrictedTime **outbound call interception (system side)**.
                          
-202 notAnswer **callee unanswered**.
+Outgoing call             202            notAnswer	 **callee unanswered**.
 
-Outbound call 203 userReject **callee reject hangup**.
+Outgoing call            203	    userReject	**callee reject hangup**.
 
-Power off. **callee powered off**.
+Outgoing call    204    powerOff    **callee shutdown**.
 
-205            numberNotExist	**callee nonexistent number**.
+Outgoing call           205            numberNotExist	**called nonexistent number**.
 
-Busy. specifies the callee is busy.
+Outbound call    206    busy    **callee busy**.
 
-Outbound call 207 outOfCredit **callee in arrears**.
+Outbound call    207    outOfCredit    **callee in arrears**.
 
-208 operatorError indicates operator channel exception.
+208    operatorError    **operator channel exception**.
 
-Outgoing call caller cancellation.
+Outgoing call          209           callerCancel          **call cancellation by the caller**.
 
-Outgoing call	        210	           notInService	**callee out of service area**.
+Outgoing call 210 notInService **callee out of service area**.
 
-Phone call in/out 211 clientError **client error**.
+Phone call in & out 211 clientError **agent client error**.
 
-Outgoing call 212 carrierBlocked **carrier blocklist**.
+Outgoing call    212     carrierBlocked      **isp blocked**.
 
-Note: call reminder.
+Outgoing call 213 callReminder **note: call reminder**.
 
-Outbound call 215 numberInvalid **called number is invalid**.
+Outbound call 215 numberInvalid **called number invalid**.
 
-Outbound call 216 callRestricted. note: call restricted.
+Outgoing call 216 callRestricted **note: call restricted**.
 
-Callee restricted by blocklist.
+Outgoing call 217 calleeRestricted **callee blocklist restricted**.
 
-Outbound call 218 areaRestricted. **callee area restricted**.
+Outbound call 218 areaRestricted **callee area restricted**.
 
-Prompt call forwarding.
+Outbound call    219     promptCallForwarding      **note call transfer**.
 
-Caller cancellation during ringing.
+Outbound call 220 callerCancelWhileRing **caller cancellation while ringing**.
 
-Caller cancel without ring.
+Outgoing call 221 callerCancelWithoutRing **called number anomaly without ring**.
 
-Audio dial-in 501 call conflict **VoIP user call termination**.
+Outgoing call  222  voiceMailReached  **voice mail hangup**.
 
-VoIP user client timeout.
+Audio inbound 501 callConflict **VoIP user call conflict termination**.
 
-Audio dial-in 503 VoIP user client error.
+Audio dial-in 502 clientTimeout **VoIP user client timeout**.
 
-Chinese version please go domestic site (https://cloud.tencent.com/document/product/679/123938).
+Audio inbound 503 voipClientError **VoIP client error**.
 
-English version please go international site (https://www.tencentcloud.com/document/product/1229/71847?lang=en).
+For chinese description, see [https://www.tencentcloud.com/zh/document/product/1229/71847](https://www.tencentcloud.com/zh/document/product/1229/71847).
+
+For english details, see [reference](https://www.tencentcloud.com/document/product/1229/71847?lang=en).
          * @type {number || null}
          */
         this.EndStatus = null;
@@ -8355,6 +8527,30 @@ No record (offline asr generation is not enabled or no package is available).
          */
         this.VoicemailAsrURL = null;
 
+        /**
+         * If it is a call related to intelligent agent, this is the intelligent agent ID.
+         * @type {number || null}
+         */
+        this.AIAgentId = null;
+
+        /**
+         * If it is a call related to intelligent agent, this is the intelligent agent name.
+         * @type {string || null}
+         */
+        this.AIAgentName = null;
+
+        /**
+         * Reasons for system hang-up after connection, enumeration class.
+         * @type {number || null}
+         */
+        this.SysHangupReason = null;
+
+        /**
+         * Reason for hang-up after connect, text description.
+         * @type {string || null}
+         */
+        this.SysHangupReasonString = null;
+
     }
 
     /**
@@ -8431,6 +8627,10 @@ No record (offline asr generation is not enabled or no package is available).
         this.QueuedSkillGroupName = 'QueuedSkillGroupName' in params ? params.QueuedSkillGroupName : null;
         this.VoicemailRecordURL = 'VoicemailRecordURL' in params ? params.VoicemailRecordURL : null;
         this.VoicemailAsrURL = 'VoicemailAsrURL' in params ? params.VoicemailAsrURL : null;
+        this.AIAgentId = 'AIAgentId' in params ? params.AIAgentId : null;
+        this.AIAgentName = 'AIAgentName' in params ? params.AIAgentName : null;
+        this.SysHangupReason = 'SysHangupReason' in params ? params.SysHangupReason : null;
+        this.SysHangupReasonString = 'SysHangupReasonString' in params ? params.SysHangupReasonString : null;
 
     }
 }
@@ -8690,6 +8890,41 @@ class UnbindStaffSkillGroupListResponse extends  AbstractModel {
 }
 
 /**
+ * ResumeAutoCalloutTask request structure.
+ * @class
+ */
+class ResumeAutoCalloutTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * App ID (required). you can view it at https://console.cloud.tencent.com/ccc.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
  * ControlAIConversation request structure.
  * @class
  */
@@ -8885,16 +9120,16 @@ class BindStaffSkillGroupListRequest extends  AbstractModel {
         this.StaffEmail = null;
 
         /**
-         * Bound skill group list.
-         * @type {Array.<number> || null}
-         */
-        this.SkillGroupList = null;
-
-        /**
          * Bound skill group list (required).
          * @type {Array.<StaffSkillGroupList> || null}
          */
         this.StaffSkillGroupList = null;
+
+        /**
+         * Bound skill group list.
+         * @type {Array.<number> || null}
+         */
+        this.SkillGroupList = null;
 
     }
 
@@ -8907,7 +9142,6 @@ class BindStaffSkillGroupListRequest extends  AbstractModel {
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.StaffEmail = 'StaffEmail' in params ? params.StaffEmail : null;
-        this.SkillGroupList = 'SkillGroupList' in params ? params.SkillGroupList : null;
 
         if (params.StaffSkillGroupList) {
             this.StaffSkillGroupList = new Array();
@@ -8917,6 +9151,7 @@ class BindStaffSkillGroupListRequest extends  AbstractModel {
                 this.StaffSkillGroupList.push(obj);
             }
         }
+        this.SkillGroupList = 'SkillGroupList' in params ? params.SkillGroupList : null;
 
     }
 }
@@ -10141,6 +10376,55 @@ class DescribeAutoCalloutTasksRequest extends  AbstractModel {
 }
 
 /**
+ * PlaySoundCall request structure.
+ * @class
+ */
+class PlaySoundCallRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * App ID (required). you can view it at https://console.cloud.tencent.com/ccc.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Session ID.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Audio file ID. please refer to the management console - telephone customer service - audio file management.
+         * @type {number || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Number of playbacks. default 1.
+         * @type {number || null}
+         */
+        this.PlayTimes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.PlayTimes = 'PlayTimes' in params ? params.PlayTimes : null;
+
+    }
+}
+
+/**
  * DescribeTelSession response structure.
  * @class
  */
@@ -10337,10 +10621,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IvrId = null;
 
         /**
-         * Task status: 0 - initial, 1 - running, 2 - completed, 3 - ending, 4 - terminated.
+         * Task status 0 initial 1 running 2 completed 3 ending 4 terminated 5 suspended.
          * @type {number || null}
          */
         this.State = null;
+
+        /**
+         * Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports this parameter.
+         * @type {number || null}
+         */
+        this.MaxRingTimeoutSecond = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -10373,6 +10663,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.IvrId = 'IvrId' in params ? params.IvrId : null;
         this.State = 'State' in params ? params.State : null;
+        this.MaxRingTimeoutSecond = 'MaxRingTimeoutSecond' in params ? params.MaxRingTimeoutSecond : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10415,6 +10706,34 @@ class DescribeStaffStatusMetricsResponse extends  AbstractModel {
                 obj.deserialize(params.Metrics[z]);
                 this.Metrics.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ResumeAutoCalloutTask response structure.
+ * @class
+ */
+class ResumeAutoCalloutTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -10485,7 +10804,7 @@ class CreateCallOutSessionRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Customer service user ID, generally the customer service email. ensure that the mobile number has been bound. https://intl.cloud.tencent.com/document/product/679/76067?from_cn_redirect=1#.E6.AD.A5.E9.AA.A42.EF.BC.9A.E5.AE.8C.E5.96.84.E8.B4.A6.E5.8F.B7.E4.BF.A1.E6.81.AF.
+         * Agent email, underwrite the mobile number has been bound. https://www.tencentcloud.comom/document/product/679/76067?from_cn_redirect=1#.E6.AD.A5.E9.AA.A42.EF.BC.9A.E5.AE.8C.E5.96.84.E8.B4.A6.E5.8F.B7.E4.BF.A1.E6.81.AF.
          * @type {string || null}
          */
         this.UserId = null;
@@ -11128,6 +11447,7 @@ module.exports = {
     AbortAgentCruiseDialingCampaignResponse: AbortAgentCruiseDialingCampaignResponse,
     DescribeSessionDetailResponse: DescribeSessionDetailResponse,
     ServeParticipant: ServeParticipant,
+    PlaySoundCallResponse: PlaySoundCallResponse,
     AICallExtractResultElement: AICallExtractResultElement,
     DescribeTelCallInfoResponse: DescribeTelCallInfoResponse,
     DescribeExtensionsResponse: DescribeExtensionsResponse,
@@ -11161,6 +11481,7 @@ module.exports = {
     CreateCCCSkillGroupRequest: CreateCCCSkillGroupRequest,
     DescribePredictiveDialingSessionsResponse: DescribePredictiveDialingSessionsResponse,
     DeleteCCCSkillGroupRequest: DeleteCCCSkillGroupRequest,
+    PauseAutoCalloutTaskRequest: PauseAutoCalloutTaskRequest,
     BindNumberCallInInterfaceRequest: BindNumberCallInInterfaceRequest,
     DescribeTelSessionRequest: DescribeTelSessionRequest,
     ModifyOwnNumberApplyRequest: ModifyOwnNumberApplyRequest,
@@ -11181,6 +11502,7 @@ module.exports = {
     DescribeStaffInfoListRequest: DescribeStaffInfoListRequest,
     AutoCalloutTaskInfo: AutoCalloutTaskInfo,
     DescribeIvrAudioListRequest: DescribeIvrAudioListRequest,
+    PauseAutoCalloutTaskResponse: PauseAutoCalloutTaskResponse,
     BindNumberCallInInterfaceResponse: BindNumberCallInInterfaceResponse,
     ForceMemberOfflineRequest: ForceMemberOfflineRequest,
     SkillGroupInfoItem: SkillGroupInfoItem,
@@ -11244,6 +11566,7 @@ module.exports = {
     DescribeAIAnalysisResultRequest: DescribeAIAnalysisResultRequest,
     DescribeCCCBuyInfoListResponse: DescribeCCCBuyInfoListResponse,
     UnbindStaffSkillGroupListResponse: UnbindStaffSkillGroupListResponse,
+    ResumeAutoCalloutTaskRequest: ResumeAutoCalloutTaskRequest,
     ControlAIConversationRequest: ControlAIConversationRequest,
     UploadAudioInfo: UploadAudioInfo,
     DescribeStaffStatusHistoryResponse: DescribeStaffStatusHistoryResponse,
@@ -11274,11 +11597,13 @@ module.exports = {
     StaffStatus: StaffStatus,
     AIAnalysisResult: AIAnalysisResult,
     DescribeAutoCalloutTasksRequest: DescribeAutoCalloutTasksRequest,
+    PlaySoundCallRequest: PlaySoundCallRequest,
     DescribeTelSessionResponse: DescribeTelSessionResponse,
     SetStaffStatusRspItem: SetStaffStatusRspItem,
     CreateAdminURLRequest: CreateAdminURLRequest,
     DescribeAutoCalloutTaskResponse: DescribeAutoCalloutTaskResponse,
     DescribeStaffStatusMetricsResponse: DescribeStaffStatusMetricsResponse,
+    ResumeAutoCalloutTaskResponse: ResumeAutoCalloutTaskResponse,
     AudioFileInfo: AudioFileInfo,
     CreateCallOutSessionRequest: CreateCallOutSessionRequest,
     BindStaffSkillGroupListResponse: BindStaffSkillGroupListResponse,

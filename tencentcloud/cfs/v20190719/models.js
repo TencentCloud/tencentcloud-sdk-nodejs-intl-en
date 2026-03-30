@@ -759,7 +759,7 @@ class FileSystemClient extends  AbstractModel {
         this.VpcId = null;
 
         /**
-         * Availability zone name, such as ap-beijing-1. see the region and availability zone list in the description document (https://www.tencentcloud.comom/document/api/582/38144?from_cn_redirect=1).
+         * Availability zone name, such as ap-beijing-1. see the region and availability zone list in the description document (https://www.tencentcloud.com/document/api/582/38144?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Zone = null;
@@ -1930,7 +1930,7 @@ class DescribeAvailableZoneInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * Information such as resource availability in each AZ and the supported storage classes and protocols
+         * <p>Resource sale status in each availability zone as well as supported storage types, storage protocol, etc.</p>
          * @type {Array.<AvailableRegion> || null}
          */
         this.RegionZones = null;
@@ -3031,22 +3031,28 @@ class AvailableType extends  AbstractModel {
         super();
 
         /**
-         * Protocol and sale details
+         * <p>Protocol and sale details</p>
          * @type {Array.<AvailableProtoStatus> || null}
          */
         this.Protocols = null;
 
         /**
-         * Storage type. the return value SD indicates general standard storage, HP indicates general performance storage, TB indicates Turbo standard, and TP indicates high-performance Turbo.
+         * <p>Storage type. In the return value, SD indicates General Standard Storage, HP indicates General Performance Storage, TB indicates Standard Turbo, and TP indicates High-Performance Turbo.</p>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Indicates whether prepaid is supported. `true`: yes; `false`: no
+         * <p>Support for prepaid. In the return value, true means supported and false means unsupported.</p>
          * @type {boolean || null}
          */
         this.Prepayment = null;
+
+        /**
+         * <p>File system version</p><p>Enumeration value:</p><ul><li>v1.5: Universal Series</li><li>v3.1: Universal Series (enhanced)</li><li>v4.0: Turbo series</li></ul>
+         * @type {string || null}
+         */
+        this.Version = null;
 
     }
 
@@ -3068,6 +3074,7 @@ class AvailableType extends  AbstractModel {
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.Prepayment = 'Prepayment' in params ? params.Prepayment : null;
+        this.Version = 'Version' in params ? params.Version : null;
 
     }
 }
@@ -4323,14 +4330,14 @@ class DeleteCfsSnapshotRequest extends  AbstractModel {
         super();
 
         /**
-         * Snapshot ID, which can be obtained by querying through the [DescribeCfsSnapshots](https://www.tencentcloud.comom/document/api/582/80206?from_cn_redirect=1) api.
+         * Snapshot ID, which can be obtained by querying through the [DescribeCfsSnapshots](https://www.tencentcloud.com/document/api/582/80206?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.SnapshotId = null;
 
         /**
          * Snapshot ID of the file system snapshot that needs to be deleted. specify either the snapshot ID or the ID list, at least one is required.
-Snapshot ID, which can be obtained by querying through the [DescribeCfsSnapshots](https://www.tencentcloud.comom/document/api/582/80206?from_cn_redirect=1) api.
+Snapshot ID, which can be obtained by querying through the [DescribeCfsSnapshots](https://www.tencentcloud.com/document/api/582/80206?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.SnapshotIds = null;

@@ -793,13 +793,13 @@ class CheckRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Event Information
          * @type {string || null}
          */
         this.Event = null;
 
         /**
-         * 
+         * EventPattern Information
          * @type {string || null}
          */
         this.EventPattern = null;

@@ -718,7 +718,7 @@ For more information on `KMSRegion`, see [Enabling TDE](https://intl.cloud.tence
         this.KMSRegion = null;
 
         /**
-         * 
+         * <p>For clusters that specify the KMS service, if KMSClusterId is empty, the default cluster's KMS is used. If you choose to specify a KMS cluster, you need to provide KMSClusterId. For details about KMSClusterId, see Enabling Transparent Data Encryption.</p>
          * @type {string || null}
          */
         this.KMSClusterId = null;
@@ -3642,7 +3642,7 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
         this.InstanceType = null;
 
         /**
-         * 
+         * <p>DB engine, default is postgresql, supports the following:<br>postgresql (TencentDB for PostgreSQL)<br>mssql_compatible (MSSQL-compatible - TencentDB for PostgreSQL)</p>
          * @type {string || null}
          */
         this.DBEngine = null;
@@ -9223,7 +9223,7 @@ Default value: `0`.
         this.DBVersion = null;
 
         /**
-         * 
+         * <p>Dedicated Cluster ID</p>
          * @type {string || null}
          */
         this.DedicatedClusterId = null;

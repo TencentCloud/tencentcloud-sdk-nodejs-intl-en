@@ -7621,13 +7621,13 @@ class DescribeUpdatableDataEnginesRequest extends  AbstractModel {
         this.DataEngineConfigCommand = null;
 
         /**
-         * 
+         * Whether to use managed storage as result storage
          * @type {boolean || null}
          */
         this.UseLakeFs = null;
 
         /**
-         * 
+         * User-defined Result Storage Path
          * @type {string || null}
          */
         this.CustomResultPath = null;
@@ -9535,13 +9535,13 @@ class DescribeDataEngineImageVersionsRequest extends  AbstractModel {
         this.EngineType = null;
 
         /**
-         * 
+         * Sort field: InsertTime (Insertion time, default), UpdateTime (Update time)
          * @type {string || null}
          */
         this.Sort = null;
 
         /**
-         * 
+         * Sort order: false (descending, default), true (ascending)
          * @type {boolean || null}
          */
         this.Asc = null;

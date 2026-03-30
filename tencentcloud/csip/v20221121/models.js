@@ -1016,7 +1016,7 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.PrivateIp = null;
 
         /**
-         * 
+         * vpc id
          * @type {string || null}
          */
         this.VpcId = null;
@@ -2323,7 +2323,7 @@ class AssetBaseInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * vpc-id
          * @type {string || null}
          */
         this.VpcId = null;
@@ -2740,7 +2740,7 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * 
+ * Group Account Member Details
  * @class
  */
 class OrganizationUserInfo extends  AbstractModel {
@@ -2748,121 +2748,124 @@ class OrganizationUserInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Member account Uin
          * @type {string || null}
          */
         this.Uin = null;
 
         /**
-         * 
+         * Member account name
          * @type {string || null}
          */
         this.NickName = null;
 
         /**
-         * 
+         * Department node name, department of account
          * @type {string || null}
          */
         this.NodeName = null;
 
         /**
-         * 
+         * Asset Quantity
          * @type {number || null}
          */
         this.AssetCount = null;
 
         /**
-         * 
+         * Risk Quantity
          * @type {number || null}
          */
         this.RiskCount = null;
 
         /**
-         * 
+         * Attack Quantity
          * @type {number || null}
          */
         this.AttackCount = null;
 
         /**
-         * 
+         * Member/Admin/;Member or Administrator
          * @type {string || null}
          */
         this.Role = null;
 
         /**
-         * 
+         * Member account id
          * @type {string || null}
          */
         this.MemberId = null;
 
         /**
-         * 
+         * Member account Appid
          * @type {string || null}
          */
         this.AppId = null;
 
         /**
-         * 
+         * account joining method,create/invite
          * @type {string || null}
          */
         this.JoinType = null;
 
         /**
-         * 
+         * If empty, it is not enabled; otherwise, different strings correspond to different versions, with 'common' being general and not version-specific.
          * @type {string || null}
          */
         this.CFWProtect = null;
 
         /**
-         * 
+         * If empty, it is not enabled; otherwise, different strings correspond to different versions, with 'common' being general and not version-specific.
          * @type {string || null}
          */
         this.WAFProtect = null;
 
         /**
-         * 
+         * If empty, it is not enabled; otherwise, different strings correspond to different versions, with 'common' being general and not version-specific.
          * @type {string || null}
          */
         this.CWPProtect = null;
 
         /**
-         * 
+         * 1 enable, 0 not enabled
          * @type {number || null}
          */
         this.Enable = null;
 
         /**
-         * 
+         * "Free"      
+   //Free edition
+   "Advanced"   //Advanced edition "Enterprise" //Enterprise edition "Ultimate"  
+   //Ultimate edition
          * @type {string || null}
          */
         this.CSIPProtect = null;
 
         /**
-         * 
+         * 1 indicates the quota consumer
          * @type {number || null}
          */
         this.QuotaConsumer = null;
 
         /**
-         * 
+         * Account type: 0 for Tencent Cloud account, 1 for AWS account
          * @type {number || null}
          */
         this.CloudType = null;
 
         /**
-         * 
+         * 0 indicates the default value; 1 indicates 10 minutes; 2 indicates 1 hour; 3 indicates 24 hours
          * @type {number || null}
          */
         this.SyncFrequency = null;
 
         /**
-         * 
+         * Whether the multi-cloud account has expired
          * @type {boolean || null}
          */
         this.IsExpired = null;
 
         /**
-         * 
+         * Multi-cloud account permissions list
          * @type {Array.<string> || null}
          */
         this.PermissionList = null;
@@ -2874,19 +2877,21 @@ class OrganizationUserInfo extends  AbstractModel {
         this.AuthType = null;
 
         /**
-         * 
+         * 0 Tencent Cloud group account
+1 Tencent Cloud access account
+2 non-Tencent Cloud
          * @type {number || null}
          */
         this.TcMemberType = null;
 
         /**
-         * 
+         * Sub-account count
          * @type {number || null}
          */
         this.SubUserCount = null;
 
         /**
-         * 
+         * Joining method details
          * @type {string || null}
          */
         this.JoinTypeInfo = null;
@@ -3111,7 +3116,7 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.PublicIpType = null;
 
         /**
-         * 
+         * vpc
          * @type {string || null}
          */
         this.VpcId = null;
@@ -6021,7 +6026,7 @@ Configuration risk.
 }
 
 /**
- * 
+ * Group account details
  * @class
  */
 class OrganizationInfo extends  AbstractModel {
@@ -6029,133 +6034,133 @@ class OrganizationInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Member account name
          * @type {string || null}
          */
         this.NickName = null;
 
         /**
-         * 
+         * Department node name, department of account
          * @type {string || null}
          */
         this.NodeName = null;
 
         /**
-         * 
+         * Member/Admin/DelegatedAdmin/EntityAdmin; Member/Admin/DelegatedAdmin/EntityAdmin
          * @type {string || null}
          */
         this.Role = null;
 
         /**
-         * 
+         * Member account id
          * @type {string || null}
          */
         this.MemberId = null;
 
         /**
-         * 
+         * account joining method,create/invite
          * @type {string || null}
          */
         this.JoinType = null;
 
         /**
-         * 
+         * Group name
          * @type {string || null}
          */
         this.GroupName = null;
 
         /**
-         * 
+         * Admin account name
          * @type {string || null}
          */
         this.AdminName = null;
 
         /**
-         * 
+         * Admin Uin
          * @type {string || null}
          */
         this.AdminUin = null;
 
         /**
-         * 
+         * Creation Time
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 
+         * Number of departments
          * @type {number || null}
          */
         this.NodeCount = null;
 
         /**
-         * 
+         * Number of members
          * @type {number || null}
          */
         this.MemberCount = null;
 
         /**
-         * 
+         * Sub-account count
          * @type {number || null}
          */
         this.SubAccountCount = null;
 
         /**
-         * 
+         * Abnormal sub-account quantity
          * @type {number || null}
          */
         this.AbnormalSubUserCount = null;
 
         /**
-         * 
+         * Organization Relationship Policy Permissions
          * @type {Array.<string> || null}
          */
         this.GroupPermission = null;
 
         /**
-         * 
+         * Membership Policy Permissions
          * @type {Array.<string> || null}
          */
         this.MemberPermission = null;
 
         /**
-         * 
+         * Organization Billing Mode; 0/Self-paid, 1/Proxy-paid
          * @type {number || null}
          */
         this.GroupPayMode = null;
 
         /**
-         * 
+         * Personal Billing Mode; 0/Self-paid, 1/Proxy-paid
          * @type {number || null}
          */
         this.MemberPayMode = null;
 
         /**
-         * 
+         * If empty, it is not enabled; otherwise, different strings correspond to different versions, with 'common' being general and not version-specific.
          * @type {string || null}
          */
         this.CFWProtect = null;
 
         /**
-         * 
+         * If empty, it is not enabled; otherwise, different strings correspond to different versions, with 'common' being general and not version-specific.
          * @type {string || null}
          */
         this.WAFProtect = null;
 
         /**
-         * 
+         * If empty, it is not enabled; otherwise, different strings correspond to different versions, with 'common' being general and not version-specific.
          * @type {string || null}
          */
         this.CWPProtect = null;
 
         /**
-         * 
+         * Array of all departments
          * @type {Array.<string> || null}
          */
         this.Departments = null;
 
         /**
-         * 
+         * Member Creation Time
          * @type {string || null}
          */
         this.MemberCreateTime = null;
@@ -6167,25 +6172,25 @@ class OrganizationInfo extends  AbstractModel {
         this.CSIPProtect = null;
 
         /**
-         * 
+         * 1 indicates the quota consumer
          * @type {number || null}
          */
         this.QuotaConsumer = null;
 
         /**
-         * 
+         * Number of enabled Admin/Delegated Admin accounts
          * @type {number || null}
          */
         this.EnableAdminCount = null;
 
         /**
-         * 
+         * Multi-cloud account statistics in array format. Refer to the CloudCountDesc description for details.
          * @type {Array.<CloudCountDesc> || null}
          */
         this.CloudCountDesc = null;
 
         /**
-         * 
+         * Total Number of Admin/Delegated Admin Accounts
          * @type {number || null}
          */
         this.AdminCount = null;
@@ -7346,7 +7351,7 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.Region = null;
 
         /**
-         * 
+         * vpc information
          * @type {string || null}
          */
         this.VpcId = null;
@@ -8587,7 +8592,7 @@ Under analysis.
 }
 
 /**
- * 
+ * Multi-cloud account statistics
  * @class
  */
 class CloudCountDesc extends  AbstractModel {
@@ -8595,19 +8600,20 @@ class CloudCountDesc extends  AbstractModel {
         super();
 
         /**
-         * 
+         * 0 represents Tencent Cloud
+1 represents AWS
          * @type {number || null}
          */
         this.CloudType = null;
 
         /**
-         * 
+         * Account quantity
          * @type {number || null}
          */
         this.CloudCount = null;
 
         /**
-         * 
+         * The cloud account type description
          * @type {string || null}
          */
         this.CloudDesc = null;
@@ -13039,7 +13045,7 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * 
+ * Sub-account details
  * @class
  */
 class SubUserInfo extends  AbstractModel {
@@ -13047,109 +13053,109 @@ class SubUserInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Primary key ID, which has no business meaning and serves solely as a unique identifier
          * @type {number || null}
          */
         this.ID = null;
 
         /**
-         * 
+         * sub-account Appid
          * @type {string || null}
          */
         this.AppID = null;
 
         /**
-         * 
+         * sub-account UIn
          * @type {string || null}
          */
         this.Uin = null;
 
         /**
-         * 
+         * Sub-account name
          * @type {string || null}
          */
         this.NickName = null;
 
         /**
-         * 
+         * master account Appid
          * @type {string || null}
          */
         this.OwnerAppID = null;
 
         /**
-         * 
+         * master account Uin
          * @type {string || null}
          */
         this.OwnerUin = null;
 
         /**
-         * 
+         * master account name
          * @type {string || null}
          */
         this.OwnerNickName = null;
 
         /**
-         * 
+         * master account's memberId information
          * @type {string || null}
          */
         this.OwnerMemberID = null;
 
         /**
-         * 
+         * Account type: 0 for Tencent Cloud account, 1 for AWS account
          * @type {number || null}
          */
         this.CloudType = null;
 
         /**
-         * 
+         * Accessible services count
          * @type {number || null}
          */
         this.ServiceCount = null;
 
         /**
-         * 
+         * Accessible API count
          * @type {number || null}
          */
         this.InterfaceCount = null;
 
         /**
-         * 
+         * Accessible resources count
          * @type {number || null}
          */
         this.AssetCount = null;
 
         /**
-         * 
+         * Access/Behavior Logs Count
          * @type {number || null}
          */
         this.LogCount = null;
 
         /**
-         * 
+         * Permissions configuration risk
          * @type {number || null}
          */
         this.ConfigRiskCount = null;
 
         /**
-         * 
+         * Dangerous behavior alarm
          * @type {number || null}
          */
         this.ActionRiskCount = null;
 
         /**
-         * 
+         * whether to enable CloudAudit logs
          * @type {boolean || null}
          */
         this.IsAccessCloudAudit = null;
 
         /**
-         * 
+         * whether risk configuration security assessment
          * @type {boolean || null}
          */
         this.IsAccessCheck = null;
 
         /**
-         * 
+         * whether to configure user behavior management policies
          * @type {boolean || null}
          */
         this.IsAccessUeba = null;
@@ -14589,7 +14595,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CWPBlProcess = null;
 
         /**
-         * 
+         * Exception status codes
          * @type {number || null}
          */
         this.ErrorCode = null;

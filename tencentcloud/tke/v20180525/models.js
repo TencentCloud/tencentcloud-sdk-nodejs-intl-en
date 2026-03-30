@@ -8608,7 +8608,7 @@ class EdgeCluster extends  AbstractModel {
         this.ServiceCIDR = null;
 
         /**
-         * 
+         * k8s version number
          * @type {string || null}
          */
         this.K8SVersion = null;
@@ -9824,7 +9824,7 @@ class NodePool extends  AbstractModel {
         this.NodeCountSummary = null;
 
         /**
-         * 
+         * Status information
          * @type {string || null}
          */
         this.AutoscalingGroupStatus = null;
@@ -13546,7 +13546,7 @@ class CreateTKEEdgeClusterRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * k8s version number
          * @type {string || null}
          */
         this.K8SVersion = null;

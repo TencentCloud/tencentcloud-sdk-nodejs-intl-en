@@ -2514,7 +2514,7 @@ class EnterRescueModeRequest extends  AbstractModel {
         this.ForceStop = null;
 
         /**
-         * 
+         * The shutdown mode of the instance. Valid values: <br><li>SOFT_FIRST: Indicates a forced shutdown after a graceful shutdown fails</li><br><li>HARD: Direct forced shutdown</li><br><li>SOFT: Soft shutdown only</li><br>Default value: SOFT.
          * @type {string || null}
          */
         this.StopType = null;
@@ -3798,7 +3798,7 @@ class ConfigureChcDeployVpcRequest extends  AbstractModel {
         this.DeploySecurityGroupIds = null;
 
         /**
-         * 
+         * dhcp option parameters required for deployment
          * @type {ChcDeployExtraConfig || null}
          */
         this.ChcDeployExtraConfig = null;
@@ -4231,7 +4231,7 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.CpuTopology = null;
 
         /**
-         * 
+         * Instance launch template.
          * @type {LaunchTemplate || null}
          */
         this.LaunchTemplate = null;
@@ -4525,25 +4525,25 @@ class ChcDeployExtraConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * MinIO type: whether to use Tencent Cloud's minios or the customer's own minios.
          * @type {string || null}
          */
         this.MiniOsType = null;
 
         /**
-         * 
+         * Server architecture and boot mode. Value: x86_legacy, arm_uefi.
          * @type {string || null}
          */
         this.BootType = null;
 
         /**
-         * 
+         * The boot file used by PXE. Default: pxelinux.0.
          * @type {string || null}
          */
         this.BootFile = null;
 
         /**
-         * 
+         * tftp server ip address.
          * @type {string || null}
          */
         this.NextServerAddress = null;
@@ -4683,7 +4683,7 @@ class CreateDisasterRecoverGroupRequest extends  AbstractModel {
         this.ClientToken = null;
 
         /**
-         * 
+         * The affinity of the placement group. Instances in the placement group are distributed according to this affinity. The affinity value range is: 1-10, and defaults to 1.
          * @type {number || null}
          */
         this.Affinity = null;
@@ -6486,7 +6486,7 @@ If the dry run succeeds, the RequestId will be returned.
         this.DisableApiTermination = null;
 
         /**
-         * 
+         * Whether jumbo frames are enabled for the instance. Valid values: <br><li/> true: Jumbo frames are enabled. Only instance types that support jumbo frames can be set to true.<br><li/>false: Jumbo frames are disabled. Only instance types that support jumbo frames can be set to false.<br> Supported instance types: [Instance Types](https://cloud.tencent.com/document/product/213/11518)
          * @type {boolean || null}
          */
         this.EnableJumboFrame = null;
@@ -7257,7 +7257,7 @@ false (default): sends a normal request. after passing the check, creates an ins
         this.DisableApiTermination = null;
 
         /**
-         * 
+         * Whether jumbo frames are enabled for the instance. Valid values: <br><li/> true: Jumbo frames are enabled. Only instance types that support jumbo frames can be set to true.<br><li/>false: Jumbo frames are disabled. Only instance types that support jumbo frames can be set to false.<br> Supported instance types: [Instance Types](https://cloud.tencent.com/document/product/213/11518)
          * @type {boolean || null}
          */
         this.EnableJumboFrame = null;
@@ -7495,7 +7495,7 @@ class InquiryPriceResetInstanceRequest extends  AbstractModel {
         this.EnhancedService = null;
 
         /**
-         * 
+         * User data provided for the instance, which must be base64-encoded. The maximum supported data size is 16KB. For detailed instructions on obtaining this parameter, see [Windows](https://cloud.tencent.com/document/product/213/17526) and [Linux](https://cloud.tencent.com/document/product/213/17525) documentation on executing commands during startup.
          * @type {string || null}
          */
         this.UserData = null;
@@ -7928,7 +7928,7 @@ class ConfigureChcAssistVpcRequest extends  AbstractModel {
         this.DeploySecurityGroupIds = null;
 
         /**
-         * 
+         * Additional parameters for deployment network, used to specify minios type, bios boot mode, etc.
          * @type {ChcDeployExtraConfig || null}
          */
         this.ChcDeployExtraConfig = null;
@@ -9592,7 +9592,7 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.Remark = null;
 
         /**
-         * 
+         * The number of physical GPU cards mapped to the instance model, unit: card. For vGPU configurations, the value is less than 1; for passthrough configurations, the value is greater than or equal to 1. vGPU utilizes slicing virtualization technology to partition physical GPU cards, allowing a single GPU card to be allocated to multiple instances after virtualization. Passthrough configurations directly mount GPU devices to instances.
          * @type {number || null}
          */
         this.GpuCount = null;
@@ -11107,7 +11107,7 @@ Note: This field may return null, indicating that no valid value is found.
         this.CreateTime = null;
 
         /**
-         * 
+         * placement group affinity
          * @type {number || null}
          */
         this.Affinity = null;
@@ -12508,7 +12508,7 @@ Note: The static single-line IP is only supported in some regions.
 
 <Li>WanIP: specifies the public ip address.</li>.
 <Li>HighQualityEIP: specifies a high quality ip. high quality ip is only supported in Singapore and hong kong (china).</li>.
-<li> AntiDDoSEIP: specifies the anti-ddos eip. only partial regions support anti-ddos eip. details visible in the [elastic IP product overview](https://www.tencentcloud.comom/document/product/1199/41646?from_cn_redirect=1).</li>.
+<li> AntiDDoSEIP: specifies the anti-ddos eip. only partial regions support anti-ddos eip. details visible in the [elastic IP product overview](https://www.tencentcloud.com/document/product/1199/41646?from_cn_redirect=1).</li>.
 If needed, assign a public IPv4 address to the resource by specifying the IPv4 address type.
 
 This feature is in beta test in selected regions. submit a ticket for consultation (https://console.cloud.tencent.com/workorder/category) if needed.

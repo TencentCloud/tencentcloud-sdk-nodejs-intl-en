@@ -262,31 +262,31 @@ class DescribeInstanceOperationsRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Cluster ID
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 
+         * Pagination parameter, offset, starting from 0
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 
+         * Pagination parameter, page size, default 10
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 
+         * Start Time
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 
+         * End Time
          * @type {string || null}
          */
         this.EndTime = null;
@@ -3108,7 +3108,7 @@ class UpdateTableSchemaRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * catalog Level Permission
  * @class
  */
 class CatalogPermission extends  AbstractModel {
@@ -3116,13 +3116,13 @@ class CatalogPermission extends  AbstractModel {
         super();
 
         /**
-         * 
+         * catalog Name
          * @type {string || null}
          */
         this.CatalogName = null;
 
         /**
-         * 
+         * catalog permission
          * @type {Array.<string> || null}
          */
         this.Permissions = null;

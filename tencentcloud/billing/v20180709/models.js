@@ -1950,6 +1950,51 @@ Example value: [].
 }
 
 /**
+ * Operate related resources return detail
+ * @class
+ */
+class OperateRsp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Operation failure code at the instance dimension
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * Failure reason for operating related resources
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Instance ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeAllocationRuleDetail request structure.
  * @class
  */
@@ -2071,6 +2116,125 @@ class DescribeAllocationUnitDetailResponse extends  AbstractModel {
         this.TreeNodeUniqKey = 'TreeNodeUniqKey' in params ? params.TreeNodeUniqKey : null;
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Resource instance information
+ * @class
+ */
+class RenewInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Product code
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * Subproduct code
+         * @type {string || null}
+         */
+        this.SubProductCode = null;
+
+        /**
+         * Region encoding
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+        /**
+         * Instance status:
+NORMAL
+ISOLATED Isolated
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Renewal flag:
+NOTIFY_AND_MANUAL_RENEW: manual renewal
+NOTIFY_AND_AUTO_RENEW: auto-renewal.
+DISABLE_NOTIFY_AND_MANUAL_RENEW: non-renewal upon expiration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * Instance expiration time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Instance alias: The name set by the user for the instance in the console, which is empty by default if not set.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Product name: Cloud products purchased by users, such as Cloud Virtual Machine (CVM)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * Project name: Instance Ownership of the project. User can autonomously assign project to the instance on the console. Default project if not allocated.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * Automatic renewal cycle length
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RenewPeriod = null;
+
+        /**
+         * Automatic renewal cycle unit: y year, m month
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RenewPeriodUnit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.SubProductCode = 'SubProductCode' in params ? params.SubProductCode : null;
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.RenewPeriod = 'RenewPeriod' in params ? params.RenewPeriod : null;
+        this.RenewPeriodUnit = 'RenewPeriodUnit' in params ? params.RenewPeriodUnit : null;
 
     }
 }
@@ -3598,6 +3762,77 @@ class DescribeCostSummaryByRegionRequest extends  AbstractModel {
 }
 
 /**
+ * SetRenewal request structure.
+ * @class
+ */
+class SetRenewalRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Product code.
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * Region code.
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+        /**
+         * Instance ID. Only one can be specified.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Renewal flag. Enumeration values are as follows:
+NOTIFY_AND_MANUAL_RENEW: manual renewal.
+NOTIFY_AND_AUTO_RENEW: automatic renewal.
+DISABLE_NOTIFY_AND_MANUAL_RENEW: non-renewal upon expiration.
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * Automatic renewal cycle length. If left empty, the default value set by product is used.
+If it is month, support: 1-11
+If it is year, support: 1-5.
+Supported range mainly depends on the product side.
+         * @type {string || null}
+         */
+        this.RenewPeriod = null;
+
+        /**
+         * Automatic renewal cycle unit. If left empty, the default value set by the product is used.
+Year y, month m
+Supported range mainly depends on the product side.
+         * @type {string || null}
+         */
+        this.RenewPeriodUnit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.RenewPeriod = 'RenewPeriod' in params ? params.RenewPeriod : null;
+        this.RenewPeriodUnit = 'RenewPeriodUnit' in params ? params.RenewPeriodUnit : null;
+
+    }
+}
+
+/**
  * Consumption cost trend
  * @class
  */
@@ -4854,6 +5089,81 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeRenewInstances request structure.
+ * @class
+ */
+class DescribeRenewInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Maximum number of instances per page. Value range: 1-100.
+         * @type {number || null}
+         */
+        this.MaxResults = null;
+
+        /**
+         * Token for querying the next page of returned results. NextToken is not needed when calling the API for the first time.
+         * @type {string || null}
+         */
+        this.NextToken = null;
+
+        /**
+         * Get the sorting order of the instance. The enumerated values are as follows:
+false = Ascending (default)
+true=Descending
+         * @type {boolean || null}
+         */
+        this.Reverse = null;
+
+        /**
+         * Renewal flag. Multiple values separated by commas. Enumeration value as follows:
+NOTIFY_AND_MANUAL_RENEW: manual renewal.
+NOTIFY_AND_AUTO_RENEW: automatic renewal.
+DISABLE_NOTIFY_AND_MANUAL_RENEW: non-renewal upon expiration.
+         * @type {Array.<string> || null}
+         */
+        this.RenewFlagList = null;
+
+        /**
+         * Instance ID. Multiple IDs separated by commas, with a maximum of 100.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdList = null;
+
+        /**
+         * Expiry time start, format yyyy-MM-dd HH:mm:ss.
+         * @type {string || null}
+         */
+        this.ExpireTimeStart = null;
+
+        /**
+         * Expiry time in the format of yyyy-MM-dd HH:mm:ss.
+         * @type {string || null}
+         */
+        this.ExpireTimeEnd = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
+        this.Reverse = 'Reverse' in params ? params.Reverse : null;
+        this.RenewFlagList = 'RenewFlagList' in params ? params.RenewFlagList : null;
+        this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
+        this.ExpireTimeStart = 'ExpireTimeStart' in params ? params.ExpireTimeStart : null;
+        this.ExpireTimeEnd = 'ExpireTimeEnd' in params ? params.ExpireTimeEnd : null;
+
+    }
+}
+
+/**
  * PayDeals request structure.
  * @class
  */
@@ -6028,7 +6338,7 @@ class ActionSummaryOverviewItem extends  AbstractModel {
         this.ActionType = null;
 
         /**
-         * Transaction type, which can be yearly/monthly subscription purchase, monthly subscription renewal, or pay-as-you-go deduction.
+         * Transaction type, which can be yearly/monthly subscription purchase, yearly/monthly subscription renewal, or pay-as-you-go deduction.
          * @type {string || null}
          */
         this.ActionTypeName = null;
@@ -6339,7 +6649,7 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
 Daily settlement
 Yearly/monthly subscription
 Spot
-New monthly subscription
+New yearly/monthly subscription
 Yearly/monthly subscription renewal
 Yearly/monthly subscription specification adjustment
 Yearly/monthly subscription refund
@@ -6413,6 +6723,57 @@ This parameter can be used for querying bills after January 2021.
         this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * DescribeRenewInstances response structure.
+ * @class
+ */
+class DescribeRenewInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance summary list.
+         * @type {Array.<RenewInstance> || null}
+         */
+        this.InstanceList = null;
+
+        /**
+         * Token for querying the next page of returned results.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NextToken = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new RenewInstance();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7601,6 +7962,49 @@ class DescribeAllocationRuleDetailResponse extends  AbstractModel {
 }
 
 /**
+ * SetRenewal response structure.
+ * @class
+ */
+class SetRenewalResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance list when the operation fails.
+         * @type {Array.<OperateRsp> || null}
+         */
+        this.InstanceList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new OperateRsp();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The product purchased.
  * @class
  */
@@ -7616,7 +8020,7 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.ProductName = null;
 
         /**
-         * 
+         * Product Details
          * @type {string || null}
          */
         this.SubProductName = null;
@@ -8582,7 +8986,7 @@ ccli billing DescribeBillDetail --cli-unfold-argument --Offset 1 --Limit 100 --M
 Daily settlement
 Yearly/monthly subscription
 Spot
-New monthly subscription
+New yearly/monthly subscription
 Yearly/monthly subscription renewal
 Yearly/monthly subscription specification adjustment
 Yearly/monthly subscription refund
@@ -10652,8 +11056,10 @@ module.exports = {
     DistributionBillDetail: DistributionBillDetail,
     DescribeDosageCosDetailByDateRequest: DescribeDosageCosDetailByDateRequest,
     DescribeBillAdjustInfoResponse: DescribeBillAdjustInfoResponse,
+    OperateRsp: OperateRsp,
     DescribeAllocationRuleDetailRequest: DescribeAllocationRuleDetailRequest,
     DescribeAllocationUnitDetailResponse: DescribeAllocationUnitDetailResponse,
+    RenewInstance: RenewInstance,
     DescribeBillSummaryByProductRequest: DescribeBillSummaryByProductRequest,
     AllocationUnit: AllocationUnit,
     AllocationRationExpression: AllocationRationExpression,
@@ -10677,6 +11083,7 @@ module.exports = {
     CreateGatherRuleRequest: CreateGatherRuleRequest,
     DescribeBillResourceSummaryForOrganizationRequest: DescribeBillResourceSummaryForOrganizationRequest,
     DescribeCostSummaryByRegionRequest: DescribeCostSummaryByRegionRequest,
+    SetRenewalRequest: SetRenewalRequest,
     ConsumptionSummaryTrend: ConsumptionSummaryTrend,
     DescribeBillDownloadUrlRequest: DescribeBillDownloadUrlRequest,
     DescribeBillSummaryByPayModeRequest: DescribeBillSummaryByPayModeRequest,
@@ -10695,6 +11102,7 @@ module.exports = {
     DescribeBillAdjustInfoRequest: DescribeBillAdjustInfoRequest,
     DeleteAllocationRuleResponse: DeleteAllocationRuleResponse,
     TagDataInfo: TagDataInfo,
+    DescribeRenewInstancesRequest: DescribeRenewInstancesRequest,
     PayDealsRequest: PayDealsRequest,
     SummaryTotal: SummaryTotal,
     BusinessSummaryTotal: BusinessSummaryTotal,
@@ -10718,6 +11126,7 @@ module.exports = {
     DescribeBillDetailForOrganizationRequest: DescribeBillDetailForOrganizationRequest,
     DescribeVoucherUsageDetailsRequest: DescribeVoucherUsageDetailsRequest,
     DescribeBillResourceSummaryRequest: DescribeBillResourceSummaryRequest,
+    DescribeRenewInstancesResponse: DescribeRenewInstancesResponse,
     BillDetailComponent: BillDetailComponent,
     ConditionRegion: ConditionRegion,
     TagSummaryOverviewItem: TagSummaryOverviewItem,
@@ -10734,6 +11143,7 @@ module.exports = {
     ExcludedProducts: ExcludedProducts,
     PayModeSummaryOverviewItem: PayModeSummaryOverviewItem,
     DescribeAllocationRuleDetailResponse: DescribeAllocationRuleDetailResponse,
+    SetRenewalResponse: SetRenewalResponse,
     UsageDetails: UsageDetails,
     AnalyseBusinessDetail: AnalyseBusinessDetail,
     AnalyseConditions: AnalyseConditions,

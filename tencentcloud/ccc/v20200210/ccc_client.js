@@ -48,6 +48,7 @@ const RestoreMemberOnlineResponse = models.RestoreMemberOnlineResponse;
 const AbortAgentCruiseDialingCampaignResponse = models.AbortAgentCruiseDialingCampaignResponse;
 const DescribeSessionDetailResponse = models.DescribeSessionDetailResponse;
 const ServeParticipant = models.ServeParticipant;
+const PlaySoundCallResponse = models.PlaySoundCallResponse;
 const AICallExtractResultElement = models.AICallExtractResultElement;
 const DescribeTelCallInfoResponse = models.DescribeTelCallInfoResponse;
 const DescribeExtensionsResponse = models.DescribeExtensionsResponse;
@@ -81,6 +82,7 @@ const CreateUserSigRequest = models.CreateUserSigRequest;
 const CreateCCCSkillGroupRequest = models.CreateCCCSkillGroupRequest;
 const DescribePredictiveDialingSessionsResponse = models.DescribePredictiveDialingSessionsResponse;
 const DeleteCCCSkillGroupRequest = models.DeleteCCCSkillGroupRequest;
+const PauseAutoCalloutTaskRequest = models.PauseAutoCalloutTaskRequest;
 const BindNumberCallInInterfaceRequest = models.BindNumberCallInInterfaceRequest;
 const DescribeTelSessionRequest = models.DescribeTelSessionRequest;
 const ModifyOwnNumberApplyRequest = models.ModifyOwnNumberApplyRequest;
@@ -101,6 +103,7 @@ const UpdatePredictiveDialingCampaignRequest = models.UpdatePredictiveDialingCam
 const DescribeStaffInfoListRequest = models.DescribeStaffInfoListRequest;
 const AutoCalloutTaskInfo = models.AutoCalloutTaskInfo;
 const DescribeIvrAudioListRequest = models.DescribeIvrAudioListRequest;
+const PauseAutoCalloutTaskResponse = models.PauseAutoCalloutTaskResponse;
 const BindNumberCallInInterfaceResponse = models.BindNumberCallInInterfaceResponse;
 const ForceMemberOfflineRequest = models.ForceMemberOfflineRequest;
 const SkillGroupInfoItem = models.SkillGroupInfoItem;
@@ -164,6 +167,7 @@ const PhoneNumBuyInfo = models.PhoneNumBuyInfo;
 const DescribeAIAnalysisResultRequest = models.DescribeAIAnalysisResultRequest;
 const DescribeCCCBuyInfoListResponse = models.DescribeCCCBuyInfoListResponse;
 const UnbindStaffSkillGroupListResponse = models.UnbindStaffSkillGroupListResponse;
+const ResumeAutoCalloutTaskRequest = models.ResumeAutoCalloutTaskRequest;
 const ControlAIConversationRequest = models.ControlAIConversationRequest;
 const UploadAudioInfo = models.UploadAudioInfo;
 const DescribeStaffStatusHistoryResponse = models.DescribeStaffStatusHistoryResponse;
@@ -194,11 +198,13 @@ const AILatencyStatistics = models.AILatencyStatistics;
 const StaffStatus = models.StaffStatus;
 const AIAnalysisResult = models.AIAnalysisResult;
 const DescribeAutoCalloutTasksRequest = models.DescribeAutoCalloutTasksRequest;
+const PlaySoundCallRequest = models.PlaySoundCallRequest;
 const DescribeTelSessionResponse = models.DescribeTelSessionResponse;
 const SetStaffStatusRspItem = models.SetStaffStatusRspItem;
 const CreateAdminURLRequest = models.CreateAdminURLRequest;
 const DescribeAutoCalloutTaskResponse = models.DescribeAutoCalloutTaskResponse;
 const DescribeStaffStatusMetricsResponse = models.DescribeStaffStatusMetricsResponse;
+const ResumeAutoCalloutTaskResponse = models.ResumeAutoCalloutTaskResponse;
 const AudioFileInfo = models.AudioFileInfo;
 const CreateCallOutSessionRequest = models.CreateCallOutSessionRequest;
 const BindStaffSkillGroupListResponse = models.BindStaffSkillGroupListResponse;
@@ -236,6 +242,17 @@ class CccClient extends AbstractClient {
     }
 
     /**
+     * This API is used to perform playback for a session in a call with an agent.
+     * @param {PlaySoundCallRequest} req
+     * @param {function(string, PlaySoundCallResponse):void} cb
+     * @public
+     */
+    PlaySoundCall(req, cb) {
+        let resp = new PlaySoundCallResponse();
+        this.request("PlaySoundCall", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain AI Conversation Analytics results.
      * @param {DescribeAIAnalysisResultRequest} req
      * @param {function(string, DescribeAIAnalysisResultResponse):void} cb
@@ -258,7 +275,11 @@ class CccClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain AI latency information.
+     * Call this API to query the processing latency detail and stats of specified Session by Session ID within a specific time period. The latency info includes:.
+-End-to-end (ETE) delay: Statistics of the overall duration from user voice input to AI returning a complete response.
+-ASR latency: statistics of the processing time consumption required for voice input to be recognized as text.
+-LLM latency: Statistics of inference latency for AI model to generate text content.
+-Text To Speech (TTS) latency: Statistics of text conversion to speech audio synthesis duration.
      * @param {DescribeAILatencyRequest} req
      * @param {function(string, DescribeAILatencyResponse):void} cb
      * @public
@@ -277,6 +298,18 @@ class CccClient extends AbstractClient {
     DescribeAutoCalloutTasks(req, cb) {
         let resp = new DescribeAutoCalloutTasksResponse();
         this.request("DescribeAutoCalloutTasks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to suspend an ongoing automatic outbound call task by TaskId. After calling this API, the task will be temporarily interrupted and no longer initiate new outbound call requests; initiated calls are not affected.
+A paused task can continue execution via the [Restore Suspended Automatic Outbound Call Task](https://www.tencentcloud.comom/document/product/679/125356?from_cn_redirect=1) API. If needed, refer to [Stop Automatic Outbound Call Task](https://www.tencentcloud.comom/document/product/679/69192?from_cn_redirect=1) to permanently terminate the task.
+     * @param {PauseAutoCalloutTaskRequest} req
+     * @param {function(string, PauseAutoCalloutTaskResponse):void} cb
+     * @public
+     */
+    PauseAutoCalloutTask(req, cb) {
+        let resp = new PauseAutoCalloutTaskResponse();
+        this.request("PauseAutoCalloutTask", req, resp, cb);
     }
 
     /**
@@ -561,7 +594,8 @@ This API is used to make calls. Currently, the agent side can only call the user
     }
 
     /**
-     * This API is used to query automatic outbound call task details.
+     * This API is used to query detailed information of an automatic outbound call task by TaskId, including basic configuration, start and end time, name list, execution status, and call status.
+This API is usually used together with Create Bulk Automatic Outbound Call Task (https://www.tencentcloud.comom/document/product/679/69194?from_cn_redirect=1) to check whether the task configuration takes effect, the current task status, and real-time progress during execution once created.
      * @param {DescribeAutoCalloutTaskRequest} req
      * @param {function(string, DescribeAutoCalloutTaskResponse):void} cb
      * @public
@@ -627,7 +661,7 @@ This API is used to make calls. Currently, the agent side can only call the user
     }
 
     /**
-     * This API is used to query call detail.
+     * This API is used to query call details for a single call by session id and timestamp after call ends, including caller and contact information, voice recording.
      * @param {DescribeSessionDetailRequest} req
      * @param {function(string, DescribeSessionDetailResponse):void} cb
      * @public
@@ -649,7 +683,7 @@ This API is used to make calls. Currently, the agent side can only call the user
     }
 
     /**
-     * Obtain AI call content extraction result
+     * This API is used to query specified session's post-call Tag results by Session ID after the Intelligent Agent call session ends. Related post-call Tags need to be configured in advance in the management console. For details, please refer to post-call Tags (https://www.tencentcloud.comom/document/product/679/119800?from_cn_redirect=1).
      * @param {DescribeAICallExtractResultRequest} req
      * @param {function(string, DescribeAICallExtractResultResponse):void} cb
      * @public
@@ -671,7 +705,7 @@ This API is used to make calls. Currently, the agent side can only call the user
     }
 
     /**
-     * This API is used to get the list of Intelligent Agents.
+     * This API is used to query the information list of configured Intelligent Agents under a specified instance (SdkAppId) by paging, including basic information such as Intelligent Agent ID and name.
      * @param {DescribeAIAgentInfoListRequest} req
      * @param {function(string, DescribeAIAgentInfoListResponse):void} cb
      * @public
@@ -803,7 +837,9 @@ This API is used to make calls. Currently, the agent side can only call the user
     }
 
     /**
-     * This API is used to create the automatic outbound call task.
+     * This API is used to create bulk automatic outbound calls. The system will automatically initiate outbound calls to the designated called number list based on task configuration. This API can call the configured Intelligent Agent to perform batch outbound call tasks. You can create a voice Intelligent Agent in the management console-Intelligent Agent Management and configure the dialogue process (https://www.tencentcloud.comom/document/product/679/119796?from_cn_redirect=1). To create a single Intelligent Agent outbound call task, refer to the documentation (https://www.tencentcloud.comom/document/product/679/115681?from_cn_redirect=1).
+
+The feature requires purchase of the Intelligent Agent call package and is only available for own telephone number. For details, refer to the [Intelligent Agent Call Purchase Guide](https://www.tencentcloud.comom/document/product/679/125953?from_cn_redirect=1).
      * @param {CreateAutoCalloutTaskRequest} req
      * @param {function(string, CreateAutoCalloutTaskResponse):void} cb
      * @public
@@ -935,6 +971,17 @@ This API is used to make calls. Currently, the agent side can only call the user
     }
 
     /**
+     * This API is used to restore a paused automatic outbound call task by TaskId. This API is suitable for scenarios where you need to continue execution of the remaining outbound call plan after calling Suspend Automatic Outbound Call Task. After a successful call, the task will resume from the paused state and re-initiate incomplete outbound requests.
+     * @param {ResumeAutoCalloutTaskRequest} req
+     * @param {function(string, ResumeAutoCalloutTaskResponse):void} cb
+     * @public
+     */
+    ResumeAutoCalloutTask(req, cb) {
+        let resp = new ResumeAutoCalloutTaskResponse();
+        this.request("ResumeAutoCalloutTask", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the number list.
      * @param {DescribeNumbersRequest} req
      * @param {function(string, DescribeNumbersResponse):void} cb
@@ -957,9 +1004,9 @@ This API is used to make calls. Currently, the agent side can only call the user
     }
 
     /**
-     * This API is used to initiate outbound calls using an AI model, limited to owned phone numbers only. Currently, a limited-time free trial of Advanced Agents is available.
+     * Used to create one-time Intelligent Agent outbound calls. You can create a voice Intelligent Agent in the management console - Intelligent Agent Management and perform dialogue process configuration (https://www.tencentcloud.comom/document/product/679/119796?from_cn_redirect=1). This API is used to initiate a single outbound call task with a configured Intelligent Agent. To create batch Intelligent Agent outbound call tasks, refer to the documentation for creating automatic outbound call tasks (https://www.tencentcloud.comom/document/product/679/69194?from_cn_redirect=1).
 
-Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://www.tencentcloud.com/document/product/1229/70681).
+The feature requires purchase of the Intelligent Agent call package and is only available for own telephone number. For details, refer to the [Intelligent Agent Call Purchase Guide](https://www.tencentcloud.comom/document/product/679/125953?from_cn_redirect=1).
      * @param {CreateAIAgentCallRequest} req
      * @param {function(string, CreateAIAgentCallResponse):void} cb
      * @public

@@ -604,25 +604,25 @@ Note: this field may return `null`, indicating that no valid value was found.
         this.FailOver = null;
 
         /**
-         * 
+         * Input RTMP_PULL configuration.
          * @type {DescribeInputRTMPPullSettings || null}
          */
         this.RTMPPullSettings = null;
 
         /**
-         * 
+         * Input RTSP_PULL configuration.
          * @type {DescribeInputRTSPPullSettings || null}
          */
         this.RTSPPullSettings = null;
 
         /**
-         * 
+         * Input HLS_PULL configuration.
          * @type {DescribeInputHLSPullSettings || null}
          */
         this.HLSPullSettings = null;
 
         /**
-         * 
+         * Delayed broadcast smooth stream delivery configuration.
          * @type {ResilientStreamConf || null}
          */
         this.ResilientStream = null;
@@ -902,7 +902,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * 
+ * Query the input RTMP configuration.
  * @class
  */
 class DescribeRTMPPullSourceAddress extends  AbstractModel {
@@ -910,13 +910,15 @@ class DescribeRTMPPullSourceAddress extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The TcUrl address of the RTMP origin server.
          * @type {string || null}
          */
         this.TcUrl = null;
 
         /**
-         * 
+         * The StreamKey of the RTMP origin server.
+
+The concatenation rule for the RTMP origin server address is: $TcUrl/$StreamKey.
          * @type {string || null}
          */
         this.StreamKey = null;
@@ -1392,19 +1394,19 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.AllowIpList = null;
 
         /**
-         * 
+         * Output RTSP pull stream configuration.
          * @type {DescribeOutputRTSPPullSettings || null}
          */
         this.RTSPPullSettings = null;
 
         /**
-         * 
+         * Output HLS pull stream configuration.
          * @type {DescribeOutputHLSPullSettings || null}
          */
         this.HLSPullSettings = null;
 
         /**
-         * 
+         * Maximum pull stream concurrency, maximum 4, default 4.
          * @type {number || null}
          */
         this.MaxConcurrent = null;
@@ -1483,7 +1485,7 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * 
+ * Created input HLS pull stream configuration.
  * @class
  */
 class CreateInputHLSPullSettings extends  AbstractModel {
@@ -1491,7 +1493,7 @@ class CreateInputHLSPullSettings extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The origin server address for the HLS origin server. There can be only one.
          * @type {Array.<HLSPullSourceAddress> || null}
          */
         this.SourceAddresses = null;
@@ -1964,7 +1966,7 @@ class DescribeStreamLinkFlowsResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Query the input RTSP configuration.
  * @class
  */
 class DescribeInputRTSPPullSettings extends  AbstractModel {
@@ -1972,7 +1974,7 @@ class DescribeInputRTSPPullSettings extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The address information of the RTSP origin server.
          * @type {Array.<DescribeRTSPPullSourceAddress> || null}
          */
         this.SourceAddresses = null;
@@ -2458,7 +2460,7 @@ class OutputSRTSourceAddressResp extends  AbstractModel {
 }
 
 /**
- * 
+ * Created input RTMP pull stream configuration.
  * @class
  */
 class CreateInputRTMPPullSettings extends  AbstractModel {
@@ -2466,7 +2468,7 @@ class CreateInputRTMPPullSettings extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The origin server address for the RTMP origin server. There can be only one.
          * @type {Array.<RTMPPullSourceAddress> || null}
          */
         this.SourceAddresses = null;
@@ -2821,7 +2823,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Query the input RTSP configuration.
  * @class
  */
 class DescribeRTSPPullSourceAddress extends  AbstractModel {
@@ -2829,7 +2831,7 @@ class DescribeRTSPPullSourceAddress extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The Url address of the RTSP origin server.
          * @type {string || null}
          */
         this.Url = null;
@@ -2877,7 +2879,7 @@ class DeleteStreamLinkFlowResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Query output RTSP pull stream configuration information.
  * @class
  */
 class DescribeOutputRTSPPullSettings extends  AbstractModel {
@@ -2885,7 +2887,7 @@ class DescribeOutputRTSPPullSettings extends  AbstractModel {
         super();
 
         /**
-         * 
+         * RTSP pull stream address list.
          * @type {Array.<DescribeOutputRTSPPullServerUrl> || null}
          */
         this.ServerUrls = null;
@@ -3046,7 +3048,7 @@ class FlowMediaVideo extends  AbstractModel {
 }
 
 /**
- * 
+ * Query output HLS pull stream URL information.
  * @class
  */
 class DescribeOutputHLSPullServerUrl extends  AbstractModel {
@@ -3054,7 +3056,7 @@ class DescribeOutputHLSPullServerUrl extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The Url of the HLS pull stream address.
          * @type {string || null}
          */
         this.Url = null;
@@ -3174,7 +3176,7 @@ class DescribeStreamLinkFlowRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Query the output HLS pull stream configuration.
  * @class
  */
 class DescribeOutputHLSPullSettings extends  AbstractModel {
@@ -3182,7 +3184,7 @@ class DescribeOutputHLSPullSettings extends  AbstractModel {
         super();
 
         /**
-         * 
+         * HLS pull stream address list.
          * @type {Array.<DescribeOutputHLSPullServerUrl> || null}
          */
         this.ServerUrls = null;
@@ -3470,7 +3472,7 @@ class CreateStreamLinkFlowResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Query the input HLS configuration.
  * @class
  */
 class DescribeInputHLSPullSettings extends  AbstractModel {
@@ -3478,7 +3480,7 @@ class DescribeInputHLSPullSettings extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The address information of the HLS origin server.
          * @type {Array.<DescribeHLSPullSourceAddress> || null}
          */
         this.SourceAddresses = null;
@@ -3730,7 +3732,7 @@ class ModifyStreamLinkOutputInfoRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Created input RTSP pull stream configuration.
  * @class
  */
 class CreateInputRTSPPullSettings extends  AbstractModel {
@@ -3738,7 +3740,7 @@ class CreateInputRTSPPullSettings extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The origin server address for the RTSP origin server. There can be only one.
          * @type {Array.<RTSPPullSourceAddress> || null}
          */
         this.SourceAddresses = null;
@@ -4000,7 +4002,7 @@ class DeleteStreamLinkOutputRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Created input RTSP pull stream origin server configuration.
  * @class
  */
 class RTSPPullSourceAddress extends  AbstractModel {
@@ -4008,7 +4010,7 @@ class RTSPPullSourceAddress extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The Url address of the RTSP origin server.
          * @type {string || null}
          */
         this.Url = null;
@@ -4028,7 +4030,7 @@ class RTSPPullSourceAddress extends  AbstractModel {
 }
 
 /**
- * 
+ * Query the input HLS configuration.
  * @class
  */
 class DescribeHLSPullSourceAddress extends  AbstractModel {
@@ -4036,7 +4038,7 @@ class DescribeHLSPullSourceAddress extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The Url of the HLS origin server.
          * @type {string || null}
          */
         this.Url = null;
@@ -4540,7 +4542,7 @@ class CreateOutputRTMPSettings extends  AbstractModel {
 }
 
 /**
- * 
+ * Created input HLS pull stream origin server configuration.
  * @class
  */
 class HLSPullSourceAddress extends  AbstractModel {
@@ -4548,7 +4550,7 @@ class HLSPullSourceAddress extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The Url of the HLS origin server.
          * @type {string || null}
          */
         this.Url = null;
@@ -4802,7 +4804,7 @@ class ModifyStreamLinkInputRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Delayed broadcast smooth stream delivery configuration.
  * @class
  */
 class ResilientStreamConf extends  AbstractModel {
@@ -4810,13 +4812,13 @@ class ResilientStreamConf extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether to enable delayed broadcast smooth stream delivery: true to enable, false to disable. It is disabled by default.
          * @type {boolean || null}
          */
         this.Enable = null;
 
         /**
-         * 
+         * Delayed broadcast duration, in seconds. Supported range: 10 to 300 seconds.
          * @type {number || null}
          */
         this.BufferTime = null;
@@ -4880,7 +4882,7 @@ class CreateStreamLinkInputRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Query output RTSP pull stream URL information.
  * @class
  */
 class DescribeOutputRTSPPullServerUrl extends  AbstractModel {
@@ -4888,7 +4890,7 @@ class DescribeOutputRTSPPullServerUrl extends  AbstractModel {
         super();
 
         /**
-         * 
+         * RTSP pull stream address Url.
          * @type {string || null}
          */
         this.Url = null;
@@ -4943,7 +4945,7 @@ class InputAddress extends  AbstractModel {
 }
 
 /**
- * 
+ * Query the input RTMP configuration.
  * @class
  */
 class DescribeInputRTMPPullSettings extends  AbstractModel {
@@ -4951,7 +4953,7 @@ class DescribeInputRTMPPullSettings extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The address information of the RTMP origin server.
          * @type {Array.<DescribeRTMPPullSourceAddress> || null}
          */
         this.SourceAddresses = null;
@@ -5071,7 +5073,7 @@ class CreateInputSRTSettings extends  AbstractModel {
 }
 
 /**
- * 
+ * Created input RTMP pull stream origin server configuration.
  * @class
  */
 class RTMPPullSourceAddress extends  AbstractModel {
@@ -5079,13 +5081,13 @@ class RTMPPullSourceAddress extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The TcUrl address of the RTMP origin server.
          * @type {string || null}
          */
         this.TcUrl = null;
 
         /**
-         * 
+         * The StreamKey of the RTMP origin server.
          * @type {string || null}
          */
         this.StreamKey = null;

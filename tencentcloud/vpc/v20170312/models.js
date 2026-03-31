@@ -3365,25 +3365,25 @@ class CreateVpcEndPointRequest extends  AbstractModel {
         super();
 
         /**
-         * VPC instance ID
+         * VPC instance ID. obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/1108/43663?from_cn_redirect=1).
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Subnet instance ID
+         * Subnet instance ID. can be obtained through the [DescribeSubnets](https://www.tencentcloud.comom/document/product/215/15784?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * Endpoint name
+         * Endpoint name. limited to 60 characters.
          * @type {string || null}
          */
         this.EndPointName = null;
 
         /**
-         * Endpoint service ID
+         * Endpoint service ID, which can be obtained through the [DescribeVpcEndPointService](https://www.tencentcloud.comom/document/product/215/54678?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.EndPointServiceId = null;
@@ -3395,10 +3395,22 @@ class CreateVpcEndPointRequest extends  AbstractModel {
         this.EndPointVip = null;
 
         /**
-         * Security group ID
+         * Security group ID. can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.comom/document/product/215/15808?from_cn_redirect=1).
          * @type {string || null}
          */
         this.SecurityGroupId = null;
+
+        /**
+         * List of tags to be bound, for example, [{"Key": "city", "Value": "shanghai"}].
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Protocol type. supports Ipv4 and Ipv6. default is Ipv4.
+         * @type {string || null}
+         */
+        this.IpAddressType = null;
 
     }
 
@@ -3415,6 +3427,16 @@ class CreateVpcEndPointRequest extends  AbstractModel {
         this.EndPointServiceId = 'EndPointServiceId' in params ? params.EndPointServiceId : null;
         this.EndPointVip = 'EndPointVip' in params ? params.EndPointVip : null;
         this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.IpAddressType = 'IpAddressType' in params ? params.IpAddressType : null;
 
     }
 }
@@ -16118,7 +16140,7 @@ class EndPoint extends  AbstractModel {
         this.EndPointId = null;
 
         /**
-         * VPC ID
+         * The unique ID of the VPC. obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1).
          * @type {string || null}
          */
         this.VpcId = null;
@@ -16172,7 +16194,7 @@ class EndPoint extends  AbstractModel {
         this.State = null;
 
         /**
-         * Creation time
+         * Creation time. format: YYYY-MM-DD HH:MM:SS.
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -16184,11 +16206,22 @@ class EndPoint extends  AbstractModel {
         this.GroupSet = null;
 
         /**
-         * Endpoint service name
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Endpoint service name.
          * @type {string || null}
          */
         this.ServiceName = null;
+
+        /**
+         * CDC cluster unique ID.
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
+        /**
+         * Tag key-value pair.		
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
 
     }
 
@@ -16212,6 +16245,16 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.GroupSet = 'GroupSet' in params ? params.GroupSet : null;
         this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
 
     }
 }

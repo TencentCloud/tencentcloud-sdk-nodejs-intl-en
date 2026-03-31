@@ -9527,19 +9527,19 @@ class CreateCloudDBInstancesRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * Instance memory size in GB
+         * Instance memory size in GB.
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * Instance disk size in GB
+         * Instance disk size in GB.
          * @type {number || null}
          */
         this.Storage = null;
 
         /**
-         * Number of CPU cores
+         * Number of CPU cores.
          * @type {number || null}
          */
         this.Cpu = null;
@@ -9551,13 +9551,13 @@ class CreateCloudDBInstancesRequest extends  AbstractModel {
         this.MachineType = null;
 
         /**
-         * Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
+         * Billing mode. Valid values: `PREPAID` (yearly/monthly subscription), `POSTPAID` (pay-as-you-go).
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
-         * Project ID
+         * Project ID.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -9593,7 +9593,7 @@ class CreateCloudDBInstancesRequest extends  AbstractModel {
         this.AutoVoucher = null;
 
         /**
-         * Array of voucher IDs (currently, only one voucher can be used per order)
+         * Array of voucher IDs (currently, only one voucher can be used per order).
          * @type {Array.<string> || null}
          */
         this.VoucherIds = null;
@@ -9605,7 +9605,7 @@ class CreateCloudDBInstancesRequest extends  AbstractModel {
         this.DBVersion = null;
 
         /**
-         * Auto-renewal flag, which takes effect only when purchasing a monthly subscribed instance.  Valid values:  `0` (auto-renewal disabled), `1` (auto-renewal enabled). Default value: `0`.
+         * Auto-renewal flag, which takes effect only when purchasing a yearly/monthly subscribed instance.  Valid values:  `0` (auto-renewal disabled), `1` (auto-renewal enabled). Default value: `0`.
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
@@ -9629,7 +9629,7 @@ class CreateCloudDBInstancesRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Configuration of the maintenance window, which specifies the maintenance duration in hours. Hour
+         * Configuration of the maintenance window, which specifies the maintenance duration in hours. Hour.
          * @type {number || null}
          */
         this.Span = null;
@@ -9641,7 +9641,7 @@ class CreateCloudDBInstancesRequest extends  AbstractModel {
         this.MultiZones = null;
 
         /**
-         * Tags associated with the instances to be created
+         * Tags associated with the instances to be created.
          * @type {Array.<ResourceTag> || null}
          */
         this.ResourceTags = null;
@@ -9657,6 +9657,24 @@ class CreateCloudDBInstancesRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.TimeZone = null;
+
+        /**
+         * Whether it is a multi-node architecture instance. Default value: `false`.If MultiNodes = true, the value of the MultiZones parameter must be true.
+         * @type {boolean || null}
+         */
+        this.MultiNodes = null;
+
+        /**
+         * The zone in which the standby node is available. Default is empty. When MultiNodes = true, the availability zones of the primary and standby nodes cannot all be the same. The minimum number of availability zones for the standby nodes is 2, and the maximum is 5.
+         * @type {Array.<string> || null}
+         */
+        this.DrZones = null;
+
+        /**
+         * Disk encryption identifier, 0-unencrypted, 1-encrypted.
+         * @type {number || null}
+         */
+        this.DiskEncryptFlag = null;
 
     }
 
@@ -9698,6 +9716,9 @@ class CreateCloudDBInstancesRequest extends  AbstractModel {
         }
         this.Collation = 'Collation' in params ? params.Collation : null;
         this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
+        this.MultiNodes = 'MultiNodes' in params ? params.MultiNodes : null;
+        this.DrZones = 'DrZones' in params ? params.DrZones : null;
+        this.DiskEncryptFlag = 'DiskEncryptFlag' in params ? params.DiskEncryptFlag : null;
 
     }
 }
@@ -10106,7 +10127,7 @@ class CreateCloudDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Order name
+         * Order name.
          * @type {string || null}
          */
         this.DealName = null;

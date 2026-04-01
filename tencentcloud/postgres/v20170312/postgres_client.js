@@ -475,7 +475,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to switch the instance billing mode from pay-as-you-go to monthly subscription.
+     * This API is used to switch the instance billing mode from pay-as-you-go to yearly/monthly subscription.
      * @param {ModifyDBInstanceChargeTypeRequest} req
      * @param {function(string, ModifyDBInstanceChargeTypeResponse):void} cb
      * @public

@@ -2201,6 +2201,41 @@ class ModifyDefaultStorageRegionRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteLLMComprehendTemplate request structure.
+ * @class
+ */
+class DeleteLLMComprehendTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique identifier of the Large Model Comprehend Template
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * <b>On-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the application ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * CloneCDNDomain request structure.
  * @class
  */
@@ -3297,6 +3332,43 @@ class RebuildMediaRequest extends  AbstractModel {
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
+
+    }
+}
+
+/**
+ * Large model parsing segment summary parse configuration
+ * @class
+ */
+class LLMComprehendSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Segment summary task switch, available values:
+-ON: Enable segment summary task.
+-OFF: Disable segment summary.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Extended parameter, which is a serialized json string. See [Extended Parameter description](https://www.tencentcloud.com/document/product/862/104493?from_cn_redirect=1#note).
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -9314,6 +9386,62 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Large model parses face identification configuration
+ * @class
+ */
+class LLMComprehendFaceRecognitionForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Face recognition task switch</p><p>Enumeration value:</p><ul><li>ON: Enable intelligent face recognition task</li><li>OFF: Disable intelligent face recognition task</li></ul><p>Default value: OFF</p>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * <p>Face recognition filter score. The recognition result is returned when it reaches or exceeds this score.</p><p>Value ranges from 0 to 100.</p>
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * <p>Default character filter tag. Specifies the tag of the default character to return. If left blank or empty, all default character results are returned.</p><p>Enumeration value:</p><ul><li>entertainment: entertainment star</li><li>sport: sports celebrity</li><li>politician: political figure</li></ul>
+         * @type {Array.<string> || null}
+         */
+        this.DefaultLibraryLabelSet = null;
+
+        /**
+         * <p>User-defined character filter tag specifies the tags of user-defined characters to return. If left blank or empty, all customized figure results are returned.</p><p>Input limit: The number of tags is limited to 100, and each tag is limited to 16 characters in length.</p>
+         * @type {Array.<string> || null}
+         */
+        this.UserDefineLibraryLabelSet = null;
+
+        /**
+         * <p>Figure library selection</p><p>Enumeration value:</p><ul><li>Default: Use default figure library</li><li>UserDefine: Use user-defined figure library</li><li>All: Use default and user-defined figure libraries simultaneously</li></ul><p>Default value: All</p>
+         * @type {string || null}
+         */
+        this.FaceLibrary = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.DefaultLibraryLabelSet = 'DefaultLibraryLabelSet' in params ? params.DefaultLibraryLabelSet : null;
+        this.UserDefineLibraryLabelSet = 'UserDefineLibraryLabelSet' in params ? params.UserDefineLibraryLabelSet : null;
+        this.FaceLibrary = 'FaceLibrary' in params ? params.FaceLibrary : null;
+
+    }
+}
+
+/**
  * DescribeEventConfig request structure.
  * @class
  */
@@ -9423,6 +9551,34 @@ and will be deleted after `PicUrlExpireTime`).
         this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+
+    }
+}
+
+/**
+ * ModifyLLMComprehendTemplate response structure.
+ * @class
+ */
+class ModifyLLMComprehendTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9711,6 +9867,12 @@ class ImportMediaKnowledgeRequest extends  AbstractModel {
         this.FileId = null;
 
         /**
+         * Unique identifier of the Large Model Comprehend Template
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
          * Specifies the task type for importing the knowledge base. valid values:.
 - AiAnalysis.DescriptionTask
 - SmartSubtitle.AsrFullTextTask
@@ -9729,6 +9891,7 @@ class ImportMediaKnowledgeRequest extends  AbstractModel {
         }
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
         this.ImportTasks = 'ImportTasks' in params ? params.ImportTasks : null;
 
     }
@@ -9964,6 +10127,34 @@ class CreateAigcVideoTaskResponse extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAdaptiveDynamicStreamingTemplate response structure.
+ * @class
+ */
+class ModifyAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -11737,6 +11928,36 @@ Default value: OFF.
 }
 
 /**
+ * Large model parse text transcribe parse configuration
+ * @class
+ */
+class LLMComprehendAsrForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Text transcription task switch. Available values:
+-ON: Enable the transcription task.
+-OFF: Disable text transcription task.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * The information of a digital watermark.
  * @class
  */
@@ -12379,10 +12600,10 @@ class AiRecognitionTaskAsrFullTextResultInput extends  AbstractModel {
 }
 
 /**
- * ModifyReviewTemplate response structure.
+ * DeleteLLMComprehendTemplate response structure.
  * @class
  */
-class ModifyReviewTemplateResponse extends  AbstractModel {
+class DeleteLLMComprehendTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -13368,6 +13589,95 @@ class WechatMiniProgramPublishTaskInput extends  AbstractModel {
             return;
         }
         this.SourceDefinition = 'SourceDefinition' in params ? params.SourceDefinition : null;
+
+    }
+}
+
+/**
+ * Large model parses template detail.
+ * @class
+ */
+class LLMComprehendTemplateItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique identifier of the image asynchronous processing template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Image async processing template name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Description information of the image asynchronous processing template.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Parsing level. Optional values:
+-Audio: Audio-level parsing
+-Video: Video-level parsing
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Segment summary parsing configuration
+         * @type {LLMComprehendSummary || null}
+         */
+        this.Summary = null;
+
+        /**
+         * Text transcription parsing configuration
+         * @type {LLMComprehendAsr || null}
+         */
+        this.Asr = null;
+
+        /**
+         * Template creation time, use [ISO date format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Template last modified time, use [ISO date format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Level = 'Level' in params ? params.Level : null;
+
+        if (params.Summary) {
+            let obj = new LLMComprehendSummary();
+            obj.deserialize(params.Summary)
+            this.Summary = obj;
+        }
+
+        if (params.Asr) {
+            let obj = new LLMComprehendAsr();
+            obj.deserialize(params.Asr)
+            this.Asr = obj;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -19991,6 +20301,62 @@ class DeleteHeadTailTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * Large model parses face identification configuration
+ * @class
+ */
+class LLMComprehendFaceRecognition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Face recognition task switch</p><p>Enumeration value:</p><ul><li>ON: Enable intelligent face recognition task</li><li>OFF: Disable intelligent face recognition task</li></ul><p>Default value: OFF</p>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * <p>Face recognition filter score. The recognition result is returned when it reaches or exceeds this score.</p><p>Value ranges from 0 to 100.</p><p>Default value: 95.</p>
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * <p>Default character filter tag. Specifies the tag of the default character to return. If left blank or empty, all default character results are returned.</p><p>Enumeration value:</p><ul><li>entertainment: entertainment star</li><li>sport: sports celebrity</li><li>politician: political figure</li></ul>
+         * @type {Array.<string> || null}
+         */
+        this.DefaultLibraryLabelSet = null;
+
+        /**
+         * <p>User-defined character filter tag specifies the tags of user-defined characters to return. If left blank or empty, all customized figure results are returned.</p><p>Input limit: The number of tags is limited to 100, and each tag is limited to 16 characters in length.</p>
+         * @type {Array.<string> || null}
+         */
+        this.UserDefineLibraryLabelSet = null;
+
+        /**
+         * <p>Figure library selection</p><p>Enumeration value:</p><ul><li>Default: Use default figure library</li><li>UserDefine: Use user-defined figure library</li><li>All: Use default and user-defined figure libraries simultaneously</li></ul><p>Default value: All</p>
+         * @type {string || null}
+         */
+        this.FaceLibrary = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.DefaultLibraryLabelSet = 'DefaultLibraryLabelSet' in params ? params.DefaultLibraryLabelSet : null;
+        this.UserDefineLibraryLabelSet = 'UserDefineLibraryLabelSet' in params ? params.UserDefineLibraryLabelSet : null;
+        this.FaceLibrary = 'FaceLibrary' in params ? params.FaceLibrary : null;
+
+    }
+}
+
+/**
  * Result type of intelligent tagging task
  * @class
  */
@@ -20955,6 +21321,56 @@ class ModifyMediaInfoResponse extends  AbstractModel {
                 let obj = new MediaSubtitleItem();
                 obj.deserialize(params.AddedSubtitleSet[z]);
                 this.AddedSubtitleSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeLLMComprehendTemplates response structure.
+ * @class
+ */
+class DescribeLLMComprehendTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of records that meet the filtering conditions.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of large model comprehend template details.
+         * @type {Array.<LLMComprehendTemplateItem> || null}
+         */
+        this.LLMComprehendTemplateSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.LLMComprehendTemplateSet) {
+            this.LLMComprehendTemplateSet = new Array();
+            for (let z in params.LLMComprehendTemplateSet) {
+                let obj = new LLMComprehendTemplateItem();
+                obj.deserialize(params.LLMComprehendTemplateSet[z]);
+                this.LLMComprehendTemplateSet.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -22026,12 +22442,18 @@ class DescribeHeadTailTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * ModifyAdaptiveDynamicStreamingTemplate response structure.
+ * CreateLLMComprehendTemplate response structure.
  * @class
  */
-class ModifyAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
+class CreateLLMComprehendTemplateResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * <p>Unique identifier of the Large Model Understanding Template</p>
+         * @type {number || null}
+         */
+        this.Definition = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -22048,6 +22470,7 @@ class ModifyAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Definition = 'Definition' in params ? params.Definition : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -23546,6 +23969,98 @@ class LiveRealTimeClipMediaSegmentInfo extends  AbstractModel {
         }
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * ModifyLLMComprehendTemplate request structure.
+ * @class
+ */
+class ModifyLLMComprehendTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Unique identifier of the Large Model Understanding Template</p>
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the application ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b></p>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * <p>Large model parsing template name. The length cannot exceed 64 characters.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Large model parses template description information. The length cannot exceed 256 characters.</p>
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * <p>Parse model. Optional values:</p><ul><li>Basic: Base Model</li><li>Pro: Optimization Model</li></ul>
+         * @type {string || null}
+         */
+        this.Model = null;
+
+        /**
+         * <p>Segment summary parsing configuration</p>
+         * @type {LLMComprehendSummaryForUpdate || null}
+         */
+        this.Summary = null;
+
+        /**
+         * <p>Text transcription parsing configuration</p>
+         * @type {LLMComprehendAsrForUpdate || null}
+         */
+        this.Asr = null;
+
+        /**
+         * <p>Face identification configuration</p>
+         * @type {LLMComprehendFaceRecognitionForUpdate || null}
+         */
+        this.FaceRecognition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Model = 'Model' in params ? params.Model : null;
+
+        if (params.Summary) {
+            let obj = new LLMComprehendSummaryForUpdate();
+            obj.deserialize(params.Summary)
+            this.Summary = obj;
+        }
+
+        if (params.Asr) {
+            let obj = new LLMComprehendAsrForUpdate();
+            obj.deserialize(params.Asr)
+            this.Asr = obj;
+        }
+
+        if (params.FaceRecognition) {
+            let obj = new LLMComprehendFaceRecognitionForUpdate();
+            obj.deserialize(params.FaceRecognition)
+            this.FaceRecognition = obj;
+        }
 
     }
 }
@@ -29447,7 +29962,7 @@ class SemanticsSearchResult extends  AbstractModel {
         this.StartTimeOffset = null;
 
         /**
-         * Specifies the end time of the video clip, in seconds.
+         * Segment end time of the video, in seconds.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -30356,6 +30871,91 @@ class DeleteReviewTemplateRequest extends  AbstractModel {
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * CreateLLMComprehendTemplate request structure.
+ * @class
+ */
+class CreateLLMComprehendTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Resolution level. Available values are:</p><ul><li>Audio: Audio-level comprehension</li><li>Video: Video-level comprehension</li></ul>
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the application ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b></p>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * <p>Large model comprehend template name. The length cannot exceed 64 characters.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Large model comprehend template description information. The length cannot exceed 256 characters.</p>
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * <p>Segment summary parsing configuration</p>
+         * @type {LLMComprehendSummary || null}
+         */
+        this.Summary = null;
+
+        /**
+         * <p>Text transcription parsing configuration</p>
+         * @type {LLMComprehendAsr || null}
+         */
+        this.Asr = null;
+
+        /**
+         * <p>Face identification configuration</p>
+         * @type {LLMComprehendFaceRecognition || null}
+         */
+        this.FaceRecognition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Level = 'Level' in params ? params.Level : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+        if (params.Summary) {
+            let obj = new LLMComprehendSummary();
+            obj.deserialize(params.Summary)
+            this.Summary = obj;
+        }
+
+        if (params.Asr) {
+            let obj = new LLMComprehendAsr();
+            obj.deserialize(params.Asr)
+            this.Asr = obj;
+        }
+
+        if (params.FaceRecognition) {
+            let obj = new LLMComprehendFaceRecognition();
+            obj.deserialize(params.FaceRecognition)
+            this.FaceRecognition = obj;
+        }
 
     }
 }
@@ -32614,6 +33214,55 @@ class PornOcrReviewTemplateInfo extends  AbstractModel {
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * DescribeLLMComprehendTemplates request structure.
+ * @class
+ */
+class DescribeLLMComprehendTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <b>On-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the application ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Filter condition for the unique identifier of the large model comprehend template. The maximum array length is 100.
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * Pagination offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -37860,7 +38509,7 @@ class SearchMediaBySemanticsResponse extends  AbstractModel {
         super();
 
         /**
-         * Media list.
+         * <p>Media list.</p>
          * @type {Array.<SemanticsSearchResult> || null}
          */
         this.SearchResults = null;
@@ -41875,6 +42524,34 @@ Default value: black.
         this.Format = 'Format' in params ? params.Format : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+
+    }
+}
+
+/**
+ * ModifyReviewTemplate response structure.
+ * @class
+ */
+class ModifyReviewTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -48013,6 +48690,43 @@ Up to 10 labels are allowed, each containing no more than 16 characters.
 }
 
 /**
+ * Large model parsing segment summary parse configuration
+ * @class
+ */
+class LLMComprehendSummaryForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Segment summary task switch, available values:
+-ON: Enable segment summary task.
+-OFF: Disable segment summary.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Extended parameter, which is a serialized json string. See [Extended Parameter description](https://www.tencentcloud.com/document/product/862/104493?from_cn_redirect=1#note).
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
+
+    }
+}
+
+/**
  * Speech keyword recognition result.
  * @class
  */
@@ -51095,6 +51809,36 @@ class PoliticalAsrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
+ * Large model parse text transcribe parse configuration
+ * @class
+ */
+class LLMComprehendAsr extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Text transcription task switch. Available values:
+-ON: Enable the transcription task.
+-OFF: Disable text transcription task.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * Scene AIGC image task input.
  * @class
  */
@@ -52689,39 +53433,43 @@ class SearchMediaBySemanticsRequest extends  AbstractModel {
         super();
 
         /**
-         * <b>VOD [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. for customers who activate on-demand services after december 25, 2023, this field must be filled with the application ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b>
+         * <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the application ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b></p>
          * @type {number || null}
          */
         this.SubAppId = null;
 
         /**
-         * Specifies the search content.
+         * <p>Search content</p>
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * Specifies the number of returned records. the default value is 20.
+         * <p>Number of returned records. The default value is 20.</p><p>Value ranges from 1 to 100.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * File type. matches any element in the collection: <li>Video: Video file</li> <li>Audio: Audio file</li> <li>Image: Image file</li>.
+         * <p>File type. Match any element in the collection: <li>Video: video file</li> <li>Audio: audio file</li> <li>Image: image file</li></p>
          * @type {Array.<string> || null}
          */
         this.Categories = null;
 
         /**
-         * Tag set, match any element in the collection. <li>single Tag length limit: 32 characters.</li> <li>array length limit: 16.</li>
+         * <p>Tag set, match any element in the collection.</p><p>Input parameter limit: single tag length limited to 32 characters. Array length limit: 16.</p>
          * @type {Array.<string> || null}
          */
         this.Tags = null;
 
         /**
-         * Specifies the task type for the search. valid values:. 
-- AiAnalysis.DescriptionTask 
-- SmartSubtitle.AsrFullTextTask
+         * <p>Figure collection, matching video clips where all imported figures appear.</p><p>Input limit: Array length limit: 16.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Persons = null;
+
+        /**
+         * <p>Task type to search. Optional values: </p><ul><li>AiAnalysis.DescriptionTask </li><li>SmartSubtitle.AsrFullTextTask</li></ul>
          * @type {Array.<string> || null}
          */
         this.TaskTypes = null;
@@ -52740,6 +53488,7 @@ class SearchMediaBySemanticsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Categories = 'Categories' in params ? params.Categories : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
+        this.Persons = 'Persons' in params ? params.Persons : null;
         this.TaskTypes = 'TaskTypes' in params ? params.TaskTypes : null;
 
     }
@@ -53212,6 +53961,7 @@ module.exports = {
     ManageTaskResponse: ManageTaskResponse,
     CreateImageProcessingTemplateRequest: CreateImageProcessingTemplateRequest,
     ModifyDefaultStorageRegionRequest: ModifyDefaultStorageRegionRequest,
+    DeleteLLMComprehendTemplateRequest: DeleteLLMComprehendTemplateRequest,
     CloneCDNDomainRequest: CloneCDNDomainRequest,
     QualityInspectTaskOutput: QualityInspectTaskOutput,
     QualityEnhanceTaskInput: QualityEnhanceTaskInput,
@@ -53228,6 +53978,7 @@ module.exports = {
     DescribeImageReviewUsageDataResponse: DescribeImageReviewUsageDataResponse,
     TempCertificate: TempCertificate,
     RebuildMediaRequest: RebuildMediaRequest,
+    LLMComprehendSummary: LLMComprehendSummary,
     AiReviewTaskPoliticalOcrResult: AiReviewTaskPoliticalOcrResult,
     QualityEnhanceTask: QualityEnhanceTask,
     AiSampleWord: AiSampleWord,
@@ -53329,8 +54080,10 @@ module.exports = {
     DescribeCDNStatDetailsResponse: DescribeCDNStatDetailsResponse,
     AttachMediaSubtitlesRequest: AttachMediaSubtitlesRequest,
     AiAnalysisTaskCoverResult: AiAnalysisTaskCoverResult,
+    LLMComprehendFaceRecognitionForUpdate: LLMComprehendFaceRecognitionForUpdate,
     DescribeEventConfigRequest: DescribeEventConfigRequest,
     MediaContentReviewOcrTextSegmentItem: MediaContentReviewOcrTextSegmentItem,
+    ModifyLLMComprehendTemplateResponse: ModifyLLMComprehendTemplateResponse,
     AiAnalysisTaskClassificationOutput: AiAnalysisTaskClassificationOutput,
     QualityInspectTask: QualityInspectTask,
     CacheConfigNoCache: CacheConfigNoCache,
@@ -53341,6 +54094,7 @@ module.exports = {
     AiAnalysisTaskHighlightResult: AiAnalysisTaskHighlightResult,
     SetVodDomainCertificateRequest: SetVodDomainCertificateRequest,
     CreateAigcVideoTaskResponse: CreateAigcVideoTaskResponse,
+    ModifyAdaptiveDynamicStreamingTemplateResponse: ModifyAdaptiveDynamicStreamingTemplateResponse,
     CreateRebuildMediaTemplateResponse: CreateRebuildMediaTemplateResponse,
     AiRecognitionTaskOcrWordsResultOutput: AiRecognitionTaskOcrWordsResultOutput,
     AiSampleFaceInfo: AiSampleFaceInfo,
@@ -53371,6 +54125,7 @@ module.exports = {
     PlayStatFileInfo: PlayStatFileInfo,
     ModifyMediaInfoRequest: ModifyMediaInfoRequest,
     FrameRateWithDenInfo: FrameRateWithDenInfo,
+    LLMComprehendAsrForUpdate: LLMComprehendAsrForUpdate,
     TraceWatermarkInput: TraceWatermarkInput,
     ModifyPersonSampleRequest: ModifyPersonSampleRequest,
     ReviewAudioVideoSegmentItem: ReviewAudioVideoSegmentItem,
@@ -53382,7 +54137,7 @@ module.exports = {
     ReduceMediaBitrateTranscodeResult: ReduceMediaBitrateTranscodeResult,
     MediaSubtitleInfo: MediaSubtitleInfo,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
-    ModifyReviewTemplateResponse: ModifyReviewTemplateResponse,
+    DeleteLLMComprehendTemplateResponse: DeleteLLMComprehendTemplateResponse,
     MediaMiniProgramReviewInfoItem: MediaMiniProgramReviewInfoItem,
     TaskStatData: TaskStatData,
     CreateVodDomainRequest: CreateVodDomainRequest,
@@ -53404,6 +54159,7 @@ module.exports = {
     BlurConfigureInfo: BlurConfigureInfo,
     PoliticalAsrReviewTemplateInfoForUpdate: PoliticalAsrReviewTemplateInfoForUpdate,
     WechatMiniProgramPublishTaskInput: WechatMiniProgramPublishTaskInput,
+    LLMComprehendTemplateItem: LLMComprehendTemplateItem,
     AiSampleFaceOperation: AiSampleFaceOperation,
     SvgWatermarkInputForUpdate: SvgWatermarkInputForUpdate,
     AiReviewTaskTerrorismOcrResult: AiReviewTaskTerrorismOcrResult,
@@ -53515,6 +54271,7 @@ module.exports = {
     DeleteMediaResponse: DeleteMediaResponse,
     ModifySnapshotByTimeOffsetTemplateResponse: ModifySnapshotByTimeOffsetTemplateResponse,
     DeleteHeadTailTemplateRequest: DeleteHeadTailTemplateRequest,
+    LLMComprehendFaceRecognition: LLMComprehendFaceRecognition,
     AiAnalysisTaskTagResult: AiAnalysisTaskTagResult,
     SearchMediaResponse: SearchMediaResponse,
     ProcessMediaByMPSResponse: ProcessMediaByMPSResponse,
@@ -53534,6 +54291,7 @@ module.exports = {
     PornImageResult: PornImageResult,
     ComplexAdaptiveDynamicStreamingTask: ComplexAdaptiveDynamicStreamingTask,
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
+    DescribeLLMComprehendTemplatesResponse: DescribeLLMComprehendTemplatesResponse,
     ModifyReviewTemplateRequest: ModifyReviewTemplateRequest,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
     MPSSubTaskResult: MPSSubTaskResult,
@@ -53551,7 +54309,7 @@ module.exports = {
     ModifyEventConfigRequest: ModifyEventConfigRequest,
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
     DescribeHeadTailTemplatesRequest: DescribeHeadTailTemplatesRequest,
-    ModifyAdaptiveDynamicStreamingTemplateResponse: ModifyAdaptiveDynamicStreamingTemplateResponse,
+    CreateLLMComprehendTemplateResponse: CreateLLMComprehendTemplateResponse,
     MediaProcessTaskTranscodeResult: MediaProcessTaskTranscodeResult,
     BlurConfigureInfoForUpdate: BlurConfigureInfoForUpdate,
     EditMediaVideoStream: EditMediaVideoStream,
@@ -53579,6 +54337,7 @@ module.exports = {
     AsrWordsConfigureInfoForUpdate: AsrWordsConfigureInfoForUpdate,
     DescribeStorageDataRequest: DescribeStorageDataRequest,
     LiveRealTimeClipMediaSegmentInfo: LiveRealTimeClipMediaSegmentInfo,
+    ModifyLLMComprehendTemplateRequest: ModifyLLMComprehendTemplateRequest,
     DeleteImageSpriteTemplateResponse: DeleteImageSpriteTemplateResponse,
     LowLightEnhanceInfo: LowLightEnhanceInfo,
     DescribeContentReviewTemplatesResponse: DescribeContentReviewTemplatesResponse,
@@ -53693,6 +54452,7 @@ module.exports = {
     ModifyContentReviewTemplateRequest: ModifyContentReviewTemplateRequest,
     ImageSpriteTemplate: ImageSpriteTemplate,
     DeleteReviewTemplateRequest: DeleteReviewTemplateRequest,
+    CreateLLMComprehendTemplateRequest: CreateLLMComprehendTemplateRequest,
     AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
     AiContentReviewTaskInput: AiContentReviewTaskInput,
     CreateAdaptiveDynamicStreamingTemplateResponse: CreateAdaptiveDynamicStreamingTemplateResponse,
@@ -53730,6 +54490,7 @@ module.exports = {
     DescribeCDNUsageDataRequest: DescribeCDNUsageDataRequest,
     JustInTimeTranscodeTemplate: JustInTimeTranscodeTemplate,
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,
+    DescribeLLMComprehendTemplatesRequest: DescribeLLMComprehendTemplatesRequest,
     AiReviewTaskPoliticalAsrResult: AiReviewTaskPoliticalAsrResult,
     DescribeFileAttributesTaskOutput: DescribeFileAttributesTaskOutput,
     TrtcRecordInfo: TrtcRecordInfo,
@@ -53885,6 +54646,7 @@ module.exports = {
     DescribeStorageRegionsResponse: DescribeStorageRegionsResponse,
     SampleSnapshotTemplate: SampleSnapshotTemplate,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
+    ModifyReviewTemplateResponse: ModifyReviewTemplateResponse,
     ProcedureTask: ProcedureTask,
     ExtractTraceWatermarkRequest: ExtractTraceWatermarkRequest,
     CDNDomainConfig: CDNDomainConfig,
@@ -53978,6 +54740,7 @@ module.exports = {
     CreateSnapshotByTimeOffsetTemplateRequest: CreateSnapshotByTimeOffsetTemplateRequest,
     DescribeQualityInspectTemplatesResponse: DescribeQualityInspectTemplatesResponse,
     UserDefineFaceReviewTemplateInfo: UserDefineFaceReviewTemplateInfo,
+    LLMComprehendSummaryForUpdate: LLMComprehendSummaryForUpdate,
     AiRecognitionTaskAsrWordsResult: AiRecognitionTaskAsrWordsResult,
     CreateSubAppIdRequest: CreateSubAppIdRequest,
     DescribeProcedureTemplatesResponse: DescribeProcedureTemplatesResponse,
@@ -54028,6 +54791,7 @@ module.exports = {
     HandleCurrentPlaylistRequest: HandleCurrentPlaylistRequest,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
+    LLMComprehendAsr: LLMComprehendAsr,
     SceneAigcImageTaskInput: SceneAigcImageTaskInput,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
     HwPrivateAccess: HwPrivateAccess,

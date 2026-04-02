@@ -30,7 +30,9 @@ const StopProjectResponse = models.StopProjectResponse;
 const DescribeDataFetchUrlResponse = models.DescribeDataFetchUrlResponse;
 const DescribeErrorRequest = models.DescribeErrorRequest;
 const StopInstanceRequest = models.StopInstanceRequest;
+const DescribeDataStaticUrlV2Request = models.DescribeDataStaticUrlV2Request;
 const ModifyInstanceRequest = models.ModifyInstanceRequest;
+const DescribeDataStaticProjectV2Response = models.DescribeDataStaticProjectV2Response;
 const DescribeLogListRequest = models.DescribeLogListRequest;
 const DescribeErrorResponse = models.DescribeErrorResponse;
 const DeleteWhitelistResponse = models.DeleteWhitelistResponse;
@@ -39,14 +41,19 @@ const DescribePvListResponse = models.DescribePvListResponse;
 const RumUvInfo = models.RumUvInfo;
 const DescribeOfflineLogsRequest = models.DescribeOfflineLogsRequest;
 const DescribeScoresRequest = models.DescribeScoresRequest;
+const ScoreInfoV2 = models.ScoreInfoV2;
 const DescribeDataReportCountRequest = models.DescribeDataReportCountRequest;
 const DeleteOfflineLogRecordRequest = models.DeleteOfflineLogRecordRequest;
+const DescribeDataStaticResourceV2Request = models.DescribeDataStaticResourceV2Request;
 const DescribeReleaseFilesRequest = models.DescribeReleaseFilesRequest;
 const CreateReleaseFileRequest = models.CreateReleaseFileRequest;
 const DeleteOfflineLogRecordResponse = models.DeleteOfflineLogRecordResponse;
 const DescribeDataCustomUrlRequest = models.DescribeDataCustomUrlRequest;
 const DescribeUvListResponse = models.DescribeUvListResponse;
+const DescribeDataStaticUrlV2Response = models.DescribeDataStaticUrlV2Response;
 const Tag = models.Tag;
+const DescribeDataPvUrlStatisticsV2Request = models.DescribeDataPvUrlStatisticsV2Request;
+const DescribeDataFetchUrlV2Response = models.DescribeDataFetchUrlV2Response;
 const CreateProjectRequest = models.CreateProjectRequest;
 const DescribeDataStaticUrlRequest = models.DescribeDataStaticUrlRequest;
 const ModifyInstanceResponse = models.ModifyInstanceResponse;
@@ -55,21 +62,27 @@ const DeleteStarProjectRequest = models.DeleteStarProjectRequest;
 const DescribeWhitelistsRequest = models.DescribeWhitelistsRequest;
 const DescribeLogExportsResponse = models.DescribeLogExportsResponse;
 const DescribeUvListRequest = models.DescribeUvListRequest;
-const DescribeTawAreasResponse = models.DescribeTawAreasResponse;
+const DescribeDataReportCountV2Request = models.DescribeDataReportCountV2Request;
+const CreateStarProjectRequest = models.CreateStarProjectRequest;
 const DescribeDataRequest = models.DescribeDataRequest;
+const DescribeDataEventUrlV2Request = models.DescribeDataEventUrlV2Request;
 const StopProjectRequest = models.StopProjectRequest;
+const DescribeTawAreasResponse = models.DescribeTawAreasResponse;
 const CreateOfflineLogConfigResponse = models.CreateOfflineLogConfigResponse;
 const ModifyProjectLimitRequest = models.ModifyProjectLimitRequest;
+const DescribeDataEventUrlV2Response = models.DescribeDataEventUrlV2Response;
 const DeleteInstanceResponse = models.DeleteInstanceResponse;
+const DescribeDataWebVitalsPageV2Request = models.DescribeDataWebVitalsPageV2Request;
+const ResumeInstanceRequest = models.ResumeInstanceRequest;
 const DescribeDataPerformancePageRequest = models.DescribeDataPerformancePageRequest;
 const DeleteReleaseFileRequest = models.DeleteReleaseFileRequest;
-const ResumeInstanceRequest = models.ResumeInstanceRequest;
+const DescribeScoresV2Request = models.DescribeScoresV2Request;
 const DescribeDataFetchUrlRequest = models.DescribeDataFetchUrlRequest;
 const DescribeRumLogExportRequest = models.DescribeRumLogExportRequest;
 const DescribeDataLogUrlStatisticsResponse = models.DescribeDataLogUrlStatisticsResponse;
 const CreateProjectResponse = models.CreateProjectResponse;
-const StopInstanceResponse = models.StopInstanceResponse;
-const DescribeProjectLimitsRequest = models.DescribeProjectLimitsRequest;
+const DescribeDataLogUrlStatisticsV2Response = models.DescribeDataLogUrlStatisticsV2Response;
+const DescribeDataCustomUrlResponse = models.DescribeDataCustomUrlResponse;
 const CreateStarProjectResponse = models.CreateStarProjectResponse;
 const DeleteProjectResponse = models.DeleteProjectResponse;
 const DescribeOfflineLogRecordsRequest = models.DescribeOfflineLogRecordsRequest;
@@ -78,34 +91,40 @@ const ReleaseFile = models.ReleaseFile;
 const ModifyProjectLimitResponse = models.ModifyProjectLimitResponse;
 const DescribeRumLogExportsResponse = models.DescribeRumLogExportsResponse;
 const DescribeDataStaticProjectRequest = models.DescribeDataStaticProjectRequest;
+const DescribeScoresResponse = models.DescribeScoresResponse;
 const DescribeRumStatsLogListRequest = models.DescribeRumStatsLogListRequest;
+const DescribeDataBridgeUrlV2Request = models.DescribeDataBridgeUrlV2Request;
 const ResumeProjectRequest = models.ResumeProjectRequest;
 const ProjectLimit = models.ProjectLimit;
 const DeleteLogExportRequest = models.DeleteLogExportRequest;
 const DescribeRumGroupLogResponse = models.DescribeRumGroupLogResponse;
 const DescribeRumStatsLogListResponse = models.DescribeRumStatsLogListResponse;
 const CreateWhitelistRequest = models.CreateWhitelistRequest;
+const StopInstanceResponse = models.StopInstanceResponse;
 const DescribeDataPvUrlStatisticsResponse = models.DescribeDataPvUrlStatisticsResponse;
 const DescribeDataLogUrlInfoRequest = models.DescribeDataLogUrlInfoRequest;
-const DescribeDataCustomUrlResponse = models.DescribeDataCustomUrlResponse;
+const DescribeProjectLimitsRequest = models.DescribeProjectLimitsRequest;
+const DescribeDataPvUrlStatisticsV2Response = models.DescribeDataPvUrlStatisticsV2Response;
 const RumAreaInfo = models.RumAreaInfo;
 const DescribeDataSetUrlStatisticsRequest = models.DescribeDataSetUrlStatisticsRequest;
 const DescribeDataPerformanceProjectResponse = models.DescribeDataPerformanceProjectResponse;
-const DescribeDataFetchUrlInfoResponse = models.DescribeDataFetchUrlInfoResponse;
+const DescribeDataWebVitalsPageV2Response = models.DescribeDataWebVitalsPageV2Response;
 const ResumeInstanceResponse = models.ResumeInstanceResponse;
 const DescribeDataStaticProjectResponse = models.DescribeDataStaticProjectResponse;
-const CreateStarProjectRequest = models.CreateStarProjectRequest;
+const DescribeDataPerformancePageV2Response = models.DescribeDataPerformancePageV2Response;
+const DescribeDataSetUrlStatisticsV2Request = models.DescribeDataSetUrlStatisticsV2Request;
 const DescribeReleaseFileSignRequest = models.DescribeReleaseFileSignRequest;
 const DeleteWhitelistRequest = models.DeleteWhitelistRequest;
 const DescribeDataLogUrlInfoResponse = models.DescribeDataLogUrlInfoResponse;
 const RumPvInfo = models.RumPvInfo;
 const DeleteReleaseFileResponse = models.DeleteReleaseFileResponse;
-const DescribeScoresResponse = models.DescribeScoresResponse;
+const DescribeDataCustomUrlV2Request = models.DescribeDataCustomUrlV2Request;
 const DescribeOfflineLogConfigsResponse = models.DescribeOfflineLogConfigsResponse;
 const DeleteLogExportResponse = models.DeleteLogExportResponse;
-const DescribeReleaseFileSignResponse = models.DescribeReleaseFileSignResponse;
+const DescribeDataBridgeUrlV2Response = models.DescribeDataBridgeUrlV2Response;
 const DescribeOfflineLogsResponse = models.DescribeOfflineLogsResponse;
 const DescribeTawAreasRequest = models.DescribeTawAreasRequest;
+const DescribeDataCustomUrlV2Response = models.DescribeDataCustomUrlV2Response;
 const Filter = models.Filter;
 const DescribeDataLogUrlStatisticsRequest = models.DescribeDataLogUrlStatisticsRequest;
 const DeleteStarProjectResponse = models.DeleteStarProjectResponse;
@@ -114,22 +133,28 @@ const DeleteInstanceRequest = models.DeleteInstanceRequest;
 const LogExport = models.LogExport;
 const DescribeDataStaticResourceResponse = models.DescribeDataStaticResourceResponse;
 const DescribeDataEventUrlResponse = models.DescribeDataEventUrlResponse;
+const DescribeReleaseFileSignResponse = models.DescribeReleaseFileSignResponse;
 const DescribeDataWebVitalsPageRequest = models.DescribeDataWebVitalsPageRequest;
 const DescribeDataFetchUrlInfoRequest = models.DescribeDataFetchUrlInfoRequest;
-const DescribeLogListResponse = models.DescribeLogListResponse;
+const DescribeDataFetchUrlInfoResponse = models.DescribeDataFetchUrlInfoResponse;
 const DescribeReleaseFilesResponse = models.DescribeReleaseFilesResponse;
 const CreateOfflineLogConfigRequest = models.CreateOfflineLogConfigRequest;
 const DescribeDataStaticUrlResponse = models.DescribeDataStaticUrlResponse;
 const CreateWhitelistResponse = models.CreateWhitelistResponse;
 const ScoreInfo = models.ScoreInfo;
 const DescribeDataWebVitalsPageResponse = models.DescribeDataWebVitalsPageResponse;
+const DescribeDataStaticProjectV2Request = models.DescribeDataStaticProjectV2Request;
+const DescribeLogListResponse = models.DescribeLogListResponse;
 const DescribeProjectsRequest = models.DescribeProjectsRequest;
 const DescribeDataEventUrlRequest = models.DescribeDataEventUrlRequest;
+const DescribeDataSetUrlStatisticsV2Response = models.DescribeDataSetUrlStatisticsV2Response;
 const DescribeOfflineLogConfigsRequest = models.DescribeOfflineLogConfigsRequest;
 const DescribeRumGroupLogRequest = models.DescribeRumGroupLogRequest;
 const DeleteOfflineLogConfigRequest = models.DeleteOfflineLogConfigRequest;
 const DescribeWhitelistsResponse = models.DescribeWhitelistsResponse;
+const DescribeDataFetchUrlV2Request = models.DescribeDataFetchUrlV2Request;
 const DescribeProjectsResponse = models.DescribeProjectsResponse;
+const DescribeDataReportCountV2Response = models.DescribeDataReportCountV2Response;
 const ModifyProjectResponse = models.ModifyProjectResponse;
 const DescribeLogExportsRequest = models.DescribeLogExportsRequest;
 const DescribeDataReportCountResponse = models.DescribeDataReportCountResponse;
@@ -138,14 +163,18 @@ const DescribeRumLogExportResponse = models.DescribeRumLogExportResponse;
 const DescribeRumLogExportsRequest = models.DescribeRumLogExportsRequest;
 const ModifyProjectRequest = models.ModifyProjectRequest;
 const DescribeRumLogListRequest = models.DescribeRumLogListRequest;
+const DescribeDataPerformancePageV2Request = models.DescribeDataPerformancePageV2Request;
 const DescribeDataStaticResourceRequest = models.DescribeDataStaticResourceRequest;
 const DescribePvListRequest = models.DescribePvListRequest;
 const DescribeDataPvUrlInfoRequest = models.DescribeDataPvUrlInfoRequest;
 const CreateReleaseFileResponse = models.CreateReleaseFileResponse;
 const CreateLogExportResponse = models.CreateLogExportResponse;
 const DescribeDataFetchProjectResponse = models.DescribeDataFetchProjectResponse;
+const DescribeScoresV2Response = models.DescribeScoresV2Response;
 const Whitelist = models.Whitelist;
+const DescribeDataLogUrlStatisticsV2Request = models.DescribeDataLogUrlStatisticsV2Request;
 const RumProject = models.RumProject;
+const DescribeDataStaticResourceV2Response = models.DescribeDataStaticResourceV2Response;
 const DescribeDataSetUrlStatisticsResponse = models.DescribeDataSetUrlStatisticsResponse;
 
 
@@ -171,14 +200,14 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of logs in a project every minute.
-     * @param {DescribeRumStatsLogListRequest} req
-     * @param {function(string, DescribeRumStatsLogListResponse):void} cb
+     * This API is used to get the list of PVs under a project.
+     * @param {DescribePvListRequest} req
+     * @param {function(string, DescribePvListResponse):void} cb
      * @public
      */
-    DescribeRumStatsLogList(req, cb) {
-        let resp = new DescribeRumStatsLogListResponse();
-        this.request("DescribeRumStatsLogList", req, resp, cb);
+    DescribePvList(req, cb) {
+        let resp = new DescribePvListResponse();
+        this.request("DescribePvList", req, resp, cb);
     }
 
     /**
@@ -193,14 +222,14 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of homepage scores.
-     * @param {DescribeScoresRequest} req
-     * @param {function(string, DescribeScoresResponse):void} cb
+     * This API is used to get the loginfo information.
+     * @param {DescribeDataLogUrlInfoRequest} req
+     * @param {function(string, DescribeDataLogUrlInfoResponse):void} cb
      * @public
      */
-    DescribeScores(req, cb) {
-        let resp = new DescribeScoresResponse();
-        this.request("DescribeScores", req, resp, cb);
+    DescribeDataLogUrlInfo(req, cb) {
+        let resp = new DescribeDataLogUrlInfoResponse();
+        this.request("DescribeDataLogUrlInfo", req, resp, cb);
     }
 
     /**
@@ -234,6 +263,39 @@ class RumClient extends AbstractClient {
     DescribeDataLogUrlStatistics(req, cb) {
         let resp = new DescribeDataLogUrlStatisticsResponse();
         this.request("DescribeDataLogUrlStatistics", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of logs in a project every minute.
+     * @param {DescribeRumStatsLogListRequest} req
+     * @param {function(string, DescribeRumStatsLogListResponse):void} cb
+     * @public
+     */
+    DescribeRumStatsLogList(req, cb) {
+        let resp = new DescribeRumStatsLogListResponse();
+        this.request("DescribeRumStatsLogList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of homepage scores.
+     * @param {DescribeScoresRequest} req
+     * @param {function(string, DescribeScoresResponse):void} cb
+     * @public
+     */
+    DescribeScores(req, cb) {
+        let resp = new DescribeScoresResponse();
+        this.request("DescribeScores", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain PerformancePage information.
+     * @param {DescribeDataPerformancePageV2Request} req
+     * @param {function(string, DescribeDataPerformancePageV2Response):void} cb
+     * @public
+     */
+    DescribeDataPerformancePageV2(req, cb) {
+        let resp = new DescribeDataPerformancePageV2Response();
+        this.request("DescribeDataPerformancePageV2", req, resp, cb);
     }
 
     /**
@@ -347,36 +409,36 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the specified offline log.
-     * @param {DescribeOfflineLogsRequest} req
-     * @param {function(string, DescribeOfflineLogsResponse):void} cb
+     * This API is used to obtain DescribeDataFetchUrl information.
+     * @param {DescribeDataFetchUrlV2Request} req
+     * @param {function(string, DescribeDataFetchUrlV2Response):void} cb
      * @public
      */
-    DescribeOfflineLogs(req, cb) {
-        let resp = new DescribeOfflineLogsResponse();
-        this.request("DescribeOfflineLogs", req, resp, cb);
+    DescribeDataFetchUrlV2(req, cb) {
+        let resp = new DescribeDataFetchUrlV2Response();
+        this.request("DescribeDataFetchUrlV2", req, resp, cb);
     }
 
     /**
-     * This API is used to create a RUM business system.
-     * @param {CreateTawInstanceRequest} req
-     * @param {function(string, CreateTawInstanceResponse):void} cb
+     * This API is used to obtain DescribeDataPvUrlStatistics information.
+     * @param {DescribeDataPvUrlStatisticsV2Request} req
+     * @param {function(string, DescribeDataPvUrlStatisticsV2Response):void} cb
      * @public
      */
-    CreateTawInstance(req, cb) {
-        let resp = new CreateTawInstanceResponse();
-        this.request("CreateTawInstance", req, resp, cb);
+    DescribeDataPvUrlStatisticsV2(req, cb) {
+        let resp = new DescribeDataPvUrlStatisticsV2Response();
+        this.request("DescribeDataPvUrlStatisticsV2", req, resp, cb);
     }
 
     /**
-     * This API is used to get the list of PVs under a project.
-     * @param {DescribePvListRequest} req
-     * @param {function(string, DescribePvListResponse):void} cb
+     * This API is used to get the DescribeDataFetchUrlInfo information.
+     * @param {DescribeDataFetchUrlInfoRequest} req
+     * @param {function(string, DescribeDataFetchUrlInfoResponse):void} cb
      * @public
      */
-    DescribePvList(req, cb) {
-        let resp = new DescribePvListResponse();
-        this.request("DescribePvList", req, resp, cb);
+    DescribeDataFetchUrlInfo(req, cb) {
+        let resp = new DescribeDataFetchUrlInfoResponse();
+        this.request("DescribeDataFetchUrlInfo", req, resp, cb);
     }
 
     /**
@@ -392,6 +454,17 @@ Default API request rate limit: 20 requests/sec.
     DescribeLogExports(req, cb) {
         let resp = new DescribeLogExportsResponse();
         this.request("DescribeLogExports", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the DescribeDataPvUrlStatistics information.
+     * @param {DescribeDataPvUrlStatisticsRequest} req
+     * @param {function(string, DescribeDataPvUrlStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeDataPvUrlStatistics(req, cb) {
+        let resp = new DescribeDataPvUrlStatisticsResponse();
+        this.request("DescribeDataPvUrlStatistics", req, resp, cb);
     }
 
     /**
@@ -429,14 +502,25 @@ It includes the Web Vitals metric for the page loading performance.
     }
 
     /**
-     * This API is used to get the DescribeDataPvUrlStatistics information.
-     * @param {DescribeDataPvUrlStatisticsRequest} req
-     * @param {function(string, DescribeDataPvUrlStatisticsResponse):void} cb
+     * This API is used to obtain DescribeDataCustomUrl information.
+     * @param {DescribeDataCustomUrlV2Request} req
+     * @param {function(string, DescribeDataCustomUrlV2Response):void} cb
      * @public
      */
-    DescribeDataPvUrlStatistics(req, cb) {
-        let resp = new DescribeDataPvUrlStatisticsResponse();
-        this.request("DescribeDataPvUrlStatistics", req, resp, cb);
+    DescribeDataCustomUrlV2(req, cb) {
+        let resp = new DescribeDataCustomUrlV2Response();
+        this.request("DescribeDataCustomUrlV2", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain DescribeDataSetUrlStatistics information.
+     * @param {DescribeDataSetUrlStatisticsV2Request} req
+     * @param {function(string, DescribeDataSetUrlStatisticsV2Response):void} cb
+     * @public
+     */
+    DescribeDataSetUrlStatisticsV2(req, cb) {
+        let resp = new DescribeDataSetUrlStatisticsV2Response();
+        this.request("DescribeDataSetUrlStatisticsV2", req, resp, cb);
     }
 
     /**
@@ -448,6 +532,17 @@ It includes the Web Vitals metric for the page loading performance.
     DescribeReleaseFileSign(req, cb) {
         let resp = new DescribeReleaseFileSignResponse();
         this.request("DescribeReleaseFileSign", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain DescribeDataStaticResource information.
+     * @param {DescribeDataStaticResourceV2Request} req
+     * @param {function(string, DescribeDataStaticResourceV2Response):void} cb
+     * @public
+     */
+    DescribeDataStaticResourceV2(req, cb) {
+        let resp = new DescribeDataStaticResourceV2Response();
+        this.request("DescribeDataStaticResourceV2", req, resp, cb);
     }
 
     /**
@@ -488,6 +583,17 @@ Default API request rate limit: 20 requests/sec.
     }
 
     /**
+     * This API is used to obtain DescribeDataEventUrl information.
+     * @param {DescribeDataEventUrlV2Request} req
+     * @param {function(string, DescribeDataEventUrlV2Response):void} cb
+     * @public
+     */
+    DescribeDataEventUrlV2(req, cb) {
+        let resp = new DescribeDataEventUrlV2Response();
+        this.request("DescribeDataEventUrlV2", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the DescribeDataStaticResource information.
      * @param {DescribeDataStaticResourceRequest} req
      * @param {function(string, DescribeDataStaticResourceResponse):void} cb
@@ -510,6 +616,17 @@ Default API request rate limit: 20 requests/sec.
     }
 
     /**
+     * This API is used to obtain DescribeDataStaticProject information.
+     * @param {DescribeDataStaticProjectV2Request} req
+     * @param {function(string, DescribeDataStaticProjectV2Response):void} cb
+     * @public
+     */
+    DescribeDataStaticProjectV2(req, cb) {
+        let resp = new DescribeDataStaticProjectV2Response();
+        this.request("DescribeDataStaticProjectV2", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the DescribeDataCustomUrl information.
      * @param {DescribeDataCustomUrlRequest} req
      * @param {function(string, DescribeDataCustomUrlResponse):void} cb
@@ -518,6 +635,17 @@ Default API request rate limit: 20 requests/sec.
     DescribeDataCustomUrl(req, cb) {
         let resp = new DescribeDataCustomUrlResponse();
         this.request("DescribeDataCustomUrl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain DescribeDataStaticUrl information.
+     * @param {DescribeDataStaticUrlV2Request} req
+     * @param {function(string, DescribeDataStaticUrlV2Response):void} cb
+     * @public
+     */
+    DescribeDataStaticUrlV2(req, cb) {
+        let resp = new DescribeDataStaticUrlV2Response();
+        this.request("DescribeDataStaticUrlV2", req, resp, cb);
     }
 
     /**
@@ -587,14 +715,14 @@ Default API request rate limit: 20 requests/sec.
     }
 
     /**
-     * This API is used to get the DescribeDataFetchUrlInfo information.
-     * @param {DescribeDataFetchUrlInfoRequest} req
-     * @param {function(string, DescribeDataFetchUrlInfoResponse):void} cb
+     * This API is used to create a RUM business system.
+     * @param {CreateTawInstanceRequest} req
+     * @param {function(string, CreateTawInstanceResponse):void} cb
      * @public
      */
-    DescribeDataFetchUrlInfo(req, cb) {
-        let resp = new DescribeDataFetchUrlInfoResponse();
-        this.request("DescribeDataFetchUrlInfo", req, resp, cb);
+    CreateTawInstance(req, cb) {
+        let resp = new CreateTawInstanceResponse();
+        this.request("CreateTawInstance", req, resp, cb);
     }
 
     /**
@@ -617,6 +745,17 @@ Default API request rate limit: 20 requests/sec.
     ModifyProject(req, cb) {
         let resp = new ModifyProjectResponse();
         this.request("ModifyProject", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain LogUrlStatistics information.
+     * @param {DescribeDataLogUrlStatisticsV2Request} req
+     * @param {function(string, DescribeDataLogUrlStatisticsV2Response):void} cb
+     * @public
+     */
+    DescribeDataLogUrlStatisticsV2(req, cb) {
+        let resp = new DescribeDataLogUrlStatisticsV2Response();
+        this.request("DescribeDataLogUrlStatisticsV2", req, resp, cb);
     }
 
     /**
@@ -643,6 +782,17 @@ Default API request rate limit: 20 requests/sec.
     DeleteLogExport(req, cb) {
         let resp = new DeleteLogExportResponse();
         this.request("DeleteLogExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the specified offline log.
+     * @param {DescribeOfflineLogsRequest} req
+     * @param {function(string, DescribeOfflineLogsResponse):void} cb
+     * @public
+     */
+    DescribeOfflineLogs(req, cb) {
+        let resp = new DescribeOfflineLogsResponse();
+        this.request("DescribeOfflineLogs", req, resp, cb);
     }
 
     /**
@@ -690,14 +840,14 @@ Default API request rate limit: 20 requests/sec.
     }
 
     /**
-     * This API is used to get the loginfo information.
-     * @param {DescribeDataLogUrlInfoRequest} req
-     * @param {function(string, DescribeDataLogUrlInfoResponse):void} cb
+     * This API is used to obtain DescribeDataBridgeUrl information.
+     * @param {DescribeDataBridgeUrlV2Request} req
+     * @param {function(string, DescribeDataBridgeUrlV2Response):void} cb
      * @public
      */
-    DescribeDataLogUrlInfo(req, cb) {
-        let resp = new DescribeDataLogUrlInfoResponse();
-        this.request("DescribeDataLogUrlInfo", req, resp, cb);
+    DescribeDataBridgeUrlV2(req, cb) {
+        let resp = new DescribeDataBridgeUrlV2Response();
+        this.request("DescribeDataBridgeUrlV2", req, resp, cb);
     }
 
     /**
@@ -723,6 +873,18 @@ Default API request rate limit: 20 requests/sec.
     }
 
     /**
+     * This API is used to obtain DescribeDataWebVitalsPage information, which is the core user activity information.
+Web Vitals for page loading performance are key performance metrics.
+     * @param {DescribeDataWebVitalsPageV2Request} req
+     * @param {function(string, DescribeDataWebVitalsPageV2Response):void} cb
+     * @public
+     */
+    DescribeDataWebVitalsPageV2(req, cb) {
+        let resp = new DescribeDataWebVitalsPageV2Response();
+        this.request("DescribeDataWebVitalsPageV2", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the PvUrlInfo information.
      * @param {DescribeDataPvUrlInfoRequest} req
      * @param {function(string, DescribeDataPvUrlInfoResponse):void} cb
@@ -734,14 +896,25 @@ Default API request rate limit: 20 requests/sec.
     }
 
     /**
-     * This API is used to get the DescribeDataStaticProject information.
-     * @param {DescribeDataStaticProjectRequest} req
-     * @param {function(string, DescribeDataStaticProjectResponse):void} cb
+     * This API is used to obtain the home page score list.
+     * @param {DescribeScoresV2Request} req
+     * @param {function(string, DescribeScoresV2Response):void} cb
      * @public
      */
-    DescribeDataStaticProject(req, cb) {
-        let resp = new DescribeDataStaticProjectResponse();
-        this.request("DescribeDataStaticProject", req, resp, cb);
+    DescribeScoresV2(req, cb) {
+        let resp = new DescribeScoresV2Response();
+        this.request("DescribeScoresV2", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the project reporting volume.
+     * @param {DescribeDataReportCountV2Request} req
+     * @param {function(string, DescribeDataReportCountV2Response):void} cb
+     * @public
+     */
+    DescribeDataReportCountV2(req, cb) {
+        let resp = new DescribeDataReportCountV2Response();
+        this.request("DescribeDataReportCountV2", req, resp, cb);
     }
 
     /**
@@ -753,6 +926,17 @@ Default API request rate limit: 20 requests/sec.
     DeleteProject(req, cb) {
         let resp = new DeleteProjectResponse();
         this.request("DeleteProject", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the DescribeDataStaticProject information.
+     * @param {DescribeDataStaticProjectRequest} req
+     * @param {function(string, DescribeDataStaticProjectResponse):void} cb
+     * @public
+     */
+    DescribeDataStaticProject(req, cb) {
+        let resp = new DescribeDataStaticProjectResponse();
+        this.request("DescribeDataStaticProject", req, resp, cb);
     }
 
     /**

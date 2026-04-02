@@ -2021,7 +2021,7 @@ This API is used to query only the information of `IPv6` addresses that are alre
     }
 
     /**
-     * This API (RenewVpnGateway) is used to renew prepaid (monthly subscription) VPN gateways. Currently, only IPSEC gateways are supported.
+     * This API (RenewVpnGateway) is used to renew prepaid (yearly/monthly subscription) VPN gateways. Currently, only IPSEC gateways are supported.
      * @param {RenewVpnGatewayRequest} req
      * @param {function(string, RenewVpnGatewayResponse):void} cb
      * @public

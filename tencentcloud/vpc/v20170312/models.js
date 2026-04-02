@@ -24391,10 +24391,22 @@ class ModifyVpnGatewayAttributeRequest extends  AbstractModel {
         this.VpnGatewayName = null;
 
         /**
-         * VPN gateway billing mode. Currently, only the conversion of prepaid (monthly subscription) to postpaid (that is, pay-as-you-go) is supported. That is, the parameters only supports POSTPAID_BY_HOUR.
+         * VPN gateway billing mode. Currently, only the conversion of prepaid (yearly/monthly subscription) to postpaid (that is, pay-as-you-go) is supported. That is, the parameters only supports POSTPAID_BY_HOUR.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.BgpAsn = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxConnection = null;
 
     }
 
@@ -24408,6 +24420,8 @@ class ModifyVpnGatewayAttributeRequest extends  AbstractModel {
         this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
         this.VpnGatewayName = 'VpnGatewayName' in params ? params.VpnGatewayName : null;
         this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.BgpAsn = 'BgpAsn' in params ? params.BgpAsn : null;
+        this.MaxConnection = 'MaxConnection' in params ? params.MaxConnection : null;
 
     }
 }
@@ -25523,7 +25537,7 @@ class VpnGateway extends  AbstractModel {
         this.IsAddressBlocked = null;
 
         /**
-         * Change of billing method. PREPAID_TO_POSTPAID: Monthly subscription prepaid to postpaid by hour.
+         * Change of billing method. PREPAID_TO_POSTPAID: Yearly/monthly subscription prepaid to postpaid by hour.
          * @type {string || null}
          */
         this.NewPurchasePlan = null;
@@ -25570,6 +25584,12 @@ class VpnGateway extends  AbstractModel {
          */
         this.MaxConnection = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.BgpAsn = null;
+
     }
 
     /**
@@ -25607,6 +25627,7 @@ class VpnGateway extends  AbstractModel {
         this.NetworkInstanceId = 'NetworkInstanceId' in params ? params.NetworkInstanceId : null;
         this.CdcId = 'CdcId' in params ? params.CdcId : null;
         this.MaxConnection = 'MaxConnection' in params ? params.MaxConnection : null;
+        this.BgpAsn = 'BgpAsn' in params ? params.BgpAsn : null;
 
     }
 }
@@ -29071,13 +29092,13 @@ class CreateVpnGatewayRequest extends  AbstractModel {
         this.InternetMaxBandwidthOut = null;
 
         /**
-         * The VPN gateway billing mode. PREPAID: prepaid means monthly subscription. POSTPAID_BY_HOUR: postpaid means pay-as-you-go. Default: POSTPAID_BY_HOUR. If prepaid mode is specified, the `InstanceChargePrepaid` parameter must be entered.
+         * The VPN gateway billing mode. PREPAID: prepaid means yearly/monthly subscription. POSTPAID_BY_HOUR: postpaid means pay-as-you-go. Default: POSTPAID_BY_HOUR. If prepaid mode is specified, the `InstanceChargePrepaid` parameter must be entered.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
-         * Parameter settings for prepaid billing mode, also known as monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
+         * Parameter settings for prepaid billing mode, also known as yearly/monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
@@ -29112,6 +29133,12 @@ class CreateVpnGatewayRequest extends  AbstractModel {
          */
         this.MaxConnection = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.BgpAsn = null;
+
     }
 
     /**
@@ -29144,6 +29171,7 @@ class CreateVpnGatewayRequest extends  AbstractModel {
         }
         this.CdcId = 'CdcId' in params ? params.CdcId : null;
         this.MaxConnection = 'MaxConnection' in params ? params.MaxConnection : null;
+        this.BgpAsn = 'BgpAsn' in params ? params.BgpAsn : null;
 
     }
 }
@@ -34496,7 +34524,7 @@ class DeleteVpcResponse extends  AbstractModel {
 }
 
 /**
- * Prepaid (monthly subscription) billing object.
+ * Prepaid (yearly/monthly subscription) billing object.
  * @class
  */
 class InstanceChargePrepaid extends  AbstractModel {

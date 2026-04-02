@@ -734,6 +734,244 @@ class StopInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDataStaticUrlV2 request structure.
+ * @class
+ */
+class DescribeDataStaticUrlV2Request extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * pagepv: performance view. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * End time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Custom parameter 2.
+         * @type {string || null}
+         */
+        this.ExtSecond = null;
+
+        /**
+         * Browser engine.
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * Internet service provider.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * Source page.
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * Log level.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Brand.
+         * @type {string || null}
+         */
+        this.Brand = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Version.
+         * @type {string || null}
+         */
+        this.VersionNum = null;
+
+        /**
+         * Platform.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Custom parameter 3.
+         * @type {string || null}
+         */
+        this.ExtThird = null;
+
+        /**
+         * Custom parameter 1.
+         * @type {string || null}
+         */
+        this.ExtFirst = null;
+
+        /**
+         * Network type.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * Model.
+         * @type {string || null}
+         */
+        this.Device = null;
+
+        /**
+         * Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+         * @type {string || null}
+         */
+        this.IsAbroad = null;
+
+        /**
+         * Operating system.
+         * @type {string || null}
+         */
+        this.Os = null;
+
+        /**
+         * Browser.
+         * @type {string || null}
+         */
+        this.Browser = null;
+
+        /**
+         * Duration calculation method.
+         * @type {string || null}
+         */
+        this.CostType = null;
+
+        /**
+         * Source.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Environment.
+         * @type {string || null}
+         */
+        this.Env = null;
+
+        /**
+         * Custom parameter 4.
+         * @type {string || null}
+         */
+        this.ExtFourth = null;
+
+        /**
+         * Custom parameter 5.
+         * @type {string || null}
+         */
+        this.ExtFifth = null;
+
+        /**
+         * Custom parameter 6.
+         * @type {string || null}
+         */
+        this.ExtSixth = null;
+
+        /**
+         * Custom parameter 7.
+         * @type {string || null}
+         */
+        this.ExtSeventh = null;
+
+        /**
+         * Custom parameter 8.
+         * @type {string || null}
+         */
+        this.ExtEighth = null;
+
+        /**
+         * Custom parameter 9.
+         * @type {string || null}
+         */
+        this.ExtNinth = null;
+
+        /**
+         * Custom parameter 10.
+         * @type {string || null}
+         */
+        this.ExtTenth = null;
+
+        /**
+         * Time period.
+         * @type {string || null}
+         */
+        this.Granularity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ExtSecond = 'ExtSecond' in params ? params.ExtSecond : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.From = 'From' in params ? params.From : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.VersionNum = 'VersionNum' in params ? params.VersionNum : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.ExtThird = 'ExtThird' in params ? params.ExtThird : null;
+        this.ExtFirst = 'ExtFirst' in params ? params.ExtFirst : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.Device = 'Device' in params ? params.Device : null;
+        this.IsAbroad = 'IsAbroad' in params ? params.IsAbroad : null;
+        this.Os = 'Os' in params ? params.Os : null;
+        this.Browser = 'Browser' in params ? params.Browser : null;
+        this.CostType = 'CostType' in params ? params.CostType : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Env = 'Env' in params ? params.Env : null;
+        this.ExtFourth = 'ExtFourth' in params ? params.ExtFourth : null;
+        this.ExtFifth = 'ExtFifth' in params ? params.ExtFifth : null;
+        this.ExtSixth = 'ExtSixth' in params ? params.ExtSixth : null;
+        this.ExtSeventh = 'ExtSeventh' in params ? params.ExtSeventh : null;
+        this.ExtEighth = 'ExtEighth' in params ? params.ExtEighth : null;
+        this.ExtNinth = 'ExtNinth' in params ? params.ExtNinth : null;
+        this.ExtTenth = 'ExtTenth' in params ? params.ExtTenth : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
+
+    }
+}
+
+/**
  * ModifyInstance request structure.
  * @class
  */
@@ -771,6 +1009,41 @@ class ModifyInstanceRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.InstanceDesc = 'InstanceDesc' in params ? params.InstanceDesc : null;
+
+    }
+}
+
+/**
+ * DescribeDataStaticProjectV2 response structure.
+ * @class
+ */
+class DescribeDataStaticProjectV2Response extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Return value.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1177,6 +1450,188 @@ class DescribeScoresRequest extends  AbstractModel {
 }
 
 /**
+ * Project score entity.
+ * @class
+ */
+class ScoreInfoV2 extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ProjectID = null;
+
+        /**
+         * Total project score.
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * API performance score.
+         * @type {number || null}
+         */
+        this.ApiPerformanceScore = null;
+
+        /**
+         * API availability score.
+         * @type {number || null}
+         */
+        this.ApiAvailableScore = null;
+
+        /**
+         * Total API calls.
+         * @type {number || null}
+         */
+        this.ApiNum = null;
+
+        /**
+         * API failures.
+         * @type {number || null}
+         */
+        this.ApiFail = null;
+
+        /**
+         * Average API duration.
+         * @type {number || null}
+         */
+        this.ApiDuration = null;
+
+        /**
+         * Page performance score.
+         * @type {number || null}
+         */
+        this.PagePerformanceScore = null;
+
+        /**
+         * Page views.
+         * @type {number || null}
+         */
+        this.PagePv = null;
+
+        /**
+         * Unique visitors.
+         * @type {number || null}
+         */
+        this.PageUv = null;
+
+        /**
+         * Page errors.
+         * @type {number || null}
+         */
+        this.PageError = null;
+
+        /**
+         * First meaningful paint.
+         * @type {number || null}
+         */
+        this.PageDuration = null;
+
+        /**
+         * Average largest contentful paint (LCP).
+         * @type {number || null}
+         */
+        this.PageLCP = null;
+
+        /**
+         * Average first input delay (FID).
+         * @type {number || null}
+         */
+        this.PageFID = null;
+
+        /**
+         * Average cumulative layout shift (CLS).
+         * @type {number || null}
+         */
+        this.PageCLS = null;
+
+        /**
+         * Average first contentful paint (FCP).
+         * @type {number || null}
+         */
+        this.PageFCP = null;
+
+        /**
+         * Average interaction to next paint (INP).
+         * @type {number || null}
+         */
+        this.PageINP = null;
+
+        /**
+         * JavaScript error score.
+         * @type {number || null}
+         */
+        this.JsErrorScore = null;
+
+        /**
+         * Static resource availability score.
+         * @type {number || null}
+         */
+        this.StaticAvailableScore = null;
+
+        /**
+         * Static resource performance score.
+         * @type {number || null}
+         */
+        this.StaticPerformanceScore = null;
+
+        /**
+         * Total static resource requests.
+         * @type {number || null}
+         */
+        this.StaticNum = null;
+
+        /**
+         * Static resource loading failures.
+         * @type {number || null}
+         */
+        this.StaticFail = null;
+
+        /**
+         * Static resource loading time.
+         * @type {number || null}
+         */
+        this.StaticDuration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.ApiPerformanceScore = 'ApiPerformanceScore' in params ? params.ApiPerformanceScore : null;
+        this.ApiAvailableScore = 'ApiAvailableScore' in params ? params.ApiAvailableScore : null;
+        this.ApiNum = 'ApiNum' in params ? params.ApiNum : null;
+        this.ApiFail = 'ApiFail' in params ? params.ApiFail : null;
+        this.ApiDuration = 'ApiDuration' in params ? params.ApiDuration : null;
+        this.PagePerformanceScore = 'PagePerformanceScore' in params ? params.PagePerformanceScore : null;
+        this.PagePv = 'PagePv' in params ? params.PagePv : null;
+        this.PageUv = 'PageUv' in params ? params.PageUv : null;
+        this.PageError = 'PageError' in params ? params.PageError : null;
+        this.PageDuration = 'PageDuration' in params ? params.PageDuration : null;
+        this.PageLCP = 'PageLCP' in params ? params.PageLCP : null;
+        this.PageFID = 'PageFID' in params ? params.PageFID : null;
+        this.PageCLS = 'PageCLS' in params ? params.PageCLS : null;
+        this.PageFCP = 'PageFCP' in params ? params.PageFCP : null;
+        this.PageINP = 'PageINP' in params ? params.PageINP : null;
+        this.JsErrorScore = 'JsErrorScore' in params ? params.JsErrorScore : null;
+        this.StaticAvailableScore = 'StaticAvailableScore' in params ? params.StaticAvailableScore : null;
+        this.StaticPerformanceScore = 'StaticPerformanceScore' in params ? params.StaticPerformanceScore : null;
+        this.StaticNum = 'StaticNum' in params ? params.StaticNum : null;
+        this.StaticFail = 'StaticFail' in params ? params.StaticFail : null;
+        this.StaticDuration = 'StaticDuration' in params ? params.StaticDuration : null;
+
+    }
+}
+
+/**
  * DescribeDataReportCount request structure.
  * @class
  */
@@ -1263,6 +1718,244 @@ class DeleteOfflineLogRecordRequest extends  AbstractModel {
         }
         this.ProjectKey = 'ProjectKey' in params ? params.ProjectKey : null;
         this.FileID = 'FileID' in params ? params.FileID : null;
+
+    }
+}
+
+/**
+ * DescribeDataStaticResourceV2 request structure.
+ * @class
+ */
+class DescribeDataStaticResourceV2Request extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * top: top resource view. count40x: 40X view. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * End time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Custom parameter 2.
+         * @type {string || null}
+         */
+        this.ExtSecond = null;
+
+        /**
+         * Browser engine.
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * Internet service provider.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * Source page.
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * Log level.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Brand.
+         * @type {string || null}
+         */
+        this.Brand = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Version.
+         * @type {string || null}
+         */
+        this.VersionNum = null;
+
+        /**
+         * Platform.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Custom parameter 3.
+         * @type {string || null}
+         */
+        this.ExtThird = null;
+
+        /**
+         * Custom parameter 1.
+         * @type {string || null}
+         */
+        this.ExtFirst = null;
+
+        /**
+         * Network type.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * Model.
+         * @type {string || null}
+         */
+        this.Device = null;
+
+        /**
+         * Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+         * @type {string || null}
+         */
+        this.IsAbroad = null;
+
+        /**
+         * Operating system.
+         * @type {string || null}
+         */
+        this.Os = null;
+
+        /**
+         * Browser.
+         * @type {string || null}
+         */
+        this.Browser = null;
+
+        /**
+         * Duration calculation method.
+         * @type {string || null}
+         */
+        this.CostType = null;
+
+        /**
+         * Source.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Environment.
+         * @type {string || null}
+         */
+        this.Env = null;
+
+        /**
+         * Custom parameter 4.
+         * @type {string || null}
+         */
+        this.ExtFourth = null;
+
+        /**
+         * Custom parameter 5.
+         * @type {string || null}
+         */
+        this.ExtFifth = null;
+
+        /**
+         * Custom parameter 6.
+         * @type {string || null}
+         */
+        this.ExtSixth = null;
+
+        /**
+         * Custom parameter 7.
+         * @type {string || null}
+         */
+        this.ExtSeventh = null;
+
+        /**
+         * Custom parameter 8.
+         * @type {string || null}
+         */
+        this.ExtEighth = null;
+
+        /**
+         * Custom parameter 9.
+         * @type {string || null}
+         */
+        this.ExtNinth = null;
+
+        /**
+         * Custom parameter 10.
+         * @type {string || null}
+         */
+        this.ExtTenth = null;
+
+        /**
+         * Time period.
+         * @type {string || null}
+         */
+        this.Granularity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ExtSecond = 'ExtSecond' in params ? params.ExtSecond : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.From = 'From' in params ? params.From : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.VersionNum = 'VersionNum' in params ? params.VersionNum : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.ExtThird = 'ExtThird' in params ? params.ExtThird : null;
+        this.ExtFirst = 'ExtFirst' in params ? params.ExtFirst : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.Device = 'Device' in params ? params.Device : null;
+        this.IsAbroad = 'IsAbroad' in params ? params.IsAbroad : null;
+        this.Os = 'Os' in params ? params.Os : null;
+        this.Browser = 'Browser' in params ? params.Browser : null;
+        this.CostType = 'CostType' in params ? params.CostType : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Env = 'Env' in params ? params.Env : null;
+        this.ExtFourth = 'ExtFourth' in params ? params.ExtFourth : null;
+        this.ExtFifth = 'ExtFifth' in params ? params.ExtFifth : null;
+        this.ExtSixth = 'ExtSixth' in params ? params.ExtSixth : null;
+        this.ExtSeventh = 'ExtSeventh' in params ? params.ExtSeventh : null;
+        this.ExtEighth = 'ExtEighth' in params ? params.ExtEighth : null;
+        this.ExtNinth = 'ExtNinth' in params ? params.ExtNinth : null;
+        this.ExtTenth = 'ExtTenth' in params ? params.ExtTenth : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
 
     }
 }
@@ -1606,6 +2299,41 @@ class DescribeUvListResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDataStaticUrlV2 response structure.
+ * @class
+ */
+class DescribeDataStaticUrlV2Response extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Return value.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Tag
  * @class
  */
@@ -1636,6 +2364,281 @@ class Tag extends  AbstractModel {
         }
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeDataPvUrlStatisticsV2 request structure.
+ * @class
+ */
+class DescribeDataPvUrlStatisticsV2Request extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * allcount: performance view. day: 14-day data. vp: performance. ckuv: UV. ckpv: PV. condition: condition list. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * End time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Custom parameter 2.
+         * @type {string || null}
+         */
+        this.ExtSecond = null;
+
+        /**
+         * Browser engine.
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * Internet service provider.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * Source page.
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * Log level.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Brand.
+         * @type {string || null}
+         */
+        this.Brand = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Version.
+         * @type {string || null}
+         */
+        this.VersionNum = null;
+
+        /**
+         * Platform.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Custom parameter 3.
+         * @type {string || null}
+         */
+        this.ExtThird = null;
+
+        /**
+         * Custom parameter 1.
+         * @type {string || null}
+         */
+        this.ExtFirst = null;
+
+        /**
+         * Network type (1, 2, 3, 4, 5, or 100). 1 indicates Wi-Fi. 2 indicates 2G. 3 indicates 3G. 4 indicates 4G. 5 indicates 5G. 6 indicates 6G. 100 indicates unknown.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * Model.
+         * @type {string || null}
+         */
+        this.Device = null;
+
+        /**
+         * Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+         * @type {string || null}
+         */
+        this.IsAbroad = null;
+
+        /**
+         * Operating system.
+         * @type {string || null}
+         */
+        this.Os = null;
+
+        /**
+         * Browser.
+         * @type {string || null}
+         */
+        this.Browser = null;
+
+        /**
+         * Environment.
+         * @type {string || null}
+         */
+        this.Env = null;
+
+        /**
+         * Parameter value enumeration for group by. 1: 1 minute. 2: 5 minutes. 3: 30 minutes. 4: 1 hour.
+ 5:1d
+         * @type {number || null}
+         */
+        this.GroupByType = null;
+
+        /**
+         * 1: Queries Zhiyan.
+0: Uses the old logic, which is removed. Do not use this value.
+         * @type {number || null}
+         */
+        this.IsNewData = null;
+
+        /**
+         * Custom parameter 4.
+         * @type {string || null}
+         */
+        this.ExtFourth = null;
+
+        /**
+         * Custom parameter 5.
+         * @type {string || null}
+         */
+        this.ExtFifth = null;
+
+        /**
+         * Custom parameter 6.
+         * @type {string || null}
+         */
+        this.ExtSixth = null;
+
+        /**
+         * Custom parameter 7.
+         * @type {string || null}
+         */
+        this.ExtSeventh = null;
+
+        /**
+         * Custom parameter 8.
+         * @type {string || null}
+         */
+        this.ExtEighth = null;
+
+        /**
+         * Custom parameter 9.
+         * @type {string || null}
+         */
+        this.ExtNinth = null;
+
+        /**
+         * Custom parameter 10.
+         * @type {string || null}
+         */
+        this.ExtTenth = null;
+
+        /**
+         * Time period.
+         * @type {string || null}
+         */
+        this.Granularity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ExtSecond = 'ExtSecond' in params ? params.ExtSecond : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.From = 'From' in params ? params.From : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.VersionNum = 'VersionNum' in params ? params.VersionNum : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.ExtThird = 'ExtThird' in params ? params.ExtThird : null;
+        this.ExtFirst = 'ExtFirst' in params ? params.ExtFirst : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.Device = 'Device' in params ? params.Device : null;
+        this.IsAbroad = 'IsAbroad' in params ? params.IsAbroad : null;
+        this.Os = 'Os' in params ? params.Os : null;
+        this.Browser = 'Browser' in params ? params.Browser : null;
+        this.Env = 'Env' in params ? params.Env : null;
+        this.GroupByType = 'GroupByType' in params ? params.GroupByType : null;
+        this.IsNewData = 'IsNewData' in params ? params.IsNewData : null;
+        this.ExtFourth = 'ExtFourth' in params ? params.ExtFourth : null;
+        this.ExtFifth = 'ExtFifth' in params ? params.ExtFifth : null;
+        this.ExtSixth = 'ExtSixth' in params ? params.ExtSixth : null;
+        this.ExtSeventh = 'ExtSeventh' in params ? params.ExtSeventh : null;
+        this.ExtEighth = 'ExtEighth' in params ? params.ExtEighth : null;
+        this.ExtNinth = 'ExtNinth' in params ? params.ExtNinth : null;
+        this.ExtTenth = 'ExtTenth' in params ? params.ExtTenth : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
+
+    }
+}
+
+/**
+ * DescribeDataFetchUrlV2 response structure.
+ * @class
+ */
+class DescribeDataFetchUrlV2Response extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Return value.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2125,6 +3128,391 @@ class DescribeUvListRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDataReportCountV2 request structure.
+ * @class
+ */
+class DescribeDataReportCountV2Request extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Reporting type (custom, event, log, miniProgramData, performance, pv, speed, and webvitals).
+         * @type {string || null}
+         */
+        this.ReportType = null;
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ReportType = 'ReportType' in params ? params.ReportType : null;
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+
+    }
+}
+
+/**
+ * CreateStarProject request structure.
+ * @class
+ */
+class CreateStarProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as taw-123
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.ID = 'ID' in params ? params.ID : null;
+
+    }
+}
+
+/**
+ * DescribeData request structure.
+ * @class
+ */
+class DescribeDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query string
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Query = 'Query' in params ? params.Query : null;
+        this.ID = 'ID' in params ? params.ID : null;
+
+    }
+}
+
+/**
+ * DescribeDataEventUrlV2 request structure.
+ * @class
+ */
+class DescribeDataEventUrlV2Request extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * allcount: performance view. day: 14-day data. condition: condition list. ckuv: obtaining UV trend. ckpv: obtaining PV trend. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * End time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Custom parameter 2.
+         * @type {string || null}
+         */
+        this.ExtSecond = null;
+
+        /**
+         * Browser engine.
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * Internet service provider.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * Source page.
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * Log level.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Brand.
+         * @type {string || null}
+         */
+        this.Brand = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Version.
+         * @type {string || null}
+         */
+        this.VersionNum = null;
+
+        /**
+         * Platform.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Custom parameter 3.
+         * @type {string || null}
+         */
+        this.ExtThird = null;
+
+        /**
+         * Custom parameter 1.
+         * @type {string || null}
+         */
+        this.ExtFirst = null;
+
+        /**
+         * Network type.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * Model.
+         * @type {string || null}
+         */
+        this.Device = null;
+
+        /**
+         * Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+         * @type {string || null}
+         */
+        this.IsAbroad = null;
+
+        /**
+         * Operating system.
+         * @type {string || null}
+         */
+        this.Os = null;
+
+        /**
+         * Browser.
+         * @type {string || null}
+         */
+        this.Browser = null;
+
+        /**
+         * Filter condition.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Environment.
+         * @type {string || null}
+         */
+        this.Env = null;
+
+        /**
+         * Custom parameter 4.
+         * @type {string || null}
+         */
+        this.ExtFourth = null;
+
+        /**
+         * Custom parameter 5.
+         * @type {string || null}
+         */
+        this.ExtFifth = null;
+
+        /**
+         * Custom parameter 6.
+         * @type {string || null}
+         */
+        this.ExtSixth = null;
+
+        /**
+         * Custom parameter 7.
+         * @type {string || null}
+         */
+        this.ExtSeventh = null;
+
+        /**
+         * Custom parameter 8.
+         * @type {string || null}
+         */
+        this.ExtEighth = null;
+
+        /**
+         * Custom parameter 9.
+         * @type {string || null}
+         */
+        this.ExtNinth = null;
+
+        /**
+         * Custom parameter 10.
+         * @type {string || null}
+         */
+        this.ExtTenth = null;
+
+        /**
+         * Time period.
+         * @type {string || null}
+         */
+        this.Granularity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ExtSecond = 'ExtSecond' in params ? params.ExtSecond : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.From = 'From' in params ? params.From : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.VersionNum = 'VersionNum' in params ? params.VersionNum : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.ExtThird = 'ExtThird' in params ? params.ExtThird : null;
+        this.ExtFirst = 'ExtFirst' in params ? params.ExtFirst : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.Device = 'Device' in params ? params.Device : null;
+        this.IsAbroad = 'IsAbroad' in params ? params.IsAbroad : null;
+        this.Os = 'Os' in params ? params.Os : null;
+        this.Browser = 'Browser' in params ? params.Browser : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Env = 'Env' in params ? params.Env : null;
+        this.ExtFourth = 'ExtFourth' in params ? params.ExtFourth : null;
+        this.ExtFifth = 'ExtFifth' in params ? params.ExtFifth : null;
+        this.ExtSixth = 'ExtSixth' in params ? params.ExtSixth : null;
+        this.ExtSeventh = 'ExtSeventh' in params ? params.ExtSeventh : null;
+        this.ExtEighth = 'ExtEighth' in params ? params.ExtEighth : null;
+        this.ExtNinth = 'ExtNinth' in params ? params.ExtNinth : null;
+        this.ExtTenth = 'ExtTenth' in params ? params.ExtTenth : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
+
+    }
+}
+
+/**
+ * StopProject request structure.
+ * @class
+ */
+class StopProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
  * DescribeTawAreas response structure.
  * @class
  */
@@ -2170,69 +3558,6 @@ class DescribeTawAreasResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeData request structure.
- * @class
- */
-class DescribeDataRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Query string
-         * @type {string || null}
-         */
-        this.Query = null;
-
-        /**
-         * Project ID
-         * @type {number || null}
-         */
-        this.ID = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Query = 'Query' in params ? params.Query : null;
-        this.ID = 'ID' in params ? params.ID : null;
-
-    }
-}
-
-/**
- * StopProject request structure.
- * @class
- */
-class StopProjectRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Project ID
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -2329,6 +3654,41 @@ class ModifyProjectLimitRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDataEventUrlV2 response structure.
+ * @class
+ */
+class DescribeDataEventUrlV2Response extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Return value.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteInstance response structure.
  * @class
  */
@@ -2352,6 +3712,216 @@ class DeleteInstanceResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDataWebVitalsPageV2 request structure.
+ * @class
+ */
+class DescribeDataWebVitalsPageV2Request extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Custom parameter 2.
+         * @type {string || null}
+         */
+        this.ExtSecond = null;
+
+        /**
+         * Browser engine.
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * Internet service provider.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * Source page.
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * Log level.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * No type.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Brand.
+         * @type {string || null}
+         */
+        this.Brand = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Version.
+         * @type {string || null}
+         */
+        this.VersionNum = null;
+
+        /**
+         * Platform.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Custom parameter 3.
+         * @type {string || null}
+         */
+        this.ExtThird = null;
+
+        /**
+         * Custom parameter 1.
+         * @type {string || null}
+         */
+        this.ExtFirst = null;
+
+        /**
+         * Network type.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * Model.
+         * @type {string || null}
+         */
+        this.Device = null;
+
+        /**
+         * Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+         * @type {string || null}
+         */
+        this.IsAbroad = null;
+
+        /**
+         * Operating system.
+         * @type {string || null}
+         */
+        this.Os = null;
+
+        /**
+         * Browser.
+         * @type {string || null}
+         */
+        this.Browser = null;
+
+        /**
+         * Duration calculation.
+         * @type {string || null}
+         */
+        this.CostType = null;
+
+        /**
+         * Environment.
+         * @type {string || null}
+         */
+        this.Env = null;
+
+        /**
+         * Time period.
+         * @type {string || null}
+         */
+        this.Granularity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ExtSecond = 'ExtSecond' in params ? params.ExtSecond : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.From = 'From' in params ? params.From : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.VersionNum = 'VersionNum' in params ? params.VersionNum : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.ExtThird = 'ExtThird' in params ? params.ExtThird : null;
+        this.ExtFirst = 'ExtFirst' in params ? params.ExtFirst : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.Device = 'Device' in params ? params.Device : null;
+        this.IsAbroad = 'IsAbroad' in params ? params.IsAbroad : null;
+        this.Os = 'Os' in params ? params.Os : null;
+        this.Browser = 'Browser' in params ? params.Browser : null;
+        this.CostType = 'CostType' in params ? params.CostType : null;
+        this.Env = 'Env' in params ? params.Env : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
+
+    }
+}
+
+/**
+ * ResumeInstance request structure.
+ * @class
+ */
+class ResumeInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the instance to be resumed
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -2567,18 +4137,42 @@ class DeleteReleaseFileRequest extends  AbstractModel {
 }
 
 /**
- * ResumeInstance request structure.
+ * DescribeScoresV2 request structure.
  * @class
  */
-class ResumeInstanceRequest extends  AbstractModel {
+class DescribeScoresV2Request extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the instance to be resumed
+         * Start time.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.StartTime = null;
+
+        /**
+         * End time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID list.
+         * @type {Array.<number> || null}
+         */
+        this.IDList = null;
+
+        /**
+         * Query granularity. Valid values: hour or day.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Environment.
+         * @type {string || null}
+         */
+        this.Env = null;
 
     }
 
@@ -2589,7 +4183,11 @@ class ResumeInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.IDList = 'IDList' in params ? params.IDList : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Env = 'Env' in params ? params.Env : null;
 
     }
 }
@@ -2938,12 +4536,53 @@ class CreateProjectResponse extends  AbstractModel {
 }
 
 /**
- * StopInstance response structure.
+ * DescribeDataLogUrlStatisticsV2 response structure.
  * @class
  */
-class StopInstanceResponse extends  AbstractModel {
+class DescribeDataLogUrlStatisticsV2Response extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Return value.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDataCustomUrl response structure.
+ * @class
+ */
+class DescribeDataCustomUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned value
+         * @type {string || null}
+         */
+        this.Result = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2960,35 +4599,8 @@ class StopInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeProjectLimits request structure.
- * @class
- */
-class DescribeProjectLimitsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Project ID
-         * @type {number || null}
-         */
-        this.ProjectID = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
 
     }
 }
@@ -3588,6 +5200,49 @@ class DescribeDataStaticProjectRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeScores response structure.
+ * @class
+ */
+class DescribeScoresResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array
+         * @type {Array.<ScoreInfo> || null}
+         */
+        this.ScoreSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ScoreSet) {
+            this.ScoreSet = new Array();
+            for (let z in params.ScoreSet) {
+                let obj = new ScoreInfo();
+                obj.deserialize(params.ScoreSet[z]);
+                this.ScoreSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRumStatsLogList request structure.
  * @class
  */
@@ -3639,6 +5294,265 @@ class DescribeRumStatsLogListRequest extends  AbstractModel {
         this.Query = 'Query' in params ? params.Query : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.ID = 'ID' in params ? params.ID : null;
+
+    }
+}
+
+/**
+ * DescribeDataBridgeUrlV2 request structure.
+ * @class
+ */
+class DescribeDataBridgeUrlV2Request extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Start time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * pagepv: performance view. allcount: performance view. falls: page loading waterfall chart. samp: first meaningful paint. day: 14-day data. nettype: network or platform view. performance: top page performance view. version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: ISP view, region view, browser view, and so on.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Log level.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Internet service provider.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Network type.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * Platform.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Model.
+         * @type {string || null}
+         */
+        this.Device = null;
+
+        /**
+         * Version.
+         * @type {string || null}
+         */
+        this.VersionNum = null;
+
+        /**
+         * Custom parameter 1.
+         * @type {string || null}
+         */
+        this.ExtFirst = null;
+
+        /**
+         * Custom parameter 2.
+         * @type {string || null}
+         */
+        this.ExtSecond = null;
+
+        /**
+         * Custom parameter 3.
+         * @type {string || null}
+         */
+        this.ExtThird = null;
+
+        /**
+         * Global or not.
+         * @type {string || null}
+         */
+        this.IsAbroad = null;
+
+        /**
+         * Browser.
+         * @type {string || null}
+         */
+        this.Browser = null;
+
+        /**
+         * Operating system.
+         * @type {string || null}
+         */
+        this.Os = null;
+
+        /**
+         * Browser engine.
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * Brand.
+         * @type {string || null}
+         */
+        this.Brand = null;
+
+        /**
+         * Source page.
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * Duration calculation method.
+         * @type {string || null}
+         */
+        this.CostType = null;
+
+        /**
+         * Environment variable.
+         * @type {string || null}
+         */
+        this.Env = null;
+
+        /**
+         * URL name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * HTTP status code.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * retcode
+         * @type {string || null}
+         */
+        this.Ret = null;
+
+        /**
+         * Network status.
+         * @type {string || null}
+         */
+        this.NetStatus = null;
+
+        /**
+         * Custom parameter 4.
+         * @type {string || null}
+         */
+        this.ExtFourth = null;
+
+        /**
+         * Custom parameter 5.
+         * @type {string || null}
+         */
+        this.ExtFifth = null;
+
+        /**
+         * Custom parameter 6.
+         * @type {string || null}
+         */
+        this.ExtSixth = null;
+
+        /**
+         * Custom parameter 7.
+         * @type {string || null}
+         */
+        this.ExtSeventh = null;
+
+        /**
+         * Custom parameter 8.
+         * @type {string || null}
+         */
+        this.ExtEighth = null;
+
+        /**
+         * Custom parameter 9.
+         * @type {string || null}
+         */
+        this.ExtNinth = null;
+
+        /**
+         * Custom parameter 10.
+         * @type {string || null}
+         */
+        this.ExtTenth = null;
+
+        /**
+         * Time period.
+         * @type {string || null}
+         */
+        this.Granularity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.Device = 'Device' in params ? params.Device : null;
+        this.VersionNum = 'VersionNum' in params ? params.VersionNum : null;
+        this.ExtFirst = 'ExtFirst' in params ? params.ExtFirst : null;
+        this.ExtSecond = 'ExtSecond' in params ? params.ExtSecond : null;
+        this.ExtThird = 'ExtThird' in params ? params.ExtThird : null;
+        this.IsAbroad = 'IsAbroad' in params ? params.IsAbroad : null;
+        this.Browser = 'Browser' in params ? params.Browser : null;
+        this.Os = 'Os' in params ? params.Os : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.From = 'From' in params ? params.From : null;
+        this.CostType = 'CostType' in params ? params.CostType : null;
+        this.Env = 'Env' in params ? params.Env : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Ret = 'Ret' in params ? params.Ret : null;
+        this.NetStatus = 'NetStatus' in params ? params.NetStatus : null;
+        this.ExtFourth = 'ExtFourth' in params ? params.ExtFourth : null;
+        this.ExtFifth = 'ExtFifth' in params ? params.ExtFifth : null;
+        this.ExtSixth = 'ExtSixth' in params ? params.ExtSixth : null;
+        this.ExtSeventh = 'ExtSeventh' in params ? params.ExtSeventh : null;
+        this.ExtEighth = 'ExtEighth' in params ? params.ExtEighth : null;
+        this.ExtNinth = 'ExtNinth' in params ? params.ExtNinth : null;
+        this.ExtTenth = 'ExtTenth' in params ? params.ExtTenth : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
 
     }
 }
@@ -3882,6 +5796,34 @@ class CreateWhitelistRequest extends  AbstractModel {
 }
 
 /**
+ * StopInstance response structure.
+ * @class
+ */
+class StopInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDataPvUrlStatistics response structure.
  * @class
  */
@@ -3959,21 +5901,49 @@ class DescribeDataLogUrlInfoRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDataCustomUrl response structure.
+ * DescribeProjectLimits request structure.
  * @class
  */
-class DescribeDataCustomUrlResponse extends  AbstractModel {
+class DescribeProjectLimitsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Returned value
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
+
+    }
+}
+
+/**
+ * DescribeDataPvUrlStatisticsV2 response structure.
+ * @class
+ */
+class DescribeDataPvUrlStatisticsV2Response extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Return value.
          * @type {string || null}
          */
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4281,21 +6251,21 @@ class DescribeDataPerformanceProjectResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDataFetchUrlInfo response structure.
+ * DescribeDataWebVitalsPageV2 response structure.
  * @class
  */
-class DescribeDataFetchUrlInfoResponse extends  AbstractModel {
+class DescribeDataWebVitalsPageV2Response extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Returned value
+         * Return value.
          * @type {string || null}
          */
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4379,24 +6349,24 @@ class DescribeDataStaticProjectResponse extends  AbstractModel {
 }
 
 /**
- * CreateStarProject request structure.
+ * DescribeDataPerformancePageV2 response structure.
  * @class
  */
-class CreateStarProjectRequest extends  AbstractModel {
+class DescribeDataPerformancePageV2Response extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID, such as taw-123
+         * Return value.
          * @type {string || null}
          */
-        this.InstanceID = null;
+        this.Result = null;
 
         /**
-         * Project ID
-         * @type {number || null}
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.ID = null;
+        this.RequestId = null;
 
     }
 
@@ -4407,8 +6377,246 @@ class CreateStarProjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDataSetUrlStatisticsV2 request structure.
+ * @class
+ */
+class DescribeDataSetUrlStatisticsV2Request extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * allcount: performance view. data: mini program. component: related to mini program. day: 14-day data. nettype: network or platform view. performance: top page performance view. version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: ISP view, region view, browser view, and so on.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * End time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Custom parameter 2.
+         * @type {string || null}
+         */
+        this.ExtSecond = null;
+
+        /**
+         * Browser engine.
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * Internet service provider.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * Source page.
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * Log level.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Brand.
+         * @type {string || null}
+         */
+        this.Brand = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Version.
+         * @type {string || null}
+         */
+        this.VersionNum = null;
+
+        /**
+         * Platform.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Custom parameter 3.
+         * @type {string || null}
+         */
+        this.ExtThird = null;
+
+        /**
+         * Custom parameter 1.
+         * @type {string || null}
+         */
+        this.ExtFirst = null;
+
+        /**
+         * Network type.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * Model.
+         * @type {string || null}
+         */
+        this.Device = null;
+
+        /**
+         * Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+         * @type {string || null}
+         */
+        this.IsAbroad = null;
+
+        /**
+         * Operating system.
+         * @type {string || null}
+         */
+        this.Os = null;
+
+        /**
+         * Browser.
+         * @type {string || null}
+         */
+        this.Browser = null;
+
+        /**
+         * Duration calculation.
+         * @type {string || null}
+         */
+        this.CostType = null;
+
+        /**
+         * Environment.
+         * @type {string || null}
+         */
+        this.Env = null;
+
+        /**
+         * Obtaining package.
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
+        /**
+         * Custom parameter 4.
+         * @type {string || null}
+         */
+        this.ExtFourth = null;
+
+        /**
+         * Custom parameter 5.
+         * @type {string || null}
+         */
+        this.ExtFifth = null;
+
+        /**
+         * Custom parameter 6.
+         * @type {string || null}
+         */
+        this.ExtSixth = null;
+
+        /**
+         * Custom parameter 7.
+         * @type {string || null}
+         */
+        this.ExtSeventh = null;
+
+        /**
+         * Custom parameter 8.
+         * @type {string || null}
+         */
+        this.ExtEighth = null;
+
+        /**
+         * Custom parameter 9.
+         * @type {string || null}
+         */
+        this.ExtNinth = null;
+
+        /**
+         * Custom parameter 10.
+         * @type {string || null}
+         */
+        this.ExtTenth = null;
+
+        /**
+         * Time period.
+         * @type {string || null}
+         */
+        this.Granularity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.ID = 'ID' in params ? params.ID : null;
+        this.ExtSecond = 'ExtSecond' in params ? params.ExtSecond : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.From = 'From' in params ? params.From : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.VersionNum = 'VersionNum' in params ? params.VersionNum : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.ExtThird = 'ExtThird' in params ? params.ExtThird : null;
+        this.ExtFirst = 'ExtFirst' in params ? params.ExtFirst : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.Device = 'Device' in params ? params.Device : null;
+        this.IsAbroad = 'IsAbroad' in params ? params.IsAbroad : null;
+        this.Os = 'Os' in params ? params.Os : null;
+        this.Browser = 'Browser' in params ? params.Browser : null;
+        this.CostType = 'CostType' in params ? params.CostType : null;
+        this.Env = 'Env' in params ? params.Env : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.ExtFourth = 'ExtFourth' in params ? params.ExtFourth : null;
+        this.ExtFifth = 'ExtFifth' in params ? params.ExtFifth : null;
+        this.ExtSixth = 'ExtSixth' in params ? params.ExtSixth : null;
+        this.ExtSeventh = 'ExtSeventh' in params ? params.ExtSeventh : null;
+        this.ExtEighth = 'ExtEighth' in params ? params.ExtEighth : null;
+        this.ExtNinth = 'ExtNinth' in params ? params.ExtNinth : null;
+        this.ExtTenth = 'ExtTenth' in params ? params.ExtTenth : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
 
     }
 }
@@ -4597,24 +6805,198 @@ class DeleteReleaseFileResponse extends  AbstractModel {
 }
 
 /**
- * DescribeScores response structure.
+ * DescribeDataCustomUrlV2 request structure.
  * @class
  */
-class DescribeScoresResponse extends  AbstractModel {
+class DescribeDataCustomUrlV2Request extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Array
-         * @type {Array.<ScoreInfo> || null}
+         * Start time.
+         * @type {number || null}
          */
-        this.ScoreSet = null;
+        this.StartTime = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * top: top resource view. allcount: performance view. day: 14-day data. condition: condition list. pagepv: performance view. area: request speed distribution. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Type = null;
+
+        /**
+         * End time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Custom parameter 2.
+         * @type {string || null}
+         */
+        this.ExtSecond = null;
+
+        /**
+         * Browser engine.
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * Internet service provider.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * Source page.
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * Log level.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Brand.
+         * @type {string || null}
+         */
+        this.Brand = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Version.
+         * @type {string || null}
+         */
+        this.VersionNum = null;
+
+        /**
+         * Platform.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Custom parameter 3.
+         * @type {string || null}
+         */
+        this.ExtThird = null;
+
+        /**
+         * Custom parameter 1.
+         * @type {string || null}
+         */
+        this.ExtFirst = null;
+
+        /**
+         * Network type (1, 2, 3, 4, 5, or 100). 1 indicates Wi-Fi. 2 indicates 2G. 3 indicates 3G. 4 indicates 4G. 5 indicates 5G. 6 indicates 6G. 100 indicates unknown.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * Model.
+         * @type {string || null}
+         */
+        this.Device = null;
+
+        /**
+         * Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+         * @type {string || null}
+         */
+        this.IsAbroad = null;
+
+        /**
+         * Operating system.
+         * @type {string || null}
+         */
+        this.Os = null;
+
+        /**
+         * Browser.
+         * @type {string || null}
+         */
+        this.Browser = null;
+
+        /**
+         * Duration calculation method.
+         * @type {string || null}
+         */
+        this.CostType = null;
+
+        /**
+         * Value of the custom speed test key.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Environment.
+         * @type {string || null}
+         */
+        this.Env = null;
+
+        /**
+         * Custom parameter 4.
+         * @type {string || null}
+         */
+        this.ExtFourth = null;
+
+        /**
+         * Custom parameter 5.
+         * @type {string || null}
+         */
+        this.ExtFifth = null;
+
+        /**
+         * Custom parameter 6.
+         * @type {string || null}
+         */
+        this.ExtSixth = null;
+
+        /**
+         * Custom parameter 7.
+         * @type {string || null}
+         */
+        this.ExtSeventh = null;
+
+        /**
+         * Custom parameter 8.
+         * @type {string || null}
+         */
+        this.ExtEighth = null;
+
+        /**
+         * Custom parameter 9.
+         * @type {string || null}
+         */
+        this.ExtNinth = null;
+
+        /**
+         * Custom parameter 10.
+         * @type {string || null}
+         */
+        this.ExtTenth = null;
+
+        /**
+         * Time period.
+         * @type {string || null}
+         */
+        this.Granularity = null;
 
     }
 
@@ -4625,16 +7007,37 @@ class DescribeScoresResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.ScoreSet) {
-            this.ScoreSet = new Array();
-            for (let z in params.ScoreSet) {
-                let obj = new ScoreInfo();
-                obj.deserialize(params.ScoreSet[z]);
-                this.ScoreSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ExtSecond = 'ExtSecond' in params ? params.ExtSecond : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.From = 'From' in params ? params.From : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.VersionNum = 'VersionNum' in params ? params.VersionNum : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.ExtThird = 'ExtThird' in params ? params.ExtThird : null;
+        this.ExtFirst = 'ExtFirst' in params ? params.ExtFirst : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.Device = 'Device' in params ? params.Device : null;
+        this.IsAbroad = 'IsAbroad' in params ? params.IsAbroad : null;
+        this.Os = 'Os' in params ? params.Os : null;
+        this.Browser = 'Browser' in params ? params.Browser : null;
+        this.CostType = 'CostType' in params ? params.CostType : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Env = 'Env' in params ? params.Env : null;
+        this.ExtFourth = 'ExtFourth' in params ? params.ExtFourth : null;
+        this.ExtFifth = 'ExtFifth' in params ? params.ExtFifth : null;
+        this.ExtSixth = 'ExtSixth' in params ? params.ExtSixth : null;
+        this.ExtSeventh = 'ExtSeventh' in params ? params.ExtSeventh : null;
+        this.ExtEighth = 'ExtEighth' in params ? params.ExtEighth : null;
+        this.ExtNinth = 'ExtNinth' in params ? params.ExtNinth : null;
+        this.ExtTenth = 'ExtTenth' in params ? params.ExtTenth : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
 
     }
 }
@@ -4718,45 +7121,21 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeReleaseFileSign response structure.
+ * DescribeDataBridgeUrlV2 response structure.
  * @class
  */
-class DescribeReleaseFileSignResponse extends  AbstractModel {
+class DescribeDataBridgeUrlV2Response extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Temporary key
+         * Return value.
          * @type {string || null}
          */
-        this.SecretKey = null;
+        this.Result = null;
 
         /**
-         * Temporary key ID
-         * @type {string || null}
-         */
-        this.SecretID = null;
-
-        /**
-         * Temporary key token
-         * @type {string || null}
-         */
-        this.SessionToken = null;
-
-        /**
-         * Start timestamp
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Expiration timestamp
-         * @type {number || null}
-         */
-        this.ExpiredTime = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4770,11 +7149,7 @@ class DescribeReleaseFileSignResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
-        this.SecretID = 'SecretID' in params ? params.SecretID : null;
-        this.SessionToken = 'SessionToken' in params ? params.SessionToken : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4874,6 +7249,41 @@ class DescribeTawAreasRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.AreaStatuses = 'AreaStatuses' in params ? params.AreaStatuses : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeDataCustomUrlV2 response structure.
+ * @class
+ */
+class DescribeDataCustomUrlV2Response extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Return value.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5359,6 +7769,69 @@ class DescribeDataEventUrlResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeReleaseFileSign response structure.
+ * @class
+ */
+class DescribeReleaseFileSignResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Temporary key
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * Temporary key ID
+         * @type {string || null}
+         */
+        this.SecretID = null;
+
+        /**
+         * Temporary key token
+         * @type {string || null}
+         */
+        this.SessionToken = null;
+
+        /**
+         * Start timestamp
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Expiration timestamp
+         * @type {number || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.SecretID = 'SecretID' in params ? params.SecretID : null;
+        this.SessionToken = 'SessionToken' in params ? params.SessionToken : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDataWebVitalsPage request structure.
  * @class
  */
@@ -5716,15 +8189,15 @@ class DescribeDataFetchUrlInfoRequest extends  AbstractModel {
 }
 
 /**
- * DescribeLogList response structure.
+ * DescribeDataFetchUrlInfo response structure.
  * @class
  */
-class DescribeLogListResponse extends  AbstractModel {
+class DescribeDataFetchUrlInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Response string
+         * Returned value
          * @type {string || null}
          */
         this.Result = null;
@@ -6061,6 +8534,279 @@ class DescribeDataWebVitalsPageResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDataStaticProjectV2 request structure.
+ * @class
+ */
+class DescribeDataStaticProjectV2Request extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * allcount: performance view. day: 14-day data. condition: condition list. area: request speed distribution. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * End time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Custom parameter 2.
+         * @type {string || null}
+         */
+        this.ExtSecond = null;
+
+        /**
+         * Browser engine.
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * Internet service provider.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * Source page.
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * Log level (1 indicates allowlist log. 2 indicates general log. 4 indicates error log. 8 indicates Promise error. 16 indicates AJAX request exception. 32 indicates JavaScript loading exception. 64 indicates image loading exception. 128 indicates CSS loading exception. 256 indicates console.error. 512 indicates audio or video resource exception. 1024 indicates retcode exception. 2048 indicates Aegis report. 4096 indicates PV log. 8192 indicates custom event. 16384 indicates mini program page does not exist. 32768 indicates WebSocket error. 65536 indicates JavaScript bridge error).
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Brand.
+         * @type {string || null}
+         */
+        this.Brand = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Version.
+         * @type {string || null}
+         */
+        this.VersionNum = null;
+
+        /**
+         * Platform.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Custom parameter 3.
+         * @type {string || null}
+         */
+        this.ExtThird = null;
+
+        /**
+         * Custom parameter 1.
+         * @type {string || null}
+         */
+        this.ExtFirst = null;
+
+        /**
+         * Network type (1, 2, 3, 4, 5, or 100). 1 indicates Wi-Fi. 2 indicates 2G. 3 indicates 3G. 4 indicates 4G. 5 indicates 5G. 6 indicates 6G. 100 indicates unknown.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * Model.
+         * @type {string || null}
+         */
+        this.Device = null;
+
+        /**
+         * Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+         * @type {string || null}
+         */
+        this.IsAbroad = null;
+
+        /**
+         * Operating system.
+         * @type {string || null}
+         */
+        this.Os = null;
+
+        /**
+         * Browser.
+         * @type {string || null}
+         */
+        this.Browser = null;
+
+        /**
+         * Duration calculation.
+         * @type {string || null}
+         */
+        this.CostType = null;
+
+        /**
+         * Source.
+         * @type {Array.<string> || null}
+         */
+        this.Url = null;
+
+        /**
+         * Environment.
+         * @type {string || null}
+         */
+        this.Env = null;
+
+        /**
+         * Custom parameter 4.
+         * @type {string || null}
+         */
+        this.ExtFourth = null;
+
+        /**
+         * Custom parameter 5.
+         * @type {string || null}
+         */
+        this.ExtFifth = null;
+
+        /**
+         * Custom parameter 6.
+         * @type {string || null}
+         */
+        this.ExtSixth = null;
+
+        /**
+         * Custom parameter 7.
+         * @type {string || null}
+         */
+        this.ExtSeventh = null;
+
+        /**
+         * Custom parameter 8.
+         * @type {string || null}
+         */
+        this.ExtEighth = null;
+
+        /**
+         * Custom parameter 9.
+         * @type {string || null}
+         */
+        this.ExtNinth = null;
+
+        /**
+         * Custom parameter 10.
+         * @type {string || null}
+         */
+        this.ExtTenth = null;
+
+        /**
+         * Time period.
+         * @type {string || null}
+         */
+        this.Granularity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ExtSecond = 'ExtSecond' in params ? params.ExtSecond : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.From = 'From' in params ? params.From : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.VersionNum = 'VersionNum' in params ? params.VersionNum : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.ExtThird = 'ExtThird' in params ? params.ExtThird : null;
+        this.ExtFirst = 'ExtFirst' in params ? params.ExtFirst : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.Device = 'Device' in params ? params.Device : null;
+        this.IsAbroad = 'IsAbroad' in params ? params.IsAbroad : null;
+        this.Os = 'Os' in params ? params.Os : null;
+        this.Browser = 'Browser' in params ? params.Browser : null;
+        this.CostType = 'CostType' in params ? params.CostType : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Env = 'Env' in params ? params.Env : null;
+        this.ExtFourth = 'ExtFourth' in params ? params.ExtFourth : null;
+        this.ExtFifth = 'ExtFifth' in params ? params.ExtFifth : null;
+        this.ExtSixth = 'ExtSixth' in params ? params.ExtSixth : null;
+        this.ExtSeventh = 'ExtSeventh' in params ? params.ExtSeventh : null;
+        this.ExtEighth = 'ExtEighth' in params ? params.ExtEighth : null;
+        this.ExtNinth = 'ExtNinth' in params ? params.ExtNinth : null;
+        this.ExtTenth = 'ExtTenth' in params ? params.ExtTenth : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
+
+    }
+}
+
+/**
+ * DescribeLogList response structure.
+ * @class
+ */
+class DescribeLogListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Response string
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeProjects request structure.
  * @class
  */
@@ -6293,6 +9039,41 @@ class DescribeDataEventUrlRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDataSetUrlStatisticsV2 response structure.
+ * @class
+ */
+class DescribeDataSetUrlStatisticsV2Response extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Return value.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeOfflineLogConfigs request structure.
  * @class
  */
@@ -6476,6 +9257,265 @@ class DescribeWhitelistsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDataFetchUrlV2 request structure.
+ * @class
+ */
+class DescribeDataFetchUrlV2Request extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * allcount: performance view. pagepv: PV view. day: 14-day data. count40x: 40X view. count50x: 50X view. count5xand4x: 40∑50 view. top: top resource view. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * End time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Custom parameter 2.
+         * @type {string || null}
+         */
+        this.ExtSecond = null;
+
+        /**
+         * Browser engine.
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * Internet service provider.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * Source page.
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * Log level.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Brand.
+         * @type {string || null}
+         */
+        this.Brand = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Version.
+         * @type {string || null}
+         */
+        this.VersionNum = null;
+
+        /**
+         * Platform.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Custom parameter 3.
+         * @type {string || null}
+         */
+        this.ExtThird = null;
+
+        /**
+         * Custom parameter 1.
+         * @type {string || null}
+         */
+        this.ExtFirst = null;
+
+        /**
+         * Network type.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * Model.
+         * @type {string || null}
+         */
+        this.Device = null;
+
+        /**
+         * Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+         * @type {string || null}
+         */
+        this.IsAbroad = null;
+
+        /**
+         * Operating system.
+         * @type {string || null}
+         */
+        this.Os = null;
+
+        /**
+         * Browser.
+         * @type {string || null}
+         */
+        this.Browser = null;
+
+        /**
+         * Duration calculation method.
+         * @type {string || null}
+         */
+        this.CostType = null;
+
+        /**
+         * Source.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Environment.
+         * @type {string || null}
+         */
+        this.Env = null;
+
+        /**
+         * HTTP response code.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * retcode
+         * @type {string || null}
+         */
+        this.Ret = null;
+
+        /**
+         * Network status.
+         * @type {string || null}
+         */
+        this.NetStatus = null;
+
+        /**
+         * Custom parameter 4.
+         * @type {string || null}
+         */
+        this.ExtFourth = null;
+
+        /**
+         * Custom parameter 5.
+         * @type {string || null}
+         */
+        this.ExtFifth = null;
+
+        /**
+         * Custom parameter 6.
+         * @type {string || null}
+         */
+        this.ExtSixth = null;
+
+        /**
+         * Custom parameter 7.
+         * @type {string || null}
+         */
+        this.ExtSeventh = null;
+
+        /**
+         * Custom parameter 8.
+         * @type {string || null}
+         */
+        this.ExtEighth = null;
+
+        /**
+         * Custom parameter 9.
+         * @type {string || null}
+         */
+        this.ExtNinth = null;
+
+        /**
+         * Custom parameter 10.
+         * @type {string || null}
+         */
+        this.ExtTenth = null;
+
+        /**
+         * Time period.
+         * @type {string || null}
+         */
+        this.Granularity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ExtSecond = 'ExtSecond' in params ? params.ExtSecond : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.From = 'From' in params ? params.From : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.VersionNum = 'VersionNum' in params ? params.VersionNum : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.ExtThird = 'ExtThird' in params ? params.ExtThird : null;
+        this.ExtFirst = 'ExtFirst' in params ? params.ExtFirst : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.Device = 'Device' in params ? params.Device : null;
+        this.IsAbroad = 'IsAbroad' in params ? params.IsAbroad : null;
+        this.Os = 'Os' in params ? params.Os : null;
+        this.Browser = 'Browser' in params ? params.Browser : null;
+        this.CostType = 'CostType' in params ? params.CostType : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Env = 'Env' in params ? params.Env : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Ret = 'Ret' in params ? params.Ret : null;
+        this.NetStatus = 'NetStatus' in params ? params.NetStatus : null;
+        this.ExtFourth = 'ExtFourth' in params ? params.ExtFourth : null;
+        this.ExtFifth = 'ExtFifth' in params ? params.ExtFifth : null;
+        this.ExtSixth = 'ExtSixth' in params ? params.ExtSixth : null;
+        this.ExtSeventh = 'ExtSeventh' in params ? params.ExtSeventh : null;
+        this.ExtEighth = 'ExtEighth' in params ? params.ExtEighth : null;
+        this.ExtNinth = 'ExtNinth' in params ? params.ExtNinth : null;
+        this.ExtTenth = 'ExtTenth' in params ? params.ExtTenth : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
+
+    }
+}
+
+/**
  * DescribeProjects response structure.
  * @class
  */
@@ -6520,6 +9560,41 @@ class DescribeProjectsResponse extends  AbstractModel {
                 this.ProjectSet.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDataReportCountV2 response structure.
+ * @class
+ */
+class DescribeDataReportCountV2Response extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Return value.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7037,6 +10112,251 @@ class DescribeRumLogListRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDataPerformancePageV2 request structure.
+ * @class
+ */
+class DescribeDataPerformancePageV2Request extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Start time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * pagepv: PV view. allcount: performance view. falls: page loading waterfall chart. samp: first meaningful paint. day: 14-day data. nettype: network or platform view. performance: top page performance view. version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: ISP view, region view, browser view, and so on.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Log level.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Internet service provider.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Network type.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * Platform.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Model.
+         * @type {string || null}
+         */
+        this.Device = null;
+
+        /**
+         * Version.
+         * @type {string || null}
+         */
+        this.VersionNum = null;
+
+        /**
+         * Custom parameter 1.
+         * @type {string || null}
+         */
+        this.ExtFirst = null;
+
+        /**
+         * Custom parameter 2.
+         * @type {string || null}
+         */
+        this.ExtSecond = null;
+
+        /**
+         * Custom parameter 3.
+         * @type {string || null}
+         */
+        this.ExtThird = null;
+
+        /**
+         * Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+         * @type {string || null}
+         */
+        this.IsAbroad = null;
+
+        /**
+         * Browser.
+         * @type {string || null}
+         */
+        this.Browser = null;
+
+        /**
+         * Operating system.
+         * @type {string || null}
+         */
+        this.Os = null;
+
+        /**
+         * Browser engine.
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * Brand.
+         * @type {string || null}
+         */
+        this.Brand = null;
+
+        /**
+         * Source page.
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * Duration calculation method.
+         * @type {string || null}
+         */
+        this.CostType = null;
+
+        /**
+         * Environment variable.
+         * @type {string || null}
+         */
+        this.Env = null;
+
+        /**
+         * Network status.
+         * @type {string || null}
+         */
+        this.NetStatus = null;
+
+        /**
+         * Indicates whether to return webvitals data.
+         * @type {boolean || null}
+         */
+        this.WebVitals = null;
+
+        /**
+         * Custom parameter 4.
+         * @type {string || null}
+         */
+        this.ExtFourth = null;
+
+        /**
+         * Custom parameter 5.
+         * @type {string || null}
+         */
+        this.ExtFifth = null;
+
+        /**
+         * Custom parameter 6.
+         * @type {string || null}
+         */
+        this.ExtSixth = null;
+
+        /**
+         * Custom parameter 7.
+         * @type {string || null}
+         */
+        this.ExtSeventh = null;
+
+        /**
+         * Custom parameter 8.
+         * @type {string || null}
+         */
+        this.ExtEighth = null;
+
+        /**
+         * Custom parameter 9.
+         * @type {string || null}
+         */
+        this.ExtNinth = null;
+
+        /**
+         * Custom parameter 10.
+         * @type {string || null}
+         */
+        this.ExtTenth = null;
+
+        /**
+         * Time period.
+         * @type {string || null}
+         */
+        this.Granularity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.Device = 'Device' in params ? params.Device : null;
+        this.VersionNum = 'VersionNum' in params ? params.VersionNum : null;
+        this.ExtFirst = 'ExtFirst' in params ? params.ExtFirst : null;
+        this.ExtSecond = 'ExtSecond' in params ? params.ExtSecond : null;
+        this.ExtThird = 'ExtThird' in params ? params.ExtThird : null;
+        this.IsAbroad = 'IsAbroad' in params ? params.IsAbroad : null;
+        this.Browser = 'Browser' in params ? params.Browser : null;
+        this.Os = 'Os' in params ? params.Os : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.From = 'From' in params ? params.From : null;
+        this.CostType = 'CostType' in params ? params.CostType : null;
+        this.Env = 'Env' in params ? params.Env : null;
+        this.NetStatus = 'NetStatus' in params ? params.NetStatus : null;
+        this.WebVitals = 'WebVitals' in params ? params.WebVitals : null;
+        this.ExtFourth = 'ExtFourth' in params ? params.ExtFourth : null;
+        this.ExtFifth = 'ExtFifth' in params ? params.ExtFifth : null;
+        this.ExtSixth = 'ExtSixth' in params ? params.ExtSixth : null;
+        this.ExtSeventh = 'ExtSeventh' in params ? params.ExtSeventh : null;
+        this.ExtEighth = 'ExtEighth' in params ? params.ExtEighth : null;
+        this.ExtNinth = 'ExtNinth' in params ? params.ExtNinth : null;
+        this.ExtTenth = 'ExtTenth' in params ? params.ExtTenth : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
+
+    }
+}
+
+/**
  * DescribeDataStaticResource request structure.
  * @class
  */
@@ -7541,6 +10861,49 @@ class DescribeDataFetchProjectResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeScoresV2 response structure.
+ * @class
+ */
+class DescribeScoresV2Response extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project score array.
+         * @type {Array.<ScoreInfoV2> || null}
+         */
+        this.ScoreSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ScoreSet) {
+            this.ScoreSet = new Array();
+            for (let z in params.ScoreSet) {
+                let obj = new ScoreInfoV2();
+                obj.deserialize(params.ScoreSet[z]);
+                this.ScoreSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Allowlist
  * @class
  */
@@ -7613,6 +10976,237 @@ class Whitelist extends  AbstractModel {
         this.CreateUser = 'CreateUser' in params ? params.CreateUser : null;
         this.Aid = 'Aid' in params ? params.Aid : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
+ * DescribeDataLogUrlStatisticsV2 request structure.
+ * @class
+ */
+class DescribeDataLogUrlStatisticsV2Request extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * analysis: exception analysis. compare: exception list comparison. allcount: performance view. condition: condition list. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * End time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Custom parameter 2.
+         * @type {string || null}
+         */
+        this.ExtSecond = null;
+
+        /**
+         * Browser engine.
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * Internet service provider.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * Source page.
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * Log level.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Brand.
+         * @type {string || null}
+         */
+        this.Brand = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Version.
+         * @type {string || null}
+         */
+        this.VersionNum = null;
+
+        /**
+         * Platform.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Custom parameter 3.
+         * @type {string || null}
+         */
+        this.ExtThird = null;
+
+        /**
+         * Custom parameter 1.
+         * @type {string || null}
+         */
+        this.ExtFirst = null;
+
+        /**
+         * Network type.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * Model.
+         * @type {string || null}
+         */
+        this.Device = null;
+
+        /**
+         * Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+         * @type {string || null}
+         */
+        this.IsAbroad = null;
+
+        /**
+         * Operating system.
+         * @type {string || null}
+         */
+        this.Os = null;
+
+        /**
+         * Browser.
+         * @type {string || null}
+         */
+        this.Browser = null;
+
+        /**
+         * Environment differentiation.
+         * @type {string || null}
+         */
+        this.Env = null;
+
+        /**
+         * JavaScript exception message.
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * Custom parameter 4.
+         * @type {string || null}
+         */
+        this.ExtFourth = null;
+
+        /**
+         * Custom parameter 5.
+         * @type {string || null}
+         */
+        this.ExtFifth = null;
+
+        /**
+         * Custom parameter 6.
+         * @type {string || null}
+         */
+        this.ExtSixth = null;
+
+        /**
+         * Custom parameter 7.
+         * @type {string || null}
+         */
+        this.ExtSeventh = null;
+
+        /**
+         * Custom parameter 8.
+         * @type {string || null}
+         */
+        this.ExtEighth = null;
+
+        /**
+         * Custom parameter 9.
+         * @type {string || null}
+         */
+        this.ExtNinth = null;
+
+        /**
+         * Custom parameter 10.
+         * @type {string || null}
+         */
+        this.ExtTenth = null;
+
+        /**
+         * Time period.
+         * @type {string || null}
+         */
+        this.Granularity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ExtSecond = 'ExtSecond' in params ? params.ExtSecond : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.From = 'From' in params ? params.From : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.VersionNum = 'VersionNum' in params ? params.VersionNum : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.ExtThird = 'ExtThird' in params ? params.ExtThird : null;
+        this.ExtFirst = 'ExtFirst' in params ? params.ExtFirst : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.Device = 'Device' in params ? params.Device : null;
+        this.IsAbroad = 'IsAbroad' in params ? params.IsAbroad : null;
+        this.Os = 'Os' in params ? params.Os : null;
+        this.Browser = 'Browser' in params ? params.Browser : null;
+        this.Env = 'Env' in params ? params.Env : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.ExtFourth = 'ExtFourth' in params ? params.ExtFourth : null;
+        this.ExtFifth = 'ExtFifth' in params ? params.ExtFifth : null;
+        this.ExtSixth = 'ExtSixth' in params ? params.ExtSixth : null;
+        this.ExtSeventh = 'ExtSeventh' in params ? params.ExtSeventh : null;
+        this.ExtEighth = 'ExtEighth' in params ? params.ExtEighth : null;
+        this.ExtNinth = 'ExtNinth' in params ? params.ExtNinth : null;
+        this.ExtTenth = 'ExtTenth' in params ? params.ExtTenth : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
 
     }
 }
@@ -7764,6 +11358,41 @@ Note:  This field may return null, indicating that no valid values can be obtain
 }
 
 /**
+ * DescribeDataStaticResourceV2 response structure.
+ * @class
+ */
+class DescribeDataStaticResourceV2Response extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Return value.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDataSetUrlStatistics response structure.
  * @class
  */
@@ -7813,7 +11442,9 @@ module.exports = {
     DescribeDataFetchUrlResponse: DescribeDataFetchUrlResponse,
     DescribeErrorRequest: DescribeErrorRequest,
     StopInstanceRequest: StopInstanceRequest,
+    DescribeDataStaticUrlV2Request: DescribeDataStaticUrlV2Request,
     ModifyInstanceRequest: ModifyInstanceRequest,
+    DescribeDataStaticProjectV2Response: DescribeDataStaticProjectV2Response,
     DescribeLogListRequest: DescribeLogListRequest,
     DescribeErrorResponse: DescribeErrorResponse,
     DeleteWhitelistResponse: DeleteWhitelistResponse,
@@ -7822,14 +11453,19 @@ module.exports = {
     RumUvInfo: RumUvInfo,
     DescribeOfflineLogsRequest: DescribeOfflineLogsRequest,
     DescribeScoresRequest: DescribeScoresRequest,
+    ScoreInfoV2: ScoreInfoV2,
     DescribeDataReportCountRequest: DescribeDataReportCountRequest,
     DeleteOfflineLogRecordRequest: DeleteOfflineLogRecordRequest,
+    DescribeDataStaticResourceV2Request: DescribeDataStaticResourceV2Request,
     DescribeReleaseFilesRequest: DescribeReleaseFilesRequest,
     CreateReleaseFileRequest: CreateReleaseFileRequest,
     DeleteOfflineLogRecordResponse: DeleteOfflineLogRecordResponse,
     DescribeDataCustomUrlRequest: DescribeDataCustomUrlRequest,
     DescribeUvListResponse: DescribeUvListResponse,
+    DescribeDataStaticUrlV2Response: DescribeDataStaticUrlV2Response,
     Tag: Tag,
+    DescribeDataPvUrlStatisticsV2Request: DescribeDataPvUrlStatisticsV2Request,
+    DescribeDataFetchUrlV2Response: DescribeDataFetchUrlV2Response,
     CreateProjectRequest: CreateProjectRequest,
     DescribeDataStaticUrlRequest: DescribeDataStaticUrlRequest,
     ModifyInstanceResponse: ModifyInstanceResponse,
@@ -7838,21 +11474,27 @@ module.exports = {
     DescribeWhitelistsRequest: DescribeWhitelistsRequest,
     DescribeLogExportsResponse: DescribeLogExportsResponse,
     DescribeUvListRequest: DescribeUvListRequest,
-    DescribeTawAreasResponse: DescribeTawAreasResponse,
+    DescribeDataReportCountV2Request: DescribeDataReportCountV2Request,
+    CreateStarProjectRequest: CreateStarProjectRequest,
     DescribeDataRequest: DescribeDataRequest,
+    DescribeDataEventUrlV2Request: DescribeDataEventUrlV2Request,
     StopProjectRequest: StopProjectRequest,
+    DescribeTawAreasResponse: DescribeTawAreasResponse,
     CreateOfflineLogConfigResponse: CreateOfflineLogConfigResponse,
     ModifyProjectLimitRequest: ModifyProjectLimitRequest,
+    DescribeDataEventUrlV2Response: DescribeDataEventUrlV2Response,
     DeleteInstanceResponse: DeleteInstanceResponse,
+    DescribeDataWebVitalsPageV2Request: DescribeDataWebVitalsPageV2Request,
+    ResumeInstanceRequest: ResumeInstanceRequest,
     DescribeDataPerformancePageRequest: DescribeDataPerformancePageRequest,
     DeleteReleaseFileRequest: DeleteReleaseFileRequest,
-    ResumeInstanceRequest: ResumeInstanceRequest,
+    DescribeScoresV2Request: DescribeScoresV2Request,
     DescribeDataFetchUrlRequest: DescribeDataFetchUrlRequest,
     DescribeRumLogExportRequest: DescribeRumLogExportRequest,
     DescribeDataLogUrlStatisticsResponse: DescribeDataLogUrlStatisticsResponse,
     CreateProjectResponse: CreateProjectResponse,
-    StopInstanceResponse: StopInstanceResponse,
-    DescribeProjectLimitsRequest: DescribeProjectLimitsRequest,
+    DescribeDataLogUrlStatisticsV2Response: DescribeDataLogUrlStatisticsV2Response,
+    DescribeDataCustomUrlResponse: DescribeDataCustomUrlResponse,
     CreateStarProjectResponse: CreateStarProjectResponse,
     DeleteProjectResponse: DeleteProjectResponse,
     DescribeOfflineLogRecordsRequest: DescribeOfflineLogRecordsRequest,
@@ -7861,34 +11503,40 @@ module.exports = {
     ModifyProjectLimitResponse: ModifyProjectLimitResponse,
     DescribeRumLogExportsResponse: DescribeRumLogExportsResponse,
     DescribeDataStaticProjectRequest: DescribeDataStaticProjectRequest,
+    DescribeScoresResponse: DescribeScoresResponse,
     DescribeRumStatsLogListRequest: DescribeRumStatsLogListRequest,
+    DescribeDataBridgeUrlV2Request: DescribeDataBridgeUrlV2Request,
     ResumeProjectRequest: ResumeProjectRequest,
     ProjectLimit: ProjectLimit,
     DeleteLogExportRequest: DeleteLogExportRequest,
     DescribeRumGroupLogResponse: DescribeRumGroupLogResponse,
     DescribeRumStatsLogListResponse: DescribeRumStatsLogListResponse,
     CreateWhitelistRequest: CreateWhitelistRequest,
+    StopInstanceResponse: StopInstanceResponse,
     DescribeDataPvUrlStatisticsResponse: DescribeDataPvUrlStatisticsResponse,
     DescribeDataLogUrlInfoRequest: DescribeDataLogUrlInfoRequest,
-    DescribeDataCustomUrlResponse: DescribeDataCustomUrlResponse,
+    DescribeProjectLimitsRequest: DescribeProjectLimitsRequest,
+    DescribeDataPvUrlStatisticsV2Response: DescribeDataPvUrlStatisticsV2Response,
     RumAreaInfo: RumAreaInfo,
     DescribeDataSetUrlStatisticsRequest: DescribeDataSetUrlStatisticsRequest,
     DescribeDataPerformanceProjectResponse: DescribeDataPerformanceProjectResponse,
-    DescribeDataFetchUrlInfoResponse: DescribeDataFetchUrlInfoResponse,
+    DescribeDataWebVitalsPageV2Response: DescribeDataWebVitalsPageV2Response,
     ResumeInstanceResponse: ResumeInstanceResponse,
     DescribeDataStaticProjectResponse: DescribeDataStaticProjectResponse,
-    CreateStarProjectRequest: CreateStarProjectRequest,
+    DescribeDataPerformancePageV2Response: DescribeDataPerformancePageV2Response,
+    DescribeDataSetUrlStatisticsV2Request: DescribeDataSetUrlStatisticsV2Request,
     DescribeReleaseFileSignRequest: DescribeReleaseFileSignRequest,
     DeleteWhitelistRequest: DeleteWhitelistRequest,
     DescribeDataLogUrlInfoResponse: DescribeDataLogUrlInfoResponse,
     RumPvInfo: RumPvInfo,
     DeleteReleaseFileResponse: DeleteReleaseFileResponse,
-    DescribeScoresResponse: DescribeScoresResponse,
+    DescribeDataCustomUrlV2Request: DescribeDataCustomUrlV2Request,
     DescribeOfflineLogConfigsResponse: DescribeOfflineLogConfigsResponse,
     DeleteLogExportResponse: DeleteLogExportResponse,
-    DescribeReleaseFileSignResponse: DescribeReleaseFileSignResponse,
+    DescribeDataBridgeUrlV2Response: DescribeDataBridgeUrlV2Response,
     DescribeOfflineLogsResponse: DescribeOfflineLogsResponse,
     DescribeTawAreasRequest: DescribeTawAreasRequest,
+    DescribeDataCustomUrlV2Response: DescribeDataCustomUrlV2Response,
     Filter: Filter,
     DescribeDataLogUrlStatisticsRequest: DescribeDataLogUrlStatisticsRequest,
     DeleteStarProjectResponse: DeleteStarProjectResponse,
@@ -7897,22 +11545,28 @@ module.exports = {
     LogExport: LogExport,
     DescribeDataStaticResourceResponse: DescribeDataStaticResourceResponse,
     DescribeDataEventUrlResponse: DescribeDataEventUrlResponse,
+    DescribeReleaseFileSignResponse: DescribeReleaseFileSignResponse,
     DescribeDataWebVitalsPageRequest: DescribeDataWebVitalsPageRequest,
     DescribeDataFetchUrlInfoRequest: DescribeDataFetchUrlInfoRequest,
-    DescribeLogListResponse: DescribeLogListResponse,
+    DescribeDataFetchUrlInfoResponse: DescribeDataFetchUrlInfoResponse,
     DescribeReleaseFilesResponse: DescribeReleaseFilesResponse,
     CreateOfflineLogConfigRequest: CreateOfflineLogConfigRequest,
     DescribeDataStaticUrlResponse: DescribeDataStaticUrlResponse,
     CreateWhitelistResponse: CreateWhitelistResponse,
     ScoreInfo: ScoreInfo,
     DescribeDataWebVitalsPageResponse: DescribeDataWebVitalsPageResponse,
+    DescribeDataStaticProjectV2Request: DescribeDataStaticProjectV2Request,
+    DescribeLogListResponse: DescribeLogListResponse,
     DescribeProjectsRequest: DescribeProjectsRequest,
     DescribeDataEventUrlRequest: DescribeDataEventUrlRequest,
+    DescribeDataSetUrlStatisticsV2Response: DescribeDataSetUrlStatisticsV2Response,
     DescribeOfflineLogConfigsRequest: DescribeOfflineLogConfigsRequest,
     DescribeRumGroupLogRequest: DescribeRumGroupLogRequest,
     DeleteOfflineLogConfigRequest: DeleteOfflineLogConfigRequest,
     DescribeWhitelistsResponse: DescribeWhitelistsResponse,
+    DescribeDataFetchUrlV2Request: DescribeDataFetchUrlV2Request,
     DescribeProjectsResponse: DescribeProjectsResponse,
+    DescribeDataReportCountV2Response: DescribeDataReportCountV2Response,
     ModifyProjectResponse: ModifyProjectResponse,
     DescribeLogExportsRequest: DescribeLogExportsRequest,
     DescribeDataReportCountResponse: DescribeDataReportCountResponse,
@@ -7921,14 +11575,18 @@ module.exports = {
     DescribeRumLogExportsRequest: DescribeRumLogExportsRequest,
     ModifyProjectRequest: ModifyProjectRequest,
     DescribeRumLogListRequest: DescribeRumLogListRequest,
+    DescribeDataPerformancePageV2Request: DescribeDataPerformancePageV2Request,
     DescribeDataStaticResourceRequest: DescribeDataStaticResourceRequest,
     DescribePvListRequest: DescribePvListRequest,
     DescribeDataPvUrlInfoRequest: DescribeDataPvUrlInfoRequest,
     CreateReleaseFileResponse: CreateReleaseFileResponse,
     CreateLogExportResponse: CreateLogExportResponse,
     DescribeDataFetchProjectResponse: DescribeDataFetchProjectResponse,
+    DescribeScoresV2Response: DescribeScoresV2Response,
     Whitelist: Whitelist,
+    DescribeDataLogUrlStatisticsV2Request: DescribeDataLogUrlStatisticsV2Request,
     RumProject: RumProject,
+    DescribeDataStaticResourceV2Response: DescribeDataStaticResourceV2Response,
     DescribeDataSetUrlStatisticsResponse: DescribeDataSetUrlStatisticsResponse,
 
 }

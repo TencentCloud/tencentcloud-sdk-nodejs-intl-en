@@ -19,7 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const ModifyCloudSliceTaskResponse = models.ModifyCloudSliceTaskResponse;
 const DescribeCloudModerationResponse = models.DescribeCloudModerationResponse;
 const AgentConfig = models.AgentConfig;
-const DescribeRecordingUsageResponse = models.DescribeRecordingUsageResponse;
+const McuLayout = models.McuLayout;
 const SubscribeModerationUserIds = models.SubscribeModerationUserIds;
 const AudioEncodeParams = models.AudioEncodeParams;
 const ServerPushText = models.ServerPushText;
@@ -38,6 +38,7 @@ const SetUserBlockedResponse = models.SetUserBlockedResponse;
 const WaterMarkChar = models.WaterMarkChar;
 const DescribeTrtcRoomUsageResponse = models.DescribeTrtcRoomUsageResponse;
 const StopPublishCdnStreamResponse = models.StopPublishCdnStreamResponse;
+const TranscriptionUserInfoParams = models.TranscriptionUserInfoParams;
 const AbnormalEvent = models.AbnormalEvent;
 const DescribeScaleInfoResponse = models.DescribeScaleInfoResponse;
 const ScaleInfomation = models.ScaleInfomation;
@@ -54,6 +55,7 @@ const DescribeTRTCMarketScaleDataResponse = models.DescribeTRTCMarketScaleDataRe
 const TranslationConfig = models.TranslationConfig;
 const McuTencentVod = models.McuTencentVod;
 const DescribeWebRecordResponse = models.DescribeWebRecordResponse;
+const DescribeCloudTranscriptionResponse = models.DescribeCloudTranscriptionResponse;
 const DescribeUserInfoRequest = models.DescribeUserInfoRequest;
 const DeleteCloudModerationResponse = models.DeleteCloudModerationResponse;
 const DescribeRelayUsageRequest = models.DescribeRelayUsageRequest;
@@ -76,8 +78,9 @@ const DescribeMixTranscodingUsageRequest = models.DescribeMixTranscodingUsageReq
 const DescribeTRTCRealTimeQualityDataRequest = models.DescribeTRTCRealTimeQualityDataRequest;
 const DescribeStreamIngestResponse = models.DescribeStreamIngestResponse;
 const MixTranscodeParams = models.MixTranscodeParams;
-const StopStreamIngestRequest = models.StopStreamIngestRequest;
+const CreateCloudTranscriptionResponse = models.CreateCloudTranscriptionResponse;
 const DescribeTRTCMarketQualityDataResponse = models.DescribeTRTCMarketQualityDataResponse;
+const TranslationParam = models.TranslationParam;
 const SubscribeStreamUserIds = models.SubscribeStreamUserIds;
 const WaterMarkImage = models.WaterMarkImage;
 const McuUserInfoParams = models.McuUserInfoParams;
@@ -85,11 +88,12 @@ const UserMediaStream = models.UserMediaStream;
 const EventList = models.EventList;
 const DescribeTrtcUsageRequest = models.DescribeTrtcUsageRequest;
 const DescribeRoomInfoResponse = models.DescribeRoomInfoResponse;
-const DismissRoomRequest = models.DismissRoomRequest;
+const McuLayoutParams = models.McuLayoutParams;
 const StartWebRecordRequest = models.StartWebRecordRequest;
 const StartStreamIngestRequest = models.StartStreamIngestRequest;
 const DescribeAITranscriptionRequest = models.DescribeAITranscriptionRequest;
 const DescribeAIConversationResponse = models.DescribeAIConversationResponse;
+const DeleteCloudTranscriptionResponse = models.DeleteCloudTranscriptionResponse;
 const DescribeUserInfoResponse = models.DescribeUserInfoResponse;
 const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
 const UpdateStreamIngestResponse = models.UpdateStreamIngestResponse;
@@ -99,7 +103,7 @@ const StartPublishCdnStreamResponse = models.StartPublishCdnStreamResponse;
 const TrtcUsage = models.TrtcUsage;
 const DeleteCloudSliceTaskResponse = models.DeleteCloudSliceTaskResponse;
 const DescribeRelayUsageResponse = models.DescribeRelayUsageResponse;
-const McuLayout = models.McuLayout;
+const DescribeRecordingUsageResponse = models.DescribeRecordingUsageResponse;
 const SliceParams = models.SliceParams;
 const ModerationSupplierParam = models.ModerationSupplierParam;
 const DescribeRecordingUsageRequest = models.DescribeRecordingUsageRequest;
@@ -110,10 +114,11 @@ const DeleteCloudSliceTaskRequest = models.DeleteCloudSliceTaskRequest;
 const MixLayoutParams = models.MixLayoutParams;
 const ModifyCloudSliceTaskRequest = models.ModifyCloudSliceTaskRequest;
 const DescribeMixTranscodingUsageResponse = models.DescribeMixTranscodingUsageResponse;
+const AsrParam = models.AsrParam;
 const McuFeedBackRoomParams = models.McuFeedBackRoomParams;
 const AudioEncode = models.AudioEncode;
 const RemoveUserRequest = models.RemoveUserRequest;
-const McuLayoutParams = models.McuLayoutParams;
+const DismissRoomRequest = models.DismissRoomRequest;
 const DescribeUnusualEventRequest = models.DescribeUnusualEventRequest;
 const DescribeCloudRecordingRequest = models.DescribeCloudRecordingRequest;
 const TencentVod = models.TencentVod;
@@ -134,8 +139,9 @@ const StopAIConversationResponse = models.StopAIConversationResponse;
 const StartPublishCdnStreamRequest = models.StartPublishCdnStreamRequest;
 const DescribeAIConversationRequest = models.DescribeAIConversationRequest;
 const RowValues = models.RowValues;
+const TranscriptionParam = models.TranscriptionParam;
 const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
-const StartStreamIngestResponse = models.StartStreamIngestResponse;
+const DescribeCloudTranscriptionRequest = models.DescribeCloudTranscriptionRequest;
 const CreateCloudSliceTaskResponse = models.CreateCloudSliceTaskResponse;
 const DeleteCloudRecordingRequest = models.DeleteCloudRecordingRequest;
 const ModifyCloudModerationResponse = models.ModifyCloudModerationResponse;
@@ -145,6 +151,7 @@ const StopStreamIngestResponse = models.StopStreamIngestResponse;
 const SetUserBlockedByStrRoomIdRequest = models.SetUserBlockedByStrRoomIdRequest;
 const DescribeTrtcRoomUsageRequest = models.DescribeTrtcRoomUsageRequest;
 const CreateCloudModerationRequest = models.CreateCloudModerationRequest;
+const StopStreamIngestRequest = models.StopStreamIngestRequest;
 const WebRecordVideoParams = models.WebRecordVideoParams;
 const UserInformation = models.UserInformation;
 const DescribeScaleInfoRequest = models.DescribeScaleInfoRequest;
@@ -153,11 +160,13 @@ const DismissRoomByStrRoomIdResponse = models.DismissRoomByStrRoomIdResponse;
 const DescribeUnusualEventResponse = models.DescribeUnusualEventResponse;
 const ModifyCloudRecordingResponse = models.ModifyCloudRecordingResponse;
 const SingleSubscribeParams = models.SingleSubscribeParams;
+const CreateCloudTranscriptionRequest = models.CreateCloudTranscriptionRequest;
 const CreateCloudSliceTaskRequest = models.CreateCloudSliceTaskRequest;
 const ModerationParams = models.ModerationParams;
 const DescribeCloudSliceTaskRequest = models.DescribeCloudSliceTaskRequest;
 const StopPublishCdnStreamRequest = models.StopPublishCdnStreamRequest;
 const MixUserInfo = models.MixUserInfo;
+const DeleteCloudTranscriptionRequest = models.DeleteCloudTranscriptionRequest;
 const EventMessage = models.EventMessage;
 const DescribeTRTCMarketQualityDataRequest = models.DescribeTRTCMarketQualityDataRequest;
 const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
@@ -181,6 +190,7 @@ const DescribeStreamIngestRequest = models.DescribeStreamIngestRequest;
 const TTSConfig = models.TTSConfig;
 const McuAudioParams = models.McuAudioParams;
 const McuPublishCdnParam = models.McuPublishCdnParam;
+const StartStreamIngestResponse = models.StartStreamIngestResponse;
 const AudioParams = models.AudioParams;
 const StopAITranscriptionResponse = models.StopAITranscriptionResponse;
 const WaterMarkTimestamp = models.WaterMarkTimestamp;
@@ -479,6 +489,17 @@ Note: For details about how to use this API, see the `StartPublishCdnStream` doc
     }
 
     /**
+     * This API is used to terminate the transcription task after successful activation.
+     * @param {DeleteCloudTranscriptionRequest} req
+     * @param {function(string, DeleteCloudTranscriptionResponse):void} cb
+     * @public
+     */
+    DeleteCloudTranscription(req, cb) {
+        let resp = new DeleteCloudTranscriptionResponse();
+        this.request("DeleteCloudTranscription", req, resp, cb);
+    }
+
+    /**
      * Initiate the transcription bot. The backend will pull the stream through the bot to perform real-time speech recognition and deliver subtitles and transcription messages. The transcription bot supports two stream pulling modes, controlled by the `TranscriptionMode` field:
 - Pull the stream of the entire room.
 - Pull the stream of a specific user.
@@ -590,6 +611,17 @@ Mixed-stream recording: Mix the audio and video of subscribed UserId in the room
     }
 
     /**
+     * This API is used to query the transcription status after starting a transcription task. It is effective only when the transcription task is in process. Querying after termination will return an error.
+     * @param {DescribeCloudTranscriptionRequest} req
+     * @param {function(string, DescribeCloudTranscriptionResponse):void} cb
+     * @public
+     */
+    DescribeCloudTranscription(req, cb) {
+        let resp = new DescribeCloudTranscriptionResponse();
+        this.request("DescribeCloudTranscription", req, resp, cb);
+    }
+
+    /**
      * This API is used to query your usage of TRTC’s relay to CDN service.
 - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 - The period queried per request cannot be longer than 31 days.
@@ -628,6 +660,18 @@ Mixed-stream recording: Mix the audio and video of subscribed UserId in the room
     ModifyCloudSliceTask(req, cb) {
         let resp = new ModifyCloudSliceTaskResponse();
         this.request("ModifyCloudSliceTask", req, resp, cb);
+    }
+
+    /**
+     * API description:
+Enable the cloud transcription feature.
+     * @param {CreateCloudTranscriptionRequest} req
+     * @param {function(string, CreateCloudTranscriptionResponse):void} cb
+     * @public
+     */
+    CreateCloudTranscription(req, cb) {
+        let resp = new CreateCloudTranscriptionResponse();
+        this.request("CreateCloudTranscription", req, resp, cb);
     }
 
     /**

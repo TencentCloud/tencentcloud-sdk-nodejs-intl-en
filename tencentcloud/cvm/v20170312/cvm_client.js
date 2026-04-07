@@ -16,7 +16,6 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ChargePrepaid = models.ChargePrepaid;
 const LocalDiskType = models.LocalDiskType;
 const AssociateInstancesKeyPairsResponse = models.AssociateInstancesKeyPairsResponse;
 const RenewInstancesRequest = models.RenewInstancesRequest;
@@ -26,7 +25,7 @@ const ConfigureChcDeployVpcResponse = models.ConfigureChcDeployVpcResponse;
 const ResetInstancesTypeResponse = models.ResetInstancesTypeResponse;
 const HostResource = models.HostResource;
 const DeleteDisasterRecoverGroupsRequest = models.DeleteDisasterRecoverGroupsRequest;
-const DescribeInstancesOperationLimitRequest = models.DescribeInstancesOperationLimitRequest;
+const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
 const TerminateInstancesResponse = models.TerminateInstancesResponse;
 const ModifyInstancesChargeTypeResponse = models.ModifyInstancesChargeTypeResponse;
 const DescribeZonesRequest = models.DescribeZonesRequest;
@@ -68,7 +67,8 @@ const DescribeImagesResponse = models.DescribeImagesResponse;
 const ModifyInstancesVpcAttributeResponse = models.ModifyInstancesVpcAttributeResponse;
 const CpuTopology = models.CpuTopology;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
-const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
+const DeleteInstancesDisasterRecoverGroupsRequest = models.DeleteInstancesDisasterRecoverGroupsRequest;
+const DescribeInstancesOperationLimitRequest = models.DescribeInstancesOperationLimitRequest;
 const ModifyInstancesChargeTypeRequest = models.ModifyInstancesChargeTypeRequest;
 const EnterRescueModeRequest = models.EnterRescueModeRequest;
 const TagSpecification = models.TagSpecification;
@@ -84,6 +84,7 @@ const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse
 const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
 const DescribeInstancesOperationLimitResponse = models.DescribeInstancesOperationLimitResponse;
 const SyncImagesResponse = models.SyncImagesResponse;
+const ModifyChcAttributeRequest = models.ModifyChcAttributeRequest;
 const DescribeZoneInstanceConfigInfosResponse = models.DescribeZoneInstanceConfigInfosResponse;
 const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
 const CreateDisasterRecoverGroupResponse = models.CreateDisasterRecoverGroupResponse;
@@ -171,7 +172,8 @@ const DescribeDisasterRecoverGroupQuotaRequest = models.DescribeDisasterRecoverG
 const DeleteLaunchTemplateVersionsResponse = models.DeleteLaunchTemplateVersionsResponse;
 const StartInstancesResponse = models.StartInstancesResponse;
 const ModifyInstancesVpcAttributeRequest = models.ModifyInstancesVpcAttributeRequest;
-const DescribeReservedInstancesRequest = models.DescribeReservedInstancesRequest;
+const DeleteInstancesDisasterRecoverGroupsResponse = models.DeleteInstancesDisasterRecoverGroupsResponse;
+const ChargePrepaid = models.ChargePrepaid;
 const DescribeInternetChargeTypeConfigsResponse = models.DescribeInternetChargeTypeConfigsResponse;
 const DescribeZoneInstanceConfigInfosRequest = models.DescribeZoneInstanceConfigInfosRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
@@ -183,7 +185,7 @@ const ExportImagesResponse = models.ExportImagesResponse;
 const RemoveChcDeployVpcRequest = models.RemoveChcDeployVpcRequest;
 const InquiryPriceRunInstancesResponse = models.InquiryPriceRunInstancesResponse;
 const DescribeHostsRequest = models.DescribeHostsRequest;
-const ModifyChcAttributeRequest = models.ModifyChcAttributeRequest;
+const DescribeReservedInstancesRequest = models.DescribeReservedInstancesRequest;
 const ModifyInstancesRenewFlagResponse = models.ModifyInstancesRenewFlagResponse;
 const DescribeInstancesStatusRequest = models.DescribeInstancesStatusRequest;
 const InquiryPriceResizeInstanceDisksResponse = models.InquiryPriceResizeInstanceDisksResponse;
@@ -1000,6 +1002,17 @@ This API is used to create an instance launch template. After the initial creati
     ExportImages(req, cb) {
         let resp = new ExportImagesResponse();
         this.request("ExportImages", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch remove CVM instances from specified placement groups.
+     * @param {DeleteInstancesDisasterRecoverGroupsRequest} req
+     * @param {function(string, DeleteInstancesDisasterRecoverGroupsResponse):void} cb
+     * @public
+     */
+    DeleteInstancesDisasterRecoverGroups(req, cb) {
+        let resp = new DeleteInstancesDisasterRecoverGroupsResponse();
+        this.request("DeleteInstancesDisasterRecoverGroups", req, resp, cb);
     }
 
     /**

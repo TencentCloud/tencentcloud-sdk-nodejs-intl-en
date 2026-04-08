@@ -1068,7 +1068,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.QualityControlResults = null;
 
         /**
-         * Format diagnostic results list.
+         * 
          * @type {Array.<DiagnoseResult> || null}
          */
         this.DiagnoseResults = null;
@@ -1868,49 +1868,18 @@ class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
 }
 
 /**
- * Watermark removal configuration for the smart erasing template.
+ * DeleteAIRecognitionTemplate request structure.
  * @class
  */
-class UpdateSmartEraseWatermarkConfig extends  AbstractModel {
+class DeleteAIRecognitionTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Watermark erasing method.
-**Automatic erasing: ** Video watermarks are automatically recognized using an AI model and are erased to generate a new video. It applies to dynamic watermarks.
-When automatic erasing is used, if AutoAreas is not specified, the full-screen video image area will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
- **Specified area erasing: ** For static watermarks in fixed positions, you are recommended to specify the erasing area directly.When you choose specified area erasing, specify at least one area.
-- auto: automatic erasing.
-- custom: specified area erasing.
-         * @type {string || null}
+         * Unique ID of a video content recognition template.
+         * @type {number || null}
          */
-        this.WatermarkEraseMethod = null;
-
-        /**
-         * Watermark erasing model.
-Basic Edition: provide average effects and high cost performance. It applies to animations or videos with clean backgrounds.
-Advanced Edition: provide better effects. It applies to reality-style videos, such as short dramas.
-- basic: Basic Edition.
-- advanced: Advanced Edition.
-         * @type {string || null}
-         */
-        this.WatermarkModel = null;
-
-        /**
-         * Custom area for automatic erasing.
-For the specified area, AI models are used to automatically detect and erase the target objects.
-Note: When the erasing method is set to custom, this parameter is invalid. Input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
-         * @type {Array.<EraseArea> || null}
-         */
-        this.AutoAreas = null;
-
-        /**
-         * Custom area for specified area erasing.
-For the specified area, erase the target objects directly without detection and recognition within a selected time period.
-Note: Input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
-         * @type {Array.<EraseTimeArea> || null}
-         */
-        this.CustomAreas = null;
+        this.Definition = null;
 
     }
 
@@ -1921,26 +1890,7 @@ Note: Input [] for the erasing area; if this parameter is unspecified, the templ
         if (!params) {
             return;
         }
-        this.WatermarkEraseMethod = 'WatermarkEraseMethod' in params ? params.WatermarkEraseMethod : null;
-        this.WatermarkModel = 'WatermarkModel' in params ? params.WatermarkModel : null;
-
-        if (params.AutoAreas) {
-            this.AutoAreas = new Array();
-            for (let z in params.AutoAreas) {
-                let obj = new EraseArea();
-                obj.deserialize(params.AutoAreas[z]);
-                this.AutoAreas.push(obj);
-            }
-        }
-
-        if (params.CustomAreas) {
-            this.CustomAreas = new Array();
-            for (let z in params.CustomAreas) {
-                let obj = new EraseTimeArea();
-                obj.deserialize(params.CustomAreas[z]);
-                this.CustomAreas.push(obj);
-            }
-        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -2135,32 +2085,32 @@ class SmartSubtitleTaskTransTextResultOutput extends  AbstractModel {
         super();
 
         /**
-         * List of segments for translation.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>List of segments for translation.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<SmartSubtitleTaskTransTextSegmentItem> || null}
          */
         this.SegmentSet = null;
 
         /**
-         * Subtitle file path.
+         * <p>Subtitle file URL.</p>
          * @type {string || null}
          */
         this.SubtitlePath = null;
 
         /**
-         * Subtitle file storage location.
+         * <p>Smart subtitling result storage information.</p>
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Subtitle file URL.
+         * <p>Subtitle file path</p>
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * Returned translation result during multilingual translation.	
+         * <p>Returned translation result during multilingual translation.</p>
          * @type {Array.<SubtitleTransResultItem> || null}
          */
         this.SubtitleResults = null;
@@ -2666,40 +2616,37 @@ class CreateSmartEraseTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Length limit for the smart erasing template name: 64 characters.
+         * <p>Length limit for the smart erasing template name: 64 characters.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Erasing type.
--subtitle: subtitle removal.
--watermark: watermark removal.
--privacy: privacy protection.
+         * <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
          * @type {string || null}
          */
         this.EraseType = null;
 
         /**
-         * Length limit for the description information of the smart erasing template: 256 characters.
+         * <p>Length limit for the description information of the smart erasing template: 256 characters.</p>
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Subtitle erasing configuration. This parameter is required and valid only when the value of EraseType is set to subtitle.
+         * <p>Subtitle erasing configuration. This parameter is required and valid only when the value of EraseType is set to subtitle.</p>
          * @type {SmartEraseSubtitleConfig || null}
          */
         this.EraseSubtitleConfig = null;
 
         /**
-         * Watermark erasing configuration. This parameter is required and valid only when the value of EraseType is set to watermark.
+         * <p>Watermark erasing configuration. This parameter is required and valid only when the value of EraseType is set to watermark.</p>
          * @type {SmartEraseWatermarkConfig || null}
          */
         this.EraseWatermarkConfig = null;
 
         /**
-         * Privacy protection configuration. This parameter is required and valid only when the value of EraseType is set to privacy.
+         * <p>Privacy protection configuration. This parameter is required and valid only when the value of EraseType is set to privacy.</p>
          * @type {SmartErasePrivacyConfig || null}
          */
         this.ErasePrivacyConfig = null;
@@ -3208,7 +3155,7 @@ class AiAnalysisTaskCutoutOutput extends  AbstractModel {
 }
 
 /**
- * Diagnosis result item.
+ * 
  * @class
  */
 class DiagnoseResult extends  AbstractModel {
@@ -3278,19 +3225,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Type = null;
 
         /**
-         * The PTS timestamp for the exception start.
+         * 
          * @type {number || null}
          */
         this.Timestamp = null;
 
         /**
-         * Diagnosed abnormal description.
+         * 
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * Abnormality detection time in Beijing time, using ISO date format.
+         * 
          * @type {string || null}
          */
         this.DateTime = null;
@@ -3949,11 +3896,23 @@ sl: Slovenian.
         this.AudioData = null;
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.AudioUrl = null;
+
+        /**
          * Cloning audio language. The default language is Chinese.
 Supported languages are the same as those for TextLang.
          * @type {string || null}
          */
         this.AudioLang = null;
+
+        /**
+         * 
+         * @type {SyncDubbingOutputOption || null}
+         */
+        this.Output = null;
 
         /**
          * Extended parameters in the format of a JSON string.
@@ -3974,7 +3933,14 @@ Supported languages are the same as those for TextLang.
         this.TextLang = 'TextLang' in params ? params.TextLang : null;
         this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
         this.AudioData = 'AudioData' in params ? params.AudioData : null;
+        this.AudioUrl = 'AudioUrl' in params ? params.AudioUrl : null;
         this.AudioLang = 'AudioLang' in params ? params.AudioLang : null;
+
+        if (params.Output) {
+            let obj = new SyncDubbingOutputOption();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
         this.ExtParam = 'ExtParam' in params ? params.ExtParam : null;
 
     }
@@ -4439,22 +4405,28 @@ class SubtitleResult extends  AbstractModel {
         super();
 
         /**
-         * Language of the subtitle file.
+         * <p>Language of the subtitle file</p>
          * @type {string || null}
          */
         this.Language = null;
 
         /**
-         * Whether the processing is successful.
+         * <p>Whether the processing is successful.</p>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Subtitle file URL.
+         * <p>Subtitle file path</p>
          * @type {string || null}
          */
         this.Path = null;
+
+        /**
+         * <p>Subtitle suppression video path.</p>
+         * @type {string || null}
+         */
+        this.SubtitleEmbedPath = null;
 
     }
 
@@ -4468,6 +4440,7 @@ class SubtitleResult extends  AbstractModel {
         this.Language = 'Language' in params ? params.Language : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.Path = 'Path' in params ? params.Path : null;
+        this.SubtitleEmbedPath = 'SubtitleEmbedPath' in params ? params.SubtitleEmbedPath : null;
 
     }
 }
@@ -4887,7 +4860,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 Unit: Hz.
 Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
 Note: This field may return null, indicating that no valid values can be obtained.
@@ -4927,6 +4900,84 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
         this.AudioChannel = 'AudioChannel' in params ? params.AudioChannel : null;
         this.StreamSelects = 'StreamSelects' in params ? params.StreamSelects : null;
+
+    }
+}
+
+/**
+ * Watermark removal configuration for the smart erasing template.
+ * @class
+ */
+class UpdateSmartEraseWatermarkConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Watermark erasing method.
+**Automatic erasing: ** Video watermarks are automatically recognized using an AI model and are erased to generate a new video. It applies to dynamic watermarks.
+When automatic erasing is used, if AutoAreas is not specified, the full-screen video image area will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
+ **Specified area erasing: ** For static watermarks in fixed positions, you are recommended to specify the erasing area directly.When you choose specified area erasing, specify at least one area.
+- auto: automatic erasing.
+- custom: specified area erasing.
+         * @type {string || null}
+         */
+        this.WatermarkEraseMethod = null;
+
+        /**
+         * Watermark erasing model.
+Basic Edition: provide average effects and high cost performance. It applies to animations or videos with clean backgrounds.
+Advanced Edition: provide better effects. It applies to reality-style videos, such as short dramas.
+- basic: Basic Edition.
+- advanced: Advanced Edition.
+         * @type {string || null}
+         */
+        this.WatermarkModel = null;
+
+        /**
+         * Custom area for automatic erasing.
+For the specified area, AI models are used to automatically detect and erase the target objects.
+Note: When the erasing method is set to custom, this parameter is invalid. Input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
+         * @type {Array.<EraseArea> || null}
+         */
+        this.AutoAreas = null;
+
+        /**
+         * Custom area for specified area erasing.
+For the specified area, erase the target objects directly without detection and recognition within a selected time period.
+Note: Input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
+         * @type {Array.<EraseTimeArea> || null}
+         */
+        this.CustomAreas = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WatermarkEraseMethod = 'WatermarkEraseMethod' in params ? params.WatermarkEraseMethod : null;
+        this.WatermarkModel = 'WatermarkModel' in params ? params.WatermarkModel : null;
+
+        if (params.AutoAreas) {
+            this.AutoAreas = new Array();
+            for (let z in params.AutoAreas) {
+                let obj = new EraseArea();
+                obj.deserialize(params.AutoAreas[z]);
+                this.AutoAreas.push(obj);
+            }
+        }
+
+        if (params.CustomAreas) {
+            this.CustomAreas = new Array();
+            for (let z in params.CustomAreas) {
+                let obj = new EraseTimeArea();
+                obj.deserialize(params.CustomAreas[z]);
+                this.CustomAreas.push(obj);
+            }
+        }
 
     }
 }
@@ -5381,6 +5432,66 @@ Note: when this field return null, means no valid values can be obtained.
 }
 
 /**
+ * Subtitle suppression module text shadow configuration
+ * @class
+ */
+class SubtitleShadowConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Text shadow configuration switch, 0 for off, 1 for on, default 0
+         * @type {number || null}
+         */
+        this.SubtitleShadowConfigSwitch = null;
+
+        /**
+         * Shadow width, default unit pixel, underlying default value 0, no shading
+
+         * @type {number || null}
+         */
+        this.ShadowWidth = null;
+
+        /**
+         * Shadow width unit. 0 for pixel, 1 for percentage. Default is 0 (pixel).
+
+         * @type {number || null}
+         */
+        this.ShadowWidthUnit = null;
+
+        /**
+         * Shadow color. 6-digit base 16 RGB. Black by default if left blank (has set shadow in the current situation).
+
+         * @type {string || null}
+         */
+        this.ShadowColor = null;
+
+        /**
+         * Shadow transparency. The value should be a positive floating-point number in the range of (0, 1]. If this is not specified, the default value is 1, which means completely opaque (with shadow configured).
+
+         * @type {number || null}
+         */
+        this.ShadowAlpha = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubtitleShadowConfigSwitch = 'SubtitleShadowConfigSwitch' in params ? params.SubtitleShadowConfigSwitch : null;
+        this.ShadowWidth = 'ShadowWidth' in params ? params.ShadowWidth : null;
+        this.ShadowWidthUnit = 'ShadowWidthUnit' in params ? params.ShadowWidthUnit : null;
+        this.ShadowColor = 'ShadowColor' in params ? params.ShadowColor : null;
+        this.ShadowAlpha = 'ShadowAlpha' in params ? params.ShadowAlpha : null;
+
+    }
+}
+
+/**
  * Smart erasure task result.
  * @class
  */
@@ -5395,7 +5506,7 @@ class SmartEraseTaskResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -5513,21 +5624,21 @@ class SmartSubtitleTaskTextResultOutput extends  AbstractModel {
         super();
 
         /**
-         * Subtitle recognition result.
+         * <p>Subtitle recognition result</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<SubtitleResult> || null}
          */
         this.RecognizeSubtitleResult = null;
 
         /**
-         * Subtitle translation result.
+         * <p>Translated subtitles</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<SubtitleResult> || null}
          */
         this.TransSubtitleResult = null;
 
         /**
-         * Storage location of the subtitle file.
+         * <p>Storage location of the subtitle file</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TaskOutputStorage || null}
          */
@@ -5690,7 +5801,7 @@ Cannot be set to 0.
 
         /**
          * Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 Unit: Hz.
 Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
          * @type {number || null}
@@ -6708,30 +6819,34 @@ class SubtitleTransResultItem extends  AbstractModel {
         super();
 
         /**
-         * Translation marker.
-- Success
-- Error
+         * <p>Translation flag:</p><ul><li>Success</li><li>Error</li></ul>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Source language (such as "en").
+         * <p>Source language (such as "en")</p>
          * @type {string || null}
          */
         this.TransSrc = null;
 
         /**
-         * Target language (such as "zh").
+         * <p>Target language (such as "zh")</p>
          * @type {string || null}
          */
         this.TransDst = null;
 
         /**
-         * Subtitle file URL.
+         * <p>Subtitle file URL</p>
          * @type {string || null}
          */
         this.Path = null;
+
+        /**
+         * <p>Subtitle translation suppression video path.</p>
+         * @type {string || null}
+         */
+        this.SubtitleEmbedPath = null;
 
     }
 
@@ -6746,6 +6861,7 @@ class SubtitleTransResultItem extends  AbstractModel {
         this.TransSrc = 'TransSrc' in params ? params.TransSrc : null;
         this.TransDst = 'TransDst' in params ? params.TransDst : null;
         this.Path = 'Path' in params ? params.Path : null;
+        this.SubtitleEmbedPath = 'SubtitleEmbedPath' in params ? params.SubtitleEmbedPath : null;
 
     }
 }
@@ -7621,18 +7737,42 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DeleteAIRecognitionTemplate request structure.
+ * DescribeSubtitleEmbedTemplates request structure.
  * @class
  */
-class DeleteAIRecognitionTemplateRequest extends  AbstractModel {
+class DescribeSubtitleEmbedTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of a video content recognition template.
+         * <p>Unique identifiers of intelligent caption templates for filtering. The array can contain up to 100 unique identifiers.</p>
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * <p>Paging offset. Default value: 0.</p>
          * @type {number || null}
          */
-        this.Definition = null;
+        this.Offset = null;
+
+        /**
+         * <p>Number of returned entries. Default value: 10. Maximum value: 100.</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <p>Filtering condition for the template type. Leave it blank to return all. Valid values:</p><ul><li>Preset: system preset template;</li><li>Custom: user-defined template.</li></ul>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Condition for filtering subtitle suppression templates by ID. Length limit: 64 characters.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
 
     }
 
@@ -7643,7 +7783,11 @@ class DeleteAIRecognitionTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -8709,34 +8853,34 @@ class OverrideEraseParameter extends  AbstractModel {
         super();
 
         /**
-         * Erasing type.
--subtitle: subtitle removal.
--watermark: watermark removal.
--privacy: privacy protection.
+         * <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
          * @type {string || null}
          */
         this.EraseType = null;
 
         /**
-         * Subtitle erasing configuration.
-This field is required when the value of EraseType is subtitle.
+         * <p>Subtitle erasing configuration;<br>This field is required when the value of EraseType is set to subtitle.</p>
          * @type {UpdateSmartEraseSubtitleConfig || null}
          */
         this.EraseSubtitleConfig = null;
 
         /**
-         * Watermark erasing configuration.
-This field is required when the value of EraseType is watermark.
+         * <p>Watermark erasing configuration.<br>This field is required when the value of EraseType is set to watermark.</p>
          * @type {UpdateSmartEraseWatermarkConfig || null}
          */
         this.EraseWatermarkConfig = null;
 
         /**
-         * Privacy protection configuration.
-This field is required when the value of EraseType is privacy.
+         * <p>Privacy protection configuration.<br>This field is required when the value of EraseType is privacy.</p>
          * @type {UpdateSmartErasePrivacyConfig || null}
          */
         this.ErasePrivacyConfig = null;
+
+        /**
+         * <p>id of the subtitle removal suppression template.</p>
+         * @type {number || null}
+         */
+        this.SubtitleEmbedId = null;
 
     }
 
@@ -8766,6 +8910,7 @@ This field is required when the value of EraseType is privacy.
             obj.deserialize(params.ErasePrivacyConfig)
             this.ErasePrivacyConfig = obj;
         }
+        this.SubtitleEmbedId = 'SubtitleEmbedId' in params ? params.SubtitleEmbedId : null;
 
     }
 }
@@ -9808,6 +9953,134 @@ Valid values for enhancement TYPE:
                 this.Details.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Subtitle suppression module background settings
+ * @class
+ */
+class SubtitleBoardConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Subtitle suppression module background configuration switch, 0 for off, 1 for on, default 0
+         * @type {number || null}
+         */
+        this.SubtitleBoardConfigSwitch = null;
+
+        /**
+         * Subtitle background base plate x-axis coordinate position; Supports pixel and percentage format:
+
+- Pixel: Npx. Value range of N: [-4096,4096].
+-Percentage: N%, N range: [-100,100]. For example, 10% means the X-coordinate of the subtitle background base plate is 10% of the source video width.
+
+Default value: 0px.
+Note: The origin of the coordinate axes is at the bottom of the central axis of the source video, and the reference position of the subtitle base plate is at the bottom of the central axis, as shown in the figure below.
+![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png)
+
+         * @type {number || null}
+         */
+        this.BoardX = null;
+
+        /**
+         * BoardX unit, 0 pixel, 1 percentage, default is 0, pixel
+         * @type {number || null}
+         */
+        this.BoardXUnit = null;
+
+        /**
+         * Subtitle background base plate y-axis coordinate position; Supports pixel and percentage format:
+
+- Pixel: Npx. Value range of N: [0,4096].
+-Percentage: N%, where N ranges from [0,100]. For example, 10% means the y-coordinate of the subtitle background base plate equals 10% of the video height.
+
+If this parameter is not specified, the subtitle background is disabled.
+Note: The origin point of the coordinate axis is located at the bottom of the central axis of the source video, and the benchmark of the subtitle background base plate is at the bottom of its central axis. See the following diagram.
+![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png)
+
+         * @type {number || null}
+         */
+        this.BoardY = null;
+
+        /**
+         * BoardY unit, 0 pixel, 1 percentage, default is 0, pixel
+         * @type {number || null}
+         */
+        this.BoardYUnit = null;
+
+        /**
+         * Background width. The value should be a positive integer.
+- Value range for pixels: [0,4096].
+- Value range for percentages: [0, 100].
+If the base plate is enabled and this parameter is not specified, the default width is 90% of the source video width.
+
+         * @type {number || null}
+         */
+        this.BoardWidth = null;
+
+        /**
+         * Background width measurement unit. 0: pixel, 1: percentage. Default is 0 (pixel).
+
+         * @type {number || null}
+         */
+        this.BoardWidthUnit = null;
+
+        /**
+         * Background height. The value should be a positive integer.
+- Value range for pixels: [0,4096].
+- Value range for percentages: [0, 100].
+If the base plate is enabled and this parameter is not specified, the default height is 15% of the source video height.
+
+         * @type {number || null}
+         */
+        this.BoardHeight = null;
+
+        /**
+         * Base plate height unit, 0 pixel, 1 percentage, defaults to 0, pixel
+
+         * @type {number || null}
+         */
+        this.BoardHeightUnit = null;
+
+        /**
+         * Board color. Format: 0xRRGGBB.
+Default value: 0x000000 (black).
+         * @type {string || null}
+         */
+        this.BoardColor = null;
+
+        /**
+         * Subtitle background transparency. Value range: [0, 1].
+<li>0: completely transparent.</li>
+<li>1: completely opaque.</li>
+Default value: 0.8.
+         * @type {number || null}
+         */
+        this.BoardAlpha = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubtitleBoardConfigSwitch = 'SubtitleBoardConfigSwitch' in params ? params.SubtitleBoardConfigSwitch : null;
+        this.BoardX = 'BoardX' in params ? params.BoardX : null;
+        this.BoardXUnit = 'BoardXUnit' in params ? params.BoardXUnit : null;
+        this.BoardY = 'BoardY' in params ? params.BoardY : null;
+        this.BoardYUnit = 'BoardYUnit' in params ? params.BoardYUnit : null;
+        this.BoardWidth = 'BoardWidth' in params ? params.BoardWidth : null;
+        this.BoardWidthUnit = 'BoardWidthUnit' in params ? params.BoardWidthUnit : null;
+        this.BoardHeight = 'BoardHeight' in params ? params.BoardHeight : null;
+        this.BoardHeightUnit = 'BoardHeightUnit' in params ? params.BoardHeightUnit : null;
+        this.BoardColor = 'BoardColor' in params ? params.BoardColor : null;
+        this.BoardAlpha = 'BoardAlpha' in params ? params.BoardAlpha : null;
 
     }
 }
@@ -10989,7 +11262,7 @@ class CreateAigcImageTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned task ID.
+         * <p>Returned task ID.</p>
          * @type {string || null}
          */
         this.TaskId = null;
@@ -13239,7 +13512,7 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
         /**
          * Notification type:
 TDMQ-CMQ: message queue.
-"URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/product/862/39229?from_cn_redirect=1).
+"URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.comom/document/product/862/39229?from_cn_redirect=1).
 <Font color="red"> Note: if it is unspecified or left blank, no callback will be sent. To send a callback, fill in the corresponding type value. </font>
          * @type {string || null}
          */
@@ -14630,26 +14903,25 @@ class AiAnalysisTaskDubbingOutput extends  AbstractModel {
         super();
 
         /**
-         * Specifies the video path for translation.
+         * <p>Dubbed video path.</p>
          * @type {string || null}
          */
         this.VideoPath = null;
 
         /**
-         * Specifies the file path of the tag.
-
+         * <p>Tag file path</p>
          * @type {string || null}
          */
         this.SpeakerPath = null;
 
         /**
-         * Voice type ID.
+         * <p>Voice type id</p>
          * @type {string || null}
          */
         this.VoiceId = null;
 
         /**
-         * Specifies the storage location of the transcoded video.
+         * <p>Storage location of the dubbed video.</p>
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -16970,256 +17242,69 @@ class RawSmartSubtitleParameter extends  AbstractModel {
         super();
 
         /**
-         * Smart subtitle language type.
-0: source language
-1: target language
-2: source language + target language
-The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
+         * <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
          * @type {number || null}
          */
         this.SubtitleType = null;
 
         /**
-         * Source language of the video with smart subtitles.
-OCR recognition only supports the following languages:
-`zh_en`: Chinese and English.
-`multi`: others.
-ASR recognition and pure subtitle translation currently support the following languages:
-`auto`: automatic recognition (it is only supported in pure subtitle translation).
-`zh`: Simplified Chinese.
-`en`: English.
-`ja`: Japanese.
-`ko`: Korean.
-`zh-PY`: Chinese, English, and Cantonese.
-`zh_medical`: Chinese (medical scenario).
-`vi`: Vietnamese.
-`ms`: Malay.
-`id`: Indonesian.
-`fil`: Filipino.
-`th`: Thai.
-`pt`: Portuguese.
-`tr`: Turkish.
-`ar`: Arabic.
-`es`: Spanish.
-`hi`: Hindi.
-`fr`: French.
-`de`: German.
-`it`: Italian.
-`zh_dialect`: Chinese dialect.
-`zh_en`: Chinese and English.
-`yue`: Cantonese.
-`ru`: Russian.
-`prime_zh`: Chinese, English, and Chinese dialects.
-`af-ZA`: Afrikaans (South Africa).
-`sq-AL`: Albanian (Albania).
-`am-ET`: Amharic (Ethiopia).
-`ar-DZ`: Arabic (Algeria).
-`ar-BH`: Arabic (Bahrain).
-`ar-EG`: Arabic (Egypt).
-`ar-IQ`: Arabic (Iraq).
-`ar-IL`: Arabic (Israel).
-`ar-JO`: Arabic (Jordan).
-`ar-KW`: Arabic (Kuwait).
-`ar-LB`: Arabic (Lebanon).
-`ar-MR`: Arabic (Mauritania).
-`ar-MA`: Arabic (Morocco).
-`ar-OM`: Arabic (Oman).
-`ar-QA`: Arabic (Qatar).
-`ar-SA`: Arabic (Saudi Arabia).
-`ar-PS`: Arabic (State of Palestine).
-`ar-SY`: Arabic (Syria).
-`ar-TN`: Arabic (Tunisia).
-`ar-AE`: Arabic (United Arab Emirates).
-`ar-YE`: Arabic (Yemen).
-`hy-AM`: Armenian (Armenia).
-`az-AZ`: Azerbaijani (Azerbaijan).
-`eu-ES`: Basque (Spain).
-`bn-BD`: Bengali (Bangladesh).
-`bn-IN`: Bengali (India).
-`bs-BA`: Bosnian (Bosnia and Herzegovina).
-`bg-BG`: Bulgarian (Bulgaria).
-`my-MM`: Burmese (Myanmar).
-`ca-ES`: Catalan (Spain).
-`hr-HR`: Croatian (Croatia).
-`cs-CZ`: Czech (Czech Republic).
-`da-DK`: Danish (Denmark).
-`nl-BE`: Dutch (Belgium).
-`nl-NL`: Dutch (Holland).
-`en-AU`: English (Australia).
-`en-CA`: English (Canada).
-`en-GH`: English (Ghana).
-`en-HK`: English (Hong Kong (China)).
-`en-IN`: English (India).
-`en-IE`: English (Ireland).
-`en-KE`: English (Kenya).
-`en-NZ`: English (New Zealand).
-`en-NG`: English (Nigeria).
-`en-PK`: English (Pakistan).
-`en-PH`: English (Philippines).
-`en-SG`: English (Singapore).
-`en-ZA`: English (South Africa).
-`en-TZ`: English (Tanzania).
-`en-GB`: English (UK).
-`en-US`: English (US).
-`et-EE`: Estonian (Estonia).
-`fil-PH`: Filipino (Philippines).
-`fi-FI`: Finnish (Finland).
-`fr-BE`: French (Belgium).
-`fr-CA`: French (Canada).
-`fr-FR`: French (France).
-`fr-CH`: French (Switzerland).
-`gl-ES`: Galician (Spain).
-`ka-GE`: Georgian (Georgia).
-`el-GR`: Greek (Greece).
-`gu-IN`: Gujarati (India).
-`iw-IL`: Hebrew (Israel).
-`hi-IN`: Hindi (India).
-`hu-HU`: Hungarian (Hungary).
-`is-IS`: Icelandic (Iceland).
-`id-ID`: Indonesian (Indonesia).
-`it-IT`: Italian (Italy).
-`it-CH`: Italian (Switzerland).
-`ja-JP`: Japanese (Japan).
-`jv-ID`: Javanese (Indonesia).
-`kn-IN`: Kannada (India).
-`kk-KZ`: Kazakh (Kazakhstan).
-`km-KH`: Khmer (Cambodia).
-`rw-RW`: Kinyarwanda (Rwanda).
-`ko-KR`: Korean (South Korea).
-`lo-LA`: Lao (Laos).
-`lv-LV`: Latvian (Latvia).
-`lt-LT`: Lithuanian (Lithuania).
-`mk-MK`: Macedonian (North Macedonia).
-`ms-MY`: Malay (Malaysia).
-`ml-IN`: Malayalam (India).
-`mr-IN`: Marathi (India).
-`mn-MN`: Mongolian (Mongolia).
-`ne-NP`: Nepali (Nepal).
-`no-NO`: Bokmål Norwegian (Norway).
-`fa-IR`: Persian (Iran).
-`pl-PL`: Polish (Poland).
-`pt-BR`: Portuguese (Brazil).
-`pt-PT`: Portuguese (Portugal).
-`ro-RO`: Romanian (Romania).
-`ru-RU`: Russian (Russia).
-`sr-RS`: Serbian (Serbia).
-`si-LK`: Sinhalese (Sri Lanka).
-`sk-SK`: Slovak (Slovakia).
-`sl-SI`: Slovenian (Slovenia).
-`st-ZA`: Sesotho (South Africa).
-`es-AR`: Spanish (Argentina).
-`es-BO`: Spanish (Bolivia).
-`es-CL`: Spanish (Chile).
-`es-CO`: Spanish (Colombia).
-`es-CR`: Spanish (Costa Rica).
-`es-DO`: Spanish (Dominican Republic).
-`es-EC`: Spanish (Ecuador).
-`es-SV`: Spanish (El Salvador).
-`es-GT`: Spanish (Guatemala).
-`es-HN`: Spanish (Honduras).
-`es-MX`: Spanish (Mexico).
-`es-NI`: Spanish (Nicaragua).
-`es-PA`: Spanish (Panama).
-`es-PY`: Spanish (Paraguay).
-`es-PE`: Spanish (Peru).
-`es-PR`: Spanish (Puerto Rico).
-`es-ES`: Spanish (Spain).
-`es-US`: Spanish (US).
-`es-UY`: Spanish (Uruguay).
-`es-VE`: Spanish (Venezuela).
-`su-ID`: Sundanese (Indonesia).
-`sw-KE`: Swahili (Kenya).
-`sw-TZ`: Swahili (Tanzania).
-`sv-SE`: Swedish (Sweden).
-`ta-IN`: Tamil (India).
-`ta-MY`: Tamil (Malaysia).
-`ta-SG`: Tamil (Singapore).
-`ta-LK`: Tamil (Sri Lanka).
-`te-IN`: Telugu (India).
-`th-TH`: Thai (Thailand).
-`ts-ZA`: Tsonga (South Africa).
-`tr-TR`: Turkish (Turkey).
-`uk-UA`: Ukrainian (Ukraine).
-`ur-IN`: Urdu (India).
-`ur-PK`: Urdu (Pakistan).
-`uz-UZ`: Uzbek (Uzbekistan).
-`ve-ZA`: Venda (South Africa).
-`vi-VN`: Vietnamese (Vietnam).
-`xh-ZA`: Xhosa (South Africa).
-`zu-ZA`: Zulu (South Africa).
-
+         * <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br>ASR recognition and pure caption translation currently support the following languages:<br><code>auto</code>: Auto-identification<br><code>zh</code>: Simplified Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>zh-PY</code>: Chinese-English-Cantonese<br><code>zh_medical</code>: Chinese health care<br><code>vi</code>: Vietnamese<br><code>ms</code>: Malay<br><code>id</code>: Indonesian<br><code>fil</code>: Filipino<br><code>th</code>: Thai<br><code>pt</code>: Portuguese<br><code>tr</code>: Turkish<br><code>ar</code>: Arabic<br><code>es</code>: Spanish<br><code>hi</code>: Hindi<br><code>fr</code>: French<br><code>de</code>: German<br><code>it</code>: Italian<br><code>zh_dialect</code>: Chinese dialect<br><code>zh_en</code>: Chinese-English<br><code>yue</code>: Cantonese<br><code>ru</code>: Russian<br><code>prime_zh</code>: Chinese-English dialect<br><code>af-ZA</code>: Afrikaans (South Africa)<br><code>sq-AL</code>: Albanian (Albania)<br><code>am-ET</code>: Amharic (Ethiopia)<br><code>ar-DZ</code>: Arabic (Algeria)<br><code>ar-BH</code>: Arabic (Bahrain)<br><code>ar-EG</code>: Arabic (Egypt)<br><code>ar-IQ</code>: Arabic (Iraq)<br><code>ar-IL</code>: Arabic (Israel)<br><code>ar-JO</code>: Arabic (Jordan)<br><code>ar-KW</code>: Arabic (Kuwait)<br><code>ar-LB</code>: Arabic (Lebanon)<br><code>ar-MR</code>: Arabic (Mauritania)<br><code>ar-MA</code>: Arabic (Morocco)<br><code>ar-OM</code>: Arabic (Oman)<br><code>ar-QA</code>: Arabic (Qatar)<br><code>ar-SA</code>: Arabic (Saudi Arabia)<br><code>ar-PS</code>: Arabic (State of Palestine)<br><code>ar-SY</code>: Arabic (Syria)<br><code>ar-TN</code>: Arabic (Tunisia)<br><code>ar-AE</code>: Arabic (United Arab Emirates)<br><code>ar-YE</code>: Arabic (Yemen)<br><code>hy-AM</code>: Armenian (Armenia)<br><code>az-AZ</code>: Azerbaijani (Azerbaijan)<br><code>eu-ES</code>: Basque (Spain)<br><code>bn-BD</code>: Bengali (Bangladesh)<br><code>bn-IN</code>: Bengali (India)<br><code>bs-BA</code>: Bosnian (Bosnia and Herzegovina)<br><code>bg-BG</code>: Bulgarian (Bulgaria)<br><code>my-MM</code>: Burmese (Myanmar)<br><code>ca-ES</code>: Catalan (Spain)<br><code>hr-HR</code>: Croatian (Croatia)<br><code>cs-CZ</code>: Czech (Czech Republic)<br><code>da-DK</code>: Danish (Denmark)<br><code>nl-BE</code>: Dutch (Belgium)<br><code>nl-NL</code>: Dutch (Netherlands)<br><code>en-AU</code>: English (Australia)<br><code>en-CA</code>: English (Canada)<br><code>en-GH</code>: English (Ghana)<br><code>en-HK</code>: English (Hong Kong (China))<br><code>en-IN</code>: English (India)<br><code>en-IE</code>: English (Ireland)<br><code>en-KE</code>: English (Kenya)<br><code>en-NZ</code>: English (New Zealand)<br><code>en-NG</code>: English (Nigeria)<br><code>en-PK</code>: English (Pakistan)<br><code>en-PH</code>: English (Philippines)<br><code>en-SG</code>: English (Singapore)<br><code>en-ZA</code>: English (South Africa)<br><code>en-TZ</code>: English (Tanzania)<br><code>en-GB</code>: English (UK)<br><code>en-US</code>: English (United States)<br><code>et-EE</code>: Estonian (Estonia)<br><code>fil-PH</code>: Filipino (Philippines)<br><code>fi-FI</code>: Finnish (Finland)<br><code>fr-BE</code>: French (Belgium)<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fr-CH</code>: French (Switzerland)<br><code>gl-ES</code>: Galician (Spain)<br><code>ka-GE</code>: Georgian (Georgia)<br><code>el-GR</code>: Greek (Greece)<br><code>gu-IN</code>: Gujarati (India)<br><code>iw-IL</code>: Hebrew (Israel)<br><code>hi-IN</code>: Hindi (India)<br><code>hu-HU</code>: Hungarian (Hungary)<br><code>is-IS</code>: Icelandic (Iceland)<br><code>id-ID</code>: Indonesian (Indonesia)<br><code>it-IT</code>: Italian (Italy)<br><code>it-CH</code>: Italian (Switzerland)<br><code>ja-JP</code>: Japanese (Japan)<br><code>jv-ID</code>: Javanese (Indonesia)<br><code>kn-IN</code>: Kannada (India)<br><code>kk-KZ</code>: Kazakh (Kazakhstan)<br><code>km-KH</code>: Khmer (Cambodia)<br><code>rw-RW</code>: Kinyarwanda (Rwanda)<br><code>ko-KR</code>: Korean (South Korea)<br><code>lo-LA</code>: Lao (Laos)<br><code>lv-LV</code>: Latvian (Latvia)<br><code>lt-LT</code>: Lithuanian (Lithuania)<br><code>mk-MK</code>: Macedonian (North Macedonia)<br><code>ms-MY</code>: Malay (Malaysia)<br><code>ml-IN</code>: Malayalam (India)<br><code>mr-IN</code>: Marathi (India)<br><code>mn-MN</code>: Mongolian (Mongolia)<br><code>ne-NP</code>: Nepali (Nepal)<br><code>no-NO</code>: Norwegian Bokmål (Norway)<br><code>fa-IR</code>: Persian (Iran)<br><code>pl-PL</code>: Polish (Poland)<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>ro-RO</code>: Romanian (Romania)<br><code>ru-RU</code>: Russian (Russia)<br><code>sr-RS</code>: Serbian (Serbia)<br><code>si-LK</code>: Sinhalese (Sri Lanka)<br><code>sk-SK</code>: Slovak (Slovakia)<br><code>sl-SI</code>: Slovenian (Slovenia)<br><code>st-ZA</code>: Southern Sotho (South Africa)<br><code>es-AR</code>: Spanish (Argentina)<br><code>es-BO</code>: Spanish (Bolivia)<br><code>es-CL</code>: Spanish (Chile)<br><code>es-CO</code>: Spanish (Colombia)<br><code>es-CR</code>: Spanish (Costa Rica)<br><code>es-DO</code>: Spanish (Dominican Republic)<br><code>es-EC</code>: Spanish (Ecuador)<br><code>es-SV</code>: Spanish (El Salvador)<br><code>es-GT</code>: Spanish (Guatemala)<br><code>es-HN</code>: Spanish (Honduras)<br><code>es-MX</code>: Spanish (Mexico)<br><code>es-NI</code>: Spanish (Nicaragua)<br><code>es-PA</code>: Spanish (Panama)<br><code>es-PY</code>: Spanish (Paraguay)<br><code>es-PE</code>: Spanish (Peru)<br><code>es-PR</code>: Spanish (Puerto Rico)<br><code>es-ES</code>: Spanish (Spain)<br><code>es-US</code>: Spanish (United States)<br><code>es-UY</code>: Spanish (Uruguay)<br><code>es-VE</code>: Spanish (Venezuela)<br><code>su-ID</code>: Sundanese (Indonesia)<br><code>sw-KE</code>: Swahili (Kenya)<br><code>sw-TZ</code>: Swahili (Tanzania)<br><code>sv-SE</code>: Swedish (Sweden)<br><code>ta-IN</code>: Tamil (India)<br><code>ta-MY</code>: Tamil (Malaysia)<br><code>ta-SG</code>: Tamil (Singapore)<br><code>ta-LK</code>: Tamil (Sri Lanka)<br><code>te-IN</code>: Telugu (India)<br><code>th-TH</code>: Thai (Thailand)<br><code>ts-ZA</code>: Tsonga (South Africa)<br><code>tr-TR</code>: Turkish (Türkiye)<br><code>uk-UA</code>: Ukrainian (Ukraine)<br><code>ur-IN</code>: Urdu (India)<br><code>ur-PK</code>: Urdu (Pakistan)<br><code>uz-UZ</code>: Uzbek (Uzbekistan)<br><code>ve-ZA</code>: Venda (South Africa)<code>vi-VN</code>: Vietnamese (Vietnam)<br><code>xh-ZA</code>: Xhosa (South Africa)<br><code>zu-ZA</code>: Zulu (South Africa)</p>
          * @type {string || null}
          */
         this.VideoSrcLanguage = null;
 
         /**
-         * Smart subtitle file format:
-- Under the ASR recognition and translation processing type:
-     - vtt: WebVTT format subtitle.
-     - srt: SRT format subtitle.
-     - Unspecified or left blank: no subtitle file generated.
-- Under the pure subtitle translation processing type:
-    - original: consistent with the source file.
-    - vtt: WebVTT format subtitle.
-    - srt: SRT format subtitle.
-- Under the OCR recognition and translation processing type:
-     - vtt: WebVTT format subtitle.
-     - srt: SRT format subtitle.
-**Note**:
-- For ASR recognition mode, when 2 or more languages are involved in translation, this field cannot be unspecified or left blank.
-- For pure subtitle translation and OCR recognition mode, this field cannot be unspecified or left blank.
+         * <p>Intelligent subtitle file format:</p><ul><li>For ASR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li><li>Blank or fill in the blank: no subtitle file generated</li></ul></li><li>For pure caption translation processing type:<ul><li>original: consistent with the source file</li><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li><li>For OCR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li></ul><p><strong>Note</strong>:</p><ul><li>For ASR recognition method, passing blank or unspecified is not allowed when translating at least 2 languages.</li><li>For pure caption translation and OCR recognition translation methods, passing blank or unspecified is not allowed.</li><li>For OCR type tasks, passing blank or unspecified is allowed when suppression is enabled.</li></ul>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SubtitleFormat = null;
 
         /**
-         * Subtitle translation switch.
-`ON`: translation enabled.
-`OFF`: translation disabled.
-**Note**: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to `OFF`.
+         * <p>Subtitle translation switch<br><code>ON</code>: Enable translation<br><code>OFF</code>: Disable translation</p><p><strong>Note</strong>: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to <code>OFF</code>.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TranslateSwitch = null;
 
         /**
-         * Target language for subtitle translation.
-This parameter takes effect when the value of TranslateSwitch is ON. Valid translation languages:`ab`: Abkhazian.`ace`: Acehnese.`ach`: Acholi.`af`: Afrikaans.`ak`: Twi (Akan).`am`: Amharic.`ar`: Arabic.`as`: Assamese.`ay`: Aymara.`az`: Azerbaijani.`ba`: Bashkir.`ban`: Balinese.`bbc`: Batak toba.`bem`: Bemba.`bew`: Betawi.`bg`: Bulgarian.`bho`: Bhojpuri.`bik`: Bikol.`bm`: Bambara.`bn`: Bengali.`br`: Breton.`bs`: Bosnian.`btx`: Batak Karo.`bts`: Batak Simalungun.`bua`: Buryat.`ca`: Catalan.`ceb`: Cebuano.`cgg`: Kiga.`chm`: Meadow Mari.`ckb`: Kurdish (Sorani).`cnh`: Hakha Chin.`co`: Corsican.`crh`: Crimean Tatar.`crs`: Seychellois Creole.`cs`: Czech.`cv`: Chuvash.`cy`: Welsh.`da`: Danish.`de`: German.`din`: Dinka.`doi`: Dogri.`dov`: Dombe.`dv`: Dhivehi.`dz`: Dzongkha.`ee`: Ewe.`el`: Greek.`en`: English.`eo`: Esperanto.`es`: Spanish.`et`: Estonian.`eu`: Basque.`fa`: Persian.`ff`: Fulah.`fi`: Finnish.`fil`: Filipino (Tagalog).`fj`: Fijian.`fr`: French.`fr-CA`: French (Canada).`fr-FR`: French (France).`fy`: Frisian.`ga`: Irish.`gaa`: Ga.
-`gd`: Scottish Gaelic.`gl`: Galician.`gn`: Guarani.`gom`: Konkani.`gu`: Gujarati.`gv`: Manx.`ha`: Hausa.`haw`: Hawaiian.`he`: Hebrew.`hi`: Hindi.`hil`: Hiligaynon.`hmn`: Hmong.`hr`: Croatian.`hrx`: Hunsrik.`ht`: Haitian Creole.`hu`: Hungarian.`hy`: Armenian.`id`: Indonesian.`ig`: Igbo.`ilo`: Iloko.`is`: Icelandic.`it`: Italian.`iw`: Hebrew.`ja`: Japanese.`jv`: Javanese.`ka`: Georgian.`kk`: Kazakh.`km`: Khmer.`kn`: Kannada.`ko`: Korean.`kri`: Krio.`ku`: Kurdish (Kurmanji).`ktu`: Kituba.`ky`: Kyrgyz.`la`: Latin.`lb`: Luxembourgish.`lg`: Ganda (Luganda).`li`: Limburgish.`lij`: Ligurian.`lmo`: Lombard.`ln`: Lingala.`lo`: Lao.`lt`: Lithuanian.`ltg`: Latgalian.`luo`: Luo.`lus`: Mizo.`lv`: Latvian.`mai`: Maithili.`mak`: Makasar.`mg`: Malagasy.`mi`: Maori.`min`: Minangkabau.`mk`: Macedonian.`ml`: Malayalam.`mn`: Mongolian.`mr`: Marathi.`ms`: Malay.`mt`: Maltese.`my`: Burmese.`ne`: Nepali.`new`: Newari.`nl`: Dutch.`no`: Norwegian.`nr`: Southern Ndebele.`nso`: Northern Sotho (Sepedi).`nus`: Nuer.`ny`: Chichewa (Nyanja).`oc`: Occitan.`om`: Oromo.`or`: Odia.`pa`: Punjabi.`pag`: Pangasinan.`pam`: Kapampangan.`pap`: Papiamento.`pl`: Polish.`ps`: Pashto.`pt`: Portuguese.`pt-BR`: Portuguese (Brazil).`pt-PT`: Portuguese (Portugal).`qu`: Quechua.`ro`: Romanian.`rom`: Romani.`rn`: Rundi.`ru`: Russian.`rw`: Kinyarwanda.`sa`: Sanskrit.`scn`: Sicilian.`sd`: Sindhi.`sg`: Sango.`shn`: Shan.`si`: Sinhala.`sk`: Slovak.`sl`: Slovenian.`sm`: Samoan.`sn`: Shona.`so`: Somali.`sq`: Albanian.`sr`: Serbian.`ss`: Swazi.`st`: Southern Sotho.`su`: Sundanese.`sv`: Swedish.`sw`: Swahili.`szl`: Silesian.`ta`: Tamil.`te`: Telugu.`tet`: Tetum.`tg`: Tajik.`th`: Thai.`ti`: Tigrinya.`tk`: Turkmen.`tn`: Tswana.`tr`: Turkish.`ts`: Tsonga.`tt`: Tatar.`ug`: Uyghur.`uk`: Ukrainian.`ur`: Urdu.`uz`: Uzbek.`vi`: Vietnamese.`xh`: Xhosa.`yi`: Yiddish.`yo`: Yoruba.`yua`: Yucatec Maya.`yue`: Cantonese.`zh`: Chinese (Simplified).`zh-TW`: Chinese (Traditional).`zu`: Zulu.**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+         * <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: GaLanguage<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method.<code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TranslateDstLanguage = null;
 
         /**
-         * ASR hotword lexicon parameter.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>ASR hot word lexicon parameter</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AsrHotWordsConfigure || null}
          */
         this.AsrHotWordsConfigure = null;
 
         /**
-         * Custom parameter.
+         * <p>Custom parameter</p>
          * @type {string || null}
          */
         this.ExtInfo = null;
 
         /**
-         * Subtitle processing type:
-- 0: ASR recognition subtitle.
-- 1: pure subtitle translation.
-- 2: OCR recognition subtitle.
-**Note**: The default processing type is ASR recognition subtitle if the field is unspecified.
+         * <p>Subtitle processing type:</p><ul><li>0: ASR recognition subtitle</li><li>1: Pure caption translation</li><li>2: OCR recognition subtitle</li></ul><p><strong>Note</strong>: The default type is ASR recognition subtitle if the field is unspecified.</p>
          * @type {number || null}
          */
         this.ProcessType = null;
 
         /**
-         * Area configurations for the subtitle OCR extraction box.Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Area configurations for the subtitle OCR extraction box</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SelectingSubtitleAreasConfig || null}
          */
         this.SelectingSubtitleAreasConfig = null;
+
+        /**
+         * <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR).</p>
+         * @type {number || null}
+         */
+        this.SubtitleEmbedId = null;
 
     }
 
@@ -17249,6 +17334,7 @@ Note: This field may return null, indicating that no valid value can be obtained
             obj.deserialize(params.SelectingSubtitleAreasConfig)
             this.SelectingSubtitleAreasConfig = obj;
         }
+        this.SubtitleEmbedId = 'SubtitleEmbedId' in params ? params.SubtitleEmbedId : null;
 
     }
 }
@@ -18322,46 +18408,43 @@ class ModifySmartEraseTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique identifier of the smart erasing template.
+         * <p>Unique identifier of the intelligent erasure template</p>
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Length limit for the smart erasing template name: 64 characters.
+         * <p>Length limit for the smart erasing template name: 64 characters.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Length limit for the description information of the smart erasing template: 256 characters.
+         * <p>Length limit for the description information of the smart erasing template: 256 characters.</p>
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Erasing type.
--subtitle: subtitle removal.
--watermark: watermark removal.
--privacy: privacy protection.
+         * <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
          * @type {string || null}
          */
         this.EraseType = null;
 
         /**
-         * Subtitle erasing configuration. It takes effect when the value of EraseType is set to subtitle, or when the value of EraseType is left unspecified but the original EraseType value of the modified template is subtitle.
+         * <p>Subtitle erasing configuration. It takes effect when the value of EraseType is set to subtitle, or when the value of EraseType is left unspecified but the original EraseType value of the modified template is subtitle.</p>
          * @type {SmartEraseSubtitleConfig || null}
          */
         this.EraseSubtitleConfig = null;
 
         /**
-         * Watermark erasing configuration. The value of EraseType can be set to watermark or left unspecified. This parameter is valid only when the value of EraseType of the corresponding template is set to watermark.
+         * <p>Watermark erasing configuration. The value of EraseType can be set to watermark or left unspecified. This parameter is valid only when the value of EraseType of the corresponding template is set to watermark.</p>
          * @type {SmartEraseWatermarkConfig || null}
          */
         this.EraseWatermarkConfig = null;
 
         /**
-         * Privacy protection configuration. The value of EraseType can be set to privacy or left unspecified. This parameter is valid only when the value of EraseType of the corresponding template is set to privacy.
+         * <p>Privacy protection configuration. The value of EraseType can be set to privacy or left unspecified. This parameter is valid only when the value of EraseType of the corresponding template is set to privacy.</p>
          * @type {SmartErasePrivacyConfig || null}
          */
         this.ErasePrivacyConfig = null;
@@ -20162,13 +20245,13 @@ class BlindWatermarkTemplate extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -20438,7 +20521,7 @@ class DeleteAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Live streaming AI tagging recognition results
+ * 
  * @class
  */
 class LiveStreamTagRecognitionResult extends  AbstractModel {
@@ -20446,25 +20529,25 @@ class LiveStreamTagRecognitionResult extends  AbstractModel {
         super();
 
         /**
-         * Tagging events.
+         * 
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Start PTS time of the recognition segment, unit: seconds.
+         * 
          * @type {number || null}
          */
         this.StartPtsTime = null;
 
         /**
-         * Termination PTS time of the recognition segment, unit: seconds.
+         * 
          * @type {number || null}
          */
         this.EndPtsTime = null;
 
         /**
-         * Recognition segment confidence. Range: 0-100.
+         * 
          * @type {number || null}
          */
         this.Confidence = null;
@@ -21326,37 +21409,49 @@ class RawSmartEraseParameter extends  AbstractModel {
         super();
 
         /**
-         * Specifies the removal type.
--subtitle removal.
--Remove watermark.
--privacy protection.
+         * <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
          * @type {string || null}
          */
         this.EraseType = null;
 
         /**
-         * Subtitle erasure configuration.
-When EraseType is subtitle, this field is required.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Subtitle erasing configuration;<br>This field is required when the value of EraseType is set to subtitle.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SmartEraseSubtitleConfig || null}
          */
         this.EraseSubtitleConfig = null;
 
         /**
-         * Specifies the watermark removal configuration.
-When EraseType is watermark, this field is required.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Watermark erasing configuration.<br>This field is required when the value of EraseType is set to watermark.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SmartEraseWatermarkConfig || null}
          */
         this.EraseWatermarkConfig = null;
 
         /**
-         * Privacy protection configuration.
-When EraseType is privacy, this field is required.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Privacy protection configuration.<br>This field is required when the value of EraseType is privacy.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SmartErasePrivacyConfig || null}
          */
         this.ErasePrivacyConfig = null;
+
+        /**
+         * <p>id of the subtitle removal suppression template.</p>
+         * @type {number || null}
+         */
+        this.SubtitleEmbedId = null;
+
+        /**
+         * <p>Suppression configuration, enabled by default, moves subtitles back to the original subtitle position.</p>
+         * @type {number || null}
+         */
+        this.UseOriginalPos = null;
+
+        /**
+         * <p>Suppression configuration, enabled by default. When enabled, use the original subtitle font size.</p>
+         * @type {number || null}
+         */
+        this.UseOriginalSize = null;
 
     }
 
@@ -21386,6 +21481,9 @@ Note: This field may return null, indicating that no valid value can be obtained
             obj.deserialize(params.ErasePrivacyConfig)
             this.ErasePrivacyConfig = obj;
         }
+        this.SubtitleEmbedId = 'SubtitleEmbedId' in params ? params.SubtitleEmbedId : null;
+        this.UseOriginalPos = 'UseOriginalPos' in params ? params.UseOriginalPos : null;
+        this.UseOriginalSize = 'UseOriginalSize' in params ? params.UseOriginalSize : null;
 
     }
 }
@@ -21405,7 +21503,7 @@ class ScheduleExecRuleTaskResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
+         * Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -22970,6 +23068,34 @@ If left empty, it is the same as the directory of the trigger file, that is, `{i
 }
 
 /**
+ * DeleteSubtitleEmbedTemplate request structure.
+ * @class
+ */
+class DeleteSubtitleEmbedTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Unique identifier of the subtitle suppression template.</p>
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
  * Object recognition task input type.
  * @class
  */
@@ -23537,7 +23663,7 @@ class LiveStreamAiRecognitionResultItem extends  AbstractModel {
         this.ObjectRecognitionResultSet = null;
 
         /**
-         * Tagging results are valid when Type is TagRecognition.
+         * 
          * @type {Array.<LiveStreamTagRecognitionResult> || null}
          */
         this.TagRecognitionResultSet = null;
@@ -23840,30 +23966,30 @@ class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * AI video intelligent analysis input parameter types
+ * DescribeTranscodeTemplates response structure.
  * @class
  */
-class AiAnalysisTaskInput extends  AbstractModel {
+class DescribeTranscodeTemplatesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Video content analysis template ID.
+         * Number of eligible entries.
          * @type {number || null}
          */
-        this.Definition = null;
+        this.TotalCount = null;
 
         /**
-         * Additional parameter. Its value is a serialized JSON string.
-Note: This parameter is used to meet customization requirements. References:
-[Smart Erase Tutorial]: https://intl.cloud.tencent.com/document/product/862/101530?from_cn_redirect=1
-[Video Splitting (Long Videos to Short Videos) Tutorial](https://intl.cloud.tencent.com/document/product/862/112098?from_cn_redirect=1)
-[Intelligent Highlights Tutorial](https://intl.cloud.tencent.com/document/product/862/107280?from_cn_redirect=1)
-[Horizontal-to-Vertical Video Transformation Tutorial](https://intl.cloud.tencent.com/document/product/862/112112?from_cn_redirect=1)
-Note: This field may return null, indicating that no valid value can be obtained.
+         * List of transcoding template details.
+         * @type {Array.<TranscodeTemplate> || null}
+         */
+        this.TranscodeTemplateSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ExtendedParameter = null;
+        this.RequestId = null;
 
     }
 
@@ -23874,8 +24000,17 @@ Note: This field may return null, indicating that no valid value can be obtained
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TranscodeTemplateSet) {
+            this.TranscodeTemplateSet = new Array();
+            for (let z in params.TranscodeTemplateSet) {
+                let obj = new TranscodeTemplate();
+                obj.deserialize(params.TranscodeTemplateSet[z]);
+                this.TranscodeTemplateSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -24283,19 +24418,19 @@ class LiveStreamAsrFullTextRecognitionResult extends  AbstractModel {
         this.Confidence = null;
 
         /**
-         * Recognition start UTC time.
+         * 
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Recognition end UTC time.
+         * 
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Steady state marker.
+         * 
          * @type {boolean || null}
          */
         this.SteadyState = null;
@@ -24511,7 +24646,7 @@ class ProhibitedAsrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * Smart segmentation clips.
+ * 
  * @class
  */
 class SegmentRecognitionItem extends  AbstractModel {
@@ -24519,19 +24654,19 @@ class SegmentRecognitionItem extends  AbstractModel {
         super();
 
         /**
-         * Confidence.
+         * 
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Segment start time offset.
+         * 
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * Segment end time offset.
+         * 
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -24609,6 +24744,56 @@ class SegmentRecognitionItem extends  AbstractModel {
 }
 
 /**
+ * DescribeSubtitleEmbedTemplates response structure.
+ * @class
+ */
+class DescribeSubtitleEmbedTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Total number of records that meet filter conditions.</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * <p>List of subtitle suppression template details.</p>
+         * @type {Array.<SubtitleEmbedTemplateItem> || null}
+         */
+        this.SubtitleEmbedTemplateSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.SubtitleEmbedTemplateSet) {
+            this.SubtitleEmbedTemplateSet = new Array();
+            for (let z in params.SubtitleEmbedTemplateSet) {
+                let obj = new SubtitleEmbedTemplateItem();
+                obj.deserialize(params.SubtitleEmbedTemplateSet[z]);
+                this.SubtitleEmbedTemplateSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The input parameters for ASR-based detection of politically sensitive information.
  * @class
  */
@@ -24637,7 +24822,7 @@ class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
 }
 
 /**
- * Live streaming analysis results
+ * 
  * @class
  */
 class LiveStreamAiAnalysisResultInfo extends  AbstractModel {
@@ -25012,13 +25197,13 @@ class TranslateConfigureInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Video source language.
+         * 
          * @type {string || null}
          */
         this.SourceLanguage = null;
 
         /**
-         * Translated target language.
+         * 
          * @type {string || null}
          */
         this.DestinationLanguage = null;
@@ -25250,23 +25435,38 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Font type. Valid values:
-<li>hei.ttf: SimHei.</li>
+<li>hei.ttf: SimHei</li>
 <li>song.ttf: SimSun.</li>
-<li>kai.ttf (recommend) or simkai.ttf: SimKai.</li>
+<li>kai.ttf (recommend) or simkai.ttf: KaiTi.</li>
 <li>msyh.ttf: Microsoft YaHei.</li>
 <li>msyhbd.ttf: Microsoft YaHei Bold.</li>
 <li>hkjgt.ttf: DynaFont King Gothic.</li>
 <li>dhttx.ttf: DianHei Extra Light.</li>
 <li>xqgdzt.ttf: XiQue GuZiDian.</li>
-<li>qpcyt.ttf: QiaoPin ChaoYuan.</li>
+<li>qpcyt.ttf: Smart Splice Super Round Body</li>
 <li>arial.ttf: English only.</li>
-<li>dinalternate.ttf: DIN Alternate Bold.</li>
-<li>helveticalt.ttf: Helvetica.</li>
-<li>helveticains.ttf: Helvetica Inserat.</li>
-<li>trajanpro.ttf: TrajanPro-Bold.</li>
+<li>dinalternate.ttf:DIN Alternate Bold</li>
+<li>helveticalt.ttf:Helvetica</li>
+<li>helveticains.ttf:Helvetica Inserat</li>
+<li>trajanpro.ttf:TrajanPro-Bold</li>
 <li>korean.ttf: Korean.</li>
 <li>japanese.ttf: Japanese.</li>
 <li>thai.ttf: Thai.</li>
+<li>roboto.ttf:Roboto</li>
+<li>notosans.ttf:NotoSans</li>
+<li>notosansthai.ttf: Thai NotoSansThai</li>
+<li>sarabun.ttf: Thai Sarabun</li>
+<li>kanit.ttf: Thai Kanit</li>
+<li>charmonman.ttf: Thai Charmonman.</li>
+<li>notonaskharabic.ttf: Arabic NotoNaskhArabic.</li>
+<li>notosansdevanagari.ttf: NotoSansDevanagari for India.</li>
+<li>notosanstc.ttf: Cantonese Source Han Sans NotoSansTC</li>
+<li>notosanskr.ttf: Korean NotoSansKR.</li>
+<li>gothica1.ttf: Korean GothicA1.</li>
+<li>nanummyeongjo.ttf: Korean NanumMyeongjo.</li>
+<li>notosansjp.ttf: Japanese NotoSansJP.</li>
+<li>notoserifjp.ttf: Japanese NotoSerifJP.</li>
+<li>shipporimincho.ttf: Japanese ShipporiMincho.</li>
 Default value: hei.ttf.
 <br>Note:
 <li>kai.ttf is recommended for SimKai.</li>
@@ -25661,26 +25861,32 @@ class SmartSubtitleTaskAsrFullTextResultOutput extends  AbstractModel {
         super();
 
         /**
-         * List of segments for full speech recognition.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>List of segments for full speech recognition.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<SmartSubtitleTaskAsrFullTextSegmentItem> || null}
          */
         this.SegmentSet = null;
 
         /**
-         * Subtitle file path.
+         * <p>Subtitle file path</p>
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * Subtitle file path.
+         * <p>Subtitle file URL.</p>
          * @type {string || null}
          */
         this.SubtitlePath = null;
 
         /**
-         * Subtitle file storage location.
+         * <p>Subtitle recognition result info.</p>
+         * @type {SubtitleResult || null}
+         */
+        this.SubtitleInfo = null;
+
+        /**
+         * <p>Storage location of the subtitle file.</p>
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -25705,6 +25911,12 @@ Note: This field may return null, indicating that no valid value can be obtained
         }
         this.Path = 'Path' in params ? params.Path : null;
         this.SubtitlePath = 'SubtitlePath' in params ? params.SubtitlePath : null;
+
+        if (params.SubtitleInfo) {
+            let obj = new SubtitleResult();
+            obj.deserialize(params.SubtitleInfo)
+            this.SubtitleInfo = obj;
+        }
 
         if (params.OutputStorage) {
             let obj = new TaskOutputStorage();
@@ -26043,46 +26255,46 @@ class AiAnalysisTaskDelLogoOutput extends  AbstractModel {
         super();
 
         /**
-         * Path of a file after removal.
+         * <p>Path of a file after removal.</p>
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * Storage location of a file after removal.
+         * <p>Storage location of a file after removal.</p>
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Path of a subtitle file extracted from a video.
+         * <p>Path of subtitle file extracted from video.</p>
          * @type {string || null}
          */
         this.OriginSubtitlePath = null;
 
         /**
-         * Path of a subtitle translation file extracted from a video.
+         * <p>Path of a subtitle translation file extracted from a video.</p>
          * @type {string || null}
          */
         this.TranslateSubtitlePath = null;
 
         /**
-         * Position of the erased subtitle. Note: This field is only valid for subtitle extraction when the option to return subtitle positions is enabled.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Subtitle position after removal. <strong>Note</strong>: only applicable to subtitle extraction when return of subtitle position is enabled.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SubtitlePosition || null}
          */
         this.SubtitlePos = null;
 
         /**
-         * Specifies the file url of the video after voice cloning.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>File URL of the video after voice type cloning</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VoiceClonedVideo = null;
 
         /**
-         * Specifies the file address of the voice type clone annotation.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>File address of the voice type clone annotation</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VoiceClonedMarkFile = null;
@@ -26480,7 +26692,7 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.Status = null;
 
         /**
-         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrMsg = null;
@@ -26859,7 +27071,7 @@ class SmartSubtitleTaskFullTextResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -27923,6 +28135,41 @@ If the value of Type is 1, the base64-encoded content of the hotword file is ret
 }
 
 /**
+ * CreateSubtitleEmbedTemplate response structure.
+ * @class
+ */
+class CreateSubtitleEmbedTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Unique identifier of the subtitle suppression template.</p>
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ResetWorkflow response structure.
  * @class
  */
@@ -28044,7 +28291,7 @@ class CreateSmartEraseTemplateResponse extends  AbstractModel {
         super();
 
         /**
-         * Unique identifier of the smart erasing template.
+         * <p>Unique identifier of the intelligent erasure template</p>
          * @type {number || null}
          */
         this.Definition = null;
@@ -28753,6 +29000,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class SyncDubbingOutputOption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.Type = 'Type' in params ? params.Type : null;
 
     }
@@ -29822,19 +30097,19 @@ class LiveStreamTransTextRecognitionResult extends  AbstractModel {
         this.Trans = null;
 
         /**
-         * Translation start UTC time.
+         * 
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Translation end UTC time.
+         * 
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Steady state marker.
+         * 
          * @type {boolean || null}
          */
         this.SteadyState = null;
@@ -30468,6 +30743,60 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.Output[z]);
                 this.Output.push(obj);
             }
+        }
+
+    }
+}
+
+/**
+ * ModifySubtitleEmbedTemplate request structure.
+ * @class
+ */
+class ModifySubtitleEmbedTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Unique identifier of the subtitle suppression template</p>
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * <p>Subtitle suppression name<br>Length limit: 64 characters.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Subtitle suppression template description information<br>Length limit: 256 characters.</p>
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * <p>Subtitle suppression configuration</p>
+         * @type {SubtitleEmbedConfig || null}
+         */
+        this.SubtitleEmbedConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+        if (params.SubtitleEmbedConfig) {
+            let obj = new SubtitleEmbedConfig();
+            obj.deserialize(params.SubtitleEmbedConfig)
+            this.SubtitleEmbedConfig = obj;
         }
 
     }
@@ -32067,6 +32396,60 @@ class OcrFullTextConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * Subtitle suppression module column configuration
+ * @class
+ */
+class SubtitleLayoutConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Subtitle arrangement configuration switch, 0 for off, 1 for on, default 0
+         * @type {number || null}
+         */
+        this.SubtitleLayoutConfigSwitch = null;
+
+        /**
+         * Line spacing. The value should be a positive integer.
+-Value range for pixels: [0, 1000].
+- Value range for percentages: [0, 100]. If this is not specified, the default value is 0.
+
+         * @type {number || null}
+         */
+        this.LineSpacing = null;
+
+        /**
+         * LineSpacing unit, 0 pixel, 1 percentage, defaults to 0, pixel
+
+         * @type {number || null}
+         */
+        this.LineSpacingUnit = null;
+
+        /**
+         * Alignment mode. Valid values: top: The top position of the subtitle is fixed, while the bottom position changes according to the line count. bottom: The bottom position of the subtitle is fixed, while the top position changes according to the line count. If this is not specified, bottom alignment is used by default.
+
+         * @type {string || null}
+         */
+        this.Alignment = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubtitleLayoutConfigSwitch = 'SubtitleLayoutConfigSwitch' in params ? params.SubtitleLayoutConfigSwitch : null;
+        this.LineSpacing = 'LineSpacing' in params ? params.LineSpacing : null;
+        this.LineSpacingUnit = 'LineSpacingUnit' in params ? params.LineSpacingUnit : null;
+        this.Alignment = 'Alignment' in params ? params.Alignment : null;
+
+    }
+}
+
+/**
  * Input for full text recognition.
  * @class
  */
@@ -32090,6 +32473,62 @@ class AiRecognitionTaskOcrFullTextResultInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * Subtitle suppression module text stroke configuration
+ * @class
+ */
+class SubtitleOutlineConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Text stroke configuration switch, 0 for off, 1 for on, default 0</p>
+         * @type {number || null}
+         */
+        this.SubtitleOutlineConfigSwitch = null;
+
+        /**
+         * <p>Stroke width, default unit pixel, underlying default value is 0.3% of the source video height</p>
+         * @type {number || null}
+         */
+        this.OutlineWidth = null;
+
+        /**
+         * <p>Stroke width unit, 0 pixel, 1 percentage, defaults to 0, pixel</p>
+         * @type {number || null}
+         */
+        this.OutlineWidthUnit = null;
+
+        /**
+         * <p>Border color. 6-digit base 16 RGB. Black by default if left blank.</p>
+         * @type {string || null}
+         */
+        this.OutlineColor = null;
+
+        /**
+         * <p>Stroke transparency. The value should be a positive floating-point number in the range of (0, 1]. If this is not specified, the default value is 1, which means completely opaque.</p>
+         * @type {number || null}
+         */
+        this.OutlineAlpha = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubtitleOutlineConfigSwitch = 'SubtitleOutlineConfigSwitch' in params ? params.SubtitleOutlineConfigSwitch : null;
+        this.OutlineWidth = 'OutlineWidth' in params ? params.OutlineWidth : null;
+        this.OutlineWidthUnit = 'OutlineWidthUnit' in params ? params.OutlineWidthUnit : null;
+        this.OutlineColor = 'OutlineColor' in params ? params.OutlineColor : null;
+        this.OutlineAlpha = 'OutlineAlpha' in params ? params.OutlineAlpha : null;
 
     }
 }
@@ -32568,11 +33007,23 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AudioData = null;
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.AudioUrl = null;
+
+        /**
          * Cloned voice type ID.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VoiceId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -32592,7 +33043,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
         this.Msg = 'Msg' in params ? params.Msg : null;
         this.AudioData = 'AudioData' in params ? params.AudioData : null;
+        this.AudioUrl = 'AudioUrl' in params ? params.AudioUrl : null;
         this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -32879,104 +33332,76 @@ class SmartEraseSubtitleConfig extends  AbstractModel {
         super();
 
         /**
-         * Specifies the subtitle erasure method.
-**Automatic erasing:** automatically identifies subtitle text content in videos through AI models and performs seamless erasure to generate new videos. frame interference and unique subtitle styles may cause certain missed or incorrect erasures, which can be handled through specified area erasure.
-When using automatic erasure, if AutoAreas is not specified, the default region (lower middle of the frame) will be erased automatically. if AutoAreas is specified, it will change to erase the designated area.
-**Specified area erasing:** if your subtitle position is fixed, directly specify the erasure area to decrease the chance of removal omission to the maximum extent.
-When your choice is specified area erasure, please import at least one designated region in CustomAreas.
--Automated removal.
-- specifies the custom specified area erasure.
-
+         * <p>Subtitle erasure method.<br><strong>Automatic erasing:</strong> Video subtitles are automatically recognized using an AI model and are erased without traces to generate a new video. However, missed or incorrect erasing may occur due to image interference and special subtitle styles. In this case, you can specify the erasing area.<br>When using automatic erasing, if you do not specify AutoAreas, the default region (lower middle part of the frame) will be erased automatically. If AutoAreas is specified, the designated region will be erased instead.<br><strong>Specified area erasure:</strong> If your subtitle position is fixed, it is recommended to directly specify the erasure area to minimize missed erasures.<br>When choosing specified area erasure, please input at least one designated region in CustomAreas.</p><ul><li>auto: Automatic erasing</li><li>custom: Specified area erasure</li></ul>
          * @type {string || null}
          */
         this.SubtitleEraseMethod = null;
 
         /**
-         * Subtitle erasure model.
-**Standard version (recommend):** if your subtitle style is standard, normally recommend choose this version for better effectiveness with seamless detail.
-**Regional version:** if your subtitles have special styles such as italics, shadows, or motion effects, we recommend choosing the regional version for larger removal area, though the detail effect is not as good as the standard version.
--Specifies the standard model.
--area. specifies the regional model.
+         * <p>Subtitle erasure model.<br><strong>Standard version (recommended):</strong> If your subtitles have a standard style, it is usually recommended to select this version for better effectiveness in seamless detail removal.<br><strong>Area edition:</strong> If the subtitles have special styles, such as calligraphy, shadow, or motion effects, you are recommended to select this edition to ensure a larger erasing area. However, the erasing effect in the details is not as good as the standard edition.</p><ul><li>standard Standard model</li><li>area Regional model</li></ul>
          * @type {string || null}
          */
         this.SubtitleModel = null;
 
         /**
-         * Whether OCR subtitle extraction is enabled. default value: OFF.
-Supports enabling OCR subtitle extraction only when SubtitleEraseMethod is set to auto. when enabled, it identifies the longest and most stable text area within the region as the subtitle area, then performs text extraction and removal.
--ON: enable.
--OFF. specifies the disabled state.
+         * <p>Whether OCR subtitle extraction is enabled. The default value is OFF.<br>OCR subtitle extraction is supported if and only if SubtitleEraseMethod is set to auto. When enabled, it identifies the text region that appears most persistently and stably within the automatic erasing area as the subtitle area. The text within the subtitle area is extracted and erased.</p><ul><li>ON Enable</li><li>OFF Disable</li></ul>
          * @type {string || null}
          */
         this.OcrSwitch = null;
 
         /**
-         * Subtitle language, for OCR guidance, default value zh_en. this parameter is valid only when OcrSwitch is ON.
--Chinese and english.
--multi other.
-Other supported languages:.
-Chinese, english, japanese, korean, spanish, french, german, portuguese, vietnamese, malay, russian, italian, dutch, swedish, finnish, danish, norwegian, hungarian, thai, hindi, arabic, indian-bengali, indian-gujarati, indian-kannada, indian-malayalam, indian-tamil, indian-telugu, slovenian, polish, catalan, bosnian, czech, estonian, croatian, punjabi, marathi, azerbaijani, indonesian, luxembourgish, lithuanian, latvian, maltese, slovak, turkish, kazakh, greek, irish, belarusian, khmer, tagalog, pashto, persian, tajik.
-
-
+         * <p>Subtitle language, used to guide OCR recognition, default value is zh_en. This parameter is valid only when OcrSwitch is "ON".</p><ul><li>zh_en Chinese and English</li><li>multi other<br>The following languages are supported for recognition:<br>Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, Hindi, Arabic, Bengali, Gujarati, Kannada, Malayalam, Tamil, Telugu, Slovenian, Polish, Catalan, Bosnia, Czech, Estonian, Croatian, Punjabi, Marathi, Azerbaijan, Indonesian, Luxembourg, Lithuanian, Latvian, Malta, Slovak, Turkish, Kazakh, Greek, Irish, Belarus, Khmer, Tagalog, Pashto, Persian, Tajikistan</li></ul>
          * @type {string || null}
          */
         this.SubtitleLang = null;
 
         /**
-         * Specifies the subtitle file format. default value: vtt. this parameter is valid only when OcrSwitch is set to ON.
--srt format.
--vtt: WebVTT format.
+         * <p>Subtitle file format. Default value is vtt. This parameter is valid only when OcrSwitch takes value "ON".</p><ul><li>srt srt format</li><li>vtt WebVTT format</li><li>When SubtitleEmbedId is filled, it can take value empty string, which means no subtitle file is output.</li></ul>
          * @type {string || null}
          */
         this.SubtitleFormat = null;
 
         /**
-         * Specifies whether to enable subtitle translation. default value: OFF. this parameter is valid only when OcrSwitch is set to ON.
--ON: enable.
--OFF. specifies the disabled state.
+         * <p>Whether to enable subtitle translation. The default value is OFF. This parameter is valid only when OcrSwitch is set to "ON".</p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul>
          * @type {string || null}
          */
         this.TransSwitch = null;
 
         /**
-         * Subtitle target language. default value: en. this parameter is valid only when TransSwitch is set to ON.
-Supported languages:.
-Simplified chinese.
-Specifies the language. valid values: en (english).
-Ja: japanese.
-Ko: korean.
-Fr: french.
-es: spanish.
-It: italian.
-de: german.
-tr: turkish.
-Ru: russian.
-pt: portuguese.
-Vi: vietnamese.
-id: indonesian.
-ms: malay.
-Th: thai.
-Ar: arabic.
-hi: Hindi
+         * <p>The target language for subtitle translation defaults to en. This parameter is valid only when TransSwitch is set to "ON".<br>The following languages are currently supported:<br>zh: Simplified Chinese<br>en: English<br>ja: Japanese<br>ko: Korean<br>fr: French<br>es: Spanish<br>it: Italian<br>de: German<br>tr: Turkish<br>ru: Russian<br>pt: Portuguese<br>vi: Vietnamese<br>id: Indonesian<br>ms: Malay<br>th: Thai<br>ar: Arabic<br>hi: Hindi</p>
          * @type {string || null}
          */
         this.TransDstLang = null;
 
         /**
-         * Specifies automatic removal of a custom region.
-Specifies the use of an AI model to automatically detect and erase existing targets in the specified region.
-Note that this parameter will not take effect when the removal method is custom. for template modification, input [] to clean up the region. the template region information remains unchanged if not imported.
+         * <p>Automatically erase custom regions.<br>For selected regions, use the AI model to automatically detect and erase existing targets.<br>Note: When the erase method is set to custom, this parameter will not take effect. To modify the template, input [] for region cleanup. If not provided, the template region information remains unchanged.</p>
          * @type {Array.<EraseArea> || null}
          */
         this.AutoAreas = null;
 
         /**
-         * Specifies erasure of a custom region.
-Detects and directly performs removal within a specified time range for the selected region.
-Note: when modifying the template, pass [] to clear the region. the template region information remains unchanged if not passed.
+         * <p>Designate the removal of custom regions.<br>For specified regions, directly perform erasure without detection and recognition within a selected time range.<br>Note: When modifying the template, import [] to clear regions. The template region information remains unchanged if not imported.</p>
          * @type {Array.<EraseTimeArea> || null}
          */
         this.CustomAreas = null;
+
+        /**
+         * <p>Subtitle suppression template id. Only allowed to fill in when OCR translation is enabled.</p>
+         * @type {number || null}
+         */
+        this.SubtitleEmbedId = null;
+
+        /**
+         * <p>Suppression configuration, enabled by default, compresses subtitles back to their original position. It can be filled only when OCR translation is turned on. A value of 0 indicates disabled suppression.</p>
+         * @type {number || null}
+         */
+        this.UseOriginalPos = null;
+
+        /**
+         * <p>Suppression configuration, enabled by default. After being turned on, the original subtitle font size is used. It can only be filled when OCR translation is enabled. Setting it to 0 means non-use of the original font size.</p>
+         * @type {number || null}
+         */
+        this.UseOriginalSize = null;
 
     }
 
@@ -33012,6 +33437,9 @@ Note: when modifying the template, pass [] to clear the region. the template reg
                 this.CustomAreas.push(obj);
             }
         }
+        this.SubtitleEmbedId = 'SubtitleEmbedId' in params ? params.SubtitleEmbedId : null;
+        this.UseOriginalPos = 'UseOriginalPos' in params ? params.UseOriginalPos : null;
+        this.UseOriginalSize = 'UseOriginalSize' in params ? params.UseOriginalSize : null;
 
     }
 }
@@ -33021,6 +33449,34 @@ Note: when modifying the template, pass [] to clear the region. the template reg
  * @class
  */
 class DeleteLiveRecordTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySubtitleEmbedTemplate response structure.
+ * @class
+ */
+class ModifySubtitleEmbedTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -33166,7 +33622,7 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.HdrType = null;
 
         /**
-         * Video Codecs.
+         * 
          * @type {string || null}
          */
         this.Codecs = null;
@@ -33965,7 +34421,7 @@ class ProcessLiveStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID, which is a number.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
+         * <p>The live streaming URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the trtc room number ID, which must be a number.<br><code>&lt;sdkappid&gt;</code> is the trtc SDK app ID.<br><code>&lt;userid&gt;</code> is the user ID of the service entering the room, which can distinguish robots.<br><code>&lt;usersig&gt;</code> is the trtc user's signature.</p><p>WebRTC supports the live stream of <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a>. To obtain the address, <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">see</a>.</p><p>For SRT-supported addresses, <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a>.</p>
          * @type {string || null}
          */
         this.Url = null;
@@ -34552,259 +35008,70 @@ class CreateSmartSubtitleTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Smart subtitle template name.
-Length limit: 64 characters.
+         * <p>Intelligent subtitle template name<br>Length limit: 64 characters.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Source language of the video with smart subtitles.
-OCR recognition only supports the following languages:
-`zh_en`: Chinese and English.
-`multi`: others.
-ASR recognition and pure subtitle translation currently support the following languages:
-`auto`: automatic recognition (it is only supported in pure subtitle translation).
-`zh`: Simplified Chinese.
-`en`: English.
-`ja`: Japanese.
-`ko`: Korean.
-`zh-PY`: Chinese, English, and Cantonese.
-`zh_medical`: Chinese (medical scenario).
-`vi`: Vietnamese.
-`ms`: Malay.
-`id`: Indonesian.
-`fil`: Filipino.
-`th`: Thai.
-`pt`: Portuguese.
-`tr`: Turkish.
-`ar`: Arabic.
-`es`: Spanish.
-`hi`: Hindi.
-`fr`: French.
-`de`: German.
-`it`: Italian.
-`zh_dialect`: Chinese dialect.
-`zh_en`: Chinese and English.
-`yue`: Cantonese.
-`ru`: Russian.
-`prime_zh`: Chinese, English, and Chinese dialects.
-`af-ZA`: Afrikaans (South Africa).
-`sq-AL`: Albanian (Albania).
-`am-ET`: Amharic (Ethiopia).
-`ar-DZ`: Arabic (Algeria).
-`ar-BH`: Arabic (Bahrain).
-`ar-EG`: Arabic (Egypt).
-`ar-IQ`: Arabic (Iraq).
-`ar-IL`: Arabic (Israel).
-`ar-JO`: Arabic (Jordan).
-`ar-KW`: Arabic (Kuwait).
-`ar-LB`: Arabic (Lebanon).
-`ar-MR`: Arabic (Mauritania).
-`ar-MA`: Arabic (Morocco).
-`ar-OM`: Arabic (Oman).
-`ar-QA`: Arabic (Qatar).
-`ar-SA`: Arabic (Saudi Arabia).
-`ar-PS`: Arabic (State of Palestine).
-`ar-SY`: Arabic (Syria).
-`ar-TN`: Arabic (Tunisia).
-`ar-AE`: Arabic (United Arab Emirates).
-`ar-YE`: Arabic (Yemen).
-`hy-AM`: Armenian (Armenia).
-`az-AZ`: Azerbaijani (Azerbaijan).
-`eu-ES`: Basque (Spain).
-`bn-BD`: Bengali (Bangladesh).
-`bn-IN`: Bengali (India).
-`bs-BA`: Bosnian (Bosnia and Herzegovina).
-`bg-BG`: Bulgarian (Bulgaria).
-`my-MM`: Burmese (Myanmar).
-`ca-ES`: Catalan (Spain).
-`hr-HR`: Croatian (Croatia).
-`cs-CZ`: Czech (Czech Republic).
-`da-DK`: Danish (Denmark).
-`nl-BE`: Dutch (Belgium).
-`nl-NL`: Dutch (Holland).
-`en-AU`: English (Australia).
-`en-CA`: English (Canada).
-`en-GH`: English (Ghana).
-`en-HK`: English (Hong Kong (China)).
-`en-IN`: English (India).
-`en-IE`: English (Ireland).
-`en-KE`: English (Kenya).
-`en-NZ`: English (New Zealand).
-`en-NG`: English (Nigeria).
-`en-PK`: English (Pakistan).
-`en-PH`: English (Philippines).
-`en-SG`: English (Singapore).
-`en-ZA`: English (South Africa).
-`en-TZ`: English (Tanzania).
-`en-GB`: English (UK).
-`en-US`: English (US).
-`et-EE`: Estonian (Estonia).
-`fil-PH`: Filipino (Philippines).
-`fi-FI`: Finnish (Finland).
-`fr-BE`: French (Belgium).
-`fr-CA`: French (Canada).
-`fr-FR`: French (France).
-`fr-CH`: French (Switzerland).
-`gl-ES`: Galician (Spain).
-`ka-GE`: Georgian (Georgia).
-`el-GR`: Greek (Greece).
-`gu-IN`: Gujarati (India).
-`iw-IL`: Hebrew (Israel).
-`hi-IN`: Hindi (India).
-`hu-HU`: Hungarian (Hungary).
-`is-IS`: Icelandic (Iceland).
-`id-ID`: Indonesian (Indonesia).
-`it-IT`: Italian (Italy).
-`it-CH`: Italian (Switzerland).
-`ja-JP`: Japanese (Japan).
-`jv-ID`: Javanese (Indonesia).
-`kn-IN`: Kannada (India).
-`kk-KZ`: Kazakh (Kazakhstan).
-`km-KH`: Khmer (Cambodia).
-`rw-RW`: Kinyarwanda (Rwanda).
-`ko-KR`: Korean (South Korea).
-`lo-LA`: Lao (Laos).
-`lv-LV`: Latvian (Latvia).
-`lt-LT`: Lithuanian (Lithuania).
-`mk-MK`: Macedonian (North Macedonia).
-`ms-MY`: Malay (Malaysia).
-`ml-IN`: Malayalam (India).
-`mr-IN`: Marathi (India).
-`mn-MN`: Mongolian (Mongolia).
-`ne-NP`: Nepali (Nepal).
-`no-NO`: Bokmal Norwegian (Norway).
-`fa-IR`: Persian (Iran).
-`pl-PL`: Polish (Poland).
-`pt-BR`: Portuguese (Brazil).
-`pt-PT`: Portuguese (Portugal).
-`ro-RO`: Romanian (Romania).
-`ru-RU`: Russian (Russia).
-`sr-RS`: Serbian (Serbia).
-`si-LK`: Sinhalese (Sri Lanka).
-`sk-SK`: Slovak (Slovakia).
-`sl-SI`: Slovenian (Slovenia).
-`st-ZA`: Sesotho (South Africa).
-`es-AR`: Spanish (Argentina).
-`es-BO`: Spanish (Bolivia).
-`es-CL`: Spanish (Chile).
-`es-CO`: Spanish (Colombia).
-`es-CR`: Spanish (Costa Rica).
-`es-DO`: Spanish (Dominican Republic).
-`es-EC`: Spanish (Ecuador).
-`es-SV`: Spanish (El Salvador).
-`es-GT`: Spanish (Guatemala).
-`es-HN`: Spanish (Honduras).
-`es-MX`: Spanish (Mexico).
-`es-NI`: Spanish (Nicaragua).
-`es-PA`: Spanish (Panama).
-`es-PY`: Spanish (Paraguay).
-`es-PE`: Spanish (Peru).
-`es-PR`: Spanish (Puerto Rico).
-`es-ES`: Spanish (Spain).
-`es-US`: Spanish (US).
-`es-UY`: Spanish (Uruguay).
-`es-VE`: Spanish (Venezuela).
-`su-ID`: Sundanese (Indonesia).
-`sw-KE`: Swahili (Kenya).
-`sw-TZ`: Swahili (Tanzania).
-`sv-SE`: Swedish (Sweden).
-`ta-IN`: Tamil (India).
-`ta-MY`: Tamil (Malaysia).
-`ta-SG`: Tamil (Singapore).
-`ta-LK`: Tamil (Sri Lanka).
-`te-IN`: Telugu (India).
-`th-TH`: Thai (Thailand).
-`ts-ZA`: Tsonga (South Africa).
-`tr-TR`: Turkish (Turkey).
-`uk-UA`: Ukrainian (Ukraine).
-`ur-IN`: Urdu (India).
-`ur-PK`: Urdu (Pakistan).
-`uz-UZ`: Uzbek (Uzbekistan).
-`ve-ZA`: Venda (South Africa).
-`vi-VN`: Vietnamese (Vietnam).
-`xh-ZA`: Xhosa (South Africa).
-`zu-ZA`: Zulu (South Africa).
+         * <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br>ASR recognition and pure caption translation currently support the following languages:<br><code>auto</code>: Auto-identification<br><code>zh</code>: Simplified Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>zh-PY</code>: Chinese-English-Cantonese<br><code>zh_medical</code>: Chinese health care<br><code>vi</code>: Vietnamese<br><code>ms</code>: Malay<br><code>id</code>: Indonesian<br><code>fil</code>: Filipino<br><code>th</code>: Thai<br><code>pt</code>: Portuguese<br><code>tr</code>: Turkish<br><code>ar</code>: Arabic<br><code>es</code>: Spanish<br><code>hi</code>: Hindi<br><code>fr</code>: French<br><code>de</code>: German<br><code>it</code>: Italian<br><code>zh_dialect</code>: Chinese dialect<br><code>zh_en</code>: Chinese-English<br><code>yue</code>: Cantonese<br><code>ru</code>: Russian<br><code>prime_zh</code>: Chinese-English dialect<br><code>af-ZA</code>: Afrikaans (South Africa)<br><code>sq-AL</code>: Albanian (Albania)<br><code>am-ET</code>: Amharic (Ethiopia)<br><code>ar-DZ</code>: Arabic (Algeria)<br><code>ar-BH</code>: Arabic (Bahrain)<br><code>ar-EG</code>: Arabic (Egypt)<br><code>ar-IQ</code>: Arabic (Iraq)<br><code>ar-IL</code>: Arabic (Israel)<br><code>ar-JO</code>: Arabic (Jordan)<br><code>ar-KW</code>: Arabic (Kuwait)<br><code>ar-LB</code>: Arabic (Lebanon)<br><code>ar-MR</code>: Arabic (Mauritania)<br><code>ar-MA</code>: Arabic (Morocco)<br><code>ar-OM</code>: Arabic (Oman)<br><code>ar-QA</code>: Arabic (Qatar)<br><code>ar-SA</code>: Arabic (Saudi Arabia)<br><code>ar-PS</code>: Arabic (State of Palestine)<br><code>ar-SY</code>: Arabic (Syria)<br><code>ar-TN</code>: Arabic (Tunisia)<br><code>ar-AE</code>: Arabic (United Arab Emirates)<br><code>ar-YE</code>: Arabic (Yemen)<br><code>hy-AM</code>: Armenian (Armenia)<br><code>az-AZ</code>: Azerbaijani (Azerbaijan)<br><code>eu-ES</code>: Basque (Spain)<br><code>bn-BD</code>: Bengali (Bangladesh)<br><code>bn-IN</code>: Bengali (India)<br><code>bs-BA</code>: Bosnian (Bosnia and Herzegovina)<br><code>bg-BG</code>: Bulgarian (Bulgaria)<br><code>my-MM</code>: Burmese (Myanmar)<br><code>ca-ES</code>: Catalan (Spain)<br><code>hr-HR</code>: Croatian (Croatia)<br><code>cs-CZ</code>: Czech (Czech Republic)<br><code>da-DK</code>: Danish (Denmark)<br><code>nl-BE</code>: Dutch (Belgium)<br><code>nl-NL</code>: Dutch (Netherlands)<br><code>en-AU</code>: English (Australia)<br><code>en-CA</code>: English (Canada)<br><code>en-GH</code>: English (Ghana)<br><code>en-HK</code>: English (Hong Kong (China))<br><code>en-IN</code>: English (India)<br><code>en-IE</code>: English (Ireland)<br><code>en-KE</code>: English (Kenya)<br><code>en-NZ</code>: English (New Zealand)<br><code>en-NG</code>: English (Nigeria)<br><code>en-PK</code>: English (Pakistan)<br><code>en-PH</code>: English (Philippines)<br><code>en-SG</code>: English (Singapore)<br><code>en-ZA</code>: English (South Africa)<br><code>en-TZ</code>: English (Tanzania)<br><code>en-GB</code>: English (UK)<br><code>en-US</code>: English (United States)<br><code>et-EE</code>: Estonian (Estonia)<br><code>fil-PH</code>: Filipino (Philippines)<br><code>fi-FI</code>: Finnish (Finland)<br><code>fr-BE</code>: French (Belgium)<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fr-CH</code>: French (Switzerland)<br><code>gl-ES</code>: Galician (Spain)<br><code>ka-GE</code>: Georgian (Georgia)<br><code>el-GR</code>: Greek (Greece)<br><code>gu-IN</code>: Gujarati (India)<br><code>iw-IL</code>: Hebrew (Israel)<br><code>hi-IN</code>: Hindi (India)<br><code>hu-HU</code>: Hungarian (Hungary)<br><code>is-IS</code>: Icelandic (Iceland)<br><code>id-ID</code>: Indonesian (Indonesia)<br><code>it-IT</code>: Italian (Italy)<br><code>it-CH</code>: Italian (Switzerland)<br><code>ja-JP</code>: Japanese (Japan)<br><code>jv-ID</code>: Javanese (Indonesia)<br><code>kn-IN</code>: Kannada (India)<br><code>kk-KZ</code>: Kazakh (Kazakhstan)<br><code>km-KH</code>: Khmer (Cambodia)<br><code>rw-RW</code>: Kinyarwanda (Rwanda)<br><code>ko-KR</code>: Korean (South Korea)<br><code>lo-LA</code>: Lao (Laos)<br><code>lv-LV</code>: Latvian (Latvia)<br><code>lt-LT</code>: Lithuanian (Lithuania)<br><code>mk-MK</code>: Macedonian (North Macedonia)<br><code>ms-MY</code>: Malay (Malaysia)<br><code>ml-IN</code>: Malayalam (India)<br><code>mr-IN</code>: Marathi (India)<br><code>mn-MN</code>: Mongolian (Mongolia)<br><code>ne-NP</code>: Nepali (Nepal)<br><code>no-NO</code>: Norwegian Bokmål (Norway)<br><code>fa-IR</code>: Persian (Iran)<br><code>pl-PL</code>: Polish (Poland)<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>ro-RO</code>: Romanian (Romania)<br><code>ru-RU</code>: Russian (Russia)<br><code>sr-RS</code>: Serbian (Serbia)<br><code>si-LK</code>: Sinhalese (Sri Lanka)<br><code>sk-SK</code>: Slovak (Slovakia)<br><code>sl-SI</code>: Slovenian (Slovenia)<br><code>st-ZA</code>: Southern Sotho (South Africa)<br><code>es-AR</code>: Spanish (Argentina)<br><code>es-BO</code>: Spanish (Bolivia)<br><code>es-CL</code>: Spanish (Chile)<br><code>es-CO</code>: Spanish (Colombia)<br><code>es-CR</code>: Spanish (Costa Rica)<br><code>es-DO</code>: Spanish (Dominican Republic)<br><code>es-EC</code>: Spanish (Ecuador)<br><code>es-SV</code>: Spanish (El Salvador)<br><code>es-GT</code>: Spanish (Guatemala)<br><code>es-HN</code>: Spanish (Honduras)<br><code>es-MX</code>: Spanish (Mexico)<br><code>es-NI</code>: Spanish (Nicaragua)<br><code>es-PA</code>: Spanish (Panama)<br><code>es-PY</code>: Spanish (Paraguay)<br><code>es-PE</code>: Spanish (Peru)<br><code>es-PR</code>: Spanish (Puerto Rico)<br><code>es-ES</code>: Spanish (Spain)<br><code>es-US</code>: Spanish (United States)<br><code>es-UY</code>: Spanish (Uruguay)<br><code>es-VE</code>: Spanish (Venezuela)<br><code>su-ID</code>: Sundanese (Indonesia)<br><code>sw-KE</code>: Swahili (Kenya)<br><code>sw-TZ</code>: Swahili (Tanzania)<br><code>sv-SE</code>: Swedish (Sweden)<br><code>ta-IN</code>: Tamil (India)<br><code>ta-MY</code>: Tamil (Malaysia)<br><code>ta-SG</code>: Tamil (Singapore)<br><code>ta-LK</code>: Tamil (Sri Lanka)<br><code>te-IN</code>: Telugu (India)<br><code>th-TH</code>: Thai (Thailand)<br><code>ts-ZA</code>: Tsonga (South Africa)<br><code>tr-TR</code>: Turkish (Türkiye)<br><code>uk-UA</code>: Ukrainian (Ukraine)<br><code>ur-IN</code>: Urdu (India)<br><code>ur-PK</code>: Urdu (Pakistan)<br><code>uz-UZ</code>: Uzbek (Uzbekistan)<br><code>ve-ZA</code>: Venda (South Africa)<code>vi-VN</code>: Vietnamese (Vietnam)<br><code>xh-ZA</code>: Xhosa (South Africa)<br><code>zu-ZA</code>: Zulu (South Africa)</p>
          * @type {string || null}
          */
         this.VideoSrcLanguage = null;
 
         /**
-         * Smart subtitle language type.
-0: source language
-1: target language
-2: source language + target language
-The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
+         * <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
          * @type {number || null}
          */
         this.SubtitleType = null;
 
         /**
-         * Smart subtitle template description.
-Length limit: 256 characters.
+         * <p>Intelligent caption template description information<br>Length limit: 256 characters.</p>
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Smart subtitle file format:
-- Under the ASR recognition and translation processing type:
-     - vtt: WebVTT format subtitle.
-     - srt: SRT format subtitle.
-     - Unspecified or left blank: no subtitle file generated.
-- Under the pure subtitle translation processing type:
-    - original: consistent with the source file.
-    - vtt: WebVTT format subtitle.
-    - srt: SRT format subtitle.
-- Under the OCR recognition and translation processing type:
-     - vtt: WebVTT format subtitle.
-     - srt: SRT format subtitle.
-**Note**:
-- For ASR recognition mode, when 2 or more languages are involved in translation, this field cannot be unspecified or left blank.
-- For pure subtitle translation and OCR recognition mode, this field cannot be unspecified or left blank.
+         * <p>Intelligent subtitle file format:</p><ul><li>For ASR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li><li>Leave blank or fill in the blank: no subtitle file generated</li></ul></li><li>For pure subtitle translation processing type:<ul><li>original: consistent with the source file</li><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li><li>For OCR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li></ul><p><strong>Note</strong>:</p><ul><li>For ASR recognition method, do not leave blank or not pass when translating 2 or more languages.</li><li>For pure subtitle translation method, do not leave blank or not pass.</li><li>For OCR tasks, it is allowed to leave blank or not pass when suppression is enabled.</li></ul>
          * @type {string || null}
          */
         this.SubtitleFormat = null;
 
         /**
-         * ASR hotword lexicon parameter.
+         * <p>ASR hot word lexicon parameter</p>
          * @type {AsrHotWordsConfigure || null}
          */
         this.AsrHotWordsConfigure = null;
 
         /**
-         * Subtitle translation switch.
-`ON`: translation enabled.
-`OFF`: translation disabled.
-**Note**: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to `OFF`.
+         * <p>Subtitle translation switch<br><code>ON</code>: Enable translation<br><code>OFF</code>: Disable translation</p><p><strong>Note</strong>: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to <code>OFF</code>.</p>
          * @type {string || null}
          */
         this.TranslateSwitch = null;
 
         /**
-         * Target language for subtitle translation.
-This parameter takes effect when the value of TranslateSwitch is ON. Valid translation languages:`ab`: Abkhazian.`ace`: Acehnese.`ach`: Acholi.`af`: Afrikaans.`ak`: Twi (Akan).`am`: Amharic.`ar`: Arabic.`as`: Assamese.`ay`: Aymara.`az`: Azerbaijani.`ba`: Bashkir.`ban`: Balinese.`bbc`: Batak toba.`bem`: Bemba.`bew`: Betawi.`bg`: Bulgarian.`bho`: Bhojpuri.`bik`: Bikol.`bm`: Bambara.`bn`: Bengali.`br`: Breton.`bs`: Bosnian.`btx`: Batak Karo.`bts`: Batak Simalungun.`bua`: Buryat.`ca`: Catalan.`ceb`: Cebuano.`cgg`: Kiga.`chm`: Meadow Mari.`ckb`: Kurdish (Sorani).`cnh`: Hakha Chin.`co`: Corsican.`crh`: Crimean Tatar.`crs`: Seychellois Creole.`cs`: Czech.`cv`: Chuvash.`cy`: Welsh.`da`: Danish.`de`: German.`din`: Dinka.`doi`: Dogri.`dov`: Dombe.`dv`: Dhivehi.`dz`: Dzongkha.`ee`: Ewe.`el`: Greek.`en`: English.`eo`: Esperanto.`es`: Spanish.`et`: Estonian.`eu`: Basque.`fa`: Persian.`ff`: Fulah.`fi`: Finnish.`fil`: Filipino (Tagalog).`fj`: Fijian.`fr`: French.`fr-CA`: French (Canada).`fr-FR`: French (France).`fy`: Frisian.`ga`: Irish.`gaa`: Ga.
-`gd`: Scottish Gaelic.`gl`: Galician.`gn`: Guarani.`gom`: Konkani.`gu`: Gujarati.`gv`: Manx.`ha`: Hausa.`haw`: Hawaiian.`he`: Hebrew.`hi`: Hindi.`hil`: Hiligaynon.`hmn`: Hmong.`hr`: Croatian.`hrx`: Hunsrik.`ht`: Haitian Creole.`hu`: Hungarian.`hy`: Armenian.`id`: Indonesian.`ig`: Igbo.`ilo`: Iloko.`is`: Icelandic.`it`: Italian.`iw`: Hebrew.`ja`: Japanese.`jv`: Javanese.`ka`: Georgian.`kk`: Kazakh.`km`: Khmer.`kn`: Kannada.`ko`: Korean.`kri`: Krio.`ku`: Kurdish (Kurmanji).`ktu`: Kituba.`ky`: Kyrgyz.`la`: Latin.`lb`: Luxembourgish.`lg`: Ganda (Luganda).`li`: Limburgish.`lij`: Ligurian.`lmo`: Lombard.`ln`: Lingala.`lo`: Lao.`lt`: Lithuanian.`ltg`: Latgalian.`luo`: Luo.`lus`: Mizo.`lv`: Latvian.`mai`: Maithili.`mak`: Makasar.`mg`: Malagasy.`mi`: Maori.`min`: Minangkabau.`mk`: Macedonian.`ml`: Malayalam.`mn`: Mongolian.`mr`: Marathi.`ms`: Malay.`mt`: Maltese.`my`: Burmese.`ne`: Nepali.`new`: Newari.`nl`: Dutch.`no`: Norwegian.`nr`: Southern Ndebele.`nso`: Northern Sotho (Sepedi).`nus`: Nuer.`ny`: Chichewa (Nyanja).`oc`: Occitan.`om`: Oromo.`or`: Odia.`pa`: Punjabi.`pag`: Pangasinan.`pam`: Kapampangan.`pap`: Papiamento.`pl`: Polish.`ps`: Pashto.`pt`: Portuguese.`pt-BR`: Portuguese (Brazil).`pt-PT`: Portuguese (Portugal).`qu`: Quechua.`ro`: Romanian.`rom`: Romani.`rn`: Rundi.`ru`: Russian.`rw`: Kinyarwanda.`sa`: Sanskrit.`scn`: Sicilian.`sd`: Sindhi.`sg`: Sango.`shn`: Shan.`si`: Sinhala.`sk`: Slovak.`sl`: Slovenian.`sm`: Samoan.`sn`: Shona.`so`: Somali.`sq`: Albanian.`sr`: Serbian.`ss`: Swazi.`st`: Southern Sotho.`su`: Sundanese.`sv`: Swedish.`sw`: Swahili.`szl`: Silesian.`ta`: Tamil.`te`: Telugu.`tet`: Tetum.`tg`: Tajik.`th`: Thai.`ti`: Tigrinya.`tk`: Turkmen.`tn`: Tswana.`tr`: Turkish.`ts`: Tsonga.`tt`: Tatar.`ug`: Uyghur.`uk`: Ukrainian.`ur`: Urdu.`uz`: Uzbek.`vi`: Vietnamese.`xh`: Xhosa.`yi`: Yiddish.`yo`: Yoruba.`yua`: Yucatec Maya.`yue`: Cantonese.`zh`: Chinese (Simplified).`zh-TW`: Chinese (Traditional).`zu`: Zulu.**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+         * <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: GaLanguage<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method.<code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
          * @type {string || null}
          */
         this.TranslateDstLanguage = null;
 
         /**
-         * Subtitle processing type.
-- 0: ASR recognition subtitle.
-- 1: pure subtitle translation.
-- 2: OCR recognition subtitle.
-**Note**: The default processing type is ASR recognition subtitle if the field is unspecified.
+         * <p>Subtitle processing type:</p><ul><li>0: ASR recognition subtitle</li><li>1: Pure caption translation</li><li>2: OCR recognition subtitle</li></ul><p><strong>Note</strong>: The default type is ASR recognition subtitle if the field is unspecified.</p>
          * @type {number || null}
          */
         this.ProcessType = null;
 
         /**
-         * Area configurations for the subtitle OCR extraction box.
+         * <p>Area configurations for the subtitle OCR extraction box</p>
          * @type {SelectingSubtitleAreasConfig || null}
          */
         this.SelectingSubtitleAreasConfig = null;
+
+        /**
+         * <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR). Cannot fill in when multiple target languages are enabled.</p>
+         * @type {number || null}
+         */
+        this.SubtitleEmbedId = null;
 
     }
 
@@ -34835,6 +35102,7 @@ This parameter takes effect when the value of TranslateSwitch is ON. Valid trans
             obj.deserialize(params.SelectingSubtitleAreasConfig)
             this.SelectingSubtitleAreasConfig = obj;
         }
+        this.SubtitleEmbedId = 'SubtitleEmbedId' in params ? params.SubtitleEmbedId : null;
 
     }
 }
@@ -35718,6 +35986,171 @@ If one or both parameters are empty or set to `0`:
 }
 
 /**
+ * Subtitle suppression module settings
+ * @class
+ */
+class SubtitleEmbedConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Font type, supports:</p><li>hei.ttf: Heiti</li><li>song.ttf: Song Typeface</li><li>kai.ttf (recommended) or simkai.ttf: KaiTi</li><li>msyh.ttf: Microsoft YaHei</li><li>msyhbd.ttf: Microsoft YaHei in bold</li><li>hkjgt.ttf: Hwakangangtai</li><li>dhttx.ttf: Dianheiti Ultra Light</li><li>xqgdzt.ttf: Xique Ancient Dictionary</li><li>qpcyt.ttf: Smart Splice Super Round Body</li><li>arial.ttf: only supports English</li><li>dinalternate.ttf: DIN Alternate Bold</li><li>helveticalt.ttf: Helvetica</li><li>helveticains.ttf: Helvetica Inserat</li><li>trajanpro.ttf: TrajanPro-Bold</li><li>korean.ttf: Korean</li><li>japanese.ttf: Japanese</li><li>thai.ttf: Thai</li><li>roboto.ttf: Roboto</li><li>notosans.ttf: NotoSans</li><li>notosansthai.ttf: Thai NotoSansThai</li><li>sarabun.ttf: Thai Sarabun</li><li>kanit.ttf: Thai Kanit</li><li>charmonman.ttf: Thai Charmonman</li><li>notonaskharabic.ttf: Arabic NotoNaskhArabic</li><li>notosansdevanagari.ttf: India NotoSansDevanagari</li><li>notosanstc.ttf: Cantonese NotoSansTC</li><li>notosanskr.ttf: Korean NotoSansKR</li><li>gothica1.ttf: Korean GothicA1</li><li>nanummyeongjo.ttf: Korean NanumMyeongjo</li><li>notosansjp.ttf: Japanese NotoSansJP</li><li>notoserifjp.ttf: Japanese NotoSerifJP</li><li>shipporimincho.ttf: Japanese ShipporiMincho</li>Default: hei.ttf Heiti.<br>Note:<li>KaiTi is recommended for use with kai.ttf</li><li>FontPath takes precedence when filled</li>
+         * @type {string || null}
+         */
+        this.FontType = null;
+
+        /**
+         * <p>Custom font file url address, either this or CosInputInfo</p>
+         * @type {string || null}
+         */
+        this.FontPath = null;
+
+        /**
+         * <p>Custom font file cos bucket address</p>
+         * @type {CosInputInfo || null}
+         */
+        this.CosInputInfo = null;
+
+        /**
+         * <p>Font size. If not specified, the font size of the subtitle file applies. Pixel and percentage formats are supported:</p><ul><li>Pixel: Npx, where N ranges from (0,4096].</li><li>Percentage: N%, where N ranges from (0,100]. For example, 10% means the subtitle font size equals 10% of the source video height.</li></ul><p>If left blank and the subtitle file has no settings, the default is 5% of the source video height.</p>
+         * @type {number || null}
+         */
+        this.FontSize = null;
+
+        /**
+         * <p>FontSize unit, 0 pixel, 1 percentage, defaults to 0, pixel</p>
+         * @type {number || null}
+         */
+        this.FontSizeUnit = null;
+
+        /**
+         * <p>Font color. Format: 0xRRGGBB. Default value: 0xFFFFFF (white).</p>
+         * @type {string || null}
+         */
+        this.FontColor = null;
+
+        /**
+         * <p>Text opacity, value ranges from 0 to 1.</p><li>0: completely transparent</li><li>1: completely opaque</li>Default value: 1.
+         * @type {number || null}
+         */
+        this.FontAlpha = null;
+
+        /**
+         * <p>The X-coordinate position of subtitles. Specifying this parameter will ignore the built-in coordinates in the subtitle file. Supports pixel and percentage formats:</p><ul><li>Pixel: Npx, where N ranges from [-4096, 4096].</li><li>Percentage: N%, where N ranges from [-100, 100]; for example, 10% means the X-coordinate of the subtitle equals 10% of the source video width.</li></ul><p>Default value: 0px.<br>Note: The origin of the coordinate axes is at the bottom of the central axis of the source video, and the subtitle reference position is at the bottom of the central axis of the subtitles, as shown in the figure below:<br><img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></p>
+         * @type {number || null}
+         */
+        this.PosX = null;
+
+        /**
+         * <p>PosX unit, 0 pixel, 1 percentage, defaults to 0, pixel</p>
+         * @type {number || null}
+         */
+        this.PosXUnit = null;
+
+        /**
+         * <p>Subtitle Y-coordinate position. Specify this parameter to ignore the built-in coordinates in the subtitle file. Supports pixel and percentage formats:</p><ul><li>Pixel: Npx, where N ranges from [0,4096].</li><li>Percentage: N%, where N ranges from [0,100]. For example, 10% means the subtitle Y-coordinate = 10% * source video height.</li></ul><p>Default value: source video height * 4%.<br>Note: The coordinate axis origin is at the bottom of the central axis of the source video, and the subtitle reference point is at the bottom of the central axis of the subtitle. Refer to the figure below:<br><img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></p>
+         * @type {number || null}
+         */
+        this.PosY = null;
+
+        /**
+         * <p>PosY measurement unit, 0 pixel, 1 percentage, defaults to 0, pixel</p>
+         * @type {number || null}
+         */
+        this.PosYUnit = null;
+
+        /**
+         * <p>Background configuration</p>
+         * @type {SubtitleBoardConfig || null}
+         */
+        this.SubtitleBoardConfig = null;
+
+        /**
+         * <p>Column configuration</p>
+         * @type {SubtitleLayoutConfig || null}
+         */
+        this.SubtitleLayoutConfig = null;
+
+        /**
+         * <p>Text stroke configuration</p>
+         * @type {SubtitleOutlineConfig || null}
+         */
+        this.SubtitleOutlineConfig = null;
+
+        /**
+         * <p>Text shadow configuration</p>
+         * @type {SubtitleShadowConfig || null}
+         */
+        this.SubtitleShadowConfig = null;
+
+        /**
+         * <p>Width of the source video dimensions, in pixels</p>
+         * @type {number || null}
+         */
+        this.SampleWidth = null;
+
+        /**
+         * <p>Height of the source video dimensions, in unit pixel</p>
+         * @type {number || null}
+         */
+        this.SampleHeight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FontType = 'FontType' in params ? params.FontType : null;
+        this.FontPath = 'FontPath' in params ? params.FontPath : null;
+
+        if (params.CosInputInfo) {
+            let obj = new CosInputInfo();
+            obj.deserialize(params.CosInputInfo)
+            this.CosInputInfo = obj;
+        }
+        this.FontSize = 'FontSize' in params ? params.FontSize : null;
+        this.FontSizeUnit = 'FontSizeUnit' in params ? params.FontSizeUnit : null;
+        this.FontColor = 'FontColor' in params ? params.FontColor : null;
+        this.FontAlpha = 'FontAlpha' in params ? params.FontAlpha : null;
+        this.PosX = 'PosX' in params ? params.PosX : null;
+        this.PosXUnit = 'PosXUnit' in params ? params.PosXUnit : null;
+        this.PosY = 'PosY' in params ? params.PosY : null;
+        this.PosYUnit = 'PosYUnit' in params ? params.PosYUnit : null;
+
+        if (params.SubtitleBoardConfig) {
+            let obj = new SubtitleBoardConfig();
+            obj.deserialize(params.SubtitleBoardConfig)
+            this.SubtitleBoardConfig = obj;
+        }
+
+        if (params.SubtitleLayoutConfig) {
+            let obj = new SubtitleLayoutConfig();
+            obj.deserialize(params.SubtitleLayoutConfig)
+            this.SubtitleLayoutConfig = obj;
+        }
+
+        if (params.SubtitleOutlineConfig) {
+            let obj = new SubtitleOutlineConfig();
+            obj.deserialize(params.SubtitleOutlineConfig)
+            this.SubtitleOutlineConfig = obj;
+        }
+
+        if (params.SubtitleShadowConfig) {
+            let obj = new SubtitleShadowConfig();
+            obj.deserialize(params.SubtitleShadowConfig)
+            this.SubtitleShadowConfig = obj;
+        }
+        this.SampleWidth = 'SampleWidth' in params ? params.SampleWidth : null;
+        this.SampleHeight = 'SampleHeight' in params ? params.SampleHeight : null;
+
+    }
+}
+
+/**
  * Task overview information
  * @class
  */
@@ -36088,58 +36521,61 @@ class CreateAigcImageTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * Model name.
-Supported models:Hunyuan,
-GEM,
-Qwen.
+         * <p>Model name.<br>Supported models:<br>Hunyuan.<br>GEM.<br>Qwen.</p>
          * @type {string || null}
          */
         this.ModelName = null;
 
         /**
-         * Specific version number of the model. By default, the system uses the supported stable version of the model.1. GEM: [2.5 and 3.0].
+         * <p>Specify the model version number. By default, the system uses the supported stable version of the model.</p><ol><li>GEM: [2.5 and 3.0].</li></ol>
          * @type {string || null}
          */
         this.ModelVersion = null;
 
         /**
-         * Description of the generated image. (Note: A maximum of 1000 characters is supported.) This parameter is required when no reference image is specified.
+         * <p>Description of the generated image. (Note: Supports up to 1000 characters.) This parameter is required when no reference image is passed in.</p>
          * @type {string || null}
          */
         this.Prompt = null;
 
         /**
-         * Specifies the content you want to prevent the model from generating. Note: Not all models support this. For example: top lighting, bright colors, people, animals, multiple vehicles, and wind.
+         * <p>Specifies the content you want to prevent the model from generating. Note: Not all models support this. For example: top lighting, bright colors, people, animals, multiple vehicles, and wind.</p>
          * @type {string || null}
          */
         this.NegativePrompt = null;
 
         /**
-         * The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.
+         * <p>The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
          * @type {boolean || null}
          */
         this.EnhancePrompt = null;
 
         /**
-         * Reference resource images. By default, one image can be specified.Model that supports multiple images:1. GEM supports up to 3 resource images.Note:1. The recommended image size is less than 7 MB. Different models have different limits.2. Supported image format: JPEG, PNG, and WebP.
+         * <p>Used for inputting image information as a resource for reference. Default support for inputting an image.</p><p>Models supporting multi-image input:</p><ol><li>GEM, supporting up to 3 images as resource input.</li></ol><p>Note:</p><ol><li>Recommended image less than 7M. Limits vary by model.</li><li>Format support: jpeg, png, webp.</li></ol>
          * @type {Array.<AigcImageInfo> || null}
          */
         this.ImageInfos = null;
 
         /**
-         * Additional parameters required for the model.
+         * <p>Additional parameters required for the model.</p>
          * @type {AigcImageExtraParam || null}
          */
         this.ExtraParameters = null;
 
         /**
-         * COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.
+         * <p>Used to input some special scene parameters required by the model, serialized into a string in Json format. Example: {"size":"2048x2048"}</p>
+         * @type {string || null}
+         */
+        this.AdditionalParameters = null;
+
+        /**
+         * <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
          * @type {AigcStoreCosParam || null}
          */
         this.StoreCosParam = null;
 
         /**
-         * API operator name.
+         * <p>API operator name.</p>
          * @type {string || null}
          */
         this.Operator = null;
@@ -36173,6 +36609,7 @@ Qwen.
             obj.deserialize(params.ExtraParameters)
             this.ExtraParameters = obj;
         }
+        this.AdditionalParameters = 'AdditionalParameters' in params ? params.AdditionalParameters : null;
 
         if (params.StoreCosParam) {
             let obj = new AigcStoreCosParam();
@@ -36355,6 +36792,34 @@ class AiAnalysisTaskHeadTailInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * DeleteSubtitleEmbedTemplate response structure.
+ * @class
+ */
+class DeleteSubtitleEmbedTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -36572,7 +37037,7 @@ class DescribeUsageDataRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.EndTime = null;
@@ -37419,7 +37884,7 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.ErrCode = null;
 
         /**
-         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrMsg = null;
@@ -38663,42 +39128,47 @@ class SmartSubtitleTaskTransTextSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * Confidence of a recognized segment. Value range: 0-100.
+         * <p>Confidence of a recognized segment. Value range: 0-100.</p>
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Start time offset of a recognized segment, in seconds.
+         * <p>Start time offset of a recognized segment, in seconds.</p>
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of a recognized segment, in seconds.
+         * <p>End time offset of a recognized segment, in seconds.</p>
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * Recognized text.
+         * <p>Recognized text.</p>
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * Translated text.
+         * <p>Translated text.</p>
          * @type {string || null}
          */
         this.Trans = null;
 
         /**
-         * Word timestamp information.
-
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Word timestamp information.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<WordResult> || null}
          */
         this.Wordlist = null;
+
+        /**
+         * <p>Speaker ID (if speaker recognition is enabled)</p>
+         * @type {string || null}
+         */
+        this.SpeakerId = null;
 
     }
 
@@ -38723,6 +39193,7 @@ Note: This field may return null, indicating that no valid value can be obtained
                 this.Wordlist.push(obj);
             }
         }
+        this.SpeakerId = 'SpeakerId' in params ? params.SpeakerId : null;
 
     }
 }
@@ -39277,267 +39748,76 @@ class ModifySmartSubtitleTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique identifier of the smart subtitle template.
+         * <p>Unique identifier of the smart subtitle template.</p>
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Subtitle translation switch.
-`ON`: translation enabled.
-`OFF`: translation disabled.
-**Note**: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to `OFF`.
+         * <p>Subtitle translation switch<br><code>ON</code>: Enable translation<br><code>OFF</code>: Disable translation</p><p><strong>Note</strong>: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to <code>OFF</code>.</p>
          * @type {string || null}
          */
         this.TranslateSwitch = null;
 
         /**
-         * Smart subtitle template name.
-Length limit: 64 characters.
+         * <p>Intelligent subtitle template name<br>Length limit: 64 characters.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Smart subtitle template description.
-Length limit: 256 characters.
+         * <p>Intelligent caption template description information<br>Length limit: 256 characters.</p>
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Source language of the video with smart subtitles.
-OCR recognition only supports the following languages:
-`zh_en`: Chinese and English.
-`multi`: others.
-ASR recognition and pure subtitle translation currently support the following languages:
-`auto`: automatic recognition (it is only supported in pure subtitle translation).
-`zh`: Simplified Chinese.
-`en`: English.
-`ja`: Japanese.
-`ko`: Korean.
-`zh-PY`: Chinese, English, and Cantonese.
-`zh_medical`: Chinese (medical scenario).
-`vi`: Vietnamese.
-`ms`: Malay.
-`id`: Indonesian.
-`fil`: Filipino.
-`th`: Thai.
-`pt`: Portuguese.
-`tr`: Turkish.
-`ar`: Arabic.
-`es`: Spanish.
-`hi`: Hindi.
-`fr`: French.
-`de`: German.
-`it`: Italian.
-`zh_dialect`: Chinese dialect.
-`zh_en`: Chinese and English.
-`yue`: Cantonese.
-`ru`: Russian.
-`prime_zh`: Chinese, English, and Chinese dialects.
-`af-ZA`: Afrikaans (South Africa).
-`sq-AL`: Albanian (Albania).
-`am-ET`: Amharic (Ethiopia).
-`ar-DZ`: Arabic (Algeria).
-`ar-BH`: Arabic (Bahrain).
-`ar-EG`: Arabic (Egypt).
-`ar-IQ`: Arabic (Iraq).
-`ar-IL`: Arabic (Israel).
-`ar-JO`: Arabic (Jordan).
-`ar-KW`: Arabic (Kuwait).
-`ar-LB`: Arabic (Lebanon).
-`ar-MR`: Arabic (Mauritania).
-`ar-MA`: Arabic (Morocco).
-`ar-OM`: Arabic (Oman).
-`ar-QA`: Arabic (Qatar).
-`ar-SA`: Arabic (Saudi Arabia).
-`ar-PS`: Arabic (State of Palestine).
-`ar-SY`: Arabic (Syria).
-`ar-TN`: Arabic (Tunisia).
-`ar-AE`: Arabic (United Arab Emirates).
-`ar-YE`: Arabic (Yemen).
-`hy-AM`: Armenian (Armenia).
-`az-AZ`: Azerbaijani (Azerbaijan).
-`eu-ES`: Basque (Spain).
-`bn-BD`: Bengali (Bangladesh).
-`bn-IN`: Bengali (India).
-`bs-BA`: Bosnian (Bosnia and Herzegovina).
-`bg-BG`: Bulgarian (Bulgaria).
-`my-MM`: Burmese (Myanmar).
-`ca-ES`: Catalan (Spain).
-`hr-HR`: Croatian (Croatia).
-`cs-CZ`: Czech (Czech Republic).
-`da-DK`: Danish (Denmark).
-`nl-BE`: Dutch (Belgium).
-`nl-NL`: Dutch (Holland).
-`en-AU`: English (Australia).
-`en-CA`: English (Canada).
-`en-GH`: English (Ghana).
-`en-HK`: English (Hong Kong (China)).
-`en-IN`: English (India).
-`en-IE`: English (Ireland).
-`en-KE`: English (Kenya).
-`en-NZ`: English (New Zealand).
-`en-NG`: English (Nigeria).
-`en-PK`: English (Pakistan).
-`en-PH`: English (Philippines).
-`en-SG`: English (Singapore).
-`en-ZA`: English (South Africa).
-`en-TZ`: English (Tanzania).
-`en-GB`: English (UK).
-`en-US`: English (US).
-`et-EE`: Estonian (Estonia).
-`fil-PH`: Filipino (Philippines).
-`fi-FI`: Finnish (Finland).
-`fr-BE`: French (Belgium).
-`fr-CA`: French (Canada).
-`fr-FR`: French (France).
-`fr-CH`: French (Switzerland).
-`gl-ES`: Galician (Spain).
-`ka-GE`: Georgian (Georgia).
-`el-GR`: Greek (Greece).
-`gu-IN`: Gujarati (India).
-`iw-IL`: Hebrew (Israel).
-`hi-IN`: Hindi (India).
-`hu-HU`: Hungarian (Hungary).
-`is-IS`: Icelandic (Iceland).
-`id-ID`: Indonesian (Indonesia).
-`it-IT`: Italian (Italy).
-`it-CH`: Italian (Switzerland).
-`ja-JP`: Japanese (Japan).
-`jv-ID`: Javanese (Indonesia).
-`kn-IN`: Kannada (India).
-`kk-KZ`: Kazakh (Kazakhstan).
-`km-KH`: Khmer (Cambodia).
-`rw-RW`: Kinyarwanda (Rwanda).
-`ko-KR`: Korean (South Korea).
-`lo-LA`: Lao (Laos).
-`lv-LV`: Latvian (Latvia).
-`lt-LT`: Lithuanian (Lithuania).
-`mk-MK`: Macedonian (North Macedonia).
-`ms-MY`: Malay (Malaysia).
-`ml-IN`: Malayalam (India).
-`mr-IN`: Marathi (India).
-`mn-MN`: Mongolian (Mongolia).
-`ne-NP`: Nepali (Nepal).
-`no-NO`: Bokmal Norwegian (Norway).
-`fa-IR`: Persian (Iran).
-`pl-PL`: Polish (Poland).
-`pt-BR`: Portuguese (Brazil).
-`pt-PT`: Portuguese (Portugal).
-`ro-RO`: Romanian (Romania).
-`ru-RU`: Russian (Russia).
-`sr-RS`: Serbian (Serbia).
-`si-LK`: Sinhalese (Sri Lanka).
-`sk-SK`: Slovak (Slovakia).
-`sl-SI`: Slovenian (Slovenia).
-`st-ZA`: Sesotho (South Africa).
-`es-AR`: Spanish (Argentina).
-`es-BO`: Spanish (Bolivia).
-`es-CL`: Spanish (Chile).
-`es-CO`: Spanish (Colombia).
-`es-CR`: Spanish (Costa Rica).
-`es-DO`: Spanish (Dominican Republic).
-`es-EC`: Spanish (Ecuador).
-`es-SV`: Spanish (El Salvador).
-`es-GT`: Spanish (Guatemala).
-`es-HN`: Spanish (Honduras).
-`es-MX`: Spanish (Mexico).
-`es-NI`: Spanish (Nicaragua).
-`es-PA`: Spanish (Panama).
-`es-PY`: Spanish (Paraguay).
-`es-PE`: Spanish (Peru).
-`es-PR`: Spanish (Puerto Rico).
-`es-ES`: Spanish (Spain).
-`es-US`: Spanish (US).
-`es-UY`: Spanish (Uruguay).
-`es-VE`: Spanish (Venezuela).
-`su-ID`: Sundanese (Indonesia).
-`sw-KE`: Swahili (Kenya).
-`sw-TZ`: Swahili (Tanzania).
-`sv-SE`: Swedish (Sweden).
-`ta-IN`: Tamil (India).
-`ta-MY`: Tamil (Malaysia).
-`ta-SG`: Tamil (Singapore).
-`ta-LK`: Tamil (Sri Lanka).
-`te-IN`: Telugu (India).
-`th-TH`: Thai (Thailand).
-`ts-ZA`: Tsonga (South Africa).
-`tr-TR`: Turkish (Turkey).
-`uk-UA`: Ukrainian (Ukraine).
-`ur-IN`: Urdu (India).
-`ur-PK`: Urdu (Pakistan).
-`uz-UZ`: Uzbek (Uzbekistan).
-`ve-ZA`: Venda (South Africa).
-`vi-VN`: Vietnamese (Vietnam).
-`xh-ZA`: Xhosa (South Africa).
-`zu-ZA`: Zulu (South Africa).
-
-
+         * <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br>ASR recognition and pure caption translation currently support the following languages:<br><code>auto</code>: Auto-identification<br><code>zh</code>: Simplified Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>zh-PY</code>: Chinese-English-Cantonese<br><code>zh_medical</code>: Chinese health care<br><code>vi</code>: Vietnamese<br><code>ms</code>: Malay<br><code>id</code>: Indonesian<br><code>fil</code>: Filipino<br><code>th</code>: Thai<br><code>pt</code>: Portuguese<br><code>tr</code>: Turkish<br><code>ar</code>: Arabic<br><code>es</code>: Spanish<br><code>hi</code>: Hindi<br><code>fr</code>: French<br><code>de</code>: German<br><code>it</code>: Italian<br><code>zh_dialect</code>: Chinese dialect<br><code>zh_en</code>: Chinese-English<br><code>yue</code>: Cantonese<br><code>ru</code>: Russian<br><code>prime_zh</code>: Chinese-English dialect<br><code>af-ZA</code>: Afrikaans (South Africa)<br><code>sq-AL</code>: Albanian (Albania)<br><code>am-ET</code>: Amharic (Ethiopia)<br><code>ar-DZ</code>: Arabic (Algeria)<br><code>ar-BH</code>: Arabic (Bahrain)<br><code>ar-EG</code>: Arabic (Egypt)<br><code>ar-IQ</code>: Arabic (Iraq)<br><code>ar-IL</code>: Arabic (Israel)<br><code>ar-JO</code>: Arabic (Jordan)<br><code>ar-KW</code>: Arabic (Kuwait)<br><code>ar-LB</code>: Arabic (Lebanon)<br><code>ar-MR</code>: Arabic (Mauritania)<br><code>ar-MA</code>: Arabic (Morocco)<br><code>ar-OM</code>: Arabic (Oman)<br><code>ar-QA</code>: Arabic (Qatar)<br><code>ar-SA</code>: Arabic (Saudi Arabia)<br><code>ar-PS</code>: Arabic (State of Palestine)<br><code>ar-SY</code>: Arabic (Syria)<br><code>ar-TN</code>: Arabic (Tunisia)<br><code>ar-AE</code>: Arabic (United Arab Emirates)<br><code>ar-YE</code>: Arabic (Yemen)<br><code>hy-AM</code>: Armenian (Armenia)<br><code>az-AZ</code>: Azerbaijani (Azerbaijan)<br><code>eu-ES</code>: Basque (Spain)<br><code>bn-BD</code>: Bengali (Bangladesh)<br><code>bn-IN</code>: Bengali (India)<br><code>bs-BA</code>: Bosnian (Bosnia and Herzegovina)<br><code>bg-BG</code>: Bulgarian (Bulgaria)<br><code>my-MM</code>: Burmese (Myanmar)<br><code>ca-ES</code>: Catalan (Spain)<br><code>hr-HR</code>: Croatian (Croatia)<br><code>cs-CZ</code>: Czech (Czech Republic)<br><code>da-DK</code>: Danish (Denmark)<br><code>nl-BE</code>: Dutch (Belgium)<br><code>nl-NL</code>: Dutch (Netherlands)<br><code>en-AU</code>: English (Australia)<br><code>en-CA</code>: English (Canada)<br><code>en-GH</code>: English (Ghana)<br><code>en-HK</code>: English (Hong Kong (China))<br><code>en-IN</code>: English (India)<br><code>en-IE</code>: English (Ireland)<br><code>en-KE</code>: English (Kenya)<br><code>en-NZ</code>: English (New Zealand)<br><code>en-NG</code>: English (Nigeria)<br><code>en-PK</code>: English (Pakistan)<br><code>en-PH</code>: English (Philippines)<br><code>en-SG</code>: English (Singapore)<br><code>en-ZA</code>: English (South Africa)<br><code>en-TZ</code>: English (Tanzania)<br><code>en-GB</code>: English (UK)<br><code>en-US</code>: English (United States)<br><code>et-EE</code>: Estonian (Estonia)<br><code>fil-PH</code>: Filipino (Philippines)<br><code>fi-FI</code>: Finnish (Finland)<br><code>fr-BE</code>: French (Belgium)<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fr-CH</code>: French (Switzerland)<br><code>gl-ES</code>: Galician (Spain)<br><code>ka-GE</code>: Georgian (Georgia)<br><code>el-GR</code>: Greek (Greece)<br><code>gu-IN</code>: Gujarati (India)<br><code>iw-IL</code>: Hebrew (Israel)<br><code>hi-IN</code>: Hindi (India)<br><code>hu-HU</code>: Hungarian (Hungary)<br><code>is-IS</code>: Icelandic (Iceland)<br><code>id-ID</code>: Indonesian (Indonesia)<br><code>it-IT</code>: Italian (Italy)<br><code>it-CH</code>: Italian (Switzerland)<br><code>ja-JP</code>: Japanese (Japan)<br><code>jv-ID</code>: Javanese (Indonesia)<br><code>kn-IN</code>: Kannada (India)<br><code>kk-KZ</code>: Kazakh (Kazakhstan)<br><code>km-KH</code>: Khmer (Cambodia)<br><code>rw-RW</code>: Kinyarwanda (Rwanda)<br><code>ko-KR</code>: Korean (South Korea)<br><code>lo-LA</code>: Lao (Laos)<br><code>lv-LV</code>: Latvian (Latvia)<br><code>lt-LT</code>: Lithuanian (Lithuania)<br><code>mk-MK</code>: Macedonian (North Macedonia)<br><code>ms-MY</code>: Malay (Malaysia)<br><code>ml-IN</code>: Malayalam (India)<br><code>mr-IN</code>: Marathi (India)<br><code>mn-MN</code>: Mongolian (Mongolia)<br><code>ne-NP</code>: Nepali (Nepal)<br><code>no-NO</code>: Norwegian Bokmål (Norway)<br><code>fa-IR</code>: Persian (Iran)<br><code>pl-PL</code>: Polish (Poland)<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>ro-RO</code>: Romanian (Romania)<br><code>ru-RU</code>: Russian (Russia)<br><code>sr-RS</code>: Serbian (Serbia)<br><code>si-LK</code>: Sinhalese (Sri Lanka)<br><code>sk-SK</code>: Slovak (Slovakia)<br><code>sl-SI</code>: Slovenian (Slovenia)<br><code>st-ZA</code>: Southern Sotho (South Africa)<br><code>es-AR</code>: Spanish (Argentina)<br><code>es-BO</code>: Spanish (Bolivia)<br><code>es-CL</code>: Spanish (Chile)<br><code>es-CO</code>: Spanish (Colombia)<br><code>es-CR</code>: Spanish (Costa Rica)<br><code>es-DO</code>: Spanish (Dominican Republic)<br><code>es-EC</code>: Spanish (Ecuador)<br><code>es-SV</code>: Spanish (El Salvador)<br><code>es-GT</code>: Spanish (Guatemala)<br><code>es-HN</code>: Spanish (Honduras)<br><code>es-MX</code>: Spanish (Mexico)<br><code>es-NI</code>: Spanish (Nicaragua)<br><code>es-PA</code>: Spanish (Panama)<br><code>es-PY</code>: Spanish (Paraguay)<br><code>es-PE</code>: Spanish (Peru)<br><code>es-PR</code>: Spanish (Puerto Rico)<br><code>es-ES</code>: Spanish (Spain)<br><code>es-US</code>: Spanish (United States)<br><code>es-UY</code>: Spanish (Uruguay)<br><code>es-VE</code>: Spanish (Venezuela)<br><code>su-ID</code>: Sundanese (Indonesia)<br><code>sw-KE</code>: Swahili (Kenya)<br><code>sw-TZ</code>: Swahili (Tanzania)<br><code>sv-SE</code>: Swedish (Sweden)<br><code>ta-IN</code>: Tamil (India)<br><code>ta-MY</code>: Tamil (Malaysia)<br><code>ta-SG</code>: Tamil (Singapore)<br><code>ta-LK</code>: Tamil (Sri Lanka)<br><code>te-IN</code>: Telugu (India)<br><code>th-TH</code>: Thai (Thailand)<br><code>ts-ZA</code>: Tsonga (South Africa)<br><code>tr-TR</code>: Turkish (Türkiye)<br><code>uk-UA</code>: Ukrainian (Ukraine)<br><code>ur-IN</code>: Urdu (India)<br><code>ur-PK</code>: Urdu (Pakistan)<br><code>uz-UZ</code>: Uzbek (Uzbekistan)<br><code>ve-ZA</code>: Venda (South Africa)<code>vi-VN</code>: Vietnamese (Vietnam)<br><code>xh-ZA</code>: Xhosa (South Africa)<br><code>zu-ZA</code>: Zulu (South Africa)</p>
          * @type {string || null}
          */
         this.VideoSrcLanguage = null;
 
         /**
-         * Smart subtitle file format:
-- Under the ASR recognition and translation processing type:
-     - vtt: WebVTT format subtitle.
-     - srt: SRT format subtitle.
-     - Unspecified or left blank: no subtitle file generated.
-- Under the pure subtitle translation processing type:
-    - original: consistent with the source file.
-    - vtt: WebVTT format subtitle.
-    - srt: SRT format subtitle.
-- Under the OCR recognition and translation processing type:
-     - vtt: WebVTT format subtitle.
-     - srt: SRT format subtitle.
-**Note**:
-- For ASR recognition mode, when 2 or more languages are involved in translation, this field cannot be unspecified or left blank.
-- For pure subtitle translation and OCR recognition mode, this field cannot be unspecified or left blank.
+         * <p>Intelligent subtitle file format:</p><ul><li>For ASR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li><li>Leave blank or fill in the blank: no subtitle file generated</li></ul></li><li>For pure subtitle translation processing type:<ul><li>original: consistent with the source file</li><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li><li>For OCR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li></ul><p><strong>Note</strong>:</p><ul><li>For ASR recognition method, do not leave blank or not pass when translating 2 or more languages.</li><li>For pure subtitle translation method, do not leave blank or not pass.</li><li>For OCR tasks, it is allowed to leave blank or not pass when suppression is enabled.</li></ul>
          * @type {string || null}
          */
         this.SubtitleFormat = null;
 
         /**
-         * Smart subtitle language type.
-0: source language
-1: target language
-2: source language + target language
-The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
+         * <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
          * @type {number || null}
          */
         this.SubtitleType = null;
 
         /**
-         * ASR hotword lexicon parameter.
+         * <p>ASR hot word lexicon parameter</p>
          * @type {AsrHotWordsConfigure || null}
          */
         this.AsrHotWordsConfigure = null;
 
         /**
-         * Target language for subtitle translation.
-This parameter takes effect when the value of TranslateSwitch is ON. Valid translation languages:`ab`: Abkhazian.`ace`: Acehnese.`ach`: Acholi.`af`: Afrikaans.`ak`: Twi (Akan).`am`: Amharic.`ar`: Arabic.`as`: Assamese.`ay`: Aymara.`az`: Azerbaijani.`ba`: Bashkir.`ban`: Balinese.`bbc`: Batak toba.`bem`: Bemba.`bew`: Betawi.`bg`: Bulgarian.`bho`: Bhojpuri.`bik`: Bikol.`bm`: Bambara.`bn`: Bengali.`br`: Breton.`bs`: Bosnian.`btx`: Batak Karo.`bts`: Batak Simalungun.`bua`: Buryat.`ca`: Catalan.`ceb`: Cebuano.`cgg`: Kiga.`chm`: Meadow Mari.`ckb`: Kurdish (Sorani).`cnh`: Hakha Chin.`co`: Corsican.`crh`: Crimean Tatar.`crs`: Seychellois Creole.`cs`: Czech.`cv`: Chuvash.`cy`: Welsh.`da`: Danish.`de`: German.`din`: Dinka.`doi`: Dogri.`dov`: Dombe.`dv`: Dhivehi.`dz`: Dzongkha.`ee`: Ewe.`el`: Greek.`en`: English.`eo`: Esperanto.`es`: Spanish.`et`: Estonian.`eu`: Basque.`fa`: Persian.`ff`: Fulah.`fi`: Finnish.`fil`: Filipino (Tagalog).`fj`: Fijian.`fr`: French.`fr-CA`: French (Canada).`fr-FR`: French (France).`fy`: Frisian.`ga`: Irish.`gaa`: Ga.
-`gd`: Scottish Gaelic.`gl`: Galician.`gn`: Guarani.`gom`: Konkani.`gu`: Gujarati.`gv`: Manx.`ha`: Hausa.`haw`: Hawaiian.`he`: Hebrew.`hi`: Hindi.`hil`: Hiligaynon.`hmn`: Hmong.`hr`: Croatian.`hrx`: Hunsrik.`ht`: Haitian Creole.`hu`: Hungarian.`hy`: Armenian.`id`: Indonesian.`ig`: Igbo.`ilo`: Iloko.`is`: Icelandic.`it`: Italian.`iw`: Hebrew.`ja`: Japanese.`jv`: Javanese.`ka`: Georgian.`kk`: Kazakh.`km`: Khmer.`kn`: Kannada.`ko`: Korean.`kri`: Krio.`ku`: Kurdish (Kurmanji).`ktu`: Kituba.`ky`: Kyrgyz.`la`: Latin.`lb`: Luxembourgish.`lg`: Ganda (Luganda).`li`: Limburgish.`lij`: Ligurian.`lmo`: Lombard.`ln`: Lingala.`lo`: Lao.`lt`: Lithuanian.`ltg`: Latgalian.`luo`: Luo.`lus`: Mizo.`lv`: Latvian.`mai`: Maithili.`mak`: Makasar.`mg`: Malagasy.`mi`: Maori.`min`: Minangkabau.`mk`: Macedonian.`ml`: Malayalam.`mn`: Mongolian.`mr`: Marathi.`ms`: Malay.`mt`: Maltese.`my`: Burmese.`ne`: Nepali.`new`: Newari.`nl`: Dutch.`no`: Norwegian.`nr`: Southern Ndebele.`nso`: Northern Sotho (Sepedi).`nus`: Nuer.`ny`: Chichewa (Nyanja).`oc`: Occitan.`om`: Oromo.`or`: Odia.`pa`: Punjabi.`pag`: Pangasinan.`pam`: Kapampangan.`pap`: Papiamento.`pl`: Polish.`ps`: Pashto.`pt`: Portuguese.`pt-BR`: Portuguese (Brazil).`pt-PT`: Portuguese (Portugal).`qu`: Quechua.`ro`: Romanian.`rom`: Romani.`rn`: Rundi.`ru`: Russian.`rw`: Kinyarwanda.`sa`: Sanskrit.`scn`: Sicilian.`sd`: Sindhi.`sg`: Sango.`shn`: Shan.`si`: Sinhala.`sk`: Slovak.`sl`: Slovenian.`sm`: Samoan.`sn`: Shona.`so`: Somali.`sq`: Albanian.`sr`: Serbian.`ss`: Swazi.`st`: Southern Sotho.`su`: Sundanese.`sv`: Swedish.`sw`: Swahili.`szl`: Silesian.`ta`: Tamil.`te`: Telugu.`tet`: Tetum.`tg`: Tajik.`th`: Thai.`ti`: Tigrinya.`tk`: Turkmen.`tn`: Tswana.`tr`: Turkish.`ts`: Tsonga.`tt`: Tatar.`ug`: Uyghur.`uk`: Ukrainian.`ur`: Urdu.`uz`: Uzbek.`vi`: Vietnamese.`xh`: Xhosa.`yi`: Yiddish.`yo`: Yoruba.`yua`: Yucatec Maya.`yue`: Cantonese.`zh`: Chinese (Simplified).`zh-TW`: Chinese (Traditional).`zu`: Zulu.**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+         * <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: GaLanguage<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method.<code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
          * @type {string || null}
          */
         this.TranslateDstLanguage = null;
 
         /**
-         * Subtitle processing type:
-- 0: ASR recognition subtitle.
-- 1: pure subtitle translation.
-- 2: OCR recognition subtitle.
-**Note**: If the field is unspecified, ASR is used by default.
+         * <p>Subtitle processing type:</p><ul><li>0: ASR recognition subtitle</li><li>1: Pure caption translation</li><li>2: OCR recognition subtitle</li></ul><p><strong>Note</strong>: ASR is selected by default if the field is unspecified.</p>
          * @type {number || null}
          */
         this.ProcessType = null;
 
         /**
-         * Area configurations for the subtitle OCR extraction box.
+         * <p>Area configurations for the subtitle OCR extraction box</p>
          * @type {SelectingSubtitleAreasConfig || null}
          */
         this.SelectingSubtitleAreasConfig = null;
+
+        /**
+         * <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR). Cannot fill in when multiple target languages are enabled.</p>
+         * @type {number || null}
+         */
+        this.SubtitleEmbedId = null;
 
     }
 
@@ -39569,35 +39849,36 @@ This parameter takes effect when the value of TranslateSwitch is ON. Valid trans
             obj.deserialize(params.SelectingSubtitleAreasConfig)
             this.SelectingSubtitleAreasConfig = obj;
         }
+        this.SubtitleEmbedId = 'SubtitleEmbedId' in params ? params.SubtitleEmbedId : null;
 
     }
 }
 
 /**
- * DescribeTranscodeTemplates response structure.
+ * AI video intelligent analysis input parameter types
  * @class
  */
-class DescribeTranscodeTemplatesResponse extends  AbstractModel {
+class AiAnalysisTaskInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of eligible entries.
+         * Video content analysis template ID.
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Definition = null;
 
         /**
-         * List of transcoding template details.
-         * @type {Array.<TranscodeTemplate> || null}
-         */
-        this.TranscodeTemplateSet = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Additional parameter. Its value is a serialized JSON string.
+Note: This parameter is used to meet customization requirements. References:
+[Smart Erase Tutorial]: https://intl.cloud.tencent.com/document/product/862/101530?from_cn_redirect=1
+[Video Splitting (Long Videos to Short Videos) Tutorial](https://intl.cloud.tencent.com/document/product/862/112098?from_cn_redirect=1)
+[Intelligent Highlights Tutorial](https://intl.cloud.tencent.com/document/product/862/107280?from_cn_redirect=1)
+[Horizontal-to-Vertical Video Transformation Tutorial](https://intl.cloud.tencent.com/document/product/862/112112?from_cn_redirect=1)
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ExtendedParameter = null;
 
     }
 
@@ -39608,17 +39889,8 @@ class DescribeTranscodeTemplatesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.TranscodeTemplateSet) {
-            this.TranscodeTemplateSet = new Array();
-            for (let z in params.TranscodeTemplateSet) {
-                let obj = new TranscodeTemplate();
-                obj.deserialize(params.TranscodeTemplateSet[z]);
-                this.TranscodeTemplateSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -39744,9 +40016,7 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
         this.Tag = null;
 
         /**
-         * Classification list of frame-level tags, where CategorySet.N represents the (N+1)th level classification.
-
-For example, when the Tag is "tower", CategorySet contains two elements: CategorySet.0 is "scene" and CategorySet.1 is "architecture", indicating the frame-level tag is "tower" with Level 1 classification as "scene" and Level 2 classification as "architecture".
+         * 
          * @type {Array.<string> || null}
          */
         this.CategorySet = null;
@@ -40150,6 +40420,53 @@ Note: When a template is modified, input [] for the erasing area; if this parame
                 obj.deserialize(params.CustomAreas[z]);
                 this.CustomAreas.push(obj);
             }
+        }
+
+    }
+}
+
+/**
+ * CreateSubtitleEmbedTemplate request structure.
+ * @class
+ */
+class CreateSubtitleEmbedTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Subtitle suppression template name<br>Length limit: 64 characters.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Subtitle suppression template description information<br>Length limit: 256 characters.</p>
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * <p>Subtitle suppression configuration</p>
+         * @type {SubtitleEmbedConfig || null}
+         */
+        this.SubtitleEmbedConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+        if (params.SubtitleEmbedConfig) {
+            let obj = new SubtitleEmbedConfig();
+            obj.deserialize(params.SubtitleEmbedConfig)
+            this.SubtitleEmbedConfig = obj;
         }
 
     }
@@ -40720,7 +41037,7 @@ Note: This field may return null, indicating that no valid value can be obtained
 
         /**
          * Output path of the generated subtitle file, which can be a relative or absolute path.
-To define the output path, end the path with .{format}. For variable names, see the description of file name variables at https://www.tencentcloud.com/document/product/862/37039.?from_cn_redirect=1
+To define the output path, end the path with .{format}. For variable names, see the description of file name variables at https://www.tencentcloud.comom/document/product/862/37039.?from_cn_redirect=1
 
 Relative path example:
  - File name_{variable name}.{format}.
@@ -40925,6 +41242,101 @@ Default value: black.
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+
+    }
+}
+
+/**
+ * Subtitle suppression template details
+ * @class
+ */
+class SubtitleEmbedTemplateItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique identifier of the subtitle suppression template
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Subtitle suppression template name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Subtitle suppression template description
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Template type. Valid values:
+* Preset: system preset template
+* Custom: user-defined template.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Deletion mark. 0 Not deleted. 1 Deleted.
+         * @type {number || null}
+         */
+        this.DeleteTag = null;
+
+        /**
+         * Template creation time in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modification time of the template in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Subtitle suppression module settings
+         * @type {SubtitleEmbedConfig || null}
+         */
+        this.SubtitleEmbedConfig = null;
+
+        /**
+         * Subtitle suppression template English name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AliasName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.DeleteTag = 'DeleteTag' in params ? params.DeleteTag : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.SubtitleEmbedConfig) {
+            let obj = new SubtitleEmbedConfig();
+            obj.deserialize(params.SubtitleEmbedConfig)
+            this.SubtitleEmbedConfig = obj;
+        }
+        this.AliasName = 'AliasName' in params ? params.AliasName : null;
 
     }
 }
@@ -41310,7 +41722,7 @@ class CreateSmartSubtitleTemplateResponse extends  AbstractModel {
         super();
 
         /**
-         * Unique identifier of the smart subtitle template.
+         * <p>Unique identifier of the smart subtitle template.</p>
          * @type {number || null}
          */
         this.Definition = null;
@@ -41337,7 +41749,7 @@ class CreateSmartSubtitleTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Live streaming AI analysis results
+ * 
  * @class
  */
 class LiveStreamAiAnalysisResultItem extends  AbstractModel {
@@ -41354,8 +41766,7 @@ class LiveStreamAiAnalysisResultItem extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Segmentation results are valid when Type is
-SegmentRecognition.
+         * 
          * @type {Array.<SegmentRecognitionItem> || null}
          */
         this.SegmentResultSet = null;
@@ -41737,7 +42148,7 @@ class AiAnalysisTaskCutoutResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -41874,13 +42285,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ErasePrivacyConfig = null;
 
         /**
-         * Template creation time in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Template creation time in [ISO datetime format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modification time of the template in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Last modification time of the template in [ISO datetime format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -42573,7 +42984,7 @@ module.exports = {
     MediaAiAnalysisDescriptionItem: MediaAiAnalysisDescriptionItem,
     DeleteAnimatedGraphicsTemplateResponse: DeleteAnimatedGraphicsTemplateResponse,
     AiReviewTaskProhibitedOcrResult: AiReviewTaskProhibitedOcrResult,
-    UpdateSmartEraseWatermarkConfig: UpdateSmartEraseWatermarkConfig,
+    DeleteAIRecognitionTemplateRequest: DeleteAIRecognitionTemplateRequest,
     AiRecognitionTaskAsrFullTextResultOutput: AiRecognitionTaskAsrFullTextResultOutput,
     AsrHotwordsSetItem: AsrHotwordsSetItem,
     AiReviewProhibitedOcrTaskOutput: AiReviewProhibitedOcrTaskOutput,
@@ -42621,11 +43032,13 @@ module.exports = {
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
     ModifyWordSampleResponse: ModifyWordSampleResponse,
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
+    UpdateSmartEraseWatermarkConfig: UpdateSmartEraseWatermarkConfig,
     WorkflowInfo: WorkflowInfo,
     ModifyProcessImageTemplateRequest: ModifyProcessImageTemplateRequest,
     DeletePersonSampleRequest: DeletePersonSampleRequest,
     AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
     ParseLiveStreamProcessNotificationResponse: ParseLiveStreamProcessNotificationResponse,
+    SubtitleShadowConfig: SubtitleShadowConfig,
     SmartEraseTaskResult: SmartEraseTaskResult,
     AiRecognitionTaskInput: AiRecognitionTaskInput,
     SmartSubtitleTaskTextResultOutput: SmartSubtitleTaskTextResultOutput,
@@ -42665,7 +43078,7 @@ module.exports = {
     ModifyLiveRecordTemplateResponse: ModifyLiveRecordTemplateResponse,
     AiParagraphInfo: AiParagraphInfo,
     AudioSeparateConfig: AudioSeparateConfig,
-    DeleteAIRecognitionTemplateRequest: DeleteAIRecognitionTemplateRequest,
+    DescribeSubtitleEmbedTemplatesRequest: DescribeSubtitleEmbedTemplatesRequest,
     AiAnalysisTaskCoverResult: AiAnalysisTaskCoverResult,
     AudioBeautifyConfig: AudioBeautifyConfig,
     EnableWorkflowRequest: EnableWorkflowRequest,
@@ -42704,6 +43117,7 @@ module.exports = {
     ImageProcessTaskOutput: ImageProcessTaskOutput,
     ComposeTargetInfo: ComposeTargetInfo,
     TaskStatData: TaskStatData,
+    SubtitleBoardConfig: SubtitleBoardConfig,
     MediaProcessTaskInput: MediaProcessTaskInput,
     DisableScheduleRequest: DisableScheduleRequest,
     AiAnalysisTaskHorizontalToVerticalResult: AiAnalysisTaskHorizontalToVerticalResult,
@@ -42914,6 +43328,7 @@ module.exports = {
     AiAnalysisTaskDescriptionResult: AiAnalysisTaskDescriptionResult,
     DeleteSmartSubtitleTemplateResponse: DeleteSmartSubtitleTemplateResponse,
     ResetWorkflowRequest: ResetWorkflowRequest,
+    DeleteSubtitleEmbedTemplateRequest: DeleteSubtitleEmbedTemplateRequest,
     AiRecognitionTaskObjectResultInput: AiRecognitionTaskObjectResultInput,
     AiReviewTaskTerrorismResult: AiReviewTaskTerrorismResult,
     LiveStreamAiReviewVoicePornResult: LiveStreamAiReviewVoicePornResult,
@@ -42930,7 +43345,7 @@ module.exports = {
     CreateAdaptiveDynamicStreamingTemplateResponse: CreateAdaptiveDynamicStreamingTemplateResponse,
     DeleteSampleSnapshotTemplateRequest: DeleteSampleSnapshotTemplateRequest,
     TerrorismOcrReviewTemplateInfoForUpdate: TerrorismOcrReviewTemplateInfoForUpdate,
-    AiAnalysisTaskInput: AiAnalysisTaskInput,
+    DescribeTranscodeTemplatesResponse: DescribeTranscodeTemplatesResponse,
     ImageSpriteTemplate: ImageSpriteTemplate,
     AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
     DeleteAsrHotwordsResponse: DeleteAsrHotwordsResponse,
@@ -42943,6 +43358,7 @@ module.exports = {
     AiAnalysisTaskHighlightInput: AiAnalysisTaskHighlightInput,
     ProhibitedAsrReviewTemplateInfo: ProhibitedAsrReviewTemplateInfo,
     SegmentRecognitionItem: SegmentRecognitionItem,
+    DescribeSubtitleEmbedTemplatesResponse: DescribeSubtitleEmbedTemplatesResponse,
     AiReviewPoliticalAsrTaskInput: AiReviewPoliticalAsrTaskInput,
     LiveStreamAiAnalysisResultInfo: LiveStreamAiAnalysisResultInfo,
     SegmentSpecificInfo: SegmentSpecificInfo,
@@ -42993,6 +43409,7 @@ module.exports = {
     CreateLiveRecordTemplateResponse: CreateLiveRecordTemplateResponse,
     ActivityResult: ActivityResult,
     DescribeAsrHotwordsResponse: DescribeAsrHotwordsResponse,
+    CreateSubtitleEmbedTemplateResponse: CreateSubtitleEmbedTemplateResponse,
     ResetWorkflowResponse: ResetWorkflowResponse,
     HLSConfigureInfo: HLSConfigureInfo,
     CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
@@ -43010,6 +43427,7 @@ module.exports = {
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
     AiAnalysisTaskVideoRemakeResult: AiAnalysisTaskVideoRemakeResult,
     ArtifactRepairConfig: ArtifactRepairConfig,
+    SyncDubbingOutputOption: SyncDubbingOutputOption,
     CreateAIRecognitionTemplateRequest: CreateAIRecognitionTemplateRequest,
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
     AiAnalysisTaskDubbingInput: AiAnalysisTaskDubbingInput,
@@ -43039,6 +43457,7 @@ module.exports = {
     ProhibitedOcrReviewTemplateInfo: ProhibitedOcrReviewTemplateInfo,
     ImageEraseLogoConfig: ImageEraseLogoConfig,
     ScheduleReviewTaskResult: ScheduleReviewTaskResult,
+    ModifySubtitleEmbedTemplateRequest: ModifySubtitleEmbedTemplateRequest,
     ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,
     LiveStreamRecordResultInfo: LiveStreamRecordResultInfo,
     RuleConditionItem: RuleConditionItem,
@@ -43064,7 +43483,9 @@ module.exports = {
     UserDefineFaceReviewTemplateInfoForUpdate: UserDefineFaceReviewTemplateInfoForUpdate,
     DeleteProcessImageTemplateResponse: DeleteProcessImageTemplateResponse,
     OcrFullTextConfigureInfoForUpdate: OcrFullTextConfigureInfoForUpdate,
+    SubtitleLayoutConfig: SubtitleLayoutConfig,
     AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
+    SubtitleOutlineConfig: SubtitleOutlineConfig,
     DescribeTasksResponse: DescribeTasksResponse,
     AiRecognitionTaskFaceResultInput: AiRecognitionTaskFaceResultInput,
     VolumeBalanceConfig: VolumeBalanceConfig,
@@ -43080,6 +43501,7 @@ module.exports = {
     LiveStreamAiReviewResultItem: LiveStreamAiReviewResultItem,
     SmartEraseSubtitleConfig: SmartEraseSubtitleConfig,
     DeleteLiveRecordTemplateResponse: DeleteLiveRecordTemplateResponse,
+    ModifySubtitleEmbedTemplateResponse: ModifySubtitleEmbedTemplateResponse,
     DescribeSnapshotByTimeOffsetTemplatesResponse: DescribeSnapshotByTimeOffsetTemplatesResponse,
     MediaVideoStreamItem: MediaVideoStreamItem,
     SnapshotByTimeOffsetTemplate: SnapshotByTimeOffsetTemplate,
@@ -43113,6 +43535,7 @@ module.exports = {
     DescribeSampleSnapshotTemplatesResponse: DescribeSampleSnapshotTemplatesResponse,
     DescribeProcessImageTemplatesRequest: DescribeProcessImageTemplatesRequest,
     ComposeImageItem: ComposeImageItem,
+    SubtitleEmbedConfig: SubtitleEmbedConfig,
     TaskSimpleInfo: TaskSimpleInfo,
     MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
     AiContentReviewResult: AiContentReviewResult,
@@ -43121,6 +43544,7 @@ module.exports = {
     TerrorismImgReviewTemplateInfo: TerrorismImgReviewTemplateInfo,
     AsrHotwordsSet: AsrHotwordsSet,
     AiAnalysisTaskHeadTailInput: AiAnalysisTaskHeadTailInput,
+    DeleteSubtitleEmbedTemplateResponse: DeleteSubtitleEmbedTemplateResponse,
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
     DescribeSmartSubtitleTemplatesResponse: DescribeSmartSubtitleTemplatesResponse,
     DescribeUsageDataRequest: DescribeUsageDataRequest,
@@ -43172,7 +43596,7 @@ module.exports = {
     TextTranslationResponse: TextTranslationResponse,
     ModifyLiveRecordTemplateRequest: ModifyLiveRecordTemplateRequest,
     ModifySmartSubtitleTemplateRequest: ModifySmartSubtitleTemplateRequest,
-    DescribeTranscodeTemplatesResponse: DescribeTranscodeTemplatesResponse,
+    AiAnalysisTaskInput: AiAnalysisTaskInput,
     DeleteAnimatedGraphicsTemplateRequest: DeleteAnimatedGraphicsTemplateRequest,
     DeleteSnapshotByTimeOffsetTemplateRequest: DeleteSnapshotByTimeOffsetTemplateRequest,
     DescribeAnimatedGraphicsTemplatesResponse: DescribeAnimatedGraphicsTemplatesResponse,
@@ -43180,6 +43604,7 @@ module.exports = {
     ActivityResItem: ActivityResItem,
     LiveActivityResItem: LiveActivityResItem,
     UpdateSmartEraseSubtitleConfig: UpdateSmartEraseSubtitleConfig,
+    CreateSubtitleEmbedTemplateRequest: CreateSubtitleEmbedTemplateRequest,
     EraseTimeArea: EraseTimeArea,
     SpekeDrm: SpekeDrm,
     AiAnalysisTaskDelLogoResult: AiAnalysisTaskDelLogoResult,
@@ -43192,6 +43617,7 @@ module.exports = {
     SmartSubtitlesTaskInput: SmartSubtitlesTaskInput,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
     SampleSnapshotTemplate: SampleSnapshotTemplate,
+    SubtitleEmbedTemplateItem: SubtitleEmbedTemplateItem,
     MediaImageSpriteItem: MediaImageSpriteItem,
     AudioEnhanceConfig: AudioEnhanceConfig,
     AiRecognitionTaskFaceResultItem: AiRecognitionTaskFaceResultItem,

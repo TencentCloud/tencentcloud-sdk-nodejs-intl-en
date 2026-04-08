@@ -4595,6 +4595,12 @@ class DescribeDLCTableListRequest extends  AbstractModel {
          */
         this.TableFormat = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DatasourceConnectionName = null;
+
     }
 
     /**
@@ -4620,6 +4626,7 @@ class DescribeDLCTableListRequest extends  AbstractModel {
         this.Sort = 'Sort' in params ? params.Sort : null;
         this.Asc = 'Asc' in params ? params.Asc : null;
         this.TableFormat = 'TableFormat' in params ? params.TableFormat : null;
+        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
 
     }
 }
@@ -5638,6 +5645,48 @@ class DeleteUserResponse extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class SortOrder extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Column = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SortDirection = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.NullOrder = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Column = 'Column' in params ? params.Column : null;
+        this.SortDirection = 'SortDirection' in params ? params.SortDirection : null;
+        this.NullOrder = 'NullOrder' in params ? params.NullOrder : null;
+
+    }
+}
+
+/**
  * Running logs of a Spark SQL batch job
  * @class
  */
@@ -5741,6 +5790,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.WrittenEnable = null;
 
+        /**
+         * 
+         * @type {WrittenAdvancePolicy || null}
+         */
+        this.AdvancePolicy = null;
+
     }
 
     /**
@@ -5751,6 +5806,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.WrittenEnable = 'WrittenEnable' in params ? params.WrittenEnable : null;
+
+        if (params.AdvancePolicy) {
+            let obj = new WrittenAdvancePolicy();
+            obj.deserialize(params.AdvancePolicy)
+            this.AdvancePolicy = obj;
+        }
 
     }
 }
@@ -7281,6 +7342,12 @@ class ModifyUserTypeRequest extends  AbstractModel {
          */
         this.UserType = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AccountType = null;
+
     }
 
     /**
@@ -7292,6 +7359,7 @@ class ModifyUserTypeRequest extends  AbstractModel {
         }
         this.UserId = 'UserId' in params ? params.UserId : null;
         this.UserType = 'UserType' in params ? params.UserType : null;
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
 
     }
 }
@@ -8387,6 +8455,12 @@ class DropDMSTableRequest extends  AbstractModel {
          */
         this.EnvProps = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DatasourceConnectionName = null;
+
     }
 
     /**
@@ -8405,6 +8479,7 @@ class DropDMSTableRequest extends  AbstractModel {
             obj.deserialize(params.EnvProps)
             this.EnvProps = obj;
         }
+        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
 
     }
 }
@@ -9783,6 +9858,12 @@ class DescribeUserRolesRequest extends  AbstractModel {
          */
         this.Sorting = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.IsDefault = null;
+
     }
 
     /**
@@ -9797,6 +9878,7 @@ class DescribeUserRolesRequest extends  AbstractModel {
         this.Fuzzy = 'Fuzzy' in params ? params.Fuzzy : null;
         this.SortBy = 'SortBy' in params ? params.SortBy : null;
         this.Sorting = 'Sorting' in params ? params.Sorting : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
 
     }
 }
@@ -10068,6 +10150,12 @@ class CreateDLCTableRequest extends  AbstractModel {
          */
         this.ResourceGroupname = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Catalog = null;
+
     }
 
     /**
@@ -10119,6 +10207,7 @@ class CreateDLCTableRequest extends  AbstractModel {
         }
         this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
         this.ResourceGroupname = 'ResourceGroupname' in params ? params.ResourceGroupname : null;
+        this.Catalog = 'Catalog' in params ? params.Catalog : null;
 
     }
 }
@@ -10610,6 +10699,112 @@ class UpdateUserDataEngineConfigRequest extends  AbstractModel {
             let obj = new SessionResourceTemplate();
             obj.deserialize(params.SessionResourceTemplate)
             this.SessionResourceTemplate = obj;
+        }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class WrittenAdvancePolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CompactEnable = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DeleteEnable = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MinInputFiles = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TargetFileSizeBytes = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.RetainLast = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.BeforeDays = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ExpiredSnapshotsIntervalMin = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.RemoveOrphanIntervalMin = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CowCompactEnable = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CompactStrategy = null;
+
+        /**
+         * 
+         * @type {Array.<SortOrder> || null}
+         */
+        this.SortOrders = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CompactEnable = 'CompactEnable' in params ? params.CompactEnable : null;
+        this.DeleteEnable = 'DeleteEnable' in params ? params.DeleteEnable : null;
+        this.MinInputFiles = 'MinInputFiles' in params ? params.MinInputFiles : null;
+        this.TargetFileSizeBytes = 'TargetFileSizeBytes' in params ? params.TargetFileSizeBytes : null;
+        this.RetainLast = 'RetainLast' in params ? params.RetainLast : null;
+        this.BeforeDays = 'BeforeDays' in params ? params.BeforeDays : null;
+        this.ExpiredSnapshotsIntervalMin = 'ExpiredSnapshotsIntervalMin' in params ? params.ExpiredSnapshotsIntervalMin : null;
+        this.RemoveOrphanIntervalMin = 'RemoveOrphanIntervalMin' in params ? params.RemoveOrphanIntervalMin : null;
+        this.CowCompactEnable = 'CowCompactEnable' in params ? params.CowCompactEnable : null;
+        this.CompactStrategy = 'CompactStrategy' in params ? params.CompactStrategy : null;
+
+        if (params.SortOrders) {
+            this.SortOrders = new Array();
+            for (let z in params.SortOrders) {
+                let obj = new SortOrder();
+                obj.deserialize(params.SortOrders[z]);
+                this.SortOrders.push(obj);
+            }
         }
 
     }
@@ -11457,6 +11652,12 @@ class DescribeEngineUsageInfoResponse extends  AbstractModel {
         this.Available = null;
 
         /**
+         * 
+         * @type {number || null}
+         */
+        this.AvailPercent = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -11474,6 +11675,7 @@ class DescribeEngineUsageInfoResponse extends  AbstractModel {
         this.Total = 'Total' in params ? params.Total : null;
         this.Used = 'Used' in params ? params.Used : null;
         this.Available = 'Available' in params ? params.Available : null;
+        this.AvailPercent = 'AvailPercent' in params ? params.AvailPercent : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -15710,6 +15912,12 @@ class AlterDMSDatabaseRequest extends  AbstractModel {
          */
         this.Asset = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DatasourceConnectionName = null;
+
     }
 
     /**
@@ -15728,6 +15936,7 @@ class AlterDMSDatabaseRequest extends  AbstractModel {
             obj.deserialize(params.Asset)
             this.Asset = obj;
         }
+        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
 
     }
 }
@@ -16725,6 +16934,7 @@ module.exports = {
     UpdateDataEngineResponse: UpdateDataEngineResponse,
     DescribeTaskStatisticsResponse: DescribeTaskStatisticsResponse,
     DeleteUserResponse: DeleteUserResponse,
+    SortOrder: SortOrder,
     SparkSessionBatchLog: SparkSessionBatchLog,
     DescribeEngineUsageInfoRequest: DescribeEngineUsageInfoRequest,
     SmartOptimizerWrittenPolicy: SmartOptimizerWrittenPolicy,
@@ -16820,6 +17030,7 @@ module.exports = {
     RenewDataEngineRequest: RenewDataEngineRequest,
     DescribeTaskResultRequest: DescribeTaskResultRequest,
     UpdateUserDataEngineConfigRequest: UpdateUserDataEngineConfigRequest,
+    WrittenAdvancePolicy: WrittenAdvancePolicy,
     Filter: Filter,
     DescribeLakeFsDirSummaryResponse: DescribeLakeFsDirSummaryResponse,
     TableBaseInfo: TableBaseInfo,

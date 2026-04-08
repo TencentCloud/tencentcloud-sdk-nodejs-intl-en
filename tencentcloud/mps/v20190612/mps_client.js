@@ -43,7 +43,7 @@ const AiAnalysisTaskReelOutput = models.AiAnalysisTaskReelOutput;
 const MediaAiAnalysisDescriptionItem = models.MediaAiAnalysisDescriptionItem;
 const DeleteAnimatedGraphicsTemplateResponse = models.DeleteAnimatedGraphicsTemplateResponse;
 const AiReviewTaskProhibitedOcrResult = models.AiReviewTaskProhibitedOcrResult;
-const UpdateSmartEraseWatermarkConfig = models.UpdateSmartEraseWatermarkConfig;
+const DeleteAIRecognitionTemplateRequest = models.DeleteAIRecognitionTemplateRequest;
 const AiRecognitionTaskAsrFullTextResultOutput = models.AiRecognitionTaskAsrFullTextResultOutput;
 const AsrHotwordsSetItem = models.AsrHotwordsSetItem;
 const AiReviewProhibitedOcrTaskOutput = models.AiReviewProhibitedOcrTaskOutput;
@@ -91,11 +91,13 @@ const ClassificationConfigureInfo = models.ClassificationConfigureInfo;
 const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
 const ModifyWordSampleResponse = models.ModifyWordSampleResponse;
 const AudioTemplateInfoForUpdate = models.AudioTemplateInfoForUpdate;
+const UpdateSmartEraseWatermarkConfig = models.UpdateSmartEraseWatermarkConfig;
 const WorkflowInfo = models.WorkflowInfo;
 const ModifyProcessImageTemplateRequest = models.ModifyProcessImageTemplateRequest;
 const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
 const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
 const ParseLiveStreamProcessNotificationResponse = models.ParseLiveStreamProcessNotificationResponse;
+const SubtitleShadowConfig = models.SubtitleShadowConfig;
 const SmartEraseTaskResult = models.SmartEraseTaskResult;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const SmartSubtitleTaskTextResultOutput = models.SmartSubtitleTaskTextResultOutput;
@@ -135,7 +137,7 @@ const ComposeTrackTime = models.ComposeTrackTime;
 const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
 const AiParagraphInfo = models.AiParagraphInfo;
 const AudioSeparateConfig = models.AudioSeparateConfig;
-const DeleteAIRecognitionTemplateRequest = models.DeleteAIRecognitionTemplateRequest;
+const DescribeSubtitleEmbedTemplatesRequest = models.DescribeSubtitleEmbedTemplatesRequest;
 const AiAnalysisTaskCoverResult = models.AiAnalysisTaskCoverResult;
 const AudioBeautifyConfig = models.AudioBeautifyConfig;
 const EnableWorkflowRequest = models.EnableWorkflowRequest;
@@ -174,6 +176,7 @@ const VideoComprehensionResultItem = models.VideoComprehensionResultItem;
 const ImageProcessTaskOutput = models.ImageProcessTaskOutput;
 const ComposeTargetInfo = models.ComposeTargetInfo;
 const TaskStatData = models.TaskStatData;
+const SubtitleBoardConfig = models.SubtitleBoardConfig;
 const MediaProcessTaskInput = models.MediaProcessTaskInput;
 const DisableScheduleRequest = models.DisableScheduleRequest;
 const AiAnalysisTaskHorizontalToVerticalResult = models.AiAnalysisTaskHorizontalToVerticalResult;
@@ -384,6 +387,7 @@ const AiAnalysisTaskTagInput = models.AiAnalysisTaskTagInput;
 const AiAnalysisTaskDescriptionResult = models.AiAnalysisTaskDescriptionResult;
 const DeleteSmartSubtitleTemplateResponse = models.DeleteSmartSubtitleTemplateResponse;
 const ResetWorkflowRequest = models.ResetWorkflowRequest;
+const DeleteSubtitleEmbedTemplateRequest = models.DeleteSubtitleEmbedTemplateRequest;
 const AiRecognitionTaskObjectResultInput = models.AiRecognitionTaskObjectResultInput;
 const AiReviewTaskTerrorismResult = models.AiReviewTaskTerrorismResult;
 const LiveStreamAiReviewVoicePornResult = models.LiveStreamAiReviewVoicePornResult;
@@ -400,7 +404,7 @@ const DeleteScheduleRequest = models.DeleteScheduleRequest;
 const CreateAdaptiveDynamicStreamingTemplateResponse = models.CreateAdaptiveDynamicStreamingTemplateResponse;
 const DeleteSampleSnapshotTemplateRequest = models.DeleteSampleSnapshotTemplateRequest;
 const TerrorismOcrReviewTemplateInfoForUpdate = models.TerrorismOcrReviewTemplateInfoForUpdate;
-const AiAnalysisTaskInput = models.AiAnalysisTaskInput;
+const DescribeTranscodeTemplatesResponse = models.DescribeTranscodeTemplatesResponse;
 const ImageSpriteTemplate = models.ImageSpriteTemplate;
 const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrFullTextSegmentTextItem;
 const DeleteAsrHotwordsResponse = models.DeleteAsrHotwordsResponse;
@@ -413,6 +417,7 @@ const CreateAsrHotwordsRequest = models.CreateAsrHotwordsRequest;
 const AiAnalysisTaskHighlightInput = models.AiAnalysisTaskHighlightInput;
 const ProhibitedAsrReviewTemplateInfo = models.ProhibitedAsrReviewTemplateInfo;
 const SegmentRecognitionItem = models.SegmentRecognitionItem;
+const DescribeSubtitleEmbedTemplatesResponse = models.DescribeSubtitleEmbedTemplatesResponse;
 const AiReviewPoliticalAsrTaskInput = models.AiReviewPoliticalAsrTaskInput;
 const LiveStreamAiAnalysisResultInfo = models.LiveStreamAiAnalysisResultInfo;
 const SegmentSpecificInfo = models.SegmentSpecificInfo;
@@ -463,6 +468,7 @@ const SuperResolutionConfig = models.SuperResolutionConfig;
 const CreateLiveRecordTemplateResponse = models.CreateLiveRecordTemplateResponse;
 const ActivityResult = models.ActivityResult;
 const DescribeAsrHotwordsResponse = models.DescribeAsrHotwordsResponse;
+const CreateSubtitleEmbedTemplateResponse = models.CreateSubtitleEmbedTemplateResponse;
 const ResetWorkflowResponse = models.ResetWorkflowResponse;
 const HLSConfigureInfo = models.HLSConfigureInfo;
 const CreateAIAnalysisTemplateResponse = models.CreateAIAnalysisTemplateResponse;
@@ -480,6 +486,7 @@ const AigcVideoReferenceVideoInfo = models.AigcVideoReferenceVideoInfo;
 const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
 const AiAnalysisTaskVideoRemakeResult = models.AiAnalysisTaskVideoRemakeResult;
 const ArtifactRepairConfig = models.ArtifactRepairConfig;
+const SyncDubbingOutputOption = models.SyncDubbingOutputOption;
 const CreateAIRecognitionTemplateRequest = models.CreateAIRecognitionTemplateRequest;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
 const AiAnalysisTaskDubbingInput = models.AiAnalysisTaskDubbingInput;
@@ -509,6 +516,7 @@ const ComposeMediaTrack = models.ComposeMediaTrack;
 const ProhibitedOcrReviewTemplateInfo = models.ProhibitedOcrReviewTemplateInfo;
 const ImageEraseLogoConfig = models.ImageEraseLogoConfig;
 const ScheduleReviewTaskResult = models.ScheduleReviewTaskResult;
+const ModifySubtitleEmbedTemplateRequest = models.ModifySubtitleEmbedTemplateRequest;
 const ModifyTranscodeTemplateResponse = models.ModifyTranscodeTemplateResponse;
 const LiveStreamRecordResultInfo = models.LiveStreamRecordResultInfo;
 const RuleConditionItem = models.RuleConditionItem;
@@ -534,7 +542,9 @@ const AiSampleFailFaceInfo = models.AiSampleFailFaceInfo;
 const UserDefineFaceReviewTemplateInfoForUpdate = models.UserDefineFaceReviewTemplateInfoForUpdate;
 const DeleteProcessImageTemplateResponse = models.DeleteProcessImageTemplateResponse;
 const OcrFullTextConfigureInfoForUpdate = models.OcrFullTextConfigureInfoForUpdate;
+const SubtitleLayoutConfig = models.SubtitleLayoutConfig;
 const AiRecognitionTaskOcrFullTextResultInput = models.AiRecognitionTaskOcrFullTextResultInput;
+const SubtitleOutlineConfig = models.SubtitleOutlineConfig;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const AiRecognitionTaskFaceResultInput = models.AiRecognitionTaskFaceResultInput;
 const VolumeBalanceConfig = models.VolumeBalanceConfig;
@@ -550,6 +560,7 @@ const ImageAreaBoxInfo = models.ImageAreaBoxInfo;
 const LiveStreamAiReviewResultItem = models.LiveStreamAiReviewResultItem;
 const SmartEraseSubtitleConfig = models.SmartEraseSubtitleConfig;
 const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
+const ModifySubtitleEmbedTemplateResponse = models.ModifySubtitleEmbedTemplateResponse;
 const DescribeSnapshotByTimeOffsetTemplatesResponse = models.DescribeSnapshotByTimeOffsetTemplatesResponse;
 const MediaVideoStreamItem = models.MediaVideoStreamItem;
 const SnapshotByTimeOffsetTemplate = models.SnapshotByTimeOffsetTemplate;
@@ -583,6 +594,7 @@ const TextTranslationRequest = models.TextTranslationRequest;
 const DescribeSampleSnapshotTemplatesResponse = models.DescribeSampleSnapshotTemplatesResponse;
 const DescribeProcessImageTemplatesRequest = models.DescribeProcessImageTemplatesRequest;
 const ComposeImageItem = models.ComposeImageItem;
+const SubtitleEmbedConfig = models.SubtitleEmbedConfig;
 const TaskSimpleInfo = models.TaskSimpleInfo;
 const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
 const AiContentReviewResult = models.AiContentReviewResult;
@@ -591,6 +603,7 @@ const CreateAigcImageTaskRequest = models.CreateAigcImageTaskRequest;
 const TerrorismImgReviewTemplateInfo = models.TerrorismImgReviewTemplateInfo;
 const AsrHotwordsSet = models.AsrHotwordsSet;
 const AiAnalysisTaskHeadTailInput = models.AiAnalysisTaskHeadTailInput;
+const DeleteSubtitleEmbedTemplateResponse = models.DeleteSubtitleEmbedTemplateResponse;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
 const DescribeSmartSubtitleTemplatesResponse = models.DescribeSmartSubtitleTemplatesResponse;
 const DescribeUsageDataRequest = models.DescribeUsageDataRequest;
@@ -642,7 +655,7 @@ const UpdateSmartErasePrivacyConfig = models.UpdateSmartErasePrivacyConfig;
 const TextTranslationResponse = models.TextTranslationResponse;
 const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
 const ModifySmartSubtitleTemplateRequest = models.ModifySmartSubtitleTemplateRequest;
-const DescribeTranscodeTemplatesResponse = models.DescribeTranscodeTemplatesResponse;
+const AiAnalysisTaskInput = models.AiAnalysisTaskInput;
 const DeleteAnimatedGraphicsTemplateRequest = models.DeleteAnimatedGraphicsTemplateRequest;
 const DeleteSnapshotByTimeOffsetTemplateRequest = models.DeleteSnapshotByTimeOffsetTemplateRequest;
 const DescribeAnimatedGraphicsTemplatesResponse = models.DescribeAnimatedGraphicsTemplatesResponse;
@@ -650,6 +663,7 @@ const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
 const ActivityResItem = models.ActivityResItem;
 const LiveActivityResItem = models.LiveActivityResItem;
 const UpdateSmartEraseSubtitleConfig = models.UpdateSmartEraseSubtitleConfig;
+const CreateSubtitleEmbedTemplateRequest = models.CreateSubtitleEmbedTemplateRequest;
 const EraseTimeArea = models.EraseTimeArea;
 const SpekeDrm = models.SpekeDrm;
 const AiAnalysisTaskDelLogoResult = models.AiAnalysisTaskDelLogoResult;
@@ -662,6 +676,7 @@ const DeleteProcessImageTemplateRequest = models.DeleteProcessImageTemplateReque
 const SmartSubtitlesTaskInput = models.SmartSubtitlesTaskInput;
 const CreateAnimatedGraphicsTemplateResponse = models.CreateAnimatedGraphicsTemplateResponse;
 const SampleSnapshotTemplate = models.SampleSnapshotTemplate;
+const SubtitleEmbedTemplateItem = models.SubtitleEmbedTemplateItem;
 const MediaImageSpriteItem = models.MediaImageSpriteItem;
 const AudioEnhanceConfig = models.AudioEnhanceConfig;
 const AiRecognitionTaskFaceResultItem = models.AiRecognitionTaskFaceResultItem;
@@ -1014,6 +1029,17 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
+     * Delete a user-customized Subtitle Suppression Template.
+     * @param {DeleteSubtitleEmbedTemplateRequest} req
+     * @param {function(string, DeleteSubtitleEmbedTemplateResponse):void} cb
+     * @public
+     */
+    DeleteSubtitleEmbedTemplate(req, cb) {
+        let resp = new DeleteSubtitleEmbedTemplateResponse();
+        this.request("DeleteSubtitleEmbedTemplate", req, resp, cb);
+    }
+
+    /**
      * * This API is used to query tasks.
 * If the data is large, one API call may not be able to obtain all the tasks in the query. You can use the `ScrollToken` parameter to query tasks with multiple calls.
 * Only tasks in the last seven days (168 hours) can be queried.
@@ -1228,6 +1254,17 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
+     * This API is used to create a custom subtitle suppression template.
+     * @param {CreateSubtitleEmbedTemplateRequest} req
+     * @param {function(string, CreateSubtitleEmbedTemplateResponse):void} cb
+     * @public
+     */
+    CreateSubtitleEmbedTemplate(req, cb) {
+        let resp = new CreateSubtitleEmbedTemplateResponse();
+        this.request("CreateSubtitleEmbedTemplate", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a media quality inspection template. Up to 50 templates can be created.
      * @param {CreateQualityControlTemplateRequest} req
      * @param {function(string, CreateQualityControlTemplateResponse):void} cb
@@ -1385,6 +1422,17 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
+     * This API is used to modify a user-customized subtitle suppression template.
+     * @param {ModifySubtitleEmbedTemplateRequest} req
+     * @param {function(string, ModifySubtitleEmbedTemplateResponse):void} cb
+     * @public
+     */
+    ModifySubtitleEmbedTemplate(req, cb) {
+        let resp = new ModifySubtitleEmbedTemplateResponse();
+        this.request("ModifySubtitleEmbedTemplate", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify a media quality inspection template.
      * @param {ModifyQualityControlTemplateRequest} req
      * @param {function(string, ModifyQualityControlTemplateResponse):void} cb
@@ -1407,14 +1455,25 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
-     * This API is used to delete a user-defined digital watermark template.
-     * @param {DeleteBlindWatermarkTemplateRequest} req
-     * @param {function(string, DeleteBlindWatermarkTemplateResponse):void} cb
+     * This API is used to modify a custom content recognition template.
+     * @param {ModifyAIRecognitionTemplateRequest} req
+     * @param {function(string, ModifyAIRecognitionTemplateResponse):void} cb
      * @public
      */
-    DeleteBlindWatermarkTemplate(req, cb) {
-        let resp = new DeleteBlindWatermarkTemplateResponse();
-        this.request("DeleteBlindWatermarkTemplate", req, resp, cb);
+    ModifyAIRecognitionTemplate(req, cb) {
+        let resp = new ModifyAIRecognitionTemplateResponse();
+        this.request("ModifyAIRecognitionTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of workflow details by workflow ID.
+     * @param {DescribeWorkflowsRequest} req
+     * @param {function(string, DescribeWorkflowsResponse):void} cb
+     * @public
+     */
+    DescribeWorkflows(req, cb) {
+        let resp = new DescribeWorkflowsResponse();
+        this.request("DescribeWorkflows", req, resp, cb);
     }
 
     /**
@@ -1462,14 +1521,14 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
-     * This API is used to get the list of workflow details by workflow ID.
-     * @param {DescribeWorkflowsRequest} req
-     * @param {function(string, DescribeWorkflowsResponse):void} cb
+     * This API is used to delete a user-defined digital watermark template.
+     * @param {DeleteBlindWatermarkTemplateRequest} req
+     * @param {function(string, DeleteBlindWatermarkTemplateResponse):void} cb
      * @public
      */
-    DescribeWorkflows(req, cb) {
-        let resp = new DescribeWorkflowsResponse();
-        this.request("DescribeWorkflows", req, resp, cb);
+    DeleteBlindWatermarkTemplate(req, cb) {
+        let resp = new DeleteBlindWatermarkTemplateResponse();
+        this.request("DeleteBlindWatermarkTemplate", req, resp, cb);
     }
 
     /**
@@ -1767,14 +1826,14 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
-     * This API is used to modify a custom content recognition template.
-     * @param {ModifyAIRecognitionTemplateRequest} req
-     * @param {function(string, ModifyAIRecognitionTemplateResponse):void} cb
+     * This API is used to delete a scheme.
+     * @param {DeleteScheduleRequest} req
+     * @param {function(string, DeleteScheduleResponse):void} cb
      * @public
      */
-    ModifyAIRecognitionTemplate(req, cb) {
-        let resp = new ModifyAIRecognitionTemplateResponse();
-        this.request("ModifyAIRecognitionTemplate", req, resp, cb);
+    DeleteSchedule(req, cb) {
+        let resp = new DeleteScheduleResponse();
+        this.request("DeleteSchedule", req, resp, cb);
     }
 
     /**
@@ -1797,6 +1856,17 @@ Instead of initiating a video processing task, this API is used to help generate
     DeleteWatermarkTemplate(req, cb) {
         let resp = new DeleteWatermarkTemplateResponse();
         this.request("DeleteWatermarkTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to retrieve the subtitle suppression template details list based on template unique identifier. The returned results include all eligible user-customized subtitle suppression templates and system preset subtitle suppression templates.
+     * @param {DescribeSubtitleEmbedTemplatesRequest} req
+     * @param {function(string, DescribeSubtitleEmbedTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeSubtitleEmbedTemplates(req, cb) {
+        let resp = new DescribeSubtitleEmbedTemplatesResponse();
+        this.request("DescribeSubtitleEmbedTemplates", req, resp, cb);
     }
 
     /**
@@ -1970,17 +2040,6 @@ Live stream processing event notification supports HTTP callback and also suppor
     CreateAIRecognitionTemplate(req, cb) {
         let resp = new CreateAIRecognitionTemplateResponse();
         this.request("CreateAIRecognitionTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a scheme.
-     * @param {DeleteScheduleRequest} req
-     * @param {function(string, DeleteScheduleResponse):void} cb
-     * @public
-     */
-    DeleteSchedule(req, cb) {
-        let resp = new DeleteScheduleResponse();
-        this.request("DeleteSchedule", req, resp, cb);
     }
 
     /**

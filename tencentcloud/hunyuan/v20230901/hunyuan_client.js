@@ -28,12 +28,13 @@ const SubmitHunyuanTo3DTextureEditJobRequest = models.SubmitHunyuanTo3DTextureEd
 const Usage = models.Usage;
 const SubmitHunyuanTo3DRapidJobResponse = models.SubmitHunyuanTo3DRapidJobResponse;
 const ChatTranslationsRequest = models.ChatTranslationsRequest;
-const PromptTokensDetails = models.PromptTokensDetails;
+const QueryHunyuanTo3DTextureEditJobResponse = models.QueryHunyuanTo3DTextureEditJobResponse;
 const SubmitHunyuanTo3DUVJobRequest = models.SubmitHunyuanTo3DUVJobRequest;
 const Submit3DSmartTopologyJobResponse = models.Submit3DSmartTopologyJobResponse;
 const SubmitHunyuanTo3DTextureEditJobResponse = models.SubmitHunyuanTo3DTextureEditJobResponse;
 const File3D = models.File3D;
-const QueryHunyuanTo3DTextureEditJobResponse = models.QueryHunyuanTo3DTextureEditJobResponse;
+const PromptTokensDetails = models.PromptTokensDetails;
+const SubmitConvert3DFormatJobRequest = models.SubmitConvert3DFormatJobRequest;
 const InputFile3D = models.InputFile3D;
 const TranslationDelta = models.TranslationDelta;
 const SubmitHunyuanTo3DRapidJobRequest = models.SubmitHunyuanTo3DRapidJobRequest;
@@ -50,10 +51,13 @@ const Reference = models.Reference;
 const ImageInfo = models.ImageInfo;
 const SubmitHunyuanTo3DProJobResponse = models.SubmitHunyuanTo3DProJobResponse;
 const ErrorMsg = models.ErrorMsg;
+const SubmitConvert3DFormatJobResponse = models.SubmitConvert3DFormatJobResponse;
 const QueryHunyuanTo3DProJobResponse = models.QueryHunyuanTo3DProJobResponse;
 const QueryHunyuan3DPartJobRequest = models.QueryHunyuan3DPartJobRequest;
+const DescribeConvert3DFormatJobRequest = models.DescribeConvert3DFormatJobRequest;
 const TranslationMessage = models.TranslationMessage;
 const QueryHunyuanTo3DRapidJobRequest = models.QueryHunyuanTo3DRapidJobRequest;
+const DescribeConvert3DFormatJobResponse = models.DescribeConvert3DFormatJobResponse;
 const Describe3DSmartTopologyJobRequest = models.Describe3DSmartTopologyJobRequest;
 
 
@@ -101,6 +105,17 @@ This API is used to provide 1 concurrent task by default, which means only 1 sub
     Submit3DSmartTopologyJob(req, cb) {
         let resp = new Submit3DSmartTopologyJobResponse();
         this.request("Submit3DSmartTopologyJob", req, resp, cb);
+    }
+
+    /**
+     * After inputting the 3D model file, the system will automatically convert it to the required format. The maximum supported file size is 200MB.
+     * @param {SubmitConvert3DFormatJobRequest} req
+     * @param {function(string, SubmitConvert3DFormatJobResponse):void} cb
+     * @public
+     */
+    SubmitConvert3DFormatJob(req, cb) {
+        let resp = new SubmitConvert3DFormatJobResponse();
+        this.request("SubmitConvert3DFormatJob", req, resp, cb);
     }
 
     /**
@@ -158,6 +173,17 @@ This API is used to provide 1 concurrent task by default, which means only 1 sub
     Describe3DSmartTopologyJob(req, cb) {
         let resp = new Describe3DSmartTopologyJobResponse();
         this.request("Describe3DSmartTopologyJob", req, resp, cb);
+    }
+
+    /**
+     * According to Convert3DFormatJob, querying the specific results of the model format conversion typically requires the unique JobID corresponding to that task.
+     * @param {DescribeConvert3DFormatJobRequest} req
+     * @param {function(string, DescribeConvert3DFormatJobResponse):void} cb
+     * @public
+     */
+    DescribeConvert3DFormatJob(req, cb) {
+        let resp = new DescribeConvert3DFormatJobResponse();
+        this.request("DescribeConvert3DFormatJob", req, resp, cb);
     }
 
     /**

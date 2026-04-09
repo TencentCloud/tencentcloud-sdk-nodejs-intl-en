@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const UpgradeProxyVersionRequest = models.UpgradeProxyVersionRequest;
+const ModifyInstanceChargeTypeRequest = models.ModifyInstanceChargeTypeRequest;
 const RemoveReplicationGroupRequest = models.RemoveReplicationGroupRequest;
 const UpgradeSmallVersionRequest = models.UpgradeSmallVersionRequest;
 const ModifyInstanceParamsResponse = models.ModifyInstanceParamsResponse;
@@ -220,7 +221,7 @@ const ManualBackupInstanceRequest = models.ManualBackupInstanceRequest;
 const DescribeReplicationGroupResponse = models.DescribeReplicationGroupResponse;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
 const AvailableRegion = models.AvailableRegion;
-const InstanceSet = models.InstanceSet;
+const FailedInstance = models.FailedInstance;
 const ReleaseWanAddressRequest = models.ReleaseWanAddressRequest;
 const CloseSSLResponse = models.CloseSSLResponse;
 const ModifyMaintenanceWindowResponse = models.ModifyMaintenanceWindowResponse;
@@ -250,6 +251,7 @@ const DescribeTendisSlowLogRequest = models.DescribeTendisSlowLogRequest;
 const DescribeProxySlowLogRequest = models.DescribeProxySlowLogRequest;
 const DescribeRedisClustersResponse = models.DescribeRedisClustersResponse;
 const ModifyInstanceBackupModeRequest = models.ModifyInstanceBackupModeRequest;
+const InstanceSet = models.InstanceSet;
 const DescribeProxySlowLogResponse = models.DescribeProxySlowLogResponse;
 const ModifyInstanceReadOnlyRequest = models.ModifyInstanceReadOnlyRequest;
 const DescribeInstanceAccountResponse = models.DescribeInstanceAccountResponse;
@@ -264,6 +266,7 @@ const BackupLimitVpcItem = models.BackupLimitVpcItem;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const StartupInstanceRequest = models.StartupInstanceRequest;
 const HotKeyInfo = models.HotKeyInfo;
+const ModifyInstanceChargeTypeResponse = models.ModifyInstanceChargeTypeResponse;
 const InstanceEnumParam = models.InstanceEnumParam;
 const CreateInstanceAccountResponse = models.CreateInstanceAccountResponse;
 const DescribeInstanceBackupsRequest = models.DescribeInstanceBackupsRequest;
@@ -860,6 +863,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceMonitorBigKeyTypeDist(req, cb) {
         let resp = new DescribeInstanceMonitorBigKeyTypeDistResponse();
         this.request("DescribeInstanceMonitorBigKeyTypeDist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the billing type of an instance.
+     * @param {ModifyInstanceChargeTypeRequest} req
+     * @param {function(string, ModifyInstanceChargeTypeResponse):void} cb
+     * @public
+     */
+    ModifyInstanceChargeType(req, cb) {
+        let resp = new ModifyInstanceChargeTypeResponse();
+        this.request("ModifyInstanceChargeType", req, resp, cb);
     }
 
     /**

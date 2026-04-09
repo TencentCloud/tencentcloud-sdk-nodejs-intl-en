@@ -68,6 +68,48 @@ class UpgradeProxyVersionRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceChargeType request structure.
+ * @class
+ */
+class ModifyInstanceChargeTypeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance ID Array</p><p>Input parameter limitation: Length of batch operation array not exceeding 20</p>
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * <p>Operation type for billing mode change</p><p>Enumeration value:</p><ul><li>PREPAID: Transition from pay-as-you-go to monthly subscription</li><li>POSTPAID: Monthly subscription to pay-as-you-go</li></ul>
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * <p>Purchase duration is required only when InstanceChargeType=PREPAID.</p><p>Valid values: 1 to 36.</p><p>Unit: months.</p>
+         * @type {number || null}
+         */
+        this.Period = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.Period = 'Period' in params ? params.Period : null;
+
+    }
+}
+
+/**
  * RemoveReplicationGroup request structure.
  * @class
  */
@@ -10882,399 +10924,24 @@ class AvailableRegion extends  AbstractModel {
 }
 
 /**
- * List of instance details
+ * Switch failed instance info
  * @class
  */
-class InstanceSet extends  AbstractModel {
+class FailedInstance extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance name.
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Instance ID.
+         * <p>Failed instance ID</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * App ID of a user, which is an application ID that uniquely corresponds to the account ID. Certain Tencent Cloud products use this app ID.
-
-         * @type {number || null}
-         */
-        this.Appid = null;
-
-        /**
-         * Project ID.
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * Region ID.<ul><li>1: Guangzhou.</li><li>4: Shanghai.</li><li>5: Hong Kong (China).</li><li>7: Shanghai Finance.</li><li>8: Beijing.</li><li>9: Singapore.</li><li>11: Shenzhen Finance.</li><li>15: Western US (Silicon Valley).</li><li>16: Chengdu.</li><li>17: Frankfurt.</li><li>18: Seoul.</li><li>19: Chongqing.</li><li>22: Eastern US (Virginia).</li><li>23: Bangkok.</li><li>25: Tokyo.</li></ul>
-         * @type {number || null}
-         */
-        this.RegionId = null;
-
-        /**
-         * Zone ID.
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * VPC ID, for example, 75101.
-         * @type {number || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * ID of the subnet under VPC, for example, 46315.
-         * @type {number || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * Current instance status. <ul><li>0: to be initialized;</li> <li>1: in process;</li> <li>2: running;</li> <li>-2: isolated;</li> <li>-3: to be deleted.</li></ul>
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Instance VIP.
+         * <p>Failure information</p>
          * @type {string || null}
          */
-        this.WanIp = null;
-
-        /**
-         * Instance port number.
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * Instance creation time, for example, in the format of 2020-01-15 10:20:00.
-         * @type {string || null}
-         */
-        this.Createtime = null;
-
-        /**
-         * Instance memory capacity. Unit: MB (1 MB = 1024 KB).
-         * @type {number || null}
-         */
-        this.Size = null;
-
-        /**
-         * This parameter has been deprecated. Obtain the memory capacity used by the instance through the TCOP API [GetMonitorData](https://intl.cloud.tencent.com/document/product/248/31014?from_cn_redirect=1).
-         * @type {number || null}
-         */
-        this.SizeUsed = null;
-
-        /**
-         * Instance type.
-
-- 2: Redis 2.8 memory edition (standard architecture).
-- 3: CKV 3.2 memory edition (standard architecture).
-- 4: CKV 3.2 memory edition (cluster architecture).
-- 5: Redis 2.8 memory edition (standalone).
-- 6: Redis 4.0 memory edition (standard architecture).
-- 7: Redis 4.0 memory edition (cluster architecture).
-- 8: Redis 5.0 memory edition (standard architecture).
-- 9: Redis 5.0 memory edition (cluster architecture).
-- 15: Redis 6.2 memory edition (standard architecture).
-- 16: Redis 6.2 memory edition (cluster architecture).
-- 17: Redis 7.0 memory edition (standard architecture).
-- 18: Redis 7.0 memory edition (cluster architecture).
-- 200: Memcached 1.6 memory edition (cluster architecture).
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * Whether the automatic renewal flag is set for an instance. <ul><li>1: set;</li> <li>0: not set.</li></ul>
-         * @type {number || null}
-         */
-        this.AutoRenewFlag = null;
-
-        /**
-         * Expiration time of a monthly subscription instance.
-         * @type {string || null}
-         */
-        this.DeadlineTime = null;
-
-        /**
-         * Engine. Valid values: Redis Community Edition and Tencent Cloud CKV.
-         * @type {string || null}
-         */
-        this.Engine = null;
-
-        /**
-         * Product type. <ul><li>standalone: Standard Edition;</li> <li>cluster: Cluster Edition.</li></ul>
-         * @type {string || null}
-         */
-        this.ProductType = null;
-
-        /**
-         * VPC ID, for example, vpc-fk33jsf43kgv.
-         * @type {string || null}
-         */
-        this.UniqVpcId = null;
-
-        /**
-         * ID of the subnet under VPC, for example, subnet-fd3j6l35mm0.
-         * @type {string || null}
-         */
-        this.UniqSubnetId = null;
-
-        /**
-         * Billing mode. Only pay-as-you-go billing is supported.
-         * @type {number || null}
-         */
-        this.BillingMode = null;
-
-        /**
-         * Description of the instance running status, for example, running.
-         * @type {string || null}
-         */
-        this.InstanceTitle = null;
-
-        /**
-         * Default termination time of isolated instances, for example, in the format of 2020-02-15 10:20:00. By default, a pay-as-you-go instance will be terminated after 2 hours of isolation, and a monthly subscription instance will be terminated after 7 days.
-         * @type {string || null}
-         */
-        this.OfflineTime = null;
-
-        /**
-         * Sub-status returned for the instance in the process.
- - 0: disk read-write status.
- - 1: disk read-only status because the upper limit is exceeded.
-         * @type {number || null}
-         */
-        this.SubStatus = null;
-
-        /**
-         * Anti-affinity tag.
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Instance node information.
-         * @type {Array.<InstanceNode> || null}
-         */
-        this.InstanceNode = null;
-
-        /**
-         * Shard size.
-         * @type {number || null}
-         */
-        this.RedisShardSize = null;
-
-        /**
-         * Number of shards.
-         * @type {number || null}
-         */
-        this.RedisShardNum = null;
-
-        /**
-         * Number of replicas.
-         * @type {number || null}
-         */
-        this.RedisReplicasNum = null;
-
-        /**
-         * Billing ID.
-         * @type {number || null}
-         */
-        this.PriceId = null;
-
-        /**
-         * Time when an instance starts to be isolated.
-         * @type {string || null}
-         */
-        this.CloseTime = null;
-
-        /**
-         * Read weight of a secondary node.
-- 0: disable read-only replicas.
-- 100: enable read-only replicas.
-         * @type {number || null}
-         */
-        this.SlaveReadWeight = null;
-
-        /**
-         * Information on tags associated with the instance.
-         * @type {Array.<InstanceTagInfo> || null}
-         */
-        this.InstanceTags = null;
-
-        /**
-         * Project name
-         * @type {string || null}
-         */
-        this.ProjectName = null;
-
-        /**
-         * Whether the instance is password-free.<ul><li>true: password-free instance.</li><li>false: password required by the instance.</li></ul>
-         * @type {boolean || null}
-         */
-        this.NoAuth = null;
-
-        /**
-         * Number of client connections.
-         * @type {number || null}
-         */
-        this.ClientLimit = null;
-
-        /**
-         * DTS status. (Internal parameter, which can be ignored.)
-         * @type {number || null}
-         */
-        this.DtsStatus = null;
-
-        /**
-         * Shard bandwidth limit. Unit: MB.
-         * @type {number || null}
-         */
-        this.NetLimit = null;
-
-        /**
-         * Password-free instance flag. (Internal parameter, which can be ignored.)
-         * @type {number || null}
-         */
-        this.PasswordFree = null;
-
-        /**
-         * This parameter encounters a naming issue. It is recommended to use the parameter IPv6 instead. It is an internal parameter and can be ignored.
-         * @type {string || null}
-         */
-        this.Vip6 = null;
-
-        /**
-         * Internal parameter, which can be ignored.
-         * @type {string || null}
-         */
-        this.IPv6 = null;
-
-        /**
-         * Instance read-only flag. (Internal parameter, which can be ignored.)
-         * @type {number || null}
-         */
-        this.ReadOnly = null;
-
-        /**
-         * Internal parameter, which can be ignored.
-         * @type {string || null}
-         */
-        this.RemainBandwidthDuration = null;
-
-        /**
-         * For TencentDB for Redis® instances, ignore this parameter.
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * Monitoring version.<ul><li>1m: monitoring with the 1-minute granularity. Currently, this monitoring granularity is unavailable. For details, see [1-Minute Granularity Will Be Disused](https://intl.cloud.tencent.com/document/product/239/80653?from_cn_redirect=1).</li><li>5s: monitoring with the 5-second granularity.</li></ul>
-         * @type {string || null}
-         */
-        this.MonitorVersion = null;
-
-        /**
-         * Minimum value that can be set for the maximum number of client connections.
-         * @type {number || null}
-         */
-        this.ClientLimitMin = null;
-
-        /**
-         * Maximum value that can be set for the maximum number of client connections.
-         * @type {number || null}
-         */
-        this.ClientLimitMax = null;
-
-        /**
-         * Node details of the instance.
-
-It is returned only for multi-AZ instances.
-         * @type {Array.<RedisNodeInfo> || null}
-         */
-        this.NodeSet = null;
-
-        /**
-         * Region information on the instance. For example, ap-guangzhou.
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * Public network address.
-         * @type {string || null}
-         */
-        this.WanAddress = null;
-
-        /**
-         * Polaris service address for internal use.
-         * @type {string || null}
-         */
-        this.PolarisServer = null;
-
-        /**
-         * CDC cluster ID of TencentDB for Redis®.
-         * @type {string || null}
-         */
-        this.RedisClusterId = null;
-
-        /**
-         * CDC cluster ID.
-         * @type {string || null}
-         */
-        this.DedicatedClusterId = null;
-
-        /**
-         * Product edition.<ul><li>local: local disk.</li><li>cloud: cloud disk edition.</li><li>cdc: CDC cluster edition.</li></ul>
-         * @type {string || null}
-         */
-        this.ProductVersion = null;
-
-        /**
-         * Current proxy version of the instance.
-         * @type {string || null}
-         */
-        this.CurrentProxyVersion = null;
-
-        /**
-         * Current cache minor version of the instance. If the instance is added to a global replication group, the global replication kernel version is displayed.
-         * @type {string || null}
-         */
-        this.CurrentRedisVersion = null;
-
-        /**
-         * Upgradable proxy version for the instance.
-         * @type {string || null}
-         */
-        this.UpgradeProxyVersion = null;
-
-        /**
-         * Upgradable cache minor version for the instance.
-         * @type {string || null}
-         */
-        this.UpgradeRedisVersion = null;
-
-        /**
-         * Backup mode. - SecondLevelBackup: second-level backup. - NormalLevelBackup: ordinary backup.
-         * @type {string || null}
-         */
-        this.BackupMode = null;
-
-        /**
-         * Deletion protection switch. 0: disabled; 1: enabled.
-         * @type {number || null}
-         */
-        this.DeleteProtectionSwitch = null;
+        this.Message = null;
 
     }
 
@@ -11285,91 +10952,8 @@ It is returned only for multi-AZ instances.
         if (!params) {
             return;
         }
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Appid = 'Appid' in params ? params.Appid : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.WanIp = 'WanIp' in params ? params.WanIp : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Createtime = 'Createtime' in params ? params.Createtime : null;
-        this.Size = 'Size' in params ? params.Size : null;
-        this.SizeUsed = 'SizeUsed' in params ? params.SizeUsed : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
-        this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
-        this.Engine = 'Engine' in params ? params.Engine : null;
-        this.ProductType = 'ProductType' in params ? params.ProductType : null;
-        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
-        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
-        this.BillingMode = 'BillingMode' in params ? params.BillingMode : null;
-        this.InstanceTitle = 'InstanceTitle' in params ? params.InstanceTitle : null;
-        this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
-        this.SubStatus = 'SubStatus' in params ? params.SubStatus : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
-
-        if (params.InstanceNode) {
-            this.InstanceNode = new Array();
-            for (let z in params.InstanceNode) {
-                let obj = new InstanceNode();
-                obj.deserialize(params.InstanceNode[z]);
-                this.InstanceNode.push(obj);
-            }
-        }
-        this.RedisShardSize = 'RedisShardSize' in params ? params.RedisShardSize : null;
-        this.RedisShardNum = 'RedisShardNum' in params ? params.RedisShardNum : null;
-        this.RedisReplicasNum = 'RedisReplicasNum' in params ? params.RedisReplicasNum : null;
-        this.PriceId = 'PriceId' in params ? params.PriceId : null;
-        this.CloseTime = 'CloseTime' in params ? params.CloseTime : null;
-        this.SlaveReadWeight = 'SlaveReadWeight' in params ? params.SlaveReadWeight : null;
-
-        if (params.InstanceTags) {
-            this.InstanceTags = new Array();
-            for (let z in params.InstanceTags) {
-                let obj = new InstanceTagInfo();
-                obj.deserialize(params.InstanceTags[z]);
-                this.InstanceTags.push(obj);
-            }
-        }
-        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
-        this.NoAuth = 'NoAuth' in params ? params.NoAuth : null;
-        this.ClientLimit = 'ClientLimit' in params ? params.ClientLimit : null;
-        this.DtsStatus = 'DtsStatus' in params ? params.DtsStatus : null;
-        this.NetLimit = 'NetLimit' in params ? params.NetLimit : null;
-        this.PasswordFree = 'PasswordFree' in params ? params.PasswordFree : null;
-        this.Vip6 = 'Vip6' in params ? params.Vip6 : null;
-        this.IPv6 = 'IPv6' in params ? params.IPv6 : null;
-        this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
-        this.RemainBandwidthDuration = 'RemainBandwidthDuration' in params ? params.RemainBandwidthDuration : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.MonitorVersion = 'MonitorVersion' in params ? params.MonitorVersion : null;
-        this.ClientLimitMin = 'ClientLimitMin' in params ? params.ClientLimitMin : null;
-        this.ClientLimitMax = 'ClientLimitMax' in params ? params.ClientLimitMax : null;
-
-        if (params.NodeSet) {
-            this.NodeSet = new Array();
-            for (let z in params.NodeSet) {
-                let obj = new RedisNodeInfo();
-                obj.deserialize(params.NodeSet[z]);
-                this.NodeSet.push(obj);
-            }
-        }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.WanAddress = 'WanAddress' in params ? params.WanAddress : null;
-        this.PolarisServer = 'PolarisServer' in params ? params.PolarisServer : null;
-        this.RedisClusterId = 'RedisClusterId' in params ? params.RedisClusterId : null;
-        this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
-        this.ProductVersion = 'ProductVersion' in params ? params.ProductVersion : null;
-        this.CurrentProxyVersion = 'CurrentProxyVersion' in params ? params.CurrentProxyVersion : null;
-        this.CurrentRedisVersion = 'CurrentRedisVersion' in params ? params.CurrentRedisVersion : null;
-        this.UpgradeProxyVersion = 'UpgradeProxyVersion' in params ? params.UpgradeProxyVersion : null;
-        this.UpgradeRedisVersion = 'UpgradeRedisVersion' in params ? params.UpgradeRedisVersion : null;
-        this.BackupMode = 'BackupMode' in params ? params.BackupMode : null;
-        this.DeleteProtectionSwitch = 'DeleteProtectionSwitch' in params ? params.DeleteProtectionSwitch : null;
+        this.Message = 'Message' in params ? params.Message : null;
 
     }
 }
@@ -12785,6 +12369,499 @@ class ModifyInstanceBackupModeRequest extends  AbstractModel {
 }
 
 /**
+ * List of instance details
+ * @class
+ */
+class InstanceSet extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance name.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * App ID of a user, which is an application ID that uniquely corresponds to the account ID. Certain Tencent Cloud products use this app ID.
+
+         * @type {number || null}
+         */
+        this.Appid = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Region ID.<ul><li>1: Guangzhou.</li><li>4: Shanghai.</li><li>5: Hong Kong (China).</li><li>7: Shanghai Finance.</li><li>8: Beijing.</li><li>9: Singapore.</li><li>11: Shenzhen Finance.</li><li>15: Western US (Silicon Valley).</li><li>16: Chengdu.</li><li>17: Frankfurt.</li><li>18: Seoul.</li><li>19: Chongqing.</li><li>22: Eastern US (Virginia).</li><li>23: Bangkok.</li><li>25: Tokyo.</li></ul>
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Zone ID.
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * VPC ID, for example, 75101.
+         * @type {number || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * ID of the subnet under VPC, for example, 46315.
+         * @type {number || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Current instance status. <ul><li>0: to be initialized;</li> <li>1: in process;</li> <li>2: running;</li> <li>-2: isolated;</li> <li>-3: to be deleted.</li></ul>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Instance VIP.
+         * @type {string || null}
+         */
+        this.WanIp = null;
+
+        /**
+         * Instance port number.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Instance creation time, for example, in the format of 2020-01-15 10:20:00.
+         * @type {string || null}
+         */
+        this.Createtime = null;
+
+        /**
+         * Instance memory capacity. Unit: MB (1 MB = 1024 KB).
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * This parameter has been deprecated. Obtain the memory capacity used by the instance through the TCOP API [GetMonitorData](https://intl.cloud.tencent.com/document/product/248/31014?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.SizeUsed = null;
+
+        /**
+         * Instance type.
+
+- 2: Redis 2.8 memory edition (standard architecture).
+- 3: CKV 3.2 memory edition (standard architecture).
+- 4: CKV 3.2 memory edition (cluster architecture).
+- 5: Redis 2.8 memory edition (standalone).
+- 6: Redis 4.0 memory edition (standard architecture).
+- 7: Redis 4.0 memory edition (cluster architecture).
+- 8: Redis 5.0 memory edition (standard architecture).
+- 9: Redis 5.0 memory edition (cluster architecture).
+- 15: Redis 6.2 memory edition (standard architecture).
+- 16: Redis 6.2 memory edition (cluster architecture).
+- 17: Redis 7.0 memory edition (standard architecture).
+- 18: Redis 7.0 memory edition (cluster architecture).
+- 200: Memcached 1.6 memory edition (cluster architecture).
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Whether the automatic renewal flag is set for an instance. <ul><li>1: set;</li> <li>0: not set.</li></ul>
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Expiration time of a monthly subscription instance.
+         * @type {string || null}
+         */
+        this.DeadlineTime = null;
+
+        /**
+         * Engine. Valid values: Redis Community Edition and Tencent Cloud CKV.
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * Product type. <ul><li>standalone: Standard Edition;</li> <li>cluster: Cluster Edition.</li></ul>
+         * @type {string || null}
+         */
+        this.ProductType = null;
+
+        /**
+         * VPC ID, for example, vpc-fk33jsf43kgv.
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * ID of the subnet under VPC, for example, subnet-fd3j6l35mm0.
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * Billing mode. Only pay-as-you-go billing is supported.
+         * @type {number || null}
+         */
+        this.BillingMode = null;
+
+        /**
+         * Description of the instance running status, for example, running.
+         * @type {string || null}
+         */
+        this.InstanceTitle = null;
+
+        /**
+         * Default termination time of isolated instances, for example, in the format of 2020-02-15 10:20:00. By default, a pay-as-you-go instance will be terminated after 2 hours of isolation, and a monthly subscription instance will be terminated after 7 days.
+         * @type {string || null}
+         */
+        this.OfflineTime = null;
+
+        /**
+         * Sub-status returned for the instance in the process.
+ - 0: disk read-write status.
+ - 1: disk read-only status because the upper limit is exceeded.
+         * @type {number || null}
+         */
+        this.SubStatus = null;
+
+        /**
+         * Anti-affinity tag.
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Instance node information.
+         * @type {Array.<InstanceNode> || null}
+         */
+        this.InstanceNode = null;
+
+        /**
+         * Shard size.
+         * @type {number || null}
+         */
+        this.RedisShardSize = null;
+
+        /**
+         * Number of shards.
+         * @type {number || null}
+         */
+        this.RedisShardNum = null;
+
+        /**
+         * Number of replicas.
+         * @type {number || null}
+         */
+        this.RedisReplicasNum = null;
+
+        /**
+         * Billing ID.
+         * @type {number || null}
+         */
+        this.PriceId = null;
+
+        /**
+         * Time when an instance starts to be isolated.
+         * @type {string || null}
+         */
+        this.CloseTime = null;
+
+        /**
+         * Read weight of a secondary node.
+- 0: disable read-only replicas.
+- 100: enable read-only replicas.
+         * @type {number || null}
+         */
+        this.SlaveReadWeight = null;
+
+        /**
+         * Information on tags associated with the instance.
+         * @type {Array.<InstanceTagInfo> || null}
+         */
+        this.InstanceTags = null;
+
+        /**
+         * Project name
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * Whether the instance is password-free.<ul><li>true: password-free instance.</li><li>false: password required by the instance.</li></ul>
+         * @type {boolean || null}
+         */
+        this.NoAuth = null;
+
+        /**
+         * Number of client connections.
+         * @type {number || null}
+         */
+        this.ClientLimit = null;
+
+        /**
+         * DTS status. (Internal parameter, which can be ignored.)
+         * @type {number || null}
+         */
+        this.DtsStatus = null;
+
+        /**
+         * Shard bandwidth limit. Unit: MB.
+         * @type {number || null}
+         */
+        this.NetLimit = null;
+
+        /**
+         * Password-free instance flag. (Internal parameter, which can be ignored.)
+         * @type {number || null}
+         */
+        this.PasswordFree = null;
+
+        /**
+         * This parameter encounters a naming issue. It is recommended to use the parameter IPv6 instead. It is an internal parameter and can be ignored.
+         * @type {string || null}
+         */
+        this.Vip6 = null;
+
+        /**
+         * Internal parameter, which can be ignored.
+         * @type {string || null}
+         */
+        this.IPv6 = null;
+
+        /**
+         * Instance read-only flag. (Internal parameter, which can be ignored.)
+         * @type {number || null}
+         */
+        this.ReadOnly = null;
+
+        /**
+         * Internal parameter, which can be ignored.
+         * @type {string || null}
+         */
+        this.RemainBandwidthDuration = null;
+
+        /**
+         * For TencentDB for Redis® instances, ignore this parameter.
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Monitoring version.<ul><li>1m: monitoring with the 1-minute granularity. Currently, this monitoring granularity is unavailable. For details, see [1-Minute Granularity Will Be Disused](https://intl.cloud.tencent.com/document/product/239/80653?from_cn_redirect=1).</li><li>5s: monitoring with the 5-second granularity.</li></ul>
+         * @type {string || null}
+         */
+        this.MonitorVersion = null;
+
+        /**
+         * Minimum value that can be set for the maximum number of client connections.
+         * @type {number || null}
+         */
+        this.ClientLimitMin = null;
+
+        /**
+         * Maximum value that can be set for the maximum number of client connections.
+         * @type {number || null}
+         */
+        this.ClientLimitMax = null;
+
+        /**
+         * Node details of the instance.
+
+It is returned only for multi-AZ instances.
+         * @type {Array.<RedisNodeInfo> || null}
+         */
+        this.NodeSet = null;
+
+        /**
+         * Region information on the instance. For example, ap-guangzhou.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Public network address.
+         * @type {string || null}
+         */
+        this.WanAddress = null;
+
+        /**
+         * Polaris service address for internal use.
+         * @type {string || null}
+         */
+        this.PolarisServer = null;
+
+        /**
+         * CDC cluster ID of TencentDB for Redis®.
+         * @type {string || null}
+         */
+        this.RedisClusterId = null;
+
+        /**
+         * CDC cluster ID.
+         * @type {string || null}
+         */
+        this.DedicatedClusterId = null;
+
+        /**
+         * Product edition.<ul><li>local: local disk.</li><li>cloud: cloud disk edition.</li><li>cdc: CDC cluster edition.</li></ul>
+         * @type {string || null}
+         */
+        this.ProductVersion = null;
+
+        /**
+         * Current proxy version of the instance.
+         * @type {string || null}
+         */
+        this.CurrentProxyVersion = null;
+
+        /**
+         * Current cache minor version of the instance. If the instance is added to a global replication group, the global replication kernel version is displayed.
+         * @type {string || null}
+         */
+        this.CurrentRedisVersion = null;
+
+        /**
+         * Upgradable proxy version for the instance.
+         * @type {string || null}
+         */
+        this.UpgradeProxyVersion = null;
+
+        /**
+         * Upgradable cache minor version for the instance.
+         * @type {string || null}
+         */
+        this.UpgradeRedisVersion = null;
+
+        /**
+         * Backup mode. - SecondLevelBackup: second-level backup. - NormalLevelBackup: ordinary backup.
+         * @type {string || null}
+         */
+        this.BackupMode = null;
+
+        /**
+         * Deletion protection switch. 0: disabled; 1: enabled.
+         * @type {number || null}
+         */
+        this.DeleteProtectionSwitch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Appid = 'Appid' in params ? params.Appid : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.WanIp = 'WanIp' in params ? params.WanIp : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Createtime = 'Createtime' in params ? params.Createtime : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.SizeUsed = 'SizeUsed' in params ? params.SizeUsed : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.ProductType = 'ProductType' in params ? params.ProductType : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.BillingMode = 'BillingMode' in params ? params.BillingMode : null;
+        this.InstanceTitle = 'InstanceTitle' in params ? params.InstanceTitle : null;
+        this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
+        this.SubStatus = 'SubStatus' in params ? params.SubStatus : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+
+        if (params.InstanceNode) {
+            this.InstanceNode = new Array();
+            for (let z in params.InstanceNode) {
+                let obj = new InstanceNode();
+                obj.deserialize(params.InstanceNode[z]);
+                this.InstanceNode.push(obj);
+            }
+        }
+        this.RedisShardSize = 'RedisShardSize' in params ? params.RedisShardSize : null;
+        this.RedisShardNum = 'RedisShardNum' in params ? params.RedisShardNum : null;
+        this.RedisReplicasNum = 'RedisReplicasNum' in params ? params.RedisReplicasNum : null;
+        this.PriceId = 'PriceId' in params ? params.PriceId : null;
+        this.CloseTime = 'CloseTime' in params ? params.CloseTime : null;
+        this.SlaveReadWeight = 'SlaveReadWeight' in params ? params.SlaveReadWeight : null;
+
+        if (params.InstanceTags) {
+            this.InstanceTags = new Array();
+            for (let z in params.InstanceTags) {
+                let obj = new InstanceTagInfo();
+                obj.deserialize(params.InstanceTags[z]);
+                this.InstanceTags.push(obj);
+            }
+        }
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.NoAuth = 'NoAuth' in params ? params.NoAuth : null;
+        this.ClientLimit = 'ClientLimit' in params ? params.ClientLimit : null;
+        this.DtsStatus = 'DtsStatus' in params ? params.DtsStatus : null;
+        this.NetLimit = 'NetLimit' in params ? params.NetLimit : null;
+        this.PasswordFree = 'PasswordFree' in params ? params.PasswordFree : null;
+        this.Vip6 = 'Vip6' in params ? params.Vip6 : null;
+        this.IPv6 = 'IPv6' in params ? params.IPv6 : null;
+        this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
+        this.RemainBandwidthDuration = 'RemainBandwidthDuration' in params ? params.RemainBandwidthDuration : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.MonitorVersion = 'MonitorVersion' in params ? params.MonitorVersion : null;
+        this.ClientLimitMin = 'ClientLimitMin' in params ? params.ClientLimitMin : null;
+        this.ClientLimitMax = 'ClientLimitMax' in params ? params.ClientLimitMax : null;
+
+        if (params.NodeSet) {
+            this.NodeSet = new Array();
+            for (let z in params.NodeSet) {
+                let obj = new RedisNodeInfo();
+                obj.deserialize(params.NodeSet[z]);
+                this.NodeSet.push(obj);
+            }
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.WanAddress = 'WanAddress' in params ? params.WanAddress : null;
+        this.PolarisServer = 'PolarisServer' in params ? params.PolarisServer : null;
+        this.RedisClusterId = 'RedisClusterId' in params ? params.RedisClusterId : null;
+        this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
+        this.ProductVersion = 'ProductVersion' in params ? params.ProductVersion : null;
+        this.CurrentProxyVersion = 'CurrentProxyVersion' in params ? params.CurrentProxyVersion : null;
+        this.CurrentRedisVersion = 'CurrentRedisVersion' in params ? params.CurrentRedisVersion : null;
+        this.UpgradeProxyVersion = 'UpgradeProxyVersion' in params ? params.UpgradeProxyVersion : null;
+        this.UpgradeRedisVersion = 'UpgradeRedisVersion' in params ? params.UpgradeRedisVersion : null;
+        this.BackupMode = 'BackupMode' in params ? params.BackupMode : null;
+        this.DeleteProtectionSwitch = 'DeleteProtectionSwitch' in params ? params.DeleteProtectionSwitch : null;
+
+    }
+}
+
+/**
  * DescribeProxySlowLog response structure.
  * @class
  */
@@ -13357,6 +13434,49 @@ class HotKeyInfo extends  AbstractModel {
         this.Key = 'Key' in params ? params.Key : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
+ * ModifyInstanceChargeType response structure.
+ * @class
+ */
+class ModifyInstanceChargeTypeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Summary of failed instance modification info</p>
+         * @type {Array.<FailedInstance> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FailedInstanceIds) {
+            this.FailedInstanceIds = new Array();
+            for (let z in params.FailedInstanceIds) {
+                let obj = new FailedInstance();
+                obj.deserialize(params.FailedInstanceIds[z]);
+                this.FailedInstanceIds.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14805,6 +14925,7 @@ class InstanceSlowlogDetail extends  AbstractModel {
 
 module.exports = {
     UpgradeProxyVersionRequest: UpgradeProxyVersionRequest,
+    ModifyInstanceChargeTypeRequest: ModifyInstanceChargeTypeRequest,
     RemoveReplicationGroupRequest: RemoveReplicationGroupRequest,
     UpgradeSmallVersionRequest: UpgradeSmallVersionRequest,
     ModifyInstanceParamsResponse: ModifyInstanceParamsResponse,
@@ -15008,7 +15129,7 @@ module.exports = {
     DescribeReplicationGroupResponse: DescribeReplicationGroupResponse,
     ModifyParamTemplateRequest: ModifyParamTemplateRequest,
     AvailableRegion: AvailableRegion,
-    InstanceSet: InstanceSet,
+    FailedInstance: FailedInstance,
     ReleaseWanAddressRequest: ReleaseWanAddressRequest,
     CloseSSLResponse: CloseSSLResponse,
     ModifyMaintenanceWindowResponse: ModifyMaintenanceWindowResponse,
@@ -15038,6 +15159,7 @@ module.exports = {
     DescribeProxySlowLogRequest: DescribeProxySlowLogRequest,
     DescribeRedisClustersResponse: DescribeRedisClustersResponse,
     ModifyInstanceBackupModeRequest: ModifyInstanceBackupModeRequest,
+    InstanceSet: InstanceSet,
     DescribeProxySlowLogResponse: DescribeProxySlowLogResponse,
     ModifyInstanceReadOnlyRequest: ModifyInstanceReadOnlyRequest,
     DescribeInstanceAccountResponse: DescribeInstanceAccountResponse,
@@ -15052,6 +15174,7 @@ module.exports = {
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     StartupInstanceRequest: StartupInstanceRequest,
     HotKeyInfo: HotKeyInfo,
+    ModifyInstanceChargeTypeResponse: ModifyInstanceChargeTypeResponse,
     InstanceEnumParam: InstanceEnumParam,
     CreateInstanceAccountResponse: CreateInstanceAccountResponse,
     DescribeInstanceBackupsRequest: DescribeInstanceBackupsRequest,

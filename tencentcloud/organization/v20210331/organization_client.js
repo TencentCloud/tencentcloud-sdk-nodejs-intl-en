@@ -25,6 +25,7 @@ const ListGroupMembersRequest = models.ListGroupMembersRequest;
 const RoleConfigurationProvisionings = models.RoleConfigurationProvisionings;
 const UpdatePolicyRequest = models.UpdatePolicyRequest;
 const DescribeShareUnitResourcesResponse = models.DescribeShareUnitResourcesResponse;
+const RoleConfiguration = models.RoleConfiguration;
 const DescribeOrganizationMemberEmailBindResponse = models.DescribeOrganizationMemberEmailBindResponse;
 const EnablePolicyTypeResponse = models.EnablePolicyTypeResponse;
 const ListTargetsForPolicyResponse = models.ListTargetsForPolicyResponse;
@@ -96,6 +97,7 @@ const UpdateUserResponse = models.UpdateUserResponse;
 const RemoveUserFromGroupRequest = models.RemoveUserFromGroupRequest;
 const AddPermissionPolicyToRoleConfigurationRequest = models.AddPermissionPolicyToRoleConfigurationRequest;
 const OrgPermission = models.OrgPermission;
+const ListPoliciesResponse = models.ListPoliciesResponse;
 const BindOrganizationMemberAuthAccountRequest = models.BindOrganizationMemberAuthAccountRequest;
 const DescribeShareUnitsResponse = models.DescribeShareUnitsResponse;
 const SAMLIdentityProviderConfiguration = models.SAMLIdentityProviderConfiguration;
@@ -205,7 +207,7 @@ const DescribeShareUnitResourcesRequest = models.DescribeShareUnitResourcesReque
 const RemoveUserFromGroupResponse = models.RemoveUserFromGroupResponse;
 const GetGroupResponse = models.GetGroupResponse;
 const GetProvisioningTaskStatusResponse = models.GetProvisioningTaskStatusResponse;
-const OrgMemberPolicy = models.OrgMemberPolicy;
+const ListPolicyNode = models.ListPolicyNode;
 const ResourceTagMapping = models.ResourceTagMapping;
 const CreateOrganizationMemberPolicyResponse = models.CreateOrganizationMemberPolicyResponse;
 const UpdateSCIMSynchronizationStatusRequest = models.UpdateSCIMSynchronizationStatusRequest;
@@ -222,7 +224,7 @@ const OpenIdentityCenterResponse = models.OpenIdentityCenterResponse;
 const ListUsersRequest = models.ListUsersRequest;
 const DescribeOrganizationMemberAuthIdentitiesResponse = models.DescribeOrganizationMemberAuthIdentitiesResponse;
 const CreateRoleAssignmentResponse = models.CreateRoleAssignmentResponse;
-const RoleConfiguration = models.RoleConfiguration;
+const OrgMemberPolicy = models.OrgMemberPolicy;
 const CreateUserRequest = models.CreateUserRequest;
 const QuitOrganizationResponse = models.QuitOrganizationResponse;
 const DescribeResourceToShareMemberResponse = models.DescribeResourceToShareMemberResponse;
@@ -233,7 +235,7 @@ const ListExternalSAMLIdPCertificatesRequest = models.ListExternalSAMLIdPCertifi
 const DeleteOrganizationIdentityResponse = models.DeleteOrganizationIdentityResponse;
 const DescribeOrganizationMemberEmailBindRequest = models.DescribeOrganizationMemberEmailBindRequest;
 const RemovePermissionPolicyFromRoleConfigurationResponse = models.RemovePermissionPolicyFromRoleConfigurationResponse;
-const ListRoleConfigurationsResponse = models.ListRoleConfigurationsResponse;
+const ListPoliciesRequest = models.ListPoliciesRequest;
 const BindOrganizationPolicySubAccountRequest = models.BindOrganizationPolicySubAccountRequest;
 const OrgMemberAuthAccount = models.OrgMemberAuthAccount;
 const UpdateOrganizationMembersPolicyRequest = models.UpdateOrganizationMembersPolicyRequest;
@@ -271,7 +273,7 @@ const AddUserToGroupRequest = models.AddUserToGroupRequest;
 const CreateOrganizationIdentityResponse = models.CreateOrganizationIdentityResponse;
 const DescribeOrganizationMembersRequest = models.DescribeOrganizationMembersRequest;
 const GetZoneSAMLServiceProviderInfoRequest = models.GetZoneSAMLServiceProviderInfoRequest;
-const ZoneStatistics = models.ZoneStatistics;
+const ListRoleConfigurationsResponse = models.ListRoleConfigurationsResponse;
 const ListSCIMCredentialsResponse = models.ListSCIMCredentialsResponse;
 const DescribeOrganizationNodesRequest = models.DescribeOrganizationNodesRequest;
 const ShareResourceToMember = models.ShareResourceToMember;
@@ -301,6 +303,7 @@ const ListTargetsForPolicyRequest = models.ListTargetsForPolicyRequest;
 const DeleteOrganizationIdentityRequest = models.DeleteOrganizationIdentityRequest;
 const UpdateOrganizationNodeRequest = models.UpdateOrganizationNodeRequest;
 const ShareUnitNode = models.ShareUnitNode;
+const ZoneStatistics = models.ZoneStatistics;
 const DeleteOrganizationNodesResponse = models.DeleteOrganizationNodesResponse;
 const AddUserToGroupResponse = models.AddUserToGroupResponse;
 const ProductResource = models.ProductResource;
@@ -1648,6 +1651,17 @@ class OrganizationClient extends AbstractClient {
     ListTargetsForPolicy(req, cb) {
         let resp = new ListTargetsForPolicyResponse();
         this.request("ListTargetsForPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query and view the policy list data.
+     * @param {ListPoliciesRequest} req
+     * @param {function(string, ListPoliciesResponse):void} cb
+     * @public
+     */
+    ListPolicies(req, cb) {
+        let resp = new ListPoliciesResponse();
+        this.request("ListPolicies", req, resp, cb);
     }
 
     /**

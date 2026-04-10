@@ -58,6 +58,7 @@ const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
 const DescribeCustomerOwnVoucherListResponse = models.DescribeCustomerOwnVoucherListResponse;
 const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
+const DescribeCustomerVoucherUsageDetailsResponse = models.DescribeCustomerVoucherUsageDetailsResponse;
 const QueryInvitationInfoData = models.QueryInvitationInfoData;
 const QuerySubAgentsDetailV2Request = models.QuerySubAgentsDetailV2Request;
 const GetCountryCodesResponse = models.GetCountryCodesResponse;
@@ -67,7 +68,7 @@ const QueryT1IndirectCustomersDetailResponse = models.QueryT1IndirectCustomersDe
 const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
 const GetCountryCodesRequest = models.GetCountryCodesRequest;
 const ForceQNResponse = models.ForceQNResponse;
-const QueryPendingCustomersItem = models.QueryPendingCustomersItem;
+const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
 const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
 const DescribeCustomerVoucherListRequest = models.DescribeCustomerVoucherListRequest;
@@ -88,12 +89,13 @@ const QueryAccountVerificationStatusRequest = models.QueryAccountVerificationSta
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
 const QueryPendingClientsV2Response = models.QueryPendingClientsV2Response;
 const AllocateCreditPoolResponse = models.AllocateCreditPoolResponse;
-const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
+const QueryPendingCustomersItem = models.QueryPendingCustomersItem;
 const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
 const DescribeCustomerUinResponse = models.DescribeCustomerUinResponse;
 const DescribeCustomerBillDetailByDayResponse = models.DescribeCustomerBillDetailByDayResponse;
 const ApproveClientApplyRequest = models.ApproveClientApplyRequest;
 const ApproveSubAgentApplyRequest = models.ApproveSubAgentApplyRequest;
+const DescribeCustomerVoucherUsageDetailsRequest = models.DescribeCustomerVoucherUsageDetailsRequest;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const QueryCustomersCreditData = models.QueryCustomersCreditData;
 const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
@@ -121,6 +123,7 @@ const DescribeCustomerInfoRequest = models.DescribeCustomerInfoRequest;
 const QueryPolicyProductListByCodeResponse = models.QueryPolicyProductListByCodeResponse;
 const QueryVoucherListByUinVoucherItem = models.QueryVoucherListByUinVoucherItem;
 const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
+const UsageDetail = models.UsageDetail;
 const QueryPendingSubAgentsV2Response = models.QueryPendingSubAgentsV2Response;
 const DescribeCustomerBillDetailByDayRequest = models.DescribeCustomerBillDetailByDayRequest;
 const BillDetailData = models.BillDetailData;
@@ -378,6 +381,18 @@ Callable roles: Distributor, Second-level reseller, Reseller
     }
 
     /**
+     * This API is used to query the daily bill expenditure of customer by resellers.
+Invocation Role: first-level reseller, second-level reseller, reseller.
+     * @param {DescribeCustomerBillDetailByDayRequest} req
+     * @param {function(string, DescribeCustomerBillDetailByDayResponse):void} cb
+     * @public
+     */
+    DescribeCustomerBillDetailByDay(req, cb) {
+        let resp = new DescribeCustomerBillDetailByDayResponse();
+        this.request("DescribeCustomerBillDetailByDay", req, resp, cb);
+    }
+
+    /**
      * This API is used to perform operations. Application for allowlist is required before usage. If needed, contact your business representative to request allowlisting. The specific usage process is as follows;.
 This API is used to create an invitation link. You can send the invitation link to your designated email address.
 2. Customers need to click the invitation link in the mailbox, fill in and submit relevant information.
@@ -545,15 +560,15 @@ Callable roles: Reseller, Distributor, Second-level reseller
     }
 
     /**
-     * This API is used to query the daily bill expenditure of customer by resellers.
-Invocation Role: first-level reseller, second-level reseller, reseller.
-     * @param {DescribeCustomerBillDetailByDayRequest} req
-     * @param {function(string, DescribeCustomerBillDetailByDayResponse):void} cb
+     * Description: The current API is used to query the usage details of reseller's customer vouchers by Reseller, Second-level Reseller or Distributor.
+Reseller, Second-level Reseller or Distributor can call this API.
+     * @param {DescribeCustomerVoucherUsageDetailsRequest} req
+     * @param {function(string, DescribeCustomerVoucherUsageDetailsResponse):void} cb
      * @public
      */
-    DescribeCustomerBillDetailByDay(req, cb) {
-        let resp = new DescribeCustomerBillDetailByDayResponse();
-        this.request("DescribeCustomerBillDetailByDay", req, resp, cb);
+    DescribeCustomerVoucherUsageDetails(req, cb) {
+        let resp = new DescribeCustomerVoucherUsageDetailsResponse();
+        this.request("DescribeCustomerVoucherUsageDetails", req, resp, cb);
     }
 
     /**

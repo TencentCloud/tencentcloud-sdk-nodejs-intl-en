@@ -65,12 +65,14 @@ const DescribePlayErrorCodeDetailInfoListRequest = models.DescribePlayErrorCodeD
 const DeleteLivePullStreamTaskRequest = models.DeleteLivePullStreamTaskRequest;
 const CreateLiveTimeShiftRuleRequest = models.CreateLiveTimeShiftRuleRequest;
 const CommonMixOutputParams = models.CommonMixOutputParams;
+const DescribePushBandwidthAndFluxListResponse = models.DescribePushBandwidthAndFluxListResponse;
 const DescribeUploadStreamNumsRequest = models.DescribeUploadStreamNumsRequest;
 const DescribeLiveSnapshotRulesResponse = models.DescribeLiveSnapshotRulesResponse;
 const DescribeLiveTranscodeDetailInfoResponse = models.DescribeLiveTranscodeDetailInfoResponse;
 const DescribeLiveDomainRequest = models.DescribeLiveDomainRequest;
 const AuthenticateDomainOwnerResponse = models.AuthenticateDomainOwnerResponse;
 const DeleteLiveTranscodeRuleRequest = models.DeleteLiveTranscodeRuleRequest;
+const DescribePushBandwidthAndFluxListRequest = models.DescribePushBandwidthAndFluxListRequest;
 const CreateLiveRecordRuleRequest = models.CreateLiveRecordRuleRequest;
 const DescribeLiveSnapshotTemplatesRequest = models.DescribeLiveSnapshotTemplatesRequest;
 const AddLiveWatermarkResponse = models.AddLiveWatermarkResponse;
@@ -1340,6 +1342,17 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     DescribeLiveStreamPublishedList(req, cb) {
         let resp = new DescribeLiveStreamPublishedListResponse();
         this.request("DescribeLiveStreamPublishedList", req, resp, cb);
+    }
+
+    /**
+     * Live Streaming Push Bandwidth and Traffic Data Query. The push billing will first compare the global push usage with the global playback usage. If the billing conditions are met, billing will be issued based on the usage in each region. For details, refer to the Billing Documentation.(https://cloud.tencent.com/document/product/267/34175)
+     * @param {DescribePushBandwidthAndFluxListRequest} req
+     * @param {function(string, DescribePushBandwidthAndFluxListResponse):void} cb
+     * @public
+     */
+    DescribePushBandwidthAndFluxList(req, cb) {
+        let resp = new DescribePushBandwidthAndFluxListResponse();
+        this.request("DescribePushBandwidthAndFluxList", req, resp, cb);
     }
 
     /**

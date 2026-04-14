@@ -19,17 +19,21 @@ const AbstractClient = require('../../common/abstract_client')
 const GetLivenessResultResponse = models.GetLivenessResultResponse;
 const GetFaceIdTokenIntlResponse = models.GetFaceIdTokenIntlResponse;
 const InternationalIDPassport = models.InternationalIDPassport;
+const ApplySdkVerificationTokenRequest = models.ApplySdkVerificationTokenRequest;
+const PhilippinesVoteID = models.PhilippinesVoteID;
 const GetSdkVerificationResultResponse = models.GetSdkVerificationResultResponse;
 const GetSdkVerificationResultRequest = models.GetSdkVerificationResultRequest;
-const Encryption = models.Encryption;
+const ApplyWebVerificationBizTokenIntlResponse = models.ApplyWebVerificationBizTokenIntlResponse;
 const AttackRiskDetail = models.AttackRiskDetail;
-const ExtraInfo = models.ExtraInfo;
+const Encryption = models.Encryption;
 const CreateUploadUrlResponse = models.CreateUploadUrlResponse;
 const NormalMLIDCard = models.NormalMLIDCard;
-const EditDetail = models.EditDetail;
+const DetectReflectLivenessAndCompareResponse = models.DetectReflectLivenessAndCompareResponse;
 const DetectReflectLivenessAndCompareRequest = models.DetectReflectLivenessAndCompareRequest;
 const GetFaceIdTokenIntlRequest = models.GetFaceIdTokenIntlRequest;
 const JapanIDCard = models.JapanIDCard;
+const BankCardVerificationRequest = models.BankCardVerificationRequest;
+const EditDetail = models.EditDetail;
 const NigeriaDrivingLicense = models.NigeriaDrivingLicense;
 const PakistanDrivingLicense = models.PakistanDrivingLicense;
 const ThailandIDCard = models.ThailandIDCard;
@@ -41,27 +45,30 @@ const SingaporeIDCard = models.SingaporeIDCard;
 const IndonesiaDrivingLicense = models.IndonesiaDrivingLicense;
 const GetFaceIdResultIntlRequest = models.GetFaceIdResultIntlRequest;
 const NormalCardInfo = models.NormalCardInfo;
-const ApplySdkVerificationTokenRequest = models.ApplySdkVerificationTokenRequest;
+const BankCard4EVerificationResponse = models.BankCard4EVerificationResponse;
 const GenerateReflectSequenceRequest = models.GenerateReflectSequenceRequest;
 const BangladeshIDCard = models.BangladeshIDCard;
+const VideoLivenessCompareResponse = models.VideoLivenessCompareResponse;
 const PhilippinesSSSID = models.PhilippinesSSSID;
 const CardVerifyResult = models.CardVerifyResult;
-const TaiWanIDCard = models.TaiWanIDCard;
-const DetectAIFakeFacesRequest = models.DetectAIFakeFacesRequest;
+const BankCard2EVerificationRequest = models.BankCard2EVerificationRequest;
+const Address = models.Address;
 const PakistanIDCard = models.PakistanIDCard;
 const ApplyLivenessTokenResponse = models.ApplyLivenessTokenResponse;
 const GetLivenessResultRequest = models.GetLivenessResultRequest;
 const CardInfo = models.CardInfo;
-const PhilippinesVoteID = models.PhilippinesVoteID;
+const ExtraInfo = models.ExtraInfo;
 const WebVerificationConfigIntl = models.WebVerificationConfigIntl;
 const MainlandIDCard = models.MainlandIDCard;
-const Address = models.Address;
+const DetectAIFakeFacesRequest = models.DetectAIFakeFacesRequest;
+const TaiWanIDCard = models.TaiWanIDCard;
 const RetrievalLivenessExtraInfo = models.RetrievalLivenessExtraInfo;
 const NigeriaIDCard = models.NigeriaIDCard;
 const NormalIndonesiaIDCard = models.NormalIndonesiaIDCard;
 const CompareFaceLivenessResponse = models.CompareFaceLivenessResponse;
-const IndonesiaIDCard = models.IndonesiaIDCard;
+const BankCardVerificationResponse = models.BankCardVerificationResponse;
 const ApplySdkVerificationTokenResponse = models.ApplySdkVerificationTokenResponse;
+const BankCard4EVerificationRequest = models.BankCard4EVerificationRequest;
 const CreateUploadUrlRequest = models.CreateUploadUrlRequest;
 const ApplyWebVerificationBizTokenIntlRequest = models.ApplyWebVerificationBizTokenIntlRequest;
 const NormalHKIDCard = models.NormalHKIDCard;
@@ -69,20 +76,21 @@ const CompareFaceLivenessRequest = models.CompareFaceLivenessRequest;
 const ApplyLivenessTokenRequest = models.ApplyLivenessTokenRequest;
 const NormalThailandIDCard = models.NormalThailandIDCard;
 const PhilippinesDrivingLicense = models.PhilippinesDrivingLicense;
-const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
+const VideoLivenessCompareRequest = models.VideoLivenessCompareRequest;
 const GenerateReflectSequenceResponse = models.GenerateReflectSequenceResponse;
 const HMTPermit = models.HMTPermit;
-const ApplyWebVerificationBizTokenIntlResponse = models.ApplyWebVerificationBizTokenIntlResponse;
+const IndonesiaIDCard = models.IndonesiaIDCard;
 const GeneralCard = models.GeneralCard;
 const LivenessCompareResponse = models.LivenessCompareResponse;
 const MacaoIDCard = models.MacaoIDCard;
 const PhilippinesUMID = models.PhilippinesUMID;
+const BankCard2EVerificationResponse = models.BankCard2EVerificationResponse;
 const PhilippinesTinID = models.PhilippinesTinID;
 const DetectAIFakeFacesResponse = models.DetectAIFakeFacesResponse;
 const LivenessCompareRequest = models.LivenessCompareRequest;
 const MLIDCard = models.MLIDCard;
 const OCRResult = models.OCRResult;
-const DetectReflectLivenessAndCompareResponse = models.DetectReflectLivenessAndCompareResponse;
+const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
 const GetWebVerificationResultIntlRequest = models.GetWebVerificationResultIntlRequest;
 const CompareResult = models.CompareResult;
 
@@ -98,6 +106,17 @@ class FaceidClient extends AbstractClient {
     }
     
     /**
+     * This API is used to pass in URLs of a video and a photo, determine whether the person in the video is real, and if yes, then determine whether the person in the video is the same as that in the photo.
+     * @param {VideoLivenessCompareRequest} req
+     * @param {function(string, VideoLivenessCompareResponse):void} cb
+     * @public
+     */
+    VideoLivenessCompare(req, cb) {
+        let resp = new VideoLivenessCompareResponse();
+        this.request("VideoLivenessCompare", req, resp, cb);
+    }
+
+    /**
      * This API is used to apply for a token before calling the liveness detection service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
      * @param {ApplyLivenessTokenRequest} req
      * @param {function(string, ApplyLivenessTokenResponse):void} cb
@@ -106,6 +125,17 @@ class FaceidClient extends AbstractClient {
     ApplyLivenessToken(req, cb) {
         let resp = new ApplyLivenessTokenResponse();
         this.request("ApplyLivenessToken", req, resp, cb);
+    }
+
+    /**
+     * This interface supports judgment of real person and photo comparison to verify the user's identity online. By passing the video and photo into the interface, it will first judge whether the person in the video is real. If yes, it judges whether the person in the video is the same one as the uploaded photo and returns authentication result.
+     * @param {CompareFaceLivenessRequest} req
+     * @param {function(string, CompareFaceLivenessResponse):void} cb
+     * @public
+     */
+    CompareFaceLiveness(req, cb) {
+        let resp = new CompareFaceLivenessResponse();
+        this.request("CompareFaceLiveness", req, resp, cb);
     }
 
     /**
@@ -120,15 +150,15 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * This API is used to pass in a video and a photo, determine whether the person in the video is real, and if yes, then determine whether the person in the video is the same as that in the photo.
-This API on the legacy version will continue to serve existing users but will be unavailable to new users. We recommend you use `VideoLivenessCompare` for better service quality.
-     * @param {LivenessCompareRequest} req
-     * @param {function(string, LivenessCompareResponse):void} cb
+     * This API is used to generate an appropriate light sequence based on the information collected by the liveness comparison (reflection-based) SDK and pass the light sequence into the SDK to start the eKYC process.
+The data generated with the SDK must be stored in COS, and the region of the COS bucket must be same as that of requests made with this API. We recommend that you pass resources with upload link APIs.
+     * @param {GenerateReflectSequenceRequest} req
+     * @param {function(string, GenerateReflectSequenceResponse):void} cb
      * @public
      */
-    LivenessCompare(req, cb) {
-        let resp = new LivenessCompareResponse();
-        this.request("LivenessCompare", req, resp, cb);
+    GenerateReflectSequence(req, cb) {
+        let resp = new GenerateReflectSequenceResponse();
+        this.request("GenerateReflectSequence", req, resp, cb);
     }
 
     /**
@@ -144,15 +174,37 @@ The image and the data generated with the SDK must be stored in COS, and the reg
     }
 
     /**
-     * This API is used to generate an appropriate light sequence based on the information collected by the liveness comparison (reflection-based) SDK and pass the light sequence into the SDK to start the eKYC process.
-The data generated with the SDK must be stored in COS, and the region of the COS bucket must be same as that of requests made with this API. We recommend that you pass resources with upload link APIs.
-     * @param {GenerateReflectSequenceRequest} req
-     * @param {function(string, GenerateReflectSequenceResponse):void} cb
+     * This API is used to verify the authenticity and consistency of the bank card number, name, and ID number of information.
+     * @param {BankCardVerificationRequest} req
+     * @param {function(string, BankCardVerificationResponse):void} cb
      * @public
      */
-    GenerateReflectSequence(req, cb) {
-        let resp = new GenerateReflectSequenceResponse();
-        this.request("GenerateReflectSequence", req, resp, cb);
+    BankCardVerification(req, cb) {
+        let resp = new BankCardVerificationResponse();
+        this.request("BankCardVerification", req, resp, cb);
+    }
+
+    /**
+     * This API is used to apply for an SDK token before calling the selfie verification SDK each time. The SDK token is used throughout the eKYC process and to get the verification result after the verification is completed. A token is valid for one eKYC process only.
+     * @param {GetFaceIdTokenIntlRequest} req
+     * @param {function(string, GetFaceIdTokenIntlResponse):void} cb
+     * @public
+     */
+    GetFaceIdTokenIntl(req, cb) {
+        let resp = new GetFaceIdTokenIntlResponse();
+        this.request("GetFaceIdTokenIntl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pass in a video and a photo, determine whether the person in the video is real, and if yes, then determine whether the person in the video is the same as that in the photo.
+This API on the legacy version will continue to serve existing users but will be unavailable to new users. We recommend you use `VideoLivenessCompare` for better service quality.
+     * @param {LivenessCompareRequest} req
+     * @param {function(string, LivenessCompareResponse):void} cb
+     * @public
+     */
+    LivenessCompare(req, cb) {
+        let resp = new LivenessCompareResponse();
+        this.request("LivenessCompare", req, resp, cb);
     }
 
     /**
@@ -189,14 +241,14 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     }
 
     /**
-     * This API is used to apply for an SDK token before calling the selfie verification SDK each time. The SDK token is used throughout the eKYC process and to get the verification result after the verification is completed. A token is valid for one eKYC process only.
-     * @param {GetFaceIdTokenIntlRequest} req
-     * @param {function(string, GetFaceIdTokenIntlResponse):void} cb
+     * This API is used to validate the authenticity and consistency of the name and bank card number.
+     * @param {BankCard2EVerificationRequest} req
+     * @param {function(string, BankCard2EVerificationResponse):void} cb
      * @public
      */
-    GetFaceIdTokenIntl(req, cb) {
-        let resp = new GetFaceIdTokenIntlResponse();
-        this.request("GetFaceIdTokenIntl", req, resp, cb);
+    BankCard2EVerification(req, cb) {
+        let resp = new BankCard2EVerificationResponse();
+        this.request("BankCard2EVerification", req, resp, cb);
     }
 
     /**
@@ -212,14 +264,14 @@ The data will be stored in a COS bucket in the region specified by the parameter
     }
 
     /**
-     * This interface supports judgment of real person and photo comparison to verify the user's identity online. By passing the video and photo into the interface, it will first judge whether the person in the video is real. If yes, it judges whether the person in the video is the same one as the uploaded photo and returns authentication result.
-     * @param {CompareFaceLivenessRequest} req
-     * @param {function(string, CompareFaceLivenessResponse):void} cb
+     * This API is used to verify the authenticity and consistency of the bank card number, name, ID number, and mobile number for account opening.
+     * @param {BankCard4EVerificationRequest} req
+     * @param {function(string, BankCard4EVerificationResponse):void} cb
      * @public
      */
-    CompareFaceLiveness(req, cb) {
-        let resp = new CompareFaceLivenessResponse();
-        this.request("CompareFaceLiveness", req, resp, cb);
+    BankCard4EVerification(req, cb) {
+        let resp = new BankCard4EVerificationResponse();
+        this.request("BankCard4EVerification", req, resp, cb);
     }
 
     /**

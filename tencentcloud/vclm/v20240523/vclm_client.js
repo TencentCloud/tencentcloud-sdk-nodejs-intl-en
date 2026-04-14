@@ -16,10 +16,12 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const SubmitImageToVideoViduJobRequest = models.SubmitImageToVideoViduJobRequest;
 const LogoParam = models.LogoParam;
 const DescribeImageAnimateJobResponse = models.DescribeImageAnimateJobResponse;
 const LogoRect = models.LogoRect;
 const SubmitImageAnimateJobResponse = models.SubmitImageAnimateJobResponse;
+const SubmitImageToVideoViduJobResponse = models.SubmitImageToVideoViduJobResponse;
 const SubmitImageAnimateJobRequest = models.SubmitImageAnimateJobRequest;
 const DescribeImageAnimateJobRequest = models.DescribeImageAnimateJobRequest;
 
@@ -34,6 +36,17 @@ class VclmClient extends AbstractClient {
         super("vclm.intl.tencentcloudapi.com", "2024-05-23", credential, region, profile);
     }
     
+    /**
+     * Submit a Vidu image-to-video task API
+     * @param {SubmitImageToVideoViduJobRequest} req
+     * @param {function(string, SubmitImageToVideoViduJobResponse):void} cb
+     * @public
+     */
+    SubmitImageToVideoViduJob(req, cb) {
+        let resp = new SubmitImageToVideoViduJobResponse();
+        this.request("SubmitImageToVideoViduJob", req, resp, cb);
+    }
+
     /**
      * This API is used to query image animation tasks. The image animation feature supports generating videos based on dance movements and images to meet the needs of scenarios such as social entertainment and interactive marketing.
      * @param {DescribeImageAnimateJobRequest} req

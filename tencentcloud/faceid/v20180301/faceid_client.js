@@ -35,7 +35,7 @@ const JapanIDCard = models.JapanIDCard;
 const BankCardVerificationRequest = models.BankCardVerificationRequest;
 const EditDetail = models.EditDetail;
 const NigeriaDrivingLicense = models.NigeriaDrivingLicense;
-const PakistanDrivingLicense = models.PakistanDrivingLicense;
+const CheckBankCardInformationResponse = models.CheckBankCardInformationResponse;
 const ThailandIDCard = models.ThailandIDCard;
 const VerificationDetail = models.VerificationDetail;
 const GetWebVerificationResultIntlResponse = models.GetWebVerificationResultIntlResponse;
@@ -45,6 +45,7 @@ const SingaporeIDCard = models.SingaporeIDCard;
 const IndonesiaDrivingLicense = models.IndonesiaDrivingLicense;
 const GetFaceIdResultIntlRequest = models.GetFaceIdResultIntlRequest;
 const NormalCardInfo = models.NormalCardInfo;
+const PakistanDrivingLicense = models.PakistanDrivingLicense;
 const BankCard4EVerificationResponse = models.BankCard4EVerificationResponse;
 const GenerateReflectSequenceRequest = models.GenerateReflectSequenceRequest;
 const BangladeshIDCard = models.BangladeshIDCard;
@@ -54,7 +55,7 @@ const CardVerifyResult = models.CardVerifyResult;
 const BankCard2EVerificationRequest = models.BankCard2EVerificationRequest;
 const Address = models.Address;
 const PakistanIDCard = models.PakistanIDCard;
-const ApplyLivenessTokenResponse = models.ApplyLivenessTokenResponse;
+const CheckBankCardInformationRequest = models.CheckBankCardInformationRequest;
 const GetLivenessResultRequest = models.GetLivenessResultRequest;
 const CardInfo = models.CardInfo;
 const ExtraInfo = models.ExtraInfo;
@@ -85,6 +86,7 @@ const LivenessCompareResponse = models.LivenessCompareResponse;
 const MacaoIDCard = models.MacaoIDCard;
 const PhilippinesUMID = models.PhilippinesUMID;
 const BankCard2EVerificationResponse = models.BankCard2EVerificationResponse;
+const ApplyLivenessTokenResponse = models.ApplyLivenessTokenResponse;
 const PhilippinesTinID = models.PhilippinesTinID;
 const DetectAIFakeFacesResponse = models.DetectAIFakeFacesResponse;
 const LivenessCompareRequest = models.LivenessCompareRequest;
@@ -294,6 +296,17 @@ The data will be stored in a COS bucket in the region specified by the parameter
     DetectAIFakeFaces(req, cb) {
         let resp = new DetectAIFakeFacesResponse();
         this.request("DetectAIFakeFaces", req, resp, cb);
+    }
+
+    /**
+     * Bank card basic information query
+     * @param {CheckBankCardInformationRequest} req
+     * @param {function(string, CheckBankCardInformationResponse):void} cb
+     * @public
+     */
+    CheckBankCardInformation(req, cb) {
+        let resp = new CheckBankCardInformationResponse();
+        this.request("CheckBankCardInformation", req, resp, cb);
     }
 
     /**

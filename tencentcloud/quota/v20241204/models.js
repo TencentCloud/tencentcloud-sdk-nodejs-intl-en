@@ -88,7 +88,7 @@ class CreateAlarmRequest extends  AbstractModel {
         super();
 
         /**
-         * Alarm rule name. specifies the name of the Alarm rule.
+         * Alarm rule name. specifies the name of the Alarm rule
          * @type {string || null}
          */
         this.Name = null;

@@ -88,7 +88,7 @@ class ModifySendChannelOnMsgTypesRequest extends  AbstractModel {
         super();
 
         /**
-         * Message sending channel.
+         * Message sending channel
          * @type {Array.<SendType> || null}
          */
         this.SendTypes = null;

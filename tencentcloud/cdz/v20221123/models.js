@@ -25,7 +25,7 @@ class DescribeCloudDedicatedZoneResourceSummaryRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique id of the cloud dedicated zone.
+         * Unique id of the cloud dedicated zone
          * @type {string || null}
          */
         this.CdzId = null;

@@ -35,7 +35,7 @@ class RceClient extends AbstractClient {
     }
     
     /**
-     * This API is used to query risk assessment results.
+     * This API is used to query risk assessment results
      * @param {DescribeRiskAssessmentRequest} req
      * @param {function(string, DescribeRiskAssessmentResponse):void} cb
      * @public

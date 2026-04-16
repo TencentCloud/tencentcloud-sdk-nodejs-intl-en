@@ -32,7 +32,7 @@ class MessageClient extends AbstractClient {
     }
     
     /**
-     * This API is used to batch modify delivery methods.
+     * This API is used to batch modify delivery methods
      * @param {ModifySendChannelOnMsgTypesRequest} req
      * @param {function(string, ModifySendChannelOnMsgTypesResponse):void} cb
      * @public

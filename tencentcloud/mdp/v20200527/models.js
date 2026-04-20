@@ -440,7 +440,7 @@ class DeleteStreamPackageLinearAssemblyChannelsRequest extends  AbstractModel {
 }
 
 /**
- * Channel-associated domain information list.
+ * 
  * @class
  */
 class CdnDomainInfo extends  AbstractModel {
@@ -1792,7 +1792,7 @@ The parameters can only contain digits, letters, underscores (_), and hyphens (-
 }
 
 /**
- * Ad insertion channel configuration information.
+ * 
  * @class
  */
 class SSAIChannelInfo extends  AbstractModel {
@@ -2005,7 +2005,7 @@ class DescribeStreamPackageLinearAssemblyProgramsRequest extends  AbstractModel 
 }
 
 /**
- * Channel-associated domain record information.
+ * 
  * @class
  */
 class DomainRecordInfo extends  AbstractModel {
@@ -3373,6 +3373,12 @@ class ModifyStreamPackageLinearAssemblyProgramRequest extends  AbstractModel {
          */
         this.AdBreaks = null;
 
+        /**
+         * VOD acquisition methods, supporting PreCaching and DynamicUpdating, with PreCaching as the default, and only Linear channels are supported.
+         * @type {string || null}
+         */
+        this.VodAcquisitionMethod = null;
+
     }
 
     /**
@@ -3402,6 +3408,7 @@ class ModifyStreamPackageLinearAssemblyProgramRequest extends  AbstractModel {
                 this.AdBreaks.push(obj);
             }
         }
+        this.VodAcquisitionMethod = 'VodAcquisitionMethod' in params ? params.VodAcquisitionMethod : null;
 
     }
 }
@@ -4044,6 +4051,12 @@ Optional values: Live, VOD.
          */
         this.AdBreaks = null;
 
+        /**
+         * VOD acquisition methods, supporting PreCaching and DynamicUpdating, with PreCaching as the default, and only Linear channels are supported.
+         * @type {string || null}
+         */
+        this.VodAcquisitionMethod = null;
+
     }
 
     /**
@@ -4073,6 +4086,7 @@ Optional values: Live, VOD.
                 this.AdBreaks.push(obj);
             }
         }
+        this.VodAcquisitionMethod = 'VodAcquisitionMethod' in params ? params.VodAcquisitionMethod : null;
 
     }
 }
@@ -5536,7 +5550,7 @@ class StartStreamPackageVodRemuxTaskRequest extends  AbstractModel {
 }
 
 /**
- * cos input information
+ * 
  * @class
  */
 class CosInputInfo extends  AbstractModel {
@@ -7486,6 +7500,12 @@ class LinearAssemblyProgramInfo extends  AbstractModel {
          */
         this.SourceLocationName = null;
 
+        /**
+         * VOD acquisition methods, supporting PreCaching and DynamicUpdating, with PreCaching as the default, and only Linear channels are supported
+         * @type {string || null}
+         */
+        this.VodAcquisitionMethod = null;
+
     }
 
     /**
@@ -7519,6 +7539,7 @@ class LinearAssemblyProgramInfo extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.Region = 'Region' in params ? params.Region : null;
         this.SourceLocationName = 'SourceLocationName' in params ? params.SourceLocationName : null;
+        this.VodAcquisitionMethod = 'VodAcquisitionMethod' in params ? params.VodAcquisitionMethod : null;
 
     }
 }

@@ -214,6 +214,7 @@ const RunSQLScriptRequest = models.RunSQLScriptRequest;
 const AssociateResourceGroupToProjectResponse = models.AssociateResourceGroupToProjectResponse;
 const CreateResourceGroupResponse = models.CreateResourceGroupResponse;
 const TriggerWorkflowRunBrief = models.TriggerWorkflowRunBrief;
+const ListTriggerTaskRunBrief = models.ListTriggerTaskRunBrief;
 const GetTriggerTaskRequest = models.GetTriggerTaskRequest;
 const DeleteSQLScriptRequest = models.DeleteSQLScriptRequest;
 const ListTasksResponse = models.ListTasksResponse;
@@ -272,7 +273,7 @@ const DependencyConfigPage = models.DependencyConfigPage;
 const CodeStudioFileActionResult = models.CodeStudioFileActionResult;
 const CreateResourceFileResponse = models.CreateResourceFileResponse;
 const StopSQLScriptRunRequest = models.StopSQLScriptRunRequest;
-const TaskInstanceExecutions = models.TaskInstanceExecutions;
+const ListTriggerTaskRunResult = models.ListTriggerTaskRunResult;
 const ListAlarmRulesResult = models.ListAlarmRulesResult;
 const EnableProjectRequest = models.EnableProjectRequest;
 const ListTaskInstanceExecutionsResponse = models.ListTaskInstanceExecutionsResponse;
@@ -286,6 +287,7 @@ const CreateWorkflowPermissionsResult = models.CreateWorkflowPermissionsResult;
 const CreateCodePermissionsResponse = models.CreateCodePermissionsResponse;
 const DisableProjectRequest = models.DisableProjectRequest;
 const GetTriggerWorkflowResponse = models.GetTriggerWorkflowResponse;
+const ListTriggerTaskRunsRequest = models.ListTriggerTaskRunsRequest;
 const DependencyStrategyTask = models.DependencyStrategyTask;
 const Task = models.Task;
 const CreateTaskBaseAttribute = models.CreateTaskBaseAttribute;
@@ -469,6 +471,7 @@ const DeleteProjectRequest = models.DeleteProjectRequest;
 const CreateResourceFileRequest = models.CreateResourceFileRequest;
 const WorkflowPermission = models.WorkflowPermission;
 const DeleteTaskFolderResponse = models.DeleteTaskFolderResponse;
+const PauseOpsTasksAsyncResponse = models.PauseOpsTasksAsyncResponse;
 const DeleteWorkflowPermissionsResponse = models.DeleteWorkflowPermissionsResponse;
 const ListLineagePage = models.ListLineagePage;
 const GetOpsAlarmRuleRequest = models.GetOpsAlarmRuleRequest;
@@ -483,7 +486,7 @@ const UpdateOpsAlarmRuleRequest = models.UpdateOpsAlarmRuleRequest;
 const ParentDependencyConfigPage = models.ParentDependencyConfigPage;
 const ListUpstreamOpsTasksResponse = models.ListUpstreamOpsTasksResponse;
 const CreateTriggerWorkflowResponse = models.CreateTriggerWorkflowResponse;
-const PauseOpsTasksAsyncResponse = models.PauseOpsTasksAsyncResponse;
+const ListTriggerTaskRunsResponse = models.ListTriggerTaskRunsResponse;
 const GetSQLFolderResponse = models.GetSQLFolderResponse;
 const LineagePair = models.LineagePair;
 const DeleteOpsAlarmRuleResponse = models.DeleteOpsAlarmRuleResponse;
@@ -539,6 +542,7 @@ const CreateOpsAlarmRuleRequest = models.CreateOpsAlarmRuleRequest;
 const SetSuccessTaskInstancesAsyncResponse = models.SetSuccessTaskInstancesAsyncResponse;
 const UpdateSQLScriptRequest = models.UpdateSQLScriptRequest;
 const ParamInfo = models.ParamInfo;
+const TaskInstanceExecutions = models.TaskInstanceExecutions;
 const UpdateTriggerTaskPart = models.UpdateTriggerTaskPart;
 const DeleteTriggerTaskRequest = models.DeleteTriggerTaskRequest;
 const DeleteDataSourceResponse = models.DeleteDataSourceResponse;
@@ -1358,6 +1362,17 @@ class WedataClient extends AbstractClient {
     ListUpstreamTaskInstances(req, cb) {
         let resp = new ListUpstreamTaskInstancesResponse();
         this.request("ListUpstreamTaskInstances", req, resp, cb);
+    }
+
+    /**
+     * Query workflow operation
+     * @param {ListTriggerTaskRunsRequest} req
+     * @param {function(string, ListTriggerTaskRunsResponse):void} cb
+     * @public
+     */
+    ListTriggerTaskRuns(req, cb) {
+        let resp = new ListTriggerTaskRunsResponse();
+        this.request("ListTriggerTaskRuns", req, resp, cb);
     }
 
     /**

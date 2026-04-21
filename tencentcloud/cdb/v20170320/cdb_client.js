@@ -298,6 +298,7 @@ const ReadonlyNode = models.ReadonlyNode;
 const DescribeRemoteBackupConfigResponse = models.DescribeRemoteBackupConfigResponse;
 const AdjustCdbProxyAddressResponse = models.AdjustCdbProxyAddressResponse;
 const CreateAuditLogFileRequest = models.CreateAuditLogFileRequest;
+const DescribeSSLStatusResponse = models.DescribeSSLStatusResponse;
 const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
 const DescribeTagsOfInstanceIdsRequest = models.DescribeTagsOfInstanceIdsRequest;
@@ -402,6 +403,7 @@ const DescribeAuditRuleTemplatesRequest = models.DescribeAuditRuleTemplatesReque
 const RollbackTables = models.RollbackTables;
 const AuditRuleTemplateInfo = models.AuditRuleTemplateInfo;
 const LocalBinlogConfigDefault = models.LocalBinlogConfigDefault;
+const DescribeSSLStatusRequest = models.DescribeSSLStatusRequest;
 const DescribeSlowLogDataRequest = models.DescribeSlowLogDataRequest;
 const ReleaseIsolatedDBInstancesResponse = models.ReleaseIsolatedDBInstancesResponse;
 const DeleteAuditLogFileRequest = models.DeleteAuditLogFileRequest;
@@ -1600,6 +1602,17 @@ Note that when modifying account permissions, you need to pass in the full permi
     DescribeDBImportRecords(req, cb) {
         let resp = new DescribeDBImportRecordsResponse();
         this.request("DescribeDBImportRecords", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the SSL enabling status. If the SSL is enabled, the certificate download link will be returned synchronously.
+     * @param {DescribeSSLStatusRequest} req
+     * @param {function(string, DescribeSSLStatusResponse):void} cb
+     * @public
+     */
+    DescribeSSLStatus(req, cb) {
+        let resp = new DescribeSSLStatusResponse();
+        this.request("DescribeSSLStatus", req, resp, cb);
     }
 
     /**

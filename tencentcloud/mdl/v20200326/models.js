@@ -3074,10 +3074,16 @@ class TimedMetadataInfo extends  AbstractModel {
         super();
 
         /**
-         * Base64-encoded id3 metadata information, with a maximum limit of 1024 characters.
+         * Base64-encoded ID3 metadata information, with a maximum limit of 1024 characters. When both ID3 and Tag have values, the ID3 value takes precedence
          * @type {string || null}
          */
         this.ID3 = null;
+
+        /**
+         * Label, the maximum supported length is 1024 characters for the label, 
+         * @type {string || null}
+         */
+        this.Tag = null;
 
     }
 
@@ -3089,6 +3095,7 @@ class TimedMetadataInfo extends  AbstractModel {
             return;
         }
         this.ID3 = 'ID3' in params ? params.ID3 : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
 
     }
 }
@@ -3619,7 +3626,7 @@ class ModifyStreamLiveWatermarkRequest extends  AbstractModel {
         this.TextSettings = null;
 
         /**
-         * AB watermark configuration.
+         * 
          * @type {AbWatermarkSettingsReq || null}
          */
         this.AbWatermarkSettings = null;
@@ -4675,7 +4682,7 @@ Valid values: 6000, 7000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000,
 }
 
 /**
- * Audio track configuration list.
+ * 
  * @class
  */
 class InputTracks extends  AbstractModel {
@@ -5180,7 +5187,7 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
 }
 
 /**
- * Motion Graphic Setting
+ * 
  * @class
  */
 class MotionGraphicsSetting extends  AbstractModel {
@@ -5865,7 +5872,7 @@ class DescribeStreamLiveChannelAlertsResponse extends  AbstractModel {
 }
 
 /**
- * Thumbnail configuration
+ * 
  * @class
  */
 class ThumbnailSettings extends  AbstractModel {
@@ -7616,7 +7623,7 @@ class DeleteStreamLiveInputResponse extends  AbstractModel {
 }
 
 /**
- * Motion Graphic Activate Setting
+ * 
  * @class
  */
 class MotionGraphicsActivateSetting extends  AbstractModel {
@@ -7840,7 +7847,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Compression recovery configuration
+ * 
  * @class
  */
 class LSqueezeSetting extends  AbstractModel {

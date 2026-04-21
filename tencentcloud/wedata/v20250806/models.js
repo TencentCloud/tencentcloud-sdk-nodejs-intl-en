@@ -13061,6 +13061,171 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Query job run list returned parameter
+ * @class
+ */
+class ListTriggerTaskRunBrief extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Running ID of the task
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExecutionId = null;
+
+        /**
+         * Workflow ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.WorkflowId = null;
+
+        /**
+         * Running ID of the workflow
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.WorkflowExecutionId = null;
+
+        /**
+         * Task ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Trigger Type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TriggerType = null;
+
+        /**
+         * Waiting duration, in seconds
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.WaitTime = null;
+
+        /**
+         * Operating Account
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExecuteUserUin = null;
+
+        /**
+         * Planned scheduling time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ScheduleTime = null;
+
+        /**
+         * Start time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExecutionStartTime = null;
+
+        /**
+         * Running end time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExecutionEndTime = null;
+
+        /**
+         * Running time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExecutionTime = null;
+
+        /**
+         * Times of automatic retry
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RetryTimes = null;
+
+        /**
+         * Error code description
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ErrorCodeStr = null;
+
+        /**
+         * Task name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+        /**
+         * Workflow name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.WorkflowName = null;
+
+        /**
+         * Number of manual rerun attempts by the user
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RerunTimes = null;
+
+        /**
+         * Task running status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskExecutionState = null;
+
+        /**
+         * Whether it is the most recent run
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsLatestExecution = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExecutionId = 'ExecutionId' in params ? params.ExecutionId : null;
+        this.WorkflowId = 'WorkflowId' in params ? params.WorkflowId : null;
+        this.WorkflowExecutionId = 'WorkflowExecutionId' in params ? params.WorkflowExecutionId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TriggerType = 'TriggerType' in params ? params.TriggerType : null;
+        this.WaitTime = 'WaitTime' in params ? params.WaitTime : null;
+        this.ExecuteUserUin = 'ExecuteUserUin' in params ? params.ExecuteUserUin : null;
+        this.ScheduleTime = 'ScheduleTime' in params ? params.ScheduleTime : null;
+        this.ExecutionStartTime = 'ExecutionStartTime' in params ? params.ExecutionStartTime : null;
+        this.ExecutionEndTime = 'ExecutionEndTime' in params ? params.ExecutionEndTime : null;
+        this.ExecutionTime = 'ExecutionTime' in params ? params.ExecutionTime : null;
+        this.RetryTimes = 'RetryTimes' in params ? params.RetryTimes : null;
+        this.ErrorCodeStr = 'ErrorCodeStr' in params ? params.ErrorCodeStr : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.WorkflowName = 'WorkflowName' in params ? params.WorkflowName : null;
+        this.RerunTimes = 'RerunTimes' in params ? params.RerunTimes : null;
+        this.TaskExecutionState = 'TaskExecutionState' in params ? params.TaskExecutionState : null;
+        this.IsLatestExecution = 'IsLatestExecution' in params ? params.IsLatestExecution : null;
+
+    }
+}
+
+/**
  * GetTriggerTask request structure.
  * @class
  */
@@ -16541,42 +16706,47 @@ class StopSQLScriptRunRequest extends  AbstractModel {
 }
 
 /**
- * Instance execution list.
+ * Query workflow results
  * @class
  */
-class TaskInstanceExecutions extends  AbstractModel {
+class ListTriggerTaskRunResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of results
+         * Total number of records
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Total pages
+         * Number of pages.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalPageNumber = null;
 
         /**
-         * Record list
-         * @type {Array.<InstanceExecution> || null}
-         */
-        this.Items = null;
-
-        /**
-         * Page number.
+         * Page number
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.PageNumber = null;
 
         /**
-         * Pagination size.
+         * Page size.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.PageSize = null;
+
+        /**
+         * Task running information collection
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ListTriggerTaskRunBrief> || null}
+         */
+        this.Items = null;
 
     }
 
@@ -16589,17 +16759,17 @@ class TaskInstanceExecutions extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.TotalPageNumber = 'TotalPageNumber' in params ? params.TotalPageNumber : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
         if (params.Items) {
             this.Items = new Array();
             for (let z in params.Items) {
-                let obj = new InstanceExecution();
+                let obj = new ListTriggerTaskRunBrief();
                 obj.deserialize(params.Items[z]);
                 this.Items.push(obj);
             }
         }
-        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -17160,6 +17330,78 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListTriggerTaskRuns request structure.
+ * @class
+ */
+class ListTriggerTaskRunsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID.
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Filtering parameters: Keyword for task name or ID query, WorkflowId for workflow ID query, FolderId for folder query, InChargeUin for responsible person query, WorkflowExecutionId for workflow execution ID, ExecutionId for task execution ID, TaskId for task ID, ScheduleTimeGreaterEqual / ScheduleTimeLessEqual for planned scheduling time interval
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Sorting field, sorting field name as follows: start time: CreateTime, end time: EndTime, scheduled dispatch time: ScheduleTime
+         * @type {Array.<OrderField> || null}
+         */
+        this.OrderFields = null;
+
+        /**
+         * Page number
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Page size.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+        if (params.OrderFields) {
+            this.OrderFields = new Array();
+            for (let z in params.OrderFields) {
+                let obj = new OrderField();
+                obj.deserialize(params.OrderFields[z]);
+                this.OrderFields.push(obj);
+            }
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -27700,6 +27942,46 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * PauseOpsTasksAsync response structure.
+ * @class
+ */
+class PauseOpsTasksAsyncResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Asynchronous operation result.
+         * @type {OpsAsyncResponse || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new OpsAsyncResponse();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteWorkflowPermissions response structure.
  * @class
  */
@@ -28463,16 +28745,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * PauseOpsTasksAsync response structure.
+ * ListTriggerTaskRuns response structure.
  * @class
  */
-class PauseOpsTasksAsyncResponse extends  AbstractModel {
+class ListTriggerTaskRunsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Asynchronous operation result.
-         * @type {OpsAsyncResponse || null}
+         * Task run query result
+         * @type {ListTriggerTaskRunResult || null}
          */
         this.Data = null;
 
@@ -28493,7 +28775,7 @@ class PauseOpsTasksAsyncResponse extends  AbstractModel {
         }
 
         if (params.Data) {
-            let obj = new OpsAsyncResponse();
+            let obj = new ListTriggerTaskRunResult();
             obj.deserialize(params.Data)
             this.Data = obj;
         }
@@ -31191,6 +31473,70 @@ class ParamInfo extends  AbstractModel {
         }
         this.ParamKey = 'ParamKey' in params ? params.ParamKey : null;
         this.ParamValue = 'ParamValue' in params ? params.ParamValue : null;
+
+    }
+}
+
+/**
+ * Instance execution list.
+ * @class
+ */
+class TaskInstanceExecutions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of results
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Total pages
+         * @type {number || null}
+         */
+        this.TotalPageNumber = null;
+
+        /**
+         * Record list
+         * @type {Array.<InstanceExecution> || null}
+         */
+        this.Items = null;
+
+        /**
+         * Page number.
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Pagination size.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TotalPageNumber = 'TotalPageNumber' in params ? params.TotalPageNumber : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new InstanceExecution();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -35405,6 +35751,7 @@ module.exports = {
     AssociateResourceGroupToProjectResponse: AssociateResourceGroupToProjectResponse,
     CreateResourceGroupResponse: CreateResourceGroupResponse,
     TriggerWorkflowRunBrief: TriggerWorkflowRunBrief,
+    ListTriggerTaskRunBrief: ListTriggerTaskRunBrief,
     GetTriggerTaskRequest: GetTriggerTaskRequest,
     DeleteSQLScriptRequest: DeleteSQLScriptRequest,
     ListTasksResponse: ListTasksResponse,
@@ -35463,7 +35810,7 @@ module.exports = {
     CodeStudioFileActionResult: CodeStudioFileActionResult,
     CreateResourceFileResponse: CreateResourceFileResponse,
     StopSQLScriptRunRequest: StopSQLScriptRunRequest,
-    TaskInstanceExecutions: TaskInstanceExecutions,
+    ListTriggerTaskRunResult: ListTriggerTaskRunResult,
     ListAlarmRulesResult: ListAlarmRulesResult,
     EnableProjectRequest: EnableProjectRequest,
     ListTaskInstanceExecutionsResponse: ListTaskInstanceExecutionsResponse,
@@ -35477,6 +35824,7 @@ module.exports = {
     CreateCodePermissionsResponse: CreateCodePermissionsResponse,
     DisableProjectRequest: DisableProjectRequest,
     GetTriggerWorkflowResponse: GetTriggerWorkflowResponse,
+    ListTriggerTaskRunsRequest: ListTriggerTaskRunsRequest,
     DependencyStrategyTask: DependencyStrategyTask,
     Task: Task,
     CreateTaskBaseAttribute: CreateTaskBaseAttribute,
@@ -35660,6 +36008,7 @@ module.exports = {
     CreateResourceFileRequest: CreateResourceFileRequest,
     WorkflowPermission: WorkflowPermission,
     DeleteTaskFolderResponse: DeleteTaskFolderResponse,
+    PauseOpsTasksAsyncResponse: PauseOpsTasksAsyncResponse,
     DeleteWorkflowPermissionsResponse: DeleteWorkflowPermissionsResponse,
     ListLineagePage: ListLineagePage,
     GetOpsAlarmRuleRequest: GetOpsAlarmRuleRequest,
@@ -35674,7 +36023,7 @@ module.exports = {
     ParentDependencyConfigPage: ParentDependencyConfigPage,
     ListUpstreamOpsTasksResponse: ListUpstreamOpsTasksResponse,
     CreateTriggerWorkflowResponse: CreateTriggerWorkflowResponse,
-    PauseOpsTasksAsyncResponse: PauseOpsTasksAsyncResponse,
+    ListTriggerTaskRunsResponse: ListTriggerTaskRunsResponse,
     GetSQLFolderResponse: GetSQLFolderResponse,
     LineagePair: LineagePair,
     DeleteOpsAlarmRuleResponse: DeleteOpsAlarmRuleResponse,
@@ -35730,6 +36079,7 @@ module.exports = {
     SetSuccessTaskInstancesAsyncResponse: SetSuccessTaskInstancesAsyncResponse,
     UpdateSQLScriptRequest: UpdateSQLScriptRequest,
     ParamInfo: ParamInfo,
+    TaskInstanceExecutions: TaskInstanceExecutions,
     UpdateTriggerTaskPart: UpdateTriggerTaskPart,
     DeleteTriggerTaskRequest: DeleteTriggerTaskRequest,
     DeleteDataSourceResponse: DeleteDataSourceResponse,

@@ -40,7 +40,7 @@ const DescribeDBInstanceSecurityGroupsResponse = models.DescribeDBInstanceSecuri
 const BackupPlan = models.BackupPlan;
 const RestoreDBInstanceObjectsResponse = models.RestoreDBInstanceObjectsResponse;
 const SlowlogDetail = models.SlowlogDetail;
-const SwitchDBInstancePrimaryRequest = models.SwitchDBInstancePrimaryRequest;
+const ModifyDBInstanceDeletionProtectionRequest = models.ModifyDBInstanceDeletionProtectionRequest;
 const OpenServerlessDBExtranetAccessRequest = models.OpenServerlessDBExtranetAccessRequest;
 const RenewInstanceResponse = models.RenewInstanceResponse;
 const DeleteServerlessDBInstanceResponse = models.DeleteServerlessDBInstanceResponse;
@@ -109,7 +109,7 @@ const ModifyMaintainTimeWindowRequest = models.ModifyMaintainTimeWindowRequest;
 const ModifyBackupDownloadRestrictionResponse = models.ModifyBackupDownloadRestrictionResponse;
 const ParamVersionRelation = models.ParamVersionRelation;
 const DescribeLogBackupsRequest = models.DescribeLogBackupsRequest;
-const SetAutoRenewFlagResponse = models.SetAutoRenewFlagResponse;
+const ModifyDBInstanceParametersRequest = models.ModifyDBInstanceParametersRequest;
 const ModifyPrivilege = models.ModifyPrivilege;
 const NetworkAccess = models.NetworkAccess;
 const DescribeDBInstanceAttributeRequest = models.DescribeDBInstanceAttributeRequest;
@@ -169,7 +169,7 @@ const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const DescribeDBInstanceSSLConfigResponse = models.DescribeDBInstanceSSLConfigResponse;
 const ModifyParameterTemplateRequest = models.ModifyParameterTemplateRequest;
 const DeleteAccountRequest = models.DeleteAccountRequest;
-const UpgradeDBInstanceKernelVersionResponse = models.UpgradeDBInstanceKernelVersionResponse;
+const SwitchDBInstancePrimaryRequest = models.SwitchDBInstancePrimaryRequest;
 const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
 const DescribeSlowQueryAnalysisRequest = models.DescribeSlowQueryAnalysisRequest;
 const ErrLogDetail = models.ErrLogDetail;
@@ -188,6 +188,7 @@ const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const Database = models.Database;
 const DeleteReadOnlyGroupRequest = models.DeleteReadOnlyGroupRequest;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
+const SetAutoRenewFlagResponse = models.SetAutoRenewFlagResponse;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
 const Filter = models.Filter;
 const DescribeReadOnlyGroupsRequest = models.DescribeReadOnlyGroupsRequest;
@@ -254,7 +255,7 @@ const CreateDatabaseResponse = models.CreateDatabaseResponse;
 const RebalanceReadOnlyGroupResponse = models.RebalanceReadOnlyGroupResponse;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const DescribeSlowQueryAnalysisResponse = models.DescribeSlowQueryAnalysisResponse;
-const ModifyDBInstanceParametersRequest = models.ModifyDBInstanceParametersRequest;
+const ModifyDBInstanceDeletionProtectionResponse = models.ModifyDBInstanceDeletionProtectionResponse;
 const DedicatedCluster = models.DedicatedCluster;
 const ServerlessDBAccount = models.ServerlessDBAccount;
 const DurationAnalysis = models.DurationAnalysis;
@@ -265,6 +266,7 @@ const RestoreDBInstanceObjectsRequest = models.RestoreDBInstanceObjectsRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const ModifyDBInstanceChargeTypeRequest = models.ModifyDBInstanceChargeTypeRequest;
 const DescribeParameterTemplateAttributesResponse = models.DescribeParameterTemplateAttributesResponse;
+const UpgradeDBInstanceKernelVersionResponse = models.UpgradeDBInstanceKernelVersionResponse;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const DescribeDBVersionsRequest = models.DescribeDBVersionsRequest;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
@@ -923,6 +925,17 @@ This API is used to show summarized steps, which may be adjusted during version 
     RebalanceReadOnlyGroup(req, cb) {
         let resp = new RebalanceReadOnlyGroupResponse();
         this.request("RebalanceReadOnlyGroup", req, resp, cb);
+    }
+
+    /**
+     * This interface (DeletionProtection) is used to enable or disable instance destruction protection.
+     * @param {ModifyDBInstanceDeletionProtectionRequest} req
+     * @param {function(string, ModifyDBInstanceDeletionProtectionResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceDeletionProtection(req, cb) {
+        let resp = new ModifyDBInstanceDeletionProtectionResponse();
+        this.request("ModifyDBInstanceDeletionProtection", req, resp, cb);
     }
 
     /**

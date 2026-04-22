@@ -346,6 +346,18 @@ false : Expired HKID is rejected and cannot enter the liveness process.
          */
         this.AllowExpiredDocument = null;
 
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.SkipResultPage = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.CardOcrDisplayFields = null;
+
     }
 
     /**
@@ -367,6 +379,8 @@ false : Expired HKID is rejected and cannot enter the liveness process.
         this.SdkVersion = 'SdkVersion' in params ? params.SdkVersion : null;
         this.ActionList = 'ActionList' in params ? params.ActionList : null;
         this.AllowExpiredDocument = 'AllowExpiredDocument' in params ? params.AllowExpiredDocument : null;
+        this.SkipResultPage = 'SkipResultPage' in params ? params.SkipResultPage : null;
+        this.CardOcrDisplayFields = 'CardOcrDisplayFields' in params ? params.CardOcrDisplayFields : null;
 
     }
 }
@@ -1186,7 +1200,7 @@ class BankCardVerificationRequest extends  AbstractModel {
 }
 
 /**
- * EKYC ID Document OCR Result Modification Details
+ * 
  * @class
  */
 class EditDetail extends  AbstractModel {
@@ -2961,7 +2975,7 @@ class BankCard2EVerificationRequest extends  AbstractModel {
 }
 
 /**
- * Overseas Document Address
+ * 
  * @class
  */
 class Address extends  AbstractModel {

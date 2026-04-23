@@ -2028,7 +2028,7 @@ class CacheConfigFollowOrigin extends  AbstractModel {
 }
 
 /**
- * Mini Program Audio-Video Review Summary Metadata
+ *  
  * @class
  */
 class MediaMiniProgramReviewElem extends  AbstractModel {
@@ -2475,26 +2475,18 @@ class Origin extends  AbstractModel {
 }
 
 /**
- * Information of time point screenshot in VOD file
+ * Face recognition media information
  * @class
  */
-class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
+class FaceRecognitionInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * <p>Face recognition task list</p>
+         * @type {Array.<FaceRecognitionTask> || null}
          */
-        this.Definition = null;
-
-        /**
-         * Information set of screenshots of the same specification. Each element represents a screenshot.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<MediaSnapshotByTimePicInfoItem> || null}
-         */
-        this.PicInfoSet = null;
+        this.FaceRecognitionTasks = null;
 
     }
 
@@ -2505,14 +2497,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
 
-        if (params.PicInfoSet) {
-            this.PicInfoSet = new Array();
-            for (let z in params.PicInfoSet) {
-                let obj = new MediaSnapshotByTimePicInfoItem();
-                obj.deserialize(params.PicInfoSet[z]);
-                this.PicInfoSet.push(obj);
+        if (params.FaceRecognitionTasks) {
+            this.FaceRecognitionTasks = new Array();
+            for (let z in params.FaceRecognitionTasks) {
+                let obj = new FaceRecognitionTask();
+                obj.deserialize(params.FaceRecognitionTasks[z]);
+                this.FaceRecognitionTasks.push(obj);
             }
         }
 
@@ -7860,6 +7851,51 @@ class AiRecognitionTaskOcrWordsResultInput extends  AbstractModel {
 }
 
 /**
+ * Information of time point screenshot in VOD file
+ * @class
+ */
+class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Information set of screenshots of the same specification. Each element represents a screenshot.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<MediaSnapshotByTimePicInfoItem> || null}
+         */
+        this.PicInfoSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.PicInfoSet) {
+            this.PicInfoSet = new Array();
+            for (let z in params.PicInfoSet) {
+                let obj = new MediaSnapshotByTimePicInfoItem();
+                obj.deserialize(params.PicInfoSet[z]);
+                this.PicInfoSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Scene AIGC image task output file information.
  * @class
  */
@@ -10282,54 +10318,18 @@ class AiSampleFaceInfo extends  AbstractModel {
 }
 
 /**
- * Image sprite information
+ * Image understanding information.
  * @class
  */
-class MediaImageSpriteItem extends  AbstractModel {
+class ImageUnderstandingInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Image sprite specification. For more information, please see [Image Sprite Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * Image understanding collection.
+         * @type {Array.<ImageUnderstandingItem> || null}
          */
-        this.Definition = null;
-
-        /**
-         * Subimage height of image sprite.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Subimage width of image sprite.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Total number of subimages in each image sprite.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Address of each image sprite.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.ImageUrlSet = null;
-
-        /**
-         * Address of WebVtt file for the position-time relationship among subimages in an image sprite. The WebVtt file indicates the corresponding time points of each subimage and their coordinates in the image sprite, which is typically used by the player for implementing preview.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.WebVttUrl = null;
+        this.ImageUnderstandingSet = null;
 
     }
 
@@ -10340,12 +10340,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.ImageUrlSet = 'ImageUrlSet' in params ? params.ImageUrlSet : null;
-        this.WebVttUrl = 'WebVttUrl' in params ? params.WebVttUrl : null;
+
+        if (params.ImageUnderstandingSet) {
+            this.ImageUnderstandingSet = new Array();
+            for (let z in params.ImageUnderstandingSet) {
+                let obj = new ImageUnderstandingItem();
+                obj.deserialize(params.ImageUnderstandingSet[z]);
+                this.ImageUnderstandingSet.push(obj);
+            }
+        }
 
     }
 }
@@ -12628,7 +12631,7 @@ class DeleteLLMComprehendTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Mini Program Audio-Video Review Information Unit
+ *  
  * @class
  */
 class MediaMiniProgramReviewInfoItem extends  AbstractModel {
@@ -14351,20 +14354,21 @@ class MediaSubtitleItem extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Subtitle language. Common values:
-<li>`zh`: Chinese</li>
-<li>`en`: English</li>
-<li>`ja`: Japanese</li>
-<li>`ko`: Korean</li>
-<li>`vi`: Vietnamese</li>
-<li>`ms`: Malay</li>
-<li>`th`: Thai</li>
-<li>`pt`: Portuguese</li>
-<li>`tr`: Turkish</li>
-<li>`ar`: Arabic</li>
-<li>`es`: Spanish</li>
-<li>`hi`: Hindi</li>
-<li>`fr`: French</li>For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
+         * Subtitle language. Common values are as follows:
+<li>zh: Chinese;</li>
+<li>en: English;</li>
+<li>ja: Japanese;</li>
+<li>ko: Korean;</li>
+<li>vi: Vietnamese.</li>
+<li>ms: Malay;</li>
+<li>th: Thai;</li>
+<li>pt: Portuguese;</li>
+<li>tr: Turkish;</li>
+<li>ar: Arabic;</li>
+<li>es: Spanish;</li>
+<li>hi: Hindi;</li>
+<li>fr: French.</li>
+For other values, see [RFC5646](https://tools.ietf.org/html/rfc5646)
          * @type {string || null}
          */
         this.Language = null;
@@ -14383,9 +14387,9 @@ class MediaSubtitleItem extends  AbstractModel {
         this.Url = null;
 
         /**
-         * Subtitle source, values:
-<li>UserUploaded: user uploaded;</li>
-<li>AIRecognition: AI recognition, generated through asr full text recognition or voice translation.</li>
+         * Subtitle source. Value ranges from...to...
+<li>UserUploaded: User upload.</li>
+<li>AIRecognition: AI recognition, generated through speech recognition or speech translation generation.</li>
          * @type {string || null}
          */
         this.Source = null;
@@ -16623,7 +16627,7 @@ class DescribeAdaptiveDynamicStreamingTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Mini Program Audio-Video Review Information
+ *  
  * @class
  */
 class MediaMiniProgramReviewInfo extends  AbstractModel {
@@ -19273,19 +19277,31 @@ class LiveRecordInfo extends  AbstractModel {
         super();
 
         /**
-         * Live recording stream ID.
+         * <p>Live streaming Recording domain name</p>
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * <p>Live streaming Recording Path</p>
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * <p>Live recording stream ID.</p>
          * @type {string || null}
          */
         this.StreamId = null;
 
         /**
-         * Recording start time, use [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
+         * <p>Recording start time in <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO datetime format</a>.</p>
          * @type {string || null}
          */
         this.RecordStartTime = null;
 
         /**
-         * Recording end time, using [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
+         * <p>Recording end time, using <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>.</p>
          * @type {string || null}
          */
         this.RecordEndTime = null;
@@ -19299,6 +19315,8 @@ class LiveRecordInfo extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Path = 'Path' in params ? params.Path : null;
         this.StreamId = 'StreamId' in params ? params.StreamId : null;
         this.RecordStartTime = 'RecordStartTime' in params ? params.RecordStartTime : null;
         this.RecordEndTime = 'RecordEndTime' in params ? params.RecordEndTime : null;
@@ -19625,6 +19643,34 @@ class CreateEnhanceMediaTemplateResponse extends  AbstractModel {
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Intelligent knowledge base info for media assets
+ * @class
+ */
+class KnowledgeBasesInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Current library list of media assets to import</p>
+         * @type {Array.<string> || null}
+         */
+        this.Bases = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Bases = 'Bases' in params ? params.Bases : null;
 
     }
 }
@@ -20460,14 +20506,13 @@ class SearchMediaResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of eligible entries.
-<li>Maximum value: 5000. If the number of eligible entries is greater than 5,000, this field will return 5,000 instead of the actual number.</li>
+         * <p>Total records that meet search criteria.</p><li>Maximum value: 5000. When the number of records hit exceeds 5000, this field will return 5000 instead of the actual total count.</li>
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Media file information list
+         * <p>Media file information list.</p>
          * @type {Array.<MediaInfo> || null}
          */
         this.MediaInfoSet = null;
@@ -21760,68 +21805,24 @@ class RestoreMediaResponse extends  AbstractModel {
 }
 
 /**
- * Result type of time point screencapturing task
+ * Image understanding information item.
  * @class
  */
-class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
+class ImageUnderstandingItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
-         * @type {string || null}
-         */
-        this.ErrCodeExt = null;
-
-        /**
-         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
+         * Template id.
          * @type {number || null}
          */
-        this.ErrCode = null;
+        this.Definition = null;
 
         /**
-         * Error message.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Task output file.
+         * @type {Array.<MPSOutputFileInfo> || null}
          */
-        this.Message = null;
-
-        /**
-         * Input of time point screencapturing task.
-         * @type {SnapshotByTimeOffsetTaskInput || null}
-         */
-        this.Input = null;
-
-        /**
-         * Output of time point screencapturing task.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {MediaSnapshotByTimeOffsetItem || null}
-         */
-        this.Output = null;
-
-        /**
-         * The progress of a time point screenshot task. Value range: 0-100.
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-        /**
-         * The time when the point-in-time screenshot task started to be executed, using [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
-         * @type {string || null}
-         */
-        this.BeginProcessTime = null;
-
-        /**
-         * The time when the point-in-time screenshot task is completed, using [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
-         * @type {string || null}
-         */
-        this.FinishTime = null;
+        this.OutputFile = null;
 
     }
 
@@ -21832,25 +21833,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
-        if (params.Input) {
-            let obj = new SnapshotByTimeOffsetTaskInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
+        if (params.OutputFile) {
+            this.OutputFile = new Array();
+            for (let z in params.OutputFile) {
+                let obj = new MPSOutputFileInfo();
+                obj.deserialize(params.OutputFile[z]);
+                this.OutputFile.push(obj);
+            }
         }
-
-        if (params.Output) {
-            let obj = new MediaSnapshotByTimeOffsetItem();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
-        this.Progress = 'Progress' in params ? params.Progress : null;
-        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
-        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -22598,6 +22590,41 @@ class BlurConfigureInfoForUpdate extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * ProcessMediaByUrl response structure.
+ * @class
+ */
+class ProcessMediaByUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -23602,6 +23629,102 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.AudioEnhance)
             this.AudioEnhance = obj;
         }
+
+    }
+}
+
+/**
+ * Result type of time point screencapturing task
+ * @class
+ */
+class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input of time point screencapturing task.
+         * @type {SnapshotByTimeOffsetTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of time point screencapturing task.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {MediaSnapshotByTimeOffsetItem || null}
+         */
+        this.Output = null;
+
+        /**
+         * The progress of a time point screenshot task. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * The time when the point-in-time screenshot task started to be executed, using [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * The time when the point-in-time screenshot task is completed, using [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new SnapshotByTimeOffsetTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new MediaSnapshotByTimeOffsetItem();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -29985,24 +30108,48 @@ class SemanticsSearchResult extends  AbstractModel {
 }
 
 /**
- * ProcessMediaByUrl response structure.
+ * MPS intelligent task
  * @class
  */
-class ProcessMediaByUrlResponse extends  AbstractModel {
+class MPSAiMediaTask extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID
-         * @type {string || null}
+         * MPS intelligent task template ID
+         * @type {number || null}
          */
-        this.TaskId = null;
+        this.Definition = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * MPS intelligent task output file collection
+         * @type {Array.<MPSOutputFileInfo> || null}
+         */
+        this.OutputFile = null;
+
+        /**
+         * The returned result of the MPS intelligent task. This field corresponds to the Output result in the MPS task return and is returned in JSON format.
+Different MPS task output results have different structures. For the specific return content, see the MPS task output struct.
+[Intelligent classification result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskClassificationOutput)
+[Intelligent cover result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskCoverOutput)
+[Intelligent Tag Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskTagOutput)
+[Intelligent frame tagging classification result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskFrameTagOutput)
+[Intelligent Highlight Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHighlightOutput)
+[Video Splitting Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskSegmentOutput)
+[Intelligent video opening/closing credits result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHeadTailOutput)
+[Intelligent summary result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskDescriptionOutput)
+[Horizontal-to-Vertical Video Transformation Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHorizontalToVerticalOutput)
+[Intelligent dubbing result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskDubbingOutput)
+[Intelligent video understanding result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskVideoComprehensionOutput)
+[Intelligent caption full speech recognition result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskAsrFullTextResultOutput)
+[Intelligent caption translation result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskTransTextResultOutput)
+[Intelligent caption pure srt translation result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#PureSubtitleTransResultOutput)
+[Smart subtitling text extraction result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskTextResultOutput)
+
+
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.OutputText = null;
 
     }
 
@@ -30013,8 +30160,17 @@ class ProcessMediaByUrlResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.OutputFile) {
+            this.OutputFile = new Array();
+            for (let z in params.OutputFile) {
+                let obj = new MPSOutputFileInfo();
+                obj.deserialize(params.OutputFile[z]);
+                this.OutputFile.push(obj);
+            }
+        }
+        this.OutputText = 'OutputText' in params ? params.OutputText : null;
 
     }
 }
@@ -30258,99 +30414,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Video segment containing detected politically sensitive content
+ * face recognition task
  * @class
  */
-class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
+class FaceRecognitionTask extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time offset of a suspected segment in seconds.
+         * <p>Face identification template No.</p>
          * @type {number || null}
          */
-        this.StartTimeOffset = null;
+        this.Definition = null;
 
         /**
-         * End time offset of a suspected segment in seconds.
-         * @type {number || null}
+         * <p>Output file information</p>
+         * @type {Array.<FaceRecognitionOutputFileInfo> || null}
          */
-        this.EndTimeOffset = null;
-
-        /**
-         * Confidence score for the detected politically sensitive content
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * Processing suggestion for the detected politically sensitive content. Valid values:
-<li>pass</li>
-<li>review</li>
-<li>block</li>
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * Name of the politically sensitive content or banned images
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Labels for the detected politically sensitive content. The relationship between the values of this parameter and those of the `LabelSet` parameter in [PoliticalImgReviewTemplateInfo](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) is as follows:
-violation_photo:
-<li>`violation_photo`: banned images</li>
-politician:
-<li>`nation_politician`: state leader of China</li>
-<li>`province_politician`: provincial officials</li>
-<li>`bureau_politician`: bureau-level officials</li>
-<li>`county_politician`: county-level officials</li>
-<li>`rural_politician`: township-level officials</li>
-<li>`sensitive_politician`: politically sensitive people</li>
-<li>`foreign_politician`: state leaders of other countries</li>
-entertainment:
-<li>`sensitive_entertainment`: banned people in the entertainment industry</li>
-sport:
-<li>`sensitive_sport`: banned sports celebrities</li>
-entrepreneur:
-<li>`sensitive_entrepreneur`: banned businesspeople</li>
-scholar:
-<li>sensitive_scholar: banned scholars</li>
-celebrity:
-<li>sensitive_celebrity: banned celebrities</li>
-<li>historical_celebrity: banned historical figures</li>
-military:
-<li>sensitive_military: banned people in military</li>
-         * @type {string || null}
-         */
-        this.Label = null;
-
-        /**
-         * URL of a suspected image (which will not be permanently stored
- and will be deleted after `PicUrlExpireTime`).
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Coordinates (pixel) of the detected politically sensitive content or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
-         * @type {Array.<number> || null}
-         */
-        this.AreaCoordSet = null;
-
-        /**
-         * This field has been disused. Please use `PicUrlExpireTime`.
-         * @type {number || null}
-         */
-        this.PicUrlExpireTimeStamp = null;
-
-        /**
-         * Expiration time of suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
-         * @type {string || null}
-         */
-        this.PicUrlExpireTime = null;
+        this.OutputFile = null;
 
     }
 
@@ -30361,16 +30442,16 @@ military:
         if (!params) {
             return;
         }
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
-        this.PicUrlExpireTimeStamp = 'PicUrlExpireTimeStamp' in params ? params.PicUrlExpireTimeStamp : null;
-        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.OutputFile) {
+            this.OutputFile = new Array();
+            for (let z in params.OutputFile) {
+                let obj = new FaceRecognitionOutputFileInfo();
+                obj.deserialize(params.OutputFile[z]);
+                this.OutputFile.push(obj);
+            }
+        }
 
     }
 }
@@ -32116,6 +32197,41 @@ class CloneCDNDomainResponse extends  AbstractModel {
 }
 
 /**
+ * Face recognition output file information
+ * @class
+ */
+class FaceRecognitionOutputFileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Face recognition output file type</p><p>Enumeration value:</p><ul><li>Output: Result output of task generation. The file corresponds to the result in the face recognition task return and is generated in JSON format.</li></ul>
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * <p>File URL of face recognition output</p>
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * Basic information of VOD media file
  * @class
  */
@@ -32214,6 +32330,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.StorageRegion = null;
 
         /**
+         * Media storage path.
+         * @type {string || null}
+         */
+        this.StoragePath = null;
+
+        /**
          * Tag information of media file.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
@@ -32278,6 +32400,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.SourceInfo = obj;
         }
         this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.StoragePath = 'StoragePath' in params ? params.StoragePath : null;
         this.TagSet = 'TagSet' in params ? params.TagSet : null;
         this.Vid = 'Vid' in params ? params.Vid : null;
         this.Category = 'Category' in params ? params.Category : null;
@@ -35568,6 +35691,70 @@ class AccelerateAreaInfo extends  AbstractModel {
 }
 
 /**
+ * Image sprite information
+ * @class
+ */
+class MediaImageSpriteItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Sprite sheet specification. Please refer to <a href="https://www.tencentcloud.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF">sprite sheet parameter template</a>.</p>
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * <p>Height of the sprite sheet.</p>
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * <p>Width of the sprite sheet.</p>
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * <p>The number of small images in each sprite sheet.</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * <p>The domain names or IP addresses of each sprite sheet.</p>
+         * @type {Array.<string> || null}
+         */
+        this.ImageUrlSet = null;
+
+        /**
+         * Address of WebVtt file for the position-time relationship among subimages in an image sprite. The WebVtt file indicates the corresponding time points of each subimage and their coordinates in the image sprite, which is typically used by the player for implementing preview.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.WebVttUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.ImageUrlSet = 'ImageUrlSet' in params ? params.ImageUrlSet : null;
+        this.WebVttUrl = 'WebVttUrl' in params ? params.WebVttUrl : null;
+
+    }
+}
+
+/**
  * Source file information.
  * @class
  */
@@ -35576,31 +35763,40 @@ class MediaSourceData extends  AbstractModel {
         super();
 
         /**
-         * Media files source category: <li>Record: From recording. Such as live streaming recording, live time shift recording, etc.</li> <li>Upload: From upload. Such as pull upload, upload from server, client UGC upload, etc.</li> <li>VideoProcessing: From video processing. Such as video splicing, video editing, etc.</li> <li>TrtcRecord: From TRTC accompanying recording.</li> <li>WebPageRecord: From panoramic recording.</li> <li>Unknown: Unknown source.</li>
+         * Media file source category:
+<li>Record: comes from recording, such as live recording, live streaming time shift recording.</li>
+<li>Upload: Comes from upload, such as pull upload, server-side upload, and client UGC upload.</li>
+<li>VideoProcessing: comes from video processing, such as video splicing, video editing.</li>
+<li>TrtcRecord: Comes from TRTC simultaneous recording.</li>
+<li>WebPageRecord: comes from panoramic recording.</li>
+<li>Unknown: Unknown source.</li>
          * @type {string || null}
          */
         this.SourceType = null;
 
         /**
-         * User-transparent transmission field when creating a file.
+         * Field passed through when the user creates a file.
          * @type {string || null}
          */
         this.SourceContext = null;
 
         /**
-         * Live streaming recording information, valid when the file source is Record.
+         * Live recording information is valid when file source is Record.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {LiveRecordInfo || null}
          */
         this.LiveRecordInfo = null;
 
         /**
-         * TRTC recording information, valid when the file source is TrtcRecord.
+         * TRTC Companion Recording Information. Valid at that time when the file source is TrtcRecord.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TrtcRecordInfo || null}
          */
         this.TrtcRecordInfo = null;
 
         /**
-         * Panoramic recording information, valid when the file source is WebPageRecord.
+         * Panoramic recording information. Valid when the file source is WebPageRecord.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {WebPageRecordInfo || null}
          */
         this.WebPageRecordInfo = null;
@@ -35756,6 +35952,124 @@ class PushUrlCacheRequest extends  AbstractModel {
         }
         this.Urls = 'Urls' in params ? params.Urls : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * Video segment containing detected politically sensitive content
+ * @class
+ */
+class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time offset of a suspected segment in seconds.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * End time offset of a suspected segment in seconds.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * Confidence score for the detected politically sensitive content
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Processing suggestion for the detected politically sensitive content. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * Name of the politically sensitive content or banned images
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Labels for the detected politically sensitive content. The relationship between the values of this parameter and those of the `LabelSet` parameter in [PoliticalImgReviewTemplateInfo](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) is as follows:
+violation_photo:
+<li>`violation_photo`: banned images</li>
+politician:
+<li>`nation_politician`: state leader of China</li>
+<li>`province_politician`: provincial officials</li>
+<li>`bureau_politician`: bureau-level officials</li>
+<li>`county_politician`: county-level officials</li>
+<li>`rural_politician`: township-level officials</li>
+<li>`sensitive_politician`: politically sensitive people</li>
+<li>`foreign_politician`: state leaders of other countries</li>
+entertainment:
+<li>`sensitive_entertainment`: banned people in the entertainment industry</li>
+sport:
+<li>`sensitive_sport`: banned sports celebrities</li>
+entrepreneur:
+<li>`sensitive_entrepreneur`: banned businesspeople</li>
+scholar:
+<li>sensitive_scholar: banned scholars</li>
+celebrity:
+<li>sensitive_celebrity: banned celebrities</li>
+<li>historical_celebrity: banned historical figures</li>
+military:
+<li>sensitive_military: banned people in military</li>
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * URL of a suspected image (which will not be permanently stored
+ and will be deleted after `PicUrlExpireTime`).
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Coordinates (pixel) of the detected politically sensitive content or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+        /**
+         * This field has been disused. Please use `PicUrlExpireTime`.
+         * @type {number || null}
+         */
+        this.PicUrlExpireTimeStamp = null;
+
+        /**
+         * Expiration time of suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.PicUrlExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+        this.PicUrlExpireTimeStamp = 'PicUrlExpireTimeStamp' in params ? params.PicUrlExpireTimeStamp : null;
+        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
 
     }
 }
@@ -36892,6 +37206,62 @@ class DescribeQualityInspectTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * MPS output file information
+ * @class
+ */
+class MPSOutputFileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * MPS output file type. Valid values:
+<li>Video: the generated video file of the task.</li>
+<li>Cover: cover file generated by task generation.</li>
+<li>Audio: audio file generated by task generation.</li>
+<li>Output: The result output of task generation. The file corresponds to the Output result in the MPS task response and is generated in JSON format.</li>
+
+Output file. Different MPS tasks have different output results. For specific return content, refer to the MPS task output struct. The struct is JSON-serialized to generate the Output file.
+[Intelligent classification result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskClassificationOutput)
+[Intelligent cover result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskCoverOutput)
+[Intelligent Tag Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskTagOutput)
+[Intelligent frame tagging classification result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskFrameTagOutput)
+[Intelligent Highlight Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHighlightOutput)
+[Video Splitting Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskSegmentOutput)
+[Intelligent video opening/closing credits result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHeadTailOutput)
+[Intelligent summary result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskDescriptionOutput)
+[Horizontal-to-Vertical Video Transformation Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHorizontalToVerticalOutput)
+[Intelligent dubbing result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskDubbingOutput)
+[Intelligent video understanding result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskVideoComprehensionOutput)
+[Intelligent caption full speech recognition result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskAsrFullTextResultOutput)
+[Intelligent caption translation result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskTransTextResultOutput)
+[Intelligent caption pure srt translation result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#PureSubtitleTransResultOutput)
+[Smart subtitling text extraction result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskTextResultOutput)
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * MPS output file URL
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * DescribeMediaInfos request structure.
  * @class
  */
@@ -37519,6 +37889,42 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Progress = 'Progress' in params ? params.Progress : null;
         this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
         this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+
+    }
+}
+
+/**
+ * Intelligent media information processed with MPS
+ * @class
+ */
+class MPSAiMediaInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of intelligent media information processed by MPS
+         * @type {Array.<MPSAiMediaItem> || null}
+         */
+        this.AiMediaList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AiMediaList) {
+            this.AiMediaList = new Array();
+            for (let z in params.AiMediaList) {
+                let obj = new MPSAiMediaItem();
+                obj.deserialize(params.AiMediaList[z]);
+                this.AiMediaList.push(obj);
+            }
+        }
 
     }
 }
@@ -38597,60 +39003,76 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
         super();
 
         /**
-         * Adaptive bitrate streaming specification.
+         * <p>Convert to adaptive bitrate streaming specification.</p>
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * The packaging format. Valid values:
-<li>`HLS`</li>
-<li>`DASH`</li>
+         * <p>Packaging format. Value ranges from:</p><li>HLS;</li><li>DASH.</li>
          * @type {string || null}
          */
         this.Package = null;
 
         /**
-         * Encryption type.
+         * <p>Encryption type.</p>
          * @type {string || null}
          */
         this.DrmType = null;
 
         /**
-         * Playback address.
+         * <p>Playback address.</p>
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * File size (bytes)
-<li>If the file is an HLS file, the value of this parameter is the sum of the size of the M3U8 and TS files.</li>
-<li>If the file is a DASH file, the value of this parameter is the sum of the size of the MPD and segment files.</li>
-<li><font color=red>Note</font>: For adaptive bitrate streaming files generated before 2022-01-10T16:00:00Z, the value of this parameter is `0`.</li>
+         * <p>Media file size, unit: byte.</p><li>When the media file is HLS, the size is the sum of m3u8 and ts file sizes.</li><li>When the media file is DASH, the size is the sum of mpd and fragment file sizes.</li><li><font color="red">Note</font>: This field is 0 for adaptive bitrate stream files generated through pre-processing before 2022-01-10T16:00:00Z.</li>
          * @type {number || null}
          */
         this.Size = null;
 
         /**
-         * Digital watermark type. Optional values:
-<li>Trace means traceability watermark processing; </li>
-<li>CopyRight means copyright watermark processing; </li>
-<li>None means no digital watermark processing. </li>
+         * <p>Watermark type. Available values:</p><li>Trace means transit watermark processing;</li><li>CopyRight means copyright watermark processing;</li><li>None means no watermark processing.</li>
          * @type {string || null}
          */
         this.DigitalWatermarkType = null;
 
         /**
-         * The information of the streams.
+         * <p>Substream info list.</p>
          * @type {Array.<MediaSubStreamInfoItem> || null}
          */
         this.SubStreamSet = null;
 
         /**
-         * Copyright Information.
+         * <p>Copyright information.</p>
          * @type {string || null}
          */
         this.CopyRightWatermarkText = null;
+
+        /**
+         * <p>Digital watermark template id.</p>
+         * @type {number || null}
+         */
+        this.BlindWatermarkDefinition = null;
+
+        /**
+         * <p>Subtitle information list.</p>
+         * @type {Array.<MediaSubtitleItem> || null}
+         */
+        this.SubtitleSet = null;
+
+        /**
+         * <p>Unique identifier for default subtitle.</p>
+         * @type {string || null}
+         */
+        this.DefaultSubtitleId = null;
+
+        /**
+         * <p>DRM encryption method.</p>
+         * @type {string || null}
+         */
+        this.DrmEncryptType = null;
 
     }
 
@@ -38677,6 +39099,18 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
             }
         }
         this.CopyRightWatermarkText = 'CopyRightWatermarkText' in params ? params.CopyRightWatermarkText : null;
+        this.BlindWatermarkDefinition = 'BlindWatermarkDefinition' in params ? params.BlindWatermarkDefinition : null;
+
+        if (params.SubtitleSet) {
+            this.SubtitleSet = new Array();
+            for (let z in params.SubtitleSet) {
+                let obj = new MediaSubtitleItem();
+                obj.deserialize(params.SubtitleSet[z]);
+                this.SubtitleSet.push(obj);
+            }
+        }
+        this.DefaultSubtitleId = 'DefaultSubtitleId' in params ? params.DefaultSubtitleId : null;
+        this.DrmEncryptType = 'DrmEncryptType' in params ? params.DrmEncryptType : null;
 
     }
 }
@@ -39103,94 +39537,119 @@ class MediaInfo extends  AbstractModel {
         super();
 
         /**
-         * Basic information, such as video name, category, playback address, and cover image.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Basic information. Include video name, category, playback address, cover image.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaBasicInfo || null}
          */
         this.BasicInfo = null;
 
         /**
-         * Metadata, such as size, duration, video stream information, and audio stream information.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Meta information, including size, duration, video stream information, and audio stream information.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaMetaData || null}
          */
         this.MetaData = null;
 
         /**
-         * Result information of transcoding, such as address, specification, bitrate, and resolution of the videos in various bitrates generated by transcoding a video.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Transcoding result information, including domain names or IP addresses, specifications, bitrates, and resolutions of various types of videos generated by video transcoding.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaTranscodeInfo || null}
          */
         this.TranscodeInfo = null;
 
         /**
-         * Result information of animated image generating, i.e., relevant information of an animated image (such as .gif) generated from a video.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>AnimatedGraphicsInfo. Information related to the animated graphics (such as gif) after video-to-gif conversion.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaAnimatedGraphicsInfo || null}
          */
         this.AnimatedGraphicsInfo = null;
 
         /**
-         * Sampled screenshot information, i.e., relevant information of a sampled screenshot generated from a video.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Sampling screenshot information. Screenshot information related to the video after sampling screenshot taking.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaSampleSnapshotInfo || null}
          */
         this.SampleSnapshotInfo = null;
 
         /**
-         * Image sprite information, i.e., relevant information of image sprite generated from video.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Sprite image information. Relevant information of the sprite after capturing CSS sprites from the video.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaImageSpriteInfo || null}
          */
         this.ImageSpriteInfo = null;
 
         /**
-         * Time point screenshot information, i.e., information of each time point screenshot generated from a video.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Screenshot information at the specified time point. Information of each screenshot after capturing the video at the specified time point.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaSnapshotByTimeOffsetInfo || null}
          */
         this.SnapshotByTimeOffsetInfo = null;
 
         /**
-         * Timestamp information, i.e., information of each timestamp set for a video.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Video timestamp information. Each dotting information set for the video.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaKeyFrameDescInfo || null}
          */
         this.KeyFrameDescInfo = null;
 
         /**
-         * Adaptive bitrate streaming information, such as specification, encryption type, and container format.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Adaptive Bitrate Streaming information. Includes specification, encryption type, packaging format and information related to.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaAdaptiveDynamicStreamingInfo || null}
          */
         this.AdaptiveDynamicStreamingInfo = null;
 
         /**
-         * WeChat Mini Program audit information.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>miniProgramReviewInfo</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaMiniProgramReviewInfo || null}
          */
         this.MiniProgramReviewInfo = null;
 
         /**
-         * Subtitle information
-Note: this field may return `null`, indicating that no valid value is obtained.
+         * <p>Subtitle information.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaSubtitleInfo || null}
          */
         this.SubtitleInfo = null;
 
         /**
-         * Unique ID of media file.
+         * <p>Media file unique identifier ID.</p>
          * @type {string || null}
          */
         this.FileId = null;
 
         /**
-         * Moderation details.
+         * <p>Verification information.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {FileReviewInfo || null}
          */
         this.ReviewInfo = null;
+
+        /**
+         * <p>MPS intelligent media asset information</p>
+         * @type {MPSAiMediaInfo || null}
+         */
+        this.MPSAiMediaInfo = null;
+
+        /**
+         * <p>Image understanding information.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ImageUnderstandingInfo || null}
+         */
+        this.ImageUnderstandingInfo = null;
+
+        /**
+         * <p>Intelligent library information.</p>
+         * @type {KnowledgeBasesInfo || null}
+         */
+        this.KnowledgeBasesInfo = null;
+
+        /**
+         * <p>Facial recognition information.</p>
+         * @type {FaceRecognitionInfo || null}
+         */
+        this.FaceRecognitionInfo = null;
 
     }
 
@@ -39273,6 +39732,30 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new FileReviewInfo();
             obj.deserialize(params.ReviewInfo)
             this.ReviewInfo = obj;
+        }
+
+        if (params.MPSAiMediaInfo) {
+            let obj = new MPSAiMediaInfo();
+            obj.deserialize(params.MPSAiMediaInfo)
+            this.MPSAiMediaInfo = obj;
+        }
+
+        if (params.ImageUnderstandingInfo) {
+            let obj = new ImageUnderstandingInfo();
+            obj.deserialize(params.ImageUnderstandingInfo)
+            this.ImageUnderstandingInfo = obj;
+        }
+
+        if (params.KnowledgeBasesInfo) {
+            let obj = new KnowledgeBasesInfo();
+            obj.deserialize(params.KnowledgeBasesInfo)
+            this.KnowledgeBasesInfo = obj;
+        }
+
+        if (params.FaceRecognitionInfo) {
+            let obj = new FaceRecognitionInfo();
+            obj.deserialize(params.FaceRecognitionInfo)
+            this.FaceRecognitionInfo = obj;
         }
 
     }
@@ -44338,22 +44821,19 @@ class MediaAudioStreamItem extends  AbstractModel {
         super();
 
         /**
-         * Bitrate of audio stream in bps.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Bitrate of the audio stream. Measurement unit: bps.</p>
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
-         * Sample rate of audio stream in Hz.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Sampling rate of the audio stream, unit: hz.</p>
          * @type {number || null}
          */
         this.SamplingRate = null;
 
         /**
-         * Audio stream encoder, such as aac.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Audio stream encoding format, such as aac.</p>
          * @type {string || null}
          */
         this.Codec = null;
@@ -46154,6 +46634,65 @@ class TerrorismImgReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
+ * MPS AI media task item
+ * @class
+ */
+class MPSAiMediaItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * MPS intelligent processing task type. Valid values:
+<li>AiAnalysis.ClassificationTask: intelligent classification task.</li>
+<li>AiAnalysis.CoverTask: intelligent thumbnail generating.</li>
+<li>AiAnalysis.TagTask: intelligent tag task.</li>
+<li>AiAnalysis.FrameTagTask: intelligent frame-by-frame tagging task.</li>
+<li>AiAnalysis.HighlightTask: Intelligent highlight task.</li>
+<li>AiAnalysis.SegmentTask: Intelligent video splitting task.</li>
+<li>AiAnalysis.HeadTailTask: Intelligent opening and closing credits task.</li>
+<li>AiAnalysis.DescriptionTask: Intelligent summary task.</li>
+<li>AiAnalysis.HorizontalToVerticalTask: Intelligent Landscape to Portrait Task.</li>
+<li>AiAnalysis.DubbingTask: Intelligent dubbing task.</li>
+<li>AiAnalysis.VideoRemakeTask: Intelligent deduplication task.</li>
+<li>AiAnalysis.VideoComprehensionTask: Video understanding task.</li>
+<li>SmartSubtitle.AsrFullTextTask: Intelligent speech full-text recognition task.</li>
+<li>SmartSubtitle.TransTextTask: Translation result.</li>
+<li>SmartSubtitle.PureSubtitleTransTask: Returns the pure subtitle file translation result.</li>
+<li>SmartSubtitle.OcrFullTextTask: Intelligent text extraction subtitle task.</li>
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * MPS intelligent processing task result set
+         * @type {Array.<MPSAiMediaTask> || null}
+         */
+        this.AiMediaTasks = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+
+        if (params.AiMediaTasks) {
+            this.AiMediaTasks = new Array();
+            for (let z in params.AiMediaTasks) {
+                let obj = new MPSAiMediaTask();
+                obj.deserialize(params.AiMediaTasks[z]);
+                this.AiMediaTasks.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ApplyUpload response structure.
  * @class
  */
@@ -47927,10 +48466,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DigitalWatermarkType = null;
 
         /**
-         * Copyright information.
+         * 
          * @type {string || null}
          */
         this.CopyRightWatermarkText = null;
+
+        /**
+         * Digital watermark template id.
+         * @type {number || null}
+         */
+        this.BlindWatermarkDefinition = null;
 
     }
 
@@ -47970,6 +48515,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.DigitalWatermarkType = 'DigitalWatermarkType' in params ? params.DigitalWatermarkType : null;
         this.CopyRightWatermarkText = 'CopyRightWatermarkText' in params ? params.CopyRightWatermarkText : null;
+        this.BlindWatermarkDefinition = 'BlindWatermarkDefinition' in params ? params.BlindWatermarkDefinition : null;
 
     }
 }
@@ -48928,244 +49474,196 @@ class SearchMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * <p><b>Video-on-demand (VOD) <a href="/document/product/266/33987">application</a> ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the app ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b></p>
          * @type {number || null}
          */
         this.SubAppId = null;
 
         /**
-         * File ID set. Any element in the set can be matched.
-<li>Array length limit: 10.</li>
-<li>ID length limit: 40 characters.</li>
+         * <p>File id collection, match any element in the collection.</p><li>Array length limit: 10.</li><li>Single ID length limit: 40 character.</li>
          * @type {Array.<string> || null}
          */
         this.FileIds = null;
 
         /**
-         * The file names to use for fuzzy search, which are sorted by relevance in descending order.
-<li>Name length limit: 100 characters.</li>
-<li>Array length limit: 10</li>
+         * <p>File name collection. Fuzzy match media files by file name. The higher the matching degree, the higher the priority in sorting.</p><li>Single file name length limit: 100 characters.</li><li>Array length limit: 10.</li>
          * @type {Array.<string> || null}
          */
         this.Names = null;
 
         /**
-         * The file name prefixes to search.
-<li>Prefix length limit: 100 characters.</li>
-<li>Array length limit: 10.</li>
+         * <p>File name prefix. Prefix match media files.</p><li>Single file name prefix length limit: 100 characters.</li><li>Array length limit: 10.</li>
          * @type {Array.<string> || null}
          */
         this.NamePrefixes = null;
 
         /**
-         * File description set. Media file descriptions are fuzzily matched. The higher the match rate, the higher-ranked the result.
-<li>Length limit for a single description: 100 characters</li>
-<li>Array length limit: 10</li>
+         * <p>File description set, fuzzy match media files. The higher the matching degree, higher priority in sorting.</p><li>Single description length limit: 100 characters.</li><li>Array length limit: 10.</li>
          * @type {Array.<string> || null}
          */
         this.Descriptions = null;
 
         /**
-         * Category ID set. The categories of the specified IDs and all subcategories in the set are matched.
-<li>Array length limit: 10.</li>
+         * <p>Category id collection, match the specified ID in the collection and all its subclasses.</p><li>Array length limit: 10.</li>
          * @type {Array.<number> || null}
          */
         this.ClassIds = null;
 
         /**
-         * The tags to search. A file is considered a match if it has any of the tags specified.
-<li>Tag length limit: 32 characters.</li>
-<li>Array length limit: 16.</li>
+         * <p>Tag set, match any element in the collection.</p><li>Single tag length limit: 32 character.</li><li>Array length limit: 16.</li>
          * @type {Array.<string> || null}
          */
         this.Tags = null;
 
         /**
-         * File type. Any element in the set can be matched.
-<li>Video: video file</li>
-<li>Audio: audio file</li>
-<li>Image: image file</li>
+         * <p>File type. Match any element in the collection:</p><li>Video: video file</li><li>Audio: audio file</li><li>Image: image file</li>
          * @type {Array.<string> || null}
          */
         this.Categories = null;
 
         /**
-         * Media file source set. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
-<li>Array length limit: 10.</li>
+         * <p>Media file source collection. Source value reference <a href="https://www.tencentcloud.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData">SourceType</a>.</p><li>Array length limit: 10.</li>
          * @type {Array.<string> || null}
          */
         this.SourceTypes = null;
 
         /**
-         * The live stream code array. A media file will be returned if it matches any element in the array.
-<li>Array length limit: 10</li>
+         * <p>Push stream live code collection. Match any element in the collection.</p><li>Array length limit: 10.</li>
          * @type {Array.<string> || null}
          */
         this.StreamIds = null;
 
         /**
-         * Matches files created within the time period.
-<li>Includes specified start and end points in time.</li>
+         * <p>Match files with creation time within this time period.</p><li>Include the specified start and end points in time.</li>
          * @type {TimeRange || null}
          */
         this.CreateTime = null;
 
         /**
-         * Files whose expiration time points are within the specified time range will be returned. Expired files will not be returned.
-<li>The files whose expiration time points are on the start or end time of the specified range will also be returned.</li>
+         * <p>Match files with expiration time within this period. Unable to retrieve expired files.</p><li>Include the specified start and end points in time.</li>
          * @type {TimeRange || null}
          */
         this.ExpireTime = null;
 
         /**
-         * Regions where media files are stored, such as `ap-chongqing`. For more regions, see [Storage Regions](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
-<li>Length limit for a single region: 20 characters</li>
-<li>Array length limit: 20</li>
+         * <p>Media file storage region, such as ap-chongqing. Please refer to <a href="https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a>.</p><li>Single storage region length limit: 20 characters.</li><li>Array length limit: 20.</li>
          * @type {Array.<string> || null}
          */
         this.StorageRegions = null;
 
         /**
-         * An array of storage classes. Valid values:
-<li>STANDARD</li>
-<li>STANDARD_IA</li>
-<li>ARCHIVE</li>
-<li>DEEP_ARCHIVE</li>
+         * <p>Storage type array. Optional values:</p><li> STANDARD: Standard storage.</li><li> STANDARD_IA: Infrequent storage.</li><li> ARCHIVE: Archive storage.</li><li> DEEP_ARCHIVE: Deep archive storage.</li>
          * @type {Array.<string> || null}
          */
         this.StorageClasses = null;
 
         /**
-         * The file formats.
-<li>Array length limit: 10</li>
+         * <p>Media file packaging format collection, match any element in the collection.</p><li>Array length limit: 10.</li>
          * @type {Array.<string> || null}
          */
         this.MediaTypes = null;
 
         /**
-         * The file statuses.
-<li>`Normal`</li>
-<li>`SystemForbidden` (blocked by VOD)</li>
-<li>`Forbidden` (blocked by you)</li>
+         * <p>Media file status, match any element in the collection.</p><li> Normal: normal;</li><li> SystemForbidden: Platform Ban;</li><li> Forbidden: proactive ban.</li>
          * @type {Array.<string> || null}
          */
         this.Status = null;
 
         /**
-         * The types of moderation result.
-<li>`pass`</li>
-<li>`review` (the content may be non-compliant and needs to be reviewed)</li>
-<li>`block` (the content is non-compliant and should be blocked)</li>
-<li>`notModerated` (the file hasn't been moderated yet)</li>
+         * <p>Media file review result, match any element in the collection.</p><li> pass: Pass review;</li><li> review: Suspected violation, suggest re-examination;</li><li> block: Confirmed violation, suggest banning;</li><li> notModerated: Not moderated.</li>
          * @type {Array.<string> || null}
          */
         this.ReviewResults = null;
 
         /**
-         * The TRTC application IDs. Any file that matches one of the application IDs will be returned.
-<li>Array length limit: 10</li>
+         * <p>TRTC application ID collection. Matches any element in the collection.</p><li>Array length limit: 10.</li>
          * @type {Array.<number> || null}
          */
         this.TrtcSdkAppIds = null;
 
         /**
-         * The TRTC room IDs. Any file that matches one of the room IDs will be returned.
-<li>Element length limit: 64 characters.</li>
-<li>Array length limit: 10.</li>
+         * <p>TRTC room ID collection. Matches any element in the collection.</p><li>Single room ID length limit: 64 characters;</li><li>Array length limit: 10.</li>
          * @type {Array.<string> || null}
          */
         this.TrtcRoomIds = null;
 
         /**
-         * Specifies information entry that needs to be returned for all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
-<li>basicInfo (basic video information).</li>
-<li>metaData (video metadata).</li>
-<li>transcodeInfo (result information of video transcoding).</li>
-<li>animatedGraphicsInfo (result information of animated image generating task).</li>
-<li>imageSpriteInfo (image sprite information).</li>
-<li>snapshotByTimeOffsetInfo (point-in-time screenshot information).</li>
-<li>sampleSnapshotInfo (sampled screenshot information).</li>
-<li>keyFrameDescInfo (timestamp information).</li>
-<li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
-<li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
+         * <p>Information to be returned for all specified media files, multiple information can be specified simultaneously, N starts incrementing from 0. If this field is not filled in, default return all information. Options include:</p><li>basicInfo (video basic information).</li><li>metaData (video metadata).</li><li>transcodeInfo (video transcoding result information).</li><li>animatedGraphicsInfo (video motion graphic result information).</li><li>imageSpriteInfo (video thumbnail information).</li><li>snapshotByTimeOffsetInfo (video screenshot by specified time point).</li><li>sampleSnapshotInfo (sampling screenshot information).</li><li>keyFrameDescInfo (Dotting Information).</li><li>adaptiveDynamicStreamingInfo (Adaptive Bitrate Streaming information).</li><li>miniProgramReviewInfo (miniProgramReviewInfo).</li>
          * @type {Array.<string> || null}
          */
         this.Filters = null;
 
         /**
-         * Sorting order.
-<li>Valid value of `Sort.Field`: CreateTime.</li>
-<li>If `Text`, `Names`, or `Descriptions` is not empty, the `Sort.Field` field will not take effect, and the search results will be sorted by match rate.</li>
+         * <p>Sorting method.</p><li>Sort.Field optional CreateTime.</li><li>When Text, Names, or Descriptions is not empty, the Sort.Field field is invalid. Search results sorted by relevance.</li>
          * @type {SortBy || null}
          */
         this.Sort = null;
 
         /**
-         * <div id="p_offset">Start offset of a paged return. Default value: 0. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
-<li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
+         * <div id="p_offset">Starting offset amount for pagination return, default value: 0. Returns entries from Offset to Offset+Limit-1.<li>Value ranges from...to... Offset + Limit is no more than 5000. (See: <a href="#maxResultsDesc">API return result count limit</a>)</li></div>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * <div id="p_limit">Number of entries returned by a paged query. Default value: 10. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
-<li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
+         * <div id="p_limit">Number of records returned in pages. Default value: 10. Records from Offset to Offset+Limit-1 will be returned.<li>Value ranges from...to... Offset + Limit is no more than 5000. (Refer to: <a href="#maxResultsDesc">API return result count limit</a>)</li></div>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
-Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
+         * <p>(Not recommended: Use Names, NamePrefixes, or Descriptions as alternatives)<br>Search text, fuzzy match media file name or description information. The higher the matching degree and more matches, the higher priority in sorting. Length limit: 64 characters.</p>
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * (This is not recommended. `SourceTypes` should be used instead)
-Media file source. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
+         * <p>(Not recommended: Use SourceTypes as an alternative)<br>Media file source. Source value reference <a href="https://www.tencentcloud.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData">SourceType</a>.</p>
          * @type {string || null}
          */
         this.SourceType = null;
 
         /**
-         * (Not recommended. Consider using `StreamIds` instead.)
-The live stream code.
+         * <p>(Not recommended: Use StreamIds as an alternative)<br>Push stream live code.</p>
          * @type {string || null}
          */
         this.StreamId = null;
 
         /**
-         * (This is not recommended. `CreateTime` should be used instead)
-Start time in the creation time range.
-<li>After or at the start time.</li>
-<li>If `CreateTime.After` also exists, it will be used first.</li>
-<li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+         * <p>(Not recommended: Use CreateTime instead)<br>Start time of creation time.</p><li>Greater than or equal to start time.</li><li>When CreateTime.After also exists, CreateTime.After will be used first.</li><li>Format according to ISO 8601 standard. For details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).</li>
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * (This is not recommended. `CreateTime` should be used instead)
-End time in the creation time range.
-<li>Before the end time.</li>
-<li>If `CreateTime.Before` also exists, it will be used first.</li>
-<li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+         * <p>(Not recommended: Use CreateTime instead)<br>End time of creation time.</p><li>Less than end time.</li><li>When CreateTime.Before also exists, CreateTime.Before will be used first.</li><li>Format according to ISO 8601 standard. For details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).</li>
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * This parameter is invalid now.
+         * <p>This field is invalid.</p>
          * @type {Array.<string> || null}
          */
         this.Vids = null;
 
         /**
-         * This parameter is invalid now.
+         * <p>This field is invalid.</p>
          * @type {string || null}
          */
         this.Vid = null;
+
+        /**
+         * <p>Live streaming push Domain. Valid when the media source is Live streaming Recording.</p>
+         * @type {Array.<string> || null}
+         */
+        this.StreamDomains = null;
+
+        /**
+         * <p>Live streaming push Path. Valid at that time when the source is live recording.</p>
+         * @type {Array.<string> || null}
+         */
+        this.StreamPaths = null;
 
     }
 
@@ -49221,6 +49719,8 @@ End time in the creation time range.
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Vids = 'Vids' in params ? params.Vids : null;
         this.Vid = 'Vid' in params ? params.Vid : null;
+        this.StreamDomains = 'StreamDomains' in params ? params.StreamDomains : null;
+        this.StreamPaths = 'StreamPaths' in params ? params.StreamPaths : null;
 
     }
 }
@@ -53973,7 +54473,7 @@ module.exports = {
     QualityEnhanceTaskInput: QualityEnhanceTaskInput,
     ResetProcedureTemplateResponse: ResetProcedureTemplateResponse,
     Origin: Origin,
-    MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
+    FaceRecognitionInfo: FaceRecognitionInfo,
     RebuildMediaTargetInfo: RebuildMediaTargetInfo,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
     AiReviewPoliticalOcrTaskInput: AiReviewPoliticalOcrTaskInput,
@@ -54058,6 +54558,7 @@ module.exports = {
     DeleteSuperPlayerConfigRequest: DeleteSuperPlayerConfigRequest,
     AiReviewTerrorismOcrTaskInput: AiReviewTerrorismOcrTaskInput,
     AiRecognitionTaskOcrWordsResultInput: AiRecognitionTaskOcrWordsResultInput,
+    MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
     SceneAigcImageTaskOutputFileInfo: SceneAigcImageTaskOutputFileInfo,
     ModifyMediaStorageClassResponse: ModifyMediaStorageClassResponse,
     AiReviewPornTaskInput: AiReviewPornTaskInput,
@@ -54104,7 +54605,7 @@ module.exports = {
     CreateRebuildMediaTemplateResponse: CreateRebuildMediaTemplateResponse,
     AiRecognitionTaskOcrWordsResultOutput: AiRecognitionTaskOcrWordsResultOutput,
     AiSampleFaceInfo: AiSampleFaceInfo,
-    MediaImageSpriteItem: MediaImageSpriteItem,
+    ImageUnderstandingInfo: ImageUnderstandingInfo,
     CDNDomainInfo: CDNDomainInfo,
     DescribeEnhanceMediaTemplatesResponse: DescribeEnhanceMediaTemplatesResponse,
     ImageBlur: ImageBlur,
@@ -54264,6 +54765,7 @@ module.exports = {
     CreateSuperPlayerConfigResponse: CreateSuperPlayerConfigResponse,
     AiAnalysisTaskFrameTagOutput: AiAnalysisTaskFrameTagOutput,
     CreateEnhanceMediaTemplateResponse: CreateEnhanceMediaTemplateResponse,
+    KnowledgeBasesInfo: KnowledgeBasesInfo,
     DeleteReviewTemplateResponse: DeleteReviewTemplateResponse,
     DNSVerifyInfo: DNSVerifyInfo,
     MediaAnimatedGraphicsItem: MediaAnimatedGraphicsItem,
@@ -54304,7 +54806,7 @@ module.exports = {
     MediaTrackItem: MediaTrackItem,
     ImportMediaKnowledgeResponse: ImportMediaKnowledgeResponse,
     RestoreMediaResponse: RestoreMediaResponse,
-    MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
+    ImageUnderstandingItem: ImageUnderstandingItem,
     ModifyWordSampleResponse: ModifyWordSampleResponse,
     EnhanceMediaByTemplateResponse: EnhanceMediaByTemplateResponse,
     CreateJustInTimeTranscodeTemplateRequest: CreateJustInTimeTranscodeTemplateRequest,
@@ -54318,6 +54820,7 @@ module.exports = {
     CreateLLMComprehendTemplateResponse: CreateLLMComprehendTemplateResponse,
     MediaProcessTaskTranscodeResult: MediaProcessTaskTranscodeResult,
     BlurConfigureInfoForUpdate: BlurConfigureInfoForUpdate,
+    ProcessMediaByUrlResponse: ProcessMediaByUrlResponse,
     EditMediaVideoStream: EditMediaVideoStream,
     ExtractTraceWatermarkTask: ExtractTraceWatermarkTask,
     AiRecognitionTaskSegmentResultOutput: AiRecognitionTaskSegmentResultOutput,
@@ -54335,6 +54838,7 @@ module.exports = {
     SimpleHlsClipRequest: SimpleHlsClipRequest,
     MediaDeleteItem: MediaDeleteItem,
     EnhanceConfigForUpdate: EnhanceConfigForUpdate,
+    MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
     PoliticalImageResult: PoliticalImageResult,
     AiSamplePerson: AiSamplePerson,
     MediaAdaptiveDynamicStreamingInfo: MediaAdaptiveDynamicStreamingInfo,
@@ -54444,12 +54948,12 @@ module.exports = {
     DomainDetailInfo: DomainDetailInfo,
     AiReviewTaskTerrorismResult: AiReviewTaskTerrorismResult,
     SemanticsSearchResult: SemanticsSearchResult,
-    ProcessMediaByUrlResponse: ProcessMediaByUrlResponse,
+    MPSAiMediaTask: MPSAiMediaTask,
     DescribeImageReviewUsageDataRequest: DescribeImageReviewUsageDataRequest,
     MediaContentReviewAsrTextSegmentItem: MediaContentReviewAsrTextSegmentItem,
     DescribeEventConfigResponse: DescribeEventConfigResponse,
     DescribeCdnLogsResponse: DescribeCdnLogsResponse,
-    MediaContentReviewPoliticalSegmentItem: MediaContentReviewPoliticalSegmentItem,
+    FaceRecognitionTask: FaceRecognitionTask,
     AigcVideoTaskOutput: AigcVideoTaskOutput,
     DeletePersonSampleResponse: DeletePersonSampleResponse,
     ReviewInfo: ReviewInfo,
@@ -54483,6 +54987,7 @@ module.exports = {
     ModifyCDNDomainConfigRequest: ModifyCDNDomainConfigRequest,
     DeleteContentReviewTemplateResponse: DeleteContentReviewTemplateResponse,
     CloneCDNDomainResponse: CloneCDNDomainResponse,
+    FaceRecognitionOutputFileInfo: FaceRecognitionOutputFileInfo,
     MediaBasicInfo: MediaBasicInfo,
     AiReviewPoliticalAsrTaskInput: AiReviewPoliticalAsrTaskInput,
     PullUploadRequest: PullUploadRequest,
@@ -54536,10 +55041,12 @@ module.exports = {
     StatDataItem: StatDataItem,
     CreateStorageRegionResponse: CreateStorageRegionResponse,
     AccelerateAreaInfo: AccelerateAreaInfo,
+    MediaImageSpriteItem: MediaImageSpriteItem,
     MediaSourceData: MediaSourceData,
     ProhibitedAsrReviewTemplateInfo: ProhibitedAsrReviewTemplateInfo,
     HandleCurrentPlaylistResponse: HandleCurrentPlaylistResponse,
     PushUrlCacheRequest: PushUrlCacheRequest,
+    MediaContentReviewPoliticalSegmentItem: MediaContentReviewPoliticalSegmentItem,
     CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
     HeadTailConfigureInfo: HeadTailConfigureInfo,
     EventContent: EventContent,
@@ -54557,6 +55064,7 @@ module.exports = {
     SceneAigcImageTaskOutput: SceneAigcImageTaskOutput,
     ComposeMediaTaskOutput: ComposeMediaTaskOutput,
     DescribeQualityInspectTemplatesRequest: DescribeQualityInspectTemplatesRequest,
+    MPSOutputFileInfo: MPSOutputFileInfo,
     DescribeMediaInfosRequest: DescribeMediaInfosRequest,
     CreateAigcApiTokenRequest: CreateAigcApiTokenRequest,
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
@@ -54568,6 +55076,7 @@ module.exports = {
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
     AiAnalysisTaskFrameTagResult: AiAnalysisTaskFrameTagResult,
+    MPSAiMediaInfo: MPSAiMediaInfo,
     AiReviewPornTaskOutput: AiReviewPornTaskOutput,
     SDMCDrmKeyProviderInfo: SDMCDrmKeyProviderInfo,
     AiRecognitionTaskAsrFullTextResult: AiRecognitionTaskAsrFullTextResult,
@@ -54704,6 +55213,7 @@ module.exports = {
     AiContentReviewResult: AiContentReviewResult,
     CreateAigcImageTaskRequest: CreateAigcImageTaskRequest,
     TerrorismImgReviewTemplateInfo: TerrorismImgReviewTemplateInfo,
+    MPSAiMediaItem: MPSAiMediaItem,
     ApplyUploadResponse: ApplyUploadResponse,
     ReviewAudioVideoResponse: ReviewAudioVideoResponse,
     DeleteClassRequest: DeleteClassRequest,

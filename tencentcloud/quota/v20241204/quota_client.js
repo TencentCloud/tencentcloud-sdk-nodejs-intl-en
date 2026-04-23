@@ -16,17 +16,25 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const Sort = models.Sort;
+const DescribeUserQuotaResponse = models.DescribeUserQuotaResponse;
 const EnableAlarmResponse = models.EnableAlarmResponse;
 const CreateAlarmResponse = models.CreateAlarmResponse;
 const CreateAlarmRequest = models.CreateAlarmRequest;
 const Alarm = models.Alarm;
+const DescribeAlarmsRequest = models.DescribeAlarmsRequest;
+const DescribeAggregateUserQuotasResponse = models.DescribeAggregateUserQuotasResponse;
 const EnableAlarmRequest = models.EnableAlarmRequest;
 const DeleteAlarmResponse = models.DeleteAlarmResponse;
+const Filter = models.Filter;
 const DeleteAlarmRequest = models.DeleteAlarmRequest;
 const DescribeAlarmsResponse = models.DescribeAlarmsResponse;
 const UpdateAlarmRequest = models.UpdateAlarmRequest;
 const UpdateAlarmResponse = models.UpdateAlarmResponse;
-const DescribeAlarmsRequest = models.DescribeAlarmsRequest;
+const QuotaDimension = models.QuotaDimension;
+const DescribeUserQuotaRequest = models.DescribeUserQuotaRequest;
+const UserQuota = models.UserQuota;
+const DescribeAggregateUserQuotasRequest = models.DescribeAggregateUserQuotasRequest;
 
 
 /**
@@ -40,14 +48,47 @@ class QuotaClient extends AbstractClient {
     }
     
     /**
-     * Add alarm rules
-     * @param {CreateAlarmRequest} req
-     * @param {function(string, CreateAlarmResponse):void} cb
+     * Deletes alarm rules
+     * @param {DeleteAlarmRequest} req
+     * @param {function(string, DeleteAlarmResponse):void} cb
      * @public
      */
-    CreateAlarm(req, cb) {
-        let resp = new CreateAlarmResponse();
-        this.request("CreateAlarm", req, resp, cb);
+    DeleteAlarm(req, cb) {
+        let resp = new DeleteAlarmResponse();
+        this.request("DeleteAlarm", req, resp, cb);
+    }
+
+    /**
+     * user quota list
+     * @param {DescribeAggregateUserQuotasRequest} req
+     * @param {function(string, DescribeAggregateUserQuotasResponse):void} cb
+     * @public
+     */
+    DescribeAggregateUserQuotas(req, cb) {
+        let resp = new DescribeAggregateUserQuotasResponse();
+        this.request("DescribeAggregateUserQuotas", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable alarm rules.
+     * @param {EnableAlarmRequest} req
+     * @param {function(string, EnableAlarmResponse):void} cb
+     * @public
+     */
+    EnableAlarm(req, cb) {
+        let resp = new EnableAlarmResponse();
+        this.request("EnableAlarm", req, resp, cb);
+    }
+
+    /**
+     * Query a user quota
+     * @param {DescribeUserQuotaRequest} req
+     * @param {function(string, DescribeUserQuotaResponse):void} cb
+     * @public
+     */
+    DescribeUserQuota(req, cb) {
+        let resp = new DescribeUserQuotaResponse();
+        this.request("DescribeUserQuota", req, resp, cb);
     }
 
     /**
@@ -62,14 +103,14 @@ class QuotaClient extends AbstractClient {
     }
 
     /**
-     * Deletes alarm rules
-     * @param {DeleteAlarmRequest} req
-     * @param {function(string, DeleteAlarmResponse):void} cb
+     * Add alarm rules
+     * @param {CreateAlarmRequest} req
+     * @param {function(string, CreateAlarmResponse):void} cb
      * @public
      */
-    DeleteAlarm(req, cb) {
-        let resp = new DeleteAlarmResponse();
-        this.request("DeleteAlarm", req, resp, cb);
+    CreateAlarm(req, cb) {
+        let resp = new CreateAlarmResponse();
+        this.request("CreateAlarm", req, resp, cb);
     }
 
     /**
@@ -81,17 +122,6 @@ class QuotaClient extends AbstractClient {
     DescribeAlarms(req, cb) {
         let resp = new DescribeAlarmsResponse();
         this.request("DescribeAlarms", req, resp, cb);
-    }
-
-    /**
-     * This API is used to enable alarm rules.
-     * @param {EnableAlarmRequest} req
-     * @param {function(string, EnableAlarmResponse):void} cb
-     * @public
-     */
-    EnableAlarm(req, cb) {
-        let resp = new EnableAlarmResponse();
-        this.request("EnableAlarm", req, resp, cb);
     }
 
 

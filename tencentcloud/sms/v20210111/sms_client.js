@@ -44,19 +44,22 @@ const DeleteTemplateStatus = models.DeleteTemplateStatus;
 const DescribeSmsSignListRequest = models.DescribeSmsSignListRequest;
 const DescribePhoneNumberInfoResponse = models.DescribePhoneNumberInfoResponse;
 const DescribeTemplateListStatus = models.DescribeTemplateListStatus;
+const SendMultiStatus = models.SendMultiStatus;
 const AddSmsTemplateResponse = models.AddSmsTemplateResponse;
 const PullSmsSendStatus = models.PullSmsSendStatus;
 const DescribeSmsSignListResponse = models.DescribeSmsSignListResponse;
+const SendMultiGlobalSmsResponse = models.SendMultiGlobalSmsResponse;
 const DescribeSmsTemplateListRequest = models.DescribeSmsTemplateListRequest;
 const CallbackStatusStatistics = models.CallbackStatusStatistics;
 const PhoneNumberInfo = models.PhoneNumberInfo;
 const SendStatusStatisticsRequest = models.SendStatusStatisticsRequest;
 const DeleteSmsTemplateRequest = models.DeleteSmsTemplateRequest;
 const PullSmsReplyStatusByPhoneNumberResponse = models.PullSmsReplyStatusByPhoneNumberResponse;
-const SendStatus = models.SendStatus;
+const MultiSmsInfo = models.MultiSmsInfo;
 const DeleteSmsSignResponse = models.DeleteSmsSignResponse;
 const AddSmsSignResponse = models.AddSmsSignResponse;
 const DeleteSmsSignRequest = models.DeleteSmsSignRequest;
+const SendMultiGlobalSmsRequest = models.SendMultiGlobalSmsRequest;
 const PullSmsReplyStatusByPhoneNumberRequest = models.PullSmsReplyStatusByPhoneNumberRequest;
 const ModifySmsSignResponse = models.ModifySmsSignResponse;
 const ReportConversionRequest = models.ReportConversionRequest;
@@ -65,6 +68,7 @@ const ModifyTemplateStatus = models.ModifyTemplateStatus;
 const PullSmsSendStatusResponse = models.PullSmsSendStatusResponse;
 const DeleteSignStatus = models.DeleteSignStatus;
 const PullSmsReplyStatusResponse = models.PullSmsReplyStatusResponse;
+const SendStatus = models.SendStatus;
 
 
 /**
@@ -77,6 +81,17 @@ class SmsClient extends AbstractClient {
         super("sms.intl.tencentcloudapi.com", "2021-01-11", credential, region, profile);
     }
     
+    /**
+     * This API is used to send Global SMS messages in batches. Compared with the SendSms API, it supports sending SMS messages with different content to multiple phone numbers in a single request and allows specifying different SenderIds.
+     * @param {SendMultiGlobalSmsRequest} req
+     * @param {function(string, SendMultiGlobalSmsResponse):void} cb
+     * @public
+     */
+    SendMultiGlobalSms(req, cb) {
+        let resp = new SendMultiGlobalSmsResponse();
+        this.request("SendMultiGlobalSms", req, resp, cb);
+    }
+
     /**
      * 1. This API is used to modify an SMS signature. Read the [Tencent Cloud SMS signature review standards](https://intl.cloud.tencent.com/document/product/382/40658) before making a modification.
 2. ⚠️ Note: Individual users cannot use this API to modify SMS signatures. For more information, see [Identity Verification Guide](https://intl.cloud.tencent.com/document/product/378/3629). If your account identity is individual, you can log in to the [console](https://console.cloud.tencent.com/smsv2) to modify SMS signatures.
@@ -124,8 +139,6 @@ Currently, you can also [configure the callback](https://intl.cloud.tencent.com/
 
     /**
      * This API is used to send SMS verification codes, notification, or marketing messages to users.
->- Note: Because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the [SDK](https://intl.cloud.tencent.com/document/product/382/43193?from_cn_redirect=1).
->- Note: You can run this API directly in [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms), which eliminates the signature calculation steps. After it is executed successfully, API Explorer can **automatically generate** SDK code samples.
      * @param {SendSmsRequest} req
      * @param {function(string, SendSmsResponse):void} cb
      * @public

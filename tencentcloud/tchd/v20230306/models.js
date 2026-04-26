@@ -147,7 +147,7 @@ class DescribeEventsRequest extends  AbstractModel {
         this.ProductIds = null;
 
         /**
-         *  1. Query by Region ID(s). Region ID examples: ap-guangzhou、ap-shanghai、ap-singapore.
+         *  1. Query by Region ID(s). Region ID examples: ap-guangzhou, ap-shanghai, ap-singapore.
 2. The region ID for non-region-specific products should be set to non-regional.
          * @type {Array.<string> || null}
          */

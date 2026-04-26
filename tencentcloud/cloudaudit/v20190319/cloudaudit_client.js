@@ -23,7 +23,6 @@ const GetAttributeKeyRequest = models.GetAttributeKeyRequest;
 const Storage = models.Storage;
 const DescribeAuditTracksResponse = models.DescribeAuditTracksResponse;
 const StartLoggingRequest = models.StartLoggingRequest;
-const DeleteAuditResponse = models.DeleteAuditResponse;
 const ModifyAuditTrackResponse = models.ModifyAuditTrackResponse;
 const InquireAuditCreditRequest = models.InquireAuditCreditRequest;
 const DescribeEventsResponse = models.DescribeEventsResponse;
@@ -33,7 +32,6 @@ const DescribeAuditTrackRequest = models.DescribeAuditTrackRequest;
 const UpdateAuditRequest = models.UpdateAuditRequest;
 const DescribeAuditTracksRequest = models.DescribeAuditTracksRequest;
 const Tracks = models.Tracks;
-const CreateAuditResponse = models.CreateAuditResponse;
 const DeleteAuditTrackRequest = models.DeleteAuditTrackRequest;
 const StartLoggingResponse = models.StartLoggingResponse;
 const AttributeKeyDetail = models.AttributeKeyDetail;
@@ -43,14 +41,14 @@ const Resource = models.Resource;
 const ListAuditsRequest = models.ListAuditsRequest;
 const ModifyAuditTrackRequest = models.ModifyAuditTrackRequest;
 const StopLoggingResponse = models.StopLoggingResponse;
+const Filter = models.Filter;
+const ResourceField = models.ResourceField;
 const CreateAuditTrackRequest = models.CreateAuditTrackRequest;
 const LookupAttribute = models.LookupAttribute;
 const ListAuditsResponse = models.ListAuditsResponse;
 const DescribeEventsRequest = models.DescribeEventsRequest;
 const UpdateAuditResponse = models.UpdateAuditResponse;
 const DescribeAuditRequest = models.DescribeAuditRequest;
-const CreateAuditRequest = models.CreateAuditRequest;
-const DeleteAuditRequest = models.DeleteAuditRequest;
 const ListCmqEnableRegionRequest = models.ListCmqEnableRegionRequest;
 const GetAttributeKeyResponse = models.GetAttributeKeyResponse;
 const ListCmqEnableRegionResponse = models.ListCmqEnableRegionResponse;
@@ -140,17 +138,6 @@ class CloudauditClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a tracking set.
-     * @param {DeleteAuditRequest} req
-     * @param {function(string, DeleteAuditResponse):void} cb
-     * @public
-     */
-    DeleteAudit(req, cb) {
-        let resp = new DeleteAuditResponse();
-        this.request("DeleteAudit", req, resp, cb);
-    }
-
-    /**
      * This API is used to query CloudAudit logs.
      * @param {DescribeEventsRequest} req
      * @param {function(string, DescribeEventsResponse):void} cb
@@ -229,21 +216,6 @@ class CloudauditClient extends AbstractClient {
     DescribeAudit(req, cb) {
         let resp = new DescribeAuditResponse();
         this.request("DescribeAudit", req, resp, cb);
-    }
-
-    /**
-     * Parameter requirements:
-1. If the value of `IsCreateNewBucket` exists, `cosRegion` and `osBucketName` are required.
-2. If the value of `IsEnableCmqNotify` is 1, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` are required.
-3. If the value of `IsEnableCmqNotify` is 0, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` cannot be passed in.
-4. If the value of `IsEnableKmsEncry` is 1, `KmsRegion` and `KeyId` are required.
-     * @param {CreateAuditRequest} req
-     * @param {function(string, CreateAuditResponse):void} cb
-     * @public
-     */
-    CreateAudit(req, cb) {
-        let resp = new CreateAuditResponse();
-        this.request("CreateAudit", req, resp, cb);
     }
 
     /**

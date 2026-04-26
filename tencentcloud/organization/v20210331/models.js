@@ -6196,7 +6196,7 @@ class AddOrganizationNodeRequest extends  AbstractModel {
         super();
 
         /**
-         * Parent node ID, which can be obtained through [DescribeOrganizationNodes](https://intl.cloud.tencent.com/document/product/850/82926?from_cn_redirect=1).
+         * Parent node ID, which can be obtained through [DescribeOrganizationNodes](https://intl.cloud.tencent.com/document/product/850/82926?from_cn_redirect=1)
          * @type {number || null}
          */
         this.ParentNodeId = null;

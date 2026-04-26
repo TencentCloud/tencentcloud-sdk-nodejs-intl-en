@@ -231,7 +231,7 @@ class TagClient extends AbstractClient {
     }
 
     /**
-     * Creates a project
+     * Creates a project.
      * @param {AddProjectRequest} req
      * @param {function(string, AddProjectResponse):void} cb
      * @public

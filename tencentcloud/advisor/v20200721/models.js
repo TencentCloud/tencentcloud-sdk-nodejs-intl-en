@@ -25,8 +25,7 @@ class DescribeStrategiesResponse extends  AbstractModel {
         super();
 
         /**
-         * Assessment item list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Assessment item list.
          * @type {Array.<Strategies> || null}
          */
         this.Strategies = null;
@@ -356,63 +355,54 @@ class Strategies extends  AbstractModel {
 
         /**
          * Assessment item ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.StrategyId = null;
 
         /**
-         * Assessment item name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Assessment item name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Assessment item description
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Assessment item description.
          * @type {string || null}
          */
         this.Desc = null;
 
         /**
-         * Product ID corresponding to the assessment item
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Product ID corresponding to the assessment item.
          * @type {string || null}
          */
         this.Product = null;
 
         /**
-         * Product name corresponding to the assessment item
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Assessment item corresponding product name.
          * @type {string || null}
          */
         this.ProductDesc = null;
 
         /**
-         * Optimization suggestions for the assessment item
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies optimization suggestions for the assessment item.
          * @type {string || null}
          */
         this.Repair = null;
 
         /**
-         * Category ID of the assessment item 
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Assessment item category ID.
          * @type {number || null}
          */
         this.GroupId = null;
 
         /**
-         * Category name of the assessment item 
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the category name of the assessment item.
          * @type {string || null}
          */
         this.GroupName = null;
 
         /**
-         * Risk list of the assessment item 
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the evaluation item risk list.
          * @type {Array.<Conditions> || null}
          */
         this.Conditions = null;
@@ -456,22 +446,19 @@ class Conditions extends  AbstractModel {
         super();
 
         /**
-         * Warning condition ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Warning condition ID.
          * @type {number || null}
          */
         this.ConditionId = null;
 
         /**
          * Warning level. 2: medium risk; 3: high risk.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Level = null;
 
         /**
-         * Warning level description
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Describes the warning level.
          * @type {string || null}
          */
         this.LevelDesc = null;

@@ -299,7 +299,7 @@ If this parameter is set to 5, make sure that an [oral-to-written resource packa
         /**
          * Audio source.
 0: Audio URL.
-1: Local audio file (body of the POST request).
+1: Local audio file (body of the POST request)
          * @type {number || null}
          */
         this.SourceType = null;
@@ -314,7 +314,7 @@ Note: The audio data size cannot exceed 5 MB.
         this.Data = null;
 
         /**
-         * Data length (before Base64 encoding).
+         * Data length (before Base64 encoding)
          * @type {number || null}
          */
         this.DataLen = null;
@@ -488,6 +488,12 @@ Notes:
          */
         this.KeyWordLibIdList = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ReplaceTextId = null;
+
     }
 
     /**
@@ -520,6 +526,7 @@ Notes:
         this.Extra = 'Extra' in params ? params.Extra : null;
         this.HotwordList = 'HotwordList' in params ? params.HotwordList : null;
         this.KeyWordLibIdList = 'KeyWordLibIdList' in params ? params.KeyWordLibIdList : null;
+        this.ReplaceTextId = 'ReplaceTextId' in params ? params.ReplaceTextId : null;
 
     }
 }

@@ -53,6 +53,7 @@ module.exports = {
     eb: require("./eb"),
     ecdn: require("./ecdn"),
     ecm: require("./ecm"),
+    edgezone: require("./edgezone"),
     eiam: require("./eiam"),
     emr: require("./emr"),
     es: require("./es"),

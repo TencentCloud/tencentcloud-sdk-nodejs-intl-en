@@ -44,8 +44,9 @@ const ModifyApplicationResponse = models.ModifyApplicationResponse;
 const AdvertDataOverview = models.AdvertDataOverview;
 const DescribeMNGAdvertisingLineChartRequest = models.DescribeMNGAdvertisingLineChartRequest;
 const DescribeMNPListResponse = models.DescribeMNPListResponse;
-const ReportDataResult = models.ReportDataResult;
+const DescribeMNPSensitiveAPIPermissionApprovalListResponse = models.DescribeMNPSensitiveAPIPermissionApprovalListResponse;
 const ProcessMNPApprovalResponse = models.ProcessMNPApprovalResponse;
+const DescribeApplicationMNPListRequest = models.DescribeApplicationMNPListRequest;
 const DeleteTeamResponse = models.DeleteTeamResponse;
 const ModifyMNPDomainRequest = models.ModifyMNPDomainRequest;
 const DescribeRevertOnlineVersionPageResp = models.DescribeRevertOnlineVersionPageResp;
@@ -122,6 +123,7 @@ const CreateTeamMemberInfoReq = models.CreateTeamMemberInfoReq;
 const DownloadApplicationConfigResp = models.DownloadApplicationConfigResp;
 const DescribeMNGDomainInfoResp = models.DescribeMNGDomainInfoResp;
 const CreateUserResponse = models.CreateUserResponse;
+const CreateMNPSecretKeyResponse = models.CreateMNPSecretKeyResponse;
 const CreateApplicationConfigRequest = models.CreateApplicationConfigRequest;
 const DescribeUserDetailResp = models.DescribeUserDetailResp;
 const RemoveMNGResponse = models.RemoveMNGResponse;
@@ -134,6 +136,7 @@ const ProcessMNPApprovalRequest = models.ProcessMNPApprovalRequest;
 const DeleteUserResponse = models.DeleteUserResponse;
 const CategoryInfo = models.CategoryInfo;
 const CategoryItem = models.CategoryItem;
+const ReportDataResult = models.ReportDataResult;
 const DescribeApplicationResponse = models.DescribeApplicationResponse;
 const DescribeMNGRequest = models.DescribeMNGRequest;
 const MAUDetailData = models.MAUDetailData;
@@ -186,7 +189,7 @@ const DisableApplicationSensitiveAPIRequest = models.DisableApplicationSensitive
 const DescribeApplicationSensitiveAPIListResponse = models.DescribeApplicationSensitiveAPIListResponse;
 const AdTrendChart = models.AdTrendChart;
 const RollbackMNPVersionResponse = models.RollbackMNPVersionResponse;
-const DescribeApplicationMNPListRequest = models.DescribeApplicationMNPListRequest;
+const CreateMNPSecretKeyResp = models.CreateMNPSecretKeyResp;
 const DescribeAdvertisingLineChartResponse = models.DescribeAdvertisingLineChartResponse;
 const RetentionData = models.RetentionData;
 const DescribeMNPSensitiveAPIPermissionListRequest = models.DescribeMNPSensitiveAPIPermissionListRequest;
@@ -221,7 +224,7 @@ const CreateMNGDomainACLRequest = models.CreateMNGDomainACLRequest;
 const DescribeMNGDomainACLResponse = models.DescribeMNGDomainACLResponse;
 const DescribeMNGAccessAnalysisLineChartRequest = models.DescribeMNGAccessAnalysisLineChartRequest;
 const QueryMNGOnlineVersionResp = models.QueryMNGOnlineVersionResp;
-const DescribeMNPSensitiveAPIPermissionApprovalListResponse = models.DescribeMNPSensitiveAPIPermissionApprovalListResponse;
+const CreateMNPSecretKeyRequest = models.CreateMNPSecretKeyRequest;
 const DescribeMNPSensitiveAPIPermissionApprovalListRequest = models.DescribeMNPSensitiveAPIPermissionApprovalListRequest;
 const DescribeGlobalOverviewReportDetailRequest = models.DescribeGlobalOverviewReportDetailRequest;
 const MNPPaymentOverview = models.MNPPaymentOverview;
@@ -1396,6 +1399,17 @@ class TcsasClient extends AbstractClient {
     DescribeMNGMAUDataDetail(req, cb) {
         let resp = new DescribeMNGMAUDataDetailResponse();
         this.request("DescribeMNGMAUDataDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a secret key for a mini program or mini game.
+     * @param {CreateMNPSecretKeyRequest} req
+     * @param {function(string, CreateMNPSecretKeyResponse):void} cb
+     * @public
+     */
+    CreateMNPSecretKey(req, cb) {
+        let resp = new CreateMNPSecretKeyResponse();
+        this.request("CreateMNPSecretKey", req, resp, cb);
     }
 
     /**

@@ -409,13 +409,13 @@ class CreateStreamLivePlanRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the channel for which you want to configure an event
+         * ID of the channel for which you want to configure an event.
          * @type {string || null}
          */
         this.ChannelId = null;
 
         /**
-         * Event configuration
+         * Event configuration.
          * @type {PlanReq || null}
          */
         this.Plan = null;
@@ -6429,7 +6429,7 @@ class EventSettingsReq extends  AbstractModel {
         this.EventType = null;
 
         /**
-         * ID of the input to attach, which is required if `EventType` is `INPUT_SWITCH`
+         * ID of the input to attach, which is required if `EventType` is `INPUT_SWITCH`.
          * @type {string || null}
          */
         this.InputAttachment = null;

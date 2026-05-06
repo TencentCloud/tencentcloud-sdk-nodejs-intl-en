@@ -129,6 +129,7 @@ module.exports = {
     trocket: require("./trocket"),
     trro: require("./trro"),
     trtc: require("./trtc"),
+    tse: require("./tse"),
     tts: require("./tts"),
     vclm: require("./vclm"),
     vm: require("./vm"),

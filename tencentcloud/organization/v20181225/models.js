@@ -494,7 +494,7 @@ class DeleteOrganizationNodesRequest extends  AbstractModel {
         super();
 
         /**
-         * Organizational unit ID list
+         * Organizational unit ID list.
          * @type {Array.<number> || null}
          */
         this.NodeIds = null;

@@ -10301,7 +10301,7 @@ class CreateApplicationSensitiveAPIRequest extends  AbstractModel {
         this.ApplicationId = null;
 
         /**
-         * List of newly-added APIs
+         * List of newly-added APIs.
          * @type {Array.<CreateApplicationSensitiveAPIReq> || null}
          */
         this.APIList = null;

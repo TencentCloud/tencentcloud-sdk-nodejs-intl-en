@@ -698,6 +698,12 @@ Filipino: fil, hindi: hi, polish: pl, czech: cs, dutch: nl, khmer: km, burmese: 
          */
         this.References = null;
 
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.GlossaryIDs = null;
+
     }
 
     /**
@@ -722,6 +728,7 @@ Filipino: fil, hindi: hi, polish: pl, czech: cs, dutch: nl, khmer: km, burmese: 
                 this.References.push(obj);
             }
         }
+        this.GlossaryIDs = 'GlossaryIDs' in params ? params.GlossaryIDs : null;
 
     }
 }
@@ -806,7 +813,7 @@ class SubmitHunyuanTo3DUVJobRequest extends  AbstractModel {
         /**
          * File URL of the 3D model requiring UV unfold
 Supported formats: FBX, OBJ, GLB
-3D model limit: less than 30000 faces
+3D model limit: The face count of the 3D model is less than 30,000 and the number of connected components does not exceed 100
          * @type {InputFile3D || null}
          */
         this.File = null;
@@ -1319,8 +1326,8 @@ Specifies the supported face count generation range. value range: 3000-1500000
         /**
          * Generation task type. default: Normal. valid values:
 Normal: generates a geometric model with textures
-LowPoly: specifies the model generated after intelligent polygon reduction.
-Geometry: specifies whether to generate a Geometry model without textures (white model). when this task is selected, the EnablePBR parameter does not take effect
+LowPoly: specifies the model generated after intelligent polygon reduction
+Geometry: specifies whether to generate a Geometry model without textures (white model). When this parameter is enabled, only GLB will be output andthe EnablePBR parameter does not take effect
 Specifies the Sketch for the generative model, allowing input of a Sketch or line drawing. in this mode, both prompt and ImageUrl/ImageBase64 can be entered together
          * @type {string || null}
          */

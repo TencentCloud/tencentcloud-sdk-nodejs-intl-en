@@ -27,6 +27,8 @@ const ChatTranslationsResponse = models.ChatTranslationsResponse;
 const SubmitHunyuanTo3DTextureEditJobRequest = models.SubmitHunyuanTo3DTextureEditJobRequest;
 const Usage = models.Usage;
 const SubmitHunyuanTo3DRapidJobResponse = models.SubmitHunyuanTo3DRapidJobResponse;
+const SubmitAutoRiggingJobResponse = models.SubmitAutoRiggingJobResponse;
+const DescribeAutoRiggingJobResponse = models.DescribeAutoRiggingJobResponse;
 const ChatTranslationsRequest = models.ChatTranslationsRequest;
 const QueryHunyuanTo3DTextureEditJobResponse = models.QueryHunyuanTo3DTextureEditJobResponse;
 const SubmitHunyuanTo3DUVJobRequest = models.SubmitHunyuanTo3DUVJobRequest;
@@ -37,16 +39,18 @@ const PromptTokensDetails = models.PromptTokensDetails;
 const SubmitConvert3DFormatJobRequest = models.SubmitConvert3DFormatJobRequest;
 const InputFile3D = models.InputFile3D;
 const TranslationDelta = models.TranslationDelta;
+const TranslationMessage = models.TranslationMessage;
 const SubmitHunyuanTo3DRapidJobRequest = models.SubmitHunyuanTo3DRapidJobRequest;
+const SubmitAutoRiggingJobRequest = models.SubmitAutoRiggingJobRequest;
 const SubmitHunyuanTo3DUVJobResponse = models.SubmitHunyuanTo3DUVJobResponse;
 const SubmitHunyuan3DPartJobResponse = models.SubmitHunyuan3DPartJobResponse;
 const SubmitHunyuanTo3DProJobRequest = models.SubmitHunyuanTo3DProJobRequest;
-const QueryHunyuanTo3DTextureEditJobRequest = models.QueryHunyuanTo3DTextureEditJobRequest;
+const DescribeHunyuanTo3DUVJobResponse = models.DescribeHunyuanTo3DUVJobResponse;
 const Convert3DFormatResponse = models.Convert3DFormatResponse;
 const DescribeHunyuanTo3DUVJobRequest = models.DescribeHunyuanTo3DUVJobRequest;
 const SubmitHunyuan3DPartJobRequest = models.SubmitHunyuan3DPartJobRequest;
 const Describe3DSmartTopologyJobResponse = models.Describe3DSmartTopologyJobResponse;
-const DescribeHunyuanTo3DUVJobResponse = models.DescribeHunyuanTo3DUVJobResponse;
+const QueryHunyuanTo3DTextureEditJobRequest = models.QueryHunyuanTo3DTextureEditJobRequest;
 const Reference = models.Reference;
 const ImageInfo = models.ImageInfo;
 const SubmitHunyuanTo3DProJobResponse = models.SubmitHunyuanTo3DProJobResponse;
@@ -55,7 +59,7 @@ const SubmitConvert3DFormatJobResponse = models.SubmitConvert3DFormatJobResponse
 const QueryHunyuanTo3DProJobResponse = models.QueryHunyuanTo3DProJobResponse;
 const QueryHunyuan3DPartJobRequest = models.QueryHunyuan3DPartJobRequest;
 const DescribeConvert3DFormatJobRequest = models.DescribeConvert3DFormatJobRequest;
-const TranslationMessage = models.TranslationMessage;
+const DescribeAutoRiggingJobRequest = models.DescribeAutoRiggingJobRequest;
 const QueryHunyuanTo3DRapidJobRequest = models.QueryHunyuanTo3DRapidJobRequest;
 const DescribeConvert3DFormatJobResponse = models.DescribeConvert3DFormatJobResponse;
 const Describe3DSmartTopologyJobRequest = models.Describe3DSmartTopologyJobRequest;
@@ -105,6 +109,17 @@ This API is used to provide 1 concurrent task by default, which means only 1 sub
     Submit3DSmartTopologyJob(req, cb) {
         let resp = new Submit3DSmartTopologyJobResponse();
         this.request("Submit3DSmartTopologyJob", req, resp, cb);
+    }
+
+    /**
+     * 3D Model Auto Rigging API, powered by the Hunyuan Large Model, processes input 3D models of characters or animals to perform automatic rigging and skinning, outputting a 3D model complete with skeletal data. By default, one concurrent slot is provided, meaning that a maximum of one submitted task can be processed simultaneously; the next task can only begin processing once the previous one has been completed.
+     * @param {DescribeAutoRiggingJobRequest} req
+     * @param {function(string, DescribeAutoRiggingJobResponse):void} cb
+     * @public
+     */
+    DescribeAutoRiggingJob(req, cb) {
+        let resp = new DescribeAutoRiggingJobResponse();
+        this.request("DescribeAutoRiggingJob", req, resp, cb);
     }
 
     /**
@@ -234,6 +249,17 @@ This API is used to provide 3 concurrent tasks by default, which can process 3 s
     QueryHunyuanTo3DProJob(req, cb) {
         let resp = new QueryHunyuanTo3DProJobResponse();
         this.request("QueryHunyuanTo3DProJob", req, resp, cb);
+    }
+
+    /**
+     * 3D Model Auto Rigging API, powered by the HY Large Model, processes input 3D models of characters or animals to perform automatic rigging and skinning, outputting a 3D model complete with skeletal data. By default, one concurrent slot is provided, meaning that a maximum of one submitted task can be processed simultaneously; the next task can only begin processing once the previous one has been completed.
+     * @param {SubmitAutoRiggingJobRequest} req
+     * @param {function(string, SubmitAutoRiggingJobResponse):void} cb
+     * @public
+     */
+    SubmitAutoRiggingJob(req, cb) {
+        let resp = new SubmitAutoRiggingJobResponse();
+        this.request("SubmitAutoRiggingJob", req, resp, cb);
     }
 
     /**

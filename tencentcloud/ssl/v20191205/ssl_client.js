@@ -69,6 +69,7 @@ const VodInstanceDetail = models.VodInstanceDetail;
 const ResourceTypeRegions = models.ResourceTypeRegions;
 const UpdateCertificateRecordRollbackRequest = models.UpdateCertificateRecordRollbackRequest;
 const DescribeHostUpdateRecordResponse = models.DescribeHostUpdateRecordResponse;
+const CertificateOrderSubmitRequest = models.CertificateOrderSubmitRequest;
 const UpdateCertificateRecordRollbackResponse = models.UpdateCertificateRecordRollbackResponse;
 const DescribeCertificateBindResourceTaskDetailResponse = models.DescribeCertificateBindResourceTaskDetailResponse;
 const DvAuthDetail = models.DvAuthDetail;
@@ -126,6 +127,7 @@ const LiveInstanceList = models.LiveInstanceList;
 const DeleteCertificateRequest = models.DeleteCertificateRequest;
 const DescribeCertificateOperateLogsResponse = models.DescribeCertificateOperateLogsResponse;
 const ModifyCertificateProjectRequest = models.ModifyCertificateProjectRequest;
+const CertificateInfoSubmitResponse = models.CertificateInfoSubmitResponse;
 const DescribeHostTeoInstanceListResponse = models.DescribeHostTeoInstanceListResponse;
 const UploadUpdateRecordInfo = models.UploadUpdateRecordInfo;
 const CancelAuditCertificateRequest = models.CancelAuditCertificateRequest;
@@ -149,8 +151,10 @@ const TkeInstanceDetail = models.TkeInstanceDetail;
 const UploadConfirmLetterRequest = models.UploadConfirmLetterRequest;
 const SubmitCertificateInformationResponse = models.SubmitCertificateInformationResponse;
 const DescribeCSRResponse = models.DescribeCSRResponse;
+const CertificateInfoSubmitRequest = models.CertificateInfoSubmitRequest;
 const ClbInstanceList = models.ClbInstanceList;
 const UpdateCertificateRecordRetryResponse = models.UpdateCertificateRecordRetryResponse;
+const CertificateOrderSubmitResponse = models.CertificateOrderSubmitResponse;
 const TCBHostService = models.TCBHostService;
 const DescribeHostUploadUpdateRecordDetailRequest = models.DescribeHostUploadUpdateRecordDetailRequest;
 const TkeIngressDetail = models.TkeIngressDetail;
@@ -226,6 +230,17 @@ class SslClient extends AbstractClient {
     }
 
     /**
+     * Submit certificate information for payment
+     * @param {CertificateInfoSubmitRequest} req
+     * @param {function(string, CertificateInfoSubmitResponse):void} cb
+     * @public
+     */
+    CertificateInfoSubmit(req, cb) {
+        let resp = new CertificateInfoSubmitResponse();
+        this.request("CertificateInfoSubmit", req, resp, cb);
+    }
+
+    /**
      * This API is used to batch delete CSRs.
      * @param {BatchDeleteCSRRequest} req
      * @param {function(string, BatchDeleteCSRResponse):void} cb
@@ -289,6 +304,17 @@ class SslClient extends AbstractClient {
     CancelCertificateOrder(req, cb) {
         let resp = new CancelCertificateOrderResponse();
         this.request("CancelCertificateOrder", req, resp, cb);
+    }
+
+    /**
+     * Submit a certificate order
+     * @param {CertificateOrderSubmitRequest} req
+     * @param {function(string, CertificateOrderSubmitResponse):void} cb
+     * @public
+     */
+    CertificateOrderSubmit(req, cb) {
+        let resp = new CertificateOrderSubmitResponse();
+        this.request("CertificateOrderSubmit", req, resp, cb);
     }
 
     /**

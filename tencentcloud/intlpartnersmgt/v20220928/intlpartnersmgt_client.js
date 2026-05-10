@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SummaryDetails = models.SummaryDetails;
+const DescribeCustomerOwnVoucherUsageDetailsResponse = models.DescribeCustomerOwnVoucherUsageDetailsResponse;
 const DescribeCustomerVoucherListResponse = models.DescribeCustomerVoucherListResponse;
 const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
 const DescribeCustomerOwnVoucherListRequest = models.DescribeCustomerOwnVoucherListRequest;
@@ -24,7 +25,7 @@ const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryRe
 const TradeTwoNode = models.TradeTwoNode;
 const QueryT1IndirectCustomersDetailRequest = models.QueryT1IndirectCustomersDetailRequest;
 const CreateAndSendClientInvitationMailResponse = models.CreateAndSendClientInvitationMailResponse;
-const CustomerBillDetailData = models.CustomerBillDetailData;
+const QueryPendingClientsV2Request = models.QueryPendingClientsV2Request;
 const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
 const QuerySubAgentsDetailV2Response = models.QuerySubAgentsDetailV2Response;
 const DescribeCustomerBillDownloadUrlRequest = models.DescribeCustomerBillDownloadUrlRequest;
@@ -84,6 +85,7 @@ const QueryPolicyProductListByCodeRequest = models.QueryPolicyProductListByCodeR
 const QueryT1IndirectCustomersDetailResponseData = models.QueryT1IndirectCustomersDetailResponseData;
 const DescribeCustomerOwnVoucherItem = models.DescribeCustomerOwnVoucherItem;
 const DescribeCustomerInfoResponse = models.DescribeCustomerInfoResponse;
+const DescribeCustomerOwnVoucherUsageDetailsRequest = models.DescribeCustomerOwnVoucherUsageDetailsRequest;
 const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
 const QueryAccountVerificationStatusRequest = models.QueryAccountVerificationStatusRequest;
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
@@ -114,7 +116,7 @@ const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
 const QueryCreditByUinListRequest = models.QueryCreditByUinListRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const ApproveClientApplyResponse = models.ApproveClientApplyResponse;
-const QueryPendingClientsV2Request = models.QueryPendingClientsV2Request;
+const CustomerBillDetailData = models.CustomerBillDetailData;
 const TagInfo = models.TagInfo;
 const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
 const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
@@ -366,6 +368,18 @@ Callable roles: Reseller, Second-level Reseller or Distributor.
     DescribeCustomerVoucherList(req, cb) {
         let resp = new DescribeCustomerVoucherListResponse();
         this.request("DescribeCustomerVoucherList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to approve applications for second-level resellers.
+Invocation Role: Distributor.
+     * @param {ApproveSubAgentApplyRequest} req
+     * @param {function(string, ApproveSubAgentApplyResponse):void} cb
+     * @public
+     */
+    ApproveSubAgentApply(req, cb) {
+        let resp = new ApproveSubAgentApplyResponse();
+        this.request("ApproveSubAgentApply", req, resp, cb);
     }
 
     /**
@@ -621,15 +635,15 @@ Callable roles: Distributor, Second-level reseller, Reseller
     }
 
     /**
-     * This API is used to approve applications for second-level resellers.
-Invocation Role: Distributor.
-     * @param {ApproveSubAgentApplyRequest} req
-     * @param {function(string, ApproveSubAgentApplyResponse):void} cb
+     * Description: The current API is used to query usage details of customer's own voucher by the customer self.
+Call role: End customer.
+     * @param {DescribeCustomerOwnVoucherUsageDetailsRequest} req
+     * @param {function(string, DescribeCustomerOwnVoucherUsageDetailsResponse):void} cb
      * @public
      */
-    ApproveSubAgentApply(req, cb) {
-        let resp = new ApproveSubAgentApplyResponse();
-        this.request("ApproveSubAgentApply", req, resp, cb);
+    DescribeCustomerOwnVoucherUsageDetails(req, cb) {
+        let resp = new DescribeCustomerOwnVoucherUsageDetailsResponse();
+        this.request("DescribeCustomerOwnVoucherUsageDetails", req, resp, cb);
     }
 
     /**

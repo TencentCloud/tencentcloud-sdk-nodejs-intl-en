@@ -1293,6 +1293,14 @@ class DescribeSmsSignListRequest extends  AbstractModel {
         super();
 
         /**
+         * Whether it is Global SMS:
+0: Mainland China SMS.
+1: Global SMS.
+         * @type {number || null}
+         */
+        this.International = null;
+
+        /**
          * Signature ID array.
 Note: the maximum length of the array is 100 by default.
          * @type {Array.<number> || null}
@@ -1300,12 +1308,18 @@ Note: the maximum length of the array is 100 by default.
         this.SignIdSet = null;
 
         /**
-         * Whether it is Global SMS:
-0: Mainland China SMS.
-1: Global SMS.
+         * Upper limit. Maximum value: 100.
+Note: it is 10 by default and is enabled when SignIdSet is empty.
          * @type {number || null}
          */
-        this.International = null;
+        this.Limit = null;
+
+        /**
+         * Offset.
+Note: it is 0 by default and is enabled when SignIdSet is empty.
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -1316,8 +1330,10 @@ Note: the maximum length of the array is 100 by default.
         if (!params) {
             return;
         }
-        this.SignIdSet = 'SignIdSet' in params ? params.SignIdSet : null;
         this.International = 'International' in params ? params.International : null;
+        this.SignIdSet = 'SignIdSet' in params ? params.SignIdSet : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }

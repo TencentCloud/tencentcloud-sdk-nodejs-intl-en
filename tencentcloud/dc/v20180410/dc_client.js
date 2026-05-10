@@ -89,7 +89,6 @@ class DcClient extends AbstractClient {
 
     /**
      * This API is used to query connection access points.
-
      * @param {DescribeAccessPointsRequest} req
      * @param {function(string, DescribeAccessPointsResponse):void} cb
      * @public
@@ -167,7 +166,7 @@ Only connected connections can be deleted.
     }
 
     /**
-     * This API is used to apply for an internet tunnel’s CIDR block.
+     * This API is used to apply for an internet tunnel's CIDR block.
      * @param {ApplyInternetAddressRequest} req
      * @param {function(string, ApplyInternetAddressResponse):void} cb
      * @public

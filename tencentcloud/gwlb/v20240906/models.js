@@ -206,6 +206,12 @@ class ModifyGatewayLoadBalancerAttributeRequest extends  AbstractModel {
          */
         this.LoadBalancerName = null;
 
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.DeleteProtect = null;
+
     }
 
     /**
@@ -217,6 +223,7 @@ class ModifyGatewayLoadBalancerAttributeRequest extends  AbstractModel {
         }
         this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
         this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+        this.DeleteProtect = 'DeleteProtect' in params ? params.DeleteProtect : null;
 
     }
 }
@@ -1232,6 +1239,46 @@ class CreateTargetGroupRequest extends  AbstractModel {
          */
         this.AllDeadToAlive = null;
 
+        /**
+         * Tags
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Traffic Distribution Mode
+<ul>
+<li>STATELESS: Stateless</li>
+<li>STATEFUL: Stateful</li>
+</ul>
+         * @type {string || null}
+         */
+        this.ForwardingMode = null;
+
+        /**
+         * <p>Switch for unbinding backend services in the rescheduling function. When enabled, unbinding backend services will trigger rescheduling.</p>
+         * @type {boolean || null}
+         */
+        this.RescheduleUnbindRs = null;
+
+        /**
+         * <p>The time to enable rescheduling after unbinding RS, configurable from 0s to 3600s, with a default value of 0s</p>
+         * @type {number || null}
+         */
+        this.RescheduleUnbindRsStartTime = null;
+
+        /**
+         * <p>Switch for backend service health detection exception in the rescheduling function. When enabled, abnormal health checks of backend services will trigger rescheduling.</p>
+         * @type {boolean || null}
+         */
+        this.RescheduleUnhealthy = null;
+
+        /**
+         * <p>The waiting time to enable rescheduling after abnormal health detection of backend services, configurable from 0s to 3600s, default is 0s</p>
+         * @type {number || null}
+         */
+        this.RescheduleUnhealthyStartTime = null;
+
     }
 
     /**
@@ -1262,6 +1309,20 @@ class CreateTargetGroupRequest extends  AbstractModel {
         }
         this.ScheduleAlgorithm = 'ScheduleAlgorithm' in params ? params.ScheduleAlgorithm : null;
         this.AllDeadToAlive = 'AllDeadToAlive' in params ? params.AllDeadToAlive : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.ForwardingMode = 'ForwardingMode' in params ? params.ForwardingMode : null;
+        this.RescheduleUnbindRs = 'RescheduleUnbindRs' in params ? params.RescheduleUnbindRs : null;
+        this.RescheduleUnbindRsStartTime = 'RescheduleUnbindRsStartTime' in params ? params.RescheduleUnbindRsStartTime : null;
+        this.RescheduleUnhealthy = 'RescheduleUnhealthy' in params ? params.RescheduleUnhealthy : null;
+        this.RescheduleUnhealthyStartTime = 'RescheduleUnhealthyStartTime' in params ? params.RescheduleUnhealthyStartTime : null;
 
     }
 }
@@ -2056,6 +2117,30 @@ class ModifyTargetGroupAttributeRequest extends  AbstractModel {
          */
         this.AllDeadToAlive = null;
 
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.RescheduleUnbindRs = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.RescheduleUnbindRsStartTime = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.RescheduleUnhealthy = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.RescheduleUnhealthyStartTime = null;
+
     }
 
     /**
@@ -2074,6 +2159,10 @@ class ModifyTargetGroupAttributeRequest extends  AbstractModel {
             this.HealthCheck = obj;
         }
         this.AllDeadToAlive = 'AllDeadToAlive' in params ? params.AllDeadToAlive : null;
+        this.RescheduleUnbindRs = 'RescheduleUnbindRs' in params ? params.RescheduleUnbindRs : null;
+        this.RescheduleUnbindRsStartTime = 'RescheduleUnbindRsStartTime' in params ? params.RescheduleUnbindRsStartTime : null;
+        this.RescheduleUnhealthy = 'RescheduleUnhealthy' in params ? params.RescheduleUnhealthy : null;
+        this.RescheduleUnhealthyStartTime = 'RescheduleUnhealthyStartTime' in params ? params.RescheduleUnhealthyStartTime : null;
 
     }
 }

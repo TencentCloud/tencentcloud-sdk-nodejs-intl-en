@@ -764,7 +764,7 @@ When making an SDK call, streaming and non-streaming calls require **different w
         this.Stream = null;
 
         /**
-         * Text to be translated.
+         * Text to be translated
          * @type {string || null}
          */
         this.Text = null;

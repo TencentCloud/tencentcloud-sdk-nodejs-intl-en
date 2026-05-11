@@ -58,7 +58,7 @@ const ModifySampleSnapshotTemplateRequest = models.ModifySampleSnapshotTemplateR
 const AiReviewPoliticalOcrTaskInput = models.AiReviewPoliticalOcrTaskInput;
 const SmartSubtitleTaskTransTextResult = models.SmartSubtitleTaskTransTextResult;
 const CreateSmartEraseTemplateRequest = models.CreateSmartEraseTemplateRequest;
-const EnhanceConfig = models.EnhanceConfig;
+const DescribeTextToSpeechAsyncTaskRequest = models.DescribeTextToSpeechAsyncTaskRequest;
 const MediaInputInfo = models.MediaInputInfo;
 const CreateWorkflowRequest = models.CreateWorkflowRequest;
 const OcrWordsConfigureInfo = models.OcrWordsConfigureInfo;
@@ -162,6 +162,7 @@ const OverrideEraseParameter = models.OverrideEraseParameter;
 const TextWatermarkTemplateInput = models.TextWatermarkTemplateInput;
 const ModifyAIAnalysisTemplateResponse = models.ModifyAIAnalysisTemplateResponse;
 const DescribeWordSamplesResponse = models.DescribeWordSamplesResponse;
+const UpdateProjectRequest = models.UpdateProjectRequest;
 const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTemplatesResponse;
 const ScratchRepairConfig = models.ScratchRepairConfig;
 const DescribeImageTaskDetailRequest = models.DescribeImageTaskDetailRequest;
@@ -193,6 +194,7 @@ const ImageEraseConfig = models.ImageEraseConfig;
 const CreateWordSamplesRequest = models.CreateWordSamplesRequest;
 const SmartEraseWatermarkConfig = models.SmartEraseWatermarkConfig;
 const Speakers = models.Speakers;
+const FaceConfigureInfo = models.FaceConfigureInfo;
 const DescribeSmartEraseTemplatesRequest = models.DescribeSmartEraseTemplatesRequest;
 const PoliticalAsrReviewTemplateInfoForUpdate = models.PoliticalAsrReviewTemplateInfoForUpdate;
 const AiSampleFaceOperation = models.AiSampleFaceOperation;
@@ -238,9 +240,11 @@ const LiveRecordResult = models.LiveRecordResult;
 const AsrFullTextConfigureInfoForUpdate = models.AsrFullTextConfigureInfoForUpdate;
 const LiveRecordFile = models.LiveRecordFile;
 const ComposeSourceMedia = models.ComposeSourceMedia;
+const TextToSpeechAsyncResponse = models.TextToSpeechAsyncResponse;
 const CreatePersonSampleResponse = models.CreatePersonSampleResponse;
 const CreateContentReviewTemplateResponse = models.CreateContentReviewTemplateResponse;
 const ModifyBlindWatermarkTemplateResponse = models.ModifyBlindWatermarkTemplateResponse;
+const EnhanceConfig = models.EnhanceConfig;
 const ProhibitedConfigureInfoForUpdate = models.ProhibitedConfigureInfoForUpdate;
 const ComposeEmptyItem = models.ComposeEmptyItem;
 const TagConfigureInfoForUpdate = models.TagConfigureInfoForUpdate;
@@ -257,6 +261,7 @@ const AiReviewTaskPornOcrResult = models.AiReviewTaskPornOcrResult;
 const BatchProcessMediaRequest = models.BatchProcessMediaRequest;
 const DescribeWatermarkTemplatesRequest = models.DescribeWatermarkTemplatesRequest;
 const TaskOutputStorage = models.TaskOutputStorage;
+const VoiceInfo = models.VoiceInfo;
 const ModifyAIAnalysisTemplateRequest = models.ModifyAIAnalysisTemplateRequest;
 const UserDefineConfigureInfo = models.UserDefineConfigureInfo;
 const SubtitlePosition = models.SubtitlePosition;
@@ -314,6 +319,7 @@ const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
 const AigcImageInfo = models.AigcImageInfo;
 const DeleteContentReviewTemplateResponse = models.DeleteContentReviewTemplateResponse;
 const VODInputInfo = models.VODInputInfo;
+const DesignVoiceAsyncRequest = models.DesignVoiceAsyncRequest;
 const ImageWatermarkTemplate = models.ImageWatermarkTemplate;
 const ModifyQualityControlTemplateResponse = models.ModifyQualityControlTemplateResponse;
 const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
@@ -322,6 +328,7 @@ const LiveStreamAsrWordsRecognitionResult = models.LiveStreamAsrWordsRecognition
 const AiSamplePerson = models.AiSamplePerson;
 const SmartSubtitleTaskAsrFullTextResult = models.SmartSubtitleTaskAsrFullTextResult;
 const BatchSmartSubtitlesResult = models.BatchSmartSubtitlesResult;
+const QueryProjectResponse = models.QueryProjectResponse;
 const DescribeDesignTaskRequest = models.DescribeDesignTaskRequest;
 const SimpleAesDrm = models.SimpleAesDrm;
 const DescribeWorkflowsResponse = models.DescribeWorkflowsResponse;
@@ -334,10 +341,12 @@ const TEHDConfig = models.TEHDConfig;
 const VideoTemplateInfoForUpdate = models.VideoTemplateInfoForUpdate;
 const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
 const WorkflowTrigger = models.WorkflowTrigger;
+const QueryProjectRequest = models.QueryProjectRequest;
 const LiveStreamAiRecognitionResultInfo = models.LiveStreamAiRecognitionResultInfo;
 const ActivityPara = models.ActivityPara;
 const ModifyAsrHotwordsResponse = models.ModifyAsrHotwordsResponse;
 const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
+const DescribeTextToSpeechAsyncTaskResponse = models.DescribeTextToSpeechAsyncTaskResponse;
 const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
 const MediaContentReviewAsrTextSegmentItem = models.MediaContentReviewAsrTextSegmentItem;
 const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
@@ -352,6 +361,7 @@ const SecurityGroupInfo = models.SecurityGroupInfo;
 const CreateScheduleRequest = models.CreateScheduleRequest;
 const LiveStreamTagRecognitionResult = models.LiveStreamTagRecognitionResult;
 const ExecuteFunctionResponse = models.ExecuteFunctionResponse;
+const DesignVoiceAsyncResponse = models.DesignVoiceAsyncResponse;
 const AnimatedGraphicTaskInput = models.AnimatedGraphicTaskInput;
 const LiveSmartSubtitlesTaskInput = models.LiveSmartSubtitlesTaskInput;
 const MosaicInput = models.MosaicInput;
@@ -474,6 +484,7 @@ const SuperResolutionConfig = models.SuperResolutionConfig;
 const CreateLiveRecordTemplateResponse = models.CreateLiveRecordTemplateResponse;
 const ActivityResult = models.ActivityResult;
 const DescribeAsrHotwordsResponse = models.DescribeAsrHotwordsResponse;
+const TextToSpeechAsyncRequest = models.TextToSpeechAsyncRequest;
 const CreateSubtitleEmbedTemplateResponse = models.CreateSubtitleEmbedTemplateResponse;
 const ResetWorkflowResponse = models.ResetWorkflowResponse;
 const HLSConfigureInfo = models.HLSConfigureInfo;
@@ -521,6 +532,7 @@ const AdaptiveDynamicStreamingInfoItem = models.AdaptiveDynamicStreamingInfoItem
 const ComposeMediaTrack = models.ComposeMediaTrack;
 const ProhibitedOcrReviewTemplateInfo = models.ProhibitedOcrReviewTemplateInfo;
 const ImageEraseLogoConfig = models.ImageEraseLogoConfig;
+const Project = models.Project;
 const ScheduleReviewTaskResult = models.ScheduleReviewTaskResult;
 const ModifySubtitleEmbedTemplateRequest = models.ModifySubtitleEmbedTemplateRequest;
 const ModifyTranscodeTemplateResponse = models.ModifyTranscodeTemplateResponse;
@@ -534,6 +546,7 @@ const AdaptiveDynamicStreamingTaskInput = models.AdaptiveDynamicStreamingTaskInp
 const ModifyQualityControlTemplateRequest = models.ModifyQualityControlTemplateRequest;
 const DescribeImageSpriteTemplatesResponse = models.DescribeImageSpriteTemplatesResponse;
 const TaskNotifyConfig = models.TaskNotifyConfig;
+const UpdateProjectResponse = models.UpdateProjectResponse;
 const FaceEnhanceConfig = models.FaceEnhanceConfig;
 const LiveStreamAiReviewImagePornResult = models.LiveStreamAiReviewImagePornResult;
 const DeleteProjectRequest = models.DeleteProjectRequest;
@@ -627,6 +640,7 @@ const FrameTagConfigureInfo = models.FrameTagConfigureInfo;
 const DeleteWorkflowResponse = models.DeleteWorkflowResponse;
 const ExecuteFunctionRequest = models.ExecuteFunctionRequest;
 const AiAnalysisTaskHeadTailOutput = models.AiAnalysisTaskHeadTailOutput;
+const DescribeVoicesResponse = models.DescribeVoicesResponse;
 const ModifyPersonSampleResponse = models.ModifyPersonSampleResponse;
 const DeleteTranscodeTemplateResponse = models.DeleteTranscodeTemplateResponse;
 const LiveStreamObjectRecognitionResult = models.LiveStreamObjectRecognitionResult;
@@ -651,7 +665,7 @@ const AiReviewTaskPornAsrResult = models.AiReviewTaskPornAsrResult;
 const EditMediaFileInfo = models.EditMediaFileInfo;
 const ComposeAudioStream = models.ComposeAudioStream;
 const SmartSubtitleTaskTransTextSegmentItem = models.SmartSubtitleTaskTransTextSegmentItem;
-const FaceConfigureInfo = models.FaceConfigureInfo;
+const DescribeVoicesRequest = models.DescribeVoicesRequest;
 const LiveAiParagraphInfo = models.LiveAiParagraphInfo;
 const AiRecognitionTaskFaceResultOutput = models.AiRecognitionTaskFaceResultOutput;
 const PornImgReviewTemplateInfoForUpdate = models.PornImgReviewTemplateInfoForUpdate;
@@ -1061,6 +1075,28 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
+     * This API is used to design a voice. It generates a voice ID based on a prompt.
+     * @param {DesignVoiceAsyncRequest} req
+     * @param {function(string, DesignVoiceAsyncResponse):void} cb
+     * @public
+     */
+    DesignVoiceAsync(req, cb) {
+        let resp = new DesignVoiceAsyncResponse();
+        this.request("DesignVoiceAsync", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update an episode project.
+     * @param {UpdateProjectRequest} req
+     * @param {function(string, UpdateProjectResponse):void} cb
+     * @public
+     */
+    UpdateProject(req, cb) {
+        let resp = new UpdateProjectResponse();
+        this.request("UpdateProject", req, resp, cb);
+    }
+
+    /**
      * This API is reserved for special circumstances. Do not use it unless you are directed to use it by technical support.
      * @param {ExecuteFunctionRequest} req
      * @param {function(string, ExecuteFunctionResponse):void} cb
@@ -1095,7 +1131,7 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
 
     /**
      * This API is used to initiate batch processing tasks for URL video links, with features including:
-Smart subtitle (full speech, speech hotword, and speech translation)
+Smart subtitle (full speech, speech hotword, and speech translation).
      * @param {BatchProcessMediaRequest} req
      * @param {function(string, BatchProcessMediaResponse):void} cb
      * @public
@@ -1193,6 +1229,17 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     DescribeMediaMetaData(req, cb) {
         let resp = new DescribeMediaMetaDataResponse();
         this.request("DescribeMediaMetaData", req, resp, cb);
+    }
+
+    /**
+     * This synchronous API is used to query available voices. It supports filtering voices by type, tag, language, and other criteria.
+     * @param {DescribeVoicesRequest} req
+     * @param {function(string, DescribeVoicesResponse):void} cb
+     * @public
+     */
+    DescribeVoices(req, cb) {
+        let resp = new DescribeVoicesResponse();
+        this.request("DescribeVoices", req, resp, cb);
     }
 
     /**
@@ -1672,6 +1719,17 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
+     * This API is used to query an episode project.
+     * @param {QueryProjectRequest} req
+     * @param {function(string, QueryProjectResponse):void} cb
+     * @public
+     */
+    QueryProject(req, cb) {
+        let resp = new QueryProjectResponse();
+        this.request("QueryProject", req, resp, cb);
+    }
+
+    /**
      * This API is used to create keyword samples in batches for video processing operations such as content recognition and inappropriate information detection with the help of the OCR and ASR technologies.
      * @param {CreateWordSamplesRequest} req
      * @param {function(string, CreateWordSamplesResponse):void} cb
@@ -1702,6 +1760,17 @@ Note: A workflow is disabled upon creation. You need to manually enable it.
     CreateWorkflow(req, cb) {
         let resp = new CreateWorkflowResponse();
         this.request("CreateWorkflow", req, resp, cb);
+    }
+
+    /**
+     * This API is used to convert text to speech asynchronously and supports long text to speech.
+     * @param {TextToSpeechAsyncRequest} req
+     * @param {function(string, TextToSpeechAsyncResponse):void} cb
+     * @public
+     */
+    TextToSpeechAsync(req, cb) {
+        let resp = new TextToSpeechAsyncResponse();
+        this.request("TextToSpeechAsync", req, resp, cb);
     }
 
     /**
@@ -1856,6 +1925,17 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
+     * This API is used to query the result of an asynchronous text to speech task.
+     * @param {DescribeTextToSpeechAsyncTaskRequest} req
+     * @param {function(string, DescribeTextToSpeechAsyncTaskResponse):void} cb
+     * @public
+     */
+    DescribeTextToSpeechAsyncTask(req, cb) {
+        let resp = new DescribeTextToSpeechAsyncTaskResponse();
+        this.request("DescribeTextToSpeechAsyncTask", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a scheme.
      * @param {DeleteScheduleRequest} req
      * @param {function(string, DeleteScheduleResponse):void} cb
@@ -1985,7 +2065,7 @@ Live stream processing event notification supports HTTP callback and also suppor
     }
 
     /**
-     * This API is used to translate text.
+     * 
      * @param {TextTranslationRequest} req
      * @param {function(string, TextTranslationResponse):void} cb
      * @public

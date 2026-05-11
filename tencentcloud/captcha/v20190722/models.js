@@ -129,13 +129,13 @@ class DescribeCaptchaResultRequest extends  AbstractModel {
         this.CaptchaType = null;
 
         /**
-         * The user verification ticket returned by the frontend callback function
+         * The user verification ticket returned by the frontend callback function.
          * @type {string || null}
          */
         this.Ticket = null;
 
         /**
-         * The user public IP obtained from the customer backend server
+         * The user public IP obtained from the customer backend server.
          * @type {string || null}
          */
         this.UserIp = null;

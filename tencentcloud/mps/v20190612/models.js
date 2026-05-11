@@ -25,11 +25,17 @@ class AiAnalysisTaskHorizontalToVerticalInput extends  AbstractModel {
         super();
 
         /**
-         * Intelligent landscape-to-portrait template ID.
+         * <p>ID of the horizontal-to-vertical video transformation template.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -41,6 +47,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -794,10 +801,16 @@ class AiAnalysisTaskClassificationInput extends  AbstractModel {
         super();
 
         /**
-         * Intelligent video categorization template ID.
+         * <p>ID of the intelligent video classification template.</p>
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -809,6 +822,7 @@ class AiAnalysisTaskClassificationInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -2714,26 +2728,18 @@ class CreateSmartEraseTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Audio/Video enhancement configuration.
+ * DescribeTextToSpeechAsyncTask request structure.
  * @class
  */
-class EnhanceConfig extends  AbstractModel {
+class DescribeTextToSpeechAsyncTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Video enhancement configuration.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {VideoEnhanceConfig || null}
+         * <p>Task ID.</p>
+         * @type {string || null}
          */
-        this.VideoEnhance = null;
-
-        /**
-         * The audio enhancement configuration.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {AudioEnhanceConfig || null}
-         */
-        this.AudioEnhance = null;
+        this.TaskId = null;
 
     }
 
@@ -2744,18 +2750,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.VideoEnhance) {
-            let obj = new VideoEnhanceConfig();
-            obj.deserialize(params.VideoEnhance)
-            this.VideoEnhance = obj;
-        }
-
-        if (params.AudioEnhance) {
-            let obj = new AudioEnhanceConfig();
-            obj.deserialize(params.AudioEnhance)
-            this.AudioEnhance = obj;
-        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -3858,92 +3853,49 @@ class SyncDubbingRequest extends  AbstractModel {
         super();
 
         /**
-         * Text for the synthesis. This is required for text to speech. The text cannot exceed 2000 characters in length.
+         * <p>Text for the synthesis. This is required for text to speech. The text cannot exceed 2000 characters in length.</p>
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * Text language. This defaults to zh (Chinese) if left empty.
-Supported languages:
-zh: Chinese.
-en: English.
-ja: Japanese.
-de: German.
-fr: French.
-ko: Korean.
-ru: Russian.
-uk: Ukrainian.
-pt: Portuguese.
-it: Italian.
-es: Spanish.
-id: Indonesian.
-nl: Dutch.
-tr: Turkish.
-fil: Filipino.
-ms: Malay.
-el: Greek.
-fi: Finnish.
-hr: Croatian.
-sk: Slovak.
-pl: Polish.
-sv: Swedish.
-hi: Hindi.
-bg: Bulgarian.
-ro: Romanian.
-ar: Arabic.
-cs: Czech.
-da: Danish.
-ta: Tamil.
-hun: Hungarian.
-vi: Vietnamese.
-no: Norwegian.
-yue: Cantonese.
-th: Thai.
-he: Hebrew.
-ca: Catalan.
-nn: Nynorsk.
-af: Afrikaans.
-fa: Persian.
-sl: Slovenian.
-
+         * <p>Text language. This defaults to Chinese if left empty.<br>Supported languages:<br>zh    Chinese<br>en    English<br>ja    Japanese<br>de    German<br>fr    French<br>ko    Korean<br>ru    Russian<br>uk    Ukrainian<br>pt    Portuguese<br>it    Italian<br>es    Spanish<br>id    Indonesian<br>nl    Dutch<br>tr    Turkish<br>fil    Filipino<br>ms    Malay<br>el    Greek<br>fi    Finnish<br>hr    Croatian<br>sk    Slovak<br>pl    Polish<br>sv    Swedish<br>hi    Hindi<br>bg    Bulgarian<br>ro    Romanian<br>ar    Arabic<br>cs    Czech<br>da    Danish<br>ta    Tamil<br>hun    Hungarian<br>vi    Vietnamese<br>no    Norwegian<br>yue    Cantonese<br>th    Thai<br>he    Hebrew<br>ca    Catalan<br>nn    Nynorsk<br>af    Afrikaans<br>fa    Persian<br>sl    Slovenian</p>
          * @type {string || null}
          */
         this.TextLang = null;
 
         /**
-         * Voice type ID. This is required for synthesis with a specific voice type. System voice types and voice type cloning are supported.
+         * <p>Voice ID. This is required for synthesis with a specific voice. System voice and voice cloning are supported.</p>
          * @type {string || null}
          */
         this.VoiceId = null;
 
         /**
-         * Base64-encoded audio for cloning.
+         * <p>Base64-encoded audio for cloning.</p>
          * @type {string || null}
          */
         this.AudioData = null;
 
         /**
-         * 
+         * <p>Cloning audio URL. Valid when AudioData is empty.</p>
          * @type {string || null}
          */
         this.AudioUrl = null;
 
         /**
-         * Cloning audio language. The default language is Chinese.
-Supported languages are the same as those for TextLang.
+         * <p>Cloning audio language. The default language is Chinese. <br>Supported languages are the same as those for TextLang.</p>
          * @type {string || null}
          */
         this.AudioLang = null;
 
         /**
-         * 
+         * <p>Output parameters.</p><p>Specifies the output format, etc.</p>
          * @type {SyncDubbingOutputOption || null}
          */
         this.Output = null;
 
         /**
-         * Extended parameters in the format of a JSON string.
+         * <p>Extended parameters in the format of a JSON string.</p><p>‑ synExt (Object): Speech synthesis extension parameter.<br>- duration (Float): Synthesized audio duration, in seconds. Example: 5.2.<br>- sampleRate (Integer): Synthesized audio sample rate. Default value: 16000. Supported values: [8000,16000,22050,32000,44100].<br> pitch (Integer): -Pitch. Default value: 0 (original voice output). Valid values: [-12, 12].<br>‑ cloneExt (Object): Voice cloning extension parameter.<br>    - timeRanges (Float[][]): Specifies the time ranges for audio cloning. Default value: [[0, 20]]. Example: [[5.2, 10], [45, 59.8]].</p>
          * @type {string || null}
          */
         this.ExtParam = null;
@@ -4888,7 +4840,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 Unit: Hz.
 Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
 Note: This field may return null, indicating that no valid values can be obtained.
@@ -5436,7 +5388,7 @@ class SmartEraseTaskResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -5731,7 +5683,7 @@ Cannot be set to 0.
 
         /**
          * Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 Unit: Hz.
 Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
          * @type {number || null}
@@ -6896,10 +6848,16 @@ class AiAnalysisTaskReelInput extends  AbstractModel {
         super();
 
         /**
-         * ID of the intelligent video editing template.
+         * <p>ID of the intelligent video editing template.</p>
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -6911,6 +6869,7 @@ class AiAnalysisTaskReelInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -7931,16 +7890,28 @@ class AigcImageExtraParam extends  AbstractModel {
         super();
 
         /**
-         * The aspect ratio of the generated video.Supported aspect ratios for different models:1. GEM: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, and 21:9.Note: For more information about the aspect ratios of specific models, see the model website.
+         * <p>Aspect ratio of the generated video.</p><p>Supported aspect ratios for different models:</p><ol><li>GEM: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, and 21:9.</li></ol><p>Note: For more information about the aspect ratios of specific models, see the model website.</p>
          * @type {string || null}
          */
         this.AspectRatio = null;
 
         /**
-         * Output resolution of the image.Models that support this parameter:Valid values: 720P, 1080P, 2K, and 4K.
+         * <p>Output resolution of the image.</p><p>Models that support this parameter:<br>Valid values: 720P, 1080P, 2K, and 4K.</p>
          * @type {string || null}
          */
         this.Resolution = null;
+
+        /**
+         * <p>Indicates whether to add a logo watermark. No watermark is added by default. 1 - A watermark is added. 0 - No watermark is added.</p><p>Value range: [0, 1].</p><p>Default value: 0.</p>
+         * @type {number || null}
+         */
+        this.LogoAdd = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OutputFormat = null;
 
     }
 
@@ -7953,6 +7924,8 @@ class AigcImageExtraParam extends  AbstractModel {
         }
         this.AspectRatio = 'AspectRatio' in params ? params.AspectRatio : null;
         this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.LogoAdd = 'LogoAdd' in params ? params.LogoAdd : null;
+        this.OutputFormat = 'OutputFormat' in params ? params.OutputFormat : null;
 
     }
 }
@@ -9039,6 +9012,78 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateProject request structure.
+ * @class
+ */
+class UpdateProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Project ID.</p>
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * <p>Project name.</p>
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * <p>Project term base.</p>
+         * @type {Array.<TermBase> || null}
+         */
+        this.TermBase = null;
+
+        /**
+         * <p>Project description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>List of characters.</p>
+         * @type {Array.<Speakers> || null}
+         */
+        this.Speakers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+
+        if (params.TermBase) {
+            this.TermBase = new Array();
+            for (let z in params.TermBase) {
+                let obj = new TermBase();
+                obj.deserialize(params.TermBase[z]);
+                this.TermBase.push(obj);
+            }
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.Speakers) {
+            this.Speakers = new Array();
+            for (let z in params.Speakers) {
+                let obj = new Speakers();
+                obj.deserialize(params.Speakers[z]);
+                this.Speakers.push(obj);
+            }
+        }
 
     }
 }
@@ -10780,6 +10825,72 @@ class Speakers extends  AbstractModel {
 }
 
 /**
+ * Control parameter of a face recognition task
+ * @class
+ */
+class FaceConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of a face recognition task. Valid values:
+<li>ON: Enables an intelligent face recognition task;</li>
+<li>OFF: Disables an intelligent face recognition task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0-100. Default value: 95.
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * The default face filter labels, which specify the types of faces to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
+<li>entertainment (people in the entertainment industry)</li>
+<li>sport (sports celebrities)</li>
+<li>politician</li>
+         * @type {Array.<string> || null}
+         */
+        this.DefaultLibraryLabelSet = null;
+
+        /**
+         * Custom face tags for filter, which specify the face recognition results to return. If this parameter is not specified or left empty, the recognition results for all custom face tags are returned.
+Up to 100 tags are allowed, each containing no more than 16 characters.
+         * @type {Array.<string> || null}
+         */
+        this.UserDefineLibraryLabelSet = null;
+
+        /**
+         * Figure library. Valid values:
+<li>Default: Default figure library;</li>
+<li>UserDefine: Custom figure library.</li>
+<li>All: Both default and custom figure libraries will be used.</li>
+Default value: All (both default and custom figure libraries will be used.)
+         * @type {string || null}
+         */
+        this.FaceLibrary = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.DefaultLibraryLabelSet = 'DefaultLibraryLabelSet' in params ? params.DefaultLibraryLabelSet : null;
+        this.UserDefineLibraryLabelSet = 'UserDefineLibraryLabelSet' in params ? params.UserDefineLibraryLabelSet : null;
+        this.FaceLibrary = 'FaceLibrary' in params ? params.FaceLibrary : null;
+
+    }
+}
+
+/**
  * DescribeSmartEraseTemplates request structure.
  * @class
  */
@@ -11509,10 +11620,16 @@ class AiAnalysisTaskCutoutInput extends  AbstractModel {
         super();
 
         /**
-         * ID of the intelligent video matting template.
+         * <p>ID of the intelligent video matting template.</p>
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -11524,6 +11641,7 @@ class AiAnalysisTaskCutoutInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -11833,10 +11951,16 @@ class AiAnalysisTaskSegmentInput extends  AbstractModel {
         super();
 
         /**
-         * Splitting task template ID.
+         * <p>ID of the video clipping task template.</p>
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -11848,6 +11972,7 @@ class AiAnalysisTaskSegmentInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -12656,18 +12781,23 @@ class SmartSubtitleTaskResultInput extends  AbstractModel {
         super();
 
         /**
-         * Smart subtitle template ID.
+         * <p>Smart subtitle template ID.</p>
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Custom smart subtitle parameter. It takes effect when Definition is set to 0.
-This parameter is used in high customization scenarios. It is recommended that you preferentially use Definition to specify smart subtitle parameters.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Custom smart subtitle parameter. It takes effect when Definition is set to 0.<br>This parameter is used in highly customized scenarios. We recommend that you use Definition to specify smart subtitle parameters.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {RawSmartSubtitleParameter || null}
          */
         this.RawParameter = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.UserExtPara = null;
 
     }
 
@@ -12685,6 +12815,7 @@ Note: This field may return null, indicating that no valid value can be obtained
             obj.deserialize(params.RawParameter)
             this.RawParameter = obj;
         }
+        this.UserExtPara = 'UserExtPara' in params ? params.UserExtPara : null;
 
     }
 }
@@ -13098,6 +13229,55 @@ Note: `EndTime` must be at least 0.02 seconds later than `StartTime`.
 }
 
 /**
+ * TextToSpeechAsync response structure.
+ * @class
+ */
+class TextToSpeechAsyncResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Error code. 0 is returned if the request is successful.</p>
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * <p>Error message. success is returned if the request is successful.</p>
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * <p>Task ID. Use this ID to query the result.</p>
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreatePersonSample response structure.
  * @class
  */
@@ -13211,6 +13391,53 @@ class ModifyBlindWatermarkTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Audio/Video enhancement configuration.
+ * @class
+ */
+class EnhanceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Video enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {VideoEnhanceConfig || null}
+         */
+        this.VideoEnhance = null;
+
+        /**
+         * The audio enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AudioEnhanceConfig || null}
+         */
+        this.AudioEnhance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VideoEnhance) {
+            let obj = new VideoEnhanceConfig();
+            obj.deserialize(params.VideoEnhance)
+            this.VideoEnhance = obj;
+        }
+
+        if (params.AudioEnhance) {
+            let obj = new AudioEnhanceConfig();
+            obj.deserialize(params.AudioEnhance)
+            this.AudioEnhance = obj;
+        }
 
     }
 }
@@ -13553,7 +13780,7 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
         /**
          * Notification type:
 TDMQ-CMQ: message queue.
-"URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.comom/document/product/862/39229?from_cn_redirect=1).
+"URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/product/862/39229?from_cn_redirect=1).
 <Font color="red"> Note: if it is unspecified or left blank, no callback will be sent. To send a callback, fill in the corresponding type value. </font>
          * @type {string || null}
          */
@@ -14486,6 +14713,90 @@ Note: This field may return null, indicating that no valid value can be obtained
             obj.deserialize(params.VODOutputStorage)
             this.VODOutputStorage = obj;
         }
+
+    }
+}
+
+/**
+ * Voice information.
+ * @class
+ */
+class VoiceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Voice ID.</p>
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
+         * <p>Voice name.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Voice description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Voice type. </p><p>Enumeration value: </p><ul><li>system: System audio.</li></ul>
+         * @type {string || null}
+         */
+        this.Category = null;
+
+        /**
+         * <p>Gender. </p><p>Enumeration values: </p><ul><li>male: Male, </li><li>female: Female.</li></ul>
+         * @type {string || null}
+         */
+        this.Gender = null;
+
+        /**
+         * <p>List of supported languages. </p><p>For example: en.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Languages = null;
+
+        /**
+         * <p>Audition audio URL.</p>
+         * @type {string || null}
+         */
+        this.AudioUrl = null;
+
+        /**
+         * <p>List of tags. </p><p>For example: gentle.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * <p>Recommended scenarios. </p><p>For example: education.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Scenes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Category = 'Category' in params ? params.Category : null;
+        this.Gender = 'Gender' in params ? params.Gender : null;
+        this.Languages = 'Languages' in params ? params.Languages : null;
+        this.AudioUrl = 'AudioUrl' in params ? params.AudioUrl : null;
+        this.Labels = 'Labels' in params ? params.Labels : null;
+        this.Scenes = 'Scenes' in params ? params.Scenes : null;
 
     }
 }
@@ -15530,10 +15841,16 @@ class AiAnalysisTaskDelLogoInput extends  AbstractModel {
         super();
 
         /**
-         * Intelligent removal template ID.
+         * <p>ID of the intelligent video erasing template.</p>
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -15545,6 +15862,7 @@ class AiAnalysisTaskDelLogoInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -15607,39 +15925,39 @@ class SmartSubtitleTaskBatchOutput extends  AbstractModel {
         super();
 
         /**
-         * Task progress.
+         * <p>Task progress.</p>
          * @type {number || null}
          */
         this.Progress = null;
 
         /**
-         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * <p>Task status. Valid values are PROCESSING, SUCCESS, WAITING, and FAIL.</p>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * <p>Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of <a href="https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81">MPS error codes</a>.</p>
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error message.
+         * <p>Error message.</p>
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * Translation task output information.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Translation task output information.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SmartSubtitleTaskTransTextResultOutput || null}
          */
         this.TransTextTask = null;
 
         /**
-         * Output information on the full speech recognition task.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Full speech recognition task output information.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SmartSubtitleTaskAsrFullTextResultOutput || null}
          */
         this.AsrFullTextTask = null;
@@ -16866,13 +17184,13 @@ class CreateAigcVideoTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>OS.<br>GV.</p>
+         * <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>OS.<br>GV.<br>PixVerse.</p>
          * @type {string || null}
          */
         this.ModelName = null;
 
         /**
-         * <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hailuo: [02 and 2.3].</li><li>Kling: [2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, and q3-turbo].</li><li>GV: [3.1].</li><li>OS: [2.0].</li></ol>
+         * <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hailuo: [02, 2.3, and 2.3-fast].</li><li>Kling: [1.6, 2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, q3-turbo, q3, and q3-mix].</li><li>GV: [3.1 and 3.1-fast].</li><li>OS: [2.0].</li><li>PixVerse: [v5.6, v6, and c1].</li></ol>
          * @type {string || null}
          */
         this.ModelVersion = null;
@@ -17349,6 +17667,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.SubtitleEmbedId = null;
 
+        /**
+         * <p>Speaker identification mode. Valid values:<br>0: Speaker identification is disabled.<br>1: Speaker identification is enabled.<br>Default value: 0.</p>
+         * @type {number || null}
+         */
+        this.SpeakerMode = null;
+
+        /**
+         * <p>Indicates whether to output the identified speaker to the subtitle file. Valid values:<br>0: The speaker is not output to the subtitle file.<br>1: The speaker is output to the VTT subtitle file.<br>Note: To use this parameter, the value of SpeakerMode cannot be 0.<br>Default value: 0.</p>
+         * @type {number || null}
+         */
+        this.SpeakerLabel = null;
+
     }
 
     /**
@@ -17378,6 +17708,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.SelectingSubtitleAreasConfig = obj;
         }
         this.SubtitleEmbedId = 'SubtitleEmbedId' in params ? params.SubtitleEmbedId : null;
+        this.SpeakerMode = 'SpeakerMode' in params ? params.SpeakerMode : null;
+        this.SpeakerLabel = 'SpeakerLabel' in params ? params.SpeakerLabel : null;
 
     }
 }
@@ -17746,58 +18078,54 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
         super();
 
         /**
-         * ID of a time point screenshot template.
+         * <p>Time point screenshot template ID.</p>
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * List of screenshot time points in the format of `s` or `%`:
-<li>If the string ends in `s`, it means that the time point is in seconds; for example, `3.5s` means that the time point is the 3.5th second;</li>
-<li>If the string ends in `%`, it means that the time point is the specified percentage of the video duration; for example, `10%` means that the time point is 10% of the video duration.</li>
+         * <p>List of screenshot time points. Time points support two formats: s and %.</p><li>The unit for a string that ends with s is second. For example, 3.5s means the time point is at 3.5 seconds.</li><li>The unit for a string that ends with % is a percentage of the video duration. For example, 10% means the time point is at 10% of the video's total duration.</li>
          * @type {Array.<string> || null}
          */
         this.ExtTimeOffsetSet = null;
 
         /**
-         * List of time points of screenshots in <font color=red>seconds</font>.
+         * <p>List of screenshot time points, in <font color="red">seconds</font>. This parameter is not recommended. We recommend that you use the ExtTimeOffsetSet parameter.</p>
          * @type {Array.<number> || null}
          */
         this.TimeOffsetSet = null;
 
         /**
-         * List of up to 10 image or text watermarks.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Watermark list. Up to 10 image or text watermarks are supported.</p>
          * @type {Array.<WatermarkInput> || null}
          */
         this.WatermarkSet = null;
 
         /**
-         * Target bucket of a generated time point screenshot file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
+         * <p>Target storage for the file after the time point screenshot is taken. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Output path for an image file of screenshots taken at specific time points, which can be a relative or absolute path.
-If you need to define an output path, the path must end with `.{format}`. For variable names, refer to [Filename Variable](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1).
-Relative path example:
-<li>Filename_{Variable name}.{format}.</li>
-<li>Filename.{format}.</li>
-Absolute path example:
-<li>/Custom path/Filename_{Variable name}.{format}.</li>
-If left empty, a relative path is used by default: `{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}`.
+         * <p>Output path of the image file after the time point screenshot is taken, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">File Name Variable Description</a>.<br>Relative path example:</p><li>File name_{variable name}.{format}</li><li>File name.{format}</li>Absolute path example:<li>/custom path/file name_{variable name}.{format}</li>If this is not specified, the default relative path is <code>{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}</code>.
          * @type {string || null}
          */
         this.OutputObjectPath = null;
 
         /**
-         * Rule of the `{number}` variable in the time point screenshot output path.
+         * <p>Rule of the <code>{number}</code> variable in the output path after the time point screenshot is taken.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {NumberFormat || null}
          */
         this.ObjectNumberFormat = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
 
     }
 
@@ -17833,6 +18161,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.ObjectNumberFormat)
             this.ObjectNumberFormat = obj;
         }
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }
@@ -17846,42 +18175,42 @@ class ImageSpriteTaskInput extends  AbstractModel {
         super();
 
         /**
-         * ID of an image sprite generating template.
+         * <p>Sprite screenshot template ID.</p>
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Target bucket of a generated image sprite. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
+         * <p>Target storage for the file after the sprite screenshot is taken. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Output path of a captured sprite image file, which can be a relative or absolute path.
-If you need to define an output path, the path must end with `.{format}`. For variable names, refer to [Filename Variable](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1).Relative path example:
-<li>Filename_{Variable name}.{format}.</li>
-<li>Filename.{format}.</li>
-Absolute path example:
-<li>/Custom path/Filename_{Variable name}.{format}.</li>
-If left empty, a relative path is used by default: `{inputName}_imageSprite_{definition}_{number}.{format}`.
+         * <p>Output path of the sprite screenshot image file after the sprite screenshot is taken, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">File Name Variable Description</a>.<br>Relative path example:</p><li>File name_{variable name}.{format}</li><li>File name.{format}</li>Absolute path example:<li>/custom path/file name_{variable name}.{format}</li>If this is not specified, the default relative path is <code>{inputName}_imageSprite_{definition}_{number}.{format}</code>.
          * @type {string || null}
          */
         this.OutputObjectPath = null;
 
         /**
-         * Output path to the WebVTT file after an image sprite is generated, which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}.{format}`.
+         * <p>Output path of the Web VTT file after the sprite screenshot is taken, which can only be a relative path. If this is not specified, the default relative path is <code>{inputName}_imageSprite_{definition}.{format}</code>.</p>
          * @type {string || null}
          */
         this.WebVttObjectName = null;
 
         /**
-         * Rule of the `{number}` variable in the image sprite output path.
+         * <p>Rule of the <code>{number}</code> variable in the output path after the sprite screenshot is taken.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {NumberFormat || null}
          */
         this.ObjectNumberFormat = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
 
     }
 
@@ -17907,6 +18236,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.ObjectNumberFormat)
             this.ObjectNumberFormat = obj;
         }
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }
@@ -18020,6 +18350,41 @@ class VODInputInfo extends  AbstractModel {
         this.Region = 'Region' in params ? params.Region : null;
         this.Object = 'Object' in params ? params.Object : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * DesignVoiceAsync request structure.
+ * @class
+ */
+class DesignVoiceAsyncRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Voice description.</p>
+         * @type {string || null}
+         */
+        this.Prompt = null;
+
+        /**
+         * <p>Extended parameters in the format of a JSON string.</p>
+         * @type {string || null}
+         */
+        this.ExtParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Prompt = 'Prompt' in params ? params.Prompt : null;
+        this.ExtParam = 'ExtParam' in params ? params.ExtParam : null;
 
     }
 }
@@ -18156,10 +18521,16 @@ class AiAnalysisTaskVideoRemakeInput extends  AbstractModel {
         super();
 
         /**
-         * Intelligent deduplication template ID.
+         * <p>ID of the intelligent video deduplication template.</p>
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -18171,6 +18542,7 @@ class AiAnalysisTaskVideoRemakeInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -18438,6 +18810,56 @@ Note: This field may return null, indicating that no valid value can be obtained
                 this.Outputs.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * QueryProject response structure.
+ * @class
+ */
+class QueryProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Total number of eligible items.</p>
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * <p>Project data.</p>
+         * @type {Array.<Project> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new Project();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -19415,6 +19837,55 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * QueryProject request structure.
+ * @class
+ */
+class QueryProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Project ID.</p>
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * <p>Project name.</p>
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * <p>Page number. Value range: starts from 1. Default value: 1.</p>
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * <p>Number of items per page. Default value: 20.</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
  * Live stream AI recognition results
  * @class
  */
@@ -19707,6 +20178,76 @@ There can be up to 10 tags, each with a length limit of 16 characters.
         this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * DescribeTextToSpeechAsyncTask response structure.
+ * @class
+ */
+class DescribeTextToSpeechAsyncTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Error code. 0 is returned if the request is successful.</p>
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * <p>Error message. success is returned if the request is successful.</p>
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * <p>Task status.</p><p>Enumeration values: </p><ul><li>success: Success, </li><li>fail: Failure, </li><li>processing: Processing.</li></ul>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Synthetic audio URL.</p>
+         * @type {string || null}
+         */
+        this.AudioUrl = null;
+
+        /**
+         * <p>Used voice ID.</p>
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
+         * <p>Extended information.</p>
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.AudioUrl = 'AudioUrl' in params ? params.AudioUrl : null;
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -20231,13 +20772,13 @@ class BlindWatermarkTemplate extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+         * Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+         * Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -20657,6 +21198,55 @@ class ExecuteFunctionResponse extends  AbstractModel {
 }
 
 /**
+ * DesignVoiceAsync response structure.
+ * @class
+ */
+class DesignVoiceAsyncResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Error code. 0 is returned if the request is successful.</p>
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * <p>Error message. success is returned if the request is successful.</p>
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * <p>Task ID, used when querying a task.</p>
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Type of an animated image generating task.
  * @class
  */
@@ -20665,42 +21255,41 @@ class AnimatedGraphicTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Animated image generating template ID.
+         * <p>Video-to-GIF conversion template ID.</p>
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Start time of an animated image in a video in seconds.
+         * <p>Start time of the GIF in the video, in seconds.</p>
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time of an animated image in a video in seconds.
+         * <p>End time of the GIF in the video, in seconds.</p>
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * Target bucket of a generated animated image file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
+         * <p>Target storage for the file after GIF conversion. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Output path of a file after animated image generating, which can be a relative or absolute path.
-If you need to define an output path, the path must end with `.{format}`. For variable names, refer to [Filename Variable](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1).
-Relative path example:
-<li>Filename_{Variable name}.{format}.</li>
-<li>Filename.{format}.</li>
-Absolute path example:
-<li>/Custom path/Filename_{Variable name}.{format}.</li>
-If left empty, a relative path is used by default: `{inputName}_animatedGraphic_{definition}.{format}`.
+         * <p>Output path of the file after GIF conversion, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">File Name Variable Description</a>.<br>Relative path example:</p><li>File name_{variable name}.{format}</li><li>File name.{format}</li>Absolute path example:<li>/custom path/file name_{variable name}.{format}</li>If this is not specified, the default relative path is <code>{inputName}_animatedGraphic_{definition}.{format}</code>.
          * @type {string || null}
          */
         this.OutputObjectPath = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
 
     }
 
@@ -20721,6 +21310,7 @@ If left empty, a relative path is used by default: `{inputName}_animatedGraphic_
             this.OutputStorage = obj;
         }
         this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }
@@ -21555,7 +22145,7 @@ class ScheduleExecRuleTaskResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
+         * Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -23001,10 +23591,16 @@ class AiAnalysisTaskTagInput extends  AbstractModel {
         super();
 
         /**
-         * Intelligent video tagging template ID.
+         * <p>ID of the intelligent video tagging template.</p>
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -23016,6 +23612,7 @@ class AiAnalysisTaskTagInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -24764,10 +25361,16 @@ class AiAnalysisTaskHighlightInput extends  AbstractModel {
         super();
 
         /**
-         * The ID of the intelligent highlight generation template.
+         * <p>ID of the intelligent video highlight template.</p>
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -24779,6 +25382,7 @@ class AiAnalysisTaskHighlightInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -25100,10 +25704,16 @@ class AiAnalysisTaskVideoComprehensionInput extends  AbstractModel {
         super();
 
         /**
-         * Video (audio) recognition template ID.
+         * <p>ID of the video (audio) understanding template.</p>
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -25115,6 +25725,7 @@ class AiAnalysisTaskVideoComprehensionInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -27253,7 +27864,7 @@ class SmartSubtitleTaskFullTextResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -27507,164 +28118,128 @@ class SmartSubtitleTemplateItem extends  AbstractModel {
         super();
 
         /**
-         * Unique identifier of the smart subtitle template.
+         * <p>Unique identifier of the smart subtitle template.</p>
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Smart subtitle template name.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Smart subtitle template name.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Smart subtitle template description.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Smart subtitle template description.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Template type. Valid values:
-* Preset: system preset template
-* Custom: user-defined template
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Template type. Valid values:</p><ul><li>Preset: preset template.</li><li>Custom: custom template.</li></ul>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * ASR hotword lexicon parameter.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>ASR hotword lexicon parameters.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AsrHotWordsConfigure || null}
          */
         this.AsrHotWordsConfigure = null;
 
         /**
-         * Name of the hotword lexicon associated with the template.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Name of the hotword lexicon associated with the template.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AsrHotWordsLibraryName = null;
 
         /**
-         * List of source languages of the video with smart subtitles.
-`zh`: Simplified Chinese.
-`yue`: Cantonese.
-`zh-PY`: Chinese, English, and Cantonese.
-`zh_medical`: Chinese (medical scenario).
-`zh_dialect`: Chinese dialect.
-`prime_zh`: Chinese, English, and Chinese dialects.
-`zh_en`: Chinese and English.
-`en`: English.
-`ja`: Japanese.
-`ko`: Korean.
-`fr`: French.
-`es`: Spanish.
-`it`: Italian.
-`de`: German.
-`tr`: Turkish.
-`ru`: Russian.
-`pt`: Portuguese (Brazil).
-`pt-PT`: Portuguese (Portugal).
-`vi`: Vietnamese.
-`id`: Indonesian.
-`ms`: Malay.
-`th`: Thai.
-`ar`: Arabic.
-`hi`: Hindi.
-`fil`: Filipino.
-`auto`: automatic recognition (it is only supported in pure subtitle translation).
+         * <p>Video source language list for smart subtitle:</p><p><code>zh</code>: Simplified Chinese<br><code>yue</code>: Cantonese<br><code>zh-PY</code>: Chinese, English, and Cantonese<br><code>zh_medical</code>: Chinese healthcare<br><code>zh_dialect</code>: Chinese dialect<br><code>prime_zh</code>: Chinese and English dialects<br><code>zh_en</code>: Chinese and English<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>fr</code>: French<br><code>es</code>: Spanish<br><code>it</code>: Italian<br><code>de</code>: German<br><code>tr</code>: Turkish<br><code>ru</code>: Russian<br><code>pt</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>vi</code>: Vietnamese<br><code>id</code>: Indonesian<br><code>ms</code>: Malay<br><code>th</code>: Thai<br><code>ar</code>: Arabic<br><code>hi</code>: Hindi<br><code>fil</code>: Filipino<br><code>auto</code>: Automatic identification (only supported for subtitle translation)</p>
          * @type {string || null}
          */
         this.VideoSrcLanguage = null;
 
         /**
-         * Smart subtitle file format.
-- vtt: WebVTT.- srt: SRT.- original: same as the source subtitle file (for subtitle translation templates).- Not specified or empty: no subtitle file generated.Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Smart subtitle file format.</p><ul><li>vtt: WebVTT.</li><li>srt: SRT.</li><li>original: same as the source subtitle file (for subtitle translation templates).</li><li>Not specified or empty: no subtitle file generated.</li></ul>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SubtitleFormat = null;
 
         /**
-         * Smart subtitle language type.
-0: source language1: target language
-2: source language + target language
-The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+         * <p>Smart subtitle language type.<br>0: source language.<br>1: target language.<br>2: source language and target language.<br>Only 0 is supported when TranslateSwitch is OFF.<br>Only 1 or 2 is supported when TranslateSwitch is ON.</p>
          * @type {number || null}
          */
         this.SubtitleType = null;
 
         /**
-         * Subtitle translation switch.
-ON: enable translation
-OFF: disable translation
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Subtitle translation switch.<br>ON: enables translation.<br>OFF: disables translation.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TranslateSwitch = null;
 
         /**
-         * Target language for subtitle translation.
-This field is valid when the value of TranslateSwitch is ON.
-`zh`: Simplified Chinese.
-`zh-TW`: Traditional Chinese.
-`en`: English.
-`ja`: Japanese.
-`ko`: Korean.
-`fr`: French.
-`es`: Spanish.
-`it`: Italian.
-`de`: German.
-`tr`: Turkish.
-`ru`: Russian.
-`pt`: Portuguese (Brazil).
-`pt-PT`: Portuguese (Portugal).
-`vi`: Vietnamese.
-`id`: Indonesian.
-`ms`: Malay.
-`th`: Thai.
-`ar`: Arabic.
-`hi`: Hindi.
-`fil`: Filipino.
-**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+         * <p>Target language for subtitle translation.<br>This parameter takes effect when TranslateSwitch is ON.<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>fr</code>: French<br><code>es</code>: Spanish<br><code>it</code>: Italian<br><code>de</code>: German<br><code>tr</code>: Turkish<br><code>ru</code>: Russian<br><code>pt</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>vi</code>: Vietnamese<br><code>id</code>: Indonesian<br><code>ms</code>: Malay<br><code>th</code>: Thai<br><code>ar</code>: Arabic<br><code>hi</code>: Hindi<br><code>fil</code>: Filipino</p><p><strong>Note</strong>: Use <code>/</code> to separate multiple languages, such as <code>en/ja</code>, which indicates English and Japanese.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TranslateDstLanguage = null;
 
         /**
-         * Template creation time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * <p>Template creation time, in <a href="https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52">ISO date format</a>.</p>
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modification time of the template in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * <p>Last template modification time, in <a href="https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52">ISO date format</a>.</p>
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Alias of the preset smart subtitle template.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Preset template alias for smart subtitle.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AliasName = null;
 
         /**
-         * Subtitle processing type:- 0: ASR subtitle recognition.- 1: subtitle translation.- 2: OCR subtitle recognition.
+         * <p>Subtitle processing type:</p><ul><li>0: ASR.</li><li>1: subtitle translation.</li><li>2: OCR.</li></ul>
          * @type {number || null}
          */
         this.ProcessType = null;
 
         /**
-         * Area configurations for the subtitle OCR extraction box.Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Area configurations for the subtitle OCR extraction box.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SelectingSubtitleAreasConfig || null}
          */
         this.SelectingSubtitleAreasConfig = null;
+
+        /**
+         * <p>Subtitle burn-in template ID.</p>
+         * @type {number || null}
+         */
+        this.SubtitleEmbedId = null;
+
+        /**
+         * <p>Speaker identification mode. Valid values:<br>0: Speaker identification is disabled.<br>1: Speaker identification is enabled.<br>Default value: 0.</p>
+         * @type {number || null}
+         */
+        this.SpeakerMode = null;
+
+        /**
+         * <p>Indicates whether to output the identified speaker to the subtitle file. Valid values:<br>0: The speaker is not output to the subtitle file.<br>1: The speaker is output to the VTT subtitle file.<br>Note: To use this parameter, the value of SpeakerMode cannot be 0.<br>Default value: 0.</p>
+         * @type {number || null}
+         */
+        this.SpeakerLabel = null;
 
     }
 
@@ -27701,6 +28276,9 @@ Note: This field may return null, indicating that no valid value can be obtained
             obj.deserialize(params.SelectingSubtitleAreasConfig)
             this.SelectingSubtitleAreasConfig = obj;
         }
+        this.SubtitleEmbedId = 'SubtitleEmbedId' in params ? params.SubtitleEmbedId : null;
+        this.SpeakerMode = 'SpeakerMode' in params ? params.SpeakerMode : null;
+        this.SpeakerLabel = 'SpeakerLabel' in params ? params.SpeakerLabel : null;
 
     }
 }
@@ -28312,6 +28890,55 @@ If the value of Type is 1, the base64-encoded content of the hotword file is ret
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TextToSpeechAsync request structure.
+ * @class
+ */
+class TextToSpeechAsyncRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Text to convert to speech.</p>
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * <p>Voice ID.</p>
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
+         * <p>Text language. The default value is Chinese.</p>
+         * @type {string || null}
+         */
+        this.TextLang = null;
+
+        /**
+         * <p>Extended parameters in the format of a JSON string.</p><p>synExt (Object): Extended text to speech parameter.<br>  duration (Float): Synthesized audio duration, in seconds. Example: 5.2.<br>  sampleRate (Integer): Synthesized audio sample rate. Default value: 16000. Supported values: [8000,16000,22050,32000,44100].<br>  pitch (Integer): -Pitch. Default value: 0 (original voice output). Value range: [-12, 12].</p><p>transExt (Object): Extended translation parameter.<br>  transInfo (Object).<br>   transDst (String): Target language, such as en.<br>  transRequirement (String): Translation requirements.</p>
+         * @type {string || null}
+         */
+        this.ExtParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.TextLang = 'TextLang' in params ? params.TextLang : null;
+        this.ExtParam = 'ExtParam' in params ? params.ExtParam : null;
 
     }
 }
@@ -29188,7 +29815,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Output parameter setting for synchronous dubbing.
  * @class
  */
 class SyncDubbingOutputOption extends  AbstractModel {
@@ -29196,7 +29823,7 @@ class SyncDubbingOutputOption extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Output type of the synthesis result. </p><p>Enumeration values: </p><ul><li>data: Audio base64 encoding, </li><li>url: Audio URL, valid for 24 hours.</li></ul>
          * @type {string || null}
          */
         this.Type = null;
@@ -29347,10 +29974,16 @@ class AiAnalysisTaskDubbingInput extends  AbstractModel {
         super();
 
         /**
-         * Video translation template ID.
+         * <p>ID of the video localization template.</p>
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -29362,6 +29995,7 @@ class AiAnalysisTaskDubbingInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -30854,6 +31488,92 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
+ * Episode project information.
+ * @class
+ */
+class Project extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Project ID.</p>
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * <p>Project name.</p>
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * <p>Project description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Project term base.</p>
+         * @type {Array.<TermBase> || null}
+         */
+        this.TermBase = null;
+
+        /**
+         * <p>List of characters.</p>
+         * @type {Array.<Speakers> || null}
+         */
+        this.Speakers = null;
+
+        /**
+         * <p>Creation time (Unix timestamp).</p>
+         * @type {number || null}
+         */
+        this.CreatedAt = null;
+
+        /**
+         * <p>Update time (Unix timestamp).</p>
+         * @type {number || null}
+         */
+        this.UpdatedAt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.TermBase) {
+            this.TermBase = new Array();
+            for (let z in params.TermBase) {
+                let obj = new TermBase();
+                obj.deserialize(params.TermBase[z]);
+                this.TermBase.push(obj);
+            }
+        }
+
+        if (params.Speakers) {
+            this.Speakers = new Array();
+            for (let z in params.Speakers) {
+                let obj = new Speakers();
+                obj.deserialize(params.Speakers[z]);
+                this.Speakers.push(obj);
+            }
+        }
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+
+    }
+}
+
+/**
  * The result of a content moderation task of a scheme.
  * @class
  */
@@ -31760,6 +32480,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * UpdateProject response structure.
+ * @class
+ */
+class UpdateProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Face enhancement configuration.
  * @class
  */
@@ -31914,10 +32662,16 @@ class AiAnalysisTaskFrameTagInput extends  AbstractModel {
         super();
 
         /**
-         * Intelligent frame-specific video tagging template ID.
+         * <p>ID of the intelligent video frame-by-frame tagging template.</p>
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -31929,6 +32683,7 @@ class AiAnalysisTaskFrameTagInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -33359,39 +34114,39 @@ class SyncDubbingResponse extends  AbstractModel {
         super();
 
         /**
-         * Error code. 0 is returned if the request is successful.
+         * <p>Error code. 0 is returned if the request is successful.</p>
          * @type {number || null}
          */
         this.ErrorCode = null;
 
         /**
-         * Error message. success is returned if the request is successful.
+         * <p>Error message. success is returned if the request is successful.</p>
          * @type {string || null}
          */
         this.Msg = null;
 
         /**
-         * Synthetic audio in Base64 encoding and WAV format.
+         * <p>Synthetic audio in Base64 encoding and WAV format.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AudioData = null;
 
         /**
-         * 
+         * <p>Synthetic audio URL. It is valid for 24 hours.</p>
          * @type {string || null}
          */
         this.AudioUrl = null;
 
         /**
-         * Cloned voice type ID.
+         * <p>Cloned voice ID.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VoiceId = null;
 
         /**
-         * 
+         * <p>Extended information in the format of a JSON string. </p><p>duration: Duration of the resulting audio, in seconds.</p>
          * @type {string || null}
          */
         this.ExtInfo = null;
@@ -34792,7 +35547,7 @@ class ProcessLiveStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>The live streaming URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the trtc room number ID, which must be a number.<br><code>&lt;sdkappid&gt;</code> is the trtc SDK app ID.<br><code>&lt;userid&gt;</code> is the user ID of the service entering the room, which can distinguish robots.<br><code>&lt;usersig&gt;</code> is the trtc user's signature.</p><p>WebRTC supports the live stream of <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a>. To obtain the address, <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">see</a>.</p><p>For SRT-supported addresses, <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a>.</p>
+         * <p>The live streaming URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the trtc room number ID, which must be a number.<br><code>&lt;sdkappid&gt;</code> is the trtc SDK app ID.<br><code>&lt;userid&gt;</code> is the user ID of the service entering the room, which can distinguish robots.<br><code>&lt;usersig&gt;</code> is the trtc user's signature.</p><p>WebRTC supports the live stream of <a href="https://www.tencentcloud.com/products/css?from_qcintl=topnav&lang=en&pg=">CSS</a>. To obtain the address, <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">see</a>.</p><p>For SRT-supported addresses, <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a>.</p>
          * @type {string || null}
          */
         this.Url = null;
@@ -35385,7 +36140,12 @@ class CreateSmartSubtitleTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br>ASR recognition and pure caption translation currently support the following languages:<br><code>auto</code>: Auto-identification<br><code>zh</code>: Simplified Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>zh-PY</code>: Chinese-English-Cantonese<br><code>zh_medical</code>: Chinese health care<br><code>vi</code>: Vietnamese<br><code>ms</code>: Malay<br><code>id</code>: Indonesian<br><code>fil</code>: Filipino<br><code>th</code>: Thai<br><code>pt</code>: Portuguese<br><code>tr</code>: Turkish<br><code>ar</code>: Arabic<br><code>es</code>: Spanish<br><code>hi</code>: Hindi<br><code>fr</code>: French<br><code>de</code>: German<br><code>it</code>: Italian<br><code>zh_dialect</code>: Chinese dialect<br><code>zh_en</code>: Chinese-English<br><code>yue</code>: Cantonese<br><code>ru</code>: Russian<br><code>prime_zh</code>: Chinese-English dialect<br><code>af-ZA</code>: Afrikaans (South Africa)<br><code>sq-AL</code>: Albanian (Albania)<br><code>am-ET</code>: Amharic (Ethiopia)<br><code>ar-DZ</code>: Arabic (Algeria)<br><code>ar-BH</code>: Arabic (Bahrain)<br><code>ar-EG</code>: Arabic (Egypt)<br><code>ar-IQ</code>: Arabic (Iraq)<br><code>ar-IL</code>: Arabic (Israel)<br><code>ar-JO</code>: Arabic (Jordan)<br><code>ar-KW</code>: Arabic (Kuwait)<br><code>ar-LB</code>: Arabic (Lebanon)<br><code>ar-MR</code>: Arabic (Mauritania)<br><code>ar-MA</code>: Arabic (Morocco)<br><code>ar-OM</code>: Arabic (Oman)<br><code>ar-QA</code>: Arabic (Qatar)<br><code>ar-SA</code>: Arabic (Saudi Arabia)<br><code>ar-PS</code>: Arabic (State of Palestine)<br><code>ar-SY</code>: Arabic (Syria)<br><code>ar-TN</code>: Arabic (Tunisia)<br><code>ar-AE</code>: Arabic (United Arab Emirates)<br><code>ar-YE</code>: Arabic (Yemen)<br><code>hy-AM</code>: Armenian (Armenia)<br><code>az-AZ</code>: Azerbaijani (Azerbaijan)<br><code>eu-ES</code>: Basque (Spain)<br><code>bn-BD</code>: Bengali (Bangladesh)<br><code>bn-IN</code>: Bengali (India)<br><code>bs-BA</code>: Bosnian (Bosnia and Herzegovina)<br><code>bg-BG</code>: Bulgarian (Bulgaria)<br><code>my-MM</code>: Burmese (Myanmar)<br><code>ca-ES</code>: Catalan (Spain)<br><code>hr-HR</code>: Croatian (Croatia)<br><code>cs-CZ</code>: Czech (Czech Republic)<br><code>da-DK</code>: Danish (Denmark)<br><code>nl-BE</code>: Dutch (Belgium)<br><code>nl-NL</code>: Dutch (Netherlands)<br><code>en-AU</code>: English (Australia)<br><code>en-CA</code>: English (Canada)<br><code>en-GH</code>: English (Ghana)<br><code>en-HK</code>: English (Hong Kong (China))<br><code>en-IN</code>: English (India)<br><code>en-IE</code>: English (Ireland)<br><code>en-KE</code>: English (Kenya)<br><code>en-NZ</code>: English (New Zealand)<br><code>en-NG</code>: English (Nigeria)<br><code>en-PK</code>: English (Pakistan)<br><code>en-PH</code>: English (Philippines)<br><code>en-SG</code>: English (Singapore)<br><code>en-ZA</code>: English (South Africa)<br><code>en-TZ</code>: English (Tanzania)<br><code>en-GB</code>: English (UK)<br><code>en-US</code>: English (United States)<br><code>et-EE</code>: Estonian (Estonia)<br><code>fil-PH</code>: Filipino (Philippines)<br><code>fi-FI</code>: Finnish (Finland)<br><code>fr-BE</code>: French (Belgium)<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fr-CH</code>: French (Switzerland)<br><code>gl-ES</code>: Galician (Spain)<br><code>ka-GE</code>: Georgian (Georgia)<br><code>el-GR</code>: Greek (Greece)<br><code>gu-IN</code>: Gujarati (India)<br><code>iw-IL</code>: Hebrew (Israel)<br><code>hi-IN</code>: Hindi (India)<br><code>hu-HU</code>: Hungarian (Hungary)<br><code>is-IS</code>: Icelandic (Iceland)<br><code>id-ID</code>: Indonesian (Indonesia)<br><code>it-IT</code>: Italian (Italy)<br><code>it-CH</code>: Italian (Switzerland)<br><code>ja-JP</code>: Japanese (Japan)<br><code>jv-ID</code>: Javanese (Indonesia)<br><code>kn-IN</code>: Kannada (India)<br><code>kk-KZ</code>: Kazakh (Kazakhstan)<br><code>km-KH</code>: Khmer (Cambodia)<br><code>rw-RW</code>: Kinyarwanda (Rwanda)<br><code>ko-KR</code>: Korean (South Korea)<br><code>lo-LA</code>: Lao (Laos)<br><code>lv-LV</code>: Latvian (Latvia)<br><code>lt-LT</code>: Lithuanian (Lithuania)<br><code>mk-MK</code>: Macedonian (North Macedonia)<br><code>ms-MY</code>: Malay (Malaysia)<br><code>ml-IN</code>: Malayalam (India)<br><code>mr-IN</code>: Marathi (India)<br><code>mn-MN</code>: Mongolian (Mongolia)<br><code>ne-NP</code>: Nepali (Nepal)<br><code>no-NO</code>: Norwegian Bokmål (Norway)<br><code>fa-IR</code>: Persian (Iran)<br><code>pl-PL</code>: Polish (Poland)<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>ro-RO</code>: Romanian (Romania)<br><code>ru-RU</code>: Russian (Russia)<br><code>sr-RS</code>: Serbian (Serbia)<br><code>si-LK</code>: Sinhalese (Sri Lanka)<br><code>sk-SK</code>: Slovak (Slovakia)<br><code>sl-SI</code>: Slovenian (Slovenia)<br><code>st-ZA</code>: Southern Sotho (South Africa)<br><code>es-AR</code>: Spanish (Argentina)<br><code>es-BO</code>: Spanish (Bolivia)<br><code>es-CL</code>: Spanish (Chile)<br><code>es-CO</code>: Spanish (Colombia)<br><code>es-CR</code>: Spanish (Costa Rica)<br><code>es-DO</code>: Spanish (Dominican Republic)<br><code>es-EC</code>: Spanish (Ecuador)<br><code>es-SV</code>: Spanish (El Salvador)<br><code>es-GT</code>: Spanish (Guatemala)<br><code>es-HN</code>: Spanish (Honduras)<br><code>es-MX</code>: Spanish (Mexico)<br><code>es-NI</code>: Spanish (Nicaragua)<br><code>es-PA</code>: Spanish (Panama)<br><code>es-PY</code>: Spanish (Paraguay)<br><code>es-PE</code>: Spanish (Peru)<br><code>es-PR</code>: Spanish (Puerto Rico)<br><code>es-ES</code>: Spanish (Spain)<br><code>es-US</code>: Spanish (United States)<br><code>es-UY</code>: Spanish (Uruguay)<br><code>es-VE</code>: Spanish (Venezuela)<br><code>su-ID</code>: Sundanese (Indonesia)<br><code>sw-KE</code>: Swahili (Kenya)<br><code>sw-TZ</code>: Swahili (Tanzania)<br><code>sv-SE</code>: Swedish (Sweden)<br><code>ta-IN</code>: Tamil (India)<br><code>ta-MY</code>: Tamil (Malaysia)<br><code>ta-SG</code>: Tamil (Singapore)<br><code>ta-LK</code>: Tamil (Sri Lanka)<br><code>te-IN</code>: Telugu (India)<br><code>th-TH</code>: Thai (Thailand)<br><code>ts-ZA</code>: Tsonga (South Africa)<br><code>tr-TR</code>: Turkish (Türkiye)<br><code>uk-UA</code>: Ukrainian (Ukraine)<br><code>ur-IN</code>: Urdu (India)<br><code>ur-PK</code>: Urdu (Pakistan)<br><code>uz-UZ</code>: Uzbek (Uzbekistan)<br><code>ve-ZA</code>: Venda (South Africa)<code>vi-VN</code>: Vietnamese (Vietnam)<br><code>xh-ZA</code>: Xhosa (South Africa)<br><code>zu-ZA</code>: Zulu (South Africa)</p>
+         * <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br><br>ASR recognition and pure caption translation currently support the following: 
+
+[ASR Supported Languages](https://www.tencentcloud.com/zh/document/product/1041/68175#ASRlanguages)
+
+
+Common available language codes:<br>`auto` (Auto Recognition), <br>`zh` (Simplified Chinese), <br>`en` (English), <br>`ja` (Japanese), <br>`ko` (Korean), <br>`zh-PY `(Chinese, English and Cantonese), <br>`zh_medical `(Medical Chinese), <br>`vi` (Vietnamese), <br>`ms` (Malay), <br>`id` (Indonesian), <br>`fil` (Filipino), <br>`th` (Thai), <br>`pt` (Portuguese), <br>`tr` (Turkish), <br>`ar` (Arabic), <br>`es` (Spanish), <br>`hi` (Hindi), <br>`fr` (French), <br>`de` (German), <br>`it` (Italian), <br>`zh_dialect` (Chinese Dialects), <br>`zh_en` (Chinese & English Mixed), <br>`yue` (Cantonese), <br>`ru` (Russian), <br>`prime_zh` (Chinese, English & Chinese Dialects)
          * @type {string || null}
          */
         this.VideoSrcLanguage = null;
@@ -35444,6 +36204,18 @@ class CreateSmartSubtitleTemplateRequest extends  AbstractModel {
          */
         this.SubtitleEmbedId = null;
 
+        /**
+         * <p>Speaker identification switch. Valid values:<br>0: Speaker identification is disabled.<br>1: Speaker identification is enabled.<br>By default, speaker identification is disabled.</p>
+         * @type {number || null}
+         */
+        this.SpeakerMode = null;
+
+        /**
+         * <p>Indicates whether to output the identified speaker to the subtitle file. Valid values:<br>0: The speaker is not output to the subtitle file.<br>1: The speaker is output to the VTT subtitle file.<br>Note: To use this parameter, the value of SpeakerMode cannot be 0.<br>By default, the speaker is not output to the subtitle file.</p>
+         * @type {number || null}
+         */
+        this.SpeakerLabel = null;
+
     }
 
     /**
@@ -35474,6 +36246,8 @@ class CreateSmartSubtitleTemplateRequest extends  AbstractModel {
             this.SelectingSubtitleAreasConfig = obj;
         }
         this.SubtitleEmbedId = 'SubtitleEmbedId' in params ? params.SubtitleEmbedId : null;
+        this.SpeakerMode = 'SpeakerMode' in params ? params.SpeakerMode : null;
+        this.SpeakerLabel = 'SpeakerLabel' in params ? params.SpeakerLabel : null;
 
     }
 }
@@ -35544,37 +36318,43 @@ class QualityControlData extends  AbstractModel {
         super();
 
         /**
-         * When this field is set to true, it indicates that the video has no audio track.
+         * <p>A value of true indicates that the video has no audio track.</p>
          * @type {boolean || null}
          */
         this.NoAudio = null;
 
         /**
-         * When this field is set to true, it indicates that the video has no video track.
+         * <p>A value of true indicates that the video has no video track.</p>
          * @type {boolean || null}
          */
         this.NoVideo = null;
 
         /**
-         * No-reference quality score of the video (100 points in total).
+         * <p>No-reference quality score of the video, on a scale of 0 to 100.</p>
          * @type {number || null}
          */
         this.QualityEvaluationScore = null;
 
         /**
-         * No-reference quality score of the video (MOS).
+         * <p>No-reference quality score of the video (MOS).</p>
          * @type {number || null}
          */
         this.QualityEvaluationMeanOpinionScore = null;
 
         /**
-         * Exception items identified in content quality inspection.
+         * <p>Video aesthetic score. Value range: [0, 100].</p>
+         * @type {number || null}
+         */
+        this.AestheticEvaluationScore = null;
+
+        /**
+         * <p>Exception items detected in content quality inspection.</p>
          * @type {Array.<QualityControlResult> || null}
          */
         this.QualityControlResultSet = null;
 
         /**
-         * Exception items identified in format diagnosis.
+         * <p>Exception items detected in format diagnosis.</p>
          * @type {Array.<ContainerDiagnoseResultItem> || null}
          */
         this.ContainerDiagnoseResultSet = null;
@@ -35592,6 +36372,7 @@ class QualityControlData extends  AbstractModel {
         this.NoVideo = 'NoVideo' in params ? params.NoVideo : null;
         this.QualityEvaluationScore = 'QualityEvaluationScore' in params ? params.QualityEvaluationScore : null;
         this.QualityEvaluationMeanOpinionScore = 'QualityEvaluationMeanOpinionScore' in params ? params.QualityEvaluationMeanOpinionScore : null;
+        this.AestheticEvaluationScore = 'AestheticEvaluationScore' in params ? params.AestheticEvaluationScore : null;
 
         if (params.QualityControlResultSet) {
             this.QualityControlResultSet = new Array();
@@ -35703,410 +36484,25 @@ class TextTranslationRequest extends  AbstractModel {
         super();
 
         /**
-         * Text to be translated, which must be encoded in UTF-8 format. Characters not encoded in UTF-8 format cannot be translated. Input valid text. Unconventional content, such as HTML tags, may also cause translation failures. The text length per request must be less than 2,000 characters.
+         * <p>Text to be translated. The text must be encoded in UTF-8 format. Non-UTF-8 encoded characters may cause translation failures. Provide valid text. Unconventional text such as HTML tags may fail to translate. The text length per request cannot exceed 2,000 characters.</p>
          * @type {string || null}
          */
         this.SourceText = null;
 
         /**
-         * Source language. Valid values:
-    "auto": "automatic recognition (recognized as a language).",
-    "ab": "Abkhaz language.",
-    "ace": Acehnese.",
-    "ach": "Acholi.",
-    "af": "Afrikaans.",
-    "ak": "Twi (Akan).",
-    "am": "Amharic",
-    "ar": "Arabic.",
-    "as": "Assamese.",
-    "ay": "Aymara.",
-    "az": "Azerbaijani.",
-    "ba": "Bashkir.",
-    "ban": "Balinese",
-    "bbc": "Batak Toba.",
-    "bem": "Bemba",
-    "bew": "Betawi",
-    "bg": "Bulgarian.",
-    "bho": "Bhojpuri.",
-    "bik": "Bikol",
-    "bm": "Bambara.",
-    "bn": "Bengali.",
-    "br": "Breton.",
-    "bs": "Bosnian.",
-    "btx": "Batak Karo.",
-    "bts": "Batak Simalungun.",
-    "bua": "Buryat.",
-    "ca": "Catalan.",
-    "ceb": "Cebuano.",
-    "cgg": "Kiga",
-    "chm": "Meadow Mari language.",
-    "ckb": "Kurdish (Sorani).",
-    "cnh": "Hakha Chin.",
-    "co": "Corsican.",
-    "crh": "Crimean Tatar.",
-    "crs": "Seychellois Creole.",
-    "cs": "Czech.",
-    "cv": "Chuvash.",
-    "cy": "Welsh.",
-    "da": "Danish.",
-    "de": "German.",
-    "din": "Dinka",
-    "doi": "Dogri.",
-    "dov": "Dombe.",
-    "dv": "Divehi.",
-    "dz": "Dzongkha.",
-    "ee": "Ewe",
-    "el": "Greek.",
-    "en": "English.",
-    "eo": "Esperanto.",
-    "es": "Spanish.",
-    "et": "Estonian.",
-    "eu": "Basque.",
-    "fa": "Persian.",
-    "ff": "Fula.",
-    "fi": "Finnish.",
-    "fil": "Filipino (Tagalog).",
-    "fj": "Fijian.",
-    "fr": "French.",
-    "fr-CA": "French (Canada).",
-    "fr-FR": "French (France).",
-    "fy": "Frisian.",
-    "ga": "Irish.",
-    "gaa": "Ga.",
-    "gd": "Scottish Gaelic.",
-    "gl": "Galician.",
-    "gn": "Guarani.",
-    "gom": "Goan Konkani.",
-    "gu": "Gujarati.",
-    "gv": "Manx.",
-    "ha": "Hausa",
-    "haw": "Hawaiian.",
-    "he": "Hebrew.",
-    "hi": "Hindi.",
-    "hil": "Hiligaynon.",
-    "hmn": "Hmong.",
-    "hr": "Croatian.",
-    "hrx": "Hunsrik.",
-    "ht": "Haitian Creole.",
-    "hu": "Hungarian.",
-    "hy": "Armenian.",
-    "id": "Indonesian.",
-    "ig": "Igbo",
-    "ilo": "Iloko.",
-    "is": "Icelandic.",
-    "it": "Italian.",
-    "iw": "Hebrew.",
-    "ja": "Japanese.",
-    "jv": "Javanese.",
-    "jw": "Javanese.",
-    "ka": "Georgian.",
-    "kk": "Kazakh.",
-    "km": "Khmer.",
-    "kn": "Kanada.",
-    "ko": "Korean.",
-    "kri": "Krio",
-    "ku": "Kurdish (Kurmanji).",
-    "ktu": "Kituba.",
-    "ky": "Kirghiz.",
-    "la": "Latin.",
-    "lb": "Luxembourgish.",
-    "lg": "Ganda (Luganda).",
-    "li": "Limburgish.",
-    "lij": "Ligurian.",
-    "lmo": "Lombard.",
-    "ln": "Lingala.",
-    "lo": "Lao.",
-    "lt": "Lithuanian.",
-    "ltg": "Latgalian.",
-    "luo": "Luo",
-    "lus": "Mizo.",
-    "lv": "Latvian.",
-    "mai": "Maithili.",
-    "mak": "Makassar.",
-    "mg": "Malagasy.",
-    "mi": "Maori.",
-    "min": "Minangkabau.",
-    "mk": "Macedonian.",
-    "ml": "Malayalam.",
-    "mn": "Mongolian.",
-    "mr": "Marathi.",
-    "ms": "Malay.",
-    "mt": "Maltese.",
-    "my": "Burmese.",
-    "ne": "Nepali.",
-    "new": "Nepali (Newar).",
-    "nl": "Dutch.",
-    "no": "Norwegian.",
-    "nr": "Ndebele (South).",
-    "nso": "Northern Sotho (Sepedi).",
-    "nus": "Nuer.",
-    "ny": "Chichewa (Nyanja).",
-    "oc": "Occitan.",
-    "om": "Oromo",
-    "or": "Odia (Oria).",
-    "pa": "Punjabi.",
-    "pag": "Pangasinan.",
-    "pam": "Kapampangan.",
-    "pap": "Papiamento",
-    "pl": "Polish.",
-    "ps": "Pashto",
-    "pt": "Portuguese.",
-    "pt-BR": "Portuguese (Brazil).",
-    "pt-PT": "Portuguese (Portugal).",
-    "qu": "Quechuan.",
-    "ro": "Romanian.",
-    "rom": "Romani.",
-    "rn": "Rundi",
-    "ru": "Russian.",
-    "rw": "Kinyarwanda.",
-    "sa": "Sanskrit.",
-    "scn": "Sicilian.",
-    "sd": "Sindhi.",
-    "sg": "Sango",
-    "shn": "Shan.",
-    "si": "Sinhalese.",
-    "sk": "Slovak.",
-    "sl": "Slovene.",
-    "sm": "Samoan.",
-    "sn": "Shona.",
-    "so": "Somali.",
-    "sq": "Albanian.",
-    "sr": "Serbian.",
-    "ss": "Swati.",
-    "st": "Sesotho.",
-    "su": "Sundanese.",
-    "sv": "Swedish.",
-    "sw": "Swahili.",
-    "szl": "Silesian.",
-    "ta": "Tamil.",
-    "te": "Telugu.",
-    "tet": "Tetum.",
-    "tg": "Tajik.",
-    "th": "Thai.",
-    "ti": "Tigrinya.",
-    "tk": "Turkmen.",
-    "tl": " Filipino (Tagalog).",
-    "tn": "Tswana.",
-    "tr": "Turkish.",
-    "ts": "Tsonga.",
-    "tt": "Tatar.",
-    "ug": "Uyghur.",
-    "uk": "Ukrainian.",
-    "ur": "Urdu.",
-    "uz": "Uzbek.",
-    "vi": "Vietnamese.",
-    "xh": "Xhosa.",
-    "yi": "Yiddish.",
-    "yo": "Yoruba.",
-    "yua": "Yucatec Maya.",
-    "yue": "Cantonese.",
-    "zh": "Simplified Chinese.",
-    "zh-TW": "Chinese (Traditional).",
-    "zu": "Zulu."
+         * <p>Source language. Valid values:<br>    &quot;auto&quot;: &quot; Auto-detection (detects as one language)&quot;,<br>    &quot;ab&quot;: &quot;Abkhaz&quot;,<br>    &quot;ace&quot;: &quot;Acehnese&quot;,<br>    &quot;ach&quot;: &quot;Acholi&quot;,<br>    &quot;af&quot;: &quot;Afrikaans&quot;,<br>    &quot;ak&quot;: &quot;Akan&quot;,<br>    &quot;am&quot;: &quot;Amharic&quot;,<br>    &quot;ar&quot;: &quot;Arabic&quot;,<br>    &quot;as&quot;: &quot;Assamese&quot;,<br>    &quot;ay&quot;: &quot;Aymara&quot;,<br>    &quot;az&quot;: &quot;Azerbaijani&quot;,<br>    &quot;ba&quot;: &quot;Bashkir&quot;,<br>    &quot;ban&quot;: &quot;Balinese&quot;,<br>    &quot;bbc&quot;: &quot;Batak Toba&quot;,<br>    &quot;bem&quot;: &quot;Bemba&quot;,<br>    &quot;bew&quot;: &quot;Betawi&quot;,<br>    &quot;bg&quot;: &quot;Bulgarian&quot;,<br>    &quot;bho&quot;: &quot;Bhojpuri&quot;,<br>    &quot;bik&quot;: &quot;Bikol&quot;,<br>    &quot;bm&quot;: &quot;Bambara&quot;,<br>    &quot;bn&quot;: &quot;Bengali&quot;,<br>    &quot;br&quot;: &quot;Breton&quot;,<br>    &quot;bs&quot;: &quot;Bosnian&quot;,<br>    &quot;btx&quot;: &quot;Batak Karo&quot;,<br>    &quot;bts&quot;: &quot;Batak Simalungun&quot;,<br>    &quot;bua&quot;: &quot;Buryat&quot;,<br>    &quot;ca&quot;: &quot;Catalan&quot;,<br>    &quot;ceb&quot;: &quot;Cebuano&quot;,<br>    &quot;cgg&quot;: &quot;Kiga&quot;,<br>    &quot;chm&quot;: &quot;Meadow Mari&quot;,<br>    &quot;ckb&quot;: &quot;Kurdish (Sorani)&quot;,<br>    &quot;cnh&quot;: &quot;Hakha Chin&quot;,<br>    &quot;co&quot;: &quot;Corsican&quot;,<br>    &quot;crh&quot;: &quot;Crimean Tatar&quot;,<br>    &quot;crs&quot;: &quot;Seychellois Creole&quot;,<br>    &quot;cs&quot;: &quot;Czech&quot;,<br>    &quot;cv&quot;: &quot;Chuvash&quot;,<br>    &quot;cy&quot;: &quot;Welsh&quot;,<br>    &quot;da&quot;: &quot;Danish&quot;,<br>    &quot;de&quot;: &quot;German&quot;,<br>    &quot;din&quot;: &quot;Dinka&quot;,<br>    &quot;doi&quot;: &quot;Dogri&quot;,<br>    &quot;dov&quot;: &quot;Dombe&quot;,<br>    &quot;dv&quot;: &quot;Dhivehi&quot;,<br>    &quot;dz&quot;: &quot;Dzongkha&quot;,<br>    &quot;ee&quot;: &quot;Ewe&quot;,<br>    &quot;el&quot;: &quot;Greek&quot;,<br>    &quot;en&quot;: &quot;English&quot;,<br>    &quot;eo&quot;: &quot;Esperanto&quot;,<br>    &quot;es&quot;: &quot;Spanish&quot;,<br>    &quot;et&quot;: &quot;Estonian&quot;,<br>    &quot;eu&quot;: &quot;Basque&quot;,<br>    &quot;fa&quot;: &quot;Persian&quot;,<br>    &quot;ff&quot;: &quot;Fula&quot;,<br>    &quot;fi&quot;: &quot;Finnish&quot;,<br>    &quot;fil&quot;: &quot;Filipino (Tagalog)&quot;,<br>    &quot;fj&quot;: &quot;Fijian&quot;,<br>    &quot;fr&quot;: &quot;French&quot;,<br>    &quot;fr-CA&quot;: &quot;French (Canada)&quot;,<br>    &quot;fr-FR&quot;: &quot;French (France)&quot;,<br>    &quot;fy&quot;: &quot;Frisian&quot;,<br>    &quot;ga&quot;: &quot;Irish&quot;,<br>    &quot;gaa&quot;: &quot;Ga&quot;,<br>    &quot;gd&quot;: &quot;Scottish Gaelic&quot;,<br>    &quot;gl&quot;: &quot;Galician&quot;,<br>    &quot;gn&quot;: &quot;Guarani&quot;,<br>    &quot;gom&quot;: &quot;Konkani&quot;,<br>    &quot;gu&quot;: &quot;Gujarati&quot;,<br>    &quot;gv&quot;: &quot;Manx&quot;,<br>    &quot;ha&quot;: &quot;Hausa&quot;,<br>    &quot;haw&quot;: &quot;Hawaiian&quot;,<br>    &quot;he&quot;: &quot;Hebrew&quot;,<br>    &quot;hi&quot;: &quot;Hindi&quot;,<br>    &quot;hil&quot;: &quot;Hiligaynon&quot;,<br>    &quot;hmn&quot;: &quot;Hmong&quot;,<br>    &quot;hr&quot;: &quot;Croatian&quot;,<br>    &quot;hrx&quot;: &quot;Hunsrik&quot;,<br>    &quot;ht&quot;: &quot;Haitian Creole&quot;,<br>    &quot;hu&quot;: &quot;Hungarian&quot;,<br>    &quot;hy&quot;: &quot;Armenian&quot;,<br>    &quot;id&quot;: &quot;Indonesian&quot;,<br>    &quot;ig&quot;: &quot;Igbo&quot;,<br>    &quot;ilo&quot;: &quot;Ilocano&quot;,<br>    &quot;is&quot;: &quot;Icelandic&quot;,<br>    &quot;it&quot;: &quot;Italian&quot;,<br>    &quot;iw&quot;: &quot;Hebrew&quot;,<br>    &quot;ja&quot;: &quot;Japanese&quot;,<br>    &quot;jv&quot;: &quot;Javanese&quot;,<br>    &quot;jw&quot;: &quot;Javanese&quot;,<br>    &quot;ka&quot;: &quot;Georgian&quot;,<br>    &quot;kk&quot;: &quot;Kazakh&quot;,<br>    &quot;km&quot;: &quot;Khmer&quot;,<br>    &quot;kn&quot;: &quot;Kannada&quot;,<br>    &quot;ko&quot;: &quot;Korean&quot;,<br>    &quot;kri&quot;: &quot;Krio&quot;,<br>    &quot;ku&quot;: &quot;Kurdish (Kurmanji)&quot;,<br>    &quot;ktu&quot;: &quot;Kituba&quot;,<br>    &quot;ky&quot;: &quot;Kyrgyz&quot;,<br>    &quot;la&quot;: &quot;Latin&quot;,<br>    &quot;lb&quot;: &quot;Luxembourgish&quot;,<br>    &quot;lg&quot;: &quot;Ganda (Luganda)&quot;,<br>    &quot;li&quot;: &quot;Limburgish&quot;,<br>    &quot;lij&quot;: &quot;Ligurian&quot;,<br>    &quot;lmo&quot;: &quot;Lombard&quot;,<br>    &quot;ln&quot;: &quot;Lingala&quot;,<br>    &quot;lo&quot;: &quot;Lao&quot;,<br>    &quot;lt&quot;: &quot;Lithuanian&quot;,<br>    &quot;ltg&quot;: &quot;Latgalian&quot;,<br>    &quot;luo&quot;: &quot;Luo&quot;,<br>    &quot;lus&quot;: &quot;Mizo&quot;,<br>    &quot;lv&quot;: &quot;Latvian&quot;,<br>    &quot;mai&quot;: &quot;Maithili&quot;,<br>    &quot;mak&quot;: &quot;Makassar&quot;,<br>    &quot;mg&quot;: &quot;Malagasy&quot;,<br>    &quot;mi&quot;: &quot;Maori&quot;,<br>    &quot;min&quot;: &quot;Minangkabau&quot;,<br>    &quot;mk&quot;: &quot;Macedonian&quot;,<br>    &quot;ml&quot;: &quot;Malayalam&quot;,<br>    &quot;mn&quot;: &quot;Mongolian&quot;,<br>    &quot;mr&quot;: &quot;Marathi&quot;,<br>    &quot;ms&quot;: &quot;Malay&quot;,<br>    &quot;mt&quot;: &quot;Maltese&quot;,<br>    &quot;my&quot;: &quot;Burmese&quot;,<br>    &quot;ne&quot;: &quot;Nepali&quot;,<br>    &quot;new&quot;: &quot;Newari&quot;,<br>    &quot;nl&quot;: &quot;Dutch&quot;,<br>    &quot;no&quot;: &quot;Norwegian&quot;,<br>    &quot;nr&quot;: &quot;Southern Ndebele&quot;,<br>    &quot;nso&quot;: &quot;Northern Sotho (Sepedi)&quot;,<br>    &quot;nus&quot;: &quot;Nuer&quot;,<br>    &quot;ny&quot;: &quot;Chichewa (Nyanja)&quot;,<br>    &quot;oc&quot;: &quot;Occitan&quot;,<br>    &quot;om&quot;: &quot;Oromo&quot;,<br>    &quot;or&quot;: &quot;Odia (Oriya)&quot;,<br>    &quot;pa&quot;: &quot;Punjabi&quot;,<br>    &quot;pag&quot;: &quot;Pangasinan&quot;,<br>    &quot;pam&quot;: &quot;Kapampangan&quot;,<br>    &quot;pap&quot;: &quot;Papiamento&quot;,<br>    &quot;pl&quot;: &quot;Polish&quot;,<br>    &quot;ps&quot;: &quot;Pashto&quot;,<br>    &quot;pt&quot;: &quot;Portuguese&quot;,<br>    &quot;pt-BR&quot;: &quot;Portuguese (Brazil)&quot;,<br>    &quot;pt-PT&quot;: &quot;Portuguese (Portugal)&quot;,<br>    &quot;qu&quot;: &quot;Quechua&quot;,<br>    &quot;ro&quot;: &quot;Romanian&quot;,<br>    &quot;rom&quot;: &quot;Romani&quot;,<br>    &quot;rn&quot;: &quot;Rundi&quot;,<br>    &quot;ru&quot;: &quot;Russian&quot;,<br>    &quot;rw&quot;: &quot;Kinyarwanda&quot;,<br>    &quot;sa&quot;: &quot;Sanskrit&quot;,<br>    &quot;scn&quot;: &quot;Sicilian&quot;,<br>    &quot;sd&quot;: &quot;Sindhi&quot;,<br>    &quot;sg&quot;: &quot;Sango&quot;,<br>    &quot;shn&quot;: &quot;Shan&quot;,<br>    &quot;si&quot;: &quot;Sinhala&quot;,<br>    &quot;sk&quot;: &quot;Slovak&quot;,<br>    &quot;sl&quot;: &quot;Slovenian&quot;,<br>    &quot;sm&quot;: &quot;Samoan&quot;,<br>    &quot;sn&quot;: &quot;Shona&quot;,<br>    &quot;so&quot;: &quot;Somali&quot;,<br>    &quot;sq&quot;: &quot;Albanian&quot;,<br>    &quot;sr&quot;: &quot;Serbian&quot;,<br>    &quot;ss&quot;: &quot;Swati&quot;,<br>    &quot;st&quot;: &quot;Sotho&quot;,<br>    &quot;su&quot;: &quot;Sundanese&quot;,<br>    &quot;sv&quot;: &quot;Swedish&quot;,<br>    &quot;sw&quot;: &quot;Swahili&quot;,<br>    &quot;szl&quot;: &quot;Silesian&quot;,<br>    &quot;ta&quot;: &quot;Tamil&quot;,<br>    &quot;te&quot;: &quot;Telugu&quot;,<br>    &quot;tet&quot;: &quot;Tetum&quot;,<br>    &quot;tg&quot;: &quot;Tajik&quot;,<br>    &quot;th&quot;: &quot;Thai&quot;,<br>    &quot;ti&quot;: &quot;Tigrinya&quot;,<br>    &quot;tk&quot;: &quot;Turkmen&quot;,<br>    &quot;tl&quot;: &quot;Filipino (Tagalog)&quot;,<br>    &quot;tn&quot;: &quot;Tswana&quot;,<br>    &quot;tr&quot;: &quot;Turkish&quot;,<br>    &quot;ts&quot;: &quot;Tsonga&quot;,<br>    &quot;tt&quot;: &quot;Tatar&quot;,<br>    &quot;ug&quot;: &quot;Uyghur&quot;,<br>    &quot;uk&quot;: &quot;Ukrainian&quot;,<br>    &quot;ur&quot;: &quot;Urdu&quot;,<br>    &quot;uz&quot;: &quot;Uzbek&quot;,<br>    &quot;vi&quot;: &quot;Vietnamese&quot;,<br>    &quot;xh&quot;: &quot;Xhosa&quot;,<br>    &quot;yi&quot;: &quot;Yiddish&quot;,<br>    &quot;yo&quot;: &quot;Yoruba&quot;,<br>    &quot;yua&quot;: &quot;Yucatec Maya&quot;,<br>    &quot;yue&quot;: &quot;Cantonese&quot;,<br>    &quot;zh&quot;: &quot;Simplified Chinese&quot;,<br>    &quot;zh-TW&quot;: &quot;Traditional Chinese&quot;,<br>    &quot;zu&quot;: &quot;Zulu&quot;</p>
          * @type {string || null}
          */
         this.Source = null;
 
         /**
-         * Target language. Valid values:
-    "ab": "Abkhaz language.",
-    "ace": "Acehnese.",
-    "ach": "Acholi.",
-    "af": "Afrikaans.",
-    "ak": "Twi (Akan).",
-    "am": "Amharic",
-    "ar": "Arabic.",
-    "as": "Assamese.",
-    "ay": "Aymara.",
-    "az": "Azerbaijani.",
-    "ba": "Bashkir.",
-    "ban": "Balinese",
-    "bbc": "Batak Toba.",
-    "bem": "Bemba",
-    "bew": "Betawi",
-    "bg": "Bulgarian.",
-    "bho": "Bhojpuri.",
-    "bik": "Bikol",
-    "bm": "Bambara.",
-    "bn": "Bengali.",
-    "br": "Breton.",
-    "bs": "Bosnian.",
-    "btx": "Batak Karo.",
-    "bts": "Batak Simalungun.",
-    "bua": "Buryat.",
-    "ca": "Catalan.",
-    "ceb": "Cebuano.",
-    "cgg": "Kiga",
-    "chm": "Meadow Mari language.",
-    "ckb": "Kurdish (Sorani).",
-    "cnh": "Hakha Chin.",
-    "co": "Corsican.",
-    "crh": "Crimean Tatar.",
-    "crs": "Seychellois Creole.",
-    "cs": "Czech.",
-    "cv": "Chuvash.",
-    "cy": "Welsh.",
-    "da": "Danish.",
-    "de": "German.",
-    "din": "Dinka",
-    "doi": "Dogri.",
-    "dov": "Dombe.",
-    "dv": "Divehi.",
-    "dz": "Dzongkha.",
-    "ee": "Ewe",
-    "el": "Greek.",
-    "en": "English.",
-    "eo": "Esperanto.",
-    "es": "Spanish.",
-    "et": "Estonian.",
-    "eu": "Basque.",
-    "fa": "Persian.",
-    "ff": "Fula.",
-    "fi": "Finnish.",
-    "fil": "Filipino (Tagalog).",
-    "fj": "Fijian.",
-    "fr": "French.",
-    "fr-CA": "French (Canada).",
-    "fr-FR": "French (France).",
-    "fy": "Frisian.",
-    "ga": "Irish.",
-    "gaa": "Ga.",
-    "gd": "Scottish Gaelic.",
-    "gl": "Galician.",
-    "gn": "Guarani.",
-    "gom": "Goan Konkani.",
-    "gu": "Gujarati.",
-    "gv": "Manx.",
-    "ha": "Hausa",
-    "haw": "Hawaiian.",
-    "he": "Hebrew.",
-    "hi": "Hindi.",
-    "hil": "Hiligaynon.",
-    "hmn": "Hmong.",
-    "hr": "Croatian.",
-    "hrx": "Hunsrik.",
-    "ht": "Haitian Creole.",
-    "hu": "Hungarian.",
-    "hy": "Armenian.",
-    "id": "Indonesian.",
-    "ig": "Igbo",
-    "ilo": "Iloko.",
-    "is": "Icelandic.",
-    "it": "Italian.",
-    "iw": "Hebrew.",
-    "ja": "Japanese.",
-    "jv": "Javanese.",
-    "jw": "Javanese.",
-    "ka": "Georgian.",
-    "kk": "Kazakh.",
-    "km": "Khmer.",
-    "kn": "Kanada.",
-    "ko": "Korean.",
-    "kri": "Krio",
-    "ku": "Kurdish (Kurmanji).",
-    "ktu": "Kituba.",
-    "ky": "Kirghiz.",
-    "la": "Latin.",
-    "lb": "Luxembourgish.",
-    "lg": "Ganda (Luganda).",
-    "li": "Limburgish.",
-    "lij": "Ligurian.",
-    "lmo": "Lombard.",
-    "ln": "Lingala.",
-    "lo": "Lao.",
-    "lt": "Lithuanian.",
-    "ltg": "Latgalian.",
-    "luo": "Luo",
-    "lus": "Mizo.",
-    "lv": "Latvian.",
-    "mai": "Maithili.",
-    "mak": "Makassar.",
-    "mg": "Malagasy.",
-    "mi": "Maori.",
-    "min": "Minangkabau.",
-    "mk": "Macedonian.",
-    "ml": "Malayalam.",
-    "mn": "Mongolian.",
-    "mr": "Marathi.",
-    "ms": "Malay.",
-    "mt": "Maltese.",
-    "my": "Burmese.",
-    "ne": "Nepali.",
-    "new": "Nepali (Newar).",
-    "nl": "Dutch.",
-    "no": "Norwegian.",
-    "nr": "Ndebele (South).",
-    "nso": "Northern Sotho (Sepedi).",
-    "nus": "Nuer.",
-    "ny": "Chichewa (Nyanja).",
-    "oc": "Occitan.",
-    "om": "Oromo",
-    "or": "Odia (Oria).",
-    "pa": "Punjabi.",
-    "pag": "Pangasinan.",
-    "pam": "Kapampangan.",
-    "pap": "Papiamento",
-    "pl": "Polish.",
-    "ps": "Pashto",
-    "pt": "Portuguese.",
-    "pt-BR": "Portuguese (Brazil).",
-    "pt-PT": "Portuguese (Portugal).",
-    "qu": "Quechuan.",
-    "ro": "Romanian.",
-    "rom": "Romani.",
-    "rn": "Rundi",
-    "ru": "Russian.",
-    "rw": "Kinyarwanda.",
-    "sa": "Sanskrit.",
-    "scn": "Sicilian.",
-    "sd": "Sindhi.",
-    "sg": "Sango",
-    "shn": "Shan.",
-    "si": "Sinhalese.",
-    "sk": "Slovak.",
-    "sl": "Slovene.",
-    "sm": "Samoan.",
-    "sn": "Shona.",
-    "so": "Somali.",
-    "sq": "Albanian.",
-    "sr": "Serbian.",
-    "ss": "Swati.",
-    "st": "Sesotho.",
-    "su": "Sundanese.",
-    "sv": "Swedish.",
-    "sw": "Swahili.",
-    "szl": "Silesian.",
-    "ta": "Tamil.",
-    "te": "Telugu.",
-    "tet": "Tetum.",
-    "tg": "Tajik.",
-    "th": "Thai.",
-    "ti": "Tigrinya.",
-    "tk": "Turkmen.",
-    "tl": " Filipino (Tagalog).",
-    "tn": "Tswana.",
-    "tr": "Turkish.",
-    "ts": "Tsonga.",
-    "tt": "Tatar.",
-    "ug": "Uyghur.",
-    "uk": "Ukrainian.",
-    "ur": "Urdu.",
-    "uz": "Uzbek.",
-    "vi": "Vietnamese.",
-    "xh": "Xhosa.",
-    "yi": "Yiddish.",
-    "yo": "Yoruba.",
-    "yua": "Yucatec Maya.",
-    "yue": "Cantonese.",
-    "zh": "Simplified Chinese.",
-    "zh-TW": "Chinese (Traditional).",
-    "zu": "Zulu."
+         * <p>Target language. Valid values:<br>    &quot;ab&quot;: &quot;Abkhaz&quot;,<br>    &quot;ace&quot;: &quot;Acehnese&quot;,<br>    &quot;ach&quot;: &quot;Acholi&quot;,<br>    &quot;af&quot;: &quot;Afrikaans&quot;,<br>    &quot;ak&quot;: &quot;Akan&quot;,<br>    &quot;am&quot;: &quot;Amharic&quot;,<br>    &quot;ar&quot;: &quot;Arabic&quot;,<br>    &quot;as&quot;: &quot;Assamese&quot;,<br>    &quot;ay&quot;: &quot;Aymara&quot;,<br>    &quot;az&quot;: &quot;Azerbaijani&quot;,<br>    &quot;ba&quot;: &quot;Bashkir&quot;,<br>    &quot;ban&quot;: &quot;Balinese&quot;,<br>    &quot;bbc&quot;: &quot;Batak Toba&quot;,<br>    &quot;bem&quot;: &quot;Bemba&quot;,<br>    &quot;bew&quot;: &quot;Betawi&quot;,<br>    &quot;bg&quot;: &quot;Bulgarian&quot;,<br>    &quot;bho&quot;: &quot;Bhojpuri&quot;,<br>    &quot;bik&quot;: &quot;Bikol&quot;,<br>    &quot;bm&quot;: &quot;Bambara&quot;,<br>    &quot;bn&quot;: &quot;Bengali&quot;,<br>    &quot;br&quot;: &quot;Breton&quot;,<br>    &quot;bs&quot;: &quot;Bosnian&quot;,<br>    &quot;btx&quot;: &quot;Batak Karo&quot;,<br>    &quot;bts&quot;: &quot;Batak Simalungun&quot;,<br>    &quot;bua&quot;: &quot;Buryat&quot;,<br>    &quot;ca&quot;: &quot;Catalan&quot;,<br>    &quot;ceb&quot;: &quot;Cebuano&quot;,<br>    &quot;cgg&quot;: &quot;Kiga&quot;,<br>    &quot;chm&quot;: &quot;Meadow Mari&quot;,<br>    &quot;ckb&quot;: &quot;Kurdish (Sorani)&quot;,<br>    &quot;cnh&quot;: &quot;Hakha Chin&quot;,<br>    &quot;co&quot;: &quot;Corsican&quot;,<br>    &quot;crh&quot;: &quot;Crimean Tatar&quot;,<br>    &quot;crs&quot;: &quot;Seychellois Creole&quot;,<br>    &quot;cs&quot;: &quot;Czech&quot;,<br>    &quot;cv&quot;: &quot;Chuvash&quot;,<br>    &quot;cy&quot;: &quot;Welsh&quot;,<br>    &quot;da&quot;: &quot;Danish&quot;,<br>    &quot;de&quot;: &quot;German&quot;,<br>    &quot;din&quot;: &quot;Dinka&quot;,<br>    &quot;doi&quot;: &quot;Dogri&quot;,<br>    &quot;dov&quot;: &quot;Dombe&quot;,<br>    &quot;dv&quot;: &quot;Dhivehi&quot;,<br>    &quot;dz&quot;: &quot;Dzongkha&quot;,<br>    &quot;ee&quot;: &quot;Ewe&quot;,<br>    &quot;el&quot;: &quot;Greek&quot;,<br>    &quot;en&quot;: &quot;English&quot;,<br>    &quot;eo&quot;: &quot;Esperanto&quot;,<br>    &quot;es&quot;: &quot;Spanish&quot;,<br>    &quot;et&quot;: &quot;Estonian&quot;,<br>    &quot;eu&quot;: &quot;Basque&quot;,<br>    &quot;fa&quot;: &quot;Persian&quot;,<br>    &quot;ff&quot;: &quot;Fula&quot;,<br>    &quot;fi&quot;: &quot;Finnish&quot;,<br>    &quot;fil&quot;: &quot;Filipino (Tagalog)&quot;,<br>    &quot;fj&quot;: &quot;Fijian&quot;,<br>    &quot;fr&quot;: &quot;French&quot;,<br>    &quot;fr-CA&quot;: &quot;French (Canada)&quot;,<br>    &quot;fr-FR&quot;: &quot;French (France)&quot;,<br>    &quot;fy&quot;: &quot;Frisian&quot;,<br>    &quot;ga&quot;: &quot;Irish&quot;,<br>    &quot;gaa&quot;: &quot;Ga&quot;,<br>    &quot;gd&quot;: &quot;Scottish Gaelic&quot;,<br>    &quot;gl&quot;: &quot;Galician&quot;,<br>    &quot;gn&quot;: &quot;Guarani&quot;,<br>    &quot;gom&quot;: &quot;Konkani&quot;,<br>    &quot;gu&quot;: &quot;Gujarati&quot;,<br>    &quot;gv&quot;: &quot;Manx&quot;,<br>    &quot;ha&quot;: &quot;Hausa&quot;,<br>    &quot;haw&quot;: &quot;Hawaiian&quot;,<br>    &quot;he&quot;: &quot;Hebrew&quot;,<br>    &quot;hi&quot;: &quot;Hindi&quot;,<br>    &quot;hil&quot;: &quot;Hiligaynon&quot;,<br>    &quot;hmn&quot;: &quot;Hmong&quot;,<br>    &quot;hr&quot;: &quot;Croatian&quot;,<br>    &quot;hrx&quot;: &quot;Hunsrik&quot;,<br>    &quot;ht&quot;: &quot;Haitian Creole&quot;,<br>    &quot;hu&quot;: &quot;Hungarian&quot;,<br>    &quot;hy&quot;: &quot;Armenian&quot;,<br>    &quot;id&quot;: &quot;Indonesian&quot;,<br>    &quot;ig&quot;: &quot;Igbo&quot;,<br>    &quot;ilo&quot;: &quot;Ilocano&quot;,<br>    &quot;is&quot;: &quot;Icelandic&quot;,<br>    &quot;it&quot;: &quot;Italian&quot;,<br>    &quot;iw&quot;: &quot;Hebrew&quot;,<br>    &quot;ja&quot;: &quot;Japanese&quot;,<br>    &quot;jv&quot;: &quot;Javanese&quot;,<br>    &quot;jw&quot;: &quot;Javanese&quot;,<br>    &quot;ka&quot;: &quot;Georgian&quot;,<br>    &quot;kk&quot;: &quot;Kazakh&quot;,<br>    &quot;km&quot;: &quot;Khmer&quot;,<br>    &quot;kn&quot;: &quot;Kannada&quot;,<br>    &quot;ko&quot;: &quot;Korean&quot;,<br>    &quot;kri&quot;: &quot;Krio&quot;,<br>    &quot;ku&quot;: &quot;Kurdish (Kurmanji)&quot;,<br>    &quot;ktu&quot;: &quot;Kituba&quot;,<br>    &quot;ky&quot;: &quot;Kyrgyz&quot;,<br>    &quot;la&quot;: &quot;Latin&quot;,<br>    &quot;lb&quot;: &quot;Luxembourgish&quot;,<br>    &quot;lg&quot;: &quot;Ganda (Luganda)&quot;,<br>    &quot;li&quot;: &quot;Limburgish&quot;,<br>    &quot;lij&quot;: &quot;Ligurian&quot;,<br>    &quot;lmo&quot;: &quot;Lombard&quot;,<br>    &quot;ln&quot;: &quot;Lingala&quot;,<br>    &quot;lo&quot;: &quot;Lao&quot;,<br>    &quot;lt&quot;: &quot;Lithuanian&quot;,<br>    &quot;ltg&quot;: &quot;Latgalian&quot;,<br>    &quot;luo&quot;: &quot;Luo&quot;,<br>    &quot;lus&quot;: &quot;Mizo&quot;,<br>    &quot;lv&quot;: &quot;Latvian&quot;,<br>    &quot;mai&quot;: &quot;Maithili&quot;,<br>    &quot;mak&quot;: &quot;Makassar&quot;,<br>    &quot;mg&quot;: &quot;Malagasy&quot;,<br>    &quot;mi&quot;: &quot;Maori&quot;,<br>    &quot;min&quot;: &quot;Minangkabau&quot;,<br>    &quot;mk&quot;: &quot;Macedonian&quot;,<br>    &quot;ml&quot;: &quot;Malayalam&quot;,<br>    &quot;mn&quot;: &quot;Mongolian&quot;,<br>    &quot;mr&quot;: &quot;Marathi&quot;,<br>    &quot;ms&quot;: &quot;Malay&quot;,<br>    &quot;mt&quot;: &quot;Maltese&quot;,<br>    &quot;my&quot;: &quot;Burmese&quot;,<br>    &quot;ne&quot;: &quot;Nepali&quot;,<br>    &quot;new&quot;: &quot;Newari&quot;,<br>    &quot;nl&quot;: &quot;Dutch&quot;,<br>    &quot;no&quot;: &quot;Norwegian&quot;,<br>    &quot;nr&quot;: &quot;Southern Ndebele&quot;,<br>    &quot;nso&quot;: &quot;Northern Sotho (Sepedi)&quot;,<br>    &quot;nus&quot;: &quot;Nuer&quot;,<br>    &quot;ny&quot;: &quot;Chichewa (Nyanja)&quot;,<br>    &quot;oc&quot;: &quot;Occitan&quot;,<br>    &quot;om&quot;: &quot;Oromo&quot;,<br>    &quot;or&quot;: &quot;Odia (Oriya)&quot;,<br>    &quot;pa&quot;: &quot;Punjabi&quot;,<br>    &quot;pag&quot;: &quot;Pangasinan&quot;,<br>    &quot;pam&quot;: &quot;Kapampangan&quot;,<br>    &quot;pap&quot;: &quot;Papiamento&quot;,<br>    &quot;pl&quot;: &quot;Polish&quot;,<br>    &quot;ps&quot;: &quot;Pashto&quot;,<br>    &quot;pt&quot;: &quot;Portuguese&quot;,<br>    &quot;pt-BR&quot;: &quot;Portuguese (Brazil)&quot;,<br>    &quot;pt-PT&quot;: &quot;Portuguese (Portugal)&quot;,<br>    &quot;qu&quot;: &quot;Quechua&quot;,<br>    &quot;ro&quot;: &quot;Romanian&quot;,<br>    &quot;rom&quot;: &quot;Romani&quot;,<br>    &quot;rn&quot;: &quot;Rundi&quot;,<br>    &quot;ru&quot;: &quot;Russian&quot;,<br>    &quot;rw&quot;: &quot;Kinyarwanda&quot;,<br>    &quot;sa&quot;: &quot;Sanskrit&quot;,<br>    &quot;scn&quot;: &quot;Sicilian&quot;,<br>    &quot;sd&quot;: &quot;Sindhi&quot;,<br>    &quot;sg&quot;: &quot;Sango&quot;,<br>    &quot;shn&quot;: &quot;Shan&quot;,<br>    &quot;si&quot;: &quot;Sinhala&quot;,<br>    &quot;sk&quot;: &quot;Slovak&quot;,<br>    &quot;sl&quot;: &quot;Slovenian&quot;,<br>    &quot;sm&quot;: &quot;Samoan&quot;,<br>    &quot;sn&quot;: &quot;Shona&quot;,<br>    &quot;so&quot;: &quot;Somali&quot;,<br>    &quot;sq&quot;: &quot;Albanian&quot;,<br>    &quot;sr&quot;: &quot;Serbian&quot;,<br>    &quot;ss&quot;: &quot;Swati&quot;,<br>    &quot;st&quot;: &quot;Sotho&quot;,<br>    &quot;su&quot;: &quot;Sundanese&quot;,<br>    &quot;sv&quot;: &quot;Swedish&quot;,<br>    &quot;sw&quot;: &quot;Swahili&quot;,<br>    &quot;szl&quot;: &quot;Silesian&quot;,<br>    &quot;ta&quot;: &quot;Tamil&quot;,<br>    &quot;te&quot;: &quot;Telugu&quot;,<br>    &quot;tet&quot;: &quot;Tetum&quot;,<br>    &quot;tg&quot;: &quot;Tajik&quot;,<br>    &quot;th&quot;: &quot;Thai&quot;,<br>    &quot;ti&quot;: &quot;Tigrinya&quot;,<br>    &quot;tk&quot;: &quot;Turkmen&quot;,<br>    &quot;tl&quot;: &quot;Filipino (Tagalog)&quot;,<br>    &quot;tn&quot;: &quot;Tswana&quot;,<br>    &quot;tr&quot;: &quot;Turkish&quot;,<br>    &quot;ts&quot;: &quot;Tsonga&quot;,<br>    &quot;tt&quot;: &quot;Tatar&quot;,<br>    &quot;ug&quot;: &quot;Uyghur&quot;,<br>    &quot;uk&quot;: &quot;Ukrainian&quot;,<br>    &quot;ur&quot;: &quot;Urdu&quot;,<br>    &quot;uz&quot;: &quot;Uzbek&quot;,<br>    &quot;vi&quot;: &quot;Vietnamese&quot;,<br>    &quot;xh&quot;: &quot;Xhosa&quot;,<br>    &quot;yi&quot;: &quot;Yiddish&quot;,<br>    &quot;yo&quot;: &quot;Yoruba&quot;,<br>    &quot;yua&quot;: &quot;Yucatec Maya&quot;,<br>    &quot;yue&quot;: &quot;Cantonese&quot;,<br>    &quot;zh&quot;: &quot;Simplified Chinese&quot;,<br>    &quot;zh-TW&quot;: &quot;Traditional Chinese&quot;,<br>    &quot;zu&quot;: &quot;Zulu&quot;</p>
          * @type {string || null}
          */
         this.Target = null;
 
         /**
-         * User extension parameter.
+         * <p>User extension parameter.</p>
          * @type {string || null}
          */
         this.UserExtPara = null;
@@ -37148,10 +37544,16 @@ class AiAnalysisTaskHeadTailInput extends  AbstractModel {
         super();
 
         /**
-         * Opening and closing segments recognition template ID.
+         * <p>ID of the intro and outro recognition template.</p>
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -37163,6 +37565,7 @@ class AiAnalysisTaskHeadTailInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -38054,6 +38457,64 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.HeadTimeOffset = 'HeadTimeOffset' in params ? params.HeadTimeOffset : null;
         this.TailTimeOffset = 'TailTimeOffset' in params ? params.TailTimeOffset : null;
+
+    }
+}
+
+/**
+ * DescribeVoices response structure.
+ * @class
+ */
+class DescribeVoicesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Error code. 0 is returned if the request is successful.</p>
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * <p>Error message. success is returned if the request is successful.</p>
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * <p>Available voice list.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<VoiceInfo> || null}
+         */
+        this.Voices = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+
+        if (params.Voices) {
+            this.Voices = new Array();
+            for (let z in params.Voices) {
+                let obj = new VoiceInfo();
+                obj.deserialize(params.Voices[z]);
+                this.Voices.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -39580,52 +40041,25 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of a face recognition task
+ * DescribeVoices request structure.
  * @class
  */
-class FaceConfigureInfo extends  AbstractModel {
+class DescribeVoicesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch of a face recognition task. Valid values:
-<li>ON: Enables an intelligent face recognition task;</li>
-<li>OFF: Disables an intelligent face recognition task.</li>
+         * <p>Voice type. </p><p>Enumeration value: </p><ul><li>system: System audio.</li></ul>
          * @type {string || null}
          */
-        this.Switch = null;
+        this.VoiceType = null;
 
         /**
-         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0-100. Default value: 95.
-         * @type {number || null}
-         */
-        this.Score = null;
-
-        /**
-         * The default face filter labels, which specify the types of faces to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
-<li>entertainment (people in the entertainment industry)</li>
-<li>sport (sports celebrities)</li>
-<li>politician</li>
-         * @type {Array.<string> || null}
-         */
-        this.DefaultLibraryLabelSet = null;
-
-        /**
-         * Custom face tags for filter, which specify the face recognition results to return. If this parameter is not specified or left empty, the recognition results for all custom face tags are returned.
-Up to 100 tags are allowed, each containing no more than 16 characters.
-         * @type {Array.<string> || null}
-         */
-        this.UserDefineLibraryLabelSet = null;
-
-        /**
-         * Figure library. Valid values:
-<li>Default: Default figure library;</li>
-<li>UserDefine: Custom figure library.</li>
-<li>All: Both default and custom figure libraries will be used.</li>
-Default value: All (both default and custom figure libraries will be used.)
+         * <p>Extended parameters in the format of a JSON string. </p><p>Other filter criteria:
+voiceName (String): Voice name, fuzzy matching. labels (Array of String): Tags. Matches voices that contain these tags.</p>
          * @type {string || null}
          */
-        this.FaceLibrary = null;
+        this.ExtParam = null;
 
     }
 
@@ -39636,11 +40070,8 @@ Default value: All (both default and custom figure libraries will be used.)
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.Score = 'Score' in params ? params.Score : null;
-        this.DefaultLibraryLabelSet = 'DefaultLibraryLabelSet' in params ? params.DefaultLibraryLabelSet : null;
-        this.UserDefineLibraryLabelSet = 'UserDefineLibraryLabelSet' in params ? params.UserDefineLibraryLabelSet : null;
-        this.FaceLibrary = 'FaceLibrary' in params ? params.FaceLibrary : null;
+        this.VoiceType = 'VoiceType' in params ? params.VoiceType : null;
+        this.ExtParam = 'ExtParam' in params ? params.ExtParam : null;
 
     }
 }
@@ -40007,19 +40438,19 @@ class TextTranslationResponse extends  AbstractModel {
         super();
 
         /**
-         * Text after translation.
+         * <p>Translated text.</p>
          * @type {string || null}
          */
         this.TargetText = null;
 
         /**
-         * Source language. See the input parameter Source.
+         * <p>Source language. See the input parameter Source.</p>
          * @type {string || null}
          */
         this.Source = null;
 
         /**
-         * Target language. See the input parameter Target.
+         * <p>Target language. See the input parameter Target.</p>
          * @type {string || null}
          */
         this.Target = null;
@@ -40200,6 +40631,18 @@ class ModifySmartSubtitleTemplateRequest extends  AbstractModel {
          */
         this.SubtitleEmbedId = null;
 
+        /**
+         * <p>Speaker identification switch. Valid values:<br>0: Speaker identification is disabled.<br>1: Speaker identification is enabled.</p>
+         * @type {number || null}
+         */
+        this.SpeakerMode = null;
+
+        /**
+         * <p>Indicates whether to output the identified speaker to the subtitle file. Valid values:<br>0: The speaker is not output to the subtitle file.<br>1: The speaker is output to the VTT subtitle file.<br>Note: To use this parameter, the value of SpeakerMode cannot be 0.</p>
+         * @type {number || null}
+         */
+        this.SpeakerLabel = null;
+
     }
 
     /**
@@ -40231,6 +40674,8 @@ class ModifySmartSubtitleTemplateRequest extends  AbstractModel {
             this.SelectingSubtitleAreasConfig = obj;
         }
         this.SubtitleEmbedId = 'SubtitleEmbedId' in params ? params.SubtitleEmbedId : null;
+        this.SpeakerMode = 'SpeakerMode' in params ? params.SpeakerMode : null;
+        this.SpeakerLabel = 'SpeakerLabel' in params ? params.SpeakerLabel : null;
 
     }
 }
@@ -41051,43 +41496,42 @@ class SampleSnapshotTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Sampled screenshot template ID.
+         * <p>Sampled screenshot template ID.</p>
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * List of up to 10 image or text watermarks.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Watermark list. Up to 10 image or text watermarks are supported.</p>
          * @type {Array.<WatermarkInput> || null}
          */
         this.WatermarkSet = null;
 
         /**
-         * Target bucket of a sampled screenshot. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
+         * <p>Target storage for the file after the sampled screenshot is taken. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Output path of an image file after sampled screenshot taking, which can be a relative or absolute path.
-If you need to define an output path, the path must end with `.{format}`. For variable names, refer to [Filename Variable](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1).Relative path example:
-<li>Filename_{Variable name}.{format}.</li>
-<li>Filename.{format}.</li>
-Absolute path example:
-<li>/Custom path/Filename_{Variable name}.{format}.</li>
-If left empty, a relative path is used by default: `{inputName}_sampleSnapshot_{definition}_{number}.{format}`.
+         * <p>Output path of the image file after the sampled screenshot is taken, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">File Name Variable Description</a>.<br>Relative path example:</p><li>File name_{variable name}.{format}</li><li>File name.{format}</li>Absolute path example:<li>/custom path/file name_{variable name}.{format}</li>If this is not specified, the default relative path is <code>{inputName}_sampleSnapshot_{definition}_{number}.{format}</code>.
          * @type {string || null}
          */
         this.OutputObjectPath = null;
 
         /**
-         * Rule of the `{number}` variable in the sampled screenshot output path.
+         * <p>Rule of the <code>{number}</code> variable in the output path after the sampled screenshot is taken.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {NumberFormat || null}
          */
         this.ObjectNumberFormat = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
 
     }
 
@@ -41121,6 +41565,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.ObjectNumberFormat)
             this.ObjectNumberFormat = obj;
         }
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }
@@ -42007,10 +42452,16 @@ class AiAnalysisTaskDescriptionInput extends  AbstractModel {
         super();
 
         /**
-         * Intelligent description template ID.
+         * <p>ID of the intelligent video description template.</p>
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -42022,6 +42473,7 @@ class AiAnalysisTaskDescriptionInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -42035,10 +42487,16 @@ class AiAnalysisTaskCoverInput extends  AbstractModel {
         super();
 
         /**
-         * Intelligent video cover generating template ID.
+         * <p>ID of the intelligent video cover template.</p>
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <p>Extended parameter.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
 
     }
 
@@ -42050,6 +42508,7 @@ class AiAnalysisTaskCoverInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }
@@ -42529,7 +42988,7 @@ class AiAnalysisTaskCutoutResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -42666,13 +43125,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ErasePrivacyConfig = null;
 
         /**
-         * Template creation time in [ISO datetime format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+         * Template creation time in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modification time of the template in [ISO datetime format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+         * Last modification time of the template in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -43380,7 +43839,7 @@ module.exports = {
     AiReviewPoliticalOcrTaskInput: AiReviewPoliticalOcrTaskInput,
     SmartSubtitleTaskTransTextResult: SmartSubtitleTaskTransTextResult,
     CreateSmartEraseTemplateRequest: CreateSmartEraseTemplateRequest,
-    EnhanceConfig: EnhanceConfig,
+    DescribeTextToSpeechAsyncTaskRequest: DescribeTextToSpeechAsyncTaskRequest,
     MediaInputInfo: MediaInputInfo,
     CreateWorkflowRequest: CreateWorkflowRequest,
     OcrWordsConfigureInfo: OcrWordsConfigureInfo,
@@ -43484,6 +43943,7 @@ module.exports = {
     TextWatermarkTemplateInput: TextWatermarkTemplateInput,
     ModifyAIAnalysisTemplateResponse: ModifyAIAnalysisTemplateResponse,
     DescribeWordSamplesResponse: DescribeWordSamplesResponse,
+    UpdateProjectRequest: UpdateProjectRequest,
     DescribeAIRecognitionTemplatesResponse: DescribeAIRecognitionTemplatesResponse,
     ScratchRepairConfig: ScratchRepairConfig,
     DescribeImageTaskDetailRequest: DescribeImageTaskDetailRequest,
@@ -43515,6 +43975,7 @@ module.exports = {
     CreateWordSamplesRequest: CreateWordSamplesRequest,
     SmartEraseWatermarkConfig: SmartEraseWatermarkConfig,
     Speakers: Speakers,
+    FaceConfigureInfo: FaceConfigureInfo,
     DescribeSmartEraseTemplatesRequest: DescribeSmartEraseTemplatesRequest,
     PoliticalAsrReviewTemplateInfoForUpdate: PoliticalAsrReviewTemplateInfoForUpdate,
     AiSampleFaceOperation: AiSampleFaceOperation,
@@ -43560,9 +44021,11 @@ module.exports = {
     AsrFullTextConfigureInfoForUpdate: AsrFullTextConfigureInfoForUpdate,
     LiveRecordFile: LiveRecordFile,
     ComposeSourceMedia: ComposeSourceMedia,
+    TextToSpeechAsyncResponse: TextToSpeechAsyncResponse,
     CreatePersonSampleResponse: CreatePersonSampleResponse,
     CreateContentReviewTemplateResponse: CreateContentReviewTemplateResponse,
     ModifyBlindWatermarkTemplateResponse: ModifyBlindWatermarkTemplateResponse,
+    EnhanceConfig: EnhanceConfig,
     ProhibitedConfigureInfoForUpdate: ProhibitedConfigureInfoForUpdate,
     ComposeEmptyItem: ComposeEmptyItem,
     TagConfigureInfoForUpdate: TagConfigureInfoForUpdate,
@@ -43579,6 +44042,7 @@ module.exports = {
     BatchProcessMediaRequest: BatchProcessMediaRequest,
     DescribeWatermarkTemplatesRequest: DescribeWatermarkTemplatesRequest,
     TaskOutputStorage: TaskOutputStorage,
+    VoiceInfo: VoiceInfo,
     ModifyAIAnalysisTemplateRequest: ModifyAIAnalysisTemplateRequest,
     UserDefineConfigureInfo: UserDefineConfigureInfo,
     SubtitlePosition: SubtitlePosition,
@@ -43636,6 +44100,7 @@ module.exports = {
     AigcImageInfo: AigcImageInfo,
     DeleteContentReviewTemplateResponse: DeleteContentReviewTemplateResponse,
     VODInputInfo: VODInputInfo,
+    DesignVoiceAsyncRequest: DesignVoiceAsyncRequest,
     ImageWatermarkTemplate: ImageWatermarkTemplate,
     ModifyQualityControlTemplateResponse: ModifyQualityControlTemplateResponse,
     AsrWordsConfigureInfo: AsrWordsConfigureInfo,
@@ -43644,6 +44109,7 @@ module.exports = {
     AiSamplePerson: AiSamplePerson,
     SmartSubtitleTaskAsrFullTextResult: SmartSubtitleTaskAsrFullTextResult,
     BatchSmartSubtitlesResult: BatchSmartSubtitlesResult,
+    QueryProjectResponse: QueryProjectResponse,
     DescribeDesignTaskRequest: DescribeDesignTaskRequest,
     SimpleAesDrm: SimpleAesDrm,
     DescribeWorkflowsResponse: DescribeWorkflowsResponse,
@@ -43656,10 +44122,12 @@ module.exports = {
     VideoTemplateInfoForUpdate: VideoTemplateInfoForUpdate,
     AnimatedGraphicsTemplate: AnimatedGraphicsTemplate,
     WorkflowTrigger: WorkflowTrigger,
+    QueryProjectRequest: QueryProjectRequest,
     LiveStreamAiRecognitionResultInfo: LiveStreamAiRecognitionResultInfo,
     ActivityPara: ActivityPara,
     ModifyAsrHotwordsResponse: ModifyAsrHotwordsResponse,
     UserDefineAsrTextReviewTemplateInfoForUpdate: UserDefineAsrTextReviewTemplateInfoForUpdate,
+    DescribeTextToSpeechAsyncTaskResponse: DescribeTextToSpeechAsyncTaskResponse,
     ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
     MediaContentReviewAsrTextSegmentItem: MediaContentReviewAsrTextSegmentItem,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
@@ -43674,6 +44142,7 @@ module.exports = {
     CreateScheduleRequest: CreateScheduleRequest,
     LiveStreamTagRecognitionResult: LiveStreamTagRecognitionResult,
     ExecuteFunctionResponse: ExecuteFunctionResponse,
+    DesignVoiceAsyncResponse: DesignVoiceAsyncResponse,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
     LiveSmartSubtitlesTaskInput: LiveSmartSubtitlesTaskInput,
     MosaicInput: MosaicInput,
@@ -43796,6 +44265,7 @@ module.exports = {
     CreateLiveRecordTemplateResponse: CreateLiveRecordTemplateResponse,
     ActivityResult: ActivityResult,
     DescribeAsrHotwordsResponse: DescribeAsrHotwordsResponse,
+    TextToSpeechAsyncRequest: TextToSpeechAsyncRequest,
     CreateSubtitleEmbedTemplateResponse: CreateSubtitleEmbedTemplateResponse,
     ResetWorkflowResponse: ResetWorkflowResponse,
     HLSConfigureInfo: HLSConfigureInfo,
@@ -43843,6 +44313,7 @@ module.exports = {
     ComposeMediaTrack: ComposeMediaTrack,
     ProhibitedOcrReviewTemplateInfo: ProhibitedOcrReviewTemplateInfo,
     ImageEraseLogoConfig: ImageEraseLogoConfig,
+    Project: Project,
     ScheduleReviewTaskResult: ScheduleReviewTaskResult,
     ModifySubtitleEmbedTemplateRequest: ModifySubtitleEmbedTemplateRequest,
     ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,
@@ -43856,6 +44327,7 @@ module.exports = {
     ModifyQualityControlTemplateRequest: ModifyQualityControlTemplateRequest,
     DescribeImageSpriteTemplatesResponse: DescribeImageSpriteTemplatesResponse,
     TaskNotifyConfig: TaskNotifyConfig,
+    UpdateProjectResponse: UpdateProjectResponse,
     FaceEnhanceConfig: FaceEnhanceConfig,
     LiveStreamAiReviewImagePornResult: LiveStreamAiReviewImagePornResult,
     DeleteProjectRequest: DeleteProjectRequest,
@@ -43949,6 +44421,7 @@ module.exports = {
     DeleteWorkflowResponse: DeleteWorkflowResponse,
     ExecuteFunctionRequest: ExecuteFunctionRequest,
     AiAnalysisTaskHeadTailOutput: AiAnalysisTaskHeadTailOutput,
+    DescribeVoicesResponse: DescribeVoicesResponse,
     ModifyPersonSampleResponse: ModifyPersonSampleResponse,
     DeleteTranscodeTemplateResponse: DeleteTranscodeTemplateResponse,
     LiveStreamObjectRecognitionResult: LiveStreamObjectRecognitionResult,
@@ -43973,7 +44446,7 @@ module.exports = {
     EditMediaFileInfo: EditMediaFileInfo,
     ComposeAudioStream: ComposeAudioStream,
     SmartSubtitleTaskTransTextSegmentItem: SmartSubtitleTaskTransTextSegmentItem,
-    FaceConfigureInfo: FaceConfigureInfo,
+    DescribeVoicesRequest: DescribeVoicesRequest,
     LiveAiParagraphInfo: LiveAiParagraphInfo,
     AiRecognitionTaskFaceResultOutput: AiRecognitionTaskFaceResultOutput,
     PornImgReviewTemplateInfoForUpdate: PornImgReviewTemplateInfoForUpdate,

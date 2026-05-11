@@ -66,7 +66,7 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
 
         /**
          * Types of cvm instances. different instance models specify different resource specifications. supports up to 10 instance models.
-The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. specifying the `InstanceTypes` field will invalidate the original `InstanceType`. specific values can be obtained by calling the api [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
+The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. specifying the `InstanceTypes` field will invalidate the original `InstanceType`. specific values can be obtained by calling the api [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/product/213/33254) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.InstanceTypes = null;
@@ -3083,7 +3083,7 @@ Note: the instance's project ID within the scaling group takes the project ID of
         this.ProjectId = null;
 
         /**
-         * Instance model. Different instance models specify different resource specifications. The specific value can be obtained by calling the [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) API to get the latest specification table or referring to the descriptions in [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
+         * Instance model. Different instance models specify different resource specifications. The specific value can be obtained by calling the [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/product/213/33254) API to get the latest specification table or referring to the descriptions in [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
 `InstanceType` and `InstanceTypes` are mutually exclusive, and one and only one of them must be entered.
          * @type {string || null}
          */
@@ -3148,7 +3148,7 @@ Note: the instance's project ID within the scaling group takes the project ID of
 
         /**
          * Instance model list. different instance models specify different resource specifications. supports up to 10 instance models.
-The `InstanceType` and `InstanceTypes` parameters are mutually exclusive. one and only one must be filled in. specific values can be obtained by calling the api [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
+The `InstanceType` and `InstanceTypes` parameters are mutually exclusive. one and only one must be filled in. specific values can be obtained by calling the api [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.InstanceTypes = null;
@@ -3183,14 +3183,19 @@ If a model in InstanceTypes does not exist or has been abolished, a verification
         this.Tags = null;
 
         /**
-         * CVM hostname settings.
+         * Specifies the related settings for the cloud virtual machine HostName (HostName).
+windows instances do not support setting hostname. 
+When adding new attributes, the cloud virtual machine hostname must be transmitted. other fields not transmitted will be set as default.
+Validates whether the host name (with suffix added if it exists) exceeds the maximum of 46 characters.
          * @type {HostNameSettings || null}
          */
         this.HostNameSettings = null;
 
         /**
-         * Settings of CVM instance names
-If this field is configured in a launch configuration, the `InstanceName` of a CVM created by the scaling group will be generated according to the configuration; otherwise, it will be in the `as-{{AutoScalingGroupName }}` format.
+         * Specifies the related settings of the cloud server instance name (InstanceName).
+If the user sets this field in the launch configuration, the instance name of the instance created by the scaling group will be set according to this field and passed to CVM. if the user does not set this field in the launch configuration, the instance name of the instance created by the scaling group will be set as "as-{{ scaling group AutoScalingGroupName }}" and passed to CVM.
+Specifies the instance name of the cloud virtual machine when adding this attribute. other fields not transmitted will be set as default.
+Verifies whether the instance name (add the suffix if it exists) exceeds the maximum of 108 characters.
          * @type {InstanceNameSettings || null}
          */
         this.InstanceNameSettings = null;
@@ -3210,7 +3215,7 @@ If this field is configured in a launch configuration, the `InstanceName` of a C
         this.DiskTypePolicy = null;
 
         /**
-         * High-Performance computing cluster ID. you can obtain this parameter by calling the [DescribeHpcClusters](https://intl.cloud.tencent.com/document/product/213/83220?from_cn_redirect=1) api.
+         * High-Performance computing cluster ID. This parameter is not currently supported for the international site.
 Note: this field is empty by default.
          * @type {string || null}
          */
@@ -3529,7 +3534,7 @@ class AutoScalingGroup extends  AbstractModel {
         this.ServiceSettings = null;
 
         /**
-         * The number of IPv6 addresses that an instance has. valid values: 0 and 1. default value: 0, which means the instance does not allocate an IPv6 address. use a private network that supports ip and enable IPv6 CIDR in the subnet. for usage restrictions, see [IPv6 usage limits](https://intl.cloud.tencent.com/document/product/1142/38369?from_cn_redirect=1).
+         * The number of IPv6 addresses that an instance has. valid values: 0 and 1. default value: 0, which means the instance does not allocate an IPv6 address. use a private network that supports ip and enable IPv6 CIDR in the subnet. for usage restrictions, see [IPv6 usage limits](https://www.tencentcloud.com/zh/document/product/215/78469).
          * @type {number || null}
          */
         this.Ipv6AddressCount = null;
@@ -3581,10 +3586,27 @@ A valid value will be returned only when `InstanceAllocationPolicy` is set to `S
         this.CapacityRebalance = null;
 
         /**
-         * Instance name sequencing settings.
+         * Instance name index settings.
          * @type {InstanceNameIndexSettings || null}
          */
         this.InstanceNameIndexSettings = null;
+
+        /**
+         * Instance host name index settings.
+         * @type {HostNameIndexSettings || null}
+         */
+        this.HostNameIndexSettings = null;
+
+        /**
+         * This feature allows the system to perform multiple scale out operations concurrently in order to reach the desired capacity. However, the following constraints apply:
+
+- Compatibility: This option cannot be set if the InstanceAllocationPolicyis SPOT_MIXED or the ScalingMode is WAKE_UP_STOPPED_SCALING.
+- Concurrency Limit: The system currently supports a maximum of two concurrent scale-out operations.
+- Operation Restrictions: Other scaling actions such as scaling to a specific instance count or performing scale in, cannot be executed concurrently.
+Default: FALSE(indicating that concurrent scaling is disabled).
+         * @type {boolean || null}
+         */
+        this.ConcurrentScaleOutForDesiredCapacity = null;
 
     }
 
@@ -3658,6 +3680,13 @@ A valid value will be returned only when `InstanceAllocationPolicy` is set to `S
             obj.deserialize(params.InstanceNameIndexSettings)
             this.InstanceNameIndexSettings = obj;
         }
+
+        if (params.HostNameIndexSettings) {
+            let obj = new HostNameIndexSettings();
+            obj.deserialize(params.HostNameIndexSettings)
+            this.HostNameIndexSettings = obj;
+        }
+        this.ConcurrentScaleOutForDesiredCapacity = 'ConcurrentScaleOutForDesiredCapacity' in params ? params.ConcurrentScaleOutForDesiredCapacity : null;
 
     }
 }
@@ -5059,7 +5088,7 @@ If there is no AZ or subnet in Zones/SubnetIds, a verification error will be rep
         this.ServiceSettings = null;
 
         /**
-         * The number of IPv6 addresses that an instance has. valid values: 0 and 1. default value: 0, which means the instance does not allocate an IPv6 address. use a private network that supports IPv6 and enable IPv6 CIDR in the subnet. for other usage restrictions, see [IPv6 usage limits](https://intl.cloud.tencent.com/document/product/1142/38369?from_cn_redirect=1).
+         * The number of IPv6 addresses that an instance has. valid values: 0 and 1. default value: 0, which means the instance does not allocate an IPv6 address. use a private network that supports IPv6 and enable IPv6 CIDR in the subnet. for other usage restrictions, see [IPv6 usage limits](https://www.tencentcloud.com/document/product/215/78469).
          * @type {number || null}
          */
         this.Ipv6AddressCount = null;
@@ -5118,10 +5147,27 @@ Default value: FALSE.
         this.CapacityRebalance = null;
 
         /**
-         * Instance name sequencing settings. If this parameter is not specified, the default is not enabled. When enabled, an incremental numeric sequence will be appended to the names of instances automatically created within the scaling group.
+         * Instance name index settings. If not specified, it is disabled by default. When enabled, an incremental numeric index will be appended to the names of instances automatically created within the scaling group.
          * @type {InstanceNameIndexSettings || null}
          */
         this.InstanceNameIndexSettings = null;
+
+        /**
+         * Specifies the related settings for the instance hostname index number. If not specified, it is disabled by default. When enabled, it appends incremental numeric index to the hostname of instances auto-created within the scaling group.
+         * @type {HostNameIndexSettings || null}
+         */
+        this.HostNameIndexSettings = null;
+
+        /**
+         * This feature allows the system to perform multiple scale out operations concurrently in order to reach the desired capacity. However, the following constraints apply:
+
+- Compatibility: This option cannot be set if the InstanceAllocationPolicyis SPOT_MIXED or the ScalingMode is WAKE_UP_STOPPED_SCALING.
+- Concurrency Limit: The system currently supports a maximum of two concurrent scale-out operations.
+- Operation Restrictions: Other scaling actions such as scaling to a specific instance count or performing scale in, cannot be executed concurrently.
+Default: FALSE(indicating that concurrent scaling is disabled).
+         * @type {boolean || null}
+         */
+        this.ConcurrentScaleOutForDesiredCapacity = null;
 
     }
 
@@ -5188,6 +5234,13 @@ Default value: FALSE.
             obj.deserialize(params.InstanceNameIndexSettings)
             this.InstanceNameIndexSettings = obj;
         }
+
+        if (params.HostNameIndexSettings) {
+            let obj = new HostNameIndexSettings();
+            obj.deserialize(params.HostNameIndexSettings)
+            this.HostNameIndexSettings = obj;
+        }
+        this.ConcurrentScaleOutForDesiredCapacity = 'ConcurrentScaleOutForDesiredCapacity' in params ? params.ConcurrentScaleOutForDesiredCapacity : null;
 
     }
 }
@@ -5620,7 +5673,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Encrypt = null;
 
         /**
-         * Cloud disk performance (MB/s). This parameter is used to purchase extra performance for the cloud disk. For details on the feature and limits, see [Enhanced SSD Performance](https://intl.cloud.tencent.com/document/product/362/51896?from_cn_redirect=1#. E5.A2.9E.E5.BC.BA.E5.9E.8B-ssd-.E4.BA.91.E7.A1.AC.E7.9B.98.E9.A2.9D.E5.A4.96 .E6.80.A7.E8.83.BD).
+         * Cloud disk performance (MB/s). This parameter is used to purchase extra performance for the cloud disk. For details on the feature and limits, see [Enhanced SSD Performance](https://intl.cloud.tencent.com/zh/document/product/362/39611).
 This feature is only available to enhanced SSD (`CLOUD_HSSD`) and tremendous SSD (`CLOUD_TSSD`) disks with a capacity greater than 460 GB.
 Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
@@ -9656,7 +9709,7 @@ Note: this field may return null, indicating that no valid value was found.
         this.BandwidthPackageId = null;
 
         /**
-         * Line type. for details on various types of lines and supported regions, refer to [EIP IP address type](https://www.tencentcloud.com/document/product/1199/41646?from_cn_redirect=1). default value: BGP.
+         * Line type. for details on various types of lines and supported regions, refer to [EIP IP address type](https://www.tencentcloud.com/zh/document/product/213/5733). default value: BGP.
 
 <Li>BGP: general bgp line.</li>.
 For a user who has enabled the static single-line IP allowlist, valid values include:.
@@ -9675,7 +9728,7 @@ Note: The static single-line IP is only supported in some regions.
 
 <Li>WanIP: specifies the public ip address.</li>.
 <Li>HighQualityEIP: highqualityip. only Singapore and hong kong (china) support highqualityip.</li>.
-<Li>AntiDDoSEIP: anti-ddos eip. only partially supported regions can use anti-ddos eip. details visible in [elastic ip product overview](https://www.tencentcloud.com/document/product/1199/41646?from_cn_redirect=1).</li>. 
+<Li>AntiDDoSEIP: anti-ddos eip. only partially supported regions can use anti-ddos eip. details visible in [elastic ip product overview](https://www.tencentcloud.com/zh/document/product/213/5733).</li>. 
 If needed to assign an elastic IPv4 address to a resource, specify the elastic IPv4 address type. if only use WanIP, do not set this field.
 
 High quality IP the anti-ddos feature is only in beta test in some regions. if needed, submit a ticket for consultation (https://console.cloud.tencent.com/workorder/category).

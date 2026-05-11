@@ -525,7 +525,7 @@ class McuRecordParams extends  AbstractModel {
          * Retweet recording mode. 
 0/Leave blank: not currently supported; behavior is undefined.
 1: disable recording.
-2: enable recording (via console automatic recording template parameters, see: [redirection document](https://www.tencentcloud.comom/document/product/647/111748?from_cn_redirect=1#.E5.BD.95.E5.88.B6.E6.8E.A7.E5.88.B6.E6.96.B9.E6.A1.88));.
+2: enable recording (via console automatic recording template parameters, see: [redirection document](https://www.tencentcloud.com/document/product/647/111748?from_cn_redirect=1#.E5.BD.95.E5.88.B6.E6.8E.A7.E5.88.B6.E6.96.B9.E6.A1.88));.
 3: enable recording (use API to specify parameter).
          * @type {number || null}
          */
@@ -2490,7 +2490,7 @@ class CloudStorage extends  AbstractModel {
         this.Vendor = null;
 
         /**
-         * [Region information](https://www.tencentcloud.comom/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of tencent cloud object storage.
+         * [Region information](https://www.tencentcloud.com/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of tencent cloud object storage.
 Example value: cn-shanghai-1.
 
 [Region information](https://docs.AWS.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions) of AWS S3.
@@ -6047,7 +6047,7 @@ class CreateCloudRecordingRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * [RoomId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC, which is the RoomId corresponding to the TRTC room in the recording.
+         * [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC, which is the RoomId corresponding to the TRTC room in the recording.
 Note: the room id type defaults to integer. if the room id type is a string, specify it via RoomIdType.
 
          * @type {string || null}
@@ -6521,7 +6521,7 @@ class StartPublishCdnStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * [SdkAppId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#SdkAppId) of TRTC, which is the same as the SdkAppId corresponding to the relayed room.
+         * [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#SdkAppId) of TRTC, which is the same as the SdkAppId corresponding to the relayed room.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -6588,7 +6588,7 @@ Note: transcoding is required for stream mixing, and this parameter must be set 
         this.FeedBackRoomParams = null;
 
         /**
-         * Relay recording parameters. refer to the reference document (https://www.tencentcloud.comom/document/product/647/111748?from_cn_redirect=1).
+         * Relay recording parameters. refer to the reference document (https://www.tencentcloud.com/document/product/647/111748?from_cn_redirect=1).
          * @type {McuRecordParams || null}
          */
         this.RecordParams = null;
@@ -9094,7 +9094,7 @@ class RecordParams extends  AbstractModel {
         /**
          * Output file format (valid when stored in third-party storage such as COS). 0: (default) output file is in hls format. 1: output file format is hls+mp4. 2: output file format is hls+aac. 3: output file format is mp4. 4: output file format is aac.
 
-This parameter is invalid when storing in VOD. when storing in VOD, set MediaType in TencentVod (https://www.tencentcloud.comom/document/api/647/44055?from_cn_redirect=1#TencentVod).
+This parameter is invalid when storing in VOD. when storing in VOD, set MediaType in TencentVod (https://www.tencentcloud.com/document/api/647/44055?from_cn_redirect=1#TencentVod).
          * @type {number || null}
          */
         this.OutputFormat = null;

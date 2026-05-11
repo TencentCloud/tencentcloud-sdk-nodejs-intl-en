@@ -1071,7 +1071,7 @@ Note: A secondary AZ will load traffic if the primary AZ is faulty. You can use 
         this.SnatIps = null;
 
         /**
-         * Public network exclusive cluster ID or CDCId. can be obtained through the [DescribeExclusiveClusters](https://www.tencentcloud.com/document/product/214/49278?from_cn_redirect=1) api.
+         * Cluster ID. This cluster identifier is used for configuring a public cloud exclusive cluster or a cloud dedicated cluster. To apply for a public cloud exclusive cluster, [submit a ticket](https://console.cloud.tencent.com/workorder/category). 
          * @type {Array.<string> || null}
          */
         this.ClusterIds = null;

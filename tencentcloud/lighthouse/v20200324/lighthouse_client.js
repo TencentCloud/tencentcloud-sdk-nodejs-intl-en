@@ -105,13 +105,12 @@ const SceneInfo = models.SceneInfo;
 const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const ImportKeyPairResponse = models.ImportKeyPairResponse;
 const DeleteBlueprintsResponse = models.DeleteBlueprintsResponse;
-const ModifyInstancesLoginKeyPairAttributeRequest = models.ModifyInstancesLoginKeyPairAttributeRequest;
 const IsolateInstancesRequest = models.IsolateInstancesRequest;
 const StopInstancesResponse = models.StopInstancesResponse;
 const DescribeImagesToShareRequest = models.DescribeImagesToShareRequest;
 const ModifyBlueprintAttributeResponse = models.ModifyBlueprintAttributeResponse;
 const Image = models.Image;
-const DescribeModifyInstanceBundlesRequest = models.DescribeModifyInstanceBundlesRequest;
+const DescribeFirewallRulesTemplateResponse = models.DescribeFirewallRulesTemplateResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
 const InquirePriceCreateBlueprintResponse = models.InquirePriceCreateBlueprintResponse;
@@ -127,7 +126,6 @@ const Instance = models.Instance;
 const DockerContainerVolume = models.DockerContainerVolume;
 const IsolateInstancesResponse = models.IsolateInstancesResponse;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
-const FirewallRule = models.FirewallRule;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const ModifyFirewallRulesResponse = models.ModifyFirewallRulesResponse;
 const DiskPrice = models.DiskPrice;
@@ -137,7 +135,6 @@ const Blueprint = models.Blueprint;
 const TotalPrice = models.TotalPrice;
 const DeniedAction = models.DeniedAction;
 const DescribeAllScenesResponse = models.DescribeAllScenesResponse;
-const ModifyInstancesLoginKeyPairAttributeResponse = models.ModifyInstancesLoginKeyPairAttributeResponse;
 const InquirePriceRenewDisksResponse = models.InquirePriceRenewDisksResponse;
 const Bundle = models.Bundle;
 const DiskConfig = models.DiskConfig;
@@ -193,7 +190,6 @@ const RenewDisksResponse = models.RenewDisksResponse;
 const InternetAccessible = models.InternetAccessible;
 const RebootInstancesResponse = models.RebootInstancesResponse;
 const DescribeDisksDeniedActionsResponse = models.DescribeDisksDeniedActionsResponse;
-const DescribeInstanceLoginKeyPairAttributeRequest = models.DescribeInstanceLoginKeyPairAttributeRequest;
 const DescribeBundleDiscountRequest = models.DescribeBundleDiscountRequest;
 const Price = models.Price;
 const DescribeDisksReturnableResponse = models.DescribeDisksReturnableResponse;
@@ -211,7 +207,7 @@ const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
 const DescribeGeneralResourceQuotasResponse = models.DescribeGeneralResourceQuotasResponse;
 const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
 const StopInstancesRequest = models.StopInstancesRequest;
-const DescribeFirewallRulesTemplateResponse = models.DescribeFirewallRulesTemplateResponse;
+const DescribeModifyInstanceBundlesRequest = models.DescribeModifyInstanceBundlesRequest;
 const RenewInstancesResponse = models.RenewInstancesResponse;
 const ResetInstanceResponse = models.ResetInstanceResponse;
 const IsolateDisksResponse = models.IsolateDisksResponse;
@@ -230,7 +226,7 @@ const InquirePriceCreateDisksResponse = models.InquirePriceCreateDisksResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
 const SyncBlueprintRequest = models.SyncBlueprintRequest;
-const DescribeInstanceLoginKeyPairAttributeResponse = models.DescribeInstanceLoginKeyPairAttributeResponse;
+const FirewallRule = models.FirewallRule;
 
 
 /**
@@ -344,20 +340,6 @@ In the `FirewallRules` parameter:
     DeleteFirewallRules(req, cb) {
         let resp = new DeleteFirewallRulesResponse();
         this.request("DeleteFirewallRules", req, resp, cb);
-    }
-
-    /**
-     * This API is used to change the auto-renewal setting of monthly-subscribed instances. 
-
-* Instances with auto-renewal enabled are automatically renewed on a monthly basis upon the expiration. 
-* Batch operations are supported. Up to 100 instances per request is allowed.
-     * @param {ModifyInstancesRenewFlagRequest} req
-     * @param {function(string, ModifyInstancesRenewFlagResponse):void} cb
-     * @public
-     */
-    ModifyInstancesRenewFlag(req, cb) {
-        let resp = new ModifyInstancesRenewFlagResponse();
-        this.request("ModifyInstancesRenewFlag", req, resp, cb);
     }
 
     /**
@@ -686,14 +668,17 @@ Note: Just like powering off a physical PC, a forced shutdown may cause data los
     }
 
     /**
-     * This API is used to query the attributes of the default login key of an instance.
-     * @param {DescribeInstanceLoginKeyPairAttributeRequest} req
-     * @param {function(string, DescribeInstanceLoginKeyPairAttributeResponse):void} cb
+     * This API is used to change the auto-renewal setting of monthly-subscribed instances. 
+
+* Instances with auto-renewal enabled are automatically renewed on a monthly basis upon the expiration. 
+* Batch operations are supported. Up to 100 instances per request is allowed.
+     * @param {ModifyInstancesRenewFlagRequest} req
+     * @param {function(string, ModifyInstancesRenewFlagResponse):void} cb
      * @public
      */
-    DescribeInstanceLoginKeyPairAttribute(req, cb) {
-        let resp = new DescribeInstanceLoginKeyPairAttributeResponse();
-        this.request("DescribeInstanceLoginKeyPairAttribute", req, resp, cb);
+    ModifyInstancesRenewFlag(req, cb) {
+        let resp = new ModifyInstancesRenewFlagResponse();
+        this.request("ModifyInstancesRenewFlag", req, resp, cb);
     }
 
     /**
@@ -844,19 +829,6 @@ The snapshot must be in `NORMAL` status. To query the status of a snapshot, you 
     DescribeRegions(req, cb) {
         let resp = new DescribeRegionsResponse();
         this.request("DescribeRegions", req, resp, cb);
-    }
-
-    /**
-     * This API is used to set the attributes of the default login key pair of an instance.
-
-
-     * @param {ModifyInstancesLoginKeyPairAttributeRequest} req
-     * @param {function(string, ModifyInstancesLoginKeyPairAttributeResponse):void} cb
-     * @public
-     */
-    ModifyInstancesLoginKeyPairAttribute(req, cb) {
-        let resp = new ModifyInstancesLoginKeyPairAttributeResponse();
-        this.request("ModifyInstancesLoginKeyPairAttribute", req, resp, cb);
     }
 
     /**

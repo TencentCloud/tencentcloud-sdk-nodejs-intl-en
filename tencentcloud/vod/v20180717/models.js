@@ -29772,7 +29772,7 @@ class ModifyVodDomainConfigRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -29794,6 +29794,12 @@ class ModifyVodDomainConfigRequest extends  AbstractModel {
          * @type {DomainQUICConfig || null}
          */
         this.QUICConfig = null;
+
+        /**
+         * IP access restriction rules.
+         * @type {IPFilterPolicy || null}
+         */
+        this.IPFilterPolicy = null;
 
     }
 
@@ -29823,6 +29829,12 @@ class ModifyVodDomainConfigRequest extends  AbstractModel {
             let obj = new DomainQUICConfig();
             obj.deserialize(params.QUICConfig)
             this.QUICConfig = obj;
+        }
+
+        if (params.IPFilterPolicy) {
+            let obj = new IPFilterPolicy();
+            obj.deserialize(params.IPFilterPolicy)
+            this.IPFilterPolicy = obj;
         }
 
     }
@@ -33695,7 +33707,7 @@ class ProcessMediaByMPSRequest extends  AbstractModel {
         this.SubAppId = null;
 
         /**
-         * <p>Optional parameter. This parameter is used for passing through to the media processing service (MPS) to trigger MPS video processing tasks from VOD. For details on different types of video processing parameters, refer to <a href="https://www.tencentcloud.com/document/product/266/131209?from_cn_redirect=1">Using MPS Media AI Capability</a>. You can create custom templates via the <a href="https://www.tencentcloud.com/document/product/266/122580?from_cn_redirect=1">CreateMPSTemplate</a> API.</p>
+         * <p>Optional parameter. This parameter is used for passing through to the media processing service (MPS) to trigger MPS video processing tasks from VOD.
          * @type {string || null}
          */
         this.MPSProcessMediaParams = null;
@@ -39335,7 +39347,7 @@ class HighlightsConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * 
+ * IP access restriction rules, currently supports configuring IP blocklist and allowlist.
  * @class
  */
 class IPFilterPolicy extends  AbstractModel {
@@ -39343,19 +39355,24 @@ class IPFilterPolicy extends  AbstractModel {
         super();
 
         /**
-         * 
+         * IP access restriction status. Optional values:
+<li>Enabled: enable;</li>
+<li>Disabled: disable.</li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * IP access restriction type:
+<li>Black: blocklist-based verification. Only IP requests from the IPList will be blocked.</li>
+<li>White: allowlist-based verification. Only IP requests from the IPList will be allowed.</li>
+<li>When Status is set to Enabled, FilterType must be assigned.</li>
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * 
+         * IP list, supporting IPV4 addresses in X.X.X.X format, IPV6 addresses in X:X:X:X:X:X:X:X format, or CIDR notation /N (IPV4: 1 <= N <= 32; IPV6: 1 <= N <= 128). A maximum of 200 IPs or CIDR blocks can be added. When Status is set to Enabled, IPList must be assigned.
          * @type {Array.<string> || null}
          */
         this.IPList = null;

@@ -654,7 +654,7 @@ Note: the primary AZ loads traffic. the secondary AZ does not load traffic by de
         this.ZoneId = null;
 
         /**
-         * Network billing mode by the maximum outbound bandwidth. It applies only to private network LCU-supported instances and all public network instances. The feature of purchasing monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+         * Network billing mode by the maximum outbound bandwidth. It applies only to private network LCU-supported instances and all public network instances. The feature of purchasing yearly/monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
@@ -758,13 +758,13 @@ Note: The secondary AZ sustains traffic when the primary AZ encounters faults. Y
         this.Egress = null;
 
         /**
-         * Prepayment-related attributes of a CLB instance. The feature of purchasing monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+         * Prepayment-related attributes of a CLB instance. The feature of purchasing yearly/monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
          * @type {LBChargePrepaid || null}
          */
         this.LBChargePrepaid = null;
 
         /**
-         * Billing type of a CLB instance. Valid values: POSTPAID_BY_HOUR and PREPAID. Default value: POSTPAID_BY_HOUR. The feature of purchasing monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+         * Billing type of a CLB instance. Valid values: POSTPAID_BY_HOUR and PREPAID. Default value: POSTPAID_BY_HOUR. The feature of purchasing yearly/monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
          * @type {string || null}
          */
         this.LBChargeType = null;
@@ -1874,36 +1874,20 @@ class DescribeIdleLoadBalancersResponse extends  AbstractModel {
 }
 
 /**
- * Configuration binding relationship
+ * AssociateTargetGroups request structure.
  * @class
  */
-class BindItem extends  AbstractModel {
+class AssociateTargetGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the CLB instance bound to the configuration
-         * @type {string || null}
-         */
-        this.LoadBalancerId = null;
+         * Specifies the binding relationship array. the target group type should be the same.
+Specifies the maximum number of requests supported in a single request is 20.
 
-        /**
-         * ID of the listener bound to the configuration
-         * @type {string || null}
+         * @type {Array.<TargetGroupAssociation> || null}
          */
-        this.ListenerId = null;
-
-        /**
-         * Domain name bound to the configuration
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * Rule bound to the configuration
-         * @type {string || null}
-         */
-        this.LocationId = null;
+        this.Associations = null;
 
     }
 
@@ -1914,10 +1898,15 @@ class BindItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+
+        if (params.Associations) {
+            this.Associations = new Array();
+            for (let z in params.Associations) {
+                let obj = new TargetGroupAssociation();
+                obj.deserialize(params.Associations[z]);
+                this.Associations.push(obj);
+            }
+        }
 
     }
 }
@@ -3344,7 +3333,7 @@ class InquiryPriceCreateLoadBalancerRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Specification of the LCU-supported instance, which is input to query the monthly subscription price. Valid values: <li>clb.c2.medium: Standard</li><li>clb.c3.small: Advanced 1</li><li>clb.c3.medium: Advanced 2</li><li>clb.c4.small: Super Large 1</li><li>clb.c4.medium: Super Large 2</li><li>clb.c4.large: Super Large 3</li><li>clb.c4.xlarge: Super Large 4</li>SLA is input to query the pay-as-you-go price.
+         * Specification of the LCU-supported instance, which is input to query the yearly/monthly subscription price. Valid values: <li>clb.c2.medium: Standard</li><li>clb.c3.small: Advanced 1</li><li>clb.c3.medium: Advanced 2</li><li>clb.c4.small: Super Large 1</li><li>clb.c4.medium: Super Large 2</li><li>clb.c4.large: Super Large 3</li><li>clb.c4.xlarge: Super Large 4</li>SLA is input to query the pay-as-you-go price.
          * @type {string || null}
          */
         this.SlaType = null;
@@ -4228,6 +4217,12 @@ Specifies no modification if left blank.
         this.LoadBalancerPassToTarget = null;
 
         /**
+         * 
+         * @type {number || null}
+         */
+        this.SwitchFlag = null;
+
+        /**
          * Specifies whether the cross-region binding 2.0 feature is enabled. leave blank for no modification.
          * @type {boolean || null}
          */
@@ -4275,6 +4270,7 @@ Specifies no modification if left blank.
             this.InternetChargeInfo = obj;
         }
         this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
+        this.SwitchFlag = 'SwitchFlag' in params ? params.SwitchFlag : null;
         this.SnatPro = 'SnatPro' in params ? params.SnatPro : null;
         this.DeleteProtect = 'DeleteProtect' in params ? params.DeleteProtect : null;
         this.ModifyClassicDomain = 'ModifyClassicDomain' in params ? params.ModifyClassicDomain : null;
@@ -4654,6 +4650,12 @@ class ModifyLoadBalancerSlaResponse extends  AbstractModel {
         super();
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -4668,6 +4670,7 @@ class ModifyLoadBalancerSlaResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DealName = 'DealName' in params ? params.DealName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7211,7 +7214,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Monthly subscription configuration of a CLB instance
+ * Yearly/monthly subscription configuration of a CLB instance
  * @class
  */
 class LBChargePrepaid extends  AbstractModel {
@@ -8575,6 +8578,12 @@ class CreateTargetGroupRequest extends  AbstractModel {
          */
         this.IpVersion = null;
 
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.SnatEnable = null;
+
     }
 
     /**
@@ -8619,6 +8628,7 @@ class CreateTargetGroupRequest extends  AbstractModel {
         this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
         this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
         this.IpVersion = 'IpVersion' in params ? params.IpVersion : null;
+        this.SnatEnable = 'SnatEnable' in params ? params.SnatEnable : null;
 
     }
 }
@@ -9156,20 +9166,36 @@ class Filter extends  AbstractModel {
 }
 
 /**
- * AssociateTargetGroups request structure.
+ * Configuration binding relationship
  * @class
  */
-class AssociateTargetGroupsRequest extends  AbstractModel {
+class BindItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Specifies the binding relationship array. the target group type should be the same.
-Specifies the maximum number of requests supported in a single request is 20.
-
-         * @type {Array.<TargetGroupAssociation> || null}
+         * ID of the CLB instance bound to the configuration
+         * @type {string || null}
          */
-        this.Associations = null;
+        this.LoadBalancerId = null;
+
+        /**
+         * ID of the listener bound to the configuration
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * Domain name bound to the configuration
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Rule bound to the configuration
+         * @type {string || null}
+         */
+        this.LocationId = null;
 
     }
 
@@ -9180,15 +9206,10 @@ Specifies the maximum number of requests supported in a single request is 20.
         if (!params) {
             return;
         }
-
-        if (params.Associations) {
-            this.Associations = new Array();
-            for (let z in params.Associations) {
-                let obj = new TargetGroupAssociation();
-                obj.deserialize(params.Associations[z]);
-                this.Associations.push(obj);
-            }
-        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
 
     }
 }
@@ -10841,6 +10862,12 @@ class ModifyTargetGroupAttributeRequest extends  AbstractModel {
          */
         this.SessionExpireTime = null;
 
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.SnatEnable = null;
+
     }
 
     /**
@@ -10863,6 +10890,7 @@ class ModifyTargetGroupAttributeRequest extends  AbstractModel {
         this.Weight = 'Weight' in params ? params.Weight : null;
         this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
         this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
+        this.SnatEnable = 'SnatEnable' in params ? params.SnatEnable : null;
 
     }
 }
@@ -12398,6 +12426,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * 
+ * @class
+ */
+class AvailableZoneAffinityInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ExitRatio = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ReentryRatio = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.ExitRatio = 'ExitRatio' in params ? params.ExitRatio : null;
+        this.ReentryRatio = 'ReentryRatio' in params ? params.ReentryRatio : null;
+
+    }
+}
+
+/**
  * SetLoadBalancerClsLog request structure.
  * @class
  */
@@ -12413,7 +12483,7 @@ class SetLoadBalancerClsLogRequest extends  AbstractModel {
 
         /**
          * Log set ID of cloud log service (CLS).
-<li>Specifies the logset ID that can be obtained by calling the [DescribeLogsets](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1) API when adding or updating a log topic.</li>.
+<li>Specifies the logset ID that can be obtained by calling the [DescribeLogsets](https://www.tencentcloud.com/document/product/614/42778?from_cn_redirect=1) API when adding or updating a log topic.</li>.
 <Li>When deleting a log topic, set this parameter to an empty string.</li>.
          * @type {string || null}
          */
@@ -14004,7 +14074,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ExpireTime = null;
 
         /**
-         * Billing mode of CLB instance. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay as you go).
+         * Billing mode of CLB instance. Valid values: PREPAID (yearly/monthly subscription), POSTPAID_BY_HOUR (pay as you go).
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -14225,6 +14295,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.AssociateEndpoint = null;
 
+        /**
+         * 
+         * @type {AvailableZoneAffinityInfo || null}
+         */
+        this.AvailableZoneAffinityInfo = null;
+
     }
 
     /**
@@ -14347,6 +14423,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TargetCount = 'TargetCount' in params ? params.TargetCount : null;
         this.AssociateEndpoint = 'AssociateEndpoint' in params ? params.AssociateEndpoint : null;
 
+        if (params.AvailableZoneAffinityInfo) {
+            let obj = new AvailableZoneAffinityInfo();
+            obj.deserialize(params.AvailableZoneAffinityInfo)
+            this.AvailableZoneAffinityInfo = obj;
+        }
+
     }
 }
 
@@ -14380,7 +14462,7 @@ module.exports = {
     DescribeTargetGroupInstancesRequest: DescribeTargetGroupInstancesRequest,
     DescribeLBOperateProtectRequest: DescribeLBOperateProtectRequest,
     DescribeIdleLoadBalancersResponse: DescribeIdleLoadBalancersResponse,
-    BindItem: BindItem,
+    AssociateTargetGroupsRequest: AssociateTargetGroupsRequest,
     AddCustomizedConfigRequest: AddCustomizedConfigRequest,
     ClassicalTarget: ClassicalTarget,
     ListenerItem: ListenerItem,
@@ -14515,7 +14597,7 @@ module.exports = {
     TypeInfo: TypeInfo,
     DisassociateTargetGroupsRequest: DisassociateTargetGroupsRequest,
     Filter: Filter,
-    AssociateTargetGroupsRequest: AssociateTargetGroupsRequest,
+    BindItem: BindItem,
     ModifyDomainResponse: ModifyDomainResponse,
     RegisterTargetsResponse: RegisterTargetsResponse,
     DeregisterTargetsFromClassicalLBResponse: DeregisterTargetsFromClassicalLBResponse,
@@ -14572,6 +14654,7 @@ module.exports = {
     ModifyFunctionTargetsRequest: ModifyFunctionTargetsRequest,
     DescribeRewriteResponse: DescribeRewriteResponse,
     Quota: Quota,
+    AvailableZoneAffinityInfo: AvailableZoneAffinityInfo,
     SetLoadBalancerClsLogRequest: SetLoadBalancerClsLogRequest,
     LBItem: LBItem,
     DeleteCustomizedConfigRequest: DeleteCustomizedConfigRequest,

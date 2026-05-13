@@ -575,7 +575,7 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create prepaid annual and monthly instances. It only supports creating Pro Edition instances.
+     * This API is used to create prepaid yearly/monthly subscribed instances. It only supports creating Pro Edition instances.
      * @param {CreateInstancePreRequest} req
      * @param {function(string, CreateInstancePreResponse):void} cb
      * @public
@@ -917,7 +917,7 @@ This API is used to get the list of topics in a CKafka instance of a user.
     }
 
     /**
-     * This API is used to enumerate regions, and can be called only in Guangzhou.
+     * Enumerate regional information
      * @param {DescribeRegionRequest} req
      * @param {function(string, DescribeRegionResponse):void} cb
      * @public

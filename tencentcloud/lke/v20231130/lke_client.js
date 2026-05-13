@@ -36,8 +36,9 @@ const MsgRecord = models.MsgRecord;
 const CreateDocCateResponse = models.CreateDocCateResponse;
 const DeleteDocCateResponse = models.DeleteDocCateResponse;
 const ExportAttributeLabelResponse = models.ExportAttributeLabelResponse;
+const KnowledgeCapacityPieGraphDetail = models.KnowledgeCapacityPieGraphDetail;
 const WorkflowInfo = models.WorkflowInfo;
-const ExportQAListResponse = models.ExportQAListResponse;
+const DocReference = models.DocReference;
 const GetAppSecretResponse = models.GetAppSecretResponse;
 const ListRejectedQuestionRequest = models.ListRejectedQuestionRequest;
 const CreateQACateResponse = models.CreateQACateResponse;
@@ -45,7 +46,6 @@ const ModifyDocAttrRangeResponse = models.ModifyDocAttrRangeResponse;
 const GetAnswerTypeDataCountResponse = models.GetAnswerTypeDataCountResponse;
 const DescribeQARequest = models.DescribeQARequest;
 const AttrLabelRefer = models.AttrLabelRefer;
-const CreateReconstructDocumentFlowConfig = models.CreateReconstructDocumentFlowConfig;
 const DescribeUnsatisfiedReplyContextRequest = models.DescribeUnsatisfiedReplyContextRequest;
 const Procedure = models.Procedure;
 const ListAppRequest = models.ListAppRequest;
@@ -54,16 +54,16 @@ const ModifyQAAttrRangeRequest = models.ModifyQAAttrRangeRequest;
 const GetWsTokenReq_Label = models.GetWsTokenReq_Label;
 const ModifyDocResponse = models.ModifyDocResponse;
 const ReleaseDoc = models.ReleaseDoc;
+const SandboxContent = models.SandboxContent;
 const KnowledgeQaSearch = models.KnowledgeQaSearch;
-const CreateCorpResponse = models.CreateCorpResponse;
 const ListQARequest = models.ListQARequest;
 const DescribeKnowledgeUsageResponse = models.DescribeKnowledgeUsageResponse;
-const ReferDetail = models.ReferDetail;
+const QuestionnaireQuestionAnswer = models.QuestionnaireQuestionAnswer;
 const ListUnsatisfiedReplyRequest = models.ListUnsatisfiedReplyRequest;
 const DeleteQARequest = models.DeleteQARequest;
 const GetLikeDataCountResponse = models.GetLikeDataCountResponse;
 const ListReleaseRequest = models.ListReleaseRequest;
-const KnowledgeCapacityPieGraphDetail = models.KnowledgeCapacityPieGraphDetail;
+const IsTransferIntentResponse = models.IsTransferIntentResponse;
 const CreateDocCateRequest = models.CreateDocCateRequest;
 const InvokeAPI = models.InvokeAPI;
 const SummaryOutput = models.SummaryOutput;
@@ -74,18 +74,17 @@ const TaskFlowInfo = models.TaskFlowInfo;
 const GetDocPreviewRequest = models.GetDocPreviewRequest;
 const ListDocCateResponse = models.ListDocCateResponse;
 const ListRejectedQuestionPreviewResponse = models.ListRejectedQuestionPreviewResponse;
-const DescribeCorpRequest = models.DescribeCorpRequest;
-const ListAppCategoryResponse = models.ListAppCategoryResponse;
 const CreateAppResponse = models.CreateAppResponse;
+const GetTaskStatusResponse = models.GetTaskStatusResponse;
 const DescribeAttributeLabelRequest = models.DescribeAttributeLabelRequest;
 const CreateQARequest = models.CreateQARequest;
 const KnowledgeSummary = models.KnowledgeSummary;
 const TaskFlowSummary = models.TaskFlowSummary;
-const CreateCorpRequest = models.CreateCorpRequest;
 const RetryDocParseRequest = models.RetryDocParseRequest;
 const ListQaItem = models.ListQaItem;
 const DeleteAttributeLabelRequest = models.DeleteAttributeLabelRequest;
 const DescribeRobotBizIDByAppKeyResponse = models.DescribeRobotBizIDByAppKeyResponse;
+const WidgetAction = models.WidgetAction;
 const RenameDocResponse = models.RenameDocResponse;
 const ListDocCateRequest = models.ListDocCateRequest;
 const DescribeDocResponse = models.DescribeDocResponse;
@@ -98,6 +97,7 @@ const ApiVarAttrInfo = models.ApiVarAttrInfo;
 const AgentThought = models.AgentThought;
 const GroupDocRequest = models.GroupDocRequest;
 const CheckAttributeLabelReferRequest = models.CheckAttributeLabelReferRequest;
+const AgentTask = models.AgentTask;
 const ModifyQACateRequest = models.ModifyQACateRequest;
 const SearchStrategy = models.SearchStrategy;
 const ModifyAttributeLabelRequest = models.ModifyAttributeLabelRequest;
@@ -107,21 +107,22 @@ const Option = models.Option;
 const ListUnsatisfiedReplyResponse = models.ListUnsatisfiedReplyResponse;
 const GetAppSecretRequest = models.GetAppSecretRequest;
 const ModelParameter = models.ModelParameter;
+const FileInfoContent = models.FileInfoContent;
 const DeleteQACateResponse = models.DeleteQACateResponse;
 const SaveDocResponse = models.SaveDocResponse;
 const ListReleaseDocPreviewResponse = models.ListReleaseDocPreviewResponse;
 const RenameDocRequest = models.RenameDocRequest;
 const SummaryConfig = models.SummaryConfig;
 const GenerateQAResponse = models.GenerateQAResponse;
-const GetTaskStatusResponse = models.GetTaskStatusResponse;
+const ExportQAListResponse = models.ExportQAListResponse;
 const DescribeConcurrencyUsageGraphRequest = models.DescribeConcurrencyUsageGraphRequest;
 const DescribeDocRequest = models.DescribeDocRequest;
 const AgentProcedureDebugging = models.AgentProcedureDebugging;
 const DescribeTokenUsageGraphRequest = models.DescribeTokenUsageGraphRequest;
 const RetryDocAuditRequest = models.RetryDocAuditRequest;
 const VoiceConfig = models.VoiceConfig;
+const Widget = models.Widget;
 const SaveDocRequest = models.SaveDocRequest;
-const ReconstructDocumentFailedPage = models.ReconstructDocumentFailedPage;
 const ListAppKnowledgeDetailResponse = models.ListAppKnowledgeDetailResponse;
 const ModifyQACateResponse = models.ModifyQACateResponse;
 const DescribeAttributeLabelResponse = models.DescribeAttributeLabelResponse;
@@ -131,13 +132,14 @@ const RetryDocParseResponse = models.RetryDocParseResponse;
 const CreateRejectedQuestionResponse = models.CreateRejectedQuestionResponse;
 const ListReleaseQAPreviewResponse = models.ListReleaseQAPreviewResponse;
 const ExportUnsatisfiedReplyRequest = models.ExportUnsatisfiedReplyRequest;
+const FileCollection = models.FileCollection;
 const GroupQAResponse = models.GroupQAResponse;
 const QuoteInfo = models.QuoteInfo;
 const CreateAppRequest = models.CreateAppRequest;
 const AppConfig = models.AppConfig;
 const DescribeReleaseRequest = models.DescribeReleaseRequest;
 const ReleaseQA = models.ReleaseQA;
-const ListAppCategoryRequest = models.ListAppCategoryRequest;
+const ContentReference = models.ContentReference;
 const ListReleaseConfigPreviewRequest = models.ListReleaseConfigPreviewRequest;
 const CallDetail = models.CallDetail;
 const DocFilterFlag = models.DocFilterFlag;
@@ -160,11 +162,12 @@ const UpdatePeriodInfo = models.UpdatePeriodInfo;
 const DescribeCallStatsGraphRequest = models.DescribeCallStatsGraphRequest;
 const GetMsgRecordResponse = models.GetMsgRecordResponse;
 const DescribeAppRequest = models.DescribeAppRequest;
-const GetReconstructDocumentResultRequest = models.GetReconstructDocumentResultRequest;
+const QuestionnaireQuestion = models.QuestionnaireQuestion;
 const DescribeKnowledgeUsageRequest = models.DescribeKnowledgeUsageRequest;
 const ListQAResponse = models.ListQAResponse;
 const IgnoreUnsatisfiedReplyRequest = models.IgnoreUnsatisfiedReplyRequest;
 const DescribeReleaseResponse = models.DescribeReleaseResponse;
+const QaReference = models.QaReference;
 const DescribeConcurrencyUsageGraphResponse = models.DescribeConcurrencyUsageGraphResponse;
 const ListDocItem = models.ListDocItem;
 const VerifyQARequest = models.VerifyQARequest;
@@ -174,14 +177,14 @@ const Stat = models.Stat;
 const DescribeKnowledgeUsagePieGraphResponse = models.DescribeKnowledgeUsagePieGraphResponse;
 const ListRejectedQuestionResponse = models.ListRejectedQuestionResponse;
 const ClassifyLabel = models.ClassifyLabel;
+const WebSearchContent = models.WebSearchContent;
 const DescribeTokenUsageGraphResponse = models.DescribeTokenUsageGraphResponse;
 const SimilarQuestionModify = models.SimilarQuestionModify;
 const WorkflowRunNodeInfo = models.WorkflowRunNodeInfo;
 const StatisticInfo = models.StatisticInfo;
 const RetryDocAuditResponse = models.RetryDocAuditResponse;
-const GetReconstructDocumentResultResponse = models.GetReconstructDocumentResultResponse;
 const ModifyDocCateRequest = models.ModifyDocCateRequest;
-const RetryReleaseResponse = models.RetryReleaseResponse;
+const RejectedQuestion = models.RejectedQuestion;
 const GetLikeDataCountRequest = models.GetLikeDataCountRequest;
 const DeleteRejectedQuestionResponse = models.DeleteRejectedQuestionResponse;
 const Credentials = models.Credentials;
@@ -189,11 +192,11 @@ const MsgFileInfo = models.MsgFileInfo;
 const CreateAttributeLabelRequest = models.CreateAttributeLabelRequest;
 const ListAppResponse = models.ListAppResponse;
 const AppInfo = models.AppInfo;
+const QACate = models.QACate;
 const CateInfo = models.CateInfo;
-const CreateReconstructDocumentFlowRequest = models.CreateReconstructDocumentFlowRequest;
 const ValueInfo = models.ValueInfo;
 const KnowledgeQaConfig = models.KnowledgeQaConfig;
-const RejectedQuestion = models.RejectedQuestion;
+const ImageInfoContent = models.ImageInfoContent;
 const MsgRecordReference = models.MsgRecordReference;
 const AICallConfig = models.AICallConfig;
 const ListRejectedQuestionPreviewRequest = models.ListRejectedQuestionPreviewRequest;
@@ -202,21 +205,26 @@ const ModelInfo = models.ModelInfo;
 const DeleteRejectedQuestionRequest = models.DeleteRejectedQuestionRequest;
 const Highlight = models.Highlight;
 const FileInfo = models.FileInfo;
+const WebSearchReference = models.WebSearchReference;
 const ExportQAListRequest = models.ExportQAListRequest;
 const GetDocPreviewResponse = models.GetDocPreviewResponse;
 const DescribeConcurrencyUsageResponse = models.DescribeConcurrencyUsageResponse;
+const ListUsageCallDetailResponse = models.ListUsageCallDetailResponse;
 const CreateReleaseResponse = models.CreateReleaseResponse;
+const ReferDetail = models.ReferDetail;
 const ModifyAppRequest = models.ModifyAppRequest;
 const KnowledgeDetail = models.KnowledgeDetail;
 const DeleteAttributeLabelResponse = models.DeleteAttributeLabelResponse;
 const RetryReleaseRequest = models.RetryReleaseRequest;
 const KnowledgeQaPlugin = models.KnowledgeQaPlugin;
 const IntentAchievement = models.IntentAchievement;
+const StrValue = models.StrValue;
 const DeleteQACateRequest = models.DeleteQACateRequest;
 const GenerateQARequest = models.GenerateQARequest;
 const GetWsTokenRequest = models.GetWsTokenRequest;
-const QACate = models.QACate;
+const FilterItem = models.FilterItem;
 const ModifyAttributeLabelResponse = models.ModifyAttributeLabelResponse;
+const Questionnaire = models.Questionnaire;
 const ModifyDocRequest = models.ModifyDocRequest;
 const DescribeTokenUsageResponse = models.DescribeTokenUsageResponse;
 const DeleteAppResponse = models.DeleteAppResponse;
@@ -232,10 +240,11 @@ const ClassifyConfig = models.ClassifyConfig;
 const DescribeConcurrencyUsageRequest = models.DescribeConcurrencyUsageRequest;
 const GroupDocResponse = models.GroupDocResponse;
 const UploadAttributeLabelRequest = models.UploadAttributeLabelRequest;
-const ListUsageCallDetailResponse = models.ListUsageCallDetailResponse;
+const Content = models.Content;
 const ExportAttributeLabelRequest = models.ExportAttributeLabelRequest;
 const DescribeTokenUsageRequest = models.DescribeTokenUsageRequest;
 const GetAppKnowledgeCountResponse = models.GetAppKnowledgeCountResponse;
+const RetryReleaseResponse = models.RetryReleaseResponse;
 const CreateAttributeLabelResponse = models.CreateAttributeLabelResponse;
 const DuplicateFileHandle = models.DuplicateFileHandle;
 const ListAppKnowledgeDetailRequest = models.ListAppKnowledgeDetailRequest;
@@ -243,15 +252,14 @@ const CreateQAResponse = models.CreateQAResponse;
 const ListQACateRequest = models.ListQACateRequest;
 const ListReleaseQAPreviewRequest = models.ListReleaseQAPreviewRequest;
 const DescribeReleaseInfoResponse = models.DescribeReleaseInfoResponse;
+const IsTransferIntentRequest = models.IsTransferIntentRequest;
 const DescribeAppResponse = models.DescribeAppResponse;
 const DeleteAppRequest = models.DeleteAppRequest;
 const ModifyRejectedQuestionResponse = models.ModifyRejectedQuestionResponse;
 const WorkFlowSummary = models.WorkFlowSummary;
 const TaskParams = models.TaskParams;
-const ListAppCategoryRspOption = models.ListAppCategoryRspOption;
 const DescribeStorageCredentialRequest = models.DescribeStorageCredentialRequest;
 const QAList = models.QAList;
-const DescribeCorpResponse = models.DescribeCorpResponse;
 const ModifyDocCateResponse = models.ModifyDocCateResponse;
 const ListReleaseResponse = models.ListReleaseResponse;
 const ListModelResponse = models.ListModelResponse;
@@ -263,7 +271,7 @@ const DescribeCallStatsGraphResponse = models.DescribeCallStatsGraphResponse;
 const GetMsgRecordRequest = models.GetMsgRecordRequest;
 const DescribeStorageCredentialResponse = models.DescribeStorageCredentialResponse;
 const CheckAttributeLabelExistResponse = models.CheckAttributeLabelExistResponse;
-const StrValue = models.StrValue;
+const QuestionOption = models.QuestionOption;
 const GetTaskStatusRequest = models.GetTaskStatusRequest;
 const CheckAttributeLabelReferResponse = models.CheckAttributeLabelReferResponse;
 const RateMsgRecordResponse = models.RateMsgRecordResponse;
@@ -272,7 +280,6 @@ const ReleaseRejectedQuestion = models.ReleaseRejectedQuestion;
 const CreateQACateRequest = models.CreateQACateRequest;
 const DescribeRobotBizIDByAppKeyRequest = models.DescribeRobotBizIDByAppKeyRequest;
 const ExportUnsatisfiedReplyResponse = models.ExportUnsatisfiedReplyResponse;
-const CreateReconstructDocumentFlowResponse = models.CreateReconstructDocumentFlowResponse;
 const HistorySummary = models.HistorySummary;
 const VerifyQAResponse = models.VerifyQAResponse;
 const ReleaseConfigs = models.ReleaseConfigs;
@@ -343,17 +350,6 @@ class LkeClient extends AbstractClient {
     }
 
     /**
-     * This is an asynchronous APIs, used to get document parsing task results.
-     * @param {GetReconstructDocumentResultRequest} req
-     * @param {function(string, GetReconstructDocumentResultResponse):void} cb
-     * @public
-     */
-    GetReconstructDocumentResult(req, cb) {
-        let resp = new GetReconstructDocumentResultResponse();
-        this.request("GetReconstructDocumentResult", req, resp, cb);
-    }
-
-    /**
      * This API is used to get account information.
      * @param {ListSelectDocRequest} req
      * @param {function(string, ListSelectDocResponse):void} cb
@@ -409,14 +405,14 @@ class LkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retry document parsing.
-     * @param {RetryDocAuditRequest} req
-     * @param {function(string, RetryDocAuditResponse):void} cb
+     * This API is used to get document category.
+     * @param {ListDocCateRequest} req
+     * @param {function(string, ListDocCateResponse):void} cb
      * @public
      */
-    RetryDocAudit(req, cb) {
-        let resp = new RetryDocAuditResponse();
-        this.request("RetryDocAudit", req, resp, cb);
+    ListDocCate(req, cb) {
+        let resp = new ListDocCateResponse();
+        this.request("ListDocCate", req, resp, cb);
     }
 
     /**
@@ -684,17 +680,6 @@ class LkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query corporate details.
-     * @param {DescribeCorpRequest} req
-     * @param {function(string, DescribeCorpResponse):void} cb
-     * @public
-     */
-    DescribeCorp(req, cb) {
-        let resp = new DescribeCorpResponse();
-        this.request("DescribeCorp", req, resp, cb);
-    }
-
-    /**
      * This API is used to get the context of dissatisfied responses.
      * @param {DescribeUnsatisfiedReplyContextRequest} req
      * @param {function(string, DescribeUnsatisfiedReplyContextResponse):void} cb
@@ -747,17 +732,6 @@ class LkeClient extends AbstractClient {
     ListQACate(req, cb) {
         let resp = new ListQACateResponse();
         this.request("ListQACate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get list of application types.
-     * @param {ListAppCategoryRequest} req
-     * @param {function(string, ListAppCategoryResponse):void} cb
-     * @public
-     */
-    ListAppCategory(req, cb) {
-        let resp = new ListAppCategoryResponse();
-        this.request("ListAppCategory", req, resp, cb);
     }
 
     /**
@@ -904,16 +878,14 @@ class LkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to initiate requests for this asynchronous API, for initiating document parsing tasks.
-Document parsing supports converting images or PDF files into Markdown format files, and can parse content elements including tables, formulas, images, headings, paragraphs, headers, and footers, and intelligently convert the content into reading order.
-During the trial period, the QPS limit for a single account is only 1. If you need to access officially, please contact our R&D team.
-     * @param {CreateReconstructDocumentFlowRequest} req
-     * @param {function(string, CreateReconstructDocumentFlowResponse):void} cb
+     * This API is used to ignore dissatisfied responses.
+     * @param {IgnoreUnsatisfiedReplyRequest} req
+     * @param {function(string, IgnoreUnsatisfiedReplyResponse):void} cb
      * @public
      */
-    CreateReconstructDocumentFlow(req, cb) {
-        let resp = new CreateReconstructDocumentFlowResponse();
-        this.request("CreateReconstructDocumentFlow", req, resp, cb);
+    IgnoreUnsatisfiedReply(req, cb) {
+        let resp = new IgnoreUnsatisfiedReplyResponse();
+        this.request("IgnoreUnsatisfiedReply", req, resp, cb);
     }
 
     /**
@@ -958,6 +930,17 @@ During the trial period, the QPS limit for a single account is only 1. If you ne
     ModifyRejectedQuestion(req, cb) {
         let resp = new ModifyRejectedQuestionResponse();
         this.request("ModifyRejectedQuestion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to determine whether to transfer to human service.
+     * @param {IsTransferIntentRequest} req
+     * @param {function(string, IsTransferIntentResponse):void} cb
+     * @public
+     */
+    IsTransferIntent(req, cb) {
+        let resp = new IsTransferIntentResponse();
+        this.request("IsTransferIntent", req, resp, cb);
     }
 
     /**
@@ -1087,14 +1070,14 @@ For the above steps, see [Documentation](https://cloud.tencent.com/document/prod
     }
 
     /**
-     * This API is used to get document category.
-     * @param {ListDocCateRequest} req
-     * @param {function(string, ListDocCateResponse):void} cb
+     * This API is used to retry document parsing.
+     * @param {RetryDocAuditRequest} req
+     * @param {function(string, RetryDocAuditResponse):void} cb
      * @public
      */
-    ListDocCate(req, cb) {
-        let resp = new ListDocCateResponse();
-        this.request("ListDocCate", req, resp, cb);
+    RetryDocAudit(req, cb) {
+        let resp = new RetryDocAuditResponse();
+        this.request("RetryDocAudit", req, resp, cb);
     }
 
     /**
@@ -1161,17 +1144,6 @@ For the above steps, see [Documentation](https://cloud.tencent.com/document/prod
     DescribeRelease(req, cb) {
         let resp = new DescribeReleaseResponse();
         this.request("DescribeRelease", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create enterprises.
-     * @param {CreateCorpRequest} req
-     * @param {function(string, CreateCorpResponse):void} cb
-     * @public
-     */
-    CreateCorp(req, cb) {
-        let resp = new CreateCorpResponse();
-        this.request("CreateCorp", req, resp, cb);
     }
 
     /**
@@ -1263,17 +1235,6 @@ For the above steps, see [Documentation](https://cloud.tencent.com/document/prod
     }
 
     /**
-     * This API is used to terminate document parsing.
-     * @param {StopDocParseRequest} req
-     * @param {function(string, StopDocParseResponse):void} cb
-     * @public
-     */
-    StopDocParse(req, cb) {
-        let resp = new StopDocParseResponse();
-        this.request("StopDocParse", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the knowledge base capacity details in a list.
      * @param {ListAppKnowledgeDetailRequest} req
      * @param {function(string, ListAppKnowledgeDetailResponse):void} cb
@@ -1285,14 +1246,14 @@ For the above steps, see [Documentation](https://cloud.tencent.com/document/prod
     }
 
     /**
-     * This API is used to ignore dissatisfied responses.
-     * @param {IgnoreUnsatisfiedReplyRequest} req
-     * @param {function(string, IgnoreUnsatisfiedReplyResponse):void} cb
+     * This API is used to terminate document parsing.
+     * @param {StopDocParseRequest} req
+     * @param {function(string, StopDocParseResponse):void} cb
      * @public
      */
-    IgnoreUnsatisfiedReply(req, cb) {
-        let resp = new IgnoreUnsatisfiedReplyResponse();
-        this.request("IgnoreUnsatisfiedReply", req, resp, cb);
+    StopDocParse(req, cb) {
+        let resp = new StopDocParseResponse();
+        this.request("StopDocParse", req, resp, cb);
     }
 
 

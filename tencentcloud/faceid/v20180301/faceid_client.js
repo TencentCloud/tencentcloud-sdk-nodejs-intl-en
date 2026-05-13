@@ -338,7 +338,7 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     }
 
     /**
-     * This API is used to validate the authenticity and consistency of the mobile number, name, and identity card number. For details on supported mobile number segments, see the <a href="https://www.tencentcloud.com/document/product/1007/46063?from_cn_redirect=1">carrier</a> document.
+     * This API is used to validate the authenticity and consistency of the mobile number, name, and identity card number. For details on supported mobile number segments, see the <a href="https://www.tencentcloud.com/document/product/1061/79689">carrier</a> document.
      * @param {PhoneVerificationRequest} req
      * @param {function(string, PhoneVerificationResponse):void} cb
      * @public

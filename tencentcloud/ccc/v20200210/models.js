@@ -607,65 +607,18 @@ class SetStaffStatusResponse extends  AbstractModel {
 }
 
 /**
- * Server controls the chatbot to broadcast specified text.
+ * http return key
  * @class
  */
-class ServerPushText extends  AbstractModel {
+class ReturnKey extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Specifies the server push broadcast text.
+         * 
          * @type {string || null}
          */
-        this.Text = null;
-
-        /**
-         * Whether to allow the text to interrupt the robot's speaking.
-         * @type {boolean || null}
-         */
-        this.Interrupt = null;
-
-        /**
-         * Specifies whether to automatically close the dialogue task after broadcasting the text.
-         * @type {boolean || null}
-         */
-        this.StopAfterPlay = null;
-
-        /**
-         * Specifies the server push broadcast audio.
-Format description: audio must be mono, sampling rate should be consistent with the corresponding TTS, and coded as a Base64 string.
-Input rules: when the Audio field is provided, the system will not accept input in the Text field. the system will play the Audio content in the Audio field directly.
-         * @type {string || null}
-         */
-        this.Audio = null;
-
-        /**
-         * Defaults to 0. valid only when Interrupt is false.
--0 indicates that messages with Interrupt set to false will be dropped when there is an interaction.
--Indicates that when there is an interaction in progress, messages with Interrupt set to false will not be dropped but cached and processed after the current interaction is completed.
-
-Note: when DropMode is 1, the cache allows multiple messages. if an interruption occurs subsequently, cached messages will be cleared.
-         * @type {number || null}
-         */
-        this.DropMode = null;
-
-        /**
-         * Message priority of ServerPushText. 0 means interruptible. 1 means not interruptible.
-Note: after receiving a message with Priority=1, any other messages will be ignored (including messages with Priority=1) until the message processing of Priority=1 is complete. this field can be used together with the Interrupt and DropMode fields.
-Example.
--Priority=1, Interrupt=true. specifies to Interrupt existing interaction and broadcast immediately. the broadcast will not be interrupted during the process.
--Priority=1, Interrupt=false, DropMode=1. waits for the current interaction to complete before broadcasting. the broadcast will not be interrupted during the process.
-
-         * @type {number || null}
-         */
-        this.Priority = null;
-
-        /**
-         * Specifies whether the text is added to the llm history context.
-         * @type {boolean || null}
-         */
-        this.AddHistory = null;
+        this.Key = null;
 
     }
 
@@ -676,36 +629,24 @@ Example.
         if (!params) {
             return;
         }
-        this.Text = 'Text' in params ? params.Text : null;
-        this.Interrupt = 'Interrupt' in params ? params.Interrupt : null;
-        this.StopAfterPlay = 'StopAfterPlay' in params ? params.StopAfterPlay : null;
-        this.Audio = 'Audio' in params ? params.Audio : null;
-        this.DropMode = 'DropMode' in params ? params.DropMode : null;
-        this.Priority = 'Priority' in params ? params.Priority : null;
-        this.AddHistory = 'AddHistory' in params ? params.AddHistory : null;
+        this.Key = 'Key' in params ? params.Key : null;
 
     }
 }
 
 /**
- * ResetExtensionPassword request structure.
+ * 
  * @class
  */
-class ResetExtensionPasswordRequest extends  AbstractModel {
+class BearerAuth extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Extension.
+         * 
          * @type {string || null}
          */
-        this.ExtensionId = null;
+        this.BearerToken = null;
 
     }
 
@@ -716,8 +657,7 @@ class ResetExtensionPasswordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.ExtensionId = 'ExtensionId' in params ? params.ExtensionId : null;
+        this.BearerToken = 'BearerToken' in params ? params.BearerToken : null;
 
     }
 }
@@ -811,6 +751,41 @@ class DescribeProtectedTelCdrResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ResetExtensionPassword request structure.
+ * @class
+ */
+class ResetExtensionPasswordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Extension.
+         * @type {string || null}
+         */
+        this.ExtensionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.ExtensionId = 'ExtensionId' in params ? params.ExtensionId : null;
 
     }
 }
@@ -1203,7 +1178,7 @@ Currently, the supported languages are as follows. The English name of the langu
          * <p>Either the VoiceType field or a custom TTS is required. this uses your own custom TTS, while VoiceType provides some built-in voice types.</p>
 <ul>
 <li>Tencent TTS<br>
-For configuration, see <a href="https://www.tencentcloud.com/document/product/1073/92668?from_cn_redirect=1#55924b56-1a73-4663-a7a1-a8dd82d6e823" target="_blank">tencent cloud TTS documentation link</a></li>
+For configuration, see <a href="https://www.tencentcloud.com/zh/document/product/1154/48916" target="_blank">tencent cloud TTS documentation link</a></li>
 </ul>
 <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{ 
 "TTSType": "tencent", // String TTS type. currently supports "tencent" and "minixmax". the rest manufacturers are under support.
@@ -3011,6 +2986,68 @@ class DescribeAILatencyResponse extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class TriggerStrategyItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {HttpCallbackConfig || null}
+         */
+        this.InterfaceConfig = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.HangupTypes = null;
+
+        /**
+         * 
+         * @type {Array.<RetryTagItem> || null}
+         */
+        this.CallTags = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TriggerMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InterfaceConfig) {
+            let obj = new HttpCallbackConfig();
+            obj.deserialize(params.InterfaceConfig)
+            this.InterfaceConfig = obj;
+        }
+        this.HangupTypes = 'HangupTypes' in params ? params.HangupTypes : null;
+
+        if (params.CallTags) {
+            this.CallTags = new Array();
+            for (let z in params.CallTags) {
+                let obj = new RetryTagItem();
+                obj.deserialize(params.CallTags[z]);
+                this.CallTags.push(obj);
+            }
+        }
+        this.TriggerMode = 'TriggerMode' in params ? params.TriggerMode : null;
+
+    }
+}
+
+/**
  * DescribeAutoCalloutTasks response structure.
  * @class
  */
@@ -3184,36 +3221,30 @@ Number.
 }
 
 /**
- * Specific information of AI call result.
+ * UnbindStaffSkillGroupList request structure.
  * @class
  */
-class AICallExtractResultInfo extends  AbstractModel {
+class UnbindStaffSkillGroupListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The extracted type is text.
-         * @type {string || null}
-         */
-        this.Text = null;
-
-        /**
-         * The extracted type is option.
-         * @type {Array.<string> || null}
-         */
-        this.Chosen = null;
-
-        /**
-         * The extracted type is a boolean value.
-         * @type {boolean || null}
-         */
-        this.Boolean = null;
-
-        /**
-         * The extracted type is a number.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
-        this.Number = null;
+        this.SdkAppId = null;
+
+        /**
+         * Customer service email.
+         * @type {string || null}
+         */
+        this.StaffEmail = null;
+
+        /**
+         * Unbound skill group list.
+         * @type {Array.<number> || null}
+         */
+        this.SkillGroupList = null;
 
     }
 
@@ -3224,10 +3255,37 @@ class AICallExtractResultInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Text = 'Text' in params ? params.Text : null;
-        this.Chosen = 'Chosen' in params ? params.Chosen : null;
-        this.Boolean = 'Boolean' in params ? params.Boolean : null;
-        this.Number = 'Number' in params ? params.Number : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.StaffEmail = 'StaffEmail' in params ? params.StaffEmail : null;
+        this.SkillGroupList = 'SkillGroupList' in params ? params.SkillGroupList : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class BasicAuth extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BasicToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BasicToken = 'BasicToken' in params ? params.BasicToken : null;
 
     }
 }
@@ -3742,6 +3800,87 @@ class DescribeStaffInfoListResponse extends  AbstractModel {
 }
 
 /**
+ * Server controls the chatbot to broadcast specified text.
+ * @class
+ */
+class ServerPushText extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the server push broadcast text.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Whether to allow the text to interrupt the robot's speaking.
+         * @type {boolean || null}
+         */
+        this.Interrupt = null;
+
+        /**
+         * Specifies whether to automatically close the dialogue task after broadcasting the text.
+         * @type {boolean || null}
+         */
+        this.StopAfterPlay = null;
+
+        /**
+         * Specifies the server push broadcast audio.
+Format description: audio must be mono, sampling rate should be consistent with the corresponding TTS, and coded as a Base64 string.
+Input rules: when the Audio field is provided, the system will not accept input in the Text field. the system will play the Audio content in the Audio field directly.
+         * @type {string || null}
+         */
+        this.Audio = null;
+
+        /**
+         * Defaults to 0. valid only when Interrupt is false.
+-0 indicates that messages with Interrupt set to false will be dropped when there is an interaction.
+-Indicates that when there is an interaction in progress, messages with Interrupt set to false will not be dropped but cached and processed after the current interaction is completed.
+
+Note: when DropMode is 1, the cache allows multiple messages. if an interruption occurs subsequently, cached messages will be cleared.
+         * @type {number || null}
+         */
+        this.DropMode = null;
+
+        /**
+         * Message priority of ServerPushText. 0 means interruptible. 1 means not interruptible.
+Note: after receiving a message with Priority=1, any other messages will be ignored (including messages with Priority=1) until the message processing of Priority=1 is complete. this field can be used together with the Interrupt and DropMode fields.
+Example.
+-Priority=1, Interrupt=true. specifies to Interrupt existing interaction and broadcast immediately. the broadcast will not be interrupted during the process.
+-Priority=1, Interrupt=false, DropMode=1. waits for the current interaction to complete before broadcasting. the broadcast will not be interrupted during the process.
+
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * Specifies whether the text is added to the llm history context.
+         * @type {boolean || null}
+         */
+        this.AddHistory = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Interrupt = 'Interrupt' in params ? params.Interrupt : null;
+        this.StopAfterPlay = 'StopAfterPlay' in params ? params.StopAfterPlay : null;
+        this.Audio = 'Audio' in params ? params.Audio : null;
+        this.DropMode = 'DropMode' in params ? params.DropMode : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.AddHistory = 'AddHistory' in params ? params.AddHistory : null;
+
+    }
+}
+
+/**
  * AI latency statistics.
  * @class
  */
@@ -3935,6 +4074,31 @@ class CreateAutoCalloutTaskRequest extends  AbstractModel {
          */
         this.MaxRingTimeoutSecond = null;
 
+        /**
+         * <p>Retry according to the specified hang-up reasons (optional hang-up status codes: 202, 203, 204, 205, 206, 207, 208, 210, 212, 213, 215, 216, 217, 218, 219, 221, 222, 234). This only takes effect for tasks using AIAgentID. For the description of hang-up status codes</p>
+<p><a href="https://cloud.tencent.com/document/product/679/123938">see details</a></p>
+         * @type {Array.<string> || null}
+         */
+        this.RetryHangupTypes = null;
+
+        /**
+         * Retry based on the specified post-dialogue tag. It only takes effect for AIAgentID tasks that use the dialogue model. Tag information can be queried in the agent configuration.
+         * @type {Array.<RetryTagItem> || null}
+         */
+        this.RetryTags = null;
+
+        /**
+         * <p>Effective working time configuration. It is recommended to use this field instead of the AvailableTime field. If both are used simultaneously, AvailableTime takes priority.</p>
+         * @type {Array.<AvailableTimeConfig> || null}
+         */
+        this.AvailableWorkTimeConfig = null;
+
+        /**
+         * <p>Trigger Strategy</p>
+         * @type {Array.<TriggerStrategyItem> || null}
+         */
+        this.TriggerStrategy = null;
+
     }
 
     /**
@@ -3985,6 +4149,34 @@ class CreateAutoCalloutTaskRequest extends  AbstractModel {
         this.AIAgentId = 'AIAgentId' in params ? params.AIAgentId : null;
         this.RetryInterval = 'RetryInterval' in params ? params.RetryInterval : null;
         this.MaxRingTimeoutSecond = 'MaxRingTimeoutSecond' in params ? params.MaxRingTimeoutSecond : null;
+        this.RetryHangupTypes = 'RetryHangupTypes' in params ? params.RetryHangupTypes : null;
+
+        if (params.RetryTags) {
+            this.RetryTags = new Array();
+            for (let z in params.RetryTags) {
+                let obj = new RetryTagItem();
+                obj.deserialize(params.RetryTags[z]);
+                this.RetryTags.push(obj);
+            }
+        }
+
+        if (params.AvailableWorkTimeConfig) {
+            this.AvailableWorkTimeConfig = new Array();
+            for (let z in params.AvailableWorkTimeConfig) {
+                let obj = new AvailableTimeConfig();
+                obj.deserialize(params.AvailableWorkTimeConfig[z]);
+                this.AvailableWorkTimeConfig.push(obj);
+            }
+        }
+
+        if (params.TriggerStrategy) {
+            this.TriggerStrategy = new Array();
+            for (let z in params.TriggerStrategy) {
+                let obj = new TriggerStrategyItem();
+                obj.deserialize(params.TriggerStrategy[z]);
+                this.TriggerStrategy.push(obj);
+            }
+        }
 
     }
 }
@@ -4192,30 +4384,36 @@ class CreateCCCSkillGroupRequest extends  AbstractModel {
 }
 
 /**
- * DescribePredictiveDialingSessions response structure.
+ * Specific information of AI call result.
  * @class
  */
-class DescribePredictiveDialingSessionsResponse extends  AbstractModel {
+class AICallExtractResultInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total data volume.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of session ids for a call. you can access detailed call bills in batches through https://intl.cloud.tencent.com/document/product/679/47714.?from_cn_redirect=1.
-         * @type {Array.<string> || null}
-         */
-        this.SessionList = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * The extracted type is text.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Text = null;
+
+        /**
+         * The extracted type is option.
+         * @type {Array.<string> || null}
+         */
+        this.Chosen = null;
+
+        /**
+         * The extracted type is a boolean value.
+         * @type {boolean || null}
+         */
+        this.Boolean = null;
+
+        /**
+         * The extracted type is a number.
+         * @type {number || null}
+         */
+        this.Number = null;
 
     }
 
@@ -4226,9 +4424,10 @@ class DescribePredictiveDialingSessionsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.SessionList = 'SessionList' in params ? params.SessionList : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Chosen = 'Chosen' in params ? params.Chosen : null;
+        this.Boolean = 'Boolean' in params ? params.Boolean : null;
+        this.Number = 'Number' in params ? params.Number : null;
 
     }
 }
@@ -4394,48 +4593,24 @@ class DescribeTelSessionRequest extends  AbstractModel {
 }
 
 /**
- * ModifyOwnNumberApply request structure.
+ * 
  * @class
  */
-class ModifyOwnNumberApplyRequest extends  AbstractModel {
+class HeaderParams extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Circuit-Related parameters.
-         * @type {Array.<OwnNumberApplyDetailItem> || null}
-         */
-        this.DetailList = null;
-
-        /**
-         * Approval id.
-         * @type {number || null}
-         */
-        this.ApplyId = null;
-
-        /**
-         * Prefix for sending numbers.
+         * 
          * @type {string || null}
          */
-        this.Prefix = null;
+        this.Key = null;
 
         /**
-         * Domestic long-distance mobile phone prefix.
+         * 
          * @type {string || null}
          */
-        this.MobileNddPrefix = null;
-
-        /**
-         * Removes the area code for local calls.
-         * @type {boolean || null}
-         */
-        this.LocalNumberTrimAC = null;
+        this.Value = null;
 
     }
 
@@ -4446,20 +4621,8 @@ class ModifyOwnNumberApplyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-
-        if (params.DetailList) {
-            this.DetailList = new Array();
-            for (let z in params.DetailList) {
-                let obj = new OwnNumberApplyDetailItem();
-                obj.deserialize(params.DetailList[z]);
-                this.DetailList.push(obj);
-            }
-        }
-        this.ApplyId = 'ApplyId' in params ? params.ApplyId : null;
-        this.Prefix = 'Prefix' in params ? params.Prefix : null;
-        this.MobileNddPrefix = 'MobileNddPrefix' in params ? params.MobileNddPrefix : null;
-        this.LocalNumberTrimAC = 'LocalNumberTrimAC' in params ? params.LocalNumberTrimAC : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -4865,30 +5028,72 @@ class AsrData extends  AbstractModel {
 }
 
 /**
- * UploadIvrAudio response structure.
+ * 
  * @class
  */
-class UploadIvrAudioResponse extends  AbstractModel {
+class HttpCallbackConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of files that failed to be uploaded.
-         * @type {Array.<UploadIvrAudioFailedInfo> || null}
-         */
-        this.FailedFileList = null;
-
-        /**
-         * List of successfully uploaded files.
-         * @type {Array.<AudioFileInfo> || null}
-         */
-        this.SuccessFileList = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * 
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Url = null;
+
+        /**
+         * 
+         * @type {Array.<HeaderParams> || null}
+         */
+        this.HeaderParams = null;
+
+        /**
+         * 
+         * @type {Array.<HttpParams> || null}
+         */
+        this.Params = null;
+
+        /**
+         * 
+         * @type {Array.<ReturnKey> || null}
+         */
+        this.Returns = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.Async = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AuthType = null;
+
+        /**
+         * 
+         * @type {BasicAuth || null}
+         */
+        this.BasicAuth = null;
+
+        /**
+         * 
+         * @type {BearerAuth || null}
+         */
+        this.BearerAuth = null;
+
+        /**
+         * 
+         * @type {HttpParams || null}
+         */
+        this.CustomAuth = null;
+
+        /**
+         * 
+         * @type {OauthConfig || null}
+         */
+        this.Oauth2Auth = null;
 
     }
 
@@ -4899,25 +5104,60 @@ class UploadIvrAudioResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Url = 'Url' in params ? params.Url : null;
 
-        if (params.FailedFileList) {
-            this.FailedFileList = new Array();
-            for (let z in params.FailedFileList) {
-                let obj = new UploadIvrAudioFailedInfo();
-                obj.deserialize(params.FailedFileList[z]);
-                this.FailedFileList.push(obj);
+        if (params.HeaderParams) {
+            this.HeaderParams = new Array();
+            for (let z in params.HeaderParams) {
+                let obj = new HeaderParams();
+                obj.deserialize(params.HeaderParams[z]);
+                this.HeaderParams.push(obj);
             }
         }
 
-        if (params.SuccessFileList) {
-            this.SuccessFileList = new Array();
-            for (let z in params.SuccessFileList) {
-                let obj = new AudioFileInfo();
-                obj.deserialize(params.SuccessFileList[z]);
-                this.SuccessFileList.push(obj);
+        if (params.Params) {
+            this.Params = new Array();
+            for (let z in params.Params) {
+                let obj = new HttpParams();
+                obj.deserialize(params.Params[z]);
+                this.Params.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Returns) {
+            this.Returns = new Array();
+            for (let z in params.Returns) {
+                let obj = new ReturnKey();
+                obj.deserialize(params.Returns[z]);
+                this.Returns.push(obj);
+            }
+        }
+        this.Async = 'Async' in params ? params.Async : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
+
+        if (params.BasicAuth) {
+            let obj = new BasicAuth();
+            obj.deserialize(params.BasicAuth)
+            this.BasicAuth = obj;
+        }
+
+        if (params.BearerAuth) {
+            let obj = new BearerAuth();
+            obj.deserialize(params.BearerAuth)
+            this.BearerAuth = obj;
+        }
+
+        if (params.CustomAuth) {
+            let obj = new HttpParams();
+            obj.deserialize(params.CustomAuth)
+            this.CustomAuth = obj;
+        }
+
+        if (params.Oauth2Auth) {
+            let obj = new OauthConfig();
+            obj.deserialize(params.Oauth2Auth)
+            this.Oauth2Auth = obj;
+        }
 
     }
 }
@@ -6253,6 +6493,77 @@ class UpdatePredictiveDialingCampaignResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyOwnNumberApply request structure.
+ * @class
+ */
+class ModifyOwnNumberApplyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Circuit-Related parameters.
+         * @type {Array.<OwnNumberApplyDetailItem> || null}
+         */
+        this.DetailList = null;
+
+        /**
+         * Approval id.
+         * @type {number || null}
+         */
+        this.ApplyId = null;
+
+        /**
+         * Prefix for sending numbers.
+         * @type {string || null}
+         */
+        this.Prefix = null;
+
+        /**
+         * Domestic long-distance mobile phone prefix.
+         * @type {string || null}
+         */
+        this.MobileNddPrefix = null;
+
+        /**
+         * Removes the area code for local calls.
+         * @type {boolean || null}
+         */
+        this.LocalNumberTrimAC = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+        if (params.DetailList) {
+            this.DetailList = new Array();
+            for (let z in params.DetailList) {
+                let obj = new OwnNumberApplyDetailItem();
+                obj.deserialize(params.DetailList[z]);
+                this.DetailList.push(obj);
+            }
+        }
+        this.ApplyId = 'ApplyId' in params ? params.ApplyId : null;
+        this.Prefix = 'Prefix' in params ? params.Prefix : null;
+        this.MobileNddPrefix = 'MobileNddPrefix' in params ? params.MobileNddPrefix : null;
+        this.LocalNumberTrimAC = 'LocalNumberTrimAC' in params ? params.LocalNumberTrimAC : null;
+
+    }
+}
+
+/**
  * PSTN Session Information.
  * @class
  */
@@ -6386,6 +6697,64 @@ class AbortPredictiveDialingCampaignResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UploadIvrAudio response structure.
+ * @class
+ */
+class UploadIvrAudioResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of files that failed to be uploaded.
+         * @type {Array.<UploadIvrAudioFailedInfo> || null}
+         */
+        this.FailedFileList = null;
+
+        /**
+         * List of successfully uploaded files.
+         * @type {Array.<AudioFileInfo> || null}
+         */
+        this.SuccessFileList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FailedFileList) {
+            this.FailedFileList = new Array();
+            for (let z in params.FailedFileList) {
+                let obj = new UploadIvrAudioFailedInfo();
+                obj.deserialize(params.FailedFileList[z]);
+                this.FailedFileList.push(obj);
+            }
+        }
+
+        if (params.SuccessFileList) {
+            this.SuccessFileList = new Array();
+            for (let z in params.SuccessFileList) {
+                let obj = new AudioFileInfo();
+                obj.deserialize(params.SuccessFileList[z]);
+                this.SuccessFileList.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -6956,6 +7325,48 @@ class DescribeSessionDetailRequest extends  AbstractModel {
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.StartTimestamp = 'StartTimestamp' in params ? params.StartTimestamp : null;
         this.EndTimestamp = 'EndTimestamp' in params ? params.EndTimestamp : null;
+
+    }
+}
+
+/**
+ * DescribePredictiveDialingSessions response structure.
+ * @class
+ */
+class DescribePredictiveDialingSessionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total data volume.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of session ids for a call. you can access detailed call bills in batches through https://intl.cloud.tencent.com/document/product/679/47714.?from_cn_redirect=1.
+         * @type {Array.<string> || null}
+         */
+        this.SessionList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.SessionList = 'SessionList' in params ? params.SessionList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7697,6 +8108,41 @@ class ForwardingConfig extends  AbstractModel {
             obj.deserialize(params.Target)
             this.Target = obj;
         }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class RetryTagItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TagName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagName = 'TagName' in params ? params.TagName : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -9220,30 +9666,30 @@ class ModifyOwnNumberApplyResponse extends  AbstractModel {
 }
 
 /**
- * UnbindStaffSkillGroupList request structure.
+ * 
  * @class
  */
-class UnbindStaffSkillGroupListRequest extends  AbstractModel {
+class AvailableTimeConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Customer service email.
+         * 
          * @type {string || null}
          */
-        this.StaffEmail = null;
+        this.DayType = null;
 
         /**
-         * Unbound skill group list.
-         * @type {Array.<number> || null}
+         * 
+         * @type {Array.<string> || null}
          */
-        this.SkillGroupList = null;
+        this.DaysOfWeek = null;
+
+        /**
+         * 
+         * @type {Array.<TimeRange> || null}
+         */
+        this.TimeRanges = null;
 
     }
 
@@ -9254,9 +9700,17 @@ class UnbindStaffSkillGroupListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.StaffEmail = 'StaffEmail' in params ? params.StaffEmail : null;
-        this.SkillGroupList = 'SkillGroupList' in params ? params.SkillGroupList : null;
+        this.DayType = 'DayType' in params ? params.DayType : null;
+        this.DaysOfWeek = 'DaysOfWeek' in params ? params.DaysOfWeek : null;
+
+        if (params.TimeRanges) {
+            this.TimeRanges = new Array();
+            for (let z in params.TimeRanges) {
+                let obj = new TimeRange();
+                obj.deserialize(params.TimeRanges[z]);
+                this.TimeRanges.push(obj);
+            }
+        }
 
     }
 }
@@ -10425,6 +10879,48 @@ class PlaySoundCallRequest extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class OauthConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TokenURL = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ClientId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ClientSecret = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TokenURL = 'TokenURL' in params ? params.TokenURL : null;
+        this.ClientId = 'ClientId' in params ? params.ClientId : null;
+        this.ClientSecret = 'ClientSecret' in params ? params.ClientSecret : null;
+
+    }
+}
+
+/**
  * DescribeTelSession response structure.
  * @class
  */
@@ -10530,6 +11026,48 @@ class SetStaffStatusRspItem extends  AbstractModel {
         this.Reason = 'Reason' in params ? params.Reason : null;
         this.PreviousStatus = 'PreviousStatus' in params ? params.PreviousStatus : null;
         this.PreviousReason = 'PreviousReason' in params ? params.PreviousReason : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class HttpParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ValueType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.ValueType = 'ValueType' in params ? params.ValueType : null;
 
     }
 }
@@ -11426,10 +11964,11 @@ module.exports = {
     DescribeIvrAudioListResponse: DescribeIvrAudioListResponse,
     DescribePredictiveDialingCampaignsElement: DescribePredictiveDialingCampaignsElement,
     SetStaffStatusResponse: SetStaffStatusResponse,
-    ServerPushText: ServerPushText,
-    ResetExtensionPasswordRequest: ResetExtensionPasswordRequest,
+    ReturnKey: ReturnKey,
+    BearerAuth: BearerAuth,
     DisableCCCPhoneNumberResponse: DisableCCCPhoneNumberResponse,
     DescribeProtectedTelCdrResponse: DescribeProtectedTelCdrResponse,
+    ResetExtensionPasswordRequest: ResetExtensionPasswordRequest,
     DescribeAutoCalloutTaskRequest: DescribeAutoCalloutTaskRequest,
     CalleeAttribute: CalleeAttribute,
     CreateUserSigResponse: CreateUserSigResponse,
@@ -11457,10 +11996,12 @@ module.exports = {
     DescribePredictiveDialingCampaignResponse: DescribePredictiveDialingCampaignResponse,
     CreateAIAgentCallResponse: CreateAIAgentCallResponse,
     DescribeAILatencyResponse: DescribeAILatencyResponse,
+    TriggerStrategyItem: TriggerStrategyItem,
     DescribeAutoCalloutTasksResponse: DescribeAutoCalloutTasksResponse,
     PackageBuyInfo: PackageBuyInfo,
     AICallExtractConfigElement: AICallExtractConfigElement,
-    AICallExtractResultInfo: AICallExtractResultInfo,
+    UnbindStaffSkillGroupListRequest: UnbindStaffSkillGroupListRequest,
+    BasicAuth: BasicAuth,
     CreateAgentCruiseDialingCampaignRequest: CreateAgentCruiseDialingCampaignRequest,
     DescribeAICallExtractResultRequest: DescribeAICallExtractResultRequest,
     CreateStaffResponse: CreateStaffResponse,
@@ -11471,6 +12012,7 @@ module.exports = {
     DeletePredictiveDialingCampaignRequest: DeletePredictiveDialingCampaignRequest,
     UploadIvrAudioRequest: UploadIvrAudioRequest,
     DescribeStaffInfoListResponse: DescribeStaffInfoListResponse,
+    ServerPushText: ServerPushText,
     AILatencyStatisticsInfo: AILatencyStatisticsInfo,
     UnbindNumberCallOutSkillGroupRequest: UnbindNumberCallOutSkillGroupRequest,
     CreateAutoCalloutTaskRequest: CreateAutoCalloutTaskRequest,
@@ -11479,12 +12021,12 @@ module.exports = {
     CreateExtensionResponse: CreateExtensionResponse,
     CreateUserSigRequest: CreateUserSigRequest,
     CreateCCCSkillGroupRequest: CreateCCCSkillGroupRequest,
-    DescribePredictiveDialingSessionsResponse: DescribePredictiveDialingSessionsResponse,
+    AICallExtractResultInfo: AICallExtractResultInfo,
     DeleteCCCSkillGroupRequest: DeleteCCCSkillGroupRequest,
     PauseAutoCalloutTaskRequest: PauseAutoCalloutTaskRequest,
     BindNumberCallInInterfaceRequest: BindNumberCallInInterfaceRequest,
     DescribeTelSessionRequest: DescribeTelSessionRequest,
-    ModifyOwnNumberApplyRequest: ModifyOwnNumberApplyRequest,
+    HeaderParams: HeaderParams,
     SessionEvent: SessionEvent,
     DescribeSkillGroupInfoListRequest: DescribeSkillGroupInfoListRequest,
     DescribeAILatencyRequest: DescribeAILatencyRequest,
@@ -11493,7 +12035,7 @@ module.exports = {
     SeatUserInfo: SeatUserInfo,
     UpdateCCCSkillGroupResponse: UpdateCCCSkillGroupResponse,
     AsrData: AsrData,
-    UploadIvrAudioResponse: UploadIvrAudioResponse,
+    HttpCallbackConfig: HttpCallbackConfig,
     ErrStaffItem: ErrStaffItem,
     PausePredictiveDialingCampaignResponse: PausePredictiveDialingCampaignResponse,
     ResumePredictiveDialingCampaignRequest: ResumePredictiveDialingCampaignRequest,
@@ -11517,8 +12059,10 @@ module.exports = {
     CreatePredictiveDialingCampaignResponse: CreatePredictiveDialingCampaignResponse,
     DescribeAIAnalysisResultResponse: DescribeAIAnalysisResultResponse,
     UpdatePredictiveDialingCampaignResponse: UpdatePredictiveDialingCampaignResponse,
+    ModifyOwnNumberApplyRequest: ModifyOwnNumberApplyRequest,
     PSTNSessionInfo: PSTNSessionInfo,
     AbortPredictiveDialingCampaignResponse: AbortPredictiveDialingCampaignResponse,
+    UploadIvrAudioResponse: UploadIvrAudioResponse,
     DescribeNumbersRequest: DescribeNumbersRequest,
     ExtensionInfo: ExtensionInfo,
     BindNumberCallOutSkillGroupRequest: BindNumberCallOutSkillGroupRequest,
@@ -11532,6 +12076,7 @@ module.exports = {
     DeleteCCCSkillGroupResponse: DeleteCCCSkillGroupResponse,
     UploadIvrAudioFailedInfo: UploadIvrAudioFailedInfo,
     DescribeSessionDetailRequest: DescribeSessionDetailRequest,
+    DescribePredictiveDialingSessionsResponse: DescribePredictiveDialingSessionsResponse,
     ModifyExtensionResponse: ModifyExtensionResponse,
     NumberInfo: NumberInfo,
     DeleteStaffRequest: DeleteStaffRequest,
@@ -11548,6 +12093,7 @@ module.exports = {
     ResetExtensionPasswordResponse: ResetExtensionPasswordResponse,
     ForwardingTarget: ForwardingTarget,
     ForwardingConfig: ForwardingConfig,
+    RetryTagItem: RetryTagItem,
     AILatencyDetail: AILatencyDetail,
     AITransferItem: AITransferItem,
     StaffInfo: StaffInfo,
@@ -11574,7 +12120,7 @@ module.exports = {
     BindStaffSkillGroupListRequest: BindStaffSkillGroupListRequest,
     CreateAgentCruiseDialingCampaignResponse: CreateAgentCruiseDialingCampaignResponse,
     ModifyOwnNumberApplyResponse: ModifyOwnNumberApplyResponse,
-    UnbindStaffSkillGroupListRequest: UnbindStaffSkillGroupListRequest,
+    AvailableTimeConfig: AvailableTimeConfig,
     SetStaffStatusItem: SetStaffStatusItem,
     DescribeCallInMetricsResponse: DescribeCallInMetricsResponse,
     DescribeAgentCruiseDialingCampaignResponse: DescribeAgentCruiseDialingCampaignResponse,
@@ -11598,8 +12144,10 @@ module.exports = {
     AIAnalysisResult: AIAnalysisResult,
     DescribeAutoCalloutTasksRequest: DescribeAutoCalloutTasksRequest,
     PlaySoundCallRequest: PlaySoundCallRequest,
+    OauthConfig: OauthConfig,
     DescribeTelSessionResponse: DescribeTelSessionResponse,
     SetStaffStatusRspItem: SetStaffStatusRspItem,
+    HttpParams: HttpParams,
     CreateAdminURLRequest: CreateAdminURLRequest,
     DescribeAutoCalloutTaskResponse: DescribeAutoCalloutTaskResponse,
     DescribeStaffStatusMetricsResponse: DescribeStaffStatusMetricsResponse,

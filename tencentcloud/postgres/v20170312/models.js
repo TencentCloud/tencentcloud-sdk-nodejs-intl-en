@@ -677,12 +677,6 @@ class CreateInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>The primary availability zone of the instance, for example: ap-guangzhou-3. If needed to support multiple AZs, add primary and secondary AZ information in the DBNodeSet.N field.<br>AZ information can be obtained by calling the <a href="https://www.tencentcloud.com/document/api/409/16769?from_cn_redirect=1">DescribeZones</a> api and checking the Zone field in the returned value.</p>
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
          * <p>Purchasable specification code. Obtain this parameter by calling the `SpecCode` field in the return value of <a href="https://www.tencentcloud.com/document/api/409/89019?from_cn_redirect=1">DescribeClasses</a>.</p>
          * @type {string || null}
          */
@@ -725,6 +719,12 @@ class CreateInstancesRequest extends  AbstractModel {
         this.AdminPassword = null;
 
         /**
+         * <p>The primary availability zone of the instance, for example: ap-guangzhou-3. If needed to support multiple AZs, add primary and secondary AZ information in the DBNodeSet.N field.<br>AZ information can be obtained by calling the <a href="https://www.tencentcloud.com/document/api/409/16769?from_cn_redirect=1">DescribeZones</a> api and checking the Zone field in the returned value.</p>
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
          * <p>PostgreSQL major version number (this parameter is currently required). Version information can be obtained from <a href="https://www.tencentcloud.com/document/api/409/89018?from_cn_redirect=1">DescribeDBVersions</a>. Currently supports major versions 10, 11, 12, 13, 14, and 15. For details, see <a href="https://www.tencentcloud.com/document/product/409/67018?from_cn_redirect=1">kernel version overview</a>.<br>When this parameter is entered, an instance running the latest kernel version of the latest minor version will be created based on this major version number.</p>
          * @type {string || null}
          */
@@ -749,7 +749,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.InstanceChargeType = null;
 
         /**
-         * <p>VPC ID, such as vpc-xxxxxxxx (this parameter is currently required). A valid VPC ID can be obtained by logging in to the console to query or by calling the API <a href="https://www.tencentcloud.com/document/api/215/1372?from_cn_redirect=1">DescribeVpcEx</a> and acquiring the unVpcId field in the API return.</p>
+         * <p>VPC ID, such as vpc-xxxxxxxx (this parameter is currently required). A valid VPC ID can be obtained by logging in to the console to query or by calling the API DescribeVpcEx and acquiring the unVpcId field in the API return.</p>
          * @type {string || null}
          */
         this.VpcId = null;
@@ -883,7 +883,6 @@ class CreateInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
         this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
         this.Storage = 'Storage' in params ? params.Storage : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
@@ -891,6 +890,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.Charset = 'Charset' in params ? params.Charset : null;
         this.AdminName = 'AdminName' in params ? params.AdminName : null;
         this.AdminPassword = 'AdminPassword' in params ? params.AdminPassword : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
         this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
         this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
         this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
@@ -6313,8 +6313,7 @@ class DBBackup extends  AbstractModel {
         this.ExternalAddr = null;
 
         /**
-         * Backup set ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Backup set ID.
          * @type {string || null}
          */
         this.SetId = null;
@@ -6463,7 +6462,7 @@ Default value: 0
         this.AutoRenewFlag = null;
 
         /**
-         * VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
+         * VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the DescribeVpcEx API.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -10692,7 +10691,7 @@ class CreateReadOnlyDBInstanceRequest extends  AbstractModel {
         this.Period = null;
 
         /**
-         * <p>VPC ID, such as vpc-xxxxxxxx (this parameter is required). A valid VPC ID can be queried by logging in to the console. You can also call the <a href="https://www.tencentcloud.com/document/api/215/1372?from_cn_redirect=1">DescribeVpcEx</a> API to obtain it from the unVpcId field in the return value.</p>
+         * <p>VPC ID, such as vpc-xxxxxxxx (this parameter is required). A valid VPC ID can be queried by logging in to the console. You can also call the DescribeVpcEx API to obtain it from the unVpcId field in the return value.</p>
          * @type {string || null}
          */
         this.VpcId = null;
@@ -12436,7 +12435,7 @@ class ModifyDatabaseOwnerRequest extends  AbstractModel {
         this.DBInstanceId = null;
 
         /**
-         * Database name. obtain through the api [DescribeDatabases](https://www.tencentcloud.com/document/api/409/43353?from_cn_redirect=1).
+         * Database name. obtain through the api [DescribeDatabases](https://www.tencentcloud.com/document/product/409/37118).
          * @type {string || null}
          */
         this.DatabaseName = null;

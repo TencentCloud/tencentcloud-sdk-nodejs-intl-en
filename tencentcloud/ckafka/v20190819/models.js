@@ -799,19 +799,19 @@ class ModifyAclRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id.
+         * <p>ckafka cluster instance Id</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40835?from_cn_redirect=1">DescribeInstances</a></p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * ACL rule name.
+         * <p>ACL rule name</p>
          * @type {string || null}
          */
         this.RuleName = null;
 
         /**
-         * Specifies whether to apply to newly-added topics when importing predefined rule modifications.
+         * <p>Input when modifying the preset rule, whether to apply to newly-added topics</p><p>Enumeration value:</p><ul><li>0: Not allowed to apply to newly-added topics</li><li>1: Allowed to apply to newly-added topics</li></ul><p>Default value: 0</p>
          * @type {number || null}
          */
         this.IsApplied = null;
@@ -1006,7 +1006,7 @@ class FetchMessageListByOffsetResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result. Note: The returned list does not display the message content (key and value). To query the message content, call the `FetchMessageByOffset` API.
+         * <p>Return result. Note that the list does not return specific message content (key, value). If necessary, query specific message content using the FetchMessageByOffset API.</p>
          * @type {Array.<ConsumerRecord> || null}
          */
         this.Result = null;
@@ -1228,7 +1228,7 @@ class DescribeInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result
+         * <p>Returned result</p>
          * @type {InstanceResponse || null}
          */
         this.Result = null;
@@ -1268,7 +1268,7 @@ class FetchMessageByOffsetResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned results
+         * <p>Returned result</p>
          * @type {ConsumerRecord || null}
          */
         this.Result = null;
@@ -1343,7 +1343,7 @@ class BatchModifyTopicAttributesResponse extends  AbstractModel {
 }
 
 /**
- * Data structure returned by monthly subscribed instance APIs
+ * Data structure returned by yearly/monthly subscribed instance APIs
  * @class
  */
 class CreateInstancePreResp extends  AbstractModel {
@@ -1503,31 +1503,31 @@ class FetchMessageListByOffsetRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id.
+         * <p>ckafka cluster instance Id</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40835?from_cn_redirect=1">DescribeInstances</a></p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Topic name
+         * <p>Topic name</p>
          * @type {string || null}
          */
         this.Topic = null;
 
         /**
-         * Partition ID
+         * <p>Partition id</p>
          * @type {number || null}
          */
         this.Partition = null;
 
         /**
-         * Offset information
+         * <p>Location info</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * The maximum number of messages that can be queried. Default value: 20. Maximum value: 20.
+         * <p>Maximum number of query results. Default value: 20. Maximum value: 20.</p>
          * @type {number || null}
          */
         this.SinglePartitionRecordNumber = null;
@@ -1655,30 +1655,25 @@ class ModifyInstancePreRequest extends  AbstractModel {
         super();
 
         /**
-         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
+         * <p>ckafka cluster instance Id, which can be obtained through the <a href="https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1">DescribeInstances</a> API</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the disk capacity in GB. value range: 100 to 500000 with a step length of 100.
-Specification limits can be viewed through the following link: https://www.tencentcloud.com/document/product/597/122562.?from_cn_redirect=1
-
+         * <p>Disk size in GB. Maximum value is 500000 with a step length of 100. View specification limits through the following url: https://www.tencentcloud.com/document/product/597/122562?from_cn_redirect=1</p>
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * Peak bandwidth in MB/s.
-Specifies the specification limits and corresponding step length through the following link: https://www.tencentcloud.com/document/product/597/11745.?from_cn_redirect=1
-
+         * <p>Peak bandwidth in MB/s can be accessed through the following link to view specifications limit and corresponding step length: https://www.tencentcloud.com/document/product/597/11745?from_cn_redirect=1</p>
          * @type {number || null}
          */
         this.BandWidth = null;
 
         /**
-         * Partition upper bound. maximum value of 40000. step length of 100.
-Specifies the specifications and limits that can be viewed through the following link: https://www.tencentcloud.com/document/product/597/122563.?from_cn_redirect=1
+         * <p>Partition upper limit maximum value: 40000, step length: 100. View specification limits through the following URL: https://www.tencentcloud.com/document/product/597/122563?from_cn_redirect=1</p>
          * @type {number || null}
          */
         this.Partition = null;
@@ -1836,7 +1831,7 @@ class DescribeInstancesDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result object of instance details
+         * <p>Returned instance detail result object</p>
          * @type {InstanceDetailResponse || null}
          */
         this.Result = null;
@@ -1876,28 +1871,34 @@ class CreateInstancePreData extends  AbstractModel {
         super();
 
         /**
-         * CreateInstancePre returns fixed as 0. it cannot be used as a query condition for CheckTaskStatus. this is merely to ensure alignment with the backend data structure.
+         * <p>CreateInstancePre returns fixed as 0 and cannot be used as a query condition for CheckTaskStatus. It is merely to ensure alignment with the backend data structure.</p>
          * @type {number || null}
          */
         this.FlowId = null;
 
         /**
-         * Order ID list
+         * <p>Order number list</p>
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
 
         /**
-         * The ckafka cluster instance Id. by default, returns the Id of the first purchased instance when purchasing multiple instances.
+         * <p>Cluster instance Id of ckafka. When you purchase multiple instances, the first instance Id is returned by default.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Order and purchase mapping list corresponding to the instance.
+         * <p>Order and purchase mapping list corresponding to the instance</p>
          * @type {Array.<DealInstanceDTO> || null}
          */
         this.DealNameInstanceIdMapping = null;
+
+        /**
+         * <p>Event ID returned by CAM authentication</p>
+         * @type {string || null}
+         */
+        this.EventId = null;
 
     }
 
@@ -1920,6 +1921,7 @@ class CreateInstancePreData extends  AbstractModel {
                 this.DealNameInstanceIdMapping.push(obj);
             }
         }
+        this.EventId = 'EventId' in params ? params.EventId : null;
 
     }
 }
@@ -2276,7 +2278,7 @@ class InquireCkafkaPriceRequest extends  AbstractModel {
         this.InstanceType = null;
 
         /**
-         * Billing mode for instance purchase/renewal. If this parameter is left empty when you purchase an instance, the fees for one month under the monthly subscription mode will be displayed by default.
+         * Billing mode for instance purchase/renewal. If this parameter is left empty when you purchase an instance, the fees for one month under the yearly/monthly subscription mode will be displayed by default.
          * @type {InstanceChargeParam || null}
          */
         this.InstanceChargeParam = null;
@@ -2401,61 +2403,61 @@ class ZoneInfo extends  AbstractModel {
         super();
 
         /**
-         * Availability zone
+         * <p>Availability zone</p>
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * Whether it is an internal application.
+         * <p>Whether the APP is internal</p><p>Enumeration value:</p><ul><li>0: Public</li><li>1: Internal</li></ul><p>Default value: 0</p>
          * @type {number || null}
          */
         this.IsInternalApp = null;
 
         /**
-         * Application identifier
+         * <p>AppID</p>
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * Indicates whether the AZ is sold out. true indicates sold out. false indicates not sold out.
+         * <p>Flag indicating whether the availability zone is sold out. true indicates sold out, false indicates not sold out.</p>
          * @type {boolean || null}
          */
         this.Flag = null;
 
         /**
-         * Availability zone name.
+         * <p>Availability zone name</p>
          * @type {string || null}
          */
         this.ZoneName = null;
 
         /**
-         * Availability zone status. enumerates example: 3: enable, 4: disable. availability zone status is subject to SoldOut.
+         * <p>Availability zone status</p><p>Enumeration value:</p><ul><li>3: Enable</li><li>4: Disable</li></ul><p>AZ status is subject to SoldOut</p>
          * @type {number || null}
          */
         this.ZoneStatus = null;
 
         /**
-         * Extra flag
+         * <p>Additional flag</p>
          * @type {string || null}
          */
         this.Exflag = null;
 
         /**
-         * Specifies whether the item is sold-out. valid values: true (sold-out), false (not sold out).
+         * <p>true indicates sold out, false indicates not sold out.</p>
          * @type {string || null}
          */
         this.SoldOut = null;
 
         /**
-         * Specifies the sell-out information of the standard version.
+         * <p>Standard version sell-out information</p>
          * @type {Array.<SaleInfo> || null}
          */
         this.SalesInfo = null;
 
         /**
-         * Additional flag.
+         * <p>Additional flag</p>
          * @type {string || null}
          */
         this.ExtraFlag = null;
@@ -2500,7 +2502,7 @@ class DescribeTopicSubscribeGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned results
+         * <p>Returned result</p>
          * @type {TopicSubscribeGroup || null}
          */
         this.Result = null;
@@ -2660,7 +2662,7 @@ class DescribeTypeInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result.
+         * <p>Returned result</p>
          * @type {InstanceResponse || null}
          */
         this.Result = null;
@@ -2735,7 +2737,7 @@ class ModifyAclRuleResponse extends  AbstractModel {
         super();
 
         /**
-         * Unique key of a rule
+         * <p>Unique representation Key of the rule</p>
          * @type {number || null}
          */
         this.Result = null;
@@ -2770,7 +2772,7 @@ class BatchModifyGroupOffsetsResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result.
+         * <p>Returned result</p>
          * @type {JgwOperateResponse || null}
          */
         this.Result = null;
@@ -3041,7 +3043,7 @@ class InstanceChargeParam extends  AbstractModel {
         super();
 
         /**
-         * Instance billing mode (`PREPAID`: Monthly subscription; `POSTPAID_BY_HOUR`: Pay-as-you-go)
+         * Instance billing mode (`PREPAID`: Yearly/monthly subscription; `POSTPAID_BY_HOUR`: Pay-as-you-go)
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -3499,7 +3501,7 @@ class DescribeGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result.
+         * <p>Returned result</p>
          * @type {GroupResponse || null}
          */
         this.Result = null;
@@ -3656,52 +3658,58 @@ class DescribeModifyTypeRequest extends  AbstractModel {
         super();
 
         /**
-         * CKafka cluster instance ID.
+         * <p>ckafka cluster instance Id</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the bandwidth after upgrade. measurement unit: mb.
+         * <p>Bandwidth after upgrade, unit mb</p>
          * @type {number || null}
          */
         this.BandWidth = null;
 
         /**
-         * Specifies the disk after upgrade, in gb.
+         * <p>Disk capacity after upgrade, in GB</p>
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * Disk type, such as CLOUD_PREMIUM.
+         * <p>Disk type, such as CLOUD_PREMIUM</p>
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
-         * Number of partitions.
+         * <p>Number of partitions</p>
          * @type {number || null}
          */
         this.Partition = null;
 
         /**
-         * Number of Topics
+         * <p>topic count</p>
          * @type {number || null}
          */
         this.Topic = null;
 
         /**
-         * Instance type, such as sp_ckafka_profession.
+         * <p>Instance type such as sp_ckafka_profession</p>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Configuration change portal.
+         * <p>Resize portal</p>
          * @type {string || null}
          */
         this.ModifyEntry = null;
+
+        /**
+         * <p>Whether to modify AZ  false: Not modify AZ  true: Modify AZ  Default false</p>
+         * @type {boolean || null}
+         */
+        this.ModifyZone = null;
 
     }
 
@@ -3720,6 +3728,7 @@ class DescribeModifyTypeRequest extends  AbstractModel {
         this.Topic = 'Topic' in params ? params.Topic : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.ModifyEntry = 'ModifyEntry' in params ? params.ModifyEntry : null;
+        this.ModifyZone = 'ModifyZone' in params ? params.ModifyZone : null;
 
     }
 }
@@ -3813,19 +3822,19 @@ class DescribeRouteRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id.
+         * <p>ckafka cluster instance Id</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40835?from_cn_redirect=1">DescribeInstances</a></p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Route ID
+         * <p>Route Id</p>
          * @type {number || null}
          */
         this.RouteId = null;
 
         /**
-         * Specifies whether to display the primary route. when true, the routing list will additionally display the primary route information during instance creation (not affected by InternalFlag or UsedFor parameter filtering).	
+         * <p>Whether to display the primary route. If true, the primary route information during instance creation will additionally be displayed on the basis of the original routing list (and will not be affected by parameter filtering such as InternalFlag or UsedFor).</p>
          * @type {boolean || null}
          */
         this.MainRouteFlag = null;
@@ -4375,7 +4384,7 @@ class DescribeTopicSyncReplicaResponse extends  AbstractModel {
         super();
 
         /**
-         * Returns topic replica details
+         * <p>Return topic replica detail</p>
          * @type {TopicInSyncReplicaResult || null}
          */
         this.Result = null;
@@ -4533,7 +4542,7 @@ class DescribeTopicResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result.
+         * <p>Returned result</p>
          * @type {TopicResult || null}
          */
         this.Result = null;
@@ -4925,109 +4934,109 @@ class CreateTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance Id. you can obtain it by calling the DescribeInstances api.
+         * <p>Instance Id</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40835?from_cn_redirect=1">DescribeInstances</a></p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Can only contain letters, digits, underscores, "-", or ".".
+         * <p>Can only contain letters, digits, underscore, "-", ".". </p>
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * Number of partitions, which should be greater than 0
+         * <p>Number of partitions, more than 0</p>
          * @type {number || null}
          */
         this.PartitionNum = null;
 
         /**
-         * Number of replicas, which cannot be higher than the number of brokers. Maximum value: 3
+         * <p>Replica count cannot be over the number of brokers, with a maximum of 3</p>
          * @type {number || null}
          */
         this.ReplicaNum = null;
 
         /**
-         * IP allowlist switch. 1: enabled, 0: disabled. Default value: 0
+         * <p>ip allowlist switch, 1: on; 0: off, default off</p>
          * @type {number || null}
          */
         this.EnableWhiteList = null;
 
         /**
-         * IP allowlist list for quota limit, which is required if `enableWhileList` is 1
+         * <p>Ip whitelist, Quota limit, essential when enableWhileList=1</p>
          * @type {Array.<string> || null}
          */
         this.IpWhiteList = null;
 
         /**
-         * Log cleanup policy, which is `delete` by default. `delete`: logs will be deleted by save time; `compact`: logs will be compressed by key; `compact, delete`: logs will be compressed by key and deleted by save time.
+         * <p>Log cleanup policy. Log cleanup mode, defaults to "delete". "delete": logs are deleted by retention time. "compact": logs are compressed by key. "compact, delete": logs are compressed by key and deleted by retention time.</p>
          * @type {string || null}
          */
         this.CleanUpPolicy = null;
 
         /**
-         * Topic remark is a string of no more than 64 characters. the first character can be a letter or digit, and the remaining part can contain letters, digits, and hyphens (-).
+         * <p>Topic remark</p><p>Input parameter limit: No more than 64 characters</p>
          * @type {string || null}
          */
         this.Note = null;
 
         /**
-         * Minimum number of synchronous replicas, defaults to 1.
+         * <p>Minimum sync replica count</p><p>Default value: 1</p><p>Minimum value: 1</p>
          * @type {number || null}
          */
         this.MinInsyncReplicas = null;
 
         /**
-         * Whether to allow unsynchronized replicas to be elected as leader. valid values: 0 (not allowed), 1 (allowed). default: not allowed.
+         * <p>Whether to allow unsynchronized replicas to be elected as leader, 0: not allowed, 1: allowed, default not allowed</p>
          * @type {number || null}
          */
         this.UncleanLeaderElectionEnable = null;
 
         /**
-         * Optional parameter. specifies the message retention period in milliseconds. current min value is 60000. default value is 7200000 ms (2 hours). maximum value is 7776000000 ms (90 days).
+         * <p>Optional parameter, message retention period</p><p>Value ranges from 60000 to 7776000000</p><p>Unit: ms</p><p>Default value: 7200000</p>
          * @type {number || null}
          */
         this.RetentionMs = null;
 
         /**
-         * Duration of Segment shard scrolling in milliseconds. minimum value is 86400000 ms (1 day).
+         * <p>Duration of Segment shard scrolling</p><p>Unit: ms</p><p>Default value: 86400000</p><p>Minimum value: 86400000ms (1 day)</p>
          * @type {number || null}
          */
         this.SegmentMs = null;
 
         /**
-         * Maximum topic messages in Bytes. value range: 1024 (1 KB) to 12582912 (12 MB).
+         * <p>Maximum topic messages in Bytes, minimum value 1024 Bytes (1 KB), maximum value 12582912 Bytes (12 MB)</p>
          * @type {number || null}
          */
         this.MaxMessageBytes = null;
 
         /**
-         * Preset ACL rule. `1`: enable, `0`: disable. Default value: `0`.
+         * <p>Preset ACL rule, 1: on 0: off, default is off</p>
          * @type {number || null}
          */
         this.EnableAclRule = null;
 
         /**
-         * Name of the preset ACL rule.
+         * <p>Preset ACL rule name</p>
          * @type {string || null}
          */
         this.AclRuleName = null;
 
         /**
-         * Optional. retain file size. defaults to -1, unit Byte. current min value is 1073741824.
+         * <p>Option, retain file size. Defaults to -1, unit Byte, current min value is 1073741824.</p><p>Value ranges from [1073741824, 1099511627776]</p><p>Unit: Byte</p><p>Special value: -1 indicates unlimited</p>
          * @type {number || null}
          */
         this.RetentionBytes = null;
 
         /**
-         * Tag list.
+         * <p>Tag list</p>
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
 
         /**
-         * Time type for message saving. valid values: CreateTime/LogAppendTime.
+         * <p>Time type for message saving: CreateTime/LogAppendTime</p>
          * @type {string || null}
          */
         this.LogMsgTimestampType = null;
@@ -5208,25 +5217,25 @@ class DescribeTopicSubscribeGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id.
+         * <p>ckafka cluster instance Id</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40835?from_cn_redirect=1">DescribeInstances</a></p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Topic name
+         * <p>Topic name</p>
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * Starting position of paging
+         * <p>Starting position for pagination</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results per page
+         * <p>Count per page</p><p>Default value: 20</p>
          * @type {number || null}
          */
         this.Limit = null;
@@ -5257,7 +5266,7 @@ class DeleteInstancePreResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result
+         * <p>Returned result</p>
          * @type {CreateInstancePreResp || null}
          */
         this.Result = null;
@@ -5374,25 +5383,25 @@ class FetchMessageByOffsetRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
+         * <p>ckafka cluster instance Id, which can be obtained through the <a href="https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1">DescribeInstances</a> API</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1) api.
+         * <p>Topic name, which can be obtained through the <a href="https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1">DescribeTopic</a> API</p>
          * @type {string || null}
          */
         this.Topic = null;
 
         /**
-         * Partition ID
+         * <p>Partition id</p>
          * @type {number || null}
          */
         this.Partition = null;
 
         /**
-         * Specifies the position information.
+         * <p>Location info</p>
          * @type {number || null}
          */
         this.Offset = null;
@@ -5423,7 +5432,7 @@ class InquiryPublicNetworkParam extends  AbstractModel {
         super();
 
         /**
-         * Public network bandwidth billing mode (`BANDWIDTH_PREPAID`: Monthly subscription; `BANDWIDTH_POSTPAID_BY_HOUR`: Bill-by-hour)
+         * Public network bandwidth billing mode (`BANDWIDTH_PREPAID`: Yearly/monthly subscription; `BANDWIDTH_POSTPAID_BY_HOUR`: Bill-by-hour)
          * @type {string || null}
          */
         this.PublicNetworkChargeType = null;
@@ -5535,25 +5544,25 @@ class DescribeRegionRequest extends  AbstractModel {
         super();
 
         /**
-         * The offset value
+         * <p>Offset</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * The maximum number of results returned
+         * <p>Return the maximum number of results</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Business field, which can be ignored.
+         * <p>Business field, can be ignored</p><p>Enumeration value:</p><ul><li>ckafka: CKafka business</li><li>cmq: CMQ business</li></ul><p>Default value: ckafka</p>
          * @type {string || null}
          */
         this.Business = null;
 
         /**
-         * CDC business field, which can be ignored.
+         * <p>cdc dedicated cluster business field, can be ignored</p>
          * @type {string || null}
          */
         this.CdcId = null;
@@ -5787,7 +5796,7 @@ class ModifyTopicAttributesResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result.
+         * <p>Returned result</p>
          * @type {JgwOperateResponse || null}
          */
         this.Result = null;
@@ -5890,7 +5899,7 @@ class DescribeUserResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result.
+         * <p>Returned result</p>
          * @type {UserResponse || null}
          */
         this.Result = null;
@@ -5930,31 +5939,31 @@ class DescribeTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id.
+         * <p>ckafka cluster instance Id</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40835?from_cn_redirect=1">DescribeInstances</a></p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Filter by `topicName`. Fuzzy search is supported
+         * <p>(Filtering Conditions) Filter by topicName. Fuzzy query is supported.</p>
          * @type {string || null}
          */
         this.SearchWord = null;
 
         /**
-         * Offset. If this parameter is left empty, 0 will be used by default
+         * <p>Offset, which is 0 by default</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * The number of results to be returned, which defaults to 20 if left empty. The maximum value is 50.
+         * <p>Number of returned results. Default value: 20. Maximum value: 50.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Name of the preset ACL rule.
+         * <p>Acl preset policy name</p>
          * @type {string || null}
          */
         this.AclRuleName = null;
@@ -5978,7 +5987,7 @@ class DescribeTopicRequest extends  AbstractModel {
 }
 
 /**
- * Mapping between orders and CKafka instances for monthly subscribed and pay-as-you-go instance APIs.
+ * Mapping between orders and CKafka instances for yearly/monthly subscribed and pay-as-you-go instance APIs.
  * @class
  */
 class DealInstanceDTO extends  AbstractModel {
@@ -6253,7 +6262,7 @@ class DescribeModifyTypeResponse extends  AbstractModel {
         super();
 
         /**
-         * Specifies the structure of the returned renewal type.
+         * <p>Returned scaling type structure</p>
          * @type {DescModifyType || null}
          */
         this.Result = null;
@@ -6722,7 +6731,7 @@ class DeleteInstancePreRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
+         * <p>ckafka cluster instance Id, which can be obtained through the <a href="https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1">DescribeInstances</a> API</p>
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -6920,70 +6929,88 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
+         * <p>ckafka cluster instance Id, which can be obtained through the <a href="https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1">DescribeInstances</a> API</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Maximum retention time of instance logs, in minutes, with a value range of 1min to 90 days.
+         * <p>Maximum retention time of instance log, in minutes, with a maximum of 90 days and a minimum of 1 min</p>
          * @type {number || null}
          */
         this.MsgRetentionTime = null;
 
         /**
-         * Specifies the Name of the ckafka cluster instance.
+         * <p>ckafka cluster instance Name</p>
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Instance configuration
+         * <p>Instance configuration</p>
          * @type {ModifyInstanceAttributesConfig || null}
          */
         this.Config = null;
 
         /**
-         * Dynamic message retention policy configuration
+         * <p>Dynamic message retention policy configuration</p>
          * @type {DynamicRetentionTime || null}
          */
         this.DynamicRetentionConfig = null;
 
         /**
-         * Specifies the execution time of a scheduled task for edition upgrade or configuration upgrade in Unix timestamp, accurate to the second.
+         * <p>Used to modify the scheduled task execution time for edition upgrade or upgrade version, Unix timestamp, accurate to the second</p>
          * @type {number || null}
          */
         this.RebalanceTime = null;
 
         /**
-         * Public network bandwidth. minimum 3 Mbps. maximum 999 Mbps. only the pro edition supports filling in.
+         * <p>Public network bandwidth: minimum 3Mbps, maximum 999Mbps. Only the Pro Edition supports filling in.</p>
          * @type {number || null}
          */
         this.PublicNetwork = null;
 
         /**
-         * Dynamic disk expansion policy configuration.
+         * <p>Configure dynamic disk expansion policy</p>
          * @type {DynamicDiskConfig || null}
          */
         this.DynamicDiskConfig = null;
 
         /**
-         * Single message size at the instance level (unit: byte). value range: 1024 (excluding) to 12582912 (excluding).
+         * <p>Single message size at the instance level (unit: byte) Maximum 12582912 (excluding) Minimum 1024 (excluding)</p>
          * @type {number || null}
          */
         this.MaxMessageByte = null;
 
         /**
-         * Whether to allow unsynchronized replicas to be elected as leader. valid values: 1 (enable), 0 (disable).
+         * <p>Whether to allow unsynchronized replicas to be elected as leader: 1 Enable 0 Disable</p>
          * @type {number || null}
          */
         this.UncleanLeaderElectionEnable = null;
 
         /**
-         * Instance deletion protection switch. 1: enabled; 0: disabled.
+         * <p>Instance deletion protection switch: 1: enabled 0: disabled</p>
          * @type {number || null}
          */
         this.DeleteProtectionEnable = null;
+
+        /**
+         * <p>Message retention size at the instance level</p>Measurement unit: byte<br>Default value: -1<br><p>Message retention size at the instance level</p>
+         * @type {number || null}
+         */
+        this.RetentionBytes = null;
+
+        /**
+         * <p>Ban Status for high-risk admin interface; true to ban high-risk adminApi; no support for turning on after closing, only supported in Pro Edition; default false, no action taken for high-risk admin interface</p>
+         * @type {boolean || null}
+         */
+        this.AdminSecurity = null;
+
+        /**
+         * <p>The maximum idle time of a transaction ID. Uncommitted transactions that time out will be marked with expiration.</p>Value ranges from 3600000 to 604800000.<br>Unit: ms
+         * @type {number || null}
+         */
+        this.TransactionalIdExpirationMs = null;
 
     }
 
@@ -7020,6 +7047,9 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
         this.MaxMessageByte = 'MaxMessageByte' in params ? params.MaxMessageByte : null;
         this.UncleanLeaderElectionEnable = 'UncleanLeaderElectionEnable' in params ? params.UncleanLeaderElectionEnable : null;
         this.DeleteProtectionEnable = 'DeleteProtectionEnable' in params ? params.DeleteProtectionEnable : null;
+        this.RetentionBytes = 'RetentionBytes' in params ? params.RetentionBytes : null;
+        this.AdminSecurity = 'AdminSecurity' in params ? params.AdminSecurity : null;
+        this.TransactionalIdExpirationMs = 'TransactionalIdExpirationMs' in params ? params.TransactionalIdExpirationMs : null;
 
     }
 }
@@ -7033,7 +7063,7 @@ class DescribeRegionResponse extends  AbstractModel {
         super();
 
         /**
-         * Returns the region enumeration result list.
+         * <p>Return the region enumeration result list</p>
          * @type {Array.<Region> || null}
          */
         this.Result = null;
@@ -7076,7 +7106,7 @@ class CreateTopicResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned creation result
+         * <p>Return creation result</p>
          * @type {CreateTopicResp || null}
          */
         this.Result = null;
@@ -7194,7 +7224,7 @@ class ModifyInstanceAttributesResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result
+         * <p>Returned result</p>
          * @type {JgwOperateResponse || null}
          */
         this.Result = null;
@@ -7433,28 +7463,34 @@ class CreateInstancePostData extends  AbstractModel {
         super();
 
         /**
-         * CreateInstancePre returns fixed as 0. it cannot be used as a query condition for CheckTaskStatus. this is merely to ensure alignment with the backend data structure.
+         * <p>CreateInstancePre returns fixed as 0 and cannot be used as a query condition for CheckTaskStatus. It is merely to ensure alignment with the backend data structure.</p>
          * @type {number || null}
          */
         this.FlowId = null;
 
         /**
-         * Order ID list
+         * <p>Order number list</p>
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
 
         /**
-         * The ckafka cluster instance Id. by default, returns the Id of the first purchased instance when purchasing multiple instances.
+         * <p>Cluster instance Id of ckafka. When you purchase multiple instances, the first instance Id is returned by default.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Order and purchase mapping list corresponding to the instance.
+         * <p>Order and purchase mapping list corresponding to the instance</p>
          * @type {Array.<DealInstanceDTO> || null}
          */
         this.DealNameInstanceIdMapping = null;
+
+        /**
+         * <p>Event ID returned by CAM authentication</p>
+         * @type {string || null}
+         */
+        this.EventId = null;
 
     }
 
@@ -7477,6 +7513,7 @@ class CreateInstancePostData extends  AbstractModel {
                 this.DealNameInstanceIdMapping.push(obj);
             }
         }
+        this.EventId = 'EventId' in params ? params.EventId : null;
 
     }
 }
@@ -7490,37 +7527,37 @@ class DescribeGroupOffsetsRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id.
+         * <p>ckafka cluster instance Id</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40835?from_cn_redirect=1">DescribeInstances</a></p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Kafka consumer group
+         * <p>Kafka consumption group</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40840?from_cn_redirect=1">DescribeGroup</a></p>
          * @type {string || null}
          */
         this.Group = null;
 
         /**
-         * Array of the names of topics subscribed to by a group. If there is no such array, this parameter means the information of all topics in the specified group
+         * <p>Name array of the subscribed topics for the group. If there is no array, it means all topic info under the designated group.</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40847?from_cn_redirect=1">DescribeTopic</a></p>
          * @type {Array.<string> || null}
          */
         this.Topics = null;
 
         /**
-         * Fuzzy match by `topicName`
+         * <p>Fuzzy matching topicName</p>
          * @type {string || null}
          */
         this.SearchWord = null;
 
         /**
-         * Offset position of this query. Default value: 0
+         * <p>Offset position of this query, defaults to 0</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Maximum number of results to be returned in this request. Default value: 50. Maximum value: 50
+         * <p>Maximum number of returned results this time. Default value: 50. Maximum value: 50.</p>
          * @type {number || null}
          */
         this.Limit = null;
@@ -7564,27 +7601,6 @@ class DescModifyType extends  AbstractModel {
          */
         this.MigrateFlag = null;
 
-        /**
-         * Estimated duration of migration in stable mode (seconds).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MigrateCostTime = null;
-
-        /**
-         * Upgrade mode (1: stable mode, 2: high-speed mode).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.UpgradeStrategy = null;
-
-        /**
-         * Indicates the estimated time for migration in high-speed mode, in seconds.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MigrateCostTimeHighSpeed = null;
-
     }
 
     /**
@@ -7596,9 +7612,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.ModifyType = 'ModifyType' in params ? params.ModifyType : null;
         this.MigrateFlag = 'MigrateFlag' in params ? params.MigrateFlag : null;
-        this.MigrateCostTime = 'MigrateCostTime' in params ? params.MigrateCostTime : null;
-        this.UpgradeStrategy = 'UpgradeStrategy' in params ? params.UpgradeStrategy : null;
-        this.MigrateCostTimeHighSpeed = 'MigrateCostTimeHighSpeed' in params ? params.MigrateCostTimeHighSpeed : null;
 
     }
 }
@@ -7675,43 +7688,43 @@ class DescribeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * (Query condition) filter by the ckafka cluster instance Id.
+         * <p>(Query Conditions) Filter by cluster instance Id</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Search term. example: (query condition) filter by instance name. fuzzy query is supported.
+         * <p>Search term  ex: (Query condition) Filter by instance name. Fuzzy query is supported.</p>
          * @type {string || null}
          */
         this.SearchWord = null;
 
         /**
-         * Instance status (query condition). valid values: 0: creating, 1: running, 2: deleting, 5: isolated, 7: upgrading. default return: all.
+         * <p>(Query condition) Instance status. Returns all by default if left blank.</p><p>Enumeration value:</p><ul><li>-1: Creation failed</li><li>0:Creating</li><li>1:Running</li><li>2:Deleting</li><li>3:Deleted</li><li>4:Deletion failure</li><li>5:Isolated</li><li>7:Upgrading</li></ul>
          * @type {Array.<number> || null}
          */
         this.Status = null;
 
         /**
-         * Offset. If this parameter is left empty, 0 will be used by default
+         * <p>Offset, which is 0 by default</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 100.
+         * <p>Number of returned results. Default value: 10. Maximum value: 100.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Tag key value (this field has been deprecated).
+         * <p>Abandoned. Match the tag key.</p>
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * (Query condition) VPC Id.
+         * <p>(Query condition) VPC Id</p>
          * @type {string || null}
          */
         this.VpcId = null;
@@ -7967,7 +7980,7 @@ class InstanceAttributesResponse extends  AbstractModel {
         this.MaxMessageByte = null;
 
         /**
-         * <p>Specifies the instance billing type. POSTPAID_BY_HOUR: hourly billing; PREPAID: annual/monthly package.</p>.
+         * <p>Specifies the instance billing type. POSTPAID_BY_HOUR: hourly billing; PREPAID: yearly/monthly subscription.</p>.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -8019,6 +8032,18 @@ class InstanceAttributesResponse extends  AbstractModel {
          * @type {number || null}
          */
         this.DeleteProtectionEnable = null;
+
+        /**
+         * <p>Message retention size at the instance level</p>Measurement unit: bytes<br>Default value: -1
+         * @type {number || null}
+         */
+        this.RetentionBytes = null;
+
+        /**
+         * <p>The maximum idle time of a transaction ID. Uncommitted transactions that time out will be marked with expiration.</p>Unit: ms
+         * @type {number || null}
+         */
+        this.TransactionalIdExpirationMs = null;
 
     }
 
@@ -8106,6 +8131,8 @@ class InstanceAttributesResponse extends  AbstractModel {
         this.CustomCertId = 'CustomCertId' in params ? params.CustomCertId : null;
         this.UncleanLeaderElectionEnable = 'UncleanLeaderElectionEnable' in params ? params.UncleanLeaderElectionEnable : null;
         this.DeleteProtectionEnable = 'DeleteProtectionEnable' in params ? params.DeleteProtectionEnable : null;
+        this.RetentionBytes = 'RetentionBytes' in params ? params.RetentionBytes : null;
+        this.TransactionalIdExpirationMs = 'TransactionalIdExpirationMs' in params ? params.TransactionalIdExpirationMs : null;
 
     }
 }
@@ -8159,31 +8186,31 @@ class DescribeGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id.
+         * <p>ckafka cluster instance Id</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40835?from_cn_redirect=1">DescribeInstances</a></p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Search keyword
+         * <p>Search keywords</p>
          * @type {string || null}
          */
         this.SearchWord = null;
 
         /**
-         * Offset
+         * <p>Offset</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Maximum number of results to be returned
+         * <p>Maximum return quantity</p><p>Default value: 20</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Only supported for GroupState filter criteria. valid values: Empty, Stable. note: this parameter can only be accessed in versions 2.8/3.2.
+         * <p>Only supports filtering by GroupState. Supported filter statuses are Empty/Stable. Note: This parameter is only supported for versions 2.8/3.2.</p>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -8366,7 +8393,7 @@ class ModifyInstancePreResponse extends  AbstractModel {
         super();
 
         /**
-         * Response structure of modifying the configurations of a prepaid instance.
+         * <p>Return structure for updating prepaid instance configuration</p>
          * @type {CreateInstancePreResp || null}
          */
         this.Result = null;
@@ -8662,61 +8689,61 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * (Filter) filter by instance ID
+         * <p>(Filtering Conditions) Filter by instance ID</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Filter by instance name, instance ID, AZ, VPC ID, or subnet ID. Fuzzy query is supported.
+         * <p>(Filtering Conditions) Filter by instance name, instance Id, availability zone, VPC Id, or subnet Id. Fuzzy query is supported.</p>
          * @type {string || null}
          */
         this.SearchWord = null;
 
         /**
-         * (Filter) instance status. 0: creating, 1: running, 2: deleting. If this parameter is left empty, all instances will be returned by default
+         * <p>(Filtering Conditions) Instance status. Return all by default if left blank.</p><p>Enumeration values:</p><ul><li>-1: Creation failed</li><li>0:Creating</li><li>1:Running</li><li>2:Deleting</li><li>3:Deleted</li><li>4:Deletion failure</li><li>5:Isolated</li><li>7:Upgrading</li></ul>
          * @type {Array.<number> || null}
          */
         this.Status = null;
 
         /**
-         * Offset. If this parameter is left empty, `0` will be used by default.
+         * <p>Offset, which is 0 by default.</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of returned results. If this parameter is left empty, `10` will be used by default. The maximum value is `20`.
+         * <p>Number of returned results. Default value: 10. Maximum value: 20.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Tag key match.
+         * <p>Match the tag key.</p>
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * Filter. Valid values of `filter.Name` include `Ip`, `VpcId`, `SubNetId`, `InstanceType`, and `InstanceId`. Up to 10 values can be passed for `filter.Values`.
+         * <p>Filter. filter.Name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType', 'InstanceId'). filter.Values can transmit up to 10 values.</p>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
         /**
-         * This parameter has been deprecated and replaced with `InstanceIdList`.
+         * <p>Deprecated. Use InstanceIdList.</p>
          * @type {string || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Filter by instance ID.
+         * <p>Filter by instance ID</p>
          * @type {Array.<string> || null}
          */
         this.InstanceIdList = null;
 
         /**
-         * Filter instances by a set of tags
+         * <p>Filter instances based on tag list (take the intersection)</p>
          * @type {Array.<Tag> || null}
          */
         this.TagList = null;
@@ -9407,25 +9434,25 @@ class BatchModifyGroupOffsetsRequest extends  AbstractModel {
         super();
 
         /**
-         * Consumer group name.
+         * <p>Consumer group name</p>
          * @type {string || null}
          */
         this.GroupName = null;
 
         /**
-         * The ckafka cluster instance Id.
+         * <p>ckafka cluster instance Id</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40835?from_cn_redirect=1">DescribeInstances</a></p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Partition information.
+         * <p>partition info</p>
          * @type {Array.<Partitions> || null}
          */
         this.Partitions = null;
 
         /**
-         * Name of the specified topic. Default value: names of all topics.
+         * <p>Specify topic, default to all topics</p>
          * @type {Array.<string> || null}
          */
         this.TopicName = null;
@@ -9982,7 +10009,7 @@ class DescribeRouteResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result set of route information
+         * <p>Returned routing information result set</p>
          * @type {RouteResponse || null}
          */
         this.Result = null;
@@ -10125,37 +10152,37 @@ class DescribeTypeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * (Filter condition) filter by instance ID.
+         * <p>(Filtering Conditions) Filter by instance ID</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * (Filter condition) filter by instance name. fuzzy query is supported.
+         * <p>(Filtering Conditions) Filter by instance name. Fuzzy query is supported.</p>
          * @type {string || null}
          */
         this.SearchWord = null;
 
         /**
-         * Instance status (filter condition). valid values: 0: creating, 1: running, 2: deleting. default return: all.
+         * <p>(Filtering Conditions) Instance status. Return all by default if left blank.</p><p>Enumeration values:</p><ul><li>-1: Creation failed</li><li>0:Creating</li><li>1:Running</li><li>2:Deleting</li><li>3:Deleted</li><li>4:Deletion failure</li><li>5:Isolated</li><li>7:Upgrading</li></ul>
          * @type {Array.<number> || null}
          */
         this.Status = null;
 
         /**
-         * Offset. default value: 0.
+         * <p>Offset, which is 0 by default</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of returned results. default: 10. maximum value: 100.
+         * <p>Number of returned results. Default value: 10. Maximum value: 100.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Matches the Tag key.
+         * <p>Match the tag key.</p>
          * @type {string || null}
          */
         this.TagKey = null;
@@ -10341,49 +10368,49 @@ class DescribeTopicDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
+         * <p>ckafka cluster instance Id, which can be obtained through the <a href="https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1">DescribeInstances</a> API</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * (Filter) filter by `topicName`. Fuzzy search is supported
+         * <p>(Filtering Conditions) Filter by topicName. Fuzzy query is supported.</p>
          * @type {string || null}
          */
         this.SearchWord = null;
 
         /**
-         * Offset. If this parameter is left empty, 0 will be used by default
+         * <p>Offset, which is 0 by default</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of returned results. default: 20. value must be above 0.
+         * <p>Number of returned results. Default value: 20. Value must be above 0.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Name of the preset ACL rule.
+         * <p>Acl preset policy name</p>
          * @type {string || null}
          */
         this.AclRuleName = null;
 
         /**
-         * Sorts based on specific attributes (currently supports PartitionNum/CreateTime). default value: CreateTime.
+         * <p>Sort by specific attributes (Currently supports PartitionNum/CreateTime). Default value is CreateTime.</p><p>If empty, default to reverse sort by CreateTime.</p>
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
-         * 0 - sequential, 1 - reverse order. default value: 0.
+         * <p>0-sequential, 1-reverse, default value is 0.</p>
          * @type {number || null}
          */
         this.OrderType = null;
 
         /**
-         * Currently supports ReplicaNum (number of replicas) filter criteria.
+         * <p>Currently supports filtering by ReplicaNum (number of replicas)</p>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -10426,7 +10453,7 @@ class DescribeGroupOffsetsResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result.
+         * <p>Returned result</p>
          * @type {GroupOffsetResponse || null}
          */
         this.Result = null;
@@ -10784,82 +10811,78 @@ class Route extends  AbstractModel {
         super();
 
         /**
-         * Instance connection method
-0: PLAINTEXT (plaintext method, which does not carry user information and is supported for legacy versions and Community Edition)
-1: SASL_PLAINTEXT (plaintext method, which authenticates the login through SASL before data start and is supported only for Community Edition)
-2: SSL (SSL-encrypted communication, which does not carry user information and is supported for legacy versions and Community Edition)
-3: SASL_SSL (SSL-encrypted communication, which authenticates the login through SASL before data start and is supported only for Community Edition)
+         * <p>Instance access method 0: PLAINTEXT (plaintext mode, no user information included, supported by older versions and community edition) 1: SASL_PLAINTEXT (plaintext mode, however, login authentication with SASL is performed at data initiation, only supported by community edition) 2: SSL (SSL encrypted communication, no user information included, supported by older versions and community edition) 3: SASL_SSL (SSL encrypted communication, login authentication with SASL is performed at data initiation, only supported by community edition)</p>
          * @type {number || null}
          */
         this.AccessType = null;
 
         /**
-         * Route ID
+         * <p>Route Id</p>
          * @type {number || null}
          */
         this.RouteId = null;
 
         /**
-         * Specifies the network type of the route (3: vpc routing; 7: internal support route; 1: public network route).
+         * <p>Routing network type (3: vpc routing; 7: Internal support routing; 1: Public network route)</p>
          * @type {number || null}
          */
         this.VipType = null;
 
         /**
-         * Virtual IP list
+         * <p>Virtual IP list</p>
          * @type {Array.<VipEntity> || null}
          */
         this.VipList = null;
 
         /**
-         * Domain name
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Domain name</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Domain name port
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Domain name port</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DomainPort = null;
 
         /**
-         * Timestamp.
+         * <p>Timestamp</p>
          * @type {string || null}
          */
         this.DeleteTimestamp = null;
 
         /**
-         * Specifies the subnet Id.
+         * <p>Subnet Id</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Subnet = null;
 
         /**
-         * Virtual IP list (1:1 broker node).
+         * <p>Virtual IP list (1:1 broker node)</p>
          * @type {Array.<VipEntity> || null}
          */
         this.BrokerVipList = null;
 
         /**
-         * VPC Id. specifies the Id of the vpc.
+         * <p>VPC Id</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Remarks
+         * <p>Remarks</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Note = null;
 
         /**
-         * Route status. 1: creating, 2: creation succeeded, 3: creation failed, 4: deleting, 6: deletion failed.
+         * <p>Route status. 1: Creating, 2: Successfully created, 3: Creation failed, 4: Deleting, 6: Deletion failed</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -11160,115 +11183,115 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id.
+         * <p>ckafka cluster instance Id</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40835?from_cn_redirect=1">DescribeInstances</a></p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Topic name
+         * <p>Topic name</p>
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * Topic remarks string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
+         * <p>Topic remark</p><p>Input parameter limit: no more than 64 characters</p><p>Default value: ""</p>
          * @type {string || null}
          */
         this.Note = null;
 
         /**
-         * IP allowlist switch. 1: enabled, 0: disabled.
+         * <p>IP allowlist switch, 1: on; 0: off.</p>
          * @type {number || null}
          */
         this.EnableWhiteList = null;
 
         /**
-         * Default value: 1.
+         * <p>Minimum sync replica count</p><p>Default value: 1</p><p>Minimum value: 1</p>
          * @type {number || null}
          */
         this.MinInsyncReplicas = null;
 
         /**
-         * 0: false, 1: true. Default value: 0.
+         * <p>Whether to allow unsynchronized replicas to be elected as leader</p><p>Enumeration value:</p><ul><li>0: Not allowed</li><li>1: Allowed</li></ul><p>Default value: 0</p>
          * @type {number || null}
          */
         this.UncleanLeaderElectionEnable = null;
 
         /**
-         * Message retention period in ms. The current minimum value is 60,000 ms.
+         * <p>Duration of Segment shard scrolling</p><p>Unit: ms</p><p>Default value: 86400000</p><p>Minimum value: 86400000ms (1 day)</p>
          * @type {number || null}
          */
         this.RetentionMs = null;
 
         /**
-         * Max message size in bytes. Max value: 8,388,608 bytes (8 MB).
+         * <p>Maximum topic messages</p><p>Value ranges from 1024 to 12582912</p><p>Unit: Bytes</p>
          * @type {number || null}
          */
         this.MaxMessageBytes = null;
 
         /**
-         * Duration of Segment shard scrolling in milliseconds. current min value is 86400000 ms.
+         * <p>Duration of Segment fragment scrolling</p><p>Unit: ms</p><p>Minimum value: 86400000ms (1 day)</p>
          * @type {number || null}
          */
         this.SegmentMs = null;
 
         /**
-         * Message deletion policy. Valid values: delete, compact
+         * <p>Message deletion strategy: choose delete or compact</p>
          * @type {string || null}
          */
         this.CleanUpPolicy = null;
 
         /**
-         * IP allowlist, which is required if the value of `enableWhileList` is 1.
+         * <p>Ip whitelist, Quota limit, essential when enableWhileList=1</p>
          * @type {Array.<string> || null}
          */
         this.IpWhiteList = null;
 
         /**
-         * Preset ACL rule. `1`: enable, `0`: disable. Default value: `0`.
+         * <p>Preset ACL rule, 1: on 0: off, default is off</p>
          * @type {number || null}
          */
         this.EnableAclRule = null;
 
         /**
-         * ACL rule name.
+         * <p>ACL rule name</p>
          * @type {string || null}
          */
         this.AclRuleName = null;
 
         /**
-         * Message retention file size in bytes, which is an optional parameter. Default value: -1. Currently, the min value that can be entered is 1,048,576 B.
+         * <p>Option, retain file size</p><p>Value ranges from [1073741824, 1099511627776]</p><p>Unit: Bytes</p><p>Default value: -1</p><p>Special value: -1 indicates unlimited</p>
          * @type {number || null}
          */
         this.RetentionBytes = null;
 
         /**
-         * Tag list.
+         * <p>Tag list</p>
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
 
         /**
-         * Production traffic throttling in MB/s. set to -1 to disable throttling.
+         * <p>Production traffic throttling in MB/s. Set to -1 for unlimited production traffic throttling.</p>
          * @type {number || null}
          */
         this.QuotaProducerByteRate = null;
 
         /**
-         * Consumption traffic throttling in MB/s. set to -1 for unlimited consumption.
+         * <p>Consumption throttling, unit MB/s; set to -1 for unlimited consumption throttling.</p>
          * @type {number || null}
          */
         this.QuotaConsumerByteRate = null;
 
         /**
-         * Number of topic replicas. valid values: 1, 3.
+         * <p>topic replica count Minimum value: 1, Maximum value: 3</p>
          * @type {number || null}
          */
         this.ReplicaNum = null;
 
         /**
-         * Specifies the time type for message saving: CreateTime/LogAppendTime.
+         * <p>Time type for message saving: CreateTime/LogAppendTime</p>
          * @type {string || null}
          */
         this.LogMsgTimestampType = null;
@@ -11713,25 +11736,25 @@ class DescribeUserRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id.
+         * <p>ckafka cluster instance Id</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40835?from_cn_redirect=1">DescribeInstances</a></p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Filter by name
+         * <p>Filter by name</p><p>Support fuzzy matching</p>
          * @type {string || null}
          */
         this.SearchWord = null;
 
         /**
-         * Offset.
+         * <p>Offset</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * The number of returns.
+         * <p>Number of returned results</p><p>Default value: 20</p>
          * @type {number || null}
          */
         this.Limit = null;
@@ -11805,31 +11828,31 @@ class DescribeTopicSyncReplicaRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * <p>Instance ID</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40835?from_cn_redirect=1">DescribeInstances</a></p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Topic name
+         * <p>Topic name</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/40847?from_cn_redirect=1">DescribeTopic</a></p>
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
+         * <p>Offset, which is 0 by default</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of returned results. default value: 20. must be greater than 0.
+         * <p>Number of returned results. Default value: 20. Must be greater than 0.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Filters unsynced replicas only
+         * <p>Only filter unsynced replicas</p>
          * @type {boolean || null}
          */
         this.OutOfSyncReplicaOnly = null;
@@ -12052,6 +12075,12 @@ class InstanceDetail extends  AbstractModel {
          */
         this.Features = null;
 
+        /**
+         * <p>Message retention size at the instance level</p>Measurement unit: byte<br>Default value: -1<br><p>Message retention size at the instance level</p>
+         * @type {number || null}
+         */
+        this.RetentionBytes = null;
+
     }
 
     /**
@@ -12109,6 +12138,7 @@ class InstanceDetail extends  AbstractModel {
         this.PublicNetwork = 'PublicNetwork' in params ? params.PublicNetwork : null;
         this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
         this.Features = 'Features' in params ? params.Features : null;
+        this.RetentionBytes = 'RetentionBytes' in params ? params.RetentionBytes : null;
 
     }
 }
@@ -12159,7 +12189,7 @@ class DescribeTopicDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned entity of topic details
+         * <p>Returned topic detail entity</p>
          * @type {TopicDetailResponse || null}
          */
         this.Result = null;
@@ -12299,40 +12329,46 @@ class InstanceVersion extends  AbstractModel {
         super();
 
         /**
-         * CKafka cluster instance version.
+         * <p>ckafka cluster instance version</p>
          * @type {string || null}
          */
         this.KafkaVersion = null;
 
         /**
-         * Broker version information.
+         * <p>broker version info</p>
          * @type {string || null}
          */
         this.CurBrokerVersion = null;
 
         /**
-         * Latest version information.
+         * <p>latest version info</p>
          * @type {Array.<LatestBrokerVersion> || null}
          */
         this.LatestBrokerVersion = null;
 
         /**
-         * Whether to allow kernel upgrades across major versions.
+         * <p>Permission for cross-major version kernel upgrade</p>
          * @type {boolean || null}
          */
         this.AllowUpgradeHighVersion = null;
 
         /**
-         * Major version allowed for upgrades.
+         * <p>Permission for major version upgrade</p>
          * @type {Array.<string> || null}
          */
         this.HighVersionSet = null;
 
         /**
-         * Whether to allow automatic deletion of consumer groups during minor version configuration.
+         * <p>Permission to configure auto deletion of consumer group for minor version number</p>
          * @type {boolean || null}
          */
         this.AllowAutoDeleteTimestamp = null;
+
+        /**
+         * <p>Allow the modification of transaction ID expiration time configuration</p>
+         * @type {boolean || null}
+         */
+        this.AllowModifyTxnIdExpiration = null;
 
     }
 
@@ -12357,6 +12393,7 @@ class InstanceVersion extends  AbstractModel {
         this.AllowUpgradeHighVersion = 'AllowUpgradeHighVersion' in params ? params.AllowUpgradeHighVersion : null;
         this.HighVersionSet = 'HighVersionSet' in params ? params.HighVersionSet : null;
         this.AllowAutoDeleteTimestamp = 'AllowAutoDeleteTimestamp' in params ? params.AllowAutoDeleteTimestamp : null;
+        this.AllowModifyTxnIdExpiration = 'AllowModifyTxnIdExpiration' in params ? params.AllowModifyTxnIdExpiration : null;
 
     }
 }

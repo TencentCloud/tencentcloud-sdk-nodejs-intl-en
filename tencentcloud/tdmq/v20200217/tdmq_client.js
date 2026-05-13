@@ -69,7 +69,7 @@ const DimensionInstance = models.DimensionInstance;
 const DeleteEnvironmentsRequest = models.DeleteEnvironmentsRequest;
 const DescribeRocketMQClustersRequest = models.DescribeRocketMQClustersRequest;
 const SendRocketMQMessageRequest = models.SendRocketMQMessageRequest;
-const CreateClusterResponse = models.CreateClusterResponse;
+const CreateRocketMQGroupV2Response = models.CreateRocketMQGroupV2Response;
 const DeleteRocketMQNamespaceRequest = models.DeleteRocketMQNamespaceRequest;
 const DeleteRabbitMQPermissionRequest = models.DeleteRabbitMQPermissionRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
@@ -101,6 +101,7 @@ const ModifyRocketMQRoleRequest = models.ModifyRocketMQRoleRequest;
 const DescribeMqMsgTraceRequest = models.DescribeMqMsgTraceRequest;
 const SendBatchMessagesRequest = models.SendBatchMessagesRequest;
 const DescribeRabbitMQNodeListResponse = models.DescribeRabbitMQNodeListResponse;
+const PriceTag = models.PriceTag;
 const ProducerInfo = models.ProducerInfo;
 const ProducerLog = models.ProducerLog;
 const DescribePublisherSummaryRequest = models.DescribePublisherSummaryRequest;
@@ -186,6 +187,7 @@ const CreateRoleRequest = models.CreateRoleRequest;
 const DescribeEnvironmentAttributesResponse = models.DescribeEnvironmentAttributesResponse;
 const DescribeRocketMQRolesRequest = models.DescribeRocketMQRolesRequest;
 const CreateRocketMQNamespaceResponse = models.CreateRocketMQNamespaceResponse;
+const DeleteCmqTopicRequest = models.DeleteCmqTopicRequest;
 const ModifyRocketMQEnvironmentRoleResponse = models.ModifyRocketMQEnvironmentRoleResponse;
 const CreateCmqQueueResponse = models.CreateCmqQueueResponse;
 const DeleteRabbitMQVipInstanceRequest = models.DeleteRabbitMQVipInstanceRequest;
@@ -230,6 +232,7 @@ const ReceiveMessageRequest = models.ReceiveMessageRequest;
 const DescribeTopicsRequest = models.DescribeTopicsRequest;
 const DescribeEnvironmentRolesResponse = models.DescribeEnvironmentRolesResponse;
 const DescribeRocketMQPublicAccessPointResponse = models.DescribeRocketMQPublicAccessPointResponse;
+const CreateRocketMQGroupV2Request = models.CreateRocketMQGroupV2Request;
 const DescribeRabbitMQExchangesResponse = models.DescribeRabbitMQExchangesResponse;
 const DescribeRabbitMQQueueDetailResponse = models.DescribeRabbitMQQueueDetailResponse;
 const DescribeRocketMQTopicMsgsResponse = models.DescribeRocketMQTopicMsgsResponse;
@@ -246,6 +249,7 @@ const ResetMsgSubOffsetByTimestampResponse = models.ResetMsgSubOffsetByTimestamp
 const SendMessagesRequest = models.SendMessagesRequest;
 const CreateRocketMQRoleRequest = models.CreateRocketMQRoleRequest;
 const DescribeRocketMQProducersResponse = models.DescribeRocketMQProducersResponse;
+const DescribeRocketMQGeneralSKUsRequest = models.DescribeRocketMQGeneralSKUsRequest;
 const DescribeRabbitMQVipInstanceResponse = models.DescribeRabbitMQVipInstanceResponse;
 const ModifyCmqSubscriptionAttributeRequest = models.ModifyCmqSubscriptionAttributeRequest;
 const ModifyTopicResponse = models.ModifyTopicResponse;
@@ -286,6 +290,7 @@ const CmqDeadLetterPolicy = models.CmqDeadLetterPolicy;
 const QueueQuota = models.QueueQuota;
 const ExportRocketMQMessageDetailRequest = models.ExportRocketMQMessageDetailRequest;
 const CreateRabbitMQUserResponse = models.CreateRabbitMQUserResponse;
+const RabbitMQVirtualHostInfo = models.RabbitMQVirtualHostInfo;
 const ModifyRocketMQRoleResponse = models.ModifyRocketMQRoleResponse;
 const CreateRabbitMQBindingRequest = models.CreateRabbitMQBindingRequest;
 const DescribePulsarProInstanceDetailRequest = models.DescribePulsarProInstanceDetailRequest;
@@ -297,7 +302,7 @@ const RabbitMQPrivateNode = models.RabbitMQPrivateNode;
 const RetryRocketMQDlqMessageRequest = models.RetryRocketMQDlqMessageRequest;
 const DescribeRocketMQTopicsByGroupRequest = models.DescribeRocketMQTopicsByGroupRequest;
 const DescribeRocketMQPublicAccessMonitorDataResponse = models.DescribeRocketMQPublicAccessMonitorDataResponse;
-const RabbitMQVirtualHostInfo = models.RabbitMQVirtualHostInfo;
+const CreateRocketMQTopicV2Request = models.CreateRocketMQTopicV2Request;
 const CmqQueue = models.CmqQueue;
 const CreateEnvironmentResponse = models.CreateEnvironmentResponse;
 const Topic = models.Topic;
@@ -322,12 +327,12 @@ const RabbitMQExchangeListInfo = models.RabbitMQExchangeListInfo;
 const DescribeBindVpcsRequest = models.DescribeBindVpcsRequest;
 const TopicRecord = models.TopicRecord;
 const DescribeEnvironmentRolesRequest = models.DescribeEnvironmentRolesRequest;
+const GeneralSKU = models.GeneralSKU;
 const DescribeRabbitMQUserRequest = models.DescribeRabbitMQUserRequest;
 const DescribeRocketMQTopicsResponse = models.DescribeRocketMQTopicsResponse;
 const Environment = models.Environment;
 const RocketMQClusterDetail = models.RocketMQClusterDetail;
 const DescribeRocketMQGroupsResponse = models.DescribeRocketMQGroupsResponse;
-const CreateClusterRequest = models.CreateClusterRequest;
 const DeleteProClusterResponse = models.DeleteProClusterResponse;
 const ModifyCmqQueueAttributeResponse = models.ModifyCmqQueueAttributeResponse;
 const DescribeCmqQueuesRequest = models.DescribeCmqQueuesRequest;
@@ -356,7 +361,8 @@ const DescribeRocketMQGroupsRequest = models.DescribeRocketMQGroupsRequest;
 const DescribeRocketMQMsgTraceResponse = models.DescribeRocketMQMsgTraceResponse;
 const ClearCmqSubscriptionFilterTagsResponse = models.ClearCmqSubscriptionFilterTagsResponse;
 const DescribePublisherSummaryResponse = models.DescribePublisherSummaryResponse;
-const DeleteCmqTopicRequest = models.DeleteCmqTopicRequest;
+const CreateRocketMQTopicV2Response = models.CreateRocketMQTopicV2Response;
+const DescribeRocketMQGeneralSKUsResponse = models.DescribeRocketMQGeneralSKUsResponse;
 const DescribePulsarProInstanceDetailResponse = models.DescribePulsarProInstanceDetailResponse;
 const UnbindCmqDeadLetterRequest = models.UnbindCmqDeadLetterRequest;
 const DescribeRolesRequest = models.DescribeRolesRequest;
@@ -387,18 +393,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a cluster.
-     * @param {CreateClusterRequest} req
-     * @param {function(string, CreateClusterResponse):void} cb
-     * @public
-     */
-    CreateCluster(req, cb) {
-        let resp = new CreateClusterResponse();
-        this.request("CreateCluster", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the list of RocketMQ namespaces.
+     * Query the RocketMQ namespace list.
+This API is applicable to clusters: 4.x virtual cluster and 4.x dedicated cluster. Other cluster types do not support this feature.
      * @param {DescribeRocketMQNamespacesRequest} req
      * @param {function(string, DescribeRocketMQNamespacesResponse):void} cb
      * @public
@@ -420,7 +416,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * Queries message trajectory
+     * Query message trajectory.
+Current API applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, see the REST API documentation for query message trajectory at [DescribeMessageTrace](https://www.tencentcloud.com/document/api/1493/114302?from_cn_redirect=1).
      * @param {DescribeRocketMQMsgTraceRequest} req
      * @param {function(string, DescribeRocketMQMsgTraceResponse):void} cb
      * @public
@@ -431,7 +428,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a role.
+     * Create a role.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateRole](https://www.tencentcloud.com/document/api/1493/98864?from_cn_redirect=1).
      * @param {CreateRocketMQRoleRequest} req
      * @param {function(string, CreateRocketMQRoleResponse):void} cb
      * @public
@@ -464,14 +462,15 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify a TDMQ for RabbitMQ vhost.
-     * @param {ModifyRabbitMQVirtualHostRequest} req
-     * @param {function(string, ModifyRabbitMQVirtualHostResponse):void} cb
+     * Query the sales specification of a generic cluster.
+This API is applicable to clusters: 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeProductSKUs](https://www.tencentcloud.com/document/api/1493/107676?from_cn_redirect=1).
+     * @param {DescribeRocketMQGeneralSKUsRequest} req
+     * @param {function(string, DescribeRocketMQGeneralSKUsResponse):void} cb
      * @public
      */
-    ModifyRabbitMQVirtualHost(req, cb) {
-        let resp = new ModifyRabbitMQVirtualHostResponse();
-        this.request("ModifyRabbitMQVirtualHost", req, resp, cb);
+    DescribeRocketMQGeneralSKUs(req, cb) {
+        let resp = new DescribeRocketMQGeneralSKUsResponse();
+        this.request("DescribeRocketMQGeneralSKUs", req, resp, cb);
     }
 
     /**
@@ -497,7 +496,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a RocketMQ consumer group.
+     * This API is used to delete a RocketMQ consumption group.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteConsumerGroup](https://www.tencentcloud.com/document/api/1493/97942?from_cn_redirect=1) to delete the consumer group.
      * @param {DeleteRocketMQGroupRequest} req
      * @param {function(string, DeleteRocketMQGroupResponse):void} cb
      * @public
@@ -519,7 +519,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * Deletes roles. Batch deletion is supported.
+     * Delete roles in batches.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteRole](https://www.tencentcloud.com/document/api/1493/98863?from_cn_redirect=1).
      * @param {DeleteRocketMQRolesRequest} req
      * @param {function(string, DeleteRocketMQRolesResponse):void} cb
      * @public
@@ -574,7 +575,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain the topic production details list.
+     * Query the production detail list of RocketMQ topics.
+This API is used for applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. The feature is not supported yet for 5.x clusters.
      * @param {DescribeRocketMQTopicStatsRequest} req
      * @param {function(string, DescribeRocketMQTopicStatsResponse):void} cb
      * @public
@@ -629,7 +631,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a RocketMQ consumer group.
+     * This API is used to create a RocketMQ consumption group.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateConsumerGroup](https://www.tencentcloud.com/document/api/1493/97943?from_cn_redirect=1) to create a consumer group.
      * @param {CreateRocketMQGroupRequest} req
      * @param {function(string, CreateRocketMQGroupResponse):void} cb
      * @public
@@ -684,7 +687,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * Modifies environment role authorization
+     * Modify role authorization.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyRole](https://www.tencentcloud.com/document/api/1493/98861?from_cn_redirect=1).
      * @param {ModifyRocketMQEnvironmentRoleRequest} req
      * @param {function(string, ModifyRocketMQEnvironmentRoleResponse):void} cb
      * @public
@@ -695,7 +699,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to update a RocketMQ topic.
+     * This API is used to modify RocketMQ topic attributes.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyTopic](https://www.tencentcloud.com/document/api/1493/97944?from_cn_redirect=1).
      * @param {ModifyRocketMQTopicRequest} req
      * @param {function(string, ModifyRocketMQTopicResponse):void} cb
      * @public
@@ -706,7 +711,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * Query RocketMQ messages.
+     * Query the RocketMQ message list.
+Current API applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, see the List API Documentation for query messages at [DescribeMessageList](https://www.tencentcloud.com/document/api/1493/114593?from_cn_redirect=1).
      * @param {DescribeRocketMQTopicMsgsRequest} req
      * @param {function(string, DescribeRocketMQTopicMsgsResponse):void} cb
      * @public
@@ -718,6 +724,7 @@ class TdmqClient extends AbstractClient {
 
     /**
      * This API is used to query the producer client list under a specified topic in RocketMQ.
+This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the List API Documentation [DescribeProducerList](https://www.tencentcloud.com/document/api/1493/122548?from_cn_redirect=1) for producer clients.
      * @param {DescribeRocketMQProducersRequest} req
      * @param {function(string, DescribeRocketMQProducersResponse):void} cb
      * @public
@@ -762,6 +769,7 @@ class TdmqClient extends AbstractClient {
 
     /**
      * This API is used to delete a RocketMQ namespace.
+This API is applicable to clusters: 4.x virtual cluster and 4.x dedicated cluster. Other cluster types do not support this feature.
      * @param {DeleteRocketMQNamespaceRequest} req
      * @param {function(string, DeleteRocketMQNamespaceResponse):void} cb
      * @public
@@ -794,7 +802,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * Modify the RocketMQ dedicated instance.
+     * Modify RocketMQ Dedicated or Generic Cluster Property.
+This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyInstance](https://www.tencentcloud.com/document/api/1493/97865?from_cn_redirect=1).
      * @param {ModifyRocketMQInstanceRequest} req
      * @param {function(string, ModifyRocketMQInstanceResponse):void} cb
      * @public
@@ -816,7 +825,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to update a RocketMQ consumer group.
+     * Modify a RocketMQ consumption group property.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyConsumerGroup](https://www.tencentcloud.com/document/api/1493/97940?from_cn_redirect=1) to modify the consumer group's attributes.
      * @param {ModifyRocketMQGroupRequest} req
      * @param {function(string, ModifyRocketMQGroupResponse):void} cb
      * @public
@@ -893,7 +903,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * Creates environment role authorization
+     * Grant access by role.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateRole](https://www.tencentcloud.com/document/api/1493/98864?from_cn_redirect=1).
      * @param {CreateRocketMQEnvironmentRoleRequest} req
      * @param {function(string, CreateRocketMQEnvironmentRoleResponse):void} cb
      * @public
@@ -915,7 +926,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * Obtains the list of topics subscribed under a specified consumer group
+     * This API is used to query the list of subscribed topics for a RocketMQ consumption group.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeTopicListByGroup](https://www.tencentcloud.com/document/api/1493/115314?from_cn_redirect=1) to query the list of subscribed topics for a consumption group.
      * @param {DescribeRocketMQTopicsByGroupRequest} req
      * @param {function(string, DescribeRocketMQTopicsByGroupResponse):void} cb
      * @public
@@ -926,7 +938,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to pull public network metric monitoring data from TCOP. Currently, only inbound bandwidth and outbound bandwidth metrics from client to LB are supported.
+     * Query public network metric monitoring data. Currently only support inbound bandwidth and outbound bandwidth metrics for Client to LB.
+This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. 5.x clusters are not supported yet.
      * @param {DescribeRocketMQPublicAccessMonitorDataRequest} req
      * @param {function(string, DescribeRocketMQPublicAccessMonitorDataResponse):void} cb
      * @public
@@ -937,7 +950,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to reset the consumption offset of a specified consumer group to a specified timestamp.
+     * Reset consumer offset.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ResetConsumerGroupOffset](https://www.tencentcloud.com/document/api/1493/116942?from_cn_redirect=1) to reset the consumer offset.
      * @param {ResetRocketMQConsumerOffSetRequest} req
      * @param {function(string, ResetRocketMQConsumerOffSetResponse):void} cb
      * @public
@@ -948,7 +962,8 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable/disable public network access, and set the security access policy.
+     * Enable or disable public network access, set security access policy.
+This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For public network access point settings of 5.x clusters, refer to the API Documentation [ModifyInstanceEndpoint](https://www.tencentcloud.com/document/api/1493/115981?from_cn_redirect=1).
      * @param {SetRocketMQPublicAccessPointRequest} req
      * @param {function(string, SetRocketMQPublicAccessPointResponse):void} cb
      * @public
@@ -956,6 +971,17 @@ class TdmqClient extends AbstractClient {
     SetRocketMQPublicAccessPoint(req, cb) {
         let resp = new SetRocketMQPublicAccessPointResponse();
         this.request("SetRocketMQPublicAccessPoint", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a TDMQ for RabbitMQ vhost.
+     * @param {ModifyRabbitMQVirtualHostRequest} req
+     * @param {function(string, ModifyRabbitMQVirtualHostResponse):void} cb
+     * @public
+     */
+    ModifyRabbitMQVirtualHost(req, cb) {
+        let resp = new ModifyRabbitMQVirtualHostResponse();
+        this.request("ModifyRabbitMQVirtualHost", req, resp, cb);
     }
 
     /**
@@ -994,7 +1020,8 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * This API is used to get the information of a specific TDMQ for RocketMQ exclusive cluster.
+     * Query RocketMQ cluster info.
+This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeInstance](https://www.tencentcloud.com/document/api/1493/97866?from_cn_redirect=1).
      * @param {DescribeRocketMQVipInstanceDetailRequest} req
      * @param {function(string, DescribeRocketMQVipInstanceDetailResponse):void} cb
      * @public
@@ -1005,7 +1032,8 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * Obtains the list of roles
+     * This API is used to query the list of roles.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the List API Documentation [DescribeRoleList](https://www.tencentcloud.com/document/api/1493/98862?from_cn_redirect=1).
      * @param {DescribeRocketMQRolesRequest} req
      * @param {function(string, DescribeRocketMQRolesResponse):void} cb
      * @public
@@ -1027,7 +1055,8 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * This API is used to update a RocketMQ cluster.
+     * This API is used to modify the attributes of a RocketMQ cluster.
+This API is applicable to clusters: 4.x virtual cluster. For 4.x dedicated or generic clusters, refer to the API documentation [ModifyRocketMQInstance](https://www.tencentcloud.com/document/api/1179/108862?from_cn_redirect=1). For 5.x clusters, refer to the API documentation [ModifyInstance](https://www.tencentcloud.com/document/api/1493/97865?from_cn_redirect=1).
      * @param {ModifyRocketMQClusterRequest} req
      * @param {function(string, ModifyRocketMQClusterResponse):void} cb
      * @public
@@ -1082,7 +1111,8 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * This API is used to get the information of a specific RocketMQ cluster.
+     * Query RocketMQ virtual cluster information.
+Current API applicable clusters: 4.x virtual cluster. For 4.x dedicated or generic clusters, see the REST API documentation for querying cluster information at [DescribeRocketMQVipInstanceDetail](https://www.tencentcloud.com/document/api/1179/86725?from_cn_redirect=1). For 5.x clusters, see the REST API documentation for querying cluster information at [DescribeInstance](https://www.tencentcloud.com/document/api/1493/97866?from_cn_redirect=1).
      * @param {DescribeRocketMQClusterRequest} req
      * @param {function(string, DescribeRocketMQClusterResponse):void} cb
      * @public
@@ -1126,7 +1156,7 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * Queries message trajectory
+     * Query the message trace of a single message
      * @param {DescribeMsgTraceRequest} req
      * @param {function(string, DescribeMsgTraceResponse):void} cb
      * @public
@@ -1137,7 +1167,8 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * Modifies roles
+     * Modify a role.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyRole](https://www.tencentcloud.com/document/api/1493/98861?from_cn_redirect=1).
      * @param {ModifyRocketMQRoleRequest} req
      * @param {function(string, ModifyRocketMQRoleResponse):void} cb
      * @public
@@ -1170,7 +1201,8 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * This API is used to delete a RocketMQ topic.
+     * Delete a RocketMQ topic.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteTopic](https://www.tencentcloud.com/document/api/1493/97946?from_cn_redirect=1).
      * @param {DeleteRocketMQTopicRequest} req
      * @param {function(string, DeleteRocketMQTopicResponse):void} cb
      * @public
@@ -1181,7 +1213,8 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * Resend the RocketMQ dead letter messages.
+     * Resend a RocketMQ dead letter message.
+Current API applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, see the REST API documentation for resending dead letter messages at [ResendDeadLetterMessage](https://www.tencentcloud.com/document/api/1493/114592?from_cn_redirect=1).
      * @param {RetryRocketMQDlqMessageRequest} req
      * @param {function(string, RetryRocketMQDlqMessageResponse):void} cb
      * @public
@@ -1225,7 +1258,8 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * This API is used to modify the configurations of a TDMQ for RocketMQ exclusive instance, including the upgrade of the instance specification, node count, and storage, and the downgrade of the instance specification. After you call this API to place the order and make payments, the configuration modification will be in progress. You can query whether the modification has been completed through the `DescribeRocketMQVipInstances` API`.
+     * This API is used to modify the RocketMQ dedicated cluster configuration, supporting upgrades of instance specification, number of nodes and storage, as well as downgrades of instance specification. After initiating order and completing payment, it will enter the instance configuration change process. You can check whether the change is completed via [DescribeRocketMQVipInstances](https://www.tencentcloud.com/document/api/1179/80903?from_cn_redirect=1).
+This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyInstance](https://www.tencentcloud.com/document/api/1493/97865?from_cn_redirect=1).
      * @param {ModifyRocketMQInstanceSpecRequest} req
      * @param {function(string, ModifyRocketMQInstanceSpecResponse):void} cb
      * @public
@@ -1236,7 +1270,8 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * This API is used to query the list of the purchased TDMQ for RocketMQ exclusive instances.
+     * Query the RocketMQ 4.x cluster list.
+This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeInstanceList](https://www.tencentcloud.com/document/api/1493/96028?from_cn_redirect=1), or use the [DescribeFusionInstanceList](https://www.tencentcloud.com/document/api/1493/106745?from_cn_redirect=1) API applicable to all cluster types.
      * @param {DescribeRocketMQVipInstancesRequest} req
      * @param {function(string, DescribeRocketMQVipInstancesResponse):void} cb
      * @public
@@ -1248,6 +1283,7 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
 
     /**
      * Used to obtain the RocketMQ metric sorting list, such as sorting topics under a cluster instance by the most occupied storage space.
+This API is used for applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. The feature is not supported yet for 5.x clusters.
      * @param {DescribeRocketMQTopUsagesRequest} req
      * @param {function(string, DescribeRocketMQTopUsagesResponse):void} cb
      * @public
@@ -1291,7 +1327,8 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * This API is used to get the list of RocketMQ consumer groups.
+     * Query the RocketMQ consumer group list.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeConsumerGroupList](https://www.tencentcloud.com/document/api/1493/101535?from_cn_redirect=1) to query the consumption group list.
      * @param {DescribeRocketMQGroupsRequest} req
      * @param {function(string, DescribeRocketMQGroupsResponse):void} cb
      * @public
@@ -1302,7 +1339,8 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * This API is used to create a RocketMQ topic.
+     * Create RocketMQ topics in batches.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateTopic](https://www.tencentcloud.com/document/api/1493/97947?from_cn_redirect=1).
      * @param {CreateRocketMQTopicRequest} req
      * @param {function(string, CreateRocketMQTopicResponse):void} cb
      * @public
@@ -1313,7 +1351,8 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * Obtains the namespace role list
+     * Query a role-based license list.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the List API Documentation [DescribeRoleList](https://www.tencentcloud.com/document/api/1493/98862?from_cn_redirect=1).
      * @param {DescribeRocketMQEnvironmentRolesRequest} req
      * @param {function(string, DescribeRocketMQEnvironmentRolesResponse):void} cb
      * @public
@@ -1325,6 +1364,7 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
 
     /**
      * This API is used to delete a RocketMQ cluster.
+This API is applicable to clusters: 4.x virtual cluster. For 4.x dedicated or generic clusters, refer to the API documentation [DeleteRocketMQVipInstance](https://www.tencentcloud.com/document/api/1179/95802?from_cn_redirect=1). For 5.x clusters, refer to [DeleteInstance](https://www.tencentcloud.com/document/product/1493/97867?from_cn_redirect=1).
      * @param {DeleteRocketMQClusterRequest} req
      * @param {function(string, DeleteRocketMQClusterResponse):void} cb
      * @public
@@ -1465,6 +1505,7 @@ Multiple MessageIDs use the special character '###' to separate with each other.
 
     /**
      * This API is used to create a RocketMQ namespace.
+This API is applicable to clusters: 4.x virtual cluster and 4.x dedicated cluster. Other cluster types do not support this feature.
      * @param {CreateRocketMQNamespaceRequest} req
      * @param {function(string, CreateRocketMQNamespaceResponse):void} cb
      * @public
@@ -1483,6 +1524,18 @@ Multiple MessageIDs use the special character '###' to separate with each other.
     DescribeMsg(req, cb) {
         let resp = new DescribeMsgResponse();
         this.request("DescribeMsg", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a RocketMQ topic.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateTopic](https://www.tencentcloud.com/document/api/1493/97947?from_cn_redirect=1).
+     * @param {CreateRocketMQTopicV2Request} req
+     * @param {function(string, CreateRocketMQTopicV2Response):void} cb
+     * @public
+     */
+    CreateRocketMQTopicV2(req, cb) {
+        let resp = new CreateRocketMQTopicV2Response();
+        this.request("CreateRocketMQTopicV2", req, resp, cb);
     }
 
     /**
@@ -1508,7 +1561,8 @@ Multiple MessageIDs use the special character '###' to separate with each other.
     }
 
     /**
-     * This API is used to get the list of RocketMQ topics.
+     * Query the RocketMQ topic list.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeTopicList](https://www.tencentcloud.com/document/api/1493/96030?from_cn_redirect=1).
      * @param {DescribeRocketMQTopicsRequest} req
      * @param {function(string, DescribeRocketMQTopicsResponse):void} cb
      * @public
@@ -1530,7 +1584,20 @@ Multiple MessageIDs use the special character '###' to separate with each other.
     }
 
     /**
-     * This API is used to get the list of RocketMQ clusters.
+     * This API is used to create a RocketMQ consumption group.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateConsumerGroup](https://www.tencentcloud.com/document/api/1493/97943?from_cn_redirect=1) to create a consumer group.
+     * @param {CreateRocketMQGroupV2Request} req
+     * @param {function(string, CreateRocketMQGroupV2Response):void} cb
+     * @public
+     */
+    CreateRocketMQGroupV2(req, cb) {
+        let resp = new CreateRocketMQGroupV2Response();
+        this.request("CreateRocketMQGroupV2", req, resp, cb);
+    }
+
+    /**
+     * Query the RocketMQ virtual cluster list.
+This API is applicable to clusters: 4.x virtual cluster. For querying 5.x cluster list, see List API Documentation [DescribeInstanceList](https://www.tencentcloud.com/document/api/1493/96028?from_cn_redirect=1), or use [DescribeFusionInstanceList](https://www.tencentcloud.com/document/api/1493/106745?from_cn_redirect=1) applicable to all cluster types.
      * @param {DescribeRocketMQClustersRequest} req
      * @param {function(string, DescribeRocketMQClustersResponse):void} cb
      * @public
@@ -1587,6 +1654,7 @@ The message cannot be sent to a persistent topic.
 
     /**
      * This API is used to update a RocketMQ namespace.
+This API is applicable to clusters: 4.x virtual cluster and 4.x dedicated cluster. Other cluster types do not support this feature.
      * @param {ModifyRocketMQNamespaceRequest} req
      * @param {function(string, ModifyRocketMQNamespaceResponse):void} cb
      * @public
@@ -1641,7 +1709,8 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
-     * This API is used to create a RocketMQ cluster.
+     * Create a RocketMQ cluster.
+This API is applicable to clusters: 4.x virtual cluster. For 4.x dedicated or generic clusters, refer to the API documentation [CreateRocketMQVipInstance](https://www.tencentcloud.com/document/api/1179/95721?from_cn_redirect=1). For 5.x clusters, refer to the API documentation [CreateInstance](https://www.tencentcloud.com/document/api/1493/97868?from_cn_redirect=1).
      * @param {CreateRocketMQClusterRequest} req
      * @param {function(string, CreateRocketMQClusterResponse):void} cb
      * @public
@@ -1663,7 +1732,8 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
-     * This API is used to query the TDMQ for RocketMQ message details.
+     * Query RocketMQ message details.
+Current API applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, see the REST API documentation for query message details at [DescribeMessage](https://www.tencentcloud.com/document/api/1493/114594?from_cn_redirect=1).
      * @param {DescribeRocketMQMsgRequest} req
      * @param {function(string, DescribeRocketMQMsgResponse):void} cb
      * @public
@@ -1740,7 +1810,8 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
-     * This API is used to delete a RocketMQ Exclusive Edition instance.
+     * This API is used to delete a RocketMQ dedicated or generic cluster.
+This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteInstance](https://www.tencentcloud.com/document/api/1493/97867?from_cn_redirect=1).
      * @param {DeleteRocketMQVipInstanceRequest} req
      * @param {function(string, DeleteRocketMQVipInstanceResponse):void} cb
      * @public
@@ -1784,7 +1855,8 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
-     * This API is used to query the public network access information of RocketMQ instances.
+     * Query the public network access point information of a RocketMQ cluster.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For public network access point information of 5.x clusters, refer to the API Documentation [DescribeInstance](https://www.tencentcloud.com/document/api/1493/97866?from_cn_redirect=1).
      * @param {DescribeRocketMQPublicAccessPointRequest} req
      * @param {function(string, DescribeRocketMQPublicAccessPointResponse):void} cb
      * @public
@@ -1817,7 +1889,8 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
-     * This API is used to create a RocketMQ Exclusive Edition instance.
+     * This API is used to create a RocketMQ 4.x cluster.
+This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateInstance](https://www.tencentcloud.com/document/api/1493/97868?from_cn_redirect=1).
      * @param {CreateRocketMQVipInstanceRequest} req
      * @param {function(string, CreateRocketMQVipInstanceResponse):void} cb
      * @public
@@ -1828,7 +1901,8 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
-     * Deletes environment role authorization
+     * Delete role authorizations in batches.
+This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteRole](https://www.tencentcloud.com/document/api/1493/98863?from_cn_redirect=1).
      * @param {DeleteRocketMQEnvironmentRolesRequest} req
      * @param {function(string, DeleteRocketMQEnvironmentRolesResponse):void} cb
      * @public

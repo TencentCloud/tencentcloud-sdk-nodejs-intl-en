@@ -16,72 +16,103 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ModifyInstanceResponse = models.ModifyInstanceResponse;
-const UpdateAuthorizationPolicyPriorityResponse = models.UpdateAuthorizationPolicyPriorityResponse;
-const AddClientSubscriptionRequest = models.AddClientSubscriptionRequest;
-const CreateMessageEnrichmentRuleRequest = models.CreateMessageEnrichmentRuleRequest;
-const DescribeClientListRequest = models.DescribeClientListRequest;
-const DeleteAuthorizationPolicyRequest = models.DeleteAuthorizationPolicyRequest;
-const DescribeAuthorizationPoliciesRequest = models.DescribeAuthorizationPoliciesRequest;
+const MQTTClientSubscription = models.MQTTClientSubscription;
+const ModifyDeviceIdentityResponse = models.ModifyDeviceIdentityResponse;
 const DeleteUserRequest = models.DeleteUserRequest;
-const MQTTUserItem = models.MQTTUserItem;
-const CreateUserRequest = models.CreateUserRequest;
-const ModifyInstanceRequest = models.ModifyInstanceRequest;
 const MessageEnrichmentRulePriority = models.MessageEnrichmentRulePriority;
-const CreateUserResponse = models.CreateUserResponse;
-const AddClientSubscriptionResponse = models.AddClientSubscriptionResponse;
-const CreateAuthorizationPolicyRequest = models.CreateAuthorizationPolicyRequest;
+const ModifyAuthorizationPolicyResponse = models.ModifyAuthorizationPolicyResponse;
+const SharedSubscriptionClient = models.SharedSubscriptionClient;
 const CreateInstanceResponse = models.CreateInstanceResponse;
-const DescribeMessageEnrichmentRulesResponse = models.DescribeMessageEnrichmentRulesResponse;
+const DescribeInstanceResponse = models.DescribeInstanceResponse;
 const MessageEnrichmentRuleItem = models.MessageEnrichmentRuleItem;
-const UserProperty = models.UserProperty;
-const ModifyMessageEnrichmentRuleRequest = models.ModifyMessageEnrichmentRuleRequest;
-const DescribeMessageByTopicRequest = models.DescribeMessageByTopicRequest;
-const AuthorizationPolicyItem = models.AuthorizationPolicyItem;
-const DeleteUserResponse = models.DeleteUserResponse;
-const DescribeAuthorizationPoliciesResponse = models.DescribeAuthorizationPoliciesResponse;
-const AuthorizationPolicyPriority = models.AuthorizationPolicyPriority;
-const Tag = models.Tag;
-const CreateInstanceRequest = models.CreateInstanceRequest;
-const DescribeMessageByTopicResponse = models.DescribeMessageByTopicResponse;
-const CreateMessageEnrichmentRuleResponse = models.CreateMessageEnrichmentRuleResponse;
+const DeleteDeviceIdentityRequest = models.DeleteDeviceIdentityRequest;
+const ModifyInstanceRequest = models.ModifyInstanceRequest;
 const DeleteTopicRequest = models.DeleteTopicRequest;
 const ModifyUserResponse = models.ModifyUserResponse;
-const CreateAuthorizationPolicyResponse = models.CreateAuthorizationPolicyResponse;
-const DescribeTopicResponse = models.DescribeTopicResponse;
-const UpdateMessageEnrichmentRulePriorityResponse = models.UpdateMessageEnrichmentRulePriorityResponse;
+const DescribeDeviceCertificatesRequest = models.DescribeDeviceCertificatesRequest;
+const DescribeSharedSubscriptionGroupsRequest = models.DescribeSharedSubscriptionGroupsRequest;
 const DeleteMessageEnrichmentRuleRequest = models.DeleteMessageEnrichmentRuleRequest;
+const VpcInfo = models.VpcInfo;
+const DeleteAuthorizationPolicyResponse = models.DeleteAuthorizationPolicyResponse;
+const ProductSkuItem = models.ProductSkuItem;
+const DescribeDeviceIdentitiesRequest = models.DescribeDeviceIdentitiesRequest;
+const UserProperty = models.UserProperty;
+const KickOutClientResponse = models.KickOutClientResponse;
+const DescribeMessageDetailsRequest = models.DescribeMessageDetailsRequest;
+const CreateDeviceIdentityRequest = models.CreateDeviceIdentityRequest;
+const DescribeClientListResponse = models.DescribeClientListResponse;
+const Tag = models.Tag;
+const MQTTInstanceItem = models.MQTTInstanceItem;
+const DescribeInstanceListResponse = models.DescribeInstanceListResponse;
+const ModifyMessageEnrichmentRuleRequest = models.ModifyMessageEnrichmentRuleRequest;
+const ModifyInstanceResponse = models.ModifyInstanceResponse;
+const AddClientSubscriptionRequest = models.AddClientSubscriptionRequest;
+const MQTTMessage = models.MQTTMessage;
+const DescribeSharedSubscriptionClientRequest = models.DescribeSharedSubscriptionClientRequest;
+const UpdateMessageEnrichmentRulePriorityResponse = models.UpdateMessageEnrichmentRulePriorityResponse;
+const DeleteDeviceIdentityResponse = models.DeleteDeviceIdentityResponse;
+const CreateUserResponse = models.CreateUserResponse;
+const CreateAuthorizationPolicyRequest = models.CreateAuthorizationPolicyRequest;
+const DescribeMessageEnrichmentRulesResponse = models.DescribeMessageEnrichmentRulesResponse;
+const DescribeMessageByTopicRequest = models.DescribeMessageByTopicRequest;
+const DeleteUserResponse = models.DeleteUserResponse;
+const DescribeMessageByTopicResponse = models.DescribeMessageByTopicResponse;
+const DeleteInstanceResponse = models.DeleteInstanceResponse;
+const DescribeProductSKUListResponse = models.DescribeProductSKUListResponse;
+const DescribeTopicResponse = models.DescribeTopicResponse;
+const DescribeAuthorizationPoliciesResponse = models.DescribeAuthorizationPoliciesResponse;
+const DescribeSharedSubscriptionClientResponse = models.DescribeSharedSubscriptionClientResponse;
+const DeleteClientSubscriptionRequest = models.DeleteClientSubscriptionRequest;
+const DescribeMessageDetailsResponse = models.DescribeMessageDetailsResponse;
+const DescribeUserListResponse = models.DescribeUserListResponse;
+const DeleteMessageEnrichmentRuleResponse = models.DeleteMessageEnrichmentRuleResponse;
+const MQTTUserItem = models.MQTTUserItem;
+const DescribeTopicRequest = models.DescribeTopicRequest;
+const UpdateAuthorizationPolicyPriorityResponse = models.UpdateAuthorizationPolicyPriorityResponse;
+const DescribeClientListRequest = models.DescribeClientListRequest;
+const SharedGroup = models.SharedGroup;
+const DeviceIdentityItem = models.DeviceIdentityItem;
+const AddClientSubscriptionResponse = models.AddClientSubscriptionResponse;
+const AuthorizationPolicyItem = models.AuthorizationPolicyItem;
+const CreateInstanceRequest = models.CreateInstanceRequest;
+const CreateAuthorizationPolicyResponse = models.CreateAuthorizationPolicyResponse;
+const DescribeSharedSubscriptionsResponse = models.DescribeSharedSubscriptionsResponse;
+const Filter = models.Filter;
+const DescribeDeviceCertificatesResponse = models.DescribeDeviceCertificatesResponse;
+const CreateUserRequest = models.CreateUserRequest;
+const DescribeSharedSubscriptionsRequest = models.DescribeSharedSubscriptionsRequest;
+const UpdateMessageEnrichmentRulePriorityRequest = models.UpdateMessageEnrichmentRulePriorityRequest;
+const DeleteInstanceRequest = models.DeleteInstanceRequest;
+const DescribeUserListRequest = models.DescribeUserListRequest;
+const CreateDeviceIdentityResponse = models.CreateDeviceIdentityResponse;
+const KickOutClientRequest = models.KickOutClientRequest;
+const DescribeDeviceIdentityResponse = models.DescribeDeviceIdentityResponse;
+const DeleteClientSubscriptionResponse = models.DeleteClientSubscriptionResponse;
+const DescribeMessageEnrichmentRulesRequest = models.DescribeMessageEnrichmentRulesRequest;
+const UpdateAuthorizationPolicyPriorityRequest = models.UpdateAuthorizationPolicyPriorityRequest;
+const CreateMessageEnrichmentRuleRequest = models.CreateMessageEnrichmentRuleRequest;
+const DescribeSharedSubscriptionGroupsResponse = models.DescribeSharedSubscriptionGroupsResponse;
+const DeleteAuthorizationPolicyRequest = models.DeleteAuthorizationPolicyRequest;
+const DescribeDeviceIdentityRequest = models.DescribeDeviceIdentityRequest;
+const DescribeInstanceRequest = models.DescribeInstanceRequest;
+const DescribeAuthorizationPoliciesRequest = models.DescribeAuthorizationPoliciesRequest;
+const DescribeProductSKUListRequest = models.DescribeProductSKUListRequest;
+const AuthorizationPolicyPriority = models.AuthorizationPolicyPriority;
+const DescribeInstanceListRequest = models.DescribeInstanceListRequest;
+const CreateMessageEnrichmentRuleResponse = models.CreateMessageEnrichmentRuleResponse;
+const DeviceCertificateItem = models.DeviceCertificateItem;
 const SubscriptionUserProperty = models.SubscriptionUserProperty;
 const ModifyMessageEnrichmentRuleResponse = models.ModifyMessageEnrichmentRuleResponse;
 const MQTTClientInfo = models.MQTTClientInfo;
-const VpcInfo = models.VpcInfo;
-const Filter = models.Filter;
-const DeleteAuthorizationPolicyResponse = models.DeleteAuthorizationPolicyResponse;
-const KickOutClientResponse = models.KickOutClientResponse;
-const MQTTClientSubscription = models.MQTTClientSubscription;
-const DeleteClientSubscriptionRequest = models.DeleteClientSubscriptionRequest;
-const MQTTMessage = models.MQTTMessage;
-const DescribeInstanceResponse = models.DescribeInstanceResponse;
-const DescribeMessageDetailsResponse = models.DescribeMessageDetailsResponse;
-const UpdateMessageEnrichmentRulePriorityRequest = models.UpdateMessageEnrichmentRulePriorityRequest;
-const DescribeUserListResponse = models.DescribeUserListResponse;
-const DeleteTopicResponse = models.DeleteTopicResponse;
-const ModifyAuthorizationPolicyResponse = models.ModifyAuthorizationPolicyResponse;
-const DeleteInstanceResponse = models.DeleteInstanceResponse;
-const DescribeMessageDetailsRequest = models.DescribeMessageDetailsRequest;
-const DeleteMessageEnrichmentRuleResponse = models.DeleteMessageEnrichmentRuleResponse;
-const DeleteInstanceRequest = models.DeleteInstanceRequest;
+const TagFilter = models.TagFilter;
+const PriceTag = models.PriceTag;
 const ModifyAuthorizationPolicyRequest = models.ModifyAuthorizationPolicyRequest;
-const DescribeInstanceRequest = models.DescribeInstanceRequest;
-const DescribeClientListResponse = models.DescribeClientListResponse;
-const DescribeUserListRequest = models.DescribeUserListRequest;
+const DeleteTopicResponse = models.DeleteTopicResponse;
+const ModifyDeviceIdentityRequest = models.ModifyDeviceIdentityRequest;
+const PropagatingProperty = models.PropagatingProperty;
 const ModifyUserRequest = models.ModifyUserRequest;
-const KickOutClientRequest = models.KickOutClientRequest;
-const DeleteClientSubscriptionResponse = models.DeleteClientSubscriptionResponse;
+const DescribeDeviceIdentitiesResponse = models.DescribeDeviceIdentitiesResponse;
 const IpRule = models.IpRule;
-const UpdateAuthorizationPolicyPriorityRequest = models.UpdateAuthorizationPolicyPriorityRequest;
-const DescribeMessageEnrichmentRulesRequest = models.DescribeMessageEnrichmentRulesRequest;
-const DescribeTopicRequest = models.DescribeTopicRequest;
 
 
 /**
@@ -94,6 +125,17 @@ class MqttClient extends AbstractClient {
         super("mqtt.intl.tencentcloudapi.com", "2024-05-16", credential, region, profile);
     }
     
+    /**
+     * Create a device signature for per-device secret
+     * @param {CreateDeviceIdentityRequest} req
+     * @param {function(string, CreateDeviceIdentityResponse):void} cb
+     * @public
+     */
+    CreateDeviceIdentity(req, cb) {
+        let resp = new CreateDeviceIdentityResponse();
+        this.request("CreateDeviceIdentity", req, resp, cb);
+    }
+
     /**
      * This API is used to query the user list. Filter parameter usage instructions are as follows:.
 
@@ -130,14 +172,14 @@ This API is used to perform Username fuzzy search.
     }
 
     /**
-     * This API is used to create a message enrichment rule.
-     * @param {CreateMessageEnrichmentRuleRequest} req
-     * @param {function(string, CreateMessageEnrichmentRuleResponse):void} cb
+     * Query device certificates with paging
+     * @param {DescribeDeviceCertificatesRequest} req
+     * @param {function(string, DescribeDeviceCertificatesResponse):void} cb
      * @public
      */
-    CreateMessageEnrichmentRule(req, cb) {
-        let resp = new CreateMessageEnrichmentRuleResponse();
-        this.request("CreateMessageEnrichmentRule", req, resp, cb);
+    DescribeDeviceCertificates(req, cb) {
+        let resp = new DescribeDeviceCertificatesResponse();
+        this.request("DescribeDeviceCertificates", req, resp, cb);
     }
 
     /**
@@ -152,6 +194,39 @@ This API is used to perform Username fuzzy search.
     }
 
     /**
+     * This API is used to obtain product sales specifications.
+     * @param {DescribeProductSKUListRequest} req
+     * @param {function(string, DescribeProductSKUListResponse):void} cb
+     * @public
+     */
+    DescribeProductSKUList(req, cb) {
+        let resp = new DescribeProductSKUListResponse();
+        this.request("DescribeProductSKUList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a message enrichment rule.
+     * @param {CreateMessageEnrichmentRuleRequest} req
+     * @param {function(string, CreateMessageEnrichmentRuleResponse):void} cb
+     * @public
+     */
+    CreateMessageEnrichmentRule(req, cb) {
+        let resp = new CreateMessageEnrichmentRuleResponse();
+        this.request("CreateMessageEnrichmentRule", req, resp, cb);
+    }
+
+    /**
+     * Delete a device signature
+     * @param {DeleteDeviceIdentityRequest} req
+     * @param {function(string, DeleteDeviceIdentityResponse):void} cb
+     * @public
+     */
+    DeleteDeviceIdentity(req, cb) {
+        let resp = new DeleteDeviceIdentityResponse();
+        this.request("DeleteDeviceIdentity", req, resp, cb);
+    }
+
+    /**
      * This API is used to query messages based on subscription.
      * @param {DescribeMessageByTopicRequest} req
      * @param {function(string, DescribeMessageByTopicResponse):void} cb
@@ -160,6 +235,17 @@ This API is used to perform Username fuzzy search.
     DescribeMessageByTopic(req, cb) {
         let resp = new DescribeMessageByTopicResponse();
         this.request("DescribeMessageByTopic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the subscription group list shared within the cluster.
+     * @param {DescribeSharedSubscriptionGroupsRequest} req
+     * @param {function(string, DescribeSharedSubscriptionGroupsResponse):void} cb
+     * @public
+     */
+    DescribeSharedSubscriptionGroups(req, cb) {
+        let resp = new DescribeSharedSubscriptionGroupsResponse();
+        this.request("DescribeSharedSubscriptionGroups", req, resp, cb);
     }
 
     /**
@@ -185,14 +271,19 @@ This API is used to perform Username fuzzy search.
     }
 
     /**
-     * This API is used to modify policy rules. See the data plane authorization policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
-     * @param {ModifyAuthorizationPolicyRequest} req
-     * @param {function(string, ModifyAuthorizationPolicyResponse):void} cb
+     * Get instance list. Description of the Filters parameter use is as follows:
+1. InstanceName, fuzzy search by name
+2. InstanceId, query by instance ID
+3. InstanceStatus, instance status query, supports multiple selections
+
+When using the TagFilters parameter for search, the filters parameter is invalid.
+     * @param {DescribeInstanceListRequest} req
+     * @param {function(string, DescribeInstanceListResponse):void} cb
      * @public
      */
-    ModifyAuthorizationPolicy(req, cb) {
-        let resp = new ModifyAuthorizationPolicyResponse();
-        this.request("ModifyAuthorizationPolicy", req, resp, cb);
+    DescribeInstanceList(req, cb) {
+        let resp = new DescribeInstanceListResponse();
+        this.request("DescribeInstanceList", req, resp, cb);
     }
 
     /**
@@ -215,6 +306,28 @@ This API is used to perform Username fuzzy search.
     DescribeMessageDetails(req, cb) {
         let resp = new DescribeMessageDetailsResponse();
         this.request("DescribeMessageDetails", req, resp, cb);
+    }
+
+    /**
+     * Query device identification
+     * @param {DescribeDeviceIdentityRequest} req
+     * @param {function(string, DescribeDeviceIdentityResponse):void} cb
+     * @public
+     */
+    DescribeDeviceIdentity(req, cb) {
+        let resp = new DescribeDeviceIdentityResponse();
+        this.request("DescribeDeviceIdentity", req, resp, cb);
+    }
+
+    /**
+     * Query the subscription list of a shared subscription group
+     * @param {DescribeSharedSubscriptionsRequest} req
+     * @param {function(string, DescribeSharedSubscriptionsResponse):void} cb
+     * @public
+     */
+    DescribeSharedSubscriptions(req, cb) {
+        let resp = new DescribeSharedSubscriptionsResponse();
+        this.request("DescribeSharedSubscriptions", req, resp, cb);
     }
 
     /**
@@ -285,6 +398,17 @@ Note: All attributes of the current rule must be submitted, even if specific fie
     }
 
     /**
+     * This API is used to modify policy rules. See the data plane authorization policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
+     * @param {ModifyAuthorizationPolicyRequest} req
+     * @param {function(string, ModifyAuthorizationPolicyResponse):void} cb
+     * @public
+     */
+    ModifyAuthorizationPolicy(req, cb) {
+        let resp = new ModifyAuthorizationPolicyResponse();
+        this.request("ModifyAuthorizationPolicy", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete policy rules.
      * @param {DeleteAuthorizationPolicyRequest} req
      * @param {function(string, DeleteAuthorizationPolicyResponse):void} cb
@@ -304,6 +428,28 @@ Note: All attributes of the current rule must be submitted, even if specific fie
     DescribeTopic(req, cb) {
         let resp = new DescribeTopicResponse();
         this.request("DescribeTopic", req, resp, cb);
+    }
+
+    /**
+     * Query shared subscription group detailed information
+     * @param {DescribeSharedSubscriptionClientRequest} req
+     * @param {function(string, DescribeSharedSubscriptionClientResponse):void} cb
+     * @public
+     */
+    DescribeSharedSubscriptionClient(req, cb) {
+        let resp = new DescribeSharedSubscriptionClientResponse();
+        this.request("DescribeSharedSubscriptionClient", req, resp, cb);
+    }
+
+    /**
+     * Modify the device signature
+     * @param {ModifyDeviceIdentityRequest} req
+     * @param {function(string, ModifyDeviceIdentityResponse):void} cb
+     * @public
+     */
+    ModifyDeviceIdentity(req, cb) {
+        let resp = new ModifyDeviceIdentityResponse();
+        this.request("ModifyDeviceIdentity", req, resp, cb);
     }
 
     /**
@@ -351,6 +497,17 @@ Note: All attributes of the current rule must be submitted, even if specific fie
     }
 
     /**
+     * This API is used to delete a subscription of an MQTT client.
+     * @param {DeleteClientSubscriptionRequest} req
+     * @param {function(string, DeleteClientSubscriptionResponse):void} cb
+     * @public
+     */
+    DeleteClientSubscription(req, cb) {
+        let resp = new DeleteClientSubscriptionResponse();
+        this.request("DeleteClientSubscription", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a performance test task for an MQTT instance.
      * @param {CreateAuthorizationPolicyRequest} req
      * @param {function(string, CreateAuthorizationPolicyResponse):void} cb
@@ -373,14 +530,14 @@ Note: All attributes of the current rule must be submitted, even if specific fie
     }
 
     /**
-     * This API is used to delete a subscription of an MQTT client.
-     * @param {DeleteClientSubscriptionRequest} req
-     * @param {function(string, DeleteClientSubscriptionResponse):void} cb
+     * Query the list of device identifiers in a cluster
+     * @param {DescribeDeviceIdentitiesRequest} req
+     * @param {function(string, DescribeDeviceIdentitiesResponse):void} cb
      * @public
      */
-    DeleteClientSubscription(req, cb) {
-        let resp = new DeleteClientSubscriptionResponse();
-        this.request("DeleteClientSubscription", req, resp, cb);
+    DescribeDeviceIdentities(req, cb) {
+        let resp = new DescribeDeviceIdentitiesResponse();
+        this.request("DescribeDeviceIdentities", req, resp, cb);
     }
 
 

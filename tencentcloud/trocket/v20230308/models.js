@@ -383,6 +383,144 @@ class CreateInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * Consumer group information
+ * @class
+ */
+class ConsumeGroupItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Consumer group name
+         * @type {string || null}
+         */
+        this.ConsumerGroup = null;
+
+        /**
+         * Enable consumption
+         * @type {boolean || null}
+         */
+        this.ConsumeEnable = null;
+
+        /**
+         * Ordered delivery: true
+Concurrent delivery: false.
+         * @type {boolean || null}
+         */
+        this.ConsumeMessageOrderly = null;
+
+        /**
+         * Maximum number of retries
+         * @type {number || null}
+         */
+        this.MaxRetryTimes = null;
+
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * ID of a 4.x cluster.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterIdV4 = null;
+
+        /**
+         * Namespace of a 4.x cluster.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NamespaceV4 = null;
+
+        /**
+         * Consumer group name of a 4.x cluster.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ConsumerGroupV4 = null;
+
+        /**
+         * Complete namespace of a 4.x cluster.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FullNamespaceV4 = null;
+
+        /**
+         * Number of subscribed topics.
+         * @type {number || null}
+         */
+        this.SubscribeTopicNum = null;
+
+        /**
+         * Creation time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * List of bound tags
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
+        /**
+         * Retry policy
+         * @type {RetryPolicy || null}
+         */
+        this.RetryPolicy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ConsumerGroup = 'ConsumerGroup' in params ? params.ConsumerGroup : null;
+        this.ConsumeEnable = 'ConsumeEnable' in params ? params.ConsumeEnable : null;
+        this.ConsumeMessageOrderly = 'ConsumeMessageOrderly' in params ? params.ConsumeMessageOrderly : null;
+        this.MaxRetryTimes = 'MaxRetryTimes' in params ? params.MaxRetryTimes : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ClusterIdV4 = 'ClusterIdV4' in params ? params.ClusterIdV4 : null;
+        this.NamespaceV4 = 'NamespaceV4' in params ? params.NamespaceV4 : null;
+        this.ConsumerGroupV4 = 'ConsumerGroupV4' in params ? params.ConsumerGroupV4 : null;
+        this.FullNamespaceV4 = 'FullNamespaceV4' in params ? params.FullNamespaceV4 : null;
+        this.SubscribeTopicNum = 'SubscribeTopicNum' in params ? params.SubscribeTopicNum : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+
+        if (params.RetryPolicy) {
+            let obj = new RetryPolicy();
+            obj.deserialize(params.RetryPolicy)
+            this.RetryPolicy = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeConsumerClient response structure.
  * @class
  */
@@ -554,6 +692,44 @@ class DescribeMessageListRequest extends  AbstractModel {
 }
 
 /**
+ * retry policy
+ * @class
+ */
+class RetryPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Retry policy type. The enumeration values are as follows:
+
+-EXPONENTIAL: Fixed interval
+-CUSTOMIZED: Tier backoff
+         * @type {string || null}
+         */
+        this.PolicyType = null;
+
+        /**
+         * Fixed retry interval. This parameter takes effect when a fixed interval-based retry policy is configured.
+         * @type {number || null}
+         */
+        this.RetryInterval = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
+        this.RetryInterval = 'RetryInterval' in params ? params.RetryInterval : null;
+
+    }
+}
+
+/**
  * ModifyInstance request structure.
  * @class
  */
@@ -654,6 +830,77 @@ class ModifyInstanceRequest extends  AbstractModel {
         this.MaxTopicNum = 'MaxTopicNum' in params ? params.MaxTopicNum : null;
         this.ExtraTopicNum = 'ExtraTopicNum' in params ? params.ExtraTopicNum : null;
         this.EnableDeletionProtection = 'EnableDeletionProtection' in params ? params.EnableDeletionProtection : null;
+
+    }
+}
+
+/**
+ * Migration task information.
+ * @class
+ */
+class MigrationTaskItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 0 - not specified (existing).
+Metadata import.
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Total number of topics.
+         * @type {number || null}
+         */
+        this.TopicNum = null;
+
+        /**
+         * Total Number of Consumer Groups
+         * @type {number || null}
+         */
+        this.GroupNum = null;
+
+        /**
+         * Task status. 0: migrating; 1: migration successful; 2: migration completed, with only part of the data migrated.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Creation time.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
+        this.GroupNum = 'GroupNum' in params ? params.GroupNum : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -3965,55 +4212,64 @@ class DescribeConsumerGroupRequest extends  AbstractModel {
 }
 
 /**
- * Migration task information.
+ * DescribeConsumerGroupList request structure.
  * @class
  */
-class MigrationTaskItem extends  AbstractModel {
+class DescribeConsumerGroupListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * Instance ID.
+         * TDMQ RocketMQ instance ID. It can be obtained from the API [DescribeFusionInstanceList](https://www.tencentcloud.com/document/api/1493/106745?from_cn_redirect=1) or the console.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 0 - not specified (existing).
-Metadata import.
-         * @type {number || null}
+         * Tag filter
+         * @type {Array.<TagFilter> || null}
          */
-        this.Type = null;
+        this.TagFilters = null;
 
         /**
-         * Total number of topics.
-         * @type {number || null}
+         * Filtering condition list. See the description of the API using this parameter for the usage method.
+         * @type {Array.<Filter> || null}
          */
-        this.TopicNum = null;
+        this.Filters = null;
 
         /**
-         * Total Number of Consumer Groups
+         * Starting position of the query. Default value: 0.
          * @type {number || null}
          */
-        this.GroupNum = null;
+        this.Offset = null;
 
         /**
-         * Task status. 0: migrating; 1: migration successful; 2: migration completed, with only part of the data migrated.
+         * Maximum number of queried results. Default value: 20.
          * @type {number || null}
          */
-        this.Status = null;
+        this.Limit = null;
 
         /**
-         * Creation time.
-         * @type {number || null}
+         * Queries consumer groups under a specified topic.
+         * @type {string || null}
          */
-        this.CreateTime = null;
+        this.FromTopic = null;
+
+        /**
+         * Sort by specified field, with the enumerated values as follows:
+-subscribeNum: Number of topics subscribed
+         * @type {string || null}
+         */
+        this.SortedBy = null;
+
+        /**
+         * Sort in ascending or descending order, with the enumerated values as follows:
+
+-asc: Ascending
+- DESC: descending order.
+         * @type {string || null}
+         */
+        this.SortOrder = null;
 
     }
 
@@ -4024,13 +4280,30 @@ Metadata import.
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
-        this.GroupNum = 'GroupNum' in params ? params.GroupNum : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
+            }
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.FromTopic = 'FromTopic' in params ? params.FromTopic : null;
+        this.SortedBy = 'SortedBy' in params ? params.SortedBy : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
 
     }
 }
@@ -6532,6 +6805,56 @@ class TagFilter extends  AbstractModel {
 }
 
 /**
+ * DescribeConsumerGroupList response structure.
+ * @class
+ */
+class DescribeConsumerGroupListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total query count
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Consumer group list
+         * @type {Array.<ConsumeGroupItem> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ConsumeGroupItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Price tag information. A complete price tag includes the billing category and the billing item.
  * @class
  */
@@ -6908,9 +7231,12 @@ module.exports = {
     ProductSKU: ProductSKU,
     DescribeRoleListResponse: DescribeRoleListResponse,
     CreateInstanceResponse: CreateInstanceResponse,
+    ConsumeGroupItem: ConsumeGroupItem,
     DescribeConsumerClientResponse: DescribeConsumerClientResponse,
     DescribeMessageListRequest: DescribeMessageListRequest,
+    RetryPolicy: RetryPolicy,
     ModifyInstanceRequest: ModifyInstanceRequest,
+    MigrationTaskItem: MigrationTaskItem,
     FusionInstanceItem: FusionInstanceItem,
     InstanceItemExtraInfo: InstanceItemExtraInfo,
     DescribeConsumerGroupResponse: DescribeConsumerGroupResponse,
@@ -6966,7 +7292,7 @@ module.exports = {
     DescribeTopicListRequest: DescribeTopicListRequest,
     ModifyConsumerGroupRequest: ModifyConsumerGroupRequest,
     DescribeConsumerGroupRequest: DescribeConsumerGroupRequest,
-    MigrationTaskItem: MigrationTaskItem,
+    DescribeConsumerGroupListRequest: DescribeConsumerGroupListRequest,
     TopicItem: TopicItem,
     SubscriptionData: SubscriptionData,
     CreateInstanceRequest: CreateInstanceRequest,
@@ -7002,6 +7328,7 @@ module.exports = {
     MessageItem: MessageItem,
     RoleItem: RoleItem,
     TagFilter: TagFilter,
+    DescribeConsumerGroupListResponse: DescribeConsumerGroupListResponse,
     PriceTag: PriceTag,
     ProducerInfo: ProducerInfo,
     DeleteTopicResponse: DeleteTopicResponse,

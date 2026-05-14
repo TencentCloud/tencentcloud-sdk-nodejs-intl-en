@@ -23,9 +23,12 @@ const DescribeSmoothMigrationTaskListRequest = models.DescribeSmoothMigrationTas
 const ProductSKU = models.ProductSKU;
 const DescribeRoleListResponse = models.DescribeRoleListResponse;
 const CreateInstanceResponse = models.CreateInstanceResponse;
+const ConsumeGroupItem = models.ConsumeGroupItem;
 const DescribeConsumerClientResponse = models.DescribeConsumerClientResponse;
 const DescribeMessageListRequest = models.DescribeMessageListRequest;
+const RetryPolicy = models.RetryPolicy;
 const ModifyInstanceRequest = models.ModifyInstanceRequest;
+const MigrationTaskItem = models.MigrationTaskItem;
 const FusionInstanceItem = models.FusionInstanceItem;
 const InstanceItemExtraInfo = models.InstanceItemExtraInfo;
 const DescribeConsumerGroupResponse = models.DescribeConsumerGroupResponse;
@@ -81,7 +84,7 @@ const ZoneScheduledItem = models.ZoneScheduledItem;
 const DescribeTopicListRequest = models.DescribeTopicListRequest;
 const ModifyConsumerGroupRequest = models.ModifyConsumerGroupRequest;
 const DescribeConsumerGroupRequest = models.DescribeConsumerGroupRequest;
-const MigrationTaskItem = models.MigrationTaskItem;
+const DescribeConsumerGroupListRequest = models.DescribeConsumerGroupListRequest;
 const TopicItem = models.TopicItem;
 const SubscriptionData = models.SubscriptionData;
 const CreateInstanceRequest = models.CreateInstanceRequest;
@@ -117,6 +120,7 @@ const Endpoint = models.Endpoint;
 const MessageItem = models.MessageItem;
 const RoleItem = models.RoleItem;
 const TagFilter = models.TagFilter;
+const DescribeConsumerGroupListResponse = models.DescribeConsumerGroupListResponse;
 const PriceTag = models.PriceTag;
 const ProducerInfo = models.ProducerInfo;
 const DeleteTopicResponse = models.DeleteTopicResponse;
@@ -510,6 +514,19 @@ This API is used to demonstrate Filters.
     }
 
     /**
+     * This API is used to query producer list information associated with a topic. Filters support the following criteria:.
+-client IP.
+-client ID.
+     * @param {DescribeProducerListRequest} req
+     * @param {function(string, DescribeProducerListResponse):void} cb
+     * @public
+     */
+    DescribeProducerList(req, cb) {
+        let resp = new DescribeProducerListResponse();
+        this.request("DescribeProducerList", req, resp, cb);
+    }
+
+    /**
      * This API is used to describe clusters. It only supports 5.x clusters. Description of the Filters parameter use is as follows:.
 
 -InstanceName Cluster name, supports fuzzy search.
@@ -553,16 +570,26 @@ This API is used to demonstrate Filters.
     }
 
     /**
-     * This API is used to query producer list information associated with a topic. Filters support the following criteria:.
--client IP.
--client ID.
-     * @param {DescribeProducerListRequest} req
-     * @param {function(string, DescribeProducerListResponse):void} cb
+     * Get the consumer group list. The Filter parameter usage instructions are as follows:
+
+-ConsumerGroupName, the consumer group name, supports fuzzy query and can be obtained from the [ConsumeGroupItem](https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#ConsumeGroupItem) in the API response of [DescribeConsumerGroupList](https://www.tencentcloud.com/document/api/1493/101535?from_cn_redirect=1) or the console.
+-ConsumeMessageOrderly, shipping order, enumeration value as follows:
+-ordered delivery
+-Concurrent delivery: false.
+-RetryPolicy, retry policy, enumeration values as follows:
+-EXPONENTIAL: fixed interval
+-CUSTOMIZED: Tier backoff
+
+Example of Filters: 
+[{ "Name": "ConsumeMessageOrderly", "Values": ["true"] }]
+This API is applicable to 5.x clusters. For 4.x clusters, refer to the REST API documentation [DescribeRocketMQGroups](https://www.tencentcloud.com/document/api/1179/63420?from_cn_redirect=1) to get the consumer group list.
+     * @param {DescribeConsumerGroupListRequest} req
+     * @param {function(string, DescribeConsumerGroupListResponse):void} cb
      * @public
      */
-    DescribeProducerList(req, cb) {
-        let resp = new DescribeProducerListResponse();
-        this.request("DescribeProducerList", req, resp, cb);
+    DescribeConsumerGroupList(req, cb) {
+        let resp = new DescribeConsumerGroupListResponse();
+        this.request("DescribeConsumerGroupList", req, resp, cb);
     }
 
     /**

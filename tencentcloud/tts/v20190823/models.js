@@ -193,7 +193,7 @@ It can contain up to 150 Chinese characters (a full-width punctuation as a Chine
         this.VoiceType = null;
 
         /**
-         * One-sentence version VRS Voice ID, must be filled in when using the one-sentence version VRS voice.
+         * 
          * @type {string || null}
          */
         this.FastVoiceType = null;
@@ -229,14 +229,13 @@ It can contain up to 150 Chinese characters (a full-width punctuation as a Chine
         this.SegmentRate = null;
 
         /**
-         * Controls the emotion of synthesized audio, applicable only to multi-emotion voices. Values: neutral, sad, happy, angry, fear, news, story, radio, poetry, call, sajiao (coquettish), disgusted, amaze (surprised), peaceful, exciting, aojiao (haughty), jieshuo (narration)
-Sample value: neutral
+         * 
          * @type {string || null}
          */
         this.EmotionCategory = null;
 
         /**
-         * Controls the emotion intensity of synthesized audio, with a value range of [50,200], defaults to 100; takes effect only when EmotionCategory is not empty;
+         * 
          * @type {number || null}
          */
         this.EmotionIntensity = null;

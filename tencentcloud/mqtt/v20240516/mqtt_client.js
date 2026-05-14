@@ -26,6 +26,7 @@ const CreateInstanceResponse = models.CreateInstanceResponse;
 const DescribeInstanceResponse = models.DescribeInstanceResponse;
 const MessageEnrichmentRuleItem = models.MessageEnrichmentRuleItem;
 const DeleteDeviceIdentityRequest = models.DeleteDeviceIdentityRequest;
+const AuthorizationPolicyPriority = models.AuthorizationPolicyPriority;
 const ModifyInstanceRequest = models.ModifyInstanceRequest;
 const DeleteTopicRequest = models.DeleteTopicRequest;
 const ModifyUserResponse = models.ModifyUserResponse;
@@ -76,13 +77,14 @@ const AddClientSubscriptionResponse = models.AddClientSubscriptionResponse;
 const AuthorizationPolicyItem = models.AuthorizationPolicyItem;
 const CreateInstanceRequest = models.CreateInstanceRequest;
 const CreateAuthorizationPolicyResponse = models.CreateAuthorizationPolicyResponse;
-const DescribeSharedSubscriptionsResponse = models.DescribeSharedSubscriptionsResponse;
+const DeleteTopicResponse = models.DeleteTopicResponse;
 const Filter = models.Filter;
 const DescribeDeviceCertificatesResponse = models.DescribeDeviceCertificatesResponse;
 const CreateUserRequest = models.CreateUserRequest;
 const DescribeSharedSubscriptionsRequest = models.DescribeSharedSubscriptionsRequest;
 const UpdateMessageEnrichmentRulePriorityRequest = models.UpdateMessageEnrichmentRulePriorityRequest;
 const DeleteInstanceRequest = models.DeleteInstanceRequest;
+const DescribeDeviceCertificateRequest = models.DescribeDeviceCertificateRequest;
 const DescribeUserListRequest = models.DescribeUserListRequest;
 const CreateDeviceIdentityResponse = models.CreateDeviceIdentityResponse;
 const KickOutClientRequest = models.KickOutClientRequest;
@@ -97,7 +99,7 @@ const DescribeDeviceIdentityRequest = models.DescribeDeviceIdentityRequest;
 const DescribeInstanceRequest = models.DescribeInstanceRequest;
 const DescribeAuthorizationPoliciesRequest = models.DescribeAuthorizationPoliciesRequest;
 const DescribeProductSKUListRequest = models.DescribeProductSKUListRequest;
-const AuthorizationPolicyPriority = models.AuthorizationPolicyPriority;
+const DescribeDeviceCertificateResponse = models.DescribeDeviceCertificateResponse;
 const DescribeInstanceListRequest = models.DescribeInstanceListRequest;
 const CreateMessageEnrichmentRuleResponse = models.CreateMessageEnrichmentRuleResponse;
 const DeviceCertificateItem = models.DeviceCertificateItem;
@@ -107,7 +109,7 @@ const MQTTClientInfo = models.MQTTClientInfo;
 const TagFilter = models.TagFilter;
 const PriceTag = models.PriceTag;
 const ModifyAuthorizationPolicyRequest = models.ModifyAuthorizationPolicyRequest;
-const DeleteTopicResponse = models.DeleteTopicResponse;
+const DescribeSharedSubscriptionsResponse = models.DescribeSharedSubscriptionsResponse;
 const ModifyDeviceIdentityRequest = models.ModifyDeviceIdentityRequest;
 const PropagatingProperty = models.PropagatingProperty;
 const ModifyUserRequest = models.ModifyUserRequest;
@@ -238,14 +240,14 @@ This API is used to perform Username fuzzy search.
     }
 
     /**
-     * This API is used to query the subscription group list shared within the cluster.
-     * @param {DescribeSharedSubscriptionGroupsRequest} req
-     * @param {function(string, DescribeSharedSubscriptionGroupsResponse):void} cb
+     * This API is used to purchase a new MQTT instance.
+     * @param {CreateInstanceRequest} req
+     * @param {function(string, CreateInstanceResponse):void} cb
      * @public
      */
-    DescribeSharedSubscriptionGroups(req, cb) {
-        let resp = new DescribeSharedSubscriptionGroupsResponse();
-        this.request("DescribeSharedSubscriptionGroups", req, resp, cb);
+    CreateInstance(req, cb) {
+        let resp = new CreateInstanceResponse();
+        this.request("CreateInstance", req, resp, cb);
     }
 
     /**
@@ -260,14 +262,14 @@ This API is used to perform Username fuzzy search.
     }
 
     /**
-     * This API is used to purchase a new MQTT instance.
-     * @param {CreateInstanceRequest} req
-     * @param {function(string, CreateInstanceResponse):void} cb
+     * This API is used to query device certificate details.
+     * @param {DescribeDeviceCertificateRequest} req
+     * @param {function(string, DescribeDeviceCertificateResponse):void} cb
      * @public
      */
-    CreateInstance(req, cb) {
-        let resp = new CreateInstanceResponse();
-        this.request("CreateInstance", req, resp, cb);
+    DescribeDeviceCertificate(req, cb) {
+        let resp = new DescribeDeviceCertificateResponse();
+        this.request("DescribeDeviceCertificate", req, resp, cb);
     }
 
     /**
@@ -494,6 +496,17 @@ Note: All attributes of the current rule must be submitted, even if specific fie
     DeleteTopic(req, cb) {
         let resp = new DeleteTopicResponse();
         this.request("DeleteTopic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the subscription group list shared within the cluster.
+     * @param {DescribeSharedSubscriptionGroupsRequest} req
+     * @param {function(string, DescribeSharedSubscriptionGroupsResponse):void} cb
+     * @public
+     */
+    DescribeSharedSubscriptionGroups(req, cb) {
+        let resp = new DescribeSharedSubscriptionGroupsResponse();
+        this.request("DescribeSharedSubscriptionGroups", req, resp, cb);
     }
 
     /**

@@ -16,10 +16,12 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ImageToImageRequest = models.ImageToImageRequest;
 const ImageToImageResponse = models.ImageToImageResponse;
-const LogoRect = models.LogoRect;
 const LogoParam = models.LogoParam;
+const ImageToImageRequest = models.ImageToImageRequest;
+const LogoRect = models.LogoRect;
+const ChangeClothesRequest = models.ChangeClothesRequest;
+const ChangeClothesResponse = models.ChangeClothesResponse;
 const ResultConfig = models.ResultConfig;
 
 
@@ -33,6 +35,18 @@ class AiartClient extends AbstractClient {
         super("aiart.intl.tencentcloudapi.com", "2022-12-29", credential, region, profile);
     }
     
+    /**
+     * This API is used to generate the images of the model changing clothes based on the model photo and the clothes image.
+It supports 1 concurrency by default, which means that up to 1 submitted task can be processed simultaneously. Subsequent tasks can be processed only after ongoing ones are completed.
+     * @param {ChangeClothesRequest} req
+     * @param {function(string, ChangeClothesResponse):void} cb
+     * @public
+     */
+    ChangeClothes(req, cb) {
+        let resp = new ChangeClothesResponse();
+        this.request("ChangeClothes", req, resp, cb);
+    }
+
     /**
      * This API is used to transfer the image style based on the image to image technology. Images with small figures, complex gestures or too many figures are not recommended.
 It supports 3 concurrency by default, which means that up to 3 submitted tasks can be processed simultaneously. Subsequent tasks can be processed only after ongoing ones are completed.

@@ -17,83 +17,108 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeApmAssociationResponse = models.DescribeApmAssociationResponse;
-const ModifyApmInstanceRequest = models.ModifyApmInstanceRequest;
-const ApmInstanceDetail = models.ApmInstanceDetail;
 const CreateApmInstanceRequest = models.CreateApmInstanceRequest;
+const DescribeApmVulnerabilityCountResponse = models.DescribeApmVulnerabilityCountResponse;
+const DescribeServiceOverviewResponse = models.DescribeServiceOverviewResponse;
+const ApmSampleConfig = models.ApmSampleConfig;
+const DescribeApmSQLInjectionDetailResponse = models.DescribeApmSQLInjectionDetailResponse;
+const AgentOperationConfigView = models.AgentOperationConfigView;
+const SelectorView = models.SelectorView;
+const DescribeApmSampleConfigRequest = models.DescribeApmSampleConfigRequest;
+const DescribeApmAllVulCountResponse = models.DescribeApmAllVulCountResponse;
+const DescribeApmSampleConfigResponse = models.DescribeApmSampleConfigResponse;
+const DescribeServiceOverviewRequest = models.DescribeServiceOverviewRequest;
+const DescribeTopologyNewResponse = models.DescribeTopologyNewResponse;
+const DescribeOPRAllVulCountResponse = models.DescribeOPRAllVulCountResponse;
+const ModifyApmApplicationConfigResponse = models.ModifyApmApplicationConfigResponse;
+const DescribeApmServiceMetricResponse = models.DescribeApmServiceMetricResponse;
+const ModifyApmAssociationRequest = models.ModifyApmAssociationRequest;
+const DescribeGeneralOTSpanListResponse = models.DescribeGeneralOTSpanListResponse;
+const DescribeApmApplicationConfigResponse = models.DescribeApmApplicationConfigResponse;
+const DescribeApmAssociationRequest = models.DescribeApmAssociationRequest;
+const APMKV = models.APMKV;
+const Position = models.Position;
+const ComponentTopologyView = models.ComponentTopologyView;
+const CreateProfileTaskRequest = models.CreateProfileTaskRequest;
+const DescribeApmVulnerabilityDetailRequest = models.DescribeApmVulnerabilityDetailRequest;
+const DeleteApmSampleConfigResponse = models.DeleteApmSampleConfigResponse;
+const TopologyEdgeNew = models.TopologyEdgeNew;
+const DescribeApmPrometheusRuleRequest = models.DescribeApmPrometheusRuleRequest;
+const CreateApmPrometheusRuleResponse = models.CreateApmPrometheusRuleResponse;
+const TerminateApmInstanceResponse = models.TerminateApmInstanceResponse;
+const ApmPrometheusRules = models.ApmPrometheusRules;
+const ApmMetricRecord = models.ApmMetricRecord;
+const TopologyNode = models.TopologyNode;
+const DescribeApmAgentResponse = models.DescribeApmAgentResponse;
+const CreateApmSampleConfigRequest = models.CreateApmSampleConfigRequest;
+const DescribeTagValuesRequest = models.DescribeTagValuesRequest;
+const ApmServiceMetric = models.ApmServiceMetric;
+const ApmAppConfig = models.ApmAppConfig;
+const CreateApmSampleConfigResponse = models.CreateApmSampleConfigResponse;
+const Line = models.Line;
+const ModifyApmAssociationResponse = models.ModifyApmAssociationResponse;
+const APMKVItem = models.APMKVItem;
+const DescribeGeneralSpanListRequest = models.DescribeGeneralSpanListRequest;
+const DescribeApmAgentRequest = models.DescribeApmAgentRequest;
+const DescribeMetricRecordsRequest = models.DescribeMetricRecordsRequest;
+const DescribeGeneralMetricDataRequest = models.DescribeGeneralMetricDataRequest;
+const ModifyApmPrometheusRuleRequest = models.ModifyApmPrometheusRuleRequest;
+const ModifyApmInstanceResponse = models.ModifyApmInstanceResponse;
+const SpanTag = models.SpanTag;
+const DescribeGeneralMetricDataResponse = models.DescribeGeneralMetricDataResponse;
+const ModifyApmInstanceRequest = models.ModifyApmInstanceRequest;
+const SpanLog = models.SpanLog;
+const QueryMetricItem = models.QueryMetricItem;
+const ServiceDetail = models.ServiceDetail;
+const DescribeApmInstancesResponse = models.DescribeApmInstancesResponse;
+const DescribeApmPrometheusRuleResponse = models.DescribeApmPrometheusRuleResponse;
+const ModifyApmSampleConfigResponse = models.ModifyApmSampleConfigResponse;
+const DescribeApmApplicationConfigRequest = models.DescribeApmApplicationConfigRequest;
+const CreateProfileTaskResponse = models.CreateProfileTaskResponse;
+const DescribeApmVulnerabilityDetailResponse = models.DescribeApmVulnerabilityDetailResponse;
+const ModifyApmPrometheusRuleResponse = models.ModifyApmPrometheusRuleResponse;
+const DescribeMetricRecordsResponse = models.DescribeMetricRecordsResponse;
+const ApmTag = models.ApmTag;
+const DescribeApmSQLInjectionDetailRequest = models.DescribeApmSQLInjectionDetailRequest;
+const Filter = models.Filter;
+const DescribeGeneralOTSpanListRequest = models.DescribeGeneralOTSpanListRequest;
+const AutoProfilingConfig = models.AutoProfilingConfig;
+const DescribeGeneralApmApplicationConfigResponse = models.DescribeGeneralApmApplicationConfigResponse;
+const CreateApmInstanceResponse = models.CreateApmInstanceResponse;
+const ApmVulnerabilityServiceDetail = models.ApmVulnerabilityServiceDetail;
+const DescribeGeneralApmApplicationConfigRequest = models.DescribeGeneralApmApplicationConfigRequest;
+const DescribeTopologyNewRequest = models.DescribeTopologyNewRequest;
+const DescribeApmInstancesRequest = models.DescribeApmInstancesRequest;
+const DeleteApmSampleConfigRequest = models.DeleteApmSampleConfigRequest;
+const DescribeApmVulnerabilityCountRequest = models.DescribeApmVulnerabilityCountRequest;
+const ModifyApmSampleConfigRequest = models.ModifyApmSampleConfigRequest;
+const TerminateApmInstanceRequest = models.TerminateApmInstanceRequest;
+const ApmInstanceDetail = models.ApmInstanceDetail;
+const Span = models.Span;
 const ModifyGeneralApmApplicationConfigRequest = models.ModifyGeneralApmApplicationConfigRequest;
 const DescribeApmServiceMetricRequest = models.DescribeApmServiceMetricRequest;
 const CreateApmPrometheusRuleRequest = models.CreateApmPrometheusRuleRequest;
-const QueryMetricItem = models.QueryMetricItem;
-const ModifyApmPrometheusRuleRequest = models.ModifyApmPrometheusRuleRequest;
-const ModifyGeneralApmApplicationConfigResponse = models.ModifyGeneralApmApplicationConfigResponse;
-const DescribeApmInstancesResponse = models.DescribeApmInstancesResponse;
-const AgentOperationConfigView = models.AgentOperationConfigView;
+const DescribeApmAllVulCountRequest = models.DescribeApmAllVulCountRequest;
+const TkeMeta = models.TkeMeta;
 const Instrument = models.Instrument;
 const DescribeTagValuesResponse = models.DescribeTagValuesResponse;
-const DescribeTagValuesRequest = models.DescribeTagValuesRequest;
-const DescribeApmPrometheusRuleResponse = models.DescribeApmPrometheusRuleResponse;
-const ServiceDetail = models.ServiceDetail;
-const Span = models.Span;
 const ApmAgentInfo = models.ApmAgentInfo;
-const TerminateApmInstanceRequest = models.TerminateApmInstanceRequest;
 const ApmApplicationConfigView = models.ApmApplicationConfigView;
-const ApmMetricRecord = models.ApmMetricRecord;
-const DescribeServiceOverviewRequest = models.DescribeServiceOverviewRequest;
-const DescribeApmSampleConfigResponse = models.DescribeApmSampleConfigResponse;
-const DescribeApmAgentResponse = models.DescribeApmAgentResponse;
-const CreateApmSampleConfigRequest = models.CreateApmSampleConfigRequest;
-const DescribeApmSampleConfigRequest = models.DescribeApmSampleConfigRequest;
-const ModifyApmInstanceResponse = models.ModifyApmInstanceResponse;
-const SpanLog = models.SpanLog;
-const ApmServiceMetric = models.ApmServiceMetric;
-const ModifyApmSampleConfigResponse = models.ModifyApmSampleConfigResponse;
-const ApmAppConfig = models.ApmAppConfig;
-const CreateApmSampleConfigResponse = models.CreateApmSampleConfigResponse;
-const DescribeApmApplicationConfigRequest = models.DescribeApmApplicationConfigRequest;
-const Filter = models.Filter;
-const ApmField = models.ApmField;
-const Line = models.Line;
-const DescribeGeneralSpanListResponse = models.DescribeGeneralSpanListResponse;
-const CreateProfileTaskResponse = models.CreateProfileTaskResponse;
-const DescribeGeneralSpanListRequest = models.DescribeGeneralSpanListRequest;
-const ModifyApmPrometheusRuleResponse = models.ModifyApmPrometheusRuleResponse;
-const ApmAssociation = models.ApmAssociation;
 const OrderBy = models.OrderBy;
-const DescribeServiceOverviewResponse = models.DescribeServiceOverviewResponse;
-const DescribeApmServiceMetricResponse = models.DescribeApmServiceMetricResponse;
-const ModifyApmAssociationResponse = models.ModifyApmAssociationResponse;
-const DescribeMetricRecordsResponse = models.DescribeMetricRecordsResponse;
-const DescribeGeneralOTSpanListResponse = models.DescribeGeneralOTSpanListResponse;
-const ApmTag = models.ApmTag;
-const ModifyApmApplicationConfigResponse = models.ModifyApmApplicationConfigResponse;
-const DescribeApmApplicationConfigResponse = models.DescribeApmApplicationConfigResponse;
-const DescribeApmAssociationRequest = models.DescribeApmAssociationRequest;
+const ApmField = models.ApmField;
+const DescribeGeneralSpanListResponse = models.DescribeGeneralSpanListResponse;
+const ApmAssociation = models.ApmAssociation;
+const Resource = models.Resource;
+const Selectors = models.Selectors;
+const ModifyApmServiceResponse = models.ModifyApmServiceResponse;
 const ModifyApmApplicationConfigRequest = models.ModifyApmApplicationConfigRequest;
-const APMKV = models.APMKV;
-const DescribeGeneralOTSpanListRequest = models.DescribeGeneralOTSpanListRequest;
-const DescribeApmAgentRequest = models.DescribeApmAgentRequest;
-const DescribeMetricRecordsRequest = models.DescribeMetricRecordsRequest;
-const DescribeGeneralApmApplicationConfigResponse = models.DescribeGeneralApmApplicationConfigResponse;
-const DescribeGeneralMetricDataRequest = models.DescribeGeneralMetricDataRequest;
-const DescribeApmPrometheusRuleRequest = models.DescribeApmPrometheusRuleRequest;
-const CreateApmInstanceResponse = models.CreateApmInstanceResponse;
+const ModifyGeneralApmApplicationConfigResponse = models.ModifyGeneralApmApplicationConfigResponse;
+const CVMMeta = models.CVMMeta;
+const ModifyApmServiceRequest = models.ModifyApmServiceRequest;
 const SpanReference = models.SpanReference;
-const CreateProfileTaskRequest = models.CreateProfileTaskRequest;
 const SpanProcess = models.SpanProcess;
-const DeleteApmSampleConfigResponse = models.DeleteApmSampleConfigResponse;
-const ModifyApmAssociationRequest = models.ModifyApmAssociationRequest;
-const ApmPrometheusRules = models.ApmPrometheusRules;
-const ModifyApmSampleConfigRequest = models.ModifyApmSampleConfigRequest;
-const DescribeGeneralApmApplicationConfigRequest = models.DescribeGeneralApmApplicationConfigRequest;
-const ApmSampleConfig = models.ApmSampleConfig;
 const GeneralFilter = models.GeneralFilter;
-const DescribeApmInstancesRequest = models.DescribeApmInstancesRequest;
-const SpanTag = models.SpanTag;
-const DescribeGeneralMetricDataResponse = models.DescribeGeneralMetricDataResponse;
-const DeleteApmSampleConfigRequest = models.DeleteApmSampleConfigRequest;
-const APMKVItem = models.APMKVItem;
-const CreateApmPrometheusRuleResponse = models.CreateApmPrometheusRuleResponse;
-const TerminateApmInstanceResponse = models.TerminateApmInstanceResponse;
+const DescribeOPRAllVulCountRequest = models.DescribeOPRAllVulCountRequest;
 
 
 /**
@@ -118,6 +143,17 @@ class ApmClient extends AbstractClient {
     }
 
     /**
+     * Query vulnerability details.
+     * @param {DescribeApmVulnerabilityDetailRequest} req
+     * @param {function(string, DescribeApmVulnerabilityDetailResponse):void} cb
+     * @public
+     */
+    DescribeApmVulnerabilityDetail(req, cb) {
+        let resp = new DescribeApmVulnerabilityDetailResponse();
+        this.request("DescribeApmVulnerabilityDetail", req, resp, cb);
+    }
+
+    /**
      * General Query Call Chain List.
      * @param {DescribeGeneralSpanListRequest} req
      * @param {function(string, DescribeGeneralSpanListResponse):void} cb
@@ -126,6 +162,17 @@ class ApmClient extends AbstractClient {
     DescribeGeneralSpanList(req, cb) {
         let resp = new DescribeGeneralSpanListResponse();
         this.request("DescribeGeneralSpanList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to edit information about applications of APM.
+     * @param {ModifyApmServiceRequest} req
+     * @param {function(string, ModifyApmServiceResponse):void} cb
+     * @public
+     */
+    ModifyApmService(req, cb) {
+        let resp = new ModifyApmServiceResponse();
+        this.request("ModifyApmService", req, resp, cb);
     }
 
     /**
@@ -148,6 +195,17 @@ class ApmClient extends AbstractClient {
     CreateApmInstance(req, cb) {
         let resp = new CreateApmInstanceResponse();
         this.request("CreateApmInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the service topology diagram according to the application name.
+     * @param {DescribeTopologyNewRequest} req
+     * @param {function(string, DescribeTopologyNewResponse):void} cb
+     * @public
+     */
+    DescribeTopologyNew(req, cb) {
+        let resp = new DescribeTopologyNewResponse();
+        this.request("DescribeTopologyNew", req, resp, cb);
     }
 
     /**
@@ -195,27 +253,28 @@ class ApmClient extends AbstractClient {
     }
 
     /**
-     * This API is a general API used to obtain metric data. Users submit request parameters as needed and receive the corresponding metric data.
-The API call frequency is limited to 20 requests per second and 1200 requests per minute. The number of data points per request is limited to 1440.
-**Usage of the General Interface for Fetching Metric Data**
-DescribeGeneralMetricData is a general interface for querying metric data, supporting flexible data retrieval. The query method of this interface is similar to using the following SQL statement:
-SELECT {Metrics} FROM {ViewName} WHERE {Filters} GROUP BY {GroupBy}.
+     * General interface to obtain metric data. Submit request parameters as needed and receive the corresponding metric data.
+API call frequency limit: 20 requests/second, 1,200 requests/minute. Data point limit per single request: up to 1,440 data points.
+
+General interface to obtain metric data usage: This API is used to query metric data flexibly. The query method of this API is similar to using the following SQL statement: SELECT {Metrics} FROM {ViewName} WHERE {Filters} GROUP BY {GroupBy}. Before initiating request, please confirm the following key parameters:
 1. View (ViewName)
-Determines the data domain you want to query.
-Examples: service_metric (Service Monitoring View), db_metric (Database View), etc. For views supported by APM, please refer to [Metric Views](https://www.tencentcloud.com/document/product/248/68462?has_map=1&lang=en&pg=)
-2. Metrics (Metrics)
-Used to specify one or more metric items to be included in the returned results.
-Examples: request_count (Total Requests), duration_avg (Average Latency), error_rate (Error Rate). For metrics supported by APM, please refer to the [APM Metric Protocol Standard](https://www.tencentcloud.com/document/product/248/68462?has_map=1&lang=en&pg=).
-3. Filters (Filters)
-Supports one or more filtering conditions in the form of Key-Value pairs.
-Example: Querying only a specific service: service.name = "order-service". Common dimensions and specific dimensions supported by each ViewName can be used as keys in filtering conditions. For more details, please refer to the [APM Metric Protocol Standard](https://www.tencentcloud.com/document/product/248/68462?has_map=1&lang=en&pg=).
-4. Aggregation (GroupBy)
-Supports one or more aggregation dimensions, equivalent to the GROUP BY clause in SQL.
-Example: Grouping by the interface name operation to view the performance of each interface. Common dimensions and specific dimensions supported by each ViewName can be used as aggregation dimensions. For more details, please refer to the [APM Metric Protocol Standard](https://www.tencentcloud.com/document/product/248/68462?has_map=1&lang=en&pg=).
-5. Granularity (Period)
-This parameter determines whether the data needs to be aggregated by time slices.
-    - Period = 1 (Time Series Mode): The returned results are aggregated by time slices. The multiple values contained in the TimeSerial and DataSerial correspond one-to-one, representing the aggregation results for specific time slices. Time Series Mode is primarily used for displaying time trend charts.
-    - Period = 0 (Summary Statistics Mode): In the returned results, the DataSerial contains only a single value, representing the summarized data for the entire time range.
+Determine the domain of the queried data.
+For example: service_metric (service monitoring view), db_metric (database view). For views supported by APM, see metrics view (https://www.tencentcloud.com/document/product/248/101681?from_cn_redirect=1#069b06a9-2593-49db-b694-dea4200f3b19).
+
+2. Metrics
+Used to specify one or more metric items in the returned result.
+For example: request_count (request count), duration_avg (avg duration), error_rate (error rate). For supported metrics about APM, see [APM Protocol Standards](https://www.tencentcloud.com/document/product/248/101681?from_cn_redirect=1). Each view (ViewName) supports an exclusive metric set.
+3. Filters
+Support filter criteria in the form of one or multiple Key-Value pairs.
+For example: Only query a certain specific service with service.name = "order-service". Common dimensional and each view (ViewName) support exclusive dimensions, which can be used as keys in filter conditions. For details, refer to the APM metrics protocol standard (https://www.tencentcloud.com/document/product/248/101681?from_cn_redirect=1).
+
+4. GroupBy (aggregation)
+Support one or more aggregate dimensions, equivalent to SQL GROUP BY.
+For example: Group by API name operation to view the performance of each API. Common dimensional and each view (ViewName) support exclusive dimensional, which can be used as aggregation dimension. For details, see [APM protocol standards](https://www.tencentcloud.com/document/product/248/101681?from_cn_redirect=1).
+5. Granularity (Period) 
+This parameter determines whether time slice aggregation is required.
+-Period = 1: Time series mode: In the returned result, aggregation is performed by time slice. The time series (TimeSerial) and data sequence (DataSerial) have a one-to-one correspondence, representing aggregation results for specific time slices. Time series mode is mainly used to show time trend charts.
+-Period = 0: Summarize mode. In the returned result, the data sequence (DataSerial) only contains a unique value, representing the aggregated data for the entire time interval.
      * @param {DescribeGeneralMetricDataRequest} req
      * @param {function(string, DescribeGeneralMetricDataResponse):void} cb
      * @public
@@ -278,6 +337,17 @@ This parameter determines whether the data needs to be aggregated by time slices
     ModifyApmPrometheusRule(req, cb) {
         let resp = new ModifyApmPrometheusRuleResponse();
         this.request("ModifyApmPrometheusRule", req, resp, cb);
+    }
+
+    /**
+     * Query SQL injection details
+     * @param {DescribeApmSQLInjectionDetailRequest} req
+     * @param {function(string, DescribeApmSQLInjectionDetailResponse):void} cb
+     * @public
+     */
+    DescribeApmSQLInjectionDetail(req, cb) {
+        let resp = new DescribeApmSQLInjectionDetailResponse();
+        this.request("DescribeApmSQLInjectionDetail", req, resp, cb);
     }
 
     /**
@@ -358,6 +428,17 @@ This parameter determines whether the data needs to be aggregated by time slices
     }
 
     /**
+     * Query all vulnerability information of the user
+     * @param {DescribeApmAllVulCountRequest} req
+     * @param {function(string, DescribeApmAllVulCountResponse):void} cb
+     * @public
+     */
+    DescribeApmAllVulCount(req, cb) {
+        let resp = new DescribeApmAllVulCountResponse();
+        this.request("DescribeApmAllVulCount", req, resp, cb);
+    }
+
+    /**
      * This API is used to query application configuration.
      * @param {DescribeApmApplicationConfigRequest} req
      * @param {function(string, DescribeApmApplicationConfigResponse):void} cb
@@ -402,6 +483,17 @@ This parameter determines whether the data needs to be aggregated by time slices
     }
 
     /**
+     * Query all vulnerability information of the user
+     * @param {DescribeOPRAllVulCountRequest} req
+     * @param {function(string, DescribeOPRAllVulCountResponse):void} cb
+     * @public
+     */
+    DescribeOPRAllVulCount(req, cb) {
+        let resp = new DescribeOPRAllVulCountResponse();
+        this.request("DescribeOPRAllVulCount", req, resp, cb);
+    }
+
+    /**
      * This API is used to pull application overview data.
      * @param {DescribeServiceOverviewRequest} req
      * @param {function(string, DescribeServiceOverviewResponse):void} cb
@@ -410,6 +502,17 @@ This parameter determines whether the data needs to be aggregated by time slices
     DescribeServiceOverview(req, cb) {
         let resp = new DescribeServiceOverviewResponse();
         this.request("DescribeServiceOverview", req, resp, cb);
+    }
+
+    /**
+     * Query vulnerability metrics
+     * @param {DescribeApmVulnerabilityCountRequest} req
+     * @param {function(string, DescribeApmVulnerabilityCountResponse):void} cb
+     * @public
+     */
+    DescribeApmVulnerabilityCount(req, cb) {
+        let resp = new DescribeApmVulnerabilityCountResponse();
+        this.request("DescribeApmVulnerabilityCount", req, resp, cb);
     }
 
 

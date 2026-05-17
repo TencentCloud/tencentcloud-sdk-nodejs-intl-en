@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeCertificateBindResourceTaskDetailRequest = models.DescribeCertificateBindResourceTaskDetailRequest;
 const GatewayCertificate = models.GatewayCertificate;
+const ManagerInfo = models.ManagerInfo;
 const Error = models.Error;
 const ModifyCSRRequest = models.ModifyCSRRequest;
 const TCBAccessInstance = models.TCBAccessInstance;
@@ -26,16 +27,18 @@ const ModifyCertificateProjectResponse = models.ModifyCertificateProjectResponse
 const Certificates = models.Certificates;
 const CertificateExtra = models.CertificateExtra;
 const TeoInstanceList = models.TeoInstanceList;
-const RootCertificates = models.RootCertificates;
+const ManagerPreAuditDomain = models.ManagerPreAuditDomain;
 const DescribeHostUploadUpdateRecordDetailResponse = models.DescribeHostUploadUpdateRecordDetailResponse;
 const CdnInstanceDetail = models.CdnInstanceDetail;
 const DeployRecordItem = models.DeployRecordItem;
 const DescribeCertificateDetailRequest = models.DescribeCertificateDetailRequest;
 const TkeNameSpaceDetail = models.TkeNameSpaceDetail;
 const CreateCertificateBindResourceSyncTaskResponse = models.CreateCertificateBindResourceSyncTaskResponse;
+const UploadCertificateRequest = models.UploadCertificateRequest;
 const TCBHostInstance = models.TCBHostInstance;
-const ClbListener = models.ClbListener;
+const DescribeManagersResponse = models.DescribeManagersResponse;
 const COSInstanceList = models.COSInstanceList;
+const DescribeCompaniesResponse = models.DescribeCompaniesResponse;
 const DvAuths = models.DvAuths;
 const ModifyCertificateAliasRequest = models.ModifyCertificateAliasRequest;
 const BatchDeleteCSRRequest = models.BatchDeleteCSRRequest;
@@ -66,8 +69,9 @@ const ClbInstanceDetail = models.ClbInstanceDetail;
 const UpdateSyncProgress = models.UpdateSyncProgress;
 const OperationLog = models.OperationLog;
 const VodInstanceDetail = models.VodInstanceDetail;
+const DescribeCertificateResponse = models.DescribeCertificateResponse;
 const ResourceTypeRegions = models.ResourceTypeRegions;
-const UpdateCertificateRecordRollbackRequest = models.UpdateCertificateRecordRollbackRequest;
+const RootCertificates = models.RootCertificates;
 const DescribeHostUpdateRecordResponse = models.DescribeHostUpdateRecordResponse;
 const CertificateOrderSubmitRequest = models.CertificateOrderSubmitRequest;
 const UpdateCertificateRecordRollbackResponse = models.UpdateCertificateRecordRollbackResponse;
@@ -87,6 +91,7 @@ const SubmitCertificateInformationRequest = models.SubmitCertificateInformationR
 const TCBEnvironment = models.TCBEnvironment;
 const WafInstanceDetail = models.WafInstanceDetail;
 const DescribeCertificatesRequest = models.DescribeCertificatesRequest;
+const UpdateCertificateRecordRollbackRequest = models.UpdateCertificateRecordRollbackRequest;
 const ApiGatewayInstanceList = models.ApiGatewayInstanceList;
 const TeoInstanceDetail = models.TeoInstanceDetail;
 const PreAuditInfo = models.PreAuditInfo;
@@ -98,7 +103,7 @@ const CSRItem = models.CSRItem;
 const DownloadCertificateRequest = models.DownloadCertificateRequest;
 const UpdateCertificateInstanceRequest = models.UpdateCertificateInstanceRequest;
 const ReplaceCertificateRequest = models.ReplaceCertificateRequest;
-const DescribeCertificateResponse = models.DescribeCertificateResponse;
+const CompanyInfo = models.CompanyInfo;
 const TkeSecretDetail = models.TkeSecretDetail;
 const UploadUpdateCertificateInstanceResponse = models.UploadUpdateCertificateInstanceResponse;
 const Tags = models.Tags;
@@ -106,7 +111,7 @@ const DeleteCertificateResponse = models.DeleteCertificateResponse;
 const CreateCSRRequest = models.CreateCSRRequest;
 const DeployRecord = models.DeployRecord;
 const UploadUpdateCertificateRecordRetryResponse = models.UploadUpdateCertificateRecordRetryResponse;
-const DescribeCertificateRequest = models.DescribeCertificateRequest;
+const ClbListener = models.ClbListener;
 const TSEInstanceDetail = models.TSEInstanceDetail;
 const WafInstanceList = models.WafInstanceList;
 const ModifyCertificatesExpiringNotificationSwitchRequest = models.ModifyCertificatesExpiringNotificationSwitchRequest;
@@ -121,6 +126,7 @@ const DescribeCSRSetRequest = models.DescribeCSRSetRequest;
 const SubmittedData = models.SubmittedData;
 const UpdateSyncProgressRegion = models.UpdateSyncProgressRegion;
 const TCBInstanceList = models.TCBInstanceList;
+const TkeIngressDetail = models.TkeIngressDetail;
 const TkeInstanceList = models.TkeInstanceList;
 const ApiGatewayInstanceDetail = models.ApiGatewayInstanceDetail;
 const LiveInstanceList = models.LiveInstanceList;
@@ -133,7 +139,7 @@ const UploadUpdateRecordInfo = models.UploadUpdateRecordInfo;
 const CancelAuditCertificateRequest = models.CancelAuditCertificateRequest;
 const ModifyCertificateResubmitResponse = models.ModifyCertificateResubmitResponse;
 const UpdateCertificateInstanceResponse = models.UpdateCertificateInstanceResponse;
-const UploadCertificateRequest = models.UploadCertificateRequest;
+const DescribeCertificateRequest = models.DescribeCertificateRequest;
 const ModifyCertificateAliasResponse = models.ModifyCertificateAliasResponse;
 const ApplyCertificateRequest = models.ApplyCertificateRequest;
 const DescribeHostUploadUpdateRecordRequest = models.DescribeHostUploadUpdateRecordRequest;
@@ -142,6 +148,7 @@ const UpdateRecordInfo = models.UpdateRecordInfo;
 const HostingConfig = models.HostingConfig;
 const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
 const DescribeCertificateBindResourceTaskResultResponse = models.DescribeCertificateBindResourceTaskResultResponse;
+const DescribeHostUploadUpdateRecordResponse = models.DescribeHostUploadUpdateRecordResponse;
 const DownloadCertificateResponse = models.DownloadCertificateResponse;
 const UploadUpdateCertificateRecordRollbackResponse = models.UploadUpdateCertificateRecordRollbackResponse;
 const ProjectInfo = models.ProjectInfo;
@@ -157,9 +164,10 @@ const UpdateCertificateRecordRetryResponse = models.UpdateCertificateRecordRetry
 const CertificateOrderSubmitResponse = models.CertificateOrderSubmitResponse;
 const TCBHostService = models.TCBHostService;
 const DescribeHostUploadUpdateRecordDetailRequest = models.DescribeHostUploadUpdateRecordDetailRequest;
-const TkeIngressDetail = models.TkeIngressDetail;
+const DescribeCompaniesRequest = models.DescribeCompaniesRequest;
+const ManagerStatusInfo = models.ManagerStatusInfo;
 const CancelAuditCertificateResponse = models.CancelAuditCertificateResponse;
-const DescribeHostUploadUpdateRecordResponse = models.DescribeHostUploadUpdateRecordResponse;
+const DescribeManagersRequest = models.DescribeManagersRequest;
 const TSEInstanceList = models.TSEInstanceList;
 const VODInstanceList = models.VODInstanceList;
 
@@ -395,6 +403,17 @@ class SslClient extends AbstractClient {
     }
 
     /**
+     * Query company list
+     * @param {DescribeCompaniesRequest} req
+     * @param {function(string, DescribeCompaniesResponse):void} cb
+     * @public
+     */
+    DescribeCompanies(req, cb) {
+        let resp = new DescribeCompaniesResponse();
+        this.request("DescribeCompanies", req, resp, cb);
+    }
+
+    /**
      * This API is used to get certificate details.
      * @param {DescribeCertificateDetailRequest} req
      * @param {function(string, DescribeCertificateDetailResponse):void} cb
@@ -590,6 +609,17 @@ class SslClient extends AbstractClient {
     ApplyCertificate(req, cb) {
         let resp = new ApplyCertificateResponse();
         this.request("ApplyCertificate", req, resp, cb);
+    }
+
+    /**
+     * Query the list of people in charge
+     * @param {DescribeManagersRequest} req
+     * @param {function(string, DescribeManagersResponse):void} cb
+     * @public
+     */
+    DescribeManagers(req, cb) {
+        let resp = new DescribeManagersResponse();
+        this.request("DescribeManagers", req, resp, cb);
     }
 
     /**

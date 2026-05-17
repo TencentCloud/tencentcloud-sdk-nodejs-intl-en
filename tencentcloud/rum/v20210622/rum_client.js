@@ -22,6 +22,7 @@ const DescribeDataResponse = models.DescribeDataResponse;
 const CreateTawInstanceResponse = models.CreateTawInstanceResponse;
 const DeleteProjectRequest = models.DeleteProjectRequest;
 const DescribeProjectLimitsResponse = models.DescribeProjectLimitsResponse;
+const DescribeTawInstancesRequest = models.DescribeTawInstancesRequest;
 const DeleteOfflineLogConfigResponse = models.DeleteOfflineLogConfigResponse;
 const ResumeProjectResponse = models.ResumeProjectResponse;
 const DescribeRumLogListResponse = models.DescribeRumLogListResponse;
@@ -165,6 +166,7 @@ const ModifyProjectRequest = models.ModifyProjectRequest;
 const DescribeRumLogListRequest = models.DescribeRumLogListRequest;
 const DescribeDataPerformancePageV2Request = models.DescribeDataPerformancePageV2Request;
 const DescribeDataStaticResourceRequest = models.DescribeDataStaticResourceRequest;
+const DescribeTawInstancesResponse = models.DescribeTawInstancesResponse;
 const DescribePvListRequest = models.DescribePvListRequest;
 const DescribeDataPvUrlInfoRequest = models.DescribeDataPvUrlInfoRequest;
 const CreateReleaseFileResponse = models.CreateReleaseFileResponse;
@@ -176,6 +178,7 @@ const DescribeDataLogUrlStatisticsV2Request = models.DescribeDataLogUrlStatistic
 const RumProject = models.RumProject;
 const DescribeDataStaticResourceV2Response = models.DescribeDataStaticResourceV2Response;
 const DescribeDataSetUrlStatisticsResponse = models.DescribeDataSetUrlStatisticsResponse;
+const RumInstanceInfo = models.RumInstanceInfo;
 
 
 /**
@@ -241,6 +244,17 @@ class RumClient extends AbstractClient {
     DescribeRumLogList(req, cb) {
         let resp = new DescribeRumLogListResponse();
         this.request("DescribeRumLogList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query instance information.
+     * @param {DescribeTawInstancesRequest} req
+     * @param {function(string, DescribeTawInstancesResponse):void} cb
+     * @public
+     */
+    DescribeTawInstances(req, cb) {
+        let resp = new DescribeTawInstancesResponse();
+        this.request("DescribeTawInstances", req, resp, cb);
     }
 
     /**

@@ -2861,7 +2861,7 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
         this.Portable = null;
 
         /**
-         * The new project ID of the cloud disk. Only the project ID of elastic cloud disk can be modified. The available projects and their IDs can be queried via the API [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1).
+         * The new project ID of the cloud disk. Only the project ID of elastic cloud disk can be modified. The available projects and their IDs can be queried via the API [DescribeProject](https://www.tencentcloud.com/document/api/651/54679).
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -5027,7 +5027,7 @@ class CopySnapshotCrossRegionsRequest extends  AbstractModel {
         super();
 
         /**
-         * Destination regions of the replication task. You can query the value of regions by calling [DescribeRegions](https://intl.cloud.tencent.com/document/product/213/9456?from_cn_redirect=1) API. Note that you can only specify regions that support snapshots.
+         * Destination regions of the replication task. You can query the value of regions by calling [DescribeRegions](https://www.tencentcloud.com/document/product/1271/71925) API. Note that you can only specify regions that support snapshots.
          * @type {Array.<string> || null}
          */
         this.DestinationRegions = null;
@@ -5039,7 +5039,7 @@ class CopySnapshotCrossRegionsRequest extends  AbstractModel {
         this.SnapshotId = null;
 
         /**
-         * Name of the snapshot replica. If it’s not specified, it defaults to “Copied [source snapshot ID from [region name]”
+         * Name of the snapshot replica. If it is not specified, it defaults to Copied [source snapshot ID from [region name]
          * @type {string || null}
          */
         this.SnapshotName = null;

@@ -615,26 +615,54 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameters for video quality evaluation.
+ * ExtractBlindWatermark request structure.
  * @class
  */
-class QualityEvaluationConfigureInfo extends  AbstractModel {
+class ExtractBlindWatermarkRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Video quality evaluation switch, optional values:
-<li>ON: enabled;</li>
-<li>OFF: disabled.</li>
+         * Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-trace: trace the source ab sequence watermark.</li>
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Type = null;
 
         /**
-         * Video quality evaluation filter threshold, the result only returns the time periods lower than this value, the default value is 60.
+         * File input information for the Media Processing Service (MPS) task.
+         * @type {ExtractBlindWatermarkInputInfo || null}
+         */
+        this.InputInfo = null;
+
+        /**
+         * VOD application ID for watermarking. Note that the SubAppId must be in line with the one used during watermarking to extract the watermark, whether importing FILEID or URL.
          * @type {number || null}
          */
-        this.Score = null;
+        this.SubAppId = null;
+
+        /**
+         * Configuration of the digital watermark extraction task.
+         * @type {ExtractBlindWatermarkTaskConfig || null}
+         */
+        this.ExtractBlindWatermarkConfig = null;
+
+        /**
+         * Identify source context, used for passing through user request information. The value of this field will be returned in the ExtractBlindWatermarkComplete callback and task flow status change callback, with a maximum length of 1000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * An identification code for task deduplication. If there has been a request with the same identification code within the past 3 days, an error will be returned for the current request. The maximum length is 50 characters. Leaving it blank or with an empty string indicates no deduplication.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Task priority. The higher the value, the higher the priority. The value ranges from -10 to 10. If left blank, it represents 0.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
 
     }
 
@@ -645,8 +673,23 @@ class QualityEvaluationConfigureInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.Score = 'Score' in params ? params.Score : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.InputInfo) {
+            let obj = new ExtractBlindWatermarkInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+        if (params.ExtractBlindWatermarkConfig) {
+            let obj = new ExtractBlindWatermarkTaskConfig();
+            obj.deserialize(params.ExtractBlindWatermarkConfig)
+            this.ExtractBlindWatermarkConfig = obj;
+        }
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
 
     }
 }
@@ -5752,24 +5795,20 @@ class DrmStreamingsInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * DeleteSampleSnapshotTemplate request structure.
+ * Control parameter of intelligent categorization task
  * @class
  */
-class DeleteSampleSnapshotTemplateRequest extends  AbstractModel {
+class ClassificationConfigureInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of a sampled screencapturing template.
-         * @type {number || null}
+         * Switch of intelligent categorization task. Valid values:
+<li>ON: enables intelligent categorization task;</li>
+<li>OFF: disables intelligent categorization task.</li>
+         * @type {string || null}
          */
-        this.Definition = null;
-
-        /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-         * @type {number || null}
-         */
-        this.SubAppId = null;
+        this.Switch = null;
 
     }
 
@@ -5780,8 +5819,7 @@ class DeleteSampleSnapshotTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -8982,6 +9020,43 @@ Value: <li>AiAnalysis.DeLogo.Video: The erased video file generated in the intel
 }
 
 /**
+ * Control parameters for video quality evaluation.
+ * @class
+ */
+class QualityEvaluationConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Video quality evaluation switch, optional values:
+<li>ON: enabled;</li>
+<li>OFF: disabled.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Video quality evaluation filter threshold, the result only returns the time periods lower than this value, the default value is 60.
+         * @type {number || null}
+         */
+        this.Score = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Score = 'Score' in params ? params.Score : null;
+
+    }
+}
+
+/**
  * CreatePersonSample request structure.
  * @class
  */
@@ -11101,6 +11176,62 @@ class ImageBlur extends  AbstractModel {
 }
 
 /**
+ * CreateBlindWatermarkTemplate request structure.
+ * @class
+ */
+class CreateBlindWatermarkTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-nagra: NAGRA watermark.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Text content of the digital watermark. The length cannot exceed 64 characters. After NAGRA watermark templates are created, the text content cannot be modified.
+         * @type {string || null}
+         */
+        this.TextContent = null;
+
+        /**
+         * VOD application ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the application ID when accessing resources in on-demand applications (default application or newly created application).
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Digital watermark template name, which supports Chinese, English, digits, underscores (_), hyphens (-), and periods (.). The length cannot exceed 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Description information of the digital watermark template. The length cannot exceed 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.TextContent = 'TextContent' in params ? params.TextContent : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+    }
+}
+
+/**
  * ModifyVodDomainAccelerateConfig request structure.
  * @class
  */
@@ -12169,6 +12300,41 @@ class ProcessMediaByUrlRequest extends  AbstractModel {
         this.TasksNotifyMode = 'TasksNotifyMode' in params ? params.TasksNotifyMode : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
+
+    }
+}
+
+/**
+ * ExtractBlindWatermark response structure.
+ * @class
+ */
+class ExtractBlindWatermarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -16955,6 +17121,64 @@ Default value: `2`.
 }
 
 /**
+ * DescribeBlindWatermarkTemplates request structure.
+ * @class
+ */
+class DescribeBlindWatermarkTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VOD application ID. Starting from December 25, 2023, customers who activate on-demand services must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created application).
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Filtering condition for the unique identifier of the digital watermark template. The array length cannot exceed 100.
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-nagra: NAGRA forensics watermark.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Pagination offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries
+<li>Default value: 10.</li>
+<li>Maximum value: 100.</li>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * Information of source file for video splicing (v2017)
  * @class
  */
@@ -17685,26 +17909,31 @@ class CacheConfigCache extends  AbstractModel {
 }
 
 /**
- * General data type used to describe a time period.
+ * Information of the intelligent highlight generating result
  * @class
  */
-class TimeRange extends  AbstractModel {
+class AiAnalysisTaskHighlightOutput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <li>After or at this time (start time).</li>
-<li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
-         * @type {string || null}
+         * List of intelligently generated highlights
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `HighlightSetFileUrl`.
+         * @type {Array.<MediaAiAnalysisHighlightItem> || null}
          */
-        this.After = null;
+        this.HighlightSet = null;
 
         /**
-         * <li>Earlier than this time (end time).</li>
-<li>In ISO 8601 format. For more information, please see [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+         * URL to the file for intelligently generated highlights. The file is in JSON format and has the same data structure as `HighlightSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `HighlightSetFileUrlExpireTime`.
          * @type {string || null}
          */
-        this.Before = null;
+        this.HighlightSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for intelligently generated highlights, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.HighlightSetFileUrlExpireTime = null;
 
     }
 
@@ -17715,8 +17944,17 @@ class TimeRange extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.After = 'After' in params ? params.After : null;
-        this.Before = 'Before' in params ? params.Before : null;
+
+        if (params.HighlightSet) {
+            this.HighlightSet = new Array();
+            for (let z in params.HighlightSet) {
+                let obj = new MediaAiAnalysisHighlightItem();
+                obj.deserialize(params.HighlightSet[z]);
+                this.HighlightSet.push(obj);
+            }
+        }
+        this.HighlightSetFileUrl = 'HighlightSetFileUrl' in params ? params.HighlightSetFileUrl : null;
+        this.HighlightSetFileUrlExpireTime = 'HighlightSetFileUrlExpireTime' in params ? params.HighlightSetFileUrlExpireTime : null;
 
     }
 }
@@ -18448,6 +18686,34 @@ class CreateContentReviewTemplateResponse extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyBlindWatermarkTemplate response structure.
+ * @class
+ */
+class ModifyBlindWatermarkTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -22095,31 +22361,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Information of the intelligent highlight generating result
+ * DeleteBlindWatermarkTemplate response structure.
  * @class
  */
-class AiAnalysisTaskHighlightOutput extends  AbstractModel {
+class DeleteBlindWatermarkTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of intelligently generated highlights
-<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `HighlightSetFileUrl`.
-         * @type {Array.<MediaAiAnalysisHighlightItem> || null}
-         */
-        this.HighlightSet = null;
-
-        /**
-         * URL to the file for intelligently generated highlights. The file is in JSON format and has the same data structure as `HighlightSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `HighlightSetFileUrlExpireTime`.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.HighlightSetFileUrl = null;
-
-        /**
-         * Expiration time of the URL to the file for intelligently generated highlights, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
-         * @type {string || null}
-         */
-        this.HighlightSetFileUrlExpireTime = null;
+        this.RequestId = null;
 
     }
 
@@ -22130,17 +22383,7 @@ class AiAnalysisTaskHighlightOutput extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.HighlightSet) {
-            this.HighlightSet = new Array();
-            for (let z in params.HighlightSet) {
-                let obj = new MediaAiAnalysisHighlightItem();
-                obj.deserialize(params.HighlightSet[z]);
-                this.HighlightSet.push(obj);
-            }
-        }
-        this.HighlightSetFileUrl = 'HighlightSetFileUrl' in params ? params.HighlightSetFileUrl : null;
-        this.HighlightSetFileUrlExpireTime = 'HighlightSetFileUrlExpireTime' in params ? params.HighlightSetFileUrlExpireTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -22786,6 +23029,41 @@ class ModifyReviewTemplateRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.Labels = 'Labels' in params ? params.Labels : null;
+
+    }
+}
+
+/**
+ * CreateBlindWatermarkTemplate response structure.
+ * @class
+ */
+class CreateBlindWatermarkTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique identifier of the digital watermark template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -23709,51 +23987,42 @@ Default value: `loudNorm`.
 }
 
 /**
- * ModifyEventConfig request structure.
+ * ModifyBlindWatermarkTemplate request structure.
  * @class
  */
-class ModifyEventConfigRequest extends  AbstractModel {
+class ModifyBlindWatermarkTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * How to receive event notifications. 
-<li>PUSH: [HTTP callback notification](https://www.tencentcloud.com/document/product/266/33948);</li>
-<li>PULL: [Reliable notification based on message queue ](https://www.tencentcloud.com/document/product/266/33948). </li>
-         * @type {string || null}
+         * Unique identifier of the digital watermark template.
+         * @type {number || null}
          */
-        this.Mode = null;
+        this.Definition = null;
 
         /**
-         * The address used to receive 3.0 format callbacks when using the [HTTP callback notification](https://www.tencentcloud.com/document/product/266/33948) reception method. 
-Note: If the NotificationUrl parameter is provided and the value is an empty string, the 3.0 format callback address will be cleared.
-         * @type {string || null}
-         */
-        this.NotificationUrl = null;
-
-        /**
-         * Whether to receive the [Video Upload Completed](https://www.tencentcloud.com/document/product/266/33950) event notification. The default "OFF" is to ignore the event notification, and "ON" is to receive the event notification. 
-         * @type {string || null}
-         */
-        this.UploadMediaCompleteEventSwitch = null;
-
-        /**
-         * Whether to receive [Video deletion completed](https://www.tencentcloud.com/document/product/266/33952) event notification, the default "OFF" means to ignore the event notification, "ON" means to receive the event notification .
-         * @type {string || null}
-         */
-        this.DeleteMediaCompleteEventSwitch = null;
-
-        /**
-         * Whether to receive the Persistence completed event notification, the default "OFF" means to ignore the event notification, "ON" means to receive the event notification.
-         * @type {string || null}
-         */
-        this.PersistenceCompleteEventSwitch = null;
-
-        /**
-         * <b>The VOD [application](https://www.tencentcloud.com/document/product/266/33987) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * VOD application ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the application ID when accessing resources in on-demand applications (default application or newly created application).
          * @type {number || null}
          */
         this.SubAppId = null;
+
+        /**
+         * Digital watermark template name, which supports Chinese, English, digits, underscores (_), hyphens (-), and periods (.). The length cannot exceed 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Description information of the digital watermark template. The length cannot exceed 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Text content of the digital watermark. The length cannot exceed 64 characters. The text content cannot be modified for NAGRA watermark templates.
+         * @type {string || null}
+         */
+        this.TextContent = null;
 
     }
 
@@ -23764,12 +24033,11 @@ Note: If the NotificationUrl parameter is provided and the value is an empty str
         if (!params) {
             return;
         }
-        this.Mode = 'Mode' in params ? params.Mode : null;
-        this.NotificationUrl = 'NotificationUrl' in params ? params.NotificationUrl : null;
-        this.UploadMediaCompleteEventSwitch = 'UploadMediaCompleteEventSwitch' in params ? params.UploadMediaCompleteEventSwitch : null;
-        this.DeleteMediaCompleteEventSwitch = 'DeleteMediaCompleteEventSwitch' in params ? params.DeleteMediaCompleteEventSwitch : null;
-        this.PersistenceCompleteEventSwitch = 'PersistenceCompleteEventSwitch' in params ? params.PersistenceCompleteEventSwitch : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.TextContent = 'TextContent' in params ? params.TextContent : null;
 
     }
 }
@@ -26999,6 +27267,76 @@ class AdvancedSuperResolutionConfig extends  AbstractModel {
         this.Height = 'Height' in params ? params.Height : null;
         this.LongSide = 'LongSide' in params ? params.LongSide : null;
         this.ShortSide = 'ShortSide' in params ? params.ShortSide : null;
+
+    }
+}
+
+/**
+ * Digital watermark template details.
+ * @class
+ */
+class BlindWatermarkTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique identifier of the digital watermark template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-nagra: NAGRA forensics watermark.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Digital watermark template name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Text content of the digital watermark template. The length cannot exceed 64 characters.
+         * @type {string || null}
+         */
+        this.TextContent = null;
+
+        /**
+         * Description information of the digital watermark template.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.TextContent = 'TextContent' in params ? params.TextContent : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -30318,6 +30656,41 @@ You cannot enable a subapplication whose status is "Destroying". You can enable 
 }
 
 /**
+ * DeleteBlindWatermarkTemplate request structure.
+ * @class
+ */
+class DeleteBlindWatermarkTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique identifier of the digital watermark template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * VOD application ID. Starting from December 25, 2023, customers who activate on-demand services must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created application).
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * CreateSubAppId response structure.
  * @class
  */
@@ -31005,6 +31378,72 @@ class ReduceMediaBitrateAdaptiveDynamicStreamingResult extends  AbstractModel {
 }
 
 /**
+ * ModifyEventConfig request structure.
+ * @class
+ */
+class ModifyEventConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * How to receive event notifications. 
+<li>PUSH: [HTTP callback notification](https://www.tencentcloud.com/document/product/266/33948);</li>
+<li>PULL: [Reliable notification based on message queue ](https://www.tencentcloud.com/document/product/266/33948). </li>
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * The address used to receive 3.0 format callbacks when using the [HTTP callback notification](https://www.tencentcloud.com/document/product/266/33948) reception method. 
+Note: If the NotificationUrl parameter is provided and the value is an empty string, the 3.0 format callback address will be cleared.
+         * @type {string || null}
+         */
+        this.NotificationUrl = null;
+
+        /**
+         * Whether to receive the [Video Upload Completed](https://www.tencentcloud.com/document/product/266/33950) event notification. The default "OFF" is to ignore the event notification, and "ON" is to receive the event notification. 
+         * @type {string || null}
+         */
+        this.UploadMediaCompleteEventSwitch = null;
+
+        /**
+         * Whether to receive [Video deletion completed](https://www.tencentcloud.com/document/product/266/33952) event notification, the default "OFF" means to ignore the event notification, "ON" means to receive the event notification .
+         * @type {string || null}
+         */
+        this.DeleteMediaCompleteEventSwitch = null;
+
+        /**
+         * Whether to receive the Persistence completed event notification, the default "OFF" means to ignore the event notification, "ON" means to receive the event notification.
+         * @type {string || null}
+         */
+        this.PersistenceCompleteEventSwitch = null;
+
+        /**
+         * <b>The VOD [application](https://www.tencentcloud.com/document/product/266/33987) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.NotificationUrl = 'NotificationUrl' in params ? params.NotificationUrl : null;
+        this.UploadMediaCompleteEventSwitch = 'UploadMediaCompleteEventSwitch' in params ? params.UploadMediaCompleteEventSwitch : null;
+        this.DeleteMediaCompleteEventSwitch = 'DeleteMediaCompleteEventSwitch' in params ? params.DeleteMediaCompleteEventSwitch : null;
+        this.PersistenceCompleteEventSwitch = 'PersistenceCompleteEventSwitch' in params ? params.PersistenceCompleteEventSwitch : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * 
  * @class
  */
@@ -31028,6 +31467,56 @@ class BlindWatermarkInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * DescribeBlindWatermarkTemplates response structure.
+ * @class
+ */
+class DescribeBlindWatermarkTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of records that meet the filtering conditions.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of digital watermark template details.
+         * @type {Array.<BlindWatermarkTemplate> || null}
+         */
+        this.BlindWatermarkTemplateSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.BlindWatermarkTemplateSet) {
+            this.BlindWatermarkTemplateSet = new Array();
+            for (let z in params.BlindWatermarkTemplateSet) {
+                let obj = new BlindWatermarkTemplate();
+                obj.deserialize(params.BlindWatermarkTemplateSet[z]);
+                this.BlindWatermarkTemplateSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -33363,20 +33852,24 @@ class CreateAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Control parameter of intelligent categorization task
+ * DeleteSampleSnapshotTemplate request structure.
  * @class
  */
-class ClassificationConfigureInfo extends  AbstractModel {
+class DeleteSampleSnapshotTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch of intelligent categorization task. Valid values:
-<li>ON: enables intelligent categorization task;</li>
-<li>OFF: disables intelligent categorization task.</li>
-         * @type {string || null}
+         * Unique ID of a sampled screencapturing template.
+         * @type {number || null}
          */
-        this.Switch = null;
+        this.Definition = null;
+
+        /**
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -33387,7 +33880,8 @@ class ClassificationConfigureInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -51682,6 +52176,43 @@ class RebuildMediaTask extends  AbstractModel {
 }
 
 /**
+ * General data type used to describe a time period.
+ * @class
+ */
+class TimeRange extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <li>After or at this time (start time).</li>
+<li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+         * @type {string || null}
+         */
+        this.After = null;
+
+        /**
+         * <li>Earlier than this time (end time).</li>
+<li>In ISO 8601 format. For more information, please see [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+         * @type {string || null}
+         */
+        this.Before = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.After = 'After' in params ? params.After : null;
+        this.Before = 'Before' in params ? params.Before : null;
+
+    }
+}
+
+/**
  * ConfirmEvents response structure.
  * @class
  */
@@ -58524,7 +59055,7 @@ module.exports = {
     CreateStorageRegionRequest: CreateStorageRegionRequest,
     AiRecognitionTaskAsrFullTextSegmentItem: AiRecognitionTaskAsrFullTextSegmentItem,
     DescribeFileAttributesTask: DescribeFileAttributesTask,
-    QualityEvaluationConfigureInfo: QualityEvaluationConfigureInfo,
+    ExtractBlindWatermarkRequest: ExtractBlindWatermarkRequest,
     ReviewAudioVideoTaskInput: ReviewAudioVideoTaskInput,
     DescribeAllClassRequest: DescribeAllClassRequest,
     AigcImageTaskOutput: AigcImageTaskOutput,
@@ -58603,7 +59134,7 @@ module.exports = {
     RoundPlayInfo: RoundPlayInfo,
     DescribeLicenseUsageDataResponse: DescribeLicenseUsageDataResponse,
     DrmStreamingsInfoForUpdate: DrmStreamingsInfoForUpdate,
-    DeleteSampleSnapshotTemplateRequest: DeleteSampleSnapshotTemplateRequest,
+    ClassificationConfigureInfo: ClassificationConfigureInfo,
     AbnormalLightingConfigureInfoForUpdate: AbnormalLightingConfigureInfoForUpdate,
     CreateCDNDomainResponse: CreateCDNDomainResponse,
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
@@ -58660,6 +59191,7 @@ module.exports = {
     DescribeAigcUsageDataResponse: DescribeAigcUsageDataResponse,
     AigcUsageDataItem: AigcUsageDataItem,
     MPSOutputFile: MPSOutputFile,
+    QualityEvaluationConfigureInfo: QualityEvaluationConfigureInfo,
     CreatePersonSampleRequest: CreatePersonSampleRequest,
     RemoveWatermarkTask: RemoveWatermarkTask,
     ReviewAudioVideoRequest: ReviewAudioVideoRequest,
@@ -58700,6 +59232,7 @@ module.exports = {
     CDNDomainInfo: CDNDomainInfo,
     CreateAigcSubjectTask: CreateAigcSubjectTask,
     ImageBlur: ImageBlur,
+    CreateBlindWatermarkTemplateRequest: CreateBlindWatermarkTemplateRequest,
     ModifyVodDomainAccelerateConfigRequest: ModifyVodDomainAccelerateConfigRequest,
     PoliticalConfigureInfoForUpdate: PoliticalConfigureInfoForUpdate,
     MaxAge: MaxAge,
@@ -58718,6 +59251,7 @@ module.exports = {
     PoliticalOcrReviewTemplateInfoForUpdate: PoliticalOcrReviewTemplateInfoForUpdate,
     TaskOutputMediaInfo: TaskOutputMediaInfo,
     ProcessMediaByUrlRequest: ProcessMediaByUrlRequest,
+    ExtractBlindWatermarkResponse: ExtractBlindWatermarkResponse,
     ModifyAIRecognitionTemplateResponse: ModifyAIRecognitionTemplateResponse,
     SplitMediaTaskConfig: SplitMediaTaskConfig,
     PlayStatFileInfo: PlayStatFileInfo,
@@ -58799,6 +59333,7 @@ module.exports = {
     LicenseUsageDataItem: LicenseUsageDataItem,
     ProcessImageAsyncTask: ProcessImageAsyncTask,
     RebuildMediaTargetAudioStream: RebuildMediaTargetAudioStream,
+    DescribeBlindWatermarkTemplatesRequest: DescribeBlindWatermarkTemplatesRequest,
     ConcatFileInfo2017: ConcatFileInfo2017,
     ContentReviewResult: ContentReviewResult,
     SceneAigcVideoTaskInput: SceneAigcVideoTaskInput,
@@ -58812,7 +59347,7 @@ module.exports = {
     DescribeAdaptiveDynamicStreamingTemplatesResponse: DescribeAdaptiveDynamicStreamingTemplatesResponse,
     MediaMiniProgramReviewInfo: MediaMiniProgramReviewInfo,
     CacheConfigCache: CacheConfigCache,
-    TimeRange: TimeRange,
+    AiAnalysisTaskHighlightOutput: AiAnalysisTaskHighlightOutput,
     DescribeAdaptiveDynamicStreamingTemplatesRequest: DescribeAdaptiveDynamicStreamingTemplatesRequest,
     CreateAigcAdvancedCustomElementInput: CreateAigcAdvancedCustomElementInput,
     ModifyRoundPlayRequest: ModifyRoundPlayRequest,
@@ -58825,6 +59360,7 @@ module.exports = {
     RebuildMediaTemplate: RebuildMediaTemplate,
     CreatePersonSampleResponse: CreatePersonSampleResponse,
     CreateContentReviewTemplateResponse: CreateContentReviewTemplateResponse,
+    ModifyBlindWatermarkTemplateResponse: ModifyBlindWatermarkTemplateResponse,
     ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
     DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
     AigcAudioTask: AigcAudioTask,
@@ -58887,7 +59423,7 @@ module.exports = {
     AiAnalysisTaskTagOutput: AiAnalysisTaskTagOutput,
     MosaicConfigureInfo: MosaicConfigureInfo,
     DescribeTranscodeTemplatesResponse: DescribeTranscodeTemplatesResponse,
-    AiAnalysisTaskHighlightOutput: AiAnalysisTaskHighlightOutput,
+    DeleteBlindWatermarkTemplateResponse: DeleteBlindWatermarkTemplateResponse,
     DescribeRebuildMediaTemplatesRequest: DescribeRebuildMediaTemplatesRequest,
     ReviewImageSegmentItem: ReviewImageSegmentItem,
     CreateRoundPlayResponse: CreateRoundPlayResponse,
@@ -58900,6 +59436,7 @@ module.exports = {
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
     DescribeLLMComprehendTemplatesResponse: DescribeLLMComprehendTemplatesResponse,
     ModifyReviewTemplateRequest: ModifyReviewTemplateRequest,
+    CreateBlindWatermarkTemplateResponse: CreateBlindWatermarkTemplateResponse,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
     MPSSubTaskResult: MPSSubTaskResult,
     MediaTrackItem: MediaTrackItem,
@@ -58916,7 +59453,7 @@ module.exports = {
     ComplexAdaptiveDynamicStreamingTaskAudioInput: ComplexAdaptiveDynamicStreamingTaskAudioInput,
     CreateAigcCustomVoiceOutput: CreateAigcCustomVoiceOutput,
     AudioVolumeBalanceInfo: AudioVolumeBalanceInfo,
-    ModifyEventConfigRequest: ModifyEventConfigRequest,
+    ModifyBlindWatermarkTemplateRequest: ModifyBlindWatermarkTemplateRequest,
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
     DescribeHeadTailTemplatesRequest: DescribeHeadTailTemplatesRequest,
     CreateLLMComprehendTemplateResponse: CreateLLMComprehendTemplateResponse,
@@ -58979,6 +59516,7 @@ module.exports = {
     ComplexAdaptiveDynamicStreamingTaskInput: ComplexAdaptiveDynamicStreamingTaskInput,
     SortBy: SortBy,
     AdvancedSuperResolutionConfig: AdvancedSuperResolutionConfig,
+    BlindWatermarkTemplate: BlindWatermarkTemplate,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
     DescribePersonSamplesRequest: DescribePersonSamplesRequest,
     WechatMiniProgramPublishTask: WechatMiniProgramPublishTask,
@@ -59028,6 +59566,7 @@ module.exports = {
     CreateAIRecognitionTemplateResponse: CreateAIRecognitionTemplateResponse,
     ProcessImageAsyncInput: ProcessImageAsyncInput,
     ModifySubAppIdStatusRequest: ModifySubAppIdStatusRequest,
+    DeleteBlindWatermarkTemplateRequest: DeleteBlindWatermarkTemplateRequest,
     CreateSubAppIdResponse: CreateSubAppIdResponse,
     DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
@@ -59040,7 +59579,9 @@ module.exports = {
     AiReviewTerrorismOcrTaskOutput: AiReviewTerrorismOcrTaskOutput,
     AiAnalysisResult: AiAnalysisResult,
     ReduceMediaBitrateAdaptiveDynamicStreamingResult: ReduceMediaBitrateAdaptiveDynamicStreamingResult,
+    ModifyEventConfigRequest: ModifyEventConfigRequest,
     BlindWatermarkInput: BlindWatermarkInput,
+    DescribeBlindWatermarkTemplatesResponse: DescribeBlindWatermarkTemplatesResponse,
     AttachMediaSubtitlesResponse: AttachMediaSubtitlesResponse,
     CreateDomainVerifyRecordResponse: CreateDomainVerifyRecordResponse,
     ExtractCopyRightWatermarkResponse: ExtractCopyRightWatermarkResponse,
@@ -59083,7 +59624,7 @@ module.exports = {
     AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
     AiContentReviewTaskInput: AiContentReviewTaskInput,
     CreateAdaptiveDynamicStreamingTemplateResponse: CreateAdaptiveDynamicStreamingTemplateResponse,
-    ClassificationConfigureInfo: ClassificationConfigureInfo,
+    DeleteSampleSnapshotTemplateRequest: DeleteSampleSnapshotTemplateRequest,
     AiAnalysisTaskInput: AiAnalysisTaskInput,
     MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
     DescribeStorageDataResponse: DescribeStorageDataResponse,
@@ -59377,6 +59918,7 @@ module.exports = {
     RemoveWatermarkRequest: RemoveWatermarkRequest,
     ExecuteFunctionRequest: ExecuteFunctionRequest,
     RebuildMediaTask: RebuildMediaTask,
+    TimeRange: TimeRange,
     ConfirmEventsResponse: ConfirmEventsResponse,
     CreateAigcApiTokenResponse: CreateAigcApiTokenResponse,
     VideoTrackItem: VideoTrackItem,

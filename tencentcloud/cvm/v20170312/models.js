@@ -659,7 +659,7 @@ class ResetInstancesTypeRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Instance model. Different resource specifications are specified for different models. For specific values, call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) to get the latest specification list or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
+         * Instance model. Different resource specifications are specified for different models. For specific values, call DescribeInstanceTypeConfigs to get the latest specification list or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -6401,7 +6401,7 @@ class CreateLaunchTemplateVersionRequest extends  AbstractModel {
         /**
          * Instance model. Different instance models specify different resource specifications.
 
-<br><li>For instances created with the payment modes PREPAID or POSTPAID_BY_HOUR, the specific values can be obtained by calling the [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) API for the latest specification table or referring to [Instance Specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). If this parameter is not specified, the system will dynamically assign a default model based on the current resource sales situation in a region.</li><br><li>For instances created with the payment mode CDHPAID, this parameter has the prefix "CDH_" and is generated based on the CPU and memory configuration. The specific format is: CDH_XCXG. For example, for creating a CDH instance with 1 CPU core and 1 GB memory, this parameter should be CDH_1C1G.</li>
+<br><li>For instances created with the payment modes PREPAID or POSTPAID_BY_HOUR, the specific values can be obtained by calling the DescribeInstanceTypeConfigs API for the latest specification table or referring to [Instance Specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). If this parameter is not specified, the system will dynamically assign a default model based on the current resource sales situation in a region.</li><br><li>For instances created with the payment mode CDHPAID, this parameter has the prefix "CDH_" and is generated based on the CPU and memory configuration. The specific format is: CDH_XCXG. For example, for creating a CDH instance with 1 CPU core and 1 GB memory, this parameter should be CDH_1C1G.</li>
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -6549,7 +6549,12 @@ If the dry run succeeds, the RequestId will be returned.
         this.DisableApiTermination = null;
 
         /**
-         * Whether jumbo frames are enabled for the instance. Valid values: <br><li/> true: Jumbo frames are enabled. Only instance types that support jumbo frames can be set to true.<br><li/>false: Jumbo frames are disabled. Only instance types that support jumbo frames can be set to false.<br> Supported instance types: [Instance Types](https://cloud.tencent.com/document/product/213/11518)
+         * Whether jumbo frames are enabled for the instance. Valid values:
+- true: Jumbo frames are enabled. Only instance types that support jumbo frames can be set to true.
+- false: Jumbo frames are disabled. Only instance types that support jumbo frames can be set to false.
+
+
+ Supported instance types: [Instance Types](https://www.tencentcloud.com/zh/document/api/213/11518)
          * @type {boolean || null}
          */
         this.EnableJumboFrame = null;
@@ -7178,7 +7183,7 @@ class CreateLaunchTemplateRequest extends  AbstractModel {
         /**
          * Instance model. Different instance models specify different resource specifications.
 
-<br><li>For instances created with the payment modes PREPAID or POSTPAID_BY_HOUR, the specific values can be obtained BY calling the [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) api to get the latest specification table or referring to the [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1) description. if this parameter is not specified, the system will dynamically assign a default model based on the current resource sales situation in a region.</li><li>for instances created with the payment mode CDHPAID, this parameter has the prefix "CDH_" and is generated based on the CPU and memory configuration. the specific format is: CDH_XCXG. for example, for creating a CDH instance with 1 CPU core and 1 gb memory, this parameter should be CDH_1C1G.</li>.
+<br><li>For instances created with the payment modes PREPAID or POSTPAID_BY_HOUR, the specific values can be obtained by calling the DescribeInstanceTypeConfigs api to get the latest specification table or referring to the [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1) description. if this parameter is not specified, the system will dynamically assign a default model based on the current resource sales situation in a region.</li><li>for instances created with the payment mode CDHPAID, this parameter has the prefix "CDH_" and is generated based on the CPU and memory configuration. the specific format is: CDH_XCXG. for example, for creating a CDH instance with 1 CPU core and 1 gb memory, this parameter should be CDH_1C1G.</li>.
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -7320,7 +7325,12 @@ false (default): sends a normal request. after passing the check, creates an ins
         this.DisableApiTermination = null;
 
         /**
-         * Whether jumbo frames are enabled for the instance. Valid values: <br><li/> true: Jumbo frames are enabled. Only instance types that support jumbo frames can be set to true.<br><li/>false: Jumbo frames are disabled. Only instance types that support jumbo frames can be set to false.<br> Supported instance types: [Instance Types](https://cloud.tencent.com/document/product/213/11518)
+         * Whether jumbo frames are enabled for the instance. Valid values:
+- true: Jumbo frames are enabled. Only instance types that support jumbo frames can be set to true.
+- false: Jumbo frames are disabled. Only instance types that support jumbo frames can be set to false.
+
+
+ Supported instance types: [Instance Types](https://www.tencentcloud.com/zh/document/api/213/11518)
          * @type {boolean || null}
          */
         this.EnableJumboFrame = null;
@@ -7682,7 +7692,7 @@ class ResetInstancesInternetMaxBandwidthRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Date until which the bandwidth takes effect, in the format of `YYYY-MM-DD`, such as `2016-10-30`. The validity period of the new bandwidth covers the end date. The end date should not be later than the expiration date of a monthly subscription instance. You can obtain the expiration date of an instance through the `ExpiredTime` in the return value from the API [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/9388?from_cn_redirect=1). This parameter is only valid for monthly subscription bandwidth, and is not supported for bandwidth billed by other modes. Otherwise, the API will return a corresponding error code.
+         * Date until which the bandwidth takes effect, in the format of `YYYY-MM-DD`, such as `2016-10-30`. The validity period of the new bandwidth covers the end date. The end date should not be later than the expiration date of a monthly subscription instance. You can obtain the expiration date of an instance through the `ExpiredTime` in the return value from the API [DescribeInstances](https://www.tencentcloud.com/zh/document/api/213/33258). This parameter is only valid for monthly subscription bandwidth, and is not supported for bandwidth billed by other modes. Otherwise, the API will return a corresponding error code.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -8455,7 +8465,7 @@ class RunInstancesRequest extends  AbstractModel {
 
         /**
          * The instance model. 
-<br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). <br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
+<br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call DescribeInstanceTypeConfigs or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). <br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -12553,7 +12563,7 @@ class InternetAccessible extends  AbstractModel {
         this.BandwidthPackageId = null;
 
         /**
-         * Line type. for details on various types of lines and supported regions, refer to [EIP IP address types](https://cloud.tencent.com/document/product/1199/41646). default value: BGP.
+         * Line type. for details on various types of lines and supported regions, refer to [EIP IP address types](https://www.tencentcloud.com/zh/document/product/213/5733). default value: BGP.
 <Li>BGP: specifies the general bgp line.</li>.
 For a user with static single-line IP allowlist enabled, valid values include:.
 <Li>CMCC: china mobile.</li>.
@@ -12571,7 +12581,7 @@ Note: The static single-line IP is only supported in some regions.
 
 <Li>WanIP: specifies the public ip address.</li>.
 <Li>HighQualityEIP: specifies a high quality ip. high quality ip is only supported in Singapore and hong kong (china).</li>.
-<li> AntiDDoSEIP: specifies the anti-ddos eip. only partial regions support anti-ddos eip. details visible in the [elastic IP product overview](https://www.tencentcloud.com/document/product/1199/41646?from_cn_redirect=1).</li>.
+<li> AntiDDoSEIP: specifies the anti-ddos eip. only partial regions support anti-ddos eip. details visible in the [elastic IP product overview](https://www.tencentcloud.com/zh/document/product/213/5733).</li>.
 If needed, assign a public IPv4 address to the resource by specifying the IPv4 address type.
 
 This feature is in beta test in selected regions. submit a ticket for consultation (https://console.cloud.tencent.com/workorder/category) if needed.

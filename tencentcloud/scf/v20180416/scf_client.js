@@ -22,16 +22,18 @@ const GetProvisionedConcurrencyConfigRequest = models.GetProvisionedConcurrencyC
 const ListAliasesResponse = models.ListAliasesResponse;
 const DeleteLayerVersionResponse = models.DeleteLayerVersionResponse;
 const GetReservedConcurrencyConfigResponse = models.GetReservedConcurrencyConfigResponse;
+const ProtocolParams = models.ProtocolParams;
 const RoutingConfig = models.RoutingConfig;
 const DeleteProvisionedConcurrencyConfigResponse = models.DeleteProvisionedConcurrencyConfigResponse;
 const VersionWeight = models.VersionWeight;
 const TimeInterval = models.TimeInterval;
 const LayerVersionInfo = models.LayerVersionInfo;
 const PutProvisionedConcurrencyConfigResponse = models.PutProvisionedConcurrencyConfigResponse;
-const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
+const UpdateFunctionConfigurationResponse = models.UpdateFunctionConfigurationResponse;
 const PublishLayerVersionResponse = models.PublishLayerVersionResponse;
 const UsageInfo = models.UsageInfo;
-const AsyncEvent = models.AsyncEvent;
+const PublicNetConfigIn = models.PublicNetConfigIn;
+const DeleteProvisionedConcurrencyConfigRequest = models.DeleteProvisionedConcurrencyConfigRequest;
 const DeleteReservedConcurrencyConfigResponse = models.DeleteReservedConcurrencyConfigResponse;
 const GetAliasResponse = models.GetAliasResponse;
 const UpdateAliasResponse = models.UpdateAliasResponse;
@@ -41,6 +43,7 @@ const StatusReason = models.StatusReason;
 const Tag = models.Tag;
 const GetRequestStatusRequest = models.GetRequestStatusRequest;
 const LogFilter = models.LogFilter;
+const EipConfigIn = models.EipConfigIn;
 const ListLayerVersionsResponse = models.ListLayerVersionsResponse;
 const DeleteFunctionRequest = models.DeleteFunctionRequest;
 const CopyFunctionResponse = models.CopyFunctionResponse;
@@ -50,9 +53,11 @@ const ListNamespacesRequest = models.ListNamespacesRequest;
 const PublishVersionRequest = models.PublishVersionRequest;
 const DeleteAliasRequest = models.DeleteAliasRequest;
 const ListVersionByFunctionResponse = models.ListVersionByFunctionResponse;
+const WSParams = models.WSParams;
 const GetAliasRequest = models.GetAliasRequest;
-const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
+const CreateNamespaceResponse = models.CreateNamespaceResponse;
 const UpdateFunctionCodeRequest = models.UpdateFunctionCodeRequest;
+const UpdateFunctionConfigurationRequest = models.UpdateFunctionConfigurationRequest;
 const DeleteReservedConcurrencyConfigRequest = models.DeleteReservedConcurrencyConfigRequest;
 const GetFunctionEventInvokeConfigResponse = models.GetFunctionEventInvokeConfigResponse;
 const ListTriggersResponse = models.ListTriggersResponse;
@@ -60,10 +65,13 @@ const TerminateAsyncEventRequest = models.TerminateAsyncEventRequest;
 const ListLayersRequest = models.ListLayersRequest;
 const CopyFunctionRequest = models.CopyFunctionRequest;
 const DeleteNamespaceResponse = models.DeleteNamespaceResponse;
+const LayerVersionSimple = models.LayerVersionSimple;
 const TriggerCount = models.TriggerCount;
 const NamespaceLimit = models.NamespaceLimit;
+const CfsConfig = models.CfsConfig;
 const ListFunctionsRequest = models.ListFunctionsRequest;
 const CreateTriggerRequest = models.CreateTriggerRequest;
+const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
 const GetLayerVersionRequest = models.GetLayerVersionRequest;
 const DeleteFunctionResponse = models.DeleteFunctionResponse;
 const ListAsyncEventsRequest = models.ListAsyncEventsRequest;
@@ -77,7 +85,8 @@ const PutTotalConcurrencyConfigResponse = models.PutTotalConcurrencyConfigRespon
 const GetAsyncEventStatusRequest = models.GetAsyncEventStatusRequest;
 const DeleteAliasResponse = models.DeleteAliasResponse;
 const PublishVersionResponse = models.PublishVersionResponse;
-const DeleteProvisionedConcurrencyConfigRequest = models.DeleteProvisionedConcurrencyConfigRequest;
+const AsyncEvent = models.AsyncEvent;
+const Environment = models.Environment;
 const TerminateAsyncEventResponse = models.TerminateAsyncEventResponse;
 const GetFunctionAddressRequest = models.GetFunctionAddressRequest;
 const InvokeResponse = models.InvokeResponse;
@@ -94,6 +103,7 @@ const UpdateTriggerStatusResponse = models.UpdateTriggerStatusResponse;
 const UpdateFunctionEventInvokeConfigRequest = models.UpdateFunctionEventInvokeConfigRequest;
 const DeleteLayerVersionRequest = models.DeleteLayerVersionRequest;
 const Filter = models.Filter;
+const Variable = models.Variable;
 const GetFunctionEventInvokeConfigRequest = models.GetFunctionEventInvokeConfigRequest;
 const Code = models.Code;
 const PutTotalConcurrencyConfigRequest = models.PutTotalConcurrencyConfigRequest;
@@ -106,17 +116,19 @@ const FunctionLog = models.FunctionLog;
 const InvokeFunctionRequest = models.InvokeFunctionRequest;
 const RetryConfig = models.RetryConfig;
 const GetFunctionAddressResponse = models.GetFunctionAddressResponse;
+const CfsInsInfo = models.CfsInsInfo;
 const UpdateTriggerStatusRequest = models.UpdateTriggerStatusRequest;
 const TriggerAction = models.TriggerAction;
 const LimitsInfo = models.LimitsInfo;
 const ListLayersResponse = models.ListLayersResponse;
 const FunctionVersion = models.FunctionVersion;
 const AsyncTriggerConfig = models.AsyncTriggerConfig;
+const DeadLetterConfig = models.DeadLetterConfig;
 const ListVersionByFunctionRequest = models.ListVersionByFunctionRequest;
 const ListFunctionsResponse = models.ListFunctionsResponse;
 const GetAsyncEventStatusResponse = models.GetAsyncEventStatusResponse;
 const ListTriggersRequest = models.ListTriggersRequest;
-const CreateNamespaceResponse = models.CreateNamespaceResponse;
+const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
 const GetReservedConcurrencyConfigRequest = models.GetReservedConcurrencyConfigRequest;
 const PutProvisionedConcurrencyConfigRequest = models.PutProvisionedConcurrencyConfigRequest;
 const Function = models.Function;
@@ -129,6 +141,7 @@ const ImageConfig = models.ImageConfig;
 const DeleteTriggerResponse = models.DeleteTriggerResponse;
 const SearchKey = models.SearchKey;
 const DeleteTriggerRequest = models.DeleteTriggerRequest;
+const VpcConfig = models.VpcConfig;
 const GetProvisionedConcurrencyConfigResponse = models.GetProvisionedConcurrencyConfigResponse;
 const ListAsyncEventsResponse = models.ListAsyncEventsResponse;
 const ListNamespacesResponse = models.ListNamespacesResponse;
@@ -502,6 +515,17 @@ An alias must point to a master version and can point to an additional version a
     ListFunctions(req, cb) {
         let resp = new ListFunctionsResponse();
         this.request("ListFunctions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the function configuration based on the input parameters.
+     * @param {UpdateFunctionConfigurationRequest} req
+     * @param {function(string, UpdateFunctionConfigurationResponse):void} cb
+     * @public
+     */
+    UpdateFunctionConfiguration(req, cb) {
+        let resp = new UpdateFunctionConfigurationResponse();
+        this.request("UpdateFunctionConfiguration", req, resp, cb);
     }
 
     /**

@@ -53,229 +53,190 @@ class CreateDBInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         *  - Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each replica set.
- - Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each shard.
+         * <ul><li>Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each replica set.</li><li>Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each shard.</li></ul>
          * @type {number || null}
          */
         this.NodeNum = null;
 
         /**
-         * Instance memory size. Unit: GB. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain specific saleable memory specifications.
+         * <p>Instance memory size. Unit: GB. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain specific saleable memory specifications.</p>
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * Instance disk size. Unit: GB. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum disk sizes corresponding to each CPU specification.
+         * <p>Instance disk size. Unit: GB. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum disk sizes corresponding to each CPU specification.</p>
          * @type {number || null}
          */
         this.Volume = null;
 
         /**
-         * Refers to version information. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain detailed information about the supported versions.
-- MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
-- MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
-- MONGO_44_WT: version of the MongoDB 4.4 WiredTiger storage engine.
-- MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
-- MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
-- MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+         * <p>Refers to version information. For supported versions, use the interface <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> to query.</p><ul><li>MONGO_40_WT: MongoDB 4.0 WiredTiger engine version.</li><li>MONGO_42_WT: MongoDB 4.2 WiredTiger engine version.</li><li>MONGO_44_WT: MongoDB 4.4 WiredTiger engine version.</li><li>MONGO_50_WT: MongoDB 5.0 WiredTiger engine version.</li><li>MONGO_60_WT: MongoDB 6.0 WiredTiger engine version.</li><li>MONGO_70_WT: MongoDB 7.0 WiredTiger engine version.</li><li>MONGO_80_WT: MongoDB 8.0 WiredTiger engine version.</li></ul>
          * @type {string || null}
          */
         this.MongoVersion = null;
 
         /**
-         * Number of instances. The minimum value is 1, and the maximum value is 30.
+         * <p>Number of instances. The minimum value is 1, and the maximum value is 30.</p>
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * AZ information. Format: ap-guangzhou-2.
- - Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the specific information.
- - This parameter indicates the primary AZ. If multi-AZ deployment is adopted, the value of Zone should be one of the values of AvailabilityZoneList.
+         * <p>AZ information. The input format must be ap-guangzhou-2.</p><ul><li>For details, use the interface <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> to obtain them.</li><li>This parameter is the primary AZ. If multi-AZ deployment is used, Zone must be one of AvailabilityZoneList.</li></ul>
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * Specifies the purchase duration during the instance purchase, in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36.
+         * <p>Specifies the purchase duration during instance purchase. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36. Unit: months.</p>
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Product specification type.
- - HIO10G: general high-I/O 10GE type.
- - HCD: cloud disk type.
+         * <p>Recommended product specification types:</p><ul><li>GE.LD.T1: Local disk (Common I).</li><li>GE.CD.T1: Cloud disk (Common I).</li></ul><p>Product allowlist specification types:</p><ul><li>HIO10G: Local disk (High IO 10G).</li><li>HCD: Cloud disk (Cloud disk edition).</li></ul><p>Note: Allowlist specification types are under allowlist control. If needed, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a> to apply.</p>
          * @type {string || null}
          */
         this.MachineCode = null;
 
         /**
-         * Instance architecture type.
- - REPLSET: replica set.
- - SHARD: sharded cluster.
+         * <p>Instance architecture type.</p><ul><li>REPLSET (replica set)</li><li>SHARD (sharded cluster)</li></ul>
          * @type {string || null}
          */
         this.ClusterType = null;
 
         /**
-         *  - Specifies the number of replica sets during replica set instance creation. This parameter can only be set to 1.
- - Specifies the number of shards during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.
+         * <ul><li>Specifies the number of replica sets during replica set instance creation. This parameter can only be 1.</li><li>Specifies the number of shards during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.</li></ul>
          * @type {number || null}
          */
         this.ReplicateSetNum = null;
 
         /**
-         * Project ID.  - The default project is used if this parameter is not specified.
- - The project ID can be obtained on the [project management page in the TencentDB for MongoDB console](https://console.cloud.tencent.com/project).
+         * <p>Project ID.</p><ul><li>If this parameter is not set, the default project is used.</li><li>You can obtain the project ID on the <a href="https://console.cloud.tencent.com/project">MongoDB console project management</a> page.</li></ul>
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * VPC ID.
-- Only VPC configuration is supported, and a VPC in the same region as the instance should be selected. Log in to the [VPC console](https://console.cloud.tencent.com/vpc) to obtain the available VPC ID.
-- After successful instance creation, VPCs can be changed. For detailed operations, see [Changing the Network](https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1).
+         * <p>VPC ID.</p><ul><li>Only private networks can be configured, and a private network in the same region as the instance must be selected. Log in to the <a href="https://console.cloud.tencent.com/vpc">VPC console</a> to obtain a used private network ID.</li><li>After successful instance creation, VPC replacement is allowed. For detailed operations, see <a href="https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1">Changing the Network</a>.</li></ul>
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Subnet ID of the VPC.
-- A subnet should be specified within the selected VPC. Log in to the [VPC console](https://console.cloud.tencent.com/vpc) to obtain the available subnet ID.
-- After successful instance creation, VPCs and subnets can be changed. For detailed operations, see [Changing the Network](https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1).
+         * <p>Subnet ID of the VPC.</p><ul><li>You must specify a subnet within the selected private network. Log in to the <a href="https://console.cloud.tencent.com/vpc">VPC console</a> to obtain the subnet ID.</li><li>After the instance is successfully created, replacement of the private network and subnet is allowed. For detailed operations, please refer to <a href="https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1">Network Change</a>.</li></ul>
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * Instance password. The requirements are as follows:
- - The number of characters should be in the range of [8, 32].
- - Characters within the ranges [A,Z], [a,z], and [0,9] are allowed.
- - Special characters that can be entered include exclamation marks (!), at signs (@), number signs (#), percent signs (%), carets (^), asterisks (\*), brackets (()), and underscores (_).
- - It cannot contain only the same letters or digits.
+         * <p>Instance password. The requirements are as follows:</p><ul><li>Character count is [8,32].</li><li>Enter characters within [A,Z], [a,z], [0,9].</li><li>Special characters include: exclamation mark "!", at "@", pound sign "#", percent sign "%", caret "^", asterisk "*", brackets "()", underscore "_".</li><li>Cannot set a single letter or number.</li></ul>
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * Instance tag information.
+         * <p>Instance tag information.</p>
          * @type {Array.<TagInfo> || null}
          */
         this.Tags = null;
 
         /**
-         * Automatic renewal flag.
- - 0: no automatic renewal.
- - 1: automatic renewal.
+         * <p>Auto-renewal flag.</p><ul><li>0: no auto-renewal.</li><li>1: auto-renewal.</li></ul>
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
 
         /**
-         * Whether to automatically select a voucher.
- - 1: yes.
- - 0: no. Default value: 0.
+         * <p>Indicates whether to automatically select voucher.</p><ul><li>1: Yes.</li><li>0: No. Default is 0.</li></ul>
          * @type {number || null}
          */
         this.AutoVoucher = null;
 
         /**
-         * Instance type.
-- 1: formal instance.
-- 3: read-only instance.
-- 4: disaster recovery instance.
-- 5: cloned instance. Note: For a cloned instance, RestoreTime is required.
+         * <p>Instance type.</p><ul><li>1: Formal instance.</li><li>3: Read-only instance.</li><li>4: Disaster recovery instance.</li><li>5: Clone instance. Note: RestoreTime is a required item when you clone an instance.</li></ul>
          * @type {number || null}
          */
         this.Clone = null;
 
         /**
-         * Parent instance ID.
-- This parameter is required when the value of the **Clone** parameter is set to 3 or 4, indicating a read-only or disaster recovery instance.
-- Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the parent instance ID from the instance list.
+         * <p>Parent instance ID.</p><ul><li>When the <strong>Clone</strong> parameter is 3 or 4, that is, the instance is read-only or a disaster recovery instance, this parameter must be configured.</li><li>Log in to the <a href="https://console.cloud.tencent.com/mongodb">MongoDB console</a> and copy the parent instance ID in the instance list.</li></ul>
          * @type {string || null}
          */
         this.Father = null;
 
         /**
-         * Security group ID. Log in to the [security group console](https://console.cloud.tencent.com/vpc/security-group) to obtain the ID of the security group in the same region as the database instance.
+         * <p>Security group ID. Log in to the <a href="https://console.cloud.tencent.com/vpc/security-group">security group console</a> to obtain the ID of the security group within the same region as the database instance.</p>
          * @type {Array.<string> || null}
          */
         this.SecurityGroup = null;
 
         /**
-         * Rollback time of the cloned instance. It is required when the Clone value is 5 or 6. - This parameter is required for cloned instances. Format: 2021-08-13 16:30:00. - Rollback time range: Only data within the last 7 days can be rolled back.
+         * <p>Rollback time of the cloned instance. It is required when the Clone value is 5 or 6. - This parameter is required for cloned instances. Format: 2021-08-13 16:30:00. - Rollback time range: Only data within the last 7 days can be rolled back.</p>
          * @type {string || null}
          */
         this.RestoreTime = null;
 
         /**
-         * Instance name. Only Chinese characters, letters, digits, underscores (_), and delimiters (-) are supported, with a length of 128 characters. When database instances are purchased in batches, the automatic ascending feature is supported through the custom naming pattern string and numeric suffix to set instance names efficiently.
-- Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for **lnstanceName**. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.
-- Custom starting number mode: prefix + {R:x} (x is the custom starting number). Prefix{R:x} is required for **InstanceName**. For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be sequentially named cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.
-- Composite pattern string: prefix 1{R:x} + prefix 2{R:y}+ ⋯ + fixed suffix, where x and y are the starting numbers of each prefix. A composite pattern string is required for **instanceName**. For example, cmgo{R:10}\_node{R:12}\_db. If the batch purchase quantity is set to 5, the instances will be sequentially named cmgo10\_node12\_db, cmgo11\_node13\_db, cmgo12\_node14\_db, cmgo13\_node15\_db, and cmgo14\_node16\_db.
+         * <p>Instance name. Only Chinese, English, digits, underscores (_), and hyphens (-) are supported, with a maximum length of 128 characters. When purchasing database instances in batches, you can efficiently set instance names by using custom pattern strings and automatically ascending numeric suffixes.</p><ul><li>Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for <strong>lnstanceName</strong>. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.</li><li>Custom starting number mode: prefix + {R:x} (x is the custom starting number). <strong>InstanceName</strong> requires "prefix{R:x}". For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.</li><li>Composite pattern string: prefix1{R:x} + prefix2{R:y} + ⋯ + fixed suffix, where x and y are the starting numbers for each prefix. <strong>InstanceName</strong> requires a composite pattern string. For example, cmgo{R:10}_node{R:12}_db. If the batch purchase quantity is set to 5, the instance names will be cmgo10_node12_db, cmgo11_node13_db, cmgo12_node14_db, cmgo13_node15_db, and cmgo14_node16_db.</li></ul>
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Specifies the list of AZs during multi-AZ deployment of TencentDB for MongoDB instances.
- - For instances in multi-AZ deployment mode, the **Zone** parameter specifies the primary AZ, and **AvailabilityZoneList** specifies all AZs, including the primary AZ. Format: [ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4].
- - The [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain AZs planned for TencentDB for MongoDB instances in different regions, helping you specify valid AZs.
- - Nodes in multi-AZ deployment mode can only be deployed in 3 different AZs. Deploying most nodes of a cluster in the same AZ is not supported. For example, a 3-node cluster does not support deploying 2 nodes in the same AZ.
+         * <p>For cloud database instances in multi-AZ deployment, specify the availability zone list.</p><ul><li>For instances in multi-AZ deployment mode, the <strong>Zone</strong> parameter specifies the primary AZ, and <strong>AvailabilityZoneList</strong> specifies all AZs, including the primary AZ. Format: [ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4].</li><li>Use the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to access cloud databases and obtain availability zone information planned for different regions, so that you can assign valid AZs.</li><li>Nodes in multi-AZ deployment can only be deployed in 3 different availability zones. Deploying most nodes of a cluster in the same availability zone is not supported. For example, a 3-node cluster does not support deploying 2 nodes in the same zone.</li></ul>
          * @type {Array.<string> || null}
          */
         this.AvailabilityZoneList = null;
 
         /**
-         * Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase.
+         * <p>Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase.</p>
          * @type {number || null}
          */
         this.MongosCpu = null;
 
         /**
-         * Mongos node memory size.
- - This parameter is required during sharded cluster instance purchase.
- - Unit: GB. 1-core 2GB, 2-core 4GB, 4-core 8GB, 8-core 16GB, and 16-core 32GB are supported.
+         * <p>Mongos node memory size.</p><ul><li>This parameter is required during sharded cluster instance purchase.</li><li>Unit: GB. Valid values: 2 (for 1 core), 4 (for 2 cores), 8 (for 4 cores), 16 (for 8 cores), and 32 (for 16 cores).</li></ul>
          * @type {number || null}
          */
         this.MongosMemory = null;
 
         /**
-         * Number of Mongos nodes. This parameter is required during sharded cluster instance purchase.
- - For instances in single-AZ deployment mode, the value range is [3,32].
- - For instances in multi-AZ deployment mode, the value range is [6,32].
+         * <p>Number of Mongos nodes. This parameter is required during sharded cluster instance purchase.</p><ul><li>For single-AZ deployment instances, the quantity range is [3,32].</li><li>For instances deployed across multiple availability zones, the quantity range is [6,32].</li></ul>
          * @type {number || null}
          */
         this.MongosNodeNum = null;
 
         /**
-         * Number of read-only nodes. Value ranges: [0,5].
+         * <p>Number of read-only nodes. Value ranges from 0 to 5.</p>
          * @type {number || null}
          */
         this.ReadonlyNodeNum = null;
 
         /**
-         * Array of AZs of read-only nodes. This parameter is required for instances in multi-AZ deployment mode when **ReadonlyNodeNum** is not set to **0**.
+         * <p>Array of AZs of read-only nodes. This parameter is required for instances in multi-AZ deployment mode when <strong>ReadonlyNodeNum</strong> is not set to <strong>0</strong>.</p>
          * @type {Array.<string> || null}
          */
         this.ReadonlyNodeAvailabilityZoneList = null;
 
         /**
-         * AZ of the hidden node. This parameter is required for instances in multi-AZ deployment mode.
+         * <p>Availability zone of the Hidden node. To deploy instances across availability zones, you must configure this parameter.</p>
          * @type {string || null}
          */
         this.HiddenZone = null;
 
         /**
-         * Parameter template ID.
-- A parameter template is a collection of predefined parameter values that can be used to quickly configure new MongoDB instances. Proper use of parameter templates can significantly enhance the deployment efficiency and operational performance of the database.
-- The [DescribeDBInstanceParamTpl](https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1) API can be called to obtain the parameter template ID. Select the parameter template ID corresponding to the instance version and architecture.
+         * <p>Parameter template ID.</p><ul><li>A parameter template is a collection of preset specific parameters applicable to quick configuration of new MongoDB instances. Proper use of parameter templates can effectively improve database deployment efficiency and operating performance.</li><li>The parameter template ID can be obtained through the <a href="https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1">DescribeDBInstanceParamTpl</a> API. Please select the parameter template ID corresponding to your instance version and architecture.</li></ul>
          * @type {string || null}
          */
         this.ParamTemplateId = null;
+
+        /**
+         * <p>Instance CPU core size. Unit: C. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain specific saleable CPU specifications.<br>Note: CPU size must be set for common I Instance Type.</p>
+         * @type {number || null}
+         */
+        this.CpuCore = null;
 
     }
 
@@ -324,6 +285,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.ReadonlyNodeAvailabilityZoneList = 'ReadonlyNodeAvailabilityZoneList' in params ? params.ReadonlyNodeAvailabilityZoneList : null;
         this.HiddenZone = 'HiddenZone' in params ? params.HiddenZone : null;
         this.ParamTemplateId = 'ParamTemplateId' in params ? params.ParamTemplateId : null;
+        this.CpuCore = 'CpuCore' in params ? params.CpuCore : null;
 
     }
 }
@@ -487,6 +449,92 @@ class CreateBackupDBInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAuditLogs request structure.
+ * @class
+ */
+class DescribeAuditLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, in the format of cmgo-xftsghuy. It is the same as the instance ID displayed on the TencentDB console page.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Start time, format: "2017-07-12 10:29:20".
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time, format: "2017-07-12 10:29:20".
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Filter conditions. You can filter logs based on these conditions.
+         * @type {AuditLogFilter || null}
+         */
+        this.Filter = null;
+
+        /**
+         * Pagination parameter indicates the number of returned data entries. Default value is 100. Maximum value is 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Pagination offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting method of the audit log.
+<ul><li>ASC: ascending.</li><li>DESC: descending order.</li></ul>
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sorting field of the audit log, including:
+<ul><li>timestamp: Timestamp.</li>
+<li>affectRows: Number of affected rows.</li>
+<li>execTime: Execution time.</li></ul>
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.Filter) {
+            let obj = new AuditLogFilter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+
+    }
+}
+
+/**
  * Instance price
  * @class
  */
@@ -524,6 +572,34 @@ class DBInstancePrice extends  AbstractModel {
         this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+
+    }
+}
+
+/**
+ * TerminateDBInstances request structure.
+ * @class
+ */
+class TerminateDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the ID of the pre-isolated instance. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -607,24 +683,65 @@ class DeleteLogDownloadTaskResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDBInstanceNamespace response structure.
+ * InquirePriceRenewDBInstances request structure.
  * @class
  */
-class DescribeDBInstanceNamespaceResponse extends  AbstractModel {
+class InquirePriceRenewDBInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of databases of the queried instance. If no database is specified for querying with DbName, a list of databases of only the queried instance is returned instead of the information indicated by Collections.
+         * Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/MongoDB) and copy the instance ID from the instance list. Up to 5 instances can be queried at a time.
          * @type {Array.<string> || null}
          */
-        this.Databases = null;
+        this.InstanceIds = null;
 
         /**
-         * Queried collection information. If DbName is specified, a list of collections of only this database is returned.
-         * @type {Array.<string> || null}
+         * The parameter setting for the prepaid mode (monthly subscription mode). This parameter can specify the renewal period, whether to set automatic renewal, and other attributes of the monthly subscription instance.
+         * @type {InstanceChargePrepaid || null}
          */
-        this.Collections = null;
+        this.InstanceChargePrepaid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeAuditLogFiles response structure.
+ * @class
+ */
+class DescribeAuditLogFilesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible audit log files.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Audit log file details.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AuditLogFile> || null}
+         */
+        this.Items = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -641,8 +758,16 @@ class DescribeDBInstanceNamespaceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Databases = 'Databases' in params ? params.Databases : null;
-        this.Collections = 'Collections' in params ? params.Collections : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new AuditLogFile();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -866,6 +991,41 @@ class InstanceMultiParam extends  AbstractModel {
 }
 
 /**
+ * DescribeSRVConnectionDomain response structure.
+ * @class
+ */
+class DescribeSRVConnectionDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * srv domain information of the current instance.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceSSL request structure.
  * @class
  */
@@ -908,18 +1068,76 @@ class DescribeBackupRulesResponse extends  AbstractModel {
         this.BackupSaveTime = null;
 
         /**
+         * Backup frequency. Backup interval in hours. Value: 12, 24.
+         * @type {number || null}
+         */
+        this.BackupFrequency = null;
+
+        /**
          * Automatic backup start time.
          * @type {number || null}
          */
         this.BackupTime = null;
 
         /**
-         * Backup method.
+         * Backup mode.
 - 0: logical backup.
 - 1: physical backup.
+-3: Snapshot backup.
+**Description**:
+1. The General Edition instance supports logical and physical backup. The Cloud Disk Edition instance supports physical and snapshot backup, but does not support logical backup currently.
+2. Physical backup is not supported when storage encryption is enabled for the instance.
          * @type {number || null}
          */
         this.BackupMethod = null;
+
+        /**
+         * Day of week for backup, 0-6, separated by commas
+         * @type {string || null}
+         */
+        this.ActiveWeekdays = null;
+
+        /**
+         * Long-term backup period. weekly - by week, monthly - by month, empty means not enabled.
+         * @type {string || null}
+         */
+        this.LongTermInterval = null;
+
+        /**
+         * Date of long-term backup, week 0-6, month 1-31
+         * @type {string || null}
+         */
+        this.LongTermActiveDays = null;
+
+        /**
+         * Long-term backup retention period
+         * @type {number || null}
+         */
+        this.LongTermExpiredDays = null;
+
+        /**
+         * Incremental backup retention period
+         * @type {number || null}
+         */
+        this.OplogExpiredDays = null;
+
+        /**
+         * Backup version. 0 - Old backup method, 1 - Advanced backup.
+         * @type {number || null}
+         */
+        this.BackupVersion = null;
+
+        /**
+         * Backup size
+         * @type {BackupTotalSize || null}
+         */
+        this.BackupTotalSize = null;
+
+        /**
+         * alarm limit
+         * @type {number || null}
+         */
+        this.AlertThreshold = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -937,8 +1155,22 @@ class DescribeBackupRulesResponse extends  AbstractModel {
             return;
         }
         this.BackupSaveTime = 'BackupSaveTime' in params ? params.BackupSaveTime : null;
+        this.BackupFrequency = 'BackupFrequency' in params ? params.BackupFrequency : null;
         this.BackupTime = 'BackupTime' in params ? params.BackupTime : null;
         this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+        this.ActiveWeekdays = 'ActiveWeekdays' in params ? params.ActiveWeekdays : null;
+        this.LongTermInterval = 'LongTermInterval' in params ? params.LongTermInterval : null;
+        this.LongTermActiveDays = 'LongTermActiveDays' in params ? params.LongTermActiveDays : null;
+        this.LongTermExpiredDays = 'LongTermExpiredDays' in params ? params.LongTermExpiredDays : null;
+        this.OplogExpiredDays = 'OplogExpiredDays' in params ? params.OplogExpiredDays : null;
+        this.BackupVersion = 'BackupVersion' in params ? params.BackupVersion : null;
+
+        if (params.BackupTotalSize) {
+            let obj = new BackupTotalSize();
+            obj.deserialize(params.BackupTotalSize)
+            this.BackupTotalSize = obj;
+        }
+        this.AlertThreshold = 'AlertThreshold' in params ? params.AlertThreshold : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1084,6 +1316,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifySRVConnectionUrl response structure.
+ * @class
+ */
+class ModifySRVConnectionUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start the task ID.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AssignProject response structure.
  * @class
  */
@@ -1114,6 +1381,76 @@ class AssignProjectResponse extends  AbstractModel {
         }
         this.FlowIds = 'FlowIds' in params ? params.FlowIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Audit log filter criteria
+ * @class
+ */
+class AuditLogFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Client IP address.
+         * @type {Array.<string> || null}
+         */
+        this.Host = null;
+
+        /**
+         * Username.
+         * @type {Array.<string> || null}
+         */
+        this.User = null;
+
+        /**
+         * Execution time. Unit: ms. Filter audit logs with execution time more than this value.
+         * @type {number || null}
+         */
+        this.ExecTime = null;
+
+        /**
+         * Number of affected rows. Filter audit logs with affected rows more than this value.
+         * @type {number || null}
+         */
+        this.AffectRows = null;
+
+        /**
+         * Operation type.
+         * @type {Array.<string> || null}
+         */
+        this.Atype = null;
+
+        /**
+         * Execution result.
+         * @type {Array.<string> || null}
+         */
+        this.Result = null;
+
+        /**
+         * Filter logs using this keyword
+         * @type {Array.<string> || null}
+         */
+        this.Param = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Host = 'Host' in params ? params.Host : null;
+        this.User = 'User' in params ? params.User : null;
+        this.ExecTime = 'ExecTime' in params ? params.ExecTime : null;
+        this.AffectRows = 'AffectRows' in params ? params.AffectRows : null;
+        this.Atype = 'Atype' in params ? params.Atype : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Param = 'Param' in params ? params.Param : null;
 
     }
 }
@@ -1195,24 +1532,31 @@ class DescribeDBInstanceDealResponse extends  AbstractModel {
 }
 
 /**
- * Modifies the request parameters of a TencentDB for MongoDB instance.
+ * DescribeAuditLogs response structure.
  * @class
  */
-class ModifyMongoDBParamType extends  AbstractModel {
+class DescribeAuditLogsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter name to be modified. Strictly refer to the parameter names supported by the current instance, which are obtained through DescribeInstanceParams.
-         * @type {string || null}
+         * Number of eligible audit log entries.
+         * @type {number || null}
          */
-        this.Key = null;
+        this.TotalCount = null;
 
         /**
-         * Corresponding value of the parameter name to be modified. Strictly refer to the value ranges corresponding to the parameters obtained through DescribeInstanceParams.
+         * Audit log details.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AuditLog> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Value = null;
+        this.RequestId = null;
 
     }
 
@@ -1223,8 +1567,17 @@ class ModifyMongoDBParamType extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new AuditLog();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1294,6 +1647,41 @@ class IsolateDBInstanceResponse extends  AbstractModel {
             return;
         }
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisableSRVConnectionUrl response structure.
+ * @class
+ */
+class DisableSRVConnectionUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start the task ID.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1655,13 +2043,13 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
         super();
 
         /**
-         * Order ID
+         * <p>Order ID.</p>
          * @type {string || null}
          */
         this.DealId = null;
 
         /**
-         * List of IDs of the created instances
+         * <p>List of instance created IDs.</p>
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1933,8 +2321,8 @@ class SpecItem extends  AbstractModel {
 
         /**
          * Saleable specification status flag. Valid values are as follows:
- - 0: selling stopped.
- - 1: available for sale.
+- 0: selling stopped.
+- 1: available for sale.
          * @type {number || null}
          */
         this.Status = null;
@@ -1989,24 +2377,34 @@ class SpecItem extends  AbstractModel {
 - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+- MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
          * @type {string || null}
          */
         this.MongoVersionCode = null;
 
         /**
          * Digital version corresponding to the instance version.
+- MongoDB version 3.2: 2.
+- MongoDB version 3.6: 4.
+- MongoDB version 4.0: 5.
+- MongoDB version 4.2: 9.
+- MongoDB version 4.4: 10.
+- MongoDB version 5.0: 11.
+- MongoDB version 6.0: 12.
+- MongoDB version 7.0: 13.
+- MongoDB version 8.0: 14.
          * @type {number || null}
          */
         this.MongoVersionValue = null;
 
         /**
-         * Instance version information. Valid values: 4.2, 4.4, 5.0, 6.0, and 7.0.
+         * Instance version information. Valid values: 4.2, 4.4, 5.0, 6.0, 7.0, and 8.0.
          * @type {string || null}
          */
         this.Version = null;
 
         /**
-         * Storage engine.
+         * Storage engine. Only WiredTiger is supported.
          * @type {string || null}
          */
         this.EngineName = null;
@@ -2224,13 +2622,22 @@ class UpgradeDbInstanceVersionRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Newly upgraded database version. Currently, it only supports MONGO_40_WT (version of the MongoDB 4.0 WiredTiger storage engine) and MONGO_42_WT (version of the MongoDB 4.2 WiredTiger storage engine).
+         * The newly upgraded database version. Currently supported versions are as follows. Upgrade from an earlier version to a high version is supported. Cross-version upgrade is not supported.
+- MONGO_40_WT: Version 4.0.
+- MONGO_42_WT: Version 4.2.
+- MONGO_44_WT: Version 4.4.
+- MONGO_50_WT: Version 5.0.
+- MONGO_60_WT: Version 6.0.
+-MONGO_70_WT: Version 7.0.
+- MONGO_80_WT: Version 8.0.
          * @type {string || null}
          */
         this.MongoVersion = null;
 
         /**
-         * Whether to perform the upgrade during the maintenance period. 0 - upgrade now; 1 - upgrade during the maintenance period.
+         * Specify whether to perform the upgrade during the maintenance period.
+-0: Upgrade now.
+- 1: Upgrade during the maintenance window.
          * @type {number || null}
          */
         this.InMaintenance = null;
@@ -2495,6 +2902,13 @@ class InquirePriceModifyDBInstanceSpecRequest extends  AbstractModel {
          */
         this.ReplicateSetNum = null;
 
+        /**
+         * CPU size after configuration changes, in C. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain the specific sales specifications for CPU.
+Note: For Common I Instance Type pricing, you need to pass in the CPU core size corresponding to the memory.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -2509,6 +2923,7 @@ class InquirePriceModifyDBInstanceSpecRequest extends  AbstractModel {
         this.Volume = 'Volume' in params ? params.Volume : null;
         this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
         this.ReplicateSetNum = 'ReplicateSetNum' in params ? params.ReplicateSetNum : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -2522,89 +2937,79 @@ class BackupInfo extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * <p>Instance ID.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Backup method.
-- 0: automatic backup.
-- 1: manual backup.
+         * <p>Backup method.</p><ul><li>0: Automatic backup.</li><li>1: Manual backup.</li></ul>
          * @type {number || null}
          */
         this.BackupType = null;
 
         /**
-         * Backup file name.
+         * <p>Backup file name.</p>
          * @type {string || null}
          */
         this.BackupName = null;
 
         /**
-         * Backup task remarks.
+         * <p>Backup task notes.</p>
          * @type {string || null}
          */
         this.BackupDesc = null;
 
         /**
-         * Backup file size, in KB.
+         * <p>Backup file size, in KB.</p>
          * @type {number || null}
          */
         this.BackupSize = null;
 
         /**
-         * Backup start time.
+         * <p>Backup start time.</p>
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Backup end time.
+         * <p>Backup end time.</p>
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Backup status.
-- 1: backing up.
-- 2: backup successful.
+         * <p>Backup status.</p><ul><li>1: Backup in progress.</li><li>2: Backup successful.</li></ul>
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Backup method.
-- 0: logical backup.
-- 1: physical backup.
-- 3: snapshot backup.
-**Note:**
-- The General Edition instance supports logical and physical backup. The Cloud Disk Edition instance supports physical and snapshot backup, but does not support logical backup currently.
-- Physical backup is not supported when storage encryption is enabled for the instance.
+         * <p>Backup method.</p><ul><li>0: Logical backup.</li><li>1: Physical backup.</li><li>3: Snapshot backup.<br><strong>Description:</strong></li><li>The General Edition instance supports logical and physical backup. The Cloud Disk Edition instance supports physical and snapshot backup, but does not support logical backup currently.</li><li>If storage encryption is activated for the instance, physical backup is not supported.</li></ul>
          * @type {number || null}
          */
         this.BackupMethod = null;
 
         /**
-         * Backup record ID.
+         * <p>Backup record ID.</p>
          * @type {number || null}
          */
         this.BackId = null;
 
         /**
-         * Backup deletion time.
+         * <p>Backup deletion time.</p>
          * @type {string || null}
          */
         this.DeleteTime = null;
 
         /**
-         * Cross-region backup region.
+         * <p>Backup region in a different location.</p>
          * @type {string || null}
          */
         this.BackupRegion = null;
 
         /**
-         * Rollback time supported by the backup.
+         * <p>Rollback time supported by the backup.</p>
          * @type {string || null}
          */
         this.RestoreTime = null;
@@ -2952,80 +3357,76 @@ class ModifyDBInstanceSpecRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+         * <p>Instance ID. Log in to the <a href="https://console.cloud.tencent.com/mongodb">MongoDB console</a> and copy the instance ID from the instance list.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Memory size after instance configuration changes, in GB. If this parameter is left blank, the default value is the current memory size of the instance. For the currently supported memory specifications, see [Product Specifications](https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1).
-**Note**: Memory and disk configurations should be upgraded or downgraded simultaneously, meaning that Memory and Volume should be modified at the same time.
+         * <p>Memory size after instance configuration modification. Unit: GB. The current instance memory size is used by default if this parameter is left blank. For supported memory specifications, please refer to <a href="https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1">product specifications</a>.<br><strong>Note</strong>: Memory and disk configurations should be upgraded or downgraded at the same time, meaning that Memory and Volume should be modified at the same time.</p>
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * Hard disk size after instance configuration changes, in GB. If this parameter is left blank, the default value is the current disk size of the instance. For the currently supported disk capacity, see [Product Specifications](https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1).
-- Memory and disk configurations should be upgraded or downgraded at the same time, meaning that Memory and Volume should be modified at the same time.
-- During configuration downgrade, the disk capacity after changes should be greater than 1.2 times the used disk capacity.
+         * <p>Hard disk size after instance configuration modification. Unit: GB. The current instance disk size is used by default if this parameter is left blank. For supported disk capacity, please refer to <a href="https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1">product specification</a>.</p><ul><li>Memory and disk configurations should be upgraded or downgraded at the same time, meaning that Memory and Volume should be modified simultaneously.</li><li>When downgrading, the disk capacity after modification must be greater than 1.2 times the used disk capacity.</li></ul>
          * @type {number || null}
          */
         this.Volume = null;
 
         /**
-         * (Deprecated) Use the independent API ResizeOplog.
-
-Oplog size after instance configuration modification.
- - Unit: GB.
- - By default, the capacity occupied by Oplog is 10% of the disk capacity. The range of capacity occupied by Oplog supported by the system is [10%,90%] of the disk capacity.
+         * <p>(Abandoned) Please use the standalone ResizeOplog API to complete.</p><p>Oplog size after instance configuration change.</p><ul><li>Unit: GB.</li><li>Default oplog capacity used is 10% of disk space. The system allows oplog capacity settings ranging from 10% to 90% of disk space.</li></ul>
          * @type {number || null}
          */
         this.OplogSize = null;
 
         /**
-         * Number of Mongod nodes after instance changes (excluding read-only nodes).
-- Number of replica set nodes. The value range of the number of nodes can be obtained through the response parameters MinNodeNum and MaxNodeNum of the [DescribeSpecInfo ](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API.
-- Number of nodes per shard in a sharded cluster. The value range of the number of nodes can be obtained through the response parameters MinReplicateSetNodeNum and MaxReplicateSetNodeNum of the [DescribeSpecInfo ](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API.
-**Note**: When the CPU and memory specifications of Mongod or Mongos nodes are changed, this parameter is not required, or enter the current number of Mongod or Mongos nodes (excluding read-only nodes).
+         * <p>Number of mongod nodes after instance change (excluding read-only nodes).</p><ul><li>Replica set node count: Use the MinNodeNum and MaxNodeNum parameters in the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API response to obtain the node count range.</li><li>Number of shard nodes in a sharded cluster: Use the MinReplicateSetNodeNum and MaxReplicateSetNodeNum parameters in the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API response to obtain the node count range.<br><strong>Note</strong>: When modifying the CPU or memory specifications of mongod or mongos, you may not configure this parameter or enter the current number of mongod or mongos nodes (excluding read-only nodes).</li></ul>
          * @type {number || null}
          */
         this.NodeNum = null;
 
         /**
-         * Number of shards after instance changes.
-- The value range for the number of instance shards can be obtained through the response parameters **MinReplicateSetNum** and **MaxReplicateSetNum** of the [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API.
-- The number of instance shards can only be increased and cannot be decreased.
+         * <p>Number of shards after instance change.</p><ul><li>The value range for the number of instance shards can be obtained through the response parameters <strong>MinReplicateSetNum</strong> and <strong>MaxReplicateSetNum</strong> of the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API.</li><li>Only allow adding shards, not reducing them.</li></ul>
          * @type {number || null}
          */
         this.ReplicateSetNum = null;
 
         /**
-         * Switch time for instance configuration modification.
- - 0: Execute the configuration modification task immediately after the adjustment is completed. Default value: 0.
- - 1: Execute the configuration modification task within the maintenance window.
-**Note**: Adjusting the number of nodes and shards is unsupported <b>within the maintenance window</b>.
+         * <p>Switch time for instance configuration change.</p><ul><li>0: Immediately execute the configuration modification task upon completion of adjustment. Default is 0.</li><li>1: Execute the configuration modification task within the maintenance window.<br><strong>Note</strong>: Adjusting the number of nodes and shard quantity is unsupported within the <b>maintenance window</b>.</li></ul>
          * @type {number || null}
          */
         this.InMaintenance = null;
 
         /**
-         * Memory size of the Mongos node after sharded cluster instance configuration changes, in GB. For the specifications supported by the instance, see [Product Specifications](https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1).
+         * <p>Memory size of mongos after sharding instance configuration change. Unit: GB. For instance support specifications, see <a href="https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1">product specification</a>.</p>
          * @type {string || null}
          */
         this.MongosMemory = null;
 
         /**
-         * List of nodes to be added, containing the node type and AZ information.
+         * <p>List of nodes to be added, containing the node type and AZ information.</p>
          * @type {Array.<AddNodeList> || null}
          */
         this.AddNodeList = null;
 
         /**
-         * Deletes the node list.
-**Note**: According to the consistency principle for nodes of each shard on a sharded cluster instance, specify the nodes on shard 0 for node deletion from the sharded cluster instance. For example, cmgo-9nl1czif_0-node-readonly0 will delete the first read-only node of each shard.
+         * <p>Delete node list.<br><strong>Note</strong>: Based on the consistency principle of sharded instance nodes, when deleting shard instance nodes, only need to specify the node corresponding to shard 0, for example: cmgo-9nl1czif_0-node-readonly0 will delete the first read-only node of each shard.</p>
          * @type {Array.<RemoveNodeList> || null}
          */
         this.RemoveNodeList = null;
+
+        /**
+         * <p>CPU size after instance configuration changes. Unit: C. If empty, the default value is the current CPU size of the instance. For currently supported CPU specifications, see <a href="https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1">Product Specifications</a>.</p>
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * <p>The product specification type after instance configuration change. If empty, the default value is the current instance product specification type.<br>Currently supported product specification types are as follows:<br>Recommended product specification types:</p><ul><li>GE.LD.T1: Local disk (Common I).</li><li>GE.CD.T1: Cloud disk (Common I).</li></ul><p>Product allowlist specification types:</p><ul><li>HIO10G: Local disk (High IO 10G).</li><li>HCD: Cloud disk (Cloud Disk Edition).</li></ul><p>Note:</p><ol><li>Allowlist specification types are controlled by allowlist. If needed, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a> to apply.</li><li>Common I cannot be changed to allowlist specification types.</li></ol>
+         * @type {string || null}
+         */
+        this.MachineCode = null;
 
     }
 
@@ -3062,6 +3463,8 @@ Oplog size after instance configuration modification.
                 this.RemoveNodeList.push(obj);
             }
         }
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.MachineCode = 'MachineCode' in params ? params.MachineCode : null;
 
     }
 }
@@ -3123,7 +3526,7 @@ class DescribeLogDownloadTasksRequest extends  AbstractModel {
 }
 
 /**
- * User permissions
+ * 
  * @class
  */
 class Auth extends  AbstractModel {
@@ -3179,14 +3582,14 @@ class ResetDBInstancePasswordRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Specifies the account name for which the password needs to be changed. The [DescribeAccountUsers](https://www.tencentcloud.com/document/product/240/80800?from_cn_redirect=1) API can be called to obtain the account list and copy the account name for which the password needs to be changed.
+         * Specifies the account name for which the password needs to be changed. The [DescribeAccountUsers](https://www.tencentcloud.com/document/product/240/74804) API can be called to obtain the account list and copy the account name for which the password needs to be changed.
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
          * Specifies a new password for the account. Password complexity requirements:
-- It should contain 8–32 characters.
+- It should contain 8-32 characters.
 - It should contain at least two types of the following: letters, digits, and special characters (!@#%^\*()\_).
          * @type {string || null}
          */
@@ -3304,6 +3707,69 @@ class InstanceIntegerParam extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceAz request structure.
+ * @class
+ */
+class ModifyInstanceAzRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance ID, such as cmgo-p8vn****. Log in to the <a href="https://console.cloud.tencent.com/mongodb">MongoDB console</a> and copy the instance ID from the instance list.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Availability zone ID where the primary node is located. For the method for obtaining, please see <a href="https://www.tencentcloud.com/document/product/240/3637?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
+         * @type {string || null}
+         */
+        this.PrimaryNodeZone = null;
+
+        /**
+         * <p>ID list of the availability zone where the secondary node resides.<br><strong>Note</strong>: It cannot contain the availability zones where the primary node and Hidden nodes reside.</p>
+         * @type {Array.<string> || null}
+         */
+        this.SecondaryNodeZone = null;
+
+        /**
+         * <p>If the current instance has no configuration for Hidden nodes, this parameter is not required.</p>
+         * @type {string || null}
+         */
+        this.HiddenNodeZone = null;
+
+        /**
+         * <p>List of AZ IDs where read-only nodes reside.<br><strong>Note</strong>: If the current instance contains read-only nodes, this parameter is required.</p>
+         * @type {Array.<string> || null}
+         */
+        this.ReadonlyNodeZone = null;
+
+        /**
+         * <p>Specify the time policy for executing the availability zone switch.</p><ul><li>0: Execute the switch immediately.</li><li>1: Execute the switch within the set maintenance window. For details, please refer to <a href="https://www.tencentcloud.com/document/product/240/19910?from_cn_redirect=1">setting instance maintenance time</a>.</li></ul>
+         * @type {number || null}
+         */
+        this.InMaintenance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.PrimaryNodeZone = 'PrimaryNodeZone' in params ? params.PrimaryNodeZone : null;
+        this.SecondaryNodeZone = 'SecondaryNodeZone' in params ? params.SecondaryNodeZone : null;
+        this.HiddenNodeZone = 'HiddenNodeZone' in params ? params.HiddenNodeZone : null;
+        this.ReadonlyNodeZone = 'ReadonlyNodeZone' in params ? params.ReadonlyNodeZone : null;
+        this.InMaintenance = 'InMaintenance' in params ? params.InMaintenance : null;
+
+    }
+}
+
+/**
  * Database IP to be modified
  * @class
  */
@@ -3334,6 +3800,41 @@ class ModifyNetworkAddress extends  AbstractModel {
         }
         this.NewIPAddress = 'NewIPAddress' in params ? params.NewIPAddress : null;
         this.OldIpAddress = 'OldIpAddress' in params ? params.OldIpAddress : null;
+
+    }
+}
+
+/**
+ * EnableSRVConnectionUrl response structure.
+ * @class
+ */
+class EnableSRVConnectionUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start the task ID.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3396,13 +3897,13 @@ class CreateDBInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * Order ID.
+         * <p>Order ID</p>
          * @type {string || null}
          */
         this.DealId = null;
 
         /**
-         * List of IDs of created instances.
+         * <p>List of instance created IDs</p>
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -3509,6 +4010,41 @@ class CreateLogDownloadTaskRequest extends  AbstractModel {
         this.LogIds = 'LogIds' in params ? params.LogIds : null;
         this.LogConnections = 'LogConnections' in params ? params.LogConnections : null;
         this.LogDetailParams = 'LogDetailParams' in params ? params.LogDetailParams : null;
+
+    }
+}
+
+/**
+ * mongodb public network service node information.
+ * @class
+ */
+class WanServiceNodeList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * vip and port information of the instance node.
+         * @type {string || null}
+         */
+        this.VipVport = null;
+
+        /**
+         * The listening port of a CLB listener ranges from 1 to 65535.
+         * @type {string || null}
+         */
+        this.ListenerPort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VipVport = 'VipVport' in params ? params.VipVport : null;
+        this.ListenerPort = 'ListenerPort' in params ? params.ListenerPort : null;
 
     }
 }
@@ -3704,24 +4240,30 @@ class ModifyDBInstanceSecurityGroupRequest extends  AbstractModel {
 }
 
 /**
- * InquirePriceRenewDBInstances request structure.
+ * DescribeDBInstanceNamespace response structure.
  * @class
  */
-class InquirePriceRenewDBInstancesRequest extends  AbstractModel {
+class DescribeDBInstanceNamespaceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/MongoDB) and copy the instance ID from the instance list. Up to 5 instances can be queried at a time.
+         * List of databases of the queried instance. If no database is specified for querying with DbName, a list of databases of only the queried instance is returned instead of the information indicated by Collections.
          * @type {Array.<string> || null}
          */
-        this.InstanceIds = null;
+        this.Databases = null;
 
         /**
-         * The parameter setting for the prepaid mode (monthly subscription mode). This parameter can specify the renewal period, whether to set automatic renewal, and other attributes of the monthly subscription instance.
-         * @type {InstanceChargePrepaid || null}
+         * Queried collection information. If DbName is specified, a list of collections of only this database is returned.
+         * @type {Array.<string> || null}
          */
-        this.InstanceChargePrepaid = null;
+        this.Collections = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -3732,13 +4274,9 @@ class InquirePriceRenewDBInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-
-        if (params.InstanceChargePrepaid) {
-            let obj = new InstanceChargePrepaid();
-            obj.deserialize(params.InstanceChargePrepaid)
-            this.InstanceChargePrepaid = obj;
-        }
+        this.Databases = 'Databases' in params ? params.Databases : null;
+        this.Collections = 'Collections' in params ? params.Collections : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3837,30 +4375,24 @@ class DescribeBackupDownloadTaskRequest extends  AbstractModel {
 }
 
 /**
- * Operation to be terminated.
+ * ModifySRVConnectionUrl request structure.
  * @class
  */
-class Operation extends  AbstractModel {
+class ModifySRVConnectionUrlRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name of the shard where the operation is performed. The [DescribeCurrentOp](https://www.tencentcloud.com/document/product/240/48120?from_cn_redirect=1) API can be called to query the shard name.
+         * Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
          * @type {string || null}
          */
-        this.ReplicaSetName = null;
+        this.InstanceId = null;
 
         /**
-         * Name of the node where the operation is performed. The [DescribeCurrentOp](https://www.tencentcloud.com/document/product/240/48120?from_cn_redirect=1) API can be called to query the node name.
+         * Custom instance access domain name.
          * @type {string || null}
          */
-        this.NodeName = null;
-
-        /**
-         * Operation number. The [DescribeCurrentOp](https://www.tencentcloud.com/document/product/240/48120?from_cn_redirect=1) API can be called to query the operation number.
-         * @type {number || null}
-         */
-        this.OpId = null;
+        this.CustomDomain = null;
 
     }
 
@@ -3871,9 +4403,8 @@ class Operation extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReplicaSetName = 'ReplicaSetName' in params ? params.ReplicaSetName : null;
-        this.NodeName = 'NodeName' in params ? params.NodeName : null;
-        this.OpId = 'OpId' in params ? params.OpId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CustomDomain = 'CustomDomain' in params ? params.CustomDomain : null;
 
     }
 }
@@ -3929,15 +4460,43 @@ class DescribeClientConnectionsResponse extends  AbstractModel {
 }
 
 /**
- * TerminateDBInstances request structure.
+ * DisableSRVConnectionUrl request structure.
  * @class
  */
-class TerminateDBInstancesRequest extends  AbstractModel {
+class DisableSRVConnectionUrlRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Specifies the ID of the pre-isolated instance. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+         * Instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeSRVConnectionDomain request structure.
+ * @class
+ */
+class DescribeSRVConnectionDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4106,7 +4665,7 @@ class InquirePriceCreateDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Price.
+         * <p>Price</p>
          * @type {DBInstancePrice || null}
          */
         this.Price = null;
@@ -4133,6 +4692,34 @@ class InquirePriceCreateDBInstancesResponse extends  AbstractModel {
             this.Price = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CloseAuditService request structure.
+ * @class
+ */
+class CloseAuditServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, in the format of cmgo-test1234. It is the same as the instance ID displayed on the TencentDB console page.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -4262,6 +4849,56 @@ class SecurityGroup extends  AbstractModel {
         this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
         this.SecurityGroupName = 'SecurityGroupName' in params ? params.SecurityGroupName : null;
         this.SecurityGroupRemark = 'SecurityGroupRemark' in params ? params.SecurityGroupRemark : null;
+
+    }
+}
+
+/**
+ * EnableWanService request structure.
+ * @class
+ */
+class EnableWanServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * CLB ID.
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * Node and listening port information.
+         * @type {Array.<WanServiceNodeList> || null}
+         */
+        this.NodeList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+
+        if (params.NodeList) {
+            this.NodeList = new Array();
+            for (let z in params.NodeList) {
+                let obj = new WanServiceNodeList();
+                obj.deserialize(params.NodeList[z]);
+                this.NodeList.push(obj);
+            }
+        }
 
     }
 }
@@ -4593,6 +5230,231 @@ class InquirePriceModifyDBInstanceSpecResponse extends  AbstractModel {
 }
 
 /**
+ * CreateDBInstanceHour request structure.
+ * @class
+ */
+class CreateDBInstanceHourRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance memory size. Unit: GB. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain specific saleable memory specifications.</p>
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * <p>Instance disk size. Unit: GB. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum disk sizes corresponding to each CPU specification.</p>
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * <ul><li>Specifies the number of replica sets during replica set instance creation. This parameter can only be 1.</li><li>Specifies the number of shards during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.</li></ul>
+         * @type {number || null}
+         */
+        this.ReplicateSetNum = null;
+
+        /**
+         * <ul><li>Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each replica set.</li><li>Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each shard.</li></ul>
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * <p>Refers to version information. For supported versions, use the interface <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> to query.</p><ul><li>MONGO_40_WT: MongoDB 4.0 WiredTiger engine version.</li><li>MONGO_42_WT: MongoDB 4.2 WiredTiger engine version.</li><li>MONGO_44_WT: MongoDB 4.4 WiredTiger engine version.</li><li>MONGO_50_WT: MongoDB 5.0 WiredTiger engine version.</li><li>MONGO_60_WT: MongoDB 6.0 WiredTiger engine version.</li><li>MONGO_70_WT: MongoDB 7.0 WiredTiger engine version.</li><li>MONGO_80_WT: MongoDB 8.0 WiredTiger engine version.</li></ul>
+         * @type {string || null}
+         */
+        this.MongoVersion = null;
+
+        /**
+         * <p>Recommended product specification types:</p><ul><li>GE.LD.T1: Local disk (Common I).</li><li>GE.CD.T1: Cloud disk (Common I).</li></ul><p>Product allowlist specification types:</p><ul><li>HIO10G: Local disk (High IO 10G).</li><li>HCD: Cloud disk (Cloud disk edition).</li></ul><p>Note: Allowlist specification types are under allowlist control. If needed, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a> to apply.</p>
+         * @type {string || null}
+         */
+        this.MachineCode = null;
+
+        /**
+         * <p>Number of instances. The minimum value is 1, and the maximum value is 30.</p>
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * <p>AZ information. The input format must be ap-guangzhou-2.</p><ul><li>For details, use the interface <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> to obtain them.</li><li>This parameter is the primary AZ. If multi-AZ deployment is used, Zone must be one of AvailabilityZoneList.</li></ul>
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * <p>Instance architecture type.</p><ul><li>REPLSET (replica set)</li><li>SHARD (sharded cluster)</li></ul>
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * <p>VPC ID.</p><ul><li>Only supports configuration of private networks. A private network in the same region as the instance must be selected. Log in to the <a href="https://console.cloud.tencent.com/vpc">VPC console</a> to obtain a usable VPC ID.</li><li>After successful instance creation, VPC replacement is allowed. For detailed operations, see <a href="https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1">Changing the Network</a>.</li></ul>
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * <p>Subnet ID of the VPC.</p><ul><li>You must specify a subnet within the selected private network. Log in to the <a href="https://console.cloud.tencent.com/vpc">VPC console</a> to obtain the subnet ID.</li><li>After the instance is successfully created, replacement of the private network and subnet is allowed. For detailed operations, please refer to <a href="https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1">Network Change</a>.</li></ul>
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * <p>Instance password. The requirements are as follows:</p><ul><li>Character count is [8,32].</li><li>Enter characters within [A,Z], [a,z], [0,9].</li><li>Special characters include: exclamation mark "!", at "@", pound sign "#", percent sign "%", caret "^", asterisk "*", brackets "()", underscore "_".</li><li>Cannot set a single letter or number.</li></ul>
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * <p>Project ID.</p><ul><li>If this parameter is not set, the default project is used.</li><li>You can obtain the project ID on the <a href="https://console.cloud.tencent.com/project">MongoDB console project management</a> page.</li></ul>
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * <p>Instance tag information.</p>
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * <p>Instance type.</p><ul><li>1: Formal instance.</li><li>3: Read-only instance.</li><li>4: Disaster recovery instance.</li><li>5: Clone instance. Note: RestoreTime is a required item when you clone an instance.</li></ul>
+         * @type {number || null}
+         */
+        this.Clone = null;
+
+        /**
+         * <p>Parent instance ID.</p><ul><li>When the <strong>Clone</strong> parameter is 3 or 4, that is, the instance is read-only or a disaster recovery instance, this parameter must be configured.</li><li>Log in to the <a href="https://console.cloud.tencent.com/mongodb">MongoDB console</a> and copy the parent instance ID in the instance list.</li></ul>
+         * @type {string || null}
+         */
+        this.Father = null;
+
+        /**
+         * <p>Security group ID. Log in to the <a href="https://console.cloud.tencent.com/vpc/security-group">security group console</a> to obtain the ID of the security group within the same region as the database instance.</p>
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroup = null;
+
+        /**
+         * <p>Rollback time of the cloned instance.</p><ul><li>This parameter is required for cloned instances. Format: 2021-08-13 16:30:00.</li><li>Rollback time range: Only data within the last 7 days can be rolled back.</li></ul>
+         * @type {string || null}
+         */
+        this.RestoreTime = null;
+
+        /**
+         * <p>Instance name. Only Chinese, English, digits, underscores (_), and hyphens (-) are supported, with a maximum length of 128 characters. When purchasing database instances in batches, you can efficiently set instance names by using custom pattern strings and automatically ascending numeric suffixes.</p><ul><li>Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for <strong>lnstanceName</strong>. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.</li><li>Custom starting number mode: prefix + {R:x} (x is the custom starting number). <strong>InstanceName</strong> requires "prefix{R:x}". For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.</li><li>Composite pattern string: prefix1{R:x} + prefix2{R:y} + ⋯ + fixed suffix, where x and y are the starting numbers for each prefix. <strong>InstanceName</strong> requires a composite pattern string. For example, cmgo{R:10}_node{R:12}_db. If the batch purchase quantity is set to 5, the instance names will be cmgo10_node12_db, cmgo11_node13_db, cmgo12_node14_db, cmgo13_node15_db, and cmgo14_node16_db.</li></ul>
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * <p>For cloud database instances in multi-AZ deployment, specify the availability zone list.</p><ul><li>For instances in multi-AZ deployment mode, the <strong>Zone</strong> parameter specifies the primary AZ, and <strong>AvailabilityZoneList</strong> specifies all AZs, including the primary AZ. Format: [ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4].</li><li>Use the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to access cloud databases and obtain availability zone information planned for different regions, so that you can assign valid AZs.</li><li>Nodes in multi-AZ deployment can only be deployed in 3 different availability zones. Deploying most nodes of a cluster in the same availability zone is not supported. For example, a 3-node cluster does not support deploying 2 nodes in the same zone.</li></ul>
+         * @type {Array.<string> || null}
+         */
+        this.AvailabilityZoneList = null;
+
+        /**
+         * <p>Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase.</p>
+         * @type {number || null}
+         */
+        this.MongosCpu = null;
+
+        /**
+         * <p>Mongos node memory size.</p><ul><li>This parameter is required during sharded cluster instance purchase.</li><li>Unit: GB. Valid values: 2 (for 1 core), 4 (for 2 cores), 8 (for 4 cores), 16 (for 8 cores), and 32 (for 16 cores).</li></ul>
+         * @type {number || null}
+         */
+        this.MongosMemory = null;
+
+        /**
+         * <p>Number of Mongos nodes. This parameter is required during sharded cluster instance purchase.</p><ul><li>For single-AZ deployment instances, the quantity range is [3,32].</li><li>For instances deployed across multiple availability zones, the quantity range is [6,32].</li></ul>
+         * @type {number || null}
+         */
+        this.MongosNodeNum = null;
+
+        /**
+         * <p>Number of read-only nodes. Value ranges from 0 to 5.</p>
+         * @type {number || null}
+         */
+        this.ReadonlyNodeNum = null;
+
+        /**
+         * <p>Array of AZs of read-only nodes. This parameter is required for instances in multi-AZ deployment mode when <strong>ReadonlyNodeNum</strong> is not set to <strong>0</strong>.</p>
+         * @type {Array.<string> || null}
+         */
+        this.ReadonlyNodeAvailabilityZoneList = null;
+
+        /**
+         * <p>Availability zone of the Hidden node. To deploy instances across availability zones, you must configure this parameter.</p>
+         * @type {string || null}
+         */
+        this.HiddenZone = null;
+
+        /**
+         * <p>Parameter template ID.</p><ul><li>A parameter template is a collection of preset specific parameters applicable to quick configuration of new MongoDB instances. Proper use of parameter templates can effectively improve database deployment efficiency and operating performance.</li><li>The parameter template ID can be obtained through the <a href="https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1">DescribeDBInstanceParamTpl</a> API. Please select the parameter template ID corresponding to your instance version and architecture.</li></ul>
+         * @type {string || null}
+         */
+        this.ParamTemplateId = null;
+
+        /**
+         * <p>Instance CPU core size. Unit: C. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain specific saleable CPU specifications.<br>Note: CPU size must be set for common I Instance Type.</p>
+         * @type {number || null}
+         */
+        this.CpuCore = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.ReplicateSetNum = 'ReplicateSetNum' in params ? params.ReplicateSetNum : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.MongoVersion = 'MongoVersion' in params ? params.MongoVersion : null;
+        this.MachineCode = 'MachineCode' in params ? params.MachineCode : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.Clone = 'Clone' in params ? params.Clone : null;
+        this.Father = 'Father' in params ? params.Father : null;
+        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
+        this.RestoreTime = 'RestoreTime' in params ? params.RestoreTime : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.AvailabilityZoneList = 'AvailabilityZoneList' in params ? params.AvailabilityZoneList : null;
+        this.MongosCpu = 'MongosCpu' in params ? params.MongosCpu : null;
+        this.MongosMemory = 'MongosMemory' in params ? params.MongosMemory : null;
+        this.MongosNodeNum = 'MongosNodeNum' in params ? params.MongosNodeNum : null;
+        this.ReadonlyNodeNum = 'ReadonlyNodeNum' in params ? params.ReadonlyNodeNum : null;
+        this.ReadonlyNodeAvailabilityZoneList = 'ReadonlyNodeAvailabilityZoneList' in params ? params.ReadonlyNodeAvailabilityZoneList : null;
+        this.HiddenZone = 'HiddenZone' in params ? params.HiddenZone : null;
+        this.ParamTemplateId = 'ParamTemplateId' in params ? params.ParamTemplateId : null;
+        this.CpuCore = 'CpuCore' in params ? params.CpuCore : null;
+
+    }
+}
+
+/**
  * Security group rule
  * @class
  */
@@ -4672,6 +5534,83 @@ class SecurityGroupBound extends  AbstractModel {
 }
 
 /**
+ * RestoreDBInstance response structure.
+ * @class
+ */
+class RestoreDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Rollback task process ID.</p>
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Total size of instance backup
+ * @class
+ */
+class BackupTotalSize extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total size of full backup, in bytes
+         * @type {number || null}
+         */
+        this.SnapshotSize = null;
+
+        /**
+         * Incremental backup total size
+         * @type {number || null}
+         */
+        this.OplogSize = null;
+
+        /**
+         * free quota
+         * @type {number || null}
+         */
+        this.FreeQuota = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SnapshotSize = 'SnapshotSize' in params ? params.SnapshotSize : null;
+        this.OplogSize = 'OplogSize' in params ? params.OplogSize : null;
+        this.FreeQuota = 'FreeQuota' in params ? params.FreeQuota : null;
+
+    }
+}
+
+/**
  * DescribeDBInstanceNodeProperty response structure.
  * @class
  */
@@ -4723,6 +5662,34 @@ class DescribeDBInstanceNodePropertyResponse extends  AbstractModel {
                 obj.deserialize(params.ReplicateSets[z]);
                 this.ReplicateSets.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CloseAuditService response structure.
+ * @class
+ */
+class CloseAuditServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -5180,6 +6147,89 @@ class SetDBInstanceDeletionProtectionResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDBInstanceNodeProperty request structure.
+ * @class
+ */
+class DescribeDBInstanceNodePropertyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Node ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), go to Node Management, and copy the node ID.
+         * @type {Array.<string> || null}
+         */
+        this.NodeIds = null;
+
+        /**
+         * Node role. Valid values:
+- PRIMARY: primary node.
+- SECONDARY: secondary node.
+- READONLY: read-only node.
+- ARBITER: arbitration node.
+         * @type {Array.<string> || null}
+         */
+        this.Roles = null;
+
+        /**
+         * Whether the node is a hidden node. Default value: false.
+         * @type {boolean || null}
+         */
+        this.OnlyHidden = null;
+
+        /**
+         * Priority of the node for electing it as the new primary node. Value range: [0, 100]. A larger value indicates a higher priority.
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * Node voting right.- 1: The node has the right to vote.
+- 0: The node does not have the right to vote.
+         * @type {number || null}
+         */
+        this.Votes = null;
+
+        /**
+         * Node tag.
+         * @type {Array.<NodeTag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.NodeIds = 'NodeIds' in params ? params.NodeIds : null;
+        this.Roles = 'Roles' in params ? params.Roles : null;
+        this.OnlyHidden = 'OnlyHidden' in params ? params.OnlyHidden : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.Votes = 'Votes' in params ? params.Votes : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new NodeTag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeDetailedSlowLogs response structure.
  * @class
  */
@@ -5335,59 +6385,18 @@ class TerminateDBInstancesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDBInstanceNodeProperty request structure.
+ * EnableSRVConnectionUrl request structure.
  * @class
  */
-class DescribeDBInstanceNodePropertyRequest extends  AbstractModel {
+class EnableSRVConnectionUrlRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+         * Instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
-
-        /**
-         * Node ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), go to Node Management, and copy the node ID.
-         * @type {Array.<string> || null}
-         */
-        this.NodeIds = null;
-
-        /**
-         * Node role. Valid values:
-- PRIMARY: primary node.
-- SECONDARY: secondary node.
-- READONLY: read-only node.
-- ARBITER: arbitration node.
-         * @type {Array.<string> || null}
-         */
-        this.Roles = null;
-
-        /**
-         * Whether the node is a hidden node. Default value: false.
-         * @type {boolean || null}
-         */
-        this.OnlyHidden = null;
-
-        /**
-         * Priority of the node for electing it as the new primary node. Value range: [0, 100]. A larger value indicates a higher priority.
-         * @type {number || null}
-         */
-        this.Priority = null;
-
-        /**
-         * Node voting right.- 1: The node has the right to vote.
-- 0: The node does not have the right to vote.
-         * @type {number || null}
-         */
-        this.Votes = null;
-
-        /**
-         * Node tag.
-         * @type {Array.<NodeTag> || null}
-         */
-        this.Tags = null;
 
     }
 
@@ -5399,20 +6408,6 @@ class DescribeDBInstanceNodePropertyRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.NodeIds = 'NodeIds' in params ? params.NodeIds : null;
-        this.Roles = 'Roles' in params ? params.Roles : null;
-        this.OnlyHidden = 'OnlyHidden' in params ? params.OnlyHidden : null;
-        this.Priority = 'Priority' in params ? params.Priority : null;
-        this.Votes = 'Votes' in params ? params.Votes : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new NodeTag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
 
     }
 }
@@ -5555,6 +6550,69 @@ class RenameInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceAz response structure.
+ * @class
+ */
+class ModifyInstanceAzResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Order ID for availability zone adjustment.</p>
+         * @type {string || null}
+         */
+        this.DealId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAuditConfig request structure.
+ * @class
+ */
+class DescribeAuditConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, in the format of cmgo-xftsghuy. It is the same as the instance ID displayed on the TencentDB console page.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * CreateBackupDBInstance request structure.
  * @class
  */
@@ -5598,6 +6656,49 @@ class CreateBackupDBInstanceRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
         this.BackupRemark = 'BackupRemark' in params ? params.BackupRemark : null;
+
+    }
+}
+
+/**
+ * Rollback database and table to new instance, database table information
+ * @class
+ */
+class RestoreDatabases extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DB name.
+         * @type {string || null}
+         */
+        this.Db = null;
+
+        /**
+         * Collection information to be rolled back.
+         * @type {Array.<RestoreCollection> || null}
+         */
+        this.Collections = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Db = 'Db' in params ? params.Db : null;
+
+        if (params.Collections) {
+            this.Collections = new Array();
+            for (let z in params.Collections) {
+                let obj = new RestoreCollection();
+                obj.deserialize(params.Collections[z]);
+                this.Collections.push(obj);
+            }
+        }
 
     }
 }
@@ -5874,217 +6975,60 @@ class IsolateDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * CreateDBInstanceHour request structure.
+ * Audit log file.
  * @class
  */
-class CreateDBInstanceHourRequest extends  AbstractModel {
+class AuditLogFile extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance memory size. Unit: GB. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain specific saleable memory specifications.
+         * Audit log file name.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Creation time of the audit log file, in the format: "2019-03-20 17:09:13".
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * File status value. May return the following values:
+"creating" - generating
+"Failed" - Creation failed.
+"success" - generated.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * File size in KB.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.Memory = null;
+        this.FileSize = null;
 
         /**
-         * Instance disk size. Unit: GB. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum disk sizes corresponding to each CPU specification.
+         * Download URL for the audit log.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * Error message.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+        /**
+         * Download progress
          * @type {number || null}
          */
-        this.Volume = null;
-
-        /**
-         *  - Specifies the number of replica sets during replica set instance creation. This parameter can only be set to 1.
- - Specifies the number of shards during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.
-         * @type {number || null}
-         */
-        this.ReplicateSetNum = null;
-
-        /**
-         *  - Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each replica set.
- - Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each shard.
-         * @type {number || null}
-         */
-        this.NodeNum = null;
-
-        /**
-         * Refers to version information. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain detailed information about the supported versions.
-- MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
-- MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
-- MONGO_44_WT: version of the MongoDB 4.4 WiredTiger storage engine.
-- MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
-- MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
-- MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
-         * @type {string || null}
-         */
-        this.MongoVersion = null;
-
-        /**
-         * Product specification type.
- - HIO10G: general high-I/O 10GE type.
- - HCD: cloud disk type.
-         * @type {string || null}
-         */
-        this.MachineCode = null;
-
-        /**
-         * Number of instances. The minimum value is 1, and the maximum value is 30.
-         * @type {number || null}
-         */
-        this.GoodsNum = null;
-
-        /**
-         * AZ information in the format of ap-guangzhou-2
-- For more information, query through the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API.
-- If multi-AZ deployment is enabled, this parameter refers to the primary AZ and must be one of the values of `AvailabilityZoneList`.
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * Instance architecture type
-- REPLSET: Replica set
-- SHARD: Sharded cluster
-         * @type {string || null}
-         */
-        this.ClusterType = null;
-
-        /**
-         * VPC ID.
-- Only VPC configuration is supported, and a VPC in the same region as the instance should be selected. Log in to the [VPC console](https://console.cloud.tencent.com/vpc) to obtain the available VPC ID.
-- After successful instance creation, VPCs can be changed. For detailed operations, see [Changing the Network](https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1).
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Subnet ID of the VPC.
-- A subnet should be specified within the selected VPC. Log in to the [VPC console](https://console.cloud.tencent.com/vpc) to obtain the available subnet ID.
-- After successful instance creation, VPCs and subnets can be changed. For detailed operations, see [Changing the Network](https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1).
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * Instance password. The requirements are as follows:
- - The number of characters should be in the range of [8, 32].
- - Characters within the ranges [A,Z], [a,z], and [0,9] are allowed.
- - Special characters that can be entered include exclamation marks (!), at signs (@), number signs (#), percent signs (%), carets (^), asterisks (\*), brackets (()), and underscores (_).
- - It cannot contain only the same letters or digits.
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * Project ID. - The default project is used if this parameter is not specified.
- - The project ID can be obtained on the [project management page in the TencentDB for MongoDB console](https://console.cloud.tencent.com/project).
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * Instance tag information
-         * @type {Array.<TagInfo> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Instance type.
-- 1: formal instance.
-- 3: read-only instance.
-- 4: disaster recovery instance.
-- 5. cloned instance. Note: For a cloned instance, RestoreTime is required.
-         * @type {number || null}
-         */
-        this.Clone = null;
-
-        /**
-         * Parent instance ID.
-- This parameter is required when the value of the **Clone** parameter is set to 3 or 4, indicating a read-only or disaster recovery instance.
-- Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the parent instance ID from the instance list.
-         * @type {string || null}
-         */
-        this.Father = null;
-
-        /**
-         * Security group ID. Log in to the [security group console](https://console.cloud.tencent.com/vpc/security-group) to obtain the ID of the security group in the same region as the database instance.
-         * @type {Array.<string> || null}
-         */
-        this.SecurityGroup = null;
-
-        /**
-         * Rollback time of the cloned instance
-- This parameter is required for a cloned instance in the format of 2021-08-13 16:30:00.
-- Time range for rollback: You can roll back data in the last 7 days.
-         * @type {string || null}
-         */
-        this.RestoreTime = null;
-
-        /**
-         * Instance name. Only Chinese characters, letters, digits, underscores (_), and delimiters (-) are supported, with a length of 128 characters. When database instances are purchased in batches, the automatic ascending feature is supported through the custom naming pattern string and numeric suffix to set instance names efficiently.
-- Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for **lnstanceName**. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.
-- Custom starting number mode: prefix + {R:x} (x is the custom starting number). Prefix{R:x} is required for **InstanceName**. For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be sequentially named cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.
-- Composite pattern string: prefix 1{R:x} + prefix 2{R:y}+ ⋯ + fixed suffix, where x and y are the starting numbers of each prefix. A composite pattern string is required for **instanceName**. For example, cmgo{R:10}\_node{R:12}\_db. If the batch purchase quantity is set to 5, the instances will be sequentially named cmgo10\_node12\_db, cmgo11\_node13\_db, cmgo12\_node14\_db, cmgo13\_node15\_db, and cmgo14\_node16\_db.
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Specifies the list of AZs during multi-AZ deployment of TencentDB for MongoDB instances.
-- For instances in multi-AZ deployment mode, the **Zone** parameter specifies the primary AZ, and **AvailabilityZoneList** specifies all AZs, including the primary AZ. Format: [ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4].
-- The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain AZs planned for TencentDB for MongoDB instances in different regions, helping you specify valid AZs.
-- Nodes in multi-AZ deployment mode can only be deployed in 3 different AZs. Deploying most nodes of a cluster in the same AZ is not supported. For example, a 3-node cluster does not support deploying 2 nodes in the same AZ.
-         * @type {Array.<string> || null}
-         */
-        this.AvailabilityZoneList = null;
-
-        /**
-         * Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase.
-         * @type {number || null}
-         */
-        this.MongosCpu = null;
-
-        /**
-         * Mongos node memory size.
-- This parameter is required during sharded cluster instance purchase.
-- Unit: GB. 1-core 2 GB, 2-core 4 GB, 4-core 8 GB, 8-core 16 GB, and 16-core 32 GB are supported.
-         * @type {number || null}
-         */
-        this.MongosMemory = null;
-
-        /**
-         * Number of Mongos nodes. This parameter is required during sharded cluster instance purchase.
- - For instances in single-AZ deployment mode, the value range is [3,32].
- - For instances in multi-AZ deployment mode, the value range is [6,32].
-         * @type {number || null}
-         */
-        this.MongosNodeNum = null;
-
-        /**
-         * Number of read-only nodes. Value ranges: [0,5].
-         * @type {number || null}
-         */
-        this.ReadonlyNodeNum = null;
-
-        /**
-         * Array of AZs of read-only nodes. This parameter is required for instances in multi-AZ deployment mode when **ReadonlyNodeNum** is not set to **0**.
-         * @type {Array.<string> || null}
-         */
-        this.ReadonlyNodeAvailabilityZoneList = null;
-
-        /**
-         * AZ where the hidden node resides, which is required in cross-AZ instance deployment.
-         * @type {string || null}
-         */
-        this.HiddenZone = null;
-
-        /**
-         * Parameter template ID.
-- A parameter template is a collection of predefined parameter values that can be used to quickly configure new MongoDB instances. Proper use of parameter templates can significantly enhance the deployment efficiency and operational performance of the database.
-- The [DescribeDBInstanceParamTpl](https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1) API can be called to obtain the parameter template ID. Select the parameter template ID corresponding to the instance version and architecture.
-         * @type {string || null}
-         */
-        this.ParamTemplateId = null;
+        this.ProgressRate = null;
 
     }
 
@@ -6095,41 +7039,13 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
-        this.ReplicateSetNum = 'ReplicateSetNum' in params ? params.ReplicateSetNum : null;
-        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
-        this.MongoVersion = 'MongoVersion' in params ? params.MongoVersion : null;
-        this.MachineCode = 'MachineCode' in params ? params.MachineCode : null;
-        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.Password = 'Password' in params ? params.Password : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new TagInfo();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.Clone = 'Clone' in params ? params.Clone : null;
-        this.Father = 'Father' in params ? params.Father : null;
-        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
-        this.RestoreTime = 'RestoreTime' in params ? params.RestoreTime : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.AvailabilityZoneList = 'AvailabilityZoneList' in params ? params.AvailabilityZoneList : null;
-        this.MongosCpu = 'MongosCpu' in params ? params.MongosCpu : null;
-        this.MongosMemory = 'MongosMemory' in params ? params.MongosMemory : null;
-        this.MongosNodeNum = 'MongosNodeNum' in params ? params.MongosNodeNum : null;
-        this.ReadonlyNodeNum = 'ReadonlyNodeNum' in params ? params.ReadonlyNodeNum : null;
-        this.ReadonlyNodeAvailabilityZoneList = 'ReadonlyNodeAvailabilityZoneList' in params ? params.ReadonlyNodeAvailabilityZoneList : null;
-        this.HiddenZone = 'HiddenZone' in params ? params.HiddenZone : null;
-        this.ParamTemplateId = 'ParamTemplateId' in params ? params.ParamTemplateId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.ProgressRate = 'ProgressRate' in params ? params.ProgressRate : null;
 
     }
 }
@@ -6442,6 +7358,96 @@ class ModifyInstanceParamsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAuditConfig response structure.
+ * @class
+ */
+class DescribeAuditConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * true indicates full audit, false indicates rule audit
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.AuditAll = null;
+
+        /**
+         * The time when the instance enables database audit.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Audit log retention period.
+Unit: day. Currently supports retention duration including 0, 30, 180, 365, 1095, 1825.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LogExpireDay = null;
+
+        /**
+         * Audit log storage type. Currently only support "storage": Storage type.
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * Whether the auditing feature is being disabled.
+<ul><li>true: Yes.</li><li>false: No.</li></ul>
+         * @type {string || null}
+         */
+        this.IsClosing = null;
+
+        /**
+         * Whether the audit feature is being enabled.<ul><li>true: Yes.</li><li>false: No.</li></ul>
+         * @type {string || null}
+         */
+        this.IsOpening = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.AuditAll = 'AuditAll' in params ? params.AuditAll : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.IsClosing = 'IsClosing' in params ? params.IsClosing : null;
+        this.IsOpening = 'IsOpening' in params ? params.IsOpening : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteLogDownloadTask request structure.
  * @class
  */
@@ -6605,6 +7611,55 @@ class DescribeSlowLogPatternsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Format = 'Format' in params ? params.Format : null;
+
+    }
+}
+
+/**
+ * Node details of the instance to be modified.
+ * @class
+ */
+class RemoveNodeList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Roles of nodes to be deleted.
+ - SECONDARY: Mongod secondary node.
+ - READONLY: read-only node.
+ - MONGOS: Mongos node.
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * IDs of nodes to be deleted. For a sharded cluster instance, specify the names of nodes to be deleted on one shard. Nodes with the same names on other shards will also be deleted.
+- Obtaining method: Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), go to the **Node Management** tab, and obtain the **node ID**.
+- Note: For a sharded cluster instance, specify the IDs of nodes on shard 0. For example, cmgo-6hfk\*\*\*\*\_0-node-primary.
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * AZ corresponding to the node. For the currently supported AZs, see [Regions and AZs](https://www.tencentcloud.com/document/product/240/3637?from_cn_redirect=1).
+- Single AZ: all nodes are in the same AZ.
+- Multiple AZs: The current standard specification involves three AZs. The primary and secondary nodes are not in the same AZ. Note: AZs corresponding to the nodes to be deleted should be specified. After deletion, the number of nodes in any 2 AZs should be larger than that in the third AZ.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Role = 'Role' in params ? params.Role : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -6849,127 +7904,118 @@ class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Region and AZ information of the instance. For details, see [Regions and AZs](https://www.tencentcloud.com/document/product/240/3637?from_cn_redirect=1).
+         * <p>Region and AZ information of the instance. For details, please see <a href="https://www.tencentcloud.com/document/product/240/3637?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * -Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. call the [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each replica set.
-- Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each shard.
+         * <ul><li>Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each replica set.</li><li>Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each shard.</li></ul>
          * @type {number || null}
          */
         this.NodeNum = null;
 
         /**
-         * Instance memory size.
-
- - Unit: GB.
- - For the value range, call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API. The CPU and Memory parameters in the returned data structure SpecItems correspond to the number of CPU cores and the memory specification, respectively.
+         * <p>Instance memory size.</p><ul><li>Unit: GB.</li><li>For the value range, call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API. The CPU and Memory parameters in the returned data structure SpecItems correspond to the number of CPU cores and the memory specifications, respectively.</li></ul>
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * Instance disk size.
- - Unit: GB.
- - For the value range, call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API. The MinStorage and MaxStorage parameters in the returned data structure SpecItems correspond to the minimum and maximum disk specifications, respectively.
+         * <p>Instance disk size.</p><ul><li>Unit: GB.</li><li>For the value range, call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API. The MinStorage and MaxStorage parameters in the returned data structure SpecItems correspond to the minimum and maximum disk specifications, respectively.</li></ul>
          * @type {number || null}
          */
         this.Volume = null;
 
         /**
-         * Instance version information. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain specific supported versions. The MongoVersionCode parameter in the returned data structure SpecItems indicates the information on versions supported by instances. The corresponding relationship between version information and version number is as follows:
-- MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
-- MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
-- MONGO_44_WT: version of the MongoDB 4.4 WiredTiger storage engine.
-- MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
-- MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
-- MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+         * <p>Instance version information. The <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API can be called to obtain specific supported versions. The MongoVersionCode parameter in the returned data structure SpecItems indicates the information on versions supported by instances. The corresponding relationship between version information and version number is as follows:</p><ul><li>MONGO_40_WT: MongoDB 4.0 WiredTiger storage engine version.</li><li>MONGO_42_WT: MongoDB 4.2 WiredTiger storage engine version.</li><li>MONGO_44_WT: MongoDB 4.4 WiredTiger storage engine version.</li><li>MONGO_50_WT: MongoDB 5.0 WiredTiger storage engine version.</li><li>MONGO_60_WT: MongoDB 6.0 WiredTiger storage engine version.</li><li>MONGO_70_WT: MongoDB 7.0 WiredTiger storage engine version.</li><li>MONGO_80_WT: MongoDB 8.0 WiredTiger storage engine version.</li></ul>
          * @type {string || null}
          */
         this.MongoVersion = null;
 
         /**
-         * Product specification type.
- - HIO10G: general high-I/O 10GE type.
- - HCD: cloud disk.
+         * <p>Recommended product specification types:</p><ul><li>GE.LD.T1: Local disk (Common I).</li><li>GE.CD.T1: Cloud disk (Common I).</li></ul><p>Product allowlist specification types:</p><ul><li>HIO10G: Local disk (High IO 10G).</li><li>HCD: Cloud disk (Cloud disk edition).</li></ul><p>Note: Allowlist specification types are under allowlist control. If needed, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a> to apply.</p>
          * @type {string || null}
          */
         this.MachineCode = null;
 
         /**
-         * Number of instances. Minimum value: 1. Maximum value: 10.
+         * <p>Number of instances. Value range: [1,10].</p>
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * Instance type.
-
- - REPLSET: replica set.
- - SHARD: sharded cluster.
+         * <p>Instance type.</p><ul><li>REPLSET (replica set)</li><li>SHARD (sharded cluster)</li></ul>
          * @type {string || null}
          */
         this.ClusterType = null;
 
         /**
-         *  - Specifies the number of replica sets during replica set instance creation. This parameter can only be set to 1.
- - Specifies the number of shards during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.
+         * <ul><li>Specifies the number of replica sets during replica set instance creation. This parameter can only be 1.</li><li>Specifies the number of shards during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.</li></ul>
          * @type {number || null}
          */
         this.ReplicateSetNum = null;
 
         /**
-         *  - When the monthly subscription mode is selected, that is, when <b>InstanceChargeType</b> is set to <b>PREPAID</b>, this parameter is required for specifying the purchase duration of instances. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36. Unit: months.
- - When pay-as-you-go is selected, that is, when <b>InstanceChargeType</b> is set to **POSTPAID_BY_HOUR**, this parameter only can be set to 1.
+         * <ul><li>When the monthly subscription mode is selected, that is, when <b>InstanceChargeType</b> is set to <b>PREPAID</b>, this parameter is required for specifying the purchase duration of instances. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36. Unit: months.<br>- When the pay-as-you-go mode is selected, that is, when <b>InstanceChargeType</b> is set to <strong>POSTPAID_BY_HOUR</strong>, this parameter can only be set to 1.</li></ul>
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Instance payment method.
- - PREPAID: monthly subscription.
- - POSTPAID_BY_HOUR: pay-as-you-go.
+         * <p>Instance payment method.</p><ul><li>PREPAID: Annual and monthly subscription.</li><li>POSTPAID_BY_HOUR: Pay-As-You-Go.</li></ul>
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
-         * Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase. If this parameter is left blank, the default value 2 is used.
+         * <p>Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase. If this parameter is left blank, the default value 2 is used.</p>
          * @type {number || null}
          */
         this.MongosCpu = null;
 
         /**
-         * Mongos node memory size. - This parameter is required during sharded cluster instance purchase. - Unit: GB. Valid values: 2 (for 1 core), 4 (for 2 cores), 8 (for 4 cores), 16 (for 8 cores), and 32 (for 16 cores). If this parameter is left blank, the default value 4 is used.
+         * <p>Mongos node memory size. - This parameter is required during sharded cluster instance purchase. - Unit: GB. Valid values: 2 (for 1 core), 4 (for 2 cores), 8 (for 4 cores), 16 (for 8 cores), and 32 (for 16 cores). If this parameter is left blank, the default value 4 is used.</p>
          * @type {number || null}
          */
         this.MongosMemory = null;
 
         /**
-         * Specifies the number of Mongos nodes. Value range: [3,32]. For querying the price of sharded cluster instances, this parameter is required. If it is left blank, the default value 3 is used.
+         * <p>Specifies the number of Mongos nodes. Value range: [3,32]. For querying the price of sharded cluster instances, this parameter is required. If it is left blank, the default value 3 is used.</p>
          * @type {number || null}
          */
         this.MongosNum = null;
 
         /**
-         * Specifies the number of ConfigServer CPU cores. The value is fixed as 1.
+         * <p>Refers to the number of ConfigServer CPU cores, value fixed at 1, unit: GB. This parameter can be left blank.</p>
          * @type {number || null}
          */
         this.ConfigServerCpu = null;
 
         /**
-         * Specifies the ConfigServer memory size. The value is fixed as 2. Unit: GB. This parameter can be left blank.
+         * <p>Specifies the ConfigServer memory size. The value is fixed as 2. Unit: GB. This parameter can be left blank.</p>
          * @type {number || null}
          */
         this.ConfigServerMemory = null;
 
         /**
-         * Specifies the ConfigServer disk size. The value is fixed as 20. Unit: GB. This parameter can be left blank.
+         * <p>Specifies the ConfigServer disk size. The value is fixed at 20. Unit: GB. This parameter can be left blank.</p>
          * @type {number || null}
          */
         this.ConfigServerVolume = null;
+
+        /**
+         * <ul><li>Create a replica set instance. It refers to the read-only node quantity in each replica set.</li><li>Create a sharded cluster instance. It refers to the read-only node quantity in each shard.<br>Value range: [1,5].</li></ul>
+         * @type {number || null}
+         */
+        this.ReadonlyNodeNum = null;
+
+        /**
+         * <p>CPU size of the instance.</p><ul><li>Unit: C.</li><li>Value range: Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API. The CPU and Memory parameters in the returned data structure SpecItems correspond to the number of CPU cores and the memory specifications, respectively.</li><li>Note: You need to pass in the CPU core size corresponding to the memory when querying the price of a Common I Instance Type.</li></ul>
+         * @type {number || null}
+         */
+        this.Cpu = null;
 
     }
 
@@ -6997,6 +8043,50 @@ class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
         this.ConfigServerCpu = 'ConfigServerCpu' in params ? params.ConfigServerCpu : null;
         this.ConfigServerMemory = 'ConfigServerMemory' in params ? params.ConfigServerMemory : null;
         this.ConfigServerVolume = 'ConfigServerVolume' in params ? params.ConfigServerVolume : null;
+        this.ReadonlyNodeNum = 'ReadonlyNodeNum' in params ? params.ReadonlyNodeNum : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+
+    }
+}
+
+/**
+ * Operation to be terminated.
+ * @class
+ */
+class Operation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the shard where the operation is performed. The [DescribeCurrentOp](https://www.tencentcloud.com/document/product/240/48120?from_cn_redirect=1) API can be called to query the shard name.
+         * @type {string || null}
+         */
+        this.ReplicaSetName = null;
+
+        /**
+         * Name of the node where the operation is performed. The [DescribeCurrentOp](https://www.tencentcloud.com/document/product/240/48120?from_cn_redirect=1) API can be called to query the node name.
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Operation number. The [DescribeCurrentOp](https://www.tencentcloud.com/document/product/240/48120?from_cn_redirect=1) API can be called to query the operation number.
+         * @type {number || null}
+         */
+        this.OpId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReplicaSetName = 'ReplicaSetName' in params ? params.ReplicaSetName : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.OpId = 'OpId' in params ? params.OpId : null;
 
     }
 }
@@ -7097,37 +8187,66 @@ class DescribeInstanceParamsResponse extends  AbstractModel {
 }
 
 /**
- * Node details of the instance to be modified.
+ * Audit log
  * @class
  */
-class RemoveNodeList extends  AbstractModel {
+class AuditLog extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Roles of nodes to be deleted.
- - SECONDARY: Mongod secondary node.
- - READONLY: read-only node.
- - MONGOS: Mongos node.
-         * @type {string || null}
+         * Number of affected rows
+         * @type {number || null}
          */
-        this.Role = null;
+        this.AffectRows = null;
 
         /**
-         * IDs of nodes to be deleted. For a sharded cluster instance, specify the names of nodes to be deleted on one shard. Nodes with the same names on other shards will also be deleted.
-- Obtaining method: Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), go to the **Node Management** tab, and obtain the **node ID**.
-- Note: For a sharded cluster instance, specify the IDs of nodes on shard 0. For example, cmgo-6hfk\*\*\*\*\_0-node-primary.
+         * Operation type. For example: grantRolesToRole, dropRole.
          * @type {string || null}
          */
-        this.NodeName = null;
+        this.Atype = null;
 
         /**
-         * AZ corresponding to the node. For the currently supported AZs, see [Regions and AZs](https://www.tencentcloud.com/document/product/240/3637?from_cn_redirect=1).
-- Single AZ: all nodes are in the same AZ.
-- Multiple AZs: The current standard specification involves three AZs. The primary and secondary nodes are not in the same AZ. Note: AZs corresponding to the nodes to be deleted should be specified. After deletion, the number of nodes in any 2 AZs should be larger than that in the third AZ.
+         * Execution time. Unit: ms.
+         * @type {number || null}
+         */
+        this.ExecTime = null;
+
+        /**
+         * Client IP address.
          * @type {string || null}
          */
-        this.Zone = null;
+        this.Host = null;
+
+        /**
+         * Operation parameter. Includes operation parameter information.
+         * @type {string || null}
+         */
+        this.Param = null;
+
+        /**
+         * Execution result. 0 indicates success, non-0 indicates failure.
+         * @type {number || null}
+         */
+        this.Result = null;
+
+        /**
+         * User role list. Format: role@db,role@db.
+         * @type {string || null}
+         */
+        this.Roles = null;
+
+        /**
+         * Operation timestamp. Format: YYYY-MM-DD HH:mm:ss.
+         * @type {string || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Username. Format: user@db.
+         * @type {string || null}
+         */
+        this.User = null;
 
     }
 
@@ -7138,9 +8257,15 @@ class RemoveNodeList extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Role = 'Role' in params ? params.Role : null;
-        this.NodeName = 'NodeName' in params ? params.NodeName : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.AffectRows = 'AffectRows' in params ? params.AffectRows : null;
+        this.Atype = 'Atype' in params ? params.Atype : null;
+        this.ExecTime = 'ExecTime' in params ? params.ExecTime : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.Param = 'Param' in params ? params.Param : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Roles = 'Roles' in params ? params.Roles : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.User = 'User' in params ? params.User : null;
 
     }
 }
@@ -7239,6 +8364,41 @@ class SlowLogItem extends  AbstractModel {
 }
 
 /**
+ * Modifies the request parameters of a TencentDB for MongoDB instance.
+ * @class
+ */
+class ModifyMongoDBParamType extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter name to be modified. Strictly refer to the parameter names supported by the current instance, which are obtained through DescribeInstanceParams.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Corresponding value of the parameter name to be modified. Strictly refer to the value ranges corresponding to the parameters obtained through DescribeInstanceParams.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * SetInstanceMaintenance request structure.
  * @class
  */
@@ -7279,6 +8439,55 @@ class SetInstanceMaintenanceRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.MaintenanceStart = 'MaintenanceStart' in params ? params.MaintenanceStart : null;
         this.MaintenanceEnd = 'MaintenanceEnd' in params ? params.MaintenanceEnd : null;
+
+    }
+}
+
+/**
+ * DescribeAuditLogFiles request structure.
+ * @class
+ */
+class DescribeAuditLogFilesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, in the format of cmgo-xfts****. It is the same as the instance ID displayed on the TencentDB console page.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Page size. Default value: 20; value ranges from 1 to 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Pagination offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Audit log file name. This API filters related audit log files based on this parameter.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
 
     }
 }
@@ -7399,6 +8608,7 @@ class InstanceDetail extends  AbstractModel {
 - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+- MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
          * @type {string || null}
          */
         this.MongoVersion = null;
@@ -7706,7 +8916,7 @@ class ModifyDBInstanceSpecResponse extends  AbstractModel {
         super();
 
         /**
-         * Order ID.
+         * <p>Order ID.</p>
          * @type {string || null}
          */
         this.DealId = null;
@@ -7728,6 +8938,91 @@ class ModifyDBInstanceSpecResponse extends  AbstractModel {
         }
         this.DealId = 'DealId' in params ? params.DealId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * collection to be rolled back
+ * @class
+ */
+class RestoreCollection extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Original collection to be rolled back
+         * @type {string || null}
+         */
+        this.OldCollection = null;
+
+        /**
+         * Rolled-back collection
+         * @type {string || null}
+         */
+        this.NewCollection = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OldCollection = 'OldCollection' in params ? params.OldCollection : null;
+        this.NewCollection = 'NewCollection' in params ? params.NewCollection : null;
+
+    }
+}
+
+/**
+ * RestoreDBInstance request structure.
+ * @class
+ */
+class RestoreDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance ID. Log in to the <a href="https://console.cloud.tencent.com/mongodb/instance">MongoDB console</a> and copy the instance ID from the instance list.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Specify the target time point to roll back. The time must be in the backup retention period of the instance.</p><p>Parameter format: YYYY-MM-DD hh:mm:ss</p>
+         * @type {string || null}
+         */
+        this.RestoreTime = null;
+
+        /**
+         * <p>Database table information to be rolled back.</p>
+         * @type {Array.<RestoreDatabases> || null}
+         */
+        this.Databases = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RestoreTime = 'RestoreTime' in params ? params.RestoreTime : null;
+
+        if (params.Databases) {
+            this.Databases = new Array();
+            for (let z in params.Databases) {
+                let obj = new RestoreDatabases();
+                obj.deserialize(params.Databases[z]);
+                this.Databases.push(obj);
+            }
+        }
 
     }
 }
@@ -7847,6 +9142,41 @@ class UpgradeDBInstanceKernelVersionRequest extends  AbstractModel {
     }
 }
 
+/**
+ * EnableWanService response structure.
+ * @class
+ */
+class EnableWanServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Asynchronous task ID.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     DescribeSpecInfoRequest: DescribeSpecInfoRequest,
     CreateDBInstanceRequest: CreateDBInstanceRequest,
@@ -7854,23 +9184,30 @@ module.exports = {
     ModifyInstanceParamsResponse: ModifyInstanceParamsResponse,
     SetInstanceMaintenanceResponse: SetInstanceMaintenanceResponse,
     CreateBackupDBInstanceResponse: CreateBackupDBInstanceResponse,
+    DescribeAuditLogsRequest: DescribeAuditLogsRequest,
     DBInstancePrice: DBInstancePrice,
+    TerminateDBInstancesRequest: TerminateDBInstancesRequest,
     KillOpsRequest: KillOpsRequest,
     DeleteLogDownloadTaskResponse: DeleteLogDownloadTaskResponse,
-    DescribeDBInstanceNamespaceResponse: DescribeDBInstanceNamespaceResponse,
+    InquirePriceRenewDBInstancesRequest: InquirePriceRenewDBInstancesRequest,
+    DescribeAuditLogFilesResponse: DescribeAuditLogFilesResponse,
     DescribeSlowLogsRequest: DescribeSlowLogsRequest,
     FlushInstanceRouterConfigResponse: FlushInstanceRouterConfigResponse,
     SetDBInstanceDeletionProtectionRequest: SetDBInstanceDeletionProtectionRequest,
     InstanceMultiParam: InstanceMultiParam,
+    DescribeSRVConnectionDomainResponse: DescribeSRVConnectionDomainResponse,
     DescribeInstanceSSLRequest: DescribeInstanceSSLRequest,
     DescribeBackupRulesResponse: DescribeBackupRulesResponse,
     SlowLogPattern: SlowLogPattern,
     Task: Task,
+    ModifySRVConnectionUrlResponse: ModifySRVConnectionUrlResponse,
     AssignProjectResponse: AssignProjectResponse,
+    AuditLogFilter: AuditLogFilter,
     DescribeDBInstanceDealResponse: DescribeDBInstanceDealResponse,
-    ModifyMongoDBParamType: ModifyMongoDBParamType,
+    DescribeAuditLogsResponse: DescribeAuditLogsResponse,
     OfflineIsolatedDBInstanceResponse: OfflineIsolatedDBInstanceResponse,
     IsolateDBInstanceResponse: IsolateDBInstanceResponse,
+    DisableSRVConnectionUrlResponse: DisableSRVConnectionUrlResponse,
     DescribeSecurityGroupRequest: DescribeSecurityGroupRequest,
     RenameInstanceRequest: RenameInstanceRequest,
     DescribeBackupRulesRequest: DescribeBackupRulesRequest,
@@ -7904,25 +9241,31 @@ module.exports = {
     Auth: Auth,
     ResetDBInstancePasswordRequest: ResetDBInstancePasswordRequest,
     InstanceIntegerParam: InstanceIntegerParam,
+    ModifyInstanceAzRequest: ModifyInstanceAzRequest,
     ModifyNetworkAddress: ModifyNetworkAddress,
+    EnableSRVConnectionUrlResponse: EnableSRVConnectionUrlResponse,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
     CreateLogDownloadTaskRequest: CreateLogDownloadTaskRequest,
+    WanServiceNodeList: WanServiceNodeList,
     CreateAccountUserRequest: CreateAccountUserRequest,
     InstanceTextParam: InstanceTextParam,
     ModifyDBInstanceSecurityGroupRequest: ModifyDBInstanceSecurityGroupRequest,
-    InquirePriceRenewDBInstancesRequest: InquirePriceRenewDBInstancesRequest,
+    DescribeDBInstanceNamespaceResponse: DescribeDBInstanceNamespaceResponse,
     DescribeBackupDownloadTaskRequest: DescribeBackupDownloadTaskRequest,
-    Operation: Operation,
+    ModifySRVConnectionUrlRequest: ModifySRVConnectionUrlRequest,
     DescribeClientConnectionsResponse: DescribeClientConnectionsResponse,
-    TerminateDBInstancesRequest: TerminateDBInstancesRequest,
+    DisableSRVConnectionUrlRequest: DisableSRVConnectionUrlRequest,
+    DescribeSRVConnectionDomainRequest: DescribeSRVConnectionDomainRequest,
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
     ModifyDBInstanceSecurityGroupResponse: ModifyDBInstanceSecurityGroupResponse,
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
     NodeTag: NodeTag,
     InquirePriceCreateDBInstancesResponse: InquirePriceCreateDBInstancesResponse,
+    CloseAuditServiceRequest: CloseAuditServiceRequest,
     DescribeSecurityGroupResponse: DescribeSecurityGroupResponse,
     SecurityGroup: SecurityGroup,
+    EnableWanServiceRequest: EnableWanServiceRequest,
     ReplicaSetInfo: ReplicaSetInfo,
     ResetDBInstancePasswordResponse: ResetDBInstancePasswordResponse,
     ClientConnection: ClientConnection,
@@ -7932,8 +9275,12 @@ module.exports = {
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
     CreateBackupDownloadTaskRequest: CreateBackupDownloadTaskRequest,
     InquirePriceModifyDBInstanceSpecResponse: InquirePriceModifyDBInstanceSpecResponse,
+    CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
     SecurityGroupBound: SecurityGroupBound,
+    RestoreDBInstanceResponse: RestoreDBInstanceResponse,
+    BackupTotalSize: BackupTotalSize,
     DescribeDBInstanceNodePropertyResponse: DescribeDBInstanceNodePropertyResponse,
+    CloseAuditServiceResponse: CloseAuditServiceResponse,
     DescribeMongodbLogsResponse: DescribeMongodbLogsResponse,
     DescribeInstanceSSLResponse: DescribeInstanceSSLResponse,
     DescribeCurrentOpRequest: DescribeCurrentOpRequest,
@@ -7941,29 +9288,35 @@ module.exports = {
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     DescribeClientConnectionsRequest: DescribeClientConnectionsRequest,
     SetDBInstanceDeletionProtectionResponse: SetDBInstanceDeletionProtectionResponse,
+    DescribeDBInstanceNodePropertyRequest: DescribeDBInstanceNodePropertyRequest,
     DescribeDetailedSlowLogsResponse: DescribeDetailedSlowLogsResponse,
     ShardInfo: ShardInfo,
     TerminateDBInstancesResponse: TerminateDBInstancesResponse,
-    DescribeDBInstanceNodePropertyRequest: DescribeDBInstanceNodePropertyRequest,
+    EnableSRVConnectionUrlRequest: EnableSRVConnectionUrlRequest,
     RenewDBInstancesResponse: RenewDBInstancesResponse,
     InstanceEnumParam: InstanceEnumParam,
     RenameInstanceResponse: RenameInstanceResponse,
+    ModifyInstanceAzResponse: ModifyInstanceAzResponse,
+    DescribeAuditConfigRequest: DescribeAuditConfigRequest,
     CreateBackupDBInstanceRequest: CreateBackupDBInstanceRequest,
+    RestoreDatabases: RestoreDatabases,
     SetAccountUserPrivilegeRequest: SetAccountUserPrivilegeRequest,
     UpgradeDbInstanceVersionResponse: UpgradeDbInstanceVersionResponse,
     NodeProperty: NodeProperty,
     KillOpsResponse: KillOpsResponse,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
-    CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
+    AuditLogFile: AuditLogFile,
     EnableTransparentDataEncryptionResponse: EnableTransparentDataEncryptionResponse,
     AssignProjectRequest: AssignProjectRequest,
     DescribeMongodbLogsRequest: DescribeMongodbLogsRequest,
     CreateBackupDownloadTaskResponse: CreateBackupDownloadTaskResponse,
     CreateLogDownloadTaskResponse: CreateLogDownloadTaskResponse,
     ModifyInstanceParamsRequest: ModifyInstanceParamsRequest,
+    DescribeAuditConfigResponse: DescribeAuditConfigResponse,
     DeleteLogDownloadTaskRequest: DeleteLogDownloadTaskRequest,
     SpecificationInfo: SpecificationInfo,
     DescribeSlowLogPatternsRequest: DescribeSlowLogPatternsRequest,
+    RemoveNodeList: RemoveNodeList,
     DescribeSpecInfoResponse: DescribeSpecInfoResponse,
     InquirePriceRenewDBInstancesResponse: InquirePriceRenewDBInstancesResponse,
     TagInfo: TagInfo,
@@ -7971,15 +9324,21 @@ module.exports = {
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     OfflineIsolatedDBInstanceRequest: OfflineIsolatedDBInstanceRequest,
     InquirePriceCreateDBInstancesRequest: InquirePriceCreateDBInstancesRequest,
+    Operation: Operation,
     DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
-    RemoveNodeList: RemoveNodeList,
+    AuditLog: AuditLog,
     DescribeLogDownloadTasksResponse: DescribeLogDownloadTasksResponse,
     SlowLogItem: SlowLogItem,
+    ModifyMongoDBParamType: ModifyMongoDBParamType,
     SetInstanceMaintenanceRequest: SetInstanceMaintenanceRequest,
+    DescribeAuditLogFilesRequest: DescribeAuditLogFilesRequest,
     InstanceDetail: InstanceDetail,
     ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,
+    RestoreCollection: RestoreCollection,
+    RestoreDBInstanceRequest: RestoreDBInstanceRequest,
     InstanceChargePrepaid: InstanceChargePrepaid,
     RenewDBInstancesRequest: RenewDBInstancesRequest,
     UpgradeDBInstanceKernelVersionRequest: UpgradeDBInstanceKernelVersionRequest,
+    EnableWanServiceResponse: EnableWanServiceResponse,
 
 }

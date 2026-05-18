@@ -22,23 +22,30 @@ const DescribeCurrentOpResponse = models.DescribeCurrentOpResponse;
 const ModifyInstanceParamsResponse = models.ModifyInstanceParamsResponse;
 const SetInstanceMaintenanceResponse = models.SetInstanceMaintenanceResponse;
 const CreateBackupDBInstanceResponse = models.CreateBackupDBInstanceResponse;
+const DescribeAuditLogsRequest = models.DescribeAuditLogsRequest;
 const DBInstancePrice = models.DBInstancePrice;
+const TerminateDBInstancesRequest = models.TerminateDBInstancesRequest;
 const KillOpsRequest = models.KillOpsRequest;
 const DeleteLogDownloadTaskResponse = models.DeleteLogDownloadTaskResponse;
-const DescribeDBInstanceNamespaceResponse = models.DescribeDBInstanceNamespaceResponse;
+const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
+const DescribeAuditLogFilesResponse = models.DescribeAuditLogFilesResponse;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const FlushInstanceRouterConfigResponse = models.FlushInstanceRouterConfigResponse;
 const SetDBInstanceDeletionProtectionRequest = models.SetDBInstanceDeletionProtectionRequest;
 const InstanceMultiParam = models.InstanceMultiParam;
+const DescribeSRVConnectionDomainResponse = models.DescribeSRVConnectionDomainResponse;
 const DescribeInstanceSSLRequest = models.DescribeInstanceSSLRequest;
 const DescribeBackupRulesResponse = models.DescribeBackupRulesResponse;
 const SlowLogPattern = models.SlowLogPattern;
 const Task = models.Task;
+const ModifySRVConnectionUrlResponse = models.ModifySRVConnectionUrlResponse;
 const AssignProjectResponse = models.AssignProjectResponse;
+const AuditLogFilter = models.AuditLogFilter;
 const DescribeDBInstanceDealResponse = models.DescribeDBInstanceDealResponse;
-const ModifyMongoDBParamType = models.ModifyMongoDBParamType;
+const DescribeAuditLogsResponse = models.DescribeAuditLogsResponse;
 const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const DisableSRVConnectionUrlResponse = models.DisableSRVConnectionUrlResponse;
 const DescribeSecurityGroupRequest = models.DescribeSecurityGroupRequest;
 const RenameInstanceRequest = models.RenameInstanceRequest;
 const DescribeBackupRulesRequest = models.DescribeBackupRulesRequest;
@@ -72,25 +79,31 @@ const DescribeLogDownloadTasksRequest = models.DescribeLogDownloadTasksRequest;
 const Auth = models.Auth;
 const ResetDBInstancePasswordRequest = models.ResetDBInstancePasswordRequest;
 const InstanceIntegerParam = models.InstanceIntegerParam;
+const ModifyInstanceAzRequest = models.ModifyInstanceAzRequest;
 const ModifyNetworkAddress = models.ModifyNetworkAddress;
+const EnableSRVConnectionUrlResponse = models.EnableSRVConnectionUrlResponse;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const CreateLogDownloadTaskRequest = models.CreateLogDownloadTaskRequest;
+const WanServiceNodeList = models.WanServiceNodeList;
 const CreateAccountUserRequest = models.CreateAccountUserRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const ModifyDBInstanceSecurityGroupRequest = models.ModifyDBInstanceSecurityGroupRequest;
-const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
+const DescribeDBInstanceNamespaceResponse = models.DescribeDBInstanceNamespaceResponse;
 const DescribeBackupDownloadTaskRequest = models.DescribeBackupDownloadTaskRequest;
-const Operation = models.Operation;
+const ModifySRVConnectionUrlRequest = models.ModifySRVConnectionUrlRequest;
 const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
-const TerminateDBInstancesRequest = models.TerminateDBInstancesRequest;
+const DisableSRVConnectionUrlRequest = models.DisableSRVConnectionUrlRequest;
+const DescribeSRVConnectionDomainRequest = models.DescribeSRVConnectionDomainRequest;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const ModifyDBInstanceSecurityGroupResponse = models.ModifyDBInstanceSecurityGroupResponse;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const NodeTag = models.NodeTag;
 const InquirePriceCreateDBInstancesResponse = models.InquirePriceCreateDBInstancesResponse;
+const CloseAuditServiceRequest = models.CloseAuditServiceRequest;
 const DescribeSecurityGroupResponse = models.DescribeSecurityGroupResponse;
 const SecurityGroup = models.SecurityGroup;
+const EnableWanServiceRequest = models.EnableWanServiceRequest;
 const ReplicaSetInfo = models.ReplicaSetInfo;
 const ResetDBInstancePasswordResponse = models.ResetDBInstancePasswordResponse;
 const ClientConnection = models.ClientConnection;
@@ -100,8 +113,12 @@ const UpgradeDBInstanceKernelVersionResponse = models.UpgradeDBInstanceKernelVer
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const CreateBackupDownloadTaskRequest = models.CreateBackupDownloadTaskRequest;
 const InquirePriceModifyDBInstanceSpecResponse = models.InquirePriceModifyDBInstanceSpecResponse;
+const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const SecurityGroupBound = models.SecurityGroupBound;
+const RestoreDBInstanceResponse = models.RestoreDBInstanceResponse;
+const BackupTotalSize = models.BackupTotalSize;
 const DescribeDBInstanceNodePropertyResponse = models.DescribeDBInstanceNodePropertyResponse;
+const CloseAuditServiceResponse = models.CloseAuditServiceResponse;
 const DescribeMongodbLogsResponse = models.DescribeMongodbLogsResponse;
 const DescribeInstanceSSLResponse = models.DescribeInstanceSSLResponse;
 const DescribeCurrentOpRequest = models.DescribeCurrentOpRequest;
@@ -109,29 +126,35 @@ const BackupDownloadTask = models.BackupDownloadTask;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
 const SetDBInstanceDeletionProtectionResponse = models.SetDBInstanceDeletionProtectionResponse;
+const DescribeDBInstanceNodePropertyRequest = models.DescribeDBInstanceNodePropertyRequest;
 const DescribeDetailedSlowLogsResponse = models.DescribeDetailedSlowLogsResponse;
 const ShardInfo = models.ShardInfo;
 const TerminateDBInstancesResponse = models.TerminateDBInstancesResponse;
-const DescribeDBInstanceNodePropertyRequest = models.DescribeDBInstanceNodePropertyRequest;
+const EnableSRVConnectionUrlRequest = models.EnableSRVConnectionUrlRequest;
 const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
 const InstanceEnumParam = models.InstanceEnumParam;
 const RenameInstanceResponse = models.RenameInstanceResponse;
+const ModifyInstanceAzResponse = models.ModifyInstanceAzResponse;
+const DescribeAuditConfigRequest = models.DescribeAuditConfigRequest;
 const CreateBackupDBInstanceRequest = models.CreateBackupDBInstanceRequest;
+const RestoreDatabases = models.RestoreDatabases;
 const SetAccountUserPrivilegeRequest = models.SetAccountUserPrivilegeRequest;
 const UpgradeDbInstanceVersionResponse = models.UpgradeDbInstanceVersionResponse;
 const NodeProperty = models.NodeProperty;
 const KillOpsResponse = models.KillOpsResponse;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
-const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
+const AuditLogFile = models.AuditLogFile;
 const EnableTransparentDataEncryptionResponse = models.EnableTransparentDataEncryptionResponse;
 const AssignProjectRequest = models.AssignProjectRequest;
 const DescribeMongodbLogsRequest = models.DescribeMongodbLogsRequest;
 const CreateBackupDownloadTaskResponse = models.CreateBackupDownloadTaskResponse;
 const CreateLogDownloadTaskResponse = models.CreateLogDownloadTaskResponse;
 const ModifyInstanceParamsRequest = models.ModifyInstanceParamsRequest;
+const DescribeAuditConfigResponse = models.DescribeAuditConfigResponse;
 const DeleteLogDownloadTaskRequest = models.DeleteLogDownloadTaskRequest;
 const SpecificationInfo = models.SpecificationInfo;
 const DescribeSlowLogPatternsRequest = models.DescribeSlowLogPatternsRequest;
+const RemoveNodeList = models.RemoveNodeList;
 const DescribeSpecInfoResponse = models.DescribeSpecInfoResponse;
 const InquirePriceRenewDBInstancesResponse = models.InquirePriceRenewDBInstancesResponse;
 const TagInfo = models.TagInfo;
@@ -139,16 +162,22 @@ const DeleteAccountUserResponse = models.DeleteAccountUserResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const OfflineIsolatedDBInstanceRequest = models.OfflineIsolatedDBInstanceRequest;
 const InquirePriceCreateDBInstancesRequest = models.InquirePriceCreateDBInstancesRequest;
+const Operation = models.Operation;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
-const RemoveNodeList = models.RemoveNodeList;
+const AuditLog = models.AuditLog;
 const DescribeLogDownloadTasksResponse = models.DescribeLogDownloadTasksResponse;
 const SlowLogItem = models.SlowLogItem;
+const ModifyMongoDBParamType = models.ModifyMongoDBParamType;
 const SetInstanceMaintenanceRequest = models.SetInstanceMaintenanceRequest;
+const DescribeAuditLogFilesRequest = models.DescribeAuditLogFilesRequest;
 const InstanceDetail = models.InstanceDetail;
 const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
+const RestoreCollection = models.RestoreCollection;
+const RestoreDBInstanceRequest = models.RestoreDBInstanceRequest;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const RenewDBInstancesRequest = models.RenewDBInstancesRequest;
 const UpgradeDBInstanceKernelVersionRequest = models.UpgradeDBInstanceKernelVersionRequest;
+const EnableWanServiceResponse = models.EnableWanServiceResponse;
 
 
 /**
@@ -192,6 +221,17 @@ class MongodbClient extends AbstractClient {
     DescribeDBInstanceNodeProperty(req, cb) {
         let resp = new DescribeDBInstanceNodePropertyResponse();
         this.request("DescribeDBInstanceNodeProperty", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the network information on a TencentDB for MongoDB instance. It supports switching from a basic network to a VPC network or from one VPC network to another VPC network.
+     * @param {ModifyDBInstanceNetworkAddressRequest} req
+     * @param {function(string, ModifyDBInstanceNetworkAddressResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceNetworkAddress(req, cb) {
+        let resp = new ModifyDBInstanceNetworkAddressResponse();
+        this.request("ModifyDBInstanceNetworkAddress", req, resp, cb);
     }
 
     /**
@@ -294,14 +334,14 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query slow log details of the instance.
-     * @param {DescribeDetailedSlowLogsRequest} req
-     * @param {function(string, DescribeDetailedSlowLogsResponse):void} cb
+     * This API is used to query the service configurations for a TencentDB audit policy, including the audit log retention period.
+     * @param {DescribeAuditConfigRequest} req
+     * @param {function(string, DescribeAuditConfigResponse):void} cb
      * @public
      */
-    DescribeDetailedSlowLogs(req, cb) {
-        let resp = new DescribeDetailedSlowLogsResponse();
-        this.request("DescribeDetailedSlowLogs", req, resp, cb);
+    DescribeAuditConfig(req, cb) {
+        let resp = new DescribeAuditConfigResponse();
+        this.request("DescribeAuditConfig", req, resp, cb);
     }
 
     /**
@@ -393,28 +433,6 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a pay-as-you-go TencentDB for MongoDB instance.
-     * @param {CreateDBInstanceHourRequest} req
-     * @param {function(string, CreateDBInstanceHourResponse):void} cb
-     * @public
-     */
-    CreateDBInstanceHour(req, cb) {
-        let resp = new CreateDBInstanceHourResponse();
-        this.request("CreateDBInstanceHour", req, resp, cb);
-    }
-
-    /**
-     * This API is used to isolate a pay-as-you-go TencentDB for MongoDB instance. After isolation, the instance is retained in the recycle bin, and data cannot be written into it. After a certain period of isolation, the instance is deleted permanently. For the retention time in the recycle bin, see the pay-as-you-go service terms. The deleted pay-as-you-go instance cannot be recovered. Proceed with caution.
-     * @param {IsolateDBInstanceRequest} req
-     * @param {function(string, IsolateDBInstanceResponse):void} cb
-     * @public
-     */
-    IsolateDBInstance(req, cb) {
-        let resp = new IsolateDBInstanceResponse();
-        this.request("IsolateDBInstance", req, resp, cb);
-    }
-
-    /**
      * This API is used to renew a monthly subscription TencentDB instance. Only monthly subscription instances are supported, while pay-as-you-go instances do not need to be renewed.
      * @param {RenewDBInstancesRequest} req
      * @param {function(string, RenewDBInstancesResponse):void} cb
@@ -426,6 +444,61 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query database audit logs.
+     * @param {DescribeAuditLogsRequest} req
+     * @param {function(string, DescribeAuditLogsResponse):void} cb
+     * @public
+     */
+    DescribeAuditLogs(req, cb) {
+        let resp = new DescribeAuditLogsResponse();
+        this.request("DescribeAuditLogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a pay-as-you-go TencentDB for MongoDB instance.
+     * @param {CreateDBInstanceHourRequest} req
+     * @param {function(string, CreateDBInstanceHourResponse):void} cb
+     * @public
+     */
+    CreateDBInstanceHour(req, cb) {
+        let resp = new CreateDBInstanceHourResponse();
+        this.request("CreateDBInstanceHour", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query slow log details of the instance.
+     * @param {DescribeDetailedSlowLogsRequest} req
+     * @param {function(string, DescribeDetailedSlowLogsResponse):void} cb
+     * @public
+     */
+    DescribeDetailedSlowLogs(req, cb) {
+        let resp = new DescribeDetailedSlowLogsResponse();
+        this.request("DescribeDetailedSlowLogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to adjust the TencentDB for MongoDB instance configuration. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to query and obtain the supported sales specifications.
+     * @param {ModifyDBInstanceSpecRequest} req
+     * @param {function(string, ModifyDBInstanceSpecResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSpec(req, cb) {
+        let resp = new ModifyDBInstanceSpecResponse();
+        this.request("ModifyDBInstanceSpec", req, resp, cb);
+    }
+
+    /**
+     * This API is used to close the audit service.
+     * @param {CloseAuditServiceRequest} req
+     * @param {function(string, CloseAuditServiceResponse):void} cb
+     * @public
+     */
+    CloseAuditService(req, cb) {
+        let resp = new CloseAuditServiceResponse();
+        this.request("CloseAuditService", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a backup download task.
      * @param {CreateBackupDownloadTaskRequest} req
      * @param {function(string, CreateBackupDownloadTaskResponse):void} cb
@@ -434,6 +507,17 @@ class MongodbClient extends AbstractClient {
     CreateBackupDownloadTask(req, cb) {
         let resp = new CreateBackupDownloadTaskResponse();
         this.request("CreateBackupDownloadTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the current domain information of the MongoDB database.
+     * @param {DescribeSRVConnectionDomainRequest} req
+     * @param {function(string, DescribeSRVConnectionDomainResponse):void} cb
+     * @public
+     */
+    DescribeSRVConnectionDomain(req, cb) {
+        let resp = new DescribeSRVConnectionDomainResponse();
+        this.request("DescribeSRVConnectionDomain", req, resp, cb);
     }
 
     /**
@@ -492,6 +576,17 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to upgrade the kernel version of the database instance.
+     * @param {UpgradeDBInstanceKernelVersionRequest} req
+     * @param {function(string, UpgradeDBInstanceKernelVersionResponse):void} cb
+     * @public
+     */
+    UpgradeDBInstanceKernelVersion(req, cb) {
+        let resp = new UpgradeDBInstanceKernelVersionResponse();
+        this.request("UpgradeDBInstanceKernelVersion", req, resp, cb);
+    }
+
+    /**
      * This API is used to query running logs.
      * @param {DescribeMongodbLogsRequest} req
      * @param {function(string, DescribeMongodbLogsResponse):void} cb
@@ -503,7 +598,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a yearly/monthly subscription TencentDB for MongoDB instance. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/35767?from_cn_redirect=1) API can be called to query and obtain the supported sales specifications.
+     * This API is used to create a yearly/monthly subscription TencentDB for MongoDB instance. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/34701) API can be called to query and obtain the supported sales specifications.
      * @param {CreateDBInstanceRequest} req
      * @param {function(string, CreateDBInstanceResponse):void} cb
      * @public
@@ -514,14 +609,14 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to adjust the TencentDB for MongoDB instance configuration. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to query and obtain the supported sales specifications.
-     * @param {ModifyDBInstanceSpecRequest} req
-     * @param {function(string, ModifyDBInstanceSpecResponse):void} cb
+     * This API is used to isolate a pay-as-you-go TencentDB for MongoDB instance. After isolation, the instance is retained in the recycle bin, and data cannot be written into it. After a certain period of isolation, the instance is deleted permanently. For the retention time in the recycle bin, see the pay-as-you-go service terms. The deleted pay-as-you-go instance cannot be recovered. Proceed with caution.
+     * @param {IsolateDBInstanceRequest} req
+     * @param {function(string, IsolateDBInstanceResponse):void} cb
      * @public
      */
-    ModifyDBInstanceSpec(req, cb) {
-        let resp = new ModifyDBInstanceSpecResponse();
-        this.request("ModifyDBInstanceSpec", req, resp, cb);
+    IsolateDBInstance(req, cb) {
+        let resp = new IsolateDBInstanceResponse();
+        this.request("IsolateDBInstance", req, resp, cb);
     }
 
     /**
@@ -536,14 +631,14 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upgrade the kernel version of the database instance.
-     * @param {UpgradeDBInstanceKernelVersionRequest} req
-     * @param {function(string, UpgradeDBInstanceKernelVersionResponse):void} cb
+     * This API is used to close the SRV Access Address of the MongoDB database.
+     * @param {DisableSRVConnectionUrlRequest} req
+     * @param {function(string, DisableSRVConnectionUrlResponse):void} cb
      * @public
      */
-    UpgradeDBInstanceKernelVersion(req, cb) {
-        let resp = new UpgradeDBInstanceKernelVersionResponse();
-        this.request("UpgradeDBInstanceKernelVersion", req, resp, cb);
+    DisableSRVConnectionUrl(req, cb) {
+        let resp = new DisableSRVConnectionUrlResponse();
+        this.request("DisableSRVConnectionUrl", req, resp, cb);
     }
 
     /**
@@ -602,6 +697,17 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to adjust the availability zone distribution of MongoDB cloud database nodes. You can specify the primary AZ and total availability zone distribution info to complete node distribution adjustment.
+     * @param {ModifyInstanceAzRequest} req
+     * @param {function(string, ModifyInstanceAzResponse):void} cb
+     * @public
+     */
+    ModifyInstanceAz(req, cb) {
+        let resp = new ModifyInstanceAzResponse();
+        this.request("ModifyInstanceAz", req, resp, cb);
+    }
+
+    /**
      * This API is used to specify the project of a TencentDB for MongoDB instance.
      * @param {AssignProjectRequest} req
      * @param {function(string, AssignProjectResponse):void} cb
@@ -613,7 +719,30 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upgrade the database kernel across versions. Currently, it is only supported to upgrade from version 3.6 to 4.0, 4.0 to 4.2, 4.2 to 4.4, and 4.4 to 5.0.
+     * This API is used to enable the public network access address of the current instance.
+     * @param {EnableWanServiceRequest} req
+     * @param {function(string, EnableWanServiceResponse):void} cb
+     * @public
+     */
+    EnableWanService(req, cb) {
+        let resp = new EnableWanServiceResponse();
+        this.request("EnableWanService", req, resp, cb);
+    }
+
+    /**
+     * This API is used to rollback the database instance to a specified time point.
+     * @param {RestoreDBInstanceRequest} req
+     * @param {function(string, RestoreDBInstanceResponse):void} cb
+     * @public
+     */
+    RestoreDBInstance(req, cb) {
+        let resp = new RestoreDBInstanceResponse();
+        this.request("RestoreDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade database version.
+**Description**: Upgrade to version 3.6 and above is supported. Only upgrading from a lower version to a higher version step by step is allowed. Cross-version upgrade or version downgrade is not supported.
      * @param {UpgradeDbInstanceVersionRequest} req
      * @param {function(string, UpgradeDbInstanceVersionResponse):void} cb
      * @public
@@ -621,6 +750,28 @@ class MongodbClient extends AbstractClient {
     UpgradeDbInstanceVersion(req, cb) {
         let resp = new UpgradeDbInstanceVersionResponse();
         this.request("UpgradeDbInstanceVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the TTL duration of the SRV Access Address for a MongoDB database.
+     * @param {ModifySRVConnectionUrlRequest} req
+     * @param {function(string, ModifySRVConnectionUrlResponse):void} cb
+     * @public
+     */
+    ModifySRVConnectionUrl(req, cb) {
+        let resp = new ModifySRVConnectionUrlResponse();
+        this.request("ModifySRVConnectionUrl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query audit log files of a cloud database instance.
+     * @param {DescribeAuditLogFilesRequest} req
+     * @param {function(string, DescribeAuditLogFilesResponse):void} cb
+     * @public
+     */
+    DescribeAuditLogFiles(req, cb) {
+        let resp = new DescribeAuditLogFilesResponse();
+        this.request("DescribeAuditLogFiles", req, resp, cb);
     }
 
     /**
@@ -635,14 +786,14 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the network information on a TencentDB for MongoDB instance. It supports switching from a basic network to a VPC network or from one VPC network to another VPC network.
-     * @param {ModifyDBInstanceNetworkAddressRequest} req
-     * @param {function(string, ModifyDBInstanceNetworkAddressResponse):void} cb
+     * This API is used to enable the SRV Access Address for MongoDB database.
+     * @param {EnableSRVConnectionUrlRequest} req
+     * @param {function(string, EnableSRVConnectionUrlResponse):void} cb
      * @public
      */
-    ModifyDBInstanceNetworkAddress(req, cb) {
-        let resp = new ModifyDBInstanceNetworkAddressResponse();
-        this.request("ModifyDBInstanceNetworkAddress", req, resp, cb);
+    EnableSRVConnectionUrl(req, cb) {
+        let resp = new EnableSRVConnectionUrlResponse();
+        this.request("EnableSRVConnectionUrl", req, resp, cb);
     }
 
     /**

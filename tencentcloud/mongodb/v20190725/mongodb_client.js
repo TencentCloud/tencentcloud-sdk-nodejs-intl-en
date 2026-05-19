@@ -19,7 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeSpecInfoRequest = models.DescribeSpecInfoRequest;
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
 const DescribeCurrentOpResponse = models.DescribeCurrentOpResponse;
-const ModifyInstanceParamsResponse = models.ModifyInstanceParamsResponse;
+const DescribeAccountUsersRequest = models.DescribeAccountUsersRequest;
 const SetInstanceMaintenanceResponse = models.SetInstanceMaintenanceResponse;
 const CreateBackupDBInstanceResponse = models.CreateBackupDBInstanceResponse;
 const DescribeAuditLogsRequest = models.DescribeAuditLogsRequest;
@@ -34,6 +34,7 @@ const FlushInstanceRouterConfigResponse = models.FlushInstanceRouterConfigRespon
 const SetDBInstanceDeletionProtectionRequest = models.SetDBInstanceDeletionProtectionRequest;
 const InstanceMultiParam = models.InstanceMultiParam;
 const DescribeSRVConnectionDomainResponse = models.DescribeSRVConnectionDomainResponse;
+const ModifyInstanceParamsResponse = models.ModifyInstanceParamsResponse;
 const DescribeInstanceSSLRequest = models.DescribeInstanceSSLRequest;
 const DescribeBackupRulesResponse = models.DescribeBackupRulesResponse;
 const SlowLogPattern = models.SlowLogPattern;
@@ -89,6 +90,7 @@ const WanServiceNodeList = models.WanServiceNodeList;
 const CreateAccountUserRequest = models.CreateAccountUserRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const ModifyDBInstanceSecurityGroupRequest = models.ModifyDBInstanceSecurityGroupRequest;
+const DescribeAccountUsersResponse = models.DescribeAccountUsersResponse;
 const DescribeDBInstanceNamespaceResponse = models.DescribeDBInstanceNamespaceResponse;
 const DescribeBackupDownloadTaskRequest = models.DescribeBackupDownloadTaskRequest;
 const ModifySRVConnectionUrlRequest = models.ModifySRVConnectionUrlRequest;
@@ -97,6 +99,7 @@ const DisableSRVConnectionUrlRequest = models.DisableSRVConnectionUrlRequest;
 const DescribeSRVConnectionDomainRequest = models.DescribeSRVConnectionDomainRequest;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const ModifyDBInstanceSecurityGroupResponse = models.ModifyDBInstanceSecurityGroupResponse;
+const UserInfo = models.UserInfo;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const NodeTag = models.NodeTag;
 const InquirePriceCreateDBInstancesResponse = models.InquirePriceCreateDBInstancesResponse;
@@ -750,6 +753,17 @@ class MongodbClient extends AbstractClient {
     UpgradeDbInstanceVersion(req, cb) {
         let resp = new UpgradeDbInstanceVersionResponse();
         this.request("UpgradeDbInstanceVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain all accounts of the current instance.
+     * @param {DescribeAccountUsersRequest} req
+     * @param {function(string, DescribeAccountUsersResponse):void} cb
+     * @public
+     */
+    DescribeAccountUsers(req, cb) {
+        let resp = new DescribeAccountUsersResponse();
+        this.request("DescribeAccountUsers", req, resp, cb);
     }
 
     /**

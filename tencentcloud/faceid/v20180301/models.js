@@ -91,14 +91,8 @@ class AttackRiskDetail extends  AbstractModel {
         super();
 
         /**
-         * Suspected attack trace types
-SuspectedSpoofingAttack: Suspected spoofing attack
-SuspectedSynthesisImage: Suspected synthesis image
-SuspectedSynthesisVideo: Suspected synthesis video
-SuspectedeAnomalyAttack: Suspected anomaly attack
-SuspectedAdversarialAttack: Suspected adversarial attack 
-SuspectedBlackIndustry: Suspected batch generation attack
-SuspectedWatermark: Suspected watermark
+         * <p>Suspected attack trace type, specific type as follows:<br>SuspectedSpoofingAttack: Rephotography attack<br>SuspectedSynthesisImage: Suspected synthesized image<br>SuspectedSynthesisVideo: Suspected synthesized video<br>SuspectedAnomalyAttack: Facial features suspected of not being real<br>SuspectedAdversarialAttack: Suspected adversarial sample attack<br>SuspectedBlackIndustry: Suspected black industry batch template attack<br>SuspectedWatermark: Suspected watermark</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
@@ -732,25 +726,25 @@ class DetectAIFakeFacesRequest extends  AbstractModel {
         super();
 
         /**
-         * Enter the image or video with a face to be detected, in base64 encoding. Base64 value of the image: The overall image resolution is recommended to be 480x640, and the face size is 100X100 or larger; The image data size after Base64 encoding does not exceed 3M, and only supports jpg and png formats. Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. Base64 value of the video: The size after Base64 encoding does not exceed 8M, and supports mp4, avi, and flv formats. Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. The maximum supported video length is 20s, and the recommended length is 2 to 5s. The recommended video resolution is 480x640, and the frame rate is between 25fps and 30fps.
+         * <p>Import the face image or facial video to be detected (currently only single face detection is supported) in base64 encoding. If your scenario involves both video and image, we recommend using video for detection. For better detection results, please note the following input data limits and suggestions:</p><ul><li><p>base64 value of the image:<br>Recommend an overall image resolution of 480x640, with the face size no less than 100x100, captured by the mobile front camera.<br>The size of the base64-encoded image data should not exceed 3M, with a maximum of 10M. Only jpg and png formats are supported.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li><li><p>base64 value of the video:<br>The size after base64 encoding should be within 8M, with a maximum of 10M. Supported formats include mp4, avi, and flv, captured by the mobile front camera.<br>Video duration is recommended to be 2–5s, with a maximum of 20s.<br>Video resolution is recommended at 480x640 (maximum support for 720p), with a frame rate between 25fps and 30fps.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li></ul><p>If you do not use Encryption for secure transmission, this field is a required parameter.</p>
          * @type {string || null}
          */
         this.FaceInput = null;
 
         /**
-         * The type of input is 1- The input type is a picture 2- The input type is a video Others - Return error code InvalidParameter
+         * <p>Passed in type.</p><ul><li>Value ranges from 1 to 2:<br>1: Passed in image type.<br>2: Passed in video type.<br>Other: Return error code InvalidParameter.</li></ul><p>If you do not use Encryption for encrypting transmission, this field is mandatory.</p>
          * @type {number || null}
          */
         this.FaceInputType = null;
 
         /**
-         * Whether the request information needs to be fully encrypted; Supported encryption algorithms: AES-256-CBC, SM4-GCM; Users with encryption requirements can use this parameter, for details, please click the link on the left.
+         * <p>Whether to encrypt the entire request information.</p><ul><li>Supported encryption algorithms: AES-256-CBC, SM4-GCM.</li><li>The user with encryption requirements can use this parameter. For details, please click the left-side link.</li></ul>
          * @type {Encryption || null}
          */
         this.Encryption = null;
 
         /**
-         * Encrypted ciphertext; The data format before encryption is as follows:{"FaceInput":"AAAAA","FaceInputType":1}
+         * <p>Encrypted ciphertext.</p><ul><li>The data format before encryption is as follows: {"FaceInput":"AAAAA","FaceInputType":1}.</li></ul>
          * @type {string || null}
          */
         this.EncryptedBody = null;
@@ -1728,7 +1722,7 @@ class GetFaceIdTokenIntlResponse extends  AbstractModel {
         super();
 
         /**
-         * The SDK token, which is used throughout the verification process and to get the verification result.
+         * <p>SdkToken, used to connect the identity verification process. The verification result can be retrieved with this token. Each SdkToken has a validity of 10 minutes.</p>
          * @type {string || null}
          */
         this.SdkToken = null;
@@ -3287,61 +3281,47 @@ class GetFaceIdTokenIntlRequest extends  AbstractModel {
         super();
 
         /**
-         * The detection mode. Valid values:
-`liveness`: Liveness detection only.
-`compare`: Selfie Verification(liveness detection and face comparison).
-Default value: `liveness`.
+         * <p>Indicates the detection mode. Parameter values as follows:<br>"liveness": liveness detection only;<br>"compare": liveness detection + face comparison;<br>Default value: "liveness".</p>
          * @type {string || null}
          */
         this.CheckMode = null;
 
         /**
-         * The verification security level. Valid values:
-`1`: Video-based liveness detection.
-`2`: Motion-based liveness detection.
-`3`: Reflection-based liveness detection.
-`4`: Motion- and reflection-based liveness detection.
-Default value: `4`.
+         * <p>Indicates the security level of authentication. Security levels are divided into:<br>"1": silent liveness;<br>"2": action liveness detection;<br>"3": light liveness;<br>"4": action + light liveness;<br>Default value is "4".</p>
+**Note:** Security level increases from `1` to `4`, with `4` providing the highest security.
          * @type {string || null}
          */
         this.SecureLevel = null;
 
         /**
-         * The photo (in Base64) to compare. This parameter is required when the value of `CheckMode` is `compare`.
+         * <p>The base64 code of the image for comparison, used for the "liveness comparison" mode. This parameter is required when CheckMode is "compare".</p>
          * @type {string || null}
          */
         this.Image = null;
 
         /**
-         * The pass-through parameter, which can be omitted if there are no special requirements.
+         * <p>This parameter is a business passthrough parameter and can be omitted unless otherwise needed.</p>
          * @type {string || null}
          */
         this.Extra = null;
 
         /**
-         * This interface is used to control th action sequences.
-Action types are as follows:
-"blink"
-"mouth"
-"nod"
-"shake"
-You can choose 1-2 actions out of the four.
-Single action example: "blink"
-Multiple action example: "blink,mouth"
-The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
+         * <p>This API is used to control the sequence of actions. The action types are as follows:<br>"blink"<br>"mouth"<br>"nod"<br>"shake"<br>Choose 1-2 actions from the four.<br>Single action example: "blink"<br>Multi-action example: "blink,mouth".<br>Default value is blink.<br>Input this parameter only when SecureLevel is 2 or 4 for different action types to take effect; otherwise, the API returns an error.</p>
          * @type {string || null}
          */
         this.ActionList = null;
 
         /**
-         * BASIC: Basic version (Default).
-ENHANCE: Enhance version, enable additional output of device risk level field.
-PRO: Pro version, enable additional output of attack type fields.
-PLUS: Plus version, enable additional output of device risk level and attack type fields.
-Please contact us to access enhance version & plus version.	
+         * <p>PLUS: PLUS version, PRO: PRO version, ENHANCED: enhanced, BASIC: basic (default)</p>
          * @type {string || null}
          */
         this.SdkVersion = null;
+
+        /**
+         * <p>Liveness retry count</p><p>Value ranges from 1 to 5</p><p>Default value: 5</p>
+         * @type {number || null}
+         */
+        this.RetryLimit = null;
 
     }
 
@@ -3358,6 +3338,7 @@ Please contact us to access enhance version & plus version.
         this.Extra = 'Extra' in params ? params.Extra : null;
         this.ActionList = 'ActionList' in params ? params.ActionList : null;
         this.SdkVersion = 'SdkVersion' in params ? params.SdkVersion : null;
+        this.RetryLimit = 'RetryLimit' in params ? params.RetryLimit : null;
 
     }
 }
@@ -3796,19 +3777,19 @@ class DetectAIFakeFacesResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether the detected image is an attack: Low: No attack risk Mid: Moderately suspected attack High: Highly suspected attack
+         * <p>Detection result for the input image/video to check the existence of face spoofing attack.</p><ul><li>Low: Low attack risk.</li><li>Mid: Moderately suspected attack.</li><li>High: Highly suspected attack.</li></ul><p>It is advisable to judge as interception when the return value is High, and pass for Mid and Low to better balance security and pass rate.</p>
          * @type {string || null}
          */
         this.AttackRiskLevel = null;
 
         /**
-         * A list of suspected attack traces detected. Note: When no attack traces are detected, an empty array is returned. This parameter is only used as a reference for result judgment. In actual applications, it is still recommended to use the result of AttackRiskLevel.
+         * <p>List of suspected attack traces detected. It is returned only when AttackRiskLevel is High or Mid.</p><ul><li>Description: Return an empty array if no attack traces are detected.</li><li>This output parameter is for result determination reference. The result of AttackRiskLevel is still recommended for actual use.</li></ul>
          * @type {Array.<AttackRiskDetail> || null}
          */
         this.AttackRiskDetailList = null;
 
         /**
-         * Additional Information
+         * <p>Return additional information (including detailed information of cache hit templates).</p>
          * @type {ExtraInfo || null}
          */
         this.ExtraInfo = null;
@@ -7082,7 +7063,7 @@ class Address extends  AbstractModel {
 }
 
 /**
- * 
+ * Template retrieve detailed information
  * @class
  */
 class RetrievalLivenessExtraInfo extends  AbstractModel {
@@ -7090,19 +7071,22 @@ class RetrievalLivenessExtraInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Hit template type. Among them, Common - public library; Auto - Auto Clustering Library; Owner - custom template.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HitGroup = null;
 
         /**
-         * 
+         * <p>The similarity between the request image and the hit attack template ranges from [0,2]. The smaller the value, the higher the probability of hitting the attack template. The default threshold is 0.6. When SimilarityScore≥0.6, it is judged as normal. SimilarityScore&lt;0.6 is judged as an attack.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SimilarityScore = null;
 
         /**
-         * 
+         * <p>Template id of the cache hit</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HitTemplate = null;

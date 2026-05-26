@@ -33,6 +33,7 @@ const DescribeAutoSnapshotPoliciesRequest = models.DescribeAutoSnapshotPoliciesR
 const ModifySnapshotsSharePermissionResponse = models.ModifySnapshotsSharePermissionResponse;
 const DeleteDiskBackupsRequest = models.DeleteDiskBackupsRequest;
 const InitializeDisksResponse = models.InitializeDisksResponse;
+const DescribeDiskStoragePoolRequest = models.DescribeDiskStoragePoolRequest;
 const DescribeDiskBackupsResponse = models.DescribeDiskBackupsResponse;
 const SnapshotCopyResult = models.SnapshotCopyResult;
 const RenewDiskRequest = models.RenewDiskRequest;
@@ -73,12 +74,14 @@ const GetSnapOverviewRequest = models.GetSnapOverviewRequest;
 const Image = models.Image;
 const ModifyAutoSnapshotPolicyAttributeResponse = models.ModifyAutoSnapshotPolicyAttributeResponse;
 const TerminateDisksRequest = models.TerminateDisksRequest;
+const CdcSize = models.CdcSize;
 const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
 const ResizeDiskRequest = models.ResizeDiskRequest;
 const ApplyDiskBackupRequest = models.ApplyDiskBackupRequest;
 const InitializeDisksRequest = models.InitializeDisksRequest;
 const CreateAutoSnapshotPolicyResponse = models.CreateAutoSnapshotPolicyResponse;
 const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
+const UnbindAutoSnapshotPolicyRequest = models.UnbindAutoSnapshotPolicyRequest;
 const DiskConfig = models.DiskConfig;
 const CreateDiskBackupResponse = models.CreateDiskBackupResponse;
 const InquirePriceModifyDiskBackupQuotaResponse = models.InquirePriceModifyDiskBackupQuotaResponse;
@@ -102,6 +105,7 @@ const DescribeDisksRequest = models.DescribeDisksRequest;
 const DetachDisksResponse = models.DetachDisksResponse;
 const InquiryPriceRenewDisksResponse = models.InquiryPriceRenewDisksResponse;
 const SharePermission = models.SharePermission;
+const DescribeDiskStoragePoolResponse = models.DescribeDiskStoragePoolResponse;
 const Policy = models.Policy;
 const ModifyDiskExtraPerformanceResponse = models.ModifyDiskExtraPerformanceResponse;
 const InquirePriceModifyDiskExtraPerformanceRequest = models.InquirePriceModifyDiskExtraPerformanceRequest;
@@ -115,7 +119,7 @@ const CopySnapshotCrossRegionsRequest = models.CopySnapshotCrossRegionsRequest;
 const PrepayPrice = models.PrepayPrice;
 const RenewDiskResponse = models.RenewDiskResponse;
 const DescribeAutoSnapshotPoliciesResponse = models.DescribeAutoSnapshotPoliciesResponse;
-const UnbindAutoSnapshotPolicyRequest = models.UnbindAutoSnapshotPolicyRequest;
+const Cdc = models.Cdc;
 const ApplyDisk = models.ApplyDisk;
 const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
 const AttachDetail = models.AttachDetail;
@@ -291,18 +295,17 @@ This API is used to delete a snapshot group. If a snapshot in the snapshot group
     }
 
     /**
-     * This API is used to reinitialize the cloud disks. Note the following when reinitializing the cloud disks:
-1. For a cloud disk created from a snapshot, it is rolled back to the state of the snapshot;
-2. For a cloud disk created from the scratch, all data are cleared. Please check and back up the necessary data before the reinitialization;
-3. Currently, you can only re-initialize a cloud disk when it’s not attached to a resource and not shared by others;
-4. For a cloud disk created from a snapshot, if the snapshot has been deleted, it cannot be reinitialized.
-     * @param {InitializeDisksRequest} req
-     * @param {function(string, InitializeDisksResponse):void} cb
+     * This API (ModifyAutoSnapshotPolicyAttribute) is used to modify the attributes of an automatic snapshot policy.
+
+* You can use this API to modify the attributes of a scheduled snapshot policy, including the execution policy, name, and activation.
+* When modifying the number of days for retention, you must ensure that there is no clash with the permanent retention attribute. Otherwise, the entire operation will fail and a specific error code will be returned.
+     * @param {ModifyAutoSnapshotPolicyAttributeRequest} req
+     * @param {function(string, ModifyAutoSnapshotPolicyAttributeResponse):void} cb
      * @public
      */
-    InitializeDisks(req, cb) {
-        let resp = new InitializeDisksResponse();
-        this.request("InitializeDisks", req, resp, cb);
+    ModifyAutoSnapshotPolicyAttribute(req, cb) {
+        let resp = new ModifyAutoSnapshotPolicyAttributeResponse();
+        this.request("ModifyAutoSnapshotPolicyAttribute", req, resp, cb);
     }
 
     /**
@@ -360,17 +363,18 @@ Rollback is an asynchronous operation. A successful API return does not indicate
     }
 
     /**
-     * This API (CreateAutoSnapshotPolicy) is used to create a scheduled snapshot policy.
-
-* For the limits on the number of scheduled snapshot policies that can be created in each region, see [Scheduled Snapshots](https://intl.cloud.tencent.com/document/product/362/8191?from_cn_redirect=1).
-* The quantity and capacity of the snapshots that can be created in each region are limited. For more information, see the **Snapshots** page on the Tencent Cloud Console. If the number of snapshots exceeds the quota, the creation of the scheduled snapshots will fail.
-     * @param {CreateAutoSnapshotPolicyRequest} req
-     * @param {function(string, CreateAutoSnapshotPolicyResponse):void} cb
+     * This API is used to reinitialize the cloud disks. Note the following when reinitializing the cloud disks:
+1. For a cloud disk created from a snapshot, it is rolled back to the state of the snapshot;
+2. For a cloud disk created from the scratch, all data are cleared. Please check and back up the necessary data before the reinitialization;
+3. Currently, you can only re-initialize a cloud disk when it’s not attached to a resource and not shared by others;
+4. For a cloud disk created from a snapshot, if the snapshot has been deleted, it cannot be reinitialized.
+     * @param {InitializeDisksRequest} req
+     * @param {function(string, InitializeDisksResponse):void} cb
      * @public
      */
-    CreateAutoSnapshotPolicy(req, cb) {
-        let resp = new CreateAutoSnapshotPolicyResponse();
-        this.request("CreateAutoSnapshotPolicy", req, resp, cb);
+    InitializeDisks(req, cb) {
+        let resp = new InitializeDisksResponse();
+        this.request("InitializeDisks", req, resp, cb);
     }
 
     /**
@@ -385,6 +389,19 @@ Rollback is an asynchronous operation. A successful API return does not indicate
     DescribeDisks(req, cb) {
         let resp = new DescribeDisksResponse();
         this.request("DescribeDisks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the snapshot group list.
+This API is used to query the snapshot group list based on snapshot group ID, snapshot group status or snapshot ID associated with the snapshot group. The relationship among different criteria is AND. For detailed filtering information, see `Filter`.
+If the parameter is empty, a certain number of the cloud disk list for the current user is returned (specified by `Limit`, defaults to 20).
+     * @param {DescribeSnapshotGroupsRequest} req
+     * @param {function(string, DescribeSnapshotGroupsResponse):void} cb
+     * @public
+     */
+    DescribeSnapshotGroups(req, cb) {
+        let resp = new DescribeSnapshotGroupsResponse();
+        this.request("DescribeSnapshotGroups", req, resp, cb);
     }
 
     /**
@@ -504,16 +521,17 @@ The "snapshot name" is only for making user management convenient. Tencent Cloud
     }
 
     /**
-     * This API is used to query the snapshot group list.
-This API is used to query the snapshot group list based on snapshot group ID, snapshot group status or snapshot ID associated with the snapshot group. The relationship among different criteria is AND. For detailed filtering information, see `Filter`.
-If the parameter is empty, a certain number of the cloud disk list for the current user is returned (specified by `Limit`, defaults to 20).
-     * @param {DescribeSnapshotGroupsRequest} req
-     * @param {function(string, DescribeSnapshotGroupsResponse):void} cb
+     * This API (CreateAutoSnapshotPolicy) is used to create a scheduled snapshot policy.
+
+* For the limits on the number of scheduled snapshot policies that can be created in each region, see [Scheduled Snapshots](https://intl.cloud.tencent.com/document/product/362/8191?from_cn_redirect=1).
+* The quantity and capacity of the snapshots that can be created in each region are limited. For more information, see the **Snapshots** page on the Tencent Cloud Console. If the number of snapshots exceeds the quota, the creation of the scheduled snapshots will fail.
+     * @param {CreateAutoSnapshotPolicyRequest} req
+     * @param {function(string, CreateAutoSnapshotPolicyResponse):void} cb
      * @public
      */
-    DescribeSnapshotGroups(req, cb) {
-        let resp = new DescribeSnapshotGroupsResponse();
-        this.request("DescribeSnapshotGroups", req, resp, cb);
+    CreateAutoSnapshotPolicy(req, cb) {
+        let resp = new CreateAutoSnapshotPolicyResponse();
+        this.request("CreateAutoSnapshotPolicy", req, resp, cb);
     }
 
     /**
@@ -568,6 +586,20 @@ If the parameter is empty, a certain number of the cloud disk list for the curre
     }
 
     /**
+     * This API is used to query the list of dedicated cloud disk clusters under the current user account.
+
+* You can query by the dedicated cloud disk cluster ID (`CdcId`) and availability zone (`zone`). Multiple filters are combined with AND. For details about filtering, please see `Filter`.
+* If the parameter is empty, a number (as specified by `Limit`; the default is 20) of dedicated cloud disk clusters are returned.
+     * @param {DescribeDiskStoragePoolRequest} req
+     * @param {function(string, DescribeDiskStoragePoolResponse):void} cb
+     * @public
+     */
+    DescribeDiskStoragePool(req, cb) {
+        let resp = new DescribeDiskStoragePoolResponse();
+        this.request("DescribeDiskStoragePool", req, resp, cb);
+    }
+
+    /**
      * This API (ApplySnapshot) is used to roll back a snapshot to the original cloud disk.
 
 * The snapshot can only be rolled back to the original cloud disk. For data disk snapshots, if you need to copy the snapshot data to other cloud disks, use the API [CreateDisks](https://intl.cloud.tencent.com/document/product/362/16312?from_cn_redirect=1) to create an elastic cloud disk and then copy the snapshot data to the created cloud disk. 
@@ -591,19 +623,6 @@ If the parameter is empty, a certain number of the cloud disk list for the curre
     InquirePriceModifyDiskBackupQuota(req, cb) {
         let resp = new InquirePriceModifyDiskBackupQuotaResponse();
         this.request("InquirePriceModifyDiskBackupQuota", req, resp, cb);
-    }
-
-    /**
-     * This API is used to expand cloud disks. 
-
-*This API supports only the expansion of elastic cloud disks. To query the type of a cloud disk, you can call the [DescribeDisks](https://intl.cloud.tencent.comhttps://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1?from_cn_redirect=1) API and check the `Portable` field in the response. To expand non-elastic cloud disks, you can call the [ResizeInstanceDisks](https://intl.cloud.tencent.com/document/product/213/15731?from_cn_redirect=1) API. *This is an async API. A successful return of this API does not mean that the cloud disk has been expanded successfully. You can call the [DescribeDisks](https://intl.cloud.tencent.comhttps://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1?from_cn_redirect=1) API to query the status of a cloud disk. `EXPANDING` indicates that the expansion is in process.
-     * @param {ResizeDiskRequest} req
-     * @param {function(string, ResizeDiskResponse):void} cb
-     * @public
-     */
-    ResizeDisk(req, cb) {
-        let resp = new ResizeDiskResponse();
-        this.request("ResizeDisk", req, resp, cb);
     }
 
     /**
@@ -662,17 +681,16 @@ This API is used to obtain snapshot overview information.
     }
 
     /**
-     * This API (ModifyAutoSnapshotPolicyAttribute) is used to modify the attributes of an automatic snapshot policy.
+     * This API is used to expand cloud disks. 
 
-* You can use this API to modify the attributes of a scheduled snapshot policy, including the execution policy, name, and activation.
-* When modifying the number of days for retention, you must ensure that there is no clash with the permanent retention attribute. Otherwise, the entire operation will fail and a specific error code will be returned.
-     * @param {ModifyAutoSnapshotPolicyAttributeRequest} req
-     * @param {function(string, ModifyAutoSnapshotPolicyAttributeResponse):void} cb
+*This API supports only the expansion of elastic cloud disks. To query the type of a cloud disk, you can call the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315) API and check the `Portable` field in the response. To expand non-elastic cloud disks, you can call the [ResizeInstanceDisks](https://intl.cloud.tencent.com/document/product/213/15731?from_cn_redirect=1) API. *This is an async API. A successful return of this API does not mean that the cloud disk has been expanded successfully. You can call the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315) API to query the status of a cloud disk. `EXPANDING` indicates that the expansion is in process.
+     * @param {ResizeDiskRequest} req
+     * @param {function(string, ResizeDiskResponse):void} cb
      * @public
      */
-    ModifyAutoSnapshotPolicyAttribute(req, cb) {
-        let resp = new ModifyAutoSnapshotPolicyAttributeResponse();
-        this.request("ModifyAutoSnapshotPolicyAttribute", req, resp, cb);
+    ResizeDisk(req, cb) {
+        let resp = new ResizeDiskResponse();
+        this.request("ResizeDisk", req, resp, cb);
     }
 
     /**

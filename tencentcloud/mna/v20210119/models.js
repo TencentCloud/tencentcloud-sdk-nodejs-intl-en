@@ -1183,82 +1183,88 @@ class DeviceBaseInfo extends  AbstractModel {
         super();
 
         /**
-         * Device unique ID
+         * <p>Unique ID of the device</p>
          * @type {string || null}
          */
         this.DeviceId = null;
 
         /**
-         * Device name.
+         * <p>Device name</p>
          * @type {string || null}
          */
         this.DeviceName = null;
 
         /**
-         * The time when the device is created, in ms.
+         * <p>The time when the device is created, in ms</p>
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last online time of the device, in ms.
+         * <p>Last online time of the device, in ms</p>
          * @type {string || null}
          */
         this.LastTime = null;
 
         /**
-         * Device remark
+         * <p>Remark of the device</p>
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Access environment. 0: Public cloud gateway; 1: Private gateway; 2: Public cloud gateway and private gateway. Default is public cloud gateway. Specific meaning: Public cloud gateway: The device can only connect to the public cloud gateway (nearby access). Private gateway: The device can only connect to the already launched private gateway (nearby access or fixed ip access). Public cloud gateway and private gateway: The device can also connect to both the public cloud gateway and the already launched private gateway (nearby access or fixed ip access).
+         * <p>Access environment. 0: public cloud gateway; 1: private gateway; 2: public cloud gateway and private gateway. Defaults to public cloud gateway. Specific meaning: Public cloud gateway: The device can only access the public cloud gateway (nearby access). Private gateway: The device can only access the already launched private gateway (nearby access or fixed ip access). Public cloud gateway and private gateway: The device can also access both the public cloud gateway and the already launched private gateway (nearby access or fixed ip access).</p>
          * @type {number || null}
          */
         this.AccessScope = null;
 
         /**
-         * Authorization validity period of license 0: Monthly authorization 1: Permanent license
+         * <p>license authorization validity period 0: monthly authorization 1: permanent license</p>
          * @type {number || null}
          */
         this.LicensePayMode = null;
 
         /**
-         * Payer 0: Manufacturer payment 1: Customer payment
+         * <p>Payment party 0: Manufacturer pays 1: Customer pays</p>
          * @type {number || null}
          */
         this.Payer = null;
 
         /**
-         * device group ID
+         * <p>device group ID</p>
          * @type {string || null}
          */
         this.GroupId = null;
 
         /**
-         * Device group name
+         * <p>Device group name</p>
          * @type {string || null}
          */
         this.GroupName = null;
 
         /**
-         * No traffic processing method for the device. 0: pay-as-you-go, 1: truncate and accelerate
+         * <p>Device data transfer plan processing method, 0: pay-as-you-go, 1: truncate acceleration</p>
          * @type {number || null}
          */
         this.FlowTrunc = null;
 
         /**
-         * Device sn
+         * <p>Device sn</p>
          * @type {string || null}
          */
         this.Sn = null;
 
         /**
-         * manufacturer
+         * <p>Manufacturer</p>
          * @type {string || null}
          */
         this.Vendor = null;
+
+        /**
+         * <p>Access region list.</p>
+         * @type {Array.<string> || null}
+         */
+        this.AllowedRegions = null;
 
     }
 
@@ -1282,6 +1288,7 @@ class DeviceBaseInfo extends  AbstractModel {
         this.FlowTrunc = 'FlowTrunc' in params ? params.FlowTrunc : null;
         this.Sn = 'Sn' in params ? params.Sn : null;
         this.Vendor = 'Vendor' in params ? params.Vendor : null;
+        this.AllowedRegions = 'AllowedRegions' in params ? params.AllowedRegions : null;
 
     }
 }
@@ -1853,17 +1860,13 @@ class GetNetMonitorResponse extends  AbstractModel {
         super();
 
         /**
-         * monitoring data
+         * <p>Monitoring data.</p>
          * @type {Array.<MonitorData> || null}
          */
         this.MonitorData = null;
 
         /**
-         * Access region. Valid values: ['MC','AP','EU','AM'].
-MC=Chinese mainland
-AP=Asia Pacific
-EU=Europe
-AM=Americas
+         * <p>Access region. Value ranges from 'MC' to 'AM'<br>MC=Chinese mainland<br>AP=Asia Pacific<br>EU=Europe<br>AM=Americas</p>
          * @type {string || null}
          */
         this.AccessRegion = null;
@@ -2216,6 +2219,49 @@ class UpdateL3SwitchResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAccessRegions response structure.
+ * @class
+ */
+class DescribeAccessRegionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Region information list</p>
+         * @type {Array.<RegionInfo> || null}
+         */
+        this.RegionList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RegionList) {
+            this.RegionList = new Array();
+            for (let z in params.RegionList) {
+                let obj = new RegionInfo();
+                obj.deserialize(params.RegionList[z]);
+                this.RegionList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetL3ConnList response structure.
  * @class
  */
@@ -2413,6 +2459,34 @@ class ModifyPackageRenewFlagResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDeviceAccessRegions response structure.
+ * @class
+ */
+class ModifyDeviceAccessRegionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetDestIPByName response structure.
  * @class
  */
@@ -2459,6 +2533,27 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.AccessRegion = 'AccessRegion' in params ? params.AccessRegion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAccessRegions request structure.
+ * @class
+ */
+class DescribeAccessRegionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -3096,6 +3191,41 @@ class DeleteApplicationRequest extends  AbstractModel {
                 this.MpApplicationIdList.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ModifyDeviceAccessRegions request structure.
+ * @class
+ */
+class ModifyDeviceAccessRegionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>device ID</p>
+         * @type {Array.<string> || null}
+         */
+        this.DeviceIds = null;
+
+        /**
+         * <p>Access region</p>
+         * @type {Array.<string> || null}
+         */
+        this.AllowedRegions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceIds = 'DeviceIds' in params ? params.DeviceIds : null;
+        this.AllowedRegions = 'AllowedRegions' in params ? params.AllowedRegions : null;
 
     }
 }
@@ -4829,31 +4959,31 @@ class GetNetMonitorRequest extends  AbstractModel {
         super();
 
         /**
-         * Device ID
+         * <p>device id</p>
          * @type {string || null}
          */
         this.DeviceId = null;
 
         /**
-         * Start time.
+         * <p>Start time.</p>
          * @type {number || null}
          */
         this.BeginTime = null;
 
         /**
-         * End time.
+         * <p>End time.</p>
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * Statistical metric (Uplink rate: "TxRate": bit/s, Downstream rate: "RxRate": bit/s, Packet loss: "Loss": %, Latency: "RTT": ms)
+         * <p>Statistical metric (Uplink rate: "TxRate": bit/s, Downstream rate: "RxRate": bit/s, Packet Loss: "Loss": %, Latency: "RTT": ms)</p>
          * @type {string || null}
          */
         this.Metrics = null;
 
         /**
-         * Gateway type. 0: public cloud gateway; 1: private gateway. Default is 0 if not specified.
+         * <p>Gateway type. 0: public cloud gateway; 1: private gateway. Defaults to 0 if not specified.</p>
          * @type {number || null}
          */
         this.GatewayType = null;
@@ -5076,6 +5206,48 @@ class UpdateDeviceResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * This data structure displays available region information.
+ * @class
+ */
+class RegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Region ID.</p>
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * <p>Region name.</p>
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * <p>English abbreviation of the region.</p>
+         * @type {string || null}
+         */
+        this.RegionAbbr = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionAbbr = 'RegionAbbr' in params ? params.RegionAbbr : null;
 
     }
 }
@@ -6235,11 +6407,14 @@ module.exports = {
     DeleteGroupRequest: DeleteGroupRequest,
     CreateEncryptedKeyResponse: CreateEncryptedKeyResponse,
     UpdateL3SwitchResponse: UpdateL3SwitchResponse,
+    DescribeAccessRegionsResponse: DescribeAccessRegionsResponse,
     GetL3ConnListResponse: GetL3ConnListResponse,
     GroupInfo: GroupInfo,
     AddApplicationResponse: AddApplicationResponse,
     ModifyPackageRenewFlagResponse: ModifyPackageRenewFlagResponse,
+    ModifyDeviceAccessRegionsResponse: ModifyDeviceAccessRegionsResponse,
     GetDestIPByNameResponse: GetDestIPByNameResponse,
+    DescribeAccessRegionsRequest: DescribeAccessRegionsRequest,
     VendorHardware: VendorHardware,
     GetDeviceRequest: GetDeviceRequest,
     ActivateHardwareResponse: ActivateHardwareResponse,
@@ -6252,6 +6427,7 @@ module.exports = {
     SetNotifyUrlRequest: SetNotifyUrlRequest,
     GetDevicePayModeRequest: GetDevicePayModeRequest,
     DeleteApplicationRequest: DeleteApplicationRequest,
+    ModifyDeviceAccessRegionsRequest: ModifyDeviceAccessRegionsRequest,
     SlotNetInfo: SlotNetInfo,
     DeviceNetInfo: DeviceNetInfo,
     NetDetails: NetDetails,
@@ -6286,6 +6462,7 @@ module.exports = {
     UpdateApplicationInfoResponse: UpdateApplicationInfoResponse,
     OrderFlowPackageResponse: OrderFlowPackageResponse,
     UpdateDeviceResponse: UpdateDeviceResponse,
+    RegionInfo: RegionInfo,
     L3ConnInfo: L3ConnInfo,
     ActivateHardwareRequest: ActivateHardwareRequest,
     GetMonitorDataByNameResponse: GetMonitorDataByNameResponse,

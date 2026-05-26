@@ -22,9 +22,10 @@ const ModifyMaintainPeriodConfigRequest = models.ModifyMaintainPeriodConfigReque
 const BizTaskModifyInstanceParam = models.BizTaskModifyInstanceParam;
 const ModifyClusterReadOnlyResponse = models.ModifyClusterReadOnlyResponse;
 const DescribeResourcePackageDetailResponse = models.DescribeResourcePackageDetailResponse;
+const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const SearchClusterTablesRequest = models.SearchClusterTablesRequest;
 const DescribeMaintainPeriodRequest = models.DescribeMaintainPeriodRequest;
-const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const ModifyBackupDownloadRestrictionResponse = models.ModifyBackupDownloadRestrictionResponse;
 const DescribeClusterDatabaseTablesRequest = models.DescribeClusterDatabaseTablesRequest;
 const DescribeClusterParamsResponse = models.DescribeClusterParamsResponse;
 const RefundResourcePackageResponse = models.RefundResourcePackageResponse;
@@ -40,6 +41,7 @@ const CreateClustersResponse = models.CreateClustersResponse;
 const CynosdbInstanceGrp = models.CynosdbInstanceGrp;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const ModifyInstanceUpgradeLimitDaysResponse = models.ModifyInstanceUpgradeLimitDaysResponse;
+const CreateLibraDBClustersResponse = models.CreateLibraDBClustersResponse;
 const DatabaseTables = models.DatabaseTables;
 const UserHostPrivilege = models.UserHostPrivilege;
 const StopCLSDeliveryRequest = models.StopCLSDeliveryRequest;
@@ -72,9 +74,10 @@ const DescribeIntegrateTaskRequest = models.DescribeIntegrateTaskRequest;
 const ProxyGroupInfo = models.ProxyGroupInfo;
 const CreateProxyEndPointRequest = models.CreateProxyEndPointRequest;
 const ModifyBackupDownloadUserRestrictionResponse = models.ModifyBackupDownloadUserRestrictionResponse;
+const AddLibraDBInstancesResponse = models.AddLibraDBInstancesResponse;
 const AuditRuleTemplateInfo = models.AuditRuleTemplateInfo;
 const DescribeParamTemplateDetailRequest = models.DescribeParamTemplateDetailRequest;
-const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
+const OpenReadOnlyInstanceExclusiveAccessRequest = models.OpenReadOnlyInstanceExclusiveAccessRequest;
 const ExportResourcePackageDeductDetailsRequest = models.ExportResourcePackageDeductDetailsRequest;
 const StartCLSDeliveryResponse = models.StartCLSDeliveryResponse;
 const ParamItemInfo = models.ParamItemInfo;
@@ -95,6 +98,7 @@ const DescribeProxyNodesRequest = models.DescribeProxyNodesRequest;
 const InquirePriceCreateResponse = models.InquirePriceCreateResponse;
 const DescribeClusterReadOnlyRequest = models.DescribeClusterReadOnlyRequest;
 const DescribeIntegrateTaskResponse = models.DescribeIntegrateTaskResponse;
+const CreateLibraDBClustersRequest = models.CreateLibraDBClustersRequest;
 const CreateClustersRequest = models.CreateClustersRequest;
 const CloseProxyResponse = models.CloseProxyResponse;
 const DescribeResourcePackageSaleSpecRequest = models.DescribeResourcePackageSaleSpecRequest;
@@ -103,15 +107,17 @@ const RollBackClusterResponse = models.RollBackClusterResponse;
 const DescribeClusterInstanceGrpsResponse = models.DescribeClusterInstanceGrpsResponse;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const ModifyClusterDatabaseRequest = models.ModifyClusterDatabaseRequest;
+const MigrateObject = models.MigrateObject;
 const DescribeServerlessStrategyResponse = models.DescribeServerlessStrategyResponse;
 const InstanceCLSDeliveryInfo = models.InstanceCLSDeliveryInfo;
 const InquirePriceMultiSpecResponse = models.InquirePriceMultiSpecResponse;
-const ModifyMaintainPeriodConfigResponse = models.ModifyMaintainPeriodConfigResponse;
+const DescribeLibraDBClusterAccountAllPrivilegesRequest = models.DescribeLibraDBClusterAccountAllPrivilegesRequest;
 const ModifyBackupNameRequest = models.ModifyBackupNameRequest;
 const AuditRuleFilters = models.AuditRuleFilters;
 const DescribeClusterParamsRequest = models.DescribeClusterParamsRequest;
 const ModifyAccountHostResponse = models.ModifyAccountHostResponse;
 const DeleteCLSDeliveryRequest = models.DeleteCLSDeliveryRequest;
+const DescribeLibraDBClusterAccountPrivilegesRequest = models.DescribeLibraDBClusterAccountPrivilegesRequest;
 const ProxyEndPointConfigInfo = models.ProxyEndPointConfigInfo;
 const CreateCLSDeliveryResponse = models.CreateCLSDeliveryResponse;
 const DescribeServerlessInstanceSpecsResponse = models.DescribeServerlessInstanceSpecsResponse;
@@ -128,6 +134,7 @@ const DescribeProxiesRequest = models.DescribeProxiesRequest;
 const ModifyParamItem = models.ModifyParamItem;
 const ParamTemplateListInfo = models.ParamTemplateListInfo;
 const CloseProxyEndPointRequest = models.CloseProxyEndPointRequest;
+const LibraDBInstanceInitInfo = models.LibraDBInstanceInitInfo;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
 const AuditInstanceInfo = models.AuditInstanceInfo;
 const AddClusterSlaveZoneResponse = models.AddClusterSlaveZoneResponse;
@@ -155,7 +162,7 @@ const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const RollbackData = models.RollbackData;
 const UnbindClusterResourcePackagesRequest = models.UnbindClusterResourcePackagesRequest;
 const ModifyBackupDownloadUserRestrictionRequest = models.ModifyBackupDownloadUserRestrictionRequest;
-const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const ModifyMaintainPeriodConfigResponse = models.ModifyMaintainPeriodConfigResponse;
 const SwitchClusterVpcResponse = models.SwitchClusterVpcResponse;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const Tag = models.Tag;
@@ -165,31 +172,36 @@ const DescribeInstanceDetailResponse = models.DescribeInstanceDetailResponse;
 const DeleteAccountsResponse = models.DeleteAccountsResponse;
 const CreateResourcePackageResponse = models.CreateResourcePackageResponse;
 const ModifyBinlogConfigRequest = models.ModifyBinlogConfigRequest;
+const DeleteLibraDBClusterAccountsRequest = models.DeleteLibraDBClusterAccountsRequest;
 const SetRenewFlagResponse = models.SetRenewFlagResponse;
 const CreateClusterDatabaseResponse = models.CreateClusterDatabaseResponse;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
 const ProxyConfig = models.ProxyConfig;
+const CheckItem = models.CheckItem;
 const Addr = models.Addr;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const ServerlessZoneStockInfo = models.ServerlessZoneStockInfo;
 const DbInfo = models.DbInfo;
 const DescribeBackupDownloadUrlRequest = models.DescribeBackupDownloadUrlRequest;
 const InstanceAuditStatus = models.InstanceAuditStatus;
-const CopyClusterPasswordComplexityRequest = models.CopyClusterPasswordComplexityRequest;
+const OpenWanRequest = models.OpenWanRequest;
 const StopCLSDeliveryResponse = models.StopCLSDeliveryResponse;
+const CreateLibraDBClusterAccountsResponse = models.CreateLibraDBClusterAccountsResponse;
+const MigrateTableItem = models.MigrateTableItem;
 const CreateProxyEndPointResponse = models.CreateProxyEndPointResponse;
 const NetAddr = models.NetAddr;
-const OpenWanRequest = models.OpenWanRequest;
+const CopyClusterPasswordComplexityRequest = models.CopyClusterPasswordComplexityRequest;
 const ReplayInstanceAuditLogRequest = models.ReplayInstanceAuditLogRequest;
+const MigrateDBItem = models.MigrateDBItem;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const InquirePriceCreateRequest = models.InquirePriceCreateRequest;
 const ModifyAuditServiceRequest = models.ModifyAuditServiceRequest;
 const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
 const CrossRegionBackupItem = models.CrossRegionBackupItem;
 const ExportInstanceSlowQueriesRequest = models.ExportInstanceSlowQueriesRequest;
-const ModifyAuditServiceResponse = models.ModifyAuditServiceResponse;
+const ParamItem = models.ParamItem;
 const ResumeServerlessResponse = models.ResumeServerlessResponse;
 const DescribeBackupDownloadUserRestrictionResponse = models.DescribeBackupDownloadUserRestrictionResponse;
 const SaleZone = models.SaleZone;
@@ -231,6 +243,7 @@ const BizTaskInfo = models.BizTaskInfo;
 const DescribeRollbackTimeRangeRequest = models.DescribeRollbackTimeRangeRequest;
 const InquirePriceRenewRequest = models.InquirePriceRenewRequest;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
+const DescribeLibraDBClusterAccountsRequest = models.DescribeLibraDBClusterAccountsRequest;
 const ProxyInstanceWeight = models.ProxyInstanceWeight;
 const CreateResourcePackageRequest = models.CreateResourcePackageRequest;
 const CloseProxyEndPointResponse = models.CloseProxyEndPointResponse;
@@ -292,11 +305,15 @@ const ModifyProxyDescRequest = models.ModifyProxyDescRequest;
 const ReloadBalanceProxyNodeResponse = models.ReloadBalanceProxyNodeResponse;
 const CloseAuditServiceResponse = models.CloseAuditServiceResponse;
 const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
+const ActivateLibraDBClusterResponse = models.ActivateLibraDBClusterResponse;
 const BindClusterResourcePackagesResponse = models.BindClusterResourcePackagesResponse;
 const ProxyZone = models.ProxyZone;
 const CreateProxyRequest = models.CreateProxyRequest;
+const DeleteLibraDBClusterResponse = models.DeleteLibraDBClusterResponse;
 const DescribeResourcePackageSaleSpecResponse = models.DescribeResourcePackageSaleSpecResponse;
+const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const DescribeResourcesByDealNameRequest = models.DescribeResourcesByDealNameRequest;
+const DescribeLibraDBClusterAccountPrivilegesResponse = models.DescribeLibraDBClusterAccountPrivilegesResponse;
 const DescribeAuditInstanceListRequest = models.DescribeAuditInstanceListRequest;
 const DescribeInstanceSlowQueriesResponse = models.DescribeInstanceSlowQueriesResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
@@ -310,10 +327,11 @@ const CynosdbCluster = models.CynosdbCluster;
 const OpenWanResponse = models.OpenWanResponse;
 const OfflineClusterResponse = models.OfflineClusterResponse;
 const ClusterTaskId = models.ClusterTaskId;
+const DeleteLibraDBClusterAccountsResponse = models.DeleteLibraDBClusterAccountsResponse;
 const ModifyAccountHostRequest = models.ModifyAccountHostRequest;
 const DescribeFlowRequest = models.DescribeFlowRequest;
 const DescribeClusterDatabaseTablesResponse = models.DescribeClusterDatabaseTablesResponse;
-const OpenReadOnlyInstanceExclusiveAccessRequest = models.OpenReadOnlyInstanceExclusiveAccessRequest;
+const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const CreateBackupRequest = models.CreateBackupRequest;
 const CreateCLSDeliveryRequest = models.CreateCLSDeliveryRequest;
 const DescribeMaintainPeriodResponse = models.DescribeMaintainPeriodResponse;
@@ -324,18 +342,22 @@ const ModifyClusterReadOnlyRequest = models.ModifyClusterReadOnlyRequest;
 const OfflineInstanceResponse = models.OfflineInstanceResponse;
 const ModifyClusterSlaveZoneRequest = models.ModifyClusterSlaveZoneRequest;
 const DescribeInstanceErrorLogsResponse = models.DescribeInstanceErrorLogsResponse;
+const Objects = models.Objects;
 const DescribeSupportProxyVersionResponse = models.DescribeSupportProxyVersionResponse;
 const DeleteClusterDatabaseResponse = models.DeleteClusterDatabaseResponse;
 const CynosdbClusterDetail = models.CynosdbClusterDetail;
+const ActivateLibraDBInstanceResponse = models.ActivateLibraDBInstanceResponse;
 const RestartInstanceRequest = models.RestartInstanceRequest;
 const PackageDetail = models.PackageDetail;
 const BackupLimitVpcItem = models.BackupLimitVpcItem;
+const DescribeLibraDBClusterAccountsResponse = models.DescribeLibraDBClusterAccountsResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const DescribeInstanceSpecsResponse = models.DescribeInstanceSpecsResponse;
-const ParamItem = models.ParamItem;
+const ModifyAuditServiceResponse = models.ModifyAuditServiceResponse;
 const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
 const ModifyResourcePackageClustersResponse = models.ModifyResourcePackageClustersResponse;
 const InputAccount = models.InputAccount;
+const DescribeLibraDBClusterAccountAllPrivilegesResponse = models.DescribeLibraDBClusterAccountAllPrivilegesResponse;
 const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
 const InstanceAuditRule = models.InstanceAuditRule;
 const ExchangeRoGroupInfo = models.ExchangeRoGroupInfo;
@@ -354,27 +376,31 @@ const OpenClusterPasswordComplexityRequest = models.OpenClusterPasswordComplexit
 const ProxyConfigInfo = models.ProxyConfigInfo;
 const PackagePriority = models.PackagePriority;
 const DescribeInstancesWithinSameClusterRequest = models.DescribeInstancesWithinSameClusterRequest;
+const AddLibraDBInstancesRequest = models.AddLibraDBInstancesRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const SetRenewFlagRequest = models.SetRenewFlagRequest;
-const ClusterReadOnlyValue = models.ClusterReadOnlyValue;
 const DescribeServerlessInstanceSpecsRequest = models.DescribeServerlessInstanceSpecsRequest;
+const ActivateLibraDBClusterRequest = models.ActivateLibraDBClusterRequest;
 const ProxyGroup = models.ProxyGroup;
 const AddClusterSlaveZoneRequest = models.AddClusterSlaveZoneRequest;
+const CheckCreateLibraDBInstanceRequest = models.CheckCreateLibraDBInstanceRequest;
 const RollbackDatabase = models.RollbackDatabase;
+const DeleteLibraDBClusterRequest = models.DeleteLibraDBClusterRequest;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const ModifyInstanceUpgradeLimitDaysRequest = models.ModifyInstanceUpgradeLimitDaysRequest;
 const CloseClusterPasswordComplexityRequest = models.CloseClusterPasswordComplexityRequest;
 const DescribeIsolatedInstancesRequest = models.DescribeIsolatedInstancesRequest;
-const ReplayInstanceAuditLogResponse = models.ReplayInstanceAuditLogResponse;
+const CheckCreateLibraDBInstanceResponse = models.CheckCreateLibraDBInstanceResponse;
 const IsolateInstanceRequest = models.IsolateInstanceRequest;
 const DescribeAuditRuleTemplatesResponse = models.DescribeAuditRuleTemplatesResponse;
 const LogicBackupConfigInfo = models.LogicBackupConfigInfo;
 const IntegrateCreateClusterConfig = models.IntegrateCreateClusterConfig;
 const DeleteBackupResponse = models.DeleteBackupResponse;
-const ModifyBackupDownloadRestrictionResponse = models.ModifyBackupDownloadRestrictionResponse;
+const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const ParamDetail = models.ParamDetail;
 const OfflineClusterRequest = models.OfflineClusterRequest;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
+const CreateLibraDBClusterAccountsRequest = models.CreateLibraDBClusterAccountsRequest;
 const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
 const ModifyResourcePackageNameResponse = models.ModifyResourcePackageNameResponse;
 const DescribeBackupListRequest = models.DescribeBackupListRequest;
@@ -419,24 +445,26 @@ const DescribeAuditRuleTemplatesRequest = models.DescribeAuditRuleTemplatesReque
 const InstanceSpec = models.InstanceSpec;
 const ModifyServerlessStrategyRequest = models.ModifyServerlessStrategyRequest;
 const DescribeBinlogConfigResponse = models.DescribeBinlogConfigResponse;
-const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
+const PolicyRule = models.PolicyRule;
 const SaleRegion = models.SaleRegion;
 const ProxyVersionInfo = models.ProxyVersionInfo;
 const DescribeInstanceSlowQueriesRequest = models.DescribeInstanceSlowQueriesRequest;
 const DescribeIsolatedInstancesResponse = models.DescribeIsolatedInstancesResponse;
 const ModifyBinlogConfigResponse = models.ModifyBinlogConfigResponse;
+const ActivateLibraDBInstanceRequest = models.ActivateLibraDBInstanceRequest;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const ModifiableInfo = models.ModifiableInfo;
 const TaskMaintainInfo = models.TaskMaintainInfo;
 const DescribeServerlessStrategyRequest = models.DescribeServerlessStrategyRequest;
 const TablePrivileges = models.TablePrivileges;
+const ReplayInstanceAuditLogResponse = models.ReplayInstanceAuditLogResponse;
 const DescribeBinlogSaveDaysResponse = models.DescribeBinlogSaveDaysResponse;
 const DeleteBackupRequest = models.DeleteBackupRequest;
 const ErrorLogItemExport = models.ErrorLogItemExport;
 const DescribeParamTemplateDetailResponse = models.DescribeParamTemplateDetailResponse;
 const ModifyBinlogSaveDaysResponse = models.ModifyBinlogSaveDaysResponse;
 const DeleteAuditRuleTemplatesResponse = models.DeleteAuditRuleTemplatesResponse;
-const PolicyRule = models.PolicyRule;
+const ClusterReadOnlyValue = models.ClusterReadOnlyValue;
 const ZoneStockInfo = models.ZoneStockInfo;
 const DeleteCLSDeliveryResponse = models.DeleteCLSDeliveryResponse;
 const InquirePriceRenewResponse = models.InquirePriceRenewResponse;
@@ -509,14 +537,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to restore a serverless cluster.
-     * @param {ResumeServerlessRequest} req
-     * @param {function(string, ResumeServerlessResponse):void} cb
+     * This API is used to delete user accounts.
+     * @param {DeleteAccountsRequest} req
+     * @param {function(string, DeleteAccountsResponse):void} cb
      * @public
      */
-    ResumeServerless(req, cb) {
-        let resp = new ResumeServerlessResponse();
-        this.request("ResumeServerless", req, resp, cb);
+    DeleteAccounts(req, cb) {
+        let resp = new DeleteAccountsResponse();
+        this.request("DeleteAccounts", req, resp, cb);
     }
 
     /**
@@ -575,14 +603,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to copy the password complexity of a replication cluster.
-     * @param {CopyClusterPasswordComplexityRequest} req
-     * @param {function(string, CopyClusterPasswordComplexityResponse):void} cb
+     * This interface (DescribeResourcesByDealName) is used to query order-associated instances.
+     * @param {DescribeResourcesByDealNameRequest} req
+     * @param {function(string, DescribeResourcesByDealNameResponse):void} cb
      * @public
      */
-    CopyClusterPasswordComplexity(req, cb) {
-        let resp = new CopyClusterPasswordComplexityResponse();
-        this.request("CopyClusterPasswordComplexity", req, resp, cb);
+    DescribeResourcesByDealName(req, cb) {
+        let resp = new DescribeResourcesByDealNameResponse();
+        this.request("DescribeResourcesByDealName", req, resp, cb);
     }
 
     /**
@@ -663,14 +691,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to export the usage details of a resource package.
-     * @param {ExportResourcePackageDeductDetailsRequest} req
-     * @param {function(string, ExportResourcePackageDeductDetailsResponse):void} cb
+     * This API is used to query database proxy specifications.
+     * @param {DescribeProxySpecsRequest} req
+     * @param {function(string, DescribeProxySpecsResponse):void} cb
      * @public
      */
-    ExportResourcePackageDeductDetails(req, cb) {
-        let resp = new ExportResourcePackageDeductDetailsResponse();
-        this.request("ExportResourcePackageDeductDetails", req, resp, cb);
+    DescribeProxySpecs(req, cb) {
+        let resp = new DescribeProxySpecsResponse();
+        this.request("DescribeProxySpecs", req, resp, cb);
     }
 
     /**
@@ -740,14 +768,25 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (DescribeResourcesByDealName) is used to query order-associated instances.
-     * @param {DescribeResourcesByDealNameRequest} req
-     * @param {function(string, DescribeResourcesByDealNameResponse):void} cb
+     * Deleting a TDSQL-C Analysis Cluster
+     * @param {DeleteLibraDBClusterRequest} req
+     * @param {function(string, DeleteLibraDBClusterResponse):void} cb
      * @public
      */
-    DescribeResourcesByDealName(req, cb) {
-        let resp = new DescribeResourcesByDealNameResponse();
-        this.request("DescribeResourcesByDealName", req, resp, cb);
+    DeleteLibraDBCluster(req, cb) {
+        let resp = new DeleteLibraDBClusterResponse();
+        this.request("DeleteLibraDBCluster", req, resp, cb);
+    }
+
+    /**
+     * This API is used to copy the password complexity of a replication cluster.
+     * @param {CopyClusterPasswordComplexityRequest} req
+     * @param {function(string, CopyClusterPasswordComplexityResponse):void} cb
+     * @public
+     */
+    CopyClusterPasswordComplexity(req, cb) {
+        let resp = new CopyClusterPasswordComplexityResponse();
+        this.request("CopyClusterPasswordComplexity", req, resp, cb);
     }
 
     /**
@@ -927,14 +966,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete audit rule templates.
-     * @param {DeleteAuditRuleTemplatesRequest} req
-     * @param {function(string, DeleteAuditRuleTemplatesResponse):void} cb
+     * This API is used to delete a parameter template.
+     * @param {DeleteParamTemplateRequest} req
+     * @param {function(string, DeleteParamTemplateResponse):void} cb
      * @public
      */
-    DeleteAuditRuleTemplates(req, cb) {
-        let resp = new DeleteAuditRuleTemplatesResponse();
-        this.request("DeleteAuditRuleTemplates", req, resp, cb);
+    DeleteParamTemplate(req, cb) {
+        let resp = new DeleteParamTemplateResponse();
+        this.request("DeleteParamTemplate", req, resp, cb);
     }
 
     /**
@@ -1180,14 +1219,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain cluster database list.
-     * @param {DescribeClusterDatabasesRequest} req
-     * @param {function(string, DescribeClusterDatabasesResponse):void} cb
+     * This API is used to unbind an isolated read-only analysis engine instance.
+     * @param {ActivateLibraDBInstanceRequest} req
+     * @param {function(string, ActivateLibraDBInstanceResponse):void} cb
      * @public
      */
-    DescribeClusterDatabases(req, cb) {
-        let resp = new DescribeClusterDatabasesResponse();
-        this.request("DescribeClusterDatabases", req, resp, cb);
+    ActivateLibraDBInstance(req, cb) {
+        let resp = new ActivateLibraDBInstanceResponse();
+        this.request("ActivateLibraDBInstance", req, resp, cb);
     }
 
     /**
@@ -1246,6 +1285,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the permissions of a cluster account.
+     * @param {DescribeLibraDBClusterAccountPrivilegesRequest} req
+     * @param {function(string, DescribeLibraDBClusterAccountPrivilegesResponse):void} cb
+     * @public
+     */
+    DescribeLibraDBClusterAccountPrivileges(req, cb) {
+        let resp = new DescribeLibraDBClusterAccountPrivilegesResponse();
+        this.request("DescribeLibraDBClusterAccountPrivileges", req, resp, cb);
+    }
+
+    /**
      * This interface is used to delete a database.
      * @param {DeleteClusterDatabaseRequest} req
      * @param {function(string, DeleteClusterDatabaseResponse):void} cb
@@ -1268,6 +1318,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to delete cluster accounts.
+     * @param {DeleteLibraDBClusterAccountsRequest} req
+     * @param {function(string, DeleteLibraDBClusterAccountsResponse):void} cb
+     * @public
+     */
+    DeleteLibraDBClusterAccounts(req, cb) {
+        let resp = new DeleteLibraDBClusterAccountsResponse();
+        this.request("DeleteLibraDBClusterAccounts", req, resp, cb);
+    }
+
+    /**
      * This API is used to add instances to a cluster.
      * @param {AddInstancesRequest} req
      * @param {function(string, AddInstancesResponse):void} cb
@@ -1276,6 +1337,17 @@ class CynosdbClient extends AbstractClient {
     AddInstances(req, cb) {
         let resp = new AddInstancesResponse();
         this.request("AddInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restore a serverless cluster.
+     * @param {ResumeServerlessRequest} req
+     * @param {function(string, ResumeServerlessResponse):void} cb
+     * @public
+     */
+    ResumeServerless(req, cb) {
+        let resp = new ResumeServerlessResponse();
+        this.request("ResumeServerless", req, resp, cb);
     }
 
     /**
@@ -1290,14 +1362,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete user accounts.
-     * @param {DeleteAccountsRequest} req
-     * @param {function(string, DeleteAccountsResponse):void} cb
+     * This API is used to query and analyze cluster accounts.
+     * @param {DescribeLibraDBClusterAccountsRequest} req
+     * @param {function(string, DescribeLibraDBClusterAccountsResponse):void} cb
      * @public
      */
-    DeleteAccounts(req, cb) {
-        let resp = new DeleteAccountsResponse();
-        this.request("DeleteAccounts", req, resp, cb);
+    DescribeLibraDBClusterAccounts(req, cb) {
+        let resp = new DescribeLibraDBClusterAccountsResponse();
+        this.request("DescribeLibraDBClusterAccounts", req, resp, cb);
     }
 
     /**
@@ -1499,14 +1571,36 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (OpenWan) is used to enable external network.
-     * @param {OpenWanRequest} req
-     * @param {function(string, OpenWanResponse):void} cb
+     * This API is used to add read-only analysis engine to a cluster.
+     * @param {AddLibraDBInstancesRequest} req
+     * @param {function(string, AddLibraDBInstancesResponse):void} cb
      * @public
      */
-    OpenWan(req, cb) {
-        let resp = new OpenWanResponse();
-        this.request("OpenWan", req, resp, cb);
+    AddLibraDBInstances(req, cb) {
+        let resp = new AddLibraDBInstancesResponse();
+        this.request("AddLibraDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain cluster database list.
+     * @param {DescribeClusterDatabasesRequest} req
+     * @param {function(string, DescribeClusterDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeClusterDatabases(req, cb) {
+        let resp = new DescribeClusterDatabasesResponse();
+        this.request("DescribeClusterDatabases", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query and analyze all permissions of a cluster account.
+     * @param {DescribeLibraDBClusterAccountAllPrivilegesRequest} req
+     * @param {function(string, DescribeLibraDBClusterAccountAllPrivilegesResponse):void} cb
+     * @public
+     */
+    DescribeLibraDBClusterAccountAllPrivileges(req, cb) {
+        let resp = new DescribeLibraDBClusterAccountAllPrivilegesResponse();
+        this.request("DescribeLibraDBClusterAccountAllPrivileges", req, resp, cb);
     }
 
     /**
@@ -1620,6 +1714,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to verify whether it is possible to add a read-only analysis engine instance to the cluster.
+     * @param {CheckCreateLibraDBInstanceRequest} req
+     * @param {function(string, CheckCreateLibraDBInstanceResponse):void} cb
+     * @public
+     */
+    CheckCreateLibraDBInstance(req, cb) {
+        let resp = new CheckCreateLibraDBInstanceResponse();
+        this.request("CheckCreateLibraDBInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to set the auto-renewal feature of an instance.
      * @param {SetRenewFlagRequest} req
      * @param {function(string, SetRenewFlagResponse):void} cb
@@ -1675,6 +1780,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This interface (OpenWan) is used to enable external network.
+     * @param {OpenWanRequest} req
+     * @param {function(string, OpenWanResponse):void} cb
+     * @public
+     */
+    OpenWan(req, cb) {
+        let resp = new OpenWanResponse();
+        this.request("OpenWan", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the download source limit of the default backup configured by the user in the current region.
      * @param {DescribeBackupDownloadRestrictionRequest} req
      * @param {function(string, DescribeBackupDownloadRestrictionResponse):void} cb
@@ -1705,6 +1821,17 @@ class CynosdbClient extends AbstractClient {
     DescribeClusterDatabaseTables(req, cb) {
         let resp = new DescribeClusterDatabaseTablesResponse();
         this.request("DescribeClusterDatabaseTables", req, resp, cb);
+    }
+
+    /**
+     * Release the analysis cluster from quarantined state
+     * @param {ActivateLibraDBClusterRequest} req
+     * @param {function(string, ActivateLibraDBClusterResponse):void} cb
+     * @public
+     */
+    ActivateLibraDBCluster(req, cb) {
+        let resp = new ActivateLibraDBClusterResponse();
+        this.request("ActivateLibraDBCluster", req, resp, cb);
     }
 
     /**
@@ -1906,14 +2033,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query database proxy specifications.
-     * @param {DescribeProxySpecsRequest} req
-     * @param {function(string, DescribeProxySpecsResponse):void} cb
+     * This API is used to export the usage details of a resource package.
+     * @param {ExportResourcePackageDeductDetailsRequest} req
+     * @param {function(string, ExportResourcePackageDeductDetailsResponse):void} cb
      * @public
      */
-    DescribeProxySpecs(req, cb) {
-        let resp = new DescribeProxySpecsResponse();
-        this.request("DescribeProxySpecs", req, resp, cb);
+    ExportResourcePackageDeductDetails(req, cb) {
+        let resp = new ExportResourcePackageDeductDetailsResponse();
+        this.request("ExportResourcePackageDeductDetails", req, resp, cb);
     }
 
     /**
@@ -2038,14 +2165,25 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a parameter template.
-     * @param {DeleteParamTemplateRequest} req
-     * @param {function(string, DeleteParamTemplateResponse):void} cb
+     * This API is used to delete audit rule templates.
+     * @param {DeleteAuditRuleTemplatesRequest} req
+     * @param {function(string, DeleteAuditRuleTemplatesResponse):void} cb
      * @public
      */
-    DeleteParamTemplate(req, cb) {
-        let resp = new DeleteParamTemplateResponse();
-        this.request("DeleteParamTemplate", req, resp, cb);
+    DeleteAuditRuleTemplates(req, cb) {
+        let resp = new DeleteAuditRuleTemplatesResponse();
+        this.request("DeleteAuditRuleTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a TDSQL-C analysis cluster
+     * @param {CreateLibraDBClustersRequest} req
+     * @param {function(string, CreateLibraDBClustersResponse):void} cb
+     * @public
+     */
+    CreateLibraDBClusters(req, cb) {
+        let resp = new CreateLibraDBClustersResponse();
+        this.request("CreateLibraDBClusters", req, resp, cb);
     }
 
     /**
@@ -2068,6 +2206,17 @@ class CynosdbClient extends AbstractClient {
     DescribeBinlogs(req, cb) {
         let resp = new DescribeBinlogsResponse();
         this.request("DescribeBinlogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an analysis cluster account.
+     * @param {CreateLibraDBClusterAccountsRequest} req
+     * @param {function(string, CreateLibraDBClusterAccountsResponse):void} cb
+     * @public
+     */
+    CreateLibraDBClusterAccounts(req, cb) {
+        let resp = new CreateLibraDBClusterAccountsResponse();
+        this.request("CreateLibraDBClusterAccounts", req, resp, cb);
     }
 
     /**

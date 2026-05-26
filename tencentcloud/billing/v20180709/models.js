@@ -976,7 +976,7 @@ zone = Availability zoneactionType = Transaction typepayMode = Billing modetags 
         this.PageNo = null;
 
         /**
-         * Cost allocation tag value
+         * Cost allocation tag key
          * @type {string || null}
          */
         this.TagKeyStr = null;
@@ -13179,7 +13179,7 @@ class AnalyseConditions extends  AbstractModel {
         this.ProjectIds = null;
 
         /**
-         * Billing mode prePay (monthly subscription)/postPay (pay-as-you-go billing)
+         * Billing mode prePay (yearly/monthly subscription)/postPay (pay-as-you-go billing)
          * @type {string || null}
          */
         this.PayModes = null;
@@ -13191,7 +13191,7 @@ class AnalyseConditions extends  AbstractModel {
         this.ActionTypes = null;
 
         /**
-         * Cost allocation tag key
+         * Cost allocation tag key and value
          * @type {string || null}
          */
         this.Tags = null;

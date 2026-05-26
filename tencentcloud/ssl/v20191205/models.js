@@ -25,43 +25,31 @@ class DescribeCertificateBindResourceTaskDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Task id, which can be used to query the result of binding cloud resources according to the task id obtained from createcertificatebindresourcesynctask.
+         * <p>Task ID. Query the result of binding cloud resources based on the task ID obtained from CreateCertificateBindResourceSyncTask.</p>
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * The number of cloud resources displayed on each page. The default value is 10, and the maximum value is 100.
+         * <p>Number of items per page, default 10, maximum value 100; total pages is the total number of instances in the resource region, that is, page 1 will pull the number of instances under each Tencent Cloud resource region up to the Limit</p>
          * @type {string || null}
          */
         this.Limit = null;
 
         /**
-         * Current offset, default is 0.
+         * <p>Offset, defaults to 0</p>
          * @type {string || null}
          */
         this.Offset = null;
 
         /**
-         * Result detail of queried resource type. if not provided, all will be queried. valid values include:.
-- clb.
-- cdn.
-- ddos.
-- live.
-- vod.
-- waf.
-- apigateway.
-- teo.
-- tke.
-- cos.
-- tse.
-- tcb.
+         * <p>Query result details of the resource type. Query all if not specified. Supported values: - clb- cdn- ddos- live- vod- waf- apigateway- teo- tke- cos- tse- tcb</p>
          * @type {Array.<string> || null}
          */
         this.ResourceTypes = null;
 
         /**
-         * Data of querying region list. clb, tke, waf, api gateway, tcb, cos, and tse support region query, while other resource types do not support.
+         * <p>Query the data of region list. clb, tke, waf, API Gateway, tcb, cos, and tse support query region. Other resource types are unsupported.</p>
          * @type {Array.<string> || null}
          */
         this.Regions = null;
@@ -94,35 +82,30 @@ class GatewayCertificate extends  AbstractModel {
 
         /**
          * Gateway certificate ID
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Gateway certificate information
-Note: This field may return null, indicating that no valid value can be obtained.
+         * gateway certificate name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Bound domain name
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Bind Domain Name
          * @type {Array.<string> || null}
          */
         this.BindDomains = null;
 
         /**
          * Certificate source
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.CertSource = null;
 
         /**
-         * SSL certificate ID that is currently bound
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Currently bound SSL certificate ID
          * @type {string || null}
          */
         this.CertId = null;
@@ -457,46 +440,40 @@ class TCBAccessInstance extends  AbstractModel {
         super();
 
         /**
-         * The domain.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Domain
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * The status.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Status.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * The unified domain status.
+         * Unified domain status
 
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.UnionStatus = null;
 
         /**
-         * Whether the domain is preempted. A preempted domain is one that is already associated with another environment. It must be disassociated or re-associated first.
+         * Whether it is preempted. Preemption means the domain name is bound to another environment and must be unbound or rebound.
 
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsPreempted = null;
 
         /**
-         * Whether the domain is added to the ICP blocklist. Valid values: `0` for no and `1` for yes.
+         * icp blocklist ban status. 0 - Not blocked. 1 - Blocked.
 
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ICPStatus = null;
 
         /**
-         * The ID of the associated certificate.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Bound Certificate ID
          * @type {string || null}
          */
         this.OldCertificateId = null;
@@ -1762,29 +1739,25 @@ class TCBHostInstance extends  AbstractModel {
         super();
 
         /**
-         * The domain.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Domain
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * The status.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Status.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The resolution status.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Parsing status
          * @type {string || null}
          */
         this.DNSStatus = null;
 
         /**
-         * The ID of the associated certificate.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Bound Certificate ID
          * @type {string || null}
          */
         this.OldCertificateId = null;
@@ -1959,6 +1932,84 @@ class DescribeCompaniesResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Deployment record information
+ * @class
+ */
+class UpdateRecordInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Record ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * New certificate ID
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * Old certificate ID
+         * @type {string || null}
+         */
+        this.OldCertId = null;
+
+        /**
+         * Deployment resource type list
+         * @type {Array.<string> || null}
+         */
+        this.ResourceTypes = null;
+
+        /**
+         * Deployment region list
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Regions = null;
+
+        /**
+         * Deployment status
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Deployment time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last update time
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.OldCertId = 'OldCertId' in params ? params.OldCertId : null;
+        this.ResourceTypes = 'ResourceTypes' in params ? params.ResourceTypes : null;
+        this.Regions = 'Regions' in params ? params.Regions : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -2600,6 +2651,63 @@ class DescribeCSRRequest extends  AbstractModel {
 }
 
 /**
+ * MQTT instance details - Asynchronously associate cloud resources data structure
+ * @class
+ */
+class MQTTInstanceList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Instance details
+         * @type {Array.<MQTTInstanceDetail> || null}
+         */
+        this.InstanceList = null;
+
+        /**
+         * Total count in the region
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Error message
+         * @type {string || null}
+         */
+        this.Error = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new MQTTInstanceDetail();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Error = 'Error' in params ? params.Error : null;
+
+    }
+}
+
+/**
  * ModifyCertificateResubmit request structure.
  * @class
  */
@@ -2721,6 +2829,41 @@ class UploadUpdateCertificateRecordRollbackRequest extends  AbstractModel {
             return;
         }
         this.DeployRecordId = 'DeployRecordId' in params ? params.DeployRecordId : null;
+
+    }
+}
+
+/**
+ * ModifyCSR response structure.
+ * @class
+ */
+class ModifyCSRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The CSR ID.
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3014,6 +3157,69 @@ class BindResourceResult extends  AbstractModel {
 }
 
 /**
+ * TDMQ - Rabbit instance details
+ * @class
+ */
+class TDMQInstanceDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Instance status
+         * @type {string || null}
+         */
+        this.InstanceStatus = null;
+
+        /**
+         * Server certificate ID.
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * CA certificate ID
+         * @type {string || null}
+         */
+        this.CaCertId = null;
+
+        /**
+         * Mismatched domain name list
+         * @type {Array.<string> || null}
+         */
+        this.NoMatchDomains = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.CaCertId = 'CaCertId' in params ? params.CaCertId : null;
+        this.NoMatchDomains = 'NoMatchDomains' in params ? params.NoMatchDomains : null;
+
+    }
+}
+
+/**
  * ApplyCertificate response structure.
  * @class
  */
@@ -3044,6 +3250,60 @@ class ApplyCertificateResponse extends  AbstractModel {
         }
         this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Update the progress of asynchronous task.
+ * @class
+ */
+class UpdateSyncProgressRegion extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource type.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Total number
+.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Quantity of executions completed.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OffsetCount = null;
+
+        /**
+         * Asynchronous update progress status: 0, pending, 1 processed, 3 processing.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.OffsetCount = 'OffsetCount' in params ? params.OffsetCount : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -3356,6 +3616,12 @@ class ClbInstanceDetail extends  AbstractModel {
          */
         this.Listeners = null;
 
+        /**
+         * CLB type. 0 classic CLB; 1 application CLB.
+         * @type {number || null}
+         */
+        this.Forward = null;
+
     }
 
     /**
@@ -3376,6 +3642,7 @@ class ClbInstanceDetail extends  AbstractModel {
                 this.Listeners.push(obj);
             }
         }
+        this.Forward = 'Forward' in params ? params.Forward : null;
 
     }
 }
@@ -3429,6 +3696,56 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * GAAP instance details - Asynchronous associate cloud resources data structure
+ * @class
+ */
+class GAAPInstanceList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance details
+         * @type {Array.<GAAPInstanceDetail> || null}
+         */
+        this.InstanceList = null;
+
+        /**
+         * Total number.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Error message	
+         * @type {string || null}
+         */
+        this.Error = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new GAAPInstanceDetail();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Error = 'Error' in params ? params.Error : null;
 
     }
 }
@@ -4228,100 +4545,112 @@ class DescribeCertificateBindResourceTaskDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * The details of associated CLB resources.	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>clb resource detail</p>
          * @type {Array.<ClbInstanceList> || null}
          */
         this.CLB = null;
 
         /**
-         * The details of associated CDN resources.	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>cdn resource detail</p>
          * @type {Array.<CdnInstanceList> || null}
          */
         this.CDN = null;
 
         /**
-         * The details of associated WAF resources.	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>waf resource detail</p>
          * @type {Array.<WafInstanceList> || null}
          */
         this.WAF = null;
 
         /**
-         * The details of associated Anti-DDS resources.	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Associate ddos resource detail</p>
          * @type {Array.<DdosInstanceList> || null}
          */
         this.DDOS = null;
 
         /**
-         * The details of associated LIVE resources.	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Associate live resource detail</p>
          * @type {Array.<LiveInstanceList> || null}
          */
         this.LIVE = null;
 
         /**
-         * The details of associated VOD resources.	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>vod resource detail</p>
          * @type {Array.<VODInstanceList> || null}
          */
         this.VOD = null;
 
         /**
-         * The details of associated TKE resources.	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>tke resource detail</p>
          * @type {Array.<TkeInstanceList> || null}
          */
         this.TKE = null;
 
         /**
-         * The details of associated APIGATEWAY resources.	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>apigateway resource detail</p>
          * @type {Array.<ApiGatewayInstanceList> || null}
          */
         this.APIGATEWAY = null;
 
         /**
-         * The details of associated TCB resources.	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>tcb resource detail</p>
          * @type {Array.<TCBInstanceList> || null}
          */
         this.TCB = null;
 
         /**
-         * The details of associated TEO resources.	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Associate teo resource detail</p>
          * @type {Array.<TeoInstanceList> || null}
          */
         this.TEO = null;
 
         /**
-         * The status of the async task. Valid values: `0` for querying, `1` for successful, and `2` for abnormal. If the status is `1`, check the result of `BindResourceResult` ; if the status is `2`, check the `error` .
+         * <p>Associate cloud resources async query result: 0 indicates querying, 1 indicates success. 2 indicates an exception. If the status is 1, view the BindResourceResult. If the status is 2, view the Error reason.</p>
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * The cache time of the current result.
+         * <p>Current result cache time</p>
          * @type {string || null}
          */
         this.CacheTime = null;
 
         /**
-         * Associated TSE resource details
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Associate tse resource detail</p>
          * @type {Array.<TSEInstanceList> || null}
          */
         this.TSE = null;
 
         /**
-         * Information of associated cos resource.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Associated COS resource detail</p>
          * @type {Array.<COSInstanceList> || null}
          */
         this.COS = null;
+
+        /**
+         * <p>Associated TDMQ - Rabbit resource detail</p>
+         * @type {Array.<TDMQInstanceList> || null}
+         */
+        this.TDMQ = null;
+
+        /**
+         * <p>Associated MQTT resource detail</p>
+         * @type {Array.<MQTTInstanceList> || null}
+         */
+        this.MQTT = null;
+
+        /**
+         * <p>Associated GAAP resource detail</p>
+         * @type {Array.<GAAPInstanceList> || null}
+         */
+        this.GAAP = null;
+
+        /**
+         * <p>Associated SCF resource detail</p>
+         * @type {Array.<SCFInstanceList> || null}
+         */
+        this.SCF = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4448,6 +4777,42 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.COS.push(obj);
             }
         }
+
+        if (params.TDMQ) {
+            this.TDMQ = new Array();
+            for (let z in params.TDMQ) {
+                let obj = new TDMQInstanceList();
+                obj.deserialize(params.TDMQ[z]);
+                this.TDMQ.push(obj);
+            }
+        }
+
+        if (params.MQTT) {
+            this.MQTT = new Array();
+            for (let z in params.MQTT) {
+                let obj = new MQTTInstanceList();
+                obj.deserialize(params.MQTT[z]);
+                this.MQTT.push(obj);
+            }
+        }
+
+        if (params.GAAP) {
+            this.GAAP = new Array();
+            for (let z in params.GAAP) {
+                let obj = new GAAPInstanceList();
+                obj.deserialize(params.GAAP[z]);
+                this.GAAP.push(obj);
+            }
+        }
+
+        if (params.SCF) {
+            this.SCF = new Array();
+            for (let z in params.SCF) {
+                let obj = new SCFInstanceList();
+                obj.deserialize(params.SCF[z]);
+                this.SCF.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4531,24 +4896,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyCSR response structure.
+ * CheckCertificateDomainVerification request structure.
  * @class
  */
-class ModifyCSRResponse extends  AbstractModel {
+class CheckCertificateDomainVerificationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The CSR ID.
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Certificate ID. 
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CertificateId = null;
 
     }
 
@@ -4559,8 +4918,7 @@ class ModifyCSRResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
 
     }
 }
@@ -5009,177 +5367,36 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * SubmitCertificateInformation request structure.
+ * SCF instance details
  * @class
  */
-class SubmitCertificateInformationRequest extends  AbstractModel {
+class SCFInstanceDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Paid certificate id of materials to be submitted.
+         * Certificate ID
          * @type {string || null}
          */
         this.CertificateId = null;
 
         /**
-         * This field is required. Generation method of CSR, valid values are:
-online: tencent cloud generates the CSR and private key based on the submitted parameter information and stores them encryptedly.
-parse: generate the CSR and private key by itself, and apply for a certificate by uploading the CSR.
+         * Protocol
          * @type {string || null}
          */
-        this.CsrType = null;
+        this.Protocol = null;
 
         /**
-         * The content of the uploaded csr.
-If CsrType is parse, this field is required.
+         * Domain
          * @type {string || null}
          */
-        this.CsrContent = null;
+        this.Domain = null;
 
         /**
-         * The common name bound to the certificate. if a CSR is uploaded, the domain name must be consistent with the common name resolved from the CSR.
+         * Region.
          * @type {string || null}
          */
-        this.CertificateDomain = null;
-
-        /**
-         * Other domain names bound to the certificate. not required for single domain and wildcard domain certificates. required for multiple domain names and multiple wildcard domain names.
-         * @type {Array.<string> || null}
-         */
-        this.DomainList = null;
-
-        /**
-         * Private key password, which is currently only used for the password when generating jks and pfx format certificates; other formats of private key certificates are not encrypted.	
-         * @type {string || null}
-         */
-        this.KeyPassword = null;
-
-        /**
-         * This field is required. Company name.
-         * @type {string || null}
-         */
-        this.OrganizationName = null;
-
-        /**
-         * This field is required.  Department name.
-         * @type {string || null}
-         */
-        this.OrganizationDivision = null;
-
-        /**
-         * This field is required. Company's detailed address.
-         * @type {string || null}
-         */
-        this.OrganizationAddress = null;
-
-        /**
-         * This field is required.Country name such as CN.
-         * @type {string || null}
-         */
-        this.OrganizationCountry = null;
-
-        /**
-         * This field is required, which specifies the city where the company is located.
-         * @type {string || null}
-         */
-        this.OrganizationCity = null;
-
-        /**
-         * This field is required, specifying the province where the company is located.
-         * @type {string || null}
-         */
-        this.OrganizationRegion = null;
-
-        /**
-         * Postal code of the organization
-         * @type {string || null}
-         */
-        this.PostalCode = null;
-
-        /**
-         * This field is required, the company's fixed-line phone area code.
-         * @type {string || null}
-         */
-        this.PhoneAreaCode = null;
-
-        /**
-         * This field is required, the company's landline number.
-         * @type {string || null}
-         */
-        this.PhoneNumber = null;
-
-        /**
-         * Certificate validation method. Validation types: DNS_AUTO = Automatic DNS validation (only supported for domains resolved by Tencent Cloud DNS with a normal resolution status), DNS = Manual DNS validation, FILE = File validation.
-         * @type {string || null}
-         */
-        this.VerifyType = null;
-
-        /**
-         * This field is required, manager name.
-         * @type {string || null}
-         */
-        this.AdminFirstName = null;
-
-        /**
-         * This field is required, the manager's surname.
-         * @type {string || null}
-         */
-        this.AdminLastName = null;
-
-        /**
-         * This field is required, the manager's mobile phone number.
-         * @type {string || null}
-         */
-        this.AdminPhoneNum = null;
-
-        /**
-         * This field is required, the manager's email address.
-         * @type {string || null}
-         */
-        this.AdminEmail = null;
-
-        /**
-         * This field is required, the manager position.
-         * @type {string || null}
-         */
-        this.AdminPosition = null;
-
-        /**
-         * This field is required, the contact person name.
-         * @type {string || null}
-         */
-        this.ContactFirstName = null;
-
-        /**
-         * This field is required, the contact person's surname.
-         * @type {string || null}
-         */
-        this.ContactLastName = null;
-
-        /**
-         * This field is required, the contact person's email address.
-         * @type {string || null}
-         */
-        this.ContactEmail = null;
-
-        /**
-         * This field is required, the contact person's mobile phone number.
-         * @type {string || null}
-         */
-        this.ContactNumber = null;
-
-        /**
-         * This field is required, the contact person position.
-         * @type {string || null}
-         */
-        this.ContactPosition = null;
-
-        /**
-         * Indicates whether it is a dv certificate. default value is false.
-         * @type {boolean || null}
-         */
-        this.IsDV = null;
+        this.Region = null;
 
     }
 
@@ -5191,32 +5408,9 @@ If CsrType is parse, this field is required.
             return;
         }
         this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
-        this.CsrType = 'CsrType' in params ? params.CsrType : null;
-        this.CsrContent = 'CsrContent' in params ? params.CsrContent : null;
-        this.CertificateDomain = 'CertificateDomain' in params ? params.CertificateDomain : null;
-        this.DomainList = 'DomainList' in params ? params.DomainList : null;
-        this.KeyPassword = 'KeyPassword' in params ? params.KeyPassword : null;
-        this.OrganizationName = 'OrganizationName' in params ? params.OrganizationName : null;
-        this.OrganizationDivision = 'OrganizationDivision' in params ? params.OrganizationDivision : null;
-        this.OrganizationAddress = 'OrganizationAddress' in params ? params.OrganizationAddress : null;
-        this.OrganizationCountry = 'OrganizationCountry' in params ? params.OrganizationCountry : null;
-        this.OrganizationCity = 'OrganizationCity' in params ? params.OrganizationCity : null;
-        this.OrganizationRegion = 'OrganizationRegion' in params ? params.OrganizationRegion : null;
-        this.PostalCode = 'PostalCode' in params ? params.PostalCode : null;
-        this.PhoneAreaCode = 'PhoneAreaCode' in params ? params.PhoneAreaCode : null;
-        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
-        this.VerifyType = 'VerifyType' in params ? params.VerifyType : null;
-        this.AdminFirstName = 'AdminFirstName' in params ? params.AdminFirstName : null;
-        this.AdminLastName = 'AdminLastName' in params ? params.AdminLastName : null;
-        this.AdminPhoneNum = 'AdminPhoneNum' in params ? params.AdminPhoneNum : null;
-        this.AdminEmail = 'AdminEmail' in params ? params.AdminEmail : null;
-        this.AdminPosition = 'AdminPosition' in params ? params.AdminPosition : null;
-        this.ContactFirstName = 'ContactFirstName' in params ? params.ContactFirstName : null;
-        this.ContactLastName = 'ContactLastName' in params ? params.ContactLastName : null;
-        this.ContactEmail = 'ContactEmail' in params ? params.ContactEmail : null;
-        this.ContactNumber = 'ContactNumber' in params ? params.ContactNumber : null;
-        this.ContactPosition = 'ContactPosition' in params ? params.ContactPosition : null;
-        this.IsDV = 'IsDV' in params ? params.IsDV : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }
@@ -5230,29 +5424,25 @@ class TCBEnvironment extends  AbstractModel {
         super();
 
         /**
-         * The unique ID.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Unique ID
          * @type {string || null}
          */
         this.ID = null;
 
         /**
-         * The source.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Source.
          * @type {string || null}
          */
         this.Source = null;
 
         /**
-         * The name.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * The status.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Status.
          * @type {string || null}
          */
         this.Status = null;
@@ -5589,6 +5779,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Status = null;
 
+        /**
+         * Certificate encryption algorithm
+         * @type {string || null}
+         */
+        this.Algorithm = null;
+
     }
 
     /**
@@ -5602,6 +5798,42 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CertId = 'CertId' in params ? params.CertId : null;
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
+
+    }
+}
+
+/**
+ * RevokeCertificate request structure.
+ * @class
+ */
+class RevokeCertificateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Certificate ID.
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * Reason to revoke certificate.
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
 
     }
 }
@@ -6329,6 +6561,50 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CheckCertificateDomainVerification response structure.
+ * @class
+ */
+class CheckCertificateDomainVerificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain validation result list. If the cert is bound to multiple domain names, the return array contains multiple items.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DomainValidationResult> || null}
+         */
+        this.VerificationResults = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VerificationResults) {
+            this.VerificationResults = new Array();
+            for (let z in params.VerificationResults) {
+                let obj = new DomainValidationResult();
+                obj.deserialize(params.VerificationResults[z]);
+                this.VerificationResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UploadUpdateCertificateInstance response structure.
  * @class
  */
@@ -6465,6 +6741,98 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * RevokeCertificate response structure.
+ * @class
+ */
+class RevokeCertificateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Revoke certificate domain name verification info.
+         * @type {Array.<RevokeDomainValidateAuths> || null}
+         */
+        this.RevokeDomainValidateAuths = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RevokeDomainValidateAuths) {
+            this.RevokeDomainValidateAuths = new Array();
+            for (let z in params.RevokeDomainValidateAuths) {
+                let obj = new RevokeDomainValidateAuths();
+                obj.deserialize(params.RevokeDomainValidateAuths[z]);
+                this.RevokeDomainValidateAuths.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Revoke certificate domain name verification info.
+ * @class
+ */
+class RevokeDomainValidateAuths extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DV authentication value path.
+         * @type {string || null}
+         */
+        this.DomainValidateAuthPath = null;
+
+        /**
+         * DV authentication KEY.
+         * @type {string || null}
+         */
+        this.DomainValidateAuthKey = null;
+
+        /**
+         * DV authentication value.
+         * @type {string || null}
+         */
+        this.DomainValidateAuthValue = null;
+
+        /**
+         * DV authentication domain name.
+         * @type {string || null}
+         */
+        this.DomainValidateAuthDomain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainValidateAuthPath = 'DomainValidateAuthPath' in params ? params.DomainValidateAuthPath : null;
+        this.DomainValidateAuthKey = 'DomainValidateAuthKey' in params ? params.DomainValidateAuthKey : null;
+        this.DomainValidateAuthValue = 'DomainValidateAuthValue' in params ? params.DomainValidateAuthValue : null;
+        this.DomainValidateAuthDomain = 'DomainValidateAuthDomain' in params ? params.DomainValidateAuthDomain : null;
+
+    }
+}
+
+/**
  * CreateCSR request structure.
  * @class
  */
@@ -6545,7 +6913,7 @@ class CreateCSRRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * Tag List
+         * 
          * @type {Array.<Tags> || null}
          */
         this.Tags = null;
@@ -6781,6 +7149,69 @@ class ClbListener extends  AbstractModel {
 }
 
 /**
+ * MQTT instance details
+ * @class
+ */
+class MQTTInstanceDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Instance status
+         * @type {string || null}
+         */
+        this.InstanceStatus = null;
+
+        /**
+         * Mismatched domain name list
+         * @type {Array.<string> || null}
+         */
+        this.NoMatchDomains = null;
+
+        /**
+         * Server certificate list
+         * @type {Array.<string> || null}
+         */
+        this.ServerCertIdList = null;
+
+        /**
+         * Certificate list
+         * @type {Array.<string> || null}
+         */
+        this.CaCertIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+        this.NoMatchDomains = 'NoMatchDomains' in params ? params.NoMatchDomains : null;
+        this.ServerCertIdList = 'ServerCertIdList' in params ? params.ServerCertIdList : null;
+        this.CaCertIdList = 'CaCertIdList' in params ? params.CaCertIdList : null;
+
+    }
+}
+
+/**
  * TSE instance details
  * @class
  */
@@ -6790,21 +7221,18 @@ class TSEInstanceDetail extends  AbstractModel {
 
         /**
          * Gateway ID
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.GatewayId = null;
 
         /**
-         * Gateway name
-Note: This field may return null, indicating that no valid value can be obtained.
+         * gateway name
          * @type {string || null}
          */
         this.GatewayName = null;
 
         /**
          * Gateway certificate list
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {Array.<GatewayCertificate> || null}
          */
         this.CertificateList = null;
@@ -6958,6 +7386,56 @@ class Filter extends  AbstractModel {
         }
         this.FilterKey = 'FilterKey' in params ? params.FilterKey : null;
         this.FilterValue = 'FilterValue' in params ? params.FilterValue : null;
+
+    }
+}
+
+/**
+ * GAAP instance details
+ * @class
+ */
+class GAAPInstanceDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Listener list
+         * @type {Array.<GAAPListenerDetail> || null}
+         */
+        this.ListenerList = null;
+
+        /**
+         * Speed up the instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.ListenerList) {
+            this.ListenerList = new Array();
+            for (let z in params.ListenerList) {
+                let obj = new GAAPListenerDetail();
+                obj.deserialize(params.ListenerList[z]);
+                this.ListenerList.push(obj);
+            }
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
     }
 }
@@ -7217,15 +7695,13 @@ class TCBAccessService extends  AbstractModel {
         super();
 
         /**
-         * The list of instances.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance list
          * @type {Array.<TCBAccessInstance> || null}
          */
         this.InstanceList = null;
 
         /**
-         * The instance count.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Quantity.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -7524,41 +8000,177 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Update the progress of asynchronous task.
+ * SubmitCertificateInformation request structure.
  * @class
  */
-class UpdateSyncProgressRegion extends  AbstractModel {
+class SubmitCertificateInformationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Resource type.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Paid certificate id of materials to be submitted.
          * @type {string || null}
          */
-        this.Region = null;
+        this.CertificateId = null;
 
         /**
-         * Total number
-.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * This field is required. Generation method of CSR, valid values are:
+online: tencent cloud generates the CSR and private key based on the submitted parameter information and stores them encryptedly.
+parse: generate the CSR and private key by itself, and apply for a certificate by uploading the CSR.
+         * @type {string || null}
          */
-        this.TotalCount = null;
+        this.CsrType = null;
 
         /**
-         * Quantity of executions completed.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * The content of the uploaded csr.
+If CsrType is parse, this field is required.
+         * @type {string || null}
          */
-        this.OffsetCount = null;
+        this.CsrContent = null;
 
         /**
-         * Asynchronous update progress status: 0, pending, 1 processed, 3 processing.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * The common name bound to the certificate. if a CSR is uploaded, the domain name must be consistent with the common name resolved from the CSR.
+         * @type {string || null}
          */
-        this.Status = null;
+        this.CertificateDomain = null;
+
+        /**
+         * Other domain names bound to the certificate. not required for single domain and wildcard domain certificates. required for multiple domain names and multiple wildcard domain names.
+         * @type {Array.<string> || null}
+         */
+        this.DomainList = null;
+
+        /**
+         * Private key password, which is currently only used for the password when generating jks and pfx format certificates; other formats of private key certificates are not encrypted.	
+         * @type {string || null}
+         */
+        this.KeyPassword = null;
+
+        /**
+         * This field is required. Company name.
+         * @type {string || null}
+         */
+        this.OrganizationName = null;
+
+        /**
+         * This field is required.  Department name.
+         * @type {string || null}
+         */
+        this.OrganizationDivision = null;
+
+        /**
+         * This field is required. Company's detailed address.
+         * @type {string || null}
+         */
+        this.OrganizationAddress = null;
+
+        /**
+         * This field is required.Country name such as CN.
+         * @type {string || null}
+         */
+        this.OrganizationCountry = null;
+
+        /**
+         * This field is required, which specifies the city where the company is located.
+         * @type {string || null}
+         */
+        this.OrganizationCity = null;
+
+        /**
+         * This field is required, specifying the province where the company is located.
+         * @type {string || null}
+         */
+        this.OrganizationRegion = null;
+
+        /**
+         * Postal code of the organization
+         * @type {string || null}
+         */
+        this.PostalCode = null;
+
+        /**
+         * This field is required, the company's fixed-line phone area code.
+         * @type {string || null}
+         */
+        this.PhoneAreaCode = null;
+
+        /**
+         * This field is required, the company's landline number.
+         * @type {string || null}
+         */
+        this.PhoneNumber = null;
+
+        /**
+         * Certificate validation method. Validation types: DNS_AUTO = Automatic DNS validation (only supported for domains resolved by Tencent Cloud DNS with a normal resolution status), DNS = Manual DNS validation, FILE = File validation.
+         * @type {string || null}
+         */
+        this.VerifyType = null;
+
+        /**
+         * This field is required, manager name.
+         * @type {string || null}
+         */
+        this.AdminFirstName = null;
+
+        /**
+         * This field is required, the manager's surname.
+         * @type {string || null}
+         */
+        this.AdminLastName = null;
+
+        /**
+         * This field is required, the manager's mobile phone number.
+         * @type {string || null}
+         */
+        this.AdminPhoneNum = null;
+
+        /**
+         * This field is required, the manager's email address.
+         * @type {string || null}
+         */
+        this.AdminEmail = null;
+
+        /**
+         * This field is required, the manager position.
+         * @type {string || null}
+         */
+        this.AdminPosition = null;
+
+        /**
+         * This field is required, the contact person name.
+         * @type {string || null}
+         */
+        this.ContactFirstName = null;
+
+        /**
+         * This field is required, the contact person's surname.
+         * @type {string || null}
+         */
+        this.ContactLastName = null;
+
+        /**
+         * This field is required, the contact person's email address.
+         * @type {string || null}
+         */
+        this.ContactEmail = null;
+
+        /**
+         * This field is required, the contact person's mobile phone number.
+         * @type {string || null}
+         */
+        this.ContactNumber = null;
+
+        /**
+         * This field is required, the contact person position.
+         * @type {string || null}
+         */
+        this.ContactPosition = null;
+
+        /**
+         * Indicates whether it is a dv certificate. default value is false.
+         * @type {boolean || null}
+         */
+        this.IsDV = null;
 
     }
 
@@ -7569,10 +8181,33 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.OffsetCount = 'OffsetCount' in params ? params.OffsetCount : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.CsrType = 'CsrType' in params ? params.CsrType : null;
+        this.CsrContent = 'CsrContent' in params ? params.CsrContent : null;
+        this.CertificateDomain = 'CertificateDomain' in params ? params.CertificateDomain : null;
+        this.DomainList = 'DomainList' in params ? params.DomainList : null;
+        this.KeyPassword = 'KeyPassword' in params ? params.KeyPassword : null;
+        this.OrganizationName = 'OrganizationName' in params ? params.OrganizationName : null;
+        this.OrganizationDivision = 'OrganizationDivision' in params ? params.OrganizationDivision : null;
+        this.OrganizationAddress = 'OrganizationAddress' in params ? params.OrganizationAddress : null;
+        this.OrganizationCountry = 'OrganizationCountry' in params ? params.OrganizationCountry : null;
+        this.OrganizationCity = 'OrganizationCity' in params ? params.OrganizationCity : null;
+        this.OrganizationRegion = 'OrganizationRegion' in params ? params.OrganizationRegion : null;
+        this.PostalCode = 'PostalCode' in params ? params.PostalCode : null;
+        this.PhoneAreaCode = 'PhoneAreaCode' in params ? params.PhoneAreaCode : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.VerifyType = 'VerifyType' in params ? params.VerifyType : null;
+        this.AdminFirstName = 'AdminFirstName' in params ? params.AdminFirstName : null;
+        this.AdminLastName = 'AdminLastName' in params ? params.AdminLastName : null;
+        this.AdminPhoneNum = 'AdminPhoneNum' in params ? params.AdminPhoneNum : null;
+        this.AdminEmail = 'AdminEmail' in params ? params.AdminEmail : null;
+        this.AdminPosition = 'AdminPosition' in params ? params.AdminPosition : null;
+        this.ContactFirstName = 'ContactFirstName' in params ? params.ContactFirstName : null;
+        this.ContactLastName = 'ContactLastName' in params ? params.ContactLastName : null;
+        this.ContactEmail = 'ContactEmail' in params ? params.ContactEmail : null;
+        this.ContactNumber = 'ContactNumber' in params ? params.ContactNumber : null;
+        this.ContactPosition = 'ContactPosition' in params ? params.ContactPosition : null;
+        this.IsDV = 'IsDV' in params ? params.IsDV : null;
 
     }
 }
@@ -7624,6 +8259,63 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.Environments.push(obj);
             }
         }
+        this.Error = 'Error' in params ? params.Error : null;
+
+    }
+}
+
+/**
+ * TDMQ - Rabbit instance details - Asynchronously associate cloud resources data structure
+ * @class
+ */
+class TDMQInstanceList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Instance details
+         * @type {Array.<TDMQInstanceDetail> || null}
+         */
+        this.InstanceList = null;
+
+        /**
+         * Total count in the region
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Error message
+         * @type {string || null}
+         */
+        this.Error = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new TDMQInstanceDetail();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.Error = 'Error' in params ? params.Error : null;
 
     }
@@ -8510,61 +9202,61 @@ class CreateCertificateResponse extends  AbstractModel {
 }
 
 /**
- * Deployment record information
+ * Domain validation result of the certificate
  * @class
  */
-class UpdateRecordInfo extends  AbstractModel {
+class DomainValidationResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Record ID
+         * Domain names bound to the certificate.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Domain name validation type. Value is DNS, FILE, DNS_AUTO, DNS_PROXY, or FILE_PROXY.
+         * @type {string || null}
+         */
+        this.VerifyType = null;
+
+        /**
+         * Tencent Cloud detection result, Value: 1 (verified); -1 (rate limited or txt record not found); -2 (txt record not match); -3 (ns record not found); -4 (file not found); -5 (file not match); -6 (cname record not found); -7 (cname record not match); -8 (ns record not found); -9 (file not found); -10 (file not match).
+
          * @type {number || null}
          */
-        this.Id = null;
+        this.LocalCheck = null;
 
         /**
-         * New certificate ID
-         * @type {string || null}
-         */
-        this.CertId = null;
-
-        /**
-         * Old certificate ID
-         * @type {string || null}
-         */
-        this.OldCertId = null;
-
-        /**
-         * Deployment resource type list
-         * @type {Array.<string> || null}
-         */
-        this.ResourceTypes = null;
-
-        /**
-         * Deployment region list
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.Regions = null;
-
-        /**
-         * Deployment status
+         * CA check result. Value: -1 (detection failed); 2 (detection passed).
          * @type {number || null}
          */
-        this.Status = null;
+        this.CaCheck = null;
 
         /**
-         * Deployment time
+         * Check failure reasons. Description of the LocalCheck status.
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.LocalCheckFailReason = null;
 
         /**
-         * Last update time
-         * @type {string || null}
+         * Detected value.
+         * @type {Array.<string> || null}
          */
-        this.UpdateTime = null;
+        this.CheckValue = null;
+
+        /**
+         * Whether the request is rate-limited. Valid values: false (not rate-limited); true (rate-limited).
+         * @type {boolean || null}
+         */
+        this.Frequently = null;
+
+        /**
+         * Whether the certificate has been issued. Value: false (not issued); true (issued).
+         * @type {boolean || null}
+         */
+        this.Issued = null;
 
     }
 
@@ -8575,14 +9267,14 @@ Note: This field may return null, indicating that no valid value can be obtained
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.CertId = 'CertId' in params ? params.CertId : null;
-        this.OldCertId = 'OldCertId' in params ? params.OldCertId : null;
-        this.ResourceTypes = 'ResourceTypes' in params ? params.ResourceTypes : null;
-        this.Regions = 'Regions' in params ? params.Regions : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.VerifyType = 'VerifyType' in params ? params.VerifyType : null;
+        this.LocalCheck = 'LocalCheck' in params ? params.LocalCheck : null;
+        this.CaCheck = 'CaCheck' in params ? params.CaCheck : null;
+        this.LocalCheckFailReason = 'LocalCheckFailReason' in params ? params.LocalCheckFailReason : null;
+        this.CheckValue = 'CheckValue' in params ? params.CheckValue : null;
+        this.Frequently = 'Frequently' in params ? params.Frequently : null;
+        this.Issued = 'Issued' in params ? params.Issued : null;
 
     }
 }
@@ -10268,15 +10960,13 @@ class TCBHostService extends  AbstractModel {
         super();
 
         /**
-         * The list of instances.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance list
          * @type {Array.<TCBHostInstance> || null}
          */
         this.InstanceList = null;
 
         /**
-         * The instance count.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Quantity.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -10342,6 +11032,63 @@ class DescribeHostUploadUpdateRecordDetailRequest extends  AbstractModel {
         this.DeployRecordId = 'DeployRecordId' in params ? params.DeployRecordId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * SCF Instance Details - Asynchronous Associate Cloud Resources Data Structure
+ * @class
+ */
+class SCFInstanceList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Region.</p>
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * <p>SCF instance details</p>
+         * @type {Array.<SCFInstanceDetail> || null}
+         */
+        this.InstanceList = null;
+
+        /**
+         * <p>Error message</p>
+         * @type {string || null}
+         */
+        this.Error = null;
+
+        /**
+         * <p>Total count in the region</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new SCFInstanceDetail();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
+        this.Error = 'Error' in params ? params.Error : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
     }
 }
@@ -10483,6 +11230,69 @@ class CancelAuditCertificateResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GAAP listener details
+ * @class
+ */
+class GAAPListenerDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Listener status
+         * @type {string || null}
+         */
+        this.ListenerStatus = null;
+
+        /**
+         * listener ID
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * listener name
+         * @type {string || null}
+         */
+        this.ListenerName = null;
+
+        /**
+         * Mismatched domain name list
+         * @type {Array.<string> || null}
+         */
+        this.NoMatchDomains = null;
+
+        /**
+         * Certificate list associated with CVM instances	
+         * @type {Array.<string> || null}
+         */
+        this.CertIdList = null;
+
+        /**
+         * Listener protocol
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ListenerStatus = 'ListenerStatus' in params ? params.ListenerStatus : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
+        this.NoMatchDomains = 'NoMatchDomains' in params ? params.NoMatchDomains : null;
+        this.CertIdList = 'CertIdList' in params ? params.CertIdList : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
 
     }
 }
@@ -10699,6 +11509,7 @@ module.exports = {
     DescribeManagersResponse: DescribeManagersResponse,
     COSInstanceList: COSInstanceList,
     DescribeCompaniesResponse: DescribeCompaniesResponse,
+    UpdateRecordInfo: UpdateRecordInfo,
     DvAuths: DvAuths,
     ModifyCertificateAliasRequest: ModifyCertificateAliasRequest,
     BatchDeleteCSRRequest: BatchDeleteCSRRequest,
@@ -10712,13 +11523,17 @@ module.exports = {
     DescribeCSRSetResponse: DescribeCSRSetResponse,
     UpdateRecordDetails: UpdateRecordDetails,
     DescribeCSRRequest: DescribeCSRRequest,
+    MQTTInstanceList: MQTTInstanceList,
     ModifyCertificateResubmitRequest: ModifyCertificateResubmitRequest,
     SupportDownloadType: SupportDownloadType,
     UploadUpdateCertificateRecordRollbackRequest: UploadUpdateCertificateRecordRollbackRequest,
+    ModifyCSRResponse: ModifyCSRResponse,
     DescribeCertificateBindResourceTaskResultRequest: DescribeCertificateBindResourceTaskResultRequest,
     UpdateRecordDetail: UpdateRecordDetail,
     BindResourceResult: BindResourceResult,
+    TDMQInstanceDetail: TDMQInstanceDetail,
     ApplyCertificateResponse: ApplyCertificateResponse,
+    UpdateSyncProgressRegion: UpdateSyncProgressRegion,
     CreateCertificateBindResourceSyncTaskRequest: CreateCertificateBindResourceSyncTaskRequest,
     CosInstanceDetail: CosInstanceDetail,
     UploadConfirmLetterResponse: UploadConfirmLetterResponse,
@@ -10727,6 +11542,7 @@ module.exports = {
     SyncTaskBindResourceResult: SyncTaskBindResourceResult,
     ClbInstanceDetail: ClbInstanceDetail,
     UpdateSyncProgress: UpdateSyncProgress,
+    GAAPInstanceList: GAAPInstanceList,
     OperationLog: OperationLog,
     VodInstanceDetail: VodInstanceDetail,
     DescribeCertificateResponse: DescribeCertificateResponse,
@@ -10737,7 +11553,7 @@ module.exports = {
     UpdateCertificateRecordRollbackResponse: UpdateCertificateRecordRollbackResponse,
     DescribeCertificateBindResourceTaskDetailResponse: DescribeCertificateBindResourceTaskDetailResponse,
     DvAuthDetail: DvAuthDetail,
-    ModifyCSRResponse: ModifyCSRResponse,
+    CheckCertificateDomainVerificationRequest: CheckCertificateDomainVerificationRequest,
     CdnInstanceList: CdnInstanceList,
     UpdateCertificateRecordRetryRequest: UpdateCertificateRecordRetryRequest,
     DdosInstanceDetail: DdosInstanceDetail,
@@ -10747,13 +11563,14 @@ module.exports = {
     CommitCertificateInformationResponse: CommitCertificateInformationResponse,
     UploadCertificateResponse: UploadCertificateResponse,
     LiveInstanceDetail: LiveInstanceDetail,
-    SubmitCertificateInformationRequest: SubmitCertificateInformationRequest,
+    SCFInstanceDetail: SCFInstanceDetail,
     TCBEnvironment: TCBEnvironment,
     WafInstanceDetail: WafInstanceDetail,
     DescribeCertificatesRequest: DescribeCertificatesRequest,
     UpdateCertificateRecordRollbackRequest: UpdateCertificateRecordRollbackRequest,
     ApiGatewayInstanceList: ApiGatewayInstanceList,
     TeoInstanceDetail: TeoInstanceDetail,
+    RevokeCertificateRequest: RevokeCertificateRequest,
     PreAuditInfo: PreAuditInfo,
     CreateCSRResponse: CreateCSRResponse,
     Certificate: Certificate,
@@ -10765,17 +11582,22 @@ module.exports = {
     ReplaceCertificateRequest: ReplaceCertificateRequest,
     CompanyInfo: CompanyInfo,
     TkeSecretDetail: TkeSecretDetail,
+    CheckCertificateDomainVerificationResponse: CheckCertificateDomainVerificationResponse,
     UploadUpdateCertificateInstanceResponse: UploadUpdateCertificateInstanceResponse,
     Tags: Tags,
     DeleteCertificateResponse: DeleteCertificateResponse,
+    RevokeCertificateResponse: RevokeCertificateResponse,
+    RevokeDomainValidateAuths: RevokeDomainValidateAuths,
     CreateCSRRequest: CreateCSRRequest,
     DeployRecord: DeployRecord,
     UploadUpdateCertificateRecordRetryResponse: UploadUpdateCertificateRecordRetryResponse,
     ClbListener: ClbListener,
+    MQTTInstanceDetail: MQTTInstanceDetail,
     TSEInstanceDetail: TSEInstanceDetail,
     WafInstanceList: WafInstanceList,
     ModifyCertificatesExpiringNotificationSwitchRequest: ModifyCertificatesExpiringNotificationSwitchRequest,
     Filter: Filter,
+    GAAPInstanceDetail: GAAPInstanceDetail,
     DescribeHostUpdateRecordDetailResponse: DescribeHostUpdateRecordDetailResponse,
     UploadUpdateCertificateRecordRetryRequest: UploadUpdateCertificateRecordRetryRequest,
     DescribeHostUpdateRecordRequest: DescribeHostUpdateRecordRequest,
@@ -10784,8 +11606,9 @@ module.exports = {
     TCBAccessService: TCBAccessService,
     DescribeCSRSetRequest: DescribeCSRSetRequest,
     SubmittedData: SubmittedData,
-    UpdateSyncProgressRegion: UpdateSyncProgressRegion,
+    SubmitCertificateInformationRequest: SubmitCertificateInformationRequest,
     TCBInstanceList: TCBInstanceList,
+    TDMQInstanceList: TDMQInstanceList,
     TkeIngressDetail: TkeIngressDetail,
     TkeInstanceList: TkeInstanceList,
     ApiGatewayInstanceDetail: ApiGatewayInstanceDetail,
@@ -10804,7 +11627,7 @@ module.exports = {
     ApplyCertificateRequest: ApplyCertificateRequest,
     DescribeHostUploadUpdateRecordRequest: DescribeHostUploadUpdateRecordRequest,
     CreateCertificateResponse: CreateCertificateResponse,
-    UpdateRecordInfo: UpdateRecordInfo,
+    DomainValidationResult: DomainValidationResult,
     HostingConfig: HostingConfig,
     DescribeCertificateDetailResponse: DescribeCertificateDetailResponse,
     DescribeCertificateBindResourceTaskResultResponse: DescribeCertificateBindResourceTaskResultResponse,
@@ -10824,9 +11647,11 @@ module.exports = {
     CertificateOrderSubmitResponse: CertificateOrderSubmitResponse,
     TCBHostService: TCBHostService,
     DescribeHostUploadUpdateRecordDetailRequest: DescribeHostUploadUpdateRecordDetailRequest,
+    SCFInstanceList: SCFInstanceList,
     DescribeCompaniesRequest: DescribeCompaniesRequest,
     ManagerStatusInfo: ManagerStatusInfo,
     CancelAuditCertificateResponse: CancelAuditCertificateResponse,
+    GAAPListenerDetail: GAAPListenerDetail,
     DescribeManagersRequest: DescribeManagersRequest,
     TSEInstanceList: TSEInstanceList,
     VODInstanceList: VODInstanceList,

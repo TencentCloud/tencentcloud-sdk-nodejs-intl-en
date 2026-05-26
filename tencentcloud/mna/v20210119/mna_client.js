@@ -65,11 +65,14 @@ const DeleteDeviceRequest = models.DeleteDeviceRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const CreateEncryptedKeyResponse = models.CreateEncryptedKeyResponse;
 const UpdateL3SwitchResponse = models.UpdateL3SwitchResponse;
+const DescribeAccessRegionsResponse = models.DescribeAccessRegionsResponse;
 const GetL3ConnListResponse = models.GetL3ConnListResponse;
 const GroupInfo = models.GroupInfo;
 const AddApplicationResponse = models.AddApplicationResponse;
 const ModifyPackageRenewFlagResponse = models.ModifyPackageRenewFlagResponse;
+const ModifyDeviceAccessRegionsResponse = models.ModifyDeviceAccessRegionsResponse;
 const GetDestIPByNameResponse = models.GetDestIPByNameResponse;
+const DescribeAccessRegionsRequest = models.DescribeAccessRegionsRequest;
 const VendorHardware = models.VendorHardware;
 const GetDeviceRequest = models.GetDeviceRequest;
 const ActivateHardwareResponse = models.ActivateHardwareResponse;
@@ -82,6 +85,7 @@ const GetStatisticDataByNameRequest = models.GetStatisticDataByNameRequest;
 const SetNotifyUrlRequest = models.SetNotifyUrlRequest;
 const GetDevicePayModeRequest = models.GetDevicePayModeRequest;
 const DeleteApplicationRequest = models.DeleteApplicationRequest;
+const ModifyDeviceAccessRegionsRequest = models.ModifyDeviceAccessRegionsRequest;
 const SlotNetInfo = models.SlotNetInfo;
 const DeviceNetInfo = models.DeviceNetInfo;
 const NetDetails = models.NetDetails;
@@ -116,6 +120,7 @@ const GetGroupListResponse = models.GetGroupListResponse;
 const UpdateApplicationInfoResponse = models.UpdateApplicationInfoResponse;
 const OrderFlowPackageResponse = models.OrderFlowPackageResponse;
 const UpdateDeviceResponse = models.UpdateDeviceResponse;
+const RegionInfo = models.RegionInfo;
 const L3ConnInfo = models.L3ConnInfo;
 const ActivateHardwareRequest = models.ActivateHardwareRequest;
 const GetMonitorDataByNameResponse = models.GetMonitorDataByNameResponse;
@@ -161,6 +166,17 @@ class MnaClient extends AbstractClient {
     SetNotifyUrl(req, cb) {
         let resp = new SetNotifyUrlResponse();
         this.request("SetNotifyUrl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify device connectivity regions.
+     * @param {ModifyDeviceAccessRegionsRequest} req
+     * @param {function(string, ModifyDeviceAccessRegionsResponse):void} cb
+     * @public
+     */
+    ModifyDeviceAccessRegions(req, cb) {
+        let resp = new ModifyDeviceAccessRegionsResponse();
+        this.request("ModifyDeviceAccessRegions", req, resp, cb);
     }
 
     /**
@@ -337,6 +353,17 @@ class MnaClient extends AbstractClient {
     GetDestIPByName(req, cb) {
         let resp = new GetDestIPByNameResponse();
         this.request("GetDestIPByName", req, resp, cb);
+    }
+
+    /**
+     * Query the access region list.
+     * @param {DescribeAccessRegionsRequest} req
+     * @param {function(string, DescribeAccessRegionsResponse):void} cb
+     * @public
+     */
+    DescribeAccessRegions(req, cb) {
+        let resp = new DescribeAccessRegionsResponse();
+        this.request("DescribeAccessRegions", req, resp, cb);
     }
 
     /**

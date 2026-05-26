@@ -437,80 +437,24 @@ class CreateAigcVideoRedrawTaskRequest extends  AbstractModel {
 }
 
 /**
- * ModifyWatermarkTemplate request structure.
+ * Image encoding format parameters.
  * @class
  */
-class ModifyWatermarkTemplateRequest extends  AbstractModel {
+class ImageSceneAigcEncodeConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique identifier of the watermark template.
+         * Image format. Valid values: JPEG and PNG. Defaults to the original image format. Animation is not supported.
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Relative image quality. Value ranges from 1 to 100. The numeric value is based on the original image quality and defaults to the original image quality.
          * @type {number || null}
          */
-        this.Definition = null;
-
-        /**
-         * <b>On-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created).</b>
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
-         * Watermark template name. The length cannot exceed 64 characters.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Template description, with a length limit of 256 characters.
-         * @type {string || null}
-         */
-        this.Comment = null;
-
-        /**
-         * Origin position. Valid values:
-<li>TopLeft: indicates that the coordinate origin is at the top left corner of the video image and the watermark origin is at the top left corner of the image or text.</li>
-<li>TopRight: indicates that the coordinate origin is at the top right corner of the video image and the watermark origin is at the top right corner of the image or text.</li>
-<li>BottomLeft: indicates that the coordinate origin is at the bottom left corner of the video image and the watermark origin is at the bottom left corner of the image or text.</li>
-<li>BottomRight: indicates that the coordinate origin is at the bottom right corner of the video image and the watermark origin is at the bottom right corner of the image or text.</li>
-         * @type {string || null}
-         */
-        this.CoordinateOrigin = null;
-
-        /**
-         * The horizontal position of the watermark origin from the origin of coordinates of the video image. Support two formats: % and px.
-<li>If a string ends with %, it indicates that the `XPos` of a watermark is a specified percentage of a video's width. For example, `10%` means that `XPos` is 10% of a video's width.</li>
-<li>If a string ends with px, it means the watermark XPos is specified in pixels, for example, 100px means the XPos is 100 pixels.</li>
-         * @type {string || null}
-         */
-        this.XPos = null;
-
-        /**
-         * Vertical position of the watermark origin from the origin of coordinates of the video image. Support two formats: % and px.
-<li>If a string ends with %, it indicates that the `YPos` of a watermark is a specified percentage of a video's height. For example, `10%` means that `YPos` is 10% of a video's height.</li>
-<li>If a string ends with px, it means the watermark YPos is specified in pixels, for example, 100px means YPos is 100 pixels.</li>
-         * @type {string || null}
-         */
-        this.YPos = null;
-
-        /**
-         * Image watermark template. This field is only applicable to image watermark templates.
-         * @type {ImageWatermarkInputForUpdate || null}
-         */
-        this.ImageTemplate = null;
-
-        /**
-         * Text watermarking template. This field is only applicable to text watermarking templates.
-         * @type {TextWatermarkTemplateInputForUpdate || null}
-         */
-        this.TextTemplate = null;
-
-        /**
-         * SVG watermark template. This field is only applicable to SVG watermark templates.
-         * @type {SvgWatermarkInputForUpdate || null}
-         */
-        this.SvgTemplate = null;
+        this.Quality = null;
 
     }
 
@@ -521,31 +465,8 @@ class ModifyWatermarkTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
-        this.XPos = 'XPos' in params ? params.XPos : null;
-        this.YPos = 'YPos' in params ? params.YPos : null;
-
-        if (params.ImageTemplate) {
-            let obj = new ImageWatermarkInputForUpdate();
-            obj.deserialize(params.ImageTemplate)
-            this.ImageTemplate = obj;
-        }
-
-        if (params.TextTemplate) {
-            let obj = new TextWatermarkTemplateInputForUpdate();
-            obj.deserialize(params.TextTemplate)
-            this.TextTemplate = obj;
-        }
-
-        if (params.SvgTemplate) {
-            let obj = new SvgWatermarkInputForUpdate();
-            obj.deserialize(params.SvgTemplate)
-            this.SvgTemplate = obj;
-        }
+        this.Format = 'Format' in params ? params.Format : null;
+        this.Quality = 'Quality' in params ? params.Quality : null;
 
     }
 }
@@ -4062,6 +3983,34 @@ class LLMComprehendSummary extends  AbstractModel {
 }
 
 /**
+ * DescribeDefaultDistributionConfig request structure.
+ * @class
+ */
+class DescribeDefaultDistributionConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <b>VOD [app](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who have enabled VOD since December 25, 2023, to access resources in an VOD application (whether it is a default application or a newly created application), this field must be filled in as the application ID. </b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * Result for OCR-based recognition of politically sensitive content
  * @class
  */
@@ -4550,7 +4499,7 @@ class AigcAudioReferenceAudioInfo extends  AbstractModel {
         this.Type = null;
 
         /**
-         * <p>The media file ID of the audio file, which is the globally unique identifier of this file on VOD, is assigned by the VOD backend after a successful upload. You can retrieve this field in the <a href="/document/product/266/7830">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File.</p>
+         * <p>The media file ID of the audio file, which is the globally unique identifier of this file on VOD, is assigned by the VOD backend after a successful upload. You can retrieve this field in the <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File.</p>
          * @type {string || null}
          */
         this.FileId = null;
@@ -7444,6 +7393,62 @@ class ComposeMediaRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeCLSTopics request structure.
+ * @class
+ */
+class DescribeCLSTopicsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region of the logset belonging to. Valid values: <li>ap-guangzhou: Guangzhou;</li> <li>ap-beijing: Beijing;</li> <li>ap-chengdu: Chengdu;</li> <li>ap-chongqing: Chongqing;</li> <li>ap-nanjing: Nanjing;</li> <li>ap-shanghai: Shanghai;</li> <li>ap-singapore: Singapore.</li>
+         * @type {string || null}
+         */
+        this.CLSRegion = null;
+
+        /**
+         * Log Set ID of Log Topic.
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * Log topic ID list. If left empty, means query all log topics.
+         * @type {Array.<string> || null}
+         */
+        this.TopicIds = null;
+
+        /**
+         * Pagination offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CLSRegion = 'CLSRegion' in params ? params.CLSRegion : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicIds = 'TopicIds' in params ? params.TopicIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * Video content recognition template details.
  * @class
  */
@@ -8786,37 +8791,30 @@ class DescribeDailyPlayStatFileListResponse extends  AbstractModel {
 }
 
 /**
- * Information of video splitting output files.
+ * 
  * @class
  */
-class SplitMediaOutputConfig extends  AbstractModel {
+class CLSTopicInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name of an output file. This parameter can contain up to 64 characters, and will be generated by the system if it is left empty.
+         * Log topic ID.
          * @type {string || null}
          */
-        this.MediaName = null;
+        this.TopicId = null;
 
         /**
-         * Output file format. Valid values: mp4 (default), hls.
+         * Log topic name.
          * @type {string || null}
          */
-        this.Type = null;
+        this.TopicName = null;
 
         /**
-         * Category ID, which is used to categorize the media file for management. You can use [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
-<li>Default value: 0, which means other categories.</li>
-         * @type {number || null}
-         */
-        this.ClassId = null;
-
-        /**
-         * Expiration time of an output file. After passing the expiration time, the file will be deleted. There is no expiration time set for a file by default. The time is in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+         * Log Set ID.
          * @type {string || null}
          */
-        this.ExpireTime = null;
+        this.LogsetId = null;
 
     }
 
@@ -8827,10 +8825,9 @@ class SplitMediaOutputConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MediaName = 'MediaName' in params ? params.MediaName : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.ClassId = 'ClassId' in params ? params.ClassId : null;
-        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
 
     }
 }
@@ -14827,6 +14824,56 @@ Video screenshot specification:
 }
 
 /**
+ * Information of video splitting output files.
+ * @class
+ */
+class SplitMediaOutputConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of an output file. This parameter can contain up to 64 characters, and will be generated by the system if it is left empty.
+         * @type {string || null}
+         */
+        this.MediaName = null;
+
+        /**
+         * Output file format. Valid values: mp4 (default), hls.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Category ID, which is used to categorize the media file for management. You can use [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+<li>Default value: 0, which means other categories.</li>
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * Expiration time of an output file. After passing the expiration time, the file will be deleted. There is no expiration time set for a file by default. The time is in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+
+    }
+}
+
+/**
  * CreateVodDomain request structure.
  * @class
  */
@@ -17115,10 +17162,10 @@ class AiRecognitionTaskAsrTranslateSegmentItem extends  AbstractModel {
 }
 
 /**
- * ModifyAIAnalysisTemplate response structure.
+ * DeleteCLSTopic response structure.
  * @class
  */
-class ModifyAIAnalysisTemplateResponse extends  AbstractModel {
+class DeleteCLSTopicResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -19965,30 +20012,80 @@ Default value: 0 px, which means that `Height` will be proportionally scaled acc
 }
 
 /**
- * Control parameter of object recognition task
+ * ModifyWatermarkTemplate request structure.
  * @class
  */
-class ObjectConfigureInfo extends  AbstractModel {
+class ModifyWatermarkTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch of object recognition task. Valid values:
-<li>ON: enables intelligent object recognition task;</li>
-<li>OFF: disables intelligent object recognition task.</li>
-         * @type {string || null}
+         * Unique identifier of the watermark template.
+         * @type {number || null}
          */
-        this.Switch = null;
+        this.Definition = null;
 
         /**
-         * Object library. Valid values:
-<li>Default: default object library;</li>
-<li>UserDefine: custom object library.</li>
-<li>All: both default and custom object libraries will be used.</li>
-Default value: All, i.e., both default and custom object libraries will be used.
+         * <b>On-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created).</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Watermark template name. The length cannot exceed 64 characters.
          * @type {string || null}
          */
-        this.ObjectLibrary = null;
+        this.Name = null;
+
+        /**
+         * Template description, with a length limit of 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Origin position. Valid values:
+<li>TopLeft: indicates that the coordinate origin is at the top left corner of the video image and the watermark origin is at the top left corner of the image or text.</li>
+<li>TopRight: indicates that the coordinate origin is at the top right corner of the video image and the watermark origin is at the top right corner of the image or text.</li>
+<li>BottomLeft: indicates that the coordinate origin is at the bottom left corner of the video image and the watermark origin is at the bottom left corner of the image or text.</li>
+<li>BottomRight: indicates that the coordinate origin is at the bottom right corner of the video image and the watermark origin is at the bottom right corner of the image or text.</li>
+         * @type {string || null}
+         */
+        this.CoordinateOrigin = null;
+
+        /**
+         * The horizontal position of the watermark origin from the origin of coordinates of the video image. Support two formats: % and px.
+<li>If a string ends with %, it indicates that the `XPos` of a watermark is a specified percentage of a video's width. For example, `10%` means that `XPos` is 10% of a video's width.</li>
+<li>If a string ends with px, it means the watermark XPos is specified in pixels, for example, 100px means the XPos is 100 pixels.</li>
+         * @type {string || null}
+         */
+        this.XPos = null;
+
+        /**
+         * Vertical position of the watermark origin from the origin of coordinates of the video image. Support two formats: % and px.
+<li>If a string ends with %, it indicates that the `YPos` of a watermark is a specified percentage of a video's height. For example, `10%` means that `YPos` is 10% of a video's height.</li>
+<li>If a string ends with px, it means the watermark YPos is specified in pixels, for example, 100px means YPos is 100 pixels.</li>
+         * @type {string || null}
+         */
+        this.YPos = null;
+
+        /**
+         * Image watermark template. This field is only applicable to image watermark templates.
+         * @type {ImageWatermarkInputForUpdate || null}
+         */
+        this.ImageTemplate = null;
+
+        /**
+         * Text watermarking template. This field is only applicable to text watermarking templates.
+         * @type {TextWatermarkTemplateInputForUpdate || null}
+         */
+        this.TextTemplate = null;
+
+        /**
+         * SVG watermark template. This field is only applicable to SVG watermark templates.
+         * @type {SvgWatermarkInputForUpdate || null}
+         */
+        this.SvgTemplate = null;
 
     }
 
@@ -19999,8 +20096,31 @@ Default value: All, i.e., both default and custom object libraries will be used.
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.ObjectLibrary = 'ObjectLibrary' in params ? params.ObjectLibrary : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+
+        if (params.ImageTemplate) {
+            let obj = new ImageWatermarkInputForUpdate();
+            obj.deserialize(params.ImageTemplate)
+            this.ImageTemplate = obj;
+        }
+
+        if (params.TextTemplate) {
+            let obj = new TextWatermarkTemplateInputForUpdate();
+            obj.deserialize(params.TextTemplate)
+            this.TextTemplate = obj;
+        }
+
+        if (params.SvgTemplate) {
+            let obj = new SvgWatermarkInputForUpdate();
+            obj.deserialize(params.SvgTemplate)
+            this.SvgTemplate = obj;
+        }
 
     }
 }
@@ -21088,7 +21208,7 @@ class AigcVideoTaskInputFileInfo extends  AbstractModel {
         this.Category = null;
 
         /**
-         * <p>Media file ID, the globally unique identifier of the file in VOD, is assigned by the VOD backend after successful upload. You can obtain this field in the <a href="/document/product/266/7830">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File. Description:</p><ol><li>Images less than 10M are recommended;</li><li>Image format values: jpeg, jpg, png.</li></ol>
+         * <p>Media file ID, the globally unique identifier of the file in VOD, is assigned by the VOD backend after successful upload. You can obtain this field in the <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File. Description:</p><ol><li>Images less than 10M are recommended;</li><li>Image format values: jpeg, jpg, png.</li></ol>
          * @type {string || null}
          */
         this.FileId = null;
@@ -21098,6 +21218,12 @@ class AigcVideoTaskInputFileInfo extends  AbstractModel {
          * @type {string || null}
          */
         this.Url = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Base64 = null;
 
         /**
          * <p>Reference Type, applicable to GV, Kling, and PixVerse models.<br>Note:<br>When using the GV model, it can be used as a reference method, available values: asset means material, style means style;<br>When using the Kling model and Category is Video, distinct reference video types can be identified, feature means feature reference video, base means video to be edited;<br>When using the PixVerse model, applicable to multi-image (subject) reference generation mode, available values: subject means subject, background means background;</p>
@@ -21148,6 +21274,7 @@ class AigcVideoTaskInputFileInfo extends  AbstractModel {
         this.Category = 'Category' in params ? params.Category : null;
         this.FileId = 'FileId' in params ? params.FileId : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.Base64 = 'Base64' in params ? params.Base64 : null;
         this.ReferenceType = 'ReferenceType' in params ? params.ReferenceType : null;
         this.ObjectId = 'ObjectId' in params ? params.ObjectId : null;
         this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
@@ -23940,18 +24067,12 @@ class SearchMediaResponse extends  AbstractModel {
 }
 
 /**
- * ProcessMediaByMPS response structure.
+ * ModifyAIAnalysisTemplate response structure.
  * @class
  */
-class ProcessMediaByMPSResponse extends  AbstractModel {
+class ModifyAIAnalysisTemplateResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * <p>Task ID.</p>
-         * @type {string || null}
-         */
-        this.TaskId = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -23968,7 +24089,6 @@ class ProcessMediaByMPSResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -24476,6 +24596,41 @@ class ReviewImageSegmentItem extends  AbstractModel {
         this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
         this.Text = 'Text' in params ? params.Text : null;
         this.KeywordSet = 'KeywordSet' in params ? params.KeywordSet : null;
+
+    }
+}
+
+/**
+ * CreateCLSTopic response structure.
+ * @class
+ */
+class CreateCLSTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log topic ID.
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -25116,6 +25271,56 @@ class AiRecognitionTaskOcrFullTextResult extends  AbstractModel {
 }
 
 /**
+ * DescribeCLSTopics response structure.
+ * @class
+ */
+class DescribeCLSTopicsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of log topics.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Log topic list.
+         * @type {Array.<CLSTopicInfo> || null}
+         */
+        this.Topics = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Topics) {
+            this.Topics = new Array();
+            for (let z in params.Topics) {
+                let obj = new CLSTopicInfo();
+                obj.deserialize(params.Topics[z]);
+                this.Topics.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * MPS specific task query result type.
  * @class
  */
@@ -25204,59 +25409,65 @@ class MPSSubTaskResult extends  AbstractModel {
 }
 
 /**
- * Segment information of media track
+ * Head Tail Template Details
  * @class
  */
-class MediaTrackItem extends  AbstractModel {
+class HeadTailTemplate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Segment type. Valid values:
-<li>Video: video segment.</li>
-<li>Audio: audio segment.</li>
-<li>Sticker: sticker segment.</li>
-<li>Transition: transition.</li>
-<li>Empty: empty segment.</li>
+         * Head Tail Template Number.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Template name, supports up to 64 characters.
          * @type {string || null}
          */
-        this.Type = null;
+        this.Name = null;
 
         /**
-         * Video segment, which is valid if `Type` is `Video`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {VideoTrackItem || null}
+         * Template description, up to 256 characters.
+         * @type {string || null}
          */
-        this.VideoItem = null;
+        this.Comment = null;
 
         /**
-         * Audio segment, which is valid if `Type` is `Audio`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {AudioTrackItem || null}
+         * Title candidate list. When using it, the one closest to the resolution of the feature film will be selected. When the same candidate exists, the first one will be selected. A maximum of 5 are supported.
+         * @type {Array.<string> || null}
          */
-        this.AudioItem = null;
+        this.HeadCandidateSet = null;
 
         /**
-         * Sticker segment, which is valid if `Type` is `Sticker`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {StickerTrackItem || null}
+         * Ending candidate list. When using it, the one closest to the resolution of the feature film will be selected. When the same candidate exists, the first one will be selected. A maximum of 5 are supported.
+         * @type {Array.<string> || null}
          */
-        this.StickerItem = null;
+        this.TailCandidateSet = null;
 
         /**
-         * Transition, which is valid if `Type` is `Transition`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {MediaTransitionItem || null}
+         * Padding method. When the video stream configuration width and height parameters are inconsistent with the aspect ratio of the original video, the transcoding processing method is "padding". Optional filling method:
+<li> stretch: stretch, stretch each frame to fill the entire screen, which may cause the transcoded video to be "squashed" or "stretched";</li> 
+<li> gauss: Gaussian blur, keep the video aspect ratio unchanged, use Gaussian blur for the remaining edges; </li>
+<li> white: leave blank, keep the video aspect ratio unchanged, use the remaining edges for the edge Use white filling; </li>
+<li> black: Leave black, keep the video aspect ratio unchanged, and fill the remaining edges with black. </li>
+Default value: stretch.
+         * @type {string || null}
          */
-        this.TransitionItem = null;
+        this.FillType = null;
 
         /**
-         * Empty segment, which is valid if `Type` is `Empty`. It is used as placeholder on time axis. <li>If you want a period of silence between two audio segments, you can use `EmptyTrackItem` to hold the place.</li>
-<li>Use `EmptyTrackItem` as a placeholder to locate an item.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {EmptyTrackItem || null}
+         * Template creation time, using [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
+         * @type {string || null}
          */
-        this.EmptyItem = null;
+        this.CreateTime = null;
+
+        /**
+         * The last modification time of the template, using [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
 
     }
 
@@ -25267,37 +25478,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-
-        if (params.VideoItem) {
-            let obj = new VideoTrackItem();
-            obj.deserialize(params.VideoItem)
-            this.VideoItem = obj;
-        }
-
-        if (params.AudioItem) {
-            let obj = new AudioTrackItem();
-            obj.deserialize(params.AudioItem)
-            this.AudioItem = obj;
-        }
-
-        if (params.StickerItem) {
-            let obj = new StickerTrackItem();
-            obj.deserialize(params.StickerItem)
-            this.StickerItem = obj;
-        }
-
-        if (params.TransitionItem) {
-            let obj = new MediaTransitionItem();
-            obj.deserialize(params.TransitionItem)
-            this.TransitionItem = obj;
-        }
-
-        if (params.EmptyItem) {
-            let obj = new EmptyTrackItem();
-            obj.deserialize(params.EmptyItem)
-            this.EmptyItem = obj;
-        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.HeadCandidateSet = 'HeadCandidateSet' in params ? params.HeadCandidateSet : null;
+        this.TailCandidateSet = 'TailCandidateSet' in params ? params.TailCandidateSet : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -26300,24 +26488,48 @@ class CreateLLMComprehendTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Image encoding format parameters.
+ * DescribeCdnLogs request structure.
  * @class
  */
-class ImageSceneAigcEncodeConfig extends  AbstractModel {
+class DescribeCdnLogsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Image format. Valid values: JPEG and PNG. Defaults to the original image format. Animation is not supported.
+         * <p>Domain name.</p>
          * @type {string || null}
          */
-        this.Format = null;
+        this.DomainName = null;
 
         /**
-         * Relative image quality. Value ranges from 1 to 100. The numeric value is based on the original image quality and defaults to the original image quality.
+         * <p>Get log start time point. Use the <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * <p>End time must be greater than start time. Use the <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ.</p>
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created).</b></p>
          * @type {number || null}
          */
-        this.Quality = null;
+        this.SubAppId = null;
+
+        /**
+         * <p>Maximum number of results returned for pagination pull. Default value: 100; maximum value: 1000.</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <p>Starting offset for pagination pull. Default value: 0.</p>
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -26328,8 +26540,12 @@ class ImageSceneAigcEncodeConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Format = 'Format' in params ? params.Format : null;
-        this.Quality = 'Quality' in params ? params.Quality : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -29324,18 +29540,86 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DeleteAigcApiToken response structure.
+ * CreateWatermarkTemplate request structure.
  * @class
  */
-class DeleteAigcApiTokenResponse extends  AbstractModel {
+class CreateWatermarkTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Watermark type. Valid values:
+<li>image: image watermark.</li>
+<li>Text: text watermark.</li>
+<li>svg: SVG watermark.</li>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Type = null;
+
+        /**
+         * <b>On-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created).</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Watermark template name. The length cannot exceed 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Template description, with a length limit of 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Origin position. Valid values:
+<li>TopLeft: indicates that the coordinate origin is at the top left corner of the video image and the watermark origin is at the top left corner of the image or text.</li>
+<li>TopRight: indicates that the coordinate origin is at the top right corner of the video image and the watermark origin is at the top right corner of the image or text.</li>
+<li>BottomLeft: indicates that the coordinate origin is at the bottom left corner of the video image and the watermark origin is at the bottom left corner of the image or text.</li>
+<li>BottomRight: indicates that the coordinate origin is at the bottom right corner of the video image and the watermark origin is at the bottom right corner of the image or text.</li>
+Default value: TopLeft.
+         * @type {string || null}
+         */
+        this.CoordinateOrigin = null;
+
+        /**
+         * The horizontal position of the watermark origin from the origin of coordinates of the video image. Support two formats: % and px.
+<li>If a string ends with %, it indicates that the `XPos` of a watermark is a specified percentage of a video's width. For example, `10%` means that `XPos` is 10% of a video's width.</li>
+<li>If a string ends with px, it means the watermark XPos is specified in pixels, for example, 100px means XPos is 100 pixels.</li>
+Default value: 0px.
+         * @type {string || null}
+         */
+        this.XPos = null;
+
+        /**
+         * The vertical position of the watermark origin from the origin of coordinates of the video image. Supports two formats: % and px.
+<li>If a string ends with %, it indicates that the `YPos` of a watermark is a specified percentage of a video's height. For example, `10%` means that `YPos` is 10% of a video's height.</li>
+<li>If a string ends with px, it means the watermark YPos is specified in pixels, for example, 100px means YPos is 100 pixels.</li>
+Default value: 0px.
+         * @type {string || null}
+         */
+        this.YPos = null;
+
+        /**
+         * Image watermark template. This field is required when Type is image. Invalid field when Type is text.
+         * @type {ImageWatermarkInput || null}
+         */
+        this.ImageTemplate = null;
+
+        /**
+         * Text watermarking template. This field is required when Type is text. Invalid field when Type is image.
+         * @type {TextWatermarkTemplateInput || null}
+         */
+        this.TextTemplate = null;
+
+        /**
+         * SVG Watermark Template. This field is required when Type is svg. Invalid field when Type is image or text.
+         * @type {SvgWatermarkInput || null}
+         */
+        this.SvgTemplate = null;
 
     }
 
@@ -29346,7 +29630,31 @@ class DeleteAigcApiTokenResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+
+        if (params.ImageTemplate) {
+            let obj = new ImageWatermarkInput();
+            obj.deserialize(params.ImageTemplate)
+            this.ImageTemplate = obj;
+        }
+
+        if (params.TextTemplate) {
+            let obj = new TextWatermarkTemplateInput();
+            obj.deserialize(params.TextTemplate)
+            this.TextTemplate = obj;
+        }
+
+        if (params.SvgTemplate) {
+            let obj = new SvgWatermarkInput();
+            obj.deserialize(params.SvgTemplate)
+            this.SvgTemplate = obj;
+        }
 
     }
 }
@@ -30617,126 +30925,6 @@ class SplitMediaTask extends  AbstractModel {
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.Progress = 'Progress' in params ? params.Progress : null;
-
-    }
-}
-
-/**
- * CreateWatermarkTemplate request structure.
- * @class
- */
-class CreateWatermarkTemplateRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Watermark type. Valid values:
-<li>image: image watermark.</li>
-<li>Text: text watermark.</li>
-<li>svg: SVG watermark.</li>
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * <b>On-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created).</b>
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
-         * Watermark template name. The length cannot exceed 64 characters.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Template description, with a length limit of 256 characters.
-         * @type {string || null}
-         */
-        this.Comment = null;
-
-        /**
-         * Origin position. Valid values:
-<li>TopLeft: indicates that the coordinate origin is at the top left corner of the video image and the watermark origin is at the top left corner of the image or text.</li>
-<li>TopRight: indicates that the coordinate origin is at the top right corner of the video image and the watermark origin is at the top right corner of the image or text.</li>
-<li>BottomLeft: indicates that the coordinate origin is at the bottom left corner of the video image and the watermark origin is at the bottom left corner of the image or text.</li>
-<li>BottomRight: indicates that the coordinate origin is at the bottom right corner of the video image and the watermark origin is at the bottom right corner of the image or text.</li>
-Default value: TopLeft.
-         * @type {string || null}
-         */
-        this.CoordinateOrigin = null;
-
-        /**
-         * The horizontal position of the watermark origin from the origin of coordinates of the video image. Support two formats: % and px.
-<li>If a string ends with %, it indicates that the `XPos` of a watermark is a specified percentage of a video's width. For example, `10%` means that `XPos` is 10% of a video's width.</li>
-<li>If a string ends with px, it means the watermark XPos is specified in pixels, for example, 100px means XPos is 100 pixels.</li>
-Default value: 0px.
-         * @type {string || null}
-         */
-        this.XPos = null;
-
-        /**
-         * The vertical position of the watermark origin from the origin of coordinates of the video image. Supports two formats: % and px.
-<li>If a string ends with %, it indicates that the `YPos` of a watermark is a specified percentage of a video's height. For example, `10%` means that `YPos` is 10% of a video's height.</li>
-<li>If a string ends with px, it means the watermark YPos is specified in pixels, for example, 100px means YPos is 100 pixels.</li>
-Default value: 0px.
-         * @type {string || null}
-         */
-        this.YPos = null;
-
-        /**
-         * Image watermark template. This field is required when Type is image. Invalid field when Type is text.
-         * @type {ImageWatermarkInput || null}
-         */
-        this.ImageTemplate = null;
-
-        /**
-         * Text watermarking template. This field is required when Type is text. Invalid field when Type is image.
-         * @type {TextWatermarkTemplateInput || null}
-         */
-        this.TextTemplate = null;
-
-        /**
-         * SVG Watermark Template. This field is required when Type is svg. Invalid field when Type is image or text.
-         * @type {SvgWatermarkInput || null}
-         */
-        this.SvgTemplate = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
-        this.XPos = 'XPos' in params ? params.XPos : null;
-        this.YPos = 'YPos' in params ? params.YPos : null;
-
-        if (params.ImageTemplate) {
-            let obj = new ImageWatermarkInput();
-            obj.deserialize(params.ImageTemplate)
-            this.ImageTemplate = obj;
-        }
-
-        if (params.TextTemplate) {
-            let obj = new TextWatermarkTemplateInput();
-            obj.deserialize(params.TextTemplate)
-            this.TextTemplate = obj;
-        }
-
-        if (params.SvgTemplate) {
-            let obj = new SvgWatermarkInput();
-            obj.deserialize(params.SvgTemplate)
-            this.SvgTemplate = obj;
-        }
 
     }
 }
@@ -33572,7 +33760,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Type = null;
 
         /**
-         * <p>Media file ID, the globally unique identifier of the file in VOD, is assigned by the VOD backend after successful upload. You can get this field in the <a href="/document/product/266/7830">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when Type value is File. Description: 1. Image less than 10M is recommended. 2. Image format values: jpeg, jpg, png.</p>
+         * <p>Media file ID, the globally unique identifier of the file in VOD, is assigned by the VOD backend after successful upload. You can get this field in the <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when Type value is File. Description: 1. Image less than 10M is recommended. 2. Image format values: jpeg, jpg, png.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -34437,65 +34625,18 @@ class AiAnalysisTaskTagInput extends  AbstractModel {
 }
 
 /**
- * Head Tail Template Details
+ * DeleteAigcApiToken response structure.
  * @class
  */
-class HeadTailTemplate extends  AbstractModel {
+class DeleteAigcApiTokenResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Head Tail Template Number.
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * Template name, supports up to 64 characters.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * Template description, up to 256 characters.
-         * @type {string || null}
-         */
-        this.Comment = null;
-
-        /**
-         * Title candidate list. When using it, the one closest to the resolution of the feature film will be selected. When the same candidate exists, the first one will be selected. A maximum of 5 are supported.
-         * @type {Array.<string> || null}
-         */
-        this.HeadCandidateSet = null;
-
-        /**
-         * Ending candidate list. When using it, the one closest to the resolution of the feature film will be selected. When the same candidate exists, the first one will be selected. A maximum of 5 are supported.
-         * @type {Array.<string> || null}
-         */
-        this.TailCandidateSet = null;
-
-        /**
-         * Padding method. When the video stream configuration width and height parameters are inconsistent with the aspect ratio of the original video, the transcoding processing method is "padding". Optional filling method:
-<li> stretch: stretch, stretch each frame to fill the entire screen, which may cause the transcoded video to be "squashed" or "stretched";</li> 
-<li> gauss: Gaussian blur, keep the video aspect ratio unchanged, use Gaussian blur for the remaining edges; </li>
-<li> white: leave blank, keep the video aspect ratio unchanged, use the remaining edges for the edge Use white filling; </li>
-<li> black: Leave black, keep the video aspect ratio unchanged, and fill the remaining edges with black. </li>
-Default value: stretch.
-         * @type {string || null}
-         */
-        this.FillType = null;
-
-        /**
-         * Template creation time, using [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * The last modification time of the template, using [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
+        this.RequestId = null;
 
     }
 
@@ -34506,14 +34647,7 @@ Default value: stretch.
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.HeadCandidateSet = 'HeadCandidateSet' in params ? params.HeadCandidateSet : null;
-        this.TailCandidateSet = 'TailCandidateSet' in params ? params.TailCandidateSet : null;
-        this.FillType = 'FillType' in params ? params.FillType : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -34730,48 +34864,24 @@ class AiRecognitionTaskObjectResultInput extends  AbstractModel {
 }
 
 /**
- * DescribeCdnLogs request structure.
+ * CreateCLSLogset response structure.
  * @class
  */
-class DescribeCdnLogsRequest extends  AbstractModel {
+class CreateCLSLogsetResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Domain name.</p>
+         * Log Set ID.
          * @type {string || null}
          */
-        this.DomainName = null;
+        this.LogsetId = null;
 
         /**
-         * <p>Get log start time point. Use the <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * <p>End time must be greater than start time. Use the <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ.</p>
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created).</b></p>
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
-         * <p>Maximum number of results returned for pagination pull. Default value: 100; maximum value: 1000.</p>
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * <p>Starting offset for pagination pull. Default value: 0.</p>
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.RequestId = null;
 
     }
 
@@ -34782,12 +34892,8 @@ class DescribeCdnLogsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -37041,30 +37147,24 @@ When `Status` is set to `Enabled`, `BlankRefererAllowed` must be specified.
 }
 
 /**
- * Task statistics, including number of tasks and usage.
+ * ProcessMediaByMPS response structure.
  * @class
  */
-class TaskStatDataItem extends  AbstractModel {
+class ProcessMediaByMPSResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time of data time range in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). For example, if the time granularity is 1-day, `2018-12-01T00:00:00+08:00` represents the time range between December 1, 2018 (inclusive) and December 2, 2018 (not inclusive).
+         * <p>Task ID.</p>
          * @type {string || null}
          */
-        this.Time = null;
+        this.TaskId = null;
 
         /**
-         * Number of tasks.
-         * @type {number || null}
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Count = null;
-
-        /**
-         * Task usage.
-         * @type {number || null}
-         */
-        this.Usage = null;
+        this.RequestId = null;
 
     }
 
@@ -37075,9 +37175,8 @@ class TaskStatDataItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Time = 'Time' in params ? params.Time : null;
-        this.Count = 'Count' in params ? params.Count : null;
-        this.Usage = 'Usage' in params ? params.Usage : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -37127,6 +37226,48 @@ class AiRecognitionTaskObjectSegmentItem extends  AbstractModel {
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
         this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+
+    }
+}
+
+/**
+ * CreateCLSTopic request structure.
+ * @class
+ */
+class CreateCLSTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region of the logset belonging to. Valid values: <li>ap-guangzhou: Guangzhou;</li> <li>ap-beijing: Beijing;</li> <li>ap-chengdu: Chengdu;</li> <li>ap-chongqing: Chongqing;</li> <li>ap-nanjing: Nanjing;</li> <li>ap-shanghai: Shanghai;</li> <li>ap-singapore: Singapore.</li>
+         * @type {string || null}
+         */
+        this.CLSRegion = null;
+
+        /**
+         * Log topic name.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Log Set ID.
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CLSRegion = 'CLSRegion' in params ? params.CLSRegion : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
 
     }
 }
@@ -38234,6 +38375,105 @@ class VoiceConfigureInfo extends  AbstractModel {
 }
 
 /**
+ * Segment information of media track
+ * @class
+ */
+class MediaTrackItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Segment type. Valid values:
+<li>Video: video segment.</li>
+<li>Audio: audio segment.</li>
+<li>Sticker: sticker segment.</li>
+<li>Transition: transition.</li>
+<li>Empty: empty segment.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Video segment, which is valid if `Type` is `Video`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {VideoTrackItem || null}
+         */
+        this.VideoItem = null;
+
+        /**
+         * Audio segment, which is valid if `Type` is `Audio`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {AudioTrackItem || null}
+         */
+        this.AudioItem = null;
+
+        /**
+         * Sticker segment, which is valid if `Type` is `Sticker`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {StickerTrackItem || null}
+         */
+        this.StickerItem = null;
+
+        /**
+         * Transition, which is valid if `Type` is `Transition`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {MediaTransitionItem || null}
+         */
+        this.TransitionItem = null;
+
+        /**
+         * Empty segment, which is valid if `Type` is `Empty`. It is used as placeholder on time axis. <li>If you want a period of silence between two audio segments, you can use `EmptyTrackItem` to hold the place.</li>
+<li>Use `EmptyTrackItem` as a placeholder to locate an item.</li>
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {EmptyTrackItem || null}
+         */
+        this.EmptyItem = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.VideoItem) {
+            let obj = new VideoTrackItem();
+            obj.deserialize(params.VideoItem)
+            this.VideoItem = obj;
+        }
+
+        if (params.AudioItem) {
+            let obj = new AudioTrackItem();
+            obj.deserialize(params.AudioItem)
+            this.AudioItem = obj;
+        }
+
+        if (params.StickerItem) {
+            let obj = new StickerTrackItem();
+            obj.deserialize(params.StickerItem)
+            this.StickerItem = obj;
+        }
+
+        if (params.TransitionItem) {
+            let obj = new MediaTransitionItem();
+            obj.deserialize(params.TransitionItem)
+            this.TransitionItem = obj;
+        }
+
+        if (params.EmptyItem) {
+            let obj = new EmptyTrackItem();
+            obj.deserialize(params.EmptyItem)
+            this.EmptyItem = obj;
+        }
+
+    }
+}
+
+/**
  * The details of a video editing task. This parameter is only valid for tasks initiated by the v2017 video editing API.
  * @class
  */
@@ -38695,6 +38935,48 @@ class SceneAigcImageOutputConfig extends  AbstractModel {
 }
 
 /**
+ * Task statistics, including number of tasks and usage.
+ * @class
+ */
+class TaskStatDataItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time of data time range in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). For example, if the time granularity is 1-day, `2018-12-01T00:00:00+08:00` represents the time range between December 1, 2018 (inclusive) and December 2, 2018 (not inclusive).
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * Number of tasks.
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Task usage.
+         * @type {number || null}
+         */
+        this.Usage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Usage = 'Usage' in params ? params.Usage : null;
+
+    }
+}
+
+/**
  * Parameters for OCR-based recognition of pornographic content
  * @class
  */
@@ -39051,64 +39333,24 @@ class AiReviewProhibitedAsrTaskInput extends  AbstractModel {
 }
 
 /**
- * Video segment containing detected pornographic or terrorism content
+ * DeleteCLSTopic request structure.
  * @class
  */
-class MediaContentReviewSegmentItem extends  AbstractModel {
+class DeleteCLSTopicRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time offset of a suspected segment in seconds.
-         * @type {number || null}
-         */
-        this.StartTimeOffset = null;
-
-        /**
-         * End time offset of a suspected segment in seconds.
-         * @type {number || null}
-         */
-        this.EndTimeOffset = null;
-
-        /**
-         * Confidence score for the detected pornographic content
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * Label for the detected pornographic content
+         * The region to which the log set belongs, the values are: <li>ap-guangzhou: Guangzhou;</li> <li>ap-beijing: Beijing;</li> <li>ap-chengdu: Chengdu;</li> < li>ap-chongqing: Chongqing; </li> <li>ap-nanjing: Nanjing; </li> <li>ap-shanghai: Shanghai; </li> <li>ap-singapore: Singapore. </li>
          * @type {string || null}
          */
-        this.Label = null;
+        this.CLSRegion = null;
 
         /**
-         * Processing suggestion for the detected pornographic content. Valid values:
-<li>pass</li>
-<li>review</li>
-<li>block</li>
+         * Log topic ID.
          * @type {string || null}
          */
-        this.Suggestion = null;
-
-        /**
-         * URL of a suspected image (which will not be permanently stored
- and will be deleted after `PicUrlExpireTime`).
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * This field has been disused. Please use `PicUrlExpireTime`.
-         * @type {number || null}
-         */
-        this.PicUrlExpireTimeStamp = null;
-
-        /**
-         * Expiration time of suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
-         * @type {string || null}
-         */
-        this.PicUrlExpireTime = null;
+        this.TopicId = null;
 
     }
 
@@ -39119,14 +39361,8 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.PicUrlExpireTimeStamp = 'PicUrlExpireTimeStamp' in params ? params.PicUrlExpireTimeStamp : null;
-        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+        this.CLSRegion = 'CLSRegion' in params ? params.CLSRegion : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
 
     }
 }
@@ -43631,6 +43867,87 @@ class TerrorismImageResult extends  AbstractModel {
 }
 
 /**
+ * Video segment containing detected pornographic or terrorism content
+ * @class
+ */
+class MediaContentReviewSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time offset of a suspected segment in seconds.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * End time offset of a suspected segment in seconds.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * Confidence score for the detected pornographic content
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Label for the detected pornographic content
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * Processing suggestion for the detected pornographic content. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * URL of a suspected image (which will not be permanently stored
+ and will be deleted after `PicUrlExpireTime`).
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * This field has been disused. Please use `PicUrlExpireTime`.
+         * @type {number || null}
+         */
+        this.PicUrlExpireTimeStamp = null;
+
+        /**
+         * Expiration time of suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.PicUrlExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.PicUrlExpireTimeStamp = 'PicUrlExpireTimeStamp' in params ? params.PicUrlExpireTimeStamp : null;
+        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+
+    }
+}
+
+/**
  * CreateAigcCustomVoice response structure.
  * @class
  */
@@ -44405,8 +44722,8 @@ If MediaType is not filled in or takes an empty string, the file type will be au
 
         /**
          * Designate the upload park, applicable only to the user with special requirement for upload target region.
-<li>If left blank, files will be uploaded to your [default region](https://www.tencentcloud.com/document/product/266/14059?from=11329?from_cn_redirect=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4) by default.</li>
-<li>If a designated upload park is specified, please confirm the [upload storage settings](https://www.tencentcloud.com/document/product/266/14059?from=11329?from_cn_redirect=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4) have already enabled corresponding storage regions.</li>
+<li>If left blank, files will be uploaded to your [default region](https://www.tencentcloud.com/zh/document/product/266/18874?has_map=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4) by default.</li>
+<li>If a designated upload park is specified, please confirm the [upload storage settings](https://www.tencentcloud.com/zh/document/product/266/18874) have already enabled corresponding storage regions.</li>
          * @type {string || null}
          */
         this.StorageRegion = null;
@@ -45344,6 +45661,62 @@ class HeuristicCache extends  AbstractModel {
             obj.deserialize(params.CacheConfig)
             this.CacheConfig = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeDefaultDistributionConfig response structure.
+ * @class
+ */
+class DescribeDefaultDistributionConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Distribute the configured domain name (abandoned).
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * Distribute the configured domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * The protocol of the distribution configuration is HTTP or HTTPS.
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
+        /**
+         * The playback key consists of uppercase and lowercase letters (a - Z) or numbers (0 - 9) with a length between 8 and 20 characters.
+         * @type {string || null}
+         */
+        this.PlayKey = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
+        this.PlayKey = 'PlayKey' in params ? params.PlayKey : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -48909,6 +49282,49 @@ class FollowRedirect extends  AbstractModel {
 }
 
 /**
+ * DescribeCLSLogsets response structure.
+ * @class
+ */
+class DescribeCLSLogsetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Queried logset list.
+         * @type {Array.<CLSLogsetInfo> || null}
+         */
+        this.Logsets = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Logsets) {
+            this.Logsets = new Array();
+            for (let z in params.Logsets) {
+                let obj = new CLSLogsetInfo();
+                obj.deserialize(params.Logsets[z]);
+                this.Logsets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeMPSTemplates response structure.
  * @class
  */
@@ -49271,6 +49687,34 @@ class AiRecognitionTaskOcrFullTextResultInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * DescribeCLSLogsets request structure.
+ * @class
+ */
+class DescribeCLSLogsetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region of the logset belonging to. Valid values: <li>ap-guangzhou: Guangzhou;</li> <li>ap-beijing: Beijing;</li> <li>ap-chengdu: Chengdu;</li> <li>ap-chongqing: Chongqing;</li> <li>ap-nanjing: Nanjing;</li> <li>ap-shanghai: Shanghai;</li> <li>ap-singapore: Singapore.</li>
+         * @type {string || null}
+         */
+        this.CLSRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CLSRegion = 'CLSRegion' in params ? params.CLSRegion : null;
 
     }
 }
@@ -50542,24 +50986,18 @@ class CreateProcessImageAsyncTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Privacy protection configuration for the smart erasing template.
+ * CreateCLSLogset request structure.
  * @class
  */
-class MPSSmartErasePrivacyConfig extends  AbstractModel {
+class CreateCLSLogsetRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Privacy protection removal method.</p><p>Enumeration value:</p><ul><li>blur: Blurry</li><li>mosaic: Mosaic</li></ul>
+         * Region of the logset belonging to. Valid values: <li>ap-guangzhou: Guangzhou;</li> <li>ap-beijing: Beijing;</li> <li>ap-chengdu: Chengdu;</li> <li>ap-chongqing: Chongqing;</li> <li>ap-nanjing: Nanjing;</li> <li>ap-shanghai: Shanghai;</li> <li>ap-singapore: Singapore.</li>
          * @type {string || null}
          */
-        this.PrivacyModel = null;
-
-        /**
-         * <p>Privacy protection objective (no need to input an array when in use on API Explorer, just add the corresponding item and fill in the value).</p><p>Enumeration value:</p><ul><li>face: human face</li><li>plate: license plate</li></ul>
-         * @type {Array.<string> || null}
-         */
-        this.PrivacyTargets = null;
+        this.CLSRegion = null;
 
     }
 
@@ -50570,8 +51008,7 @@ class MPSSmartErasePrivacyConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PrivacyModel = 'PrivacyModel' in params ? params.PrivacyModel : null;
-        this.PrivacyTargets = 'PrivacyTargets' in params ? params.PrivacyTargets : null;
+        this.CLSRegion = 'CLSRegion' in params ? params.CLSRegion : null;
 
     }
 }
@@ -54777,6 +55214,41 @@ class DomainQUICConfig extends  AbstractModel {
 }
 
 /**
+ * Privacy protection configuration for the smart erasing template.
+ * @class
+ */
+class MPSSmartErasePrivacyConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Privacy protection removal method.</p><p>Enumeration value:</p><ul><li>blur: Blurry</li><li>mosaic: Mosaic</li></ul>
+         * @type {string || null}
+         */
+        this.PrivacyModel = null;
+
+        /**
+         * <p>Privacy protection objective (no need to input an array when in use on API Explorer, just add the corresponding item and fill in the value).</p><p>Enumeration value:</p><ul><li>face: human face</li><li>plate: license plate</li></ul>
+         * @type {Array.<string> || null}
+         */
+        this.PrivacyTargets = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PrivacyModel = 'PrivacyModel' in params ? params.PrivacyModel : null;
+        this.PrivacyTargets = 'PrivacyTargets' in params ? params.PrivacyTargets : null;
+
+    }
+}
+
+/**
  * CreateRebuildMediaTemplate request structure.
  * @class
  */
@@ -55965,6 +56437,170 @@ class DeleteTranscodeTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * The video remaster parameters.
+ * @class
+ */
+class RebuildVideoInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The image restoration parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RepairInfo || null}
+         */
+        this.RepairInfo = null;
+
+        /**
+         * The smart frame interpolation parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {VideoFrameInterpolationInfo || null}
+         */
+        this.VideoFrameInterpolationInfo = null;
+
+        /**
+         * The super resolution parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SuperResolutionInfo || null}
+         */
+        this.SuperResolutionInfo = null;
+
+        /**
+         * The high dynamic range (HDR) configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {HDRInfo || null}
+         */
+        this.HDRInfo = null;
+
+        /**
+         * The image noise removal parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {VideoDenoiseInfo || null}
+         */
+        this.VideoDenoiseInfo = null;
+
+        /**
+         * The color enhancement parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ColorEnhanceInfo || null}
+         */
+        this.ColorInfo = null;
+
+        /**
+         * The detail enhancement parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SharpEnhanceInfo || null}
+         */
+        this.SharpInfo = null;
+
+        /**
+         * The face enhancement parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {FaceEnhanceInfo || null}
+         */
+        this.FaceInfo = null;
+
+        /**
+         * The low-light enhancement parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {LowLightEnhanceInfo || null}
+         */
+        this.LowLightInfo = null;
+
+        /**
+         * The banding removal parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ScratchRepairInfo || null}
+         */
+        this.ScratchRepairInfo = null;
+
+        /**
+         * The artifact removal parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ArtifactRepairInfo || null}
+         */
+        this.ArtifactRepairInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RepairInfo) {
+            let obj = new RepairInfo();
+            obj.deserialize(params.RepairInfo)
+            this.RepairInfo = obj;
+        }
+
+        if (params.VideoFrameInterpolationInfo) {
+            let obj = new VideoFrameInterpolationInfo();
+            obj.deserialize(params.VideoFrameInterpolationInfo)
+            this.VideoFrameInterpolationInfo = obj;
+        }
+
+        if (params.SuperResolutionInfo) {
+            let obj = new SuperResolutionInfo();
+            obj.deserialize(params.SuperResolutionInfo)
+            this.SuperResolutionInfo = obj;
+        }
+
+        if (params.HDRInfo) {
+            let obj = new HDRInfo();
+            obj.deserialize(params.HDRInfo)
+            this.HDRInfo = obj;
+        }
+
+        if (params.VideoDenoiseInfo) {
+            let obj = new VideoDenoiseInfo();
+            obj.deserialize(params.VideoDenoiseInfo)
+            this.VideoDenoiseInfo = obj;
+        }
+
+        if (params.ColorInfo) {
+            let obj = new ColorEnhanceInfo();
+            obj.deserialize(params.ColorInfo)
+            this.ColorInfo = obj;
+        }
+
+        if (params.SharpInfo) {
+            let obj = new SharpEnhanceInfo();
+            obj.deserialize(params.SharpInfo)
+            this.SharpInfo = obj;
+        }
+
+        if (params.FaceInfo) {
+            let obj = new FaceEnhanceInfo();
+            obj.deserialize(params.FaceInfo)
+            this.FaceInfo = obj;
+        }
+
+        if (params.LowLightInfo) {
+            let obj = new LowLightEnhanceInfo();
+            obj.deserialize(params.LowLightInfo)
+            this.LowLightInfo = obj;
+        }
+
+        if (params.ScratchRepairInfo) {
+            let obj = new ScratchRepairInfo();
+            obj.deserialize(params.ScratchRepairInfo)
+            this.ScratchRepairInfo = obj;
+        }
+
+        if (params.ArtifactRepairInfo) {
+            let obj = new ArtifactRepairInfo();
+            obj.deserialize(params.ArtifactRepairInfo)
+            this.ArtifactRepairInfo = obj;
+        }
+
+    }
+}
+
+/**
  * Transcoding information
  * @class
  */
@@ -56113,6 +56749,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * 
+ * @class
+ */
+class CLSLogsetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.LogsetName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
+
+    }
+}
+
+/**
  * DescribePersonSamples response structure.
  * @class
  */
@@ -56205,7 +56876,7 @@ class AigcAudioReferenceVideoInfo extends  AbstractModel {
         this.Type = null;
 
         /**
-         * <p>The media file ID of the video file, which is the globally unique identifier of the file in VOD, is assigned by the VOD backend after a successful upload. You can get this field in the <a href="/document/product/266/7830">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File.</p>
+         * <p>The media file ID of the video file, which is the globally unique identifier of the file in VOD, is assigned by the VOD backend after a successful upload. You can get this field in the <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File.</p>
          * @type {string || null}
          */
         this.FileId = null;
@@ -58444,7 +59115,7 @@ class AigcVideoRedrawTaskInputFileInfo extends  AbstractModel {
         this.Type = null;
 
         /**
-         * <p>Media file ID, the globally unique identifier of this file in VOD, is assigned by the VOD backend after a successful upload. You can obtain this field in the <a href="/document/product/266/7830">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File. Description: 1. Recommended image size is less than 10M. 2. Image format values: jpeg, jpg, png.</p>
+         * <p>Media file ID, the globally unique identifier of this file in VOD, is assigned by the VOD backend after a successful upload. You can obtain this field in the <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File. Description: 1. Recommended image size is less than 10M. 2. Image format values: jpeg, jpg, png.</p>
          * @type {string || null}
          */
         this.FileId = null;
@@ -60103,89 +60774,30 @@ FileId or MediaStoragePath must be provided.
 }
 
 /**
- * The video remaster parameters.
+ * Control parameter of object recognition task
  * @class
  */
-class RebuildVideoInfo extends  AbstractModel {
+class ObjectConfigureInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The image restoration parameters.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {RepairInfo || null}
+         * Switch of object recognition task. Valid values:
+<li>ON: enables intelligent object recognition task;</li>
+<li>OFF: disables intelligent object recognition task.</li>
+         * @type {string || null}
          */
-        this.RepairInfo = null;
+        this.Switch = null;
 
         /**
-         * The smart frame interpolation parameters.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {VideoFrameInterpolationInfo || null}
+         * Object library. Valid values:
+<li>Default: default object library;</li>
+<li>UserDefine: custom object library.</li>
+<li>All: both default and custom object libraries will be used.</li>
+Default value: All, i.e., both default and custom object libraries will be used.
+         * @type {string || null}
          */
-        this.VideoFrameInterpolationInfo = null;
-
-        /**
-         * The super resolution parameters.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {SuperResolutionInfo || null}
-         */
-        this.SuperResolutionInfo = null;
-
-        /**
-         * The high dynamic range (HDR) configuration.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {HDRInfo || null}
-         */
-        this.HDRInfo = null;
-
-        /**
-         * The image noise removal parameters.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {VideoDenoiseInfo || null}
-         */
-        this.VideoDenoiseInfo = null;
-
-        /**
-         * The color enhancement parameters.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {ColorEnhanceInfo || null}
-         */
-        this.ColorInfo = null;
-
-        /**
-         * The detail enhancement parameters.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {SharpEnhanceInfo || null}
-         */
-        this.SharpInfo = null;
-
-        /**
-         * The face enhancement parameters.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {FaceEnhanceInfo || null}
-         */
-        this.FaceInfo = null;
-
-        /**
-         * The low-light enhancement parameters.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {LowLightEnhanceInfo || null}
-         */
-        this.LowLightInfo = null;
-
-        /**
-         * The banding removal parameters.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {ScratchRepairInfo || null}
-         */
-        this.ScratchRepairInfo = null;
-
-        /**
-         * The artifact removal parameters.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {ArtifactRepairInfo || null}
-         */
-        this.ArtifactRepairInfo = null;
+        this.ObjectLibrary = null;
 
     }
 
@@ -60196,72 +60808,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.RepairInfo) {
-            let obj = new RepairInfo();
-            obj.deserialize(params.RepairInfo)
-            this.RepairInfo = obj;
-        }
-
-        if (params.VideoFrameInterpolationInfo) {
-            let obj = new VideoFrameInterpolationInfo();
-            obj.deserialize(params.VideoFrameInterpolationInfo)
-            this.VideoFrameInterpolationInfo = obj;
-        }
-
-        if (params.SuperResolutionInfo) {
-            let obj = new SuperResolutionInfo();
-            obj.deserialize(params.SuperResolutionInfo)
-            this.SuperResolutionInfo = obj;
-        }
-
-        if (params.HDRInfo) {
-            let obj = new HDRInfo();
-            obj.deserialize(params.HDRInfo)
-            this.HDRInfo = obj;
-        }
-
-        if (params.VideoDenoiseInfo) {
-            let obj = new VideoDenoiseInfo();
-            obj.deserialize(params.VideoDenoiseInfo)
-            this.VideoDenoiseInfo = obj;
-        }
-
-        if (params.ColorInfo) {
-            let obj = new ColorEnhanceInfo();
-            obj.deserialize(params.ColorInfo)
-            this.ColorInfo = obj;
-        }
-
-        if (params.SharpInfo) {
-            let obj = new SharpEnhanceInfo();
-            obj.deserialize(params.SharpInfo)
-            this.SharpInfo = obj;
-        }
-
-        if (params.FaceInfo) {
-            let obj = new FaceEnhanceInfo();
-            obj.deserialize(params.FaceInfo)
-            this.FaceInfo = obj;
-        }
-
-        if (params.LowLightInfo) {
-            let obj = new LowLightEnhanceInfo();
-            obj.deserialize(params.LowLightInfo)
-            this.LowLightInfo = obj;
-        }
-
-        if (params.ScratchRepairInfo) {
-            let obj = new ScratchRepairInfo();
-            obj.deserialize(params.ScratchRepairInfo)
-            this.ScratchRepairInfo = obj;
-        }
-
-        if (params.ArtifactRepairInfo) {
-            let obj = new ArtifactRepairInfo();
-            obj.deserialize(params.ArtifactRepairInfo)
-            this.ArtifactRepairInfo = obj;
-        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.ObjectLibrary = 'ObjectLibrary' in params ? params.ObjectLibrary : null;
 
     }
 }
@@ -60743,7 +61291,7 @@ class AigcVideoTaskInput extends  AbstractModel {
         this.SubjectInfos = null;
 
         /**
-         * <p>Media file ID used as the end frame to generate video. This file has a globally unique ID on VOD, assigned by the VOD backend after successful upload. You can get this field in the <a href="/document/product/266/7830">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>.</p>
+         * <p>Media file ID used as the end frame to generate video. This file has a globally unique ID on VOD, assigned by the VOD backend after successful upload. You can get this field in the <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>.</p>
          * @type {string || null}
          */
         this.LastFrameFileId = null;
@@ -63003,7 +63551,7 @@ module.exports = {
     ModifySampleSnapshotTemplateResponse: ModifySampleSnapshotTemplateResponse,
     AigcVideoOutputConfig: AigcVideoOutputConfig,
     CreateAigcVideoRedrawTaskRequest: CreateAigcVideoRedrawTaskRequest,
-    ModifyWatermarkTemplateRequest: ModifyWatermarkTemplateRequest,
+    ImageSceneAigcEncodeConfig: ImageSceneAigcEncodeConfig,
     SnapshotByTimeOffset2017: SnapshotByTimeOffset2017,
     CreateStorageRegionRequest: CreateStorageRegionRequest,
     AiRecognitionTaskAsrFullTextSegmentItem: AiRecognitionTaskAsrFullTextSegmentItem,
@@ -63060,6 +63608,7 @@ module.exports = {
     RebuildMediaRequest: RebuildMediaRequest,
     MPSSmartEraseWatermarkConfig: MPSSmartEraseWatermarkConfig,
     LLMComprehendSummary: LLMComprehendSummary,
+    DescribeDefaultDistributionConfigRequest: DescribeDefaultDistributionConfigRequest,
     AiReviewTaskPoliticalOcrResult: AiReviewTaskPoliticalOcrResult,
     QualityEnhanceTask: QualityEnhanceTask,
     AiSampleWord: AiSampleWord,
@@ -63117,6 +63666,7 @@ module.exports = {
     DescribeClientUploadAccelerationUsageDataResponse: DescribeClientUploadAccelerationUsageDataResponse,
     ModifyRebuildMediaTemplateRequest: ModifyRebuildMediaTemplateRequest,
     ComposeMediaRequest: ComposeMediaRequest,
+    DescribeCLSTopicsRequest: DescribeCLSTopicsRequest,
     AIRecognitionTemplateItem: AIRecognitionTemplateItem,
     AiReviewPornAsrTaskInput: AiReviewPornAsrTaskInput,
     AiRecognitionTaskFaceResult: AiRecognitionTaskFaceResult,
@@ -63136,7 +63686,7 @@ module.exports = {
     DeleteImageProcessingTemplateRequest: DeleteImageProcessingTemplateRequest,
     MPSTemplate: MPSTemplate,
     DescribeDailyPlayStatFileListResponse: DescribeDailyPlayStatFileListResponse,
-    SplitMediaOutputConfig: SplitMediaOutputConfig,
+    CLSTopicInfo: CLSTopicInfo,
     MPSAIAnalysisConfigureInfo: MPSAIAnalysisConfigureInfo,
     AbnormalLightingConfigureInfo: AbnormalLightingConfigureInfo,
     TextWatermarkTemplateInputForUpdate: TextWatermarkTemplateInputForUpdate,
@@ -63241,6 +63791,7 @@ module.exports = {
     DeleteLLMComprehendTemplateResponse: DeleteLLMComprehendTemplateResponse,
     MediaMiniProgramReviewInfoItem: MediaMiniProgramReviewInfoItem,
     TaskStatData: TaskStatData,
+    SplitMediaOutputConfig: SplitMediaOutputConfig,
     CreateVodDomainRequest: CreateVodDomainRequest,
     OcrFullTextConfigureInfoForUpdate: OcrFullTextConfigureInfoForUpdate,
     DeleteRoundPlayRequest: DeleteRoundPlayRequest,
@@ -63282,7 +63833,7 @@ module.exports = {
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
     CreateSceneAigcImageTaskResponse: CreateSceneAigcImageTaskResponse,
     AiRecognitionTaskAsrTranslateSegmentItem: AiRecognitionTaskAsrTranslateSegmentItem,
-    ModifyAIAnalysisTemplateResponse: ModifyAIAnalysisTemplateResponse,
+    DeleteCLSTopicResponse: DeleteCLSTopicResponse,
     LiveRealTimeClipRequest: LiveRealTimeClipRequest,
     DeleteAdaptiveDynamicStreamingTemplateRequest: DeleteAdaptiveDynamicStreamingTemplateRequest,
     AiRecognitionTaskOcrFullTextSegmentItem: AiRecognitionTaskOcrFullTextSegmentItem,
@@ -63329,7 +63880,7 @@ module.exports = {
     CreateAigcAdvancedCustomElementInput: CreateAigcAdvancedCustomElementInput,
     ModifyRoundPlayRequest: ModifyRoundPlayRequest,
     ImageWatermarkInput: ImageWatermarkInput,
-    ObjectConfigureInfo: ObjectConfigureInfo,
+    ModifyWatermarkTemplateRequest: ModifyWatermarkTemplateRequest,
     CreateAigcAudioCloneInput: CreateAigcAudioCloneInput,
     AsrFullTextConfigureInfoForUpdate: AsrFullTextConfigureInfoForUpdate,
     AiRecognitionTaskHeadTailResult: AiRecognitionTaskHeadTailResult,
@@ -63396,7 +63947,7 @@ module.exports = {
     LLMComprehendFaceRecognition: LLMComprehendFaceRecognition,
     AiAnalysisTaskTagResult: AiAnalysisTaskTagResult,
     SearchMediaResponse: SearchMediaResponse,
-    ProcessMediaByMPSResponse: ProcessMediaByMPSResponse,
+    ModifyAIAnalysisTemplateResponse: ModifyAIAnalysisTemplateResponse,
     DescribeAigcApiTokensRequest: DescribeAigcApiTokensRequest,
     Cache: Cache,
     RemoveWaterMarkTaskOutput: RemoveWaterMarkTaskOutput,
@@ -63407,6 +63958,7 @@ module.exports = {
     AiAnalysisTaskHighlightOutput: AiAnalysisTaskHighlightOutput,
     DescribeRebuildMediaTemplatesRequest: DescribeRebuildMediaTemplatesRequest,
     ReviewImageSegmentItem: ReviewImageSegmentItem,
+    CreateCLSTopicResponse: CreateCLSTopicResponse,
     CreateRoundPlayResponse: CreateRoundPlayResponse,
     MediaSubtitleInput: MediaSubtitleInput,
     FileVerifyInfo: FileVerifyInfo,
@@ -63419,8 +63971,9 @@ module.exports = {
     ModifyReviewTemplateRequest: ModifyReviewTemplateRequest,
     CreateBlindWatermarkTemplateResponse: CreateBlindWatermarkTemplateResponse,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
+    DescribeCLSTopicsResponse: DescribeCLSTopicsResponse,
     MPSSubTaskResult: MPSSubTaskResult,
-    MediaTrackItem: MediaTrackItem,
+    HeadTailTemplate: HeadTailTemplate,
     ImportMediaKnowledgeResponse: ImportMediaKnowledgeResponse,
     RestoreMediaResponse: RestoreMediaResponse,
     ImageUnderstandingItem: ImageUnderstandingItem,
@@ -63441,7 +63994,7 @@ module.exports = {
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
     DescribeHeadTailTemplatesRequest: DescribeHeadTailTemplatesRequest,
     CreateLLMComprehendTemplateResponse: CreateLLMComprehendTemplateResponse,
-    ImageSceneAigcEncodeConfig: ImageSceneAigcEncodeConfig,
+    DescribeCdnLogsRequest: DescribeCdnLogsRequest,
     BlurConfigureInfoForUpdate: BlurConfigureInfoForUpdate,
     ProcessMediaByUrlResponse: ProcessMediaByUrlResponse,
     EditMediaVideoStream: EditMediaVideoStream,
@@ -63497,7 +64050,7 @@ module.exports = {
     SetVodDomainCertificateResponse: SetVodDomainCertificateResponse,
     ExtractTraceWatermarkTaskOutput: ExtractTraceWatermarkTaskOutput,
     MediaProcessTaskCoverBySnapshotResult: MediaProcessTaskCoverBySnapshotResult,
-    DeleteAigcApiTokenResponse: DeleteAigcApiTokenResponse,
+    CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     UserAgentFilter: UserAgentFilter,
     BlackWhiteEdgeConfigureInfo: BlackWhiteEdgeConfigureInfo,
     SortBy: SortBy,
@@ -63520,7 +64073,6 @@ module.exports = {
     ExecuteFunctionResponse: ExecuteFunctionResponse,
     TranscodePlayInfo2017: TranscodePlayInfo2017,
     SplitMediaTask: SplitMediaTask,
-    CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     OthersPrivateAccess: OthersPrivateAccess,
     ComposeMediaTaskInput: ComposeMediaTaskInput,
     ModifyQualityInspectTemplateRequest: ModifyQualityInspectTemplateRequest,
@@ -63584,12 +64136,12 @@ module.exports = {
     ReviewImageResult: ReviewImageResult,
     DeleteSampleSnapshotTemplateResponse: DeleteSampleSnapshotTemplateResponse,
     AiAnalysisTaskTagInput: AiAnalysisTaskTagInput,
-    HeadTailTemplate: HeadTailTemplate,
+    DeleteAigcApiTokenResponse: DeleteAigcApiTokenResponse,
     DescribeStorageDetailsResponse: DescribeStorageDetailsResponse,
     PullEventsResponse: PullEventsResponse,
     MediaProcessTaskTranscodeResult: MediaProcessTaskTranscodeResult,
     AiRecognitionTaskObjectResultInput: AiRecognitionTaskObjectResultInput,
-    DescribeCdnLogsRequest: DescribeCdnLogsRequest,
+    CreateCLSLogsetResponse: CreateCLSLogsetResponse,
     MediaProcessTaskInput: MediaProcessTaskInput,
     OutputVideoStream: OutputVideoStream,
     ProcedureTemplate: ProcedureTemplate,
@@ -63628,8 +64180,9 @@ module.exports = {
     ProcessImageAsyncOutput: ProcessImageAsyncOutput,
     SnapshotByTimeOffsetTaskInput: SnapshotByTimeOffsetTaskInput,
     RefererAuthPolicy: RefererAuthPolicy,
-    TaskStatDataItem: TaskStatDataItem,
+    ProcessMediaByMPSResponse: ProcessMediaByMPSResponse,
     AiRecognitionTaskObjectSegmentItem: AiRecognitionTaskObjectSegmentItem,
+    CreateCLSTopicRequest: CreateCLSTopicRequest,
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
     ObjectConfigureInfoForUpdate: ObjectConfigureInfoForUpdate,
     ApplyUploadRequest: ApplyUploadRequest,
@@ -63647,12 +64200,14 @@ module.exports = {
     ProcessMediaByProcedureRequest: ProcessMediaByProcedureRequest,
     RebuildMediaTargetVideoStream: RebuildMediaTargetVideoStream,
     VoiceConfigureInfo: VoiceConfigureInfo,
+    MediaTrackItem: MediaTrackItem,
     ClipTask2017: ClipTask2017,
     DeletePersonSampleRequest: DeletePersonSampleRequest,
     TranscodeTemplate: TranscodeTemplate,
     DescribeCDNUsageDataRequest: DescribeCDNUsageDataRequest,
     JustInTimeTranscodeTemplate: JustInTimeTranscodeTemplate,
     SceneAigcImageOutputConfig: SceneAigcImageOutputConfig,
+    TaskStatDataItem: TaskStatDataItem,
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,
     DescribeLLMComprehendTemplatesRequest: DescribeLLMComprehendTemplatesRequest,
     AiReviewTaskPoliticalAsrResult: AiReviewTaskPoliticalAsrResult,
@@ -63661,7 +64216,7 @@ module.exports = {
     DescribeReviewDetailsRequest: DescribeReviewDetailsRequest,
     ModifySubAppIdInfoResponse: ModifySubAppIdInfoResponse,
     AiReviewProhibitedAsrTaskInput: AiReviewProhibitedAsrTaskInput,
-    MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
+    DeleteCLSTopicRequest: DeleteCLSTopicRequest,
     ParseStreamingManifestResponse: ParseStreamingManifestResponse,
     ListFilesResponse: ListFilesResponse,
     CreateRoundPlayRequest: CreateRoundPlayRequest,
@@ -63738,6 +64293,7 @@ module.exports = {
     CreateAigcApiTokenRequest: CreateAigcApiTokenRequest,
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
     TerrorismImageResult: TerrorismImageResult,
+    MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
     CreateAigcCustomVoiceResponse: CreateAigcCustomVoiceResponse,
     ImageEnhanceConfig: ImageEnhanceConfig,
     DescribeDrmKeyProviderInfoResponse: DescribeDrmKeyProviderInfoResponse,
@@ -63767,6 +64323,7 @@ module.exports = {
     DeleteWordSamplesResponse: DeleteWordSamplesResponse,
     MediaCastEvent: MediaCastEvent,
     HeuristicCache: HeuristicCache,
+    DescribeDefaultDistributionConfigResponse: DescribeDefaultDistributionConfigResponse,
     DeleteProcedureTemplateRequest: DeleteProcedureTemplateRequest,
     WatermarkInput: WatermarkInput,
     SearchMediaBySemanticsResponse: SearchMediaBySemanticsResponse,
@@ -63817,6 +64374,7 @@ module.exports = {
     ModifyRoundPlayResponse: ModifyRoundPlayResponse,
     CreateProcedureTemplateResponse: CreateProcedureTemplateResponse,
     FollowRedirect: FollowRedirect,
+    DescribeCLSLogsetsResponse: DescribeCLSLogsetsResponse,
     DescribeMPSTemplatesResponse: DescribeMPSTemplatesResponse,
     RebuildMediaResponse: RebuildMediaResponse,
     SetDrmKeyProviderInfoResponse: SetDrmKeyProviderInfoResponse,
@@ -63826,6 +64384,7 @@ module.exports = {
     ReduceMediaBitrateMediaProcessTaskResult: ReduceMediaBitrateMediaProcessTaskResult,
     CreateAigcAdvancedCustomElementOutput: CreateAigcAdvancedCustomElementOutput,
     AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
+    DescribeCLSLogsetsRequest: DescribeCLSLogsetsRequest,
     DescribeAigcUsageDataRequest: DescribeAigcUsageDataRequest,
     CreateVodDomainResponse: CreateVodDomainResponse,
     ModifyVodDomainAccelerateConfigResponse: ModifyVodDomainAccelerateConfigResponse,
@@ -63849,7 +64408,7 @@ module.exports = {
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
     ModifyReviewTemplateResponse: ModifyReviewTemplateResponse,
     CreateProcessImageAsyncTemplateRequest: CreateProcessImageAsyncTemplateRequest,
-    MPSSmartErasePrivacyConfig: MPSSmartErasePrivacyConfig,
+    CreateCLSLogsetRequest: CreateCLSLogsetRequest,
     ExtractTraceWatermarkRequest: ExtractTraceWatermarkRequest,
     CDNDomainConfig: CDNDomainConfig,
     DescribeAigcApiTokensResponse: DescribeAigcApiTokensResponse,
@@ -63917,6 +64476,7 @@ module.exports = {
     UserDefineAsrTextReviewTemplateInfoForUpdate: UserDefineAsrTextReviewTemplateInfoForUpdate,
     DescribeCDNDomainsResponse: DescribeCDNDomainsResponse,
     DomainQUICConfig: DomainQUICConfig,
+    MPSSmartErasePrivacyConfig: MPSSmartErasePrivacyConfig,
     CreateRebuildMediaTemplateRequest: CreateRebuildMediaTemplateRequest,
     ImageOperation: ImageOperation,
     MediaSubStreamInfoItem: MediaSubStreamInfoItem,
@@ -63937,7 +64497,9 @@ module.exports = {
     VideoDenoiseInfo: VideoDenoiseInfo,
     DescribeLicenseUsageDataRequest: DescribeLicenseUsageDataRequest,
     DeleteTranscodeTemplateResponse: DeleteTranscodeTemplateResponse,
+    RebuildVideoInfo: RebuildVideoInfo,
     MediaTranscodeItem: MediaTranscodeItem,
+    CLSLogsetInfo: CLSLogsetInfo,
     DescribePersonSamplesResponse: DescribePersonSamplesResponse,
     ExtractCopyRightWatermarkTaskOutput: ExtractCopyRightWatermarkTaskOutput,
     AigcAudioReferenceVideoInfo: AigcAudioReferenceVideoInfo,
@@ -64001,7 +64563,7 @@ module.exports = {
     UserDefineOcrTextReviewTemplateInfoForUpdate: UserDefineOcrTextReviewTemplateInfoForUpdate,
     SampleSnapshotTaskInput: SampleSnapshotTaskInput,
     ReviewImageRequest: ReviewImageRequest,
-    RebuildVideoInfo: RebuildVideoInfo,
+    ObjectConfigureInfo: ObjectConfigureInfo,
     DescribeHeadTailTemplatesResponse: DescribeHeadTailTemplatesResponse,
     HandleCurrentPlaylistRequest: HandleCurrentPlaylistRequest,
     RebuildMediaByTemplateResponse: RebuildMediaByTemplateResponse,

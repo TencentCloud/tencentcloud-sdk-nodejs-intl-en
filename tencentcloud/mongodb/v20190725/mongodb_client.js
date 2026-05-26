@@ -18,25 +18,31 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeSpecInfoRequest = models.DescribeSpecInfoRequest;
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
-const DescribeCurrentOpResponse = models.DescribeCurrentOpResponse;
+const CreateDBInstanceParamTplResponse = models.CreateDBInstanceParamTplResponse;
 const DescribeAccountUsersRequest = models.DescribeAccountUsersRequest;
-const SetInstanceMaintenanceResponse = models.SetInstanceMaintenanceResponse;
+const DescribeDBInstanceParamTplRequest = models.DescribeDBInstanceParamTplRequest;
 const CreateBackupDBInstanceResponse = models.CreateBackupDBInstanceResponse;
 const DescribeAuditLogsRequest = models.DescribeAuditLogsRequest;
 const DBInstancePrice = models.DBInstancePrice;
-const TerminateDBInstancesRequest = models.TerminateDBInstancesRequest;
+const DescribePasswordRotationResponse = models.DescribePasswordRotationResponse;
 const KillOpsRequest = models.KillOpsRequest;
+const EnablePasswordRotationRequest = models.EnablePasswordRotationRequest;
 const DeleteLogDownloadTaskResponse = models.DeleteLogDownloadTaskResponse;
 const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
 const DescribeAuditLogFilesResponse = models.DescribeAuditLogFilesResponse;
+const FlushInstanceRouterConfigRequest = models.FlushInstanceRouterConfigRequest;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const FlushInstanceRouterConfigResponse = models.FlushInstanceRouterConfigResponse;
+const DescribeCurrentOpResponse = models.DescribeCurrentOpResponse;
 const SetDBInstanceDeletionProtectionRequest = models.SetDBInstanceDeletionProtectionRequest;
 const InstanceMultiParam = models.InstanceMultiParam;
 const DescribeSRVConnectionDomainResponse = models.DescribeSRVConnectionDomainResponse;
 const ModifyInstanceParamsResponse = models.ModifyInstanceParamsResponse;
+const SetInstanceMaintenanceResponse = models.SetInstanceMaintenanceResponse;
 const DescribeInstanceSSLRequest = models.DescribeInstanceSSLRequest;
+const EnableTransparentDataEncryptionRequest = models.EnableTransparentDataEncryptionRequest;
 const DescribeBackupRulesResponse = models.DescribeBackupRulesResponse;
+const ModifyBackupExpireTimeResponse = models.ModifyBackupExpireTimeResponse;
 const SlowLogPattern = models.SlowLogPattern;
 const Task = models.Task;
 const ModifySRVConnectionUrlResponse = models.ModifySRVConnectionUrlResponse;
@@ -46,24 +52,27 @@ const DescribeDBInstanceDealResponse = models.DescribeDBInstanceDealResponse;
 const DescribeAuditLogsResponse = models.DescribeAuditLogsResponse;
 const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const CreateDBInstanceParamTplRequest = models.CreateDBInstanceParamTplRequest;
 const DisableSRVConnectionUrlResponse = models.DisableSRVConnectionUrlResponse;
 const DescribeSecurityGroupRequest = models.DescribeSecurityGroupRequest;
 const RenameInstanceRequest = models.RenameInstanceRequest;
 const DescribeBackupRulesRequest = models.DescribeBackupRulesRequest;
 const DescribeBackupDownloadTaskResponse = models.DescribeBackupDownloadTaskResponse;
 const AddNodeList = models.AddNodeList;
-const FlushInstanceRouterConfigRequest = models.FlushInstanceRouterConfigRequest;
+const EnablePasswordRotationResponse = models.EnablePasswordRotationResponse;
 const DBInstanceInfo = models.DBInstanceInfo;
+const ParamType = models.ParamType;
 const SetAccountUserPrivilegeResponse = models.SetAccountUserPrivilegeResponse;
 const ModifyDBInstanceNetworkAddressRequest = models.ModifyDBInstanceNetworkAddressRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const InstanceEnableSSLRequest = models.InstanceEnableSSLRequest;
 const DescribeDBInstanceNamespaceRequest = models.DescribeDBInstanceNamespaceRequest;
-const EnableTransparentDataEncryptionRequest = models.EnableTransparentDataEncryptionRequest;
+const DescribeDBInstanceNodePropertyRequest = models.DescribeDBInstanceNodePropertyRequest;
 const LogInfo = models.LogInfo;
 const DeleteAccountUserRequest = models.DeleteAccountUserRequest;
 const SpecItem = models.SpecItem;
 const DescribeDetailedSlowLogsRequest = models.DescribeDetailedSlowLogsRequest;
+const ModifyInstanceAzResponse = models.ModifyInstanceAzResponse;
 const UpgradeDbInstanceVersionRequest = models.UpgradeDbInstanceVersionRequest;
 const ModifyDBInstanceNetworkAddressResponse = models.ModifyDBInstanceNetworkAddressResponse;
 const CreateAccountUserResponse = models.CreateAccountUserResponse;
@@ -90,12 +99,12 @@ const WanServiceNodeList = models.WanServiceNodeList;
 const CreateAccountUserRequest = models.CreateAccountUserRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const ModifyDBInstanceSecurityGroupRequest = models.ModifyDBInstanceSecurityGroupRequest;
-const DescribeAccountUsersResponse = models.DescribeAccountUsersResponse;
+const DeleteDBBackupsRequest = models.DeleteDBBackupsRequest;
 const DescribeDBInstanceNamespaceResponse = models.DescribeDBInstanceNamespaceResponse;
 const DescribeBackupDownloadTaskRequest = models.DescribeBackupDownloadTaskRequest;
 const ModifySRVConnectionUrlRequest = models.ModifySRVConnectionUrlRequest;
 const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
-const DisableSRVConnectionUrlRequest = models.DisableSRVConnectionUrlRequest;
+const DescribeAccountUsersResponse = models.DescribeAccountUsersResponse;
 const DescribeSRVConnectionDomainRequest = models.DescribeSRVConnectionDomainRequest;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const ModifyDBInstanceSecurityGroupResponse = models.ModifyDBInstanceSecurityGroupResponse;
@@ -115,21 +124,25 @@ const DescribeDBInstanceDealRequest = models.DescribeDBInstanceDealRequest;
 const UpgradeDBInstanceKernelVersionResponse = models.UpgradeDBInstanceKernelVersionResponse;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const CreateBackupDownloadTaskRequest = models.CreateBackupDownloadTaskRequest;
+const TerminateDBInstancesRequest = models.TerminateDBInstancesRequest;
+const ParamTpl = models.ParamTpl;
 const InquirePriceModifyDBInstanceSpecResponse = models.InquirePriceModifyDBInstanceSpecResponse;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
+const DeleteDBBackupsResponse = models.DeleteDBBackupsResponse;
 const SecurityGroupBound = models.SecurityGroupBound;
 const RestoreDBInstanceResponse = models.RestoreDBInstanceResponse;
 const BackupTotalSize = models.BackupTotalSize;
 const DescribeDBInstanceNodePropertyResponse = models.DescribeDBInstanceNodePropertyResponse;
 const CloseAuditServiceResponse = models.CloseAuditServiceResponse;
+const DescribeDBInstanceParamTplDetailResponse = models.DescribeDBInstanceParamTplDetailResponse;
 const DescribeMongodbLogsResponse = models.DescribeMongodbLogsResponse;
+const ModifyBackupExpireTimeRequest = models.ModifyBackupExpireTimeRequest;
 const DescribeInstanceSSLResponse = models.DescribeInstanceSSLResponse;
 const DescribeCurrentOpRequest = models.DescribeCurrentOpRequest;
 const BackupDownloadTask = models.BackupDownloadTask;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
 const SetDBInstanceDeletionProtectionResponse = models.SetDBInstanceDeletionProtectionResponse;
-const DescribeDBInstanceNodePropertyRequest = models.DescribeDBInstanceNodePropertyRequest;
 const DescribeDetailedSlowLogsResponse = models.DescribeDetailedSlowLogsResponse;
 const ShardInfo = models.ShardInfo;
 const TerminateDBInstancesResponse = models.TerminateDBInstancesResponse;
@@ -137,7 +150,7 @@ const EnableSRVConnectionUrlRequest = models.EnableSRVConnectionUrlRequest;
 const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
 const InstanceEnumParam = models.InstanceEnumParam;
 const RenameInstanceResponse = models.RenameInstanceResponse;
-const ModifyInstanceAzResponse = models.ModifyInstanceAzResponse;
+const DisableSRVConnectionUrlRequest = models.DisableSRVConnectionUrlRequest;
 const DescribeAuditConfigRequest = models.DescribeAuditConfigRequest;
 const CreateBackupDBInstanceRequest = models.CreateBackupDBInstanceRequest;
 const RestoreDatabases = models.RestoreDatabases;
@@ -146,8 +159,10 @@ const UpgradeDbInstanceVersionResponse = models.UpgradeDbInstanceVersionResponse
 const NodeProperty = models.NodeProperty;
 const KillOpsResponse = models.KillOpsResponse;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
+const DescribePasswordRotationRequest = models.DescribePasswordRotationRequest;
 const AuditLogFile = models.AuditLogFile;
 const EnableTransparentDataEncryptionResponse = models.EnableTransparentDataEncryptionResponse;
+const DescribeAuditLogFilesRequest = models.DescribeAuditLogFilesRequest;
 const AssignProjectRequest = models.AssignProjectRequest;
 const DescribeMongodbLogsRequest = models.DescribeMongodbLogsRequest;
 const CreateBackupDownloadTaskResponse = models.CreateBackupDownloadTaskResponse;
@@ -167,12 +182,13 @@ const OfflineIsolatedDBInstanceRequest = models.OfflineIsolatedDBInstanceRequest
 const InquirePriceCreateDBInstancesRequest = models.InquirePriceCreateDBInstancesRequest;
 const Operation = models.Operation;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const DescribeDBInstanceParamTplResponse = models.DescribeDBInstanceParamTplResponse;
 const AuditLog = models.AuditLog;
 const DescribeLogDownloadTasksResponse = models.DescribeLogDownloadTasksResponse;
 const SlowLogItem = models.SlowLogItem;
 const ModifyMongoDBParamType = models.ModifyMongoDBParamType;
 const SetInstanceMaintenanceRequest = models.SetInstanceMaintenanceRequest;
-const DescribeAuditLogFilesRequest = models.DescribeAuditLogFilesRequest;
+const DescribeDBInstanceParamTplDetailRequest = models.DescribeDBInstanceParamTplDetailRequest;
 const InstanceDetail = models.InstanceDetail;
 const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
 const RestoreCollection = models.RestoreCollection;
@@ -235,6 +251,18 @@ class MongodbClient extends AbstractClient {
     ModifyDBInstanceNetworkAddress(req, cb) {
         let resp = new ModifyDBInstanceNetworkAddressResponse();
         this.request("ModifyDBInstanceNetworkAddress", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query ALL MongoDB database parameter templates under the current account.
+**Description:** The DescribeDBInstanceParamTpl API is in public beta. During this period, this API is only applicable to beta test participants.
+     * @param {DescribeDBInstanceParamTplRequest} req
+     * @param {function(string, DescribeDBInstanceParamTplResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceParamTpl(req, cb) {
+        let resp = new DescribeDBInstanceParamTplResponse();
+        this.request("DescribeDBInstanceParamTpl", req, resp, cb);
     }
 
     /**
@@ -469,6 +497,18 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to create a parameter template for TencentDB for MongoDB.
+**Description:** The CreateDBInstanceParamTpl API is in public beta. During this period, this API is only applicable to beta test participants.
+     * @param {CreateDBInstanceParamTplRequest} req
+     * @param {function(string, CreateDBInstanceParamTplResponse):void} cb
+     * @public
+     */
+    CreateDBInstanceParamTpl(req, cb) {
+        let resp = new CreateDBInstanceParamTplResponse();
+        this.request("CreateDBInstanceParamTpl", req, resp, cb);
+    }
+
+    /**
      * This API is used to query slow log details of the instance.
      * @param {DescribeDetailedSlowLogsRequest} req
      * @param {function(string, DescribeDetailedSlowLogsResponse):void} cb
@@ -488,6 +528,17 @@ class MongodbClient extends AbstractClient {
     ModifyDBInstanceSpec(req, cb) {
         let resp = new ModifyDBInstanceSpecResponse();
         this.request("ModifyDBInstanceSpec", req, resp, cb);
+    }
+
+    /**
+     * Enable password rotation
+     * @param {EnablePasswordRotationRequest} req
+     * @param {function(string, EnablePasswordRotationResponse):void} cb
+     * @public
+     */
+    EnablePasswordRotation(req, cb) {
+        let resp = new EnablePasswordRotationResponse();
+        this.request("EnablePasswordRotation", req, resp, cb);
     }
 
     /**
@@ -689,6 +740,17 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * Retrieve the rotation status info
+     * @param {DescribePasswordRotationRequest} req
+     * @param {function(string, DescribePasswordRotationResponse):void} cb
+     * @public
+     */
+    DescribePasswordRotation(req, cb) {
+        let resp = new DescribePasswordRotationResponse();
+        this.request("DescribePasswordRotation", req, resp, cb);
+    }
+
+    /**
      * This API is used to set instance termination protection.
      * @param {SetDBInstanceDeletionProtectionRequest} req
      * @param {function(string, SetDBInstanceDeletionProtectionResponse):void} cb
@@ -756,6 +818,17 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to delete full backups.
+     * @param {DeleteDBBackupsRequest} req
+     * @param {function(string, DeleteDBBackupsResponse):void} cb
+     * @public
+     */
+    DeleteDBBackups(req, cb) {
+        let resp = new DeleteDBBackupsResponse();
+        this.request("DeleteDBBackups", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain all accounts of the current instance.
      * @param {DescribeAccountUsersRequest} req
      * @param {function(string, DescribeAccountUsersResponse):void} cb
@@ -811,6 +884,18 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query parameter template details of a cloud database instance for MongoDB.
+**Description:** The DescribeDBInstanceParamTplDetail API is in public beta. During this period, this interface is only applicable to beta test participants.
+     * @param {DescribeDBInstanceParamTplDetailRequest} req
+     * @param {function(string, DescribeDBInstanceParamTplDetailResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceParamTplDetail(req, cb) {
+        let resp = new DescribeDBInstanceParamTplDetailResponse();
+        this.request("DescribeDBInstanceParamTplDetail", req, resp, cb);
+    }
+
+    /**
      * This API is used to terminate a specific operation performed on a TencentDB for MongoDB instance.
      * @param {KillOpsRequest} req
      * @param {function(string, KillOpsResponse):void} cb
@@ -819,6 +904,17 @@ class MongodbClient extends AbstractClient {
     KillOps(req, cb) {
         let resp = new KillOpsResponse();
         this.request("KillOps", req, resp, cb);
+    }
+
+    /**
+     * Modify backup expiration time
+     * @param {ModifyBackupExpireTimeRequest} req
+     * @param {function(string, ModifyBackupExpireTimeResponse):void} cb
+     * @public
+     */
+    ModifyBackupExpireTime(req, cb) {
+        let resp = new ModifyBackupExpireTimeResponse();
+        this.request("ModifyBackupExpireTime", req, resp, cb);
     }
 
     /**

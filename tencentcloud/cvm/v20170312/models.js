@@ -2746,6 +2746,18 @@ class InquiryPriceResizeInstanceDisksRequest extends  AbstractModel {
          */
         this.ForceStop = null;
 
+        /**
+         * Configuration information of the system disk to be expanded. Only cloud disks are supported for expansion. You must specify either DataDisks or SystemDisk, but not both.
+         * @type {SystemDisk || null}
+         */
+        this.SystemDisk = null;
+
+        /**
+         * Whether to perform online resizing.
+         * @type {boolean || null}
+         */
+        this.ResizeOnline = null;
+
     }
 
     /**
@@ -2766,6 +2778,13 @@ class InquiryPriceResizeInstanceDisksRequest extends  AbstractModel {
             }
         }
         this.ForceStop = 'ForceStop' in params ? params.ForceStop : null;
+
+        if (params.SystemDisk) {
+            let obj = new SystemDisk();
+            obj.deserialize(params.SystemDisk)
+            this.SystemDisk = obj;
+        }
+        this.ResizeOnline = 'ResizeOnline' in params ? params.ResizeOnline : null;
 
     }
 }

@@ -306,7 +306,7 @@ class EbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query logs. 
+     * This API is used to query logs.
      * @param {SearchLogRequest} req
      * @param {function(string, SearchLogResponse):void} cb
      * @public

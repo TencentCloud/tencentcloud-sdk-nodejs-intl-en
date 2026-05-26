@@ -106,7 +106,7 @@ class DescribeCloudModerationResponse extends  AbstractModel {
 }
 
 /**
- * Robot parameters
+ * Bot parameters.
  * @class
  */
 class AgentConfig extends  AbstractModel {
@@ -114,46 +114,111 @@ class AgentConfig extends  AbstractModel {
         super();
 
         /**
-         * The robot's UserId is used to enter a room and initiate tasks. [Note] This UserId cannot be repeated with the host viewer [UserId](https://cloud.tencent.com/document/product/647/46351#userid) in the current room. If multiple tasks are initiated in a room, the robot's UserId cannot be repeated, otherwise the previous task will be interrupted. The robot's UserId must be unique in the room.
+         * The robot's UserId is used to enter a room and initiate a task. note that this UserId cannot be duplicated with the host or audience [UserId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#UserId) in the current room. if multiple tasks are initiated in a room, the robot's UserId cannot be mutually duplicated. otherwise, the previous task will be interrupted. ensure the robot's UserId is unique in the room.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * The verification signature corresponding to the robot's UserId, that is, UserId and UserSig are equivalent to the robot's login password to enter the room. For the specific calculation method, please refer to the TRTC calculation [UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig) solution.
+         * Signature verification corresponding to the chatbot's UserId, namely, the UserId and UserSig serve as the login password for the chatbot to enter the room. for specific calculation methods, see TRTC solution for calculating.
          * @type {string || null}
          */
         this.UserSig = null;
 
         /**
-         * The UserId of the robot pulling the media stream. After filling in, the robot will pull the media stream of the UserId for real-time processing
+         * UserId for robot stream pulling. after fill, the robot performs stream pulling and processes in real time.
          * @type {string || null}
          */
         this.TargetUserId = null;
 
         /**
-         * If there is no streaming in the room for more than MaxIdleTime, the Service will automatically close the task. The default value is 60s.
+         * Exceeding MaxIdleTime in the room with no streaming automatically shuts down the backend task. default value is 60s.
          * @type {number || null}
          */
         this.MaxIdleTime = null;
 
         /**
-         * Robot's welcome message
+         * Robot'S greeting.
          * @type {string || null}
          */
         this.WelcomeMessage = null;
 
         /**
-         * Intelligent interruption mode, the default value is 0, 0 means the server automatically interrupts, 1 means the server does not interrupt, and the client sends an interrupt signal to interrupt
+         * Intelligent interruption mode, defaults to 0. 0 means server-side automatic interruption. 1 means the server does not interrupt, and the client sends an interruption signal to perform interruption.
          * @type {number || null}
          */
         this.InterruptMode = null;
 
         /**
-         * Used when InterruptMode is 0, in milliseconds, with a default value of 500ms. This means that the server will interrupt when it detects a human voice that lasts for InterruptSpeechDuration milliseconds.
+         * Used when InterruptMode is 0, in milliseconds, defaults to 500ms. indicates the server will interrupt when it detects continuous voice for InterruptSpeechDuration milliseconds.
          * @type {number || null}
          */
         this.InterruptSpeechDuration = null;
+
+        /**
+         * Controls the trigger mode for a new dialogue. default is 0.
+-0 means a new dialogue is automatically triggered when the server detects a complete sentence through automatic speech recognition.
+-1 indicates the client determines whether to manually send a chat signaling trigger for a new dialogue upon receiving the caption message.
+         * @type {number || null}
+         */
+        this.TurnDetectionMode = null;
+
+        /**
+         * Whether to filter out sentences where the user only says one word. true indicates filtering, false indicates no filtering. default value is true.
+         * @type {boolean || null}
+         */
+        this.FilterOneWord = null;
+
+        /**
+         * Welcome message priority. valid values: 0 (default), 1 (high priority). high priority messages cannot be interrupted.
+         * @type {number || null}
+         */
+        this.WelcomeMessagePriority = null;
+
+        /**
+         * For filtering LLM return content, do not play the content in brackets.
+Chinese bracket ().
+2: english parentheses.
+3: chinese square brackets [].
+4: english square brackets [].
+5: english curly braces {}.
+Empty by default, means no filtering.
+         * @type {number || null}
+         */
+        this.FilterBracketsContent = null;
+
+        /**
+         * Ambient sound settings.
+         * @type {AmbientSound || null}
+         */
+        this.AmbientSound = null;
+
+        /**
+         * Voiceprint configuration.
+         * @type {VoicePrint || null}
+         */
+        this.VoicePrint = null;
+
+        /**
+         * Semantic sentence segmentation detection.
+         * @type {TurnDetection || null}
+         */
+        this.TurnDetection = null;
+
+        /**
+         * Robot subtitle display mode.
+-0 means display as soon as possible without synchronizing with audio playback. at this point, subtitles are fully delivered, and subsequent subtitles will include previous ones.
+-1 indicates sentence-level real-time display, which synchronizes with audio playback. only when the current sentence's corresponding audio playback is complete will the next subtitle be delivered. at this point, subtitles are delivered incrementally, and the terminal needs to concatenate the leading and trailing subtitles to form a complete subtitle.
+         * @type {number || null}
+         */
+        this.SubtitleMode = null;
+
+        /**
+         * Interruption word list. during AI speaking, only speak words in the list to interrupt AI speaking.
+Note: interrupt words avoid triggering AI reply.
+         * @type {Array.<string> || null}
+         */
+        this.InterruptWordList = null;
 
     }
 
@@ -171,6 +236,30 @@ class AgentConfig extends  AbstractModel {
         this.WelcomeMessage = 'WelcomeMessage' in params ? params.WelcomeMessage : null;
         this.InterruptMode = 'InterruptMode' in params ? params.InterruptMode : null;
         this.InterruptSpeechDuration = 'InterruptSpeechDuration' in params ? params.InterruptSpeechDuration : null;
+        this.TurnDetectionMode = 'TurnDetectionMode' in params ? params.TurnDetectionMode : null;
+        this.FilterOneWord = 'FilterOneWord' in params ? params.FilterOneWord : null;
+        this.WelcomeMessagePriority = 'WelcomeMessagePriority' in params ? params.WelcomeMessagePriority : null;
+        this.FilterBracketsContent = 'FilterBracketsContent' in params ? params.FilterBracketsContent : null;
+
+        if (params.AmbientSound) {
+            let obj = new AmbientSound();
+            obj.deserialize(params.AmbientSound)
+            this.AmbientSound = obj;
+        }
+
+        if (params.VoicePrint) {
+            let obj = new VoicePrint();
+            obj.deserialize(params.VoicePrint)
+            this.VoicePrint = obj;
+        }
+
+        if (params.TurnDetection) {
+            let obj = new TurnDetection();
+            obj.deserialize(params.TurnDetection)
+            this.TurnDetection = obj;
+        }
+        this.SubtitleMode = 'SubtitleMode' in params ? params.SubtitleMode : null;
+        this.InterruptWordList = 'InterruptWordList' in params ? params.InterruptWordList : null;
 
     }
 }
@@ -525,7 +614,7 @@ class McuRecordParams extends  AbstractModel {
          * Retweet recording mode. 
 0/Leave blank: not currently supported; behavior is undefined.
 1: disable recording.
-2: enable recording (via console automatic recording template parameters, see: [redirection document](https://www.tencentcloud.com/document/product/647/111748?from_cn_redirect=1#.E5.BD.95.E5.88.B6.E6.8E.A7.E5.88.B6.E6.96.B9.E6.A1.88));.
+2: enable recording (via console automatic recording template parameters.
 3: enable recording (use API to specify parameter).
          * @type {number || null}
          */
@@ -855,7 +944,7 @@ class StartAIConversationResponse extends  AbstractModel {
         super();
 
         /**
-         * Used to uniquely identify a conversation task.
+         * For uniquely identifying a conversation task.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -890,31 +979,31 @@ class StartAIConversationRequest extends  AbstractModel {
         super();
 
         /**
-         * TRTC's [SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid) is the same as the SdkAppId used by the room that starts the conversation task.
+         * [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#SdkAppId) of TRTC, which is the same as the SdkAppId used by the room with transcription task enabled.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * TRTC's [RoomId](https://cloud.tencent.com/document/product/647/46351#roomid), which indicates the room number where the conversation task is started.
+         * [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC refers to the room number that enables the conversation task.
          * @type {string || null}
          */
         this.RoomId = null;
 
         /**
-         * Robot parameters
+         * Bot parameters.
          * @type {AgentConfig || null}
          */
         this.AgentConfig = null;
 
         /**
-         * The unique ID passed in by the caller can be used by the client to prevent repeated task initiation and to query the task status through this field.
+         * The unique Id passed by the caller can be used to prevent duplication of task initiation on the client side as well as query task status through this field.
          * @type {string || null}
          */
         this.SessionId = null;
 
         /**
-         * The type of TRTC room number. 0 represents a numeric room number, and 1 represents a string room number. If not filled in, the default is a numeric room number.
+         * Type of the TRTC room number. 0 indicates digit room number, 1 indicates string room number. by default if left blank, it is digit room number.
          * @type {number || null}
          */
         this.RoomIdType = null;
@@ -926,16 +1015,23 @@ class StartAIConversationRequest extends  AbstractModel {
         this.STTConfig = null;
 
         /**
-         * LLM configuration. It must comply with the openai specification and be a JSON string. The example is as follows: <pre> { <br> &emsp; "LLMType": "Large model type", // String required, such as: "openai" <br> &emsp; "Model": "Your model name", // String required, specify the model to be used<br> "APIKey": "Your LLM API key", // String required <br> &emsp; "APIUrl": "https://api.xxx.com/chat/completions", // String required, URL for LLM API access<br> &emsp; "Streaming": true // Boolean optional, specify whether to use streaming<br> &emsp;} </pre>
+         * Required parameter, LLM configuration. it must comply with the openai standard and be a JSON String. example: <pre> { <br> &emsp;  "LLMType": "Model type",  // String required, for example: "openai" <br> &emsp;  "Model": "your Model name", // String required, specifies the Model to be used<br>    "APIKey": "your LLM API key", // String required <br> &emsp;  "APIUrl": "https://API.xxx.com/chat/completions", // String required, the URL for LLM API access<br> &emsp;  "History": 10, // Integer optional, sets the context rounds for LLM, default value is 0, maximum value is 50<br> &emsp;  "HistoryMode": 1, // Integer optional, 1 means the content in the LLM context will synchronize with playback audio, and text corresponding to unplayed audio will not appear in the context. 0 means no synchronization, default value is 0<br> &emsp;  "Streaming": true // Boolean optional, whether to use Streaming<br> &emsp;} </pre>.
          * @type {string || null}
          */
         this.LLMConfig = null;
 
         /**
-         * TTS configuration, which is a JSON string. The Tencent Cloud TTS example is as follows: <pre>{ <br> &emsp; "AppId": your application ID, // Integer Required<br> &emsp; "TTSType": "TTS type", // String TTS type, fixed to "tencent"<br> &emsp; "SecretId": "Your key ID", // String Required<br> &emsp; "SecretKey": "Your keyKey", // String Required<br> &emsp; "VoiceType": 101001, // Integer Required, voice ID, including standard voice and premium voice. Premium voice has higher fidelity and different price from standard voice. For details, please refer to <a href="https://cloud.tencent.com/document/product/1073/34112">Overview of Speech Synthesis Billing</a>. For a complete list of timbre IDs, see <a href="https://cloud.tencent.com/document/product/1073/92668#55924b56-1a73-4663-a7a1-a8dd82d6e823">List of speech synthesis timbre IDs</a>. <br> &emsp; "Speed": 1.25, // Integer Optional, speaking speed, range: [-2, 6], corresponding to different speaking speeds: -2: 0.6 times -1: 0.8 times 0: 1.0 times (default) 1: 1.2 times 2: 1.5 times 6: 2.5 times If a more detailed speaking speed is required, 2 decimal places can be retained, such as 0.5/1.25/2.81, etc. For the conversion between parameter value and actual speech speed, please refer to <a href="https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz">Speed Conversion</a><br> &emsp; "Volume": 5, // Integer Optional, volume size, range: [0, 10], corresponding to 11 levels of volume, the default value is 0, representing normal volume. <br> &emsp; "PrimaryLanguage": "zh-CN" // String Optional, primary language<br> &emsp;}</pre>
+         * Required parameter, TTS configuration. it is a JSON string: TRTC TTS configuration as follows:.  
+<pre> { <br> &emsp;  "TTSType": "flow",  // [required] fixed to this value.  <br> &emsp;  "VoiceId": "v-female-R2s4N9qJ", // [required] premium timbre ID/clone voice ID. selectable different timbres. refer to the following timbre list for ID library.   <br> &emsp;  "Model": "flow_01_turbo", // (required) current default TTS Model version (corresponds to Flash version).  <br> &emsp;  "Speed": 1.0,    // [option] adjust the speaking rate. value range [0.5-2.0]. default 1.0. the larger the value, the faster the speech speed. <br> &emsp;  "Volume": 1.0,   // [optional] adjust volume [0,10]. default: 1.0. a larger value indicates higher volume.   <br> &emsp;  "Pitch": 0,   // [optional] adjusts the tone [-12,12]. default value is 0. among them, 0 outputs the original voice type. <br> &emsp;  "Language": "zh" // [optional] recommend filling in. currently supports filling in chinese: zh, english: en, cantonese dialect: yue. parameter reference: (ISO 639-1). <br> &emsp;} </pre>
          * @type {string || null}
          */
         this.TTSConfig = null;
+
+        /**
+         * Experimental parameter, contact for background usage.
+         * @type {string || null}
+         */
+        this.ExperimentalParams = null;
 
     }
 
@@ -964,6 +1060,7 @@ class StartAIConversationRequest extends  AbstractModel {
         }
         this.LLMConfig = 'LLMConfig' in params ? params.LLMConfig : null;
         this.TTSConfig = 'TTSConfig' in params ? params.TTSConfig : null;
+        this.ExperimentalParams = 'ExperimentalParams' in params ? params.ExperimentalParams : null;
 
     }
 }
@@ -1065,6 +1162,76 @@ class McuLayoutVolume extends  AbstractModel {
         this.PayloadType = 'PayloadType' in params ? params.PayloadType : null;
         this.Interval = 'Interval' in params ? params.Interval : null;
         this.FollowIdr = 'FollowIdr' in params ? params.FollowIdr : null;
+
+    }
+}
+
+/**
+ * VoiceClone request structure.
+ * @class
+ */
+class VoiceCloneRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the SdkAppId of TRTC.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Sound clone name. only digits, letters, and underscores are allowed with a maximum of 36 characters.
+         * @type {string || null}
+         */
+        this.VoiceName = null;
+
+        /**
+         * The reference audio for voice cloning must be a base64 string of a 16k mono wav file with length between 10–180 seconds.
+         * @type {string || null}
+         */
+        this.PromptAudio = null;
+
+        /**
+         * API key for TTS.
+         * @type {string || null}
+         */
+        this.APIKey = null;
+
+        /**
+         * Reference text for voice cloning. specifies the text corresponding to the reference audio.
+         * @type {string || null}
+         */
+        this.PromptText = null;
+
+        /**
+         * TTS model: flow_01_turbo, flow_01_ex.
+         * @type {string || null}
+         */
+        this.Model = null;
+
+        /**
+         * Language parameter, empty by default. see: (ISO 639-1).
+         * @type {string || null}
+         */
+        this.Language = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.VoiceName = 'VoiceName' in params ? params.VoiceName : null;
+        this.PromptAudio = 'PromptAudio' in params ? params.PromptAudio : null;
+        this.APIKey = 'APIKey' in params ? params.APIKey : null;
+        this.PromptText = 'PromptText' in params ? params.PromptText : null;
+        this.Model = 'Model' in params ? params.Model : null;
+        this.Language = 'Language' in params ? params.Language : null;
 
     }
 }
@@ -1476,14 +1643,13 @@ class AbnormalEvent extends  AbstractModel {
         super();
 
         /**
-         * The error event ID. For details, see https://www.tencentcloud.com/document/product/647/37906?has_map=1
+         * Exception event ID. view the specific value in the appendix: abnormal experience ID [mapping table](https://trtc.io/document/37906)
          * @type {number || null}
          */
         this.AbnormalEventId = null;
 
         /**
-         * The remote user ID. If this parameter is empty, it indicates that the error event is not associated with a remote user.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Remote user ID,"": indicates the exception event is not user-generated.
          * @type {string || null}
          */
         this.PeerId = null;
@@ -1504,31 +1670,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeScaleInfo response structure.
+ * DeleteCloudSliceTask request structure.
  * @class
  */
-class DescribeScaleInfoResponse extends  AbstractModel {
+class DeleteCloudSliceTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The number of records returned.
+         * SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the TRTC room.
          * @type {number || null}
          */
-        this.Total = null;
+        this.SdkAppId = null;
 
         /**
-         * The returned data.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ScaleInfomation> || null}
-         */
-        this.ScaleList = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Unique ID of the slicing task, which is returned after the task is started.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.TaskId = null;
 
     }
 
@@ -1539,17 +1698,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.ScaleList) {
-            this.ScaleList = new Array();
-            for (let z in params.ScaleList) {
-                let obj = new ScaleInfomation();
-                obj.deserialize(params.ScaleList[z]);
-                this.ScaleList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -2059,7 +2209,7 @@ class DescribeTRTCMarketScaleDataResponse extends  AbstractModel {
 }
 
 /**
- * Translation config
+ * Translate configuration.
  * @class
  */
 class TranslationConfig extends  AbstractModel {
@@ -2067,25 +2217,27 @@ class TranslationConfig extends  AbstractModel {
         super();
 
         /**
-         * Target language, target language list (ISO 639-1).
+         * Target language for translation, target language list (ISO 639-1).
+
          * @type {Array.<string> || null}
          */
         this.TargetLanguages = null;
 
         /**
-         * 1: Only text translation, 2: Voice simultaneous interpretation.
+         * 1: text translation only 2: speech simultaneous interpretation.
+
          * @type {number || null}
          */
         this.Mode = null;
 
         /**
-         * Voice simultaneous interpretation configuration: When enabling simultaneous interpretation, this parameter needs to be passed.
+         * Speech simultaneous interpretation configuration. when enabling simultaneous interpretation, transmission is required.
          * @type {TTSConfig || null}
          */
         this.TTSConfig = null;
 
         /**
-         * Translation terminology.
+         * Translation terminology collection.
          * @type {Array.<Terminology> || null}
          */
         this.Terminology = null;
@@ -2551,6 +2703,41 @@ To store files to tencent cloud object storage (COS), visit https://console.clou
 }
 
 /**
+ * Voiceprint configuration parameters.
+ * @class
+ */
+class VoicePrint extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The default is 0, which means voiceprint is not enabled. 1 means voiceprint is enabled, at which point you need to fill in the voiceprint id.
+         * @type {number || null}
+         */
+        this.Mode = null;
+
+        /**
+         * VoicePrint Mode requires filling in when set to 1. currently only support a VoicePrint id.
+         * @type {Array.<string> || null}
+         */
+        this.IdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.IdList = 'IdList' in params ? params.IdList : null;
+
+    }
+}
+
+/**
  * DescribeTrtcUsage response structure.
  * @class
  */
@@ -3007,6 +3194,41 @@ Landscape mode.
         }
         this.MobileDeviceType = 'MobileDeviceType' in params ? params.MobileDeviceType : null;
         this.ScreenOrientation = 'ScreenOrientation' in params ? params.ScreenOrientation : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class PronunciationDict extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Word = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Pronunciation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Word = 'Word' in params ? params.Word : null;
+        this.Pronunciation = 'Pronunciation' in params ? params.Pronunciation : null;
 
     }
 }
@@ -4195,6 +4417,59 @@ class DescribeAIConversationResponse extends  AbstractModel {
 }
 
 /**
+ * Format of TTS audio output.
+ * @class
+ */
+class AudioFormat extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Generated audio format.
+
+-TextToSpeechSSE streaming API.
+
+Supports pcm. default: pcm.
+
+-TextToSpeech non-streaming API.
+
+Supports pcm, wav, mp3. default: pcm.
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Generated audio sample rate. default 24000.
+Selectable.
+- 16000
+- 24000 
+         * @type {number || null}
+         */
+        this.SampleRate = null;
+
+        /**
+         * MP3 bitrate (kbps), only applicable to mp3 format. can choose: `64`, `128`, `192`, `256`. default: `128`.
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Format = 'Format' in params ? params.Format : null;
+        this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+
+    }
+}
+
+/**
  * DeleteCloudTranscription response structure.
  * @class
  */
@@ -4647,6 +4922,34 @@ class DescribeRelayUsageResponse extends  AbstractModel {
 }
 
 /**
+ * TextToSpeechSSE response structure.
+ * @class
+ */
+class TextToSpeechSSEResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem. As a streaming response API, when the request is successfully completed, the RequestId will be placed in the Header "X-TC-RequestId" of the HTTP response.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRecordingUsage response structure.
  * @class
  */
@@ -5039,24 +5342,31 @@ class McuStorageParams extends  AbstractModel {
 }
 
 /**
- * DeleteCloudSliceTask request structure.
+ * DescribeScaleInfo response structure.
  * @class
  */
-class DeleteCloudSliceTaskRequest extends  AbstractModel {
+class DescribeScaleInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the TRTC room.
+         * The number of records returned.
          * @type {number || null}
          */
-        this.SdkAppId = null;
+        this.Total = null;
 
         /**
-         * Unique ID of the slicing task, which is returned after the task is started.
+         * The returned data.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ScaleInfomation> || null}
+         */
+        this.ScaleList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.RequestId = null;
 
     }
 
@@ -5067,8 +5377,17 @@ class DeleteCloudSliceTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.ScaleList) {
+            this.ScaleList = new Array();
+            for (let z in params.ScaleList) {
+                let obj = new ScaleInfomation();
+                obj.deserialize(params.ScaleList[z]);
+                this.ScaleList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5458,6 +5777,51 @@ class McuFeedBackRoomParams extends  AbstractModel {
 }
 
 /**
+ * Sentence segmentation configuration.
+ * @class
+ */
+class TurnDetection extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * This parameter is valid only when TurnDetectionMode is 3, indicating the sensitivity of sentence segmentation.
+
+
+Feature description: determines whether the user has finished speaking to separate the audio.
+
+
+Optional: "low" | "medium" | "high" | "auto".
+
+
+auto is the default value, same as medium.
+low will give users sufficient time to speak.
+high will perform audio chunking as soon as possible.
+
+
+If you wish the model to respond more frequently in conversation mode, you can set SemanticEagerness to high.
+If you wish the AI to wait a moment when the user pauses, set SemanticEagerness to low.
+Regardless of the mode, it will eventually split and send to a large model for reply.
+
+         * @type {string || null}
+         */
+        this.SemanticEagerness = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SemanticEagerness = 'SemanticEagerness' in params ? params.SemanticEagerness : null;
+
+    }
+}
+
+/**
  * The audio encoding parameters.
  * @class
  */
@@ -5592,26 +5956,26 @@ class DescribeUnusualEventRequest extends  AbstractModel {
         super();
 
         /**
-         * The application ID, such as `1400xxxxxx`.
+         * User SdkAppId (for example: 1400xxxxxx).
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
-Note: Only data in the last 14 days can be queried.
+         * Query start time, local unix timestamp, in seconds (for example: 1590065777).
+Note: support querying data within the last 14 days.
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`. The end time and start time cannot be more than one hour apart.
+         * Query end time, local unix timestamp, in seconds (for example, 1590065877). note: the time interval from StartTime should be no more than 1 hour.
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * The room ID. Up to 20 random abnormal user experiences of the specified room will be returned.
+         * Room number. query up to 20 abnormal experience events in the room.
          * @type {string || null}
          */
         this.RoomId = null;
@@ -6155,7 +6519,7 @@ Note: the room id type defaults to integer. if the room id type is a string, spe
 }
 
 /**
- * Configuration used by speech recognition
+ * Configuration for speech recognition usage.
  * @class
  */
 class RecognizeConfig extends  AbstractModel {
@@ -6163,39 +6527,73 @@ class RecognizeConfig extends  AbstractModel {
         super();
 
         /**
-         * The supported languages for speech recognition are as follows, with the default being "zh" for Chinese. The values for the `Language` field follow the [ISO639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) standard. Here is the full list of supported languages:
+         * Convert speech to text supported languages, "zh" chinese is selected by default.
 
-1. Chinese = "zh"
-2. Chinese_TW = "zh-TW"
-3. Chinese_DIALECT = "zh-dialect"
-4. English = "en"
-5. Vietnamese = "vi"
-6. Japanese = "ja"
-7. Korean = "ko"
-8. Indonesian = "id"
-9. Thai = "th"
-10. Portuguese = "pt"
-11. Turkish = "tr"
-12. Arabic = "ar"
-13. Spanish = "es"
-14. Hindi = "hi"
-15. French = "fr"
-16. Malay = "ms"
-17. Filipino = "fil"
-18. German = "de"
-19. Italian = "it"
-20. Russian = "ru"
+You can unlock different languages by purchasing the "AI intelligent recognition duration package" or claiming the trial version of the monthly subscription package. 
 
-**Note:** If the language you need is not listed, please contact our technical support team.
+Supported languages for different speech to text package versions are as follows:.
+
+Basic language engine:.
+-"zh": chinese (simplified).
+
+**Standard language engine:**.
+-"8k_zh_large": engine (large model version) for telecommunication. the current model supports chinese and other language recognition, has a large number of parameters, and features language model performance enhancement. it greatly improves recognition accuracy for telephone audio in various scenarios and chinese dialects.
+-"16k_zh_large": large model engine for mandarin, chinese dialects, and english. the current model supports language recognition for chinese, english, and multiple chinese dialects. it has a large number of parameters and enhanced language model performance, targeting low-quality audio such as loud noise, strong echo, low voice volume, and voice from far away with greatly improved recognition accuracy.
+-"16k_zh_en": chinese-english large model engine. the current model simultaneously supports chinese and english recognition, has a large number of parameters, and features language model performance enhancement. it greatly improves recognition accuracy for low-quality audio such as loud noise, strong echo, low voice volume, and voice from far away.
+
+**Advanced language engine:**.
+-"zh-dialect": chinese dialect.
+-"zh-yue": cantonese in china.
+-"Vi": "vietnamese.".
+-"Ja": "japanese.".
+-"Ko": "korean.".
+-"id": "indonesian".
+-"Th": thai.
+-"pt": portuguese.
+-"tr": "turkish.".
+-"Ar": "arabic".
+-"es": "spanish".
+-"Hi": "hindi".
+-"Fr": "french.".
+-"ms": malay.
+-"Fil": filipino.
+-"de": german.
+-`It`: italian.
+-"Ru": russian.
+-"sv": "swedish.".
+-"Da": "danish.".
+-"No": norwegian.
+
+**Note**:.
+If the language you need is not available, contact our technical staff.
          * @type {string || null}
          */
         this.Language = null;
 
         /**
-         * Initiate fuzzy recognition to replace additional language types. Fill in up to 3 language types. Note: When Language is specified as "zh-dialect", fuzzy recognition is not supported and this field is invalid.
+         * **Fuzzy recognition is an advanced edition capacity, charged as advanced edition by default, and only supports filling in basic version and advanced edition language.**.
+Note: does not support entering "zh-dialect".
          * @type {Array.<string> || null}
          */
         this.AlternativeLanguage = null;
+
+        /**
+         * Hot word list: this parameter is used for improving recognition accuracy. each hot word is limited to "term|weight", with no more than 30 characters (a maximum of 10 chinese characters) per term. weight ranges from 1 to 11 or 100, for example: "tencent cloud|5" or "ASR|11". hot word list limitation: multiple terms separated by commas, supports up to 300 hot words, for example: "tencent cloud|10, speech recognition|5, ASR|11".
+         * @type {string || null}
+         */
+        this.HotWordList = null;
+
+        /**
+         * Specifies the time when automatic speech recognition (asr) vad is active. value range: 240-2000. default: 1000. unit: ms. a smaller value enables faster speech recognition sentence segmentation.
+         * @type {number || null}
+         */
+        this.VadSilenceTime = null;
+
+        /**
+         * The vad far-field voice suppression capacity (does not impact asr recognition performance) ranges from 0 to 3, with a default value of 0. recommended setting is 2 for better far-field voice suppression.
+         * @type {number || null}
+         */
+        this.VadLevel = null;
 
     }
 
@@ -6208,6 +6606,9 @@ class RecognizeConfig extends  AbstractModel {
         }
         this.Language = 'Language' in params ? params.Language : null;
         this.AlternativeLanguage = 'AlternativeLanguage' in params ? params.AlternativeLanguage : null;
+        this.HotWordList = 'HotWordList' in params ? params.HotWordList : null;
+        this.VadSilenceTime = 'VadSilenceTime' in params ? params.VadSilenceTime : null;
+        this.VadLevel = 'VadLevel' in params ? params.VadLevel : null;
 
     }
 }
@@ -6256,33 +6657,33 @@ class StartAITranscriptionRequest extends  AbstractModel {
         super();
 
         /**
-         * TRTC's [SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid) is the same as the SdkAppId used by the room that starts the transcription task.
+         * [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#SdkAppId) of TRTC, which is the same as the SdkAppId used by the room with transcription task enabled.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * TRTC's [RoomId](https://cloud.tencent.com/document/product/647/46351#roomid), which indicates the room number where the transcription task is started.
+         * [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC refers to the room number that enables the transcription task.
          * @type {string || null}
          */
         this.RoomId = null;
 
         /**
-         * Parameters of the transcription robot.
+         * Transcription robot parameters.
          * @type {TranscriptionParams || null}
          */
         this.TranscriptionParams = null;
 
         /**
-         * The unique ID passed by the caller is used by the server to deduplicate. Note: If this parameter is passed, the server will use it first to deduplicate. If this parameter is not passed, the server's deduplication strategy is as follows: 
-- If the TranscriptionMode field is 0, only one task can be opened in a room
-- If the TranscriptionMode field is 1, only one task can be opened in a TargetUserId
+         * Unique Id passed by the caller, used by the server for task deduplication. duplicate tasks will fail to initiate. the server uses SdkAppId+RoomId+RoomIdType+RobotUserId for deduplication by default. if SessionId is provided, it will also be used for deduplication.
+Note:.
+When TranscriptionMode is 0, ensure only one task is initiated in a room. if multiple tasks are initiated, robots will subscribe to each other. unless the task is stopped proactively, it will timeout exit after 10 hours. in such cases, it is advisable to fill in SessionId to ensure subsequent repeated tasks fail.
          * @type {string || null}
          */
         this.SessionId = null;
 
         /**
-         * The type of TRTC room number. 0 represents a numeric room number, and 1 represents a string room number. If not filled in, the default is a numeric room number.
+         * Type of the TRTC room number. 0 indicates digit room number, 1 indicates string room number. by default if left blank, it is digit room number.
          * @type {number || null}
          */
         this.RoomIdType = null;
@@ -6294,7 +6695,7 @@ class StartAITranscriptionRequest extends  AbstractModel {
         this.RecognizeConfig = null;
 
         /**
-         * Translation config.
+         * Translate configuration details.
          * @type {TranslationConfig || null}
          */
         this.TranslationConfig = null;
@@ -6749,7 +7150,7 @@ class TranscriptionParam extends  AbstractModel {
         this.UserId = null;
 
         /**
-         * User signature for the transcription service to join a TRTC room. The signature verification corresponding to the current UserId serves as the login password. For specific details, see TRTC solution for calculating [UserSig](https://www.tencentcloud.com/document/product/647/45910?from_cn_redirect=1#UserSig).
+         * User signature for the transcription service to join a TRTC room. The signature verification corresponding to the current UserId serves as the login password. For specific details, see TRTC solution for calculating [UserSig](https://intl.cloud.tencent.com/zh/document/product/647/38104).
          * @type {string || null}
          */
         this.UserSig = null;
@@ -6962,6 +7363,55 @@ class DeleteCloudRecordingRequest extends  AbstractModel {
 }
 
 /**
+ * TTS sound parameter configuration.
+ * @class
+ */
+class Voice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Voice ID, can be obtained from the timbre list or use a custom voice ID generated by sound clone.
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
+         * Speech speed adjustment. 0.5 for half speed, 2.0 for 2x speed, and 1.0 for normal speed. value range: [0.5, 2.0]. default: 1.0.
+         * @type {number || null}
+         */
+        this.Speed = null;
+
+        /**
+         * Audio volume adjustment, where 0 indicates mute and 10 indicates maximum volume. recommended to keep the default value of 1.0. value range: [0,10]. default: 1.0.
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * Pitch adjustment. negative value makes the sound deeper, positive value makes the sound sharper. 0 indicates the original pitch. value range: [-12, 12]. default: 0.
+         * @type {number || null}
+         */
+        this.Pitch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.Speed = 'Speed' in params ? params.Speed : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.Pitch = 'Pitch' in params ? params.Pitch : null;
+
+    }
+}
+
+/**
  * ModifyCloudModeration response structure.
  * @class
  */
@@ -6997,7 +7447,7 @@ class ModifyCloudModerationResponse extends  AbstractModel {
 }
 
 /**
- * Translation terminology
+ * Translate terminology.
  * @class
  */
 class Terminology extends  AbstractModel {
@@ -7005,13 +7455,13 @@ class Terminology extends  AbstractModel {
         super();
 
         /**
-         * Source terminology
+         * Source terminology.
          * @type {string || null}
          */
         this.Source = null;
 
         /**
-         * Target terminology
+         * Terminology translation result.
          * @type {string || null}
          */
         this.Target = null;
@@ -7206,6 +7656,63 @@ class DescribeTrtcRoomUsageRequest extends  AbstractModel {
         this.SdkAppid = 'SdkAppid' in params ? params.SdkAppid : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * TextToSpeech response structure.
+ * @class
+ */
+class TextToSpeechResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Base64-Encoded audio data.
+         * @type {string || null}
+         */
+        this.Audio = null;
+
+        /**
+         * 
+         * @type {Array.<AlignmentItem> || null}
+         */
+        this.Alignments = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TotalDurationMs = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Audio = 'Audio' in params ? params.Audio : null;
+
+        if (params.Alignments) {
+            this.Alignments = new Array();
+            for (let z in params.Alignments) {
+                let obj = new AlignmentItem();
+                obj.deserialize(params.Alignments[z]);
+                this.Alignments.push(obj);
+            }
+        }
+        this.TotalDurationMs = 'TotalDurationMs' in params ? params.TotalDurationMs : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7601,14 +8108,14 @@ class DescribeUnusualEventResponse extends  AbstractModel {
         super();
 
         /**
-         * The number of records returned.
-Value range: 0-20.
+         * Total number of returned data entries.
+Value range: [0, 20].
          * @type {number || null}
          */
         this.Total = null;
 
         /**
-         * The information of the abnormal user experiences.
+         * Abnormal experience list.
          * @type {Array.<AbnormalExperience> || null}
          */
         this.AbnormalExperienceList = null;
@@ -8129,46 +8636,28 @@ class DeleteCloudTranscriptionRequest extends  AbstractModel {
 }
 
 /**
- * The event information, including the timestamp and event ID.
+ * Background sound settings will add environmental sound effects during a call to make the experience more realistic. currently support the following options:.
+Coffee_shops: chat in a coffee shop communication environment with background chatter.
+busy office: customer service center.
+Street traffic: outdoors street.
+evening_mountain: outdoors mountain.
  * @class
  */
-class EventMessage extends  AbstractModel {
+class AmbientSound extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The video stream type. Valid values:
-`0`: A non-video event
-`2`: The big video
-`3`: The small video
-`7`: A relayed video
-         * @type {number || null}
+         * Scenario selection.
+         * @type {string || null}
          */
-        this.Type = null;
+        this.Scene = null;
 
         /**
-         * The event reporting time in the format of UNIX timestamp (milliseconds), such as `1589891188801`.
+         * Control the volume of ambient sound. value ranges from [0,2]. the lower the value, the softer the ambient sound; the higher the value, the louder the ambient sound. if not set, use the default value 1.
          * @type {number || null}
          */
-        this.Time = null;
-
-        /**
-         * The event ID. Events are classified into SDK events and WebRTC events. For more information, see https://www.tencentcloud.com/document/product/647/37906?has_map=1
-         * @type {number || null}
-         */
-        this.EventId = null;
-
-        /**
-         * The first event parameter, such as the video width.
-         * @type {number || null}
-         */
-        this.ParamOne = null;
-
-        /**
-         * The second event parameter, such as the video height.
-         * @type {number || null}
-         */
-        this.ParamTwo = null;
+        this.Volume = null;
 
     }
 
@@ -8179,11 +8668,8 @@ class EventMessage extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.EventId = 'EventId' in params ? params.EventId : null;
-        this.ParamOne = 'ParamOne' in params ? params.ParamOne : null;
-        this.ParamTwo = 'ParamTwo' in params ? params.ParamTwo : null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
 
     }
 }
@@ -8468,6 +8954,41 @@ class MaxVideoUser extends  AbstractModel {
 }
 
 /**
+ * VoiceClone response structure.
+ * @class
+ */
+class VoiceCloneResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloned voice type ID. specifies the ID for performing text to speech.
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateStreamIngest request structure.
  * @class
  */
@@ -8524,6 +9045,108 @@ class UpdateStreamIngestRequest extends  AbstractModel {
 }
 
 /**
+ * TextToSpeechSSE request structure.
+ * @class
+ */
+class TextToSpeechSSERequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Text to be converted to speech. length range: [1, 255].
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Audio configuration for text-to-speech.
+         * @type {Voice || null}
+         */
+        this.Voice = null;
+
+        /**
+         * Specifies the SdkAppId of TRTC.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Specifies the output audio format for text-to-speech.
+         * @type {AudioFormat || null}
+         */
+        this.AudioFormat = null;
+
+        /**
+         * API key for TTS.
+         * @type {string || null}
+         */
+        this.APIKey = null;
+
+        /**
+         * TTS model, current fixed value: flow_01_turbo.
+         * @type {string || null}
+         */
+        this.Model = null;
+
+        /**
+         * Language to be synthesised (ISO 639-1). supports zh (chinese), en (english), yue (cantonese), ja (japanese), and ko (korean). defaults to auto-identification.
+         * @type {string || null}
+         */
+        this.Language = null;
+
+        /**
+         * 
+         * @type {Array.<PronunciationDict> || null}
+         */
+        this.PronunciationDict = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AlignmentMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+
+        if (params.Voice) {
+            let obj = new Voice();
+            obj.deserialize(params.Voice)
+            this.Voice = obj;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+        if (params.AudioFormat) {
+            let obj = new AudioFormat();
+            obj.deserialize(params.AudioFormat)
+            this.AudioFormat = obj;
+        }
+        this.APIKey = 'APIKey' in params ? params.APIKey : null;
+        this.Model = 'Model' in params ? params.Model : null;
+        this.Language = 'Language' in params ? params.Language : null;
+
+        if (params.PronunciationDict) {
+            this.PronunciationDict = new Array();
+            for (let z in params.PronunciationDict) {
+                let obj = new PronunciationDict();
+                obj.deserialize(params.PronunciationDict[z]);
+                this.PronunciationDict.push(obj);
+            }
+        }
+        this.AlignmentMode = 'AlignmentMode' in params ? params.AlignmentMode : null;
+
+    }
+}
+
+/**
  * StopWebRecord response structure.
  * @class
  */
@@ -8552,7 +9175,7 @@ class StopWebRecordResponse extends  AbstractModel {
 }
 
 /**
- * Speech-to-text parameters
+ * Convert speech to text parameter.
  * @class
  */
 class STTConfig extends  AbstractModel {
@@ -8560,45 +9183,81 @@ class STTConfig extends  AbstractModel {
         super();
 
         /**
-         * The supported languages for speech recognition are as follows, with the default being "zh" for Chinese. The values for the `Language` field follow the [ISO639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) standard. Here is the full list of supported languages:
+         * Convert speech to text supported languages, "zh" chinese is selected by default.
 
-1. Chinese = "zh"
-2. Chinese_TW = "zh-TW"
-3. Chinese_DIALECT = "zh-dialect"
-4. English = "en"
-5. Vietnamese = "vi"
-6. Japanese = "ja"
-7. Korean = "ko"
-8. Indonesian = "id"
-9. Thai = "th"
-10. Portuguese = "pt"
-11. Turkish = "tr"
-12. Arabic = "ar"
-13. Spanish = "es"
-14. Hindi = "hi"
-15. French = "fr"
-16. Malay = "ms"
-17. Filipino = "fil"
-18. German = "de"
-19. Italian = "it"
-20. Russian = "ru"
+You can unlock different languages by purchasing the "AI intelligent recognition duration package" or claiming the trial version of the monthly subscription package. 
 
-**Note:** If the language you need is not listed, please contact our technical support team.
+Supported languages for different speech to text package versions are as follows:.
+
+Basic language engine:.
+-"zh": chinese (simplified).
+-`zh-TW`: chinese (traditional).
+-"En": english.
+-"16k_zh_edu": chinese education.
+-"16k_zh_medical": medical chinese.
+-"16k_zh_court": chinese court.
+
+**Standard language engine:**.
+-"8k_zh_large": engine (large model version) for telecommunication. the current model supports chinese and other language recognition, has a large number of parameters, and features language model performance enhancement. it greatly improves recognition accuracy for telephone audio in various scenarios and chinese dialects.
+-"16k_zh_large": large model engine for mandarin, chinese dialects, and english. the current model supports language recognition for chinese, english, and multiple chinese dialects. it has a large number of parameters and enhanced language model performance, targeting low-quality audio such as loud noise, strong echo, low voice volume, and voice from far away with greatly improved recognition accuracy.
+-"16k_multi_lang": multilingual large model engine. the current model simultaneously supports english, japanese, korean, arabic, filipino, french, hindi, indonesian, malay, portuguese, spanish, thai, turkish, vietnamese, and german. it achieves auto-identification of 15 languages at the sentence or paragraph level.
+-"16k_zh_en": chinese-english large model engine. the current model supports chinese and english recognition at the same time, has a large number of parameters, and features language model performance enhancement. it greatly improves recognition accuracy against low-quality audio such as loud noise, echo, low voice volume, and voice from far away.
+
+**Advanced language engine:**.
+-"zh-dialect": chinese dialect.
+-"zh-yue": cantonese in china.
+-"Vi": "vietnamese.".
+-"Ja": "japanese.".
+-"Ko": "korean.".
+-"id": "indonesian".
+-"Th": thai.
+-"pt": portuguese.
+-"tr": "turkish.".
+-"Ar": "arabic".
+-"es": "spanish".
+-"Hi": "hindi".
+-"Fr": "french.".
+-"ms": malay.
+-"Fil": filipino.
+-"de": german.
+-`It`: italian.
+-"Ru": russian.
+-"sv": "swedish.".
+-"Da": "danish.".
+-"No": norwegian.
+
+**Note**:.
+If the language you need is not available, contact our technical staff.
          * @type {string || null}
          */
         this.Language = null;
 
         /**
-         * Initiate fuzzy recognition to replace additional language types. Fill in up to 3 language types. Note: When Language is specified as "zh-dialect", fuzzy recognition is not supported and this field is invalid.
+         * **Fuzzy recognition is an advanced edition capacity, charged by default as the advanced edition.**.
+Note: does not support entering "zh-dialect", "16k_zh_edu", "16k_zh_medical", "16k_zh_court", "8k_zh_large", "16k_zh_large", "16k_multi_lang", "16k_zh_en".
+
          * @type {Array.<string> || null}
          */
         this.AlternativeLanguage = null;
 
         /**
-         * The time for speech recognition vad is in the range of 240-2000, the default value is 1000, and the unit is ms. A smaller value will make speech recognition sentence segmentation faster.
+         * Custom parameter. contact for background usage.
+
+         * @type {string || null}
+         */
+        this.CustomParam = null;
+
+        /**
+         * Specifies the time when automatic speech recognition (asr) vad is active. value range: 240-2000. default: 1000. unit: ms. a smaller value enables faster speech recognition sentence segmentation.
          * @type {number || null}
          */
         this.VadSilenceTime = null;
+
+        /**
+         * The vad far-field voice suppression capacity (without impacting asr recognition performance) ranges from 0 to 5, with a default value of 0, indicating disabled far-field voice suppression. the recommended setting is 2 for better far-field voice suppression. in a noisy office environment, it can be set to 3, and in more noisy environments, 4 and 5 are available for use. note that a higher VadLevel may suppress single words as noise.
+         * @type {number || null}
+         */
+        this.VadLevel = null;
 
     }
 
@@ -8611,7 +9270,9 @@ class STTConfig extends  AbstractModel {
         }
         this.Language = 'Language' in params ? params.Language : null;
         this.AlternativeLanguage = 'AlternativeLanguage' in params ? params.AlternativeLanguage : null;
+        this.CustomParam = 'CustomParam' in params ? params.CustomParam : null;
         this.VadSilenceTime = 'VadSilenceTime' in params ? params.VadSilenceTime : null;
+        this.VadLevel = 'VadLevel' in params ? params.VadLevel : null;
 
     }
 }
@@ -8713,6 +9374,66 @@ class StopAIConversationRequest extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * The event information, including the timestamp and event ID.
+ * @class
+ */
+class EventMessage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The video stream type. Valid values:
+`0`: A non-video event
+`2`: The big video
+`3`: The small video
+`7`: A relayed video
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * The event reporting time in the format of UNIX timestamp (milliseconds), such as `1589891188801`.
+         * @type {number || null}
+         */
+        this.Time = null;
+
+        /**
+         * The event ID. Events are classified into SDK events and WebRTC events. For more information, see https://www.tencentcloud.com/document/product/647/37906?has_map=1
+         * @type {number || null}
+         */
+        this.EventId = null;
+
+        /**
+         * The first event parameter, such as the video width.
+         * @type {number || null}
+         */
+        this.ParamOne = null;
+
+        /**
+         * The second event parameter, such as the video height.
+         * @type {number || null}
+         */
+        this.ParamTwo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.ParamOne = 'ParamOne' in params ? params.ParamOne : null;
+        this.ParamTwo = 'ParamTwo' in params ? params.ParamTwo : null;
 
     }
 }
@@ -8914,7 +9635,7 @@ class McuWaterMarkText extends  AbstractModel {
 }
 
 /**
- * AI Transcription Params
+ * AI transcribe parameters.
  * @class
  */
 class TranscriptionParams extends  AbstractModel {
@@ -8922,34 +9643,46 @@ class TranscriptionParams extends  AbstractModel {
         super();
 
         /**
-         * The robot's UserId is used to enter a room and initiate tasks. [Note] This UserId cannot be repeated with the host viewer [UserId](https://cloud.tencent.com/document/product/647/46351#userid) in the current room. If multiple tasks are initiated in a room, the robot's UserId cannot be repeated, otherwise the previous task will be interrupted. The robot's UserId must be unique in the room.
+         * The transcription robot's UserId is used to enter the room and trigger a transcription task. note that this UserId cannot be the same as the host or audience [UserId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#UserId) in the current room. if multiple transcription tasks are initiated in a room, the robot's UserId must also be unique to avoid interrupting the previous task. ensure the transcription robot's UserId is unique in the room.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * The verification signature corresponding to the robot's UserId, that is, UserId and UserSig are equivalent to the robot's login password to enter the room. For the specific calculation method, please refer to the TRTC calculation [UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig) solution.
+         * Verification signature corresponding to the transcription bot's UserId, namely, the UserId and UserSig serve as the login password for the transcription bot to enter the room. for specific calculation methods, see TRTC solution for calculating.
          * @type {string || null}
          */
         this.UserSig = null;
 
         /**
-         * If there is no streaming in the room for more than MaxIdleTime, the background will automatically close the task. The default value is 60s.
+         * After all push users exit the room and exceed MaxIdleTime seconds, the backend automation shuts down the transcription task. default value is 60s.
          * @type {number || null}
          */
         this.MaxIdleTime = null;
 
         /**
-         * 1 means the robot subscribes to the stream of only one person, 0 means the robot subscribes to the stream of the entire room. If it is not filled in, the robot subscribes to the stream of the entire room by default.
+         * 1 means the robot subscribes to the stream of an individual, and 0 means the robot subscribes to the stream of the entire room. if left empty, it defaults to subscribing to the stream of the entire room.
          * @type {number || null}
          */
         this.TranscriptionMode = null;
 
         /**
-         * Required when TranscriptionMode is 1. The robot will only pull the stream of the userid and ignore other users in the room.
+         * Required when TranscriptionMode is 1, the robot only pulls streams from this userid and ignores other users in the room.
          * @type {string || null}
          */
         this.TargetUserId = null;
+
+        /**
+         * Voiceprint configuration.
+         * @type {VoicePrint || null}
+         */
+        this.VoicePrint = null;
+
+        /**
+         * Semantic sentence segmentation detection.
+         * @type {TurnDetection || null}
+         */
+        this.TurnDetection = null;
 
     }
 
@@ -8965,6 +9698,18 @@ class TranscriptionParams extends  AbstractModel {
         this.MaxIdleTime = 'MaxIdleTime' in params ? params.MaxIdleTime : null;
         this.TranscriptionMode = 'TranscriptionMode' in params ? params.TranscriptionMode : null;
         this.TargetUserId = 'TargetUserId' in params ? params.TargetUserId : null;
+
+        if (params.VoicePrint) {
+            let obj = new VoicePrint();
+            obj.deserialize(params.VoicePrint)
+            this.VoicePrint = obj;
+        }
+
+        if (params.TurnDetection) {
+            let obj = new TurnDetection();
+            obj.deserialize(params.TurnDetection)
+            this.TurnDetection = obj;
+        }
 
     }
 }
@@ -9166,6 +9911,108 @@ When this option is enabled, it is recommended to use the "Subscription Allowlis
 }
 
 /**
+ * TextToSpeech request structure.
+ * @class
+ */
+class TextToSpeechRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Text to be converted to speech. length range: [1, 255].
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Audio configuration for text-to-speech.
+         * @type {Voice || null}
+         */
+        this.Voice = null;
+
+        /**
+         * Specifies the SdkAppId of TRTC.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Specifies the output audio format for text-to-speech.
+         * @type {AudioFormat || null}
+         */
+        this.AudioFormat = null;
+
+        /**
+         * API key for TTS.
+         * @type {string || null}
+         */
+        this.APIKey = null;
+
+        /**
+         * TTS model, current fixed value: flow_01_turbo.
+         * @type {string || null}
+         */
+        this.Model = null;
+
+        /**
+         * Language to be synthesised (ISO 639-1). supports zh (chinese), en (english), yue (cantonese), ja (japanese), and ko (korean). defaults to auto-identification.
+         * @type {string || null}
+         */
+        this.Language = null;
+
+        /**
+         * 
+         * @type {Array.<PronunciationDict> || null}
+         */
+        this.PronunciationDict = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AlignmentMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+
+        if (params.Voice) {
+            let obj = new Voice();
+            obj.deserialize(params.Voice)
+            this.Voice = obj;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+        if (params.AudioFormat) {
+            let obj = new AudioFormat();
+            obj.deserialize(params.AudioFormat)
+            this.AudioFormat = obj;
+        }
+        this.APIKey = 'APIKey' in params ? params.APIKey : null;
+        this.Model = 'Model' in params ? params.Model : null;
+        this.Language = 'Language' in params ? params.Language : null;
+
+        if (params.PronunciationDict) {
+            this.PronunciationDict = new Array();
+            for (let z in params.PronunciationDict) {
+                let obj = new PronunciationDict();
+                obj.deserialize(params.PronunciationDict[z]);
+                this.PronunciationDict.push(obj);
+            }
+        }
+        this.AlignmentMode = 'AlignmentMode' in params ? params.AlignmentMode : null;
+
+    }
+}
+
+/**
  * DescribeStreamIngest request structure.
  * @class
  */
@@ -9201,7 +10048,7 @@ class DescribeStreamIngestRequest extends  AbstractModel {
 }
 
 /**
- * TTS-related configurations
+ * TTS configuration.
  * @class
  */
 class TTSConfig extends  AbstractModel {
@@ -9209,10 +10056,28 @@ class TTSConfig extends  AbstractModel {
         super();
 
         /**
-         * Voice ID
+         * Voice type ID.
          * @type {string || null}
          */
         this.VoiceId = null;
+
+        /**
+         * TTS model: flow_01_turbo is selected by default. options: [flow_01_turbo, flow_01_ex].
+         * @type {string || null}
+         */
+        this.Model = null;
+
+        /**
+         * Speaking rate. value range: 0.5-2.0. default: 1.0.
+         * @type {number || null}
+         */
+        this.Speed = null;
+
+        /**
+         * Value range: (0, 10]. default value: 1.0.
+         * @type {number || null}
+         */
+        this.Volume = null;
 
     }
 
@@ -9224,6 +10089,9 @@ class TTSConfig extends  AbstractModel {
             return;
         }
         this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.Model = 'Model' in params ? params.Model : null;
+        this.Speed = 'Speed' in params ? params.Speed : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
 
     }
 }
@@ -9828,7 +10696,7 @@ class StartAITranscriptionResponse extends  AbstractModel {
         super();
 
         /**
-         * Used to uniquely identify a transcription task.
+         * For unique identification of transcription task.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -9882,6 +10750,55 @@ class RemoveUserResponse extends  AbstractModel {
     }
 }
 
+/**
+ * 
+ * @class
+ */
+class AlignmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TimeBeginMs = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TimeEndMs = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TextBegin = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TextEnd = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeBeginMs = 'TimeBeginMs' in params ? params.TimeBeginMs : null;
+        this.TimeEndMs = 'TimeEndMs' in params ? params.TimeEndMs : null;
+        this.TextBegin = 'TextBegin' in params ? params.TextBegin : null;
+        this.TextEnd = 'TextEnd' in params ? params.TextEnd : null;
+
+    }
+}
+
 module.exports = {
     ModifyCloudSliceTaskResponse: ModifyCloudSliceTaskResponse,
     DescribeCloudModerationResponse: DescribeCloudModerationResponse,
@@ -9898,6 +10815,7 @@ module.exports = {
     StartAIConversationRequest: StartAIConversationRequest,
     DescribeTRTCMarketScaleDataRequest: DescribeTRTCMarketScaleDataRequest,
     McuLayoutVolume: McuLayoutVolume,
+    VoiceCloneRequest: VoiceCloneRequest,
     SetUserBlockedRequest: SetUserBlockedRequest,
     DescribeUserEventRequest: DescribeUserEventRequest,
     DeleteCloudModerationRequest: DeleteCloudModerationRequest,
@@ -9908,7 +10826,7 @@ module.exports = {
     StopPublishCdnStreamResponse: StopPublishCdnStreamResponse,
     TranscriptionUserInfoParams: TranscriptionUserInfoParams,
     AbnormalEvent: AbnormalEvent,
-    DescribeScaleInfoResponse: DescribeScaleInfoResponse,
+    DeleteCloudSliceTaskRequest: DeleteCloudSliceTaskRequest,
     ScaleInfomation: ScaleInfomation,
     AgentParams: AgentParams,
     ControlAIConversationResponse: ControlAIConversationResponse,
@@ -9929,6 +10847,7 @@ module.exports = {
     DescribeRelayUsageRequest: DescribeRelayUsageRequest,
     DismissRoomResponse: DismissRoomResponse,
     CloudStorage: CloudStorage,
+    VoicePrint: VoicePrint,
     DescribeTrtcUsageResponse: DescribeTrtcUsageResponse,
     TimeValue: TimeValue,
     CreateCloudRecordingResponse: CreateCloudRecordingResponse,
@@ -9939,6 +10858,7 @@ module.exports = {
     CloudVod: CloudVod,
     CloudSliceStorage: CloudSliceStorage,
     EmulateMobileParams: EmulateMobileParams,
+    PronunciationDict: PronunciationDict,
     DescribeCallDetailInfoResponse: DescribeCallDetailInfoResponse,
     DescribeTRTCRealTimeQualityDataResponse: DescribeTRTCRealTimeQualityDataResponse,
     McuCustomCrop: McuCustomCrop,
@@ -9961,6 +10881,7 @@ module.exports = {
     StartStreamIngestRequest: StartStreamIngestRequest,
     DescribeAITranscriptionRequest: DescribeAITranscriptionRequest,
     DescribeAIConversationResponse: DescribeAIConversationResponse,
+    AudioFormat: AudioFormat,
     DeleteCloudTranscriptionResponse: DeleteCloudTranscriptionResponse,
     DescribeUserInfoResponse: DescribeUserInfoResponse,
     RemoveUserByStrRoomIdResponse: RemoveUserByStrRoomIdResponse,
@@ -9971,6 +10892,7 @@ module.exports = {
     TrtcUsage: TrtcUsage,
     DeleteCloudSliceTaskResponse: DeleteCloudSliceTaskResponse,
     DescribeRelayUsageResponse: DescribeRelayUsageResponse,
+    TextToSpeechSSEResponse: TextToSpeechSSEResponse,
     DescribeRecordingUsageResponse: DescribeRecordingUsageResponse,
     SliceParams: SliceParams,
     ModerationSupplierParam: ModerationSupplierParam,
@@ -9978,12 +10900,13 @@ module.exports = {
     StorageFile: StorageFile,
     WaterMark: WaterMark,
     McuStorageParams: McuStorageParams,
-    DeleteCloudSliceTaskRequest: DeleteCloudSliceTaskRequest,
+    DescribeScaleInfoResponse: DescribeScaleInfoResponse,
     MixLayoutParams: MixLayoutParams,
     ModifyCloudSliceTaskRequest: ModifyCloudSliceTaskRequest,
     DescribeMixTranscodingUsageResponse: DescribeMixTranscodingUsageResponse,
     AsrParam: AsrParam,
     McuFeedBackRoomParams: McuFeedBackRoomParams,
+    TurnDetection: TurnDetection,
     AudioEncode: AudioEncode,
     RemoveUserRequest: RemoveUserRequest,
     DismissRoomRequest: DismissRoomRequest,
@@ -10012,12 +10935,14 @@ module.exports = {
     DescribeCloudTranscriptionRequest: DescribeCloudTranscriptionRequest,
     CreateCloudSliceTaskResponse: CreateCloudSliceTaskResponse,
     DeleteCloudRecordingRequest: DeleteCloudRecordingRequest,
+    Voice: Voice,
     ModifyCloudModerationResponse: ModifyCloudModerationResponse,
     Terminology: Terminology,
     VideoParams: VideoParams,
     StopStreamIngestResponse: StopStreamIngestResponse,
     SetUserBlockedByStrRoomIdRequest: SetUserBlockedByStrRoomIdRequest,
     DescribeTrtcRoomUsageRequest: DescribeTrtcRoomUsageRequest,
+    TextToSpeechResponse: TextToSpeechResponse,
     CreateCloudModerationRequest: CreateCloudModerationRequest,
     StopStreamIngestRequest: StopStreamIngestRequest,
     WebRecordVideoParams: WebRecordVideoParams,
@@ -10035,18 +10960,21 @@ module.exports = {
     StopPublishCdnStreamRequest: StopPublishCdnStreamRequest,
     MixUserInfo: MixUserInfo,
     DeleteCloudTranscriptionRequest: DeleteCloudTranscriptionRequest,
-    EventMessage: EventMessage,
+    AmbientSound: AmbientSound,
     DescribeTRTCMarketQualityDataRequest: DescribeTRTCMarketQualityDataRequest,
     UpdatePublishCdnStreamRequest: UpdatePublishCdnStreamRequest,
     InvokeLLM: InvokeLLM,
     SliceStorageParams: SliceStorageParams,
     MaxVideoUser: MaxVideoUser,
+    VoiceCloneResponse: VoiceCloneResponse,
     UpdateStreamIngestRequest: UpdateStreamIngestRequest,
+    TextToSpeechSSERequest: TextToSpeechSSERequest,
     StopWebRecordResponse: StopWebRecordResponse,
     STTConfig: STTConfig,
     StopWebRecordRequest: StopWebRecordRequest,
     McuSeiParams: McuSeiParams,
     StopAIConversationRequest: StopAIConversationRequest,
+    EventMessage: EventMessage,
     UpdateAIConversationRequest: UpdateAIConversationRequest,
     UpdatePublishCdnStreamResponse: UpdatePublishCdnStreamResponse,
     McuWaterMarkText: McuWaterMarkText,
@@ -10054,6 +10982,7 @@ module.exports = {
     SeriesInfos: SeriesInfos,
     RemoveUserByStrRoomIdRequest: RemoveUserByStrRoomIdRequest,
     RecordParams: RecordParams,
+    TextToSpeechRequest: TextToSpeechRequest,
     DescribeStreamIngestRequest: DescribeStreamIngestRequest,
     TTSConfig: TTSConfig,
     McuAudioParams: McuAudioParams,
@@ -10071,5 +11000,6 @@ module.exports = {
     RoomState: RoomState,
     StartAITranscriptionResponse: StartAITranscriptionResponse,
     RemoveUserResponse: RemoveUserResponse,
+    AlignmentItem: AlignmentItem,
 
 }

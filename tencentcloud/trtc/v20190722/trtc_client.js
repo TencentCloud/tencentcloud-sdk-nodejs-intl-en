@@ -31,6 +31,7 @@ const StartAIConversationResponse = models.StartAIConversationResponse;
 const StartAIConversationRequest = models.StartAIConversationRequest;
 const DescribeTRTCMarketScaleDataRequest = models.DescribeTRTCMarketScaleDataRequest;
 const McuLayoutVolume = models.McuLayoutVolume;
+const VoiceCloneRequest = models.VoiceCloneRequest;
 const SetUserBlockedRequest = models.SetUserBlockedRequest;
 const DescribeUserEventRequest = models.DescribeUserEventRequest;
 const DeleteCloudModerationRequest = models.DeleteCloudModerationRequest;
@@ -41,7 +42,7 @@ const DescribeTrtcRoomUsageResponse = models.DescribeTrtcRoomUsageResponse;
 const StopPublishCdnStreamResponse = models.StopPublishCdnStreamResponse;
 const TranscriptionUserInfoParams = models.TranscriptionUserInfoParams;
 const AbnormalEvent = models.AbnormalEvent;
-const DescribeScaleInfoResponse = models.DescribeScaleInfoResponse;
+const DeleteCloudSliceTaskRequest = models.DeleteCloudSliceTaskRequest;
 const ScaleInfomation = models.ScaleInfomation;
 const AgentParams = models.AgentParams;
 const ControlAIConversationResponse = models.ControlAIConversationResponse;
@@ -62,6 +63,7 @@ const DeleteCloudModerationResponse = models.DeleteCloudModerationResponse;
 const DescribeRelayUsageRequest = models.DescribeRelayUsageRequest;
 const DismissRoomResponse = models.DismissRoomResponse;
 const CloudStorage = models.CloudStorage;
+const VoicePrint = models.VoicePrint;
 const DescribeTrtcUsageResponse = models.DescribeTrtcUsageResponse;
 const TimeValue = models.TimeValue;
 const CreateCloudRecordingResponse = models.CreateCloudRecordingResponse;
@@ -72,6 +74,7 @@ const StorageParams = models.StorageParams;
 const CloudVod = models.CloudVod;
 const CloudSliceStorage = models.CloudSliceStorage;
 const EmulateMobileParams = models.EmulateMobileParams;
+const PronunciationDict = models.PronunciationDict;
 const DescribeCallDetailInfoResponse = models.DescribeCallDetailInfoResponse;
 const DescribeTRTCRealTimeQualityDataResponse = models.DescribeTRTCRealTimeQualityDataResponse;
 const McuCustomCrop = models.McuCustomCrop;
@@ -94,6 +97,7 @@ const StartWebRecordRequest = models.StartWebRecordRequest;
 const StartStreamIngestRequest = models.StartStreamIngestRequest;
 const DescribeAITranscriptionRequest = models.DescribeAITranscriptionRequest;
 const DescribeAIConversationResponse = models.DescribeAIConversationResponse;
+const AudioFormat = models.AudioFormat;
 const DeleteCloudTranscriptionResponse = models.DeleteCloudTranscriptionResponse;
 const DescribeUserInfoResponse = models.DescribeUserInfoResponse;
 const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
@@ -104,6 +108,7 @@ const StartPublishCdnStreamResponse = models.StartPublishCdnStreamResponse;
 const TrtcUsage = models.TrtcUsage;
 const DeleteCloudSliceTaskResponse = models.DeleteCloudSliceTaskResponse;
 const DescribeRelayUsageResponse = models.DescribeRelayUsageResponse;
+const TextToSpeechSSEResponse = models.TextToSpeechSSEResponse;
 const DescribeRecordingUsageResponse = models.DescribeRecordingUsageResponse;
 const SliceParams = models.SliceParams;
 const ModerationSupplierParam = models.ModerationSupplierParam;
@@ -111,12 +116,13 @@ const DescribeRecordingUsageRequest = models.DescribeRecordingUsageRequest;
 const StorageFile = models.StorageFile;
 const WaterMark = models.WaterMark;
 const McuStorageParams = models.McuStorageParams;
-const DeleteCloudSliceTaskRequest = models.DeleteCloudSliceTaskRequest;
+const DescribeScaleInfoResponse = models.DescribeScaleInfoResponse;
 const MixLayoutParams = models.MixLayoutParams;
 const ModifyCloudSliceTaskRequest = models.ModifyCloudSliceTaskRequest;
 const DescribeMixTranscodingUsageResponse = models.DescribeMixTranscodingUsageResponse;
 const AsrParam = models.AsrParam;
 const McuFeedBackRoomParams = models.McuFeedBackRoomParams;
+const TurnDetection = models.TurnDetection;
 const AudioEncode = models.AudioEncode;
 const RemoveUserRequest = models.RemoveUserRequest;
 const DismissRoomRequest = models.DismissRoomRequest;
@@ -145,12 +151,14 @@ const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
 const DescribeCloudTranscriptionRequest = models.DescribeCloudTranscriptionRequest;
 const CreateCloudSliceTaskResponse = models.CreateCloudSliceTaskResponse;
 const DeleteCloudRecordingRequest = models.DeleteCloudRecordingRequest;
+const Voice = models.Voice;
 const ModifyCloudModerationResponse = models.ModifyCloudModerationResponse;
 const Terminology = models.Terminology;
 const VideoParams = models.VideoParams;
 const StopStreamIngestResponse = models.StopStreamIngestResponse;
 const SetUserBlockedByStrRoomIdRequest = models.SetUserBlockedByStrRoomIdRequest;
 const DescribeTrtcRoomUsageRequest = models.DescribeTrtcRoomUsageRequest;
+const TextToSpeechResponse = models.TextToSpeechResponse;
 const CreateCloudModerationRequest = models.CreateCloudModerationRequest;
 const StopStreamIngestRequest = models.StopStreamIngestRequest;
 const WebRecordVideoParams = models.WebRecordVideoParams;
@@ -168,18 +176,21 @@ const DescribeCloudSliceTaskRequest = models.DescribeCloudSliceTaskRequest;
 const StopPublishCdnStreamRequest = models.StopPublishCdnStreamRequest;
 const MixUserInfo = models.MixUserInfo;
 const DeleteCloudTranscriptionRequest = models.DeleteCloudTranscriptionRequest;
-const EventMessage = models.EventMessage;
+const AmbientSound = models.AmbientSound;
 const DescribeTRTCMarketQualityDataRequest = models.DescribeTRTCMarketQualityDataRequest;
 const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
 const InvokeLLM = models.InvokeLLM;
 const SliceStorageParams = models.SliceStorageParams;
 const MaxVideoUser = models.MaxVideoUser;
+const VoiceCloneResponse = models.VoiceCloneResponse;
 const UpdateStreamIngestRequest = models.UpdateStreamIngestRequest;
+const TextToSpeechSSERequest = models.TextToSpeechSSERequest;
 const StopWebRecordResponse = models.StopWebRecordResponse;
 const STTConfig = models.STTConfig;
 const StopWebRecordRequest = models.StopWebRecordRequest;
 const McuSeiParams = models.McuSeiParams;
 const StopAIConversationRequest = models.StopAIConversationRequest;
+const EventMessage = models.EventMessage;
 const UpdateAIConversationRequest = models.UpdateAIConversationRequest;
 const UpdatePublishCdnStreamResponse = models.UpdatePublishCdnStreamResponse;
 const McuWaterMarkText = models.McuWaterMarkText;
@@ -187,6 +198,7 @@ const TranscriptionParams = models.TranscriptionParams;
 const SeriesInfos = models.SeriesInfos;
 const RemoveUserByStrRoomIdRequest = models.RemoveUserByStrRoomIdRequest;
 const RecordParams = models.RecordParams;
+const TextToSpeechRequest = models.TextToSpeechRequest;
 const DescribeStreamIngestRequest = models.DescribeStreamIngestRequest;
 const TTSConfig = models.TTSConfig;
 const McuAudioParams = models.McuAudioParams;
@@ -204,6 +216,7 @@ const DescribeCloudSliceTaskResponse = models.DescribeCloudSliceTaskResponse;
 const RoomState = models.RoomState;
 const StartAITranscriptionResponse = models.StartAITranscriptionResponse;
 const RemoveUserResponse = models.RemoveUserResponse;
+const AlignmentItem = models.AlignmentItem;
 
 
 /**
@@ -297,13 +310,13 @@ This API is used to achieve the following goals:
 
     /**
      * API description:.  
-Start a mixed stream forwarding task to mix multiple audio and video streams in a TRTC room into one media stream, transcode it, and push it to live stream CDN or back to the TRTC room. It also supports directly forwarding a single stream from the TRTC room without transcoding. After startup successful, it will return a task ID (TaskId) unique to the SdkAppid dimension. You need to save this TaskId, as it will be relied on to update and end the task subsequently. See document: [Feature Description](https://www.tencentcloud.com/document/product/647/84721?from_cn_redirect=1#b9a855f4-e38c-4616-9b07-fc44e0e8282a) and [Common Issues](https://www.tencentcloud.com/document/product/647/62620?from_cn_redirect=1).
+Start a mixed stream forwarding task to mix multiple audio and video streams in a TRTC room into one media stream, transcode it, and push it to live stream CDN or back to the TRTC room. It also supports directly forwarding a single stream from the TRTC room without transcoding. After startup successful, it will return a task ID (TaskId) unique to the SdkAppid dimension. You need to save this TaskId, as it will be relied on to update and end the task subsequently. 
 
 Note:.
-You can enable bypass relay callback through console activation for monitoring events of CDN state. Refer to the documentation for callback: [Bypass Relay Callback Description](https://www.tencentcloud.com/document/product/647/88552?from_cn_redirect=1).  
+You can enable bypass relay callback through console activation for monitoring events of CDN state. 
 Initiating a mixed stream push task may incur the following fees:.  
-For MCU mix transcoding fees, refer to the documentation: On-Cloud MixTranscoding billing (https://www.tencentcloud.com/document/product/647/49446?from_cn_redirect=1).  
-For forwarding expenses of non-Tencent Cloud CDN, refer to the documentation: [Cloud-based forwarding billing explanation](https://www.tencentcloud.com/document/product/647/82155?from_cn_redirect=1).
+MCU mix transcoding fees.
+Forwarding expenses of non-Tencent Cloud CDN.
      * @param {StartPublishCdnStreamRequest} req
      * @param {function(string, StartPublishCdnStreamResponse):void} cb
      * @public
@@ -384,6 +397,17 @@ Note: For details about how to use this API, see the `StartPublishCdnStream` doc
     }
 
     /**
+     * This API is used to perform text to speech.
+     * @param {TextToSpeechRequest} req
+     * @param {function(string, TextToSpeechResponse):void} cb
+     * @public
+     */
+    TextToSpeech(req, cb) {
+        let resp = new TextToSpeechResponse();
+        this.request("TextToSpeech", req, resp, cb);
+    }
+
+    /**
      * Push an online media stream to the TRTC room.
      * @param {StartStreamIngestRequest} req
      * @param {function(string, StartStreamIngestResponse):void} cb
@@ -395,7 +419,9 @@ Note: For details about how to use this API, see the `StartPublishCdnStream` doc
     }
 
     /**
-     * Initiate AI conversation task, where the AI bot enters the TRTC room to engage in AI conversation with specified members in the room. This is suitable for scenarios such as intelligent customer service and AI language teachers. The TRTC AI conversation feature has built-in speech-to-text capabilities , allowing customers to flexibly specify third-party AI model (LLM) services and text-to-speech (TTS) services. For more [feature details](https://cloud.tencent.com/document/product/647/108901).
+     * Start an AI conversation task. The AI Channel Robot joins the TRTC room and performs AI dialogue with specified members inside the room. Suitable for smart customer service, AI spoken language teacher, and other scenarios.
+
+The TRTC AI dialogue function has built-in speech-to-text capability and provides both Channel Service, allowing customers to flexibly designate third-party AI model (LLM) services and Text-to-Audio (TTS) services.
      * @param {StartAIConversationRequest} req
      * @param {function(string, StartAIConversationResponse):void} cb
      * @public
@@ -498,11 +524,16 @@ Because parameter or API logic issues will return immediate results. For page is
     }
 
     /**
-     * Initiate the transcription bot. The backend will pull the stream through the bot to perform real-time speech recognition and deliver subtitles and transcription messages. The transcription bot supports two stream pulling modes, controlled by the `TranscriptionMode` field:
-- Pull the stream of the entire room.
-- Pull the stream of a specific user.
+     * Start up the transcription bot. The backend will pass the robot stream pulling to perform real-time speech recognition and deliver subtitles and transcription messages.
+The transcription bot supports two stream pulling methods, controlled by the TranscriptionMode field.
+- Pull the stream of all players in the room.
+- Pull the stream for a specific user.
 
-The server delivers subtitles and transcription messages in real-time through TRTC's custom messages, with `CmdId` fixed at 1. The client only needs to listen for the callback of custom messages. For example, see the [C++ callback](https://cloud.tencent.com/document/product/647/79637#4cd82f4edb24992a15a25187089e1565). Other clients, such as Android, Web, etc., can also be found at the same link.
+The server delivers subtitles and transcription messages in real time through TRTC custom messages, with CmdId fixed to 1. Clients just need to listen to the custom message callback, such as the C++ callback (https://www.tencentcloud.com/document/product/647/79637?from_cn_redirect=1#4cd82f4edb24992a15a25187089e1565). Other clients such as Android and Web can likewise find it at the same link.
+
+
+**Note:**
+When TranscriptionMode is 0, ensure only one task is initiated in a room. If multiple tasks are initiated, robots will subscribe with each other. Unless the task is stopped proactively, it will timeout exit after 10 hours. In such cases, it is advisable to fill in SessionId to ensure subsequent repeated task failures.
      * @param {StartAITranscriptionRequest} req
      * @param {function(string, StartAITranscriptionResponse):void} cb
      * @public
@@ -661,8 +692,7 @@ Mixed-stream recording: Mix the audio and video of subscribed UserId in the room
     }
 
     /**
-     * API description:
-Enable the cloud transcription feature.
+     * API description: Enable the cloud transcription feature.
      * @param {CreateCloudTranscriptionRequest} req
      * @param {function(string, CreateCloudTranscriptionResponse):void} cb
      * @public
@@ -681,6 +711,17 @@ Enable the cloud transcription feature.
     StopStreamIngest(req, cb) {
         let resp = new StopStreamIngestResponse();
         this.request("StopStreamIngest", req, resp, cb);
+    }
+
+    /**
+     * This API is used to clone sound.
+     * @param {VoiceCloneRequest} req
+     * @param {function(string, VoiceCloneResponse):void} cb
+     * @public
+     */
+    VoiceClone(req, cb) {
+        let resp = new VoiceCloneResponse();
+        this.request("VoiceClone", req, resp, cb);
     }
 
     /**
@@ -904,6 +945,17 @@ For details about the error events, see https://intl.cloud.tencent.com/document/
     DescribeUnusualEvent(req, cb) {
         let resp = new DescribeUnusualEventResponse();
         this.request("DescribeUnusualEvent", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stream text-to-speech.
+     * @param {TextToSpeechSSERequest} req
+     * @param {function(string, TextToSpeechSSEResponse):void} cb
+     * @public
+     */
+    TextToSpeechSSE(req, cb) {
+        let resp = new TextToSpeechSSEResponse();
+        this.request("TextToSpeechSSE", req, resp, cb);
     }
 
 

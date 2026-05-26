@@ -923,6 +923,64 @@ class InitializeDisksResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDiskStoragePool request structure.
+ * @class
+ */
+class DescribeDiskStoragePoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of returned results, defaults to 20 with a maximum value of 100. For further introduction about `Limit`, see relevant sections in the API [overview](/document/product/362/15633).
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Specify the exclusive cluster ID list you want to query. This parameter cannot be used with Filters.
+
+         * @type {Array.<string> || null}
+         */
+        this.CdcIds = null;
+
+        /**
+         * Filter conditions. `CdcIds` and `Filters` cannot be specified at the same time. <br><li>cdc-id - Array of String - Optional - Filter by the cluster ID. <br><li>zone - Array of String - Optional - Filter by the [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) where the cluster resides. <br><li>cage-id - Array of String - Optional - Filter by the ID of the cage where the cluster resides. <br><li>disk-type - Array of string - Optional - Filter by the media type of cloud disks (`CLOUD_BASIC`: HDD cloud disk | `CLOUD_PREMIUM`: Premium cloud disk. | `CLOUD_SSD`: SSD cloud disk.)
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Offset, defaults to 0. For further introduction about `Offset`, see the relevant sections in the API [overview](/document/product/362/15633).
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.CdcIds = 'CdcIds' in params ? params.CdcIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DescribeDiskBackups response structure.
  * @class
  */
@@ -3027,6 +3085,41 @@ class TerminateDisksRequest extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class CdcSize extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.DiskTotal = null;
+
+        /**
+         * Specifies the available capacity size of the dedicated cluster in GiB.
+         * @type {number || null}
+         */
+        this.DiskAvailable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskTotal = 'DiskTotal' in params ? params.DiskTotal : null;
+        this.DiskAvailable = 'DiskAvailable' in params ? params.DiskAvailable : null;
+
+    }
+}
+
+/**
  * DescribeInstancesDiskNum response structure.
  * @class
  */
@@ -3268,6 +3361,48 @@ class ModifySnapshotAttributeRequest extends  AbstractModel {
         this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
         this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
         this.Deadline = 'Deadline' in params ? params.Deadline : null;
+
+    }
+}
+
+/**
+ * UnbindAutoSnapshotPolicy request structure.
+ * @class
+ */
+class UnbindAutoSnapshotPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of scheduled snapshot policy to be unbound.
+         * @type {string || null}
+         */
+        this.AutoSnapshotPolicyId = null;
+
+        /**
+         * ID list of cloud disks from which the regular snapshot policy is unbound. specifies this parameter or the InstanceIds parameter. a minimum of one is required.
+         * @type {Array.<string> || null}
+         */
+        this.DiskIds = null;
+
+        /**
+         * Instance ID list to unbind the periodic snapshot policy. this parameter or the DiskIds parameter requires a minimum of one input.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoSnapshotPolicyId = 'AutoSnapshotPolicyId' in params ? params.AutoSnapshotPolicyId : null;
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -4569,6 +4704,71 @@ class SharePermission extends  AbstractModel {
 }
 
 /**
+ * DescribeDiskStoragePool response structure.
+ * @class
+ */
+class DescribeDiskStoragePoolResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * the number of eligible dedicated clusters.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Details of the dedicated cluster.
+         * @type {Array.<Cdc> || null}
+         */
+        this.CdcSet = null;
+
+        /**
+         * Exclusive cluster details list.
+         * @type {Array.<Cdc> || null}
+         */
+        this.DiskStoragePoolSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.CdcSet) {
+            this.CdcSet = new Array();
+            for (let z in params.CdcSet) {
+                let obj = new Cdc();
+                obj.deserialize(params.CdcSet[z]);
+                this.CdcSet.push(obj);
+            }
+        }
+
+        if (params.DiskStoragePoolSet) {
+            this.DiskStoragePoolSet = new Array();
+            for (let z in params.DiskStoragePoolSet) {
+                let obj = new Cdc();
+                obj.deserialize(params.DiskStoragePoolSet[z]);
+                this.DiskStoragePoolSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Describes the execution strategy of regular snapshots. it can be understood as executing this scheduled snapshot policy at the moment specified by Hour on the days designated by DayOfWeek/DayOfMonth or at the interval set by IntervalDays. note: DayOfWeek/DayOfMonth/IntervalDays are mutual exclusion rules, required and only one policy rule can be set. if mutual exclusion rules are imported at the same time, only one takes effect, with priority following the sequence listed in the previous context: for example, if all three rules are set, only DayOfWeek comes into effect.
  * @class
  */
@@ -5243,30 +5443,72 @@ class DescribeAutoSnapshotPoliciesResponse extends  AbstractModel {
 }
 
 /**
- * UnbindAutoSnapshotPolicy request structure.
+ * 
  * @class
  */
-class UnbindAutoSnapshotPolicyRequest extends  AbstractModel {
+class Cdc extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of scheduled snapshot policy to be unbound.
+         * 
          * @type {string || null}
          */
-        this.AutoSnapshotPolicyId = null;
+        this.CageId = null;
 
         /**
-         * ID list of cloud disks from which the regular snapshot policy is unbound. specifies this parameter or the InstanceIds parameter. a minimum of one is required.
-         * @type {Array.<string> || null}
+         * Exclusive cluster status. value ranges from:<br><li>NORMAL: NORMAL;</li><br><li>CLOSED: CLOSED. at this time, the exclusive cluster will be unavailable to create new cloud disks;</li><br><li>FAULT: abnormal exclusive cluster status. at this point, the exclusive cluster will be inoperable, and the tencent cloud ops team will promptly fix the cluster;</li><br><li>ISOLATED: the exclusive cluster is ISOLATED due to not renewed timely. at this moment, the exclusive cluster will be unavailable to create new cloud disks, and the corresponding cloud disks will also be inoperable.</li>.
+         * @type {string || null}
          */
-        this.DiskIds = null;
+        this.CdcState = null;
 
         /**
-         * Instance ID list to unbind the periodic snapshot policy. this parameter or the DiskIds parameter requires a minimum of one input.
-         * @type {Array.<string> || null}
+         * Specifies the AZ ID of the exclusive cluster.
+         * @type {string || null}
          */
-        this.InstanceIds = null;
+        this.Zone = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CdcName = null;
+
+        /**
+         * Specifies the capacity size of the dedicated cluster.
+         * @type {CdcSize || null}
+         */
+        this.CdcResource = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
+        /**
+         * Exclusive cluster type. valid values: <br><li>CLOUD_BASIC: BASIC CLOUD disk cluster</li><br><li>CLOUD_PREMIUM: high-performance CLOUD block storage cluster</li><br><li>CLOUD_SSD: SSD CLOUD disk cluster.</li>.
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Expiry time of the dedicated cloud disk cluster.
+         * @type {string || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * Creation time of the resource pool.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Number of cloud disks created in the current cluster.
+         * @type {number || null}
+         */
+        this.DiskNumber = null;
 
     }
 
@@ -5277,9 +5519,21 @@ class UnbindAutoSnapshotPolicyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoSnapshotPolicyId = 'AutoSnapshotPolicyId' in params ? params.AutoSnapshotPolicyId : null;
-        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.CageId = 'CageId' in params ? params.CageId : null;
+        this.CdcState = 'CdcState' in params ? params.CdcState : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.CdcName = 'CdcName' in params ? params.CdcName : null;
+
+        if (params.CdcResource) {
+            let obj = new CdcSize();
+            obj.deserialize(params.CdcResource)
+            this.CdcResource = obj;
+        }
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.DiskNumber = 'DiskNumber' in params ? params.DiskNumber : null;
 
     }
 }
@@ -5656,6 +5910,7 @@ module.exports = {
     ModifySnapshotsSharePermissionResponse: ModifySnapshotsSharePermissionResponse,
     DeleteDiskBackupsRequest: DeleteDiskBackupsRequest,
     InitializeDisksResponse: InitializeDisksResponse,
+    DescribeDiskStoragePoolRequest: DescribeDiskStoragePoolRequest,
     DescribeDiskBackupsResponse: DescribeDiskBackupsResponse,
     SnapshotCopyResult: SnapshotCopyResult,
     RenewDiskRequest: RenewDiskRequest,
@@ -5696,12 +5951,14 @@ module.exports = {
     Image: Image,
     ModifyAutoSnapshotPolicyAttributeResponse: ModifyAutoSnapshotPolicyAttributeResponse,
     TerminateDisksRequest: TerminateDisksRequest,
+    CdcSize: CdcSize,
     DescribeInstancesDiskNumResponse: DescribeInstancesDiskNumResponse,
     ResizeDiskRequest: ResizeDiskRequest,
     ApplyDiskBackupRequest: ApplyDiskBackupRequest,
     InitializeDisksRequest: InitializeDisksRequest,
     CreateAutoSnapshotPolicyResponse: CreateAutoSnapshotPolicyResponse,
     ModifySnapshotAttributeRequest: ModifySnapshotAttributeRequest,
+    UnbindAutoSnapshotPolicyRequest: UnbindAutoSnapshotPolicyRequest,
     DiskConfig: DiskConfig,
     CreateDiskBackupResponse: CreateDiskBackupResponse,
     InquirePriceModifyDiskBackupQuotaResponse: InquirePriceModifyDiskBackupQuotaResponse,
@@ -5725,6 +5982,7 @@ module.exports = {
     DetachDisksResponse: DetachDisksResponse,
     InquiryPriceRenewDisksResponse: InquiryPriceRenewDisksResponse,
     SharePermission: SharePermission,
+    DescribeDiskStoragePoolResponse: DescribeDiskStoragePoolResponse,
     Policy: Policy,
     ModifyDiskExtraPerformanceResponse: ModifyDiskExtraPerformanceResponse,
     InquirePriceModifyDiskExtraPerformanceRequest: InquirePriceModifyDiskExtraPerformanceRequest,
@@ -5738,7 +5996,7 @@ module.exports = {
     PrepayPrice: PrepayPrice,
     RenewDiskResponse: RenewDiskResponse,
     DescribeAutoSnapshotPoliciesResponse: DescribeAutoSnapshotPoliciesResponse,
-    UnbindAutoSnapshotPolicyRequest: UnbindAutoSnapshotPolicyRequest,
+    Cdc: Cdc,
     ApplyDisk: ApplyDisk,
     UnbindAutoSnapshotPolicyResponse: UnbindAutoSnapshotPolicyResponse,
     AttachDetail: AttachDetail,

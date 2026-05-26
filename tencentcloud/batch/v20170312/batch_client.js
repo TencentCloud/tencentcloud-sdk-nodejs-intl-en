@@ -31,6 +31,7 @@ const Notification = models.Notification;
 const SystemDisk = models.SystemDisk;
 const Task = models.Task;
 const InstanceTypeConfig = models.InstanceTypeConfig;
+const DescribeJobMonitorDataResponse = models.DescribeJobMonitorDataResponse;
 const Externals = models.Externals;
 const TerminateComputeNodesResponse = models.TerminateComputeNodesResponse;
 const DescribeComputeEnvActivitiesResponse = models.DescribeComputeEnvActivitiesResponse;
@@ -39,6 +40,7 @@ const TaskInstanceLog = models.TaskInstanceLog;
 const MountDataDisk = models.MountDataDisk;
 const TaskView = models.TaskView;
 const Tag = models.Tag;
+const EnhancedService = models.EnhancedService;
 const DescribeComputeEnvResponse = models.DescribeComputeEnvResponse;
 const TerminateJobRequest = models.TerminateJobRequest;
 const DetachInstancesResponse = models.DetachInstancesResponse;
@@ -57,6 +59,7 @@ const DescribeComputeEnvCreateInfoResponse = models.DescribeComputeEnvCreateInfo
 const TerminateJobResponse = models.TerminateJobResponse;
 const ComputeEnvCreateInfo = models.ComputeEnvCreateInfo;
 const DescribeComputeEnvCreateInfosRequest = models.DescribeComputeEnvCreateInfosRequest;
+const DataPointView = models.DataPointView;
 const DescribeComputeEnvRequest = models.DescribeComputeEnvRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const DescribeTaskTemplatesResponse = models.DescribeTaskTemplatesResponse;
@@ -75,12 +78,13 @@ const LoginSettings = models.LoginSettings;
 const DetachInstancesRequest = models.DetachInstancesRequest;
 const Instance = models.Instance;
 const OutputMapping = models.OutputMapping;
-const EnhancedService = models.EnhancedService;
+const DescribeJobMonitorDataRequest = models.DescribeJobMonitorDataRequest;
 const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
 const DescribeJobSubmitInfoResponse = models.DescribeJobSubmitInfoResponse;
 const DescribeComputeEnvCreateInfosResponse = models.DescribeComputeEnvCreateInfosResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const DescribeJobRequest = models.DescribeJobRequest;
+const Dimension = models.Dimension;
 const RedirectInfo = models.RedirectInfo;
 const DescribeInstanceCategoriesResponse = models.DescribeInstanceCategoriesResponse;
 const ModifyTaskTemplateResponse = models.ModifyTaskTemplateResponse;
@@ -140,6 +144,17 @@ class BatchClient extends AbstractClient {
         super("batch.intl.tencentcloudapi.com", "2017-03-12", credential, region, profile);
     }
     
+    /**
+     * Query the resource usage monitoring information of Job task instances. This API only supports querying elastic node tasks and undeleted jobs. Computing environment tasks are not currently supported. This interface only supports querying the resource utilization of Job instances within a time range.
+     * @param {DescribeJobMonitorDataRequest} req
+     * @param {function(string, DescribeJobMonitorDataResponse):void} cb
+     * @public
+     */
+    DescribeJobMonitorData(req, cb) {
+        let resp = new DescribeJobMonitorDataResponse();
+        this.request("DescribeJobMonitorData", req, resp, cb);
+    }
+
     /**
      * This API is used to query compute environment details.
      * @param {DescribeComputeEnvRequest} req

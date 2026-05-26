@@ -3365,13 +3365,13 @@ class CreateVpcEndPointRequest extends  AbstractModel {
         super();
 
         /**
-         * VPC instance ID. obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/1108/43663?from_cn_redirect=1).
+         * VPC instance ID. obtain through the API [DescribeVpcs](https://www.tencentcloud.com/document/product/1108/43663?from_cn_redirect=1).
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Subnet instance ID. can be obtained through the [DescribeSubnets](https://www.tencentcloud.comom/document/product/215/15784?from_cn_redirect=1) api.
+         * Subnet instance ID. can be obtained through the [DescribeSubnets](https://www.tencentcloud.com/document/product/215/15784?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -3383,7 +3383,7 @@ class CreateVpcEndPointRequest extends  AbstractModel {
         this.EndPointName = null;
 
         /**
-         * Endpoint service ID, which can be obtained through the [DescribeVpcEndPointService](https://www.tencentcloud.comom/document/product/215/54678?from_cn_redirect=1) api.
+         * Endpoint service ID, which can be obtained through the [DescribeVpcEndPointService](https://www.tencentcloud.com/document/product/215/54678?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.EndPointServiceId = null;
@@ -3395,7 +3395,7 @@ class CreateVpcEndPointRequest extends  AbstractModel {
         this.EndPointVip = null;
 
         /**
-         * Security group ID. can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.comom/document/product/215/15808?from_cn_redirect=1).
+         * Security group ID. can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.com/document/product/215/15808?from_cn_redirect=1).
          * @type {string || null}
          */
         this.SecurityGroupId = null;
@@ -16140,7 +16140,7 @@ class EndPoint extends  AbstractModel {
         this.EndPointId = null;
 
         /**
-         * The unique ID of the VPC. obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1).
+         * The unique ID of the VPC. obtain through the API [DescribeVpcs](https://www.tencentcloud.com/document/product/215/15778?from_cn_redirect=1).
          * @type {string || null}
          */
         this.VpcId = null;

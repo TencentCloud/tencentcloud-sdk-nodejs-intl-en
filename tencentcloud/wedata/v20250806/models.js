@@ -5446,6 +5446,27 @@ Output stream:
          */
         this.TableGuid = null;
 
+        /**
+         * Catalog name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CatalogName = null;
+
+        /**
+         * Data source name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DatasourceName = null;
+
+        /**
+         * Catalog (if any).Database (if any).Table name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.QualifiedName = null;
+
     }
 
     /**
@@ -5463,6 +5484,9 @@ Output stream:
         this.TablePhysicalId = 'TablePhysicalId' in params ? params.TablePhysicalId : null;
         this.DbGuid = 'DbGuid' in params ? params.DbGuid : null;
         this.TableGuid = 'TableGuid' in params ? params.TableGuid : null;
+        this.CatalogName = 'CatalogName' in params ? params.CatalogName : null;
+        this.DatasourceName = 'DatasourceName' in params ? params.DatasourceName : null;
+        this.QualifiedName = 'QualifiedName' in params ? params.QualifiedName : null;
 
     }
 }
@@ -11778,197 +11802,190 @@ class CreateTaskSchedulerConfiguration extends  AbstractModel {
         super();
 
         /**
-         * Period type: defaults to DAY_CYCLE.
-
-Supported types. 
-
-ONEOFF_CYCLE: specifies a one-time cycle.
-YEAR_CYCLE: specifies the year cycle.
-MONTH_CYCLE: specifies the monthly cycle.
-WEEK_CYCLE: specifies the week cycle.
-DAY_CYCLE: specifies the day cycle.
-HOUR_CYCLE: specifies the hour cycle.
-MINUTE_CYCLE: specifies the minute cycle.
-CRONTAB_CYCLE: specifies the crontab expression type.
+         * <p>Period type: Defaults to DAY_CYCLE</p><p>Supported types are </p><ul><li>ONEOFF_CYCLE: One-time</li><li>YEAR_CYCLE: Year</li><li>MONTH_CYCLE: Month</li><li>WEEK_CYCLE: Week</li><li>DAY_CYCLE: Day</li><li>HOUR_CYCLE: Hour</li><li>MINUTE_CYCLE: Minute</li><li>CRONTAB_CYCLE: crontab expression</li></ul>
          * @type {string || null}
          */
         this.CycleType = null;
 
         /**
-         * Time zone, defaults to UTC+8.
+         * <p>Time zone, defaults to UTC+8</p>
          * @type {string || null}
          */
         this.ScheduleTimeZone = null;
 
         /**
-         * Cron expression, defaults to 0 0 0 * * ? *.
+         * <p>Cron expression, defaults to 0 0 0 * * ? *</p>
          * @type {string || null}
          */
         this.CrontabExpression = null;
 
         /**
-         * Effective date, defaults to 00:00:00 of the current date.
+         * <p>Effective date, defaults to 00:00:00 of the current date</p>
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End date, defaults to 2099-12-31 23:59:59.
+         * <p>End date, defaults to 2099-12-31 23:59:59</p>
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Execution time: the left-closed interval. Default: 00:00.
+         * <p>Execution time left-closed interval, default 00:00</p>
          * @type {string || null}
          */
         this.ExecutionStartTime = null;
 
         /**
-         * Execution time: the right closed interval. Default: 23:59.
+         * <p>Execution time right closed interval, default 23:59</p>
          * @type {string || null}
          */
         this.ExecutionEndTime = null;
 
         /**
-         * Calendar scheduling value: 0 or 1, where 1 means ON and 0 means OFF. Default is 0.
+         * <p>Calendar scheduling value is 0 and 1, where 1 is on and 0 is shutdown, with a default value of 0.</p>
          * @type {string || null}
          */
         this.CalendarOpen = null;
 
         /**
-         * Calendar scheduling:  the calendar ID.
+         * <p>Calendar scheduling Calendar ID</p>
          * @type {string || null}
          */
         this.CalendarId = null;
 
         /**
-         * Self-Dependent. Valid values: parallel, serial, orderly. Default value: serial. 
+         * <p>Self-dependent, default value serial, value: parallel, serial, orderly</p>
          * @type {string || null}
          */
         this.SelfDepend = null;
 
         /**
-         * Specifies the upstream dependency list.
+         * <p>Upstream dependency array</p>
          * @type {Array.<DependencyTaskBrief> || null}
          */
         this.UpstreamDependencyConfigList = null;
 
         /**
-         * List of Events
+         * <p>Event array</p>
          * @type {Array.<EventListener> || null}
          */
         this.EventListenerList = null;
 
         /**
-         * Rerun & Refill Configuration: Default: ALL;
-
-* ALL: Rerun or refill is allowed regardless of whether the task succeeds or fails.
-
-* FAILURE: Rerun or refill is allowed only if the task fails; not allowed if the task succeeds.
-
-* NONE: Rerun or refill is not allowed regardless of success or failure.
+         * <p>Rerun & replenishment configuration, defaults to ALL; , ALL allows rerun or replenishment after successful or failed running, FAILURE cannot rerun or replenish after successful running but allows rerun or replenishment after running FAILURE, NONE does not allow rerun or replenishment after either successful or failed running;</p>
          * @type {string || null}
          */
         this.AllowRedoType = null;
 
         /**
-         * Output parameter list.
+         * <p>Output parameter array</p>
          * @type {Array.<OutTaskParameter> || null}
          */
         this.ParamTaskOutList = null;
 
         /**
-         * Input parameter list.
+         * <p>Input parameter array</p>
          * @type {Array.<InTaskParameter> || null}
          */
         this.ParamTaskInList = null;
 
         /**
-         * Output registration.
+         * <p>Output registration</p>
          * @type {Array.<TaskDataRegistry> || null}
          */
         this.TaskOutputRegistryList = null;
 
         /**
-         * **Instance generation policy**.
-T_PLUS_0: specifies t+0 generation. default policy.
-T_PLUS_1: specifies t+1 generation.
+         * <p><strong>Instance Generation Policy</strong></p><ul><li>T_PLUS_0: T+0 generation, default policy</li><li>T_PLUS_1: T+1 generation</li></ul>
          * @type {string || null}
          */
         this.InitStrategy = null;
 
         /**
-         * Scheduling type: 0 for normal scheduling, 1 for dry-run scheduling. Default is 0.
+         * <p>Scheduling type: 0 normal scheduling 1 dry-run scheduling, default is 0</p>
          * @type {string || null}
          */
         this.ScheduleRunType = null;
 
         /**
-         * Task scheduling priority. Valid values: 4 (high), 5 (medium), 6 (low). Default: 6.
+         * <p>Task scheduling priority Execution priority 4 High 5 Medium 6 Low, Default:6</p>
          * @type {string || null}
          */
         this.RunPriority = null;
 
         /**
-         * Retry Policy: Retry Wait Time (in minutes): Default 5
+         * <p>Retry policy Retry wait time, in minutes: Default: 5</p>
          * @type {string || null}
          */
         this.RetryWait = null;
 
         /**
-         * Retry Policy: maximum attempts. Default: 4.
+         * <p>Retry policy Maximum attempts, Default: 4</p>
          * @type {string || null}
          */
         this.MaxRetryAttempts = null;
 
         /**
-         * Timeout Handling Policy: Execution Timeout (in minutes), default: -1
+         * <p>Timeout handling strategy Runtime timeout (unit: minutes) Default is -1</p>
          * @type {string || null}
          */
         this.ExecutionTTL = null;
 
         /**
-         * Timeout Handling Policy: Wait Duration Timeout  (in minutes), default: -1
+         * <p>Timeout handling strategy Wait duration timeout (unit: minutes) Default value is -1</p>
          * @type {string || null}
          */
         this.WaitExecutionTotalTTL = null;
 
         /**
-         * Scheduling type: 0 normal scheduling 1 dry-run scheduling, defaults to 0.
+         * <p>Scheduling type: 0 normal scheduling 1 dry-run scheduling, default is 0</p>
          * @type {number || null}
          */
         this.ScheduleType = null;
 
         /**
-         * Task scheduling priority. execution priority. valid values: 4 (high), 5 (medium), 6 (low). default: 6.
+         * <p>Task scheduling priority Execution priority 4 High 5 Medium 6 Low, Default:6</p>
          * @type {number || null}
          */
         this.RunPriorityType = null;
 
         /**
-         * Retry policy retry wait time, in minutes: default: 5.
+         * <p>Retry policy Retry wait time, in minutes: Default: 5</p>
          * @type {number || null}
          */
         this.RetryWaitMinute = null;
 
         /**
-         * Maximum attempts of the retry policy. default: 4.
+         * <p>Retry policy Maximum attempts, Default: 4</p>
          * @type {number || null}
          */
         this.MaxRetryNumber = null;
 
         /**
-         * Timeout handling strategy runtime timeout (unit: minutes) defaults to -1.
+         * <p>Timeout handling strategy Runtime timeout (unit: minutes) Default is -1</p>
          * @type {number || null}
          */
         this.ExecutionTTLMinute = null;
 
         /**
-         * Timeout handling strategy wait duration timeout (unit: minutes) defaults to -1.
+         * <p>Timeout handling strategy Wait duration timeout (unit: minutes) Default value is -1</p>
          * @type {number || null}
          */
         this.WaitExecutionTotalTTLMinute = null;
+
+        /**
+         * <ul><li>The task dependency run condition defaults to ALL_SUCCESS. Currently, only workflow scheduling under the project supports configuration.</li><li>ALL_SUCCESS: All successful: When all upstream dependency tasks reach the final state, perform a dependency check. If all upstream tasks are successful, the dependency check passes. Otherwise, if one upstream task skips running, it is marked as skipped. In other cases, it is marked as upstream failure.</li><li>ALL_FAILED: All failed: When all upstream dependency tasks reach the final state, perform a dependency check. If all upstream tasks are in a failed state or marked as upstream failure, the dependency check passes. Otherwise, it is marked as skipped.</li><li>ALL_DONE: All completed: When all upstream dependency tasks reach the final state, perform a dependency check, and the dependency check passes directly.</li><li>ALL_DONE_AT_LEAST_ONE_SUCCESS: All upstream tasks completed with at least one success: When all upstream dependency tasks reach the final state, perform a dependency check. If at least one is successful, the dependency check passes. Otherwise, it skips running.</li><li>ALL_SKIPPED: All upstream tasks skipped: When all upstream dependency tasks reach the final state, perform a dependency check. Only if all upstream tasks are in a skipped state does the dependency check pass. Otherwise, the current node skips running.</li><li>ONE_FAILED: At least one failed: If at least one upstream task fails, perform a dependency check, and the check passes. If all upstream tasks complete but none fail, it skips running.</li><li>ONE_SUCCESS: At least one success: If at least one upstream task succeeds, perform a dependency check, and the check passes. If all upstream tasks complete but none succeed, it skips running.</li><li>ONE_DONE: At least one completed: If at least one upstream task completes, perform a dependency check, and the check passes. Otherwise, it continues waiting for upstream.</li><li>NONE_FAILED: All upstream tasks completed with no failure: When all upstream dependency tasks reach the final state, perform a dependency check. If all upstream tasks are successful or skipped, the check passes. Otherwise, it is marked as upstream failure.</li><li>ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS: All upstream tasks completed with no failure and at least one success: When all upstream dependency tasks reach the final state, perform a dependency check. If no upstream task fails and at least one succeeds, the check passes. Otherwise, it skips running.</li><li>NONE_SKIPPED: All upstream tasks completed with no skipped runs: When all upstream dependency tasks reach the final state, perform a dependency check. If all upstream tasks are in a successful, failed, or upstream failure state, the check passes. Otherwise, it skips running.</li><li>ALL_DONE_AT_LEAST_ONE_FAILED: All upstream tasks completed with at least one failure: When all upstream dependency tasks reach the final state, perform a dependency check. If at least one fails, the check passes. Otherwise, it skips running.</li></ul>
+         * @type {string || null}
+         */
+        this.DependencyTriggerPolicy = null;
+
+        /**
+         * <p>Whether to allow downstream dependency 1 Allow 0 Do not allow</p><p>Value ranges from 0 to 1</p><p>Default value: 1</p>
+         * @type {number || null}
+         */
+        this.AllowDownstreamDependency = null;
 
     }
 
@@ -12048,6 +12065,8 @@ T_PLUS_1: specifies t+1 generation.
         this.MaxRetryNumber = 'MaxRetryNumber' in params ? params.MaxRetryNumber : null;
         this.ExecutionTTLMinute = 'ExecutionTTLMinute' in params ? params.ExecutionTTLMinute : null;
         this.WaitExecutionTotalTTLMinute = 'WaitExecutionTotalTTLMinute' in params ? params.WaitExecutionTotalTTLMinute : null;
+        this.DependencyTriggerPolicy = 'DependencyTriggerPolicy' in params ? params.DependencyTriggerPolicy : null;
+        this.AllowDownstreamDependency = 'AllowDownstreamDependency' in params ? params.AllowDownstreamDependency : null;
 
     }
 }
@@ -17163,7 +17182,7 @@ class CreateTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * Task ID
+         * <p>Task ID.</p>
          * @type {CreateTaskResult || null}
          */
         this.Data = null;
@@ -22761,25 +22780,26 @@ class CreateTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * Project ID.
+         * <p>Project ID</p>
          * @type {string || null}
          */
         this.ProjectId = null;
 
         /**
-         * The basic attributes of the task.
+         * <p>The
+basic attributes of the task.</p>
          * @type {CreateTaskBaseAttribute || null}
          */
         this.TaskBaseAttribute = null;
 
         /**
-         * Task configurations.
+         * <p>Task configurations.</p>
          * @type {CreateTaskConfiguration || null}
          */
         this.TaskConfiguration = null;
 
         /**
-         * Task scheduling configuration.
+         * <p>Task scheduling configuration</p>
          * @type {CreateTaskSchedulerConfiguration || null}
          */
         this.TaskSchedulerConfiguration = null;
@@ -31700,32 +31720,39 @@ class InTaskParameter extends  AbstractModel {
         super();
 
         /**
-         * Parameter name.
-
+         * <p>Parameter name</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ParamKey = null;
 
         /**
-         * Parameter Description: The format is ProjectIdentifier.TaskName.ParameterName
-Example: project_wedata_1.sh_250820_104107.pp_out
+         * <p>Parameter description: Format is project ID.task name.parameter name; for example: project_wedata_1.sh_250820_104107.pp_out</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ParamDesc = null;
 
         /**
-         * Parent Task ID
-
+         * <p>Parent task ID.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FromTaskId = null;
 
         /**
-         * Parent task parameter key.
-
+         * <p>Parent task parameter key</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FromParamKey = null;
+
+        /**
+         * <p>Task input type, by default uses TASK.</p><p>Enumeration value:</p><ul><li>TASK: Source is the parent task.</li><li>CONSTANT: Constant value, currently only supported by for-each node.</li></ul>
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
 
     }
 
@@ -31740,6 +31767,7 @@ Example: project_wedata_1.sh_250820_104107.pp_out
         this.ParamDesc = 'ParamDesc' in params ? params.ParamDesc : null;
         this.FromTaskId = 'FromTaskId' in params ? params.FromTaskId : null;
         this.FromParamKey = 'FromParamKey' in params ? params.FromParamKey : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }

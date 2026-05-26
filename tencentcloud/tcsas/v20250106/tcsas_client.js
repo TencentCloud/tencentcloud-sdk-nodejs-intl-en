@@ -170,6 +170,7 @@ const DescribeUserListResponse = models.DescribeUserListResponse;
 const DescribeMNGRetentionDataResponse = models.DescribeMNGRetentionDataResponse;
 const DescribeApplicationConfigInfo = models.DescribeApplicationConfigInfo;
 const DescribeMNPRequest = models.DescribeMNPRequest;
+const MNPI18NSyncDto = models.MNPI18NSyncDto;
 const DescribeMNPPreviewResp = models.DescribeMNPPreviewResp;
 const CreateGlobalDomainACLResponse = models.CreateGlobalDomainACLResponse;
 const RollbackMNPVersionRequest = models.RollbackMNPVersionRequest;
@@ -199,6 +200,7 @@ const DescribeMNPReleasedVersionHistoryRequest = models.DescribeMNPReleasedVersi
 const DescribeMNPSensitiveAPIPermissionListResponse = models.DescribeMNPSensitiveAPIPermissionListResponse;
 const AddTeamMemberResponse = models.AddTeamMemberResponse;
 const DescribeMNPMAUMetricCardRequest = models.DescribeMNPMAUMetricCardRequest;
+const MNPDetailI18nVO = models.MNPDetailI18nVO;
 const DescribeMNPResponse = models.DescribeMNPResponse;
 const CreateTeamResponse = models.CreateTeamResponse;
 const CreateMNPSensitiveAPIPermissionApprovalResponse = models.CreateMNPSensitiveAPIPermissionApprovalResponse;
@@ -368,7 +370,7 @@ class TcsasClient extends AbstractClient {
     }
     
     /**
-     * This API is used to retrieve a detailed payment report data for a mini game.
+     * This API is used to query a detailed payment report data for a mini game.
      * @param {DescribeMNGPaymentReportDetailRequest} req
      * @param {function(string, DescribeMNGPaymentReportDetailResponse):void} cb
      * @public
@@ -390,7 +392,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve an overview of mini game ad metrics within a specified date range.
+     * This API is used to query an overview of mini game ad metrics within a specified date range.
      * @param {DescribeMNGAdvertisingOverviewRequest} req
      * @param {function(string, DescribeMNGAdvertisingOverviewResponse):void} cb
      * @public
@@ -423,7 +425,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the released mini game versions.
+     * This API is used to query the release version history of a mini game.
      * @param {DescribeMNGReleasedVersionHistoryRequest} req
      * @param {function(string, DescribeMNGReleasedVersionHistoryResponse):void} cb
      * @public
@@ -445,7 +447,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve user retention data for a mini program within a specified date range.
+     * This API is used to query the mini program user retention data within a specified date range.
      * @param {DescribeMNPRetentionDataRequest} req
      * @param {function(string, DescribeMNPRetentionDataResponse):void} cb
      * @public
@@ -478,7 +480,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the line chart data for selected superapp metrics.
+     * This API is used to query the line chart data for selected superapp metrics.
      * @param {DescribeAPPDataDetailLineChartRequest} req
      * @param {function(string, DescribeAPPDataDetailLineChartResponse):void} cb
      * @public
@@ -489,7 +491,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query details of a specific permission request to call sensitive APIs.
+     * This API is used to query the details of a sensitive API permission request for a mini program.
      * @param {DescribeMNPSensitiveAPIPermissionApprovalRequest} req
      * @param {function(string, DescribeMNPSensitiveAPIPermissionApprovalResponse):void} cb
      * @public
@@ -500,7 +502,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the line chart data for mini game payment.
+     * This API is used to query the mini game payment line chart.
      * @param {DescribeMNGPaymentLineChartRequest} req
      * @param {function(string, DescribeMNGPaymentLineChartResponse):void} cb
      * @public
@@ -511,7 +513,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set a sensitive API to restricted.
+     * This API is used to disable a superapp sensitive API.
      * @param {DisableApplicationSensitiveAPIRequest} req
      * @param {function(string, DisableApplicationSensitiveAPIResponse):void} cb
      * @public
@@ -566,7 +568,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the detailed advertising data for a mini program within a specified date range.
+     * This API is used to query the detailed advertising data for a mini program within a specified date range.
      * @param {DescribeMNPAdvertisingDetailRequest} req
      * @param {function(string, DescribeMNPAdvertisingDetailResponse):void} cb
      * @public
@@ -577,7 +579,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a sensitive API of an application.
+     * This API is used to create a superapp sensitive API.
      * @param {CreateApplicationSensitiveAPIRequest} req
      * @param {function(string, CreateApplicationSensitiveAPIResponse):void} cb
      * @public
@@ -599,7 +601,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the application details.
+     * This API is used to query the superapp details.
      * @param {DescribeApplicationRequest} req
      * @param {function(string, DescribeApplicationResponse):void} cb
      * @public
@@ -610,7 +612,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve an overview of mini game payment data within a specified period.
+     * This API is used to query an overview of mini game payment data within a specified period.
      * @param {DescribeMNGPaymentOverviewRequest} req
      * @param {function(string, DescribeMNGPaymentOverviewResponse):void} cb
      * @public
@@ -632,7 +634,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the users.
+     * This API is used to query a list of users.
      * @param {DescribeUserListRequest} req
      * @param {function(string, DescribeUserListResponse):void} cb
      * @public
@@ -643,7 +645,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to rollback a mini program online version.
+     * This API is used to roll back the released version of a mini program to a specified version.
      * @param {RollbackMNPVersionRequest} req
      * @param {function(string, RollbackMNPVersionResponse):void} cb
      * @public
@@ -665,7 +667,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the roles.
+     * This API is used to query a list of roles.
      * @param {DescribeRoleListRequest} req
      * @param {function(string, DescribeRoleListResponse):void} cb
      * @public
@@ -687,7 +689,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the teams.
+     * This API is used to query a list of teams.
      * @param {DescribeTeamListRequest} req
      * @param {function(string, DescribeTeamListResponse):void} cb
      * @public
@@ -709,7 +711,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve line chart analysis data for mini game visits.
+     * This API is used to query the mini game visit analysis line chart.
      * @param {DescribeMNGAccessAnalysisLineChartRequest} req
      * @param {function(string, DescribeMNGAccessAnalysisLineChartResponse):void} cb
      * @public
@@ -720,7 +722,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve an overview of mini program payment data within a specified date range.
+     * This API is used to query an overview of mini program payment data within a specified date range.
      * @param {DescribePaymentDataOverviewRequest} req
      * @param {function(string, DescribePaymentDataOverviewResponse):void} cb
      * @public
@@ -731,7 +733,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of mini game types.
+     * This API is used to query the mini game categories.
      * @param {DescribeMNGCategoryRequest} req
      * @param {function(string, DescribeMNGCategoryResponse):void} cb
      * @public
@@ -786,7 +788,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve a list of the mini programs or mini games associated with a superapp.
+     * This API is used to query the mini program or mini game list associated with a superapp.
      * @param {DescribeApplicationMNPListRequest} req
      * @param {function(string, DescribeApplicationMNPListResponse):void} cb
      * @public
@@ -808,7 +810,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve user retention data for a mini game within a specified date range.
+     * This API is used to query the user retention data for a mini game within a specified date range.
      * @param {DescribeMNGRetentionDataRequest} req
      * @param {function(string, DescribeMNGRetentionDataResponse):void} cb
      * @public
@@ -819,7 +821,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the configuration details for an superapp.
+     * This API is used to query the superapp configuration information.
      * @param {DescribeApplicationConfigInfosRequest} req
      * @param {function(string, DescribeApplicationConfigInfosResponse):void} cb
      * @public
@@ -830,7 +832,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the mini program types.
+     * This API is used to query the mini program category list.
      * @param {DescribeMNPCategoryRequest} req
      * @param {function(string, DescribeMNPCategoryResponse):void} cb
      * @public
@@ -841,7 +843,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the detailed visit analysis data for a mini game within a specified date range.
+     * This API is used to query the detailed visit analysis data for a mini game within a specified date range.
      * @param {DescribeMNGAccessAnalysisDetailRequest} req
      * @param {function(string, DescribeMNGAccessAnalysisDetailResponse):void} cb
      * @public
@@ -852,7 +854,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve an overview of visit analysis data for a mini game within a specified date range.
+     * This API is used to query an overview of visit analysis data for a mini game within a specified date range.
      * @param {DescribeMNGAccessAnalysisOverviewRequest} req
      * @param {function(string, DescribeMNGAccessAnalysisOverviewResponse):void} cb
      * @public
@@ -874,7 +876,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the line chart data for mini program visit analysis within a given date range.
+     * This API is used to query the mini program visit analysis line chart within a given date range.
      * @param {DescribeMNPReportDataLineChartRequest} req
      * @param {function(string, DescribeMNPReportDataLineChartResponse):void} cb
      * @public
@@ -885,7 +887,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the line chart data related to standard payment for a mini program within a specified date range.
+     * This API is used to query the mini program payment line chart within a specified date range.
      * @param {DescribePaymentDataLineChartRequest} req
      * @param {function(string, DescribePaymentDataLineChartResponse):void} cb
      * @public
@@ -907,7 +909,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to approve or reject the release of a mini program version.
+     * This API is used to process mini program approval requests.
      * @param {ProcessMNPApprovalRequest} req
      * @param {function(string, ProcessMNPApprovalResponse):void} cb
      * @public
@@ -929,7 +931,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the mini game payment retention data.
+     * This API is used to query the mini game payment retention data.
      * @param {DescribeMNGPaymentRetentionAnalysisRequest} req
      * @param {function(string, DescribeMNGPaymentRetentionAnalysisResponse):void} cb
      * @public
@@ -951,7 +953,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the mini programs.
+     * This API is used to query the mini program list.
      * @param {DescribeMNPListRequest} req
      * @param {function(string, DescribeMNPListResponse):void} cb
      * @public
@@ -962,7 +964,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the detailed mini program monthly active user data.
+     * This API is used to query the detailed mini program monthly active user data.
      * @param {DescribeMNPMAUDataDetailRequest} req
      * @param {function(string, DescribeMNPMAUDataDetailResponse):void} cb
      * @public
@@ -973,7 +975,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the advertising line chart data for a mini program within a specified date range.
+     * This API is used to query the advertising line chart data for a mini program within a specified date range.
      * @param {DescribeAdvertisingLineChartRequest} req
      * @param {function(string, DescribeAdvertisingLineChartResponse):void} cb
      * @public
@@ -1006,7 +1008,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the detailed mini program visit analysis data.
+     * This API is used to query the detailed mini program visit analysis data.
      * @param {DescribeMNPReportDetailRequest} req
      * @param {function(string, DescribeMNPReportDetailResponse):void} cb
      * @public
@@ -1028,7 +1030,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the real-time active user statistics for a mini program.
+     * This API is used to query the mini program real-time active user statistics.
      * @param {DescribeMNPActiveUserRealTimeStatisticsRequest} req
      * @param {function(string, DescribeMNPActiveUserRealTimeStatisticsResponse):void} cb
      * @public
@@ -1050,7 +1052,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to list sensitive APIs of an application.
+     * This API is used to query a list of superapp sensitive APIs.
      * @param {DescribeApplicationSensitiveAPIListRequest} req
      * @param {function(string, DescribeApplicationSensitiveAPIListResponse):void} cb
      * @public
@@ -1061,7 +1063,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the advertising detailed data for a mini game over a specified period.
+     * This API is used to query the detailed mini game advertising data over a specified period.
      * @param {DescribeMNGAdvertisingDetailRequest} req
      * @param {function(string, DescribeMNGAdvertisingDetailResponse):void} cb
      * @public
@@ -1083,7 +1085,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the configuration files of an application.
+     * This API is used to query the configuration files of a superapp.
      * @param {DescribeApplicationConfigFileRequest} req
      * @param {function(string, DescribeApplicationConfigFileResponse):void} cb
      * @public
@@ -1094,7 +1096,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve mini game advertising data in a line chart format.
+     * This API is used to query the mini game advertising data in a line chart format.
      * @param {DescribeMNGAdvertisingLineChartRequest} req
      * @param {function(string, DescribeMNGAdvertisingLineChartResponse):void} cb
      * @public
@@ -1105,7 +1107,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to list the approval requests related with a mini program version.
+     * This API is used to query a list of approval requests related with a mini program.
      * @param {DescribeMNPApprovalListRequest} req
      * @param {function(string, DescribeMNPApprovalListResponse):void} cb
      * @public
@@ -1116,7 +1118,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query permission requests to allow a mini program calling sensitive APIs.
+     * This API is used to query a list of permission requests to allow a mini program to call sensitive APIs.
      * @param {DescribeMNPSensitiveAPIPermissionApprovalListRequest} req
      * @param {function(string, DescribeMNPSensitiveAPIPermissionApprovalListResponse):void} cb
      * @public
@@ -1127,7 +1129,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to change the application information.
+     * This API is used to change the superapp information.
      * @param {ModifyApplicationRequest} req
      * @param {function(string, ModifyApplicationResponse):void} cb
      * @public
@@ -1138,7 +1140,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the team members.
+     * This API is used to query a list of team members.
      * @param {DescribeTeamMemberListRequest} req
      * @param {function(string, DescribeTeamMemberListResponse):void} cb
      * @public
@@ -1149,7 +1151,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve an overview of the superapp data.
+     * This API is used to query the data overview for the selected superapp metrics.
      * @param {DescribeAPPDataOverviewRequest} req
      * @param {function(string, DescribeAPPDataOverviewResponse):void} cb
      * @public
@@ -1160,7 +1162,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the domain allowlist / blocklist of a mini program.
+     * This API is used to query the domain allowlist/blocklist of a mini program.
      * @param {DescribeMNPDomainACLRequest} req
      * @param {function(string, DescribeMNPDomainACLResponse):void} cb
      * @public
@@ -1171,7 +1173,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to add a domain name to the allowlist / blocklist of a mini program.
+     * This API is used to create a domain allowlist/blocklist for a mini program.
      * @param {CreateMNPDomainACLRequest} req
      * @param {function(string, CreateMNPDomainACLResponse):void} cb
      * @public
@@ -1193,7 +1195,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the creation result of a mini game version.
+     * This API is used to query the mini game version creation results.
      * @param {DescribeMNGVersionRequest} req
      * @param {function(string, DescribeMNGVersionResponse):void} cb
      * @public
@@ -1215,7 +1217,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to list all released versions of a mini program.
+     * This API is used to query the release version history of a mini program.
      * @param {DescribeMNPReleasedVersionHistoryRequest} req
      * @param {function(string, DescribeMNPReleasedVersionHistoryResponse):void} cb
      * @public
@@ -1226,7 +1228,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the mini program version information.
+     * This API is used to query versions of a mini program across all stages.
      * @param {DescribeMNPAllStageVersionsRequest} req
      * @param {function(string, DescribeMNPAllStageVersionsResponse):void} cb
      * @public
@@ -1237,7 +1239,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the detailed report data for global overview within a specified date range.
+     * This API is used to query the detailed report data for global overview within a specified date range.
      * @param {DescribeGlobalOverviewReportDetailRequest} req
      * @param {function(string, DescribeGlobalOverviewReportDetailResponse):void} cb
      * @public
@@ -1270,7 +1272,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve MAU comparison data for a mini program between two months.
+     * This API is used to query the MAU comparison data for a mini program between two months.
      * @param {DescribeMNPMAUMetricCardRequest} req
      * @param {function(string, DescribeMNPMAUMetricCardResponse):void} cb
      * @public
@@ -1292,7 +1294,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create an application.
+     * This API is used to create a superapp.
      * @param {CreateApplicationRequest} req
      * @param {function(string, CreateApplicationResponse):void} cb
      * @public
@@ -1358,7 +1360,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the details of a sensitive API permission request for a mini game.
+     * This API is used to query the details of permission requests to allow a mini game to call sensitive APIs.
      * @param {DescribeMNGSensitiveAPIPermissionApprovalRequest} req
      * @param {function(string, DescribeMNGSensitiveAPIPermissionApprovalResponse):void} cb
      * @public
@@ -1369,7 +1371,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the real-time active user statistics for a mini game.
+     * This API is used to query the mini game real-time active user statistics.
      * @param {DescribeMNGActiveUserRealTimeStatisticsRequest} req
      * @param {function(string, DescribeMNGActiveUserRealTimeStatisticsResponse):void} cb
      * @public
@@ -1391,7 +1393,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the detailed mini game monthly active user data.
+     * This API is used to query the detailed mini game monthly active user data.
      * @param {DescribeMNGMAUDataDetailRequest} req
      * @param {function(string, DescribeMNGMAUDataDetailResponse):void} cb
      * @public
@@ -1402,7 +1404,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a secret key for a mini program or mini game.
+     * This API is used to create a package secret key for a mini program or mini game.
      * @param {CreateMNPSecretKeyRequest} req
      * @param {function(string, CreateMNPSecretKeyResponse):void} cb
      * @public
@@ -1413,7 +1415,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve MAU comparison data for a mini game between two months.
+     * This API is used to query the MAU comparison data for a mini game between two months.
      * @param {DescribeMNGMAUMonthlyComparisonMetricCardRequest} req
      * @param {function(string, DescribeMNGMAUMonthlyComparisonMetricCardResponse):void} cb
      * @public
@@ -1424,7 +1426,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve mini game monthly active user data in a line chart format.
+     * This API is used to query the mini game MAU line chart.
      * @param {DescribeMNGMAULineChartRequest} req
      * @param {function(string, DescribeMNGMAULineChartResponse):void} cb
      * @public
@@ -1435,7 +1437,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete the applications.
+     * This API is used to delete a superapp.
      * @param {DeleteApplicationRequest} req
      * @param {function(string, DeleteApplicationResponse):void} cb
      * @public
@@ -1457,7 +1459,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve an overview of mini program ad metrics within a specified date range.
+     * This API is used to query the mini program advertising overview.
      * @param {DescribeAdvertisingOverviewRequest} req
      * @param {function(string, DescribeAdvertisingOverviewResponse):void} cb
      * @public
@@ -1490,7 +1492,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the detailed page visit data for a mini program over a specified period.
+     * This API is used to query the detailed mini program page visit data.
      * @param {DescribeMNPPageAnalysisDetailRequest} req
      * @param {function(string, DescribeMNPPageAnalysisDetailResponse):void} cb
      * @public
@@ -1501,7 +1503,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve a global overview summary of usage statistics.
+     * This API is used to query the data summary for the global overview.
      * @param {DescribeGlobalOverviewDataSummaryRequest} req
      * @param {function(string, DescribeGlobalOverviewDataSummaryResponse):void} cb
      * @public
@@ -1534,7 +1536,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to add a team member
+     * This API is used to add a team member.
      * @param {AddTeamMemberRequest} req
      * @param {function(string, AddTeamMemberResponse):void} cb
      * @public
@@ -1545,7 +1547,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the mini program monthly active user data in a line chart format.
+     * This API is used to query the mini program monthly active user data in a line chart format.
      * @param {DescribeMNPMAULineChartRequest} req
      * @param {function(string, DescribeMNPMAULineChartResponse):void} cb
      * @public
@@ -1567,7 +1569,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve the detailed standard payment data for specified  mini programs within a specified date range.
+     * This API is used to query the mini program payment data details within a specified date range.
      * @param {DescribePaymentDataDetailRequest} req
      * @param {function(string, DescribePaymentDataDetailResponse):void} cb
      * @public
@@ -1589,7 +1591,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of sensitive APIs that available to the mini game.
+     * This API is used to query a list of sensitive APIs that are available to the mini game.
      * @param {DescribeMNGSensitiveAPIPermissionListRequest} req
      * @param {function(string, DescribeMNGSensitiveAPIPermissionListResponse):void} cb
      * @public
@@ -1600,7 +1602,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to approve or reject the sensitive API permission requests.
+     * This API is used to process a sensitive API permission request for a mini program.
      * @param {ProcessMNPSensitiveAPIPermissionApprovalRequest} req
      * @param {function(string, ProcessMNPSensitiveAPIPermissionApprovalResponse):void} cb
      * @public
@@ -1611,7 +1613,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the mini program information.
+     * This API is used to edit the mini program information.
      * @param {ModifyMNPRequest} req
      * @param {function(string, ModifyMNPResponse):void} cb
      * @public
@@ -1622,7 +1624,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set an application sensitive API to public.
+     * This API is used to enable a superapp sensitive API.
      * @param {EnableApplicationSensitiveAPIRequest} req
      * @param {function(string, EnableApplicationSensitiveAPIResponse):void} cb
      * @public
@@ -1644,7 +1646,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retrieve an overview of visit analysis data for a mini program within a specified date range.
+     * This API is used to query the overview of mini program visit analysis data within a specified date range.
      * @param {DescribeMNPAccessAnalysisOverviewRequest} req
      * @param {function(string, DescribeMNPAccessAnalysisOverviewResponse):void} cb
      * @public
@@ -1666,7 +1668,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a sensitive API.
+     * This API is used to delete a superapp sensitive API.
      * @param {DeleteApplicationSensitiveAPIRequest} req
      * @param {function(string, DeleteApplicationSensitiveAPIResponse):void} cb
      * @public
@@ -1677,7 +1679,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the applications.
+     * This API is used to query a list of superapps.
      * @param {DescribeApplicationListRequest} req
      * @param {function(string, DescribeApplicationListResponse):void} cb
      * @public

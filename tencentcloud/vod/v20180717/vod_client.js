@@ -1786,7 +1786,7 @@ Developers can achieve this by calling this interface:
     }
 
     /**
-     * This API is used to create AIGC voice replication. Note that calling this API will incur fees. See the [billing documentation] (https://intl.cloud.tencent.com/zh/document/product/266/14666#87e472ca-9c95-4658-ab7b-8f2130608419).
+     * This API is used to create AIGC voice replication. Note that calling this API will incur fees. See the [billing documentation](https://intl.cloud.tencent.com/document/product/266/14666#87e472ca-9c95-4658-ab7b-8f2130608419).
      * @param {CreateAigcAudioCloneRequest} req
      * @param {function(string, CreateAigcAudioCloneResponse):void} cb
      * @public

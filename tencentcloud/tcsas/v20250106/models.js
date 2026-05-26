@@ -25,7 +25,7 @@ class CreatePresetKeyResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {PresetResp || null}
          */
         this.Data = null;
@@ -65,7 +65,7 @@ class DescribePaymentDataLineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -109,7 +109,7 @@ class DescribePaymentDataOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MNPPaymentOverview || null}
          */
@@ -150,43 +150,43 @@ class DescribeMNGMAUMonthlyComparisonMetricCardRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time in YYYYMMDD format
+         * Start time in YYYYMMDD format.
          * @type {number || null}
          */
         this.SourceMonth = null;
 
         /**
-         * Type: 0 Non-production data, 1 Production data 
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * End time in YYYYMMDD format
+         * End time in YYYYMMDD format.
          * @type {number || null}
          */
         this.TargetMonth = null;
 
         /**
-         * Superapp ID starting with App
+         * Superapp ID prefixed with "app".
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Mini program appid. If this parameter is specified, the query is filtered by mini program appid.
+         * Mini program appid. If not empty, results are filtered by mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Mini program team ID, required. When provided, the query is performed based on the mini program team.
+         * Mini program team ID. If not empty, results are filtered by mini program team ID.
          * @type {number || null}
          */
         this.MNPTeamId = null;
@@ -220,7 +220,7 @@ class ModifyMNGDomainResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -260,13 +260,13 @@ class DescribeMNPAllStageVersionsRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -295,37 +295,37 @@ class DescribeMNGRetentionDataRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time
+         * Start time.
          * @type {number || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Type: 1 Production data, 0 Non-production data
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * End time
+         * End time.
          * @type {number || null}
          */
         this.TimeEnd = null;
 
         /**
-         * 0 All, 2 Android, 3 iOS
+         * Operating system. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
@@ -358,7 +358,7 @@ class DescribeAdvertisingOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MNPAdvertisingOverview || null}
          */
@@ -399,19 +399,19 @@ class ModifyMNGDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * <p>Domain list</p>
+         * <p>List of domains.</p>
          * @type {Array.<CreateDomainParam> || null}
          */
         this.Domain = null;
@@ -449,7 +449,7 @@ class DescribeMNPReportDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page
+         * Data display at the top of the page.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AccessAnalysisDetail> || null}
          */
@@ -493,13 +493,13 @@ class DeleteUserRequest extends  AbstractModel {
         super();
 
         /**
-         * User ID
+         * User ID.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -528,7 +528,7 @@ class DescribeMNGAdvertisingOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AnalysisAdvertOverview || null}
          */
@@ -569,8 +569,7 @@ class DescribeMNPCategoryResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Response data.
          * @type {Array.<MNPTypeDefine> || null}
          */
         this.Data = null;
@@ -605,7 +604,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * The request to add a sensitive API
+ * Request object for creating a sensitive API.
  * @class
  */
 class CreateApplicationSensitiveAPIReq extends  AbstractModel {
@@ -613,25 +612,25 @@ class CreateApplicationSensitiveAPIReq extends  AbstractModel {
         super();
 
         /**
-         * <p>API name</p>
+         * <p>API name.</p>
          * @type {string || null}
          */
         this.APIName = null;
 
         /**
-         * <p>API description</p>
+         * <p>API description.</p>
          * @type {string || null}
          */
         this.APIDesc = null;
 
         /**
-         * <p>API type. Valid values: 1: System; 2: Custom</p>
+         * <p>API type. Valid values: 1: System; 2: Custom.</p>
          * @type {number || null}
          */
         this.APIType = null;
 
         /**
-         * <p>Applicable scope: Valid values: 0: Mini program; 1: Mini game; 100: Universal</p>
+         * <p>Applicable scope: Valid values: 0: Mini program; 1: Mini game; 100: Both.</p>
          * @type {number || null}
          */
         this.UseScope = null;
@@ -662,19 +661,19 @@ class CreateMNPApprovalRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program version ID
+         * Mini program version ID.
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * submit: Submit an approval request; cancel: Cancel the approval request
+         * submit: Submit an approval request; cancel: Cancel the approval request.
          * @type {string || null}
          */
         this.ApplyAction = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -704,37 +703,37 @@ class DescribeMNGAdvertisingDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time in YYYYMMDD format
+         * Start time in YYYYMMDD format.
          * @type {string || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * End time in YYYYMMDD format
+         * End time in YYYYMMDD format.
          * @type {string || null}
          */
         this.TimeEnd = null;
 
         /**
-         * //1-BANNER  2-REWARDED
+         * Ad unit type. Valid values: 1: Banner; 2: Rewarded.
          * @type {string || null}
          */
         this.AdUnitType = null;
 
         /**
-         * // 2 Android, 3 iOS
+         * Operating system. Valid values: 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
@@ -767,7 +766,7 @@ class DescribeMNGSensitiveAPIPermissionApprovalResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {DescribeMNGSensitiveAPIPermissionApprovalData || null}
          */
@@ -808,7 +807,7 @@ class ReleaseMNGVersionResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -848,7 +847,7 @@ class DeleteTeamMemberResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -888,7 +887,7 @@ class RemoveMNPResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -928,37 +927,37 @@ class DescribeMNGSensitiveAPIPermissionListRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Pagination offset</p>
+         * <p>Pagination offset.</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * <p>Pagination count</p>
+         * <p>Number of entries per page.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * <p>Superapp ID</p>
+         * <p>Superapp ID.</p>
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * <p>Keywords for search (API name)</p>
+         * <p>Search keyword (API name).</p>
          * @type {string || null}
          */
         this.Keyword = null;
@@ -991,7 +990,7 @@ class DescribeMNPRetentionDataResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RetentionData> || null}
          */
@@ -1035,13 +1034,13 @@ class DeleteApplicationRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -1070,7 +1069,7 @@ class DescribeMNPVersionResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {DescribeMNPVersionResp || null}
          */
         this.Data = null;
@@ -1110,7 +1109,7 @@ class ModifyApplicationResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -1142,7 +1141,7 @@ class ModifyApplicationResponse extends  AbstractModel {
 }
 
 /**
- * Advertising data overview
+ * Ad data overview.
  * @class
  */
 class AdvertDataOverview extends  AbstractModel {
@@ -1150,35 +1149,35 @@ class AdvertDataOverview extends  AbstractModel {
         super();
 
         /**
-         * Estimated revenue
+         * Estimated revenue.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.EstimatedEarnings = null;
 
         /**
-         * Requests
+         * Number of requests.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RequestsNumber = null;
 
         /**
-         * Impressions
+         * Number of impressions.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Impressions = null;
 
         /**
-         * Taps
+         * Number of taps.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ClicksNumber = null;
 
         /**
-         * Impressions
+         * eCPM (effective cost per mille).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1211,37 +1210,37 @@ class DescribeMNGAdvertisingLineChartRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time in YYYYMMDD format
+         * Start time in YYYYMMDD format.
          * @type {string || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * End time in YYYYMMDD format
+         * End time in YYYYMMDD format.
          * @type {string || null}
          */
         this.TimeEnd = null;
 
         /**
-         * //1-BANNER  2-REWARDED
+         * Ad unit type. Valid values: 1: Banner; 2: Rewarded.
          * @type {string || null}
          */
         this.AdUnitType = null;
 
         /**
-         * // 2 Android, 3 iOS
+         * Operating system. Valid values: 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
@@ -1274,7 +1273,7 @@ class DescribeMNPListResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeMNPListResp || null}
          */
         this.Data = null;
@@ -1314,7 +1313,7 @@ class DescribeMNPSensitiveAPIPermissionApprovalListResponse extends  AbstractMod
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeMNPSensitiveAPIPermissionApprovalListResp || null}
          */
         this.Data = null;
@@ -1354,7 +1353,7 @@ class ProcessMNPApprovalResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -1394,55 +1393,55 @@ class DescribeApplicationMNPListRequest extends  AbstractModel {
         super();
 
         /**
-         * Page offset
+         * Pagination offset.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results per page
+         * Number of entries per page.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Superapp ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Online status. 0 All (default); 1 Available; 2 In canary release
+         * Available status. Valid value: 0: All; 1 Available; 2: In canary release.
          * @type {number || null}
          */
         this.OnlineStatus = null;
 
         /**
-         * Engine type. 0 Mini program; 1 Mini game
+         * Engine type. Specifies the runtime engine by product type. Valid values: 0: Mini program; 1: Mini game.
          * @type {Array.<number> || null}
          */
         this.EngineTypeList = null;
 
         /**
-         * Secondary category name
+         * Secondary category name.
          * @type {string || null}
          */
         this.SubCategory = null;
 
         /**
-         * Primary category name
+         * Primary category name.
          * @type {string || null}
          */
         this.PrimaryCategory = null;
 
         /**
-         * Keywords
+         * Keyword.
          * @type {string || null}
          */
         this.Keyword = null;
@@ -1478,7 +1477,7 @@ class DeleteTeamResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -1518,19 +1517,19 @@ class ModifyMNPDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Domain list
+         * Domain list.
          * @type {Array.<CreateDomainParam> || null}
          */
         this.Domain = null;
@@ -1560,7 +1559,7 @@ class ModifyMNPDomainRequest extends  AbstractModel {
 }
 
 /**
- * Response of querying the rollback version list
+ * Response of querying the rollback version list.
  * @class
  */
 class DescribeRevertOnlineVersionPageResp extends  AbstractModel {
@@ -1568,13 +1567,13 @@ class DescribeRevertOnlineVersionPageResp extends  AbstractModel {
         super();
 
         /**
-         * Total number of entries
+         * Total number of entries.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List information
+         * List data.
          * @type {Array.<QueryOnlineVersionResp> || null}
          */
         this.DataList = null;
@@ -1611,13 +1610,13 @@ class DescribeMNPSensitiveAPIPermissionApprovalRequest extends  AbstractModel {
         super();
 
         /**
-         * Approval request number
+         * Approval number.
          * @type {string || null}
          */
         this.ApprovalNo = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -1638,7 +1637,7 @@ class DescribeMNPSensitiveAPIPermissionApprovalRequest extends  AbstractModel {
 }
 
 /**
- * Superapp overview data details
+ * Superapp overview data details.
  * @class
  */
 class APPOverviewData extends  AbstractModel {
@@ -1646,77 +1645,77 @@ class APPOverviewData extends  AbstractModel {
         super();
 
         /**
-         * Superapp active device count
+         * Superapp active device count.
          * @type {number || null}
          */
         this.AllActiveDeviceNum = null;
 
         /**
-         * Superapp new device count
+         * Superapp new device count.
          * @type {number || null}
          */
         this.AllNewDeviceNum = null;
 
         /**
-         * Mini program team count
+         * Mini program team count.
          * @type {number || null}
          */
         this.CorpNum = null;
 
         /**
-         * Mini game active device count
+         * Mini game active device count.
          * @type {number || null}
          */
         this.GameActiveDeviceNum = null;
 
         /**
-         * Mini game new device count
+         * Mini game new device count.
          * @type {number || null}
          */
         this.GameNewDeviceNum = null;
 
         /**
-         * Created mini program count
+         * Created mini program count.
 
          * @type {number || null}
          */
         this.MiniAppNum = null;
 
         /**
-         * Created mini game count
+         * Created mini game count.
 
          * @type {number || null}
          */
         this.MngNum = null;
 
         /**
-         * Mini program new device count
+         * Mini program new device count.
          * @type {number || null}
          */
         this.NewDeviceNum = null;
 
         /**
-         * Released mini program count
+         * Released mini program count.
 
          * @type {number || null}
          */
         this.OnlineMiniAppNum = null;
 
         /**
-         * Released mini game count
+         * Released mini game count.
 
          * @type {number || null}
          */
         this.OnlineMngNum = null;
 
         /**
-         * Mini program active device count
+         * Mini program active device count.
          * @type {number || null}
          */
         this.VisitNum = null;
 
         /**
-         * Data refresh timestamp
+         * Data refresh timestamp.
          * @type {string || null}
          */
         this.FlushTime = null;
@@ -1755,7 +1754,7 @@ class ModifyUserResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -1795,13 +1794,13 @@ class DescribeUserRequest extends  AbstractModel {
         super();
 
         /**
-         * User ID
+         * User ID.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -1822,7 +1821,7 @@ class DescribeUserRequest extends  AbstractModel {
 }
 
 /**
- * Team member information
+ * Team member information.
  * @class
  */
 class DescribeTeamMemberInfoResp extends  AbstractModel {
@@ -1830,49 +1829,49 @@ class DescribeTeamMemberInfoResp extends  AbstractModel {
         super();
 
         /**
-         * User ID
+         * User ID.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * User account
+         * User account.
          * @type {string || null}
          */
         this.UserAccount = null;
 
         /**
-         * User name
+         * User name.
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Team name
+         * Team name.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Specifies the team role name.
+         * Team role name.
          * @type {string || null}
          */
         this.TeamRoleName = null;
 
         /**
-         * Specifies the team role ID.
+         * Team role ID.
          * @type {number || null}
          */
         this.TeamRoleId = null;
 
         /**
-         * Whether it is editable
+         * Whether it can be edited.
          * @type {boolean || null}
          */
         this.CanEdit = null;
@@ -1907,7 +1906,7 @@ class ConfigureMNPPreviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -1947,8 +1946,7 @@ class DescribeMNGResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Response data.</p>
          * @type {DescribeMNGManagerDetailData || null}
          */
         this.Data = null;
@@ -1988,25 +1986,25 @@ class RollbackMNGVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Mini game version ID</p>
+         * <p>Mini game version ID.</p>
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * <p>Mini game version number</p>
+         * <p>Mini game version number.</p>
          * @type {string || null}
          */
         this.MNPVersion = null;
@@ -2037,46 +2035,52 @@ class ModifyMNGRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game type</p>
+         * <p>Mini game category.</p>
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
-         * <p>Mini game name</p>
+         * <p>Mini game name.</p>
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * <p>Mini game introduction</p>
+         * <p>Mini game introduction.</p>
          * @type {string || null}
          */
         this.MNPIntro = null;
 
         /**
-         * <p>Mini game description</p>
+         * <p>Mini game description.</p>
          * @type {string || null}
          */
         this.MNPDesc = null;
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * <p>Mini game icon</p>
+         * <p>Mini game icon.</p>
          * @type {string || null}
          */
         this.MNPIcon = null;
+
+        /**
+         * <p>The mini game name and description in multiple languages.	</p>
+         * @type {Array.<MNPI18NSyncDto> || null}
+         */
+        this.I18nList = null;
 
     }
 
@@ -2095,11 +2099,20 @@ class ModifyMNGRequest extends  AbstractModel {
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
         this.MNPIcon = 'MNPIcon' in params ? params.MNPIcon : null;
 
+        if (params.I18nList) {
+            this.I18nList = new Array();
+            for (let z in params.I18nList) {
+                let obj = new MNPI18NSyncDto();
+                obj.deserialize(params.I18nList[z]);
+                this.I18nList.push(obj);
+            }
+        }
+
     }
 }
 
 /**
- * List of permission requests to allow a mini program to call sensitive APIs
+ * List data for querying mini program sensitive API permission approvals.
  * @class
  */
 class DescribeMNPSensitiveAPIPermissionApprovalListData extends  AbstractModel {
@@ -2107,67 +2120,67 @@ class DescribeMNPSensitiveAPIPermissionApprovalListData extends  AbstractModel {
         super();
 
         /**
-         * Approval ID
+         * Approval number.
          * @type {string || null}
          */
         this.ApprovalNo = null;
 
         /**
-         * Sensitive API ID
+         * Sensitive API ID.
          * @type {string || null}
          */
         this.APIId = null;
 
         /**
-         * API name
+         * API name.
          * @type {string || null}
          */
         this.APIName = null;
 
         /**
-         * API request method
+         * API method.
          * @type {string || null}
          */
         this.APIMethod = null;
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Mini program name
+         * Mini program name.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * Applicant
+         * Applicant.
          * @type {string || null}
          */
         this.ApplyUser = null;
 
         /**
-         * Application time
+         * Application time.
          * @type {string || null}
          */
         this.ApplyTime = null;
 
         /**
-         * Application notes
+         * Application note.
          * @type {string || null}
          */
         this.ApplyNote = null;
 
         /**
-         * Approval status. 1: Processing; 20: Rejected; 30: Approved
+         * Approval status. Valid values: 1: Processing; 20: Rejected; 30: Approved.
          * @type {number || null}
          */
         this.ApprovalStatus = null;
 
         /**
-         * Specifies the review user.
+         * Approver.
          * @type {string || null}
          */
         this.ApprovalUser = null;
@@ -2179,31 +2192,31 @@ class DescribeMNPSensitiveAPIPermissionApprovalListData extends  AbstractModel {
         this.ApprovalTime = null;
 
         /**
-         * Approval notes
+         * Approval note.
          * @type {string || null}
          */
         this.ApprovalNote = null;
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Application name
+         * Superapp name.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * Specifies the application icon.
+         * Superapp icon.
          * @type {string || null}
          */
         this.ApplicationLogo = null;
 
         /**
-         * API type. 1: system; 2: custom.
+         * API type. Valid values: 1: System; 2: Custom.
          * @type {number || null}
          */
         this.APIType = null;
@@ -2254,13 +2267,13 @@ class CreateMNGVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Version number</p>
+         * <p>Version number.</p>
          * @type {string || null}
          */
         this.MNPVersion = null;
@@ -2272,13 +2285,13 @@ class CreateMNGVersionRequest extends  AbstractModel {
         this.FileUrl = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * <p>Version description</p>
+         * <p>Version description.</p>
          * @type {string || null}
          */
         this.MNPVersionIntro = null;
@@ -2302,7 +2315,7 @@ class CreateMNGVersionRequest extends  AbstractModel {
 }
 
 /**
- * Page visit data
+ * Page visit data.
  * @class
  */
 class VisitData extends  AbstractModel {
@@ -2310,38 +2323,37 @@ class VisitData extends  AbstractModel {
         super();
 
         /**
-         * Number of visits
+         * Number of visits.
          * @type {number || null}
          */
         this.VisitCount = null;
 
         /**
-         * Average pages per device - visit_page_count / active_device_num
+         * Average pages viewed per device. Calculated as: visit_page_count / active_device_num.
          * @type {string || null}
          */
         this.AvgDeviceVisitDeep = null;
 
         /**
-         * Pages per visit - visit_page_count / miniapp_open_num
+         * Average pages viewed per session. Calculated as: visit_page_count / miniapp_open_num.
          * @type {string || null}
          */
         this.AvgCountVisitDeep = null;
 
         /**
-         * Average visit duration - miniapp_total_duration / visit_page_count
+         * Average page visit duration. Calculated as: miniapp_total_duration / visit_page_count.
          * @type {string || null}
          */
         this.AvgPageVisitDuration = null;
 
         /**
-         * Average visit duration per session
-miniapp_total_duration/miniapp_open_num
+         * Average visit duration per session. Calculated as: miniapp_total_duration / miniapp_open_num.
          * @type {string || null}
          */
         this.AvgCountVisitDuration = null;
 
         /**
-         * Refresh time in YYYYMMDD format
+         * Refresh time in YYYYMMDD format.
          * @type {number || null}
          */
         this.DataTime = null;
@@ -2366,7 +2378,7 @@ miniapp_total_duration/miniapp_open_num
 }
 
 /**
- * List of all developer versions of a mini program
+ * Response for querying all-stage versions of a mini program.
  * @class
  */
 class DescribeMPAllStageVersionsResp extends  AbstractModel {
@@ -2374,110 +2386,109 @@ class DescribeMPAllStageVersionsResp extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID.
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Specifies the mini program version primary key id.
+         * Mini program version primary key ID.
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * Mini program name
+         * Mini program name.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * Specifies the mini program avatar.
+         * Mini program icon.
          * @type {string || null}
          */
         this.MNPIcon = null;
 
         /**
-         * Mini program type
+         * Mini program category.
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
-         * Mini program introduction
+         * Mini program introduction.
          * @type {string || null}
          */
         this.MNPIntro = null;
 
         /**
-         * Mini program description
+         * Mini program description.
          * @type {string || null}
          */
         this.MNPDesc = null;
 
         /**
-         * Specifies the developer.
+         * Creator.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * Developer creation time.
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Mini program version.
+         * Mini program version number.
          * @type {string || null}
          */
         this.MNPVersion = null;
 
         /**
-         * Describes version features.
+         * Version introduction.
          * @type {string || null}
          */
         this.MNPVersionIntro = null;
 
         /**
-         * Development Platform Online.
+         * Stage: Develop, preview, released.
          * @type {string || null}
          */
         this.Phase = null;
 
         /**
-         * 0 pending review; 1 under review; 2 review rejection; 3 pass review; 4 review cancellation.
+         * Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.
          * @type {number || null}
          */
         this.ApprovalStatus = null;
 
         /**
-         * Approval ticket ID
+         * Approval number.
          * @type {string || null}
          */
         this.ApprovalNo = null;
 
         /**
-         * Specifies whether it is a trial version.
-Specifies the version type. valid values: 0 (non-preview version); 1 (trial version).
+         * Whether this is a preview. Valid values: 0: No; 1: Yes.
          * @type {number || null}
          */
         this.ShowCase = null;
 
         /**
-         * Version number to roll back to.
+         * Rollback version number.
          * @type {number || null}
          */
         this.RollbackVersion = null;
 
         /**
-         * Indicates the release status.
+         * Available status. Valid value: 0: All; 1 Available; 2: In canary release.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Specifies the current main status of the version. valid values: "0" (pending review), "1" (under review), "2" (review rejection), "3" (pass review), "4" (review cancellation).
+         * Current version approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.
          * @type {number || null}
          */
         this.VersionCurrentStatus = null;
@@ -2522,31 +2533,31 @@ class DescribeMNGMAULineChartRequest extends  AbstractModel {
         super();
 
         /**
-         * Type: 0 Non-production data, 1 Production data 
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Superapp ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Mini program appid, required. When provided, the query is performed based on the mini program.
+         * Mini program appid. If not empty, results are filtered by mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Mini program team ID
+         * Mini program team ID.
          * @type {number || null}
          */
         this.MNPTeamId = null;
@@ -2578,13 +2589,13 @@ class DescribeMNGPaymentLineChartRequest extends  AbstractModel {
         super();
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Fixed value: payment_data_analysis
+         * Fixed value: payment_data_analysis.
          * @type {string || null}
          */
         this.ReportId = null;
@@ -2598,13 +2609,13 @@ new_paid_user_amount: Revenue from new paying users,
 new_paid_user_ratio: Percentage of new users who made payments,
 arppu: Average revenue per paying user (ARPPU),
 mng_refund_num: Number of refund orders
-mng_refund_amount: Refund amount
+mng_refund_amount: Refund amount.
          * @type {string || null}
          */
         this.IndexId = null;
 
         /**
-         * Input parameter base64 string: {"Platform":0,"MnpId":"mgcp5xc2yzw8aixv","BeginDate":20251028,"EndDate":20251126,"DataType":"1","PaymentType":2}
+         * Input parameter base64 string: {"Platform":0,"MnpId":"mgcp5xc2yzw8aixv","BeginDate":20251028,"EndDate":20251126,"DataType":"1","PaymentType":2}.
          * @type {string || null}
          */
         this.QueryData = null;
@@ -2627,7 +2638,7 @@ mng_refund_amount: Refund amount
 }
 
 /**
- * Response object for querying the preview
+ * Response for querying the preview.
  * @class
  */
 class DescribeMNGPreviewResp extends  AbstractModel {
@@ -2635,49 +2646,49 @@ class DescribeMNGPreviewResp extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Mini game name</p>
+         * <p>Mini game name.</p>
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * <p>Mini game description</p>
+         * <p>Mini game description.</p>
          * @type {string || null}
          */
         this.MNPDesc = null;
 
         /**
-         * <p>Mini game version</p>
+         * <p>Mini game version.</p>
          * @type {string || null}
          */
         this.MNPVersion = null;
 
         /**
-         * <p>Mini game version description</p>
+         * <p>Mini game version description.</p>
          * @type {string || null}
          */
         this.MNPVersionIntro = null;
 
         /**
-         * <p>Mini game version QR code</p>
+         * <p>Mini game version QR code URL.</p>
          * @type {string || null}
          */
         this.QRCodeUrl = null;
 
         /**
-         * <p>Preview path</p>
+         * <p>Preview path.</p>
          * @type {string || null}
          */
         this.PreviewEntrancePath = null;
 
         /**
-         * <p>Information encoded in the QR code</p>
+         * <p>Information encoded in the QR code.</p>
          * @type {string || null}
          */
         this.QRCodeContent = null;
@@ -2712,31 +2723,31 @@ class DescribeApplicationListRequest extends  AbstractModel {
         super();
 
         /**
-         * Page offset
+         * Pagination offset.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results per page
+         * Number of entries per page.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Keywords for search (app name)
+         * Search keyword (superapp name).
          * @type {string || null}
          */
         this.Keyword = null;
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
@@ -2760,7 +2771,7 @@ class DescribeApplicationListRequest extends  AbstractModel {
 }
 
 /**
- * Mini program list data
+ * Mini game list data.
  * @class
  */
 class DescribeMNGListData extends  AbstractModel {
@@ -2768,91 +2779,91 @@ class DescribeMNGListData extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Mini game icon</p>
+         * <p>Mini game icon.</p>
          * @type {string || null}
          */
         this.MNPIcon = null;
 
         /**
-         * <p>Mini game name</p>
+         * <p>Mini game name.</p>
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * <p>Team name</p>
+         * <p>Team name.</p>
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * <p>Mini game category</p>
+         * <p>Mini game category.</p>
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
-         * <p>Mini game available status. Valid values: 1: Available; 2: Not available</p>
+         * <p>Mini game available status. Valid values: 1: Available; 2: Not available.</p>
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * <p>Mini game introduction</p>
+         * <p>Mini game introduction.</p>
          * @type {string || null}
          */
         this.MNPIntro = null;
 
         /**
-         * <p>Creator</p>
+         * <p>Creator.</p>
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * <p>Creation time</p>
+         * <p>Creation time.</p>
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * <p>Updater</p>
+         * <p>Last modifier.</p>
          * @type {string || null}
          */
         this.UpdateUser = null;
 
         /**
-         * <p>Update time</p>
+         * <p>Last modified time.</p>
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * <p>Superapp name</p>
+         * <p>Superapp name.</p>
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * <p>Effective status of the bound superapp. 1: Not effective; 2: Effective</p>
+         * <p>Binding effective status for the superapp. Valid values: 1: Not effective; 2: Effective.</p>
          * @type {number || null}
          */
         this.EffectStatus = null;
 
         /**
-         * <p>Effective version ID of the superapp bound to the mini game</p>
+         * <p>Effective mini game version ID bound to the superapp.</p>
          * @type {number || null}
          */
         this.EffectMNPVersionId = null;
 
         /**
-         * <p>Effective version number of the superapp bound to the mini game</p>
+         * <p>Effective mini game version number bound to the superapp. </p>
          * @type {string || null}
          */
         this.EffectMNPVersion = null;
@@ -2886,7 +2897,7 @@ class DescribeMNGListData extends  AbstractModel {
 }
 
 /**
- * Advertising analysis data overview
+ * Ad analysis data overview.
  * @class
  */
 class AnalysisAdvertOverview extends  AbstractModel {
@@ -2894,7 +2905,7 @@ class AnalysisAdvertOverview extends  AbstractModel {
         super();
 
         /**
-         * Advertising overview
+         * Ad overview. 
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AdvertDataOverview || null}
          */
@@ -2928,13 +2939,13 @@ class DeleteTeamRequest extends  AbstractModel {
         super();
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -2963,31 +2974,31 @@ class DescribeRoleListRequest extends  AbstractModel {
         super();
 
         /**
-         * Page offset
+         * Pagination offset. 
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results per page
+         * Number of entries per page.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Keywords for search (role name)
+         * Search keyword (role name).
          * @type {string || null}
          */
         this.Keyword = null;
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
@@ -3019,37 +3030,37 @@ class DescribeMNGPaymentReportDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time
+         * Start time.
          * @type {number || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Type: 0 Non-production data, 1 Production data
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * End time
+         * End time.
          * @type {number || null}
          */
         this.TimeEnd = null;
 
         /**
-         * Operating system: 0 All, 2-Android, 3 iOS
+         * Operating system. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
@@ -3074,7 +3085,7 @@ class DescribeMNGPaymentReportDetailRequest extends  AbstractModel {
 }
 
 /**
- * Superapp data overview
+ * Superapp data overview.
  * @class
  */
 class APPOverview extends  AbstractModel {
@@ -3082,28 +3093,28 @@ class APPOverview extends  AbstractModel {
         super();
 
         /**
-         * No data available
+         * No description available.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {APPOverviewData || null}
          */
         this.BaseData = null;
 
         /**
-         * Superapp overview summary data
+         * Superapp overview summary data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {APPOverviewData || null}
          */
         this.Overview = null;
 
         /**
-         * No data available
+         * No description available.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {APPOverviewData || null}
          */
         this.PageData = null;
 
         /**
-         * No data available
+         * No description available.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {APPOverviewData || null}
          */
@@ -3147,7 +3158,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Response object for the mini game list
+ * Response for querying the mini game list.
  * @class
  */
 class DescribeMNGListResp extends  AbstractModel {
@@ -3155,13 +3166,13 @@ class DescribeMNGListResp extends  AbstractModel {
         super();
 
         /**
-         * <p>Total number of entries</p>
+         * <p>Total number of entries.</p>
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * <p>List information</p>
+         * <p>List data.</p>
          * @type {Array.<DescribeMNGListData> || null}
          */
         this.DataList = null;
@@ -3198,31 +3209,31 @@ class DescribeMNGMAUDataDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Type
+         * Type.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Superapp ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Mini program appid, required. When provided, the query is performed based on the mini program.
+         * Mini program appid. If not empty, results are filtered by mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Mini program team ID
+         * Mini program team ID.
          * @type {number || null}
          */
         this.MNPTeamId = null;
@@ -3254,7 +3265,7 @@ class ModifyTeamMemberResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -3294,25 +3305,25 @@ class ModifyTeamRequest extends  AbstractModel {
         super();
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Team name
+         * Team name.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Team administrator
+         * Team administrator.
          * @type {string || null}
          */
         this.AdminUserId = null;
@@ -3335,7 +3346,7 @@ class ModifyTeamRequest extends  AbstractModel {
 }
 
 /**
- * Mini program MAU details
+ * Mini program MAU details.
  * @class
  */
 class MAUDetail extends  AbstractModel {
@@ -3343,13 +3354,13 @@ class MAUDetail extends  AbstractModel {
         super();
 
         /**
-         * Mini program name
+         * Mini program name.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * MAU details
+         * MAU details.
          * @type {Array.<MAULineChartData> || null}
          */
         this.DataList = null;
@@ -3386,7 +3397,7 @@ class DescribeMNGPreviewResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {DescribeMNGPreviewResp || null}
          */
         this.Data = null;
@@ -3426,7 +3437,7 @@ class DeleteApplicationResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -3458,7 +3469,7 @@ class DeleteApplicationResponse extends  AbstractModel {
 }
 
 /**
- * Line chart data
+ * Line chart data.
  * @class
  */
 class MAULineChartData extends  AbstractModel {
@@ -3466,14 +3477,14 @@ class MAULineChartData extends  AbstractModel {
         super();
 
         /**
-         * Year-month date data
+         * Date in YYYYMM format.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DataTime = null;
 
         /**
-         * MAU data
+         * MAU count. 
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -3503,7 +3514,7 @@ class DescribeMNGMAUMonthlyComparisonMetricCardResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page
+         * Data display at the top of the page.
          * @type {MAUIndicatorCard || null}
          */
         this.Data = null;
@@ -3535,7 +3546,7 @@ class DescribeMNGMAUMonthlyComparisonMetricCardResponse extends  AbstractModel {
 }
 
 /**
- * Queries the mini program version creation results
+ * Response for querying the mini game version creation result.
  * @class
  */
 class DescribeMNGVersionResp extends  AbstractModel {
@@ -3543,31 +3554,31 @@ class DescribeMNGVersionResp extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Task ID</p>
+         * <p>Task ID.</p>
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * <p>Valid values: 1: Pending; 20: Running; 30: Failed; 60: Succeeded</p>
+         * <p>Task status. Valid values: 1: Pending; 20: Running; 30: Failed; 60: Succeeded.</p>
          * @type {number || null}
          */
         this.TaskStatus = null;
 
         /**
-         * <p>Task status information</p>
+         * <p>Task status information.</p>
          * @type {string || null}
          */
         this.TaskMsg = null;
 
         /**
-         * <p>Mini game version ID (returned upon successful compilation)</p>
+         * <p>Mini game version ID (returned upon successful compilation).</p>
          * @type {number || null}
          */
         this.MNPVersionId = null;
@@ -3605,7 +3616,7 @@ class DescribeMNPVersionRequest extends  AbstractModel {
         this.BusinessId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -3634,7 +3645,7 @@ class CreateMNGResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>The mini game appid returned in the response.</p>
+         * <p>The returned mini game appid.</p>
          * @type {ResourceIdStringInfo || null}
          */
         this.Data = null;
@@ -3666,7 +3677,7 @@ class CreateMNGResponse extends  AbstractModel {
 }
 
 /**
- * Domain information
+ * Response parameters for querying domain information.
  * @class
  */
 class DescribeDomainInfoParam extends  AbstractModel {
@@ -3674,13 +3685,13 @@ class DescribeDomainInfoParam extends  AbstractModel {
         super();
 
         /**
-         * Multiple domain separators ';'.
+         * Multiple domains concatenated with semicolons (;). 
          * @type {string || null}
          */
         this.DomainUrl = null;
 
         /**
-         * Domain type 1-requests domain 2-business domain.
+         * Domain type. Valid values: 1 Requests domain; 2 web-view domain.
          * @type {number || null}
          */
         this.DomainType = null;
@@ -3709,37 +3720,37 @@ class DescribePaymentDataOverviewRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time
+         * Start time.
          * @type {number || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {Array.<string> || null}
          */
         this.MNPIds = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Type: 0 Non-production data, 1 Production data
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * End time
+         * End time.
          * @type {number || null}
          */
         this.TimeEnd = null;
 
         /**
-         * Operating system: 0 All, 2 Android, 3 iOS
+         * Operating system. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
@@ -3764,7 +3775,7 @@ class DescribePaymentDataOverviewRequest extends  AbstractModel {
 }
 
 /**
- * Mini program payment detailed data
+ * Mini program payment detailed data.
  * @class
  */
 class PaymentDetail extends  AbstractModel {
@@ -3772,73 +3783,73 @@ class PaymentDetail extends  AbstractModel {
         super();
 
         /**
-         * Date in YYYYMMDD format
+         * Date in YYYYMMDD format.
          * @type {string || null}
          */
         this.DataTime = null;
 
         /**
-         * Number of mini programs involved in the order
+         * Mini program count with orders.
          * @type {number || null}
          */
         this.OrderMNPNum = null;
 
         /**
-         * Total orders
+         * Total orders.
          * @type {number || null}
          */
         this.OrderNum = null;
 
         /**
-         * Paid orders
+         * Paid orders.
          * @type {number || null}
          */
         this.OrderPaidNum = null;
 
         /**
-         * Total refunded orders
+         * Number of refund orders.
          * @type {number || null}
          */
         this.OrderRefundNum = null;
 
         /**
-         * Unpaid orders
+         * Total unpaid orders.
          * @type {number || null}
          */
         this.OrderUnpaidNum = null;
 
         /**
-         * Number of users placing orders (openid)
+         * Number of ordering users (by OpenID).
          * @type {number || null}
          */
         this.OrderUserNum = null;
 
         /**
-         * Amount paid
+         * Amount paid.
          * @type {string || null}
          */
         this.PaidAmount = null;
 
         /**
-         * Amount refunded
+         * Amount refunded.
          * @type {string || null}
          */
         this.RefundAmount = null;
 
         /**
-         * Total order amount
+         * Total amount.
          * @type {string || null}
          */
         this.TotalAmount = null;
 
         /**
-         * Unpaid amount
+         * Unpaid amount.
          * @type {string || null}
          */
         this.UnpaidAmount = null;
 
         /**
-         * Data update timestamp
+         * Data update timestamp.
          * @type {number || null}
          */
         this.UpdateTime = null;
@@ -3877,7 +3888,7 @@ class DescribeApplicationListResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeApplicationListResp || null}
          */
         this.Data = null;
@@ -3917,37 +3928,37 @@ class DescribeTeamMemberListRequest extends  AbstractModel {
         super();
 
         /**
-         * Page offset
+         * Pagination offset.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results per page
+         * Number of entries per page.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Keywords for search (user name)
+         * Search keyword (user name).
          * @type {string || null}
          */
         this.Keyword = null;
 
         /**
-         * Role ID
+         * Role ID.
          * @type {Array.<number> || null}
          */
         this.RoleIds = null;
@@ -3980,7 +3991,7 @@ class ModifyGlobalDomainResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {GlobalDomainModifyRespResp || null}
          */
         this.Data = null;
@@ -4012,7 +4023,7 @@ class ModifyGlobalDomainResponse extends  AbstractModel {
 }
 
 /**
- * Role management list
+ * Response for querying the role list data.
  * @class
  */
 class DescribeRoleListResp extends  AbstractModel {
@@ -4020,13 +4031,13 @@ class DescribeRoleListResp extends  AbstractModel {
         super();
 
         /**
-         * Total number of entries
+         * Total number of entries.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List data
+         * List data.
          * @type {Array.<DescribeRoleListData> || null}
          */
         this.DataList = null;
@@ -4055,7 +4066,7 @@ class DescribeRoleListResp extends  AbstractModel {
 }
 
 /**
- * Team list information
+ * Team list information.
  * @class
  */
 class DescribeTeamListInfoResp extends  AbstractModel {
@@ -4063,67 +4074,67 @@ class DescribeTeamListInfoResp extends  AbstractModel {
         super();
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Team name
+         * Team name.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Administrator user ID
+         * Admin user ID.
          * @type {string || null}
          */
         this.AdminUserId = null;
 
         /**
-         * Administrator account
+         * Admin account.
          * @type {string || null}
          */
         this.AdminUserAccount = null;
 
         /**
-         * Administrator username
+         * Admin username.
          * @type {string || null}
          */
         this.AdminUserName = null;
 
         /**
-         * Number of team members
+         * Number of team members.
          * @type {number || null}
          */
         this.MemberCount = null;
 
         /**
-         * Team registration link
+         * Team registration link.
          * @type {string || null}
          */
         this.RegisterLink = null;
 
         /**
-         * Team permission type
+         * Team role types. 
          * @type {Array.<number> || null}
          */
         this.TeamRoleTypeList = null;
 
         /**
-         * Associated team ID
+         * Associated team ID.
          * @type {number || null}
          */
         this.RelatedTeamId = null;
 
         /**
-         * Team expiration time. 0 means never expire.
+         * Team expiration time. 0 indicates no expiration.
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * Team status. valid values: 1: normal; 2: disabled; 3: expired.
+         * Team status. Valid values: 1: Active; 2: Disabled; 3: Expired. 
          * @type {number || null}
          */
         this.Status = null;
@@ -4161,25 +4172,25 @@ class CreateMNPSensitiveAPIPermissionApprovalRequest extends  AbstractModel {
         super();
 
         /**
-         * API Id
+         * API ID.
          * @type {string || null}
          */
         this.APIId = null;
 
         /**
-         * Reason for application
+         * Reason for request.
          * @type {string || null}
          */
         this.ApplyReason = null;
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -4210,7 +4221,7 @@ class ReleaseMNPVersionResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -4250,13 +4261,13 @@ class DeleteMNPRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -4277,7 +4288,7 @@ class DeleteMNPRequest extends  AbstractModel {
 }
 
 /**
- * Payment active retention data
+ * Payment user active retention data.
  * @class
  */
 class PaymentActiveRetention extends  AbstractModel {
@@ -4285,73 +4296,73 @@ class PaymentActiveRetention extends  AbstractModel {
         super();
 
         /**
-         * Day 1 active retention of paying users
+         * Day 1 active retention of paying users.
          * @type {number || null}
          */
         this.OneDayRetentionUsers = null;
 
         /**
-         * Day 2 active retention of paying users
+         * Day 2 active retention of paying users.
          * @type {number || null}
          */
         this.TwoDayRetentionUsers = null;
 
         /**
-         * Day 3 active retention of paying users
+         * Day 3 active retention of paying users.
          * @type {number || null}
          */
         this.ThreeDayRetentionUsers = null;
 
         /**
-         * Day 4 active retention of paying users
+         * Day 4 active retention of paying users.
          * @type {number || null}
          */
         this.FourDayRetentionUsers = null;
 
         /**
-         * Day 5 active retention of paying users
+         * Day 5 active retention of paying users.
          * @type {number || null}
          */
         this.FiveDayRetentionUsers = null;
 
         /**
-         * Day 6 active retention of paying users
+         * Day 6 active retention of paying users.
          * @type {number || null}
          */
         this.SixDayRetentionUsers = null;
 
         /**
-         * Day 7 active retention of paying users
+         * Day 7 active retention of paying users.
          * @type {number || null}
          */
         this.SevenDayRetentionUsers = null;
 
         /**
-         * Day 14 active retention of paying users
+         * Day 14 active retention of paying users.
          * @type {number || null}
          */
         this.FourteenDayRetentionUsers = null;
 
         /**
-         * Day 15 active retention of paying users
+         * Day 15 active retention of paying users.
          * @type {number || null}
          */
         this.FifteenDayRetentionUsers = null;
 
         /**
-         * Day 30 active retention of paying users
+         * Day 30 active retention of paying users.
          * @type {number || null}
          */
         this.ThirtyDayRetentionUsers = null;
 
         /**
-         * Number of paying users
+         * Number of paying users.
          * @type {number || null}
          */
         this.PaymentUserNum = null;
 
         /**
-         * Data time in YYYYMMDD format
+         * Data time in YYYYMMDD format.
          * @type {string || null}
          */
         this.DataTime = null;
@@ -4390,7 +4401,7 @@ class DescribeMNPReleasedVersionHistoryResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeRevertOnlineVersionPageResp || null}
          */
         this.Data = null;
@@ -4430,7 +4441,7 @@ class DescribeMNGOfflinePackageURLResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {StringData || null}
          */
         this.Data = null;
@@ -4470,7 +4481,7 @@ class DescribeTeamListResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeTeamPageResp || null}
          */
         this.Data = null;
@@ -4510,8 +4521,7 @@ class DescribeMNPAllStageVersionsResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Response data.
          * @type {Array.<DescribeMPAllStageVersionsResp> || null}
          */
         this.Data = null;
@@ -4554,19 +4564,19 @@ class DescribeMNGPreviewRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Mini game version ID</p>
+         * <p>Mini game version ID.</p>
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -4588,7 +4598,7 @@ class DescribeMNGPreviewRequest extends  AbstractModel {
 }
 
 /**
- * User management list
+ * Response for querying the user list.
  * @class
  */
 class DescribeUserListResp extends  AbstractModel {
@@ -4596,14 +4606,14 @@ class DescribeUserListResp extends  AbstractModel {
         super();
 
         /**
-         * Total number of entries
+         * Total number of entries.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List data
+         * List data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DescribeUserListData> || null}
          */
@@ -4633,7 +4643,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Result of the mini program approval requests
+ * Mini program approval processing details.
  * @class
  */
 class ApprovalItem extends  AbstractModel {
@@ -4641,20 +4651,19 @@ class ApprovalItem extends  AbstractModel {
         super();
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.AppId = null;
 
         /**
-         * Approval result. 2: Rejected;
-3: Approved
+         * Approval result. Valid value: 2: Rejected; 3: Approved.
          * @type {number || null}
          */
         this.ApprovalResult = null;
 
         /**
-         * Approval notes. It’s required when the request is rejected.
+         * Approval notes. It is required when the request is rejected.
          * @type {string || null}
          */
         this.ApprovalNote = null;
@@ -4676,7 +4685,7 @@ class ApprovalItem extends  AbstractModel {
 }
 
 /**
- * Mini program online version ID
+ * Response for querying mini program released version IDs.
  * @class
  */
 class QueryOnlineVersionResp extends  AbstractModel {
@@ -4684,13 +4693,13 @@ class QueryOnlineVersionResp extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Version number
+         * Version number.
          * @type {string || null}
          */
         this.MNPVersion = null;
@@ -4702,13 +4711,13 @@ class QueryOnlineVersionResp extends  AbstractModel {
         this.MNPVersionId = null;
 
         /**
-         * Version remarks.
+         * Version note.
          * @type {string || null}
          */
         this.MNPVersionNote = null;
 
         /**
-         * Update time
+         * Last modified time.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -4732,7 +4741,7 @@ class QueryOnlineVersionResp extends  AbstractModel {
 }
 
 /**
- * Application information
+ * Superapp information.
  * @class
  */
 class DescribeApplicationListData extends  AbstractModel {
@@ -4740,97 +4749,97 @@ class DescribeApplicationListData extends  AbstractModel {
         super();
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * App Id.
+         * Superapp identity ID.
          * @type {number || null}
          */
         this.AppIdentityId = null;
 
         /**
-         * Name
+         * Superapp name.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * Icon
+         * Superapp icon.
          * @type {string || null}
          */
         this.Logo = null;
 
         /**
-         * Remarks
+         * Remarks.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Android app package name
+         * Android superapp package name. 
          * @type {string || null}
          */
         this.AndroidAppKey = null;
 
         /**
-         * iOS App bundleId
+         * iOS superapp bundle ID. 
          * @type {string || null}
          */
         this.IosAppKey = null;
 
         /**
-         * Creator
+         * Creator.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Specifies the updater.
+         * Last modifier.
          * @type {string || null}
          */
         this.UpdateUser = null;
 
         /**
-         * Update time
+         * Last modified time. 
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Introduction
+         * Superapp introduction.
          * @type {string || null}
          */
         this.Intro = null;
 
         /**
-         * Team Id.
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Team name
+         * Team name.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Number of sensitive apis.
+         * Number of sensitive APIs.
          * @type {number || null}
          */
         this.SensitiveApiCount = null;
 
         /**
-         * Application type. 1: Test; 2: Formal
+         * Superapp type. Valid values: 1: Test; 2: Production.
          * @type {number || null}
          */
         this.ApplicationType = null;
@@ -4873,7 +4882,7 @@ class DescribeRoleListResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {DescribeRoleListResp || null}
          */
@@ -4914,13 +4923,13 @@ class CreateMNPVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini-program appid</p>
+         * <p>Mini-program appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Version number</p>
+         * <p>Version number.</p>
          * @type {string || null}
          */
         this.MNPVersion = null;
@@ -4932,13 +4941,13 @@ class CreateMNPVersionRequest extends  AbstractModel {
         this.FileUrl = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * <p>Version description</p>
+         * <p>Version description.</p>
          * @type {string || null}
          */
         this.MNPVersionIntro = null;
@@ -4962,7 +4971,7 @@ class CreateMNPVersionRequest extends  AbstractModel {
 }
 
 /**
- * Mini program list
+ * Mini program list data.
  * @class
  */
 class DescribeMNPListData extends  AbstractModel {
@@ -4970,91 +4979,91 @@ class DescribeMNPListData extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Mini program icon
+         * Mini program icon.
          * @type {string || null}
          */
         this.MNPIcon = null;
 
         /**
-         * Mini program name
+         * Mini program name.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * Name of the associated team
+         * Team name. 
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Mini program type
+         * Mini program category.
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
-         * Specifies the mini program listing status. valid values: 1 (submitted), 2 (removed).
+         * Mini program available status. Valid values: 1: Available; 2: Removed.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Mini program introduction
+         * Mini program introduction.
          * @type {string || null}
          */
         this.MNPIntro = null;
 
         /**
-         * Creator
+         * Creator.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Specifies the updater.
+         * Last modifier.
          * @type {string || null}
          */
         this.UpdateUser = null;
 
         /**
-         * Update time
+         * Last modified time.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Application name
+         * Superapp name.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * Effective status of the bound application. valid values: 1 (not effective), 2 (effective).
+         * Binding effective status for the superapp. Valid values: 1: Not effective; 2: Effective.
          * @type {number || null}
          */
         this.EffectStatus = null;
 
         /**
-         * Specifies the ID of the application bound with the mini program.
+         * Effective mini program version ID bound to the superapp. 
          * @type {number || null}
          */
         this.EffectMNPVersionId = null;
 
         /**
-         * Specifies the effective version number of the application bound to the mini program.
+         * Effective mini program version number bound to the superapp. 
          * @type {string || null}
          */
         this.EffectMNPVersion = null;
@@ -5088,7 +5097,7 @@ class DescribeMNPListData extends  AbstractModel {
 }
 
 /**
- * The mini program or mini game data associated with a superapp
+ * The mini program or mini game data associated with a superapp.
  * @class
  */
 class DescribeApplicationMNPInfoResp extends  AbstractModel {
@@ -5096,67 +5105,67 @@ class DescribeApplicationMNPInfoResp extends  AbstractModel {
         super();
 
         /**
-         * Mini program or mini game appid
+         * Mini program or mini game appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Mini program or mini game icon
+         * Mini program or mini game icon.
          * @type {string || null}
          */
         this.MNPIcon = null;
 
         /**
-         * Mini program or mini game name
+         * Mini program or mini game name.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * Mini program or mini game information
+         * Mini program or mini game information.
          * @type {string || null}
          */
         this.MNPIntro = null;
 
         /**
-         * Creator
+         * Creator.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Modifier
+         * Last modifier.
          * @type {string || null}
          */
         this.UpdateUser = null;
 
         /**
-         * Update time
+         * Last modified time.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Online status. 0 Not available; 1 Available
+         * Available status. Valid value: 0: Not available; 1 Available; 2: In canary release.
          * @type {number || null}
          */
         this.OnlineStatus = null;
 
         /**
-         * Engine type. 0 Mini program; 1 Mini game
+         * Engine type. Specifies the runtime engine by product type. Valid values: 0: Mini program; 1: Mini game.
          * @type {number || null}
          */
         this.EngineType = null;
 
         /**
-         * Category information
+         * Category information.
          * @type {Array.<CategoryInfo> || null}
          */
         this.CategoryList = null;
@@ -5202,7 +5211,7 @@ class DescribeMNGAccessAnalysisOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page
+         * Data display at the top of the page.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AccessAnalysisOverview || null}
          */
@@ -5243,7 +5252,7 @@ class DescribeMNGCategoryRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -5271,37 +5280,37 @@ class DescribeMNPAccessAnalysisOverviewRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time: 20251123 (example)
+         * Start time: 20251123.
          * @type {number || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * End time: 20251123 (example)
+         * End time: 20251123.
          * @type {number || null}
          */
         this.TimeEnd = null;
 
         /**
-         * 1 Production data, 0 Non-production data
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.ProdData = null;
 
         /**
-         * Operating system: 0 All, 2 Android, 3 iOS
+         * Operating system. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
@@ -5334,7 +5343,7 @@ class DescribeApplicationConfigInfosResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeApplicationConfigInfo || null}
          */
         this.Data = null;
@@ -5374,32 +5383,32 @@ class DescribeMNPActiveUserRealTimeStatisticsRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Fixed value: mnp_data_analysis
+         * Fixed value: mnp_data_analysis.
          * @type {string || null}
          */
         this.ReportId = null;
 
         /**
          * IndexId 
-realtime_pv_num or realtime_uv_num
+realtime_pv_num or realtime_uv_num.
          * @type {string || null}
          */
         this.IndexId = null;
 
         /**
-         * Input parameter base64 string: {"Platform":0,"DataType":"1","BeginDate":"20251125","EndDate":"20251125"}
+         * Input parameter base64 string: {"Platform":0,"DataType":"1","BeginDate":"20251125","EndDate":"20251125"}.
          * @type {string || null}
          */
         this.QueryData = null;
@@ -5431,7 +5440,7 @@ class DescribeGlobalOverviewReportDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -5475,13 +5484,13 @@ class DescribeApplicationConfigInfosRequest extends  AbstractModel {
         super();
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Superapp ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
@@ -5502,7 +5511,7 @@ class DescribeApplicationConfigInfosRequest extends  AbstractModel {
 }
 
 /**
- * List of sensitive APIs of an application
+ * Superapp sensitive API list data.
  * @class
  */
 class DescribeApplicationSensitiveAPIListData extends  AbstractModel {
@@ -5510,94 +5519,100 @@ class DescribeApplicationSensitiveAPIListData extends  AbstractModel {
         super();
 
         /**
-         * APIID
+         * API ID.
          * @type {string || null}
          */
         this.APIId = null;
 
         /**
-         * API name
+         * API name.
          * @type {string || null}
          */
         this.APIName = null;
 
         /**
-         * API request method
+         * API request method.
          * @type {string || null}
          */
         this.APIMethod = null;
 
         /**
-         * API description
+         * API description.
          * @type {string || null}
          */
         this.APIDesc = null;
 
         /**
-         * Creator
+         * Creator.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Updater
+         * Last modifier.
          * @type {string || null}
          */
         this.UpdateUser = null;
 
         /**
-         * Update time
+         * Last modified time.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Application name
+         * Superapp name.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Team name
+         * Team name.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Specifies the application icon.
+         * Superapp icon.
          * @type {string || null}
          */
         this.ApplicationLogo = null;
 
         /**
-         * API type. 1: system; 2: custom.
+         * API type. Valid values: 1: System; 2: Custom.
          * @type {number || null}
          */
         this.APIType = null;
 
         /**
-         * API status. 0: public; 1: restricted.
+         * API status. Valid values: 0: Public; 1: Restricted.
          * @type {number || null}
          */
         this.Status = null;
+
+        /**
+         * Applicable scope: Valid values: 0: Mini program; 1: Mini game; 100: Both.
+         * @type {number || null}
+         */
+        this.UseScope = null;
 
     }
 
@@ -5623,6 +5638,7 @@ class DescribeApplicationSensitiveAPIListData extends  AbstractModel {
         this.ApplicationLogo = 'ApplicationLogo' in params ? params.ApplicationLogo : null;
         this.APIType = 'APIType' in params ? params.APIType : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.UseScope = 'UseScope' in params ? params.UseScope : null;
 
     }
 }
@@ -5636,7 +5652,7 @@ class CreateMNGVersionResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {CreateMNGVersionResp || null}
          */
         this.Data = null;
@@ -5668,7 +5684,7 @@ class CreateMNGVersionResponse extends  AbstractModel {
 }
 
 /**
- * New team member - Member information
+ * Member information for adding a team member.
  * @class
  */
 class CreateTeamMemberInfoReq extends  AbstractModel {
@@ -5676,13 +5692,13 @@ class CreateTeamMemberInfoReq extends  AbstractModel {
         super();
 
         /**
-         * User ID
+         * User ID.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * User role ID
+         * User role ID.
          * @type {number || null}
          */
         this.UserRoleId = null;
@@ -5703,7 +5719,7 @@ class CreateTeamMemberInfoReq extends  AbstractModel {
 }
 
 /**
- * Application configuration info
+ * Superapp configuration information.
  * @class
  */
 class DownloadApplicationConfigResp extends  AbstractModel {
@@ -5711,7 +5727,7 @@ class DownloadApplicationConfigResp extends  AbstractModel {
         super();
 
         /**
-         * Configuration information in Base64 format
+         * Configuration information in Base64 encoding.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -5732,7 +5748,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Response parameters for querying domain information
+ * Response parameters for querying domain information.
  * @class
  */
 class DescribeMNGDomainInfoResp extends  AbstractModel {
@@ -5740,13 +5756,13 @@ class DescribeMNGDomainInfoResp extends  AbstractModel {
         super();
 
         /**
-         * <p>Multiple domain names are concatenated with the separator ;</p>
+         * <p>Multiple domains concatenated with semicolons (;).</p>
          * @type {string || null}
          */
         this.DomainUrl = null;
 
         /**
-         * <p>Domain type. Valid values: 1: Requests domain; 2: web-view domain</p>
+         * <p>Domain type. Valid values: 1: Requests domain; 2: web-view domain.</p>
          * @type {number || null}
          */
         this.DomainType = null;
@@ -5775,7 +5791,7 @@ class CreateUserResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data, user ID
+         * Response data, containing the user ID.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {ResourceIdStringInfo || null}
          */
@@ -5816,7 +5832,7 @@ class CreateMNPSecretKeyResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {CreateMNPSecretKeyResp || null}
          */
         this.Data = null;
@@ -5856,37 +5872,37 @@ class CreateApplicationConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Superapp ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Superapp type. 1: Test; 2: Formal
+         * Superapp type. Valid values: 1: Test; 2: Production.
          * @type {number || null}
          */
         this.ApplicationType = null;
 
         /**
-         * Superapp operating system. 2 Android 3 iOS
+         * Superapp operating system type. Valid values: 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.ApplicationPlatformType = null;
 
         /**
-         * Package name: corresponds to packageName on Android and bundleId on iOS
+         * Package name. Corresponds to the package name on Android and the bundle ID on iOS.
          * @type {string || null}
          */
         this.AppKey = null;
 
         /**
-         * Superapp URL
+         * Superapp URL.
          * @type {string || null}
          */
         this.AppURL = null;
@@ -5911,7 +5927,7 @@ class CreateApplicationConfigRequest extends  AbstractModel {
 }
 
 /**
- * User details
+ * Response for querying user details.
  * @class
  */
 class DescribeUserDetailResp extends  AbstractModel {
@@ -5919,26 +5935,25 @@ class DescribeUserDetailResp extends  AbstractModel {
         super();
 
         /**
-         * User iD.
+         * User ID.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * User account
+         * User account.
          * @type {string || null}
          */
         this.UserAccount = null;
 
         /**
-         * User account
-1 - super admin 2 - platform admin 3 - ordinary member. not passing indicates all.
+         * User account type. Valid values: 1: Super admin; 2: Platform admin; 3: Regular member. If left empty, all types are returned.
          * @type {number || null}
          */
         this.AccountType = null;
 
         /**
-         * User name
+         * User name.
          * @type {string || null}
          */
         this.UserName = null;
@@ -5969,7 +5984,7 @@ class RemoveMNGResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -6009,37 +6024,37 @@ class DescribeMNPAdvertisingDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time in YYYYMMDD format
+         * Start time in YYYYMMDD format.
          * @type {string || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * End time in YYYYMMDD format
+         * End time in YYYYMMDD format.
          * @type {string || null}
          */
         this.TimeEnd = null;
 
         /**
-         * // 2 Android, 3 iOS
+         * Operating system. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
 
         /**
-         * //1-BANNER  2-REWARDED
+         * Ad unit type. Valid values: 1: Banner; 2: Rewarded.
          * @type {string || null}
          */
         this.AdUnitType = null;
@@ -6072,7 +6087,7 @@ class ModifyMNPDomainResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -6112,37 +6127,37 @@ class DescribeMNGPaymentRetentionAnalysisRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time in YYYYMMDD format
+         * Start time in YYYYMMDD format.
          * @type {number || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Type: 0 Non-production data, 1 Production data
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * End time in YYYYMMDD format
+         * End time in YYYYMMDD format.
          * @type {number || null}
          */
         this.TimeEnd = null;
 
         /**
-         * 0 All, 2-Android, 3 iOS
+         * Platform type. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
@@ -6175,19 +6190,19 @@ class DescribeApplicationConfigFileRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Application platform. 2: Android; 3: iOS
+         * Superapp type. Valid values: 1: Test; 2: Production.
          * @type {number || null}
          */
         this.AppType = null;
@@ -6217,37 +6232,37 @@ class DescribeUserListRequest extends  AbstractModel {
         super();
 
         /**
-         * Page offset
+         * Pagination offset. 
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results per page
+         * Number of entries per page.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Keywords for search (username or account)
+         * Search keyword (username or account).
          * @type {string || null}
          */
         this.Keyword = null;
 
         /**
-         * User account 1 - Super admin 2 - Platform admin 3 - Member
+         * User account type. Valid values: 1: Super admin; 2: Platform admin; 3: Regular member. If left empty, all types are returned. 
          * @type {number || null}
          */
         this.AccountType = null;
 
         /**
-         * Team ID
+         * Team ID. If left empty, all teams are returned.
          * @type {string || null}
          */
         this.TeamId = null;
@@ -6280,19 +6295,19 @@ class ProcessMNPApprovalRequest extends  AbstractModel {
         super();
 
         /**
-         * Approval ID
+         * Approval number.
          * @type {string || null}
          */
         this.ApprovalNo = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Approval details
+         * Approval details.
          * @type {Array.<ApprovalItem> || null}
          */
         this.ApprovalItems = null;
@@ -6330,7 +6345,7 @@ class DeleteUserResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -6362,7 +6377,7 @@ class DeleteUserResponse extends  AbstractModel {
 }
 
 /**
- * Category information
+ * Category information.
  * @class
  */
 class CategoryInfo extends  AbstractModel {
@@ -6370,19 +6385,19 @@ class CategoryInfo extends  AbstractModel {
         super();
 
         /**
-         * Category ID
+         * Category ID.
          * @type {string || null}
          */
         this.ID = null;
 
         /**
-         * Category name
+         * Category name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Subcategory information
+         * Subcategory information.
          * @type {Array.<CategoryItem> || null}
          */
         this.SubItems = null;
@@ -6412,7 +6427,7 @@ class CategoryInfo extends  AbstractModel {
 }
 
 /**
- * Category information
+ * Subcategory item information.
  * @class
  */
 class CategoryItem extends  AbstractModel {
@@ -6420,13 +6435,13 @@ class CategoryItem extends  AbstractModel {
         super();
 
         /**
-         * Category ID
+         * Category ID.
          * @type {string || null}
          */
         this.ID = null;
 
         /**
-         * Category name
+         * Category name.
          * @type {string || null}
          */
         this.Name = null;
@@ -6447,7 +6462,7 @@ class CategoryItem extends  AbstractModel {
 }
 
 /**
- * General response for data query reports
+ * General response for data query reports.
  * @class
  */
 class ReportDataResult extends  AbstractModel {
@@ -6455,27 +6470,27 @@ class ReportDataResult extends  AbstractModel {
         super();
 
         /**
-         * Base64-encoded result data
+         * Result data in Base64 encoding.
          * @type {string || null}
          */
         this.DataResult = null;
 
         /**
-         * Executed SQL
+         * Executed SQL.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ExecSql = null;
 
         /**
-         * Execution time
+         * Execution time.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ExecTime = null;
 
         /**
-         * Query index ID
+         * Query index ID.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -6507,7 +6522,7 @@ class DescribeApplicationResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeApplicationResp || null}
          */
         this.Data = null;
@@ -6547,13 +6562,13 @@ class DescribeMNGRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -6574,7 +6589,7 @@ class DescribeMNGRequest extends  AbstractModel {
 }
 
 /**
- * MAU detailed data
+ * MAU detailed data.
  * @class
  */
 class MAUDetailData extends  AbstractModel {
@@ -6582,49 +6597,49 @@ class MAUDetailData extends  AbstractModel {
         super();
 
         /**
-         * Date
+         * Date.
          * @type {string || null}
          */
         this.DataTime = null;
 
         /**
-         * Mini program name
+         * Mini program name.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * Mini program type
+         * Mini program category.
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
-         * Estimated revenue
+         * Estimated revenue.
          * @type {string || null}
          */
         this.EstimatedEarnings = null;
 
         /**
-         * Requests
+         * Number of requests.
          * @type {number || null}
          */
         this.RequestsNumber = null;
 
         /**
-         * Impressions
+         * Number of impressions.
          * @type {number || null}
          */
         this.Impressions = null;
 
         /**
-         * Effective Cost Per Mille
+         * eCPM (effective cost per mille).
          * @type {string || null}
          */
         this.ECPM = null;
 
         /**
-         * Taps
+         * Number of taps.
          * @type {number || null}
          */
         this.ClicksNumber = null;
@@ -6651,7 +6666,7 @@ class MAUDetailData extends  AbstractModel {
 }
 
 /**
- * Line chart data values
+ * Trend data value.
  * @class
  */
 class AnalysisData extends  AbstractModel {
@@ -6659,13 +6674,13 @@ class AnalysisData extends  AbstractModel {
         super();
 
         /**
-         * Time
+         * Data time.
          * @type {string || null}
          */
         this.DataTime = null;
 
         /**
-         * Value
+         * Data value.
          * @type {string || null}
          */
         this.Number = null;
@@ -6686,7 +6701,7 @@ class AnalysisData extends  AbstractModel {
 }
 
 /**
- * Response of creating a mini program version
+ * Response for creating a mini program version.
  * @class
  */
 class CreateMNPVersionResp extends  AbstractModel {
@@ -6694,7 +6709,7 @@ class CreateMNPVersionResp extends  AbstractModel {
         super();
 
         /**
-         * Specifies the ID of the task to create a mini program version.
+         * Mini program version compilation task ID.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -6722,7 +6737,7 @@ class DescribeAPPDataDetailLineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -6766,37 +6781,37 @@ class DescribeMNGPaymentOverviewRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time
+         * Start time.
          * @type {number || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Type: 0 Non-production data, 1 Production data
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * End time
+         * End time.
          * @type {number || null}
          */
         this.TimeEnd = null;
 
         /**
-         * Operating system: 0 All, 2 Android, 3 iOS
+         * Operating system. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
@@ -6829,37 +6844,37 @@ class DescribeAdvertisingOverviewRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time in YYYYMMDD format
+         * Start time in YYYYMMDD format.
          * @type {string || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * End time in YYYYMMDD format
+         * End time in YYYYMMDD format.
          * @type {string || null}
          */
         this.TimeEnd = null;
 
         /**
-         * // 0 All, 2-Android, 3 iOS
+         * Operating system. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
 
         /**
-         * //1-BANNER  2-REWARDED
+         * Ad unit type. Valid values: 1: Banner; 2: Rewarded.
          * @type {string || null}
          */
         this.AdUnitType = null;
@@ -6892,37 +6907,37 @@ class DescribeAdvertisingLineChartRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time in YYYYMMDD format
+         * Start time in YYYYMMDD format.
          * @type {string || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * End time in YYYYMMDD format
+         * End time in YYYYMMDD format.
          * @type {string || null}
          */
         this.TimeEnd = null;
 
         /**
-         * // 0 All, 2-Android, 3 iOS
+         * Operating system. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
 
         /**
-         *   1-BANNER  2-REWARDED
+         * Ad unit type. Valid values: 1: Banner; 2: Rewarded.
          * @type {string || null}
          */
         this.AdUnitType = null;
@@ -6955,7 +6970,7 @@ class CreateMNPApprovalResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {CreateMNPApprovalResp || null}
          */
         this.Data = null;
@@ -6995,31 +7010,31 @@ class ModifyApplicationConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Superapp ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Superapp configuration ID
+         * Superapp configuration ID.
          * @type {number || null}
          */
         this.Id = null;
 
         /**
-         * Package name: corresponds to packageName on Android and bundleId on iOS
+         * Package name. Corresponds to the package name on Android and the bundle ID on iOS.
          * @type {string || null}
          */
         this.AppKey = null;
 
         /**
-         * Superapp URL
+         * Superapp URL.
          * @type {string || null}
          */
         this.AppURL = null;
@@ -7043,7 +7058,7 @@ class ModifyApplicationConfigRequest extends  AbstractModel {
 }
 
 /**
- * List of mini program approval requests of the application
+ * Mini program approval list information.
  * @class
  */
 class DescribeMNPApprovalListData extends  AbstractModel {
@@ -7051,25 +7066,25 @@ class DescribeMNPApprovalListData extends  AbstractModel {
         super();
 
         /**
-         * Approval ticket ID
+         * Approval number.
          * @type {string || null}
          */
         this.ApprovalNo = null;
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Approval status. valid values: 1 (processing), 2 (rejected), 3 (approved), 4 (cancelled).
+         * Approval status. Valid values: 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.
          * @type {number || null}
          */
         this.ApprovalStatus = null;
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
@@ -7081,73 +7096,73 @@ class DescribeMNPApprovalListData extends  AbstractModel {
         this.MNPVersion = null;
 
         /**
-         * Mini program version ID
+         * Mini program version ID.
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * Applicant
+         * Applicant.
          * @type {string || null}
          */
         this.ApplyUser = null;
 
         /**
-         * Application time
+         * Application time.
          * @type {string || null}
          */
         this.ApplyTime = null;
 
         /**
-         * Mini program name
+         * Mini program name.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * Mini program icon
+         * Mini program icon.
          * @type {string || null}
          */
         this.MNPIcon = null;
 
         /**
-         * Application name
+         * Superapp name.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * Specifies the application icon.
+         * Superapp icon.
          * @type {string || null}
          */
         this.ApplicationLogo = null;
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Team name
+         * Team name.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Mini program review qr code.
+         * Mini program approval QR code URL.
          * @type {string || null}
          */
         this.MNPQrCodeUrl = null;
 
         /**
-         * Mini program type
+         * Mini program category.
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
-         * Specifies the reviewer.
+         * Approver.
          * @type {string || null}
          */
         this.ApprovalUser = null;
@@ -7159,7 +7174,7 @@ class DescribeMNPApprovalListData extends  AbstractModel {
         this.ApprovalTime = null;
 
         /**
-         * Approval notes
+         * Approval note.
          * @type {string || null}
          */
         this.ApprovalNote = null;
@@ -7197,7 +7212,7 @@ class DescribeMNPApprovalListData extends  AbstractModel {
 }
 
 /**
- * Unified operation success ID - integer
+ * Unified ID data returned on successful operation (Integer type).
  * @class
  */
 class ResourceIdInfo extends  AbstractModel {
@@ -7205,10 +7220,7 @@ class ResourceIdInfo extends  AbstractModel {
         super();
 
         /**
-         * Specifies the resource ID returned by the business.
-0: no trial version available.
-A trial version is currently available and uploaded by the current user.
-2: a trial version is currently available and uploaded by another user.
+         * Resource ID returned by the operation. Valid values: 0: No preview exists; 1: Preview exists and was uploaded by the current user; 2: Preview exists and was uploaded by another user. Example value: 2940.
          * @type {number || null}
          */
         this.ResourceId = null;
@@ -7236,7 +7248,7 @@ class DescribeMNPPreviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeMNPPreviewResp || null}
          */
         this.Data = null;
@@ -7276,13 +7288,13 @@ class DescribeMNGReleasedVersionHistoryRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -7311,7 +7323,7 @@ class DescribeMNGAdvertisingLineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AdTrendChart || null}
          */
@@ -7352,25 +7364,25 @@ class ModifyUserRequest extends  AbstractModel {
         super();
 
         /**
-         * User ID
+         * User ID.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * User name
+         * User name.
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
-         * Account type 2 - Platform admin 3 - Member
+         * User account type. Valid values: 2: Platform administrator; 3: Regular member.
          * @type {number || null}
          */
         this.AccountType = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -7401,7 +7413,7 @@ class DescribeApplicationMNPListResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeApplicationMNPListResp || null}
          */
         this.Data = null;
@@ -7441,7 +7453,7 @@ class ConfigureMNGPreviewResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -7481,7 +7493,7 @@ class CreateMNPResponse extends  AbstractModel {
         super();
 
         /**
-         * Response mini program ID
+         * <p>The returned mini game appid returned.</p>
          * @type {ResourceIdStringInfo || null}
          */
         this.Data = null;
@@ -7521,25 +7533,25 @@ class DescribeMNPReportDataLineChartRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Fixed value: mnp_data_analysis
+         * Fixed value: mnp_data_analysis.
          * @type {string || null}
          */
         this.ReportId = null;
 
         /**
-         * IndexId (optional):
+         * Index ID (optional):
 active_device_num: Active users
 new_device_num: New users
 total_user_num: Total users
@@ -7547,13 +7559,13 @@ share_num: Number of shares
 miniapp_open_num: Number of opens
 avg_device_open_num: Average opens per user
 avg_device_open_duration: Average duration per user
-avg_count_open_duration: Average duration per session
+avg_count_open_duration: Average duration per session.
          * @type {string || null}
          */
         this.IndexId = null;
 
         /**
-         * Input parameter base64 string: {"DataType":"1","Platform":0,"BeginDate":20251118,"EndDate":20251124}
+         * Input parameter base64 string: {"DataType":"1","Platform":0,"BeginDate":20251118,"EndDate":20251124}.
          * @type {string || null}
          */
         this.QueryData = null;
@@ -7577,7 +7589,7 @@ avg_count_open_duration: Average duration per session
 }
 
 /**
- * List of permission requests to allow a mini program to call sensitive APIs
+ * Response for querying the mini program sensitive API permission approval list.
  * @class
  */
 class DescribeMNPSensitiveAPIPermissionApprovalListResp extends  AbstractModel {
@@ -7585,13 +7597,13 @@ class DescribeMNPSensitiveAPIPermissionApprovalListResp extends  AbstractModel {
         super();
 
         /**
-         * Total number of entries
+         * Total number of entries.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List information
+         * List data.
          * @type {Array.<DescribeMNPSensitiveAPIPermissionApprovalListData> || null}
          */
         this.DataList = null;
@@ -7628,13 +7640,13 @@ class DescribeMNPDomainACLRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -7655,7 +7667,7 @@ class DescribeMNPDomainACLRequest extends  AbstractModel {
 }
 
 /**
- * Payment overview data
+ * Payment overview data.
  * @class
  */
 class MNGPaymentOverview extends  AbstractModel {
@@ -7663,61 +7675,61 @@ class MNGPaymentOverview extends  AbstractModel {
         super();
 
         /**
-         * Paid revenue / Number of paying users * 100%
+         * ARPPU. Calculated as: paying revenue / paying users * 100%.
          * @type {string || null}
          */
         this.ARPPu = null;
 
         /**
-         * Data time in YYYYMMDD format
+         * Data time in YYYYMMDD format.
          * @type {string || null}
          */
         this.DataTime = null;
 
         /**
-         * New paying user ratio = NewUserNum / OrderUserNum * 100%
+         * New paying user ratio. Calculated as: NewUserNum / OrderUserNum * 100%.
          * @type {string || null}
          */
         this.NewPaidUseRatio = null;
 
         /**
-         * Number of new paying users
+         * Number of new paying users.
          * @type {number || null}
          */
         this.NewPaidUserNum = null;
 
         /**
-         * Total payment amount from new users
+         * Total payment amount from new users.
          * @type {string || null}
          */
         this.NewUserPaidAmount = null;
 
         /**
-         * Total payment amount
+         * Total payment amount.
          * @type {string || null}
          */
         this.PaidAmount = null;
 
         /**
-         * Number of paying users
+         * Number of paying users.
          * @type {number || null}
          */
         this.PaidUserNum = null;
 
         /**
-         * Refund amount
+         * Refund amount.
          * @type {string || null}
          */
         this.RefundAmount = null;
 
         /**
-         * Number of refund orders
+         * Number of refund orders.
          * @type {number || null}
          */
         this.RefundNum = null;
 
         /**
-         * Update time (timestamp in seconds)
+         * Last modified time (timestamp in seconds).
          * @type {number || null}
          */
         this.UpdateTime = null;
@@ -7746,7 +7758,7 @@ class MNGPaymentOverview extends  AbstractModel {
 }
 
 /**
- * MAU line chart data
+ * MAU line chart data.
  * @class
  */
 class MAUChartData extends  AbstractModel {
@@ -7754,19 +7766,19 @@ class MAUChartData extends  AbstractModel {
         super();
 
         /**
-         * Year and month: 2024-12
+         * Date in YYYYMM format.
          * @type {number || null}
          */
         this.DataTime = null;
 
         /**
-         * Value
+         * MAU count.
          * @type {number || null}
          */
         this.MAUCount = null;
 
         /**
-         * Data update time, only available when MAUCount is greater than 0.
+         * Data update time. Only has a value when MAUCount is greater than 0.
          * @type {number || null}
          */
         this.UpdateTime = null;
@@ -7788,7 +7800,7 @@ class MAUChartData extends  AbstractModel {
 }
 
 /**
- * MAU metric comparison response data
+ * MAU metric comparison response data.
  * @class
  */
 class MAUIndicatorCard extends  AbstractModel {
@@ -7796,33 +7808,31 @@ class MAUIndicatorCard extends  AbstractModel {
         super();
 
         /**
-         * Growth rate (targetData - sourceData) / sourceData, returns 0 when SourceMAUNum is 0
+         * Growth rate, calculated as (targetData - sourceData) / sourceData. Returns 0 when SourceMAUNum is 0.
          * @type {string || null}
          */
         this.ComparisonRatio = null;
 
         /**
-         * 1 Increase
-2 Decrease
-Returns 0 when SourceMAUNum is 0
+         * Comparison result. Valid values: 1: Increase; 2: Decrease. Returns 0 when SourceMAUNum is 0.
          * @type {number || null}
          */
         this.ComparisonResult = null;
 
         /**
-         * Last month's MAU data
+         * Previous month MAU. 
          * @type {number || null}
          */
         this.SourceMAUNum = null;
 
         /**
-         * This month's MAU data
+         * Current month MAU.
          * @type {number || null}
          */
         this.TargetMAUNum = null;
 
         /**
-         * Data timestamp
+         * Data timestamp.
          * @type {number || null}
          */
         this.FlushTime = null;
@@ -7854,8 +7864,7 @@ class DescribeMNGAllStageVersionsResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Response data.</p>
          * @type {Array.<DescribeMNGAllStageVersionsResp> || null}
          */
         this.Data = null;
@@ -7898,7 +7907,7 @@ class DescribeMNGListResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {DescribeMNGListResp || null}
          */
         this.Data = null;
@@ -7938,13 +7947,13 @@ class DescribeMNGAllStageVersionsRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -7973,7 +7982,7 @@ class DescribeUserListResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeUserListResp || null}
          */
         this.Data = null;
@@ -8013,7 +8022,7 @@ class DescribeMNGRetentionDataResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RetentionData> || null}
          */
@@ -8049,7 +8058,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Response data for retrieving superapp configuration information
+ * Response for querying superapp configuration information.
  * @class
  */
 class DescribeApplicationConfigInfo extends  AbstractModel {
@@ -8057,13 +8066,13 @@ class DescribeApplicationConfigInfo extends  AbstractModel {
         super();
 
         /**
-         * Android configuration list
+         * Android configuration list.
          * @type {Array.<ApplicationConfigInfo> || null}
          */
         this.AndroidConfig = null;
 
         /**
-         * iOS configuration list
+         * iOS configuration list.
          * @type {Array.<ApplicationConfigInfo> || null}
          */
         this.IosConfig = null;
@@ -8108,13 +8117,13 @@ class DescribeMNPRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -8135,7 +8144,56 @@ class DescribeMNPRequest extends  AbstractModel {
 }
 
 /**
- * Response of querying the preview
+ * The mini program name and description in multiple languages.
+ * @class
+ */
+class MNPI18NSyncDto extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Language type. Valid values: en-US: English; zh-CN: Simplified Chinese; zh-Hant: Traditional Chinese; fr-FR: French; ar-SA: Arabic; id-ID: Indonesian; vi-VN: Vietnamese. Default value: en-US.
+         * @type {string || null}
+         */
+        this.Lang = null;
+
+        /**
+         * Whether this is the default language. Valid values: 0: No; 1: Yes. Default value: 0.
+         * @type {number || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * Mini program name.
+         * @type {string || null}
+         */
+        this.MNPName = null;
+
+        /**
+         * Mini program introduction.
+         * @type {string || null}
+         */
+        this.MNPIntro = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Lang = 'Lang' in params ? params.Lang : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.MNPName = 'MNPName' in params ? params.MNPName : null;
+        this.MNPIntro = 'MNPIntro' in params ? params.MNPIntro : null;
+
+    }
+}
+
+/**
+ * Response for querying the preview.
  * @class
  */
 class DescribeMNPPreviewResp extends  AbstractModel {
@@ -8143,19 +8201,19 @@ class DescribeMNPPreviewResp extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID
+         * Mini program appid. 
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Mini program name
+         * Mini program name.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * Mini program description
+         * Mini program description.
          * @type {string || null}
          */
         this.MNPDesc = null;
@@ -8167,25 +8225,25 @@ class DescribeMNPPreviewResp extends  AbstractModel {
         this.MNPVersion = null;
 
         /**
-         * Describes the mini program version.
+         * Mini program version introduction.
          * @type {string || null}
          */
         this.MNPVersionIntro = null;
 
         /**
-         * Specifies the mini program qr code.
+         * Mini program QR code URL.
          * @type {string || null}
          */
         this.QRCodeUrl = null;
 
         /**
-         * Specifies the path to the preview version.
+         * Preview path.
          * @type {string || null}
          */
         this.PreviewEntrancePath = null;
 
         /**
-         * Specifies the qr code content.
+         * Information encoded in the QR code.
          * @type {string || null}
          */
         this.QRCodeContent = null;
@@ -8220,7 +8278,7 @@ class CreateGlobalDomainACLResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {CreateGlobalDomainResp || null}
          */
         this.Data = null;
@@ -8260,25 +8318,25 @@ class RollbackMNPVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Mini program version ID
+         * Mini program version ID.
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Mini program version number
+         * Mini program version number.
          * @type {string || null}
          */
         this.MNPVersion = null;
@@ -8301,7 +8359,7 @@ class RollbackMNPVersionRequest extends  AbstractModel {
 }
 
 /**
- * List of sensitive APIs of the application
+ * Response for querying the superapp sensitive API list.
  * @class
  */
 class DescribeApplicationSensitiveAPIListResp extends  AbstractModel {
@@ -8309,13 +8367,13 @@ class DescribeApplicationSensitiveAPIListResp extends  AbstractModel {
         super();
 
         /**
-         * Total number of entries
+         * Total number of entries.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List information
+         * List data.
          * @type {Array.<DescribeApplicationSensitiveAPIListData> || null}
          */
         this.DataList = null;
@@ -8352,7 +8410,7 @@ class DescribeMNGPaymentLineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -8396,7 +8454,7 @@ class DescribeMNPReportDataLineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -8440,37 +8498,37 @@ class DescribeMNGAdvertisingOverviewRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time in YYYYMMDD format
+         * Start time in YYYYMMDD format.
          * @type {string || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * End time in YYYYMMDD format
+         * End time in YYYYMMDD format.
          * @type {string || null}
          */
         this.TimeEnd = null;
 
         /**
-         * //1-BANNER  2-REWARDED
+         * Ad unit type. Valid values: 1: Banner; 2: Rewarded.
          * @type {string || null}
          */
         this.AdUnitType = null;
 
         /**
-         * // 2 Android, 3 iOS
+         * Operating system. Valid values: 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
@@ -8495,7 +8553,7 @@ class DescribeMNGAdvertisingOverviewRequest extends  AbstractModel {
 }
 
 /**
- * List of sensitive APIs that can be called by a mini program
+ * List data for querying callable sensitive APIs of a mini program.
  * @class
  */
 class DescribeMNPSensitiveAPIPermissionListData extends  AbstractModel {
@@ -8503,7 +8561,7 @@ class DescribeMNPSensitiveAPIPermissionListData extends  AbstractModel {
         super();
 
         /**
-         * API ID
+         * API ID.
          * @type {string || null}
          */
         this.APIId = null;
@@ -8515,7 +8573,7 @@ class DescribeMNPSensitiveAPIPermissionListData extends  AbstractModel {
         this.APIName = null;
 
         /**
-         * API request method
+         * API method.
          * @type {string || null}
          */
         this.APIMethod = null;
@@ -8539,31 +8597,31 @@ class DescribeMNPSensitiveAPIPermissionListData extends  AbstractModel {
         this.RejectReason = null;
 
         /**
-         * Approval ID
+         * Approval number.
          * @type {string || null}
          */
         this.ApprovalNo = null;
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Specifies the application icon.
+         * Superapp icon.
          * @type {string || null}
          */
         this.ApplicationIcon = null;
 
         /**
-         * Application name
+         * Superapp name.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * API type. 1: system; 2: custom.
+         * API type. Valid values: 1: System; 2: Custom.
          * @type {number || null}
          */
         this.APIType = null;
@@ -8608,37 +8666,37 @@ class DescribeMNGAccessAnalysisOverviewRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time
+         * Start time.
          * @type {number || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * End time
+         * End time.
          * @type {number || null}
          */
         this.TimeEnd = null;
 
         /**
-         * 1 Production data, 0 Non-production data
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.ProdData = null;
 
         /**
-         * Operating system: 0 All, 2-Android, 3 iOS
+         * Operating system. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
@@ -8663,7 +8721,7 @@ class DescribeMNGAccessAnalysisOverviewRequest extends  AbstractModel {
 }
 
 /**
- * Mini game details
+ * Mini game detail information.
  * @class
  */
 class DescribeMNGManagerDetailData extends  AbstractModel {
@@ -8671,76 +8729,82 @@ class DescribeMNGManagerDetailData extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game type</p>
+         * <p>Mini game category.</p>
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Mini game name</p>
+         * <p>Mini game name.</p>
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * <p>Mini game icon</p>
+         * <p>Mini game icon.</p>
          * @type {string || null}
          */
         this.MNPIcon = null;
 
         /**
-         * <p>Mini game introduction</p>
+         * <p>Mini game introduction.</p>
          * @type {string || null}
          */
         this.MNPIntro = null;
 
         /**
-         * <p>Mini game description</p>
+         * <p>Mini game description.</p>
          * @type {string || null}
          */
         this.MNPDesc = null;
 
         /**
-         * <p>Creation time (Unix timestamp)</p>
+         * <p>Creation time.</p>
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * <p>Creator</p>
+         * <p>Creator.</p>
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * Connection status. Valid values: 1: Not connected; 2: Connected
+         * Access status. Valid values: 1: Not connected; 2: Connected. 
          * @type {number || null}
          */
         this.AccessStatus = null;
 
         /**
-         * <p>Team name</p>
+         * <p>Team name.</p>
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * <p>Team ID</p>
+         * <p>Team ID.</p>
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * <p>Mini game available status. Valid values: 1: Available; 2: Not available</p>
+         * <p>Mini game available status. Valid values: 1: Available; 2: Not available.</p>
          * @type {number || null}
          */
         this.Status = null;
+
+        /**
+         * The mini game name and description in multiple languages.
+         * @type {Array.<MNPDetailI18nVO> || null}
+         */
+        this.I18nList = null;
 
     }
 
@@ -8764,11 +8828,20 @@ class DescribeMNGManagerDetailData extends  AbstractModel {
         this.TeamId = 'TeamId' in params ? params.TeamId : null;
         this.Status = 'Status' in params ? params.Status : null;
 
+        if (params.I18nList) {
+            this.I18nList = new Array();
+            for (let z in params.I18nList) {
+                let obj = new MNPDetailI18nVO();
+                obj.deserialize(params.I18nList[z]);
+                this.I18nList.push(obj);
+            }
+        }
+
     }
 }
 
 /**
- * Application configuration info
+ * Superapp configuration infomation.
  * @class
  */
 class ApplicationConfigInfo extends  AbstractModel {
@@ -8776,25 +8849,25 @@ class ApplicationConfigInfo extends  AbstractModel {
         super();
 
         /**
-         * Superapp configuration type: 1 Non-production, 2 Production
+         * Superapp configuration type. Valid values: 1 Non-production; 2 Production.
          * @type {number || null}
          */
         this.ApplicationType = null;
 
         /**
-         * Superapp package name
+         * Superapp package name.
          * @type {string || null}
          */
         this.AppKey = null;
 
         /**
-         * Superapp URL
+         * Superapp URL.
          * @type {string || null}
          */
         this.AppURL = null;
 
         /**
-         * Superapp configuration ID
+         * Superapp configuration ID.
          * @type {number || null}
          */
         this.Id = null;
@@ -8825,7 +8898,7 @@ class CreateApplicationSensitiveAPIResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -8865,7 +8938,7 @@ class RollbackMNGVersionResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -8897,7 +8970,7 @@ class RollbackMNGVersionResponse extends  AbstractModel {
 }
 
 /**
- * Details of a permission request to allow a mini program to call sensitive APIs
+ * Detail data for querying mini program sensitive API permission approval.
  * @class
  */
 class DescribeMNPSensitiveAPIPermissionApprovalData extends  AbstractModel {
@@ -8905,7 +8978,7 @@ class DescribeMNPSensitiveAPIPermissionApprovalData extends  AbstractModel {
         super();
 
         /**
-         * API ID
+         * API ID.
          * @type {string || null}
          */
         this.APIId = null;
@@ -8917,7 +8990,7 @@ class DescribeMNPSensitiveAPIPermissionApprovalData extends  AbstractModel {
         this.APIMethod = null;
 
         /**
-         * Reason for application
+         * Reason for request.
          * @type {string || null}
          */
         this.ApplyReason = null;
@@ -8929,7 +9002,7 @@ class DescribeMNPSensitiveAPIPermissionApprovalData extends  AbstractModel {
         this.RejectReason = null;
 
         /**
-         * Approval status. valid values: 20 (rejected), 30 (approved).
+         * Approval status. Valid values: 20: Rejected; 30: Approved.
          * @type {number || null}
          */
         this.ApprovalStatus = null;
@@ -8941,7 +9014,7 @@ class DescribeMNPSensitiveAPIPermissionApprovalData extends  AbstractModel {
         this.APIDesc = null;
 
         /**
-         * API type. 1: system; 2: custom.
+         * API type. Valid values: 1: System; 2: Custom.
          * @type {number || null}
          */
         this.APIType = null;
@@ -8967,7 +9040,7 @@ class DescribeMNPSensitiveAPIPermissionApprovalData extends  AbstractModel {
 }
 
 /**
- * Response of global domain name modification
+ * Response for modifying a global domain.
  * @class
  */
 class GlobalDomainModifyRespResp extends  AbstractModel {
@@ -8975,7 +9048,7 @@ class GlobalDomainModifyRespResp extends  AbstractModel {
         super();
 
         /**
-         * 0: success; 1: allowed domains exist; 2: blocked domains exist.
+         * Operation result. Valid values: 0: Succeeded; 1: Exists in the allowlist; 2: Exists in the blocklist. 
          * @type {number || null}
          */
         this.Result = null;
@@ -9003,13 +9076,13 @@ class DisableApplicationSensitiveAPIRequest extends  AbstractModel {
         super();
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * API ID
+         * API ID.
          * @type {string || null}
          */
         this.APIId = null;
@@ -9038,7 +9111,7 @@ class DescribeApplicationSensitiveAPIListResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeApplicationSensitiveAPIListResp || null}
          */
         this.Data = null;
@@ -9070,7 +9143,7 @@ class DescribeApplicationSensitiveAPIListResponse extends  AbstractModel {
 }
 
 /**
- * Advertising line chart data
+ * Ad trend data.
  * @class
  */
 class AdTrendChart extends  AbstractModel {
@@ -9078,35 +9151,35 @@ class AdTrendChart extends  AbstractModel {
         super();
 
         /**
-         * Estimated revenue
+         * Estimated revenue.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AnalysisData> || null}
          */
         this.EstimatedEarnings = null;
 
         /**
-         * Requests
+         * Number of requests.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AnalysisData> || null}
          */
         this.RequestsNumber = null;
 
         /**
-         * Impressions
+         * Number of impressions.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AnalysisData> || null}
          */
         this.Impressions = null;
 
         /**
-         * Effective Cost Per Mille
+         * eCPM (effective cost per mille).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AnalysisData> || null}
          */
         this.ECPM = null;
 
         /**
-         * Taps
+         * Number of taps.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AnalysisData> || null}
          */
@@ -9179,7 +9252,7 @@ class RollbackMNPVersionResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -9211,7 +9284,7 @@ class RollbackMNPVersionResponse extends  AbstractModel {
 }
 
 /**
- * Creates secret key response.
+ * Response for creating a mini program secret key.
  * @class
  */
 class CreateMNPSecretKeyResp extends  AbstractModel {
@@ -9219,13 +9292,13 @@ class CreateMNPSecretKeyResp extends  AbstractModel {
         super();
 
         /**
-         * <p>Secret ID</p>
+         * <p>Key ID.</p>
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * <p>Secret key</p>
+         * <p>Secret key.</p>
          * @type {string || null}
          */
         this.SecretKey = null;
@@ -9254,7 +9327,7 @@ class DescribeAdvertisingLineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AdTrendChart || null}
          */
@@ -9287,7 +9360,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Retention data
+ * Retention data.
  * @class
  */
 class RetentionData extends  AbstractModel {
@@ -9295,127 +9368,127 @@ class RetentionData extends  AbstractModel {
         super();
 
         /**
-         * Number of active users
+         * Number of active users.
          * @type {number || null}
          */
         this.ActiveUserCount = null;
 
         /**
-         * Day 1 retention of active users
+         * Day 1 retention of active users.
          * @type {number || null}
          */
         this.OneDayRetentionUsers = null;
 
         /**
-         * Day 2 retention of active users
+         * Day 2 retention of active users.
          * @type {number || null}
          */
         this.TwoDayRetentionUsers = null;
 
         /**
-         * Day 3 retention of active users
+         * Day 3 retention of active users.
          * @type {number || null}
          */
         this.ThreeDayRetentionUsers = null;
 
         /**
-         * Day 4 retention of active users
+         * Day 4 retention of active users.
          * @type {number || null}
          */
         this.FourDayRetentionUsers = null;
 
         /**
-         * Day 5 retention of active users
+         * Day 5 retention of active users.
          * @type {number || null}
          */
         this.FiveDayRetentionUsers = null;
 
         /**
-         * Day 6 retention of active users
+         * Day 6 retention of active users.
          * @type {number || null}
          */
         this.SixDayRetentionUsers = null;
 
         /**
-         * Day 7 retention of active users
+         * Day 7 retention of active users.
          * @type {number || null}
          */
         this.SevenDayRetentionUsers = null;
 
         /**
-         * Day 14 retention of active users
+         * Day 14 retention of active users.
          * @type {number || null}
          */
         this.FourteenDayRetentionUsers = null;
 
         /**
-         * Day 30 retention of active users
+         * Day 30 retention of active users.
          * @type {number || null}
          */
         this.ThirtyDayRetentionUsers = null;
 
         /**
-         * Number of new users
+         * Number of new users.
          * @type {number || null}
          */
         this.NewUserCount = null;
 
         /**
-         * Day 1 retention of new users
+         * Day 1 retention of new users.
          * @type {number || null}
          */
         this.OneDayRetentionNewUsers = null;
 
         /**
-         * Day 2 retention of new users
+         * Day 2 retention of new users.
          * @type {number || null}
          */
         this.TwoDayRetentionNewUsers = null;
 
         /**
-         * Day 3 retention of new users
+         * Day 3 retention of new users.
          * @type {number || null}
          */
         this.ThreeDayRetentionNewUsers = null;
 
         /**
-         * Day 4 retention of new users
+         * Day 4 retention of new users.
          * @type {number || null}
          */
         this.FourDayRetentionNewUsers = null;
 
         /**
-         * Day 5 retention of new users
+         * Day 5 retention of new users.
          * @type {number || null}
          */
         this.FiveDayRetentionNewUsers = null;
 
         /**
-         * Day 6 retention of new users
+         * Day 6 retention of new users.
          * @type {number || null}
          */
         this.SixDayRetentionNewUsers = null;
 
         /**
-         * Day 7 retention of new users
+         * Day 7 retention of new users.
          * @type {number || null}
          */
         this.SevenDayRetentionNewUsers = null;
 
         /**
-         * Day 14 retention of new users
+         * Day 14 retention of new users.
          * @type {number || null}
          */
         this.FourteenDayRetentionNewUsers = null;
 
         /**
-         * Day 30 retention of new users
+         * Day 30 retention of new users.
          * @type {number || null}
          */
         this.ThirtyDayRetentionNewUsers = null;
 
         /**
-         * Data time in YYYYMMDD format
+         * Data time in YYYYMMDD format.
          * @type {string || null}
          */
         this.DataTime = null;
@@ -9463,25 +9536,25 @@ class DescribeMNPSensitiveAPIPermissionListRequest extends  AbstractModel {
         super();
 
         /**
-         * Page offset
+         * Pagination offset.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results per page
+         * Number of entries per page.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -9493,7 +9566,7 @@ class DescribeMNPSensitiveAPIPermissionListRequest extends  AbstractModel {
         this.ApplicationId = null;
 
         /**
-         * Keywords for search (API name)
+         * Search keyword (API name).
          * @type {string || null}
          */
         this.Keyword = null;
@@ -9526,19 +9599,19 @@ class ModifyGlobalDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * Domain ID
+         * Domain ID.
          * @type {number || null}
          */
         this.DomainId = null;
 
         /**
-         * Domain name
+         * Domain URL.
          * @type {string || null}
          */
         this.DomainUrl = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -9568,25 +9641,25 @@ class CreateMNGSensitiveAPIPermissionApprovalRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>API ID</p>
+         * <p>API ID.</p>
          * @type {string || null}
          */
         this.APIId = null;
 
         /**
-         * <p>Reason for request</p>
+         * <p>Reason for request.</p>
          * @type {string || null}
          */
         this.ApplyReason = null;
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -9617,13 +9690,13 @@ class DescribeMNPReleasedVersionHistoryRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -9652,7 +9725,7 @@ class DescribeMNPSensitiveAPIPermissionListResponse extends  AbstractModel {
         super();
 
         /**
-         * Response parameters.
+         * Response data.
          * @type {DescribeMNPSensitiveAPIPermissionListResp || null}
          */
         this.Data = null;
@@ -9692,7 +9765,7 @@ class AddTeamMemberResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -9732,43 +9805,43 @@ class DescribeMNPMAUMetricCardRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time in YYYYMMDD format
+         * Start time in YYYYMMDD format.
          * @type {number || null}
          */
         this.SourceMonth = null;
 
         /**
-         * Type: 0 Non-production data, 1 Production data 
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * End time in YYYYMMDD format
+         * End time in YYYYMMDD format.
          * @type {number || null}
          */
         this.TargetMonth = null;
 
         /**
-         * Superapp ID starting with App
+         * Superapp ID prefixed with "app".
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Mini program appid, required. When provided, the query is performed based on the mini program.
+         * Mini program appid. If not empty, results are filtered by mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Mini program team ID, required. When provided, the query is performed based on the mini program team.
+         * Mini program team ID. If not empty, results are filtered by mini program team ID.
          * @type {number || null}
          */
         this.MNPTeamId = null;
@@ -9794,6 +9867,62 @@ class DescribeMNPMAUMetricCardRequest extends  AbstractModel {
 }
 
 /**
+ * The mini program name and description in multiple languages.
+ * @class
+ */
+class MNPDetailI18nVO extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Language ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Language type. Valid values: en-US: English; zh-CN: Simplified Chinese; zh-Hant: Traditional Chinese; fr-FR: French; ar-SA: Arabic; id-ID: Indonesian; vi-VN: Vietnamese. Default value: en-US.
+         * @type {string || null}
+         */
+        this.Lang = null;
+
+        /**
+         * Whether this is the default language. Valid values: 0: No; 1: Yes. Default value: 0.
+         * @type {number || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * Mini program name.
+         * @type {string || null}
+         */
+        this.MNPName = null;
+
+        /**
+         * Mini program introduction.
+         * @type {string || null}
+         */
+        this.MNPIntro = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Lang = 'Lang' in params ? params.Lang : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.MNPName = 'MNPName' in params ? params.MNPName : null;
+        this.MNPIntro = 'MNPIntro' in params ? params.MNPIntro : null;
+
+    }
+}
+
+/**
  * DescribeMNP response structure.
  * @class
  */
@@ -9802,8 +9931,7 @@ class DescribeMNPResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Response data.
          * @type {DescribeMNPManagerDetailData || null}
          */
         this.Data = null;
@@ -9871,7 +9999,7 @@ class CreateMNPSensitiveAPIPermissionApprovalResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {ResourceIdStringInfo || null}
          */
         this.Data = null;
@@ -9911,46 +10039,52 @@ class ModifyMNPRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program type
+         * Mini program category.
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
-         * Mini program name
+         * Mini program name.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * Mini program introduction
+         * Mini program introduction.
          * @type {string || null}
          */
         this.MNPIntro = null;
 
         /**
-         * Mini program description
+         * Mini program description.
          * @type {string || null}
          */
         this.MNPDesc = null;
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Mini program icon
+         * Mini program icon.
          * @type {string || null}
          */
         this.MNPIcon = null;
+
+        /**
+         * <p>The mini program name and description in multiple languages.</p>
+         * @type {Array.<MNPI18NSyncDto> || null}
+         */
+        this.I18nList = null;
 
     }
 
@@ -9969,6 +10103,15 @@ class ModifyMNPRequest extends  AbstractModel {
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
         this.MNPIcon = 'MNPIcon' in params ? params.MNPIcon : null;
 
+        if (params.I18nList) {
+            this.I18nList = new Array();
+            for (let z in params.I18nList) {
+                let obj = new MNPI18NSyncDto();
+                obj.deserialize(params.I18nList[z]);
+                this.I18nList.push(obj);
+            }
+        }
+
     }
 }
 
@@ -9981,19 +10124,19 @@ class CreateMNPDomainACLRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Domain name list
+         * List of domains.
          * @type {Array.<CreateDomainParam> || null}
          */
         this.Domain = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -10023,7 +10166,7 @@ class CreateMNPDomainACLRequest extends  AbstractModel {
 }
 
 /**
- * Mini program category information
+ * Mini program category information.
  * @class
  */
 class MNPTypeDefine extends  AbstractModel {
@@ -10031,13 +10174,13 @@ class MNPTypeDefine extends  AbstractModel {
         super();
 
         /**
-         * Specifies the mini program category name.
+         * Mini program category name.
          * @type {string || null}
          */
         this.TypeName = null;
 
         /**
-         * Mini program category value.
+         * Mini program category values.
          * @type {Array.<string> || null}
          */
         this.TypeValue = null;
@@ -10049,19 +10192,19 @@ class MNPTypeDefine extends  AbstractModel {
         this.TypeId = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * Creator
+         * Creator.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * Indicates whether it is a system category.
+         * Whether it is a system category.
          * @type {boolean || null}
          */
         this.IsSystem = null;
@@ -10094,38 +10237,38 @@ class DescribeAPPDataDetailLineChartRequest extends  AbstractModel {
         super();
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Fixed value: mnp_data_analysis
+         * Fixed value: mnp_data_analysis.
          * @type {string || null}
          */
         this.ReportId = null;
 
         /**
-         * IndexId (optional):
+         * Index ID (optional):
 app_minigame_num: Number of created mini games
 app_online_miniapp_num: Number of available mini programs
 app_miniapp_num: Number of created mini programs
 app_related_corp_num: Mini program team data
 app_online_minigame_num: Number of available mini games
 app_active_device_num: Number of active devices
-app_new_device_num: Number of new devices
+app_new_device_num: Number of new devices.
          * @type {Array.<string> || null}
          */
         this.IndexIds = null;
 
         /**
-         * Input parameter base64 string: {"BeginDate":"20251122","EndDate":"20251128"}
+         * Input parameter base64 string: {"BeginDate":"20251122","EndDate":"20251128"}.
          * @type {string || null}
          */
         this.QueryData = null;
 
         /**
-         * Superapp ID
+         * Superapp ID.
          * @type {Array.<string> || null}
          */
         this.ApplicationIds = null;
@@ -10157,7 +10300,7 @@ class DescribeMNGSensitiveAPIPermissionListResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response parameters</p>
+         * <p>Response data.</p>
          * @type {DescribeMNGSensitiveAPIPermissionListResp || null}
          */
         this.Data = null;
@@ -10197,13 +10340,13 @@ class DescribeMNGDomainACLRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -10232,37 +10375,37 @@ class CreateTeamRequest extends  AbstractModel {
         super();
 
         /**
-         * Team name
+         * Team name.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Admin name
+         * Admin name.
          * @type {string || null}
          */
         this.AdminUserId = null;
 
         /**
-         * Permission assigned to the team. 1: Mini program; 2: Application (only one of these types is supported)
+         * Team role type. Valid values: 1: Mini program; 2: Superapp (only one type is currently supported).
          * @type {Array.<number> || null}
          */
         this.TeamRoleTypeList = null;
 
         /**
-         * Remarks
+         * Remark.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Platform ID, required for API call
+         * Platform ID, required for API call.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Associated team ID
+         * Associated team ID.
          * @type {string || null}
          */
         this.RelatedTeamId = null;
@@ -10295,7 +10438,7 @@ class CreateApplicationSensitiveAPIRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
@@ -10307,7 +10450,7 @@ class CreateApplicationSensitiveAPIRequest extends  AbstractModel {
         this.APIList = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -10337,7 +10480,7 @@ class CreateApplicationSensitiveAPIRequest extends  AbstractModel {
 }
 
 /**
- * List of sensitive APIs that can be called by a mini program
+ * Response for querying the list of callable sensitive APIs of a mini program.
  * @class
  */
 class DescribeMNPSensitiveAPIPermissionListResp extends  AbstractModel {
@@ -10345,13 +10488,13 @@ class DescribeMNPSensitiveAPIPermissionListResp extends  AbstractModel {
         super();
 
         /**
-         * Total number of entries
+         * Total number of entries.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List data
+         * List data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DescribeMNPSensitiveAPIPermissionListData> || null}
          */
@@ -10389,13 +10532,13 @@ class ReleaseMNPVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program version ID
+         * Mini program version ID.
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -10424,31 +10567,31 @@ class DescribeMNPMAULineChartRequest extends  AbstractModel {
         super();
 
         /**
-         * Type: 0 Non-production data, 1 Production data
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Superapp ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Mini program appid, required. When provided, the query is performed based on the mini program.
+         * Mini program appid. If not empty, results are filtered by mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Mini program team ID
+         * Mini program team ID.
          * @type {number || null}
          */
         this.MNPTeamId = null;
@@ -10472,7 +10615,7 @@ class DescribeMNPMAULineChartRequest extends  AbstractModel {
 }
 
 /**
- * Role management list
+ * Role list data.
  * @class
  */
 class DescribeRoleListData extends  AbstractModel {
@@ -10480,7 +10623,7 @@ class DescribeRoleListData extends  AbstractModel {
         super();
 
         /**
-         * Role ID
+         * Role ID.
          * @type {number || null}
          */
         this.RoleId = null;
@@ -10492,19 +10635,19 @@ class DescribeRoleListData extends  AbstractModel {
         this.RoleName = null;
 
         /**
-         * Team name
+         * Team name.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Role type 1-preset role 2-custom role.
+         * Role type. Valid values: 1: Preset role; 2: Custom role. 
          * @type {number || null}
          */
         this.RoleType = null;
@@ -10536,7 +10679,7 @@ class DescribePaymentDataDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<PaymentDetail> || null}
          */
@@ -10572,7 +10715,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Application details
+ * Superapp details.
  * @class
  */
 class DescribeApplicationResp extends  AbstractModel {
@@ -10580,7 +10723,7 @@ class DescribeApplicationResp extends  AbstractModel {
         super();
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
@@ -10592,91 +10735,91 @@ class DescribeApplicationResp extends  AbstractModel {
         this.AppIdentityId = null;
 
         /**
-         * Application name
+         * Superapp name.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * Specifies the application icon.
+         * Superapp icon.
          * @type {string || null}
          */
         this.Logo = null;
 
         /**
-         * Remarks
+         * Remarks.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Android package name
+         * Android superapp package name.
          * @type {string || null}
          */
         this.AndroidAppKey = null;
 
         /**
-         * iOS bundleId
+         * iOS superapp bundle ID.
          * @type {string || null}
          */
         this.IosAppKey = null;
 
         /**
-         * Creator
+         * Creator.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Specifies the updater.
+         * Last modifier.
          * @type {string || null}
          */
         this.UpdateUser = null;
 
         /**
-         * Update time
+         * Last modified time.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Describes the application description.
+         * Superapp introduction.
          * @type {string || null}
          */
         this.Intro = null;
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Team name
+         * Team name.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Number of sensitive apis.
+         * Number of sensitive APIs.
          * @type {number || null}
          */
         this.SensitiveApiCount = null;
 
         /**
-         * Application type. 1: Test; 2: Formal
+         * Superapp type. Valid values: 1: Test; 2: Production.
          * @type {number || null}
          */
         this.ApplicationType = null;
 
         /**
-         * Specifies the application Scheme.
+         * Superapp scheme.
          * @type {string || null}
          */
         this.Scheme = null;
@@ -10720,7 +10863,7 @@ class DescribeMNGAccessAnalysisDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page
+         * Data display at the top of the page.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AccessAnalysisDetail> || null}
          */
@@ -10756,7 +10899,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Global domain name page list
+ * Paginated global domain list.
  * @class
  */
 class DescribeGlobalDomainsResp extends  AbstractModel {
@@ -10764,13 +10907,13 @@ class DescribeGlobalDomainsResp extends  AbstractModel {
         super();
 
         /**
-         * Total number
+         * Total number of entries.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Describes the domain information.
+         * Domain information.
          * @type {Array.<DescribeGlobalDomainsListData> || null}
          */
         this.DataList = null;
@@ -10807,7 +10950,7 @@ class DescribeMNGReleasedVersionHistoryResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {DescribeMNGRevertOnlineVersionPageResp || null}
          */
         this.Data = null;
@@ -10847,19 +10990,19 @@ class DescribeAPPDataOverviewRequest extends  AbstractModel {
         super();
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Start time in YYYYMMDD format
+         * Start time in YYYYMMDD format.
          * @type {number || null}
          */
         this.DataTime = null;
 
         /**
-         * Superapp ID
+         * Superapp ID.
          * @type {Array.<string> || null}
          */
         this.ApplicationIds = null;
@@ -10889,19 +11032,19 @@ class CreateMNGDomainACLRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Domain list</p>
+         * <p>Domain list.</p>
          * @type {Array.<CreateDomainParam> || null}
          */
         this.Domain = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -10939,8 +11082,7 @@ class DescribeMNGDomainACLResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Response data.</p>
          * @type {Array.<DescribeMNGDomainInfoResp> || null}
          */
         this.Data = null;
@@ -10983,25 +11125,25 @@ class DescribeMNGAccessAnalysisLineChartRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Fixed value: mnp_data_analysis
+         * Fixed value: mnp_data_analysis.
          * @type {string || null}
          */
         this.ReportId = null;
 
         /**
-         * IndexId (optional):
+         * Index ID (optional):
 active_device_num: Number of active users
 new_device_num: Number of new users
 total_user_num: Total number of users
@@ -11009,13 +11151,13 @@ share_num: Number of shares
 miniapp_open_num: Number of mini game opens
 avg_device_open_num: Average opens per user
 avg_device_open_duration: Average visit duration per user
-avg_count_open_duration: Average visit duration per session
+avg_count_open_duration: Average visit duration per session.
          * @type {string || null}
          */
         this.IndexId = null;
 
         /**
-         * Input parameter base64 string: {"DataType":"1","Platform":0,"BeginDate":20251118,"EndDate":20251124}
+         * Input parameter base64 string: {"DataType":"1","Platform":0,"BeginDate":20251118,"EndDate":20251124}.
          * @type {string || null}
          */
         this.QueryData = null;
@@ -11039,7 +11181,7 @@ avg_count_open_duration: Average visit duration per session
 }
 
 /**
- * Queries the released mini game version ID
+ * Response for querying mini game released version IDs.
  * @class
  */
 class QueryMNGOnlineVersionResp extends  AbstractModel {
@@ -11047,31 +11189,31 @@ class QueryMNGOnlineVersionResp extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Version number</p>
+         * <p>Version number.</p>
          * @type {string || null}
          */
         this.MNPVersion = null;
 
         /**
-         * <p>Version ID</p>
+         * <p>Version ID.</p>
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * <p>Version remarks</p>
+         * <p>Version note.</p>
          * @type {string || null}
          */
         this.MNPVersionNote = null;
 
         /**
-         * <p>Update time</p>
+         * <p>Last modified time.</p>
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -11103,13 +11245,13 @@ class CreateMNPSecretKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * <p>Mini program or mini game appid</p>
+         * <p>Mini program or mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
@@ -11138,31 +11280,31 @@ class DescribeMNPSensitiveAPIPermissionApprovalListRequest extends  AbstractMode
         super();
 
         /**
-         * Page offset
+         * Pagination offset.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results per page
+         * Number of entries per page.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Approval status. 1: Processing; 20: Rejected; 30: Approved
+         * Approval status. Valid values: 1: Processing; 20: Rejected; 30: Approved.
          * @type {Array.<number> || null}
          */
         this.ApprovalStatusList = null;
 
         /**
-         * Keywords for search (API name, API method or application name)
+         * Search keyword (API name, API method or superapp name).
          * @type {string || null}
          */
         this.Keyword = null;
@@ -11194,7 +11336,7 @@ class DescribeGlobalOverviewReportDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -11206,13 +11348,13 @@ class DescribeGlobalOverviewReportDetailRequest extends  AbstractModel {
         this.ReportId = null;
 
         /**
-         * Parameter value: app_num|corp_num|miniapp_num|miniapp_visit_pv|minigame_num|minigame_visit_pv
+         * Parameter value: app_num|corp_num|miniapp_num|miniapp_visit_pv|minigame_num|minigame_visit_pv.
          * @type {string || null}
          */
         this.IndexId = null;
 
         /**
-         * Base64 string containing start and end time: {"BeginDate":20251111,"EndDate":20251125}
+         * Base64 string containing start and end time: {"BeginDate":20251111,"EndDate":20251125}.
          * @type {string || null}
          */
         this.QueryData = null;
@@ -11235,7 +11377,7 @@ class DescribeGlobalOverviewReportDetailRequest extends  AbstractModel {
 }
 
 /**
- * Payment overview data
+ * Payment overview data.
  * @class
  */
 class MNPPaymentOverview extends  AbstractModel {
@@ -11243,14 +11385,14 @@ class MNPPaymentOverview extends  AbstractModel {
         super();
 
         /**
-         * Number of mini programs involved in the order
+         * Mini program count with orders.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.OrderMNPNum = null;
 
         /**
-         * Total orders
+         * Total orders.
 
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
@@ -11258,7 +11400,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.OrderNum = null;
 
         /**
-         * Total paid orders
+         * Total paid orders.
 
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
@@ -11266,7 +11408,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.OrderPaidNum = null;
 
         /**
-         * Total refunded orders
+         * Number of refund orders.
 
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
@@ -11274,63 +11416,63 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.OrderRefundNum = null;
 
         /**
-         * Total unpaid orders
+         * Total unpaid orders.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.OrderUnpaidNum = null;
 
         /**
-         * Total order users
+         * Total order users.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.OrderUserNum = null;
 
         /**
-         * Total paying users
+         * Total paying users.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.PaidUserNum = null;
 
         /**
-         * Amount paid
+         * Amount paid.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PaidAmount = null;
 
         /**
-         * Total amount refunded
+         * Total amount refunded.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RefundAmount = null;
 
         /**
-         * Total order amount
+         * Total order amount.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TotalAmount = null;
 
         /**
-         * Unpaid amount
+         * Unpaid amount.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UnpaidAmount = null;
 
         /**
-         * Timestamp
+         * Timestamp.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Data date
+         * Data time.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -11371,31 +11513,31 @@ class ConfigureMNPPreviewRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * 1: Set; 2: Cancel
+         * Action type. Valid values: 1: Set; 2: Cancel.
          * @type {number || null}
          */
         this.ActionType = null;
 
         /**
-         * Mini program version ID
+         * Mini program version ID.
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Path to the preview page
+         * Preview path.
          * @type {string || null}
          */
         this.PreivewEntrancePath = null;
@@ -11427,19 +11569,19 @@ class AddTeamMemberRequest extends  AbstractModel {
         super();
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Members to be added
+         * List of new team members.
          * @type {Array.<CreateTeamMemberInfoReq> || null}
          */
         this.MemberList = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -11477,13 +11619,13 @@ class DescribeMNPOfflinePackageURLRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -11512,31 +11654,31 @@ class ConfigureMNGPreviewRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>1 Set 2 Cancel</p>
+         * <p>Action type. Valid values: 1: Set; 2: Cancel.</p>
          * @type {number || null}
          */
         this.ActionType = null;
 
         /**
-         * <p>Mini game version ID</p>
+         * <p>Mini game version ID.</p>
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * <p>Preview path</p>
+         * <p>Preview path.</p>
          * @type {string || null}
          */
         this.PreviewEntrancePath = null;
@@ -11568,7 +11710,7 @@ class CreateMNGSensitiveAPIPermissionApprovalResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {ResourceIdStringInfo || null}
          */
         this.Data = null;
@@ -11608,7 +11750,7 @@ class DescribeMNPActiveUserRealTimeStatisticsResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -11652,13 +11794,13 @@ class DescribeTeamRequest extends  AbstractModel {
         super();
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -11687,7 +11829,7 @@ class DescribeMNGAccessAnalysisLineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -11723,7 +11865,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Response data for creating a mini game version
+ * Response for creating a mini game version.
  * @class
  */
 class CreateMNGVersionResp extends  AbstractModel {
@@ -11731,7 +11873,7 @@ class CreateMNGVersionResp extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game version compilation task ID</p>
+         * <p>Mini game version compilation task ID.</p>
          * @type {string || null}
          */
         this.TaskId = null;
@@ -11759,7 +11901,7 @@ class CreateMNGDomainACLResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -11799,13 +11941,13 @@ class DescribeMNGSensitiveAPIPermissionApprovalRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Approval number</p>
+         * <p>Approval number.</p>
          * @type {string || null}
          */
         this.ApprovalNo = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -11834,19 +11976,19 @@ class CreateUserRequest extends  AbstractModel {
         super();
 
         /**
-         * User account
+         * User account.
          * @type {string || null}
          */
         this.UserAccount = null;
 
         /**
-         * User name
+         * User name.
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
-         * User account type. 2: Platform admin; 3: Member.
+         * User account type. Valid values: 2: Platform admin; 3: Regular member. If left empty, all types are returned. 
          * @type {number || null}
          */
         this.AccountType = null;
@@ -11858,13 +12000,13 @@ class CreateUserRequest extends  AbstractModel {
         this.Password = null;
 
         /**
-         * Call CreatePresetKey to get the keyID from RequestId
+         * Call CreatePresetKey to get the keyID from RequestId.
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -11889,7 +12031,7 @@ class CreateUserRequest extends  AbstractModel {
 }
 
 /**
- * Mini game type definition
+ * Mini game category definition.
  * @class
  */
 class MNGTypeDefine extends  AbstractModel {
@@ -11897,37 +12039,37 @@ class MNGTypeDefine extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game category name</p>
+         * <p>Mini game category name.</p>
          * @type {string || null}
          */
         this.TypeName = null;
 
         /**
-         * <p>Mini game category</p>
+         * <p>Mini game category.</p>
          * @type {Array.<string> || null}
          */
         this.TypeValue = null;
 
         /**
-         * <p>Category ID</p>
+         * <p>Category ID.</p>
          * @type {number || null}
          */
         this.TypeId = null;
 
         /**
-         * <p>Creation time</p>
+         * <p>Creation time.</p>
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * <p>Creator</p>
+         * <p>Creator.</p>
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * <p>Whether this is a system category</p>
+         * <p>Whether it is a system category.</p>
          * @type {boolean || null}
          */
         this.IsSystem = null;
@@ -11952,7 +12094,7 @@ class MNGTypeDefine extends  AbstractModel {
 }
 
 /**
- * Response for submitting a mini game version for approval
+ * Response for submitting a mini game version for approval.
  * @class
  */
 class CreateMNGApprovalResp extends  AbstractModel {
@@ -11960,14 +12102,14 @@ class CreateMNGApprovalResp extends  AbstractModel {
         super();
 
         /**
-         * <p>Boolean response object</p>
+         * <p>Boolean response object.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.Result = null;
 
         /**
-         * <p>Approval number</p>
+         * <p>Approval number.</p>
          * @type {string || null}
          */
         this.ApprovalNo = null;
@@ -11996,13 +12138,13 @@ class DescribeMNGOfflinePackageURLRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -12031,43 +12173,43 @@ class DescribeMNPApprovalListRequest extends  AbstractModel {
         super();
 
         /**
-         * Page offset
+         * Pagination offset.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results per page
+         * Number of entries per page.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Approval status. 1: Processing; 2: Rejected; 3: Approved; 4 Cancelled
+         * Approval status. Valid values: 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.
          * @type {Array.<number> || null}
          */
         this.ApprovalStatusList = null;
 
         /**
-         * Keywords of the mini program name to search
+         * Search keyword (mini program name).
          * @type {string || null}
          */
         this.Keyword = null;
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
@@ -12101,7 +12243,7 @@ class DescribeMNPSensitiveAPIPermissionApprovalResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {DescribeMNPSensitiveAPIPermissionApprovalData || null}
          */
@@ -12142,46 +12284,52 @@ class CreateMNGRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game type</p>
+         * <p>Mini game category.</p>
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
-         * <p>Mini game name</p>
+         * <p>Mini game name.</p>
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * <p>Mini game icon</p>
+         * <p>Mini game icon.</p>
          * @type {string || null}
          */
         this.MNPIcon = null;
 
         /**
-         * <p>Mini game introduction</p>
+         * <p>Mini game introduction.</p>
          * @type {string || null}
          */
         this.MNPIntro = null;
 
         /**
-         * <p>Mini game description</p>
+         * <p>Mini game description.</p>
          * @type {string || null}
          */
         this.MNPDesc = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * <p>Team ID</p>
+         * <p>Team ID.</p>
          * @type {string || null}
          */
         this.TeamId = null;
+
+        /**
+         * <p>The mini game name and description in multiple languages.</p>
+         * @type {Array.<MNPI18NSyncDto> || null}
+         */
+        this.I18nList = null;
 
     }
 
@@ -12199,6 +12347,15 @@ class CreateMNGRequest extends  AbstractModel {
         this.MNPDesc = 'MNPDesc' in params ? params.MNPDesc : null;
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
         this.TeamId = 'TeamId' in params ? params.TeamId : null;
+
+        if (params.I18nList) {
+            this.I18nList = new Array();
+            for (let z in params.I18nList) {
+                let obj = new MNPI18NSyncDto();
+                obj.deserialize(params.I18nList[z]);
+                this.I18nList.push(obj);
+            }
+        }
 
     }
 }
@@ -12254,7 +12411,7 @@ class DescribeMNGPaymentRetentionAnalysisResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<PaymentActiveRetention> || null}
          */
@@ -12298,25 +12455,25 @@ class ModifyTeamMemberRequest extends  AbstractModel {
         super();
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * User ID
+         * User ID.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * Role ID
+         * Role ID.
          * @type {number || null}
          */
         this.RoleId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -12339,7 +12496,7 @@ class ModifyTeamMemberRequest extends  AbstractModel {
 }
 
 /**
- * List of global domain names
+ * Global domain list information.
  * @class
  */
 class DescribeGlobalDomainsListData extends  AbstractModel {
@@ -12347,43 +12504,43 @@ class DescribeGlobalDomainsListData extends  AbstractModel {
         super();
 
         /**
-         * Domain ID
+         * Domain ID.
          * @type {number || null}
          */
         this.DomainId = null;
 
         /**
-         * Domain name
+         * Domain name.
          * @type {string || null}
          */
         this.DomainUrl = null;
 
         /**
-         * Type. 1: allowlist; 2: blocklist.
+         * Domain type. Valid value: 1: Allowed; 2: Blocked.
          * @type {number || null}
          */
         this.DomainType = null;
 
         /**
-         * Creator
+         * Creator.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Specifies the updater.
+         * Last modifier.
          * @type {string || null}
          */
         this.UpdateUser = null;
 
         /**
-         * Update time
+         * Last modified time.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -12417,7 +12574,7 @@ class DescribeMNGActiveUserRealTimeStatisticsResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -12461,55 +12618,55 @@ class ModifyApplicationRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Application name
+         * Superapp name.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * Application introduction
+         * Superapp introduction.
          * @type {string || null}
          */
         this.Intro = null;
 
         /**
-         * Icon
+         * Superapp icon.
          * @type {string || null}
          */
         this.Logo = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Android app package name
+         * Android app package name.
          * @type {string || null}
          */
         this.AndroidAppKey = null;
 
         /**
-         * iOS App bundleId
+         * iOS app bundle ID.
          * @type {string || null}
          */
         this.IosAppKey = null;
 
         /**
-         * Remarks
+         * Remarks.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Scheme
+         * Scheme.
          * @type {string || null}
          */
         this.Scheme = null;
@@ -12537,7 +12694,7 @@ class ModifyApplicationRequest extends  AbstractModel {
 }
 
 /**
- * Mini program details
+ * Mini program details.
  * @class
  */
 class DescribeMNPManagerDetailData extends  AbstractModel {
@@ -12545,76 +12702,82 @@ class DescribeMNPManagerDetailData extends  AbstractModel {
         super();
 
         /**
-         * Mini program type 
+         * Mini program category.
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Mini program name
+         * Mini program name.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * Mini program icon
+         * Mini program icon.
          * @type {string || null}
          */
         this.MNPIcon = null;
 
         /**
-         * Mini program introduction
+         * Mini program introduction.
          * @type {string || null}
          */
         this.MNPIntro = null;
 
         /**
-         * Mini program description
+         * Mini program description.
          * @type {string || null}
          */
         this.MNPDesc = null;
 
         /**
-         * Creation time, timestamp.
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Creator
+         * Creator.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * Access status. 1: not connected; 2: connected.
+         * Access status. Valid values: 1: not connected; 2: connected.
          * @type {number || null}
          */
         this.AccessStatus = null;
 
         /**
-         * Name of the associated team
+         * Team name.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Specifies the mini program listing status. valid values: 1 (submitted), 2 (removed).
+         * Mini program available status. Valid values: 1: Available; 2: Removed.
          * @type {number || null}
          */
         this.Status = null;
+
+        /**
+         * The mini program name and description in multiple languages.
+         * @type {Array.<MNPDetailI18nVO> || null}
+         */
+        this.I18nList = null;
 
     }
 
@@ -12638,6 +12801,15 @@ class DescribeMNPManagerDetailData extends  AbstractModel {
         this.TeamId = 'TeamId' in params ? params.TeamId : null;
         this.Status = 'Status' in params ? params.Status : null;
 
+        if (params.I18nList) {
+            this.I18nList = new Array();
+            for (let z in params.I18nList) {
+                let obj = new MNPDetailI18nVO();
+                obj.deserialize(params.I18nList[z]);
+                this.I18nList.push(obj);
+            }
+        }
+
     }
 }
 
@@ -12650,31 +12822,31 @@ class DescribeMNPMAUDataDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Type: 0 Non-production data, 1 Production data
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Superapp ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Mini program appid, required. When provided, the query is performed based on the mini program.
+         * Mini program appid. If not empty, results are filtered by mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Program team ID, -1 means not provided
+         * Mini program team ID. Pass -1 to leave unspecified.
          * @type {number || null}
          */
         this.MNPTeamId = null;
@@ -12698,7 +12870,7 @@ class DescribeMNPMAUDataDetailRequest extends  AbstractModel {
 }
 
 /**
- * Queries the list data of sensitive APIs that available to the mini game
+ * List data for querying callable sensitive APIs of a mini game.
  * @class
  */
 class DescribeMNGSensitiveAPIPermissionListData extends  AbstractModel {
@@ -12706,73 +12878,73 @@ class DescribeMNGSensitiveAPIPermissionListData extends  AbstractModel {
         super();
 
         /**
-         * <p>API ID</p>
+         * <p>API ID.</p>
          * @type {string || null}
          */
         this.APIId = null;
 
         /**
-         * <p>API name</p>
+         * <p>API name.</p>
          * @type {string || null}
          */
         this.APIName = null;
 
         /**
-         * <p>API method</p>
+         * <p>API method.</p>
          * @type {string || null}
          */
         this.APIMethod = null;
 
         /**
-         * <p>API status</p>
+         * <p>API status.</p>
          * @type {number || null}
          */
         this.APIStatus = null;
 
         /**
-         * <p>API request status</p>
+         * <p>API request status.</p>
          * @type {number || null}
          */
         this.APIApplyStatus = null;
 
         /**
-         * <p>Reason for rejection</p>
+         * <p>Reason for rejection.</p>
          * @type {string || null}
          */
         this.RejectReason = null;
 
         /**
-         * <p>Approval number</p>
+         * <p>Approval number.</p>
          * @type {string || null}
          */
         this.ApprovalNo = null;
 
         /**
-         * <p>Superapp ID</p>
+         * <p>Superapp ID.</p>
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * <p>Superapp icon</p>
+         * <p>Superapp icon.</p>
          * @type {string || null}
          */
         this.ApplicationIcon = null;
 
         /**
-         * <p>Superapp name</p>
+         * <p>Superapp name.</p>
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * <p>API type. Valid values: 1: System; 2: Custom
+         * <p>API type. Valid values: 1: System; 2: Custom.</p>
          * @type {number || null}
          */
         this.APIType = null;
 
         /**
-         * <p>API feature description</p>
+         * <p>API feature description.</p>
          * @type {string || null}
          */
         this.APIDesc = null;
@@ -12811,37 +12983,37 @@ class DescribePaymentDataDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time
+         * Start time.
          * @type {number || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {Array.<string> || null}
          */
         this.MNPIds = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Type: 0 Non-production data, 1 Production data
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * End time
+         * End time.
          * @type {number || null}
          */
         this.TimeEnd = null;
 
         /**
-         * Operating system: 0 All, 2 Android, 3 iOS
+         * Operating system. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
@@ -12866,7 +13038,7 @@ class DescribePaymentDataDetailRequest extends  AbstractModel {
 }
 
 /**
- * User list data
+ * User list data.
  * @class
  */
 class DescribeUserListData extends  AbstractModel {
@@ -12874,43 +13046,43 @@ class DescribeUserListData extends  AbstractModel {
         super();
 
         /**
-         * User ID
+         * User ID.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * User account
+         * User account.
          * @type {string || null}
          */
         this.UserAccount = null;
 
         /**
-         * Account type. 1: super administrator; 2: platform administrator; 3: ordinary member.
+         * User account type. Valid values: 1: Super admin; 2: Platform admin; 3: Regular member.
          * @type {number || null}
          */
         this.AccountType = null;
 
         /**
-         * User name
+         * User name.
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Status. 1: normal; 2: disabled.
+         * Status. Valid values: 1: Active; 2: Disabled.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Team name
+         * Team name.
          * @type {string || null}
          */
         this.TeamName = null;
@@ -12944,7 +13116,7 @@ class DescribeMNPAdvertisingDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MAUDetailData> || null}
          */
@@ -12980,7 +13152,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Returned list of mini programs or mini games
+ * Returned mini program or mini game list.
  * @class
  */
 class DescribeApplicationMNPListResp extends  AbstractModel {
@@ -12988,13 +13160,13 @@ class DescribeApplicationMNPListResp extends  AbstractModel {
         super();
 
         /**
-         * Total number of entries
+         * Total number of entries.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List information
+         * List data.
          * @type {Array.<DescribeApplicationMNPInfoResp> || null}
          */
         this.DataList = null;
@@ -13031,7 +13203,7 @@ class DescribeTeamResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeTeamDetailResp || null}
          */
         this.Data = null;
@@ -13071,13 +13243,13 @@ class DescribeApplicationRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -13106,19 +13278,19 @@ class DescribePaymentDataLineChartRequest extends  AbstractModel {
         super();
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Fixed value: payment_data_analysis
+         * Fixed value: payment_data_analysis.
          * @type {string || null}
          */
         this.ReportId = null;
 
         /**
-         * IndexId (optional):
+         * Index ID (optional):
 order_user_num: Number of users placing orders
 order_num: Total orders
 total_amount: Total amount
@@ -13127,13 +13299,13 @@ unpaid_amount: Unpaid amount
 order_paid_num: Total paid orders
 paid_amount: Amount paid
 order_refund_num: Total refunded orders
-refund_amount: Total amount refunded
+refund_amount: Total amount refunded.
          * @type {string || null}
          */
         this.IndexId = null;
 
         /**
-         * Input parameter base64 string: {"Platform":0,"MnpIds":["mp9e7qluz4i3z3km"],"BeginDate":20251031,"EndDate":20251129,"DataType":"1","PaymentType":1}
+         * Input parameter base64 string: {"Platform":0,"MnpIds":["mp9e7qluz4i3z3km"],"BeginDate":20251031,"EndDate":20251129,"DataType":"1","PaymentType":1}.
          * @type {string || null}
          */
         this.QueryData = null;
@@ -13156,7 +13328,7 @@ refund_amount: Total amount refunded
 }
 
 /**
- * Response object of querying the rollback version list
+ * Response of querying the rollback version list.
  * @class
  */
 class DescribeMNGRevertOnlineVersionPageResp extends  AbstractModel {
@@ -13164,13 +13336,13 @@ class DescribeMNGRevertOnlineVersionPageResp extends  AbstractModel {
         super();
 
         /**
-         * <p>Total number of entries</p>
+         * <p>Total number of entries.</p>
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * <p>List information</p>
+         * <p>List data.</p>
          * @type {Array.<QueryMNGOnlineVersionResp> || null}
          */
         this.DataList = null;
@@ -13207,7 +13379,7 @@ class CreateMNPVersionResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {CreateMNPVersionResp || null}
          */
         this.Data = null;
@@ -13247,37 +13419,37 @@ class DescribeMNGListRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Pagination offset</p>
+         * <p>Pagination offset.</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * <p>Pagination count</p>
+         * <p>Number of entries per page.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * <p>Keywords for search (mini game name)</p>
+         * <p>The search keyword (mini game name).</p>
          * @type {string || null}
          */
         this.Keyword = null;
 
         /**
-         * <p>Team ID</p>
+         * <p>Team ID.</p>
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * <p>Superapp ID</p>
+         * <p>Superapp ID.</p>
          * @type {string || null}
          */
         this.ApplicationId = null;
@@ -13302,7 +13474,7 @@ class DescribeMNGListRequest extends  AbstractModel {
 }
 
 /**
- * List of mini program approval requests of an application
+ * Paginated mini program approval list.
  * @class
  */
 class DescribeMNPApprovalListResp extends  AbstractModel {
@@ -13310,13 +13482,13 @@ class DescribeMNPApprovalListResp extends  AbstractModel {
         super();
 
         /**
-         * Total number of entries
+         * Total number of entries.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List information
+         * List data.
          * @type {Array.<DescribeMNPApprovalListData> || null}
          */
         this.DataList = null;
@@ -13353,7 +13525,7 @@ class DescribeMNPMAUDataDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MAUDetail> || null}
          */
@@ -13397,7 +13569,7 @@ class DescribeMNPDomainACLResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DescribeDomainInfoParam> || null}
          */
@@ -13441,37 +13613,37 @@ class DescribeMNPReportDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time in YYYYMMDD format
+         * Start time in YYYYMMDD format.
          * @type {number || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Type: 0 Non-production data, 1 Production data
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * 0 All, 2 Android, 3 iOS
+         * Operating system. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
 
         /**
-         * End time in YYYYMMDD format
+         * End time in YYYYMMDD format.
          * @type {number || null}
          */
         this.TimeEnd = null;
@@ -13496,7 +13668,7 @@ class DescribeMNPReportDetailRequest extends  AbstractModel {
 }
 
 /**
- * Result of the task to create a mini program version
+ * Response for querying the mini program version creation result.
  * @class
  */
 class DescribeMNPVersionResp extends  AbstractModel {
@@ -13504,31 +13676,31 @@ class DescribeMNPVersionResp extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini program appid</p>
+         * <p>Mini program appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Task ID</p>
+         * <p>Task ID.</p>
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * <p>Valid values: 1: Pending; 20: Running; 30: Failed; 60: Succeeded</p>
+         * Task status. Valid values: 1: Pending; 20: Running; 30: Failed; 60: Succeeded.
          * @type {number || null}
          */
         this.TaskStatus = null;
 
         /**
-         * <p>Task status information</p>
+         * <p>Task status information.</p>
          * @type {string || null}
          */
         this.TaskMsg = null;
 
         /**
-         * <p>Mini program version ID (returned upon successful compilation)</p>
+         * <p>Mini program version ID (returned upon successful compilation).</p>
          * @type {number || null}
          */
         this.MNPVersionId = null;
@@ -13560,7 +13732,7 @@ class DescribeMNGVersionResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {DescribeMNGVersionResp || null}
          */
         this.Data = null;
@@ -13592,7 +13764,7 @@ class DescribeMNGVersionResponse extends  AbstractModel {
 }
 
 /**
- * The general parameter for resource ID returned for successful operations
+ * Unified ID data returned on successful operation.
  * @class
  */
 class ResourceIdStringInfo extends  AbstractModel {
@@ -13600,7 +13772,7 @@ class ResourceIdStringInfo extends  AbstractModel {
         super();
 
         /**
-         * The ID of the resource returned
+         * Resource ID returned by the operation.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -13621,7 +13793,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Parameters to create a domain name
+ * Request parameters for creating a domain.
  * @class
  */
 class CreateDomainParam extends  AbstractModel {
@@ -13629,13 +13801,13 @@ class CreateDomainParam extends  AbstractModel {
         super();
 
         /**
-         * Array of domain name URLs
+         * Array of domain URLs.
          * @type {Array.<string> || null}
          */
         this.DomainUrlList = null;
 
         /**
-         * Domain type. 1: requests domain; 2: WebView load domain, 3: sockets domain; 4: File upload; 5: File download
+         * Domain type. Valid values: 1: Request domain; 2: Business domain; 3: Socket domain; 4: File upload; 5: File download. 
          * @type {number || null}
          */
         this.DomainType = null;
@@ -13664,7 +13836,7 @@ class DescribeMNGPaymentReportDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MNGPaymentOverview> || null}
          */
@@ -13708,31 +13880,31 @@ class DescribeMNGActiveUserRealTimeStatisticsRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Fixed value: mnp_data_analysis
+         * Fixed value: mnp_data_analysis.
          * @type {string || null}
          */
         this.ReportId = null;
 
         /**
-         * IndexId
+         * IndexId.
          * @type {string || null}
          */
         this.IndexId = null;
 
         /**
-         * Input parameter base64 string: {"Platform":0,"DataType":"1","BeginDate":"20251125","EndDate":"20251125"}
+         * Input parameter base64 string: {"Platform":0,"DataType":"1","BeginDate":"20251125","EndDate":"20251125"}.
          * @type {string || null}
          */
         this.QueryData = null;
@@ -13756,7 +13928,7 @@ class DescribeMNGActiveUserRealTimeStatisticsRequest extends  AbstractModel {
 }
 
 /**
- * Mini program advertising revenue
+ * Mini program advertising revenue.
  * @class
  */
 class MNPAdvertisingOverview extends  AbstractModel {
@@ -13764,7 +13936,7 @@ class MNPAdvertisingOverview extends  AbstractModel {
         super();
 
         /**
-         * Data
+         * Data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MNPAdOverview || null}
          */
@@ -13790,7 +13962,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Queries the details of a sensitive API permission request for a mini game
+ * Detail data for querying mini game sensitive API permission approval.
  * @class
  */
 class DescribeMNGSensitiveAPIPermissionApprovalData extends  AbstractModel {
@@ -13798,43 +13970,43 @@ class DescribeMNGSensitiveAPIPermissionApprovalData extends  AbstractModel {
         super();
 
         /**
-         * <p>API ID</p>
+         * <p>API ID.</p>
          * @type {string || null}
          */
         this.APIId = null;
 
         /**
-         * <p>API method</p>
+         * <p>API method.</p>
          * @type {string || null}
          */
         this.APIMethod = null;
 
         /**
-         * <p>Reason for request</p>
+         * <p>Reason for request.</p>
          * @type {string || null}
          */
         this.ApplyReason = null;
 
         /**
-         * <p>Reason for rejection</p>
+         * <p>Reason for rejection.</p>
          * @type {string || null}
          */
         this.RejectReason = null;
 
         /**
-         * <p>Approval status. 20: Rejected; 30: Approved</p>
+         * <p>Approval status. Valid values: 20: Rejected; 30: Approved.</p>
          * @type {number || null}
          */
         this.ApprovalStatus = null;
 
         /**
-         * <p>API feature description</p>
+         * <p>API feature description.</p>
          * @type {string || null}
          */
         this.APIDesc = null;
 
         /**
-         * <p>API type. Valid values: 1: System; 2: Custom</p>
+         * <p>API type. Valid values: 1: System; 2: Custom.</p>
          * @type {number || null}
          */
         this.APIType = null;
@@ -13868,7 +14040,7 @@ class DescribeMNPAccessAnalysisOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page
+         * Data display at the top of the page.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AccessAnalysisOverview || null}
          */
@@ -13909,7 +14081,7 @@ class ModifyTeamResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -13949,7 +14121,7 @@ class ModifyMNPResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {ResourceIdInfo || null}
          */
         this.Data = null;
@@ -13989,7 +14161,7 @@ class DescribeMNPPageAnalysisDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VisitData> || null}
          */
@@ -14033,7 +14205,7 @@ class DescribeApplicationConfigFileResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DownloadApplicationConfigResp || null}
          */
         this.Data = null;
@@ -14065,7 +14237,7 @@ class DescribeApplicationConfigFileResponse extends  AbstractModel {
 }
 
 /**
- * Used for Data object when no data is returned after the a successful action.
+ * Used for Data object when no data is returned after a successful action.
  * @class
  */
 class BooleanInfo extends  AbstractModel {
@@ -14073,7 +14245,7 @@ class BooleanInfo extends  AbstractModel {
         super();
 
         /**
-         * Bool type response object
+         * The Boolean response object. 
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
@@ -14102,7 +14274,7 @@ class DisableApplicationSensitiveAPIResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -14142,7 +14314,7 @@ class DescribeMNPMAULineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MAUChartData> || null}
          */
@@ -14178,7 +14350,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Team list
+ * Paginated team list.
  * @class
  */
 class DescribeTeamPageResp extends  AbstractModel {
@@ -14186,13 +14358,13 @@ class DescribeTeamPageResp extends  AbstractModel {
         super();
 
         /**
-         * Total count
+         * Total number of entries.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List information
+         * List data.
          * @type {Array.<DescribeTeamListInfoResp> || null}
          */
         this.DataList = null;
@@ -14221,7 +14393,7 @@ class DescribeTeamPageResp extends  AbstractModel {
 }
 
 /**
- * Global overview data
+ * Global overview data.
  * @class
  */
 class Overview extends  AbstractModel {
@@ -14229,49 +14401,49 @@ class Overview extends  AbstractModel {
         super();
 
         /**
-         * Superapps
+         * Number of superapps.
          * @type {number || null}
          */
         this.AppNum = null;
 
         /**
-         * Teams
+         * Number of teams.
          * @type {number || null}
          */
         this.CorpNum = null;
 
         /**
-         * Refresh time
+         * Refresh timestamp.
          * @type {string || null}
          */
         this.FlushTime = null;
 
         /**
-         * Mini programs
+         * Number of mini programs.
          * @type {number || null}
          */
         this.MiniAppNum = null;
 
         /**
-         * Mini games
+         * Number of mini games.
          * @type {number || null}
          */
         this.MiniGameNum = null;
 
         /**
-         * Mini game visits
+         * Number of mini game visits.
          * @type {number || null}
          */
         this.MiniGameVisitNum = null;
 
         /**
-         * Mini program updates
+         * Number of mini program updates.
          * @type {number || null}
          */
         this.UpdateNum = null;
 
         /**
-         * Mini program visits
+         * Number of mini program visits.
          * @type {number || null}
          */
         this.VisitNum = null;
@@ -14306,7 +14478,7 @@ class CreateMNPDomainACLResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -14346,7 +14518,7 @@ class DeleteMNGResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -14378,7 +14550,7 @@ class DeleteMNGResponse extends  AbstractModel {
 }
 
 /**
- * Advertising data list fields
+ * Ad data list fields.
  * @class
  */
 class OverviewDetail extends  AbstractModel {
@@ -14386,49 +14558,49 @@ class OverviewDetail extends  AbstractModel {
         super();
 
         /**
-         * Time
+         * Time.
          * @type {string || null}
          */
         this.DataTime = null;
 
         /**
-         * Name
+         * Name.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * Category
+         * Category.
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
-         * Estimated revenue
+         * Estimated revenue.
          * @type {string || null}
          */
         this.EstimatedEarnings = null;
 
         /**
-         * Requests
+         * Number of requests.
          * @type {number || null}
          */
         this.RequestsNumber = null;
 
         /**
-         * Impressions
+         * Number of impressions.
          * @type {number || null}
          */
         this.Impressions = null;
 
         /**
-         * Effective Cost Per Mille
+         * eCPM (effective cost per mille).
          * @type {string || null}
          */
         this.ECPM = null;
 
         /**
-         * Taps
+         * Number of taps.
          * @type {number || null}
          */
         this.ClicksNumber = null;
@@ -14463,7 +14635,7 @@ class ModifyApplicationConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -14503,25 +14675,25 @@ class DescribeTeamListRequest extends  AbstractModel {
         super();
 
         /**
-         * Pagination offset
+         * Pagination offset.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Page size
+         * Number of entries per page.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Team name to be queried
+         * Search keyword (team name).
          * @type {string || null}
          */
         this.Keyword = null;
@@ -14552,7 +14724,7 @@ class DescribeMNPApprovalListResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeMNPApprovalListResp || null}
          */
         this.Data = null;
@@ -14584,7 +14756,7 @@ class DescribeMNPApprovalListResponse extends  AbstractModel {
 }
 
 /**
- * Temporary key for file upload
+ * Temporary credentials for file upload.
  * @class
  */
 class UploadFileTempSecret extends  AbstractModel {
@@ -14592,49 +14764,49 @@ class UploadFileTempSecret extends  AbstractModel {
         super();
 
         /**
-         * Bucket
+         * Storage bucket.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Bucket = null;
 
         /**
-         * Region
+         * Region.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * Destination of upload
+         * Upload path.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * Temporary secret ID
+         * Temporary secret ID.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TempSecretId = null;
 
         /**
-         * Temporary secret key
+         * Temporary secret key.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TempSecretKey = null;
 
         /**
-         * Token 
+         * Token credential. 
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Token = null;
 
         /**
-         * Whether to enable global acceleration. Valid values: 0 (no), 1 (yes)
+         * Whether global acceleration is enabled. Valid values: 0: No; 1: Yes.
          * @type {number || null}
          */
         this.AccelerateEnable = null;
@@ -14668,7 +14840,7 @@ class EnableApplicationSensitiveAPIResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -14708,7 +14880,7 @@ class DeleteMNPResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -14748,13 +14920,13 @@ class RemoveMNGRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -14783,31 +14955,31 @@ class DescribeGlobalDomainACLRequest extends  AbstractModel {
         super();
 
         /**
-         * Page offset
+         * Pagination offset. 
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results per page
+         * Number of entries per page.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Domain type. 1: Allowed; 2: Blocked
+         * Domain type. Valid value: 1: Allowed; 2: Blocked.
          * @type {Array.<number> || null}
          */
         this.DomainTypes = null;
 
         /**
-         * Domain names to be queried
+         * Search keyword (domain).
          * @type {string || null}
          */
         this.Keyword = null;
@@ -14839,61 +15011,61 @@ class CreateApplicationRequest extends  AbstractModel {
         super();
 
         /**
-         * Application name
+         * Superapp name.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * Logo address
+         * Superapp logo URL.
          * @type {string || null}
          */
         this.Logo = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Introduction
+         * Superapp introduction.
          * @type {string || null}
          */
         this.Intro = null;
 
         /**
-         * Application type. 1: Test; 2: Formal
+         * Superapp type. Valid values: 1: Test; 2: Production.
          * @type {number || null}
          */
         this.ApplicationType = null;
 
         /**
-         * Android app package name
+         * Android app package name.
          * @type {string || null}
          */
         this.AndroidAppKey = null;
 
         /**
-         * iOS App bundleId
+         * iOS app bundle ID.
          * @type {string || null}
          */
         this.IosAppKey = null;
 
         /**
-         * Remarks
+         * Remarks.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Scheme
+         * Scheme.
          * @type {string || null}
          */
         this.Scheme = null;
@@ -14922,7 +15094,7 @@ class CreateApplicationRequest extends  AbstractModel {
 }
 
 /**
- * Overview of mini game visit analysis data
+ * Access analysis overview.
  * @class
  */
 class AccessAnalysisOverview extends  AbstractModel {
@@ -14930,28 +15102,28 @@ class AccessAnalysisOverview extends  AbstractModel {
         super();
 
         /**
-         * Overview of visit analysis data
+         * Access analysis overview data. 
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AccessAnalysisDetail || null}
          */
         this.BaseData = null;
 
         /**
-         * This API does not respond.
+         * Not returned by this API.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Overview || null}
          */
         this.Overview = null;
 
         /**
-         * This API does not respond.
+         * Not returned by this API.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AccessAnalysisDetail || null}
          */
         this.PageData = null;
 
         /**
-         * This API does not respond.
+         * Not returned by this API.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AccessAnalysisDetail || null}
          */
@@ -15003,25 +15175,25 @@ class ProcessMNPSensitiveAPIPermissionApprovalRequest extends  AbstractModel {
         super();
 
         /**
-         * Approval ID
+         * Approval number.
          * @type {string || null}
          */
         this.ApprovalNo = null;
 
         /**
-         * Approval status. 20: Rejected; 30: Approved
+         * Approval status. Valid values: 1: Processing; 20: Rejected; 30: Approved.
          * @type {number || null}
          */
         this.ApprovalStatus = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Approval notes
+         * Approval note.
          * @type {string || null}
          */
         this.ApprovalNote = null;
@@ -15052,37 +15224,37 @@ class DescribeMNPListRequest extends  AbstractModel {
         super();
 
         /**
-         * Page offset
+         * Pagination offset.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results per page
+         * Number of entries per page.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Keywords for search (mini program name)
+         * Search keyword (mini program name).
          * @type {string || null}
          */
         this.Keyword = null;
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
@@ -15107,7 +15279,7 @@ class DescribeMNPListRequest extends  AbstractModel {
 }
 
 /**
- * Response object for querying the list of sensitive APIs available to the mini game
+ * Response for querying the list of callable sensitive APIs of a mini game.
  * @class
  */
 class DescribeMNGSensitiveAPIPermissionListResp extends  AbstractModel {
@@ -15115,13 +15287,13 @@ class DescribeMNGSensitiveAPIPermissionListResp extends  AbstractModel {
         super();
 
         /**
-         * <p>Total number of entries</p>
+         * <p>Total number of entries.</p>
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * <p>List data</p>
+         * <p>List data.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DescribeMNGSensitiveAPIPermissionListData> || null}
          */
@@ -15191,7 +15363,7 @@ class DescribeTempSecret4UploadFile2CosResponse extends  AbstractModel {
 }
 
 /**
- * List of applications
+ * Response for querying the superapp list.
  * @class
  */
 class DescribeApplicationListResp extends  AbstractModel {
@@ -15199,13 +15371,13 @@ class DescribeApplicationListResp extends  AbstractModel {
         super();
 
         /**
-         * Total number of entries
+         * Total number of entries.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List information
+         * Superapp list data.
          * @type {Array.<DescribeApplicationListData> || null}
          */
         this.DataList = null;
@@ -15234,7 +15406,7 @@ class DescribeApplicationListResp extends  AbstractModel {
 }
 
 /**
- * Response object for querying the mini game version information
+ * Response for querying all-stage versions of a mini game.
  * @class
  */
 class DescribeMNGAllStageVersionsResp extends  AbstractModel {
@@ -15242,109 +15414,109 @@ class DescribeMNGAllStageVersionsResp extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Mini game version ID</p>
+         * <p>Mini game version ID.</p>
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * <p>Mini game name</p>
+         * <p>Mini game name.</p>
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * <p>Mini game icon</p>
+         * <p>Mini game icon.</p>
          * @type {string || null}
          */
         this.MNPIcon = null;
 
         /**
-         * <p>Mini game category</p>
+         * <p>Mini game category.</p>
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
-         * <p>Mini game introduction</p>
+         * <p>Mini game introduction.</p>
          * @type {string || null}
          */
         this.MNPIntro = null;
 
         /**
-         * <p>Mini game description</p>
+         * <p>Mini game description.</p>
          * @type {string || null}
          */
         this.MNPDesc = null;
 
         /**
-         * <p>Developer</p>
+         * <p>Creator.</p>
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * <p>Developer creation time</p>
+         * <p>Creation time.</p>
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * <p>Mini game version</p>
+         * <p>Mini game version.</p>
          * @type {string || null}
          */
         this.MNPVersion = null;
 
         /**
-         * <p>Version feature description</p>
+         * <p>Version feature introduction.</p>
          * @type {string || null}
          */
         this.MNPVersionIntro = null;
 
         /**
-         * <p>Version:</p> Develop, preview, released</p>
+         * <p>Stage: Develop, preview, available.</p>
          * @type {string || null}
          */
         this.Phase = null;
 
         /**
-         * <p>Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled</p>
+         * <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
          * @type {number || null}
          */
         this.ApprovalStatus = null;
 
         /**
-         * <p>Approval number</p>
+         * <p>Approval number.</p>
          * @type {string || null}
          */
         this.ApprovalNo = null;
 
         /**
-         * <p>Whether this is a preview. Valid values: 0: No; 1: Yes</p>
+         * <p>Whether this is a preview. Valid values: 0: No; 1: Yes.</p>
          * @type {number || null}
          */
         this.ShowCase = null;
 
         /**
-         * <p>Rollback version number</p>
+         * <p>Rollback version number.</p>
          * @type {number || null}
          */
         this.RollbackVersion = null;
 
         /**
-         * <p>Available status</p>
+         * <p>Available status.</p>
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * <p>Primary status of the current version. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled</p>
+         * <p>Current version approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
          * @type {number || null}
          */
         this.VersionCurrentStatus = null;
@@ -15389,7 +15561,7 @@ class DescribeMNPOfflinePackageURLResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {StringData || null}
          */
         this.Data = null;
@@ -15429,13 +15601,13 @@ class DeleteApplicationSensitiveAPIRequest extends  AbstractModel {
         super();
 
         /**
-         * API ID
+         * API ID.
          * @type {string || null}
          */
         this.APIId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -15464,7 +15636,7 @@ class CreateMNGApprovalResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {CreateMNGApprovalResp || null}
          */
         this.Data = null;
@@ -15504,37 +15676,37 @@ class DescribeMNPRetentionDataRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time
+         * Start time.
          * @type {number || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Type: 1 Production data, 0 Non-production data
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * End time
+         * End time.
          * @type {number || null}
          */
         this.TimeEnd = null;
 
         /**
-         * 0 All, 2 Android, 3 iOS
+         * Operating system. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
@@ -15559,7 +15731,7 @@ class DescribeMNPRetentionDataRequest extends  AbstractModel {
 }
 
 /**
- * Response for platform review of mini program version submission.
+ * Response for submitting a mini program version for approval.
  * @class
  */
 class CreateMNPApprovalResp extends  AbstractModel {
@@ -15567,13 +15739,13 @@ class CreateMNPApprovalResp extends  AbstractModel {
         super();
 
         /**
-         * Bool type response object
+         * The Boolean response object.
          * @type {boolean || null}
          */
         this.Result = null;
 
         /**
-         * Approval No.
+         * Approval nunmber.
          * @type {string || null}
          */
         this.ApprovalNo = null;
@@ -15602,7 +15774,7 @@ class DescribeMNPMAUMetricCardResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page
+         * Data display at the top of the page.
          * @type {MAUIndicatorCard || null}
          */
         this.Data = null;
@@ -15642,8 +15814,7 @@ class DescribeMNGCategoryResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Response data.</p>
          * @type {Array.<MNGTypeDefine> || null}
          */
         this.Data = null;
@@ -15678,7 +15849,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Mini program advertisement overview
+ * Mini program ad overview.
  * @class
  */
 class MNPAdOverview extends  AbstractModel {
@@ -15686,35 +15857,35 @@ class MNPAdOverview extends  AbstractModel {
         super();
 
         /**
-         * Estimated revenue
+         * Estimated revenue.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.EstimatedEarnings = null;
 
         /**
-         * Effective Cost Per Mille
+         * eCPM (effective cost per mille).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ECPM = null;
 
         /**
-         * Requests
+         * Number of requests.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RequestsNumber = null;
 
         /**
-         * Impressions
+         * Number of impressions.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Impressions = null;
 
         /**
-         * Taps
+         * Number of taps.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -15747,13 +15918,13 @@ class DeleteMNGRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game appid</p>
+         * <p>Mini game appid.</p>
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -15788,7 +15959,7 @@ class DescribeMNGVersionRequest extends  AbstractModel {
         this.BusinessId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -15817,37 +15988,37 @@ class DescribeMNPPageAnalysisDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Type: 0 Non-production data, 1 Production data
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Start time in YYYYMMDD format
+         * Start time in YYYYMMDD format.
          * @type {number || null}
          */
         this.TimeBegin = null;
 
         /**
-         * End time in YYYYMMDD format
+         * End time in YYYYMMDD format.
          * @type {number || null}
          */
         this.TimeEnd = null;
 
         /**
-         * 0 All, 2 Android, 3 iOS
+         * Operating system. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
@@ -15880,7 +16051,7 @@ class DescribeAPPDataOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {APPOverview || null}
          */
@@ -15921,19 +16092,19 @@ class DeleteTeamMemberRequest extends  AbstractModel {
         super();
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * User ID
+         * User ID.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -15955,7 +16126,7 @@ class DeleteTeamMemberRequest extends  AbstractModel {
 }
 
 /**
- * String object
+ * String data object.
  * @class
  */
 class StringData extends  AbstractModel {
@@ -15963,7 +16134,7 @@ class StringData extends  AbstractModel {
         super();
 
         /**
-         * string type response data.
+         * String response data. 
          * @type {string || null}
          */
         this.Data = null;
@@ -15991,13 +16162,13 @@ class RemoveMNPRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -16026,7 +16197,7 @@ class DescribeGlobalOverviewDataSummaryResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page
+         * Data display at the top of the page.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AccessAnalysisOverview || null}
          */
@@ -16067,46 +16238,52 @@ class CreateMNPRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program type
+         * <p>Mini program category.</p>
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
-         * Mini program name
+         * <p>Mini program name.</p>
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * Mini app icon
+         * <p>Mini program icon.</p>
          * @type {string || null}
          */
         this.MNPIcon = null;
 
         /**
-         * Mini program introduction
+         * <p>Mini program introduction.</p>
          * @type {string || null}
          */
         this.MNPIntro = null;
 
         /**
-         * Mini program description
+         * <p>Mini program description.</p>
          * @type {string || null}
          */
         this.MNPDesc = null;
 
         /**
-         * Platform ID
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Team ID
+         * <p>Team ID.</p>
          * @type {string || null}
          */
         this.TeamId = null;
+
+        /**
+         * <p>The mini program name and description in multiple languages.</p>
+         * @type {Array.<MNPI18NSyncDto> || null}
+         */
+        this.I18nList = null;
 
     }
 
@@ -16125,6 +16302,15 @@ class CreateMNPRequest extends  AbstractModel {
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
         this.TeamId = 'TeamId' in params ? params.TeamId : null;
 
+        if (params.I18nList) {
+            this.I18nList = new Array();
+            for (let z in params.I18nList) {
+                let obj = new MNPI18NSyncDto();
+                obj.deserialize(params.I18nList[z]);
+                this.I18nList.push(obj);
+            }
+        }
+
     }
 }
 
@@ -16137,19 +16323,19 @@ class DescribeGlobalOverviewDataSummaryRequest extends  AbstractModel {
         super();
 
         /**
-         * string: Overview
+         * string: Overview.
          * @type {string || null}
          */
         this.DataType = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Date in YYYYMMDD format
+         * Date in YYYYMMDD format.
          * @type {number || null}
          */
         this.DataTime = null;
@@ -16179,7 +16365,7 @@ class ProcessMNPSensitiveAPIPermissionApprovalResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -16211,7 +16397,7 @@ class ProcessMNPSensitiveAPIPermissionApprovalResponse extends  AbstractModel {
 }
 
 /**
- * Team details
+ * Team details.
  * @class
  */
 class DescribeTeamDetailResp extends  AbstractModel {
@@ -16219,73 +16405,73 @@ class DescribeTeamDetailResp extends  AbstractModel {
         super();
 
         /**
-         * Team name
+         * Team name.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Team role type 1-mini program team 2-application team
+         * Team role type. Valid values: 1: Mini program team; 2: Superapp team.
          * @type {number || null}
          */
         this.TeamRoleType = null;
 
         /**
-         * Administrator account
+         * Admin account.
          * @type {string || null}
          */
         this.AdminUserAccount = null;
 
         /**
-         * Creator
+         * Creator.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Number of team members
+         * Number of team members.
          * @type {number || null}
          */
         this.MemberCount = null;
 
         /**
-         * Number of bound mini program teams
+         * Number of bound mini program teams.
          * @type {number || null}
          */
         this.BindMiniTeamCount = null;
 
         /**
-         * Name of the bound team
+         * Name of the bound team.
          * @type {string || null}
          */
         this.BindTeamName = null;
 
         /**
-         * Team registration link
+         * Team registration link.
          * @type {string || null}
          */
         this.RegisterLink = null;
 
         /**
-         * Application name. It Is required when querying details of a mini program team.
+         * Superapp name. Only returned for mini program teams.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * Team expiration time. 0 means never expire.
+         * Team expiration time. 0 indicates no expiration. 
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * Team status. valid values: 1: normal; 2: disabled; 3: expired.
+         * Team status. Valid values: 1: Active; 2: Disabled; 3: Expired. 
          * @type {number || null}
          */
         this.Status = null;
@@ -16324,7 +16510,7 @@ class DescribeMNGMAUDataDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MAUDetail> || null}
          */
@@ -16360,7 +16546,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Detailed visit analysis data
+ * Access analysis detail data.
  * @class
  */
 class AccessAnalysisDetail extends  AbstractModel {
@@ -16368,61 +16554,61 @@ class AccessAnalysisDetail extends  AbstractModel {
         super();
 
         /**
-         * Number of new devices
+         * Number of new devices.
          * @type {number || null}
          */
         this.ActiveCount = null;
 
         /**
-         * Average visit duration per user
+         * Average visit duration per user.
          * @type {string || null}
          */
         this.AvgDevice = null;
 
         /**
-         * Average visit duration per session
+         * Average visit duration per session.
          * @type {string || null}
          */
         this.AvgOnce = null;
 
         /**
-         * Average opens per user
+         * Average opens per user.
          * @type {string || null}
          */
         this.AvgOpenCount = null;
 
         /**
-         * Date
+         * Date.
          * @type {string || null}
          */
         this.DataTime = null;
 
         /**
-         * Data time
+         * Data refresh time.
          * @type {string || null}
          */
         this.FlushTime = null;
 
         /**
-         * Number of active devices
+         * Number of active devices.
          * @type {number || null}
          */
         this.NewCount = null;
 
         /**
-         * Number of opens
+         * Number of opens.
          * @type {number || null}
          */
         this.OpenCount = null;
 
         /**
-         * Number of shares
+         * Number of shares.
          * @type {number || null}
          */
         this.TotalShareNum = null;
 
         /**
-         * Cumulative users
+         * Cumulative users.
          * @type {number || null}
          */
         this.TotalUserNum = null;
@@ -16459,7 +16645,7 @@ class DescribeGlobalDomainACLResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeGlobalDomainsResp || null}
          */
         this.Data = null;
@@ -16499,13 +16685,13 @@ class ReleaseMNGVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game version ID</p>
+         * <p>Mini game version ID.</p>
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -16534,7 +16720,7 @@ class CreatePresetKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -16562,19 +16748,19 @@ class CreateMNGApprovalRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Mini game version ID</p>
+         * <p>Mini game version ID.</p>
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * <p>submit: Submit for approval; cancel: Cancel approval</p>
+         * <p>submit: Submit an approval request; cancel: Cancel the approval request.</p>
          * @type {string || null}
          */
         this.ApplyAction = null;
 
         /**
-         * <p>Platform ID</p>
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -16596,7 +16782,7 @@ class CreateMNGApprovalRequest extends  AbstractModel {
 }
 
 /**
- * Encryption key returned
+ * Response for obtaining the encryption key.
  * @class
  */
 class PresetResp extends  AbstractModel {
@@ -16604,7 +16790,7 @@ class PresetResp extends  AbstractModel {
         super();
 
         /**
-         * RSA encryption public key.
+         * RSA public key.
          * @type {string || null}
          */
         this.Key = null;
@@ -16632,7 +16818,7 @@ class CreateApplicationResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {ResourceIdStringInfo || null}
          */
         this.Data = null;
@@ -16672,7 +16858,7 @@ class DescribeMNPCategoryRequest extends  AbstractModel {
         super();
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -16700,7 +16886,7 @@ class DescribeMNGMAULineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page
+         * Data display at the top of the page.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MNGMAULineChartData> || null}
          */
@@ -16744,7 +16930,7 @@ class DeleteApplicationSensitiveAPIResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -16784,7 +16970,7 @@ class DescribeMNGAdvertisingDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<OverviewDetail> || null}
          */
@@ -16828,13 +17014,13 @@ class EnableApplicationSensitiveAPIRequest extends  AbstractModel {
         super();
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * API ID
+         * API ID.
          * @type {string || null}
          */
         this.APIId = null;
@@ -16863,7 +17049,7 @@ class ModifyMNGResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response data</p>
+         * <p>Response data.</p>
          * @type {ResourceIdInfo || null}
          */
         this.Data = null;
@@ -16903,13 +17089,13 @@ class DeleteGlobalDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * Domain ID
+         * Domain ID.
          * @type {number || null}
          */
         this.DomainId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -16938,37 +17124,37 @@ class DescribeMNGAccessAnalysisDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time in YYYYMMDD format
+         * Start time in YYYYMMDD format.
          * @type {number || null}
          */
         this.TimeBegin = null;
 
         /**
-         * Mini program appid
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Type: 0 Non-production data, 1 Production data
+         * Data type. Valid values: 0: Non-production data; 1: Production data.
          * @type {number || null}
          */
         this.DataType = null;
 
         /**
-         * Tenant ID
+         * Tenant ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * 0 All, 2 Android, 3 iOS
+         * Operating system. Valid values: 0: All; 2: Android; 3: iOS.
          * @type {number || null}
          */
         this.Platform = null;
 
         /**
-         * End time in YYYYMMDD format
+         * End time in YYYYMMDD format.
          * @type {number || null}
          */
         this.TimeEnd = null;
@@ -16993,7 +17179,7 @@ class DescribeMNGAccessAnalysisDetailRequest extends  AbstractModel {
 }
 
 /**
- * Response of deleting a global domain name
+ * Response for deleting a global domain.
  * @class
  */
 class GlobalDomainDeleteResp extends  AbstractModel {
@@ -17001,7 +17187,7 @@ class GlobalDomainDeleteResp extends  AbstractModel {
         super();
 
         /**
-         * Result.
+         * Operation result.
          * @type {boolean || null}
          */
         this.Result = null;
@@ -17021,7 +17207,7 @@ class GlobalDomainDeleteResp extends  AbstractModel {
 }
 
 /**
- * Mini program list
+ * Response for querying the mini program list.
  * @class
  */
 class DescribeMNPListResp extends  AbstractModel {
@@ -17029,13 +17215,13 @@ class DescribeMNPListResp extends  AbstractModel {
         super();
 
         /**
-         * Total number of entries
+         * Total number of entries.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List information
+         * List data.
          * @type {Array.<DescribeMNPListData> || null}
          */
         this.DataList = null;
@@ -17072,7 +17258,7 @@ class DeleteGlobalDomainResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {GlobalDomainDeleteResp || null}
          */
         this.Data = null;
@@ -17104,7 +17290,7 @@ class DeleteGlobalDomainResponse extends  AbstractModel {
 }
 
 /**
- * Mini game MAU line chart data
+ * Mini game MAU line chart data.
  * @class
  */
 class MNGMAULineChartData extends  AbstractModel {
@@ -17112,21 +17298,21 @@ class MNGMAULineChartData extends  AbstractModel {
         super();
 
         /**
-         * Year-month-date data
+         * Date in YYYYMM format. 
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DataTime = null;
 
         /**
-         * MAU data
+         * MAU count.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MAUCount = null;
 
         /**
-         * Update time
+         * Last modified time.
          * @type {number || null}
          */
         this.UpdateTime = null;
@@ -17156,7 +17342,7 @@ class DescribeUserResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeUserDetailResp || null}
          */
         this.Data = null;
@@ -17196,7 +17382,7 @@ class DescribeMNGPaymentOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display
+         * Data display.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MNGPaymentOverview || null}
          */
@@ -17237,19 +17423,19 @@ class DescribeMNPPreviewRequest extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID
+         * Mini program appid.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Mini program version ID
+         * Mini program version ID.
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -17271,7 +17457,7 @@ class DescribeMNPPreviewRequest extends  AbstractModel {
 }
 
 /**
- * Response of creating a global domain name
+ * Response for creating a global domain.
  * @class
  */
 class CreateGlobalDomainResp extends  AbstractModel {
@@ -17279,25 +17465,25 @@ class CreateGlobalDomainResp extends  AbstractModel {
         super();
 
         /**
-         * Result
+         * Operation result. 
          * @type {boolean || null}
          */
         this.Result = null;
 
         /**
-         * Indicates the duplicate domain name.
+         * Duplicate domains.
          * @type {Array.<string> || null}
          */
         this.RepeatUrls = null;
 
         /**
-         * Lists allowed domain names.
+         * Domains that already exist in the allowlist.
          * @type {Array.<string> || null}
          */
         this.ExistsWhiteUrls = null;
 
         /**
-         * Indicates the domain name already exists in the blocklist.
+         * Domains that already exist in the blocklist. 
          * @type {Array.<string> || null}
          */
         this.ExistsBlackUrls = null;
@@ -17328,19 +17514,19 @@ class CreateGlobalDomainACLRequest extends  AbstractModel {
         super();
 
         /**
-         * Domain name list
+         * Domain list.
          * @type {Array.<string> || null}
          */
         this.DomainUrlList = null;
 
         /**
-         * Domain type. 1: Allowed; 2: Blocked
+         * Domain type. Valid value: 1: Allowed; 2: Blocked.
          * @type {number || null}
          */
         this.DomainType = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -17370,37 +17556,37 @@ class DescribeApplicationSensitiveAPIListRequest extends  AbstractModel {
         super();
 
         /**
-         * Page offset
+         * Pagination offset. 
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results per page
+         * Number of entries per page. 
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Platform ID
+         * Platform ID.
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Application ID
+         * Superapp ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Keywords for search (API name or method)
+         * Search keyword (API name or method).
          * @type {string || null}
          */
         this.Keyword = null;
 
         /**
-         * Team ID
+         * Team ID.
          * @type {string || null}
          */
         this.TeamId = null;
@@ -17433,7 +17619,7 @@ class DescribeTeamMemberListResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {DescribeTeamMemberListPageResp || null}
          */
         this.Data = null;
@@ -17473,7 +17659,7 @@ class CreateApplicationConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data
+         * Response data.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -17505,7 +17691,7 @@ class CreateApplicationConfigResponse extends  AbstractModel {
 }
 
 /**
- * List of members
+ * Paginated team member list.
  * @class
  */
 class DescribeTeamMemberListPageResp extends  AbstractModel {
@@ -17513,13 +17699,13 @@ class DescribeTeamMemberListPageResp extends  AbstractModel {
         super();
 
         /**
-         * Total number of entries
+         * Total number of entries.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List information
+         * List data.
          * @type {Array.<DescribeTeamMemberInfoResp> || null}
          */
         this.DataList = null;
@@ -17702,6 +17888,7 @@ module.exports = {
     DescribeMNGRetentionDataResponse: DescribeMNGRetentionDataResponse,
     DescribeApplicationConfigInfo: DescribeApplicationConfigInfo,
     DescribeMNPRequest: DescribeMNPRequest,
+    MNPI18NSyncDto: MNPI18NSyncDto,
     DescribeMNPPreviewResp: DescribeMNPPreviewResp,
     CreateGlobalDomainACLResponse: CreateGlobalDomainACLResponse,
     RollbackMNPVersionRequest: RollbackMNPVersionRequest,
@@ -17731,6 +17918,7 @@ module.exports = {
     DescribeMNPSensitiveAPIPermissionListResponse: DescribeMNPSensitiveAPIPermissionListResponse,
     AddTeamMemberResponse: AddTeamMemberResponse,
     DescribeMNPMAUMetricCardRequest: DescribeMNPMAUMetricCardRequest,
+    MNPDetailI18nVO: MNPDetailI18nVO,
     DescribeMNPResponse: DescribeMNPResponse,
     CreateTeamResponse: CreateTeamResponse,
     CreateMNPSensitiveAPIPermissionApprovalResponse: CreateMNPSensitiveAPIPermissionApprovalResponse,

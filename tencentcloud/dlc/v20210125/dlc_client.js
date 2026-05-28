@@ -59,7 +59,7 @@ const SwitchDataEngineImageResponse = models.SwitchDataEngineImageResponse;
 const PythonSparkImage = models.PythonSparkImage;
 const Task = models.Task;
 const DataEngineConfigInstanceInfo = models.DataEngineConfigInstanceInfo;
-const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
+const CreateUserRoleResponse = models.CreateUserRoleResponse;
 const CrontabResumeSuspendStrategy = models.CrontabResumeSuspendStrategy;
 const DescribeQueryResponse = models.DescribeQueryResponse;
 const CreateCHDFSBindingProductRequest = models.CreateCHDFSBindingProductRequest;
@@ -119,6 +119,7 @@ const UpdateDataEngineResponse = models.UpdateDataEngineResponse;
 const DescribeTaskStatisticsResponse = models.DescribeTaskStatisticsResponse;
 const DeleteUserResponse = models.DeleteUserResponse;
 const SortOrder = models.SortOrder;
+const CreateUserRoleRequest = models.CreateUserRoleRequest;
 const SparkSessionBatchLog = models.SparkSessionBatchLog;
 const DescribeEngineUsageInfoRequest = models.DescribeEngineUsageInfoRequest;
 const SmartOptimizerWrittenPolicy = models.SmartOptimizerWrittenPolicy;
@@ -239,6 +240,7 @@ const CheckDataEngineImageCanBeRollbackResponse = models.CheckDataEngineImageCan
 const SmartPolicyBaseInfo = models.SmartPolicyBaseInfo;
 const CreateStoreLocationRequest = models.CreateStoreLocationRequest;
 const DescribeThirdPartyAccessUserResponse = models.DescribeThirdPartyAccessUserResponse;
+const TaskResultInfo = models.TaskResultInfo;
 const CreateResultDownloadRequest = models.CreateResultDownloadRequest;
 const DescribeLakeFsInfoResponse = models.DescribeLakeFsInfoResponse;
 const DescribeJobsRequest = models.DescribeJobsRequest;
@@ -267,7 +269,7 @@ const TagInfo = models.TagInfo;
 const NetworkConnection = models.NetworkConnection;
 const CreateTasksRequest = models.CreateTasksRequest;
 const SuspendResumeDataEngineRequest = models.SuspendResumeDataEngineRequest;
-const TaskResultInfo = models.TaskResultInfo;
+const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
 const DescribeSparkAppJobsResponse = models.DescribeSparkAppJobsResponse;
 const DeleteThirdPartyAccessUserResponse = models.DeleteThirdPartyAccessUserResponse;
 const DescribeSparkAppTasksResponse = models.DescribeSparkAppTasksResponse;
@@ -1332,6 +1334,17 @@ class DlcClient extends AbstractClient {
     CreateDataEngine(req, cb) {
         let resp = new CreateDataEngineResponse();
         this.request("CreateDataEngine", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a user role.
+     * @param {CreateUserRoleRequest} req
+     * @param {function(string, CreateUserRoleResponse):void} cb
+     * @public
+     */
+    CreateUserRole(req, cb) {
+        let resp = new CreateUserRoleResponse();
+        this.request("CreateUserRole", req, resp, cb);
     }
 
     /**

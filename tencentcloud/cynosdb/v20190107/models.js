@@ -1075,31 +1075,31 @@ class CreateClustersResponse extends  AbstractModel {
         super();
 
         /**
-         * Frozen transaction ID.
+         * <p>Frozen transaction ID</p>
          * @type {string || null}
          */
         this.TranId = null;
 
         /**
-         * Order ID
+         * <p>Order ID</p>
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
 
         /**
-         * Resource ID list (this field is no longer maintained. please use the dealNames field and the DescribeResourcesByDealName query API to obtain resource ids.).
+         * <p>Resource ID list (This field is no longer maintained. Please use the dealNames field to query the API DescribeResourcesByDealName to obtain resource IDs)</p>
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
 
         /**
-         * Cluster ID list. this field is no longer maintained. please use the dealNames field and the DescribeResourcesByDealName query API to get the cluster ID.
+         * <p>Cluster ID list (This field is no longer maintained. Please use the dealNames field and the query API DescribeResourcesByDealName to get the cluster ID)</p>
          * @type {Array.<string> || null}
          */
         this.ClusterIds = null;
 
         /**
-         * Big order ID
+         * <p>Large Order ID</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
@@ -5462,301 +5462,283 @@ class CreateClustersRequest extends  AbstractModel {
         super();
 
         /**
-         * AZ
+         * <p>AZ.</p>
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * VPC ID
+         * <p>VPC network ID</p>
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Subnet ID
+         * <p>Subnet ID</p>
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * Database type. Valid values: 
-<li> MYSQL </li>
+         * <p>Database type</p><p>Enumeration value:</p><ul><li>MYSQL: MYSQL</li></ul>
          * @type {string || null}
          */
         this.DbType = null;
 
         /**
-         * Database version. Valid values: 
-<li> Valid values for `MYSQL`: 5.7 and 8.0 </li>
+         * <p>Database version</p><p>Enumeration value:</p><ul><li>5.7: MySQL 5.7 edition</li><li>8.0: MySQL 8.0 edition</li></ul>
          * @type {string || null}
          */
         this.DbVersion = null;
 
         /**
-         * Project ID.
+         * <p>project-ID</p>
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * It is required when `DbMode` is set to `NORMAL` or left empty.
-Number of CPU cores of normal instance
+         * <p>Required when DbMode is NORMAL or left blank<br>Cpu cores of the regular instance</p>
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * It is required when `DbMode` is set to `NORMAL` or left empty.
-Memory of a non-serverless instance in GB
+         * <p>Required when DbMode is NORMAL or left blank<br>Ordinary instance memory in GB</p>
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * Instance count. valid values: a quantity range from 0 to 16. the default value is 2 (that is, one rw instance + one ro instance). the transmitted n represents 1 rw instance + (n - 1) ro instances (with identical specifications). if a more precise cluster composition collocation is required, please use InstanceInitInfos.
+         * <p>Instance count</p><p>Value ranges from [1, 16]</p><p>Default value: 2</p><ul><li>A value of 2 means one rw instance + one ro instance.</li><li>The transmitted n refers to one rw instance + n-1 ro instances (identical specifications).</li><li>For a more precise cluster composition collocation, please use InstanceInitInfos.</li><li>The value set by this parameter is suitable for provisioned resource cluster. If needed to set the specifications and quantity of Serverless cluster, please use the InstanceInitInfo structure in InstanceInitInfos.n.</li></ul>
          * @type {number || null}
          */
         this.InstanceCount = null;
 
         /**
-         * This parameter has been deprecated.
-Storage capacity in GB
+         * <p>This parameter is meaningless and abandoned.<br>Storage size, in GB.</p>
          * @type {number || null}
          */
         this.Storage = null;
 
         /**
-         * Cluster name, which can contain less than 64 letters, digits, or symbols (-_.).
+         * <p>Cluster name, length less than 64 characters, each character value ranges from uppercase/lowercase letters, digits, special symbols ('-', '_', '.')</p>
          * @type {string || null}
          */
         this.ClusterName = null;
 
         /**
-         * Account password, which must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).
+         * <p>Account (8-64 characters, a combination of uppercase and lowercase letters, digits and symbols ~!@#$%^&amp;*_-+=`|(){}[]:;&#39;&lt;&gt;,.?/ with any three types required)</p>
          * @type {string || null}
          */
         this.AdminPassword = null;
 
         /**
-         * Port. Valid range: [0, 65535). Default value: 3306
+         * <p>Port, default 3306, in the range of [0, 65535)</p>
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Billing mode. supported values: 0 and 1. default value: 0.
-Value is 0, indicating pay-as-you-go billing.
-Value is 1, which means yearly/monthly subscription.
+         * <p>Billing mode</p><p>Enumeration value:</p><ul><li>0: Pay-as-you-go billing</li><li>1: Monthly Subscription</li></ul><p>Default value: 0</p>
          * @type {number || null}
          */
         this.PayMode = null;
 
         /**
-         * Number of purchased clusters. Valid range: [1,50]. Default value: 1
+         * <p>Number of clusters to purchase. Optional value range: [1,50]. Default is 1.</p>
          * @type {number || null}
          */
         this.Count = null;
 
         /**
-         * Rollback type:
-noneRollback: no rollback;
-snapRollback: rollback by snapshot;
-timeRollback: rollback by time point
+         * <p>Rollback type</p><p>Enumeration value:</p><ul><li>noneRollback: No rollback</li><li>snapRollback: Snapshot rollback</li><li>timeRollback: Point-in-time rollback</li></ul>
          * @type {string || null}
          */
         this.RollbackStrategy = null;
 
         /**
-         * `snapshotId` for snapshot rollback or `queryId` for time point rollback. 0 indicates to determine whether the time point is valid
+         * <p>Snapshot rollback means snapshotId; point-in-time rollback means queryId. A value of 0 indicates requirement to judge whether the time point is valid.</p>
          * @type {number || null}
          */
         this.RollbackId = null;
 
         /**
-         * The source cluster ID passed in during rollback to find the source `poolId`
+         * <p>During rollback, input the source cluster ID to search for the source poolId</p>
          * @type {string || null}
          */
         this.OriginalClusterId = null;
 
         /**
-         * Specified time for time point rollback or snapshot time for snapshot rollback
+         * <p>Point-in-time rollback, specified time; snapshot rollback, snapshot time</p>
          * @type {string || null}
          */
         this.ExpectTime = null;
 
         /**
-         * This parameter has been deprecated.
-Specified allowed time range for time point rollback
+         * <p>This parameter is meaningless and abandoned.<br>Point-in-time rollback, allowed range of specified time.</p>
          * @type {number || null}
          */
         this.ExpectTimeThresh = null;
 
         /**
-         * Storage upper limit of normal instance in GB
-If `DbType` is `MYSQL` and the storage billing mode is yearly/monthly subscription, the parameter value can't exceed the maximum storage corresponding to the CPU and memory specifications.
+         * <p>Ordinary instance storage cap, in GB<br>When DbType is MYSQL and the storage billing mode is prepaid, this parameter should not exceed the maximum storage specification corresponding to cpu and memory.</p>
          * @type {number || null}
          */
         this.StorageLimit = null;
 
         /**
-         * Purchase duration of yearly/monthly subscription plan
+         * <p>Annual and monthly subscription duration</p>
          * @type {number || null}
          */
         this.TimeSpan = null;
 
         /**
-         * Duration unit of yearly/monthly subscription. Valid values: `s`, `d`, `m`, `y`
+         * <p>Annual and monthly subscription duration unit, ['s', 'd', 'm', 'y']</p>
          * @type {string || null}
          */
         this.TimeUnit = null;
 
         /**
-         * Specifies whether the annual/yearly/monthly subscription is auto-renewed. the default value is 0.
-0 indicates the default renewal method. 1 means auto-renewal. 2 means no auto-renewal.
+         * <p>Whether Annual/Monthly Subscription is auto-renewed</p><p>Enumeration value:</p><ul><li>0: Default renewal method</li><li>1: Auto-renewal</li><li>2: No auto-renewal</li></ul><p>Default value: 0</p>
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
 
         /**
-         * Whether to automatically select a voucher. `1`: yes; `0`: no. Default value: `0`
+         * <p>Whether to automatically select voucher 1 Yes 0 No Default value: 0</p><p>Enumeration value:</p><ul><li>1: Yes</li><li>0: No</li></ul><p>Default value: 0</p>
          * @type {number || null}
          */
         this.AutoVoucher = null;
 
         /**
-         * Number of instances (this parameter has been disused and is retained only for compatibility with existing instances)
+         * <p>Instance count (this parameter is deprecated and only for existing accommodative)</p>
          * @type {number || null}
          */
         this.HaCount = null;
 
         /**
-         * Order source
+         * <p>Order source</p>
          * @type {string || null}
          */
         this.OrderSource = null;
 
         /**
-         * Array of tags to be bound to the created cluster
+         * <p>tag Array info that should be bound for cluster creation</p>
          * @type {Array.<Tag> || null}
          */
         this.ResourceTags = null;
 
         /**
-         * Database type
-Valid values when `DbType` is `MYSQL` (default value: `NORMAL`):
-<li>NORMAL</li>
-<li>SERVERLESS</li>
+         * <p>Db type</p><p>Enumeration value:</p><ul><li>NORMAL: NORMAL instance</li><li>SERVERLESS: SERVERLESS instance</li></ul><p>Default value: NORMAL</p><p>Selectable when DbType is MYSQL (default NORMAL)</p>
          * @type {string || null}
          */
         this.DbMode = null;
 
         /**
-         * This parameter is required if `DbMode` is `SERVERLESS`.
-Minimum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
+         * <p>Required when DbMode is SERVERLESS<br>Minimum value of cpu. For optional range, see API response of DescribeServerlessInstanceSpecs</p>
          * @type {number || null}
          */
         this.MinCpu = null;
 
         /**
-         * This parameter is required if `DbMode` is `SERVERLESS`.
-Maximum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
+         * <p>Required when DbMode is SERVERLESS:<br>Maximum value of cpu. For optional range, see API response of DescribeServerlessInstanceSpecs.</p>
          * @type {number || null}
          */
         this.MaxCpu = null;
 
         /**
-         * This parameter specifies whether the cluster will be automatically paused if `DbMode` is `SERVERLESS`. Valid values:
-<li>yes</li>
-<li>no</li>
-Default value: yes
+         * <p>No auto pause</p><p>Enumeration value:</p><ul><li>yes: Yes</li><li>no: No</li></ul><p>Default value: yes</p><p>Take effect when DbMode is SERVERLESS</p>
          * @type {string || null}
          */
         this.AutoPause = null;
 
         /**
-         * This parameter specifies the delay for automatic cluster pause in seconds if `DbMode` is `SERVERLESS`. Value range: [600,691200]
-Default value: `600`
+         * <p>When DbMode is SERVERLESS, specify the delay for Cluster Auto-Pause in seconds. Optional range: [600,691200]<br>Default value: 600</p>
          * @type {number || null}
          */
         this.AutoPauseDelay = null;
 
         /**
-         * The billing mode of cluster storage. Valid values: `0` (pay-as-you-go), `1` (yearly/monthly subscription). Default value: `0`.
-If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be pay-as-you-go.
-Clusters with storage billed in yearly/monthly subscription can't be cloned or rolled back.
+         * <p>The storage billing mode of the cluster. Pay-As-You-Go: 0, Monthly Subscription: 1. Default is Pay-As-You-Go.<br>When DbType is MYSQL and the compute billing mode of the cluster is postpaid (including DbMode as SERVERLESS), the storage billing mode can only be Pay-As-You-Go.<br>Rollback and clone do not support Monthly Subscription storage.</p>
          * @type {number || null}
          */
         this.StoragePayMode = null;
 
         /**
-         * Array of security group IDs
+         * <p>Security group id array</p>
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
 
         /**
-         * Array of alarm policy IDs
+         * <p>Alarm policy Id array</p>
          * @type {Array.<string> || null}
          */
         this.AlarmPolicyIds = null;
 
         /**
-         * Array of parameters. Valid values: `character_set_server` (utf8/latin1/gbk/utf8mb4), `lower_case_table_names`. 0: case-sensitive; 1: case-insensitive).
+         * <p>Parameter array, temporarily supports character_set_server (utf8|latin1|gbk|utf8mb4), lower_case_table_names, 1-case-insensitive, 0-case-sensitive</p>
          * @type {Array.<ParamItem> || null}
          */
         this.ClusterParams = null;
 
         /**
-         * Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+         * <p>Transaction mode</p><p>Enumeration value:</p><ul><li>0: Place order and pay</li><li>1: Place order</li></ul><p>Default value: 0</p>
          * @type {number || null}
          */
         this.DealMode = null;
 
         /**
-         * Parameter template ID, which can be obtained by querying parameter template information "DescribeParamTemplates"
+         * <p>Parameter template ID. The parameter template ID can be obtained through querying parameter template information DescribeParamTemplates.</p>
          * @type {number || null}
          */
         this.ParamTemplateId = null;
 
         /**
-         * Multi-AZ address
+         * <p>Multi-AZ address</p>
          * @type {string || null}
          */
         this.SlaveZone = null;
 
         /**
-         * Instance initialization configuration information, which is used to select instances with different specifications when purchasing a cluster.
+         * <p>Instance initialization configuration information is mainly used to select different specification instances during cluster purchase.</p>
          * @type {Array.<InstanceInitInfo> || null}
          */
         this.InstanceInitInfos = null;
 
         /**
-         * Global database unique identifier.
+         * <p>Global database unique ID</p>
          * @type {string || null}
          */
         this.GdnId = null;
 
         /**
-         * Database proxy configuration.
+         * <p>Database proxy configuration</p>
          * @type {ProxyConfig || null}
          */
         this.ProxyConfig = null;
 
         /**
-         * Automatically archive.
+         * <p>Auto archive or not</p><p>Enumeration value:</p><ul><li>yes: Yes</li><li>no: No</li></ul><p>Default value: no</p><p>This parameter takes effect only when the primary instance of the current cluster is SERVERLESS</p>
          * @type {string || null}
          */
         this.AutoArchive = null;
 
         /**
-         * Archiving processing time after pausing.
+         * <p>Archiving processing time after pausing</p><p>Measurement unit: hour</p><p>Default value: 12</p><p>This parameter takes effect only when the primary instance of the current cluster is SERVERLESS.</p>
          * @type {number || null}
          */
         this.AutoArchiveDelayHours = null;
 
         /**
-         * Kernel minor version number.
+         * <p>Cluster level, optional. Example: P0, P1. (This field can be ignored)</p>
+         * @type {string || null}
+         */
+        this.ClusterLevel = null;
+
+        /**
+         * <p>Kernel minor version</p>
          * @type {string || null}
          */
         this.CynosVersion = null;
@@ -5844,6 +5826,7 @@ Clusters with storage billed in yearly/monthly subscription can't be cloned or r
         }
         this.AutoArchive = 'AutoArchive' in params ? params.AutoArchive : null;
         this.AutoArchiveDelayHours = 'AutoArchiveDelayHours' in params ? params.AutoArchiveDelayHours : null;
+        this.ClusterLevel = 'ClusterLevel' in params ? params.ClusterLevel : null;
         this.CynosVersion = 'CynosVersion' in params ? params.CynosVersion : null;
 
     }
@@ -9739,49 +9722,49 @@ class ProxyConfig extends  AbstractModel {
         super();
 
         /**
-         * Number of database proxy group nodes. this parameter is no longer recommended. recommend using ProxyZones.
+         * <p>Number of database proxy group nodes. This parameter is no longer recommended. Recommend using ProxyZones.</p>
          * @type {number || null}
          */
         this.ProxyCount = null;
 
         /**
-         * Number of CPU cores
+         * <p>cpu cores</p>
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * Memory.
+         * <p>Memory</p>
          * @type {number || null}
          */
         this.Mem = null;
 
         /**
-         * Connection pool type: SessionConnectionPool (session-level connection pool).
+         * <p>Connection pool type: SessionConnectionPool (session-level connection pool)</p>
          * @type {string || null}
          */
         this.ConnectionPoolType = null;
 
         /**
-         * Whether to enable the connection pool. valid values: yes (enable), no (not enabled).
+         * <p>Whether the connection pool is enabled, yes-enable, no-disable</p>
          * @type {string || null}
          */
         this.OpenConnectionPool = null;
 
         /**
-         * Connection pool threshold. measurement unit (seconds).
+         * <p>Connection pool threshold: Measurement unit (seconds)</p>
          * @type {number || null}
          */
         this.ConnectionPoolTimeOut = null;
 
         /**
-         * Description.
+         * <p>description</p>
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * Database node information (this parameter is used in combination with ProxyCount, either one must be manually input).
+         * <p>Database node information (this parameter is used in combination with ProxyCount and either one must be input)</p>
          * @type {Array.<ProxyZone> || null}
          */
         this.ProxyZones = null;
@@ -15676,57 +15659,55 @@ class InstanceInitInfo extends  AbstractModel {
         super();
 
         /**
-         * Instance CPU
+         * <p>Instance cpu</p>
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * Instance memory
+         * <p>Instance memory</p>
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * Instance type. Valid values:`rw`, `ro`.
+         * <p>Instance type rw/ro</p>
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * Number of the instances. Value range: 1-15.
+         * <p>Number of instances, range [1,15]</p>
          * @type {number || null}
          */
         this.InstanceCount = null;
 
         /**
-         * Minimum number of serverless instances. Value range: 1-15.
+         * <p>Minimum count of Serverless instance, range [1,15]</p>
          * @type {number || null}
          */
         this.MinRoCount = null;
 
         /**
-         * Maximum number of serverless instances. Value range: 1-15.
+         * <p>Maximum count of Serverless instances, range [1,15]</p>
          * @type {number || null}
          */
         this.MaxRoCount = null;
 
         /**
-         * Minimum specifications for serverless instance
+         * <p>Minimum specification of Serverless instance</p>
          * @type {number || null}
          */
         this.MinRoCpu = null;
 
         /**
-         * Maximum specifications for serverless instance
+         * <p>Maximum specification of Serverless instance</p>
          * @type {number || null}
          */
         this.MaxRoCpu = null;
 
         /**
-         * Instance machine type.
-1. common: general.
-2. exclusive: exclusive.
+         * <p>Instance Machine Type</p><ol><li>common, universal type.</li><li>exclusive, dedicated.</li></ol>
          * @type {string || null}
          */
         this.DeviceType = null;

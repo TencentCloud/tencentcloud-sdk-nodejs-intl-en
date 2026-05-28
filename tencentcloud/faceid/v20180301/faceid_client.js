@@ -27,7 +27,7 @@ const MobileStatusRequest = models.MobileStatusRequest;
 const OCRResult = models.OCRResult;
 const BangladeshIDCard = models.BangladeshIDCard;
 const LivenessCompareResponse = models.LivenessCompareResponse;
-const GenerateReflectSequenceResponse = models.GenerateReflectSequenceResponse;
+const PhilippinesSSSID = models.PhilippinesSSSID;
 const DetectAIFakeFacesRequest = models.DetectAIFakeFacesRequest;
 const IndonesiaIDCard = models.IndonesiaIDCard;
 const SingaporeIDCard = models.SingaporeIDCard;
@@ -63,7 +63,9 @@ const LivenessCompareRequest = models.LivenessCompareRequest;
 const MLIDCard = models.MLIDCard;
 const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
 const CheckBankCardInformationRequest = models.CheckBankCardInformationRequest;
+const GetWxNFCResultResponse = models.GetWxNFCResultResponse;
 const BankCardVerificationRequest = models.BankCardVerificationRequest;
+const GetWxNFCResultRequest = models.GetWxNFCResultRequest;
 const ThailandIDCard = models.ThailandIDCard;
 const CheckIdCardInformationResponse = models.CheckIdCardInformationResponse;
 const PhoneVerificationResponse = models.PhoneVerificationResponse;
@@ -83,7 +85,7 @@ const BankCardVerificationResponse = models.BankCardVerificationResponse;
 const ApplyWebVerificationBizTokenIntlRequest = models.ApplyWebVerificationBizTokenIntlRequest;
 const FileInfo = models.FileInfo;
 const PhilippinesDrivingLicense = models.PhilippinesDrivingLicense;
-const PhilippinesSSSID = models.PhilippinesSSSID;
+const GenerateReflectSequenceResponse = models.GenerateReflectSequenceResponse;
 const ImageRecognitionResponse = models.ImageRecognitionResponse;
 const IdCardVerificationResponse = models.IdCardVerificationResponse;
 const WebVerificationConfigIntl = models.WebVerificationConfigIntl;
@@ -108,9 +110,11 @@ const NormalMLIDCard = models.NormalMLIDCard;
 const ImageRecognitionRequest = models.ImageRecognitionRequest;
 const BankCard4EVerificationRequest = models.BankCard4EVerificationRequest;
 const CreateUploadUrlRequest = models.CreateUploadUrlRequest;
+const GetNFCTokenResponse = models.GetNFCTokenResponse;
 const NormalHKIDCard = models.NormalHKIDCard;
 const GetSdkVerificationResultRequest = models.GetSdkVerificationResultRequest;
 const ApplyLivenessTokenRequest = models.ApplyLivenessTokenRequest;
+const GetNFCTokenRequest = models.GetNFCTokenRequest;
 const TaiWanIDCard = models.TaiWanIDCard;
 const GetWebVerificationResultIntlRequest = models.GetWebVerificationResultIntlRequest;
 
@@ -346,6 +350,28 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     PhoneVerification(req, cb) {
         let resp = new PhoneVerificationResponse();
         this.request("PhoneVerification", req, resp, cb);
+    }
+
+    /**
+     * NFC verification service, obtain Token information for the NFC identify request.
+     * @param {GetNFCTokenRequest} req
+     * @param {function(string, GetNFCTokenResponse):void} cb
+     * @public
+     */
+    GetNFCToken(req, cb) {
+        let resp = new GetNFCTokenResponse();
+        this.request("GetNFCToken", req, resp, cb);
+    }
+
+    /**
+     * Obtain document NFC data, input the Token returned by the NFC SDK (valid for 10 minutes), and return the corresponding document information retrieved via NFC. This API supports NFC recognition and verification of ID cards (second-generation resident identity card, Residence Permit for Hong Kong (China) and Macao (China), Residence Permit for Taiwan (China), Permanent Residence Permit for Foreigners) as well as travel documents (exit-entry permit for travelling to and from Hong Kong (China) and Macao (China), Taiwan travel permit, Mainland Travel Permit for Taiwan Residents, Return Home Permit).
+     * @param {GetWxNFCResultRequest} req
+     * @param {function(string, GetWxNFCResultResponse):void} cb
+     * @public
+     */
+    GetWxNFCResult(req, cb) {
+        let resp = new GetWxNFCResultResponse();
+        this.request("GetWxNFCResult", req, resp, cb);
     }
 
     /**

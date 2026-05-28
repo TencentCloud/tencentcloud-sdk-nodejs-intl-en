@@ -21,7 +21,7 @@ const DescribeCustomerOwnVoucherUsageDetailsResponse = models.DescribeCustomerOw
 const DescribeCustomerVoucherListResponse = models.DescribeCustomerVoucherListResponse;
 const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
 const DescribeCustomerOwnVoucherListRequest = models.DescribeCustomerOwnVoucherListRequest;
-const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryResponse;
+const GetCountryCodesResponse = models.GetCountryCodesResponse;
 const TradeTwoNode = models.TradeTwoNode;
 const QueryT1IndirectCustomersDetailRequest = models.QueryT1IndirectCustomersDetailRequest;
 const CreateAndSendClientInvitationMailResponse = models.CreateAndSendClientInvitationMailResponse;
@@ -39,6 +39,8 @@ const QueryCreditAllocationHistoryResponse = models.QueryCreditAllocationHistory
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeBillSummaryRequest = models.DescribeBillSummaryRequest;
 const QueryDirectCustomersCreditRequest = models.QueryDirectCustomersCreditRequest;
+const CostAnalyzeFilter = models.CostAnalyzeFilter;
+const CostAnalyzeDimensionData = models.CostAnalyzeDimensionData;
 const QueryCustomerBillingQuotaData = models.QueryCustomerBillingQuotaData;
 const QueryPartnerCreditRequest = models.QueryPartnerCreditRequest;
 const GetTradeConfigListRequest = models.GetTradeConfigListRequest;
@@ -52,18 +54,20 @@ const PolicyProductList = models.PolicyProductList;
 const QueryCustomerBillingQuotaResponse = models.QueryCustomerBillingQuotaResponse;
 const DescribeCustomerBillSummaryRequest = models.DescribeCustomerBillSummaryRequest;
 const QueryPendingSubAgentsV2ResponseData = models.QueryPendingSubAgentsV2ResponseData;
+const QueryPendingCustomersItem = models.QueryPendingCustomersItem;
 const ApproveSubAgentApplyResponse = models.ApproveSubAgentApplyResponse;
 const QueryInvitationInfoResponse = models.QueryInvitationInfoResponse;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const QueryAccountVerificationStatusResponse = models.QueryAccountVerificationStatusResponse;
 const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
 const DescribeCustomerOwnVoucherListResponse = models.DescribeCustomerOwnVoucherListResponse;
+const DescribeCustomerOwnCostExplorerSummaryResponse = models.DescribeCustomerOwnCostExplorerSummaryResponse;
 const ModifyClientRemarkResponse = models.ModifyClientRemarkResponse;
 const QueryInvitationInfoData = models.QueryInvitationInfoData;
 const DescribeCustomerVoucherUsageDetailsResponse = models.DescribeCustomerVoucherUsageDetailsResponse;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
 const QuerySubAgentsDetailV2Request = models.QuerySubAgentsDetailV2Request;
-const GetCountryCodesResponse = models.GetCountryCodesResponse;
+const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryResponse;
 const AllocateCreditPoolRequest = models.AllocateCreditPoolRequest;
 const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
 const CostAnalyzeFilterDetail = models.CostAnalyzeFilterDetail;
@@ -72,12 +76,12 @@ const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
 const GetCountryCodesRequest = models.GetCountryCodesRequest;
 const ForceQNResponse = models.ForceQNResponse;
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
-const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
+const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
 const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
 const DescribeCustomerVoucherListRequest = models.DescribeCustomerVoucherListRequest;
-const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
 const TradeOneNode = models.TradeOneNode;
 const DescribeRebateDownloadUrlResponse = models.DescribeRebateDownloadUrlResponse;
+const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
 const QuerySubAgentsDetailV2ResponseData = models.QuerySubAgentsDetailV2ResponseData;
 const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
 const DescribeCustomerOwnVoucherUsageDetailsRequest = models.DescribeCustomerOwnVoucherUsageDetailsRequest;
@@ -85,6 +89,7 @@ const DescribeCustomerVoucherItem = models.DescribeCustomerVoucherItem;
 const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
 const QueryPolicyProductListByCodeRequest = models.QueryPolicyProductListByCodeRequest;
 const QueryT1IndirectCustomersDetailResponseData = models.QueryT1IndirectCustomersDetailResponseData;
+const DescribeCustomerOwnCostExplorerSummaryRequest = models.DescribeCustomerOwnCostExplorerSummaryRequest;
 const DescribeCustomerOwnVoucherItem = models.DescribeCustomerOwnVoucherItem;
 const DescribeCustomerInfoResponse = models.DescribeCustomerInfoResponse;
 const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
@@ -93,7 +98,7 @@ const DescribeCustomerOwnCostExplorerFilterRequest = models.DescribeCustomerOwnC
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
 const QueryPendingClientsV2Response = models.QueryPendingClientsV2Response;
 const AllocateCreditPoolResponse = models.AllocateCreditPoolResponse;
-const QueryPendingCustomersItem = models.QueryPendingCustomersItem;
+const PeriodItemDetail = models.PeriodItemDetail;
 const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
 const DescribeCustomerUinResponse = models.DescribeCustomerUinResponse;
 const DescribeCustomerBillDetailByDayResponse = models.DescribeCustomerBillDetailByDayResponse;
@@ -136,6 +141,7 @@ const BillDetailData = models.BillDetailData;
 const QueryCustomerBillingQuotaRequest = models.QueryCustomerBillingQuotaRequest;
 const DescribeCustomerInfoData = models.DescribeCustomerInfoData;
 const CreateAndSendClientInvitationMailRequest = models.CreateAndSendClientInvitationMailRequest;
+const DimensionPeriodData = models.DimensionPeriodData;
 const DescribeRebateDownloadUrlRequest = models.DescribeRebateDownloadUrlRequest;
 const SendVerifyCodeResponse = models.SendVerifyCodeResponse;
 
@@ -216,16 +222,15 @@ Callable roles: Distributor, Second-level reseller, Reseller
     }
 
     /**
-     * This API is used for a partner to query its own total credit, available credit, and used credit in USD.
-
+     * This API is used to query the credits of direct customers.
 Callable roles: Distributor, Second-level reseller, Reseller
-     * @param {QueryPartnerCreditRequest} req
-     * @param {function(string, QueryPartnerCreditResponse):void} cb
+     * @param {QueryDirectCustomersCreditRequest} req
+     * @param {function(string, QueryDirectCustomersCreditResponse):void} cb
      * @public
      */
-    QueryPartnerCredit(req, cb) {
-        let resp = new QueryPartnerCreditResponse();
-        this.request("QueryPartnerCredit", req, resp, cb);
+    QueryDirectCustomersCredit(req, cb) {
+        let resp = new QueryDirectCustomersCreditResponse();
+        this.request("QueryDirectCustomersCredit", req, resp, cb);
     }
 
     /**
@@ -325,15 +330,16 @@ Callable roles: Distributor
     }
 
     /**
-     * This API is used to query the indirect sub-customers of a distributor.
-Invokable role type: Distributor
-     * @param {QueryT1IndirectCustomersDetailRequest} req
-     * @param {function(string, QueryT1IndirectCustomersDetailResponse):void} cb
+     * This API is used for a partner to query its own total credit, available credit, and used credit in USD.
+
+Callable roles: Distributor, Second-level reseller, Reseller
+     * @param {QueryPartnerCreditRequest} req
+     * @param {function(string, QueryPartnerCreditResponse):void} cb
      * @public
      */
-    QueryT1IndirectCustomersDetail(req, cb) {
-        let resp = new QueryT1IndirectCustomersDetailResponse();
-        this.request("QueryT1IndirectCustomersDetail", req, resp, cb);
+    QueryPartnerCredit(req, cb) {
+        let resp = new QueryPartnerCreditResponse();
+        this.request("QueryPartnerCredit", req, resp, cb);
     }
 
     /**
@@ -450,15 +456,14 @@ Callable roles: Distributor, Second-level reseller, Reseller
     }
 
     /**
-     * This API is used to query the credits of direct customers.
-Callable roles: Distributor, Second-level reseller, Reseller
-     * @param {QueryDirectCustomersCreditRequest} req
-     * @param {function(string, QueryDirectCustomersCreditResponse):void} cb
+     * Cost analysis API
+     * @param {DescribeCustomerOwnCostExplorerSummaryRequest} req
+     * @param {function(string, DescribeCustomerOwnCostExplorerSummaryResponse):void} cb
      * @public
      */
-    QueryDirectCustomersCredit(req, cb) {
-        let resp = new QueryDirectCustomersCreditResponse();
-        this.request("QueryDirectCustomersCredit", req, resp, cb);
+    DescribeCustomerOwnCostExplorerSummary(req, cb) {
+        let resp = new DescribeCustomerOwnCostExplorerSummaryResponse();
+        this.request("DescribeCustomerOwnCostExplorerSummary", req, resp, cb);
     }
 
     /**
@@ -610,6 +615,18 @@ Callable roles: Distributor, First-level reseller, Second-level reseller
     QueryVoucherPool(req, cb) {
         let resp = new QueryVoucherPoolResponse();
         this.request("QueryVoucherPool", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the indirect sub-customers of a distributor.
+Invokable role type: Distributor
+     * @param {QueryT1IndirectCustomersDetailRequest} req
+     * @param {function(string, QueryT1IndirectCustomersDetailResponse):void} cb
+     * @public
+     */
+    QueryT1IndirectCustomersDetail(req, cb) {
+        let resp = new QueryT1IndirectCustomersDetailResponse();
+        this.request("QueryT1IndirectCustomersDetail", req, resp, cb);
     }
 
     /**

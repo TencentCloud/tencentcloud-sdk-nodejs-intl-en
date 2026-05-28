@@ -19515,7 +19515,7 @@ class SearchConditionNew extends  AbstractModel {
         super();
 
         /**
-         * Query Framework, required
+         * Query Framework, required.
          * @type {SearchConditionInstanceNew || null}
          */
         this.Instance = null;
@@ -39650,7 +39650,7 @@ class GetOfflineDIInstanceListRequest extends  AbstractModel {
         this.PageIndex = null;
 
         /**
-         * Number of Items per Page
+         * Number of Items per Page.
          * @type {number || null}
          */
         this.PageSize = null;

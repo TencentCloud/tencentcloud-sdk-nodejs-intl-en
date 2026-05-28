@@ -3799,7 +3799,7 @@ class ScaleInInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Scaling activity ID
+         * Scaling activity ID.
          * @type {string || null}
          */
         this.ActivityId = null;

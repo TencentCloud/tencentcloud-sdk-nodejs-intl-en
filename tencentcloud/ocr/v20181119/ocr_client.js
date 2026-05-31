@@ -33,7 +33,7 @@ const GetCardVerificationExternalResultResponse = models.GetCardVerificationExte
 const PermitOCRResponse = models.PermitOCRResponse;
 const RecognizeBrazilDriverLicenseOCRRequest = models.RecognizeBrazilDriverLicenseOCRRequest;
 const Rect = models.Rect;
-const RecognizeMainlandIDCardOCRRequest = models.RecognizeMainlandIDCardOCRRequest;
+const LicensePlateInfo = models.LicensePlateInfo;
 const VatRollItem = models.VatRollItem;
 const HmtResidentPermitOCRResponse = models.HmtResidentPermitOCRResponse;
 const WordPolygon = models.WordPolygon;
@@ -105,6 +105,7 @@ const IDCardOCRRequest = models.IDCardOCRRequest;
 const GeneralAccurateOCRRequest = models.GeneralAccurateOCRRequest;
 const UsedCarPurchaseInvoice = models.UsedCarPurchaseInvoice;
 const RecognizeMacaoIDCardOCRRequest = models.RecognizeMacaoIDCardOCRRequest;
+const CoordsItem = models.CoordsItem;
 const NonTaxIncomeBill = models.NonTaxIncomeBill;
 const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
 const AirTransport = models.AirTransport;
@@ -121,7 +122,7 @@ const VatElectronicItemInfo = models.VatElectronicItemInfo;
 const ConfigAdvanced = models.ConfigAdvanced;
 const LineInfo = models.LineInfo;
 const ItemCoord = models.ItemCoord;
-const LicensePlateInfo = models.LicensePlateInfo;
+const RecognizeMainlandIDCardOCRRequest = models.RecognizeMainlandIDCardOCRRequest;
 const VatInvoiceRoll = models.VatInvoiceRoll;
 const ApplyCardVerificationExternalResponse = models.ApplyCardVerificationExternalResponse;
 const Polygon = models.Polygon;
@@ -137,6 +138,7 @@ const RecognizeMainlandIDCardOCRResponse = models.RecognizeMainlandIDCardOCRResp
 const MainlandPermitOCRResponse = models.MainlandPermitOCRResponse;
 const NonTaxItem = models.NonTaxItem;
 const RecognizeMexicoVTIDRequest = models.RecognizeMexicoVTIDRequest;
+const PODAuditAIResponse = models.PODAuditAIResponse;
 const TollInvoice = models.TollInvoice;
 const SmartStructuralProResponse = models.SmartStructuralProResponse;
 const TableOCRResponse = models.TableOCRResponse;
@@ -144,11 +146,12 @@ const DetectedWordCoordPoint = models.DetectedWordCoordPoint;
 const RecognizeBrazilDriverLicenseOCRResponse = models.RecognizeBrazilDriverLicenseOCRResponse;
 const BrazilCardInfo = models.BrazilCardInfo;
 const RecognizeIndonesiaIDCardOCRRequest = models.RecognizeIndonesiaIDCardOCRRequest;
-const CoordsItem = models.CoordsItem;
+const AnalyzedLog = models.AnalyzedLog;
 const VinOCRRequest = models.VinOCRRequest;
 const BrazilRNEInfo = models.BrazilRNEInfo;
 const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
 const RecognizePhilippinesTinIDOCRRequest = models.RecognizePhilippinesTinIDOCRRequest;
+const PODAuditAIRequest = models.PODAuditAIRequest;
 const RecognizeThaiPinkCardRequest = models.RecognizeThaiPinkCardRequest;
 const BankCardOCRResponse = models.BankCardOCRResponse;
 const RecognizeThaiPinkCardResponse = models.RecognizeThaiPinkCardResponse;
@@ -1027,6 +1030,17 @@ Default API request rate limit: 5 requests/second.
     RecognizeIndonesiaIDCardOCR(req, cb) {
         let resp = new RecognizeIndonesiaIDCardOCRResponse();
         this.request("RecognizeIndonesiaIDCardOCR", req, resp, cb);
+    }
+
+    /**
+     * The POD intelligent review deeply integrates multimodal large model image understanding technology, targeting the logistics last-mile delivery scenario to provide high-precision POD compliance audit service. The system auto-recognizes ticket imperfections and risks of non-compliance, helping businesses achieve standardized control in the delivery process and effectively avoid customer complaints and disputes caused by non-compliant credentials.
+     * @param {PODAuditAIRequest} req
+     * @param {function(string, PODAuditAIResponse):void} cb
+     * @public
+     */
+    PODAuditAI(req, cb) {
+        let resp = new PODAuditAIResponse();
+        this.request("PODAuditAI", req, resp, cb);
     }
 
     /**

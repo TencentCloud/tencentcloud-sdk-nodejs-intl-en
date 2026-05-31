@@ -45,7 +45,7 @@ class DeleteStreamLiveChannelResponse extends  AbstractModel {
 }
 
 /**
- * VideoEnhanceSetting
+ * Video enhancement configuration
  * @class
  */
 class VideoEnhanceSetting extends  AbstractModel {
@@ -53,7 +53,7 @@ class VideoEnhanceSetting extends  AbstractModel {
         super();
 
         /**
-         * Video enhancement types, optional: "GameEnhance", "ColorEnhance", "Debur", "Comprehensive", "Denoising", "SR", "OutdoorSportsCompetitions", "IndoorSportsCompetitions", "ShowEnhance"
+         * Video enhancement type. Option: "GameEnhance", "ColorEnhance", "Debur", "Comprehensive", "Denoising", "SR", "OutdoorSportsCompetitions", "IndoorSportsCompetitions", "ShowEnhance".
          * @type {string || null}
          */
         this.Type = null;
@@ -88,13 +88,13 @@ class AudioTrackInfo extends  AbstractModel {
         super();
 
         /**
-         * User input is limited to letters and numbers, the length should not exceed 20, and should not be repeated in the same channel.
+         * User input, limited to letters and digits, length not exceeding 20, non-repeating in the same channel.
          * @type {string || null}
          */
         this.TrackName = null;
 
         /**
-         * Audio encoding format, only `AAC` and `PASSTHROUGH` are available, with `AAC` as the default.
+         * Audio encoding format, can only be `AAC` or `PASSTHROUGH`. Default is AAC.
          * @type {string || null}
          */
         this.AudioCodec = null;
@@ -112,7 +112,7 @@ class AudioTrackInfo extends  AbstractModel {
         this.AudioSampleRate = null;
 
         /**
-         * Only values defined by AttachedInputs.$.AudioSelectors.$.audioPidSelection.pid can be entered.
+         * Input Only the value defined in AttachedInputs.$.AudioSelectors.$.audioPidSelection.pid.
          * @type {string || null}
          */
         this.AudioSelectorName = null;
@@ -124,7 +124,7 @@ class AudioTrackInfo extends  AbstractModel {
         this.AudioNormalization = null;
 
         /**
-         * Audio encoding configuration.
+         * Additional audio mode and sound channel configuration.
          * @type {AudioCodecDetail || null}
          */
         this.AudioCodecDetails = null;
@@ -190,6 +190,72 @@ class CreateStreamLiveInputSecurityGroupResponse extends  AbstractModel {
         }
         this.Id = 'Id' in params ? params.Id : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class PipSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AudioSelection = null;
+
+        /**
+         * 
+         * @type {SourceLayout || null}
+         */
+        this.LiveSourceLayout = null;
+
+        /**
+         * 
+         * @type {SourceLayout || null}
+         */
+        this.AdSourceLayout = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BackgroundImgUrl = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AdSourceUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AudioSelection = 'AudioSelection' in params ? params.AudioSelection : null;
+
+        if (params.LiveSourceLayout) {
+            let obj = new SourceLayout();
+            obj.deserialize(params.LiveSourceLayout)
+            this.LiveSourceLayout = obj;
+        }
+
+        if (params.AdSourceLayout) {
+            let obj = new SourceLayout();
+            obj.deserialize(params.AdSourceLayout)
+            this.AdSourceLayout = obj;
+        }
+        this.BackgroundImgUrl = 'BackgroundImgUrl' in params ? params.BackgroundImgUrl : null;
+        this.AdSourceUrl = 'AdSourceUrl' in params ? params.AdSourceUrl : null;
 
     }
 }
@@ -520,13 +586,13 @@ class AudioCodecDetail extends  AbstractModel {
         super();
 
         /**
-         * Channel configuration, optional values: MONO (mono), STEREO (two-channel), 5.1 (surround).
+         * Sound track configuration. Available values: MONO, STEREO, 5.1.
          * @type {string || null}
          */
         this.ChannelMode = null;
 
         /**
-         * Level in aac case, optional values: "LC" "HE-AAC" "HE-AACV2".
+         * Level in aac, available values: "LC", "HE-aac", "HE-AACV2".
          * @type {string || null}
          */
         this.Profile = null;
@@ -709,13 +775,13 @@ class SubtitleFontConf extends  AbstractModel {
         this.LineSpacing = null;
 
         /**
-         * Margins.
+         * Margin.
          * @type {number || null}
          */
         this.Margins = null;
 
         /**
-         * Rows.
+         * Number of rows.
          * @type {number || null}
          */
         this.Lines = null;
@@ -727,31 +793,31 @@ class SubtitleFontConf extends  AbstractModel {
         this.CharactersPerLine = null;
 
         /**
-         * Original font Helvetica: simhei.ttf Song Dynasty: simsun.ttc Dynacw Diamond Black: hkjgh.ttf Helvetica font: helvetica.ttf; Need to be set in Source or Source+Target mode
+         * Original font    Heiti: simhei.ttf    Song Typeface: simsun.ttc    Huakang Diamond Black (Dynacw Diamond Black): hkjgh.ttf    Helvetica: helvetica.ttf; Needs to be set in Source or Source+Target mode.
          * @type {string || null}
          */
         this.SourceTextFont = null;
 
         /**
-         * Font color is represented by 6 RGB hexadecimal characters.
+         * Font color, represented by 6 characters in hexadecimal RGB.
          * @type {string || null}
          */
         this.TextColor = null;
 
         /**
-         * The background color is represented by 6 RGB hexadecimal characters.
+         * Background color, represented by 6 characters in hexadecimal RGB.
          * @type {string || null}
          */
         this.BackgroundColor = null;
 
         /**
-         * Background transparency, a number from 0-100.
+         * Background opacity. A number from 0 to 100.
          * @type {number || null}
          */
         this.BackgroundAlpha = null;
 
         /**
-         * Preview copy.
+         * Preview the copywriting.
          * @type {string || null}
          */
         this.PreviewContent = null;
@@ -769,7 +835,7 @@ class SubtitleFontConf extends  AbstractModel {
         this.PreviewWindowWidth = null;
 
         /**
-         * Translation language font, the enumeration value is the same as Font, the fonts supported by the language need to be distinguished; TextColor needs to be set in Target or Source+Target mode
+         * Font for the target language. The enumeration value is the same as SourceTextFont. Case-sensitive language support for fonts. TextColor needs to be set in Target or Source+Target mode.
          * @type {string || null}
          */
         this.TranslatedTextFont = null;
@@ -919,7 +985,7 @@ class InputStreamInfo extends  AbstractModel {
 }
 
 /**
- * Frame capture template.
+ * Chart template.
  * @class
  */
 class FrameCaptureTemplate extends  AbstractModel {
@@ -927,43 +993,43 @@ class FrameCaptureTemplate extends  AbstractModel {
         super();
 
         /**
-         * Name of frame capture template, limited to uppercase and lowercase letters and numbers, with a length between 1 and 20 characters.
+         * Screenshot template name. Limited to uppercase and lowercase letters and digits. Length [1, 20].
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Width of frame capture, optional, input range is from 0 to 3000, must be a multiple of 2.
+         * Screenshot width. Optional. The input range is [0, 3000] and must be a multiple of 2.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Height of frame capture, optional, input range is from 0 to 3000, must be a multiple of 2.
+         * Screenshot height, optional, input range [0, 3000], must be a multiple of 2
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Interval of frame capture, an integer between 1 and 3600.
+         * Screenshot interval, an integer between 1 and 3600.
          * @type {number || null}
          */
         this.CaptureInterval = null;
 
         /**
-         * Interval units of frame capture, only supports SECONDS.
+         * Screenshot measurement unit, supports only SECONDS.
          * @type {string || null}
          */
         this.CaptureIntervalUnits = null;
 
         /**
-         * Scaling behavior of frame capture, supports DEFAULT or STRETCH_TO_OUTPUT, with DEFAULT being the default option.
+         * Stretch behavior, supports [DEFAULT|STRETCH_TO_OUTPUT], default is DEFAULT.
          * @type {string || null}
          */
         this.ScalingBehavior = null;
 
         /**
-         * Sharpness, an integer between 0 and 100.
+         * Sharpening degree, an integer between 0 and 100.
          * @type {number || null}
          */
         this.Sharpness = null;
@@ -997,7 +1063,8 @@ class PipelineInputSettingsInfo extends  AbstractModel {
         super();
 
         /**
-         * Pipeline failover configuration, the valid value is: 1.PIPELINE_FAILOVER (channels are mutually failover); 2.PIPELINE_FILLING (channels fill in themselves). Default value: PIPELINE_FILLING. The specific content is specified by FaultBehavior.
+         * Pipeline disaster recovery configuration. Value: PIPELINE_FAILOVER (mutual disaster recovery for channels if unable), PIPELINE_FILLING (channel fill automatically).
+Default value: PIPELINE_FAILOVER. If failover between channels fails, auto-execute PIPELINE_FILLING. Specific content is specified by InputLossBehavior.
          * @type {string || null}
          */
         this.FaultBehavior = null;
@@ -1076,9 +1143,8 @@ class TimedRecordSettings extends  AbstractModel {
         super();
 
         /**
-         * Whether to automatically delete finished recording events. Valid values: `CLOSE`, `OPEN`. If this parameter is left empty, `CLOSE` will be used.
-If it is set to `OPEN`, a recording event will be deleted 7 days after it is finished.
-Note: This field may return `null`, indicating that no valid value was found.
+         * Whether to automatically clear ended recording tasks. Options: [CLOSE|OPEN]. Default is CLOSE.
+If enabled, the task will be cleared 7 days after completion.
          * @type {string || null}
          */
         this.AutoClear = null;
@@ -1262,7 +1328,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Recognition configuration for input content.
+ * Input content identification configuration.
  * @class
  */
 class InputAnalysisInfo extends  AbstractModel {
@@ -1270,7 +1336,7 @@ class InputAnalysisInfo extends  AbstractModel {
         super();
 
         /**
-         * Highlight configuration.
+         * Highlights configuration.
          * @type {HighlightInfo || null}
          */
         this.HighlightSetting = null;
@@ -1321,19 +1387,19 @@ class AVTemplate extends  AbstractModel {
         this.Vcodec = null;
 
         /**
-         * Video width. Value range: (0, 4096]. The value must be an integer multiple of 2. If this parameter is left empty, the original video width will be used.
+         * Video width. The input range is (0, 4096] and must be a multiple of 2. If left blank, it represents passthrough.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Video height. Value range: (0, 4096]. The value must be an integer multiple of 2. If this parameter is left empty, the original video height will be used.
+         * Video height. Input range is (0, 4096] and must be a multiple of 2. Leave empty to represent passthrough.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Video frame rate. Value range: [1, 240]. If this parameter is left empty, the original frame rate will be used.
+         * Video frame rate. Valid when you select SPECIFIED_HZ for FrameRateType. Input range is [1, 240]. Leave blank to represent passthrough.
          * @type {number || null}
          */
         this.Fps = null;
@@ -1357,7 +1423,7 @@ class AVTemplate extends  AbstractModel {
         this.NeedAudio = null;
 
         /**
-         * Audio encoding format, only `AAC` and `PASSTHROUGH` are available, with `AAC` as the default.
+         * Audio encoding format, can only be `AAC` or `PASSTHROUGH`. Default is AAC.
          * @type {string || null}
          */
         this.Acodec = null;
@@ -1376,7 +1442,7 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
         this.VideoBitrate = null;
 
         /**
-         * Bitrate control mode. Valid values: `CBR`, `ABR` (default), `VBR`.
+         * Bitrate control mode. Optional values: [CBR|ABR|VBR]. Default: ABR.
          * @type {string || null}
          */
         this.RateControlMode = null;
@@ -1430,31 +1496,31 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
         this.AudioSampleRate = null;
 
         /**
-         * This field indicates how to specify the output video frame rate. If FOLLOW_SOURCE is selected, the output video frame rate will be set equal to the input video frame rate of the first input. If SPECIFIED_FRACTION is selected, the output video frame rate is determined by the fraction (frame rate numerator and frame rate denominator). If SPECIFIED_HZ is selected, the frame rate of the output video is determined by the HZ you enter.
+         * This field indicates how to specify the output video frame rate. If FOLLOW_SOURCE is selected, the output video frame rate is set to equal the frame rate of the first input video. If SPECIFIED_FRACTION is selected, the output video frame rate is determined by the fraction (frame rate numerator and frame rate denominator). If SPECIFIED_HZ is selected, the frame rate of the output video is confirmed by the HZ you input.	
          * @type {string || null}
          */
         this.FrameRateType = null;
 
         /**
-         * Valid when the FrameRateType type you select is SPECIFIED_FRACTION, the output frame rate numerator setting.
+         * Valid when you select SPECIFIED_FRACTION as the FrameRateType. Set the output frame rate molecular.	
          * @type {number || null}
          */
         this.FrameRateNumerator = null;
 
         /**
-         * Valid when the FrameRateType type you select is SPECIFIED_FRACTION, the output frame rate denominator setting.
+         * Valid when you select SPECIFIED_FRACTION for FrameRateType. Output frame rate denominator set.	
          * @type {number || null}
          */
         this.FrameRateDenominator = null;
 
         /**
-         * The number of B frames can be selected from 1 to 3.
+         * Number of B-frames 1-3.
          * @type {number || null}
          */
         this.BFramesNum = null;
 
         /**
-         * The number of reference frames can be selected from 1 to 16.
+         * Refer to the number of frames 1-16.
          * @type {number || null}
          */
         this.RefFramesNum = null;
@@ -1478,19 +1544,19 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
         this.AudioCodecDetails = null;
 
         /**
-         * Whether to enable multiple audio tracks 0: Not required 1: Required Default value 0.
+         * Whether to enable multiple audio tracks. 0: not required 1: required. Default value: 0.
          * @type {number || null}
          */
         this.MultiAudioTrackEnabled = null;
 
         /**
-         * Quantity limit 0-20 Valid when MultiAudioTrackEnabled is turned on.
+         * Limit on the number 0-20. Valid when MultiAudioTrackEnabled is enabled.
          * @type {Array.<AudioTrackInfo> || null}
          */
         this.AudioTracks = null;
 
         /**
-         * Do you want to enable video enhancement? 1: Enable 0: Do not enable.
+         * Whether to enable video enhancement, 1: enable 0: disable.
          * @type {number || null}
          */
         this.VideoEnhanceEnabled = null;
@@ -1502,25 +1568,25 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
         this.VideoEnhanceSettings = null;
 
         /**
-         * Key frame interval, 300-10000, optional.
+         * Keyframe interval, 300-10000, optional.
          * @type {number || null}
          */
         this.GopSize = null;
 
         /**
-         * Keyframe units, only support MILLISECONDS (milliseconds).
+         * Key frame measurement unit currently only supports MILLISECONDS (ms).
          * @type {string || null}
          */
         this.GopSizeUnits = null;
 
         /**
-         * Color space setting.
+         * Colorspace configuration.
          * @type {ColorSpaceSetting || null}
          */
         this.ColorSpaceSettings = null;
 
         /**
-         * Traceability watermark.
+         * Traceable watermark.
          * @type {Array.<string> || null}
          */
         this.ForensicWatermarkIds = null;
@@ -1630,40 +1696,37 @@ class DestinationInfo extends  AbstractModel {
         this.OutputUrl = null;
 
         /**
-         * Authentication key. Length limit: [1,128].
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Authentication key, length limited to [1, 128].
          * @type {string || null}
          */
         this.AuthKey = null;
 
         /**
-         * Authentication username. Length limit: [1,128].
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Authentication username, length limited to [1, 128].
          * @type {string || null}
          */
         this.Username = null;
 
         /**
-         * Authentication password. Length limit: [1,128].
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Authentication password, length limited to [1, 128].
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * The destination type of the retweet. Currently available values are: Standard, AWS_MediaPackageV1, AWS_MediaPackageV2. The default is: Standard. When the output group type is FRAME_CAPTURE, valid values are: AWS_AmazonS3, COS.
+         * The destination type for relay. Available values: Standard, AWS_MediaPackageV1, AWS_MediaPackageV2. Default: Standard. AWS_AmazonS3 or COS is supported when FrameCapture group is selected.
          * @type {string || null}
          */
         this.DestinationType = null;
 
         /**
-         * Aws S3 destination setting.
+         * Forward the Aws S3 address information.
          * @type {AmazonS3Settings || null}
          */
         this.AmazonS3Settings = null;
 
         /**
-         * Cos destination setting.
+         * Forward COS address information.
          * @type {CosSettings || null}
          */
         this.CosSettings = null;
@@ -1699,7 +1762,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Console Tag, for documentation please refer to: https://www.tencentcloud.com/document/product/651.
+ * Console tag, documentation link: https://www.tencentcloud.com/document/product/651.?from_cn_redirect=1
  * @class
  */
 class Tag extends  AbstractModel {
@@ -1707,19 +1770,19 @@ class Tag extends  AbstractModel {
         super();
 
         /**
-         * Tag key, for restrictions please refer to the tag documentation: https://www.tencentcloud.com/document/product/651/13354.
+         * Tag key. Refer to the tag document (https://www.tencentcloud.com/document/product/651/13354?from_cn_redirect=1) for limits.
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * Tag value, for restrictions please refer to the tag documentation: https://www.tencentcloud.com/document/product/651/13354.
+         * Tag value. For reference, see the tag document at https://www.tencentcloud.com/document/product/651/13354.?from_cn_redirect=1
          * @type {string || null}
          */
         this.TagValue = null;
 
         /**
-         * Tag type, optional; for documentation please refer to: https://www.tencentcloud.com/document/product/651/33023#tag.
+         * Tag type, optional. See the tag document for reference (https://www.tencentcloud.com/document/product/651/35327?from_cn_redirect=1#Tag).
          * @type {string || null}
          */
         this.Category = null;
@@ -1769,6 +1832,48 @@ class DeleteStreamLiveInputRequest extends  AbstractModel {
 }
 
 /**
+ * SourceLayout
+ * @class
+ */
+class SourceLayout extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.LeftOffset = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.RightOffset = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.BottomOffset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LeftOffset = 'LeftOffset' in params ? params.LeftOffset : null;
+        this.RightOffset = 'RightOffset' in params ? params.RightOffset : null;
+        this.BottomOffset = 'BottomOffset' in params ? params.BottomOffset : null;
+
+    }
+}
+
+/**
  * ModifyStreamLiveInputSecurityGroup response structure.
  * @class
  */
@@ -1797,7 +1902,7 @@ class ModifyStreamLiveInputSecurityGroupResponse extends  AbstractModel {
 }
 
 /**
- * Amazon S3 destination setting.
+ * Amazon S3 address configuration
  * @class
  */
 class AmazonS3Settings extends  AbstractModel {
@@ -1805,19 +1910,19 @@ class AmazonS3Settings extends  AbstractModel {
         super();
 
         /**
-         * Access key ID of the S3 sub-account.
+         * Access key ID of the S3 sub-user.
          * @type {string || null}
          */
         this.AccessKeyID = null;
 
         /**
-         * Secret access key of the S3 sub-account.
+         * Secret access key of the S3 sub-user.
          * @type {string || null}
          */
         this.SecretAccessKey = null;
 
         /**
-         * Region of S3.
+         * S3 region.
          * @type {string || null}
          */
         this.Region = null;
@@ -1829,25 +1934,25 @@ class AmazonS3Settings extends  AbstractModel {
         this.Bucket = null;
 
         /**
-         * File output path, which can be empty. If it is not empty, it starts with / and ends with /.
+         * File output path, can be empty, starts and ends with / if not empty.
          * @type {string || null}
          */
         this.FilePath = null;
 
         /**
-         * User-defined name, supports alphanumeric characters, underscores, and hyphens, with a length between 1 and 32 characters.
+         * User-defined name supports 1 to 32 characters consisting of digits, letters, underscores (_), and hyphens (-).
          * @type {string || null}
          */
         this.FileName = null;
 
         /**
-         * File suffix, only supports `jpg`.
+         * File suffix only supports jpg.
          * @type {string || null}
          */
         this.FileExt = null;
 
         /**
-         * Support `unix` or `utc0`, default unix.
+         * Support [unix|utc0]. Default is unix.
          * @type {string || null}
          */
         this.TimeFormat = null;
@@ -2066,7 +2171,7 @@ class AudioSelectorInfo extends  AbstractModel {
         this.AudioPidSelection = null;
 
         /**
-         * Audio input type, optional values: 'PID_SELECTOR' 'TRACK_SELECTOR', default value PID_SELECTOR.
+         * Audio input type. Value range: 'PID_SELECTOR' | 'TRACK_SELECTOR'. Default value: PID_SELECTOR.
          * @type {string || null}
          */
         this.AudioSelectorType = null;
@@ -2161,21 +2266,19 @@ class TimeShiftSettingsInfo extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable time shifting. Valid values: `OPEN`; `CLOSE`
-Note: This field may return `null`, indicating that no valid value was found.
+         * Whether to enable time shifting. Option [OPEN|CLOSE].
          * @type {string || null}
          */
         this.State = null;
 
         /**
-         * Domain name bound for time shifting
-Note: This field may return `null`, indicating that no valid value was found.
+         * Enable time-shift bound domain name.
          * @type {string || null}
          */
         this.PlayDomain = null;
 
         /**
-         * Allowable time-shift period (s). Value range: [300, 2592000]. Default value: 300Note: This field may return `null`, indicating that no valid value was found.
+         * The time when time-shift replay starts, in seconds, range [300, 1209600], default value 300.
          * @type {number || null}
          */
         this.StartoverWindow = null;
@@ -2205,61 +2308,61 @@ class WebVTTFontStyle extends  AbstractModel {
         super();
 
         /**
-         * Text color, RGB hexadecimal representation, 6 hexadecimal characters (no # needed).
+         * Text color, 6 hexadecimal characters in RGB (not required #).
          * @type {string || null}
          */
         this.TextColor = null;
 
         /**
-         * Background color, RGB hexadecimal representation, 6 hexadecimal characters (no # needed).
+         * Background color, 6 hexadecimal characters in RGB (not required #)
          * @type {string || null}
          */
         this.BackgroundColor = null;
 
         /**
-         * Background opacity parameter, a number from 0 to 100, with 0 being the default for full transparency.
+         * Background opacity parameter. A number from 0 to 100. The default value is 0 (fully transparent).
          * @type {number || null}
          */
         this.BackgroundAlpha = null;
 
         /**
-         * Font size, in units of vh (1% of height), default value 0 means automatic.
+         * Font size, in vh (1% of height), default value 0 means auto.
          * @type {number || null}
          */
         this.FontSize = null;
 
         /**
-         * The position of the text box, default value AUTO, can be empty; represents the percentage of video height, supports integers from 0 to 100.
+         * The position of the text box, default value AUTO, can be empty; it represents the percentage of video height and supports integers from 0 to 100.
          * @type {string || null}
          */
         this.Line = null;
 
         /**
-         * The alignment of the text box on the Line. Optional values: START, CENTER, END. Which can be empty.
+         * The alignment mode of the text box on the Line. Available values: START, CENTER, END. Default: START. Can be blank.
          * @type {string || null}
          */
         this.LineAlignment = null;
 
         /**
-         * The text box is positioned in another direction as a percentage of the video's width. It defaults to AUTO and can be empty.
+         * The position of the text box in another direction is a percentage of the video width or height, defaults to AUTO, and can be empty.
          * @type {string || null}
          */
         this.Position = null;
 
         /**
-         * The alignment of the text box on the Position. Optional values are LINE_LEFT, LINE_RIGHT, CENTER, and AUTO. The default value is AUTO, and it can be empty.
+         * The alignment mode of the text box on Position. Available values: LINE_LEFT, LINE_RIGHT, CENTER, AUTO. Default value: AUTO. Can be empty.
          * @type {string || null}
          */
         this.PositionAlignment = null;
 
         /**
-         * Text box size, a percentage of video width/height, with values (0, 100), default AUTO, can be empty.
+         * The size of the text box, a percentage of video width/height, value (0, 100], default AUTO, can be empty.
          * @type {string || null}
          */
         this.CueSize = null;
 
         /**
-         * Text alignment, with possible values  START, CENTER, END, LEFT, and RIGHT; the default value is CENTER, which can be empty.
+         * Text alignment mode, available values START, CENTER, END, LEFT, RIGHT; default value CENTER, can be empty.
          * @type {string || null}
          */
         this.TextAlignment = null;
@@ -2316,7 +2419,7 @@ class DescribeStreamLiveWatermarkRequest extends  AbstractModel {
 }
 
 /**
- * Caption selector.
+ * Subtitle selector.
  * @class
  */
 class CaptionSelector extends  AbstractModel {
@@ -2324,13 +2427,13 @@ class CaptionSelector extends  AbstractModel {
         super();
 
         /**
-         * Caption selector name, which can contain 1-32 letters, digits, and underscores.
+         * Digits, uppercase and lowercase letters, underscore, length 1-32.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Caption source type, only support `SCTE-128`.
+         * Supports only `SCTE-128`.
          * @type {string || null}
          */
         this.CaptionSourceType = null;
@@ -2359,50 +2462,45 @@ class DrmSettingsInfo extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable DRM encryption. Valid values: `CLOSE` (disable), `OPEN` (enable). Default value: `CLOSE`
-DRM encryption is supported only for HLS, DASH, HLS_ARCHIVE, DASH_ARCHIVE, HLS_MEDIAPACKAGE, and DASH_MEDIAPACKAGE outputs.
+         * Whether DRM encryption is enabled. Option: CLOSE/OPEN. Default: CLOSE.
+Currently only support HLS/DASH/HLS_ARCHIVE/DASH_ARCHIVE/HLS_MEDIAPACKAGE/DASH_MEDIAPACKAGE.
          * @type {string || null}
          */
         this.State = null;
 
         /**
-         * Valid values: `CustomDRMKeys` (default value), `SDMCDRM`
-`CustomDRMKeys` means encryption keys customized by users.
-`SDMCDRM` means the DRM key management system of SDMC.
+         * Optional [CustomDRMKeys|SDMCDRM], defaults to CustomDRMKeys.
+CustomDRMKeys refers to the custom encryption key.
+SDMCDRM refers to the DRM key management system using SMDC.
          * @type {string || null}
          */
         this.Scheme = null;
 
         /**
-         * If `Scheme` is set to `CustomDRMKeys`, this parameter is required.
-If `Scheme` is set to `SDMCDRM`, this parameter is optional. It supports digits, letters, hyphens, and underscores and must contain 1 to 36 characters. If it is not specified, the value of `ChannelId` will be used.
+         * Scheme is CustomDRMKeys, required, filled in by the user.
+Scheme is SDMCDRM, optional, defaults to ChannelId. The format supports digits, upper- and lower-case letters, hyphens, and underscores, with a length of [1, 36].
          * @type {string || null}
          */
         this.ContentId = null;
 
         /**
-         * The key customized by the content user, which is required when `Scheme` is set to CustomDRMKeys.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Required when Scheme is CustomDRMKeys. The content is the key customized by users.
          * @type {Array.<DrmKey> || null}
          */
         this.Keys = null;
 
         /**
-         * SDMC key configuration. This parameter is used when `Scheme` is set to `SDMCDRM`.
-Note: This field may return `null`, indicating that no valid value was found.
+         * SDMC key configuration information, used when Scheme is SDMCDRM.
          * @type {SDMCSettingsInfo || null}
          */
         this.SDMCSettings = null;
 
         /**
-         * Optional Types:
-`FAIRPLAY`, `WIDEVINE`, `PLAYREADY`, `AES128`
-
+         * Optional type:
+`FAIRPLAY` `WIDEVINE` `PLAYREADY` `AES128`
 HLS-TS supports `FAIRPLAY` and `AES128`.
-
-HLS-FMP4 supports `FAIRPLAY`, `WIDEVINE`, `PLAYREADY`, `AES128`, and combinations of two or three from `FAIRPLAY`, `WIDEVINE`, and `PLAYREADY` (concatenated with commas, e.g., "FAIRPLAY,WIDEVINE,PLAYREADY").
-
-DASH supports `WIDEVINE`, `PLAYREADY`, and combinations of `PLAYREADY` and `WIDEVINE` (concatenated with commas, e.g., "PLAYREADY,WIDEVINE").
+HLS-FMP4 supports `FAIRPLAY`, `WIDEVINE`, `PLAYREADY`, `AES128`, and permutation and combination of two or three from `FAIRPLAY`, `WIDEVINE`, `PLAYREADY` (use commas to concatenate, such as "FAIRPLAY,WIDEVINE,PLAYREADY").
+DASH supports `WIDEVINE`, `PLAYREADY`, and the permutation and combination of `PLAYREADY` and `WIDEVINE` (use commas to concatenate, such as "PLAYREADY,WIDEVINE").
          * @type {string || null}
          */
         this.DrmType = null;
@@ -2722,7 +2820,7 @@ class CreateStreamLiveWatermarkRequest extends  AbstractModel {
 }
 
 /**
- * Color space setting.
+ * Colorspace configuration.
  * @class
  */
 class ColorSpaceSetting extends  AbstractModel {
@@ -2730,7 +2828,7 @@ class ColorSpaceSetting extends  AbstractModel {
         super();
 
         /**
-         * Color space, supports `PASSTHROUGH` (transparent transmission, only supports H265); optional.
+         * Colorspace, supports PASSTHROUGH (passthrough, only supports H265). Can be empty.
          * @type {string || null}
          */
         this.ColorSpace = null;
@@ -2750,7 +2848,7 @@ class ColorSpaceSetting extends  AbstractModel {
 }
 
 /**
- * Static graphic overlay configuration.
+ * Static image overlay configuration.
  * @class
  */
 class StaticImageSettings extends  AbstractModel {
@@ -2758,7 +2856,7 @@ class StaticImageSettings extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable global static image overlay, 0: Disable, 1: Enable; Default value: 0.
+         * Whether global static image overlay is enabled. 0: not enabled, 1: enabled. Default value: 0.
          * @type {number || null}
          */
         this.GlobalImageOverlayEnabled = null;
@@ -2911,7 +3009,8 @@ Note: this field may return `null`, indicating that no valid value was found.
         this.FailOverSettings = null;
 
         /**
-         * Caption selector for the input. There can be 0 to 1 audio selectors.
+         * Subtitle selector.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<CaptionSelector> || null}
          */
         this.CaptionSelectors = null;
@@ -3362,19 +3461,19 @@ class VideoTemplateInfo extends  AbstractModel {
         this.VideoBitrate = null;
 
         /**
-         * Video width. Value range: (0,4096]. The value can only be a multiple of 2. If this parameter is left empty, the original value will be used.
+         * Video width. The input range is (0, 4096] and must be a multiple of 2. If left blank, it represents passthrough.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Video height. Value range: (0,4096]. The value can only be a multiple of 2. If this parameter is left empty, the original value will be used.
+         * Video height. Input range is (0, 4096] and must be a multiple of 2. Leave empty to represent passthrough.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Video frame rate. Value range: [1,240]. If this parameter is left empty, the original value will be used.
+         * Video frame rate. Valid when you select SPECIFIED_HZ for FrameRateType. Input range is [1, 240]. Leave blank to represent passthrough.
          * @type {number || null}
          */
         this.Fps = null;
@@ -3392,14 +3491,13 @@ class VideoTemplateInfo extends  AbstractModel {
         this.BitrateCompressionRatio = null;
 
         /**
-         * Bitrate control mode. Valid values: `CBR`, `ABR` (default), `VBR`.
+         * Bitrate control mode. Optional values: [CBR|ABR|VBR]. Default: ABR.
          * @type {string || null}
          */
         this.RateControlMode = null;
 
         /**
-         * Watermark ID
-Note: This field may return `null`, indicating that no valid value was found.
+         * Watermark Id.
          * @type {string || null}
          */
         this.WatermarkId = null;
@@ -3411,67 +3509,67 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.FaceBlurringEnabled = null;
 
         /**
-         * This field indicates how to specify the output video frame rate. If FOLLOW_SOURCE is selected, the output video frame rate will be set equal to the input video frame rate of the first input. If SPECIFIED_FRACTION is selected, the output video frame rate is determined by the fraction (frame rate numerator and frame rate denominator). If SPECIFIED_HZ is selected, the frame rate of the output video is determined by the HZ you enter.
+         * This field indicates how to specify the output video frame rate. If selected FOLLOW_SOURCE, the output video frame rate is set to equal the frame rate of the first input video. If selected SPECIFIED_FRACTION, the output video frame rate is determined by the fraction (frame rate molecular and frame rate denominator). If selected SPECIFIED_HZ, the frame rate of the output video is determined by the HZ you input.
          * @type {string || null}
          */
         this.FrameRateType = null;
 
         /**
-         * Valid when the FrameRateType type you select is SPECIFIED_FRACTION, the output frame rate numerator setting.
+         * Valid when you select SPECIFIED_FRACTION as the FrameRateType. Set the output frame rate molecular.
          * @type {number || null}
          */
         this.FrameRateNumerator = null;
 
         /**
-         * Valid when the FrameRateType type you select is SPECIFIED_FRACTION, the output frame rate denominator setting.
+         * Valid when you select SPECIFIED_FRACTION for FrameRateType. Output frame rate denominator set.
          * @type {number || null}
          */
         this.FrameRateDenominator = null;
 
         /**
-         * The number of B frames can be selected from 1 to 3.
+         * Number of B-frames 1-3.	
          * @type {number || null}
          */
         this.BFramesNum = null;
 
         /**
-         * The number of reference frames can be selected from 1 to 16.
+         * Refer to the number of frames 1-16.	
          * @type {number || null}
          */
         this.RefFramesNum = null;
 
         /**
-         * Additional video bitrate configuration.
+         * Additional video bitrate configuration.	
          * @type {AdditionalRateSetting || null}
          */
         this.AdditionalRateSettings = null;
 
         /**
-         * Video encoding configuration.
+         * Video encoding configuration.	
          * @type {VideoCodecDetail || null}
          */
         this.VideoCodecDetails = null;
 
         /**
-         * Video enhancement switch, 1: on 0: off.
+         * Video enhancement switch, 1: enable 0: disable.
          * @type {number || null}
          */
         this.VideoEnhanceEnabled = null;
 
         /**
-         * Video enhancement parameter array.
+         * Video enhancement parameters array.
          * @type {Array.<VideoEnhanceSetting> || null}
          */
         this.VideoEnhanceSettings = null;
 
         /**
-         * Color space setting.
+         * Colorspace configuration.
          * @type {ColorSpaceSetting || null}
          */
         this.ColorSpaceSettings = null;
 
         /**
-         * Traceability watermark.
+         * Traceable watermark.
          * @type {Array.<string> || null}
          */
         this.ForensicWatermarkIds = null;
@@ -3972,7 +4070,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Collection configuration.
+ * Highlight configuration.
  * @class
  */
 class HighlightInfo extends  AbstractModel {
@@ -3980,49 +4078,51 @@ class HighlightInfo extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable input recognition 0: Disable 1 Enable Default value 0 Disable.
+         * Whether to enable input recognition  0: disabled  1: enabled  Default value: 0.
          * @type {number || null}
          */
         this.HighlightEnabled = null;
 
         /**
-         * The product where the results are saved, optional: COS. Currently, only Tencent Cloud COS is supported. In the future, it will be connected to AWS S3 and COS will be used by default.
+         * Products to save results. Option: COS.
+Currently supports Tencent Cloud COS only. AWS S3 integration will be supported later. Default is COS.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Valid when Type is COS, the region where COS is stored.
+         * Valid when Type is COS. Region of COS storage.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * Valid when Type is COS, the bucket name stored in COS.
+         * Valid when Type is COS. Bucket name of COS storage.
          * @type {string || null}
          */
         this.Bucket = null;
 
         /**
-         * Valid when Type is COS, the path where cos is stored.
+         * Valid when Type is COS. Path of COS storage.
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * Valid when Type is COS, the file name stored in cos.
+         * Valid when Type is COS. Name of the stored file in COS.
          * @type {string || null}
          */
         this.Filename = null;
 
         /**
-         * Valid when Type is COS, the file name suffix stored in COS is automatically generated in the time format, optional values: unix, utc. Unix is the second-level timestamp and UTC is the year, month and day represented by the zero time zone.
+         * Valid when Type is COS. The file extension of COS storage is automatically generated in time format. Available values: unix, utc.
+unix is a second-level timestamp. utc 0 represents the year, month, day.
          * @type {string || null}
          */
         this.TimestampFormat = null;
 
         /**
-         * Audio selector list is optional and can be empty. If not filled in, an audio will be used as the output of the recognition result by default.
+         * Audio selector list, selectable, can be left blank. By default, an audio is used as the output of the recognition result.
          * @type {Array.<string> || null}
          */
         this.AudioSelectorNames = null;
@@ -4204,8 +4304,7 @@ class FailOverSettings extends  AbstractModel {
         super();
 
         /**
-         * ID of the backup input
-Note: this field may return `null`, indicating that no valid value was found.
+         * Input Id of the backup stream.
          * @type {string || null}
          */
         this.SecondaryInputId = null;
@@ -4287,86 +4386,90 @@ class HlsRemuxSettingsInfo extends  AbstractModel {
         super();
 
         /**
-         * Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
+         * Segment duration in milliseconds. Input range is [1000, 30000], default 4000, can only be a multiple of 1000.
          * @type {number || null}
          */
         this.SegmentDuration = null;
 
         /**
-         * Number of segments. Value range: [3,30]. Default value: 5.
+         * Number of shards. Input range [3, 30]. Default is 5.
          * @type {number || null}
          */
         this.SegmentNumber = null;
 
         /**
-         * Whether to enable PDT insertion. Valid values: CLOSE/OPEN. Default value: CLOSE.
+         * Whether to enable Pdt insertion. CLOSE/OPEN. Default is CLOSE.
          * @type {string || null}
          */
         this.PdtInsertion = null;
 
         /**
-         * PDT duration in seconds. Value range: (0,3000]. Default value: 600.
+         * Pdt duration in seconds. Input range (0, 3000]. Default 600.
          * @type {number || null}
          */
         this.PdtDuration = null;
 
         /**
-         * Audio/Video packaging scheme. Valid values: `SEPARATE`, `MERGE`. Default value is: SEPARATE.
+         * Video packaging type, selectable SEPARATE|MERGE.
          * @type {string || null}
          */
         this.Scheme = null;
 
         /**
-         * The segment type. Valid values: `ts` (default), `fmp4`.
-Currently, fMP4 segments do not support DRM or time shifting.
+         * Segment type, supports [ts|fmp4], default ts.
+fmp4 does not currently support DRM and time shifting.
          * @type {string || null}
          */
         this.SegmentType = null;
 
         /**
-         * The HLS package type when the H.265 codec is used. Valid values: `hvc1`, `hev1` (default).
+         * When the transcoding type is H265, the HLS H265 encapsulation type is selectable [hvc1|hev1], default is hev1.
          * @type {string || null}
          */
         this.H265PackageType = null;
 
         /**
-         * Whether to enable low latency 0:CLOSE, 1:OPEN, default value: 0.
+         * Whether to enable low delay. 0:CLOSE. Default is 0. 1:OPEN.
          * @type {number || null}
          */
         this.LowLatency = null;
 
         /**
-         * Low latency slice size, unit ms. Value range: integer [200-HlsRemuxSettings.SegmentDuration] Default value: 500ms.
+         * Small slice size in milliseconds. Value ranges from 200 to SegmentDuration (integer). Default value: 500 ms.
          * @type {number || null}
          */
         this.PartialSegmentDuration = null;
 
         /**
-         * Low latency slice playback position, unit ms. Value range: integer [3*HlsRemuxSettings.PartiSegmentDuration - 3*HlsRemuxSettings.SegmentDuration], Default value: 3*HlsRemuxSettings.PartiSegmentDuration.
+         * Small slice playback position in milliseconds. Value ranges from 3*PartiSegmentDuration to 3*SegmentDuration (integer). Default value: 3*PartiSegmentDuration.
          * @type {number || null}
          */
         this.PartialSegmentPlaySite = null;
 
         /**
-         * Hls main m3u8 file sorting rules by bitrate, optional values: 1: video bitrate ascending order; 2: video bitrate descending order. Default value: 1.
+         * Hls master m3u8 file sorting rule by bitrate. Available values:
+1: Video bitrate ascending 2: Video bitrate descending
+Default value: 1
          * @type {number || null}
          */
         this.StreamOrder = null;
 
         /**
-         * Whether the Hls main m3u8 file contains resolution information, optional values: 1: INCLUDE includes video resolution; 2: EXCLUDE does not include video resolution. Default value: 1.
+         * Whether the Hls master m3u8 file contains resolution information. Available values:
+1: INCLUDE includes video resolution 2: EXCLUDE excludes video resolution.
+Default value: 1.
          * @type {number || null}
          */
         this.VideoResolution = null;
 
         /**
-         * Whether to include the `EXT-X-ENDLIST` tag, 1 includes  `EXT-X-ENDLIST` tag, 2 does not include  `EXT-X-ENDLIST` tag; the default value is 1.
+         * Whether the content contains the `EXT-X-ENDLIST` tag. 1: contains; 2: does not contain. Default: 1.
          * @type {number || null}
          */
         this.EndListTag = null;
 
         /**
-         * Optional: `ENHANCED_SCTE35`, `DATERANGE`; default value: `ENHANCED_SCTE35`.
+         * Option: `ENHANCED_SCTE35`, `DATERANGE`; default `ENHANCED_SCTE35`.
          * @type {string || null}
          */
         this.AdMarkupType = null;
@@ -4567,7 +4670,8 @@ class TimedMetadataSettingInfo extends  AbstractModel {
         super();
 
         /**
-         * Whether to transparently transmit ID3 information, optional values: 0:NO_PASSTHROUGH, 1:PASSTHROUGH, default 0.
+         * Whether to pass through ID3 info. Available values:
+0:NO_PASSTHROUGH, 1:PASSTHROUGH, default 0.
          * @type {number || null}
          */
         this.Behavior = null;
@@ -4607,7 +4711,7 @@ class AudioTemplateInfo extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Audio encoding format, only `AAC` and `PASSTHROUGH` are available, with `AAC` as the default.
+         * Audio encoding format, can only be `AAC` or `PASSTHROUGH`. Default is AAC.
          * @type {string || null}
          */
         this.Acodec = null;
@@ -4620,7 +4724,7 @@ Valid values: 6000, 7000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000,
         this.AudioBitrate = null;
 
         /**
-         * Audio language code, which length is between 2 and 20.
+         * Audio language Code, length 2-20.
          * @type {string || null}
          */
         this.LanguageCode = null;
@@ -4644,7 +4748,7 @@ Valid values: 6000, 7000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000,
         this.AudioCodecDetails = null;
 
         /**
-         * Audio language description, which maximum length is 100.
+         * Audio language description, maximum length 100
          * @type {string || null}
          */
         this.LanguageDescription = null;
@@ -4682,7 +4786,7 @@ Valid values: 6000, 7000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000,
 }
 
 /**
- * 
+ * Audio track configuration list.
  * @class
  */
 class InputTracks extends  AbstractModel {
@@ -4690,7 +4794,7 @@ class InputTracks extends  AbstractModel {
         super();
 
         /**
-         * Audio track configuration information.
+         * Audio track configuration message.
          * @type {Array.<InputTrack> || null}
          */
         this.Tracks = null;
@@ -4975,55 +5079,55 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
         super();
 
         /**
-         * Channel name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
+         * Channel name, limited to lowercase letters, digits, and underscores, length [1, 32], unique in each Region.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Inputs to attach. You can attach 1 to 5 inputs.
+         * Associated media input, limit on the number [1, 5].
          * @type {Array.<AttachedInput> || null}
          */
         this.AttachedInputs = null;
 
         /**
-         * Configuration information of the channel's output groups. Quantity: [1, 10]
+         * Configuration message of the output group for the channel. Limit on the number [1, 10].
          * @type {Array.<StreamLiveOutputGroupsInfo> || null}
          */
         this.OutputGroups = null;
 
         /**
-         * Audio transcoding templates. Quantity: [1, 20]
+         * Audio transcoding template array, with the maximum number of [1, 20].
          * @type {Array.<AudioTemplateInfo> || null}
          */
         this.AudioTemplates = null;
 
         /**
-         * Video transcoding templates. Quantity: [1, 10]
+         * Video transcoding template array, with the maximum number of [1, 10].
          * @type {Array.<VideoTemplateInfo> || null}
          */
         this.VideoTemplates = null;
 
         /**
-         * Audio/Video transcoding templates. Quantity: [1, 10]
+         * Audio and video transcoding template array, with a limit on the number between 1 and 10.
          * @type {Array.<AVTemplate> || null}
          */
         this.AVTemplates = null;
 
         /**
-         * Subtitle template configuration.
+         * Subtitle template configuration is only valid for joint transcoding template.
          * @type {Array.<SubtitleConf> || null}
          */
         this.CaptionTemplates = null;
 
         /**
-         * Event settings
+         * Configuration message of the scheduled task.
          * @type {PlanSettings || null}
          */
         this.PlanSettings = null;
 
         /**
-         * The callback settings.
+         * Callback configuration information.
          * @type {EventNotifySetting || null}
          */
         this.EventNotifySettings = null;
@@ -5041,25 +5145,25 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
         this.PipelineInputSettings = null;
 
         /**
-         * Recognition configuration for input content.
+         * Input content identification configuration.
          * @type {InputAnalysisInfo || null}
          */
         this.InputAnalysisSettings = null;
 
         /**
-         * Console tag list.
+         * Console tag list
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
 
         /**
-         * Frame capture templates.
+         * chart template
          * @type {Array.<FrameCaptureTemplate> || null}
          */
         this.FrameCaptureTemplates = null;
 
         /**
-         * General settings.
+         * Common configuration.
          * @type {GeneralSetting || null}
          */
         this.GeneralSettings = null;
@@ -5187,7 +5291,7 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Dynamic graphic configuration.
  * @class
  */
 class MotionGraphicsSetting extends  AbstractModel {
@@ -5195,7 +5299,8 @@ class MotionGraphicsSetting extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable dynamic graphic overlay, '0' not enabled, '1' enabled; Default 0.
+         * Whether to enable dynamic graphic overlay. `0`: not enabled, `1`: enabled. Default: 0.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MotionGraphicsOverlayEnabled = null;
@@ -5328,7 +5433,7 @@ class AbWatermarkDetectionInfo extends  AbstractModel {
 }
 
 /**
- * Cos destination setting.
+ * Cos address configuration
  * @class
  */
 class CosSettings extends  AbstractModel {
@@ -5348,25 +5453,25 @@ class CosSettings extends  AbstractModel {
         this.Bucket = null;
 
         /**
-         * File output path, which can be empty. If it is not empty, it  ends with /.
+         * COS file output path, can be empty, ends with / if not empty.
          * @type {string || null}
          */
         this.FilePath = null;
 
         /**
-         * User-defined name, supports alphanumeric characters, underscores, and hyphens, with a length between 1 and 32 characters.
+         * User-defined name supports 1 to 32 characters consisting of digits, letters, underscores (_), and hyphens (-).
          * @type {string || null}
          */
         this.FileName = null;
 
         /**
-         * File suffix, only supports `jpg`.
+         * COS file suffix is only supported for jpg.
          * @type {string || null}
          */
         this.FileExt = null;
 
         /**
-         * Support `unix` or `utc0`, default unix.
+         * Support [unix|utc0]. Default is unix.
          * @type {string || null}
          */
         this.TimeFormat = null;
@@ -5491,87 +5596,85 @@ class SubtitleConf extends  AbstractModel {
         super();
 
         /**
-         * Template name.
+         * Template Name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Name of caption selector. Required when CaptionSource selects `INPUT`.
+         * Name of the subtitle selector. Required when CaptionSource is set to INPUT.
          * @type {string || null}
          */
         this.CaptionSelectorName = null;
 
         /**
-         * Optional values: INPUT (source subtitle information), ANALYSIS (intelligent speech recognition to subtitles).
+         * Available values: INPUT (source subtitle information), ANALYSIS (intelligent voice recognition to subtitle).
          * @type {string || null}
          */
         this.CaptionSource = null;
 
         /**
-         * Optional values: 1 Source, 2 Source+Target, 3 Target (original language only, original language + translation language, translation language). Required when CaptionSource selects `ANALYSIS `. When outputting as WebVTT, a single template can only output one language.
+         * Available values: 1 Source, 2 Source+Target, 3 Target (source language only, source language + target language, target language). When the output is WebVTT, it can only output one language.
          * @type {number || null}
          */
         this.ContentType = null;
 
         /**
-         * Output mode: 1 Burn in, 2 Embedded, 3 WebVTT. Support `2` when CaptionSource selects `INPUT`. Support `1` and `3` when CaptionSource selects `ANALYSIS `.
+         * Output mode: 1 Burn in, 2 Embedded, 3 WebVTT. When CaptionSource is INPUT, it supports only 2. When CaptionSource is ANALYSIS, it supports 1, 3.
          * @type {number || null}
          */
         this.TargetType = null;
 
         /**
-         * Original phonetic language.
-Optional values: Chinese, English, Japanese, Korean. Required when CaptionSource selects `ANALYSIS `.
+         * Original speech languages: Chinese, English, Japanese, Korean.
          * @type {string || null}
          */
         this.SourceLanguage = null;
 
         /**
-         * Target language.
-Optional values: Chinese, English, Japanese, Korean. Required when CaptionSource selects `ANALYSIS `.
+         * Target languages: Chinese, English, Japanese, Korean.
          * @type {string || null}
          */
         this.TargetLanguage = null;
 
         /**
-         * Font style configuration. Required when CaptionSource selects `ANALYSIS `.
+         * Font style configuration. Required for BurnIn.
          * @type {SubtitleFontConf || null}
          */
         this.FontStyle = null;
 
         /**
-         * There are two modes: STEADY and DYNAMIC, corresponding to steady state and unstable state respectively; the default is STEADY. Required when CaptionSource selects `ANALYSIS `. When the output is WebVTT, only STEADY can be selected.
+         * STEADY and DYNAMIC modes correspond to steady state and non-steady state respectively. Default is STEADY. Only select STEADY when the output is WebVTT.
          * @type {string || null}
          */
         this.StateEffectMode = null;
 
         /**
-         * Steady-state delay time, unit seconds; optional values: 10, 20, default 10. Required when CaptionSource selects `ANALYSIS `.
+         * Steady-state delay time in seconds. Value range: 10, 20. Default: 10.
          * @type {number || null}
          */
         this.SteadyStateDelayedTime = null;
 
         /**
-         * Audio selector name, required for generating WebVTT subtitles using speech recognition, can be empty.
+         * Audio selector name, required for speech recognition to generate WebVTT subtitles, can be empty
          * @type {string || null}
          */
         this.AudioSelectorName = null;
 
         /**
-         * Format configuration for speech recognition output on WebVTT.
+         * Format configuration for WebVTT output in speech recognition.
          * @type {WebVTTFontStyle || null}
          */
         this.WebVTTFontStyle = null;
 
         /**
-         * Language code, length 2-20. ISO 639-2 three-digit code is recommend.
+         * Language code, length 2-20.
          * @type {string || null}
          */
         this.LanguageCode = null;
 
         /**
-         * Language description, less than 100 characters in length.
+         * Language description, length less than 100.
          * @type {string || null}
          */
         this.LanguageDescription = null;
@@ -5872,7 +5975,7 @@ class DescribeStreamLiveChannelAlertsResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Thumbnail configuration
  * @class
  */
 class ThumbnailSettings extends  AbstractModel {
@@ -5880,7 +5983,7 @@ class ThumbnailSettings extends  AbstractModel {
         super();
 
         /**
-         * Generate thumbnail ,0: Disabled ,1: Enabled , Default: 0
+         * Whether to generate thumbnails  0: disabled  1: enabled  Default value: 0
          * @type {number || null}
          */
         this.ThumbnailEnabled = null;
@@ -6124,10 +6227,16 @@ class AdBreakSetting extends  AbstractModel {
         this.Format = null;
 
         /**
-         * Duration, in milliseconds, requires 1000<duration<=600000. The current accuracy is seconds, which is a multiple of 1000
+         * Duration, in milliseconds, requires 1000&lt;duration&lt;=600000 The current accuracy is seconds, which is a multiple of 1000
          * @type {number || null}
          */
         this.Duration = null;
+
+        /**
+         * AdSource type, supports UPLOAD_CREATIVES
+         * @type {string || null}
+         */
+        this.AdSource = null;
 
         /**
          * L-type compression recovery configuration
@@ -6136,10 +6245,16 @@ class AdBreakSetting extends  AbstractModel {
         this.LSqueezeSetting = null;
 
         /**
-         * AdSource type, supports UPLOAD_CREATIVES
-         * @type {string || null}
+         * 
+         * @type {PipSetting || null}
          */
-        this.AdSource = null;
+        this.PipSetting = null;
+
+        /**
+         * 
+         * @type {BorderFrameSetting || null}
+         */
+        this.BorderFrameSetting = null;
 
     }
 
@@ -6152,13 +6267,25 @@ class AdBreakSetting extends  AbstractModel {
         }
         this.Format = 'Format' in params ? params.Format : null;
         this.Duration = 'Duration' in params ? params.Duration : null;
+        this.AdSource = 'AdSource' in params ? params.AdSource : null;
 
         if (params.LSqueezeSetting) {
             let obj = new LSqueezeSetting();
             obj.deserialize(params.LSqueezeSetting)
             this.LSqueezeSetting = obj;
         }
-        this.AdSource = 'AdSource' in params ? params.AdSource : null;
+
+        if (params.PipSetting) {
+            let obj = new PipSetting();
+            obj.deserialize(params.PipSetting)
+            this.PipSetting = obj;
+        }
+
+        if (params.BorderFrameSetting) {
+            let obj = new BorderFrameSetting();
+            obj.deserialize(params.BorderFrameSetting)
+            this.BorderFrameSetting = obj;
+        }
 
     }
 }
@@ -6653,52 +6780,49 @@ class OutputInfo extends  AbstractModel {
 
         /**
          * Audio transcoding template name array.
-Quantity limit: [0,1] for RTMP; [0,20] for others.
-Note: this field may return null, indicating that no valid values can be obtained.
+RTMP limit [0, 1], other limits [0, 20].
          * @type {Array.<string> || null}
          */
         this.AudioTemplateNames = null;
 
         /**
-         * Video transcoding template name array. Quantity limit: [0,1].
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Video transcoding template name array, with the maximum number of [0, 1].
          * @type {Array.<string> || null}
          */
         this.VideoTemplateNames = null;
 
         /**
-         * SCTE-35 information configuration.
+         * Scte-35 information configuration.
          * @type {Scte35SettingsInfo || null}
          */
         this.Scte35Settings = null;
 
         /**
-         * Audio/Video transcoding template name. If `HlsRemuxSettings.Scheme` is `MERGE`, there is 1 audio/video transcoding template. Otherwise, this parameter is empty.
-Note: this field may return `null`, indicating that no valid value was found.
+         * Audio/video transcoding template name array, with the maximum number of 1.
          * @type {Array.<string> || null}
          */
         this.AVTemplateNames = null;
 
         /**
-         * For the subtitle template used, only the AVTemplateNames is valid.
+         * The used subtitle template is only valid for merge template.
          * @type {Array.<string> || null}
          */
         this.CaptionTemplateNames = null;
 
         /**
-         * Meta information controls configuration.
+         * Meta-information control configuration.
          * @type {TimedMetadataSettingInfo || null}
          */
         this.TimedMetadataSettings = null;
 
         /**
-         * Frame capture template name array. Quantity limit: [0,1].
+         * Screenshot transcode template name array. Limit: 1.
          * @type {Array.<string> || null}
          */
         this.FrameCaptureTemplateNames = null;
 
         /**
-         * Name modification for sub m3u8.
+         * Modify the name of the sub-m3u8.
          * @type {string || null}
          */
         this.NameModifier = null;
@@ -6821,7 +6945,7 @@ class StaticImageDeactivateSetting extends  AbstractModel {
 }
 
 /**
- * Video codec additional configuration.
+ * Additional configuration for video codec.
  * @class
  */
 class VideoCodecDetail extends  AbstractModel {
@@ -6829,31 +6953,31 @@ class VideoCodecDetail extends  AbstractModel {
         super();
 
         /**
-         * The three image quality levels of h264 include: BASELINE, HIGH, and MAIN. The default option is MAIN.
+         * Three image quality levels for H264, options include: BASELINE, HIGH, MAIN. The default option is MAIN.
          * @type {string || null}
          */
         this.Profile = null;
 
         /**
-         * Profile corresponding codec performance, options include: 1, 1.1, 1.2, 1.3, 2, 2.1, 2.2, 2.3, 3, 3.1, 3.2, 4, 4.1, 4.2, 5, 5.1, AUTO. The default option is AUTO.
+         * Decoding performance of the profile. Options include 1, 1.1, 1.2, 1.3, 2, 2.1, 2.2, 2.3, 3, 3.1, 3.2, 4, 4.1, 4.2, 5, 5.1, AUTO. The default option is AUTO.
          * @type {string || null}
          */
         this.Level = null;
 
         /**
-         * Codecs include entropy coding and lossless coding, and options include: CABAC and CAVLC. The default option is CABAC. .
+         * Encoding/decoding includes entropy encoding and lossless encoding. Options include CABAC and CAVLC. The default option is CABAC.
          * @type {string || null}
          */
         this.EntropyEncoding = null;
 
         /**
-         * Mode, options include: AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF. The default option is: AUTO. .
+         * Mode, options include: AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF. Default option: AUTO.
          * @type {string || null}
          */
         this.AdaptiveQuantization = null;
 
         /**
-         * Analyze subsequent encoded frames in advance, options include: HIGH, LOW, MEDIUM. The default option is: MEDIUM. .
+         * Analyze subsequent coding frames in advance. Options include HIGH, LOW, and MEDIUM. Default option is MEDIUM.
          * @type {string || null}
          */
         this.LookAheadRateControl = null;
@@ -6885,13 +7009,13 @@ class CreateStreamLiveChannelResponse extends  AbstractModel {
         super();
 
         /**
-         * Channel ID
+         * Channel ID.
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Tag prompt information, this information will be attached when the tag operation fails.
+         * Tag prompt message. When the operation fails, the information comes with it.
          * @type {string || null}
          */
         this.TagMsg = null;
@@ -7033,7 +7157,7 @@ class InputTrack extends  AbstractModel {
         super();
 
         /**
-         * Audio track index 1-based index mapping to the specified audio track integer starting from 1.
+         * Audio track index  1-based index mapping to the specified audio track  Integer starting from 1.
          * @type {number || null}
          */
         this.TrackIndex = null;
@@ -7169,18 +7293,15 @@ class StreamLiveOutputGroupsInfo extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Output protocol
-Valid values: `HLS`, `DASH`, `HLS_ARCHIVE`, 
- `DASH_ARCHIVE`, `HLS_STREAM_PACKAGE`, 
- `DASH_STREAM_PACKAGE`, 
- `FRAME_CAPTURE`, `RTP`, `RTMP`, `M2TS`.
+         * Output protocol type.
+Selectable HLS/DASH/HLS_ARCHIVE/DASH_ARCHIVE/HLS_STREAM_PACKAGE/DASH_STREAM_PACKAGE/FRAME_CAPTURE/RTP/RTMP/M2TS.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Output information
-If the type is RTMP, RTP or FRAME_CAPTURE, only one output is allowed; if it is HLS or DASH, 1-10 outputs are allowed.
+         * Output information.
+RTMP/RTP/FRAME_CAPTURE limit [1,1], HLS/DASH limit [1,10].
          * @type {Array.<OutputInfo> || null}
          */
         this.Outputs = null;
@@ -7192,36 +7313,31 @@ If the type is RTMP, RTP or FRAME_CAPTURE, only one output is allowed; if it is 
         this.Destinations = null;
 
         /**
-         * HLS protocol configuration information, which takes effect only for HLS/HLS_ARCHIVE/HLS_STREAM_PACKAGE outputs.
-Note: this field may return `null`, indicating that no valid value was found.
+         * HLS protocol configuration info, valid only for HLS/HLS_ARCHIVE.
          * @type {HlsRemuxSettingsInfo || null}
          */
         this.HlsRemuxSettings = null;
 
         /**
-         * DRM configuration information
-Note: this field may return `null`, indicating that no valid value was found.
+         * DRM configuration message.
          * @type {DrmSettingsInfo || null}
          */
         this.DrmSettings = null;
 
         /**
-         * DASH protocol configuration information, which takes effect only for DASH/DASH_ARCHIVE outputs
-Note: this field may return `null`, indicating that no valid value was found.
+         * DASH protocol configuration info, valid only for DASH/DSAH_ARCHIVE.
          * @type {DashRemuxSettingsInfo || null}
          */
         this.DashRemuxSettings = null;
 
         /**
-         * StreamPackage configuration information, which is required if the output type is StreamPackage
-Note: this field may return `null`, indicating that no valid value was found.
+         * Configuration message for media encapsulation. Requires filling in when Type is related to StreamPackage.
          * @type {StreamPackageSettingsInfo || null}
          */
         this.StreamPackageSettings = null;
 
         /**
-         * Time-shift configuration information
-Note: This field may return `null`, indicating that no valid value was found.
+         * Time shift configuration information.
          * @type {TimeShiftSettingsInfo || null}
          */
         this.TimeShiftSettings = null;
@@ -7330,7 +7446,7 @@ class ChannelOutputsStatistics extends  AbstractModel {
 }
 
 /**
- * additional bit rate configuration.
+ * Additional bitrate configuration for video template.
  * @class
  */
 class AdditionalRateSetting extends  AbstractModel {
@@ -7338,19 +7454,19 @@ class AdditionalRateSetting extends  AbstractModel {
         super();
 
         /**
-         * The maximum bit rate in a VBR scenario must be a multiple of 1000 and between 50000 - 40000000.
+         * The maximum bitrate in the VBR scenario must be a multiple of 1000 and between 50000 and 40000000.
          * @type {number || null}
          */
         this.VideoMaxBitrate = null;
 
         /**
-         * Cache configuration supports configuring a Max Bitrate value of 1-4 times.
+         * Cache configuration supports configuration as 1-4x the Max Bitrate value.
          * @type {number || null}
          */
         this.BufferSize = null;
 
         /**
-         * VBR scene is valid, video quality level, only supports user input numbers between 1-51.
+         * Valid in VBR scenarios. Video quality level. Only supports user input of numbers between 1 and 51.
          * @type {number || null}
          */
         this.QualityLevel = null;
@@ -7380,8 +7496,7 @@ class PlanSettings extends  AbstractModel {
         super();
 
         /**
-         * Timed recording settings
-Note: This field may return `null`, indicating that no valid value was found.
+         * Configuration message of the scheduled recording task.
          * @type {TimedRecordSettings || null}
          */
         this.TimedRecordSettings = null;
@@ -7505,7 +7620,7 @@ class AbWatermarkSettingsReq extends  AbstractModel {
 }
 
 /**
- * General setting.
+ * Common configuration.
  * @class
  */
 class GeneralSetting extends  AbstractModel {
@@ -7513,19 +7628,19 @@ class GeneralSetting extends  AbstractModel {
         super();
 
         /**
-         * Static graphic overlay configuration.
+         * Static image overlay configuration.
          * @type {StaticImageSettings || null}
          */
         this.StaticImageSettings = null;
 
         /**
-         * Dynamic graphic overlay configuration.
+         * Real-time graphic overlay configuration.
          * @type {MotionGraphicsSetting || null}
          */
         this.MotionGraphicsSettings = null;
 
         /**
-         * Thumbnail Configuration.
+         * Thumbnail configuration
          * @type {ThumbnailSettings || null}
          */
         this.ThumbnailSettings = null;
@@ -7570,7 +7685,7 @@ class EventNotifySetting extends  AbstractModel {
         super();
 
         /**
-         * The callback configuration for push events.
+         * Inference stream callback configuration. Currently supports rtmp_push, rtmps_push, and rtmp_pull input types.
          * @type {PushEventSetting || null}
          */
         this.PushEventSettings = null;
@@ -7925,34 +8040,30 @@ Note: uppercase letters in the string will be automatically converted to lowerca
         this.Key = null;
 
         /**
-         * Required for Widevine encryption. Valid values: SD, HD, UHD1, UHD2, AUDIO, ALL.
-ALL refers to all tracks. If this parameter is set to ALL, no other tracks can be added.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Widevine encryption is required. Selectable options: SD/HD/UHD1/UHD2/AUDIO/ALL.
+Among them, ALL represents select ALL. If ALL is specified, you cannot add other tracks.
          * @type {string || null}
          */
         this.Track = null;
 
         /**
-         * Required for Widevine encryption. It is a 32-bit hexadecimal string.
-Note: uppercase letters in the string will be automatically converted to lowercase ones.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * KeyId for Widevine encryption, a 32-bit length hexadecimal string.
+Note: The string will be modified to lowercase.
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * Required when FairPlay uses the AES encryption method. It is a 32-bit hexadecimal string.
-For more information about this parameter, please see: 
+         * Iv for AES encryption in Fairplay, a 32-bit length hexadecimal string.
+Iv parsing reference
 https://tools.ietf.org/html/rfc3826
-Note: uppercase letters in the string will be automatically converted to lowercase ones.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: The string will be modified to lowercase.
          * @type {string || null}
          */
         this.Iv = null;
 
         /**
-         * The URI of the license server when AES-128 is used. This parameter may be empty.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * uri of the license server. AES128 is used. Can be empty.
          * @type {string || null}
          */
         this.KeyUri = null;
@@ -9422,6 +9533,46 @@ class SegmentationDescriptorInfo extends  AbstractModel {
 }
 
 /**
+ * BorderFrameSetting
+ * @class
+ */
+class BorderFrameSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {SourceLayout || null}
+         */
+        this.LiveSourceLayout = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BackgroundImgUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LiveSourceLayout) {
+            let obj = new SourceLayout();
+            obj.deserialize(params.LiveSourceLayout)
+            this.LiveSourceLayout = obj;
+        }
+        this.BackgroundImgUrl = 'BackgroundImgUrl' in params ? params.BackgroundImgUrl : null;
+
+    }
+}
+
+/**
  * The input settings.
 The format of an RTMP_PUSH/RTMPS_PUSH address is ${InputAddress}/${AppName}/${StreamName}.
 The format of an SRT_PUSH address is ${InputAddress}?streamid=${StreamName},h=${InputDomain}.
@@ -9648,6 +9799,7 @@ module.exports = {
     VideoEnhanceSetting: VideoEnhanceSetting,
     AudioTrackInfo: AudioTrackInfo,
     CreateStreamLiveInputSecurityGroupResponse: CreateStreamLiveInputSecurityGroupResponse,
+    PipSetting: PipSetting,
     CreateWatermarkDetectionRequest: CreateWatermarkDetectionRequest,
     StreamInfo: StreamInfo,
     StreamVideoInfo: StreamVideoInfo,
@@ -9674,6 +9826,7 @@ module.exports = {
     DestinationInfo: DestinationInfo,
     Tag: Tag,
     DeleteStreamLiveInputRequest: DeleteStreamLiveInputRequest,
+    SourceLayout: SourceLayout,
     ModifyStreamLiveInputSecurityGroupResponse: ModifyStreamLiveInputSecurityGroupResponse,
     AmazonS3Settings: AmazonS3Settings,
     ModifyStreamLiveInputRequest: ModifyStreamLiveInputRequest,
@@ -9815,6 +9968,7 @@ module.exports = {
     DescribeStreamLiveInputSecurityGroupResponse: DescribeStreamLiveInputSecurityGroupResponse,
     StreamLiveChannelInfo: StreamLiveChannelInfo,
     SegmentationDescriptorInfo: SegmentationDescriptorInfo,
+    BorderFrameSetting: BorderFrameSetting,
     InputSettingInfo: InputSettingInfo,
     DescribeImageSettings: DescribeImageSettings,
     DeleteStreamLiveChannelRequest: DeleteStreamLiveChannelRequest,

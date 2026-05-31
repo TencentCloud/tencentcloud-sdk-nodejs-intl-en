@@ -1326,42 +1326,36 @@ class Rect extends  AbstractModel {
 }
 
 /**
- * RecognizeMainlandIDCardOCR request structure.
+ * Vehicle license plate information
  * @class
  */
-class RecognizeMainlandIDCardOCRRequest extends  AbstractModel {
+class LicensePlateInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The Base64 value of the image. The image is required to be no larger than 7M after Base64 encoding, and the resolution is recommended to be 500*800 or above. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+         * The recognized license plate number.
          * @type {string || null}
          */
-        this.ImageBase64 = null;
+        this.Number = null;
 
         /**
-         * The URL address of the image. The image is required to be no larger than 7M after Base64 encoding, and the resolution is recommended to be 500*800 or above. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. It is recommended that images be stored in Tencent Cloud to ensure higher download speed and stability.
+         * The confidence score (0–100).
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * The bounding box coordinates of the text line in the original image.
+         * @type {Rect || null}
+         */
+        this.Rect = null;
+
+        /**
+         * The recognized license plate color, which currently includes "white", "black", "blue", "green", "yellow", "yellow-green", and "temporary plate".
          * @type {string || null}
          */
-        this.ImageUrl = null;
-
-        /**
-         * FRONT: The side of the ID card with the photo (portrait side), BACK: The side of the ID card with the national emblem (national emblem side). If this parameter is not filled in, the front and back of the ID card will be automatically determined for you.
-         * @type {string || null}
-         */
-        this.CardSide = null;
-
-        /**
-         * Whether to return the ID card portrait, the default is false
-         * @type {boolean || null}
-         */
-        this.CropPortrait = null;
-
-        /**
-         * Whether to enable ID card photo cropping (removing excess edges outside the ID, automatically correcting the shooting angle), the default value is false
-         * @type {boolean || null}
-         */
-        this.CropIdCard = null;
+        this.Color = null;
 
     }
 
@@ -1372,11 +1366,15 @@ class RecognizeMainlandIDCardOCRRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.CardSide = 'CardSide' in params ? params.CardSide : null;
-        this.CropPortrait = 'CropPortrait' in params ? params.CropPortrait : null;
-        this.CropIdCard = 'CropIdCard' in params ? params.CropIdCard : null;
+        this.Number = 'Number' in params ? params.Number : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+        if (params.Rect) {
+            let obj = new Rect();
+            obj.deserialize(params.Rect)
+            this.Rect = obj;
+        }
+        this.Color = 'Color' in params ? params.Color : null;
 
     }
 }
@@ -8582,6 +8580,51 @@ RetImage: whether to return the processed image (base64 encrypted string); the v
 }
 
 /**
+ * Detected coordinate recognition information.
+ * @class
+ */
+class CoordsItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Coordinates of four points in the image.
+         * @type {Polygon || null}
+         */
+        this.Polygon = null;
+
+        /**
+         * Coordinates of two points in the image.
+         * @type {ItemCoord || null}
+         */
+        this.Coords = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Polygon) {
+            let obj = new Polygon();
+            obj.deserialize(params.Polygon)
+            this.Polygon = obj;
+        }
+
+        if (params.Coords) {
+            let obj = new ItemCoord();
+            obj.deserialize(params.Coords)
+            this.Coords = obj;
+        }
+
+    }
+}
+
+/**
  * Non-tax revenue
  * @class
  */
@@ -10113,36 +10156,42 @@ class ItemCoord extends  AbstractModel {
 }
 
 /**
- * Vehicle license plate information
+ * RecognizeMainlandIDCardOCR request structure.
  * @class
  */
-class LicensePlateInfo extends  AbstractModel {
+class RecognizeMainlandIDCardOCRRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The recognized license plate number.
+         * The Base64 value of the image. The image is required to be no larger than 7M after Base64 encoding, and the resolution is recommended to be 500*800 or above. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
          * @type {string || null}
          */
-        this.Number = null;
+        this.ImageBase64 = null;
 
         /**
-         * The confidence score (0–100).
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * The bounding box coordinates of the text line in the original image.
-         * @type {Rect || null}
-         */
-        this.Rect = null;
-
-        /**
-         * The recognized license plate color, which currently includes "white", "black", "blue", "green", "yellow", "yellow-green", and "temporary plate".
+         * The URL address of the image. The image is required to be no larger than 7M after Base64 encoding, and the resolution is recommended to be 500*800 or above. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. It is recommended that images be stored in Tencent Cloud to ensure higher download speed and stability.
          * @type {string || null}
          */
-        this.Color = null;
+        this.ImageUrl = null;
+
+        /**
+         * FRONT: The side of the ID card with the photo (portrait side), BACK: The side of the ID card with the national emblem (national emblem side). If this parameter is not filled in, the front and back of the ID card will be automatically determined for you.
+         * @type {string || null}
+         */
+        this.CardSide = null;
+
+        /**
+         * Whether to return the ID card portrait, the default is false
+         * @type {boolean || null}
+         */
+        this.CropPortrait = null;
+
+        /**
+         * Whether to enable ID card photo cropping (removing excess edges outside the ID, automatically correcting the shooting angle), the default value is false
+         * @type {boolean || null}
+         */
+        this.CropIdCard = null;
 
     }
 
@@ -10153,15 +10202,11 @@ class LicensePlateInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Number = 'Number' in params ? params.Number : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-
-        if (params.Rect) {
-            let obj = new Rect();
-            obj.deserialize(params.Rect)
-            this.Rect = obj;
-        }
-        this.Color = 'Color' in params ? params.Color : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.CardSide = 'CardSide' in params ? params.CardSide : null;
+        this.CropPortrait = 'CropPortrait' in params ? params.CropPortrait : null;
+        this.CropIdCard = 'CropIdCard' in params ? params.CropIdCard : null;
 
     }
 }
@@ -11350,6 +11395,70 @@ class RecognizeMexicoVTIDRequest extends  AbstractModel {
 }
 
 /**
+ * PODAuditAI response structure.
+ * @class
+ */
+class PODAuditAIResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>0 means non-compliance 1 means compliance</p>
+         * @type {number || null}
+         */
+        this.AuditorDecision = null;
+
+        /**
+         * <p>Reason code for non-compliance. If there are multiple, return a list of multiple codes.</p><p>Enumeration value:</p><ul><li>100: Wrong delivery address</li><li>101: No house number</li><li>104: Single question</li><li>200: No package</li><li>202: Privacy leakage</li></ul>
+         * @type {Array.<string> || null}
+         */
+        this.FailCode = null;
+
+        /**
+         * <p>Entire approval result analysis content</p>
+         * @type {string || null}
+         */
+        this.ResultAnalysis = null;
+
+        /**
+         * <p>Analysis result logs of each layer, including time taken, judgment reason, and judgment conclusion</p>
+         * @type {Array.<AnalyzedLog> || null}
+         */
+        this.AnalyzedLogs = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuditorDecision = 'AuditorDecision' in params ? params.AuditorDecision : null;
+        this.FailCode = 'FailCode' in params ? params.FailCode : null;
+        this.ResultAnalysis = 'ResultAnalysis' in params ? params.ResultAnalysis : null;
+
+        if (params.AnalyzedLogs) {
+            this.AnalyzedLogs = new Array();
+            for (let z in params.AnalyzedLogs) {
+                let obj = new AnalyzedLog();
+                obj.deserialize(params.AnalyzedLogs[z]);
+                this.AnalyzedLogs.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Toll receipt
  * @class
  */
@@ -11871,24 +11980,36 @@ V2
 }
 
 /**
- * Detected coordinate recognition information.
+ * Intelligent review log
  * @class
  */
-class CoordsItem extends  AbstractModel {
+class AnalyzedLog extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Coordinates of four points in the image.
-         * @type {Polygon || null}
+         * <p>Indexes of the procedure.</p><p>Enumeration value:</p><ul><li>L1_IMAGE_QUALITY: Image quality detection</li><li>L2_RULE_ENGINE: Rule verification</li><li>L3_LLM_JUDGE: Large model judgment</li></ul>
+         * @type {string || null}
          */
-        this.Polygon = null;
+        this.StepKey = null;
 
         /**
-         * Coordinates of two points in the image.
-         * @type {ItemCoord || null}
+         * <p>Compliant and non-compliant are final states; to be determined is an intermediate state. Judgment status of each layer: Compliant Non-Compliant Pending.</p>
+         * @type {string || null}
          */
-        this.Coords = null;
+        this.Decision = null;
+
+        /**
+         * <p>Reason for the current layer judgment</p>
+         * @type {string || null}
+         */
+        this.DecisionMessage = null;
+
+        /**
+         * <p>Time taken by the current layer</p><p>Unit: ms</p>
+         * @type {number || null}
+         */
+        this.CostTime = null;
 
     }
 
@@ -11899,18 +12020,10 @@ class CoordsItem extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Polygon) {
-            let obj = new Polygon();
-            obj.deserialize(params.Polygon)
-            this.Polygon = obj;
-        }
-
-        if (params.Coords) {
-            let obj = new ItemCoord();
-            obj.deserialize(params.Coords)
-            this.Coords = obj;
-        }
+        this.StepKey = 'StepKey' in params ? params.StepKey : null;
+        this.Decision = 'Decision' in params ? params.Decision : null;
+        this.DecisionMessage = 'DecisionMessage' in params ? params.DecisionMessage : null;
+        this.CostTime = 'CostTime' in params ? params.CostTime : null;
 
     }
 }
@@ -12258,6 +12371,55 @@ For a non-Tencent Cloud URL, the download speed and stability may be affected.
         this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
+ * PODAuditAI request structure.
+ * @class
+ */
+class PODAuditAIRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>The Base64 value of the image/PDF. The Base64 must be no more than 10M, resolution is recommended to be 600*800 or higher, and supports PNG, JPG, JPEG, BMP, PDF formats. Either ImageUrl or ImageBase64 of the image must be provided. If both are provided, only use ImageUrl. Example value: /9j/4AAQSkZJRg.....s97n//2Q==</p>
+         * @type {Array.<string> || null}
+         */
+        this.ImageBase64List = null;
+
+        /**
+         * <p>The Url address of the image/PDF. The image after Base64 encoding should be no more than 10M, with a resolution of 600*800 or higher, and supports PNG, JPG, JPEG, BMP, and PDF formats. The image download time should not exceed 3 seconds. Images stored in Tencent Cloud's Url can guarantee higher download speed and stability. It is recommended to store images in Tencent Cloud. The speed and stability of non-Tencent Cloud storage URLs may be impacted to a certain extent. Example value: https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/general/GeneralAccurateOCR/GeneralAccurateOCR1.JPG</p>
+         * @type {Array.<string> || null}
+         */
+        this.ImageUrlList = null;
+
+        /**
+         * <p>Waybill number is used for pod rule review assistance</p>
+         * @type {string || null}
+         */
+        this.WaybillNumber = null;
+
+        /**
+         * <p>No      The acknowledge type, 0 is selected by default</p><p>Enumeration value:</p><ul><li>0: Doorstep/yard</li><li>1: Parcel reception room</li><li>2: Myself/others acknowledge</li><li>3: Front desk/reception</li><li>4: Express delivery collection point</li><li>5: Express cabinet</li></ul>
+         * @type {number || null}
+         */
+        this.SignType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64List = 'ImageBase64List' in params ? params.ImageBase64List : null;
+        this.ImageUrlList = 'ImageUrlList' in params ? params.ImageUrlList : null;
+        this.WaybillNumber = 'WaybillNumber' in params ? params.WaybillNumber : null;
+        this.SignType = 'SignType' in params ? params.SignType : null;
 
     }
 }
@@ -12737,7 +12899,7 @@ module.exports = {
     PermitOCRResponse: PermitOCRResponse,
     RecognizeBrazilDriverLicenseOCRRequest: RecognizeBrazilDriverLicenseOCRRequest,
     Rect: Rect,
-    RecognizeMainlandIDCardOCRRequest: RecognizeMainlandIDCardOCRRequest,
+    LicensePlateInfo: LicensePlateInfo,
     VatRollItem: VatRollItem,
     HmtResidentPermitOCRResponse: HmtResidentPermitOCRResponse,
     WordPolygon: WordPolygon,
@@ -12809,6 +12971,7 @@ module.exports = {
     GeneralAccurateOCRRequest: GeneralAccurateOCRRequest,
     UsedCarPurchaseInvoice: UsedCarPurchaseInvoice,
     RecognizeMacaoIDCardOCRRequest: RecognizeMacaoIDCardOCRRequest,
+    CoordsItem: CoordsItem,
     NonTaxIncomeBill: NonTaxIncomeBill,
     MLIDPassportOCRResponse: MLIDPassportOCRResponse,
     AirTransport: AirTransport,
@@ -12825,7 +12988,7 @@ module.exports = {
     ConfigAdvanced: ConfigAdvanced,
     LineInfo: LineInfo,
     ItemCoord: ItemCoord,
-    LicensePlateInfo: LicensePlateInfo,
+    RecognizeMainlandIDCardOCRRequest: RecognizeMainlandIDCardOCRRequest,
     VatInvoiceRoll: VatInvoiceRoll,
     ApplyCardVerificationExternalResponse: ApplyCardVerificationExternalResponse,
     Polygon: Polygon,
@@ -12841,6 +13004,7 @@ module.exports = {
     MainlandPermitOCRResponse: MainlandPermitOCRResponse,
     NonTaxItem: NonTaxItem,
     RecognizeMexicoVTIDRequest: RecognizeMexicoVTIDRequest,
+    PODAuditAIResponse: PODAuditAIResponse,
     TollInvoice: TollInvoice,
     SmartStructuralProResponse: SmartStructuralProResponse,
     TableOCRResponse: TableOCRResponse,
@@ -12848,11 +13012,12 @@ module.exports = {
     RecognizeBrazilDriverLicenseOCRResponse: RecognizeBrazilDriverLicenseOCRResponse,
     BrazilCardInfo: BrazilCardInfo,
     RecognizeIndonesiaIDCardOCRRequest: RecognizeIndonesiaIDCardOCRRequest,
-    CoordsItem: CoordsItem,
+    AnalyzedLog: AnalyzedLog,
     VinOCRRequest: VinOCRRequest,
     BrazilRNEInfo: BrazilRNEInfo,
     MLIDCardOCRResponse: MLIDCardOCRResponse,
     RecognizePhilippinesTinIDOCRRequest: RecognizePhilippinesTinIDOCRRequest,
+    PODAuditAIRequest: PODAuditAIRequest,
     RecognizeThaiPinkCardRequest: RecognizeThaiPinkCardRequest,
     BankCardOCRResponse: BankCardOCRResponse,
     RecognizeThaiPinkCardResponse: RecognizeThaiPinkCardResponse,

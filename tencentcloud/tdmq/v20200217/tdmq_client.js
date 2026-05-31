@@ -34,7 +34,7 @@ const RabbitMQVipInstance = models.RabbitMQVipInstance;
 const RabbitMQClusterInfo = models.RabbitMQClusterInfo;
 const RabbitMQVirtualHostStatistics = models.RabbitMQVirtualHostStatistics;
 const DescribeRabbitMQQueuesResponse = models.DescribeRabbitMQQueuesResponse;
-const Tag = models.Tag;
+const DescribeEnvironmentsRequest = models.DescribeEnvironmentsRequest;
 const DescribeRocketMQNamespacesRequest = models.DescribeRocketMQNamespacesRequest;
 const ModifyRocketMQClusterResponse = models.ModifyRocketMQClusterResponse;
 const DescribeRocketMQTopicStatsResponse = models.DescribeRocketMQTopicStatsResponse;
@@ -87,11 +87,13 @@ const DescribeMsgRequest = models.DescribeMsgRequest;
 const DeleteRabbitMQPermissionResponse = models.DeleteRabbitMQPermissionResponse;
 const DeleteRabbitMQBindingResponse = models.DeleteRabbitMQBindingResponse;
 const DescribePulsarProInstancesRequest = models.DescribePulsarProInstancesRequest;
+const RocketMQGroupConfig = models.RocketMQGroupConfig;
 const VpcEndpointInfo = models.VpcEndpointInfo;
 const ClearCmqQueueResponse = models.ClearCmqQueueResponse;
 const DescribeTopicMsgsRequest = models.DescribeTopicMsgsRequest;
 const DeleteCmqQueueRequest = models.DeleteCmqQueueRequest;
 const DeleteRabbitMQUserResponse = models.DeleteRabbitMQUserResponse;
+const CreateRocketMQMigrationTaskRequest = models.CreateRocketMQMigrationTaskRequest;
 const SetRocketMQPublicAccessPointResponse = models.SetRocketMQPublicAccessPointResponse;
 const DescribeRocketMQTopicMsgsRequest = models.DescribeRocketMQTopicMsgsRequest;
 const ModifyEnvironmentRoleRequest = models.ModifyEnvironmentRoleRequest;
@@ -101,6 +103,7 @@ const ModifyRocketMQRoleRequest = models.ModifyRocketMQRoleRequest;
 const DescribeMqMsgTraceRequest = models.DescribeMqMsgTraceRequest;
 const SendBatchMessagesRequest = models.SendBatchMessagesRequest;
 const DescribeRabbitMQNodeListResponse = models.DescribeRabbitMQNodeListResponse;
+const RocketMQTopicConfig = models.RocketMQTopicConfig;
 const PriceTag = models.PriceTag;
 const ProducerInfo = models.ProducerInfo;
 const ProducerLog = models.ProducerLog;
@@ -139,7 +142,7 @@ const RabbitMQQueueListInfo = models.RabbitMQQueueListInfo;
 const DescribeMsgResponse = models.DescribeMsgResponse;
 const CreateProClusterResponse = models.CreateProClusterResponse;
 const ModifyRocketMQInstanceRequest = models.ModifyRocketMQInstanceRequest;
-const DescribeEnvironmentsRequest = models.DescribeEnvironmentsRequest;
+const Tag = models.Tag;
 const CreateProClusterRequest = models.CreateProClusterRequest;
 const DescribeRabbitMQVipInstancesResponse = models.DescribeRabbitMQVipInstancesResponse;
 const DeleteRolesRequest = models.DeleteRolesRequest;
@@ -260,6 +263,7 @@ const DeleteRocketMQClusterResponse = models.DeleteRocketMQClusterResponse;
 const CreateCmqTopicResponse = models.CreateCmqTopicResponse;
 const CmqDeadLetterSource = models.CmqDeadLetterSource;
 const DescribeRocketMQTopicRequest = models.DescribeRocketMQTopicRequest;
+const CreateRocketMQMigrationTaskResponse = models.CreateRocketMQMigrationTaskResponse;
 const ResetMsgSubOffsetByTimestampRequest = models.ResetMsgSubOffsetByTimestampRequest;
 const DescribeBindVpcsResponse = models.DescribeBindVpcsResponse;
 const ModifyRabbitMQPermissionRequest = models.ModifyRabbitMQPermissionRequest;
@@ -299,6 +303,7 @@ const ModifyClusterResponse = models.ModifyClusterResponse;
 const RocketMQClusterRecentStats = models.RocketMQClusterRecentStats;
 const DescribeRocketMQPublicAccessPointRequest = models.DescribeRocketMQPublicAccessPointRequest;
 const RabbitMQPrivateNode = models.RabbitMQPrivateNode;
+const RocketMQRoleConfig = models.RocketMQRoleConfig;
 const RetryRocketMQDlqMessageRequest = models.RetryRocketMQDlqMessageRequest;
 const DescribeRocketMQTopicsByGroupRequest = models.DescribeRocketMQTopicsByGroupRequest;
 const DescribeRocketMQPublicAccessMonitorDataResponse = models.DescribeRocketMQPublicAccessMonitorDataResponse;
@@ -325,6 +330,7 @@ const MsgLog = models.MsgLog;
 const CmqTopic = models.CmqTopic;
 const RabbitMQExchangeListInfo = models.RabbitMQExchangeListInfo;
 const DescribeBindVpcsRequest = models.DescribeBindVpcsRequest;
+const RabbitMQVHostBaseQuota = models.RabbitMQVHostBaseQuota;
 const TopicRecord = models.TopicRecord;
 const DescribeEnvironmentRolesRequest = models.DescribeEnvironmentRolesRequest;
 const GeneralSKU = models.GeneralSKU;
@@ -1698,14 +1704,14 @@ This API is applicable to clusters: 4.x virtual cluster and 4.x dedicated cluste
     }
 
     /**
-     * This API is used to obtain the list of producer information.
-     * @param {DescribePublishersRequest} req
-     * @param {function(string, DescribePublishersResponse):void} cb
+     * Create a RocketMQ metadata migration task to batch create topics and consumer group data.
+     * @param {CreateRocketMQMigrationTaskRequest} req
+     * @param {function(string, CreateRocketMQMigrationTaskResponse):void} cb
      * @public
      */
-    DescribePublishers(req, cb) {
-        let resp = new DescribePublishersResponse();
-        this.request("DescribePublishers", req, resp, cb);
+    CreateRocketMQMigrationTask(req, cb) {
+        let resp = new CreateRocketMQMigrationTaskResponse();
+        this.request("CreateRocketMQMigrationTask", req, resp, cb);
     }
 
     /**
@@ -1819,6 +1825,17 @@ This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluste
     DeleteRocketMQVipInstance(req, cb) {
         let resp = new DeleteRocketMQVipInstanceResponse();
         this.request("DeleteRocketMQVipInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of producer information.
+     * @param {DescribePublishersRequest} req
+     * @param {function(string, DescribePublishersResponse):void} cb
+     * @public
+     */
+    DescribePublishers(req, cb) {
+        let resp = new DescribePublishersResponse();
+        this.request("DescribePublishers", req, resp, cb);
     }
 
     /**

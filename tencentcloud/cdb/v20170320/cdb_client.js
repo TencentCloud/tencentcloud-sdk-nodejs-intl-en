@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const TaskDetail = models.TaskDetail;
+const DescribeTableColumnsResponse = models.DescribeTableColumnsResponse;
 const CdbZoneSellConf = models.CdbZoneSellConf;
 const CreateDBImportJobRequest = models.CreateDBImportJobRequest;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
@@ -33,13 +34,15 @@ const DescribeRollbackRangeTimeRequest = models.DescribeRollbackRangeTimeRequest
 const DescribeBackupOverviewRequest = models.DescribeBackupOverviewRequest;
 const DescribeAuditInstanceListResponse = models.DescribeAuditInstanceListResponse;
 const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
-const DescribeDataBackupOverviewResponse = models.DescribeDataBackupOverviewResponse;
+const ModifyDBInstanceModesResponse = models.ModifyDBInstanceModesResponse;
 const DeleteAuditPolicyRequest = models.DeleteAuditPolicyRequest;
 const BackupSummaryItem = models.BackupSummaryItem;
 const CreateDatabaseRequest = models.CreateDatabaseRequest;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
+const ModifyProtectModeResponse = models.ModifyProtectModeResponse;
 const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
-const DescribeSupportedPrivilegesRequest = models.DescribeSupportedPrivilegesRequest;
+const RemoteBackupInfo = models.RemoteBackupInfo;
+const PeriodStrategy = models.PeriodStrategy;
 const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
 const ModifyCdbProxyAddressVipAndVPortResponse = models.ModifyCdbProxyAddressVipAndVPortResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
@@ -48,12 +51,13 @@ const ModifyCdbProxyAddressDescRequest = models.ModifyCdbProxyAddressDescRequest
 const CdbRegionSellConf = models.CdbRegionSellConf;
 const ReadWriteNode = models.ReadWriteNode;
 const DescribeRoGroupsRequest = models.DescribeRoGroupsRequest;
-const DescribeBackupDecryptionKeyRequest = models.DescribeBackupDecryptionKeyRequest;
+const DescribeInstanceUpgradeTypeResponse = models.DescribeInstanceUpgradeTypeResponse;
 const CreateCdbProxyAddressResponse = models.CreateCdbProxyAddressResponse;
 const RollbackTableName = models.RollbackTableName;
 const CloseWanServiceRequest = models.CloseWanServiceRequest;
 const DescribeAuditConfigRequest = models.DescribeAuditConfigRequest;
 const CreateRoInstanceIpResponse = models.CreateRoInstanceIpResponse;
+const CloseSSLRequest = models.CloseSSLRequest;
 const CreateAuditPolicyResponse = models.CreateAuditPolicyResponse;
 const LogRuleTemplateInfo = models.LogRuleTemplateInfo;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
@@ -66,6 +70,7 @@ const DescribeRoMinScaleResponse = models.DescribeRoMinScaleResponse;
 const StopDBImportJobResponse = models.StopDBImportJobResponse;
 const ProxyAllocation = models.ProxyAllocation;
 const StopCpuExpandRequest = models.StopCpuExpandRequest;
+const DescribeInstancePasswordComplexityRequest = models.DescribeInstancePasswordComplexityRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const TagInfoUnit = models.TagInfoUnit;
 const DescribeAuditRulesRequest = models.DescribeAuditRulesRequest;
@@ -73,12 +78,12 @@ const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVer
 const ErrlogItem = models.ErrlogItem;
 const ProxyGroupInfo = models.ProxyGroupInfo;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
-const BackupConfig = models.BackupConfig;
+const DescribeCPUExpandStrategyInfoResponse = models.DescribeCPUExpandStrategyInfoResponse;
 const Rule = models.Rule;
 const AuditPolicy = models.AuditPolicy;
 const ProxyNode = models.ProxyNode;
 const DescribeCdbZoneConfigResponse = models.DescribeCdbZoneConfigResponse;
-const AccountInfo = models.AccountInfo;
+const ReadonlyNode = models.ReadonlyNode;
 const DescribeTablesRequest = models.DescribeTablesRequest;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
@@ -88,15 +93,18 @@ const DescribeDBInstanceLogToCLSResponse = models.DescribeDBInstanceLogToCLSResp
 const SwitchDBInstanceMasterSlaveRequest = models.SwitchDBInstanceMasterSlaveRequest;
 const ModifyCdbProxyAddressVipAndVPortRequest = models.ModifyCdbProxyAddressVipAndVPortRequest;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
+const OpenSSLRequest = models.OpenSSLRequest;
 const DescribeAuditConfigResponse = models.DescribeAuditConfigResponse;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const OpenWanServiceRequest = models.OpenWanServiceRequest;
 const DeleteAuditPolicyResponse = models.DeleteAuditPolicyResponse;
 const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const DeleteDatabaseRequest = models.DeleteDatabaseRequest;
 const UploadInfo = models.UploadInfo;
-const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
+const NodeDistribution = models.NodeDistribution;
 const AuditRuleFilters = models.AuditRuleFilters;
+const SubmitInstanceUpgradeCheckJobRequest = models.SubmitInstanceUpgradeCheckJobRequest;
 const ModifyLocalBinlogConfigRequest = models.ModifyLocalBinlogConfigRequest;
 const StartBatchRollbackResponse = models.StartBatchRollbackResponse;
 const DescribeDeviceMonitorInfoResponse = models.DescribeDeviceMonitorInfoResponse;
@@ -105,22 +113,27 @@ const ModifyRoGroupInfoRequest = models.ModifyRoGroupInfoRequest;
 const ReleaseResult = models.ReleaseResult;
 const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
 const AuditRule = models.AuditRule;
+const DescribeInstanceAlarmEventsRequest = models.DescribeInstanceAlarmEventsRequest;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
+const TimeIntervalStrategy = models.TimeIntervalStrategy;
 const DescribeCdbProxyInfoRequest = models.DescribeCdbProxyInfoRequest;
 const RollbackDBName = models.RollbackDBName;
 const RuleFilters = models.RuleFilters;
 const ModifyAuditRuleTemplatesRequest = models.ModifyAuditRuleTemplatesRequest;
+const StopDBImportJobRequest = models.StopDBImportJobRequest;
 const ModifyRemoteBackupConfigResponse = models.ModifyRemoteBackupConfigResponse;
 const DescribeDBInstanceInfoResponse = models.DescribeDBInstanceInfoResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
-const StartReplicationResponse = models.StartReplicationResponse;
+const DescribeInstanceUpgradeCheckJobRequest = models.DescribeInstanceUpgradeCheckJobRequest;
 const DescribeDBFeaturesResponse = models.DescribeDBFeaturesResponse;
+const SubmitInstanceUpgradeCheckJobResponse = models.SubmitInstanceUpgradeCheckJobResponse;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
 const DescribeRoMinScaleRequest = models.DescribeRoMinScaleRequest;
 const DescribeDefaultParamsRequest = models.DescribeDefaultParamsRequest;
 const AuditInstanceInfo = models.AuditInstanceInfo;
 const CustomConfig = models.CustomConfig;
 const SwitchDBInstanceMasterSlaveResponse = models.SwitchDBInstanceMasterSlaveResponse;
+const DescribeDataBackupOverviewResponse = models.DescribeDataBackupOverviewResponse;
 const DescribeBackupsRequest = models.DescribeBackupsRequest;
 const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
 const DescribeDBInstanceGTIDResponse = models.DescribeDBInstanceGTIDResponse;
@@ -136,7 +149,8 @@ const DescribeErrorLogDataResponse = models.DescribeErrorLogDataResponse;
 const AddTimeWindowRequest = models.AddTimeWindowRequest;
 const ImportRecord = models.ImportRecord;
 const DeleteAuditLogFileResponse = models.DeleteAuditLogFileResponse;
-const Parameter = models.Parameter;
+const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
+const DescribeCPUExpandStrategyInfoRequest = models.DescribeCPUExpandStrategyInfoRequest;
 const SlaveInfo = models.SlaveInfo;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const DescribeDBSwitchRecordsResponse = models.DescribeDBSwitchRecordsResponse;
@@ -146,7 +160,7 @@ const CreateAuditLogFileResponse = models.CreateAuditLogFileResponse;
 const ModifyCdbProxyParamResponse = models.ModifyCdbProxyParamResponse;
 const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
 const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
-const RemoteBackupInfo = models.RemoteBackupInfo;
+const DescribeSupportedPrivilegesRequest = models.DescribeSupportedPrivilegesRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
 const DeleteAccountsResponse = models.DeleteAccountsResponse;
 const ParamTemplateInfo = models.ParamTemplateInfo;
@@ -167,6 +181,7 @@ const StopReplicationRequest = models.StopReplicationRequest;
 const StartCpuExpandResponse = models.StartCpuExpandResponse;
 const CreateCloneInstanceResponse = models.CreateCloneInstanceResponse;
 const DescribeCdbZoneConfigRequest = models.DescribeCdbZoneConfigRequest;
+const ResetPasswordRequest = models.ResetPasswordRequest;
 const DeviceCpuInfo = models.DeviceCpuInfo;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const BalanceRoGroupLoadRequest = models.BalanceRoGroupLoadRequest;
@@ -174,7 +189,7 @@ const DescribeBackupOverviewResponse = models.DescribeBackupOverviewResponse;
 const DescribeLocalBinlogConfigRequest = models.DescribeLocalBinlogConfigRequest;
 const TagsInfoOfInstance = models.TagsInfoOfInstance;
 const DescribeDeviceMonitorInfoRequest = models.DescribeDeviceMonitorInfoRequest;
-const StopDBImportJobRequest = models.StopDBImportJobRequest;
+const DescribeInstanceUpgradeTypeRequest = models.DescribeInstanceUpgradeTypeRequest;
 const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
 const SlaveConfig = models.SlaveConfig;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
@@ -182,7 +197,7 @@ const StopRollbackRequest = models.StopRollbackRequest;
 const LogToCLSConfig = models.LogToCLSConfig;
 const ResetRootAccountRequest = models.ResetRootAccountRequest;
 const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
-const ModifyAuditServiceRequest = models.ModifyAuditServiceRequest;
+const DescribeTableColumnsRequest = models.DescribeTableColumnsRequest;
 const DescribeProxyCustomConfResponse = models.DescribeProxyCustomConfResponse;
 const ModifyAuditConfigResponse = models.ModifyAuditConfigResponse;
 const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
@@ -204,10 +219,10 @@ const TagInfo = models.TagInfo;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const DescribeBackupDownloadRestrictionRequest = models.DescribeBackupDownloadRestrictionRequest;
 const DeleteAccountsRequest = models.DeleteAccountsRequest;
-const ReloadBalanceProxyNodeRequest = models.ReloadBalanceProxyNodeRequest;
+const DeleteRotationPasswordResponse = models.DeleteRotationPasswordResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackTimeRange = models.RollbackTimeRange;
-const AuditLog = models.AuditLog;
+const ModifyProtectModeRequest = models.ModifyProtectModeRequest;
 const DescribeAuditRuleTemplateModifyHistoryResponse = models.DescribeAuditRuleTemplateModifyHistoryResponse;
 const DescribeAuditLogFilesRequest = models.DescribeAuditLogFilesRequest;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
@@ -222,14 +237,17 @@ const DescribeAuditLogsRequest = models.DescribeAuditLogsRequest;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
 const RoVipInfo = models.RoVipInfo;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const ModifyAuditServiceRequest = models.ModifyAuditServiceRequest;
 const DescribeErrorLogDataRequest = models.DescribeErrorLogDataRequest;
 const DescribeAuditLogFilesResponse = models.DescribeAuditLogFilesResponse;
 const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
 const Inbound = models.Inbound;
 const CreateAccountsResponse = models.CreateAccountsResponse;
+const ModifyDBInstanceModesRequest = models.ModifyDBInstanceModesRequest;
 const CdbSellType = models.CdbSellType;
 const MasterInfo = models.MasterInfo;
 const ResetRootAccountResponse = models.ResetRootAccountResponse;
+const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const Account = models.Account;
 const ModifyNameOrDescByDpIdResponse = models.ModifyNameOrDescByDpIdResponse;
 const DescribeDBPriceResponse = models.DescribeDBPriceResponse;
@@ -241,8 +259,10 @@ const ModifyCdbProxyParamRequest = models.ModifyCdbProxyParamRequest;
 const RoGroup = models.RoGroup;
 const ParameterDetail = models.ParameterDetail;
 const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
+const CreateRotationPasswordRequest = models.CreateRotationPasswordRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const DescribeBackupDownloadRestrictionResponse = models.DescribeBackupDownloadRestrictionResponse;
+const DescribeBackupDecryptionKeyRequest = models.DescribeBackupDecryptionKeyRequest;
 const CloneItem = models.CloneItem;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const CreateAccountsRequest = models.CreateAccountsRequest;
@@ -253,7 +273,8 @@ const CloseWanServiceResponse = models.CloseWanServiceResponse;
 const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
 const SlowLogInfo = models.SlowLogInfo;
 const ModifyLocalBinlogConfigResponse = models.ModifyLocalBinlogConfigResponse;
-const CreateRotationPasswordRequest = models.CreateRotationPasswordRequest;
+const DeleteDatabaseResponse = models.DeleteDatabaseResponse;
+const DescribeInstanceUpgradeCheckJobResponse = models.DescribeInstanceUpgradeCheckJobResponse;
 const DescribeCloneListRequest = models.DescribeCloneListRequest;
 const ModifyInstanceTagRequest = models.ModifyInstanceTagRequest;
 const DescribeProxySupportParamRequest = models.DescribeProxySupportParamRequest;
@@ -262,7 +283,7 @@ const RollbackTask = models.RollbackTask;
 const StartReplicationRequest = models.StartReplicationRequest;
 const ProxyInst = models.ProxyInst;
 const ReloadBalanceProxyNodeResponse = models.ReloadBalanceProxyNodeResponse;
-const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
+const DescribeRemoteBackupConfigResponse = models.DescribeRemoteBackupConfigResponse;
 const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
 const BackupItem = models.BackupItem;
 const AuditFilter = models.AuditFilter;
@@ -273,6 +294,7 @@ const AdjustCdbProxyResponse = models.AdjustCdbProxyResponse;
 const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
 const BalanceRoGroupLoadResponse = models.BalanceRoGroupLoadResponse;
 const DeviceNetInfo = models.DeviceNetInfo;
+const ModifyRoGroupVipVportResponse = models.ModifyRoGroupVipVportResponse;
 const ModifyDBInstanceVipVportResponse = models.ModifyDBInstanceVipVportResponse;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const InstanceAuditLogFilters = models.InstanceAuditLogFilters;
@@ -280,13 +302,16 @@ const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
 const InstanceInfo = models.InstanceInfo;
 const DescribeDefaultParamsResponse = models.DescribeDefaultParamsResponse;
 const SwitchCDBProxyRequest = models.SwitchCDBProxyRequest;
+const StartReplicationResponse = models.StartReplicationResponse;
 const DescribeTagsOfInstanceIdsResponse = models.DescribeTagsOfInstanceIdsResponse;
 const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse;
 const CreateAuditRuleTemplateRequest = models.CreateAuditRuleTemplateRequest;
 const DatabasePrivilege = models.DatabasePrivilege;
 const DescribeAuditPoliciesRequest = models.DescribeAuditPoliciesRequest;
+const DescribeInstancePasswordComplexityResponse = models.DescribeInstancePasswordComplexityResponse;
 const AdjustCdbProxyAddressRequest = models.AdjustCdbProxyAddressRequest;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
+const TaskAttachInfo = models.TaskAttachInfo;
 const DescribeRoGroupsResponse = models.DescribeRoGroupsResponse;
 const CloseCdbProxyAddressResponse = models.CloseCdbProxyAddressResponse;
 const DescribeAuditRulesResponse = models.DescribeAuditRulesResponse;
@@ -294,8 +319,9 @@ const RoInstanceInfo = models.RoInstanceInfo;
 const DeviceCpuRateInfo = models.DeviceCpuRateInfo;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const CreateBackupRequest = models.CreateBackupRequest;
-const ReadonlyNode = models.ReadonlyNode;
-const DescribeRemoteBackupConfigResponse = models.DescribeRemoteBackupConfigResponse;
+const AccountInfo = models.AccountInfo;
+const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
+const UpgradeAnalysisInstanceVersionInfo = models.UpgradeAnalysisInstanceVersionInfo;
 const AdjustCdbProxyAddressResponse = models.AdjustCdbProxyAddressResponse;
 const CreateAuditLogFileRequest = models.CreateAuditLogFileRequest;
 const DescribeSSLStatusResponse = models.DescribeSSLStatusResponse;
@@ -303,7 +329,6 @@ const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
 const DescribeTagsOfInstanceIdsRequest = models.DescribeTagsOfInstanceIdsRequest;
 const StartCpuExpandRequest = models.StartCpuExpandRequest;
-const DescribeCpuExpandStrategyRequest = models.DescribeCpuExpandStrategyRequest;
 const CloseCDBProxyResponse = models.CloseCDBProxyResponse;
 const StopReplicationResponse = models.StopReplicationResponse;
 const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
@@ -313,11 +338,13 @@ const BackupLimitVpcItem = models.BackupLimitVpcItem;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
 const Bucket = models.Bucket;
 const SwitchForUpgradeResponse = models.SwitchForUpgradeResponse;
+const UpgradeEngineVersionParams = models.UpgradeEngineVersionParams;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const CdbSellConfig = models.CdbSellConfig;
 const DescribeSupportedPrivilegesResponse = models.DescribeSupportedPrivilegesResponse;
 const SlowLogItem = models.SlowLogItem;
 const DescribeLocalBinlogConfigResponse = models.DescribeLocalBinlogConfigResponse;
+const OpenSSLResponse = models.OpenSSLResponse;
 const ModifyAuditServiceResponse = models.ModifyAuditServiceResponse;
 const ModifyInstancePasswordComplexityRequest = models.ModifyInstancePasswordComplexityRequest;
 const OpenWanServiceResponse = models.OpenWanServiceResponse;
@@ -326,8 +353,10 @@ const DescribeBackupEncryptionStatusResponse = models.DescribeBackupEncryptionSt
 const DescribeCdbProxyInfoResponse = models.DescribeCdbProxyInfoResponse;
 const ModifyAuditConfigRequest = models.ModifyAuditConfigRequest;
 const DeviceDiskInfo = models.DeviceDiskInfo;
+const DescribeInstanceAlarmEventsResponse = models.DescribeInstanceAlarmEventsResponse;
 const RoWeightValue = models.RoWeightValue;
 const DescribeSlowLogDataResponse = models.DescribeSlowLogDataResponse;
+const DeleteRotationPasswordRequest = models.DeleteRotationPasswordRequest;
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const TagInfoItem = models.TagInfoItem;
@@ -337,7 +366,9 @@ const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse
 const CloseCdbProxyAddressRequest = models.CloseCdbProxyAddressRequest;
 const ModifyRoGroupInfoResponse = models.ModifyRoGroupInfoResponse;
 const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
+const TimeInterval = models.TimeInterval;
 const DBSwitchInfo = models.DBSwitchInfo;
+const ResetPasswordResponse = models.ResetPasswordResponse;
 const DescribeAuditRuleTemplateModifyHistoryRequest = models.DescribeAuditRuleTemplateModifyHistoryRequest;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DescribeAuditLogsResponse = models.DescribeAuditLogsResponse;
@@ -362,11 +393,15 @@ const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGrou
 const DescribeBackupSummariesRequest = models.DescribeBackupSummariesRequest;
 const AnalyzeAuditLogsResponse = models.AnalyzeAuditLogsResponse;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
+const ModifyRoGroupVipVportRequest = models.ModifyRoGroupVipVportRequest;
 const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
 const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetResponse;
 const DescribeDBFeaturesRequest = models.DescribeDBFeaturesRequest;
+const TImeCycle = models.TImeCycle;
 const DescribeBackupSummariesResponse = models.DescribeBackupSummariesResponse;
 const DescribeBinlogBackupOverviewRequest = models.DescribeBinlogBackupOverviewRequest;
+const InstEventInfo = models.InstEventInfo;
+const ReloadBalanceProxyNodeRequest = models.ReloadBalanceProxyNodeRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const CloseAuditServiceRequest = models.CloseAuditServiceRequest;
 const AutoStrategy = models.AutoStrategy;
@@ -378,6 +413,7 @@ const DescribeBackupDecryptionKeyResponse = models.DescribeBackupDecryptionKeyRe
 const SecurityGroup = models.SecurityGroup;
 const OfflineIsolatedInstancesRequest = models.OfflineIsolatedInstancesRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
+const AuditLog = models.AuditLog;
 const ColumnPrivilege = models.ColumnPrivilege;
 const DescribeUploadedFilesResponse = models.DescribeUploadedFilesResponse;
 const DescribeDBPriceRequest = models.DescribeDBPriceRequest;
@@ -390,24 +426,25 @@ const RoGroupAttr = models.RoGroupAttr;
 const UpgradeCDBProxyVersionResponse = models.UpgradeCDBProxyVersionResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const ModifyAccountPasswordRequest = models.ModifyAccountPasswordRequest;
-const DescribeCpuExpandStrategyResponse = models.DescribeCpuExpandStrategyResponse;
 const InstanceRebootTime = models.InstanceRebootTime;
 const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const TablePrivilege = models.TablePrivilege;
 const AddTimeWindowResponse = models.AddTimeWindowResponse;
+const CloseSSLResponse = models.CloseSSLResponse;
 const DescribeAuditInstanceListRequest = models.DescribeAuditInstanceListRequest;
 const DescribeBackupEncryptionStatusRequest = models.DescribeBackupEncryptionStatusRequest;
 const ModifyDBInstanceLogToCLSResponse = models.ModifyDBInstanceLogToCLSResponse;
+const AuditRuleTemplateInfo = models.AuditRuleTemplateInfo;
 const AuditLogFile = models.AuditLogFile;
 const DescribeAuditRuleTemplatesRequest = models.DescribeAuditRuleTemplatesRequest;
 const RollbackTables = models.RollbackTables;
-const AuditRuleTemplateInfo = models.AuditRuleTemplateInfo;
+const BackupConfig = models.BackupConfig;
 const LocalBinlogConfigDefault = models.LocalBinlogConfigDefault;
 const DescribeSSLStatusRequest = models.DescribeSSLStatusRequest;
 const DescribeSlowLogDataRequest = models.DescribeSlowLogDataRequest;
 const ReleaseIsolatedDBInstancesResponse = models.ReleaseIsolatedDBInstancesResponse;
 const DeleteAuditLogFileRequest = models.DeleteAuditLogFileRequest;
-const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
+const Parameter = models.Parameter;
 const DeleteTimeWindowRequest = models.DeleteTimeWindowRequest;
 const SwitchCDBProxyResponse = models.SwitchCDBProxyResponse;
 const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
@@ -464,7 +501,29 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query database version attributes, including supported features such as database encryption and audit.
+     * This API is used to query table column information of a designated database in a cloud database instance. It only supports primary instance and disaster recovery instance.
+     * @param {DescribeTableColumnsRequest} req
+     * @param {function(string, DescribeTableColumnsResponse):void} cb
+     * @public
+     */
+    DescribeTableColumns(req, cb) {
+        let resp = new DescribeTableColumnsResponse();
+        this.request("DescribeTableColumns", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable SSL connectivity function.
+     * @param {OpenSSLRequest} req
+     * @param {function(string, OpenSSLResponse):void} cb
+     * @public
+     */
+    OpenSSL(req, cb) {
+        let resp = new OpenSSLResponse();
+        this.request("OpenSSL", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query cloud database version attributes, including whether database encryption and database audit are supported, and other features.
      * @param {DescribeDBFeaturesRequest} req
      * @param {function(string, DescribeDBFeaturesResponse):void} cb
      * @public
@@ -497,7 +556,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to isolate a TencentDB instance, which will no longer be accessible via IP and port. The isolated instance can be started up in the recycle bin. If it is isolated due to arrears, please top up your account as soon as possible.
+     * This API is used to isolate a cloud database instance. After an instance is isolated, you cannot access the database via IP and port. The isolated instance can be started in the recycle bin. If the instance is isolated due to arrears, please recharge as soon as possible.
      * @param {IsolateDBInstanceRequest} req
      * @param {function(string, IsolateDBInstanceResponse):void} cb
      * @public
@@ -508,11 +567,22 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * This API (RestartDBInstances) is used to restart TencentDB instances.
+     * This API is used to modify the vip and vport of a Ro group.
+     * @param {ModifyRoGroupVipVportRequest} req
+     * @param {function(string, ModifyRoGroupVipVportResponse):void} cb
+     * @public
+     */
+    ModifyRoGroupVipVport(req, cb) {
+        let resp = new ModifyRoGroupVipVportResponse();
+        this.request("ModifyRoGroupVipVport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restart cloud database instances.
 
 Note:
-1. This API only supports restarting primary instances.
-2. The instance status must be normal, and no other async tasks are in progress.
+This API supports performing a restart operation on primary instances, read-only instances, and disaster recovery instances.
+2. The instance status must be normal and no other async tasks are in progress.
      * @param {RestartDBInstancesRequest} req
      * @param {function(string, RestartDBInstancesResponse):void} cb
      * @public
@@ -545,6 +615,17 @@ Note:
     }
 
     /**
+     * This API (CloseWanService) is used to disable public network access for TencentDB instance, which will make public IP addresses inaccessible.
+     * @param {CloseWanServiceRequest} req
+     * @param {function(string, CloseWanServiceResponse):void} cb
+     * @public
+     */
+    CloseWanService(req, cb) {
+        let resp = new CloseWanServiceResponse();
+        this.request("CloseWanService", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the backup overview of a user. It will return the user's current total number of backups, total capacity used by backups, capacity in the free tier, and paid capacity (all capacity values are in bytes).
      * @param {DescribeBackupOverviewRequest} req
      * @param {function(string, DescribeBackupOverviewResponse):void} cb
@@ -556,7 +637,7 @@ Note:
     }
 
     /**
-     * This API is used to stop the data replication from the source instance to the read-only instance.
+     * This API is used to stop RO replication and interrupt data sync from the primary instance.
      * @param {StopReplicationRequest} req
      * @param {function(string, StopReplicationResponse):void} cb
      * @public
@@ -622,7 +703,7 @@ Note:
     }
 
     /**
-     * This API is used to cancel a rollback task in progress, and returns an async task ID. You can use the `DescribeAsyncRequestInfo` API to query the result of cancellation.
+     * This api is used to revoke an ongoing rollback task of an instance. The api response returns an Asynchronous Task ID. The revocation result can be queried through [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/20410?from_cn_redirect=1) for task execution.
      * @param {StopRollbackRequest} req
      * @param {function(string, StopRollbackResponse):void} cb
      * @public
@@ -633,11 +714,22 @@ Note:
     }
 
     /**
-     * This API (OfflineIsolatedInstances) is used to deactivate isolated TencentDB instances immediately. The instances must be in isolated status, i.e., their `Status` value is 5 in the return of the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1).
+     * This API is used to query the upgrade type of a database instance.
+     * @param {DescribeInstanceUpgradeTypeRequest} req
+     * @param {function(string, DescribeInstanceUpgradeTypeResponse):void} cb
+     * @public
+     */
+    DescribeInstanceUpgradeType(req, cb) {
+        let resp = new DescribeInstanceUpgradeTypeResponse();
+        this.request("DescribeInstanceUpgradeType", req, resp, cb);
+    }
 
-This is an asynchronous API. There may be a delay in repossessing some resources. You can query the details by using the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) and specifying the InstanceId and the `Status` value as [5, 6, 7]. If the returned instance is empty, then all its resources have been released.
+    /**
+     * This api is used to deactivate cloud database instances in quarantined state now. The instance Status for row operations must be quarantined state, such as instances with Status value 5 queried through the query instance list api.
 
-Note that once an instance is deactivated, its resources and data will not be recoverable. Please do so with caution.
+This API is used to perform asynchronous operation, and delays may occur when reclaiming partial resources. You can query by using the query instance list API (https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1) with specified instance InstanceId and status Status as [5,6,7]. Among them, 5 represents isolated, 6 represents offline, and 7 represents Offline. If the return instance is empty, all instance resources have been released.
+
+Note that after the instance goes offline, relevant resources and data cannot be recovered. Proceed with caution.
      * @param {OfflineIsolatedInstancesRequest} req
      * @param {function(string, OfflineIsolatedInstancesResponse):void} cb
      * @public
@@ -670,7 +762,7 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API is used to query the details of a TencentDB instance rollback task.
+     * This API is used to query the rollback task detail of a cloud database instance.
      * @param {DescribeRollbackTaskDetailRequest} req
      * @param {function(string, DescribeRollbackTaskDetailResponse):void} cb
      * @public
@@ -692,7 +784,8 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API is used to query the parameter template list. The common request parameter `Region` can only be set to `ap-guangzhou`.
+     * This API is used to query the parameter template list.
+Description: The parameter template is a common component, effective across all regions once configured. For api calls, Guangzhou or Singapore is available to configure region.
      * @param {DescribeParamTemplatesRequest} req
      * @param {function(string, DescribeParamTemplatesResponse):void} cb
      * @public
@@ -714,7 +807,7 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API (DescribeBackupConfig) is used to query the configuration information of a TencentDB instance backup.
+     * This API is used to query database backup configuration info.
      * @param {DescribeBackupConfigRequest} req
      * @param {function(string, DescribeBackupConfigResponse):void} cb
      * @public
@@ -725,14 +818,36 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API (CloseWanService) is used to disable public network access for TencentDB instance, which will make public IP addresses inaccessible.
-     * @param {CloseWanServiceRequest} req
-     * @param {function(string, CloseWanServiceResponse):void} cb
+     * This API is used to enable data storage encryption for instance and support users to specify custom keys.
+
+Note that before enabling data storage encryption for instance, perform the following operations:
+
+1. Perform instance initialization (https://www.tencentcloud.com/document/api/236/15873?from_cn_redirect=1).
+
+2. Enable the KMS service (https://console.cloud.tencent.com/kms2).
+
+3. Grant the cloud database (MySQL) permission to access the KMS key (https://console.cloud.tencent.com/cam/role). The role name is MySQL_QCSRole and the preset policy name is QcloudAccessForMySQLRole.
+4. Closing is not allowed after encryption being enabled.
+
+This API may take up to 10s, and the client may timeout. If the API call returns InternalError, please call [DescribeDBInstanceInfo](https://www.tencentcloud.com/document/product/236/44160?from_cn_redirect=1) to confirm whether backend encryption is successfully enabled. After calling, if the parameter Encryption is YES, it means activation is successful.
+     * @param {OpenDBInstanceEncryptionRequest} req
+     * @param {function(string, OpenDBInstanceEncryptionResponse):void} cb
      * @public
      */
-    CloseWanService(req, cb) {
-        let resp = new CloseWanServiceResponse();
-        this.request("CloseWanService", req, resp, cb);
+    OpenDBInstanceEncryption(req, cb) {
+        let resp = new OpenDBInstanceEncryptionResponse();
+        this.request("OpenDBInstanceEncryption", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the instance version upgrade validation task.
+     * @param {DescribeInstanceUpgradeCheckJobRequest} req
+     * @param {function(string, DescribeInstanceUpgradeCheckJobResponse):void} cb
+     * @public
+     */
+    DescribeInstanceUpgradeCheckJob(req, cb) {
+        let resp = new DescribeInstanceUpgradeCheckJobResponse();
+        this.request("DescribeInstanceUpgradeCheckJob", req, resp, cb);
     }
 
     /**
@@ -747,7 +862,7 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API is used to query the audit policies of a TencentDB instance.
+     * This API is used to query audit policies of cloud database instances.
      * @param {DescribeAuditPoliciesRequest} req
      * @param {function(string, DescribeAuditPoliciesResponse):void} cb
      * @public
@@ -758,28 +873,18 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API is used to enable the encryption feature for instance data storage, and custom keys are supported.
-
-Note: Before enabling data storage encryption for an instance, you need to perform the following operations:
-
-1. [Initialize an instance](https://intl.cloud.tencent.com/document/api/236/15873?from_cn_redirect=1).
-
-2. Enable [KMS service](https://console.cloud.tencent.com/kms2)
-
-3. [Grant permission to access KMS](https://console.cloud.tencent.com/cam/role) for TencentDB for MySQL. The role name is `MySQL_QCSRole`, and the preset policy name is `QcloudAccessForMySQLRole`.
-
-This API calling may take up to 10 seconds, causing the client to time out. If it returns `InternalError`, call `DescribeDBInstanceInfo` to confirm whether the backend encryption is enabled successfully.
-     * @param {OpenDBInstanceEncryptionRequest} req
-     * @param {function(string, OpenDBInstanceEncryptionResponse):void} cb
+     * This API is used to delete a database in a cloud database instance.
+     * @param {DeleteDatabaseRequest} req
+     * @param {function(string, DeleteDatabaseResponse):void} cb
      * @public
      */
-    OpenDBInstanceEncryption(req, cb) {
-        let resp = new OpenDBInstanceEncryptionResponse();
-        this.request("OpenDBInstanceEncryption", req, resp, cb);
+    DeleteDatabase(req, cb) {
+        let resp = new DeleteDatabaseResponse();
+        this.request("DeleteDatabase", req, resp, cb);
     }
 
     /**
-     * This API (DescribeTagsOfInstanceIds) is used to query the tag information of a TencentDB instance.
+     * This API is used to access tag information of the instance for cloud databases.
      * @param {DescribeTagsOfInstanceIdsRequest} req
      * @param {function(string, DescribeTagsOfInstanceIdsResponse):void} cb
      * @public
@@ -835,6 +940,17 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
+     * This API is used to query the CPU Elastic Scaling information of an instance.
+     * @param {DescribeCPUExpandStrategyInfoRequest} req
+     * @param {function(string, DescribeCPUExpandStrategyInfoResponse):void} cb
+     * @public
+     */
+    DescribeCPUExpandStrategyInfo(req, cb) {
+        let resp = new DescribeCPUExpandStrategyInfoResponse();
+        this.request("DescribeCPUExpandStrategyInfo", req, resp, cb);
+    }
+
+    /**
      * This API (DisassociateSecurityGroups) is used to unbind security groups from instances in batches.
      * @param {DisassociateSecurityGroupsRequest} req
      * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
@@ -868,7 +984,7 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
-     * This API (DescribeAccountPrivileges) is used to query the information of TencentDB account permissions.
+     * This API is used to query the permission information supported by a cloud database account.
      * @param {DescribeAccountPrivilegesRequest} req
      * @param {function(string, DescribeAccountPrivilegesResponse):void} cb
      * @public
@@ -890,7 +1006,7 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
-     * This API is used to deisolate an isolated TencentDB instance.
+     * This API is used to restore isolated cloud database instances. It is only used for de-isolating pay-as-you-go instances. For monthly subscription instances, please use RenewDBInstance.
      * @param {ReleaseIsolatedDBInstancesRequest} req
      * @param {function(string, ReleaseIsolatedDBInstancesResponse):void} cb
      * @public
@@ -901,7 +1017,7 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
-     * This API is used to create a clone of a specific instance, and roll back the clone by using a physical backup file of the instance or roll back the clone to a point in time.
+     * This API is used to create a clone instance from the source instance. You can specify a physical backup file or a rollback time point for the clone instance.
      * @param {CreateCloneInstanceRequest} req
      * @param {function(string, CreateCloneInstanceResponse):void} cb
      * @public
@@ -923,7 +1039,7 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
-     * This API is used to modify the password complexity of a TencentDB instance.
+     * This API is used to modify the password complexity of a cloud database instance.
      * @param {ModifyInstancePasswordComplexityRequest} req
      * @param {function(string, ModifyInstancePasswordComplexityResponse):void} cb
      * @public
@@ -978,7 +1094,7 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
-     * This API is used to query the details of a database proxy.
+     * This API is used to query database proxy detailed information.
      * @param {DescribeCdbProxyInfoRequest} req
      * @param {function(string, DescribeCdbProxyInfoResponse):void} cb
      * @public
@@ -989,7 +1105,8 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
-     * This API is used to create a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
+     * This API is used to create a parameter template.
+Description: The parameter template is a common component, effective across all regions once configured. For api calls, Guangzhou or Singapore is available to configure region.
      * @param {CreateParamTemplateRequest} req
      * @param {function(string, CreateParamTemplateResponse):void} cb
      * @public
@@ -1000,15 +1117,14 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
-     * This API is used to create a pay-as-you-go TencentDB instance (which can be a source, disaster recovery, or read-only instance) by passing in information such as instance specifications, MySQL version number, and quantity.
+     * This API is used to create pay-as-you-go instances. You can create a cloud database instance by inputting the instance specification, MySQL version number, quantity, etc. It supports the creation of primary instances, disaster recovery instances, and read-only instances.
 
-This is an async API. You can also use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the instance details. If the `Status` value of an instance is `1` and `TaskStatus` is `0`, the instance has been successfully delivered.
+This API is an async API. You can also use the API for the query (https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1) to check the instance details. When the instance Status is 1 and TaskStatus is 0, it means the instance has been delivered successfully.
 
-1. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the purchasable instance specifications, and then use the [DescribeDBPrice](https://intl.cloud.tencent.com/document/api/236/18566?from_cn_redirect=1) API to query the prices of the purchasable instances.
-2. You can create up to 100 instances at a time, with an instance validity period of up to 36 months.
-3. MySQL 5.5, 5.6, 5.7, and 8.0 are supported.
-4. Source instances, disaster recovery instances, and read-only instances can be created.
-5. If `Port`, `ParamList`, or `Password` is specified in the input parameters, the instance will be initialized.
+1. First, please use the API for the query (https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1) to obtain the purchasable specifications of cloud databases, then please use the API for the query (https://www.tencentcloud.com/document/api/236/18566?from_cn_redirect=1) to query the instance selling price.
+2. Supports a maximum of 100 instances created at a time, with a maximum duration of 36 months;
+3. Support creating MySQL 5.5, MySQL 5.6, MySQL 5.7, and MySQL 8.0 versions.
+4. Support creating primary instances, disaster recovery instances, and read-only instances.
      * @param {CreateDBInstanceHourRequest} req
      * @param {function(string, CreateDBInstanceHourResponse):void} cb
      * @public
@@ -1019,7 +1135,7 @@ This is an async API. You can also use the [DescribeDBInstances](https://intl.cl
     }
 
     /**
-     * This API (AddTimeWindow) is used to add a maintenance time window for a TencentDB instance, so as to specify when the instance can automatically perform access switch operations.
+     * This API is used to add a maintenance time window for cloud database instances to specify which time periods allow automatic execution of access operations.
      * @param {AddTimeWindowRequest} req
      * @param {function(string, AddTimeWindowResponse):void} cb
      * @public
@@ -1030,7 +1146,7 @@ This is an async API. You can also use the [DescribeDBInstances](https://intl.cl
     }
 
     /**
-     * This API is used to query the supported proxy versions and parameters for an instance.
+     * This API is used to query instance support proxy version and parameters.
      * @param {DescribeProxySupportParamRequest} req
      * @param {function(string, DescribeProxySupportParamResponse):void} cb
      * @public
@@ -1052,7 +1168,7 @@ This is an async API. You can also use the [DescribeDBInstances](https://intl.cl
     }
 
     /**
-     * This API (CreateBackup) is used to create a TencentDB instance backup.
+     * This API is used to create a database backup.
      * @param {CreateBackupRequest} req
      * @param {function(string, CreateBackupResponse):void} cb
      * @public
@@ -1063,7 +1179,7 @@ This is an async API. You can also use the [DescribeDBInstances](https://intl.cl
     }
 
     /**
-     * This API is used to modify the IP and port number of a TencentDB instance, switch from classic network to VPC, or change VPC subnets.
+     * This API is used to modify the IP and port number of a cloud database instance. It can also perform basic network to VPC network and subnet change under VPC network.
      * @param {ModifyDBInstanceVipVportRequest} req
      * @param {function(string, ModifyDBInstanceVipVportResponse):void} cb
      * @public
@@ -1074,7 +1190,7 @@ This is an async API. You can also use the [DescribeDBInstances](https://intl.cl
     }
 
     /**
-     * This API (DescribeDBInstanceConfig) is used to query the configuration information of a TencentDB instance, such as its synchronization mode and deployment mode.
+     * This API is used to query the configuration message of a cloud database instance, including sync mode and deployment mode.
      * @param {DescribeDBInstanceConfigRequest} req
      * @param {function(string, DescribeDBInstanceConfigResponse):void} cb
      * @public
@@ -1085,7 +1201,18 @@ This is an async API. You can also use the [DescribeDBInstances](https://intl.cl
     }
 
     /**
-     * This API is used to create a database proxy address.
+     * This API is used to query the password complexity parameter list of the instance.
+     * @param {DescribeInstancePasswordComplexityRequest} req
+     * @param {function(string, DescribeInstancePasswordComplexityResponse):void} cb
+     * @public
+     */
+    DescribeInstancePasswordComplexity(req, cb) {
+        let resp = new DescribeInstancePasswordComplexityResponse();
+        this.request("DescribeInstancePasswordComplexity", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add a proxy address for database proxy.
      * @param {CreateCdbProxyAddressRequest} req
      * @param {function(string, CreateCdbProxyAddressResponse):void} cb
      * @public
@@ -1118,7 +1245,8 @@ This is an async API. You can also use the [DescribeDBInstances](https://intl.cl
     }
 
     /**
-     * The API DescribeSlowLogs is used to obtain slow query logs of a cloud database (CDB) instance. Note: If the size of logs to be queried is too large, the operation may time out. It is recommended that you select a shorter time range, such as one hour.
+     * This API is used to obtain the slow query log of a cloud database instance.
+Description: If the data volume is too large in a single query, it may lead to response timeout. We recommend shortening the query time range per request, such as one hour, to avoid timeout.
      * @param {DescribeSlowLogsRequest} req
      * @param {function(string, DescribeSlowLogsResponse):void} cb
      * @public
@@ -1129,7 +1257,7 @@ This is an async API. You can also use the [DescribeDBInstances](https://intl.cl
     }
 
     /**
-     * This API is used to modify the retention policy of local binlog of an instance.
+     * This API is used to modify the local binlog retention policy of an instance.
      * @param {ModifyLocalBinlogConfigRequest} req
      * @param {function(string, ModifyLocalBinlogConfigResponse):void} cb
      * @public
@@ -1159,7 +1287,8 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to modify a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
+     * This API is used to modify parameter templates.
+Description: The parameter template is a common component, effective across all regions once configured. For api calls, Guangzhou or Singapore is available to configure region.
      * @param {ModifyParamTemplateRequest} req
      * @param {function(string, ModifyParamTemplateResponse):void} cb
      * @public
@@ -1203,7 +1332,8 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API (StopDBImportJob) is used to stop a data import task.
+     * This API is used to terminate a data import task.
+Description: Only incomplete import jobs support termination, and the executed SQL part is retained after termination.
      * @param {StopDBImportJobRequest} req
      * @param {function(string, StopDBImportJobResponse):void} cb
      * @public
@@ -1214,7 +1344,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to aggregate the audit logs filtered by different conditions and aggregate the statistics of the specified data rows.
+     * This API is used to perform aggregation statistics on specified data columns in audit log result sets with different filter criteria.
      * @param {AnalyzeAuditLogsRequest} req
      * @param {function(string, AnalyzeAuditLogsResponse):void} cb
      * @public
@@ -1225,7 +1355,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to create a TencentDB account. The account name, host address, and password are required. Account remarks and maximum connections can also be configured.
+     * This API is used to create cloud database accounts. It requires specifying a new account name and domain name as well as the corresponding password. You can also set the account's remark information and maximum number of available connections.
      * @param {CreateAccountsRequest} req
      * @param {function(string, CreateAccountsResponse):void} cb
      * @public
@@ -1236,7 +1366,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to adjust the configuration of database proxy.
+     * This API is used to adjust database proxy configuration.
      * @param {AdjustCdbProxyRequest} req
      * @param {function(string, AdjustCdbProxyResponse):void} cb
      * @public
@@ -1247,7 +1377,19 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API (UpgradeDBInstanceEngineVersion) is used to upgrade the version of a TencentDB instance, which can be a primary instance, disaster recovery instance, or read-only instance.
+     * This API is used to modify the sync method of an instance.
+Description: This API can be called only by an exclusive cluster. This API is about to go offline.
+     * @param {ModifyProtectModeRequest} req
+     * @param {function(string, ModifyProtectModeResponse):void} cb
+     * @public
+     */
+    ModifyProtectMode(req, cb) {
+        let resp = new ModifyProtectModeResponse();
+        this.request("ModifyProtectMode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade the version of a cloud database instance. Supported instance types include primary instance, disaster recovery instance, and read-only instance. Before upgrade, submit an upgrade check task via SubmitInstanceUpgradeCheckJob (https://www.tencentcloud.com/document/product/236/110468?from_cn_redirect=1).
      * @param {UpgradeDBInstanceEngineVersionRequest} req
      * @param {function(string, UpgradeDBInstanceEngineVersionResponse):void} cb
      * @public
@@ -1291,7 +1433,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to query the statistics of backups. It will return the capacity used by backups at the instance level and the number and used capacity of data backups and log backups of each instance (all capacity values are in bytes).
+     * This API is used to query backup statistics, return the occupied capacity of backups by instance as well as the count and capacity of data backup and log backup for each instance (in bytes).
      * @param {DescribeBackupSummariesRequest} req
      * @param {function(string, DescribeBackupSummariesResponse):void} cb
      * @public
@@ -1302,7 +1444,8 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to query parameter template details. The common request parameter `Region` can only be set to `ap-guangzhou`.
+     * This API is used to query parameter template details.
+Description: The parameter template is a common component, effective across all regions once configured. For api calls, Guangzhou or Singapore is available to configure region.
      * @param {DescribeParamTemplateInfoRequest} req
      * @param {function(string, DescribeParamTemplateInfoResponse):void} cb
      * @public
@@ -1324,7 +1467,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to promote a disaster recovery instance to source instance. The request parameter `Region` must be the region of the disaster recovery instance.
+     * This API is used to switch a cloud database disaster recovery instance to primary instance. Note that the request must be sent to the region where the disaster recovery instance is located.
      * @param {SwitchDrInstanceToMasterRequest} req
      * @param {function(string, SwitchDrInstanceToMasterResponse):void} cb
      * @public
@@ -1335,7 +1478,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API (DeleteAccounts) is used to delete TencentDB accounts.
+     * This API is used to delete CDB accounts.
      * @param {DeleteAccountsRequest} req
      * @param {function(string, DeleteAccountsResponse):void} cb
      * @public
@@ -1346,7 +1489,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to query the basic information of an instance (instance ID, instance name, and whether encryption is enabled).
+     * This API is used to query the basic information of an instance, including instance ID, instance name, and whether encryption is enabled. Querying read-only instances is not supported.
      * @param {DescribeDBInstanceInfoRequest} req
      * @param {function(string, DescribeDBInstanceInfoResponse):void} cb
      * @public
@@ -1368,7 +1511,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to disable the database proxy address.
+     * This API is used to disable database proxy.
      * @param {CloseCdbProxyAddressRequest} req
      * @param {function(string, CloseCdbProxyAddressResponse):void} cb
      * @public
@@ -1379,7 +1522,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to delete a database backup. It can only delete manually initiated backups.
+     * This API is used to delete database backups. It only supports deleting manually initiated backups.
      * @param {DeleteBackupRequest} req
      * @param {function(string, DeleteBackupResponse):void} cb
      * @public
@@ -1387,6 +1530,17 @@ This API is an asynchronous API. You can also use the query instance list API (h
     DeleteBackup(req, cb) {
         let resp = new DeleteBackupResponse();
         this.request("DeleteBackup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the mode of a cloud database.
+     * @param {ModifyDBInstanceModesRequest} req
+     * @param {function(string, ModifyDBInstanceModesResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceModes(req, cb) {
+        let resp = new ModifyDBInstanceModesResponse();
+        this.request("ModifyDBInstanceModes", req, resp, cb);
     }
 
     /**
@@ -1401,7 +1555,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to modify the description of a proxy address.
+     * This API is used to modify the proxy address description.
      * @param {ModifyCdbProxyAddressDescRequest} req
      * @param {function(string, ModifyCdbProxyAddressDescResponse):void} cb
      * @public
@@ -1412,7 +1566,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to start the data replication from the source instance to the read-only instance.
+     * This API is used to enable RO replication and sync data from the primary instance.
      * @param {StartReplicationRequest} req
      * @param {function(string, StartReplicationResponse):void} cb
      * @public
@@ -1423,7 +1577,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to adjust the database proxy address.
+     * This API is used to adjust the database proxy address configuration.
      * @param {AdjustCdbProxyAddressRequest} req
      * @param {function(string, AdjustCdbProxyAddressResponse):void} cb
      * @public
@@ -1456,6 +1610,17 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
+     * Manually refresh rotation passwords
+     * @param {ResetPasswordRequest} req
+     * @param {function(string, ResetPasswordResponse):void} cb
+     * @public
+     */
+    ResetPassword(req, cb) {
+        let resp = new ResetPasswordResponse();
+        this.request("ResetPassword", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyInstanceParam) is used to modify instance parameters.
      * @param {ModifyInstanceParamRequest} req
      * @param {function(string, ModifyInstanceParamResponse):void} cb
@@ -1467,7 +1632,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to disable database proxy.
+     * This API is used to disable the database proxy.
      * @param {CloseCDBProxyRequest} req
      * @param {function(string, CloseCDBProxyResponse):void} cb
      * @public
@@ -1478,7 +1643,18 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to modify the maximum connections of one or more TencentDB instance accounts.
+     * This API is used to modify the name or description of a placement group.
+     * @param {ModifyNameOrDescByDpIdRequest} req
+     * @param {function(string, ModifyNameOrDescByDpIdResponse):void} cb
+     * @public
+     */
+    ModifyNameOrDescByDpId(req, cb) {
+        let resp = new ModifyNameOrDescByDpIdResponse();
+        this.request("ModifyNameOrDescByDpId", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the maximum number of available connections for a cloud database account.
      * @param {ModifyAccountMaxUserConnectionsRequest} req
      * @param {function(string, ModifyAccountMaxUserConnectionsResponse):void} cb
      * @public
@@ -1500,7 +1676,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API is used to query a database audit log.
+     * This API is used to query database audit logs.
      * @param {DescribeAuditLogsRequest} req
      * @param {function(string, DescribeAuditLogsResponse):void} cb
      * @public
@@ -1511,7 +1687,7 @@ This API is an asynchronous API. You can also use the query instance list API (h
     }
 
     /**
-     * This API (DescribeDBInstanceRebootTime) is used to query the estimated time needed for a TencentDB instance to restart.
+     * This API is used to query the expected time required to restart a cloud database instance.
      * @param {DescribeDBInstanceRebootTimeRequest} req
      * @param {function(string, DescribeDBInstanceRebootTimeResponse):void} cb
      * @public
@@ -1605,7 +1781,7 @@ Note that when modifying account permissions, you need to pass in the full permi
     }
 
     /**
-     * This API is used to query the SSL enabling status. If the SSL is enabled, the certificate download link will be returned synchronously.
+     * This API is used to query SSL activation status. If SSL has been enabled, it will synchronously return the certificate download URL.
      * @param {DescribeSSLStatusRequest} req
      * @param {function(string, DescribeSSLStatusResponse):void} cb
      * @public
@@ -1638,9 +1814,8 @@ Note that when modifying account permissions, you need to pass in the full permi
     }
 
     /**
-     * This API (CreateDBImportJob) is used to create a data import task for a TencentDB instance.
-
-Note that the files for a data import task must be uploaded to Tencent Cloud in advance. You need to do so in the console.
+     * This API is used to create a cloud database data import task.
+Note that the file for the data import task must be uploaded to Tencent Cloud in advance. The user must perform file import on the console.
      * @param {CreateDBImportJobRequest} req
      * @param {function(string, CreateDBImportJobResponse):void} cb
      * @public
@@ -1651,7 +1826,7 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API is used to query information of all TencentDB accounts.
+     * This API is used to query ALL account information of the cloud database.
      * @param {DescribeAccountsRequest} req
      * @param {function(string, DescribeAccountsResponse):void} cb
      * @public
@@ -1659,17 +1834,6 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
         this.request("DescribeAccounts", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the elastic expansion policy of an instance.
-     * @param {DescribeCpuExpandStrategyRequest} req
-     * @param {function(string, DescribeCpuExpandStrategyResponse):void} cb
-     * @public
-     */
-    DescribeCpuExpandStrategy(req, cb) {
-        let resp = new DescribeCpuExpandStrategyResponse();
-        this.request("DescribeCpuExpandStrategy", req, resp, cb);
     }
 
     /**
@@ -1728,6 +1892,28 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
+     * This API is used to submit an instance version upgrade validation task.
+     * @param {SubmitInstanceUpgradeCheckJobRequest} req
+     * @param {function(string, SubmitInstanceUpgradeCheckJobResponse):void} cb
+     * @public
+     */
+    SubmitInstanceUpgradeCheckJob(req, cb) {
+        let resp = new SubmitInstanceUpgradeCheckJobResponse();
+        this.request("SubmitInstanceUpgradeCheckJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to close instance account password rotation.
+     * @param {DeleteRotationPasswordRequest} req
+     * @param {function(string, DeleteRotationPasswordResponse):void} cb
+     * @public
+     */
+    DeleteRotationPassword(req, cb) {
+        let resp = new DeleteRotationPasswordResponse();
+        this.request("DeleteRotationPassword", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyAccountPassword) is used to modify the password of a TencentDB instance account.
      * @param {ModifyAccountPasswordRequest} req
      * @param {function(string, ModifyAccountPasswordResponse):void} cb
@@ -1761,8 +1947,8 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API is used to query the slow logs of an instance over the past month by search criteria.
-Note: the HTTP response packet will be very large if it contain a single large slow log, which causes the API call to time out. If this happens, we recommend you lower the value of the input parameter `Limit` to reduce the packet size so that the API can respond timely.
+     * This API is used to search for instance slow logs under usage conditions. Only allow viewing slow logs within one month.
+During use, pay attention: a single slow log may be too large, causing the entire http request return content to be too large, furthermore leading to API timeout. Once timed out, narrow down the Limit parameter value when querying, thereby reducing the size and enabling the API to return content promptly.
      * @param {DescribeSlowLogDataRequest} req
      * @param {function(string, DescribeSlowLogDataResponse):void} cb
      * @public
@@ -1773,7 +1959,7 @@ Note: the HTTP response packet will be very large if it contain a single large s
     }
 
     /**
-     * This API is used to enable the audit service.
+     * This API is used to activate audit service for CDB instance.
      * @param {OpenAuditServiceRequest} req
      * @param {function(string, OpenAuditServiceResponse):void} cb
      * @public
@@ -1806,7 +1992,7 @@ Note: the HTTP response packet will be very large if it contain a single large s
     }
 
     /**
-     * This API (ModifyBackupConfig) is used to modify the database backup configuration.
+     * This API is used to modify database backup configuration.
      * @param {ModifyBackupConfigRequest} req
      * @param {function(string, ModifyBackupConfigResponse):void} cb
      * @public
@@ -1817,7 +2003,9 @@ Note: the HTTP response packet will be very large if it contain a single large s
     }
 
     /**
-     * This API is used to query the audit rules in the current region.
+     * This API is used to create audit rules no longer supported.
+
+This API is used to query audit rules in current region.
      * @param {DescribeAuditRulesRequest} req
      * @param {function(string, DescribeAuditRulesResponse):void} cb
      * @public
@@ -1839,7 +2027,7 @@ Note: the HTTP response packet will be very large if it contain a single large s
     }
 
     /**
-     * This API is used to modify the VPC of the database proxy address.
+     * This API is used to modify the database proxy address VPC information.
      * @param {ModifyCdbProxyAddressVipAndVPortRequest} req
      * @param {function(string, ModifyCdbProxyAddressVipAndVPortResponse):void} cb
      * @public
@@ -1850,7 +2038,7 @@ Note: the HTTP response packet will be very large if it contain a single large s
     }
 
     /**
-     * The API DescribeDBInstanceLogToCLS is used to query the configurations of sending slow and error logs of an instance (InstanceId) filtered by AppId and Region to Cloud Log Service (CLS).
+     * This API is used to query the configuration of slow log and error log delivery to CLS for an instance. It filters out the present instance log delivery configuration to CLS by AppId, Region, and instance ID.
      * @param {DescribeDBInstanceLogToCLSRequest} req
      * @param {function(string, DescribeDBInstanceLogToCLSResponse):void} cb
      * @public
@@ -1872,7 +2060,7 @@ Note: the HTTP response packet will be very large if it contain a single large s
     }
 
     /**
-     * This API is used create a database proxy for a source instance.
+     * This API is used to create a database proxy for the primary instance.
      * @param {CreateCdbProxyRequest} req
      * @param {function(string, CreateCdbProxyResponse):void} cb
      * @public
@@ -1894,7 +2082,7 @@ Note: the HTTP response packet will be very large if it contain a single large s
     }
 
     /**
-     * This API is used to switch database proxy after the proxy configuration is modified or the proxy version is upgraded.
+     * This API is used to manually initiate an immediate switch after database proxy configuration modification or edition upgrade.
      * @param {SwitchCDBProxyRequest} req
      * @param {function(string, SwitchCDBProxyResponse):void} cb
      * @public
@@ -1916,7 +2104,7 @@ Note: the HTTP response packet will be very large if it contain a single large s
     }
 
     /**
-     * This API is used to configure the database proxy parameters.
+     * This API is used to configure database proxy parameters.
      * @param {ModifyCdbProxyParamRequest} req
      * @param {function(string, ModifyCdbProxyParamResponse):void} cb
      * @public
@@ -1984,7 +2172,7 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * u200cThis API is used to enable elastic CPU expansion manually or automatically.
+     * This API is used to enable CPU Elastic Scaling, including one-time manual scale-out and automatic elastic scaling.
      * @param {StartCpuExpandRequest} req
      * @param {function(string, StartCpuExpandResponse):void} cb
      * @public
@@ -2006,7 +2194,8 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API is used to delete a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
+     * This API is used to delete parameter template.
+Description: The parameter template is a common component, effective across all regions once configured. For api calls, Guangzhou or Singapore is available to configure region.
      * @param {DeleteParamTemplateRequest} req
      * @param {function(string, DeleteParamTemplateResponse):void} cb
      * @public
@@ -2039,7 +2228,7 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API is used to query the information of all RO groups of a TencentDB instance.
+     * This API is used to query all RO groups of a cloud database instance.
      * @param {DescribeRoGroupsRequest} req
      * @param {function(string, DescribeRoGroupsResponse):void} cb
      * @public
@@ -2050,7 +2239,7 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API is used to query the clone task list of an instance.
+     * This API is used to query the clone task list of a user instance.
      * @param {DescribeCloneListRequest} req
      * @param {function(string, DescribeCloneListResponse):void} cb
      * @public
@@ -2061,18 +2250,18 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API is used to modify the name or description of a placement group.
-     * @param {ModifyNameOrDescByDpIdRequest} req
-     * @param {function(string, ModifyNameOrDescByDpIdResponse):void} cb
+     * This API is used to query event information of instance occurrence.
+     * @param {DescribeInstanceAlarmEventsRequest} req
+     * @param {function(string, DescribeInstanceAlarmEventsResponse):void} cb
      * @public
      */
-    ModifyNameOrDescByDpId(req, cb) {
-        let resp = new ModifyNameOrDescByDpIdResponse();
-        this.request("ModifyNameOrDescByDpId", req, resp, cb);
+    DescribeInstanceAlarmEvents(req, cb) {
+        let resp = new DescribeInstanceAlarmEventsResponse();
+        this.request("DescribeInstanceAlarmEvents", req, resp, cb);
     }
 
     /**
-     * This API is used to upgrade or downgrade a TencentDB instance, which can be a primary instance, disaster recovery instance, or read-only instance.
+     * This API is used to upgrade or downgrade the configuration of a cloud database instance. Supported instance types include primary instance, disaster recovery instance and read-only instance. If you need to migrate business, fill in the instance specification (CPU, memory), otherwise the system will use the minimum allowed specification by default.
      * @param {UpgradeDBInstanceRequest} req
      * @param {function(string, UpgradeDBInstanceResponse):void} cb
      * @public
@@ -2083,7 +2272,18 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API is used to upgrade the version of database proxy.
+     * This API is used to close the SSL connectivity function.
+     * @param {CloseSSLRequest} req
+     * @param {function(string, CloseSSLResponse):void} cb
+     * @public
+     */
+    CloseSSL(req, cb) {
+        let resp = new CloseSSLResponse();
+        this.request("CloseSSL", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade the database proxy version.
      * @param {UpgradeCDBProxyVersionRequest} req
      * @param {function(string, UpgradeCDBProxyVersionResponse):void} cb
      * @public
@@ -2105,7 +2305,7 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API (DeleteTimeWindow) is used to delete a maintenance time window for a TencentDB instance. After it is deleted, the default maintenance time window will be 03:00-04:00, i.e., switch to a new instance will be performed during 03:00-04:00 by default.
+     * This API is used to delete the maintenance time window of a cloud database instance. After deleting the instance maintenance window, the default maintenance period is 03:00-04:00 daily with a data validation delay threshold of 10 seconds. When switching to a new instance during the maintenance time window, the switch is performed by default at 03:00-04:00.
      * @param {DeleteTimeWindowRequest} req
      * @param {function(string, DeleteTimeWindowResponse):void} cb
      * @public

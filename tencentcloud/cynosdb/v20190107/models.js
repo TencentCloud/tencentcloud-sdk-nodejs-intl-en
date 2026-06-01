@@ -4287,7 +4287,7 @@ class AddInstancesResponse extends  AbstractModel {
         this.TranId = null;
 
         /**
-         * <p>Order ID for payment. Description: Recommend you use the <a href="https://www.tencentcloud.com/document/product/1003/52131?from_cn_redirect=1">DescribeResourcesByDealName</a> api to query order associated instance.</p>
+         * <p>Order ID for payment. Description: Recommend you use the <a href="https://www.tencentcloud.com/document/product/1098/40735">DescribeResourcesByDealName</a> api to query order associated instance.</p>
          * @type {Array.<string> || null}
          */
         this.DealNames = null;

@@ -5346,66 +5346,18 @@ class OpenReadOnlyInstanceExclusiveAccessRequest extends  AbstractModel {
 }
 
 /**
- * ExportResourcePackageDeductDetails request structure.
+ * AI optimizer task data
  * @class
  */
-class ExportResourcePackageDeductDetailsRequest extends  AbstractModel {
+class AIOptimizerTaskData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Resource package ID to be exported.
+         * <p>Template ID</p>
          * @type {string || null}
          */
-        this.PackageId = null;
-
-        /**
-         * Specifies the cluster ID of the cynos cluster that uses the resource package capacity.
-         * @type {Array.<string> || null}
-         */
-        this.ClusterIds = null;
-
-        /**
-         * Sorting field. currently supports: createTime (resource package deduction time), successDeductSpec (resource package deduction amount).
-         * @type {string || null}
-         */
-        this.OrderBy = null;
-
-        /**
-         * Sorting type. supports ASC, DESC, ASC, DESC.
-         * @type {string || null}
-         */
-        this.OrderByType = null;
-
-        /**
-         * Start time.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * A maximum of 2000 rows of data can be exported at a time. currently, a maximum of 2000 rows are supported.
-         * @type {string || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Offset and page number.
-         * @type {string || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Specifies the format for exporting data. currently only supports csv format, reserved for future expansion.
-         * @type {string || null}
-         */
-        this.FileType = null;
+        this.TemplateID = null;
 
     }
 
@@ -5416,15 +5368,7 @@ class ExportResourcePackageDeductDetailsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PackageId = 'PackageId' in params ? params.PackageId : null;
-        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
 
     }
 }
@@ -20993,7 +20937,7 @@ class InquirePriceModifyRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Task Information
  * @class
  */
 class BizTaskInfo extends  AbstractModel {
@@ -21001,245 +20945,254 @@ class BizTaskInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Task ID.</p>
          * @type {number || null}
          */
         this.ID = null;
 
         /**
-         * 
+         * <p>User appid</p>
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * 
+         * <p>Cluster ID.</p>
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Region
+         * <p>Region</p>
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 
+         * <p>Task creation time</p>
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Specifies the delayed execution time.
+         * <p>Delayed execution time</p>
          * @type {string || null}
          */
         this.DelayTime = null;
 
         /**
-         * Task failure information.
+         * <p>Task failure information</p>
          * @type {string || null}
          */
         this.ErrMsg = null;
 
         /**
-         * 
+         * <p>Asynchronous task flow id</p>
          * @type {number || null}
          */
         this.FlowId = null;
 
         /**
-         * 
+         * <p>Task input information</p>
          * @type {string || null}
          */
         this.Input = null;
 
         /**
-         * 
+         * <p>Instance group id.</p>
          * @type {string || null}
          */
         this.InstanceGrpId = null;
 
         /**
-         * 
+         * <p>Instance group id.</p>
          * @type {string || null}
          */
         this.InstanceGroupId = null;
 
         /**
-         * 
+         * <p>Instance id</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 
+         * <p>Task operation object id</p>
          * @type {string || null}
          */
         this.ObjectId = null;
 
         /**
-         * 
+         * <p>Task operation object type.</p>
          * @type {string || null}
          */
         this.ObjectType = null;
 
         /**
-         * 
+         * <p>Operator uin</p>
          * @type {string || null}
          */
         this.Operator = null;
 
         /**
-         * 
+         * <p>Task output information</p>
          * @type {string || null}
          */
         this.Output = null;
 
         /**
-         * 
+         * <p>Task status</p>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * <p>Task type</p>
          * @type {string || null}
          */
         this.TaskType = null;
 
         /**
-         * 
+         * <p>Parent task ID that triggers this task</p>
          * @type {number || null}
          */
         this.TriggerTaskId = null;
 
         /**
-         * 
+         * <p>Update time.</p>
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * 
+         * <p>Task start time</p>
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 
+         * <p>Task end time</p>
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * 
+         * <p>Cluster name.</p>
          * @type {string || null}
          */
         this.ClusterName = null;
 
         /**
-         * 
+         * <p>Instance name</p>
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * 
+         * <p>Task progress</p>
          * @type {number || null}
          */
         this.Process = null;
 
         /**
-         * 
+         * <p>Modify parameter task information</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ModifyParamsData> || null}
          */
         this.ModifyParamsData = null;
 
         /**
-         * Create cluster task information.
+         * <p>Create cluster task information</p>
          * @type {CreateClustersData || null}
          */
         this.CreateClustersData = null;
 
         /**
-         * Cluster rollback task information.
+         * <p>Cluster rollback task information</p>
          * @type {RollbackData || null}
          */
         this.RollbackData = null;
 
         /**
-         * Instance configuration change task information.
+         * <p>Instance configuration change task information</p>
          * @type {ModifyInstanceData || null}
          */
         this.ModifyInstanceData = null;
 
         /**
-         * 
+         * <p>Manual backup task information</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {ManualBackupData || null}
          */
         this.ManualBackupData = null;
 
         /**
-         * Modify kernel version task information.
+         * <p>Modify kernel version task information</p>
          * @type {ModifyDbVersionData || null}
          */
         this.ModifyDbVersionData = null;
 
         /**
-         * Cluster availability zone information.
+         * <p>Cluster Availability Zone Information</p>
          * @type {ClusterSlaveData || null}
          */
         this.ClusterSlaveData = null;
 
         /**
-         * 
+         * <p>Convert cluster logs</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SwitchClusterLogBin || null}
          */
         this.SwitchClusterLogBin = null;
 
         /**
-         * 
+         * <p>Modify instance parameter data</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {BizTaskModifyParamsData || null}
          */
         this.ModifyInstanceParamsData = null;
 
         /**
-         * Maintenance time.
+         * <p>Maintenance time</p>
          * @type {TaskMaintainInfo || null}
          */
         this.TaskMaintainInfo = null;
 
         /**
-         * Instance log delivery information.
-
+         * <p>Instance Log Delivery Information</p>
          * @type {Array.<InstanceCLSDeliveryInfo> || null}
          */
         this.InstanceCLSDeliveryInfos = null;
 
         /**
-         * Task progress information.
+         * <p>Task progress information</p>
          * @type {TaskProgressInfo || null}
          */
         this.TaskProgressInfo = null;
 
         /**
-         * Global Database Network Task
+         * <p>Global database network task</p>
          * @type {GdnTaskInfo || null}
          */
         this.GdnTaskInfo = null;
 
         /**
-         * Safe id
+         * <p>Safe id</p>
          * @type {string || null}
          */
         this.VaultId = null;
 
         /**
-         * Safe name
+         * <p>Safe name</p>
          * @type {string || null}
          */
         this.VaultName = null;
+
+        /**
+         * <p>AI optimizer task information</p>
+         * @type {AIOptimizerTaskData || null}
+         */
+        this.AIOptimizerTaskData = null;
 
     }
 
@@ -21361,6 +21314,12 @@ class BizTaskInfo extends  AbstractModel {
         }
         this.VaultId = 'VaultId' in params ? params.VaultId : null;
         this.VaultName = 'VaultName' in params ? params.VaultName : null;
+
+        if (params.AIOptimizerTaskData) {
+            let obj = new AIOptimizerTaskData();
+            obj.deserialize(params.AIOptimizerTaskData)
+            this.AIOptimizerTaskData = obj;
+        }
 
     }
 }
@@ -29275,6 +29234,55 @@ class DescribeIsolatedInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * ResetAccountPassword request structure.
+ * @class
+ */
+class ResetAccountPasswordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database account name
+         * @type {string || null}
+         */
+        this.AccountName = null;
+
+        /**
+         * New password of the database account
+         * @type {string || null}
+         */
+        this.AccountPassword = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Host. Default value: `%`
+         * @type {string || null}
+         */
+        this.Host = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccountName = 'AccountName' in params ? params.AccountName : null;
+        this.AccountPassword = 'AccountPassword' in params ? params.AccountPassword : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Host = 'Host' in params ? params.Host : null;
+
+    }
+}
+
+/**
  * CheckCreateLibraDBInstance response structure.
  * @class
  */
@@ -34405,36 +34413,66 @@ class ActivateLibraDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * ResetAccountPassword request structure.
+ * ExportResourcePackageDeductDetails request structure.
  * @class
  */
-class ResetAccountPasswordRequest extends  AbstractModel {
+class ExportResourcePackageDeductDetailsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Database account name
+         * Resource package ID to be exported.
          * @type {string || null}
          */
-        this.AccountName = null;
+        this.PackageId = null;
 
         /**
-         * New password of the database account
-         * @type {string || null}
+         * Specifies the cluster ID of the cynos cluster that uses the resource package capacity.
+         * @type {Array.<string> || null}
          */
-        this.AccountPassword = null;
+        this.ClusterIds = null;
 
         /**
-         * Cluster ID
+         * Sorting field. currently supports: createTime (resource package deduction time), successDeductSpec (resource package deduction amount).
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.OrderBy = null;
 
         /**
-         * Host. Default value: `%`
+         * Sorting type. supports ASC, DESC, ASC, DESC.
          * @type {string || null}
          */
-        this.Host = null;
+        this.OrderByType = null;
+
+        /**
+         * Start time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * A maximum of 2000 rows of data can be exported at a time. currently, a maximum of 2000 rows are supported.
+         * @type {string || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset and page number.
+         * @type {string || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Specifies the format for exporting data. currently only supports csv format, reserved for future expansion.
+         * @type {string || null}
+         */
+        this.FileType = null;
 
     }
 
@@ -34445,10 +34483,15 @@ class ResetAccountPasswordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AccountName = 'AccountName' in params ? params.AccountName : null;
-        this.AccountPassword = 'AccountPassword' in params ? params.AccountPassword : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Host = 'Host' in params ? params.Host : null;
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
 
     }
 }
@@ -35399,7 +35442,7 @@ module.exports = {
     AuditRuleTemplateInfo: AuditRuleTemplateInfo,
     DescribeParamTemplateDetailRequest: DescribeParamTemplateDetailRequest,
     OpenReadOnlyInstanceExclusiveAccessRequest: OpenReadOnlyInstanceExclusiveAccessRequest,
-    ExportResourcePackageDeductDetailsRequest: ExportResourcePackageDeductDetailsRequest,
+    AIOptimizerTaskData: AIOptimizerTaskData,
     DescribeRedoLogListByVaultItem: DescribeRedoLogListByVaultItem,
     StartCLSDeliveryResponse: StartCLSDeliveryResponse,
     ParamItemInfo: ParamItemInfo,
@@ -35805,6 +35848,7 @@ module.exports = {
     CloseClusterPasswordComplexityRequest: CloseClusterPasswordComplexityRequest,
     ModifyLibraDBClusterAccountDescriptionResponse: ModifyLibraDBClusterAccountDescriptionResponse,
     DescribeIsolatedInstancesRequest: DescribeIsolatedInstancesRequest,
+    ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     CheckCreateLibraDBInstanceResponse: CheckCreateLibraDBInstanceResponse,
     AddServerlessRoInstancesResponse: AddServerlessRoInstancesResponse,
     DescribeAuditRuleTemplatesResponse: DescribeAuditRuleTemplatesResponse,
@@ -35893,7 +35937,7 @@ module.exports = {
     LogicBackupConfigInfo: LogicBackupConfigInfo,
     ModifyBinlogConfigResponse: ModifyBinlogConfigResponse,
     ActivateLibraDBInstanceRequest: ActivateLibraDBInstanceRequest,
-    ResetAccountPasswordRequest: ResetAccountPasswordRequest,
+    ExportResourcePackageDeductDetailsRequest: ExportResourcePackageDeductDetailsRequest,
     ModifiableInfo: ModifiableInfo,
     TaskMaintainInfo: TaskMaintainInfo,
     DescribeServerlessStrategyRequest: DescribeServerlessStrategyRequest,

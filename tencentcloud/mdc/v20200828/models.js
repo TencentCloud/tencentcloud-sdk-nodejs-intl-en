@@ -468,6 +468,96 @@ class FlowSRTInfo extends  AbstractModel {
          */
         this.RecvPacketDropNumber = null;
 
+        /**
+         * bandwidth
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * Transmit bandwidth
+         * @type {number || null}
+         */
+        this.SendBandwidth = null;
+
+        /**
+         * Receive bandwidth
+         * @type {number || null}
+         */
+        this.RecvBandwidth = null;
+
+        /**
+         * Number of packets sent
+         * @type {number || null}
+         */
+        this.SendPackets = null;
+
+        /**
+         * Number of received packets
+         * @type {number || null}
+         */
+        this.RecvPackets = null;
+
+        /**
+         * Send lost package
+         * @type {number || null}
+         */
+        this.SendLostPackets = null;
+
+        /**
+         * Accept lost packages
+         * @type {number || null}
+         */
+        this.RecvLostPackets = null;
+
+        /**
+         * Number of retransmission packets sent
+         * @type {number || null}
+         */
+        this.SendRetransmitPackets = null;
+
+        /**
+         * Number of received retransmission packets
+         * @type {number || null}
+         */
+        this.RecvRetransmitPackets = null;
+
+        /**
+         * Flight window size
+         * @type {number || null}
+         */
+        this.FlightSize = null;
+
+        /**
+         * congestion window
+         * @type {number || null}
+         */
+        this.CongestionWindow = null;
+
+        /**
+         * Send buffer (ms)
+         * @type {number || null}
+         */
+        this.SendBuffer = null;
+
+        /**
+         * Receive buffer (ms)
+         * @type {number || null}
+         */
+        this.RecvBuffer = null;
+
+        /**
+         * Sending delay
+         * @type {number || null}
+         */
+        this.SendLatency = null;
+
+        /**
+         * Receiving delay
+         * @type {number || null}
+         */
+        this.RecvLatency = null;
+
     }
 
     /**
@@ -486,6 +576,21 @@ class FlowSRTInfo extends  AbstractModel {
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SendPacketDropNumber = 'SendPacketDropNumber' in params ? params.SendPacketDropNumber : null;
         this.RecvPacketDropNumber = 'RecvPacketDropNumber' in params ? params.RecvPacketDropNumber : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.SendBandwidth = 'SendBandwidth' in params ? params.SendBandwidth : null;
+        this.RecvBandwidth = 'RecvBandwidth' in params ? params.RecvBandwidth : null;
+        this.SendPackets = 'SendPackets' in params ? params.SendPackets : null;
+        this.RecvPackets = 'RecvPackets' in params ? params.RecvPackets : null;
+        this.SendLostPackets = 'SendLostPackets' in params ? params.SendLostPackets : null;
+        this.RecvLostPackets = 'RecvLostPackets' in params ? params.RecvLostPackets : null;
+        this.SendRetransmitPackets = 'SendRetransmitPackets' in params ? params.SendRetransmitPackets : null;
+        this.RecvRetransmitPackets = 'RecvRetransmitPackets' in params ? params.RecvRetransmitPackets : null;
+        this.FlightSize = 'FlightSize' in params ? params.FlightSize : null;
+        this.CongestionWindow = 'CongestionWindow' in params ? params.CongestionWindow : null;
+        this.SendBuffer = 'SendBuffer' in params ? params.SendBuffer : null;
+        this.RecvBuffer = 'RecvBuffer' in params ? params.RecvBuffer : null;
+        this.SendLatency = 'SendLatency' in params ? params.SendLatency : null;
+        this.RecvLatency = 'RecvLatency' in params ? params.RecvLatency : null;
 
     }
 }
@@ -3127,6 +3232,12 @@ It must be in UTC format, such as `2020-01-01T12:00:00Z`.
          */
         this.Period = null;
 
+        /**
+         * Peer IP address
+         * @type {string || null}
+         */
+        this.RemoteIp = null;
+
     }
 
     /**
@@ -3143,6 +3254,7 @@ It must be in UTC format, such as `2020-01-01T12:00:00Z`.
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Period = 'Period' in params ? params.Period : null;
+        this.RemoteIp = 'RemoteIp' in params ? params.RemoteIp : null;
 
     }
 }

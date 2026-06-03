@@ -456,61 +456,67 @@ class OCRResult extends  AbstractModel {
         super();
 
         /**
-         * Is the indentity verification or OCR process passed
+         * <p>Whether the identity authentication or OCR process is successful.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsPass = null;
 
         /**
-         * The Base64 of ID card image
+         * <p>Base64 of the ID image</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CardImageBase64 = null;
 
         /**
-         * OCR result of the ID card.
+         * <p>ID card recognition result</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {CardInfo || null}
          */
         this.CardInfo = null;
 
         /**
-         * OCR result of the ID card.
+         * <p>Document recognition result (when CheckMode value is 4, return the OriginalCardInfo field; other scenarios return the current field)</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {NormalCardInfo || null}
          */
         this.NormalCardInfo = null;
 
         /**
-         * The request id
+         * <p>Request id</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RequestId = null;
 
         /**
-         * Base64 of cropped image of ID card
+         * <p>Base64 of the cropped ID image</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CardCutImageBase64 = null;
 
         /**
-         * Base64 of the cropped image on the reverse side of the ID card
+         * <p>Base64 of the cropped image of the back side of the ID</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CardBackCutImageBase64 = null;
 
         /**
-         * Card Warning Information
-
--9101 Alarm for covered certificate,
--9102 Alarm for photocopied certificate,
--9103 Alarm for photographed certificate,
--9104 Alarm for PS certificate,
--9107 Alarm for reflective certificate,
--9108 Alarm for blurry image,
--9109 This capability is not enabled.
+         * <p>Alarm code</p><p>Enumeration value:</p><ul><li>-9101: Alarm for incomplete document border</li><li>-9102: Alarm for document photocopy</li><li>-9103: Alarm for rephotographing</li><li>-9104: PS alarm</li><li>-9107: Reflective alarm</li><li>-9108: Blurry alarm</li><li>-9109: Alarm capability not enabled</li></ul>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<number> || null}
          */
         this.WarnCardInfos = null;
+
+        /**
+         * <p>Original document recognition information (the current field will be returned when CheckMode value is 4)</p>
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OriginalCardInfo = null;
 
     }
 
@@ -539,6 +545,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CardCutImageBase64 = 'CardCutImageBase64' in params ? params.CardCutImageBase64 : null;
         this.CardBackCutImageBase64 = 'CardBackCutImageBase64' in params ? params.CardBackCutImageBase64 : null;
         this.WarnCardInfos = 'WarnCardInfos' in params ? params.WarnCardInfos : null;
+        this.OriginalCardInfo = 'OriginalCardInfo' in params ? params.OriginalCardInfo : null;
 
     }
 }
@@ -6983,6 +6990,30 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Seq = null;
 
+        /**
+         * Describe the detailed reason why the current request was rejected in the liveness phase. This parameter only applies to the PLUS edition eKYC service.
+-Details as follows:
+01-User eyes closed throughout
+02-User not completed specified action
+03-Suspected rephotography attack
+04-Suspected Synthesis Attack
+05-Suspected fraudulent template
+06-Suspected watermark
+07-Reflection validation failed
+08 - Suspected change of person midway
+09-Poor face quality
+10 - Distance validation failed
+11-Suspected adversarial sample attack
+12 - Suspected attack traces in the mouth area
+13 - Suspected attack traces exist in the eye area
+14 - Eye or mouth obstruction
+Note: This field may return null, indicating that no valid values can be obtained.
+Example value: ["01"].
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.LivenessInfoTag = null;
+
     }
 
     /**
@@ -7001,6 +7032,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ReqTimestamp = 'ReqTimestamp' in params ? params.ReqTimestamp : null;
         this.Similarity = 'Similarity' in params ? params.Similarity : null;
         this.Seq = 'Seq' in params ? params.Seq : null;
+        this.LivenessInfoTag = 'LivenessInfoTag' in params ? params.LivenessInfoTag : null;
 
     }
 }
@@ -7816,7 +7848,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CurrentIssueDate = null;
 
         /**
-         * Hong kong identity card version.
+         * Hong Kong identity card version number, HKID-2003: 03 edition ID card, HKID-2018: 18 edition ID card
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */

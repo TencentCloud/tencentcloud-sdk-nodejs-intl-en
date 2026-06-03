@@ -197,6 +197,7 @@ const StopRollbackRequest = models.StopRollbackRequest;
 const LogToCLSConfig = models.LogToCLSConfig;
 const ResetRootAccountRequest = models.ResetRootAccountRequest;
 const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
+const ClusterNodeInfo = models.ClusterNodeInfo;
 const DescribeTableColumnsRequest = models.DescribeTableColumnsRequest;
 const DescribeProxyCustomConfResponse = models.DescribeProxyCustomConfResponse;
 const ModifyAuditConfigResponse = models.ModifyAuditConfigResponse;
@@ -250,6 +251,7 @@ const ResetRootAccountResponse = models.ResetRootAccountResponse;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const Account = models.Account;
 const ModifyNameOrDescByDpIdResponse = models.ModifyNameOrDescByDpIdResponse;
+const DescribeClusterInfoRequest = models.DescribeClusterInfoRequest;
 const DescribeDBPriceResponse = models.DescribeDBPriceResponse;
 const AuditLogFilter = models.AuditLogFilter;
 const OpenDBInstanceGTIDResponse = models.OpenDBInstanceGTIDResponse;
@@ -407,6 +409,7 @@ const CloseAuditServiceRequest = models.CloseAuditServiceRequest;
 const AutoStrategy = models.AutoStrategy;
 const ModifyAccountMaxUserConnectionsResponse = models.ModifyAccountMaxUserConnectionsResponse;
 const Outbound = models.Outbound;
+const DescribeClusterInfoResponse = models.DescribeClusterInfoResponse;
 const AuditInstanceFilters = models.AuditInstanceFilters;
 const ParamInfo = models.ParamInfo;
 const DescribeBackupDecryptionKeyResponse = models.DescribeBackupDecryptionKeyResponse;
@@ -454,6 +457,7 @@ const ModifyNameOrDescByDpIdRequest = models.ModifyNameOrDescByDpIdRequest;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const UpgradeCDBProxyVersionRequest = models.UpgradeCDBProxyVersionRequest;
 const DeleteAuditRuleTemplatesResponse = models.DeleteAuditRuleTemplatesResponse;
+const AddressInfo = models.AddressInfo;
 const ModifyAuditRuleTemplatesResponse = models.ModifyAuditRuleTemplatesResponse;
 
 
@@ -1497,6 +1501,17 @@ Description: The parameter template is a common component, effective across all 
     DescribeDBInstanceInfo(req, cb) {
         let resp = new DescribeDBInstanceInfoResponse();
         this.request("DescribeDBInstanceInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query cloud disk edition instance info.
+     * @param {DescribeClusterInfoRequest} req
+     * @param {function(string, DescribeClusterInfoResponse):void} cb
+     * @public
+     */
+    DescribeClusterInfo(req, cb) {
+        let resp = new DescribeClusterInfoResponse();
+        this.request("DescribeClusterInfo", req, resp, cb);
     }
 
     /**

@@ -8028,66 +8028,70 @@ class ModifyDBInstanceLogToCLSRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+         * <p>Instance ID, which can be obtained through the <a href="https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1">DescribeDBInstances</a> API.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Log type. error: error log. slowlog: slow log.
+         * <p>Log type. Error: error log, slowlog: slow log.</p>
          * @type {string || null}
          */
         this.LogType = null;
 
         /**
-         * Delivery status. ON: Enabled, OFF: Disabled.
+         * <p>Delivery status. ON: enabled, OFF: disabled.</p>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Whether required to create logset. Default to false.
+         * <p>Whether required to create logset. Default to false.</p>
          * @type {boolean || null}
          */
         this.CreateLogset = null;
 
         /**
-         * Logset name when creating a logset; logset ID when selecting an existing log set. Empty by default.
-Description: When the parameter Status is set to ON, you must fill in either the Logset or LogTopic parameter.
+         * <p>Logset name when creating a logset; logset ID when selecting an existing logset. Empty by default.<br>Description: When the Status parameter is ON, either the Logset or LogTopic parameter must be filled.</p>
          * @type {string || null}
          */
         this.Logset = null;
 
         /**
-         * Whether required to create log topic. Default to false.
+         * <p>Whether required to create log topic. Default to false.</p>
          * @type {boolean || null}
          */
         this.CreateLogTopic = null;
 
         /**
-         * Log topic name when creating a log topic; log topic ID when selecting an existing log topic. Empty by default.
-Description: When the parameter Status is set to ON, you must fill in either the Logset or LogTopic parameter.
+         * <p>Enter a log topic name when creating a log topic, or enter a log topic ID when selecting an existing log topic. Empty by default.<br>Description: When the Status parameter is set to ON, either the Logset or LogTopic parameter must be specified.</p>
          * @type {string || null}
          */
         this.LogTopic = null;
 
         /**
-         * Log topic valid period. Default value: 30 days if left empty. Maximum value: 3600.
+         * <p>Valid period of the log topic. Default value: 30 days if left empty. Maximum value: 3600 days.</p>
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Whether to create an index when creating a log topic. Default to false.
+         * <p>Whether to create an index when creating a log topic. Defaults to false.</p>
          * @type {boolean || null}
          */
         this.CreateIndex = null;
 
         /**
-         * The region of CLS. If left empty, it defaults to the parameter value of Region.
+         * <p>CLS region. If left empty, it defaults to the Region parameter value.</p>
          * @type {string || null}
          */
         this.ClsRegion = null;
+
+        /**
+         * <p>Selectable when creating a log topic. Cannot exceed 10 tags</p>
+         * @type {Array.<TagInfoItem> || null}
+         */
+        this.ResourceTags = null;
 
     }
 
@@ -8108,6 +8112,15 @@ Description: When the parameter Status is set to ON, you must fill in either the
         this.Period = 'Period' in params ? params.Period : null;
         this.CreateIndex = 'CreateIndex' in params ? params.CreateIndex : null;
         this.ClsRegion = 'ClsRegion' in params ? params.ClsRegion : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new TagInfoItem();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -9614,6 +9627,62 @@ class DescribeDBInstanceConfigRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * Cluster Edition instance node information.
+ * @class
+ */
+class ClusterNodeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * node id.
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Node role.
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * Node AZ.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Weight of the node
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * Node status.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -12529,6 +12598,35 @@ class ModifyNameOrDescByDpIdResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterInfo request structure.
+ * @class
+ */
+class DescribeClusterInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+Description: Only able to input the instance ID of instances with cloud disk architecture, corresponding to console instance configurations displayed as "Cloud Disk Edition (Cloud Disk)".
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -21612,6 +21710,97 @@ class Outbound extends  AbstractModel {
 }
 
 /**
+ * DescribeClusterInfo response structure.
+ * @class
+ */
+class DescribeClusterInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance name.
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Address information for reading and writing of the cloud disk edition instance.
+         * @type {AddressInfo || null}
+         */
+        this.ReadWriteAddress = null;
+
+        /**
+         * Read-only address information of the cloud disk edition instance.
+         * @type {Array.<AddressInfo> || null}
+         */
+        this.ReadOnlyAddress = null;
+
+        /**
+         * Node list information of the Cloud Disk Edition instance.
+         * @type {Array.<ClusterNodeInfo> || null}
+         */
+        this.NodeList = null;
+
+        /**
+         * Read-only space protection threshold, GB
+         * @type {number || null}
+         */
+        this.ReadonlyLimit = null;
+
+        /**
+         * Number of instance nodes.
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+
+        if (params.ReadWriteAddress) {
+            let obj = new AddressInfo();
+            obj.deserialize(params.ReadWriteAddress)
+            this.ReadWriteAddress = obj;
+        }
+
+        if (params.ReadOnlyAddress) {
+            this.ReadOnlyAddress = new Array();
+            for (let z in params.ReadOnlyAddress) {
+                let obj = new AddressInfo();
+                obj.deserialize(params.ReadOnlyAddress[z]);
+                this.ReadOnlyAddress.push(obj);
+            }
+        }
+
+        if (params.NodeList) {
+            this.NodeList = new Array();
+            for (let z in params.NodeList) {
+                let obj = new ClusterNodeInfo();
+                obj.deserialize(params.NodeList[z]);
+                this.NodeList.push(obj);
+            }
+        }
+        this.ReadonlyLimit = 'ReadonlyLimit' in params ? params.ReadonlyLimit : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Filter conditions for querying audit instances.
  * @class
  */
@@ -23937,6 +24126,76 @@ class DeleteAuditRuleTemplatesResponse extends  AbstractModel {
 }
 
 /**
+ * Instance address information.
+ * @class
+ */
+class AddressInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource ID identifier of the address.
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * The vpc where the address resides.
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * The subnet where the address resides.
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * vip address.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * The port of the address.
+         * @type {number || null}
+         */
+        this.VPort = null;
+
+        /**
+         * Public network address domain name.
+         * @type {string || null}
+         */
+        this.WanDomain = null;
+
+        /**
+         * Public network address port.
+         * @type {number || null}
+         */
+        this.WanPort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.VPort = 'VPort' in params ? params.VPort : null;
+        this.WanDomain = 'WanDomain' in params ? params.WanDomain : null;
+        this.WanPort = 'WanPort' in params ? params.WanPort : null;
+
+    }
+}
+
+/**
  * ModifyAuditRuleTemplates response structure.
  * @class
  */
@@ -24146,6 +24405,7 @@ module.exports = {
     LogToCLSConfig: LogToCLSConfig,
     ResetRootAccountRequest: ResetRootAccountRequest,
     DescribeDBInstanceConfigRequest: DescribeDBInstanceConfigRequest,
+    ClusterNodeInfo: ClusterNodeInfo,
     DescribeTableColumnsRequest: DescribeTableColumnsRequest,
     DescribeProxyCustomConfResponse: DescribeProxyCustomConfResponse,
     ModifyAuditConfigResponse: ModifyAuditConfigResponse,
@@ -24199,6 +24459,7 @@ module.exports = {
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     Account: Account,
     ModifyNameOrDescByDpIdResponse: ModifyNameOrDescByDpIdResponse,
+    DescribeClusterInfoRequest: DescribeClusterInfoRequest,
     DescribeDBPriceResponse: DescribeDBPriceResponse,
     AuditLogFilter: AuditLogFilter,
     OpenDBInstanceGTIDResponse: OpenDBInstanceGTIDResponse,
@@ -24356,6 +24617,7 @@ module.exports = {
     AutoStrategy: AutoStrategy,
     ModifyAccountMaxUserConnectionsResponse: ModifyAccountMaxUserConnectionsResponse,
     Outbound: Outbound,
+    DescribeClusterInfoResponse: DescribeClusterInfoResponse,
     AuditInstanceFilters: AuditInstanceFilters,
     ParamInfo: ParamInfo,
     DescribeBackupDecryptionKeyResponse: DescribeBackupDecryptionKeyResponse,
@@ -24403,6 +24665,7 @@ module.exports = {
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     UpgradeCDBProxyVersionRequest: UpgradeCDBProxyVersionRequest,
     DeleteAuditRuleTemplatesResponse: DeleteAuditRuleTemplatesResponse,
+    AddressInfo: AddressInfo,
     ModifyAuditRuleTemplatesResponse: ModifyAuditRuleTemplatesResponse,
 
 }

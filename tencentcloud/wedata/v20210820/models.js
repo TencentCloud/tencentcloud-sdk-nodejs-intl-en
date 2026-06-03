@@ -8440,7 +8440,7 @@ class AddProjectUserRoleRequest extends  AbstractModel {
         this.UserIds = null;
 
         /**
-         * Role id
+         * Role ID
          * @type {Array.<string> || null}
          */
         this.RoleIds = null;

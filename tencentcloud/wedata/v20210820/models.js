@@ -7513,7 +7513,7 @@ class SearchConditionInstanceNew extends  AbstractModel {
         this.ExecutionSpace = null;
 
         /**
-         * Business Products, options: <DATA_DEV / DATA_QUALITY / DATA_INTEGRATION, default DATA_DEV. Non-empty. Default own project
+         * Business Products, options: DATA_DEV, DATA_QUALITY, DATA_INTEGRATION, default DATA_DEV. Non-empty. Default own project
          * @type {string || null}
          */
         this.ProductName = null;

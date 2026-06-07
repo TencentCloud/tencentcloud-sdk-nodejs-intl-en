@@ -351,8 +351,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.BestFrameBase64 = null;
 
         /**
-         * Card recognize result.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Card recognize result
          * @type {Array.<OCRResult> || null}
          */
         this.OCRResult = null;
@@ -448,7 +447,7 @@ class MobileStatusRequest extends  AbstractModel {
 }
 
 /**
- * The content of a single license in the license information.
+ * The content of a single license in the license information
  * @class
  */
 class OCRResult extends  AbstractModel {

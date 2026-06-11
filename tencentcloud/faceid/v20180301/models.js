@@ -112,7 +112,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Additional details
  * @class
  */
 class ExtraInfo extends  AbstractModel {
@@ -120,7 +120,7 @@ class ExtraInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Full details of the hit template; return solely the template with the maximum similarity.
          * @type {Array.<RetrievalLivenessExtraInfo> || null}
          */
         this.RetrievalLivenessExtraInfo = null;
@@ -504,7 +504,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CardBackCutImageBase64 = null;
 
         /**
-         * <p>Alarm code</p><p>Enumeration value:</p><ul><li>-9101: Alarm for incomplete document border</li><li>-9102: Alarm for document photocopy</li><li>-9103: Alarm for rephotographing</li><li>-9104: PS alarm</li><li>-9107: Reflective alarm</li><li>-9108: Blurry alarm</li><li>-9109: Alarm capability not enabled</li></ul>
+         * <p>Alarm code</p><p>Enumeration value:</p><ul><li>9101: Alarm for incomplete document border</li><li>9102: Alarm for document photocopy</li><li>9103: Alarm for rephotographing</li><li>9104: PS alarm</li><li>9107: Reflective alarm</li><li>9108: Blurry alarm</li><li>9109: Alarm capability not enabled</li></ul>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<number> || null}
          */
@@ -651,7 +651,8 @@ class LivenessCompareResponse extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 
+         * Best screenshot list.
+Returned only when multiple best screenshots are configured to be returned.
          * @type {Array.<string> || null}
          */
         this.BestFrameList = null;
@@ -1866,7 +1867,7 @@ class ApplyWebVerificationBizTokenIntlResponse extends  AbstractModel {
 
         /**
          * The token identifying this web-based verification process, valid for 7,200s after issuance. It is required for getting the result after the verification process is completed.
-Example: https://intl.faceid.qq.com/reflect/?token=81EEF678-28EE-4759-A82E-6CBBBE6BC442
+Example: `https://intl.faceid.qq.com/reflect/?token=81EEF678-28EE-4759-A82E-6CBBBE6BC442`
          * @type {string || null}
          */
         this.VerificationUrl = null;
@@ -2502,16 +2503,29 @@ false : Expired HKID is rejected and cannot enter the liveness process.
         this.AllowExpiredDocument = null;
 
         /**
-         * 
+         * <p>Whether to display the final result page</p><p>Enumeration values:</p><ul><li>true: Do not display the result page</li><li>false: Display the result page</li></ul><p>Default value: false</p>
          * @type {boolean || null}
          */
         this.SkipResultPage = null;
 
         /**
-         * 
+         * <p>Identified fields displayed during document OCR</p><p>Parameter format: ["ChineseName","FullName"]</p><p>Input constraints: <strong>Supported field names by document type:</strong><br><strong>HK (Hong Kong Identity Card):</strong> "ChineseName","FullName","LicenseNumber","Birthday","Sex", "IssuedDate", "Permanent", "Symbol", "CurrentIssueDate"<br><strong>ML (Malaysia Identity Card):</strong> "FullName","LicenseNumber","Sex", "Birthday", "Type", "FormattedAddress"<br><strong>IndonesiaIDCard (Indonesia Identity Card):</strong> "LicenseNumber","FullName","Sex", "Birthday", "FormattedAddress", "Nationality", "DueDate", "IssuedDate", "Street", "Village","Area","Province","City","MaritalStatus", "BloodType", "Religion", "Occupation"<br><strong>PhilippinesVoteID (Philippines Voter's ID):</strong> "FirstName","LastName","Birthday"<br><strong>PhilippinesDrivingLicense (Philippines Driving License):</strong> "LastName","FirstName","MiddleName","Sex","Birthday"<br><strong>PhilippinesTinID (Philippines TIN ID):</strong> "LicenseNumber", "FullName", "Birthday"<br><strong>PhilippinesSSSID (Philippines SSS ID):</strong> "LicenseNumber", "FullName", "Birthday"<br><strong>PhilippinesUMID (Philippines UMID):</strong> "Surname", "MiddleName", "GivenName", "Sex", "Birthday"<br><strong>MLIDPassport (Passports of Hong Kong, Macao, Taiwan and overseas regions):</strong> "LicenseNumber","FullName", "Surname", "GivenName", "Birthday", "Sex","DateOfExpiration","IssuingCountry"<br><strong>ThailandIDCard (Thailand Identity Card):</strong> "FullName", "LastName", "FirstName", "FormattedAddress", "LicenseNumber", "Birthday", "ExpirationDate", "IssuedDate", "RegistrationNumber", "Religion", "ThaiBirthday", "ThaiExpirationDate", "ThaiIssueDate"<br><strong>MainlandIDCard (Chinese Mainland Identity Card):</strong> "LicenseNumber", "FullName", "Sex", "Nation", "Birthday", "FormattedAddress"<br><strong>SingaporeIDCard (Singapore Identity Card):</strong> "ChineseName","Sex","Birthday","LicenseNumber","Nationality","FullName","Address"<br><strong>HMTPermit (Mainland Travel Permit for Hong Kong and Macao Residents / Mainland Travel Permit for Taiwan Residents):</strong> "Name", "EnglishName", "Sex", "Number", "ValidDate", "Birthday"</p><p>If no fields are specified, all identified fields will be displayed by default.</p>
+
          * @type {Array.<string> || null}
          */
         this.CardOcrDisplayFields = null;
+
+        /**
+         * <p>Liveness retry attempts</p><p>Value range: [1, 5]</p><p>Default value: 5</p>
+         * @type {number || null}
+         */
+        this.RetryLimit = null;
+
+        /**
+         * <p>Enable multi-image anti-spoofing for single-angle Identity Document Recognition</p><p>Default value: false</p><p>true - Enabled; false - Disabled</p>
+         * @type {boolean || null}
+         */
+        this.EnableForgeryDetectionImages = null;
 
     }
 
@@ -2536,6 +2550,8 @@ false : Expired HKID is rejected and cannot enter the liveness process.
         this.AllowExpiredDocument = 'AllowExpiredDocument' in params ? params.AllowExpiredDocument : null;
         this.SkipResultPage = 'SkipResultPage' in params ? params.SkipResultPage : null;
         this.CardOcrDisplayFields = 'CardOcrDisplayFields' in params ? params.CardOcrDisplayFields : null;
+        this.RetryLimit = 'RetryLimit' in params ? params.RetryLimit : null;
+        this.EnableForgeryDetectionImages = 'EnableForgeryDetectionImages' in params ? params.EnableForgeryDetectionImages : null;
 
     }
 }
@@ -4900,7 +4916,7 @@ class GenerateReflectSequenceRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * EKYC Document OCR Result Modification Details
  * @class
  */
 class EditDetail extends  AbstractModel {
@@ -5011,7 +5027,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Sensitive Data Encryption
  * @class
  */
 class Encryption extends  AbstractModel {
@@ -5523,8 +5539,8 @@ class ApplyWebVerificationBizTokenIntlRequest extends  AbstractModel {
 
         /**
          * Web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. 
-After the verification process is completed, the BizToken of this process will be spliced to the callback URL in the format of https://www.tencentcloud.com/products/faceid?token={BizToken} before redirect.
-Example: https://www.tencentcloud.com/products/faceid.
+After the verification process is completed, the BizToken of this process will be spliced to the callback URL in the format of `https://www.tencentcloud.com/products/faceid?token={BizToken}` before redirect.
+Example: `https://www.tencentcloud.com/products/faceid.`
          * @type {string || null}
          */
         this.RedirectURL = null;
@@ -6797,6 +6813,7 @@ class PhoneVerificationRequest extends  AbstractModel {
 
         /**
          * Users with encryption requirements can import the CiphertextBlob of kms. Read the <a href="https://www.tencentcloud.com/document/product/1007/47180?from_cn_redirect=1">data encryption</a> document about encrypting data.
+
          * @type {string || null}
          */
         this.CiphertextBlob = null;
@@ -7210,7 +7227,7 @@ class BankCard2EVerificationRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Overseas Document Address
  * @class
  */
 class Address extends  AbstractModel {

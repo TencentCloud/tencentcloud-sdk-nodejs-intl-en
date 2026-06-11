@@ -181,8 +181,7 @@ class DescribeBaselineTopResponse extends  AbstractModel {
         super();
 
         /**
-         * List of top check items
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of Top check items
          * @type {Array.<BaselineRuleTopInfo> || null}
          */
         this.RuleTopList = null;
@@ -338,7 +337,6 @@ class DescribeAssetWebServiceInfoListResponse extends  AbstractModel {
 
         /**
          * List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetWebServiceBaseInfo> || null}
          */
         this.WebServices = null;
@@ -424,7 +422,6 @@ class DescribeAssetAppProcessListResponse extends  AbstractModel {
 
         /**
          * Process list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetAppProcessInfo> || null}
          */
         this.Process = null;
@@ -528,10 +525,16 @@ class ModifyWebHookPolicyRequest extends  AbstractModel {
         this.Quuids = null;
 
         /**
-         * Machines to be excluded
+         * List of machines to be excluded.	
          * @type {Array.<string> || null}
          */
         this.ExcludedQuuids = null;
+
+        /**
+         * Push language type, Chinese zh, English en
+         * @type {string || null}
+         */
+        this.MsgLanguage = null;
 
     }
 
@@ -584,6 +587,7 @@ class ModifyWebHookPolicyRequest extends  AbstractModel {
         this.IsDisabled = 'IsDisabled' in params ? params.IsDisabled : null;
         this.Quuids = 'Quuids' in params ? params.Quuids : null;
         this.ExcludedQuuids = 'ExcludedQuuids' in params ? params.ExcludedQuuids : null;
+        this.MsgLanguage = 'MsgLanguage' in params ? params.MsgLanguage : null;
 
     }
 }
@@ -715,7 +719,6 @@ class ExportRansomDefenseBackupListResponse extends  AbstractModel {
 
         /**
          * Task ID, required for obtaining the DownloadURL at API Asynchronous Export Task ExportTasks
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -813,8 +816,7 @@ class DescribeAssetAppCountResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of software applications
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of all software applications.
          * @type {Array.<AssetKeyVal> || null}
          */
         this.Apps = null;
@@ -858,7 +860,6 @@ class DescribeAttackTopResponse extends  AbstractModel {
 
         /**
          * Top Statistics
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {NetAttackTopInfo || null}
          */
         this.NetAttackTopInfo = null;
@@ -1071,28 +1072,58 @@ class MachineLicenseDetail extends  AbstractModel {
         this.Quuid = null;
 
         /**
-         * xx
+         * Billing mode. 0: pay-as-you-go; 1: prepaid.
          * @type {number || null}
          */
         this.PayMode = null;
 
         /**
-         * xxx
+         * Resource ID
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * xxx
+         * Authorization type
+         * @type {number || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * Order type. 0: default billing order; 1: trial order; 2: gift; 3: experience.
+         * @type {number || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * This field has been deprecated.
          * @type {string || null}
          */
         this.InquireKey = null;
 
         /**
-         * xxx
+         * Auto-renewal flag. 0: default (no automatic payment); 1: automatic payment; 2: set manually (non-renewal).
          * @type {number || null}
          */
-        this.SourceType = null;
+        this.AutoRenewFlag = null;
+
+        /**
+         * Expiry time. This value is empty for pay-as-you-go.
+         * @type {string || null}
+         */
+        this.Deadline = null;
+
+        /**
+         * Time of purchase
+         * @type {string || null}
+         */
+        this.BuyTime = null;
+
+        /**
+         * Number of authorizations
+         * @type {number || null}
+         */
+        this.LicenseCnt = null;
 
     }
 
@@ -1106,8 +1137,13 @@ class MachineLicenseDetail extends  AbstractModel {
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
-        this.InquireKey = 'InquireKey' in params ? params.InquireKey : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.InquireKey = 'InquireKey' in params ? params.InquireKey : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.Deadline = 'Deadline' in params ? params.Deadline : null;
+        this.BuyTime = 'BuyTime' in params ? params.BuyTime : null;
+        this.LicenseCnt = 'LicenseCnt' in params ? params.LicenseCnt : null;
 
     }
 }
@@ -1336,69 +1372,6 @@ class ClearLocalStorageResponse extends  AbstractModel {
 }
 
 /**
- * CreateNetAttackWhiteList request structure.
- * @class
- */
-class CreateNetAttackWhiteListRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether the allowlist applies to all hosts. 0: no; 1: yes.
-         * @type {number || null}
-         */
-        this.Scope = null;
-
-        /**
-         * Source IP. Single IP: 1.1.1.1, IP Range: 1.1.1.1-1.1.2.1, IP Range: 1.1.1.0/24 
-         * @type {Array.<string> || null}
-         */
-        this.SrcIp = null;
-
-        /**
-         * QUUID list
-         * @type {Array.<string> || null}
-         */
-        this.QuuidList = null;
-
-        /**
-         * Event ID
-         * @type {number || null}
-         */
-        this.EventId = null;
-
-        /**
-         * Whether to allowlist all alarms that match this rule: 1: Yes, 0: No.
-         * @type {number || null}
-         */
-        this.DealOldEvents = null;
-
-        /**
-         * Description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Scope = 'Scope' in params ? params.Scope : null;
-        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
-        this.QuuidList = 'QuuidList' in params ? params.QuuidList : null;
-        this.EventId = 'EventId' in params ? params.EventId : null;
-        this.DealOldEvents = 'DealOldEvents' in params ? params.DealOldEvents : null;
-        this.Description = 'Description' in params ? params.Description : null;
-
-    }
-}
-
-/**
  * DescribeUndoVulCounts response structure.
  * @class
  */
@@ -1408,21 +1381,18 @@ class DescribeUndoVulCountsResponse extends  AbstractModel {
 
         /**
          * Number of unfixed vulnerabilities
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.UndoVulCount = null;
 
         /**
-         * Number of unfixed hosts
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of Unprocessed Hosts
          * @type {number || null}
          */
         this.UndoHostCount = null;
 
         /**
          * Number of Standard Edition hosts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.NotProfessionCount = null;
@@ -1459,8 +1429,7 @@ class DescribeBaselineScanScheduleResponse extends  AbstractModel {
         super();
 
         /**
-         * Check progress (percentage)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Detection progress (percentage)
          * @type {number || null}
          */
         this.Schedule = null;
@@ -1571,6 +1540,69 @@ class DeleteBashEventsResponse extends  AbstractModel {
 }
 
 /**
+ * Patch information details
+ * @class
+ */
+class PatchInfoDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * KB No.
+         * @type {string || null}
+         */
+        this.KBNo = null;
+
+        /**
+         * KB name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 2025-05
+         * @type {string || null}
+         */
+        this.PublishTime = null;
+
+        /**
+         * Vulnerability impacted by KB
+         * @type {Array.<string> || null}
+         */
+        this.RelatedCveId = null;
+
+        /**
+         * KB documentation
+         * @type {string || null}
+         */
+        this.KbDocUrl = null;
+
+        /**
+         * KB id No.
+         * @type {number || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KBNo = 'KBNo' in params ? params.KBNo : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
+        this.RelatedCveId = 'RelatedCveId' in params ? params.RelatedCveId : null;
+        this.KbDocUrl = 'KbDocUrl' in params ? params.KbDocUrl : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * DescribeAssetProcessInfoList request structure.
  * @class
  */
@@ -1676,7 +1708,7 @@ class VulEmergentMsgInfo extends  AbstractModel {
         this.VulId = null;
 
         /**
-         * Vulnerability publish time
+         * Vulnerability disclosure time
          * @type {string || null}
          */
         this.PublishTime = null;
@@ -1686,6 +1718,36 @@ class VulEmergentMsgInfo extends  AbstractModel {
          * @type {string || null}
          */
         this.Name = null;
+
+        /**
+         * Vulnerability name, English description
+         * @type {string || null}
+         */
+        this.NameEn = null;
+
+        /**
+         * Is auto-repair supported 0: not supported >0: supported
+         * @type {number || null}
+         */
+        this.SupportFix = null;
+
+        /**
+         * Whether automatic defense is supported 0: no support 1: support
+         * @type {number || null}
+         */
+        this.SupportDefense = null;
+
+        /**
+         * KB ID
+         * @type {number || null}
+         */
+        this.KbId = null;
+
+        /**
+         * KB number
+         * @type {string || null}
+         */
+        this.KbNumber = null;
 
     }
 
@@ -1699,6 +1761,11 @@ class VulEmergentMsgInfo extends  AbstractModel {
         this.VulId = 'VulId' in params ? params.VulId : null;
         this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
         this.Name = 'Name' in params ? params.Name : null;
+        this.NameEn = 'NameEn' in params ? params.NameEn : null;
+        this.SupportFix = 'SupportFix' in params ? params.SupportFix : null;
+        this.SupportDefense = 'SupportDefense' in params ? params.SupportDefense : null;
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.KbNumber = 'KbNumber' in params ? params.KbNumber : null;
 
     }
 }
@@ -1929,24 +1996,30 @@ class DescribeAssetWebFrameListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeMonthInspectionReport response structure.
+ * ScanVul response structure.
  * @class
  */
-class DescribeMonthInspectionReportResponse extends  AbstractModel {
+class ScanVulResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number
+         * Task ID
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.TaskId = null;
 
         /**
-         * Inspection report list
-         * @type {Array.<MonthInspectionReport> || null}
+         * Selected host includes basic version count
+         * @type {number || null}
          */
-        this.List = null;
+        this.BasicVersionCount = null;
+
+        /**
+         * Number of machines for scan task creation
+         * @type {number || null}
+         */
+        this.SuccessCount = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1963,17 +2036,73 @@ class DescribeMonthInspectionReportResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new MonthInspectionReport();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
-        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.BasicVersionCount = 'BasicVersionCount' in params ? params.BasicVersionCount : null;
+        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Important Period Guarantee Protection License Plugin Details
+ * @class
+ */
+class RaspLicensePlugin extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * java Process pid
+         * @type {number || null}
+         */
+        this.PID = null;
+
+        /**
+         * Java Main Class
+         * @type {string || null}
+         */
+        this.MainClass = null;
+
+        /**
+         * 0: Injecting, 1: Injection successful, 2: Plugin timed out, 3: Plug-in exit, 4: Injection failure
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error details
+         * @type {string || null}
+         */
+        this.ErrorLog = null;
+
+        /**
+         * Failure reason of injection
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * Injection duration
+         * @type {string || null}
+         */
+        this.InjectTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PID = 'PID' in params ? params.PID : null;
+        this.MainClass = 'MainClass' in params ? params.MainClass : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorLog = 'ErrorLog' in params ? params.ErrorLog : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.InjectTime = 'InjectTime' in params ? params.InjectTime : null;
 
     }
 }
@@ -1988,7 +2117,6 @@ class DescribeBaselineHostTopResponse extends  AbstractModel {
 
         /**
          * Top host baseline policy events
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BaselineHostTopList> || null}
          */
         this.BaselineHostTopList = null;
@@ -2031,13 +2159,13 @@ class HostDesc extends  AbstractModel {
         super();
 
         /**
-         * Yunjing client ID
+         * Machine UUID
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
-         * Host ID
+         * Host Security UUID
          * @type {string || null}
          */
         this.Uuid = null;
@@ -2235,8 +2363,7 @@ class ExportVulListResponse extends  AbstractModel {
         super();
 
         /**
-         * Download URL of the exported file (deprecated)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Download url of the exported file (deprecated).
          * @type {string || null}
          */
         this.DownloadUrl = null;
@@ -2265,6 +2392,71 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMemShellRules request structure.
+ * @class
+ */
+class DescribeMemShellRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of entries to be returned. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter criteria
+<li>Keywords - String - required: no - keyword (process name)</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Sort field, which currently supports CreateTime and ModifyTime. The default value is ModifyTime.
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * Sorting method: DESC, ASC.
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -2368,15 +2560,13 @@ class AssetMachineBaseInfo extends  AbstractModel {
         this.CpuLoad = null;
 
         /**
-         * Tag
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Tag.
          * @type {Array.<MachineTag> || null}
          */
         this.Tag = null;
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -2395,14 +2585,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
 
         /**
-         * CPU load readings (only valid for Linux systems)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * CPU load readings (only valid for Linux systems).
          * @type {string || null}
          */
         this.CpuLoadNum = null;
@@ -2455,36 +2643,30 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ExportRansomDefenseMachineList request structure.
+ * DescribeReverseShellSystemPolicyConfig response structure.
  * @class
  */
-class ExportRansomDefenseMachineListRequest extends  AbstractModel {
+class DescribeReverseShellSystemPolicyConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filtering criteria
-<li>Ips - String - required: no - IP address for querying</li>
-<li>MachineNames - String - required: no - instance name for querying</li>
-<li>Names - String - required: no - instance name for querying</li>
-<li>Status - String - required: no - policy status: 0: backup in progress; 1: backup succeeded; 2: backup failed</li>
-<li>LastBackupTimeBegin - String - required: no - start of the last backup time</li>
-<li>LastBackupTimeEnd - String - required: no - end of the last backup time</li>
-         * @type {Array.<Filters> || null}
+         * Private Network Alarm Display
+         * @type {boolean || null}
          */
-        this.Filters = null;
+        this.InnerNetAlarmShow = null;
 
         /**
-         * Sorting method: ASC / DESC
-         * @type {string || null}
+         * Private IP Display
+         * @type {boolean || null}
          */
-        this.Order = null;
+        this.InnerIPShow = null;
 
         /**
-         * Sorting fields, supporting CreateTime and MachineCount
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.By = null;
+        this.RequestId = null;
 
     }
 
@@ -2495,17 +2677,9 @@ class ExportRansomDefenseMachineListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filters();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Order = 'Order' in params ? params.Order : null;
-        this.By = 'By' in params ? params.By : null;
+        this.InnerNetAlarmShow = 'InnerNetAlarmShow' in params ? params.InnerNetAlarmShow : null;
+        this.InnerIPShow = 'InnerIPShow' in params ? params.InnerIPShow : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2596,71 +2770,61 @@ class BaselineEffectHost extends  AbstractModel {
         super();
 
         /**
-         * Passed item
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Passed items
          * @type {number || null}
          */
         this.PassCount = null;
 
         /**
          * Risky item
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.FailCount = null;
 
         /**
-         * First check time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * First detection event
          * @type {string || null}
          */
         this.FirstScanTime = null;
 
         /**
-         * Last check time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Last detection time
          * @type {string || null}
          */
         this.LastScanTime = null;
 
         /**
          * Risky item processing status. 0: failed; 1: passed.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
          * Host QUUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
          * Host IP address
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostIp = null;
 
         /**
          * Host alias
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AliasName = null;
 
         /**
          * Host UUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
-         * Check status
-Note: This field may return null, indicating that no valid values can be obtained.
+         * detecting state
          * @type {number || null}
          */
         this.MaxStatus = null;
@@ -2862,122 +3026,111 @@ class DescribeVulInfoCvssResponse extends  AbstractModel {
 
         /**
          * Vulnerability ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.VulId = null;
 
         /**
          * Vulnerability name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VulName = null;
 
         /**
          * Hazard level: 1-Low-risk; 2-Medium-risk; 3-High-risk; 4-Critical
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.VulLevel = null;
 
         /**
          * Vulnerability Classification: 1: Web-CMS Vulnerability 2: Application Vulnerabilities 4: Linux Software Vulnerabilities 5: Windows System Vulnerabilities
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.VulType = null;
 
         /**
          * Vulnerability Description Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Description = null;
 
         /**
          * Fixing solution
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RepairPlan = null;
 
         /**
-         * Vulnerability CVE ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Vulnerability CVEID
          * @type {string || null}
          */
         this.CveId = null;
 
         /**
          * Reference link
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Reference = null;
 
         /**
          * CVSS Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CVSS = null;
 
         /**
-         * Release date
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Release time
          * @type {string || null}
          */
         this.PublicDate = null;
 
         /**
          * CVSS Score
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CvssScore = null;
 
         /**
          * CVSS Details
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CveInfo = null;
 
         /**
          * CVSS score, floating point type
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CvssScoreFloat = null;
 
         /**
          * Vulnerability Tags, Separated by Multiple Commas
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Labels = null;
 
         /**
          * Number of Attacks Defended
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DefenseAttackCount = null;
 
         /**
          * Total Number of Successful Network Repairs. Returns 0 by default for unsupported auto-repair vulnerabilities.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SuccessFixCount = null;
 
         /**
          * Repair support: 0 - Neither Windows nor Linux supports for repair; 1 - Both Windows and Linux support for repair; 2 - Only Linux supports for repair; 3 - Only Windows supports for repair.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.FixSwitch = null;
+
+        /**
+         * Support defense: 0-no support 1-support
+         * @type {number || null}
+         */
+        this.SupportDefence = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3011,6 +3164,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DefenseAttackCount = 'DefenseAttackCount' in params ? params.DefenseAttackCount : null;
         this.SuccessFixCount = 'SuccessFixCount' in params ? params.SuccessFixCount : null;
         this.FixSwitch = 'FixSwitch' in params ? params.FixSwitch : null;
+        this.SupportDefence = 'SupportDefence' in params ? params.SupportDefence : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3045,36 +3199,12 @@ class DescribeBaselineStrategyDetailRequest extends  AbstractModel {
 }
 
 /**
- * ModifyLicenseBinds request structure.
+ * DescribeRaspMaxCpu request structure.
  * @class
  */
-class ModifyLicenseBindsRequest extends  AbstractModel {
+class DescribeRaspMaxCpuRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Resource ID
-         * @type {string || null}
-         */
-        this.ResourceId = null;
-
-        /**
-         * Authorization type
-         * @type {number || null}
-         */
-        this.LicenseType = null;
-
-        /**
-         * Whether all machines are involved. (If the total number of machines exceeds the available authorizations in the current order, some machines will be skipped.)
-         * @type {boolean || null}
-         */
-        this.IsAll = null;
-
-        /**
-         * List of QUUIDs of machines to be bound. This parameter is required when IsAll is set to false. Otherwise, it is ignored. Maximum number: 2,000.
-         * @type {Array.<string> || null}
-         */
-        this.QuuidList = null;
 
     }
 
@@ -3085,10 +3215,6 @@ class ModifyLicenseBindsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
-        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
-        this.IsAll = 'IsAll' in params ? params.IsAll : null;
-        this.QuuidList = 'QuuidList' in params ? params.QuuidList : null;
 
     }
 }
@@ -3120,20 +3246,19 @@ class MalWareList extends  AbstractModel {
         this.FilePath = null;
 
         /**
-         * Description
+         * Virus name
          * @type {string || null}
          */
         this.VirusName = null;
 
         /**
-         * Status: 4-Pending, 5-Trusted, 6-Isolated, 8-Files Deleted, 14-Processed.
+         * Status. 4 - pending processing; 5 - trusted; 6 - isolated; 8 - files deleted; 14 - processed; 13 - allowlisted.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
          * Unique ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Id = null;
@@ -3146,21 +3271,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Feature tag. This field has been deprecated, and no tag will be returned. Tags are returned in the details.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Tags = null;
 
         /**
          * First running time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FileCreateTime = null;
 
         /**
          * Last running time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FileModifierTime = null;
@@ -3215,10 +3337,21 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
+
+        /**
+         * Is it possible to clean up
+         * @type {boolean || null}
+         */
+        this.DoClean = null;
+
+        /**
+         * Detection method 0 Scan; 1 Monitor in real time.
+         * @type {number || null}
+         */
+        this.FirstDetectionMethod = null;
 
     }
 
@@ -3253,6 +3386,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.MachineExtraInfo)
             this.MachineExtraInfo = obj;
         }
+        this.DoClean = 'DoClean' in params ? params.DoClean : null;
+        this.FirstDetectionMethod = 'FirstDetectionMethod' in params ? params.FirstDetectionMethod : null;
 
     }
 }
@@ -3267,73 +3402,75 @@ class WebHookPolicy extends  AbstractModel {
 
         /**
          * id
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Id = null;
 
         /**
          * Policy name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
          * Event type
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<WebHookEventKv> || null}
          */
         this.Events = null;
 
         /**
-         * Host range
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host scope
          * @type {Array.<WebHookHostLabel> || null}
          */
         this.HostLabels = null;
 
         /**
          * Recipient
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<WebHookReceiver> || null}
          */
         this.Receivers = null;
 
         /**
          * Format. 0: text; 1: JSON.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Format = null;
 
         /**
          * Custom passthrough field
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<WebHookCustomField> || null}
          */
         this.CustomFields = null;
 
         /**
-         * Enable/Disable [1-Disable, 0-Enable]
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether it is disabled [1: disabled|0: enabled]
          * @type {number || null}
          */
         this.IsDisabled = null;
 
         /**
-         * Host list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of hosts
          * @type {Array.<string> || null}
          */
         this.Quuids = null;
 
         /**
          * Number of hosts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.HostCount = null;
+
+        /**
+         * List of machines to be excluded.
+         * @type {Array.<string> || null}
+         */
+        this.ExcludedQuuids = null;
+
+        /**
+         * Push language type, Chinese zh, English en	
+         * @type {string || null}
+         */
+        this.MsgLanguage = null;
 
     }
 
@@ -3386,6 +3523,51 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsDisabled = 'IsDisabled' in params ? params.IsDisabled : null;
         this.Quuids = 'Quuids' in params ? params.Quuids : null;
         this.HostCount = 'HostCount' in params ? params.HostCount : null;
+        this.ExcludedQuuids = 'ExcludedQuuids' in params ? params.ExcludedQuuids : null;
+        this.MsgLanguage = 'MsgLanguage' in params ? params.MsgLanguage : null;
+
+    }
+}
+
+/**
+ * DescribeScreenMachineRegions response structure.
+ * @class
+ */
+class DescribeScreenMachineRegionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List details
+         * @type {Array.<ScreenRegionInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ScreenRegionInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3716,114 +3898,30 @@ class ModifyMalwareWhiteListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSecurityProtectionStat response structure.
+ * DescribeRaspRuleVuls request structure.
  * @class
  */
-class DescribeSecurityProtectionStatResponse extends  AbstractModel {
+class DescribeRaspRuleVulsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 0: asset not paid; 1: agent not installed; 2: Pro or Ultimate Edition for some assets; 3: Pro or Ultimate Edition for all assets.
-         * @type {number || null}
+         * Filter criteria. Name=WhiteType is required. 0: indicates a list of vulnerabilities with custom scope. 1: indicates a list of all request ranges.
+         * @type {Array.<Filter> || null}
          */
-        this.AssetManageStat = null;
+        this.Filters = null;
 
         /**
-         * 0: never scanned or asset not paid; 1: vulnerability risk found; 2: no risk.
+         * Number of entries to be returned. Default value: 10. Maximum value: 1000.
          * @type {number || null}
          */
-        this.VulManageStat = null;
+        this.Limit = null;
 
         /**
-         * 0: never scanned or asset not paid; 1: baseline risk found; 2: no risk.
+         * Offset. Default value: 0.
          * @type {number || null}
          */
-        this.SecureBasicLineStat = null;
-
-        /**
-         * 0: never scanned or asset not paid; 1: scanned and malicious files found; 2: scanned but isolation protection disabled; 3: scanned, protection enabled, and no risk found.
-         * @type {number || null}
-         */
-        this.MalwareScanStat = null;
-
-        /**
-         * Enabling status of password cracking prevention. 0: disabled or asset not paid; 1: enabled; 2: events pending fixing found.
-         * @type {number || null}
-         */
-        this.DefenseBruteAttackStat = null;
-
-        /**
-         * Core file monitoring. 0: disabled (asset not paid); 1: enabled.
-         * @type {number || null}
-         */
-        this.FileTamperStat = null;
-
-        /**
-         * Web page tamper prevention. 0: disabled; 1: enabled.
-         * @type {number || null}
-         */
-        this.WebPageStat = null;
-
-        /**
-         * Abnormal log-in. 0: unfixed risks found; 1: no risk and allowlist not configured; 2: no risk and allowlist configured.
-         * @type {number || null}
-         */
-        this.LoginLogStat = null;
-
-        /**
-         * Password cracking risk detection. 0: unfixed risks found; 1: no risk with detection in progress.
-         * @type {number || null}
-         */
-        this.DiscoverBruteAttackStat = null;
-
-        /**
-         * Malicious request. 0: no asset in Pro or Ultimate Edition; 1: unfixed malicious request risks found; 2: paid assets found with no risk.
-         * @type {number || null}
-         */
-        this.MaliciousRequestStat = null;
-
-        /**
-         * Local privilege escalation. 0: no asset in Pro or Ultimate Edition; 1: unfixed risks found; 2: paid assets found with no risk.
-         * @type {number || null}
-         */
-        this.PrivilegeStat = null;
-
-        /**
-         * Reverse shell. 0: no asset in Pro or Ultimate Edition; 1: unfixed risks found; 2: paid assets found with no risk.
-         * @type {number || null}
-         */
-        this.ReverseShellStat = null;
-
-        /**
-         * Expert service. 0: disabled; 1: enabled.
-         * @type {number || null}
-         */
-        this.ExpertServiceStat = null;
-
-        /**
-         * Log analysis. 0: disabled; 1: enabled.
-         * @type {number || null}
-         */
-        this.LogAnalysisStat = null;
-
-        /**
-         * Security alarm. 0: disabled (for all assets); 1: enabled (for at least one asset).
-         * @type {number || null}
-         */
-        this.WarningSetStat = null;
-
-        /**
-         * High-risk command. 0: no asset in Pro or Ultimate Edition; 1: unfixed risks found; 2: paid assets found with no risk.
-         * @type {number || null}
-         */
-        this.EventBashStat = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Offset = null;
 
     }
 
@@ -3834,23 +3932,17 @@ class DescribeSecurityProtectionStatResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AssetManageStat = 'AssetManageStat' in params ? params.AssetManageStat : null;
-        this.VulManageStat = 'VulManageStat' in params ? params.VulManageStat : null;
-        this.SecureBasicLineStat = 'SecureBasicLineStat' in params ? params.SecureBasicLineStat : null;
-        this.MalwareScanStat = 'MalwareScanStat' in params ? params.MalwareScanStat : null;
-        this.DefenseBruteAttackStat = 'DefenseBruteAttackStat' in params ? params.DefenseBruteAttackStat : null;
-        this.FileTamperStat = 'FileTamperStat' in params ? params.FileTamperStat : null;
-        this.WebPageStat = 'WebPageStat' in params ? params.WebPageStat : null;
-        this.LoginLogStat = 'LoginLogStat' in params ? params.LoginLogStat : null;
-        this.DiscoverBruteAttackStat = 'DiscoverBruteAttackStat' in params ? params.DiscoverBruteAttackStat : null;
-        this.MaliciousRequestStat = 'MaliciousRequestStat' in params ? params.MaliciousRequestStat : null;
-        this.PrivilegeStat = 'PrivilegeStat' in params ? params.PrivilegeStat : null;
-        this.ReverseShellStat = 'ReverseShellStat' in params ? params.ReverseShellStat : null;
-        this.ExpertServiceStat = 'ExpertServiceStat' in params ? params.ExpertServiceStat : null;
-        this.LogAnalysisStat = 'LogAnalysisStat' in params ? params.LogAnalysisStat : null;
-        this.WarningSetStat = 'WarningSetStat' in params ? params.WarningSetStat : null;
-        this.EventBashStat = 'EventBashStat' in params ? params.EventBashStat : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -3865,14 +3957,12 @@ class DescribeBaselineEffectHostListResponse extends  AbstractModel {
 
         /**
          * Total number of records
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
          * List of affected servers
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BaselineEffectHost> || null}
          */
         this.EffectHostList = null;
@@ -4092,8 +4182,7 @@ class ExportRansomDefenseMachineListResponse extends  AbstractModel {
         super();
 
         /**
-         * Task ID, which is used to obtain the download URL (DownloadUrl) using the asynchronous task export API ExportTasks.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task ID, required for obtaining the DownloadURL at API Asynchronous Export Task ExportTasks
          * @type {string || null}
          */
         this.TaskId = null;
@@ -4169,6 +4258,12 @@ class VulDefenceRangeDetail extends  AbstractModel {
          */
         this.VulId = null;
 
+        /**
+         * Status. 0: defending; 1: allowlisted. It indicates that the vulnerability is included in an allowlist, which may not be a global allowlist.
+         * @type {number || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -4185,6 +4280,7 @@ class VulDefenceRangeDetail extends  AbstractModel {
         this.CveId = 'CveId' in params ? params.CveId : null;
         this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
         this.VulId = 'VulId' in params ? params.VulId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -4378,7 +4474,7 @@ class DescribeMachineGeneralResponse extends  AbstractModel {
         this.NotProtectMachineCnt = null;
 
         /**
-         * Number of protected Inclusive Edition machines (Lighthouse machines)
+         * Number of protected Lighthouse machines (Lighthouse machines)
          * @type {number || null}
          */
         this.LHGeneralDiscountCnt = null;
@@ -4394,6 +4490,12 @@ class DescribeMachineGeneralResponse extends  AbstractModel {
          * @type {number || null}
          */
         this.MachineDestroyAfterOfflineHours = null;
+
+        /**
+         * Machine type array
+         * @type {Array.<CloudFromCnt> || null}
+         */
+        this.CloudFrom = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4429,6 +4531,15 @@ class DescribeMachineGeneralResponse extends  AbstractModel {
         this.LHGeneralDiscountCnt = 'LHGeneralDiscountCnt' in params ? params.LHGeneralDiscountCnt : null;
         this.CompareYesterdayMachineCnt = 'CompareYesterdayMachineCnt' in params ? params.CompareYesterdayMachineCnt : null;
         this.MachineDestroyAfterOfflineHours = 'MachineDestroyAfterOfflineHours' in params ? params.MachineDestroyAfterOfflineHours : null;
+
+        if (params.CloudFrom) {
+            this.CloudFrom = new Array();
+            for (let z in params.CloudFrom) {
+                let obj = new CloudFromCnt();
+                obj.deserialize(params.CloudFrom[z]);
+                this.CloudFrom.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4689,15 +4800,13 @@ class Broadcasts extends  AbstractModel {
         super();
 
         /**
-         * Article name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * article name
          * @type {string || null}
          */
         this.Title = null;
 
         /**
          * Type: 0: emergency notification; 1: feature update; 2: industry honor; 3: version release
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Type = null;
@@ -4795,24 +4904,18 @@ class CreateLicenseOrderResponse extends  AbstractModel {
 }
 
 /**
- * ModifyBashPolicyStatus request structure.
+ * DescribeRaspMemShellDetailTCSS request structure.
  * @class
  */
-class ModifyBashPolicyStatusRequest extends  AbstractModel {
+class DescribeRaspMemShellDetailTCSSRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Rule ID
+         * Java Webshell event id
          * @type {number || null}
          */
         this.Id = null;
-
-        /**
-         * Whether to disable
-         * @type {number || null}
-         */
-        this.Enable = null;
 
     }
 
@@ -4824,7 +4927,6 @@ class ModifyBashPolicyStatusRequest extends  AbstractModel {
             return;
         }
         this.Id = 'Id' in params ? params.Id : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
 
     }
 }
@@ -4894,15 +4996,13 @@ class BroadcastInfo extends  AbstractModel {
         super();
 
         /**
-         * Article name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * article name
          * @type {string || null}
          */
         this.Title = null;
 
         /**
-         * Redirection location: 0: no redirection; 1: virus scanning; 2: vulnerability scan; 3: security baseline
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Redirection location: 0: no redirection; 1: malicious file scan; 2: vulnerability scanning; 3: security baseline
          * @type {number || null}
          */
         this.GotoType = null;
@@ -4958,103 +5058,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Network attack log
+ * DeleteLoginWhiteList request structure.
  * @class
  */
-class DefendAttackLog extends  AbstractModel {
+class DeleteLoginWhiteListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Log ID
-         * @type {number || null}
+         * Allowlisted IDs (The maximum number is 100.)
+         * @type {Array.<number> || null}
          */
-        this.Id = null;
-
-        /**
-         * Client ID
-         * @type {string || null}
-         */
-        this.Uuid = null;
-
-        /**
-         * Source IP
-         * @type {string || null}
-         */
-        this.SrcIp = null;
-
-        /**
-         * Source port
-         * @type {number || null}
-         */
-        this.SrcPort = null;
-
-        /**
-         * Attack method
-         * @type {string || null}
-         */
-        this.HttpMethod = null;
-
-        /**
-         * Attack description
-         * @type {string || null}
-         */
-        this.HttpCgi = null;
-
-        /**
-         * Attack parameter
-         * @type {string || null}
-         */
-        this.HttpParam = null;
-
-        /**
-         * Threat type
-         * @type {string || null}
-         */
-        this.VulType = null;
-
-        /**
-         * Attack time
-         * @type {string || null}
-         */
-        this.CreatedAt = null;
-
-        /**
-         * Target server IP
-         * @type {string || null}
-         */
-        this.MachineIp = null;
-
-        /**
-         * Target server name
-         * @type {string || null}
-         */
-        this.MachineName = null;
-
-        /**
-         * Target IP
-         * @type {string || null}
-         */
-        this.DstIp = null;
-
-        /**
-         * Target port
-         * @type {number || null}
-         */
-        this.DstPort = null;
-
-        /**
-         * Attack content
-         * @type {string || null}
-         */
-        this.HttpContent = null;
-
-        /**
-         * Host Additional Information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {MachineExtraInfo || null}
-         */
-        this.MachineExtraInfo = null;
+        this.Ids = null;
 
     }
 
@@ -5065,26 +5080,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
-        this.SrcPort = 'SrcPort' in params ? params.SrcPort : null;
-        this.HttpMethod = 'HttpMethod' in params ? params.HttpMethod : null;
-        this.HttpCgi = 'HttpCgi' in params ? params.HttpCgi : null;
-        this.HttpParam = 'HttpParam' in params ? params.HttpParam : null;
-        this.VulType = 'VulType' in params ? params.VulType : null;
-        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
-        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
-        this.MachineName = 'MachineName' in params ? params.MachineName : null;
-        this.DstIp = 'DstIp' in params ? params.DstIp : null;
-        this.DstPort = 'DstPort' in params ? params.DstPort : null;
-        this.HttpContent = 'HttpContent' in params ? params.HttpContent : null;
-
-        if (params.MachineExtraInfo) {
-            let obj = new MachineExtraInfo();
-            obj.deserialize(params.MachineExtraInfo)
-            this.MachineExtraInfo = obj;
-        }
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -5132,13 +5128,13 @@ class PrivilegeEventInfo extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Yunjing ID
+         * Host Security UUID
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
-         * Host ID
+         * Host UUID
          * @type {string || null}
          */
         this.Quuid = null;
@@ -5281,6 +5277,12 @@ class PrivilegeEventInfo extends  AbstractModel {
          */
         this.ModifyTime = null;
 
+        /**
+         * Alarm count
+         * @type {number || null}
+         */
+        this.Count = null;
+
     }
 
     /**
@@ -5316,6 +5318,7 @@ class PrivilegeEventInfo extends  AbstractModel {
         this.NewCaps = 'NewCaps' in params ? params.NewCaps : null;
         this.MachineStatus = 'MachineStatus' in params ? params.MachineStatus : null;
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.Count = 'Count' in params ? params.Count : null;
 
     }
 }
@@ -5444,6 +5447,56 @@ class ExportTasksRequest extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DescribeRaspRuleVuls response structure.
+ * @class
+ */
+class DescribeRaspRuleVulsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List content
+         * @type {Array.<RaspRuleVul> || null}
+         */
+        this.List = null;
+
+        /**
+         * Total number of entries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new RaspRuleVul();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5702,6 +5755,24 @@ class ModifyMalwareTimingScanSettingsRequest extends  AbstractModel {
          */
         this.ProtectFileScope = null;
 
+        /**
+         * Selected host isolation collection
+         * @type {Array.<string> || null}
+         */
+        this.QuaraUuids = null;
+
+        /**
+         * Isolation scope selected by users: 0: default full isolation 1: user selected
+         * @type {number || null}
+         */
+        this.QuaraScope = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ProductType = null;
+
     }
 
     /**
@@ -5728,6 +5799,9 @@ class ModifyMalwareTimingScanSettingsRequest extends  AbstractModel {
         this.EnableMemShellScan = 'EnableMemShellScan' in params ? params.EnableMemShellScan : null;
         this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
         this.ProtectFileScope = 'ProtectFileScope' in params ? params.ProtectFileScope : null;
+        this.QuaraUuids = 'QuaraUuids' in params ? params.QuaraUuids : null;
+        this.QuaraScope = 'QuaraScope' in params ? params.QuaraScope : null;
+        this.ProductType = 'ProductType' in params ? params.ProductType : null;
 
     }
 }
@@ -5937,66 +6011,43 @@ class VulLevelCountInfo extends  AbstractModel {
 }
 
 /**
- * ExportBashEvents response structure.
+ * DescribeRaspRules request structure.
  * @class
  */
-class ExportBashEventsResponse extends  AbstractModel {
+class DescribeRaspRulesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Export file download link
-         * @type {string || null}
-         */
-        this.DownloadUrl = null;
-
-        /**
-         * Task ID, required for obtaining the DownloadURL at API Asynchronous Export Task ExportTasks
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeMonthInspectionReport request structure.
- * @class
- */
-class DescribeMonthInspectionReportRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Pagination size
+         * Number of entries to be returned. Default value: 10. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Pagination step size
+         * Offset. Default value: 0.
          * @type {number || null}
          */
         this.Offset = null;
+
+        /**
+         * Filter criteria
+<li>Keywords - String - required: no - keyword (process name)</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Sort field, which currently supports CreateTime and ModifyTime. The default value is ModifyTime.
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * Sorting method: DESC, ASC.
+         * @type {string || null}
+         */
+        this.Order = null;
 
     }
 
@@ -6009,6 +6060,17 @@ class DescribeMonthInspectionReportRequest extends  AbstractModel {
         }
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -6088,43 +6150,37 @@ class VertexInfo extends  AbstractModel {
         this.IsLeaf = null;
 
         /**
-         * Process name, used when Type=1
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Process name. This parameter is used when Type is 1.
          * @type {string || null}
          */
         this.ProcNamePrefix = null;
 
         /**
-         * Process name MD5, used when Type=1
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Process name MD5. This parameter is used when Type is 1.
          * @type {string || null}
          */
         this.ProcNameMd5 = null;
 
         /**
-         * Command line, used when Type=1
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Command line. This parameter is used when Type is 1.
          * @type {string || null}
          */
         this.CmdLinePrefix = null;
 
         /**
-         * Command line MD5, used when Type=1
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Command line MD5. This parameter is used when Type is 1.
          * @type {string || null}
          */
         this.CmdLineMd5 = null;
 
         /**
-         * File path, used when Type=3
-Note: This field may return null, indicating that no valid values can be obtained.
+         * File path. This parameter is used when Type is 3.
          * @type {string || null}
          */
         this.FilePathPrefix = null;
 
         /**
-         * Request destination address, used when Type=2
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Request destination address. This parameter is used when Type is 2.
          * @type {string || null}
          */
         this.AddressPrefix = null;
@@ -6142,15 +6198,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsAlarm = null;
 
         /**
-         * File path MD5, used when Type=3
-Note: This field may return null, indicating that no valid values can be obtained.
+         * File path MD5. This parameter is used when Type is 3.
          * @type {string || null}
          */
         this.FilePathMd5 = null;
 
         /**
-         * Request destination address MD5, used when Type=2
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Request destination address MD5. This parameter is used when Type is 2.
          * @type {string || null}
          */
         this.AddressMd5 = null;
@@ -6209,15 +6263,13 @@ class DescribeNetAttackSettingResponse extends  AbstractModel {
         this.Scope = null;
 
         /**
-         * Selected hosts
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specified hosts
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
          * Custom Hosts to Exclude
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.ExcludeInstanceIds = null;
@@ -6431,54 +6483,48 @@ class DescribeBashRulesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeAvailableExpertServiceDetail response structure.
+ * Server Basic Information
  * @class
  */
-class DescribeAvailableExpertServiceDetailResponse extends  AbstractModel {
+class MachineExtraInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Security manager order
-         * @type {Array.<ExpertServiceOrderInfo> || null}
-         */
-        this.ExpertService = null;
-
-        /**
-         * Number of available emergency responses
-         * @type {number || null}
-         */
-        this.EmergencyResponse = null;
-
-        /**
-         * 
-         * @type {number || null}
-         */
-        this.ProtectNet = null;
-
-        /**
-         * Whether you purchased security manager
-         * @type {boolean || null}
-         */
-        this.ExpertServiceBuy = null;
-
-        /**
-         * Whether you purchased emergency response
-         * @type {boolean || null}
-         */
-        this.EmergencyResponseBuy = null;
-
-        /**
-         * 
-         * @type {boolean || null}
-         */
-        this.ProtectNetBuy = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Public IP address
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.WanIP = null;
+
+        /**
+         * Private IP address
+         * @type {string || null}
+         */
+        this.PrivateIP = null;
+
+        /**
+         * Network Type. 1: VPC network; 2: Basic Network; 3: Non-Tencent Cloud Network
+         * @type {number || null}
+         */
+        this.NetworkType = null;
+
+        /**
+         * Network Name, returns vpc_id in the case of a VPC network
+         * @type {string || null}
+         */
+        this.NetworkName = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * host name
+         * @type {string || null}
+         */
+        this.HostName = null;
 
     }
 
@@ -6489,21 +6535,12 @@ class DescribeAvailableExpertServiceDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.ExpertService) {
-            this.ExpertService = new Array();
-            for (let z in params.ExpertService) {
-                let obj = new ExpertServiceOrderInfo();
-                obj.deserialize(params.ExpertService[z]);
-                this.ExpertService.push(obj);
-            }
-        }
-        this.EmergencyResponse = 'EmergencyResponse' in params ? params.EmergencyResponse : null;
-        this.ProtectNet = 'ProtectNet' in params ? params.ProtectNet : null;
-        this.ExpertServiceBuy = 'ExpertServiceBuy' in params ? params.ExpertServiceBuy : null;
-        this.EmergencyResponseBuy = 'EmergencyResponseBuy' in params ? params.EmergencyResponseBuy : null;
-        this.ProtectNetBuy = 'ProtectNetBuy' in params ? params.ProtectNetBuy : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.WanIP = 'WanIP' in params ? params.WanIP : null;
+        this.PrivateIP = 'PrivateIP' in params ? params.PrivateIP : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.NetworkName = 'NetworkName' in params ? params.NetworkName : null;
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
 
     }
 }
@@ -6891,24 +6928,18 @@ class ExportAssetCoreModuleListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeComponentStatistics response structure.
+ * ExportAssetMachineDetail response structure.
  * @class
  */
-class DescribeComponentStatisticsResponse extends  AbstractModel {
+class ExportAssetMachineDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of records in the component statistics list
-         * @type {number || null}
+         * Download link
+         * @type {string || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * Array of list of counted components
-         * @type {Array.<ComponentStatistics> || null}
-         */
-        this.ComponentStatistics = null;
+        this.DownloadUrl = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6925,16 +6956,7 @@ class DescribeComponentStatisticsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.ComponentStatistics) {
-            this.ComponentStatistics = new Array();
-            for (let z in params.ComponentStatistics) {
-                let obj = new ComponentStatistics();
-                obj.deserialize(params.ComponentStatistics[z]);
-                this.ComponentStatistics.push(obj);
-            }
-        }
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6969,6 +6991,63 @@ class ModifyNetAttackWhiteListResponse extends  AbstractModel {
 }
 
 /**
+ * Policy rule expression.
+ * @class
+ */
+class PolicyRules extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Process
+         * @type {CommandLine || null}
+         */
+        this.Process = null;
+
+        /**
+         * Parent process
+         * @type {CommandLine || null}
+         */
+        this.PProcess = null;
+
+        /**
+         * Ancestor process
+         * @type {CommandLine || null}
+         */
+        this.AProcess = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Process) {
+            let obj = new CommandLine();
+            obj.deserialize(params.Process)
+            this.Process = obj;
+        }
+
+        if (params.PProcess) {
+            let obj = new CommandLine();
+            obj.deserialize(params.PProcess)
+            this.PProcess = obj;
+        }
+
+        if (params.AProcess) {
+            let obj = new CommandLine();
+            obj.deserialize(params.AProcess)
+            this.AProcess = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeMachineRegions request structure.
  * @class
  */
@@ -6985,77 +7064,6 @@ class DescribeMachineRegionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-    }
-}
-
-/**
- * DescribeAttackLogs request structure.
- * @class
- */
-class DescribeAttackLogsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of returns. The maximum value is 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Filter criteria
-<li>HttpMethod - String - required: no - attack method (POST|GET)</li>
-<li>DateRange - String - required: no - timeframe (store data from the past 3 months), such as the last month ["2019-11-17", "2019-12-17"]</li>
-<li>VulType - String threat type - required: no</li>
-<li>SrcIp - String attack source IP - required: no</li>
-<li>DstIp - String attack target IP - required: no</li>
-<li>SrcPort - String attack source port - required: no</li>
-<li>DstPort - String attack target port - required: no</li>
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * CWPP client ID
-         * @type {string || null}
-         */
-        this.Uuid = null;
-
-        /**
-         * CVM machine ID
-         * @type {string || null}
-         */
-        this.Quuid = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -7109,7 +7117,7 @@ class ModifyEventAttackStatusRequest extends  AbstractModel {
         this.All = null;
 
         /**
-         * 0: Pending 1: Processed 2: Allowlisted 3: Ignored 4: Deleted 
+         * 0: pending processing; 1: processed; 3: ignored; 4: deleted. 
          * @type {number || null}
          */
         this.Status = null;
@@ -7120,7 +7128,7 @@ class ModifyEventAttackStatusRequest extends  AbstractModel {
 <li>Status: String event processing status: 0: pending 1: processed; 2: allowlisted; 3: ignored; 4: deleted: required: no</li>
 <li>SrcIP - String source IP - required: no</li>
 <li>DstPort - String attack target port - required: no</li>
-<li>MachineName - String host name - required: no</li>
+<li>MachineName - String host name - required: no</li>
 <li>InstanceID - String host instance ID - required: no</li>
 <li>Quuids - String host CVM UUID - required: no</li>
 
@@ -7161,6 +7169,69 @@ class ModifyEventAttackStatusRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyBashPolicyStatus request structure.
+ * @class
+ */
+class ModifyBashPolicyStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Whether to disable
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+
+    }
+}
+
+/**
+ * DeleteRaspRules response structure.
+ * @class
+ */
+class DeleteRaspRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeVulLevelCount response structure.
  * @class
  */
@@ -7169,8 +7240,7 @@ class DescribeVulLevelCountResponse extends  AbstractModel {
         super();
 
         /**
-         * Statistical result
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Statistical Result
          * @type {Array.<VulLevelInfo> || null}
          */
         this.VulLevelList = null;
@@ -7200,6 +7270,70 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeShellPolicyList request structure.
+ * @class
+ */
+class DescribeShellPolicyListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Maximum number of entries. Default value: 10.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset, which is 0 by default.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter parameters
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Sorting Method: [ASC: Ascending Order, DESC: Descending Order]
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sorting column: [UpdateTime].
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -7266,7 +7400,7 @@ class DescribeVersionStatisticsResponse extends  AbstractModel {
         this.UltimateVersionNum = null;
 
         /**
-         * Number of General Discount Editions
+         * Number of lightweight editions
          * @type {number || null}
          */
         this.GeneralVersionNum = null;
@@ -7291,27 +7425,6 @@ class DescribeVersionStatisticsResponse extends  AbstractModel {
         this.UltimateVersionNum = 'UltimateVersionNum' in params ? params.UltimateVersionNum : null;
         this.GeneralVersionNum = 'GeneralVersionNum' in params ? params.GeneralVersionNum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeAvailableExpertServiceDetail request structure.
- * @class
- */
-class DescribeAvailableExpertServiceDetailRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
 
     }
 }
@@ -7361,6 +7474,55 @@ class DescribeMachineFileTamperRulesResponse extends  AbstractModel {
                 this.List.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVulDefenceOverviewCount response structure.
+ * @class
+ */
+class DescribeVulDefenceOverviewCountResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * number of policies
+         * @type {number || null}
+         */
+        this.StrategyCount = null;
+
+        /**
+         * Number of enabled policies.
+         * @type {number || null}
+         */
+        this.StrategyOpenCount = null;
+
+        /**
+         * Number of supported defense vulnerabilities.
+         * @type {number || null}
+         */
+        this.SupportDefenceVulCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StrategyCount = 'StrategyCount' in params ? params.StrategyCount : null;
+        this.StrategyOpenCount = 'StrategyOpenCount' in params ? params.StrategyOpenCount : null;
+        this.SupportDefenceVulCount = 'SupportDefenceVulCount' in params ? params.SupportDefenceVulCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7609,16 +7771,16 @@ class CreateWhiteListOrderRequest extends  AbstractModel {
         this.Deadline = null;
 
         /**
-         * Rule name, big asset center: asset_center
-         * @type {string || null}
-         */
-        this.RuleName = null;
-
-        /**
          * Order type. 1: trial; 2: free; 3: experience; 4: free SSL certificate gift; 5: free CVM
          * @type {number || null}
          */
         this.SourceType = null;
+
+        /**
+         * Rule name, big asset center: asset_center
+         * @type {string || null}
+         */
+        this.RuleName = null;
 
         /**
          * Region: 1 Guangzhou; 9 Singapore. The default is 1. Do not select 9 unless necessary.
@@ -7644,8 +7806,8 @@ class CreateWhiteListOrderRequest extends  AbstractModel {
         this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
         this.LicenseNum = 'LicenseNum' in params ? params.LicenseNum : null;
         this.Deadline = 'Deadline' in params ? params.Deadline : null;
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.ExtraParam = 'ExtraParam' in params ? params.ExtraParam : null;
 
@@ -7662,7 +7824,6 @@ class DescribeBaselineBasicInfoResponse extends  AbstractModel {
 
         /**
          * Baseline basic information list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BaselineBasicInfo> || null}
          */
         this.BaselineBasicInfoList = null;
@@ -7706,7 +7867,6 @@ class DescribeRansomDefenseStrategyDetailResponse extends  AbstractModel {
 
         /**
          * Policy details
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {RansomDefenseStrategyDetail || null}
          */
         this.Strategy = null;
@@ -7868,30 +8028,268 @@ class DescribeRansomDefenseBackupListRequest extends  AbstractModel {
 }
 
 /**
- * ModifyFileTamperRuleStatus request structure.
+ * order detail
  * @class
  */
-class ModifyFileTamperRuleStatusRequest extends  AbstractModel {
+class OrderDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 0: enable; 1: disable; 2: delete
+         * Resource ID
+         * @type {string || null}
+         */
+        this.ResourceID = null;
+
+        /**
+         * Billing item
+         * @type {string || null}
+         */
+        this.InquireKey = null;
+
+        /**
+         * Order status
+-Normal
+-Isolation period
+-3 Terminated
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceID = 'ResourceID' in params ? params.ResourceID : null;
+        this.InquireKey = 'InquireKey' in params ? params.InquireKey : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * Java webshell event information
+ * @class
+ */
+class RaspMemShellEvent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Event ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Server QUUID
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * Server name
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Server IP address
+         * @type {string || null}
+         */
+        this.HostIp = null;
+
+        /**
+         * Memory Trojan Type. 0: Filter Type; 1: Listener Type; 2: Servlet Type; 3: Interceptors Type; 4: Agent Type; 5: Other
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * First detection time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last detection time
+         * @type {string || null}
+         */
+        this.RecentFoundTime = null;
+
+        /**
+         * Processing Status. 0 - Pending; 1 - Allowlisted; 2 - Deleted; 3 - Ignored; 4 - Manually Processed
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Corresponding event ID
-         * @type {Array.<number> || null}
+         * Class file md5
+         * @type {string || null}
          */
-        this.Ids = null;
+        this.Md5 = null;
 
         /**
-         * Whether a system rule: 0: system rule; 1: user defined rule. System rule Status cannot be deleted.
+         * Class name
+         * @type {string || null}
+         */
+        this.ClassName = null;
+
+        /**
+         * Parent class name
+         * @type {string || null}
+         */
+        this.SuperClassName = null;
+
+        /**
+         * Inherited API
+         * @type {string || null}
+         */
+        this.Interfaces = null;
+
+        /**
+         * Annotation
+         * @type {string || null}
+         */
+        this.Annotations = null;
+
+        /**
+         * Associated class loader.
+         * @type {string || null}
+         */
+        this.LoaderClassName = null;
+
+        /**
+         * Process ID
          * @type {number || null}
          */
-        this.RuleCategory = null;
+        this.Pid = null;
+
+        /**
+         * Java Process Path
+         * @type {string || null}
+         */
+        this.Exe = null;
+
+        /**
+         * Java process command line parameters
+         * @type {string || null}
+         */
+        this.Args = null;
+
+        /**
+         * Node name.
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Node ID.
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Container name
+         * @type {string || null}
+         */
+        this.ContainerName = null;
+
+        /**
+         * container id
+         * @type {string || null}
+         */
+        this.ContainerId = null;
+
+        /**
+         * Container running status
+         * @type {string || null}
+         */
+        this.ContainerStatus = null;
+
+        /**
+         * Container isolation status
+         * @type {string || null}
+         */
+        this.ContainerNetStatus = null;
+
+        /**
+         * Image ID
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * Image name
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * Pod name
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * podip
+         * @type {string || null}
+         */
+        this.PodIp = null;
+
+        /**
+         * Cluster name.
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Same as the node id, the frontend can leave this unused.
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * Private ip address of the server
+         * @type {string || null}
+         */
+        this.HostInnerIP = null;
+
+        /**
+         * Public ip of the server
+         * @type {string || null}
+         */
+        this.HostPublicIP = null;
+
+        /**
+         * Regular node: NORMAL
+Super node: SUPER
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Super Node Unique ID
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
 
     }
 
@@ -7902,94 +8300,41 @@ class ModifyFileTamperRuleStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.HostIp = 'HostIp' in params ? params.HostIp : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.RecentFoundTime = 'RecentFoundTime' in params ? params.RecentFoundTime : null;
         this.Status = 'Status' in params ? params.Status : null;
-        this.Ids = 'Ids' in params ? params.Ids : null;
-        this.RuleCategory = 'RuleCategory' in params ? params.RuleCategory : null;
-
-    }
-}
-
-/**
- * ScanVul response structure.
- * @class
- */
-class ScanVulResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Task ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteNonlocalLoginPlaces request structure.
- * @class
- */
-class DeleteNonlocalLoginPlacesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Method for deleting cross-region log-in events, available values are Ids, Ip, and All. The default is Ids.
-         * @type {string || null}
-         */
-        this.DelType = null;
-
-        /**
-         * Array of cross-region log-in event IDs. Required if DelType is Ids or DelType is not filled.
-         * @type {Array.<number> || null}
-         */
-        this.Ids = null;
-
-        /**
-         * IP of cross-region log-in event. Required if DelType is Ip.
-         * @type {Array.<string> || null}
-         */
-        this.Ip = null;
-
-        /**
-         * Host UUID
-         * @type {string || null}
-         */
-        this.Uuid = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DelType = 'DelType' in params ? params.DelType : null;
-        this.Ids = 'Ids' in params ? params.Ids : null;
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
+        this.ClassName = 'ClassName' in params ? params.ClassName : null;
+        this.SuperClassName = 'SuperClassName' in params ? params.SuperClassName : null;
+        this.Interfaces = 'Interfaces' in params ? params.Interfaces : null;
+        this.Annotations = 'Annotations' in params ? params.Annotations : null;
+        this.LoaderClassName = 'LoaderClassName' in params ? params.LoaderClassName : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.Exe = 'Exe' in params ? params.Exe : null;
+        this.Args = 'Args' in params ? params.Args : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+        this.ContainerId = 'ContainerId' in params ? params.ContainerId : null;
+        this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
+        this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.PodIp = 'PodIp' in params ? params.PodIp : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.HostInnerIP = 'HostInnerIP' in params ? params.HostInnerIP : null;
+        this.HostPublicIP = 'HostPublicIP' in params ? params.HostPublicIP : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
 
     }
 }
@@ -8235,15 +8580,13 @@ class DescribeRansomDefenseMachineListResponse extends  AbstractModel {
         super();
 
         /**
-         * Host list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of hosts
          * @type {Array.<RansomDefenseStrategyMachineBackupInfo> || null}
          */
         this.List = null;
 
         /**
          * Total number of pagination query records
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -8347,6 +8690,12 @@ class ScanVulAgainRequest extends  AbstractModel {
          */
         this.Uuids = null;
 
+        /**
+         * 0 vulnerabilities, 1 windows patch
+         * @type {number || null}
+         */
+        this.EventType = null;
+
     }
 
     /**
@@ -8358,6 +8707,7 @@ class ScanVulAgainRequest extends  AbstractModel {
         }
         this.EventIds = 'EventIds' in params ? params.EventIds : null;
         this.Uuids = 'Uuids' in params ? params.Uuids : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
 
     }
 }
@@ -8400,7 +8750,6 @@ class ExportJavaMemShellPluginsResponse extends  AbstractModel {
 
         /**
          * Task ID, required for obtaining the DownloadURL at API Asynchronous Export Task ExportTasks
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -8644,7 +8993,6 @@ class DescribeJavaMemShellListResponse extends  AbstractModel {
 
         /**
          * Event list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<JavaMemShellInfo> || null}
          */
         this.List = null;
@@ -8764,6 +9112,12 @@ class DescribeNetAttackSettingRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ProductType = null;
+
     }
 
     /**
@@ -8773,6 +9127,7 @@ class DescribeNetAttackSettingRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ProductType = 'ProductType' in params ? params.ProductType : null;
 
     }
 }
@@ -8792,36 +9147,31 @@ class HostLoginList extends  AbstractModel {
         this.Id = null;
 
         /**
-         * UUID string
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host UUID
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
-         * Host IP
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host IP address
          * @type {string || null}
          */
         this.MachineIp = null;
 
         /**
          * Host name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MachineName = null;
 
         /**
-         * Username
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Username.
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
          * Source IP
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SrcIp = null;
@@ -8834,112 +9184,103 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Country/Region ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Country = null;
 
         /**
          * City ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.City = null;
 
         /**
-         * Province ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Province id
          * @type {number || null}
          */
         this.Province = null;
 
         /**
          * Log-in time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LoginTime = null;
 
         /**
          * Modification time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ModifyTime = null;
 
         /**
-         * Whether hit the exception of cross-region log-in: 1: yes; 0: no
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether hit the exception of cross-region log-in: 1 means hit the exception, 0 means not hit
          * @type {number || null}
          */
         this.IsRiskArea = null;
 
         /**
          * Whether hit the exception of abnormal user: 1: yes; 0: no
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.IsRiskUser = null;
 
         /**
          * Whether hit the exception of abnormal time: 1: yes; 0: no
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.IsRiskTime = null;
 
         /**
          * Whether hit the exception of abnormal IP: 1: yes; 0: no
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.IsRiskSrcIp = null;
 
         /**
          * Risk level:
-0: high
-1: suspicious
-Note: This field may return null, indicating that no valid values can be obtained.
+0: high risk
+1: Suspicious
          * @type {number || null}
          */
         this.RiskLevel = null;
 
         /**
          * Location name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Location = null;
 
         /**
          * Host QUUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
          * High-risk information description:
-ABROAD - overseas IP
-XTI - threat intelligence
-Note: This field may return null, indicating that no valid values can be obtained.
+ABROAD - IP outside Chinese mainland
+XTI - Threat Intelligence
          * @type {string || null}
          */
         this.Desc = null;
 
         /**
          * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
 
         /**
-         * Request destination port
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Request destination port.
          * @type {number || null}
          */
         this.Port = null;
+
+        /**
+         * ip analysis
+         * @type {IPAnalyse || null}
+         */
+        this.IPAnalyse = null;
 
     }
 
@@ -8977,6 +9318,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.MachineExtraInfo = obj;
         }
         this.Port = 'Port' in params ? params.Port : null;
+
+        if (params.IPAnalyse) {
+            let obj = new IPAnalyse();
+            obj.deserialize(params.IPAnalyse)
+            this.IPAnalyse = obj;
+        }
 
     }
 }
@@ -9023,6 +9370,12 @@ class DeletePrivilegeEventsRequest extends  AbstractModel {
          */
         this.Ids = null;
 
+        /**
+         * Whether to delete all.
+         * @type {boolean || null}
+         */
+        this.All = null;
+
     }
 
     /**
@@ -9033,252 +9386,24 @@ class DeletePrivilegeEventsRequest extends  AbstractModel {
             return;
         }
         this.Ids = 'Ids' in params ? params.Ids : null;
+        this.All = 'All' in params ? params.All : null;
 
     }
 }
 
 /**
- * Basic information on the server list in asset fingerprint
+ * DeleteWebHookRule response structure.
  * @class
  */
-class AssetMachineDetail extends  AbstractModel {
+class DeleteWebHookRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Server QUUID
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Quuid = null;
-
-        /**
-         * Server UUID
-         * @type {string || null}
-         */
-        this.Uuid = null;
-
-        /**
-         * Private IP address of server
-         * @type {string || null}
-         */
-        this.MachineIp = null;
-
-        /**
-         * Server name
-         * @type {string || null}
-         */
-        this.MachineName = null;
-
-        /**
-         * Operating system name
-         * @type {string || null}
-         */
-        this.OsInfo = null;
-
-        /**
-         * CPU information
-         * @type {string || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * Memory capacity, in GB
-         * @type {number || null}
-         */
-        this.MemSize = null;
-
-        /**
-         * Memory utilization, in percentage
-         * @type {string || null}
-         */
-        this.MemLoad = null;
-
-        /**
-         * Hard disk capacity, in GB
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * Hard disk usage, in percentage
-         * @type {string || null}
-         */
-        this.DiskLoad = null;
-
-        /**
-         * Number of partitions
-         * @type {number || null}
-         */
-        this.PartitionCount = null;
-
-        /**
-         * Host public IP address
-         * @type {string || null}
-         */
-        this.MachineWanIp = null;
-
-        /**
-         * Number of CPU
-         * @type {number || null}
-         */
-        this.CpuSize = null;
-
-        /**
-         * CPU load
-         * @type {string || null}
-         */
-        this.CpuLoad = null;
-
-        /**
-         * Protection Level. 0 Basic Edition; 1 Professional Edition; 2 Premium Edition; 3 General Discount Edition
-         * @type {number || null}
-         */
-        this.ProtectLevel = null;
-
-        /**
-         * Risk status: UNKNOW - unknown; RISK - risky; SAFT - Safe
-         * @type {string || null}
-         */
-        this.RiskStatus = null;
-
-        /**
-         * Days protected
-         * @type {number || null}
-         */
-        this.ProtectDays = null;
-
-        /**
-         * Professional edition activation time
-         * @type {string || null}
-         */
-        this.BuyTime = null;
-
-        /**
-         * Professional edition expiration time
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Kernel version
-         * @type {string || null}
-         */
-        this.CoreVersion = null;
-
-        /**
-         * linux/windows
-         * @type {string || null}
-         */
-        this.OsType = null;
-
-        /**
-         * Agent version
-         * @type {string || null}
-         */
-        this.AgentVersion = null;
-
-        /**
-         * Installation time
-         * @type {string || null}
-         */
-        this.InstallTime = null;
-
-        /**
-         * System startup time
-         * @type {string || null}
-         */
-        this.BootTime = null;
-
-        /**
-         * Last online time
-         * @type {string || null}
-         */
-        this.LastLiveTime = null;
-
-        /**
-         * Manufacturer
-         * @type {string || null}
-         */
-        this.Producer = null;
-
-        /**
-         * Serial number
-         * @type {string || null}
-         */
-        this.SerialNumber = null;
-
-        /**
-         * Network interface
-
-         * @type {Array.<AssetNetworkCardInfo> || null}
-         */
-        this.NetCards = null;
-
-        /**
-         * Partition
-         * @type {Array.<AssetDiskPartitionInfo> || null}
-         */
-        this.Disks = null;
-
-        /**
-         * 0: online; 1: offline
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Business group ID
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * Server model
-         * @type {string || null}
-         */
-        this.DeviceVersion = null;
-
-        /**
-         * Offline time
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OfflineTime = null;
-
-        /**
-         * Host ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * Host Additional Information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {MachineExtraInfo || null}
-         */
-        this.MachineExtraInfo = null;
-
-        /**
-         * CpuLoadVul
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CpuLoadVul = null;
-
-        /**
-         * Time
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.FirstTime = null;
+        this.RequestId = null;
 
     }
 
@@ -9289,65 +9414,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
-        this.MachineName = 'MachineName' in params ? params.MachineName : null;
-        this.OsInfo = 'OsInfo' in params ? params.OsInfo : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.MemSize = 'MemSize' in params ? params.MemSize : null;
-        this.MemLoad = 'MemLoad' in params ? params.MemLoad : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.DiskLoad = 'DiskLoad' in params ? params.DiskLoad : null;
-        this.PartitionCount = 'PartitionCount' in params ? params.PartitionCount : null;
-        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
-        this.CpuSize = 'CpuSize' in params ? params.CpuSize : null;
-        this.CpuLoad = 'CpuLoad' in params ? params.CpuLoad : null;
-        this.ProtectLevel = 'ProtectLevel' in params ? params.ProtectLevel : null;
-        this.RiskStatus = 'RiskStatus' in params ? params.RiskStatus : null;
-        this.ProtectDays = 'ProtectDays' in params ? params.ProtectDays : null;
-        this.BuyTime = 'BuyTime' in params ? params.BuyTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.CoreVersion = 'CoreVersion' in params ? params.CoreVersion : null;
-        this.OsType = 'OsType' in params ? params.OsType : null;
-        this.AgentVersion = 'AgentVersion' in params ? params.AgentVersion : null;
-        this.InstallTime = 'InstallTime' in params ? params.InstallTime : null;
-        this.BootTime = 'BootTime' in params ? params.BootTime : null;
-        this.LastLiveTime = 'LastLiveTime' in params ? params.LastLiveTime : null;
-        this.Producer = 'Producer' in params ? params.Producer : null;
-        this.SerialNumber = 'SerialNumber' in params ? params.SerialNumber : null;
-
-        if (params.NetCards) {
-            this.NetCards = new Array();
-            for (let z in params.NetCards) {
-                let obj = new AssetNetworkCardInfo();
-                obj.deserialize(params.NetCards[z]);
-                this.NetCards.push(obj);
-            }
-        }
-
-        if (params.Disks) {
-            this.Disks = new Array();
-            for (let z in params.Disks) {
-                let obj = new AssetDiskPartitionInfo();
-                obj.deserialize(params.Disks[z]);
-                this.Disks.push(obj);
-            }
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.DeviceVersion = 'DeviceVersion' in params ? params.DeviceVersion : null;
-        this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-
-        if (params.MachineExtraInfo) {
-            let obj = new MachineExtraInfo();
-            obj.deserialize(params.MachineExtraInfo)
-            this.MachineExtraInfo = obj;
-        }
-        this.CpuLoadVul = 'CpuLoadVul' in params ? params.CpuLoadVul : null;
-        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9467,49 +9534,42 @@ class IgnoreRuleEffectHostInfo extends  AbstractModel {
 
         /**
          * Host name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostName = null;
 
         /**
-         * Severity level: 1: low-risk; 2: medium-risk; 3: high-risk; 4: critical
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Severity level: 1-Low-risk; 2-Medium-risk; 3-High-risk; 4-Critical
          * @type {number || null}
          */
         this.Level = null;
 
         /**
          * Host tag array
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.TagList = null;
 
         /**
-         * Status: 0: failed; 1: ignore; 3: passed; 5: detecting
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Status: 0: failed; 1: ignore; 3: approved; 5: detecting
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Last check time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Last detection time
          * @type {string || null}
          */
         this.LastScanTime = null;
 
         /**
          * Event ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.EventId = null;
 
         /**
          * Host QUUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Quuid = null;
@@ -9604,19 +9664,108 @@ class DescribeFileTamperEventsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeScreenMachineRegions response structure.
+ * DescribeScanTaskDetails response structure.
  * @class
  */
-class DescribeScreenMachineRegionsResponse extends  AbstractModel {
+class DescribeScanTaskDetailsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List details
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ScreenRegionInfo> || null}
+         * List of scan task information
+         * @type {Array.<ScanTaskDetails> || null}
          */
-        this.List = null;
+        this.ScanTaskDetailList = null;
+
+        /**
+         * Total number
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Total number of scanned machines
+         * @type {number || null}
+         */
+        this.ScanMachineCount = null;
+
+        /**
+         * Number of machines with risks detected
+         * @type {number || null}
+         */
+        this.RiskMachineCount = null;
+
+        /**
+         * Scan start time
+         * @type {string || null}
+         */
+        this.ScanBeginTime = null;
+
+        /**
+         * Scan end time
+         * @type {string || null}
+         */
+        this.ScanEndTime = null;
+
+        /**
+         * Scan time
+         * @type {number || null}
+         */
+        this.ScanTime = null;
+
+        /**
+         * Scan progress
+         * @type {number || null}
+         */
+        this.ScanProgress = null;
+
+        /**
+         * Remaining scan time
+         * @type {number || null}
+         */
+        this.ScanLeftTime = null;
+
+        /**
+         * Scan content
+         * @type {Array.<string> || null}
+         */
+        this.ScanContent = null;
+
+        /**
+         * Vulnerability information
+         * @type {Array.<VulDetailInfo> || null}
+         */
+        this.VulInfo = null;
+
+        /**
+         * Number of risk events
+         * @type {number || null}
+         */
+        this.RiskEventCount = null;
+
+        /**
+         * 0 - one-click detection; 1 - regular detection
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * whether all tasks are being stopped (true: yes)
+         * @type {boolean || null}
+         */
+        this.StoppingAll = null;
+
+        /**
+         * Number of vulnerabilities scanned
+         * @type {number || null}
+         */
+        this.VulCount = null;
+
+        /**
+         * Scan info when scanning kb separately
+         * @type {Array.<PatchInfoDetail> || null}
+         */
+        this.PatchInfo = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -9634,12 +9783,43 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
 
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new ScreenRegionInfo();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
+        if (params.ScanTaskDetailList) {
+            this.ScanTaskDetailList = new Array();
+            for (let z in params.ScanTaskDetailList) {
+                let obj = new ScanTaskDetails();
+                obj.deserialize(params.ScanTaskDetailList[z]);
+                this.ScanTaskDetailList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.ScanMachineCount = 'ScanMachineCount' in params ? params.ScanMachineCount : null;
+        this.RiskMachineCount = 'RiskMachineCount' in params ? params.RiskMachineCount : null;
+        this.ScanBeginTime = 'ScanBeginTime' in params ? params.ScanBeginTime : null;
+        this.ScanEndTime = 'ScanEndTime' in params ? params.ScanEndTime : null;
+        this.ScanTime = 'ScanTime' in params ? params.ScanTime : null;
+        this.ScanProgress = 'ScanProgress' in params ? params.ScanProgress : null;
+        this.ScanLeftTime = 'ScanLeftTime' in params ? params.ScanLeftTime : null;
+        this.ScanContent = 'ScanContent' in params ? params.ScanContent : null;
+
+        if (params.VulInfo) {
+            this.VulInfo = new Array();
+            for (let z in params.VulInfo) {
+                let obj = new VulDetailInfo();
+                obj.deserialize(params.VulInfo[z]);
+                this.VulInfo.push(obj);
+            }
+        }
+        this.RiskEventCount = 'RiskEventCount' in params ? params.RiskEventCount : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.StoppingAll = 'StoppingAll' in params ? params.StoppingAll : null;
+        this.VulCount = 'VulCount' in params ? params.VulCount : null;
+
+        if (params.PatchInfo) {
+            this.PatchInfo = new Array();
+            for (let z in params.PatchInfo) {
+                let obj = new PatchInfoDetail();
+                obj.deserialize(params.PatchInfo[z]);
+                this.PatchInfo.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -9734,6 +9914,34 @@ class DescribeBanModeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * ModifyRaspMaxCpu request structure.
+ * @class
+ */
+class ModifyRaspMaxCpuRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * rasp current maximum cpu limitation, larger than 0, less than or equal to 100, default 100 indicates no restriction
+         * @type {number || null}
+         */
+        this.RaspMaxCpu = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RaspMaxCpu = 'RaspMaxCpu' in params ? params.RaspMaxCpu : null;
 
     }
 }
@@ -9873,123 +10081,45 @@ class ExportVulInfoResponse extends  AbstractModel {
 }
 
 /**
- * Emergency vulnerability information
+ * DescribeWindowsPatchList request structure.
  * @class
  */
-class EmergencyVul extends  AbstractModel {
+class DescribeWindowsPatchListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Vulnerability ID
+         * Pagination parameter
          * @type {number || null}
          */
-        this.VulId = null;
+        this.Limit = null;
 
         /**
-         * Vulnerability level
-         * @type {number || null}
-         */
-        this.Level = null;
-
-        /**
-         * Vulnerability name
+         * Sorting order: desc. Default value: asc.
          * @type {string || null}
          */
-        this.VulName = null;
+        this.Order = null;
 
         /**
-         * Release date
+         * Selectable sorting field
+<li>PublishTime</li>
+<li>LastScanTime</li>
+<li>HostCount</li>
          * @type {string || null}
          */
-        this.PublishDate = null;
+        this.By = null;
 
         /**
-         * Vulnerability category
+         * Offset. Default value: 0.
          * @type {number || null}
          */
-        this.Category = null;
+        this.Offset = null;
 
         /**
-         * Vulnerability status. 0: not detected; 1: at risk; 2: not at risk; 3: show progress during check
-         * @type {number || null}
+         * Filter criteria. <li>Status: string type optional processing status 0-pending, 1-ignored, 3-fixed</li><li>ShowNew: int type optional show latest version 1-enable 0-disable</li><li>Name: string type optional patch name</li><li>KbNo: string type optional Patch Number</li><li>VulName: string type optional vulnerability name</li><li>CVEId: string type optional CVE number</li><li>Uuid: string type optional host uuid</li>
+         * @type {Array.<Filters> || null}
          */
-        this.Status = null;
-
-        /**
-         * Last scan time
-         * @type {string || null}
-         */
-        this.LastScanTime = null;
-
-        /**
-         * Scan progress
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-        /**
-         * CVE ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CveId = null;
-
-        /**
-         * CVSS score
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.CvssScore = null;
-
-        /**
-         * Vulnerability Tags, Separated by Multiple Commas
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Labels = null;
-
-        /**
-         * Number of affected machines
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.HostCount = null;
-
-        /**
-         * Whether to support defense: 0: no; 1: yes
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsSupportDefense = null;
-
-        /**
-         * Number of Attacks Defended
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.DefenseAttackCount = null;
-
-        /**
-         * Detection rule: 0: version comparison; 1: POC verification
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Method = null;
-
-        /**
-         * Attack intensity level
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.AttackLevel = null;
-
-        /**
-         * Whether vulnerability defense is enabled on hosts with vulnerabilities
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.DefenseState = null;
+        this.Filters = null;
 
     }
 
@@ -10000,23 +10130,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.VulId = 'VulId' in params ? params.VulId : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.VulName = 'VulName' in params ? params.VulName : null;
-        this.PublishDate = 'PublishDate' in params ? params.PublishDate : null;
-        this.Category = 'Category' in params ? params.Category : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
-        this.Progress = 'Progress' in params ? params.Progress : null;
-        this.CveId = 'CveId' in params ? params.CveId : null;
-        this.CvssScore = 'CvssScore' in params ? params.CvssScore : null;
-        this.Labels = 'Labels' in params ? params.Labels : null;
-        this.HostCount = 'HostCount' in params ? params.HostCount : null;
-        this.IsSupportDefense = 'IsSupportDefense' in params ? params.IsSupportDefense : null;
-        this.DefenseAttackCount = 'DefenseAttackCount' in params ? params.DefenseAttackCount : null;
-        this.Method = 'Method' in params ? params.Method : null;
-        this.AttackLevel = 'AttackLevel' in params ? params.AttackLevel : null;
-        this.DefenseState = 'DefenseState' in params ? params.DefenseState : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -10179,57 +10305,55 @@ class BashEventNew extends  AbstractModel {
         this.MachineName = null;
 
         /**
-         * 0: bash log; 1: real-time monitoring (Leiting edition)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 0: bash log; 1: real-time monitoring (Thunder Edition)
          * @type {number || null}
          */
         this.DetectBy = null;
 
         /**
-         * Process ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Process id
          * @type {string || null}
          */
         this.Pid = null;
 
         /**
          * Process name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Exe = null;
 
         /**
          * Processing time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ModifyTime = null;
 
         /**
          * Rule category. 0: system rule; 1: user rule
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RuleCategory = null;
 
         /**
-         * Automatically generated regular expression
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Escaped regular expression.
          * @type {string || null}
          */
         this.RegexBashCmd = null;
 
         /**
-         * 0: normal; 1: Professional edition; 2: Ultimate edition
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Escaped regular expression.
+         * @type {string || null}
+         */
+        this.RegexExe = null;
+
+        /**
+         * 0: Normal; 1: Pro edition; 2: Flagship edition
          * @type {number || null}
          */
         this.MachineType = null;
 
         /**
          * Additional Information on Machine
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -10262,6 +10386,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
         this.RuleCategory = 'RuleCategory' in params ? params.RuleCategory : null;
         this.RegexBashCmd = 'RegexBashCmd' in params ? params.RegexBashCmd : null;
+        this.RegexExe = 'RegexExe' in params ? params.RegexExe : null;
         this.MachineType = 'MachineType' in params ? params.MachineType : null;
 
         if (params.MachineExtraInfo) {
@@ -10310,8 +10435,7 @@ class DescribeVertexDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Attribute information of specified point list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Attribute information of the specified node list.
          * @type {Array.<VertexDetail> || null}
          */
         this.VertexDetails = null;
@@ -10374,31 +10498,18 @@ class DeleteRiskDnsEventResponse extends  AbstractModel {
 }
 
 /**
- * DescribeAttackLogs response structure.
+ * Availability zone information
  * @class
  */
-class DescribeAttackLogsResponse extends  AbstractModel {
+class ZoneInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Log list
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<DefendAttackLog> || null}
-         */
-        this.AttackLogs = null;
-
-        /**
-         * Total number
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Availability zone name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ZoneName = null;
 
     }
 
@@ -10409,17 +10520,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.AttackLogs) {
-            this.AttackLogs = new Array();
-            for (let z in params.AttackLogs) {
-                let obj = new DefendAttackLog();
-                obj.deserialize(params.AttackLogs[z]);
-                this.AttackLogs.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
 
     }
 }
@@ -10533,6 +10634,12 @@ class ModifyRiskDnsPolicyResponse extends  AbstractModel {
         super();
 
         /**
+         * 0: No duplication. 1: Duplicates the existing policy.
+         * @type {number || null}
+         */
+        this.Repeat = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -10547,6 +10654,7 @@ class ModifyRiskDnsPolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Repeat = 'Repeat' in params ? params.Repeat : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10661,6 +10769,56 @@ class ProductStatusInfo extends  AbstractModel {
         this.CanApplyTrial = 'CanApplyTrial' in params ? params.CanApplyTrial : null;
         this.CanNotApplyReason = 'CanNotApplyReason' in params ? params.CanNotApplyReason : null;
         this.LastTrialTime = 'LastTrialTime' in params ? params.LastTrialTime : null;
+
+    }
+}
+
+/**
+ * DescribeYDRaspBlackWhite response structure.
+ * @class
+ */
+class DescribeYDRaspBlackWhiteResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List content
+         * @type {Array.<YDRaspBlackWhiteListItem> || null}
+         */
+        this.List = null;
+
+        /**
+         * Total number of entries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new YDRaspBlackWhiteListItem();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10837,6 +10995,18 @@ class ScanVulAgainResponse extends  AbstractModel {
         super();
 
         /**
+         * Number of successful hosts
+         * @type {number || null}
+         */
+        this.SuccessCount = null;
+
+        /**
+         * Number of Basic Version hosts (unsupported)
+         * @type {number || null}
+         */
+        this.BasicVersionCount = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -10851,6 +11021,8 @@ class ScanVulAgainResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
+        this.BasicVersionCount = 'BasicVersionCount' in params ? params.BasicVersionCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10957,29 +11129,25 @@ class VulTopInfo extends  AbstractModel {
         super();
 
         /**
-         * Vulnerability name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Vulnerability name.
          * @type {string || null}
          */
         this.VulName = null;
 
         /**
          * Hazard level: 1-Low-risk; 2-Medium-risk; 3-High-risk; 4-Critical
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.VulLevel = null;
 
         /**
          * Number of vulnerabilities
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.VulCount = null;
 
         /**
          * Vulnerability ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.VulId = null;
@@ -11034,13 +11202,17 @@ class CKafkaRouteInfo extends  AbstractModel {
         this.Vip = null;
 
         /**
-         * Virtual IP Type
+         * Virtual IP address type. 1: public network TGW; 2: basic network; 3: VPC; 4: supporting network (standard edition); 5: SSL public network access; 6: VPC in the bare metal environment; 7: supporting network (Pro).
          * @type {number || null}
          */
         this.VipType = null;
 
         /**
          * Access type
+0: PLAINTEXT (plaintext mode, no user information included, supported by older versions and community edition)
+1: SASL_PLAINTEXT (plaintext mode, however, login authentication with SASL is performed at the start of data transmission, only supported by community version)
+2: SSL (SSL encrypted communication, no user information included, supported by older versions and community edition)
+3: SASL_SSL (SSL encrypted communication. Authenticate the login with SASL when data transmission starts. Only supported by community version)
          * @type {number || null}
          */
         this.AccessType = null;
@@ -11073,7 +11245,7 @@ class SeparateMalwaresResponse extends  AbstractModel {
         super();
 
         /**
-         * Successfully isolated arrays of IDs; if none, an empty array is returned.
+         * Successfully isolated arrays of IDs; if no array is successfully isolated, an empty array is returned.
          * @type {Array.<number> || null}
          */
         this.SuccessIds = null;
@@ -11305,7 +11477,12 @@ class CheckBashPolicyParamsRequest extends  AbstractModel {
         super();
 
         /**
-         * Verify content Name or Rule. (Use a comma to separate them if both need to be verified.)
+         * Verify content field, use commas to separate if necessary to detect multiple fields
+<li>Name Policy name</li>
+<li>Process</li>
+<li>Name PProcess Parent process</li>
+<li>Name AProcess Ancestor process</li>
+
          * @type {string || null}
          */
         this.CheckField = null;
@@ -11323,7 +11500,8 @@ class CheckBashPolicyParamsRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * The regular expression to be entered by the user: It must match command content corresponding to the submitted EventId.
+         * This field is not in maintenance. If you fill in this parameter, it will automatically replace to Rules.Process.
+
          * @type {string || null}
          */
         this.Rule = null;
@@ -11333,6 +11511,12 @@ class CheckBashPolicyParamsRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Id = null;
+
+        /**
+         * Rule expression
+         * @type {PolicyRules || null}
+         */
+        this.Rules = null;
 
     }
 
@@ -11348,6 +11532,12 @@ class CheckBashPolicyParamsRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Rule = 'Rule' in params ? params.Rule : null;
         this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.Rules) {
+            let obj = new PolicyRules();
+            obj.deserialize(params.Rules)
+            this.Rules = obj;
+        }
 
     }
 }
@@ -11563,6 +11753,41 @@ class DescribeAssetTypeTopRequest extends  AbstractModel {
 }
 
 /**
+ * ExportRansomDefenseStrategyMachines response structure.
+ * @class
+ */
+class ExportRansomDefenseStrategyMachinesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID, required for obtaining the DownloadURL at API Asynchronous Export Task ExportTasks
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CheckFileTamperRule response structure.
  * @class
  */
@@ -11684,7 +11909,6 @@ class DescribeAssetJarListResponse extends  AbstractModel {
 
         /**
          * Application list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetJarBaseInfo> || null}
          */
         this.Jars = null;
@@ -11833,8 +12057,7 @@ class DescribeWebHookPolicyResponse extends  AbstractModel {
         super();
 
         /**
-         * Policy list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Policy List
          * @type {Array.<WebHookPolicy> || null}
          */
         this.List = null;
@@ -11914,22 +12137,19 @@ class BanWhiteList extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * Machine associated with the allowlist
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Machine associated with the allowlist.
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
-         * Whether the allowlist is global
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether the allowlist takes effect globally
          * @type {boolean || null}
          */
         this.IsGlobal = null;
 
         /**
          * Machine list associated with the allowlist
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Quuids = null;
@@ -12076,22 +12296,19 @@ class AssetJarDetail extends  AbstractModel {
         this.OsInfo = null;
 
         /**
-         * Reference process list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Reference process list.
          * @type {Array.<AssetAppProcessInfo> || null}
          */
         this.Process = null;
 
         /**
-         * Jar package Md5
-Note: This field may return null, indicating that no valid values can be obtained.
+         * JAR package Md5
          * @type {string || null}
          */
         this.Md5 = null;
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -12124,6 +12341,56 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.Md5 = 'Md5' in params ? params.Md5 : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * DescribeVulDefenceSettingList request structure.
+ * @class
+ */
+class DescribeVulDefenceSettingListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter condition: Switch, Keywords.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Data offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Data limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -12206,13 +12473,13 @@ class ReverseShellEventInfo extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Yunjing UUID
+         * Host Security UUID
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
-         * Host ID
+         * Host UUID
          * @type {string || null}
          */
         this.Quuid = null;
@@ -12314,8 +12581,7 @@ class ReverseShellEventInfo extends  AbstractModel {
         this.DetectBy = null;
 
         /**
-         * Process tree json; pid: process ID; exe: file path; account: groups and users to which the process belongs; cmdline: execute commands; ssh_service: ssh service IP, ssh_source: log-in source
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Process tree json pid: process ID; exe: file path; account: groups and users to which the process belongs; cmdline: execute commands; ssh_service: SSH service IP; ssh_source: log-in source
          * @type {string || null}
          */
         this.PsTree = null;
@@ -12362,6 +12628,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ModifyTime = null;
 
+        /**
+         * Escaped content of command details. It is used when regular expressions match allowlisted full strings.
+         * @type {string || null}
+         */
+        this.CmdLineQuote = null;
+
+        /**
+         * Risk level
+         * @type {number || null}
+         */
+        this.RiskLevel = null;
+
     }
 
     /**
@@ -12398,6 +12676,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
         this.MachineStatus = 'MachineStatus' in params ? params.MachineStatus : null;
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.CmdLineQuote = 'CmdLineQuote' in params ? params.CmdLineQuote : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
 
     }
 }
@@ -12498,7 +12778,7 @@ class ModifyWarningHostConfigRequest extends  AbstractModel {
         this.ItemLabelIds = null;
 
         /**
-         * Machines to be excluded
+         * List of machines to be excluded.
          * @type {Array.<string> || null}
          */
         this.ExcludedQuuids = null;
@@ -12565,6 +12845,153 @@ class ExportMalwaresResponse extends  AbstractModel {
 }
 
 /**
+ * Application defense overview information
+ * @class
+ */
+class RaspEventOverview extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of protectable vulnerabilities
+         * @type {number || null}
+         */
+        this.DefenceVuls = null;
+
+        /**
+         * Number of accurately prevented vulnerabilities
+         * @type {number || null}
+         */
+        this.PreciseDefenseVuls = null;
+
+        /**
+         * Unprocessed application defense event count
+         * @type {number || null}
+         */
+        this.UnhandledRaspEvents = null;
+
+        /**
+         * Number of unprocessed Java Webshell scan events
+         * @type {number || null}
+         */
+        this.UnhandledMemShellScanEvents = null;
+
+        /**
+         * Number of unprocessed memory shell injection events
+         * @type {number || null}
+         */
+        this.UnhandledMemShellInjectEvents = null;
+
+        /**
+         * Daily event handling trend
+         * @type {Array.<number> || null}
+         */
+        this.UnHandledEvents = null;
+
+        /**
+         * Daily vulnerability detect event trend
+         * @type {Array.<number> || null}
+         */
+        this.RaspAttackCounts = null;
+
+        /**
+         * Daily vulnerability defense event trend
+         * @type {Array.<number> || null}
+         */
+        this.RaspDefendCounts = null;
+
+        /**
+         * Daily Java Webshell detect event trend
+         * @type {Array.<number> || null}
+         */
+        this.MemShellAttackCounts = null;
+
+        /**
+         * Daily Java Webshell defense event trends
+         * @type {Array.<number> || null}
+         */
+        this.MemShellDefendCounts = null;
+
+        /**
+         * Date
+         * @type {Array.<string> || null}
+         */
+        this.Date = null;
+
+        /**
+         * Enable RASP protection switch number of assets
+         * @type {number || null}
+         */
+        this.ProtectAssetOpenCount = null;
+
+        /**
+         * Total number of assets
+         * @type {number || null}
+         */
+        this.ProtectAssetCount = null;
+
+        /**
+         * Number of asset protection bound to the flagship edition
+         * @type {number || null}
+         */
+        this.UltimateAssetCount = null;
+
+        /**
+         * Number of assets bound to the Prioritized Protection package
+         * @type {number || null}
+         */
+        this.RaspAssetCount = null;
+
+        /**
+         * Number of unauthorized assets
+         * @type {number || null}
+         */
+        this.NotProtectAssetCount = null;
+
+        /**
+         * Pending events count in the last 7 days
+         * @type {number || null}
+         */
+        this.RecentUnhandledEvents = null;
+
+        /**
+         * Total Number of Successful Defenses
+         * @type {number || null}
+         */
+        this.RaspDefendCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DefenceVuls = 'DefenceVuls' in params ? params.DefenceVuls : null;
+        this.PreciseDefenseVuls = 'PreciseDefenseVuls' in params ? params.PreciseDefenseVuls : null;
+        this.UnhandledRaspEvents = 'UnhandledRaspEvents' in params ? params.UnhandledRaspEvents : null;
+        this.UnhandledMemShellScanEvents = 'UnhandledMemShellScanEvents' in params ? params.UnhandledMemShellScanEvents : null;
+        this.UnhandledMemShellInjectEvents = 'UnhandledMemShellInjectEvents' in params ? params.UnhandledMemShellInjectEvents : null;
+        this.UnHandledEvents = 'UnHandledEvents' in params ? params.UnHandledEvents : null;
+        this.RaspAttackCounts = 'RaspAttackCounts' in params ? params.RaspAttackCounts : null;
+        this.RaspDefendCounts = 'RaspDefendCounts' in params ? params.RaspDefendCounts : null;
+        this.MemShellAttackCounts = 'MemShellAttackCounts' in params ? params.MemShellAttackCounts : null;
+        this.MemShellDefendCounts = 'MemShellDefendCounts' in params ? params.MemShellDefendCounts : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.ProtectAssetOpenCount = 'ProtectAssetOpenCount' in params ? params.ProtectAssetOpenCount : null;
+        this.ProtectAssetCount = 'ProtectAssetCount' in params ? params.ProtectAssetCount : null;
+        this.UltimateAssetCount = 'UltimateAssetCount' in params ? params.UltimateAssetCount : null;
+        this.RaspAssetCount = 'RaspAssetCount' in params ? params.RaspAssetCount : null;
+        this.NotProtectAssetCount = 'NotProtectAssetCount' in params ? params.NotProtectAssetCount : null;
+        this.RecentUnhandledEvents = 'RecentUnhandledEvents' in params ? params.RecentUnhandledEvents : null;
+        this.RaspDefendCount = 'RaspDefendCount' in params ? params.RaspDefendCount : null;
+
+    }
+}
+
+/**
  * DescribeScanVulSetting request structure.
  * @class
  */
@@ -12621,8 +13048,7 @@ class KeyValueInfo extends  AbstractModel {
         this.CaseSensitive = null;
 
         /**
-         * Information about the key-value pair to be indexed
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Information about the key-value pair that requires index creation.
          * @type {Array.<KeyValueArrayInfo> || null}
          */
         this.KeyValues = null;
@@ -12679,6 +13105,41 @@ class StartBaselineDetectRequest extends  AbstractModel {
             obj.deserialize(params.Param)
             this.Param = obj;
         }
+
+    }
+}
+
+/**
+ * ExportAssetUserList response structure.
+ * @class
+ */
+class ExportAssetUserListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of asynchronous download task. It is used together with ExportTasks API.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12994,7 +13455,6 @@ class DescribeAssetPlanTaskListResponse extends  AbstractModel {
 
         /**
          * List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetPlanTask> || null}
          */
         this.Tasks = null;
@@ -13101,6 +13561,90 @@ class DescribeBaselineRuleRequest extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
+
+    }
+}
+
+/**
+ * Custom passthrough field structure
+ * @class
+ */
+class WebHookCustomField extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * List of vulnerabilities in a RASP allowlist.
+ * @class
+ */
+class RaspRuleVul extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Vulnerability ID
+         * @type {number || null}
+         */
+        this.VulVulsID = null;
+
+        /**
+         * Vulnerability name
+         * @type {string || null}
+         */
+        this.VulVulsName = null;
+
+        /**
+         * cve_id
+         * @type {string || null}
+         */
+        this.CveID = null;
+
+        /**
+         * Vulnerability defense type, which comes from the vulnerability table. 1: component vulnerability defense supported, with component vulnerabilities not allowlisted through a regular expression; 2: regular expression defense supported.
+         * @type {number || null}
+         */
+        this.SupportDefense = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VulVulsID = 'VulVulsID' in params ? params.VulVulsID : null;
+        this.VulVulsName = 'VulVulsName' in params ? params.VulVulsName : null;
+        this.CveID = 'CveID' in params ? params.CveID : null;
+        this.SupportDefense = 'SupportDefense' in params ? params.SupportDefense : null;
 
     }
 }
@@ -13267,12 +13811,18 @@ class DescribeAssetMachineDetailRequest extends  AbstractModel {
 }
 
 /**
- * CancelIgnoreVul response structure.
+ * GetLocalStorageItem response structure.
  * @class
  */
-class CancelIgnoreVulResponse extends  AbstractModel {
+class GetLocalStorageItemResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Value
+         * @type {string || null}
+         */
+        this.Value = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -13289,6 +13839,7 @@ class CancelIgnoreVulResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Value = 'Value' in params ? params.Value : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -13318,34 +13869,6 @@ class DescribeSecurityBroadcastInfoRequest extends  AbstractModel {
             return;
         }
         this.Id = 'Id' in params ? params.Id : null;
-
-    }
-}
-
-/**
- * IgnoreImpactedHosts response structure.
- * @class
- */
-class IgnoreImpactedHostsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13394,15 +13917,13 @@ class DescribeRansomDefenseStrategyMachinesResponse extends  AbstractModel {
         super();
 
         /**
-         * Host list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of hosts
          * @type {Array.<RansomDefenseStrategyMachineDetail> || null}
          */
         this.List = null;
 
         /**
          * Total number of pagination query records
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -13447,7 +13968,6 @@ class ExportRansomDefenseEventsListResponse extends  AbstractModel {
 
         /**
          * Task ID, required for obtaining the DownloadURL at API Asynchronous Export Task ExportTasks
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -13514,6 +14034,76 @@ class DescribeAssetMachineDetailResponse extends  AbstractModel {
 }
 
 /**
+ * Vulnerability information associated with Windows patches
+ * @class
+ */
+class RelateVulInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CVEid
+         * @type {string || null}
+         */
+        this.CveId = null;
+
+        /**
+         * Vulnerability name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Vulnerability tag
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * Vulnerability level
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * CVSS score
+         * @type {number || null}
+         */
+        this.CVSS = null;
+
+        /**
+         * Vulnerability disclosure time
+         * @type {string || null}
+         */
+        this.PublishTime = null;
+
+        /**
+         * Vulnerability ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CveId = 'CveId' in params ? params.CveId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.CVSS = 'CVSS' in params ? params.CVSS : null;
+        this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * DescribeRansomDefenseStrategyList response structure.
  * @class
  */
@@ -13522,15 +14112,13 @@ class DescribeRansomDefenseStrategyListResponse extends  AbstractModel {
         super();
 
         /**
-         * Policy list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Policy List
          * @type {Array.<RansomDefenseStrategy> || null}
          */
         this.List = null;
 
         /**
          * Total number of pagination query records
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -13631,6 +14219,71 @@ class DeleteNetAttackWhiteListRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRaspEventCWP request structure.
+ * @class
+ */
+class DescribeRaspEventCWPRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter criteria: Keywords: ip or hostname, VulKeywords vulnerability name or CveId for fuzzy query; AttackTypeKeywords attack type for fuzzy query; Quuid, VulId, EventType, Status for precise match, CreateBeginTime, CreateEndTime time period query.
+Source is case-sensitive for memory shell injection and vulnerability defense, rasp: vulnerability defense, memshell_inject: memory shell injection
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Data offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Data limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Sorting method (case insensitive): asc for ascending order; desc for descending order
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sort columns, which are strictly equal: CreateTime for creation time, MergeTime for merge time, and Count for event count
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
  * Account change history data
  * @class
  */
@@ -13663,7 +14316,7 @@ class HistoryAccount extends  AbstractModel {
         this.MachineName = null;
 
         /**
-         * Username
+         * Account name.
          * @type {string || null}
          */
         this.Username = null;
@@ -13713,7 +14366,6 @@ class DescribeStrategyExistResponse extends  AbstractModel {
 
         /**
          * Whether the policy exists. 1: yes; 0: no.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.IfExist = null;
@@ -13753,6 +14405,12 @@ class DeleteReverseShellEventsRequest extends  AbstractModel {
          */
         this.Ids = null;
 
+        /**
+         * Whether to delete all.
+         * @type {boolean || null}
+         */
+        this.All = null;
+
     }
 
     /**
@@ -13763,6 +14421,7 @@ class DeleteReverseShellEventsRequest extends  AbstractModel {
             return;
         }
         this.Ids = 'Ids' in params ? params.Ids : null;
+        this.All = 'All' in params ? params.All : null;
 
     }
 }
@@ -13860,8 +14519,7 @@ class DescribeVulTopResponse extends  AbstractModel {
         super();
 
         /**
-         * List of top vulnerabilities
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of top vulnerabilities.
          * @type {Array.<VulTopInfo> || null}
          */
         this.VulTopList = null;
@@ -13922,8 +14580,7 @@ class TaskStatus extends  AbstractModel {
         this.Fail = null;
 
         /**
-         * Scan failed, with specific reason displayed: scan timeout, low client version, or client offline
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Scan failed, with specific reason displayed: scan timeout, low client version, or client offline.
          * @type {string || null}
          */
         this.Stop = null;
@@ -13998,7 +14655,6 @@ class DescribeAssetWebServiceProcessListResponse extends  AbstractModel {
 
         /**
          * Process list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetAppProcessInfo> || null}
          */
         this.Process = null;
@@ -14077,7 +14733,6 @@ class ExportRansomDefenseStrategyListResponse extends  AbstractModel {
 
         /**
          * Task ID, required for obtaining the DownloadURL at API Asynchronous Export Task ExportTasks
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -14104,18 +14759,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * IgnoreImpactedHosts request structure.
+ * ModifyRaspMaxCpu response structure.
  * @class
  */
-class IgnoreImpactedHostsRequest extends  AbstractModel {
+class ModifyRaspMaxCpuResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Vulnerability ID array
-         * @type {Array.<number> || null}
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Ids = null;
+        this.RequestId = null;
 
     }
 
@@ -14126,7 +14781,7 @@ class IgnoreImpactedHostsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = 'Ids' in params ? params.Ids : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14152,7 +14807,7 @@ class SearchLogRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Statement for search and analysis, with a maximum length of 12 KB
+         * The retrieval analysis statement has a maximum length of 12KB. Refer to the query syntax in the referenced document https://www.tencentcloud.com/document/product/296/50508.?from_cn_redirect=1
          * @type {string || null}
          */
         this.QueryString = null;
@@ -14203,7 +14858,7 @@ class DescribeBaselineWeakPasswordListRequest extends  AbstractModel {
         super();
 
         /**
-         * <li>WeakPassword - string - required: no - weak password</li>
+         * <li>WeakPassword - string - required: no - weak password</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -14221,13 +14876,13 @@ class DescribeBaselineWeakPasswordListRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Sorting order [ASC: ascending|DESC: descending]
+         * Sorting order [ASC: ascending|DESC: descending]
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * Sorting column [CreateTime|ModifyTime]
+         * Sorting column [CreateTime|ModifyTime]
          * @type {string || null}
          */
         this.By = null;
@@ -14363,7 +15018,7 @@ class VulDefenceEvent extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 0: Pro Edition; 1: Ultimate Edition; 2: LH Inclusive Edition (for Lighthouse only); 3: CVM Inclusive Edition (for CVM only).
+         * 0: Pro Edition; 1: Flagship Edition; 2: LH Light Edition (for Lighthouse only); 3: CVM Light Edition (for CVM only).
          * @type {number || null}
          */
         this.UpgradeType = null;
@@ -14382,7 +15037,6 @@ class VulDefenceEvent extends  AbstractModel {
 
         /**
          * Host Additional Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -14521,7 +15175,7 @@ class ExportBaselineFixListRequest extends  AbstractModel {
         super();
 
         /**
-         * <li>ItemName - String - required: no - item name</li>
+         * <li>ItemName - String - required: no - item name</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -14624,13 +15278,13 @@ class AssetUserDetail extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Account type. 0: guest user; 1: standard user; 2: administrator user; 999: null (Windows only).
+         * Account type. 0: guest user; 1: standard user; 2: administrator user; 999: null (for Windows only).
          * @type {number || null}
          */
         this.UserType = null;
 
         /**
-         * Whether the account is a domain account. 0: no; 1: yes; 999: null (Windows only).
+         * Whether it is a domain account: 0: no; 1: yes; 999: null (for Windows only).
          * @type {number || null}
          */
         this.IsDomain = null;
@@ -14726,14 +15380,13 @@ class AssetUserDetail extends  AbstractModel {
         this.PasswordChangeType = null;
 
         /**
-         * User public key listNote: This field may return null, indicating that no valid values can be obtained.
+         * User public key list.
          * @type {Array.<AssetUserKeyInfo> || null}
          */
         this.Keys = null;
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -14854,7 +15507,6 @@ class DescribeFileTamperEventsResponse extends  AbstractModel {
 
         /**
          * Core File Event List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<FileTamperEvent> || null}
          */
         this.List = null;
@@ -14931,63 +15583,30 @@ class DescribeVulLabelsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeMachines request structure.
+ * DescribeLoginTypeHost response structure.
  * @class
  */
-class DescribeMachinesRequest extends  AbstractModel {
+class DescribeLoginTypeHostResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Type of the machine's zone
-CVM: Cloud Virtual Machine
-BM: BMECM: Edge Computing Machine
-LH: Lighthouse
-Other: Hybrid Cloud Zone
-         * @type {string || null}
-         */
-        this.MachineType = null;
-
-        /**
-         * Machine region. For example, ap-guangzhou and ap-shanghai.
-         * @type {string || null}
-         */
-        this.MachineRegion = null;
-
-        /**
-         * Number of returns. It is 10 by default, and the maximum value is 100.
+         * Total number
          * @type {number || null}
          */
-        this.Limit = null;
+        this.Total = null;
 
         /**
-         * Offset. Default value: 0.
-         * @type {number || null}
+         * List of hosts
+         * @type {Array.<ClientSettingHost> || null}
          */
-        this.Offset = null;
+        this.List = null;
 
         /**
-         * Filter criteria
-<li>Ips - String - required: no - query by IP</li>
-<li>Names - String - required: no - query by instance name</li>
-<li>InstanceIds - String - required: no - instance ID for query </li>
-<li>Status - String - required: no - client online status (OFFLINE: offline/shut down | ONLINE: online | UNINSTALLED: not installed | AGENT_OFFLINE: agent offline | AGENT_SHUTDOWN: agent shut down)</li>
-<li>Version - String required: no - current edition ( PRO_VERSION: Pro Edition | BASIC_VERSION: Basic Edition | Flagship: Ultimate Edition | ProtectedMachines: Pro + Ultimate Editions)</li>
-<li>Risk - String - required: no - risky host (yes)</li>
-<li>Os - String - required: no - operating system (value of DescribeMachineOsList)</li>
-Each filter criterion supports only one value.
-<li>Quuid - String - required: no - CVM instance UUID. Maximum value: 100.</li>
-<li>AddedOnTheFifteen - String required: no - whether to query only hosts added within the last 15 days (1: yes) </li>
-<li> TagId - String required: no - query the list of hosts associated with the specified tag </li>
-         * @type {Array.<Filter> || null}
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Filters = null;
-
-        /**
-         * ID List of Businesses to which machines belong
-         * @type {Array.<number> || null}
-         */
-        this.ProjectIds = null;
+        this.RequestId = null;
 
     }
 
@@ -14998,20 +15617,17 @@ Each filter criterion supports only one value.
         if (!params) {
             return;
         }
-        this.MachineType = 'MachineType' in params ? params.MachineType : null;
-        this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Total = 'Total' in params ? params.Total : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ClientSettingHost();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
             }
         }
-        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15026,14 +15642,12 @@ class DescribeRansomDefenseBackupListResponse extends  AbstractModel {
 
         /**
          * Backup list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RansomDefenseBackup> || null}
          */
         this.List = null;
 
         /**
          * Total number of pagination query records
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -15391,7 +16005,7 @@ class ScanTaskDetails extends  AbstractModel {
         this.Quuid = null;
 
         /**
-         * Status code
+         * Status code: Scanning; Ok; Fail.
          * @type {string || null}
          */
         this.Status = null;
@@ -15409,7 +16023,7 @@ class ScanTaskDetails extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Failure details
+         * Failure type. 3: offline; 4: timeout; 5: failed; 8: early agent version.
          * @type {number || null}
          */
         this.FailType = null;
@@ -15422,7 +16036,6 @@ class ScanTaskDetails extends  AbstractModel {
 
         /**
          * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -15545,6 +16158,62 @@ class DescribeMalwareInfoRequest extends  AbstractModel {
 }
 
 /**
+ * ScanBaseline request structure.
+ * @class
+ */
+class ScanBaselineRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID array (Either StrategyIdList, CategoryIdList, or RuleIdList must be selected.)
+         * @type {Array.<number> || null}
+         */
+        this.StrategyIdList = null;
+
+        /**
+         * Baseline ID array (Either StrategyIdList, CategoryIdList, or RuleIdList must be selected.)
+         * @type {Array.<number> || null}
+         */
+        this.CategoryIdList = null;
+
+        /**
+         * Detection item ID array (Either StrategyIdList, CategoryIdList, or RuleIdList must be selected.)
+         * @type {Array.<number> || null}
+         */
+        this.RuleIdList = null;
+
+        /**
+         * Not required when StrategyIdList is selected, but required in other cases.
+         * @type {Array.<string> || null}
+         */
+        this.QuuidList = null;
+
+        /**
+         * Host UUID array
+         * @type {Array.<string> || null}
+         */
+        this.UuidList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StrategyIdList = 'StrategyIdList' in params ? params.StrategyIdList : null;
+        this.CategoryIdList = 'CategoryIdList' in params ? params.CategoryIdList : null;
+        this.RuleIdList = 'RuleIdList' in params ? params.RuleIdList : null;
+        this.QuuidList = 'QuuidList' in params ? params.QuuidList : null;
+        this.UuidList = 'UuidList' in params ? params.UuidList : null;
+
+    }
+}
+
+/**
  * DescribeVersionStatistics request structure.
  * @class
  */
@@ -15601,18 +16270,36 @@ class DescribeLogTypeResponse extends  AbstractModel {
 }
 
 /**
- * ModifyRiskDnsPolicyStatus response structure.
+ * Log details
  * @class
  */
-class ModifyRiskDnsPolicyStatusResponse extends  AbstractModel {
+class LogInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * JSON serialized string of the log content
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Content = null;
+
+        /**
+         * Log file name
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Log source IP address
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * Log time, in milliseconds
+         * @type {number || null}
+         */
+        this.TimeStamp = null;
 
     }
 
@@ -15623,7 +16310,10 @@ class ModifyRiskDnsPolicyStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.TimeStamp = 'TimeStamp' in params ? params.TimeStamp : null;
 
     }
 }
@@ -15831,7 +16521,7 @@ class MachineSimple extends  AbstractModel {
         this.MachineOs = null;
 
         /**
-         * Yunjing client UUID. If the client is offline for a long time, an empty string is returned.
+         * CWP UUID. If the CWP client is offline for a long time, an empty character is returned.
          * @type {string || null}
          */
         this.Uuid = null;
@@ -15883,7 +16573,8 @@ class MachineSimple extends  AbstractModel {
         this.RegionInfo = null;
 
         /**
-         * Instance status. TERMINATED_PRO_VERSION: terminated.
+         * Refer to the instance status in the CVM instance list for the InstanceState value.
+https://www.tencentcloud.com/document/api/213/15753?from_cn_redirect=1#Instance
          * @type {string || null}
          */
         this.InstanceState = null;
@@ -15907,28 +16598,25 @@ class MachineSimple extends  AbstractModel {
         this.KernelVersion = null;
 
         /**
-         * Protection Edition. BASIC_VERSION: Basic Edition; PRO_VERSION: Professional Edition; Flagship: Premium Edition; GENERAL_DISCOUNT: General Discount Edition
+         * Protection version: BASIC_VERSION - Basic Edition; PRO_VERSION - Professional Edition; Flagship - Ultimate Edition; GENERAL_DISCOUNT - Lightweight Edition
          * @type {string || null}
          */
         this.ProtectType = null;
 
         /**
          * Authorization order object
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {LicenseOrder || null}
          */
         this.LicenseOrder = null;
 
         /**
          * Cloud Tag Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Tags> || null}
          */
         this.CloudTags = null;
 
         /**
          * Instance ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -15986,6 +16674,55 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * Log-in location information
+ * @class
+ */
+class Place extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * City ID
+         * @type {number || null}
+         */
+        this.CityId = null;
+
+        /**
+         * Province ID
+         * @type {number || null}
+         */
+        this.ProvinceId = null;
+
+        /**
+         * Country ID. Currently, only 1 is supported, indicating domestic.
+         * @type {number || null}
+         */
+        this.CountryId = null;
+
+        /**
+         * Location name
+         * @type {string || null}
+         */
+        this.Location = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CityId = 'CityId' in params ? params.CityId : null;
+        this.ProvinceId = 'ProvinceId' in params ? params.ProvinceId : null;
+        this.CountryId = 'CountryId' in params ? params.CountryId : null;
+        this.Location = 'Location' in params ? params.Location : null;
 
     }
 }
@@ -16051,6 +16788,98 @@ class DescribeReverseShellEventsRequest extends  AbstractModel {
         }
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * DescribePatchInfo response structure.
+ * @class
+ */
+class DescribePatchInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * kb No.
+         * @type {string || null}
+         */
+        this.KbNo = null;
+
+        /**
+         * kb name
+         * @type {string || null}
+         */
+        this.PatchName = null;
+
+        /**
+         * kb release date
+         * @type {string || null}
+         */
+        this.PublishTime = null;
+
+        /**
+         * Reference link
+         * @type {string || null}
+         */
+        this.ReferUrl = null;
+
+        /**
+         * Number of vulnerabilities
+         * @type {number || null}
+         */
+        this.VulCount = null;
+
+        /**
+         * List of vulnerability details associated with the patch
+         * @type {Array.<RelateVulInfo> || null}
+         */
+        this.RelateVulInfoList = null;
+
+        /**
+         * Patch ID
+         * @type {number || null}
+         */
+        this.KbId = null;
+
+        /**
+         * Associated vulnerability CveId, multiple IDs split by ","
+         * @type {string || null}
+         */
+        this.RelateVulCveId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbNo = 'KbNo' in params ? params.KbNo : null;
+        this.PatchName = 'PatchName' in params ? params.PatchName : null;
+        this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
+        this.ReferUrl = 'ReferUrl' in params ? params.ReferUrl : null;
+        this.VulCount = 'VulCount' in params ? params.VulCount : null;
+
+        if (params.RelateVulInfoList) {
+            this.RelateVulInfoList = new Array();
+            for (let z in params.RelateVulInfoList) {
+                let obj = new RelateVulInfo();
+                obj.deserialize(params.RelateVulInfoList[z]);
+                this.RelateVulInfoList.push(obj);
+            }
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.RelateVulCveId = 'RelateVulCveId' in params ? params.RelateVulCveId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -16143,7 +16972,6 @@ class FileTamperRuleInfo extends  AbstractModel {
 
         /**
          * Rule name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
@@ -16156,7 +16984,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Number of affected hosts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.HostCount = null;
@@ -16198,22 +17025,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Level = null;
 
         /**
-         * Number of write entries for the sub-rule
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of write entries for a subrule.
          * @type {number || null}
          */
         this.WriteRuleCount = null;
 
         /**
-         * Number of read entries for the sub-rule
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of read entries for a subrule.
          * @type {number || null}
          */
         this.ReadRuleCount = null;
 
         /**
-         * Number of read and write entries for the sub-rule
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of read and write entries for a subrule.
          * @type {number || null}
          */
         this.ReadWriteRuleCount = null;
@@ -16223,16 +17047,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
 <li>read: read file</li>
 <li>write: modify file</li>
 <li>read-write: read and modify file</li>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FileAction = null;
 
         /**
          * Allowlisted processing type
-<li>cur: add the current items to the allowlist</li>
-<li>all: add all items that meet the conditions to the allowlist</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+<li>cur: add only the current item to an allowlist</li>
+<li>all: add all objects that meet the conditions to the allowlist</li>
          * @type {string || null}
          */
         this.AddWhiteType = null;
@@ -16315,7 +17137,7 @@ class ModifyLogStorageConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Whether to modify the validity period
+         * Whether to modify the validity period (deprecated).
          * @type {boolean || null}
          */
         this.IsModifyPeriod = null;
@@ -16327,10 +17149,22 @@ class ModifyLogStorageConfigRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Log retention days. The value 3640 indicates that the number of days is unlimited.
+         * Log retention time. The value 3640 indicates that the time is unlimited.
          * @type {number || null}
          */
         this.Period = null;
+
+        /**
+         * Log storage duration unit: year/month/day
+         * @type {string || null}
+         */
+        this.Granularity = null;
+
+        /**
+         * Language type
+         * @type {string || null}
+         */
+        this.MsgLanguage = null;
 
     }
 
@@ -16344,6 +17178,8 @@ class ModifyLogStorageConfigRequest extends  AbstractModel {
         this.IsModifyPeriod = 'IsModifyPeriod' in params ? params.IsModifyPeriod : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Period = 'Period' in params ? params.Period : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
+        this.MsgLanguage = 'MsgLanguage' in params ? params.MsgLanguage : null;
 
     }
 }
@@ -16796,14 +17632,12 @@ class DescribeAssetWebLocationPathListResponse extends  AbstractModel {
 
         /**
          * Total number
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Total = null;
 
         /**
          * List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetWebLocationPath> || null}
          */
         this.Paths = null;
@@ -16878,42 +17712,36 @@ class RansomDefenseStrategyMachineDetail extends  AbstractModel {
 
         /**
          * Public IP address
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MachineWanIp = null;
 
         /**
-         * Cloud tag
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Cloud Tag
          * @type {Array.<Tag> || null}
          */
         this.CloudTags = null;
 
         /**
          * Availability zone information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {RegionInfo || null}
          */
         this.RegionInfo = null;
 
         /**
-         * CWPP tag
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host security tag
          * @type {Array.<MachineTag> || null}
          */
         this.Tag = null;
 
         /**
          * Protection status: 0 Disabled, 1 Enabled.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
          * Policy ID. 0 indicates no binding to any policy.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.StrategyId = null;
@@ -16921,23 +17749,27 @@ Note: This field may return null, indicating that no valid values can be obtaine
         /**
          * Hard disk information, all hard disks take effect when left blank:
 Separate diskId1|diskName1;diskId2|diskName2
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DiskInfo = null;
 
         /**
-         * Edition information. 0: Basic Edition; 1: Pro Edition; 2: Ultimate Edition; 3: Inclusive Edition.Note: This field may return null, indicating that no valid values can be obtained.
+         * Version information: 0-Basic version, 1-Pro edition, 2-Flagship edition, 3-Lightweight edition
          * @type {number || null}
          */
         this.HostVersion = null;
 
         /**
          * Policy name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StrategyName = null;
+
+        /**
+         * Machine Zone Type. CVM - Cloud Virtual Machine; BM: Bare Metal; ECM: Edge Computing Machine; LH: Lightweight Application Server; Other: Hybrid Cloud Zone
+         * @type {string || null}
+         */
+        this.MachineType = null;
 
     }
 
@@ -16983,6 +17815,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DiskInfo = 'DiskInfo' in params ? params.DiskInfo : null;
         this.HostVersion = 'HostVersion' in params ? params.HostVersion : null;
         this.StrategyName = 'StrategyName' in params ? params.StrategyName : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
 
     }
 }
@@ -17086,6 +17919,57 @@ class BruteAttackRuleList extends  AbstractModel {
 }
 
 /**
+ * DescribeVulDefenceSettingList response structure.
+ * @class
+ */
+class DescribeVulDefenceSettingListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of data
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Vulnerability defense settings list.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<VulDefenceSetting> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VulDefenceSetting();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ExportFileTamperEvents response structure.
  * @class
  */
@@ -17129,10 +18013,7 @@ class DescribeBanStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * Blocking enabling status:
-0: disabled 
-1: advanced blocking
-2: basic blocking (block only malicious IP addresses in the intelligence database)
+         * (Abandoned) Block switch status: 0 -- Off 1 -- Advanced blocking 2 -- Basic block (blocklist IPs in the intelligence database)
          * @type {number || null}
          */
         this.Status = null;
@@ -17148,6 +18029,24 @@ class DescribeBanStatusResponse extends  AbstractModel {
          * @type {boolean || null}
          */
         this.OpenSmartMode = null;
+
+        /**
+         * Whether intelligence IP blocking is enabled
+         * @type {boolean || null}
+         */
+        this.BanBlackIp = null;
+
+        /**
+         * Whether vulnerability IP blocking is enabled
+         * @type {boolean || null}
+         */
+        this.BanVulIp = null;
+
+        /**
+         * Whether to enable rule blocking
+         * @type {boolean || null}
+         */
+        this.BanByRule = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -17167,6 +18066,9 @@ class DescribeBanStatusResponse extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.ShowTips = 'ShowTips' in params ? params.ShowTips : null;
         this.OpenSmartMode = 'OpenSmartMode' in params ? params.OpenSmartMode : null;
+        this.BanBlackIp = 'BanBlackIp' in params ? params.BanBlackIp : null;
+        this.BanVulIp = 'BanVulIp' in params ? params.BanVulIp : null;
+        this.BanByRule = 'BanByRule' in params ? params.BanByRule : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -17193,19 +18095,7 @@ class DescribeVulListRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Filter criteria
-<li>Status - String - required: no - processing status: 0: pending; 1: allowlisted; 2: deleted; 3: ignored</li>
-<li>ModifyTime - String - required: no - last occurrence time</li>
-<li>Uuid- String - required: no - query by host UUID</li>
-<li>VulName- string -</li>
-<li>VulCategory- string - required: no - vulnerability category: 1: web CMS vulnerability; 2: application vulnerability; 4: Linux software vulnerability; 5: Windows system vulnerability</li>
-<li>IsSupportDefense - int - required: no - support for defense: 0: not supported; 1: supported</li>
-<li>Labels - string - required: no - tag for search</li>
-<li>IsSupportAutoFix - string - required: no - whether automatic fixing is supported: 0: not supported; 1: supported</li>
-<li>CvssScore - string - required: no - lower limit of CVSS score</li>
-<li>AttackLevel - string - required: no - lower limit of attack level</li>
-
-
+         * Filtering conditions. <li>Status - String - required: no - processing status.  0 - pending processing; 1 - allowlisted; 2 - deleted; 3 - fixed; 5 - detecting; 6 - fixing; 8 - fixing failed.</li><li>ModifyTime - String - required: no - last occurrence time.</li><li>Uuid- String - required: no - Query by host UUID.</li><li>VulName- String -</li><li>VulCategory- String - required: no - vulnerability category. 1: Web-CMS vulnerability; 2: application vulnerability; 4: Linux software vulnerability; 5: Windows system vulnerability.</li><li>IsSupportDefense - int- required: no - whether defense is supported. 0: not supported; 1: supported.</li><li>Labels- string- required: no - search by tag.</li><li>IsSupportAutoFix- string- required: no - whether automatic fixing is supported. 0: not supported; 1: supported.</li><li>CvssScore- string- required: no - lower limit of CVSS score.</li><li>AttackLevel- string- required: no - lower limit of attack level.</li>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
@@ -17308,62 +18198,54 @@ class BaselineInfo extends  AbstractModel {
 
         /**
          * Baseline name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
          * Hazard level: 1-Low-risk; 2-Medium-risk; 3-High-risk; 4-Critical
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Level = null;
 
         /**
          * Number of check items
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RuleCount = null;
 
         /**
          * Number of affected servers
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.HostCount = null;
 
         /**
-         * Pass status. 0: passed; 1: failed.Note: This field may return null, indicating that no valid values can be obtained.
+         * Pass status: 0: Failed, 1: Approved
          * @type {number || null}
          */
         this.Status = null;
 
         /**
          * Baseline ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CategoryId = null;
 
         /**
-         * Last check time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Last detection time
          * @type {string || null}
          */
         this.LastScanTime = null;
 
         /**
-         * 5: checking
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 5: detecting
          * @type {number || null}
          */
         this.MaxStatus = null;
 
         /**
-         * Baseline check items with risks
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Baseline risk items
          * @type {number || null}
          */
         this.BaselineFailCount = null;
@@ -17441,6 +18323,62 @@ class DescribeWebHookReceiverUsageResponse extends  AbstractModel {
 }
 
 /**
+ * vulnerability defense plugin status of a single process
+ * @class
+ */
+class VulDefencePluginDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the injected process
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * Main class name of the injected process
+         * @type {string || null}
+         */
+        this.MainClass = null;
+
+        /**
+         * Plugin status. 0: injecting; 1: injection successful; 2: plugin timed out, 3: plugin exited; 4: injection failed; 5: logically deleted.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error log
+         * @type {string || null}
+         */
+        this.ErrorLog = null;
+
+        /**
+         * Injection log
+         * @type {string || null}
+         */
+        this.InjectLog = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.MainClass = 'MainClass' in params ? params.MainClass : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorLog = 'ErrorLog' in params ? params.ErrorLog : null;
+        this.InjectLog = 'InjectLog' in params ? params.InjectLog : null;
+
+    }
+}
+
+/**
  * Basic information on the resource management process
  * @class
  */
@@ -17486,7 +18424,6 @@ class AssetAppBaseInfo extends  AbstractModel {
 
         /**
          * Host tag
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MachineTag> || null}
          */
         this.Tag = null;
@@ -17555,21 +18492,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Whether the web service is newly added [0: no|1: yes]
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether it is newly added [0: no | 1: yes]
          * @type {number || null}
          */
         this.IsNew = null;
 
         /**
          * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -17713,22 +18647,7 @@ class ExportAssetAppListRequest extends  AbstractModel {
         this.Quuid = null;
 
         /**
-         * Filter criteria
-<li>AppName - string - required: no - application name for search</li>
-<li>IP - String - required: no - host IP address</li>
-<li>MachineName - String - required: no - host name</li>
-<li>InstanceID - string - required: no - instance ID</li>
-<li>Type - int - required: no - type	: Linux only
-0: all
-1: operations
-2: database
-3: Security
-4: suspicious application
-5: system architecture
-6: system application
-7: web service
-99: other</li>
-<li>OsType - uint64 - required: no - Windows/Linux</li>
+         * Filtering conditions.<li>AppName - string - required: no - application name for search.</li><li>IP - String - required: no - host IP address.</li><li>MachineName - String - required: no - host name.</li><li>InstanceID - string - required: no - instance ID.</li><li>Type - int - required: no - Type	: for Linux only. 0: all; 1: Ops; 2: database; 3: security; 4: suspicious application; 5: system architecture; 6: system application; 7: web service; 99: others.</li><li>OsType - uint64 - required: no - Windows or Linux.</li>
          * @type {Array.<AssetFilters> || null}
          */
         this.Filters = null;
@@ -17821,14 +18740,12 @@ class JavaMemShellInfo extends  AbstractModel {
 
         /**
          * Server name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Alias = null;
 
         /**
          * Server IP address
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostIp = null;
@@ -17871,17 +18788,45 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Host Additional Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
 
         /**
          * Server UUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Uuid = null;
+
+        /**
+         * Class name
+         * @type {string || null}
+         */
+        this.ClassName = null;
+
+        /**
+         * Parent class name
+         * @type {string || null}
+         */
+        this.SuperClassName = null;
+
+        /**
+         * Inherited API
+         * @type {string || null}
+         */
+        this.Interfaces = null;
+
+        /**
+         * Annotation
+         * @type {string || null}
+         */
+        this.Annotations = null;
+
+        /**
+         * Associated class loader.
+         * @type {string || null}
+         */
+        this.LoaderClassName = null;
 
     }
 
@@ -17908,6 +18853,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.MachineExtraInfo = obj;
         }
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.ClassName = 'ClassName' in params ? params.ClassName : null;
+        this.SuperClassName = 'SuperClassName' in params ? params.SuperClassName : null;
+        this.Interfaces = 'Interfaces' in params ? params.Interfaces : null;
+        this.Annotations = 'Annotations' in params ? params.Annotations : null;
+        this.LoaderClassName = 'LoaderClassName' in params ? params.LoaderClassName : null;
 
     }
 }
@@ -17928,7 +18878,6 @@ class DescribeAssetSystemPackageListResponse extends  AbstractModel {
 
         /**
          * List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetSystemPackageInfo> || null}
          */
         this.Packages = null;
@@ -17957,6 +18906,46 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.Packages[z]);
                 this.Packages.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRaspEventDetailTCSS response structure.
+ * @class
+ */
+class DescribeRaspEventDetailTCSSResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application protection event details
+         * @type {RaspEventDetail || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new RaspEventDetail();
+            obj.deserialize(params.Data)
+            this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -17994,6 +18983,72 @@ class ExportAssetWebFrameListResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Security event message data
+ * @class
+ */
+class SecurityDynamic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CWPP client UUID
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * Security event occurrence time
+         * @type {string || null}
+         */
+        this.EventTime = null;
+
+        /**
+         * Security event type
+<li>MALWARE: Trojan event</li>
+<li>NON_LOCAL_LOGIN: cross-region log-in</li>
+<li>BRUTEATTACK_SUCCESS: successful password cracking</li>
+<li>VUL: vulnerability</li>
+<li>BASELINE: security baseline</li>
+         * @type {string || null}
+         */
+        this.EventType = null;
+
+        /**
+         * Security event message
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Security event level
+<li>RISK: critical</li>
+<li>HIGH: high-risk</li>
+<li>NORMAL: medium-risk</li>
+<li>LOW: low-risk</li>
+<li>UNKNOWNED: suspicious</li>
+         * @type {string || null}
+         */
+        this.SecurityLevel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.EventTime = 'EventTime' in params ? params.EventTime : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.SecurityLevel = 'SecurityLevel' in params ? params.SecurityLevel : null;
 
     }
 }
@@ -18106,7 +19161,6 @@ class DescribeAssetMachineListResponse extends  AbstractModel {
 
         /**
          * Record list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetMachineBaseInfo> || null}
          */
         this.Machines = null;
@@ -18312,7 +19366,6 @@ class NetAttackEventInfo extends  AbstractModel {
 
         /**
          * Host Additional Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -18330,45 +19383,52 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Count = null;
 
         /**
-         * Machine payment edition. 0: Basic Edition; 1: Professional Edition; 2: Premium Edition; 3: General Discount Edition
+         * Machine payment version, 0 Basic version, 1 Pro edition, 2 Flagship edition, 3 Lightweight edition
          * @type {number || null}
          */
         this.PayVersion = null;
 
         /**
          * cvm uuid
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
          * Time of Attack
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MergeTime = null;
 
         /**
          * 0: Attack Attempt 1: Successful Attack
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Type = null;
 
         /**
          * 0: No Compromised Behavior 1: RCE (command execution) 2: Dnslog 3: Writefile
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.HostOpType = null;
 
         /**
          * Process Tree, needs to be decoded with base64.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostOpProcessTree = null;
+
+        /**
+         * IP analysis
+         * @type {IPAnalyse || null}
+         */
+        this.IPAnalyse = null;
+
+        /**
+         * Response packet base64 encoded
+         * @type {string || null}
+         */
+        this.NetResponsePayload = null;
 
     }
 
@@ -18408,22 +19468,35 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.HostOpType = 'HostOpType' in params ? params.HostOpType : null;
         this.HostOpProcessTree = 'HostOpProcessTree' in params ? params.HostOpProcessTree : null;
 
+        if (params.IPAnalyse) {
+            let obj = new IPAnalyse();
+            obj.deserialize(params.IPAnalyse)
+            this.IPAnalyse = obj;
+        }
+        this.NetResponsePayload = 'NetResponsePayload' in params ? params.NetResponsePayload : null;
+
     }
 }
 
 /**
- * GetLocalStorageItem response structure.
+ * DescribeShellPolicyList response structure.
  * @class
  */
-class GetLocalStorageItemResponse extends  AbstractModel {
+class DescribeShellPolicyListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Value
-         * @type {string || null}
+         * List data
+         * @type {Array.<ShellPolicyList> || null}
          */
-        this.Value = null;
+        this.List = null;
+
+        /**
+         * Total number of entries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -18440,8 +19513,102 @@ class GetLocalStorageItemResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Value = 'Value' in params ? params.Value : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ShellPolicyList();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRaspMemShellListTCSS request structure.
+ * @class
+ */
+class DescribeRaspMemShellListTCSSRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter criteria: InstanceID, IP, MachineName host name fuzzy query, Type, Status for precise match, CreateBeginTime, CreateEndTime time period
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries to be returned. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Sorting method.
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sorting field
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * DescribeLoginTypeGlobalConf request structure.
+ * @class
+ */
+class DescribeLoginTypeGlobalConfRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -18490,22 +19657,19 @@ class LogStorageRecord extends  AbstractModel {
         super();
 
         /**
-         * Year and month
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Year and month.
          * @type {string || null}
          */
         this.Month = null;
 
         /**
-         * Used storage capacity, in bytes
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Storage amount, in bytes.
          * @type {number || null}
          */
         this.UsedSize = null;
 
         /**
-         * Total capacity, in bytes
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total volume, in bytes.
          * @type {number || null}
          */
         this.InquireSize = null;
@@ -18536,14 +19700,12 @@ class DescribeBruteAttackListResponse extends  AbstractModel {
 
         /**
          * Total number
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
          * List of password cracking attacks
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BruteAttackInfo> || null}
          */
         this.BruteAttackList = null;
@@ -18608,7 +19770,9 @@ class DescribeJavaMemShellPluginListRequest extends  AbstractModel {
         super();
 
         /**
-         * Filter Criteria: Keywords: Fuzzy query of IP or host name, JavaShellStatus, exact match of Exception
+         * Filtering criteria: InstanceID and IP
+
+MachineName fuzzy query, JavaShellStatus, Exception exact match
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
@@ -18650,6 +19814,70 @@ class DescribeJavaMemShellPluginListRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeLoginTypeHost request structure.
+ * @class
+ */
+class DescribeLoginTypeHostRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <li>Name - string - Required: No - Host name</li> <li>InstanceId - string - Required: No - Instance ID</li> <li>PublicIp - string - Required: No - Public IP address</li> <li>PrivateIp - string - Required: No - Private IP</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Limit Entries, 10 by default, up to 100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset, which is 0 by default.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting Method: [ASC: Ascending Order, DESC: Descending Order]
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sorting column: [Id].
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
  * Host information for batch vulnerability fixing
  * @class
  */
@@ -18659,34 +19887,30 @@ class CanFixVulInfo extends  AbstractModel {
 
         /**
          * Vulnerability ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.VulId = null;
 
         /**
          * Vulnerability name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VulName = null;
 
         /**
          * Information on hosts where this vulnerability can be fixed
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VulInfoHostInfo> || null}
          */
         this.HostList = null;
 
         /**
          * Fixing prompt tag
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.FixTag = null;
 
         /**
-         * Vulnerability categories: 1 web cms vulnerabilities, 2 application vulnerabilities, 4 linux software vulnerabilities, 5 windows system vulnerabilities
+         * Vulnerability category. 1: web CMS vulnerability, 2: application vulnerability, 4: Linux software vulnerability, 5 Windows system vulnerability.
          * @type {number || null}
          */
         this.VulCategory = null;
@@ -18854,7 +20078,6 @@ class DescribeAssetUserKeyListResponse extends  AbstractModel {
 
         /**
          * Public key list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetUserKeyInfo> || null}
          */
         this.Keys = null;
@@ -19032,58 +20255,168 @@ class UntrustMalwaresResponse extends  AbstractModel {
 }
 
 /**
- * Availability zone information
+ * Malicious request event
  * @class
  */
-class ZoneInfo extends  AbstractModel {
+class RiskDnsEvent extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Availability zone name
-         * @type {string || null}
-         */
-        this.ZoneName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
-
-    }
-}
-
-/**
- * DescribeExpertServiceList response structure.
- * @class
- */
-class DescribeExpertServiceListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number of entries
+         * Event ID
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Id = null;
 
         /**
-         * Security manager data
-         * @type {Array.<SecurityButlerInfo> || null}
+         * Policy ID
+         * @type {number || null}
          */
-        this.List = null;
+        this.PolicyId = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Type of hit policy [-1: unknown|0: system|1: user]
+         * @type {number || null}
+         */
+        this.PolicyType = null;
+
+        /**
+         * Name of hit policy
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.PolicyName = null;
+
+        /**
+         * Protection level [0: basic edition|1: professional edition|2: ultimate edition]
+         * @type {number || null}
+         */
+        this.ProtectLevel = null;
+
+        /**
+         * Server ID
+         * @type {string || null}
+         */
+        this.HostId = null;
+
+        /**
+         * Host name
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+        /**
+         * Host IP
+         * @type {string || null}
+         */
+        this.HostIp = null;
+
+        /**
+         * Public IP address
+         * @type {string || null}
+         */
+        this.WanIp = null;
+
+        /**
+         * Client ID
+         * @type {string || null}
+         */
+        this.AgentId = null;
+
+        /**
+         * Access domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Tag Features
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Access count
+         * @type {number || null}
+         */
+        this.AccessCount = null;
+
+        /**
+         * Threat description
+         * @type {string || null}
+         */
+        this.ThreatDesc = null;
+
+        /**
+         * Fixing solution
+         * @type {string || null}
+         */
+        this.SuggestSolution = null;
+
+        /**
+         * Reference link
+         * @type {string || null}
+         */
+        this.ReferenceLink = null;
+
+        /**
+         * Processing status [0: pending|2: allowlisted|3: untrusted status|4: processed|5: ignored|6: blocked]
+         * @type {number || null}
+         */
+        this.HandleStatus = null;
+
+        /**
+         * Process ID
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * Process name
+         * @type {string || null}
+         */
+        this.ProcessName = null;
+
+        /**
+         * Process MD5
+         * @type {string || null}
+         */
+        this.ProcessMd5 = null;
+
+        /**
+         * Command line
+         * @type {string || null}
+         */
+        this.CmdLine = null;
+
+        /**
+         * First access time
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * Last access Time
+         * @type {string || null}
+         */
+        this.LastTime = null;
+
+        /**
+         * Host online status [OFFLINE: offline|ONLINE: online|UNKNOWN: unknown]
+         * @type {string || null}
+         */
+        this.HostStatus = null;
+
+        /**
+         * Additional information
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
+        /**
+         * [1:CentOS|2:Debian|3:Gentoo|4:Redhat|5:Ubuntu|6:Windows|7:TencentOS|8:CoreOS|9:FreeBSD|10:SUSE]
+         * @type {number || null}
+         */
+        this.OsType = null;
 
     }
 
@@ -19094,17 +20427,37 @@ class DescribeExpertServiceListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.ProtectLevel = 'ProtectLevel' in params ? params.ProtectLevel : null;
+        this.HostId = 'HostId' in params ? params.HostId : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
+        this.HostIp = 'HostIp' in params ? params.HostIp : null;
+        this.WanIp = 'WanIp' in params ? params.WanIp : null;
+        this.AgentId = 'AgentId' in params ? params.AgentId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.AccessCount = 'AccessCount' in params ? params.AccessCount : null;
+        this.ThreatDesc = 'ThreatDesc' in params ? params.ThreatDesc : null;
+        this.SuggestSolution = 'SuggestSolution' in params ? params.SuggestSolution : null;
+        this.ReferenceLink = 'ReferenceLink' in params ? params.ReferenceLink : null;
+        this.HandleStatus = 'HandleStatus' in params ? params.HandleStatus : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
+        this.ProcessMd5 = 'ProcessMd5' in params ? params.ProcessMd5 : null;
+        this.CmdLine = 'CmdLine' in params ? params.CmdLine : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.LastTime = 'LastTime' in params ? params.LastTime : null;
+        this.HostStatus = 'HostStatus' in params ? params.HostStatus : null;
 
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new SecurityButlerInfo();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.OsType = 'OsType' in params ? params.OsType : null;
 
     }
 }
@@ -19118,13 +20471,13 @@ class DescribeAccountStatisticsResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of account statistics list records
+         * Total number of account statistics list records.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Account statistics list
+         * Account statistics list.
          * @type {Array.<AccountStatistics> || null}
          */
         this.AccountStatistics = null;
@@ -19230,34 +20583,6 @@ class ScreenTrendsChart extends  AbstractModel {
 }
 
 /**
- * ModifyLoginWhiteInfo response structure.
- * @class
- */
-class ModifyLoginWhiteInfoResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeBaselineRule response structure.
  * @class
  */
@@ -19273,13 +20598,12 @@ class DescribeBaselineRuleResponse extends  AbstractModel {
 
         /**
          * Baseline check item list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BaselineRuleInfo> || null}
          */
         this.BaselineRuleList = null;
 
         /**
-         * Whether to display the description column. True: yes; false: no.Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether to display the description column: true-yes, false-no
          * @type {boolean || null}
          */
         this.ShowRuleRemark = null;
@@ -19316,72 +20640,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Attack backtracking node
+ * ModifyVulDefenceEventStatus response structure.
  * @class
  */
-class AttackSourceNode extends  AbstractModel {
+class ModifyVulDefenceEventStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Event ID. If this parameter is left blank, no corresponding event exists.
-         * @type {number || null}
-         */
-        this.EventId = null;
-
-        /**
-         * BRUTEFORCE: password cracking; MALWARE: Trojan; BASH: high-risk command; RISK_DNS: malicious request; LOGIN: cross-region log-in; HOST: host node; TIME_ORDER: general node.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.EventType = null;
-
-        /**
-         * Node IP address. When the node is HOST, the value is the IP address of this node.
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * Level. 0: prompt; 1: low-risk; 2: medium-risk; 3: high-risk; 4: critical.
-         * @type {number || null}
-         */
-        this.Level = null;
-
-        /**
-         * Node ID
-         * @type {string || null}
-         */
-        this.NodeId = null;
-
-        /**
-         * Start time
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * General node description
-         * @type {string || null}
-         */
-        this.NodeDesc = null;
-
-        /**
-         * Timeline number. Nodes with the same number belong to the same timeline.
-         * @type {number || null}
-         */
-        this.TimeLineNum = null;
-
-        /**
-         * Node details
-         * @type {string || null}
-         */
-        this.NodeDetail = null;
+        this.RequestId = null;
 
     }
 
@@ -19392,16 +20662,7 @@ class AttackSourceNode extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EventId = 'EventId' in params ? params.EventId : null;
-        this.EventType = 'EventType' in params ? params.EventType : null;
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.NodeId = 'NodeId' in params ? params.NodeId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.NodeDesc = 'NodeDesc' in params ? params.NodeDesc : null;
-        this.TimeLineNum = 'TimeLineNum' in params ? params.TimeLineNum : null;
-        this.NodeDetail = 'NodeDetail' in params ? params.NodeDetail : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -19624,7 +20885,7 @@ class VulStoreListInfo extends  AbstractModel {
 
         /**
          * Whether automatic vulnerability fixing is supported
-0: not supported on Windows/Linux; 1: supported on Windows/Linux; 2: supported on Linux only; 3: supported on Windows only.
+0 - Windows/Linux both off; 1 - Windows/Linux both on; 2 - Linux only; 3 - Windows only
          * @type {number || null}
          */
         this.FixSwitch = null;
@@ -19669,7 +20930,6 @@ class DescribeScreenEventsCntResponse extends  AbstractModel {
 
         /**
          * Event statistics details
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ScreenEventsCnt> || null}
          */
         this.Info = null;
@@ -19807,7 +21067,6 @@ class DescribeBashEventsInfoNewResponse extends  AbstractModel {
 
         /**
          * Event details
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {BashEventsInfoNew || null}
          */
         this.BashEventsInfo = null;
@@ -20141,18 +21400,18 @@ class RansomDefenseEvent extends  AbstractModel {
 }
 
 /**
- * DeleteMalwareWhiteList request structure.
+ * DeleteRaspRules request structure.
  * @class
  */
-class DeleteMalwareWhiteListRequest extends  AbstractModel {
+class DeleteRaspRulesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID array, with the maximum value being 100.
+         * Array containing IDs of rules to be deleted (maximum value: 100).
          * @type {Array.<number> || null}
          */
-        this.Ids = null;
+        this.IDs = null;
 
     }
 
@@ -20163,7 +21422,7 @@ class DeleteMalwareWhiteListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = 'Ids' in params ? params.Ids : null;
+        this.IDs = 'IDs' in params ? params.IDs : null;
 
     }
 }
@@ -20177,8 +21436,7 @@ class LoginWhiteCombinedInfo extends  AbstractModel {
         super();
 
         /**
-         * Allowlist region
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Allowlisted regions
          * @type {Array.<Place> || null}
          */
         this.Places = null;
@@ -20262,7 +21520,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Uuid = null;
 
         /**
-         * Login Location
+         * Login location
          * @type {string || null}
          */
         this.Locations = null;
@@ -20299,6 +21557,314 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
         this.Locations = 'Locations' in params ? params.Locations : null;
+
+    }
+}
+
+/**
+ * Java webshell event information
+ * @class
+ */
+class RaspMemShellDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Event ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Server QUUID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * Server name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * Private IP address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PrivateIp = null;
+
+        /**
+         * Public IP address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PublicIp = null;
+
+        /**
+         * Host tag
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.HostTags = null;
+
+        /**
+         * Memory Trojan Type. 0: Filter Type; 1: Listener Type; 2: Servlet Type; 3: Interceptors Type; 4: Agent Type; 5: Other
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Processing Status. 0 - Pending; 1 - Allowlisted; 2 - Deleted; 3 - Ignored; 4 - Manually Processed
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Associated class loader.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClassLoaderName = null;
+
+        /**
+         * Parent class name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SuperClassName = null;
+
+        /**
+         * Inherited API
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Interfaces = null;
+
+        /**
+         * Annotation
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Annotations = null;
+
+        /**
+         * Class name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClassName = null;
+
+        /**
+         * Class file md5
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Md5 = null;
+
+        /**
+         * Process ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * Java Process Path
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Exe = null;
+
+        /**
+         * Java process command line parameters
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Args = null;
+
+        /**
+         * Java Memory Horse Binary Code (base64)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClassContent = null;
+
+        /**
+         * Java Memory Trojan Decompilation Code
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClassContentPretty = null;
+
+        /**
+         * Event description
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EventDescription = null;
+
+        /**
+         * Security advice
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SecurityAdvice = null;
+
+        /**
+         * First detection time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last detection time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RecentFoundTime = null;
+
+        /**
+         * Node name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Node ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Container name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ContainerName = null;
+
+        /**
+         * container id
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ContainerId = null;
+
+        /**
+         * Container running status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ContainerStatus = null;
+
+        /**
+         * Container isolation status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ContainerNetStatus = null;
+
+        /**
+         * Image ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * Image name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * Pod name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * podip
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PodIp = null;
+
+        /**
+         * Cluster name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Cluster ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.PrivateIp = 'PrivateIp' in params ? params.PrivateIp : null;
+        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.HostTags = 'HostTags' in params ? params.HostTags : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ClassLoaderName = 'ClassLoaderName' in params ? params.ClassLoaderName : null;
+        this.SuperClassName = 'SuperClassName' in params ? params.SuperClassName : null;
+        this.Interfaces = 'Interfaces' in params ? params.Interfaces : null;
+        this.Annotations = 'Annotations' in params ? params.Annotations : null;
+        this.ClassName = 'ClassName' in params ? params.ClassName : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.Exe = 'Exe' in params ? params.Exe : null;
+        this.Args = 'Args' in params ? params.Args : null;
+        this.ClassContent = 'ClassContent' in params ? params.ClassContent : null;
+        this.ClassContentPretty = 'ClassContentPretty' in params ? params.ClassContentPretty : null;
+        this.EventDescription = 'EventDescription' in params ? params.EventDescription : null;
+        this.SecurityAdvice = 'SecurityAdvice' in params ? params.SecurityAdvice : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.RecentFoundTime = 'RecentFoundTime' in params ? params.RecentFoundTime : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+        this.ContainerId = 'ContainerId' in params ? params.ContainerId : null;
+        this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
+        this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.PodIp = 'PodIp' in params ? params.PodIp : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -20341,24 +21907,57 @@ class WebHookReceiver extends  AbstractModel {
 
         /**
          * id
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Id = null;
 
         /**
-         * Recipient name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Receiver name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Webhook URL
-Note: This field may return null, indicating that no valid values can be obtained.
+         * webhook URL
          * @type {string || null}
          */
         this.Addr = null;
+
+        /**
+         * Type
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * target region
+         * @type {string || null}
+         */
+        this.SCFRegion = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * function name
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Version
+         * @type {string || null}
+         */
+        this.FunctionVersion = null;
+
+        /**
+         * Alias
+         * @type {string || null}
+         */
+        this.Alias = null;
 
     }
 
@@ -20372,29 +21971,29 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Addr = 'Addr' in params ? params.Addr : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SCFRegion = 'SCFRegion' in params ? params.SCFRegion : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
 
     }
 }
 
 /**
- * DescribeAttackSource response structure.
+ * RecoverMalwares request structure.
  * @class
  */
-class DescribeAttackSourceResponse extends  AbstractModel {
+class RecoverMalwaresRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Attack backtracking data
-         * @type {AttackSource || null}
+         * Trojan ID array (The maximum number of IDs is 100)
+         * @type {Array.<number> || null}
          */
-        this.AttackSource = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Ids = null;
 
     }
 
@@ -20405,13 +22004,7 @@ class DescribeAttackSourceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.AttackSource) {
-            let obj = new AttackSource();
-            obj.deserialize(params.AttackSource)
-            this.AttackSource = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -20426,63 +22019,54 @@ class DescribeAssetTypeTopResponse extends  AbstractModel {
 
         /**
          * Top 5 accounts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetKeyVal> || null}
          */
         this.User = null;
 
         /**
          * Top 5 ports
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetKeyVal> || null}
          */
         this.Port = null;
 
         /**
          * Top 5 processes
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetKeyVal> || null}
          */
         this.Process = null;
 
         /**
          * Top 5 software
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetKeyVal> || null}
          */
         this.Software = null;
 
         /**
          * Top 5 databases
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetKeyVal> || null}
          */
         this.Database = null;
 
         /**
-         * Top 5 web applications
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Top 5 Web Applications
          * @type {Array.<AssetKeyVal> || null}
          */
         this.WebApp = null;
 
         /**
-         * Top 5 web sites
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Top 5 Websites
          * @type {Array.<AssetKeyVal> || null}
          */
         this.WebLocation = null;
 
         /**
-         * Top 5 web frameworks
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Top 5 Web frameworks
          * @type {Array.<AssetKeyVal> || null}
          */
         this.WebFrame = null;
 
         /**
-         * Top 5 web services
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Top 5 Web Services
          * @type {Array.<AssetKeyVal> || null}
          */
         this.WebService = null;
@@ -20773,8 +22357,7 @@ class LicenseBindTaskDetail extends  AbstractModel {
         this.FixMessage = null;
 
         /**
-         * Additional information of machine
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Additional Information on Machine
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -20891,30 +22474,30 @@ class DescribeAssetEnvListRequest extends  AbstractModel {
 }
 
 /**
- * Tag information
+ * DescribeReverseShellRulesAggregation response structure.
  * @class
  */
-class Tag extends  AbstractModel {
+class DescribeReverseShellRulesAggregationResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag ID
-         * @type {number || null}
+         * List content
+         * @type {Array.<ReverseShellRuleAggregation> || null}
          */
-        this.Id = null;
+        this.List = null;
 
         /**
-         * Tag name
+         * Total number of entries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * Number of servers
-         * @type {number || null}
-         */
-        this.Count = null;
+        this.RequestId = null;
 
     }
 
@@ -20925,9 +22508,17 @@ class Tag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Count = 'Count' in params ? params.Count : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ReverseShellRuleAggregation();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -21410,6 +23001,147 @@ class DescribeLogHistogramResponse extends  AbstractModel {
 }
 
 /**
+ * Authorization order list object
+ * @class
+ */
+class LicenseDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Authorization ID
+         * @type {number || null}
+         */
+        this.LicenseId = null;
+
+        /**
+         * Authorization type. 0: Pro Edition - pay-as-you-go; 1: Pro Edition - yearly/monthly subscription; 2: Ultimate Edition - yearly/monthly subscription.
+         * @type {number || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * Authorization status. 0: not in use; 1: partially in use; 2: used up; 3: unavailable.
+         * @type {number || null}
+         */
+        this.LicenseStatus = null;
+
+        /**
+         * Total number of authorizations
+         * @type {number || null}
+         */
+        this.LicenseCnt = null;
+
+        /**
+         * Number of used authorizations
+         * @type {number || null}
+         */
+        this.UsedLicenseCnt = null;
+
+        /**
+         * Order status. 1: normal; 2: isolated; 3: terminated.
+         * @type {number || null}
+         */
+        this.OrderStatus = null;
+
+        /**
+         * Deadline
+         * @type {string || null}
+         */
+        this.Deadline = null;
+
+        /**
+         * Order resource ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 0: initialization; 1: automatic renewal; 2: no automatic renewal.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Task ID. Default value: 0. It is used to query the binding progress.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Time of purchase
+         * @type {string || null}
+         */
+        this.BuyTime = null;
+
+        /**
+         * Whether the order is a trial order
+         * @type {number || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * Resource alias
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Platform tag
+         * @type {Array.<Tags> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Number of frozen licenses. 0: unfrozen, values other than 0: number of frozen licenses.
+         * @type {number || null}
+         */
+        this.FreezeNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LicenseId = 'LicenseId' in params ? params.LicenseId : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.LicenseStatus = 'LicenseStatus' in params ? params.LicenseStatus : null;
+        this.LicenseCnt = 'LicenseCnt' in params ? params.LicenseCnt : null;
+        this.UsedLicenseCnt = 'UsedLicenseCnt' in params ? params.UsedLicenseCnt : null;
+        this.OrderStatus = 'OrderStatus' in params ? params.OrderStatus : null;
+        this.Deadline = 'Deadline' in params ? params.Deadline : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.BuyTime = 'BuyTime' in params ? params.BuyTime : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tags();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.FreezeNum = 'FreezeNum' in params ? params.FreezeNum : null;
+
+    }
+}
+
+/**
  * DescribeUsersConfig request structure.
  * @class
  */
@@ -21482,7 +23214,6 @@ class DescribeAssetWebLocationListResponse extends  AbstractModel {
 
         /**
          * Site list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetWebLocationBaseInfo> || null}
          */
         this.Locations = null;
@@ -21527,7 +23258,6 @@ class DescribeAssetDiskListResponse extends  AbstractModel {
 
         /**
          * Disk partition list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetDiskPartitionInfo> || null}
          */
         this.Disks = null;
@@ -21934,7 +23664,7 @@ class LoginWhiteLists extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Yunjing client ID
+         * Host Security UUID
          * @type {string || null}
          */
         this.Uuid = null;
@@ -22082,14 +23812,12 @@ class AssetKeyVal extends  AbstractModel {
 
         /**
          * Description information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Desc = null;
 
         /**
-         * Number of additions today
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of new key-value pairs today
          * @type {number || null}
          */
         this.NewCount = null;
@@ -22175,7 +23903,6 @@ class AssetWebLocationInfo extends  AbstractModel {
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -22232,18 +23959,241 @@ class ChangeRuleEventsIgnoreStatusResponse extends  AbstractModel {
 }
 
 /**
- * DeleteWebHookRule response structure.
+ * Basic information on the server list in asset fingerprint
  * @class
  */
-class DeleteWebHookRuleResponse extends  AbstractModel {
+class AssetMachineDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Server QUUID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Quuid = null;
+
+        /**
+         * Server UUID
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * Private IP address of server
+         * @type {string || null}
+         */
+        this.MachineIp = null;
+
+        /**
+         * Server name
+         * @type {string || null}
+         */
+        this.MachineName = null;
+
+        /**
+         * Operating system name
+         * @type {string || null}
+         */
+        this.OsInfo = null;
+
+        /**
+         * CPU information
+         * @type {string || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Memory capacity, in GB
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * Memory utilization, in percentage
+         * @type {string || null}
+         */
+        this.MemLoad = null;
+
+        /**
+         * Hard disk capacity, in GB
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Hard disk usage, in percentage
+         * @type {string || null}
+         */
+        this.DiskLoad = null;
+
+        /**
+         * Number of partitions
+         * @type {number || null}
+         */
+        this.PartitionCount = null;
+
+        /**
+         * Host public IP address
+         * @type {string || null}
+         */
+        this.MachineWanIp = null;
+
+        /**
+         * Number of CPU
+         * @type {number || null}
+         */
+        this.CpuSize = null;
+
+        /**
+         * CPU load
+         * @type {string || null}
+         */
+        this.CpuLoad = null;
+
+        /**
+         * Protection level: 0 Basic version, 1 Pro edition, 2 Flagship edition, 3 Lightweight edition
+         * @type {number || null}
+         */
+        this.ProtectLevel = null;
+
+        /**
+         * Risk status: UNKNOW - unknown; RISK - risky; SAFT - Safe
+         * @type {string || null}
+         */
+        this.RiskStatus = null;
+
+        /**
+         * Days protected
+         * @type {number || null}
+         */
+        this.ProtectDays = null;
+
+        /**
+         * Professional edition activation time
+         * @type {string || null}
+         */
+        this.BuyTime = null;
+
+        /**
+         * Professional edition expiration time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Kernel version
+         * @type {string || null}
+         */
+        this.CoreVersion = null;
+
+        /**
+         * Linux/Windows
+         * @type {string || null}
+         */
+        this.OsType = null;
+
+        /**
+         * Agent version
+         * @type {string || null}
+         */
+        this.AgentVersion = null;
+
+        /**
+         * Installation time
+         * @type {string || null}
+         */
+        this.InstallTime = null;
+
+        /**
+         * System startup time
+         * @type {string || null}
+         */
+        this.BootTime = null;
+
+        /**
+         * Last online time
+         * @type {string || null}
+         */
+        this.LastLiveTime = null;
+
+        /**
+         * Manufacturer
+         * @type {string || null}
+         */
+        this.Producer = null;
+
+        /**
+         * Serial number
+         * @type {string || null}
+         */
+        this.SerialNumber = null;
+
+        /**
+         * Network interface
+
+         * @type {Array.<AssetNetworkCardInfo> || null}
+         */
+        this.NetCards = null;
+
+        /**
+         * Partition
+         * @type {Array.<AssetDiskPartitionInfo> || null}
+         */
+        this.Disks = null;
+
+        /**
+         * 0: online; 1: offline
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Business group ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Server model
+         * @type {string || null}
+         */
+        this.DeviceVersion = null;
+
+        /**
+         * Offline time
+         * @type {string || null}
+         */
+        this.OfflineTime = null;
+
+        /**
+         * Host ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Data update time
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Host Additional Information
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
+        /**
+         * CpuLoadVul
+         * @type {string || null}
+         */
+        this.CpuLoadVul = null;
+
+        /**
+         * Time
+         * @type {string || null}
+         */
+        this.FirstTime = null;
 
     }
 
@@ -22254,7 +24204,65 @@ class DeleteWebHookRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.OsInfo = 'OsInfo' in params ? params.OsInfo : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.MemLoad = 'MemLoad' in params ? params.MemLoad : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskLoad = 'DiskLoad' in params ? params.DiskLoad : null;
+        this.PartitionCount = 'PartitionCount' in params ? params.PartitionCount : null;
+        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
+        this.CpuSize = 'CpuSize' in params ? params.CpuSize : null;
+        this.CpuLoad = 'CpuLoad' in params ? params.CpuLoad : null;
+        this.ProtectLevel = 'ProtectLevel' in params ? params.ProtectLevel : null;
+        this.RiskStatus = 'RiskStatus' in params ? params.RiskStatus : null;
+        this.ProtectDays = 'ProtectDays' in params ? params.ProtectDays : null;
+        this.BuyTime = 'BuyTime' in params ? params.BuyTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.CoreVersion = 'CoreVersion' in params ? params.CoreVersion : null;
+        this.OsType = 'OsType' in params ? params.OsType : null;
+        this.AgentVersion = 'AgentVersion' in params ? params.AgentVersion : null;
+        this.InstallTime = 'InstallTime' in params ? params.InstallTime : null;
+        this.BootTime = 'BootTime' in params ? params.BootTime : null;
+        this.LastLiveTime = 'LastLiveTime' in params ? params.LastLiveTime : null;
+        this.Producer = 'Producer' in params ? params.Producer : null;
+        this.SerialNumber = 'SerialNumber' in params ? params.SerialNumber : null;
+
+        if (params.NetCards) {
+            this.NetCards = new Array();
+            for (let z in params.NetCards) {
+                let obj = new AssetNetworkCardInfo();
+                obj.deserialize(params.NetCards[z]);
+                this.NetCards.push(obj);
+            }
+        }
+
+        if (params.Disks) {
+            this.Disks = new Array();
+            for (let z in params.Disks) {
+                let obj = new AssetDiskPartitionInfo();
+                obj.deserialize(params.Disks[z]);
+                this.Disks.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.DeviceVersion = 'DeviceVersion' in params ? params.DeviceVersion : null;
+        this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
+        this.CpuLoadVul = 'CpuLoadVul' in params ? params.CpuLoadVul : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
 
     }
 }
@@ -22340,7 +24348,6 @@ class AssetDatabaseBaseInfo extends  AbstractModel {
 
         /**
          * Host tag
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MachineTag> || null}
          */
         this.Tag = null;
@@ -22437,7 +24444,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -22461,8 +24467,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MachineName = null;
 
         /**
-         * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
+         *  Additional information
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -22781,7 +24786,6 @@ class DescribeHotVulTopResponse extends  AbstractModel {
 
         /**
          * Vulnerability information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VulStoreListInfo> || null}
          */
         this.List = null;
@@ -22940,41 +24944,6 @@ class DescribeProductStatusResponse extends  AbstractModel {
 }
 
 /**
- * DescribeIndexList response structure.
- * @class
- */
-class DescribeIndexListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ES index information
-         * @type {string || null}
-         */
-        this.Data = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Data = 'Data' in params ? params.Data : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ModifyJavaMemShellPluginSwitch request structure.
  * @class
  */
@@ -23019,14 +24988,12 @@ class DescribeIgnoreHostAndItemConfigResponse extends  AbstractModel {
 
         /**
          * Affected detection items
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BaselineItemInfo> || null}
          */
         this.ItemSet = null;
 
         /**
          * Affected hosts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BaselineHost> || null}
          */
         this.HostSet = null;
@@ -23210,7 +25177,6 @@ class DescribeAttackEventsResponse extends  AbstractModel {
 
         /**
          * Attack Event List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<NetAttackEvent> || null}
          */
         this.List = null;
@@ -23296,7 +25262,6 @@ class DescribeReverseShellEventInfoResponse extends  AbstractModel {
 
         /**
          * Reverse shell details
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {ReverseShellEventInfo || null}
          */
         this.ReverseShellEventInfo = null;
@@ -23514,13 +25479,21 @@ class ExportRiskDnsEventListRequest extends  AbstractModel {
         super();
 
         /**
-         * <li>IpOrName - String - required: no - filter by host IP or alias</li>
+         * <li>MachineName  Host name</li>
+
+
+
+Instance ID  
+
+ 
+
+<li>IP - private IP address or public IP address - required: no - filter by host IP or alias</li>
 <li>HostId - String - required: no - host ID</li>
 <li>AgentId - String - required: no - client ID</li>
 <li>PolicyType - String - required: no - policy type: 0 - system policy; 1 - user-defined policy</li>
-<li>Domain - String - required: no - domain name (First convert the domain name into the urlencode format, and then encode it using base64.)</li>
+<li>Domain - String - Required: No - Domain name (URL-encode the Domain name first, then base64 it)</li>
 <li>HandleStatus - String - required: no - filter by status: 0 - pending; 2 - trusted; 3 - untrusted</li>
-<li>BeginTime - String - required: no - start time of last access</li>
+<li>BeginTime - String - Required: no - start time of last access</li>
 <li>EndTime - String - required: no - end time of last access</li>
          * @type {Array.<Filter> || null}
          */
@@ -23563,52 +25536,24 @@ class ExportRiskDnsEventListRequest extends  AbstractModel {
 }
 
 /**
- * Security event message data
+ * DescribeRaspMaxCpu response structure.
  * @class
  */
-class SecurityDynamic extends  AbstractModel {
+class DescribeRaspMaxCpuResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CWPP client UUID
-         * @type {string || null}
+         * rasp current maximum cpu limitation, larger than 0, less than or equal to 100, default 100 indicates no restriction
+         * @type {number || null}
          */
-        this.Uuid = null;
+        this.RaspMaxCpu = null;
 
         /**
-         * Security event occurrence time
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.EventTime = null;
-
-        /**
-         * Security event type
-<li>MALWARE: Trojan event</li>
-<li>NON_LOCAL_LOGIN: cross-region log-in</li>
-<li>BRUTEATTACK_SUCCESS: successful password cracking</li>
-<li>VUL: vulnerability</li>
-<li>BASELINE: security baseline</li>
-         * @type {string || null}
-         */
-        this.EventType = null;
-
-        /**
-         * Security event message
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * Security event level
-<li>RISK: critical</li>
-<li>HIGH: high-risk</li>
-<li>NORMAL: medium-risk</li>
-<li>LOW: low-risk</li>
-<li>UNKNOWNED: suspicious</li>
-         * @type {string || null}
-         */
-        this.SecurityLevel = null;
+        this.RequestId = null;
 
     }
 
@@ -23619,11 +25564,8 @@ class SecurityDynamic extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.EventTime = 'EventTime' in params ? params.EventTime : null;
-        this.EventType = 'EventType' in params ? params.EventType : null;
-        this.Message = 'Message' in params ? params.Message : null;
-        this.SecurityLevel = 'SecurityLevel' in params ? params.SecurityLevel : null;
+        this.RaspMaxCpu = 'RaspMaxCpu' in params ? params.RaspMaxCpu : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -23806,7 +25748,7 @@ class DescribeProVersionInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * Postpay yesterday's charge
+         * Payment details for [Pro Edition - pay-as-you-go] yesterday (the actual bill prevails).
          * @type {number || null}
          */
         this.PostPayCost = null;
@@ -23818,7 +25760,7 @@ class DescribeProVersionInfoResponse extends  AbstractModel {
         this.IsAutoOpenProVersion = null;
 
         /**
-         * Number of hosts with Pro Edition activated
+         * Number of hosts with Pro Edition.
          * @type {number || null}
          */
         this.ProVersionNum = null;
@@ -23988,13 +25930,13 @@ class AssetUserBaseInfo extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Account type. 0: guest user; 1: standard user; 2: administrator user; 999: null (Windows only)
+         * Account type. 0: guest user; 1: standard user; 2: administrator user; 999: null (for Windows only).
          * @type {number || null}
          */
         this.UserType = null;
 
         /**
-         * Whether a domain account. 0: no; 1: yes; 2: no; 999: null (Windows only)
+         * Whether it is a domain account: 0: no; 1: yes; 2: no; 999: null (for Windows only).
          * @type {number || null}
          */
         this.IsDomain = null;
@@ -24055,7 +25997,6 @@ class AssetUserBaseInfo extends  AbstractModel {
 
         /**
          * Update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -24073,8 +26014,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsNew = null;
 
         /**
-         * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
+         *  Additional information
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -24135,7 +26075,7 @@ class ModifyRiskEventsStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * Operations - 0: Mark as Handled, 1: Ignore, 2: Delete Record, 3: Trojan Isolation, 4: Isolated Trojan Resumption, 5: Trojan Trust, 6: Trojan Untrust, 7: Kill Exceptional Process.
+         * Operation. 0: mark as handled; 1: ignore; 2: delete records; 3: isolate Trojan viruses; 4: recover isolating Trojan viruses; 5: add files to the trusted list; 6: delete files from the trusted list; 7: scan abnormal processes; 8: add to the allowlist.
          * @type {number || null}
          */
         this.Operate = null;
@@ -24196,6 +26136,13 @@ Filter criteria
          */
         this.Filters = null;
 
+        /**
+         * When Operate is Trojan isolation
+<li>This operation will fix tampered system commands, scheduled tasks, and other system files. Please ensure that yum/apt is available during the operation.</li>
+         * @type {boolean || null}
+         */
+        this.DoClean = null;
+
     }
 
     /**
@@ -24221,6 +26168,7 @@ Filter criteria
                 this.Filters.push(obj);
             }
         }
+        this.DoClean = 'DoClean' in params ? params.DoClean : null;
 
     }
 }
@@ -24291,30 +26239,18 @@ class ExportBaselineEffectHostListRequest extends  AbstractModel {
 }
 
 /**
- * ExportMaliciousRequests response structure.
+ * Risk service during Java Webshell and RASP injection.
  * @class
  */
-class ExportMaliciousRequestsResponse extends  AbstractModel {
+class RiskMainClass extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * This parameter has been discarded.
+         * Risky services for RASP injection.	
          * @type {string || null}
          */
-        this.DownloadUrl = null;
-
-        /**
-         * Task ID, required for obtaining the DownloadURL at API Asynchronous Export Task ExportTasks
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.ServiceName = null;
 
     }
 
@@ -24325,50 +26261,30 @@ class ExportMaliciousRequestsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
 
     }
 }
 
 /**
- * ScanBaseline request structure.
+ * ExportWindowsPatchList request structure.
  * @class
  */
-class ScanBaselineRequest extends  AbstractModel {
+class ExportWindowsPatchListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Policy ID array (Either StrategyIdList, CategoryIdList, or RuleIdList must be selected.)
-         * @type {Array.<number> || null}
-         */
-        this.StrategyIdList = null;
+         * Filter criteria  
+<li>Status - String type - optional - processing status: 0: pending, 1: ignored, 3: fixed</li>
+<li>ShowNew: int optional show latest version 0-enable 1-disable</li>
+<li>Name : string type optional patch name</li>
+<li>KbNo : string type optional Patch Number</li>
+<li>Uuid : string type optional host uuid</li>
 
-        /**
-         * Baseline ID array (Either StrategyIdList, CategoryIdList, or RuleIdList must be selected.)
-         * @type {Array.<number> || null}
+         * @type {Array.<Filter> || null}
          */
-        this.CategoryIdList = null;
-
-        /**
-         * Detection item ID array (Either StrategyIdList, CategoryIdList, or RuleIdList must be selected.)
-         * @type {Array.<number> || null}
-         */
-        this.RuleIdList = null;
-
-        /**
-         * Not required when StrategyIdList is selected, but required in other cases.
-         * @type {Array.<string> || null}
-         */
-        this.QuuidList = null;
-
-        /**
-         * Host UUID array
-         * @type {Array.<string> || null}
-         */
-        this.UuidList = null;
+        this.Filters = null;
 
     }
 
@@ -24379,11 +26295,15 @@ class ScanBaselineRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StrategyIdList = 'StrategyIdList' in params ? params.StrategyIdList : null;
-        this.CategoryIdList = 'CategoryIdList' in params ? params.CategoryIdList : null;
-        this.RuleIdList = 'RuleIdList' in params ? params.RuleIdList : null;
-        this.QuuidList = 'QuuidList' in params ? params.QuuidList : null;
-        this.UuidList = 'UuidList' in params ? params.UuidList : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -24439,8 +26359,7 @@ class DescribeVulCountByDatesResponse extends  AbstractModel {
         super();
 
         /**
-         * Obtain the number of vulnerabilities for corresponding days in batch
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Obtain the vulnerability count for corresponding days in batch
          * @type {Array.<number> || null}
          */
         this.VulCount = null;
@@ -24482,22 +26401,28 @@ class CreateVulFixTaskQuuids extends  AbstractModel {
         super();
 
         /**
-         * Vulnerability ID
-         * @type {number || null}
-         */
-        this.VulId = null;
-
-        /**
          * Hosts that need to fix vulnerabilities. All hosts need to have the vulnerability with the ID of VulId and be in a pending fix status.
          * @type {Array.<string> || null}
          */
         this.Quuids = null;
 
         /**
-         * Repair method: 0 component update or patch installation, 1 disable service
+         * Vulnerability ID
+         * @type {number || null}
+         */
+        this.VulId = null;
+
+        /**
+         * Repair method. 0: Update components or install patches. 1: Disable service.
          * @type {number || null}
          */
         this.FixMethod = null;
+
+        /**
+         * kb id
+         * @type {number || null}
+         */
+        this.KbId = null;
 
     }
 
@@ -24508,9 +26433,10 @@ class CreateVulFixTaskQuuids extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VulId = 'VulId' in params ? params.VulId : null;
         this.Quuids = 'Quuids' in params ? params.Quuids : null;
+        this.VulId = 'VulId' in params ? params.VulId : null;
         this.FixMethod = 'FixMethod' in params ? params.FixMethod : null;
+        this.KbId = 'KbId' in params ? params.KbId : null;
 
     }
 }
@@ -24643,33 +26569,30 @@ class DescribeVulDefenceEventRequest extends  AbstractModel {
 }
 
 /**
- * Attack backtracking
+ * ExportMaliciousRequests response structure.
  * @class
  */
-class AttackSource extends  AbstractModel {
+class ExportMaliciousRequestsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Attack backtracking node description
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<AttackSourceNode> || null}
-         */
-        this.Nodes = null;
-
-        /**
-         * Attack backtracking node path
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<AttackSourceEdge> || null}
-         */
-        this.Edges = null;
-
-        /**
-         * Parameters for requesting details on node-related events
-Note: This field may return null, indicating that no valid values can be obtained.
+         * This parameter has been discarded.
          * @type {string || null}
          */
-        this.EventInfoParam = null;
+        this.DownloadUrl = null;
+
+        /**
+         * Task ID, required for obtaining the DownloadURL at API Asynchronous Export Task ExportTasks
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -24680,46 +26603,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.Nodes) {
-            this.Nodes = new Array();
-            for (let z in params.Nodes) {
-                let obj = new AttackSourceNode();
-                obj.deserialize(params.Nodes[z]);
-                this.Nodes.push(obj);
-            }
-        }
-
-        if (params.Edges) {
-            this.Edges = new Array();
-            for (let z in params.Edges) {
-                let obj = new AttackSourceEdge();
-                obj.deserialize(params.Edges[z]);
-                this.Edges.push(obj);
-            }
-        }
-        this.EventInfoParam = 'EventInfoParam' in params ? params.EventInfoParam : null;
-
-    }
-}
-
-/**
- * DescribeIndexList request structure.
- * @class
- */
-class DescribeIndexListRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -24750,6 +26636,12 @@ class RetryVulFixRequest extends  AbstractModel {
          */
         this.VulId = null;
 
+        /**
+         * Kb Id 
+         * @type {number || null}
+         */
+        this.KbId = null;
+
     }
 
     /**
@@ -24762,6 +26654,7 @@ class RetryVulFixRequest extends  AbstractModel {
         this.FixId = 'FixId' in params ? params.FixId : null;
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
         this.VulId = 'VulId' in params ? params.VulId : null;
+        this.KbId = 'KbId' in params ? params.KbId : null;
 
     }
 }
@@ -24775,13 +26668,21 @@ class DescribeRiskDnsEventListRequest extends  AbstractModel {
         super();
 
         /**
-         * <li>IpOrName - String - required: no - filter by host IP or alias</li>
+         * <li>MachineName  Host name</li>
+
+
+
+Instance ID  
+
+ 
+
+IP    Private IP address or public IP address - Required: No - Filter by host IP or alias</li>
 <li>HostId - String - required: no - host ID</li>
 <li>AgentId - String - required: no - client ID</li>
 <li>PolicyType - String - required: no - policy type: 0 - system policy; 1 - user-defined policy</li>
-<li>Domain - String - required: no - domain name (First convert the domain name into the urlencode format, and then encode it using base64.)</li>
+<li>Domain - String - Required: No - Domain name (URL-encode the Domain name first, then base64 it)</li>
 <li>HandleStatus - String - required: no - filter by status: 0 - pending; 2 - trusted; 3 - untrusted</li>
-<li>BeginTime - String - required: no - start time of last access</li>
+<li>BeginTime - String - Required: no - start time of last access</li>
 <li>EndTime - String - required: no - end time of last access</li>
          * @type {Array.<Filter> || null}
          */
@@ -24924,7 +26825,7 @@ class DescribeLogKafkaDeliverInfoResponse extends  AbstractModel {
         this.Username = null;
 
         /**
-         * xx
+         * Shipping type details.
          * @type {Array.<DeliverTypeDetails> || null}
          */
         this.DeliverTypeDetails = null;
@@ -25015,7 +26916,6 @@ class DescribeVulEffectModulesResponse extends  AbstractModel {
 
         /**
          * List of affected hosts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VulEffectModuleInfo> || null}
          */
         this.VulEffectModuleInfo = null;
@@ -25129,7 +27029,6 @@ class DescribeMalwareWhiteListAffectListResponse extends  AbstractModel {
 
         /**
          * List of events affected by allowlist rules
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MalwareWhiteListAffectEvent> || null}
          */
         this.AffectList = null;
@@ -25275,6 +27174,18 @@ class DescribeRansomDefenseEventsListRequest extends  AbstractModel {
          */
         this.By = null;
 
+        /**
+         * Event Creation Start Time
+         * @type {string || null}
+         */
+        this.CreateBeginTime = null;
+
+        /**
+         * Incident creation end time
+         * @type {string || null}
+         */
+        this.CreateEndTime = null;
+
     }
 
     /**
@@ -25297,6 +27208,8 @@ class DescribeRansomDefenseEventsListRequest extends  AbstractModel {
         }
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
+        this.CreateBeginTime = 'CreateBeginTime' in params ? params.CreateBeginTime : null;
+        this.CreateEndTime = 'CreateEndTime' in params ? params.CreateEndTime : null;
 
     }
 }
@@ -25341,42 +27254,36 @@ class RansomDefenseStrategyMachineBackupInfo extends  AbstractModel {
 
         /**
          * Public IP address
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MachineWanIp = null;
 
         /**
-         * Cloud tag
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Cloud Tag
          * @type {Array.<Tag> || null}
          */
         this.CloudTags = null;
 
         /**
          * Availability zone information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {RegionInfo || null}
          */
         this.RegionInfo = null;
 
         /**
-         * CWPP tag
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host security tag
          * @type {Array.<MachineTag> || null}
          */
         this.Tag = null;
 
         /**
          * Protection status: 0 Disabled, 1 Enabled.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
          * Policy ID. 0 indicates no binding to any policy.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.StrategyId = null;
@@ -25384,66 +27291,69 @@ Note: This field may return null, indicating that no valid values can be obtaine
         /**
          * Hard disk information, all hard disks take effect when left blank:
 Separate diskId1|diskName1;diskId2|diskName2
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DiskInfo = null;
 
         /**
          * Policy name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StrategyName = null;
 
         /**
          * Number of Backups
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.BackupCount = null;
 
         /**
          * Latest Backup Status: 0 - Backing Up, 1 - Normal, 2 - Failed, 9 - No Backup Yet
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.LastBackupStatus = null;
 
         /**
          * Reason for the Last Backup Failure
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LastBackupMessage = null;
 
         /**
          * Last Backup Time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LastBackupTime = null;
 
         /**
          * Latest Rollback Progress Percentage
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RollBackPercent = null;
 
         /**
          * Latest Rollback Status: 0 - In Progress, 1 - Succeeded, 2 - Failed
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RollBackStatus = null;
 
         /**
          * Backup Success Count
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.BackupSuccessCount = null;
+
+        /**
+         * Version information: 0-Basic version, 1-Pro edition, 2-Flagship edition, 3-Lightweight edition
+         * @type {number || null}
+         */
+        this.HostVersion = null;
+
+        /**
+         * Machine Zone Type. CVM - Cloud Virtual Machine; BM: Bare Metal; ECM: Edge Computing Machine; LH: Lightweight Application Server; Other: Hybrid Cloud Zone
+         * @type {string || null}
+         */
+        this.MachineType = null;
 
     }
 
@@ -25495,6 +27405,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RollBackPercent = 'RollBackPercent' in params ? params.RollBackPercent : null;
         this.RollBackStatus = 'RollBackStatus' in params ? params.RollBackStatus : null;
         this.BackupSuccessCount = 'BackupSuccessCount' in params ? params.BackupSuccessCount : null;
+        this.HostVersion = 'HostVersion' in params ? params.HostVersion : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
 
     }
 }
@@ -25595,6 +27507,55 @@ class ExportRansomDefenseBackupListRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyRaspRules request structure.
+ * @class
+ */
+class ModifyRaspRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule ID. (Leave it blank during addition, and specify it during editing.)
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Vulnerability ID array.
+         * @type {Array.<number> || null}
+         */
+        this.VulVulsIDs = null;
+
+        /**
+         * Base64-encoded regular expression for allowlisting requests within a custom request scope. It cannot be left blank unless all requests are to be allowlisted.
+         * @type {string || null}
+         */
+        this.URLRegexp = null;
+
+        /**
+         * Allowlisting method. 0: allowlist requests within a custom request scope; 1: allowlist all requests.
+         * @type {number || null}
+         */
+        this.WhiteType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.VulVulsIDs = 'VulVulsIDs' in params ? params.VulVulsIDs : null;
+        this.URLRegexp = 'URLRegexp' in params ? params.URLRegexp : null;
+        this.WhiteType = 'WhiteType' in params ? params.WhiteType : null;
+
+    }
+}
+
+/**
  * DescribeWarningHostConfig response structure.
  * @class
  */
@@ -25610,34 +27571,30 @@ class DescribeWarningHostConfigResponse extends  AbstractModel {
 
         /**
          * List of Project or Tag Names, empty for custom hosts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.ItemLabels = null;
 
         /**
          * Machine list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Quuids = null;
 
         /**
          * Total Number of Machine Lists
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
          * List of Project or Tag IDs, empty for custom hosts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.ItemLabelIds = null;
 
         /**
-         * 
+         * List of machines to be excluded.
          * @type {Array.<string> || null}
          */
         this.ExcludedQuuids = null;
@@ -25739,6 +27696,97 @@ class ModifyRansomDefenseEventsStatusRequest extends  AbstractModel {
 }
 
 /**
+ * RASP allowlist rule.
+ * @class
+ */
+class RaspRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Regular expression for a custom request URL range. If this parameter is left blank, saving fails.
+         * @type {string || null}
+         */
+        this.URLRegexp = null;
+
+        /**
+         * Vulnerability ID
+         * @type {number || null}
+         */
+        this.VulVulsID = null;
+
+        /**
+         * Vulnerability name
+         * @type {string || null}
+         */
+        this.VulVulsName = null;
+
+        /**
+         * cve_id
+         * @type {string || null}
+         */
+        this.CveID = null;
+
+        /**
+         * Vulnerability defense type, which comes from the vulnerability table. 1: component vulnerability defense supported, with component vulnerabilities not allowlisted through a regular expression; 2: regular expression defense supported.
+         * @type {number || null}
+         */
+        this.SupportDefense = null;
+
+        /**
+         * Allowlisting scope. 0: Allowlist all requests; 1: Allowlist requests within a custom request scope.
+         * @type {number || null}
+         */
+        this.WhiteType = null;
+
+        /**
+         * Status. 0: valid.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.URLRegexp = 'URLRegexp' in params ? params.URLRegexp : null;
+        this.VulVulsID = 'VulVulsID' in params ? params.VulVulsID : null;
+        this.VulVulsName = 'VulVulsName' in params ? params.VulVulsName : null;
+        this.CveID = 'CveID' in params ? params.CveID : null;
+        this.SupportDefense = 'SupportDefense' in params ? params.SupportDefense : null;
+        this.WhiteType = 'WhiteType' in params ? params.WhiteType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+    }
+}
+
+/**
  * DescribeUsersConfig response structure.
  * @class
  */
@@ -25774,6 +27822,27 @@ class DescribeUsersConfigResponse extends  AbstractModel {
 }
 
 /**
+ * RaspEventOverview request structure.
+ * @class
+ */
+class RaspEventOverviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeAttackStatistics response structure.
  * @class
  */
@@ -25783,70 +27852,60 @@ class DescribeAttackStatisticsResponse extends  AbstractModel {
 
         /**
          * Total Number of Attacks
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.PendingAttackCount = null;
 
         /**
          * Total Attack Attempts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.PendingTryAttackCount = null;
 
         /**
          * Total Number of Successful Attacks
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.PendingSuccAttackCount = null;
 
         /**
          * Number of New Attacks Today
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.PendingNewAttackCount = null;
 
         /**
          * Total Number of Assets Under Attack
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.AttackedAssetCount = null;
 
         /**
          * Number of New Attacked Assets Today
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.NewAttackedAssetCount = null;
 
         /**
          * Total Number of Attacked Ports
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.AttackedPortCount = null;
 
         /**
          * Number of New Attacked Ports Today
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.NewAttackedPortCount = null;
 
         /**
          * Total Number of Attack Source IPs
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.AttackSrcIpCount = null;
 
         /**
          * Number of New Attacking Source IPs Today
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.NewAttackSrcIpCount = null;
@@ -26144,7 +28203,6 @@ class DescribeVulDefenceListResponse extends  AbstractModel {
 
         /**
          * Vulnerability defense list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VulDefenceRangeDetail> || null}
          */
         this.List = null;
@@ -26265,13 +28323,13 @@ class HostInfo extends  AbstractModel {
         super();
 
         /**
-         * Quuid
+         * Host QUUID
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
-         * Uuid
+         * Host UUID.
          * @type {string || null}
          */
         this.Uuid = null;
@@ -26329,7 +28387,6 @@ class DescribeVulHostTopResponse extends  AbstractModel {
 
         /**
          * List of top server risks
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VulHostTopInfo> || null}
          */
         this.VulHostTopList = null;
@@ -26546,18 +28603,150 @@ class SyncAssetScanRequest extends  AbstractModel {
 }
 
 /**
- * RecoverMalwares request structure.
+ * List of hosts affected by vulnerabilities
  * @class
  */
-class RecoverMalwaresRequest extends  AbstractModel {
+class VulEffectHostList extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Trojan ID array (The maximum number of IDs is 100)
-         * @type {Array.<number> || null}
+         * Event ID
+         * @type {number || null}
          */
-        this.Ids = null;
+        this.EventId = null;
+
+        /**
+         * Status: 0 - pending processing; 1 - ignored; 3 - fixed; 5 - detecting; 6 - in remediation; 7 - rolling back; 8 - fix failed.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Last detection time
+         * @type {string || null}
+         */
+        this.LastTime = null;
+
+        /**
+         * Hazard level: 1-Low-risk; 2-Medium-risk; 3-High-risk; 4-Critical
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * Host QUUID
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * Host UUID
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * Host IP address
+         * @type {string || null}
+         */
+        this.HostIp = null;
+
+        /**
+         * Host alias
+         * @type {string || null}
+         */
+        this.AliasName = null;
+
+        /**
+         * Host tag
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Version information: 0-Basic version, 1-Pro edition, 2-Flagship edition, 3-Lightweight edition
+         * @type {number || null}
+         */
+        this.HostVersion = null;
+
+        /**
+         * Whether automatic fixing is supported 0: Cannot be automatically repaired, 1: Can be automatically repaired, 2: Client offline, 3: Host can only be manually repaired if not flagship, 4: Not supported for this model, 5: In remediation, 6: Fixed, 7: In-progress detection, 9: Fix failed, 10: Ignored, 11: Vulnerability supported only on linux, not Windows, 12: Vulnerability supported only on Windows, not on linux, 13: Fixing failed but host is offline, 14: Fixing failed but host is not flagship, 15: Manually fixed
+         * @type {number || null}
+         */
+        this.IsSupportAutoFix = null;
+
+        /**
+         * Reason for failure
+         * @type {string || null}
+         */
+        this.FixStatusMsg = null;
+
+        /**
+         * First detection time
+         * @type {string || null}
+         */
+        this.FirstDiscoveryTime = null;
+
+        /**
+         * Instance status: "PENDING" - creating, "LAUNCH_FAILED" - creation failed, "RUNNING" - running, "STOPPED" - shutdown, "STARTING" - starting, "STOPPING" - indicates shutdown in progress, "REBOOTING" - restarting, "SHUTDOWN" - indicate shutdown and pending termination, "TERMINATING" - indicates terminating in progress.
+         * @type {string || null}
+         */
+        this.InstanceState = null;
+
+        /**
+         * Public IP address
+         * @type {string || null}
+         */
+        this.PublicIpAddresses = null;
+
+        /**
+         * Cloud Tag Information
+         * @type {Array.<Tags> || null}
+         */
+        this.CloudTags = null;
+
+        /**
+         * Host Additional Information
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
+        /**
+         * Host type
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * Availability zone ID.
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Whether to create a snapshot for the fix task: 0: not created; other: created.
+         * @type {number || null}
+         */
+        this.HasSnapshot = null;
+
+        /**
+         * Last repair time
+         * @type {string || null}
+         */
+        this.LatestFixTime = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.DescriptionEn = null;
 
     }
 
@@ -26568,7 +28757,42 @@ class RecoverMalwaresRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = 'Ids' in params ? params.Ids : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.LastTime = 'LastTime' in params ? params.LastTime : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.HostIp = 'HostIp' in params ? params.HostIp : null;
+        this.AliasName = 'AliasName' in params ? params.AliasName : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.HostVersion = 'HostVersion' in params ? params.HostVersion : null;
+        this.IsSupportAutoFix = 'IsSupportAutoFix' in params ? params.IsSupportAutoFix : null;
+        this.FixStatusMsg = 'FixStatusMsg' in params ? params.FixStatusMsg : null;
+        this.FirstDiscoveryTime = 'FirstDiscoveryTime' in params ? params.FirstDiscoveryTime : null;
+        this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
+        this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
+
+        if (params.CloudTags) {
+            this.CloudTags = new Array();
+            for (let z in params.CloudTags) {
+                let obj = new Tags();
+                obj.deserialize(params.CloudTags[z]);
+                this.CloudTags.push(obj);
+            }
+        }
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.HasSnapshot = 'HasSnapshot' in params ? params.HasSnapshot : null;
+        this.LatestFixTime = 'LatestFixTime' in params ? params.LatestFixTime : null;
+        this.DescriptionEn = 'DescriptionEn' in params ? params.DescriptionEn : null;
 
     }
 }
@@ -26644,6 +28868,74 @@ class ExportSecurityTrendsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeYDRaspBlackWhite request structure.
+ * @class
+ */
+class DescribeYDRaspBlackWhiteRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter criteria
+<li>WhiteContent - String - required: no - allowlist content search</li>
+<li>GroupName - String - required: no - Search rule name</li>
+<li>Source - String - Required: No - Allowlisted module</li>
+<li>Status - String - required: no - policy switch</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Number of entries to be returned. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sort field, which currently supports CreateTime and ModifyTime. The default value is ModifyTime.
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * Sorting method: DESC, ASC.
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
  * ModifyBanWhiteList request structure.
  * @class
  */
@@ -26714,28 +29006,24 @@ class BaselineHostTopList extends  AbstractModel {
 
         /**
          * List of event levels and occurrences
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BaselineEventLevelInfo> || null}
          */
         this.EventLevelList = null;
 
         /**
          * Host name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostName = null;
 
         /**
          * Host QUUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
          * Score for calculating weight
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Score = null;
@@ -26866,16 +29154,18 @@ class DescribeBruteAttackListRequest extends  AbstractModel {
         /**
          * Filter criteria
 <li>IpOrAlias - String - required: no - filter by host IP or alias</li>
-<li>Uuid - String - required: no - CWPP unique UUID</li>
+<li>Uuid - String - Required: no - CWP unique UUID</li>
 <li>Quuid - String - required: no - CVM UUID</li>
 <li>Status - String - required: no - filter by status: failed - FAILED; succeeded - SUCCESS</li>
 <li>UserName - String - required: no - filter by UserName</li>
-<li>SrcIp - String - required: no - filter by source IP</li>
+<li>SrcIp - String - Required: No - Source ip filter criteria</li>
 <li>CreateBeginTime - String - required: no - filter by first attack time, start time</li>
-<li>CreateEndTime - String - required: no - filter by first attack time, end time</li>
+<li>CreateEndTime - String - Required: no - Filter by first attack time, end time</li>
 <li>ModifyBeginTime - String - required: no - filter by last attack time, start time</li>
 <li>ModifyEndTime - String - required: no - filter by last attack time, end time</li>
-<li>Banned - String - required: no - filter by blocking status (separate multiple items with commas): 0 - not blocked (global ZK switch is off); 82 - not blocked (Non-Pro Edition); 83 - not blocked (allowlisted); 1 - blocked; 2 - not blocked (abnormal program); 3 - not blocked (private network attacks cannot be blocked); 4 - not blocked (Anping is not supported)</li>
+<li>Banned - String - Required: No - Blocking status filtering, multiple values separated by ",": 0-unblocked (global ZK switch off), 82-unblocked (non-Pro Edition), 83-unblocked (added to allowlist), 1-Block Success (completed), 2-unblocked-abnormal program, 3-unblocked-internal network attack (blocking is not supported), 4-unblocked-Anping (blocking is not supported), 10-Block Success (active)</li>
+<li>DataFrom - Int - Matched rule: 0-login rule, 1-intelligence rule</li>
+<li>EventType - String - Required: No - Filter criteria for cracking status: 200-Cracking failure (incorrect password), 300-Successful cracking, 400-Cracking failure (account does not exist)</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -26940,40 +29230,12 @@ class DescribeVdbAndPocInfoRequest extends  AbstractModel {
 }
 
 /**
- * Statistics on top network attacks
+ * DescribeInjectRiskyServiceSwitch request structure.
  * @class
  */
-class NetAttackTopInfo extends  AbstractModel {
+class DescribeInjectRiskyServiceSwitchRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Top Statistical Data on Network Attack Host Dimension
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<TopInfo> || null}
-         */
-        this.Agent = null;
-
-        /**
-         * Top Statistical Data on Network Attack IP Source Dimension
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<TopInfo> || null}
-         */
-        this.SrcIp = null;
-
-        /**
-         * Top Statistical Data on Network Attack Target Port Dimension
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<TopInfo> || null}
-         */
-        this.DstPort = null;
-
-        /**
-         * Top Statistical Data on Network Attack Vulnerability Dimension
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<TopInfo> || null}
-         */
-        this.Vul = null;
 
     }
 
@@ -26983,42 +29245,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
     deserialize(params) {
         if (!params) {
             return;
-        }
-
-        if (params.Agent) {
-            this.Agent = new Array();
-            for (let z in params.Agent) {
-                let obj = new TopInfo();
-                obj.deserialize(params.Agent[z]);
-                this.Agent.push(obj);
-            }
-        }
-
-        if (params.SrcIp) {
-            this.SrcIp = new Array();
-            for (let z in params.SrcIp) {
-                let obj = new TopInfo();
-                obj.deserialize(params.SrcIp[z]);
-                this.SrcIp.push(obj);
-            }
-        }
-
-        if (params.DstPort) {
-            this.DstPort = new Array();
-            for (let z in params.DstPort) {
-                let obj = new TopInfo();
-                obj.deserialize(params.DstPort[z]);
-                this.DstPort.push(obj);
-            }
-        }
-
-        if (params.Vul) {
-            this.Vul = new Array();
-            for (let z in params.Vul) {
-                let obj = new TopInfo();
-                obj.deserialize(params.Vul[z]);
-                this.Vul.push(obj);
-            }
         }
 
     }
@@ -27033,22 +29259,19 @@ class DescribeVulListResponse extends  AbstractModel {
         super();
 
         /**
-         * Vulnerability list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of vulnerabilities
          * @type {Array.<VulInfoList> || null}
          */
         this.VulInfoList = null;
 
         /**
          * Total number of vulnerabilities
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Total number of focused vulnerabilities
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total number of key vulnerabilities
          * @type {number || null}
          */
         this.FollowVulCount = null;
@@ -27100,35 +29323,30 @@ class BaselineHost extends  AbstractModel {
 
         /**
          * Host name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostName = null;
 
         /**
          * Host tag
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostTag = null;
 
         /**
          * Private IP address
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostIp = null;
 
         /**
          * Public IP address
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.WanIp = null;
 
         /**
          * Host Additional Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -27249,6 +29467,82 @@ class RemoveMachineRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRaspLicenseList request structure.
+ * @class
+ */
+class DescribeRaspLicenseListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter criteria
+-AssetType Asset type (CWP Host security asset, TCSS_HOST Container host node, TCSS_EKS Container super node)
+-PluginStatus Plug-in status (Normal, Abnormal, Inactive)
+-ProtectionSwitch (Enable, Disable)
+-ProtectionVersion Protection edition (Rasp authorization package, Unauthorized)
+-Instance ID
+-Instance name
+-InstanceIP Instance IP (private IP address/public network IP)
+-Node ID of the container node
+-NodeName Container node name
+-Container Cluster ID
+-Cluster name of the container cluster
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Maximum number of entries. Default value: 10.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset, which is 0 by default.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting method: ASC, DESC.
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sort value
+-Latest update time
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
  * ModifyLicenseBinds response structure.
  * @class
  */
@@ -27328,14 +29622,12 @@ class DescribeBaselineStrategyListResponse extends  AbstractModel {
 
         /**
          * Total number of pagination query records
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
          * User policy information list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Strategy> || null}
          */
         this.StrategyList = null;
@@ -27366,6 +29658,27 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVulDefenceOverviewCount request structure.
+ * @class
+ */
+class DescribeVulDefenceOverviewCountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -27427,7 +29740,7 @@ class CreateRansomDefenseStrategyRequest extends  AbstractModel {
         this.ExcludeDir = null;
 
         /**
-         * Backup pattern: 0 weekly, 1 daily.
+         * Backup mode: 0 weekly, 1 daily, 2 do not backup.
          * @type {number || null}
          */
         this.BackupType = null;
@@ -27484,18 +29797,18 @@ class CreateRansomDefenseStrategyRequest extends  AbstractModel {
 }
 
 /**
- * DeleteLoginWhiteList request structure.
+ * DescribeMalwareFile request structure.
  * @class
  */
-class DeleteLoginWhiteListRequest extends  AbstractModel {
+class DescribeMalwareFileRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Allowlisted IDs (The maximum number is 100.)
-         * @type {Array.<number> || null}
+         * Trojan record ID
+         * @type {number || null}
          */
-        this.Ids = null;
+        this.Id = null;
 
     }
 
@@ -27506,7 +29819,7 @@ class DeleteLoginWhiteListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = 'Ids' in params ? params.Ids : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -27553,13 +29866,13 @@ class DescribeLicenseListRequest extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * 
+         * ASC for ascending order; DESC for descending order.
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * 
+         * Number of LicenseCnt authorizations.
          * @type {string || null}
          */
         this.By = null;
@@ -27662,7 +29975,7 @@ class CreateMalwareWhiteListRequest extends  AbstractModel {
         this.EventId = null;
 
         /**
-         * Perform allowlisting operations on pending historical items; 0 indicates no action, 1 indicates processing
+         * Whether to add historical pending events to an allowlist. 0: no, 1: yes.
          * @type {number || null}
          */
         this.IsHandleHistoryEvents = null;
@@ -27864,24 +30177,36 @@ class DescribeVulOverviewResponse extends  AbstractModel {
 }
 
 /**
- * Attack backtracking path description
+ * ExportRansomDefenseStrategyList request structure.
  * @class
  */
-class AttackSourceEdge extends  AbstractModel {
+class ExportRansomDefenseStrategyListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Starting node
-         * @type {string || null}
+         * Filter criteria
+<li>Ips - String - required: no - query by IP</li>
+<li>MachineNames - String - required: no - query by instance name</li>
+<li>Names - String - required: no - query by instance name</li>
+<li>Dirs - String - Required: No - Bait Directory </li>
+<li>Status - String - Required: No - Policy Status: 0 Disabled, 1 Enabled </li>
+<li>BackupType - String - Required: No - Backup Mode: 0-Weekly; 1-Daily </li>
+         * @type {Array.<Filters> || null}
          */
-        this.From = null;
+        this.Filters = null;
 
         /**
-         * Target node
+         * Sorting method: ASC / DESC
          * @type {string || null}
          */
-        this.To = null;
+        this.Order = null;
+
+        /**
+         * Sorting fields, supporting CreateTime and MachineCount
+         * @type {string || null}
+         */
+        this.By = null;
 
     }
 
@@ -27892,8 +30217,17 @@ class AttackSourceEdge extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.From = 'From' in params ? params.From : null;
-        this.To = 'To' in params ? params.To : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -27912,6 +30246,12 @@ class DeleteMaliciousRequestsRequest extends  AbstractModel {
          */
         this.Ids = null;
 
+        /**
+         * Whether to delete all.
+         * @type {boolean || null}
+         */
+        this.All = null;
+
     }
 
     /**
@@ -27922,6 +30262,7 @@ class DeleteMaliciousRequestsRequest extends  AbstractModel {
             return;
         }
         this.Ids = 'Ids' in params ? params.Ids : null;
+        this.All = 'All' in params ? params.All : null;
 
     }
 }
@@ -27986,53 +30327,58 @@ class VulInfoHostInfo extends  AbstractModel {
         super();
 
         /**
-         * Host name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * host name
          * @type {string || null}
          */
         this.HostName = null;
 
         /**
-         * Host IP
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host IP address
          * @type {string || null}
          */
         this.HostIp = null;
 
         /**
          * Host tag
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Tags = null;
 
         /**
          * Host QUUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
-         * 0 - the vulnerability cannot be fixed automatically; 1 - the vulnerability can be fixed automatically; 2 - the client has been offline; 3 - the host is not the ultimate edition and can only be fixed manually; 4 - the model does not allow automatic fix; 5 - fixing; 6 - fixed; 7 - under detection; 9 - fix failed; 10 - ignored; 11 - the vulnerability is supported only on Linux, not on Windows; 12 - the vulnerability is supported only on Windows, not on Linux.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 0: Vulnerability cannot be automatically repaired, 1: Can be automatically repaired, 2: Client offline, 3: Manual fixing supported for non-flagship hosts, 4: Not supported for this model, 5: In remediation, 6: Fixed, 7: Detecting, 9: Fix failed, 10: Ignored, 11: Vulnerability supported only on linux, not Windows, 12: Vulnerability supported only on Windows, not linux.
          * @type {number || null}
          */
         this.IsSupportAutoFix = null;
 
         /**
          * Host UUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
-         * Host InstanceId
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * Host type
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * agent online status; 0 for offline, 1 for online.
+         * @type {number || null}
+         */
+        this.AgentStatus = null;
 
     }
 
@@ -28050,6 +30396,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsSupportAutoFix = 'IsSupportAutoFix' in params ? params.IsSupportAutoFix : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.AgentStatus = 'AgentStatus' in params ? params.AgentStatus : null;
 
     }
 }
@@ -28064,7 +30412,6 @@ class DescribeJavaMemShellPluginListResponse extends  AbstractModel {
 
         /**
          * Java Memory Trojan Plugin List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<JavaMemShellPluginSetting> || null}
          */
         this.List = null;
@@ -28100,34 +30447,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyLogKafkaState response structure.
- * @class
- */
-class ModifyLogKafkaStateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -28322,7 +30641,9 @@ class DescribeJavaMemShellListRequest extends  AbstractModel {
         super();
 
         /**
-         * Filtering criteria: Keywords: IP or host name for fuzzy query; Type or status for precise match; CreateBeginTime, CreateEndTime for time period query
+         * Filtering criteria: InstanceID and IP
+
+MachineName host name for fuzzy query; Type, status for precise match; CreateBeginTime, CreateEndTime for time period
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
@@ -28338,6 +30659,18 @@ class DescribeJavaMemShellListRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Limit = null;
+
+        /**
+         * Sorting method (case insensitive): asc for ascending order; desc for descending order
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sort column, strictly equal: Latest detection time RecentFoundTime
+         * @type {string || null}
+         */
+        this.By = null;
 
     }
 
@@ -28359,6 +30692,8 @@ class DescribeJavaMemShellListRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -28434,6 +30769,100 @@ class DescribeAgentInstallationTokenResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeMachines request structure.
+ * @class
+ */
+class DescribeMachinesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type of the machine's zone
+CVM: Cloud Virtual Machine
+BM: BMECM: Edge Computing Machine
+LH: Lighthouse
+Other: Hybrid Cloud Zone
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * Machine region. For example, ap-guangzhou, ap-shanghai. For non-Tencent Cloud hosts, use ap-others.
+         * @type {string || null}
+         */
+        this.MachineRegion = null;
+
+        /**
+         * Number of returns. It is 10 by default, and the maximum value is 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter criteria
+<li>Ips - String - Required: No - Query by ip</li>
+<li>Names - String - required: no - query by instance name</li>
+<li>InstanceIds - String - Required: No - Query by instance id</li>
+<li>Version - String required: no - current protection version ( PRO_VERSION: Pro Edition | BASIC_VERSION: Basic Edition | Flagship: Ultimate Edition | ProtectedMachines: Pro + Ultimate Editions)</li>
+<li>Risk - String - required: no - risky host (yes)</li>
+<li>Os - String - required: no - operating system (DescribeMachineOsList API value)</li>
+Each filtering criterion supports only one value; queries of multiple values with OR relationship are not supported.</li>
+<li>Quuid - String - Required: no - CVM instance UUID. Maximum value: 100.</li>
+<li>AddedOnTheFifteen - String required: no - whether to query only hosts added within the last 15 days (1: yes) </li>
+<li> TagId - String required: no - query the list of hosts associated with the specified tag </li>
+<li>AgentStatus - String - required: no - ALL total; ONLINE under protection; OFFLINE offline; UNINSTALLED not installed</li>
+<li>MachineStatus - String required: no - ALL all; RUNNING running; STOPPED is shut down; EXPIRED to be recycled</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * ID List of Businesses to which machines belong
+         * @type {Array.<number> || null}
+         */
+        this.ProjectIds = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MachineAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
+        this.MachineAppId = 'MachineAppId' in params ? params.MachineAppId : null;
+
+    }
+}
+
+/**
  * Visualized emergency notification on the large screen
  * @class
  */
@@ -28485,7 +30914,6 @@ class DescribeAssetMachineTagTopResponse extends  AbstractModel {
 
         /**
          * Top 5 tags along with their counts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetKeyVal> || null}
          */
         this.Tags = null;
@@ -28520,6 +30948,49 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ExportVulDefenceList request structure.
+ * @class
+ */
+class ExportVulDefenceListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filtering criteria: Keywords: vulnerability name or CVE ID for fuzzy matching, and level for precise matching
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Fields to be exported. All fields are to be exported by default.
+         * @type {Array.<string> || null}
+         */
+        this.Where = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Where = 'Where' in params ? params.Where : null;
+
+    }
+}
+
+/**
  * CreateScanMalwareSetting response structure.
  * @class
  */
@@ -28529,7 +31000,6 @@ class CreateScanMalwareSettingResponse extends  AbstractModel {
 
         /**
          * Task ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TaskId = null;
@@ -28632,7 +31102,6 @@ class CKafkaInstanceInfo extends  AbstractModel {
 
         /**
          * Topic list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<CKafkaTopicInfo> || null}
          */
         this.TopicList = null;
@@ -28727,6 +31196,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyReverseShellRulesAggregation response structure.
+ * @class
+ */
+class ModifyReverseShellRulesAggregationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Resource management Web application list information
  * @class
  */
@@ -28772,13 +31269,12 @@ class AssetWebFrameBaseInfo extends  AbstractModel {
 
         /**
          * Host tag
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MachineTag> || null}
          */
         this.Tag = null;
 
         /**
-         * Database name
+         * Web application name.
          * @type {string || null}
          */
         this.Name = null;
@@ -28826,8 +31322,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsNew = null;
 
         /**
-         * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
+         *  Additional information
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -28901,6 +31396,12 @@ class ModifyJavaMemShellsStatusRequest extends  AbstractModel {
          */
         this.Ids = null;
 
+        /**
+         * Whether to update all statuses. This parameter takes effect only when the statuses are Ignored, Processed, and Deleted.
+         * @type {boolean || null}
+         */
+        this.UpdateAll = null;
+
     }
 
     /**
@@ -28912,6 +31413,7 @@ class ModifyJavaMemShellsStatusRequest extends  AbstractModel {
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.Ids = 'Ids' in params ? params.Ids : null;
+        this.UpdateAll = 'UpdateAll' in params ? params.UpdateAll : null;
 
     }
 }
@@ -28979,13 +31481,13 @@ class ExportAttackEventsRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * Sorting value: CreateTime
+         * Sorting value: CreateTime
          * @type {string || null}
          */
         this.By = null;
 
         /**
-         * Sorting method: ASC, DESC
+         * Sorting method: ASC, DESC
          * @type {string || null}
          */
         this.Order = null;
@@ -29031,6 +31533,15 @@ class ModifyAutoOpenProVersionConfigRequest extends  AbstractModel {
         this.Status = null;
 
         /**
+         * Strengthen protection mode
+PROVERSION_POSTPAY indicates the Pro Edition pay-as-you-go mode.
+PROVERSION_PREPAY Professional Edition - Subscription
+FLAGSHIP_PREPAY Flagship Edition - Subscription
+         * @type {string || null}
+         */
+        this.ProtectType = null;
+
+        /**
          * Automatic purchase/expansion authorization switch, 1 by default, 0 for OFF, 1 for ON.
          * @type {number || null}
          */
@@ -29048,6 +31559,24 @@ class ModifyAutoOpenProVersionConfigRequest extends  AbstractModel {
          */
         this.RepurchaseRenewSwitch = null;
 
+        /**
+         * Automatically add machines and bind rasp. 0: Turn off. 1: Turn on.
+         * @type {number || null}
+         */
+        this.AutoBindRaspSwitch = null;
+
+        /**
+         * Automatically add machines with rasp protection enabled, off by default. 0: Off, 1: On
+         * @type {number || null}
+         */
+        this.AutoOpenRaspSwitch = null;
+
+        /**
+         * Automatic scaling down switch, 0 for off and 1 for on
+         * @type {number || null}
+         */
+        this.AutoDowngradeSwitch = null;
+
     }
 
     /**
@@ -29058,9 +31587,13 @@ class ModifyAutoOpenProVersionConfigRequest extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ProtectType = 'ProtectType' in params ? params.ProtectType : null;
         this.AutoRepurchaseSwitch = 'AutoRepurchaseSwitch' in params ? params.AutoRepurchaseSwitch : null;
         this.AutoRepurchaseRenewSwitch = 'AutoRepurchaseRenewSwitch' in params ? params.AutoRepurchaseRenewSwitch : null;
         this.RepurchaseRenewSwitch = 'RepurchaseRenewSwitch' in params ? params.RepurchaseRenewSwitch : null;
+        this.AutoBindRaspSwitch = 'AutoBindRaspSwitch' in params ? params.AutoBindRaspSwitch : null;
+        this.AutoOpenRaspSwitch = 'AutoOpenRaspSwitch' in params ? params.AutoOpenRaspSwitch : null;
+        this.AutoDowngradeSwitch = 'AutoDowngradeSwitch' in params ? params.AutoDowngradeSwitch : null;
 
     }
 }
@@ -29102,8 +31635,7 @@ class DescribeAssetWebLocationInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * Site information
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Site information.
          * @type {AssetWebLocationInfo || null}
          */
         this.WebLocation = null;
@@ -29274,7 +31806,6 @@ class RiskProcessEvent extends  AbstractModel {
 
         /**
          * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -29284,6 +31815,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.Uuid = null;
+
+        /**
+         * First time detection method 0 scan;1 real-time monitoring
+         * @type {number || null}
+         */
+        this.FirstDetectionMethod = null;
 
     }
 
@@ -29318,6 +31855,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.MachineExtraInfo = obj;
         }
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.FirstDetectionMethod = 'FirstDetectionMethod' in params ? params.FirstDetectionMethod : null;
 
     }
 }
@@ -29666,48 +32204,18 @@ class CreateLogExportResponse extends  AbstractModel {
 }
 
 /**
- * Expert service - emergency response information
+ * TestWebHookRule response structure.
  * @class
  */
-class EmergencyResponseInfo extends  AbstractModel {
+class TestWebHookRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.TaskId = null;
-
-        /**
-         * Number of hosts
-         * @type {number || null}
-         */
-        this.HostNum = null;
-
-        /**
-         * Service status: 0 not started, · in progress, 2 completed
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Service start time
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Service end time
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Report download link
-         * @type {string || null}
-         */
-        this.ReportPath = null;
+        this.RequestId = null;
 
     }
 
@@ -29718,12 +32226,7 @@ class EmergencyResponseInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.HostNum = 'HostNum' in params ? params.HostNum : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.ReportPath = 'ReportPath' in params ? params.ReportPath : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -29920,7 +32423,6 @@ class RansomDefenseStrategyDetail extends  AbstractModel {
 
         /**
          * Operating UIN
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Uin = null;
@@ -29933,7 +32435,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Policy Remarks
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Description = null;
@@ -29952,28 +32453,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Includes directories, separated by semicolons (;).
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IncludeDir = null;
 
         /**
          * Includes directories, separated by semicolons (;).
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ExcludeDir = null;
 
         /**
          * Backup pattern: 0 weekly, 1 daily.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.BackupType = null;
 
         /**
          * Backup days in a week (1-7): 1; 2; 3; 4.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Weekday = null;
@@ -29992,28 +32489,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Creation time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
          * Last modification time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ModifyTime = null;
 
         /**
          * Number of Bound Machines
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MachineCount = null;
 
         /**
          * Policy Associated Event Count
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.EventCount = null;
@@ -30056,22 +32549,19 @@ class DescribeEmergencyVulListResponse extends  AbstractModel {
         super();
 
         /**
-         * Vulnerability list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of vulnerabilities
          * @type {Array.<EmergencyVul> || null}
          */
         this.List = null;
 
         /**
          * Total number of vulnerabilities
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Whether there is any risk
-Note: This field may return null, indicating that no valid values can be obtained.
+         * is there a risk?
          * @type {boolean || null}
          */
         this.ExistsRisk = null;
@@ -30151,7 +32641,6 @@ class DescribeAssetUserListResponse extends  AbstractModel {
 
         /**
          * Account list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetUserBaseInfo> || null}
          */
         this.Users = null;
@@ -30301,49 +32790,43 @@ class BashEvent extends  AbstractModel {
         this.MachineName = null;
 
         /**
-         * 0: bash log; 1: real-time monitoring (thunder edition)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 0: bash log; 1: real-time monitoring (Thunder Edition)
          * @type {number || null}
          */
         this.DetectBy = null;
 
         /**
-         * Process ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Process id
          * @type {string || null}
          */
         this.Pid = null;
 
         /**
          * Process name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Exe = null;
 
         /**
          * Processing time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ModifyTime = null;
 
         /**
-         * Rule category: 0 - system rule; 1 - user rule
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Rule category. 0: system rule; 1: user rule
          * @type {number || null}
          */
         this.RuleCategory = null;
 
         /**
-         * Automatically generated regular expression\nNote: This field may return null, indicating that no valid values can be obtained.
+         * Automatically generated regular expression
          * @type {string || null}
          */
         this.RegexBashCmd = null;
 
         /**
-         * Host HostName
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host name.
          * @type {string || null}
          */
         this.HostName = null;
@@ -30395,6 +32878,12 @@ class DeleteMalwaresRequest extends  AbstractModel {
          */
         this.Ids = null;
 
+        /**
+         * Whether to delete all.
+         * @type {boolean || null}
+         */
+        this.All = null;
+
     }
 
     /**
@@ -30405,6 +32894,7 @@ class DeleteMalwaresRequest extends  AbstractModel {
             return;
         }
         this.Ids = 'Ids' in params ? params.Ids : null;
+        this.All = 'All' in params ? params.All : null;
 
     }
 }
@@ -30495,6 +32985,56 @@ class RegionSet extends  AbstractModel {
 }
 
 /**
+ * DescribeRaspMemShellListTCSS response structure.
+ * @class
+ */
+class DescribeRaspMemShellListTCSSResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Event list
+         * @type {Array.<RaspMemShellEvent> || null}
+         */
+        this.List = null;
+
+        /**
+         * Total number
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new RaspMemShellEvent();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Enterprise WeChat Robot Host Range
  * @class
  */
@@ -30545,7 +33085,6 @@ class RansomDefenseStrategy extends  AbstractModel {
 
         /**
          * Operating UIN
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Uin = null;
@@ -30558,7 +33097,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Policy Remarks
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Description = null;
@@ -30577,28 +33115,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Includes directories, separated by semicolons (;).
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IncludeDir = null;
 
         /**
          * Includes directories, separated by semicolons (;).
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ExcludeDir = null;
 
         /**
-         * Backup pattern: 0 weekly, 1 daily.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Backup mode: 0 weekly, 1 daily, 2 do not backup.
          * @type {number || null}
          */
         this.BackupType = null;
 
         /**
          * Backup days in a week (1-7): 1; 2; 3; 4.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Weekday = null;
@@ -30617,21 +33151,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Creation time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
          * Last modification time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ModifyTime = null;
 
         /**
          * Number of Bound Machines
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MachineCount = null;
@@ -30673,8 +33204,8 @@ class DescribeIgnoreHostAndItemConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * <li>ItemId - int64 - whether required: no - item ID</i>
-<li>RuleId - int64 - whether required: no - rule ID</li>
+         * <li>ItemId - int64 - required: no - item ID</li>
+<li>RuleId - int64 - required: no - rule ID</li>
 <li>HostId - string - whether required: no - host ID</li>
          * @type {Array.<Filter> || null}
          */
@@ -30816,13 +33347,13 @@ class DescribeScanVulSettingResponse extends  AbstractModel {
         this.ClickTimeout = null;
 
         /**
-         * If empty, scan hosts with all Professional, Premium, and General Discount editions by default; if not empty, only scan the selected hosts.
+         * If empty, scan all Pro Edition, Flagship Edition, and Lite hosts by default. If not empty, only scan selected hosts.
          * @type {Array.<string> || null}
          */
         this.Uuids = null;
 
         /**
-         * 
+         * 0: version comparison, 2: version comparison + POC.
          * @type {number || null}
          */
         this.ScanMethod = null;
@@ -30979,6 +33510,70 @@ class DescribeSecurityBroadcastsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeRaspEventTCSS request structure.
+ * @class
+ */
+class DescribeRaspEventTCSSRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter criteria: Keywords: ip or hostname, VulKeywords vulnerability name or CveId for fuzzy query; AttackTypeKeywords attack type for fuzzy query; Quuid, VulId, EventType, Status for precise match, CreateBeginTime, CreateEndTime time period query
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Data offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Data limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Sorting method (case insensitive): asc for ascending order; desc for descending order
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sort columns, which are strictly equal: CreateTime for creation time, MergeTime for merge time, and Count for event count
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
  * DescribeSearchLogs response structure.
  * @class
  */
@@ -31128,48 +33723,6 @@ class SyncMachinesRequest extends  AbstractModel {
 }
 
 /**
- * Expert service - monthly inspection report
- * @class
- */
-class MonthInspectionReport extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Inspection report name
-         * @type {string || null}
-         */
-        this.ReportName = null;
-
-        /**
-         * Inspection report download link
-         * @type {string || null}
-         */
-        this.ReportPath = null;
-
-        /**
-         * Inspection report update time
-         * @type {string || null}
-         */
-        this.ModifyTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ReportName = 'ReportName' in params ? params.ReportName : null;
-        this.ReportPath = 'ReportPath' in params ? params.ReportPath : null;
-        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
-
-    }
-}
-
-/**
  * SetBashEventsStatus request structure.
  * @class
  */
@@ -31303,7 +33856,7 @@ class ReverseShell extends  AbstractModel {
         this.ParentProcPath = null;
 
         /**
-         * Processing status: 0 - pending; 2 - allowlisted; 3 - processed; 4 - ignored
+         * Processing status. 0 - pending processing; 2 - allowlisted; 3 - processed; 4 - ignored; 6 - blocked.
          * @type {number || null}
          */
         this.Status = null;
@@ -31334,24 +33887,27 @@ class ReverseShell extends  AbstractModel {
 
         /**
          *  Host Additional Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
 
         /**
-         * Process ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Process id
          * @type {number || null}
          */
         this.Pid = null;
 
         /**
-         * Threat level: 0 - medium-risk; 1 - high-risk
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Threat level. 0: medium risk, 1: high risk.
          * @type {number || null}
          */
         this.RiskLevel = null;
+
+        /**
+         * Escaped content of command details. It is used when regular expressions match allowlisted full strings.	
+         * @type {string || null}
+         */
+        this.CmdLineQuote = null;
 
     }
 
@@ -31390,6 +33946,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.Pid = 'Pid' in params ? params.Pid : null;
         this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
+        this.CmdLineQuote = 'CmdLineQuote' in params ? params.CmdLineQuote : null;
 
     }
 }
@@ -31467,56 +34024,48 @@ class NetAttackWhiteRule extends  AbstractModel {
 
         /**
          * Rule ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Id = null;
 
         /**
          * Rule description
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Description = null;
 
         /**
          * 0: A group of Quuid 1: All hosts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Scope = null;
 
         /**
          * Whether to process previous events: 0: do not process; 1: process
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DealOldEvents = null;
 
         /**
          * Host QUUIDs, separated by semicolons (;).
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Quuids = null;
 
         /**
          * Source IP. Single IP: 1.1.1.1, IP Range: 1.1.1.1-1.1.2.1, IP Range: 1.1.1.0/24, separated by semicolons (;)
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SrcIP = null;
 
         /**
          * Creation time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
          * Modification time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ModifyTime = null;
@@ -31646,6 +34195,18 @@ MachineName host name for fuzzy query; Type, status for precise match; CreateBeg
          */
         this.Where = null;
 
+        /**
+         * Sorting method (case insensitive): asc for ascending order; desc for descending order
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sort column, strictly equal: latest detection time RecentFoundTime
+         * @type {string || null}
+         */
+        this.By = null;
+
     }
 
     /**
@@ -31665,6 +34226,8 @@ MachineName host name for fuzzy query; Type, status for precise match; CreateBeg
             }
         }
         this.Where = 'Where' in params ? params.Where : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -31762,7 +34325,6 @@ class NetAttackEvent extends  AbstractModel {
 
         /**
          * Host Additional Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -31792,7 +34354,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.VulDefenceStatus = null;
 
         /**
-         * Machine payment edition. 0: Basic Edition; 1: Professional Edition; 2: Premium Edition; 3: General Discount Edition
+         * Machine payment version, 0 Basic version, 1 Pro edition, 2 Flagship edition, 3 Lightweight edition
          * @type {number || null}
          */
         this.PayVersion = null;
@@ -31814,6 +34376,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {boolean || null}
          */
         this.New = null;
+
+        /**
+         * Whether application protection is enabled. 0: disabled, 1: enabled
+         * @type {number || null}
+         */
+        this.RaspOpen = null;
+
+        /**
+         * ip analysis
+         * @type {IPAnalyse || null}
+         */
+        this.IPAnalyse = null;
 
     }
 
@@ -31846,6 +34420,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
         this.Count = 'Count' in params ? params.Count : null;
         this.New = 'New' in params ? params.New : null;
+        this.RaspOpen = 'RaspOpen' in params ? params.RaspOpen : null;
+
+        if (params.IPAnalyse) {
+            let obj = new IPAnalyse();
+            obj.deserialize(params.IPAnalyse)
+            this.IPAnalyse = obj;
+        }
 
     }
 }
@@ -31914,7 +34495,6 @@ class BaselineItemInfo extends  AbstractModel {
 
         /**
          * ID of the Rule to Which the Detection Item Belongs
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RuleId = null;
@@ -31945,14 +34525,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * System Rule ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SysRuleId = null;
 
         /**
          * Referenced Custom Rule Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BaselineCustomRuleIdName> || null}
          */
         this.RelatedCustomRuleInfo = null;
@@ -31997,28 +34575,24 @@ class NetAttackTrend extends  AbstractModel {
 
         /**
          * Time Point, e.g., 2023-05-06
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DateTime = null;
 
         /**
-         * Number of attacks
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Attack count
          * @type {number || null}
          */
         this.AttackCount = null;
 
         /**
          * Attack Attempts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TryAttackCount = null;
 
         /**
          * Attack Success Count
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SuccAttackCount = null;
@@ -32078,64 +34652,6 @@ class DescribeVertexDetailRequest extends  AbstractModel {
         this.VertexIds = 'VertexIds' in params ? params.VertexIds : null;
         this.IncidentId = 'IncidentId' in params ? params.IncidentId : null;
         this.TableName = 'TableName' in params ? params.TableName : null;
-
-    }
-}
-
-/**
- * Component statistics
- * @class
- */
-class ComponentStatistics extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Component ID
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * Number of hosts
-         * @type {number || null}
-         */
-        this.MachineNum = null;
-
-        /**
-         * Component name
-         * @type {string || null}
-         */
-        this.ComponentName = null;
-
-        /**
-         * Component type
-<li>WEB: Web component</li>
-<li>SYSTEM: system component</li>
-         * @type {string || null}
-         */
-        this.ComponentType = null;
-
-        /**
-         * Component description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.MachineNum = 'MachineNum' in params ? params.MachineNum : null;
-        this.ComponentName = 'ComponentName' in params ? params.ComponentName : null;
-        this.ComponentType = 'ComponentType' in params ? params.ComponentType : null;
-        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -32281,6 +34797,46 @@ class DescribeAssetUserInfoRequest extends  AbstractModel {
 }
 
 /**
+ * RaspEventOverview response structure.
+ * @class
+ */
+class RaspEventOverviewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application defense overview information
+         * @type {RaspEventOverview || null}
+         */
+        this.Overview = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Overview) {
+            let obj = new RaspEventOverview();
+            obj.deserialize(params.Overview)
+            this.Overview = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateBaselineStrategy response structure.
  * @class
  */
@@ -32347,7 +34903,7 @@ class DescribeAgentInstallCommandRequest extends  AbstractModel {
         this.TagIds = null;
 
         /**
-         * Command validity period, required for non-Tencent Cloud instances
+         * Command validity period, required for non-Tencent Cloud instances (abandoned, takes effect permanently).
          * @type {string || null}
          */
         this.ExpireDate = null;
@@ -32521,72 +35077,6 @@ class DescribeScreenGeneralStatRequest extends  AbstractModel {
 }
 
 /**
- * DescribeExpertServiceList request structure.
- * @class
- */
-class DescribeExpertServiceListRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Filter criteria
-<li>Keyword - String - whether required: no - filter by keyword</li>
-<li>Uuids - String - whether required: no - filter by host ID</li>
-         * @type {Array.<Filters> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Number of items to be returned. The maximum value is 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Sorting step size
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Sort method
-         * @type {string || null}
-         */
-        this.Order = null;
-
-        /**
-         * Sorting field: StartTime, EndTime
-         * @type {string || null}
-         */
-        this.By = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filters();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Order = 'Order' in params ? params.Order : null;
-        this.By = 'By' in params ? params.By : null;
-
-    }
-}
-
-/**
  * ModifyUsersConfig response structure.
  * @class
  */
@@ -32610,75 +35100,6 @@ class ModifyUsersConfigResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Server Basic Information
- * @class
- */
-class MachineExtraInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Public IP address
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.WanIP = null;
-
-        /**
-         * Private IP address
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PrivateIP = null;
-
-        /**
-         * Network Type. 1: VPC network; 2: Basic Network; 3: Non-Tencent Cloud Network
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.NetworkType = null;
-
-        /**
-         * Network Name, returns vpc_id in the case of a VPC network
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NetworkName = null;
-
-        /**
-         * Instance ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceID = null;
-
-        /**
-         * Host name
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.HostName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.WanIP = 'WanIP' in params ? params.WanIP : null;
-        this.PrivateIP = 'PrivateIP' in params ? params.PrivateIP : null;
-        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
-        this.NetworkName = 'NetworkName' in params ? params.NetworkName : null;
-        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
-        this.HostName = 'HostName' in params ? params.HostName : null;
 
     }
 }
@@ -32895,14 +35316,12 @@ class FileTamperEvent extends  AbstractModel {
 
         /**
          * Target File Update Time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TargetModifyTime = null;
 
         /**
          * Target File Creation Time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TargetCreatTime = null;
@@ -32933,14 +35352,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Process name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ExeName = null;
 
         /**
          *  Host Additional Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -32949,7 +35366,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * File threat behavior
 <li>read: read file</li>
 <li>write: modify file</li>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FileAction = null;
@@ -33082,6 +35498,12 @@ class DescribeLicenseResponse extends  AbstractModel {
         super();
 
         /**
+         * Supported Features
+         * @type {Array.<string> || null}
+         */
+        this.FunctionsEn = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -33096,6 +35518,7 @@ class DescribeLicenseResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.FunctionsEn = 'FunctionsEn' in params ? params.FunctionsEn : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -33229,8 +35652,7 @@ class DescribeSecurityBroadcastInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * Security broadcasting article details
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Security report article details
          * @type {BroadcastInfo || null}
          */
         this.BroadcastInfo = null;
@@ -33313,8 +35735,7 @@ class DescribeScreenRiskAssetsTopResponse extends  AbstractModel {
         super();
 
         /**
-         * Statistical details icon data. Name: display the host IP and region; value: number of events
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Name: Display host ip and region. value: Number of events.
          * @type {Array.<ScreenNameValue> || null}
          */
         this.Chart = null;
@@ -33349,18 +35770,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * StopBaselineDetect request structure.
+ * Command line content.
  * @class
  */
-class StopBaselineDetectRequest extends  AbstractModel {
+class CommandLine extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cancel task ID collection
-         * @type {Array.<number> || null}
+         * Path, which needs to be encrypted using Base64.
+         * @type {string || null}
          */
-        this.TaskIds = null;
+        this.Exe = null;
+
+        /**
+         * Command line, which needs to be encrypted using Base64.
+         * @type {string || null}
+         */
+        this.Cmdline = null;
 
     }
 
@@ -33371,7 +35798,8 @@ class StopBaselineDetectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskIds = 'TaskIds' in params ? params.TaskIds : null;
+        this.Exe = 'Exe' in params ? params.Exe : null;
+        this.Cmdline = 'Cmdline' in params ? params.Cmdline : null;
 
     }
 }
@@ -33385,15 +35813,13 @@ class ScanBaselineResponse extends  AbstractModel {
         super();
 
         /**
-         * QUUID of the host being scanned
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host Quuid being scanned
          * @type {Array.<string> || null}
          */
         this.ScanningQuuids = null;
 
         /**
-         * TaskId returned upon successful task distribution
-Note: This field may return null, indicating that no valid values can be obtained.
+         * TaskId returned upon successful task issuance
          * @type {number || null}
          */
         this.TaskId = null;
@@ -33415,6 +35841,56 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.ScanningQuuids = 'ScanningQuuids' in params ? params.ScanningQuuids : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePatchEffectHostList response structure.
+ * @class
+ */
+class DescribePatchEffectHostListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of affected hosts
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Affected host list of the patch
+         * @type {Array.<PatchEffectHostList> || null}
+         */
+        this.PatchEffectHostList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.PatchEffectHostList) {
+            this.PatchEffectHostList = new Array();
+            for (let z in params.PatchEffectHostList) {
+                let obj = new PatchEffectHostList();
+                obj.deserialize(params.PatchEffectHostList[z]);
+                this.PatchEffectHostList.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -33534,6 +36010,12 @@ class ModifyNetAttackSettingRequest extends  AbstractModel {
          */
         this.AutoInclude = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ProductType = null;
+
     }
 
     /**
@@ -33549,6 +36031,7 @@ class ModifyNetAttackSettingRequest extends  AbstractModel {
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.ExcludeInstanceIds = 'ExcludeInstanceIds' in params ? params.ExcludeInstanceIds : null;
         this.AutoInclude = 'AutoInclude' in params ? params.AutoInclude : null;
+        this.ProductType = 'ProductType' in params ? params.ProductType : null;
 
     }
 }
@@ -33563,7 +36046,6 @@ class DescribeRiskDnsListResponse extends  AbstractModel {
 
         /**
          * Arrays of malicious request lists
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RiskDnsList> || null}
          */
         this.RiskDnsList = null;
@@ -33673,8 +36155,7 @@ class DescribeAssetWebAppListResponse extends  AbstractModel {
         this.Total = null;
 
         /**
-         * Data list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List
          * @type {Array.<AssetWebAppBaseInfo> || null}
          */
         this.WebApps = null;
@@ -33947,7 +36428,6 @@ class AssetDatabaseDetail extends  AbstractModel {
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -34023,7 +36503,6 @@ class DescribeVulStoreListResponse extends  AbstractModel {
 
         /**
          * Vulnerability information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VulStoreListInfo> || null}
          */
         this.List = null;
@@ -34332,169 +36811,30 @@ class ModifyWebHookPolicyStatusRequest extends  AbstractModel {
 }
 
 /**
- * Malicious request event
+ * DescribeVulHostTop request structure.
  * @class
  */
-class RiskDnsEvent extends  AbstractModel {
+class DescribeVulHostTopRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Event ID
+         * Obtain top values: 1-100
          * @type {number || null}
          */
-        this.Id = null;
+        this.Top = null;
 
         /**
-         * Policy ID
+         * 1: web-cms vulnerabilities; 2: application vulnerabilities; 4: Linux software vulnerabilities; 5: Windows system vulnerabilities; 6: emergency vulnerabilities. If it is left blank or set to 0, the total statistics of vulnerabilities 1, 2, 4, and 5 are returned.
          * @type {number || null}
          */
-        this.PolicyId = null;
+        this.VulCategory = null;
 
         /**
-         * Type of hit policy [-1: unknown|0: system|1: user]
+         * Whether to count only critical vulnerabilities: 1: only critical vulnerabilities; 0: all vulnerabilities
          * @type {number || null}
          */
-        this.PolicyType = null;
-
-        /**
-         * Name of hit policy
-         * @type {string || null}
-         */
-        this.PolicyName = null;
-
-        /**
-         * Protection level [0: basic edition|1: professional edition|2: ultimate edition]
-         * @type {number || null}
-         */
-        this.ProtectLevel = null;
-
-        /**
-         * Server ID
-         * @type {string || null}
-         */
-        this.HostId = null;
-
-        /**
-         * Host name
-         * @type {string || null}
-         */
-        this.HostName = null;
-
-        /**
-         * Host IP
-         * @type {string || null}
-         */
-        this.HostIp = null;
-
-        /**
-         * Public IP address
-         * @type {string || null}
-         */
-        this.WanIp = null;
-
-        /**
-         * Client ID
-         * @type {string || null}
-         */
-        this.AgentId = null;
-
-        /**
-         * Access domain name
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * Tag Features
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Access count
-         * @type {number || null}
-         */
-        this.AccessCount = null;
-
-        /**
-         * Threat description
-         * @type {string || null}
-         */
-        this.ThreatDesc = null;
-
-        /**
-         * Fixing solution
-         * @type {string || null}
-         */
-        this.SuggestSolution = null;
-
-        /**
-         * Reference link
-         * @type {string || null}
-         */
-        this.ReferenceLink = null;
-
-        /**
-         * Processing status [0: pending|2: allowlisted|3: untrusted status|4: processed|5: ignored]
-         * @type {number || null}
-         */
-        this.HandleStatus = null;
-
-        /**
-         * Process ID
-         * @type {number || null}
-         */
-        this.Pid = null;
-
-        /**
-         * Process name
-         * @type {string || null}
-         */
-        this.ProcessName = null;
-
-        /**
-         * Process MD5
-         * @type {string || null}
-         */
-        this.ProcessMd5 = null;
-
-        /**
-         * Command line
-         * @type {string || null}
-         */
-        this.CmdLine = null;
-
-        /**
-         * First access time
-         * @type {string || null}
-         */
-        this.FirstTime = null;
-
-        /**
-         * Last access Time
-         * @type {string || null}
-         */
-        this.LastTime = null;
-
-        /**
-         * Host online status [OFFLINE: offline|ONLINE: online|UNKNOWN: unknown]
-         * @type {string || null}
-         */
-        this.HostStatus = null;
-
-        /**
-         * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {MachineExtraInfo || null}
-         */
-        this.MachineExtraInfo = null;
-
-        /**
-         * [1:CentOS|2:Debian|3:Gentoo|4:Redhat|5:Ubuntu|6:Windows|7:TencentOS|8:CoreOS|9:FreeBSD|10:SUSE]
-         * @type {number || null}
-         */
-        this.OsType = null;
+        this.IsFollowVul = null;
 
     }
 
@@ -34505,37 +36845,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
-        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
-        this.ProtectLevel = 'ProtectLevel' in params ? params.ProtectLevel : null;
-        this.HostId = 'HostId' in params ? params.HostId : null;
-        this.HostName = 'HostName' in params ? params.HostName : null;
-        this.HostIp = 'HostIp' in params ? params.HostIp : null;
-        this.WanIp = 'WanIp' in params ? params.WanIp : null;
-        this.AgentId = 'AgentId' in params ? params.AgentId : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
-        this.AccessCount = 'AccessCount' in params ? params.AccessCount : null;
-        this.ThreatDesc = 'ThreatDesc' in params ? params.ThreatDesc : null;
-        this.SuggestSolution = 'SuggestSolution' in params ? params.SuggestSolution : null;
-        this.ReferenceLink = 'ReferenceLink' in params ? params.ReferenceLink : null;
-        this.HandleStatus = 'HandleStatus' in params ? params.HandleStatus : null;
-        this.Pid = 'Pid' in params ? params.Pid : null;
-        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
-        this.ProcessMd5 = 'ProcessMd5' in params ? params.ProcessMd5 : null;
-        this.CmdLine = 'CmdLine' in params ? params.CmdLine : null;
-        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
-        this.LastTime = 'LastTime' in params ? params.LastTime : null;
-        this.HostStatus = 'HostStatus' in params ? params.HostStatus : null;
-
-        if (params.MachineExtraInfo) {
-            let obj = new MachineExtraInfo();
-            obj.deserialize(params.MachineExtraInfo)
-            this.MachineExtraInfo = obj;
-        }
-        this.OsType = 'OsType' in params ? params.OsType : null;
+        this.Top = 'Top' in params ? params.Top : null;
+        this.VulCategory = 'VulCategory' in params ? params.VulCategory : null;
+        this.IsFollowVul = 'IsFollowVul' in params ? params.IsFollowVul : null;
 
     }
 }
@@ -34707,6 +37019,144 @@ class DescribeScanTaskStatusResponse extends  AbstractModel {
 }
 
 /**
+ * Affected host list by patch
+ * @class
+ */
+class PatchEffectHostList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Version information: 0-Basic Version 1-Pro Edition 2-Flagship Edition 3-Lite Edition
+         * @type {number || null}
+         */
+        this.HostVersion = null;
+
+        /**
+         * Instance status: "PENDING"-creating "LAUNCH_FAILED"-creation failed "RUNNING"-running "STOPPED"-shutdown "STARTING"-starting "STOPPING"-indicates shutdown in progress "REBOOTING"-restarting "SHUTDOWN"-indicate shutdown and pending termination "TERMINATING"-indicates terminating in progress
+         * @type {string || null}
+         */
+        this.InstanceState = null;
+
+        /**
+         * First scan time
+         * @type {string || null}
+         */
+        this.FirstScanTime = null;
+
+        /**
+         * Last scan time
+         * @type {string || null}
+         */
+        this.LatestScanTime = null;
+
+        /**
+         * Remediation status: 0-not remediated; 1-in remediation; 2-FIX_FAILURE; 3-repair successful; 4-timeout
+         * @type {number || null}
+         */
+        this.FixStatus = null;
+
+        /**
+         * Host basic information
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
+        /**
+         * Host Security Uuid
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * Unique Uuid of a CVM or BM machine
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * Event ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Status: 0: pending 1: ignored 3: fixed 5: detecting 6: in remediation 7: rolling back 8: FIX_FAILURE
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Fixing time
+         * @type {string || null}
+         */
+        this.LatestFixTime = null;
+
+        /**
+         * KB id
+         * @type {number || null}
+         */
+        this.KbId = null;
+
+        /**
+         * Whether restart is required 0: not required 1: required
+         * @type {number || null}
+         */
+        this.RestartRequired = null;
+
+        /**
+         * Availability zone ID.	
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Machine type info
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * Whether to create a snapshot for the fix task: 0: not created; other: created.
+         * @type {number || null}
+         */
+        this.HasSnapshot = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HostVersion = 'HostVersion' in params ? params.HostVersion : null;
+        this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
+        this.FirstScanTime = 'FirstScanTime' in params ? params.FirstScanTime : null;
+        this.LatestScanTime = 'LatestScanTime' in params ? params.LatestScanTime : null;
+        this.FixStatus = 'FixStatus' in params ? params.FixStatus : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.LatestFixTime = 'LatestFixTime' in params ? params.LatestFixTime : null;
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.RestartRequired = 'RestartRequired' in params ? params.RestartRequired : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.HasSnapshot = 'HasSnapshot' in params ? params.HasSnapshot : null;
+
+    }
+}
+
+/**
  * DescribeRansomDefenseStrategyMachines request structure.
  * @class
  */
@@ -34790,21 +37240,18 @@ class DescribeAssetLoadInfoResponse extends  AbstractModel {
 
         /**
          * System load
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AssetLoadSummary || null}
          */
         this.CpuLoad = null;
 
         /**
-         * Memory utilization
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Memory usage rate
          * @type {AssetLoadSummary || null}
          */
         this.MemLoad = null;
 
         /**
          * Hard disk utilization
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AssetLoadSummary || null}
          */
         this.DiskLoad = null;
@@ -35322,59 +37769,42 @@ class DescribeBashEventsNewResponse extends  AbstractModel {
 }
 
 /**
- * View vulnerability fixing details
+ * Baseline details
  * @class
  */
-class VulFixStatusInfo extends  AbstractModel {
+class BaselineDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Vulnerability ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.VulId = null;
-
-        /**
-         * Vulnerability name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Baseline description
          * @type {string || null}
          */
-        this.VulName = null;
+        this.Description = null;
 
         /**
-         * Vulnerability fixing progress: 1-100;
+         * Severity level
          * @type {number || null}
          */
-        this.Progress = null;
+        this.Level = null;
 
         /**
-         * Vulnerability fixing status for corresponding hosts
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<VulFixStatusHostInfo> || null}
+         * package name
+         * @type {string || null}
          */
-        this.HostList = null;
+        this.PackageName = null;
 
         /**
-         * Number of hosts with failed vulnerability fixing
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Parent id
          * @type {number || null}
          */
-        this.FailCnt = null;
+        this.ParentId = null;
 
         /**
-         * Number of hosts with successful vulnerability fixing
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * Baseline name
+         * @type {string || null}
          */
-        this.FixSuccessCnt = null;
-
-        /**
-         * Repair method: 0 component update or patch installation, 1 disable service
-         * @type {number || null}
-         */
-        this.FixMethod = null;
+        this.Name = null;
 
     }
 
@@ -35385,21 +37815,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.VulId = 'VulId' in params ? params.VulId : null;
-        this.VulName = 'VulName' in params ? params.VulName : null;
-        this.Progress = 'Progress' in params ? params.Progress : null;
-
-        if (params.HostList) {
-            this.HostList = new Array();
-            for (let z in params.HostList) {
-                let obj = new VulFixStatusHostInfo();
-                obj.deserialize(params.HostList[z]);
-                this.HostList.push(obj);
-            }
-        }
-        this.FailCnt = 'FailCnt' in params ? params.FailCnt : null;
-        this.FixSuccessCnt = 'FixSuccessCnt' in params ? params.FixSuccessCnt : null;
-        this.FixMethod = 'FixMethod' in params ? params.FixMethod : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+        this.ParentId = 'ParentId' in params ? params.ParentId : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -35574,6 +37994,244 @@ class DescribeVulTrendResponse extends  AbstractModel {
 }
 
 /**
+ * List object of authorization packages
+ * @class
+ */
+class RaspLicenseList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Machine unique ID
+         * @type {string || null}
+         */
+        this.QUUID = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Public IP address
+         * @type {string || null}
+         */
+        this.PublicIP = null;
+
+        /**
+         * Private IP address
+         * @type {string || null}
+         */
+        this.PrivateIP = null;
+
+        /**
+         * Cloud Tag Information
+         * @type {Array.<Tags> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Version information
+-Prioritized Protection package
+-Container Security - Pro Edition
+-CWP - Flagship Edition
+         * @type {Array.<string> || null}
+         */
+        this.ProtectionVersion = null;
+
+        /**
+         * Protection setting
+-0 unconfigured
+-Configured
+         * @type {number || null}
+         */
+        this.ConfigurationSetting = null;
+
+        /**
+         * Master switch
+-0 Not enabled
+- 1: enabled.
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * Vulnerability defense switch
+-0 Not enabled
+- 1: enabled.
+         * @type {number || null}
+         */
+        this.VulDefEnable = null;
+
+        /**
+         * Vulnerability defense mode
+-0 Standard
+-1. Major Event Support
+         * @type {number || null}
+         */
+        this.VulDefMode = null;
+
+        /**
+         * Vulnerability defense action
+-0 Detect only
+-Detect + defend
+         * @type {number || null}
+         */
+        this.VulDefAction = null;
+
+        /**
+         * Java Webshell Defense switch
+-0 Not enabled
+- 1: enabled.
+         * @type {number || null}
+         */
+        this.MemShellDefEnable = null;
+
+        /**
+         * More protection
+-0 Do not inject processes that will restart 
+-Inject a process that will restart
+         * @type {number || null}
+         */
+        this.SafeInject = null;
+
+        /**
+         * Performance threshold configuration switch
+-0 Not enabled
+- 1: enabled.
+         * @type {number || null}
+         */
+        this.PerformanceLimit = null;
+
+        /**
+         * CPU threshold, Value 1-99
+         * @type {number || null}
+         */
+        this.PerformanceLimitCpu = null;
+
+        /**
+         * Memory threshold, value 1-99
+         * @type {number || null}
+         */
+        this.PerformanceLimitMem = null;
+
+        /**
+         * Memory remaining threshold
+         * @type {number || null}
+         */
+        this.PerformanceLimitMemAmount = null;
+
+        /**
+         * Plug-in status
+-0 Use normally
+-1: Existence of anomalies
+-2 inactive
+         * @type {number || null}
+         */
+        this.RaspException = null;
+
+        /**
+         * Latest update time
+         * @type {string || null}
+         */
+        this.LatestUpdateTime = null;
+
+        /**
+         * Cluster ID, only valid for container assets
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Cluster name, only container assets have values
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Order information
+         * @type {OrderDetail || null}
+         */
+        this.OrderDetail = null;
+
+        /**
+         * Whether unbinding is allowed: false - not allowed, true - allowed.
+         * @type {boolean || null}
+         */
+        this.IsUnBind = null;
+
+        /**
+         * uuid. Unique ID of the machine. Only valid when AssetType = CWP.
+         * @type {string || null}
+         */
+        this.UUID = null;
+
+        /**
+         * No injection/Failure reason of injection
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QUUID = 'QUUID' in params ? params.QUUID : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
+        this.PrivateIP = 'PrivateIP' in params ? params.PrivateIP : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tags();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.ProtectionVersion = 'ProtectionVersion' in params ? params.ProtectionVersion : null;
+        this.ConfigurationSetting = 'ConfigurationSetting' in params ? params.ConfigurationSetting : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.VulDefEnable = 'VulDefEnable' in params ? params.VulDefEnable : null;
+        this.VulDefMode = 'VulDefMode' in params ? params.VulDefMode : null;
+        this.VulDefAction = 'VulDefAction' in params ? params.VulDefAction : null;
+        this.MemShellDefEnable = 'MemShellDefEnable' in params ? params.MemShellDefEnable : null;
+        this.SafeInject = 'SafeInject' in params ? params.SafeInject : null;
+        this.PerformanceLimit = 'PerformanceLimit' in params ? params.PerformanceLimit : null;
+        this.PerformanceLimitCpu = 'PerformanceLimitCpu' in params ? params.PerformanceLimitCpu : null;
+        this.PerformanceLimitMem = 'PerformanceLimitMem' in params ? params.PerformanceLimitMem : null;
+        this.PerformanceLimitMemAmount = 'PerformanceLimitMemAmount' in params ? params.PerformanceLimitMemAmount : null;
+        this.RaspException = 'RaspException' in params ? params.RaspException : null;
+        this.LatestUpdateTime = 'LatestUpdateTime' in params ? params.LatestUpdateTime : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.OrderDetail) {
+            let obj = new OrderDetail();
+            obj.deserialize(params.OrderDetail)
+            this.OrderDetail = obj;
+        }
+        this.IsUnBind = 'IsUnBind' in params ? params.IsUnBind : null;
+        this.UUID = 'UUID' in params ? params.UUID : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+
+    }
+}
+
+/**
  * DescribeOpenPortStatistics request structure.
  * @class
  */
@@ -35667,6 +38325,12 @@ class DescribeMalwareTimingScanSettingRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ProductType = null;
+
     }
 
     /**
@@ -35676,6 +38340,7 @@ class DescribeMalwareTimingScanSettingRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ProductType = 'ProductType' in params ? params.ProductType : null;
 
     }
 }
@@ -35732,7 +38397,6 @@ class DescribeFileTamperRuleCountResponse extends  AbstractModel {
 
         /**
          * Information on Number of Host-associated Core File Rules
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<FileTamperRuleCount> || null}
          */
         this.List = null;
@@ -35781,22 +38445,7 @@ class ExportAssetUserListRequest extends  AbstractModel {
         this.Quuid = null;
 
         /**
-         * Filter criteria
-<li>Name - String - whether required: no - account name</li>
-<li>Uid - uint64 - whether required: no - Uid</li>
-<li>Guid - uint64 - whether required: no - Guid</li>
-<li>LoginTimeStart - String - whether required: no - start time, such as 2021-01-11</li>
-<li>LoginTimeEnd - String - whether required: no - end time, such as 2021-01-11</li>
-<li>LoginType - uint64 - whether required: no - 0 - not allowed to log in; 1 - only key-based log-in allowed; 2 - only password-based log-in allowed; 3 - both key-based and password-based log-in allowed (Linux only)</li>
-<li>OsType - String - whether required: no - Windows or Linux</li>
-<li>Status - uint64 - whether required: no - account status: 0 - disabled; 1 - enabled</li>
-<li>Type - uint64 - whether required: no - account type: 0 - guest user; 1 - standard user; 2 - administrator user (Windows Only)</li>
-<li>IsDomain - uint64 - whether required: no - whether a domain account: 0 - no; 1 - yes (Windows only)</li>
-<li>IsRoot - uint64 - whether required: no - whether there is root permission: 0 - no; 1 - yes (Linux only)</li>
-<li>IsSudo - uint64 - whether required: no - whether there is sudo permission: 0 - no; 1 - yes (Linux only)</li>
-<li>IsSshLogin - uint64 - whether required: no - whether to use ssh log-in: 0 - no; 1 - yes (Linux only)</li>
-<li>ShellLoginStatus - uint64 - whether required: no - whether to use shell log-in: 0 - no; 1 - yes (Linux only)</li>
-<li>PasswordStatus - uint64 - whether required: no - password status: 1 - normal; 2 - expiring soon; 3 - expired; 4 - locked (Linux only)</li>
+         *   Filtering conditions.<li>Name - String - required: no - account name.</li> <li>Uid - uint64 - required: no - UID.</li> <li>Guid - uint64 - required: no - GUID.</li> <li>LoginTimeStart - String - required: no - start time, such as 2021-01-11.</li> <li>LoginTimeEnd - String - required: no - end time, such as 2021-01-11.</li> <li>LoginType - uint64 - required: no - 0 - login not allowed; 1 - only key-based login allowed; 2 - only password-based login allowed; 3 - both key-based and password-based login allowed (Linux only).</li> <li>OsType - String - required: no - Windows or Linux.</li> <li>Status - uint64 - required: no - account status: 0 - disabled; 1 - enabled.</li> <li>Type - uint64 - required: no - account type: 0: guest user; 1: standard user; 2: administrator user (Windows Only).</li> <li>IsDomain - uint64 - required: no - whether a domain account: 0: no; 1: yes (Windows only).</li> <li>IsRoot - uint64 - required: no - whether there is root permission: 0: no; 1: yes (Linux only).</li> <li>IsSudo - uint64 - required: no - whether there is sudo permission: 0: no; 1: yes (Linux only).</li> <li>IsSshLogin - uint64 - required: no - whether to use SSH login: 0: no; 1: yes (Linux only).</li> <li>ShellLoginStatus - uint64 - required: no - whether shell login allowed: 0: no; 1: yes (Linux only).</li> <li>PasswordStatus - uint64 - required: no - password status: 1: normal; 2: expiring soon; 3: expired; 4: locked (Linux only).</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -36039,7 +38688,6 @@ class DescribeCanFixVulMachineResponse extends  AbstractModel {
 
         /**
          * Host vulnerability fixing information list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<CanFixVulInfo> || null}
          */
         this.VulInfo = null;
@@ -36116,6 +38764,41 @@ class CreateSearchTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * Machine that passed the check and the corresponding host IP address.
+ * @class
+ */
+class UuidHostip extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Server ID
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * Server IP address
+         * @type {string || null}
+         */
+        this.Hostip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Hostip = 'Hostip' in params ? params.Hostip : null;
+
+    }
+}
+
+/**
  * Event point information
  * @class
  */
@@ -36125,28 +38808,24 @@ class IncidentVertexInfo extends  AbstractModel {
 
         /**
          * Event ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IncidentId = null;
 
         /**
          * The name of the table where the event occurred
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TableName = null;
 
         /**
-         * A list of node information, with array items containing detailed node information
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Node information list, in an array including detailed node information.
          * @type {Array.<VertexInfo> || null}
          */
         this.Vertex = null;
 
         /**
-         * Total number of nodes
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total number of nodes.
          * @type {number || null}
          */
         this.VertexCount = null;
@@ -36186,98 +38865,84 @@ class BaselineItemDetect extends  AbstractModel {
 
         /**
          * Item ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ItemId = null;
 
         /**
          * Item Name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ItemName = null;
 
         /**
          * Item Description
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ItemDesc = null;
 
         /**
          * Fixing Method
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FixMethod = null;
 
         /**
          * Rule
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RuleName = null;
 
         /**
          * 0: Failed; 1: Ignored; 3: Passed; 5: Under detection
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DetectStatus = null;
 
         /**
          * Risk level
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Level = null;
 
         /**
          * Number of affected servers
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.HostCount = null;
 
         /**
          * First detection time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FirstTime = null;
 
         /**
-         * Last Detection Time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Last detection time
          * @type {string || null}
          */
         this.LastTime = null;
 
         /**
-         * Detection result, JSON string
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Detection result; JSON string.
          * @type {string || null}
          */
         this.DetectResult = null;
 
         /**
-         * Rule ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Rule ID.
          * @type {number || null}
          */
         this.RuleId = null;
 
         /**
-         * Number of servers passed
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of servers passed.
          * @type {number || null}
          */
         this.PassedHostCount = null;
 
         /**
-         * Number of servers failed
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of servers failed.
          * @type {number || null}
          */
         this.NotPassedHostCount = null;
@@ -36330,8 +38995,7 @@ class DescribeVulDefenceSettingResponse extends  AbstractModel {
         this.Scope = null;
 
         /**
-         * List of affected host QUUIDs
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Affected host quuid list
          * @type {Array.<string> || null}
          */
         this.Quuids = null;
@@ -36343,8 +39007,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.FlagshipCount = null;
 
         /**
-         * List of affected host IDs
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Affected host ID list.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -36356,8 +39019,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AutoInclude = null;
 
         /**
-         * List of excluded host IDs
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Excluded host ID list.
          * @type {Array.<string> || null}
          */
         this.ExcludeInstanceIds = null;
@@ -36398,8 +39060,7 @@ class DescribeAssetProcessCountResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of individual processes
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of processes
          * @type {Array.<AssetKeyVal> || null}
          */
         this.Process = null;
@@ -36434,44 +39095,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeEmergencyResponseList request structure.
+ * Anti-Ransomware Machine Hard Disk Configuration
  * @class
  */
-class DescribeEmergencyResponseListRequest extends  AbstractModel {
+class RansomDefenseStrategyMachineInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter criteria
-<li>Keyword - String - whether required: no - filter by keyword</li>
-<li>Uuids - String - whether required: no - filter by host ID</li>
-         * @type {Array.<Filters> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Number of items to be returned. The maximum value is 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Sorting step size
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Sort method
+         * Host UUID
          * @type {string || null}
          */
-        this.Order = null;
+        this.Uuid = null;
 
         /**
-         * Sorting field: StartTime, EndTime
+         * Specified Hard Disk List. When it is empty, it means all hard disks: disk_id1|disk_name1;disk_id2|disk_name2.
          * @type {string || null}
          */
-        this.By = null;
+        this.DiskInfo = null;
 
     }
 
@@ -36482,19 +39123,8 @@ class DescribeEmergencyResponseListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filters();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Order = 'Order' in params ? params.Order : null;
-        this.By = 'By' in params ? params.By : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.DiskInfo = 'DiskInfo' in params ? params.DiskInfo : null;
 
     }
 }
@@ -36539,24 +39169,27 @@ class DescribeScanStateResponse extends  AbstractModel {
 
         /**
          * Scan start time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ScanBeginTime = null;
 
         /**
          * Number of vulnerabilities scanned
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RiskEventCount = null;
 
         /**
          * Scan end time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ScanEndTime = null;
+
+        /**
+         * Task scan KB No.
+         * @type {Array.<string> || null}
+         */
+        this.KBNumber = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -36581,6 +39214,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ScanBeginTime = 'ScanBeginTime' in params ? params.ScanBeginTime : null;
         this.RiskEventCount = 'RiskEventCount' in params ? params.RiskEventCount : null;
         this.ScanEndTime = 'ScanEndTime' in params ? params.ScanEndTime : null;
+        this.KBNumber = 'KBNumber' in params ? params.KBNumber : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -36655,15 +39289,13 @@ class BaselineHostDetect extends  AbstractModel {
         this.LastTime = null;
 
         /**
-         * CWPP UUID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * CWP UUID
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
          * Host Additional Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -36741,6 +39373,56 @@ class EditTagsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRaspEventTCSS response structure.
+ * @class
+ */
+class DescribeRaspEventTCSSResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of data
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Vulnerability Defense Event List
+         * @type {Array.<RaspEvent> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new RaspEvent();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteReverseShellRules request structure.
  * @class
  */
@@ -36808,14 +39490,12 @@ class ScreenVulInfo extends  AbstractModel {
 
         /**
          * Vulnerability type: 1 - web-cms vulnerabilities; 2 - application vulnerabilities; 4 - Linux software vulnerabilities; 5 - Windows system vulnerabilities
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Category = null;
 
         /**
-         * Host UUID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host UUID.
          * @type {string || null}
          */
         this.Uuid = null;
@@ -36970,26 +39650,18 @@ class DescribeBaselineEffectHostListRequest extends  AbstractModel {
 }
 
 /**
- * Custom passthrough field structure
+ * DescribeRaspEventDetailCWP request structure.
  * @class
  */
-class WebHookCustomField extends  AbstractModel {
+class DescribeRaspEventDetailCWPRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * key
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Vulnerability Event ID
+         * @type {number || null}
          */
-        this.Key = null;
-
-        /**
-         * value
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Value = null;
+        this.Id = null;
 
     }
 
@@ -37000,8 +39672,49 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * Application protection allowlist attack type list
+ * @class
+ */
+class RaspAttackTypeListItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Attack Type Name
+         * @type {string || null}
+         */
+        this.AttackTypeName = null;
+
+        /**
+         * Attack Type ID
+         * @type {number || null}
+         */
+        this.AttackTypeID = null;
+
+        /**
+         * Feature type of the vulnerability, rasp: vulnerability defense, memshell_inject: memory shell injection
+         * @type {string || null}
+         */
+        this.Source = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AttackTypeName = 'AttackTypeName' in params ? params.AttackTypeName : null;
+        this.AttackTypeID = 'AttackTypeID' in params ? params.AttackTypeID : null;
+        this.Source = 'Source' in params ? params.Source : null;
 
     }
 }
@@ -37442,7 +40155,7 @@ class BashPolicy extends  AbstractModel {
         this.BashAction = null;
 
         /**
-         * Regular expression
+         * Regular expression, encrypted with Base64. This field is deprecated. If you enter this parameter, it will be automatically replaced with Rules.Process.CmdLine.
          * @type {string || null}
          */
         this.Rule = null;
@@ -37467,27 +40180,24 @@ class BashPolicy extends  AbstractModel {
 
         /**
          * Policy description
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Descript = null;
 
         /**
-         * When it is added to the allowlist, the EventId needs to be passed in.Note: This field may return null, indicating that no valid values can be obtained.
+         * When it is added to the allowlist, the event ID needs to be passed in.
          * @type {number || null}
          */
         this.EventId = null;
 
         /**
-         * Whether to process old events as allowlisted ones: 0 - no; 1 - yes
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether to add existing events to the allowlist. 0: no; 1: yes.
          * @type {number || null}
          */
         this.DealOldEvents = null;
 
         /**
-         * A collection of QUUIDs for effective hosts
-Note: This field may return null, indicating that no valid values can be obtained.
+         * QUUID set for effective hosts
          * @type {Array.<string> || null}
          */
         this.Quuids = null;
@@ -37516,6 +40226,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Uuids = null;
 
+        /**
+         * Rule expression
+         * @type {PolicyRules || null}
+         */
+        this.Rules = null;
+
     }
 
     /**
@@ -37541,6 +40257,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
         this.Uuids = 'Uuids' in params ? params.Uuids : null;
+
+        if (params.Rules) {
+            let obj = new PolicyRules();
+            obj.deserialize(params.Rules)
+            this.Rules = obj;
+        }
 
     }
 }
@@ -37868,7 +40590,7 @@ class DescribeBaselineWeakPasswordListResponse extends  AbstractModel {
         this.Total = null;
 
         /**
-         * None
+         * List
          * @type {Array.<BaselineWeakPassword> || null}
          */
         this.List = null;
@@ -37932,41 +40654,6 @@ class DeleteNonlocalLoginPlacesResponse extends  AbstractModel {
 }
 
 /**
- * ExportAssetMachineDetail response structure.
- * @class
- */
-class ExportAssetMachineDetailResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Download link
-         * @type {string || null}
-         */
-        this.DownloadUrl = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ModifyLogKafkaAccess response structure.
  * @class
  */
@@ -38018,6 +40705,55 @@ class DeleteMalwareScanTaskResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyLicenseBinds request structure.
+ * @class
+ */
+class ModifyLicenseBindsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * Authorization type
+         * @type {number || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * Whether all machines are involved. (If the total number of machines exceeds the available authorizations in the current order, some machines will be skipped.)
+         * @type {boolean || null}
+         */
+        this.IsAll = null;
+
+        /**
+         * List of QUUIDs of machines to be bound. This parameter is required when IsAll is set to false. Otherwise, it is ignored. Maximum number: 2,000.
+         * @type {Array.<string> || null}
+         */
+        this.QuuidList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.IsAll = 'IsAll' in params ? params.IsAll : null;
+        this.QuuidList = 'QuuidList' in params ? params.QuuidList : null;
 
     }
 }
@@ -38096,6 +40832,12 @@ class MalwareWhiteListInfo extends  AbstractModel {
          */
         this.EventsCount = null;
 
+        /**
+         * Rule modification time.
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
     }
 
     /**
@@ -38116,6 +40858,7 @@ class MalwareWhiteListInfo extends  AbstractModel {
         this.FileExtension = 'FileExtension' in params ? params.FileExtension : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.EventsCount = 'EventsCount' in params ? params.EventsCount : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
 
     }
 }
@@ -38130,7 +40873,6 @@ class DescribeBaselineDetailResponse extends  AbstractModel {
 
         /**
          * Baseline details
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {BaselineDetail || null}
          */
         this.BaselineDetail = null;
@@ -38446,8 +41188,7 @@ class DescribeLogStorageRecordResponse extends  AbstractModel {
         super();
 
         /**
-         * Storage amount record
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Storage record.
          * @type {Array.<LogStorageRecord> || null}
          */
         this.Records = null;
@@ -38518,29 +41259,25 @@ class VulHostTopInfo extends  AbstractModel {
         super();
 
         /**
-         * Host name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * host name
          * @type {string || null}
          */
         this.HostName = null;
 
         /**
          * Vulnerability level and quantity statistics list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VulLevelCountInfo> || null}
          */
         this.VulLevelList = null;
 
         /**
          * Host QUUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
-         * Top ratings
-Note: This field may return null, indicating that no valid values can be obtained.
+         * top rating
          * @type {number || null}
          */
         this.Score = null;
@@ -38622,14 +41359,12 @@ class DescribeRansomDefenseRollBackTaskListResponse extends  AbstractModel {
 
         /**
          * Task list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RansomDefenseRollbackTask> || null}
          */
         this.List = null;
 
         /**
          * Total number of pagination query records
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -38673,134 +41408,115 @@ class VertexDetail extends  AbstractModel {
         super();
 
         /**
-         * Node type. process - 1; network - 2; file - 3; SSH - 4
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Node type. 1: process, 2: network, 3: file, 4: SSH.
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * Time used for each node type, which is in the format of 2022-11-29 00:00:00.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Time used by each node type, in the format of 2022-11-29 00:00:00.
          * @type {string || null}
          */
         this.Time = null;
 
         /**
-         * Alarm information
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Alarm information.
          * @type {Array.<AlarmInfo> || null}
          */
         this.AlarmInfo = null;
 
         /**
-         * Process name, which is effective when the node type is process.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Process name. This parameter takes effect when this node is a process.
          * @type {string || null}
          */
         this.ProcName = null;
 
         /**
-         * Command line, which is effective when the node type is process.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Command line. This parameter takes effect when this node is a process.
          * @type {string || null}
          */
         this.CmdLine = null;
 
         /**
-         * Process ID, which is effective when the node type is process.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Process ID. This parameter takes effect when this node is a process.
          * @type {string || null}
          */
         this.Pid = null;
 
         /**
-         * File MD5, which is effective when the node type is file.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * File MD5. This parameter takes effect when this node is a file.
          * @type {string || null}
          */
         this.FileMd5 = null;
 
         /**
-         * Content written to the file, which is effective when the node type is file.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * File write content. This parameter takes effect when this node is a file.
          * @type {string || null}
          */
         this.FileContent = null;
 
         /**
-         * File path, which is effective when the node type is file.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * File path. This parameter takes effect when this node is a file.
          * @type {string || null}
          */
         this.FilePath = null;
 
         /**
-         * File creation time, which is effective when the node type is file.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * File creation time. This parameter takes effect when this node is a file.
          * @type {string || null}
          */
         this.FileCreateTime = null;
 
         /**
-         * Request destination address, which is effective when the node type is network.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Request destination address. This parameter takes effect when this node is a network.
          * @type {string || null}
          */
         this.Address = null;
 
         /**
-         * Target port, which is effective when the node type is network.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Target port. This parameter takes effect when this node is a network.
          * @type {number || null}
          */
         this.DstPort = null;
 
         /**
-         * Log-in source IP, which is effective when the node type is SSH.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Login source IP address. This parameter takes effect when this node is ssh.
          * @type {string || null}
          */
         this.SrcIP = null;
 
         /**
-         * Log-in username and user group, which is effective when the node type is SSH.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Login username and user group. This parameter takes effect when this node is ssh.
          * @type {string || null}
          */
         this.User = null;
 
         /**
-         * Vulnerability name, which is effective when the node type is vulnerability.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Vulnerability name. This parameter takes effect when this node is a vulnerability.
          * @type {string || null}
          */
         this.VulName = null;
 
         /**
-         * Vulnerability exploitation time, which is effective when the node type is vulnerability.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Vulnerability exploitation time. This parameter takes effect when this node is a vulnerability.
          * @type {string || null}
          */
         this.VulTime = null;
 
         /**
-         * HTTP request content, which is effective when the node type is vulnerability.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * HTTP request content. This parameter takes effect when this node is a vulnerability.
          * @type {string || null}
          */
         this.HttpContent = null;
 
         /**
-         * Vulnerability exploiter source IP, which is effective when the node type is vulnerability.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Source IP address of the vulnerability exploiter. This parameter takes effect when this node is a vulnerability.
          * @type {string || null}
          */
         this.VulSrcIP = null;
 
         /**
-         * Node ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Node ID.
          * @type {string || null}
          */
         this.VertexId = null;
@@ -38927,7 +41643,6 @@ class DescribeVulEffectHostListResponse extends  AbstractModel {
 
         /**
          * List of affected hosts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VulEffectHostList> || null}
          */
         this.VulEffectHostList = null;
@@ -38963,46 +41678,241 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Details of the region list
+ * Application protection event
  * @class
  */
-class RegionListDetail extends  AbstractModel {
+class RaspEvent extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Machine type
-CVM, Tencent Cloud Virtual Machine
-LH, TencentCloud Lighthouse
-ECM, Tencent Cloud Edge Computing Machine
-BM, Tencent BM 1.0
-Other, Other servers (non-Tencent Cloud)
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MachineType = null;
-
-        /**
-         * 0 Tencent Cloud
-1 IDC
-2 Alibaba Cloud
-3 Huawei Cloud
-4 Amazon
-5 Microsoft
-6 Google
-7 Oracle
-8 Digital Ocean
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Vulnerability Event ID
          * @type {number || null}
          */
-        this.CloudFrom = null;
+        this.Id = null;
 
         /**
-         * List of regions
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<RegionInfo> || null}
+         * Machine UUID
+         * @type {string || null}
          */
-        this.RegionList = null;
+        this.Uuid = null;
+
+        /**
+         * Machine QUuid.
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * host name
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * Private IP address
+         * @type {string || null}
+         */
+        this.PrivateIp = null;
+
+        /**
+         * Public IP address
+         * @type {string || null}
+         */
+        this.PublicIp = null;
+
+        /**
+         * Vulnerability ID
+         * @type {number || null}
+         */
+        this.VulId = null;
+
+        /**
+         * Vulnerability name
+         * @type {string || null}
+         */
+        this.VulName = null;
+
+        /**
+         * CVE ID
+         * @type {string || null}
+         */
+        this.CveId = null;
+
+        /**
+         * Attack source IP address
+         * @type {string || null}
+         */
+        this.SourceIp = null;
+
+        /**
+         * City of the attack source IP address
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * Port under attack
+         * @type {number || null}
+         */
+        this.AttackPort = null;
+
+        /**
+         * First Attack Time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last attack time
+         * @type {string || null}
+         */
+        this.MergeTime = null;
+
+        /**
+         * Attack count
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Status 0: pending 1: defended 2: processed 3: ignored 4: deleted 5: allowlisted
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Application attack type
+         * @type {string || null}
+         */
+        this.AttackTypeName = null;
+
+        /**
+         * Application Attack Type id
+         * @type {number || null}
+         */
+        this.AttackType = null;
+
+        /**
+         * Node name.
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Node ID.
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Container name
+         * @type {string || null}
+         */
+        this.ContainerName = null;
+
+        /**
+         * container id
+         * @type {string || null}
+         */
+        this.ContainerId = null;
+
+        /**
+         * Container running status
+         * @type {string || null}
+         */
+        this.ContainerStatus = null;
+
+        /**
+         * Container isolation status
+         * @type {string || null}
+         */
+        this.ContainerNetStatus = null;
+
+        /**
+         * Image ID
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * Image Name
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * Pod name
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * podip
+         * @type {string || null}
+         */
+        this.PodIp = null;
+
+        /**
+         * Cluster name.
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Event details, including poc
+         * @type {string || null}
+         */
+        this.RaspDetail = null;
+
+        /**
+         * regular node: NORMAL
+Super node: SUPER
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Event Type 1: Attack Time 2: Successful Defense
+         * @type {number || null}
+         */
+        this.EventType = null;
+
+        /**
+         * Unique id of a super node
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
+        /**
+         * poc id
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * Request URL
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * malicious feature
+         * @type {string || null}
+         */
+        this.Poc = null;
 
     }
 
@@ -39013,17 +41923,44 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.MachineType = 'MachineType' in params ? params.MachineType : null;
-        this.CloudFrom = 'CloudFrom' in params ? params.CloudFrom : null;
-
-        if (params.RegionList) {
-            this.RegionList = new Array();
-            for (let z in params.RegionList) {
-                let obj = new RegionInfo();
-                obj.deserialize(params.RegionList[z]);
-                this.RegionList.push(obj);
-            }
-        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.PrivateIp = 'PrivateIp' in params ? params.PrivateIp : null;
+        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.VulId = 'VulId' in params ? params.VulId : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.CveId = 'CveId' in params ? params.CveId : null;
+        this.SourceIp = 'SourceIp' in params ? params.SourceIp : null;
+        this.City = 'City' in params ? params.City : null;
+        this.AttackPort = 'AttackPort' in params ? params.AttackPort : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.MergeTime = 'MergeTime' in params ? params.MergeTime : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.AttackTypeName = 'AttackTypeName' in params ? params.AttackTypeName : null;
+        this.AttackType = 'AttackType' in params ? params.AttackType : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+        this.ContainerId = 'ContainerId' in params ? params.ContainerId : null;
+        this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
+        this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.PodIp = 'PodIp' in params ? params.PodIp : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RaspDetail = 'RaspDetail' in params ? params.RaspDetail : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Poc = 'Poc' in params ? params.Poc : null;
 
     }
 }
@@ -39131,6 +42068,12 @@ class DescribeVulInfoCvssRequest extends  AbstractModel {
          */
         this.VulId = null;
 
+        /**
+         * Compatible with application protection vulnerability defense container perspective alerts for vulnerability details. Host perspective is selected by default. Optional fields. Source=tcss indicates container perspective vulnerability details. The backend converts VulId to VulId in host vul_vuls.
+         * @type {string || null}
+         */
+        this.Source = null;
+
     }
 
     /**
@@ -39141,6 +42084,7 @@ class DescribeVulInfoCvssRequest extends  AbstractModel {
             return;
         }
         this.VulId = 'VulId' in params ? params.VulId : null;
+        this.Source = 'Source' in params ? params.Source : null;
 
     }
 }
@@ -39183,7 +42127,6 @@ class DescribeFileTamperRulesResponse extends  AbstractModel {
 
         /**
          * List of rules
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<FileTamperRuleInfo> || null}
          */
         this.List = null;
@@ -39220,57 +42163,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeComponentStatistics request structure.
- * @class
- */
-class DescribeComponentStatisticsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Quantity of returns. It is 10 by default, and the maximum value is 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Offset, which defaults to 0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Filter criteria
-ComponentName - String - required: no - component name
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
 
     }
 }
@@ -39441,6 +42333,42 @@ class ModifyWebHookReceiverRequest extends  AbstractModel {
          */
         this.IsModify = null;
 
+        /**
+         * Type
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * target region
+         * @type {string || null}
+         */
+        this.SCFRegion = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * function name
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Function version
+         * @type {string || null}
+         */
+        this.FunctionVersion = null;
+
+        /**
+         * Alias
+         * @type {string || null}
+         */
+        this.Alias = null;
+
     }
 
     /**
@@ -39454,6 +42382,12 @@ class ModifyWebHookReceiverRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Addr = 'Addr' in params ? params.Addr : null;
         this.IsModify = 'IsModify' in params ? params.IsModify : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SCFRegion = 'SCFRegion' in params ? params.SCFRegion : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
 
     }
 }
@@ -39741,7 +42675,6 @@ class AssetWebLocationBaseInfo extends  AbstractModel {
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -39753,15 +42686,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.FirstTime = null;
 
         /**
-         * Whether the web service is newly added [0 - no|1 - yes]
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether it is newly added [0: no | 1: yes]
          * @type {number || null}
          */
         this.IsNew = null;
 
         /**
-         * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
+         *  Additional information
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -39997,29 +42928,25 @@ class BashRule extends  AbstractModel {
         this.Hostip = null;
 
         /**
-         * Arrays of UUIDs for servers to be effective
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Array of UUIDs for active servers
          * @type {Array.<string> || null}
          */
         this.Uuids = null;
 
         /**
-         * 0= blocklist; 1= allowlist
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 0: blocklist 1: allowlist
          * @type {number || null}
          */
         this.White = null;
 
         /**
          * Whether to process previous events: 0: do not process; 1: process
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DealOldEvents = null;
 
         /**
          * Rule description
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Description = null;
@@ -40195,8 +43122,7 @@ class DescribeRiskDnsPolicyListResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Data list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List
          * @type {Array.<RiskDnsPolicy> || null}
          */
         this.List = null;
@@ -40424,7 +43350,7 @@ class BashEventsInfo extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Yunjing ID
+         * Host UUID
          * @type {string || null}
          */
         this.Uuid = null;
@@ -40491,98 +43417,84 @@ class BashEventsInfo extends  AbstractModel {
 
         /**
          * Process name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Exe = null;
 
         /**
          * Processing time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ModifyTime = null;
 
         /**
-         * Rule category: 0 - system rule; 1 - user rule
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Rule category. 0: system rule; 1: user rule
          * @type {number || null}
          */
         this.RuleCategory = null;
 
         /**
          * Automatically generated regular expression
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RegexBashCmd = null;
 
         /**
-         * Process tree json  pid: process ID; exe: file path; account: groups and users to which the process belongs; cmdline: command execution; ssh_service: ssh service IP, ssh_source: log-in source
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Process tree json pid: process ID; exe: file path; account: groups and users to which the process belongs; cmdline: execute commands; ssh_service: SSH service IP; ssh_source: log-in source
          * @type {string || null}
          */
         this.PsTree = null;
 
         /**
          * Recommended solution
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SuggestScheme = null;
 
         /**
          * Description
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HarmDescribe = null;
 
         /**
-         * Tag
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Tag.
          * @type {Array.<string> || null}
          */
         this.Tags = null;
 
         /**
          * Reference link
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.References = null;
 
         /**
          * Host public IP address
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MachineWanIp = null;
 
         /**
-         * Host online status: OFFLINE  ONLINE
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host online status: OFFLINE; ONLINE
          * @type {string || null}
          */
         this.MachineStatus = null;
 
         /**
          * Log-in user
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.User = null;
 
         /**
          * Process ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Pid = null;
 
         /**
          * Data source
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DetectBy = null;
@@ -40712,7 +43624,6 @@ class AssetSystemPackageInfo extends  AbstractModel {
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -41032,10 +43943,25 @@ class LicenseBindDetail extends  AbstractModel {
 
         /**
          * Host Additional Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
+
+        /**
+         * <li>RUNNING: running</li>
+<li>STOPPED: Shut down</li>
+<li> EXPIRED To be recycled</li>
+         * @type {string || null}
+         */
+        this.InstanceState = null;
+
+        /**
+         * <li>ONLINE Offline</li>
+<li>OFFLINE: Under protection</li>
+<li>UNINSTALLED Client not installed</li>
+         * @type {string || null}
+         */
+        this.AgentState = null;
 
     }
 
@@ -41061,6 +43987,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.MachineExtraInfo)
             this.MachineExtraInfo = obj;
         }
+        this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
+        this.AgentState = 'AgentState' in params ? params.AgentState : null;
 
     }
 }
@@ -41075,7 +44003,6 @@ class DescribeAttackTrendsResponse extends  AbstractModel {
 
         /**
          * Attack Trend Statistics (Days)
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<NetAttackTrend> || null}
          */
         this.NetAttackTrend = null;
@@ -41180,20 +44107,30 @@ class DescribeAttackStatisticsRequest extends  AbstractModel {
 }
 
 /**
- * ExportFileTamperRules request structure.
+ * DescribeMemShellRules response structure.
  * @class
  */
-class ExportFileTamperRulesRequest extends  AbstractModel {
+class DescribeMemShellRulesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter criteria
-<li>RuleCategory- string- rule category: 0 = system rule; 1 = user rule</li>
-<li>Name - String - Rule name</li>
-         * @type {Array.<Filters> || null}
+         * List content
+         * @type {Array.<MemShellRule> || null}
          */
-        this.Filters = null;
+        this.List = null;
+
+        /**
+         * Total number of entries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -41205,14 +44142,16 @@ class ExportFileTamperRulesRequest extends  AbstractModel {
             return;
         }
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filters();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new MemShellRule();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -41227,7 +44166,6 @@ class AddLoginWhiteListsResponse extends  AbstractModel {
 
         /**
          * Prompt list of duplicate addition
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DuplicateHosts> || null}
          */
         this.DuplicateHosts = null;
@@ -41419,13 +44357,12 @@ class AssetWebServiceBaseInfo extends  AbstractModel {
 
         /**
          * Host tag
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MachineTag> || null}
          */
         this.Tag = null;
 
         /**
-         * Database name
+         * Service name
          * @type {string || null}
          */
         this.Name = null;
@@ -41486,7 +44423,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -41504,8 +44440,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsNew = null;
 
         /**
-         * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
+         *  Additional information
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -41729,7 +44664,7 @@ class DescribeMalwareWhiteListRequest extends  AbstractModel {
         this.Order = null;
 
         /**
-         * Optional sorting columns: [EventsCount]
+         * Optional sorting columns: [EventsCount | CreateTime | ModifyTime]
          * @type {string || null}
          */
         this.By = null;
@@ -41964,9 +44899,8 @@ class AssetInitServiceBaseInfo extends  AbstractModel {
         this.MachineWanIp = null;
 
         /**
-         * Additional information
+         *  Additional information
 
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -42148,16 +45082,16 @@ class ExportAssetMachineListRequest extends  AbstractModel {
 <li>OsType - String - required: no - Windows or Linux</li>
 <li>CpuLoad - Int - required: no - 
 0: 0% or unknown; 1: 0% to 20%
-2: 20%～50%  3: 50%～80%
-4: 80%～100%</li>
+2: 20%~50%  3: 50%~80%
+4: 80%~100%</li>
 <li>DiskLoad - Int - required: no - 
 0: 0% or unknown; 1: 0% to 20%
-2: 20%～50%  3: 50%～80%
-4: 80%～100%</li>
+2: 20%~50%  3: 50%=~80%
+4: 80%~100%</li>
 <li>MemLoad - Int - required: no - 
 0: 0% or unknown; 1: 0% to 20%
-2: 20%～50%  3: 50%～80%
-4: 80%～100%</li>
+2: 20%~50%  3: 50%~80%
+4: 80%~100%</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -42358,7 +45292,7 @@ class ExportBaselineItemDetectListRequest extends  AbstractModel {
         super();
 
         /**
-         * <li>HostId - string - required: no - host ID</li> <li>RuleId - int64 - required: no - rule ID</li> <li>IsPassed - int - required: no - pass or not</li> <li>RiskTier - int - required: no - risk level</li>
+         * <li>HostId - string - required: no - host ID</li> <li>RuleId - int64 - required: no - rule ID</li> <li>IsPassed - int - required: no - pass or not</li> <li>RiskTier - int - required: no - risk level</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -42400,30 +45334,48 @@ class ExportBaselineItemDetectListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAttackSource request structure.
+ * CreateNetAttackWhiteList request structure.
  * @class
  */
-class DescribeAttackSourceRequest extends  AbstractModel {
+class CreateNetAttackWhiteListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Host UUID
-         * @type {string || null}
+         * Whether the allowlist applies to all hosts. 0: no; 1: yes.
+         * @type {number || null}
          */
-        this.Uuid = null;
+        this.Scope = null;
 
         /**
-         * Start date
-         * @type {string || null}
+         * Source IP. Single IP: 1.1.1.1, IP Range: 1.1.1.1-1.1.2.1, IP Range: 1.1.1.0/24 
+         * @type {Array.<string> || null}
          */
-        this.BeginDate = null;
+        this.SrcIp = null;
 
         /**
-         * End date
+         * QUUID list
+         * @type {Array.<string> || null}
+         */
+        this.QuuidList = null;
+
+        /**
+         * Event ID
+         * @type {number || null}
+         */
+        this.EventId = null;
+
+        /**
+         * Whether to allowlist all alarms that match this rule: 1: Yes, 0: No.
+         * @type {number || null}
+         */
+        this.DealOldEvents = null;
+
+        /**
+         * Description
          * @type {string || null}
          */
-        this.EndDate = null;
+        this.Description = null;
 
     }
 
@@ -42434,9 +45386,12 @@ class DescribeAttackSourceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.BeginDate = 'BeginDate' in params ? params.BeginDate : null;
-        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
+        this.QuuidList = 'QuuidList' in params ? params.QuuidList : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.DealOldEvents = 'DealOldEvents' in params ? params.DealOldEvents : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -42482,6 +45437,76 @@ class DescribeMalwareInfoResponse extends  AbstractModel {
 }
 
 /**
+ * Skill info
+ * @class
+ */
+class SkillInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Skill name
+         * @type {string || null}
+         */
+        this.SkillName = null;
+
+        /**
+         * Skill description
+         * @type {string || null}
+         */
+        this.SkillDesc = null;
+
+        /**
+         * Skill source
+         * @type {string || null}
+         */
+        this.SkillSource = null;
+
+        /**
+         * Skill risk tag
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * skill risk description
+         * @type {string || null}
+         */
+        this.RiskDesc = null;
+
+        /**
+         * evidence chain
+         * @type {string || null}
+         */
+        this.Evidence = null;
+
+        /**
+         * Event ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SkillName = 'SkillName' in params ? params.SkillName : null;
+        this.SkillDesc = 'SkillDesc' in params ? params.SkillDesc : null;
+        this.SkillSource = 'SkillSource' in params ? params.SkillSource : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.RiskDesc = 'RiskDesc' in params ? params.RiskDesc : null;
+        this.Evidence = 'Evidence' in params ? params.Evidence : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * DeleteRiskDnsPolicy response structure.
  * @class
  */
@@ -42519,14 +45544,12 @@ class DuplicateHosts extends  AbstractModel {
 
         /**
          * Quuid
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
          * Uuid
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Uuid = null;
@@ -42659,6 +45682,140 @@ class MalwareWhiteListAffectEvent extends  AbstractModel {
 }
 
 /**
+ * Reverse shell rule for the aggregated version.
+ * @class
+ */
+class ReverseShellRuleAggregation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Client ID
+         * @type {Array.<UuidHostip> || null}
+         */
+        this.UuidHostips = null;
+
+        /**
+         * Process name
+         * @type {string || null}
+         */
+        this.ProcessName = null;
+
+        /**
+         * Target IP address
+         * @type {string || null}
+         */
+        this.DestIp = null;
+
+        /**
+         * Target port
+         * @type {string || null}
+         */
+        this.DestPort = null;
+
+        /**
+         * Operator
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * Whether a global rule
+         * @type {number || null}
+         */
+        this.IsGlobal = null;
+
+        /**
+         * Status (0: valid; 1: invalid)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * Allowlisting method. 0: regular allowlisting, 1: regular expression allowlisting.
+         * @type {number || null}
+         */
+        this.WhiteType = null;
+
+        /**
+         * Regular expression
+         * @type {string || null}
+         */
+        this.RuleRegexp = null;
+
+        /**
+         * Whether to process historical events. 0: no, 1: yes.
+         * @type {number || null}
+         */
+        this.HandleHistory = null;
+
+        /**
+         * Batch ID.
+         * @type {string || null}
+         */
+        this.GroupID = null;
+
+        /**
+         * Number of servers covered by a rule. When IsGlobal is set to 1, all servers are displayed.
+         * @type {string || null}
+         */
+        this.MachinesNums = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.UuidHostips) {
+            this.UuidHostips = new Array();
+            for (let z in params.UuidHostips) {
+                let obj = new UuidHostip();
+                obj.deserialize(params.UuidHostips[z]);
+                this.UuidHostips.push(obj);
+            }
+        }
+        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
+        this.DestIp = 'DestIp' in params ? params.DestIp : null;
+        this.DestPort = 'DestPort' in params ? params.DestPort : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.WhiteType = 'WhiteType' in params ? params.WhiteType : null;
+        this.RuleRegexp = 'RuleRegexp' in params ? params.RuleRegexp : null;
+        this.HandleHistory = 'HandleHistory' in params ? params.HandleHistory : null;
+        this.GroupID = 'GroupID' in params ? params.GroupID : null;
+        this.MachinesNums = 'MachinesNums' in params ? params.MachinesNums : null;
+
+    }
+}
+
+/**
  * CreateBanWhiteList request structure.
  * @class
  */
@@ -42708,7 +45865,7 @@ class DescribeMachineRiskCntRequest extends  AbstractModel {
 
         /**
          * Filter criteria
-<li>Uuids- String - required: no - host uuid</li>
+<li>Uuids- String - required: no - host uuid</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -42736,25 +45893,36 @@ class DescribeMachineRiskCntRequest extends  AbstractModel {
 }
 
 /**
- * ExportRansomDefenseStrategyMachines response structure.
+ * ExportRansomDefenseMachineList request structure.
  * @class
  */
-class ExportRansomDefenseStrategyMachinesResponse extends  AbstractModel {
+class ExportRansomDefenseMachineListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID, required for obtaining the DownloadURL at API Asynchronous Export Task ExportTasks
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Filtering criteria
+<li>Ips - String - required: no - IP address for querying</li>
+<li>MachineNames - String - required: no - instance name for querying</li>
+<li>Names - String - required: no - instance name for querying</li>
+<li>Status - String - required: no - policy status: 0: backup in progress; 1: backup succeeded; 2: backup failed</li>
+<li>LastBackupTimeBegin - String - required: no - start of the last backup time</li>
+<li>LastBackupTimeEnd - String - required: no - end of the last backup time</li>
+         * @type {Array.<Filters> || null}
          */
-        this.TaskId = null;
+        this.Filters = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Sorting method: ASC / DESC
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Order = null;
+
+        /**
+         * Sorting fields, supporting CreateTime and MachineCount
+         * @type {string || null}
+         */
+        this.By = null;
 
     }
 
@@ -42765,8 +45933,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -42781,28 +45958,24 @@ class BaselineRuleTopInfo extends  AbstractModel {
 
         /**
          * Baseline detection item name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RuleName = null;
 
         /**
          * Detection item hazard level
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Level = null;
 
         /**
          * Total number of events
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.EventCount = null;
 
         /**
-         * Detection Item ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Detection item ID
          * @type {number || null}
          */
         this.RuleId = null;
@@ -42929,7 +46102,7 @@ class DescribeSecurityBroadcastsRequest extends  AbstractModel {
         this.EndDate = null;
 
         /**
-         * Filter security report type: 0 - emergency notification; 1 - feature update; 2 - industry honor; 3 - version release
+         * Filter by security report type. 0 - emergency notification; 1 - feature update; 2 - industry honor; 3 - version release; 4 - practical tutorial.
          * @type {string || null}
          */
         this.BroadcastType = null;
@@ -42967,8 +46140,7 @@ class DescribeVulDefenceEventResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * List of vulnerability defense events
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Vulnerability Defense Event List
          * @type {Array.<VulDefenceEvent> || null}
          */
         this.List = null;
@@ -43012,8 +46184,7 @@ class ExportBaselineEffectHostListResponse extends  AbstractModel {
         super();
 
         /**
-         * This parameter has been discarded.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * This parameter has been deprecated.
          * @type {string || null}
          */
         this.DownloadUrl = null;
@@ -43128,108 +46299,99 @@ class BashEventsInfoNew extends  AbstractModel {
 
         /**
          * Process name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Exe = null;
 
         /**
          * Processing time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ModifyTime = null;
 
         /**
-         * Rule category. 0 - system rule; 1 - user rule
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Rule category. 0: system rule; 1: user rule
          * @type {number || null}
          */
         this.RuleCategory = null;
 
         /**
          * Automatically generated regular expression
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RegexBashCmd = null;
 
         /**
-         * Process tree json  pid: process ID; exe: file path; account: groups and users to which the process belongs; cmdline: command execution; ssh_service: ssh service IP, ssh_source: log-in source
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Process tree json pid: process ID; exe: file path; account: groups and users to which the process belongs; cmdline: execute commands; ssh_service: SSH service IP; ssh_source: log-in source
          * @type {string || null}
          */
         this.PsTree = null;
 
         /**
          * Recommended solution
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SuggestScheme = null;
 
         /**
          * Description
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HarmDescribe = null;
 
         /**
-         * Tag
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Tag.
          * @type {Array.<string> || null}
          */
         this.Tags = null;
 
         /**
          * Reference link
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.References = null;
 
         /**
          * Host public IP address
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MachineWanIp = null;
 
         /**
          * Host online status: OFFLINE; ONLINE
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MachineStatus = null;
 
         /**
          * Log-in user
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.User = null;
 
         /**
          * Process ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Pid = null;
 
         /**
-         * 0: normal; 1: professional version; 2: ultimate edition
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 0: Ordinary 1: Pro Edition 2: Flagship Edition
          * @type {number || null}
          */
         this.MachineType = null;
 
         /**
          * Source of Detection: 0: bash log; 1: real-time monitoring
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DetectBy = null;
+
+        /**
+         * Execute commands (decoded)
+         * @type {string || null}
+         */
+        this.BashCmdDecoded = null;
 
     }
 
@@ -43267,6 +46429,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Pid = 'Pid' in params ? params.Pid : null;
         this.MachineType = 'MachineType' in params ? params.MachineType : null;
         this.DetectBy = 'DetectBy' in params ? params.DetectBy : null;
+        this.BashCmdDecoded = 'BashCmdDecoded' in params ? params.BashCmdDecoded : null;
 
     }
 }
@@ -43659,24 +46822,36 @@ class DescribeLogIndexResponse extends  AbstractModel {
 }
 
 /**
- * DescribeAttackVulTypeList response structure.
+ * DeleteNonlocalLoginPlaces request structure.
  * @class
  */
-class DescribeAttackVulTypeListResponse extends  AbstractModel {
+class DeleteNonlocalLoginPlacesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Threat type list
-         * @type {Array.<string> || null}
-         */
-        this.List = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Method for deleting cross-region log-in events, available values are Ids, Ip, and All. The default is Ids.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DelType = null;
+
+        /**
+         * Array of cross-region log-in event IDs. Required if DelType is Ids or DelType is not filled.
+         * @type {Array.<number> || null}
+         */
+        this.Ids = null;
+
+        /**
+         * IP of cross-region log-in event. Required if DelType is Ip.
+         * @type {Array.<string> || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Host UUID
+         * @type {string || null}
+         */
+        this.Uuid = null;
 
     }
 
@@ -43687,8 +46862,10 @@ class DescribeAttackVulTypeListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.List = 'List' in params ? params.List : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DelType = 'DelType' in params ? params.DelType : null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
 
     }
 }
@@ -43772,8 +46949,7 @@ class DescribeAssetWebAppPluginListResponse extends  AbstractModel {
         super();
 
         /**
-         * Data list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List
          * @type {Array.<AssetWebAppPluginInfo> || null}
          */
         this.Plugins = null;
@@ -43873,14 +47049,12 @@ class BaselineEventLevelInfo extends  AbstractModel {
 
         /**
          * Hazard level: 1-Low-risk; 2-Medium-risk; 3-High-risk; 4-Critical
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.EventLevel = null;
 
         /**
          * Number of vulnerabilities
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.EventCount = null;
@@ -43901,18 +47075,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeMalwareFile request structure.
+ * ExportWindowsPatchList response structure.
  * @class
  */
-class DescribeMalwareFileRequest extends  AbstractModel {
+class ExportWindowsPatchListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Trojan record ID
-         * @type {number || null}
+         * Export file ID, which can be downloaded using the ExportTasks API.
+         * @type {string || null}
          */
-        this.Id = null;
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -43923,7 +47103,8 @@ class DescribeMalwareFileRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -43949,11 +47130,7 @@ class DescribeLoginWhiteCombinedListRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Filter criteria
-<li>IpOrAlias - String - required: no - filter by host IP or alias</li>
-<li>UserName - String - required: no - filter by username</li>
-<li>ModifyBeginTime - String - required: no - filter by modification time; start time</li>
-<li>ModifyEndTime - String - required: no - Filter by modification time; end time</li>
+         * Filtering conditions. <li>IpOrAlias - String - required: no - filter by host IP address or alias.</li> <li>UserName - String - required: no - filter by username.</li> <li>SrcIP - String - required: no - filter by source IP address.</li> <li>Location - String - required: no - filter by login location.</li> <li>ModifyBeginTime - String - required: no - filter by modification time; start time.</li> <li>ModifyEndTime - String - required: no - filter by modification time; end time.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -43992,70 +47169,60 @@ class Strategy extends  AbstractModel {
 
         /**
          * Policy name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StrategyName = null;
 
         /**
          * Policy ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.StrategyId = null;
 
         /**
          * Total number of baseline detection items
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RuleCount = null;
 
         /**
-         * Number of Hosts
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of hosts
          * @type {number || null}
          */
         this.HostCount = null;
 
         /**
          * Scan cycle
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ScanCycle = null;
 
         /**
          * Scan time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ScanAt = null;
 
         /**
          * Available or not?
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Enabled = null;
 
         /**
-         * Pass rate
-Note: This field may return null, indicating that no valid values can be obtained.
+         * pass rate
          * @type {number || null}
          */
         this.PassRate = null;
 
         /**
          * Baseline ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CategoryIds = null;
 
         /**
          * Whether a default policy
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.IsDefault = null;
@@ -44079,6 +47246,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PassRate = 'PassRate' in params ? params.PassRate : null;
         this.CategoryIds = 'CategoryIds' in params ? params.CategoryIds : null;
         this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+
+    }
+}
+
+/**
+ * ModifyRiskDnsPolicyStatus response structure.
+ * @class
+ */
+class ModifyRiskDnsPolicyStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -44140,56 +47335,6 @@ class DeleteBashPoliciesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeEmergencyResponseList response structure.
- * @class
- */
-class DescribeEmergencyResponseListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number of entries
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Emergency Response List
-         * @type {Array.<EmergencyResponseInfo> || null}
-         */
-        this.List = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new EmergencyResponseInfo();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -44308,7 +47453,6 @@ class AssetPlanTask extends  AbstractModel {
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -44332,8 +47476,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MachineWanIp = null;
 
         /**
-         * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
+         *  Additional information
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -44398,22 +47541,19 @@ class VulDefenceOverview extends  AbstractModel {
         this.ExceptionCount = null;
 
         /**
-         * Daily attack trends
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Daily attack trend
          * @type {Array.<number> || null}
          */
         this.AttackCounts = null;
 
         /**
          * Daily defense trends
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<number> || null}
          */
         this.DefendCounts = null;
 
         /**
          * Date
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Date = null;
@@ -44753,7 +47893,6 @@ class DescribeAssetAppListResponse extends  AbstractModel {
 
         /**
          * Application list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetAppBaseInfo> || null}
          */
         this.Apps = null;
@@ -44901,7 +48040,6 @@ class DescribeVulDefencePluginStatusResponse extends  AbstractModel {
 
         /**
          * List of host vulnerability defense plugin information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VulDefencePluginStatus> || null}
          */
         this.List = null;
@@ -44946,87 +48084,93 @@ class HostTagInfo extends  AbstractModel {
 
         /**
          * Host QUUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
          * Host tag name array
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.TagList = null;
 
         /**
          * Host intranet IP
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostIp = null;
 
         /**
-         * Host name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * host name
          * @type {string || null}
          */
         this.AliasName = null;
 
         /**
-         * Host public IP address
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host public IP address.
          * @type {string || null}
          */
         this.MachineWanIp = null;
 
         /**
          * Host UUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
          * Kernel version number
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.KernelVersion = null;
 
         /**
-         * Host online status: ONLINE; OFFLINE
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host online status: ONLINE, OFFLINE
          * @type {string || null}
          */
         this.MachineStatus = null;
 
         /**
-         * Protection version: BASIC_VERSION - Basic Edition PRO_VERSION - Professional Edition; Flagship: Ultimate Edition
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Protection version: BASIC_VERSION - Basic Edition, PRO_VERSION - Professional Edition; Flagship: Ultimate Edition
          * @type {string || null}
          */
         this.ProtectType = null;
 
         /**
          * Number of vulnerabilities
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.VulNum = null;
 
         /**
          * Cloud Tag Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Tags> || null}
          */
         this.CloudTags = null;
 
         /**
          * Host Instance ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceID = null;
+
+        /**
+         * Specific host types
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * Availability zone name
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * Availability zone ID.
+         * @type {number || null}
+         */
+        this.RegionId = null;
 
     }
 
@@ -45057,6 +48201,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
 
     }
 }
@@ -45071,14 +48218,12 @@ class DescribeRansomDefenseEventsListResponse extends  AbstractModel {
 
         /**
          * Event list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RansomDefenseEvent> || null}
          */
         this.List = null;
 
         /**
          * Total number of pagination query records
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -45384,7 +48529,6 @@ class AssetLoadSummary extends  AbstractModel {
 
         /**
          * Top 5 Load
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetLoadDetail> || null}
          */
         this.Top5 = null;
@@ -45445,8 +48589,7 @@ class DescribeMalwareTimingScanSettingResponse extends  AbstractModel {
         this.IsGlobal = null;
 
         /**
-         * When you select servers, host quuid is required.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Required for specified servers, a string array of host QUUIDs
          * @type {Array.<string> || null}
          */
         this.QuuidList = null;
@@ -45530,6 +48673,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ProtectFileScope = null;
 
         /**
+         * Cleanup switch 0 Disabled 1 Enabled
+         * @type {number || null}
+         */
+        this.DoClean = null;
+
+        /**
+         * Selected host isolation collection
+         * @type {Array.<string> || null}
+         */
+        this.QuaraUuids = null;
+
+        /**
+         * Isolation scope selected by users: 0: default full isolation 1: user selected
+         * @type {number || null}
+         */
+        this.QuaraScope = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -45562,6 +48723,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EnableMemShellScan = 'EnableMemShellScan' in params ? params.EnableMemShellScan : null;
         this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
         this.ProtectFileScope = 'ProtectFileScope' in params ? params.ProtectFileScope : null;
+        this.DoClean = 'DoClean' in params ? params.DoClean : null;
+        this.QuaraUuids = 'QuaraUuids' in params ? params.QuaraUuids : null;
+        this.QuaraScope = 'QuaraScope' in params ? params.QuaraScope : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -45588,18 +48752,7 @@ class DescribeHostLoginListRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Filter criteria
-<li>Quuid - String - required: no - CVM UUID</li>
-<li>Uuid - String - required: no - CWPP unique UUID</li>
-<li>MachineName - String - required: no - host alias</li>
-<li>Ip - String - required: no - host IP</li>
-<li>InstanceID - String - required: no - host instance ID</li>
-<li>SrcIp - String - required: no - filter by source IP</li>
-<li>UserName - String - required: no - filter by username</li>
-<li>Status - int - required: no - status filtering: 1: normal log-in; 5: whitelisted; 14: processed; 15: ignored</li>
-<li>LoginTimeBegin - String - required: no - filter by modification time; start time</li>
-<li>LoginTimeEnd - String - required: no - filter by modification time; end time</li>
-<li>RiskLevel - int - required: no - status filtering: 0: high-risk; 1: suspicious</li>
+         * Filter criteria. <li>Quuid - String - Required: No - CVM uuid</li> <li>uuid - String - Required: No - Host security unique uuid</li> <li>MachineName - String - Required: No - Host alias</li> <li>Ip - String - Required: No - Host Ip address</li> <li>InstanceID - String - Required: No - Host instance ID</li> <li>SrcIp - String - Required: No - Source Ip filter</li> <li>UserName - String - Required: No - UserName filter</li> <li>Status - String - Required: No - Status filtering: 2: Pending; 5: Whitelisted; 14: Fixed; 15: Ignored</li> <li>LoginTimeBegin - String - Required: No - Filter by modification time range, start time</li> <li>LoginTimeEnd - String - Required: No - Filter by modification time range, end time</li> <li>RiskLevel - String - Required: No - Status filtering: 0: High risk; 1: Suspicious</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -45671,36 +48824,18 @@ class ModifyRansomDefenseStrategyStatusResponse extends  AbstractModel {
 }
 
 /**
- * ExportRansomDefenseStrategyList request structure.
+ * ModifyLoginWhiteInfo response structure.
  * @class
  */
-class ExportRansomDefenseStrategyListRequest extends  AbstractModel {
+class ModifyLoginWhiteInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter criteria
-<li>Ips - String - required: no - query by IP</li>
-<li>MachineNames - String - required: no - query by instance name</li>
-<li>Names - String - required: no - query by instance name</li>
-<li>Dirs - String - Required: No - Bait Directory </li>
-<li>Status - String - Required: No - Policy Status: 0 Disabled, 1 Enabled </li>
-<li>BackupType - String - Required: No - Backup Mode: 0-Weekly; 1-Daily </li>
-         * @type {Array.<Filters> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Sorting method: ASC / DESC
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Order = null;
-
-        /**
-         * Sorting fields, supporting CreateTime and MachineCount
-         * @type {string || null}
-         */
-        this.By = null;
+        this.RequestId = null;
 
     }
 
@@ -45711,17 +48846,7 @@ class ExportRansomDefenseStrategyListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filters();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Order = 'Order' in params ? params.Order : null;
-        this.By = 'By' in params ? params.By : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -45747,29 +48872,25 @@ class Machine extends  AbstractModel {
         this.MachineOs = null;
 
         /**
-         * Host status
-<li>OFFLINE: Offline</li>
-<li>ONLINE: Online</li>
-<li>SHUTDOWN: Shut down</li>
-<li>UNINSTALLED: Unprotected</li>
+         * Host status. <li>OFFLINE: Offline</li> <li>ONLINE: Online</li> <li>SHUTDOWN: Shutdown</li> <li>UNINSTALLED: No protection</li>	
          * @type {string || null}
          */
         this.MachineStatus = null;
 
         /**
-         * 
+         * ONLINE Under protection; OFFLINE OFFLINE; UNINStALLED Not installed
          * @type {string || null}
          */
         this.AgentStatus = null;
 
         /**
-         * 
+         * RUNNING; is shut down; to be recycled	
          * @type {string || null}
          */
         this.InstanceStatus = null;
 
         /**
-         * Yunjing client UUID. If the client is offline for a long time, an empty string is returned.
+         * CWP UUID. If the CWP client is offline for a long time, an empty character is returned.
          * @type {string || null}
          */
         this.Uuid = null;
@@ -45896,42 +49017,37 @@ class Machine extends  AbstractModel {
         this.KernelVersion = null;
 
         /**
-         * Protection version: BASIC_VERSION - Basic Edition; PRO_VERSION - Professional Edition; Flagship - Ultimate Edition; GENERAL_DISCOUNT - Inclusive Edition
+         * Protection version: BASIC_VERSION - Basic Edition; PRO_VERSION - Professional Edition; Flagship - Ultimate Edition; GENERAL_DISCOUNT - Lightweight Edition
          * @type {string || null}
          */
         this.ProtectType = null;
 
         /**
          * Cloud Tag Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Tags> || null}
          */
         this.CloudTags = null;
 
         /**
-         * Whether a host added within the last 15 days: 0: no; 1: yes
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether the host is added within 15 days. 0: Host not added within 15 days. 1: Host added within 15 days.
          * @type {number || null}
          */
         this.IsAddedOnTheFifteen = null;
 
         /**
          * Host IP List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IpList = null;
 
         /**
          * Network
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
          * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -45944,16 +49060,27 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Remarks
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * 
+         * Host security agent version
          * @type {string || null}
          */
         this.AgentVersion = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CSIPProtectType = null;
 
     }
 
@@ -46024,6 +49151,58 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.AgentVersion = 'AgentVersion' in params ? params.AgentVersion : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.CSIPProtectType = 'CSIPProtectType' in params ? params.CSIPProtectType : null;
+
+    }
+}
+
+/**
+ * ExportPatchEffectHostList request structure.
+ * @class
+ */
+class ExportPatchEffectHostListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Patch ID
+         * @type {number || null}
+         */
+        this.KbId = null;
+
+        /**
+         * Filter criteria:  
+<li>ProtectType : uint64 data type optional Version type 0 means BASIC_VERSION, 1 means Flagship </li>
+<li>InstanceState: string type (optional) Host status: "PENDING": creating; "LAUNCH_FAILED": creation failed; "RUNNING": running; "STOPPED": shut down; "STARTING": starting; "STOPPING": shutting down; "REBOOTING": restarting; "SHUTDOWN": to be terminated; "TERMINATING": terminating; "UNKNOWN": unknown (for non-Tencent Cloud machines and offline client)</li>
+<li>Status - uint64 - optional - processing Status: 0 - pending; 1 - ignored; 3 - fixed</li>
+<li>HostName : string type optional host name</li>
+<li>InstanceID : string type optional host id</li>
+<li>IpAddress: string type optional The ip address of the host</li>
+<li>Uuid : string type, optional, host uuid</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -46059,10 +49238,15 @@ class FileTamperRule extends  AbstractModel {
 <li>read: read file</li>
 <li>write: modify file</li>
 <li>read-write: read and modify file</li>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FileAction = null;
+
+        /**
+         * Command line parameter not filled
+         * @type {string || null}
+         */
+        this.Args = null;
 
     }
 
@@ -46077,6 +49261,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Target = 'Target' in params ? params.Target : null;
         this.Action = 'Action' in params ? params.Action : null;
         this.FileAction = 'FileAction' in params ? params.FileAction : null;
+        this.Args = 'Args' in params ? params.Args : null;
 
     }
 }
@@ -46125,6 +49310,18 @@ class ScanTaskAgainResponse extends  AbstractModel {
         super();
 
         /**
+         * number of hosts with successful delivery
+         * @type {number || null}
+         */
+        this.SuccessCount = null;
+
+        /**
+         * Number of hosts (Basic version, do not support scanning)
+         * @type {number || null}
+         */
+        this.BasicVersionCount = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -46139,6 +49336,8 @@ class ScanTaskAgainResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
+        this.BasicVersionCount = 'BasicVersionCount' in params ? params.BasicVersionCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -46210,7 +49409,6 @@ class DescribeScreenMachinesResponse extends  AbstractModel {
 
         /**
          * List details
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ScreenRegionMachines> || null}
          */
         this.List = null;
@@ -46245,111 +49443,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Authorization order list object
+ * DescribeRaspMemShellDetailTCSS response structure.
  * @class
  */
-class LicenseDetail extends  AbstractModel {
+class DescribeRaspMemShellDetailTCSSResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Authorization ID
-         * @type {number || null}
+         * Event details
+         * @type {RaspMemShellDetail || null}
          */
-        this.LicenseId = null;
+        this.Data = null;
 
         /**
-         * Authorization type. 0: Pro Edition - pay-as-you-go; 1: Pro Edition - yearly/monthly subscription; 2: Ultimate Edition - yearly/monthly subscription.
-         * @type {number || null}
-         */
-        this.LicenseType = null;
-
-        /**
-         * Authorization status. 0: not in use; 1: partially in use; 2: used up; 3: unavailable.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.LicenseStatus = null;
-
-        /**
-         * Total number of authorizations
-         * @type {number || null}
-         */
-        this.LicenseCnt = null;
-
-        /**
-         * Number of used authorizations
-         * @type {number || null}
-         */
-        this.UsedLicenseCnt = null;
-
-        /**
-         * Order status. 1: normal; 2: isolated; 3: terminated.
-         * @type {number || null}
-         */
-        this.OrderStatus = null;
-
-        /**
-         * Deadline
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Deadline = null;
-
-        /**
-         * Order resource ID
-         * @type {string || null}
-         */
-        this.ResourceId = null;
-
-        /**
-         * 0: initialization; 1: automatic renewal; 2: no automatic renewal.
-         * @type {number || null}
-         */
-        this.AutoRenewFlag = null;
-
-        /**
-         * Project ID
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * Task ID. Default value: 0. It is used to query the binding progress.
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * Time of purchase
-         * @type {string || null}
-         */
-        this.BuyTime = null;
-
-        /**
-         * Whether the order is a trial order
-         * @type {number || null}
-         */
-        this.SourceType = null;
-
-        /**
-         * Resource alias
-         * @type {string || null}
-         */
-        this.Alias = null;
-
-        /**
-         * Platform Tag
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Tags> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Number of frozen authorizations. 0: no authorization is frozen; other values: actual number of frozen authorizations.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.FreezeNum = null;
+        this.RequestId = null;
 
     }
 
@@ -46360,39 +49471,22 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.LicenseId = 'LicenseId' in params ? params.LicenseId : null;
-        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
-        this.LicenseStatus = 'LicenseStatus' in params ? params.LicenseStatus : null;
-        this.LicenseCnt = 'LicenseCnt' in params ? params.LicenseCnt : null;
-        this.UsedLicenseCnt = 'UsedLicenseCnt' in params ? params.UsedLicenseCnt : null;
-        this.OrderStatus = 'OrderStatus' in params ? params.OrderStatus : null;
-        this.Deadline = 'Deadline' in params ? params.Deadline : null;
-        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
-        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.BuyTime = 'BuyTime' in params ? params.BuyTime : null;
-        this.SourceType = 'SourceType' in params ? params.SourceType : null;
-        this.Alias = 'Alias' in params ? params.Alias : null;
 
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tags();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
+        if (params.Data) {
+            let obj = new RaspMemShellDetail();
+            obj.deserialize(params.Data)
+            this.Data = obj;
         }
-        this.FreezeNum = 'FreezeNum' in params ? params.FreezeNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * Local privilege escalation rule
+ * Application protection allowlist rule
  * @class
  */
-class PrivilegeRule extends  AbstractModel {
+class YDRaspBlackWhiteListItem extends  AbstractModel {
     constructor(){
         super();
 
@@ -46403,37 +49497,49 @@ class PrivilegeRule extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Client ID
-         * @type {string || null}
-         */
-        this.Uuid = null;
-
-        /**
-         * Process name
-         * @type {string || null}
-         */
-        this.ProcessName = null;
-
-        /**
-         * Whether the mode is S mode
+         * Logical operator. 0: 5 valid regular expression logical ANDs; 1: logical OR.
          * @type {number || null}
          */
-        this.SMode = null;
+        this.LogicalSymbol = null;
 
         /**
-         * Operator
+         * Class name regular expression, which is not matched if empty.
          * @type {string || null}
          */
-        this.Operator = null;
+        this.ClassNameRegexp = null;
 
         /**
-         * Whether the rule is global
-         * @type {number || null}
+         * Parent class name regular expression, which is not matched if empty.
+         * @type {string || null}
          */
-        this.IsGlobal = null;
+        this.SuperClassNameRegexp = null;
 
         /**
-         * Status. 0: valid; 1: invalid.
+         * Inherited interface regular expression, which is not matched if empty.
+         * @type {string || null}
+         */
+        this.InterfacesRegexp = null;
+
+        /**
+         * Annotation regular expression, which is not matched if empty.
+         * @type {string || null}
+         */
+        this.AnnotationsRegexp = null;
+
+        /**
+         * Associated class loader regular expression, which is not matched if empty.
+         * @type {string || null}
+         */
+        this.LoaderClassNameRegexp = null;
+
+        /**
+         * Allowlist type, rasp: vulnerability defense, memshell_scan: Java Webshell scan, memshell_inject: memory shell injection
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * Status (0: valid, 1: deleted, 2: invalid (enabling switch off)).
          * @type {number || null}
          */
         this.Status = null;
@@ -46451,10 +49557,118 @@ class PrivilegeRule extends  AbstractModel {
         this.ModifyTime = null;
 
         /**
-         * Host IP
+         * Java Webshell scan usage, process historical events, 0: do not process 1: process
+         * @type {number || null}
+         */
+        this.HandleHistory = null;
+
+        /**
+         * rasp and memory shell injection usage, match content, POC, can be a regular expression (MatchMode=5) or a string.
          * @type {string || null}
          */
-        this.Hostip = null;
+        this.Content = null;
+
+        /**
+         * rasp and memory shell injection usage, attack source ip, leave unset for all sources, multiple allowed, can have ip ranges, such as: 192.168.57.1/24;172.17.0.1
+         * @type {string || null}
+         */
+        this.IP = null;
+
+        /**
+         * Rule name
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * rasp and memory shell injection usage, allowlisting method, 0: malicious feature allowlisting, 1: request URL allowlisting
+         * @type {number || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * RASP and memory shell injection usage, attack type, vul.rasp_attacktype_mapping attack_type_id field
+         * @type {number || null}
+         */
+        this.AttackType = null;
+
+        /**
+         * rasp and memory shell injection usage, match mode, 0: exact match, 1: prefix match, 2: suffix matching, 4: arbitrary matching, 5: partial matching, 6: regular expression matching.
+         * @type {number || null}
+         */
+        this.MatchMode = null;
+
+        /**
+         * Effective asset type. 0: Host disabled. 1: Host enabled.
+         * @type {number || null}
+         */
+        this.CWPEffective = null;
+
+        /**
+         * 0: a set of quuid 1: ALL the Real Server with host authorization
+         * @type {number || null}
+         */
+        this.CWPScope = null;
+
+        /**
+         * Designate the effective host machine
+         * @type {Array.<string> || null}
+         */
+        this.CWPQuuids = null;
+
+        /**
+         * Effective asset type. 0: Container disabled. 1: Container enabled.
+         * @type {number || null}
+         */
+        this.TCSSEffective = null;
+
+        /**
+         * 0: a set of quuid 1: ALL the node with container authorization
+         * @type {number || null}
+         */
+        this.TCSSScope = null;
+
+        /**
+         * Designate the container node to take effect
+         * @type {Array.<string> || null}
+         */
+        this.TCSSQuuids = null;
+
+        /**
+         * Effective asset type. 0: Super node disabled. 1: Super node enabled.
+         * @type {number || null}
+         */
+        this.EksEffective = null;
+
+        /**
+         * 0: a set of quuid 1: ALL the super node with container authorization
+         * @type {number || null}
+         */
+        this.EksScope = null;
+
+        /**
+         * Designate the super node where the container takes effect
+         * @type {Array.<string> || null}
+         */
+        this.EksNodeUniqueID = null;
+
+        /**
+         * Application asset. If global, all hosts. Otherwise, the number of selected host servers.
+         * @type {string || null}
+         */
+        this.CWPMachinesNums = null;
+
+        /**
+         * Application asset. If global, all containers host nodes. Otherwise, select the number of host nodes.
+         * @type {string || null}
+         */
+        this.TCSSMachinesNums = null;
+
+        /**
+         * Application asset. If global, all super nodes. Otherwise, select the number of nodes.
+         * @type {string || null}
+         */
+        this.EksMachinesNums = null;
 
     }
 
@@ -46466,15 +49680,77 @@ class PrivilegeRule extends  AbstractModel {
             return;
         }
         this.Id = 'Id' in params ? params.Id : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
-        this.SMode = 'SMode' in params ? params.SMode : null;
-        this.Operator = 'Operator' in params ? params.Operator : null;
-        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
+        this.LogicalSymbol = 'LogicalSymbol' in params ? params.LogicalSymbol : null;
+        this.ClassNameRegexp = 'ClassNameRegexp' in params ? params.ClassNameRegexp : null;
+        this.SuperClassNameRegexp = 'SuperClassNameRegexp' in params ? params.SuperClassNameRegexp : null;
+        this.InterfacesRegexp = 'InterfacesRegexp' in params ? params.InterfacesRegexp : null;
+        this.AnnotationsRegexp = 'AnnotationsRegexp' in params ? params.AnnotationsRegexp : null;
+        this.LoaderClassNameRegexp = 'LoaderClassNameRegexp' in params ? params.LoaderClassNameRegexp : null;
+        this.Source = 'Source' in params ? params.Source : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
-        this.Hostip = 'Hostip' in params ? params.Hostip : null;
+        this.HandleHistory = 'HandleHistory' in params ? params.HandleHistory : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.IP = 'IP' in params ? params.IP : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.AttackType = 'AttackType' in params ? params.AttackType : null;
+        this.MatchMode = 'MatchMode' in params ? params.MatchMode : null;
+        this.CWPEffective = 'CWPEffective' in params ? params.CWPEffective : null;
+        this.CWPScope = 'CWPScope' in params ? params.CWPScope : null;
+        this.CWPQuuids = 'CWPQuuids' in params ? params.CWPQuuids : null;
+        this.TCSSEffective = 'TCSSEffective' in params ? params.TCSSEffective : null;
+        this.TCSSScope = 'TCSSScope' in params ? params.TCSSScope : null;
+        this.TCSSQuuids = 'TCSSQuuids' in params ? params.TCSSQuuids : null;
+        this.EksEffective = 'EksEffective' in params ? params.EksEffective : null;
+        this.EksScope = 'EksScope' in params ? params.EksScope : null;
+        this.EksNodeUniqueID = 'EksNodeUniqueID' in params ? params.EksNodeUniqueID : null;
+        this.CWPMachinesNums = 'CWPMachinesNums' in params ? params.CWPMachinesNums : null;
+        this.TCSSMachinesNums = 'TCSSMachinesNums' in params ? params.TCSSMachinesNums : null;
+        this.EksMachinesNums = 'EksMachinesNums' in params ? params.EksMachinesNums : null;
+
+    }
+}
+
+/**
+ * ExportBashEvents response structure.
+ * @class
+ */
+class ExportBashEventsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Export file download link
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * Task ID, required for obtaining the DownloadURL at API Asynchronous Export Task ExportTasks
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -46536,13 +49812,13 @@ class ScanVulSettingRequest extends  AbstractModel {
         this.EnableScan = null;
 
         /**
-         * If empty, scan hosts with all Professional, Premium, and General Discount editions by default; if not empty, only scan the selected hosts.
+         * If empty, scan all Pro Edition, Flagship Edition, and Lite hosts by default. If not empty, only scan selected hosts.
          * @type {Array.<string> || null}
          */
         this.Uuids = null;
 
         /**
-         * 0 version comparison, 2 version comparison + poc
+         * 0: version comparison, 2: version comparison + POC.
          * @type {number || null}
          */
         this.ScanMethod = null;
@@ -46641,6 +49917,34 @@ class CreateEmergencyVulScanRequest extends  AbstractModel {
 }
 
 /**
+ * StopBaselineDetect request structure.
+ * @class
+ */
+class StopBaselineDetectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cancel task ID collection
+         * @type {Array.<number> || null}
+         */
+        this.TaskIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskIds = 'TaskIds' in params ? params.TaskIds : null;
+
+    }
+}
+
+/**
  * ModifyWebHookRuleStatus response structure.
  * @class
  */
@@ -46678,7 +49982,6 @@ class ExportVulEffectHostListResponse extends  AbstractModel {
 
         /**
          * This parameter has been deprecated.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DownloadUrl = null;
@@ -46805,15 +50108,13 @@ class AssetCoreModuleDetail extends  AbstractModel {
         this.Modules = null;
 
         /**
-         * Parameter information
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Parameter information.
          * @type {Array.<AssetCoreModuleParam> || null}
          */
         this.Params = null;
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -47012,35 +50313,30 @@ class IgnoreBaselineRule extends  AbstractModel {
 
         /**
          * Baseline check item name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RuleName = null;
 
         /**
-         * Baseline check item ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Baseline detection item id
          * @type {number || null}
          */
         this.RuleId = null;
 
         /**
          * Update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ModifyTime = null;
 
         /**
-         * Fixing suggestions
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Fixing suggestion
          * @type {string || null}
          */
         this.Fix = null;
 
         /**
          * Number of affected hosts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.EffectHostCount = null;
@@ -47192,29 +50488,25 @@ class DescribeAssetRecentMachineInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * List of total assets
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of total quantities
          * @type {Array.<AssetKeyVal> || null}
          */
         this.TotalList = null;
 
         /**
          * List of online assets
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetKeyVal> || null}
          */
         this.LiveList = null;
 
         /**
          * List of offline assets
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetKeyVal> || null}
          */
         this.OfflineList = null;
 
         /**
          * List of risky assets
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetKeyVal> || null}
          */
         this.RiskList = null;
@@ -47321,84 +50613,72 @@ class BaselineItem extends  AbstractModel {
 
         /**
          * Check result description
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DetectResultDesc = null;
 
         /**
          * Risk level
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Level = null;
 
         /**
          * Detection Status. 0: Failed; 1: Ignored; 3: Passed; 5: Under detection
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DetectStatus = null;
 
         /**
          * Host ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostId = null;
 
         /**
-         * Host name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * host name
          * @type {string || null}
          */
         this.HostName = null;
 
         /**
          * Host IP address
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostIp = null;
 
         /**
          * Public IP address
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.WanIp = null;
 
         /**
          * First Occurrence Time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FirstTime = null;
 
         /**
          * Last Occurrence Time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LastTime = null;
 
         /**
          * Can Be Fixed or Not
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CanBeFixed = null;
 
         /**
          * Host Security UUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
          * Host Additional Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -47448,8 +50728,7 @@ class DescribeMalWareListResponse extends  AbstractModel {
         super();
 
         /**
-         * List of Trojans
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Trojan List
          * @type {Array.<MalWareList> || null}
          */
         this.MalWareList = null;
@@ -47598,7 +50877,6 @@ class DescribeAssetPortInfoListResponse extends  AbstractModel {
 
         /**
          * List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetPortBaseInfo> || null}
          */
         this.Ports = null;
@@ -47655,6 +50933,90 @@ class DescribeMalwareRiskOverviewRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeLoginTypeGlobalConf response structure.
+ * @class
+ */
+class DescribeLoginTypeGlobalConfResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether anti-uninstall is enabled <li>0 No</li> <li>1 Yes</li> <li>9 Not set, same as 0 means not enabled</li>
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * Scope <li>0 Selected host</li> <li>1 All hosts</li>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * Selected host configuration count
+         * @type {number || null}
+         */
+        this.IncludeHostCount = null;
+
+        /**
+         * Deselect host configuration count
+         * @type {number || null}
+         */
+        this.ExcludeHostCount = null;
+
+        /**
+         * Select quuid configuration list
+         * @type {Array.<string> || null}
+         */
+        this.IncludeQuuid = null;
+
+        /**
+         * Exclude quuid configuration list
+         * @type {Array.<string> || null}
+         */
+        this.ExcludeQuuid = null;
+
+        /**
+         * Number of Machines Enabled
+         * @type {number || null}
+         */
+        this.EnableCount = null;
+
+        /**
+         * Number of inactive machines
+         * @type {number || null}
+         */
+        this.DisableCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.IncludeHostCount = 'IncludeHostCount' in params ? params.IncludeHostCount : null;
+        this.ExcludeHostCount = 'ExcludeHostCount' in params ? params.ExcludeHostCount : null;
+        this.IncludeQuuid = 'IncludeQuuid' in params ? params.IncludeQuuid : null;
+        this.ExcludeQuuid = 'ExcludeQuuid' in params ? params.ExcludeQuuid : null;
+        this.EnableCount = 'EnableCount' in params ? params.EnableCount : null;
+        this.DisableCount = 'DisableCount' in params ? params.DisableCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeMaliciousRequestWhiteList response structure.
  * @class
  */
@@ -47664,14 +51026,12 @@ class DescribeMaliciousRequestWhiteListResponse extends  AbstractModel {
 
         /**
          * List of allowlist information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MaliciousRequestWhiteListInfo> || null}
          */
         this.List = null;
 
         /**
          * Total number of pagination query records
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -47771,6 +51131,69 @@ class DescribeBaselinePolicyListRequest extends  AbstractModel {
 }
 
 /**
+ * Details of the region list
+ * @class
+ */
+class RegionListDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Machine type
+CVM, Tencent Cloud Virtual Machine
+LH, TencentCloud Lighthouse
+ECM, Tencent Cloud Edge Computing Machine
+BM, Tencent BM 1.0
+Other, Other servers (non-Tencent Cloud)
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 0 Tencent Cloud
+1 IDC
+2 Alibaba Cloud
+3 Huawei Cloud
+4 Amazon
+5 Microsoft
+6 Google
+7 Oracle
+8 Digital Ocean
+         * @type {number || null}
+         */
+        this.CloudFrom = null;
+
+        /**
+         * Region list
+         * @type {Array.<RegionInfo> || null}
+         */
+        this.RegionList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.CloudFrom = 'CloudFrom' in params ? params.CloudFrom : null;
+
+        if (params.RegionList) {
+            this.RegionList = new Array();
+            for (let z in params.RegionList) {
+                let obj = new RegionInfo();
+                obj.deserialize(params.RegionList[z]);
+                this.RegionList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Vulnerability details
  * @class
  */
@@ -47840,7 +51263,6 @@ class VulDefenceEventDetail extends  AbstractModel {
 
         /**
          * Attack source port
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<number> || null}
          */
         this.SourcePort = null;
@@ -47925,7 +51347,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Host Additional Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -48088,14 +51509,12 @@ class DescribeIgnoreBaselineRuleResponse extends  AbstractModel {
 
         /**
          * List of ignored baseline check items
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<IgnoreBaselineRule> || null}
          */
         this.IgnoreBaselineRuleList = null;
 
         /**
          * Total number of pagination query records
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -48188,7 +51607,6 @@ class DescribeMalwareRiskWarningResponse extends  AbstractModel {
 
         /**
          * List of risky files
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MalwareRisk> || null}
          */
         this.List = null;
@@ -48201,7 +51619,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Information on Abnormal Process List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MalwareRisk> || null}
          */
         this.ProcessList = null;
@@ -48274,7 +51691,13 @@ class DescribeBashRulesRequest extends  AbstractModel {
 
         /**
          * Filter criteria
-<li>Keywords - String - required: no - keyword (rule name)</li>
+<li>Name - String - required: no - rule name</li>
+<li>Rule - String - Required: no - Rule content</li>
+<li>Level - Int - required: no - threat level</li>
+<li>White - Int - Required: no - Type of allowlist</li>
+<li>RuleCategory - Int - required: no - policy type</li>
+<li>BashAction - Int - required: no - action</li>
+<li>Status - Int - required: no - effective status</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -48356,21 +51779,18 @@ class BaselineBasicInfo extends  AbstractModel {
 
         /**
          * Baseline name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
          * Baseline ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.BaselineId = null;
 
         /**
-         * Parent ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Parent id
          * @type {number || null}
          */
         this.ParentId = null;
@@ -48448,7 +51868,6 @@ class DescribeScreenAttackHotspotResponse extends  AbstractModel {
 
         /**
          * Attack hotspot list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ScreenAttackHotspot> || null}
          */
         this.List = null;
@@ -48504,7 +51923,6 @@ class FileTamperRuleCount extends  AbstractModel {
 
         /**
          * Name of the Association Rule (Show Only One of Them)
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
@@ -48535,7 +51953,6 @@ class DescribeRiskDnsEventInfoResponse extends  AbstractModel {
 
         /**
          * Malicious request event details
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {RiskDnsEvent || null}
          */
         this.Info = null;
@@ -49128,42 +52545,36 @@ class ScreenBaselineInfo extends  AbstractModel {
 
         /**
          * Baseline name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
          * Hazard level: 1-Low-risk; 2-Medium-risk; 3-High-risk; 4-Critical
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Level = null;
 
         /**
          * Baseline ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CategoryId = null;
 
         /**
-         * Last check time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Last detection time
          * @type {string || null}
          */
         this.LastScanTime = null;
 
         /**
-         * Baseline check items with risks
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Baseline risk items
          * @type {number || null}
          */
         this.BaselineFailCount = null;
 
         /**
          * Host UUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Uuid = null;
@@ -49301,7 +52712,6 @@ class DescribeVulDefencePluginDetailResponse extends  AbstractModel {
 
         /**
          * List of detailed information on the vulnerability defense plugin
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VulDefencePluginDetail> || null}
          */
         this.List = null;
@@ -49395,7 +52805,6 @@ class DescribeAssetDatabaseListResponse extends  AbstractModel {
 
         /**
          * List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetDatabaseBaseInfo> || null}
          */
         this.Databases = null;
@@ -49558,6 +52967,76 @@ class DescribeProcessStatisticsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRaspPluginList request structure.
+ * @class
+ */
+class DescribeRaspPluginListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Asset type
+-CWP host security asset
+-TCSS_HOST container host node
+-TCSS_EKS Container Super Node
+         * @type {string || null}
+         */
+        this.AssetType = null;
+
+        /**
+         * Machine unique ID
+         * @type {string || null}
+         */
+        this.QUUID = null;
+
+        /**
+         * Filter parameters
+PluginStatus Plug-in status (Injecting, Injected successfully, Timed out, Plug-in exit, Injection failure)
+process PID
+Main class name of the process
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum number of entries. Default value: 10.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.QUUID = 'QUUID' in params ? params.QUUID : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * Malicious request list
  * @class
  */
@@ -49687,14 +53166,12 @@ class RiskDnsList extends  AbstractModel {
 
         /**
          * Public IP address
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MachineWanIp = null;
 
         /**
-         * Host online status. OFFLINE: offline; ONLINE: online; UNKNOWN: unknown.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host online status [OFFLINE: offline|ONLINE: online|UNKNOWN: unknown]
          * @type {string || null}
          */
         this.MachineStatus = null;
@@ -49762,7 +53239,6 @@ class SyncAssetScanResponse extends  AbstractModel {
 
         /**
          * Task ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TaskId = null;
@@ -49935,7 +53411,6 @@ class AssetCoreModuleBaseInfo extends  AbstractModel {
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -49959,8 +53434,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MachineWanIp = null;
 
         /**
-         * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
+         *  Additional information
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -50082,7 +53556,6 @@ class DescribeScreenBroadcastsResponse extends  AbstractModel {
 
         /**
          * Broadcasting article list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ScreenBroadcasts> || null}
          */
         this.List = null;
@@ -50272,8 +53745,7 @@ class VulFixStatusHostInfo extends  AbstractModel {
         this.ModifyTime = null;
 
         /**
-         * Fixing failure cause
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Fix failure cause
          * @type {string || null}
          */
         this.FailReason = null;
@@ -50298,58 +53770,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Attack backtracking event
+ * DescribeAttackVulTypeList response structure.
  * @class
  */
-class AttackSourceEvent extends  AbstractModel {
+class DescribeAttackVulTypeListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Event type. 0: virus scanning; 1: abnormal log-in; 2: password cracking; 3: malicious request; 4: high-risk command.
-         * @type {number || null}
+         * Threat type list
+         * @type {Array.<string> || null}
          */
-        this.EventType = null;
+        this.List = null;
 
         /**
-         * [Virus scanning] Virus name: VirusName, file name: FileName, file path: FilePath, file size: FileSize, file MD5: MD5, first detection time: CreateTime, last detection time: LatestScanTime, severity description: HarmDescribe, fixing suggestion: SuggestScheme
-[Abnormal log-in] Source IP: SrcIp, location: Location, log-in username: UserName, log-in time: LoginTime
-[Password cracking] Source IP: SrcIp, location: City and Country, protocol: Protocol, log-in username: UserName, port: Port, attempt count: Count, first attack time: CreateTime, last attack time: ModifyTime
-[Malicious request] Malicious request domain name: Url, process: ProcessName, MD5: ProcessMd5, PID: Pid, request count: AccessCount, last request time: MergeTime, severity description: HarmDescribe, fixing suggestion: SuggestScheme
-[High-risk command] Hit rule name: RuleName, rule category: RuleCategory, command content: BashCmd, data source: DetectBy, Log-in user: User, PID: Pid, occurrence time: CreateTime, severity description: HarmDescribe, fixing suggestion: SuggestScheme
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Content = null;
-
-        /**
-         * Intrusion time
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * Unified event risk level. 0: prompt; 1: low; 2: medium; 3: high; 4: critical.
-         * @type {number || null}
-         */
-        this.Level = null;
-
-        /**
-         * Risk level string in Chinese
-         * @type {string || null}
-         */
-        this.LevelZh = null;
-
-        /**
-         * Event ID
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * Host UUID
-         * @type {string || null}
-         */
-        this.Uuid = null;
+        this.RequestId = null;
 
     }
 
@@ -50360,13 +53798,8 @@ class AttackSourceEvent extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EventType = 'EventType' in params ? params.EventType : null;
-        this.Content = 'Content' in params ? params.Content : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.LevelZh = 'LevelZh' in params ? params.LevelZh : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.List = 'List' in params ? params.List : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -50500,6 +53933,338 @@ class DescribeAssetAppCountRequest extends  AbstractModel {
 }
 
 /**
+ * Application protection event details
+ * @class
+ */
+class RaspEventDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Vulnerability Event ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Status 0: pending 1: defended 2: processed 3: ignored 4: deleted 5: allowlisted
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Machine QUuid.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * host name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Instance ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * Private IP address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PrivateIp = null;
+
+        /**
+         * Public IP address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PublicIp = null;
+
+        /**
+         * Asset tag
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.HostTags = null;
+
+        /**
+         * First Attack Time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last attack time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MergeTime = null;
+
+        /**
+         * Application attack type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AttackTypeName = null;
+
+        /**
+         * Application Attack Type id
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AttackType = null;
+
+        /**
+         * Request URL
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Vulnerability name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VulName = null;
+
+        /**
+         * Attack count
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * CVE ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CveId = null;
+
+        /**
+         * Attack source IP address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SourceIp = null;
+
+        /**
+         * City of the attack source IP address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * Port under attack
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AttackPort = null;
+
+        /**
+         * Vulnerability description
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Repair method
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Fix = null;
+
+        /**
+         * Request content
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NetworkPayload = null;
+
+        /**
+         * Node name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Node ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Container name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ContainerName = null;
+
+        /**
+         * container id
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ContainerId = null;
+
+        /**
+         * Container running status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ContainerStatus = null;
+
+        /**
+         * Container isolation status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ContainerNetStatus = null;
+
+        /**
+         * Image ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * Image Name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * Pod name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * podip
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PodIp = null;
+
+        /**
+         * Cluster name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Cluster ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Process id
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * Associated Process Main Class Name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MainClass = null;
+
+        /**
+         * Stack information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StackTrace = null;
+
+        /**
+         * Vulnerability ID-Related Event Details (JSON array format, unique to RASP)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RaspDetail = null;
+
+        /**
+         * Intrusion Status: 1 Attack Event, 2 Successful Defense
+         * @type {number || null}
+         */
+        this.EventType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.PrivateIp = 'PrivateIp' in params ? params.PrivateIp : null;
+        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.HostTags = 'HostTags' in params ? params.HostTags : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.MergeTime = 'MergeTime' in params ? params.MergeTime : null;
+        this.AttackTypeName = 'AttackTypeName' in params ? params.AttackTypeName : null;
+        this.AttackType = 'AttackType' in params ? params.AttackType : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.CveId = 'CveId' in params ? params.CveId : null;
+        this.SourceIp = 'SourceIp' in params ? params.SourceIp : null;
+        this.City = 'City' in params ? params.City : null;
+        this.AttackPort = 'AttackPort' in params ? params.AttackPort : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Fix = 'Fix' in params ? params.Fix : null;
+        this.NetworkPayload = 'NetworkPayload' in params ? params.NetworkPayload : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+        this.ContainerId = 'ContainerId' in params ? params.ContainerId : null;
+        this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
+        this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.PodIp = 'PodIp' in params ? params.PodIp : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.MainClass = 'MainClass' in params ? params.MainClass : null;
+        this.StackTrace = 'StackTrace' in params ? params.StackTrace : null;
+        this.RaspDetail = 'RaspDetail' in params ? params.RaspDetail : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+
+    }
+}
+
+/**
  * DescribeMaliciousRequestWhiteList request structure.
  * @class
  */
@@ -50561,6 +54326,87 @@ class DescribeMaliciousRequestWhiteListRequest extends  AbstractModel {
         }
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * Statistics on top network attacks
+ * @class
+ */
+class NetAttackTopInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Top Statistical Data on Network Attack Host Dimension
+         * @type {Array.<TopInfo> || null}
+         */
+        this.Agent = null;
+
+        /**
+         * Top Statistical Data on Network Attack IP Source Dimension
+         * @type {Array.<TopInfo> || null}
+         */
+        this.SrcIp = null;
+
+        /**
+         * Top Statistical Data on Network Attack Target Port Dimension
+         * @type {Array.<TopInfo> || null}
+         */
+        this.DstPort = null;
+
+        /**
+         * Top Statistical Data on Network Attack Vulnerability Dimension
+         * @type {Array.<TopInfo> || null}
+         */
+        this.Vul = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Agent) {
+            this.Agent = new Array();
+            for (let z in params.Agent) {
+                let obj = new TopInfo();
+                obj.deserialize(params.Agent[z]);
+                this.Agent.push(obj);
+            }
+        }
+
+        if (params.SrcIp) {
+            this.SrcIp = new Array();
+            for (let z in params.SrcIp) {
+                let obj = new TopInfo();
+                obj.deserialize(params.SrcIp[z]);
+                this.SrcIp.push(obj);
+            }
+        }
+
+        if (params.DstPort) {
+            this.DstPort = new Array();
+            for (let z in params.DstPort) {
+                let obj = new TopInfo();
+                obj.deserialize(params.DstPort[z]);
+                this.DstPort.push(obj);
+            }
+        }
+
+        if (params.Vul) {
+            this.Vul = new Array();
+            for (let z in params.Vul) {
+                let obj = new TopInfo();
+                obj.deserialize(params.Vul[z]);
+                this.Vul.push(obj);
+            }
+        }
 
     }
 }
@@ -50634,6 +54480,118 @@ class DescribeBashEventsNewRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * Patch details
+ * @class
+ */
+class EventPatchInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Patch name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Patch Number
+         * @type {string || null}
+         */
+        this.KbNo = null;
+
+        /**
+         * Disclosure time
+         * @type {string || null}
+         */
+        this.PublishTime = null;
+
+        /**
+         * Number of affected hosts.
+         * @type {number || null}
+         */
+        this.EffectHostCount = null;
+
+        /**
+         * Number of associated vulnerabilities
+         * @type {number || null}
+         */
+        this.RelateVulCount = null;
+
+        /**
+         * Associated vulnerability ID array
+         * @type {Array.<string> || null}
+         */
+        this.RelateVulList = null;
+
+        /**
+         * Whether it is the latest disclosure [0: no | 1: yes], no by default
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         * Last scan time
+         * @type {string || null}
+         */
+        this.LastScanTime = null;
+
+        /**
+         * 0 pending, 1 ignored, 3 fixed
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Prerequisite for installing the kb is generally other KBs, and there may be multiple, with KBs separated by ", "
+         * @type {string || null}
+         */
+        this.KbPreCondition = null;
+
+        /**
+         * Name of the windows product associated with the kb
+         * @type {string || null}
+         */
+        this.RelatedProduct = null;
+
+        /**
+         * Patch ID
+         * @type {number || null}
+         */
+        this.KbId = null;
+
+        /**
+         * Related kb event id collection
+         * @type {string || null}
+         */
+        this.Ids = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.KbNo = 'KbNo' in params ? params.KbNo : null;
+        this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
+        this.EffectHostCount = 'EffectHostCount' in params ? params.EffectHostCount : null;
+        this.RelateVulCount = 'RelateVulCount' in params ? params.RelateVulCount : null;
+        this.RelateVulList = 'RelateVulList' in params ? params.RelateVulList : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.KbPreCondition = 'KbPreCondition' in params ? params.KbPreCondition : null;
+        this.RelatedProduct = 'RelatedProduct' in params ? params.RelatedProduct : null;
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -50825,6 +54783,81 @@ class DescribeVulDefencePluginDetailRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ModifyLoginWhiteInfo request structure.
+ * @class
+ */
+class ModifyLoginWhiteInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Update the allowlist information entity
+         * @type {UpdateHostLoginWhiteObj || null}
+         */
+        this.HostLoginWhiteObj = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.HostLoginWhiteObj) {
+            let obj = new UpdateHostLoginWhiteObj();
+            obj.deserialize(params.HostLoginWhiteObj)
+            this.HostLoginWhiteObj = obj;
+        }
+
+    }
+}
+
+/**
+ * Tag information
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Tag name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Number of servers
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Count = 'Count' in params ? params.Count : null;
 
     }
 }
@@ -51083,7 +55116,7 @@ class WarningObject extends  AbstractModel {
         super();
 
         /**
-         * Event Alarm Type. 1: Offline; 2: Trojan; 3: Exceptional login; 4: Brute force; 5: Vulnerability (split into four types ranging from 9 to 12); 6: High-risk command; 7: Reverse sell; 8: Local privilege escalation;, 9: System component vulnerabilities; 10: Web application vulnerabilities; 11: Emergency vulnerabilities; 12: Security baseline; 14: Malicious request; 15: Network attack; 16: Windows system vulnerabilities; 17: Linux software vulnerabilities
+         * Event alarm type: 1: offline, 2: Trojan, 3: abnormal login, 4: crack, 5: vulnerability (split into four types 9-12), 6: high-risk command, 7: rebound shell, 8: local privilege escalation, 9: system component vulnerability, 10: web application vulnerability, 11: emergency vulnerability, 12: security baseline, 14: malicious request, 15: network attack, 16: Windows system vulnerability, 17: Linux software vulnerability.
          * @type {number || null}
          */
         this.Type = null;
@@ -51118,6 +55151,12 @@ class WarningObject extends  AbstractModel {
          */
         this.HostRange = null;
 
+        /**
+         * Unit.
+         * @type {string || null}
+         */
+        this.Unit = null;
+
     }
 
     /**
@@ -51133,6 +55172,7 @@ class WarningObject extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.ControlBits = 'ControlBits' in params ? params.ControlBits : null;
         this.HostRange = 'HostRange' in params ? params.HostRange : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
 
     }
 }
@@ -51176,6 +55216,91 @@ class DescribeAssetPortCountResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Reverse shell list data details.
+ * @class
+ */
+class ShellPolicyList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Policy name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * 0: system policy, 1: custom policy.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PolicyType = null;
+
+        /**
+         * Policy description
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PolicyDesc = null;
+
+        /**
+         * Policy action [0: alarm; 1: allow; 2:intercept + alarm]
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PolicyAction = null;
+
+        /**
+         * 0: enabled, 1: disabled.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsEnabled = null;
+
+        /**
+         * Update time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Host range. [0: a group of QUuids, 1: all Pro edition hosts, 2: Premium edition, 3: all hosts.]
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.HostScope = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
+        this.PolicyDesc = 'PolicyDesc' in params ? params.PolicyDesc : null;
+        this.PolicyAction = 'PolicyAction' in params ? params.PolicyAction : null;
+        this.IsEnabled = 'IsEnabled' in params ? params.IsEnabled : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.HostScope = 'HostScope' in params ? params.HostScope : null;
 
     }
 }
@@ -51400,7 +55525,6 @@ class DescribeIgnoreRuleEffectHostListResponse extends  AbstractModel {
 
         /**
          * List of hosts affected by ignored check items
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<IgnoreRuleEffectHostInfo> || null}
          */
         this.IgnoreRuleEffectHostList = null;
@@ -51451,7 +55575,6 @@ class FileTamperRuleDetail extends  AbstractModel {
 
         /**
          * Rule name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
@@ -51482,7 +55605,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Effective Host UUID. Empty means all hosts, and returned number of entries can be controlled through parameters.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Uuids = null;
@@ -51512,10 +55634,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.UuidTotalCount = null;
 
         /**
-         * Allowlisted processing type
-<li>cur: add the current items to the allowlist</li>
-<li>all: add all items that meet the conditions to the allowlist</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Allowlist processing type
+<li>cur: add only the current item to an allowlist</li>
+<li>all: add all objects that meet the conditions to the allowlist</li>
          * @type {string || null}
          */
         this.AddWhiteType = null;
@@ -51576,6 +55697,34 @@ class CreateBaselineStrategyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRaspEventDetailTCSS request structure.
+ * @class
+ */
+class DescribeRaspEventDetailTCSSRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Vulnerability Event ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -51652,13 +55801,13 @@ class DescribeHistoryAccountsResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of records in the history account list
+         * Total number of records in the account change history list.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Array of history accounts
+         * Array of account change history data.
          * @type {Array.<HistoryAccount> || null}
          */
         this.HistoryAccounts = null;
@@ -51703,14 +55852,12 @@ class BaselineCustomRuleIdName extends  AbstractModel {
 
         /**
          * Custom rule ID　
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RuleId = null;
 
         /**
          * Custom Rule Name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RuleName = null;
@@ -51739,25 +55886,34 @@ class DescribeLogStorageConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Storage type. The value is an array of strings.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Storage type: string array
          * @type {Array.<string> || null}
          */
         this.Type = null;
 
         /**
-         * Log retention days. The value 3640 means the retention days are not limited.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Log retention time. The value 3640 indicates that the time is unlimited.
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Count of period changes in this month
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of modifications made to Period this month.
          * @type {number || null}
          */
         this.PeriodModifyCount = null;
+
+        /**
+         * Log storage duration unit: year/month/day
+         * @type {string || null}
+         */
+        this.Granularity = null;
+
+        /**
+         * Language type
+         * @type {string || null}
+         */
+        this.MsgLanguage = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -51777,6 +55933,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Type = 'Type' in params ? params.Type : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.PeriodModifyCount = 'PeriodModifyCount' in params ? params.PeriodModifyCount : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
+        this.MsgLanguage = 'MsgLanguage' in params ? params.MsgLanguage : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -51792,7 +55950,6 @@ class DescribeVulEmergentMsgResponse extends  AbstractModel {
 
         /**
          * Vulnerability emergency notification data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VulEmergentMsgInfo> || null}
          */
         this.EmergentMsgList = null;
@@ -51917,7 +56074,7 @@ class ModifyWarningSettingRequest extends  AbstractModel {
         super();
 
         /**
-         * Modified alarm setting content
+         * Modify alarm settings.
          * @type {Array.<WarningObject> || null}
          */
         this.WarningObjects = null;
@@ -51940,6 +56097,48 @@ class ModifyWarningSettingRequest extends  AbstractModel {
                 this.WarningObjects.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ExportBruteAttacks response structure.
+ * @class
+ */
+class ExportBruteAttacksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * This parameter has been deprecated.
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * Task ID, required for obtaining the DownloadURL at API Asynchronous Export Task ExportTasks
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -52036,132 +56235,44 @@ class CheckFirstScanBaselineRequest extends  AbstractModel {
 }
 
 /**
- * DescribeLicenseGeneral response structure.
+ * DescribeAttackType request structure.
  * @class
  */
-class DescribeLicenseGeneralResponse extends  AbstractModel {
+class DescribeAttackTypeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of authorizations (including those that are isolated, expired, and in other states)
+         * Filter criteria
+<li>Source - String - Required - Allowlisted module, rasp: vulnerability defense, memshell_inject: memory shell injection</li>
+
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Number of entries to be returned. Default value: 10. Maximum value: 1000.
          * @type {number || null}
          */
-        this.LicenseCnt = null;
+        this.Limit = null;
 
         /**
-         * Number of available authorizations
+         * Offset. Default value: 0.
          * @type {number || null}
          */
-        this.AvailableLicenseCnt = null;
+        this.Offset = null;
 
         /**
-         * Number of available Professional Edition authorizations (including those in postpaid mode)
-         * @type {number || null}
-         */
-        this.AvailableProVersionLicenseCnt = null;
-
-        /**
-         * Number of available Ultimate Edition authorizations
-         * @type {number || null}
-         */
-        this.AvailableFlagshipVersionLicenseCnt = null;
-
-        /**
-         * Number of authorizations about to expire (no more than 15 days left)
-         * @type {number || null}
-         */
-        this.NearExpiryLicenseCnt = null;
-
-        /**
-         * Number of expired authorizations (excluding deleted ones)
-         * @type {number || null}
-         */
-        this.ExpireLicenseCnt = null;
-
-        /**
-         * Automatic upgrade enabling status. True: enabled; false: disabled. Default value: false.
-         * @type {boolean || null}
-         */
-        this.AutoOpenStatus = null;
-
-        /**
-         * PROVERSION_POSTPAY: Pro Edition - postpaid; PROVERSION_PREPAY: Pro edition - prepaid; FLAGSHIP_PREPAY: Ultimate Edition - prepaid.
+         * Sorting field. Currently available: Id. Default sorting order is by Id. Can be omitted.
          * @type {string || null}
          */
-        this.ProtectType = null;
+        this.By = null;
 
         /**
-         * Whether automatic upgrade has been enabled before
-         * @type {boolean || null}
-         */
-        this.IsOpenStatusHistory = null;
-
-        /**
-         * Number of used authorizations
-         * @type {number || null}
-         */
-        this.UsedLicenseCnt = null;
-
-        /**
-         * Number of authorizations that have not expired
-         * @type {number || null}
-         */
-        this.NotExpiredLicenseCnt = null;
-
-        /**
-         * Total number of Ultimate Edition authorizations (valid orders)
-         * @type {number || null}
-         */
-        this.FlagshipVersionLicenseCnt = null;
-
-        /**
-         * Total number of Pro Edition authorizations (valid orders)
-         * @type {number || null}
-         */
-        this.ProVersionLicenseCnt = null;
-
-        /**
-         * Total number of Inclusive Edition authorizations (those of valid orders)
-         * @type {number || null}
-         */
-        this.CwpVersionLicenseCnt = null;
-
-        /**
-         * Number of available Inclusive Edition authorizations
-         * @type {number || null}
-         */
-        this.AvailableLHLicenseCnt = null;
-
-        /**
-         * Auto-purchase switch, true for ON, false for OFF
-         * @type {boolean || null}
-         */
-        this.AutoRepurchaseSwitch = null;
-
-        /**
-         * Is auto-renewal required for auto-purchase orders, true for ON, false for OFF
-         * @type {boolean || null}
-         */
-        this.AutoRepurchaseRenewSwitch = null;
-
-        /**
-         * Number of terminated orders
-         * @type {number || null}
-         */
-        this.DestroyOrderNum = null;
-
-        /**
-         * Whether automatic renewal is enabled. True: enabled; false: disabled.
-         * @type {boolean || null}
-         */
-        this.RepurchaseRenewSwitch = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Sorting method: DESC, ASC.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Order = null;
 
     }
 
@@ -52172,26 +56283,19 @@ class DescribeLicenseGeneralResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LicenseCnt = 'LicenseCnt' in params ? params.LicenseCnt : null;
-        this.AvailableLicenseCnt = 'AvailableLicenseCnt' in params ? params.AvailableLicenseCnt : null;
-        this.AvailableProVersionLicenseCnt = 'AvailableProVersionLicenseCnt' in params ? params.AvailableProVersionLicenseCnt : null;
-        this.AvailableFlagshipVersionLicenseCnt = 'AvailableFlagshipVersionLicenseCnt' in params ? params.AvailableFlagshipVersionLicenseCnt : null;
-        this.NearExpiryLicenseCnt = 'NearExpiryLicenseCnt' in params ? params.NearExpiryLicenseCnt : null;
-        this.ExpireLicenseCnt = 'ExpireLicenseCnt' in params ? params.ExpireLicenseCnt : null;
-        this.AutoOpenStatus = 'AutoOpenStatus' in params ? params.AutoOpenStatus : null;
-        this.ProtectType = 'ProtectType' in params ? params.ProtectType : null;
-        this.IsOpenStatusHistory = 'IsOpenStatusHistory' in params ? params.IsOpenStatusHistory : null;
-        this.UsedLicenseCnt = 'UsedLicenseCnt' in params ? params.UsedLicenseCnt : null;
-        this.NotExpiredLicenseCnt = 'NotExpiredLicenseCnt' in params ? params.NotExpiredLicenseCnt : null;
-        this.FlagshipVersionLicenseCnt = 'FlagshipVersionLicenseCnt' in params ? params.FlagshipVersionLicenseCnt : null;
-        this.ProVersionLicenseCnt = 'ProVersionLicenseCnt' in params ? params.ProVersionLicenseCnt : null;
-        this.CwpVersionLicenseCnt = 'CwpVersionLicenseCnt' in params ? params.CwpVersionLicenseCnt : null;
-        this.AvailableLHLicenseCnt = 'AvailableLHLicenseCnt' in params ? params.AvailableLHLicenseCnt : null;
-        this.AutoRepurchaseSwitch = 'AutoRepurchaseSwitch' in params ? params.AutoRepurchaseSwitch : null;
-        this.AutoRepurchaseRenewSwitch = 'AutoRepurchaseRenewSwitch' in params ? params.AutoRepurchaseRenewSwitch : null;
-        this.DestroyOrderNum = 'DestroyOrderNum' in params ? params.DestroyOrderNum : null;
-        this.RepurchaseRenewSwitch = 'RepurchaseRenewSwitch' in params ? params.RepurchaseRenewSwitch : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -52248,6 +56352,175 @@ Value: event count after statistics
 }
 
 /**
+ * Java Webshell allowlist rule.
+ * @class
+ */
+class MemShellRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Client ID
+         * @type {Array.<UuidHostip> || null}
+         */
+        this.UuidHostips = null;
+
+        /**
+         * Logical operator. 0: 5 valid regular expression logical ANDs; 1: logical OR.
+         * @type {number || null}
+         */
+        this.LogicalSymbol = null;
+
+        /**
+         * Class name regular expression, which is not matched if empty.
+         * @type {string || null}
+         */
+        this.ClassNameRegexp = null;
+
+        /**
+         * Parent class name regular expression, which is not matched if empty.
+         * @type {string || null}
+         */
+        this.SuperClassNameRegexp = null;
+
+        /**
+         * Inherited interface regular expression, which is not matched if empty.
+         * @type {string || null}
+         */
+        this.InterfacesRegexp = null;
+
+        /**
+         * Annotation regular expression, which is not matched if empty.
+         * @type {string || null}
+         */
+        this.AnnotationsRegexp = null;
+
+        /**
+         * Associated class loader regular expression, which is not matched if empty.
+         * @type {string || null}
+         */
+        this.LoaderClassNameRegexp = null;
+
+        /**
+         * Operator
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * Whether it is a global rule. (Whether it is effective for all hosts under appid. 0: single UUID; 1: global. The default value is no.)
+         * @type {number || null}
+         */
+        this.IsGlobal = null;
+
+        /**
+         * Status (0: valid, 1: deleted, 2: invalid (enabling switch off)).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * Whether to process historical events. 0: no, 1: yes.
+         * @type {number || null}
+         */
+        this.HandleHistory = null;
+
+        /**
+         * Batch ID.
+         * @type {string || null}
+         */
+        this.GroupID = null;
+
+        /**
+         * Number of servers covered by a rule. When IsGlobal is set to 1, all servers are displayed.
+         * @type {string || null}
+         */
+        this.MachinesNums = null;
+
+        /**
+         * Policy name
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * Source code regular expression, which is not matched if empty.
+         * @type {string || null}
+         */
+        this.CodeSourceRegexp = null;
+
+        /**
+         * Call stack regular expression, which is not matched if empty.
+         * @type {string || null}
+         */
+        this.CallStackRegexp = null;
+
+        /**
+         * Whether a file exists. 0: Default value when a user does not select a rule. 1: File exists. 2: File does not exist.
+         * @type {number || null}
+         */
+        this.FileExist = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.UuidHostips) {
+            this.UuidHostips = new Array();
+            for (let z in params.UuidHostips) {
+                let obj = new UuidHostip();
+                obj.deserialize(params.UuidHostips[z]);
+                this.UuidHostips.push(obj);
+            }
+        }
+        this.LogicalSymbol = 'LogicalSymbol' in params ? params.LogicalSymbol : null;
+        this.ClassNameRegexp = 'ClassNameRegexp' in params ? params.ClassNameRegexp : null;
+        this.SuperClassNameRegexp = 'SuperClassNameRegexp' in params ? params.SuperClassNameRegexp : null;
+        this.InterfacesRegexp = 'InterfacesRegexp' in params ? params.InterfacesRegexp : null;
+        this.AnnotationsRegexp = 'AnnotationsRegexp' in params ? params.AnnotationsRegexp : null;
+        this.LoaderClassNameRegexp = 'LoaderClassNameRegexp' in params ? params.LoaderClassNameRegexp : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.HandleHistory = 'HandleHistory' in params ? params.HandleHistory : null;
+        this.GroupID = 'GroupID' in params ? params.GroupID : null;
+        this.MachinesNums = 'MachinesNums' in params ? params.MachinesNums : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.CodeSourceRegexp = 'CodeSourceRegexp' in params ? params.CodeSourceRegexp : null;
+        this.CallStackRegexp = 'CallStackRegexp' in params ? params.CallStackRegexp : null;
+        this.FileExist = 'FileExist' in params ? params.FileExist : null;
+
+    }
+}
+
+/**
  * DescribeFastAnalysis response structure.
  * @class
  */
@@ -52256,8 +56529,7 @@ class DescribeFastAnalysisResponse extends  AbstractModel {
         super();
 
         /**
-         * Statistical data after analysis
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Analyze statistical information
          * @type {Array.<FieldValueRatioInfo> || null}
          */
         this.FieldValueRatioInfos = null;
@@ -52319,7 +56591,7 @@ class ScreenMachine extends  AbstractModel {
         this.MachineOs = null;
 
         /**
-         * Yunjing client UUID. If the client is offline for a long time, an empty string is returned.
+         * CWP UUID. If the CWP client is offline for a long time, an empty character is returned.
          * @type {string || null}
          */
         this.Uuid = null;
@@ -52434,7 +56706,6 @@ class ScreenMachine extends  AbstractModel {
 
         /**
          * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -52706,7 +56977,6 @@ class ExportBaselineListResponse extends  AbstractModel {
 
         /**
          * Download URL of exported file (deprecated)
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DownloadUrl = null;
@@ -52819,8 +57089,7 @@ class DescribeVulDefencePluginExceptionCountResponse extends  AbstractModel {
         super();
 
         /**
-         * Current number of abnormal plugins
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of plugin exceptions
          * @type {number || null}
          */
         this.Count = null;
@@ -52920,7 +57189,6 @@ class AssetProcessBaseInfo extends  AbstractModel {
 
         /**
          * Host tag
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MachineTag> || null}
          */
         this.Tag = null;
@@ -53010,7 +57278,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Status = null;
 
         /**
-         * Digital signature. 0: no; 1: yes; 999: null (Windows only).
+         * Digital signature: 0: none; 1: yes; 999: null (for Windows only).
          * @type {number || null}
          */
         this.HasSign = null;
@@ -53035,7 +57303,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -53053,9 +57320,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsNew = null;
 
         /**
-         * Additional information
+         *  Additional information
 
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -53208,7 +57474,6 @@ class DescribeRiskDnsEventListResponse extends  AbstractModel {
 
         /**
          * Malicious Request Event List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RiskDnsEvent> || null}
          */
         this.List = null;
@@ -53263,6 +57528,12 @@ class DeleteBruteAttacksRequest extends  AbstractModel {
          */
         this.Ids = null;
 
+        /**
+         * Whether to delete all.
+         * @type {boolean || null}
+         */
+        this.All = null;
+
     }
 
     /**
@@ -53273,6 +57544,7 @@ class DeleteBruteAttacksRequest extends  AbstractModel {
             return;
         }
         this.Ids = 'Ids' in params ? params.Ids : null;
+        this.All = 'All' in params ? params.All : null;
 
     }
 }
@@ -53287,7 +57559,6 @@ class DescribeAssetCoreModuleListResponse extends  AbstractModel {
 
         /**
          * List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetCoreModuleBaseInfo> || null}
          */
         this.Modules = null;
@@ -53519,7 +57790,6 @@ class DescribeLoginWhiteCombinedListResponse extends  AbstractModel {
 
         /**
          * List of allowlists after merge
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<LoginWhiteCombinedInfo> || null}
          */
         this.LoginWhiteCombinedInfos = null;
@@ -53603,10 +57873,22 @@ class DescribeLicenseWhiteConfigResponse extends  AbstractModel {
         this.Professional = null;
 
         /**
-         * Inclusive Edition configuration information
+         * Lightweight Edition configuration information
          * @type {VersionWhiteConfig || null}
          */
         this.PrattWhitney = null;
+
+        /**
+         * Authorization package configuration message
+         * @type {VersionWhiteConfig || null}
+         */
+        this.RASP = null;
+
+        /**
+         * 
+         * @type {VersionWhiteConfig || null}
+         */
+        this.LOG = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -53640,6 +57922,18 @@ class DescribeLicenseWhiteConfigResponse extends  AbstractModel {
             let obj = new VersionWhiteConfig();
             obj.deserialize(params.PrattWhitney)
             this.PrattWhitney = obj;
+        }
+
+        if (params.RASP) {
+            let obj = new VersionWhiteConfig();
+            obj.deserialize(params.RASP)
+            this.RASP = obj;
+        }
+
+        if (params.LOG) {
+            let obj = new VersionWhiteConfig();
+            obj.deserialize(params.LOG)
+            this.LOG = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -53761,7 +58055,6 @@ class DescribeVulCveIdInfoResponse extends  AbstractModel {
 
         /**
          * Detail list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VulInfoByCveId> || null}
          */
         this.List = null;
@@ -53804,8 +58097,7 @@ class DescribeAlarmVertexIdResponse extends  AbstractModel {
         super();
 
         /**
-         * List of alarm IDs
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Alarm node ID list.
          * @type {Array.<string> || null}
          */
         this.AlarmVertexIds = null;
@@ -54095,7 +58387,6 @@ class DescribeAgentInstallCommandResponse extends  AbstractModel {
 
         /**
          * Arm installation command
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ARMCommand = null;
@@ -54121,6 +58412,56 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.WindowsStepTwo = 'WindowsStepTwo' in params ? params.WindowsStepTwo : null;
         this.WindowsDownloadUrl = 'WindowsDownloadUrl' in params ? params.WindowsDownloadUrl : null;
         this.ARMCommand = 'ARMCommand' in params ? params.ARMCommand : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRaspLicenseList response structure.
+ * @class
+ */
+class DescribeRaspLicenseListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of entries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * array object
+         * @type {Array.<RaspLicenseList> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new RaspLicenseList();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -54220,7 +58561,6 @@ class AssetEnvBaseInfo extends  AbstractModel {
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -54244,9 +58584,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MachineWanIp = null;
 
         /**
-         * Additional information
+         *  Additional information
 
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -54279,34 +58618,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.MachineExtraInfo)
             this.MachineExtraInfo = obj;
         }
-
-    }
-}
-
-/**
- * ModifyVulDefenceEventStatus response structure.
- * @class
- */
-class ModifyVulDefenceEventStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -54399,14 +58710,12 @@ class MalwareInfo extends  AbstractModel {
 
         /**
          * Impact breadth // Not provided currently
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Breadth = null;
 
         /**
-         * Search popularity // Not provided currently
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Query popularity // Not provided currently
          * @type {string || null}
          */
         this.Heat = null;
@@ -54443,71 +58752,87 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Public IP address
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MachineWanIp = null;
 
         /**
-         * Process tree in JSON format. pid: process ID; exe: file path; account: groups and users to which the process belongs; cmdline: executed commands; ssh_service: SSH service IP; ssh_source: log-in source
-.Note: This field may return null, indicating that no valid values can be obtained.
+         * Process tree json pid: process ID; exe: file path; account: groups and users to which the process belongs; cmdline: execute commands; ssh_service: SSH service IP; ssh_source: log-in source
          * @type {string || null}
          */
         this.PsTree = null;
 
         /**
-         * Online status of a host: OFFLINE and ONLINE
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host online status: OFFLINE; ONLINE
          * @type {string || null}
          */
         this.MachineStatus = null;
 
         /**
          * Status. 4: pending; 5: trusted; 6: isolated.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Risk level. 0: prompt; 1: low; 2: medium; 3: high; 4: critical.Note: This field may return null, indicating that no valid values can be obtained.
+         * Risk level. 0: notification, 1: low, 2: medium, 3: high, 4: critical.
          * @type {number || null}
          */
         this.Level = null;
 
         /**
-         * Trojan detection platforms, separated with commas. 1: cloud security engine; 2: TAV; 3: BinaryAI; 4: abnormal behavior; 5: threat intelligence.Note: This field may return null, indicating that no valid values can be obtained.
+         * Trojan detection platform uses comma to separate 1Cloud Killing Engine, 2TAV, 3binaryAi, 4abnormal behavior, 5TI.
          * @type {string || null}
          */
         this.CheckPlatform = null;
 
         /**
          * Host UUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
          * Last modification time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ModifyTime = null;
 
         /**
-         * Last access time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Last access Time
          * @type {string || null}
          */
         this.StrFileAccessTime = null;
 
         /**
          * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
+
+        /**
+         * Reference link
+         * @type {Array.<string> || null}
+         */
+        this.References = null;
+
+        /**
+         * Whether any Trojan file exists.
+         * @type {boolean || null}
+         */
+        this.FileExists = null;
+
+        /**
+         * Whether any Trojan process exists.
+         * @type {boolean || null}
+         */
+        this.ProcessExists = null;
+
+        /**
+         * Method by which the file was detected for the first time. 0: scanning; 1: real-time monitoring.
+         * @type {number || null}
+         */
+        this.FirstDetectionMethod = null;
 
     }
 
@@ -54553,41 +58878,120 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.MachineExtraInfo)
             this.MachineExtraInfo = obj;
         }
+        this.References = 'References' in params ? params.References : null;
+        this.FileExists = 'FileExists' in params ? params.FileExists : null;
+        this.ProcessExists = 'ProcessExists' in params ? params.ProcessExists : null;
+        this.FirstDetectionMethod = 'FirstDetectionMethod' in params ? params.FirstDetectionMethod : null;
 
     }
 }
 
 /**
- * Log-in location information
+ * Client settings related features host struct
  * @class
  */
-class Place extends  AbstractModel {
+class ClientSettingHost extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * City ID
+         * Record ID of the corresponding database host
          * @type {number || null}
          */
-        this.CityId = null;
+        this.Id = null;
 
         /**
-         * Province ID
-         * @type {number || null}
-         */
-        this.ProvinceId = null;
-
-        /**
-         * Country ID. Currently, only 1 is supported, indicating China.
-         * @type {number || null}
-         */
-        this.CountryId = null;
-
-        /**
-         * Location name
+         * Host name.
          * @type {string || null}
          */
-        this.Location = null;
+        this.Name = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Public IP address
+         * @type {string || null}
+         */
+        this.PublicIp = null;
+
+        /**
+         * Private IP address
+         * @type {string || null}
+         */
+        this.PrivateIp = null;
+
+        /**
+         * Host QUUID
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * Host status
+<li>OFFLINE: Offline</li>
+<li>ONLINE: Online</li>
+<li>SHUTDOWN: Shut down</li>
+<li>UNINSTALLED: Unprotected</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * ins-sad143
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Region information
+         * @type {RegionInfo || null}
+         */
+        this.RegionInfo = null;
+
+        /**
+         * Additional information
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
+        /**
+         * <li>0: disabled</li>
+<li>1:  Enable</li>
+<li>2: Enabled </li>
+<li>3: Turning off</li>
+<li>9: not set</li>
+         * @type {number || null}
+         */
+        this.FunctionStatus = null;
+
+        /**
+         * The following fixed values require special handling by the frontend, other failures can be shown directly.
+1. UNINSTALLED -- Not installed
+2. NEED_UPGRADE -- Upgrade required
+3. NOT_RUNNING -- Shutdown
+4. NO_PASSWORD -- Password login is not enabled and cannot be enabled.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Reason for failure
+         * @type {string || null}
+         */
+        this.MessageDesc = null;
+
+        /**
+         * Instance status
+<li>RUNNING: running</li>
+<li>STOPPED: Shut down</li>
+<li>EXPIRED: To be recycled</li>
+         * @type {string || null}
+         */
+        this.InstanceStatus = null;
 
     }
 
@@ -54598,66 +59002,74 @@ class Place extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CityId = 'CityId' in params ? params.CityId : null;
-        this.ProvinceId = 'ProvinceId' in params ? params.ProvinceId : null;
-        this.CountryId = 'CountryId' in params ? params.CountryId : null;
-        this.Location = 'Location' in params ? params.Location : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.PrivateIp = 'PrivateIp' in params ? params.PrivateIp : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
 
-    }
-}
-
-/**
- * DescribeSecurityProtectionStat request structure.
- * @class
- */
-class DescribeSecurityProtectionStatRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.RegionInfo) {
+            let obj = new RegionInfo();
+            obj.deserialize(params.RegionInfo)
+            this.RegionInfo = obj;
         }
 
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
+        this.FunctionStatus = 'FunctionStatus' in params ? params.FunctionStatus : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.MessageDesc = 'MessageDesc' in params ? params.MessageDesc : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+
     }
 }
 
 /**
- * Log details
+ * ip analysis
  * @class
  */
-class LogInfo extends  AbstractModel {
+class IPAnalyse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * JSON serialized string of the log content
-         * @type {string || null}
-         */
-        this.Content = null;
-
-        /**
-         * Log file name
-         * @type {string || null}
-         */
-        this.FileName = null;
-
-        /**
-         * Log source IP address
-         * @type {string || null}
-         */
-        this.Source = null;
-
-        /**
-         * Log time, in milliseconds
+         * 0: safe
+1: Suspicious
+2 Malicious
+3 Unknown
          * @type {number || null}
          */
-        this.TimeStamp = null;
+        this.Status = null;
+
+        /**
+         * Tag feature
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Family information
+         * @type {Array.<string> || null}
+         */
+        this.Family = null;
+
+        /**
+         * profile
+         * @type {Array.<string> || null}
+         */
+        this.Profile = null;
+
+        /**
+         * Internet service provider.
+         * @type {string || null}
+         */
+        this.Isp = null;
 
     }
 
@@ -54668,10 +59080,11 @@ class LogInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Content = 'Content' in params ? params.Content : null;
-        this.FileName = 'FileName' in params ? params.FileName : null;
-        this.Source = 'Source' in params ? params.Source : null;
-        this.TimeStamp = 'TimeStamp' in params ? params.TimeStamp : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.Family = 'Family' in params ? params.Family : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
 
     }
 }
@@ -54686,7 +59099,6 @@ class DescribeHostInfoResponse extends  AbstractModel {
 
         /**
          * Host and tag information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<HostTagInfo> || null}
          */
         this.HostInfoList = null;
@@ -54829,7 +59241,6 @@ class DescribeScreenDefenseTrendsResponse extends  AbstractModel {
 
         /**
          * Trend charts of detailed statistics data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ScreenTrendsChart> || null}
          */
         this.TrendsChart = null;
@@ -54927,56 +59338,6 @@ class SyncBaselineDetectSummaryRequest extends  AbstractModel {
             return;
         }
         this.TaskIds = 'TaskIds' in params ? params.TaskIds : null;
-
-    }
-}
-
-/**
- * DescribeExpertServiceOrderList response structure.
- * @class
- */
-class DescribeExpertServiceOrderListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number of entries
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Order list
-         * @type {Array.<ExpertServiceOrderInfo> || null}
-         */
-        this.List = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new ExpertServiceOrderInfo();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -55102,7 +59463,6 @@ class DescribePrivilegeEventInfoResponse extends  AbstractModel {
 
         /**
          * Local privilege escalation details
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {PrivilegeEventInfo || null}
          */
         this.PrivilegeEventInfo = null;
@@ -55177,35 +59537,30 @@ class VulFixStatusSnapshotInfo extends  AbstractModel {
 
         /**
          * Host name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostName = null;
 
         /**
          * Host IP address
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostIp = null;
 
         /**
          * Snapshot name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SnapshotName = null;
 
         /**
          * Snapshot creation time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ModifyTime = null;
 
         /**
          * Snapshot ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SnapshotId = null;
@@ -55217,17 +59572,22 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Id = null;
 
         /**
-         * Snapshot status. 0: initial; 1: created successfully; 2: creation failed.
+         * Snapshot status. 0: initial; 1: created successfully; 2: creation failed; 10: unsupported; 11: no need to create.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
          * Snapshot creation failure reason
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FailReason = null;
+
+        /**
+         * Host type
+         * @type {string || null}
+         */
+        this.MachineType = null;
 
     }
 
@@ -55247,6 +59607,113 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Id = 'Id' in params ? params.Id : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.FailReason = 'FailReason' in params ? params.FailReason : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+
+    }
+}
+
+/**
+ * View vulnerability fixing details
+ * @class
+ */
+class VulFixStatusInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Vulnerability ID
+         * @type {number || null}
+         */
+        this.VulId = null;
+
+        /**
+         * Vulnerability name
+         * @type {string || null}
+         */
+        this.VulName = null;
+
+        /**
+         * Vulnerability fixing progress: 1-100;
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Vulnerability fixing status for corresponding hosts
+         * @type {Array.<VulFixStatusHostInfo> || null}
+         */
+        this.HostList = null;
+
+        /**
+         * Number of hosts with failed vulnerability fixing
+         * @type {number || null}
+         */
+        this.FailCnt = null;
+
+        /**
+         * Number of successful repairs
+         * @type {number || null}
+         */
+        this.FixSuccessCnt = null;
+
+        /**
+         * Repair method. 0: Update components or install patches. 1: Disable service.
+         * @type {number || null}
+         */
+        this.FixMethod = null;
+
+        /**
+         * kb ID
+         * @type {number || null}
+         */
+        this.KbId = null;
+
+        /**
+         * kb number
+         * @type {string || null}
+         */
+        this.KbNumber = null;
+
+        /**
+         * kb name
+         * @type {string || null}
+         */
+        this.KbName = null;
+
+        /**
+         * Pre kb list
+         * @type {Array.<string> || null}
+         */
+        this.PreKbList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VulId = 'VulId' in params ? params.VulId : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+
+        if (params.HostList) {
+            this.HostList = new Array();
+            for (let z in params.HostList) {
+                let obj = new VulFixStatusHostInfo();
+                obj.deserialize(params.HostList[z]);
+                this.HostList.push(obj);
+            }
+        }
+        this.FailCnt = 'FailCnt' in params ? params.FailCnt : null;
+        this.FixSuccessCnt = 'FixSuccessCnt' in params ? params.FixSuccessCnt : null;
+        this.FixMethod = 'FixMethod' in params ? params.FixMethod : null;
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.KbNumber = 'KbNumber' in params ? params.KbNumber : null;
+        this.KbName = 'KbName' in params ? params.KbName : null;
+        this.PreKbList = 'PreKbList' in params ? params.PreKbList : null;
 
     }
 }
@@ -55282,6 +59749,41 @@ class Tags extends  AbstractModel {
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * ExportPatchEffectHostList response structure.
+ * @class
+ */
+class ExportPatchEffectHostListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Export task ID, which is downloadable via the ExportTasks API.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -55356,7 +59858,7 @@ Other: Hybrid Cloud Zone
         this.MachineType = null;
 
         /**
-         * Machine region. For example, ap-guangzhou and ap-shanghai.
+         * Machine region. For example, ap-guangzhou, ap-shanghai. For non-Tencent Cloud hosts, use ap-others.
          * @type {string || null}
          */
         this.MachineRegion = null;
@@ -55718,6 +60220,12 @@ class ExportFileTamperEventsRequest extends  AbstractModel {
          */
         this.Fields = null;
 
+        /**
+         * Fields to be exported
+         * @type {Array.<string> || null}
+         */
+        this.Where = null;
+
     }
 
     /**
@@ -55738,6 +60246,7 @@ class ExportFileTamperEventsRequest extends  AbstractModel {
         }
         this.Fileds = 'Fileds' in params ? params.Fileds : null;
         this.Fields = 'Fields' in params ? params.Fields : null;
+        this.Where = 'Where' in params ? params.Where : null;
 
     }
 }
@@ -55815,7 +60324,6 @@ class DescribeBaselineDefaultStrategyListResponse extends  AbstractModel {
 
         /**
          * List of the basic default policy information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DefaultStrategyInfo> || null}
          */
         this.StrategyList = null;
@@ -55842,6 +60350,77 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 let obj = new DefaultStrategyInfo();
                 obj.deserialize(params.StrategyList[z]);
                 this.StrategyList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePatchInfo request structure.
+ * @class
+ */
+class DescribePatchInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Patch ID
+         * @type {number || null}
+         */
+        this.KbId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+
+    }
+}
+
+/**
+ * DescribeSkillInfo response structure.
+ * @class
+ */
+class DescribeSkillInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * skill information list
+         * @type {Array.<SkillInfo> || null}
+         */
+        this.SkillInfoList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SkillInfoList) {
+            this.SkillInfoList = new Array();
+            for (let z in params.SkillInfoList) {
+                let obj = new SkillInfo();
+                obj.deserialize(params.SkillInfoList[z]);
+                this.SkillInfoList.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -55969,32 +60548,30 @@ class DeleteScanTaskResponse extends  AbstractModel {
 }
 
 /**
- * DescribeScreenGeneralStat response structure.
+ * ModifyFileTamperRuleStatus request structure.
  * @class
  */
-class DescribeScreenGeneralStatResponse extends  AbstractModel {
+class ModifyFileTamperRuleStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Value of name: online, shutdown/offline, not installed
-Value: indicates the corresponding quantity
-         * @type {Array.<ScreenNameValue> || null}
+         * 0: enable; 1: disable; 2: delete
+         * @type {number || null}
          */
-        this.Machines = null;
+        this.Status = null;
 
         /**
-         * Value of name: Ultimate Edition, Pro Edition, Basic Edition
-Value: indicates the corresponding number
-         * @type {Array.<ScreenNameValue> || null}
+         * Corresponding event ID
+         * @type {Array.<number> || null}
          */
-        this.Protection = null;
+        this.Ids = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
+         * Whether a system rule: 0: system rule; 1: user defined rule. System rule Status cannot be deleted.
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.RuleCategory = null;
 
     }
 
@@ -56005,25 +60582,9 @@ Value: indicates the corresponding number
         if (!params) {
             return;
         }
-
-        if (params.Machines) {
-            this.Machines = new Array();
-            for (let z in params.Machines) {
-                let obj = new ScreenNameValue();
-                obj.deserialize(params.Machines[z]);
-                this.Machines.push(obj);
-            }
-        }
-
-        if (params.Protection) {
-            this.Protection = new Array();
-            for (let z in params.Protection) {
-                let obj = new ScreenNameValue();
-                obj.deserialize(params.Protection[z]);
-                this.Protection.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
+        this.RuleCategory = 'RuleCategory' in params ? params.RuleCategory : null;
 
     }
 }
@@ -56096,6 +60657,36 @@ class EditBashRulesRequest extends  AbstractModel {
          */
         this.DealOldEvents = null;
 
+        /**
+         * Policy description
+         * @type {string || null}
+         */
+        this.Descript = null;
+
+        /**
+         * Effective or not [0: not effective, 1: effective]
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 0: alarm; 1: allowlist; 2: intercept
+         * @type {number || null}
+         */
+        this.BashAction = null;
+
+        /**
+         * Effective range (0: a set of quuid 1: all Pro edition hosts 2: all Pro edition and Ultimate edition hosts 3: all hosts)
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * QUUID set for effective hosts
+         * @type {Array.<string> || null}
+         */
+        this.Quuids = null;
+
     }
 
     /**
@@ -56115,6 +60706,11 @@ class EditBashRulesRequest extends  AbstractModel {
         this.White = 'White' in params ? params.White : null;
         this.EventId = 'EventId' in params ? params.EventId : null;
         this.DealOldEvents = 'DealOldEvents' in params ? params.DealOldEvents : null;
+        this.Descript = 'Descript' in params ? params.Descript : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.BashAction = 'BashAction' in params ? params.BashAction : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.Quuids = 'Quuids' in params ? params.Quuids : null;
 
     }
 }
@@ -56187,6 +60783,18 @@ class RansomDefenseRollbackTask extends  AbstractModel {
          */
         this.RegionInfo = null;
 
+        /**
+         * Host example ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Host type
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
     }
 
     /**
@@ -56211,6 +60819,8 @@ class RansomDefenseRollbackTask extends  AbstractModel {
             obj.deserialize(params.RegionInfo)
             this.RegionInfo = obj;
         }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
 
     }
 }
@@ -56334,24 +60944,168 @@ class DescribeMachineRegionsResponse extends  AbstractModel {
 }
 
 /**
- * ExportVulDefenceList request structure.
+ * DescribeLicenseGeneral response structure.
  * @class
  */
-class ExportVulDefenceListRequest extends  AbstractModel {
+class DescribeLicenseGeneralResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filtering criteria: Keywords: vulnerability name or CVE ID for fuzzy matching, and level for precise matching
-         * @type {Array.<Filter> || null}
+         * Total number of authorizations (including those that are isolated, expired, and in other states)
+         * @type {number || null}
          */
-        this.Filters = null;
+        this.LicenseCnt = null;
 
         /**
-         * Fields to be exported. All fields are to be exported by default.
-         * @type {Array.<string> || null}
+         * Number of available authorizations
+         * @type {number || null}
          */
-        this.Where = null;
+        this.AvailableLicenseCnt = null;
+
+        /**
+         * Number of available Professional Edition authorizations (including those in postpaid mode)
+         * @type {number || null}
+         */
+        this.AvailableProVersionLicenseCnt = null;
+
+        /**
+         * Number of available Ultimate Edition authorizations
+         * @type {number || null}
+         */
+        this.AvailableFlagshipVersionLicenseCnt = null;
+
+        /**
+         * Number of authorizations about to expire (no more than 15 days left)
+         * @type {number || null}
+         */
+        this.NearExpiryLicenseCnt = null;
+
+        /**
+         * Number of expired authorizations (excluding deleted ones)
+         * @type {number || null}
+         */
+        this.ExpireLicenseCnt = null;
+
+        /**
+         * Automatic upgrade enabling status. True: enabled; false: disabled. Default value: false.
+         * @type {boolean || null}
+         */
+        this.AutoOpenStatus = null;
+
+        /**
+         * PROVERSION_POSTPAY: Pro Edition - postpaid; PROVERSION_PREPAY: Pro edition - prepaid; FLAGSHIP_PREPAY: Ultimate Edition - prepaid.
+         * @type {string || null}
+         */
+        this.ProtectType = null;
+
+        /**
+         * Whether automatic upgrade has been enabled before
+         * @type {boolean || null}
+         */
+        this.IsOpenStatusHistory = null;
+
+        /**
+         * Number of used authorizations
+         * @type {number || null}
+         */
+        this.UsedLicenseCnt = null;
+
+        /**
+         * Number of authorizations that have not expired
+         * @type {number || null}
+         */
+        this.NotExpiredLicenseCnt = null;
+
+        /**
+         * Total number of Ultimate Edition authorizations (valid orders)
+         * @type {number || null}
+         */
+        this.FlagshipVersionLicenseCnt = null;
+
+        /**
+         * Total number of Pro Edition authorizations (valid orders)
+         * @type {number || null}
+         */
+        this.ProVersionLicenseCnt = null;
+
+        /**
+         * Total number of Lite Edition authorizations (those of valid orders)
+         * @type {number || null}
+         */
+        this.CwpVersionLicenseCnt = null;
+
+        /**
+         * Number of available Inclusive Edition authorizations
+         * @type {number || null}
+         */
+        this.AvailableLHLicenseCnt = null;
+
+        /**
+         * Auto-purchase switch, true for ON, false for OFF
+         * @type {boolean || null}
+         */
+        this.AutoRepurchaseSwitch = null;
+
+        /**
+         * Is auto-renewal required for auto-purchase orders, true for ON, false for OFF
+         * @type {boolean || null}
+         */
+        this.AutoRepurchaseRenewSwitch = null;
+
+        /**
+         * Number of terminated orders
+         * @type {number || null}
+         */
+        this.DestroyOrderNum = null;
+
+        /**
+         * Whether automatic renewal is enabled for additional purchase. true: enabled; false: disabled.
+         * @type {boolean || null}
+         */
+        this.RepurchaseRenewSwitch = null;
+
+        /**
+         * Whether to automatically bind new machines to rasp protection. false indicates disabled, enabled otherwise.
+         * @type {boolean || null}
+         */
+        this.AutoBindRaspSwitch = null;
+
+        /**
+         * Whether to enable automatic addition of machines for rasp protection. false indicates disabled, enabled.
+         * @type {boolean || null}
+         */
+        this.AutoOpenRaspSwitch = null;
+
+        /**
+         * Whether the automatic scaling down switch is on
+         * @type {boolean || null}
+         */
+        this.AutoDowngradeSwitch = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AvailableAISecurityLicenseCnt = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AISecurityVersionLicenseCnt = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ApplicationAvailableLicenseCnt = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -56362,107 +61116,32 @@ class ExportVulDefenceListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Where = 'Where' in params ? params.Where : null;
-
-    }
-}
-
-/**
- * List of security manager information
- * @class
- */
-class SecurityButlerInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Data ID
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * Order ID
-         * @type {number || null}
-         */
-        this.OrderId = null;
-
-        /**
-         * cvm id
-         * @type {string || null}
-         */
-        this.Quuid = null;
-
-        /**
-         * Service status. 0: in service; 1: expired; 2: terminated.
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Service start time
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Service end time
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Host name
-         * @type {string || null}
-         */
-        this.HostName = null;
-
-        /**
-         * Host IP address
-         * @type {string || null}
-         */
-        this.HostIp = null;
-
-        /**
-         * Host UUID
-         * @type {string || null}
-         */
-        this.Uuid = null;
-
-        /**
-         * Number of host risks
-         * @type {number || null}
-         */
-        this.RiskCount = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.OrderId = 'OrderId' in params ? params.OrderId : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.HostName = 'HostName' in params ? params.HostName : null;
-        this.HostIp = 'HostIp' in params ? params.HostIp : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.RiskCount = 'RiskCount' in params ? params.RiskCount : null;
+        this.LicenseCnt = 'LicenseCnt' in params ? params.LicenseCnt : null;
+        this.AvailableLicenseCnt = 'AvailableLicenseCnt' in params ? params.AvailableLicenseCnt : null;
+        this.AvailableProVersionLicenseCnt = 'AvailableProVersionLicenseCnt' in params ? params.AvailableProVersionLicenseCnt : null;
+        this.AvailableFlagshipVersionLicenseCnt = 'AvailableFlagshipVersionLicenseCnt' in params ? params.AvailableFlagshipVersionLicenseCnt : null;
+        this.NearExpiryLicenseCnt = 'NearExpiryLicenseCnt' in params ? params.NearExpiryLicenseCnt : null;
+        this.ExpireLicenseCnt = 'ExpireLicenseCnt' in params ? params.ExpireLicenseCnt : null;
+        this.AutoOpenStatus = 'AutoOpenStatus' in params ? params.AutoOpenStatus : null;
+        this.ProtectType = 'ProtectType' in params ? params.ProtectType : null;
+        this.IsOpenStatusHistory = 'IsOpenStatusHistory' in params ? params.IsOpenStatusHistory : null;
+        this.UsedLicenseCnt = 'UsedLicenseCnt' in params ? params.UsedLicenseCnt : null;
+        this.NotExpiredLicenseCnt = 'NotExpiredLicenseCnt' in params ? params.NotExpiredLicenseCnt : null;
+        this.FlagshipVersionLicenseCnt = 'FlagshipVersionLicenseCnt' in params ? params.FlagshipVersionLicenseCnt : null;
+        this.ProVersionLicenseCnt = 'ProVersionLicenseCnt' in params ? params.ProVersionLicenseCnt : null;
+        this.CwpVersionLicenseCnt = 'CwpVersionLicenseCnt' in params ? params.CwpVersionLicenseCnt : null;
+        this.AvailableLHLicenseCnt = 'AvailableLHLicenseCnt' in params ? params.AvailableLHLicenseCnt : null;
+        this.AutoRepurchaseSwitch = 'AutoRepurchaseSwitch' in params ? params.AutoRepurchaseSwitch : null;
+        this.AutoRepurchaseRenewSwitch = 'AutoRepurchaseRenewSwitch' in params ? params.AutoRepurchaseRenewSwitch : null;
+        this.DestroyOrderNum = 'DestroyOrderNum' in params ? params.DestroyOrderNum : null;
+        this.RepurchaseRenewSwitch = 'RepurchaseRenewSwitch' in params ? params.RepurchaseRenewSwitch : null;
+        this.AutoBindRaspSwitch = 'AutoBindRaspSwitch' in params ? params.AutoBindRaspSwitch : null;
+        this.AutoOpenRaspSwitch = 'AutoOpenRaspSwitch' in params ? params.AutoOpenRaspSwitch : null;
+        this.AutoDowngradeSwitch = 'AutoDowngradeSwitch' in params ? params.AutoDowngradeSwitch : null;
+        this.AvailableAISecurityLicenseCnt = 'AvailableAISecurityLicenseCnt' in params ? params.AvailableAISecurityLicenseCnt : null;
+        this.AISecurityVersionLicenseCnt = 'AISecurityVersionLicenseCnt' in params ? params.AISecurityVersionLicenseCnt : null;
+        this.ApplicationAvailableLicenseCnt = 'ApplicationAvailableLicenseCnt' in params ? params.ApplicationAvailableLicenseCnt : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -56476,22 +61155,19 @@ class WebHookReceiverUsage extends  AbstractModel {
         super();
 
         /**
-         * Recipient ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Recipient ID.
          * @type {number || null}
          */
         this.ReceiverId = null;
 
         /**
-         * Recipient name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Receiver name
          * @type {string || null}
          */
         this.ReceiverName = null;
 
         /**
          * Policy name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PolicyName = null;
@@ -56593,7 +61269,6 @@ class AssetWebAppBaseInfo extends  AbstractModel {
 
         /**
          * Host tag
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MachineTag> || null}
          */
         this.Tag = null;
@@ -56660,7 +61335,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -56678,8 +61352,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsNew = null;
 
         /**
-         * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
+         *  Additional information
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -56760,6 +61433,145 @@ class DescribeRiskDnsInfoRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeWindowsPatchList response structure.
+ * @class
+ */
+class DescribeWindowsPatchListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of patches and vulnerabilities
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Windows patch information list
+         * @type {Array.<EventPatchInfo> || null}
+         */
+        this.PatchInfoList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.PatchInfoList) {
+            this.PatchInfoList = new Array();
+            for (let z in params.PatchInfoList) {
+                let obj = new EventPatchInfo();
+                obj.deserialize(params.PatchInfoList[z]);
+                this.PatchInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateBaselineStrategy request structure.
+ * @class
+ */
+class UpdateBaselineStrategyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {number || null}
+         */
+        this.StrategyId = null;
+
+        /**
+         * Policy name
+         * @type {string || null}
+         */
+        this.StrategyName = null;
+
+        /**
+         * Detection period
+         * @type {number || null}
+         */
+        this.ScanCycle = null;
+
+        /**
+         * Time when routine detection scans are triggered.
+         * @type {string || null}
+         */
+        this.ScanAt = null;
+
+        /**
+         * Array of baseline IDs selected under this policy
+         * @type {Array.<string> || null}
+         */
+        this.CategoryIds = null;
+
+        /**
+         * Whether all servers are scanned: 1: yes; 0 :no. If the value is 1, all Professional Edition hosts are scanned.
+         * @type {number || null}
+         */
+        this.IsGlobal = null;
+
+        /**
+         * CVM type:
+cvm: Tencent Cloud Virtual Machine
+bm: bare metal
+ecm: edge computing host
+lh: Tencent Cloud Lighthouse
+other: hybrid cloud machine
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * Host region ap-guangzhou
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+        /**
+         * Host ID array
+         * @type {Array.<string> || null}
+         */
+        this.Quuids = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StrategyId = 'StrategyId' in params ? params.StrategyId : null;
+        this.StrategyName = 'StrategyName' in params ? params.StrategyName : null;
+        this.ScanCycle = 'ScanCycle' in params ? params.ScanCycle : null;
+        this.ScanAt = 'ScanAt' in params ? params.ScanAt : null;
+        this.CategoryIds = 'CategoryIds' in params ? params.CategoryIds : null;
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+        this.Quuids = 'Quuids' in params ? params.Quuids : null;
+
+    }
+}
+
+/**
  * Parameters of the asset management kernel module
  * @class
  */
@@ -56804,14 +61616,12 @@ class DescribeMachineLicenseDetailResponse extends  AbstractModel {
 
         /**
          * Authorization information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MachineLicenseDetail> || null}
          */
         this.MachineLicense = null;
 
         /**
          * Total number
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -56890,10 +61700,16 @@ class DeleteBashEventsRequest extends  AbstractModel {
         super();
 
         /**
-         * ID array. Maximum number of IDs: 100.
+         * ID array. Up to 1,000 items are allowed.
          * @type {Array.<number> || null}
          */
         this.Ids = null;
+
+        /**
+         * Whether to delete all.
+         * @type {boolean || null}
+         */
+        this.All = null;
 
     }
 
@@ -56905,6 +61721,7 @@ class DeleteBashEventsRequest extends  AbstractModel {
             return;
         }
         this.Ids = 'Ids' in params ? params.Ids : null;
+        this.All = 'All' in params ? params.All : null;
 
     }
 }
@@ -57054,7 +61871,6 @@ class AssetJarBaseInfo extends  AbstractModel {
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -57078,9 +61894,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MachineWanIp = null;
 
         /**
-         * Additional information
+         *  Additional information
 
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -57219,126 +62034,144 @@ class VulInfoList extends  AbstractModel {
         this.Level = null;
 
         /**
-         * This field has been deprecated.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Obsolete
          * @type {number || null}
          */
         this.From = null;
 
         /**
          * Description
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Descript = null;
 
         /**
-         * This field has been deprecated.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Obsolete
          * @type {string || null}
          */
         this.PublishTimeWisteria = null;
 
         /**
-         * This field has been deprecated.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Obsolete
          * @type {string || null}
          */
         this.NameWisteria = null;
 
         /**
-         * This field has been deprecated.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Obsolete
          * @type {string || null}
          */
         this.DescriptWisteria = null;
 
         /**
          * Event status after aggregation
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StatusStr = null;
 
         /**
          * CVE ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CveId = null;
 
         /**
          * CVSS score
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CvssScore = null;
 
         /**
-         * Vulnerability tags, separated by multiple commas
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Vulnerability Tags, Separated by Multiple Commas
+
+EXP exists
+Wild Attacks: KNOWN_EXPLOITED
+LOCAL: Local use
+Mandatory vulnerabilities: NEED_FIX
+RemoteExploit:NETWORK
+POC exists: POC
+System RESTART
          * @type {string || null}
          */
         this.Labels = null;
 
         /**
-         * Whether automatic fixing is supported and hosts that support automatic fixing are included. 0: no; 1: yes.Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether automatic fixing is supported and hosts that support automatic fixing, 0=No 1=Yes
          * @type {number || null}
          */
         this.FixSwitch = null;
 
         /**
-         * ID of the last scan task
-Note: This field may return null, indicating that no valid values can be obtained.
+         * id of the last scan task
          * @type {number || null}
          */
         this.TaskId = null;
 
         /**
-         * Whether defense is supported. 0: not supported; 1: supported.Note: This field may return null, indicating that no valid values can be obtained.
+         * Support defense, 0: no support 1: support
          * @type {number || null}
          */
         this.IsSupportDefense = null;
 
         /**
-         * Number of attacks defended
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of Attacks Defended
          * @type {number || null}
          */
         this.DefenseAttackCount = null;
 
         /**
-         * First occurrence time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * first occurrence time
          * @type {string || null}
          */
         this.FirstAppearTime = null;
 
         /**
-         * Vulnerability category. 1: web CMS vulnerability; 2: application vulnerability; 4: Linux software vulnerability; 5: Windows system vulnerability.Note: This field may return null, indicating that no valid values can be obtained.
+         * Vulnerability Category 1: web-cms Vulnerability 2: Application Vulnerability 4: Linux Software Vulnerability 5: Windows System Vulnerability
          * @type {number || null}
          */
         this.VulCategory = null;
 
         /**
-         * Attack intensity
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Attack intensity level.
          * @type {number || null}
          */
         this.AttackLevel = null;
 
         /**
-         * Whether a restart is required after the vulnerability is fixed
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether a restart is required after vulnerability repair.
          * @type {boolean || null}
          */
         this.FixNoNeedRestart = null;
 
         /**
-         * Detection method. 0: version comparison; 1: POC verification.Note: This field may return null, indicating that no valid values can be obtained.
+         * Detection method. 0: version comparison, 1: POC verification.
          * @type {number || null}
          */
         this.Method = null;
+
+        /**
+         * Whether vulnerability fixing is supported. 0: not supported; 1: supported.
+         * @type {number || null}
+         */
+        this.VulFixSwitch = null;
+
+        /**
+         * Latest remediation time
+         * @type {string || null}
+         */
+        this.LatestFixTime = null;
+
+        /**
+         * Number of application protection activations for machines with vulnerability correspondence
+         * @type {number || null}
+         */
+        this.RaspOpenNodeCount = null;
+
+        /**
+         * Number of application protection deactivations for machines with vulnerability correspondence
+         * @type {number || null}
+         */
+        this.RaspClosedNodeCount = null;
 
     }
 
@@ -57375,6 +62208,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AttackLevel = 'AttackLevel' in params ? params.AttackLevel : null;
         this.FixNoNeedRestart = 'FixNoNeedRestart' in params ? params.FixNoNeedRestart : null;
         this.Method = 'Method' in params ? params.Method : null;
+        this.VulFixSwitch = 'VulFixSwitch' in params ? params.VulFixSwitch : null;
+        this.LatestFixTime = 'LatestFixTime' in params ? params.LatestFixTime : null;
+        this.RaspOpenNodeCount = 'RaspOpenNodeCount' in params ? params.RaspOpenNodeCount : null;
+        this.RaspClosedNodeCount = 'RaspClosedNodeCount' in params ? params.RaspClosedNodeCount : null;
 
     }
 }
@@ -57475,14 +62312,12 @@ class JavaMemShellPluginSetting extends  AbstractModel {
 
         /**
          * Server UUID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
          * Host Additional Information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -57524,7 +62359,6 @@ class MachineFileTamperRule extends  AbstractModel {
 
         /**
          * Rule name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
@@ -57840,14 +62674,12 @@ class WarningInfoObj extends  AbstractModel {
 
         /**
          * Alarm Host Range Type. 0: All Hosts; 1: By Project; 2: By Tencent Cloud Tag; 3: By Host Security Tag; 4: Custom Hosts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.HostRange = null;
 
         /**
          * Configured Number of Hosts in the Range of Alarm, used by the frontend to decide when to display prompt information.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Count = null;
@@ -58107,7 +62939,7 @@ class VulInfoByCveId extends  AbstractModel {
         this.VulId = null;
 
         /**
-         * Repair Support Status. 0-Neither Windows nor Linux supports for repair; 1-Both Windows and Linux support for repair; 2-Only Linux supports for repair; 3-Only Windows supports for repair.
+         * Fixing support status: 0 - not support fixing for Windows and Linux; 1 - support fixing for both Windows and Linux; 2 - support fixing for Linux only; 3 - support fixing for Windows only.
          * @type {number || null}
          */
         this.FixSwitch = null;
@@ -58132,34 +62964,6 @@ class VulInfoByCveId extends  AbstractModel {
  * @class
  */
 class DeleteLogExportResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * TestWebHookRule response structure.
- * @class
- */
-class TestWebHookRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -58221,34 +63025,30 @@ class DescribeBaselineStrategyDetailResponse extends  AbstractModel {
 
         /**
          * Policy scan pass rate
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.PassRate = null;
 
         /**
          * Policy name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StrategyName = null;
 
         /**
-         * policy scan cycle (days)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Policy scan cycle (days)
          * @type {string || null}
          */
         this.ScanCycle = null;
 
         /**
          * Regular scan time. The scan task is triggered at this time.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ScanAt = null;
 
         /**
-         * Whether all hosts are scanned. 1: yes; 0: no. If the value is 1, all Pro Edition hosts are scanned.Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether all servers are scanned: 1: yes; 0 :no. If the value is 1, all Professional Edition hosts are scanned.
          * @type {number || null}
          */
         this.IsGlobal = null;
@@ -58256,38 +63056,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
         /**
          * Machine type:
 cvm: Tencent Cloud Virtual Machine
-bm: BM
-ecm: Edge Computing Machine
-lh: Lighthouse
-other: Hybrid Cloud Machine
-Note: This field may return null, indicating that no valid values can be obtained.
+bm: bare metal server
+ecm: edge computing host
+Lightweight Application Server
+Hybrid cloud machine
          * @type {string || null}
          */
         this.MachineType = null;
 
         /**
          * Host region
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * IDs of all user hosts involved in this policy
-Note: This field may return null, indicating that no valid values can be obtained.
+         * IDs of all user hosts under this policy
          * @type {Array.<string> || null}
          */
         this.Quuids = null;
 
         /**
-         * IDs of all user baselines involved in this policy
-Note: This field may return null, indicating that no valid values can be obtained.
+         * User baseline IDs under this policy
          * @type {Array.<string> || null}
          */
         this.CategoryIds = null;
 
         /**
-         * 1: scanned; 0: not scanned.Note: This field may return null, indicating that no valid values can be obtained.
+         * 1 means scanned, 0 means not scanned
          * @type {number || null}
          */
         this.IfScanned = null;
@@ -58343,11 +63139,7 @@ class DescribeBaselineListRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Filtering criteria
-<li>StrategyId - Uint64 - baseline policy ID</li>
-<li>Status - Uint64 - processing status: 1: passed; 0: failed</li><li>Level - Uint64[] - risk level: 1: low; 2: medium; 3: high; 4: critical</li><li>BaselineName - String - baseline name</li>
-<li>Quuid - String - host QUUID</li>
-<li>Uuid - String - host UUID</li>
+         * Filter conditions <li>StrategyId- Uint64 - Baseline policy id</li> <li>Status - Uint64 - Processing status 1-Approved 0-Failed</li> <li>Level - Uint64 - Threat level 1-Low risk 2-Medium risk 3-High risk 4-Critical</li> <li>BaselineName  - String - Baseline name</li> <li>Quuid- String - Host quuid</li> <li>Uuid- String - Host uuid</li>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
@@ -58475,8 +63267,7 @@ class DescribeRiskProcessEventsResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * List of exceptional processes
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of Exceptional Processes
          * @type {Array.<RiskProcessEvent> || null}
          */
         this.List = null;
@@ -58538,8 +63329,7 @@ class DescribeScreenHostInvasionResponse extends  AbstractModel {
         this.Vul = null;
 
         /**
-         * List of baseline event
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of baseline events
          * @type {Array.<ScreenBaselineInfo> || null}
          */
         this.Baseline = null;
@@ -58708,10 +63498,10 @@ class DescribeMachineDefenseCntRequest extends  AbstractModel {
 }
 
 /**
- * ModifyFileTamperRuleStatus response structure.
+ * ModifyLogKafkaState response structure.
  * @class
  */
-class ModifyFileTamperRuleStatusResponse extends  AbstractModel {
+class ModifyLogKafkaStateResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -59120,30 +63910,18 @@ class DescribeAccountStatisticsRequest extends  AbstractModel {
 }
 
 /**
- * ExportBruteAttacks response structure.
+ * DescribeSkillInfo request structure.
  * @class
  */
-class ExportBruteAttacksResponse extends  AbstractModel {
+class DescribeSkillInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * This parameter has been deprecated.
-         * @type {string || null}
+         * Event ID
+         * @type {Array.<number> || null}
          */
-        this.DownloadUrl = null;
-
-        /**
-         * Task ID, required for obtaining the DownloadURL at API Asynchronous Export Task ExportTasks
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Ids = null;
 
     }
 
@@ -59154,9 +63932,7 @@ class ExportBruteAttacksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -59302,14 +64078,13 @@ class JavaMemShellDetail extends  AbstractModel {
         this.SecurityAdvice = null;
 
         /**
-         * Additional host information
-Note: This field may return null, indicating that no valid values can be obtained.
+         *  Host Additional Information
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
 
         /**
-         * Instance status: RUNNING, STOPPED, SHUTDOWN...
+         * Agent status: OFFLINE; ONLINE.
          * @type {string || null}
          */
         this.MachineState = null;
@@ -59478,7 +64253,6 @@ class DescribeAssetProcessInfoListResponse extends  AbstractModel {
 
         /**
          * List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetProcessBaseInfo> || null}
          */
         this.Process = null;
@@ -59549,6 +64323,145 @@ class ChangeStrategyEnableStatusRequest extends  AbstractModel {
 }
 
 /**
+ * Vulnerability defense settings
+ * @class
+ */
+class VulDefenceSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StrategyName = null;
+
+        /**
+         * System policy
+Create a custom policy
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StrategyType = null;
+
+        /**
+         * Threat level
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ThreatLevel = null;
+
+        /**
+         * All Flagship Edition Hosts
+Specified hosts
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * Number of supported vulnerabilities.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SupportVulNum = null;
+
+        /**
+         * 0: disabled, 1: enabled.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * User appid.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * User's member ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Policy action
+Alarm
+1. Defense
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StrategyAction = null;
+
+        /**
+         * User UIN
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * User Nickname
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Nickname = null;
+
+        /**
+         * Protection type
+Vulnerability defense
+Attack detection
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DefenceType = null;
+
+        /**
+         * Number of custom hosts.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.InstanceNum = null;
+
+        /**
+         * Policy ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StrategyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StrategyName = 'StrategyName' in params ? params.StrategyName : null;
+        this.StrategyType = 'StrategyType' in params ? params.StrategyType : null;
+        this.ThreatLevel = 'ThreatLevel' in params ? params.ThreatLevel : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.SupportVulNum = 'SupportVulNum' in params ? params.SupportVulNum : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.StrategyAction = 'StrategyAction' in params ? params.StrategyAction : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Nickname = 'Nickname' in params ? params.Nickname : null;
+        this.DefenceType = 'DefenceType' in params ? params.DefenceType : null;
+        this.InstanceNum = 'InstanceNum' in params ? params.InstanceNum : null;
+        this.StrategyId = 'StrategyId' in params ? params.StrategyId : null;
+
+    }
+}
+
+/**
  * Process statistics data
  * @class
  */
@@ -59593,7 +64506,6 @@ class DescribeScanScheduleResponse extends  AbstractModel {
 
         /**
          * Detection progress
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Schedule = null;
@@ -59620,47 +64532,30 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Baseline details
+ * DescribeAttackType response structure.
  * @class
  */
-class BaselineDetail extends  AbstractModel {
+class DescribeAttackTypeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Baseline description
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * List content
+         * @type {Array.<RaspAttackTypeListItem> || null}
          */
-        this.Description = null;
+        this.List = null;
 
         /**
-         * Severity level
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total number of entries
          * @type {number || null}
          */
-        this.Level = null;
+        this.TotalCount = null;
 
         /**
-         * Package name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.PackageName = null;
-
-        /**
-         * Parent ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ParentId = null;
-
-        /**
-         * Baseline name
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Name = null;
+        this.RequestId = null;
 
     }
 
@@ -59671,11 +64566,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.PackageName = 'PackageName' in params ? params.PackageName : null;
-        this.ParentId = 'ParentId' in params ? params.ParentId : null;
-        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new RaspAttackTypeListItem();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -59810,54 +64711,18 @@ class DescribeAssetWebAppListRequest extends  AbstractModel {
 }
 
 /**
- * Expert service order information
+ * ModifyFileTamperRuleStatus response structure.
  * @class
  */
-class ExpertServiceOrderInfo extends  AbstractModel {
+class ModifyFileTamperRuleStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Order ID
-         * @type {number || null}
-         */
-        this.OrderId = null;
-
-        /**
-         * Order type. 1: emergency; 2: Ultimate Edition important period guarantee; 3: security manager.
-         * @type {number || null}
-         */
-        this.InquireType = null;
-
-        /**
-         * Number of services
-         * @type {number || null}
-         */
-        this.InquireNum = null;
-
-        /**
-         * Service start time
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.BeginTime = null;
-
-        /**
-         * Service end time
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Service duration, in months
-         * @type {number || null}
-         */
-        this.ServiceTime = null;
-
-        /**
-         * Order status. 0: not started; 1: in service; 2: expired; 3: completed; 4: refunded and terminated.
-         * @type {number || null}
-         */
-        this.Status = null;
+        this.RequestId = null;
 
     }
 
@@ -59868,13 +64733,7 @@ class ExpertServiceOrderInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OrderId = 'OrderId' in params ? params.OrderId : null;
-        this.InquireType = 'InquireType' in params ? params.InquireType : null;
-        this.InquireNum = 'InquireNum' in params ? params.InquireNum : null;
-        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.ServiceTime = 'ServiceTime' in params ? params.ServiceTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -59889,7 +64748,6 @@ class DescribeAssetEnvListResponse extends  AbstractModel {
 
         /**
          * List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetEnvBaseInfo> || null}
          */
         this.Envs = null;
@@ -60156,42 +65014,20 @@ class DeleteAllJavaMemShellsRequest extends  AbstractModel {
 }
 
 /**
- * vulnerability defense plugin status of a single process
+ * ExportFileTamperRules request structure.
  * @class
  */
-class VulDefencePluginDetail extends  AbstractModel {
+class ExportFileTamperRulesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the injected process
-         * @type {number || null}
+         * Filter criteria
+<li>RuleCategory- string- rule category: 0 = system rule; 1 = user rule</li>
+<li>Name - String - Rule name</li>
+         * @type {Array.<Filters> || null}
          */
-        this.Pid = null;
-
-        /**
-         * Main class name of the injected process
-         * @type {string || null}
-         */
-        this.MainClass = null;
-
-        /**
-         * Plugin status. 0: injecting; 1: injection successful; 2: plugin timed out, 3: plugin exited; 4: injection failed; 5: logically deleted.
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Error log
-         * @type {string || null}
-         */
-        this.ErrorLog = null;
-
-        /**
-         * Injection log
-         * @type {string || null}
-         */
-        this.InjectLog = null;
+        this.Filters = null;
 
     }
 
@@ -60202,11 +65038,15 @@ class VulDefencePluginDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Pid = 'Pid' in params ? params.Pid : null;
-        this.MainClass = 'MainClass' in params ? params.MainClass : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrorLog = 'ErrorLog' in params ? params.ErrorLog : null;
-        this.InjectLog = 'InjectLog' in params ? params.InjectLog : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -60317,7 +65157,7 @@ class DescribeAssetJarInfoRequest extends  AbstractModel {
 }
 
 /**
- * Account statistics data
+ * Account stats.
  * @class
  */
 class AccountStatistics extends  AbstractModel {
@@ -60389,6 +65229,46 @@ class AssetUserKeyInfo extends  AbstractModel {
         this.Value = 'Value' in params ? params.Value : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.EncryptType = 'EncryptType' in params ? params.EncryptType : null;
+
+    }
+}
+
+/**
+ * DescribeRaspEventDetailCWP response structure.
+ * @class
+ */
+class DescribeRaspEventDetailCWPResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application protection event details
+         * @type {RaspEventDetail || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new RaspEventDetail();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -60489,42 +65369,6 @@ class DescribeMalwareWhiteListResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Anti-Ransomware Machine Hard Disk Configuration
- * @class
- */
-class RansomDefenseStrategyMachineInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Host UUID
-         * @type {string || null}
-         */
-        this.Uuid = null;
-
-        /**
-         * Specified Hard Disk List. When it is empty, it means all hard disks: disk_id1|disk_name1;disk_id2|disk_name2.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DiskInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.DiskInfo = 'DiskInfo' in params ? params.DiskInfo : null;
 
     }
 }
@@ -60768,10 +65612,16 @@ class ScanVulRequest extends  AbstractModel {
         this.VulIds = null;
 
         /**
-         * 0 version comparison, 2 version comparison + poc
+         * 0: version comparison, 2: version comparison + POC.
          * @type {number || null}
          */
         this.ScanMethod = null;
+
+        /**
+         * kb No.
+         * @type {Array.<string> || null}
+         */
+        this.KBNumber = null;
 
     }
 
@@ -60790,6 +65640,7 @@ class ScanVulRequest extends  AbstractModel {
         this.TimeoutPeriod = 'TimeoutPeriod' in params ? params.TimeoutPeriod : null;
         this.VulIds = 'VulIds' in params ? params.VulIds : null;
         this.ScanMethod = 'ScanMethod' in params ? params.ScanMethod : null;
+        this.KBNumber = 'KBNumber' in params ? params.KBNumber : null;
 
     }
 }
@@ -60901,14 +65752,12 @@ class DescribeBaselineListResponse extends  AbstractModel {
 
         /**
          * List of baseline information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BaselineInfo> || null}
          */
         this.BaselineList = null;
 
         /**
-         * Total number of records for paging query
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total number of pagination query records
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -60953,7 +65802,6 @@ class DescribeBashEventsInfoResponse extends  AbstractModel {
 
         /**
          * Event details
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {BashEventsInfo || null}
          */
         this.BashEventsInfo = null;
@@ -60994,7 +65842,6 @@ class DescribeJavaMemShellPluginInfoResponse extends  AbstractModel {
 
         /**
          * Java Memory Trojan Plugin List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<JavaMemShellPluginInfo> || null}
          */
         this.List = null;
@@ -61036,180 +65883,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * List of hosts affected by vulnerabilities
- * @class
- */
-class VulEffectHostList extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Event ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.EventId = null;
-
-        /**
-         * Status. 0: pending; 1: ignored; 3: fixed; 5: detecting; 6: fixing; 7: rolling back; 8: fixing failed.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Last detection time
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LastTime = null;
-
-        /**
-         * Hazard level: 1-Low-risk; 2-Medium-risk; 3-High-risk; 4-Critical
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Level = null;
-
-        /**
-         * Host QUUID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Quuid = null;
-
-        /**
-         * Host UUID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Uuid = null;
-
-        /**
-         * Host IP address
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.HostIp = null;
-
-        /**
-         * Host alias
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AliasName = null;
-
-        /**
-         * Host tag
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Description
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Edition information. 0: Basic Edition; 1: Pro Edition; 2: Ultimate Edition; 3: Inclusive Edition.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.HostVersion = null;
-
-        /**
-         * Whether automatic fixing is supported. 0: not supported; 1: supported; 2: client offline; 3: manual fixing supported for Ultimate Edition hosts; 4: not supported for this model; 5: fixing, 6: fixed; 7: detecting; 9: fixing failed; 10: ignored; 11: supported for Linux but not Windows; 12: supported for Windows but not Linux; 13: fixing failed but host is offline; 14: fixing failed but host is not of the Ultimate edition; 15: manually fixed.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsSupportAutoFix = null;
-
-        /**
-         * Failure cause
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.FixStatusMsg = null;
-
-        /**
-         * First detection time
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.FirstDiscoveryTime = null;
-
-        /**
-         * Instance status. "PENDING": creating; "LAUNCH_FAILED" : creation failed; "RUNNING": running; "STOPPED": shut down; "STARTING": starting; "STOPPING": shutting down; "REBOOTING": restarting; "SHUTDOWN": shut down and pending termination; "TERMINATING": terminating.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceState = null;
-
-        /**
-         * Public IP address
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PublicIpAddresses = null;
-
-        /**
-         * Cloud tag information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Tags> || null}
-         */
-        this.CloudTags = null;
-
-        /**
-         * Host additional information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {MachineExtraInfo || null}
-         */
-        this.MachineExtraInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EventId = 'EventId' in params ? params.EventId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.LastTime = 'LastTime' in params ? params.LastTime : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.HostIp = 'HostIp' in params ? params.HostIp : null;
-        this.AliasName = 'AliasName' in params ? params.AliasName : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.HostVersion = 'HostVersion' in params ? params.HostVersion : null;
-        this.IsSupportAutoFix = 'IsSupportAutoFix' in params ? params.IsSupportAutoFix : null;
-        this.FixStatusMsg = 'FixStatusMsg' in params ? params.FixStatusMsg : null;
-        this.FirstDiscoveryTime = 'FirstDiscoveryTime' in params ? params.FirstDiscoveryTime : null;
-        this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
-        this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
-
-        if (params.CloudTags) {
-            this.CloudTags = new Array();
-            for (let z in params.CloudTags) {
-                let obj = new Tags();
-                obj.deserialize(params.CloudTags[z]);
-                this.CloudTags.push(obj);
-            }
-        }
-
-        if (params.MachineExtraInfo) {
-            let obj = new MachineExtraInfo();
-            obj.deserialize(params.MachineExtraInfo)
-            this.MachineExtraInfo = obj;
-        }
-
-    }
-}
-
-/**
  * DescribeAlarmIncidentNodes response structure.
  * @class
  */
@@ -61218,8 +65891,7 @@ class DescribeAlarmIncidentNodesResponse extends  AbstractModel {
         super();
 
         /**
-         * All node information on the event corresponding to an alarm. Multiple events may be involved.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * All node information on the event corresponding to an alarm, which may include multiple events.
          * @type {Array.<IncidentVertexInfo> || null}
          */
         this.IncidentNodes = null;
@@ -61254,30 +65926,72 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeExpertServiceOrderList request structure.
+ * Local privilege escalation rule
  * @class
  */
-class DescribeExpertServiceOrderListRequest extends  AbstractModel {
+class PrivilegeRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <li>InquireType- String - required: no - order type for filtering,</li>
-         * @type {Array.<Filters> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Number of entries on each page. Maximum value: 100.
+         * Rule ID
          * @type {number || null}
          */
-        this.Limit = null;
+        this.Id = null;
 
         /**
-         * Offset
+         * Client ID
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * Process name
+         * @type {string || null}
+         */
+        this.ProcessName = null;
+
+        /**
+         * Whether the mode is S mode
          * @type {number || null}
          */
-        this.Offset = null;
+        this.SMode = null;
+
+        /**
+         * Operator
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * Whether the rule is global
+         * @type {number || null}
+         */
+        this.IsGlobal = null;
+
+        /**
+         * Status. 0: valid; 1: invalid.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * Host IP
+         * @type {string || null}
+         */
+        this.Hostip = null;
 
     }
 
@@ -61288,17 +66002,16 @@ class DescribeExpertServiceOrderListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filters();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
+        this.SMode = 'SMode' in params ? params.SMode : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.Hostip = 'Hostip' in params ? params.Hostip : null;
 
     }
 }
@@ -61378,7 +66091,6 @@ class DescribeJavaMemShellInfoResponse extends  AbstractModel {
 
         /**
          * Java webshell event details
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {JavaMemShellDetail || null}
          */
         this.Info = null;
@@ -61403,6 +66115,99 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new JavaMemShellDetail();
             obj.deserialize(params.Info)
             this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeReverseShellRulesAggregation request structure.
+ * @class
+ */
+class DescribeReverseShellRulesAggregationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of entries to be returned. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter criteria
+<li>Keywords - String - required: no - keyword (process name)</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Sort field, which currently supports CreateTime and ModifyTime. The default value is ModifyTime.
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * Sorting method: DESC, ASC.
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * ModifyRaspRules response structure.
+ * @class
+ */
+class ModifyRaspRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -61494,7 +66299,7 @@ class RansomDefenseBackup extends  AbstractModel {
         this.EventStatus = null;
 
         /**
-         * Backup Status: 0 - Backing up, 1 - Normal, 2, 3 - Failed, 4 - Snapshot expired, 9 - Snapshot deleted
+         * Backup status: 0 backup in progress, 1 normal, 2, 3 failure, 4 snapshot expired, 5 number of snapshots exceed the limit, 9 snapshot deleted.
          * @type {number || null}
          */
         this.BackupStatus = null;
@@ -61672,21 +66477,18 @@ class DescribeVulFixStatusResponse extends  AbstractModel {
 
         /**
          * Fixing start time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FixStartTime = null;
 
         /**
          * Fixing end time. If this parameter is left blank, fixing is not ended.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FixEndTime = null;
 
         /**
          * Number of successfully fixed hosts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.FixSuccessCnt = null;
@@ -61711,14 +66513,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Status list of snapshots to be fixed
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VulFixStatusSnapshotInfo> || null}
          */
         this.SnapshotList = null;
 
         /**
          * Details list of vulnerabilities to be fixed
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VulFixStatusInfo> || null}
          */
         this.VulFixList = null;
@@ -61730,7 +66530,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SnapshotProgress = null;
 
         /**
-         * Fixing progress (0-100)
+         * Fixing progress (0-100).
          * @type {number || null}
          */
         this.FixProgress = null;
@@ -61748,14 +66548,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsRetrySnapshot = null;
 
         /**
-         * Number of snapshots failed to be created
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Snapshot creation failures
          * @type {number || null}
          */
         this.SnapshotFailCnt = null;
 
         /**
-         * Whether retry is allowed. 0: not allowed; 1: allowed.Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether to allow retry 0: not allowed 1: allowed
          * @type {number || null}
          */
         this.IsAllowRetry = null;
@@ -61806,6 +66605,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SnapshotFailCnt = 'SnapshotFailCnt' in params ? params.SnapshotFailCnt : null;
         this.IsAllowRetry = 'IsAllowRetry' in params ? params.IsAllowRetry : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteMalwareWhiteList request structure.
+ * @class
+ */
+class DeleteMalwareWhiteListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID array, with the maximum value being 100.
+         * @type {Array.<number> || null}
+         */
+        this.Ids = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -61886,21 +66713,18 @@ class DescribeGeneralStatResponse extends  AbstractModel {
 
         /**
          * Number of Ultimate Edition hosts
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.FlagshipMachineCnt = null;
 
         /**
-         * Protection duration, in days
-Note: This field may return null, indicating that no valid values can be obtained.
+         * protection days
          * @type {number || null}
          */
         this.ProtectDays = null;
 
         /**
          * Number of hosts added in the last 15 days
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.AddedOnTheFifteen = null;
@@ -62045,192 +66869,178 @@ class BruteAttackInfo extends  AbstractModel {
         this.Id = null;
 
         /**
-         * CWPP client UUID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * CWP client UUID.
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
          * Host IP address
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MachineIp = null;
 
         /**
-         * Host name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * host name
          * @type {string || null}
          */
         this.MachineName = null;
 
         /**
-         * Username
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Username.
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
-         * Source IP address
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Source IP
          * @type {string || null}
          */
         this.SrcIp = null;
 
         /**
          * SUCCESS: cracking successful; FAILED: cracking failed
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
          * Country/Region ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Country = null;
 
         /**
          * City ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.City = null;
 
         /**
-         * Province ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Province id
          * @type {number || null}
          */
         this.Province = null;
 
         /**
          * Creation time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 0: no blocking (not supported for the client version)1: blocked
-2: blocking failed (program exception)
-3: no blocking (do not block for the private network)
-4: availability zone does not support blocking
+         * 0 - No blocking (not supported by the client version)
+1: blocked
+2: Blocking failed (program exception)
+3: No blocking (No blocking for the private network)
+4: Availability zone does not support blocking
 10: blocking
 81: no blocking (blocking disabled)
-82: no blocking (non-Pro Edition)
+82-No Blocking (Non-Pro Edition)
 83: no blocking (added to the allowlist)
 86: no blocking (system allowlist)
-87: no blocking (client offline)
-Note: This field may return null, indicating that no valid values can be obtained.
+87: No blocking (client offline)
+88-No blocking (Source Ip belongs to the same customer)
+89: no blocking (blocking is not supported for ipv6)
          * @type {number || null}
          */
         this.BanStatus = null;
 
         /**
-         * Event type. 200: brute force cracking event; 300: event of successful brute force cracking (page display); 400: event of brute force cracking on a non-existent account.Note: This field may return null, indicating that no valid values can be obtained.
+         * Event type: 200 - brute force cracking event; 300 - successful brute force cracking event (the status is displayed on the page); 400 - brute force cracking event for non-existent accounts.
          * @type {number || null}
          */
         this.EventType = null;
 
         /**
          * Occurrence count
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Count = null;
 
         /**
-         * Machine UUID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * CVM instance UUID.
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
-         * Whether it is of the Pro Edition (true/false)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether it is the Pro Edition (true/false)
          * @type {boolean || null}
          */
         this.IsProVersion = null;
 
         /**
          * Username of the attacked service
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
          * Port
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Port = null;
 
         /**
          * Last attack time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ModifyTime = null;
 
         /**
          * Instance ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
          * 0: pending; 1: ignored; 5: fixed; 6: added to allowlist
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DataStatus = null;
 
         /**
          * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
 
         /**
-         * Geo-location in Chinese
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Chinese name of a geo location.
          * @type {string || null}
          */
         this.Location = null;
 
         /**
-         * Threat level. 0: low-risk; 1: medium-risk; 2: high-risk.Note: This field may return null, indicating that no valid values can be obtained.
+         * Threat level. 0: low risk, 1: medium risk, 2: high risk.
          * @type {number || null}
          */
         this.RiskLevel = null;
 
         /**
-         * Event source. 0: blocking rule; 1: threat intelligence.Note: This field may return null, indicating that no valid values can be obtained.
+         * Event source. 0: blocking rule, 1: threat intelligence.
          * @type {number || null}
          */
         this.DataFrom = null;
 
         /**
-         * Description of the brute force cracking status
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Cracking status description.
          * @type {string || null}
          */
         this.AttackStatusDesc = null;
 
         /**
-         * Blocking expiration time (valid only for events in blocking status)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Block expiration time (only valid for blocked events).
          * @type {string || null}
          */
         this.BanExpiredTime = null;
+
+        /**
+         * IP analysis
+         * @type {IPAnalyse || null}
+         */
+        this.IPAnalyse = null;
 
     }
 
@@ -62274,22 +67084,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AttackStatusDesc = 'AttackStatusDesc' in params ? params.AttackStatusDesc : null;
         this.BanExpiredTime = 'BanExpiredTime' in params ? params.BanExpiredTime : null;
 
+        if (params.IPAnalyse) {
+            let obj = new IPAnalyse();
+            obj.deserialize(params.IPAnalyse)
+            this.IPAnalyse = obj;
+        }
+
     }
 }
 
 /**
- * ModifyLoginWhiteInfo request structure.
+ * Number of cloud server type instances
  * @class
  */
-class ModifyLoginWhiteInfoRequest extends  AbstractModel {
+class CloudFromCnt extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Update the allowlist information entity
-         * @type {UpdateHostLoginWhiteObj || null}
+         * Cloud server type
+         * @type {number || null}
          */
-        this.HostLoginWhiteObj = null;
+        this.CloudFrom = null;
+
+        /**
+         * Number of Machines
+         * @type {number || null}
+         */
+        this.MachineCnt = null;
 
     }
 
@@ -62300,12 +67122,8 @@ class ModifyLoginWhiteInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.HostLoginWhiteObj) {
-            let obj = new UpdateHostLoginWhiteObj();
-            obj.deserialize(params.HostLoginWhiteObj)
-            this.HostLoginWhiteObj = obj;
-        }
+        this.CloudFrom = 'CloudFrom' in params ? params.CloudFrom : null;
+        this.MachineCnt = 'MachineCnt' in params ? params.MachineCnt : null;
 
     }
 }
@@ -62336,6 +67154,12 @@ class DescribeVulFixStatusRequest extends  AbstractModel {
          */
         this.Quuid = null;
 
+        /**
+         * Patch id
+         * @type {number || null}
+         */
+        this.KbId = null;
+
     }
 
     /**
@@ -62348,6 +67172,7 @@ class DescribeVulFixStatusRequest extends  AbstractModel {
         this.FixId = 'FixId' in params ? params.FixId : null;
         this.VulId = 'VulId' in params ? params.VulId : null;
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.KbId = 'KbId' in params ? params.KbId : null;
 
     }
 }
@@ -62452,111 +67277,18 @@ class DescribeBaselineItemDetectListResponse extends  AbstractModel {
 }
 
 /**
- * DescribeScanTaskDetails response structure.
+ * DescribeReverseShellSystemPolicyConfig request structure.
  * @class
  */
-class DescribeScanTaskDetailsResponse extends  AbstractModel {
+class DescribeReverseShellSystemPolicyConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of scan task information
-         * @type {Array.<ScanTaskDetails> || null}
-         */
-        this.ScanTaskDetailList = null;
-
-        /**
-         * Total number
+         * 
          * @type {number || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * Total number of scanned machines
-         * @type {number || null}
-         */
-        this.ScanMachineCount = null;
-
-        /**
-         * Number of machines with risks detected
-         * @type {number || null}
-         */
-        this.RiskMachineCount = null;
-
-        /**
-         * Scan start time
-         * @type {string || null}
-         */
-        this.ScanBeginTime = null;
-
-        /**
-         * Scan end time
-         * @type {string || null}
-         */
-        this.ScanEndTime = null;
-
-        /**
-         * Scan time
-         * @type {number || null}
-         */
-        this.ScanTime = null;
-
-        /**
-         * Scan progress
-         * @type {number || null}
-         */
-        this.ScanProgress = null;
-
-        /**
-         * Remaining scan time
-         * @type {number || null}
-         */
-        this.ScanLeftTime = null;
-
-        /**
-         * Scan content
-         * @type {Array.<string> || null}
-         */
-        this.ScanContent = null;
-
-        /**
-         * Vulnerability information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<VulDetailInfo> || null}
-         */
-        this.VulInfo = null;
-
-        /**
-         * Number of risk events
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RiskEventCount = null;
-
-        /**
-         * 0: one-click scan; 1: scheduled scan.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * Whether all tasks are being stopped. true: yes.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.StoppingAll = null;
-
-        /**
-         * Number of vulnerabilities scanned
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.VulCount = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.ProductType = null;
 
     }
 
@@ -62567,108 +67299,90 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.ScanTaskDetailList) {
-            this.ScanTaskDetailList = new Array();
-            for (let z in params.ScanTaskDetailList) {
-                let obj = new ScanTaskDetails();
-                obj.deserialize(params.ScanTaskDetailList[z]);
-                this.ScanTaskDetailList.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.ScanMachineCount = 'ScanMachineCount' in params ? params.ScanMachineCount : null;
-        this.RiskMachineCount = 'RiskMachineCount' in params ? params.RiskMachineCount : null;
-        this.ScanBeginTime = 'ScanBeginTime' in params ? params.ScanBeginTime : null;
-        this.ScanEndTime = 'ScanEndTime' in params ? params.ScanEndTime : null;
-        this.ScanTime = 'ScanTime' in params ? params.ScanTime : null;
-        this.ScanProgress = 'ScanProgress' in params ? params.ScanProgress : null;
-        this.ScanLeftTime = 'ScanLeftTime' in params ? params.ScanLeftTime : null;
-        this.ScanContent = 'ScanContent' in params ? params.ScanContent : null;
-
-        if (params.VulInfo) {
-            this.VulInfo = new Array();
-            for (let z in params.VulInfo) {
-                let obj = new VulDetailInfo();
-                obj.deserialize(params.VulInfo[z]);
-                this.VulInfo.push(obj);
-            }
-        }
-        this.RiskEventCount = 'RiskEventCount' in params ? params.RiskEventCount : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.StoppingAll = 'StoppingAll' in params ? params.StoppingAll : null;
-        this.VulCount = 'VulCount' in params ? params.VulCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ProductType = 'ProductType' in params ? params.ProductType : null;
 
     }
 }
 
 /**
- * UpdateBaselineStrategy request structure.
+ * ModifyReverseShellRulesAggregation request structure.
  * @class
  */
-class UpdateBaselineStrategyRequest extends  AbstractModel {
+class ModifyReverseShellRulesAggregationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Policy ID
+         * Rule ID (leave this parameter blank for addition)
          * @type {number || null}
          */
-        this.StrategyId = null;
+        this.Id = null;
 
         /**
-         * Policy name
-         * @type {string || null}
-         */
-        this.StrategyName = null;
-
-        /**
-         * Detection period
-         * @type {number || null}
-         */
-        this.ScanCycle = null;
-
-        /**
-         * Time when routine detection scans are triggered.
-         * @type {string || null}
-         */
-        this.ScanAt = null;
-
-        /**
-         * Array of baseline IDs selected under this policy
+         * Client ID array
          * @type {Array.<string> || null}
          */
-        this.CategoryIds = null;
+        this.Uuids = null;
 
         /**
-         * Whether all servers are scanned: 1: yes; 0 :no. If the value is 1, all Professional Edition hosts are scanned.
+         * Host IP address
+         * @type {string || null}
+         */
+        this.HostIp = null;
+
+        /**
+         * Target IP address
+         * @type {string || null}
+         */
+        this.DestIp = null;
+
+        /**
+         * Target port
+         * @type {string || null}
+         */
+        this.DestPort = null;
+
+        /**
+         * Process name
+         * @type {string || null}
+         */
+        this.ProcessName = null;
+
+        /**
+         * Whether the rule is global (not global by default)
          * @type {number || null}
          */
         this.IsGlobal = null;
 
         /**
-         * CVM type:
-cvm: Tencent Cloud Virtual Machine
-bm: bare metal
-ecm: edge computing host
-lh: Tencent Cloud Lighthouse
-other: hybrid cloud machine
-         * @type {string || null}
+         * ID of the associated event when clicking Add to Allowlist on the event list and details page (leave this parameter blank for rule addition)
+         * @type {number || null}
          */
-        this.MachineType = null;
+        this.EventId = null;
 
         /**
-         * Host region ap-guangzhou
-         * @type {string || null}
+         * Allowlisting method. 0: regular allowlisting, 1: regular expression allowlisting.
+         * @type {number || null}
          */
-        this.RegionCode = null;
+        this.WhiteType = null;
 
         /**
-         * Host ID array
-         * @type {Array.<string> || null}
+         * Regular expression
+         * @type {string || null}
          */
-        this.Quuids = null;
+        this.RuleRegexp = null;
+
+        /**
+         * Whether to process historical events. 0: no, 1: yes.
+         * @type {number || null}
+         */
+        this.HandleHistory = null;
+
+        /**
+         * Batch ID.
+         * @type {string || null}
+         */
+        this.GroupID = null;
 
     }
 
@@ -62679,15 +67393,18 @@ other: hybrid cloud machine
         if (!params) {
             return;
         }
-        this.StrategyId = 'StrategyId' in params ? params.StrategyId : null;
-        this.StrategyName = 'StrategyName' in params ? params.StrategyName : null;
-        this.ScanCycle = 'ScanCycle' in params ? params.ScanCycle : null;
-        this.ScanAt = 'ScanAt' in params ? params.ScanAt : null;
-        this.CategoryIds = 'CategoryIds' in params ? params.CategoryIds : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuids = 'Uuids' in params ? params.Uuids : null;
+        this.HostIp = 'HostIp' in params ? params.HostIp : null;
+        this.DestIp = 'DestIp' in params ? params.DestIp : null;
+        this.DestPort = 'DestPort' in params ? params.DestPort : null;
+        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
         this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
-        this.MachineType = 'MachineType' in params ? params.MachineType : null;
-        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
-        this.Quuids = 'Quuids' in params ? params.Quuids : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.WhiteType = 'WhiteType' in params ? params.WhiteType : null;
+        this.RuleRegexp = 'RuleRegexp' in params ? params.RuleRegexp : null;
+        this.HandleHistory = 'HandleHistory' in params ? params.HandleHistory : null;
+        this.GroupID = 'GroupID' in params ? params.GroupID : null;
 
     }
 }
@@ -62707,8 +67424,7 @@ class DescribeHostLoginListResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Log-in an audit list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Obtaining the List of Abnormal Logins
          * @type {Array.<HostLoginList> || null}
          */
         this.HostLoginList = null;
@@ -62759,7 +67475,6 @@ class DescribePublicProxyInstallCommandResponse extends  AbstractModel {
 
         /**
          * Keepalived Installation Command
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.KeepAliveCommand = null;
@@ -62832,8 +67547,7 @@ class ModifyRiskEventsStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether this operation is asynchronous. 0: operation completed; 1: asynchronous operation in progress and DescribeRiskBatchStatus needs to be called by front end to check if the operation is completed.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether this operation is asynchronous. 0: operation completed; 1: asynchronous operation in progress and DescribeRiskBatchStatus needs to be called by frontend to check if the operation is completed.
          * @type {number || null}
          */
         this.IsSync = null;
@@ -62854,6 +67568,262 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.IsSync = 'IsSync' in params ? params.IsSync : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInjectRiskyServiceSwitch response structure.
+ * @class
+ */
+class DescribeInjectRiskyServiceSwitchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to inject a Java Webshell into risk service. 0: If a user has not set it, it is not injected by default. 1: Inject. 2: A user specifies not to inject.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.JavaShellInjectRiskyServiceStatus = null;
+
+        /**
+         * Whether to inject the host RASP into risk service. 0: If a user has not set it, it is not injected by default. 1: Inject. 2: A user specifies not to inject.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RaspInjectRiskyServiceStatus = null;
+
+        /**
+         * Total number of risk services.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Risk Service List
+         * @type {Array.<RiskMainClass> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JavaShellInjectRiskyServiceStatus = 'JavaShellInjectRiskyServiceStatus' in params ? params.JavaShellInjectRiskyServiceStatus : null;
+        this.RaspInjectRiskyServiceStatus = 'RaspInjectRiskyServiceStatus' in params ? params.RaspInjectRiskyServiceStatus : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new RiskMainClass();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Emergency vulnerability information
+ * @class
+ */
+class EmergencyVul extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Vulnerability ID
+         * @type {number || null}
+         */
+        this.VulId = null;
+
+        /**
+         * Vulnerability level
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * Vulnerability name
+         * @type {string || null}
+         */
+        this.VulName = null;
+
+        /**
+         * Release date
+         * @type {string || null}
+         */
+        this.PublishDate = null;
+
+        /**
+         * Vulnerability category
+         * @type {number || null}
+         */
+        this.Category = null;
+
+        /**
+         * Vulnerability status. 0: not detected; 1: at risk; 2: not at risk; 3: show progress during check
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Last scan time
+         * @type {string || null}
+         */
+        this.LastScanTime = null;
+
+        /**
+         * Scan progress
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * CVE ID
+         * @type {string || null}
+         */
+        this.CveId = null;
+
+        /**
+         * CVSS score
+         * @type {number || null}
+         */
+        this.CvssScore = null;
+
+        /**
+         * Vulnerability Tags, Separated by Multiple Commas
+         * @type {string || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Number of affected machines
+         * @type {number || null}
+         */
+        this.HostCount = null;
+
+        /**
+         * Support defense: 0-no support 1-support
+         * @type {number || null}
+         */
+        this.IsSupportDefense = null;
+
+        /**
+         * Number of Attacks Defended
+         * @type {number || null}
+         */
+        this.DefenseAttackCount = null;
+
+        /**
+         * Detection rule. 0: version comparison, 1: POC verification.
+         * @type {number || null}
+         */
+        this.Method = null;
+
+        /**
+         * Attack intensity level.
+         * @type {number || null}
+         */
+        this.AttackLevel = null;
+
+        /**
+         * Whether vulnerable hosts are enabled with vulnerability defense.
+         * @type {boolean || null}
+         */
+        this.DefenseState = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VulId = 'VulId' in params ? params.VulId : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.PublishDate = 'PublishDate' in params ? params.PublishDate : null;
+        this.Category = 'Category' in params ? params.Category : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.CveId = 'CveId' in params ? params.CveId : null;
+        this.CvssScore = 'CvssScore' in params ? params.CvssScore : null;
+        this.Labels = 'Labels' in params ? params.Labels : null;
+        this.HostCount = 'HostCount' in params ? params.HostCount : null;
+        this.IsSupportDefense = 'IsSupportDefense' in params ? params.IsSupportDefense : null;
+        this.DefenseAttackCount = 'DefenseAttackCount' in params ? params.DefenseAttackCount : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.AttackLevel = 'AttackLevel' in params ? params.AttackLevel : null;
+        this.DefenseState = 'DefenseState' in params ? params.DefenseState : null;
+
+    }
+}
+
+/**
+ * DescribeRaspRules response structure.
+ * @class
+ */
+class DescribeRaspRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List content
+         * @type {Array.<RaspRule> || null}
+         */
+        this.List = null;
+
+        /**
+         * Total number of entries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new RaspRule();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -62961,7 +67931,6 @@ class AssetPortBaseInfo extends  AbstractModel {
 
         /**
          * Host tag
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MachineTag> || null}
          */
         this.Tag = null;
@@ -63064,7 +68033,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Data update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -63082,8 +68050,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsNew = null;
 
         /**
-         * Additional information
-Note: This field may return null, indicating that no valid values can be obtained.
+         *  Additional information
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
@@ -63226,48 +68193,32 @@ class DescribeAlarmVertexIdRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAttackSourceEvents request structure.
+ * DescribeScreenGeneralStat response structure.
  * @class
  */
-class DescribeAttackSourceEventsRequest extends  AbstractModel {
+class DescribeScreenGeneralStatResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Host UUID
+         * Value of name: online, shutdown/offline, not installed
+Value: indicates the corresponding quantity
+         * @type {Array.<ScreenNameValue> || null}
+         */
+        this.Machines = null;
+
+        /**
+         * Value of name: Ultimate Edition, Pro Edition, Basic Edition
+Value: indicates the corresponding number
+         * @type {Array.<ScreenNameValue> || null}
+         */
+        this.Protection = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Uuid = null;
-
-        /**
-         * Start date
-         * @type {string || null}
-         */
-        this.BeginDate = null;
-
-        /**
-         * End date
-         * @type {string || null}
-         */
-        this.EndDate = null;
-
-        /**
-         * EventInfoParam returned by DescribeAttackSource API
-         * @type {string || null}
-         */
-        this.EventInfoParam = null;
-
-        /**
-         * Maximum number of paginations, which is 10 by default.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Starting step size, which is 0 by default.
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.RequestId = null;
 
     }
 
@@ -63278,12 +68229,25 @@ class DescribeAttackSourceEventsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.BeginDate = 'BeginDate' in params ? params.BeginDate : null;
-        this.EndDate = 'EndDate' in params ? params.EndDate : null;
-        this.EventInfoParam = 'EventInfoParam' in params ? params.EventInfoParam : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Machines) {
+            this.Machines = new Array();
+            for (let z in params.Machines) {
+                let obj = new ScreenNameValue();
+                obj.deserialize(params.Machines[z]);
+                this.Machines.push(obj);
+            }
+        }
+
+        if (params.Protection) {
+            this.Protection = new Array();
+            for (let z in params.Protection) {
+                let obj = new ScreenNameValue();
+                obj.deserialize(params.Protection[z]);
+                this.Protection.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -63298,7 +68262,6 @@ class DescribeAssetInitServiceListResponse extends  AbstractModel {
 
         /**
          * List
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssetInitServiceBaseInfo> || null}
          */
         this.Services = null;
@@ -63406,12 +68369,12 @@ class DescribeBaselineHostDetectListRequest extends  AbstractModel {
 
         /**
          * <li>PolicyId - int64 - required: no - policy ID</li>
-</li>HostName - string - required: no - host name</i>
-<li>HostIp - string - required: no - host IP</i>
-<li>ItemId - int64 - required: no - item ID</i>
+<li>HostName - string - required: no - host name</li>
+<li>HostIp - string - required: no - host IP</li>
+<li>ItemId - int64 - required: no - item ID</li>
 <li>RuleId - int64 - required: no - rule ID</li>
 <li>DetectStatus - int - required: no - detection status</li>
-<li>Level - int - required: no - risk level<li>
+<li>Level - int - Required: No - Risk level</li>
 <li>StartTime - string - required: no - start time</li>
 <li>EndTime - string - required: no - end time</li>
          * @type {Array.<Filter> || null}
@@ -63575,8 +68538,7 @@ class DescribeAssetWebFrameListResponse extends  AbstractModel {
         this.Total = null;
 
         /**
-         * Data list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List
          * @type {Array.<AssetWebFrameBaseInfo> || null}
          */
         this.WebFrames = null;
@@ -63708,56 +68670,6 @@ class DescribeWarningListResponse extends  AbstractModel {
                 let obj = new WarningInfoObj();
                 obj.deserialize(params.WarningInfoList[z]);
                 this.WarningInfoList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeAttackSourceEvents response structure.
- * @class
- */
-class DescribeAttackSourceEventsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number of entries
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Attack tracing event list
-         * @type {Array.<AttackSourceEvent> || null}
-         */
-        this.List = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new AttackSourceEvent();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -63993,30 +68905,30 @@ class DescribeAssetSystemPackageListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeVulHostTop request structure.
+ * DescribeRaspEventCWP response structure.
  * @class
  */
-class DescribeVulHostTopRequest extends  AbstractModel {
+class DescribeRaspEventCWPResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Obtain top values: 1-100
+         * Total number of data
          * @type {number || null}
          */
-        this.Top = null;
+        this.TotalCount = null;
 
         /**
-         * 1: web-cms vulnerabilities; 2: application vulnerabilities; 4: Linux software vulnerabilities; 5: Windows system vulnerabilities; 6: emergency vulnerabilities. If it is left blank or set to 0, the total statistics of vulnerabilities 1, 2, 4, and 5 are returned.
-         * @type {number || null}
+         * Vulnerability Defense Event List
+         * @type {Array.<RaspEvent> || null}
          */
-        this.VulCategory = null;
+        this.List = null;
 
         /**
-         * Whether to count only critical vulnerabilities: 1: only critical vulnerabilities; 0: all vulnerabilities
-         * @type {number || null}
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.IsFollowVul = null;
+        this.RequestId = null;
 
     }
 
@@ -64027,9 +68939,67 @@ class DescribeVulHostTopRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Top = 'Top' in params ? params.Top : null;
-        this.VulCategory = 'VulCategory' in params ? params.VulCategory : null;
-        this.IsFollowVul = 'IsFollowVul' in params ? params.IsFollowVul : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new RaspEvent();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRaspPluginList response structure.
+ * @class
+ */
+class DescribeRaspPluginListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List details
+         * @type {Array.<RaspLicensePlugin> || null}
+         */
+        this.List = null;
+
+        /**
+         * Total number of entries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new RaspLicensePlugin();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -64170,14 +69140,12 @@ class DescribeSecurityEventsCntResponse extends  AbstractModel {
 
         /**
          * Total of Windows system vulnerability events
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SecurityEventInfo || null}
          */
         this.WindowVul = null;
 
         /**
-         * Total of Linux system vulnerability events
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total of linux system vulnerability events
          * @type {SecurityEventInfo || null}
          */
         this.LinuxVul = null;
@@ -64483,18 +69451,43 @@ class DescribeSearchTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * CancelIgnoreVul request structure.
+ * DescribePatchEffectHostList request structure.
  * @class
  */
-class CancelIgnoreVulRequest extends  AbstractModel {
+class DescribePatchEffectHostListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Vulnerability event ID string (multiple entries are separated by comma)
-         * @type {string || null}
+         * Patch ID
+         * @type {number || null}
          */
-        this.EventIds = null;
+        this.KbId = null;
+
+        /**
+         * Pagination limit, with the maximum value being 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Pagination offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter criteria:  
+<li>HostVersion : uint64 data type Optional Version information : 0-Basic version 1-Pro edition 2-Flagship edition 3-Lite edition</li>
+<li>InstanceState: string type, optional. Host status: "PENDING": creating; "LAUNCH_FAILED": creation failed; "RUNNING": running; "STOPPED": shut down; "STARTING": starting; "STOPPING": shutting down; "REBOOTING": restarting; "SHUTDOWN": to be terminated; "TERMINATING": terminating; "UNKNOWN": unknown (for non-Tencent Cloud machines and offline client)</li>
+<li>Status - uint64 - optional - processing Status: 0 - pending; 1 - ignored; 3 - fixed</li>
+<li>HostName: string type optional host name</li>
+<li>InstanceID : string type optional host id</li>
+<li>IpAddress: string type optional The ip address of the host</li>
+<li>Uuid : string type optional host uuid</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -64505,42 +69498,18 @@ class CancelIgnoreVulRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EventIds = 'EventIds' in params ? params.EventIds : null;
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
-    }
-}
-
-/**
- * ExportAssetUserList response structure.
- * @class
- */
-class ExportAssetUserListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID of asynchronous download task. It is used together with ExportTasks API.
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -64574,17 +69543,18 @@ module.exports = {
     ExportAssetDatabaseListRequest: ExportAssetDatabaseListRequest,
     HostLoginWhiteObj: HostLoginWhiteObj,
     ClearLocalStorageResponse: ClearLocalStorageResponse,
-    CreateNetAttackWhiteListRequest: CreateNetAttackWhiteListRequest,
     DescribeUndoVulCountsResponse: DescribeUndoVulCountsResponse,
     DescribeBaselineScanScheduleResponse: DescribeBaselineScanScheduleResponse,
     MaliciousRequestWhiteListInfo: MaliciousRequestWhiteListInfo,
     DeleteBashEventsResponse: DeleteBashEventsResponse,
+    PatchInfoDetail: PatchInfoDetail,
     DescribeAssetProcessInfoListRequest: DescribeAssetProcessInfoListRequest,
     VulEmergentMsgInfo: VulEmergentMsgInfo,
     SearchLogResponse: SearchLogResponse,
     AssetNetworkCardInfo: AssetNetworkCardInfo,
     DescribeAssetWebFrameListRequest: DescribeAssetWebFrameListRequest,
-    DescribeMonthInspectionReportResponse: DescribeMonthInspectionReportResponse,
+    ScanVulResponse: ScanVulResponse,
+    RaspLicensePlugin: RaspLicensePlugin,
     DescribeBaselineHostTopResponse: DescribeBaselineHostTopResponse,
     HostDesc: HostDesc,
     DeleteBashRulesResponse: DeleteBashRulesResponse,
@@ -64592,8 +69562,9 @@ module.exports = {
     ModifyFileTamperEventsRequest: ModifyFileTamperEventsRequest,
     RetryVulFixResponse: RetryVulFixResponse,
     ExportVulListResponse: ExportVulListResponse,
+    DescribeMemShellRulesRequest: DescribeMemShellRulesRequest,
     AssetMachineBaseInfo: AssetMachineBaseInfo,
-    ExportRansomDefenseMachineListRequest: ExportRansomDefenseMachineListRequest,
+    DescribeReverseShellSystemPolicyConfigResponse: DescribeReverseShellSystemPolicyConfigResponse,
     DescribeHistoryServiceResponse: DescribeHistoryServiceResponse,
     BaselineEffectHost: BaselineEffectHost,
     DescribeRiskProcessEventsRequest: DescribeRiskProcessEventsRequest,
@@ -64602,15 +69573,16 @@ module.exports = {
     ModifyAutoOpenProVersionConfigResponse: ModifyAutoOpenProVersionConfigResponse,
     DescribeVulInfoCvssResponse: DescribeVulInfoCvssResponse,
     DescribeBaselineStrategyDetailRequest: DescribeBaselineStrategyDetailRequest,
-    ModifyLicenseBindsRequest: ModifyLicenseBindsRequest,
+    DescribeRaspMaxCpuRequest: DescribeRaspMaxCpuRequest,
     MalWareList: MalWareList,
     WebHookPolicy: WebHookPolicy,
+    DescribeScreenMachineRegionsResponse: DescribeScreenMachineRegionsResponse,
     DescribeAssetUserInfoResponse: DescribeAssetUserInfoResponse,
     DescribeRansomDefenseStrategyListRequest: DescribeRansomDefenseStrategyListRequest,
     DescribeMachineClearHistoryRequest: DescribeMachineClearHistoryRequest,
     DescribeServersAndRiskAndFirstInfoResponse: DescribeServersAndRiskAndFirstInfoResponse,
     ModifyMalwareWhiteListRequest: ModifyMalwareWhiteListRequest,
-    DescribeSecurityProtectionStatResponse: DescribeSecurityProtectionStatResponse,
+    DescribeRaspRuleVulsRequest: DescribeRaspRuleVulsRequest,
     DescribeBaselineEffectHostListResponse: DescribeBaselineEffectHostListResponse,
     DescribeJavaMemShellPluginInfoRequest: DescribeJavaMemShellPluginInfoRequest,
     DescribeMachineFileTamperRulesRequest: DescribeMachineFileTamperRulesRequest,
@@ -64630,15 +69602,16 @@ module.exports = {
     DescribeAssetWebServiceCountRequest: DescribeAssetWebServiceCountRequest,
     Broadcasts: Broadcasts,
     CreateLicenseOrderResponse: CreateLicenseOrderResponse,
-    ModifyBashPolicyStatusRequest: ModifyBashPolicyStatusRequest,
+    DescribeRaspMemShellDetailTCSSRequest: DescribeRaspMemShellDetailTCSSRequest,
     DescribeAssetWebLocationPathListRequest: DescribeAssetWebLocationPathListRequest,
     BroadcastInfo: BroadcastInfo,
-    DefendAttackLog: DefendAttackLog,
+    DeleteLoginWhiteListRequest: DeleteLoginWhiteListRequest,
     DeleteRiskDnsEventRequest: DeleteRiskDnsEventRequest,
     PrivilegeEventInfo: PrivilegeEventInfo,
     RansomDefenseRollbackResponse: RansomDefenseRollbackResponse,
     ExportAssetSystemPackageListRequest: ExportAssetSystemPackageListRequest,
     ExportTasksRequest: ExportTasksRequest,
+    DescribeRaspRuleVulsResponse: DescribeRaspRuleVulsResponse,
     DescribeNetAttackWhiteListRequest: DescribeNetAttackWhiteListRequest,
     DescribeOverviewStatisticsResponse: DescribeOverviewStatisticsResponse,
     ModifyMalwareTimingScanSettingsRequest: ModifyMalwareTimingScanSettingsRequest,
@@ -64646,15 +69619,14 @@ module.exports = {
     DescribeWebHookRulesResponse: DescribeWebHookRulesResponse,
     VulDetailInfo: VulDetailInfo,
     VulLevelCountInfo: VulLevelCountInfo,
-    ExportBashEventsResponse: ExportBashEventsResponse,
-    DescribeMonthInspectionReportRequest: DescribeMonthInspectionReportRequest,
+    DescribeRaspRulesRequest: DescribeRaspRulesRequest,
     DescribeDirectConnectInstallCommandRequest: DescribeDirectConnectInstallCommandRequest,
     VertexInfo: VertexInfo,
     DescribeNetAttackSettingResponse: DescribeNetAttackSettingResponse,
     ReverseShellRule: ReverseShellRule,
     DescribeAESKeyResponse: DescribeAESKeyResponse,
     DescribeBashRulesResponse: DescribeBashRulesResponse,
-    DescribeAvailableExpertServiceDetailResponse: DescribeAvailableExpertServiceDetailResponse,
+    MachineExtraInfo: MachineExtraInfo,
     DescribeLogStorageConfigRequest: DescribeLogStorageConfigRequest,
     ExportAssetWebLocationListResponse: ExportAssetWebLocationListResponse,
     ScreenBroadcasts: ScreenBroadcasts,
@@ -64664,17 +69636,20 @@ module.exports = {
     OpenPortStatistics: OpenPortStatistics,
     DescribeRansomDefenseMachineListRequest: DescribeRansomDefenseMachineListRequest,
     ExportAssetCoreModuleListRequest: ExportAssetCoreModuleListRequest,
-    DescribeComponentStatisticsResponse: DescribeComponentStatisticsResponse,
+    ExportAssetMachineDetailResponse: ExportAssetMachineDetailResponse,
     ModifyNetAttackWhiteListResponse: ModifyNetAttackWhiteListResponse,
+    PolicyRules: PolicyRules,
     DescribeMachineRegionsRequest: DescribeMachineRegionsRequest,
-    DescribeAttackLogsRequest: DescribeAttackLogsRequest,
     ModifyMachineAutoClearConfigRequest: ModifyMachineAutoClearConfigRequest,
     ModifyEventAttackStatusRequest: ModifyEventAttackStatusRequest,
+    ModifyBashPolicyStatusRequest: ModifyBashPolicyStatusRequest,
+    DeleteRaspRulesResponse: DeleteRaspRulesResponse,
     DescribeVulLevelCountResponse: DescribeVulLevelCountResponse,
+    DescribeShellPolicyListRequest: DescribeShellPolicyListRequest,
     BruteAttackRule: BruteAttackRule,
     DescribeVersionStatisticsResponse: DescribeVersionStatisticsResponse,
-    DescribeAvailableExpertServiceDetailRequest: DescribeAvailableExpertServiceDetailRequest,
     DescribeMachineFileTamperRulesResponse: DescribeMachineFileTamperRulesResponse,
+    DescribeVulDefenceOverviewCountResponse: DescribeVulDefenceOverviewCountResponse,
     DeleteLogExportRequest: DeleteLogExportRequest,
     DescribeUsualLoginPlacesResponse: DescribeUsualLoginPlacesResponse,
     DescribeAttackEventsRequest: DescribeAttackEventsRequest,
@@ -64685,9 +69660,8 @@ module.exports = {
     EditBashRulesResponse: EditBashRulesResponse,
     ModifyBruteAttackRulesResponse: ModifyBruteAttackRulesResponse,
     DescribeRansomDefenseBackupListRequest: DescribeRansomDefenseBackupListRequest,
-    ModifyFileTamperRuleStatusRequest: ModifyFileTamperRuleStatusRequest,
-    ScanVulResponse: ScanVulResponse,
-    DeleteNonlocalLoginPlacesRequest: DeleteNonlocalLoginPlacesRequest,
+    OrderDetail: OrderDetail,
+    RaspMemShellEvent: RaspMemShellEvent,
     DeleteMalwareWhiteListResponse: DeleteMalwareWhiteListResponse,
     DescribeOverviewStatisticsRequest: DescribeOverviewStatisticsRequest,
     DeleteScanTaskRequest: DeleteScanTaskRequest,
@@ -64712,32 +69686,34 @@ module.exports = {
     HostLoginList: HostLoginList,
     DescribeScreenRiskAssetsTopRequest: DescribeScreenRiskAssetsTopRequest,
     DeletePrivilegeEventsRequest: DeletePrivilegeEventsRequest,
-    AssetMachineDetail: AssetMachineDetail,
+    DeleteWebHookRuleResponse: DeleteWebHookRuleResponse,
     ModifyNetAttackWhiteListRequest: ModifyNetAttackWhiteListRequest,
     DescribeVulDefenceSettingRequest: DescribeVulDefenceSettingRequest,
     DescribeTrialReportRequest: DescribeTrialReportRequest,
     IgnoreRuleEffectHostInfo: IgnoreRuleEffectHostInfo,
     DescribeFileTamperEventsRequest: DescribeFileTamperEventsRequest,
-    DescribeScreenMachineRegionsResponse: DescribeScreenMachineRegionsResponse,
+    DescribeScanTaskDetailsResponse: DescribeScanTaskDetailsResponse,
     ExportVulDefencePluginEventResponse: ExportVulDefencePluginEventResponse,
     ExportAssetMachineDetailRequest: ExportAssetMachineDetailRequest,
     DescribeBanModeRequest: DescribeBanModeRequest,
+    ModifyRaspMaxCpuRequest: ModifyRaspMaxCpuRequest,
     StopAssetScanRequest: StopAssetScanRequest,
     DescribeSecurityEventStatRequest: DescribeSecurityEventStatRequest,
     DescribeESAggregationsResponse: DescribeESAggregationsResponse,
     ExportVulInfoResponse: ExportVulInfoResponse,
-    EmergencyVul: EmergencyVul,
+    DescribeWindowsPatchListRequest: DescribeWindowsPatchListRequest,
     ExportAssetRecentMachineInfoRequest: ExportAssetRecentMachineInfoRequest,
     ExportReverseShellEventsRequest: ExportReverseShellEventsRequest,
     BashEventNew: BashEventNew,
     DeleteLoginWhiteListResponse: DeleteLoginWhiteListResponse,
     DescribeVertexDetailResponse: DescribeVertexDetailResponse,
     DeleteRiskDnsEventResponse: DeleteRiskDnsEventResponse,
-    DescribeAttackLogsResponse: DescribeAttackLogsResponse,
+    ZoneInfo: ZoneInfo,
     ModifyLoginWhiteRecordRequest: ModifyLoginWhiteRecordRequest,
     ModifyRiskDnsPolicyResponse: ModifyRiskDnsPolicyResponse,
     DescribeScanTaskDetailsRequest: DescribeScanTaskDetailsRequest,
     ProductStatusInfo: ProductStatusInfo,
+    DescribeYDRaspBlackWhiteResponse: DescribeYDRaspBlackWhiteResponse,
     DeleteMalwaresResponse: DeleteMalwaresResponse,
     ExportRiskDnsEventListResponse: ExportRiskDnsEventListResponse,
     DescribeAssetInitServiceListRequest: DescribeAssetInitServiceListRequest,
@@ -64758,6 +69734,7 @@ module.exports = {
     DescribeRiskDnsEventInfoRequest: DescribeRiskDnsEventInfoRequest,
     DescribeIgnoreBaselineRuleRequest: DescribeIgnoreBaselineRuleRequest,
     DescribeAssetTypeTopRequest: DescribeAssetTypeTopRequest,
+    ExportRansomDefenseStrategyMachinesResponse: ExportRansomDefenseStrategyMachinesResponse,
     CheckFileTamperRuleResponse: CheckFileTamperRuleResponse,
     ExportNonlocalLoginPlacesResponse: ExportNonlocalLoginPlacesResponse,
     DeleteMaliciousRequestWhiteListRequest: DeleteMaliciousRequestWhiteListRequest,
@@ -64770,16 +69747,19 @@ module.exports = {
     SetLocalStorageItemResponse: SetLocalStorageItemResponse,
     ExportBashEventsNewRequest: ExportBashEventsNewRequest,
     AssetJarDetail: AssetJarDetail,
+    DescribeVulDefenceSettingListRequest: DescribeVulDefenceSettingListRequest,
     ModifyFileTamperRuleResponse: ModifyFileTamperRuleResponse,
     StartBaselineDetectResponse: StartBaselineDetectResponse,
     ReverseShellEventInfo: ReverseShellEventInfo,
     ExportVulDetectionReportRequest: ExportVulDetectionReportRequest,
     ModifyWarningHostConfigRequest: ModifyWarningHostConfigRequest,
     ExportMalwaresResponse: ExportMalwaresResponse,
+    RaspEventOverview: RaspEventOverview,
     DescribeScanVulSettingRequest: DescribeScanVulSettingRequest,
     DescribeMalwareRiskWarningRequest: DescribeMalwareRiskWarningRequest,
     KeyValueInfo: KeyValueInfo,
     StartBaselineDetectRequest: StartBaselineDetectRequest,
+    ExportAssetUserListResponse: ExportAssetUserListResponse,
     DescribeVulStoreListRequest: DescribeVulStoreListRequest,
     EditPrivilegeRulesRequest: EditPrivilegeRulesRequest,
     DescribeAssetDiskListRequest: DescribeAssetDiskListRequest,
@@ -64787,19 +69767,22 @@ module.exports = {
     DescribeClientExceptionRequest: DescribeClientExceptionRequest,
     DescribeAssetPlanTaskListResponse: DescribeAssetPlanTaskListResponse,
     DescribeBaselineRuleRequest: DescribeBaselineRuleRequest,
+    WebHookCustomField: WebHookCustomField,
+    RaspRuleVul: RaspRuleVul,
     ExportAssetPortInfoListRequest: ExportAssetPortInfoListRequest,
     DescribeHistoryAccountsRequest: DescribeHistoryAccountsRequest,
     DescribeAssetMachineDetailRequest: DescribeAssetMachineDetailRequest,
-    CancelIgnoreVulResponse: CancelIgnoreVulResponse,
+    GetLocalStorageItemResponse: GetLocalStorageItemResponse,
     DescribeSecurityBroadcastInfoRequest: DescribeSecurityBroadcastInfoRequest,
-    IgnoreImpactedHostsResponse: IgnoreImpactedHostsResponse,
     DescribeCanFixVulMachineRequest: DescribeCanFixVulMachineRequest,
     DescribeRansomDefenseStrategyMachinesResponse: DescribeRansomDefenseStrategyMachinesResponse,
     ExportRansomDefenseEventsListResponse: ExportRansomDefenseEventsListResponse,
     DescribeAssetMachineDetailResponse: DescribeAssetMachineDetailResponse,
+    RelateVulInfo: RelateVulInfo,
     DescribeRansomDefenseStrategyListResponse: DescribeRansomDefenseStrategyListResponse,
     DescribeAttackTrendsRequest: DescribeAttackTrendsRequest,
     DeleteNetAttackWhiteListRequest: DeleteNetAttackWhiteListRequest,
+    DescribeRaspEventCWPRequest: DescribeRaspEventCWPRequest,
     HistoryAccount: HistoryAccount,
     DescribeStrategyExistResponse: DescribeStrategyExistResponse,
     DeleteReverseShellEventsRequest: DeleteReverseShellEventsRequest,
@@ -64812,7 +69795,7 @@ module.exports = {
     DescribeAssetWebServiceProcessListResponse: DescribeAssetWebServiceProcessListResponse,
     ChangeStrategyEnableStatusResponse: ChangeStrategyEnableStatusResponse,
     ExportRansomDefenseStrategyListResponse: ExportRansomDefenseStrategyListResponse,
-    IgnoreImpactedHostsRequest: IgnoreImpactedHostsRequest,
+    ModifyRaspMaxCpuResponse: ModifyRaspMaxCpuResponse,
     SearchLogRequest: SearchLogRequest,
     DescribeBaselineWeakPasswordListRequest: DescribeBaselineWeakPasswordListRequest,
     VulDefenceEvent: VulDefenceEvent,
@@ -64823,7 +69806,7 @@ module.exports = {
     ModifyWebHookPolicyResponse: ModifyWebHookPolicyResponse,
     DescribeFileTamperEventsResponse: DescribeFileTamperEventsResponse,
     DescribeVulLabelsResponse: DescribeVulLabelsResponse,
-    DescribeMachinesRequest: DescribeMachinesRequest,
+    DescribeLoginTypeHostResponse: DescribeLoginTypeHostResponse,
     DescribeRansomDefenseBackupListResponse: DescribeRansomDefenseBackupListResponse,
     DescribeVulEffectHostListRequest: DescribeVulEffectHostListRequest,
     DeliverTypeDetails: DeliverTypeDetails,
@@ -64833,16 +69816,19 @@ module.exports = {
     ScanTaskDetails: ScanTaskDetails,
     DescribeLicenseBindScheduleResponse: DescribeLicenseBindScheduleResponse,
     DescribeMalwareInfoRequest: DescribeMalwareInfoRequest,
+    ScanBaselineRequest: ScanBaselineRequest,
     DescribeVersionStatisticsRequest: DescribeVersionStatisticsRequest,
     DescribeLogTypeResponse: DescribeLogTypeResponse,
-    ModifyRiskDnsPolicyStatusResponse: ModifyRiskDnsPolicyStatusResponse,
+    LogInfo: LogInfo,
     ExportPrivilegeEventsResponse: ExportPrivilegeEventsResponse,
     ExportAssetRecentMachineInfoResponse: ExportAssetRecentMachineInfoResponse,
     DescribeMachineRegionListRequest: DescribeMachineRegionListRequest,
     UsualPlace: UsualPlace,
     ModifyBaselinePolicyResponse: ModifyBaselinePolicyResponse,
     MachineSimple: MachineSimple,
+    Place: Place,
     DescribeReverseShellEventsRequest: DescribeReverseShellEventsRequest,
+    DescribePatchInfoResponse: DescribePatchInfoResponse,
     DescribeCanNotSeparateMachineResponse: DescribeCanNotSeparateMachineResponse,
     ExportAssetPortInfoListResponse: ExportAssetPortInfoListResponse,
     FileTamperRuleInfo: FileTamperRuleInfo,
@@ -64863,12 +69849,14 @@ module.exports = {
     RansomDefenseStrategyMachineDetail: RansomDefenseStrategyMachineDetail,
     ExportIgnoreBaselineRuleResponse: ExportIgnoreBaselineRuleResponse,
     BruteAttackRuleList: BruteAttackRuleList,
+    DescribeVulDefenceSettingListResponse: DescribeVulDefenceSettingListResponse,
     ExportFileTamperEventsResponse: ExportFileTamperEventsResponse,
     DescribeBanStatusResponse: DescribeBanStatusResponse,
     DescribeVulListRequest: DescribeVulListRequest,
     DescribeLicenseBindListResponse: DescribeLicenseBindListResponse,
     BaselineInfo: BaselineInfo,
     DescribeWebHookReceiverUsageResponse: DescribeWebHookReceiverUsageResponse,
+    VulDefencePluginDetail: VulDefencePluginDetail,
     AssetAppBaseInfo: AssetAppBaseInfo,
     DescribeJavaMemShellInfoRequest: DescribeJavaMemShellInfoRequest,
     DescribePrivilegeRulesRequest: DescribePrivilegeRulesRequest,
@@ -64876,19 +69864,24 @@ module.exports = {
     TestWebHookRuleRequest: TestWebHookRuleRequest,
     JavaMemShellInfo: JavaMemShellInfo,
     DescribeAssetSystemPackageListResponse: DescribeAssetSystemPackageListResponse,
+    DescribeRaspEventDetailTCSSResponse: DescribeRaspEventDetailTCSSResponse,
     ExportAssetWebFrameListResponse: ExportAssetWebFrameListResponse,
+    SecurityDynamic: SecurityDynamic,
     CheckBashPolicyParamsResponse: CheckBashPolicyParamsResponse,
     DescribeClientExceptionResponse: DescribeClientExceptionResponse,
     DescribeAssetMachineListResponse: DescribeAssetMachineListResponse,
     VersionWhiteConfig: VersionWhiteConfig,
     DescribeBaselineDetailRequest: DescribeBaselineDetailRequest,
     NetAttackEventInfo: NetAttackEventInfo,
-    GetLocalStorageItemResponse: GetLocalStorageItemResponse,
+    DescribeShellPolicyListResponse: DescribeShellPolicyListResponse,
+    DescribeRaspMemShellListTCSSRequest: DescribeRaspMemShellListTCSSRequest,
+    DescribeLoginTypeGlobalConfRequest: DescribeLoginTypeGlobalConfRequest,
     DescribeScreenDefenseTrendsRequest: DescribeScreenDefenseTrendsRequest,
     LogStorageRecord: LogStorageRecord,
     DescribeBruteAttackListResponse: DescribeBruteAttackListResponse,
     DescribeAssetInfoRequest: DescribeAssetInfoRequest,
     DescribeJavaMemShellPluginListRequest: DescribeJavaMemShellPluginListRequest,
+    DescribeLoginTypeHostRequest: DescribeLoginTypeHostRequest,
     CanFixVulInfo: CanFixVulInfo,
     DescribeWebHookPolicyRequest: DescribeWebHookPolicyRequest,
     EditReverseShellRulesResponse: EditReverseShellRulesResponse,
@@ -64897,14 +69890,12 @@ module.exports = {
     DescribeVulLabelsRequest: DescribeVulLabelsRequest,
     DescribeAssetAppListRequest: DescribeAssetAppListRequest,
     UntrustMalwaresResponse: UntrustMalwaresResponse,
-    ZoneInfo: ZoneInfo,
-    DescribeExpertServiceListResponse: DescribeExpertServiceListResponse,
+    RiskDnsEvent: RiskDnsEvent,
     DescribeAccountStatisticsResponse: DescribeAccountStatisticsResponse,
     DescribeBashEventsInfoNewRequest: DescribeBashEventsInfoNewRequest,
     ScreenTrendsChart: ScreenTrendsChart,
-    ModifyLoginWhiteInfoResponse: ModifyLoginWhiteInfoResponse,
     DescribeBaselineRuleResponse: DescribeBaselineRuleResponse,
-    AttackSourceNode: AttackSourceNode,
+    ModifyVulDefenceEventStatusResponse: ModifyVulDefenceEventStatusResponse,
     DescribeRiskDnsPolicyListRequest: DescribeRiskDnsPolicyListRequest,
     DeleteMaliciousRequestsResponse: DeleteMaliciousRequestsResponse,
     DescribeWebHookReceiverRequest: DescribeWebHookReceiverRequest,
@@ -64918,11 +69909,12 @@ module.exports = {
     ExportBruteAttacksRequest: ExportBruteAttacksRequest,
     DeleteMachineResponse: DeleteMachineResponse,
     RansomDefenseEvent: RansomDefenseEvent,
-    DeleteMalwareWhiteListRequest: DeleteMalwareWhiteListRequest,
+    DeleteRaspRulesRequest: DeleteRaspRulesRequest,
     LoginWhiteCombinedInfo: LoginWhiteCombinedInfo,
+    RaspMemShellDetail: RaspMemShellDetail,
     SetLocalStorageExpireResponse: SetLocalStorageExpireResponse,
     WebHookReceiver: WebHookReceiver,
-    DescribeAttackSourceResponse: DescribeAttackSourceResponse,
+    RecoverMalwaresRequest: RecoverMalwaresRequest,
     DescribeAssetTypeTopResponse: DescribeAssetTypeTopResponse,
     DescribeVulDefencePluginExceptionCountRequest: DescribeVulDefencePluginExceptionCountRequest,
     DescribeLogIndexRequest: DescribeLogIndexRequest,
@@ -64930,7 +69922,7 @@ module.exports = {
     DescribeAssetCoreModuleInfoResponse: DescribeAssetCoreModuleInfoResponse,
     LicenseBindTaskDetail: LicenseBindTaskDetail,
     DescribeAssetEnvListRequest: DescribeAssetEnvListRequest,
-    Tag: Tag,
+    DescribeReverseShellRulesAggregationResponse: DescribeReverseShellRulesAggregationResponse,
     StopNoticeBanTipsRequest: StopNoticeBanTipsRequest,
     ScreenProtection: ScreenProtection,
     DescribeScanMalwareScheduleRequest: DescribeScanMalwareScheduleRequest,
@@ -64943,6 +69935,7 @@ module.exports = {
     DescribeBashEventsRequest: DescribeBashEventsRequest,
     DeleteMachineClearHistoryRequest: DeleteMachineClearHistoryRequest,
     DescribeLogHistogramResponse: DescribeLogHistogramResponse,
+    LicenseDetail: LicenseDetail,
     DescribeUsersConfigRequest: DescribeUsersConfigRequest,
     DeleteMachineRequest: DeleteMachineRequest,
     DescribeAssetWebLocationListResponse: DescribeAssetWebLocationListResponse,
@@ -64958,7 +69951,7 @@ module.exports = {
     AssetKeyVal: AssetKeyVal,
     AssetWebLocationInfo: AssetWebLocationInfo,
     ChangeRuleEventsIgnoreStatusResponse: ChangeRuleEventsIgnoreStatusResponse,
-    DeleteWebHookRuleResponse: DeleteWebHookRuleResponse,
+    AssetMachineDetail: AssetMachineDetail,
     SeparateMalwaresRequest: SeparateMalwaresRequest,
     AssetDatabaseBaseInfo: AssetDatabaseBaseInfo,
     LicenseOrder: LicenseOrder,
@@ -64972,7 +69965,6 @@ module.exports = {
     DescribeRansomDefenseMachineStrategyInfoRequest: DescribeRansomDefenseMachineStrategyInfoRequest,
     DescribeAssetCoreModuleInfoRequest: DescribeAssetCoreModuleInfoRequest,
     DescribeProductStatusResponse: DescribeProductStatusResponse,
-    DescribeIndexListResponse: DescribeIndexListResponse,
     ModifyJavaMemShellPluginSwitchRequest: ModifyJavaMemShellPluginSwitchRequest,
     DescribeIgnoreHostAndItemConfigResponse: DescribeIgnoreHostAndItemConfigResponse,
     RemoveLocalStorageItemResponse: RemoveLocalStorageItemResponse,
@@ -64987,7 +69979,7 @@ module.exports = {
     CreateVulFixResponse: CreateVulFixResponse,
     DescribeOpenPortStatisticsResponse: DescribeOpenPortStatisticsResponse,
     ExportRiskDnsEventListRequest: ExportRiskDnsEventListRequest,
-    SecurityDynamic: SecurityDynamic,
+    DescribeRaspMaxCpuResponse: DescribeRaspMaxCpuResponse,
     DescribeMachineGeneralRequest: DescribeMachineGeneralRequest,
     ExportRiskProcessEventsResponse: ExportRiskProcessEventsResponse,
     DescribeAssetDatabaseCountResponse: DescribeAssetDatabaseCountResponse,
@@ -64998,16 +69990,15 @@ module.exports = {
     AssetUserBaseInfo: AssetUserBaseInfo,
     ModifyRiskEventsStatusRequest: ModifyRiskEventsStatusRequest,
     ExportBaselineEffectHostListRequest: ExportBaselineEffectHostListRequest,
-    ExportMaliciousRequestsResponse: ExportMaliciousRequestsResponse,
-    ScanBaselineRequest: ScanBaselineRequest,
+    RiskMainClass: RiskMainClass,
+    ExportWindowsPatchListRequest: ExportWindowsPatchListRequest,
     RansomDefenseRollbackRequest: RansomDefenseRollbackRequest,
     DescribeVulCountByDatesResponse: DescribeVulCountByDatesResponse,
     CreateVulFixTaskQuuids: CreateVulFixTaskQuuids,
     DescribeServersAndRiskAndFirstInfoRequest: DescribeServersAndRiskAndFirstInfoRequest,
     FieldValueRatioInfo: FieldValueRatioInfo,
     DescribeVulDefenceEventRequest: DescribeVulDefenceEventRequest,
-    AttackSource: AttackSource,
-    DescribeIndexListRequest: DescribeIndexListRequest,
+    ExportMaliciousRequestsResponse: ExportMaliciousRequestsResponse,
     RetryVulFixRequest: RetryVulFixRequest,
     DescribeRiskDnsEventListRequest: DescribeRiskDnsEventListRequest,
     DescribeLogKafkaDeliverInfoResponse: DescribeLogKafkaDeliverInfoResponse,
@@ -65020,10 +70011,13 @@ module.exports = {
     RansomDefenseStrategyMachineBackupInfo: RansomDefenseStrategyMachineBackupInfo,
     ExportAssetPlanTaskListResponse: ExportAssetPlanTaskListResponse,
     ExportRansomDefenseBackupListRequest: ExportRansomDefenseBackupListRequest,
+    ModifyRaspRulesRequest: ModifyRaspRulesRequest,
     DescribeWarningHostConfigResponse: DescribeWarningHostConfigResponse,
     DescribeABTestConfigRequest: DescribeABTestConfigRequest,
     ModifyRansomDefenseEventsStatusRequest: ModifyRansomDefenseEventsStatusRequest,
+    RaspRule: RaspRule,
     DescribeUsersConfigResponse: DescribeUsersConfigResponse,
+    RaspEventOverviewRequest: RaspEventOverviewRequest,
     DescribeAttackStatisticsResponse: DescribeAttackStatisticsResponse,
     DescribeRansomDefenseStateRequest: DescribeRansomDefenseStateRequest,
     ExportAssetJarListRequest: ExportAssetJarListRequest,
@@ -65043,9 +70037,10 @@ module.exports = {
     CreateMaliciousRequestWhiteListRequest: CreateMaliciousRequestWhiteListRequest,
     DescribeWarningListRequest: DescribeWarningListRequest,
     SyncAssetScanRequest: SyncAssetScanRequest,
-    RecoverMalwaresRequest: RecoverMalwaresRequest,
+    VulEffectHostList: VulEffectHostList,
     DefaultStrategyInfo: DefaultStrategyInfo,
     ExportSecurityTrendsRequest: ExportSecurityTrendsRequest,
+    DescribeYDRaspBlackWhiteRequest: DescribeYDRaspBlackWhiteRequest,
     ModifyBanWhiteListRequest: ModifyBanWhiteListRequest,
     DescribeESAggregationsRequest: DescribeESAggregationsRequest,
     BaselineHostTopList: BaselineHostTopList,
@@ -65053,38 +70048,42 @@ module.exports = {
     DeleteWebHookRuleRequest: DeleteWebHookRuleRequest,
     DescribeBruteAttackListRequest: DescribeBruteAttackListRequest,
     DescribeVdbAndPocInfoRequest: DescribeVdbAndPocInfoRequest,
-    NetAttackTopInfo: NetAttackTopInfo,
+    DescribeInjectRiskyServiceSwitchRequest: DescribeInjectRiskyServiceSwitchRequest,
     DescribeVulListResponse: DescribeVulListResponse,
     BaselineHost: BaselineHost,
     KeysLocalStorageRequest: KeysLocalStorageRequest,
     DescribeUndoVulCountsRequest: DescribeUndoVulCountsRequest,
     RemoveMachineRequest: RemoveMachineRequest,
+    DescribeRaspLicenseListRequest: DescribeRaspLicenseListRequest,
     ModifyLicenseBindsResponse: ModifyLicenseBindsResponse,
     CheckFileTamperRuleRequest: CheckFileTamperRuleRequest,
     DescribeBaselineStrategyListResponse: DescribeBaselineStrategyListResponse,
+    DescribeVulDefenceOverviewCountRequest: DescribeVulDefenceOverviewCountRequest,
     CreateRansomDefenseStrategyRequest: CreateRansomDefenseStrategyRequest,
-    DeleteLoginWhiteListRequest: DeleteLoginWhiteListRequest,
+    DescribeMalwareFileRequest: DescribeMalwareFileRequest,
     DescribeLicenseListRequest: DescribeLicenseListRequest,
     CreateMalwareWhiteListRequest: CreateMalwareWhiteListRequest,
     ExportAssetWebLocationListRequest: ExportAssetWebLocationListRequest,
     DescribeVulOverviewResponse: DescribeVulOverviewResponse,
-    AttackSourceEdge: AttackSourceEdge,
+    ExportRansomDefenseStrategyListRequest: ExportRansomDefenseStrategyListRequest,
     DeleteMaliciousRequestsRequest: DeleteMaliciousRequestsRequest,
     DescribeBanWhiteListRequest: DescribeBanWhiteListRequest,
     VulInfoHostInfo: VulInfoHostInfo,
     DescribeJavaMemShellPluginListResponse: DescribeJavaMemShellPluginListResponse,
-    ModifyLogKafkaStateResponse: ModifyLogKafkaStateResponse,
     BaselinePolicy: BaselinePolicy,
     DescribeMalwareRiskOverviewResponse: DescribeMalwareRiskOverviewResponse,
     DeleteMaliciousRequestWhiteListResponse: DeleteMaliciousRequestWhiteListResponse,
     DescribeJavaMemShellListRequest: DescribeJavaMemShellListRequest,
     SwitchBashRulesRequest: SwitchBashRulesRequest,
     DescribeAgentInstallationTokenResponse: DescribeAgentInstallationTokenResponse,
+    DescribeMachinesRequest: DescribeMachinesRequest,
     ScreenEmergentMsg: ScreenEmergentMsg,
     DescribeAssetMachineTagTopResponse: DescribeAssetMachineTagTopResponse,
+    ExportVulDefenceListRequest: ExportVulDefenceListRequest,
     CreateScanMalwareSettingResponse: CreateScanMalwareSettingResponse,
     DescribeRansomDefenseTrendResponse: DescribeRansomDefenseTrendResponse,
     CKafkaInstanceInfo: CKafkaInstanceInfo,
+    ModifyReverseShellRulesAggregationResponse: ModifyReverseShellRulesAggregationResponse,
     AssetWebFrameBaseInfo: AssetWebFrameBaseInfo,
     ModifyJavaMemShellsStatusRequest: ModifyJavaMemShellsStatusRequest,
     DescribeFileTamperRuleInfoRequest: DescribeFileTamperRuleInfoRequest,
@@ -65101,7 +70100,7 @@ module.exports = {
     CreateLicenseOrderRequest: CreateLicenseOrderRequest,
     CreateNetAttackWhiteListResponse: CreateNetAttackWhiteListResponse,
     CreateLogExportResponse: CreateLogExportResponse,
-    EmergencyResponseInfo: EmergencyResponseInfo,
+    TestWebHookRuleResponse: TestWebHookRuleResponse,
     ExportVulDefenceListResponse: ExportVulDefenceListResponse,
     ModifyLogKafkaDeliverTypeResponse: ModifyLogKafkaDeliverTypeResponse,
     DescribeBaselineScanScheduleRequest: DescribeBaselineScanScheduleRequest,
@@ -65116,6 +70115,7 @@ module.exports = {
     DeleteMalwaresRequest: DeleteMalwaresRequest,
     RecoverMalwaresResponse: RecoverMalwaresResponse,
     RegionSet: RegionSet,
+    DescribeRaspMemShellListTCSSResponse: DescribeRaspMemShellListTCSSResponse,
     WebHookHostLabel: WebHookHostLabel,
     RansomDefenseStrategy: RansomDefenseStrategy,
     DescribeIgnoreHostAndItemConfigRequest: DescribeIgnoreHostAndItemConfigRequest,
@@ -65123,11 +70123,11 @@ module.exports = {
     DescribeScanVulSettingResponse: DescribeScanVulSettingResponse,
     MachineClearHistory: MachineClearHistory,
     DescribeSecurityBroadcastsResponse: DescribeSecurityBroadcastsResponse,
+    DescribeRaspEventTCSSRequest: DescribeRaspEventTCSSRequest,
     DescribeSearchLogsResponse: DescribeSearchLogsResponse,
     AssetFilters: AssetFilters,
     DescribeAssetDatabaseInfoResponse: DescribeAssetDatabaseInfoResponse,
     SyncMachinesRequest: SyncMachinesRequest,
-    MonthInspectionReport: MonthInspectionReport,
     SetBashEventsStatusRequest: SetBashEventsStatusRequest,
     ReverseShell: ReverseShell,
     AssetAppProcessInfo: AssetAppProcessInfo,
@@ -65141,19 +70141,17 @@ module.exports = {
     BaselineItemInfo: BaselineItemInfo,
     NetAttackTrend: NetAttackTrend,
     DescribeVertexDetailRequest: DescribeVertexDetailRequest,
-    ComponentStatistics: ComponentStatistics,
     ExportAssetWebServiceInfoListRequest: ExportAssetWebServiceInfoListRequest,
     SetBashEventsStatusResponse: SetBashEventsStatusResponse,
     DescribeAssetUserInfoRequest: DescribeAssetUserInfoRequest,
+    RaspEventOverviewResponse: RaspEventOverviewResponse,
     UpdateBaselineStrategyResponse: UpdateBaselineStrategyResponse,
     DescribeAgentInstallCommandRequest: DescribeAgentInstallCommandRequest,
     DescribeMachineRegionListResponse: DescribeMachineRegionListResponse,
     ExportPrivilegeEventsRequest: ExportPrivilegeEventsRequest,
     ModifyWebPageProtectSwitchRequest: ModifyWebPageProtectSwitchRequest,
     DescribeScreenGeneralStatRequest: DescribeScreenGeneralStatRequest,
-    DescribeExpertServiceListRequest: DescribeExpertServiceListRequest,
     ModifyUsersConfigResponse: ModifyUsersConfigResponse,
-    MachineExtraInfo: MachineExtraInfo,
     DescribeAttackEventInfoRequest: DescribeAttackEventInfoRequest,
     FileTamperEvent: FileTamperEvent,
     CreateLogExportRequest: CreateLogExportRequest,
@@ -65164,8 +70162,9 @@ module.exports = {
     DescribeSecurityBroadcastInfoResponse: DescribeSecurityBroadcastInfoResponse,
     DescribeLogDeliveryKafkaOptionsResponse: DescribeLogDeliveryKafkaOptionsResponse,
     DescribeScreenRiskAssetsTopResponse: DescribeScreenRiskAssetsTopResponse,
-    StopBaselineDetectRequest: StopBaselineDetectRequest,
+    CommandLine: CommandLine,
     ScanBaselineResponse: ScanBaselineResponse,
+    DescribePatchEffectHostListResponse: DescribePatchEffectHostListResponse,
     CheckLogKafkaConnectionStateRequest: CheckLogKafkaConnectionStateRequest,
     ModifyNetAttackSettingRequest: ModifyNetAttackSettingRequest,
     DescribeRiskDnsListResponse: DescribeRiskDnsListResponse,
@@ -65183,10 +70182,11 @@ module.exports = {
     AssetDiskPartitionInfo: AssetDiskPartitionInfo,
     DescribeScreenMachineRegionsRequest: DescribeScreenMachineRegionsRequest,
     ModifyWebHookPolicyStatusRequest: ModifyWebHookPolicyStatusRequest,
-    RiskDnsEvent: RiskDnsEvent,
+    DescribeVulHostTopRequest: DescribeVulHostTopRequest,
     BaselineRuleInfo: BaselineRuleInfo,
     DescribeExportMachinesResponse: DescribeExportMachinesResponse,
     DescribeScanTaskStatusResponse: DescribeScanTaskStatusResponse,
+    PatchEffectHostList: PatchEffectHostList,
     DescribeRansomDefenseStrategyMachinesRequest: DescribeRansomDefenseStrategyMachinesRequest,
     DescribeAssetLoadInfoResponse: DescribeAssetLoadInfoResponse,
     DescribeMachineRiskCntResponse: DescribeMachineRiskCntResponse,
@@ -65197,11 +70197,12 @@ module.exports = {
     CanNotSeparateInfo: CanNotSeparateInfo,
     DescribeAssetWebLocationCountResponse: DescribeAssetWebLocationCountResponse,
     DescribeBashEventsNewResponse: DescribeBashEventsNewResponse,
-    VulFixStatusInfo: VulFixStatusInfo,
+    BaselineDetail: BaselineDetail,
     DeleteWebHookReceiverResponse: DeleteWebHookReceiverResponse,
     ExportAssetSystemPackageListResponse: ExportAssetSystemPackageListResponse,
     DescribeLogExportsResponse: DescribeLogExportsResponse,
     DescribeVulTrendResponse: DescribeVulTrendResponse,
+    RaspLicenseList: RaspLicenseList,
     DescribeOpenPortStatisticsRequest: DescribeOpenPortStatisticsRequest,
     OsName: OsName,
     DescribeMalwareTimingScanSettingRequest: DescribeMalwareTimingScanSettingRequest,
@@ -65214,20 +70215,23 @@ module.exports = {
     RegionInfo: RegionInfo,
     DescribeCanFixVulMachineResponse: DescribeCanFixVulMachineResponse,
     CreateSearchTemplateResponse: CreateSearchTemplateResponse,
+    UuidHostip: UuidHostip,
     IncidentVertexInfo: IncidentVertexInfo,
     BaselineItemDetect: BaselineItemDetect,
     DescribeVulDefenceSettingResponse: DescribeVulDefenceSettingResponse,
     DescribeAssetProcessCountResponse: DescribeAssetProcessCountResponse,
-    DescribeEmergencyResponseListRequest: DescribeEmergencyResponseListRequest,
+    RansomDefenseStrategyMachineInfo: RansomDefenseStrategyMachineInfo,
     DescribeScanStateResponse: DescribeScanStateResponse,
     BaselineHostDetect: BaselineHostDetect,
     EditTagsRequest: EditTagsRequest,
+    DescribeRaspEventTCSSResponse: DescribeRaspEventTCSSResponse,
     DeleteReverseShellRulesRequest: DeleteReverseShellRulesRequest,
     ScreenVulInfo: ScreenVulInfo,
     UntrustMalwaresRequest: UntrustMalwaresRequest,
     DescribeScreenEventsCntRequest: DescribeScreenEventsCntRequest,
     DescribeBaselineEffectHostListRequest: DescribeBaselineEffectHostListRequest,
-    WebHookCustomField: WebHookCustomField,
+    DescribeRaspEventDetailCWPRequest: DescribeRaspEventDetailCWPRequest,
+    RaspAttackTypeListItem: RaspAttackTypeListItem,
     DescribeDefenceEventDetailResponse: DescribeDefenceEventDetailResponse,
     ExportBaselineHostDetectListRequest: ExportBaselineHostDetectListRequest,
     DescribeAssetDatabaseInfoRequest: DescribeAssetDatabaseInfoRequest,
@@ -65250,9 +70254,9 @@ module.exports = {
     DescribeLogKafkaDeliverInfoRequest: DescribeLogKafkaDeliverInfoRequest,
     DescribeBaselineWeakPasswordListResponse: DescribeBaselineWeakPasswordListResponse,
     DeleteNonlocalLoginPlacesResponse: DeleteNonlocalLoginPlacesResponse,
-    ExportAssetMachineDetailResponse: ExportAssetMachineDetailResponse,
     ModifyLogKafkaAccessResponse: ModifyLogKafkaAccessResponse,
     DeleteMalwareScanTaskResponse: DeleteMalwareScanTaskResponse,
+    ModifyLicenseBindsRequest: ModifyLicenseBindsRequest,
     MalwareWhiteListInfo: MalwareWhiteListInfo,
     DescribeBaselineDetailResponse: DescribeBaselineDetailResponse,
     DescribeWebHookReceiverResponse: DescribeWebHookReceiverResponse,
@@ -65269,14 +70273,13 @@ module.exports = {
     VertexDetail: VertexDetail,
     ExportAssetEnvListRequest: ExportAssetEnvListRequest,
     DescribeVulEffectHostListResponse: DescribeVulEffectHostListResponse,
-    RegionListDetail: RegionListDetail,
+    RaspEvent: RaspEvent,
     DescribeSearchLogsRequest: DescribeSearchLogsRequest,
     ScanVulSettingResponse: ScanVulSettingResponse,
     DescribeAssetJarInfoResponse: DescribeAssetJarInfoResponse,
     DescribeVulInfoCvssRequest: DescribeVulInfoCvssRequest,
     SwitchBashRulesResponse: SwitchBashRulesResponse,
     DescribeFileTamperRulesResponse: DescribeFileTamperRulesResponse,
-    DescribeComponentStatisticsRequest: DescribeComponentStatisticsRequest,
     DescribeAssetProcessCountRequest: DescribeAssetProcessCountRequest,
     ModifyBanStatusResponse: ModifyBanStatusResponse,
     DescribeLoginWhiteListResponse: DescribeLoginWhiteListResponse,
@@ -65308,7 +70311,7 @@ module.exports = {
     DescribeVulTrendRequest: DescribeVulTrendRequest,
     ModifyLogStorageConfigResponse: ModifyLogStorageConfigResponse,
     DescribeAttackStatisticsRequest: DescribeAttackStatisticsRequest,
-    ExportFileTamperRulesRequest: ExportFileTamperRulesRequest,
+    DescribeMemShellRulesResponse: DescribeMemShellRulesResponse,
     AddLoginWhiteListsResponse: AddLoginWhiteListsResponse,
     ModifyLogKafkaStateRequest: ModifyLogKafkaStateRequest,
     AssetWebServiceBaseInfo: AssetWebServiceBaseInfo,
@@ -65326,16 +70329,18 @@ module.exports = {
     ExportInfo: ExportInfo,
     DescribeScreenProtectionStatResponse: DescribeScreenProtectionStatResponse,
     ExportBaselineItemDetectListRequest: ExportBaselineItemDetectListRequest,
-    DescribeAttackSourceRequest: DescribeAttackSourceRequest,
+    CreateNetAttackWhiteListRequest: CreateNetAttackWhiteListRequest,
     DescribeMalwareInfoResponse: DescribeMalwareInfoResponse,
+    SkillInfo: SkillInfo,
     DeleteRiskDnsPolicyResponse: DeleteRiskDnsPolicyResponse,
     DuplicateHosts: DuplicateHosts,
     DescribeLogStorageRecordRequest: DescribeLogStorageRecordRequest,
     ExportBaselineHostDetectListResponse: ExportBaselineHostDetectListResponse,
     MalwareWhiteListAffectEvent: MalwareWhiteListAffectEvent,
+    ReverseShellRuleAggregation: ReverseShellRuleAggregation,
     CreateBanWhiteListRequest: CreateBanWhiteListRequest,
     DescribeMachineRiskCntRequest: DescribeMachineRiskCntRequest,
-    ExportRansomDefenseStrategyMachinesResponse: ExportRansomDefenseStrategyMachinesResponse,
+    ExportRansomDefenseMachineListRequest: ExportRansomDefenseMachineListRequest,
     BaselineRuleTopInfo: BaselineRuleTopInfo,
     ExportAssetWebFrameListRequest: ExportAssetWebFrameListRequest,
     DescribeSecurityBroadcastsRequest: DescribeSecurityBroadcastsRequest,
@@ -65349,18 +70354,18 @@ module.exports = {
     DescribeBruteAttackRulesRequest: DescribeBruteAttackRulesRequest,
     DescribeProcessStatisticsResponse: DescribeProcessStatisticsResponse,
     DescribeLogIndexResponse: DescribeLogIndexResponse,
-    DescribeAttackVulTypeListResponse: DescribeAttackVulTypeListResponse,
+    DeleteNonlocalLoginPlacesRequest: DeleteNonlocalLoginPlacesRequest,
     VulEffectModuleInfo: VulEffectModuleInfo,
     DescribeAssetWebAppPluginListResponse: DescribeAssetWebAppPluginListResponse,
     DescribeAssetWebAppCountRequest: DescribeAssetWebAppCountRequest,
     DescribeAssetTypesRequest: DescribeAssetTypesRequest,
     BaselineEventLevelInfo: BaselineEventLevelInfo,
-    DescribeMalwareFileRequest: DescribeMalwareFileRequest,
+    ExportWindowsPatchListResponse: ExportWindowsPatchListResponse,
     DescribeLoginWhiteCombinedListRequest: DescribeLoginWhiteCombinedListRequest,
     Strategy: Strategy,
+    ModifyRiskDnsPolicyStatusResponse: ModifyRiskDnsPolicyStatusResponse,
     DeleteSearchTemplateResponse: DeleteSearchTemplateResponse,
     DeleteBashPoliciesResponse: DeleteBashPoliciesResponse,
-    DescribeEmergencyResponseListResponse: DescribeEmergencyResponseListResponse,
     ScreenProtectionCnt: ScreenProtectionCnt,
     AssetPlanTask: AssetPlanTask,
     VulDefenceOverview: VulDefenceOverview,
@@ -65386,18 +70391,21 @@ module.exports = {
     DescribeMalwareTimingScanSettingResponse: DescribeMalwareTimingScanSettingResponse,
     DescribeHostLoginListRequest: DescribeHostLoginListRequest,
     ModifyRansomDefenseStrategyStatusResponse: ModifyRansomDefenseStrategyStatusResponse,
-    ExportRansomDefenseStrategyListRequest: ExportRansomDefenseStrategyListRequest,
+    ModifyLoginWhiteInfoResponse: ModifyLoginWhiteInfoResponse,
     Machine: Machine,
+    ExportPatchEffectHostListRequest: ExportPatchEffectHostListRequest,
     FileTamperRule: FileTamperRule,
     SecurityTrend: SecurityTrend,
     ScanTaskAgainResponse: ScanTaskAgainResponse,
     DescribeAssetWebServiceProcessListRequest: DescribeAssetWebServiceProcessListRequest,
     DescribeScreenMachinesResponse: DescribeScreenMachinesResponse,
-    LicenseDetail: LicenseDetail,
-    PrivilegeRule: PrivilegeRule,
+    DescribeRaspMemShellDetailTCSSResponse: DescribeRaspMemShellDetailTCSSResponse,
+    YDRaspBlackWhiteListItem: YDRaspBlackWhiteListItem,
+    ExportBashEventsResponse: ExportBashEventsResponse,
     ScanVulSettingRequest: ScanVulSettingRequest,
     ExportVulDetectionExcelRequest: ExportVulDetectionExcelRequest,
     CreateEmergencyVulScanRequest: CreateEmergencyVulScanRequest,
+    StopBaselineDetectRequest: StopBaselineDetectRequest,
     ModifyWebHookRuleStatusResponse: ModifyWebHookRuleStatusResponse,
     ExportVulEffectHostListResponse: ExportVulEffectHostListResponse,
     DescribeAssetWebServiceCountResponse: DescribeAssetWebServiceCountResponse,
@@ -65417,8 +70425,10 @@ module.exports = {
     ModifyMalwareWhiteListResponse: ModifyMalwareWhiteListResponse,
     DescribeAssetPortInfoListResponse: DescribeAssetPortInfoListResponse,
     DescribeMalwareRiskOverviewRequest: DescribeMalwareRiskOverviewRequest,
+    DescribeLoginTypeGlobalConfResponse: DescribeLoginTypeGlobalConfResponse,
     DescribeMaliciousRequestWhiteListResponse: DescribeMaliciousRequestWhiteListResponse,
     DescribeBaselinePolicyListRequest: DescribeBaselinePolicyListRequest,
+    RegionListDetail: RegionListDetail,
     VulDefenceEventDetail: VulDefenceEventDetail,
     DeleteBruteAttacksResponse: DeleteBruteAttacksResponse,
     ExportTasksResponse: ExportTasksResponse,
@@ -65449,6 +70459,7 @@ module.exports = {
     DescribeAssetDatabaseListResponse: DescribeAssetDatabaseListResponse,
     ExportMalwaresRequest: ExportMalwaresRequest,
     DescribeProcessStatisticsRequest: DescribeProcessStatisticsRequest,
+    DescribeRaspPluginListRequest: DescribeRaspPluginListRequest,
     RiskDnsList: RiskDnsList,
     SyncAssetScanResponse: SyncAssetScanResponse,
     MalwareRiskOverview: MalwareRiskOverview,
@@ -65459,19 +70470,25 @@ module.exports = {
     CreateBaselineStrategyRequest: CreateBaselineStrategyRequest,
     DescribeSecurityTrendsRequest: DescribeSecurityTrendsRequest,
     VulFixStatusHostInfo: VulFixStatusHostInfo,
-    AttackSourceEvent: AttackSourceEvent,
+    DescribeAttackVulTypeListResponse: DescribeAttackVulTypeListResponse,
     DescribePrivilegeRulesResponse: DescribePrivilegeRulesResponse,
     DescribeReverseShellEventsResponse: DescribeReverseShellEventsResponse,
     DescribeAssetAppCountRequest: DescribeAssetAppCountRequest,
+    RaspEventDetail: RaspEventDetail,
     DescribeMaliciousRequestWhiteListRequest: DescribeMaliciousRequestWhiteListRequest,
+    NetAttackTopInfo: NetAttackTopInfo,
     DescribeBashEventsNewRequest: DescribeBashEventsNewRequest,
+    EventPatchInfo: EventPatchInfo,
     MalwareRisk: MalwareRisk,
     DescribeAssetPortInfoListRequest: DescribeAssetPortInfoListRequest,
     DescribeVulDefencePluginDetailRequest: DescribeVulDefencePluginDetailRequest,
+    ModifyLoginWhiteInfoRequest: ModifyLoginWhiteInfoRequest,
+    Tag: Tag,
     DescribeExportMachinesRequest: DescribeExportMachinesRequest,
     DescribeAssetInfoResponse: DescribeAssetInfoResponse,
     WarningObject: WarningObject,
     DescribeAssetPortCountResponse: DescribeAssetPortCountResponse,
+    ShellPolicyList: ShellPolicyList,
     DescribeScreenMachinesRequest: DescribeScreenMachinesRequest,
     DeleteMalwareScanTaskRequest: DeleteMalwareScanTaskRequest,
     ScreenInvasion: ScreenInvasion,
@@ -65480,6 +70497,7 @@ module.exports = {
     DescribeIgnoreRuleEffectHostListResponse: DescribeIgnoreRuleEffectHostListResponse,
     FileTamperRuleDetail: FileTamperRuleDetail,
     CreateBaselineStrategyResponse: CreateBaselineStrategyResponse,
+    DescribeRaspEventDetailTCSSRequest: DescribeRaspEventDetailTCSSRequest,
     ExportAssetCoreModuleListResponse: ExportAssetCoreModuleListResponse,
     ModifyMachineAutoClearConfigResponse: ModifyMachineAutoClearConfigResponse,
     DescribeHistoryAccountsResponse: DescribeHistoryAccountsResponse,
@@ -65489,11 +70507,13 @@ module.exports = {
     DescribeLoginWhiteListRequest: DescribeLoginWhiteListRequest,
     DescribeAssetDatabaseCountRequest: DescribeAssetDatabaseCountRequest,
     ModifyWarningSettingRequest: ModifyWarningSettingRequest,
+    ExportBruteAttacksResponse: ExportBruteAttacksResponse,
     ExportVulDetectionReportResponse: ExportVulDetectionReportResponse,
     DescribeScanScheduleRequest: DescribeScanScheduleRequest,
     CheckFirstScanBaselineRequest: CheckFirstScanBaselineRequest,
-    DescribeLicenseGeneralResponse: DescribeLicenseGeneralResponse,
+    DescribeAttackTypeRequest: DescribeAttackTypeRequest,
     ScreenEventsCnt: ScreenEventsCnt,
+    MemShellRule: MemShellRule,
     DescribeFastAnalysisResponse: DescribeFastAnalysisResponse,
     ScreenMachine: ScreenMachine,
     DescribeAESKeyRequest: DescribeAESKeyRequest,
@@ -65531,13 +70551,12 @@ module.exports = {
     SyncBaselineDetectSummaryResponse: SyncBaselineDetectSummaryResponse,
     ExportFileTamperRulesResponse: ExportFileTamperRulesResponse,
     DescribeAgentInstallCommandResponse: DescribeAgentInstallCommandResponse,
+    DescribeRaspLicenseListResponse: DescribeRaspLicenseListResponse,
     DescribeSafeInfoResponse: DescribeSafeInfoResponse,
     AssetEnvBaseInfo: AssetEnvBaseInfo,
-    ModifyVulDefenceEventStatusResponse: ModifyVulDefenceEventStatusResponse,
     MalwareInfo: MalwareInfo,
-    Place: Place,
-    DescribeSecurityProtectionStatRequest: DescribeSecurityProtectionStatRequest,
-    LogInfo: LogInfo,
+    ClientSettingHost: ClientSettingHost,
+    IPAnalyse: IPAnalyse,
     DescribeHostInfoResponse: DescribeHostInfoResponse,
     ModifyWebHookPolicyStatusResponse: ModifyWebHookPolicyStatusResponse,
     ExportRiskDnsPolicyListResponse: ExportRiskDnsPolicyListResponse,
@@ -65545,13 +70564,14 @@ module.exports = {
     DescribeScreenDefenseTrendsResponse: DescribeScreenDefenseTrendsResponse,
     KeyValueArrayInfo: KeyValueArrayInfo,
     SyncBaselineDetectSummaryRequest: SyncBaselineDetectSummaryRequest,
-    DescribeExpertServiceOrderListResponse: DescribeExpertServiceOrderListResponse,
     DeleteReverseShellRulesResponse: DeleteReverseShellRulesResponse,
     DescribeAssetPlanTaskListRequest: DescribeAssetPlanTaskListRequest,
     DescribePrivilegeEventInfoResponse: DescribePrivilegeEventInfoResponse,
     DescribeMachineLicenseDetailRequest: DescribeMachineLicenseDetailRequest,
     VulFixStatusSnapshotInfo: VulFixStatusSnapshotInfo,
+    VulFixStatusInfo: VulFixStatusInfo,
     Tags: Tags,
+    ExportPatchEffectHostListResponse: ExportPatchEffectHostListResponse,
     DescribeBaselineItemListResponse: DescribeBaselineItemListResponse,
     DescribeMachinesSimpleRequest: DescribeMachinesSimpleRequest,
     StopBaselineDetectResponse: StopBaselineDetectResponse,
@@ -65564,18 +70584,21 @@ module.exports = {
     DeleteLicenseRecordAllResponse: DeleteLicenseRecordAllResponse,
     ModifyBanModeRequest: ModifyBanModeRequest,
     DescribeBaselineDefaultStrategyListResponse: DescribeBaselineDefaultStrategyListResponse,
+    DescribePatchInfoRequest: DescribePatchInfoRequest,
+    DescribeSkillInfoResponse: DescribeSkillInfoResponse,
     BanWhiteListDetail: BanWhiteListDetail,
     DeleteScanTaskResponse: DeleteScanTaskResponse,
-    DescribeScreenGeneralStatResponse: DescribeScreenGeneralStatResponse,
+    ModifyFileTamperRuleStatusRequest: ModifyFileTamperRuleStatusRequest,
     EditBashRulesRequest: EditBashRulesRequest,
     RansomDefenseRollbackTask: RansomDefenseRollbackTask,
     DescribeMachineRegionsResponse: DescribeMachineRegionsResponse,
-    ExportVulDefenceListRequest: ExportVulDefenceListRequest,
-    SecurityButlerInfo: SecurityButlerInfo,
+    DescribeLicenseGeneralResponse: DescribeLicenseGeneralResponse,
     WebHookReceiverUsage: WebHookReceiverUsage,
     DestroyOrderRequest: DestroyOrderRequest,
     AssetWebAppBaseInfo: AssetWebAppBaseInfo,
     DescribeRiskDnsInfoRequest: DescribeRiskDnsInfoRequest,
+    DescribeWindowsPatchListResponse: DescribeWindowsPatchListResponse,
+    UpdateBaselineStrategyRequest: UpdateBaselineStrategyRequest,
     AssetCoreModuleParam: AssetCoreModuleParam,
     DescribeMachineLicenseDetailResponse: DescribeMachineLicenseDetailResponse,
     DescribeHostInfoRequest: DescribeHostInfoRequest,
@@ -65598,7 +70621,6 @@ module.exports = {
     DescribeAssetCoreModuleListRequest: DescribeAssetCoreModuleListRequest,
     VulInfoByCveId: VulInfoByCveId,
     DeleteLogExportResponse: DeleteLogExportResponse,
-    TestWebHookRuleResponse: TestWebHookRuleResponse,
     DeleteBanWhiteListResponse: DeleteBanWhiteListResponse,
     DescribeBaselineStrategyDetailResponse: DescribeBaselineStrategyDetailResponse,
     DescribeBaselineListRequest: DescribeBaselineListRequest,
@@ -65610,7 +70632,7 @@ module.exports = {
     ExportBaselineFixListResponse: ExportBaselineFixListResponse,
     ExportBashEventsNewResponse: ExportBashEventsNewResponse,
     DescribeMachineDefenseCntRequest: DescribeMachineDefenseCntRequest,
-    ModifyFileTamperRuleStatusResponse: ModifyFileTamperRuleStatusResponse,
+    ModifyLogKafkaStateResponse: ModifyLogKafkaStateResponse,
     DescribeBaselineTopRequest: DescribeBaselineTopRequest,
     DescribeAssetAppProcessListRequest: DescribeAssetAppProcessListRequest,
     ScanTaskAgainRequest: ScanTaskAgainRequest,
@@ -65619,34 +70641,35 @@ module.exports = {
     DescribeLicenseBindListRequest: DescribeLicenseBindListRequest,
     DeleteLicenseRecordAllRequest: DeleteLicenseRecordAllRequest,
     DescribeAccountStatisticsRequest: DescribeAccountStatisticsRequest,
-    ExportBruteAttacksResponse: ExportBruteAttacksResponse,
+    DescribeSkillInfoRequest: DescribeSkillInfoRequest,
     JavaMemShellDetail: JavaMemShellDetail,
     DescribeBaselineHostDetectListResponse: DescribeBaselineHostDetectListResponse,
     AssetWebLocationPath: AssetWebLocationPath,
     DescribeAssetProcessInfoListResponse: DescribeAssetProcessInfoListResponse,
     ChangeStrategyEnableStatusRequest: ChangeStrategyEnableStatusRequest,
+    VulDefenceSetting: VulDefenceSetting,
     ProcessStatistics: ProcessStatistics,
     DescribeScanScheduleResponse: DescribeScanScheduleResponse,
-    BaselineDetail: BaselineDetail,
+    DescribeAttackTypeResponse: DescribeAttackTypeResponse,
     DescribeVulDefenceOverviewResponse: DescribeVulDefenceOverviewResponse,
     DescribeAssetWebAppListRequest: DescribeAssetWebAppListRequest,
-    ExpertServiceOrderInfo: ExpertServiceOrderInfo,
+    ModifyFileTamperRuleStatusResponse: ModifyFileTamperRuleStatusResponse,
     DescribeAssetEnvListResponse: DescribeAssetEnvListResponse,
     WebHookRuleDetail: WebHookRuleDetail,
     DescribePrivilegeEventInfoRequest: DescribePrivilegeEventInfoRequest,
     ModifyBashPolicyRequest: ModifyBashPolicyRequest,
     DescribeScreenEmergentMsgResponse: DescribeScreenEmergentMsgResponse,
     DeleteAllJavaMemShellsRequest: DeleteAllJavaMemShellsRequest,
-    VulDefencePluginDetail: VulDefencePluginDetail,
+    ExportFileTamperRulesRequest: ExportFileTamperRulesRequest,
     DescribeVersionCompareChartRequest: DescribeVersionCompareChartRequest,
     DescribeLicenseRequest: DescribeLicenseRequest,
     DescribeLicenseGeneralRequest: DescribeLicenseGeneralRequest,
     DescribeAssetJarInfoRequest: DescribeAssetJarInfoRequest,
     AccountStatistics: AccountStatistics,
     AssetUserKeyInfo: AssetUserKeyInfo,
+    DescribeRaspEventDetailCWPResponse: DescribeRaspEventDetailCWPResponse,
     DescribeMachinesResponse: DescribeMachinesResponse,
     DescribeMalwareWhiteListResponse: DescribeMalwareWhiteListResponse,
-    RansomDefenseStrategyMachineInfo: RansomDefenseStrategyMachineInfo,
     DescribeAssetWebLocationListRequest: DescribeAssetWebLocationListRequest,
     DescribeAssetHostTotalCountRequest: DescribeAssetHostTotalCountRequest,
     CreateMaliciousRequestWhiteListResponse: CreateMaliciousRequestWhiteListResponse,
@@ -65658,38 +70681,43 @@ module.exports = {
     DescribeBaselineListResponse: DescribeBaselineListResponse,
     DescribeBashEventsInfoResponse: DescribeBashEventsInfoResponse,
     DescribeJavaMemShellPluginInfoResponse: DescribeJavaMemShellPluginInfoResponse,
-    VulEffectHostList: VulEffectHostList,
     DescribeAlarmIncidentNodesResponse: DescribeAlarmIncidentNodesResponse,
-    DescribeExpertServiceOrderListRequest: DescribeExpertServiceOrderListRequest,
+    PrivilegeRule: PrivilegeRule,
     DescribeFileTamperRulesRequest: DescribeFileTamperRulesRequest,
     DescribeJavaMemShellInfoResponse: DescribeJavaMemShellInfoResponse,
+    DescribeReverseShellRulesAggregationRequest: DescribeReverseShellRulesAggregationRequest,
+    ModifyRaspRulesResponse: ModifyRaspRulesResponse,
     DescribeRecommendedProtectCpuRequest: DescribeRecommendedProtectCpuRequest,
     DescribeABTestConfigResponse: DescribeABTestConfigResponse,
     RansomDefenseBackup: RansomDefenseBackup,
     DescribeProVersionStatusResponse: DescribeProVersionStatusResponse,
     SearchTemplate: SearchTemplate,
     DescribeVulFixStatusResponse: DescribeVulFixStatusResponse,
+    DeleteMalwareWhiteListRequest: DeleteMalwareWhiteListRequest,
     DescribeGeneralStatResponse: DescribeGeneralStatResponse,
     DescribeLogExportsRequest: DescribeLogExportsRequest,
     DeleteMachineTagResponse: DeleteMachineTagResponse,
     UpdateMachineTagsResponse: UpdateMachineTagsResponse,
     BruteAttackInfo: BruteAttackInfo,
-    ModifyLoginWhiteInfoRequest: ModifyLoginWhiteInfoRequest,
+    CloudFromCnt: CloudFromCnt,
     DescribeVulFixStatusRequest: DescribeVulFixStatusRequest,
     UpdateMachineTagsRequest: UpdateMachineTagsRequest,
     DescribeBaselineItemDetectListResponse: DescribeBaselineItemDetectListResponse,
-    DescribeScanTaskDetailsResponse: DescribeScanTaskDetailsResponse,
-    UpdateBaselineStrategyRequest: UpdateBaselineStrategyRequest,
+    DescribeReverseShellSystemPolicyConfigRequest: DescribeReverseShellSystemPolicyConfigRequest,
+    ModifyReverseShellRulesAggregationRequest: ModifyReverseShellRulesAggregationRequest,
     DescribeHostLoginListResponse: DescribeHostLoginListResponse,
     DescribePublicProxyInstallCommandResponse: DescribePublicProxyInstallCommandResponse,
     DescribeAttackTopRequest: DescribeAttackTopRequest,
     ModifyRiskEventsStatusResponse: ModifyRiskEventsStatusResponse,
+    DescribeInjectRiskyServiceSwitchResponse: DescribeInjectRiskyServiceSwitchResponse,
+    EmergencyVul: EmergencyVul,
+    DescribeRaspRulesResponse: DescribeRaspRulesResponse,
     DescribeVulCveIdInfoRequest: DescribeVulCveIdInfoRequest,
     ModifyJavaMemShellsStatusResponse: ModifyJavaMemShellsStatusResponse,
     AssetPortBaseInfo: AssetPortBaseInfo,
     DescribeAssetWebLocationInfoRequest: DescribeAssetWebLocationInfoRequest,
     DescribeAlarmVertexIdRequest: DescribeAlarmVertexIdRequest,
-    DescribeAttackSourceEventsRequest: DescribeAttackSourceEventsRequest,
+    DescribeScreenGeneralStatResponse: DescribeScreenGeneralStatResponse,
     DescribeAssetInitServiceListResponse: DescribeAssetInitServiceListResponse,
     ModifyBaselinePolicyRequest: ModifyBaselinePolicyRequest,
     DescribeBaselineHostDetectListRequest: DescribeBaselineHostDetectListRequest,
@@ -65699,19 +70727,18 @@ module.exports = {
     DescribeRansomDefenseStrategyDetailRequest: DescribeRansomDefenseStrategyDetailRequest,
     ModifyRiskDnsPolicyRequest: ModifyRiskDnsPolicyRequest,
     DescribeWarningListResponse: DescribeWarningListResponse,
-    DescribeAttackSourceEventsResponse: DescribeAttackSourceEventsResponse,
     ClearLocalStorageRequest: ClearLocalStorageRequest,
     DescribeAssetUserListRequest: DescribeAssetUserListRequest,
     DeleteBaselineStrategyRequest: DeleteBaselineStrategyRequest,
     DescribeAssetSystemPackageListRequest: DescribeAssetSystemPackageListRequest,
-    DescribeVulHostTopRequest: DescribeVulHostTopRequest,
+    DescribeRaspEventCWPResponse: DescribeRaspEventCWPResponse,
+    DescribeRaspPluginListResponse: DescribeRaspPluginListResponse,
     MachineTag: MachineTag,
     DescribeSecurityEventsCntResponse: DescribeSecurityEventsCntResponse,
     Filters: Filters,
     DescribeAssetWebServiceInfoListRequest: DescribeAssetWebServiceInfoListRequest,
     CreateSearchLogRequest: CreateSearchLogRequest,
     DescribeSearchTemplatesRequest: DescribeSearchTemplatesRequest,
-    CancelIgnoreVulRequest: CancelIgnoreVulRequest,
-    ExportAssetUserListResponse: ExportAssetUserListResponse,
+    DescribePatchEffectHostListRequest: DescribePatchEffectHostListRequest,
 
 }

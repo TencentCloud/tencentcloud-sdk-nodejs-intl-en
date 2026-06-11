@@ -44,17 +44,18 @@ const DescribeBashEventsInfoRequest = models.DescribeBashEventsInfoRequest;
 const ExportAssetDatabaseListRequest = models.ExportAssetDatabaseListRequest;
 const HostLoginWhiteObj = models.HostLoginWhiteObj;
 const ClearLocalStorageResponse = models.ClearLocalStorageResponse;
-const CreateNetAttackWhiteListRequest = models.CreateNetAttackWhiteListRequest;
 const DescribeUndoVulCountsResponse = models.DescribeUndoVulCountsResponse;
 const DescribeBaselineScanScheduleResponse = models.DescribeBaselineScanScheduleResponse;
 const MaliciousRequestWhiteListInfo = models.MaliciousRequestWhiteListInfo;
 const DeleteBashEventsResponse = models.DeleteBashEventsResponse;
+const PatchInfoDetail = models.PatchInfoDetail;
 const DescribeAssetProcessInfoListRequest = models.DescribeAssetProcessInfoListRequest;
 const VulEmergentMsgInfo = models.VulEmergentMsgInfo;
 const SearchLogResponse = models.SearchLogResponse;
 const AssetNetworkCardInfo = models.AssetNetworkCardInfo;
 const DescribeAssetWebFrameListRequest = models.DescribeAssetWebFrameListRequest;
-const DescribeMonthInspectionReportResponse = models.DescribeMonthInspectionReportResponse;
+const ScanVulResponse = models.ScanVulResponse;
+const RaspLicensePlugin = models.RaspLicensePlugin;
 const DescribeBaselineHostTopResponse = models.DescribeBaselineHostTopResponse;
 const HostDesc = models.HostDesc;
 const DeleteBashRulesResponse = models.DeleteBashRulesResponse;
@@ -62,8 +63,9 @@ const DescribeDirectConnectInstallCommandResponse = models.DescribeDirectConnect
 const ModifyFileTamperEventsRequest = models.ModifyFileTamperEventsRequest;
 const RetryVulFixResponse = models.RetryVulFixResponse;
 const ExportVulListResponse = models.ExportVulListResponse;
+const DescribeMemShellRulesRequest = models.DescribeMemShellRulesRequest;
 const AssetMachineBaseInfo = models.AssetMachineBaseInfo;
-const ExportRansomDefenseMachineListRequest = models.ExportRansomDefenseMachineListRequest;
+const DescribeReverseShellSystemPolicyConfigResponse = models.DescribeReverseShellSystemPolicyConfigResponse;
 const DescribeHistoryServiceResponse = models.DescribeHistoryServiceResponse;
 const BaselineEffectHost = models.BaselineEffectHost;
 const DescribeRiskProcessEventsRequest = models.DescribeRiskProcessEventsRequest;
@@ -72,15 +74,16 @@ const DescribeScreenEmergentMsgRequest = models.DescribeScreenEmergentMsgRequest
 const ModifyAutoOpenProVersionConfigResponse = models.ModifyAutoOpenProVersionConfigResponse;
 const DescribeVulInfoCvssResponse = models.DescribeVulInfoCvssResponse;
 const DescribeBaselineStrategyDetailRequest = models.DescribeBaselineStrategyDetailRequest;
-const ModifyLicenseBindsRequest = models.ModifyLicenseBindsRequest;
+const DescribeRaspMaxCpuRequest = models.DescribeRaspMaxCpuRequest;
 const MalWareList = models.MalWareList;
 const WebHookPolicy = models.WebHookPolicy;
+const DescribeScreenMachineRegionsResponse = models.DescribeScreenMachineRegionsResponse;
 const DescribeAssetUserInfoResponse = models.DescribeAssetUserInfoResponse;
 const DescribeRansomDefenseStrategyListRequest = models.DescribeRansomDefenseStrategyListRequest;
 const DescribeMachineClearHistoryRequest = models.DescribeMachineClearHistoryRequest;
 const DescribeServersAndRiskAndFirstInfoResponse = models.DescribeServersAndRiskAndFirstInfoResponse;
 const ModifyMalwareWhiteListRequest = models.ModifyMalwareWhiteListRequest;
-const DescribeSecurityProtectionStatResponse = models.DescribeSecurityProtectionStatResponse;
+const DescribeRaspRuleVulsRequest = models.DescribeRaspRuleVulsRequest;
 const DescribeBaselineEffectHostListResponse = models.DescribeBaselineEffectHostListResponse;
 const DescribeJavaMemShellPluginInfoRequest = models.DescribeJavaMemShellPluginInfoRequest;
 const DescribeMachineFileTamperRulesRequest = models.DescribeMachineFileTamperRulesRequest;
@@ -100,15 +103,16 @@ const EditReverseShellRulesRequest = models.EditReverseShellRulesRequest;
 const DescribeAssetWebServiceCountRequest = models.DescribeAssetWebServiceCountRequest;
 const Broadcasts = models.Broadcasts;
 const CreateLicenseOrderResponse = models.CreateLicenseOrderResponse;
-const ModifyBashPolicyStatusRequest = models.ModifyBashPolicyStatusRequest;
+const DescribeRaspMemShellDetailTCSSRequest = models.DescribeRaspMemShellDetailTCSSRequest;
 const DescribeAssetWebLocationPathListRequest = models.DescribeAssetWebLocationPathListRequest;
 const BroadcastInfo = models.BroadcastInfo;
-const DefendAttackLog = models.DefendAttackLog;
+const DeleteLoginWhiteListRequest = models.DeleteLoginWhiteListRequest;
 const DeleteRiskDnsEventRequest = models.DeleteRiskDnsEventRequest;
 const PrivilegeEventInfo = models.PrivilegeEventInfo;
 const RansomDefenseRollbackResponse = models.RansomDefenseRollbackResponse;
 const ExportAssetSystemPackageListRequest = models.ExportAssetSystemPackageListRequest;
 const ExportTasksRequest = models.ExportTasksRequest;
+const DescribeRaspRuleVulsResponse = models.DescribeRaspRuleVulsResponse;
 const DescribeNetAttackWhiteListRequest = models.DescribeNetAttackWhiteListRequest;
 const DescribeOverviewStatisticsResponse = models.DescribeOverviewStatisticsResponse;
 const ModifyMalwareTimingScanSettingsRequest = models.ModifyMalwareTimingScanSettingsRequest;
@@ -116,15 +120,14 @@ const DescribeAssetTotalCountRequest = models.DescribeAssetTotalCountRequest;
 const DescribeWebHookRulesResponse = models.DescribeWebHookRulesResponse;
 const VulDetailInfo = models.VulDetailInfo;
 const VulLevelCountInfo = models.VulLevelCountInfo;
-const ExportBashEventsResponse = models.ExportBashEventsResponse;
-const DescribeMonthInspectionReportRequest = models.DescribeMonthInspectionReportRequest;
+const DescribeRaspRulesRequest = models.DescribeRaspRulesRequest;
 const DescribeDirectConnectInstallCommandRequest = models.DescribeDirectConnectInstallCommandRequest;
 const VertexInfo = models.VertexInfo;
 const DescribeNetAttackSettingResponse = models.DescribeNetAttackSettingResponse;
 const ReverseShellRule = models.ReverseShellRule;
 const DescribeAESKeyResponse = models.DescribeAESKeyResponse;
 const DescribeBashRulesResponse = models.DescribeBashRulesResponse;
-const DescribeAvailableExpertServiceDetailResponse = models.DescribeAvailableExpertServiceDetailResponse;
+const MachineExtraInfo = models.MachineExtraInfo;
 const DescribeLogStorageConfigRequest = models.DescribeLogStorageConfigRequest;
 const ExportAssetWebLocationListResponse = models.ExportAssetWebLocationListResponse;
 const ScreenBroadcasts = models.ScreenBroadcasts;
@@ -134,17 +137,20 @@ const ModifyWebHookReceiverResponse = models.ModifyWebHookReceiverResponse;
 const OpenPortStatistics = models.OpenPortStatistics;
 const DescribeRansomDefenseMachineListRequest = models.DescribeRansomDefenseMachineListRequest;
 const ExportAssetCoreModuleListRequest = models.ExportAssetCoreModuleListRequest;
-const DescribeComponentStatisticsResponse = models.DescribeComponentStatisticsResponse;
+const ExportAssetMachineDetailResponse = models.ExportAssetMachineDetailResponse;
 const ModifyNetAttackWhiteListResponse = models.ModifyNetAttackWhiteListResponse;
+const PolicyRules = models.PolicyRules;
 const DescribeMachineRegionsRequest = models.DescribeMachineRegionsRequest;
-const DescribeAttackLogsRequest = models.DescribeAttackLogsRequest;
 const ModifyMachineAutoClearConfigRequest = models.ModifyMachineAutoClearConfigRequest;
 const ModifyEventAttackStatusRequest = models.ModifyEventAttackStatusRequest;
+const ModifyBashPolicyStatusRequest = models.ModifyBashPolicyStatusRequest;
+const DeleteRaspRulesResponse = models.DeleteRaspRulesResponse;
 const DescribeVulLevelCountResponse = models.DescribeVulLevelCountResponse;
+const DescribeShellPolicyListRequest = models.DescribeShellPolicyListRequest;
 const BruteAttackRule = models.BruteAttackRule;
 const DescribeVersionStatisticsResponse = models.DescribeVersionStatisticsResponse;
-const DescribeAvailableExpertServiceDetailRequest = models.DescribeAvailableExpertServiceDetailRequest;
 const DescribeMachineFileTamperRulesResponse = models.DescribeMachineFileTamperRulesResponse;
+const DescribeVulDefenceOverviewCountResponse = models.DescribeVulDefenceOverviewCountResponse;
 const DeleteLogExportRequest = models.DeleteLogExportRequest;
 const DescribeUsualLoginPlacesResponse = models.DescribeUsualLoginPlacesResponse;
 const DescribeAttackEventsRequest = models.DescribeAttackEventsRequest;
@@ -155,9 +161,8 @@ const DescribeRansomDefenseStrategyDetailResponse = models.DescribeRansomDefense
 const EditBashRulesResponse = models.EditBashRulesResponse;
 const ModifyBruteAttackRulesResponse = models.ModifyBruteAttackRulesResponse;
 const DescribeRansomDefenseBackupListRequest = models.DescribeRansomDefenseBackupListRequest;
-const ModifyFileTamperRuleStatusRequest = models.ModifyFileTamperRuleStatusRequest;
-const ScanVulResponse = models.ScanVulResponse;
-const DeleteNonlocalLoginPlacesRequest = models.DeleteNonlocalLoginPlacesRequest;
+const OrderDetail = models.OrderDetail;
+const RaspMemShellEvent = models.RaspMemShellEvent;
 const DeleteMalwareWhiteListResponse = models.DeleteMalwareWhiteListResponse;
 const DescribeOverviewStatisticsRequest = models.DescribeOverviewStatisticsRequest;
 const DeleteScanTaskRequest = models.DeleteScanTaskRequest;
@@ -182,32 +187,34 @@ const DescribeNetAttackSettingRequest = models.DescribeNetAttackSettingRequest;
 const HostLoginList = models.HostLoginList;
 const DescribeScreenRiskAssetsTopRequest = models.DescribeScreenRiskAssetsTopRequest;
 const DeletePrivilegeEventsRequest = models.DeletePrivilegeEventsRequest;
-const AssetMachineDetail = models.AssetMachineDetail;
+const DeleteWebHookRuleResponse = models.DeleteWebHookRuleResponse;
 const ModifyNetAttackWhiteListRequest = models.ModifyNetAttackWhiteListRequest;
 const DescribeVulDefenceSettingRequest = models.DescribeVulDefenceSettingRequest;
 const DescribeTrialReportRequest = models.DescribeTrialReportRequest;
 const IgnoreRuleEffectHostInfo = models.IgnoreRuleEffectHostInfo;
 const DescribeFileTamperEventsRequest = models.DescribeFileTamperEventsRequest;
-const DescribeScreenMachineRegionsResponse = models.DescribeScreenMachineRegionsResponse;
+const DescribeScanTaskDetailsResponse = models.DescribeScanTaskDetailsResponse;
 const ExportVulDefencePluginEventResponse = models.ExportVulDefencePluginEventResponse;
 const ExportAssetMachineDetailRequest = models.ExportAssetMachineDetailRequest;
 const DescribeBanModeRequest = models.DescribeBanModeRequest;
+const ModifyRaspMaxCpuRequest = models.ModifyRaspMaxCpuRequest;
 const StopAssetScanRequest = models.StopAssetScanRequest;
 const DescribeSecurityEventStatRequest = models.DescribeSecurityEventStatRequest;
 const DescribeESAggregationsResponse = models.DescribeESAggregationsResponse;
 const ExportVulInfoResponse = models.ExportVulInfoResponse;
-const EmergencyVul = models.EmergencyVul;
+const DescribeWindowsPatchListRequest = models.DescribeWindowsPatchListRequest;
 const ExportAssetRecentMachineInfoRequest = models.ExportAssetRecentMachineInfoRequest;
 const ExportReverseShellEventsRequest = models.ExportReverseShellEventsRequest;
 const BashEventNew = models.BashEventNew;
 const DeleteLoginWhiteListResponse = models.DeleteLoginWhiteListResponse;
 const DescribeVertexDetailResponse = models.DescribeVertexDetailResponse;
 const DeleteRiskDnsEventResponse = models.DeleteRiskDnsEventResponse;
-const DescribeAttackLogsResponse = models.DescribeAttackLogsResponse;
+const ZoneInfo = models.ZoneInfo;
 const ModifyLoginWhiteRecordRequest = models.ModifyLoginWhiteRecordRequest;
 const ModifyRiskDnsPolicyResponse = models.ModifyRiskDnsPolicyResponse;
 const DescribeScanTaskDetailsRequest = models.DescribeScanTaskDetailsRequest;
 const ProductStatusInfo = models.ProductStatusInfo;
+const DescribeYDRaspBlackWhiteResponse = models.DescribeYDRaspBlackWhiteResponse;
 const DeleteMalwaresResponse = models.DeleteMalwaresResponse;
 const ExportRiskDnsEventListResponse = models.ExportRiskDnsEventListResponse;
 const DescribeAssetInitServiceListRequest = models.DescribeAssetInitServiceListRequest;
@@ -228,6 +235,7 @@ const CheckBashRuleParamsRequest = models.CheckBashRuleParamsRequest;
 const DescribeRiskDnsEventInfoRequest = models.DescribeRiskDnsEventInfoRequest;
 const DescribeIgnoreBaselineRuleRequest = models.DescribeIgnoreBaselineRuleRequest;
 const DescribeAssetTypeTopRequest = models.DescribeAssetTypeTopRequest;
+const ExportRansomDefenseStrategyMachinesResponse = models.ExportRansomDefenseStrategyMachinesResponse;
 const CheckFileTamperRuleResponse = models.CheckFileTamperRuleResponse;
 const ExportNonlocalLoginPlacesResponse = models.ExportNonlocalLoginPlacesResponse;
 const DeleteMaliciousRequestWhiteListRequest = models.DeleteMaliciousRequestWhiteListRequest;
@@ -240,16 +248,19 @@ const BanWhiteList = models.BanWhiteList;
 const SetLocalStorageItemResponse = models.SetLocalStorageItemResponse;
 const ExportBashEventsNewRequest = models.ExportBashEventsNewRequest;
 const AssetJarDetail = models.AssetJarDetail;
+const DescribeVulDefenceSettingListRequest = models.DescribeVulDefenceSettingListRequest;
 const ModifyFileTamperRuleResponse = models.ModifyFileTamperRuleResponse;
 const StartBaselineDetectResponse = models.StartBaselineDetectResponse;
 const ReverseShellEventInfo = models.ReverseShellEventInfo;
 const ExportVulDetectionReportRequest = models.ExportVulDetectionReportRequest;
 const ModifyWarningHostConfigRequest = models.ModifyWarningHostConfigRequest;
 const ExportMalwaresResponse = models.ExportMalwaresResponse;
+const RaspEventOverview = models.RaspEventOverview;
 const DescribeScanVulSettingRequest = models.DescribeScanVulSettingRequest;
 const DescribeMalwareRiskWarningRequest = models.DescribeMalwareRiskWarningRequest;
 const KeyValueInfo = models.KeyValueInfo;
 const StartBaselineDetectRequest = models.StartBaselineDetectRequest;
+const ExportAssetUserListResponse = models.ExportAssetUserListResponse;
 const DescribeVulStoreListRequest = models.DescribeVulStoreListRequest;
 const EditPrivilegeRulesRequest = models.EditPrivilegeRulesRequest;
 const DescribeAssetDiskListRequest = models.DescribeAssetDiskListRequest;
@@ -257,19 +268,22 @@ const ScreenAttackHotspot = models.ScreenAttackHotspot;
 const DescribeClientExceptionRequest = models.DescribeClientExceptionRequest;
 const DescribeAssetPlanTaskListResponse = models.DescribeAssetPlanTaskListResponse;
 const DescribeBaselineRuleRequest = models.DescribeBaselineRuleRequest;
+const WebHookCustomField = models.WebHookCustomField;
+const RaspRuleVul = models.RaspRuleVul;
 const ExportAssetPortInfoListRequest = models.ExportAssetPortInfoListRequest;
 const DescribeHistoryAccountsRequest = models.DescribeHistoryAccountsRequest;
 const DescribeAssetMachineDetailRequest = models.DescribeAssetMachineDetailRequest;
-const CancelIgnoreVulResponse = models.CancelIgnoreVulResponse;
+const GetLocalStorageItemResponse = models.GetLocalStorageItemResponse;
 const DescribeSecurityBroadcastInfoRequest = models.DescribeSecurityBroadcastInfoRequest;
-const IgnoreImpactedHostsResponse = models.IgnoreImpactedHostsResponse;
 const DescribeCanFixVulMachineRequest = models.DescribeCanFixVulMachineRequest;
 const DescribeRansomDefenseStrategyMachinesResponse = models.DescribeRansomDefenseStrategyMachinesResponse;
 const ExportRansomDefenseEventsListResponse = models.ExportRansomDefenseEventsListResponse;
 const DescribeAssetMachineDetailResponse = models.DescribeAssetMachineDetailResponse;
+const RelateVulInfo = models.RelateVulInfo;
 const DescribeRansomDefenseStrategyListResponse = models.DescribeRansomDefenseStrategyListResponse;
 const DescribeAttackTrendsRequest = models.DescribeAttackTrendsRequest;
 const DeleteNetAttackWhiteListRequest = models.DeleteNetAttackWhiteListRequest;
+const DescribeRaspEventCWPRequest = models.DescribeRaspEventCWPRequest;
 const HistoryAccount = models.HistoryAccount;
 const DescribeStrategyExistResponse = models.DescribeStrategyExistResponse;
 const DeleteReverseShellEventsRequest = models.DeleteReverseShellEventsRequest;
@@ -282,7 +296,7 @@ const DescribeMachineOsListResponse = models.DescribeMachineOsListResponse;
 const DescribeAssetWebServiceProcessListResponse = models.DescribeAssetWebServiceProcessListResponse;
 const ChangeStrategyEnableStatusResponse = models.ChangeStrategyEnableStatusResponse;
 const ExportRansomDefenseStrategyListResponse = models.ExportRansomDefenseStrategyListResponse;
-const IgnoreImpactedHostsRequest = models.IgnoreImpactedHostsRequest;
+const ModifyRaspMaxCpuResponse = models.ModifyRaspMaxCpuResponse;
 const SearchLogRequest = models.SearchLogRequest;
 const DescribeBaselineWeakPasswordListRequest = models.DescribeBaselineWeakPasswordListRequest;
 const VulDefenceEvent = models.VulDefenceEvent;
@@ -293,7 +307,7 @@ const DescribeAssetPortCountRequest = models.DescribeAssetPortCountRequest;
 const ModifyWebHookPolicyResponse = models.ModifyWebHookPolicyResponse;
 const DescribeFileTamperEventsResponse = models.DescribeFileTamperEventsResponse;
 const DescribeVulLabelsResponse = models.DescribeVulLabelsResponse;
-const DescribeMachinesRequest = models.DescribeMachinesRequest;
+const DescribeLoginTypeHostResponse = models.DescribeLoginTypeHostResponse;
 const DescribeRansomDefenseBackupListResponse = models.DescribeRansomDefenseBackupListResponse;
 const DescribeVulEffectHostListRequest = models.DescribeVulEffectHostListRequest;
 const DeliverTypeDetails = models.DeliverTypeDetails;
@@ -303,16 +317,19 @@ const DeletePrivilegeRulesRequest = models.DeletePrivilegeRulesRequest;
 const ScanTaskDetails = models.ScanTaskDetails;
 const DescribeLicenseBindScheduleResponse = models.DescribeLicenseBindScheduleResponse;
 const DescribeMalwareInfoRequest = models.DescribeMalwareInfoRequest;
+const ScanBaselineRequest = models.ScanBaselineRequest;
 const DescribeVersionStatisticsRequest = models.DescribeVersionStatisticsRequest;
 const DescribeLogTypeResponse = models.DescribeLogTypeResponse;
-const ModifyRiskDnsPolicyStatusResponse = models.ModifyRiskDnsPolicyStatusResponse;
+const LogInfo = models.LogInfo;
 const ExportPrivilegeEventsResponse = models.ExportPrivilegeEventsResponse;
 const ExportAssetRecentMachineInfoResponse = models.ExportAssetRecentMachineInfoResponse;
 const DescribeMachineRegionListRequest = models.DescribeMachineRegionListRequest;
 const UsualPlace = models.UsualPlace;
 const ModifyBaselinePolicyResponse = models.ModifyBaselinePolicyResponse;
 const MachineSimple = models.MachineSimple;
+const Place = models.Place;
 const DescribeReverseShellEventsRequest = models.DescribeReverseShellEventsRequest;
+const DescribePatchInfoResponse = models.DescribePatchInfoResponse;
 const DescribeCanNotSeparateMachineResponse = models.DescribeCanNotSeparateMachineResponse;
 const ExportAssetPortInfoListResponse = models.ExportAssetPortInfoListResponse;
 const FileTamperRuleInfo = models.FileTamperRuleInfo;
@@ -333,12 +350,14 @@ const DescribeAssetWebLocationPathListResponse = models.DescribeAssetWebLocation
 const RansomDefenseStrategyMachineDetail = models.RansomDefenseStrategyMachineDetail;
 const ExportIgnoreBaselineRuleResponse = models.ExportIgnoreBaselineRuleResponse;
 const BruteAttackRuleList = models.BruteAttackRuleList;
+const DescribeVulDefenceSettingListResponse = models.DescribeVulDefenceSettingListResponse;
 const ExportFileTamperEventsResponse = models.ExportFileTamperEventsResponse;
 const DescribeBanStatusResponse = models.DescribeBanStatusResponse;
 const DescribeVulListRequest = models.DescribeVulListRequest;
 const DescribeLicenseBindListResponse = models.DescribeLicenseBindListResponse;
 const BaselineInfo = models.BaselineInfo;
 const DescribeWebHookReceiverUsageResponse = models.DescribeWebHookReceiverUsageResponse;
+const VulDefencePluginDetail = models.VulDefencePluginDetail;
 const AssetAppBaseInfo = models.AssetAppBaseInfo;
 const DescribeJavaMemShellInfoRequest = models.DescribeJavaMemShellInfoRequest;
 const DescribePrivilegeRulesRequest = models.DescribePrivilegeRulesRequest;
@@ -346,19 +365,24 @@ const ExportAssetAppListRequest = models.ExportAssetAppListRequest;
 const TestWebHookRuleRequest = models.TestWebHookRuleRequest;
 const JavaMemShellInfo = models.JavaMemShellInfo;
 const DescribeAssetSystemPackageListResponse = models.DescribeAssetSystemPackageListResponse;
+const DescribeRaspEventDetailTCSSResponse = models.DescribeRaspEventDetailTCSSResponse;
 const ExportAssetWebFrameListResponse = models.ExportAssetWebFrameListResponse;
+const SecurityDynamic = models.SecurityDynamic;
 const CheckBashPolicyParamsResponse = models.CheckBashPolicyParamsResponse;
 const DescribeClientExceptionResponse = models.DescribeClientExceptionResponse;
 const DescribeAssetMachineListResponse = models.DescribeAssetMachineListResponse;
 const VersionWhiteConfig = models.VersionWhiteConfig;
 const DescribeBaselineDetailRequest = models.DescribeBaselineDetailRequest;
 const NetAttackEventInfo = models.NetAttackEventInfo;
-const GetLocalStorageItemResponse = models.GetLocalStorageItemResponse;
+const DescribeShellPolicyListResponse = models.DescribeShellPolicyListResponse;
+const DescribeRaspMemShellListTCSSRequest = models.DescribeRaspMemShellListTCSSRequest;
+const DescribeLoginTypeGlobalConfRequest = models.DescribeLoginTypeGlobalConfRequest;
 const DescribeScreenDefenseTrendsRequest = models.DescribeScreenDefenseTrendsRequest;
 const LogStorageRecord = models.LogStorageRecord;
 const DescribeBruteAttackListResponse = models.DescribeBruteAttackListResponse;
 const DescribeAssetInfoRequest = models.DescribeAssetInfoRequest;
 const DescribeJavaMemShellPluginListRequest = models.DescribeJavaMemShellPluginListRequest;
+const DescribeLoginTypeHostRequest = models.DescribeLoginTypeHostRequest;
 const CanFixVulInfo = models.CanFixVulInfo;
 const DescribeWebHookPolicyRequest = models.DescribeWebHookPolicyRequest;
 const EditReverseShellRulesResponse = models.EditReverseShellRulesResponse;
@@ -367,14 +391,12 @@ const DescribeAssetUserKeyListResponse = models.DescribeAssetUserKeyListResponse
 const DescribeVulLabelsRequest = models.DescribeVulLabelsRequest;
 const DescribeAssetAppListRequest = models.DescribeAssetAppListRequest;
 const UntrustMalwaresResponse = models.UntrustMalwaresResponse;
-const ZoneInfo = models.ZoneInfo;
-const DescribeExpertServiceListResponse = models.DescribeExpertServiceListResponse;
+const RiskDnsEvent = models.RiskDnsEvent;
 const DescribeAccountStatisticsResponse = models.DescribeAccountStatisticsResponse;
 const DescribeBashEventsInfoNewRequest = models.DescribeBashEventsInfoNewRequest;
 const ScreenTrendsChart = models.ScreenTrendsChart;
-const ModifyLoginWhiteInfoResponse = models.ModifyLoginWhiteInfoResponse;
 const DescribeBaselineRuleResponse = models.DescribeBaselineRuleResponse;
-const AttackSourceNode = models.AttackSourceNode;
+const ModifyVulDefenceEventStatusResponse = models.ModifyVulDefenceEventStatusResponse;
 const DescribeRiskDnsPolicyListRequest = models.DescribeRiskDnsPolicyListRequest;
 const DeleteMaliciousRequestsResponse = models.DeleteMaliciousRequestsResponse;
 const DescribeWebHookReceiverRequest = models.DescribeWebHookReceiverRequest;
@@ -388,11 +410,12 @@ const WebHookEventKv = models.WebHookEventKv;
 const ExportBruteAttacksRequest = models.ExportBruteAttacksRequest;
 const DeleteMachineResponse = models.DeleteMachineResponse;
 const RansomDefenseEvent = models.RansomDefenseEvent;
-const DeleteMalwareWhiteListRequest = models.DeleteMalwareWhiteListRequest;
+const DeleteRaspRulesRequest = models.DeleteRaspRulesRequest;
 const LoginWhiteCombinedInfo = models.LoginWhiteCombinedInfo;
+const RaspMemShellDetail = models.RaspMemShellDetail;
 const SetLocalStorageExpireResponse = models.SetLocalStorageExpireResponse;
 const WebHookReceiver = models.WebHookReceiver;
-const DescribeAttackSourceResponse = models.DescribeAttackSourceResponse;
+const RecoverMalwaresRequest = models.RecoverMalwaresRequest;
 const DescribeAssetTypeTopResponse = models.DescribeAssetTypeTopResponse;
 const DescribeVulDefencePluginExceptionCountRequest = models.DescribeVulDefencePluginExceptionCountRequest;
 const DescribeLogIndexRequest = models.DescribeLogIndexRequest;
@@ -400,7 +423,7 @@ const TagMachine = models.TagMachine;
 const DescribeAssetCoreModuleInfoResponse = models.DescribeAssetCoreModuleInfoResponse;
 const LicenseBindTaskDetail = models.LicenseBindTaskDetail;
 const DescribeAssetEnvListRequest = models.DescribeAssetEnvListRequest;
-const Tag = models.Tag;
+const DescribeReverseShellRulesAggregationResponse = models.DescribeReverseShellRulesAggregationResponse;
 const StopNoticeBanTipsRequest = models.StopNoticeBanTipsRequest;
 const ScreenProtection = models.ScreenProtection;
 const DescribeScanMalwareScheduleRequest = models.DescribeScanMalwareScheduleRequest;
@@ -413,6 +436,7 @@ const DescribeTrialReportResponse = models.DescribeTrialReportResponse;
 const DescribeBashEventsRequest = models.DescribeBashEventsRequest;
 const DeleteMachineClearHistoryRequest = models.DeleteMachineClearHistoryRequest;
 const DescribeLogHistogramResponse = models.DescribeLogHistogramResponse;
+const LicenseDetail = models.LicenseDetail;
 const DescribeUsersConfigRequest = models.DescribeUsersConfigRequest;
 const DeleteMachineRequest = models.DeleteMachineRequest;
 const DescribeAssetWebLocationListResponse = models.DescribeAssetWebLocationListResponse;
@@ -428,7 +452,7 @@ const TrustMalwaresRequest = models.TrustMalwaresRequest;
 const AssetKeyVal = models.AssetKeyVal;
 const AssetWebLocationInfo = models.AssetWebLocationInfo;
 const ChangeRuleEventsIgnoreStatusResponse = models.ChangeRuleEventsIgnoreStatusResponse;
-const DeleteWebHookRuleResponse = models.DeleteWebHookRuleResponse;
+const AssetMachineDetail = models.AssetMachineDetail;
 const SeparateMalwaresRequest = models.SeparateMalwaresRequest;
 const AssetDatabaseBaseInfo = models.AssetDatabaseBaseInfo;
 const LicenseOrder = models.LicenseOrder;
@@ -442,7 +466,6 @@ const DescribeHotVulTopResponse = models.DescribeHotVulTopResponse;
 const DescribeRansomDefenseMachineStrategyInfoRequest = models.DescribeRansomDefenseMachineStrategyInfoRequest;
 const DescribeAssetCoreModuleInfoRequest = models.DescribeAssetCoreModuleInfoRequest;
 const DescribeProductStatusResponse = models.DescribeProductStatusResponse;
-const DescribeIndexListResponse = models.DescribeIndexListResponse;
 const ModifyJavaMemShellPluginSwitchRequest = models.ModifyJavaMemShellPluginSwitchRequest;
 const DescribeIgnoreHostAndItemConfigResponse = models.DescribeIgnoreHostAndItemConfigResponse;
 const RemoveLocalStorageItemResponse = models.RemoveLocalStorageItemResponse;
@@ -457,7 +480,7 @@ const DescribeBanWhiteListResponse = models.DescribeBanWhiteListResponse;
 const CreateVulFixResponse = models.CreateVulFixResponse;
 const DescribeOpenPortStatisticsResponse = models.DescribeOpenPortStatisticsResponse;
 const ExportRiskDnsEventListRequest = models.ExportRiskDnsEventListRequest;
-const SecurityDynamic = models.SecurityDynamic;
+const DescribeRaspMaxCpuResponse = models.DescribeRaspMaxCpuResponse;
 const DescribeMachineGeneralRequest = models.DescribeMachineGeneralRequest;
 const ExportRiskProcessEventsResponse = models.ExportRiskProcessEventsResponse;
 const DescribeAssetDatabaseCountResponse = models.DescribeAssetDatabaseCountResponse;
@@ -468,16 +491,15 @@ const DescribeSecurityEventsCntRequest = models.DescribeSecurityEventsCntRequest
 const AssetUserBaseInfo = models.AssetUserBaseInfo;
 const ModifyRiskEventsStatusRequest = models.ModifyRiskEventsStatusRequest;
 const ExportBaselineEffectHostListRequest = models.ExportBaselineEffectHostListRequest;
-const ExportMaliciousRequestsResponse = models.ExportMaliciousRequestsResponse;
-const ScanBaselineRequest = models.ScanBaselineRequest;
+const RiskMainClass = models.RiskMainClass;
+const ExportWindowsPatchListRequest = models.ExportWindowsPatchListRequest;
 const RansomDefenseRollbackRequest = models.RansomDefenseRollbackRequest;
 const DescribeVulCountByDatesResponse = models.DescribeVulCountByDatesResponse;
 const CreateVulFixTaskQuuids = models.CreateVulFixTaskQuuids;
 const DescribeServersAndRiskAndFirstInfoRequest = models.DescribeServersAndRiskAndFirstInfoRequest;
 const FieldValueRatioInfo = models.FieldValueRatioInfo;
 const DescribeVulDefenceEventRequest = models.DescribeVulDefenceEventRequest;
-const AttackSource = models.AttackSource;
-const DescribeIndexListRequest = models.DescribeIndexListRequest;
+const ExportMaliciousRequestsResponse = models.ExportMaliciousRequestsResponse;
 const RetryVulFixRequest = models.RetryVulFixRequest;
 const DescribeRiskDnsEventListRequest = models.DescribeRiskDnsEventListRequest;
 const DescribeLogKafkaDeliverInfoResponse = models.DescribeLogKafkaDeliverInfoResponse;
@@ -490,10 +512,13 @@ const DescribeRansomDefenseEventsListRequest = models.DescribeRansomDefenseEvent
 const RansomDefenseStrategyMachineBackupInfo = models.RansomDefenseStrategyMachineBackupInfo;
 const ExportAssetPlanTaskListResponse = models.ExportAssetPlanTaskListResponse;
 const ExportRansomDefenseBackupListRequest = models.ExportRansomDefenseBackupListRequest;
+const ModifyRaspRulesRequest = models.ModifyRaspRulesRequest;
 const DescribeWarningHostConfigResponse = models.DescribeWarningHostConfigResponse;
 const DescribeABTestConfigRequest = models.DescribeABTestConfigRequest;
 const ModifyRansomDefenseEventsStatusRequest = models.ModifyRansomDefenseEventsStatusRequest;
+const RaspRule = models.RaspRule;
 const DescribeUsersConfigResponse = models.DescribeUsersConfigResponse;
+const RaspEventOverviewRequest = models.RaspEventOverviewRequest;
 const DescribeAttackStatisticsResponse = models.DescribeAttackStatisticsResponse;
 const DescribeRansomDefenseStateRequest = models.DescribeRansomDefenseStateRequest;
 const ExportAssetJarListRequest = models.ExportAssetJarListRequest;
@@ -513,9 +538,10 @@ const DescribeHistoryServiceRequest = models.DescribeHistoryServiceRequest;
 const CreateMaliciousRequestWhiteListRequest = models.CreateMaliciousRequestWhiteListRequest;
 const DescribeWarningListRequest = models.DescribeWarningListRequest;
 const SyncAssetScanRequest = models.SyncAssetScanRequest;
-const RecoverMalwaresRequest = models.RecoverMalwaresRequest;
+const VulEffectHostList = models.VulEffectHostList;
 const DefaultStrategyInfo = models.DefaultStrategyInfo;
 const ExportSecurityTrendsRequest = models.ExportSecurityTrendsRequest;
+const DescribeYDRaspBlackWhiteRequest = models.DescribeYDRaspBlackWhiteRequest;
 const ModifyBanWhiteListRequest = models.ModifyBanWhiteListRequest;
 const DescribeESAggregationsRequest = models.DescribeESAggregationsRequest;
 const BaselineHostTopList = models.BaselineHostTopList;
@@ -523,38 +549,42 @@ const DescribeReverseShellRulesResponse = models.DescribeReverseShellRulesRespon
 const DeleteWebHookRuleRequest = models.DeleteWebHookRuleRequest;
 const DescribeBruteAttackListRequest = models.DescribeBruteAttackListRequest;
 const DescribeVdbAndPocInfoRequest = models.DescribeVdbAndPocInfoRequest;
-const NetAttackTopInfo = models.NetAttackTopInfo;
+const DescribeInjectRiskyServiceSwitchRequest = models.DescribeInjectRiskyServiceSwitchRequest;
 const DescribeVulListResponse = models.DescribeVulListResponse;
 const BaselineHost = models.BaselineHost;
 const KeysLocalStorageRequest = models.KeysLocalStorageRequest;
 const DescribeUndoVulCountsRequest = models.DescribeUndoVulCountsRequest;
 const RemoveMachineRequest = models.RemoveMachineRequest;
+const DescribeRaspLicenseListRequest = models.DescribeRaspLicenseListRequest;
 const ModifyLicenseBindsResponse = models.ModifyLicenseBindsResponse;
 const CheckFileTamperRuleRequest = models.CheckFileTamperRuleRequest;
 const DescribeBaselineStrategyListResponse = models.DescribeBaselineStrategyListResponse;
+const DescribeVulDefenceOverviewCountRequest = models.DescribeVulDefenceOverviewCountRequest;
 const CreateRansomDefenseStrategyRequest = models.CreateRansomDefenseStrategyRequest;
-const DeleteLoginWhiteListRequest = models.DeleteLoginWhiteListRequest;
+const DescribeMalwareFileRequest = models.DescribeMalwareFileRequest;
 const DescribeLicenseListRequest = models.DescribeLicenseListRequest;
 const CreateMalwareWhiteListRequest = models.CreateMalwareWhiteListRequest;
 const ExportAssetWebLocationListRequest = models.ExportAssetWebLocationListRequest;
 const DescribeVulOverviewResponse = models.DescribeVulOverviewResponse;
-const AttackSourceEdge = models.AttackSourceEdge;
+const ExportRansomDefenseStrategyListRequest = models.ExportRansomDefenseStrategyListRequest;
 const DeleteMaliciousRequestsRequest = models.DeleteMaliciousRequestsRequest;
 const DescribeBanWhiteListRequest = models.DescribeBanWhiteListRequest;
 const VulInfoHostInfo = models.VulInfoHostInfo;
 const DescribeJavaMemShellPluginListResponse = models.DescribeJavaMemShellPluginListResponse;
-const ModifyLogKafkaStateResponse = models.ModifyLogKafkaStateResponse;
 const BaselinePolicy = models.BaselinePolicy;
 const DescribeMalwareRiskOverviewResponse = models.DescribeMalwareRiskOverviewResponse;
 const DeleteMaliciousRequestWhiteListResponse = models.DeleteMaliciousRequestWhiteListResponse;
 const DescribeJavaMemShellListRequest = models.DescribeJavaMemShellListRequest;
 const SwitchBashRulesRequest = models.SwitchBashRulesRequest;
 const DescribeAgentInstallationTokenResponse = models.DescribeAgentInstallationTokenResponse;
+const DescribeMachinesRequest = models.DescribeMachinesRequest;
 const ScreenEmergentMsg = models.ScreenEmergentMsg;
 const DescribeAssetMachineTagTopResponse = models.DescribeAssetMachineTagTopResponse;
+const ExportVulDefenceListRequest = models.ExportVulDefenceListRequest;
 const CreateScanMalwareSettingResponse = models.CreateScanMalwareSettingResponse;
 const DescribeRansomDefenseTrendResponse = models.DescribeRansomDefenseTrendResponse;
 const CKafkaInstanceInfo = models.CKafkaInstanceInfo;
+const ModifyReverseShellRulesAggregationResponse = models.ModifyReverseShellRulesAggregationResponse;
 const AssetWebFrameBaseInfo = models.AssetWebFrameBaseInfo;
 const ModifyJavaMemShellsStatusRequest = models.ModifyJavaMemShellsStatusRequest;
 const DescribeFileTamperRuleInfoRequest = models.DescribeFileTamperRuleInfoRequest;
@@ -571,7 +601,7 @@ const ScreenNameValue = models.ScreenNameValue;
 const CreateLicenseOrderRequest = models.CreateLicenseOrderRequest;
 const CreateNetAttackWhiteListResponse = models.CreateNetAttackWhiteListResponse;
 const CreateLogExportResponse = models.CreateLogExportResponse;
-const EmergencyResponseInfo = models.EmergencyResponseInfo;
+const TestWebHookRuleResponse = models.TestWebHookRuleResponse;
 const ExportVulDefenceListResponse = models.ExportVulDefenceListResponse;
 const ModifyLogKafkaDeliverTypeResponse = models.ModifyLogKafkaDeliverTypeResponse;
 const DescribeBaselineScanScheduleRequest = models.DescribeBaselineScanScheduleRequest;
@@ -586,6 +616,7 @@ const BashEvent = models.BashEvent;
 const DeleteMalwaresRequest = models.DeleteMalwaresRequest;
 const RecoverMalwaresResponse = models.RecoverMalwaresResponse;
 const RegionSet = models.RegionSet;
+const DescribeRaspMemShellListTCSSResponse = models.DescribeRaspMemShellListTCSSResponse;
 const WebHookHostLabel = models.WebHookHostLabel;
 const RansomDefenseStrategy = models.RansomDefenseStrategy;
 const DescribeIgnoreHostAndItemConfigRequest = models.DescribeIgnoreHostAndItemConfigRequest;
@@ -593,11 +624,11 @@ const DescribeReverseShellRulesRequest = models.DescribeReverseShellRulesRequest
 const DescribeScanVulSettingResponse = models.DescribeScanVulSettingResponse;
 const MachineClearHistory = models.MachineClearHistory;
 const DescribeSecurityBroadcastsResponse = models.DescribeSecurityBroadcastsResponse;
+const DescribeRaspEventTCSSRequest = models.DescribeRaspEventTCSSRequest;
 const DescribeSearchLogsResponse = models.DescribeSearchLogsResponse;
 const AssetFilters = models.AssetFilters;
 const DescribeAssetDatabaseInfoResponse = models.DescribeAssetDatabaseInfoResponse;
 const SyncMachinesRequest = models.SyncMachinesRequest;
-const MonthInspectionReport = models.MonthInspectionReport;
 const SetBashEventsStatusRequest = models.SetBashEventsStatusRequest;
 const ReverseShell = models.ReverseShell;
 const AssetAppProcessInfo = models.AssetAppProcessInfo;
@@ -611,19 +642,17 @@ const DescribeMachineDefenseCntResponse = models.DescribeMachineDefenseCntRespon
 const BaselineItemInfo = models.BaselineItemInfo;
 const NetAttackTrend = models.NetAttackTrend;
 const DescribeVertexDetailRequest = models.DescribeVertexDetailRequest;
-const ComponentStatistics = models.ComponentStatistics;
 const ExportAssetWebServiceInfoListRequest = models.ExportAssetWebServiceInfoListRequest;
 const SetBashEventsStatusResponse = models.SetBashEventsStatusResponse;
 const DescribeAssetUserInfoRequest = models.DescribeAssetUserInfoRequest;
+const RaspEventOverviewResponse = models.RaspEventOverviewResponse;
 const UpdateBaselineStrategyResponse = models.UpdateBaselineStrategyResponse;
 const DescribeAgentInstallCommandRequest = models.DescribeAgentInstallCommandRequest;
 const DescribeMachineRegionListResponse = models.DescribeMachineRegionListResponse;
 const ExportPrivilegeEventsRequest = models.ExportPrivilegeEventsRequest;
 const ModifyWebPageProtectSwitchRequest = models.ModifyWebPageProtectSwitchRequest;
 const DescribeScreenGeneralStatRequest = models.DescribeScreenGeneralStatRequest;
-const DescribeExpertServiceListRequest = models.DescribeExpertServiceListRequest;
 const ModifyUsersConfigResponse = models.ModifyUsersConfigResponse;
-const MachineExtraInfo = models.MachineExtraInfo;
 const DescribeAttackEventInfoRequest = models.DescribeAttackEventInfoRequest;
 const FileTamperEvent = models.FileTamperEvent;
 const CreateLogExportRequest = models.CreateLogExportRequest;
@@ -634,8 +663,9 @@ const DescribeWebHookRuleRequest = models.DescribeWebHookRuleRequest;
 const DescribeSecurityBroadcastInfoResponse = models.DescribeSecurityBroadcastInfoResponse;
 const DescribeLogDeliveryKafkaOptionsResponse = models.DescribeLogDeliveryKafkaOptionsResponse;
 const DescribeScreenRiskAssetsTopResponse = models.DescribeScreenRiskAssetsTopResponse;
-const StopBaselineDetectRequest = models.StopBaselineDetectRequest;
+const CommandLine = models.CommandLine;
 const ScanBaselineResponse = models.ScanBaselineResponse;
+const DescribePatchEffectHostListResponse = models.DescribePatchEffectHostListResponse;
 const CheckLogKafkaConnectionStateRequest = models.CheckLogKafkaConnectionStateRequest;
 const ModifyNetAttackSettingRequest = models.ModifyNetAttackSettingRequest;
 const DescribeRiskDnsListResponse = models.DescribeRiskDnsListResponse;
@@ -653,10 +683,11 @@ const DeleteMachineTagRequest = models.DeleteMachineTagRequest;
 const AssetDiskPartitionInfo = models.AssetDiskPartitionInfo;
 const DescribeScreenMachineRegionsRequest = models.DescribeScreenMachineRegionsRequest;
 const ModifyWebHookPolicyStatusRequest = models.ModifyWebHookPolicyStatusRequest;
-const RiskDnsEvent = models.RiskDnsEvent;
+const DescribeVulHostTopRequest = models.DescribeVulHostTopRequest;
 const BaselineRuleInfo = models.BaselineRuleInfo;
 const DescribeExportMachinesResponse = models.DescribeExportMachinesResponse;
 const DescribeScanTaskStatusResponse = models.DescribeScanTaskStatusResponse;
+const PatchEffectHostList = models.PatchEffectHostList;
 const DescribeRansomDefenseStrategyMachinesRequest = models.DescribeRansomDefenseStrategyMachinesRequest;
 const DescribeAssetLoadInfoResponse = models.DescribeAssetLoadInfoResponse;
 const DescribeMachineRiskCntResponse = models.DescribeMachineRiskCntResponse;
@@ -667,11 +698,12 @@ const DescribeAssetWebFrameCountResponse = models.DescribeAssetWebFrameCountResp
 const CanNotSeparateInfo = models.CanNotSeparateInfo;
 const DescribeAssetWebLocationCountResponse = models.DescribeAssetWebLocationCountResponse;
 const DescribeBashEventsNewResponse = models.DescribeBashEventsNewResponse;
-const VulFixStatusInfo = models.VulFixStatusInfo;
+const BaselineDetail = models.BaselineDetail;
 const DeleteWebHookReceiverResponse = models.DeleteWebHookReceiverResponse;
 const ExportAssetSystemPackageListResponse = models.ExportAssetSystemPackageListResponse;
 const DescribeLogExportsResponse = models.DescribeLogExportsResponse;
 const DescribeVulTrendResponse = models.DescribeVulTrendResponse;
+const RaspLicenseList = models.RaspLicenseList;
 const DescribeOpenPortStatisticsRequest = models.DescribeOpenPortStatisticsRequest;
 const OsName = models.OsName;
 const DescribeMalwareTimingScanSettingRequest = models.DescribeMalwareTimingScanSettingRequest;
@@ -684,20 +716,23 @@ const DescribeLogStorageStatisticResponse = models.DescribeLogStorageStatisticRe
 const RegionInfo = models.RegionInfo;
 const DescribeCanFixVulMachineResponse = models.DescribeCanFixVulMachineResponse;
 const CreateSearchTemplateResponse = models.CreateSearchTemplateResponse;
+const UuidHostip = models.UuidHostip;
 const IncidentVertexInfo = models.IncidentVertexInfo;
 const BaselineItemDetect = models.BaselineItemDetect;
 const DescribeVulDefenceSettingResponse = models.DescribeVulDefenceSettingResponse;
 const DescribeAssetProcessCountResponse = models.DescribeAssetProcessCountResponse;
-const DescribeEmergencyResponseListRequest = models.DescribeEmergencyResponseListRequest;
+const RansomDefenseStrategyMachineInfo = models.RansomDefenseStrategyMachineInfo;
 const DescribeScanStateResponse = models.DescribeScanStateResponse;
 const BaselineHostDetect = models.BaselineHostDetect;
 const EditTagsRequest = models.EditTagsRequest;
+const DescribeRaspEventTCSSResponse = models.DescribeRaspEventTCSSResponse;
 const DeleteReverseShellRulesRequest = models.DeleteReverseShellRulesRequest;
 const ScreenVulInfo = models.ScreenVulInfo;
 const UntrustMalwaresRequest = models.UntrustMalwaresRequest;
 const DescribeScreenEventsCntRequest = models.DescribeScreenEventsCntRequest;
 const DescribeBaselineEffectHostListRequest = models.DescribeBaselineEffectHostListRequest;
-const WebHookCustomField = models.WebHookCustomField;
+const DescribeRaspEventDetailCWPRequest = models.DescribeRaspEventDetailCWPRequest;
+const RaspAttackTypeListItem = models.RaspAttackTypeListItem;
 const DescribeDefenceEventDetailResponse = models.DescribeDefenceEventDetailResponse;
 const ExportBaselineHostDetectListRequest = models.ExportBaselineHostDetectListRequest;
 const DescribeAssetDatabaseInfoRequest = models.DescribeAssetDatabaseInfoRequest;
@@ -720,9 +755,9 @@ const ExportRiskProcessEventsRequest = models.ExportRiskProcessEventsRequest;
 const DescribeLogKafkaDeliverInfoRequest = models.DescribeLogKafkaDeliverInfoRequest;
 const DescribeBaselineWeakPasswordListResponse = models.DescribeBaselineWeakPasswordListResponse;
 const DeleteNonlocalLoginPlacesResponse = models.DeleteNonlocalLoginPlacesResponse;
-const ExportAssetMachineDetailResponse = models.ExportAssetMachineDetailResponse;
 const ModifyLogKafkaAccessResponse = models.ModifyLogKafkaAccessResponse;
 const DeleteMalwareScanTaskResponse = models.DeleteMalwareScanTaskResponse;
+const ModifyLicenseBindsRequest = models.ModifyLicenseBindsRequest;
 const MalwareWhiteListInfo = models.MalwareWhiteListInfo;
 const DescribeBaselineDetailResponse = models.DescribeBaselineDetailResponse;
 const DescribeWebHookReceiverResponse = models.DescribeWebHookReceiverResponse;
@@ -739,14 +774,13 @@ const DescribeRansomDefenseRollBackTaskListResponse = models.DescribeRansomDefen
 const VertexDetail = models.VertexDetail;
 const ExportAssetEnvListRequest = models.ExportAssetEnvListRequest;
 const DescribeVulEffectHostListResponse = models.DescribeVulEffectHostListResponse;
-const RegionListDetail = models.RegionListDetail;
+const RaspEvent = models.RaspEvent;
 const DescribeSearchLogsRequest = models.DescribeSearchLogsRequest;
 const ScanVulSettingResponse = models.ScanVulSettingResponse;
 const DescribeAssetJarInfoResponse = models.DescribeAssetJarInfoResponse;
 const DescribeVulInfoCvssRequest = models.DescribeVulInfoCvssRequest;
 const SwitchBashRulesResponse = models.SwitchBashRulesResponse;
 const DescribeFileTamperRulesResponse = models.DescribeFileTamperRulesResponse;
-const DescribeComponentStatisticsRequest = models.DescribeComponentStatisticsRequest;
 const DescribeAssetProcessCountRequest = models.DescribeAssetProcessCountRequest;
 const ModifyBanStatusResponse = models.ModifyBanStatusResponse;
 const DescribeLoginWhiteListResponse = models.DescribeLoginWhiteListResponse;
@@ -778,7 +812,7 @@ const DescribeAttackTrendsResponse = models.DescribeAttackTrendsResponse;
 const DescribeVulTrendRequest = models.DescribeVulTrendRequest;
 const ModifyLogStorageConfigResponse = models.ModifyLogStorageConfigResponse;
 const DescribeAttackStatisticsRequest = models.DescribeAttackStatisticsRequest;
-const ExportFileTamperRulesRequest = models.ExportFileTamperRulesRequest;
+const DescribeMemShellRulesResponse = models.DescribeMemShellRulesResponse;
 const AddLoginWhiteListsResponse = models.AddLoginWhiteListsResponse;
 const ModifyLogKafkaStateRequest = models.ModifyLogKafkaStateRequest;
 const AssetWebServiceBaseInfo = models.AssetWebServiceBaseInfo;
@@ -796,16 +830,18 @@ const ExportAssetMachineListRequest = models.ExportAssetMachineListRequest;
 const ExportInfo = models.ExportInfo;
 const DescribeScreenProtectionStatResponse = models.DescribeScreenProtectionStatResponse;
 const ExportBaselineItemDetectListRequest = models.ExportBaselineItemDetectListRequest;
-const DescribeAttackSourceRequest = models.DescribeAttackSourceRequest;
+const CreateNetAttackWhiteListRequest = models.CreateNetAttackWhiteListRequest;
 const DescribeMalwareInfoResponse = models.DescribeMalwareInfoResponse;
+const SkillInfo = models.SkillInfo;
 const DeleteRiskDnsPolicyResponse = models.DeleteRiskDnsPolicyResponse;
 const DuplicateHosts = models.DuplicateHosts;
 const DescribeLogStorageRecordRequest = models.DescribeLogStorageRecordRequest;
 const ExportBaselineHostDetectListResponse = models.ExportBaselineHostDetectListResponse;
 const MalwareWhiteListAffectEvent = models.MalwareWhiteListAffectEvent;
+const ReverseShellRuleAggregation = models.ReverseShellRuleAggregation;
 const CreateBanWhiteListRequest = models.CreateBanWhiteListRequest;
 const DescribeMachineRiskCntRequest = models.DescribeMachineRiskCntRequest;
-const ExportRansomDefenseStrategyMachinesResponse = models.ExportRansomDefenseStrategyMachinesResponse;
+const ExportRansomDefenseMachineListRequest = models.ExportRansomDefenseMachineListRequest;
 const BaselineRuleTopInfo = models.BaselineRuleTopInfo;
 const ExportAssetWebFrameListRequest = models.ExportAssetWebFrameListRequest;
 const DescribeSecurityBroadcastsRequest = models.DescribeSecurityBroadcastsRequest;
@@ -819,18 +855,18 @@ const DeleteRiskDnsPolicyRequest = models.DeleteRiskDnsPolicyRequest;
 const DescribeBruteAttackRulesRequest = models.DescribeBruteAttackRulesRequest;
 const DescribeProcessStatisticsResponse = models.DescribeProcessStatisticsResponse;
 const DescribeLogIndexResponse = models.DescribeLogIndexResponse;
-const DescribeAttackVulTypeListResponse = models.DescribeAttackVulTypeListResponse;
+const DeleteNonlocalLoginPlacesRequest = models.DeleteNonlocalLoginPlacesRequest;
 const VulEffectModuleInfo = models.VulEffectModuleInfo;
 const DescribeAssetWebAppPluginListResponse = models.DescribeAssetWebAppPluginListResponse;
 const DescribeAssetWebAppCountRequest = models.DescribeAssetWebAppCountRequest;
 const DescribeAssetTypesRequest = models.DescribeAssetTypesRequest;
 const BaselineEventLevelInfo = models.BaselineEventLevelInfo;
-const DescribeMalwareFileRequest = models.DescribeMalwareFileRequest;
+const ExportWindowsPatchListResponse = models.ExportWindowsPatchListResponse;
 const DescribeLoginWhiteCombinedListRequest = models.DescribeLoginWhiteCombinedListRequest;
 const Strategy = models.Strategy;
+const ModifyRiskDnsPolicyStatusResponse = models.ModifyRiskDnsPolicyStatusResponse;
 const DeleteSearchTemplateResponse = models.DeleteSearchTemplateResponse;
 const DeleteBashPoliciesResponse = models.DeleteBashPoliciesResponse;
-const DescribeEmergencyResponseListResponse = models.DescribeEmergencyResponseListResponse;
 const ScreenProtectionCnt = models.ScreenProtectionCnt;
 const AssetPlanTask = models.AssetPlanTask;
 const VulDefenceOverview = models.VulDefenceOverview;
@@ -856,18 +892,21 @@ const AssetLoadSummary = models.AssetLoadSummary;
 const DescribeMalwareTimingScanSettingResponse = models.DescribeMalwareTimingScanSettingResponse;
 const DescribeHostLoginListRequest = models.DescribeHostLoginListRequest;
 const ModifyRansomDefenseStrategyStatusResponse = models.ModifyRansomDefenseStrategyStatusResponse;
-const ExportRansomDefenseStrategyListRequest = models.ExportRansomDefenseStrategyListRequest;
+const ModifyLoginWhiteInfoResponse = models.ModifyLoginWhiteInfoResponse;
 const Machine = models.Machine;
+const ExportPatchEffectHostListRequest = models.ExportPatchEffectHostListRequest;
 const FileTamperRule = models.FileTamperRule;
 const SecurityTrend = models.SecurityTrend;
 const ScanTaskAgainResponse = models.ScanTaskAgainResponse;
 const DescribeAssetWebServiceProcessListRequest = models.DescribeAssetWebServiceProcessListRequest;
 const DescribeScreenMachinesResponse = models.DescribeScreenMachinesResponse;
-const LicenseDetail = models.LicenseDetail;
-const PrivilegeRule = models.PrivilegeRule;
+const DescribeRaspMemShellDetailTCSSResponse = models.DescribeRaspMemShellDetailTCSSResponse;
+const YDRaspBlackWhiteListItem = models.YDRaspBlackWhiteListItem;
+const ExportBashEventsResponse = models.ExportBashEventsResponse;
 const ScanVulSettingRequest = models.ScanVulSettingRequest;
 const ExportVulDetectionExcelRequest = models.ExportVulDetectionExcelRequest;
 const CreateEmergencyVulScanRequest = models.CreateEmergencyVulScanRequest;
+const StopBaselineDetectRequest = models.StopBaselineDetectRequest;
 const ModifyWebHookRuleStatusResponse = models.ModifyWebHookRuleStatusResponse;
 const ExportVulEffectHostListResponse = models.ExportVulEffectHostListResponse;
 const DescribeAssetWebServiceCountResponse = models.DescribeAssetWebServiceCountResponse;
@@ -887,8 +926,10 @@ const DescribeWebHookRulesRequest = models.DescribeWebHookRulesRequest;
 const ModifyMalwareWhiteListResponse = models.ModifyMalwareWhiteListResponse;
 const DescribeAssetPortInfoListResponse = models.DescribeAssetPortInfoListResponse;
 const DescribeMalwareRiskOverviewRequest = models.DescribeMalwareRiskOverviewRequest;
+const DescribeLoginTypeGlobalConfResponse = models.DescribeLoginTypeGlobalConfResponse;
 const DescribeMaliciousRequestWhiteListResponse = models.DescribeMaliciousRequestWhiteListResponse;
 const DescribeBaselinePolicyListRequest = models.DescribeBaselinePolicyListRequest;
+const RegionListDetail = models.RegionListDetail;
 const VulDefenceEventDetail = models.VulDefenceEventDetail;
 const DeleteBruteAttacksResponse = models.DeleteBruteAttacksResponse;
 const ExportTasksResponse = models.ExportTasksResponse;
@@ -919,6 +960,7 @@ const JavaMemShellPluginInfo = models.JavaMemShellPluginInfo;
 const DescribeAssetDatabaseListResponse = models.DescribeAssetDatabaseListResponse;
 const ExportMalwaresRequest = models.ExportMalwaresRequest;
 const DescribeProcessStatisticsRequest = models.DescribeProcessStatisticsRequest;
+const DescribeRaspPluginListRequest = models.DescribeRaspPluginListRequest;
 const RiskDnsList = models.RiskDnsList;
 const SyncAssetScanResponse = models.SyncAssetScanResponse;
 const MalwareRiskOverview = models.MalwareRiskOverview;
@@ -929,19 +971,25 @@ const DescribeScreenBroadcastsResponse = models.DescribeScreenBroadcastsResponse
 const CreateBaselineStrategyRequest = models.CreateBaselineStrategyRequest;
 const DescribeSecurityTrendsRequest = models.DescribeSecurityTrendsRequest;
 const VulFixStatusHostInfo = models.VulFixStatusHostInfo;
-const AttackSourceEvent = models.AttackSourceEvent;
+const DescribeAttackVulTypeListResponse = models.DescribeAttackVulTypeListResponse;
 const DescribePrivilegeRulesResponse = models.DescribePrivilegeRulesResponse;
 const DescribeReverseShellEventsResponse = models.DescribeReverseShellEventsResponse;
 const DescribeAssetAppCountRequest = models.DescribeAssetAppCountRequest;
+const RaspEventDetail = models.RaspEventDetail;
 const DescribeMaliciousRequestWhiteListRequest = models.DescribeMaliciousRequestWhiteListRequest;
+const NetAttackTopInfo = models.NetAttackTopInfo;
 const DescribeBashEventsNewRequest = models.DescribeBashEventsNewRequest;
+const EventPatchInfo = models.EventPatchInfo;
 const MalwareRisk = models.MalwareRisk;
 const DescribeAssetPortInfoListRequest = models.DescribeAssetPortInfoListRequest;
 const DescribeVulDefencePluginDetailRequest = models.DescribeVulDefencePluginDetailRequest;
+const ModifyLoginWhiteInfoRequest = models.ModifyLoginWhiteInfoRequest;
+const Tag = models.Tag;
 const DescribeExportMachinesRequest = models.DescribeExportMachinesRequest;
 const DescribeAssetInfoResponse = models.DescribeAssetInfoResponse;
 const WarningObject = models.WarningObject;
 const DescribeAssetPortCountResponse = models.DescribeAssetPortCountResponse;
+const ShellPolicyList = models.ShellPolicyList;
 const DescribeScreenMachinesRequest = models.DescribeScreenMachinesRequest;
 const DeleteMalwareScanTaskRequest = models.DeleteMalwareScanTaskRequest;
 const ScreenInvasion = models.ScreenInvasion;
@@ -950,6 +998,7 @@ const ModifyEventAttackStatusResponse = models.ModifyEventAttackStatusResponse;
 const DescribeIgnoreRuleEffectHostListResponse = models.DescribeIgnoreRuleEffectHostListResponse;
 const FileTamperRuleDetail = models.FileTamperRuleDetail;
 const CreateBaselineStrategyResponse = models.CreateBaselineStrategyResponse;
+const DescribeRaspEventDetailTCSSRequest = models.DescribeRaspEventDetailTCSSRequest;
 const ExportAssetCoreModuleListResponse = models.ExportAssetCoreModuleListResponse;
 const ModifyMachineAutoClearConfigResponse = models.ModifyMachineAutoClearConfigResponse;
 const DescribeHistoryAccountsResponse = models.DescribeHistoryAccountsResponse;
@@ -959,11 +1008,13 @@ const DescribeVulEmergentMsgResponse = models.DescribeVulEmergentMsgResponse;
 const DescribeLoginWhiteListRequest = models.DescribeLoginWhiteListRequest;
 const DescribeAssetDatabaseCountRequest = models.DescribeAssetDatabaseCountRequest;
 const ModifyWarningSettingRequest = models.ModifyWarningSettingRequest;
+const ExportBruteAttacksResponse = models.ExportBruteAttacksResponse;
 const ExportVulDetectionReportResponse = models.ExportVulDetectionReportResponse;
 const DescribeScanScheduleRequest = models.DescribeScanScheduleRequest;
 const CheckFirstScanBaselineRequest = models.CheckFirstScanBaselineRequest;
-const DescribeLicenseGeneralResponse = models.DescribeLicenseGeneralResponse;
+const DescribeAttackTypeRequest = models.DescribeAttackTypeRequest;
 const ScreenEventsCnt = models.ScreenEventsCnt;
+const MemShellRule = models.MemShellRule;
 const DescribeFastAnalysisResponse = models.DescribeFastAnalysisResponse;
 const ScreenMachine = models.ScreenMachine;
 const DescribeAESKeyRequest = models.DescribeAESKeyRequest;
@@ -1001,13 +1052,12 @@ const DescribeScanStateRequest = models.DescribeScanStateRequest;
 const SyncBaselineDetectSummaryResponse = models.SyncBaselineDetectSummaryResponse;
 const ExportFileTamperRulesResponse = models.ExportFileTamperRulesResponse;
 const DescribeAgentInstallCommandResponse = models.DescribeAgentInstallCommandResponse;
+const DescribeRaspLicenseListResponse = models.DescribeRaspLicenseListResponse;
 const DescribeSafeInfoResponse = models.DescribeSafeInfoResponse;
 const AssetEnvBaseInfo = models.AssetEnvBaseInfo;
-const ModifyVulDefenceEventStatusResponse = models.ModifyVulDefenceEventStatusResponse;
 const MalwareInfo = models.MalwareInfo;
-const Place = models.Place;
-const DescribeSecurityProtectionStatRequest = models.DescribeSecurityProtectionStatRequest;
-const LogInfo = models.LogInfo;
+const ClientSettingHost = models.ClientSettingHost;
+const IPAnalyse = models.IPAnalyse;
 const DescribeHostInfoResponse = models.DescribeHostInfoResponse;
 const ModifyWebHookPolicyStatusResponse = models.ModifyWebHookPolicyStatusResponse;
 const ExportRiskDnsPolicyListResponse = models.ExportRiskDnsPolicyListResponse;
@@ -1015,13 +1065,14 @@ const ModifyBruteAttackRulesRequest = models.ModifyBruteAttackRulesRequest;
 const DescribeScreenDefenseTrendsResponse = models.DescribeScreenDefenseTrendsResponse;
 const KeyValueArrayInfo = models.KeyValueArrayInfo;
 const SyncBaselineDetectSummaryRequest = models.SyncBaselineDetectSummaryRequest;
-const DescribeExpertServiceOrderListResponse = models.DescribeExpertServiceOrderListResponse;
 const DeleteReverseShellRulesResponse = models.DeleteReverseShellRulesResponse;
 const DescribeAssetPlanTaskListRequest = models.DescribeAssetPlanTaskListRequest;
 const DescribePrivilegeEventInfoResponse = models.DescribePrivilegeEventInfoResponse;
 const DescribeMachineLicenseDetailRequest = models.DescribeMachineLicenseDetailRequest;
 const VulFixStatusSnapshotInfo = models.VulFixStatusSnapshotInfo;
+const VulFixStatusInfo = models.VulFixStatusInfo;
 const Tags = models.Tags;
+const ExportPatchEffectHostListResponse = models.ExportPatchEffectHostListResponse;
 const DescribeBaselineItemListResponse = models.DescribeBaselineItemListResponse;
 const DescribeMachinesSimpleRequest = models.DescribeMachinesSimpleRequest;
 const StopBaselineDetectResponse = models.StopBaselineDetectResponse;
@@ -1034,18 +1085,21 @@ const ExportFileTamperEventsRequest = models.ExportFileTamperEventsRequest;
 const DeleteLicenseRecordAllResponse = models.DeleteLicenseRecordAllResponse;
 const ModifyBanModeRequest = models.ModifyBanModeRequest;
 const DescribeBaselineDefaultStrategyListResponse = models.DescribeBaselineDefaultStrategyListResponse;
+const DescribePatchInfoRequest = models.DescribePatchInfoRequest;
+const DescribeSkillInfoResponse = models.DescribeSkillInfoResponse;
 const BanWhiteListDetail = models.BanWhiteListDetail;
 const DeleteScanTaskResponse = models.DeleteScanTaskResponse;
-const DescribeScreenGeneralStatResponse = models.DescribeScreenGeneralStatResponse;
+const ModifyFileTamperRuleStatusRequest = models.ModifyFileTamperRuleStatusRequest;
 const EditBashRulesRequest = models.EditBashRulesRequest;
 const RansomDefenseRollbackTask = models.RansomDefenseRollbackTask;
 const DescribeMachineRegionsResponse = models.DescribeMachineRegionsResponse;
-const ExportVulDefenceListRequest = models.ExportVulDefenceListRequest;
-const SecurityButlerInfo = models.SecurityButlerInfo;
+const DescribeLicenseGeneralResponse = models.DescribeLicenseGeneralResponse;
 const WebHookReceiverUsage = models.WebHookReceiverUsage;
 const DestroyOrderRequest = models.DestroyOrderRequest;
 const AssetWebAppBaseInfo = models.AssetWebAppBaseInfo;
 const DescribeRiskDnsInfoRequest = models.DescribeRiskDnsInfoRequest;
+const DescribeWindowsPatchListResponse = models.DescribeWindowsPatchListResponse;
+const UpdateBaselineStrategyRequest = models.UpdateBaselineStrategyRequest;
 const AssetCoreModuleParam = models.AssetCoreModuleParam;
 const DescribeMachineLicenseDetailResponse = models.DescribeMachineLicenseDetailResponse;
 const DescribeHostInfoRequest = models.DescribeHostInfoRequest;
@@ -1068,7 +1122,6 @@ const DescribeAssetWebLocationCountRequest = models.DescribeAssetWebLocationCoun
 const DescribeAssetCoreModuleListRequest = models.DescribeAssetCoreModuleListRequest;
 const VulInfoByCveId = models.VulInfoByCveId;
 const DeleteLogExportResponse = models.DeleteLogExportResponse;
-const TestWebHookRuleResponse = models.TestWebHookRuleResponse;
 const DeleteBanWhiteListResponse = models.DeleteBanWhiteListResponse;
 const DescribeBaselineStrategyDetailResponse = models.DescribeBaselineStrategyDetailResponse;
 const DescribeBaselineListRequest = models.DescribeBaselineListRequest;
@@ -1080,7 +1133,7 @@ const DescribeScreenHostInvasionResponse = models.DescribeScreenHostInvasionResp
 const ExportBaselineFixListResponse = models.ExportBaselineFixListResponse;
 const ExportBashEventsNewResponse = models.ExportBashEventsNewResponse;
 const DescribeMachineDefenseCntRequest = models.DescribeMachineDefenseCntRequest;
-const ModifyFileTamperRuleStatusResponse = models.ModifyFileTamperRuleStatusResponse;
+const ModifyLogKafkaStateResponse = models.ModifyLogKafkaStateResponse;
 const DescribeBaselineTopRequest = models.DescribeBaselineTopRequest;
 const DescribeAssetAppProcessListRequest = models.DescribeAssetAppProcessListRequest;
 const ScanTaskAgainRequest = models.ScanTaskAgainRequest;
@@ -1089,34 +1142,35 @@ const DescribeRecommendedProtectCpuResponse = models.DescribeRecommendedProtectC
 const DescribeLicenseBindListRequest = models.DescribeLicenseBindListRequest;
 const DeleteLicenseRecordAllRequest = models.DeleteLicenseRecordAllRequest;
 const DescribeAccountStatisticsRequest = models.DescribeAccountStatisticsRequest;
-const ExportBruteAttacksResponse = models.ExportBruteAttacksResponse;
+const DescribeSkillInfoRequest = models.DescribeSkillInfoRequest;
 const JavaMemShellDetail = models.JavaMemShellDetail;
 const DescribeBaselineHostDetectListResponse = models.DescribeBaselineHostDetectListResponse;
 const AssetWebLocationPath = models.AssetWebLocationPath;
 const DescribeAssetProcessInfoListResponse = models.DescribeAssetProcessInfoListResponse;
 const ChangeStrategyEnableStatusRequest = models.ChangeStrategyEnableStatusRequest;
+const VulDefenceSetting = models.VulDefenceSetting;
 const ProcessStatistics = models.ProcessStatistics;
 const DescribeScanScheduleResponse = models.DescribeScanScheduleResponse;
-const BaselineDetail = models.BaselineDetail;
+const DescribeAttackTypeResponse = models.DescribeAttackTypeResponse;
 const DescribeVulDefenceOverviewResponse = models.DescribeVulDefenceOverviewResponse;
 const DescribeAssetWebAppListRequest = models.DescribeAssetWebAppListRequest;
-const ExpertServiceOrderInfo = models.ExpertServiceOrderInfo;
+const ModifyFileTamperRuleStatusResponse = models.ModifyFileTamperRuleStatusResponse;
 const DescribeAssetEnvListResponse = models.DescribeAssetEnvListResponse;
 const WebHookRuleDetail = models.WebHookRuleDetail;
 const DescribePrivilegeEventInfoRequest = models.DescribePrivilegeEventInfoRequest;
 const ModifyBashPolicyRequest = models.ModifyBashPolicyRequest;
 const DescribeScreenEmergentMsgResponse = models.DescribeScreenEmergentMsgResponse;
 const DeleteAllJavaMemShellsRequest = models.DeleteAllJavaMemShellsRequest;
-const VulDefencePluginDetail = models.VulDefencePluginDetail;
+const ExportFileTamperRulesRequest = models.ExportFileTamperRulesRequest;
 const DescribeVersionCompareChartRequest = models.DescribeVersionCompareChartRequest;
 const DescribeLicenseRequest = models.DescribeLicenseRequest;
 const DescribeLicenseGeneralRequest = models.DescribeLicenseGeneralRequest;
 const DescribeAssetJarInfoRequest = models.DescribeAssetJarInfoRequest;
 const AccountStatistics = models.AccountStatistics;
 const AssetUserKeyInfo = models.AssetUserKeyInfo;
+const DescribeRaspEventDetailCWPResponse = models.DescribeRaspEventDetailCWPResponse;
 const DescribeMachinesResponse = models.DescribeMachinesResponse;
 const DescribeMalwareWhiteListResponse = models.DescribeMalwareWhiteListResponse;
-const RansomDefenseStrategyMachineInfo = models.RansomDefenseStrategyMachineInfo;
 const DescribeAssetWebLocationListRequest = models.DescribeAssetWebLocationListRequest;
 const DescribeAssetHostTotalCountRequest = models.DescribeAssetHostTotalCountRequest;
 const CreateMaliciousRequestWhiteListResponse = models.CreateMaliciousRequestWhiteListResponse;
@@ -1128,38 +1182,43 @@ const DescribeProVersionStatusRequest = models.DescribeProVersionStatusRequest;
 const DescribeBaselineListResponse = models.DescribeBaselineListResponse;
 const DescribeBashEventsInfoResponse = models.DescribeBashEventsInfoResponse;
 const DescribeJavaMemShellPluginInfoResponse = models.DescribeJavaMemShellPluginInfoResponse;
-const VulEffectHostList = models.VulEffectHostList;
 const DescribeAlarmIncidentNodesResponse = models.DescribeAlarmIncidentNodesResponse;
-const DescribeExpertServiceOrderListRequest = models.DescribeExpertServiceOrderListRequest;
+const PrivilegeRule = models.PrivilegeRule;
 const DescribeFileTamperRulesRequest = models.DescribeFileTamperRulesRequest;
 const DescribeJavaMemShellInfoResponse = models.DescribeJavaMemShellInfoResponse;
+const DescribeReverseShellRulesAggregationRequest = models.DescribeReverseShellRulesAggregationRequest;
+const ModifyRaspRulesResponse = models.ModifyRaspRulesResponse;
 const DescribeRecommendedProtectCpuRequest = models.DescribeRecommendedProtectCpuRequest;
 const DescribeABTestConfigResponse = models.DescribeABTestConfigResponse;
 const RansomDefenseBackup = models.RansomDefenseBackup;
 const DescribeProVersionStatusResponse = models.DescribeProVersionStatusResponse;
 const SearchTemplate = models.SearchTemplate;
 const DescribeVulFixStatusResponse = models.DescribeVulFixStatusResponse;
+const DeleteMalwareWhiteListRequest = models.DeleteMalwareWhiteListRequest;
 const DescribeGeneralStatResponse = models.DescribeGeneralStatResponse;
 const DescribeLogExportsRequest = models.DescribeLogExportsRequest;
 const DeleteMachineTagResponse = models.DeleteMachineTagResponse;
 const UpdateMachineTagsResponse = models.UpdateMachineTagsResponse;
 const BruteAttackInfo = models.BruteAttackInfo;
-const ModifyLoginWhiteInfoRequest = models.ModifyLoginWhiteInfoRequest;
+const CloudFromCnt = models.CloudFromCnt;
 const DescribeVulFixStatusRequest = models.DescribeVulFixStatusRequest;
 const UpdateMachineTagsRequest = models.UpdateMachineTagsRequest;
 const DescribeBaselineItemDetectListResponse = models.DescribeBaselineItemDetectListResponse;
-const DescribeScanTaskDetailsResponse = models.DescribeScanTaskDetailsResponse;
-const UpdateBaselineStrategyRequest = models.UpdateBaselineStrategyRequest;
+const DescribeReverseShellSystemPolicyConfigRequest = models.DescribeReverseShellSystemPolicyConfigRequest;
+const ModifyReverseShellRulesAggregationRequest = models.ModifyReverseShellRulesAggregationRequest;
 const DescribeHostLoginListResponse = models.DescribeHostLoginListResponse;
 const DescribePublicProxyInstallCommandResponse = models.DescribePublicProxyInstallCommandResponse;
 const DescribeAttackTopRequest = models.DescribeAttackTopRequest;
 const ModifyRiskEventsStatusResponse = models.ModifyRiskEventsStatusResponse;
+const DescribeInjectRiskyServiceSwitchResponse = models.DescribeInjectRiskyServiceSwitchResponse;
+const EmergencyVul = models.EmergencyVul;
+const DescribeRaspRulesResponse = models.DescribeRaspRulesResponse;
 const DescribeVulCveIdInfoRequest = models.DescribeVulCveIdInfoRequest;
 const ModifyJavaMemShellsStatusResponse = models.ModifyJavaMemShellsStatusResponse;
 const AssetPortBaseInfo = models.AssetPortBaseInfo;
 const DescribeAssetWebLocationInfoRequest = models.DescribeAssetWebLocationInfoRequest;
 const DescribeAlarmVertexIdRequest = models.DescribeAlarmVertexIdRequest;
-const DescribeAttackSourceEventsRequest = models.DescribeAttackSourceEventsRequest;
+const DescribeScreenGeneralStatResponse = models.DescribeScreenGeneralStatResponse;
 const DescribeAssetInitServiceListResponse = models.DescribeAssetInitServiceListResponse;
 const ModifyBaselinePolicyRequest = models.ModifyBaselinePolicyRequest;
 const DescribeBaselineHostDetectListRequest = models.DescribeBaselineHostDetectListRequest;
@@ -1169,20 +1228,19 @@ const DescribeAssetWebFrameListResponse = models.DescribeAssetWebFrameListRespon
 const DescribeRansomDefenseStrategyDetailRequest = models.DescribeRansomDefenseStrategyDetailRequest;
 const ModifyRiskDnsPolicyRequest = models.ModifyRiskDnsPolicyRequest;
 const DescribeWarningListResponse = models.DescribeWarningListResponse;
-const DescribeAttackSourceEventsResponse = models.DescribeAttackSourceEventsResponse;
 const ClearLocalStorageRequest = models.ClearLocalStorageRequest;
 const DescribeAssetUserListRequest = models.DescribeAssetUserListRequest;
 const DeleteBaselineStrategyRequest = models.DeleteBaselineStrategyRequest;
 const DescribeAssetSystemPackageListRequest = models.DescribeAssetSystemPackageListRequest;
-const DescribeVulHostTopRequest = models.DescribeVulHostTopRequest;
+const DescribeRaspEventCWPResponse = models.DescribeRaspEventCWPResponse;
+const DescribeRaspPluginListResponse = models.DescribeRaspPluginListResponse;
 const MachineTag = models.MachineTag;
 const DescribeSecurityEventsCntResponse = models.DescribeSecurityEventsCntResponse;
 const Filters = models.Filters;
 const DescribeAssetWebServiceInfoListRequest = models.DescribeAssetWebServiceInfoListRequest;
 const CreateSearchLogRequest = models.CreateSearchLogRequest;
 const DescribeSearchTemplatesRequest = models.DescribeSearchTemplatesRequest;
-const CancelIgnoreVulRequest = models.CancelIgnoreVulRequest;
-const ExportAssetUserListResponse = models.ExportAssetUserListResponse;
+const DescribePatchEffectHostListRequest = models.DescribePatchEffectHostListRequest;
 
 
 /**
@@ -1196,6 +1254,17 @@ class CwpClient extends AbstractClient {
     }
     
     /**
+     * This API is used to query the application protection allowlist attack type list.
+     * @param {DescribeAttackTypeRequest} req
+     * @param {function(string, DescribeAttackTypeResponse):void} cb
+     * @public
+     */
+    DescribeAttackType(req, cb) {
+        let resp = new DescribeAttackTypeResponse();
+        this.request("DescribeAttackType", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain the list of asset management ports.
      * @param {DescribeAssetPortInfoListRequest} req
      * @param {function(string, DescribeAssetPortInfoListResponse):void} cb
@@ -1204,19 +1273,6 @@ class CwpClient extends AbstractClient {
     DescribeAssetPortInfoList(req, cb) {
         let resp = new DescribeAssetPortInfoListResponse();
         this.request("DescribeAssetPortInfoList", req, resp, cb);
-    }
-
-    /**
-     * 接口已无效
-
-This API is used to obtain the data of the component statistics list.
-     * @param {DescribeComponentStatisticsRequest} req
-     * @param {function(string, DescribeComponentStatisticsResponse):void} cb
-     * @public
-     */
-    DescribeComponentStatistics(req, cb) {
-        let resp = new DescribeComponentStatisticsResponse();
-        this.request("DescribeComponentStatistics", req, resp, cb);
     }
 
     /**
@@ -1484,14 +1540,14 @@ This API is used to obtain the data of the component statistics list.
     }
 
     /**
-     * This API is used to query the list of asset management environment variables.
-     * @param {DescribeAssetEnvListRequest} req
-     * @param {function(string, DescribeAssetEnvListResponse):void} cb
+     * This API is used to export asset management host resource details.
+     * @param {ExportAssetMachineDetailRequest} req
+     * @param {function(string, ExportAssetMachineDetailResponse):void} cb
      * @public
      */
-    DescribeAssetEnvList(req, cb) {
-        let resp = new DescribeAssetEnvListResponse();
-        this.request("DescribeAssetEnvList", req, resp, cb);
+    ExportAssetMachineDetail(req, cb) {
+        let resp = new ExportAssetMachineDetailResponse();
+        this.request("ExportAssetMachineDetail", req, resp, cb);
     }
 
     /**
@@ -1627,6 +1683,17 @@ This API is used to obtain the data of the component statistics list.
     }
 
     /**
+     * Edit the maximum cpu configuration for vulnerability defense
+     * @param {ModifyRaspMaxCpuRequest} req
+     * @param {function(string, ModifyRaspMaxCpuResponse):void} cb
+     * @public
+     */
+    ModifyRaspMaxCpu(req, cb) {
+        let resp = new ModifyRaspMaxCpuResponse();
+        this.request("ModifyRaspMaxCpu", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete all authorization records.
      * @param {DeleteLicenseRecordAllRequest} req
      * @param {function(string, DeleteLicenseRecordAllResponse):void} cb
@@ -1668,6 +1735,17 @@ This API is used to obtain the data of the component statistics list.
     ModifyLoginWhiteRecord(req, cb) {
         let resp = new ModifyLoginWhiteRecordResponse();
         this.request("ModifyLoginWhiteRecord", req, resp, cb);
+    }
+
+    /**
+     * Patch details
+     * @param {DescribeSkillInfoRequest} req
+     * @param {function(string, DescribeSkillInfoResponse):void} cb
+     * @public
+     */
+    DescribeSkillInfo(req, cb) {
+        let resp = new DescribeSkillInfoResponse();
+        this.request("DescribeSkillInfo", req, resp, cb);
     }
 
     /**
@@ -1770,14 +1848,14 @@ This API is used to obtain the data of the component statistics list.
     }
 
     /**
-     * This API is used to delete the cross-region log-in allowlist rules.
-     * @param {DeleteLoginWhiteListRequest} req
-     * @param {function(string, DeleteLoginWhiteListResponse):void} cb
+     * This API is used to obtain the details of the WeCom chatbot rules.
+     * @param {DescribeWebHookRuleRequest} req
+     * @param {function(string, DescribeWebHookRuleResponse):void} cb
      * @public
      */
-    DeleteLoginWhiteList(req, cb) {
-        let resp = new DeleteLoginWhiteListResponse();
-        this.request("DeleteLoginWhiteList", req, resp, cb);
+    DescribeWebHookRule(req, cb) {
+        let resp = new DescribeWebHookRuleResponse();
+        this.request("DescribeWebHookRule", req, resp, cb);
     }
 
     /**
@@ -1789,6 +1867,17 @@ This API is used to obtain the data of the component statistics list.
     DeleteLogExport(req, cb) {
         let resp = new DeleteLogExportResponse();
         this.request("DeleteLogExport", req, resp, cb);
+    }
+
+    /**
+     * Query the information list of affected hosts by a patch
+     * @param {DescribePatchEffectHostListRequest} req
+     * @param {function(string, DescribePatchEffectHostListResponse):void} cb
+     * @public
+     */
+    DescribePatchEffectHostList(req, cb) {
+        let resp = new DescribePatchEffectHostListResponse();
+        this.request("DescribePatchEffectHostList", req, resp, cb);
     }
 
     /**
@@ -1825,14 +1914,14 @@ This API is used to obtain the data of the component statistics list.
     }
 
     /**
-     * This API is used to delete the policy by baseline policy ID.
-     * @param {DeleteBaselineStrategyRequest} req
-     * @param {function(string, DeleteBaselineStrategyResponse):void} cb
+     * This API is used to obtain asset management host resource details.
+     * @param {DescribeAssetMachineDetailRequest} req
+     * @param {function(string, DescribeAssetMachineDetailResponse):void} cb
      * @public
      */
-    DeleteBaselineStrategy(req, cb) {
-        let resp = new DeleteBaselineStrategyResponse();
-        this.request("DeleteBaselineStrategy", req, resp, cb);
+    DescribeAssetMachineDetail(req, cb) {
+        let resp = new DescribeAssetMachineDetailResponse();
+        this.request("DescribeAssetMachineDetail", req, resp, cb);
     }
 
     /**
@@ -1855,6 +1944,28 @@ This API is used to obtain the data of the component statistics list.
     DescribeMachineLicenseDetail(req, cb) {
         let resp = new DescribeMachineLicenseDetailResponse();
         this.request("DescribeMachineLicenseDetail", req, resp, cb);
+    }
+
+    /**
+     * Search patch information list
+     * @param {DescribeWindowsPatchListRequest} req
+     * @param {function(string, DescribeWindowsPatchListResponse):void} cb
+     * @public
+     */
+    DescribeWindowsPatchList(req, cb) {
+        let resp = new DescribeWindowsPatchListResponse();
+        this.request("DescribeWindowsPatchList", req, resp, cb);
+    }
+
+    /**
+     * Editing Reverse Shell Rules. (Supporting Selecting Multiple Servers)
+     * @param {ModifyReverseShellRulesAggregationRequest} req
+     * @param {function(string, ModifyReverseShellRulesAggregationResponse):void} cb
+     * @public
+     */
+    ModifyReverseShellRulesAggregation(req, cb) {
+        let resp = new ModifyReverseShellRulesAggregationResponse();
+        this.request("ModifyReverseShellRulesAggregation", req, resp, cb);
     }
 
     /**
@@ -2067,14 +2178,14 @@ This API is used to obtain the data of the component statistics list.
     }
 
     /**
-     * This API is used to obtain the list of Web sites.
-     * @param {DescribeAssetWebLocationListRequest} req
-     * @param {function(string, DescribeAssetWebLocationListResponse):void} cb
+     * This API is used to obtain the statistics of security events.
+     * @param {DescribeSecurityEventStatRequest} req
+     * @param {function(string, DescribeSecurityEventStatResponse):void} cb
      * @public
      */
-    DescribeAssetWebLocationList(req, cb) {
-        let resp = new DescribeAssetWebLocationListResponse();
-        this.request("DescribeAssetWebLocationList", req, resp, cb);
+    DescribeSecurityEventStat(req, cb) {
+        let resp = new DescribeSecurityEventStatResponse();
+        this.request("DescribeSecurityEventStat", req, resp, cb);
     }
 
     /**
@@ -2232,6 +2343,17 @@ This API is used to obtain the data of the component statistics list.
     }
 
     /**
+     * This API is used to obtain the list of Reverse Shell rules.
+     * @param {DescribeMemShellRulesRequest} req
+     * @param {function(string, DescribeMemShellRulesResponse):void} cb
+     * @public
+     */
+    DescribeMemShellRules(req, cb) {
+        let resp = new DescribeMemShellRulesResponse();
+        this.request("DescribeMemShellRules", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain Top5 resources of various types.
      * @param {DescribeAssetTypeTopRequest} req
      * @param {function(string, DescribeAssetTypeTopResponse):void} cb
@@ -2240,6 +2362,17 @@ This API is used to obtain the data of the component statistics list.
     DescribeAssetTypeTop(req, cb) {
         let resp = new DescribeAssetTypeTopResponse();
         this.request("DescribeAssetTypeTop", req, resp, cb);
+    }
+
+    /**
+     * Retrieve the vulnerability list of the vulnerability defense allowlist
+     * @param {DescribeRaspRuleVulsRequest} req
+     * @param {function(string, DescribeRaspRuleVulsResponse):void} cb
+     * @public
+     */
+    DescribeRaspRuleVuls(req, cb) {
+        let resp = new DescribeRaspRuleVulsResponse();
+        this.request("DescribeRaspRuleVuls", req, resp, cb);
     }
 
     /**
@@ -2350,6 +2483,17 @@ This API is used to obtain the data of the component statistics list.
     DescribeVersionCompareChart(req, cb) {
         let resp = new DescribeVersionCompareChartResponse();
         this.request("DescribeVersionCompareChart", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the vulnerability defense overview information, including event trend and plugin enabling status.
+     * @param {RaspEventOverviewRequest} req
+     * @param {function(string, RaspEventOverviewResponse):void} cb
+     * @public
+     */
+    RaspEventOverview(req, cb) {
+        let resp = new RaspEventOverviewResponse();
+        this.request("RaspEventOverview", req, resp, cb);
     }
 
     /**
@@ -2529,6 +2673,17 @@ This API is used to obtain the data of the component statistics list.
     }
 
     /**
+     * This API is used to obtain the list of Web sites.
+     * @param {DescribeAssetWebLocationListRequest} req
+     * @param {function(string, DescribeAssetWebLocationListResponse):void} cb
+     * @public
+     */
+    DescribeAssetWebLocationList(req, cb) {
+        let resp = new DescribeAssetWebLocationListResponse();
+        this.request("DescribeAssetWebLocationList", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain log types, and the returned result of this API indicates temporarily filterable log types.
      * @param {DescribeLogTypeRequest} req
      * @param {function(string, DescribeLogTypeResponse):void} cb
@@ -2661,19 +2816,6 @@ This API is used to obtain the data of the component statistics list.
     }
 
     /**
-     * DescribeAttackEvents 代替
-
-This API is used to display the list of network attack logs in pagination.
-     * @param {DescribeAttackLogsRequest} req
-     * @param {function(string, DescribeAttackLogsResponse):void} cb
-     * @public
-     */
-    DescribeAttackLogs(req, cb) {
-        let resp = new DescribeAttackLogsResponse();
-        this.request("DescribeAttackLogs", req, resp, cb);
-    }
-
-    /**
      * This API is used to modify the alarm policy switch.
      * @param {ModifyWebHookPolicyStatusRequest} req
      * @param {function(string, ModifyWebHookPolicyStatusResponse):void} cb
@@ -2693,6 +2835,17 @@ This API is used to display the list of network attack logs in pagination.
     ExportAssetAppList(req, cb) {
         let resp = new ExportAssetAppListResponse();
         this.request("ExportAssetAppList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query application protection event lists
+     * @param {DescribeRaspEventTCSSRequest} req
+     * @param {function(string, DescribeRaspEventTCSSResponse):void} cb
+     * @public
+     */
+    DescribeRaspEventTCSS(req, cb) {
+        let resp = new DescribeRaspEventTCSSResponse();
+        this.request("DescribeRaspEventTCSS", req, resp, cb);
     }
 
     /**
@@ -2759,6 +2912,17 @@ This API is used to display the list of network attack logs in pagination.
     ModifyEventAttackStatus(req, cb) {
         let resp = new ModifyEventAttackStatusResponse();
         this.request("ModifyEventAttackStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of vulnerability defense settings.
+     * @param {DescribeVulDefenceSettingListRequest} req
+     * @param {function(string, DescribeVulDefenceSettingListResponse):void} cb
+     * @public
+     */
+    DescribeVulDefenceSettingList(req, cb) {
+        let resp = new DescribeVulDefenceSettingListResponse();
+        this.request("DescribeVulDefenceSettingList", req, resp, cb);
     }
 
     /**
@@ -2905,17 +3069,6 @@ This API is used to display the list of network attack logs in pagination.
     }
 
     /**
-     * This API is used to delete the malicious request allowlist.
-     * @param {DeleteMaliciousRequestWhiteListRequest} req
-     * @param {function(string, DeleteMaliciousRequestWhiteListResponse):void} cb
-     * @public
-     */
-    DeleteMaliciousRequestWhiteList(req, cb) {
-        let resp = new DeleteMaliciousRequestWhiteListResponse();
-        this.request("DeleteMaliciousRequestWhiteList", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the information of the host overview.
      * @param {DescribeMachineGeneralRequest} req
      * @param {function(string, DescribeMachineGeneralResponse):void} cb
@@ -3056,6 +3209,17 @@ This API is used to display the list of network attack logs in pagination.
     DescribeAgentInstallCommand(req, cb) {
         let resp = new DescribeAgentInstallCommandResponse();
         this.request("DescribeAgentInstallCommand", req, resp, cb);
+    }
+
+    /**
+     * Application defense event details
+     * @param {DescribeRaspEventDetailCWPRequest} req
+     * @param {function(string, DescribeRaspEventDetailCWPResponse):void} cb
+     * @public
+     */
+    DescribeRaspEventDetailCWP(req, cb) {
+        let resp = new DescribeRaspEventDetailCWPResponse();
+        this.request("DescribeRaspEventDetailCWP", req, resp, cb);
     }
 
     /**
@@ -3279,19 +3443,6 @@ This API is used to display the list of network attack logs in pagination.
     }
 
     /**
-     * 已废弃
-
-This API is used to query attack backtracking events.
-     * @param {DescribeAttackSourceEventsRequest} req
-     * @param {function(string, DescribeAttackSourceEventsResponse):void} cb
-     * @public
-     */
-    DescribeAttackSourceEvents(req, cb) {
-        let resp = new DescribeAttackSourceEventsResponse();
-        this.request("DescribeAttackSourceEvents", req, resp, cb);
-    }
-
-    /**
      * This API is used to obtain Jar package details.
      * @param {DescribeAssetJarInfoRequest} req
      * @param {function(string, DescribeAssetJarInfoResponse):void} cb
@@ -3350,6 +3501,17 @@ This API is used to call the billing payment API for payment since prepaid order
     }
 
     /**
+     * Query application protection allowlist rules
+     * @param {DescribeYDRaspBlackWhiteRequest} req
+     * @param {function(string, DescribeYDRaspBlackWhiteResponse):void} cb
+     * @public
+     */
+    DescribeYDRaspBlackWhite(req, cb) {
+        let resp = new DescribeYDRaspBlackWhiteResponse();
+        this.request("DescribeYDRaspBlackWhite", req, resp, cb);
+    }
+
+    /**
      * This API is used to add or edit tags.
      * @param {EditTagsRequest} req
      * @param {function(string, EditTagsResponse):void} cb
@@ -3358,6 +3520,17 @@ This API is used to call the billing payment API for payment since prepaid order
     EditTags(req, cb) {
         let resp = new EditTagsResponse();
         this.request("EditTags", req, resp, cb);
+    }
+
+    /**
+     * This example shows you how to query the vulnerability defense allowlist.
+     * @param {DescribeRaspRulesRequest} req
+     * @param {function(string, DescribeRaspRulesResponse):void} cb
+     * @public
+     */
+    DescribeRaspRules(req, cb) {
+        let resp = new DescribeRaspRulesResponse();
+        this.request("DescribeRaspRules", req, resp, cb);
     }
 
     /**
@@ -3493,14 +3666,14 @@ This API is used to call the billing payment API for payment since prepaid order
     }
 
     /**
-     * This API is used to modify alarm settings.
-     * @param {ModifyWarningSettingRequest} req
-     * @param {function(string, ModifyWarningSettingResponse):void} cb
+     * Query the configuration of the reverse shell system policy.
+     * @param {DescribeReverseShellSystemPolicyConfigRequest} req
+     * @param {function(string, DescribeReverseShellSystemPolicyConfigResponse):void} cb
      * @public
      */
-    ModifyWarningSetting(req, cb) {
-        let resp = new ModifyWarningSettingResponse();
-        this.request("ModifyWarningSetting", req, resp, cb);
+    DescribeReverseShellSystemPolicyConfig(req, cb) {
+        let resp = new DescribeReverseShellSystemPolicyConfigResponse();
+        this.request("DescribeReverseShellSystemPolicyConfig", req, resp, cb);
     }
 
     /**
@@ -3559,6 +3732,17 @@ This API is used to call the billing payment API for payment since prepaid order
     }
 
     /**
+     * Retrieve Java Webshell scan event list from container perspective
+     * @param {DescribeRaspMemShellListTCSSRequest} req
+     * @param {function(string, DescribeRaspMemShellListTCSSResponse):void} cb
+     * @public
+     */
+    DescribeRaspMemShellListTCSS(req, cb) {
+        let resp = new DescribeRaspMemShellListTCSSResponse();
+        this.request("DescribeRaspMemShellListTCSS", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain the list of baseline detection items.
      * @param {DescribeBaselineItemDetectListRequest} req
      * @param {function(string, DescribeBaselineItemDetectListResponse):void} cb
@@ -3567,6 +3751,28 @@ This API is used to call the billing payment API for payment since prepaid order
     DescribeBaselineItemDetectList(req, cb) {
         let resp = new DescribeBaselineItemDetectListResponse();
         this.request("DescribeBaselineItemDetectList", req, resp, cb);
+    }
+
+    /**
+     * Query the application protection license list
+     * @param {DescribeRaspLicenseListRequest} req
+     * @param {function(string, DescribeRaspLicenseListResponse):void} cb
+     * @public
+     */
+    DescribeRaspLicenseList(req, cb) {
+        let resp = new DescribeRaspLicenseListResponse();
+        this.request("DescribeRaspLicenseList", req, resp, cb);
+    }
+
+    /**
+     * Query java memory horse and rasp whether inject risk service configuration
+     * @param {DescribeInjectRiskyServiceSwitchRequest} req
+     * @param {function(string, DescribeInjectRiskyServiceSwitchResponse):void} cb
+     * @public
+     */
+    DescribeInjectRiskyServiceSwitch(req, cb) {
+        let resp = new DescribeInjectRiskyServiceSwitchResponse();
+        this.request("DescribeInjectRiskyServiceSwitch", req, resp, cb);
     }
 
     /**
@@ -3614,14 +3820,14 @@ This API is used to call the billing payment API for payment since prepaid order
     }
 
     /**
-     * This API is used to add or modify local privilege escalation rules (multiple servers supported).
-     * @param {EditPrivilegeRulesRequest} req
-     * @param {function(string, EditPrivilegeRulesResponse):void} cb
+     * This API is used to delete the malicious request allowlist.
+     * @param {DeleteMaliciousRequestWhiteListRequest} req
+     * @param {function(string, DeleteMaliciousRequestWhiteListResponse):void} cb
      * @public
      */
-    EditPrivilegeRules(req, cb) {
-        let resp = new EditPrivilegeRulesResponse();
-        this.request("EditPrivilegeRules", req, resp, cb);
+    DeleteMaliciousRequestWhiteList(req, cb) {
+        let resp = new DeleteMaliciousRequestWhiteListResponse();
+        this.request("DeleteMaliciousRequestWhiteList", req, resp, cb);
     }
 
     /**
@@ -3724,14 +3930,14 @@ This API is used to call the billing payment API for payment since prepaid order
     }
 
     /**
-     * This API is used to export network attack events.
-     * @param {ExportAttackEventsRequest} req
-     * @param {function(string, ExportAttackEventsResponse):void} cb
+     * This API is used to query application protection event lists
+     * @param {DescribeRaspEventCWPRequest} req
+     * @param {function(string, DescribeRaspEventCWPResponse):void} cb
      * @public
      */
-    ExportAttackEvents(req, cb) {
-        let resp = new ExportAttackEventsResponse();
-        this.request("ExportAttackEvents", req, resp, cb);
+    DescribeRaspEventCWP(req, cb) {
+        let resp = new DescribeRaspEventCWPResponse();
+        this.request("DescribeRaspEventCWP", req, resp, cb);
     }
 
     /**
@@ -3922,6 +4128,17 @@ This API is used to call the billing payment API for payment since prepaid order
     }
 
     /**
+     * Retrieve the host list via QR code log-in
+     * @param {DescribeLoginTypeHostRequest} req
+     * @param {function(string, DescribeLoginTypeHostResponse):void} cb
+     * @public
+     */
+    DescribeLoginTypeHost(req, cb) {
+        let resp = new DescribeLoginTypeHostResponse();
+        this.request("DescribeLoginTypeHost", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of asset management plan tasks.
      * @param {DescribeAssetPlanTaskListRequest} req
      * @param {function(string, DescribeAssetPlanTaskListResponse):void} cb
@@ -3999,6 +4216,17 @@ This API is used to call the billing payment API for payment since prepaid order
     }
 
     /**
+     * This API is used to modify alarm settings.
+     * @param {ModifyWarningSettingRequest} req
+     * @param {function(string, ModifyWarningSettingResponse):void} cb
+     * @public
+     */
+    ModifyWarningSetting(req, cb) {
+        let resp = new ModifyWarningSettingResponse();
+        this.request("ModifyWarningSetting", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the CWPP authorized trial report (only available for console applications).
      * @param {DescribeTrialReportRequest} req
      * @param {function(string, DescribeTrialReportResponse):void} cb
@@ -4007,6 +4235,17 @@ This API is used to call the billing payment API for payment since prepaid order
     DescribeTrialReport(req, cb) {
         let resp = new DescribeTrialReportResponse();
         this.request("DescribeTrialReport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain vulnerability defense policies and event statistics.
+     * @param {DescribeVulDefenceOverviewCountRequest} req
+     * @param {function(string, DescribeVulDefenceOverviewCountResponse):void} cb
+     * @public
+     */
+    DescribeVulDefenceOverviewCount(req, cb) {
+        let resp = new DescribeVulDefenceOverviewCountResponse();
+        this.request("DescribeVulDefenceOverviewCount", req, resp, cb);
     }
 
     /**
@@ -4032,6 +4271,17 @@ This API is used to call the billing payment API for payment since prepaid order
     }
 
     /**
+     * Retrieve application protection Java Webshell scan event details from container perspective
+     * @param {DescribeRaspMemShellDetailTCSSRequest} req
+     * @param {function(string, DescribeRaspMemShellDetailTCSSResponse):void} cb
+     * @public
+     */
+    DescribeRaspMemShellDetailTCSS(req, cb) {
+        let resp = new DescribeRaspMemShellDetailTCSSResponse();
+        this.request("DescribeRaspMemShellDetailTCSS", req, resp, cb);
+    }
+
+    /**
      * This API is used to add cross-region log-in allowlists in batches.
      * @param {AddLoginWhiteListsRequest} req
      * @param {function(string, AddLoginWhiteListsResponse):void} cb
@@ -4040,19 +4290,6 @@ This API is used to call the billing payment API for payment since prepaid order
     AddLoginWhiteLists(req, cb) {
         let resp = new AddLoginWhiteListsResponse();
         this.request("AddLoginWhiteLists", req, resp, cb);
-    }
-
-    /**
-     * 接口已废弃
-
-This API is used to obtain the index list.
-     * @param {DescribeIndexListRequest} req
-     * @param {function(string, DescribeIndexListResponse):void} cb
-     * @public
-     */
-    DescribeIndexList(req, cb) {
-        let resp = new DescribeIndexListResponse();
-        this.request("DescribeIndexList", req, resp, cb);
     }
 
     /**
@@ -4141,19 +4378,6 @@ This API is used to obtain the index list.
     DescribeAssetAppList(req, cb) {
         let resp = new DescribeAssetAppListResponse();
         this.request("DescribeAssetAppList", req, resp, cb);
-    }
-
-    /**
-     * 已废弃
-
-This API is used to backtrack attacks.
-     * @param {DescribeAttackSourceRequest} req
-     * @param {function(string, DescribeAttackSourceResponse):void} cb
-     * @public
-     */
-    DescribeAttackSource(req, cb) {
-        let resp = new DescribeAttackSourceResponse();
-        this.request("DescribeAttackSource", req, resp, cb);
     }
 
     /**
@@ -4278,6 +4502,17 @@ This API is used to backtrack attacks.
     }
 
     /**
+     * This API is used to add or modify local privilege escalation rules (multiple servers supported).
+     * @param {EditPrivilegeRulesRequest} req
+     * @param {function(string, EditPrivilegeRulesResponse):void} cb
+     * @public
+     */
+    EditPrivilegeRules(req, cb) {
+        let resp = new EditPrivilegeRulesResponse();
+        this.request("EditPrivilegeRules", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain the list of abnormal processes.
      * @param {DescribeRiskProcessEventsRequest} req
      * @param {function(string, DescribeRiskProcessEventsResponse):void} cb
@@ -4286,17 +4521,6 @@ This API is used to backtrack attacks.
     DescribeRiskProcessEvents(req, cb) {
         let resp = new DescribeRiskProcessEventsResponse();
         this.request("DescribeRiskProcessEvents", req, resp, cb);
-    }
-
-    /**
-     * This API is used to obtain available order details.
-     * @param {DescribeAvailableExpertServiceDetailRequest} req
-     * @param {function(string, DescribeAvailableExpertServiceDetailResponse):void} cb
-     * @public
-     */
-    DescribeAvailableExpertServiceDetail(req, cb) {
-        let resp = new DescribeAvailableExpertServiceDetailResponse();
-        this.request("DescribeAvailableExpertServiceDetail", req, resp, cb);
     }
 
     /**
@@ -4333,17 +4557,6 @@ This API is used to backtrack attacks.
     }
 
     /**
-     * This API is used to obtain the statistics of security events.
-     * @param {DescribeSecurityEventStatRequest} req
-     * @param {function(string, DescribeSecurityEventStatResponse):void} cb
-     * @public
-     */
-    DescribeSecurityEventStat(req, cb) {
-        let resp = new DescribeSecurityEventStatResponse();
-        this.request("DescribeSecurityEventStat", req, resp, cb);
-    }
-
-    /**
      * This API is used to obtain the number of all databases.
      * @param {DescribeAssetDatabaseCountRequest} req
      * @param {function(string, DescribeAssetDatabaseCountResponse):void} cb
@@ -4352,6 +4565,28 @@ This API is used to backtrack attacks.
     DescribeAssetDatabaseCount(req, cb) {
         let resp = new DescribeAssetDatabaseCountResponse();
         this.request("DescribeAssetDatabaseCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the cross-region log-in allowlist list.
+     * @param {DescribeLoginWhiteListRequest} req
+     * @param {function(string, DescribeLoginWhiteListResponse):void} cb
+     * @public
+     */
+    DescribeLoginWhiteList(req, cb) {
+        let resp = new DescribeLoginWhiteListResponse();
+        this.request("DescribeLoginWhiteList", req, resp, cb);
+    }
+
+    /**
+     * Important Period Guarantee Protection License Plugin Detail List
+     * @param {DescribeRaspPluginListRequest} req
+     * @param {function(string, DescribeRaspPluginListResponse):void} cb
+     * @public
+     */
+    DescribeRaspPluginList(req, cb) {
+        let resp = new DescribeRaspPluginListResponse();
+        this.request("DescribeRaspPluginList", req, resp, cb);
     }
 
     /**
@@ -4421,7 +4656,7 @@ This API is used to backtrack attacks.
     }
 
     /**
-     * This API is used to retrieve the log-in audit list.
+     * Retrieve the abnormal login list
      * @param {DescribeHostLoginListRequest} req
      * @param {function(string, DescribeHostLoginListResponse):void} cb
      * @public
@@ -4440,17 +4675,6 @@ This API is used to backtrack attacks.
     UpdateBaselineStrategy(req, cb) {
         let resp = new UpdateBaselineStrategyResponse();
         this.request("UpdateBaselineStrategy", req, resp, cb);
-    }
-
-    /**
-     * This API is used to unignore the vulnerabilities.
-     * @param {CancelIgnoreVulRequest} req
-     * @param {function(string, CancelIgnoreVulResponse):void} cb
-     * @public
-     */
-    CancelIgnoreVul(req, cb) {
-        let resp = new CancelIgnoreVulResponse();
-        this.request("CancelIgnoreVul", req, resp, cb);
     }
 
     /**
@@ -4476,19 +4700,6 @@ This API is used to backtrack attacks.
     }
 
     /**
-     * 接口已无效
-
-This API is used to obtain the summary of security protection statuses.
-     * @param {DescribeSecurityProtectionStatRequest} req
-     * @param {function(string, DescribeSecurityProtectionStatResponse):void} cb
-     * @public
-     */
-    DescribeSecurityProtectionStat(req, cb) {
-        let resp = new DescribeSecurityProtectionStatResponse();
-        this.request("DescribeSecurityProtectionStat", req, resp, cb);
-    }
-
-    /**
      * This API is used to modify the brute-force blocking mode.
      * @param {ModifyBanModeRequest} req
      * @param {function(string, ModifyBanModeResponse):void} cb
@@ -4497,6 +4708,17 @@ This API is used to obtain the summary of security protection statuses.
     ModifyBanMode(req, cb) {
         let resp = new ModifyBanModeResponse();
         this.request("ModifyBanMode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of reverse shell policies.
+     * @param {DescribeShellPolicyListRequest} req
+     * @param {function(string, DescribeShellPolicyListResponse):void} cb
+     * @public
+     */
+    DescribeShellPolicyList(req, cb) {
+        let resp = new DescribeShellPolicyListResponse();
+        this.request("DescribeShellPolicyList", req, resp, cb);
     }
 
     /**
@@ -4588,6 +4810,17 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
+     * Retrieve the global configuration for uninstall protection
+     * @param {DescribeLoginTypeGlobalConfRequest} req
+     * @param {function(string, DescribeLoginTypeGlobalConfResponse):void} cb
+     * @public
+     */
+    DescribeLoginTypeGlobalConf(req, cb) {
+        let resp = new DescribeLoginTypeGlobalConfResponse();
+        this.request("DescribeLoginTypeGlobalConf", req, resp, cb);
+    }
+
+    /**
      * This API is used to export the list of host snapshot backups.
      * @param {ExportRansomDefenseBackupListRequest} req
      * @param {function(string, ExportRansomDefenseBackupListResponse):void} cb
@@ -4643,14 +4876,14 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
-     * This API is used to obtain the details of the WeCom chatbot rules.
-     * @param {DescribeWebHookRuleRequest} req
-     * @param {function(string, DescribeWebHookRuleResponse):void} cb
+     * This API is used to delete the cross-region log-in allowlist rules.
+     * @param {DeleteLoginWhiteListRequest} req
+     * @param {function(string, DeleteLoginWhiteListResponse):void} cb
      * @public
      */
-    DescribeWebHookRule(req, cb) {
-        let resp = new DescribeWebHookRuleResponse();
-        this.request("DescribeWebHookRule", req, resp, cb);
+    DeleteLoginWhiteList(req, cb) {
+        let resp = new DeleteLoginWhiteListResponse();
+        this.request("DeleteLoginWhiteList", req, resp, cb);
     }
 
     /**
@@ -4673,6 +4906,17 @@ This API is used to obtain the summary of security protection statuses.
     DeleteBashRules(req, cb) {
         let resp = new DeleteBashRulesResponse();
         this.request("DeleteBashRules", req, resp, cb);
+    }
+
+    /**
+     * This example shows you how to add entries to the vulnerability defense allowlist.
+     * @param {ModifyRaspRulesRequest} req
+     * @param {function(string, ModifyRaspRulesResponse):void} cb
+     * @public
+     */
+    ModifyRaspRules(req, cb) {
+        let resp = new ModifyRaspRulesResponse();
+        this.request("ModifyRaspRules", req, resp, cb);
     }
 
     /**
@@ -4731,14 +4975,14 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
-     * This API is used to export asset management host resource details.
-     * @param {ExportAssetMachineDetailRequest} req
-     * @param {function(string, ExportAssetMachineDetailResponse):void} cb
+     * This API is used to query the list of asset management environment variables.
+     * @param {DescribeAssetEnvListRequest} req
+     * @param {function(string, DescribeAssetEnvListResponse):void} cb
      * @public
      */
-    ExportAssetMachineDetail(req, cb) {
-        let resp = new ExportAssetMachineDetailResponse();
-        this.request("ExportAssetMachineDetail", req, resp, cb);
+    DescribeAssetEnvList(req, cb) {
+        let resp = new DescribeAssetEnvListResponse();
+        this.request("DescribeAssetEnvList", req, resp, cb);
     }
 
     /**
@@ -4750,6 +4994,17 @@ This API is used to obtain the summary of security protection statuses.
     DescribeSecurityEventsCnt(req, cb) {
         let resp = new DescribeSecurityEventsCntResponse();
         this.request("DescribeSecurityEventsCnt", req, resp, cb);
+    }
+
+    /**
+     * Patch details
+     * @param {DescribePatchInfoRequest} req
+     * @param {function(string, DescribePatchInfoResponse):void} cb
+     * @public
+     */
+    DescribePatchInfo(req, cb) {
+        let resp = new DescribePatchInfoResponse();
+        this.request("DescribePatchInfo", req, resp, cb);
     }
 
     /**
@@ -4797,7 +5052,7 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
-     * This API is used to obtain the data of the account change history list.
+     * This API is used to obtain the account change history list data.
      * @param {DescribeHistoryAccountsRequest} req
      * @param {function(string, DescribeHistoryAccountsResponse):void} cb
      * @public
@@ -4830,14 +5085,14 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
-     * This API is used to obtain asset management host resource details.
-     * @param {DescribeAssetMachineDetailRequest} req
-     * @param {function(string, DescribeAssetMachineDetailResponse):void} cb
+     * This API is used to delete the policy by baseline policy ID.
+     * @param {DeleteBaselineStrategyRequest} req
+     * @param {function(string, DeleteBaselineStrategyResponse):void} cb
      * @public
      */
-    DescribeAssetMachineDetail(req, cb) {
-        let resp = new DescribeAssetMachineDetailResponse();
-        this.request("DescribeAssetMachineDetail", req, resp, cb);
+    DeleteBaselineStrategy(req, cb) {
+        let resp = new DeleteBaselineStrategyResponse();
+        this.request("DeleteBaselineStrategy", req, resp, cb);
     }
 
     /**
@@ -4948,17 +5203,6 @@ This API is used to obtain the summary of security protection statuses.
     ChangeStrategyEnableStatus(req, cb) {
         let resp = new ChangeStrategyEnableStatusResponse();
         this.request("ChangeStrategyEnableStatus", req, resp, cb);
-    }
-
-    /**
-     * This API is used to obtain the expert service order list.
-     * @param {DescribeExpertServiceOrderListRequest} req
-     * @param {function(string, DescribeExpertServiceOrderListResponse):void} cb
-     * @public
-     */
-    DescribeExpertServiceOrderList(req, cb) {
-        let resp = new DescribeExpertServiceOrderListResponse();
-        this.request("DescribeExpertServiceOrderList", req, resp, cb);
     }
 
     /**
@@ -5438,6 +5682,17 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
+     * This API is used to export network attack events.
+     * @param {ExportAttackEventsRequest} req
+     * @param {function(string, ExportAttackEventsResponse):void} cb
+     * @public
+     */
+    ExportAttackEvents(req, cb) {
+        let resp = new ExportAttackEventsResponse();
+        this.request("ExportAttackEvents", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain all node information on the event corresponding to an alarm.
      * @param {DescribeAlarmIncidentNodesRequest} req
      * @param {function(string, DescribeAlarmIncidentNodesResponse):void} cb
@@ -5482,6 +5737,28 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
+     * Export Windows patch list
+     * @param {ExportWindowsPatchListRequest} req
+     * @param {function(string, ExportWindowsPatchListResponse):void} cb
+     * @public
+     */
+    ExportWindowsPatchList(req, cb) {
+        let resp = new ExportWindowsPatchListResponse();
+        this.request("ExportWindowsPatchList", req, resp, cb);
+    }
+
+    /**
+     * Application defense event details
+     * @param {DescribeRaspEventDetailTCSSRequest} req
+     * @param {function(string, DescribeRaspEventDetailTCSSResponse):void} cb
+     * @public
+     */
+    DescribeRaspEventDetailTCSS(req, cb) {
+        let resp = new DescribeRaspEventDetailTCSSResponse();
+        this.request("DescribeRaspEventDetailTCSS", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete cross-region log-in records.
      * @param {DeleteNonlocalLoginPlacesRequest} req
      * @param {function(string, DeleteNonlocalLoginPlacesResponse):void} cb
@@ -5504,8 +5781,7 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
-     * This API is used to edit reverse shell rules (multiple servers supported).
-
+     * Editing Reverse Shell Rules. (Supporting Selecting Multiple Servers)
      * @param {EditReverseShellRulesRequest} req
      * @param {function(string, EditReverseShellRulesResponse):void} cb
      * @public
@@ -5560,6 +5836,17 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
+     * Deleting Entries from the Vulnerability Defense Allowlist
+     * @param {DeleteRaspRulesRequest} req
+     * @param {function(string, DeleteRaspRulesResponse):void} cb
+     * @public
+     */
+    DeleteRaspRules(req, cb) {
+        let resp = new DeleteRaspRulesResponse();
+        this.request("DeleteRaspRules", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete Trojan records.
      * @param {DeleteMalwaresRequest} req
      * @param {function(string, DeleteMalwaresResponse):void} cb
@@ -5593,7 +5880,7 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
-     * This API is used to obtain the account statistics data.
+     * This API is used to obtain account statistics list data.
      * @param {DescribeAccountStatisticsRequest} req
      * @param {function(string, DescribeAccountStatisticsResponse):void} cb
      * @public
@@ -5725,17 +6012,6 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
-     * This API is used to obtain the emergency response list.
-     * @param {DescribeEmergencyResponseListRequest} req
-     * @param {function(string, DescribeEmergencyResponseListResponse):void} cb
-     * @public
-     */
-    DescribeEmergencyResponseList(req, cb) {
-        let resp = new DescribeEmergencyResponseListResponse();
-        this.request("DescribeEmergencyResponseList", req, resp, cb);
-    }
-
-    /**
      * This API is used to obtain the network attack trend data.
      * @param {DescribeAttackTrendsRequest} req
      * @param {function(string, DescribeAttackTrendsResponse):void} cb
@@ -5788,17 +6064,6 @@ This API is used to obtain the summary of security protection statuses.
     DescribeBaselineRule(req, cb) {
         let resp = new DescribeBaselineRuleResponse();
         this.request("DescribeBaselineRule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to export the list of hosts affected by baseline.
-     * @param {ExportBaselineEffectHostListRequest} req
-     * @param {function(string, ExportBaselineEffectHostListResponse):void} cb
-     * @public
-     */
-    ExportBaselineEffectHostList(req, cb) {
-        let resp = new ExportBaselineEffectHostListResponse();
-        this.request("ExportBaselineEffectHostList", req, resp, cb);
     }
 
     /**
@@ -6000,14 +6265,14 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
-     * This API is used to obtain the cross-region log-in allowlist list.
-     * @param {DescribeLoginWhiteListRequest} req
-     * @param {function(string, DescribeLoginWhiteListResponse):void} cb
+     * View the maximum cpu limitation for vulnerability defense
+     * @param {DescribeRaspMaxCpuRequest} req
+     * @param {function(string, DescribeRaspMaxCpuResponse):void} cb
      * @public
      */
-    DescribeLoginWhiteList(req, cb) {
-        let resp = new DescribeLoginWhiteListResponse();
-        this.request("DescribeLoginWhiteList", req, resp, cb);
+    DescribeRaspMaxCpu(req, cb) {
+        let resp = new DescribeRaspMaxCpuResponse();
+        this.request("DescribeRaspMaxCpu", req, resp, cb);
     }
 
     /**
@@ -6121,6 +6386,17 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
+     * Export the affected host list of a patch
+     * @param {ExportPatchEffectHostListRequest} req
+     * @param {function(string, ExportPatchEffectHostListResponse):void} cb
+     * @public
+     */
+    ExportPatchEffectHostList(req, cb) {
+        let resp = new ExportPatchEffectHostListResponse();
+        this.request("ExportPatchEffectHostList", req, resp, cb);
+    }
+
+    /**
      * This API is used to export reverse shell events.
      * @param {ExportReverseShellEventsRequest} req
      * @param {function(string, ExportReverseShellEventsResponse):void} cb
@@ -6132,7 +6408,7 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
-     * This API is used to create a network attack allowlist.
+     * This API is used to create a network attack allowlist.
      * @param {CreateNetAttackWhiteListRequest} req
      * @param {function(string, CreateNetAttackWhiteListResponse):void} cb
      * @public
@@ -6151,17 +6427,6 @@ This API is used to obtain the summary of security protection statuses.
     ModifyRiskDnsPolicy(req, cb) {
         let resp = new ModifyRiskDnsPolicyResponse();
         this.request("ModifyRiskDnsPolicy", req, resp, cb);
-    }
-
-    /**
-     * This API is used to obtain the security manager list.
-     * @param {DescribeExpertServiceListRequest} req
-     * @param {function(string, DescribeExpertServiceListResponse):void} cb
-     * @public
-     */
-    DescribeExpertServiceList(req, cb) {
-        let resp = new DescribeExpertServiceListResponse();
-        this.request("DescribeExpertServiceList", req, resp, cb);
     }
 
     /**
@@ -6184,6 +6449,17 @@ This API is used to obtain the summary of security protection statuses.
     DescribeVulFixStatus(req, cb) {
         let resp = new DescribeVulFixStatusResponse();
         this.request("DescribeVulFixStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of Reverse Shell rules.
+     * @param {DescribeReverseShellRulesAggregationRequest} req
+     * @param {function(string, DescribeReverseShellRulesAggregationResponse):void} cb
+     * @public
+     */
+    DescribeReverseShellRulesAggregation(req, cb) {
+        let resp = new DescribeReverseShellRulesAggregationResponse();
+        this.request("DescribeReverseShellRulesAggregation", req, resp, cb);
     }
 
     /**
@@ -6220,14 +6496,14 @@ This API is used to obtain the summary of security protection statuses.
     }
 
     /**
-     * This API is used to download the monthly inspection report of the security manager.
-     * @param {DescribeMonthInspectionReportRequest} req
-     * @param {function(string, DescribeMonthInspectionReportResponse):void} cb
+     * This API is used to export the list of hosts affected by baseline.
+     * @param {ExportBaselineEffectHostListRequest} req
+     * @param {function(string, ExportBaselineEffectHostListResponse):void} cb
      * @public
      */
-    DescribeMonthInspectionReport(req, cb) {
-        let resp = new DescribeMonthInspectionReportResponse();
-        this.request("DescribeMonthInspectionReport", req, resp, cb);
+    ExportBaselineEffectHostList(req, cb) {
+        let resp = new ExportBaselineEffectHostListResponse();
+        this.request("ExportBaselineEffectHostList", req, resp, cb);
     }
 
     /**
@@ -6250,17 +6526,6 @@ This API is used to obtain the summary of security protection statuses.
     DescribeMalwareWhiteListAffectList(req, cb) {
         let resp = new DescribeMalwareWhiteListAffectListResponse();
         this.request("DescribeMalwareWhiteListAffectList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to ignore vulnerabilities.
-     * @param {IgnoreImpactedHostsRequest} req
-     * @param {function(string, IgnoreImpactedHostsResponse):void} cb
-     * @public
-     */
-    IgnoreImpactedHosts(req, cb) {
-        let resp = new IgnoreImpactedHostsResponse();
-        this.request("IgnoreImpactedHosts", req, resp, cb);
     }
 
     /**

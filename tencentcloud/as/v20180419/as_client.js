@@ -803,7 +803,8 @@ The instance enters standby status, and the scaling group attempts to lower the 
     }
 
     /**
-     * This API (CreateScalingPolicy) is used to create an alarm trigger policy.
+     * This API is used to create an alarm-triggered scaling policy.
+-The target tracking policy triggers scale-out when the specified type of metric exceeds the threshold (target value) for 3 consecutive cycles (1 minute each). It triggers auto scale-down when the specified type of metric is below the threshold (80% of the target value) for 15 consecutive cycles (1 minute each).
      * @param {CreateScalingPolicyRequest} req
      * @param {function(string, CreateScalingPolicyResponse):void} cb
      * @public
@@ -913,7 +914,7 @@ The instance enters standby status, and the scaling group attempts to lower the 
     }
 
     /**
-     * This API (DescribeAutoScalingActivities) is used to query the activity history of an auto scaling group.
+     * This API is used to query the scaling activities of the scaling group. Currently, only scaling operations from the past two years are saved.
      * @param {DescribeAutoScalingActivitiesRequest} req
      * @param {function(string, DescribeAutoScalingActivitiesResponse):void} cb
      * @public

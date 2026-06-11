@@ -247,7 +247,7 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query instance information.
+     * Query instance information.
      * @param {DescribeTawInstancesRequest} req
      * @param {function(string, DescribeTawInstancesResponse):void} cb
      * @public

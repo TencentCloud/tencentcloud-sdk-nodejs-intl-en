@@ -488,7 +488,7 @@ class DescribeRedoLogListByVaultResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Instance parameter modification task details.
  * @class
  */
 class BizTaskModifyInstanceParam extends  AbstractModel {
@@ -496,7 +496,7 @@ class BizTaskModifyInstanceParam extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -744,19 +744,19 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Database CPU
+         * Database CPU.
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * Database memory in GB
+         * Database memory in GB.
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * Upgrade type. Valid values: upgradeImmediate, upgradeInMaintain
+         * Upgrade type. Valid values: upgradeImmediate, upgradeInMaintain.
          * @type {string || null}
          */
         this.UpgradeType = null;
@@ -776,7 +776,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.StorageLimit = null;
 
         /**
-         * Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
+         * Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0.
          * @type {number || null}
          */
         this.AutoVoucher = null;
@@ -788,7 +788,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.DbType = null;
 
         /**
-         * Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+         * Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order).
          * @type {number || null}
          */
         this.DealMode = null;
@@ -800,7 +800,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.UpgradeMode = null;
 
         /**
-         * 
+         * Proxy synchronous upgrade.
          * @type {UpgradeProxy || null}
          */
         this.UpgradeProxy = null;
@@ -1086,7 +1086,7 @@ class DescribeClusterParamsResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of parameters
+         * Number of parameters.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -1646,7 +1646,7 @@ class InquirePriceMultiSpecRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Rollback RO group information.
  * @class
  */
 class RollbackRoGroupInfo extends  AbstractModel {
@@ -1654,13 +1654,13 @@ class RollbackRoGroupInfo extends  AbstractModel {
         super();
 
         /**
-         * Instance group ID
+         * Instance group ID.
          * @type {string || null}
          */
         this.InstanceGroupId = null;
 
         /**
-         * VPC information
+         * VPC information.
          * @type {string || null}
          */
         this.UniqVpcId = null;
@@ -2442,7 +2442,7 @@ class OpenReadOnlyInstanceExclusiveAccessResponse extends  AbstractModel {
         super();
 
         /**
-         * Activation process ID
+         * Activation process ID.
          * @type {number || null}
          */
         this.FlowId = null;
@@ -2751,7 +2751,7 @@ class ModifyResourcePackageNameRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * When adding or resizing an instance, synchronously upgrade the proxy.
  * @class
  */
 class UpgradeProxy extends  AbstractModel {
@@ -2771,13 +2771,13 @@ class UpgradeProxy extends  AbstractModel {
         this.Mem = null;
 
         /**
-         * 
+         * Proxy node information
          * @type {Array.<ProxyZone> || null}
          */
         this.ProxyZones = null;
 
         /**
-         * 
+         * Rebalance
          * @type {string || null}
          */
         this.ReloadBalance = null;
@@ -4059,7 +4059,7 @@ class ResetLibraDBClusterAccountPasswordResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Instance resizing task information.
  * @class
  */
 class ModifyInstanceData extends  AbstractModel {
@@ -4067,37 +4067,37 @@ class ModifyInstanceData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * CPU after resizing.
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * 
+         * Memory after resizing.
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 
+         * Storage upper limit after resizing.
          * @type {number || null}
          */
         this.StorageLimit = null;
 
         /**
-         * 
+         * CPU before resizing.
          * @type {number || null}
          */
         this.OldCpu = null;
 
         /**
-         * 
+         * Memory before resizing.
          * @type {number || null}
          */
         this.OldMemory = null;
 
         /**
-         * 
+         * Storage upper limit before resizing.
          * @type {number || null}
          */
         this.OldStorageLimit = null;
@@ -4119,7 +4119,7 @@ class ModifyInstanceData extends  AbstractModel {
         this.DeviceType = null;
 
         /**
-         * 
+         * Upgrade method. Switch after upgrade completes or switch within maintenance window.
          * @type {string || null}
          */
         this.UpgradeType = null;
@@ -4902,131 +4902,118 @@ class CreateProxyEndPointRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID.
+         * <p>Cluster ID.</p>
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * VPC ID. By default, it remains consistent with the VPC ID of the cluster.
+         * <p>VPC ID.</p>
          * @type {string || null}
          */
         this.UniqueVpcId = null;
 
         /**
-         * Subnet ID of the VPC. By default, it remains consistent with the subnet ID of the cluster.
+         * <p>VPC subnet ID.</p>
          * @type {string || null}
          */
         this.UniqueSubnetId = null;
 
         /**
-         * Type of connection pool: SessionConnectionPool (session-level connection pool).
+         * <p>Connection pool Type: SessionConnectionPool (session-level connection pool).</p>
          * @type {string || null}
          */
         this.ConnectionPoolType = null;
 
         /**
-         * Whether to enable the connection pool.
-yes: indicates enabled.
-no: indicates not enabled.
+         * <p>Whether the connection pool is enabled.<br>yes: enabled.<br>no: disabled.</p>
          * @type {string || null}
          */
         this.OpenConnectionPool = null;
 
         /**
-         * Threshold of the connection pool: unit (seconds). Valid values: 0 - 300 seconds.
+         * <p>Connection pool threshold: measurement unit (seconds), optional range: 0 - 300 seconds.</p>
          * @type {number || null}
          */
         this.ConnectionPoolTimeOut = null;
 
         /**
-         * Array of bound security group IDs.
+         * <p>Bound security group ID array.</p>
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
 
         /**
-         * Description.
+         * <p>Description.</p>
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * The vip information to be bound must correspond to the UniqueVpcId.
+         * <p>vip information that should be bound must correspond to UniqueVpcId.</p>
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
-         * Weight mode:
-system: system-assigned.
-custom: custom.
+         * <p>Weight mode:<br>system: system-assigned.<br>custom: custom.</p>
          * @type {string || null}
          */
         this.WeightMode = null;
 
         /**
-         * Whether to automatically add a read-only instance.
-yes: indicates automatically adding a read-only instance.
-no: indicates not to automatically add a read-only instance.
+         * <p>Automatically add read-only instance.<br>yes: means automatically add read-only instance.<br>no: means not automatic add read-only instance.</p>
          * @type {string || null}
          */
         this.AutoAddRo = null;
 
         /**
-         * Whether to enable failover.
-yes: indicates enabled. After it is enabled, when the database proxy encounters faults, the connection address will be routed to the primary instance.
-no: indicates not enabled.
-Description:
-Only when the value of the RwType parameter is READWRITE can this option be configured.
+         * <p>Whether fault migration is enabled.<br>yes: Enable. Once enabled, when a database proxy failure occurs, the connection address will be routed to the primary instance.<br>no: Disabled.<br>Description:<br>This item can be set to only when the RwType parameter value is READWRITE.</p>
          * @type {string || null}
          */
         this.FailOver = null;
 
         /**
-         * Consistency Type:
-eventual: eventual consistency.
-global: global consistency.
-session: session consistency.
-Description:
-Only when the RwType parameter value is READWRITE can this option be configured.
+         * <p>Consistency type:<br>eventual: Final consistency.<br>global: Global consistency.<br>session: Session consistency.<br>Description:<br>This item can be set to only when the RwType parameter value is READWRITE.</p>
          * @type {string || null}
          */
         this.ConsistencyType = null;
 
         /**
-         * Read-Write Attribute:
-READWRITE: indicates read/write splitting. Only when this parameter value is READWRITE can the FailOver and ConsistencyType parameters be configured.
-READONLY: indicates read-only.
+         * <p>Read-write attribute:<br>READWRITE: means read-write separation. When the parameter value is READWRITE, FailOver and ConsistencyType parameters can be set.<br>READONLY: means read-only.</p>
          * @type {string || null}
          */
         this.RwType = null;
 
         /**
-         * The consistency timeout period. Value range: 0 - 1000000 (microseconds). When set to 0, if a read-only instance experiences latency causing the consistency policy to be unsatisfied, the request will wait indefinitely.
+         * <p>Consistency timeout. Value ranges from 0 to 1000000 (microseconds). When set to 0, it means the request will wait if the read-only instance fails to satisfy the consistency policy due to latency.</p>
          * @type {number || null}
          */
         this.ConsistencyTimeOut = null;
 
         /**
-         * Whether to enable transaction split. After it is enabled, read and write operations in a transaction are split to different instances for execution.
+         * <p>Whether to enable transaction split. Once enabled, read and write operations in a transaction are split and executed on different instances.</p>
          * @type {boolean || null}
          */
         this.TransSplit = null;
 
         /**
-         * Access mode:
-nearby: nearby access.
-balance: balanced allocation.
+         * <p>Access mode:<br>nearby: proximity access.<br>balance: balanced allocation.</p>
          * @type {string || null}
          */
         this.AccessMode = null;
 
         /**
-         * Instance weight.
+         * <p>Instance weight.</p>
          * @type {Array.<ProxyInstanceWeight> || null}
          */
         this.InstanceWeights = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.LoadBalanceMode = null;
 
     }
 
@@ -5063,6 +5050,7 @@ balance: balanced allocation.
                 this.InstanceWeights.push(obj);
             }
         }
+        this.LoadBalanceMode = 'LoadBalanceMode' in params ? params.LoadBalanceMode : null;
 
     }
 }
@@ -5291,25 +5279,25 @@ class OpenReadOnlyInstanceExclusiveAccessRequest extends  AbstractModel {
         super();
 
         /**
-         * Please use the cluster information description (https://intl.cloud.tencent.com/document/api/1003/48086?from_cn_redirect=1) to obtain the clusterId.
+         * Please use the [cluster information description](https://www.tencentcloud.com/document/product/1098/40752) to obtain the clusterId.
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Please use the cluster information description (https://intl.cloud.tencent.com/document/api/1003/48086?from_cn_redirect=1) to obtain the instanceId.
+         * Please use the [cluster information description](https://www.tencentcloud.com/document/product/1098/40752) to obtain the instanceId.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the designated vpc ID. please use the "query vpc list" to obtain the vpc ID.
+         * Specifies the designated vpc ID. please use the [query vpc list](https://www.tencentcloud.com/document/product/215/15778) to obtain the vpc ID.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Specified subnet ID. if vpc ID is set, SubnetId is required. please use query subnet list (https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) to get SubnetId.
+         * Specified subnet ID. if vpc ID is set, SubnetId is required. please use [query subnet list](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) to get SubnetId.
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -5456,7 +5444,7 @@ class StartCLSDeliveryResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Parameter change information.
  * @class
  */
 class ParamItemInfo extends  AbstractModel {
@@ -5613,6 +5601,12 @@ class DescribeInstanceSpecsRequest extends  AbstractModel {
          */
         this.IncludeZoneStocks = null;
 
+        /**
+         * Instance machine type.
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
     }
 
     /**
@@ -5624,6 +5618,7 @@ class DescribeInstanceSpecsRequest extends  AbstractModel {
         }
         this.DbType = 'DbType' in params ? params.DbType : null;
         this.IncludeZoneStocks = 'IncludeZoneStocks' in params ? params.IncludeZoneStocks : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
 
     }
 }
@@ -5715,7 +5710,7 @@ class CreateIntegrateClusterRequest extends  AbstractModel {
         super();
 
         /**
-         * Availability zone
+         * Availability zone.
          * @type {string || null}
          */
         this.Zone = null;
@@ -5740,7 +5735,7 @@ class CreateIntegrateClusterRequest extends  AbstractModel {
         this.DbVersion = null;
 
         /**
-         * Project ID
+         * Project ID.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -5752,7 +5747,7 @@ class CreateIntegrateClusterRequest extends  AbstractModel {
         this.ClusterName = null;
 
         /**
-         * Account password (8-64 characters, a combination of uppercase and lowercase letters, digits and symbols ~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/ with any three types).
+         * Account password (8-64 characters, a combination of uppercase and lowercase letters, digits and symbols ~!@#$%^&*_-+=|\(){}[]:;'<>,.?/ with any three types).
          * @type {string || null}
          */
         this.AdminPassword = null;
@@ -5984,7 +5979,7 @@ Rollback and clone do not support monthly subscription storage.
 }
 
 /**
- * Node in the database proxy group
+ * Node in the database proxy group.
  * @class
  */
 class ProxyNodeInfo extends  AbstractModel {
@@ -5992,7 +5987,7 @@ class ProxyNodeInfo extends  AbstractModel {
         super();
 
         /**
-         * Database proxy node ID
+         * Database proxy node ID.
          * @type {string || null}
          */
         this.ProxyNodeId = null;
@@ -6004,55 +5999,55 @@ class ProxyNodeInfo extends  AbstractModel {
         this.ProxyNodeConnections = null;
 
         /**
-         * CPU of the database proxy node
+         * CPU of the database proxy node.
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * Memory of the database proxy node
+         * Memory of the database proxy node.
          * @type {number || null}
          */
         this.Mem = null;
 
         /**
-         * Status of the database proxy node
+         * Status of the database proxy node.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Database proxy group ID
+         * Database proxy group ID.
          * @type {string || null}
          */
         this.ProxyGroupId = null;
 
         /**
-         * Cluster ID
+         * Cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * User AppID
+         * User AppID.
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * Region
+         * Region.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * AZ
+         * AZ.
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 
+         * Database proxy node name.
          * @type {string || null}
          */
         this.OssProxyNodeName = null;
@@ -6438,76 +6433,82 @@ class ProxyGroupRwInfo extends  AbstractModel {
         super();
 
         /**
-         * Consistency type. Valid values: `eventual` (eventual consistency), `session` (session consistency), `global` (global consistency).
+         * <p>Consistency Type eventual-final consistency,global-global consistency,session-session consistency</p>
          * @type {string || null}
          */
         this.ConsistencyType = null;
 
         /**
-         * Consistency timeout period
+         * <p>Consistency timeout</p>
          * @type {number || null}
          */
         this.ConsistencyTimeOut = null;
 
         /**
-         * Weight mode. Valid values: `system` (auto-assigned), `custom`.
+         * <p>Weight mode system-system-assigned, custom-custom</p>
          * @type {string || null}
          */
         this.WeightMode = null;
 
         /**
-         * Whether to enable failover
+         * <p>Whether fault migration is enabled</p>
          * @type {string || null}
          */
         this.FailOver = null;
 
         /**
-         * Whether to automatically add read-only instance. Valid value: `yes`, `no`.
+         * <p>Automatically add read-only instance, yes-yes, no-no</p>
          * @type {string || null}
          */
         this.AutoAddRo = null;
 
         /**
-         * Instance weight array
+         * <p>Instance weight array</p>
          * @type {Array.<ProxyInstanceWeight> || null}
          */
         this.InstanceWeights = null;
 
         /**
-         * Whether to enable read-write nodes. valid values: yes, no.
+         * <p>Whether to enable the read-write node, yes - enable, no - disable</p>
          * @type {string || null}
          */
         this.OpenRw = null;
 
         /**
-         * Read/write attribute. Valid values: `READWRITE`, `READONLY`.
+         * <p>Read-write attribute, value range: READWRITE, READONLY</p>
          * @type {string || null}
          */
         this.RwType = null;
 
         /**
-         * Transaction split
+         * <p>Transaction split</p>
          * @type {boolean || null}
          */
         this.TransSplit = null;
 
         /**
-         * Connection mode. Valid values: `balance`, `nearby`.
+         * <p>Connection mode, available values: balance, nearby</p>
          * @type {string || null}
          */
         this.AccessMode = null;
 
         /**
-         * Whether to treat the libra node as an ordinary RO node
+         * <p>Whether to treat the libra node as an ordinary RO node</p>
          * @type {boolean || null}
          */
         this.ApNodeAsRoNode = null;
 
         /**
-         * libra node fault, whether to forward to other nodes
+         * <p>Whether to forward to other nodes when a libra node fault occurs</p>
          * @type {boolean || null}
          */
         this.ApQueryToOtherNode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.LoadBalanceMode = null;
 
     }
 
@@ -6538,6 +6539,7 @@ class ProxyGroupRwInfo extends  AbstractModel {
         this.AccessMode = 'AccessMode' in params ? params.AccessMode : null;
         this.ApNodeAsRoNode = 'ApNodeAsRoNode' in params ? params.ApNodeAsRoNode : null;
         this.ApQueryToOtherNode = 'ApQueryToOtherNode' in params ? params.ApQueryToOtherNode : null;
+        this.LoadBalanceMode = 'LoadBalanceMode' in params ? params.LoadBalanceMode : null;
 
     }
 }
@@ -6991,7 +6993,7 @@ class CreateClustersRequest extends  AbstractModel {
         this.ClusterName = null;
 
         /**
-         * <p>Account (8-64 characters, a combination of uppercase and lowercase letters, digits and symbols ~!@#$%^&amp;*_-+=`|(){}[]:;&#39;&lt;&gt;,.?/ with any three types required)</p>
+         * <p>Account (8-64 characters, a combination of uppercase and lowercase letters, digits and symbols ~!@#$%^&amp;*_-+=|(){}[]:;&#39;&lt;&gt;,.?/ with any three types required)</p>
          * @type {string || null}
          */
         this.AdminPassword = null;
@@ -7914,7 +7916,7 @@ no
 }
 
 /**
- * 
+ * Instance log delivery information.
  * @class
  */
 class InstanceCLSDeliveryInfo extends  AbstractModel {
@@ -7922,14 +7924,13 @@ class InstanceCLSDeliveryInfo extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Instance name
-
+         * Instance name.
 
          * @type {string || null}
          */
@@ -7943,14 +7944,13 @@ class InstanceCLSDeliveryInfo extends  AbstractModel {
         this.TopicId = null;
 
         /**
-         * Log topic name
+         * Log topic name.
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
          * Log set id.
-
          * @type {string || null}
          */
         this.GroupId = null;
@@ -7958,21 +7958,18 @@ class InstanceCLSDeliveryInfo extends  AbstractModel {
         /**
          * Log set name.
 
-
          * @type {string || null}
          */
         this.GroupName = null;
 
         /**
          * Log delivery region.
-
          * @type {string || null}
          */
         this.Region = null;
 
         /**
          * Delivery status: creating, running, offlining, offlined.
-
          * @type {string || null}
          */
         this.Status = null;
@@ -8516,16 +8513,22 @@ class DescribeClusterParamsRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * Cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Parameter name
+         * Parameter name.
          * @type {string || null}
          */
         this.ParamName = null;
+
+        /**
+         * Whether it is a global parameter.
+         * @type {string || null}
+         */
+        this.IsGlobal = null;
 
     }
 
@@ -8538,6 +8541,7 @@ class DescribeClusterParamsRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
 
     }
 }
@@ -9002,7 +9006,7 @@ class DescribeServerlessInstanceSpecsResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Manual backup task information.
  * @class
  */
 class ManualBackupData extends  AbstractModel {
@@ -9010,19 +9014,19 @@ class ManualBackupData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Backup type. snapshot - Snapshot backup.
          * @type {string || null}
          */
         this.BackupType = null;
 
         /**
-         * 
+         * Backup method. auto - Automatic backup, manual - Manual backup.
          * @type {string || null}
          */
         this.BackupMethod = null;
 
         /**
-         * 
+         * Backup time.
          * @type {string || null}
          */
         this.SnapshotTime = null;
@@ -9259,7 +9263,7 @@ class UpgradeProxyVersionRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Standby availability zone inventory information.
  * @class
  */
 class SlaveZoneStockInfo extends  AbstractModel {
@@ -9309,111 +9313,112 @@ class ModifyProxyRwSplitRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * <p>Cluster ID, for example, cynosdbmysql-asd123</p>
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Database proxy group ID
+         * <p>Database Proxy Group ID, such as cynosdbmysql-proxy-qwe123</p>
          * @type {string || null}
          */
         this.ProxyGroupId = null;
 
         /**
-         * Consistency type. Valid values: `eventual` (eventual consistency), `session` (session consistency), `global` (global consistency).
+         * <p>Consistency Type "eventual"-final consistency, "session"-session consistency, "global"-global consistency</p>
          * @type {string || null}
          */
         this.ConsistencyType = null;
 
         /**
-         * Consistency timeout period
+         * <p>Consistency timeout.<br>Value ranges from 0 to 1000000 (microseconds). When set to 0, it means the request will wait if the read-only instance fails to satisfy the consistency policy due to delay.</p>
          * @type {string || null}
          */
         this.ConsistencyTimeOut = null;
 
         /**
-         * Assignment mode of read/write weights. Valid values: `system` (auto-assigned), `custom`
+         * <p>Read-write weight allocation mode; system Auto-Assignment: "system", custom: "custom"</p>
          * @type {string || null}
          */
         this.WeightMode = null;
 
         /**
-         * Instance Read-Only Weight.
-
+         * <p>Instance read-only weight.</p>
          * @type {Array.<ProxyInstanceWeight> || null}
          */
         this.InstanceWeights = null;
 
         /**
-         * Whether to enable failover. If it is enabled, the connection address will route requests to the source instance in case of proxy failure. Valid values: `true`, `false`.
+         * <p>Whether fault migration is enabled. After a failure occurs, the connection address will be routed to primary instance. Value: "yes", "no"</p>
          * @type {string || null}
          */
         this.FailOver = null;
 
         /**
-         * Whether to automatically add read-only instances. Valid values: `true`, `false`
+         * <p>Automatically add read-only instance, value: "yes", "no"</p>
          * @type {string || null}
          */
         this.AutoAddRo = null;
 
         /**
-         * Whether to enable read/write separation
+         * <p>Whether to enable read-write separation.<br>This parameter is deprecated. Set the read-write attribute through RwType.</p>
          * @type {string || null}
          */
         this.OpenRw = null;
 
         /**
-         * Read/Write type. Valid values:
-`READWRITE`, `READONLY`.
+         * <p>Read-write type:<br>READWRITE, READONLY</p>
          * @type {string || null}
          */
         this.RwType = null;
 
         /**
-         * Transaction split
+         * <p>Transaction split.<br>Read and write operations in a transaction are split and executed on different instances.</p>
          * @type {boolean || null}
          */
         this.TransSplit = null;
 
         /**
-         * Connection mode. Valid values:
-`nearby`, `balance`.
+         * <p>Connection mode:<br>nearby, balance</p>
          * @type {string || null}
          */
         this.AccessMode = null;
 
         /**
-         * Whether to enable the connection pool. Valid values: 
-`yes`, `no`.
+         * <p>Whether to enable the connection pool:<br>yes, no</p>
          * @type {string || null}
          */
         this.OpenConnectionPool = null;
 
         /**
-         * Connection pool type. Valid values:
-`ConnectionPoolType`, `SessionConnectionPool`.
+         * <p>Connection pool Type:<br>SessionConnectionPool</p>
          * @type {string || null}
          */
         this.ConnectionPoolType = null;
 
         /**
-         * Connection persistence timeout
+         * <p>Connection pool time.<br>Optional range: 0-300 (seconds).</p>
          * @type {number || null}
          */
         this.ConnectionPoolTimeOut = null;
 
         /**
-         * Whether to treat the libra node as an ordinary RO node
+         * <p>Whether to treat the libra node as an ordinary RO node</p>
          * @type {boolean || null}
          */
         this.ApNodeAsRoNode = null;
 
         /**
-         * libra node fault, whether to forward to other nodes
+         * <p>Whether to forward to other nodes when a libra node fault occurs</p>
          * @type {boolean || null}
          */
         this.ApQueryToOtherNode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.LoadBalanceMode = null;
 
     }
 
@@ -9449,6 +9454,7 @@ class ModifyProxyRwSplitRequest extends  AbstractModel {
         this.ConnectionPoolTimeOut = 'ConnectionPoolTimeOut' in params ? params.ConnectionPoolTimeOut : null;
         this.ApNodeAsRoNode = 'ApNodeAsRoNode' in params ? params.ApNodeAsRoNode : null;
         this.ApQueryToOtherNode = 'ApQueryToOtherNode' in params ? params.ApQueryToOtherNode : null;
+        this.LoadBalanceMode = 'LoadBalanceMode' in params ? params.LoadBalanceMode : null;
 
     }
 }
@@ -9998,7 +10004,7 @@ class ModifyAuditRuleTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Create cluster task information.
  * @class
  */
 class CreateClustersData extends  AbstractModel {
@@ -10006,19 +10012,19 @@ class CreateClustersData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Instance CPU.
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * 
+         * Instance memory.
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 
+         * Cluster storage upper limit.
          * @type {number || null}
          */
         this.StorageLimit = null;
@@ -10636,7 +10642,7 @@ class DescribeBinlogsResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Audit instance details.
  * @class
  */
 class AuditInstanceInfo extends  AbstractModel {
@@ -10650,7 +10656,7 @@ class AuditInstanceInfo extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Tag information
+         * Tag information.
          * @type {Array.<Tag> || null}
          */
         this.TagList = null;
@@ -10687,7 +10693,7 @@ class AddClusterSlaveZoneResponse extends  AbstractModel {
         super();
 
         /**
-         * Async FlowId
+         * Async FlowId.
          * @type {number || null}
          */
         this.FlowId = null;
@@ -11492,7 +11498,7 @@ class UpgradeClusterVersionRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Modify database kernel version task information.
  * @class
  */
 class ModifyDbVersionData extends  AbstractModel {
@@ -11500,19 +11506,19 @@ class ModifyDbVersionData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Version before modification.
          * @type {string || null}
          */
         this.OldVersion = null;
 
         /**
-         * 
+         * Version after modification.
          * @type {string || null}
          */
         this.NewVersion = null;
 
         /**
-         * 
+         * Upgrade method.
          * @type {string || null}
          */
         this.UpgradeType = null;
@@ -12025,7 +12031,7 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Rollback task information.
  * @class
  */
 class RollbackData extends  AbstractModel {
@@ -12033,55 +12039,55 @@ class RollbackData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Instance CPU.
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * 
+         * Instance memory.
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 
+         * Cluster storage upper limit.
          * @type {number || null}
          */
         this.StorageLimit = null;
 
         /**
-         * 
+         * Original cluster ID.
          * @type {string || null}
          */
         this.OriginalClusterId = null;
 
         /**
-         * 
+         * Original cluster name.
          * @type {string || null}
          */
         this.OriginalClusterName = null;
 
         /**
-         * 
+         * Rollback method.
          * @type {string || null}
          */
         this.RollbackStrategy = null;
 
         /**
-         * 
+         * Snapshot time.
          * @type {string || null}
          */
         this.SnapshotTime = null;
 
         /**
-         * Roll back to the Serverless cluster with minimum CPU
+         * Roll back to the Serverless cluster with minimum CPU.
          * @type {number || null}
          */
         this.MinCpu = null;
 
         /**
-         * Roll back to the Serverless cluster with maximum CPU
+         * Roll back to the Serverless cluster with maximum CPU.
          * @type {number || null}
          */
         this.MaxCpu = null;
@@ -12093,13 +12099,13 @@ class RollbackData extends  AbstractModel {
         this.SnapShotId = null;
 
         /**
-         * 
+         * Rollback database.
          * @type {Array.<RollbackDatabase> || null}
          */
         this.RollbackDatabases = null;
 
         /**
-         * 
+         * Rollback data table.
          * @type {Array.<RollbackTable> || null}
          */
         this.RollbackTables = null;
@@ -12412,7 +12418,7 @@ class Tag extends  AbstractModel {
 }
 
 /**
- * 
+ * Rule template content.
  * @class
  */
 class RuleTemplateInfo extends  AbstractModel {
@@ -13820,7 +13826,7 @@ class DescribeBackupDownloadUrlRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Instance audit details information.
  * @class
  */
 class InstanceAuditStatus extends  AbstractModel {
@@ -13828,13 +13834,13 @@ class InstanceAuditStatus extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 
+         * Audit status. ON - Indicates audit is enabled, OFF - Indicates audit is disabled.
          * @type {string || null}
          */
         this.AuditStatus = null;
@@ -14109,19 +14115,19 @@ class CreateProxyEndPointResponse extends  AbstractModel {
         super();
 
         /**
-         * asynchronous process ID.
+         * <p>Async process ID.</p>
          * @type {number || null}
          */
         this.FlowId = null;
 
         /**
-         * Asynchronous task ID.
+         * <p>Asynchronous Task ID.</p>
          * @type {number || null}
          */
         this.TaskId = null;
 
         /**
-         * ID of the Database proxy group.
+         * <p>Database Proxy Group ID.</p>
          * @type {string || null}
          */
         this.ProxyGroupId = null;
@@ -15651,7 +15657,7 @@ class ModifyLibraDBForwardConfigResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Availability zone attribute item.
  * @class
  */
 class SlaveZoneAttrItem extends  AbstractModel {
@@ -15659,7 +15665,7 @@ class SlaveZoneAttrItem extends  AbstractModel {
         super();
 
         /**
-         * Availability zone
+         * Availability zone.
          * @type {string || null}
          */
         this.Zone = null;
@@ -15791,7 +15797,7 @@ class DescribeChangedParamsAfterUpgradeRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * CLS log delivery configuration.
  * @class
  */
 class CLSInfo extends  AbstractModel {
@@ -15799,43 +15805,49 @@ class CLSInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Log topic operation: Options are create, reuse. 
+create: Create a new log topic, using TopicName to create the log topic.
+reuse: Use an existing log topic, using TopicId to specify the log topic.
+The combination of using an existing log topic while creating a new logset is not allowed.
          * @type {string || null}
          */
         this.TopicOperation = null;
 
         /**
-         * 
+         * Logset operation: Options are create, reuse.
+create: Create a new logset, using GroupName to create the logset.
+reuse: Use an existing logset, using GroupId to specify the logset.
+The combination of using an existing log topic while creating a new logset is not allowed.
          * @type {string || null}
          */
         this.GroupOperation = null;
 
         /**
-         * 
+         * Log delivery region.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 
+         * Log topic ID.
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * 
+         * Log topic name.
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * 
+         * Logset ID.
          * @type {string || null}
          */
         this.GroupId = null;
 
         /**
-         * 
+         * Logset name.
          * @type {string || null}
          */
         this.GroupName = null;
@@ -16171,7 +16183,7 @@ class IsolateClusterRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * Cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
@@ -16183,19 +16195,19 @@ class IsolateClusterRequest extends  AbstractModel {
         this.DbType = null;
 
         /**
-         * 
+         * Instance return reason type.
          * @type {Array.<number> || null}
          */
         this.IsolateReasonTypes = null;
 
         /**
-         * 
+         * Instance return reason supplement.
          * @type {string || null}
          */
         this.IsolateReason = null;
 
         /**
-         * Retain backup, true - Retained (incur fees)
+         * Retain backup, true - Retained (incur fees).
          * @type {boolean || null}
          */
         this.SaveBackup = null;
@@ -17027,31 +17039,31 @@ class DescribeInstanceErrorLogsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Limit on the number of logs
+         * Limit on the number of logs.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset of the log number
+         * Offset of the log number.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Start time
+         * Start time.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time
+         * End time.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -17075,7 +17087,7 @@ class DescribeInstanceErrorLogsRequest extends  AbstractModel {
         this.LogLevels = null;
 
         /**
-         * 
+         * Keywords, supports fuzzy search.
          * @type {Array.<string> || null}
          */
         this.KeyWords = null;
@@ -17641,7 +17653,7 @@ class CreateProxyResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Modify parameter task data.
  * @class
  */
 class BizTaskModifyParamsData extends  AbstractModel {
@@ -17649,7 +17661,7 @@ class BizTaskModifyParamsData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
@@ -18558,7 +18570,7 @@ class DescribeBackupConfigRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Swap instance information.
  * @class
  */
 class ExchangeInstanceInfo extends  AbstractModel {
@@ -18843,7 +18855,13 @@ class SwitchClusterZoneResponse extends  AbstractModel {
         super();
 
         /**
-         * Async FlowId
+         * <p>Task ID.</p>
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * <p>Async FlowId</p>
          * @type {number || null}
          */
         this.FlowId = null;
@@ -18863,6 +18881,7 @@ class SwitchClusterZoneResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -19394,13 +19413,13 @@ class ModifyProxyRwSplitResponse extends  AbstractModel {
         super();
 
         /**
-         * Async FlowId
+         * <p>Async FlowId</p>
          * @type {number || null}
          */
         this.FlowId = null;
 
         /**
-         * Async task ID
+         * <p>Asynchronous task ID.</p>
          * @type {number || null}
          */
         this.TaskId = null;
@@ -19776,43 +19795,43 @@ class ExportInstanceErrorLogsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Log start time
+         * Log start time.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Log end time
+         * Log end time.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * The max number of returned results
+         * The max number of returned results.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset
+         * Offset.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Log level
+         * Log level.
          * @type {Array.<string> || null}
          */
         this.LogLevels = null;
 
         /**
-         * 
+         * KeyWords.
          * @type {Array.<string> || null}
          */
         this.KeyWords = null;
@@ -19824,7 +19843,7 @@ class ExportInstanceErrorLogsRequest extends  AbstractModel {
         this.FileType = null;
 
         /**
-         * Valid value: `Timestamp`
+         * Valid value: `Timestamp`.
          * @type {string || null}
          */
         this.OrderBy = null;
@@ -20346,7 +20365,7 @@ class ModifyVipVportRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * List of allowed operations for the instance.
  * @class
  */
 class InstanceAbility extends  AbstractModel {
@@ -20594,25 +20613,25 @@ class SwitchClusterZoneRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * <p>Cluster Id</p>
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * The current AZ
+         * <p>Current availability zone</p>
          * @type {string || null}
          */
         this.OldZone = null;
 
         /**
-         * New AZ
+         * <p>Availability zone to switch to</p>
          * @type {string || null}
          */
         this.NewZone = null;
 
         /**
-         * Valid values: `yes` (execute during maintenance time), `no` (execute now)
+         * <p>Execute during maintenance period - yes, immediately execute - no</p>
          * @type {string || null}
          */
         this.IsInMaintainPeriod = null;
@@ -21591,7 +21610,7 @@ class NewAccount extends  AbstractModel {
 }
 
 /**
- * 
+ * Modify parameter information.
  * @class
  */
 class ModifyParamsData extends  AbstractModel {
@@ -21599,19 +21618,19 @@ class ModifyParamsData extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Parameter name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Parameter value before modification.
          * @type {string || null}
          */
         this.OldValue = null;
 
         /**
-         * 
+         * Parameter value after modification.
          * @type {string || null}
          */
         this.CurValue = null;
@@ -21955,7 +21974,7 @@ class CreateIntegrateClusterResponse extends  AbstractModel {
         this.TranId = null;
 
         /**
-         * Order ID
+         * Order ID.
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
@@ -25140,13 +25159,13 @@ class DescribeBackupListResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of backup files
+         * Total number of backup files.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Backup file list
+         * Backup file list.
          * @type {Array.<BackupFileInfo> || null}
          */
         this.BackupList = null;
@@ -25741,7 +25760,7 @@ class DeleteClusterDatabaseResponse extends  AbstractModel {
 }
 
 /**
- * Cluster details
+ * Cluster details.
  * @class
  */
 class CynosdbClusterDetail extends  AbstractModel {
@@ -25749,25 +25768,25 @@ class CynosdbClusterDetail extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * Cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Cluster name
+         * Cluster name.
          * @type {string || null}
          */
         this.ClusterName = null;
 
         /**
-         * Region
+         * Region.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * AZ
+         * AZ.
          * @type {string || null}
          */
         this.Zone = null;
@@ -25780,13 +25799,13 @@ class CynosdbClusterDetail extends  AbstractModel {
 
         /**
          * Status. supported values are as follows:.
--Creating: creating.
+- Creating: creating.
 - running: running.
--isolating.
--Isolated: isolated.
--activating: restore from recycle bin.
--offlining: offline.
--offlined: offline.
+- isolating.
+- Isolated: isolated.
+- activating: restore from recycle bin.
+- offlining: offline.
+- offlined: offline.
 - deleting: deleting.
 - deleted: deleted.
          * @type {string || null}
@@ -25840,43 +25859,43 @@ pausing
         this.StoragePayMode = null;
 
         /**
-         * VPC name
+         * VPC name.
          * @type {string || null}
          */
         this.VpcName = null;
 
         /**
-         * Unique VPC ID
+         * Unique VPC ID.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Subnet name
+         * Subnet name.
          * @type {string || null}
          */
         this.SubnetName = null;
 
         /**
-         * Subnet ID
+         * Subnet ID.
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * Character set
+         * Character set.
          * @type {string || null}
          */
         this.Charset = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Database type
+         * Database type.
          * @type {string || null}
          */
         this.DbType = null;
@@ -25888,7 +25907,7 @@ pausing
         this.DbMode = null;
 
         /**
-         * Database version
+         * Database version.
          * @type {string || null}
          */
         this.DbVersion = null;
@@ -25900,19 +25919,19 @@ pausing
         this.StorageLimit = null;
 
         /**
-         * Used capacity
+         * Used capacity.
          * @type {number || null}
          */
         this.UsedStorage = null;
 
         /**
-         * VIP
+         * VIP.
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
-         * vport
+         * vport.
          * @type {number || null}
          */
         this.Vport = null;
@@ -25972,31 +25991,31 @@ pausing
         this.SlaveZones = null;
 
         /**
-         * Instance information
+         * Instance information.
          * @type {Array.<ClusterInstanceDetail> || null}
          */
         this.InstanceSet = null;
 
         /**
-         * Billing mode
+         * Billing mode.
          * @type {number || null}
          */
         this.PayMode = null;
 
         /**
-         * Expiration time
+         * Expiration time.
          * @type {string || null}
          */
         this.PeriodEndTime = null;
 
         /**
-         * Project ID
+         * Project ID.
          * @type {number || null}
          */
         this.ProjectID = null;
 
         /**
-         * Array of tags bound to instance
+         * Array of tags bound to instance.
          * @type {Array.<Tag> || null}
          */
         this.ResourceTags = null;
@@ -27234,7 +27253,7 @@ class DescribeLibraDBClusterDetailRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Swap RO group information.
  * @class
  */
 class ExchangeRoGroupInfo extends  AbstractModel {
@@ -27461,7 +27480,7 @@ class ModifyInstanceNameRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Rollback instance information.
  * @class
  */
 class RollbackInstanceInfo extends  AbstractModel {
@@ -27505,37 +27524,37 @@ class RollbackInstanceInfo extends  AbstractModel {
         this.Vport = null;
 
         /**
-         * Instance ID
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Instance name
+         * Instance name.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Status
+         * Status.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * CPU Size
+         * CPU Size.
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * Memory Size
+         * Memory Size.
          * @type {number || null}
          */
         this.Mem = null;
 
         /**
-         * Storage size
+         * Storage size.
          * @type {number || null}
          */
         this.StorageLimit = null;
@@ -27982,7 +28001,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Cluster slave availability zone information.
  * @class
  */
 class ClusterSlaveData extends  AbstractModel {
@@ -27996,7 +28015,7 @@ class ClusterSlaveData extends  AbstractModel {
         this.OldMasterZone = null;
 
         /**
-         * 
+         * Old slave availability zone.
          * @type {Array.<string> || null}
          */
         this.OldSlaveZone = null;
@@ -28008,7 +28027,7 @@ class ClusterSlaveData extends  AbstractModel {
         this.NewMasterZone = null;
 
         /**
-         * 
+         * New slave availability zone.
          * @type {Array.<string> || null}
          */
         this.NewSlaveZone = null;
@@ -28811,19 +28830,19 @@ class AddClusterSlaveZoneRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * Cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Replica AZ
+         * Replica AZ.
          * @type {string || null}
          */
         this.SlaveZone = null;
 
         /**
-         * 
+         * Binlog sync mode. Default value: async. Optional values: sync, semisync, async.
          * @type {string || null}
          */
         this.BinlogSyncWay = null;
@@ -28887,7 +28906,7 @@ class CheckCreateLibraDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Rollback database information.
  * @class
  */
 class RollbackDatabase extends  AbstractModel {
@@ -28895,13 +28914,13 @@ class RollbackDatabase extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Old database name.
          * @type {string || null}
          */
         this.OldDatabase = null;
 
         /**
-         * 
+         * New database name.
          * @type {string || null}
          */
         this.NewDatabase = null;
@@ -29453,13 +29472,13 @@ class DeleteClusterDatabaseRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * Cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * 
+         * Database name.
          * @type {Array.<string> || null}
          */
         this.DbNames = null;
@@ -29979,19 +29998,19 @@ class OpenAuditServiceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Log retention period
+         * Log retention period.
          * @type {number || null}
          */
         this.LogExpireDay = null;
 
         /**
-         * Frequent log retention period
+         * Frequent log retention period.
          * @type {number || null}
          */
         this.HighLogExpireDay = null;
@@ -30009,7 +30028,7 @@ class OpenAuditServiceRequest extends  AbstractModel {
         this.RuleTemplateIds = null;
 
         /**
-         * 
+         * Audit type. true - Full audit; default false - Rule-based audit.
          * @type {boolean || null}
          */
         this.AuditAll = null;
@@ -30078,19 +30097,19 @@ class DescribeBackupListRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * Cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * The number of results to be returned. Value range: (0,100]
+         * The number of results to be returned. Value range: (0,100].
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Record offset. Value range: [0,INF)
+         * Record offset. Value range: [0,INF).
          * @type {number || null}
          */
         this.Offset = null;
@@ -30103,7 +30122,7 @@ class DescribeBackupListRequest extends  AbstractModel {
         this.DbType = null;
 
         /**
-         * Backup ID
+         * Backup ID.
          * @type {Array.<number> || null}
          */
         this.BackupIds = null;
@@ -30121,25 +30140,25 @@ class DescribeBackupListRequest extends  AbstractModel {
         this.BackupMethod = null;
 
         /**
-         * 
+         * Snapshot type. Optional values: full - Full snapshot; increment - Incremental snapshot.
          * @type {string || null}
          */
         this.SnapShotType = null;
 
         /**
-         * Backup start time
+         * Backup start time.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Backup end time
+         * Backup end time.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * 
+         * Backup file name, fuzzy search.
          * @type {Array.<string> || null}
          */
         this.FileNames = null;
@@ -30151,25 +30170,25 @@ class DescribeBackupListRequest extends  AbstractModel {
         this.BackupNames = null;
 
         /**
-         * ID list of the snapshot backup
+         * ID list of the snapshot backup.
          * @type {Array.<number> || null}
          */
         this.SnapshotIdList = null;
 
         /**
-         * 
+         * Backup region.
          * @type {string || null}
          */
         this.BackupRegion = null;
 
         /**
-         * 
+         * Whether cross-region backup.
          * @type {string || null}
          */
         this.IsCrossRegionsBackup = null;
 
         /**
-         * Status you want to query
+         * Status you want to query.
          * @type {Array.<string> || null}
          */
         this.BackupStatus = null;
@@ -30309,7 +30328,7 @@ class IntegrateInstanceInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Switch cluster log bin toggle
  * @class
  */
 class SwitchClusterLogBin extends  AbstractModel {
@@ -31057,7 +31076,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Rollback table information.
  * @class
  */
 class RollbackTableInfo extends  AbstractModel {
@@ -31092,7 +31111,7 @@ class RollbackTableInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Rollback progress details.
  * @class
  */
 class RollbackProcessInfo extends  AbstractModel {
@@ -31112,13 +31131,13 @@ class RollbackProcessInfo extends  AbstractModel {
         this.VipSwitchableTime = null;
 
         /**
-         * 
+         * Swap instance list.
          * @type {Array.<ExchangeInstanceInfo> || null}
          */
         this.ExchangeInstanceInfoList = null;
 
         /**
-         * 
+         * Swap RO group list.
          * @type {Array.<ExchangeRoGroupInfo> || null}
          */
         this.ExchangeRoGroupInfoList = null;
@@ -31418,7 +31437,7 @@ class ModifyClusterPasswordComplexityResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Filter criteria for querying audit instances.
  * @class
  */
 class AuditInstanceFilters extends  AbstractModel {
@@ -31426,19 +31445,19 @@ class AuditInstanceFilters extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Filter condition values. Supported values include: InstanceId - Instance ID, InstanceName - Instance name, ProjectId - Project ID, TagKey - Tag key, Tag - Tag (separated by vertical bar, e.g., TagKey|TagValue).
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * True indicates exact match, false indicates fuzzy match.
          * @type {boolean || null}
          */
         this.ExactMatch = null;
 
         /**
-         * 
+         * Filter value.
          * @type {Array.<string> || null}
          */
         this.Values = null;
@@ -32986,7 +33005,7 @@ class UpgradeInstanceResponse extends  AbstractModel {
         this.BigDealIds = null;
 
         /**
-         * Order ID
+         * Order ID.
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
@@ -33843,7 +33862,7 @@ class PolicyRule extends  AbstractModel {
 }
 
 /**
- * 
+ * Rollback databases and tables.
  * @class
  */
 class RollbackTable extends  AbstractModel {
@@ -33851,13 +33870,13 @@ class RollbackTable extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Database name.
          * @type {string || null}
          */
         this.Database = null;
 
         /**
-         * 
+         * Database table.
          * @type {Array.<RollbackTableInfo> || null}
          */
         this.Tables = null;
@@ -34270,7 +34289,7 @@ class GrantAccountPrivilegesResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Logical backup configuration information.
  * @class
  */
 class LogicBackupConfigInfo extends  AbstractModel {
@@ -34310,7 +34329,7 @@ Valid values: ON/OFF.
         this.LogicCrossRegionsEnable = null;
 
         /**
-         * 
+         * Regions covered by logical backup.
          * @type {Array.<string> || null}
          */
         this.LogicCrossRegions = null;
@@ -34497,7 +34516,7 @@ class ExportResourcePackageDeductDetailsRequest extends  AbstractModel {
 }
 
 /**
- * Details of whether the parameter can be modified
+ * Details of whether the parameter can be modified.
  * @class
  */
 class ModifiableInfo extends  AbstractModel {
@@ -34505,7 +34524,7 @@ class ModifiableInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether the parameter can be modified, 1: Yes 0: No.
          * @type {number || null}
          */
         this.IsModifiable = null;

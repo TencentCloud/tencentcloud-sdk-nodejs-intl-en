@@ -422,8 +422,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.AccessKey = null;
 
         /**
-         * Key.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Key. specifies the field with masking back.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SecretKey = null;
@@ -894,8 +894,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.Hsts = null;
 
         /**
-         * TLS version settings, which only support certain advanced domain names. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`. Only consecutive versions can be enabled at the same time.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Specifies the Tls version setting, which has partial support for Advance domain names and can be set to TLSv1, TLSv1.1, TLSv1.2, or TLSv1.3. consecutive versions must be enabled when modifying.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.TlsVersion = null;
@@ -1359,6 +1359,51 @@ class DescribeCdnOriginIpResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Parameter blocklist.
+ * @class
+ */
+class ParamFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the blocklist parameter switch.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Specifies the blocklist rule parameter.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ParamFilterRule> || null}
+         */
+        this.FilterRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.FilterRules) {
+            this.FilterRules = new Array();
+            for (let z in params.FilterRules) {
+                let obj = new ParamFilterRule();
+                obj.deserialize(params.FilterRules[z]);
+                this.FilterRules.push(obj);
+            }
+        }
 
     }
 }
@@ -2600,11 +2645,11 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.CosPrivateAccess = null;
 
         /**
-         * Origin-pull protocol configuration
-http: forced HTTP origin-pull
-follow: protocol follow origin-pull
-https: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Configures the origin-pull protocol.
+Http: force http origin-pull.
+follow protocol for origin pull.
+Https: enforce https origin-pull.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginPullProtocol = null;
@@ -2618,17 +2663,16 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.BackupOrigins = null;
 
         /**
-         * Secondary origin type
-<font color=red>This field is used together with `BackupOrigins`.</font>
-Values:
-`domain`: Domain name
-`ip`: IP address
-The following secondary origin types are only available to beta users. Submit a ticket to use it.
-`ipv6_domain`: Multiple IPv6 addresses and one domain name
-`ip_ipv6`: Multiple IPv4 addresses and one IPv6 address
-`ipv6_domain`: Multiple IPv6 addresses and one domain name
-`ip_ipv6_domain`: Multiple IPv4 and IPv6 addresses and one domain name
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Secondary origin type. valid values:.
+BackupOrigins specifies the backup origin list. required when not empty.
+Supports the following types.
+domain type.
+ip: ip list as the origin server.
+The following backup origin server types are not fully available yet and require trial use application.
+ipv6_domain: specifies the origin server list containing multiple ipv6 addresses and domain names.
+ip_ipv6: specifies the origin server list containing multiple ipv4 addresses and ipv6 addresses.
+ip_ipv6_domain: specifies the origin server list containing multiple ipv4 addresses, ipv6 addresses, and domain names.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.BackupOriginType = null;
@@ -3241,8 +3285,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.Switch = null;
 
         /**
-         * UA blacklist/whitelist effect rule list
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Effective rule list for UA blacklist and whitelist. must not exceed 10 rules.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<UserAgentFilterRule> || null}
          */
         this.FilterRules = null;
@@ -3858,6 +3902,16 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.IgnoreSetCookie = null;
 
+        /**
+         * Whether to enable origin server mtime verification after cache expires. valid values: equal, since, none, and null. default value: equal, which validates the origin server file's mtime and length. domains created prior to 2024-09-12 18:00 default to null, with behavior remaining unchanged.
+equal: the mtime in the origin server response must match the mtime in the cache. if there is a difference in parameter values, purge the cache.
+since: purges cache if the origin server response mtime is larger than the cache mtime.
+none: when the cache expires and the file is retrieved from the origin server again to get the mtime and Length, it does not validate the mtime in the origin response. if the origin response carries a Content-Length header, the cache is updated only when the file size changes. if the origin response does not carry a Content-Length header, the cache is updated.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OriginMtimeCheckType = null;
+
     }
 
     /**
@@ -3872,6 +3926,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.CompareMaxAge = 'CompareMaxAge' in params ? params.CompareMaxAge : null;
         this.IgnoreCacheControl = 'IgnoreCacheControl' in params ? params.IgnoreCacheControl : null;
         this.IgnoreSetCookie = 'IgnoreSetCookie' in params ? params.IgnoreSetCookie : null;
+        this.OriginMtimeCheckType = 'OriginMtimeCheckType' in params ? params.OriginMtimeCheckType : null;
 
     }
 }
@@ -4281,6 +4336,48 @@ class WafSubRuleStatus extends  AbstractModel {
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.SubIds = 'SubIds' in params ? params.SubIds : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class FilterRules extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
 
     }
 }
@@ -5471,8 +5568,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.RulePaths = null;
 
         /**
-         * `UserAgent` list
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * UserAgent list. the count cannot exceed 10.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.UserAgents = null;
@@ -5811,6 +5908,18 @@ After switching to global acceleration, configurations of the domain name will b
          */
         this.HttpsBilling = null;
 
+        /**
+         * Specifies the blocklist parameter.
+         * @type {ParamFilter || null}
+         */
+        this.ParamFilter = null;
+
+        /**
+         * 
+         * @type {AutoGuard || null}
+         */
+        this.AutoGuard = null;
+
     }
 
     /**
@@ -6090,6 +6199,18 @@ After switching to global acceleration, configurations of the domain name will b
             this.HttpsBilling = obj;
         }
 
+        if (params.ParamFilter) {
+            let obj = new ParamFilter();
+            obj.deserialize(params.ParamFilter)
+            this.ParamFilter = obj;
+        }
+
+        if (params.AutoGuard) {
+            let obj = new AutoGuard();
+            obj.deserialize(params.AutoGuard)
+            this.AutoGuard = obj;
+        }
+
     }
 }
 
@@ -6153,6 +6274,16 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.HeuristicCache = null;
 
+        /**
+         * Whether to enable origin server mtime verification after cache expires. valid values: equal, since, none, and null. default value: equal, which validates the origin server file's mtime and length. domains created prior to 2024-09-12 18:00 default to null, with behavior remaining unchanged.
+equal: the mtime in the origin server response must match the mtime in the cache. if there is a difference in parameter values, purge the cache.
+since: purges cache if the origin server response mtime is larger than the cache mtime.
+none: when the cache expires and the file is retrieved from the origin server again to get the mtime and Length, it does not validate the mtime in the origin response. if the origin response carries a Content-Length header, the cache is updated only when the file size changes. if the origin response does not carry a Content-Length header, the cache is updated.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OriginMtimeCheckType = null;
+
     }
 
     /**
@@ -6169,6 +6300,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             obj.deserialize(params.HeuristicCache)
             this.HeuristicCache = obj;
         }
+        this.OriginMtimeCheckType = 'OriginMtimeCheckType' in params ? params.OriginMtimeCheckType : null;
 
     }
 }
@@ -6447,7 +6579,7 @@ class AdvancedAuthenticationTypeA extends  AbstractModel {
         this.ExpireTimeRequired = null;
 
         /**
-         * URL composition, e.g., `${private_key}${schema}${host}${full_uri}`.
+         * URL format, for example: ${private_key}${schema}${host}${full_uri}.
          * @type {string || null}
          */
         this.Format = null;
@@ -6776,7 +6908,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.AccessKey = null;
 
         /**
-         * Key
+         * Key. the field is returned with masking.
          * @type {string || null}
          */
         this.SecretKey = null;
@@ -6980,7 +7112,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 
 /**
  * Timestamp hotlink protection mode D configuration
-The access URL format of timestamp hotlink protection mode D is as follows: http://DomainName/FileName?sign=md5hash&t=timestamp
+The access URL format of timestamp hotlink protection mode D is as follows: `http://DomainName/FileName?sign=md5hash&t=timestamp`
 Here, timestamp is a decimal or hexadecimal timestamp in Unix format;
 `md5hash`: MD5 (custom key + file path + timestamp)
  * @class
@@ -7071,7 +7203,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 
 /**
  * Timestamp hotlink protection mode C configuration
-The access URL format of timestamp hotlink protection mode C is as follows: http://DomainName/md5hash/timestamp/FileName
+The access URL format of timestamp hotlink protection mode C is as follows: `http://DomainName/md5hash/timestamp/FileName`
 Here, timestamp is a hexadecimal timestamp in Unix format;
 `md5hash`: MD5 (custom key + file path + timestamp)
  * @class
@@ -7209,13 +7341,12 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * Timestamp hotlink protection mode A configuration
-The access URL format of timestamp hotlink protection mode A is as follows: http://DomainName/Filename?sign=timestamp-rand-uid-md5hash
-Here, timestamp is a decimal timestamp in Unix format;
-rand is a random string composed of 0-100 characters, including digits, upper and lower-case letters.
-uid is 0;
-md5hash: MD5 (file path-timestamp-rand-uid-custom key)
-
+ * Timestamp hotlink protection mode A configuration.
+The access URL format for timestamp hotlink protection mode A is: `http://DomainName/Filename?sign=timestamp-rand-uid-md5hash`.
+Among them, timestamp is a decimal UNIX timestamp.
+Rand specifies a random string with 0 to 100 characters composed of upper- and lower-case letters and numbers.
+Specifies the uid is 0.
+md5hash: specifies md5 (file path-timestamp-rand-uid-custom key).
  * @class
  */
 class AuthenticationTypeA extends  AbstractModel {
@@ -7707,10 +7838,10 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.HeaderName = null;
 
         /**
-         * HTTP header value. Up to 1000 characters can be set.
-Not required when Mode is del
-Required when Mode is add/set
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * http header value. custom request header supports up to 1000 characters. custom response header can be set up to 2000 characters.
+Optional when Mode is del.
+Required when Mode is add/set.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HeaderValue = null;
@@ -7963,10 +8094,7 @@ If this parameter is left empty, edge server information will be returned by def
         this.Layer = null;
 
         /**
-         * Specifies a region to query.
-`mainland`: Nodes in the Chinese mainland
-`overseas`: Nodes outside the Chinese mainland
-`global`: Global nodes
+         * Query region: mainland: node in chinese mainland; overseas: node outside the chinese mainland; global: global node.
          * @type {string || null}
          */
         this.Area = null;
@@ -7978,7 +8106,7 @@ If this parameter is left empty, edge server information will be returned by def
         this.Segment = null;
 
         /**
-         * whether to query node IPV6 information.
+         * 
          * @type {boolean || null}
          */
         this.ShowIpv6 = null;
@@ -8966,10 +9094,10 @@ class HeuristicCache extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable heuristic caching. Values:
-`on`: Enable
-`off`: Disable
-Note: This field may return·`null`, indicating that no valid values can be obtained.
+         * Specifies the heuristic cache configuration switch. valid values:.
+on: enable.
+Off: turn off the switch (default).
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -9591,9 +9719,9 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.RedirectType = null;
 
         /**
-         * Status code returned for forced redirect 
-Supports 301, 302.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Specifies the return status code for forced redirection. 
+Supports 301, 302, 307, and 308.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RedirectStatusCode = null;
@@ -9943,7 +10071,7 @@ class PushUrlsCacheRequest extends  AbstractModel {
         super();
 
         /**
-         * List of URLs. The protocol header such as "http://" or "https://" needs to be included.
+         * List of URLs. The protocol header such as `http://` or `https://` needs to be included.
          * @type {Array.<string> || null}
          */
         this.Urls = null;
@@ -12189,8 +12317,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.BpsThreshold = null;
 
         /**
-         * Specifies how to disable CDN service when the threshold is exceeded. `RETURN_404`: Return 404; `RESOLVE_DNS_TO_ORIGIN`: Forward to origin server.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Shutdown method RETURN 404: RETURN_404.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CounterMeasure = null;
@@ -12219,7 +12347,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.Metric = null;
 
         /**
-         * Detection Cycle, Unit: Minutes, 60 or 1440
+         * 
          * @type {number || null}
          */
         this.Cycle = null;
@@ -12564,8 +12692,10 @@ class CacheKey extends  AbstractModel {
         this.FullUrlCache = null;
 
         /**
-         * Specifies whether the cache key is case sensitive
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Specifies whether to use case-insensitive cache.
+on: enable.
+Off: turn off the switch.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IgnoreCase = null;
@@ -12894,8 +13024,10 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.FullUrlCache = null;
 
         /**
-         * Whether caches are case insensitive
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Specifies whether to use case-insensitive cache.
+on: enable.
+Off: turn off the switch.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IgnoreCase = null;
@@ -12934,6 +13066,52 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             this.QueryString = obj;
         }
         this.RuleTag = 'RuleTag' in params ? params.RuleTag : null;
+
+    }
+}
+
+/**
+ * Parameter blocklist rule.
+ * @class
+ */
+class ParamFilterRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter name.
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Numeric array. value range: less than 10.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+        /**
+         * http status code (only supports 403).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ReturnCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Values = 'Values' in params ? params.Values : null;
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
 
     }
 }
@@ -13024,6 +13202,49 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.Cname = 'Cname' in params ? params.Cname : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class AutoGuard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {Array.<FilterRules> || null}
+         */
+        this.FilterRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.FilterRules) {
+            this.FilterRules = new Array();
+            for (let z in params.FilterRules) {
+                let obj = new FilterRules();
+                obj.deserialize(params.FilterRules[z]);
+                this.FilterRules.push(obj);
+            }
+        }
 
     }
 }
@@ -13485,7 +13706,7 @@ class PurgeUrlsCacheRequest extends  AbstractModel {
         super();
 
         /**
-         * List of URLs. The protocol header such as "http://" or "https://" needs to be included.
+         * List of URLs. The protocol header such as `http://` or `https://` needs to be included.
          * @type {Array.<string> || null}
          */
         this.Urls = null;
@@ -14066,8 +14287,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.AccessKey = null;
 
         /**
-         * Key
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Key. the field is returned with masking.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SecretKey = null;
@@ -14412,8 +14633,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.AccessKey = null;
 
         /**
-         * Key.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Key. the field is returned with masking.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SecretKey = null;
@@ -14619,7 +14840,7 @@ class SearchClsLogRequest extends  AbstractModel {
         this.Channel = null;
 
         /**
-         * Query statement. For more details, see [https://intl.cloud.tencent.com/document/product/614/16982?from_cn_redirect=1].
+         * Query statement. For more details, see [Syntax Rules](https://www.tencentcloud.com/document/product/614/37803).
          * @type {string || null}
          */
         this.Query = null;
@@ -14721,8 +14942,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.AccessKey = null;
 
         /**
-         * Key.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Key. the field is returned with masking.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SecretKey = null;
@@ -15178,23 +15399,23 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.FilterType = null;
 
         /**
-         * IP blocklist/allowlist
-Supports IPs in X.X.X.X format, or IP ranges in /8, /16, /24 format.
-Up to 50 whitelists or blacklists can be entered
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * IP blocklist/allowlist configuration.
+Supports IPV4 addresses in X.X.X.X format, IPV6 addresses in X:X:X:X:X:X:X:X format, or network segments in /X format (IPV4: 1≤X≤32; IPV6: 1≤X≤128).
+Specifies a maximum of 200 allowlist or blocklist entries.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Filters = null;
 
         /**
-         * IP blocklist/allowlist path-based configuration. This feature is only available to selected beta customers.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * IP blocklist and allowlist path-specific configuration. the total count of blocklist and allowlist ips must not exceed 1000.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<IpFilterPathRule> || null}
          */
         this.FilterRules = null;
 
         /**
-         * (Disused) Expected HTTP code to return when the IP allowlist/blocklist verification fails. <br><font color=red>The 514 code is used instead.</font>
+         * (Disused) Expected HTTP code to return when the IP allowlist/blocklist verification fails. 
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -15452,7 +15673,7 @@ Supports 301 or 302.
 
         /**
          * Redirect URL
-Requires a full redirect path, such as https://www.test.com/error.html.
+Requires a full redirect path, such as `https://www.test.com/error.html`.
          * @type {string || null}
          */
         this.RedirectUrl = null;
@@ -16170,7 +16391,7 @@ class UrlRedirectRule extends  AbstractModel {
         this.RedirectUrl = null;
 
         /**
-         * Target host. It should be a standard domain name starting with `http://` or `https://`. If it is left empty, “http://[current domain name]” will be used by default.
+         * Target host. It should be a standard domain name starting with `http://` or `https://`. If it is left empty, "http://[current domain name]" will be used by default.
 Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
@@ -16182,6 +16403,12 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          * @type {boolean || null}
          */
         this.FullMatch = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.Regex = null;
 
     }
 
@@ -16197,6 +16424,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
         this.RedirectHost = 'RedirectHost' in params ? params.RedirectHost : null;
         this.FullMatch = 'FullMatch' in params ? params.FullMatch : null;
+        this.Regex = 'Regex' in params ? params.Regex : null;
 
     }
 }
@@ -16254,10 +16482,10 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.FilterType = null;
 
         /**
-         * IP blocklist/allowlist list
-Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges.
-Up to 50 allowlists or blocklists can be entered.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * IP blocklist/allowlist configuration.
+Supports IPV4 addresses in X.X.X.X format, IPV6 addresses in X:X:X:X:X:X:X:X format, or network segments in /X format (IPV4: 1≤X≤32; IPV6: 1≤X≤128).
+Specifies a maximum of 500 allowlist or 200 blocklist entries.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Filters = null;
@@ -16284,6 +16512,12 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.RulePaths = null;
 
+        /**
+         * Remark information. supports up to 50 characters.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
     }
 
     /**
@@ -16297,6 +16531,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.Filters = 'Filters' in params ? params.Filters : null;
         this.RuleType = 'RuleType' in params ? params.RuleType : null;
         this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -16366,6 +16601,7 @@ module.exports = {
     PurgePathCacheResponse: PurgePathCacheResponse,
     DomainFilter: DomainFilter,
     DescribeCdnOriginIpResponse: DescribeCdnOriginIpResponse,
+    ParamFilter: ParamFilter,
     SpecificConfig: SpecificConfig,
     FollowRedirect: FollowRedirect,
     RequestHeader: RequestHeader,
@@ -16416,6 +16652,7 @@ module.exports = {
     DescribeCdnIpRequest: DescribeCdnIpRequest,
     Ipv6: Ipv6,
     WafSubRuleStatus: WafSubRuleStatus,
+    FilterRules: FilterRules,
     StatusCodeCache: StatusCodeCache,
     DescribeIpVisitResponse: DescribeIpVisitResponse,
     EnableClsLogTopicResponse: EnableClsLogTopicResponse,
@@ -16525,8 +16762,10 @@ module.exports = {
     CookieKey: CookieKey,
     RemoteAuthentication: RemoteAuthentication,
     KeyRule: KeyRule,
+    ParamFilterRule: ParamFilterRule,
     CappingRule: CappingRule,
     ShareCname: ShareCname,
+    AutoGuard: AutoGuard,
     ListClsLogTopicsRequest: ListClsLogTopicsRequest,
     Seo: Seo,
     BandwidthAlert: BandwidthAlert,

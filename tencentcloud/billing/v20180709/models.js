@@ -380,6 +380,97 @@ class ConsumptionBusinessSummaryDataItem extends  AbstractModel {
 }
 
 /**
+ * Detailed summary of purchases by project
+ * @class
+ */
+class ProjectSummaryOverviewItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Project name: The project to which a resource belongs, which is user-designated. If a resource has not been assigned to a project, it will automatically belong to the default project.
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * Cost ratio, to two decimal points
+         * @type {string || null}
+         */
+        this.RealTotalCostRatio = null;
+
+        /**
+         * Total amount after discount
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * Cash credit: The amount paid from the user’s cash account
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * Free credit: The amount paid with the user’s free credit
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * Voucher payment: The voucher deduction amount
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * Commission credit: The amount paid with the user’s commission credit.
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
+        /**
+         * Billing month, e.g. `2019-08`
+         * @type {string || null}
+         */
+        this.BillMonth = null;
+
+        /**
+         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
+        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+
+    }
+}
+
+/**
  * Resource instance information
  * @class
  */
@@ -4716,72 +4807,66 @@ class AnalyseProjectDetail extends  AbstractModel {
 }
 
 /**
- * Detailed summary of purchases by project
+ * DescribeOrgMemberAccountBalanceData
  * @class
  */
-class ProjectSummaryOverviewItem extends  AbstractModel {
+class DescribeOrgMemberAccountBalanceData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Project ID
+         * <p>Member account Uin</p>
          * @type {string || null}
          */
-        this.ProjectId = null;
+        this.MemberUin = null;
 
         /**
-         * Project name: The project to which a resource belongs, which is user-designated. If a resource has not been assigned to a project, it will automatically belong to the default project.
+         * <p>Member name</p>
          * @type {string || null}
          */
-        this.ProjectName = null;
+        this.MemberName = null;
 
         /**
-         * Cost ratio, to two decimal points
-         * @type {string || null}
+         * <p>Whether it is a credit account</p>
+         * @type {boolean || null}
          */
-        this.RealTotalCostRatio = null;
+        this.IsCreditAccount = null;
 
         /**
-         * Total amount after discount
-         * @type {string || null}
+         * <p>Current actual available balance</p><p>Unit: cent</p>
+         * @type {number || null}
          */
-        this.RealTotalCost = null;
+        this.RealBalance = null;
 
         /**
-         * Cash credit: The amount paid from the user’s cash account
-         * @type {string || null}
+         * <p>Cash account balance</p><p>Unit: cent</p>
+         * @type {number || null}
          */
-        this.CashPayAmount = null;
+        this.CashAccountBalance = null;
 
         /**
-         * Free credit: The amount paid with the user’s free credit
-         * @type {string || null}
+         * <p>Credit limit</p><p>Unit: cent</p><p>Credit limit = Basic credit limit + Temporary credit limit</p>
+         * @type {number || null}
          */
-        this.IncentivePayAmount = null;
+        this.CreditAmount = null;
 
         /**
-         * Voucher payment: The voucher deduction amount
-         * @type {string || null}
+         * <p>Temporary credit limit</p><p>Unit: cent</p>
+         * @type {number || null}
          */
-        this.VoucherPayAmount = null;
+        this.TempCredit = null;
 
         /**
-         * Commission credit: The amount paid with the user’s commission credit.
-         * @type {string || null}
+         * <p>Basic credit limit</p><p>Unit: cent</p>
+         * @type {number || null}
          */
-        this.TransferPayAmount = null;
+        this.BasicCreditAmount = null;
 
         /**
-         * Billing month, e.g. `2019-08`
-         * @type {string || null}
+         * <p>Overdue payments</p><p>Unit: cent</p>
+         * @type {number || null}
          */
-        this.BillMonth = null;
-
-        /**
-         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
-         * @type {string || null}
-         */
-        this.TotalCost = null;
+        this.OweAmount = null;
 
     }
 
@@ -4792,16 +4877,15 @@ class ProjectSummaryOverviewItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
-        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
-        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
-        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
-        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
-        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
-        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
-        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
-        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.MemberUin = 'MemberUin' in params ? params.MemberUin : null;
+        this.MemberName = 'MemberName' in params ? params.MemberName : null;
+        this.IsCreditAccount = 'IsCreditAccount' in params ? params.IsCreditAccount : null;
+        this.RealBalance = 'RealBalance' in params ? params.RealBalance : null;
+        this.CashAccountBalance = 'CashAccountBalance' in params ? params.CashAccountBalance : null;
+        this.CreditAmount = 'CreditAmount' in params ? params.CreditAmount : null;
+        this.TempCredit = 'TempCredit' in params ? params.TempCredit : null;
+        this.BasicCreditAmount = 'BasicCreditAmount' in params ? params.BasicCreditAmount : null;
+        this.OweAmount = 'OweAmount' in params ? params.OweAmount : null;
 
     }
 }
@@ -8250,6 +8334,48 @@ class SummaryTotal extends  AbstractModel {
 }
 
 /**
+ * DescribeOrgMemberAccountBalance request structure.
+ * @class
+ */
+class DescribeOrgMemberAccountBalanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Page number</p><p>Default value: 1</p><p>Value ranges from 1</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * <p>Page size</p><p>Value ranges from 1 to 10</p><p>Default value: 10</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * <p>Member uin list</p><p>Input parameter limit: Elements must be pure digits and the number of elements cannot be greater than 10</p><p>Return the account balance information of all members within the organization when empty, and return the account balance information of specified members when not empty</p>
+         * @type {Array.<string> || null}
+         */
+        this.MemberUins = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.MemberUins = 'MemberUins' in params ? params.MemberUins : null;
+
+    }
+}
+
+/**
  * Summarize total cost by product
  * @class
  */
@@ -11022,6 +11148,70 @@ class ModifyGatherRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeOrgMemberAccountBalance response structure.
+ * @class
+ */
+class DescribeOrgMemberAccountBalanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Member account balance list</p>
+         * @type {Array.<DescribeOrgMemberAccountBalanceData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * <p>Total record count</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * <p>Actual number of returned results on the current page</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * <p>current page</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DescribeOrgMemberAccountBalanceData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -17186,6 +17376,7 @@ module.exports = {
     DescribeCostSummaryByProductRequest: DescribeCostSummaryByProductRequest,
     DescribeCPQBillingMappingRequest: DescribeCPQBillingMappingRequest,
     ConsumptionBusinessSummaryDataItem: ConsumptionBusinessSummaryDataItem,
+    ProjectSummaryOverviewItem: ProjectSummaryOverviewItem,
     RenewInstance: RenewInstance,
     ModifyAllocationRuleRequest: ModifyAllocationRuleRequest,
     DeleteAllocationRuleRequest: DeleteAllocationRuleRequest,
@@ -17239,7 +17430,7 @@ module.exports = {
     DescribeGatherResourceRequest: DescribeGatherResourceRequest,
     DescribeCostSummaryByProjectResponse: DescribeCostSummaryByProjectResponse,
     AnalyseProjectDetail: AnalyseProjectDetail,
-    ProjectSummaryOverviewItem: ProjectSummaryOverviewItem,
+    DescribeOrgMemberAccountBalanceData: DescribeOrgMemberAccountBalanceData,
     DescribeBillSummaryByTagResponse: DescribeBillSummaryByTagResponse,
     ModifyGatherRuleRequest: ModifyGatherRuleRequest,
     SummaryDetail: SummaryDetail,
@@ -17286,6 +17477,7 @@ module.exports = {
     DescribeRenewInstancesRequest: DescribeRenewInstancesRequest,
     PayDealsRequest: PayDealsRequest,
     SummaryTotal: SummaryTotal,
+    DescribeOrgMemberAccountBalanceRequest: DescribeOrgMemberAccountBalanceRequest,
     BusinessSummaryTotal: BusinessSummaryTotal,
     DescribeAllocationBillConditionsResponse: DescribeAllocationBillConditionsResponse,
     CostComponentSet: CostComponentSet,
@@ -17315,6 +17507,7 @@ module.exports = {
     CreateInstanceRequest: CreateInstanceRequest,
     AllocationStat: AllocationStat,
     ModifyGatherRuleResponse: ModifyGatherRuleResponse,
+    DescribeOrgMemberAccountBalanceResponse: DescribeOrgMemberAccountBalanceResponse,
     BillProject: BillProject,
     ActionSummaryOverviewItem: ActionSummaryOverviewItem,
     DescribeBillDetailForOrganizationRequest: DescribeBillDetailForOrganizationRequest,

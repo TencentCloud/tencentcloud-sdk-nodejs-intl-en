@@ -21,6 +21,7 @@ const DescribeBillAdjustInfoResponse = models.DescribeBillAdjustInfoResponse;
 const DescribeCostSummaryByProductRequest = models.DescribeCostSummaryByProductRequest;
 const DescribeCPQBillingMappingRequest = models.DescribeCPQBillingMappingRequest;
 const ConsumptionBusinessSummaryDataItem = models.ConsumptionBusinessSummaryDataItem;
+const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
 const RenewInstance = models.RenewInstance;
 const ModifyAllocationRuleRequest = models.ModifyAllocationRuleRequest;
 const DeleteAllocationRuleRequest = models.DeleteAllocationRuleRequest;
@@ -74,7 +75,7 @@ const DescribeAllocationSummaryByItemResponse = models.DescribeAllocationSummary
 const DescribeGatherResourceRequest = models.DescribeGatherResourceRequest;
 const DescribeCostSummaryByProjectResponse = models.DescribeCostSummaryByProjectResponse;
 const AnalyseProjectDetail = models.AnalyseProjectDetail;
-const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
+const DescribeOrgMemberAccountBalanceData = models.DescribeOrgMemberAccountBalanceData;
 const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
 const ModifyGatherRuleRequest = models.ModifyGatherRuleRequest;
 const SummaryDetail = models.SummaryDetail;
@@ -121,6 +122,7 @@ const TagDataInfo = models.TagDataInfo;
 const DescribeRenewInstancesRequest = models.DescribeRenewInstancesRequest;
 const PayDealsRequest = models.PayDealsRequest;
 const SummaryTotal = models.SummaryTotal;
+const DescribeOrgMemberAccountBalanceRequest = models.DescribeOrgMemberAccountBalanceRequest;
 const BusinessSummaryTotal = models.BusinessSummaryTotal;
 const DescribeAllocationBillConditionsResponse = models.DescribeAllocationBillConditionsResponse;
 const CostComponentSet = models.CostComponentSet;
@@ -150,6 +152,7 @@ const AllocationSummaryByBusiness = models.AllocationSummaryByBusiness;
 const CreateInstanceRequest = models.CreateInstanceRequest;
 const AllocationStat = models.AllocationStat;
 const ModifyGatherRuleResponse = models.ModifyGatherRuleResponse;
+const DescribeOrgMemberAccountBalanceResponse = models.DescribeOrgMemberAccountBalanceResponse;
 const BillProject = models.BillProject;
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
 const DescribeBillDetailForOrganizationRequest = models.DescribeBillDetailForOrganizationRequest;
@@ -733,6 +736,17 @@ Currently, the integrated and supported product for purchase includes: Cloud Fir
     DescribeGatherResource(req, cb) {
         let resp = new DescribeGatherResourceResponse();
         this.request("DescribeGatherResource", req, resp, cb);
+    }
+
+    /**
+     * Query member available balance in batches
+     * @param {DescribeOrgMemberAccountBalanceRequest} req
+     * @param {function(string, DescribeOrgMemberAccountBalanceResponse):void} cb
+     * @public
+     */
+    DescribeOrgMemberAccountBalance(req, cb) {
+        let resp = new DescribeOrgMemberAccountBalanceResponse();
+        this.request("DescribeOrgMemberAccountBalance", req, resp, cb);
     }
 
     /**

@@ -546,6 +546,12 @@ class AdaptiveFrequencyControl extends  AbstractModel {
         this.Enabled = null;
 
         /**
+         * Rule ID of adaptive frequency control, returned as an output parameter.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
          * The restriction level of adaptive frequency control. required when Enabled is on. valid values: <li>Loose: Loose</li><li>Moderate: Moderate</li><li>Strict: Strict</li>.
          * @type {string || null}
          */
@@ -567,6 +573,7 @@ class AdaptiveFrequencyControl extends  AbstractModel {
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Id = 'Id' in params ? params.Id : null;
         this.Sensitivity = 'Sensitivity' in params ? params.Sensitivity : null;
 
         if (params.Action) {
@@ -1682,6 +1689,34 @@ class DeleteSecurityAPIResourceRequest extends  AbstractModel {
 }
 
 /**
+ * Origin server uninstallation config.
+ * @class
+ */
+class ShieldParameters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Origin server uninstallation space ID.
+         * @type {string || null}
+         */
+        this.ShieldSpaceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShieldSpaceId = 'ShieldSpaceId' in params ? params.ShieldSpaceId : null;
+
+    }
+}
+
+/**
  * Region policy configuration.
  * @class
  */
@@ -2735,56 +2770,37 @@ class CreateRealtimeLogDeliveryTaskRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
+         * Data shipping area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding the Chinese mainland).</li></ul>
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Data delivery type. Available values: <ul><li>domain: site acceleration log;</li><li>application: four-layer proxy logs;</li><li>function: edge function logs;</li><li>web-rateLiming: rate limit and CC attack defense log;</li><li>web-attack: managed rule log;</li><li>web-rule: custom rule logs;</li><li>web-bot: bot management log.</li></ul>
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
          * Name of a real-time log delivery task, which can contain up to 200 characters, including digits, English letters, hyphens (-) and underscores (_).
          * @type {string || null}
          */
         this.TaskName = null;
 
         /**
-         * Type of a real-time log shipping task. valid values:.
-<li>cls: push to tencent cloud cls.</li>.
-<li>custom_endpoint: push to a custom HTTP(S) address.</li>.
-<li>s3: push to an AWS s3-compatible bucket address.</li>.
-<li>log_analysis: pushes to EdgeOne log analytics. this task type only supports the "site acceleration log" data delivery type.</li>.
+         * Type of a real-time log shipping task. Valid values:<ul><li>cls: push to Tencent Cloud CLS;</li><li>custom_endpoint: push to a custom HTTP(S) address;</li><li>s3: push to an AWS S3-compatible bucket address;</li><li>log_analysis: push to EdgeOne log analytics. Only supported when LogType = domain or web-attack.</li></ul>
          * @type {string || null}
          */
         this.TaskType = null;
 
         /**
-         * Entity list corresponding to the real-time log delivery task. example values:.
-<Li>Specifies the layer-7 domain name: domain.example.com.</li>.
-<Li>Specifies the l4 proxy instance: sid-2s69eb5wcms7.</li>.
-<Li>Edge function instance: test-zone-2mxigizoh9l9-1257626257.</li>.
+         * List of entities corresponding to the real-time log delivery task. Example values are as follows: <ul><li>Layer 7 domain: domain.example.com</li><li>L4 proxy instance: sid-2s69eb5wcms7</li><li>Cloud function instance: test-zone-2mxigizoh9l9-1257626257</li></ul>
          * @type {Array.<string> || null}
          */
         this.EntityList = null;
 
         /**
-         * Data delivery type. valid values:.
-<li>domain: specifies the site acceleration logs.</li>.
-<li>application: four-layer proxy logs.</li>.
-<Li>Function: specifies the edge function logs.</li>.
-<li>web-rateLiming: specifies the rate limit and CC attack defense logs.</li>.
-<li>web-attack: managed rule logs;</li>.
-<li>web-rule: custom rule logs;</li>.
-<li>web-bot: Bot management logs.</li>
-         * @type {string || null}
-         */
-        this.LogType = null;
-
-        /**
-         * Data area. Valid values:
-<li>mainland: within the Chinese mainland;</li>
-<li>overseas: global (excluding the Chinese mainland).</li>
-         * @type {string || null}
-         */
-        this.Area = null;
-
-        /**
-         * Predefined fields for delivery. valid values:.
-<Li>[Site acceleration log (l7 access log)](https://www.tencentcloud.com/document/product/1552/105791?from_cn_redirect=1)</li>.
-<Li><A href="https://www.tencentcloud.com/document/product/1552/105792?from_cn_redirect=1">four-layer proxy logs</a></li>.
-<Li>Specifies the edge function logs (https://www.tencentcloud.com/document/product/1552/115585?from_cn_redirect=1).</li>.
+         * Predefined fields for delivery. Value reference: <ul><li>[Site acceleration log (Layer 7 Access Logs)](https://www.tencentcloud.com/document/product/1552/105791?from_cn_redirect=1)</li><li>[Four-layer proxy logs](https://www.tencentcloud.com/document/product/1552/105792?from_cn_redirect=1)</li><li>[Edge Function logs](https://www.tencentcloud.com/document/product/1552/115585?from_cn_redirect=1)</li></ul>
          * @type {Array.<string> || null}
          */
         this.Fields = null;
@@ -2808,9 +2824,7 @@ class CreateRealtimeLogDeliveryTaskRequest extends  AbstractModel {
         this.Sample = null;
 
         /**
-         * Output format for log delivery. if this field is not specified, the default format is used, which works as follows:.
-<li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, with each JSON object representing a log entry;</li>.
-<li>When TaskType is 's3', the default format is JSON Lines;</li>specifically, when TaskType is 'cls' or 'log_analysis', the only allowed value for LogFormat.FormatType is 'JSON', and other parameters in LogFormat will be ignored. it is recommended not to transfer LogFormat.
+         * Output format for log delivery. If left empty, the default format is used. The default format logic is as follows:<ul><li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, each JSON object represents a log entry;</li><li>When TaskType is 's3', the default format is JSON Lines;</li></ul>Particularly, when TaskType is 'cls' or 'log_analysis', the only allowed value for LogFormat.FormatType is 'json', and other parameters in LogFormat will be ignored. It is recommended not to transfer LogFormat.
          * @type {LogFormat || null}
          */
         this.LogFormat = null;
@@ -2843,11 +2857,11 @@ class CreateRealtimeLogDeliveryTaskRequest extends  AbstractModel {
             return;
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
         this.TaskName = 'TaskName' in params ? params.TaskName : null;
         this.TaskType = 'TaskType' in params ? params.TaskType : null;
         this.EntityList = 'EntityList' in params ? params.EntityList : null;
-        this.LogType = 'LogType' in params ? params.LogType : null;
-        this.Area = 'Area' in params ? params.Area : null;
         this.Fields = 'Fields' in params ? params.Fields : null;
 
         if (params.CustomFields) {
@@ -3303,7 +3317,7 @@ class EdgeKVGetRequest extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters. Allowed characters include letters, numbers, hyphens, and underscores. To query a single key, input an array with one element.
+         * Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters, and supports valid UTF-8 characters. When querying a single key, input an array with one element.
          * @type {Array.<string> || null}
          */
         this.Keys = null;
@@ -4237,7 +4251,7 @@ Note: NoCheck means the health check policy is not enabled.
         this.Port = null;
 
         /**
-         * Check frequency, in seconds. It indicates how often a health check task is initiated. Valid values: 30, 60, 180, 300, 600.
+         * Check frequency, in seconds. It indicates how often a health check task is initiated. Configurable range: 10-600 seconds.
          * @type {number || null}
          */
         this.Interval = null;
@@ -6152,50 +6166,18 @@ Note: This field may return null, which indicates a failure to obtain a valid va
 }
 
 /**
- * Bot user portrait rules
+ * DeleteFunctionReplica response structure.
  * @class
  */
-class BotPortraitRule extends  AbstractModel {
+class DeleteFunctionReplicaResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch. Values:
-<li>`on`: Enable</li>
-<li>`off`: Disable</li>
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Switch = null;
-
-        /**
-         * The rule ID, which is only used as an output parameter.
-         * @type {number || null}
-         */
-        this.RuleID = null;
-
-        /**
-         * The rule ID of JS challenge. default all rules without configuring JS challenge.
-         * @type {Array.<number> || null}
-         */
-        this.AlgManagedIds = null;
-
-        /**
-         * Rule ID for digit captcha-intl. default is all rules without configuring digit captcha-intl.
-         * @type {Array.<number> || null}
-         */
-        this.CapManagedIds = null;
-
-        /**
-         * Rule ID for observation. by default, observation is not configured for all rules.
-         * @type {Array.<number> || null}
-         */
-        this.MonManagedIds = null;
-
-        /**
-         * Rule ID for interception. default to all rules with no configuration interception.
-         * @type {Array.<number> || null}
-         */
-        this.DropManagedIds = null;
+        this.RequestId = null;
 
     }
 
@@ -6206,12 +6188,7 @@ class BotPortraitRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.RuleID = 'RuleID' in params ? params.RuleID : null;
-        this.AlgManagedIds = 'AlgManagedIds' in params ? params.AlgManagedIds : null;
-        this.CapManagedIds = 'CapManagedIds' in params ? params.CapManagedIds : null;
-        this.MonManagedIds = 'MonManagedIds' in params ? params.MonManagedIds : null;
-        this.DropManagedIds = 'DropManagedIds' in params ? params.DropManagedIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7257,6 +7234,165 @@ class DownloadL4LogsRequest extends  AbstractModel {
         this.ProxyIds = 'ProxyIds' in params ? params.ProxyIds : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * Origin server failover configuration parameter internal structure.
+ * @class
+ */
+class SiteFailover extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Origin server failover type. Valid values:
+<li>FailoverToHost: Fail back to the specified IP/domain.</li>
+<li>FailoverToCOS: Fail back to Tencent Cloud COS;</li>
+<li>FailoverToS3CompatibleObjectStorage: Fail over to S3-compatible object storage;</li>
+<li> FailoverRedirectToURL: Redirect to the specified URL.</li>
+<li>FailoverCustomResponsePage: Use a custom response page.</li>
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * Origin server address, divided into following scenarios based on the Mode value:
+<li>When Mode = FailoverToHost, specify an IPV4 address, an IPV6 address, or a domain name;</li>
+<li>When Mode = FailoverToCOS, specify the access domain name of the COS bucket;</li>
+<li>When Mode = FailoverToS3CompatibleObjectStorage, specify the access domain of the S3 bucket.</li>
+         * @type {string || null}
+         */
+        this.Origin = null;
+
+        /**
+         * Protocol configuration. This parameter is required when Mode value is FailoverToHost. Valid values:
+<li>http: use HTTP protocol;</li>
+<li>https: Using HTTPS protocol;</li>
+<li>follow: protocol following.</li>
+         * @type {string || null}
+         */
+        this.OriginProtocol = null;
+
+        /**
+         * HTTP origin port, value ranges from 1 to 65535. This parameter is required when the origin-pull protocol OriginProtocol is http or follow.
+         * @type {number || null}
+         */
+        this.HTTPOriginPort = null;
+
+        /**
+         * HTTPS origin port, value ranges from 1–65535. This parameter is required when the origin-pull protocol OriginProtocol is https or follow.
+         * @type {number || null}
+         */
+        this.HTTPSOriginPort = null;
+
+        /**
+         * Host Header rewrite configuration for origin-pull
+         * @type {HostHeaderParameters || null}
+         */
+        this.UpstreamHostHeader = null;
+
+        /**
+         * Origin-pull URL rewrite configuration.
+         * @type {UpstreamURLRewriteParameters || null}
+         */
+        this.UpstreamURLRewrite = null;
+
+        /**
+         * Origin Requests parameter configuration.
+         * @type {UpstreamRequestParameters || null}
+         */
+        this.UpstreamRequestParameters = null;
+
+        /**
+         * HTTP2 origin-pull configuration parameters.
+         * @type {UpstreamHTTP2Parameters || null}
+         */
+        this.UpstreamHTTP2Parameters = null;
+
+        /**
+         * Specify whether access to the private object storage origin server is allowed. This parameter is required when the origin server type is FailoverToCOS or FailoverToS3CompatibleObjectStorage. Valid values:
+<li>on: Enable private authentication;</li>
+<li>off: Disable private authentication.</li>
+         * @type {string || null}
+         */
+        this.PrivateAccess = null;
+
+        /**
+         * Private authentication parameter. This parameter is valid only when Mode = FailoverToS3CompatibleObjectStorage and PrivateAccess = on.
+         * @type {OriginPrivateParameters || null}
+         */
+        this.PrivateParameters = null;
+
+        /**
+         * Redirect target URL. This parameter is required when Mode has a value of FailoverRedirectToURL.
+         * @type {string || null}
+         */
+        this.RedirectURL = null;
+
+        /**
+         * Response page ID. This parameter is required when Mode value is FailoverCustomResponsePage.
+         * @type {string || null}
+         */
+        this.ResponsePageId = null;
+
+        /**
+         * Response status code. This parameter is required when Mode is a value of FailoverRedirectToURL or FailoverCustomResponsePage. Valid values:
+<li>When Mode = FailoverRedirectToURL, the parameter value is one of 301, 302, 303, 307, 308.</li>
+<li>When Mode = FailoverCustomResponsePage, the parameter value is one of 400, 403, 404, 405, 414, 416, 451, 500, 501, 502, 503, 504.</li>
+         * @type {number || null}
+         */
+        this.StatusCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Origin = 'Origin' in params ? params.Origin : null;
+        this.OriginProtocol = 'OriginProtocol' in params ? params.OriginProtocol : null;
+        this.HTTPOriginPort = 'HTTPOriginPort' in params ? params.HTTPOriginPort : null;
+        this.HTTPSOriginPort = 'HTTPSOriginPort' in params ? params.HTTPSOriginPort : null;
+
+        if (params.UpstreamHostHeader) {
+            let obj = new HostHeaderParameters();
+            obj.deserialize(params.UpstreamHostHeader)
+            this.UpstreamHostHeader = obj;
+        }
+
+        if (params.UpstreamURLRewrite) {
+            let obj = new UpstreamURLRewriteParameters();
+            obj.deserialize(params.UpstreamURLRewrite)
+            this.UpstreamURLRewrite = obj;
+        }
+
+        if (params.UpstreamRequestParameters) {
+            let obj = new UpstreamRequestParameters();
+            obj.deserialize(params.UpstreamRequestParameters)
+            this.UpstreamRequestParameters = obj;
+        }
+
+        if (params.UpstreamHTTP2Parameters) {
+            let obj = new UpstreamHTTP2Parameters();
+            obj.deserialize(params.UpstreamHTTP2Parameters)
+            this.UpstreamHTTP2Parameters = obj;
+        }
+        this.PrivateAccess = 'PrivateAccess' in params ? params.PrivateAccess : null;
+
+        if (params.PrivateParameters) {
+            let obj = new OriginPrivateParameters();
+            obj.deserialize(params.PrivateParameters)
+            this.PrivateParameters = obj;
+        }
+        this.RedirectURL = 'RedirectURL' in params ? params.RedirectURL : null;
+        this.ResponsePageId = 'ResponsePageId' in params ? params.ResponsePageId : null;
+        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
 
     }
 }
@@ -10904,6 +11040,56 @@ class EdgeKVDeleteResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeFunctionReplicas response structure.
+ * @class
+ */
+class DescribeFunctionReplicasResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of edge function replicas.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Edge function replica list.
+         * @type {Array.<FunctionReplica> || null}
+         */
+        this.FunctionReplicas = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.FunctionReplicas) {
+            this.FunctionReplicas = new Array();
+            for (let z in params.FunctionReplicas) {
+                let obj = new FunctionReplica();
+                obj.deserialize(params.FunctionReplicas[z]);
+                this.FunctionReplicas.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateSecurityAPIService response structure.
  * @class
  */
@@ -12134,6 +12320,62 @@ class ModifySecurityPolicyRequest extends  AbstractModel {
         this.Entity = 'Entity' in params ? params.Entity : null;
         this.Host = 'Host' in params ? params.Host : null;
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
+ * CreateFunctionReplica request structure.
+ * @class
+ */
+class CreateFunctionReplicaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Zone ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Function ID.
+         * @type {string || null}
+         */
+        this.FunctionId = null;
+
+        /**
+         * Edge function copy name. Limit to enter 1-50 characters. Allowed characters are a-z, 0-9, and -. The - cannot be registered alone or used continuously, and cannot be placed at the beginning or the end. Copy names under the same FunctionId must be unique.
+         * @type {string || null}
+         */
+        this.ReplicaName = null;
+
+        /**
+         * Edge function replica content. Currently only supports JavaScript code. Supports a maximum of 5 MB.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Edge function replica description. Supports up to 50 characters.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.FunctionId = 'FunctionId' in params ? params.FunctionId : null;
+        this.ReplicaName = 'ReplicaName' in params ? params.ReplicaName : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -14009,9 +14251,9 @@ Note: Up to 20 ports can be input for each rule.
         this.OriginType = null;
 
         /**
-         * Origin server information.
+         * Details of the origin server:
 <li>When OriginType is custom, it indicates one or more origin servers, such as `["8.8.8.8","9.9.9.9"]` or `OriginValue=["test.com"]`;</li>
-<li>When OriginType is loadbalancer, it indicates a cloud load balancer, such as ["lb-xdffsfasdfs"];</li>
+<li>When OriginType is loadbalancer, it indicates a load balancer, such as ["lb-3pbiw4d9iqz0"];</li>
 <li>When OriginType is origins, it requires one and only one element, indicating the origin server group ID, such as ["origin-537f5b41-162a-11ed-abaa-525400c5da15"].</li>
          * @type {Array.<string> || null}
          */
@@ -14053,7 +14295,7 @@ Note: Up to 20 ports can be input for each rule.
         this.SessionPersist = null;
 
         /**
-         * Duration for session persistence. the value takes effect only when SessionPersist is true.
+         * Duration for session persistence, in seconds. The value takes effect only when SessionPersist is true.
          * @type {number || null}
          */
         this.SessionPersistTime = null;
@@ -14700,13 +14942,13 @@ class DDoSAttackEvent extends  AbstractModel {
         this.AttackStatus = null;
 
         /**
-         * The maximum attack bandwidth.
+         * Maximum bandwidth of the attack in bps.
          * @type {number || null}
          */
         this.AttackMaxBandWidth = null;
 
         /**
-         * The peak attack packet rate.
+         * Peak attack packet rate, unit: pps.
          * @type {number || null}
          */
         this.AttackPacketMaxRate = null;
@@ -15079,6 +15321,12 @@ class BandwidthAbuseDefense extends  AbstractModel {
         this.Enabled = null;
 
         /**
+         * Rule ID of traffic anti-fraud, returned as an output parameter.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
          * Bandwidth abuse protection (applicable to chinese mainland) handling method. required when Enabled is on. valid values for SecurityAction Name: <li>Monitor: observe;</li> <li>Deny: block;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>.
          * @type {SecurityAction || null}
          */
@@ -15094,6 +15342,7 @@ class BandwidthAbuseDefense extends  AbstractModel {
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
         if (params.Action) {
             let obj = new SecurityAction();
@@ -16254,6 +16503,48 @@ class ModifyApplicationProxyRuleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteFunctionReplica request structure.
+ * @class
+ */
+class DeleteFunctionReplicaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Zone ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Function ID.
+         * @type {string || null}
+         */
+        this.FunctionId = null;
+
+        /**
+         * Copy name of the deleted function. Input in the form of a list is supported.
+         * @type {Array.<string> || null}
+         */
+        this.ReplicaNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.FunctionId = 'FunctionId' in params ? params.FunctionId : null;
+        this.ReplicaNames = 'ReplicaNames' in params ? params.ReplicaNames : null;
 
     }
 }
@@ -17881,6 +18172,34 @@ Default: `source_to_eo`.
 }
 
 /**
+ * ModifyFunctionReplica response structure.
+ * @class
+ */
+class ModifyFunctionReplicaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Version release record details for the configuration group.
  * @class
  */
@@ -18177,6 +18496,69 @@ class CreateJustInTimeTranscodeTemplateRequest extends  AbstractModel {
             obj.deserialize(params.AudioTemplate)
             this.AudioTemplate = obj;
         }
+
+    }
+}
+
+/**
+ * Edge function replica.
+ * @class
+ */
+class FunctionReplica extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Function ID.
+         * @type {string || null}
+         */
+        this.FunctionId = null;
+
+        /**
+         * Edge function copy name.
+         * @type {string || null}
+         */
+        this.ReplicaName = null;
+
+        /**
+         * Edge function replica content. Format is JavaScript code.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Edge function replica description.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Edge function replica creation time.
+         * @type {string || null}
+         */
+        this.CreatedOn = null;
+
+        /**
+         * Edge function replica last update time.
+         * @type {string || null}
+         */
+        this.ModifiedOn = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionId = 'FunctionId' in params ? params.FunctionId : null;
+        this.ReplicaName = 'ReplicaName' in params ? params.ReplicaName : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
+        this.ModifiedOn = 'ModifiedOn' in params ? params.ModifiedOn : null;
 
     }
 }
@@ -18729,23 +19111,23 @@ class ModifyOriginParameters extends  AbstractModel {
         super();
 
         /**
-         * The origin type. values:.
-<Li>IPDomain: ipv4, ipv6, or domain name type origin server;</li>.
-<Li>OriginGroup: origin server group type origin server;</li>.
-<Li>LoadBalance: cloud load balancer (clb), this feature is in beta test. to use it, please submit a ticket or contact smart customer service;</li>.
-<Li>COS: tencent cloud COS origin server;</li>.
-<Li>AWSS3: all object storage origin servers that support the aws s3 protocol.</li>.
+         * Origin server type. Valid values:
+<li>IPDomain: IPV4, IPV6, or domain type origin server;</li>
+<li>OriginGroup: origin server group type origin server;</li>
+<li>LoadBalance: load balancing. This feature is in beta test. If needed, submit a ticket;</li>
+<li>COS: Tencent Cloud COS origin server;</li>
+<li>AWSS3: supports ALL AWS S3-compatible COS origin servers.</li>
          * @type {string || null}
          */
         this.OriginType = null;
 
         /**
-         * Origin server address, which varies according to the value of origintype:.
-<Li>When origintype = ipdomain, fill in an ipv4 address, an ipv6 address, or a domain name;</li>.
-<Li>When origintype = cos, please fill in the access domain name of the cos bucket;</li>.
-<Li>When origintype = awss3, fill in the access domain name of the s3 bucket;</li>.
-<Li>When origintype = origingroup, fill in the origin server group id;</li>.
-<Li>When origintype = loadbalance, fill in the cloud load balancer instance id. this feature is currently only available to the allowlist.</li>.
+         * Origin server address, which varies according to the value of OriginType:
+<li>When OriginType = IPDomain, specify this parameter with an IPV4 address, an IPV6 address, or a domain name;</li>
+<li>When OriginType = COS, specify the cos bucket access domain.</li>
+<li>When OriginType = AWSS3, specify this parameter as the access domain of the S3 bucket;</li>
+<li>When OriginType = OriginGroup, fill in the origin server group ID; when it is an output parameter, if the origin server group of other sites is referenced, the format is {origin server group ID}@{ZoneID}. For example: og-testorigin@zone-38moq1z10wwwy;</li>
+<li>When OriginType = LoadBalance, specify this parameter as the Cloud Load Balancer instance ID. This feature is currently only available to the allowlist. When it is an output parameter, if the load balancing of other sites is referenced, the format is {LoadBalancer ID}@{ZoneID}, such as lb-2rxpamcyqfzg@zone-38moq1z10wwwy.</li>
          * @type {string || null}
          */
         this.Origin = null;
@@ -20720,7 +21102,7 @@ class CreateL4ProxyResponse extends  AbstractModel {
 }
 
 /**
- * Custom Cache Key configuration parameters.
+ * Custom Cache Key config.
  * @class
  */
 class CacheKeyParameters extends  AbstractModel {
@@ -21310,6 +21692,34 @@ class ClientAttester extends  AbstractModel {
  * @class
  */
 class ModifyL4ProxyRulesStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateFunctionReplica response structure.
+ * @class
+ */
+class CreateFunctionReplicaResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -24254,7 +24664,7 @@ The original configuration will apply if this field is not specified.
         this.SessionPersist = null;
 
         /**
-         * Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
+         * Duration for session persistence, in seconds. The value takes effect only when SessionPersist is true.
          * @type {number || null}
          */
         this.SessionPersistTime = null;
@@ -26059,7 +26469,7 @@ class CreateApplicationProxyRuleRequest extends  AbstractModel {
         this.SessionPersist = null;
 
         /**
-         * Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
+         * Duration for session persistence, in seconds. The value takes effect only when SessionPersist is true.
          * @type {number || null}
          */
         this.SessionPersistTime = null;
@@ -27256,6 +27666,12 @@ class RateLimitingRule extends  AbstractModel {
         this.Condition = null;
 
         /**
+         * Speed limit mode. Within the statistical time window CountingPeriod, the following speed limit modes can be configured for requests that meet the feature CountBy:<li>Block: Block access source. When the count exceeds the threshold MaxRequestThreshold, execute Action disposal for ALL subsequent requests that meet the feature within the ActionDuration. </li><li>Throttle: Only dispose excess requests. When the count exceeds the threshold MaxRequestThreshold, only execute Action disposal for requests that exceed the threshold, and stop disposal when the window ends. At this point, the ActionDuration parameter will be ignored.</li><br />Default value is Block.
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
          * The match mode of the rate threshold request feature. this field is required when Enabled is on.<br /><br />when there are multiple conditions, composite conditions are used to collect statistics. the maximum number of conditions cannot exceed 5. valid values:<br/><li><b>http.request.ip</b>: client ip;</li><li><b>http.request.xff_header_ip</b>: client ip (priority match xff header);</li><li><b>http.request.uri.path</b>: access path of the request;</li><li><b>http.request.cookies['session']</b>: Cookie named session, where session can be replaced with your own parameter;</li><li><b>http.request.headers['user-agent']</b>: http header named user-agent, where user-agent can be replaced with your own parameter;</li><li><b>http.request.ja3</b>: ja3 fingerprint of the request;</li><li><b>http.request.ja4</b>: ja4 fingerprint of the request;</li><li><b>http.request.uri.query['test']</b>: URL query parameter named test, where test can be replaced with your own parameter.</li>.
          * @type {Array.<string> || null}
          */
@@ -27274,7 +27690,7 @@ class RateLimitingRule extends  AbstractModel {
         this.CountingPeriod = null;
 
         /**
-         * The duration of an Action is only supported in the following units: <li>s: seconds, value range 1-120;</li> <li>m: minutes, value range 1-120;</li> <li>h: hours, value range 1-48;</li> <li>d: days, value range 1-30.</li>.
+         * Duration of the Action. Only the following units are supported: <li>s: second, value range 1-120;</li><li>m: minute, value range 1-120;</li><li>h: hour, value range 1-48;</li><li>d: day, value range 1-30.</li><br />This parameter will be ignored and will not take effect when Mode is Throttle.
          * @type {string || null}
          */
         this.ActionDuration = null;
@@ -27309,6 +27725,7 @@ class RateLimitingRule extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Condition = 'Condition' in params ? params.Condition : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
         this.CountBy = 'CountBy' in params ? params.CountBy : null;
         this.MaxRequestThreshold = 'MaxRequestThreshold' in params ? params.MaxRequestThreshold : null;
         this.CountingPeriod = 'CountingPeriod' in params ? params.CountingPeriod : null;
@@ -28154,7 +28571,7 @@ Default value: overseas.
         this.AccelerateType = null;
 
         /**
-         * The session persistence duration.
+         * Session hold time, unit: seconds.
          * @type {number || null}
          */
         this.SessionPersistTime = null;
@@ -29145,6 +29562,49 @@ class DeliveryCondition extends  AbstractModel {
 }
 
 /**
+ * Origin server failure failover config.
+ * @class
+ */
+class SiteFailoverParameters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Origin server fault migration condition status code. The origin server response status code must hit the field return to execute origin server migration as SiteFailoverParams. The parameter value is one of 4xx, 5xx.
+         * @type {Array.<number> || null}
+         */
+        this.SiteFailoverStatusCodes = null;
+
+        /**
+         * Origin server failure failover configuration parameter list. Minimum length is 1, maximum length is 2.
+         * @type {Array.<SiteFailover> || null}
+         */
+        this.SiteFailoverParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SiteFailoverStatusCodes = 'SiteFailoverStatusCodes' in params ? params.SiteFailoverStatusCodes : null;
+
+        if (params.SiteFailoverParams) {
+            this.SiteFailoverParams = new Array();
+            for (let z in params.SiteFailoverParams) {
+                let obj = new SiteFailover();
+                obj.deserialize(params.SiteFailoverParams[z]);
+                this.SiteFailoverParams.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Web security exception rule.
  * @class
  */
@@ -29319,7 +29779,7 @@ class EdgeKVDeleteRequest extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters. Allowed characters include letters, numbers, hyphens, and underscores. To delete a single key, import an array with one element.
+         * Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters, supporting valid UTF-8 characters. To delete one key, input an array containing one element.
          * @type {Array.<string> || null}
          */
         this.Keys = null;
@@ -30738,6 +31198,84 @@ class ModifySecurityIPGroupRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeFunctionReplicas request structure.
+ * @class
+ */
+class DescribeFunctionReplicasRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Zone ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Function ID.
+         * @type {string || null}
+         */
+        this.FunctionId = null;
+
+        /**
+         * The offset of paginated query. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number limit of paginated query. Default value: 20. Maximum value: 200.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Sorting basis. Valid values: <li>created-on: Creation time.</li> Default sorting is based on the created-on attribute.
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+        /**
+         * List sort method. Valid values: <li>asc: ascending order;</li> <li>desc: sort in descending order.</li> Default value: asc.
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+        /**
+         * Filtering Conditions. The maximum of Filters.Values is 20. If this parameter is left empty, it returns all function replicas under the function ID. Detailed filter criteria: <li>replica-name: Filter by function replica name. Fuzzy query is supported.</li>
+         * @type {Array.<AdvancedFilter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.FunctionId = 'FunctionId' in params ? params.FunctionId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AdvancedFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * [Vary feature](https://intl.cloud.tencent.com/document/product/1552/89301?from_cn_redirect=1) configuration parameter.
  * @class
  */
@@ -31485,6 +32023,12 @@ class ClientFiltering extends  AbstractModel {
         this.Enabled = null;
 
         /**
+         * Rule ID of intelligent client filtering, returned as an output parameter.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
          * The handling method of intelligent client filtering. when Enabled is on, this field is required. the Name parameter of SecurityAction supports: <li>Monitor: observation;</li> <li>Deny: block;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>.
          * @type {SecurityAction || null}
          */
@@ -31500,6 +32044,7 @@ class ClientFiltering extends  AbstractModel {
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
         if (params.Action) {
             let obj = new SecurityAction();
@@ -34184,7 +34729,7 @@ class KeyValuePair extends  AbstractModel {
         super();
 
         /**
-         * Key name. Each key name cannot be empty, with a length of 1-512 characters. Allowed characters include letters, digits, hyphens, and underscores.
+         * Key name. Each key name cannot be empty, with a length of 1-512 characters, and supports valid UTF-8 characters.
          * @type {string || null}
          */
         this.Key = null;
@@ -34448,6 +34993,12 @@ class SlowAttackDefense extends  AbstractModel {
         this.Enabled = null;
 
         /**
+         * Rule ID of slow attack protection, returned as an output parameter.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
          * Slow attack protection handling method. required when Enabled is on. valid values for SecurityAction Name: <li>Monitor: observation;</li> <li>Deny: block;</li>.
          * @type {SecurityAction || null}
          */
@@ -34475,6 +35026,7 @@ class SlowAttackDefense extends  AbstractModel {
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
         if (params.Action) {
             let obj = new SecurityAction();
@@ -35756,6 +36308,62 @@ class IPSSLSetting extends  AbstractModel {
 }
 
 /**
+ * ModifyFunctionReplica request structure.
+ * @class
+ */
+class ModifyFunctionReplicaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Zone ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Function ID.
+         * @type {string || null}
+         */
+        this.FunctionId = null;
+
+        /**
+         * Edge function copy name that needs to be modified.
+         * @type {string || null}
+         */
+        this.ReplicaName = null;
+
+        /**
+         * Edge function replica content. Currently only supports JavaScript code. Supports a maximum of 5 MB.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Edge function replica description. Supports up to 50 characters.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.FunctionId = 'FunctionId' in params ? params.FunctionId : null;
+        this.ReplicaName = 'ReplicaName' in params ? params.ReplicaName : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
  * DescribeMultiPathGateways request structure.
  * @class
  */
@@ -35810,6 +36418,71 @@ class DescribeMultiPathGatewaysRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Bot user portrait rules
+ * @class
+ */
+class BotPortraitRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch. Values:
+<li>`on`: Enable</li>
+<li>`off`: Disable</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The rule ID, which is only used as an output parameter.
+         * @type {number || null}
+         */
+        this.RuleID = null;
+
+        /**
+         * The rule ID of JS challenge. default all rules without configuring JS challenge.
+         * @type {Array.<number> || null}
+         */
+        this.AlgManagedIds = null;
+
+        /**
+         * Rule ID for digit captcha-intl. default is all rules without configuring digit captcha-intl.
+         * @type {Array.<number> || null}
+         */
+        this.CapManagedIds = null;
+
+        /**
+         * Rule ID for observation. by default, observation is not configured for all rules.
+         * @type {Array.<number> || null}
+         */
+        this.MonManagedIds = null;
+
+        /**
+         * Rule ID for interception. default to all rules with no configuration interception.
+         * @type {Array.<number> || null}
+         */
+        this.DropManagedIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.RuleID = 'RuleID' in params ? params.RuleID : null;
+        this.AlgManagedIds = 'AlgManagedIds' in params ? params.AlgManagedIds : null;
+        this.CapManagedIds = 'CapManagedIds' in params ? params.CapManagedIds : null;
+        this.MonManagedIds = 'MonManagedIds' in params ? params.MonManagedIds : null;
+        this.DropManagedIds = 'DropManagedIds' in params ? params.DropManagedIds : null;
 
     }
 }
@@ -37805,7 +38478,7 @@ class EdgeKVPutRequest extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * Key name. The length is 1-512 characters. Allowed characters include letters, digits, hyphens, and underscores.
+         * Key name, with a length of 1-512 characters, supports valid UTF-8 characters.
          * @type {string || null}
          */
         this.Key = null;
@@ -37817,13 +38490,13 @@ class EdgeKVPutRequest extends  AbstractModel {
         this.Value = null;
 
         /**
-         * Expiration time, absolute time. It means the seconds elapsed since midnight (UTC/GMT) on January 1, 1970, and cannot be earlier than the current time. If both Expiration and ExpirationTTL are filled in, ExpirationTTL takes precedence. If neither Expiration nor ExpirationTTL is specified, the key-value pair will never expire.
+         * Expiry date of the key-value pair, absolute time in seconds, represents the seconds elapsed since 00:00:00 on January 1, 1970 (UTC) (Unix timestamp). The value must be greater than or equal to current time + 60, meaning the expiry date is at least 60 seconds from now. When both Expiration and ExpirationTTL are filled, ExpirationTTL takes precedence. If left empty, the key-value pair will never expire.
          * @type {number || null}
          */
         this.Expiration = null;
 
         /**
-         * Expiration time, relative time, in seconds. Indicates the data will expire after the specified seconds, must be greater than 0. If both Expiration and ExpirationTTL are filled in, ExpirationTTL takes precedence. If neither Expiration nor ExpirationTTL is specified, the key-value pair will never expire.
+         * The survival time of the key-value pair is a relative time in seconds, indicating that the data will expire after transit of specified seconds. Value ranges from 60. When both Expiration and ExpirationTTL are filled, ExpirationTTL takes precedence; if left empty, the key-value pair will never expire.
          * @type {number || null}
          */
         this.ExpirationTTL = null;
@@ -39393,7 +40066,7 @@ Note that if it’s enabled, the purging is based on the converted URLs.
         this.EncodeUrl = null;
 
         /**
-         * The information attached when the node cache purge type is set to purge_cache_tag.
+         * The parameter is required when the node cache clearing type is set to purge_cache_tag, and the input value is the domain name.
          * @type {CacheTag || null}
          */
         this.CacheTag = null;
@@ -39531,12 +40204,6 @@ class BotIntelligence extends  AbstractModel {
         super();
 
         /**
-         * Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
-         * @type {BotRatings || null}
-         */
-        this.BotRatings = null;
-
-        /**
          * Specifies the switch for Bot intelligent analysis configuration. valid values:.
 
 on: enabled.
@@ -39544,6 +40211,18 @@ off: disabled.
          * @type {string || null}
          */
         this.Enabled = null;
+
+        /**
+         * Rule ID of Bot intelligent analysis, returned as an output parameter.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
+         * @type {BotRatings || null}
+         */
+        this.BotRatings = null;
 
     }
 
@@ -39554,13 +40233,14 @@ off: disabled.
         if (!params) {
             return;
         }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
         if (params.BotRatings) {
             let obj = new BotRatings();
             obj.deserialize(params.BotRatings)
             this.BotRatings = obj;
         }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -39845,6 +40525,12 @@ class FrequentScanningProtection extends  AbstractModel {
         this.Enabled = null;
 
         /**
+         * Rule ID of high frequency scan protection, returned as an output parameter.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
          * The handling action for high-frequency scan protection. required when Enabled is on. valid values for SecurityAction Name: <li>Deny: block and respond with an interception page;</li> <li>Monitor: observe without processing requests, log security events in logs;</li> <li>JSChallenge: respond with a JavaScript challenge page.</li>.
          * @type {SecurityAction || null}
          */
@@ -39884,6 +40570,7 @@ class FrequentScanningProtection extends  AbstractModel {
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
         if (params.Action) {
             let obj = new SecurityAction();
@@ -40630,45 +41317,47 @@ class RuleEngineAction extends  AbstractModel {
         super();
 
         /**
-         * Operation Name. the Name must correspond to the parameter structure, such as Name=Cache, then CacheParameters is required.
-<li>Cache: specifies the node Cache TTL.</li>.
-<Li>CacheKey: specifies the custom cache key.</li>.
-<Li>CachePrefresh: specifies cache pre-refresh.</li>.
-<Li>AccessURLRedirect: specifies access url redirection.</li>.
-<Li>UpstreamURLRewrite: specifies the origin-pull url rewrite.</li>.
+         * Operation name. The name must correspond to the parameter structure. For example, if Name=Cache, CacheParameters is required.
+<li>Cache: Node caching TTL;</li>
+<li>CacheKey: custom Cache Key;</li>
+<li>CachePrefresh: cache pre-refresh;</li>
+<li>AccessURLRedirect: URL redirection;</li>
+<li>UpstreamURLRewrite: origin-pull URL rewrite;</li>
 <li>QUIC:QUIC;</li>
 <li>WebSocket:WebSocket;</li>
-<li>Authentication: Token Authentication;</li>.
-<li>MaxAge: specifies the browser cache TTL.</li>.
-<li>StatusCodeCache: specifies the status code cache TTL.</li>.
-<Li>OfflineCache: specifies the offline cache.</li>.
-<Li>SmartRouting: specifies smart acceleration.</li>.
-<Li>RangeOriginPull: specifies range-based origin pull.</li>.
-<Li>UpstreamHTTP2: specifies http/2 origin pull.</li>.
-<Li>HostHeader: specifies the host header rewrite.</li>.
-<Li>ForceRedirectHTTPS: specifies the forced https redirect configuration for access protocol.</li>.
-<li>OriginPullProtocol: specifies HTTPS origin pull.</li>.
-<Li>Compression: specifies the intelligent compression configuration.</li>.
+<li>Authentication: Token authentication;</li>
+<li>MaxAge: Browser cache TTL;</li>
+<li>StatusCodeCache: Status code cache TTL;</li>
+<li>OfflineCache: Offline cache;</li>
+<li>SmartRouting: Smart acceleration;</li>
+<li>RangeOriginPull: Range-based origin pull;</li>
+<li>UpstreamHTTP2: HTTP/2 origin pull;</li>
+<li>HostHeader: Host header rewrite;</li>
+<li>ForceRedirectHTTPS: Forced HTTPS redirect configuration for access protocol.</li>
+<li>HTTPS origin pull (OriginPullProtocol);</li>
+<li>Compression: Intelligent compression configuration;</li>
 <li>HSTS:HSTS;</li>
-<Li>ClientIPHeader: specifies the header information configuration for storing client request ip.</li>.
-<Li>OCSPStapling: specifies ocsp stapling.</li>.
-<Li>HTTP2: specifies http/2 integration.</li>.
-<li>PostMaxSize: specifies the maximum limit for file streaming transmission in POST request upload.</li>.
-<Li>ClientIPCountry: specifies the regional information of the client ip carried during origin-pull.</li>.
-<Li>UpstreamFollowRedirect: specifies the parameter configuration for redirection during origin pull.</li>.
-<Li>UpstreamRequest: specifies the origin-pull request parameters.</li>.
-<li>TLSConfig: specifies SSL/TLS security.</li>.
-<Li>ModifyOrigin: modifies the origin server.</li>.
-<Li>HTTPUpstreamTimeout: specifies the layer-7 origin-pull timeout configuration.</li>.
-<li>HttpResponse: HTTP response.</li>.
-<Li>ErrorPage: specifies the custom error page.</li>.
-<li>ModifyResponseHeader: modifies the HTTP node response header.</li>.
-<li>ModifyRequestHeader: modifies the request header of an HTTP node.</li>.
-<Li>ResponseSpeedLimit: specifies the download speed limit for a single connection.</li>.
-<Li>SetContentIdentifier: specifies the content identifier.</li>.
-<Li>Vary: specifies the vary feature configuration.</li>.
-<Li>ContentCompression: specifies the content compression configuration.</li>.
-<Li>OriginAuthentication. specifies the origin authentication configuration.</li>.
+<li>ClientIPHeader: Header information configuration that stores the client request IP.</li>
+<li>OCSPStapling: OCSP stapling;</li>
+<li>HTTP2: HTTP/2 integration;</li>
+<li>PostMaxSize: Maximum limit for file streaming transmission in POST requests.</li>
+<li>ClientIPCountry: Carry regional information of the client IP during origin pull.</li>
+<li>UpstreamFollowRedirect: Parameter configuration for redirection during origin pull;</li>
+<li>UpstreamRequest: Origin-pull request parameter;</li>
+<li>Shield: Origin server uninstallation.</li>
+<li>TLSConfig: SSL/TLS security;</li>
+<li>ModifyOrigin: Modify origin server;</li>
+<li>SiteFailover: origin server failure failover;</li>
+<li>HTTPUpstreamTimeout: Layer-7 origin-pull timeout configuration.</li>
+<li>HTTP response: HTTP response;</li>
+<li>ErrorPage: Custom error page;</li>
+<li>ModifyResponseHeader: Modify the HTTP node response header;</li>
+<li>ModifyRequestHeader: Modify the request header of an HTTP node;</li>
+<li>ResponseSpeedLimit: Download speed limit for a single connection;</li>
+<li>SetContentIdentifier: Set the content identifier.</li>
+<li>Vary: Vary feature configuration;</li>
+<li>ContentCompression: Content compression configuration;</li>
+<li>OriginAuthentication: Origin authentication configuration.</li>
          * @type {string || null}
          */
         this.Name = null;
@@ -40856,6 +41545,13 @@ Note: this field may return null, which indicates a failure to obtain a valid va
         this.UpstreamRequestParameters = null;
 
         /**
+         * Origin server uninstallation config. When the Name value is Shield, this parameter is required.
+Note: This field may return null, which indicates a failure to obtain a valid value.
+         * @type {ShieldParameters || null}
+         */
+        this.ShieldParameters = null;
+
+        /**
          * SSL/TLS security configuration parameter. this parameter is required when the name is set to tlsconfig.
 Note: this field may return null, which indicates a failure to obtain a valid value.
          * @type {TLSConfigParameters || null}
@@ -40868,6 +41564,13 @@ Note: this field may return null, which indicates a failure to obtain a valid va
          * @type {ModifyOriginParameters || null}
          */
         this.ModifyOriginParameters = null;
+
+        /**
+         * Origin server failure failover configuration parameter. This parameter is required when the Name value is SiteFailover.
+Note: This field may return null, which indicates a failure to obtain a valid value.
+         * @type {SiteFailoverParameters || null}
+         */
+        this.SiteFailoverParameters = null;
 
         /**
          * Configuration of layer 7 origin timeout. this parameter is required when name is httpupstreamtimeout.
@@ -41104,6 +41807,12 @@ Note: This field may return null, which indicates a failure to obtain a valid va
             this.UpstreamRequestParameters = obj;
         }
 
+        if (params.ShieldParameters) {
+            let obj = new ShieldParameters();
+            obj.deserialize(params.ShieldParameters)
+            this.ShieldParameters = obj;
+        }
+
         if (params.TLSConfigParameters) {
             let obj = new TLSConfigParameters();
             obj.deserialize(params.TLSConfigParameters)
@@ -41114,6 +41823,12 @@ Note: This field may return null, which indicates a failure to obtain a valid va
             let obj = new ModifyOriginParameters();
             obj.deserialize(params.ModifyOriginParameters)
             this.ModifyOriginParameters = obj;
+        }
+
+        if (params.SiteFailoverParameters) {
+            let obj = new SiteFailoverParameters();
+            obj.deserialize(params.SiteFailoverParameters)
+            this.SiteFailoverParameters = obj;
         }
 
         if (params.HTTPUpstreamTimeoutParameters) {
@@ -41250,6 +41965,7 @@ module.exports = {
     ModifyFunctionRulePriorityRequest: ModifyFunctionRulePriorityRequest,
     ModifyAccelerationDomainResponse: ModifyAccelerationDomainResponse,
     DeleteSecurityAPIResourceRequest: DeleteSecurityAPIResourceRequest,
+    ShieldParameters: ShieldParameters,
     FunctionRegionSelection: FunctionRegionSelection,
     ModifyMultiPathGatewayLineRequest: ModifyMultiPathGatewayLineRequest,
     DescribeHostsSettingResponse: DescribeHostsSettingResponse,
@@ -41331,7 +42047,7 @@ module.exports = {
     ImageOptimize: ImageOptimize,
     CreateL7AccRulesRequest: CreateL7AccRulesRequest,
     RealtimeLogDeliveryTask: RealtimeLogDeliveryTask,
-    BotPortraitRule: BotPortraitRule,
+    DeleteFunctionReplicaResponse: DeleteFunctionReplicaResponse,
     RulesProperties: RulesProperties,
     DescribeSecurityJSInjectionRuleResponse: DescribeSecurityJSInjectionRuleResponse,
     OriginACLInfo: OriginACLInfo,
@@ -41350,6 +42066,7 @@ module.exports = {
     Sv: Sv,
     Rule: Rule,
     DownloadL4LogsRequest: DownloadL4LogsRequest,
+    SiteFailover: SiteFailover,
     ZoneInfo: ZoneInfo,
     EdgeKVGetResponse: EdgeKVGetResponse,
     CAPTCHAPageChallenge: CAPTCHAPageChallenge,
@@ -41422,6 +42139,7 @@ module.exports = {
     ModifyMultiPathGatewayRequest: ModifyMultiPathGatewayRequest,
     LoadBalancer: LoadBalancer,
     EdgeKVDeleteResponse: EdgeKVDeleteResponse,
+    DescribeFunctionReplicasResponse: DescribeFunctionReplicasResponse,
     CreateSecurityAPIServiceResponse: CreateSecurityAPIServiceResponse,
     HostName: HostName,
     DeleteRulesRequest: DeleteRulesRequest,
@@ -41448,6 +42166,7 @@ module.exports = {
     FileVerification: FileVerification,
     ModifyWebSecurityTemplateResponse: ModifyWebSecurityTemplateResponse,
     ModifySecurityPolicyRequest: ModifySecurityPolicyRequest,
+    CreateFunctionReplicaRequest: CreateFunctionReplicaRequest,
     ModifySharedCNAMEResponse: ModifySharedCNAMEResponse,
     DeleteL7AccRulesRequest: DeleteL7AccRulesRequest,
     SmartRouting: SmartRouting,
@@ -41519,6 +42238,7 @@ module.exports = {
     DescribeMultiPathGatewaysResponse: DescribeMultiPathGatewaysResponse,
     MaxAgeParameters: MaxAgeParameters,
     ModifyApplicationProxyRuleResponse: ModifyApplicationProxyRuleResponse,
+    DeleteFunctionReplicaRequest: DeleteFunctionReplicaRequest,
     DDoS: DDoS,
     ModifyL7AccRulePriorityResponse: ModifyL7AccRulePriorityResponse,
     APIService: APIService,
@@ -41548,11 +42268,13 @@ module.exports = {
     OriginAuthenticationRequestProperties: OriginAuthenticationRequestProperties,
     ModifyRealtimeLogDeliveryTaskResponse: ModifyRealtimeLogDeliveryTaskResponse,
     RateLimitUserRule: RateLimitUserRule,
+    ModifyFunctionReplicaResponse: ModifyFunctionReplicaResponse,
     DeployRecord: DeployRecord,
     CreatePlanForZoneRequest: CreatePlanForZoneRequest,
     DeviceProfile: DeviceProfile,
     ConfirmMultiPathGatewayOriginACLResponse: ConfirmMultiPathGatewayOriginACLResponse,
     CreateJustInTimeTranscodeTemplateRequest: CreateJustInTimeTranscodeTemplateRequest,
+    FunctionReplica: FunctionReplica,
     TimingDataItem: TimingDataItem,
     ModifyCustomErrorPageRequest: ModifyCustomErrorPageRequest,
     ModifyFunctionRuleResponse: ModifyFunctionRuleResponse,
@@ -41616,6 +42338,7 @@ module.exports = {
     CreatePlanForZoneResponse: CreatePlanForZoneResponse,
     ClientAttester: ClientAttester,
     ModifyL4ProxyRulesStatusResponse: ModifyL4ProxyRulesStatusResponse,
+    CreateFunctionReplicaResponse: CreateFunctionReplicaResponse,
     CheckCnameStatusResponse: CheckCnameStatusResponse,
     ImportZoneConfigResponse: ImportZoneConfigResponse,
     ModifyWebSecurityTemplateRequest: ModifyWebSecurityTemplateRequest,
@@ -41760,6 +42483,7 @@ module.exports = {
     ModifyApplicationProxyRuleStatusRequest: ModifyApplicationProxyRuleStatusRequest,
     AccelerateType: AccelerateType,
     DeliveryCondition: DeliveryCondition,
+    SiteFailoverParameters: SiteFailoverParameters,
     ExceptionRule: ExceptionRule,
     FollowOrigin: FollowOrigin,
     EdgeKVDeleteRequest: EdgeKVDeleteRequest,
@@ -41790,6 +42514,7 @@ module.exports = {
     DescribeDDoSAttackEventRequest: DescribeDDoSAttackEventRequest,
     OriginGroup: OriginGroup,
     ModifySecurityIPGroupRequest: ModifySecurityIPGroupRequest,
+    DescribeFunctionReplicasRequest: DescribeFunctionReplicasRequest,
     VaryParameters: VaryParameters,
     L4Proxy: L4Proxy,
     SkipCondition: SkipCondition,
@@ -41884,7 +42609,9 @@ module.exports = {
     DescribeMultiPathGatewaySecretKeyRequest: DescribeMultiPathGatewaySecretKeyRequest,
     DDoSBlockData: DDoSBlockData,
     IPSSLSetting: IPSSLSetting,
+    ModifyFunctionReplicaRequest: ModifyFunctionReplicaRequest,
     DescribeMultiPathGatewaysRequest: DescribeMultiPathGatewaysRequest,
+    BotPortraitRule: BotPortraitRule,
     DeleteL4ProxyRulesResponse: DeleteL4ProxyRulesResponse,
     ModifyMultiPathGatewaySecretKeyRequest: ModifyMultiPathGatewaySecretKeyRequest,
     DnsRecord: DnsRecord,

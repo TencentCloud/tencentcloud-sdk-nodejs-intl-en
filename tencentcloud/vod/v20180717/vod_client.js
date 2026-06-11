@@ -53,7 +53,7 @@ const ProcessImageAsyncTemplateItem = models.ProcessImageAsyncTemplateItem;
 const DescribeAigcFaceInfoRequest = models.DescribeAigcFaceInfoRequest;
 const CacheConfigFollowOrigin = models.CacheConfigFollowOrigin;
 const NoiseConfigureInfo = models.NoiseConfigureInfo;
-const MediaMiniProgramReviewElem = models.MediaMiniProgramReviewElem;
+const DescribeAigcFaceInfoAsyncResponse = models.DescribeAigcFaceInfoAsyncResponse;
 const ManageTaskResponse = models.ManageTaskResponse;
 const CreateImageProcessingTemplateRequest = models.CreateImageProcessingTemplateRequest;
 const ModifyDefaultStorageRegionRequest = models.ModifyDefaultStorageRegionRequest;
@@ -189,8 +189,10 @@ const TagConfigureInfo = models.TagConfigureInfo;
 const SharpEnhanceInfo = models.SharpEnhanceInfo;
 const ModifySuperPlayerConfigResponse = models.ModifySuperPlayerConfigResponse;
 const DescribeWordSamplesResponse = models.DescribeWordSamplesResponse;
+const DescribeAigcFaceInfoAsyncRequest = models.DescribeAigcFaceInfoAsyncRequest;
 const RefreshUrlCacheResponse = models.RefreshUrlCacheResponse;
 const ConcatTask2017 = models.ConcatTask2017;
+const DescribeAigcFaceInfoAsyncTask = models.DescribeAigcFaceInfoAsyncTask;
 const DeleteAIRecognitionTemplateRequest = models.DeleteAIRecognitionTemplateRequest;
 const FileUploadTask = models.FileUploadTask;
 const DescribeCDNStatDetailsResponse = models.DescribeCDNStatDetailsResponse;
@@ -200,6 +202,7 @@ const LLMComprehendFaceRecognitionForUpdate = models.LLMComprehendFaceRecognitio
 const DescribeEventConfigRequest = models.DescribeEventConfigRequest;
 const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
 const ModifyLLMComprehendTemplateResponse = models.ModifyLLMComprehendTemplateResponse;
+const DescribeAigcFaceInfoAsyncInput = models.DescribeAigcFaceInfoAsyncInput;
 const AiAnalysisTaskClassificationOutput = models.AiAnalysisTaskClassificationOutput;
 const QualityInspectTask = models.QualityInspectTask;
 const CacheConfigNoCache = models.CacheConfigNoCache;
@@ -227,9 +230,10 @@ const OcrWordsConfigureInfoForUpdate = models.OcrWordsConfigureInfoForUpdate;
 const FileReviewInfo = models.FileReviewInfo;
 const WatermarkTemplate = models.WatermarkTemplate;
 const CoverBySnapshotTaskOutput = models.CoverBySnapshotTaskOutput;
+const WatermarkConfigureInfoForUpdate = models.WatermarkConfigureInfoForUpdate;
 const ModifyQualityInspectTemplateResponse = models.ModifyQualityInspectTemplateResponse;
 const AigcAudioTaskInput = models.AigcAudioTaskInput;
-const ProcessImageAsyncRequest = models.ProcessImageAsyncRequest;
+const MediaMiniProgramReviewElem = models.MediaMiniProgramReviewElem;
 const ModifyAdaptiveDynamicStreamingTemplateRequest = models.ModifyAdaptiveDynamicStreamingTemplateRequest;
 const ForbidMediaDistributionRequest = models.ForbidMediaDistributionRequest;
 const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTemplatesResponse;
@@ -269,7 +273,7 @@ const SuperResolutionInfo = models.SuperResolutionInfo;
 const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
 const EnhanceMediaQualityRequest = models.EnhanceMediaQualityRequest;
 const ExtractBlindWatermarkTask = models.ExtractBlindWatermarkTask;
-const PersistenceCompleteTask = models.PersistenceCompleteTask;
+const DescribeImageProcessingTemplatesRequest = models.DescribeImageProcessingTemplatesRequest;
 const AiRecognitionTaskFaceSegmentItem = models.AiRecognitionTaskFaceSegmentItem;
 const ProcessMediaResponse = models.ProcessMediaResponse;
 const CreateWordSamplesResponse = models.CreateWordSamplesResponse;
@@ -290,7 +294,7 @@ const SvgWatermarkInputForUpdate = models.SvgWatermarkInputForUpdate;
 const AiReviewTaskTerrorismOcrResult = models.AiReviewTaskTerrorismOcrResult;
 const DescribeProcessImageAsyncTemplatesRequest = models.DescribeProcessImageAsyncTemplatesRequest;
 const AigcImageOutputConfig = models.AigcImageOutputConfig;
-const WatermarkConfigureInfoForUpdate = models.WatermarkConfigureInfoForUpdate;
+const ProcessImageAsyncRequest = models.ProcessImageAsyncRequest;
 const AiRecognitionTaskOcrWordsResult = models.AiRecognitionTaskOcrWordsResult;
 const PornAsrReviewTemplateInfo = models.PornAsrReviewTemplateInfo;
 const AiRecognitionTaskSegmentResult = models.AiRecognitionTaskSegmentResult;
@@ -581,7 +585,7 @@ const CreateSubAppIdResponse = models.CreateSubAppIdResponse;
 const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
 const AiReviewTerrorismTaskOutput = models.AiReviewTerrorismTaskOutput;
 const AudioSeparateInfo = models.AudioSeparateInfo;
-const DescribeImageProcessingTemplatesRequest = models.DescribeImageProcessingTemplatesRequest;
+const DescribeAigcFaceInfoAsyncOutput = models.DescribeAigcFaceInfoAsyncOutput;
 const QualityInspectTaskInput = models.QualityInspectTaskInput;
 const ProhibitedConfigureInfo = models.ProhibitedConfigureInfo;
 const DrmStreamingsInfo = models.DrmStreamingsInfo;
@@ -958,6 +962,7 @@ const CreateAnimatedGraphicsTemplateRequest = models.CreateAnimatedGraphicsTempl
 const AigcVideoRedrawTaskOutput = models.AigcVideoRedrawTaskOutput;
 const FrameTagConfigureInfo = models.FrameTagConfigureInfo;
 const RemoveWatermarkRequest = models.RemoveWatermarkRequest;
+const SPEKEDrm = models.SPEKEDrm;
 const ExecuteFunctionRequest = models.ExecuteFunctionRequest;
 const RebuildMediaTask = models.RebuildMediaTask;
 const TimeRange = models.TimeRange;
@@ -1054,6 +1059,7 @@ const ModifyDefaultStorageRegionResponse = models.ModifyDefaultStorageRegionResp
 const DescribeStorageDetailsRequest = models.DescribeStorageDetailsRequest;
 const EnhanceMediaQualityResponse = models.EnhanceMediaQualityResponse;
 const SubtitleFormatsOperation = models.SubtitleFormatsOperation;
+const ThirdPartyDrmInfo = models.ThirdPartyDrmInfo;
 const MediaTrack = models.MediaTrack;
 const FastEditMediaFileInfo = models.FastEditMediaFileInfo;
 const StorageStatData = models.StorageStatData;
@@ -1072,6 +1078,7 @@ const DeleteQualityInspectTemplateRequest = models.DeleteQualityInspectTemplateR
 const SubtitleInfoInput = models.SubtitleInfoInput;
 const DeleteJustInTimeTranscodeTemplateResponse = models.DeleteJustInTimeTranscodeTemplateResponse;
 const MPSUpdateSmartEraseWatermarkConfig = models.MPSUpdateSmartEraseWatermarkConfig;
+const PersistenceCompleteTask = models.PersistenceCompleteTask;
 const DescribeJustInTimeTranscodeTemplatesRequest = models.DescribeJustInTimeTranscodeTemplatesRequest;
 const SearchMediaBySemanticsRequest = models.SearchMediaBySemanticsRequest;
 const CreateHeadTailTemplateRequest = models.CreateHeadTailTemplateRequest;
@@ -2873,7 +2880,7 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
-     * This API is used to create custom voice types for AIGC.
+     * This API is used to create custom voice types. Note that calling this API will incur customization fees. See the billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#5e5217e8-29fc-467e-ac2d-853648f988b7).
      * @param {CreateAigcCustomVoiceRequest} req
      * @param {function(string, CreateAigcCustomVoiceResponse):void} cb
      * @public
@@ -3183,6 +3190,17 @@ The output file is in MP4 or MP3 format. In the callback for media composition, 
     DescribeQualityInspectTemplates(req, cb) {
         let resp = new DescribeQualityInspectTemplatesResponse();
         this.request("DescribeQualityInspectTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to asynchronously fetch AIGC face information. Note that calling this API incurs face recognition fees. Refer to the billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#96b3b59a-f9e1-49e9-966a-bedb70a4bf12).
+     * @param {DescribeAigcFaceInfoAsyncRequest} req
+     * @param {function(string, DescribeAigcFaceInfoAsyncResponse):void} cb
+     * @public
+     */
+    DescribeAigcFaceInfoAsync(req, cb) {
+        let resp = new DescribeAigcFaceInfoAsyncResponse();
+        this.request("DescribeAigcFaceInfoAsync", req, resp, cb);
     }
 
     /**

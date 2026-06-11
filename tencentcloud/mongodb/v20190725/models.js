@@ -3968,7 +3968,7 @@ class DescribeLogDownloadTasksRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * User Permissions
  * @class
  */
 class Auth extends  AbstractModel {
@@ -4945,7 +4945,7 @@ class DescribeAccountUsersResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The list of instance accounts.
          * @type {Array.<UserInfo> || null}
          */
         this.Users = null;
@@ -5094,37 +5094,37 @@ class UserInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The account name.
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
-         * 
+         * The account permission details.
          * @type {Array.<Auth> || null}
          */
         this.AuthRole = null;
 
         /**
-         * 
+         * The time when the account was created.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 
+         * The time when the account was last updated.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * 
+         * The remarks for the account.
          * @type {string || null}
          */
         this.UserDesc = null;
 
         /**
-         * Console password update time.
+         * The time when the console password was last updated.
          * @type {string || null}
          */
         this.ConsolePassUpdateTime = null;
@@ -5818,7 +5818,7 @@ class ParamTpl extends  AbstractModel {
          * Database type that the parameter template applies to.
 - REPLSET: replica set instance.
 - SHARD: shard instance.
--STANDALONE: Single-node instance.
+- STANDALONE: Single-node instance.
          * @type {string || null}
          */
         this.ClusterType = null;
@@ -5831,8 +5831,8 @@ class ParamTpl extends  AbstractModel {
 
         /**
          * Template type.
--DEFAULT: System default template.
--CUSTOMIZE: custom template.
+- DEFAULT: System default template.
+- CUSTOMIZE: custom template.
          * @type {string || null}
          */
         this.TplType = null;
@@ -8002,7 +8002,7 @@ class DescribeMongodbLogsRequest extends  AbstractModel {
 
         /**
          * Log category.
-- Log categories include but are not limited to COMMAND, ACCESS, CONTROL, FTDC, INDEX, NETWORK, QUERY, REPL, SHARDING, STORAGE, RECOVERY, JOURNAL, and WRITE. The specific supported categories may vary depending on the MongoDB version. For details, see Log Messages (https://www.mongodb.com/zh-cn/docs/v5.0/reference/log-messages/#log-message-examples).
+- Log categories include but are not limited to COMMAND, ACCESS, CONTROL, FTDC, INDEX, NETWORK, QUERY, REPL, SHARDING, STORAGE, RECOVERY, JOURNAL, and WRITE. The specific supported categories may vary depending on the MongoDB version. For details, see [Log Messages](https://www.mongodb.com/docs/v5.0/reference/log-messages/#log-message-examples).
 - Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and view the **log category** on the **Error Log** tab of the **Log Management** page.
          * @type {Array.<string> || null}
          */

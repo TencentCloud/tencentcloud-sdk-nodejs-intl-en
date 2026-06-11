@@ -2623,9 +2623,9 @@ Note: When the device is paid by the tenant and inactive (not selected for month
 
         /**
          * Authorization validity period
-Monthly authorization
+0: Monthly authorization
 1: Permanent license
--Unknown
+-1: Unknown
          * @type {number || null}
          */
         this.LicensePayMode = null;

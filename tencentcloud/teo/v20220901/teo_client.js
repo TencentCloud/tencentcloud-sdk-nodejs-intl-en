@@ -51,6 +51,7 @@ const BrowserImpersonationDetectionRule = models.BrowserImpersonationDetectionRu
 const ModifyFunctionRulePriorityRequest = models.ModifyFunctionRulePriorityRequest;
 const ModifyAccelerationDomainResponse = models.ModifyAccelerationDomainResponse;
 const DeleteSecurityAPIResourceRequest = models.DeleteSecurityAPIResourceRequest;
+const ShieldParameters = models.ShieldParameters;
 const FunctionRegionSelection = models.FunctionRegionSelection;
 const ModifyMultiPathGatewayLineRequest = models.ModifyMultiPathGatewayLineRequest;
 const DescribeHostsSettingResponse = models.DescribeHostsSettingResponse;
@@ -132,7 +133,7 @@ const DescribeTimingL7AnalysisDataResponse = models.DescribeTimingL7AnalysisData
 const ImageOptimize = models.ImageOptimize;
 const CreateL7AccRulesRequest = models.CreateL7AccRulesRequest;
 const RealtimeLogDeliveryTask = models.RealtimeLogDeliveryTask;
-const BotPortraitRule = models.BotPortraitRule;
+const DeleteFunctionReplicaResponse = models.DeleteFunctionReplicaResponse;
 const RulesProperties = models.RulesProperties;
 const DescribeSecurityJSInjectionRuleResponse = models.DescribeSecurityJSInjectionRuleResponse;
 const OriginACLInfo = models.OriginACLInfo;
@@ -151,6 +152,7 @@ const DescribeSecurityIPGroupContentResponse = models.DescribeSecurityIPGroupCon
 const Sv = models.Sv;
 const Rule = models.Rule;
 const DownloadL4LogsRequest = models.DownloadL4LogsRequest;
+const SiteFailover = models.SiteFailover;
 const ZoneInfo = models.ZoneInfo;
 const EdgeKVGetResponse = models.EdgeKVGetResponse;
 const CAPTCHAPageChallenge = models.CAPTCHAPageChallenge;
@@ -223,6 +225,7 @@ const ModifyPrefetchOriginLimitResponse = models.ModifyPrefetchOriginLimitRespon
 const ModifyMultiPathGatewayRequest = models.ModifyMultiPathGatewayRequest;
 const LoadBalancer = models.LoadBalancer;
 const EdgeKVDeleteResponse = models.EdgeKVDeleteResponse;
+const DescribeFunctionReplicasResponse = models.DescribeFunctionReplicasResponse;
 const CreateSecurityAPIServiceResponse = models.CreateSecurityAPIServiceResponse;
 const HostName = models.HostName;
 const DeleteRulesRequest = models.DeleteRulesRequest;
@@ -249,6 +252,7 @@ const ModifyL4ProxyStatusResponse = models.ModifyL4ProxyStatusResponse;
 const FileVerification = models.FileVerification;
 const ModifyWebSecurityTemplateResponse = models.ModifyWebSecurityTemplateResponse;
 const ModifySecurityPolicyRequest = models.ModifySecurityPolicyRequest;
+const CreateFunctionReplicaRequest = models.CreateFunctionReplicaRequest;
 const ModifySharedCNAMEResponse = models.ModifySharedCNAMEResponse;
 const DeleteL7AccRulesRequest = models.DeleteL7AccRulesRequest;
 const SmartRouting = models.SmartRouting;
@@ -320,6 +324,7 @@ const CreateSecurityJSInjectionRuleRequest = models.CreateSecurityJSInjectionRul
 const DescribeMultiPathGatewaysResponse = models.DescribeMultiPathGatewaysResponse;
 const MaxAgeParameters = models.MaxAgeParameters;
 const ModifyApplicationProxyRuleResponse = models.ModifyApplicationProxyRuleResponse;
+const DeleteFunctionReplicaRequest = models.DeleteFunctionReplicaRequest;
 const DDoS = models.DDoS;
 const ModifyL7AccRulePriorityResponse = models.ModifyL7AccRulePriorityResponse;
 const APIService = models.APIService;
@@ -349,11 +354,13 @@ const CacheParameters = models.CacheParameters;
 const OriginAuthenticationRequestProperties = models.OriginAuthenticationRequestProperties;
 const ModifyRealtimeLogDeliveryTaskResponse = models.ModifyRealtimeLogDeliveryTaskResponse;
 const RateLimitUserRule = models.RateLimitUserRule;
+const ModifyFunctionReplicaResponse = models.ModifyFunctionReplicaResponse;
 const DeployRecord = models.DeployRecord;
 const CreatePlanForZoneRequest = models.CreatePlanForZoneRequest;
 const DeviceProfile = models.DeviceProfile;
 const ConfirmMultiPathGatewayOriginACLResponse = models.ConfirmMultiPathGatewayOriginACLResponse;
 const CreateJustInTimeTranscodeTemplateRequest = models.CreateJustInTimeTranscodeTemplateRequest;
+const FunctionReplica = models.FunctionReplica;
 const TimingDataItem = models.TimingDataItem;
 const ModifyCustomErrorPageRequest = models.ModifyCustomErrorPageRequest;
 const ModifyFunctionRuleResponse = models.ModifyFunctionRuleResponse;
@@ -417,6 +424,7 @@ const TimingTypeValue = models.TimingTypeValue;
 const CreatePlanForZoneResponse = models.CreatePlanForZoneResponse;
 const ClientAttester = models.ClientAttester;
 const ModifyL4ProxyRulesStatusResponse = models.ModifyL4ProxyRulesStatusResponse;
+const CreateFunctionReplicaResponse = models.CreateFunctionReplicaResponse;
 const CheckCnameStatusResponse = models.CheckCnameStatusResponse;
 const ImportZoneConfigResponse = models.ImportZoneConfigResponse;
 const ModifyWebSecurityTemplateRequest = models.ModifyWebSecurityTemplateRequest;
@@ -561,6 +569,7 @@ const DescribeZoneConfigImportResultRequest = models.DescribeZoneConfigImportRes
 const ModifyApplicationProxyRuleStatusRequest = models.ModifyApplicationProxyRuleStatusRequest;
 const AccelerateType = models.AccelerateType;
 const DeliveryCondition = models.DeliveryCondition;
+const SiteFailoverParameters = models.SiteFailoverParameters;
 const ExceptionRule = models.ExceptionRule;
 const FollowOrigin = models.FollowOrigin;
 const EdgeKVDeleteRequest = models.EdgeKVDeleteRequest;
@@ -591,6 +600,7 @@ const DescribeHostsSettingRequest = models.DescribeHostsSettingRequest;
 const DescribeDDoSAttackEventRequest = models.DescribeDDoSAttackEventRequest;
 const OriginGroup = models.OriginGroup;
 const ModifySecurityIPGroupRequest = models.ModifySecurityIPGroupRequest;
+const DescribeFunctionReplicasRequest = models.DescribeFunctionReplicasRequest;
 const VaryParameters = models.VaryParameters;
 const L4Proxy = models.L4Proxy;
 const SkipCondition = models.SkipCondition;
@@ -685,7 +695,9 @@ const ModifyMultiPathGatewaySecretKeyResponse = models.ModifyMultiPathGatewaySec
 const DescribeMultiPathGatewaySecretKeyRequest = models.DescribeMultiPathGatewaySecretKeyRequest;
 const DDoSBlockData = models.DDoSBlockData;
 const IPSSLSetting = models.IPSSLSetting;
+const ModifyFunctionReplicaRequest = models.ModifyFunctionReplicaRequest;
 const DescribeMultiPathGatewaysRequest = models.DescribeMultiPathGatewaysRequest;
+const BotPortraitRule = models.BotPortraitRule;
 const DeleteL4ProxyRulesResponse = models.DeleteL4ProxyRulesResponse;
 const ModifyMultiPathGatewaySecretKeyRequest = models.ModifyMultiPathGatewaySecretKeyRequest;
 const DnsRecord = models.DnsRecord;
@@ -1046,14 +1058,14 @@ A site can be deleted by using the [Delete Site](https://intl.cloud.tencent.com/
     }
 
     /**
-     * This API is used to create a JavaScript injection rule.
-     * @param {CreateSecurityJSInjectionRuleRequest} req
-     * @param {function(string, CreateSecurityJSInjectionRuleResponse):void} cb
+     * This API is used to query domain name information of a site, including the acceleration domain name, origin, and domain name status. You can query the information of all domain names, or specific domain names by specifying filters information.
+     * @param {DescribeAccelerationDomainsRequest} req
+     * @param {function(string, DescribeAccelerationDomainsResponse):void} cb
      * @public
      */
-    CreateSecurityJSInjectionRule(req, cb) {
-        let resp = new CreateSecurityJSInjectionRuleResponse();
-        this.request("CreateSecurityJSInjectionRule", req, resp, cb);
+    DescribeAccelerationDomains(req, cb) {
+        let resp = new DescribeAccelerationDomainsResponse();
+        this.request("DescribeAccelerationDomains", req, resp, cb);
     }
 
     /**
@@ -1495,14 +1507,14 @@ If your plan needs to upgrade to the Enterprise Edition, [Contact Us](https://ww
     }
 
     /**
-     * This API is used to create a real-time log delivery task. The following limits apply.
--When the data delivery type (LogType) is site acceleration log (Layer 7 Access Logs), L4 proxy logs, or edge function logs, an entity (L7 domain, L4 proxy instance, or edge function instance) under the same combination of data delivery type (LogType) and data delivery area (Area) can only be added to the following real-time log delivery task type (TaskType) combinations:.
--A task to push to Tencent Cloud CLS, add another task to push to a custom HTTP(S) address;.
--A task to push to Tencent Cloud CLS, add another task to push to AWS S3-compatible Cloud Object Storage;.
--When the data delivery type (LogType) is rate limit and CC attack defense log, managed rule log, custom rule log, or Bot Management Log, an entity can only be added to one real-time log delivery task under the same combination of data delivery type (LogType) and data delivery Area.
--When the real-time log delivery task type (TaskType) is EdgeOne log analysis (log_analysis), it supports only the data delivery type (LogType) as site acceleration log (domain). Under the combination of the same site (ZoneId) and data delivery area (Area), you can only add one real-time log delivery task for EdgeOne log analysis.
+     * This API is used to create a real-time log delivery task. The following limits apply:
+-When the data delivery type (LogType) is site acceleration log (Layer 7 Access Logs), four-layer proxy logs, or edge function logs, the same entity (L7 domain, L4 proxy instance, or edge function instance) under the same combination of data delivery type (LogType) and data delivery area (Area) can only be added to the following real-time log delivery task type (TaskType) combinations:
+-A task to push to Tencent Cloud CLS, add another task to push to a custom HTTP(S) address.
+-A task to push to Tencent Cloud CLS, add another task to push to S3-compatible object storage.
+-When the data delivery type (LogType) is rate limit and CC attack defense log, managed rule log, custom rule log, or Bot Management Log, an entity can only be added to one real-time log delivery task under the combination of the same data delivery type (LogType) and data delivery area (Area).
+-When the real-time log delivery task type (TaskType) is EdgeOne log analysis (log_analysis), it supports only data delivery type (LogType) as site acceleration log (domain) or managed rule log (web-attack). Under the same site (ZoneId), same data delivery area (Area), and data combination, each data delivery type (LogType) can only add one real-time log delivery task pushed to EdgeOne log analysis.
 
-This API is used to query the real-time log delivery task list based on the entity to check whether the entity has been added to another real-time log delivery task. It is advisable to use the [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.com/document/product/1552/104110?from_cn_redirect=1) API first.
+It is recommended to first query the real-time log delivery task list according to the entity via the [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.com/document/product/1552/104110?from_cn_redirect=1) API, and check whether the entity has been added to another real-time log delivery task.
      * @param {CreateRealtimeLogDeliveryTaskRequest} req
      * @param {function(string, CreateRealtimeLogDeliveryTaskResponse):void} cb
      * @public
@@ -1544,6 +1556,17 @@ This API is used to check the free certificate application result after triggeri
     ModifyL4ProxyRules(req, cb) {
         let resp = new ModifyL4ProxyRulesResponse();
         this.request("ModifyL4ProxyRules", req, resp, cb);
+    }
+
+    /**
+     * This interface is used to modify the priority of the rule list in the [Rule Engine](https://intl.cloud.tencent.com/document/product/1552/70901?from_cn_redirect=1). This interface requires the complete rule ID list under the site ID to be passed in. The rule ID list can be obtained through the [Query Seven-Layer Acceleration Rules](https://intl.cloud.tencent.com/document/product/1552/115820?from_cn_redirect=1) interface. The final priority order will be adjusted to the order of the rule ID list, and will be executed from front to back.
+     * @param {ModifyL7AccRulePriorityRequest} req
+     * @param {function(string, ModifyL7AccRulePriorityResponse):void} cb
+     * @public
+     */
+    ModifyL7AccRulePriority(req, cb) {
+        let resp = new ModifyL7AccRulePriorityResponse();
+        this.request("ModifyL7AccRulePriority", req, resp, cb);
     }
 
     /**
@@ -1604,14 +1627,14 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     }
 
     /**
-     * This API is used to modify a trigger rule for an edge function. It supports modifying rule conditions, execution functions, and description. You can first use the DescribeFunctionRules API to get the RuleId of the rule that needs to be modified, then input the modified rule content. The original rule content will be overwritten.
-     * @param {ModifyFunctionRuleRequest} req
-     * @param {function(string, ModifyFunctionRuleResponse):void} cb
+     * This API is used to create copies of specified edge functions. After creating copies, when client requests match configured trigger rules or the default domain name, you can access specific function copies by adding EO-Function-Replica-Name:[copy name] to the request header. Each function supports creating two copies by default.
+     * @param {CreateFunctionReplicaRequest} req
+     * @param {function(string, CreateFunctionReplicaResponse):void} cb
      * @public
      */
-    ModifyFunctionRule(req, cb) {
-        let resp = new ModifyFunctionRuleResponse();
-        this.request("ModifyFunctionRule", req, resp, cb);
+    CreateFunctionReplica(req, cb) {
+        let resp = new CreateFunctionReplicaResponse();
+        this.request("CreateFunctionReplica", req, resp, cb);
     }
 
     /**
@@ -1659,14 +1682,14 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     }
 
     /**
-     * This interface is used to modify the priority of the rule list in the [Rule Engine](https://intl.cloud.tencent.com/document/product/1552/70901?from_cn_redirect=1). This interface requires the complete rule ID list under the site ID to be passed in. The rule ID list can be obtained through the [Query Seven-Layer Acceleration Rules](https://intl.cloud.tencent.com/document/product/1552/115820?from_cn_redirect=1) interface. The final priority order will be adjusted to the order of the rule ID list, and will be executed from front to back.
-     * @param {ModifyL7AccRulePriorityRequest} req
-     * @param {function(string, ModifyL7AccRulePriorityResponse):void} cb
+     * This API is used to modify a trigger rule for an edge function. It supports modifying rule conditions, execution functions, and description. You can first use the DescribeFunctionRules API to get the RuleId of the rule that needs to be modified, then input the modified rule content. The original rule content will be overwritten.
+     * @param {ModifyFunctionRuleRequest} req
+     * @param {function(string, ModifyFunctionRuleResponse):void} cb
      * @public
      */
-    ModifyL7AccRulePriority(req, cb) {
-        let resp = new ModifyL7AccRulePriorityResponse();
-        this.request("ModifyL7AccRulePriority", req, resp, cb);
+    ModifyFunctionRule(req, cb) {
+        let resp = new ModifyFunctionRuleResponse();
+        this.request("ModifyFunctionRule", req, resp, cb);
     }
 
     /**
@@ -1678,6 +1701,17 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     ModifyZoneSetting(req, cb) {
         let resp = new ModifyZoneSettingResponse();
         this.request("ModifyZoneSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the content and description of a specified edge function replica.
+     * @param {ModifyFunctionReplicaRequest} req
+     * @param {function(string, ModifyFunctionReplicaResponse):void} cb
+     * @public
+     */
+    ModifyFunctionReplica(req, cb) {
+        let resp = new ModifyFunctionReplicaResponse();
+        this.request("ModifyFunctionReplica", req, resp, cb);
     }
 
     /**
@@ -2223,14 +2257,14 @@ If there are already EdgeOne plans under the current account, it is recommended 
     }
 
     /**
-     * This API is an older version. EdgeOne has fully upgraded the APIs related to the rule engine. For details, please refer to [RuleEngineAction](https://intl.cloud.tencent.com/document/product/1552/80721?from_cn_redirect=1#RuleEngineAction).
-     * @param {DescribeRulesSettingRequest} req
-     * @param {function(string, DescribeRulesSettingResponse):void} cb
+     * This API is used to query the replica list of edge functions.
+     * @param {DescribeFunctionReplicasRequest} req
+     * @param {function(string, DescribeFunctionReplicasResponse):void} cb
      * @public
      */
-    DescribeRulesSetting(req, cb) {
-        let resp = new DescribeRulesSettingResponse();
-        this.request("DescribeRulesSetting", req, resp, cb);
+    DescribeFunctionReplicas(req, cb) {
+        let resp = new DescribeFunctionReplicasResponse();
+        this.request("DescribeFunctionReplicas", req, resp, cb);
     }
 
     /**
@@ -2245,14 +2279,14 @@ If there are already EdgeOne plans under the current account, it is recommended 
     }
 
     /**
-     * This API is used to modify an API service.
-     * @param {ModifySecurityAPIServiceRequest} req
-     * @param {function(string, ModifySecurityAPIServiceResponse):void} cb
+     * This API is an older version. EdgeOne has fully upgraded the APIs related to the rule engine. For details, please refer to [RuleEngineAction](https://intl.cloud.tencent.com/document/product/1552/80721?from_cn_redirect=1#RuleEngineAction).
+     * @param {DescribeRulesSettingRequest} req
+     * @param {function(string, DescribeRulesSettingResponse):void} cb
      * @public
      */
-    ModifySecurityAPIService(req, cb) {
-        let resp = new ModifySecurityAPIServiceResponse();
-        this.request("ModifySecurityAPIService", req, resp, cb);
+    DescribeRulesSetting(req, cb) {
+        let resp = new DescribeRulesSettingResponse();
+        this.request("DescribeRulesSetting", req, resp, cb);
     }
 
     /**
@@ -2278,14 +2312,14 @@ If there are already EdgeOne plans under the current account, it is recommended 
     }
 
     /**
-     * This API is used to query domain name information of a site, including the acceleration domain name, origin, and domain name status. You can query the information of all domain names, or specific domain names by specifying filters information.
-     * @param {DescribeAccelerationDomainsRequest} req
-     * @param {function(string, DescribeAccelerationDomainsResponse):void} cb
+     * This API is used to create a JavaScript injection rule.
+     * @param {CreateSecurityJSInjectionRuleRequest} req
+     * @param {function(string, CreateSecurityJSInjectionRuleResponse):void} cb
      * @public
      */
-    DescribeAccelerationDomains(req, cb) {
-        let resp = new DescribeAccelerationDomainsResponse();
-        this.request("DescribeAccelerationDomains", req, resp, cb);
+    CreateSecurityJSInjectionRule(req, cb) {
+        let resp = new CreateSecurityJSInjectionRuleResponse();
+        this.request("CreateSecurityJSInjectionRule", req, resp, cb);
     }
 
     /**
@@ -2386,6 +2420,17 @@ After the environment variables are set, they can be used in the function code. 
     HandleFunctionRuntimeEnvironment(req, cb) {
         let resp = new HandleFunctionRuntimeEnvironmentResponse();
         this.request("HandleFunctionRuntimeEnvironment", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an API service.
+     * @param {ModifySecurityAPIServiceRequest} req
+     * @param {function(string, ModifySecurityAPIServiceResponse):void} cb
+     * @public
+     */
+    ModifySecurityAPIService(req, cb) {
+        let resp = new ModifySecurityAPIServiceResponse();
+        this.request("ModifySecurityAPIService", req, resp, cb);
     }
 
     /**
@@ -2917,8 +2962,8 @@ Note: Starting from June 27, 2025, the legacy version APIs will stop updating. N
     }
 
     /**
-     * This API is used to query time series data of origin-pull for L7 domains. 
-Group aggregation can be performed by specifying the query dimension <code>DimensionName</code>, returning multiple groups of time series data. For detailed guide and limits, see [How to Use API to Implement Grouping Aggregation in a Single Call](https://www.tencentcloud.com/document/product/1145/77047?lang=en&pg=).
+     * This API is used to query time series data of the layer-7 domain name business.
+You can choose to perform grouping queries by specifying the query dimension <code>DimensionName</code>, returning multiple groups of time series data. For detailed directions and usage limits, see [How to Implement Group Query in a Single Call Using API](https://www.tencentcloud.com/document/product/1552/127501?from_cn_redirect=1).
      * @param {DescribeTimingL7OriginPullDataRequest} req
      * @param {function(string, DescribeTimingL7OriginPullDataResponse):void} cb
      * @public
@@ -2936,7 +2981,7 @@ Step 3: Call CheckFreeCertificateVerification to verify. After verification pass
 Step 4: Call ModifyHostsCertificate to issue a domain certificate configured to use the EdgeOne free certificate.
 
 The application method introduction in the document: [Free Certificate Application Description](https://www.tencentcloud.com/document/product/1552/90437?from_cn_redirect=1). 
-description:.
+description:
 - Only CNAME access mode can call this API to specify the free certificate application method. NS/DNSPod hosting access modes use automatic validation to apply for free certificates with no need to call this API.
 - If you need to switch the free certificate authentication method, you can call this API again by changing the VerificationMethod field to update it.
 - A domain name can only apply for one free certificate. After calling this API, the backend will trigger the free certificate application task. You need to complete the domain name verification info configuration within 2 days, then finish certificate authentication.
@@ -3128,6 +3173,17 @@ The feature is only supported in the enterprise plan and is currently in closed 
     DescribeL4Proxy(req, cb) {
         let resp = new DescribeL4ProxyResponse();
         this.request("DescribeL4Proxy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete specified edge function replicas.
+     * @param {DeleteFunctionReplicaRequest} req
+     * @param {function(string, DeleteFunctionReplicaResponse):void} cb
+     * @public
+     */
+    DeleteFunctionReplica(req, cb) {
+        let resp = new DeleteFunctionReplicaResponse();
+        this.request("DeleteFunctionReplica", req, resp, cb);
     }
 
     /**

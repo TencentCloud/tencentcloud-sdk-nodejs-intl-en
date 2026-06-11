@@ -507,31 +507,31 @@ class DescribeTawInstancesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Region ID
+         * Region Id
          * @type {Array.<number> || null}
          */
         this.AreaIds = null;
 
         /**
-         * Instance status (1: creating; 2: running; 3: exceptional; 4: restarting; 5: stopping; 6: stopped; 7: terminating; 8: terminated)
+         * Instance status (1=creating, 2=running, 3=abnormal, 4=restarting, 5=stopping, 6=stopped, 7=being destroyed, 8=terminated). Deprecated. Please note in Filters.
          * @type {Array.<number> || null}
          */
         this.InstanceStatuses = null;
 
         /**
-         * Instance ID
+         * Instance Id, deprecated. Please note in Filters.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Filter parameter
+         * Filter parameters; In demo mode, pass {"Name": "IsDemo", "Values":["1"]}.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
         /**
-         * Whether it is in the demo mode. `1`: Yes; `2`: No.
+         * Deprecated. For demo mode, please note in Filters.
          * @type {number || null}
          */
         this.IsDemo = null;
@@ -2426,7 +2426,7 @@ class DescribeDataStaticUrlV2Response extends  AbstractModel {
 }
 
 /**
- * Tag
+ * Tag.
  * @class
  */
 class Tag extends  AbstractModel {
@@ -11570,7 +11570,7 @@ class DescribeDataSetUrlStatisticsResponse extends  AbstractModel {
 }
 
 /**
- * RUM instance information
+ * Rum instance information
  * @class
  */
 class RumInstanceInfo extends  AbstractModel {
@@ -11578,13 +11578,13 @@ class RumInstanceInfo extends  AbstractModel {
         super();
 
         /**
-         * Instance status (1: creating; 2: running; 3: exceptional; 4: restarting; 5: stopping; 6: stopped; 7: deleted)
+         * Instance status (1=creating, 2=running, 3=abnormal, 4=restarting, 5=stopping, 6=stopped, 7=deleted)
          * @type {number || null}
          */
         this.InstanceStatus = null;
 
         /**
-         * Region ID
+         * Zone Id
          * @type {number || null}
          */
         this.AreaId = null;
@@ -11596,7 +11596,7 @@ class RumInstanceInfo extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * Instance ID
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -11614,13 +11614,13 @@ class RumInstanceInfo extends  AbstractModel {
         this.InstanceDesc = null;
 
         /**
-         * Billing status (1: in use; 2: expired; 3: terminated; 4: assigning; 5: assignment failed)
+         * Billing status (1=Active, 2=Expired, 3=Terminated, 4=Allocating, 5=Allocation failure)
          * @type {number || null}
          */
         this.ChargeStatus = null;
 
         /**
-         * Billing type (1: free; 2: prepaid; 3: postpaid)
+         * Billing type (1=Free edition, 2=Prepayment, 3=Pay-as-you-go)
          * @type {number || null}
          */
         this.ChargeType = null;
@@ -11632,25 +11632,25 @@ class RumInstanceInfo extends  AbstractModel {
         this.UpdatedAt = null;
 
         /**
-         * Data retention period (in days)
+         * Data retention time (days)
          * @type {number || null}
          */
         this.DataRetentionDays = null;
 
         /**
-         * Instance name
+         * Instance name.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {string || null}
          */
         this.CreatedAt = null;
 
         /**
-         * 
+         * Instance type 1: Original web-related class 2: app endpoint type
          * @type {number || null}
          */
         this.InstanceType = null;

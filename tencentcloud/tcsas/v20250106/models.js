@@ -877,6 +877,41 @@ class DeleteUserRequest extends  AbstractModel {
 }
 
 /**
+ * Subpackage information.
+ * @class
+ */
+class MNPVersionSubPackageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Package name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Package size. 
+         * @type {number || null}
+         */
+        this.Size = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Size = 'Size' in params ? params.Size : null;
+
+    }
+}
+
+/**
  * CreateMNPVersion request structure.
  * @class
  */
@@ -914,6 +949,36 @@ class CreateMNPVersionRequest extends  AbstractModel {
          */
         this.MNPVersionIntro = null;
 
+        /**
+         * <p>Version type. Valid values: 1: Debug; 2: Development. Default value: 2.</p>
+         * @type {number || null}
+         */
+        this.VersionType = null;
+
+        /**
+         * <p>Compilation condition.</p>
+         * @type {string || null}
+         */
+        this.CompileCondition = null;
+
+        /**
+         * <p>Compilation configuration.</p>
+         * @type {string || null}
+         */
+        this.CompileConfig = null;
+
+        /**
+         * <p>CI/CD key ID.</p>
+         * @type {string || null}
+         */
+        this.PipelineId = null;
+
+        /**
+         * <p>Internal file URL.</p>
+         * @type {string || null}
+         */
+        this.FileInnerUrl = null;
+
     }
 
     /**
@@ -928,6 +993,11 @@ class CreateMNPVersionRequest extends  AbstractModel {
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
         this.MNPVersionIntro = 'MNPVersionIntro' in params ? params.MNPVersionIntro : null;
+        this.VersionType = 'VersionType' in params ? params.VersionType : null;
+        this.CompileCondition = 'CompileCondition' in params ? params.CompileCondition : null;
+        this.CompileConfig = 'CompileConfig' in params ? params.CompileConfig : null;
+        this.PipelineId = 'PipelineId' in params ? params.PipelineId : null;
+        this.FileInnerUrl = 'FileInnerUrl' in params ? params.FileInnerUrl : null;
 
     }
 }
@@ -2756,6 +2826,12 @@ class CreateMNPSecretKeyRequest extends  AbstractModel {
          */
         this.MNPId = null;
 
+        /**
+         * <p>CI/CD key ID.</p>
+         * @type {string || null}
+         */
+        this.PipelineId = null;
+
     }
 
     /**
@@ -2767,6 +2843,7 @@ class CreateMNPSecretKeyRequest extends  AbstractModel {
         }
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
         this.MNPId = 'MNPId' in params ? params.MNPId : null;
+        this.PipelineId = 'PipelineId' in params ? params.PipelineId : null;
 
     }
 }
@@ -5660,6 +5737,36 @@ class CreateMNGVersionRequest extends  AbstractModel {
          */
         this.MNPVersionIntro = null;
 
+        /**
+         * <p>Version type. Valid values: 1: Debug; 2: Development. Default value: 2.</p>
+         * @type {number || null}
+         */
+        this.VersionType = null;
+
+        /**
+         * <p>Compilation condition.</p>
+         * @type {string || null}
+         */
+        this.CompileCondition = null;
+
+        /**
+         * <p>Compilation configuration.</p>
+         * @type {string || null}
+         */
+        this.CompileConfig = null;
+
+        /**
+         * <p>CI/CD key ID.</p>
+         * @type {string || null}
+         */
+        this.PipelineId = null;
+
+        /**
+         * <p>Internal file URL.</p>
+         * @type {string || null}
+         */
+        this.FileInnerUrl = null;
+
     }
 
     /**
@@ -5674,6 +5781,11 @@ class CreateMNGVersionRequest extends  AbstractModel {
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
         this.MNPVersionIntro = 'MNPVersionIntro' in params ? params.MNPVersionIntro : null;
+        this.VersionType = 'VersionType' in params ? params.VersionType : null;
+        this.CompileCondition = 'CompileCondition' in params ? params.CompileCondition : null;
+        this.CompileConfig = 'CompileConfig' in params ? params.CompileConfig : null;
+        this.PipelineId = 'PipelineId' in params ? params.PipelineId : null;
+        this.FileInnerUrl = 'FileInnerUrl' in params ? params.FileInnerUrl : null;
 
     }
 }
@@ -7747,6 +7859,12 @@ class DescribeMNGVersionRequest extends  AbstractModel {
          */
         this.PlatformId = null;
 
+        /**
+         * <p>CI/CD key ID.</p>
+         * @type {string || null}
+         */
+        this.PipelineId = null;
+
     }
 
     /**
@@ -7758,6 +7876,7 @@ class DescribeMNGVersionRequest extends  AbstractModel {
         }
         this.BusinessId = 'BusinessId' in params ? params.BusinessId : null;
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
+        this.PipelineId = 'PipelineId' in params ? params.PipelineId : null;
 
     }
 }
@@ -16243,6 +16362,12 @@ class DescribeMNPVersionRequest extends  AbstractModel {
          */
         this.PlatformId = null;
 
+        /**
+         * <p>CI/CD key ID.</p>
+         * @type {string || null}
+         */
+        this.PipelineId = null;
+
     }
 
     /**
@@ -16254,6 +16379,7 @@ class DescribeMNPVersionRequest extends  AbstractModel {
         }
         this.BusinessId = 'BusinessId' in params ? params.BusinessId : null;
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
+        this.PipelineId = 'PipelineId' in params ? params.PipelineId : null;
 
     }
 }
@@ -16443,6 +16569,24 @@ class DescribeMNGVersionResp extends  AbstractModel {
          */
         this.MNPVersionId = null;
 
+        /**
+         * <p>QR code expiration time.</p>
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * <p>Version QR code.</p>
+         * @type {string || null}
+         */
+        this.QRCode = null;
+
+        /**
+         * <p>Compilation package information.</p>
+         * @type {Array.<MNPVersionSubPackageInfo> || null}
+         */
+        this.SubPackageInfos = null;
+
     }
 
     /**
@@ -16457,6 +16601,17 @@ class DescribeMNGVersionResp extends  AbstractModel {
         this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
         this.TaskMsg = 'TaskMsg' in params ? params.TaskMsg : null;
         this.MNPVersionId = 'MNPVersionId' in params ? params.MNPVersionId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.QRCode = 'QRCode' in params ? params.QRCode : null;
+
+        if (params.SubPackageInfos) {
+            this.SubPackageInfos = new Array();
+            for (let z in params.SubPackageInfos) {
+                let obj = new MNPVersionSubPackageInfo();
+                obj.deserialize(params.SubPackageInfos[z]);
+                this.SubPackageInfos.push(obj);
+            }
+        }
 
     }
 }
@@ -19870,6 +20025,24 @@ class DescribeMNPVersionResp extends  AbstractModel {
          */
         this.MNPVersionId = null;
 
+        /**
+         * <p>QR code expiration time.</p>
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * <p>Version QR code.</p>
+         * @type {string || null}
+         */
+        this.QRCode = null;
+
+        /**
+         * <p>Compilation package information.</p>
+         * @type {Array.<MNPVersionSubPackageInfo> || null}
+         */
+        this.SubPackageInfos = null;
+
     }
 
     /**
@@ -19884,6 +20057,17 @@ class DescribeMNPVersionResp extends  AbstractModel {
         this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
         this.TaskMsg = 'TaskMsg' in params ? params.TaskMsg : null;
         this.MNPVersionId = 'MNPVersionId' in params ? params.MNPVersionId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.QRCode = 'QRCode' in params ? params.QRCode : null;
+
+        if (params.SubPackageInfos) {
+            this.SubPackageInfos = new Array();
+            for (let z in params.SubPackageInfos) {
+                let obj = new MNPVersionSubPackageInfo();
+                obj.deserialize(params.SubPackageInfos[z]);
+                this.SubPackageInfos.push(obj);
+            }
+        }
 
     }
 }
@@ -21175,6 +21359,7 @@ module.exports = {
     DeleteApplicationResponse: DeleteApplicationResponse,
     ResetMNPAppSecretResp: ResetMNPAppSecretResp,
     DeleteUserRequest: DeleteUserRequest,
+    MNPVersionSubPackageInfo: MNPVersionSubPackageInfo,
     CreateMNPVersionRequest: CreateMNPVersionRequest,
     DescribeMNPAccessAnalysisOverviewRequest: DescribeMNPAccessAnalysisOverviewRequest,
     DescribeApplicationConfigInfosResponse: DescribeApplicationConfigInfosResponse,

@@ -3132,7 +3132,7 @@ class ModifyChcAttributeRequest extends  AbstractModel {
         this.BmcUser = null;
 
         /**
-         * The password can contain 8 to 16 characters, including letters, numbers and special symbols (()`~!@#$%^&*-+=_|{}).
+         * The password can contain 8 to 16 characters, including letters, numbers and special symbols ()`~!@#$%^&*-+=_|{}[]:;'<>,.?/
          * @type {string || null}
          */
         this.Password = null;
@@ -4685,7 +4685,7 @@ class DescribeDisasterRecoverGroupQuotaResponse extends  AbstractModel {
         this.CvmInRackGroupQuota = null;
 
         /**
-         * 
+         * Quota for instances in a disaster recovery group of the switch type.
          * @type {number || null}
          */
         this.CvmInSwitchGroupQuota = null;
@@ -5014,13 +5014,13 @@ class DataDisk extends  AbstractModel {
         super();
 
         /**
-         * Data disk size, unit: GiB. the minimum adjustment step size is 10 GiB. the value ranges of different data disk types vary. for specific limitations, see the storage overview (https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). the default value is 0, which means no data disk purchase. for more restrictions, see the product document.
+         * Data disk size, unit: GiB. the minimum adjustment step size is 10 GiB. the value ranges of different data disk types vary. for specific limitations, see the [storage overview](https://www.tencentcloud.com/document/product/213/4952). the default value is 0, which means no data disk purchase. for more restrictions, see the product document.
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * Specifies the data disk type. for restrictions on data disk types, refer to [storage overview](https://www.tencentcloud.com/document/product/213/4952?from_cn_redirect=1). valid values: <br /><li>LOCAL_BASIC: LOCAL disk</li> <li>LOCAL_SSD: LOCAL SSD</li><li>LOCAL_NVME: LOCAL NVME disk, which is closely related to InstanceType and cannot be specified</li><li>LOCAL_PRO: LOCAL HDD, which is closely related to InstanceType and cannot be specified</li><li>cloud_BASIC: BASIC cloud disk</li><li>cloud_PREMIUM: high-performance cloud block storage</li><li>cloud_SSD: SSD cloud disk</li><li>cloud_HSSD: enhanced SSD cloud disk</li> <li>cloud_TSSD: ultra-fast SSD cbs</li><li>cloud_BSSD: universal SSD cloud disk</li><br />default: LOCAL_BASIC.<br/><br />this parameter is invalid for the `ResizeInstanceDisk` api.
+         * Specifies the data disk type. for restrictions on data disk types, refer to [storage overview](https://www.tencentcloud.com/document/product/213/4952). valid values: <br /><li>LOCAL_BASIC: LOCAL disk</li> <li>LOCAL_SSD: LOCAL SSD</li><li>LOCAL_NVME: LOCAL NVME disk, which is closely related to InstanceType and cannot be specified</li><li>LOCAL_PRO: LOCAL HDD, which is closely related to InstanceType and cannot be specified</li><li>cloud_BASIC: BASIC cloud disk</li><li>cloud_PREMIUM: high-performance cloud block storage</li><li>cloud_SSD: SSD cloud disk</li><li>cloud_HSSD: enhanced SSD cloud disk</li> <li>cloud_TSSD: ultra-fast SSD cbs</li><li>cloud_BSSD: universal SSD cloud disk</li><br />default: LOCAL_BASIC.<br/><br />this parameter is invalid for the `ResizeInstanceDisk` api.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -7187,7 +7187,7 @@ class CreateLaunchTemplateRequest extends  AbstractModel {
         this.Placement = null;
 
         /**
-         * Specify an effective [mirror](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. there are four image types: <li>PUBLIC image</li> <li>custom image</li> <li>shared image</li> <li>service market image</li>  you can obtain available mirror ids in the following ways: <li>the mirror ids of `PUBLIC image`, `custom image` and `shared image` can be queried by logging in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_image); the mirror ids of `service market image` can be queried through the [cloud market](https://market.cloud.tencent.com/list).</li> <li>call the api [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), input InstanceType to obtain the list of images supported by the current model, and take the `ImageId` field from the return information.</li>.
+         * Specify an effective [mirror](https://www.tencentcloud.com/document/product/213/4940) ID in the format of `img-xxx`. there are four image types: <li>PUBLIC image</li> <li>custom image</li> <li>shared image</li> <li>service market image</li>  you can obtain available mirror ids in the following ways: <li>the mirror ids of `PUBLIC image`, `custom image` and `shared image` can be queried by logging in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_image); the mirror ids of `service market image` can be queried through the [cloud market](https://market.cloud.tencent.com/list).</li> <li>call the api [DescribeImages](https://www.tencentcloud.com/document/api/213/33272), input InstanceType to obtain the list of images supported by the current model, and take the `ImageId` field from the return information.</li>.
          * @type {string || null}
          */
         this.ImageId = null;
@@ -7201,7 +7201,7 @@ class CreateLaunchTemplateRequest extends  AbstractModel {
         /**
          * Instance model. Different instance models specify different resource specifications.
 
-<br><li>For instances created with the payment modes PREPAID or POSTPAID_BY_HOUR, the specific values can be obtained by calling the DescribeInstanceTypeConfigs api to get the latest specification table or referring to the [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1) description. if this parameter is not specified, the system will dynamically assign a default model based on the current resource sales situation in a region.</li><li>for instances created with the payment mode CDHPAID, this parameter has the prefix "CDH_" and is generated based on the CPU and memory configuration. the specific format is: CDH_XCXG. for example, for creating a CDH instance with 1 CPU core and 1 gb memory, this parameter should be CDH_1C1G.</li>.
+<br><li>For instances created with the payment modes PREPAID or POSTPAID_BY_HOUR, the specific values can be obtained by calling the DescribeInstanceTypeConfigs api to get the latest specification table or referring to the [instance specifications](https://www.tencentcloud.com/document/product/213/11518) description. if this parameter is not specified, the system will dynamically assign a default model based on the current resource sales situation in a region.</li><li>for instances created with the payment mode CDHPAID, this parameter has the prefix "CDH_" and is generated based on the CPU and memory configuration. the specific format is: CDH_XCXG. for example, for creating a CDH instance with 1 CPU core and 1 gb memory, this parameter should be CDH_1C1G.</li>.
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -7231,7 +7231,7 @@ class CreateLaunchTemplateRequest extends  AbstractModel {
         this.InternetAccessible = null;
 
         /**
-         * Number of instances to purchase. value range for monthly subscription instances: [1, 300]. value range for pay-as-you-go instances: [1, 100]. default value: 1. the number of instances to purchase must not exceed the remaining user quota. for specific quota limitations, see [CVM instance purchase limitations](https://intl.cloud.tencent.com/document/product/213/2664?from_cn_redirect=1).
+         * Number of instances to purchase. value range for monthly subscription instances: [1, 300]. value range for pay-as-you-go instances: [1, 100]. default value: 1. the number of instances to purchase must not exceed the remaining user quota. for specific quota limitations, see [CVM instance purchase limitations](https://www.tencentcloud.com/document/product/213/2664).
          * @type {number || null}
          */
         this.InstanceCount = null;
@@ -7249,7 +7249,7 @@ class CreateLaunchTemplateRequest extends  AbstractModel {
         this.LoginSettings = null;
 
         /**
-         * Security group to which an instance belongs. this parameter can be obtained by calling the sgId field in the returned value of [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1). if not specified, the default security group is bound.
+         * Security group to which an instance belongs. this parameter can be obtained by calling the sgId field in the returned value of [DescribeSecurityGroups](https://www.tencentcloud.com/document/api/215/15808). if not specified, the default security group is bound.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
@@ -7297,7 +7297,7 @@ class CreateLaunchTemplateRequest extends  AbstractModel {
         this.InstanceMarketOptions = null;
 
         /**
-         * User data provided for an instance must be encoded in base64. valid values for maximum data size are up to 16 KB. for details on obtaining this parameter, see running commands at startup for Windows (https://intl.cloud.tencent.com/document/product/213/17526?from_cn_redirect=1) and Linux (https://intl.cloud.tencent.com/document/product/213/17525?from_cn_redirect=1).
+         * User data provided for an instance must be encoded in base64. valid values for maximum data size are up to 16 KB. for details on obtaining this parameter, see running commands at startup for [Windows](https://www.tencentcloud.com/document/product/213/17526) and [Linux](https://www.tencentcloud.com/document/product/213/17525).
          * @type {string || null}
          */
         this.UserData = null;
@@ -7325,7 +7325,7 @@ false (default): sends a normal request. after passing the check, creates an ins
         this.HpcClusterId = null;
 
         /**
-         * Instance [billing mode](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1).<br><li>PREPAID: prepaid, that is, monthly subscription.</li><li>POSTPAID_BY_HOUR: pay-as-you-go by hour.</li><li>CDHPAID: CDH instance (created based on CDH; the resources of the host are free of charge).</li><li>SPOTPAID: spot payment.</li>Default value: POSTPAID_BY_HOUR.
+         * Instance [billing mode](https://www.tencentcloud.com/document/product/213/2180).<br><li>PREPAID: prepaid, that is, monthly subscription.</li><li>POSTPAID_BY_HOUR: pay-as-you-go by hour.</li><li>CDHPAID: CDH instance (created based on CDH; the resources of the host are free of charge).</li><li>SPOTPAID: spot payment.</li>Default value: POSTPAID_BY_HOUR.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -11545,7 +11545,7 @@ class ModifyImageAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * Image ID, such as `img-gvbnzy6f`. You can obtain the image ID in the following ways:<li>Call the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) API and find the value of `ImageId` in the response.</li><li>Obtain it in the [Image console](https://console.cloud.tencent.com/cvm/image).</li>
+         * Image ID, such as `img-gvbnzy6f`. You can obtain the image ID in the following ways:<li>Call the [DescribeImages](https://www.tencentcloud.com/document/api/213/33272) API and find the value of `ImageId` in the response.</li><li>Obtain it in the [Image console](https://console.cloud.tencent.com/cvm/image).</li>
          * @type {string || null}
          */
         this.ImageId = null;
@@ -12258,7 +12258,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         super();
 
         /**
-         * vpc ID, such as `vpc-xxx`. valid vpc ids can be queried by logging in to the console (https://console.cloud.tencent.com/vpc/vpc?rid=1) or by calling the API [DescribeVpcs](https://www.tencentcloud.com/document/product/215/15778?lang=en) and obtaining the `VpcId` field from the API response. if both VpcId and SubnetId are input as `DEFAULT` when creating an instance, the DEFAULT vpc network will be forcibly used.
+         * vpc ID, such as `vpc-xxx`. Valid vpc ids can be queried by logging in to the [console](https://console.tencentcloud.com/vpc/vpc?rid=1) or by calling the API [DescribeVpcs](https://www.tencentcloud.com/document/product/215/15778) and obtaining the `VpcId` field from the API response. if both VpcId and SubnetId are input as `DEFAULT` when creating an instance, the DEFAULT vpc network will be forcibly used.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -12343,14 +12343,13 @@ class ResizeInstanceDisksRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID to be operated. can be obtained from the `InstanceId` in the return value from the DescribeInstances api (https://www.tencentcloud.com/document/api/213/15728?from_cn_redirect=1).
+         * Instance ID to be operated. can be obtained from the `InstanceId` in the return value from the [DescribeInstances API](https://www.tencentcloud.com/document/api/213/33258) .
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Specifies the configuration information of the data disk to be expanded, only supporting specifying the target capacity of the disk to be expanded. only non-elastic data disks (with `Portable` being `false` in the return values of [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315?from_cn_redirect=1)) can be expanded. the unit of data disk capacity is GiB. the minimum expansion step is 10 GiB. for data disk type selection, refer to [disk product introduction](https://www.tencentcloud.com/document/product/362/2353?from_cn_redirect=1). the available data disk type is restricted by the instance type `InstanceType`. additionally, the maximum allowable capacity for expansion varies by data disk type.
-<dx-alert infotype="explain" title="">You should specify either DataDisks or SystemDisk, but you cannot specify both at the same time.</dx-alert>
+         * Specifies the configuration information of the data disk to be expanded, only supporting specifying the target capacity of the disk to be expanded. only non-elastic data disks (with `Portable` being `false` in the return values of [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)) can be expanded. the unit of data disk capacity is GiB. the minimum expansion step is 10 GiB. for data disk type selection, refer to [disk product introduction](https://www.tencentcloud.com/document/product/362/31636). the available data disk type is restricted by the instance type `InstanceType`. additionally, the maximum allowable capacity for expansion varies by data disk type. You can specify either DataDisks or SystemDisk, but not both at the same time.
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
@@ -12362,8 +12361,7 @@ class ResizeInstanceDisksRequest extends  AbstractModel {
         this.ForceStop = null;
 
         /**
-         * System disk configuration information to be expanded. only supports specifying the purpose capacity of the disk to be expanded. only supports cloud disk expansion.
-<dx-alert infotype="explain" title="">You should specify either DataDisks or SystemDisk, but you cannot specify both at the same time.</dx-alert>
+         * System disk configuration information to be expanded. only supports specifying the purpose capacity of the disk to be expanded. only supports cloud disk expansion. You can specify either DataDisks or SystemDisk, but not both at the same time.
          * @type {SystemDisk || null}
          */
         this.SystemDisk = null;
@@ -12563,7 +12561,7 @@ class InternetAccessible extends  AbstractModel {
         this.InternetChargeType = null;
 
         /**
-         * The maximum outbound bandwidth of the public network, in Mbps. The default value is 0 Mbps. The upper limit of bandwidth varies for different models. For more information, see [Purchase Network Bandwidth](https://intl.cloud.tencent.com/document/product/213/12523?from_cn_redirect=1).
+         * The maximum outbound bandwidth of the public network, in Mbps. The default value is 0 Mbps. The upper limit of bandwidth varies for different models. For more information, see [Purchase Network Bandwidth](https://www.tencentcloud.com/document/product/213/12523).
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
@@ -12602,7 +12600,7 @@ Note: The static single-line IP is only supported in some regions.
 <li> AntiDDoSEIP: specifies the anti-ddos eip. only partial regions support anti-ddos eip. details visible in the [elastic IP product overview](https://www.tencentcloud.com/document/product/213/5733).</li>.
 If needed, assign a public IPv4 address to the resource by specifying the IPv4 address type.
 
-This feature is in beta test in selected regions. submit a ticket for consultation (https://console.cloud.tencent.com/workorder/category) if needed.
+This feature is in beta test in selected regions. [submit a ticket for consultation](https://console.tencentcloud.com/workorder/category) if needed.
          * @type {string || null}
          */
         this.IPv4AddressType = null;
@@ -12613,7 +12611,7 @@ This feature is in beta test in selected regions. submit a ticket for consultati
 <Li>HighQualityEIPv6: specifies the high quality ipv6. highqualityeipv6 is only supported in hong kong (china).</li>.
 If needed, assign an elastic IPv6 address for resource allocation.
 
-This feature is in beta test in selected regions. submit a ticket for consultation (https://console.cloud.tencent.com/workorder/category) if needed.
+This feature is in beta test in selected regions. [submit a ticket for consultation](https://console.tencentcloud.com/workorder/category) if needed.
          * @type {string || null}
          */
         this.IPv6AddressType = null;
@@ -12956,13 +12954,13 @@ class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
         super();
 
         /**
-         * One or more instance IDs to be operated. You can obtain the instance ID through the `InstanceId` in the return value from the API [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1). The maximum number of instances per request is 1.
+         * One or more instance IDs to be operated. You can obtain the instance ID through the `InstanceId` in the return value from the API [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258). The maximum number of instances per request is 1.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Instance model. Resources vary with the instance model. Specific values can be found in the tables of [Instance Types] (https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1) or in the latest specifications via the [DescribeInstanceTypeConfigs] (https://intl.cloud.tencent.com/document/product/213/15749?from_cn_redirect=1) API.
+         * Instance model. Resources vary with the instance model. Specific values can be found in the tables of [Instance Types](https://www.tencentcloud.com/document/product/213/11518).
          * @type {string || null}
          */
         this.InstanceType = null;

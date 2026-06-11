@@ -36,6 +36,7 @@ const DescribeMNGListResp = models.DescribeMNGListResp;
 const DeleteApplicationResponse = models.DeleteApplicationResponse;
 const ResetMNPAppSecretResp = models.ResetMNPAppSecretResp;
 const DeleteUserRequest = models.DeleteUserRequest;
+const MNPVersionSubPackageInfo = models.MNPVersionSubPackageInfo;
 const CreateMNPVersionRequest = models.CreateMNPVersionRequest;
 const DescribeMNPAccessAnalysisOverviewRequest = models.DescribeMNPAccessAnalysisOverviewRequest;
 const DescribeApplicationConfigInfosResponse = models.DescribeApplicationConfigInfosResponse;

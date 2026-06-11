@@ -2798,7 +2798,7 @@ Name specification: consists of letters (a-z, a-z), digits (0-9), and underscore
         this.DatabaseName = null;
 
         /**
-         * Owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+         * Owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109).
          * @type {string || null}
          */
         this.DatabaseOwner = null;
@@ -11336,7 +11336,7 @@ class DeleteAccountRequest extends  AbstractModel {
         this.DBInstanceId = null;
 
         /**
-         * Account name to be deleted. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+         * Account name to be deleted. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109).
          * @type {string || null}
          */
         this.UserName = null;
@@ -11630,7 +11630,7 @@ class ModifyAccountPrivilegesRequest extends  AbstractModel {
         this.DBInstanceId = null;
 
         /**
-         * Modify the permission of this account for a database object. obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1) api.
+         * Modify the permission of this account for a database object. obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109) api.
          * @type {string || null}
          */
         this.UserName = null;
@@ -12626,7 +12626,7 @@ class ModifyDatabaseOwnerRequest extends  AbstractModel {
         this.DatabaseName = null;
 
         /**
-         * New owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+         * New owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109).
          * @type {string || null}
          */
         this.DatabaseOwner = null;
@@ -13013,7 +13013,7 @@ class ResetAccountPasswordRequest extends  AbstractModel {
         this.DBInstanceId = null;
 
         /**
-         * Instance account name. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+         * Instance account name. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109).
          * @type {string || null}
          */
         this.UserName = null;
@@ -13022,10 +13022,10 @@ class ResetAccountPasswordRequest extends  AbstractModel {
          * Specifies the new password for the UserName account.
 Password settings rule specifies the following:.
 - valid values: 8 to 32 characters. a password with more than 12 characters is recommended.
--Must not start with "/".
--Must include the following four items:.
-Lowercase letters a ~ z.
-Uppercase letters: A – Z.
+- Must not start with "/".
+- Must include the following four items:.
+Lowercase letters a - z.
+Uppercase letters: A - Z.
 Digits: 0-9.
 Special symbols: ()`~!@#$%^&*-+=_|{}[]:<>,.?/.
          * @type {string || null}

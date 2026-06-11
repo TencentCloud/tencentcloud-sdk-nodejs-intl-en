@@ -2255,7 +2255,7 @@ class AllocationSummaryByItem extends  AbstractModel {
         this.PayMode = null;
 
         /**
-         * Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+         * Billing mode: Resource billing mode, which can be  yearly/monthly subscriptionor pay-as-you-go.
          * @type {string || null}
          */
         this.PayModeName = null;
@@ -2884,7 +2884,7 @@ class DistributionBillDetail extends  AbstractModel {
         this.ProductCodeName = null;
 
         /**
-         * Billing mode: The billing mode, which can be monthly subscription or pay-as-you-go.
+         * Billing mode: The billing mode, which can be yearly/monthly subscriptionor pay-as-you-go.
          * @type {string || null}
          */
         this.PayModeName = null;
@@ -2920,13 +2920,13 @@ class DistributionBillDetail extends  AbstractModel {
         this.ResourceName = null;
 
         /**
-         * Transaction type, which can be monthly subscription purchase, monthly subscription renewal, pay-as-you-go deduction, etc.
+         * Transaction type, which can be yearly/monthly subscription purchase, yearly/monthly subscription renewal, pay-as-you-go deduction, etc.
          * @type {string || null}
          */
         this.ActionTypeName = null;
 
         /**
-         * Order ID: The ID of a monthly subscription order.
+         * Order ID: The ID of a yearly/monthly subscription order.
          * @type {string || null}
          */
         this.OrderId = null;
@@ -3306,7 +3306,7 @@ class BillDistributionResourceSummary extends  AbstractModel {
         this.ProductCodeName = null;
 
         /**
-         * Billing mode: The billing mode, which can be monthly subscription or pay-as-you-go.
+         * Billing mode: The billing mode, which can be yearly/monthly subscription or pay-as-you-go.
          * @type {string || null}
          */
         this.PayModeName = null;
@@ -3342,13 +3342,13 @@ class BillDistributionResourceSummary extends  AbstractModel {
         this.ResourceName = null;
 
         /**
-         * Transaction type, which can be monthly subscription purchase, monthly subscription renewal, pay-as-you-go deduction, etc.
+         * Transaction type, which can be yearly/monthly subscription purchase, yearly/monthly subscription renewal, pay-as-you-go deduction, etc.
          * @type {string || null}
          */
         this.ActionTypeName = null;
 
         /**
-         * Order ID: The ID of a monthly subscription order.
+         * Order ID: The ID of a yearly/monthly subscription order.
          * @type {string || null}
          */
         this.OrderId = null;
@@ -6510,7 +6510,7 @@ class AllocationSummaryByResource extends  AbstractModel {
         this.PayMode = null;
 
         /**
-         * Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+         * Billing mode: Resource billing mode, which can be  yearly/monthly subscriptionor pay-as-you-go.
          * @type {string || null}
          */
         this.PayModeName = null;
@@ -9970,7 +9970,7 @@ class AllocationDetail extends  AbstractModel {
         this.PayMode = null;
 
         /**
-         * Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+         * Billing mode: Resource billing mode, which can be yearly/monthly subscriptionor pay-as-you-go.
          * @type {string || null}
          */
         this.PayModeName = null;
@@ -15718,7 +15718,7 @@ class GatherResourceSummary extends  AbstractModel {
         this.PayMode = null;
 
         /**
-         * Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+         * Billing mode: Resource billing mode, which can be yearly/monthly subscription or pay-as-you-go.
          * @type {string || null}
          */
         this.PayModeName = null;
@@ -16567,7 +16567,7 @@ class BillPayMode extends  AbstractModel {
         this.PayMode = null;
 
         /**
-         * Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+         * Billing mode: Resource billing mode, which can be yearly/monthly subscription or pay-as-you-go.
          * @type {string || null}
          */
         this.PayModeName = null;

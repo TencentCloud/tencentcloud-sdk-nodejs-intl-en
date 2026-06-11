@@ -260,6 +260,12 @@ class DeleteRoomMemberRequest extends  AbstractModel {
          */
         this.Uids = null;
 
+        /**
+         * List of users to exclude (string type)
+         * @type {Array.<string> || null}
+         */
+        this.StrUids = null;
+
     }
 
     /**
@@ -273,6 +279,7 @@ class DeleteRoomMemberRequest extends  AbstractModel {
         this.DeleteType = 'DeleteType' in params ? params.DeleteType : null;
         this.BizId = 'BizId' in params ? params.BizId : null;
         this.Uids = 'Uids' in params ? params.Uids : null;
+        this.StrUids = 'StrUids' in params ? params.StrUids : null;
 
     }
 }
@@ -1458,19 +1465,22 @@ class SceneInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * RealTime: Real-time Voice Analysis; 
+VoiceMessage: Voice Message; 
+GMECloudApi: GME Cloud API; 
          * @type {string || null}
          */
         this.SceneId = null;
 
         /**
-         * 
+         * Switch state, true for on, false for off.
+
          * @type {boolean || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * callback URL
          * @type {string || null}
          */
         this.CallbackUrl = null;

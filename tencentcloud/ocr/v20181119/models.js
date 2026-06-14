@@ -2469,9 +2469,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Gender on the document.
--M: man.
--F: woman.
--X: other gender identity.
+- M: man.
+- F: woman.
+- X: other gender identity.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -7470,13 +7470,13 @@ class RecognizeBrazilRNMOCRResponse extends  AbstractModel {
         this.CPF = null;
 
         /**
-         * 
+         * Residence category
          * @type {string || null}
          */
         this.CLASSIFICATION = null;
 
         /**
-         * 
+         * Residence validity term
          * @type {string || null}
          */
         this.PRAZODERESIDENCIA = null;

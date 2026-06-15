@@ -254,16 +254,16 @@ class CreateLifecycleDataTaskRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * The path or file to be settled supports passing only one path and cannot be empty.
-         * @type {string || null}
-         */
-        this.TaskPath = null;
-
-        /**
          * Task name.
          * @type {string || null}
          */
         this.TaskName = null;
+
+        /**
+         * The path or file to be settled supports passing only one path and cannot be empty.
+         * @type {string || null}
+         */
+        this.TaskPath = null;
 
         /**
          * Data flow ID. this api can be accessed through DescribeDataFlow.
@@ -288,8 +288,8 @@ class CreateLifecycleDataTaskRequest extends  AbstractModel {
         }
         this.FileSystemId = 'FileSystemId' in params ? params.FileSystemId : null;
         this.Type = 'Type' in params ? params.Type : null;
-        this.TaskPath = 'TaskPath' in params ? params.TaskPath : null;
         this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.TaskPath = 'TaskPath' in params ? params.TaskPath : null;
         this.DataFlowId = 'DataFlowId' in params ? params.DataFlowId : null;
         this.IsOverwrite = 'IsOverwrite' in params ? params.IsOverwrite : null;
 
@@ -4626,6 +4626,12 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
         this.FsName = null;
 
         /**
+         * 
+         * @type {boolean || null}
+         */
+        this.Encrypted = null;
+
+        /**
          * File system tag
          * @type {Array.<TagInfo> || null}
          */
@@ -4711,6 +4717,7 @@ Enhanced: creates enhanced metadata.
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.MountIP = 'MountIP' in params ? params.MountIP : null;
         this.FsName = 'FsName' in params ? params.FsName : null;
+        this.Encrypted = 'Encrypted' in params ? params.Encrypted : null;
 
         if (params.ResourceTags) {
             this.ResourceTags = new Array();

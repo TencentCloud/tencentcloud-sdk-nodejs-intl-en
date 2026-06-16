@@ -17,80 +17,106 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const PageScreenVO = models.PageScreenVO;
+const DeleteProjectRequest = models.DeleteProjectRequest;
+const ExportScreenPageResponse = models.ExportScreenPageResponse;
+const ProjectConfigResult = models.ProjectConfigResult;
+const DeleteUserRoleResponse = models.DeleteUserRoleResponse;
+const DescribeUserProjectListRequest = models.DescribeUserProjectListRequest;
+const ModifyResourceUserRequest = models.ModifyResourceUserRequest;
+const CorpUserListData = models.CorpUserListData;
+const RowColumnConfig = models.RowColumnConfig;
+const JoinRelation = models.JoinRelation;
+const PageScreenListVO = models.PageScreenListVO;
+const DescribeSourceFieldListResponse = models.DescribeSourceFieldListResponse;
+const UserResourceDTO = models.UserResourceDTO;
+const ModifyDatasourceCloudResponse = models.ModifyDatasourceCloudResponse;
+const CreateUserRoleResponse = models.CreateUserRoleResponse;
+const ApplyEmbedTokenInfo = models.ApplyEmbedTokenInfo;
+const Project = models.Project;
+const ExportScreenPageRequest = models.ExportScreenPageRequest;
+const JoinSourceTable = models.JoinSourceTable;
+const CreateUserRoleProjectRequest = models.CreateUserRoleProjectRequest;
+const WidgetVO = models.WidgetVO;
+const CreateDatasourceResponse = models.CreateDatasourceResponse;
+const TableColumnListData = models.TableColumnListData;
+const DeleteDatasourceResponse = models.DeleteDatasourceResponse;
+const CreateProjectRequest = models.CreateProjectRequest;
+const ApplyEmbedIntervalRequest = models.ApplyEmbedIntervalRequest;
+const ModifyResourceUserResponse = models.ModifyResourceUserResponse;
+const CreateDataTableRequest = models.CreateDataTableRequest;
+const CreatePermissionRanksRequest = models.CreatePermissionRanksRequest;
+const ModifyResourceUserGroupResourceRequest = models.ModifyResourceUserGroupResourceRequest;
+const DescribeProjectInfoRequest = models.DescribeProjectInfoRequest;
+const ModifyUserRoleRequest = models.ModifyUserRoleRequest;
+const CreateUserRoleRequest = models.CreateUserRoleRequest;
+const CreateEmbedTokenRequest = models.CreateEmbedTokenRequest;
+const ModifyDatasourceRequest = models.ModifyDatasourceRequest;
+const CreatePermissionRanksResponse = models.CreatePermissionRanksResponse;
+const CreateDataTableResponse = models.CreateDataTableResponse;
+const CreateProjectResponse = models.CreateProjectResponse;
+const DescribeProjectInfoResponse = models.DescribeProjectInfoResponse;
+const DeleteProjectResponse = models.DeleteProjectResponse;
+const ApplyEmbedIntervalResponse = models.ApplyEmbedIntervalResponse;
+const ResourceItem = models.ResourceItem;
+const UserInfo = models.UserInfo;
+const UserIdAndUserName = models.UserIdAndUserName;
+const EmptyValue = models.EmptyValue;
+const DescribeUserRoleListResponse = models.DescribeUserRoleListResponse;
+const RowColumnTagValue = models.RowColumnTagValue;
+const UserRoleListDataRoleInfo = models.UserRoleListDataRoleInfo;
+const EmbedTokenInfo = models.EmbedTokenInfo;
+const JoinRelationField = models.JoinRelationField;
+const DescribeProjectListResponse = models.DescribeProjectListResponse;
+const TableColumn = models.TableColumn;
+const DatasourceInfoData = models.DatasourceInfoData;
+const DescribePageWidgetListRequest = models.DescribePageWidgetListRequest;
+const DescribeUserRoleProjectListRequest = models.DescribeUserRoleProjectListRequest;
+const BaseStateAction = models.BaseStateAction;
+const Data = models.Data;
+const DescribeUserRoleProjectListResponse = models.DescribeUserRoleProjectListResponse;
+const DeleteUserRoleRequest = models.DeleteUserRoleRequest;
+const UserRoleListData = models.UserRoleListData;
+const CreateUserRoleProjectResponse = models.CreateUserRoleProjectResponse;
+const DeleteUserRoleProjectRequest = models.DeleteUserRoleProjectRequest;
+const DescribeUserRoleListRequest = models.DescribeUserRoleListRequest;
+const ClearEmbedTokenResponse = models.ClearEmbedTokenResponse;
+const ParamCreateDTO = models.ParamCreateDTO;
+const DescribeSourceFieldListRequest = models.DescribeSourceFieldListRequest;
+const EmptyValueConfig = models.EmptyValueConfig;
+const DeleteUserRoleProjectResponse = models.DeleteUserRoleProjectResponse;
+const FieldRemarkDTO = models.FieldRemarkDTO;
+const IdDTO = models.IdDTO;
+const ModifyDatasourceCloudRequest = models.ModifyDatasourceCloudRequest;
+const CreateDatasourceCloudRequest = models.CreateDatasourceCloudRequest;
 const DataId = models.DataId;
 const ClearEmbedTokenRequest = models.ClearEmbedTokenRequest;
-const DescribeUserRoleListResponse = models.DescribeUserRoleListResponse;
-const ExportScreenPageResponse = models.ExportScreenPageResponse;
-const ModifyProjectResponse = models.ModifyProjectResponse;
-const DeleteProjectRequest = models.DeleteProjectRequest;
 const DescribeUserProjectListResponse = models.DescribeUserProjectListResponse;
 const CreateDatasourceRequest = models.CreateDatasourceRequest;
 const DeleteDatasourceRequest = models.DeleteDatasourceRequest;
+const WidgetListVO = models.WidgetListVO;
 const ModifyDatasourceResponse = models.ModifyDatasourceResponse;
-const UserRoleListDataRoleInfo = models.UserRoleListDataRoleInfo;
-const ApplyEmbedIntervalRequest = models.ApplyEmbedIntervalRequest;
-const ProjectConfigResult = models.ProjectConfigResult;
-const EmbedTokenInfo = models.EmbedTokenInfo;
 const DescribePageWidgetListResponse = models.DescribePageWidgetListResponse;
-const DeleteUserRoleResponse = models.DeleteUserRoleResponse;
-const ErrorInfo = models.ErrorInfo;
-const DescribeUserProjectListRequest = models.DescribeUserProjectListRequest;
-const DescribePageWidgetListRequest = models.DescribePageWidgetListRequest;
 const CreateDatasourceCloudResponse = models.CreateDatasourceCloudResponse;
 const ProjectConfigList = models.ProjectConfigList;
-const DeleteUserRoleRequest = models.DeleteUserRoleRequest;
-const CreateUserRoleRequest = models.CreateUserRoleRequest;
+const PermissionGroup = models.PermissionGroup;
+const ApiDatasourceConfig = models.ApiDatasourceConfig;
 const UserGroupDTO = models.UserGroupDTO;
-const ModifyUserRoleRequest = models.ModifyUserRoleRequest;
-const DatasourceInfoData = models.DatasourceInfoData;
-const DescribeProjectListResponse = models.DescribeProjectListResponse;
-const CorpUserListData = models.CorpUserListData;
-const IdDTO = models.IdDTO;
+const ModifyProjectResponse = models.ModifyProjectResponse;
 const ModifyUserRoleResponse = models.ModifyUserRoleResponse;
-const CreateEmbedTokenRequest = models.CreateEmbedTokenRequest;
-const CreateUserRoleProjectResponse = models.CreateUserRoleProjectResponse;
-const PageScreenListVO = models.PageScreenListVO;
-const DescribeProjectInfoRequest = models.DescribeProjectInfoRequest;
-const BaseStateAction = models.BaseStateAction;
-const Data = models.Data;
 const ModifyUserRoleProjectResponse = models.ModifyUserRoleProjectResponse;
-const DescribeUserRoleProjectListResponse = models.DescribeUserRoleProjectListResponse;
-const ModifyDatasourceCloudResponse = models.ModifyDatasourceCloudResponse;
-const ModifyDatasourceCloudRequest = models.ModifyDatasourceCloudRequest;
-const ModifyDatasourceRequest = models.ModifyDatasourceRequest;
+const TableField = models.TableField;
 const ModifyProjectRequest = models.ModifyProjectRequest;
 const ModifyUserRoleProjectRequest = models.ModifyUserRoleProjectRequest;
-const CreateUserRoleResponse = models.CreateUserRoleResponse;
-const ApplyEmbedTokenInfo = models.ApplyEmbedTokenInfo;
+const ModifyResourceUserGroupResourceResponse = models.ModifyResourceUserGroupResourceResponse;
 const DescribeProjectListRequest = models.DescribeProjectListRequest;
 const UserRoleListDataUserRoleInfo = models.UserRoleListDataUserRoleInfo;
-const UserRoleListData = models.UserRoleListData;
-const Project = models.Project;
 const DatasourceInfo = models.DatasourceInfo;
-const DeleteUserRoleProjectRequest = models.DeleteUserRoleProjectRequest;
-const CreateProjectResponse = models.CreateProjectResponse;
-const DescribeProjectInfoResponse = models.DescribeProjectInfoResponse;
-const ExportScreenPageRequest = models.ExportScreenPageRequest;
-const DescribeUserRoleListRequest = models.DescribeUserRoleListRequest;
-const ClearEmbedTokenResponse = models.ClearEmbedTokenResponse;
-const DeleteProjectResponse = models.DeleteProjectResponse;
 const ProjectListData = models.ProjectListData;
-const DescribeUserRoleProjectListRequest = models.DescribeUserRoleProjectListRequest;
-const PermissionGroup = models.PermissionGroup;
 const CreateEmbedTokenResponse = models.CreateEmbedTokenResponse;
-const CreateUserRoleProjectRequest = models.CreateUserRoleProjectRequest;
-const WidgetListVO = models.WidgetListVO;
-const WidgetVO = models.WidgetVO;
 const DescribeDatasourceListRequest = models.DescribeDatasourceListRequest;
-const ApplyEmbedIntervalResponse = models.ApplyEmbedIntervalResponse;
-const CreateDatasourceResponse = models.CreateDatasourceResponse;
-const DeleteUserRoleProjectResponse = models.DeleteUserRoleProjectResponse;
-const CreateDatasourceCloudRequest = models.CreateDatasourceCloudRequest;
-const UserInfo = models.UserInfo;
+const FrequencyConfig = models.FrequencyConfig;
 const DescribeDatasourceListResponse = models.DescribeDatasourceListResponse;
-const UserIdAndUserName = models.UserIdAndUserName;
-const DeleteDatasourceResponse = models.DeleteDatasourceResponse;
-const CreateProjectRequest = models.CreateProjectRequest;
+const ErrorInfo = models.ErrorInfo;
 const PermissionComponent = models.PermissionComponent;
 
 
@@ -138,6 +164,17 @@ class BiClient extends AbstractClient {
     }
 
     /**
+     * Create row/column permissions
+     * @param {CreatePermissionRanksRequest} req
+     * @param {function(string, CreatePermissionRanksResponse):void} cb
+     * @public
+     */
+    CreatePermissionRanks(req, cb) {
+        let resp = new CreatePermissionRanksResponse();
+        this.request("CreatePermissionRanks", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain project details.
      * @param {DescribeProjectInfoRequest} req
      * @param {function(string, DescribeProjectInfoResponse):void} cb
@@ -149,25 +186,25 @@ class BiClient extends AbstractClient {
     }
 
     /**
-     * This API is used to extend the available time of a token with strong authentication.
-     * @param {ApplyEmbedIntervalRequest} req
-     * @param {function(string, ApplyEmbedIntervalResponse):void} cb
+     * This API is used to create a project.
+     * @param {CreateProjectRequest} req
+     * @param {function(string, CreateProjectResponse):void} cb
      * @public
      */
-    ApplyEmbedInterval(req, cb) {
-        let resp = new ApplyEmbedIntervalResponse();
-        this.request("ApplyEmbedInterval", req, resp, cb);
+    CreateProject(req, cb) {
+        let resp = new CreateProjectResponse();
+        this.request("CreateProject", req, resp, cb);
     }
 
     /**
-     * This API is used to export a screenshot.
-     * @param {ExportScreenPageRequest} req
-     * @param {function(string, ExportScreenPageResponse):void} cb
+     * This API is used to create a cloud database.
+     * @param {CreateDatasourceCloudRequest} req
+     * @param {function(string, CreateDatasourceCloudResponse):void} cb
      * @public
      */
-    ExportScreenPage(req, cb) {
-        let resp = new ExportScreenPageResponse();
-        this.request("ExportScreenPage", req, resp, cb);
+    CreateDatasourceCloud(req, cb) {
+        let resp = new CreateDatasourceCloudResponse();
+        this.request("CreateDatasourceCloud", req, resp, cb);
     }
 
     /**
@@ -182,14 +219,14 @@ class BiClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a cloud database.
-     * @param {CreateDatasourceCloudRequest} req
-     * @param {function(string, CreateDatasourceCloudResponse):void} cb
+     * This API is used to export a screenshot.
+     * @param {ExportScreenPageRequest} req
+     * @param {function(string, ExportScreenPageResponse):void} cb
      * @public
      */
-    CreateDatasourceCloud(req, cb) {
-        let resp = new CreateDatasourceCloudResponse();
-        this.request("CreateDatasourceCloud", req, resp, cb);
+    ExportScreenPage(req, cb) {
+        let resp = new ExportScreenPageResponse();
+        this.request("ExportScreenPage", req, resp, cb);
     }
 
     /**
@@ -303,6 +340,28 @@ class BiClient extends AbstractClient {
     }
 
     /**
+     * Add a data table
+     * @param {CreateDataTableRequest} req
+     * @param {function(string, CreateDataTableResponse):void} cb
+     * @public
+     */
+    CreateDataTable(req, cb) {
+        let resp = new CreateDataTableResponse();
+        this.request("CreateDataTable", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify by user resource.
+     * @param {ModifyResourceUserRequest} req
+     * @param {function(string, ModifyResourceUserResponse):void} cb
+     * @public
+     */
+    ModifyResourceUser(req, cb) {
+        let resp = new ModifyResourceUserResponse();
+        this.request("ModifyResourceUser", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a user role in the project.
      * @param {CreateUserRoleProjectRequest} req
      * @param {function(string, CreateUserRoleProjectResponse):void} cb
@@ -311,6 +370,17 @@ class BiClient extends AbstractClient {
     CreateUserRoleProject(req, cb) {
         let resp = new CreateUserRoleProjectResponse();
         this.request("CreateUserRoleProject", req, resp, cb);
+    }
+
+    /**
+     * API information for raw data table fields
+     * @param {DescribeSourceFieldListRequest} req
+     * @param {function(string, DescribeSourceFieldListResponse):void} cb
+     * @public
+     */
+    DescribeSourceFieldList(req, cb) {
+        let resp = new DescribeSourceFieldListResponse();
+        this.request("DescribeSourceFieldList", req, resp, cb);
     }
 
     /**
@@ -325,14 +395,14 @@ class BiClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a project.
-     * @param {CreateProjectRequest} req
-     * @param {function(string, CreateProjectResponse):void} cb
+     * This API is used to extend the available time of a token with strong authentication.
+     * @param {ApplyEmbedIntervalRequest} req
+     * @param {function(string, ApplyEmbedIntervalResponse):void} cb
      * @public
      */
-    CreateProject(req, cb) {
-        let resp = new CreateProjectResponse();
-        this.request("CreateProject", req, resp, cb);
+    ApplyEmbedInterval(req, cb) {
+        let resp = new ApplyEmbedIntervalResponse();
+        this.request("ApplyEmbedInterval", req, resp, cb);
     }
 
     /**
@@ -344,6 +414,17 @@ class BiClient extends AbstractClient {
     DescribeUserProjectList(req, cb) {
         let resp = new DescribeUserProjectListResponse();
         this.request("DescribeUserProjectList", req, resp, cb);
+    }
+
+    /**
+     * Update user group permission based on resources
+     * @param {ModifyResourceUserGroupResourceRequest} req
+     * @param {function(string, ModifyResourceUserGroupResourceResponse):void} cb
+     * @public
+     */
+    ModifyResourceUserGroupResource(req, cb) {
+        let resp = new ModifyResourceUserGroupResourceResponse();
+        this.request("ModifyResourceUserGroupResource", req, resp, cb);
     }
 
     /**

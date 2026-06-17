@@ -70,6 +70,7 @@ const CopyBackupToVaultResponse = models.CopyBackupToVaultResponse;
 const ModifyResourcePackageNameRequest = models.ModifyResourcePackageNameRequest;
 const UpgradeProxy = models.UpgradeProxy;
 const OpenWanResponse = models.OpenWanResponse;
+const OpenAIOptimizerRequest = models.OpenAIOptimizerRequest;
 const BackupFileInfo = models.BackupFileInfo;
 const UpgradeProxyRequest = models.UpgradeProxyRequest;
 const DescribeBinlogDownloadUrlResponse = models.DescribeBinlogDownloadUrlResponse;
@@ -184,6 +185,7 @@ const ParamTemplateListInfo = models.ParamTemplateListInfo;
 const CloseProxyEndPointRequest = models.CloseProxyEndPointRequest;
 const LibraDBInstanceInitInfo = models.LibraDBInstanceInitInfo;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
+const OpenAIOptimizerResponse = models.OpenAIOptimizerResponse;
 const AuditInstanceInfo = models.AuditInstanceInfo;
 const AddClusterSlaveZoneResponse = models.AddClusterSlaveZoneResponse;
 const DescribeProxySpecsResponse = models.DescribeProxySpecsResponse;
@@ -828,6 +830,17 @@ class CynosdbClient extends AbstractClient {
     DescribeVaults(req, cb) {
         let resp = new DescribeVaultsResponse();
         this.request("DescribeVaults", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start the optimizer switch of an instance.
+     * @param {OpenAIOptimizerRequest} req
+     * @param {function(string, OpenAIOptimizerResponse):void} cb
+     * @public
+     */
+    OpenAIOptimizer(req, cb) {
+        let resp = new OpenAIOptimizerResponse();
+        this.request("OpenAIOptimizer", req, resp, cb);
     }
 
     /**

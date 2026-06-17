@@ -82,13 +82,13 @@ class DescribeTargetGroupListResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of displayed results
+         * <p>Number of displayed results.</p>
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Information set of displayed target groups
+         * <p>Collection of displayed target group information.</p>
          * @type {Array.<TargetGroupInfo> || null}
          */
         this.TargetGroupSet = null;
@@ -153,25 +153,25 @@ class DescribeTargetGroupListRequest extends  AbstractModel {
         super();
 
         /**
-         * Target group ID array
+         * <p>Target group ID array.</p>
          * @type {Array.<string> || null}
          */
         this.TargetGroupIds = null;
 
         /**
-         * Filter array, which is exclusive of `TargetGroupIds`. Valid values: `TargetGroupVpcId` and `TargetGroupName`. Target group ID will be used first.
+         * <p>Filter condition array. Support TargetGroupVpcId and TargetGroupName. Mutually exclusive with TargetGroupIds. Prioritize target group ID.</p>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
         /**
-         * Starting display offset
+         * <p>Starting display offset.</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Limit of the number of displayed results. Default value: 20.
+         * <p>Number of entries displayed per page.</p><p>Value ranges from 0 to 100.</p><p>The default value is 20.</p>
          * @type {number || null}
          */
         this.Limit = null;
@@ -372,109 +372,109 @@ class ClassicalListener extends  AbstractModel {
         super();
 
         /**
-         * CLB listener ID
+         * <p>CLB listener ID</p>
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * CLB listener port
+         * <p>CLB listener port</p>
          * @type {number || null}
          */
         this.ListenerPort = null;
 
         /**
-         * Backend forwarding port of a listener
+         * <p>listener backend forwarding port</p>
          * @type {number || null}
          */
         this.InstancePort = null;
 
         /**
-         * Listener name
+         * <p>Listener name</p>
          * @type {string || null}
          */
         this.ListenerName = null;
 
         /**
-         * Listener protocol type
+         * <p>Listener protocol type</p>
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * Session persistence time
+         * <p>Session persistence time</p>
          * @type {number || null}
          */
         this.SessionExpire = null;
 
         /**
-         * Whether health check is enabled. 1: enabled; 0: disabled.
+         * <p>Whether health check is enabled: 1 (enabled), 0 (disabled)</p>
          * @type {number || null}
          */
         this.HealthSwitch = null;
 
         /**
-         * Response timeout period
+         * <p>Response timeout</p><p>Unit: second</p>
          * @type {number || null}
          */
         this.TimeOut = null;
 
         /**
-         * Check interval
+         * <p>Check interval</p><p>Unit: seconds</p>
          * @type {number || null}
          */
         this.IntervalTime = null;
 
         /**
-         * Health threshold
+         * <p>Health threshold</p>
          * @type {number || null}
          */
         this.HealthNum = null;
 
         /**
-         * Unhealthy threshold
+         * <p>Unhealthy threshold</p>
          * @type {number || null}
          */
         this.UnhealthNum = null;
 
         /**
-         * Request balancing method for listeners of the classic public network CLB. An empty string or wrr indicates weighted round robin. ip_hash indicates consistent hashing based on the accessed source IP address. least_conn indicates least connections.
+         * <p>Request balancing method for listeners of the classic public network CLB. An empty string or wrr indicates weighted round robin. ip_hash indicates consistent hashing based on the accessed source IP address. least_conn indicates least connections.</p>
          * @type {string || null}
          */
         this.HttpHash = null;
 
         /**
-         * Health check return code for HTTP and HTTPS listeners of a public network classic CLB. For more information, see the explanation of the field in the listener creating API.
+         * <p>Health check return code of HTTP and HTTPS listeners for public network CLB. For details, see the explanation of this field in listener creation API.</p>
          * @type {number || null}
          */
         this.HttpCode = null;
 
         /**
-         * Health check path for HTTP and HTTPS listeners of a public network classic CLB
+         * <p>Health check path of HTTP and HTTPS listeners for public network CLB</p>
          * @type {string || null}
          */
         this.HttpCheckPath = null;
 
         /**
-         * Authentication method for an HTTPS listener of a public network classic CLB
+         * <p>Authentication method of the HTTPS listener for public network CLB</p>
          * @type {string || null}
          */
         this.SSLMode = null;
 
         /**
-         * Server certificate ID for an HTTPS listener of a public network classic CLB
+         * <p>Server certificate ID of the HTTPS listener for the public network CLB</p>
          * @type {string || null}
          */
         this.CertId = null;
 
         /**
-         * Client certificate ID for an HTTPS listener of a public network classic CLB
+         * <p>Client certificate ID of the HTTPS listener for public network CLB</p>
          * @type {string || null}
          */
         this.CertCaId = null;
 
         /**
-         * Listener status. Value range: 0 (creating), 1 (running)
+         * <p>Listener status. 0 indicates creating in progress, 1 indicates running.</p>
          * @type {number || null}
          */
         this.Status = null;
@@ -591,21 +591,19 @@ class CreateLoadBalancerRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance network type:
-OPEN: public network; INTERNAL: private network.
+         * <p>Network type of the Cloud Load Balancer instance:<br>OPEN: public network attribute, INTERNAL: private network attribute.</p>
          * @type {string || null}
          */
         this.LoadBalancerType = null;
 
         /**
-         * CLB instance type. Valid value: 1 (generic CLB instance).
+         * <p>Type of the Cloud Load Balancer instance. 1: Common CLB instance. Currently only support passing in 1.</p>
          * @type {number || null}
          */
         this.Forward = null;
 
         /**
-         * CLB instance name, which takes effect only when only one instance is to be created in the request. It can consist 1 to 60 letters, digits, hyphens (-), or underscores (_).
-Note: if the name of the new CLB instance already exists, a default name will be generated automatically.
+         * <p>The name of the Cloud Load Balancer instance is effective only when creating an instance. Rule: 1-80 characters in internationally compatible languages such as English letters, Chinese characters, digits, connecting line "-", underscore "_", and other common characters (Unicode supplementary characters such as emoji and rare Chinese characters are forbidden). Note: If the name is identical to an existing Cloud Load Balancer instance name in the system, the system will automatically generate the name for the created CLB instance.</p>
          * @type {string || null}
          */
         this.LoadBalancerName = null;
@@ -617,7 +615,7 @@ Note: if the name of the new CLB instance already exists, a default name will be
         this.VpcId = null;
 
         /**
-         * A subnet ID should be specified when you purchase a private network CLB instance under a VPC. The VIP of the private network CLB instance is in this subnet. This parameter is required when you create a private network CLB instance but not supported when you create a public network IPv4 CLB instance.
+         * <p>When you purchase a private network CLB instance in a VPC, the subnet ID must be specified. The VIP of the private network CLB instance is generated in this subnet.<br>This parameter is required when you create a private network CLB instance or a CLB instance of the IPv6FullChain version.<br>It cannot be specified when you create a public network IPv4 CLB instance.</p>
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -629,157 +627,160 @@ Note: if the name of the new CLB instance already exists, a default name will be
         this.ProjectId = null;
 
         /**
-         * It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: `IPV6` indicates IPv6 NAT64, while `IPv6FullChain` indicates IPv6. 
+         * <p>Applicable only to public network CLB. IP version, valid values: IPV4, IPV6, IPv6FullChain, case-insensitive, default value IPV4. Description: A value of IPV6 means IPV6 NAT64 version; a value of IPv6FullChain means IPv6 version.</p>
          * @type {string || null}
          */
         this.AddressIPVersion = null;
 
         /**
-         * Specifies the count of cloud load balancers to create, with a default value of 1. the count must not exceed the maximum value allowed for the account, with a default creation maximum value of 20.
+         * <p>Count of Cloud Load Balancers to create, default value is 1. The count must not exceed the maximum value allowed for the account, with a default creation maximum value of 20.</p>
          * @type {number || null}
          */
         this.Number = null;
 
         /**
-         * Applicable only to public network IPv4 cloud load balancer instances. specifies the primary AZ ID for cross-az disaster recovery. both AZ ID and name are supported, such as 100001 or ap-guangzhou-1.
-Note: the primary AZ loads traffic. the secondary AZ does not load traffic by default and is used only if the primary AZ becomes unavailable.
+         * <p>Applicable only to public network load balancing with IP version IPv4. Sets the primary AZ ID for cross-AZ disaster recovery. Both AZ ID and name are supported, such as 100001 or ap-guangzhou-1.<br>Note: The primary AZ loads traffic. The secondary AZ does not load traffic by default and is used only if the primary AZ becomes unavailable.</p>
          * @type {string || null}
          */
         this.MasterZoneId = null;
 
         /**
-         * Applicable only to public network IPv4 clb instances. specifies the AZ ID or availability zone name for creating a clb instance. for example, 100001 or ap-guangzhou-1.
+         * <p>Applicable only to public network load balancing with IP version IPv4. AZ ID, availability zone id and name are supported. Specify availability zone to create a CLB instance. For example: 100001 or ap-guangzhou-1.</p>
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * Network billing mode by the maximum outbound bandwidth. It applies only to private network LCU-supported instances and all public network instances. The feature of purchasing yearly/monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+         * <p>Maximum outbound bandwidth under the network billing mode. It applies only to LCU-supported instances of the private network type and all instances of the public network type.</p>
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
 
         /**
-         * ISP of VIP. Values: `CMCC` (China Mobile), `CUCC` (China Unicom) and `CTCC` (China Telecom). You need to activate static single-line IPs. This feature is in beta and is only available in Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu and Chongqing regions. To try it out, please contact your sales rep. If it's specified, the network billing mode must be `BANDWIDTH_PACKAGE`. If it's not specified, BGP is used by default. To query ISPs supported in a region, please use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). 
+         * <p>Applicable only to public network CLB. Currently, only Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu, and Chongqing regions support static single-line IP type. If you need to experience it, contact business manager to submit a request. After approval, you can select operator type of China Mobile (CMCC), China Unicom (CUCC), or China Telecom (CTCC). Only can be used network billing mode BANDWIDTH_PACKAGE. If this parameter is not specified, use BGP by default. You can query ISPs supported in a region via <a href="https://www.tencentcloud.com/document/api/214/70213?from_cn_redirect=1">DescribeResources</a> api.</p>
          * @type {string || null}
          */
         this.VipIsp = null;
 
         /**
-         * Tags the CLB instance when purchasing it. Up to 20 tag key value pairs are supported.
+         * <p>When purchasing a Cloud Load Balancer, you can tag it with up to 20 tag key-value pairs.</p>
          * @type {Array.<TagInfo> || null}
          */
         this.Tags = null;
 
         /**
-         * Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
-Note: If the specified VIP is occupied or is not within the IP range of the specified VPC subnet, you cannot use the VIP to create a CLB instance in a private network or an IPv6 BGP CLB instance in a public network.
+         * <p>Specify VIP to apply for Cloud Load Balancer. This parameter is optional. If this parameter is not specified, VIP is automatically assigned. This parameter is supported for IPv4 and IPv6 types but not for IPv6 NAT64 type.<br>Note: When creating a private network instance or a public IPv6 BGP instance with a designated VIP, creation fails if the VIP is not within the IP range of the specified VPC subnet or if the VIP is already occupied.</p>
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
-         * BANDWIDTH PACKAGE ID, which can be obtained through the [DescribeBandwidthPackages](https://www.tencentcloud.com/document/api/215/19209?from_cn_redirect=1) api. specifies the BANDWIDTH PACKAGE ID. when this parameter is specified, the network billing mode (InternetAccessible.InternetChargeType) supports only billing by BANDWIDTH PACKAGE (BANDWIDTH_PACKAGE). the attributes of the BANDWIDTH PACKAGE determine the settlement method. for IPv6 clb instances purchased by non-promoted users, if the operator type is not BGP, the BANDWIDTH PACKAGE ID cannot be specified.
+         * <p>Bandwidth package ID, which can be obtained through the <a href="https://www.tencentcloud.com/document/api/215/19209?from_cn_redirect=1">DescribeBandwidthPackages</a> API. When this parameter is specified, the network billing mode (InternetAccessible.InternetChargeType) supports only billing by bandwidth package (BANDWIDTH_PACKAGE), and the bandwidth package attributes determine the settlement method. For IPv6 Cloud Load Balancer instances purchased by non-promoted users with a non-BGP operator type, specifying bandwidth package ID is unsupported.</p>
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
 
         /**
-         * Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
+         * <p>Dedicated instance info. This parameter is required when creating a private network CLB instance of exclusive type.</p>
          * @type {ExclusiveCluster || null}
          */
         this.ExclusiveCluster = null;
 
         /**
-         * Specification of the LCU-supported instance.<ul><li>If you need to create an LCU-supported instance, this parameter is required. Valid values:<ul><li> clb.c2.medium: Standard </li><li> clb.c3.small: Advanced 1 </li><li> clb.c3.medium: Advanced 2 </li><li> clb.c4.small: Super Large 1 </li><li> clb.c4.medium: Super Large 2 </li><li> clb.c4.large: Super Large 3 </li><li> clb.c4.xlarge: Super Large 4 </li></ul></li><li>If you need to create a shared instance, this parameter is not required.</li></ul> For specification details, see [Instance Specifications Comparison](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
+         * <p>Performance capacity specification.</p><ul><li>If you need to create an LCU-supported instance, this parameter is required. Valid values:<ul><li> clb.c2.medium: Standard </li><li> clb.c3.small: Advanced 1 </li><li> clb.c3.medium: Advanced 2 </li><li> clb.c4.small: Super Large 1 </li><li> clb.c4.medium: Super Large 2 </li><li> clb.c4.large: Super Large 3 </li><li> clb.c4.xlarge: Super Large 4 </li></ul></li><li>For Chinese site users who need to create a shared instance, this parameter is not required. International site users will purchase a standard instance by default if this parameter is not passed.</li></ul> For specification details, see [Instance Specifications Comparison](https://www.tencentcloud.com/document/product/214/84689?from_cn_redirect=1).
          * @type {string || null}
          */
         this.SlaType = null;
 
         /**
-         * Cluster ID. This cluster identifier is used for configuring a public cloud exclusive cluster or a cloud dedicated cluster. To apply for a public cloud exclusive cluster, [submit a ticket](https://console.cloud.tencent.com/workorder/category). For cloud dedicated clusters, see the descriptions in [Cloud Dedicated Cluster](https://intl.cloud.tencent.com/document/product/1346?from_cn_redirect=1).
+         * <p>Cluster ID. This cluster identifier is used for configuring a public cloud exclusive cluster or a local dedicated cluster. To apply for a public cloud exclusive cluster, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>. For local dedicated clusters, refer to the description in <a href="https://www.tencentcloud.com/document/product/1346?from_cn_redirect=1">Local Dedicated Cluster</a>.</p>
          * @type {Array.<string> || null}
          */
         this.ClusterIds = null;
 
         /**
-         * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+         * <p>String used to ensure request idempotency. This string is generated by the customer and must be unique among different requests, with a maximum value of 64 ASCII characters. If not specified, request idempotency cannot be guaranteed.</p>
          * @type {string || null}
          */
         this.ClientToken = null;
 
         /**
-         * Whether Binding IPs of other VPCs feature switch
+         * <p>Whether binding cross-regional or cross-Vpc IP addresses is supported.</p>
          * @type {boolean || null}
          */
         this.SnatPro = null;
 
         /**
-         * Creates `SnatIp` when the binding IPs of other VPCs feature is enabled
+         * <p>Enable the cross-regional or cross-Vpc IP binding feature to create a SnatIp.</p>
          * @type {Array.<SnatIp> || null}
          */
         this.SnatIps = null;
 
         /**
-         * Tag for the STGW exclusive cluster.
+         * <p>Tag of the Stgw exclusive cluster.</p>
          * @type {string || null}
          */
         this.ClusterTag = null;
 
         /**
-         * Applicable only to public network IPv4 clb instances. specifies the secondary AZ ID for cross-az disaster recovery. both AZ ID and name are supported, such as 100001 or ap-guangzhou-1.
-Note: The secondary AZ sustains traffic when the primary AZ encounters faults. You can call the [DescribeResources](https://www.tencentcloud.com/document/api/214/70213?from_cn_redirect=1) API to query the list of primary/secondary AZs in a region. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+         * <p>Applicable only to public network load balancing with IP version IPv4. Sets the secondary AZ ID for cross-AZ disaster recovery. AZ ID and name are supported, such as 100001 or ap-guangzhou-1.<br>Note: The secondary AZ is the availability zone that needs to carry traffic after primary availability zone failure. Query a region's list of primary/secondary AZs via the <a href="https://www.tencentcloud.com/document/api/214/70213?from_cn_redirect=1">DescribeResources</a> API. [If you need to trial the feature, submit a ticket application via <a href="https://console.cloud.tencent.com/workorder/category">Work Order</a>]</p>
          * @type {string || null}
          */
         this.SlaveZoneId = null;
 
         /**
-         * The unique ID of EIP, which can be queried through the DescribeAddresses API (https://www.tencentcloud.com/document/product/215/16702?from_cn_redirect=1). format: EIP-qhx8udkc. applicable only to private network clb binding EIP.
+         * <p>The unique ID of EIP can be accessed through the <a href="https://www.tencentcloud.com/document/product/215/16702?from_cn_redirect=1">DescribeAddresses</a> api for the query. Example: eip-qhx8udkc, applicable only to bind EIP for private network CLB.</p>
          * @type {string || null}
          */
         this.EipAddressId = null;
 
         /**
-         * Specifies whether to allow CLB traffic to the Target. enable (true): verify security groups on CLB. disable (false): verify security groups on both CLB and backend instances. IPv6 CLB security group default permit, this parameter is not required.
+         * <p>Allow CLB traffic to the Target. Enable (true): verify security groups on CLB; deny CLB traffic to the Target (false): verify security groups on both CLB and backend instances. IPv6 CLB security group default permit, this parameter is not required.</p>
          * @type {boolean || null}
          */
         this.LoadBalancerPassToTarget = null;
 
         /**
-         * Upgrades to domain name-based CLB
+         * <p>Create a domain-name based CLB.</p>
          * @type {boolean || null}
          */
         this.DynamicVip = null;
 
         /**
-         * Network egress point
+         * <p>Network outbound</p>
          * @type {string || null}
          */
         this.Egress = null;
 
         /**
-         * Prepayment-related attributes of a CLB instance. The feature of purchasing yearly/monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+         * <p>Prepaid billing attributes of the CLB instance</p>
          * @type {LBChargePrepaid || null}
          */
         this.LBChargePrepaid = null;
 
         /**
-         * Billing type of a CLB instance. Valid values: POSTPAID_BY_HOUR and PREPAID. Default value: POSTPAID_BY_HOUR. The feature of purchasing yearly/monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+         * <p>Billing type of the CLB instance. Valid values: POSTPAID_BY_HOUR and PREPAID. Default value: POSTPAID_BY_HOUR.</p><p>Enumeration values:</p><ul><li>POSTPAID_BY_HOUR: Pay-As-You-Go</li><li>PREPAID: Monthly Subscription</li></ul>
          * @type {string || null}
          */
         this.LBChargeType = null;
 
         /**
-         * Topic ID of logs of traffic access over layer-7 protocols.
+         * <p>L7 access log topic ID</p>
          * @type {string || null}
          */
         this.AccessLogTopicId = null;
 
         /**
-         * Whether layer-7 advanced routing is enabled.
+         * <p>Whether layer-7 advanced routing is enabled</p>
          * @type {boolean || null}
          */
         this.AdvancedRoute = null;
+
+        /**
+         * <p>Availability zone affinity info</p>
+         * @type {AvailableZoneAffinityInfo || null}
+         */
+        this.AvailableZoneAffinityInfo = null;
 
     }
 
@@ -852,6 +853,12 @@ Note: The secondary AZ sustains traffic when the primary AZ encounters faults. Y
         this.LBChargeType = 'LBChargeType' in params ? params.LBChargeType : null;
         this.AccessLogTopicId = 'AccessLogTopicId' in params ? params.AccessLogTopicId : null;
         this.AdvancedRoute = 'AdvancedRoute' in params ? params.AdvancedRoute : null;
+
+        if (params.AvailableZoneAffinityInfo) {
+            let obj = new AvailableZoneAffinityInfo();
+            obj.deserialize(params.AvailableZoneAffinityInfo)
+            this.AvailableZoneAffinityInfo = obj;
+        }
 
     }
 }
@@ -945,7 +952,7 @@ class DeleteRuleRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * Forwarding path of the forwarding rule to be deleted can be accessed through the DescribeLoadBalancersDetail api (https://www.tencentcloud.com/document/api/214/46916?from_cn_redirect=1).
+         * Forwarding path of the forwarding rule to be deleted can be accessed through the [DescribeLoadBalancersDetail](https://www.tencentcloud.com/document/api/214/46916?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Url = null;
@@ -1017,7 +1024,7 @@ Note: A secondary AZ will load traffic if the primary AZ is faulty. You can use 
         this.SlaveZoneId = null;
 
         /**
-         * Applicable only to public network clb. AZ ID, both availability zone ID and name are supported. specify availability zone to create a load balancing instance, for example: 100001 or ap-guangzhou-1. if not passed, queries CVM instances in all azs. if needed, call the API for the query DescribeZones (https://www.tencentcloud.com/document/product/213/15707?from_cn_redirect=1) to specify availability zone.
+         * Applicable only to public network clb. AZ ID, both availability zone ID and name are supported. specify availability zone to create a load balancing instance, for example: 100001 or ap-guangzhou-1. if not passed, queries CVM instances in all azs. if needed, call the API for the query [DescribeZones](https://www.tencentcloud.com/document/product/213/15707?from_cn_redirect=1) to specify availability zone.
          * @type {string || null}
          */
         this.ZoneId = null;
@@ -1089,13 +1096,13 @@ Note: A secondary AZ will load traffic if the primary AZ is faulty. You can use 
         this.ClusterTag = null;
 
         /**
-         * Applicable only to private network clb. when connected to nearby, select availability zone for deployment. you can call DescribeZones (https://www.tencentcloud.com/document/product/213/15707?from_cn_redirect=1) to query the availability zone list.
+         * Applicable only to private network clb. when connected to nearby, select availability zone for deployment. you can call [DescribeZones](https://www.tencentcloud.com/document/product/213/15707?from_cn_redirect=1) to query the availability zone list.
          * @type {Array.<string> || null}
          */
         this.Zones = null;
 
         /**
-         * The unique ID of EIP, such as EIP-qhx8udkc, applicable only to private network clb binding EIP, can be queried through the DescribeAddresses API (https://www.tencentcloud.com/document/product/215/16702?from_cn_redirect=1).
+         * The unique ID of EIP, such as EIP-qhx8udkc, applicable only to private network clb binding EIP, can be queried through the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702?from_cn_redirect=1) API .
          * @type {string || null}
          */
         this.EipAddressId = null;
@@ -1294,6 +1301,57 @@ class SetLoadBalancerClsLogResponse extends  AbstractModel {
 }
 
 /**
+ * Target group instance
+ * @class
+ */
+class TargetGroupInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Private IP of target group instance
+         * @type {string || null}
+         */
+        this.BindIP = null;
+
+        /**
+         * Port of target group instance. this field is not supported for full listen target groups.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Weight of a target group instance
+Specifies that the Weight must be configured for a v2 target group. when calling the CreateTargetGroup API for target group creation, this parameter is used in combination with the Weight parameter in the create api, and one of them is required.
+Valid values: 0-100.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * The new port of the target group instance. this field is not supported for full listen target groups.
+         * @type {number || null}
+         */
+        this.NewPort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BindIP = 'BindIP' in params ? params.BindIP : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.NewPort = 'NewPort' in params ? params.NewPort : null;
+
+    }
+}
+
+/**
  * DescribeLoadBalancerTraffic response structure.
  * @class
  */
@@ -1395,25 +1453,25 @@ class RsTagRule extends  AbstractModel {
         super();
 
         /**
-         * CLB listener ID.
+         * <p>CLB listener ID.</p>
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * List of real servers with tags to be modified.
+         * <p>List of real servers with tags to be modified.</p>
          * @type {Array.<Target> || null}
          */
         this.Targets = null;
 
         /**
-         * Forwarding rule ID, which is required only for Layer-7 rules but not for Layer-4 rules.
+         * <p>Forwarding rule ID, required for layer-7 rules, not required for layer-4 rules.</p>
          * @type {string || null}
          */
         this.LocationId = null;
 
         /**
-         * Modified Tag of the backend service. this parameter has a lower priority than the Tag parameter in the aforementioned [Target](https://www.tencentcloud.com/document/api/214/30694?from_cn_redirect=1#Target). the final Tag value is based on the Tag parameter in the Target. the Tag parameter in RsTagRule will be used only when the Tag parameter in the Target is empty.
+         * <p>Modified tag of the backend service. This parameter has a lower priority than the Tag parameter in the aforementioned <a href="https://www.tencentcloud.com/document/api/214/30694?from_cn_redirect=1#Target">Target</a>. The final tag value is based on the Tag parameter in the Target. The Tag parameter in RsTagRule will be used only when the Tag parameter in the Target is empty.</p>
          * @type {string || null}
          */
         this.Tag = null;
@@ -1464,7 +1522,7 @@ class ModifyRuleRequest extends  AbstractModel {
         this.ListenerId = null;
 
         /**
-         * Specifies the rule ID of the forwarding rule to be modified, which can be obtained through the DescribeListeners API (https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1).
+         * Specifies the rule ID of the forwarding rule to be modified, which can be obtained through the [DescribeListeners](https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.LocationId = null;
@@ -1718,8 +1776,8 @@ class ModifyLoadBalancerAttributesResponse extends  AbstractModel {
         super();
 
         /**
-         * This parameter can be used to query whether CLB billing mode switch is successful.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>When switching the billing mode of Cloud Load Balancer, you can use this parameter to check if the switch task is successful.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DealName = null;
@@ -2579,38 +2637,24 @@ Note: Either `TaskId` or `DealName` is required.
 }
 
 /**
- * Target group instance
+ * DescribeTargetGroupInstanceStatus response structure.
  * @class
  */
-class TargetGroupInstance extends  AbstractModel {
+class DescribeTargetGroupInstanceStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Private IP of target group instance
+         * Health check backend RS status list
+         * @type {Array.<TargetGroupInstanceStatus> || null}
+         */
+        this.TargetGroupInstanceSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.BindIP = null;
-
-        /**
-         * Port of target group instance. this field is not supported for full listen target groups.
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * Weight of a target group instance
-Specifies that the Weight must be configured for a v2 target group. when calling the CreateTargetGroup API for target group creation, this parameter is used in combination with the Weight parameter in the create api, and one of them is required.
-Valid values: 0-100.
-         * @type {number || null}
-         */
-        this.Weight = null;
-
-        /**
-         * The new port of the target group instance. this field is not supported for full listen target groups.
-         * @type {number || null}
-         */
-        this.NewPort = null;
+        this.RequestId = null;
 
     }
 
@@ -2621,10 +2665,16 @@ Valid values: 0-100.
         if (!params) {
             return;
         }
-        this.BindIP = 'BindIP' in params ? params.BindIP : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Weight = 'Weight' in params ? params.Weight : null;
-        this.NewPort = 'NewPort' in params ? params.NewPort : null;
+
+        if (params.TargetGroupInstanceSet) {
+            this.TargetGroupInstanceSet = new Array();
+            for (let z in params.TargetGroupInstanceSet) {
+                let obj = new TargetGroupInstanceStatus();
+                obj.deserialize(params.TargetGroupInstanceSet[z]);
+                this.TargetGroupInstanceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4184,64 +4234,61 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * Specifies the unique ID of the cloud load balancer. you can call the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1) API to obtain the ID.
+         * <p>Unique ID of the Cloud Load Balancer (CLB). You can call the <a href="https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1">DescribeLoadBalancers</a> API to obtain the ID.</p>
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Load balancing instance name. rule: 1-60 english letters, chinese characters, digits, hyphens "-", or underscores "_".
+         * <p>CLB instance name. Rules: 1-80 internationally compatible characters including letters, Chinese characters, digits, "-", "_", and other common characters (Unicode supplementary characters such as emojis and rare Chinese characters are forbidden).</p>
          * @type {string || null}
          */
         this.LoadBalancerName = null;
 
         /**
-         * The backend service information of cross-region binding 1.0
+         * <p>Set the backend service information for cross-region binding 1.0 of Cloud Load Balancer.</p>
          * @type {TargetRegionInfo || null}
          */
         this.TargetRegionInfo = null;
 
         /**
-         * Network billing parameter
+         * <p>Network billing related parameters</p>
          * @type {InternetAccessible || null}
          */
         this.InternetChargeInfo = null;
 
         /**
-         * Specifies whether to allow CLB traffic to the Target.
-Enable pass-through (true): verify security groups on CLB only.
-Denies CLB traffic to the target (false): verify security groups on both CLB and backend instances.
-Specifies no modification if left blank.
+         * <p>Allow CLB traffic to the Target.<br>Enable (true): verify security groups on CLB;<br>deny CLB traffic to the Target (false): verify security groups on both CLB and backend instances.<br>Leave blank for no modification.</p>
          * @type {boolean || null}
          */
         this.LoadBalancerPassToTarget = null;
 
         /**
-         * 
+         * <p>Switchover between different billing modes: 0 means no switchover, 1 means switch between prepaid and postpaid, 2 means switch between postpaid modes. Default value: 0</p>
          * @type {number || null}
          */
         this.SwitchFlag = null;
 
         /**
-         * Specifies whether the cross-region binding 2.0 feature is enabled. leave blank for no modification.
+         * <p>Whether cross-region binding 2.0 is enabled. Leave it blank for no modification.</p>
          * @type {boolean || null}
          */
         this.SnatPro = null;
 
         /**
-         * Specifies whether to enable deletion protection. leave it blank to keep the current setting.
+         * <p>Whether to enable deletion protection. Leave it empty to skip modification.</p>
          * @type {boolean || null}
          */
         this.DeleteProtect = null;
 
         /**
-         * Modifies the second-level domain name of cloud load balancer from mycloud.com to tencentclb.com. the subdomain will be transformed, and the mycloud.com domain name will become invalid after modification. leave it blank if no modification is required.
+         * <p>Change the second-level domain name of Cloud Load Balancer (CLB) from mycloud.com to tencentclb.com. The subdomain will also be transformed. After modification, the mycloud.com domain name will become invalid. Leave it blank if no modification is needed.</p>
          * @type {boolean || null}
          */
         this.ModifyClassicDomain = null;
 
         /**
-         * The associated endpoint Id, which can be queried via the [DescribeVpcEndPoint](https://www.tencentcloud.com/document/product/215/54679?from_cn_redirect=1) api. input an empty string to unbind.
+         * <p>Id of the associated endpoint, which can be queried via the <a href="https://www.tencentcloud.com/document/product/215/54679?from_cn_redirect=1">DescribeVpcEndPoint</a> api. Input an empty string to unbind.</p>
          * @type {string || null}
          */
         this.AssociateEndpoint = null;
@@ -4650,7 +4697,7 @@ class ModifyLoadBalancerSlaResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Order number.
          * @type {string || null}
          */
         this.DealName = null;
@@ -4706,166 +4753,167 @@ class Listener extends  AbstractModel {
         super();
 
         /**
-         * CLB listener ID
+         * <p>CLB listener ID</p>
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * Listener protocol. valid values: TCP, UDP, HTTP, HTTPS, TCP_SSL, QUIC.
+         * <p>Listener protocol. Available values: TCP, UDP, HTTP, HTTPS, TCP_SSL, QUIC</p>
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * Listener port. value range: 1-65535.
+         * <p>Listener port, port range: 1–65535</p>
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Information of certificates bound to the listener
+         * <p>Listener bound certificate information</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {CertificateOutput || null}
          */
         this.Certificate = null;
 
         /**
-         * Health check information of the listener
+         * <p>Health check information of the listener</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {HealthCheck || null}
          */
         this.HealthCheck = null;
 
         /**
-         * Request scheduling method. WRR, LEAST_CONN, and IP_HASH respectively indicate weighted round robin, least connections, and IP hash.Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Requested scheduling method. WRR, LEAST_CONN, and IP_HASH indicate weighted round-robin, least connection, and IP Hash respectively.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Scheduler = null;
 
         /**
-         * Session persistence time, in seconds. value range: 30-3600. default value: 0, indicating that session persistence is not enabled by default. this parameter applies only to TCP and UDP listeners.
+         * <p>Session persistence time, unit: second. Available values: 30-3600, default 0, disabled by default. This parameter is applicable only to TCP/UDP listener.</p><p>Unit: second</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SessionExpireTime = null;
 
         /**
-         * Specifies whether to enable the SNI feature. 1: enable; 0: disable. this parameter is applicable only to HTTPS listeners.
+         * <p>Whether to enable SNI feature. 1: enable, 0: disabled (this parameter is applicable only to HTTPS listeners)</p>
          * @type {number || null}
          */
         this.SniSwitch = null;
 
         /**
-         * All forwarding rules under a listener (this parameter is meaningful only for HTTP/HTTPS listeners)
+         * <p>All forwarding rules under a listener (this parameter is only meaningful for HTTP/HTTPS listeners)</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RuleOutput> || null}
          */
         this.Rules = null;
 
         /**
-         * Listener name
+         * <p>Listener name</p>
          * @type {string || null}
          */
         this.ListenerName = null;
 
         /**
-         * Listener creation time
+         * <p>Listener creation time.</p>
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * End port of the port range. value range: 2-65535.
+         * <p>End port of the port range: 2–65535</p>
          * @type {number || null}
          */
         this.EndPort = null;
 
         /**
-         * Backend server type. available values: NODE, POLARIS, TARGETGROUP, TARGETGROUP-V2.
+         * <p>Backend server type. Available values: NODE, POLARIS, TARGETGROUP, TARGETGROUP-V2.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TargetType = null;
 
         /**
-         * Basic information of a bound target group. This field will be returned when a target group is bound to a listener.
+         * <p>Bound target group basic information; return this field when listener binding target group.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {BasicTargetGroupInfo || null}
          */
         this.TargetGroup = null;
 
         /**
-         * Session persistence type. NORMAL: Default session persistence type; QUIC_CID: Session persistence by Quic Connection ID.
+         * <p>Session persistence type. NORMAL means the default session persistence type. QUIC_CID refers to maintaining the session based on Quic Connection ID.</p>
          * @type {string || null}
          */
         this.SessionType = null;
 
         /**
-         * Whether a persistent connection is enabled (1: enabled; 0: disabled). This parameter can only be configured in HTTP/HTTPS listeners.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * <p>Whether to enable long connections. 1: enable, 0: disable (this parameter is applicable only to HTTP/HTTPS listeners)</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.KeepaliveEnable = null;
 
         /**
-         * Supports Nat64 CLB TCP listeners only
+         * <p>Only supports Nat64 CLB TCP listener</p>
          * @type {boolean || null}
          */
         this.Toa = null;
 
         /**
-         * Reschedules when unbinding real servers. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * <p>Rescheduling feature, which provides a switch for scaling out the backend service. If the switch is toggled on, rescheduling is triggered when the backend service is unbound. This parameter is applicable only to TCP/UDP listeners.</p>
          * @type {boolean || null}
          */
         this.DeregisterTargetRst = null;
 
         /**
-         * Describes the attributes of the listener.
+         * <p>Listener attribute.</p>
          * @type {Array.<string> || null}
          */
         this.AttrFlags = null;
 
         /**
-         * List of bound target groups
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * <p>List of bound target groups</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BasicTargetGroupInfo> || null}
          */
         this.TargetGroupList = null;
 
         /**
-         * Maximum number of connections to a listener. -1 indicates unlimited speed at the listener dimension.
+         * <p>Maximum number of connections to a listener. -1 means no speed limit at the listener dimension.</p>
          * @type {number || null}
          */
         this.MaxConn = null;
 
         /**
-         * Maximum number of new connections to a listener. -1 means no speed limit at the listener dimension.
+         * <p>Maximum number of new connections to a listener. -1 means no speed limit at the listener dimension.</p>
          * @type {number || null}
          */
         this.MaxCps = null;
 
         /**
-         * Connection idle timeout period (in seconds). It’s only available to TCP listeners. Value range: 300-900 for shared and dedicated instances; 300-2000 for LCU-supported CLB instances. It defaults to 900.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * <p>Idle connection timeout is only supported for TCP listeners. Default value: 900. Value range: 300–900 for shared instances and dedicated instances and 300–1980 for LCU-supported instances.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.IdleConnectTimeout = null;
 
         /**
-         * Rescheduling trigger duration, valid values: 0-3600s. only TCP/UDP listeners support this. after triggering rescheduling, persistent connections will disconnect and be reassigned within the set scheduling time.
+         * <p>Rescheduling trigger duration. Value range: 0–3600. Unit: s. This parameter is applicable only to TCP/UDP listeners. After rescheduling is triggered, persistent connections will be disconnected and reassigned within the scheduled time window. </p><p>Unit: s.</p>
          * @type {number || null}
          */
         this.RescheduleInterval = null;
 
         /**
-         * Data compression mode.
+         * <p>Data compression mode</p>
          * @type {string || null}
          */
         this.DataCompressMode = null;
 
         /**
-         * Reschedules the startup time. when configured, rescheduling will be triggered upon arrival of the start time.
+         * <p>Rescheduling startup time: After the rescheduling startup time is configured, rescheduling is triggered when the startup time is arrived.</p>
          * @type {number || null}
          */
         this.RescheduleStartTime = null;
@@ -5417,157 +5465,145 @@ class ModifyListenerRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) API to query the ID.
+         * <p>ID of the Cloud Load Balancer (CLB) instance. You can call the <a href="https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1">DescribeLoadBalancers</a> API to query the ID.</p>
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * ID of the CLB instance listener. You can call the [DescribeListeners](https://intl.cloud.tencent.com/document/product/214/30686?from_cn_redirect=1) API to query the ID.
+         * <p>ID of the CLB listener. You can call the <a href="https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1">DescribeListeners</a> API to query the ID.</p>
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * New listener name. The maximum length is 255 characters.
+         * <p>New listener name. Naming rule: 1-80 characters including English letters, Chinese characters, digits, connecting line "-", underscore "_" and other common characters (Unicode supplementary characters such as emoji and rare Chinese characters are forbidden).</p>
          * @type {string || null}
          */
         this.ListenerName = null;
 
         /**
-         * Session persistence time in seconds. Value range: 30-3,600. The default value is 0, indicating that session persistence is not enabled. This parameter is applicable only to TCP/UDP listeners.
+         * <p>Session persistence time, unit: second. Available values: 30-3600, default 0, disabled. This parameter is applicable only to TCP/UDP listener.</p>
          * @type {number || null}
          */
         this.SessionExpireTime = null;
 
         /**
-         * Health check parameter. It is only applicable only to TCP, UDP, TCP_SSL and QUIC listeners.
+         * <p>Health check parameters. This parameter is applicable only to TCP/UDP/TCP_SSL/QUIC listeners.</p>
          * @type {HealthCheck || null}
          */
         this.HealthCheck = null;
 
         /**
-         * Certificate information. This parameter is only applicable to HTTPS/TCP_SSL/QUIC listeners. `Certificate` and `MultiCertInfo` cannot be both specified.
+         * <p>Certificate-related information. This parameter is applicable only to HTTPS/TCP_SSL/QUIC listeners. This parameter and MultiCertInfo cannot be specified at the same time.</p>
          * @type {CertificateInput || null}
          */
         this.Certificate = null;
 
         /**
-         * Listener forwarding method. Valid values: WRR (weighted round-robin), LEAST_CONN (least connections), and IP_HASH (IP address hash).
-They indicate weighted round-robin and least connections, respectively. Default value: WRR.
-Use cases: This applies to TCP/UDP/TCP_SSL/QUIC listeners. The balancing method for Layer-7 listeners should be modified in the forwarding rules.
+         * <p>Listener forwarding method. Valid values: WRR (weighted round-robin), LEAST_CONN (least connections), and IP_HASH (IP address hash).<br>They indicate weighted round-robin and least connection respectively. Default is WRR.<br>Usage scenario: Suitable for TCP/UDP/TCP_SSL/QUIC listeners. The balancing method for Layer-7 listeners should be modified in the forwarding rules.</p>
          * @type {string || null}
          */
         this.Scheduler = null;
 
         /**
-         * Whether to enable the SNI feature. This parameter applies only to HTTPS listeners. The default value is 0, indicating disabled, and 1 indicates enabled. Note: The SNI feature can be enabled for listeners that have not enabled SNI, but cannot be disabled for listeners that have enabled SNI.
+         * <p>Whether to enable SNI feature. This parameter applies only to HTTPS listeners. Default is 0 (disabled) or 1 (enable). Note: You can enable SNI for listeners without SNI. SNI cannot be disabled for listeners with SNI enabled.</p>
          * @type {number || null}
          */
         this.SniSwitch = null;
 
         /**
-         * Target backend type. `NODE`: A single node; `TARGETGROUP`: A target group.
+         * <p>Backend target type. NODE indicates binding to a general node. TARGETGROUP indicates binding to a target group.</p>
          * @type {string || null}
          */
         this.TargetType = null;
 
         /**
-         * Whether to enable the persistent connection feature. This parameter applies only to HTTP/HTTPS listeners.
-The default value is 0, indicating disabled, and 1 indicates enabled.
-
-Enable this feature with caution if the maximum number of connections is limited for real servers. This feature is in beta testing. To use it, submit a [beta testing application](https://intl.cloud.tencent.com/apply/p/tsodp6qm21?from_cn_redirect=1).
+         * <p>Whether to enable long connections. This parameter is applicable only to HTTP/HTTPS listeners.<br>The default value 0 means disabled, and 1 means enable.<br>If the backend service has a connection limit, enable with caution. This feature is currently in internal testing. If needed, submit a <a href="https://www.tencentcloud.com/apply/p/tsodp6qm21?from_cn_redirect=1">beta application</a>.</p>
          * @type {number || null}
          */
         this.KeepaliveEnable = null;
 
         /**
-         * Reschedules when unbinding real servers. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * <p>Rescheduling feature, which provides a switch for scaling out the backend service. If the switch is toggled on, rescheduling is triggered when the backend service is unbound. This parameter is applicable only to TCP/UDP listeners.</p>
          * @type {boolean || null}
          */
         this.DeregisterTargetRst = null;
 
         /**
-         * Session persistence type. NORMAL: default session persistence type; QUIC_CID: perform session persistence based on QUIC connection ID. If the value is set to QUIC_CID, only the UDP protocol is supported.
-Use cases: This applies to TCP/UDP/TCP_SSL/QUIC listeners.
-
-Default value: NORMAL.
+         * <p>Session persistence type. NORMAL means the default session persistence type. QUIC_CID refers to maintaining the session based on Quic Connection ID. QUIC_CID supports only UDP Protocol.<br>Usage scenario: Applicable to TCP/UDP/TCP_SSL/QUIC listeners.<br>Default is NORMAL.</p>
          * @type {string || null}
          */
         this.SessionType = null;
 
         /**
-         * Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+         * <p>Certificate information. Multiple server certificates with different algorithm types can be imported at the same time. This parameter is applicable only to HTTPS listeners with SNI feature disabled. This parameter and Certificate cannot be specified at the same time.</p>
          * @type {MultiCertInfo || null}
          */
         this.MultiCertInfo = null;
 
         /**
-         * Maximum number of concurrent connections at the listener level. This parameter is supported only for LCU-supported instances with TCP/UDP/TCP_SSL/QUIC listeners currently. Value range: 1 to the maximum number of concurrent connections for the instance specification. -1 indicates that no limit is set on the concurrent connections at the listener level. Classic network instances do not support this parameter.
-
-Default value: -1, which indicates no limit.
+         * <p>Maximum number of concurrent connections at the listener level. This parameter is supported only for LCU-supported instances with TCP/UDP/TCP_SSL/QUIC listeners currently. Value range: 1 to the maximum number of concurrent connections for the instance specification. -1 indicates no speed limit on the concurrent connections at the listener level. Classic network instances do not support this parameter.<br>Default value is -1, which means unlimited speed.</p>
          * @type {number || null}
          */
         this.MaxConn = null;
 
         /**
-         * Maximum number of new connections at the listener level. This parameter is supported only for LCU-supported instances with TCP/UDP/TCP_SSL/QUIC listeners currently. Value range: 1 to the maximum number of new connections for the instance specification. -1 indicates that no limit is set on the new connections at the listener level. Classic network instances do not support this parameter.
-
-Default value: -1, which indicates no limit.
+         * <p>Maximum number of new connections at the listener level. This parameter is supported only for LCU-supported instances with TCP/UDP/TCP_SSL/QUIC listeners currently. Value range: 1 to the maximum number of new connections for the instance specification. -1 indicates no speed limit on new connections at the listener level. Classic network instances do not support this parameter.<br>Default is -1, which means unlimited speed.</p>
          * @type {number || null}
          */
         this.MaxCps = null;
 
         /**
-         * Specifies the idle connection timeout in seconds. this parameter applies only to TCP/UDP listeners. default value: 900 for TCP listeners and 300 for UDP listeners. value range: 10–900 for shared instances and dedicated instances and 10–1980 for lcu-supported instances. to set a value exceeding 1980, [submit a ticket application](https://console.cloud.tencent.com/workorder/category). the maximum settable value is 3600.
+         * <p>Idle connection timeout. This parameter applies only to TCP/UDP listeners. To set a value exceeding 1980, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket for application</a>. The maximum value can be 3600.</p><p>Range of values: [10, 1980]</p><p>Unit: seconds</p><p>Default value: 900</p><p>Default value for TCP listeners: 900. Default value for UDP listeners: 300. Value range: 10–900 for shared instances and dedicated instances and 10–1980 for LCU-supported instances.</p>
          * @type {number || null}
          */
         this.IdleConnectTimeout = null;
 
         /**
-         * Specifies whether PP is supported for TCP_SSL and QUIC.
+         * <p>Whether TCP_SSL and QUIC support PP</p>
          * @type {boolean || null}
          */
         this.ProxyProtocol = null;
 
         /**
-         * Whether SNAT (source IP replacement) is enabled. valid values: True (enabled), False (disabled). disabled by default. note: when SnatEnable is enabled, the client source IP will be replaced, at this point the `pass through client source IP` option is disabled, and vice versa.
+         * <p>Whether SNAT (source IP replacement) is enabled, True (enabled), False (disabled). Disabled by default. Note: When SnatEnable is enabled, the client source IP will be replaced. At this point, the <code>Pass through client source IP</code> option is disabled, and vice versa.</p>
          * @type {boolean || null}
          */
         this.SnatEnable = null;
 
         /**
-         * Data compression mode.
+         * <p>Data compression mode</p><p>Enumeration value:</p><ul><li>transparent: Transparent mode (default value)</li><li>compatibility: Compatible mode (enable gzip compression configuration)</li></ul>
          * @type {string || null}
          */
         this.DataCompressMode = null;
 
         /**
-         * Reschedules when setting backend server weight to 0. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * <p>Rescheduling feature, which provides a switch for changing the weight to 0. If the switch is toggled on, rescheduling is triggered when the weight of a real server is changed to 0. This parameter is applicable only to TCP/UDP listeners.</p>
          * @type {boolean || null}
          */
         this.RescheduleTargetZeroWeight = null;
 
         /**
-         * Reschedules when health check exceptions occur on real servers. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * <p>Rescheduling feature, which provides a switch for detecting health check exceptions. If the switch is toggled on, rescheduling is triggered when the real server health check fails. This parameter is applicable only to TCP/UDP listeners.</p>
          * @type {boolean || null}
          */
         this.RescheduleUnhealthy = null;
 
         /**
-         * Reschedules when adding or removing backend servers. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * <p>Rescheduling feature, which provides a switch for scaling out real servers. If the switch is toggled on, rescheduling is triggered when the number of real servers increases or decreases. This parameter is applicable only to TCP/UDP listeners.</p>
          * @type {boolean || null}
          */
         this.RescheduleExpandTarget = null;
 
         /**
-         * Specifies the trigger start time for rescheduling. value range: 0-3600s. supported only by TCP/UDP listeners.
+         * <p>Rescheduling trigger start time. Value range: 0–3600. Unit: s. This parameter is applicable only to TCP/UDP listeners.</p>
          * @type {number || null}
          */
         this.RescheduleStartTime = null;
 
         /**
-         * Rescheduling trigger duration. valid values: 0-3600s. only TCP/UDP listeners support this.
+         * <p>Rescheduling trigger duration. Value range: 0–3600. Unit: s. This parameter is applicable only to TCP/UDP listeners.</p>
          * @type {number || null}
          */
         this.RescheduleInterval = null;
@@ -5707,7 +5743,7 @@ class RegisterTargetsRequest extends  AbstractModel {
         this.Targets = null;
 
         /**
-         * Specifies the forwarding rule ID, which can be obtained through the DescribeListeners API (https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1). you must provide this parameter or either Domain or Url when binding a backend service to a layer-7 forwarding rule.
+         * Specifies the forwarding rule ID, which can be obtained through the [DescribeListeners]((https://www.tencentcloud.com/document/product/214/30686?from_cn_redirect=1)) API. you must provide this parameter or either Domain or Url when binding a backend service to a layer-7 forwarding rule.
          * @type {string || null}
          */
         this.LocationId = null;
@@ -6021,6 +6057,41 @@ class DescribeCustomizedConfigAssociateListRequest extends  AbstractModel {
 }
 
 /**
+ * RenewLoadBalancers response structure.
+ * @class
+ */
+class RenewLoadBalancersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order number.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyTargetPort response structure.
  * @class
  */
@@ -6109,7 +6180,7 @@ class DescribeLoadBalancersDetailRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * List of fields. Only fields specified will be returned. If it’s left blank, `null` is returned. The fields `LoadBalancerId` and `LoadBalancerName` are added by default. For details about fields, see <a href="https://intl.cloud.tencent.com/document/api/214/30694?from_cn_redirect=1#LoadBalancerDetail">LoadBalancerDetail</a>.
+         * List of fields. Only fields specified will be returned. If it's left blank, `null` is returned. The fields `LoadBalancerId` and `LoadBalancerName` are added by default. For details about fields, see [LoadBalancerDetail](https://intl.cloud.tencent.com/document/api/214/30694?from_cn_redirect=1#LoadBalancerDetail)
          * @type {Array.<string> || null}
          */
         this.Fields = null;
@@ -6599,6 +6670,67 @@ class ManualRewriteResponse extends  AbstractModel {
 }
 
 /**
+ * It is used for the health check status of the target group backend RS.
+ * @class
+ */
+class TargetGroupInstanceStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP of backend RS
+         * @type {string || null}
+         */
+        this.InstanceIp = null;
+
+        /**
+         * Health check status. Parameter values and meanings are as follows:
+● on: Indicates checking.
+● off: means health check disabled.
+● Health: Indicates healthy.
+● unhealth: indicates being abnormal.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Port.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * NIC ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EniId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIp = 'InstanceIp' in params ? params.InstanceIp : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.EniId = 'EniId' in params ? params.EniId : null;
+
+    }
+}
+
+/**
  * ModifyBlockIPList request structure.
  * @class
  */
@@ -7056,7 +7188,7 @@ class DescribeListenersRequest extends  AbstractModel {
         this.ListenerIds = null;
 
         /**
-         * Type of the listener protocols to be queried. Values: TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
+         * Type of the listener protocols to be queried. Values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL`  and  `QUIC`.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -7190,6 +7322,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Tag = null;
 
+        /**
+         * The availability zone where the backend service resides, such as ap-guangzhou-1
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
     }
 
     /**
@@ -7209,6 +7348,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RegisteredTime = 'RegisteredTime' in params ? params.RegisteredTime : null;
         this.EniId = 'EniId' in params ? params.EniId : null;
         this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -7609,6 +7749,46 @@ class DescribeCustomizedConfigAssociateListResponse extends  AbstractModel {
 }
 
 /**
+ * RenewLoadBalancers request structure.
+ * @class
+ */
+class RenewLoadBalancersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID array of the CLB instance, supports up to 20.
+         * @type {Array.<string> || null}
+         */
+        this.LoadBalancerIds = null;
+
+        /**
+         * Prepaid billing attributes of the CLB instance.
+         * @type {LBChargePrepaid || null}
+         */
+        this.LBChargePrepaid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+
+        if (params.LBChargePrepaid) {
+            let obj = new LBChargePrepaid();
+            obj.deserialize(params.LBChargePrepaid)
+            this.LBChargePrepaid = obj;
+        }
+
+    }
+}
+
+/**
  * SetCustomizedConfigForLoadBalancer request structure.
  * @class
  */
@@ -7635,7 +7815,7 @@ class SetCustomizedConfigForLoadBalancerRequest extends  AbstractModel {
 
         /**
          * Specifies the personalized configuration content. this field is required when creating or modifying custom configuration.
-Specifies specific restrictions. view layer-7 personalized configuration (https://www.tencentcloud.com/document/product/214/15171?from_cn_redirect=1).
+Specifies specific restrictions. view [layer-7 personalized configuration](https://www.tencentcloud.com/document/product/214/15171?from_cn_redirect=1).
          * @type {string || null}
          */
         this.ConfigContent = null;
@@ -7680,7 +7860,7 @@ class CreateListenerResponse extends  AbstractModel {
         super();
 
         /**
-         * Array of the unique IDs of created listeners.
+         * <p>Array of the unique IDs of created listeners.</p>
          * @type {Array.<string> || null}
          */
         this.ListenerIds = null;
@@ -7715,7 +7895,7 @@ class CreateTargetGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * ID generated after target group creation
+         * <p>Generated id after target group creation</p>
          * @type {string || null}
          */
         this.TargetGroupId = null;
@@ -8400,7 +8580,7 @@ class DescribeTargetHealthResponse extends  AbstractModel {
         super();
 
         /**
-         * LoadBalancer list.
+         * <p>CLB list.</p>
          * @type {Array.<LoadBalancerHealth> || null}
          */
         this.LoadBalancers = null;
@@ -8492,94 +8672,91 @@ class CreateTargetGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Target group name (up to 50 characters)
+         * <p>Target group name. Naming rule: 1-80 English letters, Chinese characters and other internationally compatible language characters, digits, connecting line "-", underscore "_" and other common characters (Unicode supplementary characters such as emoji and rare Chinese characters are forbidden).</p>
          * @type {string || null}
          */
         this.TargetGroupName = null;
 
         /**
-         * Specifies the vpc id attribute of the target group. uses the default vpc if left empty.
+         * <p>The vpcId attribute of the target group. Leave it blank to use the default VPC.</p>
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Specifies the default Port of the target group. the default Port can be used when servers are added subsequently. this parameter is not supported for full-listen target groups. for non-full-listen target groups, either Port or Port in TargetGroupInstances.N is required.
-
+         * <p>Default port of target group. Default port can be used when servers are added subsequently. Full listen target group does not support this parameter. For non-full listen target group, either Port or port in TargetGroupInstances.N is required.</p>
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Specifies the real servers bound to the target group. supports up to 50 at a time.
+         * <p>The target group supports up to 50 real servers bound to it.</p>
          * @type {Array.<TargetGroupInstance> || null}
          */
         this.TargetGroupInstances = null;
 
         /**
-         * Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).
+         * <p>Target Group Type, currently supported v1 (legacy version target group), v2 (new version target group), defaults to v1 (legacy version target group).</p>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.
+         * <p>Backend forwarding protocol of the target group. This field is required for the new version target group v2. Currently supports TCP, UDP, HTTP, HTTPS, GRPC.</p>
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * Health check.
+         * <p>Health check.</p>
          * @type {TargetGroupHealthCheck || null}
          */
         this.HealthCheck = null;
 
         /**
-         * Scheduling algorithm. this parameter is valid only for target groups of the new version V2 when the backend forwarding protocol is HTTP, HTTPS, or GRPC. available values:.
-<ur><li>WRR: weighted round-robin.</li><li>LEAST_CONN: LEAST connection.</li><li>IP_HASH: based on IP HASH.</li><li>default is WRR.</li></ur>.
+         * <p>Scheduling algorithm. This parameter is valid only for new version V2 target groups with backend forwarding protocol (HTTP|HTTPS|GRPC). Available values:</p><li>WRR: weighted round-robin.</li><li>LEAST_CONN: least connection.</li><li>IP_HASH: based on IP hash.</li><li>Default WRR.</li>
          * @type {string || null}
          */
         this.ScheduleAlgorithm = null;
 
         /**
-         * Tag.
+         * <p>Tag.</p>
          * @type {Array.<TagInfo> || null}
          */
         this.Tags = null;
 
         /**
-         * Specifies the default weight of the backend service. among them:.
-<ul><li>Value ranges from 0 to 100.</li><li>after setting this value, when adding a backend service to the target group, if the backend service does not set Weight separately, use the default Weight here.</li><li>Weight parameter settings not supported for v1 target group type.</li></ul>.
+         * <p>Default weight of the backend service, where:</p><ul><li>Value ranges from 0 to 100.</li><li>After setting this value, when adding a backend service to the target group, if the backend service does not set the weight separately, use the default weight here.</li><li>Weight parameter settings not supported for v1 target group type.</li></ul>
          * @type {number || null}
          */
         this.Weight = null;
 
         /**
-         * Full listen target group flag. valid values: true (yes), false (no). only target groups of the new version V2 event type support this parameter.
+         * <p>Full listen target group flag. true: yes, false: no. Only target groups of the new version V2 support this parameter.</p>
          * @type {boolean || null}
          */
         this.FullListenSwitch = null;
 
         /**
-         * Specifies whether to enable the persistent connection feature. this parameter applies only to HTTP and HTTPS target groups. 0: disable; 1: enable. this feature is off by default.
+         * <p>Whether to enable long connections. This parameter is applicable only to HTTP/HTTPS target groups. 0: off; 1: on. Off by default.</p>
          * @type {boolean || null}
          */
         this.KeepaliveEnable = null;
 
         /**
-         * Session hold time, unit: second. value range: 30-3600. default: 0, disabled. this parameter is supported only for target groups with HTTP/HTTPS/GRPC backend forwarding protocol in the new version V2.
+         * <p>Session persistence time, unit: second. Available values: 30-3600, default 0, disabled. This parameter is supported only for target groups with HTTP/HTTPS/GRPC backend forwarding protocol in the new version V2.</p>
          * @type {number || null}
          */
         this.SessionExpireTime = null;
 
         /**
-         * IP version type.
+         * <p>IP version type.</p>
          * @type {string || null}
          */
         this.IpVersion = null;
 
         /**
-         * 
+         * <p>Whether SNAT (source IP replacement) is enabled, True (enabled), False (disabled). Disabled by default. Note: When SnatEnable is enabled, the client source IP will be replaced. At this point, the <code>Pass through client source IP</code> option is disabled, and vice versa.</p>
          * @type {boolean || null}
          */
         this.SnatEnable = null;
@@ -8770,184 +8947,175 @@ class CreateListenerRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) API to obtain the ID.
+         * <p>ID of the Cloud Load Balancer (CLB) instance. You can call the <a href="https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1">DescribeLoadBalancers</a> API to obtain the ID.</p>
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Ports for creating listeners. Each port corresponds to a listener.
-Port range: 1–65535.
+         * <p>Which ports to create listeners on, each port maps to a new listener.<br>Port range: 1–65535</p>
          * @type {Array.<number> || null}
          */
         this.Ports = null;
 
         /**
-         * Listener protocol. Valid values: TCP, UDP, HTTP, HTTPS, TCP_SSL, and QUIC.
+         * <p>Listener protocol. Valid values: TCP, UDP, HTTP, HTTPS, TCP_SSL, and QUIC.</p>
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * List of names of listeners to be created. The names correspond to ports one by one. This parameter can be left blank if you do not want to name the listeners immediately.
+         * <p>List of listener names to be created. Names correspond sequentially to Ports. If naming is not immediately necessary, this parameter need not be provided. Naming rule: 1-80 characters including English letters, Chinese characters, digits, connecting line "-", underscore "_" and other common characters (Unicode supplementary characters such as emoji and rare Chinese characters are forbidden).</p>
          * @type {Array.<string> || null}
          */
         this.ListenerNames = null;
 
         /**
-         * Health check parameter. This parameter applies only to TCP, UDP, TCP_SSL, and QUIC listeners.
+         * <p>Health check parameters. This parameter is applicable only to TCP/UDP/TCP_SSL/QUIC listeners.</p>
          * @type {HealthCheck || null}
          */
         this.HealthCheck = null;
 
         /**
-         * Certificate-related information. The parameter limitations are as follows:
-<li>This parameter applies only to TCP_SSL listeners and HTTPS listeners with the SNI feature disabled.</li>
-<li>Either this parameter or the MultiCertInfo parameter should be specified when you create a TCP_SSL listener or an HTTPS listener with the SNI feature disabled. You cannot specify them at the same time.</li>
+         * <p>Certificate-related information. The limits are as follows:</p><li>This parameter is applicable only to TCP_SSL listeners and HTTPS listeners with SNI feature disabled.</li><li>When creating a TCP_SSL listener or an HTTPS listener with SNI feature disabled, a minimum of this parameter or MultiCertInfo must be specified, but they cannot be specified at the same time.</li>
          * @type {CertificateInput || null}
          */
         this.Certificate = null;
 
         /**
-         * Session persistence duration, in seconds. Value range: 30–3600. Default value: 0, indicating that session persistence is not enabled by default. This parameter applies only to TCP and UDP listeners.
+         * <p>Session persistence duration, in seconds. Value range: 30–3600. Default value: 0, indicating that session persistence is not enabled by default. This parameter applies only to TCP and UDP listeners.</p>
          * @type {number || null}
          */
         this.SessionExpireTime = null;
 
         /**
-         * Listener forwarding mode. valid values: WRR (weighted round-robin), LEAST_CONN (LEAST connections).
-Default value: WRR. This parameter applies only to TCP, UDP, TCP_SSL, and QUIC listeners.
+         * <p>Listener forwarding mode. Available values: WRR (weighted round-robin), LEAST_CONN (least connections).<br>Default WRR. This parameter is applicable only to TCP/UDP/TCP_SSL/QUIC listeners.</p>
          * @type {string || null}
          */
         this.Scheduler = null;
 
         /**
-         * Whether to enable the SNI feature. This parameter applies only to HTTPS listeners. 0: disable; 1: enable.
+         * <p>Whether to enable SNI feature. This parameter applies only to HTTPS listeners. 0: not enabled, 1: enable.</p>
          * @type {number || null}
          */
         this.SniSwitch = null;
 
         /**
-         * Real server type. NODE: ordinary node; TARGETGROUP: real server group. This parameter applies only to TCP and UDP listeners. For layer-7 listeners, set the type in forwarding rules.
+         * <p>Backend target type. NODE indicates binding to a general node. TARGETGROUP indicates binding to a target group. This parameter is applicable only to TCP/UDP listeners. For layer-7 (HTTP/HTTPS) listeners, configure it in forwarding rules.</p>
          * @type {string || null}
          */
         this.TargetType = null;
 
         /**
-         * Session persistence type. If this parameter is not specified or the value is set to NORMAL, the default session persistence type is used. QUIC_CID: perform session persistence based on QUIC connection ID. If the value is set to QUIC_CID, only the UDP protocol is supported. This parameter applies only to TCP and UDP listeners. For layer-7 listeners, set the type in forwarding rules. (If the value is set to QUIC_CID, the Protocol value should be UDP, the Scheduler value should be WRR, and only IPv4 addresses are supported.)
+         * <p>Session persistence type. Leaving it blank or passing NORMAL means the default session persistence type. QUIC_CID refers to maintaining the session based on QUIC Connection ID. QUIC_CID supports only UDP Protocol. This parameter is applicable only to TCP/UDP listeners. Layer-7 (HTTP/HTTPS) listeners should set this in forwarding rules. (If QUIC_CID is selected, Protocol must be UDP, Scheduler must be WRR, and it supports only ipv4 concurrently).</p>
          * @type {string || null}
          */
         this.SessionType = null;
 
         /**
-         * Whether to enable the persistent connection feature. This parameter applies only to HTTP and HTTPS listeners. 0: disable; 1: enable. This feature is disabled by default.
-Enable this feature with caution if the maximum number of connections is limited for real servers. This feature is in beta testing. To use it, submit a [beta testing application](https://intl.cloud.tencent.com/apply/p/tsodp6qm21?from_cn_redirect=1).
+         * <p>Whether to enable long connections. This parameter is applicable only to HTTP/HTTPS listeners. 0: off by default; 1: enable. <br>If the backend service has a connection limit, enable with caution. This feature is currently in internal testing. If you need to use it, submit a <a href="https://www.tencentcloud.com/apply/p/tsodp6qm21?from_cn_redirect=1">beta application</a>.</p>
          * @type {number || null}
          */
         this.KeepaliveEnable = null;
 
         /**
-         * End port. This parameter is required for creating a listener with a port range. In this case, the input parameter Ports allows only one value to indicate the start port. To experience the port range feature, [submit a ticket for application](https://console.cloud.tencent.com/workorder/category).
+         * <p>End port. This parameter is required for creating a listener with a port range. In this case, the input parameter Ports allows only one value to indicate the start port. To experience the port range feature, [submit a ticket for application](https://console.cloud.tencent.com/workorder/category).</p>
          * @type {number || null}
          */
         this.EndPort = null;
 
         /**
-         * Reschedules when unbinding real servers. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * <p>Rescheduling feature, which provides a switch for scaling out the backend service. If the switch is toggled on, rescheduling is triggered when the backend service is unbound. This parameter is applicable only to TCP/UDP listeners.</p>
          * @type {boolean || null}
          */
         this.DeregisterTargetRst = null;
 
         /**
-         * Certificate information. You can import multiple server certificates with different algorithms at the same time. The parameter limitations are as follows:
-<li>This parameter applies only to TCP_SSL listeners and HTTPS listeners with the SNI feature disabled.</li>
-<li>Either this parameter or the Certificate parameter should be specified when you create a TCP_SSL listener or an HTTPS listener with the SNI feature disabled. You cannot specify them at the same time.</li>
+         * <p>Certificate information. Multiple server certificates with different algorithm types can be imported at the same time. Parameter constraints are as follows:</p><li>This parameter is applicable only to TCP_SSL listeners and HTTPS listeners with SNI feature disabled.</li><li>When creating a TCP_SSL listener or an HTTPS listener with SNI feature disabled, a minimum of this parameter or Certificate must be specified, but they cannot be specified at the same time.</li>
          * @type {MultiCertInfo || null}
          */
         this.MultiCertInfo = null;
 
         /**
-         * Maximum number of connections to a listener. Currently, this parameter applies only to TCP, UDP, TCP_SSL, and QUIC listeners of LCU-supported instances. If this parameter is not specified or the value is set to -1, the maximum number of connections is not limited. This parameter is not supported for classic network-based instances.
+         * <p>Maximum number of connections to a listener. Currently, this parameter applies only to TCP, UDP, TCP_SSL, and QUIC listeners of LCU-supported instances. If this parameter is not specified or the value is set to -1, the maximum number of connections is not limited. This parameter is not supported for classic network-based instances.</p>
          * @type {number || null}
          */
         this.MaxConn = null;
 
         /**
-         * Maximum number of new connections to a listener. Currently, this parameter applies only to TCP, UDP, TCP_SSL, and QUIC listeners of LCU-supported instances. If this parameter is not specified or the value is set to -1, the maximum number of new connections is not limited. This parameter is not supported for classic network-based instances.
+         * <p>Maximum number of new connections to a listener. Currently, this parameter applies only to TCP, UDP, TCP_SSL, and QUIC listeners of LCU-supported instances. If this parameter is not specified or the value is set to -1, the maximum number of new connections is not limited. This parameter is not supported for classic network-based instances.</p>
          * @type {number || null}
          */
         this.MaxCps = null;
 
         /**
-         * Specifies the idle connection timeout in seconds. this parameter applies only to TCP/UDP listeners. default value: 900 for TCP listeners and 300 for UDP listeners. value range: 10–900 for shared instances and dedicated instances and 10–1980 for lcu-supported instances. to set a value exceeding the permissible range, [submit a ticket for application](https://console.cloud.tencent.com/workorder/category).
+         * <p>Idle connection timeout, in seconds. This parameter applies only to TCP/UDP listeners. Default value: 900 for TCP listeners and 300 for UDP listeners. Value range: 10–900 for shared instances and dedicated instances and 10–1980 for LCU-supported instances. To set a value exceeding the permissible range, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket for application</a>.</p><p>Permissible range: [10, 1980]</p><p>Measurement unit: seconds</p><p>Default value: 900</p><p>Default value: 900 for TCP listeners and 300 for UDP listeners. Value range: 10–900 for shared instances and dedicated instances and 10–1980 for LCU-supported instances.</p>
          * @type {number || null}
          */
         this.IdleConnectTimeout = null;
 
         /**
-         * Specifies whether PP is supported for TCP_SSL and QUIC.
+         * <p>Whether TCP_SSL and QUIC support PP</p>
          * @type {boolean || null}
          */
         this.ProxyProtocol = null;
 
         /**
-         * Whether SNAT (source IP replacement) is enabled. valid values: True (enabled), False (disabled). disabled by default. note: when SnatEnable is enabled, the client source IP will be replaced, at this point the `pass through client source IP` option is disabled, and vice versa.
+         * <p>Whether SNAT (source IP replacement) is enabled, True (enabled), False (disabled). Disabled by default. Note: When SnatEnable is enabled, the client source IP will be replaced. At this point, the <code>Pass through client source IP</code> option is disabled, and vice versa.</p>
          * @type {boolean || null}
          */
         this.SnatEnable = null;
 
         /**
-         * End port of a listener with a port range. Range of the port: 2–65535.
+         * <p>End port of a listener with a port range. Range of the port: 2–65535.</p>
          * @type {Array.<number> || null}
          */
         this.FullEndPorts = null;
 
         /**
-         * Enable private network http listener h2c switch. valid values: True (enable), False (disable).
-Disabled by default.
+         * <p>Enable the h2c switch for the private network HTTP listener.<br>True (enabled), False (disabled). Disabled by default.<br>Once enabled, the listener only supports creating layer-7 rules with GRPC or GRPCS as the backend forwarding type. When creating rules, explicitly input GRPC or GRPCS in Rules.N.ForwardType.</p>
          * @type {boolean || null}
          */
         this.H2cSwitch = null;
 
         /**
-         * Whether to disable SSL for TCP_SSL listeners. dual-stack binding is still supported after SSL is disabled. valid values: True (disable), False (enable).
-Disabled by default.
+         * <p>Control whether to remove the SSL encryption layer for TCP_SSL listeners. Once enabled, the listener will run as a normal TCP protocol. Available values:</p><ul><li>True: Disable SSL (protocol downgraded to plain text TCP).</li><li>False (default): Keep SSL enabled.</li></ul>
          * @type {boolean || null}
          */
         this.SslCloseSwitch = null;
 
         /**
-         * Data compression mode. Valid values: transparent (passthrough mode) and compatibility (compatibility mode).
+         * <p>Data compression mode. Valid values: transparent (passthrough mode) and compatibility (compatibility mode).</p>
          * @type {string || null}
          */
         this.DataCompressMode = null;
 
         /**
-         * Reschedules when setting backend server weight to 0. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * <p>Rescheduling feature, which provides a switch for changing the weight to 0. If the switch is toggled on, rescheduling is triggered when the weight of a real server is changed to 0. This parameter is applicable only to TCP/UDP listeners.</p>
          * @type {boolean || null}
          */
         this.RescheduleTargetZeroWeight = null;
 
         /**
-         * Reschedules when health check exceptions occur on real servers. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * <p>Rescheduling feature, which provides a switch for detecting health check exceptions. If the switch is toggled on, rescheduling is triggered when the real server health check fails. This parameter is applicable only to TCP/UDP listeners.</p>
          * @type {boolean || null}
          */
         this.RescheduleUnhealthy = null;
 
         /**
-         * Reschedules when adding or removing backend servers. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * <p>Rescheduling feature, which provides a switch for scaling out real servers. If the switch is toggled on, rescheduling is triggered when the number of real servers increases or decreases. This parameter is applicable only to TCP/UDP listeners.</p>
          * @type {boolean || null}
          */
         this.RescheduleExpandTarget = null;
 
         /**
-         * Specifies the trigger start time for rescheduling. value range: 0-3600s. supported only by TCP/UDP listeners.
+         * <p>Rescheduling trigger start time. Value range: 0–3600. Unit: s. This parameter is applicable only to TCP/UDP listeners.</p>
          * @type {number || null}
          */
         this.RescheduleStartTime = null;
 
         /**
-         * Rescheduling trigger duration. valid values: 0-3600s. only TCP/UDP listeners support this.
+         * <p>Rescheduling trigger duration. Value range: 0–3600. Unit: s. This parameter is applicable only to TCP/UDP listeners.</p>
          * @type {number || null}
          */
         this.RescheduleInterval = null;
@@ -9139,13 +9307,13 @@ class Filter extends  AbstractModel {
         super();
 
         /**
-         * Filter name
+         * <p>Filter name</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Filter value array
+         * <p>filter value array</p>
          * @type {Array.<string> || null}
          */
         this.Values = null;
@@ -10250,6 +10418,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Exclusive = null;
 
+        /**
+         * Availability zone forwarding affinity info
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AvailableZoneAffinityInfo || null}
+         */
+        this.AvailableZoneAffinityInfo = null;
+
     }
 
     /**
@@ -10325,6 +10500,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SlaType = 'SlaType' in params ? params.SlaType : null;
         this.Exclusive = 'Exclusive' in params ? params.Exclusive : null;
 
+        if (params.AvailableZoneAffinityInfo) {
+            let obj = new AvailableZoneAffinityInfo();
+            obj.deserialize(params.AvailableZoneAffinityInfo)
+            this.AvailableZoneAffinityInfo = obj;
+        }
+
     }
 }
 
@@ -10393,13 +10574,13 @@ class BatchModifyTargetWeightRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * <p>CLB instance ID.</p>
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * List of weights to be modified in batches
+         * <p>List of weights to be modified in batch. The ModifyList array can contain no more than 100 elements, ModifyList[i].Targets can have no more than 50, and the total number of Targets must not exceed 500.</p>
          * @type {Array.<RsWeightRule> || null}
          */
         this.ModifyList = null;
@@ -10423,6 +10604,41 @@ class BatchModifyTargetWeightRequest extends  AbstractModel {
                 this.ModifyList.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeTargetGroupInstanceStatus request structure.
+ * @class
+ */
+class DescribeTargetGroupInstanceStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique target group ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * List of backend service IPs bound to the target group
+         * @type {Array.<string> || null}
+         */
+        this.TargetGroupInstanceIps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.TargetGroupInstanceIps = 'TargetGroupInstanceIps' in params ? params.TargetGroupInstanceIps : null;
 
     }
 }
@@ -10634,19 +10850,19 @@ class DescribeTargetHealthRequest extends  AbstractModel {
         super();
 
         /**
-         * List of IDs of CLB instances to be queried
+         * <p>List of Cloud Load Balancer instance IDs to query. The array size supports up to 30.</p>
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
 
         /**
-         * Specifies the listener ID list to query.
+         * <p>Listener ID list to query.</p>
          * @type {Array.<string> || null}
          */
         this.ListenerIds = null;
 
         /**
-         * Specifies the list of rule ids to be queried.
+         * <p>List of forwarding rule IDs to query.</p>
          * @type {Array.<string> || null}
          */
         this.LocationIds = null;
@@ -10814,56 +11030,55 @@ class ModifyTargetGroupAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * Target group ID
+         * <p>Target group ID.</p>
          * @type {string || null}
          */
         this.TargetGroupId = null;
 
         /**
-         * New name of target group
+         * <p>New name of target group. Naming rule: 1-80 English letters, Chinese characters and other internationally compatible language characters, digits, connecting line "-", underscore "_" and other common characters (Unicode supplementary characters such as emoji and rare Chinese characters are forbidden).</p>
          * @type {string || null}
          */
         this.TargetGroupName = null;
 
         /**
-         * The new default port of the target group. this parameter is not supported for full listen target groups.
+         * <p>New default port of target group. Full listen target group does not support this parameter.</p>
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Scheduling algorithm. this parameter is valid only for target groups of the new version V2 when the backend forwarding protocol is HTTP, HTTPS, or GRPC. available values:.
-<ur><li>WRR: weighted round-robin.</li><li>LEAST_CONN: LEAST connection.</li><li>IP_HASH: based on IP HASH.</li><li>default is WRR.</li></ur>.
+         * <p>Scheduling algorithm. This parameter is valid only for new version V2 target groups with backend forwarding protocol (HTTP|HTTPS|GRPC). Available values:<br>&lt;ur&gt;<li>WRR: weighted round-robin.</li><li>LEAST_CONN: least connection.</li><li>IP_HASH: based on IP hash.</li><li>Default WRR.</li>&lt;ur&gt;</p>
          * @type {string || null}
          */
         this.ScheduleAlgorithm = null;
 
         /**
-         * Health check details.
+         * <p>Health check details.</p>
          * @type {TargetGroupHealthCheck || null}
          */
         this.HealthCheck = null;
 
         /**
-         * Default Weight for backend service. among them: <ul><li>value ranges from 0 to 100.</li><li>after setting this value, when adding a backend service to the target group, if the backend service does not set Weight separately, use the default Weight here.</li><li>Weight parameter settings not supported for v1 target group type.</li></ul>.
+         * <p>Default weight of the backend service. Among them: <ul><li>Value ranges from 0 to 100.</li><li>After setting this value, when adding a backend service to the target group, if the backend service does not set weight individually, use the default weight here.</li><li>Weight parameter settings not supported for Target Group Type v1.</li></ul></p>
          * @type {number || null}
          */
         this.Weight = null;
 
         /**
-         * Specifies whether to enable the persistent connection feature. this parameter applies only to HTTP and HTTPS target groups. true: disable; false: enable. this feature is off by default.
+         * <p>Whether to enable long connections. This parameter is applicable only to HTTP/HTTPS target groups. true: off; false: on. Off by default.</p>
          * @type {boolean || null}
          */
         this.KeepaliveEnable = null;
 
         /**
-         * Specifies the session persistence time in seconds. value range: 30-3600. default: 0 (disabled). this parameter is unsupported for TCP/UDP target groups.
+         * <p>Session persistence time, unit: second. Available values: 30-3600, default 0, disabled. This parameter is not supported for TCP/UDP target group.</p>
          * @type {number || null}
          */
         this.SessionExpireTime = null;
 
         /**
-         * 
+         * <p>Whether SNAT (source IP replacement) is enabled, True (enabled), False (disabled). Disabled by default. Note: When SnatEnable is enabled, the client source IP will be replaced. At this point, the <code>Pass through client source IP</code> option is disabled, and vice versa.</p>
          * @type {boolean || null}
          */
         this.SnatEnable = null;
@@ -12224,16 +12439,15 @@ class CreateLoadBalancerResponse extends  AbstractModel {
         super();
 
         /**
-         * Array of unique CLB instance IDs.
-This field may return `null` in some cases, such as there is delay during instance creation. You can query the IDs of the created instances by invoking `DescribeTaskStatus` with the `RequestId` or `DealName` returned by this API.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * <p>An array consisting of the unique IDs of Cloud Load Balancer instances.<br>In certain scenarios, such as delay in creation, this field may return null. At this point, you can query the created resource ID through the DescribeTaskStatus API using the RequestId or DealName parameter returned by the API.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
 
         /**
-         * Order ID.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * <p>Order number.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DealName = null;
@@ -12426,7 +12640,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Availability zone forward affinity info
  * @class
  */
 class AvailableZoneAffinityInfo extends  AbstractModel {
@@ -12434,19 +12648,21 @@ class AvailableZoneAffinityInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether to enable availability zone forwarding affinity. true: enable availability zone forwarding affinity; false: enable availability zone forwarding affinity.
          * @type {boolean || null}
          */
         this.Enable = null;
 
         /**
-         * 
+         * The threshold for availability zone forwarding affinity failure. When the healthy ratio of backend services in an availability zone is less than this threshold, the Cloud Load Balancer will exit availability zone forwarding affinity and convert to forwarding across all availability zones.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ExitRatio = null;
 
         /**
-         * 
+         * The threshold for re-enabling availability zone affinity forwarding. When forwarding across all availability zones and the health ratio of backend services in the Cloud Load Balancer AZ is greater than or equal to this threshold, the CLB will enter availability zone affinity forwarding again.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ReentryRatio = null;
@@ -13114,129 +13330,130 @@ class TargetGroupInfo extends  AbstractModel {
         super();
 
         /**
-         * Target group ID
+         * <p>Target group ID</p>
          * @type {string || null}
          */
         this.TargetGroupId = null;
 
         /**
-         * `vpcid` of target group
+         * <p>VPC ID of the target group</p>
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Target group name
+         * <p>Target group name</p>
          * @type {string || null}
          */
         this.TargetGroupName = null;
 
         /**
-         * Specifies the default port of the target group. for a full listen target group, this field returns 0, indicating an invalid port.
+         * <p>Default port of target group. This field returns 0 for full listen target group, indicating an invalid port.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Target group creation time
+         * <p>Creation time of target group</p>
          * @type {string || null}
          */
         this.CreatedTime = null;
 
         /**
-         * Target group modification time
+         * <p>Target group modification time</p>
          * @type {string || null}
          */
         this.UpdatedTime = null;
 
         /**
-         * Associated rule array. This parameter cannot be obtained when the DescribeTargetGroupList API is called.Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Associated rule array. This parameter cannot be obtained in the DescribeTargetGroupList API call.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssociationItem> || null}
          */
         this.AssociatedRule = null;
 
         /**
-         * Backend forwarding protocol of the target group. only returns valid values for the new version (v2) target group.
+         * <p>Backend forwarding protocol of the target group. Only the new version target group v2 returns a valid value.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * Scheduling algorithm. returns a valid value only when the backend forwarding protocol is HTTP, HTTPS, or GRPC. available values:.
-<ur>
-<Li>WRR: weighted round-robin.</li>.
-<Li>LEAST_CONN: specifies the least connection.</li>.
-<Li>IP_HASH: based on ip hash.</li>.
-</ur>
-
+         * <p>Scheduling algorithm. This parameter returns valid values only for target groups with backend forwarding protocol (HTTP, HTTPS, GRPC). Available values:</p><ur></p><li>WRR: weighted round-robin.</li><li>LEAST_CONN: LEAST connection.</li><li>IP_HASH: based on IP HASH.</li></ur>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ScheduleAlgorithm = null;
 
         /**
-         * Health check details.
+         * <p>Health check details.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TargetGroupHealthCheck || null}
          */
         this.HealthCheck = null;
 
         /**
-         * Target group type, currently supported v1 (legacy version target group) and v2 (new version target group). defaults to v1 (legacy version target group).
+         * <p>Target Group Type, currently supported v1 (legacy version target group), v2 (new version target group). Defaults to v1 (legacy version target group).</p>
          * @type {string || null}
          */
         this.TargetGroupType = null;
 
         /**
-         * Number of rules associated with the target group.
+         * <p>Number of rules associated with the target group.</p>
          * @type {number || null}
          */
         this.AssociatedRuleCount = null;
 
         /**
-         * Specifies the number of instances in the target group.
+         * <p>Number of instances in the target group.</p>
          * @type {number || null}
          */
         this.RegisteredInstancesCount = null;
 
         /**
-         * Tag.
+         * <p>Tag.</p>
          * @type {Array.<TagInfo> || null}
          */
         this.Tag = null;
 
         /**
-         * Default weight. only target groups of v2 type return this field. when NULL is returned, it means the default weight is not set.
+         * <p>Default weight. Only target groups of v2 type return this field. When NULL is returned, it means the default weight is not set.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Weight = null;
 
         /**
-         * Specifies whether to listen to all target groups.
+         * <p>Whether to listen to the target group.</p>
          * @type {boolean || null}
          */
         this.FullListenSwitch = null;
 
         /**
-         * Whether to enable persistent connections. valid only when the backend forwarding protocol is HTTP/HTTPS/GRPC and returned by the target group.
+         * <p>Whether to enable long connections. Only target groups with HTTP/HTTPS/GRPC as the backend forwarding protocol return a valid value.</p>
          * @type {boolean || null}
          */
         this.KeepaliveEnable = null;
 
         /**
-         * Session persistence time. valid only when the backend forwarding protocol is HTTP/HTTPS/GRPC and the target group returns a valid value.
+         * <p>Session hold time. Only target groups with backend forwarding protocol set to HTTP/HTTPS/GRPC return a valid value.</p>
          * @type {number || null}
          */
         this.SessionExpireTime = null;
 
         /**
-         * IP version.
+         * <p>IP version.</p>
          * @type {string || null}
          */
         this.IpVersion = null;
+
+        /**
+         * <p>Whether to enable SNAT</p>
+         * @type {boolean || null}
+         */
+        this.SnatEnable = null;
 
     }
 
@@ -13287,6 +13504,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
         this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
         this.IpVersion = 'IpVersion' in params ? params.IpVersion : null;
+        this.SnatEnable = 'SnatEnable' in params ? params.SnatEnable : null;
 
     }
 }
@@ -13909,7 +14127,7 @@ class LoadBalancer extends  AbstractModel {
 
         /**
          * Network type of the load balancing instance.
-OPEN: public network attribute. INTERNAL: private network attribute. for a cloud load balancer with private network attribute, you can bind an EIP for public network access. for details, see the EIP document on binding elastic IP (https://www.tencentcloud.com/document/product/215/16700?from_cn_redirect=1).
+OPEN: public network attribute. INTERNAL: private network attribute. for a cloud load balancer with private network attribute, you can bind an EIP for public network access. for details, see the EIP document on [Binding Elastic IP](https://www.tencentcloud.com/document/product/215/16700?from_cn_redirect=1).
          * @type {string || null}
          */
         this.LoadBalancerType = null;
@@ -14027,7 +14245,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AddressIPVersion = null;
 
         /**
-         * Specifies the VPC ID in numerical form, obtainable through the DescribeVpcs API (https://www.tencentcloud.com/document/product/215/15778?from_cn_redirect=1).
+         * Specifies the VPC ID in numerical form, obtainable through the [DescribeVpcs]((https://www.tencentcloud.com/document/product/215/15778?from_cn_redirect=1)) API.
          * @type {number || null}
          */
         this.NumericalVpcId = null;
@@ -14035,9 +14253,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         /**
          * Specifies the ISP of the load balancer IP address.
 
--BGP (multi-line).
+- BGP (multi-line).
 - CMCC: CMCC single line network.
--CTCC: ctcc single-line.
+- CTCC: ctcc single-line.
 - CUCC: china unicom single-line.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -14296,7 +14514,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AssociateEndpoint = null;
 
         /**
-         * 
+         * Availability zone forwarding affinity info
          * @type {AvailableZoneAffinityInfo || null}
          */
         this.AvailableZoneAffinityInfo = null;
@@ -14451,6 +14669,7 @@ module.exports = {
     DisassociateTargetGroupsResponse: DisassociateTargetGroupsResponse,
     ListenerBackend: ListenerBackend,
     SetLoadBalancerClsLogResponse: SetLoadBalancerClsLogResponse,
+    TargetGroupInstance: TargetGroupInstance,
     DescribeLoadBalancerTrafficResponse: DescribeLoadBalancerTrafficResponse,
     MultiCertInfo: MultiCertInfo,
     RsTagRule: RsTagRule,
@@ -14475,7 +14694,7 @@ module.exports = {
     ModifyTargetWeightResponse: ModifyTargetWeightResponse,
     ZoneResource: ZoneResource,
     DescribeTaskStatusRequest: DescribeTaskStatusRequest,
-    TargetGroupInstance: TargetGroupInstance,
+    DescribeTargetGroupInstanceStatusResponse: DescribeTargetGroupInstanceStatusResponse,
     DescribeClassicalLBByInstanceIdResponse: DescribeClassicalLBByInstanceIdResponse,
     CreateRuleResponse: CreateRuleResponse,
     CrossTargets: CrossTargets,
@@ -14540,6 +14759,7 @@ module.exports = {
     DeleteListenerRequest: DeleteListenerRequest,
     ClassicalHealth: ClassicalHealth,
     DescribeCustomizedConfigAssociateListRequest: DescribeCustomizedConfigAssociateListRequest,
+    RenewLoadBalancersResponse: RenewLoadBalancersResponse,
     ModifyTargetPortResponse: ModifyTargetPortResponse,
     MigrateClassicalLoadBalancersRequest: MigrateClassicalLoadBalancersRequest,
     DescribeLoadBalancersDetailRequest: DescribeLoadBalancersDetailRequest,
@@ -14551,6 +14771,7 @@ module.exports = {
     DescribeResourcesResponse: DescribeResourcesResponse,
     ModifyTargetGroupInstancesWeightRequest: ModifyTargetGroupInstancesWeightRequest,
     ManualRewriteResponse: ManualRewriteResponse,
+    TargetGroupInstanceStatus: TargetGroupInstanceStatus,
     ModifyBlockIPListRequest: ModifyBlockIPListRequest,
     RuleOutput: RuleOutput,
     ModifyBlockIPListResponse: ModifyBlockIPListResponse,
@@ -14568,6 +14789,7 @@ module.exports = {
     ResourceAvailability: ResourceAvailability,
     SetLoadBalancerSecurityGroupsRequest: SetLoadBalancerSecurityGroupsRequest,
     DescribeCustomizedConfigAssociateListResponse: DescribeCustomizedConfigAssociateListResponse,
+    RenewLoadBalancersRequest: RenewLoadBalancersRequest,
     SetCustomizedConfigForLoadBalancerRequest: SetCustomizedConfigForLoadBalancerRequest,
     CreateListenerResponse: CreateListenerResponse,
     CreateTargetGroupResponse: CreateTargetGroupResponse,
@@ -14615,6 +14837,7 @@ module.exports = {
     LoadBalancerDetail: LoadBalancerDetail,
     LbRsTargets: LbRsTargets,
     BatchModifyTargetWeightRequest: BatchModifyTargetWeightRequest,
+    DescribeTargetGroupInstanceStatusRequest: DescribeTargetGroupInstanceStatusRequest,
     BatchModifyTargetTagResponse: BatchModifyTargetTagResponse,
     DeleteRewriteResponse: DeleteRewriteResponse,
     BatchTarget: BatchTarget,

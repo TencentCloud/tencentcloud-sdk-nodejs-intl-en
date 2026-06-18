@@ -661,25 +661,25 @@ class DescribeLoginWhiteHostListRequest extends  AbstractModel {
         super();
 
         /**
-         * Allowlist ID
+         * <p>Allowlist ID</p>
          * @type {number || null}
          */
         this.Id = null;
 
         /**
-         * Number of results to be returned. Maximum value: 1000.
+         * <p>Number of items to return. Maximum value: 1000.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset. Default value: 0.
+         * <p>Offset. Default value: 0.</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Filtering criteria <li>IpOrAlias - String - required: no - host IP or alias for filtering</li>
+         * <p>Filter criteria<li>IpOrAlias - String - Required: No - Host IP or alias filter</li></p>
          * @type {Array.<AssetFilters> || null}
          */
         this.Filters = null;
@@ -2651,13 +2651,13 @@ class DescribeReverseShellSystemPolicyConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Private Network Alarm Display
+         * <p>Display intranet alerts</p>
          * @type {boolean || null}
          */
         this.InnerNetAlarmShow = null;
 
         /**
-         * Private IP Display
+         * <p>Display intranet IP addresses</p>
          * @type {boolean || null}
          */
         this.InnerIPShow = null;
@@ -3691,35 +3691,31 @@ class DescribeMachineClearHistoryRequest extends  AbstractModel {
         super();
 
         /**
-         * Filtering criteria
-Return entries that match both Keywords and TimeBetween when multiple filtering criteria are used
-<li> Keywords: instance name, private IP address, public IP address</li>
-<li> TimeBetween: time interval</li>
+         * <p>Filter conditions<br>When multiple conditions are used, Keywords and TimeBetween are intersected</p><li>Keywords: instance name, private IP, or public IP</li><li>TimeBetween: time range</li>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
 
         /**
-         * Limit Entries, 10 by default, up to 100.
+         * <p>The maximum number of entries. Default value: 10. Maximum value: 100.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset. Default value: 0.
+         * <p>Offset. Default value: 0.</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Ascending order, ASC, Descending order DESC, ASC by default.
+         * <p>Sort order: ASC for ascending, DESC for descending. Default: ASC</p>
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * AgentLastOfflineTime: last offline time of client
-AutoClearTime: clearing time
+         * <p>AgentLastOfflineTime: Time when the client was last offline<br>AutoClearTime: Cleanup time</p>
          * @type {string || null}
          */
         this.By = null;
@@ -4378,121 +4374,121 @@ class DescribeMachineGeneralResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of assets
+         * <p>Total number of assets</p>
          * @type {number || null}
          */
         this.MachineCnt = null;
 
         /**
-         * Number of Tencent Cloud machines
+         * <p>Number of Tencent Cloud machines</p>
          * @type {number || null}
          */
         this.TencentCloudMachineCnt = null;
 
         /**
-         * Number of Alibaba Cloud machines
+         * <p>Number of Alibaba Cloud machines</p>
          * @type {number || null}
          */
         this.AliCloudMachineCnt = null;
 
         /**
-         * Number of Baidu Cloud machines
+         * <p>Number of Baidu Cloud machines</p>
          * @type {number || null}
          */
         this.BaiduCloudMachineCnt = null;
 
         /**
-         * Number of IDC machines
+         * <p>Number of IDC machines</p>
          * @type {number || null}
          */
         this.IDCMachineCnt = null;
 
         /**
-         * Number of machines from other cloud service vendors
+         * <p>Number of machines from other cloud service vendors</p>
          * @type {number || null}
          */
         this.OtherCloudMachineCnt = null;
 
         /**
-         * Number of protected machines
+         * <p>Number of protected machines</p>
          * @type {number || null}
          */
         this.ProtectMachineCnt = null;
 
         /**
-         * Number of protected Basic Edition machines
+         * <p>Number of protected Basic Edition machines</p>
          * @type {number || null}
          */
         this.BaseMachineCnt = null;
 
         /**
-         * Number of protected Pro Edition machines
+         * <p>Number of protected Pro Edition machines</p>
          * @type {number || null}
          */
         this.SpecialtyMachineCnt = null;
 
         /**
-         * Number of protected Ultimate Edition machines
+         * <p>Number of protected Ultimate Edition machines</p>
          * @type {number || null}
          */
         this.FlagshipMachineCnt = null;
 
         /**
-         * Number of risky machines
+         * <p>Number of risky machines</p>
          * @type {number || null}
          */
         this.RiskMachineCnt = null;
 
         /**
-         * Number of new risky machines compared with that yesterday
+         * <p>Change in the number of risky machines compared with yesterday</p>
          * @type {number || null}
          */
         this.CompareYesterdayRiskMachineCnt = null;
 
         /**
-         * Number of new unprotected machines compared with that yesterday
+         * <p>Change in the number of unprotected machines compared with yesterday</p>
          * @type {number || null}
          */
         this.CompareYesterdayNotProtectMachineCnt = null;
 
         /**
-         * Number of new machines about to expire compared with that yesterday
+         * <p>Change in the number of machines expiring soon compared with yesterday</p>
          * @type {number || null}
          */
         this.CompareYesterdayDeadlineMachineCnt = null;
 
         /**
-         * Number of machines about to expire
+         * <p>Number of machines about to expire</p>
          * @type {number || null}
          */
         this.DeadlineMachineCnt = null;
 
         /**
-         * Number of unprotected machines
+         * <p>Number of unprotected machines</p>
          * @type {number || null}
          */
         this.NotProtectMachineCnt = null;
 
         /**
-         * Number of protected Lighthouse machines (Lighthouse machines)
+         * <p>Number of protected Lighthouse machines</p>
          * @type {number || null}
          */
         this.LHGeneralDiscountCnt = null;
 
         /**
-         * Number of new hosts compared with that yesterday
+         * <p>Change in the number of newly added hosts compared with yesterday</p>
          * @type {number || null}
          */
         this.CompareYesterdayMachineCnt = null;
 
         /**
-         * Auto-cleanup Time, maximum 720 hours, minimum 0, 0 by default, 0=OFF
+         * <p>Automatic cleanup time, maximum 720 hours, minimum 0, default 0, 0=disabled</p>
          * @type {number || null}
          */
         this.MachineDestroyAfterOfflineHours = null;
 
         /**
-         * Machine type array
+         * <p>Cloud server type array</p>
          * @type {Array.<CloudFromCnt> || null}
          */
         this.CloudFrom = null;
@@ -4554,13 +4550,13 @@ class DescribeMachineClearHistoryResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of entries
+         * <p>Total quantity.</p>
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List data
+         * <p>List data</p>
          * @type {Array.<MachineClearHistory> || null}
          */
         this.List = null;
@@ -5066,7 +5062,7 @@ class DeleteLoginWhiteListRequest extends  AbstractModel {
         super();
 
         /**
-         * Allowlisted IDs (The maximum number is 100.)
+         * <p>Allowlist ID (maximum 100)</p>
          * @type {Array.<number> || null}
          */
         this.Ids = null;
@@ -5432,7 +5428,7 @@ class ExportTasksRequest extends  AbstractModel {
         super();
 
         /**
-         * Task ID
+         * <p>Task ID.</p>
          * @type {string || null}
          */
         this.TaskId = null;
@@ -5653,122 +5649,121 @@ class ModifyMalwareTimingScanSettingsRequest extends  AbstractModel {
         super();
 
         /**
-         * Detection mode. 0: full disk detection; 1: rapid detection
+         * <p>Detection mode. 0: full disk detection; 1: rapid detection</p>
          * @type {number || null}
          */
         this.CheckPattern = null;
 
         /**
-         * Detection interval start time, such as 02:00:00
+         * <p>Start time of the detection window, for example, 02:00:00</p>
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Detection interval timeout end time, such as 04:00:00
+         * <p>Timeout end time of the detection window, for example, 04:00:00</p>
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Whether all servers. 1: all; 2: specified
+         * <p>Whether all servers are selected. 1: All; 2: Custom</p>
          * @type {number || null}
          */
         this.IsGlobal = null;
 
         /**
-         * Regular detection switch. 0: off; 1: on
+         * <p>Scheduled detection switch. 0: off; 1: on</p>
          * @type {number || null}
          */
         this.EnableScan = null;
 
         /**
-         * Monitoring mode. 0: standard; 1: deep
+         * <p>Monitoring mode. 0: standard; 1: deep</p>
          * @type {number || null}
          */
         this.MonitoringPattern = null;
 
         /**
-         * Scan interval: defaults to 1 per day
+         * <p>Scan cycle. Default: daily (1)</p>
          * @type {number || null}
          */
         this.Cycle = null;
 
         /**
-         * Real-time monitoring. 0: off; 1: on
+         * <p>Real-time monitoring. 0: off; 1: on</p>
          * @type {number || null}
          */
         this.RealTimeMonitoring = null;
 
         /**
-         * Required for specified servers, a string array of host QUUIDs
+         * <p>A string array of host QUUIDs, required when custom servers are selected</p>
          * @type {Array.<string> || null}
          */
         this.QuuidList = null;
 
         /**
-         * Whether to apply automatic isolation. 1: yes; 0: no
+         * <p>Whether to isolate automatically: 1 - yes; 0 - no</p>
          * @type {number || null}
          */
         this.AutoIsolation = null;
 
         /**
-         * Whether to terminate the process. 1: terminate; 0: not terminate
+         * <p>Whether to terminate the process: 1: terminate; 0: not terminate</p>
          * @type {number || null}
          */
         this.KillProcess = null;
 
         /**
-         * 1: clean up; 0: not clean up
-<li>This operation will fix tampered system commands, scheduled tasks, and other system files. Please ensure that yum/apt is available during the operation.</li>
+         * <p>1: Clean; 0: Do not clean</p><li>This operation repairs tampered system commands, scheduled tasks, and other system files. Make sure yum/apt is available during the operation.</li>
          * @type {number || null}
          */
         this.DoClean = null;
 
         /**
-         * 1: standard mode (only critical and high-risk are reported.); 2: enhanced mode (critical, high-risk, and medium-risk are reported.); 3: strict mode (critical, high-risk, medium-risk, low-risk, and prompt are reported.)
+         * <p>1: Standard mode (reports only critical and high-risk items); 2: Enhanced mode (reports critical, high-risk, and medium-risk items); 3: Strict mode (reports critical, high-, medium-, and low-risk items, plus informational items)</p>
          * @type {number || null}
          */
         this.EngineType = null;
 
         /**
-         * Heuristic Engine Switch: 0 OFF, 1 ON.
+         * <p>Heuristic engine switch. 0: off; 1: on</p>
          * @type {number || null}
          */
         this.EnableInspiredEngine = null;
 
         /**
-         * Whether to enable malicious process killing [0: Not Enabled; 1: Enabled]
+         * <p>Whether malicious process termination is enabled [0: disabled, 1: enabled]</p>
          * @type {number || null}
          */
         this.EnableMemShellScan = null;
 
         /**
-         * Protection mode: 0: standard; 1: important period guarantee
+         * <p>Protection mode. 0: Standard; 1: Critical-period protection</p>
          * @type {number || null}
          */
         this.ProtectMode = null;
 
         /**
-         * Scope of detection: 0: malicious files other than scripts; 1: all malicious files
+         * <p>Scan scope. 0: Malicious files other than script files; 1: All malicious files</p>
          * @type {number || null}
          */
         this.ProtectFileScope = null;
 
         /**
-         * Selected host isolation collection
+         * <p>Selected hosts for isolation</p>
          * @type {Array.<string> || null}
          */
         this.QuaraUuids = null;
 
         /**
-         * Isolation scope selected by users: 0: default full isolation 1: user selected
+         * <p>Isolation scope selected by the user. 0: Full isolation by default; 1: Custom</p>
          * @type {number || null}
          */
         this.QuaraScope = null;
 
         /**
-         * 
+         * <p>Product type. 0:CWP (default); 1:CSC</p>
          * @type {number || null}
          */
         this.ProductType = null;
@@ -6245,37 +6240,37 @@ class DescribeNetAttackSettingResponse extends  AbstractModel {
         super();
 
         /**
-         * 0 - Disable Network Attack Detection; 1 - Enable Network Attack Detection.
+         * <p>0: Disable network attack detection; 1: Enable network attack detection</p>
          * @type {number || null}
          */
         this.NetAttackEnable = null;
 
         /**
-         * 0: New warning events pending processing by default, 1: New warning events processed by default, 3: New warning events ignored by default.
+         * <p>0: Newly added alert events are pending by default; 1: newly added alert events are processed by default; 3: newly added alert events are ignored by default</p>
          * @type {number || null}
          */
         this.NetAttackAlarmStatus = null;
 
         /**
-         * 1 - All Premium Edition Hosts, 0 - Hosts in InstanceIds List
+         * <p>1 - All Ultimate Edition hosts; 0 - hosts in InstanceIds list</p>
          * @type {number || null}
          */
         this.Scope = null;
 
         /**
-         * Specified hosts
+         * <p>Selected hosts</p>
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Custom Hosts to Exclude
+         * <p>Custom excluded hosts</p>
          * @type {Array.<string> || null}
          */
         this.ExcludeInstanceIds = null;
 
         /**
-         * New assets automatically include: 0 - Do not include, 1 - include.
+         * <p>Automatically include newly added assets. 0: No; 1: Yes</p>
          * @type {number || null}
          */
         this.AutoInclude = null;
@@ -7077,7 +7072,7 @@ class ModifyMachineAutoClearConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Clean-up rule time, 0 for OFF, in days, up to 30 days
+         * <p>Cleanup rule retention period. 0: Disabled. Unit: day. Maximum: 30 days</p>
          * @type {number || null}
          */
         this.ClearRule = null;
@@ -9113,7 +9108,7 @@ class DescribeNetAttackSettingRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Product type. 0:CWP; 1:CSC</p>
          * @type {number || null}
          */
         this.ProductType = null;
@@ -10534,55 +10529,55 @@ class ModifyLoginWhiteRecordRequest extends  AbstractModel {
         super();
 
         /**
-         * Allowlisted users (Multiple users are separated by commas.)
+         * <p>Allowlisted users (multiple users separated by commas)</p>
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
-         * Allowlisted dimension information recorded after the update
+         * <p>Allowlisted dimension information recorded after the update</p>
          * @type {string || null}
          */
         this.SrcIp = null;
 
         /**
-         * Start time
+         * <p>Start time.</p>
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time
+         * <p>End time.</p>
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Remarks
+         * <p>Remark</p>
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Whether it applies to all servers: 0: no; 1: yes
+         * <p>Whether it applies to all servers: 0 - no; 1 - yes</p>
          * @type {number || null}
          */
         this.IsGlobal = null;
 
         /**
-         * Allowlist ID
+         * <p>Allowlist ID</p>
          * @type {number || null}
          */
         this.Id = null;
 
         /**
-         * Server list
+         * <p>Server list</p>
          * @type {Array.<HostInfo> || null}
          */
         this.Hosts = null;
 
         /**
-         * Region list
+         * <p>Region list</p>
          * @type {Array.<Place> || null}
          */
         this.Places = null;
@@ -14611,7 +14606,7 @@ class DescribeMachineOsListResponse extends  AbstractModel {
         super();
 
         /**
-         * Operating system list
+         * <p>Operating system list</p>
          * @type {Array.<OsName> || null}
          */
         this.List = null;
@@ -15591,13 +15586,13 @@ class DescribeLoginTypeHostResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number
+         * <p>Total.</p>
          * @type {number || null}
          */
         this.Total = null;
 
         /**
-         * List of hosts
+         * <p>Host list</p>
          * @type {Array.<ClientSettingHost> || null}
          */
         this.List = null;
@@ -18013,37 +18008,37 @@ class DescribeBanStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * (Abandoned) Block switch status: 0 -- Off 1 -- Advanced blocking 2 -- Basic block (blocklist IPs in the intelligence database)
+         * <p>(Deprecated) Blocking switch status: 0 -- Off; 1 -- Advanced blocking; 2 -- Basic blocking (blocks only blacklisted IPs in the intelligence database)</p>
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Whether to display the pop-up prompt. False: no; true: yes.
+         * <p>Whether to show pop-up prompts. false: disabled; true: enabled</p>
          * @type {boolean || null}
          */
         this.ShowTips = null;
 
         /**
-         * Whether to enable intelligent over-allowing mode
+         * <p>Whether to enable intelligent allowlisting mode</p>
          * @type {boolean || null}
          */
         this.OpenSmartMode = null;
 
         /**
-         * Whether intelligence IP blocking is enabled
+         * <p>Whether to enable threat-intelligence IP blocking</p>
          * @type {boolean || null}
          */
         this.BanBlackIp = null;
 
         /**
-         * Whether vulnerability IP blocking is enabled
+         * <p>Whether to enable vulnerability-related IP blocking</p>
          * @type {boolean || null}
          */
         this.BanVulIp = null;
 
         /**
-         * Whether to enable rule blocking
+         * <p>Whether to enable rule blocking</p>
          * @type {boolean || null}
          */
         this.BanByRule = null;
@@ -18147,13 +18142,13 @@ class DescribeLicenseBindListResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of entries
+         * <p>Total quantity.</p>
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List of bound machines
+         * <p>List of bound machine information</p>
          * @type {Array.<LicenseBindDetail> || null}
          */
         this.List = null;
@@ -19828,25 +19823,25 @@ class DescribeLoginTypeHostRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * Limit Entries, 10 by default, up to 100
+         * <p>The maximum number of entries. Default value: 10. Maximum value: 100.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset, which is 0 by default.
+         * <p>Offset. Default value: 0.</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Sorting Method: [ASC: Ascending Order, DESC: Descending Order]
+         * <p>Sort order: [ASC: ascending | DESC: descending]</p>
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * Sorting column: [Id].
+         * <p>Optional sorting column: [Id]</p>
          * @type {string || null}
          */
         this.By = null;
@@ -20506,6 +20501,34 @@ class DescribeAccountStatisticsResponse extends  AbstractModel {
                 obj.deserialize(params.AccountStatistics[z]);
                 this.AccountStatistics.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeProVersionStatus response structure.
+ * @class
+ */
+class DescribeProVersionStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -22924,7 +22947,7 @@ class DeleteMachineClearHistoryRequest extends  AbstractModel {
         super();
 
         /**
-         * IDs of records to be deleted, up to 100 characters in length
+         * <p>IDs of the records to be deleted. Maximum: 100</p>
          * @type {Array.<number> || null}
          */
         this.Ids = null;
@@ -30777,59 +30800,43 @@ class DescribeMachinesRequest extends  AbstractModel {
         super();
 
         /**
-         * Type of the machine's zone
-CVM: Cloud Virtual Machine
-BM: BMECM: Edge Computing Machine
-LH: Lighthouse
-Other: Hybrid Cloud Zone
+         * <p>Machine zone type<br>CVM: Cloud Virtual Machine<br>BM: Blackstone<br>ECM: Edge Computing Machine<br>LH: Lighthouse<br>Other: Hybrid cloud zone</p>
          * @type {string || null}
          */
         this.MachineType = null;
 
         /**
-         * Machine region. For example, ap-guangzhou, ap-shanghai. For non-Tencent Cloud hosts, use ap-others.
+         * <p>Machine region, for example, ap-guangzhou or ap-shanghai. For non-Tencent Cloud hosts, use ap-others.</p>
          * @type {string || null}
          */
         this.MachineRegion = null;
 
         /**
-         * Number of returns. It is 10 by default, and the maximum value is 100.
+         * <p>Number of returned results. The default number is 10, and the maximum value is 100.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset. Default value: 0.
+         * <p>Offset. Default value: 0.</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Filter criteria
-<li>Ips - String - Required: No - Query by ip</li>
-<li>Names - String - required: no - query by instance name</li>
-<li>InstanceIds - String - Required: No - Query by instance id</li>
-<li>Version - String required: no - current protection version ( PRO_VERSION: Pro Edition | BASIC_VERSION: Basic Edition | Flagship: Ultimate Edition | ProtectedMachines: Pro + Ultimate Editions)</li>
-<li>Risk - String - required: no - risky host (yes)</li>
-<li>Os - String - required: no - operating system (DescribeMachineOsList API value)</li>
-Each filtering criterion supports only one value; queries of multiple values with OR relationship are not supported.</li>
-<li>Quuid - String - Required: no - CVM instance UUID. Maximum value: 100.</li>
-<li>AddedOnTheFifteen - String required: no - whether to query only hosts added within the last 15 days (1: yes) </li>
-<li> TagId - String required: no - query the list of hosts associated with the specified tag </li>
-<li>AgentStatus - String - required: no - ALL total; ONLINE under protection; OFFLINE offline; UNINSTALLED not installed</li>
-<li>MachineStatus - String required: no - ALL all; RUNNING running; STOPPED is shut down; EXPIRED to be recycled</li>
+         * <p>Filter criteria.</p><li>Ips - String - Required: No - Query by IP</li><li>Names - String - Required: No - Query by instance name</li><li>InstanceIds - String - Required: No - Query by instance id</li><li>Version - String - Required: No - Current protection edition (PRO_VERSION: Pro Edition | BASIC_VERSION: Basic Version | Flagship: Ultimate Edition | ProtectedMachines: Pro Edition + Ultimate Edition)</li><li>Risk - String - Required: No - Risk host (yes)</li><li>Os - String - Required: No - Operating system (DescribeMachineOsList API value). Each filter criterion only supports one value and does not support multiple values or relationship query.</li><li>Quuid - String - Required: No - Cloud server UUID. Maximum 100 entries.</li><li>AddedOnTheFifteen - String - Required: No - Query only hosts added within the last 15 days (1: yes)</li><li>TagId - String - Required: No - Query host list associated with the specified tag</li><li>AgentStatus - String - Required: No - ALL: All; ONLINE: Under protection; OFFLINE: Offline; UNINSTALLED: Not installed</li><li>MachineStatus - String - Required: No - ALL: All; RUNNING: Running; STOPPED: Shut down; EXPIRED: Pending recycling</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
         /**
-         * ID List of Businesses to which machines belong
+         * <p>List of business IDs to which the machines belong</p>
          * @type {Array.<number> || null}
          */
         this.ProjectIds = null;
 
         /**
-         * 
+         * <p>APPID of the machine</p>
          * @type {number || null}
          */
         this.MachineAppId = null;
@@ -35975,43 +35982,43 @@ class ModifyNetAttackSettingRequest extends  AbstractModel {
         super();
 
         /**
-         * 0 - Disable Network Attack Detection; 1 - Enable Network Attack Detection.
+         * <p>0: Disable network attack detection; 1: Enable network attack detection</p>
          * @type {number || null}
          */
         this.NetAttackEnable = null;
 
         /**
-         * 0: New warning events pending processing by default, 1: New warning events processed by default, 3: New warning events ignored by default.
+         * <p>0: Newly added alert events are pending by default; 1: newly added alert events are processed by default; 3: newly added alert events are ignored by default</p>
          * @type {number || null}
          */
         this.NetAttackAlarmStatus = null;
 
         /**
-         * 1 - All Ultimate edition hosts; 0 - list of hosts with Quuids
+         * <p>1: All Ultimate Edition hosts; 0: Hosts in the Quuids list</p>
          * @type {number || null}
          */
         this.Scope = null;
 
         /**
-         * Specified hosts
+         * <p>Selected hosts</p>
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Manually Excluded Hosts
+         * <p>Custom excluded hosts</p>
          * @type {Array.<string> || null}
          */
         this.ExcludeInstanceIds = null;
 
         /**
-         * New assets automatically include: 0 - Do not include, 1 - include.
+         * <p>Automatically include newly added assets. 0: No; 1: Yes</p>
          * @type {number || null}
          */
         this.AutoInclude = null;
 
         /**
-         * 
+         * <p>Product type. 0: CWP; 1: CSC</p>
          * @type {number || null}
          */
         this.ProductType = null;
@@ -36566,13 +36573,13 @@ class DescribeLoginWhiteHostListResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number
+         * <p>Total.</p>
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Server list
+         * <p>Server list</p>
          * @type {Array.<HostDesc> || null}
          */
         this.Hosts = null;
@@ -38326,7 +38333,7 @@ class DescribeMalwareTimingScanSettingRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Product type. 0:CWP (default); 1:CSC</p>
          * @type {number || null}
          */
         this.ProductType = null;
@@ -41251,6 +41258,153 @@ class DeletePrivilegeEventsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeMachineInfo response structure.
+ * @class
+ */
+class DescribeMachineInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Server IP.
+         * @type {string || null}
+         */
+        this.MachineIp = null;
+
+        /**
+         * Days under protection by CWP
+         * @type {number || null}
+         */
+        this.ProtectDays = null;
+
+        /**
+         * OS.
+         * @type {string || null}
+         */
+        this.MachineOs = null;
+
+        /**
+         * Server name.
+         * @type {string || null}
+         */
+        this.MachineName = null;
+
+        /**
+         * Status.
+<li>ONLINE: online</li>
+<li>OFFLINE: offline</li>
+         * @type {string || null}
+         */
+        this.MachineStatus = null;
+
+        /**
+         * Unique ID of CVM or BM instance.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Public IP of server.
+         * @type {string || null}
+         */
+        this.MachineWanIp = null;
+
+        /**
+         * CVM or BM instance `Uuid`.
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * CWP agent `Uuid`.
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * Whether CWP Pro is activated.
+<li>true: yes</li>
+<li>false: no</li>
+         * @type {boolean || null}
+         */
+        this.IsProVersion = null;
+
+        /**
+         * CWP Pro activation time.
+         * @type {string || null}
+         */
+        this.ProVersionOpenDate = null;
+
+        /**
+         * Server type.
+<li>CVM: CVM</li>
+<li>BM: BM</li>
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * Server region, such as ap-guangzhou or ap-shanghai
+         * @type {string || null}
+         */
+        this.MachineRegion = null;
+
+        /**
+         * Server status.
+<li>POSTPAY: post-paid, i.e., pay-as-you-go </li>
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Number of trojans left for free scan.
+         * @type {number || null}
+         */
+        this.FreeMalwaresLeft = null;
+
+        /**
+         * Number of vulnerability left for free scan.
+         * @type {number || null}
+         */
+        this.FreeVulsLeft = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.ProtectDays = 'ProtectDays' in params ? params.ProtectDays : null;
+        this.MachineOs = 'MachineOs' in params ? params.MachineOs : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.MachineStatus = 'MachineStatus' in params ? params.MachineStatus : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.IsProVersion = 'IsProVersion' in params ? params.IsProVersion : null;
+        this.ProVersionOpenDate = 'ProVersionOpenDate' in params ? params.ProVersionOpenDate : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.FreeMalwaresLeft = 'FreeMalwaresLeft' in params ? params.FreeMalwaresLeft : null;
+        this.FreeVulsLeft = 'FreeVulsLeft' in params ? params.FreeVulsLeft : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Top 5 server risk entities
  * @class
  */
@@ -44165,7 +44319,7 @@ class AddLoginWhiteListsResponse extends  AbstractModel {
         super();
 
         /**
-         * Prompt list of duplicate addition
+         * <p>List of duplicate-addition prompts</p>
          * @type {Array.<DuplicateHosts> || null}
          */
         this.DuplicateHosts = null;
@@ -47118,19 +47272,19 @@ class DescribeLoginWhiteCombinedListRequest extends  AbstractModel {
         super();
 
         /**
-         * Number of items to be returned. It is 10 by default, and the maximum value is 100.
+         * <p>Number of items to return. The default number is 10, and the maximum number is 100.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset, which defaults to 0
+         * <p>Offset. Default value: 0.</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Filtering conditions. <li>IpOrAlias - String - required: no - filter by host IP address or alias.</li> <li>UserName - String - required: no - filter by username.</li> <li>SrcIP - String - required: no - filter by source IP address.</li> <li>Location - String - required: no - filter by login location.</li> <li>ModifyBeginTime - String - required: no - filter by modification time; start time.</li> <li>ModifyEndTime - String - required: no - filter by modification time; end time.</li>
+         * <p>Filter criteria.<li>IpOrAlias - String - Required: No - Host ip or alias filter</li><li>UserName - String - Required: No - UserName filter</li><li>SrcIP - String - Required: No - Source ip filter</li><li>Location - String - Required: No - Login Location filter</li><li>ModifyBeginTime - String - Required: No - Filter by modification time range, start time</li><li>ModifyEndTime - String - Required: No - Filter by modification time range, end time</li></p>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -48565,127 +48719,127 @@ class DescribeMalwareTimingScanSettingResponse extends  AbstractModel {
         super();
 
         /**
-         * Detection mode: 0 - full disk detection; 1 - rapid detection
+         * <p>Detection mode. 0: full disk detection; 1: rapid detection</p>
          * @type {number || null}
          */
         this.CheckPattern = null;
 
         /**
-         * Detection cycle; start time
+         * <p>Start time of the detection window</p>
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Detection cycle; timeout end time
+         * <p>Timeout end time of the detection window</p>
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Whether all servers: 1 - all; 2 - specified
+         * <p>Whether all servers are selected. 1: All; 2: Custom</p>
          * @type {number || null}
          */
         this.IsGlobal = null;
 
         /**
-         * Required for specified servers, a string array of host QUUIDs
+         * <p>A string array of host QUUIDs, required when custom servers are selected</p>
          * @type {Array.<string> || null}
          */
         this.QuuidList = null;
 
         /**
-         * Monitoring mode: 0 - standard; 1 - deep
+         * <p>Monitoring mode. 0: standard; 1: deep</p>
          * @type {number || null}
          */
         this.MonitoringPattern = null;
 
         /**
-         * Cycle: 1 - daily
+         * <p>Cycle. 1: Daily</p>
          * @type {number || null}
          */
         this.Cycle = null;
 
         /**
-         * Scheduled detection switch: 0 - disable; 1 - enable
+         * <p>Scheduled detection switch. 0: off; 1: on</p>
          * @type {number || null}
          */
         this.EnableScan = null;
 
         /**
-         * Unique ID
+         * <p>Unique ID</p>
          * @type {number || null}
          */
         this.Id = null;
 
         /**
-         * Real-time monitoring: 0 - disable 1 - enable
+         * <p>Real-time monitoring. 0: off; 1: on</p>
          * @type {number || null}
          */
         this.RealTimeMonitoring = null;
 
         /**
-         * Whether to isolate automatically: 1 - yes; 0 - no
+         * <p>Whether to isolate automatically: 1 - yes; 0 - no</p>
          * @type {number || null}
          */
         this.AutoIsolation = null;
 
         /**
-         * One-click scan timeout duration, such as 1800 seconds
+         * <p>Timeout for one-click scanning, for example, 1800 seconds</p>
          * @type {number || null}
          */
         this.ClickTimeout = null;
 
         /**
-         * Whether to terminate the process: 1: terminate; 0: not terminate. It is effective only if automatic isolation is enabled.
+         * <p>Whether to terminate the process: 1: terminate; 0: not terminate. It is effective only if automatic isolation is enabled.</p>
          * @type {number || null}
          */
         this.KillProcess = null;
 
         /**
-         * 1 - standard mode (only critical and high-risk are reported.); 2 - enhanced mode (critical, high-risk, and medium-risk are reported.); 3 - strict mode (critical, high-risk, medium-risk, low-risk, and prompt are reported.)
+         * <p>1: Standard mode (reports only critical and high-risk items); 2: Enhanced mode (reports critical, high-risk, and medium-risk items); 3: Strict mode (reports critical, high-, medium-, and low-risk items, plus prompt items)</p>
          * @type {number || null}
          */
         this.EngineType = null;
 
         /**
-         * Heuristic Engine: 0 - OFF, 1 - ON
+         * <p>Heuristic engine. 0: off; 1: on</p>
          * @type {number || null}
          */
         this.EnableInspiredEngine = null;
 
         /**
-         * Whether to enable malicious process killing [0: Not Enabled; 1: Enabled]
+         * <p>Whether malicious process termination is enabled [0: disabled, 1: enabled]</p>
          * @type {number || null}
          */
         this.EnableMemShellScan = null;
 
         /**
-         * Protection mode: 0 - standard; 1 - enhanced
+         * <p>Protection mode. 0: Standard; 1: Critical-period protection</p>
          * @type {number || null}
          */
         this.ProtectMode = null;
 
         /**
-         * Scope of detection: 0 - malicious files other than scripts; 1 - all malicious files
+         * <p>Scan scope. 0: Malicious files other than script files; 1: All malicious files</p>
          * @type {number || null}
          */
         this.ProtectFileScope = null;
 
         /**
-         * Cleanup switch 0 Disabled 1 Enabled
+         * <p>Cleanup switch. 0: off; 1: on</p>
          * @type {number || null}
          */
         this.DoClean = null;
 
         /**
-         * Selected host isolation collection
+         * <p>Selected hosts for isolation</p>
          * @type {Array.<string> || null}
          */
         this.QuaraUuids = null;
 
         /**
-         * Isolation scope selected by users: 0: default full isolation 1: user selected
+         * <p>Isolation scope selected by the user. 0: Full isolation by default; 1: Custom</p>
          * @type {number || null}
          */
         this.QuaraScope = null;
@@ -48860,224 +49014,217 @@ class Machine extends  AbstractModel {
         super();
 
         /**
-         * Host name.
+         * <p>Host name.</p>
          * @type {string || null}
          */
         this.MachineName = null;
 
         /**
-         * Host System.
+         * <p>Host operating system.</p>
          * @type {string || null}
          */
         this.MachineOs = null;
 
         /**
-         * Host status. <li>OFFLINE: Offline</li> <li>ONLINE: Online</li> <li>SHUTDOWN: Shutdown</li> <li>UNINSTALLED: No protection</li>	
+         * <p>Host status. <li>OFFLINE: Offline</li> <li>ONLINE: Online</li> <li>SHUTDOWN: Shut down</li> <li>UNINSTALLED: Unprotected</li></p>
          * @type {string || null}
          */
         this.MachineStatus = null;
 
         /**
-         * ONLINE Under protection; OFFLINE OFFLINE; UNINStALLED Not installed
+         * <p>ONLINE: Protected; OFFLINE: Offline; UNINSTALLED: Not installed</p>
          * @type {string || null}
          */
         this.AgentStatus = null;
 
         /**
-         * RUNNING; is shut down; to be recycled	
+         * <p>RUNNING: Running; STOPED: Shut down; EXPIRED: Pending reclamation</p>
          * @type {string || null}
          */
         this.InstanceStatus = null;
 
         /**
-         * CWP UUID. If the CWP client is offline for a long time, an empty character is returned.
+         * <p>CWP Uuid. Returns an empty string if the client is offline long-term.</p>
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
-         * CVM or BM Machine Unique UUID.
+         * <p>Unique Uuid of a CVM or BM machine.</p>
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
-         * Number of vulnerabilities
+         * <p>Number of vulnerabilities.</p>
          * @type {number || null}
          */
         this.VulNum = null;
 
         /**
-         * Host IP.
+         * <p>Host IP.</p>
          * @type {string || null}
          */
         this.MachineIp = null;
 
         /**
-         * Whether the edition is Pro Edition
-<li>true: yes</li>
-<li>false: no</li>
+         * <p>Whether the host is Pro Edition.</p><li>true: Yes</li><li>false: No</li>
          * @type {boolean || null}
          */
         this.IsProVersion = null;
 
         /**
-         * Public IP address of a host
+         * <p>Host public IP.</p>
          * @type {string || null}
          */
         this.MachineWanIp = null;
 
         /**
-         * Host status
-<li>POSTPAY: postpaid, indicating pay-as-you-go mode  </li>
-<li>PREPAY: prepaid, indicating yearly/monthly subscription mode</li>
+         * <p>Host status.</p><li>POSTPAY: Postpaid (pay-as-you-go)</li><li>PREPAY: Prepaid (monthly or yearly subscription)</li>
          * @type {string || null}
          */
         this.PayMode = null;
 
         /**
-         * Number of Trojans
+         * <p>Number of trojans.</p>
          * @type {number || null}
          */
         this.MalwareNum = null;
 
         /**
-         * Tag information
+         * <p>Tag information</p>
          * @type {Array.<MachineTag> || null}
          */
         this.Tag = null;
 
         /**
-         * Number of baseline risks
+         * <p>Number of baseline risks.</p>
          * @type {number || null}
          */
         this.BaselineNum = null;
 
         /**
-         * Number of network risks
+         * <p>Number of network risks.</p>
          * @type {number || null}
          */
         this.CyberAttackNum = null;
 
         /**
-         * Risk status
-<li>SAFE: Safe</li>
-<li>RISK: Risk</li>
-<li>UNKNOWN: Unknown</li>
+         * <p>Risk status.</p><li>SAFE: Safe</li><li>RISK: Risk</li><li>UNKNOWN: Unknown</li>
          * @type {string || null}
          */
         this.SecurityStatus = null;
 
         /**
-         * Number of intrusion events
+         * <p>Number of intrusion events</p>
          * @type {number || null}
          */
         this.InvasionNum = null;
 
         /**
-         * Region information
+         * <p>Region information</p>
          * @type {RegionInfo || null}
          */
         this.RegionInfo = null;
 
         /**
-         * Instance status: TERMINATED_PRO_VERSION - terminated
+         * <p>Instance status. TERMINATED_PRO_VERSION: terminated.</p>
          * @type {string || null}
          */
         this.InstanceState = null;
 
         /**
-         * Tamper-proof; authorization status: 1 - authorized; 0 - unauthorized
+         * <p>Tamper-proof; authorization status: 1 - authorized; 0 - unauthorized</p>
          * @type {number || null}
          */
         this.LicenseStatus = null;
 
         /**
-         * Project ID
+         * <p>Project ID</p>
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * Whether there is an available asset scanning API: 0 - no; 1 - yes
+         * <p>Whether the asset scanning API is available. 0: No; 1: Yes</p>
          * @type {number || null}
          */
         this.HasAssetScan = null;
 
         /**
-         * Machine Zone Type. CVM - Cloud Virtual Machine; BM: Bare Metal; ECM: Edge Computing Machine; LH: Lightweight Application Server; Other: Hybrid Cloud Zone
+         * <p>Machine zone type. CVM: Cloud Virtual Machine; BM: Blackstone; ECM: Edge Computing Machine; LH: Lighthouse; Other: Hybrid cloud zone</p>
          * @type {string || null}
          */
         this.MachineType = null;
 
         /**
-         * Kernel version
+         * <p>Kernel version</p>
          * @type {string || null}
          */
         this.KernelVersion = null;
 
         /**
-         * Protection version: BASIC_VERSION - Basic Edition; PRO_VERSION - Professional Edition; Flagship - Ultimate Edition; GENERAL_DISCOUNT - Lightweight Edition
+         * <p>Protection edition: BASIC_VERSION: Basic Edition; PRO_VERSION: Pro Edition; Flagship: Ultimate Edition; GENERAL_DISCOUNT: Lighthouse Edition</p>
          * @type {string || null}
          */
         this.ProtectType = null;
 
         /**
-         * Cloud Tag Information
+         * <p>Cloud tag information</p>
          * @type {Array.<Tags> || null}
          */
         this.CloudTags = null;
 
         /**
-         * Whether the host is added within 15 days. 0: Host not added within 15 days. 1: Host added within 15 days.
+         * <p>Whether the host was added within the last 15 days. 0: No; 1: Yes</p>
          * @type {number || null}
          */
         this.IsAddedOnTheFifteen = null;
 
         /**
-         * Host IP List
+         * <p>Host IP list</p>
          * @type {string || null}
          */
         this.IpList = null;
 
         /**
-         * Network
+         * <p>Network</p>
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Additional information
+         * <p>Additional information</p>
          * @type {MachineExtraInfo || null}
          */
         this.MachineExtraInfo = null;
 
         /**
-         * Instance ID
+         * <p>Instance ID.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Remarks
+         * <p>Remarks</p>
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Host security agent version
+         * <p>CWP agent version</p>
          * @type {string || null}
          */
         this.AgentVersion = null;
 
         /**
-         * 
+         * <p>APPID of the machine</p>
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * 
+         * <p>CSC paid edition</p>
          * @type {string || null}
          */
         this.CSIPProtectType = null;
@@ -50941,49 +51088,49 @@ class DescribeLoginTypeGlobalConfResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether anti-uninstall is enabled <li>0 No</li> <li>1 Yes</li> <li>9 Not set, same as 0 means not enabled</li>
+         * <p>Whether uninstall protection is enabled <li>0: No</li> <li>1: Yes</li> <li>9: Not set, equivalent to 0 (disabled)</li></p>
          * @type {number || null}
          */
         this.Enable = null;
 
         /**
-         * Scope <li>0 Selected host</li> <li>1 All hosts</li>
+         * <p>Scope <li>0: Selected hosts</li> <li>1: All hosts</li></p>
          * @type {number || null}
          */
         this.Scope = null;
 
         /**
-         * Selected host configuration count
+         * <p>Number of selected host configurations</p>
          * @type {number || null}
          */
         this.IncludeHostCount = null;
 
         /**
-         * Deselect host configuration count
+         * <p>Number of excluded host configurations</p>
          * @type {number || null}
          */
         this.ExcludeHostCount = null;
 
         /**
-         * Select quuid configuration list
+         * <p>List of selected QUUID configurations</p>
          * @type {Array.<string> || null}
          */
         this.IncludeQuuid = null;
 
         /**
-         * Exclude quuid configuration list
+         * <p>List of excluded QUUID configurations</p>
          * @type {Array.<string> || null}
          */
         this.ExcludeQuuid = null;
 
         /**
-         * Number of Machines Enabled
+         * <p>Number of enabled machines</p>
          * @type {number || null}
          */
         this.EnableCount = null;
 
         /**
-         * Number of inactive machines
+         * <p>Number of disabled machines</p>
          * @type {number || null}
          */
         this.DisableCount = null;
@@ -51431,16 +51578,22 @@ class ExportTasksResponse extends  AbstractModel {
         super();
 
         /**
-         * PENDING: download URL being generated; FINISHED: download URL generated; ERROR: network error or other errors.
+         * <p>PENDING: The download URL is being generated; FINISHED: The download URL has been generated; ERROR: A network error or another exception occurred</p>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Download URL
+         * <p>Download link</p>
          * @type {string || null}
          */
         this.DownloadUrl = null;
+
+        /**
+         * <p>File name.</p>
+         * @type {string || null}
+         */
+        this.FileName = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -51459,6 +51612,7 @@ class ExportTasksResponse extends  AbstractModel {
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -51820,13 +51974,13 @@ class DescribeBanModeResponse extends  AbstractModel {
         super();
 
         /**
-         * Blocking mode. STANDARD_MODE: standard mode; DEEP_MODE: deep mode.
+         * <p>Blocking mode. STANDARD_MODE: standard mode; DEEP_MODE: deep mode.</p>
          * @type {string || null}
          */
         this.Mode = null;
 
         /**
-         * Configuration of the standard blocking mode
+         * <p>Configuration of the standard blocking mode</p>
          * @type {StandardModeConfig || null}
          */
         this.StandardModeConfig = null;
@@ -52614,19 +52768,19 @@ class Filter extends  AbstractModel {
         super();
 
         /**
-         * Name of filter key
+         * <p>Name of filter key.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * One or more filter values
+         * <p>One or more filter values.</p>
          * @type {Array.<string> || null}
          */
         this.Values = null;
 
         /**
-         * Fuzzy search
+         * <p>Fuzzy search</p>
          * @type {boolean || null}
          */
         this.ExactMatch = null;
@@ -57018,7 +57172,7 @@ class DescribeBruteAttackRulesResponse extends  AbstractModel {
         super();
 
         /**
-         * List of rules for blocking brute force cracking
+         * <p>Rules for blocking brute-force attacks</p>
          * @type {Array.<BruteAttackRuleList> || null}
          */
         this.Rules = null;
@@ -57783,13 +57937,13 @@ class DescribeLoginWhiteCombinedListResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number
+         * <p>Total quantity.</p>
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List of allowlists after merge
+         * <p>Merged allowlist</p>
          * @type {Array.<LoginWhiteCombinedInfo> || null}
          */
         this.LoginWhiteCombinedInfos = null;
@@ -57861,31 +58015,31 @@ class DescribeLicenseWhiteConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Ultimate Edition configuration information
+         * <p>Ultimate Edition configuration information</p>
          * @type {VersionWhiteConfig || null}
          */
         this.FlagShip = null;
 
         /**
-         * Pro Edition configuration information
+         * <p>Pro Edition configuration information</p>
          * @type {VersionWhiteConfig || null}
          */
         this.Professional = null;
 
         /**
-         * Lightweight Edition configuration information
+         * <p>Lightweight Edition configuration information</p>
          * @type {VersionWhiteConfig || null}
          */
         this.PrattWhitney = null;
 
         /**
-         * Authorization package configuration message
+         * <p>License package configuration message</p>
          * @type {VersionWhiteConfig || null}
          */
         this.RASP = null;
 
         /**
-         * 
+         * <p>Log analysis configuration information</p>
          * @type {VersionWhiteConfig || null}
          */
         this.LOG = null;
@@ -59204,7 +59358,7 @@ class ModifyBruteAttackRulesRequest extends  AbstractModel {
         super();
 
         /**
-         * Rule of determining brute force cracking
+         * <p>Brute-force attack determination rule</p>
          * @type {Array.<BruteAttackRule> || null}
          */
         this.Rules = null;
@@ -60288,13 +60442,13 @@ class ModifyBanModeRequest extends  AbstractModel {
         super();
 
         /**
-         * Blocking mode. STANDARD_MODE: standard mode; DEEP_MODE: deep mode.
+         * <p>Blocking mode. STANDARD_MODE: standard mode; DEEP_MODE: deep mode.</p>
          * @type {string || null}
          */
         this.Mode = null;
 
         /**
-         * Blocking time. This parameter is valid in standard blocking mode.
+         * <p>Blocking duration, used in standard blocking mode</p>
          * @type {number || null}
          */
         this.Ttl = null;
@@ -60952,151 +61106,151 @@ class DescribeLicenseGeneralResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of authorizations (including those that are isolated, expired, and in other states)
+         * <p>Total number of licenses (including unavailable licenses such as isolated and expired ones)</p>
          * @type {number || null}
          */
         this.LicenseCnt = null;
 
         /**
-         * Number of available authorizations
+         * <p>Available licenses</p>
          * @type {number || null}
          */
         this.AvailableLicenseCnt = null;
 
         /**
-         * Number of available Professional Edition authorizations (including those in postpaid mode)
+         * <p>Number of available Pro Edition licenses (including postpaid licenses)</p>
          * @type {number || null}
          */
         this.AvailableProVersionLicenseCnt = null;
 
         /**
-         * Number of available Ultimate Edition authorizations
+         * <p>Number of available Ultimate Edition licenses</p>
          * @type {number || null}
          */
         this.AvailableFlagshipVersionLicenseCnt = null;
 
         /**
-         * Number of authorizations about to expire (no more than 15 days left)
+         * <p>Number of licenses expiring within 15 days</p>
          * @type {number || null}
          */
         this.NearExpiryLicenseCnt = null;
 
         /**
-         * Number of expired authorizations (excluding deleted ones)
+         * <p>Number of expired licenses (excluding deleted records)</p>
          * @type {number || null}
          */
         this.ExpireLicenseCnt = null;
 
         /**
-         * Automatic upgrade enabling status. True: enabled; false: disabled. Default value: false.
+         * <p>Automatic upgrade switch status. Default value: false. true: enabled; false: disabled.</p>
          * @type {boolean || null}
          */
         this.AutoOpenStatus = null;
 
         /**
-         * PROVERSION_POSTPAY: Pro Edition - postpaid; PROVERSION_PREPAY: Pro edition - prepaid; FLAGSHIP_PREPAY: Ultimate Edition - prepaid.
+         * <p>PROVERSION_POSTPAY: Pro Edition - postpaid; PROVERSION_PREPAY: Pro Edition - prepaid; FLAGSHIP_PREPAY: Ultimate Edition - prepaid.</p>
          * @type {string || null}
          */
         this.ProtectType = null;
 
         /**
-         * Whether automatic upgrade has been enabled before
+         * <p>Whether automatic upgrade has been enabled before</p>
          * @type {boolean || null}
          */
         this.IsOpenStatusHistory = null;
 
         /**
-         * Number of used authorizations
+         * <p>Number of used licenses</p>
          * @type {number || null}
          */
         this.UsedLicenseCnt = null;
 
         /**
-         * Number of authorizations that have not expired
+         * <p>Number of unexpired licenses</p>
          * @type {number || null}
          */
         this.NotExpiredLicenseCnt = null;
 
         /**
-         * Total number of Ultimate Edition authorizations (valid orders)
+         * <p>Total number of Ultimate Edition licenses (valid orders)</p>
          * @type {number || null}
          */
         this.FlagshipVersionLicenseCnt = null;
 
         /**
-         * Total number of Pro Edition authorizations (valid orders)
+         * <p>Total number of Pro Edition licenses (valid orders)</p>
          * @type {number || null}
          */
         this.ProVersionLicenseCnt = null;
 
         /**
-         * Total number of Lite Edition authorizations (those of valid orders)
+         * <p>Lightweight edition total number of licenses (valid order licenses count)</p>
          * @type {number || null}
          */
         this.CwpVersionLicenseCnt = null;
 
         /**
-         * Number of available Inclusive Edition authorizations
+         * <p>Number of available Lightweight Edition licenses</p>
          * @type {number || null}
          */
         this.AvailableLHLicenseCnt = null;
 
         /**
-         * Auto-purchase switch, true for ON, false for OFF
+         * <p>Auto-purchase switch. true: enabled; false: disabled.</p>
          * @type {boolean || null}
          */
         this.AutoRepurchaseSwitch = null;
 
         /**
-         * Is auto-renewal required for auto-purchase orders, true for ON, false for OFF
+         * <p>Whether auto-purchase orders are automatically renewed. true: enabled; false: disabled.</p>
          * @type {boolean || null}
          */
         this.AutoRepurchaseRenewSwitch = null;
 
         /**
-         * Number of terminated orders
+         * <p>Number of terminated orders</p>
          * @type {number || null}
          */
         this.DestroyOrderNum = null;
 
         /**
-         * Whether automatic renewal is enabled for additional purchase. true: enabled; false: disabled.
+         * <p>Auto-renewal switch for auto-purchase. true: enabled; false: disabled.</p>
          * @type {boolean || null}
          */
         this.RepurchaseRenewSwitch = null;
 
         /**
-         * Whether to automatically bind new machines to rasp protection. false indicates disabled, enabled otherwise.
+         * <p>Whether to automatically bind RASP protection to newly added machines. false: disabled; true: enabled.</p>
          * @type {boolean || null}
          */
         this.AutoBindRaspSwitch = null;
 
         /**
-         * Whether to enable automatic addition of machines for rasp protection. false indicates disabled, enabled.
+         * <p>Whether to automatically enable RASP protection for newly added machines. false: disabled; true: enabled.</p>
          * @type {boolean || null}
          */
         this.AutoOpenRaspSwitch = null;
 
         /**
-         * Whether the automatic scaling down switch is on
+         * <p>Whether the auto-downgrade switch is enabled</p>
          * @type {boolean || null}
          */
         this.AutoDowngradeSwitch = null;
 
         /**
-         * 
+         * <p>Number of available AI Protection Edition licenses</p>
          * @type {number || null}
          */
         this.AvailableAISecurityLicenseCnt = null;
 
         /**
-         * 
+         * <p>Total number of AI Protection Edition licenses</p>
          * @type {number || null}
          */
         this.AISecurityVersionLicenseCnt = null;
 
         /**
-         * 
+         * <p>Number of available licenses after combining application protection licenses with Ultimate Edition licenses</p>
          * @type {number || null}
          */
         this.ApplicationAvailableLicenseCnt = null;
@@ -61735,7 +61889,7 @@ class DescribeLicenseWhiteConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Rule name. For example, cwp.
+         * <p>Rule name, for example: cwp</p>
          * @type {string || null}
          */
         this.RuleName = null;
@@ -63773,39 +63927,37 @@ class DescribeLicenseBindListRequest extends  AbstractModel {
         super();
 
         /**
-         * Authorization ID
+         * <p>License ID. The value is the value of the LicenseId parameter under the List object of the DescribeLicenseList API.</p>
          * @type {number || null}
          */
         this.LicenseId = null;
 
         /**
-         * Authorization type
+         * <p>License type</p><p>Valid values:</p><ul><li>0: Pro Edition - pay-as-you-go</li><li>1: Pro Edition - monthly subscription (CWP)</li><li>2: Ultimate Edition - monthly subscription (CWP)</li><li>3: Lightweight Edition - LH monthly subscription</li><li>6: Pro Edition - monthly subscription (CSC)</li><li>7: Ultimate Edition - monthly subscription (CSC)</li></ul>
          * @type {number || null}
          */
         this.LicenseType = null;
 
         /**
-         * Resource ID
+         * <p>Resource ID. The value is the value of the ResourceId parameter under the List object of the DescribeLicenseList API.</p>
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * <li>InstanceID, IP,
-
-and MachineName for fuzzy search</li>
+         * <li>Fuzzy search by InstanceID, IP, or <p>MachineName</p></li>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
 
         /**
-         * Limit number, 10 by default.
+         * <p>The maximum number of entries. Default value: 10.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset. Default value: 0.
+         * <p>Offset. Default value: 0.</p>
          * @type {number || null}
          */
         this.Offset = null;
@@ -65282,13 +65434,13 @@ class DescribeMachinesResponse extends  AbstractModel {
         super();
 
         /**
-         * List of hosts
+         * <p>Host list</p>
          * @type {Array.<Machine> || null}
          */
         this.Machines = null;
 
         /**
-         * Number of hosts
+         * <p>Number of hosts</p>
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -65654,20 +65806,19 @@ class AddLoginWhiteListsRequest extends  AbstractModel {
         super();
 
         /**
-         * Cross-region log-in allowlist entity
+         * <p>Unusual-login allowlist entry</p>
          * @type {HostLoginWhiteObj || null}
          */
         this.HostLoginWhiteObj = null;
 
         /**
-         * Synchronous event processing method:
-"": do not process"All": add all events that match this configuration to the allowlist"Id": add the event corresponding to the event ID to the allowlist
+         * <p>Event sync processing method:<br>"" -- No action<br>"All" -- Add all event records matching this configuration to the allowlist<br>"Id" -- Add the event record corresponding to EventId to the allowlist</p>
          * @type {string || null}
          */
         this.ProcessType = null;
 
         /**
-         * Cross-region log-in event ID. This parameter is required when ProcessType is set to Id.
+         * <p>Unusual-login event ID. This parameter is required when ProcessType is Id.</p>
          * @type {number || null}
          */
         this.EventId = null;
@@ -66363,18 +66514,18 @@ class RansomDefenseBackup extends  AbstractModel {
 }
 
 /**
- * DescribeProVersionStatus response structure.
+ * DescribeMachineInfo request structure.
  * @class
  */
-class DescribeProVersionStatusResponse extends  AbstractModel {
+class DescribeMachineInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * CWP agent `Uuid`.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Uuid = null;
 
     }
 
@@ -66385,7 +66536,7 @@ class DescribeProVersionStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
 
     }
 }
@@ -67285,7 +67436,7 @@ class DescribeReverseShellSystemPolicyConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Product type. 0:CWP (default); 1:CSC</p>
          * @type {number || null}
          */
         this.ProductType = null;
@@ -69892,6 +70043,7 @@ module.exports = {
     UntrustMalwaresResponse: UntrustMalwaresResponse,
     RiskDnsEvent: RiskDnsEvent,
     DescribeAccountStatisticsResponse: DescribeAccountStatisticsResponse,
+    DescribeProVersionStatusResponse: DescribeProVersionStatusResponse,
     DescribeBashEventsInfoNewRequest: DescribeBashEventsInfoNewRequest,
     ScreenTrendsChart: ScreenTrendsChart,
     DescribeBaselineRuleResponse: DescribeBaselineRuleResponse,
@@ -70267,6 +70419,7 @@ module.exports = {
     DescribeBanRegionsResponse: DescribeBanRegionsResponse,
     DescribeLogStorageRecordResponse: DescribeLogStorageRecordResponse,
     DeletePrivilegeEventsResponse: DeletePrivilegeEventsResponse,
+    DescribeMachineInfoResponse: DescribeMachineInfoResponse,
     VulHostTopInfo: VulHostTopInfo,
     OrderModifyObject: OrderModifyObject,
     DescribeRansomDefenseRollBackTaskListResponse: DescribeRansomDefenseRollBackTaskListResponse,
@@ -70690,7 +70843,7 @@ module.exports = {
     DescribeRecommendedProtectCpuRequest: DescribeRecommendedProtectCpuRequest,
     DescribeABTestConfigResponse: DescribeABTestConfigResponse,
     RansomDefenseBackup: RansomDefenseBackup,
-    DescribeProVersionStatusResponse: DescribeProVersionStatusResponse,
+    DescribeMachineInfoRequest: DescribeMachineInfoRequest,
     SearchTemplate: SearchTemplate,
     DescribeVulFixStatusResponse: DescribeVulFixStatusResponse,
     DeleteMalwareWhiteListRequest: DeleteMalwareWhiteListRequest,

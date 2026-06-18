@@ -393,6 +393,7 @@ const DescribeAssetAppListRequest = models.DescribeAssetAppListRequest;
 const UntrustMalwaresResponse = models.UntrustMalwaresResponse;
 const RiskDnsEvent = models.RiskDnsEvent;
 const DescribeAccountStatisticsResponse = models.DescribeAccountStatisticsResponse;
+const DescribeProVersionStatusResponse = models.DescribeProVersionStatusResponse;
 const DescribeBashEventsInfoNewRequest = models.DescribeBashEventsInfoNewRequest;
 const ScreenTrendsChart = models.ScreenTrendsChart;
 const DescribeBaselineRuleResponse = models.DescribeBaselineRuleResponse;
@@ -768,6 +769,7 @@ const DescribeBaselinePolicyListResponse = models.DescribeBaselinePolicyListResp
 const DescribeBanRegionsResponse = models.DescribeBanRegionsResponse;
 const DescribeLogStorageRecordResponse = models.DescribeLogStorageRecordResponse;
 const DeletePrivilegeEventsResponse = models.DeletePrivilegeEventsResponse;
+const DescribeMachineInfoResponse = models.DescribeMachineInfoResponse;
 const VulHostTopInfo = models.VulHostTopInfo;
 const OrderModifyObject = models.OrderModifyObject;
 const DescribeRansomDefenseRollBackTaskListResponse = models.DescribeRansomDefenseRollBackTaskListResponse;
@@ -1191,7 +1193,7 @@ const ModifyRaspRulesResponse = models.ModifyRaspRulesResponse;
 const DescribeRecommendedProtectCpuRequest = models.DescribeRecommendedProtectCpuRequest;
 const DescribeABTestConfigResponse = models.DescribeABTestConfigResponse;
 const RansomDefenseBackup = models.RansomDefenseBackup;
-const DescribeProVersionStatusResponse = models.DescribeProVersionStatusResponse;
+const DescribeMachineInfoRequest = models.DescribeMachineInfoRequest;
 const SearchTemplate = models.SearchTemplate;
 const DescribeVulFixStatusResponse = models.DescribeVulFixStatusResponse;
 const DeleteMalwareWhiteListRequest = models.DeleteMalwareWhiteListRequest;
@@ -2351,6 +2353,17 @@ class CwpClient extends AbstractClient {
     DescribeMemShellRules(req, cb) {
         let resp = new DescribeMemShellRulesResponse();
         this.request("DescribeMemShellRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get server details.
+     * @param {DescribeMachineInfoRequest} req
+     * @param {function(string, DescribeMachineInfoResponse):void} cb
+     * @public
+     */
+    DescribeMachineInfo(req, cb) {
+        let resp = new DescribeMachineInfoResponse();
+        this.request("DescribeMachineInfo", req, resp, cb);
     }
 
     /**

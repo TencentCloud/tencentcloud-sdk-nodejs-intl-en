@@ -193,7 +193,7 @@ It can contain up to 150 Chinese characters (a full-width punctuation as a Chine
         this.VoiceType = null;
 
         /**
-         * 
+         * Instant Voice Clone Voice ID. Required when using Instant Voice Clone voices.
          * @type {string || null}
          */
         this.FastVoiceType = null;
@@ -229,13 +229,13 @@ It can contain up to 150 Chinese characters (a full-width punctuation as a Chine
         this.SegmentRate = null;
 
         /**
-         * 
+         * Controls the emotion of synthesized speech. This parameter is supported only by multi-emotion voices. Valid values: neutral, sad, happy, angry, fear, news, story, radio, poetry, call, sajiao, disgusted, amaze, peaceful, exciting, aojiao, jieshuo. <br>Example value: neutral.
          * @type {string || null}
          */
         this.EmotionCategory = null;
 
         /**
-         * 
+         * Controls the intensity of emotion in synthesized speech. Valid values: [50, 200]. Default: 100. Takes effect only when EmotionCategoryis specified.
          * @type {number || null}
          */
         this.EmotionIntensity = null;

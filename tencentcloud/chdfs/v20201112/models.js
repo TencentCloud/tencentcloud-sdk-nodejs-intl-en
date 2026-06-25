@@ -1093,12 +1093,6 @@ class CreateFileSystemRequest extends  AbstractModel {
         this.FileSystemName = null;
 
         /**
-         * File system capacity (in bytes), which can range from 1 GB to 1 PB and must be an integer multiple of 1 GB
-         * @type {number || null}
-         */
-        this.CapacityQuota = null;
-
-        /**
          * Whether to verify POSIX ACL
          * @type {boolean || null}
          */
@@ -1109,6 +1103,12 @@ class CreateFileSystemRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Description = null;
+
+        /**
+         * File system capacity (in bytes), which can range from 1 GB to 1 PB and must be an integer multiple of 1 GB
+         * @type {number || null}
+         */
+        this.CapacityQuota = null;
 
         /**
          * List of superuser names, which is an empty array by default
@@ -1156,9 +1156,9 @@ class CreateFileSystemRequest extends  AbstractModel {
             return;
         }
         this.FileSystemName = 'FileSystemName' in params ? params.FileSystemName : null;
-        this.CapacityQuota = 'CapacityQuota' in params ? params.CapacityQuota : null;
         this.PosixAcl = 'PosixAcl' in params ? params.PosixAcl : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.CapacityQuota = 'CapacityQuota' in params ? params.CapacityQuota : null;
         this.SuperUsers = 'SuperUsers' in params ? params.SuperUsers : null;
         this.RootInodeUser = 'RootInodeUser' in params ? params.RootInodeUser : null;
         this.RootInodeGroup = 'RootInodeGroup' in params ? params.RootInodeGroup : null;
@@ -2055,6 +2055,12 @@ class DescribeFileSystemsRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FileSystemIdMarker = null;
+
     }
 
     /**
@@ -2064,6 +2070,7 @@ class DescribeFileSystemsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.FileSystemIdMarker = 'FileSystemIdMarker' in params ? params.FileSystemIdMarker : null;
 
     }
 }

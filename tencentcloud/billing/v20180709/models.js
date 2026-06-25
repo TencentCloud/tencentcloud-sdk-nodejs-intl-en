@@ -7300,7 +7300,7 @@ class BillDetail extends  AbstractModel {
         this.ProductCodeName = null;
 
         /**
-         * Billing mode, which can be monthly subscription or pay-as-you-go.
+         * Billing mode, which can be yearly/monthly subscription or pay-as-you-go.
          * @type {string || null}
          */
         this.PayModeName = null;
@@ -7336,13 +7336,13 @@ class BillDetail extends  AbstractModel {
         this.ResourceName = null;
 
         /**
-         * Transaction type, which can be monthly subscription purchase, monthly subscription renewal, or pay-as-you-go deduction.
+         * Transaction type, which can be yearly/monthly subscription purchase, yearly/monthly subscription renewal, or pay-as-you-go deduction.
          * @type {string || null}
          */
         this.ActionTypeName = null;
 
         /**
-         * Order ID: The sub-order number corresponding to the monthly subscription mode. In the postpaid billing model, the bill amount does not exist as an order concept, and this parameter can be ignored.
+         * Order ID: The sub-order number corresponding to the yearly/monthly subscription mode. In the postpaid billing model, the bill amount does not exist as an order concept, and this parameter can be ignored.
 
          * @type {string || null}
          */
@@ -12913,7 +12913,7 @@ class PayModeSummaryOverviewItem extends  AbstractModel {
         this.PayMode = null;
 
         /**
-         * Billing mode, which can be monthly subscription or pay-as-you-go.
+         * Billing mode, which can be yearly/monthly subscription or pay-as-you-go.
          * @type {string || null}
          */
         this.PayModeName = null;
@@ -12931,13 +12931,13 @@ class PayModeSummaryOverviewItem extends  AbstractModel {
         this.RealTotalCost = null;
 
         /**
-         * Cash credit: The amount paid from the user’s cash balance
+         * Cash credit: The amount paid from the user's cash balance
          * @type {string || null}
          */
         this.CashPayAmount = null;
 
         /**
-         * Free credit: The amount paid with the user’s free credit
+         * Free credit: The amount paid with the user's free credit
          * @type {string || null}
          */
         this.IncentivePayAmount = null;
@@ -12949,7 +12949,7 @@ class PayModeSummaryOverviewItem extends  AbstractModel {
         this.VoucherPayAmount = null;
 
         /**
-         * Commission credit: The amount paid with the user’s commission credit.
+         * Commission credit: The amount paid with the user's commission credit.
          * @type {string || null}
          */
         this.TransferPayAmount = null;
@@ -16905,7 +16905,7 @@ class BillResourceSummary extends  AbstractModel {
         this.ProductCodeName = null;
 
         /**
-         * Billing mode, which can be monthly subscription or pay-as-you-go.
+         * Billing mode, which can be yearly/monthly subscription or pay-as-you-go.
          * @type {string || null}
          */
         this.PayModeName = null;
@@ -16941,13 +16941,13 @@ class BillResourceSummary extends  AbstractModel {
         this.ResourceName = null;
 
         /**
-         * Transaction type, which can be monthly subscription purchase, monthly subscription renewal, or pay-as-you-go deduction.
+         * Transaction type, which can be yearly/monthly subscription purchase, yearly/monthly subscription renewal, or pay-as-you-go deduction.
          * @type {string || null}
          */
         this.ActionTypeName = null;
 
         /**
-         * Order ID: The order number for a monthly subscription purchase
+         * Order ID: The order number for a yearly/monthly subscription purchase
          * @type {string || null}
          */
         this.OrderId = null;

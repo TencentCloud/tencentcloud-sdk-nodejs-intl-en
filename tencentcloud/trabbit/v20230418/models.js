@@ -95,6 +95,41 @@ class DeleteRabbitMQServerlessPermissionResponse extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class RabbitMQServerlessKeyValuePair extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * Rabbitmq binding relationship list member.
  * @class
  */
@@ -1909,6 +1944,36 @@ class DescribeRabbitMQServerlessConnectionRequest extends  AbstractModel {
          */
         this.VirtualHost = null;
 
+        /**
+         * Sort by which field. Supported options: channel (channel count), incoming_bytes (inbound traffic size), outgoing_bytes (outbound traffic size)
+         * @type {string || null}
+         */
+        this.SortElement = null;
+
+        /**
+         * Sort order: ASC, DESC
+         * @type {string || null}
+         */
+        this.SortType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Name = null;
+
     }
 
     /**
@@ -1920,6 +1985,11 @@ class DescribeRabbitMQServerlessConnectionRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.SortElement = 'SortElement' in params ? params.SortElement : null;
+        this.SortType = 'SortType' in params ? params.SortType : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -3410,6 +3480,12 @@ class CreateRabbitMQServerlessBindingRequest extends  AbstractModel {
          */
         this.RoutingKey = null;
 
+        /**
+         * 
+         * @type {Array.<RabbitMQServerlessKeyValuePair> || null}
+         */
+        this.Arguments = null;
+
     }
 
     /**
@@ -3425,6 +3501,15 @@ class CreateRabbitMQServerlessBindingRequest extends  AbstractModel {
         this.DestinationType = 'DestinationType' in params ? params.DestinationType : null;
         this.Destination = 'Destination' in params ? params.Destination : null;
         this.RoutingKey = 'RoutingKey' in params ? params.RoutingKey : null;
+
+        if (params.Arguments) {
+            this.Arguments = new Array();
+            for (let z in params.Arguments) {
+                let obj = new RabbitMQServerlessKeyValuePair();
+                obj.deserialize(params.Arguments[z]);
+                this.Arguments.push(obj);
+            }
+        }
 
     }
 }
@@ -4909,6 +4994,7 @@ class ModifyRabbitMQServerlessQueueRequest extends  AbstractModel {
 module.exports = {
     DescribeRabbitMQServerlessConnectionResponse: DescribeRabbitMQServerlessConnectionResponse,
     DeleteRabbitMQServerlessPermissionResponse: DeleteRabbitMQServerlessPermissionResponse,
+    RabbitMQServerlessKeyValuePair: RabbitMQServerlessKeyValuePair,
     RabbitMQBindingListInfo: RabbitMQBindingListInfo,
     ModifyRabbitMQServerlessUserResponse: ModifyRabbitMQServerlessUserResponse,
     CreateRabbitMQServerlessVirtualHostRequest: CreateRabbitMQServerlessVirtualHostRequest,

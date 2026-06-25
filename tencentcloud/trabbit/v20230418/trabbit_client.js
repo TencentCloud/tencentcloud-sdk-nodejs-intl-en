@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeRabbitMQServerlessConnectionResponse = models.DescribeRabbitMQServerlessConnectionResponse;
 const DeleteRabbitMQServerlessPermissionResponse = models.DeleteRabbitMQServerlessPermissionResponse;
+const RabbitMQServerlessKeyValuePair = models.RabbitMQServerlessKeyValuePair;
 const RabbitMQBindingListInfo = models.RabbitMQBindingListInfo;
 const ModifyRabbitMQServerlessUserResponse = models.ModifyRabbitMQServerlessUserResponse;
 const CreateRabbitMQServerlessVirtualHostRequest = models.CreateRabbitMQServerlessVirtualHostRequest;

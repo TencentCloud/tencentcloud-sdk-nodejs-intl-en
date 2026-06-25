@@ -4377,13 +4377,13 @@ class DescribeBasicDeviceStatusResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * 
+         * Name of the domain asset.
          * @type {Array.<KeyValue> || null}
          */
         this.CLBData = null;
 
         /**
-         * 
+         * Status of the CNAME WAF resource.
          * @type {Array.<KeyValue> || null}
          */
         this.CnameWafData = null;
@@ -5721,25 +5721,25 @@ class DescribeBasicDeviceStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * List of IP resources
+         * List of IP resources.
          * @type {Array.<string> || null}
          */
         this.IpList = null;
 
         /**
-         * Pass id for domain-bound resources
+         * List of domain asset IDs.
          * @type {Array.<string> || null}
          */
         this.IdList = null;
 
         /**
-         * region name
+         * Region name for filtering.
          * @type {number || null}
          */
         this.FilterRegion = null;
 
         /**
-         * CNAME WAF resource
+         * List of CNAME WAF resource IDs.
          * @type {Array.<string> || null}
          */
         this.CnameWafIdList = null;

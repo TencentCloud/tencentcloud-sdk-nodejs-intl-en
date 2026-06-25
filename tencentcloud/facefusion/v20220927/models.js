@@ -268,7 +268,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Facial Information of Inappropriate Content Detection in Face Fusion
  * @class
  */
 class FuseFaceReviewDetail extends  AbstractModel {
@@ -276,25 +276,31 @@ class FuseFaceReviewDetail extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Reserved field
          * @type {string || null}
          */
         this.Field = null;
 
         /**
-         * 
+         * Label Names Matched by Content Moderation
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 
+         * Confidence score of the detection label. A higher score means a greater likelihood of violations.
+0-70: Suggestion = PASS
+70-80: Suggestion = REVIEW
+80-100: Suggestion = BLOCK
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 
+         * Moderation Conclusion for Detection Scenarios
+PASS: Normal
+REVIEW: Suspicious
+BLOCK: Violation
          * @type {string || null}
          */
         this.Suggestion = null;
@@ -497,7 +503,7 @@ Width and height are no less than 30.
 }
 
 /**
- * 
+ * Face Fusion Inappropriate Content Detection Response Parameter item
  * @class
  */
 class FuseFaceReviewResult extends  AbstractModel {
@@ -505,37 +511,37 @@ class FuseFaceReviewResult extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Reserved field
          * @type {string || null}
          */
         this.Category = null;
 
         /**
-         * 
+         * Status code. 0 indicates successful processing; other values indicate failure.
          * @type {string || null}
          */
         this.Code = null;
 
         /**
-         * 
+         * Corresponding Status Code Description
          * @type {string || null}
          */
         this.CodeDescription = null;
 
         /**
-         * 
+         * Reserved field
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 
+         * Reserved field
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * 
+         * Detailed Moderation Content
          * @type {Array.<FuseFaceReviewDetail> || null}
          */
         this.DetailSet = null;

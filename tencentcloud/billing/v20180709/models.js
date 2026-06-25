@@ -7780,16 +7780,15 @@ class Deal extends  AbstractModel {
 
         /**
          * Transaction type
-
 Modify network mode adjust bandwidth mode.
 Adjust bandwidth size.
-`Refund`: refund.
+Refund: refund.
 downgrade.
 upgrade configuration.
 renew.
 purchase.
-preMoveOut monthly subscription resource migration out.
-preMoveIn specifies the monthly subscription resources to migrate.
+preMoveOut yearly/monthly subscription resource migration out.
+preMoveIn specifies the yearly/monthly subscription resources to migrate.
 preToPost specifies the prepaid to postpaid conversion.
 postMoveOut specifies the pay-as-you-go resources to be migrated out.
 postMoveIn specifies the pay-as-you-go resources for inbound migration.
@@ -15844,7 +15843,7 @@ class DescribeDealsByCondRequest extends  AbstractModel {
 
         /**
          * Start time 
-Example :2016-01-01 00:00:00
+Example :2016-01-01 00:00:00.
          * @type {string || null}
          */
         this.StartTime = null;
@@ -15876,11 +15875,11 @@ Status of the order
 2: paid 
 3: shipment in progress
 4: shipped
-5`: Shipment Failed
-6`: Refunded
-7`: Ticket closed
-8`: Order expired
-9`: Order invalid
+5: Shipment Failed
+6: Refunded
+7: Ticket closed
+8: Order expired
+9: Order invalid
 10: product invalidated
 11: third-party payment refused
 12: payment in process

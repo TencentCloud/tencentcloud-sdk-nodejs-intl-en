@@ -6945,6 +6945,18 @@ class DescribeMNPListData extends  AbstractModel {
          */
         this.EffectMNPVersion = null;
 
+        /**
+         * Team ID.
+         * @type {string || null}
+         */
+        this.TeamId = null;
+
+        /**
+         * Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.
+         * @type {number || null}
+         */
+        this.TeamTypeId = null;
+
     }
 
     /**
@@ -6969,6 +6981,8 @@ class DescribeMNPListData extends  AbstractModel {
         this.EffectStatus = 'EffectStatus' in params ? params.EffectStatus : null;
         this.EffectMNPVersionId = 'EffectMNPVersionId' in params ? params.EffectMNPVersionId : null;
         this.EffectMNPVersion = 'EffectMNPVersion' in params ? params.EffectMNPVersion : null;
+        this.TeamId = 'TeamId' in params ? params.TeamId : null;
+        this.TeamTypeId = 'TeamTypeId' in params ? params.TeamTypeId : null;
 
     }
 }
@@ -9095,6 +9109,12 @@ class DescribeMNPManagerDetailData extends  AbstractModel {
          */
         this.I18nList = null;
 
+        /**
+         * Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.
+         * @type {number || null}
+         */
+        this.TeamTypeId = null;
+
     }
 
     /**
@@ -9125,6 +9145,7 @@ class DescribeMNPManagerDetailData extends  AbstractModel {
                 this.I18nList.push(obj);
             }
         }
+        this.TeamTypeId = 'TeamTypeId' in params ? params.TeamTypeId : null;
 
     }
 }
@@ -11634,6 +11655,18 @@ class DescribeMNGListData extends  AbstractModel {
          */
         this.EffectMNPVersion = null;
 
+        /**
+         * Team ID.
+         * @type {string || null}
+         */
+        this.TeamId = null;
+
+        /**
+         * Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.
+         * @type {number || null}
+         */
+        this.TeamTypeId = null;
+
     }
 
     /**
@@ -11658,6 +11691,8 @@ class DescribeMNGListData extends  AbstractModel {
         this.EffectStatus = 'EffectStatus' in params ? params.EffectStatus : null;
         this.EffectMNPVersionId = 'EffectMNPVersionId' in params ? params.EffectMNPVersionId : null;
         this.EffectMNPVersion = 'EffectMNPVersion' in params ? params.EffectMNPVersion : null;
+        this.TeamId = 'TeamId' in params ? params.TeamId : null;
+        this.TeamTypeId = 'TeamTypeId' in params ? params.TeamTypeId : null;
 
     }
 }
@@ -17061,6 +17096,24 @@ class DescribeApplicationMNPInfoResp extends  AbstractModel {
          */
         this.CategoryList = null;
 
+        /**
+         * Team ID.
+         * @type {string || null}
+         */
+        this.TeamId = null;
+
+        /**
+         * Team name.
+         * @type {string || null}
+         */
+        this.TeamName = null;
+
+        /**
+         * Team type ID.
+         * @type {number || null}
+         */
+        this.TeamTypeId = null;
+
     }
 
     /**
@@ -17089,6 +17142,9 @@ class DescribeApplicationMNPInfoResp extends  AbstractModel {
                 this.CategoryList.push(obj);
             }
         }
+        this.TeamId = 'TeamId' in params ? params.TeamId : null;
+        this.TeamName = 'TeamName' in params ? params.TeamName : null;
+        this.TeamTypeId = 'TeamTypeId' in params ? params.TeamTypeId : null;
 
     }
 }
@@ -18395,6 +18451,12 @@ class DescribeMNGManagerDetailData extends  AbstractModel {
          */
         this.I18nList = null;
 
+        /**
+         * Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.
+         * @type {number || null}
+         */
+        this.TeamTypeId = null;
+
     }
 
     /**
@@ -18425,6 +18487,7 @@ class DescribeMNGManagerDetailData extends  AbstractModel {
                 this.I18nList.push(obj);
             }
         }
+        this.TeamTypeId = 'TeamTypeId' in params ? params.TeamTypeId : null;
 
     }
 }

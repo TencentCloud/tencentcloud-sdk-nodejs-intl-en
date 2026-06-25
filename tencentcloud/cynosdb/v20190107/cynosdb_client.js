@@ -34,6 +34,7 @@ const SearchClusterTablesRequest = models.SearchClusterTablesRequest;
 const DescribeMaintainPeriodRequest = models.DescribeMaintainPeriodRequest;
 const ModifyBackupDownloadRestrictionResponse = models.ModifyBackupDownloadRestrictionResponse;
 const WillDeleteItem = models.WillDeleteItem;
+const TransferClusterZoneResponse = models.TransferClusterZoneResponse;
 const DescribeClusterDatabaseTablesRequest = models.DescribeClusterDatabaseTablesRequest;
 const ModifyClusterBinlogRedoLogAutoCopyVaultRequest = models.ModifyClusterBinlogRedoLogAutoCopyVaultRequest;
 const DescribeClusterParamsResponse = models.DescribeClusterParamsResponse;
@@ -224,7 +225,7 @@ const SwitchClusterVpcResponse = models.SwitchClusterVpcResponse;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const Tag = models.Tag;
 const RuleTemplateInfo = models.RuleTemplateInfo;
-const TransferClusterZoneResponse = models.TransferClusterZoneResponse;
+const StopCLSDeliveryResponse = models.StopCLSDeliveryResponse;
 const PauseServerlessResponse = models.PauseServerlessResponse;
 const DescribeInstanceDetailResponse = models.DescribeInstanceDetailResponse;
 const RestartLibraDBInstanceRequest = models.RestartLibraDBInstanceRequest;
@@ -251,7 +252,7 @@ const DbInfo = models.DbInfo;
 const DescribeBackupDownloadUrlRequest = models.DescribeBackupDownloadUrlRequest;
 const InstanceAuditStatus = models.InstanceAuditStatus;
 const DescribeVaultsResponse = models.DescribeVaultsResponse;
-const StopCLSDeliveryResponse = models.StopCLSDeliveryResponse;
+const DescribeClusterInstanceGroupsResponse = models.DescribeClusterInstanceGroupsResponse;
 const CreateLibraDBClusterAccountsResponse = models.CreateLibraDBClusterAccountsResponse;
 const MigrateTableItem = models.MigrateTableItem;
 const CreateProxyEndPointResponse = models.CreateProxyEndPointResponse;
@@ -496,6 +497,7 @@ const ModifyClusterBinlogRedoLogAutoCopyVaultResponse = models.ModifyClusterBinl
 const PackagePriority = models.PackagePriority;
 const DescribeInstancesWithinSameClusterRequest = models.DescribeInstancesWithinSameClusterRequest;
 const AddLibraDBInstancesRequest = models.AddLibraDBInstancesRequest;
+const ModifyBinlogConfigResponse = models.ModifyBinlogConfigResponse;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const SetRenewFlagRequest = models.SetRenewFlagRequest;
 const DescribeServerlessInstanceSpecsRequest = models.DescribeServerlessInstanceSpecsRequest;
@@ -527,6 +529,7 @@ const ParamDetail = models.ParamDetail;
 const OfflineClusterRequest = models.OfflineClusterRequest;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const CreateLibraDBClusterAccountsRequest = models.CreateLibraDBClusterAccountsRequest;
+const DescribeClusterInstanceGroupsRequest = models.DescribeClusterInstanceGroupsRequest;
 const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
 const ModifyResourcePackageNameResponse = models.ModifyResourcePackageNameResponse;
 const DescribeBackupListRequest = models.DescribeBackupListRequest;
@@ -599,7 +602,7 @@ const DescribeInstanceSlowQueriesRequest = models.DescribeInstanceSlowQueriesReq
 const DescribeIsolatedInstancesResponse = models.DescribeIsolatedInstancesResponse;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const LogicBackupConfigInfo = models.LogicBackupConfigInfo;
-const ModifyBinlogConfigResponse = models.ModifyBinlogConfigResponse;
+const CynosdbInstanceGroup = models.CynosdbInstanceGroup;
 const ActivateLibraDBInstanceRequest = models.ActivateLibraDBInstanceRequest;
 const ExportResourcePackageDeductDetailsRequest = models.ExportResourcePackageDeductDetailsRequest;
 const ModifiableInfo = models.ModifiableInfo;
@@ -2953,6 +2956,17 @@ class CynosdbClient extends AbstractClient {
     CreateLibraDBClusterAccounts(req, cb) {
         let resp = new CreateLibraDBClusterAccountsResponse();
         this.request("CreateLibraDBClusterAccounts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query instance group info.
+     * @param {DescribeClusterInstanceGroupsRequest} req
+     * @param {function(string, DescribeClusterInstanceGroupsResponse):void} cb
+     * @public
+     */
+    DescribeClusterInstanceGroups(req, cb) {
+        let resp = new DescribeClusterInstanceGroupsResponse();
+        this.request("DescribeClusterInstanceGroups", req, resp, cb);
     }
 
     /**

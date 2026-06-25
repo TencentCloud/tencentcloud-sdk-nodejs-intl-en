@@ -30,17 +30,22 @@ const PageScreenListVO = models.PageScreenListVO;
 const DescribeSourceFieldListResponse = models.DescribeSourceFieldListResponse;
 const UserResourceDTO = models.UserResourceDTO;
 const ModifyDatasourceCloudResponse = models.ModifyDatasourceCloudResponse;
+const ParamCreateDTO = models.ParamCreateDTO;
+const EditCorpTagResponse = models.EditCorpTagResponse;
 const CreateUserRoleResponse = models.CreateUserRoleResponse;
 const ApplyEmbedTokenInfo = models.ApplyEmbedTokenInfo;
 const Project = models.Project;
 const ExportScreenPageRequest = models.ExportScreenPageRequest;
 const JoinSourceTable = models.JoinSourceTable;
+const ModifyUserTagRequest = models.ModifyUserTagRequest;
+const CreateTagTableVO = models.CreateTagTableVO;
 const CreateUserRoleProjectRequest = models.CreateUserRoleProjectRequest;
 const WidgetVO = models.WidgetVO;
 const CreateDatasourceResponse = models.CreateDatasourceResponse;
 const TableColumnListData = models.TableColumnListData;
 const DeleteDatasourceResponse = models.DeleteDatasourceResponse;
 const CreateProjectRequest = models.CreateProjectRequest;
+const ModifyTagTableResponse = models.ModifyTagTableResponse;
 const ApplyEmbedIntervalRequest = models.ApplyEmbedIntervalRequest;
 const ModifyResourceUserResponse = models.ModifyResourceUserResponse;
 const CreateDataTableRequest = models.CreateDataTableRequest;
@@ -50,6 +55,7 @@ const DescribeProjectInfoRequest = models.DescribeProjectInfoRequest;
 const ModifyUserRoleRequest = models.ModifyUserRoleRequest;
 const CreateUserRoleRequest = models.CreateUserRoleRequest;
 const CreateEmbedTokenRequest = models.CreateEmbedTokenRequest;
+const CreateCorpTagRequest = models.CreateCorpTagRequest;
 const ModifyDatasourceRequest = models.ModifyDatasourceRequest;
 const CreatePermissionRanksResponse = models.CreatePermissionRanksResponse;
 const CreateDataTableResponse = models.CreateDataTableResponse;
@@ -62,6 +68,7 @@ const UserInfo = models.UserInfo;
 const UserIdAndUserName = models.UserIdAndUserName;
 const EmptyValue = models.EmptyValue;
 const DescribeUserRoleListResponse = models.DescribeUserRoleListResponse;
+const CreateCorpTagResponse = models.CreateCorpTagResponse;
 const RowColumnTagValue = models.RowColumnTagValue;
 const UserRoleListDataRoleInfo = models.UserRoleListDataRoleInfo;
 const EmbedTokenInfo = models.EmbedTokenInfo;
@@ -69,6 +76,7 @@ const JoinRelationField = models.JoinRelationField;
 const DescribeProjectListResponse = models.DescribeProjectListResponse;
 const TableColumn = models.TableColumn;
 const DatasourceInfoData = models.DatasourceInfoData;
+const UserTagInfo = models.UserTagInfo;
 const DescribePageWidgetListRequest = models.DescribePageWidgetListRequest;
 const DescribeUserRoleProjectListRequest = models.DescribeUserRoleProjectListRequest;
 const BaseStateAction = models.BaseStateAction;
@@ -80,11 +88,13 @@ const CreateUserRoleProjectResponse = models.CreateUserRoleProjectResponse;
 const DeleteUserRoleProjectRequest = models.DeleteUserRoleProjectRequest;
 const DescribeUserRoleListRequest = models.DescribeUserRoleListRequest;
 const ClearEmbedTokenResponse = models.ClearEmbedTokenResponse;
-const ParamCreateDTO = models.ParamCreateDTO;
+const CreateTagTableRequest = models.CreateTagTableRequest;
+const ModifyTagTableRequest = models.ModifyTagTableRequest;
 const DescribeSourceFieldListRequest = models.DescribeSourceFieldListRequest;
 const EmptyValueConfig = models.EmptyValueConfig;
 const DeleteUserRoleProjectResponse = models.DeleteUserRoleProjectResponse;
 const FieldRemarkDTO = models.FieldRemarkDTO;
+const ModifyTagTableVO = models.ModifyTagTableVO;
 const IdDTO = models.IdDTO;
 const ModifyDatasourceCloudRequest = models.ModifyDatasourceCloudRequest;
 const CreateDatasourceCloudRequest = models.CreateDatasourceCloudRequest;
@@ -94,9 +104,11 @@ const DescribeUserProjectListResponse = models.DescribeUserProjectListResponse;
 const CreateDatasourceRequest = models.CreateDatasourceRequest;
 const DeleteDatasourceRequest = models.DeleteDatasourceRequest;
 const WidgetListVO = models.WidgetListVO;
+const ModifyUserTagResponse = models.ModifyUserTagResponse;
 const ModifyDatasourceResponse = models.ModifyDatasourceResponse;
 const DescribePageWidgetListResponse = models.DescribePageWidgetListResponse;
 const CreateDatasourceCloudResponse = models.CreateDatasourceCloudResponse;
+const CreateTagTableResponse = models.CreateTagTableResponse;
 const ProjectConfigList = models.ProjectConfigList;
 const PermissionGroup = models.PermissionGroup;
 const ApiDatasourceConfig = models.ApiDatasourceConfig;
@@ -111,12 +123,14 @@ const ModifyResourceUserGroupResourceResponse = models.ModifyResourceUserGroupRe
 const DescribeProjectListRequest = models.DescribeProjectListRequest;
 const UserRoleListDataUserRoleInfo = models.UserRoleListDataUserRoleInfo;
 const DatasourceInfo = models.DatasourceInfo;
+const EditTagVO = models.EditTagVO;
 const ProjectListData = models.ProjectListData;
 const CreateEmbedTokenResponse = models.CreateEmbedTokenResponse;
 const DescribeDatasourceListRequest = models.DescribeDatasourceListRequest;
 const FrequencyConfig = models.FrequencyConfig;
 const DescribeDatasourceListResponse = models.DescribeDatasourceListResponse;
 const ErrorInfo = models.ErrorInfo;
+const EditCorpTagRequest = models.EditCorpTagRequest;
 const PermissionComponent = models.PermissionComponent;
 
 
@@ -186,6 +200,17 @@ class BiClient extends AbstractClient {
     }
 
     /**
+     * Create a tag table
+     * @param {CreateTagTableRequest} req
+     * @param {function(string, CreateTagTableResponse):void} cb
+     * @public
+     */
+    CreateTagTable(req, cb) {
+        let resp = new CreateTagTableResponse();
+        this.request("CreateTagTable", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a project.
      * @param {CreateProjectRequest} req
      * @param {function(string, CreateProjectResponse):void} cb
@@ -194,6 +219,17 @@ class BiClient extends AbstractClient {
     CreateProject(req, cb) {
         let resp = new CreateProjectResponse();
         this.request("CreateProject", req, resp, cb);
+    }
+
+    /**
+     * Edit business tags (async)
+     * @param {EditCorpTagRequest} req
+     * @param {function(string, EditCorpTagResponse):void} cb
+     * @public
+     */
+    EditCorpTag(req, cb) {
+        let resp = new EditCorpTagResponse();
+        this.request("EditCorpTag", req, resp, cb);
     }
 
     /**
@@ -307,6 +343,17 @@ class BiClient extends AbstractClient {
     }
 
     /**
+     * Create a business tag
+     * @param {CreateCorpTagRequest} req
+     * @param {function(string, CreateCorpTagResponse):void} cb
+     * @public
+     */
+    CreateCorpTag(req, cb) {
+        let resp = new CreateCorpTagResponse();
+        this.request("CreateCorpTag", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain the user role list in the project.
      * @param {DescribeUserRoleProjectListRequest} req
      * @param {function(string, DescribeUserRoleProjectListResponse):void} cb
@@ -384,6 +431,17 @@ class BiClient extends AbstractClient {
     }
 
     /**
+     * Edit tag table
+     * @param {ModifyTagTableRequest} req
+     * @param {function(string, ModifyTagTableResponse):void} cb
+     * @public
+     */
+    ModifyTagTable(req, cb) {
+        let resp = new ModifyTagTableResponse();
+        this.request("ModifyTagTable", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a user role in the project.
      * @param {DeleteUserRoleProjectRequest} req
      * @param {function(string, DeleteUserRoleProjectResponse):void} cb
@@ -403,6 +461,17 @@ class BiClient extends AbstractClient {
     ApplyEmbedInterval(req, cb) {
         let resp = new ApplyEmbedIntervalResponse();
         this.request("ApplyEmbedInterval", req, resp, cb);
+    }
+
+    /**
+     * Modify user tag value
+     * @param {ModifyUserTagRequest} req
+     * @param {function(string, ModifyUserTagResponse):void} cb
+     * @public
+     */
+    ModifyUserTag(req, cb) {
+        let resp = new ModifyUserTagResponse();
+        this.request("ModifyUserTag", req, resp, cb);
     }
 
     /**

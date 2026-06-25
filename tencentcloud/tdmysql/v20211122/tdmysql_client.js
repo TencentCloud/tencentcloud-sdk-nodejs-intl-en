@@ -33,6 +33,7 @@ const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse
 const InstanceFilter = models.InstanceFilter;
 const Explain = models.Explain;
 const BackupStatisticsModel = models.BackupStatisticsModel;
+const ResetUsersPasswordRequest = models.ResetUsersPasswordRequest;
 const BackupPolicyModelOutPut = models.BackupPolicyModelOutPut;
 const ModifyInstanceSSLStatusRequest = models.ModifyInstanceSSLStatusRequest;
 const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
@@ -76,6 +77,7 @@ const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
 const ModifyMaintenanceWindowRequest = models.ModifyMaintenanceWindowRequest;
 const DestroyInstancesResponse = models.DestroyInstancesResponse;
 const DescribeSaleInfoResponse = models.DescribeSaleInfoResponse;
+const ResetUserPasswordInfo = models.ResetUserPasswordInfo;
 const DeleteUsersResponse = models.DeleteUsersResponse;
 const DatabaseTable = models.DatabaseTable;
 const DescribeDBInstanceDetailRequest = models.DescribeDBInstanceDetailRequest;
@@ -131,6 +133,7 @@ const ModifyDBSBackupSetCommentResponse = models.ModifyDBSBackupSetCommentRespon
 const AutoScalingConfig = models.AutoScalingConfig;
 const DatabaseProcedure = models.DatabaseProcedure;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
+const ResetUsersPasswordResponse = models.ResetUsersPasswordResponse;
 const CreateDBSBackupRequest = models.CreateDBSBackupRequest;
 const DestroyInstancesRequest = models.DestroyInstancesRequest;
 const DescribeMaintenanceWindowRequest = models.DescribeMaintenanceWindowRequest;
@@ -165,6 +168,17 @@ class TdmysqlClient extends AbstractClient {
         super("tdmysql.intl.tencentcloudapi.com", "2021-11-22", credential, region, profile);
     }
     
+    /**
+     * This API is used to batch reset user password.
+     * @param {ResetUsersPasswordRequest} req
+     * @param {function(string, ResetUsersPasswordResponse):void} cb
+     * @public
+     */
+    ResetUsersPassword(req, cb) {
+        let resp = new ResetUsersPasswordResponse();
+        this.request("ResetUsersPassword", req, resp, cb);
+    }
+
     /**
      * Query an instance backup strategy
      * @param {DescribeDBSBackupPolicyRequest} req

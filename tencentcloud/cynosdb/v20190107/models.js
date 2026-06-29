@@ -19085,7 +19085,7 @@ class DescribeClusterPasswordComplexityRequest extends  AbstractModel {
 }
 
 /**
- * Query filter
+ * Query filter. Filter criteria for the DescribeClusterAndInstances API.
  * @class
  */
 class QueryFilter extends  AbstractModel {
@@ -19093,31 +19093,31 @@ class QueryFilter extends  AbstractModel {
         super();
 
         /**
-         * Search field. Valid values: "InstanceId", "ProjectId", "InstanceName", "Vip"
-         * @type {Array.<string> || null}
-         */
-        this.Names = null;
-
-        /**
-         * Search string
+         * Field value list, in one-to-one correspondence with Names. InstanceId/ClusterId uses exact matching, and InstanceName uses fuzzy matching by default.
          * @type {Array.<string> || null}
          */
         this.Values = null;
 
         /**
-         * Whether to use exact match
+         * Search field name list, support the following 3 fields (case-insensitive, multiple values are OR relationship): ClusterId (filter by cluster ID, exact match), InstanceId (reverse-check cluster by instance ID), InstanceName (reverse-check cluster by instance name, default LIKE fuzzy matching, exact match when ExactMatch=true). Take the intersection when InstanceId and InstanceName are input at the same time (AND semantics).
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+        /**
+         * Exact match. Only applicable to InstanceName: true for exact matching, false (default) for LIKE fuzzy matching.
          * @type {boolean || null}
          */
         this.ExactMatch = null;
 
         /**
-         * Search field
+         * Search field name (single field mode, choose between this and Names). ClusterId, InstanceId, and InstanceName are supported.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Operator
+         * Operator (reserved field, currently disabled). Available values: >, >=, !=, =, <, <=
          * @type {string || null}
          */
         this.Operator = null;
@@ -19131,8 +19131,8 @@ class QueryFilter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Names = 'Names' in params ? params.Names : null;
         this.Values = 'Values' in params ? params.Values : null;
+        this.Names = 'Names' in params ? params.Names : null;
         this.ExactMatch = 'ExactMatch' in params ? params.ExactMatch : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Operator = 'Operator' in params ? params.Operator : null;

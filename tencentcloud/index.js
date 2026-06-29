@@ -126,6 +126,7 @@ module.exports = {
     tke: require("./tke"),
     tms: require("./tms"),
     tmt: require("./tmt"),
+    tokenhub: require("./tokenhub"),
     trabbit: require("./trabbit"),
     trocket: require("./trocket"),
     trro: require("./trro"),

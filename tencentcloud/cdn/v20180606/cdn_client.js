@@ -21,11 +21,10 @@ const AdvancedAuthentication = models.AdvancedAuthentication;
 const AdvanceHttps = models.AdvanceHttps;
 const Revalidate = models.Revalidate;
 const ResourceData = models.ResourceData;
-const UrlRecord = models.UrlRecord;
+const UserAgentFilter = models.UserAgentFilter;
 const OthersPrivateAccess = models.OthersPrivateAccess;
 const DescribePushQuotaResponse = models.DescribePushQuotaResponse;
 const DescribePurgeQuotaResponse = models.DescribePurgeQuotaResponse;
-const ScdnSevenLayerRules = models.ScdnSevenLayerRules;
 const Authentication = models.Authentication;
 const ImageOptimization = models.ImageOptimization;
 const Https = models.Https;
@@ -37,19 +36,17 @@ const MaxAgeCodeRule = models.MaxAgeCodeRule;
 const Compression = models.Compression;
 const PurgePathCacheResponse = models.PurgePathCacheResponse;
 const DomainFilter = models.DomainFilter;
-const DescribeCdnOriginIpResponse = models.DescribeCdnOriginIpResponse;
 const ParamFilter = models.ParamFilter;
 const SpecificConfig = models.SpecificConfig;
 const FollowRedirect = models.FollowRedirect;
 const RequestHeader = models.RequestHeader;
 const DescribePurgeQuotaRequest = models.DescribePurgeQuotaRequest;
 const Referer = models.Referer;
-const PostSize = models.PostSize;
 const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
 const EnableClsLogTopicRequest = models.EnableClsLogTopicRequest;
 const CacheConfigNoCache = models.CacheConfigNoCache;
 const OriginCombine = models.OriginCombine;
-const DeleteCdnDomainRequest = models.DeleteCdnDomainRequest;
+const DescribeCdnOriginIpResponse = models.DescribeCdnOriginIpResponse;
 const DescribePayTypeResponse = models.DescribePayTypeResponse;
 const PathRule = models.PathRule;
 const ListTopDataRequest = models.ListTopDataRequest;
@@ -60,22 +57,17 @@ const AdvancedAuthenticationTypeD = models.AdvancedAuthenticationTypeD;
 const CompressionRule = models.CompressionRule;
 const RedirectConfig = models.RedirectConfig;
 const GuetzliAdapter = models.GuetzliAdapter;
-const UpdateScdnDomainResponse = models.UpdateScdnDomainResponse;
 const Origin = models.Origin;
 const AdvancedAuthenticationTypeF = models.AdvancedAuthenticationTypeF;
 const TopData = models.TopData;
-const EnableCachesRequest = models.EnableCachesRequest;
 const Quota = models.Quota;
 const HeaderKey = models.HeaderKey;
 const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
 const SimpleCache = models.SimpleCache;
 const DeleteClsLogTopicRequest = models.DeleteClsLogTopicRequest;
-const UserAgentFilter = models.UserAgentFilter;
-const ModifyDomainConfigRequest = models.ModifyDomainConfigRequest;
 const DescribeCdnOriginIpRequest = models.DescribeCdnOriginIpRequest;
 const UpdatePayTypeResponse = models.UpdatePayTypeResponse;
 const TopicInfo = models.TopicInfo;
-const AdvancedCCRules = models.AdvancedCCRules;
 const DescribeDomainsConfigResponse = models.DescribeDomainsConfigResponse;
 const BriefDomain = models.BriefDomain;
 const TimestampData = models.TimestampData;
@@ -85,10 +77,9 @@ const DescribeReportDataResponse = models.DescribeReportDataResponse;
 const DisableClsLogTopicRequest = models.DisableClsLogTopicRequest;
 const RuleCacheConfig = models.RuleCacheConfig;
 const ListClsTopicDomainsResponse = models.ListClsTopicDomainsResponse;
-const BotCookie = models.BotCookie;
+const HttpsBilling = models.HttpsBilling;
 const DescribeCdnIpRequest = models.DescribeCdnIpRequest;
 const Ipv6 = models.Ipv6;
-const WafSubRuleStatus = models.WafSubRuleStatus;
 const FilterRules = models.FilterRules;
 const StatusCodeCache = models.StatusCodeCache;
 const DescribeIpVisitResponse = models.DescribeIpVisitResponse;
@@ -99,7 +90,7 @@ const OverseaConfig = models.OverseaConfig;
 const AddCdnDomainRequest = models.AddCdnDomainRequest;
 const UserAgentFilterRule = models.UserAgentFilterRule;
 const UpdateDomainConfigRequest = models.UpdateDomainConfigRequest;
-const Tag = models.Tag;
+const ShareCname = models.ShareCname;
 const CacheConfigFollowOrigin = models.CacheConfigFollowOrigin;
 const MaxAgeRule = models.MaxAgeRule;
 const AdvancedAuthenticationTypeE = models.AdvancedAuthenticationTypeE;
@@ -115,11 +106,12 @@ const QnPrivateAccess = models.QnPrivateAccess;
 const WebSocket = models.WebSocket;
 const MapInfo = models.MapInfo;
 const DescribeCertDomainsResponse = models.DescribeCertDomainsResponse;
-const ScdnBotConfig = models.ScdnBotConfig;
+const DuplicateDomainConfigRequest = models.DuplicateDomainConfigRequest;
 const AuthenticationTypeD = models.AuthenticationTypeD;
 const AuthenticationTypeC = models.AuthenticationTypeC;
 const AuthenticationTypeB = models.AuthenticationTypeB;
 const AuthenticationTypeA = models.AuthenticationTypeA;
+const ResponseHeader = models.ResponseHeader;
 const OriginAuthenticationTypeA = models.OriginAuthenticationTypeA;
 const DescribePushTasksResponse = models.DescribePushTasksResponse;
 const ResourceOriginData = models.ResourceOriginData;
@@ -129,26 +121,21 @@ const DomainAreaConfig = models.DomainAreaConfig;
 const ServerCert = models.ServerCert;
 const AccessControlRule = models.AccessControlRule;
 const HttpHeaderPathRule = models.HttpHeaderPathRule;
-const DisableCachesRequest = models.DisableCachesRequest;
 const AddCLSTopicDomainsResponse = models.AddCLSTopicDomainsResponse;
 const SimpleCacheRule = models.SimpleCacheRule;
 const DisableClsLogTopicResponse = models.DisableClsLogTopicResponse;
-const Hsts = models.Hsts;
 const DescribeIpStatusRequest = models.DescribeIpStatusRequest;
 const DetailDomain = models.DetailDomain;
 const RuleEngine = models.RuleEngine;
-const GetDisableRecordsResponse = models.GetDisableRecordsResponse;
 const Ipv6Access = models.Ipv6Access;
 const HeuristicCache = models.HeuristicCache;
-const ResponseHeader = models.ResponseHeader;
+const DuplicateDomainConfigResponse = models.DuplicateDomainConfigResponse;
 const CdnIpHistory = models.CdnIpHistory;
 const SummarizedData = models.SummarizedData;
-const UpdateScdnDomainRequest = models.UpdateScdnDomainRequest;
-const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
 const ManageClsTopicDomainsRequest = models.ManageClsTopicDomainsRequest;
 const AddCLSTopicDomainsRequest = models.AddCLSTopicDomainsRequest;
-const ScdnWafConfig = models.ScdnWafConfig;
-const CreateScdnFailedLogTaskRequest = models.CreateScdnFailedLogTaskRequest;
+const UrlRedirectRule = models.UrlRedirectRule;
+const PostSize = models.PostSize;
 const Cache = models.Cache;
 const ForceRedirect = models.ForceRedirect;
 const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
@@ -162,29 +149,22 @@ const DescribeReportDataRequest = models.DescribeReportDataRequest;
 const DescribePushTasksRequest = models.DescribePushTasksRequest;
 const DescribeUrlViolationsRequest = models.DescribeUrlViolationsRequest;
 const RefererRule = models.RefererRule;
-const ScdnCCRules = models.ScdnCCRules;
 const IpFreqLimit = models.IpFreqLimit;
 const CreateClsLogTopicRequest = models.CreateClsLogTopicRequest;
-const CacheOptResult = models.CacheOptResult;
+const Hsts = models.Hsts;
 const OriginSni = models.OriginSni;
 const StopCdnDomainRequest = models.StopCdnDomainRequest;
 const DescribeMapInfoResponse = models.DescribeMapInfoResponse;
 const DescribeMapInfoRequest = models.DescribeMapInfoRequest;
-const EnableCachesResponse = models.EnableCachesResponse;
 const RuleQueryString = models.RuleQueryString;
-const AdvancedScdnAclRule = models.AdvancedScdnAclRule;
 const DescribeIpVisitRequest = models.DescribeIpVisitRequest;
 const HttpHeaderRule = models.HttpHeaderRule;
 const StatusCodeCacheRule = models.StatusCodeCacheRule;
 const ClientCert = models.ClientCert;
-const ScdnConfig = models.ScdnConfig;
 const DomainLog = models.DomainLog;
-const GetDisableRecordsRequest = models.GetDisableRecordsRequest;
 const PurgeUrlsCacheResponse = models.PurgeUrlsCacheResponse;
-const BotJavaScript = models.BotJavaScript;
 const DeleteClsLogTopicResponse = models.DeleteClsLogTopicResponse;
 const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
-const DisableCachesResponse = models.DisableCachesResponse;
 const SchemeKey = models.SchemeKey;
 const StatisticItem = models.StatisticItem;
 const RangeOriginPullRule = models.RangeOriginPullRule;
@@ -192,7 +172,6 @@ const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
 const AdvanceCacheRule = models.AdvanceCacheRule;
 const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
 const AccessControl = models.AccessControl;
-const ScdnErrorPage = models.ScdnErrorPage;
 const CacheKey = models.CacheKey;
 const UrlRedirect = models.UrlRedirect;
 const DownstreamCapping = models.DownstreamCapping;
@@ -201,7 +180,7 @@ const RemoteAuthentication = models.RemoteAuthentication;
 const KeyRule = models.KeyRule;
 const ParamFilterRule = models.ParamFilterRule;
 const CappingRule = models.CappingRule;
-const ShareCname = models.ShareCname;
+const PushTask = models.PushTask;
 const AutoGuard = models.AutoGuard;
 const ListClsLogTopicsRequest = models.ListClsLogTopicsRequest;
 const Seo = models.Seo;
@@ -210,12 +189,12 @@ const ClsLogObject = models.ClsLogObject;
 const RegionMapRelation = models.RegionMapRelation;
 const PurgePathCacheRequest = models.PurgePathCacheRequest;
 const ModifyDomainConfigResponse = models.ModifyDomainConfigResponse;
-const CreateScdnFailedLogTaskResponse = models.CreateScdnFailedLogTaskResponse;
+const Quic = models.Quic;
 const CdnData = models.CdnData;
 const PurgeUrlsCacheRequest = models.PurgeUrlsCacheRequest;
 const OriginPullOptimization = models.OriginPullOptimization;
 const ErrorPage = models.ErrorPage;
-const PushTask = models.PushTask;
+const DeleteCdnDomainRequest = models.DeleteCdnDomainRequest;
 const ReportData = models.ReportData;
 const StartCdnDomainResponse = models.StartCdnDomainResponse;
 const DescribePushQuotaRequest = models.DescribePushQuotaRequest;
@@ -238,18 +217,15 @@ const SecurityConfig = models.SecurityConfig;
 const SearchClsLogRequest = models.SearchClsLogRequest;
 const AdvanceConfig = models.AdvanceConfig;
 const AwsPrivateAccess = models.AwsPrivateAccess;
-const AdvancedScdnAclGroup = models.AdvancedScdnAclGroup;
+const ManageClsTopicDomainsResponse = models.ManageClsTopicDomainsResponse;
 const VideoSeek = models.VideoSeek;
 const Compatibility = models.Compatibility;
-const ManageClsTopicDomainsResponse = models.ManageClsTopicDomainsResponse;
-const HttpsBilling = models.HttpsBilling;
-const ScdnAclGroup = models.ScdnAclGroup;
-const ScdnWafRule = models.ScdnWafRule;
+const ModifyDomainConfigRequest = models.ModifyDomainConfigRequest;
+const Tag = models.Tag;
 const ClsSearchLogs = models.ClsSearchLogs;
 const DescribeUrlViolationsResponse = models.DescribeUrlViolationsResponse;
 const IpFilter = models.IpFilter;
-const ScdnAclConfig = models.ScdnAclConfig;
-const ScdnDdosConfig = models.ScdnDdosConfig;
+const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
 const OriginAuthentication = models.OriginAuthentication;
 const ErrorPageRule = models.ErrorPageRule;
@@ -262,13 +238,10 @@ const CdnIp = models.CdnIp;
 const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
 const ExtraLogset = models.ExtraLogset;
 const CacheTagKey = models.CacheTagKey;
-const Quic = models.Quic;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;
 const OfflineCache = models.OfflineCache;
-const UrlRedirectRule = models.UrlRedirectRule;
 const HTTPHeader = models.HTTPHeader;
 const IpFilterPathRule = models.IpFilterPathRule;
-const ScdnAclRule = models.ScdnAclRule;
 
 
 /**
@@ -424,17 +397,6 @@ If you have migrated your ECDN service to CDN, you can use the [DescribeIpStatus
     }
 
     /**
-     * This API is used to block access to a specific URL on CDN. When a URL is blocked, error 403 will be returned for requests from the Chinese mainland. URL blocking is not permanent. Note that this API is only available to beta users now. 
-     * @param {DisableCachesRequest} req
-     * @param {function(string, DisableCachesResponse):void} cb
-     * @public
-     */
-    DisableCaches(req, cb) {
-        let resp = new DisableCachesResponse();
-        this.request("DisableCaches", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the basic configuration information of CDN acceleration domain names (inside and outside mainland China), including the project ID, service status, service type, creation time, and update time, etc.
      * @param {DescribeDomainsRequest} req
      * @param {function(string, DescribeDomainsResponse):void} cb
@@ -468,15 +430,14 @@ If you have migrated your ECDN service to CDN, you can use the [DescribeIpStatus
     }
 
     /**
-     * This API is used to suspend the acceleration service for a domain name.
-Note: after the acceleration service has been suspended, requests to the cache node will return a 404 error. In order to avoid impact to your business, please move the domain name to another service before suspending the acceleration service.
-     * @param {StopCdnDomainRequest} req
-     * @param {function(string, StopCdnDomainResponse):void} cb
+     * This API is used to copy the configuration of a reference domain to a new domain name. Self-owned certificates and customization options are not currently supported.
+     * @param {DuplicateDomainConfigRequest} req
+     * @param {function(string, DuplicateDomainConfigResponse):void} cb
      * @public
      */
-    StopCdnDomain(req, cb) {
-        let resp = new StopCdnDomainResponse();
-        this.request("StopCdnDomain", req, resp, cb);
+    DuplicateDomainConfig(req, cb) {
+        let resp = new DuplicateDomainConfigResponse();
+        this.request("DuplicateDomainConfig", req, resp, cb);
     }
 
     /**
@@ -491,17 +452,6 @@ Note: after the acceleration service has been suspended, requests to the cache n
     }
 
     /**
-     * This API is used to modify security configurations of SCDN acceleration domain names.
-     * @param {UpdateScdnDomainRequest} req
-     * @param {function(string, UpdateScdnDomainResponse):void} cb
-     * @public
-     */
-    UpdateScdnDomain(req, cb) {
-        let resp = new UpdateScdnDomainResponse();
-        this.request("UpdateScdnDomain", req, resp, cb);
-    }
-
-    /**
      * This API is used to search for CLS logs. Search filters can be set to today, 24 hours (one of the last 7 days), and the last 7 days.
      * @param {SearchClsLogRequest} req
      * @param {function(string, SearchClsLogResponse):void} cb
@@ -510,6 +460,18 @@ Note: after the acceleration service has been suspended, requests to the cache n
     SearchClsLog(req, cb) {
         let resp = new SearchClsLogResponse();
         this.request("SearchClsLog", req, resp, cb);
+    }
+
+    /**
+     * This API is used to suspend the acceleration service for a domain name.
+Note: after the acceleration service has been suspended, requests to the cache node will return a 404 error. In order to avoid impact to your business, please move the domain name to another service before suspending the acceleration service.
+     * @param {StopCdnDomainRequest} req
+     * @param {function(string, StopCdnDomainResponse):void} cb
+     * @public
+     */
+    StopCdnDomain(req, cb) {
+        let resp = new StopCdnDomainResponse();
+        this.request("StopCdnDomain", req, resp, cb);
     }
 
     /**
@@ -554,6 +516,7 @@ Note: only data from the last 90 days will be queried.
 
     /**
      * This API is used to query CDN IP ownership.
+This API is used to create and bind a policy. (Note: The API request frequency limit follows CDN's restriction: 200 requests/10 minutes).
      * @param {DescribeCdnIpRequest} req
      * @param {function(string, DescribeCdnIpResponse):void} cb
      * @public
@@ -576,8 +539,8 @@ By default, a maximum of 100 directories can be purged per day for acceleration 
     }
 
     /**
-     * This API is used to query the list of domain name URLs containing regulation-violating content scanned and detected by the CDN system, and the current status of the URLs.
-It corresponds to the **Pornography Detection** page on the CDN Console.
+     * This API is used to query the URL list with domain violations detected by the CDN system scan and their status.
+This API is used to correspond to the content compliant webpage in the CDN console.
      * @param {DescribeUrlViolationsRequest} req
      * @param {function(string, DescribeUrlViolationsResponse):void} cb
      * @public
@@ -669,17 +632,6 @@ By default, the daily pre-warming quota for domestic and outside the Chinese mai
     }
 
     /**
-     * This API is used to recreate a failed event log task.
-     * @param {CreateScdnFailedLogTaskRequest} req
-     * @param {function(string, CreateScdnFailedLogTaskResponse):void} cb
-     * @public
-     */
-    CreateScdnFailedLogTask(req, cb) {
-        let resp = new CreateScdnFailedLogTaskResponse();
-        this.request("CreateScdnFailedLogTask", req, resp, cb);
-    }
-
-    /**
      * This API is used to stop publishing to a log topic. Note: after a log topic is disabled, all logs of the domain names bound to it will no longer be published to the topic, and the logs that have already been published will be retained. This action will take effect within 5–15 minutes.
 
      * @param {DisableClsLogTopicRequest} req
@@ -714,17 +666,6 @@ By default, the daily pre-warming quota for domestic and outside the Chinese mai
     }
 
     /**
-     * This API is used to query the resource blocking history and the current URL status. (This API is in beta test and not generally available yet.)
-     * @param {GetDisableRecordsRequest} req
-     * @param {function(string, GetDisableRecordsResponse):void} cb
-     * @public
-     */
-    GetDisableRecords(req, cb) {
-        let resp = new GetDisableRecordsResponse();
-        this.request("GetDisableRecords", req, resp, cb);
-    }
-
-    /**
      * This API is used to delete a log topic. Note: when a log topic is deleted, all logs of the domain names bound to it will no longer be published to the topic, and the logs previously published to the topic will be deleted. This action will take effect within 5–15 minutes.
      * @param {DeleteClsLogTopicRequest} req
      * @param {function(string, DeleteClsLogTopicResponse):void} cb
@@ -736,7 +677,8 @@ By default, the daily pre-warming quota for domestic and outside the Chinese mai
     }
 
     /**
-     * This API is used to query the IP information of CDN intermediate nodes. Note: this API will be deactivated soon and no longer be maintained. Please call `DescribeIpStatus` instead.
+     * **This API is deprecated.**.
+This API is used to query the IP information of CDN origin-pull nodes. (Note: The replace API is DescribeIpStatus.).
      * @param {DescribeCdnOriginIpRequest} req
      * @param {function(string, DescribeCdnOriginIpResponse):void} cb
      * @public
@@ -802,17 +744,6 @@ If you have a strong requirement for data timeliness, it is recommended to use t
     UpdatePayType(req, cb) {
         let resp = new UpdatePayTypeResponse();
         this.request("UpdatePayType", req, resp, cb);
-    }
-
-    /**
-     * This API (EnableCaches) is used to unblock manually blocked URLs. After a URL is successfully unblocked, it takes about 5 to 10 minutes to take effect across the entire network. (This API is during beta test and not fully available now.)
-     * @param {EnableCachesRequest} req
-     * @param {function(string, EnableCachesResponse):void} cb
-     * @public
-     */
-    EnableCaches(req, cb) {
-        let resp = new EnableCachesResponse();
-        this.request("EnableCaches", req, resp, cb);
     }
 
 

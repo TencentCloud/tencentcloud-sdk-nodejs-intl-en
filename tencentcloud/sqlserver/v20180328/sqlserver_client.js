@@ -17,9 +17,11 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeCrossBackupStatisticalResponse = models.DescribeCrossBackupStatisticalResponse;
+const InstanceRenewInfo = models.InstanceRenewInfo;
 const DealInfo = models.DealInfo;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const CrossRegionStatus = models.CrossRegionStatus;
+const StartMigrationCheckResponse = models.StartMigrationCheckResponse;
 const DescribeBackupStatisticalResponse = models.DescribeBackupStatisticalResponse;
 const DeleteBackupMigrationRequest = models.DeleteBackupMigrationRequest;
 const DescribeInstanceTasksResponse = models.DescribeInstanceTasksResponse;
@@ -45,6 +47,7 @@ const ModifyAccountPrivilegeResponse = models.ModifyAccountPrivilegeResponse;
 const ModifyMigrationResponse = models.ModifyMigrationResponse;
 const DescribeInstanceTasksRequest = models.DescribeInstanceTasksRequest;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
+const ModifyDBInstanceRenewFlagResponse = models.ModifyDBInstanceRenewFlagResponse;
 const SpecInfo = models.SpecInfo;
 const ModifyBackupNameResponse = models.ModifyBackupNameResponse;
 const CreateReadOnlyDBInstancesRequest = models.CreateReadOnlyDBInstancesRequest;
@@ -72,6 +75,7 @@ const InterInstance = models.InterInstance;
 const ModifyDBNameResponse = models.ModifyDBNameResponse;
 const CosUploadBackupFile = models.CosUploadBackupFile;
 const ModifyDBNameRequest = models.ModifyDBNameRequest;
+const ModifyDBInstanceRenewFlagRequest = models.ModifyDBInstanceRenewFlagRequest;
 const DescribeUpgradeInstanceCheckResponse = models.DescribeUpgradeInstanceCheckResponse;
 const DescribeRestoreTimeRangeResponse = models.DescribeRestoreTimeRangeResponse;
 const ModifyDatabasePrivilegeResponse = models.ModifyDatabasePrivilegeResponse;
@@ -82,6 +86,7 @@ const ModifyDBInstanceSSLResponse = models.ModifyDBInstanceSSLResponse;
 const DBPrivilege = models.DBPrivilege;
 const DescribeReadOnlyGroupDetailsResponse = models.DescribeReadOnlyGroupDetailsResponse;
 const ResourceTag = models.ResourceTag;
+const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
 const DeleteBackupMigrationResponse = models.DeleteBackupMigrationResponse;
 const DescribePublishSubscribeRequest = models.DescribePublishSubscribeRequest;
 const BackupFile = models.BackupFile;
@@ -145,11 +150,13 @@ const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
 const ModifyBackupMigrationResponse = models.ModifyBackupMigrationResponse;
 const ReadOnlyGroup = models.ReadOnlyGroup;
 const DescribeDBsNormalResponse = models.DescribeDBsNormalResponse;
+const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
 const StepDetail = models.StepDetail;
 const DescribeDBsRequest = models.DescribeDBsRequest;
 const CompleteExpansionRequest = models.CompleteExpansionRequest;
 const ModifyDatabaseMdfRequest = models.ModifyDatabaseMdfRequest;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
+const StopMigrationRequest = models.StopMigrationRequest;
 const TerminateDBInstanceResponse = models.TerminateDBInstanceResponse;
 const ModifyDBRemarkRequest = models.ModifyDBRemarkRequest;
 const DescribeAccountPrivilegeByDBResponse = models.DescribeAccountPrivilegeByDBResponse;
@@ -222,6 +229,7 @@ const RemoveBackupsRequest = models.RemoveBackupsRequest;
 const CreateCloudReadOnlyDBInstancesRequest = models.CreateCloudReadOnlyDBInstancesRequest;
 const ModifyInstanceEncryptAttributesResponse = models.ModifyInstanceEncryptAttributesResponse;
 const DescribeBackupFilesResponse = models.DescribeBackupFilesResponse;
+const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
 const DeleteDBRequest = models.DeleteDBRequest;
 const DescribeMigrationDatabasesResponse = models.DescribeMigrationDatabasesResponse;
 const CompleteExpansionResponse = models.CompleteExpansionResponse;
@@ -232,6 +240,8 @@ const DeleteIncrementalMigrationResponse = models.DeleteIncrementalMigrationResp
 const DescribeFlowStatusResponse = models.DescribeFlowStatusResponse;
 const CutXEventsRequest = models.CutXEventsRequest;
 const SwitchCloudInstanceHAResponse = models.SwitchCloudInstanceHAResponse;
+const DescribeUploadIncrementalInfoResponse = models.DescribeUploadIncrementalInfoResponse;
+const DeleteRestoreTaskResponse = models.DeleteRestoreTaskResponse;
 const DescribeBackupFilesRequest = models.DescribeBackupFilesRequest;
 const ModifyPublishSubscribeRequest = models.ModifyPublishSubscribeRequest;
 const DescribeCrossRegionsResponse = models.DescribeCrossRegionsResponse;
@@ -316,6 +326,7 @@ const ModifyDataBaseTuple = models.ModifyDataBaseTuple;
 const DescribeMigrationsRequest = models.DescribeMigrationsRequest;
 const DealInstance = models.DealInstance;
 const DescribeBackupUploadSizeResponse = models.DescribeBackupUploadSizeResponse;
+const DescribeUploadIncrementalInfoRequest = models.DescribeUploadIncrementalInfoRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeBackupByFlowIdResponse = models.DescribeBackupByFlowIdResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
@@ -344,10 +355,12 @@ const DescribeBackupMigrationResponse = models.DescribeBackupMigrationResponse;
 const RestoreTask = models.RestoreTask;
 const DescribeUploadBackupInfoResponse = models.DescribeUploadBackupInfoResponse;
 const OldVip = models.OldVip;
+const StartMigrationCheckRequest = models.StartMigrationCheckRequest;
 const DescribeBackupCommandRequest = models.DescribeBackupCommandRequest;
 const CrossSummaryDetailRes = models.CrossSummaryDetailRes;
 const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
 const DescribeBackupSummaryRequest = models.DescribeBackupSummaryRequest;
+const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const DescribeReadOnlyGroupAutoWeightRequest = models.DescribeReadOnlyGroupAutoWeightRequest;
 const RecycleDBInstanceResponse = models.RecycleDBInstanceResponse;
 const DescribeReadOnlyGroupByReadOnlyInstanceRequest = models.DescribeReadOnlyGroupByReadOnlyInstanceRequest;
@@ -364,11 +377,13 @@ const CreateBusinessDBInstancesRequest = models.CreateBusinessDBInstancesRequest
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const DescribeSlowlogsRequest = models.DescribeSlowlogsRequest;
 const ModifyDReadableResponse = models.ModifyDReadableResponse;
+const StopMigrationResponse = models.StopMigrationResponse;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const DescribePublishSubscribeResponse = models.DescribePublishSubscribeResponse;
 const ModifyDBRemarkResponse = models.ModifyDBRemarkResponse;
 const ModifyOpenWanIpRequest = models.ModifyOpenWanIpRequest;
 const ModifyPublishSubscribeResponse = models.ModifyPublishSubscribeResponse;
+const DeleteRestoreTaskRequest = models.DeleteRestoreTaskRequest;
 
 
 /**
@@ -481,14 +496,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to isolate an instance to move it into a recycle bin.
-     * @param {TerminateDBInstanceRequest} req
-     * @param {function(string, TerminateDBInstanceResponse):void} cb
+     * This API is used to query upload permissions for incremental backups.
+     * @param {DescribeUploadIncrementalInfoRequest} req
+     * @param {function(string, DescribeUploadIncrementalInfoResponse):void} cb
      * @public
      */
-    TerminateDBInstance(req, cb) {
-        let resp = new TerminateDBInstanceResponse();
-        this.request("TerminateDBInstance", req, resp, cb);
+    DescribeUploadIncrementalInfo(req, cb) {
+        let resp = new DescribeUploadIncrementalInfoResponse();
+        this.request("DescribeUploadIncrementalInfo", req, resp, cb);
     }
 
     /**
@@ -522,6 +537,17 @@ class SqlserverClient extends AbstractClient {
     DeleteIncrementalMigration(req, cb) {
         let resp = new DeleteIncrementalMigrationResponse();
         this.request("DeleteIncrementalMigration", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start running a migration task.
+     * @param {RunMigrationRequest} req
+     * @param {function(string, RunMigrationResponse):void} cb
+     * @public
+     */
+    RunMigration(req, cb) {
+        let resp = new RunMigrationResponse();
+        this.request("RunMigration", req, resp, cb);
     }
 
     /**
@@ -734,6 +760,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * This API is used to isolate an instance to move it into a recycle bin.
+     * @param {TerminateDBInstanceRequest} req
+     * @param {function(string, TerminateDBInstanceResponse):void} cb
+     * @public
+     */
+    TerminateDBInstance(req, cb) {
+        let resp = new TerminateDBInstanceResponse();
+        this.request("TerminateDBInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the instance remarks.
      * @param {ModifyDBInstanceNoteRequest} req
      * @param {function(string, ModifyDBInstanceNoteResponse):void} cb
@@ -910,14 +947,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to start running a migration task.
-     * @param {RunMigrationRequest} req
-     * @param {function(string, RunMigrationResponse):void} cb
+     * This API is used to delete rollback task records.
+     * @param {DeleteRestoreTaskRequest} req
+     * @param {function(string, DeleteRestoreTaskResponse):void} cb
      * @public
      */
-    RunMigration(req, cb) {
-        let resp = new RunMigrationResponse();
-        this.request("RunMigration", req, resp, cb);
+    DeleteRestoreTask(req, cb) {
+        let resp = new DeleteRestoreTaskResponse();
+        this.request("DeleteRestoreTask", req, resp, cb);
     }
 
     /**
@@ -951,6 +988,17 @@ class SqlserverClient extends AbstractClient {
     CreateAccount(req, cb) {
         let resp = new CreateAccountResponse();
         this.request("CreateAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to terminate a migration task.
+     * @param {StopMigrationRequest} req
+     * @param {function(string, StopMigrationResponse):void} cb
+     * @public
+     */
+    StopMigration(req, cb) {
+        let resp = new StopMigrationResponse();
+        this.request("StopMigration", req, resp, cb);
     }
 
     /**
@@ -1094,6 +1142,17 @@ class SqlserverClient extends AbstractClient {
     DescribeHASwitchLog(req, cb) {
         let resp = new DescribeHASwitchLogResponse();
         this.request("DescribeHASwitchLog", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start a pre-migration verification task, applicable to the migration method where the migration source type is TencentDB for SQL Server.
+     * @param {StartMigrationCheckRequest} req
+     * @param {function(string, StartMigrationCheckResponse):void} cb
+     * @public
+     */
+    StartMigrationCheck(req, cb) {
+        let resp = new StartMigrationCheckResponse();
+        this.request("StartMigrationCheck", req, resp, cb);
     }
 
     /**
@@ -1759,6 +1818,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
+     * This API is used to renew instances. For pay-as-you-go instances, the billing method will change to monthly subscription after renewal. You can call the InquiryPriceRenewDBInstance API for the renewal price of pay-as-you-go instances.
+     * @param {RenewDBInstanceRequest} req
+     * @param {function(string, RenewDBInstanceResponse):void} cb
+     * @public
+     */
+    RenewDBInstance(req, cb) {
+        let resp = new RenewDBInstanceResponse();
+        this.request("RenewDBInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the upgrade prices of a yearly/monthly subscribed instance.
 .
      * @param {InquiryPriceUpgradeDBInstanceRequest} req
@@ -1779,6 +1849,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     DescribeReadOnlyGroupAutoWeight(req, cb) {
         let resp = new DescribeReadOnlyGroupAutoWeightResponse();
         this.request("DescribeReadOnlyGroupAutoWeight", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the renewal price of a monthly subscription instance.
+     * @param {InquiryPriceRenewDBInstanceRequest} req
+     * @param {function(string, InquiryPriceRenewDBInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceRenewDBInstance(req, cb) {
+        let resp = new InquiryPriceRenewDBInstanceResponse();
+        this.request("InquiryPriceRenewDBInstance", req, resp, cb);
     }
 
     /**
@@ -1859,6 +1940,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
+     * This API is used to modify read-only group details.
+     * @param {ModifyReadOnlyGroupDetailsRequest} req
+     * @param {function(string, ModifyReadOnlyGroupDetailsResponse):void} cb
+     * @public
+     */
+    ModifyReadOnlyGroupDetails(req, cb) {
+        let resp = new ModifyReadOnlyGroupDetailsResponse();
+        this.request("ModifyReadOnlyGroupDetails", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a backup import task.
      * @param {DeleteBackupMigrationRequest} req
      * @param {function(string, DeleteBackupMigrationResponse):void} cb
@@ -1892,14 +1984,14 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to modify read-only group details.
-     * @param {ModifyReadOnlyGroupDetailsRequest} req
-     * @param {function(string, ModifyReadOnlyGroupDetailsResponse):void} cb
+     * This API is used to modify the instance renewal flag.
+     * @param {ModifyDBInstanceRenewFlagRequest} req
+     * @param {function(string, ModifyDBInstanceRenewFlagResponse):void} cb
      * @public
      */
-    ModifyReadOnlyGroupDetails(req, cb) {
-        let resp = new ModifyReadOnlyGroupDetailsResponse();
-        this.request("ModifyReadOnlyGroupDetails", req, resp, cb);
+    ModifyDBInstanceRenewFlag(req, cb) {
+        let resp = new ModifyDBInstanceRenewFlagResponse();
+        this.request("ModifyDBInstanceRenewFlag", req, resp, cb);
     }
 
     /**

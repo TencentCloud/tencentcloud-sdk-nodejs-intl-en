@@ -3697,7 +3697,8 @@ class DescribeTRTCMarketQualityDataResponse extends  AbstractModel {
         super();
 
         /**
-         * TRTC Data Dashboard output parameters
+         * TRTC monitoring data output parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TRTCDataResult || null}
          */
         this.Data = null;
@@ -6409,19 +6410,22 @@ class TRTCDataResult extends  AbstractModel {
         super();
 
         /**
-         * StatementID value, fixed at 0 for Monitoring Dashboard.
+         * The StatementID value is fixed as 0 in the monitoring dashboard.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.StatementID = null;
 
         /**
-         * Query result data, returned in Columns-Values format.
+         * Query result data is returned in Columns-Values format.	
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<SeriesInfos> || null}
          */
         this.Series = null;
 
         /**
-         * Total value, fixed at 1 for Monitoring Dashboard.
+         * The Total value is fixed as 1 in the dashboard feature monitoring.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Total = null;
@@ -7278,10 +7282,17 @@ class RowValues extends  AbstractModel {
         super();
 
         /**
-         * Data value
+         * Data value.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<number> || null}
          */
         this.RowValue = null;
+
+        /**
+         * Data value.
+         * @type {Array.<number> || null}
+         */
+        this.RowValueFloat = null;
 
     }
 
@@ -7293,6 +7304,7 @@ class RowValues extends  AbstractModel {
             return;
         }
         this.RowValue = 'RowValue' in params ? params.RowValue : null;
+        this.RowValueFloat = 'RowValueFloat' in params ? params.RowValueFloat : null;
 
     }
 }
@@ -8883,30 +8895,36 @@ class DescribeTRTCMarketQualityDataRequest extends  AbstractModel {
         super();
 
         /**
-         * User SDKAppId (e.g., 1400xxxxxx)
+         * User SdkAppId (for example: 1400xxxxxx).
          * @type {string || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Query start time, format is YYYY-MM-DD. (The query time range depends on the monitoring dashboard function version, the premium edition can query up to 30 days)
+         * Query start time, and the format is YYYY-MM-DD. (query time range is based on the monitoring dashboard feature version. the basic version supports querying the last 30 days, and the advanced version supports querying the last 60 days).
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Query end time, format is YYYY-MM-DD.
+         * Query end time in YYYY-MM-DD format.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * The granularity of the returned data, which can be set to the following values:
-d: by day. This returns data for the entire UTC day of the query time range. 
-h: by hour. This returns data for the entire UTC hour of the query time range.
+         * The granularity of returned data supports the following values:.
+d: day. at this time, return the data of UTC time at zero point within a specified time range.
+h: billed hourly. at this point, return the data of full hour UTC time within a specified time range.
          * @type {string || null}
          */
         this.Period = null;
+
+        /**
+         * Whether the returned data is a decimal.
+         * @type {boolean || null}
+         */
+        this.IsFloat = null;
 
     }
 
@@ -8921,6 +8939,7 @@ h: by hour. This returns data for the entire UTC hour of the query time range.
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Period = 'Period' in params ? params.Period : null;
+        this.IsFloat = 'IsFloat' in params ? params.IsFloat : null;
 
     }
 }
@@ -9951,13 +9970,15 @@ class SeriesInfos extends  AbstractModel {
         super();
 
         /**
-         * Data columns
+         * Data column
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Columns = null;
 
         /**
-         * Data values
+         * Data value.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RowValues> || null}
          */
         this.Values = null;

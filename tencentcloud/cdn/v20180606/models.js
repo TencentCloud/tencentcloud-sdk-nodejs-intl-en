@@ -25,8 +25,8 @@ class DescribeCdnDomainLogsResponse extends  AbstractModel {
         super();
 
         /**
-         * Download link of the log package.
-You can open the link to download a .gz log package that contains all log files without extension.
+         * Specifies the download url of the log package.
+Download content is a compression package with the gz suffix. after decompression, it becomes a text file without an extension. link validity period is 1 day.
          * @type {Array.<DomainLog> || null}
          */
         this.DomainLogs = null;
@@ -346,40 +346,28 @@ Project ID: Queries domain name details by a project ID. The aggregated details 
 }
 
 /**
- * Details of the blocked URLs
+ * `UserAgent` blacklist/whitelist configuration
  * @class
  */
-class UrlRecord extends  AbstractModel {
+class UserAgentFilter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Status. `disable`: Blocked; `enable`: Unblocked.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable User-Agent blocklist/allowlist. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Status = null;
+        this.Switch = null;
 
         /**
-         * Corresponding URL
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
+         * Effective rule list for UA blacklist and whitelist. must not exceed 10 rules.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<UserAgentFilterRule> || null}
          */
-        this.RealUrl = null;
-
-        /**
-         * Creation time
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Update time.
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
+        this.FilterRules = null;
 
     }
 
@@ -390,10 +378,16 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RealUrl = 'RealUrl' in params ? params.RealUrl : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.FilterRules) {
+            this.FilterRules = new Array();
+            for (let z in params.FilterRules) {
+                let obj = new UserAgentFilterRule();
+                obj.deserialize(params.FilterRules[z]);
+                this.FilterRules.push(obj);
+            }
+        }
 
     }
 }
@@ -557,83 +551,6 @@ class DescribePurgeQuotaResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SCDN layer-7 rule configuration for CC frequency limiting
- * @class
- */
-class ScdnSevenLayerRules extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether values are case sensitive
-         * @type {boolean || null}
-         */
-        this.CaseSensitive = null;
-
-        /**
-         * Rule types:
-`protocol`: protocol. Valid values: `HTTP` and `HTTPS`.
-`method`: request method. Valid values: `HEAD`, `GET`, `POST`, `PUT`, `OPTIONS`, `TRACE`, `DELETE`, `PATCH` and `CONNECT`.
-`all`: domain name. The matching content is `*` and cannot be edited.
-`ip`: IP in CIDR format.
-`directory`: path starting with a slash (/). You can specify a directory or specific path using up to 128 characters.
-`index`: default homepage, which is specified by `/;/index.html` and cannot be edited.
-`path`: full path of the file, such as `/acb/test.png`. Wildcard is supported, such as `/abc/*.jpg`.
-`file`: file extension, such as `jpg`, `png` and `css`.
-`param`: request parameter. The value can contain up to 512 characters.
-`referer`: Referer. The value can contain up to 512 characters.
-`cookie`: Cookie. The value can contain up to 512 characters.
-`user-agent`: User-Agent. The value can contain up to 512 characters.
-`head`: custom header. The value can contain up to 512 characters. If the matching content is blank or does not exist, enter the matching parameter directly.
-         * @type {string || null}
-         */
-        this.RuleType = null;
-
-        /**
-         * Logical operator, which connects the relation between RuleType and RuleValue. Valid values:
-`exclude`: the rule value is not contained. 
-`include`: the rule value is contained. 
-`notequal`: the rule value is not equal to the specified rule type. 
-`equal`: the rule value is equal to the specified rule type. 
-`matching`: the rule value matches with the prefix of the specified rule type.
-`null`: the rule value is empty or does not exist.
-         * @type {string || null}
-         */
-        this.LogicOperator = null;
-
-        /**
-         * Rule value
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.RuleValue = null;
-
-        /**
-         * Matched parameter. Only request parameters, Cookie, and custom request headers have a value.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RuleParam = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CaseSensitive = 'CaseSensitive' in params ? params.CaseSensitive : null;
-        this.RuleType = 'RuleType' in params ? params.RuleType : null;
-        this.LogicOperator = 'LogicOperator' in params ? params.LogicOperator : null;
-        this.RuleValue = 'RuleValue' in params ? params.RuleValue : null;
-        this.RuleParam = 'RuleParam' in params ? params.RuleParam : null;
 
     }
 }
@@ -1015,13 +932,13 @@ class DescribeCdnDomainLogsRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * Starting time, such as `2019-09-04 00:00:00`
+         * Start time.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time, such as `2019-09-04 12:00:00`
+         * End time.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -1039,18 +956,17 @@ class DescribeCdnDomainLogsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Specifies a region for the query.
-`mainland`: specifies to return the download link of logs on acceleration within Mainland China;
-`overseas`: specifies to return the download link of logs on acceleration outside Mainland China;
-`global`: specifies to return a download link of logs on acceleration within Mainland China and a link of logs on acceleration outside Mainland China.
-Default value: `mainland`.
+         * Specifies the region for log download, defaults to mainland. valid values:.
+<li>mainland: specifies the download url for the domestic acceleration log package.</li>.
+<Li>Overseas: specifies the url for obtaining overseas acceleration logs package download.</li>.
+<li>global: simultaneously obtain domestic and overseas acceleration logs package download urls (separately packaged).</li>.
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * Specifies the type of logs to download (only access logs supported).
-`access`: Access logs.
+         * Specifies the type of logs to download. valid values:.
+<Li>Access: specifies the access log.</li>.
          * @type {string || null}
          */
         this.LogType = null;
@@ -1092,6 +1008,22 @@ Note: This field may return·`null`, indicating that no valid values can be obta
          */
         this.Switch = null;
 
+        /**
+         * When the original image is avif and the client Accept header contains image/avif, return directly the original image.
+When the original image is in avif format and the client Accept header does not include image/avif but includes image/webp, convert avif to webp format and return. if the Accept header does not include image/webp, convert to jpeg and return.
+
+Valid values:. 
+- []
+- ["webp"]
+- ["jpeg"]
+- ["webp", "jpeg"]
+
+"Webp": whether avif to webp is enabled, "jpeg": whether avif to jpeg is enabled. if both webp and jpeg are enabled, webp must be before jpeg.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.FallbackFormats = null;
+
     }
 
     /**
@@ -1102,6 +1034,7 @@ Note: This field may return·`null`, indicating that no valid values can be obta
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+        this.FallbackFormats = 'FallbackFormats' in params ? params.FallbackFormats : null;
 
     }
 }
@@ -1116,7 +1049,6 @@ class CreateClsLogTopicResponse extends  AbstractModel {
 
         /**
          * Topic ID
-Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.TopicId = null;
@@ -1268,24 +1200,24 @@ class DomainFilter extends  AbstractModel {
         super();
 
         /**
-         * Filter filter. Values:
-- `origin`: Primary origin server.
-- `domain`: Domain name.
-- `resourceId`: Domain name ID.
-- `status`: Domain name status. Values: `online`, `offline`, and `processing`.
-- `serviceType`: Service type. Values: `web`, `download`, `media`, `hybrid` and `dynamic`.
-- `projectId`: Project ID.
-- `domainType`: Primary origin type. Values: `cname` (customer origin), `COS` (COS origin), `third_party` (third-party object storage origin), and `igtm` (IGTM origin).
-- `fullUrlCache`: Whether to enable path cache. Values: `on`, `off`.
-- `https`: Whether to configure HTTPS. Values: `on`, `off` and `processing`.
-- `originPullProtocol`: Origin-pull protocol type. Value: `http`, `follow`, and `https`.
-- `tagKey`: Tag key.
+         * Filter field name. supported list as follows:.
+-`Origin`: specifies the primary origin server.
+-Domain name. specifies the domain name.
+-resourceId: domain id.
+-Status: specifies the domain name status. valid values: online, offline, processing, deleted.
+-serviceType: specifies the business type. valid values: web, download, media, hybrid, dynamic.
+-projectId: specifies the project ID.
+-domainType: specifies the primary origin server type. valid values: cname (self-owned origin), cos (cloud object storage integration), third_party (third-party object storage), igtm (igtm multi-active origin).
+-fullUrlCache. specifies full path cache. valid values: on, off.
+-Specifies whether to configure https. valid values: on, off, processing.
+-originPullProtocol: specifies the origin-pull protocol. valid values: http, follow, https.
+-tagKey: specifies the Tag key.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Filter field value.
+         * Specifies the filter field value. the default maximum is 5. when Name is origin/domain and Fuzzy is true, the maximum is 1.
          * @type {Array.<string> || null}
          */
         this.Value = null;
@@ -1309,56 +1241,6 @@ When fuzzy query is enabled, the maximum Value length is 1. When fuzzy query is 
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
         this.Fuzzy = 'Fuzzy' in params ? params.Fuzzy : null;
-
-    }
-}
-
-/**
- * DescribeCdnOriginIp response structure.
- * @class
- */
-class DescribeCdnOriginIpResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Intermediate node IP details
-         * @type {Array.<OriginIp> || null}
-         */
-        this.Ips = null;
-
-        /**
-         * Number of intermediate node IPs
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Ips) {
-            this.Ips = new Array();
-            for (let z in params.Ips) {
-                let obj = new OriginIp();
-                obj.deserialize(params.Ips[z]);
-                this.Ips.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1612,44 +1494,6 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * Maximum size of the file uploaded for streaming via a POST request
- * @class
- */
-class PostSize extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Maximum size of the file uploaded for streaming via a POST request. Values:
-`on`: Enable. When enabled, it is set to 32 MB by default.
-`off`: Disable
-
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-        /**
-         * Maximum size. Value range: 1 MB to 200 MB.
-         * @type {number || null}
-         */
-        this.MaxSize = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
-
-    }
-}
-
-/**
  * DescribeCdnData response structure.
  * @class
  */
@@ -1818,19 +1662,30 @@ class OriginCombine extends  AbstractModel {
 }
 
 /**
- * DeleteCdnDomain request structure.
+ * DescribeCdnOriginIp response structure.
  * @class
  */
-class DeleteCdnDomainRequest extends  AbstractModel {
+class DescribeCdnOriginIpResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Domain name
-The domain name status should be `Disabled`
+         * Intermediate node IP details
+         * @type {Array.<OriginIp> || null}
+         */
+        this.Ips = null;
+
+        /**
+         * Number of intermediate node IPs
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Domain = null;
+        this.RequestId = null;
 
     }
 
@@ -1841,7 +1696,17 @@ The domain name status should be `Disabled`
         if (!params) {
             return;
         }
-        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.Ips) {
+            this.Ips = new Array();
+            for (let z in params.Ips) {
+                let obj = new OriginIp();
+                obj.deserialize(params.Ips[z]);
+                this.Ips.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2055,12 +1920,12 @@ Only data queries at the granularity of days are supported. Take the day in the 
         this.EndTime = null;
 
         /**
-         * Objects to be sorted. Valid values:
-`url`: Sort by access URL (URLs carrying no parameters). Supported filters are `flux` and `request`.
-`district`: sorts provinces or countries/regions. Supported filters are `flux` and `request`.
-`isp`: sorts ISPs. Supported filters are `flux` and `request`.
-`host`: Sort by domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, and `statusCode` (2XX, 3XX, 4XX, 5XX).
-`originHost`: Sort by domain name origin-pull data. Supported filters are `flux`, `request`, `bandwidth`, and `OriginStatusCode` (origin_2XX, origin_3XX, origin_4XX, origin_5XX).
+         * Sorting object, which supports the following formats.
+url: specifies the access url in alphabetical order (no parameters). supported filters: flux, request.
+district: specifies the province or country/region sorting order. supported filters are flux and request.
+isp: specifies the carrier sorting order. supported filters are flux and request.
+host: specifies the domain name data access sorting order. supported filters: flux, request, bandwidth, fluxHitRate, 2XX, 3XX, 4XX, 5XX, statusCode.   
+originHost: specifies the domain name origin-pull data sort. supported filters: flux, request, bandwidth, origin_2XX, origin_3XX, origin_4XX, origin_5XX, OriginStatusCode.
          * @type {string || null}
          */
         this.Metric = null;
@@ -2537,41 +2402,6 @@ Note: This field may return·`null`, indicating that no valid values can be obta
 }
 
 /**
- * UpdateScdnDomain response structure.
- * @class
- */
-class UpdateScdnDomainResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Result of the request. `Success` indicates that the configurations are updated.
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Complex origin server configurations. The following configurations are supported:
 + Origin server specified as a single domain name
 + Origin server specified as multiple IPs. Supported port range: 1-65535; Supported weight range: 1-100. Format: IP:Port:Weight.
@@ -2895,41 +2725,6 @@ all: This indicates the details at the account level
 }
 
 /**
- * EnableCaches request structure.
- * @class
- */
-class EnableCachesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of unblocked URLs
-         * @type {Array.<string> || null}
-         */
-        this.Urls = null;
-
-        /**
-         * URL blocking date
-         * @type {string || null}
-         */
-        this.Date = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Urls = 'Urls' in params ? params.Urls : null;
-        this.Date = 'Date' in params ? params.Date : null;
-
-    }
-}
-
-/**
  * Purge/Prefetch available usage and quota
  * @class
  */
@@ -3099,7 +2894,7 @@ Default value: `bandwidth`
         this.Product = null;
 
         /**
-         * Specify the time zone for query time, default UTC+08:00
+         * 
          * @type {string || null}
          */
         this.TimeZone = null;
@@ -3268,95 +3063,6 @@ class DeleteClsLogTopicRequest extends  AbstractModel {
 }
 
 /**
- * `UserAgent` blacklist/whitelist configuration
- * @class
- */
-class UserAgentFilter extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether to enable User-Agent blocklist/allowlist. Values:
-`on`: Enable
-`off`: Disable
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-        /**
-         * Effective rule list for UA blacklist and whitelist. must not exceed 10 rules.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<UserAgentFilterRule> || null}
-         */
-        this.FilterRules = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.FilterRules) {
-            this.FilterRules = new Array();
-            for (let z in params.FilterRules) {
-                let obj = new UserAgentFilterRule();
-                obj.deserialize(params.FilterRules[z]);
-                this.FilterRules.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * ModifyDomainConfig request structure.
- * @class
- */
-class ModifyDomainConfigRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The domain name.
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * Name of the configuration parameter.
-         * @type {string || null}
-         */
-        this.Route = null;
-
-        /**
-         * Value of the configuration parameter. This field is serialized to a JSON string {key:value}, where **key** is fixed to `update`.
-         * @type {string || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Route = 'Route' in params ? params.Route : null;
-        this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
  * DescribeCdnOriginIp request structure.
  * @class
  */
@@ -3467,110 +3173,6 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Channel = 'Channel' in params ? params.Channel : null;
         this.Deleted = 'Deleted' in params ? params.Deleted : null;
-
-    }
-}
-
-/**
- * SCDN custom CC rules
- * @class
- */
-class AdvancedCCRules extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Rule name
-         * @type {string || null}
-         */
-        this.RuleName = null;
-
-        /**
-         * Detection duration
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.DetectionTime = null;
-
-        /**
-         * Detection frequency threshold
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.FrequencyLimit = null;
-
-        /**
-         * Whether to enable IP blocking. Values:
-`on`: Enable
-`off`: Disable
-Note: This field may return·`null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PunishmentSwitch = null;
-
-        /**
-         * IP penalty duration
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.PunishmentTime = null;
-
-        /**
-         * Action. Valid values: `intercept` and `redirect`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Action = null;
-
-        /**
-         * A redirection URL used when Action is `redirect`
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RedirectUrl = null;
-
-        /**
-         * Layer-7 rule configuration for CC frequency limiting
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<ScdnSevenLayerRules> || null}
-         */
-        this.Configure = null;
-
-        /**
-         * Whether to enable custom CC rules. Values:
-`on`: Enable
-`off`: Disable
-Note: This field may return·`null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-        this.DetectionTime = 'DetectionTime' in params ? params.DetectionTime : null;
-        this.FrequencyLimit = 'FrequencyLimit' in params ? params.FrequencyLimit : null;
-        this.PunishmentSwitch = 'PunishmentSwitch' in params ? params.PunishmentSwitch : null;
-        this.PunishmentTime = 'PunishmentTime' in params ? params.PunishmentTime : null;
-        this.Action = 'Action' in params ? params.Action : null;
-        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
-
-        if (params.Configure) {
-            this.Configure = new Array();
-            for (let z in params.Configure) {
-                let obj = new ScdnSevenLayerRules();
-                obj.deserialize(params.Configure[z]);
-                this.Configure.push(obj);
-            }
-        }
-        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -4136,11 +3738,16 @@ class ListClsTopicDomainsResponse extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * Last modified time of log topic
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Latest update time of the log topic.
          * @type {string || null}
          */
         this.UpdateTime = null;
+
+        /**
+         * Specifies whether to inherit the domain name tag.
+         * @type {boolean || null}
+         */
+        this.InheritDomainTags = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4172,58 +3779,28 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         }
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.InheritDomainTags = 'InheritDomainTags' in params ? params.InheritDomainTags : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * Bot cookie policy
+ * HTTPS. When it’s disabled, HTTPS requests are blocked.
  * @class
  */
-class BotCookie extends  AbstractModel {
+class HttpsBilling extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable bot cookie policies. Values:
-`on`: Enable
-`off`: Disable
+         * Whether to enable HTTPS. Values:
+`on`: When it's enabled, HTTPS requests are allowed and incur charges. If not specified, his field uses the default value `on`.
+`off`: When it's disabled, HTTPS requests are blocked.
+
          * @type {string || null}
          */
         this.Switch = null;
-
-        /**
-         * Rule type, which can only be `all` currently.
-         * @type {string || null}
-         */
-        this.RuleType = null;
-
-        /**
-         * Rule value. Valid value: `*`.
-         * @type {Array.<string> || null}
-         */
-        this.RuleValue = null;
-
-        /**
-         * Action. Valid values: `monitor`, `intercept`, `redirect`, and `captcha`.
-         * @type {string || null}
-         */
-        this.Action = null;
-
-        /**
-         * Redirection target page
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RedirectUrl = null;
-
-        /**
-         * Update time
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
 
     }
 
@@ -4235,11 +3812,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
-        this.RuleType = 'RuleType' in params ? params.RuleType : null;
-        this.RuleValue = 'RuleValue' in params ? params.RuleValue : null;
-        this.Action = 'Action' in params ? params.Action : null;
-        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -4253,7 +3825,7 @@ class DescribeCdnIpRequest extends  AbstractModel {
         super();
 
         /**
-         * List of IPs to be queried
+         * IP list you want to query. supports 1-20 ip inquiries at a time.
          * @type {Array.<string> || null}
          */
         this.Ips = null;
@@ -4299,43 +3871,6 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
-
-    }
-}
-
-/**
- * WAF sub-rule switch status
- * @class
- */
-class WafSubRuleStatus extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether to enable WAF sub-rules. Values:
-`on`: Enable
-`off`: Disable
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-        /**
-         * List of rule IDs
-         * @type {Array.<number> || null}
-         */
-        this.SubIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.SubIds = 'SubIds' in params ? params.SubIds : null;
 
     }
 }
@@ -6215,26 +5750,29 @@ After switching to global acceleration, configurations of the domain name will b
 }
 
 /**
- * Domain name tag configuration
+ * Shared CNAME configuration
+ShareCname is only available to beta users. Submit a ticket if you need it.
  * @class
  */
-class Tag extends  AbstractModel {
+class ShareCname extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag key
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable Shared CNAME. Values:
+`on`: Enable. When enabled, it uses a shared CNAME.
+`off`: Disable. When disabled, it uses a default CNAME.
+
          * @type {string || null}
          */
-        this.TagKey = null;
+        this.Switch = null;
 
         /**
-         * Tag value
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Shared CNAME to be configured
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.TagValue = null;
+        this.Cname = null;
 
     }
 
@@ -6245,8 +5783,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Cname = 'Cname' in params ? params.Cname : null;
 
     }
 }
@@ -6451,7 +5989,7 @@ class DescribeCertDomainsRequest extends  AbstractModel {
         this.Cert = null;
 
         /**
-         * Managed certificate ID. `Cert` and `CertId` cannot be both empty. If they’re both filled in, `CerID` prevails.
+         * Managed certificate ID. Cert and CertId cannot both be empty. if both are filled in, CertId takes precedence.
          * @type {string || null}
          */
         this.CertId = null;
@@ -6493,7 +6031,7 @@ class DescribeDomainsConfigRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Limit on paginated queries. Default value: 100. Maximum value: 1000.
+         * Number limit of paginated query. default value: 100. maximum settable: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -7013,15 +6551,13 @@ class DescribeCertDomainsResponse extends  AbstractModel {
         super();
 
         /**
-         * List of domain names connected to CDN
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * List of domain names integrated with CDN.
          * @type {Array.<string> || null}
          */
         this.Domains = null;
 
         /**
-         * List of CDN domain names with certificates configured
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * List of CDN domain names with configured certificates.
          * @type {Array.<string> || null}
          */
         this.CertifiedDomains = null;
@@ -7049,34 +6585,24 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * Bot configuration
+ * DuplicateDomainConfig request structure.
  * @class
  */
-class ScdnBotConfig extends  AbstractModel {
+class DuplicateDomainConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable SCDN bot configuration. Values:
-`on`: Enable
-`off`: Disable
+         * Adds a domain name.
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Domain = null;
 
         /**
-         * Bot cookie policy
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<BotCookie> || null}
+         * Specifies the configured domain name to be copied.
+         * @type {string || null}
          */
-        this.BotCookie = null;
-
-        /**
-         * Bot JS policy
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<BotJavaScript> || null}
-         */
-        this.BotJavaScript = null;
+        this.ReferenceDomain = null;
 
     }
 
@@ -7087,25 +6613,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.BotCookie) {
-            this.BotCookie = new Array();
-            for (let z in params.BotCookie) {
-                let obj = new BotCookie();
-                obj.deserialize(params.BotCookie[z]);
-                this.BotCookie.push(obj);
-            }
-        }
-
-        if (params.BotJavaScript) {
-            this.BotJavaScript = new Array();
-            for (let z in params.BotJavaScript) {
-                let obj = new BotJavaScript();
-                obj.deserialize(params.BotJavaScript[z]);
-                this.BotJavaScript.push(obj);
-            }
-        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.ReferenceDomain = 'ReferenceDomain' in params ? params.ReferenceDomain : null;
 
     }
 }
@@ -7417,6 +6926,52 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
+ * Custom response header configuration. This is disabled by default.
+ * @class
+ */
+class ResponseHeader extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable custom response headers. Values:
+`on`: Enable
+`off`: Disable
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Custom response header rules
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<HttpHeaderPathRule> || null}
+         */
+        this.HeaderRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.HeaderRules) {
+            this.HeaderRules = new Array();
+            for (let z in params.HeaderRules) {
+                let obj = new HttpHeaderPathRule();
+                obj.deserialize(params.HeaderRules[z]);
+                this.HeaderRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Origin-pull authentication advanced configuration TypeA
  * @class
  */
@@ -7454,15 +7009,13 @@ class DescribePushTasksResponse extends  AbstractModel {
         super();
 
         /**
-         * Prefetch history
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Preheating history.
          * @type {Array.<PushTask> || null}
          */
         this.PushLogs = null;
 
         /**
-         * Total number of tasks, which is used for pagination.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Total number of tasks. for pagination.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -7887,35 +7440,6 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * DisableCaches request structure.
- * @class
- */
-class DisableCachesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of URLs to be blocked (URLs must contain `http://` or `https://`).
-Up to 100 entries can be submitted at a time and 3,000 entries per day.
-         * @type {Array.<string> || null}
-         */
-        this.Urls = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Urls = 'Urls' in params ? params.Urls : null;
-
-    }
-}
-
-/**
  * AddCLSTopicDomains response structure.
  * @class
  */
@@ -8020,52 +7544,6 @@ class DisableClsLogTopicResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * HSTS configuration.
- * @class
- */
-class Hsts extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether to enable HSTS. Values:
-`on`: Enable
-`off`: Disable
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-        /**
-         * `MaxAge` value.
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.MaxAge = null;
-
-        /**
-         * Whether to include subdomain names. Valid values: on, off.
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.IncludeSubDomains = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.MaxAge = 'MaxAge' in params ? params.MaxAge : null;
-        this.IncludeSubDomains = 'IncludeSubDomains' in params ? params.IncludeSubDomains : null;
 
     }
 }
@@ -8624,6 +8102,19 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.OthersPrivateAccess = null;
 
+        /**
+         * Specifies the blocklist parameter.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ParamFilter || null}
+         */
+        this.ParamFilter = null;
+
+        /**
+         * 
+         * @type {AutoGuard || null}
+         */
+        this.AutoGuard = null;
+
     }
 
     /**
@@ -8961,6 +8452,18 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             this.OthersPrivateAccess = obj;
         }
 
+        if (params.ParamFilter) {
+            let obj = new ParamFilter();
+            obj.deserialize(params.ParamFilter)
+            this.ParamFilter = obj;
+        }
+
+        if (params.AutoGuard) {
+            let obj = new AutoGuard();
+            obj.deserialize(params.AutoGuard)
+            this.AutoGuard = obj;
+        }
+
     }
 }
 
@@ -8998,58 +8501,6 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.Content = 'Content' in params ? params.Content : null;
-
-    }
-}
-
-/**
- * GetDisableRecords response structure.
- * @class
- */
-class GetDisableRecordsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Blocking history
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<UrlRecord> || null}
-         */
-        this.UrlRecordList = null;
-
-        /**
-         * Total number of tasks, which is used for pagination.
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.UrlRecordList) {
-            this.UrlRecordList = new Array();
-            for (let z in params.UrlRecordList) {
-                let obj = new UrlRecord();
-                obj.deserialize(params.UrlRecordList[z]);
-                this.UrlRecordList.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9130,27 +8581,18 @@ Note: This field may return·`null`, indicating that no valid values can be obta
 }
 
 /**
- * Custom response header configuration. This is disabled by default.
+ * DuplicateDomainConfig response structure.
  * @class
  */
-class ResponseHeader extends  AbstractModel {
+class DuplicateDomainConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable custom response headers. Values:
-`on`: Enable
-`off`: Disable
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Switch = null;
-
-        /**
-         * Custom response header rules
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<HttpHeaderPathRule> || null}
-         */
-        this.HeaderRules = null;
+        this.RequestId = null;
 
     }
 
@@ -9161,16 +8603,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.HeaderRules) {
-            this.HeaderRules = new Array();
-            for (let z in params.HeaderRules) {
-                let obj = new HttpHeaderPathRule();
-                obj.deserialize(params.HeaderRules[z]);
-                this.HeaderRules.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9253,129 +8686,6 @@ class SummarizedData extends  AbstractModel {
 }
 
 /**
- * UpdateScdnDomain request structure.
- * @class
- */
-class UpdateScdnDomainRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Domain name
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * WAF configuration
-         * @type {ScdnWafConfig || null}
-         */
-        this.Waf = null;
-
-        /**
-         * Custom defense policy configuration
-         * @type {ScdnAclConfig || null}
-         */
-        this.Acl = null;
-
-        /**
-         * CC attack defense configurations. CC attack defense is enabled by default.
-         * @type {ScdnConfig || null}
-         */
-        this.CC = null;
-
-        /**
-         * DDoS defense configuration. DDoS defense is enabled by default.
-         * @type {ScdnDdosConfig || null}
-         */
-        this.Ddos = null;
-
-        /**
-         * Bot defense configuration
-         * @type {ScdnBotConfig || null}
-         */
-        this.Bot = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Domain = 'Domain' in params ? params.Domain : null;
-
-        if (params.Waf) {
-            let obj = new ScdnWafConfig();
-            obj.deserialize(params.Waf)
-            this.Waf = obj;
-        }
-
-        if (params.Acl) {
-            let obj = new ScdnAclConfig();
-            obj.deserialize(params.Acl)
-            this.Acl = obj;
-        }
-
-        if (params.CC) {
-            let obj = new ScdnConfig();
-            obj.deserialize(params.CC)
-            this.CC = obj;
-        }
-
-        if (params.Ddos) {
-            let obj = new ScdnDdosConfig();
-            obj.deserialize(params.Ddos)
-            this.Ddos = obj;
-        }
-
-        if (params.Bot) {
-            let obj = new ScdnBotConfig();
-            obj.deserialize(params.Bot)
-            this.Bot = obj;
-        }
-
-    }
-}
-
-/**
- * UpdatePayType request structure.
- * @class
- */
-class UpdatePayTypeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Billing region, which can be `mainland` or `overseas`.
-         * @type {string || null}
-         */
-        this.Area = null;
-
-        /**
-         * Billing mode, which can be `flux` or `bandwidth`.
-         * @type {string || null}
-         */
-        this.PayType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Area = 'Area' in params ? params.Area : null;
-        this.PayType = 'PayType' in params ? params.PayType : null;
-
-    }
-}
-
-/**
  * ManageClsTopicDomains request structure.
  * @class
  */
@@ -9407,6 +8717,12 @@ class ManageClsTopicDomainsRequest extends  AbstractModel {
          */
         this.DomainAreaConfigs = null;
 
+        /**
+         * Specifies whether to inherit the domain name tag.
+         * @type {boolean || null}
+         */
+        this.InheritDomainTags = null;
+
     }
 
     /**
@@ -9428,6 +8744,7 @@ class ManageClsTopicDomainsRequest extends  AbstractModel {
                 this.DomainAreaConfigs.push(obj);
             }
         }
+        this.InheritDomainTags = 'InheritDomainTags' in params ? params.InheritDomainTags : null;
 
     }
 }
@@ -9464,6 +8781,12 @@ class AddCLSTopicDomainsRequest extends  AbstractModel {
          */
         this.Channel = null;
 
+        /**
+         * Specifies whether to inherit the domain name tag. default reservation is the value changed last time.
+         * @type {boolean || null}
+         */
+        this.InheritDomainTags = null;
+
     }
 
     /**
@@ -9485,71 +8808,98 @@ class AddCLSTopicDomainsRequest extends  AbstractModel {
             }
         }
         this.Channel = 'Channel' in params ? params.Channel : null;
+        this.InheritDomainTags = 'InheritDomainTags' in params ? params.InheritDomainTags : null;
 
     }
 }
 
 /**
- * WAF configuration
+ * URL redirect rule configuration
  * @class
  */
-class ScdnWafConfig extends  AbstractModel {
+class UrlRedirectRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable SCDN WAF configuration. Values:
-`on`: Enable
+         * Redirect status code. Valid values: 301, 302
+         * @type {number || null}
+         */
+        this.RedirectStatusCode = null;
+
+        /**
+         * URL to be matched. Only URLs are supported, while parameters are not. The exact match is used by default. In regex match, up to 5 wildcards `*` are supported. The URL can contain up to 1,024 characters.
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * Target URL, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the matching path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
+         * @type {string || null}
+         */
+        this.RedirectUrl = null;
+
+        /**
+         * Target host. It should be a standard domain name starting with `http://` or `https://`. If it is left empty, "http://[current domain name]" will be used by default.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.RedirectHost = null;
+
+        /**
+         * Whether to use full-path matching or arbitrary matching
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.FullMatch = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.Regex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RedirectStatusCode = 'RedirectStatusCode' in params ? params.RedirectStatusCode : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
+        this.RedirectHost = 'RedirectHost' in params ? params.RedirectHost : null;
+        this.FullMatch = 'FullMatch' in params ? params.FullMatch : null;
+        this.Regex = 'Regex' in params ? params.Regex : null;
+
+    }
+}
+
+/**
+ * Maximum size of the file uploaded for streaming via a POST request
+ * @class
+ */
+class PostSize extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Maximum size of the file uploaded for streaming via a POST request. Values:
+`on`: Enable. When enabled, it is set to 32 MB by default.
 `off`: Disable
+
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * WAF protection mode. Valid values: `intercept` and `observe`. Default value: `intercept`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Mode = null;
-
-        /**
-         * Redirection error page
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {ScdnErrorPage || null}
-         */
-        this.ErrorPage = null;
-
-        /**
-         * Whether to enable webshell blocking. Values:
-`on`: Enable
-`off`: Disable
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.WebShellSwitch = null;
-
-        /**
-         * Attack blocking rules
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<ScdnWafRule> || null}
-         */
-        this.Rules = null;
-
-        /**
-         * WAF rule level. Valid values: 100, 200, and 300.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Maximum size. Value range: 1 MB to 200 MB.
          * @type {number || null}
          */
-        this.Level = null;
-
-        /**
-         * Whether to enable WAF sub-rules. Values:
-`on`: Enable
-`off`: Disable
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<WafSubRuleStatus> || null}
-         */
-        this.SubRuleSwitch = null;
+        this.MaxSize = null;
 
     }
 
@@ -9561,68 +8911,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
-        this.Mode = 'Mode' in params ? params.Mode : null;
-
-        if (params.ErrorPage) {
-            let obj = new ScdnErrorPage();
-            obj.deserialize(params.ErrorPage)
-            this.ErrorPage = obj;
-        }
-        this.WebShellSwitch = 'WebShellSwitch' in params ? params.WebShellSwitch : null;
-
-        if (params.Rules) {
-            this.Rules = new Array();
-            for (let z in params.Rules) {
-                let obj = new ScdnWafRule();
-                obj.deserialize(params.Rules[z]);
-                this.Rules.push(obj);
-            }
-        }
-        this.Level = 'Level' in params ? params.Level : null;
-
-        if (params.SubRuleSwitch) {
-            this.SubRuleSwitch = new Array();
-            for (let z in params.SubRuleSwitch) {
-                let obj = new WafSubRuleStatus();
-                obj.deserialize(params.SubRuleSwitch[z]);
-                this.SubRuleSwitch.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * CreateScdnFailedLogTask request structure.
- * @class
- */
-class CreateScdnFailedLogTaskRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID of the failed task to retry
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * Region. Valid values: `mainland` and `overseas`.
-         * @type {string || null}
-         */
-        this.Area = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.Area = 'Area' in params ? params.Area : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
 
     }
 }
@@ -9816,8 +9105,8 @@ If the domain name information is specified, this parameter can be ignored.
         this.Interval = null;
 
         /**
-         * The aggregate data for multiple domain names is returned by default (false) when multiple `Domains` are passed in.
-You can set it to true to return the details for each Domain (the statusCode metric is currently not supported)
+         * Domains specifies multiple domain names to import. default (false) indicates aggregated data for multiple domain names.
+Specifies as required to be true, returns detailed data for each Domain (statusCode, 2xx, 3xx, 4xx, 5xx metrics not currently supported).
          * @type {boolean || null}
          */
         this.Detail = null;
@@ -10822,103 +10111,6 @@ For `path`, enter an absolute path, e.g., `/xxx/test.html`.
 }
 
 /**
- * SCDN custom CC rules
- * @class
- */
-class ScdnCCRules extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Rule types:
-`all`: effective for all files.
-`file`: Apply to files with the specified suffixes.
-`directory`: Apply to specified paths.
-`path`: Apply to specified absolute paths.
-`index`: effective for web homepages and root directories.
-         * @type {string || null}
-         */
-        this.RuleType = null;
-
-        /**
-         * Rule value (blocking condition)
-         * @type {Array.<string> || null}
-         */
-        this.RuleValue = null;
-
-        /**
-         * IP access limit rule
-         * @type {number || null}
-         */
-        this.Qps = null;
-
-        /**
-         * Detection granularity
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.DetectionTime = null;
-
-        /**
-         * Frequency threshold
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.FrequencyLimit = null;
-
-        /**
-         * Whether to enable IP blocking. Values:
-`on`: Enable
-`off`: Disable
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PunishmentSwitch = null;
-
-        /**
-         * Suspicious IP restriction duration
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.PunishmentTime = null;
-
-        /**
-         * Action. Valid values: `intercept` and `redirect`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Action = null;
-
-        /**
-         * The redirection target URL used when the `Action` is `redirect`
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RedirectUrl = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RuleType = 'RuleType' in params ? params.RuleType : null;
-        this.RuleValue = 'RuleValue' in params ? params.RuleValue : null;
-        this.Qps = 'Qps' in params ? params.Qps : null;
-        this.DetectionTime = 'DetectionTime' in params ? params.DetectionTime : null;
-        this.FrequencyLimit = 'FrequencyLimit' in params ? params.FrequencyLimit : null;
-        this.PunishmentSwitch = 'PunishmentSwitch' in params ? params.PunishmentSwitch : null;
-        this.PunishmentTime = 'PunishmentTime' in params ? params.PunishmentTime : null;
-        this.Action = 'Action' in params ? params.Action : null;
-        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
-
-    }
-}
-
-/**
  * Access limit configuration for a single IP of a single node. This is disabled by default.
  * @class
  */
@@ -10989,6 +10181,12 @@ class CreateClsLogTopicRequest extends  AbstractModel {
          */
         this.DomainAreaConfigs = null;
 
+        /**
+         * Specifies whether to inherit the domain name tag. default false.
+         * @type {boolean || null}
+         */
+        this.InheritDomainTags = null;
+
     }
 
     /**
@@ -11010,31 +10208,40 @@ class CreateClsLogTopicRequest extends  AbstractModel {
                 this.DomainAreaConfigs.push(obj);
             }
         }
+        this.InheritDomainTags = 'InheritDomainTags' in params ? params.InheritDomainTags : null;
 
     }
 }
 
 /**
- * Result of blocking/unblocking URLs
+ * HSTS configuration.
  * @class
  */
-class CacheOptResult extends  AbstractModel {
+class Hsts extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of succeeded URLs
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<string> || null}
+         * Whether to enable HSTS. Values:
+`on`: Enable
+`off`: Disable
+         * @type {string || null}
          */
-        this.SuccessUrls = null;
+        this.Switch = null;
 
         /**
-         * List of failed URLs
+         * `MaxAge` value.
 Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<string> || null}
+         * @type {number || null}
          */
-        this.FailUrls = null;
+        this.MaxAge = null;
+
+        /**
+         * Whether to include subdomain names. Valid values: on, off.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.IncludeSubDomains = null;
 
     }
 
@@ -11045,8 +10252,9 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.SuccessUrls = 'SuccessUrls' in params ? params.SuccessUrls : null;
-        this.FailUrls = 'FailUrls' in params ? params.FailUrls : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.MaxAge = 'MaxAge' in params ? params.MaxAge : null;
+        this.IncludeSubDomains = 'IncludeSubDomains' in params ? params.IncludeSubDomains : null;
 
     }
 }
@@ -11224,55 +10432,6 @@ class DescribeMapInfoRequest extends  AbstractModel {
 }
 
 /**
- * EnableCaches response structure.
- * @class
- */
-class EnableCachesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Result list
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {CacheOptResult || null}
-         */
-        this.CacheOptResult = null;
-
-        /**
-         * Task ID
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.CacheOptResult) {
-            let obj = new CacheOptResult();
-            obj.deserialize(params.CacheOptResult)
-            this.CacheOptResult = obj;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Configuration to retain query strings for this path
  * @class
  */
@@ -11316,298 +10475,6 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.Action = 'Action' in params ? params.Action : null;
         this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
- * Precise access control rule
- * @class
- */
-class AdvancedScdnAclRule extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Keyword. Valid values:
-`protocol`: HTTP protocol
-`httpVersion`: HTTP version
-`method`: request method
-`ip`: requester IP
-`ipAsn`: ASN of the requester IP
-`ipCountry`: country/region of the requester IP
-`ipArea`: region of the requester IP
-`xForwardFor`: X-Forward-For request header
-`directory`: Path
-`index`: Homepage
-`path`: Full path of a file
-`file`: File extension
-`param`: Request parameter
-`referer`: Referer request header
-`cookie`: Cookie request header
-`userAgent`: User-Agent request header
-`head`: Custom request header
-         * @type {string || null}
-         */
-        this.MatchKey = null;
-
-        /**
-         * Logical operator. Valid values:
-`exclude`: The keyword is not included
-`include`: The keyword is included
-`notequal`: Not the same as the keyword
-`equal`: The same as the keyword
-`matching`: The prefix is matched
-`null`: Empty or does not exist
-         * @type {string || null}
-         */
-        this.LogicOperator = null;
-
-        /**
-         * Matched value.
-When `MatchKey` is `protocol`,
-Values: `HTTP` and `HTTPS`.
-
-When `MatchKey` is `httpVersion`,
-Values: `HTTP/1.0`, `HTTP/1.1`, `HTTP/1.2`, `HTTP/2`, and `HTTP/3`.
-
-When `MatchKey` is `method`,
-Values: `HEAD`, `GET`, `POST`, `PUT`, `OPTIONS`, `TRACE`, `DELETE`, `PATCH` and `CONNECT`.
-
-When `MatchKey` is `ipCountry`, valid values include:
-`OTHER`: Other areas
-`VE`: Venezuela
-`UY`: Uruguay
-`SR`: Suriname
-`PY`: Paraguay
-`PE`: Peru
-`GY`: Guyana
-`EC`: Ecuador
-`CO`: Colombia
-`CL`: Chile
-`BR`: Brazil
-`BO`: Bolivia
-`AR`: Argentina
-`NZ`: New Zealand
-`WS`: Samoa
-`VU`: Vanuatu
-`TV`: Tuvalu
-`TO`: Tonga
-`TK`: Tokelau
-`PW`: Palau
-`NU`: Niue
-`NR`: Nauru
-`KI`: Kiribati
-`GU`: Guam
-`FM`: Micronesia
-`AU`: Australia
-`US`: United States
-`PR`: Puerto Rico
-`DO`: Dominican Republic
-`CR`: Costa Rica
-`AS`: American Samoa
-`AG`: Antigua and Barbuda
-`PA`: Panama
-`NI`: Nicaragua
-`MX`: Mexico
-`JM`: Jamaica
-`HT`: Haiti
-`HN`: Honduras
-`GT`: Guatemala
-`GP`: Guadeloupe
-`GL`: Greenland
-`GD`: Grenada
-`CU`: Cuba
-`CA`: Canada
-`BZ`: Belize
-`BS`: Bahamas
-`BM`: Bermuda
-`BB`: Barbados
-`AW`: Aruba
-`AI`: Anguilla
-`VA`: Vatican
-`SK`: Slovakia
-`GB`: United Kingdom
-`CZ`: Czech Republic
-`UA`: Ukraine
-`TR`: Türkiye
-`SI`: Slovenia
-`SE`: Sweden
-`RS`: Republic of Serbia
-`RO`: Romania
-`PT`: Portugal
-`PL`: Poland
-`NO`: Norway
-`NL`: Netherlands
-`MT`: Malta
-`MK`: Macedonia
-`ME`: Montenegro
-`MD`: Moldova
-`MC`: Monaco
-`LV`: Latvia
-`LU`: Luxembourg
-`LT`: Lithuania
-`LI`: Liechtenstein
-`KZ`: Kazakhstan
-`IT`: Italy
-`IS`: Iceland
-`IE`: Ireland
-`HU`: Hungary
-`HR`: Croatia
-`GR`: Greece
-`GI`: Gibraltar
-`GG`: Guernsey
-`GE`: Georgia
-`FR`: France
-`FI`: Finland
-`ES`: Spain
-`EE`: Estonia
-`DK`: Denmark
-`DE`: Germany
-`CY`: Cyprus
-`CH`: Switzerland
-`BY`: Belarus
-`BG`: Bulgaria
-`BE`: Belgium
-`AZ`: Azerbaijan
-`AT`: Austria
-`AM`: Armenia
-`AL`: Albania
-`AD`: Andorra
-`TL`: East Timor
-`SY`: Syria
-`SA`: Saudi Arabia
-`PS`: Palestine
-`LK`: Sri Lanka
-`LK`: Sri Lanka
-`KP`: North Korea
-`KG`: Kyrgyzstan
-`HK`: Hong Kong, China
-`BN`: Brunei
-`BD`: Bangladesh
-`AE`: United Arab Emirates
-`YE`: Yemen
-`VN`: Vietnam
-`UZ`: Uzbekistan
-`TW`: Taiwan, China
-`TM`: Turkmenistan
-`TJ`: Tajikistan
-`TH`: Thailand
-`SG`: Singapore
-`QA`: Qatar
-`PK`: Pakistan
-`PH`: Philippines
-`OM`: Oman
-`NP`: Nepal
-`MY`: Malaysia
-`MV`: Maldives
-`MO`: Macao, China
-`MN`: Mongolia
-`MM`: Myanmar
-`LB`: Lebanon
-`KW`: Kuwait
-`KR`: South Korea
-`KH`: Cambodia
-`JP`: Japan
-`JO`: Jordan
-`IR`: Iran
-`IQ`: Iraq
-`IN`: India
-`IL`: Israel
-`ID`: Indonesia
-`CN`: China
-`BT`: Bhutan
-`BH`: Bahrain
-`AF`: Afghanistan
-`LY`: Libya
-`CD`: Democratic Republic of the Congo
-`RE`: La Réunion
-`SZ`: Swaziland
-`ZW`: Zimbabwe
-`ZM`: Zambia
-`YT`: Mayotte
-`UG`: Uganda
-`TZ`: Tanzania
-`TN`: Tunisia
-`TG`: Togo
-`TD`: Chad
-`SO`: Somalia
-`SN`: Senegal
-`SD`: Sudan
-`SC`: Seychelles
-`RW`: Rwanda
-`NG`: Nigeria
-`NE`: Niger
-`NA`: Namibia
-`MZ`: Mozambique
-`MW`: Malawi
-`MU`: Mauritius
-`MR`: Mauritania
-`ML`: Mali
-`MG`: Madagascar
-`MA`: Morocco
-`LS`: Lesotho
-`LR`: Liberia
-`KM`: Comoros
-`KE`: Kenya
-`GN`: Guinea
-`GM`: Gambia
-`GH`: Ghana
-`GA`: Gabon
-`ET`: Ethiopia
-`ER`: Eritrea
-`EG`: Egypt
-`DZ`: Algeria
-`DJ`: Djibouti
-`CM`: Cameroon
-`CG`: Republic of the Congo
-`BW`: Botswana
-`BJ`: Benin
-`BI`: Burundi
-`AO`: Angola
-
-When MatchKey is `ipArea`, valid values include:
-`OTHER`: Other areas
-`AS`: Asia
-`EU`: Europe
-`AN`: Antarctica
-`AF`: Africa
-`OC`: Oceania
-`NA`: North America
-`SA`: South America
-
-When MatchKey is `index`,
-valid value is `/;/index.html`.
-         * @type {Array.<string> || null}
-         */
-        this.MatchValue = null;
-
-        /**
-         * Whether to distinguish uppercase or lowercase letters. `true`: case sensitive; `false`: case insensitive.
-         * @type {boolean || null}
-         */
-        this.CaseSensitive = null;
-
-        /**
-         * This field is required when `MatchKey` is `param` or `cookie`. For `param`, it indicates a key value of the request parameter if MatchKey is `param`, while a key value of the Cookie request header if MatchKey is `cookie`.
-         * @type {string || null}
-         */
-        this.MatchKeyParam = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.MatchKey = 'MatchKey' in params ? params.MatchKey : null;
-        this.LogicOperator = 'LogicOperator' in params ? params.LogicOperator : null;
-        this.MatchValue = 'MatchValue' in params ? params.MatchValue : null;
-        this.CaseSensitive = 'CaseSensitive' in params ? params.CaseSensitive : null;
-        this.MatchKeyParam = 'MatchKeyParam' in params ? params.MatchKeyParam : null;
 
     }
 }
@@ -11808,84 +10675,6 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * CC attack defense configuration
- * @class
- */
-class ScdnConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether to enable SCDN CC configuration. Values:
-`on`: Enable
-`off`: Disable
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-        /**
-         * Custom CC attack defense rule
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<ScdnCCRules> || null}
-         */
-        this.Rules = null;
-
-        /**
-         * Advanced custom CC attack defense rule
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<AdvancedCCRules> || null}
-         */
-        this.AdvancedRules = null;
-
-        /**
-         * Global advanced CC protection rules
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<AdvancedCCRules> || null}
-         */
-        this.GlobalAdvancedRules = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.Rules) {
-            this.Rules = new Array();
-            for (let z in params.Rules) {
-                let obj = new ScdnCCRules();
-                obj.deserialize(params.Rules[z]);
-                this.Rules.push(obj);
-            }
-        }
-
-        if (params.AdvancedRules) {
-            this.AdvancedRules = new Array();
-            for (let z in params.AdvancedRules) {
-                let obj = new AdvancedCCRules();
-                obj.deserialize(params.AdvancedRules[z]);
-                this.AdvancedRules.push(obj);
-            }
-        }
-
-        if (params.GlobalAdvancedRules) {
-            this.GlobalAdvancedRules = new Array();
-            for (let z in params.GlobalAdvancedRules) {
-                let obj = new AdvancedCCRules();
-                obj.deserialize(params.GlobalAdvancedRules[z]);
-                this.GlobalAdvancedRules.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * Details about a log package download link
  * @class
  */
@@ -11952,78 +10741,6 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * GetDisableRecords request structure.
- * @class
- */
-class GetDisableRecordsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Specifies the URL to be queried
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Starting time, such as `2018-12-12 10:24:00`
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time, such as `2018-12-14 10:24:00`
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Current URL status
-disable: The URL remains disabled, and accessing it will return an error 403
-enable: The URL is enabled (unblocked) and can be normally accessed
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Offset for paginated queries. Default value: 0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Pagination limit. Default value: 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Task ID. The task ID and start time cannot be both left empty.
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Url = 'Url' in params ? params.Url : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-
-    }
-}
-
-/**
  * PurgeUrlsCache response structure.
  * @class
  */
@@ -12054,73 +10771,6 @@ class PurgeUrlsCacheResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Bot JS policy
- * @class
- */
-class BotJavaScript extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether to enable bot JS policies. Values:
-`on`: Enable
-`off`: Disable
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-        /**
-         * Rule type, which can only be `file` currently.
-         * @type {string || null}
-         */
-        this.RuleType = null;
-
-        /**
-         * Rule value. Valid values: `html` and `htm`.
-         * @type {Array.<string> || null}
-         */
-        this.RuleValue = null;
-
-        /**
-         * Action. Valid values: `monitor`, `intercept`, `redirect`, and `captcha`.
-         * @type {string || null}
-         */
-        this.Action = null;
-
-        /**
-         * Redirection target page
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RedirectUrl = null;
-
-        /**
-         * Update time
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.RuleType = 'RuleType' in params ? params.RuleType : null;
-        this.RuleValue = 'RuleValue' in params ? params.RuleValue : null;
-        this.Action = 'Action' in params ? params.Action : null;
-        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -12202,55 +10852,6 @@ class DescribeBillingDataResponse extends  AbstractModel {
                 this.Data.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DisableCaches response structure.
- * @class
- */
-class DisableCachesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Submission result
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {CacheOptResult || null}
-         */
-        this.CacheOptResult = null;
-
-        /**
-         * Task ID
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.CacheOptResult) {
-            let obj = new CacheOptResult();
-            obj.deserialize(params.CacheOptResult)
-            this.CacheOptResult = obj;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -12634,43 +11235,6 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             }
         }
         this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
-
-    }
-}
-
-/**
- * ACL error page
- * @class
- */
-class ScdnErrorPage extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Status code
-`403` is passed in when the action is `intercept`.
-`301` is passed in when the action is `redirect`.
-         * @type {number || null}
-         */
-        this.RedirectCode = null;
-
-        /**
-         * URL to be redirected
-         * @type {string || null}
-         */
-        this.RedirectUrl = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RedirectCode = 'RedirectCode' in params ? params.RedirectCode : null;
-        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
 
     }
 }
@@ -13167,29 +11731,62 @@ For `path`, enter an absolute path, e.g., `/xxx/test.html`.
 }
 
 /**
- * Shared CNAME configuration
-ShareCname is only available to beta users. Submit a ticket if you need it.
+ * Prefetch task details.
  * @class
  */
-class ShareCname extends  AbstractModel {
+class PushTask extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable Shared CNAME. Values:
-`on`: Enable. When enabled, it uses a shared CNAME.
-`off`: Disable. When disabled, it uses a default CNAME.
-
+         * Prefetch task ID
          * @type {string || null}
          */
-        this.Switch = null;
+        this.TaskId = null;
 
         /**
-         * Shared CNAME to be configured
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Prefetched URL
          * @type {string || null}
          */
-        this.Cname = null;
+        this.Url = null;
+
+        /**
+         * Prefetch task status
+`fail`: Prefetch failed
+`done`: Prefetch succeeded
+`process`: Prefetch in progress
+`invalid`: Invalid prefetch with 4XX/5XX status code returned from the origin server
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Prefetch progress in percentage
+         * @type {number || null}
+         */
+        this.Percent = null;
+
+        /**
+         * Prefetch task submission time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Prefetch region
+`mainland`: Within the Chinese mainland
+`overseas`: Outside the Chinese mainland
+`global`: Globe
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Prefetch task update time
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
 
     }
 
@@ -13200,8 +11797,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.Cname = 'Cname' in params ? params.Cname : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -13597,25 +12199,20 @@ class ModifyDomainConfigResponse extends  AbstractModel {
 }
 
 /**
- * CreateScdnFailedLogTask response structure.
+ * QUIC configuration item
  * @class
  */
-class CreateScdnFailedLogTaskResponse extends  AbstractModel {
+class Quic extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Creation result. 
-0: Creation succeeded
+         * Whether to enable QUIC. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
-        this.Result = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Switch = null;
 
     }
 
@@ -13626,8 +12223,7 @@ class CreateScdnFailedLogTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -13831,62 +12427,19 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * Prefetch task details.
+ * DeleteCdnDomain request structure.
  * @class
  */
-class PushTask extends  AbstractModel {
+class DeleteCdnDomainRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Prefetch task ID
+         * Domain name
+The domain name status should be `Disabled`
          * @type {string || null}
          */
-        this.TaskId = null;
-
-        /**
-         * Prefetched URL
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Prefetch task status
-`fail`: Prefetch failed
-`done`: Prefetch succeeded
-`process`: Prefetch in progress
-`invalid`: Invalid prefetch with 4XX/5XX status code returned from the origin server
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Prefetch progress in percentage
-         * @type {number || null}
-         */
-        this.Percent = null;
-
-        /**
-         * Prefetch task submission time
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Prefetch region
-`mainland`: Within the Chinese mainland
-`overseas`: Outside the Chinese mainland
-`global`: Globe
-         * @type {string || null}
-         */
-        this.Area = null;
-
-        /**
-         * Prefetch task update time
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
+        this.Domain = null;
 
     }
 
@@ -13897,13 +12450,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Percent = 'Percent' in params ? params.Percent : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Area = 'Area' in params ? params.Area : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
@@ -14981,42 +13528,18 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * SCDN precise access control configuration
+ * ManageClsTopicDomains response structure.
  * @class
  */
-class AdvancedScdnAclGroup extends  AbstractModel {
+class ManageClsTopicDomainsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Rule name
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.RuleName = null;
-
-        /**
-         * Specific configurations
-         * @type {Array.<AdvancedScdnAclRule> || null}
-         */
-        this.Configure = null;
-
-        /**
-         * Action. Valid values: `intercept` and `redirect`.
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * Whether the rule is activated. Valid values: `active` and `inactive`.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Error page configuration
-         * @type {ScdnErrorPage || null}
-         */
-        this.ErrorPage = null;
+        this.RequestId = null;
 
     }
 
@@ -15027,24 +13550,7 @@ class AdvancedScdnAclGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-
-        if (params.Configure) {
-            this.Configure = new Array();
-            for (let z in params.Configure) {
-                let obj = new AdvancedScdnAclRule();
-                obj.deserialize(params.Configure[z]);
-                this.Configure.push(obj);
-            }
-        }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.Status = 'Status' in params ? params.Status : null;
-
-        if (params.ErrorPage) {
-            let obj = new ScdnErrorPage();
-            obj.deserialize(params.ErrorPage)
-            this.ErrorPage = obj;
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15109,18 +13615,30 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * ManageClsTopicDomains response structure.
+ * ModifyDomainConfig request structure.
  * @class
  */
-class ManageClsTopicDomainsResponse extends  AbstractModel {
+class ModifyDomainConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * The domain name.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Domain = null;
+
+        /**
+         * Name of the configuration parameter.
+         * @type {string || null}
+         */
+        this.Route = null;
+
+        /**
+         * Value of the configuration parameter. This field is serialized to a JSON string {key:value}, where **key** is fixed to `update`.
+         * @type {string || null}
+         */
+        this.Value = null;
 
     }
 
@@ -15131,80 +13649,34 @@ class ManageClsTopicDomainsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Route = 'Route' in params ? params.Route : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
 
 /**
- * HTTPS. When it’s disabled, HTTPS requests are blocked.
+ * Domain name tag configuration
  * @class
  */
-class HttpsBilling extends  AbstractModel {
+class Tag extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable HTTPS. Values:
-`on`: When it's enabled, HTTPS requests are allowed and incur charges. If not specified, his field uses the default value `on`.
-`off`: When it's disabled, HTTPS requests are blocked.
-
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-    }
-}
-
-/**
- * SCDN precise access control configuration
- * @class
- */
-class ScdnAclGroup extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Rule name
-         * @type {string || null}
-         */
-        this.RuleName = null;
-
-        /**
-         * Specific configurations
-         * @type {Array.<ScdnAclRule> || null}
-         */
-        this.Configure = null;
-
-        /**
-         * Action. Valid values: `intercept` and `redirect`.
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * Whether the rule is activated. Valid values: `active` and `inactive`.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Error page configuration
+         * Tag key
 Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {ScdnErrorPage || null}
+         * @type {string || null}
          */
-        this.ErrorPage = null;
+        this.TagKey = null;
+
+        /**
+         * Tag value
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.TagValue = null;
 
     }
 
@@ -15215,59 +13687,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-
-        if (params.Configure) {
-            this.Configure = new Array();
-            for (let z in params.Configure) {
-                let obj = new ScdnAclRule();
-                obj.deserialize(params.Configure[z]);
-                this.Configure.push(obj);
-            }
-        }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.Status = 'Status' in params ? params.Status : null;
-
-        if (params.ErrorPage) {
-            let obj = new ScdnErrorPage();
-            obj.deserialize(params.ErrorPage)
-            this.ErrorPage = obj;
-        }
-
-    }
-}
-
-/**
- * WAF rule information
- * @class
- */
-class ScdnWafRule extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Attack type
-         * @type {string || null}
-         */
-        this.AttackType = null;
-
-        /**
-         * Defense action. Valid value: `observe`.
-         * @type {string || null}
-         */
-        this.Operate = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AttackType = 'AttackType' in params ? params.AttackType : null;
-        this.Operate = 'Operate' in params ? params.Operate : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -15448,41 +13869,24 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * SCDN access control
+ * UpdatePayType request structure.
  * @class
  */
-class ScdnAclConfig extends  AbstractModel {
+class UpdatePayTypeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable SCDN access. Values:
-`on`: Enable
-`off`: Disable
+         * Billing region, which can be `mainland` or `overseas`.
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Area = null;
 
         /**
-         * This field is disused. Please use `AdvancedScriptData` instead.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<ScdnAclGroup> || null}
+         * Billing mode, which can be `flux` or `bandwidth`.
+         * @type {string || null}
          */
-        this.ScriptData = null;
-
-        /**
-         * Error page configuration
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {ScdnErrorPage || null}
-         */
-        this.ErrorPage = null;
-
-        /**
-         * ACL rule group, which is required when the access control is on.
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<AdvancedScdnAclGroup> || null}
-         */
-        this.AdvancedScriptData = null;
+        this.PayType = null;
 
     }
 
@@ -15493,61 +13897,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.ScriptData) {
-            this.ScriptData = new Array();
-            for (let z in params.ScriptData) {
-                let obj = new ScdnAclGroup();
-                obj.deserialize(params.ScriptData[z]);
-                this.ScriptData.push(obj);
-            }
-        }
-
-        if (params.ErrorPage) {
-            let obj = new ScdnErrorPage();
-            obj.deserialize(params.ErrorPage)
-            this.ErrorPage = obj;
-        }
-
-        if (params.AdvancedScriptData) {
-            this.AdvancedScriptData = new Array();
-            for (let z in params.AdvancedScriptData) {
-                let obj = new AdvancedScdnAclGroup();
-                obj.deserialize(params.AdvancedScriptData[z]);
-                this.AdvancedScriptData.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * DDoS configuration
- * @class
- */
-class ScdnDdosConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether to enable SCDN DDoS configuration. Values:
-`on`: Enable
-`off`: Disable
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
 
     }
 }
@@ -15561,15 +13912,13 @@ class DescribePurgeTasksResponse extends  AbstractModel {
         super();
 
         /**
-         * Detailed purge record.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Specifies the detailed refresh record.
          * @type {Array.<PurgeTask> || null}
          */
         this.PurgeLogs = null;
 
         /**
-         * Total number of tasks, which is used for pagination.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Total number of tasks. for pagination.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -16059,8 +14408,8 @@ Note that `Project` will be ignored if `Domains` is specified.
         this.Interval = null;
 
         /**
-         * The aggregate data for multiple domain names is returned by default (false) during a multi-domain-name query.
-You can set it to true to return the details for each Domain (the statusCode metric is currently not supported).
+         * Queries multiple domain names and returns aggregated data by default (false).
+Specifies as required to be true, returns detailed data for each Domain (statusCode, 2xx, 3xx, 4xx, 5xx metrics not currently supported).
          * @type {boolean || null}
          */
         this.Detail = null;
@@ -16255,36 +14604,6 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * QUIC configuration item
- * @class
- */
-class Quic extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether to enable QUIC. Values:
-`on`: Enable
-`off`: Disable
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-    }
-}
-
-/**
  * DescribeDomains request structure.
  * @class
  */
@@ -16360,71 +14679,6 @@ class OfflineCache extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
-
-    }
-}
-
-/**
- * URL redirect rule configuration
- * @class
- */
-class UrlRedirectRule extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Redirect status code. Valid values: 301, 302
-         * @type {number || null}
-         */
-        this.RedirectStatusCode = null;
-
-        /**
-         * URL to be matched. Only URLs are supported, while parameters are not. The exact match is used by default. In regex match, up to 5 wildcards `*` are supported. The URL can contain up to 1,024 characters.
-         * @type {string || null}
-         */
-        this.Pattern = null;
-
-        /**
-         * Target URL, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the matching path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
-         * @type {string || null}
-         */
-        this.RedirectUrl = null;
-
-        /**
-         * Target host. It should be a standard domain name starting with `http://` or `https://`. If it is left empty, "http://[current domain name]" will be used by default.
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.RedirectHost = null;
-
-        /**
-         * Whether to use full-path matching or arbitrary matching
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {boolean || null}
-         */
-        this.FullMatch = null;
-
-        /**
-         * 
-         * @type {boolean || null}
-         */
-        this.Regex = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RedirectStatusCode = 'RedirectStatusCode' in params ? params.RedirectStatusCode : null;
-        this.Pattern = 'Pattern' in params ? params.Pattern : null;
-        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
-        this.RedirectHost = 'RedirectHost' in params ? params.RedirectHost : null;
-        this.FullMatch = 'FullMatch' in params ? params.FullMatch : null;
-        this.Regex = 'Regex' in params ? params.Regex : null;
 
     }
 }
@@ -16536,59 +14790,16 @@ Note: This field may return `null`, indicating that no valid value can be obtain
     }
 }
 
-/**
- * Precise access control match rule
- * @class
- */
-class ScdnAclRule extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Keyword
-         * @type {string || null}
-         */
-        this.MatchKey = null;
-
-        /**
-         * Logical operator. Valid values:
-         * @type {string || null}
-         */
-        this.LogiOperator = null;
-
-        /**
-         * Matched value
-         * @type {string || null}
-         */
-        this.MatchValue = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.MatchKey = 'MatchKey' in params ? params.MatchKey : null;
-        this.LogiOperator = 'LogiOperator' in params ? params.LogiOperator : null;
-        this.MatchValue = 'MatchValue' in params ? params.MatchValue : null;
-
-    }
-}
-
 module.exports = {
     DescribeCdnDomainLogsResponse: DescribeCdnDomainLogsResponse,
     AdvancedAuthentication: AdvancedAuthentication,
     AdvanceHttps: AdvanceHttps,
     Revalidate: Revalidate,
     ResourceData: ResourceData,
-    UrlRecord: UrlRecord,
+    UserAgentFilter: UserAgentFilter,
     OthersPrivateAccess: OthersPrivateAccess,
     DescribePushQuotaResponse: DescribePushQuotaResponse,
     DescribePurgeQuotaResponse: DescribePurgeQuotaResponse,
-    ScdnSevenLayerRules: ScdnSevenLayerRules,
     Authentication: Authentication,
     ImageOptimization: ImageOptimization,
     Https: Https,
@@ -16600,19 +14811,17 @@ module.exports = {
     Compression: Compression,
     PurgePathCacheResponse: PurgePathCacheResponse,
     DomainFilter: DomainFilter,
-    DescribeCdnOriginIpResponse: DescribeCdnOriginIpResponse,
     ParamFilter: ParamFilter,
     SpecificConfig: SpecificConfig,
     FollowRedirect: FollowRedirect,
     RequestHeader: RequestHeader,
     DescribePurgeQuotaRequest: DescribePurgeQuotaRequest,
     Referer: Referer,
-    PostSize: PostSize,
     DescribeCdnDataResponse: DescribeCdnDataResponse,
     EnableClsLogTopicRequest: EnableClsLogTopicRequest,
     CacheConfigNoCache: CacheConfigNoCache,
     OriginCombine: OriginCombine,
-    DeleteCdnDomainRequest: DeleteCdnDomainRequest,
+    DescribeCdnOriginIpResponse: DescribeCdnOriginIpResponse,
     DescribePayTypeResponse: DescribePayTypeResponse,
     PathRule: PathRule,
     ListTopDataRequest: ListTopDataRequest,
@@ -16623,22 +14832,17 @@ module.exports = {
     CompressionRule: CompressionRule,
     RedirectConfig: RedirectConfig,
     GuetzliAdapter: GuetzliAdapter,
-    UpdateScdnDomainResponse: UpdateScdnDomainResponse,
     Origin: Origin,
     AdvancedAuthenticationTypeF: AdvancedAuthenticationTypeF,
     TopData: TopData,
-    EnableCachesRequest: EnableCachesRequest,
     Quota: Quota,
     HeaderKey: HeaderKey,
     DescribeBillingDataRequest: DescribeBillingDataRequest,
     SimpleCache: SimpleCache,
     DeleteClsLogTopicRequest: DeleteClsLogTopicRequest,
-    UserAgentFilter: UserAgentFilter,
-    ModifyDomainConfigRequest: ModifyDomainConfigRequest,
     DescribeCdnOriginIpRequest: DescribeCdnOriginIpRequest,
     UpdatePayTypeResponse: UpdatePayTypeResponse,
     TopicInfo: TopicInfo,
-    AdvancedCCRules: AdvancedCCRules,
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
     BriefDomain: BriefDomain,
     TimestampData: TimestampData,
@@ -16648,10 +14852,9 @@ module.exports = {
     DisableClsLogTopicRequest: DisableClsLogTopicRequest,
     RuleCacheConfig: RuleCacheConfig,
     ListClsTopicDomainsResponse: ListClsTopicDomainsResponse,
-    BotCookie: BotCookie,
+    HttpsBilling: HttpsBilling,
     DescribeCdnIpRequest: DescribeCdnIpRequest,
     Ipv6: Ipv6,
-    WafSubRuleStatus: WafSubRuleStatus,
     FilterRules: FilterRules,
     StatusCodeCache: StatusCodeCache,
     DescribeIpVisitResponse: DescribeIpVisitResponse,
@@ -16662,7 +14865,7 @@ module.exports = {
     AddCdnDomainRequest: AddCdnDomainRequest,
     UserAgentFilterRule: UserAgentFilterRule,
     UpdateDomainConfigRequest: UpdateDomainConfigRequest,
-    Tag: Tag,
+    ShareCname: ShareCname,
     CacheConfigFollowOrigin: CacheConfigFollowOrigin,
     MaxAgeRule: MaxAgeRule,
     AdvancedAuthenticationTypeE: AdvancedAuthenticationTypeE,
@@ -16678,11 +14881,12 @@ module.exports = {
     WebSocket: WebSocket,
     MapInfo: MapInfo,
     DescribeCertDomainsResponse: DescribeCertDomainsResponse,
-    ScdnBotConfig: ScdnBotConfig,
+    DuplicateDomainConfigRequest: DuplicateDomainConfigRequest,
     AuthenticationTypeD: AuthenticationTypeD,
     AuthenticationTypeC: AuthenticationTypeC,
     AuthenticationTypeB: AuthenticationTypeB,
     AuthenticationTypeA: AuthenticationTypeA,
+    ResponseHeader: ResponseHeader,
     OriginAuthenticationTypeA: OriginAuthenticationTypeA,
     DescribePushTasksResponse: DescribePushTasksResponse,
     ResourceOriginData: ResourceOriginData,
@@ -16692,26 +14896,21 @@ module.exports = {
     ServerCert: ServerCert,
     AccessControlRule: AccessControlRule,
     HttpHeaderPathRule: HttpHeaderPathRule,
-    DisableCachesRequest: DisableCachesRequest,
     AddCLSTopicDomainsResponse: AddCLSTopicDomainsResponse,
     SimpleCacheRule: SimpleCacheRule,
     DisableClsLogTopicResponse: DisableClsLogTopicResponse,
-    Hsts: Hsts,
     DescribeIpStatusRequest: DescribeIpStatusRequest,
     DetailDomain: DetailDomain,
     RuleEngine: RuleEngine,
-    GetDisableRecordsResponse: GetDisableRecordsResponse,
     Ipv6Access: Ipv6Access,
     HeuristicCache: HeuristicCache,
-    ResponseHeader: ResponseHeader,
+    DuplicateDomainConfigResponse: DuplicateDomainConfigResponse,
     CdnIpHistory: CdnIpHistory,
     SummarizedData: SummarizedData,
-    UpdateScdnDomainRequest: UpdateScdnDomainRequest,
-    UpdatePayTypeRequest: UpdatePayTypeRequest,
     ManageClsTopicDomainsRequest: ManageClsTopicDomainsRequest,
     AddCLSTopicDomainsRequest: AddCLSTopicDomainsRequest,
-    ScdnWafConfig: ScdnWafConfig,
-    CreateScdnFailedLogTaskRequest: CreateScdnFailedLogTaskRequest,
+    UrlRedirectRule: UrlRedirectRule,
+    PostSize: PostSize,
     Cache: Cache,
     ForceRedirect: ForceRedirect,
     DescribeOriginDataRequest: DescribeOriginDataRequest,
@@ -16725,29 +14924,22 @@ module.exports = {
     DescribePushTasksRequest: DescribePushTasksRequest,
     DescribeUrlViolationsRequest: DescribeUrlViolationsRequest,
     RefererRule: RefererRule,
-    ScdnCCRules: ScdnCCRules,
     IpFreqLimit: IpFreqLimit,
     CreateClsLogTopicRequest: CreateClsLogTopicRequest,
-    CacheOptResult: CacheOptResult,
+    Hsts: Hsts,
     OriginSni: OriginSni,
     StopCdnDomainRequest: StopCdnDomainRequest,
     DescribeMapInfoResponse: DescribeMapInfoResponse,
     DescribeMapInfoRequest: DescribeMapInfoRequest,
-    EnableCachesResponse: EnableCachesResponse,
     RuleQueryString: RuleQueryString,
-    AdvancedScdnAclRule: AdvancedScdnAclRule,
     DescribeIpVisitRequest: DescribeIpVisitRequest,
     HttpHeaderRule: HttpHeaderRule,
     StatusCodeCacheRule: StatusCodeCacheRule,
     ClientCert: ClientCert,
-    ScdnConfig: ScdnConfig,
     DomainLog: DomainLog,
-    GetDisableRecordsRequest: GetDisableRecordsRequest,
     PurgeUrlsCacheResponse: PurgeUrlsCacheResponse,
-    BotJavaScript: BotJavaScript,
     DeleteClsLogTopicResponse: DeleteClsLogTopicResponse,
     DescribeBillingDataResponse: DescribeBillingDataResponse,
-    DisableCachesResponse: DisableCachesResponse,
     SchemeKey: SchemeKey,
     StatisticItem: StatisticItem,
     RangeOriginPullRule: RangeOriginPullRule,
@@ -16755,7 +14947,6 @@ module.exports = {
     AdvanceCacheRule: AdvanceCacheRule,
     DescribeIpStatusResponse: DescribeIpStatusResponse,
     AccessControl: AccessControl,
-    ScdnErrorPage: ScdnErrorPage,
     CacheKey: CacheKey,
     UrlRedirect: UrlRedirect,
     DownstreamCapping: DownstreamCapping,
@@ -16764,7 +14955,7 @@ module.exports = {
     KeyRule: KeyRule,
     ParamFilterRule: ParamFilterRule,
     CappingRule: CappingRule,
-    ShareCname: ShareCname,
+    PushTask: PushTask,
     AutoGuard: AutoGuard,
     ListClsLogTopicsRequest: ListClsLogTopicsRequest,
     Seo: Seo,
@@ -16773,12 +14964,12 @@ module.exports = {
     RegionMapRelation: RegionMapRelation,
     PurgePathCacheRequest: PurgePathCacheRequest,
     ModifyDomainConfigResponse: ModifyDomainConfigResponse,
-    CreateScdnFailedLogTaskResponse: CreateScdnFailedLogTaskResponse,
+    Quic: Quic,
     CdnData: CdnData,
     PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,
     OriginPullOptimization: OriginPullOptimization,
     ErrorPage: ErrorPage,
-    PushTask: PushTask,
+    DeleteCdnDomainRequest: DeleteCdnDomainRequest,
     ReportData: ReportData,
     StartCdnDomainResponse: StartCdnDomainResponse,
     DescribePushQuotaRequest: DescribePushQuotaRequest,
@@ -16801,18 +14992,15 @@ module.exports = {
     SearchClsLogRequest: SearchClsLogRequest,
     AdvanceConfig: AdvanceConfig,
     AwsPrivateAccess: AwsPrivateAccess,
-    AdvancedScdnAclGroup: AdvancedScdnAclGroup,
+    ManageClsTopicDomainsResponse: ManageClsTopicDomainsResponse,
     VideoSeek: VideoSeek,
     Compatibility: Compatibility,
-    ManageClsTopicDomainsResponse: ManageClsTopicDomainsResponse,
-    HttpsBilling: HttpsBilling,
-    ScdnAclGroup: ScdnAclGroup,
-    ScdnWafRule: ScdnWafRule,
+    ModifyDomainConfigRequest: ModifyDomainConfigRequest,
+    Tag: Tag,
     ClsSearchLogs: ClsSearchLogs,
     DescribeUrlViolationsResponse: DescribeUrlViolationsResponse,
     IpFilter: IpFilter,
-    ScdnAclConfig: ScdnAclConfig,
-    ScdnDdosConfig: ScdnDdosConfig,
+    UpdatePayTypeRequest: UpdatePayTypeRequest,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,
     OriginAuthentication: OriginAuthentication,
     ErrorPageRule: ErrorPageRule,
@@ -16825,12 +15013,9 @@ module.exports = {
     DescribeCdnDataRequest: DescribeCdnDataRequest,
     ExtraLogset: ExtraLogset,
     CacheTagKey: CacheTagKey,
-    Quic: Quic,
     DescribeDomainsRequest: DescribeDomainsRequest,
     OfflineCache: OfflineCache,
-    UrlRedirectRule: UrlRedirectRule,
     HTTPHeader: HTTPHeader,
     IpFilterPathRule: IpFilterPathRule,
-    ScdnAclRule: ScdnAclRule,
 
 }

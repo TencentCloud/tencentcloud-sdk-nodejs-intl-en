@@ -137,6 +137,7 @@ const DescribePolicyConditionListConfigManual = models.DescribePolicyConditionLi
 const InstallPluginsRequest = models.InstallPluginsRequest;
 const DescribeAlarmEventsResponse = models.DescribeAlarmEventsResponse;
 const DescribeServiceDiscoveryResponse = models.DescribeServiceDiscoveryResponse;
+const ExportPrometheusReadOnlyDynamicAPIRequest = models.ExportPrometheusReadOnlyDynamicAPIRequest;
 const PrometheusTag = models.PrometheusTag;
 const DescribePolicyConditionListMetric = models.DescribePolicyConditionListMetric;
 const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
@@ -219,6 +220,7 @@ const DescribeDNSConfigResponse = models.DescribeDNSConfigResponse;
 const DeleteRecordingRulesRequest = models.DeleteRecordingRulesRequest;
 const MonitorTypeNamespace = models.MonitorTypeNamespace;
 const UninstallGrafanaPluginsRequest = models.UninstallGrafanaPluginsRequest;
+const PrometheusStringKeyValuePair = models.PrometheusStringKeyValuePair;
 const DeleteSSOAccountResponse = models.DeleteSSOAccountResponse;
 const DescribePolicyGroupListGroup = models.DescribePolicyGroupListGroup;
 const GrafanaAccountInfo = models.GrafanaAccountInfo;
@@ -252,6 +254,7 @@ const PrometheusInstancesItem = models.PrometheusInstancesItem;
 const DescribeConditionsTemplateListRequest = models.DescribeConditionsTemplateListRequest;
 const DeletePrometheusRecordRuleYamlResponse = models.DeletePrometheusRecordRuleYamlResponse;
 const MetricDataPoint = models.MetricDataPoint;
+const ExportPrometheusReadOnlyDynamicAPIResponse = models.ExportPrometheusReadOnlyDynamicAPIResponse;
 const GetMonitorDataRequest = models.GetMonitorDataRequest;
 const CreateRecordingRuleRequest = models.CreateRecordingRuleRequest;
 const ModifyPrometheusConfigRequest = models.ModifyPrometheusConfigRequest;
@@ -266,6 +269,7 @@ const DescribePrometheusTargetsTMPRequest = models.DescribePrometheusTargetsTMPR
 const CreateServiceDiscoveryRequest = models.CreateServiceDiscoveryRequest;
 const PeriodsSt = models.PeriodsSt;
 const ModifyAlarmReceiversResponse = models.ModifyAlarmReceiversResponse;
+const RoutePrometheusDynamicAPIResponse = models.RoutePrometheusDynamicAPIResponse;
 const GrafanaChannel = models.GrafanaChannel;
 const CreatePrometheusConfigRequest = models.CreatePrometheusConfigRequest;
 const DescribeSSOAccountResponse = models.DescribeSSOAccountResponse;
@@ -279,6 +283,7 @@ const ModifyAlarmPolicyConditionResponse = models.ModifyAlarmPolicyConditionResp
 const DescribePrometheusInstancesOverviewResponse = models.DescribePrometheusInstancesOverviewResponse;
 const MetricSet = models.MetricSet;
 const DescribePrometheusRecordRuleYamlResponse = models.DescribePrometheusRecordRuleYamlResponse;
+const RoutePrometheusDynamicAPIRequest = models.RoutePrometheusDynamicAPIRequest;
 const TemplateGroup = models.TemplateGroup;
 const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
 const UpdateGrafanaIntegrationResponse = models.UpdateGrafanaIntegrationResponse;
@@ -287,6 +292,7 @@ const DescribeAlarmMetricsRequest = models.DescribeAlarmMetricsRequest;
 const CreateSSOAccountRequest = models.CreateSSOAccountRequest;
 const AlarmPolicyFilter = models.AlarmPolicyFilter;
 const ModifyAlarmPolicyNoticeResponse = models.ModifyAlarmPolicyNoticeResponse;
+const PrometheusDynamicAPIResponseHTTP = models.PrometheusDynamicAPIResponseHTTP;
 const PrometheusAlertRule = models.PrometheusAlertRule;
 const UnbindPrometheusManagedGrafanaResponse = models.UnbindPrometheusManagedGrafanaResponse;
 const DescribeGrafanaChannelsResponse = models.DescribeGrafanaChannelsResponse;
@@ -524,6 +530,31 @@ Note that alert object and alert message are special fields of Prometheus Rule A
     UpdateAlertRule(req, cb) {
         let resp = new UpdateAlertRuleResponse();
         this.request("UpdateAlertRule", req, resp, cb);
+    }
+
+    /**
+     * Prometheus internal read-only dynamic api proxy supports accessing native Prometheus APIs via cloud api format
+support the following APIs:
+
+| path | method | purpose |
+| - | - | - |
+/api/v1/query | GET, POST | point query
+/api/v1/query_range | GET, POST | Range query
+/api/v1/series | GET, POST | Query the series list
+/api/v1/labels | GET, POST | Query labels
+/api/v1/label/{label_name}/values | GET | Query label values.
+/api/v1/rules | GET | Query pre-aggregation and alert rules.
+/api/v1/user_limits | GET | Query prometheus instance limits
+ /alertmanager/api/v2/alerts/groups | GET | Query current alarm information 
+/alertmanager/api/v2/silences | GET | Query alert silences
+/alertmanager/api/v2/silence/{id} | GET | Query alert silence details
+     * @param {ExportPrometheusReadOnlyDynamicAPIRequest} req
+     * @param {function(string, ExportPrometheusReadOnlyDynamicAPIResponse):void} cb
+     * @public
+     */
+    ExportPrometheusReadOnlyDynamicAPI(req, cb) {
+        let resp = new ExportPrometheusReadOnlyDynamicAPIResponse();
+        this.request("ExportPrometheusReadOnlyDynamicAPI", req, resp, cb);
     }
 
     /**
@@ -876,6 +907,33 @@ Note that alert object and alert message are special fields of Prometheus Rule A
     UnBindingPolicyObject(req, cb) {
         let resp = new UnBindingPolicyObjectResponse();
         this.request("UnBindingPolicyObject", req, resp, cb);
+    }
+
+    /**
+     * Prometheus internal dynamics api proxy supports accessing Prometheus native APIs via cloud APIs.
+support the following APIs:
+ 
+It is recommended to use the ExportPrometheusReadOnlyDynamicAPI call for Read API, supporting longer query latency and response size. Meanwhile, it makes permission management easy.
+
+| path | method | purpose |
+| - | - | - |
+/api/v1/query | GET, POST | point query
+/api/v1/query_range | GET, POST | Range query
+/api/v1/series | GET, POST | Query the series list
+/api/v1/labels | GET, POST | Query labels
+/api/v1/label/{label_name}/values | GET | Query label values.
+/api/v1/rules | GET | Query pre-aggregation and alert rules.
+/api/v1/user_limits | GET | Query prometheus instance limits
+ /alertmanager/api/v2/alerts/groups | GET | Query current alarm information 
+/alertmanager/api/v2/silences | GET, POST | Query, create, or modify alert silences
+/alertmanager/api/v2/silence/{id} | GET, DELETE | Query alert silence details, Delete alert silence
+     * @param {RoutePrometheusDynamicAPIRequest} req
+     * @param {function(string, RoutePrometheusDynamicAPIResponse):void} cb
+     * @public
+     */
+    RoutePrometheusDynamicAPI(req, cb) {
+        let resp = new RoutePrometheusDynamicAPIResponse();
+        this.request("RoutePrometheusDynamicAPI", req, resp, cb);
     }
 
     /**

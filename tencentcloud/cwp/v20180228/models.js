@@ -19835,7 +19835,7 @@ class DescribeLoginTypeHostRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * <p>Sort order: [ASC: ascending | DESC: descending]</p>
+         * <p>Sort order: [ASC: ascending, DESC: descending]</p>
          * @type {string || null}
          */
         this.Order = null;

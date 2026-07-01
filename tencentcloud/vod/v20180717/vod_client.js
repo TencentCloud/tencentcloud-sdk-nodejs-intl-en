@@ -126,6 +126,7 @@ const ProcedureReviewAudioVideoTaskInput = models.ProcedureReviewAudioVideoTaskI
 const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
 const CreateAigcAdvancedCustomElementResponse = models.CreateAigcAdvancedCustomElementResponse;
 const TextWatermarkTemplateInput = models.TextWatermarkTemplateInput;
+const SegmentConfigureInfoForUpdate = models.SegmentConfigureInfoForUpdate;
 const QualityEvaluationConfigureInfoForUpdate = models.QualityEvaluationConfigureInfoForUpdate;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const CreateCDNDomainRequest = models.CreateCDNDomainRequest;
@@ -167,13 +168,14 @@ const AiRecognitionTaskOcrWordsResultInput = models.AiRecognitionTaskOcrWordsRes
 const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
 const SceneAigcImageTaskOutputFileInfo = models.SceneAigcImageTaskOutputFileInfo;
 const ModifyMediaStorageClassResponse = models.ModifyMediaStorageClassResponse;
+const CreateAigcQuotaResponse = models.CreateAigcQuotaResponse;
 const DescribeProcedureTemplatesRequest = models.DescribeProcedureTemplatesRequest;
 const AiReviewPornTaskInput = models.AiReviewPornTaskInput;
 const JitterConfigureInfoForUpdate = models.JitterConfigureInfoForUpdate;
 const UserDefineAsrTextReviewTemplateInfo = models.UserDefineAsrTextReviewTemplateInfo;
 const CreateProcedureTemplateRequest = models.CreateProcedureTemplateRequest;
 const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
-const DescribeAigcUsageDataResponse = models.DescribeAigcUsageDataResponse;
+const DeleteAigcQuotaRequest = models.DeleteAigcQuotaRequest;
 const AigcUsageDataItem = models.AigcUsageDataItem;
 const MPSOutputFile = models.MPSOutputFile;
 const QualityEvaluationConfigureInfo = models.QualityEvaluationConfigureInfo;
@@ -246,6 +248,7 @@ const ProcessMediaByUrlRequest = models.ProcessMediaByUrlRequest;
 const ExtractBlindWatermarkResponse = models.ExtractBlindWatermarkResponse;
 const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
 const SplitMediaTaskConfig = models.SplitMediaTaskConfig;
+const TEHDConfig = models.TEHDConfig;
 const PlayStatFileInfo = models.PlayStatFileInfo;
 const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
 const MediaProcessTaskAdaptiveDynamicStreamingResult = models.MediaProcessTaskAdaptiveDynamicStreamingResult;
@@ -345,6 +348,7 @@ const CrashScreenConfigureInfo = models.CrashScreenConfigureInfo;
 const CreateReviewTemplateRequest = models.CreateReviewTemplateRequest;
 const DescribeMediaInfosResponse = models.DescribeMediaInfosResponse;
 const DeleteProcedureTemplateResponse = models.DeleteProcedureTemplateResponse;
+const ModifyAigcQuotaResponse = models.ModifyAigcQuotaResponse;
 const DescribeReviewTemplatesResponse = models.DescribeReviewTemplatesResponse;
 const DescribeAdaptiveDynamicStreamingTemplatesResponse = models.DescribeAdaptiveDynamicStreamingTemplatesResponse;
 const MediaMiniProgramReviewInfo = models.MediaMiniProgramReviewInfo;
@@ -390,12 +394,13 @@ const DescribeWatermarkTemplatesRequest = models.DescribeWatermarkTemplatesReque
 const ArtifactRepairInfo = models.ArtifactRepairInfo;
 const CreateAigcAudioTaskRequest = models.CreateAigcAudioTaskRequest;
 const CoverBySnapshotTaskInput = models.CoverBySnapshotTaskInput;
-const SegmentConfigureInfoForUpdate = models.SegmentConfigureInfoForUpdate;
+const DescribeMediaProcessUsageDataRequest = models.DescribeMediaProcessUsageDataRequest;
 const RebuildMediaTaskInput = models.RebuildMediaTaskInput;
 const ModifyProcessImageAsyncTemplateResponse = models.ModifyProcessImageAsyncTemplateResponse;
 const UserDefineConfigureInfo = models.UserDefineConfigureInfo;
 const NoiseConfigureInfoForUpdate = models.NoiseConfigureInfoForUpdate;
 const LiveRecordInfo = models.LiveRecordInfo;
+const DescribeAigcQuotasRequest = models.DescribeAigcQuotasRequest;
 const AiRecognitionTaskSegmentSegmentItem = models.AiRecognitionTaskSegmentSegmentItem;
 const RestoreMediaTask = models.RestoreMediaTask;
 const AiReviewPornOcrTaskInput = models.AiReviewPornOcrTaskInput;
@@ -466,6 +471,7 @@ const CreateAigcCustomVoiceOutput = models.CreateAigcCustomVoiceOutput;
 const AudioVolumeBalanceInfo = models.AudioVolumeBalanceInfo;
 const ModifyBlindWatermarkTemplateRequest = models.ModifyBlindWatermarkTemplateRequest;
 const AiRecognitionTaskAsrWordsResultOutput = models.AiRecognitionTaskAsrWordsResultOutput;
+const CreateAigcQuotaRequest = models.CreateAigcQuotaRequest;
 const DescribeHeadTailTemplatesRequest = models.DescribeHeadTailTemplatesRequest;
 const CreateLLMComprehendTemplateResponse = models.CreateLLMComprehendTemplateResponse;
 const DescribeCdnLogsRequest = models.DescribeCdnLogsRequest;
@@ -506,7 +512,7 @@ const DeleteImageSpriteTemplateResponse = models.DeleteImageSpriteTemplateRespon
 const LowLightEnhanceInfo = models.LowLightEnhanceInfo;
 const DescribeContentReviewTemplatesResponse = models.DescribeContentReviewTemplatesResponse;
 const ProductImageConfig = models.ProductImageConfig;
-const TEHDConfig = models.TEHDConfig;
+const DeleteAigcQuotaResponse = models.DeleteAigcQuotaResponse;
 const ProcessImageAsyncTaskInput = models.ProcessImageAsyncTaskInput;
 const ImageReviewUsageDataItem = models.ImageReviewUsageDataItem;
 const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
@@ -640,6 +646,7 @@ const DeleteReviewTemplateRequest = models.DeleteReviewTemplateRequest;
 const CreateLLMComprehendTemplateRequest = models.CreateLLMComprehendTemplateRequest;
 const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
 const AiContentReviewTaskInput = models.AiContentReviewTaskInput;
+const DescribeAigcQuotasResponse = models.DescribeAigcQuotasResponse;
 const CreateAdaptiveDynamicStreamingTemplateResponse = models.CreateAdaptiveDynamicStreamingTemplateResponse;
 const DeleteSampleSnapshotTemplateRequest = models.DeleteSampleSnapshotTemplateRequest;
 const AiAnalysisTaskInput = models.AiAnalysisTaskInput;
@@ -862,7 +869,7 @@ const DescribeCLSLogsetsRequest = models.DescribeCLSLogsetsRequest;
 const DescribeAigcUsageDataRequest = models.DescribeAigcUsageDataRequest;
 const CreateVodDomainResponse = models.CreateVodDomainResponse;
 const ModifyVodDomainAccelerateConfigResponse = models.ModifyVodDomainAccelerateConfigResponse;
-const AiRecognitionTaskSegmentResultInput = models.AiRecognitionTaskSegmentResultInput;
+const AigcQuotaItem = models.AigcQuotaItem;
 const ForceRedirect = models.ForceRedirect;
 const ModifyHeadTailTemplateRequest = models.ModifyHeadTailTemplateRequest;
 const DescribeTasksResponse = models.DescribeTasksResponse;
@@ -964,6 +971,7 @@ const FrameTagConfigureInfo = models.FrameTagConfigureInfo;
 const RemoveWatermarkRequest = models.RemoveWatermarkRequest;
 const SPEKEDrm = models.SPEKEDrm;
 const ExecuteFunctionRequest = models.ExecuteFunctionRequest;
+const ModifyAigcQuotaRequest = models.ModifyAigcQuotaRequest;
 const RebuildMediaTask = models.RebuildMediaTask;
 const TimeRange = models.TimeRange;
 const ConfirmEventsResponse = models.ConfirmEventsResponse;
@@ -1031,7 +1039,7 @@ const DescribeAnimatedGraphicsTemplatesResponse = models.DescribeAnimatedGraphic
 const ExtractCopyRightWatermarkTask = models.ExtractCopyRightWatermarkTask;
 const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
 const QualityInspectItem = models.QualityInspectItem;
-const DescribeMediaProcessUsageDataRequest = models.DescribeMediaProcessUsageDataRequest;
+const DescribeAigcUsageDataResponse = models.DescribeAigcUsageDataResponse;
 const PullUploadTask = models.PullUploadTask;
 const DescribeImageProcessingTemplatesResponse = models.DescribeImageProcessingTemplatesResponse;
 const AigcVideoRedrawTask = models.AigcVideoRedrawTask;
@@ -1060,6 +1068,7 @@ const DescribeStorageDetailsRequest = models.DescribeStorageDetailsRequest;
 const EnhanceMediaQualityResponse = models.EnhanceMediaQualityResponse;
 const SubtitleFormatsOperation = models.SubtitleFormatsOperation;
 const ThirdPartyDrmInfo = models.ThirdPartyDrmInfo;
+const AiRecognitionTaskSegmentResultInput = models.AiRecognitionTaskSegmentResultInput;
 const MediaTrack = models.MediaTrack;
 const FastEditMediaFileInfo = models.FastEditMediaFileInfo;
 const StorageStatData = models.StorageStatData;
@@ -1292,6 +1301,19 @@ The files must be in HLS format. Preferably, they should have the same bitrate a
     }
 
     /**
+     * This API is used to edit AIGC quota configuration. Quota usage starts accumulating when the quota functionality is enabled. The AIGC functionality will no longer be usable once the quota is reached.
+
+Since AGC content generation is an async task, real-time usage data cannot be obtained. Therefore, the Quota limit may result in some errors, and completely precise control cannot be achieved with the set limit.
+     * @param {ModifyAigcQuotaRequest} req
+     * @param {function(string, ModifyAigcQuotaResponse):void} cb
+     * @public
+     */
+    ModifyAigcQuota(req, cb) {
+        let resp = new ModifyAigcQuotaResponse();
+        this.request("ModifyAigcQuota", req, resp, cb);
+    }
+
+    /**
      * This API is used to start a task flow on a video.
 There are two ways to create a task flow template:
 1. Create and modify a task flow template in the console;
@@ -1514,14 +1536,16 @@ This API returns the video content duration for intelligent recognition in secon
     }
 
     /**
-     * Create a new logset with VOD.
-     * @param {CreateCLSLogsetRequest} req
-     * @param {function(string, CreateCLSLogsetResponse):void} cb
+     * This API is used to delete AIGC quota configurations. Once deleted, it will no longer limit the initiation of AIGC tasks.
+
+If the quota is re-enabled after deletion, the amount will be cleared and recalculated.
+     * @param {DeleteAigcQuotaRequest} req
+     * @param {function(string, DeleteAigcQuotaResponse):void} cb
      * @public
      */
-    CreateCLSLogset(req, cb) {
-        let resp = new CreateCLSLogsetResponse();
-        this.request("CreateCLSLogset", req, resp, cb);
+    DeleteAigcQuota(req, cb) {
+        let resp = new DeleteAigcQuotaResponse();
+        this.request("DeleteAigcQuota", req, resp, cb);
     }
 
     /**
@@ -2305,6 +2329,21 @@ This API is used to create a player configuration. Up to 100 configurations can 
     }
 
     /**
+     * This API is used to create and enable AIGC quota configuration. Quota usage starts accumulating when the quota feature is enabled. The AIGC feature will no longer be usable when the quota is reached.
+
+If the quota is re-enabled after deletion, the amount will be cleared and recalculated.
+
+Since AGC content generation is an async task, real-time usage data cannot be obtained. Therefore, the Quota limit may result in some errors, and completely precise control cannot be achieved with the set limit.
+     * @param {CreateAigcQuotaRequest} req
+     * @param {function(string, CreateAigcQuotaResponse):void} cb
+     * @public
+     */
+    CreateAigcQuota(req, cb) {
+        let resp = new CreateAigcQuotaResponse();
+        this.request("CreateAigcQuota", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a custom animated image generating template.
      * @param {DeleteAnimatedGraphicsTemplateRequest} req
      * @param {function(string, DeleteAnimatedGraphicsTemplateResponse):void} cb
@@ -2842,6 +2881,17 @@ The unblock operation takes effect across the entire network in approximately 5-
     ForbidMediaDistribution(req, cb) {
         let resp = new ForbidMediaDistributionResponse();
         this.request("ForbidMediaDistribution", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the AIGC quota configuration.
+     * @param {DescribeAigcQuotasRequest} req
+     * @param {function(string, DescribeAigcQuotasResponse):void} cb
+     * @public
+     */
+    DescribeAigcQuotas(req, cb) {
+        let resp = new DescribeAigcQuotasResponse();
+        this.request("DescribeAigcQuotas", req, resp, cb);
     }
 
     /**
@@ -3449,6 +3499,17 @@ Conditional filtering not recommend
     }
 
     /**
+     * This API is used to modify the category of a media file.
+     * @param {ModifyClassRequest} req
+     * @param {function(string, ModifyClassResponse):void} cb
+     * @public
+     */
+    ModifyClass(req, cb) {
+        let resp = new ModifyClassResponse();
+        this.request("ModifyClass", req, resp, cb);
+    }
+
+    /**
      * Modify a user-customized MPS task template.
 When modifying a template, require filling in MPS related parameters in JSON format into the MPSModifyTemplateParams parameter. For specific task parameter configuration methods, refer to the MPS task template document description.
      * @param {ModifyMPSTemplateRequest} req
@@ -3673,14 +3734,14 @@ The advantage of editing not being solidified is that the editing operation is r
     }
 
     /**
-     * This API is used to modify the category of a media file.
-     * @param {ModifyClassRequest} req
-     * @param {function(string, ModifyClassResponse):void} cb
+     * Create a new logset with VOD.
+     * @param {CreateCLSLogsetRequest} req
+     * @param {function(string, CreateCLSLogsetResponse):void} cb
      * @public
      */
-    ModifyClass(req, cb) {
-        let resp = new ModifyClassResponse();
-        this.request("ModifyClass", req, resp, cb);
+    CreateCLSLogset(req, cb) {
+        let resp = new CreateCLSLogsetResponse();
+        this.request("CreateCLSLogset", req, resp, cb);
     }
 
     /**

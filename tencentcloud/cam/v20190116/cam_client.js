@@ -41,6 +41,7 @@ const DescribeUserSAMLConfigResponse = models.DescribeUserSAMLConfigResponse;
 const DeleteUserPermissionsBoundaryResponse = models.DeleteUserPermissionsBoundaryResponse;
 const ListUsersResponse = models.ListUsersResponse;
 const UpdateRoleDescriptionResponse = models.UpdateRoleDescriptionResponse;
+const GetPasswordRulesRequest = models.GetPasswordRulesRequest;
 const GetAccountSummaryRequest = models.GetAccountSummaryRequest;
 const DeletePolicyResponse = models.DeletePolicyResponse;
 const GetUserAppIdResponse = models.GetUserAppIdResponse;
@@ -52,6 +53,7 @@ const DescribeRoleListRequest = models.DescribeRoleListRequest;
 const DescribeUserSAMLConfigRequest = models.DescribeUserSAMLConfigRequest;
 const DeleteAccessKeyResponse = models.DeleteAccessKeyResponse;
 const PutRolePermissionsBoundaryRequest = models.PutRolePermissionsBoundaryRequest;
+const UpdatePasswordRulesRequest = models.UpdatePasswordRulesRequest;
 const GetGroupRequest = models.GetGroupRequest;
 const StrategyInfo = models.StrategyInfo;
 const DeleteRoleResponse = models.DeleteRoleResponse;
@@ -60,6 +62,7 @@ const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
 const DescribeSubAccountsRequest = models.DescribeSubAccountsRequest;
 const DeleteUserPermissionsBoundaryRequest = models.DeleteUserPermissionsBoundaryRequest;
 const ListSAMLProvidersRequest = models.ListSAMLProvidersRequest;
+const UpdatePasswordRulesResponse = models.UpdatePasswordRulesResponse;
 const CreateAccessKeyResponse = models.CreateAccessKeyResponse;
 const DeletePolicyVersionResponse = models.DeletePolicyVersionResponse;
 const CreateAccessKeyRequest = models.CreateAccessKeyRequest;
@@ -117,6 +120,7 @@ const AttachPolicyInfo = models.AttachPolicyInfo;
 const ConsumeCustomMFATokenRequest = models.ConsumeCustomMFATokenRequest;
 const UpdateRoleConsoleLoginResponse = models.UpdateRoleConsoleLoginResponse;
 const AttachRolePolicyRequest = models.AttachRolePolicyRequest;
+const GetPasswordRulesResponse = models.GetPasswordRulesResponse;
 const ConsumeCustomMFATokenResponse = models.ConsumeCustomMFATokenResponse;
 const AttachUserPolicyRequest = models.AttachUserPolicyRequest;
 const ListAttachedGroupPoliciesResponse = models.ListAttachedGroupPoliciesResponse;
@@ -130,6 +134,7 @@ const CreateOIDCConfigRequest = models.CreateOIDCConfigRequest;
 const AccessKey = models.AccessKey;
 const GetGroupResponse = models.GetGroupResponse;
 const UpdateOIDCConfigResponse = models.UpdateOIDCConfigResponse;
+const PassWordRule = models.PassWordRule;
 const AttachGroupPolicyRequest = models.AttachGroupPolicyRequest;
 const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
 const GetAccountSummaryResponse = models.GetAccountSummaryResponse;
@@ -509,6 +514,17 @@ class CamClient extends AbstractClient {
     UpdateSAMLProvider(req, cb) {
         let resp = new UpdateSAMLProviderResponse();
         this.request("UpdateSAMLProvider", req, resp, cb);
+    }
+
+    /**
+     * Obtaining CAM Console Password Rules
+     * @param {GetPasswordRulesRequest} req
+     * @param {function(string, GetPasswordRulesResponse):void} cb
+     * @public
+     */
+    GetPasswordRules(req, cb) {
+        let resp = new GetPasswordRulesResponse();
+        this.request("GetPasswordRules", req, resp, cb);
     }
 
     /**
@@ -971,6 +987,17 @@ class CamClient extends AbstractClient {
     AttachUserPolicy(req, cb) {
         let resp = new AttachUserPolicyResponse();
         this.request("AttachUserPolicy", req, resp, cb);
+    }
+
+    /**
+     * Updating CAM Console Password Rules
+     * @param {UpdatePasswordRulesRequest} req
+     * @param {function(string, UpdatePasswordRulesResponse):void} cb
+     * @public
+     */
+    UpdatePasswordRules(req, cb) {
+        let resp = new UpdatePasswordRulesResponse();
+        this.request("UpdatePasswordRules", req, resp, cb);
     }
 
     /**

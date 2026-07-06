@@ -346,31 +346,31 @@ class AiRecognitionTaskAsrFullTextSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * Confidence of a recognition segment. Value range: 0-100.
+         * <p>Confidence of the recognized segment. Value range: 0–100.</p>
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Start time offset of a recognition segment in seconds.
+         * <p>Start time offset of the recognized segment, in seconds.</p>
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of a recognition segment in seconds.
+         * <p>End time offset of the recognized segment, in seconds.</p>
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * Recognized text.
+         * <p>Recognized text.</p>
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * Word timestamp information.
+         * <p>Word timestamp information.</p>
          * @type {Array.<WordResult> || null}
          */
         this.Wordlist = null;
@@ -923,67 +923,61 @@ class CreateTranscodeTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Container format. Valid values: mp4, flv, hls, ts, webm, mkv, mxf, mov, mp3, flac, ogg, and m4a. Among them, mp3, flac, ogg, and m4a are for audio-only files.
+         * <p>Container format. Valid values: mp4, flv, hls, ts, webm, mkv, mxf, mov, mp3, flac, ogg, m4a, and wav. Among them, mp3, flac, ogg, m4a, and wav are for audio-only files.</p>
          * @type {string || null}
          */
         this.Container = null;
 
         /**
-         * Name of a transcoding template. Length limit: 64 characters.
+         * <p>Transcoding template name. Length limit: 64 characters.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Template description. Length limit: 256 characters.
+         * <p>Transcoding template description. Length limit: 256 characters.</p>
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Whether to remove video data. Valid values:
-<li>0: Retain</li>
-<li>1: Remove</li>
-Default value: 0.
+         * <p>Indicates whether to remove video data. Valid values:</p><li>0: Data is reserved.</li><li>1: Data is removed.</li>Default value: 0.
          * @type {number || null}
          */
         this.RemoveVideo = null;
 
         /**
-         * Whether to remove audio data. Valid values:
-<li>0: Retain</li>
-<li>1: Remove</li>
-Default value: 0.
+         * <p>Indicates whether to remove audio data. Valid values:</p><li>0: Data is reserved.</li><li>1: Data is removed.</li>Default value: 0.
          * @type {number || null}
          */
         this.RemoveAudio = null;
 
         /**
-         * Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
+         * <p>Video stream configuration parameters. This field is required when RemoveVideo is 0.</p>
          * @type {VideoTemplateInfo || null}
          */
         this.VideoTemplate = null;
 
         /**
-         * Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
+         * <p>Audio stream configuration parameters. This field is required when RemoveAudio is 0.</p>
          * @type {AudioTemplateInfo || null}
          */
         this.AudioTemplate = null;
 
         /**
-         * TESHD transcoding parameter. To enable it, please contact your Tencent Cloud sales rep.
+         * <p>Top Speed Codec transcoding parameters.</p>
          * @type {TEHDConfig || null}
          */
         this.TEHDConfig = null;
 
         /**
-         * Audio/Video enhancement configuration.
+         * <p>Audio/video enhancement configurations.</p>
          * @type {EnhanceConfig || null}
          */
         this.EnhanceConfig = null;
 
         /**
-         * Additional parameter, which is a serialized JSON string.
+         * <p>Extended parameter, which is a serialized JSON string.</p>
          * @type {string || null}
          */
         this.StdExtInfo = null;
@@ -1615,6 +1609,41 @@ Note: The HLS segment format for adaptive bitrate streaming is based on this fie
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.PureAudio = 'PureAudio' in params ? params.PureAudio : null;
         this.SegmentType = 'SegmentType' in params ? params.SegmentType : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class CustomVariable extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -2277,6 +2306,46 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.AwsSQS)
             this.AwsSQS = obj;
         }
+
+    }
+}
+
+/**
+ * Data structure that indicates the subtitle area coordinates for the automatic hard subtitle area detection. The confidence is also included.
+ * @class
+ */
+class SubtitleArea extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Detected subtitle area.</p>
+         * @type {EraseArea || null}
+         */
+        this.Area = null;
+
+        /**
+         * <p>Confidence of the detected area.</p><p>Value range: [0, 100].</p>
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Area) {
+            let obj = new EraseArea();
+            obj.deserialize(params.Area)
+            this.Area = obj;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }
 }
@@ -3907,13 +3976,25 @@ class SyncDubbingRequest extends  AbstractModel {
         this.AudioLang = null;
 
         /**
-         * <p>Output parameters.</p><p>Specifies the output format, etc.</p>
+         * <p>Voice attribute.</p>
+         * @type {VoiceProfile || null}
+         */
+        this.VoiceProfile = null;
+
+        /**
+         * <p>Output parameters.</p><p>Specifies the output format, etc. The default output audio format is base64.</p>
          * @type {SyncDubbingOutputOption || null}
          */
         this.Output = null;
 
         /**
-         * <p>Extended parameters in the format of a JSON string.</p><p>‑ synExt (Object): Speech synthesis extension parameter.<br>- duration (Float): Synthesized audio duration, in seconds. Example: 5.2.<br>- sampleRate (Integer): Synthesized audio sample rate. Default value: 16000. Supported values: [8000,16000,22050,32000,44100].<br> pitch (Integer): -Pitch. Default value: 0 (original voice output). Valid values: [-12, 12].<br>‑ cloneExt (Object): Voice cloning extension parameter.<br>    - timeRanges (Float[][]): Specifies the time ranges for audio cloning. Default value: [[0, 20]]. Example: [[5.2, 10], [45, 59.8]].</p>
+         * <p>Resource ID. The resource needs to be enabled. The default value is the account's primary resource ID.</p>
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * <p>Extended parameters in the format of a JSON string.</p><p><strong>synExt</strong>    Object    Extended text to speech parameter.<br>  <strong>duration</strong>    Float    Synthesized audio duration, in seconds. Example: 5.2.<br>  <strong>sampleRate</strong>    Integer    Synthesized audio sample rate. Default value: 16000. Valid values: [8000, 16000, 22050, 24000, 32000, 44100].<br>  <strong>pitch</strong>    Integer    Pitch. Default value: 0 (original voice output). Valid values: [-12, 12].<br><strong>cloneExt</strong>    Object    Extended voice cloning parameter.<br>  <strong>timeRanges</strong>    Float[][]    Specifies the time ranges for audio cloning. The default value is the first 20 seconds of the audio. Example: [[5.2, 10], [45, 59.8]].</p>
          * @type {string || null}
          */
         this.ExtParam = null;
@@ -3934,11 +4015,18 @@ class SyncDubbingRequest extends  AbstractModel {
         this.AudioUrl = 'AudioUrl' in params ? params.AudioUrl : null;
         this.AudioLang = 'AudioLang' in params ? params.AudioLang : null;
 
+        if (params.VoiceProfile) {
+            let obj = new VoiceProfile();
+            obj.deserialize(params.VoiceProfile)
+            this.VoiceProfile = obj;
+        }
+
         if (params.Output) {
             let obj = new SyncDubbingOutputOption();
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.ExtParam = 'ExtParam' in params ? params.ExtParam : null;
 
     }
@@ -4828,58 +4916,36 @@ class AudioTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Audio stream encoding format.
-When audio transcoding is not needed, the value is:
-<li>copy.</li>
-When the outer parameter Container is mp3, the value is:
-<li>mp3.</li>
-When the outer parameter Container is ogg or flac, the value is:
-<li>flac.</li>
-When the outer parameter Container is m4a, valid values are:
-<li>aac;</li>
-<li>ac3.</li>
-When the outer parameter Container is mp4 or flv, valid values are:
-<li>aac: more suitable for mp4;</li>
-<li>mp3: more suitable for flv;</li>
-<li>mp2.</li>
-When the outer parameter Container is hls, valid values are:
-<li>aac;</li>
-<li>mp3.</li>
+         * <p>Audio stream encoding format.<br>When audio transcoding is not needed, the valid value is:</p><li>copy.</li>When the outer parameter Container is mp3, the valid value is:<li>mp3.</li>When the outer parameter Container is ogg or flac, the valid value is:<li>flac.</li>When the outer parameter Container is m4a, the valid values are:<li>aac;</li><li>ac3.</li>When the outer parameter Container is mp4 or flv, the valid values are:<li>aac: suitable for mp4.</li><li>mp3: suitable for flv.</li><li>mp2.</li>When the outer parameter Container is hls, the valid values are:<li>aac.</li><li>mp3.</li>When the outer parameter Container is wav, the valid values are:<li>pcm16 and pcm24.</li>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Codec = null;
 
         /**
-         * Audio stream bitrate in Kbps. Value range: 0 and [26, 256]. If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+         * <p>Audio stream bitrate, in kbps. Value range: 0 and [26, 256]. When the value is 0, it means the audio bitrate remains consistent with that of the original audio.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
-         * Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
-Unit: Hz.
-Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
+         * <p>Audio stream sampling rate. Different sampling rate options are provided for different encoding standards. Enter 0 to use the source audio sampling rate.<br>For details, see <a href="https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53">Audio Sampling Rate Range</a>.<br>Unit: Hz.<br>Note: Ensure the source audio stream sampling rate is within the supported range. Otherwise, transcoding may fail.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SampleRate = null;
 
         /**
-         * Audio channel mode. Valid values:
-<li>1: mono-channel.</li>
-<li>2: dual-channel.</li>
-<li>6: 5.1 surround sound.
-When the container format is audio (flac, ogg, mp3, and m4a), the audio channel cannot be set to 5.1 surround sound.
-
+         * <p>Audio channel mode. Valid values:</p><li>0: The number of audio channels follows that of the source.</li><li>1: Single channel.</li><li>2: Two channels.</li><li>6: 5.1 channels.</li>When the media container format is an audio format (mp3), the number of audio channels cannot be set to 5.1.<p>Default value: 2.<br>Note: If you set the audio channel to follow that of the source and the audio encoding format does not support the current audio channel, the transcoding task may fail.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.AudioChannel = null;
 
         /**
-         * The audio tracks to retain. All audio tracks are retained by default.
+         * <p>Specifies the retained audio tracks for output. All source tracks are retained by default.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<number> || null}
          */
         this.StreamSelects = null;
@@ -5725,6 +5791,83 @@ class AiAnalysisTaskFrameTagResult extends  AbstractModel {
 }
 
 /**
+ * Fields of the updated voice.
+ * @class
+ */
+class VoiceUpdateFields extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Voice name.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Voice description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Gender.</p><p>Enumeration values:</p><ul><li>male: male</li><li>female: female</li><li>unknown: unknown</li></ul>
+         * @type {string || null}
+         */
+        this.Gender = null;
+
+        /**
+         * <p>Age.</p><p>Enumeration values:</p><ul><li>child: child</li><li>teenager: teenager</li><li>youth: youth</li><li>middle_aged: middle-aged</li><li>senior: senior</li><li>unknown: unknown</li></ul>
+         * @type {string || null}
+         */
+        this.Age = null;
+
+        /**
+         * <p>Language.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Languages = null;
+
+        /**
+         * <p>Tag.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * <p>Scenario.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Scenes = null;
+
+        /**
+         * <p>Audition audio.</p>
+         * @type {string || null}
+         */
+        this.AudioUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Gender = 'Gender' in params ? params.Gender : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Languages = 'Languages' in params ? params.Languages : null;
+        this.Labels = 'Labels' in params ? params.Labels : null;
+        this.Scenes = 'Scenes' in params ? params.Scenes : null;
+        this.AudioUrl = 'AudioUrl' in params ? params.AudioUrl : null;
+
+    }
+}
+
+/**
  * Audio stream configuration parameter
  * @class
  */
@@ -5733,67 +5876,32 @@ class AudioTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Specifies the encoding format of the audio stream.
-When audio transcoding is not needed, the optional values are:.
-<li>copy.</li>
-When the outer parameter Container is mp3, the valid values are:.
-<li>mp3.</li>
-When the outer parameter Container is ogg or flac, the valid values are:.
-<li>flac.</li>
-When the outer parameter Container is m4a, valid values are:.
-<li>aac;</li>
-<li>ac3.</li>
-When the outer parameter Container is mp4 or flv, valid values are:.
-<li>aac: more suitable for mp4;</li>.
-<li>mp3: more suitable for flv;</li>.
-<li>mp2.</li>
-When the outer parameter Container is hls, valid values are:.
-<li>aac;</li>
-<li>mp3;</li>
-<li>eac3: used when merging adaptive transcoding audio tracks.</li>.
+         * <p>Audio stream encoding format.<br>When audio transcoding is not needed, the valid value is:</p><li>copy.</li>When the outer parameter Container is mp3, the valid value is:<li>mp3.</li>When the outer parameter Container is ogg or flac, the valid value is:<li>flac.</li>When the outer parameter Container is m4a, the valid values are:<li>aac;</li><li>ac3.</li>When the outer parameter Container is mp4 or flv, the valid values are:<li>aac: suitable for mp4.</li><li>mp3: suitable for flv.</li><li>mp2.</li>When the outer parameter Container is hls, the valid values are:<li>aac.</li><li>mp3.</li><li>eac3: used when merging audio tracks with adaptive transcoding.</li>When the outer parameter Container is wav, the valid values are:<li>pcm16 and pcm24.</li>
          * @type {string || null}
          */
         this.Codec = null;
 
         /**
-         * The bitrate of the audio stream. value ranges from 0 to 26 and in the range of [26, 256]. measurement unit: kbps.
-If the value is 0, the audio bitrate will be the same as that of the original audio.
-Specifies that when using the TrackChannelInfo parameter for adaptive transcoding audio track merging, the valid values are:.
-Cannot be set to 0.
-2). when Codec is aac, valid values: [26, 256].
-3). when Codec is ac3, valid values: [26, 640].
-4) when Codec is eac3, value range: [26, 6144]. remark: when SampleRate is 44100HZ, maximum value: 5644. when SampleRate is 48000HZ, maximum value: 6144.
-
-
+         * <p>Audio stream bitrate, in kbps. Value range: 0 and [26, 256].<br>When the value is 0, it means the audio bitrate remains consistent with that of the original audio.<br>Note: If the TrackChannelInfo parameter is used for audio track merging with adaptive transcoding, the value range:<br>1) cannot be 0.<br>2) When Codec is aac, the value range is [26, 256].<br>3) When Codec is ac3, the value range is [26, 640].<br>4) When Codec is eac3, the value range is [26, 6144]. Note: When SampleRate is 44100HZ, the maximum value is 5644. When SampleRate is 48000HZ, the maximum value is 6144.</p>
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
-         * Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
-Unit: Hz.
-Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
+         * <p>Audio stream sampling rate. Different sampling rate options are provided for different encoding standards. Enter 0 to use the source audio sampling rate.<br>For details, see <a href="https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53">Audio Sampling Rate Range</a>.<br>Unit: Hz.<br>Note: Ensure the source audio stream sampling rate is within the supported range. Otherwise, transcoding may fail.</p>
          * @type {number || null}
          */
         this.SampleRate = null;
 
         /**
-         * Audio channel mode. Valid values:
-<li>1: mono-channel.</li>
-<li>2: dual-channel.</li>
-<li>6: 5.1 surround sound.
-<li>Default value: 2.
-When the container format is audio (flac, ogg, mp3, and m4a), the audio channel cannot be set to 5.1 surround sound.
+         * <p>Audio channel mode. Valid values:</p><li>0: The number of audio channels follows that of the source.</li><li>1: Single channel.</li><li>2: Two channels.</li><li>6: 5.1 channels.</li>When the media container format is an audio format (mp3), the number of audio channels cannot be set to 5.1.<p>Default value: 2.<br>Note: If you set the audio channel to follow that of the source and the audio encoding format does not support the current audio channel, the transcoding task may fail.</p>
          * @type {number || null}
          */
         this.AudioChannel = null;
 
         /**
-         * Merge audio track information.
-This field only takes effect in adaptive bitrate transcoding.
-
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Audio track merging information.<br>Note: This field only takes effect for adaptive transcoding.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AudioTrackChannelInfo || null}
          */
         this.TrackChannelInfo = null;
@@ -6387,6 +6495,77 @@ This value only distinguishes template types. The task uses the values of Remove
 }
 
 /**
+ * Aggregation results of each LLM detection item.
+ * @class
+ */
+class LLMDetectionResultItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Detection category.</p><p>Enumeration value:</p><ul><li>AIGCQualityCharacteristics: AIGC quality characteristics.</li></ul>
+         * @type {string || null}
+         */
+        this.Category = null;
+
+        /**
+         * <p>Detection group.</p><p>Enumeration values:</p><ul><li>AIGCAuthenticity: AIGC authenticity, including human body plausibility, physical plausibility, and cross-frame consistency.</li><li>AIGCTechQuality: AIGC technology quality, including aspect ratio, black border, and forced portrait mode.</li></ul>
+         * @type {string || null}
+         */
+        this.Group = null;
+
+        /**
+         * <p>Detection type name.</p><p>Enumeration values:</p><ul><li>BodyPoseCheck: Human body pose plausibility, which belongs to AIGCAuthenticity.</li><li>BodyDetailCheck: Human body detail plausibility, including finger count and facial symmetry, which belongs to AIGCAuthenticity.</li><li>PhysicRulesCheck: Physics rules plausibility, including perspective, lighting, and gravity, which belongs to AIGCAuthenticity.</li><li>ObjectConsistencyCheck: Cross-frame object consistency, which belongs to AIGCAuthenticity.</li><li>FormatCheck: Aspect ratio, black border, forced portrait mode, and other format issues, which belong to AIGCTechQuality.</li></ul>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Overall quality score. Value range: [0, 100]. Higher values indicate better quality.</p>
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * <p>Detection confidence. Value range: [0, 100]. Higher values indicate greater certainty.</p>
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * <p>List of issues detected. This is empty if no issue is detected.</p>
+         * @type {Array.<LLMDetectionIssue> || null}
+         */
+        this.IssueSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Category = 'Category' in params ? params.Category : null;
+        this.Group = 'Group' in params ? params.Group : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+        if (params.IssueSet) {
+            this.IssueSet = new Array();
+            for (let z in params.IssueSet) {
+                let obj = new LLMDetectionIssue();
+                obj.deserialize(params.IssueSet[z]);
+                this.IssueSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreateProcessImageTemplate response structure.
  * @class
  */
@@ -6489,65 +6668,61 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a transcoding template.
+         * <p>Unique identifier of the transcoding template.</p>
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Container format. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+         * <p>Container format. Valid values: mp4, flv, hls, mp3, flac, ogg, m4a, and wav. Among them, mp3, flac, ogg, m4a, and wav are for audio-only files.</p>
          * @type {string || null}
          */
         this.Container = null;
 
         /**
-         * Name of a transcoding template. Length limit: 64 characters.
+         * <p>Transcoding template name. Length limit: 64 characters.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Template description. Length limit: 256 characters.
+         * <p>Transcoding template description. Length limit: 256 characters.</p>
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Whether to remove video data. Valid values:
-<li>0: Retain</li>
-<li>1: Remove</li>
+         * <p>Indicates whether to remove video data. Valid values:</p><li>0: Data is reserved.</li><li>1: Data is removed.</li>
          * @type {number || null}
          */
         this.RemoveVideo = null;
 
         /**
-         * Whether to remove audio data. Valid values:
-<li>0: Retain</li>
-<li>1: Remove</li>
+         * <p>Indicates whether to remove audio data. Valid values:</p><li>0: Data is reserved.</li><li>1: Data is removed.</li>
          * @type {number || null}
          */
         this.RemoveAudio = null;
 
         /**
-         * Video stream configuration parameter.
+         * <p>Video stream configuration parameters.</p>
          * @type {VideoTemplateInfoForUpdate || null}
          */
         this.VideoTemplate = null;
 
         /**
-         * Audio stream configuration parameter.
+         * <p>Audio stream configuration parameters.</p>
          * @type {AudioTemplateInfoForUpdate || null}
          */
         this.AudioTemplate = null;
 
         /**
-         * TESHD transcoding parameter. To enable it, please contact your Tencent Cloud sales rep.
+         * <p>Top Speed Codec transcoding parameters.</p>
          * @type {TEHDConfigForUpdate || null}
          */
         this.TEHDConfig = null;
 
         /**
-         * Audio/Video enhancement settings.
+         * <p>Audio/video enhancement parameters.</p>
          * @type {EnhanceConfig || null}
          */
         this.EnhanceConfig = null;
@@ -7345,25 +7520,31 @@ class ImageTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Image encoding configuration.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Image encoding configuration.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {ImageEncodeConfig || null}
          */
         this.EncodeConfig = null;
 
         /**
-         * Image enhancement configuration.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Image enhancement configuration.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {ImageEnhanceConfig || null}
          */
         this.EnhanceConfig = null;
 
         /**
-         * Image erasing configuration.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Image erasing configuration.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {ImageEraseConfig || null}
          */
         this.EraseConfig = null;
+
+        /**
+         * 
+         * @type {AiPosterSuiteConfig || null}
+         */
+        this.AiPosterSuiteConfig = null;
 
     }
 
@@ -7391,6 +7572,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new ImageEraseConfig();
             obj.deserialize(params.EraseConfig)
             this.EraseConfig = obj;
+        }
+
+        if (params.AiPosterSuiteConfig) {
+            let obj = new AiPosterSuiteConfig();
+            obj.deserialize(params.AiPosterSuiteConfig)
+            this.AiPosterSuiteConfig = obj;
         }
 
     }
@@ -7862,6 +8049,53 @@ class AigcAudioOutputAudioInfo extends  AbstractModel {
 }
 
 /**
+ * UpdateVoice request structure.
+ * @class
+ */
+class UpdateVoiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Voice ID.</p>
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
+         * <p>Fields of the updated voice.</p>
+         * @type {VoiceUpdateFields || null}
+         */
+        this.VoiceFields = null;
+
+        /**
+         * <p>Extended parameters in the format of a JSON string.</p>
+         * @type {string || null}
+         */
+        this.ExtParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+
+        if (params.VoiceFields) {
+            let obj = new VoiceUpdateFields();
+            obj.deserialize(params.VoiceFields)
+            this.VoiceFields = obj;
+        }
+        this.ExtParam = 'ExtParam' in params ? params.ExtParam : null;
+
+    }
+}
+
+/**
  * Result type of intelligent cover generating task
  * @class
  */
@@ -8013,7 +8247,7 @@ class AigcImageExtraParam extends  AbstractModel {
         super();
 
         /**
-         * <p>Aspect ratio of the generated video.</p><p>Supported aspect ratios for different models:</p><ol><li>GEM: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, and 21:9.</li></ol><p>Note: For more information about the aspect ratios of specific models, see the model website.</p>
+         * <p>Aspect ratio of the generated video.</p><p>Supported aspect ratios for different models:</p><ol><li>Kling 2.1: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, and 21:9.</li><li>Kling 3.0: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, and 21:9.</li><li>Kling 3.0-Omni: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, and 21:9.</li><li>Kling O1: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, and 21:9.</li><li>Vidu q2: 16:9, 9:16, 1:1, 3:4, 4:3, 21:9, 2:3, and 3:2.</li><li>MJ v7: The aspect ratio needs to be specified in the prompt.</li></ol><p>Note: For more information about the aspect ratios of specific models, see the model website.</p>
          * @type {string || null}
          */
         this.AspectRatio = null;
@@ -8031,7 +8265,7 @@ class AigcImageExtraParam extends  AbstractModel {
         this.LogoAdd = null;
 
         /**
-         * 
+         * <p>Specifies the output format of the image. JPEG and PNG formats are supported.</p>
          * @type {string || null}
          */
         this.OutputFormat = null;
@@ -11156,6 +11390,60 @@ class DescribeSmartEraseTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateVoice response structure.
+ * @class
+ */
+class UpdateVoiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Error code. 0 is returned if the request is successful.</p>
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * <p>Error message. success is returned if the request is successful.</p>
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * <p>Voice information after the update.</p>
+         * @type {VoiceInfo || null}
+         */
+        this.Voice = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+
+        if (params.Voice) {
+            let obj = new VoiceInfo();
+            obj.deserialize(params.Voice)
+            this.Voice = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The parameters for detecting sensitive information based on ASR.
  * @class
  */
@@ -11760,6 +12048,76 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.SteadyState = 'SteadyState' in params ? params.SteadyState : null;
         this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * Issue detected by the LLM.
+ * @class
+ */
+class LLMDetectionIssue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Issue category tag.</p>
+         * @type {string || null}
+         */
+        this.Tag = null;
+
+        /**
+         * <p>Issue description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Quality score of the issue. Value range: [0, 100].</p>
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * <p>Detection confidence for the issue. Value range: [0, 100].</p>
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * <p>Issue start time (ms).</p>
+         * @type {number || null}
+         */
+        this.StartTimeMs = null;
+
+        /**
+         * <p>Issue end time (ms).</p>
+         * @type {number || null}
+         */
+        this.EndTimeMs = null;
+
+        /**
+         * <p>Additional data (JSON format), such as severity and other supplementary information.</p>
+         * @type {string || null}
+         */
+        this.ExtraData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.StartTimeMs = 'StartTimeMs' in params ? params.StartTimeMs : null;
+        this.EndTimeMs = 'EndTimeMs' in params ? params.EndTimeMs : null;
+        this.ExtraData = 'ExtraData' in params ? params.ExtraData : null;
 
     }
 }
@@ -12470,6 +12828,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.SubtitleResults.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DeleteVoice request structure.
+ * @class
+ */
+class DeleteVoiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Voice ID.</p>
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
+         * <p>Extended parameters in the format of a JSON string.</p>
+         * @type {string || null}
+         */
+        this.ExtParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.ExtParam = 'ExtParam' in params ? params.ExtParam : null;
 
     }
 }
@@ -15007,6 +15400,12 @@ class VoiceInfo extends  AbstractModel {
         this.Gender = null;
 
         /**
+         * <p>Age.</p><p>Enumeration values:</p><ul><li>child: child</li><li>teenager: teenager</li><li>youth: youth</li><li>middle_aged: middle-aged</li><li>senior: senior</li><li>unknown: unknown</li></ul>
+         * @type {string || null}
+         */
+        this.Age = null;
+
+        /**
          * <p>List of supported languages. </p><p>For example: en.</p>
          * @type {Array.<string> || null}
          */
@@ -15044,6 +15443,7 @@ class VoiceInfo extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.Category = 'Category' in params ? params.Category : null;
         this.Gender = 'Gender' in params ? params.Gender : null;
+        this.Age = 'Age' in params ? params.Age : null;
         this.Languages = 'Languages' in params ? params.Languages : null;
         this.AudioUrl = 'AudioUrl' in params ? params.AudioUrl : null;
         this.Labels = 'Labels' in params ? params.Labels : null;
@@ -17435,25 +17835,25 @@ class CreateAigcVideoTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>OS.<br>GV.<br>PixVerse.</p>
+         * <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>PixVerse.<br>Mingmou.<br>H2.</p>
          * @type {string || null}
          */
         this.ModelName = null;
 
         /**
-         * <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hailuo: [02, 2.3, and 2.3-fast].</li><li>Kling: [1.6, 2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, q3-turbo, q3, and q3-mix].</li><li>GV: [3.1 and 3.1-fast].</li><li>OS: [2.0].</li><li>PixVerse: [v5.6, v6, and c1].</li></ol>
+         * <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hunyuan: [1.5].</li><li>Hailuo: [02, 2.3, and 2.3-fast].</li><li>Kling: [1.6, 2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, q3-turbo, q3, and q3-mix].</li><li>PixVerse: [v5.6, v6, and c1].</li><li>H2: [1.0].</li></ol>
          * @type {string || null}
          */
         this.ModelVersion = null;
 
         /**
-         * <p>Scenario for the generated video.<br>Note: Not all models support scenarios.</p><ol><li>Kling supports motion control (motion_control).</li><li>Mingmou supports landscape-to-portrait conversion (land2port).</li><li>Vidu supports special effect templates (template_effect).</li></ol>
+         * <p>Scenario for the generated video.<br>Note: Not all models support scenarios.</p><ol><li>Kling supports: motion control (motion_control), digital human (avatar_i2v), and lip sync (lip_sync).</li><li>Mingmou supports: landscape-to-portrait conversion (land2port).</li><li>Vidu supports: effect templates (template_effect).</li><li>Hunyuan supports: 3D world model (3d_scene). The returned file is not a video.</li></ol>
          * @type {string || null}
          */
         this.SceneType = null;
 
         /**
-         * <p>Description of the generated video. (Note: A maximum of 2000 characters is supported.) This parameter is required when no reference image is specified.</p>
+         * <p>Description of the generated video. This parameter is required when no image is specified.</p>
          * @type {string || null}
          */
         this.Prompt = null;
@@ -17465,37 +17865,37 @@ class CreateAigcVideoTaskRequest extends  AbstractModel {
         this.NegativePrompt = null;
 
         /**
-         * <p>The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
+         * <p>The default value is False, meaning the model follows instructions strictly.<br>For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
          * @type {boolean || null}
          */
         this.EnhancePrompt = null;
 
         /**
-         * <p>Image URL for video generation. The URL must be accessible from the public network.<br>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different size limits.</li><li>Supported image formats: JPEG and PNG.</li><li>If the OS model is used, the input image dimension should be 1280x720 or 720x1280.</li></ol>
+         * <p>Image URL used for video generation. The URL must be accessible from the public network.<br>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different size limits. See the model website for a more complete description.</li><li>Supported image formats: JPEG and PNG.</li></ol>
          * @type {string || null}
          */
         this.ImageUrl = null;
 
         /**
-         * <p>The model will generate a video using the image of this parameter as the ending frame.<br>Models that support this parameter:</p><ol><li>GV. If the ending frame image is specified, ImageUrl is required as the starting frame.</li><li>Kling. Version 2.1 supports starting and ending frames with a resolution of 1080P.</li><li>Vidu. q2-pro and q2-turbo support starting and ending frames.</li></ol><p>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different limits.</li><li>Supported image formats: JPEG and PNG.</li></ol>
+         * <p>The model will generate a video using the image of this parameter as the ending frame.<br>Models that support this parameter:</p><ol><li>Kling 2.0, O1, 3.0, and 3.0-Omni support starting and ending frames.</li><li>Kling 1.6, 2.1, 2.5, and 2.6 support starting and ending frames with Resolution:1080p.</li><li>Vidu q2-pro, q2-turbo, q3-pro, and q3-turbo support starting and ending frames.</li><li>PixVerse v5.6, v6, and c1 support starting and ending frames.</li><li>Hailuo 02 supports starting and ending frames.</li></ol><p>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different limits.</li><li>Supported image formats: JPEG and PNG.</li></ol>
          * @type {string || null}
          */
         this.LastImageUrl = null;
 
         /**
-         * <p>List of up to 3 asset images, used to describe the images the model should use for video generation.</p><p>Model that supports multiple images:</p><ol><li>GV. If multiple images are specified, ImageUrl and LastImageUrl are unavailable.</li><li>Vidu supports video generation with multiple reference images. The q2 model accepts 1 to 7 images. The ReferenceType in ImageInfos can be used to specify the subject ID for the input.</li></ol><p>Note:</p><ol><li>The image size cannot exceed 10 MB.</li><li>Supported image formats: JPEG and PNG.</li></ol>
+         * <p>List of multiple asset resource images used to describe the resource images used by the model for video generation.</p><p>Models that support multiple images:</p><ol><li>Vidu q2, q2-pro, q3-turbo, q3, and q3-mix support video generation with multiple reference images. One to 7 images can be uploaded. The ReferenceType in ImageInfos can be used to specify the subject ID for the input.</li><li>Kling O1, 3.0-Omni, and 1.6 support video generation with multiple reference images.<ol><li>Kling 1.6 allows uploading 1 to 4 images.</li><li>Kling O1 and 3.0-Omni allow uploading 1 to 7 images. If a reference video is present, 0 to 4 images can be uploaded.</li></ol></li><li>PixVerse, v5.6, v6, and c1 support video generation with multiple reference images. One to 7 images can be uploaded, and image names need to be specified via the Text field in ImageInfos.</li><li>H2 1.0 supports video generation with multiple image parameters. One to 9 images can be uploaded. If a reference video is present, 0 to 5 images can be uploaded.</li></ol><p>Note:</p><ol><li>The image size cannot exceed 10 MB.</li><li>Supported image formats: JPEG and PNG.</li></ol>
          * @type {Array.<AigcVideoReferenceImageInfo> || null}
          */
         this.ImageInfos = null;
 
         /**
-         * <p>Only Kling O1 supports reference video information.<br>This can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.</p>
+         * <p>Only Kling O1, Kling 3.0-Omni, Vidu q2-pro, and H2 1.0 support reference video information.</p><ol><li>For Kling O1 and 3.0-Omni, the reference video can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.</li><li>Vidu q2-pro supports video reference.</li><li>H2 1.0 supports video reference.</li></ol>
          * @type {Array.<AigcVideoReferenceVideoInfo> || null}
          */
         this.VideoInfos = null;
 
         /**
-         * <p>Duration of the generated video.<br>Note:</p><ol><li>Kling supports 5 and 10 seconds. Default value: 5 seconds.</li><li>The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.</li><li>Vidu supports 1 to 10 seconds.</li><li>GV supports 8 seconds. Default value: 8 seconds.</li><li>OS supports 4, 8, and 12 seconds. Default value: 8 seconds.</li></ol>
+         * <p>Duration of the generated video.<br>Note:</p><ol><li>Kling: default value: 5 seconds.<ul><li>O1 supports 3 to 10 seconds.</li><li>3.0-Omni supports 3 to 15 seconds, or 3 to 10 seconds when a video reference is used.</li><li>3.0 supports 3 to 15 seconds.</li><li>Other versions support 5 and 10 seconds.</li></ul></li><li>The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.</li><li>Vidu: default value: 5 seconds.<ul><li>q3-pro, q3-turbo, q3, and q3-mix support 3 to 16 seconds.</li><li>q2-pro, q2-turbo, and q2 support 1 to 10 seconds.</li></ul></li><li>PixVerse: default value: 5 seconds.<ul><li>v5.6 supports 5, 8, and 10 seconds.</li><li>v6 and c1 support 1 to 15 seconds.</li></ul></li><li>H2 supports 3 to 15 seconds. Default value: 5 seconds.</li></ol>
          * @type {number || null}
          */
         this.Duration = null;
@@ -17513,7 +17913,7 @@ class CreateAigcVideoTaskRequest extends  AbstractModel {
         this.StoreCosParam = null;
 
         /**
-         * <p>Special scenario parameters required by the model, formatted as a JSON serialized string.<br>Example:<br>{"camera_control":{"type":"simple"}}.</p>
+         * <p>Special scenario parameters or storyboard prompts required by the model, formatted as a JSON serialized string.<br>Example:<br>{"camera_control":{"type":"simple"}}.</p>
          * @type {string || null}
          */
         this.AdditionalParameters = null;
@@ -18620,6 +19020,18 @@ class DesignVoiceAsyncRequest extends  AbstractModel {
         this.Prompt = null;
 
         /**
+         * <p>Voice attribute.</p>
+         * @type {VoiceProfile || null}
+         */
+        this.VoiceProfile = null;
+
+        /**
+         * <p>Audition audio text. The length cannot exceed 500.</p>
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
          * <p>Extended parameters in the format of a JSON string.</p>
          * @type {string || null}
          */
@@ -18635,6 +19047,13 @@ class DesignVoiceAsyncRequest extends  AbstractModel {
             return;
         }
         this.Prompt = 'Prompt' in params ? params.Prompt : null;
+
+        if (params.VoiceProfile) {
+            let obj = new VoiceProfile();
+            obj.deserialize(params.VoiceProfile)
+            this.VoiceProfile = obj;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
         this.ExtParam = 'ExtParam' in params ? params.ExtParam : null;
 
     }
@@ -21176,24 +21595,30 @@ strongest: normal video quality, strongest resilience.
 }
 
 /**
- * The parameters for detecting sensitive information.
+ * DetectVideoSubtitleArea request structure.
  * @class
  */
-class TerrorismConfigureInfoForUpdate extends  AbstractModel {
+class DetectVideoSubtitleAreaRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The parameters for detecting sensitive information in images.
-         * @type {TerrorismImgReviewTemplateInfoForUpdate || null}
+         * <p>Input information, which supports only URL and COS.</p>
+         * @type {MediaInputInfo || null}
          */
-        this.ImgReviewInfo = null;
+        this.InputInfo = null;
 
         /**
-         * The parameters for detecting sensitive information based on OCR.
-         * @type {TerrorismOcrReviewTemplateInfoForUpdate || null}
+         * <p>Video language. If you know the language of the video, you can specify this parameter to improve the recognition accuracy.</p><p>Enumeration values:</p><ul><li>zh_en: Chinese and English</li><li>en: English</li><li>ja: Japanese</li><li>ko: Korean</li></ul>
+         * @type {string || null}
          */
-        this.OcrReviewInfo = null;
+        this.VideoLanguage = null;
+
+        /**
+         * <p>Extended parameter. This is left empty by default.</p>
+         * @type {string || null}
+         */
+        this.UserExtPara = null;
 
     }
 
@@ -21205,17 +21630,13 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
             return;
         }
 
-        if (params.ImgReviewInfo) {
-            let obj = new TerrorismImgReviewTemplateInfoForUpdate();
-            obj.deserialize(params.ImgReviewInfo)
-            this.ImgReviewInfo = obj;
+        if (params.InputInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
         }
-
-        if (params.OcrReviewInfo) {
-            let obj = new TerrorismOcrReviewTemplateInfoForUpdate();
-            obj.deserialize(params.OcrReviewInfo)
-            this.OcrReviewInfo = obj;
-        }
+        this.VideoLanguage = 'VideoLanguage' in params ? params.VideoLanguage : null;
+        this.UserExtPara = 'UserExtPara' in params ? params.UserExtPara : null;
 
     }
 }
@@ -23302,6 +23723,59 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * The information about the sensitive content detected based on OCR.
+ * @class
+ */
+class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The confidence score for the OCR-based detection of sensitive information. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * The suggestion for handling the sensitive information detected based on OCR. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * The video segments that contain sensitive information detected based on OCR.
+         * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new MediaContentReviewOcrTextSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Digital watermark parameter type in the MPS task.
  * @class
  */
@@ -23531,7 +24005,7 @@ class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * Information required for uploading AIGC result files to COS. The LVB_QCSRole role needs to be created and authorized.
+ * Information required for uploading AIGC result files to COS. The MPS_QcsRole role needs to be created and authorized.
  * @class
  */
 class AigcStoreCosParam extends  AbstractModel {
@@ -23606,6 +24080,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.VoiceId = null;
 
         /**
+         * <p>Audition audio URL.</p>
+         * @type {string || null}
+         */
+        this.AudioUrl = null;
+
+        /**
          * <p>Extended information.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -23631,6 +24111,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Msg = 'Msg' in params ? params.Msg : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.AudioUrl = 'AudioUrl' in params ? params.AudioUrl : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -25327,19 +25808,19 @@ class AiRecognitionTaskOcrFullTextSegmentTextItem extends  AbstractModel {
         super();
 
         /**
-         * Confidence of a recognition segment. Value range: 0-100.
+         * <p>Confidence of the recognized segment. Value range: 0–100.</p>
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+         * <p>Area coordinates of the recognition result. The array contains 4 elements [x1,y1,x2,y2], representing the horizontal and vertical coordinates of the top-left corner and bottom-right corner.</p>
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
 
         /**
-         * Recognized text.
+         * <p>Recognized text.</p>
          * @type {string || null}
          */
         this.Text = null;
@@ -25397,39 +25878,38 @@ class SmartSubtitleTaskAsrFullTextSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * Confidence of a recognized segment. Value range: 0-100.
+         * <p>Confidence of the recognized segment. Value range: 0–100.</p>
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Start time offset of a recognized segment, in seconds.
+         * <p>Start time offset of the recognized segment, in seconds.</p>
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of a recognized segment, in seconds.
+         * <p>End time offset of the recognized segment, in seconds.</p>
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * Recognized text.
+         * <p>Recognized text.</p>
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * Word timestamp information.
-
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Word timestamp information.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<WordResult> || null}
          */
         this.Wordlist = null;
 
         /**
-         * Speaker ID (if speaker recognition is enabled).
+         * <p>Speaker ID (if speaker recognition is enabled).</p>
          * @type {string || null}
          */
         this.SpeakerId = null;
@@ -27180,6 +27660,63 @@ Note: This field may return null, indicating that no valid value can be obtained
             return;
         }
         this.SegmentDuration = 'SegmentDuration' in params ? params.SegmentDuration : null;
+
+    }
+}
+
+/**
+ * DetectVideoSubtitleArea response structure.
+ * @class
+ */
+class DetectVideoSubtitleAreaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Video width.</p><p>Unit: px.</p>
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * <p>Video height.</p><p>Unit: px.</p>
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * <p>Detected subtitle box. If nothing is detected, the value is empty.</p>
+         * @type {Array.<SubtitleArea> || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new SubtitleArea();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -29601,6 +30138,46 @@ Note: This field may return null, indicating that no valid value can be obtained
         }
         this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
         this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+
+    }
+}
+
+/**
+ * DetectVideoWatermark request structure.
+ * @class
+ */
+class DetectVideoWatermarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Input information, which supports only URL and COS.</p>
+         * @type {MediaInputInfo || null}
+         */
+        this.InputInfo = null;
+
+        /**
+         * <p>Extended parameter. This is left empty by default.</p>
+         * @type {string || null}
+         */
+        this.UserExtPara = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InputInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
+        }
+        this.UserExtPara = 'UserExtPara' in params ? params.UserExtPara : null;
 
     }
 }
@@ -32781,63 +33358,56 @@ class TaskNotifyConfig extends  AbstractModel {
         super();
 
         /**
-         * Notification type. available values:.
-<li>CMQ: offline. switch to TDMQ-CMQ.</li>.
-<Li>TDMQ-CMQ: message queue</li>.
-<li>URL: when a URL is specified, the HTTP callback is pushed to the address specified by NotifyUrl. the callback protocol is HTTP+json. the content of the packet body is the same as the output parameters of the parseeventnotification api.</li>.
-<Li>SCF: not recommended. additional configuration is required in the console.</li>.
-<Li>AWS-SQS: aws queue, suitable for aws tasks only and requires the same region.</li>.
-<font color="red">note: if left blank, it is TDMQ-CMQ by default. to use another type, you need to fill in the corresponding type value. if using TDMQ-CMQ message queue, an excessively large task response may cause queue failure.</font>.
+         * <p>Notification type. Valid values:</p><li>CMQ: Removed. We recommend that you switch to TDMQ-CMQ.</li><li>TDMQ-CMQ: TDMQ.</li><li>URL: If URL is specified, HTTP callbacks are pushed to the URL specified in NotifyUrl. The callback protocol is HTTP and JSON. The packet body is the same as the output parameter of the event parsing notification API.</li><li>SCF: This is not recommended. Additional configuration for SCF is required in the console.</li><li>AWS-SQS: AWS queue. This is only suitable for AWS tasks in the same region.</li><font color="red"> Note: The default value is TDMQ-CMQ if this is not specified or empty. To use another type, you need to specify the corresponding value. If TDMQ-CMQ is used, oversized task response may cause failure to write to the queue. </font>
          * @type {string || null}
          */
         this.NotifyType = null;
 
         /**
-         * Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+         * <p>Workflow notification mode. Valid values are Finish and Change. If this is not specified, the default value is Finish.</p>
          * @type {string || null}
          */
         this.NotifyMode = null;
 
         /**
-         * HTTP callback URL, required if `NotifyType` is set to `URL`
+         * <p>HTTP callback URL. This is required if NotifyType is URL.</p>
          * @type {string || null}
          */
         this.NotifyUrl = null;
 
         /**
-         * The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
+         * <p>CMQ or TDMQ for CMQ model. Valid values are Queue and Topic.</p>
          * @type {string || null}
          */
         this.CmqModel = null;
 
         /**
-         * The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
+         * <p>CMQ or TDMQ for CMQ region, such as sh or bj.</p>
          * @type {string || null}
          */
         this.CmqRegion = null;
 
         /**
-         * The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
+         * <p>This field takes effect if the model is Topic. It indicates the topic name of the CMQ or TDMQ for CMQ for receiving event notifications.</p>
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+         * <p>This field takes effect if the model is Queue. It indicates the queue name of the CMQ or TDMQ for CMQ for receiving event notifications.</p>
          * @type {string || null}
          */
         this.QueueName = null;
 
         /**
-         * The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.
-
+         * <p>AWS SQS callback. This is required if NotifyType is AWS-SQS.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AwsSQS || null}
          */
         this.AwsSQS = null;
 
         /**
-         * key used to generate a callback signature.
+         * <p>Key used to generate the callback signature.</p>
          * @type {string || null}
          */
         this.NotifyKey = null;
@@ -33828,6 +34398,76 @@ class AiRecognitionTaskOcrFullTextResultInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * Voice attribute.
+ * @class
+ */
+class VoiceProfile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Voice name.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Voice description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Gender.</p><p>Enumeration values:</p><ul><li>male: male</li><li>female: female</li><li>unknown: unknown</li></ul>
+         * @type {string || null}
+         */
+        this.Gender = null;
+
+        /**
+         * <p>Age.</p><p>Enumeration values:</p><ul><li>child: child</li><li>teenager: teenager</li><li>youth: youth</li><li>middle_aged: middle-aged</li><li>senior: senior</li><li>unknown: unknown</li></ul>
+         * @type {string || null}
+         */
+        this.Age = null;
+
+        /**
+         * <p>Language. Supported languages:<br>zh Chinese<br>en English<br>ja Japanese<br>de German<br>fr French<br>ko Korean<br>ru Russian<br>uk Ukrainian<br>pt Portuguese<br>it Italian<br>es Spanish<br>id Indonesian<br>nl Dutch<br>tr Turkish<br>fil Filipino<br>ms Malay<br>el Greek<br>fi Finnish<br>hr Croatian<br>sk Slovak<br>pl Polish<br>sv Swedish<br>hi Hindi<br>bg Bulgarian<br>ro Romanian<br>ar Arabic<br>cs Czech<br>da Danish<br>ta Tamil<br>hun Hungarian<br>vi Vietnamese<br>no Norwegian<br>yue Cantonese<br>th Thai<br>he Hebrew<br>ca Catalan<br>nn Nynorsk<br>af Afrikaans<br>fa Persian<br>sl Slovenian</p>
+         * @type {Array.<string> || null}
+         */
+        this.Languages = null;
+
+        /**
+         * <p>Tag.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * <p>Scenario.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Scenes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Gender = 'Gender' in params ? params.Gender : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Languages = 'Languages' in params ? params.Languages : null;
+        this.Labels = 'Labels' in params ? params.Labels : null;
+        this.Scenes = 'Scenes' in params ? params.Scenes : null;
 
     }
 }
@@ -35509,7 +36149,7 @@ class CreateTranscodeTemplateResponse extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a transcoding template.
+         * <p>Unique identifier of the transcoding template.</p>
          * @type {number || null}
          */
         this.Definition = null;
@@ -35932,7 +36572,7 @@ class ProcessLiveStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>The live streaming URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the trtc room number ID, which must be a number.<br><code>&lt;sdkappid&gt;</code> is the trtc SDK app ID.<br><code>&lt;userid&gt;</code> is the user ID of the service entering the room, which can distinguish robots.<br><code>&lt;usersig&gt;</code> is the trtc user's signature.</p><p>WebRTC supports the live stream of <a href="https://www.tencentcloud.com/products/css?from_qcintl=topnav&lang=en&pg=">CSS</a>. To obtain the address, <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">see</a>.</p><p>For SRT-supported addresses, <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a>.</p>
+         * <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
          * @type {string || null}
          */
         this.Url = null;
@@ -36525,12 +37165,7 @@ class CreateSmartSubtitleTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br><br>ASR recognition and pure caption translation currently support the following: 
-
-[ASR Supported Languages](https://www.tencentcloud.com/zh/document/product/1041/68175#ASRlanguages)
-
-
-Common available language codes:<br>`auto` (Auto Recognition), <br>`zh` (Simplified Chinese), <br>`en` (English), <br>`ja` (Japanese), <br>`ko` (Korean), <br>`zh-PY `(Chinese, English and Cantonese), <br>`zh_medical `(Medical Chinese), <br>`vi` (Vietnamese), <br>`ms` (Malay), <br>`id` (Indonesian), <br>`fil` (Filipino), <br>`th` (Thai), <br>`pt` (Portuguese), <br>`tr` (Turkish), <br>`ar` (Arabic), <br>`es` (Spanish), <br>`hi` (Hindi), <br>`fr` (French), <br>`de` (German), <br>`it` (Italian), <br>`zh_dialect` (Chinese Dialects), <br>`zh_en` (Chinese & English Mixed), <br>`yue` (Cantonese), <br>`ru` (Russian), <br>`prime_zh` (Chinese, English & Chinese Dialects)
+         * <p>Smart subtitling video source language.</p><p>For ASR and subtitle translation parameter values, see <a href="https://www.tencentcloud.com/document/product/862/116243?from_cn_redirect=1#ASRlanguages">ASR Languages</a>.</p><p>The following lists some commonly used values:</p><p><code>auto</code>: automatic identification. <code>zh</code>: Simplified Chinese. <code>en</code>: English. <code>ja</code>: Japanese. <code>ko</code>: Korean. <code>zh-PY</code>: Chinese, English, and Cantonese. <code>zh_medical</code>: Chinese health care. <code>vi</code>: Vietnamese. <code>ms</code>: Malay. <code>id</code>: Indonesian. <code>fil</code>: Filipino. <code>th</code>: Thai. <code>pt</code>: Portuguese. <code>tr</code>: Turkish. <code>ar</code>: Arabic. <code>es</code>: Spanish. <code>hi</code>: Hindi. <code>fr</code>: French. <code>de</code>: German. <code>it</code>: Italian. <code>zh_dialect</code>: Chinese dialect. <code>zh_en</code>: Chinese and English. <code>yue</code>: Cantonese. <code>ru</code>: Russian. <code>prime_zh</code>: Chinese and English dialects.</p><p>OCR only supports the following values:</p><p><code>zh_en</code>: Chinese and English<br><code>multi</code>: others</p><p>For languages supported by different values, see <a href="https://www.tencentcloud.com/document/product/862/116243?from_cn_redirect=1#OCRlanguages">OCR Languages</a></p>
          * @type {string || null}
          */
         this.VideoSrcLanguage = null;
@@ -36566,7 +37201,7 @@ Common available language codes:<br>`auto` (Auto Recognition), <br>`zh` (Simplif
         this.TranslateSwitch = null;
 
         /**
-         * <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: GaLanguage<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method.<code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
+         * <p>This parameter takes effect when the value of TranslateSwitch is ON. Valid translation languages:</p><p>For ASR extraction and translation, see <a href="https://www.tencentcloud.com/document/product/862/116243?from_cn_redirect=1#ASRlanguages">ASR Translation Languages</a>.<br>For OCR extraction and translation, see <a href="https://www.tencentcloud.com/document/product/862/116243?from_cn_redirect=1#OCRlanguages">OCR Translation Languages</a>.</p><p><strong>Note</strong>: Use <code>/</code> to separate multiple languages, such as <code>en/ja</code>, which indicates English and Japanese.</p><p>Examples of some commonly used languages:</p><p><code>ar</code>: Arabic<br><code>en</code>: English<br><code>fr</code>: French<br><code>it</code>: Italian<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>ru</code>: Russian<br><code>th</code>: Thai<br><code>tr</code>: Turkish<br><code>vi</code>: Vietnamese<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese</p>
          * @type {string || null}
          */
         this.TranslateDstLanguage = null;
@@ -36744,6 +37379,12 @@ class QualityControlData extends  AbstractModel {
          */
         this.ContainerDiagnoseResultSet = null;
 
+        /**
+         * <p>LLM AIGC quality detection result.</p>
+         * @type {LLMDetectionReport || null}
+         */
+        this.LLMDetectionReport = null;
+
     }
 
     /**
@@ -36775,6 +37416,12 @@ class QualityControlData extends  AbstractModel {
                 obj.deserialize(params.ContainerDiagnoseResultSet[z]);
                 this.ContainerDiagnoseResultSet.push(obj);
             }
+        }
+
+        if (params.LLMDetectionReport) {
+            let obj = new LLMDetectionReport();
+            obj.deserialize(params.LLMDetectionReport)
+            this.LLMDetectionReport = obj;
         }
 
     }
@@ -37673,37 +38320,43 @@ class CreateAigcImageTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Model name.<br>Supported models:<br>Hunyuan.<br>GEM.<br>Qwen.</p>
+         * <p>Model name.<br>Supported models:<br>Hunyuan.<br>Qwen.<br>Vidu.<br>Kling.<br>MJ.</p>
          * @type {string || null}
          */
         this.ModelName = null;
 
         /**
-         * <p>Specify the model version number. By default, the system uses the supported stable version of the model.</p><ol><li>GEM: [2.5 and 3.0].</li></ol>
+         * <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hunyuan: [3.0].</li><li>Vidu: [q2].</li><li>Kling: [2.1, O1, 3.0, and 3.0-Omni].</li><li>Qwen: [0925].</li><li>MJ: [v7].</li></ol>
          * @type {string || null}
          */
         this.ModelVersion = null;
 
         /**
-         * <p>Description of the generated image. (Note: Supports up to 1000 characters.) This parameter is required when no reference image is passed in.</p>
+         * <p>Used for scene-based image generation; only supported by some models.</p><p>Enumeration value:</p><ul><li>3d_panorama: panoramic view. Only Hunyuan supports this.</li></ul>
+         * @type {string || null}
+         */
+        this.SceneType = null;
+
+        /**
+         * <p>Description of the generated image. This parameter is required when no reference image is specified.</p>
          * @type {string || null}
          */
         this.Prompt = null;
 
         /**
-         * <p>Specifies the content you want to prevent the model from generating. Note: Not all models support this. For example: top lighting, bright colors, people, animals, multiple vehicles, and wind.</p>
+         * <p>Specifies the content you want to prevent the model from generating. Note: Not all models support this.</p><p>For example: top lighting, bright colors, people, animals, multiple vehicles, and wind.</p>
          * @type {string || null}
          */
         this.NegativePrompt = null;
 
         /**
-         * <p>The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
+         * <p>The default value is False, meaning the model follows instructions strictly.<br>For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
          * @type {boolean || null}
          */
         this.EnhancePrompt = null;
 
         /**
-         * <p>Used for inputting image information as a resource for reference. Default support for inputting an image.</p><p>Models supporting multi-image input:</p><ol><li>GEM, supporting up to 3 images as resource input.</li></ol><p>Note:</p><ol><li>Recommended image less than 7M. Limits vary by model.</li><li>Format support: jpeg, png, webp.</li></ol>
+         * <p>Reference resource images. By default, one image can be specified.</p><p>Models supporting multiple images:</p><ol><li>Kling 2.1 supports up to 4 images as resource image input.</li><li>Kling 3.0-Omni supports up to 10 images as resource image input.</li><li>Kling O1 supports up to 10 images as resource image input.</li><li>Vidu q2 supports up to 7 images as resource image input.</li><li>Hunyuan 3.0 supports up to 3 images as resource image input.</li><li>MJ v7 supports up to 3 images as resource image input.</li></ol><p>Note:</p><ol><li>The recommended image size is less than 7 MB. Different models have different limits.</li><li>Supported image formats: JPEG, PNG, and WebP.</li></ol>
          * @type {Array.<AigcImageInfo> || null}
          */
         this.ImageInfos = null;
@@ -37715,7 +38368,7 @@ class CreateAigcImageTaskRequest extends  AbstractModel {
         this.ExtraParameters = null;
 
         /**
-         * <p>Used to input some special scene parameters required by the model, serialized into a string in Json format. Example: {"size":"2048x2048"}</p>
+         * <p>Special scenario parameters required by the model, formatted as a JSON serialized string.</p><ol><li>Hunyuan 3.0 supports freely setting resolution width and height within [512, 2048] pixels, with the product of width and height less than or equal to 1024x1024 pixels.</li><li>Qwen 0925 supports freely setting resolution width and height, with a valid total pixel range of [512x512=261632, 2048x2048=4194304].</li></ol><p>Example: {"size":"1024x1024"}.</p>
          * @type {string || null}
          */
         this.AdditionalParameters = null;
@@ -37743,6 +38396,7 @@ class CreateAigcImageTaskRequest extends  AbstractModel {
         }
         this.ModelName = 'ModelName' in params ? params.ModelName : null;
         this.ModelVersion = 'ModelVersion' in params ? params.ModelVersion : null;
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
         this.Prompt = 'Prompt' in params ? params.Prompt : null;
         this.NegativePrompt = 'NegativePrompt' in params ? params.NegativePrompt : null;
         this.EnhancePrompt = 'EnhancePrompt' in params ? params.EnhancePrompt : null;
@@ -38177,6 +38831,49 @@ class DescribeSmartSubtitleTemplatesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * LLM detection result report.
+ * @class
+ */
+class LLMDetectionReport extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Number of detection results.</p>
+         * @type {number || null}
+         */
+        this.ResultCount = null;
+
+        /**
+         * <p>Detection item result list.</p>
+         * @type {Array.<LLMDetectionResultItem> || null}
+         */
+        this.ResultSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResultCount = 'ResultCount' in params ? params.ResultCount : null;
+
+        if (params.ResultSet) {
+            this.ResultSet = new Array();
+            for (let z in params.ResultSet) {
+                let obj = new LLMDetectionResultItem();
+                obj.deserialize(params.ResultSet[z]);
+                this.ResultSet.push(obj);
+            }
+        }
 
     }
 }
@@ -39603,25 +40300,25 @@ class AigcVideoExtraParam extends  AbstractModel {
         super();
 
         /**
-         * <p>Resolution of the generated video. The resolution is related to the selected model and set video duration.</p><p>Supported resolution options for different models:</p><ol><li>Kling: 720P (default) and 1080P.</li><li>Hailuo: 768P (default) and 1080P.</li><li>Vidu: 720P (default) and 1080P.</li><li>GV: 720P (default) and 1080P.</li><li>OS: 720P. For images, only 1280x720 and 720x1280 are supported. Resolution cannot be specified.</li></ol><p>Note: In addition to the resolution supported by the model, 2K and 4K resolutions are also available.</p>
+         * <p>Resolution of the generated video. The resolution is related to the selected model and set video duration.</p><p>Supported resolution options for different models:</p><ol><li>Kling: 720P (default) and 1080P. Kling 3.0 and Kling 3.0-Omni support 4K.</li><li>Hailuo: 768P (default) and 1080P.</li><li>Vidu: 540P, 720P (default), and 1080P.</li><li>PixVerse: 540P, 720P (default), and 1080P.</li><li>H2: 720P and 1080P (default).</li></ol><p>Note: In addition to the resolution supported by the model, 2K and 4K resolutions are also available.</p>
          * @type {string || null}
          */
         this.Resolution = null;
 
         /**
-         * <p>Aspect ratio of the generated video.</p><p>Support for this parameter by different models:</p><ol><li>Kling only supports this parameter for text-to-video, with aspect ratios of 16:9 (default), 9:16, and 1:1.</li><li>Hailuo does not support this parameter.</li><li>Vidu supports [16:9, 9:16, 4:3, 3:4, 1:1] for text-to-video and reference image-to-video only. Only q2 supports 4:3 and 3:4.</li><li>GV supports 16:9 (default) and 9:16.</li><li>OS only supports this parameter for text-to-video, with aspect ratios of 16:9 (default) and 9:16.</li></ol><p>Note: For more information about the supported aspect ratios of specific models, see the model website.</p>
+         * <p>Aspect ratio of the generated video.</p><p>Support for this parameter by different models:</p><ol><li>Kling only supports this parameter for text-to-video, with aspect ratios of 16:9 (default), 9:16, and 1:1.</li><li>Hailuo does not support this parameter.</li><li>Vidu supports [16:9, 9:16, 4:3, 3:4, 1:1] for text-to-video and reference image-to-video only. Only q2 supports 4:3 and 3:4.</li><li>PixVerse supports [16:9, 9:16, 4:3, 3:4, 1:1, 2:3, 3:2, 21:9] for text-to-video and reference image-to-video only. Only v6 and c1 support 2:3, 3:2, and 21:9.</li><li>H2 supports [16:9, 9:16, 4:3, 3:4, 4:5, 5:4, 1:1, 21:9, 9:21] for text-to-video and reference image-to-video only.</li></ol><p>Note: For more information about the supported aspect ratios of specific models, see the model website.</p>
          * @type {string || null}
          */
         this.AspectRatio = null;
 
         /**
-         * <p>Indicates whether to add a logo watermark.</p><ol><li>Hailuo supports this parameter.</li><li>Kling supports this parameter.</li><li>Vidu supports this parameter.</li></ol>
+         * <p>Indicates whether to add a logo watermark.</p><ol><li>Hailuo supports this parameter.</li><li>Kling supports this parameter.</li><li>Vidu supports this parameter.</li><li>H2 supports this parameter.</li></ol>
          * @type {number || null}
          */
         this.LogoAdd = null;
 
         /**
-         * <p>Indicates whether to generate audio for the video. Valid values: true or false.</p><p>Models that support this parameter:</p><ol><li>GV. Default value: true.</li><li>OS. Default value: true.</li></ol>
+         * <p>Indicates whether to generate audio for the video. Valid values: true or false.</p><p>Models that support this parameter:</p><ol><li>Vidu. Only q3 series models support this parameter. Default value: false.</li><li>PixVerse. Default value: false.</li><li>Kling. Default value: false.</li></ol>
          * @type {boolean || null}
          */
         this.EnableAudio = null;
@@ -40375,6 +41072,55 @@ If not set, the service will automatically adopt a suitable bitrate based on aud
 }
 
 /**
+ * DetectVideoWatermark response structure.
+ * @class
+ */
+class DetectVideoWatermarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Confidence of watermark presence.</p><p>Value range: [0, 100].</p>
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * <p>Indicates whether a watermark is present in the video.</p>
+         * @type {boolean || null}
+         */
+        this.HasWatermark = null;
+
+        /**
+         * <p>Watermark description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.HasWatermark = 'HasWatermark' in params ? params.HasWatermark : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Translated segment.
  * @class
  */
@@ -40462,10 +41208,58 @@ class DescribeVoicesRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Voice type. </p><p>Enumeration value: </p><ul><li>system: System audio.</li></ul>
+         * <p>Voice ID.</p>
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
+         * <p>Voice type.</p><p>Enumeration values:</p><ul><li>system: system audio.</li><li>clone: cloned audio.</li><li>design: designed audio.</li><li>all: All voices (default).</li></ul>
          * @type {string || null}
          */
         this.VoiceType = null;
+
+        /**
+         * <p>Voice name.</p>
+         * @type {string || null}
+         */
+        this.VoiceName = null;
+
+        /**
+         * <p>Voice description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Gender.</p><p>Enumeration values:</p><ul><li>male: male</li><li>female: female</li><li>unknown: unknown</li></ul>
+         * @type {string || null}
+         */
+        this.Gender = null;
+
+        /**
+         * <p>Age.</p><p>Enumeration values:</p><ul><li>child: child</li><li>teenager: teenager</li><li>youth: youth</li><li>middle_aged: middle-aged</li><li>senior: senior</li><li>unknown: unknown</li></ul>
+         * @type {string || null}
+         */
+        this.Age = null;
+
+        /**
+         * <p>Language.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Languages = null;
+
+        /**
+         * <p>Tag.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * <p>Scenario.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Scenes = null;
 
         /**
          * <p>Extended parameters in the format of a JSON string. </p><p>Other filter criteria:
@@ -40483,7 +41277,15 @@ voiceName (String): Voice name, fuzzy matching. labels (Array of String): Tags. 
         if (!params) {
             return;
         }
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
         this.VoiceType = 'VoiceType' in params ? params.VoiceType : null;
+        this.VoiceName = 'VoiceName' in params ? params.VoiceName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Gender = 'Gender' in params ? params.Gender : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Languages = 'Languages' in params ? params.Languages : null;
+        this.Labels = 'Labels' in params ? params.Labels : null;
+        this.Scenes = 'Scenes' in params ? params.Scenes : null;
         this.ExtParam = 'ExtParam' in params ? params.ExtParam : null;
 
     }
@@ -40721,33 +41523,24 @@ class DescribeStreamLinkSecurityGroupRequest extends  AbstractModel {
 }
 
 /**
- * The information about the sensitive content detected based on OCR.
+ * 
  * @class
  */
-class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
+class RecipeItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The confidence score for the OCR-based detection of sensitive information. Value range: 0-100.
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * The suggestion for handling the sensitive information detected based on OCR. Valid values:
-<li>pass</li>
-<li>review</li>
-<li>block</li>
+         * 
          * @type {string || null}
          */
-        this.Suggestion = null;
+        this.Theme = null;
 
         /**
-         * The video segments that contain sensitive information detected based on OCR.
-         * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
+         * 
+         * @type {number || null}
          */
-        this.SegmentSet = null;
+        this.Num = null;
 
     }
 
@@ -40758,17 +41551,50 @@ class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Theme = 'Theme' in params ? params.Theme : null;
+        this.Num = 'Num' in params ? params.Num : null;
 
-        if (params.SegmentSet) {
-            this.SegmentSet = new Array();
-            for (let z in params.SegmentSet) {
-                let obj = new MediaContentReviewOcrTextSegmentItem();
-                obj.deserialize(params.SegmentSet[z]);
-                this.SegmentSet.push(obj);
-            }
+    }
+}
+
+/**
+ * DeleteVoice response structure.
+ * @class
+ */
+class DeleteVoiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Error code. 0 is returned if the request is successful.</p>
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * <p>Error message. success is returned if the request is successful.</p>
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -41278,6 +42104,51 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
         this.Tag = 'Tag' in params ? params.Tag : null;
         this.CategorySet = 'CategorySet' in params ? params.CategorySet : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
+ * The parameters for detecting sensitive information.
+ * @class
+ */
+class TerrorismConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The parameters for detecting sensitive information in images.
+         * @type {TerrorismImgReviewTemplateInfoForUpdate || null}
+         */
+        this.ImgReviewInfo = null;
+
+        /**
+         * The parameters for detecting sensitive information based on OCR.
+         * @type {TerrorismOcrReviewTemplateInfoForUpdate || null}
+         */
+        this.OcrReviewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ImgReviewInfo) {
+            let obj = new TerrorismImgReviewTemplateInfoForUpdate();
+            obj.deserialize(params.ImgReviewInfo)
+            this.ImgReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new TerrorismOcrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
+        }
 
     }
 }
@@ -42656,6 +43527,99 @@ class MediaImageSpriteItem extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class AiPosterSuiteConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 
+         * @type {Array.<RecipeItem> || null}
+         */
+        this.Recipe = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Language = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PanelRatio = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PanelResolution = null;
+
+        /**
+         * 
+         * @type {Array.<CustomVariable> || null}
+         */
+        this.CustomVariables = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Model = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.Recipe) {
+            this.Recipe = new Array();
+            for (let z in params.Recipe) {
+                let obj = new RecipeItem();
+                obj.deserialize(params.Recipe[z]);
+                this.Recipe.push(obj);
+            }
+        }
+        this.Language = 'Language' in params ? params.Language : null;
+        this.PanelRatio = 'PanelRatio' in params ? params.PanelRatio : null;
+        this.PanelResolution = 'PanelResolution' in params ? params.PanelResolution : null;
+
+        if (params.CustomVariables) {
+            this.CustomVariables = new Array();
+            for (let z in params.CustomVariables) {
+                let obj = new CustomVariable();
+                obj.deserialize(params.CustomVariables[z]);
+                this.CustomVariables.push(obj);
+            }
+        }
+        this.Model = 'Model' in params ? params.Model : null;
+
+    }
+}
+
+/**
  * The audio enhancement configuration.
  * @class
  */
@@ -43979,37 +44943,37 @@ class AiRecognitionTaskTransTextSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * The confidence score for a segment. Value range: 0-100.
+         * <p>Confidence of the recognized segment. Value range: 0–100.</p>
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * The start time offset (seconds) of a segment.
+         * <p>Start time offset of the recognized segment, in seconds.</p>
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * The end time offset (seconds) of a segment.
+         * <p>End time offset of the recognized segment, in seconds.</p>
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * The text transcript.
+         * <p>Recognized text.</p>
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * The translation.
+         * <p>Translated text.</p>
          * @type {string || null}
          */
         this.Trans = null;
 
         /**
-         * Word timestamp information.
+         * <p>Word timestamp information.</p>
          * @type {Array.<WordResult> || null}
          */
         this.Wordlist = null;
@@ -44233,6 +45197,7 @@ module.exports = {
     ExtractBlindWatermarkTask: ExtractBlindWatermarkTask,
     AiReviewTaskProhibitedAsrResult: AiReviewTaskProhibitedAsrResult,
     AdaptiveDynamicStreamingTemplate: AdaptiveDynamicStreamingTemplate,
+    CustomVariable: CustomVariable,
     AiAnalysisTaskReelOutput: AiAnalysisTaskReelOutput,
     MediaAiAnalysisDescriptionItem: MediaAiAnalysisDescriptionItem,
     DeleteAnimatedGraphicsTemplateResponse: DeleteAnimatedGraphicsTemplateResponse,
@@ -44246,6 +45211,7 @@ module.exports = {
     ManageTaskResponse: ManageTaskResponse,
     DeleteWorkflowRequest: DeleteWorkflowRequest,
     AwsS3FileUploadTrigger: AwsS3FileUploadTrigger,
+    SubtitleArea: SubtitleArea,
     MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
     NumberFormat: NumberFormat,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
@@ -44300,6 +45266,7 @@ module.exports = {
     AiRecognitionTaskInput: AiRecognitionTaskInput,
     SmartSubtitleTaskTextResultOutput: SmartSubtitleTaskTextResultOutput,
     AiAnalysisTaskFrameTagResult: AiAnalysisTaskFrameTagResult,
+    VoiceUpdateFields: VoiceUpdateFields,
     AudioTemplateInfo: AudioTemplateInfo,
     DescribeBatchTaskDetailResponse: DescribeBatchTaskDetailResponse,
     CoverConfigureInfo: CoverConfigureInfo,
@@ -44308,6 +45275,7 @@ module.exports = {
     AiReviewPornAsrTaskInput: AiReviewPornAsrTaskInput,
     AiRecognitionTaskFaceResult: AiRecognitionTaskFaceResult,
     CreateAdaptiveDynamicStreamingTemplateRequest: CreateAdaptiveDynamicStreamingTemplateRequest,
+    LLMDetectionResultItem: LLMDetectionResultItem,
     CreateProcessImageTemplateResponse: CreateProcessImageTemplateResponse,
     TerrorismImgReviewTemplateInfoForUpdate: TerrorismImgReviewTemplateInfoForUpdate,
     ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
@@ -44338,6 +45306,7 @@ module.exports = {
     AudioSeparateConfig: AudioSeparateConfig,
     DeleteAIRecognitionTemplateRequest: DeleteAIRecognitionTemplateRequest,
     AigcAudioOutputAudioInfo: AigcAudioOutputAudioInfo,
+    UpdateVoiceRequest: UpdateVoiceRequest,
     AiAnalysisTaskCoverResult: AiAnalysisTaskCoverResult,
     AudioBeautifyConfig: AudioBeautifyConfig,
     EnableWorkflowRequest: EnableWorkflowRequest,
@@ -44396,6 +45365,7 @@ module.exports = {
     Speakers: Speakers,
     FaceConfigureInfo: FaceConfigureInfo,
     DescribeSmartEraseTemplatesRequest: DescribeSmartEraseTemplatesRequest,
+    UpdateVoiceResponse: UpdateVoiceResponse,
     PoliticalAsrReviewTemplateInfoForUpdate: PoliticalAsrReviewTemplateInfoForUpdate,
     AiSampleFaceOperation: AiSampleFaceOperation,
     SvgWatermarkInputForUpdate: SvgWatermarkInputForUpdate,
@@ -44407,6 +45377,7 @@ module.exports = {
     CreateAigcImageTaskResponse: CreateAigcImageTaskResponse,
     ComposeVideoStream: ComposeVideoStream,
     LiveSmartSubtitleResult: LiveSmartSubtitleResult,
+    LLMDetectionIssue: LLMDetectionIssue,
     ProhibitedAsrReviewTemplateInfoForUpdate: ProhibitedAsrReviewTemplateInfoForUpdate,
     AiAnalysisTaskCutoutInput: AiAnalysisTaskCutoutInput,
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
@@ -44422,6 +45393,7 @@ module.exports = {
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     EditMediaRequest: EditMediaRequest,
     PureSubtitleTransResultOutput: PureSubtitleTransResultOutput,
+    DeleteVoiceRequest: DeleteVoiceRequest,
     DeleteAsrHotwordsRequest: DeleteAsrHotwordsRequest,
     S3InputInfo: S3InputInfo,
     MediaProcessTaskImageSpriteResult: MediaProcessTaskImageSpriteResult,
@@ -44555,7 +45527,7 @@ module.exports = {
     ComposeMediaItem: ComposeMediaItem,
     AdvancedSuperResolutionConfig: AdvancedSuperResolutionConfig,
     BlindWatermarkTemplate: BlindWatermarkTemplate,
-    TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
+    DetectVideoSubtitleAreaRequest: DetectVideoSubtitleAreaRequest,
     DescribePersonSamplesRequest: DescribePersonSamplesRequest,
     EnableScheduleResponse: EnableScheduleResponse,
     SecurityGroupInfo: SecurityGroupInfo,
@@ -44589,6 +45561,7 @@ module.exports = {
     AiReviewTerrorismOcrTaskOutput: AiReviewTerrorismOcrTaskOutput,
     DescribeAsrHotwordsListResponse: DescribeAsrHotwordsListResponse,
     AiAnalysisResult: AiAnalysisResult,
+    AiReviewPoliticalOcrTaskOutput: AiReviewPoliticalOcrTaskOutput,
     BlindWatermarkInput: BlindWatermarkInput,
     DescribeBlindWatermarkTemplatesResponse: DescribeBlindWatermarkTemplatesResponse,
     ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
@@ -44654,6 +45627,7 @@ module.exports = {
     SmartSubtitleTaskAsrFullTextResultOutput: SmartSubtitleTaskAsrFullTextResultOutput,
     TerrorismOcrReviewTemplateInfo: TerrorismOcrReviewTemplateInfo,
     ExtractBlindWatermarkTaskConfig: ExtractBlindWatermarkTaskConfig,
+    DetectVideoSubtitleAreaResponse: DetectVideoSubtitleAreaResponse,
     RecognizeAudioSentence: RecognizeAudioSentence,
     SharpEnhanceConfig: SharpEnhanceConfig,
     ImageEncodeConfig: ImageEncodeConfig,
@@ -44693,6 +45667,7 @@ module.exports = {
     CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
     CreateSmartEraseTemplateResponse: CreateSmartEraseTemplateResponse,
     MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
+    DetectVideoWatermarkRequest: DetectVideoWatermarkRequest,
     ModifySmartSubtitleTemplateResponse: ModifySmartSubtitleTemplateResponse,
     UserDefineConfigureInfoForUpdate: UserDefineConfigureInfoForUpdate,
     S3OutputStorage: S3OutputStorage,
@@ -44766,6 +45741,7 @@ module.exports = {
     OcrFullTextConfigureInfoForUpdate: OcrFullTextConfigureInfoForUpdate,
     SubtitleLayoutConfig: SubtitleLayoutConfig,
     AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
+    VoiceProfile: VoiceProfile,
     SubtitleOutlineConfig: SubtitleOutlineConfig,
     DescribeTasksResponse: DescribeTasksResponse,
     AiRecognitionTaskFaceResultInput: AiRecognitionTaskFaceResultInput,
@@ -44829,6 +45805,7 @@ module.exports = {
     DeleteSubtitleEmbedTemplateResponse: DeleteSubtitleEmbedTemplateResponse,
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
     DescribeSmartSubtitleTemplatesResponse: DescribeSmartSubtitleTemplatesResponse,
+    LLMDetectionReport: LLMDetectionReport,
     DescribeUsageDataRequest: DescribeUsageDataRequest,
     SchedulesInfo: SchedulesInfo,
     DisableWorkflowRequest: DisableWorkflowRequest,
@@ -44867,6 +45844,7 @@ module.exports = {
     AiReviewTaskPornAsrResult: AiReviewTaskPornAsrResult,
     EditMediaFileInfo: EditMediaFileInfo,
     ComposeAudioStream: ComposeAudioStream,
+    DetectVideoWatermarkResponse: DetectVideoWatermarkResponse,
     SmartSubtitleTaskTransTextSegmentItem: SmartSubtitleTaskTransTextSegmentItem,
     DescribeVoicesRequest: DescribeVoicesRequest,
     LiveAiParagraphInfo: LiveAiParagraphInfo,
@@ -44874,7 +45852,8 @@ module.exports = {
     PornImgReviewTemplateInfoForUpdate: PornImgReviewTemplateInfoForUpdate,
     CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
     DescribeStreamLinkSecurityGroupRequest: DescribeStreamLinkSecurityGroupRequest,
-    AiReviewPoliticalOcrTaskOutput: AiReviewPoliticalOcrTaskOutput,
+    RecipeItem: RecipeItem,
+    DeleteVoiceResponse: DeleteVoiceResponse,
     OcrFullTextConfigureInfo: OcrFullTextConfigureInfo,
     UpdateSmartErasePrivacyConfig: UpdateSmartErasePrivacyConfig,
     TextTranslationResponse: TextTranslationResponse,
@@ -44885,6 +45864,7 @@ module.exports = {
     DeleteSnapshotByTimeOffsetTemplateRequest: DeleteSnapshotByTimeOffsetTemplateRequest,
     DescribeAnimatedGraphicsTemplatesResponse: DescribeAnimatedGraphicsTemplatesResponse,
     MediaAiAnalysisFrameTagItem: MediaAiAnalysisFrameTagItem,
+    TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
     ActivityResItem: ActivityResItem,
     LiveActivityResItem: LiveActivityResItem,
     UpdateSmartEraseSubtitleConfig: UpdateSmartEraseSubtitleConfig,
@@ -44903,6 +45883,7 @@ module.exports = {
     SampleSnapshotTemplate: SampleSnapshotTemplate,
     SubtitleEmbedTemplateItem: SubtitleEmbedTemplateItem,
     MediaImageSpriteItem: MediaImageSpriteItem,
+    AiPosterSuiteConfig: AiPosterSuiteConfig,
     AudioEnhanceConfig: AudioEnhanceConfig,
     AiRecognitionTaskFaceResultItem: AiRecognitionTaskFaceResultItem,
     AiAnalysisTaskDescriptionInput: AiAnalysisTaskDescriptionInput,

@@ -4823,7 +4823,7 @@ This API is used to call the billing payment API for payment since prepaid order
     }
 
     /**
-     * Retrieve the global configuration for uninstall protection
+     * This API is used to obtain the global configuration for QR code login.
      * @param {DescribeLoginTypeGlobalConfRequest} req
      * @param {function(string, DescribeLoginTypeGlobalConfResponse):void} cb
      * @public

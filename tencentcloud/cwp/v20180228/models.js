@@ -51088,7 +51088,7 @@ class DescribeLoginTypeGlobalConfResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Whether uninstall protection is enabled <li>0: No</li> <li>1: Yes</li> <li>9: Not set, equivalent to 0 (disabled)</li></p>
+         * <p>Whether to enable QR code log-in <li>0 No</li> <li>1 Yes</li> <li>9 Not set, same as 0 means not enabled</li></p>
          * @type {number || null}
          */
         this.Enable = null;

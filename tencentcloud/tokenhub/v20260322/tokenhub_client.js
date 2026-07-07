@@ -16,27 +16,35 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ModifyGlossaryEntriesRequest = models.ModifyGlossaryEntriesRequest;
+const GlossaryEntryInput = models.GlossaryEntryInput;
+const DeleteGlossaryEntryInput = models.DeleteGlossaryEntryInput;
+const DescribeGlossariesResponse = models.DescribeGlossariesResponse;
+const DeleteGlossaryResponse = models.DeleteGlossaryResponse;
+const DeleteGlossaryEntriesResponse = models.DeleteGlossaryEntriesResponse;
+const GlossaryItem = models.GlossaryItem;
+const ModifyApiKeyInfoResponse = models.ModifyApiKeyInfoResponse;
 const CreateGlossaryRequest = models.CreateGlossaryRequest;
 const DescribeGlossaryEntriesResponse = models.DescribeGlossaryEntriesResponse;
 const DeleteGlossaryRequest = models.DeleteGlossaryRequest;
 const DescribeGlossaryEntriesRequest = models.DescribeGlossaryEntriesRequest;
-const DescribeGlossariesRequest = models.DescribeGlossariesRequest;
-const RequestFilter = models.RequestFilter;
 const DeleteGlossaryEntriesRequest = models.DeleteGlossaryEntriesRequest;
 const CreateGlossaryEntriesResponse = models.CreateGlossaryEntriesResponse;
-const DeleteGlossaryEntryInput = models.DeleteGlossaryEntryInput;
-const GlossaryEntryItem = models.GlossaryEntryItem;
-const DeleteGlossaryResponse = models.DeleteGlossaryResponse;
-const CreateGlossaryEntriesRequest = models.CreateGlossaryEntriesRequest;
-const RequestSort = models.RequestSort;
-const ModifyGlossaryEntriesResponse = models.ModifyGlossaryEntriesResponse;
+const DeleteApiKeyResponse = models.DeleteApiKeyResponse;
 const ModifyGlossaryEntryInput = models.ModifyGlossaryEntryInput;
-const DeleteGlossaryEntriesResponse = models.DeleteGlossaryEntriesResponse;
-const DescribeGlossariesResponse = models.DescribeGlossariesResponse;
-const GlossaryItem = models.GlossaryItem;
-const GlossaryEntryInput = models.GlossaryEntryInput;
+const ModifyApiKeyInfoRequest = models.ModifyApiKeyInfoRequest;
 const CreateGlossaryResponse = models.CreateGlossaryResponse;
+const ModifyGlossaryEntriesRequest = models.ModifyGlossaryEntriesRequest;
+const DescribeGlossariesRequest = models.DescribeGlossariesRequest;
+const ModifyApiKeyStatusRequest = models.ModifyApiKeyStatusRequest;
+const CreateGlossaryEntriesRequest = models.CreateGlossaryEntriesRequest;
+const GlossaryEntryItem = models.GlossaryEntryItem;
+const ModifyApiKeyStatusResponse = models.ModifyApiKeyStatusResponse;
+const CreateApiKeyResponse = models.CreateApiKeyResponse;
+const DeleteApiKeyRequest = models.DeleteApiKeyRequest;
+const RequestFilter = models.RequestFilter;
+const ModifyGlossaryEntriesResponse = models.ModifyGlossaryEntriesResponse;
+const RequestSort = models.RequestSort;
+const CreateApiKeyRequest = models.CreateApiKeyRequest;
 
 
 /**
@@ -60,6 +68,17 @@ Delete terminology entries in batches under the specified Termbase. You can dele
     DeleteGlossaryEntries(req, cb) {
         let resp = new DeleteGlossaryEntriesResponse();
         this.request("DeleteGlossaryEntries", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable or disable the status of an api key.
+     * @param {ModifyApiKeyStatusRequest} req
+     * @param {function(string, ModifyApiKeyStatusResponse):void} cb
+     * @public
+     */
+    ModifyApiKeyStatus(req, cb) {
+        let resp = new ModifyApiKeyStatusResponse();
+        this.request("ModifyApiKeyStatus", req, resp, cb);
     }
 
     /**
@@ -89,16 +108,42 @@ This API is used to batch modify terminology entries in a designated Termbase. Y
     }
 
     /**
-     * Query the terminology repository list.
+     * Query the terminology entry list.
 
-Query the Termbase list under this application. Support paginate, filter, and sort.
-     * @param {DescribeGlossariesRequest} req
-     * @param {function(string, DescribeGlossariesResponse):void} cb
+Query specified entries in a Termbase. Support pagination.
+     * @param {DescribeGlossaryEntriesRequest} req
+     * @param {function(string, DescribeGlossaryEntriesResponse):void} cb
      * @public
      */
-    DescribeGlossaries(req, cb) {
-        let resp = new DescribeGlossariesResponse();
-        this.request("DescribeGlossaries", req, resp, cb);
+    DescribeGlossaryEntries(req, cb) {
+        let resp = new DescribeGlossaryEntriesResponse();
+        this.request("DescribeGlossaryEntries", req, resp, cb);
+    }
+
+    /**
+     * Refresh API key information.
+
+This API is used to update the remark information, IP allowlist and Token quota of an API key (recommended to use QuotaDesired parameter for quota modification). Passing no optional parameters means no modification.
+     * @param {ModifyApiKeyInfoRequest} req
+     * @param {function(string, ModifyApiKeyInfoResponse):void} cb
+     * @public
+     */
+    ModifyApiKeyInfo(req, cb) {
+        let resp = new ModifyApiKeyInfoResponse();
+        this.request("ModifyApiKeyInfo", req, resp, cb);
+    }
+
+    /**
+     * Create an API key.
+
+Create a new API key. Upon successful creation, return the API Key ID. Specify the platform kind, binding method, and initial state.
+     * @param {CreateApiKeyRequest} req
+     * @param {function(string, CreateApiKeyResponse):void} cb
+     * @public
+     */
+    CreateApiKey(req, cb) {
+        let resp = new CreateApiKeyResponse();
+        this.request("CreateApiKey", req, resp, cb);
     }
 
     /**
@@ -128,16 +173,27 @@ This API is used to delete specified Termbase and ALL terminology entries under 
     }
 
     /**
-     * Query the terminology entry list.
-
-Query specified entries in a Termbase. Support pagination.
-     * @param {DescribeGlossaryEntriesRequest} req
-     * @param {function(string, DescribeGlossaryEntriesResponse):void} cb
+     * This API is used to delete specified api keys and clean up associated model binding relationships.
+     * @param {DeleteApiKeyRequest} req
+     * @param {function(string, DeleteApiKeyResponse):void} cb
      * @public
      */
-    DescribeGlossaryEntries(req, cb) {
-        let resp = new DescribeGlossaryEntriesResponse();
-        this.request("DescribeGlossaryEntries", req, resp, cb);
+    DeleteApiKey(req, cb) {
+        let resp = new DeleteApiKeyResponse();
+        this.request("DeleteApiKey", req, resp, cb);
+    }
+
+    /**
+     * Query the terminology repository list.
+
+Query the Termbase list under this application. Support paginate, filter, and sort.
+     * @param {DescribeGlossariesRequest} req
+     * @param {function(string, DescribeGlossariesResponse):void} cb
+     * @public
+     */
+    DescribeGlossaries(req, cb) {
+        let resp = new DescribeGlossariesResponse();
+        this.request("DescribeGlossaries", req, resp, cb);
     }
 
 

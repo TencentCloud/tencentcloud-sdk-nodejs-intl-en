@@ -38375,6 +38375,12 @@ class CreateAigcImageTaskRequest extends  AbstractModel {
         this.ImageInfos = null;
 
         /**
+         * 
+         * @type {number || null}
+         */
+        this.OutputImageCount = null;
+
+        /**
          * <p>Additional parameters required for the model.</p>
          * @type {AigcImageExtraParam || null}
          */
@@ -38422,6 +38428,7 @@ class CreateAigcImageTaskRequest extends  AbstractModel {
                 this.ImageInfos.push(obj);
             }
         }
+        this.OutputImageCount = 'OutputImageCount' in params ? params.OutputImageCount : null;
 
         if (params.ExtraParameters) {
             let obj = new AigcImageExtraParam();

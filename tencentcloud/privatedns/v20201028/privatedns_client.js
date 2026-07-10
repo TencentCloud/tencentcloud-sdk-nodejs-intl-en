@@ -16,90 +16,96 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeExtendEndpointListRequest = models.DescribeExtendEndpointListRequest;
-const DescribeQuotaUsageResponse = models.DescribeQuotaUsageResponse;
-const ModifyPrivateZoneVpcRequest = models.ModifyPrivateZoneVpcRequest;
-const CreateEndPointAndEndPointServiceResponse = models.CreateEndPointAndEndPointServiceResponse;
-const ForwardIp = models.ForwardIp;
-const DescribePrivateDNSAccountListResponse = models.DescribePrivateDNSAccountListResponse;
-const CreateForwardRuleRequest = models.CreateForwardRuleRequest;
-const PrivateDNSAccount = models.PrivateDNSAccount;
-const DescribeForwardRuleListRequest = models.DescribeForwardRuleListRequest;
-const DescribeEndPointListRequest = models.DescribeEndPointListRequest;
-const DescribePrivateZoneRecordListResponse = models.DescribePrivateZoneRecordListResponse;
-const DescribePrivateZoneListResponse = models.DescribePrivateZoneListResponse;
+const QueryAsyncBindVpcStatusResponse = models.QueryAsyncBindVpcStatusResponse;
+const DescribeAccountVpcListRequest = models.DescribeAccountVpcListRequest;
 const AccountVpcInfoOutput = models.AccountVpcInfoOutput;
 const DescribeEndPointRegionRequest = models.DescribeEndPointRegionRequest;
-const DescribeAuditLogResponse = models.DescribeAuditLogResponse;
-const ModifyRecordsStatusResponse = models.ModifyRecordsStatusResponse;
-const CreateExtendEndpointRequest = models.CreateExtendEndpointRequest;
-const DatePoint = models.DatePoint;
 const DescribeAccountVpcListResponse = models.DescribeAccountVpcListResponse;
-const DescribeEndPointRegionResponse = models.DescribeEndPointRegionResponse;
-const DeleteEndPointResponse = models.DeleteEndPointResponse;
-const Filter = models.Filter;
-const PrivateZoneRecord = models.PrivateZoneRecord;
-const DescribePrivateDNSAccountListRequest = models.DescribePrivateDNSAccountListRequest;
-const DeleteEndPointRequest = models.DeleteEndPointRequest;
 const AuditLogInfo = models.AuditLogInfo;
-const OutboundEndpoint = models.OutboundEndpoint;
-const DescribeRequestDataRequest = models.DescribeRequestDataRequest;
+const AddSpecifyPrivateZoneVpcRequest = models.AddSpecifyPrivateZoneVpcRequest;
+const DescribeForwardRuleResponse = models.DescribeForwardRuleResponse;
+const VpcInfo = models.VpcInfo;
+const CreatePrivateDNSAccountResponse = models.CreatePrivateDNSAccountResponse;
+const SubscribePrivateZoneServiceRequest = models.SubscribePrivateZoneServiceRequest;
+const CreateEndPointRequest = models.CreateEndPointRequest;
+const DescribeEndPointListRequest = models.DescribeEndPointListRequest;
+const PrivateZone = models.PrivateZone;
+const CreatePrivateDNSAccountRequest = models.CreatePrivateDNSAccountRequest;
+const FlowUsage = models.FlowUsage;
+const CreateForwardRuleResponse = models.CreateForwardRuleResponse;
+const EndpointService = models.EndpointService;
+const ModifyPrivateZoneVpcRequest = models.ModifyPrivateZoneVpcRequest;
+const DescribePrivateDNSAccountListResponse = models.DescribePrivateDNSAccountListResponse;
+const CreateExtendEndpointRequest = models.CreateExtendEndpointRequest;
+const DescribePrivateZoneServiceRequest = models.DescribePrivateZoneServiceRequest;
+const PrivateZoneRecord = models.PrivateZoneRecord;
+const CreatePrivateZoneRecordRequest = models.CreatePrivateZoneRecordRequest;
 const ModifyPrivateZoneRecordResponse = models.ModifyPrivateZoneRecordResponse;
-const DescribeAccountVpcListRequest = models.DescribeAccountVpcListRequest;
-const CreateExtendEndpointResponse = models.CreateExtendEndpointResponse;
+const DescribePrivateZoneRecordListResponse = models.DescribePrivateZoneRecordListResponse;
 const DescribeRequestDataResponse = models.DescribeRequestDataResponse;
+const DescribeRecordRequest = models.DescribeRecordRequest;
+const DeleteForwardRuleRequest = models.DeleteForwardRuleRequest;
+const ModifyPrivateZoneResponse = models.ModifyPrivateZoneResponse;
+const DeleteSpecifyPrivateZoneVpcRequest = models.DeleteSpecifyPrivateZoneVpcRequest;
+const ModifyPrivateZoneRequest = models.ModifyPrivateZoneRequest;
+const DescribeRecordResponse = models.DescribeRecordResponse;
+const DescribeDashboardResponse = models.DescribeDashboardResponse;
+const RecordInfo = models.RecordInfo;
+const ModifyForwardRuleResponse = models.ModifyForwardRuleResponse;
+const SubscribePrivateZoneServiceResponse = models.SubscribePrivateZoneServiceResponse;
+const AccountVpcInfoOut = models.AccountVpcInfoOut;
+const ModifyRecordsStatusRequest = models.ModifyRecordsStatusRequest;
+const DescribeEndPointRegionResponse = models.DescribeEndPointRegionResponse;
+const CreateEndPointAndEndPointServiceRequest = models.CreateEndPointAndEndPointServiceRequest;
+const ModifyPrivateZoneRecordRequest = models.ModifyPrivateZoneRecordRequest;
+const DescribePrivateDNSAccountListRequest = models.DescribePrivateDNSAccountListRequest;
+const CreateEndPointAndEndPointServiceResponse = models.CreateEndPointAndEndPointServiceResponse;
+const DescribePrivateZoneRecordListRequest = models.DescribePrivateZoneRecordListRequest;
+const PrivateDNSAccount = models.PrivateDNSAccount;
+const DescribeForwardRuleListRequest = models.DescribeForwardRuleListRequest;
+const ModifyRecordsStatusResponse = models.ModifyRecordsStatusResponse;
+const DatePoint = models.DatePoint;
+const DeleteSpecifyPrivateZoneVpcResponse = models.DeleteSpecifyPrivateZoneVpcResponse;
+const DeleteEndPointResponse = models.DeleteEndPointResponse;
+const DeleteEndPointRequest = models.DeleteEndPointRequest;
+const DescribePrivateZoneListRequest = models.DescribePrivateZoneListRequest;
+const OutboundEndpoint = models.OutboundEndpoint;
+const DescribeExtendEndpointListRequest = models.DescribeExtendEndpointListRequest;
+const CreatePrivateZoneRequest = models.CreatePrivateZoneRequest;
+const ModifyForwardRuleRequest = models.ModifyForwardRuleRequest;
+const DescribeRequestDataRequest = models.DescribeRequestDataRequest;
+const Filter = models.Filter;
+const DescribeDashboardRequest = models.DescribeDashboardRequest;
+const CreateEndPointResponse = models.CreateEndPointResponse;
+const DescribeForwardRuleRequest = models.DescribeForwardRuleRequest;
+const DescribePrivateZoneListResponse = models.DescribePrivateZoneListResponse;
+const EndPointInfo = models.EndPointInfo;
+const ModifyPrivateZoneVpcResponse = models.ModifyPrivateZoneVpcResponse;
+const DescribeQuotaUsageResponse = models.DescribeQuotaUsageResponse;
+const DescribeAuditLogResponse = models.DescribeAuditLogResponse;
+const ForwardIp = models.ForwardIp;
+const CreateForwardRuleRequest = models.CreateForwardRuleRequest;
+const AddSpecifyPrivateZoneVpcResponse = models.AddSpecifyPrivateZoneVpcResponse;
+const CreateExtendEndpointResponse = models.CreateExtendEndpointResponse;
 const DescribeEndPointListResponse = models.DescribeEndPointListResponse;
 const RegionInfo = models.RegionInfo;
 const TagInfo = models.TagInfo;
 const TldQuota = models.TldQuota;
-const SubscribePrivateZoneServiceResponse = models.SubscribePrivateZoneServiceResponse;
-const CreatePrivateZoneRequest = models.CreatePrivateZoneRequest;
-const DeleteForwardRuleRequest = models.DeleteForwardRuleRequest;
 const AccountVpcInfo = models.AccountVpcInfo;
-const ModifyPrivateZoneResponse = models.ModifyPrivateZoneResponse;
-const DescribeForwardRuleResponse = models.DescribeForwardRuleResponse;
-const ModifyPrivateZoneVpcResponse = models.ModifyPrivateZoneVpcResponse;
 const ForwardRule = models.ForwardRule;
-const DescribePrivateZoneListRequest = models.DescribePrivateZoneListRequest;
-const DescribeRecordRequest = models.DescribeRecordRequest;
-const DescribeRecordResponse = models.DescribeRecordResponse;
-const SubscribePrivateZoneServiceRequest = models.SubscribePrivateZoneServiceRequest;
-const ModifyPrivateZoneRequest = models.ModifyPrivateZoneRequest;
 const CreatePrivateZoneResponse = models.CreatePrivateZoneResponse;
-const EndPointInfo = models.EndPointInfo;
-const DescribeDashboardResponse = models.DescribeDashboardResponse;
 const CreatePrivateZoneRecordResponse = models.CreatePrivateZoneRecordResponse;
-const RecordInfo = models.RecordInfo;
-const DescribePrivateZoneServiceResponse = models.DescribePrivateZoneServiceResponse;
 const DescribeForwardRuleListResponse = models.DescribeForwardRuleListResponse;
 const DescribeExtendEndpointListResponse = models.DescribeExtendEndpointListResponse;
-const CreatePrivateDNSAccountResponse = models.CreatePrivateDNSAccountResponse;
 const DescribeAuditLogRequest = models.DescribeAuditLogRequest;
-const ModifyForwardRuleRequest = models.ModifyForwardRuleRequest;
-const DescribeDashboardRequest = models.DescribeDashboardRequest;
-const ModifyForwardRuleResponse = models.ModifyForwardRuleResponse;
-const CreateEndPointResponse = models.CreateEndPointResponse;
+const DescribeQuotaUsageRequest = models.DescribeQuotaUsageRequest;
 const AuditLog = models.AuditLog;
-const DescribePrivateZoneServiceRequest = models.DescribePrivateZoneServiceRequest;
-const AccountVpcInfoOut = models.AccountVpcInfoOut;
 const DeletePrivateZoneRecordRequest = models.DeletePrivateZoneRecordRequest;
-const DescribeForwardRuleRequest = models.DescribeForwardRuleRequest;
+const DescribePrivateZoneServiceResponse = models.DescribePrivateZoneServiceResponse;
 const DeleteForwardRuleResponse = models.DeleteForwardRuleResponse;
-const CreateEndPointRequest = models.CreateEndPointRequest;
-const ModifyRecordsStatusRequest = models.ModifyRecordsStatusRequest;
-const CreatePrivateDNSAccountRequest = models.CreatePrivateDNSAccountRequest;
 const MetricData = models.MetricData;
 const DeletePrivateZoneRecordResponse = models.DeletePrivateZoneRecordResponse;
-const PrivateZone = models.PrivateZone;
-const CreatePrivateZoneRecordRequest = models.CreatePrivateZoneRecordRequest;
-const DescribeQuotaUsageRequest = models.DescribeQuotaUsageRequest;
-const CreateEndPointAndEndPointServiceRequest = models.CreateEndPointAndEndPointServiceRequest;
-const ModifyPrivateZoneRecordRequest = models.ModifyPrivateZoneRecordRequest;
-const VpcInfo = models.VpcInfo;
-const EndpointService = models.EndpointService;
-const FlowUsage = models.FlowUsage;
-const CreateForwardRuleResponse = models.CreateForwardRuleResponse;
-const DescribePrivateZoneRecordListRequest = models.DescribePrivateZoneRecordListRequest;
+const QueryAsyncBindVpcStatusRequest = models.QueryAsyncBindVpcStatusRequest;
 
 
 /**
@@ -135,14 +141,14 @@ class PrivatednsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of records for a private domain.
-     * @param {DescribePrivateZoneRecordListRequest} req
-     * @param {function(string, DescribePrivateZoneRecordListResponse):void} cb
+     * Deletes an endpoint
+     * @param {DeleteEndPointRequest} req
+     * @param {function(string, DeleteEndPointResponse):void} cb
      * @public
      */
-    DescribePrivateZoneRecordList(req, cb) {
-        let resp = new DescribePrivateZoneRecordListResponse();
-        this.request("DescribePrivateZoneRecordList", req, resp, cb);
+    DeleteEndPoint(req, cb) {
+        let resp = new DeleteEndPointResponse();
+        this.request("DeleteEndPoint", req, resp, cb);
     }
 
     /**
@@ -223,14 +229,36 @@ class PrivatednsClient extends AbstractClient {
     }
 
     /**
-     * Deletes an endpoint
-     * @param {DeleteEndPointRequest} req
-     * @param {function(string, DeleteEndPointResponse):void} cb
+     * This API is used to add the VPC associated with the private domain.
+     * @param {AddSpecifyPrivateZoneVpcRequest} req
+     * @param {function(string, AddSpecifyPrivateZoneVpcResponse):void} cb
      * @public
      */
-    DeleteEndPoint(req, cb) {
-        let resp = new DeleteEndPointResponse();
-        this.request("DeleteEndPoint", req, resp, cb);
+    AddSpecifyPrivateZoneVpc(req, cb) {
+        let resp = new AddSpecifyPrivateZoneVpcResponse();
+        this.request("AddSpecifyPrivateZoneVpc", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the private domain record list.
+     * @param {DescribePrivateZoneRecordListRequest} req
+     * @param {function(string, DescribePrivateZoneRecordListResponse):void} cb
+     * @public
+     */
+    DescribePrivateZoneRecordList(req, cb) {
+        let resp = new DescribePrivateZoneRecordListResponse();
+        this.request("DescribePrivateZoneRecordList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the asynchronous VPC binding status.
+     * @param {QueryAsyncBindVpcStatusRequest} req
+     * @param {function(string, QueryAsyncBindVpcStatusResponse):void} cb
+     * @public
+     */
+    QueryAsyncBindVpcStatus(req, cb) {
+        let resp = new QueryAsyncBindVpcStatusResponse();
+        this.request("QueryAsyncBindVpcStatus", req, resp, cb);
     }
 
     /**
@@ -355,6 +383,17 @@ class PrivatednsClient extends AbstractClient {
     }
 
     /**
+     * This API is used to delete the VPC associated with the private domain.
+     * @param {DeleteSpecifyPrivateZoneVpcRequest} req
+     * @param {function(string, DeleteSpecifyPrivateZoneVpcResponse):void} cb
+     * @public
+     */
+    DeleteSpecifyPrivateZoneVpc(req, cb) {
+        let resp = new DeleteSpecifyPrivateZoneVpcResponse();
+        this.request("DeleteSpecifyPrivateZoneVpc", req, resp, cb);
+    }
+
+    /**
      * This API is used to query forwarding rules.
      * @param {DescribeForwardRuleRequest} req
      * @param {function(string, DescribeForwardRuleResponse):void} cb
@@ -421,7 +460,7 @@ class PrivatednsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a DNS record for a private domain.
+     * This API is used to delete the private DNS records.
      * @param {DeletePrivateZoneRecordRequest} req
      * @param {function(string, DeletePrivateZoneRecordResponse):void} cb
      * @public

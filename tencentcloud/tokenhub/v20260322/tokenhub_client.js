@@ -16,13 +16,17 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const GlossaryItem = models.GlossaryItem;
+const BindingItem = models.BindingItem;
 const GlossaryEntryInput = models.GlossaryEntryInput;
 const DeleteGlossaryEntryInput = models.DeleteGlossaryEntryInput;
-const DescribeGlossariesResponse = models.DescribeGlossariesResponse;
+const GlossaryEntryItem = models.GlossaryEntryItem;
 const DeleteGlossaryResponse = models.DeleteGlossaryResponse;
+const QuotaInfo = models.QuotaInfo;
 const DeleteGlossaryEntriesResponse = models.DeleteGlossaryEntriesResponse;
-const GlossaryItem = models.GlossaryItem;
+const DescribeApiKeyListResponse = models.DescribeApiKeyListResponse;
 const ModifyApiKeyInfoResponse = models.ModifyApiKeyInfoResponse;
+const DescribeApiKeyListRequest = models.DescribeApiKeyListRequest;
 const CreateGlossaryRequest = models.CreateGlossaryRequest;
 const DescribeGlossaryEntriesResponse = models.DescribeGlossaryEntriesResponse;
 const DeleteGlossaryRequest = models.DeleteGlossaryRequest;
@@ -35,15 +39,18 @@ const ModifyApiKeyInfoRequest = models.ModifyApiKeyInfoRequest;
 const CreateGlossaryResponse = models.CreateGlossaryResponse;
 const ModifyGlossaryEntriesRequest = models.ModifyGlossaryEntriesRequest;
 const DescribeGlossariesRequest = models.DescribeGlossariesRequest;
+const DescribeApiKeyRequest = models.DescribeApiKeyRequest;
 const ModifyApiKeyStatusRequest = models.ModifyApiKeyStatusRequest;
 const CreateGlossaryEntriesRequest = models.CreateGlossaryEntriesRequest;
-const GlossaryEntryItem = models.GlossaryEntryItem;
+const ApiKeyDetail = models.ApiKeyDetail;
+const DescribeGlossariesResponse = models.DescribeGlossariesResponse;
 const ModifyApiKeyStatusResponse = models.ModifyApiKeyStatusResponse;
 const CreateApiKeyResponse = models.CreateApiKeyResponse;
 const DeleteApiKeyRequest = models.DeleteApiKeyRequest;
 const RequestFilter = models.RequestFilter;
 const ModifyGlossaryEntriesResponse = models.ModifyGlossaryEntriesResponse;
 const RequestSort = models.RequestSort;
+const DescribeApiKeyResponse = models.DescribeApiKeyResponse;
 const CreateApiKeyRequest = models.CreateApiKeyRequest;
 
 
@@ -57,6 +64,19 @@ class TokenhubClient extends AbstractClient {
         super("tokenhub.intl.tencentcloudapi.com", "2026-03-22", credential, region, profile);
     }
     
+    /**
+     * Query API key list.
+
+Query the API key list of the current user with key values in masking display. Support pagination, filtering, and sorting.
+     * @param {DescribeApiKeyListRequest} req
+     * @param {function(string, DescribeApiKeyListResponse):void} cb
+     * @public
+     */
+    DescribeApiKeyList(req, cb) {
+        let resp = new DescribeApiKeyListResponse();
+        this.request("DescribeApiKeyList", req, resp, cb);
+    }
+
     /**
      * Delete terminology entries in batches.
 
@@ -118,6 +138,17 @@ Query specified entries in a Termbase. Support pagination.
     DescribeGlossaryEntries(req, cb) {
         let resp = new DescribeGlossaryEntriesResponse();
         this.request("DescribeGlossaryEntries", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query API Key details based on API Key ID or key value, and return the plaintext key. At least one of ApiKeyId and ApiKey must be input, with priority given to ApiKeyId.
+     * @param {DescribeApiKeyRequest} req
+     * @param {function(string, DescribeApiKeyResponse):void} cb
+     * @public
+     */
+    DescribeApiKey(req, cb) {
+        let resp = new DescribeApiKeyResponse();
+        this.request("DescribeApiKey", req, resp, cb);
     }
 
     /**

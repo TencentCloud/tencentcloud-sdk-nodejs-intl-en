@@ -624,7 +624,7 @@ support the following APIs:
     }
 
     /**
-     * This API is used to create a monthly subscribed TCMG instance of the Basic Edition, with auto-renewal enabled and vouchers not allowed by default.
+     * This API is used to create a yearly/monthly subscribed TCMG instance of the Basic Edition, with auto-renewal enabled and vouchers not allowed by default.
      * @param {CreateGrafanaInstanceRequest} req
      * @param {function(string, CreateGrafanaInstanceResponse):void} cb
      * @public
@@ -1281,7 +1281,7 @@ Alarm policies in the same type under the project will be set as non-default.
     }
 
     /**
-     * This API is used to refund a monthly subscribed TCMG instance. Once it is called, the instance cannot be used and will be automatically terminated seven days later.
+     * This API is used to refund a yearly/monthly subscribed TCMG instance. Once it is called, the instance cannot be used and will be automatically terminated seven days later.
      * @param {DeleteGrafanaInstanceRequest} req
      * @param {function(string, DeleteGrafanaInstanceResponse):void} cb
      * @public
@@ -1380,7 +1380,7 @@ Alarm policies in the same type under the project will be set as non-default.
     }
 
     /**
-     * This API is used to renew a monthly subscribed TCMG instance for a month without changing the instance edition. It doesn't apply to running instances.
+     * This API is used to renew a yearly/monthly subscribed TCMG instance for a month without changing the instance edition. It doesn't apply to running instances.
      * @param {ResumeGrafanaInstanceRequest} req
      * @param {function(string, ResumeGrafanaInstanceResponse):void} cb
      * @public

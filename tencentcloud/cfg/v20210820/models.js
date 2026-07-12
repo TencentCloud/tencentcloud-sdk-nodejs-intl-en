@@ -400,6 +400,12 @@ class CreateTaskFromActionRequest extends  AbstractModel {
          */
         this.TaskPauseDuration = null;
 
+        /**
+         * 
+         * @type {Array.<TagWithCreate> || null}
+         */
+        this.TaskTags = null;
+
     }
 
     /**
@@ -416,6 +422,15 @@ class CreateTaskFromActionRequest extends  AbstractModel {
         this.TaskActionGeneralConfiguration = 'TaskActionGeneralConfiguration' in params ? params.TaskActionGeneralConfiguration : null;
         this.TaskActionCustomConfiguration = 'TaskActionCustomConfiguration' in params ? params.TaskActionCustomConfiguration : null;
         this.TaskPauseDuration = 'TaskPauseDuration' in params ? params.TaskPauseDuration : null;
+
+        if (params.TaskTags) {
+            this.TaskTags = new Array();
+            for (let z in params.TaskTags) {
+                let obj = new TagWithCreate();
+                obj.deserialize(params.TaskTags[z]);
+                this.TaskTags.push(obj);
+            }
+        }
 
     }
 }
@@ -1319,6 +1334,24 @@ class ModifyTaskRunStatusRequest extends  AbstractModel {
          */
         this.Summary = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Issue = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Record = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.IncludeRecordInReport = null;
+
     }
 
     /**
@@ -1332,6 +1365,9 @@ class ModifyTaskRunStatusRequest extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.IsExpect = 'IsExpect' in params ? params.IsExpect : null;
         this.Summary = 'Summary' in params ? params.Summary : null;
+        this.Issue = 'Issue' in params ? params.Issue : null;
+        this.Record = 'Record' in params ? params.Record : null;
+        this.IncludeRecordInReport = 'IncludeRecordInReport' in params ? params.IncludeRecordInReport : null;
 
     }
 }
@@ -3013,13 +3049,13 @@ class DescribeTaskListRequest extends  AbstractModel {
         this.TaskStatusList = null;
 
         /**
-         * Architecture ID
+         * 
          * @type {string || null}
          */
         this.ArchId = null;
 
         /**
-         * Architecture Name
+         * 
          * @type {string || null}
          */
         this.ArchName = null;

@@ -517,6 +517,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.OriginalCardInfo = null;
 
+        /**
+         * Base64 of the cropped portrait image extracted from the identity document</p>
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HeadImageBase64 = null;
+
     }
 
     /**
@@ -545,6 +552,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CardBackCutImageBase64 = 'CardBackCutImageBase64' in params ? params.CardBackCutImageBase64 : null;
         this.WarnCardInfos = 'WarnCardInfos' in params ? params.WarnCardInfos : null;
         this.OriginalCardInfo = 'OriginalCardInfo' in params ? params.OriginalCardInfo : null;
+        this.HeadImageBase64 = 'HeadImageBase64' in params ? params.HeadImageBase64 : null;
 
     }
 }
@@ -7428,6 +7436,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.FormattedAddress = null;
 
+        /**
+         * Issuing authority
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Authority = null;
+
+        /**
+         * Validity period
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ValidDate = null;
+
     }
 
     /**
@@ -7444,6 +7466,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Address = 'Address' in params ? params.Address : null;
         this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
         this.FormattedAddress = 'FormattedAddress' in params ? params.FormattedAddress : null;
+        this.Authority = 'Authority' in params ? params.Authority : null;
+        this.ValidDate = 'ValidDate' in params ? params.ValidDate : null;
 
     }
 }

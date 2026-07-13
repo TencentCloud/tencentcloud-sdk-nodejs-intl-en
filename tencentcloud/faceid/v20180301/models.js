@@ -462,7 +462,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsPass = null;
 
         /**
-         * <p>Base64 of the ID image</p>
+         * <p>Base64 of the front side ID image</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -518,11 +518,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.OriginalCardInfo = null;
 
         /**
-         * Base64 of the cropped portrait image extracted from the identity document</p>
+         * <p>Document portrait matting</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HeadImageBase64 = null;
+
+        /**
+         * <p>Base64 of the back side ID image</p>
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CardBackImageBase64 = null;
 
     }
 
@@ -553,6 +560,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.WarnCardInfos = 'WarnCardInfos' in params ? params.WarnCardInfos : null;
         this.OriginalCardInfo = 'OriginalCardInfo' in params ? params.OriginalCardInfo : null;
         this.HeadImageBase64 = 'HeadImageBase64' in params ? params.HeadImageBase64 : null;
+        this.CardBackImageBase64 = 'CardBackImageBase64' in params ? params.CardBackImageBase64 : null;
 
     }
 }
@@ -7386,65 +7394,63 @@ class MainlandIDCard extends  AbstractModel {
         super();
 
         /**
-         * Chinese name
+         * <p>name</p>
 Note: This field may return null, indicating that no valid values can be obtained.
-
          * @type {string || null}
          */
         this.FullName = null;
 
         /**
-         * Sex
+         * <p>Gender</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Sex = null;
 
         /**
-         * Nation
+         * <p>Ethnicity</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Nation = null;
 
         /**
-         * Birthday
+         * <p>Birthday</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Birthday = null;
 
         /**
-         * Address
+         * <p>Address</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Address = null;
 
         /**
-         * License number
+         * <p>Identity card number</p>
 Note: This field may return null, indicating that no valid values can be obtained.
-
          * @type {string || null}
          */
         this.LicenseNumber = null;
 
         /**
-         * Address
+         * <p>Address</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FormattedAddress = null;
 
         /**
-         * Issuing authority
+         * <p>Issuing authority</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Authority = null;
 
         /**
-         * Validity period
+         * <p>Validity period</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */

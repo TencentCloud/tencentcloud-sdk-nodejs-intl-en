@@ -19,19 +19,21 @@ const AbstractClient = require('../../common/abstract_client')
 const CreateAllocationUnitRequest = models.CreateAllocationUnitRequest;
 const DescribeBillAdjustInfoResponse = models.DescribeBillAdjustInfoResponse;
 const DescribeCostSummaryByProductRequest = models.DescribeCostSummaryByProductRequest;
+const DescribeBudgetResponse = models.DescribeBudgetResponse;
 const DescribeCPQBillingMappingRequest = models.DescribeCPQBillingMappingRequest;
 const ConsumptionBusinessSummaryDataItem = models.ConsumptionBusinessSummaryDataItem;
-const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
-const RenewInstance = models.RenewInstance;
+const ModifyGatherRuleRequest = models.ModifyGatherRuleRequest;
+const BudgetWarn = models.BudgetWarn;
 const ModifyAllocationRuleRequest = models.ModifyAllocationRuleRequest;
 const DeleteAllocationRuleRequest = models.DeleteAllocationRuleRequest;
 const CreateAllocationRuleResponse = models.CreateAllocationRuleResponse;
 const BillTagInfo = models.BillTagInfo;
 const AllocationOverviewTotal = models.AllocationOverviewTotal;
 const CreateInstanceResponse = models.CreateInstanceResponse;
+const BudgetExtend = models.BudgetExtend;
 const ConditionBusiness = models.ConditionBusiness;
 const AnalyseActionTypeDetail = models.AnalyseActionTypeDetail;
-const DescribeCPQBillingMappingResponse = models.DescribeCPQBillingMappingResponse;
+const DescribeBudgetRequest = models.DescribeBudgetRequest;
 const DescribeCostExplorerSummaryRequest = models.DescribeCostExplorerSummaryRequest;
 const BillBusinessLink = models.BillBusinessLink;
 const DescribeCostSummaryByProductResponse = models.DescribeCostSummaryByProductResponse;
@@ -42,11 +44,12 @@ const DescribeBillDetailForOrganizationResponse = models.DescribeBillDetailForOr
 const BillDetailComponentConfig = models.BillDetailComponentConfig;
 const DescribeCostSummaryByResourceResponse = models.DescribeCostSummaryByResourceResponse;
 const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
+const CreateBudgetRequest = models.CreateBudgetRequest;
 const AdjustInfoDetail = models.AdjustInfoDetail;
 const DescribeAllocateConditionsRequest = models.DescribeAllocateConditionsRequest;
 const CreateAllocationRuleRequest = models.CreateAllocationRuleRequest;
 const ConsumptionRegionSummaryDataItem = models.ConsumptionRegionSummaryDataItem;
-const DescribeAllocationUnitDetailResponse = models.DescribeAllocationUnitDetailResponse;
+const DeleteBudgetResponse = models.DeleteBudgetResponse;
 const DescribeBillSummaryRequest = models.DescribeBillSummaryRequest;
 const DescribeBillResourceSummaryResponse = models.DescribeBillResourceSummaryResponse;
 const AllocationSummaryByItem = models.AllocationSummaryByItem;
@@ -56,8 +59,10 @@ const DistributionBillDetail = models.DistributionBillDetail;
 const DescribeAllocationOverviewResponse = models.DescribeAllocationOverviewResponse;
 const DescribeDosageCosDetailByDateRequest = models.DescribeDosageCosDetailByDateRequest;
 const DeleteAllocationTagRequest = models.DeleteAllocationTagRequest;
+const OrderDto = models.OrderDto;
 const OperateRsp = models.OperateRsp;
 const BillDistributionResourceSummary = models.BillDistributionResourceSummary;
+const WaveThresholdForm = models.WaveThresholdForm;
 const BusinessSummaryInfo = models.BusinessSummaryInfo;
 const DescribeAllocationBillDetailRequest = models.DescribeAllocationBillDetailRequest;
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
@@ -67,34 +72,43 @@ const AllocationRationExpression = models.AllocationRationExpression;
 const DescribeVoucherUsageDetailsResponse = models.DescribeVoucherUsageDetailsResponse;
 const ResourceSpuSet = models.ResourceSpuSet;
 const ConsumptionSummaryTotal = models.ConsumptionSummaryTotal;
-const DescribeAllocationOverviewRequest = models.DescribeAllocationOverviewRequest;
+const BudgetConditionsForm = models.BudgetConditionsForm;
+const DescribeAccountBalanceResponse = models.DescribeAccountBalanceResponse;
 const DescribeGatherResourceResponse = models.DescribeGatherResourceResponse;
+const DescribeAllocationSummaryByResourceRequest = models.DescribeAllocationSummaryByResourceRequest;
 const DescribeCostDetailResponse = models.DescribeCostDetailResponse;
 const DescribeAllocationMonthOverviewResponse = models.DescribeAllocationMonthOverviewResponse;
 const DescribeAllocationSummaryByItemResponse = models.DescribeAllocationSummaryByItemResponse;
+const DataForBudgetOperationLogPage = models.DataForBudgetOperationLogPage;
+const ModifyBudgetResponse = models.ModifyBudgetResponse;
 const DescribeGatherResourceRequest = models.DescribeGatherResourceRequest;
 const DescribeCostSummaryByProjectResponse = models.DescribeCostSummaryByProjectResponse;
 const AnalyseProjectDetail = models.AnalyseProjectDetail;
 const DescribeOrgMemberAccountBalanceData = models.DescribeOrgMemberAccountBalanceData;
 const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
-const ModifyGatherRuleRequest = models.ModifyGatherRuleRequest;
+const ModifyAllocationRuleResponse = models.ModifyAllocationRuleResponse;
 const SummaryDetail = models.SummaryDetail;
-const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
+const DescribeCPQBillingMappingResponse = models.DescribeCPQBillingMappingResponse;
+const DescribeAllocationUnitDetailResponse = models.DescribeAllocationUnitDetailResponse;
 const DescribeAllocationSummaryByBusinessResponse = models.DescribeAllocationSummaryByBusinessResponse;
 const DescribeAllocationSummaryByItemRequest = models.DescribeAllocationSummaryByItemRequest;
 const DescribeBillSummaryByTagRequest = models.DescribeBillSummaryByTagRequest;
 const AnalyseDetail = models.AnalyseDetail;
 const BillDays = models.BillDays;
+const RenewInstance = models.RenewInstance;
 const DescribeAllocationRuleSummaryResponse = models.DescribeAllocationRuleSummaryResponse;
 const AnalyseAmountDetail = models.AnalyseAmountDetail;
 const DescribeBillSummaryByProjectRequest = models.DescribeBillSummaryByProjectRequest;
 const CreateGatherRuleRequest = models.CreateGatherRuleRequest;
 const DescribeBillResourceSummaryForOrganizationRequest = models.DescribeBillResourceSummaryForOrganizationRequest;
+const DescribeBudgetRemindRecordListRequest = models.DescribeBudgetRemindRecordListRequest;
 const DescribeCostSummaryByRegionRequest = models.DescribeCostSummaryByRegionRequest;
 const SetRenewalRequest = models.SetRenewalRequest;
 const ConsumptionSummaryTrend = models.ConsumptionSummaryTrend;
 const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
+const DescribeAllocationOverviewRequest = models.DescribeAllocationOverviewRequest;
 const DescribeAllocationSummaryByBusinessRequest = models.DescribeAllocationSummaryByBusinessRequest;
+const CreateBudgetResponse = models.CreateBudgetResponse;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
 const DeleteGatherRuleResponse = models.DeleteGatherRuleResponse;
 const DescribeAllocationBillConditionsRequest = models.DescribeAllocationBillConditionsRequest;
@@ -112,6 +126,7 @@ const BillDetailAssociatedOrder = models.BillDetailAssociatedOrder;
 const BillDetail = models.BillDetail;
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const Deal = models.Deal;
+const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
 const DescribeDealsByCondResponse = models.DescribeDealsByCondResponse;
 const BillZoneId = models.BillZoneId;
 const BillRegion = models.BillRegion;
@@ -133,6 +148,7 @@ const AllocationOverviewDetail = models.AllocationOverviewDetail;
 const AnalysePayModeDetail = models.AnalysePayModeDetail;
 const AllocationBillTrendDetail = models.AllocationBillTrendDetail;
 const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
+const TagsForm = models.TagsForm;
 const AnalyseOwnerUinDetail = models.AnalyseOwnerUinDetail;
 const Conditions = models.Conditions;
 const AnalyseTimeDetail = models.AnalyseTimeDetail;
@@ -143,7 +159,8 @@ const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
 const ConsumptionProjectSummaryDataItem = models.ConsumptionProjectSummaryDataItem;
 const AnalyseRegionDetail = models.AnalyseRegionDetail;
 const ProductInfo = models.ProductInfo;
-const DeleteAllocationTagResponse = models.DeleteAllocationTagResponse;
+const BudgetInfoDiffEntity = models.BudgetInfoDiffEntity;
+const DescribeBudgetOperationLogResponse = models.DescribeBudgetOperationLogResponse;
 const AllocationDetail = models.AllocationDetail;
 const VoucherInfos = models.VoucherInfos;
 const DescribeAllocationUnitDetailRequest = models.DescribeAllocationUnitDetailRequest;
@@ -151,7 +168,7 @@ const DescribeBillSummaryForOrganizationRequest = models.DescribeBillSummaryForO
 const AllocationSummaryByBusiness = models.AllocationSummaryByBusiness;
 const CreateInstanceRequest = models.CreateInstanceRequest;
 const AllocationStat = models.AllocationStat;
-const ModifyGatherRuleResponse = models.ModifyGatherRuleResponse;
+const ModifyBudgetRequest = models.ModifyBudgetRequest;
 const DescribeOrgMemberAccountBalanceResponse = models.DescribeOrgMemberAccountBalanceResponse;
 const BillProject = models.BillProject;
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
@@ -165,7 +182,7 @@ const AllocationAverageData = models.AllocationAverageData;
 const ConsumptionResourceSummaryConditionValue = models.ConsumptionResourceSummaryConditionValue;
 const DescribeCostSummaryByRegionResponse = models.DescribeCostSummaryByRegionResponse;
 const DescribeCostDetailRequest = models.DescribeCostDetailRequest;
-const DescribeAllocationSummaryByResourceRequest = models.DescribeAllocationSummaryByResourceRequest;
+const BudgetSendInfoDto = models.BudgetSendInfoDto;
 const RenewInstanceRequest = models.RenewInstanceRequest;
 const DescribeBillSummaryForOrganizationResponse = models.DescribeBillSummaryForOrganizationResponse;
 const BillOperateUin = models.BillOperateUin;
@@ -177,36 +194,46 @@ const CreateAllocationTagRequest = models.CreateAllocationTagRequest;
 const ExcludedProducts = models.ExcludedProducts;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const BillBusiness = models.BillBusiness;
+const BudgetRemindRecords = models.BudgetRemindRecords;
 const DescribeAllocationRuleDetailResponse = models.DescribeAllocationRuleDetailResponse;
 const SetRenewalResponse = models.SetRenewalResponse;
 const UsageDetails = models.UsageDetails;
+const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const BillInstanceType = models.BillInstanceType;
 const AnalyseBusinessDetail = models.AnalyseBusinessDetail;
 const AnalyseConditions = models.AnalyseConditions;
+const DeleteAllocationTagResponse = models.DeleteAllocationTagResponse;
+const BudgetInfoApiResponse = models.BudgetInfoApiResponse;
 const CostDetail = models.CostDetail;
-const UinTempAmountModel = models.UinTempAmountModel;
+const DescribeBudgetOperationLogRequest = models.DescribeBudgetOperationLogRequest;
 const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
-const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
+const DescribeAllocationRuleSummaryRequest = models.DescribeAllocationRuleSummaryRequest;
+const UinTempAmountModel = models.UinTempAmountModel;
 const CreateAllocationTagResponse = models.CreateAllocationTagResponse;
 const ModifyAllocationUnitRequest = models.ModifyAllocationUnitRequest;
 const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
 const ConsumptionResourceSummaryDataItem = models.ConsumptionResourceSummaryDataItem;
+const ModifyGatherRuleResponse = models.ModifyGatherRuleResponse;
 const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
 const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
 const AnalyseZoneDetail = models.AnalyseZoneDetail;
 const DescribeVoucherInfoResponse = models.DescribeVoucherInfoResponse;
 const AllocationRulesSummary = models.AllocationRulesSummary;
 const DeleteGatherRuleRequest = models.DeleteGatherRuleRequest;
-const DescribeAccountBalanceResponse = models.DescribeAccountBalanceResponse;
+const DataForBudgetInfoPage = models.DataForBudgetInfoPage;
+const BudgetOperationLogEntity = models.BudgetOperationLogEntity;
 const DescribeAllocationBillDetailResponse = models.DescribeAllocationBillDetailResponse;
 const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
 const CreateGatherRuleResponse = models.CreateGatherRuleResponse;
 const BillTag = models.BillTag;
 const DescribeAllocateConditionsResponse = models.DescribeAllocateConditionsResponse;
-const UsageRecords = models.UsageRecords;
-const ModifyAllocationRuleResponse = models.ModifyAllocationRuleResponse;
-const BillComponent = models.BillComponent;
 const DescribeVoucherInfoRequest = models.DescribeVoucherInfoRequest;
+const UsageRecords = models.UsageRecords;
+const DescribeBudgetRemindRecordListResponse = models.DescribeBudgetRemindRecordListResponse;
+const BillComponent = models.BillComponent;
+const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
+const BudgetRemindRecordList = models.BudgetRemindRecordList;
+const DeleteBudgetRequest = models.DeleteBudgetRequest;
 const BillActionType = models.BillActionType;
 const GatherResourceSummary = models.GatherResourceSummary;
 const DescribeDealsByCondRequest = models.DescribeDealsByCondRequest;
@@ -222,7 +249,7 @@ const DeleteAllocationUnitResponse = models.DeleteAllocationUnitResponse;
 const ConditionProject = models.ConditionProject;
 const DescribeTagListResponse = models.DescribeTagListResponse;
 const CosDetailSets = models.CosDetailSets;
-const DescribeAllocationRuleSummaryRequest = models.DescribeAllocationRuleSummaryRequest;
+const BudgetPlan = models.BudgetPlan;
 const BillPayMode = models.BillPayMode;
 const DescribeAllocationTrendByMonthResponse = models.DescribeAllocationTrendByMonthResponse;
 const ModifyAllocationUnitResponse = models.ModifyAllocationUnitResponse;
@@ -358,14 +385,25 @@ Note: The API request may fail due to network instability or other exceptions. I
     }
 
     /**
-     * Query the four-layer matching relationship between the quoted product name and billing products
-     * @param {DescribeCPQBillingMappingRequest} req
-     * @param {function(string, DescribeCPQBillingMappingResponse):void} cb
+     * Create budget information
+     * @param {CreateBudgetRequest} req
+     * @param {function(string, CreateBudgetResponse):void} cb
      * @public
      */
-    DescribeCPQBillingMapping(req, cb) {
-        let resp = new DescribeCPQBillingMappingResponse();
-        this.request("DescribeCPQBillingMapping", req, resp, cb);
+    CreateBudget(req, cb) {
+        let resp = new CreateBudgetResponse();
+        this.request("CreateBudget", req, resp, cb);
+    }
+
+    /**
+     * Return budget alert records, including budget period, detection time, notification time, reminder type, and content.
+     * @param {DescribeBudgetRemindRecordListRequest} req
+     * @param {function(string, DescribeBudgetRemindRecordListResponse):void} cb
+     * @public
+     */
+    DescribeBudgetRemindRecordList(req, cb) {
+        let resp = new DescribeBudgetRemindRecordListResponse();
+        this.request("DescribeBudgetRemindRecordList", req, resp, cb);
     }
 
     /**
@@ -399,6 +437,17 @@ Note: The API request may fail due to network instability or other exceptions. I
     CreateAllocationTag(req, cb) {
         let resp = new CreateAllocationTagResponse();
         this.request("CreateAllocationTag", req, resp, cb);
+    }
+
+    /**
+     * Delete the corresponding budget project based on the budget ID
+     * @param {DeleteBudgetRequest} req
+     * @param {function(string, DeleteBudgetResponse):void} cb
+     * @public
+     */
+    DeleteBudget(req, cb) {
+        let resp = new DeleteBudgetResponse();
+        this.request("DeleteBudget", req, resp, cb);
     }
 
     /**
@@ -595,6 +644,17 @@ Note:
     }
 
     /**
+     * Refresh budget information
+     * @param {ModifyBudgetRequest} req
+     * @param {function(string, ModifyBudgetResponse):void} cb
+     * @public
+     */
+    ModifyBudget(req, cb) {
+        let resp = new ModifyBudgetResponse();
+        this.request("ModifyBudget", req, resp, cb);
+    }
+
+    /**
      * This API is used to check the Tencent Cloud account balance.
      * @param {DescribeAccountBalanceRequest} req
      * @param {function(string, DescribeAccountBalanceResponse):void} cb
@@ -637,6 +697,17 @@ Currently, the integrated and supported product for purchase includes: Cloud Fir
     DescribeAllocationUnitDetail(req, cb) {
         let resp = new DescribeAllocationUnitDetailResponse();
         this.request("DescribeAllocationUnitDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get cost allocation tags.
+     * @param {DescribeTagListRequest} req
+     * @param {function(string, DescribeTagListResponse):void} cb
+     * @public
+     */
+    DescribeTagList(req, cb) {
+        let resp = new DescribeTagListResponse();
+        this.request("DescribeTagList", req, resp, cb);
     }
 
     /**
@@ -750,14 +821,14 @@ Currently, the integrated and supported product for purchase includes: Cloud Fir
     }
 
     /**
-     * This API is used to get cost allocation tags.
-     * @param {DescribeTagListRequest} req
-     * @param {function(string, DescribeTagListResponse):void} cb
+     * Retrieve budget details
+     * @param {DescribeBudgetRequest} req
+     * @param {function(string, DescribeBudgetResponse):void} cb
      * @public
      */
-    DescribeTagList(req, cb) {
-        let resp = new DescribeTagListResponse();
-        this.request("DescribeTagList", req, resp, cb);
+    DescribeBudget(req, cb) {
+        let resp = new DescribeBudgetResponse();
+        this.request("DescribeBudget", req, resp, cb);
     }
 
     /**
@@ -806,14 +877,14 @@ Currently, the integrated and supported product for renewal includes: Cloud Fire
     }
 
     /**
-     * This API is used to obtain consumption details summarized by product.
-     * @param {DescribeCostSummaryByProductRequest} req
-     * @param {function(string, DescribeCostSummaryByProductResponse):void} cb
+     * Query budget modification records
+     * @param {DescribeBudgetOperationLogRequest} req
+     * @param {function(string, DescribeBudgetOperationLogResponse):void} cb
      * @public
      */
-    DescribeCostSummaryByProduct(req, cb) {
-        let resp = new DescribeCostSummaryByProductResponse();
-        this.request("DescribeCostSummaryByProduct", req, resp, cb);
+    DescribeBudgetOperationLog(req, cb) {
+        let resp = new DescribeBudgetOperationLogResponse();
+        this.request("DescribeBudgetOperationLog", req, resp, cb);
     }
 
     /**
@@ -862,6 +933,17 @@ Currently, the integrated and supported product for this operation includes: Clo
     }
 
     /**
+     * Query the four-layer matching relationship between the quoted product name and billing products
+     * @param {DescribeCPQBillingMappingRequest} req
+     * @param {function(string, DescribeCPQBillingMappingResponse):void} cb
+     * @public
+     */
+    DescribeCPQBillingMapping(req, cb) {
+        let resp = new DescribeCPQBillingMappingResponse();
+        this.request("DescribeCPQBillingMapping", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the details of a cost allocation bill by item.
      * @param {DescribeAllocationSummaryByItemRequest} req
      * @param {function(string, DescribeAllocationSummaryByItemResponse):void} cb
@@ -892,6 +974,17 @@ Currently, the integrated and supported product for this operation includes: Clo
     ModifyAllocationRule(req, cb) {
         let resp = new ModifyAllocationRuleResponse();
         this.request("ModifyAllocationRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain consumption details summarized by product.
+     * @param {DescribeCostSummaryByProductRequest} req
+     * @param {function(string, DescribeCostSummaryByProductResponse):void} cb
+     * @public
+     */
+    DescribeCostSummaryByProduct(req, cb) {
+        let resp = new DescribeCostSummaryByProductResponse();
+        this.request("DescribeCostSummaryByProduct", req, resp, cb);
     }
 
     /**

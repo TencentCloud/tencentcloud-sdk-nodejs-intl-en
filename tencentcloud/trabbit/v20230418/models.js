@@ -95,7 +95,7 @@ class DeleteRabbitMQServerlessPermissionResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Key-value pair
  * @class
  */
 class RabbitMQServerlessKeyValuePair extends  AbstractModel {
@@ -103,13 +103,13 @@ class RabbitMQServerlessKeyValuePair extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Key.
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * 
+         * Value.
          * @type {string || null}
          */
         this.Value = null;
@@ -138,58 +138,64 @@ class RabbitMQBindingListInfo extends  AbstractModel {
         super();
 
         /**
-         * binding id.
+         * <p>Routing relationship id</p>
          * @type {number || null}
          */
         this.BindingId = null;
 
         /**
-         * Vhost parameter.
+         * <p>Vhost parameter</p>
          * @type {string || null}
          */
         this.VirtualHost = null;
 
         /**
-         * Source exchange name.
+         * <p>Source exchange name</p>
          * @type {string || null}
          */
         this.Source = null;
 
         /**
-         * Target type. valid values: queue or exchange.
+         * <p>Target type, queue or exchange</p>
          * @type {string || null}
          */
         this.DestinationType = null;
 
         /**
-         * Target resource name.
+         * <p>Target resource name</p>
          * @type {string || null}
          */
         this.Destination = null;
 
         /**
-         * Binding key.
+         * <p>Bind key</p>
          * @type {string || null}
          */
         this.RoutingKey = null;
 
         /**
-         * Source exchange type.
+         * <p>Source exchange type</p>
          * @type {string || null}
          */
         this.SourceExchangeType = null;
 
         /**
-         * Creation time
+         * <p>Creation time.</p>
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Modification time
+         * <p>Modification time.</p>
          * @type {string || null}
          */
         this.ModifyTime = null;
+
+        /**
+         * <p>Bind parameter. Parameters can be passed in during binding for header type Exchange. No need to input for other types of Exchange.</p>
+         * @type {Array.<RabbitMQServerlessKeyValuePair> || null}
+         */
+        this.Arguments = null;
 
     }
 
@@ -209,6 +215,15 @@ class RabbitMQBindingListInfo extends  AbstractModel {
         this.SourceExchangeType = 'SourceExchangeType' in params ? params.SourceExchangeType : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+        if (params.Arguments) {
+            this.Arguments = new Array();
+            for (let z in params.Arguments) {
+                let obj = new RabbitMQServerlessKeyValuePair();
+                obj.deserialize(params.Arguments[z]);
+                this.Arguments.push(obj);
+            }
+        }
 
     }
 }
@@ -343,6 +358,41 @@ class DescribeRabbitMQServerlessUserResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Tag.
+ * @class
+ */
+class RabbitMQServerlessTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key.
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value.
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -1174,6 +1224,24 @@ class ModifyRabbitMQServerlessInstanceRequest extends  AbstractModel {
          */
         this.TraceFlag = null;
 
+        /**
+         * Traffic throttling production consumption ratio
+         * @type {number || null}
+         */
+        this.SendReceiveRatio = null;
+
+        /**
+         * Specifies whether to delete all tags. Default value: false.
+         * @type {boolean || null}
+         */
+        this.DeleteAllTags = null;
+
+        /**
+         * Modified instance tag list
+         * @type {Array.<RabbitMQServerlessTag> || null}
+         */
+        this.InstanceTags = null;
+
     }
 
     /**
@@ -1187,6 +1255,17 @@ class ModifyRabbitMQServerlessInstanceRequest extends  AbstractModel {
         this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.TraceFlag = 'TraceFlag' in params ? params.TraceFlag : null;
+        this.SendReceiveRatio = 'SendReceiveRatio' in params ? params.SendReceiveRatio : null;
+        this.DeleteAllTags = 'DeleteAllTags' in params ? params.DeleteAllTags : null;
+
+        if (params.InstanceTags) {
+            this.InstanceTags = new Array();
+            for (let z in params.InstanceTags) {
+                let obj = new RabbitMQServerlessTag();
+                obj.deserialize(params.InstanceTags[z]);
+                this.InstanceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -1320,6 +1399,18 @@ class RabbitMQServerlessInstance extends  AbstractModel {
          */
         this.IsolatedTime = null;
 
+        /**
+         * Serverless Extension Fields
+         * @type {string || null}
+         */
+        this.ServerlessExt = null;
+
+        /**
+         * Instance tag list.
+         * @type {Array.<RabbitMQServerlessTag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -1357,6 +1448,16 @@ class RabbitMQServerlessInstance extends  AbstractModel {
         this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
         this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
         this.IsolatedTime = 'IsolatedTime' in params ? params.IsolatedTime : null;
+        this.ServerlessExt = 'ServerlessExt' in params ? params.ServerlessExt : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new RabbitMQServerlessTag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -1550,6 +1651,12 @@ class RabbitMQServerlessAccessInfo extends  AbstractModel {
          */
         this.PublicDataStreamStatus = null;
 
+        /**
+         * Public network CLB instance ID
+         * @type {string || null}
+         */
+        this.PublicClbId = null;
+
     }
 
     /**
@@ -1561,6 +1668,7 @@ class RabbitMQServerlessAccessInfo extends  AbstractModel {
         }
         this.PublicAccessEndpoint = 'PublicAccessEndpoint' in params ? params.PublicAccessEndpoint : null;
         this.PublicDataStreamStatus = 'PublicDataStreamStatus' in params ? params.PublicDataStreamStatus : null;
+        this.PublicClbId = 'PublicClbId' in params ? params.PublicClbId : null;
 
     }
 }
@@ -1736,13 +1844,13 @@ class DescribeRabbitMQServerlessQueuesResponse extends  AbstractModel {
         super();
 
         /**
-         * Queue list information.
+         * <p>Queue list info</p>
          * @type {Array.<RabbitMQQueueListInfo> || null}
          */
         this.QueueInfoList = null;
 
         /**
-         * Quantity
+         * <p>Quantity</p>
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -1902,6 +2010,12 @@ class CreateRabbitMQServerlessExchangeRequest extends  AbstractModel {
          */
         this.AlternateExchange = null;
 
+        /**
+         * exchange type behind delay type, supports "fanout", "direct", "topic", "headers".
+         * @type {string || null}
+         */
+        this.DelayedExchangeType = null;
+
     }
 
     /**
@@ -1920,6 +2034,7 @@ class CreateRabbitMQServerlessExchangeRequest extends  AbstractModel {
         this.AutoDelete = 'AutoDelete' in params ? params.AutoDelete : null;
         this.Internal = 'Internal' in params ? params.Internal : null;
         this.AlternateExchange = 'AlternateExchange' in params ? params.AlternateExchange : null;
+        this.DelayedExchangeType = 'DelayedExchangeType' in params ? params.DelayedExchangeType : null;
 
     }
 }
@@ -1945,31 +2060,31 @@ class DescribeRabbitMQServerlessConnectionRequest extends  AbstractModel {
         this.VirtualHost = null;
 
         /**
-         * Sort by which field. Supported options: channel (channel count), incoming_bytes (inbound traffic size), outgoing_bytes (outbound traffic size)
+         * Sort by which field. Supported values: channel (number of channels), incoming_bytes (inbound traffic volume), outgoing_bytes (outbound traffic volume).
          * @type {string || null}
          */
         this.SortElement = null;
 
         /**
-         * Sort order: ASC, DESC
+         * Sorting method: ASC, DESC
          * @type {string || null}
          */
         this.SortType = null;
 
         /**
-         * 
+         * Pagination parameters, started from which data entry
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 
+         * Page size.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 
+         * Connection name fuzzy search
          * @type {string || null}
          */
         this.Name = null;
@@ -2094,154 +2209,196 @@ class RabbitMQClusterInfo extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * <p>Cluster ID.</p>
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Cluster name.
+         * <p>Cluster name.</p>
          * @type {string || null}
          */
         this.ClusterName = null;
 
         /**
-         * Region information
+         * <p>Regional information</p>
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * Creation time, in milliseconds
+         * <p>Creation time in milliseconds</p>
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * Cluster description remark information
+         * <p>Cluster description information</p>
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * VPC and network information.
+         * <p>VPC and network info</p>
          * @type {Array.<VpcEndpointInfo> || null}
          */
         this.Vpcs = null;
 
         /**
-         * Availability zone information
+         * <p>AZ information</p>
          * @type {Array.<number> || null}
          */
         this.ZoneIds = null;
 
         /**
-         * number of virtual hosts.
+         * <p>Number of virtual hosts</p>
          * @type {number || null}
          */
         this.VirtualHostNumber = null;
 
         /**
-         * Number of queues
+         * <p>Number of queues</p>
          * @type {number || null}
          */
         this.QueueNumber = null;
 
         /**
-         * Number of messages produced per second (measurement unit: messages/second).
+         * <p>Number of messages produced per second Unit: messages/second</p>
          * @type {number || null}
          */
         this.MessagePublishRate = null;
 
         /**
-         * Number of accumulated messages. valid values: pieces.
+         * <p>Number of accumulated messages Unit: unit</p>
          * @type {number || null}
          */
         this.MessageStackNumber = null;
 
         /**
-         * Expiration time
+         * <p>Expiration time</p>
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * number of channels.
+         * <p>Number of channels</p>
          * @type {number || null}
          */
         this.ChannelNumber = null;
 
         /**
-         * number of connections.
+         * <p>Number of connections</p>
          * @type {number || null}
          */
         this.ConnectionNumber = null;
 
         /**
-         * Number of consumers.
+         * <p>Number of consumers</p>
          * @type {number || null}
          */
         this.ConsumerNumber = null;
 
         /**
-         * Number of Exchanges.
+         * <p>Number of Exchanges</p>
          * @type {number || null}
          */
         this.ExchangeNumber = null;
 
         /**
-         * Cluster exception information.
+         * <p>Cluster exception information</p>
          * @type {string || null}
          */
         this.ExceptionInformation = null;
 
         /**
-         * Instance status. 0 indicates creating in progress. 1 indicates normal. 2 indicates isolated. 3 indicates terminated. 4 indicates exception. 5 indicates delivery failed.
+         * <p>Instance status. 0 indicates creating in progress, 1 indicates normal, 2 indicates isolated, 3 indicates terminated, 4 - abnormal, 5 - delivery failed</p>
          * @type {number || null}
          */
         this.ClusterStatus = null;
 
         /**
-         * Auto-renewal flag. 0 indicates the default status (If the default status is not configured, manual renewal is enabled), 1 indicates auto-renewal, and 2 indicates explicitly no auto-renewal (configured by the user).
+         * <p>Automatic renewal flag. 0: default status (initial status (that is manual renewal) if no status is set by the user); 1: automatic renewal; 2: no automatic renewal (set by the user).</p>
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
 
         /**
-         * Whether the mirrored queue strategy is enabled. 1 indicates enabled, and 0 indicates not enabled.
+         * <p>Whether to enable the mirror queue policy. 1 means enabled, 0 means disabled.</p>
          * @type {number || null}
          */
         this.MirrorQueuePolicyFlag = null;
 
         /**
-         * Number of messages consumed per second (measurement unit: messages/second).
+         * <p>Number of messages consumed per second Unit: messages/second</p>
          * @type {number || null}
          */
         this.MessageConsumeRate = null;
 
         /**
-         * Specifies the cluster version information.
+         * <p>Cluster version information</p>
          * @type {string || null}
          */
         this.ClusterVersion = null;
 
         /**
-         * Billing mode. valid values: 0 (postpaid), 1 (prepaid).
+         * <p>Billing mode. 0 - Postpaid, 1 - Prepaid</p>
          * @type {number || null}
          */
         this.PayMode = null;
 
         /**
-         * Specifies the cluster type.
+         * <p>Cluster type.</p>
          * @type {number || null}
          */
         this.InstanceType = null;
 
         /**
-         * Specifies the message retention time, in hours.
+         * <p>Message retention period Unit: hour</p>
          * @type {number || null}
          */
         this.MessageRetainTime = null;
+
+        /**
+         * <p>Traffic ratio of sending messages</p>
+         * @type {number || null}
+         */
+        this.SendReceiveRatio = null;
+
+        /**
+         * <p>Message trace retention time in hours</p>
+         * @type {number || null}
+         */
+        this.TraceTime = null;
+
+        /**
+         * <p>Instance tag list</p>
+         * @type {Array.<RabbitMQServerlessTag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * <p>Elastic scaling enabled tps</p>
+         * @type {boolean || null}
+         */
+        this.ElasticTpsFlag = null;
+
+        /**
+         * <p>Elastic tps multiple, default is 1x</p>
+         * @type {number || null}
+         */
+        this.ElasticTpsRatio = null;
+
+        /**
+         * <p>Maximum retry count</p>
+         * @type {number || null}
+         */
+        this.MaxRedeliverCount = null;
+
+        /**
+         * <p>Consumption timeout period Unit: min</p>
+         * @type {number || null}
+         */
+        this.ConsumerTimeout = null;
 
     }
 
@@ -2285,6 +2442,21 @@ class RabbitMQClusterInfo extends  AbstractModel {
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.MessageRetainTime = 'MessageRetainTime' in params ? params.MessageRetainTime : null;
+        this.SendReceiveRatio = 'SendReceiveRatio' in params ? params.SendReceiveRatio : null;
+        this.TraceTime = 'TraceTime' in params ? params.TraceTime : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new RabbitMQServerlessTag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.ElasticTpsFlag = 'ElasticTpsFlag' in params ? params.ElasticTpsFlag : null;
+        this.ElasticTpsRatio = 'ElasticTpsRatio' in params ? params.ElasticTpsRatio : null;
+        this.MaxRedeliverCount = 'MaxRedeliverCount' in params ? params.MaxRedeliverCount : null;
+        this.ConsumerTimeout = 'ConsumerTimeout' in params ? params.ConsumerTimeout : null;
 
     }
 }
@@ -2298,13 +2470,13 @@ class DescribeRabbitMQServerlessBindingsResponse extends  AbstractModel {
         super();
 
         /**
-         * Route relationship list
+         * <p>Route relationship list</p>
          * @type {Array.<RabbitMQBindingListInfo> || null}
          */
         this.BindingInfoList = null;
 
         /**
-         * Quantity
+         * <p>Quantity</p>
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -2488,6 +2660,12 @@ class DescribeRabbitMQServerlessConsumersRequest extends  AbstractModel {
          */
         this.SearchWord = null;
 
+        /**
+         * channelId
+         * @type {string || null}
+         */
+        this.Channel = null;
+
     }
 
     /**
@@ -2503,6 +2681,7 @@ class DescribeRabbitMQServerlessConsumersRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
 
     }
 }
@@ -2527,6 +2706,48 @@ class RabbitMQConsumersListInfo extends  AbstractModel {
          */
         this.ConsumerTag = null;
 
+        /**
+         * Consume target queue
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * Whether required for the consumer to manually ack
+         * @type {boolean || null}
+         */
+        this.AckRequired = null;
+
+        /**
+         * Consumer qos value
+         * @type {number || null}
+         */
+        this.PrefetchCount = null;
+
+        /**
+         * Consumer status
+         * @type {string || null}
+         */
+        this.Active = null;
+
+        /**
+         * Time of the last message submission
+         * @type {string || null}
+         */
+        this.LastDeliveredTime = null;
+
+        /**
+         * Number of unconfirmed messages of the consumer
+         * @type {number || null}
+         */
+        this.UnAckMsgCount = null;
+
+        /**
+         * channel belonging to the consumer
+         * @type {string || null}
+         */
+        this.ChannelName = null;
+
     }
 
     /**
@@ -2538,6 +2759,13 @@ class RabbitMQConsumersListInfo extends  AbstractModel {
         }
         this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
         this.ConsumerTag = 'ConsumerTag' in params ? params.ConsumerTag : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.AckRequired = 'AckRequired' in params ? params.AckRequired : null;
+        this.PrefetchCount = 'PrefetchCount' in params ? params.PrefetchCount : null;
+        this.Active = 'Active' in params ? params.Active : null;
+        this.LastDeliveredTime = 'LastDeliveredTime' in params ? params.LastDeliveredTime : null;
+        this.UnAckMsgCount = 'UnAckMsgCount' in params ? params.UnAckMsgCount : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
 
     }
 }
@@ -2551,19 +2779,19 @@ class CreateRabbitMQServerlessBindingResponse extends  AbstractModel {
         super();
 
         /**
-         * Queue name.
+         * <p>Queue name</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * vhost parameter.
+         * <p>vhost parameter</p>
          * @type {string || null}
          */
         this.VirtualHost = null;
 
         /**
-         * binding Id.
+         * <p>Routing relationship Id</p>
          * @type {number || null}
          */
         this.BindingId = null;
@@ -3379,6 +3607,12 @@ class RabbitMQClusterSpecInfo extends  AbstractModel {
          */
         this.PublicNetworkTps = null;
 
+        /**
+         * Feature list corresponding to the instance, yes means supported, no means unsupported
+         * @type {string || null}
+         */
+        this.Features = null;
+
     }
 
     /**
@@ -3397,6 +3631,7 @@ class RabbitMQClusterSpecInfo extends  AbstractModel {
         this.MaxUserNum = 'MaxUserNum' in params ? params.MaxUserNum : null;
         this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
         this.PublicNetworkTps = 'PublicNetworkTps' in params ? params.PublicNetworkTps : null;
+        this.Features = 'Features' in params ? params.Features : null;
 
     }
 }
@@ -3445,43 +3680,43 @@ class CreateRabbitMQServerlessBindingRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * <p>Instance Id</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Vhost parameter.
+         * <p>Vhost parameter</p>
          * @type {string || null}
          */
         this.VirtualHost = null;
 
         /**
-         * Source exchange.
+         * <p>Source exchange</p>
          * @type {string || null}
          */
         this.Source = null;
 
         /**
-         * Target type. valid values: queue or exchange.
+         * <p>Target type, value queue or exchange</p>
          * @type {string || null}
          */
         this.DestinationType = null;
 
         /**
-         * Target queue or exchange.
+         * <p>Target queue or switch</p>
          * @type {string || null}
          */
         this.Destination = null;
 
         /**
-         * Binding key.
+         * <p>Bind key</p>
          * @type {string || null}
          */
         this.RoutingKey = null;
 
         /**
-         * 
+         * <p>When creating a Binding for Header type Exchange, parameters can be passed in. No need to input for other types of Exchange.</p>
          * @type {Array.<RabbitMQServerlessKeyValuePair> || null}
          */
         this.Arguments = null;
@@ -3953,6 +4188,36 @@ class RabbitMQConnection extends  AbstractModel {
          */
         this.Channels = null;
 
+        /**
+         * Inbound traffic volume in bytes
+         * @type {number || null}
+         */
+        this.IncomingBytes = null;
+
+        /**
+         * Outbound traffic volume in bytes
+         * @type {number || null}
+         */
+        this.OutgoingBytes = null;
+
+        /**
+         * Heartbeat interval. Default 60s.
+         * @type {number || null}
+         */
+        this.Heartbeat = null;
+
+        /**
+         * Maximum number of channels per link. Default 1024.
+         * @type {number || null}
+         */
+        this.MaxChannel = null;
+
+        /**
+         * Idle time point
+         * @type {string || null}
+         */
+        this.IdleSince = null;
+
     }
 
     /**
@@ -3969,6 +4234,11 @@ class RabbitMQConnection extends  AbstractModel {
         this.SSL = 'SSL' in params ? params.SSL : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.Channels = 'Channels' in params ? params.Channels : null;
+        this.IncomingBytes = 'IncomingBytes' in params ? params.IncomingBytes : null;
+        this.OutgoingBytes = 'OutgoingBytes' in params ? params.OutgoingBytes : null;
+        this.Heartbeat = 'Heartbeat' in params ? params.Heartbeat : null;
+        this.MaxChannel = 'MaxChannel' in params ? params.MaxChannel : null;
+        this.IdleSince = 'IdleSince' in params ? params.IdleSince : null;
 
     }
 }
@@ -4441,54 +4711,49 @@ class DescribeRabbitMQServerlessQueuesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * <p>Instance Id</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Vhost parameter.
+         * <p>Vhost parameter</p>
          * @type {string || null}
          */
         this.VirtualHost = null;
 
         /**
-         * Pagination offset
+         * <p>Pagination offset.</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Pagination limit
+         * <p>Pagination limit.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Search keywords
+         * <p>Search keyword</p>
          * @type {string || null}
          */
         this.SearchWord = null;
 
         /**
-         * Specifies the queue type filter criteria. if it is left blank or set to "all", it indicates classic and quorum queues; if set to "classic", it filters classic queues; if set to "quorum", it filters quorum queues.
+         * <p>Queue type filter criteria. Leave blank or use "all" for classic and quorum queues; "classic" for classic queues; "quorum" for quorum queues.</p>
          * @type {string || null}
          */
         this.QueueType = null;
 
         /**
-         * Sorting field.
-ConsumerNumber: specifies the number of online consumers.
-MessageHeapCount specifies the number of message backlogs.
-MessageRateInOut specifies the total production and consumption rate.
-MessageRateIn specifies the production rate.
-MessageRateOut specifies the consumption rate.
+         * <p>Sorting field:<br>messages_ready - message backlog;<br>publish - production rate;<br>deliver - consumption rate;<br>consumers - number of online consumers;</p>
          * @type {string || null}
          */
         this.SortElement = null;
 
         /**
-         * Sort order. valid values: ascend or descend.
+         * <p>Sort order, asc or desc</p>
          * @type {string || null}
          */
         this.SortOrder = null;
@@ -4523,49 +4788,49 @@ class DescribeRabbitMQServerlessBindingsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * <p>Instance Id</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Vhost parameter.
+         * <p>Vhost parameter</p>
          * @type {string || null}
          */
         this.VirtualHost = null;
 
         /**
-         * Pagination Offset
+         * <p>Pagination offset</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Pagination Limit
+         * <p>Pagination limit</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Search keywords. do fuzzy search based on source exchange name, target resource name or binding key.
+         * <p>Search keywords, do fuzzy search based on source exchange name/target resource name</p>
          * @type {string || null}
          */
         this.SearchWord = null;
 
         /**
-         * Search and filter precisely according to the source Exchange.
+         * <p>Precise search and filter based on source Exchange</p>
          * @type {string || null}
          */
         this.SourceExchange = null;
 
         /**
-         * Specifies precise search filter based on target QueueName. cannot set simultaneously with DestinationExchange filter.
+         * <p>Precise search filter based on target QueueName and DestinationExchange cannot be set both at the same time</p>
          * @type {string || null}
          */
         this.QueueName = null;
 
         /**
-         * Precise search filter based on target Exchange. cannot set it simultaneously with QueueName filter.
+         * <p>Precise search filter based on target Exchange and QueueName filter cannot be set both at the same time</p>
          * @type {string || null}
          */
         this.DestinationExchange = null;
@@ -4792,6 +5057,12 @@ class ModifyRabbitMQServerlessExchangeRequest extends  AbstractModel {
          */
         this.Remark = null;
 
+        /**
+         * standby switch
+         * @type {string || null}
+         */
+        this.AlternateExchange = null;
+
     }
 
     /**
@@ -4805,6 +5076,7 @@ class ModifyRabbitMQServerlessExchangeRequest extends  AbstractModel {
         this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
         this.ExchangeName = 'ExchangeName' in params ? params.ExchangeName : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.AlternateExchange = 'AlternateExchange' in params ? params.AlternateExchange : null;
 
     }
 }
@@ -4974,6 +5246,24 @@ class ModifyRabbitMQServerlessQueueRequest extends  AbstractModel {
          */
         this.Remark = null;
 
+        /**
+         * MessageTTL parameter in milliseconds, dedicated to classic event type	
+         * @type {number || null}
+         */
+        this.MessageTTL = null;
+
+        /**
+         * DeadLetterExchange parameter. It specifies that expired or rejected messages can be delivered to the specified dead letter exchange.
+         * @type {string || null}
+         */
+        this.DeadLetterExchange = null;
+
+        /**
+         * DeadLetterRoutingKey parameter. The value can only contain letters, digits, periods (.), hyphens (-), at signs (@), and underscores (_).
+         * @type {string || null}
+         */
+        this.DeadLetterRoutingKey = null;
+
     }
 
     /**
@@ -4987,6 +5277,9 @@ class ModifyRabbitMQServerlessQueueRequest extends  AbstractModel {
         this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
         this.QueueName = 'QueueName' in params ? params.QueueName : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.MessageTTL = 'MessageTTL' in params ? params.MessageTTL : null;
+        this.DeadLetterExchange = 'DeadLetterExchange' in params ? params.DeadLetterExchange : null;
+        this.DeadLetterRoutingKey = 'DeadLetterRoutingKey' in params ? params.DeadLetterRoutingKey : null;
 
     }
 }
@@ -4999,6 +5292,7 @@ module.exports = {
     ModifyRabbitMQServerlessUserResponse: ModifyRabbitMQServerlessUserResponse,
     CreateRabbitMQServerlessVirtualHostRequest: CreateRabbitMQServerlessVirtualHostRequest,
     DescribeRabbitMQServerlessUserResponse: DescribeRabbitMQServerlessUserResponse,
+    RabbitMQServerlessTag: RabbitMQServerlessTag,
     ModifyRabbitMQServerlessExchangeResponse: ModifyRabbitMQServerlessExchangeResponse,
     DescribeRabbitMQServerlessConsumersResponse: DescribeRabbitMQServerlessConsumersResponse,
     DescribeRabbitMQServerlessQueueDetailResponse: DescribeRabbitMQServerlessQueueDetailResponse,

@@ -23,6 +23,7 @@ const RabbitMQBindingListInfo = models.RabbitMQBindingListInfo;
 const ModifyRabbitMQServerlessUserResponse = models.ModifyRabbitMQServerlessUserResponse;
 const CreateRabbitMQServerlessVirtualHostRequest = models.CreateRabbitMQServerlessVirtualHostRequest;
 const DescribeRabbitMQServerlessUserResponse = models.DescribeRabbitMQServerlessUserResponse;
+const RabbitMQServerlessTag = models.RabbitMQServerlessTag;
 const ModifyRabbitMQServerlessExchangeResponse = models.ModifyRabbitMQServerlessExchangeResponse;
 const DescribeRabbitMQServerlessConsumersResponse = models.DescribeRabbitMQServerlessConsumersResponse;
 const DescribeRabbitMQServerlessQueueDetailResponse = models.DescribeRabbitMQServerlessQueueDetailResponse;

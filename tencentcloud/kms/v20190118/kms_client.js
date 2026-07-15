@@ -33,6 +33,7 @@ const WhiteboxKeyInfo = models.WhiteboxKeyInfo;
 const DescribeDataKeysRequest = models.DescribeDataKeysRequest;
 const ListAlgorithmsResponse = models.ListAlgorithmsResponse;
 const DisableKeysResponse = models.DisableKeysResponse;
+const RegionQps = models.RegionQps;
 const EnableDataKeyResponse = models.EnableDataKeyResponse;
 const DescribeWhiteBoxKeyResponse = models.DescribeWhiteBoxKeyResponse;
 const UpdateKeyDescriptionResponse = models.UpdateKeyDescriptionResponse;

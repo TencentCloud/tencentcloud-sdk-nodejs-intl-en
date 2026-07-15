@@ -1614,7 +1614,7 @@ Note: The HLS segment format for adaptive bitrate streaming is based on this fie
 }
 
 /**
- * 
+ * Custom description variable.
  * @class
  */
 class CustomVariable extends  AbstractModel {
@@ -1622,13 +1622,13 @@ class CustomVariable extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>User-defined variable type.</p><p>Parameter format: PascalCase format.</p><p>This cannot be UserPrompt. The default platform template is not adapted for custom content. Submit a ticket if needed.</p>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * <p>Custom variable description.</p>
          * @type {string || null}
          */
         this.Description = null;
@@ -2775,7 +2775,7 @@ class DescribeTextToSpeechAsyncTaskRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Output video information of the AIGC audio generation task.
  * @class
  */
 class AigcAudioOutputVideoInfo extends  AbstractModel {
@@ -2783,13 +2783,13 @@ class AigcAudioOutputVideoInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Video URL.</p>
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 
+         * <p>Video duration.</p>
          * @type {number || null}
          */
         this.Duration = null;
@@ -3795,7 +3795,7 @@ Default value: black.
 }
 
 /**
- * 
+ * Reference audio information.
  * @class
  */
 class AigcAudioReferenceAudioInfo extends  AbstractModel {
@@ -3803,7 +3803,7 @@ class AigcAudioReferenceAudioInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Reference audio URL, which must be accessible from the public network.</p>
          * @type {string || null}
          */
         this.AudioUrl = null;
@@ -5630,6 +5630,69 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
+ * Smart subtitle recognition segment.
+ * @class
+ */
+class SmartSubtitleTaskFullTextSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Confidence of the recognized segment. Value range: 0–100.</p>
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * <p>Start time offset of the recognized segment, in seconds.</p>
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * <p>End time offset of the recognized segment, in seconds.</p>
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * <p>Recognized text.</p>
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * <p>Translated text.</p>
+         * @type {string || null}
+         */
+        this.Trans = null;
+
+        /**
+         * <p>Speaker ID.</p>
+         * @type {string || null}
+         */
+        this.SpeakerId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Trans = 'Trans' in params ? params.Trans : null;
+        this.SpeakerId = 'SpeakerId' in params ? params.SpeakerId : null;
+
+    }
+}
+
+/**
  * Input parameter type of video content recognition
  * @class
  */
@@ -5673,6 +5736,13 @@ class SmartSubtitleTaskTextResultOutput extends  AbstractModel {
         super();
 
         /**
+         * <p>List of segments for smart subtitle recognition.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SmartSubtitleTaskFullTextSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+        /**
          * <p>Subtitle recognition result</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<SubtitleResult> || null}
@@ -5701,6 +5771,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new SmartSubtitleTaskFullTextSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
         }
 
         if (params.RecognizeSubtitleResult) {
@@ -5919,6 +5998,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.TrackChannelInfo = null;
 
+        /**
+         * <p>Audio track language, such as chi or eng. Note: (1) This follows the ISO 639-2 standard. (2) This applies only to adaptive bitrate streaming templates. (3) The value "source" means that the source language is used.</p>
+         * @type {string || null}
+         */
+        this.AudioLanguage = null;
+
+        /**
+         * <p>Audio track name, such as Chinese or English. Note: (1) Only Chinese characters, letters, digits, spaces, underscores (_), hyphens (-), periods (.), and brackets are supported. The length cannot exceed 64 characters. (2) This applies only to adaptive bitrate streaming templates. (3) The value "source" means that the source name is used.</p>
+         * @type {string || null}
+         */
+        this.AudioName = null;
+
+        /**
+         * <p>Default audio track. When set to true, the current audio track is designated as the default audio track. A maximum of 1 default audio track can be specified.</p><p>Default value: false.</p>
+         * @type {boolean || null}
+         */
+        this.DefaultTrack = null;
+
     }
 
     /**
@@ -5938,6 +6035,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.TrackChannelInfo)
             this.TrackChannelInfo = obj;
         }
+        this.AudioLanguage = 'AudioLanguage' in params ? params.AudioLanguage : null;
+        this.AudioName = 'AudioName' in params ? params.AudioName : null;
+        this.DefaultTrack = 'DefaultTrack' in params ? params.DefaultTrack : null;
 
     }
 }
@@ -7053,6 +7153,60 @@ class AiReviewTerrorismOcrTaskInput extends  AbstractModel {
 }
 
 /**
+ * External audio.
+ * @class
+ */
+class AddOnAudio extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Audio file input information. Note: (1) Supported audio stream encoding formats: AAC, AC3, EAC3, FLAC, Opus, and MP3. (2) If the segment type set in the adaptive bitrate streaming template is TS, the audio stream encoding format cannot be FLAC.</p>
+         * @type {MediaInputInfo || null}
+         */
+        this.InputInfo = null;
+
+        /**
+         * <p>Audio track name, such as Chinese or English. Note: Only Chinese characters, letters, digits, spaces, underscores (_), hyphens (-), periods (.), and brackets are supported. The length cannot exceed 64 characters.</p>
+         * @type {string || null}
+         */
+        this.AudioName = null;
+
+        /**
+         * <p>Audio track language, such as chi or eng. This follows the ISO 639-2 standard.</p>
+         * @type {string || null}
+         */
+        this.AudioLanguage = null;
+
+        /**
+         * <p>Default audio track. When set to true, the current audio is designated as the default audio track. A maximum of 1 default audio track can be specified.</p><p>Default value: false.</p>
+         * @type {boolean || null}
+         */
+        this.DefaultTrack = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InputInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
+        }
+        this.AudioName = 'AudioName' in params ? params.AudioName : null;
+        this.AudioLanguage = 'AudioLanguage' in params ? params.AudioLanguage : null;
+        this.DefaultTrack = 'DefaultTrack' in params ? params.DefaultTrack : null;
+
+    }
+}
+
+/**
  * Input for text keyword recognition.
  * @class
  */
@@ -7554,7 +7708,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EraseConfig = null;
 
         /**
-         * 
+         * <p>AI image set configuration.</p>
          * @type {AiPosterSuiteConfig || null}
          */
         this.AiPosterSuiteConfig = null;
@@ -8027,7 +8181,7 @@ class DeleteAIRecognitionTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Output audio information of the AIGC audio generation task.
  * @class
  */
 class AigcAudioOutputAudioInfo extends  AbstractModel {
@@ -8035,13 +8189,13 @@ class AigcAudioOutputAudioInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Audio URL.</p>
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 
+         * <p>Audio duration.</p>
          * @type {number || null}
          */
         this.Duration = null;
@@ -8938,7 +9092,7 @@ class CreateAigcAudioTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * The task ID returned after the task is created successfully.Call the query API to poll for task progress and the generation result.Example value: 24*******AigcAudio-6a38**3a9f51468da5bfc25****9a462
+         * <p>Returned task ID after the task is created successfully.<br>The task progress and generation results can be obtained by calling the query API.</p>
          * @type {string || null}
          */
         this.TaskId = null;
@@ -10609,25 +10763,25 @@ class DescribeAigcAudioTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * Current task status. WAIT: waiting; RUN: running; FAIL: failed; DONE: successful.Example value: DONE
+         * <p>Current task status. WAIT: waiting. RUN: running. FAIL: failed. DONE: successful.</p>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * When the task status is FAIL, the failure information is returned.
+         * <p>If the task status is FAIL, the failure information is returned.</p>
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * Output audio information.
+         * <p>Output audio information.</p>
          * @type {Array.<AigcAudioOutputAudioInfo> || null}
          */
         this.AudioInfos = null;
 
         /**
-         * Output video information. Only returned for scenarios such as video dubbing.
+         * <p>Output video information, which is only available for scenarios such as video dubbing.</p>
          * @type {Array.<AigcAudioOutputVideoInfo> || null}
          */
         this.VideoInfos = null;
@@ -15259,67 +15413,67 @@ class CreateAigcAudioTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * Model name. Currently supported models for music generation: GL, MinimaxMusic.Example value: MiniMaxMusic
+         * <p>Model name. Supported models for music generation: GL and MiniMaxMusic.</p>
          * @type {string || null}
          */
         this.ModelName = null;
 
         /**
-         * Specifies the model version. By default, the system uses the supported stable version of the model.Supported versions for GL: 2.0, 3.0-clip, 3.0-pro.Supported versions for MinimaxMusic: 2.0, 2.5, 2.6.Example value: 2.0
+         * <p>Specifies the model version. By default, the system uses the supported stable version of the model.<br>Supported versions for GL: 3.0-clip and 3.0-pro.<br>Supported versions for MinimaxMusic: 2.0, 2.5, and 2.6.</p>
          * @type {string || null}
          */
         this.ModelVersion = null;
 
         /**
-         * Specifies the audio generation scene. Music: music.Example value: music
+         * <p>Specifies the scenario for audio generation. Music: music.</p>
          * @type {string || null}
          */
         this.SceneType = null;
 
         /**
-         * Description of the generated audio. (Note: Supports up to 2000 characters.) This parameter is required when no reference image is passed in.Example value: generate a piece of music
+         * <p>Description of the generated video. (Note: A maximum of 2000 characters is supported.) This parameter is required when no reference image is specified.</p>
          * @type {string || null}
          */
         this.Prompt = null;
 
         /**
-         * Reference video information. Only supported by certain models.
+         * <p>Reference video information, which is supported by some models.</p>
          * @type {Array.<AigcAudioReferenceVideoInfo> || null}
          */
         this.VideoInfos = null;
 
         /**
-         * Reference audio information.For example, this parameter is required when generating music from a reference audio.
+         * <p>Specify the reference audio information.</p><p>For example, this is required for music generation.</p>
          * @type {Array.<AigcAudioReferenceAudioInfo> || null}
          */
         this.AudioInfos = null;
 
         /**
-         * Output audio format. Empty by default. Supported values: mp3, wav.Example value: wav
+         * <p>Output audio format. By default, this is not specified. Valid values: mp3 and wav.</p>
          * @type {string || null}
          */
         this.OutputAudioFormat = null;
 
         /**
-         * COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.
+         * <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
          * @type {AigcStoreCosParam || null}
          */
         this.StoreCosParam = null;
 
         /**
-         * Additional parameters required for the model.
+         * <p>Additional parameters required.</p>
          * @type {AigcAudioExtraParam || null}
          */
         this.ExtraParameters = null;
 
         /**
-         * Used to input some special scene parameters required by the model, serialized into a string in JSON format.Example: when passing lyrics to the MinimaxMusic model:{"lyric":{"The pony runs happily, flowers are blooming"}}Example value: {"sequential_image_generation":"auto"}
+         * <p>This is used to specify special scenario parameters required by the model, in the format of a serialized JSON string.<br>Example to specify lyrics for the MinimaxMusic model:<br>{"lyric":{"The pony is running with joy. The flowers are blooming."}}</p>
          * @type {string || null}
          */
         this.AdditionalParameters = null;
 
         /**
-         * API operator name.Example value: admin
+         * <p>API operator name.</p>
          * @type {string || null}
          */
         this.Operator = null;
@@ -22804,7 +22958,7 @@ class CreateQualityControlTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Extended parameters for AIGC audio generation.
  * @class
  */
 class AigcAudioExtraParam extends  AbstractModel {
@@ -22812,7 +22966,7 @@ class AigcAudioExtraParam extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Resource ID. Specify this based on your needs.</p>
          * @type {string || null}
          */
         this.ResourceId = null;
@@ -29232,7 +29386,7 @@ class DescribeAigcAudioTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * The task ID returned when creating the AIGC audio generation task.Example value: 24000145-****d**-cb46b8040b684b539bbd46****e*e2fd
+         * <p>Task ID returned when the AIGC video generation task is created.</p>
          * @type {string || null}
          */
         this.TaskId = null;
@@ -33081,97 +33235,94 @@ class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Adaptive dynamic streaming template ID.
+         * <p>Adaptive bitrate streaming template ID.</p>
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Watermark list. Multiple image or text watermarks up to a maximum of 10 are supported.
+         * <p>Watermark list. Up to 10 image or text watermarks are supported.</p>
          * @type {Array.<WatermarkInput> || null}
          */
         this.WatermarkSet = null;
 
         /**
-         * Digital watermark parameter.	
+         * <p>Digital watermark parameter.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {BlindWatermarkInput || null}
          */
         this.BlindWatermark = null;
 
         /**
-         * Target storage for files after adaptive dynamic streaming. If left blank, it inherits the upper-level OutputStorage value.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Target storage for files after adaptive bitrate streaming. If this is not specified, the upper-level OutputStorage value is used.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Output path for the manifest file after adaptive dynamic streaming. It can be either a relative path or an absolute path.
-If you need to define an output path, the path must end with `.{format}`. Refer to [Filename Variable Description](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1) for variable names.
-Example of relative path:
-<li>filename_{variable name}.{format}</li>
-<li>filename.{format}</li>
-Example of absolute path:
-<li>/custom path/filename_{variable name}.{format}</li>
-If not filled in, it is a relative path by default: {inputName}_adaptiveDynamicStreaming_{definition}.{format}.
+         * <p>Output path for the manifest file after adaptive bitrate streaming, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">Filename Variables</a>.<br>Relative path example:</p><li>Filename_{variable name}.{format}</li><li>Filename.{format}</li>Absolute path example:<li>/custom path/Filename_{variable name}.{format}</li>If this is not specified, the default relative path is {inputName}_adaptiveDynamicStreaming_{definition}.{format}.
          * @type {string || null}
          */
         this.OutputObjectPath = null;
 
         /**
-         * After adaptive dynamic streaming, the output path of substream files can only be a relative path. If not filled in, it is a relative path by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`.
+         * <p>Output path for substream files after adaptive bitrate streaming, which can only be a relative path. If this is not specified, the default relative path is <code>{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}</code>.</p>
          * @type {string || null}
          */
         this.SubStreamObjectName = null;
 
         /**
-         * After adaptive dynamic streaming (for HLS only), the output path of segment files can only be a relative path. If not filled in, it is a relative path by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
+         * <p>Output path for segment files after adaptive bitrate streaming (HLS only), which can only be a relative path. If this is not specified, the default relative path is <code>{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}</code>.</p>
          * @type {string || null}
          */
         this.SegmentObjectName = null;
 
         /**
-         * External subtitle feature specifies the subtitle file to be inserted.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>External subtitle feature. Specifies the subtitle file to be inserted.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AddOnSubtitle> || null}
          */
         this.AddOnSubtitles = null;
 
         /**
-         * Specifies the Drm information.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>DRM information.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {DrmInfo || null}
          */
         this.DrmInfo = null;
 
         /**
-         * Adaptive transcoding template type.
-Common: audio/video type.
-PureAudio: audio-only.
+         * <p>Adaptive bitrate streaming template type. Valid values:<br>Common: audio and video.<br>PureAudio: audio only.</p>
          * @type {string || null}
          */
         this.DefinitionType = null;
 
         /**
-         * Hard subtitle (suppression subtitle) feature, specify subtitles source, font size, position and other subtitle parameters.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Hard subtitle (burned-in subtitle) feature. Specifies the subtitle source, font size, location, and other subtitle parameters.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SubtitleTemplate || null}
          */
         this.SubtitleTemplate = null;
 
         /**
-         * Transcoding parameter extension field.
+         * <p>Extended transcoding parameter field.</p>
          * @type {string || null}
          */
         this.StdExtInfo = null;
 
         /**
-         * Specifies the frame at the given pts time as a key frame and segments it. unit: milliseconds (relative deviation <=1ms is allowed). when gop and segment duration are specified simultaneously, they function together. note: enable RawPts, keep the frame rate as source, and ensure the passed-in pts time corresponds to a frame in the source.
+         * <p>Specifies frames at specified PTS times as keyframes and splits segments. Unit: milliseconds (relative deviation of up to 1 ms is allowed). When both GOP and segment duration are specified, they function together. Note that you need to enable RawPts, keep the frame rate as that of the source, and ensure the specified PTS time corresponds to a frame in the source.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<number> || null}
          */
         this.KeyPTSList = null;
+
+        /**
+         * <p>External audio feature. Specifies the audio files to be inserted.</p>
+         * @type {Array.<AddOnAudio> || null}
+         */
+        this.AddOnAudios = null;
 
     }
 
@@ -33231,6 +33382,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.StdExtInfo = 'StdExtInfo' in params ? params.StdExtInfo : null;
         this.KeyPTSList = 'KeyPTSList' in params ? params.KeyPTSList : null;
+
+        if (params.AddOnAudios) {
+            this.AddOnAudios = new Array();
+            for (let z in params.AddOnAudios) {
+                let obj = new AddOnAudio();
+                obj.deserialize(params.AddOnAudios[z]);
+                this.AddOnAudios.push(obj);
+            }
+        }
 
     }
 }
@@ -37000,40 +37160,40 @@ class AddOnSubtitle extends  AbstractModel {
         super();
 
         /**
-         * The mode. Valid values:
-<li>`subtitle-stream`: Add a subtitle track.</li>
-<li>`close-caption-708`: Embed CEA-708 subtitles in SEI frames.</li>
-<li>`close-caption-608`: Embed CEA-608 subtitles in SEI frames.</li>
+         * <p>Insertion method. Valid values:</p><li>subtitle-stream: Inserts a subtitle track.</li><li>close-caption-708: Encodes CEA-708 subtitles into SEI frames.</li><li>close-caption-608: Encodes CEA-608 subtitles into SEI frames.</li>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * The subtitle file.
+         * <p>Subtitle file.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaInputInfo || null}
          */
         this.Subtitle = null;
 
         /**
-         * Subtitle name.
-Note: supports Chinese characters, letters, digits, spaces, underscores (_), hyphens (-), periods (.), and parentheses. Max 64 characters.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Subtitle name.<br>Note: Only Chinese characters, letters, digits, spaces, underscores (_), hyphens (-), periods (.), and brackets are supported. The length cannot exceed 64 characters.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SubtitleName = null;
 
         /**
-         * Output format of the subtitle. valid values: "WebVTT", "TTML".
-Default value: "WebVTT".
+         * <p>Subtitle language, such as eng.</p>
+         * @type {string || null}
+         */
+        this.SubtitleLanguage = null;
+
+        /**
+         * <p>Subtitle output format. Valid values: {&quot;WebVTT&quot;,&quot;TTML&quot;}.<br>Default value: &quot;WebVTT&quot;.</p>
          * @type {string || null}
          */
         this.OutputFormat = null;
 
         /**
-         * Default subtitle track. specifies the current subtitle as the default track when true. a maximum of 1 default subtitle track can be specified.
-Default value: `false`.
+         * <p>Default subtitle track. When set to true, the current subtitle is designated as the default subtitle track. A maximum of 1 default subtitle track can be specified.<br>Default value: false.</p>
          * @type {boolean || null}
          */
         this.DefaultTrack = null;
@@ -37055,6 +37215,7 @@ Default value: `false`.
             this.Subtitle = obj;
         }
         this.SubtitleName = 'SubtitleName' in params ? params.SubtitleName : null;
+        this.SubtitleLanguage = 'SubtitleLanguage' in params ? params.SubtitleLanguage : null;
         this.OutputFormat = 'OutputFormat' in params ? params.OutputFormat : null;
         this.DefaultTrack = 'DefaultTrack' in params ? params.DefaultTrack : null;
 
@@ -38375,7 +38536,7 @@ class CreateAigcImageTaskRequest extends  AbstractModel {
         this.ImageInfos = null;
 
         /**
-         * 
+         * <p>Specifies the number of output images. One image is supported by default.</p>
          * @type {number || null}
          */
         this.OutputImageCount = null;
@@ -39947,7 +40108,7 @@ class DescribePersonSamplesResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Reference video asset for AIGC video generation.
  * @class
  */
 class AigcAudioReferenceVideoInfo extends  AbstractModel {
@@ -39955,7 +40116,7 @@ class AigcAudioReferenceVideoInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Reference video URL, which must be accessible from the public network.</p>
          * @type {string || null}
          */
         this.VideoUrl = null;
@@ -41543,7 +41704,7 @@ class DescribeStreamLinkSecurityGroupRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Image set information.
  * @class
  */
 class RecipeItem extends  AbstractModel {
@@ -41551,13 +41712,13 @@ class RecipeItem extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Sub-image type.</p><p>Enumeration values:</p><ul><li>hero: product hero image.</li><li>detail: product details image.</li><li>selling: core selling point image.</li><li>atmosphere: scene atmosphere image.</li><li>angles: multiple-angle image.</li><li>scene: usage scenario image.</li></ul>
          * @type {string || null}
          */
         this.Theme = null;
 
         /**
-         * 
+         * <p>Number of corresponding sub-images.</p><p>Value range: 1 to 4.</p><p>Unit: image.</p><p>Each type can have up to 4 sub-images. The total number of sub-images must be within the range of 4 to 12.</p>
          * @type {number || null}
          */
         this.Num = null;
@@ -43547,7 +43708,7 @@ class MediaImageSpriteItem extends  AbstractModel {
 }
 
 /**
- * 
+ * Intelligent image set configuration.
  * @class
  */
 class AiPosterSuiteConfig extends  AbstractModel {
@@ -43555,49 +43716,49 @@ class AiPosterSuiteConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Image output mode.</p><p>Enumeration values:</p><ul><li>auto: fully automatic mode. CustomVariables can be passed in this mode.</li><li>modify: modification mode. The corresponding description needs to be provided in the AddOnParameter.ExtPrompt field in this mode. CustomVariables cannot be passed in this mode.</li></ul><p>Default value: auto.</p>
          * @type {string || null}
          */
         this.Mode = null;
 
         /**
-         * 
+         * <p>Ecommerce platform visual template ID.</p><p>If you need a personalized visual template, submit a ticket.</p>
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * 
+         * <p>Sub-image configuration.</p>
          * @type {Array.<RecipeItem> || null}
          */
         this.Recipe = null;
 
         /**
-         * 
+         * <p>Sub-image text language.</p><p>Enumeration values:</p><ul><li>zh-CN: Simplified Chinese.</li><li>en-US: American English.</li></ul><p>Default value: zh-CN.</p><p>If you need more languages, submit a ticket.</p>
          * @type {string || null}
          */
         this.Language = null;
 
         /**
-         * 
+         * <p>Sub-image aspect ratio.</p><p>Enumeration values:</p><ul><li>1:1: 1:1.</li><li>3:4: 3:4.</li><li>4:3: 4:3.</li><li>9:16: 9:16.</li><li>16:9: 16:9.</li></ul><p>Default value: 1:1.</p>
          * @type {string || null}
          */
         this.PanelRatio = null;
 
         /**
-         * 
+         * <p>Sub-image resolution.</p><p>Enumeration values:</p><ul><li>720: 720.</li><li>1K: 1K.</li><li>2K: 2K.</li><li>4K: 4K.</li></ul><p>Default value: 1K.</p>
          * @type {string || null}
          */
         this.PanelResolution = null;
 
         /**
-         * 
+         * <p>User-defined variable.</p>
          * @type {Array.<CustomVariable> || null}
          */
         this.CustomVariables = null;
 
         /**
-         * 
+         * <p>Model name.</p><p>Enumeration value:</p><ul><li>WAND-suite-1.0-flash: WAND-suite-1.0-flash.</li></ul>
          * @type {string || null}
          */
         this.Model = null;
@@ -45283,6 +45444,7 @@ module.exports = {
     ParseLiveStreamProcessNotificationResponse: ParseLiveStreamProcessNotificationResponse,
     SubtitleShadowConfig: SubtitleShadowConfig,
     SmartEraseTaskResult: SmartEraseTaskResult,
+    SmartSubtitleTaskFullTextSegmentItem: SmartSubtitleTaskFullTextSegmentItem,
     AiRecognitionTaskInput: AiRecognitionTaskInput,
     SmartSubtitleTaskTextResultOutput: SmartSubtitleTaskTextResultOutput,
     AiAnalysisTaskFrameTagResult: AiAnalysisTaskFrameTagResult,
@@ -45305,6 +45467,7 @@ module.exports = {
     TextWatermarkTemplateInputForUpdate: TextWatermarkTemplateInputForUpdate,
     SubtitleTransResultItem: SubtitleTransResultItem,
     AiReviewTerrorismOcrTaskInput: AiReviewTerrorismOcrTaskInput,
+    AddOnAudio: AddOnAudio,
     AiRecognitionTaskOcrWordsResultInput: AiRecognitionTaskOcrWordsResultInput,
     CreateQualityControlTemplateResponse: CreateQualityControlTemplateResponse,
     AiAnalysisTaskReelInput: AiAnalysisTaskReelInput,

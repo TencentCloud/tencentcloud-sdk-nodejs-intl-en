@@ -780,6 +780,41 @@ class DisableKeysResponse extends  AbstractModel {
 }
 
 /**
+ * Region extra QPS package
+ * @class
+ */
+class RegionQps extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Region.</p>
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * <p>qps size</p>
+         * @type {number || null}
+         */
+        this.Qps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+
+    }
+}
+
+/**
  * EnableDataKey response structure.
  * @class
  */
@@ -2000,25 +2035,25 @@ class ImportKeyMaterialRequest extends  AbstractModel {
         super();
 
         /**
-         * Base64-encoded key material that encrypted with the `PublicKey` returned by `GetParametersForImport`. For the KMS of SM-CRYPTO version, the length of the key material should be 128 bits, while for KMS of FIPS-compliant version, the length should be 256 bits.
+         * <p>base64-encoded encrypted key material using the PublicKey returned by GetParametersForImport. For KMS in national cryptography version regions, the length requirement for imported key material is 128 bit. For KMS in FIPS 140-2 version regions, the length requirement for imported key material is 256 bit.</p>
          * @type {string || null}
          */
         this.EncryptedKeyMaterial = null;
 
         /**
-         * Import token obtained by calling `GetParametersForImport`.
+         * <p>Import token obtained by calling GetParametersForImport.</p>
          * @type {string || null}
          */
         this.ImportToken = null;
 
         /**
-         * Specifies the CMK into which to import key material, which must be the same as the one specified by `GetParametersForImport`.
+         * <p>The CMK designated for importing key material must be identical to the CMK specified in GetParametersForImport.</p>
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * Unix timestamp of the key material's expiration time. If this value is empty or 0, the key material will never expire. To specify the expiration time, it should be later than the current time. Maximum value: 2147443200.
+         * <p>Expiration time of the key material in unix timestamp. If unspecified or 0, the key material does not expire. If specified, the expiration time must be greater than the current time and supports up to 2147443200.</p>
          * @type {number || null}
          */
         this.ValidTo = null;
@@ -4039,112 +4074,130 @@ class GetServiceStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether the KMS service has been activated. true: activated
+         * <p>Whether the KMS service is enabled. true means enabled</p>
          * @type {boolean || null}
          */
         this.ServiceEnabled = null;
 
         /**
-         * Service unavailability type: 0-not purchased, 1-normal, 2-service suspended due to overdue payments, 3-resource release.
+         * <p>Service unavailability type: 0-not purchased, 1-normal, 2-service suspended due to overdue payments, 3-resource release</p>
          * @type {number || null}
          */
         this.InvalidType = null;
 
         /**
-         * 0: Basic Edition, 1: Ultimate Edition
+         * <p>0-Standard Edition, 1-Flagship Edition</p>
          * @type {number || null}
          */
         this.UserLevel = null;
 
         /**
-         * Specifies the expiry time (Epoch Unix Timestamp) of the flagship edition.
+         * <p>Expiry time of the flagship edition (Epoch Unix Timestamp).</p>
          * @type {number || null}
          */
         this.ProExpireTime = null;
 
         /**
-         * Specifies whether the flagship edition is automatically renewed: 0 - no automatic renewal, 1 - automatic renewal.
+         * <p>Whether the flagship edition is automatically renewed: 0-no auto-renewal, 1-auto-renewal</p>
          * @type {number || null}
          */
         this.ProRenewFlag = null;
 
         /**
-         * Flagship edition purchase record unique identifier. if not activated, the return value is empty.
+         * <p>Unique identifier of the flagship edition purchase record. If the flagship edition is not activated, the return value is empty.</p>
          * @type {string || null}
          */
         this.ProResourceId = null;
 
         /**
-         * Whether to enable the KMS-managed version.
+         * <p>Whether to enable managed by KMS</p>
          * @type {boolean || null}
          */
         this.ExclusiveVSMEnabled = null;
 
         /**
-         * Whether to enable the exclusive edition of KMS.
+         * <p>Whether to enable KMS exclusive edition</p>
          * @type {boolean || null}
          */
         this.ExclusiveHSMEnabled = null;
 
         /**
-         * Specifies the KMS subscription information.
+         * <p>KMS subscription information.</p>
          * @type {string || null}
          */
         this.SubscriptionInfo = null;
 
         /**
-         * Returns the amount of KMS user secret keys used.
+         * <p>Return the usage quantity of KMS user secret key</p>
          * @type {number || null}
          */
         this.CmkUserCount = null;
 
         /**
-         * Returns the specification quantity of KMS user secret keys.
+         * <p>Return the specification quantity of KMS user secret keys</p>
          * @type {number || null}
          */
         this.CmkLimit = null;
 
         /**
-         * Return dedicated cluster group.
+         * <p>Return the dedicated cluster group</p>
          * @type {Array.<ExclusiveHSM> || null}
          */
         this.ExclusiveHSMList = null;
 
         /**
-         * Whether data key management is supported. valid values: 1 (supported), 0 (unsupported).
+         * <p>Indicates whether data key management is supported. 1: supported. 0: not supported.</p>
          * @type {boolean || null}
          */
         this.IsAllowedDataKeyHosted = null;
 
         /**
-         * Valid when IsAllowedDataKeyHosted is 1. specifies the purchase quota for data keys.
+         * <p>Valid when IsAllowedDataKeyHosted is 1. Purchase quota of the data key</p>
          * @type {number || null}
          */
         this.DataKeyLimit = null;
 
         /**
-         * Valid when IsAllowedDataKeyHosted is 1. data key free quota.
+         * <p>Valid at that time when IsAllowedDataKeyHosted is 1. Data key free quota.</p>
          * @type {number || null}
          */
         this.FreeDataKeyLimit = null;
 
         /**
-         * Valid at that time when IsAllowedDataKeyHosted is 1. specifies the number of keys used.
+         * <p>Valid when IsAllowedDataKeyHosted is 1. Number of used data keys.</p>
          * @type {number || null}
          */
         this.DataKeyUsedCount = null;
 
         /**
-         * Specifies the target region of the sync task.
+         * <p>Target region info of the sync task</p>
          * @type {Array.<DestinationSyncConfig> || null}
          */
         this.SyncTaskList = null;
 
         /**
-         * Whether synchronization task is supported. true: supported; false: unsupported.
+         * <p>Whether sync task is supported. true: supported, false: unsupported.</p>
          * @type {boolean || null}
          */
         this.IsAllowedSync = null;
+
+        /**
+         * <p>QPS in the region</p>
+         * @type {number || null}
+         */
+        this.QpsLimit = null;
+
+        /**
+         * <p>Total QPS value</p>
+         * @type {number || null}
+         */
+        this.QpsTotalLimit = null;
+
+        /**
+         * <p>QPS in the region</p>
+         * @type {Array.<RegionQps> || null}
+         */
+        this.RegionsQps = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4195,6 +4248,17 @@ class GetServiceStatusResponse extends  AbstractModel {
             }
         }
         this.IsAllowedSync = 'IsAllowedSync' in params ? params.IsAllowedSync : null;
+        this.QpsLimit = 'QpsLimit' in params ? params.QpsLimit : null;
+        this.QpsTotalLimit = 'QpsTotalLimit' in params ? params.QpsTotalLimit : null;
+
+        if (params.RegionsQps) {
+            this.RegionsQps = new Array();
+            for (let z in params.RegionsQps) {
+                let obj = new RegionQps();
+                obj.deserialize(params.RegionsQps[z]);
+                this.RegionsQps.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4694,169 +4758,169 @@ class KeyMetadata extends  AbstractModel {
         super();
 
         /**
-         * Globally unique CMK ID
+         * <p>Globally unique ID of the CMK.</p>
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * Alias that makes a key more recognizable and understandable
+         * <p>An alias name as a key that is easier to identify and understand</p>
          * @type {string || null}
          */
         this.Alias = null;
 
         /**
-         * Key creation time
+         * <p>Key creation time</p>
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * CMK description
+         * <p>Description of the CMK.</p>
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * CMK status. Valid values: Enabled, Disabled, PendingDelete, PendingImport, Archived.
+         * <p>CMK state, value: Enabled | Disabled | PendingDelete | PendingImport | Archived</p>
          * @type {string || null}
          */
         this.KeyState = null;
 
         /**
-         * CMK purpose. Valid values: `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, and `ASYMMETRIC_SIGN_VERIFY_ECC`.
+         * <p>CMK purpose. Value: ENCRYPT_DECRYPT | ASYMMETRIC_DECRYPT_RSA_2048 | ASYMMETRIC_DECRYPT_SM2 | ASYMMETRIC_SIGN_VERIFY_SM2 | ASYMMETRIC_SIGN_VERIFY_RSA_2048 | ASYMMETRIC_SIGN_VERIFY_ECC</p>
          * @type {string || null}
          */
         this.KeyUsage = null;
 
         /**
-         * CMK type. 2: FIPS-compliant; 4: SM-CRYPTO
+         * <p>CMK type. 2 means compliant with FIPS 140-2 standard. 4 means compliant with national cryptography standards.</p><p>Enumeration value:</p><ul><li>2: Complies with FIPS 140-2 standard</li><li>4: Complies with national cryptography standards</li></ul>
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * Creator
+         * <p>Creator.</p>
          * @type {number || null}
          */
         this.CreatorUin = null;
 
         /**
-         * Whether key rotation is enabled
+         * <p>Is key rotation function enabled?</p>
          * @type {boolean || null}
          */
         this.KeyRotationEnabled = null;
 
         /**
-         * CMK creator. The value of this parameter is `user` if the CMK is created by the user, or the corresponding service name if it is created automatically by an authorized Tencent Cloud service.
+         * <p>Creator of the CMK. For user-created CMKs, the value is user. For CMKs auto-created by authorized Cloud services, the value is the corresponding product name.</p>
          * @type {string || null}
          */
         this.Owner = null;
 
         /**
-         * Time of next rotation if key rotation is enabled
+         * <p>The time when the next rotation occurs with key rotation enabled</p>
          * @type {number || null}
          */
         this.NextRotateTime = null;
 
         /**
-         * The time when scheduled deletion occurs.
+         * <p>The time when schedule deletion</p>
          * @type {number || null}
          */
         this.DeletionDate = null;
 
         /**
-         * CMK key material type. the type created by KMS is TENCENT_KMS. the user-imported type is EXTERNAL.
+         * <p>CMK key material type. TENCENT_KMS for those created by KMS, EXTERNAL for user import.</p>
          * @type {string || null}
          */
         this.Origin = null;
 
         /**
-         * Valid when Origin is EXTERNAL. indicates the validity date of the key material. 0 means no expiration.
+         * <p>Valid when Origin is EXTERNAL. Indicates the expiration date of the key material. 0 means never expire.</p>
          * @type {number || null}
          */
         this.ValidTo = null;
 
         /**
-         * Resource ID in the format of `creatorUin/$creatorUin/$keyId`.
+         * <p>Resource ID, format: creatorUin/$creatorUin/$keyId</p>
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * HSM cluster ID (valid only for exclusive or managed version KMS service instances).
+         * <p>HSM Cluster ID (only applicable to KMS exclusive/managed service instance)</p>
          * @type {string || null}
          */
         this.HsmClusterId = null;
 
         /**
-         * Key rotation period (days).
+         * <p>Key rotation cycle (days)</p>
          * @type {number || null}
          */
         this.RotateDays = null;
 
         /**
-         * Last disorderly rotation time (Unix timestamp).
+         * <p>Last rotation time (Unix timestamp).</p>
          * @type {number || null}
          */
         this.LastRotateTime = null;
 
         /**
-         * Specifies whether the key is a primary replica. valid values: 0 (primary replica), 1 (synced replica).
+         * <p>Whether the key is the primary replica. 0: primary replica, 1: synced replica.</p>
          * @type {number || null}
          */
         this.IsSyncReplica = null;
 
         /**
-         * Synchronous original region.
+         * <p>Synchronous original region</p>
          * @type {string || null}
          */
         this.SourceRegion = null;
 
         /**
-         * The state of key synchronization. valid values: 0 (unsynced), 1 (synchronization successful), 2 (synchronization failed), 3 (synchronizing).
+         * <p>Key synchronization state: 0: unsynced, 1: synced successfully, 2: synchronization failed, 3: syncing.</p>
          * @type {number || null}
          */
         this.SyncStatus = null;
 
         /**
-         * Describes the synchronous result.
+         * <p>Synchronous result description</p>
          * @type {string || null}
          */
         this.SyncMessages = null;
 
         /**
-         * Start time of synchronization.
+         * <p>Start time of synchronization</p>
          * @type {number || null}
          */
         this.SyncStartTime = null;
 
         /**
-         * Specifies the synchronous end time.
+         * <p>Synchronous end time</p>
          * @type {number || null}
          */
         this.SyncEndTime = null;
 
         /**
-         * Synchronous original cluster. if empty, it is a public cloud public cluster.
+         * <p>Synchronous original cluster. If empty, it is a public cloud public cluster.</p>
          * @type {string || null}
          */
         this.SourceHsmClusterId = null;
 
         /**
-         * Member account appId.
+         * <p>Member account appId</p>
          * @type {number || null}
          */
         this.AccountAppId = null;
 
         /**
-         * Member account UIN
+         * <p>member account uin</p>
          * @type {number || null}
          */
         this.AccountUin = null;
 
         /**
-         * Member account name.
+         * <p>Member account name</p>
          * @type {string || null}
          */
         this.AccountName = null;
@@ -6556,6 +6620,7 @@ module.exports = {
     DescribeDataKeysRequest: DescribeDataKeysRequest,
     ListAlgorithmsResponse: ListAlgorithmsResponse,
     DisableKeysResponse: DisableKeysResponse,
+    RegionQps: RegionQps,
     EnableDataKeyResponse: EnableDataKeyResponse,
     DescribeWhiteBoxKeyResponse: DescribeWhiteBoxKeyResponse,
     UpdateKeyDescriptionResponse: UpdateKeyDescriptionResponse,

@@ -105,6 +105,7 @@ const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSeg
 const ParseLiveStreamProcessNotificationResponse = models.ParseLiveStreamProcessNotificationResponse;
 const SubtitleShadowConfig = models.SubtitleShadowConfig;
 const SmartEraseTaskResult = models.SmartEraseTaskResult;
+const SmartSubtitleTaskFullTextSegmentItem = models.SmartSubtitleTaskFullTextSegmentItem;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const SmartSubtitleTaskTextResultOutput = models.SmartSubtitleTaskTextResultOutput;
 const AiAnalysisTaskFrameTagResult = models.AiAnalysisTaskFrameTagResult;
@@ -127,6 +128,7 @@ const TimeSpotCheck = models.TimeSpotCheck;
 const TextWatermarkTemplateInputForUpdate = models.TextWatermarkTemplateInputForUpdate;
 const SubtitleTransResultItem = models.SubtitleTransResultItem;
 const AiReviewTerrorismOcrTaskInput = models.AiReviewTerrorismOcrTaskInput;
+const AddOnAudio = models.AddOnAudio;
 const AiRecognitionTaskOcrWordsResultInput = models.AiRecognitionTaskOcrWordsResultInput;
 const CreateQualityControlTemplateResponse = models.CreateQualityControlTemplateResponse;
 const AiAnalysisTaskReelInput = models.AiAnalysisTaskReelInput;
@@ -1950,7 +1952,7 @@ This API is used to create an orchestration, which is in disable status by defau
     }
 
     /**
-     * This API is used to create AIGC audio generation tasks.
+     * This API is used to create AI audio generation tasks.
      * @param {CreateAigcAudioTaskRequest} req
      * @param {function(string, CreateAigcAudioTaskResponse):void} cb
      * @public
@@ -1995,7 +1997,7 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
-     * This API is used to query the progress of AIGC audio generation tasks and obtain the generation results.
+     * This API is used to query the progress of AIGC video generation tasks and obtain the generation results.
      * @param {DescribeAigcAudioTaskRequest} req
      * @param {function(string, DescribeAigcAudioTaskResponse):void} cb
      * @public

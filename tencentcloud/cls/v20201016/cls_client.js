@@ -93,6 +93,7 @@ const CloudProductLogTaskInfo = models.CloudProductLogTaskInfo;
 const Instance = models.Instance;
 const DescribeAlarmNoticesResponse = models.DescribeAlarmNoticesResponse;
 const DeleteDataTransformRequest = models.DeleteDataTransformRequest;
+const DescribeRemoteWriteTasksResponse = models.DescribeRemoteWriteTasksResponse;
 const AddMachineGroupInfoRequest = models.AddMachineGroupInfoRequest;
 const DescribeKafkaConsumerGroupListResponse = models.DescribeKafkaConsumerGroupListResponse;
 const CreateHostMetricConfigResponse = models.CreateHostMetricConfigResponse;
@@ -117,6 +118,7 @@ const DescribeKafkaConsumerPreviewRequest = models.DescribeKafkaConsumerPreviewR
 const CreateDeliverCloudFunctionResponse = models.CreateDeliverCloudFunctionResponse;
 const PreviewLogStatistic = models.PreviewLogStatistic;
 const CompressInfo = models.CompressInfo;
+const ModifyRemoteWriteTaskResponse = models.ModifyRemoteWriteTaskResponse;
 const CreateConfigResponse = models.CreateConfigResponse;
 const CreateCloudProductLogCollectionResponse = models.CreateCloudProductLogCollectionResponse;
 const SearchCosRechargeInfoResponse = models.SearchCosRechargeInfoResponse;
@@ -124,6 +126,7 @@ const CreateEsRechargeResponse = models.CreateEsRechargeResponse;
 const KeyValueInfo = models.KeyValueInfo;
 const DataTransformSqlDataSource = models.DataTransformSqlDataSource;
 const ModifyMachineGroupRequest = models.ModifyMachineGroupRequest;
+const JsonExpandInfo = models.JsonExpandInfo;
 const AnonymousInfo = models.AnonymousInfo;
 const DescribeHostMetricConfigsResponse = models.DescribeHostMetricConfigsResponse;
 const CreateDashboardRequest = models.CreateDashboardRequest;
@@ -240,6 +243,7 @@ const MetricCollectConfig = models.MetricCollectConfig;
 const Delta = models.Delta;
 const DeleteIndexResponse = models.DeleteIndexResponse;
 const AlarmAnalysisConfig = models.AlarmAnalysisConfig;
+const CreateRemoteWriteTaskRequest = models.CreateRemoteWriteTaskRequest;
 const SearchLogErrors = models.SearchLogErrors;
 const DescribeSplunkDeliversRequest = models.DescribeSplunkDeliversRequest;
 const DeleteScheduledSqlRequest = models.DeleteScheduledSqlRequest;
@@ -251,6 +255,7 @@ const DescribeKafkaConsumerTopicsRequest = models.DescribeKafkaConsumerTopicsReq
 const CreateConsumerRequest = models.CreateConsumerRequest;
 const DeleteHostMetricConfigRequest = models.DeleteHostMetricConfigRequest;
 const DeleteMetricConfigResponse = models.DeleteMetricConfigResponse;
+const DescribeRemoteWriteTasksRequest = models.DescribeRemoteWriteTasksRequest;
 const DataTransformTaskInfo = models.DataTransformTaskInfo;
 const NoticeRule = models.NoticeRule;
 const ContentInfo = models.ContentInfo;
@@ -266,7 +271,9 @@ const Ckafka = models.Ckafka;
 const MultiCondition = models.MultiCondition;
 const Filter = models.Filter;
 const SearchViewInfo = models.SearchViewInfo;
+const RemoteWriteInfo = models.RemoteWriteInfo;
 const ModifyLogsetResponse = models.ModifyLogsetResponse;
+const DlcFailHandle = models.DlcFailHandle;
 const HostMetricItem = models.HostMetricItem;
 const CreateDashboardResponse = models.CreateDashboardResponse;
 const GetMetricLabelValuesRequest = models.GetMetricLabelValuesRequest;
@@ -297,6 +304,7 @@ const Choice = models.Choice;
 const DeleteMetricConfigRequest = models.DeleteMetricConfigRequest;
 const CreateEsRechargeRequest = models.CreateEsRechargeRequest;
 const ConsumerGroup = models.ConsumerGroup;
+const DlcFailTableInfo = models.DlcFailTableInfo;
 const DeleteNoticeContentResponse = models.DeleteNoticeContentResponse;
 const MetricYamlSpec = models.MetricYamlSpec;
 const DeleteCloudProductLogCollectionRequest = models.DeleteCloudProductLogCollectionRequest;
@@ -358,6 +366,7 @@ const DashboardTemplateVariable = models.DashboardTemplateVariable;
 const CancelRebuildIndexTaskRequest = models.CancelRebuildIndexTaskRequest;
 const DescribeLogsetsResponse = models.DescribeLogsetsResponse;
 const DescribeKafkaConsumerPreviewResponse = models.DescribeKafkaConsumerPreviewResponse;
+const RemoteWriteAuthInfo = models.RemoteWriteAuthInfo;
 const NetworkApplicationInfo = models.NetworkApplicationInfo;
 const ModifySearchViewRequest = models.ModifySearchViewRequest;
 const WebCallback = models.WebCallback;
@@ -377,6 +386,7 @@ const DashboardSubscribeInfo = models.DashboardSubscribeInfo;
 const DescribeWebCallbacksResponse = models.DescribeWebCallbacksResponse;
 const DeleteExportRequest = models.DeleteExportRequest;
 const ModifyKafkaConsumerGroupOffsetRequest = models.ModifyKafkaConsumerGroupOffsetRequest;
+const ModifyRemoteWriteTaskRequest = models.ModifyRemoteWriteTaskRequest;
 const DescribeConsolesRequest = models.DescribeConsolesRequest;
 const AlarmShieldInfo = models.AlarmShieldInfo;
 const EsImportInfo = models.EsImportInfo;
@@ -441,6 +451,7 @@ const CreateRecordingRuleYamlTaskResponse = models.CreateRecordingRuleYamlTaskRe
 const DescribeTopicsResponse = models.DescribeTopicsResponse;
 const EventLog = models.EventLog;
 const ConsumerGroupInfo = models.ConsumerGroupInfo;
+const CreateRemoteWriteTaskResponse = models.CreateRemoteWriteTaskResponse;
 const DescribeRebuildIndexTasksRequest = models.DescribeRebuildIndexTasksRequest;
 const DlcDeliverInfo = models.DlcDeliverInfo;
 const DescribeShippersRequest = models.DescribeShippersRequest;
@@ -479,12 +490,14 @@ const ModifyAlarmShieldRequest = models.ModifyAlarmShieldRequest;
 const AlarmNoticeDeliverConfig = models.AlarmNoticeDeliverConfig;
 const DescribeConsumersResponse = models.DescribeConsumersResponse;
 const DlcTableInfo = models.DlcTableInfo;
+const DeleteRemoteWriteTaskRequest = models.DeleteRemoteWriteTaskRequest;
 const ModifyKafkaConsumerGroupOffsetResponse = models.ModifyKafkaConsumerGroupOffsetResponse;
 const CreateShipperRequest = models.CreateShipperRequest;
 const InstanceData = models.InstanceData;
 const HostMetricConfig = models.HostMetricConfig;
 const CreateShipperResponse = models.CreateShipperResponse;
 const ModifyCloudProductLogCollectionRequest = models.ModifyCloudProductLogCollectionRequest;
+const DeleteRemoteWriteTaskResponse = models.DeleteRemoteWriteTaskResponse;
 const OpenClawServiceResponse = models.OpenClawServiceResponse;
 const Column = models.Column;
 const DescribeDataTransformInfoRequest = models.DescribeDataTransformInfoRequest;
@@ -1014,14 +1027,14 @@ This API is used to enable CLS in all regions by filling any region for Region, 
     }
 
     /**
-     * Query the DataSight console instance list
-     * @param {DescribeConsolesRequest} req
-     * @param {function(string, DescribeConsolesResponse):void} cb
+     * This API is used to obtain metric subscription configurations.
+     * @param {DescribeClusterBaseMetricConfigsRequest} req
+     * @param {function(string, DescribeClusterBaseMetricConfigsResponse):void} cb
      * @public
      */
-    DescribeConsoles(req, cb) {
-        let resp = new DescribeConsolesResponse();
-        this.request("DescribeConsoles", req, resp, cb);
+    DescribeClusterBaseMetricConfigs(req, cb) {
+        let resp = new DescribeClusterBaseMetricConfigsResponse();
+        this.request("DescribeClusterBaseMetricConfigs", req, resp, cb);
     }
 
     /**
@@ -1322,6 +1335,17 @@ This API is used to enable CLS in all regions by filling any region for Region, 
     }
 
     /**
+     * This API is used to delete a RemoteWrite task.
+     * @param {DeleteRemoteWriteTaskRequest} req
+     * @param {function(string, DeleteRemoteWriteTaskResponse):void} cb
+     * @public
+     */
+    DeleteRemoteWriteTask(req, cb) {
+        let resp = new DeleteRemoteWriteTaskResponse();
+        this.request("DeleteRemoteWriteTask", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the alarm policy list.
      * @param {DescribeAlarmsRequest} req
      * @param {function(string, DescribeAlarmsResponse):void} cb
@@ -1520,14 +1544,14 @@ This API is used to enable CLS in all regions by filling any region for Region, 
     }
 
     /**
-     * This API is used to obtain metric subscription configurations.
-     * @param {DescribeClusterBaseMetricConfigsRequest} req
-     * @param {function(string, DescribeClusterBaseMetricConfigsResponse):void} cb
+     * Query the DataSight console instance list
+     * @param {DescribeConsolesRequest} req
+     * @param {function(string, DescribeConsolesResponse):void} cb
      * @public
      */
-    DescribeClusterBaseMetricConfigs(req, cb) {
-        let resp = new DescribeClusterBaseMetricConfigsResponse();
-        this.request("DescribeClusterBaseMetricConfigs", req, resp, cb);
+    DescribeConsoles(req, cb) {
+        let resp = new DescribeConsolesResponse();
+        this.request("DescribeConsoles", req, resp, cb);
     }
 
     /**
@@ -1561,6 +1585,17 @@ This API is used to enable CLS in all regions by filling any region for Region, 
     DescribeRebuildIndexTasks(req, cb) {
         let resp = new DescribeRebuildIndexTasksResponse();
         this.request("DescribeRebuildIndexTasks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify collection rule configuration.
+     * @param {ModifyConfigRequest} req
+     * @param {function(string, ModifyConfigResponse):void} cb
+     * @public
+     */
+    ModifyConfig(req, cb) {
+        let resp = new ModifyConfigResponse();
+        this.request("ModifyConfig", req, resp, cb);
     }
 
     /**
@@ -1819,6 +1854,19 @@ Note:
     }
 
     /**
+     * This API is used to retrieve and analyze logs. Please note the following matters when using this API.
+1. Besides being subject to the default API request rate limit, for a single log topic, the number of concurrent queries cannot exceed 15.
+2. The API's return data packet maximum is 49MB. It is recommended to enable gzip compression (HTTP Request Header Accept-Encoding: gzip).
+     * @param {SearchLogRequest} req
+     * @param {function(string, SearchLogResponse):void} cb
+     * @public
+     */
+    SearchLog(req, cb) {
+        let resp = new SearchLogResponse();
+        this.request("SearchLog", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify logs or metric topics.
      * @param {ModifyTopicRequest} req
      * @param {function(string, ModifyTopicResponse):void} cb
@@ -1962,16 +2010,14 @@ Note:
     }
 
     /**
-     * This API is used to retrieve and analyze logs. Please note the following matters when using this API.
-1. Besides being subject to the default API request rate limit, for a single log topic, the number of concurrent queries cannot exceed 15.
-2. The API's return data packet maximum is 49MB. It is recommended to enable gzip compression (HTTP Request Header Accept-Encoding: gzip).
-     * @param {SearchLogRequest} req
-     * @param {function(string, SearchLogResponse):void} cb
+     * This API is used to modify a CKafka delivery task.
+     * @param {ModifyConsumerRequest} req
+     * @param {function(string, ModifyConsumerResponse):void} cb
      * @public
      */
-    SearchLog(req, cb) {
-        let resp = new SearchLogResponse();
-        this.request("SearchLog", req, resp, cb);
+    ModifyConsumer(req, cb) {
+        let resp = new ModifyConsumerResponse();
+        this.request("ModifyConsumer", req, resp, cb);
     }
 
     /**
@@ -2363,14 +2409,14 @@ Note: Modifying the interface will directly overwrite historical data and change
     }
 
     /**
-     * This API is used to modify collection rule configuration.
-     * @param {ModifyConfigRequest} req
-     * @param {function(string, ModifyConfigResponse):void} cb
+     * This API is used to obtain the list of RemoteWrite delivery tasks.
+     * @param {DescribeRemoteWriteTasksRequest} req
+     * @param {function(string, DescribeRemoteWriteTasksResponse):void} cb
      * @public
      */
-    ModifyConfig(req, cb) {
-        let resp = new ModifyConfigResponse();
-        this.request("ModifyConfig", req, resp, cb);
+    DescribeRemoteWriteTasks(req, cb) {
+        let resp = new DescribeRemoteWriteTasksResponse();
+        this.request("DescribeRemoteWriteTasks", req, resp, cb);
     }
 
     /**
@@ -2549,14 +2595,14 @@ Import the generated cls.pb.h header file into the code and call the interface t
     }
 
     /**
-     * This API is used to modify a CKafka delivery task.
-     * @param {ModifyConsumerRequest} req
-     * @param {function(string, ModifyConsumerResponse):void} cb
+     * This API is used to create a remote write delivery task.
+     * @param {CreateRemoteWriteTaskRequest} req
+     * @param {function(string, CreateRemoteWriteTaskResponse):void} cb
      * @public
      */
-    ModifyConsumer(req, cb) {
-        let resp = new ModifyConsumerResponse();
-        this.request("ModifyConsumer", req, resp, cb);
+    CreateRemoteWriteTask(req, cb) {
+        let resp = new CreateRemoteWriteTaskResponse();
+        this.request("CreateRemoteWriteTask", req, resp, cb);
     }
 
     /**
@@ -2722,6 +2768,17 @@ Import the generated cls.pb.h header file into the code and call the interface t
     DeleteTopic(req, cb) {
         let resp = new DeleteTopicResponse();
         this.request("DeleteTopic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a RemoteWrite task.
+     * @param {ModifyRemoteWriteTaskRequest} req
+     * @param {function(string, ModifyRemoteWriteTaskResponse):void} cb
+     * @public
+     */
+    ModifyRemoteWriteTask(req, cb) {
+        let resp = new ModifyRemoteWriteTaskResponse();
+        this.request("ModifyRemoteWriteTask", req, resp, cb);
     }
 
 

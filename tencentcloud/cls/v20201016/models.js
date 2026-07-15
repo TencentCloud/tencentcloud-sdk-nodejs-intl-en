@@ -807,7 +807,7 @@ class CreateScheduledSqlResponse extends  AbstractModel {
         super();
 
         /**
-         * Task ID
+         * <p>Task ID.</p>
          * @type {string || null}
          */
         this.TaskId = null;
@@ -1804,124 +1804,130 @@ class ScheduledSqlTaskInfo extends  AbstractModel {
         super();
 
         /**
-         * ScheduledSql task id
+         * <p>ScheduledSql task id</p>
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * ScheduledSql task name
+         * <p>ScheduledSql task name</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Source Log Topic ID
+         * <p>Source log topic id.</p>
          * @type {string || null}
          */
         this.SrcTopicId = null;
 
         /**
-         * Source Log Topic Name
+         * <p>source log topic name</p>
          * @type {string || null}
          */
         this.SrcTopicName = null;
 
         /**
-         * Scheduled SQL analysis of target topic
+         * <p>Scheduled SQL analysis target topic</p>
          * @type {ScheduledSqlResouceInfo || null}
          */
         this.DstResource = null;
 
         /**
-         * Task creation time. Format: yyyy-MM-dd HH:mm:ss
+         * <p>Task creation time. Format: yyyy-MM-dd HH:mm:ss</p>
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Task update time. Format: yyyy-MM-dd HH:mm:ss
+         * <p>Task update time. Format: yyyy-MM-dd HH:mm:ss</p>
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Task status: 1: Running 2: Stop 3: Exception - Source log topic not found 4: Exception - target topic not found5: Access permission issue 6: Internal failure 7: Other faults
+         * <p>Task status, 1: Running 2: Stopped 3: Exception - Source log topic not found 4: Exception - Target topic not found</p><p>5: Access permission issue 6: Internal fault 7: Other faults</p>
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Task status: 1 Enabled, 2 Disabled
+         * <p>Task status: 1 Enabled, 2 Disabled</p>
          * @type {number || null}
          */
         this.EnableFlag = null;
 
         /**
-         * Queries statements
+         * <p>Query statement</p>
          * @type {string || null}
          */
         this.ScheduledSqlContent = null;
 
         /**
-         * Schedule start time. Format: yyyy-MM-dd HH:mm:ss
+         * <p>Schedule start time. Format: yyyy-MM-dd HH:mm:ss</p>
          * @type {string || null}
          */
         this.ProcessStartTime = null;
 
         /**
-         * Schedule Type: 1 Continuous Running 2 Specified Time Range
+         * <p>Schedule Type: 1 Continuous Running 2 Specified Time Range</p>
          * @type {number || null}
          */
         this.ProcessType = null;
 
         /**
-         * Schedule End Time, format: yyyy-MM-dd HH:mm:ss, required when process_type=2
+         * <p>Schedule End Time, format: yyyy-MM-dd HH:mm:ss, required when process_type=2</p>
          * @type {string || null}
          */
         this.ProcessEndTime = null;
 
         /**
-         * Scheduling cycle (minutes), 1-1440 minutes
+         * <p>Scheduling Interval (Minutes), 1-1440 minutes</p>
          * @type {number || null}
          */
         this.ProcessPeriod = null;
 
         /**
-         * Query Time Window. @m-15m, @m, meaning the last 15 minutes
+         * <p>Query Time Window. @m-15m, @m, meaning the last 15 minutes</p>
          * @type {string || null}
          */
         this.ProcessTimeWindow = null;
 
         /**
-         * Execution delay (seconds), 0-120 seconds, default 60
+         * <p>Execution delay (seconds), 0-120 seconds, default 60 seconds</p>
          * @type {number || null}
          */
         this.ProcessDelay = null;
 
         /**
-         * Regional information of the source topicId. Supported regions are listed in the region list document (https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
+         * <p>Regional information of the source topicId. For supported regions, see the <a href="https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a> document.</p>
          * @type {string || null}
          */
         this.SrcTopicRegion = null;
 
         /**
-         * Syntax rules. 0: Lucene syntax; 1: CQL syntax.
+         * <p>Syntax rules. 0: Lucene syntax, 1: CQL syntax</p>
          * @type {number || null}
          */
         this.SyntaxRule = null;
 
         /**
-         * Whether to enable service log shipping. Valid values: 1: disable; 2: enable.
+         * <p>Whether the delivery service log is enabled. 1: Turn off, 2: Turn on.</p>
          * @type {number || null}
          */
         this.HasServicesLog = null;
 
         /**
-         * Full-text search tag. 1: Off, 2: On.
+         * <p>Full-text search tag. 1: Off, 2: On.</p>
          * @type {number || null}
          */
         this.FullQuery = null;
+
+        /**
+         * <p>Scheduling cycle time unit</p><p>Value ranges from 1 to 2</p><p>Default value: 1</p><p>Default value 1 (minute), other value 2 (second)</p>
+         * @type {number || null}
+         */
+        this.ProcessPeriodUnit = null;
 
     }
 
@@ -1957,6 +1963,7 @@ class ScheduledSqlTaskInfo extends  AbstractModel {
         this.SyntaxRule = 'SyntaxRule' in params ? params.SyntaxRule : null;
         this.HasServicesLog = 'HasServicesLog' in params ? params.HasServicesLog : null;
         this.FullQuery = 'FullQuery' in params ? params.FullQuery : null;
+        this.ProcessPeriodUnit = 'ProcessPeriodUnit' in params ? params.ProcessPeriodUnit : null;
 
     }
 }
@@ -3659,6 +3666,24 @@ class CreateDlcDeliverRequest extends  AbstractModel {
          */
         this.HasServicesLog = null;
 
+        /**
+         * <p>Auto-create dlc field</p><p>Default value: false</p><p>When there are additional fields in your log, the system will automatically ship them to DLC.</p>
+         * @type {boolean || null}
+         */
+        this.AutoCreateField = null;
+
+        /**
+         * <p>Store delivery failure logs in DLC tables</p>
+         * @type {DlcFailHandle || null}
+         */
+        this.DlcFailHandle = null;
+
+        /**
+         * <p>Log pre-filtering - Perform pre-filtering on original data for data ingestion into Splunk</p>
+         * @type {string || null}
+         */
+        this.DSLFilter = null;
+
     }
 
     /**
@@ -3682,6 +3707,14 @@ class CreateDlcDeliverRequest extends  AbstractModel {
         this.Interval = 'Interval' in params ? params.Interval : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.HasServicesLog = 'HasServicesLog' in params ? params.HasServicesLog : null;
+        this.AutoCreateField = 'AutoCreateField' in params ? params.AutoCreateField : null;
+
+        if (params.DlcFailHandle) {
+            let obj = new DlcFailHandle();
+            obj.deserialize(params.DlcFailHandle)
+            this.DlcFailHandle = obj;
+        }
+        this.DSLFilter = 'DSLFilter' in params ? params.DSLFilter : null;
 
     }
 }
@@ -3732,70 +3765,88 @@ class ModifyScheduledSqlRequest extends  AbstractModel {
         super();
 
         /**
-         * Task ID, which can be obtained through [scheduled SQL analysis task list](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1).
+         * <p>Task ID, obtained by <a href="https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1">searching the scheduled SQL analysis task list</a>.</p>
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * Source log topic. Search the [scheduled SQL analysis task list](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1) to obtain it.
+         * <p>Source log topic, obtained via <a href="https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1">search scheduled SQL analysis task list</a></p>
          * @type {string || null}
          */
         this.SrcTopicId = null;
 
         /**
-         * Task start status. 1: Enabled, 2: Disabled
+         * <p>Task start status. 1: Enabled, 2: Disabled</p>
          * @type {number || null}
          */
         this.EnableFlag = null;
 
         /**
-         * Target log topic for scheduled SQL analysis
+         * <p>Target log topic for scheduled SQL analysis</p>
          * @type {ScheduledSqlResouceInfo || null}
          */
         this.DstResource = null;
 
         /**
-         * Queries statements
+         * <p>Query statement</p>
          * @type {string || null}
          */
         this.ScheduledSqlContent = null;
 
         /**
-         * Scheduling cycle (minutes), 1-1440 minutes
+         * <p>Scheduling Interval (Minutes), 1-1440 minutes</p>
          * @type {number || null}
          */
         this.ProcessPeriod = null;
 
         /**
-         * Time window for a single query. Example: last 15 minutes
+         * <p>Time window for a single query. Example: last 15 minutes</p>
          * @type {string || null}
          */
         this.ProcessTimeWindow = null;
 
         /**
-         * Execution delay (seconds), 0-120 seconds, default 60
+         * <p>Execution delay (seconds), 0-120 seconds, default 60 seconds</p>
          * @type {number || null}
          */
         this.ProcessDelay = null;
 
         /**
-         * Regional information of the source topicId. Supported regions are listed in the region list document (https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
+         * <p>Regional information of the source topicId. For supported regions, see the <a href="https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a> document.</p>
          * @type {string || null}
          */
         this.SrcTopicRegion = null;
 
         /**
-         * Task name, 0-255 characters
+         * <p>Task name, 0-255 characters</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Syntax rules. Default value: 0. 0: Lucene syntax, 1: CQL syntax
+         * <p>Syntax rules. Default value: 0. 0: Lucene syntax, 1: CQL syntax</p>
          * @type {number || null}
          */
         this.SyntaxRule = null;
+
+        /**
+         * <p>Whether to enable delivery service log. 1: Disabled, 2: Enabled.</p>
+         * @type {number || null}
+         */
+        this.HasServicesLog = null;
+
+        /**
+         * <p>Full-text search query tag. 1: Off, 2: On.</p>
+         * @type {number || null}
+         */
+        this.FullQuery = null;
+
+        /**
+         * <p>Scheduling period unit</p><p>Value ranges from 1 to 2</p><p>Default value: 1</p><p>Default value 1 (minute), other value 2 (second)</p>
+         * @type {number || null}
+         */
+        this.ProcessPeriodUnit = null;
 
     }
 
@@ -3822,6 +3873,9 @@ class ModifyScheduledSqlRequest extends  AbstractModel {
         this.SrcTopicRegion = 'SrcTopicRegion' in params ? params.SrcTopicRegion : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.SyntaxRule = 'SyntaxRule' in params ? params.SyntaxRule : null;
+        this.HasServicesLog = 'HasServicesLog' in params ? params.HasServicesLog : null;
+        this.FullQuery = 'FullQuery' in params ? params.FullQuery : null;
+        this.ProcessPeriodUnit = 'ProcessPeriodUnit' in params ? params.ProcessPeriodUnit : null;
 
     }
 }
@@ -4333,46 +4387,58 @@ class CloudProductLogTaskInfo extends  AbstractModel {
         super();
 
         /**
-         * Service region
+         * <p>Log service region</p>
          * @type {string || null}
          */
         this.ClsRegion = null;
 
         /**
-         * Instance ID.
+         * <p>Instance ID.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Logset ID
+         * <p>Logset ID</p>
          * @type {string || null}
          */
         this.LogsetId = null;
 
         /**
-         * Log topic ID
+         * <p>Log topic ID.</p>
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * Log configuration extended information, generally used for storage of additional log delivery configuration
+         * <p>Extended information for logging configuration, generally used to store additional log delivery configuration</p>
          * @type {string || null}
          */
         this.Extend = null;
 
         /**
-         * Log type, support enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS
+         * <p>Log type, supports enumeration: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</p>
          * @type {string || null}
          */
         this.LogType = null;
 
         /**
-         * Task status: 0 Creating, 1 Creation completed, 2 Deleting
+         * <p>Task status: 0 creating, 1 creation completed, 2 deleting</p>
          * @type {number || null}
          */
         this.Status = null;
+
+        /**
+         * <p>Tag information of the topic associated with the delivery task</p>
+         * @type {Array.<Tag> || null}
+         */
+        this.TopicTags = null;
+
+        /**
+         * <p>Tag information of the logset associated with the delivery task</p>
+         * @type {Array.<Tag> || null}
+         */
+        this.LogsetTags = null;
 
     }
 
@@ -4390,6 +4456,24 @@ class CloudProductLogTaskInfo extends  AbstractModel {
         this.Extend = 'Extend' in params ? params.Extend : null;
         this.LogType = 'LogType' in params ? params.LogType : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.TopicTags) {
+            this.TopicTags = new Array();
+            for (let z in params.TopicTags) {
+                let obj = new Tag();
+                obj.deserialize(params.TopicTags[z]);
+                this.TopicTags.push(obj);
+            }
+        }
+
+        if (params.LogsetTags) {
+            this.LogsetTags = new Array();
+            for (let z in params.LogsetTags) {
+                let obj = new Tag();
+                obj.deserialize(params.LogsetTags[z]);
+                this.LogsetTags.push(obj);
+            }
+        }
 
     }
 }
@@ -4496,6 +4580,56 @@ class DeleteDataTransformRequest extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DescribeRemoteWriteTasks response structure.
+ * @class
+ */
+class DescribeRemoteWriteTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RemoteWrite information list.
+         * @type {Array.<RemoteWriteInfo> || null}
+         */
+        this.Infos = null;
+
+        /**
+         * Total number of RemoteWrite tasks.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Infos) {
+            this.Infos = new Array();
+            for (let z in params.Infos) {
+                let obj = new RemoteWriteInfo();
+                obj.deserialize(params.Infos[z]);
+                this.Infos.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5963,6 +6097,34 @@ class CompressInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyRemoteWriteTask response structure.
+ * @class
+ */
+class ModifyRemoteWriteTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateConfig response structure.
  * @class
  */
@@ -6394,6 +6556,73 @@ Time format: HH:mm:ss.
                 this.MetaTags.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * **JsonExpandInfo data structure description**:
+```
+JSON nest unfold configuration
+```
+
+**Field description**:
+
+| Field | Description |
+|------|------|
+Switch | Whether JSON nested unfold is enabled
+Fields | Field list of JSON to unfold, 1-3
+DropOriginal | Whether to drop the raw field after unfolding, default true
+| ConflictPolicy | Field conflict policy. keep_outer: Keep the outer layer (default). keep_inner: Keep the inner-layer. |
+
+**LogRechargeRuleInfo add field**:
+
+| Field | Description |
+|------|------|
+JsonExpand | JSON nest unfold configuration. This parameter is valid only when RechargeType is json_log.
+ * @class
+ */
+class JsonExpandInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether to enable the JSON nested unfold functionality. Once enabled, it will flatten and process the specified JSON field.</p><p>Default value: None (Required parameter)</p>
+         * @type {boolean || null}
+         */
+        this.Switch = null;
+
+        /**
+         * <p>List of JSON field names to be unfolded, supporting 1 to 3 fields. Field names cannot be empty strings and cannot be repeated.</p><p>Input parameter limits: 1. Number of fields: 1 to 3. 2. Length of each field name not exceeding 128 characters. 3. Field names cannot be empty strings. 4. Field names cannot be repeated.</p><p>Default value: None (required parameter)</p><p>Value for reference: Value: message; Description: Example field name</p><p>Example: ["message", "data", "content"]</p>
+         * @type {Array.<string> || null}
+         */
+        this.Fields = null;
+
+        /**
+         * <p>Whether to discard the original nested field after unfolding. true: discard the original field and keep only the flattened field after unfolding; false: keep the original field and add the flattened field after unfolding.</p><p>Enumeration value:</p><ul><li>true / false: discard the original field / keep the original field</li></ul><p>Default value: true</p><p>Optional. Default is true if not provided.</p>
+         * @type {boolean || null}
+         */
+        this.DropOriginal = null;
+
+        /**
+         * <p>Processing policy when the unfolded field conflicts with an existing field</p><p>Enumeration value:</p><ul><li>keep_outer / keep_inner: Keep the outer (existing) field / Keep the inner (newly unfolded) field</li></ul><p>Default value: keep_outer</p><p>Optional. Defaults to keep_outer if not passed.</p>
+         * @type {string || null}
+         */
+        this.ConflictPolicy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Fields = 'Fields' in params ? params.Fields : null;
+        this.DropOriginal = 'DropOriginal' in params ? params.DropOriginal : null;
+        this.ConflictPolicy = 'ConflictPolicy' in params ? params.ConflictPolicy : null;
 
     }
 }
@@ -7019,6 +7248,12 @@ class DescribeCloudProductLogTasksRequest extends  AbstractModel {
          */
         this.Filters = null;
 
+        /**
+         * <p>Whether to carry tag information of the topic and logset</p>
+         * @type {boolean || null}
+         */
+        this.WithTags = null;
+
     }
 
     /**
@@ -7039,6 +7274,7 @@ class DescribeCloudProductLogTasksRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.WithTags = 'WithTags' in params ? params.WithTags : null;
 
     }
 }
@@ -13101,6 +13337,100 @@ Limit: Maximum number of logs. Example of value: 5.
 }
 
 /**
+ * CreateRemoteWriteTask request structure.
+ * @class
+ */
+class CreateRemoteWriteTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Task Name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Target service name.
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * Destination address
+         * @type {string || null}
+         */
+        this.RemoteWriteURL = null;
+
+        /**
+         * Authentication type
+- 0: No authentication
+1: basic_auth 
+2: token
+         * @type {number || null}
+         */
+        this.AuthType = null;
+
+        /**
+         * Network type. Valid values: 1 private network; 2: public network.
+         * @type {number || null}
+         */
+        this.NetType = null;
+
+        /**
+         * VPC id
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Authentication information
+         * @type {RemoteWriteAuthInfo || null}
+         */
+        this.AuthInfo = null;
+
+        /**
+         * Backend service type
+0 CVM
+1025 CLB
+         * @type {number || null}
+         */
+        this.VirtualGatewayType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Target = 'Target' in params ? params.Target : null;
+        this.RemoteWriteURL = 'RemoteWriteURL' in params ? params.RemoteWriteURL : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+
+        if (params.AuthInfo) {
+            let obj = new RemoteWriteAuthInfo();
+            obj.deserialize(params.AuthInfo)
+            this.AuthInfo = obj;
+        }
+        this.VirtualGatewayType = 'VirtualGatewayType' in params ? params.VirtualGatewayType : null;
+
+    }
+}
+
+/**
  * Error information for multi-log topic search
  * @class
  */
@@ -13633,6 +13963,77 @@ class DeleteMetricConfigResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRemoteWriteTasks request structure.
+ * @class
+ */
+class DescribeRemoteWriteTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * - taskId
+Filter by [task ID].
+Type: String
+Required: No
+
+- topicId
+Filter by [Log topic].
+Type: String
+Required: No
+
+- taskStatus
+Filter by [task running status]. Supports `1`: running, `2`: stop, `3`: exception.
+Type: String
+Required: No
+
+- name
+Filter by [task name] using fuzzy filtering. 
+Type: String
+Required: No
+
+
+Each request can have up to 10 Filters. The maximum of Filter.Values is 10.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Page offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum number of entries per page. Default value: 20. Maximum value: 100.	
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -14651,6 +15052,158 @@ class SearchViewInfo extends  AbstractModel {
 }
 
 /**
+ * RemoteWrite configuration information.
+ * @class
+ */
+class RemoteWriteInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Log topic ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * RemoteWrite task name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Network type.
+Valid values: 1: private network
+2: Public network
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.NetType = null;
+
+        /**
+         * VPC id
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Task running status
+1: Running
+2: Suspend
+3: Failure
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Creation time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Update time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Target service name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * Destination address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RemoteWriteURL = null;
+
+        /**
+         * Authentication type
+Valid values: 0: no authentication; 1: basic_auth; 2: token.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AuthType = null;
+
+        /**
+         * Authentication information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RemoteWriteAuthInfo || null}
+         */
+        this.AuthInfo = null;
+
+        /**
+         * Logset
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * Task status.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * Backend service type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VirtualGatewayType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Target = 'Target' in params ? params.Target : null;
+        this.RemoteWriteURL = 'RemoteWriteURL' in params ? params.RemoteWriteURL : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
+
+        if (params.AuthInfo) {
+            let obj = new RemoteWriteAuthInfo();
+            obj.deserialize(params.AuthInfo)
+            this.AuthInfo = obj;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.VirtualGatewayType = 'VirtualGatewayType' in params ? params.VirtualGatewayType : null;
+
+    }
+}
+
+/**
  * ModifyLogset response structure.
  * @class
  */
@@ -14674,6 +15227,46 @@ class ModifyLogsetResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * dlc delivery failure handling message
+ * @class
+ */
+class DlcFailHandle extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether to store in DLC</p><p>Default value: false</p><p>Controls whether to enable storing delivery failure logs in DLC tables</p>
+         * @type {boolean || null}
+         */
+        this.StoreToDlc = null;
+
+        /**
+         * <p>DLC table information</p>
+         * @type {DlcFailTableInfo || null}
+         */
+        this.DlcFailTableInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StoreToDlc = 'StoreToDlc' in params ? params.StoreToDlc : null;
+
+        if (params.DlcFailTableInfo) {
+            let obj = new DlcFailTableInfo();
+            obj.deserialize(params.DlcFailTableInfo)
+            this.DlcFailTableInfo = obj;
+        }
 
     }
 }
@@ -15608,82 +16201,100 @@ class CreateScheduledSqlRequest extends  AbstractModel {
         super();
 
         /**
-         * Source log topic ID. Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+         * <p>Source log topic ID - Obtain the log topic ID by <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">searching the log topic list</a>.</p>
          * @type {string || null}
          */
         this.SrcTopicId = null;
 
         /**
-         * Task name, 0-255 characters
+         * <p>Task name, 0-255 characters</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Task start status. 1: Enabled, 2: Disabled
+         * <p>Task start status. 1: Enabled, 2: Disabled</p>
          * @type {number || null}
          */
         this.EnableFlag = null;
 
         /**
-         * Target log topic for scheduled SQL analysis
+         * <p>Target log topic for scheduled SQL analysis</p>
          * @type {ScheduledSqlResouceInfo || null}
          */
         this.DstResource = null;
 
         /**
-         * Query statement
+         * <p>Query statement</p>
          * @type {string || null}
          */
         this.ScheduledSqlContent = null;
 
         /**
-         * Schedule start time, Unix timestamp, in milliseconds
+         * <p>Schedule start time, Unix timestamp, in milliseconds</p>
          * @type {number || null}
          */
         this.ProcessStartTime = null;
 
         /**
-         * Schedule type: 1: Continuous running; 2: Specified time range
+         * <p>Schedule Type: 1 Continuous Running 2 Specified Time Range</p>
          * @type {number || null}
          */
         this.ProcessType = null;
 
         /**
-         * Scheduling Interval (Minutes), 1-1440 minutes
+         * <p>Scheduling Interval (Minutes), 1-1440 minutes</p>
          * @type {number || null}
          */
         this.ProcessPeriod = null;
 
         /**
-         * Time window for a single query. If your target topic is a metric topic, it is recommended that the size of this parameter not exceed 30 minutes, otherwise, metric conversion may fail.
+         * <p>Time window for a single query. If your target topic is a metric topic, it is recommended that the size of this parameter not exceed 30 minutes, otherwise, metric conversion may fail.</p>
          * @type {string || null}
          */
         this.ProcessTimeWindow = null;
 
         /**
-         * Execution Delay (Seconds), 0-120 seconds, default 60 seconds
+         * <p>Execution delay (seconds), 0-120 seconds, default 60 seconds</p>
          * @type {number || null}
          */
         this.ProcessDelay = null;
 
         /**
-         * Regional information of the source topicId. For supported regions, see the region list (https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8) document.
+         * <p>Regional information of the source topicId. For supported regions, see the <a href="https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a> document.</p>
          * @type {string || null}
          */
         this.SrcTopicRegion = null;
 
         /**
-         * Schedule end time. Required field when ProcessType=2, Unix timestamp, in milliseconds
+         * <p>Scheduling Time Unit</p><p>Value ranges from 1 to 2</p><p>Default value: 1</p><p>The default value is 1 (minute), and the additional value is 2 (second).</p>
+         * @type {number || null}
+         */
+        this.ProcessPeriodUnit = null;
+
+        /**
+         * <p>Schedule End Time, required when ProcessType=2, Unix timestamp, in milliseconds</p>
          * @type {number || null}
          */
         this.ProcessEndTime = null;
 
         /**
-         * Query syntax rules. Default value is 0. 0: Lucene syntax, 1: CQL syntax
+         * <p>Query syntax rules. Default value: 0. 0: Lucene syntax, 1: CQL syntax</p>
          * @type {number || null}
          */
         this.SyntaxRule = null;
+
+        /**
+         * <p>Whether to enable delivery service log. 1: Disabled, 2: Enabled.</p>
+         * @type {number || null}
+         */
+        this.HasServicesLog = null;
+
+        /**
+         * <p>Full-text search tag. 1: Off, 2: On. Default: 1</p>
+         * @type {number || null}
+         */
+        this.FullQuery = null;
 
     }
 
@@ -15710,8 +16321,11 @@ class CreateScheduledSqlRequest extends  AbstractModel {
         this.ProcessTimeWindow = 'ProcessTimeWindow' in params ? params.ProcessTimeWindow : null;
         this.ProcessDelay = 'ProcessDelay' in params ? params.ProcessDelay : null;
         this.SrcTopicRegion = 'SrcTopicRegion' in params ? params.SrcTopicRegion : null;
+        this.ProcessPeriodUnit = 'ProcessPeriodUnit' in params ? params.ProcessPeriodUnit : null;
         this.ProcessEndTime = 'ProcessEndTime' in params ? params.ProcessEndTime : null;
         this.SyntaxRule = 'SyntaxRule' in params ? params.SyntaxRule : null;
+        this.HasServicesLog = 'HasServicesLog' in params ? params.HasServicesLog : null;
+        this.FullQuery = 'FullQuery' in params ? params.FullQuery : null;
 
     }
 }
@@ -16194,6 +16808,41 @@ class ConsumerGroup extends  AbstractModel {
         this.Group = 'Group' in params ? params.Group : null;
         this.State = 'State' in params ? params.State : null;
         this.ProtocolName = 'ProtocolName' in params ? params.ProtocolName : null;
+
+    }
+}
+
+/**
+ * dlc failure log storage table information
+ * @class
+ */
+class DlcFailTableInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>DLC table name</p>
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * <p>Field name in the table</p><p>Field type must be String type</p>
+         * @type {string || null}
+         */
+        this.FieldName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.FieldName = 'FieldName' in params ? params.FieldName : null;
 
     }
 }
@@ -18958,6 +19607,12 @@ class ModifyCloudProductLogCollectionResponse extends  AbstractModel {
         super();
 
         /**
+         * <p>Additional information. For example, failed to modify the topic or logset tag.</p>
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -18972,6 +19627,7 @@ class ModifyCloudProductLogCollectionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Message = 'Message' in params ? params.Message : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -19730,6 +20386,51 @@ class DescribeKafkaConsumerPreviewResponse extends  AbstractModel {
 }
 
 /**
+ * RemoteWrite authentication information.
+ * @class
+ */
+class RemoteWriteAuthInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * basic auth username
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Username = null;
+
+        /**
+         * basic auth password
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * basic auth token
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Token = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Username = 'Username' in params ? params.Username : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Token = 'Token' in params ? params.Token : null;
+
+    }
+}
+
+/**
  * Network application task info
  * @class
  */
@@ -20361,6 +21062,24 @@ class ModifyDlcDeliverRequest extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * <p>Auto-create dlc field</p><p>Default value: false</p><p>When there are additional fields in your log, the system will automatically ship them to DLC.</p>
+         * @type {boolean || null}
+         */
+        this.AutoCreateField = null;
+
+        /**
+         * <p>Store logs with delivery failure in a DLC table</p>
+         * @type {DlcFailHandle || null}
+         */
+        this.DlcFailHandle = null;
+
+        /**
+         * <p>Log pre-filtering - Perform pre-filtering process on the original data for data ingestion into Splunk.</p>
+         * @type {string || null}
+         */
+        this.DSLFilter = null;
+
     }
 
     /**
@@ -20386,6 +21105,14 @@ class ModifyDlcDeliverRequest extends  AbstractModel {
         }
         this.HasServicesLog = 'HasServicesLog' in params ? params.HasServicesLog : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.AutoCreateField = 'AutoCreateField' in params ? params.AutoCreateField : null;
+
+        if (params.DlcFailHandle) {
+            let obj = new DlcFailHandle();
+            obj.deserialize(params.DlcFailHandle)
+            this.DlcFailHandle = obj;
+        }
+        this.DSLFilter = 'DSLFilter' in params ? params.DSLFilter : null;
 
     }
 }
@@ -20980,6 +21707,113 @@ class ModifyKafkaConsumerGroupOffsetRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * ModifyRemoteWriteTask request structure.
+ * @class
+ */
+class ModifyRemoteWriteTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Log topic id
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Task status.
+0: disabled, 1: enabled.
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * RemoteWrite task name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Valid values: 1: private network; 2: public network.
+         * @type {number || null}
+         */
+        this.NetType = null;
+
+        /**
+         * VPC id
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Target service name.
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * Destination address
+         * @type {string || null}
+         */
+        this.RemoteWriteURL = null;
+
+        /**
+         * Valid values: 0: no authentication; 1: basic_auth; 2: token.	
+         * @type {number || null}
+         */
+        this.AuthType = null;
+
+        /**
+         * Authentication information
+         * @type {RemoteWriteAuthInfo || null}
+         */
+        this.AuthInfo = null;
+
+        /**
+         * Backend service type
+-1 No
+0 CVM
+1025 CLB
+         * @type {number || null}
+         */
+        this.VirtualGatewayType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Target = 'Target' in params ? params.Target : null;
+        this.RemoteWriteURL = 'RemoteWriteURL' in params ? params.RemoteWriteURL : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
+
+        if (params.AuthInfo) {
+            let obj = new RemoteWriteAuthInfo();
+            obj.deserialize(params.AuthInfo)
+            this.AuthInfo = obj;
+        }
+        this.VirtualGatewayType = 'VirtualGatewayType' in params ? params.VirtualGatewayType : null;
 
     }
 }
@@ -23949,19 +24783,19 @@ class CreateCloudProductLogCollectionRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * <p>Cloud product identifier, support enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS</p>
+         * <p>Cloud product identifier. Support the following products</p><ul><li>APIS</li><li>BH</li><li>CDB</li><li>CDS</li><li>CFS</li><li>CLB</li><li>CSIP</li><li>CWP</li><li>DCDB</li><li>DNSPod</li><li>EMR</li><li>HTTPDNS</li><li>KHL</li><li>llmsgw</li><li>MariaDB</li><li>MDP</li><li>MongoDB</li><li>PostgreSQL</li><li>TCSS</li><li>TDSQL-C</li><li>TDStore</li><li>TencentDB-Redis</li><li>TEO</li><li>TokenHub</li><li>TSE</li></ul>
          * @type {string || null}
          */
         this.AssumerName = null;
 
         /**
-         * <p>Log type, supports enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</p>
+         * <p>Log types supported by each cloud product are as follows:</p><table><thead><tr><th>assumer_name</th><th>Supported log_type</th></tr></thead><tbody><tr><td>APIS</td><td>APIS-ACCESS</td></tr><tr><td>BH</td><td>BH-COMMANDLOG, BH-FILELOG</td></tr><tr><td>CDB</td><td>CDB-AUDIT</td></tr><tr><td>CDS</td><td>CDS-AUDIT, CDS-RISK</td></tr><tr><td>CFS</td><td>CFS-AUDIT</td></tr><tr><td>CLB</td><td>CMR-SPEND</td></tr><tr><td>CSIP</td><td>CSIP</td></tr><tr><td>CWP</td><td>CWP</td></tr><tr><td>DCDB</td><td>DCDB-AUDIT, DCDB-ERROR, DCDB-SLOW</td></tr><tr><td>DNSPod</td><td>DNSPod-RESOLVELOG</td></tr><tr><td>EMR</td><td>EMR-OPERATION</td></tr><tr><td>HTTPDNS</td><td>HTTPDNS-RESOLVELOG</td></tr><tr><td>MariaDB</td><td>MariaDB-AUDIT, MariaDB-ERROR, MariaDB-SLOW</td></tr><tr><td>MDP</td><td>MDP-SSAI</td></tr><tr><td>MongoDB</td><td>MongoDB-AUDIT, MongoDB-ErrorLog, MongoDB-OperationLog, MongoDB-SlowLog</td></tr><tr><td>PostgreSQL</td><td>PostgreSQL-AUDIT, PostgreSQL-ERROR, PostgreSQL-SLOW</td></tr><tr><td>TCSS</td><td>TCSS</td></tr><tr><td>TDSQL-C</td><td>TDSQL-C-AUDIT</td></tr><tr><td>TDStore</td><td>TDMYSQL-SLOW</td></tr><tr><td>TencentDB-Redis</td><td>Redis-AUDIT, Redis-ERROR, Redis-SLOW</td></tr><tr><td>TEO</td><td>TEO-INEFERENCE</td></tr><tr><td>llmsgw</td><td>llmsgw-mcp-security-alarm</td></tr></tbody></table>
          * @type {string || null}
          */
         this.LogType = null;
 
         /**
-         * <p>Product region. The input parameter format for regions varies by log type (LogType). Refer to the following example:</p><ul><li>All CDS log types: ap-guangzhou</li><li>CDB-AUDIT: gz</li><li>TDSQL-C-AUDIT: gz</li><li>MongoDB-AUDIT: gz</li><li>MongoDB-SlowLog: ap-guangzhou</li><li>MongoDB-ErrorLog: ap-guangzhou</li><li>TDMYSQL-SLOW: gz</li><li>All DCDB log types: gz</li><li>All MariaDB log types: gz</li><li>All PostgreSQL log types: gz</li><li>All BH log types: overseas-polaris (Hong Kong (China) and other)/fsi-polaris (financial district)/general-polaris (general zone)/intl-sg-prod (international site)</li><li>All APIS log types: gz</li></ul>
+         * <p>Product region. Different LogTypes have different input parameter formats:</p><p><strong>Format A: Short region code</strong> (gz / sh / bj …)</p><ul><li>All APIS log types: for example, <code>gz</code></li><li>CDB-AUDIT</li><li>TDSQL-C-AUDIT</li><li>TDMYSQL-SLOW</li><li>All DCDB log types</li><li>All MariaDB log types</li><li>All PostgreSQL log types</li><li>MongoDB-AUDIT (<strong>Note that this is different from SlowLog/ErrorLog/OperationLog</strong>)</li><li>All TencentDB-Redis log types</li><li>EMR-OPERATION</li></ul><p><strong>Format B: Long region code</strong> (ap-guangzhou / ap-shanghai / ap-singapore …)</p><ul><li>All CDS log types: for example, <code>ap-guangzhou</code></li><li>MongoDB-SlowLog / MongoDB-ErrorLog / MongoDB-OperationLog</li><li>DNSPod-RESOLVELOG</li><li>HTTPDNS-RESOLVELOG</li><li>MDP-SSAI</li><li>CFS-AUDIT</li><li>TEO-INEFERENCE</li><li>TokenHub-ActivityLog / TokenHub-AuditLog</li><li>llmsgw-mcp-security-alarm</li><li>CSIP / TCSS / TSE / CWP / KHL and others</li></ul><p><strong>Format C: Dedicated BH Polaris name</strong></p><ul><li>All BH log types: <code>overseas-polaris</code> (Hong Kong (China) and other overseas) / <code>fsi-polaris</code> (financial district) / <code>general-polaris</code> (general zone) / <code>intl-sg-prod</code> (international website)</li></ul>
          * @type {string || null}
          */
         this.CloudProductRegion = null;
@@ -24692,6 +25526,42 @@ class ConsumerGroupInfo extends  AbstractModel {
 }
 
 /**
+ * CreateRemoteWriteTask response structure.
+ * @class
+ */
+class CreateRemoteWriteTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RemoteWrite task ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRebuildIndexTasks request structure.
  * @class
  */
@@ -24756,100 +25626,118 @@ class DlcDeliverInfo extends  AbstractModel {
         super();
 
         /**
-         * Task ID.
+         * <p>Task id.</p>
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * Account id.
+         * <p>Account id.</p>
          * @type {number || null}
          */
         this.Uin = null;
 
         /**
-         * Log topic ID.
+         * <p>Log topic id.</p>
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * Task name.
+         * <p>Task name.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Delivery Type. Valid values: 0: real-time delivery; 1: historic delivery.
+         * <p>Delivery Type, 0: real-time delivery, 1: history delivery</p>
          * @type {number || null}
          */
         this.DeliverType = null;
 
         /**
-         * Delivery file size in MB
+         * <p>Delivery file size, in MB.</p>
          * @type {number || null}
          */
         this.MaxSize = null;
 
         /**
-         * Delivery interval in seconds
+         * <p>Delivery interval in seconds</p>
          * @type {number || null}
          */
         this.Interval = null;
 
         /**
-         * Start time of the delivery time range
+         * <p>Start time of the delivery time range</p>
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * End time of the delivery time range
+         * <p>End time of the delivery time range</p>
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * dlc configuration message
+         * <p>dlc configuration message</p>
          * @type {DlcInfo || null}
          */
         this.DlcInfo = null;
 
         /**
-         * Whether to enable delivery service log. 1 for disabled, 2 for enabled
+         * <p>Whether to enable delivery service log. 1 Disabled, 2 Enabled</p>
          * @type {number || null}
          */
         this.HasServicesLog = null;
 
         /**
-         * Task status.
+         * <p>Task status.</p>
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Task progress. Historic delivery tasks take effect.
+         * <p>Task progress. Historic delivery tasks take effect.</p>
          * @type {number || null}
          */
         this.Progress = null;
 
         /**
-         * Topic type of logs. 0: standard topic; 1: metric topic.
+         * <p>Log topic type. 0: Standard topic, 1: Metric topic</p>
          * @type {number || null}
          */
         this.BizType = null;
 
         /**
-         * Task creation time.
+         * <p>Task creation time.</p>
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * Task modification time.
+         * <p>Task last modified.</p>
          * @type {number || null}
          */
         this.UpdateTime = null;
+
+        /**
+         * <p>Auto-create dlc field</p><p>Default value: false</p><p>When there are additional fields in your log, the system will automatically ship them to DLC.</p>
+         * @type {boolean || null}
+         */
+        this.AutoCreateField = null;
+
+        /**
+         * <p>Store logs with delivery failure in a DLC table</p>
+         * @type {DlcFailHandle || null}
+         */
+        this.DlcFailHandle = null;
+
+        /**
+         * <p>Log pre-filtering - Perform pre-filtering process on the original data for data ingestion into Splunk.</p>
+         * @type {string || null}
+         */
+        this.DSLFilter = null;
 
     }
 
@@ -24881,6 +25769,14 @@ class DlcDeliverInfo extends  AbstractModel {
         this.BizType = 'BizType' in params ? params.BizType : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.AutoCreateField = 'AutoCreateField' in params ? params.AutoCreateField : null;
+
+        if (params.DlcFailHandle) {
+            let obj = new DlcFailHandle();
+            obj.deserialize(params.DlcFailHandle)
+            this.DlcFailHandle = obj;
+        }
+        this.DSLFilter = 'DSLFilter' in params ? params.DSLFilter : null;
 
     }
 }
@@ -24976,6 +25872,12 @@ class DescribeCloudProductLogTasksResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
+         * <p>Additional information. For example, error in querying topic or logset tag information.</p>
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -25000,6 +25902,7 @@ class DescribeCloudProductLogTasksResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Message = 'Message' in params ? params.Message : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -26567,189 +27470,106 @@ class LogRechargeRuleInfo extends  AbstractModel {
         super();
 
         /**
-         * Import type. Valid values: `json_log` (JSON logs), `minimalist_log` (single-line full text), and fullregex_log (single-line full regex)
+         * <p>Import type, support json_log: JSON logs, minimalist_log: single-line full-text log, fullregex_log: single-line full regular expression</p>
          * @type {string || null}
          */
         this.RechargeType = null;
 
         /**
-         * Encoding format. Valid values: 0 (default, UTF-8) and 1 GBK).
+         * <p>Parse encoding format. 0: UTF-8 (default value), 1: GBK</p>
          * @type {number || null}
          */
         this.EncodingFormat = null;
 
         /**
-         * Use default time status. true: when enabled, current system time or Kafka message timestamp will be used as log timestamp. false: when disabled, time field in the log will be used as log timestamp. Default: true.
+         * <p>Use default time status. true: once enabled, current system time or Kafka message timestamp will be used as log timestamp; false: when turned off, time field in the log will be used as log timestamp. Default: true</p>
          * @type {boolean || null}
          */
         this.DefaultTimeSwitch = null;
 
         /**
-         * Full log matching rule. It is valid only when RechargeType is fullregex_log.
+         * <p>The whole log matching rule is valid only when RechargeType is fullregex_log.</p>
          * @type {string || null}
          */
         this.LogRegex = null;
 
         /**
-         * Whether to upload the logs that failed to be parsed. Valid values: `true` and `false`.
+         * <p>Whether to upload logs that failed to be parsed. true for upload, false for not uploading.</p>
          * @type {boolean || null}
          */
         this.UnMatchLogSwitch = null;
 
         /**
-         * key name of parsing-failed logs
+         * <p>Key name of parsing-failed logs</p>
          * @type {string || null}
          */
         this.UnMatchLogKey = null;
 
         /**
-         * Time source for parsing failure logs. 0: current time of the system; 1: Kafka message timestamp.
+         * <p>Parsing failure log time source. 0: Current system time. 1: Kafka message timestamp.</p>
          * @type {number || null}
          */
         this.UnMatchLogTimeSrc = null;
 
         /**
-         * Default time source. 0: Current system time; 1: Kafka message timestamp.
+         * <p>Default time source. 0: Current system time, 1: Kafka message timestamp</p>
          * @type {number || null}
          */
         this.DefaultTimeSrc = null;
 
         /**
-         * Time field. Field name representing time in logs.
-
--When DefaultTimeSwitch is false and RechargeType data extraction mode is `json_log` JSON file log or `fullregex_log` single-line full regex file log, TimeKey cannot be empty.
+         * <p>Time field. Field name that represents time in logs.</p><ul><li>When DefaultTimeSwitch is false and the RechargeType data extraction mode is <code>json_log</code> JSON-file log or <code>fullregex_log</code> single-line full regex-file log, the TimeKey cannot be empty.</li></ul>
          * @type {string || null}
          */
         this.TimeKey = null;
 
         /**
-         * Time extraction regular expression.
--When DefaultTimeSwitch is false and the data extraction mode of RechargeType is `minimalist_log` (single-line full text - file log), TimeRegex cannot be empty.
--Only need to input the regular expression representing the time field in logs. If multiple fields are matched to, the first will be used.
-Example: The original log is "message with time 2022-08-08 14:20:20". You can set the retrieval time regex to \d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d.
-
+         * <p>Time extraction regular expression.</p><ul><li>When DefaultTimeSwitch is false and the RechargeType data extraction mode is <code>minimalist_log</code> single-line full text - file log, the TimeRegex cannot be empty.</li><li>Only need to input the regular expression for the field representing time in logs. If multiple fields are matched to, the first one will be used.<br> For example: If the original log is: message with time 2022-08-08 14:20:20, you can set the retrieval time regular expression to \d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d</li></ul>
          * @type {string || null}
          */
         this.TimeRegex = null;
 
         /**
-         * Time field format.
--When DefaultTimeSwitch is false, TimeFormat cannot be empty.
+         * <p>Time field format.</p><ul><li>When DefaultTimeSwitch is false, TimeFormat cannot be empty.</li></ul>
          * @type {string || null}
          */
         this.TimeFormat = null;
 
         /**
-         * Time field time zone.
--When DefaultTimeSwitch is false, TimeZone cannot be empty.
--Time zone format rule
-Prefix: Use GMT or UTC as the time zone benchmark.
-Offset:
--`-` indicates a western time zone (later than the benchmark time).
--`+` means the east time zone (earlier than the benchmark time).
--Format ±HH:MM (hr:min)
-
--Currently supported:
-```
-"GMT-12:00" 
-"GMT-11:00" 
-"GMT-10:00" 
-"GMT-09:30" 
-"GMT-09:00" 
-"GMT-08:00" 
-"GMT-07:00" 
-"GMT-06:00" 
-"GMT-05:00" 
-"GMT-04:00" 
-"GMT-03:30" 
-"GMT-03:00" 
-"GMT-02:00" 
-"GMT-01:00" 
-"GMT+00:00"
-"GMT+01:00"
-"GMT+02:00"
-"GMT+03:30"
-"GMT+04:00"
-"GMT+04:30"
-"GMT+05:00"
-"GMT+05:30"
-"GMT+05:45"
-"GMT+06:00"
-"GMT+06:30"
-"GMT+07:00"
-"GMT+08:00"
-"GMT+09:00"
-"GMT+09:30"
-"GMT+10:00"
-"GMT+10:30"
-"GMT+11:00"
-"GMT+11:30"
-"GMT+12:00"
-"GMT+12:45"
-"GMT+13:00"
-"GMT+14:00"
-"UTC-11:00"
-"UTC-10:00"
-"UTC-09:00"
-"UTC-08:00"
-"UTC-12:00"
-"UTC-07:00"
-"UTC-06:00"
-"UTC-05:00"
-"UTC-04:30"
-"UTC-04:00"
-"UTC-03:30"
-"UTC-03:00"
-"UTC-02:00"
-"UTC-01:00"
-"UTC+00:00"
-"UTC+01:00"
-"UTC+02:00"
-"UTC+03:00"
-"UTC+03:30"
-"UTC+04:00"
-"UTC+04:30"
-"UTC+05:00"
-"UTC+05:45"
-"UTC+06:00"
-"UTC+06:30"
-"UTC+07:00"
-"UTC+08:00"
-"UTC+09:00"
-"UTC+09:30"
-"UTC+10:00"
-"UTC+11:00"
-"UTC+12:00"
-"UTC+13:00"
-```
+         * <p>Time field time zone.</p><ul><li><p>When DefaultTimeSwitch is false, TimeZone cannot be empty.</p></li><li><p>Time zone format rule<br>Prefix: Use GMT or UTC as the time zone benchmark<br>Offset:</p><ul><li><code>-</code> indicates a western time zone (later than the benchmark time)</li><li><code>+</code> indicates an eastern time zone (earlier than the benchmark time)</li><li>Format is ±HH:MM (hour:minute)</li></ul></li><li><p>Currently supported:<br><pre><code>&quot;GMT-12:00&quot; &quot;GMT-11:00&quot; &quot;GMT-10:00&quot; &quot;GMT-09:30&quot; &quot;GMT-09:00&quot; &quot;GMT-08:00&quot; &quot;GMT-07:00&quot; &quot;GMT-06:00&quot; &quot;GMT-05:00&quot; &quot;GMT-04:00&quot; &quot;GMT-03:30&quot; &quot;GMT-03:00&quot; &quot;GMT-02:00&quot; &quot;GMT-01:00&quot; &quot;GMT+00:00&quot;&quot;GMT+01:00&quot;&quot;GMT+02:00&quot;&quot;GMT+03:30&quot;&quot;GMT+04:00&quot;&quot;GMT+04:30&quot;&quot;GMT+05:00&quot;&quot;GMT+05:30&quot;&quot;GMT+05:45&quot;&quot;GMT+06:00&quot;&quot;GMT+06:30&quot;&quot;GMT+07:00&quot;&quot;GMT+08:00&quot;&quot;GMT+09:00&quot;&quot;GMT+09:30&quot;&quot;GMT+10:00&quot;&quot;GMT+10:30&quot;&quot;GMT+11:00&quot;&quot;GMT+11:30&quot;&quot;GMT+12:00&quot;&quot;GMT+12:45&quot;&quot;GMT+13:00&quot;&quot;GMT+14:00&quot;&quot;UTC-11:00&quot;&quot;UTC-10:00&quot;&quot;UTC-09:00&quot;&quot;UTC-08:00&quot;&quot;UTC-12:00&quot;&quot;UTC-07:00&quot;&quot;UTC-06:00&quot;&quot;UTC-05:00&quot;&quot;UTC-04:30&quot;&quot;UTC-04:00&quot;&quot;UTC-03:30&quot;&quot;UTC-03:00&quot;&quot;UTC-02:00&quot;&quot;UTC-01:00&quot;&quot;UTC+00:00&quot;&quot;UTC+01:00&quot;&quot;UTC+02:00&quot;&quot;UTC+03:00&quot;&quot;UTC+03:30&quot;&quot;UTC+04:00&quot;&quot;UTC+04:30&quot;&quot;UTC+05:00&quot;&quot;UTC+05:45&quot;&quot;UTC+06:00&quot;&quot;UTC+06:30&quot;&quot;UTC+07:00&quot;&quot;UTC+08:00&quot;&quot;UTC+09:00&quot;&quot;UTC+09:30&quot;&quot;UTC+10:00&quot;&quot;UTC+11:00&quot;&quot;UTC+12:00&quot;&quot;UTC+13:00&quot;</code></pre></p></li></ul>
          * @type {string || null}
          */
         this.TimeZone = null;
 
         /**
-         * Metadata information. Kafka import supports kafka_topic, kafka_partition, kafka_offset, and kafka_timestamp.
+         * <p>Metadata information, Kafka import supports kafka_topic, kafka_partition, kafka_offset, kafka_timestamp</p>
          * @type {Array.<string> || null}
          */
         this.Metadata = null;
 
         /**
-         * log Key list. It is required when RechargeType is full_regex_log or delimiter_log.
+         * <p>log Key list, required when RechargeType is full_regex_log or delimiter_log.</p>
          * @type {Array.<string> || null}
          */
         this.Keys = null;
 
         /**
-         * JSON parsing mode. The first-level data parsing is enabled.
+         * <p>json parsing mode, enable first level data parsing</p>
          * @type {boolean || null}
          */
         this.ParseArray = null;
 
         /**
-         * Delimiter parsing mode - Separator
-This field is required when the parsing format is delimiter extraction.
+         * <p>Delimiter parsing mode - Separator<br>This field is required when the parsing format is delimiter extraction.</p>
          * @type {string || null}
          */
         this.Delimiter = null;
+
+        /**
+         * <p>JSON nest unfold configuration. This parameter is valid only when RechargeType is json_log. If it is not passed, it is disabled.</p>
+         * @type {JsonExpandInfo || null}
+         */
+        this.JsonExpand = null;
 
     }
 
@@ -26776,6 +27596,12 @@ This field is required when the parsing format is delimiter extraction.
         this.Keys = 'Keys' in params ? params.Keys : null;
         this.ParseArray = 'ParseArray' in params ? params.ParseArray : null;
         this.Delimiter = 'Delimiter' in params ? params.Delimiter : null;
+
+        if (params.JsonExpand) {
+            let obj = new JsonExpandInfo();
+            obj.deserialize(params.JsonExpand)
+            this.JsonExpand = obj;
+        }
 
     }
 }
@@ -27017,6 +27843,41 @@ class DlcTableInfo extends  AbstractModel {
         this.DataDirectory = 'DataDirectory' in params ? params.DataDirectory : null;
         this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
         this.TableName = 'TableName' in params ? params.TableName : null;
+
+    }
+}
+
+/**
+ * DeleteRemoteWriteTask request structure.
+ * @class
+ */
+class DeleteRemoteWriteTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RemoteWrite import task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Log topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
 
     }
 }
@@ -27428,46 +28289,40 @@ class ModifyCloudProductLogCollectionRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * <p>Instance ID.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Cloud product identifier, support enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS.
+         * <p>Cloud product identifier, supports enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS</p>
          * @type {string || null}
          */
         this.AssumerName = null;
 
         /**
-         * Log type, support enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS
+         * <p>Log type. Supports enumeration: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB  ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</p>
          * @type {string || null}
          */
         this.LogType = null;
 
         /**
-         * Cloud product region. Data discrepancies exist in the format of region input parameters for different log types (LogType). Refer to the following example:
--All log types of CDS: ap-guangzhou
-- CDB-AUDIT: gz
-- TDSQL-C-AUDIT: gz
-- MongoDB-AUDIT: gz
-- MongoDB-SlowLog:ap-guangzhou
-- MongoDB-ErrorLog:ap-guangzhou
-- TDMYSQL-SLOW:gz
--All log types of DCDB: gz
--All log types of MariaDB: gz
--PostgreSQL all log types: gz
--BH all log types: overseas-polaris (Hong Kong (China) and other)/fsi-polaris (financial district)/general-polaris (general zone)/intl-sg-prod (international site)
--All log types of APIS: gz
+         * <p>Product region. Different log types have different region input formats. Refer to the following example:</p><ul><li>All CDS log types: ap-guangzhou</li><li>CDB-AUDIT: gz</li><li>TDSQL-C-AUDIT: gz</li><li>MongoDB-AUDIT: gz</li><li>MongoDB-SlowLog: ap-guangzhou</li><li>MongoDB-ErrorLog: ap-guangzhou</li><li>TDMYSQL-SLOW: gz</li><li>All DCDB log types: gz</li><li>All MariaDB log types: gz</li><li>All PostgreSQL log types: gz</li><li>All BH log types: overseas-polaris(Hong Kong (China) and other)/fsi-polaris(financial district)/general-polaris(general zone)/intl-sg-prod(international site)</li><li>All APIS log types: gz</li></ul>
          * @type {string || null}
          */
         this.CloudProductRegion = null;
 
         /**
-         * Logging configuration extended information, normally used to store additional log shipping configuration
+         * <p>Logging configuration extended information, generally used to store additional log delivery configuration</p>
          * @type {string || null}
          */
         this.Extend = null;
+
+        /**
+         * <p>Description list of tags. By specifying this parameter, you can simultaneously bind tags to the appropriate logset and topic. Supports a maximum of 10 tag key-value pairs. The same resource can only be bound to the same tag key.</p>
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
 
     }
 
@@ -27483,6 +28338,43 @@ class ModifyCloudProductLogCollectionRequest extends  AbstractModel {
         this.LogType = 'LogType' in params ? params.LogType : null;
         this.CloudProductRegion = 'CloudProductRegion' in params ? params.CloudProductRegion : null;
         this.Extend = 'Extend' in params ? params.Extend : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteRemoteWriteTask response structure.
+ * @class
+ */
+class DeleteRemoteWriteTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -30894,6 +31786,7 @@ module.exports = {
     Instance: Instance,
     DescribeAlarmNoticesResponse: DescribeAlarmNoticesResponse,
     DeleteDataTransformRequest: DeleteDataTransformRequest,
+    DescribeRemoteWriteTasksResponse: DescribeRemoteWriteTasksResponse,
     AddMachineGroupInfoRequest: AddMachineGroupInfoRequest,
     DescribeKafkaConsumerGroupListResponse: DescribeKafkaConsumerGroupListResponse,
     CreateHostMetricConfigResponse: CreateHostMetricConfigResponse,
@@ -30918,6 +31811,7 @@ module.exports = {
     CreateDeliverCloudFunctionResponse: CreateDeliverCloudFunctionResponse,
     PreviewLogStatistic: PreviewLogStatistic,
     CompressInfo: CompressInfo,
+    ModifyRemoteWriteTaskResponse: ModifyRemoteWriteTaskResponse,
     CreateConfigResponse: CreateConfigResponse,
     CreateCloudProductLogCollectionResponse: CreateCloudProductLogCollectionResponse,
     SearchCosRechargeInfoResponse: SearchCosRechargeInfoResponse,
@@ -30925,6 +31819,7 @@ module.exports = {
     KeyValueInfo: KeyValueInfo,
     DataTransformSqlDataSource: DataTransformSqlDataSource,
     ModifyMachineGroupRequest: ModifyMachineGroupRequest,
+    JsonExpandInfo: JsonExpandInfo,
     AnonymousInfo: AnonymousInfo,
     DescribeHostMetricConfigsResponse: DescribeHostMetricConfigsResponse,
     CreateDashboardRequest: CreateDashboardRequest,
@@ -31041,6 +31936,7 @@ module.exports = {
     Delta: Delta,
     DeleteIndexResponse: DeleteIndexResponse,
     AlarmAnalysisConfig: AlarmAnalysisConfig,
+    CreateRemoteWriteTaskRequest: CreateRemoteWriteTaskRequest,
     SearchLogErrors: SearchLogErrors,
     DescribeSplunkDeliversRequest: DescribeSplunkDeliversRequest,
     DeleteScheduledSqlRequest: DeleteScheduledSqlRequest,
@@ -31052,6 +31948,7 @@ module.exports = {
     CreateConsumerRequest: CreateConsumerRequest,
     DeleteHostMetricConfigRequest: DeleteHostMetricConfigRequest,
     DeleteMetricConfigResponse: DeleteMetricConfigResponse,
+    DescribeRemoteWriteTasksRequest: DescribeRemoteWriteTasksRequest,
     DataTransformTaskInfo: DataTransformTaskInfo,
     NoticeRule: NoticeRule,
     ContentInfo: ContentInfo,
@@ -31067,7 +31964,9 @@ module.exports = {
     MultiCondition: MultiCondition,
     Filter: Filter,
     SearchViewInfo: SearchViewInfo,
+    RemoteWriteInfo: RemoteWriteInfo,
     ModifyLogsetResponse: ModifyLogsetResponse,
+    DlcFailHandle: DlcFailHandle,
     HostMetricItem: HostMetricItem,
     CreateDashboardResponse: CreateDashboardResponse,
     GetMetricLabelValuesRequest: GetMetricLabelValuesRequest,
@@ -31098,6 +31997,7 @@ module.exports = {
     DeleteMetricConfigRequest: DeleteMetricConfigRequest,
     CreateEsRechargeRequest: CreateEsRechargeRequest,
     ConsumerGroup: ConsumerGroup,
+    DlcFailTableInfo: DlcFailTableInfo,
     DeleteNoticeContentResponse: DeleteNoticeContentResponse,
     MetricYamlSpec: MetricYamlSpec,
     DeleteCloudProductLogCollectionRequest: DeleteCloudProductLogCollectionRequest,
@@ -31159,6 +32059,7 @@ module.exports = {
     CancelRebuildIndexTaskRequest: CancelRebuildIndexTaskRequest,
     DescribeLogsetsResponse: DescribeLogsetsResponse,
     DescribeKafkaConsumerPreviewResponse: DescribeKafkaConsumerPreviewResponse,
+    RemoteWriteAuthInfo: RemoteWriteAuthInfo,
     NetworkApplicationInfo: NetworkApplicationInfo,
     ModifySearchViewRequest: ModifySearchViewRequest,
     WebCallback: WebCallback,
@@ -31178,6 +32079,7 @@ module.exports = {
     DescribeWebCallbacksResponse: DescribeWebCallbacksResponse,
     DeleteExportRequest: DeleteExportRequest,
     ModifyKafkaConsumerGroupOffsetRequest: ModifyKafkaConsumerGroupOffsetRequest,
+    ModifyRemoteWriteTaskRequest: ModifyRemoteWriteTaskRequest,
     DescribeConsolesRequest: DescribeConsolesRequest,
     AlarmShieldInfo: AlarmShieldInfo,
     EsImportInfo: EsImportInfo,
@@ -31242,6 +32144,7 @@ module.exports = {
     DescribeTopicsResponse: DescribeTopicsResponse,
     EventLog: EventLog,
     ConsumerGroupInfo: ConsumerGroupInfo,
+    CreateRemoteWriteTaskResponse: CreateRemoteWriteTaskResponse,
     DescribeRebuildIndexTasksRequest: DescribeRebuildIndexTasksRequest,
     DlcDeliverInfo: DlcDeliverInfo,
     DescribeShippersRequest: DescribeShippersRequest,
@@ -31280,12 +32183,14 @@ module.exports = {
     AlarmNoticeDeliverConfig: AlarmNoticeDeliverConfig,
     DescribeConsumersResponse: DescribeConsumersResponse,
     DlcTableInfo: DlcTableInfo,
+    DeleteRemoteWriteTaskRequest: DeleteRemoteWriteTaskRequest,
     ModifyKafkaConsumerGroupOffsetResponse: ModifyKafkaConsumerGroupOffsetResponse,
     CreateShipperRequest: CreateShipperRequest,
     InstanceData: InstanceData,
     HostMetricConfig: HostMetricConfig,
     CreateShipperResponse: CreateShipperResponse,
     ModifyCloudProductLogCollectionRequest: ModifyCloudProductLogCollectionRequest,
+    DeleteRemoteWriteTaskResponse: DeleteRemoteWriteTaskResponse,
     OpenClawServiceResponse: OpenClawServiceResponse,
     Column: Column,
     DescribeDataTransformInfoRequest: DescribeDataTransformInfoRequest,

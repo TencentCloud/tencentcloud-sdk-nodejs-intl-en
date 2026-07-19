@@ -17,8 +17,10 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateMNPSubscribeMessageTemplateResponse = models.CreateMNPSubscribeMessageTemplateResponse;
+const DisableMNPPaymentRequest = models.DisableMNPPaymentRequest;
 const DescribeMNGRetentionDataRequest = models.DescribeMNGRetentionDataRequest;
 const DescribeSubscribeMessageTemplateLibraryListResp = models.DescribeSubscribeMessageTemplateLibraryListResp;
+const AgeRatingItem = models.AgeRatingItem;
 const DescribeMNGDomainInfoResp = models.DescribeMNGDomainInfoResp;
 const DeleteTeamMemberResponse = models.DeleteTeamMemberResponse;
 const DescribeMNPRetentionDataResponse = models.DescribeMNPRetentionDataResponse;
@@ -29,6 +31,7 @@ const DescribeMNPSensitiveAPIPermissionApprovalRequest = models.DescribeMNPSensi
 const ConfigureMNPPreviewResponse = models.ConfigureMNPPreviewResponse;
 const DescribeMNGAppSecretRequest = models.DescribeMNGAppSecretRequest;
 const DescribeMNPSensitiveAPIPermissionApprovalResponse = models.DescribeMNPSensitiveAPIPermissionApprovalResponse;
+const UnbindMNPPaymentMerchantResponse = models.UnbindMNPPaymentMerchantResponse;
 const ReleaseMNGVersionResponse = models.ReleaseMNGVersionResponse;
 const DescribeMNGPaymentReportDetailRequest = models.DescribeMNGPaymentReportDetailRequest;
 const APPOverview = models.APPOverview;
@@ -42,6 +45,8 @@ const DescribeMNPAccessAnalysisOverviewRequest = models.DescribeMNPAccessAnalysi
 const DescribeApplicationConfigInfosResponse = models.DescribeApplicationConfigInfosResponse;
 const DescribeGlobalOverviewReportDetailResponse = models.DescribeGlobalOverviewReportDetailResponse;
 const DescribeMNPMAUDataDetailRequest = models.DescribeMNPMAUDataDetailRequest;
+const ApplyPaymentOpenDetailRes = models.ApplyPaymentOpenDetailRes;
+const ApproveMNPPaymentEnableRequest = models.ApproveMNPPaymentEnableRequest;
 const CreateApplicationConfigRequest = models.CreateApplicationConfigRequest;
 const DescribeMNPAdvertisingDetailRequest = models.DescribeMNPAdvertisingDetailRequest;
 const PaymentDetail = models.PaymentDetail;
@@ -59,13 +64,16 @@ const CreateMNGSubscribeMessageTemplateRequest = models.CreateMNGSubscribeMessag
 const ModifyMNGAppSecretStatusResponse = models.ModifyMNGAppSecretStatusResponse;
 const DescribeMNGSubscribeMessageTemplateLibraryResponse = models.DescribeMNGSubscribeMessageTemplateLibraryResponse;
 const DescribeMNPOfflinePackageURLResponse = models.DescribeMNPOfflinePackageURLResponse;
+const UnbindPaymentMerchantResponse = models.UnbindPaymentMerchantResponse;
 const ApplicationConfigInfo = models.ApplicationConfigInfo;
 const DescribeApplicationSensitiveAPIListResponse = models.DescribeApplicationSensitiveAPIListResponse;
 const DescribeMNGSubscribeMessageTemplateLibraryListRequest = models.DescribeMNGSubscribeMessageTemplateLibraryListRequest;
+const DescribeMNPTeamMerchantInfoRes = models.DescribeMNPTeamMerchantInfoRes;
 const DescribeApplicationMNPListRequest = models.DescribeApplicationMNPListRequest;
-const DescribeAPPDataDetailLineChartResponse = models.DescribeAPPDataDetailLineChartResponse;
 const DescribeMNGReleasedVersionHistoryResponse = models.DescribeMNGReleasedVersionHistoryResponse;
+const DescribeMNGAllStageVersionsRequest = models.DescribeMNGAllStageVersionsRequest;
 const DescribeMNPSensitiveAPIPermissionListResp = models.DescribeMNPSensitiveAPIPermissionListResp;
+const ChangePaymentBoundMerchantResponse = models.ChangePaymentBoundMerchantResponse;
 const DescribeMNPSubscribeMessageTemplateListResp = models.DescribeMNPSubscribeMessageTemplateListResp;
 const DescribeMNGVersionResponse = models.DescribeMNGVersionResponse;
 const DescribeMNGSubscribeMessageTemplateLibraryListResponse = models.DescribeMNGSubscribeMessageTemplateLibraryListResponse;
@@ -84,10 +92,9 @@ const DescribeUserListData = models.DescribeUserListData;
 const MNPSubscribeMessageTemplateDetailResp = models.MNPSubscribeMessageTemplateDetailResp;
 const DescribePaymentDataLineChartRequest = models.DescribePaymentDataLineChartRequest;
 const MNPI18NSyncDto = models.MNPI18NSyncDto;
-const CreateDomainParam = models.CreateDomainParam;
 const DescribeMNPSensitiveAPIPermissionListResponse = models.DescribeMNPSensitiveAPIPermissionListResponse;
 const DescribePaymentDataDetailResponse = models.DescribePaymentDataDetailResponse;
-const DescribeMNPApprovalListResp = models.DescribeMNPApprovalListResp;
+const CreateDomainParam = models.CreateDomainParam;
 const DescribeMNPAccessAnalysisOverviewResponse = models.DescribeMNPAccessAnalysisOverviewResponse;
 const ProcessMNPSensitiveAPIPermissionApprovalResponse = models.ProcessMNPSensitiveAPIPermissionApprovalResponse;
 const CreateMNPAppSecretResp = models.CreateMNPAppSecretResp;
@@ -117,6 +124,8 @@ const DescribeMNGAdvertisingOverviewResponse = models.DescribeMNGAdvertisingOver
 const DescribeMNPCategoryResponse = models.DescribeMNPCategoryResponse;
 const DescribeRoleListResponse = models.DescribeRoleListResponse;
 const CreateMNPApprovalRequest = models.CreateMNPApprovalRequest;
+const ApprovePaymentMerchantBindingRequest = models.ApprovePaymentMerchantBindingRequest;
+const ApprovalPaymentV2MerchantBindRes = models.ApprovalPaymentV2MerchantBindRes;
 const DescribeMNGSensitiveAPIPermissionListRequest = models.DescribeMNGSensitiveAPIPermissionListRequest;
 const DescribeMNPPreviewResp = models.DescribeMNPPreviewResp;
 const DescribeMNGAdvertisingLineChartRequest = models.DescribeMNGAdvertisingLineChartRequest;
@@ -137,7 +146,7 @@ const DescribeMNPSubscribeMessageTemplateListResponse = models.DescribeMNPSubscr
 const DescribeGlobalOverviewDataSummaryResponse = models.DescribeGlobalOverviewDataSummaryResponse;
 const DeleteMNPSubscribeMessageTemplateResponse = models.DeleteMNPSubscribeMessageTemplateResponse;
 const ModifyGlobalDomainResponse = models.ModifyGlobalDomainResponse;
-const Overview = models.Overview;
+const MAUDetailData = models.MAUDetailData;
 const PaymentActiveRetention = models.PaymentActiveRetention;
 const DescribeMNGSubscribeMessageTemplateListRequest = models.DescribeMNGSubscribeMessageTemplateListRequest;
 const DescribeMNGOfflinePackageURLResponse = models.DescribeMNGOfflinePackageURLResponse;
@@ -147,6 +156,7 @@ const DescribeMNGPreviewRequest = models.DescribeMNGPreviewRequest;
 const DescribeMNGSubscribeMessageTemplateInfoResp = models.DescribeMNGSubscribeMessageTemplateInfoResp;
 const DescribeMNPListData = models.DescribeMNPListData;
 const DescribeMNGAccessAnalysisOverviewResponse = models.DescribeMNGAccessAnalysisOverviewResponse;
+const UnbindPaymentMerchantRequest = models.UnbindPaymentMerchantRequest;
 const ModifyMNPDomainRequest = models.ModifyMNPDomainRequest;
 const ModifyMNGAppSecretStatusResp = models.ModifyMNGAppSecretStatusResp;
 const DeleteUserResponse = models.DeleteUserResponse;
@@ -155,6 +165,7 @@ const DescribeApplicationResponse = models.DescribeApplicationResponse;
 const DescribeAdvertisingOverviewRequest = models.DescribeAdvertisingOverviewRequest;
 const DescribeAdvertisingLineChartRequest = models.DescribeAdvertisingLineChartRequest;
 const ResourceIdInfo = models.ResourceIdInfo;
+const DisableMNPPaymentResponse = models.DisableMNPPaymentResponse;
 const DescribeMNGListResponse = models.DescribeMNGListResponse;
 const CreateMNPResponse = models.CreateMNPResponse;
 const DescribeMNGSensitiveAPIPermissionListResponse = models.DescribeMNGSensitiveAPIPermissionListResponse;
@@ -162,12 +173,14 @@ const CreateMNGAppSecretRequest = models.CreateMNGAppSecretRequest;
 const DescribeUserListResponse = models.DescribeUserListResponse;
 const ModifyMNPAppSecretStatusRequest = models.ModifyMNPAppSecretStatusRequest;
 const DeleteTeamMemberRequest = models.DeleteTeamMemberRequest;
+const DescribeMNPPaymentApprovalInfoRequest = models.DescribeMNPPaymentApprovalInfoRequest;
+const RetentionData = models.RetentionData;
 const ResetMNPAppSecretRequest = models.ResetMNPAppSecretRequest;
 const DescribeMNPReportDataLineChartResponse = models.DescribeMNPReportDataLineChartResponse;
 const DescribeMNPSensitiveAPIPermissionListData = models.DescribeMNPSensitiveAPIPermissionListData;
 const DescribeMNGVersionRequest = models.DescribeMNGVersionRequest;
 const DescribeTempSecret4UploadFile2CosResponse = models.DescribeTempSecret4UploadFile2CosResponse;
-const RetentionData = models.RetentionData;
+const ApproveMNPPaymentEnableResponse = models.ApproveMNPPaymentEnableResponse;
 const DescribeUserDetailResp = models.DescribeUserDetailResp;
 const DescribeMNPReleasedVersionHistoryRequest = models.DescribeMNPReleasedVersionHistoryRequest;
 const CreateMNPSensitiveAPIPermissionApprovalResponse = models.CreateMNPSensitiveAPIPermissionApprovalResponse;
@@ -185,7 +198,7 @@ const DescribeMNGAccessAnalysisLineChartResponse = models.DescribeMNGAccessAnaly
 const CreateMNGVersionResp = models.CreateMNGVersionResp;
 const RollbackMNPVersionResponse = models.RollbackMNPVersionResponse;
 const DescribeMNPApprovalListRequest = models.DescribeMNPApprovalListRequest;
-const MAUDetail = models.MAUDetail;
+const DescribeMNGPaymentRetentionAnalysisResponse = models.DescribeMNGPaymentRetentionAnalysisResponse;
 const DescribeGlobalDomainsListData = models.DescribeGlobalDomainsListData;
 const DescribeMNPManagerDetailData = models.DescribeMNPManagerDetailData;
 const DescribeUserListRequest = models.DescribeUserListRequest;
@@ -194,6 +207,7 @@ const DescribeMNGRevertOnlineVersionPageResp = models.DescribeMNGRevertOnlineVer
 const DescribeMNPSubscribeMessageTemplateInfoResp = models.DescribeMNPSubscribeMessageTemplateInfoResp;
 const DescribeMNPMAUDataDetailResponse = models.DescribeMNPMAUDataDetailResponse;
 const DescribeMNPReportDetailRequest = models.DescribeMNPReportDetailRequest;
+const QueryMNPMerchantInfoRequest = models.QueryMNPMerchantInfoRequest;
 const ModifyMNGDomainResponse = models.ModifyMNGDomainResponse;
 const DescribeMNGPaymentReportDetailResponse = models.DescribeMNGPaymentReportDetailResponse;
 const DescribeApplicationConfigFileResponse = models.DescribeApplicationConfigFileResponse;
@@ -224,6 +238,7 @@ const DescribeTeamMemberListRequest = models.DescribeTeamMemberListRequest;
 const DescribeMNGMAUMonthlyComparisonMetricCardRequest = models.DescribeMNGMAUMonthlyComparisonMetricCardRequest;
 const DescribePaymentDataLineChartResponse = models.DescribePaymentDataLineChartResponse;
 const DescribeMNGAdvertisingDetailRequest = models.DescribeMNGAdvertisingDetailRequest;
+const QueryMNPMerchantInfoResponse = models.QueryMNPMerchantInfoResponse;
 const DescribeMNPPreviewResponse = models.DescribeMNPPreviewResponse;
 const AdvertDataOverview = models.AdvertDataOverview;
 const DescribeMNPListResponse = models.DescribeMNPListResponse;
@@ -238,9 +253,9 @@ const DeleteTeamRequest = models.DeleteTeamRequest;
 const DescribeRoleListRequest = models.DescribeRoleListRequest;
 const DescribeMNGMAUDataDetailRequest = models.DescribeMNGMAUDataDetailRequest;
 const DescribeMNGSubscribeMessageTemplateLibraryRequest = models.DescribeMNGSubscribeMessageTemplateLibraryRequest;
-const DescribeMNGPaymentRetentionAnalysisResponse = models.DescribeMNGPaymentRetentionAnalysisResponse;
+const MAUDetail = models.MAUDetail;
 const DescribeMNGPreviewResponse = models.DescribeMNGPreviewResponse;
-const MAUDetailData = models.MAUDetailData;
+const DescribeAPPDataDetailLineChartResponse = models.DescribeAPPDataDetailLineChartResponse;
 const DescribeApplicationListResponse = models.DescribeApplicationListResponse;
 const DescribeRoleListResp = models.DescribeRoleListResp;
 const DescribeTeamListInfoResp = models.DescribeTeamListInfoResp;
@@ -249,7 +264,7 @@ const DescribeMNPAllStageVersionsResponse = models.DescribeMNPAllStageVersionsRe
 const DescribeUserListResp = models.DescribeUserListResp;
 const QueryOnlineVersionResp = models.QueryOnlineVersionResp;
 const MNPTypeDefine = models.MNPTypeDefine;
-const DeleteMNPSubscribeMessageTemplateRequest = models.DeleteMNPSubscribeMessageTemplateRequest;
+const DescribeMNGCategoryRequest = models.DescribeMNGCategoryRequest;
 const DescribeSubscribeMessageTemplateLibraryResp = models.DescribeSubscribeMessageTemplateLibraryResp;
 const DescribeApplicationConfigInfosRequest = models.DescribeApplicationConfigInfosRequest;
 const CreateTeamMemberInfoReq = models.CreateTeamMemberInfoReq;
@@ -257,8 +272,10 @@ const DownloadApplicationConfigResp = models.DownloadApplicationConfigResp;
 const CreateUserResponse = models.CreateUserResponse;
 const CreateMNPSecretKeyResponse = models.CreateMNPSecretKeyResponse;
 const RemoveMNGResponse = models.RemoveMNGResponse;
+const DescribeMNPPaymentApprovalInfoResponse = models.DescribeMNPPaymentApprovalInfoResponse;
 const CategoryItem = models.CategoryItem;
-const DescribeMNGCategoryRequest = models.DescribeMNGCategoryRequest;
+const DeleteMNPSubscribeMessageTemplateRequest = models.DeleteMNPSubscribeMessageTemplateRequest;
+const RequestPaymentEnableRequest = models.RequestPaymentEnableRequest;
 const DescribeMNGReleasedVersionHistoryRequest = models.DescribeMNGReleasedVersionHistoryRequest;
 const ProcessMNPApprovalRequest = models.ProcessMNPApprovalRequest;
 const DescribeMNGSensitiveAPIPermissionApprovalData = models.DescribeMNGSensitiveAPIPermissionApprovalData;
@@ -266,6 +283,7 @@ const DescribeMNPListResp = models.DescribeMNPListResp;
 const DescribeMNPDomainACLRequest = models.DescribeMNPDomainACLRequest;
 const DescribeMNGRetentionDataResponse = models.DescribeMNGRetentionDataResponse;
 const DescribeMNGPaymentLineChartResponse = models.DescribeMNGPaymentLineChartResponse;
+const MerchantBindApprovalResp = models.MerchantBindApprovalResp;
 const DescribeMNGAccessAnalysisOverviewRequest = models.DescribeMNGAccessAnalysisOverviewRequest;
 const DescribeUserResponse = models.DescribeUserResponse;
 const DisableApplicationSensitiveAPIRequest = models.DisableApplicationSensitiveAPIRequest;
@@ -289,10 +307,13 @@ const DescribeMNGSubscribeMessageTemplateDetailResp = models.DescribeMNGSubscrib
 const CreateMNGDomainACLResponse = models.CreateMNGDomainACLResponse;
 const AnalysisAdvertOverview = models.AnalysisAdvertOverview;
 const AdTrendChart = models.AdTrendChart;
+const ApprovePaymentMerchantBindingResponse = models.ApprovePaymentMerchantBindingResponse;
 const DescribeMNGActiveUserRealTimeStatisticsResponse = models.DescribeMNGActiveUserRealTimeStatisticsResponse;
 const ResetMNGAppSecretResponse = models.ResetMNGAppSecretResponse;
 const DescribeMNGSubscribeMessageTemplateLibraryListResp = models.DescribeMNGSubscribeMessageTemplateLibraryListResp;
 const CreateMNPVersionResponse = models.CreateMNPVersionResponse;
+const DescribeMNPApprovalListResp = models.DescribeMNPApprovalListResp;
+const ApproveMNPPaymentOpenRes = models.ApproveMNPPaymentOpenRes;
 const DescribeMNPActiveUserRealTimeStatisticsResponse = models.DescribeMNPActiveUserRealTimeStatisticsResponse;
 const ModifyMNPResponse = models.ModifyMNPResponse;
 const DescribeMNPPageAnalysisDetailResponse = models.DescribeMNPPageAnalysisDetailResponse;
@@ -301,6 +322,7 @@ const DescribeMNGAppSecretResp = models.DescribeMNGAppSecretResp;
 const BooleanInfo = models.BooleanInfo;
 const DescribeTeamListRequest = models.DescribeTeamListRequest;
 const DescribeMNPApprovalListResponse = models.DescribeMNPApprovalListResponse;
+const RequestPaymentMerchantBindingRequest = models.RequestPaymentMerchantBindingRequest;
 const DescribeMNGSubscribeMessageTemplateLibraryKeywordInfoResp = models.DescribeMNGSubscribeMessageTemplateLibraryKeywordInfoResp;
 const CreateMNGAppSecretResp = models.CreateMNGAppSecretResp;
 const AccessAnalysisOverview = models.AccessAnalysisOverview;
@@ -321,6 +343,7 @@ const DescribeApplicationSensitiveAPIListRequest = models.DescribeApplicationSen
 const ModifyMNPAppSecretStatusResponse = models.ModifyMNPAppSecretStatusResponse;
 const RemoveMNGRequest = models.RemoveMNGRequest;
 const DescribeAdvertisingOverviewResponse = models.DescribeAdvertisingOverviewResponse;
+const RequestPaymentMerchantBindingResponse = models.RequestPaymentMerchantBindingResponse;
 const CreateApplicationSensitiveAPIReq = models.CreateApplicationSensitiveAPIReq;
 const CreateMNGVersionResponse = models.CreateMNGVersionResponse;
 const DescribeMNGSensitiveAPIPermissionApprovalResponse = models.DescribeMNGSensitiveAPIPermissionApprovalResponse;
@@ -338,6 +361,7 @@ const ModifyApplicationConfigResponse = models.ModifyApplicationConfigResponse;
 const DescribeMNPReportDetailResponse = models.DescribeMNPReportDetailResponse;
 const DescribePaymentDataOverviewRequest = models.DescribePaymentDataOverviewRequest;
 const CreateMNPSensitiveAPIPermissionApprovalRequest = models.CreateMNPSensitiveAPIPermissionApprovalRequest;
+const Overview = models.Overview;
 const DeleteMNGSubscribeMessageTemplateRequest = models.DeleteMNGSubscribeMessageTemplateRequest;
 const DescribeApplicationListData = models.DescribeApplicationListData;
 const DescribeApplicationMNPInfoResp = models.DescribeApplicationMNPInfoResp;
@@ -359,7 +383,7 @@ const ConfigureMNGPreviewResponse = models.ConfigureMNGPreviewResponse;
 const DescribeMNPReportDataLineChartRequest = models.DescribeMNPReportDataLineChartRequest;
 const DescribeMNPSensitiveAPIPermissionApprovalListResp = models.DescribeMNPSensitiveAPIPermissionApprovalListResp;
 const DescribeMNGSubscribeMessageTemplateLibraryInfoResp = models.DescribeMNGSubscribeMessageTemplateLibraryInfoResp;
-const DescribeMNGAllStageVersionsRequest = models.DescribeMNGAllStageVersionsRequest;
+const ChangePaymentBoundMerchantRequest = models.ChangePaymentBoundMerchantRequest;
 const DescribeMNPSensitiveAPIPermissionApprovalListRequest = models.DescribeMNPSensitiveAPIPermissionApprovalListRequest;
 const DescribeMNGListRequest = models.DescribeMNGListRequest;
 const DescribeMNGAdvertisingOverviewRequest = models.DescribeMNGAdvertisingOverviewRequest;
@@ -369,6 +393,7 @@ const RollbackMNGVersionResponse = models.RollbackMNGVersionResponse;
 const DescribeMNPAllStageVersionsRequest = models.DescribeMNPAllStageVersionsRequest;
 const CreateMNPSecretKeyResp = models.CreateMNPSecretKeyResp;
 const DescribeUserRequest = models.DescribeUserRequest;
+const ChangePaymentV2BindMerchantRes = models.ChangePaymentV2BindMerchantRes;
 const ModifyGlobalDomainRequest = models.ModifyGlobalDomainRequest;
 const ModifyTeamMemberResponse = models.ModifyTeamMemberResponse;
 const AddTeamMemberResponse = models.AddTeamMemberResponse;
@@ -380,6 +405,7 @@ const DescribeMNGDomainACLRequest = models.DescribeMNGDomainACLRequest;
 const CreateApplicationSensitiveAPIRequest = models.CreateApplicationSensitiveAPIRequest;
 const ReleaseMNPVersionRequest = models.ReleaseMNPVersionRequest;
 const DescribeMNPResponse = models.DescribeMNPResponse;
+const RequestPaymentEnableResponse = models.RequestPaymentEnableResponse;
 const DescribeMNPSubscribeMessageTemplateLibraryRequest = models.DescribeMNPSubscribeMessageTemplateLibraryRequest;
 const DescribeAPPDataOverviewRequest = models.DescribeAPPDataOverviewRequest;
 const DescribeMNGDomainACLResponse = models.DescribeMNGDomainACLResponse;
@@ -392,6 +418,7 @@ const ModifyApplicationRequest = models.ModifyApplicationRequest;
 const DescribeMNPSubscribeMessageTemplateDetailResp = models.DescribeMNPSubscribeMessageTemplateDetailResp;
 const CreateMNGRequest = models.CreateMNGRequest;
 const DescribeTempSecret4UploadFile2CosRequest = models.DescribeTempSecret4UploadFile2CosRequest;
+const UnbindMNPPaymentMerchantRequest = models.UnbindMNPPaymentMerchantRequest;
 const CreateMNGSubscribeMessageTemplateResponse = models.CreateMNGSubscribeMessageTemplateResponse;
 const DescribeApplicationRequest = models.DescribeApplicationRequest;
 const DescribeMNPDomainACLResponse = models.DescribeMNPDomainACLResponse;
@@ -405,6 +432,7 @@ const ResetMNGAppSecretResp = models.ResetMNGAppSecretResp;
 const DescribeMNPAppSecretResponse = models.DescribeMNPAppSecretResponse;
 const StringData = models.StringData;
 const MAULineChartData = models.MAULineChartData;
+const AgeRatingItemReq = models.AgeRatingItemReq;
 const DescribeMNPReleasedVersionHistoryResponse = models.DescribeMNPReleasedVersionHistoryResponse;
 const ApprovalItem = models.ApprovalItem;
 const ReportDataResult = models.ReportDataResult;
@@ -472,6 +500,17 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
+     * This API is used to allow the superapp to actively disable mini program payment.
+     * @param {DisableMNPPaymentRequest} req
+     * @param {function(string, DisableMNPPaymentResponse):void} cb
+     * @public
+     */
+    DisableMNPPayment(req, cb) {
+        let resp = new DisableMNPPaymentResponse();
+        this.request("DisableMNPPayment", req, resp, cb);
+    }
+
+    /**
      * This API is used to query an overview of mini game ad metrics within a specified date range.
      * @param {DescribeMNGAdvertisingOverviewRequest} req
      * @param {function(string, DescribeMNGAdvertisingOverviewResponse):void} cb
@@ -480,6 +519,17 @@ class TcsasClient extends AbstractClient {
     DescribeMNGAdvertisingOverview(req, cb) {
         let resp = new DescribeMNGAdvertisingOverviewResponse();
         this.request("DescribeMNGAdvertisingOverview", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the merchant information of a mini program.
+     * @param {QueryMNPMerchantInfoRequest} req
+     * @param {function(string, QueryMNPMerchantInfoResponse):void} cb
+     * @public
+     */
+    QueryMNPMerchantInfo(req, cb) {
+        let resp = new QueryMNPMerchantInfoResponse();
+        this.request("QueryMNPMerchantInfo", req, resp, cb);
     }
 
     /**
@@ -568,6 +618,17 @@ class TcsasClient extends AbstractClient {
     DescribeMNPSubscribeMessageTemplate(req, cb) {
         let resp = new DescribeMNPSubscribeMessageTemplateResponse();
         this.request("DescribeMNPSubscribeMessageTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to allow a mini program team to actively unbind the payment merchant.
+     * @param {UnbindMNPPaymentMerchantRequest} req
+     * @param {function(string, UnbindMNPPaymentMerchantResponse):void} cb
+     * @public
+     */
+    UnbindMNPPaymentMerchant(req, cb) {
+        let resp = new UnbindMNPPaymentMerchantResponse();
+        this.request("UnbindMNPPaymentMerchant", req, resp, cb);
     }
 
     /**
@@ -689,6 +750,17 @@ class TcsasClient extends AbstractClient {
     DescribeTempSecret4UploadFile2Cos(req, cb) {
         let resp = new DescribeTempSecret4UploadFile2CosResponse();
         this.request("DescribeTempSecret4UploadFile2Cos", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the domain allowlist or blocklist.
+     * @param {ModifyGlobalDomainRequest} req
+     * @param {function(string, ModifyGlobalDomainResponse):void} cb
+     * @public
+     */
+    ModifyGlobalDomain(req, cb) {
+        let resp = new ModifyGlobalDomainResponse();
+        this.request("ModifyGlobalDomain", req, resp, cb);
     }
 
     /**
@@ -945,6 +1017,17 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
+     * This API is used to allow the superapp to actively unbind the payment merchant.
+     * @param {UnbindPaymentMerchantRequest} req
+     * @param {function(string, UnbindPaymentMerchantResponse):void} cb
+     * @public
+     */
+    UnbindPaymentMerchant(req, cb) {
+        let resp = new UnbindPaymentMerchantResponse();
+        this.request("UnbindPaymentMerchant", req, resp, cb);
+    }
+
+    /**
      * This API is used to edit the mini game information.
      * @param {ModifyMNGRequest} req
      * @param {function(string, ModifyMNGResponse):void} cb
@@ -1162,6 +1245,17 @@ class TcsasClient extends AbstractClient {
     CreateApplicationConfig(req, cb) {
         let resp = new CreateApplicationConfigResponse();
         this.request("CreateApplicationConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to request the activation of mini program payment.
+     * @param {RequestPaymentEnableRequest} req
+     * @param {function(string, RequestPaymentEnableResponse):void} cb
+     * @public
+     */
+    RequestPaymentEnable(req, cb) {
+        let resp = new RequestPaymentEnableResponse();
+        this.request("RequestPaymentEnable", req, resp, cb);
     }
 
     /**
@@ -1517,14 +1611,14 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the domain allowlist or blocklist.
-     * @param {ModifyGlobalDomainRequest} req
-     * @param {function(string, ModifyGlobalDomainResponse):void} cb
+     * This API is used to query the mini program payment approval information.
+     * @param {DescribeMNPPaymentApprovalInfoRequest} req
+     * @param {function(string, DescribeMNPPaymentApprovalInfoResponse):void} cb
      * @public
      */
-    ModifyGlobalDomain(req, cb) {
-        let resp = new ModifyGlobalDomainResponse();
-        this.request("ModifyGlobalDomain", req, resp, cb);
+    DescribeMNPPaymentApprovalInfo(req, cb) {
+        let resp = new DescribeMNPPaymentApprovalInfoResponse();
+        this.request("DescribeMNPPaymentApprovalInfo", req, resp, cb);
     }
 
     /**
@@ -1550,6 +1644,17 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
+     * This API is used to allow the superapp to approve the payment merchant binding request of a mini program team.
+     * @param {ApprovePaymentMerchantBindingRequest} req
+     * @param {function(string, ApprovePaymentMerchantBindingResponse):void} cb
+     * @public
+     */
+    ApprovePaymentMerchantBinding(req, cb) {
+        let resp = new ApprovePaymentMerchantBindingResponse();
+        this.request("ApprovePaymentMerchantBinding", req, resp, cb);
+    }
+
+    /**
      * This API is used to query a list of superapps.
      * @param {DescribeApplicationListRequest} req
      * @param {function(string, DescribeApplicationListResponse):void} cb
@@ -1558,6 +1663,17 @@ class TcsasClient extends AbstractClient {
     DescribeApplicationList(req, cb) {
         let resp = new DescribeApplicationListResponse();
         this.request("DescribeApplicationList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to allow the superapp to approve the activation of mini program payment.
+     * @param {ApproveMNPPaymentEnableRequest} req
+     * @param {function(string, ApproveMNPPaymentEnableResponse):void} cb
+     * @public
+     */
+    ApproveMNPPaymentEnable(req, cb) {
+        let resp = new ApproveMNPPaymentEnableResponse();
+        this.request("ApproveMNPPaymentEnable", req, resp, cb);
     }
 
     /**
@@ -1836,6 +1952,17 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
+     * This API is used to change the bound payment merchant.
+     * @param {ChangePaymentBoundMerchantRequest} req
+     * @param {function(string, ChangePaymentBoundMerchantResponse):void} cb
+     * @public
+     */
+    ChangePaymentBoundMerchant(req, cb) {
+        let resp = new ChangePaymentBoundMerchantResponse();
+        this.request("ChangePaymentBoundMerchant", req, resp, cb);
+    }
+
+    /**
      * This API is used to reset a mini game secret key.
      * @param {ResetMNGAppSecretRequest} req
      * @param {function(string, ResetMNGAppSecretResponse):void} cb
@@ -1899,6 +2026,17 @@ class TcsasClient extends AbstractClient {
     ProcessMNPSensitiveAPIPermissionApproval(req, cb) {
         let resp = new ProcessMNPSensitiveAPIPermissionApprovalResponse();
         this.request("ProcessMNPSensitiveAPIPermissionApproval", req, resp, cb);
+    }
+
+    /**
+     * This API is used to request the binding of a payment merchant to a team.
+     * @param {RequestPaymentMerchantBindingRequest} req
+     * @param {function(string, RequestPaymentMerchantBindingResponse):void} cb
+     * @public
+     */
+    RequestPaymentMerchantBinding(req, cb) {
+        let resp = new RequestPaymentMerchantBindingResponse();
+        this.request("RequestPaymentMerchantBinding", req, resp, cb);
     }
 
     /**

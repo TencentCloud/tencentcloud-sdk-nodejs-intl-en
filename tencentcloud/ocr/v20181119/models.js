@@ -1210,14 +1210,15 @@ class PermitOCRResponse extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Warning information for the document. This field is only valid for international site requests. Warning codes:
--9101: Incomplete card border warning
--9102: Photocopied card warning
--9103: Recaptured card warning
--9104: Photoshopped card warning
--9107: Reflective card warning
--9108: Blurry image warning
--9109: Warning capability not enabled
+         * Card Warning Information
+
+-9101 Alarm for covered certificate
+-9102 Alarm for photocopied certificate
+-9103 Alarm for photographed certificate
+-9104 Alarm for tamper certificate
+-9107 Alarm for reflective certificate
+-9108 Alarm for blurry certificate 
+-9109 This capability is not enabled. Please contact customer support to activate the alert service.
          * @type {Array.<number> || null}
          */
         this.WarnCardInfos = null;
@@ -3143,13 +3144,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         /**
          * Card Warning Information
 
--9101 Alarm for covered certificate,
--9102 Alarm for photocopied certificate,
--9103 Alarm for photographed certificate,
--9104 Alarm for PS certificate,
--9107 Alarm for reflective certificate,
--9108 Alarm for blurry image,
--9109 This capability is not enabled.
+-9101 Alarm for covered certificate
+-9102 Alarm for photocopied certificate
+-9103 Alarm for photographed certificate
+-9104 Alarm for tamper certificate
+-9107 Alarm for reflective certificate
+-9108 Alarm for blurry certificate 
+-9109 This capability is not enabled. Please contact customer support to activate the alert service.
          * @type {Array.<number> || null}
          */
         this.WarnCardInfos = null;
@@ -5012,15 +5013,15 @@ class RecognizeIndonesiaIDCardOCRResponse extends  AbstractModel {
         /**
          * Card Warning Information
 
--9101 Alarm for covered certificate,
--9102 Alarm for photocopied certificate,
--9103 Alarm for photographed certificate,
--9104 Alarm for PS certificate,
--9107 Alarm for reflective certificate,
--9108 Alarm for blurry image,
--8101 Alarm for document information format verification,
--8102 Alarm for document information consistency verification,
--9109 This capability is not enabled.
+-9101 Alarm for covered certificate
+-9102 Alarm for photocopied certificate
+-9103 Alarm for photographed certificate
+-9104 Alarm for tamper certificate
+-9107 Alarm for reflective certificate
+-9108 Alarm for blurry image
+-8101 Alarm for document information format verification
+-8102 Alarm for document information consistency verification
+-9109 This capability is not enabled. Please contact customer support to activate the alert service
          * @type {Array.<number> || null}
          */
         this.WarnCardInfos = null;
@@ -5728,14 +5729,15 @@ class RecognizeMainlandIDCardOCRResponse extends  AbstractModel {
         this.ValidDate = null;
 
         /**
-         * Warning information for the ID card. Valid warning codes: 
--9101 (incomplete card border), 
--9102 (photocopied document), 
--9103 (re-photographed document), 
--9104 (PS-altered document), 
--9107 (reflective document), 
--9108 (blurry image), 
--9109 (warning capability not enabled).
+         * Card Warning Information
+
+-9101 Alarm for covered certificate
+-9102 Alarm for photocopied certificate
+-9103 Alarm for photographed certificate
+-9104 Alarm for tamper certificate
+-9107 Alarm for reflective certificate
+-9108 Alarm for blurry certificate 
+-9109 This capability is not enabled. Please contact customer support to activate the alert service.
          * @type {Array.<number> || null}
          */
         this.WarnCardInfos = null;
@@ -5871,12 +5873,12 @@ Note: Only supported for the back side of the Mainland Travel Permit for Hong Ko
         this.MainlandTravelPermitBackInfos = null;
 
         /**
-         * Warning information for the document. This field is only valid for international site requests. 
-Warning codes: 
--9102: photocopy warning; 
--9103: recapture warning; 
--9104: Photoshopped document warning; 
--9109: warning capability not enabled.
+         * Card Warning Information
+
+-9102 Alarm for photocopied certificate
+-9103 Alarm for photographed certificate
+-9104 Alarm for tamper certificate
+-9109 This capability is not enabled.This capability is not enabled. Please contact customer support to activate the alert service.
          * @type {Array.<number> || null}
          */
         this.WarnCardInfos = null;

@@ -17660,7 +17660,7 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b></p>
+         * <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b></p>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -17684,19 +17684,19 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.Procedure = null;
 
         /**
-         * <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the <a href="/document/product/266/31772">Create Category</a> API.</p><li>Default value: 0, indicating other categories.</li>Valid at that time only when IsPersistence is 1.
+         * <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the <a href="/document/product/266/31772?from_cn_redirect=1">Create Category</a> API.</p><li>Default value: 0, indicating other categories.</li>Valid at that time only when IsPersistence is 1.
          * @type {number || null}
          */
         this.ClassId = null;
 
         /**
-         * <p>Source context. This is used to pass user request information. The <a href="/document/product/266/7830">upload completion callback</a> returns the value of this field. The maximum length is 250 characters. Valid only when IsPersistence is 1.</p>
+         * <p>Source context. This is used to pass user request information. The <a href="/document/product/266/7830?from_cn_redirect=1">upload completion callback</a> returns the value of this field. The maximum length is 250 characters. Valid only when IsPersistence is 1.</p>
          * @type {string || null}
          */
         this.SourceContext = null;
 
         /**
-         * <p>Session context. This is used to pass through user request information. When specifying the Procedure parameter, the <a href="/document/product/266/9636">task flow status change callback</a> returns the value of this field. The maximum length is 1000 characters. Valid only when IsPersistence is 1.</p>
+         * <p>Session context. This is used to pass through user request information. When specifying the Procedure parameter, the <a href="/document/product/266/9636?from_cn_redirect=1">task flow status change callback</a> returns the value of this field. The maximum length is 1000 characters. Valid only when IsPersistence is 1.</p>
          * @type {string || null}
          */
         this.SessionContext = null;
@@ -24775,7 +24775,7 @@ class DescribeAigcApiTokensRequest extends  AbstractModel {
         super();
 
         /**
-         * <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. For customers who activate on-demand services from December 25, 2023, to access resources in on-demand applications (whether the default application or a newly created application), you must fill this <b>field</b> with the application ID.</b></p>
+         * <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services from December 25, 2023, to access resources in on-demand applications (whether the default application or a newly created application), you must fill this <b>field</b> with the application ID.</b></p>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -45675,7 +45675,7 @@ class PullUploadRequest extends  AbstractModel {
         this.MediaType = null;
 
         /**
-         * <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. Customers who activate on-demand services after December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
+         * <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services after December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -45741,7 +45741,7 @@ class PullUploadRequest extends  AbstractModel {
         this.ExtInfo = null;
 
         /**
-         * <p>Source context. This is used to pass through user request information. The <a href="/document/product/266/7830">upload completion callback</a> returns the value of this field. The maximum length is 250 characters.</p>
+         * <p>Source context. This is used to pass through user request information. The <a href="/document/product/266/7830?from_cn_redirect=1">upload completion callback</a> returns the value of this field. The maximum length is 250 characters.</p>
          * @type {string || null}
          */
         this.SourceContext = null;
@@ -49859,7 +49859,7 @@ class SimpleHlsClipRequest extends  AbstractModel {
         this.Url = null;
 
         /**
-         * <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b></p>
+         * <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b></p>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -49895,19 +49895,19 @@ class SimpleHlsClipRequest extends  AbstractModel {
         this.Procedure = null;
 
         /**
-         * <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the <a href="/document/product/266/31772">create category</a> API.</p><li>Default value: 0, indicating other categories.</li>Valid only when IsPersistence is 1.
+         * <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the <a href="/document/product/266/31772?from_cn_redirect=1">create category</a> API.</p><li>Default value: 0, indicating other categories.</li>Valid only when IsPersistence is 1.
          * @type {number || null}
          */
         this.ClassId = null;
 
         /**
-         * <p>Source context. This is used to pass through user request information. The <a href="/document/product/266/7830">upload completion callback</a> returns the value of this field. The maximum length is 250 characters. Valid when IsPersistence is 1.</p>
+         * <p>Source context. This is used to pass through user request information. The <a href="/document/product/266/7830?from_cn_redirect=1">upload completion callback</a> returns the value of this field. The maximum length is 250 characters. Valid when IsPersistence is 1.</p>
          * @type {string || null}
          */
         this.SourceContext = null;
 
         /**
-         * <p>Session context. This is used to pass through user request information. When specifying the Procedure parameter, the <a href="/document/product/266/9636">task flow status change callback</a> returns the value of this field. The maximum length is 1000 characters. Valid only when IsPersistence is 1.</p>
+         * <p>Session context. This is used to pass through user request information. When specifying the Procedure parameter, the <a href="/document/product/266/9636?from_cn_redirect=1">task flow status change callback</a> returns the value of this field. The maximum length is 1000 characters. Valid only when IsPersistence is 1.</p>
          * @type {string || null}
          */
         this.SessionContext = null;
@@ -56808,7 +56808,7 @@ class UpdateAigcApiTokenRequest extends  AbstractModel {
         super();
 
         /**
-         * <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. For customers who activate on-demand services from December 25, 2023, to access resources in on-demand applications (whether it is the default application or a newly created application), you must fill in this field with the application ID.</b></p>
+         * <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services from December 25, 2023, to access resources in on-demand applications (whether it is the default application or a newly created application), you must fill in this field with the application ID.</b></p>
          * @type {number || null}
          */
         this.SubAppId = null;

@@ -3614,7 +3614,7 @@ When this parameter is set to `true`, the Base64-encoded value of the profile ph
 }
 
 /**
- * 
+ * Passport Information Page Content
  * @class
  */
 class PassportRecognizeInfos extends  AbstractModel {
@@ -3622,94 +3622,134 @@ class PassportRecognizeInfos extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Document type, obtained from passport visual zone
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * Issuing country, obtained from passport visual zone
          * @type {string || null}
          */
         this.IssuingCountry = null;
 
         /**
-         * 
+         * Unique serial number / identification number of the passport, obtained from passport visual zone
          * @type {string || null}
          */
         this.PassportID = null;
 
         /**
-         * 
+         * Last name, obtained from passport visual zone
          * @type {string || null}
          */
         this.Surname = null;
 
         /**
-         * 
+         * First name, obtained from passport visual zone
          * @type {string || null}
          */
         this.GivenName = null;
 
         /**
-         * 
+         * Full name, obtained from passport visual zone
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Nationality, obtained from passport visual zone
          * @type {string || null}
          */
         this.Nationality = null;
 
         /**
-         * 
+         * Date of birth, obtained from passport visual zone
          * @type {string || null}
          */
         this.DateOfBirth = null;
 
         /**
-         * 
+         * Gender, obtained from passport visual zone
          * @type {string || null}
          */
         this.Sex = null;
 
         /**
-         * 
+         * Date of issue, obtained from passport visual zone
          * @type {string || null}
          */
         this.DateOfIssuance = null;
 
         /**
-         * 
+         * Passport expiry date, obtained from passport visual zone
          * @type {string || null}
          */
         this.DateOfExpiration = null;
 
         /**
-         * 
+         * Holder's signature, obtained from passport visual zone
+(Note: Only returned for PRC passport)
          * @type {string || null}
          */
         this.Signature = null;
 
         /**
-         * 
+         * Place of issue, obtained from passport visual zone
+(Note: Only returned for PRC passport)
          * @type {string || null}
          */
         this.IssuePlace = null;
 
         /**
-         * 
+         * Issuing Authority, obtained from passport visual zone
+(Note: Only returned for PRC passport)
+
          * @type {string || null}
          */
         this.IssuingAuthority = null;
 
         /**
-         * 
+         * Place of birth, obtained from passport visual zone
          * @type {string || null}
          */
         this.BirthPlace = null;
+
+        /**
+         * Passport flag, obtained from passport visual zone
+         * @type {string || null}
+         */
+        this.PassportFlag = null;
+
+        /**
+         * Middle name, obtained from passport visual zone
+         * @type {string || null}
+         */
+        this.MiddleName = null;
+
+        /**
+         * Father's name, obtained from passport visual zone
+         * @type {string || null}
+         */
+        this.FatherName = null;
+
+        /**
+         * Mother's name, obtained from passport visual zone
+         * @type {string || null}
+         */
+        this.MotherName = null;
+
+        /**
+         * Title, obtained from passport visual zone
+         * @type {string || null}
+         */
+        this.Title = null;
+
+        /**
+         * Name suffix, obtained from passport visual zone
+         * @type {string || null}
+         */
+        this.Postname = null;
 
     }
 
@@ -3735,6 +3775,12 @@ class PassportRecognizeInfos extends  AbstractModel {
         this.IssuePlace = 'IssuePlace' in params ? params.IssuePlace : null;
         this.IssuingAuthority = 'IssuingAuthority' in params ? params.IssuingAuthority : null;
         this.BirthPlace = 'BirthPlace' in params ? params.BirthPlace : null;
+        this.PassportFlag = 'PassportFlag' in params ? params.PassportFlag : null;
+        this.MiddleName = 'MiddleName' in params ? params.MiddleName : null;
+        this.FatherName = 'FatherName' in params ? params.FatherName : null;
+        this.MotherName = 'MotherName' in params ? params.MotherName : null;
+        this.Title = 'Title' in params ? params.Title : null;
+        this.Postname = 'Postname' in params ? params.Postname : null;
 
     }
 }
@@ -4542,13 +4588,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PassportRecognizeInfos = null;
 
         /**
-         * Warning information for the document. This field applies only to international site requests and will return an empty array for domestic site requests. Valid warning codes: 
--9101 (incomplete card border), 
--9102 (photocopied document), 
--9103 (re-photographed document), -9104 (PS-altered document), 
--9107 (reflective document), 
--9108 (blurry image), 
--9109 (warning capability not enabled).
+         * Card Warning Information
+
+-9101 Alarm for covered certificate
+-9102 Alarm for photocopied certificate
+-9103 Alarm for photographed certificate
+-9104 Alarm for tamper certificate
+-9107 Alarm for reflective certificate
+-9108 Alarm for blurry certificate 
+-9109 This capability is not enabled. Please contact customer support to activate the alert service.
          * @type {Array.<number> || null}
          */
         this.WarnCardInfos = null;

@@ -35,6 +35,7 @@ const RuntimeConfig = models.RuntimeConfig;
 const Label = models.Label;
 const HealthCheckPolicyBinding = models.HealthCheckPolicyBinding;
 const CreateHealthCheckPolicyRequest = models.CreateHealthCheckPolicyRequest;
+const ModifyClusterMachineRequest = models.ModifyClusterMachineRequest;
 const InstanceExtraArgs = models.InstanceExtraArgs;
 const MachineUpgradeSettings = models.MachineUpgradeSettings;
 const UpdateNativeNodePoolParam = models.UpdateNativeNodePoolParam;
@@ -44,6 +45,7 @@ const Tag = models.Tag;
 const MachineSetScaling = models.MachineSetScaling;
 const ModifyNodePoolRequest = models.ModifyNodePoolRequest;
 const Annotation = models.Annotation;
+const ModifyClusterMachineResponse = models.ModifyClusterMachineResponse;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
 const DeleteHealthCheckPolicyResponse = models.DeleteHealthCheckPolicyResponse;
 const TagSpecification = models.TagSpecification;
@@ -90,6 +92,17 @@ class TkeClient extends AbstractClient {
         super("tke.intl.tencentcloudapi.com", "2022-05-01", credential, region, profile);
     }
     
+    /**
+     * This API is used to modify a native node.
+     * @param {ModifyClusterMachineRequest} req
+     * @param {function(string, ModifyClusterMachineResponse):void} cb
+     * @public
+     */
+    ModifyClusterMachine(req, cb) {
+        let resp = new ModifyClusterMachineResponse();
+        this.request("ModifyClusterMachine", req, resp, cb);
+    }
+
     /**
      * This API is used to query a TKE node pool list.
      * @param {DescribeNodePoolsRequest} req

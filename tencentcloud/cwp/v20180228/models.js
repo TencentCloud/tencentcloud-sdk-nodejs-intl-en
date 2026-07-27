@@ -60548,7 +60548,7 @@ class DescribeSkillInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * skill information list
+         * <p>skill information list</p>
          * @type {Array.<SkillInfo> || null}
          */
         this.SkillInfoList = null;
@@ -64070,7 +64070,7 @@ class DescribeSkillInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * Event ID
+         * <p>Event ID.</p>
          * @type {Array.<number> || null}
          */
         this.Ids = null;

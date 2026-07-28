@@ -15018,8 +15018,8 @@ class AnalyseConditions extends  AbstractModel {
 cashPayAmount: Cash 
 incentivePayAmount: Bonus 
 voucherPayAmount: Coupon 
-tax: tax. 
-costBeforeTax: pre-tax price
+tax: tax
+amountBeforeTax: pre-tax price
          * @type {string || null}
          */
         this.FeeType = null;

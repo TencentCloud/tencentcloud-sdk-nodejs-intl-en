@@ -384,6 +384,12 @@ class CreateAigcVideoRedrawTaskRequest extends  AbstractModel {
         this.FileInfo = null;
 
         /**
+         * <p>Parameters for the AIGC video conversion task.</p>
+         * @type {AigcVideoRedrawTaskInfo || null}
+         */
+        this.TaskInfo = null;
+
+        /**
          * <p>Output media file configuration for the AIGC video conversion task.</p>
          * @type {AigcVideoRedrawOutputConfig || null}
          */
@@ -428,6 +434,12 @@ class CreateAigcVideoRedrawTaskRequest extends  AbstractModel {
             let obj = new AigcVideoRedrawTaskInputFileInfo();
             obj.deserialize(params.FileInfo)
             this.FileInfo = obj;
+        }
+
+        if (params.TaskInfo) {
+            let obj = new AigcVideoRedrawTaskInfo();
+            obj.deserialize(params.TaskInfo)
+            this.TaskInfo = obj;
         }
 
         if (params.OutputConfig) {

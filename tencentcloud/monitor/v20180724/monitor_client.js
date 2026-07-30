@@ -228,6 +228,7 @@ const DescribeBindingPolicyObjectListInstanceGroup = models.DescribeBindingPolic
 const ModifyAlarmPolicyTasksRequest = models.ModifyAlarmPolicyTasksRequest;
 const GetPrometheusAgentManagementCommandRequest = models.GetPrometheusAgentManagementCommandRequest;
 const DescribeBindingPolicyObjectListDimension = models.DescribeBindingPolicyObjectListDimension;
+const NoticeOnCallUsersInfo = models.NoticeOnCallUsersInfo;
 const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition;
 const GetPrometheusAgentManagementCommandResponse = models.GetPrometheusAgentManagementCommandResponse;
 const MetricData = models.MetricData;
@@ -259,6 +260,7 @@ const GetMonitorDataRequest = models.GetMonitorDataRequest;
 const CreateRecordingRuleRequest = models.CreateRecordingRuleRequest;
 const ModifyPrometheusConfigRequest = models.ModifyPrometheusConfigRequest;
 const DescribeGrafanaEnvironmentsResponse = models.DescribeGrafanaEnvironmentsResponse;
+const DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDResponse = models.DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDResponse;
 const DescribePolicyConditionListRequest = models.DescribePolicyConditionListRequest;
 const DeletePolicyGroupResponse = models.DeletePolicyGroupResponse;
 const DeleteGrafanaInstanceRequest = models.DeleteGrafanaInstanceRequest;
@@ -292,6 +294,7 @@ const DescribeAlarmMetricsRequest = models.DescribeAlarmMetricsRequest;
 const CreateSSOAccountRequest = models.CreateSSOAccountRequest;
 const AlarmPolicyFilter = models.AlarmPolicyFilter;
 const ModifyAlarmPolicyNoticeResponse = models.ModifyAlarmPolicyNoticeResponse;
+const NoticeSendGroup = models.NoticeSendGroup;
 const PrometheusDynamicAPIResponseHTTP = models.PrometheusDynamicAPIResponseHTTP;
 const PrometheusAlertRule = models.PrometheusAlertRule;
 const UnbindPrometheusManagedGrafanaResponse = models.UnbindPrometheusManagedGrafanaResponse;
@@ -420,6 +423,7 @@ const PrometheusScrapeJob = models.PrometheusScrapeJob;
 const AlarmHierarchicalNotice = models.AlarmHierarchicalNotice;
 const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension;
 const DescribePrometheusTempRequest = models.DescribePrometheusTempRequest;
+const DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDRequest = models.DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDRequest;
 const UpdateOnCallFormRequest = models.UpdateOnCallFormRequest;
 const UpdatePrometheusAlertGroupStateResponse = models.UpdatePrometheusAlertGroupStateResponse;
 const CoverStaffInfo = models.CoverStaffInfo;
@@ -427,6 +431,7 @@ const DescribeBasicAlarmListAlarms = models.DescribeBasicAlarmListAlarms;
 const CreateAlarmNoticeResponse = models.CreateAlarmNoticeResponse;
 const Condition = models.Condition;
 const DeleteGrafanaInstanceResponse = models.DeleteGrafanaInstanceResponse;
+const NoticeUserInfo = models.NoticeUserInfo;
 const PrometheusAgentOverview = models.PrometheusAgentOverview;
 const Filter = models.Filter;
 const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
@@ -830,6 +835,17 @@ support the following APIs:
     DeleteAlertRules(req, cb) {
         let resp = new DeleteAlertRulesResponse();
         this.request("DeleteAlertRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the user information configured in the notification template.
+     * @param {DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDRequest} req
+     * @param {function(string, DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDResponse):void} cb
+     * @public
+     */
+    DescribeAlarmNoticeOnCallUsersFromPrometheusAlertID(req, cb) {
+        let resp = new DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDResponse();
+        this.request("DescribeAlarmNoticeOnCallUsersFromPrometheusAlertID", req, resp, cb);
     }
 
     /**

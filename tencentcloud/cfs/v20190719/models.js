@@ -759,7 +759,8 @@ class FileSystemClient extends  AbstractModel {
         this.VpcId = null;
 
         /**
-         * Availability zone name, such as ap-beijing-1. see the region and availability zone list in the description document (https://www.tencentcloud.com/document/api/582/38144?from_cn_redirect=1).
+         * Availability zone name, such as ap-beijing-1. see the region and availability zone list in the description [Introduction
+](https://www.tencentcloud.com/zh/document/product/582/50830)
          * @type {string || null}
          */
         this.Zone = null;
@@ -1568,7 +1569,8 @@ class UpdateCfsFileSystemNameRequest extends  AbstractModel {
         super();
 
         /**
-         * File system ID. obtain it by querying the file system interface (https://www.tencentcloud.com/document/api/582/38170?from_cn_redirect=1).
+         * File system ID. obtain it by querying the file system interface [DescribeCfsFileSystems
+](https://www.tencentcloud.com/zh/document/product/582/34514)
          * @type {string || null}
          */
         this.FileSystemId = null;
@@ -4366,7 +4368,8 @@ class DescribeCfsFileSystemClientsRequest extends  AbstractModel {
         super();
 
         /**
-         * File system ID. obtain it by querying the file system interface (https://www.tencentcloud.com/document/api/582/38170?from_cn_redirect=1).
+         * File system ID. obtain it by querying the file system interface [DescribeCfsFileSystems
+](https://www.tencentcloud.com/zh/document/product/582/34514)
          * @type {string || null}
          */
         this.FileSystemId = null;
@@ -5797,7 +5800,8 @@ class UpdateCfsFileSystemPGroupRequest extends  AbstractModel {
         this.PGroupId = null;
 
         /**
-         * File system ID. obtain it by querying the file system interface (https://www.tencentcloud.com/document/api/582/38170?from_cn_redirect=1).
+         * File system ID. obtain it by querying the file system interface [DescribeCfsFileSystems
+](https://www.tencentcloud.com/zh/document/product/582/34514)
          * @type {string || null}
          */
         this.FileSystemId = null;

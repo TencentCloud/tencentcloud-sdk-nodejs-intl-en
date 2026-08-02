@@ -4726,6 +4726,12 @@ If set to true, the image constraints are:
          */
         this.ReturnHeadImage = null;
 
+        /**
+         * Verification status callback URL. When set, this endpoint will be actively notified with the final verification result upon process completion. Leave blank to disable callbacks. Since callbacks are not fully reliable, a polling mechanism is advised to guarantee retrieval of the final status.
+         * @type {string || null}
+         */
+        this.WebhookUrl = null;
+
     }
 
     /**
@@ -4742,6 +4748,7 @@ If set to true, the image constraints are:
         this.ImageUrlFront = 'ImageUrlFront' in params ? params.ImageUrlFront : null;
         this.ImageUrlBack = 'ImageUrlBack' in params ? params.ImageUrlBack : null;
         this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
+        this.WebhookUrl = 'WebhookUrl' in params ? params.WebhookUrl : null;
 
     }
 }

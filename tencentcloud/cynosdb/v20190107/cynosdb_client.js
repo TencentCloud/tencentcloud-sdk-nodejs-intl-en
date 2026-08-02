@@ -41,6 +41,7 @@ const DescribeClusterParamsResponse = models.DescribeClusterParamsResponse;
 const RefundResourcePackageResponse = models.RefundResourcePackageResponse;
 const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
 const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
+const DescribeBackupOverviewRequest = models.DescribeBackupOverviewRequest;
 const DescribeAuditInstanceListResponse = models.DescribeAuditInstanceListResponse;
 const DescribeVaultBackupClusterInfoResponse = models.DescribeVaultBackupClusterInfoResponse;
 const DescribeSlaveZonesResponse = models.DescribeSlaveZonesResponse;
@@ -216,6 +217,8 @@ const InstanceNetInfo = models.InstanceNetInfo;
 const ModifyClusterDatabaseResponse = models.ModifyClusterDatabaseResponse;
 const InstanceParamItem = models.InstanceParamItem;
 const IsolateLibraDBInstanceRequest = models.IsolateLibraDBInstanceRequest;
+const DescribeVaultsResponse = models.DescribeVaultsResponse;
+const TransferClusterPrepayToPostpayResponse = models.TransferClusterPrepayToPostpayResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const RollbackData = models.RollbackData;
 const UnbindClusterResourcePackagesRequest = models.UnbindClusterResourcePackagesRequest;
@@ -251,17 +254,18 @@ const ServerlessZoneStockInfo = models.ServerlessZoneStockInfo;
 const DbInfo = models.DbInfo;
 const DescribeBackupDownloadUrlRequest = models.DescribeBackupDownloadUrlRequest;
 const InstanceAuditStatus = models.InstanceAuditStatus;
-const DescribeVaultsResponse = models.DescribeVaultsResponse;
+const CopyClusterPasswordComplexityRequest = models.CopyClusterPasswordComplexityRequest;
 const DescribeClusterInstanceGroupsResponse = models.DescribeClusterInstanceGroupsResponse;
 const CreateLibraDBClusterAccountsResponse = models.CreateLibraDBClusterAccountsResponse;
 const MigrateTableItem = models.MigrateTableItem;
 const CreateProxyEndPointResponse = models.CreateProxyEndPointResponse;
 const DescribeSQLExecutionPlanResponse = models.DescribeSQLExecutionPlanResponse;
 const NetAddr = models.NetAddr;
-const CopyClusterPasswordComplexityRequest = models.CopyClusterPasswordComplexityRequest;
+const DescribeBackupOverviewResponse = models.DescribeBackupOverviewResponse;
 const ReplayInstanceAuditLogRequest = models.ReplayInstanceAuditLogRequest;
 const MigrateDBItem = models.MigrateDBItem;
 const RegionInstanceSpecInfo = models.RegionInstanceSpecInfo;
+const TransferClusterPrepayToPostpayRequest = models.TransferClusterPrepayToPostpayRequest;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const InquirePriceCreateRequest = models.InquirePriceCreateRequest;
 const ModifyLibraDBClusterAccountDescriptionRequest = models.ModifyLibraDBClusterAccountDescriptionRequest;
@@ -335,6 +339,7 @@ const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeVaultBackupClusterInfoRequest = models.DescribeVaultBackupClusterInfoRequest;
 const DescribeRollbackTimeRangeResponse = models.DescribeRollbackTimeRangeResponse;
 const DescribeBinlogListByVaultItem = models.DescribeBinlogListByVaultItem;
+const BinlogRegionInfo = models.BinlogRegionInfo;
 const ModifyBackupNameResponse = models.ModifyBackupNameResponse;
 const SwitchClusterZoneResponse = models.SwitchClusterZoneResponse;
 const ProxyConnectionPoolInfo = models.ProxyConnectionPoolInfo;
@@ -468,6 +473,7 @@ const DescribeInstanceSpecsResponse = models.DescribeInstanceSpecsResponse;
 const ModifyAuditServiceResponse = models.ModifyAuditServiceResponse;
 const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
 const ModifyResourcePackageClustersResponse = models.ModifyResourcePackageClustersResponse;
+const BackupVolumeInfo = models.BackupVolumeInfo;
 const InputAccount = models.InputAccount;
 const DescribeSaveBackupClustersRequest = models.DescribeSaveBackupClustersRequest;
 const DescribeLibraDBClusterAccountAllPrivilegesResponse = models.DescribeLibraDBClusterAccountAllPrivilegesResponse;
@@ -536,6 +542,7 @@ const DescribeBackupListRequest = models.DescribeBackupListRequest;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const IntegrateInstanceInfo = models.IntegrateInstanceInfo;
 const SwitchClusterLogBin = models.SwitchClusterLogBin;
+const TransferStoragePrepayToPostpayRequest = models.TransferStoragePrepayToPostpayRequest;
 const ModifyVaultRequest = models.ModifyVaultRequest;
 const ExportInstanceErrorLogsResponse = models.ExportInstanceErrorLogsResponse;
 const DescribeLibraDBClustersRequest = models.DescribeLibraDBClustersRequest;
@@ -555,6 +562,7 @@ const ModifyLibraDBClusterReplicationObjectRequest = models.ModifyLibraDBCluster
 const ModifyClusterPasswordComplexityResponse = models.ModifyClusterPasswordComplexityResponse;
 const AuditInstanceFilters = models.AuditInstanceFilters;
 const ParamInfo = models.ParamInfo;
+const TransferStoragePrepayToPostpayResponse = models.TransferStoragePrepayToPostpayResponse;
 const ModifyClusterParamResponse = models.ModifyClusterParamResponse;
 const SecurityGroup = models.SecurityGroup;
 const SetLibraDBClusterRenewFlagRequest = models.SetLibraDBClusterRenewFlagRequest;
@@ -781,14 +789,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify maintenance time configuration.
-     * @param {ModifyMaintainPeriodConfigRequest} req
-     * @param {function(string, ModifyMaintainPeriodConfigResponse):void} cb
+     * This API is used to query the backup usage overview.
+     * @param {DescribeBackupOverviewRequest} req
+     * @param {function(string, DescribeBackupOverviewResponse):void} cb
      * @public
      */
-    ModifyMaintainPeriodConfig(req, cb) {
-        let resp = new ModifyMaintainPeriodConfigResponse();
-        this.request("ModifyMaintainPeriodConfig", req, resp, cb);
+    DescribeBackupOverview(req, cb) {
+        let resp = new DescribeBackupOverviewResponse();
+        this.request("DescribeBackupOverview", req, resp, cb);
     }
 
     /**
@@ -1716,6 +1724,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to convert a Prepaid Cluster to a postpaid cluster.
+     * @param {TransferClusterPrepayToPostpayRequest} req
+     * @param {function(string, TransferClusterPrepayToPostpayResponse):void} cb
+     * @public
+     */
+    TransferClusterPrepayToPostpay(req, cb) {
+        let resp = new TransferClusterPrepayToPostpayResponse();
+        this.request("TransferClusterPrepayToPostpay", req, resp, cb);
+    }
+
+    /**
      * This API is used to purchase new resource packets.
      * @param {CreateResourcePackageRequest} req
      * @param {function(string, CreateResourcePackageResponse):void} cb
@@ -1768,6 +1787,17 @@ class CynosdbClient extends AbstractClient {
     DeleteLibraDBClusterAccounts(req, cb) {
         let resp = new DeleteLibraDBClusterAccountsResponse();
         this.request("DeleteLibraDBClusterAccounts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify maintenance time configuration.
+     * @param {ModifyMaintainPeriodConfigRequest} req
+     * @param {function(string, ModifyMaintainPeriodConfigResponse):void} cb
+     * @public
+     */
+    ModifyMaintainPeriodConfig(req, cb) {
+        let resp = new ModifyMaintainPeriodConfigResponse();
+        this.request("ModifyMaintainPeriodConfig", req, resp, cb);
     }
 
     /**
@@ -2494,6 +2524,17 @@ class CynosdbClient extends AbstractClient {
     DescribeBackupList(req, cb) {
         let resp = new DescribeBackupListResponse();
         this.request("DescribeBackupList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to convert prepaid storage to postpaid storage.
+     * @param {TransferStoragePrepayToPostpayRequest} req
+     * @param {function(string, TransferStoragePrepayToPostpayResponse):void} cb
+     * @public
+     */
+    TransferStoragePrepayToPostpay(req, cb) {
+        let resp = new TransferStoragePrepayToPostpayResponse();
+        this.request("TransferStoragePrepayToPostpay", req, resp, cb);
     }
 
     /**

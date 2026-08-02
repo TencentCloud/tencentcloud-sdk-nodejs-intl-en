@@ -1324,6 +1324,34 @@ class DescribeParamTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeBackupOverview request structure.
+ * @class
+ */
+class DescribeBackupOverviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * DescribeAuditInstanceList response structure.
  * @class
  */
@@ -4281,16 +4309,22 @@ class ModifyBinlogSaveDaysRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * <p>Cluster ID.</p>
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Binlog retention period in days
+         * <p>Binlog retention days</p>
          * @type {number || null}
          */
         this.BinlogSaveDays = null;
+
+        /**
+         * <p>Cross-region backup retention period</p><p>Unit: Day</p>
+         * @type {number || null}
+         */
+        this.BinlogCrossRegionSaveDays = null;
 
     }
 
@@ -4303,6 +4337,7 @@ class ModifyBinlogSaveDaysRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.BinlogSaveDays = 'BinlogSaveDays' in params ? params.BinlogSaveDays : null;
+        this.BinlogCrossRegionSaveDays = 'BinlogCrossRegionSaveDays' in params ? params.BinlogCrossRegionSaveDays : null;
 
     }
 }
@@ -6063,70 +6098,82 @@ class ProxyNodeInfo extends  AbstractModel {
         super();
 
         /**
-         * Database proxy node ID.
+         * <p>Database Proxy Node ID</p>
          * @type {string || null}
          */
         this.ProxyNodeId = null;
 
         /**
-         * Current node connections, which is not returned by the `DescribeProxyNodes` API.
+         * <p>Current connection number of nodes. This field value does not return in the DescribeProxyNodes API.</p>
          * @type {number || null}
          */
         this.ProxyNodeConnections = null;
 
         /**
-         * CPU of the database proxy node.
+         * <p>Database proxy node cpu</p>
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * Memory of the database proxy node.
+         * <p>Database proxy node memory</p>
          * @type {number || null}
          */
         this.Mem = null;
 
         /**
-         * Status of the database proxy node.
+         * <p>Database Proxy Node Status</p>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Database proxy group ID.
+         * <p>Database Proxy Group ID</p>
          * @type {string || null}
          */
         this.ProxyGroupId = null;
 
         /**
-         * Cluster ID.
+         * <p>Cluster ID.</p>
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * User AppID.
+         * <p>User AppID</p>
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * Region.
+         * <p>Region.</p>
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * AZ.
+         * <p>AZ.</p>
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * Database proxy node name.
+         * <p>Database Proxy Node Name</p>
          * @type {string || null}
          */
         this.OssProxyNodeName = null;
+
+        /**
+         * <p>Creation time.</p>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * <p>Update time.</p>
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
 
     }
 
@@ -6148,6 +6195,8 @@ class ProxyNodeInfo extends  AbstractModel {
         this.Region = 'Region' in params ? params.Region : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.OssProxyNodeName = 'OssProxyNodeName' in params ? params.OssProxyNodeName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -6697,13 +6746,13 @@ class InquirePriceCreateResponse extends  AbstractModel {
         super();
 
         /**
-         * Instance price
+         * <p>Instance price</p>
          * @type {TradePrice || null}
          */
         this.InstancePrice = null;
 
         /**
-         * Storage price
+         * <p>Storage price</p>
          * @type {TradePrice || null}
          */
         this.StoragePrice = null;
@@ -10300,22 +10349,28 @@ class ModifySnapBackupCrossRegionConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * <p>Cluster ID.</p>
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Whether cross-region snapshot backup is enabled.
+         * <p>Whether cross-region snapshot backup is enabled ON/OFF</p>
          * @type {string || null}
          */
         this.CrossRegionsEnable = null;
 
         /**
-         * Cross-Regional snapshot backup.
+         * <p>Cross-regional snapshot backup</p>
          * @type {Array.<string> || null}
          */
         this.CrossRegions = null;
+
+        /**
+         * <p>Cross-region backup retention period</p><p>Unit: day</p>
+         * @type {number || null}
+         */
+        this.CrossRegionSaveDays = null;
 
     }
 
@@ -10329,6 +10384,7 @@ class ModifySnapBackupCrossRegionConfigRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.CrossRegionsEnable = 'CrossRegionsEnable' in params ? params.CrossRegionsEnable : null;
         this.CrossRegions = 'CrossRegions' in params ? params.CrossRegions : null;
+        this.CrossRegionSaveDays = 'CrossRegionSaveDays' in params ? params.CrossRegionSaveDays : null;
 
     }
 }
@@ -12102,6 +12158,84 @@ class IsolateLibraDBInstanceRequest extends  AbstractModel {
         this.ForceIsolate = 'ForceIsolate' in params ? params.ForceIsolate : null;
         this.IsolateReasonTypes = 'IsolateReasonTypes' in params ? params.IsolateReasonTypes : null;
         this.IsolateReason = 'IsolateReason' in params ? params.IsolateReason : null;
+
+    }
+}
+
+/**
+ * DescribeVaults response structure.
+ * @class
+ */
+class DescribeVaultsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Safe list
+         * @type {Array.<DescribeVaultsItem> || null}
+         */
+        this.Vaults = null;
+
+        /**
+         * Total number.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Vaults) {
+            this.Vaults = new Array();
+            for (let z in params.Vaults) {
+                let obj = new DescribeVaultsItem();
+                obj.deserialize(params.Vaults[z]);
+                this.Vaults.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TransferClusterPrepayToPostpay response structure.
+ * @class
+ */
+class TransferClusterPrepayToPostpayResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14076,30 +14210,24 @@ class InstanceAuditStatus extends  AbstractModel {
 }
 
 /**
- * DescribeVaults response structure.
+ * CopyClusterPasswordComplexity request structure.
  * @class
  */
-class DescribeVaultsResponse extends  AbstractModel {
+class CopyClusterPasswordComplexityRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Safe list
-         * @type {Array.<DescribeVaultsItem> || null}
+         * A parameter used to replicate the array of cluster IDs
+         * @type {Array.<string> || null}
          */
-        this.Vaults = null;
+        this.ClusterIds = null;
 
         /**
-         * Total number.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Cluster ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SourceClusterId = null;
 
     }
 
@@ -14110,17 +14238,8 @@ class DescribeVaultsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Vaults) {
-            this.Vaults = new Array();
-            for (let z in params.Vaults) {
-                let obj = new DescribeVaultsItem();
-                obj.deserialize(params.Vaults[z]);
-                this.Vaults.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
+        this.SourceClusterId = 'SourceClusterId' in params ? params.SourceClusterId : null;
 
     }
 }
@@ -14421,24 +14540,90 @@ class NetAddr extends  AbstractModel {
 }
 
 /**
- * CopyClusterPasswordComplexity request structure.
+ * DescribeBackupOverview response structure.
  * @class
  */
-class CopyClusterPasswordComplexityRequest extends  AbstractModel {
+class DescribeBackupOverviewResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * A parameter used to replicate the array of cluster IDs
-         * @type {Array.<string> || null}
+         * Total Backup Capacity
+         * @type {number || null}
          */
-        this.ClusterIds = null;
+        this.BackupTotalVolume = null;
 
         /**
-         * Cluster ID
+         * Backup snapshot capacity
+         * @type {number || null}
+         */
+        this.BackupSnapshotVolume = null;
+
+        /**
+         * Backup logical capacity
+         * @type {number || null}
+         */
+        this.BackupLogicVolume = null;
+
+        /**
+         * Total Log Capacity
+         * @type {number || null}
+         */
+        this.LogTotalVolume = null;
+
+        /**
+         * binlog capacity
+         * @type {number || null}
+         */
+        this.LogBinlogVolume = null;
+
+        /**
+         * Redo log capacity
+         * @type {number || null}
+         */
+        this.LogRedoLogVolume = null;
+
+        /**
+         * Total Cross-Region Backup Capacity
+         * @type {number || null}
+         */
+        this.CrossTotalVolume = null;
+
+        /**
+         * Cross-Region Backup Capacity
+         * @type {number || null}
+         */
+        this.CrossRegionBackupVolume = null;
+
+        /**
+         * Cross-regional log capacity
+         * @type {number || null}
+         */
+        this.CrossRegionLogVolume = null;
+
+        /**
+         * Backup capacity details
+         * @type {Array.<BackupVolumeInfo> || null}
+         */
+        this.BackupVolumeInfos = null;
+
+        /**
+         * Cross-region backup capacity details
+         * @type {Array.<BackupVolumeInfo> || null}
+         */
+        this.CrossRegionBackupVolumeInfos = null;
+
+        /**
+         * Cross-region information
+         * @type {Array.<string> || null}
+         */
+        this.CrossRegions = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.SourceClusterId = null;
+        this.RequestId = null;
 
     }
 
@@ -14449,8 +14634,35 @@ class CopyClusterPasswordComplexityRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
-        this.SourceClusterId = 'SourceClusterId' in params ? params.SourceClusterId : null;
+        this.BackupTotalVolume = 'BackupTotalVolume' in params ? params.BackupTotalVolume : null;
+        this.BackupSnapshotVolume = 'BackupSnapshotVolume' in params ? params.BackupSnapshotVolume : null;
+        this.BackupLogicVolume = 'BackupLogicVolume' in params ? params.BackupLogicVolume : null;
+        this.LogTotalVolume = 'LogTotalVolume' in params ? params.LogTotalVolume : null;
+        this.LogBinlogVolume = 'LogBinlogVolume' in params ? params.LogBinlogVolume : null;
+        this.LogRedoLogVolume = 'LogRedoLogVolume' in params ? params.LogRedoLogVolume : null;
+        this.CrossTotalVolume = 'CrossTotalVolume' in params ? params.CrossTotalVolume : null;
+        this.CrossRegionBackupVolume = 'CrossRegionBackupVolume' in params ? params.CrossRegionBackupVolume : null;
+        this.CrossRegionLogVolume = 'CrossRegionLogVolume' in params ? params.CrossRegionLogVolume : null;
+
+        if (params.BackupVolumeInfos) {
+            this.BackupVolumeInfos = new Array();
+            for (let z in params.BackupVolumeInfos) {
+                let obj = new BackupVolumeInfo();
+                obj.deserialize(params.BackupVolumeInfos[z]);
+                this.BackupVolumeInfos.push(obj);
+            }
+        }
+
+        if (params.CrossRegionBackupVolumeInfos) {
+            this.CrossRegionBackupVolumeInfos = new Array();
+            for (let z in params.CrossRegionBackupVolumeInfos) {
+                let obj = new BackupVolumeInfo();
+                obj.deserialize(params.CrossRegionBackupVolumeInfos[z]);
+                this.CrossRegionBackupVolumeInfos.push(obj);
+            }
+        }
+        this.CrossRegions = 'CrossRegions' in params ? params.CrossRegions : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14696,6 +14908,27 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * TransferClusterPrepayToPostpay request structure.
+ * @class
+ */
+class TransferClusterPrepayToPostpayRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * ModifyAccountPrivileges response structure.
  * @class
  */
@@ -14732,72 +14965,82 @@ class InquirePriceCreateRequest extends  AbstractModel {
         super();
 
         /**
-         * AZ
+         * <p>Availability zone, each region provision best practice</p>
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * Number of compute node to purchase
+         * <p>Number of compute nodes to purchase</p>
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * Instance type for purchase. Valid values: `PREPAID`, `POSTPAID`, `SERVERLESS`.
+         * <p>Instance purchase type, optional values: PREPAID, POSTPAID, SERVERLESS</p>
          * @type {string || null}
          */
         this.InstancePayMode = null;
 
         /**
-         * Storage type for purchase. Valid values: `PREPAID`, `POSTPAID`.
+         * <p>Storage purchase type, optional values: PREPAID, POSTPAID</p>
          * @type {string || null}
          */
         this.StoragePayMode = null;
 
         /**
-         * Instance device type. Supported values are as follows:
-- common: indicates the general type
-- exclusive: indicates the exclusive type.
+         * <p>Instance device type. Supported values are as follows:</p><ul><li>common: refers to universal type</li><li>exclusive: refers to dedicated type</li></ul>
          * @type {string || null}
          */
         this.DeviceType = null;
 
         /**
-         * Number of CPU cores, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
+         * <p>Number of CPU cores. Required for PREPAID and POSTPAID instance types.</p>
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * Memory size in GB, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
+         * <p>Memory size in GB. Required for PREPAID and POSTPAID instance types.</p>
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * CCU size, which is required when `InstancePayMode` is `SERVERLESS`.
+         * <p>Ccu size. Required for the serverless type.</p>
          * @type {number || null}
          */
         this.Ccu = null;
 
         /**
-         * Storage size, which is required when `StoragePayMode` is `PREPAID`.
+         * <p>Storage size. Required for PREPAID storage type</p>
          * @type {number || null}
          */
         this.StorageLimit = null;
 
         /**
-         * Validity period, which is required when `InstancePayMode` is `PREPAID`.
+         * <p>Purchase period, required for PREPAID purchase type</p>
          * @type {number || null}
          */
         this.TimeSpan = null;
 
         /**
-         * Duration unit, which is required when `InstancePayMode` is `PREPAID`. Valid values: `m` (month), `d` (day).
+         * <p>Duration unit. Optional values: m, d. Required for PREPAID purchase type.</p>
          * @type {string || null}
          */
         this.TimeUnit = null;
+
+        /**
+         * <p>Storage architecture type. Enumeration value: 1.0/2.0 Default value: 1.0</p>
+         * @type {string || null}
+         */
+        this.StorageVersion = null;
+
+        /**
+         * <p>Whether storage spans AZs. Valid for storage architecture 2.0</p>
+         * @type {boolean || null}
+         */
+        this.IsMultiAz = null;
 
     }
 
@@ -14819,6 +15062,8 @@ class InquirePriceCreateRequest extends  AbstractModel {
         this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.StorageVersion = 'StorageVersion' in params ? params.StorageVersion : null;
+        this.IsMultiAz = 'IsMultiAz' in params ? params.IsMultiAz : null;
 
     }
 }
@@ -15693,7 +15938,7 @@ class ModifySnapBackupCrossRegionConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Task ID.
+         * <p>Task ID.</p>
          * @type {number || null}
          */
         this.TaskId = null;
@@ -18940,6 +19185,41 @@ class DescribeBinlogListByVaultItem extends  AbstractModel {
             obj.deserialize(params.BinlogFileInfo)
             this.BinlogFileInfo = obj;
         }
+
+    }
+}
+
+/**
+ * binlog retention info for each region
+ * @class
+ */
+class BinlogRegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Backup region</p>
+         * @type {string || null}
+         */
+        this.BackupRegion = null;
+
+        /**
+         * <p>Backup ID</p>
+         * @type {number || null}
+         */
+        this.BackupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BackupRegion = 'BackupRegion' in params ? params.BackupRegion : null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
 
     }
 }
@@ -22493,64 +22773,70 @@ class BinlogItem extends  AbstractModel {
         super();
 
         /**
-         * Binlog filename
+         * <p>Binlog filename</p>
          * @type {string || null}
          */
         this.FileName = null;
 
         /**
-         * File size in bytes
+         * <p>File size, measurement unit: byte</p>
          * @type {number || null}
          */
         this.FileSize = null;
 
         /**
-         * Transaction start time
+         * <p>Earliest transaction time</p>
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Transaction end time
+         * <p>Latest transaction time</p>
          * @type {string || null}
          */
         this.FinishTime = null;
 
         /**
-         * Binlog file ID
+         * <p>Binlog file ID</p>
          * @type {number || null}
          */
         this.BinlogId = null;
 
         /**
-         * binlog cross-region coverage
+         * <p>Cross-regional binlog</p>
          * @type {Array.<string> || null}
          */
         this.CrossRegions = null;
 
         /**
-         * Backup delivery status
+         * <p>Backup delivery status</p>
          * @type {string || null}
          */
         this.CopyStatus = null;
 
         /**
-         * Safe info
+         * <p>Safe information</p>
          * @type {Array.<VaultInfo> || null}
          */
         this.VaultInfos = null;
 
         /**
-         * Encryption key
+         * <p>Encryption key</p>
          * @type {string || null}
          */
         this.EncryptKeyId = null;
 
         /**
-         * Encrypt key region
+         * <p>Key region for encryption</p>
          * @type {string || null}
          */
         this.EncryptRegion = null;
+
+        /**
+         * <p>Geographical distribution of backups</p>
+         * @type {Array.<BinlogRegionInfo> || null}
+         */
+        this.ExistRegions = null;
 
     }
 
@@ -22579,6 +22865,15 @@ class BinlogItem extends  AbstractModel {
         }
         this.EncryptKeyId = 'EncryptKeyId' in params ? params.EncryptKeyId : null;
         this.EncryptRegion = 'EncryptRegion' in params ? params.EncryptRegion : null;
+
+        if (params.ExistRegions) {
+            this.ExistRegions = new Array();
+            for (let z in params.ExistRegions) {
+                let obj = new BinlogRegionInfo();
+                obj.deserialize(params.ExistRegions[z]);
+                this.ExistRegions.push(obj);
+            }
+        }
 
     }
 }
@@ -26600,26 +26895,32 @@ class BinlogConfigInfo extends  AbstractModel {
         super();
 
         /**
-         * Specifies the retention time of binlogs.
+         * <p>binlog retention time</p>
          * @type {number || null}
          */
         this.BinlogSaveDays = null;
 
         /**
-         * Whether binlog cross-region backup is enabled.
+         * <p>Whether cross-region backup of binlog is enabled</p>
          * @type {string || null}
          */
         this.BinlogCrossRegionsEnable = null;
 
         /**
-         * binlog in a different region.
+         * <p>binlog cross-region</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.BinlogCrossRegions = null;
 
         /**
-         * Safe info
+         * <p>Cross-region backup retention period</p><p>Unit: Day</p>
+         * @type {number || null}
+         */
+        this.BinlogCrossRegionSaveDays = null;
+
+        /**
+         * <p>Safe info</p>
          * @type {Array.<CreateBackupVaultItem> || null}
          */
         this.AutoCopyVaults = null;
@@ -26636,6 +26937,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.BinlogSaveDays = 'BinlogSaveDays' in params ? params.BinlogSaveDays : null;
         this.BinlogCrossRegionsEnable = 'BinlogCrossRegionsEnable' in params ? params.BinlogCrossRegionsEnable : null;
         this.BinlogCrossRegions = 'BinlogCrossRegions' in params ? params.BinlogCrossRegions : null;
+        this.BinlogCrossRegionSaveDays = 'BinlogCrossRegionSaveDays' in params ? params.BinlogCrossRegionSaveDays : null;
 
         if (params.AutoCopyVaults) {
             this.AutoCopyVaults = new Array();
@@ -26898,6 +27200,48 @@ class ModifyResourcePackageClustersResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Backup Usage Info
+ * @class
+ */
+class BackupVolumeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backup usage
+         * @type {number || null}
+         */
+        this.BackupVolume = null;
+
+        /**
+         * Backup type
+         * @type {string || null}
+         */
+        this.BackupType = null;
+
+        /**
+         * Backup method
+         * @type {string || null}
+         */
+        this.BackupMethod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BackupVolume = 'BackupVolume' in params ? params.BackupVolume : null;
+        this.BackupType = 'BackupType' in params ? params.BackupType : null;
+        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
 
     }
 }
@@ -28813,58 +29157,70 @@ class ProxyGroup extends  AbstractModel {
         super();
 
         /**
-         * Database proxy group ID
+         * <p>Database Proxy Group ID.</p>
          * @type {string || null}
          */
         this.ProxyGroupId = null;
 
         /**
-         * Number of nodes in the proxy group
+         * <p>Number of database proxy group nodes</p>
          * @type {number || null}
          */
         this.ProxyNodeCount = null;
 
         /**
-         * Database proxy group status
+         * <p>Database Proxy Group status</p>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Region
+         * <p>Region.</p>
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * AZ
+         * <p>AZ.</p>
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * Current proxy version
+         * <p>Current proxy version</p>
          * @type {string || null}
          */
         this.CurrentProxyVersion = null;
 
         /**
-         * Cluster ID
+         * <p>Cluster ID.</p>
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * User AppId
+         * <p>User AppId</p>
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * Specifies that a read-write node activates the database proxy.
+         * <p>Activate database proxy for RWNode</p>
          * @type {string || null}
          */
         this.OpenRw = null;
+
+        /**
+         * <p>Creation time.</p>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * <p>Update time.</p>
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
 
     }
 
@@ -28884,6 +29240,8 @@ class ProxyGroup extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.AppId = 'AppId' in params ? params.AppId : null;
         this.OpenRw = 'OpenRw' in params ? params.OpenRw : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -30536,6 +30894,27 @@ class SwitchClusterLogBin extends  AbstractModel {
 }
 
 /**
+ * TransferStoragePrepayToPostpay request structure.
+ * @class
+ */
+class TransferStoragePrepayToPostpayRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * ModifyVault request structure.
  * @class
  */
@@ -31161,65 +31540,69 @@ class BackupConfigInfo extends  AbstractModel {
         super();
 
         /**
-         * System automation time.
+         * <p>System automation time</p>
          * @type {boolean || null}
          */
         this.BackupCustomAutoTime = null;
 
         /**
-         * Indicates the full backup start time. value range: [0-24*3600]. for example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.
+         * <p>Indicates the full backup start time, [0-24*3600]. For example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.</p>
          * @type {number || null}
          */
         this.BackupTimeBeg = null;
 
         /**
-         * Indicates the full backup end time. value range: [0-24*3600]. for example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.
+         * <p>Indicates the full backup end time, [0-24*3600]. For example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.</p>
          * @type {number || null}
          */
         this.BackupTimeEnd = null;
 
         /**
-         * Currently this parameter cannot be modified. no need to specify. backup frequency is an array of length 7, corresponding to the backup method from sunday to saturday, full for full backup and increment for incremental backup.
+         * <p>This parameter currently does not support modification and is not required. Backup frequency is an array of length 7, corresponding to the backup method from Sunday to Saturday, full-full backup, increment-incremental backup.</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.BackupWeekDays = null;
 
         /**
-         * Interval.
+         * <p>Interval</p>
          * @type {number || null}
          */
         this.BackupIntervalTime = null;
 
         /**
-         * Indicates the backup retention period in seconds. data will be cleaned up longer than this time. 7 days means 3600247=604800. the maximum is 158112000.
+         * <p>Indicates the backup retention period in seconds. Backups will be cleaned up longer than this time. 7 days means 3600*24*7=604800. The maximum value is 158112000.</p>
          * @type {number || null}
          */
         this.ReserveDuration = null;
 
         /**
-         * Enable cross-region backup.
-Enable.
-0: disabled.
+         * <p>Cross-region backup enabled<br>yes-Enable<br>no-Disable</p>
          * @type {string || null}
          */
         this.CrossRegionsEnable = null;
 
         /**
-         * Cross-Regional backup region.
+         * <p>Cross-regional backup region</p>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.CrossRegions = null;
 
         /**
-         * Automatic data backup trigger policy, periodically: automatic periodic backup, frequent: high-frequency backup
+         * <p>Cross-region backup retention period</p><p>Unit: Day</p>
+         * @type {number || null}
+         */
+        this.CrossRegionSaveDays = null;
+
+        /**
+         * <p>Automatic data backup trigger policy, periodically: automatic periodic backup, frequent: high frequency backup</p>
          * @type {string || null}
          */
         this.BackupTriggerStrategy = null;
 
         /**
-         * Backup delivery relationship
+         * <p>Backup delivery relationship</p>
          * @type {Array.<CreateBackupVaultItem> || null}
          */
         this.AutoCopyVaults = null;
@@ -31241,6 +31624,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ReserveDuration = 'ReserveDuration' in params ? params.ReserveDuration : null;
         this.CrossRegionsEnable = 'CrossRegionsEnable' in params ? params.CrossRegionsEnable : null;
         this.CrossRegions = 'CrossRegions' in params ? params.CrossRegions : null;
+        this.CrossRegionSaveDays = 'CrossRegionSaveDays' in params ? params.CrossRegionSaveDays : null;
         this.BackupTriggerStrategy = 'BackupTriggerStrategy' in params ? params.BackupTriggerStrategy : null;
 
         if (params.AutoCopyVaults) {
@@ -31792,6 +32176,34 @@ class ParamInfo extends  AbstractModel {
         this.IsFunc = 'IsFunc' in params ? params.IsFunc : null;
         this.Func = 'Func' in params ? params.Func : null;
         this.FuncPattern = 'FuncPattern' in params ? params.FuncPattern : null;
+
+    }
+}
+
+/**
+ * TransferStoragePrepayToPostpay response structure.
+ * @class
+ */
+class TransferStoragePrepayToPostpayResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -34477,48 +34889,53 @@ class LogicBackupConfigInfo extends  AbstractModel {
         super();
 
         /**
-         * Whether automatic logical backup is enabled.
+         * <p>Whether automatic logical backup is enabled</p>
          * @type {string || null}
          */
         this.LogicBackupEnable = null;
 
         /**
-         * Specifies the automatic logic backup start time.
+         * <p>Automatic logic backup start time</p>
          * @type {number || null}
          */
         this.LogicBackupTimeBeg = null;
 
         /**
-         * Specifies the termination time of automatic logical backup.
+         * <p>Automated logic backup end time</p>
          * @type {number || null}
          */
         this.LogicBackupTimeEnd = null;
 
         /**
-         * Automatic logical backup retention time.
-Unit: seconds.
+         * <p>Automatic logical backup retention time<br>Unit: second</p>
          * @type {number || null}
          */
         this.LogicReserveDuration = null;
 
         /**
-         * Is cross-regional logical backup enabled?.
-Valid values: ON/OFF.
+         * <p>Whether cross-regional logical backup is enabled<br>Available values: ON/OFF</p>
          * @type {string || null}
          */
         this.LogicCrossRegionsEnable = null;
 
         /**
-         * Regions covered by logical backup.
+         * <p>Cross-regional logic backup</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.LogicCrossRegions = null;
 
         /**
-         * Backup delivery relationship
+         * <p>Backup delivery relationship</p>
          * @type {Array.<CreateBackupVaultItem> || null}
          */
         this.AutoCopyVaults = null;
+
+        /**
+         * <p>Day</p><p>Unit: Cross-regional logical backup retention time</p>
+         * @type {number || null}
+         */
+        this.LogicCrossRegionSaveDays = null;
 
     }
 
@@ -34544,6 +34961,7 @@ Valid values: ON/OFF.
                 this.AutoCopyVaults.push(obj);
             }
         }
+        this.LogicCrossRegionSaveDays = 'LogicCrossRegionSaveDays' in params ? params.LogicCrossRegionSaveDays : null;
 
     }
 }
@@ -35739,6 +36157,7 @@ module.exports = {
     RefundResourcePackageResponse: RefundResourcePackageResponse,
     ModifyInstanceNameResponse: ModifyInstanceNameResponse,
     DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
+    DescribeBackupOverviewRequest: DescribeBackupOverviewRequest,
     DescribeAuditInstanceListResponse: DescribeAuditInstanceListResponse,
     DescribeVaultBackupClusterInfoResponse: DescribeVaultBackupClusterInfoResponse,
     DescribeSlaveZonesResponse: DescribeSlaveZonesResponse,
@@ -35914,6 +36333,8 @@ module.exports = {
     ModifyClusterDatabaseResponse: ModifyClusterDatabaseResponse,
     InstanceParamItem: InstanceParamItem,
     IsolateLibraDBInstanceRequest: IsolateLibraDBInstanceRequest,
+    DescribeVaultsResponse: DescribeVaultsResponse,
+    TransferClusterPrepayToPostpayResponse: TransferClusterPrepayToPostpayResponse,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     RollbackData: RollbackData,
     UnbindClusterResourcePackagesRequest: UnbindClusterResourcePackagesRequest,
@@ -35949,17 +36370,18 @@ module.exports = {
     DbInfo: DbInfo,
     DescribeBackupDownloadUrlRequest: DescribeBackupDownloadUrlRequest,
     InstanceAuditStatus: InstanceAuditStatus,
-    DescribeVaultsResponse: DescribeVaultsResponse,
+    CopyClusterPasswordComplexityRequest: CopyClusterPasswordComplexityRequest,
     DescribeClusterInstanceGroupsResponse: DescribeClusterInstanceGroupsResponse,
     CreateLibraDBClusterAccountsResponse: CreateLibraDBClusterAccountsResponse,
     MigrateTableItem: MigrateTableItem,
     CreateProxyEndPointResponse: CreateProxyEndPointResponse,
     DescribeSQLExecutionPlanResponse: DescribeSQLExecutionPlanResponse,
     NetAddr: NetAddr,
-    CopyClusterPasswordComplexityRequest: CopyClusterPasswordComplexityRequest,
+    DescribeBackupOverviewResponse: DescribeBackupOverviewResponse,
     ReplayInstanceAuditLogRequest: ReplayInstanceAuditLogRequest,
     MigrateDBItem: MigrateDBItem,
     RegionInstanceSpecInfo: RegionInstanceSpecInfo,
+    TransferClusterPrepayToPostpayRequest: TransferClusterPrepayToPostpayRequest,
     ModifyAccountPrivilegesResponse: ModifyAccountPrivilegesResponse,
     InquirePriceCreateRequest: InquirePriceCreateRequest,
     ModifyLibraDBClusterAccountDescriptionRequest: ModifyLibraDBClusterAccountDescriptionRequest,
@@ -36033,6 +36455,7 @@ module.exports = {
     DescribeVaultBackupClusterInfoRequest: DescribeVaultBackupClusterInfoRequest,
     DescribeRollbackTimeRangeResponse: DescribeRollbackTimeRangeResponse,
     DescribeBinlogListByVaultItem: DescribeBinlogListByVaultItem,
+    BinlogRegionInfo: BinlogRegionInfo,
     ModifyBackupNameResponse: ModifyBackupNameResponse,
     SwitchClusterZoneResponse: SwitchClusterZoneResponse,
     ProxyConnectionPoolInfo: ProxyConnectionPoolInfo,
@@ -36166,6 +36589,7 @@ module.exports = {
     ModifyAuditServiceResponse: ModifyAuditServiceResponse,
     DescribeClusterDetailResponse: DescribeClusterDetailResponse,
     ModifyResourcePackageClustersResponse: ModifyResourcePackageClustersResponse,
+    BackupVolumeInfo: BackupVolumeInfo,
     InputAccount: InputAccount,
     DescribeSaveBackupClustersRequest: DescribeSaveBackupClustersRequest,
     DescribeLibraDBClusterAccountAllPrivilegesResponse: DescribeLibraDBClusterAccountAllPrivilegesResponse,
@@ -36234,6 +36658,7 @@ module.exports = {
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     IntegrateInstanceInfo: IntegrateInstanceInfo,
     SwitchClusterLogBin: SwitchClusterLogBin,
+    TransferStoragePrepayToPostpayRequest: TransferStoragePrepayToPostpayRequest,
     ModifyVaultRequest: ModifyVaultRequest,
     ExportInstanceErrorLogsResponse: ExportInstanceErrorLogsResponse,
     DescribeLibraDBClustersRequest: DescribeLibraDBClustersRequest,
@@ -36253,6 +36678,7 @@ module.exports = {
     ModifyClusterPasswordComplexityResponse: ModifyClusterPasswordComplexityResponse,
     AuditInstanceFilters: AuditInstanceFilters,
     ParamInfo: ParamInfo,
+    TransferStoragePrepayToPostpayResponse: TransferStoragePrepayToPostpayResponse,
     ModifyClusterParamResponse: ModifyClusterParamResponse,
     SecurityGroup: SecurityGroup,
     SetLibraDBClusterRenewFlagRequest: SetLibraDBClusterRenewFlagRequest,

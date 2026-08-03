@@ -7333,6 +7333,18 @@ class CreateClustersRequest extends  AbstractModel {
          */
         this.CynosVersion = null;
 
+        /**
+         * <p>Synchronization method. Value range: async, semisync, sync.</p>
+         * @type {string || null}
+         */
+        this.SyncWay = null;
+
+        /**
+         * <p>Semi-sync timeout period, in milliseconds. To ensure business stability, semi-synchronous replication has a degradation logic. When the primary availability zone cluster waits for the secondary availability zone cluster to confirm a transaction, if the timeout period is exceeded, the replication method will degrade to asynchronous replication.</p><p>Value ranges from 1000 to 4294967295.</p><p>Unit: ms</p><p>Default value: 10000</p>
+         * @type {number || null}
+         */
+        this.SemiSyncTimeout = null;
+
     }
 
     /**
@@ -7418,6 +7430,8 @@ class CreateClustersRequest extends  AbstractModel {
         this.AutoArchiveDelayHours = 'AutoArchiveDelayHours' in params ? params.AutoArchiveDelayHours : null;
         this.ClusterLevel = 'ClusterLevel' in params ? params.ClusterLevel : null;
         this.CynosVersion = 'CynosVersion' in params ? params.CynosVersion : null;
+        this.SyncWay = 'SyncWay' in params ? params.SyncWay : null;
+        this.SemiSyncTimeout = 'SemiSyncTimeout' in params ? params.SemiSyncTimeout : null;
 
     }
 }
@@ -17658,13 +17672,13 @@ class DeleteAccountsRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * <p>Cluster ID.</p>
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Accounts in array, which contains `account` and `host`.
+         * <p>Account array, including account and host.</p>
          * @type {Array.<InputAccount> || null}
          */
         this.Accounts = null;
@@ -19693,43 +19707,43 @@ class Account extends  AbstractModel {
         super();
 
         /**
-         * Database account name
+         * <p>Database account name.</p>
          * @type {string || null}
          */
         this.AccountName = null;
 
         /**
-         * Host
+         * <p>host</p>
          * @type {string || null}
          */
         this.Host = null;
 
         /**
-         * Database account description
+         * <p>Database account description.</p>
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * Creation time
+         * <p>Creation time.</p>
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Update time
+         * <p>Update time.</p>
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * The max connections
+         * <p>Maximum user connections</p>
          * @type {number || null}
          */
         this.MaxUserConnections = null;
 
         /**
-         * Whether password rotation is enabled (0: turn off; 1: turn on)
+         * <p>Whether password rotation is enabled (0: turn off; 1: turn on)</p>
          * @type {number || null}
          */
         this.PasswordRotation = null;
@@ -20913,13 +20927,13 @@ class CreateAccountsRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * <p>Cluster ID.</p>
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * List of new accounts
+         * <p>New account list</p>
          * @type {Array.<NewAccount> || null}
          */
         this.Accounts = null;
@@ -21111,73 +21125,73 @@ class Ability extends  AbstractModel {
         super();
 
         /**
-         * Whether secondary AZ is supported
+         * <p>Whether support from availability zone is supported</p>
          * @type {string || null}
          */
         this.IsSupportSlaveZone = null;
 
         /**
-         * The causes for no support from an availability zone.
+         * <p>The causes for no support from availability zone</p>
          * @type {string || null}
          */
         this.NonsupportSlaveZoneReason = null;
 
         /**
-         * Whether read-only instance is supported
+         * <p>Whether RO instance is supported</p>
          * @type {string || null}
          */
         this.IsSupportRo = null;
 
         /**
-         * Reasons why RO instances are not supported.
+         * <p>Reason for unsupported RO instance</p>
          * @type {string || null}
          */
         this.NonsupportRoReason = null;
 
         /**
-         * Whether manual snapshot backup initiation is supported.
+         * <p>Whether manual snapshot backup initiation is supported</p>
          * @type {string || null}
          */
         this.IsSupportManualSnapshot = null;
 
         /**
-         * Whether transparent data encryption is supported.
+         * <p>Whether transparent data encryption is supported</p>
          * @type {string || null}
          */
         this.IsSupportTransparentDataEncryption = null;
 
         /**
-         * Reasons for no support of transparent data encryption.
+         * <p>The causes for unsupported transparent data encryption</p>
          * @type {string || null}
          */
         this.NoSupportTransparentDataEncryptionReason = null;
 
         /**
-         * Whether manual initiation of logical backup is supported.
+         * <p>Whether manual initiation of logical backup is supported</p>
          * @type {string || null}
          */
         this.IsSupportManualLogic = null;
 
         /**
-         * Enable global encryption.
+         * <p>Whether global encryption can be enabled</p>
          * @type {string || null}
          */
         this.IsSupportGlobalEncryption = null;
 
         /**
-         * The causes for unsupported global encryption.
+         * <p>The causes for unsupported global encryption</p>
          * @type {string || null}
          */
         this.NoSupportGlobalEncryptionReason = null;
 
         /**
-         * Status code for unsupported tde reason.
+         * <p>Status code for unsupported transparent encryption reason</p>
          * @type {string || null}
          */
         this.NoSupportTransparentDataEncryptionReasonCode = null;
 
         /**
-         * Status code for unsupported global encryption.
+         * <p>Status code for unsupported global encryption reason</p>
          * @type {string || null}
          */
         this.NoSupportGlobalEncryptionReasonCode = null;
@@ -21961,37 +21975,37 @@ class NewAccount extends  AbstractModel {
         super();
 
         /**
-         * Account name, which can contain 1-16 letters, digits, and underscores. It must begin with a letter and end with a letter or digit.
+         * <p>Account name, containing letters, digits, and underscores, starting with a letter, ending with a letter or digit, length 1-30</p>
          * @type {string || null}
          */
         this.AccountName = null;
 
         /**
-         * Host
+         * <p>host (% or ipv4 address)</p>
          * @type {string || null}
          */
         this.Host = null;
 
         /**
-         * Password, which can contain 8-64 characters.
+         * <p>Password. The length range is 8 to 64 characters.</p>
          * @type {string || null}
          */
         this.AccountPassword = null;
 
         /**
-         * Whether password rotation is enabled (0: turn off; 1: turn on)
+         * <p>Whether password rotation is enabled (0: turn off; 1: turn on)</p>
          * @type {number || null}
          */
         this.PasswordRotation = null;
 
         /**
-         * Description
+         * <p>Description.</p>
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * Maximum number of user connections, which cannot be above 10,240.
+         * <p>Maximum user connections cannot be greater than 10240</p>
          * @type {number || null}
          */
         this.MaxUserConnections = null;
@@ -22682,6 +22696,24 @@ class RollbackToNewClusterRequest extends  AbstractModel {
          */
         this.FromSaveBackup = null;
 
+        /**
+         * <p>Synchronization method. Available values: async, semisync, sync. Async as a default.</p>
+         * @type {string || null}
+         */
+        this.SyncWay = null;
+
+        /**
+         * <p>Semi-synchronous timeout period, in milliseconds. To ensure business stability, semi-synchronous replication has a degradation logic. When the primary availability zone cluster waits for the secondary availability zone cluster to confirm a transaction, if the timeout period is exceeded, the replication method will degrade to asynchronous replication.</p><p>Value ranges from 1000 to 4294967295.</p><p>Unit: ms</p><p>Default value: 10000</p>
+         * @type {number || null}
+         */
+        this.SemiSyncTimeout = null;
+
+        /**
+         * <p>Standby availability zone</p>
+         * @type {string || null}
+         */
+        this.SlaveZone = null;
+
     }
 
     /**
@@ -22760,6 +22792,9 @@ class RollbackToNewClusterRequest extends  AbstractModel {
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.AutoArchive = 'AutoArchive' in params ? params.AutoArchive : null;
         this.FromSaveBackup = 'FromSaveBackup' in params ? params.FromSaveBackup : null;
+        this.SyncWay = 'SyncWay' in params ? params.SyncWay : null;
+        this.SemiSyncTimeout = 'SemiSyncTimeout' in params ? params.SemiSyncTimeout : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
 
     }
 }

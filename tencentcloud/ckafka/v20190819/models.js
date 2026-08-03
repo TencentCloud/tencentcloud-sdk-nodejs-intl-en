@@ -873,6 +873,69 @@ class DescribeAclRuleResponse extends  AbstractModel {
 }
 
 /**
+ * Group offset partition object
+ * @class
+ */
+class GroupOffsetPartition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic `partitionId`
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * Offset position submitted by consumer
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Supports consumers to submit messages with imported metadata for other purposes, currently an empty string.
+         * @type {string || null}
+         */
+        this.Metadata = null;
+
+        /**
+         * Error code
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * Latest offset of current partition
+         * @type {number || null}
+         */
+        this.LogEndOffset = null;
+
+        /**
+         * Number of unconsumed messages
+         * @type {number || null}
+         */
+        this.Lag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Metadata = 'Metadata' in params ? params.Metadata : null;
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.LogEndOffset = 'LogEndOffset' in params ? params.LogEndOffset : null;
+        this.Lag = 'Lag' in params ? params.Lag : null;
+
+    }
+}
+
+/**
  * DescribeConsumerGroup response structure.
  * @class
  */
@@ -1119,7 +1182,7 @@ class CreateRouteRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * <p>Access type: 0-plaintext; 1-sasl_plaintext; 3-sasl_ssl; 4-sasl_scram_sha_256; 5-sasl_scram_sha_512. defaults to 0. when vipType=3, supports 0,1,3,4,5. when vipType=7, supports 0,1,3. when vipType=1, supports 1,3.</p>.
+         * <p>Access type: 0-plaintext; 1-sasl_plaintext; 3-sasl_ssl; 4-sasl_scram_sha_256; 5-sasl_scram_sha_512. Default is 0.<br>vipType=3, supports 0,1,3,4,5<br>vipType=7, supports 0,1,3<br>vipType=1, supports 1,3</p>
          * @type {number || null}
          */
         this.AccessType = null;
@@ -1160,6 +1223,12 @@ class CreateRouteRequest extends  AbstractModel {
          */
         this.SecurityGroupIds = null;
 
+        /**
+         * <p>Preset configuration of public network route IP allowlist</p><p>Input parameter limit: vipType=1</p>
+         * @type {Array.<IpWhitelistDTO> || null}
+         */
+        this.IpWhitelist = null;
+
     }
 
     /**
@@ -1180,6 +1249,15 @@ class CreateRouteRequest extends  AbstractModel {
         this.Ip = 'Ip' in params ? params.Ip : null;
         this.Note = 'Note' in params ? params.Note : null;
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+        if (params.IpWhitelist) {
+            this.IpWhitelist = new Array();
+            for (let z in params.IpWhitelist) {
+                let obj = new IpWhitelistDTO();
+                obj.deserialize(params.IpWhitelist[z]);
+                this.IpWhitelist.push(obj);
+            }
+        }
 
     }
 }
@@ -1599,31 +1677,31 @@ class UpgradeBrokerVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id.
+         * <p>ckafka cluster instance Id</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 1. smooth configuration upgrade 2. vertical configuration upgrade.
+         * <p>Upgrade type</p><p>Enumeration value:</p><ul><li>1: Minor version migration (recommended)</li></ul>
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * Version number
+         * <p>Version number.</p>
          * @type {string || null}
          */
         this.SourceVersion = null;
 
         /**
-         * Version number
+         * <p>Version number.</p>
          * @type {string || null}
          */
         this.TargetVersion = null;
 
         /**
-         * Delay time.
+         * <p>Delay time</p>
          * @type {string || null}
          */
         this.DelayTimeStamp = null;
@@ -2224,20 +2302,20 @@ class JgwOperateResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned code. 0: normal, other values: error
+         * <p>Returned code. 0 as normal, non-0 as error.</p>
          * @type {string || null}
          */
         this.ReturnCode = null;
 
         /**
-         * Success message
+         * <p>Success message</p>
          * @type {string || null}
          */
         this.ReturnMessage = null;
 
         /**
-         * Data returned by an operation, which may contain `flowId`, etc.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>The Data returned by the operation may include flowId.</p>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {OperateResponseData || null}
          */
         this.Data = null;
@@ -2764,6 +2842,46 @@ class ModifyAclRuleResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceAttributes response structure.
+ * @class
+ */
+class ModifyInstanceAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Returned result</p>
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * BatchModifyGroupOffsets response structure.
  * @class
  */
@@ -2979,31 +3097,31 @@ class CreateDatahubTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * Name, a string of no more than 128 characters, must start with "AppId-" and can contain letters, digits, and hyphens (-).
+         * <p>Name is a string of no more than 128 characters, must start with "AppId-", and the remaining part can contain letters, digits, and hyphens (-). It can be queried through the API DescribeAppInfo.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Number of partitions, which should be greater than 0.
+         * <p>Number of partitions, maximum value is 500, larger than 0</p>
          * @type {number || null}
          */
         this.PartitionNum = null;
 
         /**
-         * Message retention period in milliseconds. The current minimum value is 60,000 ms.
+         * <p>Message retention period in milliseconds. Current min value is 60000 ms.</p>
          * @type {number || null}
          */
         this.RetentionMs = null;
 
         /**
-         * Topic remarks, which are a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+         * <p>Topic remark is a string of no more than 64 characters, which can contain letters, digits, and hyphens (-).</p>
          * @type {string || null}
          */
         this.Note = null;
 
         /**
-         * Tag list
+         * <p>Tag list</p>
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -3030,41 +3148,6 @@ class CreateDatahubTopicRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
-
-    }
-}
-
-/**
- * Instance billing parameters
- * @class
- */
-class InstanceChargeParam extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance billing mode (`PREPAID`: Yearly/monthly subscription; `POSTPAID_BY_HOUR`: Pay-as-you-go)
-         * @type {string || null}
-         */
-        this.InstanceChargeType = null;
-
-        /**
-         * Validity period, which is only required for the monthly subscription billing mode
-         * @type {number || null}
-         */
-        this.InstanceChargePeriod = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
-        this.InstanceChargePeriod = 'InstanceChargePeriod' in params ? params.InstanceChargePeriod : null;
 
     }
 }
@@ -3112,6 +3195,83 @@ class CreateInstancePostResp extends  AbstractModel {
             obj.deserialize(params.Data)
             this.Data = obj;
         }
+
+    }
+}
+
+/**
+ * ModifyGroupOffsets request structure.
+ * @class
+ */
+class ModifyGroupOffsetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Consumer group name. obtain through the API [DescribeConsumerGroup](https://www.tencentcloud.com/document/product/597/40841?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.Group = null;
+
+        /**
+         * Reset offset strategy. parameter meaning: 0. align with the shift-by parameter, move the offset forward or backward by shift entries. 1. alignment reference (by-duration, to-datetime, to-earliest, to-latest), move the offset to the specified timestamp position. 2. alignment reference (to-offset), move the offset to the specified offset position.
+         * @type {number || null}
+         */
+        this.Strategy = null;
+
+        /**
+         * Specifies the topic name list that needs to reset.
+         * @type {Array.<string> || null}
+         */
+        this.Topics = null;
+
+        /**
+         * When `strategy` is 0, this field is required. If it is above zero, the offset will be shifted backward by the value of the `shift`. If it is below zero, the offset will be shifted forward by the value of the `shift`. After a correct reset, the new offset should be (old_offset + shift). Note that if the new offset is smaller than the `earliest` parameter of the partition, it will be set to `earliest`, and if it is greater than the `latest` parameter of the partition, it will be set to `latest`
+         * @type {number || null}
+         */
+        this.Shift = null;
+
+        /**
+         * In milliseconds. when strategy is 1, must include this field. among them, -2 means reset offset to the start position, -1 means reset to the latest position (equivalent to clearing), other values represent the specified time. obtain the offset at the specified time in the topic and reset. notably, if no message exists at the specified time, get the last offset.
+         * @type {number || null}
+         */
+        this.ShiftTimestamp = null;
+
+        /**
+         * Position of the offset that needs to be reset. When `strategy` is 2, this field is required
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * List of partitions that need to be reset. If the topics parameter is not specified, reset partitions in the corresponding partition list of all topics. If the topics parameter is specified, reset partitions of the corresponding partition list of the specified topic list.
+         * @type {Array.<number> || null}
+         */
+        this.Partitions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Group = 'Group' in params ? params.Group : null;
+        this.Strategy = 'Strategy' in params ? params.Strategy : null;
+        this.Topics = 'Topics' in params ? params.Topics : null;
+        this.Shift = 'Shift' in params ? params.Shift : null;
+        this.ShiftTimestamp = 'ShiftTimestamp' in params ? params.ShiftTimestamp : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Partitions = 'Partitions' in params ? params.Partitions : null;
 
     }
 }
@@ -3325,19 +3485,19 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * <P>Instance version. currently supports "2.4.1", "2.4.2", "2.8.1", "3.2.3". default value is "2.4.1". "2.4.1" and "2.4.2" belong to the same version, any one can be passed.</p>.
+         * <p>Instance version. Currently supports "2.4.1", "2.4.2", "2.8.1", "3.2.3". Default value is "2.4.1". "2.4.1" and "2.4.2" belong to the same version. You can pass any one of them.</p>
          * @type {string || null}
          */
         this.KafkaVersion = null;
 
         /**
-         * <P>Instance type. "standard": standard version, "profession": professional version. (standard version is only supported on the international site. chinese site currently supports professional version)</p>.
+         * <p>Instance type. "standard": standard version, "profession": professional version. (The standard version is only supported on the international site. The domestic site currently supports the professional version.)</p>
          * @type {string || null}
          */
         this.SpecificationsType = null;
 
         /**
-         * <p>Specifies the instance disk type for pro edition. standard edition instances do not require this field. valid values: "CLOUD_SSD" (SSD CLOUD disk), "CLOUD_BASIC" (high-performance CLOUD block storage). default value: "CLOUD_BASIC".</p>.
+         * <p>Instance disk type for Pro Edition. You do not need to fill it in for standard edition instance. "CLOUD_SSD": SSD CLOUD disk; "CLOUD_BASIC": high-performance CLOUD block storage. Default value is "CLOUD_BASIC" if not specified.</p>
          * @type {string || null}
          */
         this.DiskType = null;
@@ -3391,7 +3551,7 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
         this.InstanceNum = null;
 
         /**
-         * <p>Public bandwidth size in Mbps. the free 3 Mbps bandwidth is not included by default. for example, if the total required public network bandwidth is 3 Mbps, input 0 here; if the total required public network bandwidth is 6 Mbps, input 3 here. ensure the input parameter is a multiple of 3.</p>.
+         * <p>Public bandwidth size, measurement unit Mbps.</p><p>Unit: Mbps</p>
          * @type {number || null}
          */
         this.PublicNetworkMonthly = null;
@@ -3413,6 +3573,12 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.CustomSSLCertId = null;
+
+        /**
+         * <p>Elastic storage switch</p><p>Enumeration value:</p><ul><li>0: Turn off</li><li>1: Turn on</li></ul><p>Default value: 0</p>
+         * @type {number || null}
+         */
+        this.StoreQuantityType = null;
 
     }
 
@@ -3452,6 +3618,7 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
         }
         this.ElasticBandwidthSwitch = 'ElasticBandwidthSwitch' in params ? params.ElasticBandwidthSwitch : null;
         this.CustomSSLCertId = 'CustomSSLCertId' in params ? params.CustomSSLCertId : null;
+        this.StoreQuantityType = 'StoreQuantityType' in params ? params.StoreQuantityType : null;
 
     }
 }
@@ -3782,7 +3949,7 @@ class CreateUserResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result.
+         * <p>Returned results</p>
          * @type {JgwOperateResponse || null}
          */
         this.Result = null;
@@ -4988,7 +5155,7 @@ class CreateTopicRequest extends  AbstractModel {
         this.MinInsyncReplicas = null;
 
         /**
-         * <p>Whether to allow unsynchronized replicas to be elected as leader, 0: not allowed, 1: allowed, default not allowed</p>
+         * <p>Whether to allow unsynchronized replicas to be elected as leader. 0: not allowed, 1: allowed. Default value is the instance dimension value.</p>
          * @type {number || null}
          */
         this.UncleanLeaderElectionEnable = null;
@@ -5931,6 +6098,56 @@ class DescribeUserResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyAccessPolicy request structure.
+ * @class
+ */
+class ModifyAccessPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance ID.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Route ID</p>
+         * @type {number || null}
+         */
+        this.RouteId = null;
+
+        /**
+         * <p>Public Network IP Whitelist Configuration</p><p>Default if not passed: delete all</p>
+         * @type {Array.<IpWhitelistDTO> || null}
+         */
+        this.IpWhitelist = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
+
+        if (params.IpWhitelist) {
+            this.IpWhitelist = new Array();
+            for (let z in params.IpWhitelist) {
+                let obj = new IpWhitelistDTO();
+                obj.deserialize(params.IpWhitelist[z]);
+                this.IpWhitelist.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeTopic request structure.
  * @class
  */
@@ -5982,6 +6199,34 @@ class DescribeTopicRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.AclRuleName = 'AclRuleName' in params ? params.AclRuleName : null;
+
+    }
+}
+
+/**
+ * IsolatedInstancePre request structure.
+ * @class
+ */
+class IsolatedInstancePreRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CKafka cluster instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -7055,6 +7300,41 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAccessPolicy request structure.
+ * @class
+ */
+class DescribeAccessPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance ID.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Route ID</p>
+         * @type {number || null}
+         */
+        this.RouteId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
+
+    }
+}
+
+/**
  * DescribeRegion response structure.
  * @class
  */
@@ -7216,24 +7496,24 @@ class DescribeTopicProduceConnectionResponse extends  AbstractModel {
 }
 
 /**
- * ModifyInstanceAttributes response structure.
+ * Public network route IP allowlist list object of the instance
  * @class
  */
-class ModifyInstanceAttributesResponse extends  AbstractModel {
+class IpWhitelistDTO extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Returned result</p>
-         * @type {JgwOperateResponse || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * <p>Allow IP or ranges</p>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CidrBlock = null;
+
+        /**
+         * <p>Description.</p>
+         * @type {string || null}
+         */
+        this.PolicyDescription = null;
 
     }
 
@@ -7244,13 +7524,8 @@ class ModifyInstanceAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new JgwOperateResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.PolicyDescription = 'PolicyDescription' in params ? params.PolicyDescription : null;
 
     }
 }
@@ -7299,25 +7574,25 @@ class User extends  AbstractModel {
         super();
 
         /**
-         * User ID
+         * <p>User id</p>
          * @type {number || null}
          */
         this.UserId = null;
 
         /**
-         * Username
+         * <p>Username</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Creation time
+         * <p>Creation time.</p>
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last updated time
+         * <p>Last update time</p>
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -7423,7 +7698,7 @@ class UpgradeBrokerVersionResponse extends  AbstractModel {
         super();
 
         /**
-         * Upgrade result.
+         * <p>Upgrade result</p>
          * @type {JgwOperateResponse || null}
          */
         this.Result = null;
@@ -7617,48 +7892,24 @@ class DescModifyType extends  AbstractModel {
 }
 
 /**
- * Group offset partition object
+ * Result object of the public network route IP allowlist for the instance
  * @class
  */
-class GroupOffsetPartition extends  AbstractModel {
+class ExternalAccessInfoWrapper extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Topic `partitionId`
+         * <p>Number of IP allowlist access rules</p>
          * @type {number || null}
          */
-        this.Partition = null;
+        this.TotalCount = null;
 
         /**
-         * Offset position submitted by consumer
-         * @type {number || null}
+         * <p>IP allowlist</p>
+         * @type {Array.<IpWhitelistDTO> || null}
          */
-        this.Offset = null;
-
-        /**
-         * Supports consumers to submit messages with imported metadata for other purposes, currently an empty string.
-         * @type {string || null}
-         */
-        this.Metadata = null;
-
-        /**
-         * Error code
-         * @type {number || null}
-         */
-        this.ErrorCode = null;
-
-        /**
-         * Latest offset of current partition
-         * @type {number || null}
-         */
-        this.LogEndOffset = null;
-
-        /**
-         * Number of unconsumed messages
-         * @type {number || null}
-         */
-        this.Lag = null;
+        this.IpWhitelist = null;
 
     }
 
@@ -7669,12 +7920,16 @@ class GroupOffsetPartition extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Metadata = 'Metadata' in params ? params.Metadata : null;
-        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
-        this.LogEndOffset = 'LogEndOffset' in params ? params.LogEndOffset : null;
-        this.Lag = 'Lag' in params ? params.Lag : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.IpWhitelist) {
+            this.IpWhitelist = new Array();
+            for (let z in params.IpWhitelist) {
+                let obj = new IpWhitelistDTO();
+                obj.deserialize(params.IpWhitelist[z]);
+                this.IpWhitelist.push(obj);
+            }
+        }
 
     }
 }
@@ -7788,7 +8043,7 @@ class InstanceAttributesResponse extends  AbstractModel {
         this.Vport = null;
 
         /**
-         * <P>Specifies the instance status. valid values: 0 (creating), 1 (running), 2 (deleting), 3 (deleted), 5 (isolated), 7 (upgrading), -1 (creation failed).</p>.
+         * <p>Instance status. 0: Creating, 1: Running, 2: Deleting, 3: Deleted, 5: Isolated, 7: Upgrading, -1: Creation failed</p>
          * @type {number || null}
          */
         this.Status = null;
@@ -7914,7 +8169,7 @@ class InstanceAttributesResponse extends  AbstractModel {
         this.Cvm = null;
 
         /**
-         * <p>Instance type. enumerates the list: profession: pro edition; standards2: standard version; premium: advanced edition; serverless: serverless edition.</p>.
+         * <p>Instance type</p><p>Enumeration value:</p><ul><li>profession: Pro Edition</li><li>premium: Advanced Edition</li><li>serverless: Serverless Edition</li><li>other: Standard Version (for example: standards2/standard, this version is not available for sale)</li></ul>
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -7986,19 +8241,19 @@ class InstanceAttributesResponse extends  AbstractModel {
         this.InstanceChargeType = null;
 
         /**
-         * <p>Specifies whether to enable the elastic bandwidth allowlist. valid values: 1 (enabled), 0 (disabled).</p>.
+         * <p>Whether to enable elastic bandwidth allowlist<br>1: Elastic bandwidth allowlist is enabled;<br>0: Elastic bandwidth allowlist is not enabled;</p>
          * @type {number || null}
          */
         this.ElasticBandwidthSwitch = null;
 
         /**
-         * <P>Specifies the elastic bandwidth activation status. 1: elastic bandwidth is disabled; 16: enabling elastic bandwidth; 32: elastic bandwidth enabled successfully; 33: disabling elastic bandwidth; 34: elastic bandwidth disabled successfully; 64: failed to enable elastic bandwidth; 65: failed to disable elastic bandwidth.</p>.
+         * <p>Elastic bandwidth activation status<br>1: Elastic bandwidth not enabled;<br>16: Enabling elastic bandwidth;<br>32: Elastic bandwidth enabled successfully;<br>33: Disabling elastic bandwidth;<br>34: Elastic bandwidth disabled successfully;<br>64: Failed to enable elastic bandwidth;<br>65: Failed to disable elastic bandwidth;</p>
          * @type {number || null}
          */
         this.ElasticBandwidthOpenStatus = null;
 
         /**
-         * <p>ClusterType<br />CLOUD_IDC IDC cluster<br />CLOUD_CVM_SHARE CVM shared cluster<br />CLOUD_CVM_YUNTI YUNTI CVM cluster<br />CLOUD_CVM CVM cluster<br />CLOUD_CDC CDC cluster<br />CLOUD_EKS_TSE EKS cluster</p>.
+         * <p>Cluster type<br>CLOUD_IDC IDC cluster<br>CLOUD_CVM_SHARE CVM shared cluster<br>CLOUD_CVM_YUNTI YunTi CVM cluster<br>CLOUD_CVM CVM cluster<br>CLOUD_CDC cdc cluster<br>CLOUD_EKS_TSE EKS cluster</p>
          * @type {string || null}
          */
         this.ClusterType = null;
@@ -8034,13 +8289,13 @@ class InstanceAttributesResponse extends  AbstractModel {
         this.DeleteProtectionEnable = null;
 
         /**
-         * <p>Message retention size at the instance level</p>Measurement unit: bytes<br>Default value: -1
+         * <p>Message retention size at the instance level</p><p>Measurement unit: bytes</p><p>Default value: -1</p>
          * @type {number || null}
          */
         this.RetentionBytes = null;
 
         /**
-         * <p>The maximum idle time of a transaction ID. Uncommitted transactions that time out will be marked with expiration.</p>Unit: ms
+         * <p>Maximum idle time of transaction ID. Uncommitted transactions that time out will be marked with expiration.</p><p>Unit: ms</p>
          * @type {number || null}
          */
         this.TransactionalIdExpirationMs = null;
@@ -8146,7 +8401,7 @@ class DescribeDatahubTopicsResponse extends  AbstractModel {
         super();
 
         /**
-         * Topic list.
+         * <p>Topic list</p>
          * @type {DescribeDatahubTopicsResp || null}
          */
         this.Result = null;
@@ -8433,19 +8688,19 @@ class CreateUserRequest extends  AbstractModel {
         super();
 
         /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
+         * <p>ckafka cluster instance Id, which can be obtained through the <a href="https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1">DescribeInstances</a> API</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Username
+         * <p>Username.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * User password
+         * <p>User password.</p>
          * @type {string || null}
          */
         this.Password = null;
@@ -8462,6 +8717,41 @@ class CreateUserRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
+ * ModifyAccessPolicy response structure.
+ * @class
+ */
+class ModifyAccessPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Result of public IP allowlist modification</p>
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8559,24 +8849,24 @@ class DeleteRouteRequest extends  AbstractModel {
 }
 
 /**
- * DeleteTopicIpWhiteList response structure.
+ * Instance billing parameters
  * @class
  */
-class DeleteTopicIpWhiteListResponse extends  AbstractModel {
+class InstanceChargeParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Result of deleting topic IP allowlist
-         * @type {JgwOperateResponse || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Instance billing mode (`PREPAID`: Yearly/monthly subscription; `POSTPAID_BY_HOUR`: Pay-as-you-go)
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceChargeType = null;
+
+        /**
+         * Validity period, which is only required for the monthly subscription billing mode
+         * @type {number || null}
+         */
+        this.InstanceChargePeriod = null;
 
     }
 
@@ -8587,13 +8877,8 @@ class DeleteTopicIpWhiteListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new JgwOperateResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.InstanceChargePeriod = 'InstanceChargePeriod' in params ? params.InstanceChargePeriod : null;
 
     }
 }
@@ -9042,7 +9327,7 @@ class CreateDatahubTopicResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned creation result
+         * <p>Return creation result</p>
          * @type {DatahubTopicResp || null}
          */
         this.Result = null;
@@ -9749,24 +10034,24 @@ class DescribeGroupInfoRequest extends  AbstractModel {
 }
 
 /**
- * `DescribeGroup` response entity
+ * DescribeAccessPolicy response structure.
  * @class
  */
-class DescribeGroup extends  AbstractModel {
+class DescribeAccessPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Consumer group name.
-         * @type {string || null}
+         * <p>Public network IP allowlist configuration list of the instance</p>
+         * @type {ExternalAccessInfoWrapper || null}
          */
-        this.Group = null;
+        this.Result = null;
 
         /**
-         * Protocol used by the group.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Protocol = null;
+        this.RequestId = null;
 
     }
 
@@ -9777,8 +10062,13 @@ class DescribeGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Group = 'Group' in params ? params.Group : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+        if (params.Result) {
+            let obj = new ExternalAccessInfoWrapper();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10049,7 +10339,7 @@ class ModifyDatahubTopicResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result set
+         * <p>Returned result set</p>
          * @type {JgwOperateResponse || null}
          */
         this.Result = null;
@@ -10081,6 +10371,41 @@ class ModifyDatahubTopicResponse extends  AbstractModel {
 }
 
 /**
+ * `DescribeGroup` response entity
+ * @class
+ */
+class DescribeGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Consumer group name.
+         * @type {string || null}
+         */
+        this.Group = null;
+
+        /**
+         * Protocol used by the group.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Group = 'Group' in params ? params.Group : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+    }
+}
+
+/**
  * DescribeDatahubTopics request structure.
  * @class
  */
@@ -10089,37 +10414,37 @@ class DescribeDatahubTopicsRequest extends  AbstractModel {
         super();
 
         /**
-         * Search term.
+         * <p>Search term</p><p>Performs fuzzy matching on the Name, TopicName, or TopicId field.</p>
          * @type {string || null}
          */
         this.SearchWord = null;
 
         /**
-         * Query offset, which defaults to `0`.
+         * <p>Offset position of this page, defaults to 0</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Maximum number of results to be returned in this request. Default value: `50`. Maximum value: `50`.
+         * <p>Maximum number of returned results this time</p><p>Value ranges from 1 to 100</p><p>Default value: 20</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Specifies whether to query the topic list from the connection.
+         * <p>Whether to query the topic list from the connection query</p><p>Default value: false</p>
          * @type {boolean || null}
          */
         this.QueryFromConnectResource = null;
 
         /**
-         * Connection ID.
+         * <p>Connection ID.</p>
          * @type {string || null}
          */
         this.ConnectResourceId = null;
 
         /**
-         * topic resource expression.
+         * <p>topic resource expression</p>
          * @type {string || null}
          */
         this.TopicRegularExpression = null;
@@ -10601,60 +10926,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyGroupOffsets request structure.
+ * IsolatedInstancePre response structure.
  * @class
  */
-class ModifyGroupOffsetsRequest extends  AbstractModel {
+class IsolatedInstancePreResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
+         * Return result
+         * @type {CreateInstancePreResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * Consumer group name. obtain through the API [DescribeConsumerGroup](https://www.tencentcloud.com/document/product/597/40841?from_cn_redirect=1).
-         * @type {string || null}
-         */
-        this.Group = null;
-
-        /**
-         * Reset offset strategy. parameter meaning: 0. align with the shift-by parameter, move the offset forward or backward by shift entries. 1. alignment reference (by-duration, to-datetime, to-earliest, to-latest), move the offset to the specified timestamp position. 2. alignment reference (to-offset), move the offset to the specified offset position.
-         * @type {number || null}
-         */
-        this.Strategy = null;
-
-        /**
-         * Specifies the topic name list that needs to reset.
-         * @type {Array.<string> || null}
-         */
-        this.Topics = null;
-
-        /**
-         * When `strategy` is 0, this field is required. If it is above zero, the offset will be shifted backward by the value of the `shift`. If it is below zero, the offset will be shifted forward by the value of the `shift`. After a correct reset, the new offset should be (old_offset + shift). Note that if the new offset is smaller than the `earliest` parameter of the partition, it will be set to `earliest`, and if it is greater than the `latest` parameter of the partition, it will be set to `latest`
-         * @type {number || null}
-         */
-        this.Shift = null;
-
-        /**
-         * In milliseconds. when strategy is 1, must include this field. among them, -2 means reset offset to the start position, -1 means reset to the latest position (equivalent to clearing), other values represent the specified time. obtain the offset at the specified time in the topic and reset. notably, if no message exists at the specified time, get the last offset.
-         * @type {number || null}
-         */
-        this.ShiftTimestamp = null;
-
-        /**
-         * Position of the offset that needs to be reset. When `strategy` is 2, this field is required
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * List of partitions that need to be reset. If the topics parameter is not specified, reset partitions in the corresponding partition list of all topics. If the topics parameter is specified, reset partitions of the corresponding partition list of the specified topic list.
-         * @type {Array.<number> || null}
-         */
-        this.Partitions = null;
+        this.RequestId = null;
 
     }
 
@@ -10665,14 +10954,13 @@ class ModifyGroupOffsetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Group = 'Group' in params ? params.Group : null;
-        this.Strategy = 'Strategy' in params ? params.Strategy : null;
-        this.Topics = 'Topics' in params ? params.Topics : null;
-        this.Shift = 'Shift' in params ? params.Shift : null;
-        this.ShiftTimestamp = 'ShiftTimestamp' in params ? params.ShiftTimestamp : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Partitions = 'Partitions' in params ? params.Partitions : null;
+
+        if (params.Result) {
+            let obj = new CreateInstancePreResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11126,25 +11414,25 @@ class ModifyDatahubTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * Elastic topic name.
+         * <p>Elastic topic name</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/597/86863?from_cn_redirect=1">DescribeDatahubTopics</a></p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Message retention period in ms. The current minimum value is 60,000 ms.
+         * <p>Message retention period in milliseconds. Current min value is 60000 ms.</p>
          * @type {number || null}
          */
         this.RetentionMs = null;
 
         /**
-         * Topic remarks, which are a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+         * <p>Topic remark</p><p>Input parameter limit: no more than 64 characters</p>
          * @type {string || null}
          */
         this.Note = null;
 
         /**
-         * Tag list
+         * <p>Tag list</p>
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -11357,7 +11645,7 @@ class CreateInstancePreRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * <P>Specifies the prepaid purchase duration, such as "1m" (exactly one month). value ranges from 1m to 36m.</p>.
+         * <p>Prepaid purchase duration, for example "1m", exactly one month, value ranges from 1m to 36m.</p>
          * @type {string || null}
          */
         this.Period = null;
@@ -11405,7 +11693,7 @@ class CreateInstancePreRequest extends  AbstractModel {
         this.KafkaVersion = null;
 
         /**
-         * <P>Instance type. specifies "standard" for standard edition instance (default), "profession" for professional edition instance, "premium" for advanced edition instance.</p>.
+         * <p>Instance type: Fill in "standard" for [standard edition instance] (default), "profession" for [professional edition instance], and "premium" for [Advanced Edition Instance].</p>
          * @type {string || null}
          */
         this.SpecificationsType = null;
@@ -11435,7 +11723,7 @@ class CreateInstancePreRequest extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * <p>Specifies the instance disk type for pro edition/advanced edition. standard edition instances do not require this field. valid values: "CLOUD_SSD" (SSD CLOUD disk), "CLOUD_BASIC" (high-performance CLOUD block storage). default value: "CLOUD_BASIC".</p>.
+         * <p>Instance disk type for Pro Edition/Advanced Edition instances. You do not need to fill it in for Standard Edition instances. "CLOUD_SSD": SSD CLOUD disk; "CLOUD_BASIC": high-performance CLOUD block storage. Defaults to "CLOUD_BASIC" if not specified.</p>
          * @type {string || null}
          */
         this.DiskType = null;
@@ -11482,6 +11770,12 @@ class CreateInstancePreRequest extends  AbstractModel {
          */
         this.CustomSSLCertId = null;
 
+        /**
+         * <p>Elastic storage switch</p><p>Enumeration value:</p><ul><li>0: Turn off</li><li>1: Turn on</li></ul><p>Default value: 0</p>
+         * @type {number || null}
+         */
+        this.StoreQuantityType = null;
+
     }
 
     /**
@@ -11522,48 +11816,7 @@ class CreateInstancePreRequest extends  AbstractModel {
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.ElasticBandwidthSwitch = 'ElasticBandwidthSwitch' in params ? params.ElasticBandwidthSwitch : null;
         this.CustomSSLCertId = 'CustomSSLCertId' in params ? params.CustomSSLCertId : null;
-
-    }
-}
-
-/**
- * DeleteTopicIpWhiteList request structure.
- * @class
- */
-class DeleteTopicIpWhiteListRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1) api.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1) api.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * IP allowlist list
-         * @type {Array.<string> || null}
-         */
-        this.IpWhiteList = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.IpWhiteList = 'IpWhiteList' in params ? params.IpWhiteList : null;
+        this.StoreQuantityType = 'StoreQuantityType' in params ? params.StoreQuantityType : null;
 
     }
 }
@@ -11914,7 +12167,7 @@ class InstanceDetail extends  AbstractModel {
         this.VipList = null;
 
         /**
-         * <P>Specifies the instance status. valid values: 0 (creating), 1 (running), 2 (deleting), 3 (deleted), 5 (isolated), 7 (upgrading), -1 (creation failed).</p>.
+         * <p>Instance status. 0: Creating, 1: Running, 2: Deleting, 3: Deleted, 5: Isolated, 7: Upgrading, -1: Creation failed</p>
          * @type {number || null}
          */
         this.Status = null;
@@ -12076,7 +12329,7 @@ class InstanceDetail extends  AbstractModel {
         this.Features = null;
 
         /**
-         * <p>Message retention size at the instance level</p>Measurement unit: byte<br>Default value: -1<br><p>Message retention size at the instance level</p>
+         * <p>Message retention size at the instance level</p><p>Measurement unit: byte</p><p>Default value: -1</p><p>Message retention size at the instance level</p>
          * @type {number || null}
          */
         this.RetentionBytes = null;
@@ -12522,6 +12775,7 @@ module.exports = {
     Assignment: Assignment,
     ModifyAclRuleRequest: ModifyAclRuleRequest,
     DescribeAclRuleResponse: DescribeAclRuleResponse,
+    GroupOffsetPartition: GroupOffsetPartition,
     DescribeConsumerGroupResponse: DescribeConsumerGroupResponse,
     InquiryDetailPrice: InquiryDetailPrice,
     FetchMessageListByOffsetResponse: FetchMessageListByOffsetResponse,
@@ -12557,13 +12811,14 @@ module.exports = {
     DescribeTypeInstancesResponse: DescribeTypeInstancesResponse,
     Tag: Tag,
     ModifyAclRuleResponse: ModifyAclRuleResponse,
+    ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
     BatchModifyGroupOffsetsResponse: BatchModifyGroupOffsetsResponse,
     SecurityGroupRoute: SecurityGroupRoute,
     GroupResponse: GroupResponse,
     FetchMessageListByTimestampRequest: FetchMessageListByTimestampRequest,
     CreateDatahubTopicRequest: CreateDatahubTopicRequest,
-    InstanceChargeParam: InstanceChargeParam,
     CreateInstancePostResp: CreateInstancePostResp,
+    ModifyGroupOffsetsRequest: ModifyGroupOffsetsRequest,
     DescribeDatahubTopicResponse: DescribeDatahubTopicResponse,
     DescribeConsumerGroupRequest: DescribeConsumerGroupRequest,
     DescribeCvmInfoRequest: DescribeCvmInfoRequest,
@@ -12620,7 +12875,9 @@ module.exports = {
     BatchContent: BatchContent,
     DeleteRouteTriggerTimeResponse: DeleteRouteTriggerTimeResponse,
     DescribeUserResponse: DescribeUserResponse,
+    ModifyAccessPolicyRequest: ModifyAccessPolicyRequest,
     DescribeTopicRequest: DescribeTopicRequest,
+    IsolatedInstancePreRequest: IsolatedInstancePreRequest,
     DealInstanceDTO: DealInstanceDTO,
     CreatePartitionRequest: CreatePartitionRequest,
     Group: Group,
@@ -12639,11 +12896,12 @@ module.exports = {
     Config: Config,
     ModifyPasswordRequest: ModifyPasswordRequest,
     ModifyInstanceAttributesRequest: ModifyInstanceAttributesRequest,
+    DescribeAccessPolicyRequest: DescribeAccessPolicyRequest,
     DescribeRegionResponse: DescribeRegionResponse,
     CreateTopicResponse: CreateTopicResponse,
     VipEntity: VipEntity,
     DescribeTopicProduceConnectionResponse: DescribeTopicProduceConnectionResponse,
-    ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
+    IpWhitelistDTO: IpWhitelistDTO,
     ConsumerGroupTopic: ConsumerGroupTopic,
     User: User,
     CreateAclRuleResponse: CreateAclRuleResponse,
@@ -12652,7 +12910,7 @@ module.exports = {
     CreateInstancePostData: CreateInstancePostData,
     DescribeGroupOffsetsRequest: DescribeGroupOffsetsRequest,
     DescModifyType: DescModifyType,
-    GroupOffsetPartition: GroupOffsetPartition,
+    ExternalAccessInfoWrapper: ExternalAccessInfoWrapper,
     DescribeInstancesRequest: DescribeInstancesRequest,
     InstanceAttributesResponse: InstanceAttributesResponse,
     DescribeDatahubTopicsResponse: DescribeDatahubTopicsResponse,
@@ -12662,9 +12920,10 @@ module.exports = {
     DescribeSecurityGroupRoutesRequest: DescribeSecurityGroupRoutesRequest,
     ModifyInstancePreResponse: ModifyInstancePreResponse,
     CreateUserRequest: CreateUserRequest,
+    ModifyAccessPolicyResponse: ModifyAccessPolicyResponse,
     InstanceDetailResponse: InstanceDetailResponse,
     DeleteRouteRequest: DeleteRouteRequest,
-    DeleteTopicIpWhiteListResponse: DeleteTopicIpWhiteListResponse,
+    InstanceChargeParam: InstanceChargeParam,
     CreateInstancePreResponse: CreateInstancePreResponse,
     CvmAndIpInfo: CvmAndIpInfo,
     DescribeInstancesDetailRequest: DescribeInstancesDetailRequest,
@@ -12689,13 +12948,14 @@ module.exports = {
     InstanceResponse: InstanceResponse,
     DatahubTopicDTO: DatahubTopicDTO,
     DescribeGroupInfoRequest: DescribeGroupInfoRequest,
-    DescribeGroup: DescribeGroup,
+    DescribeAccessPolicyResponse: DescribeAccessPolicyResponse,
     TopicPartitionDO: TopicPartitionDO,
     CreateTopicResp: CreateTopicResp,
     TaskStatusResponse: TaskStatusResponse,
     BatchModifyTopicInfo: BatchModifyTopicInfo,
     DescribeRouteResponse: DescribeRouteResponse,
     ModifyDatahubTopicResponse: ModifyDatahubTopicResponse,
+    DescribeGroup: DescribeGroup,
     DescribeDatahubTopicsRequest: DescribeDatahubTopicsRequest,
     DescribeTypeInstancesRequest: DescribeTypeInstancesRequest,
     InquiryPrice: InquiryPrice,
@@ -12704,7 +12964,7 @@ module.exports = {
     DescribeGroupOffsetsResponse: DescribeGroupOffsetsResponse,
     SendMessageRequest: SendMessageRequest,
     ConsumerRecord: ConsumerRecord,
-    ModifyGroupOffsetsRequest: ModifyGroupOffsetsRequest,
+    IsolatedInstancePreResponse: IsolatedInstancePreResponse,
     BatchModifyTopicAttributesRequest: BatchModifyTopicAttributesRequest,
     DeleteGroupResponse: DeleteGroupResponse,
     CreateTopicIpWhiteListRequest: CreateTopicIpWhiteListRequest,
@@ -12716,7 +12976,6 @@ module.exports = {
     ModifyDatahubTopicRequest: ModifyDatahubTopicRequest,
     ModifyTopicAttributesRequest: ModifyTopicAttributesRequest,
     CreateInstancePreRequest: CreateInstancePreRequest,
-    DeleteTopicIpWhiteListRequest: DeleteTopicIpWhiteListRequest,
     DeleteTopicResponse: DeleteTopicResponse,
     DescribeDatahubTopicResp: DescribeDatahubTopicResp,
     DescribeTaskStatusRequest: DescribeTaskStatusRequest,

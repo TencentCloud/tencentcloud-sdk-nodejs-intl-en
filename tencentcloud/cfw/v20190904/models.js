@@ -38,6 +38,206 @@ class DescribeNatFwInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * Status monitoring filter condition.
+ * @class
+ */
+class CfwStatusMonitorFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter field name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Filter value list, up to 10.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+        /**
+         * Operator type, optional; only supported for backend permission types.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OperatorType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+        this.OperatorType = 'OperatorType' in params ? params.OperatorType : null;
+
+    }
+}
+
+/**
+ * DescribeCfwStatusMonitor request structure.
+ * @class
+ */
+class DescribeCfwStatusMonitorRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Operation type. describe_scene means discovery of scenarios and secondary dropdown options; fetch_scene means acquisition of scenario-based snapshots. Required.
+         * @type {string || null}
+         */
+        this.Op = null;
+
+        /**
+         * Firewall scenario type. Supports internet_edge (Internet edge firewall), nat_cluster (NAT border firewall - cluster), nat_ha (NAT border firewall - primary/secondary), vpc_cluster (VPC boundary firewall - cluster), vpc_ha (VPC boundary firewall - primary/secondary). Required.
+         * @type {string || null}
+         */
+        this.FirewallType = null;
+
+        /**
+         * Secondary dropdown option ID. fetch_scene is imported as needed, and the value comes from selection.available_options[].ID returned by describe_scene. internet_edge is the region, NAT is the instance ID, and VPC bandwidth scenario is the firewall group ID. The connections aggregation scenario for VPC_cluster ignores this parameter.
+         * @type {string || null}
+         */
+        this.SelectionId = null;
+
+        /**
+         * Secondary dropdown display name. Can be used as an alternative to SelectionId for matching by name. The value comes from selection.available_options[].name returned by describe_scene.
+         * @type {string || null}
+         */
+        this.SelectionName = null;
+
+        /**
+         * Engine instance ID. Mainly used in vpc ha scenarios where a firewall group corresponds to multiple instances. Preferentially use the selection.available_options[].instance_ID returned by describe_scene. If only instance_ids are available, select a string value from the array.
+         * @type {string || null}
+         */
+        this.SelectionInstanceId = null;
+
+        /**
+         * Metrics tab. fetch_scene can be passed; used when not passed, this scenario default value. Support bandwidth, connections.
+         * @type {string || null}
+         */
+        this.Metric = null;
+
+        /**
+         * Perspective under the metric. fetch_scene is optional; the default value for this scenario is used when not provided. Supports ip, subnet, session, switch, and vpc. The actual usable composite is subject to the return from describe_scene.
+         * @type {string || null}
+         */
+        this.Perspective = null;
+
+        /**
+         * NAT primary/secondary number of connections IP perspective range. External means external IP, asset means Asset IP. Only nat_ha + connections + ip is used. Other group input will return InvalidParameter.
+         * @type {string || null}
+         */
+        this.IpScope = null;
+
+        /**
+         * Preset time range. Default 24h; used by fetch_scene. Supports 5m, 15m, 30m, 1h, 6h, 24h, 3d, 7d, 30d, today, yesterday, day before yesterday, this week, last week, this month.
+         * @type {string || null}
+         */
+        this.TimePreset = null;
+
+        /**
+         * Custom start time. Format YYYY-MM-DD HH:MM:SS; must be specified together with EndTime, maximum span 30 days.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Custom end time. Format YYYY-MM-DD HH:MM:SS; must be consistent with StartTime at the same time, maximum span 30 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Page number, starting from 1. Default is 1; used for the fetch_scene list viewing angle.
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * Entries per page. Default 10, value 1 to 100; used for the viewing angle of the fetch_scene list.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Whether to only get overview data. When true, fetch_scene only requests overview, skips table/detail, and is suitable for viewing scenario snapshot summary.
+         * @type {boolean || null}
+         */
+        this.OverviewOnly = null;
+
+        /**
+         * Original offset coverage. Option, overwrites the calculation result of Page after input; value 0 to 10000.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting field. Option. InputMax and OutputMax are supported for the Internet boundary IP and NAT IP/subnet perspective. SwitchName is supported for the VPC switch perspective. FlowMax is supported for the VPC IP/VPC perspective. Do not pass other groups.
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+        /**
+         * Sorting order. Default desc; supports asc, desc.
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+        /**
+         * Filter condition list. Reserved.
+         * @type {Array.<CfwStatusMonitorFilter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Op = 'Op' in params ? params.Op : null;
+        this.FirewallType = 'FirewallType' in params ? params.FirewallType : null;
+        this.SelectionId = 'SelectionId' in params ? params.SelectionId : null;
+        this.SelectionName = 'SelectionName' in params ? params.SelectionName : null;
+        this.SelectionInstanceId = 'SelectionInstanceId' in params ? params.SelectionInstanceId : null;
+        this.Metric = 'Metric' in params ? params.Metric : null;
+        this.Perspective = 'Perspective' in params ? params.Perspective : null;
+        this.IpScope = 'IpScope' in params ? params.IpScope : null;
+        this.TimePreset = 'TimePreset' in params ? params.TimePreset : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OverviewOnly = 'OverviewOnly' in params ? params.OverviewOnly : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new CfwStatusMonitorFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyNatFwVpcDnsSwitch response structure.
  * @class
  */
@@ -471,6 +671,56 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.ReturnMsg = 'ReturnMsg' in params ? params.ReturnMsg : null;
         this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddAclRule request structure.
+ * @class
+ */
+class AddAclRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The list of Internet boundary rules to be added cannot be empty. Each rule must meet the requirements for direction, source and target, action, scope, protocol port, and template restrictions. The entire request must also comply with rule quota and effective rule count limitations. Account-related values must come from read-only queries: for address templates, call DescribeAddressTemplateList, filter the request with TemplateType=1 or 5, and confirm that the returned Data[].Type is 1 or 5. Write Data[].Uuid (with the mb_ prefix) to the corresponding Content, and do not use Data[].TemplateId (with the ip-/dm- prefix). For protocol port templates, filter the request with TemplateType=6, and write Data[].TemplateId (with the pp- prefix) to ParamTemplateId. For asset instances, call DescribeCfwAssets, parse the returned results, and use assets[].instance_id. For asset groups, call DescribeResourceGroupNew, pass QueryType=resource, GroupId="0", ShowType=all, parse the returned results, and use GroupId. For resource tags, pass QueryType=tag, skip the "all assets" root node, and construct JSON using the first-level node GroupName as the Key and the selected second-level sub-node GroupName as the Value, without writing GroupId. For regions, call DescribeAclRegInfo: for Scope=serial, pass FwType=["SERIAL"]; for Scope=side, pass FwType=["BYPASS"]; for Scope=all, pass both items simultaneously, and use Data[].RegionCode. Do not use display names or manually concatenate values. The range for overwrite import is determined solely by the Direction of the first rule.
+         * @type {Array.<CreateRuleItem> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * <p>AI operation source</p><p>Enumeration value:</p><ul><li>console: console source value</li><li>wechat: WeChat</li></ul>
+         * @type {string || null}
+         */
+        this.CfwAiAgentOperationSource = null;
+
+        /**
+         * Add method. Omit or an empty string means ordinary addition; insert_rule means adding new at a specified position; batch_import means non-overwrite batch import; batch_import_cover means overwrite import, which deletes the existing operation rule corresponding to the first rule's Direction and then adds Rules. Deleted rules will not be restored if addition fails, with extremely high risk. The coverage area is only determined by the first rule. The caller must ensure the Directions of the Rules match. Only the above values are supported.
+         * @type {string || null}
+         */
+        this.From = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new CreateRuleItem();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.CfwAiAgentOperationSource = 'CfwAiAgentOperationSource' in params ? params.CfwAiAgentOperationSource : null;
+        this.From = 'From' in params ? params.From : null;
 
     }
 }
@@ -1080,6 +1330,41 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
+ * DescribeCfwStatusMonitor response structure.
+ * @class
+ */
+class DescribeCfwStatusMonitorResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query result. UTF-8 JSON object string; the caller needs to parse Response.Data. The scene returned by describe_scene includes metric_options, perspective_options, default_metric, default_perspective, selection_required_by_metric, selection_kind_by_metric, and time_preset_options; selection.available_options returns options applicable to SelectionId, SelectionName, and SelectionInstanceId. fetch_scene returns a data snapshot of the selected scenario, which may contain overview, table, or detail. The example below is a section of the field structure, and the array only shows representative values.
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteAllAccessControlRule request structure.
  * @class
  */
@@ -1117,6 +1402,70 @@ class DeleteAllAccessControlRuleRequest extends  AbstractModel {
         this.Direction = 'Direction' in params ? params.Direction : null;
         this.EdgeId = 'EdgeId' in params ? params.EdgeId : null;
         this.Area = 'Area' in params ? params.Area : null;
+
+    }
+}
+
+/**
+ * ModifyBlockIgnoreList request structure.
+ * @class
+ */
+class ModifyBlockIgnoreListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type of the rule. Values: `1` (Blocklist); `2` (Allowlist)
+         * @type {number || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Either IP or Domain is required
+         * @type {Array.<IocListData> || null}
+         */
+        this.IOC = null;
+
+        /**
+         * Optional values: delete, edit, and add
+         * @type {string || null}
+         */
+        this.IocAction = null;
+
+        /**
+         * Time format: yyyy-MM-dd HH:mm:ss. Required when IocAction is edit or add
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the period in the format of yyyy-MM-dd HH:mm:ss. It must be later than both the start time and the current time. It’s required when `IocAction` is `edit` or `add`. 
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+
+        if (params.IOC) {
+            this.IOC = new Array();
+            for (let z in params.IOC) {
+                let obj = new IocListData();
+                obj.deserialize(params.IOC[z]);
+                this.IOC.push(obj);
+            }
+        }
+        this.IocAction = 'IocAction' in params ? params.IocAction : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -1604,6 +1953,41 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
+ * DescribeCfwLogs response structure.
+ * @class
+ */
+class DescribeCfwLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query result. UTF-8 JSON object string; the caller must parse Response.Data. Items is the log array of the current page, and fields vary with LogType. TotalCount is the return limit of the current page, Limit is the page size, and LogType and TimeWindow echo the query scope. When HasMore=true, NextToken must be saved and used as-is for continued querying. When HasMore=false, pagination ends.
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ExpandCfwVertical request structure.
  * @class
  */
@@ -1781,42 +2165,24 @@ class ModifyAssetScanRequest extends  AbstractModel {
 }
 
 /**
- * ModifyBlockIgnoreList request structure.
+ * Sets the VPC DNS toggle of the NAT firewall 
  * @class
  */
-class ModifyBlockIgnoreListRequest extends  AbstractModel {
+class DnsVpcSwitch extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Type of the rule. Values: `1` (Blocklist); `2` (Allowlist)
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 0: off; 1: on
          * @type {number || null}
          */
-        this.RuleType = null;
-
-        /**
-         * Either IP or Domain is required
-         * @type {Array.<IocListData> || null}
-         */
-        this.IOC = null;
-
-        /**
-         * Optional values: delete, edit, and add
-         * @type {string || null}
-         */
-        this.IocAction = null;
-
-        /**
-         * Time format: yyyy-MM-dd HH:mm:ss. Required when IocAction is edit or add
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time of the period in the format of yyyy-MM-dd HH:mm:ss. It must be later than both the start time and the current time. It’s required when `IocAction` is `edit` or `add`. 
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.Status = null;
 
     }
 
@@ -1827,19 +2193,8 @@ class ModifyBlockIgnoreListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RuleType = 'RuleType' in params ? params.RuleType : null;
-
-        if (params.IOC) {
-            this.IOC = new Array();
-            for (let z in params.IOC) {
-                let obj = new IocListData();
-                obj.deserialize(params.IOC[z]);
-                this.IOC.push(obj);
-            }
-        }
-        this.IocAction = 'IocAction' in params ? params.IocAction : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1897,6 +2252,63 @@ class AddEnterpriseSecurityGroupRulesRequest extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
         this.IsDelay = 'IsDelay' in params ? params.IsDelay : null;
+
+    }
+}
+
+/**
+ * DescribeIPStatusList response structure.
+ * @class
+ */
+class DescribeIPStatusListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP status information
+         * @type {Array.<IPDefendStatus> || null}
+         */
+        this.StatusList = null;
+
+        /**
+         * Status code
+         * @type {number || null}
+         */
+        this.ReturnCode = null;
+
+        /**
+         * Status information
+         * @type {string || null}
+         */
+        this.ReturnMsg = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.StatusList) {
+            this.StatusList = new Array();
+            for (let z in params.StatusList) {
+                let obj = new IPDefendStatus();
+                obj.deserialize(params.StatusList[z]);
+                this.StatusList.push(obj);
+            }
+        }
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.ReturnMsg = 'ReturnMsg' in params ? params.ReturnMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2992,6 +3404,41 @@ class DeleteSecurityGroupRuleRequest extends  AbstractModel {
         this.Area = 'Area' in params ? params.Area : null;
         this.Direction = 'Direction' in params ? params.Direction : null;
         this.IsDelReverse = 'IsDelReverse' in params ? params.IsDelReverse : null;
+
+    }
+}
+
+/**
+ * AddAclRule response structure.
+ * @class
+ */
+class AddAclRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID list of the added rules, in the same sequence as Rules.
+         * @type {Array.<number> || null}
+         */
+        this.RuleUuid = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleUuid = 'RuleUuid' in params ? params.RuleUuid : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5344,30 +5791,30 @@ class ModifySecurityGroupSequenceRulesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeResourceGroupNew request structure.
+ * DescribeVpcAcRule response structure.
  * @class
  */
-class DescribeResourceGroupNewRequest extends  AbstractModel {
+class DescribeVpcAcRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Query type. Network–VPC; business recognition–resource; resource tag–tag
-         * @type {string || null}
+         * Total Data
+         * @type {number || null}
          */
-        this.QueryType = null;
+        this.Total = null;
 
         /**
-         * Asset group ID, 0: all asset group IDs
-         * @type {string || null}
+         * Data list
+         * @type {Array.<VpcRuleItem> || null}
          */
-        this.GroupId = null;
+        this.Data = null;
 
         /**
-         * all: all, including subgroups; own: my asset groups only
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ShowType = null;
+        this.RequestId = null;
 
     }
 
@@ -5378,9 +5825,17 @@ class DescribeResourceGroupNewRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.QueryType = 'QueryType' in params ? params.QueryType : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.ShowType = 'ShowType' in params ? params.ShowType : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new VpcRuleItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5829,30 +6284,30 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * DescribeVpcAcRule response structure.
+ * DescribeResourceGroupNew request structure.
  * @class
  */
-class DescribeVpcAcRuleResponse extends  AbstractModel {
+class DescribeResourceGroupNewRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total Data
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * Data list
-         * @type {Array.<VpcRuleItem> || null}
-         */
-        this.Data = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Query type. Network–VPC; business recognition–resource; resource tag–tag
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.QueryType = null;
+
+        /**
+         * Asset group ID, 0: all asset group IDs
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * all: all, including subgroups; own: my asset groups only
+         * @type {string || null}
+         */
+        this.ShowType = null;
 
     }
 
@@ -5863,17 +6318,9 @@ class DescribeVpcAcRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new VpcRuleItem();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.QueryType = 'QueryType' in params ? params.QueryType : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.ShowType = 'ShowType' in params ? params.ShowType : null;
 
     }
 }
@@ -6701,36 +7148,48 @@ class ModifyNatFwSwitchRequest extends  AbstractModel {
 }
 
 /**
- * DescribeIPStatusList response structure.
+ * DescribeCfwLogs request structure.
  * @class
  */
-class DescribeIPStatusListResponse extends  AbstractModel {
+class DescribeCfwLogsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * IP status information
-         * @type {Array.<IPDefendStatus> || null}
+         * Log type. Required for the initial query; cannot be passed when using NextToken for continuation. cfw_netflow_border=Internet boundary traffic, cfw_netflow_vpc=VPC east-west traffic, cfw_netflow_nat=NAT firewall traffic, cfw_netflow_nta=NDR/NTA traffic, cfw_netflow_dns=DNS firewall log, cfw_rule_threatinfo=Intrusion defense/Threat Intelligence Alarm, cfw_rule_acl=Internet Boundary Access Control log, cfw_rule_vpc_acl=VPC access control log, cfw_rule_nat_acl=NAT access control log, cfw_ndr_subject_risk=NDR topic risk, cfw_ndr_dataleak_entry=NDR sensitive data leak, cfw_ndr_ai_audit=NDR AI application identification and Large Model Invocation audit, cfw_feature_collect=Statistical feature and baseline anomaly, cfw_behavior_collect=Beacon/DNS/port/cert/VPC mutual access behavior, operate_log_all=Operation audit log.
+         * @type {string || null}
          */
-        this.StatusList = null;
+        this.LogType = null;
 
         /**
-         * Status code
+         * Log filter expression. Default * means no filtering; for example src_ip:1.1.1.1. Queryable fields vary with LogType. You should preferentially use the field name returned in the corresponding Items. Do not guess non-existing fields. It cannot be passed when using NextToken for continued query.
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * Query start time. Supports RFC3339, YYYY-MM-DD HH:MM:SS, YYYY-MM-DD, or Unix timestamp. Input to query the TimeRange backward from this time. Cannot be imported when using NextToken for continued querying.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Query time range. Default 1h; format is positive integer plus unit m/h/d, such as 5m, 1h, 24h, 7d; cannot be passed when using NextToken for continuation.
+         * @type {string || null}
+         */
+        this.TimeRange = null;
+
+        /**
+         * Return limit. Selectable for initial query, default 100; value 1 to 1000; cannot be passed when using NextToken for continued query.
          * @type {number || null}
          */
-        this.ReturnCode = null;
+        this.Limit = null;
 
         /**
-         * Status information
+         * Previous page opaque continuation token returned by Response.Data. Not required for initial query; only required for continuation query with NextToken. Invalid, tampered, or mismatched tenant will be rejected.
          * @type {string || null}
          */
-        this.ReturnMsg = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.NextToken = null;
 
     }
 
@@ -6741,18 +7200,12 @@ class DescribeIPStatusListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.StatusList) {
-            this.StatusList = new Array();
-            for (let z in params.StatusList) {
-                let obj = new IPDefendStatus();
-                obj.deserialize(params.StatusList[z]);
-                this.StatusList.push(obj);
-            }
-        }
-        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
-        this.ReturnMsg = 'ReturnMsg' in params ? params.ReturnMsg : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.TimeRange = 'TimeRange' in params ? params.TimeRange : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
 
     }
 }
@@ -9066,24 +9519,108 @@ class DescribeNatFwInstanceResponse extends  AbstractModel {
 }
 
 /**
- * Sets the VPC DNS toggle of the NAT firewall 
+ * Complete content of the Internet Boundary Access Control Rule, shared for adding new and modification. When projects are added, default values are handled according to field descriptions; during modification, writable content is completely replaced, omitted writable fields do not inherit old values, and system management fields are unaffected.
  * @class
  */
-class DnsVpcSwitch extends  AbstractModel {
+class CreateRuleItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * VPC ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * 0: off; 1: on
+         * Rule direction: 1 means inbound, 0 means outbound; other integers or omitted values result in verification failure. Direction also determines the available combinations of SourceType, TargetType, Scope, and Protocol.
          * @type {number || null}
          */
-        this.Status = null;
+        this.Direction = null;
+
+        /**
+         * Rule order, required. Pass -1 to append to the end of the current direction; a positive serial number indicates insertion at the corresponding position and postponement of subsequent rules; treat 0 as 1, other negative numbers and out-of-scope values should not be used. When a new request contains multiple rules, Direction must be the same; pass all -1 for appending, pass consecutive incremental positive serial numbers in request order for insertion. A modify request accepts only one rule.
+         * @type {number || null}
+         */
+        this.OrderIndex = null;
+
+        /**
+         * Destination port. Ignore this field and set it to an empty string when Protocol is ICMP. For other protocols, you must provide a parse string. You can enter a positive integer single port or a "start/end" range separated with commas. The starting value must not be larger than the end value. -1/-1 indicates all ports. FTP only accepts one positive integer. For domain or domain name template targets within the side or all scope, only -1/-1 or 0/65535 are accepted.
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * Protocol, case-insensitive parsing. Layer-4 values TCP, UDP, ICMP, ICMPV6, ANY are normalized to uppercase. Application-layer values HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, DNS, TLS/SSL and aliases domain, TLS, SSL are normalized to corresponding standard values. ANY means no protocol limitation, not an empty Protocol. It belongs to both parseable Layer-4 protocols and application protocols. domain, TLS, SSL are all normalized to TLS/SSL. The target for domain or domain name template accepts the above application-layer protocols and ANY, but does not accept FTP and other Layer-4 protocols. dnsparse and domainiptwoverify only accept TCP or UDP and only support serial. Other targets in the public cloud environment do not accept application-layer protocols outside of FTP and ANY. Under the side or all scope, inbound only accepts TCP, outbound only accepts TCP, HTTP/HTTPS, or TLS/SSL. When DNS is used for a non-domain target and the target is not *, the destination content must also be a rule list of valid non-IP domain names. When using a protocol port template, each group of protocol and port in the template also executes these integration validations.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Traffic processing actions are case-insensitive. accept means allow, drop means deny, and log means observe. isolateinaccept means allow access to allowlisted traffic for isolated assets, isolateindrop means block access to other traffic for isolated assets, isolateoutaccept means allow isolated assets to access allowlisted targets, and isolateoutdrop means block isolated assets from accessing other targets. drop and its deny alias also verify whether the current account has Internet boundary blocking capability.
+         * @type {string || null}
+         */
+        this.RuleAction = null;
+
+        /**
+         * Access the source content. For ip or net, use a valid IP/CIDR list, with a maximum of 10 items in a regular list. For template, use a parseable address template identifier of the current account. When Direction=0, use the corresponding resource identifier for instance, group, and tag. Among them, the instance must be resolvable to a public IP, and the tag must exist with the format {"Key":"tag key","Value":"tag value"}. When Direction=1, use a CSV of region codes for location, which must pass the verification of the new regional rules capability of the current account. For vendor, use a CSV of tencent, aliyun, aws, huawei, azure, or all. location and vendor are converted to region or manufacturer matchmaking information when saved.
+         * @type {string || null}
+         */
+        this.SourceContent = null;
+
+        /**
+         * Access source type, case-insensitive parsing. net and ip both indicate IP/CIDR, template refers to address template, instance refers to asset instance, group refers to asset group, tag refers to resource tag, location refers to region, vendor refers to cloud service provider. Direction=1 accepts ip, net, template, location, vendor; Direction=0 accepts ip, net, template, instance, group, tag. ip and net are handled as the same type.
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * Access the destination content. For ip or net, use a valid IP/CIDR list. For domain, use a valid IP, standard domain name, or wildcard domain name list, and also accept a single *. The regular list supports up to 10 items, and wildcard domain names support up to 5 levels. When domain is used with the DNS protocol, IP is not accepted. For dnsparse, use a single valid domain name, wildcard domain name, or an mb_ domain name template that can be resolved by the current account. For domainiptwoverify, use a single valid domain name without wildcards or such a template. Both do not accept a single *, IP, comma-separated list, or wildcard domain names within the segment. For serial domain segments with wildcards and domainiptwoverify templates, the current environment must support the corresponding capacity. For template, use the address template identifier that can be resolved by the current account. For Direction=1, instance, group, and tag use the corresponding resource identifiers. The instance must be resolvable to a public network IP, and the tag must exist with the format {"Key":"tag key","Value":"tag value"}. For Direction=0, location uses region code CSV, and vendor uses CSV of tencent, aliyun, aws, huawei, azure, or all. The standardized content has a maximum length of 1023.
+         * @type {string || null}
+         */
+        this.TargetContent = null;
+
+        /**
+         * Access purpose type. Case-insensitive parsing. net and ip both indicate IP/CIDR, template indicates address template, instance indicates asset instance, group indicates asset group, tag indicates resource tag, location indicates region, vendor indicates cloud service provider, domain indicates FQDN matching (content can also be IP or *), dnsparse indicates loose matching: Host/SNI matches the domain name, or the destination IP belongs to the IP range of the current DNS resolution result of that domain name, hit if any condition is met; domainiptwoverify indicates strict matching: the above two conditions require simultaneous satisfaction. Direction=1 accepts ip, net, template, domain, instance, group, tag; Direction=0 accepts ip, net, template, domain, dnsparse, domainiptwoverify, location, or vendor.
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * Rule description, no more than 100 characters. When projects are added, save the requested value; when modified, replace fully, do not inherit old values.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Enable status. Non-empty values accept the string true or false in a case-insensitive manner and are normalized to enable or disable. When omitted or an empty string is input, the default enabled configuration for access control of the current account is read. If this configuration is unavailable, it is enabled by default. Existing rules are replaced without inheriting old values.
+         * @type {string || null}
+         */
+        this.Enable = null;
+
+        /**
+         * Associated alarm or source event ID. When projects are added, omit or input an empty string to indicate not associated. When modifying, import the rules[].log_id returned by DescribeCfwRules as is. If not returned, omit or input an empty string. The old value is not automatically inherited during replacement. When From=batch_import_cover, a non-empty value is also reused as the string literal identification for the rule after overwrite import.
+         * @type {string || null}
+         */
+        this.LogId = null;
+
+        /**
+         * Protocol port template ID. Omit or input an empty string to indicate no template is used. If not empty, it must point to an existing template in the current account with the content format "protocol:port", otherwise the request fails. The protocol and port in the template must meet the integration restrictions of Direction, TargetType, and Scope. Protocol and Port must still comply with their respective field rules, but are not required to be fixed as ANY, -1/-1, or serial.
+         * @type {string || null}
+         */
+        this.ParamTemplateId = null;
+
+        /**
+         * Rule source: 0 means General rule, 2 means isolated asset outgoing access rule. It can be omitted when projects are added, and omitted values are handled as 0. Only 0 or 2 are accepted for explicit input and modification, and the original rule value should be imported during modification.
+         * @type {number || null}
+         */
+        this.RuleSource = null;
+
+        /**
+         * Effective scope. Case insensitivity: serial means only Internet boundary serial firewall, side means only Internet boundary bypass firewall, all means acting on both serial and bypass firewalls simultaneously. Omitted, empty string, or other values will result in verification failure. The international site environment will normalize valid user-submitted input to serial. For linkage restrictions on protocol, port, destination type, and protocol port templates, refer to Protocol, Port, and ParamTemplateId.
+         * @type {string || null}
+         */
+        this.Scope = null;
+
+        /**
+         * Rule numeric value ID. Ordinary new additions, user-specified location additions, and batch import ignore this field; positive integer ID is usable when From=batch_import_cover; must provide an existing and modifiable positive integer ID of the current account for modification, used for locating and fully replacing the original rule, omitted, non-positive integer, or non-existing IDs cause request failure.
+         * @type {number || null}
+         */
+        this.Uuid = null;
 
     }
 
@@ -9094,8 +9631,22 @@ class DnsVpcSwitch extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
+        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.RuleAction = 'RuleAction' in params ? params.RuleAction : null;
+        this.SourceContent = 'SourceContent' in params ? params.SourceContent : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.TargetContent = 'TargetContent' in params ? params.TargetContent : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.LogId = 'LogId' in params ? params.LogId : null;
+        this.ParamTemplateId = 'ParamTemplateId' in params ? params.ParamTemplateId : null;
+        this.RuleSource = 'RuleSource' in params ? params.RuleSource : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
 
     }
 }
@@ -9404,6 +9955,8 @@ class DescribeGuideScanInfoResponse extends  AbstractModel {
 
 module.exports = {
     DescribeNatFwInstanceRequest: DescribeNatFwInstanceRequest,
+    CfwStatusMonitorFilter: CfwStatusMonitorFilter,
+    DescribeCfwStatusMonitorRequest: DescribeCfwStatusMonitorRequest,
     ModifyNatFwVpcDnsSwitchResponse: ModifyNatFwVpcDnsSwitchResponse,
     DescribeNatFwInstanceWithRegionRequest: DescribeNatFwInstanceWithRegionRequest,
     ModifyNatAcRuleResponse: ModifyNatAcRuleResponse,
@@ -9413,6 +9966,7 @@ module.exports = {
     StaticInfo: StaticInfo,
     DescribeNatAcRuleResponse: DescribeNatAcRuleResponse,
     ModifyPublicIPSwitchStatusResponse: ModifyPublicIPSwitchStatusResponse,
+    AddAclRuleRequest: AddAclRuleRequest,
     ModifyNatAcRuleRequest: ModifyNatAcRuleRequest,
     ModifyAcRuleResponse: ModifyAcRuleResponse,
     ModifyNatSequenceRulesRequest: ModifyNatSequenceRulesRequest,
@@ -9422,7 +9976,9 @@ module.exports = {
     BlockIgnoreRule: BlockIgnoreRule,
     ModifyNatFwVpcDnsSwitchRequest: ModifyNatFwVpcDnsSwitchRequest,
     UnHandleEvent: UnHandleEvent,
+    DescribeCfwStatusMonitorResponse: DescribeCfwStatusMonitorResponse,
     DeleteAllAccessControlRuleRequest: DeleteAllAccessControlRuleRequest,
+    ModifyBlockIgnoreListRequest: ModifyBlockIgnoreListRequest,
     ModifyAllVPCSwitchStatusResponse: ModifyAllVPCSwitchStatusResponse,
     CreateSecurityGroupRulesResponse: CreateSecurityGroupRulesResponse,
     DescribeNatFwVpcDnsLstRequest: DescribeNatFwVpcDnsLstRequest,
@@ -9433,12 +9989,14 @@ module.exports = {
     ModifyStorageSettingResponse: ModifyStorageSettingResponse,
     RemoveAcRuleResponse: RemoveAcRuleResponse,
     NatFwInstance: NatFwInstance,
+    DescribeCfwLogsResponse: DescribeCfwLogsResponse,
     ExpandCfwVerticalRequest: ExpandCfwVerticalRequest,
     ModifyAllPublicIPSwitchStatusResponse: ModifyAllPublicIPSwitchStatusResponse,
     DeleteVpcInstanceResponse: DeleteVpcInstanceResponse,
     ModifyAssetScanRequest: ModifyAssetScanRequest,
-    ModifyBlockIgnoreListRequest: ModifyBlockIgnoreListRequest,
+    DnsVpcSwitch: DnsVpcSwitch,
     AddEnterpriseSecurityGroupRulesRequest: AddEnterpriseSecurityGroupRulesRequest,
+    DescribeIPStatusListResponse: DescribeIPStatusListResponse,
     SecurityGroupRule: SecurityGroupRule,
     DeleteSecurityGroupRuleResponse: DeleteSecurityGroupRuleResponse,
     ModifySequenceRulesRequest: ModifySequenceRulesRequest,
@@ -9453,6 +10011,7 @@ module.exports = {
     ModifyNatFwReSelectResponse: ModifyNatFwReSelectResponse,
     DescribeVpcAcRuleRequest: DescribeVpcAcRuleRequest,
     DeleteSecurityGroupRuleRequest: DeleteSecurityGroupRuleRequest,
+    AddAclRuleResponse: AddAclRuleResponse,
     SetNatFwEipRequest: SetNatFwEipRequest,
     SetNatFwEipResponse: SetNatFwEipResponse,
     AcListsData: AcListsData,
@@ -9497,7 +10056,7 @@ module.exports = {
     ModifyRunSyncAssetResponse: ModifyRunSyncAssetResponse,
     ModifyEnterpriseSecurityGroupRuleResponse: ModifyEnterpriseSecurityGroupRuleResponse,
     ModifySecurityGroupSequenceRulesResponse: ModifySecurityGroupSequenceRulesResponse,
-    DescribeResourceGroupNewRequest: DescribeResourceGroupNewRequest,
+    DescribeVpcAcRuleResponse: DescribeVpcAcRuleResponse,
     AddEnterpriseSecurityGroupRulesResponse: AddEnterpriseSecurityGroupRulesResponse,
     UnHandleEventDetail: UnHandleEventDetail,
     RemoveEnterpriseSecurityGroupRuleRequest: RemoveEnterpriseSecurityGroupRuleRequest,
@@ -9508,7 +10067,7 @@ module.exports = {
     ModifySequenceRulesResponse: ModifySequenceRulesResponse,
     DescribeResourceGroupNewResponse: DescribeResourceGroupNewResponse,
     DescribeNatFwInstanceWithRegionResponse: DescribeNatFwInstanceWithRegionResponse,
-    DescribeVpcAcRuleResponse: DescribeVpcAcRuleResponse,
+    DescribeResourceGroupNewRequest: DescribeResourceGroupNewRequest,
     ModifyBlockTopRequest: ModifyBlockTopRequest,
     DeleteAcRuleResponse: DeleteAcRuleResponse,
     IocListData: IocListData,
@@ -9525,7 +10084,7 @@ module.exports = {
     DeleteAcRuleRequest: DeleteAcRuleRequest,
     DeleteAllAccessControlRuleResponse: DeleteAllAccessControlRuleResponse,
     ModifyNatFwSwitchRequest: ModifyNatFwSwitchRequest,
-    DescribeIPStatusListResponse: DescribeIPStatusListResponse,
+    DescribeCfwLogsRequest: DescribeCfwLogsRequest,
     NatInstanceInfo: NatInstanceInfo,
     DescribeTLogIpListResponse: DescribeTLogIpListResponse,
     StopSecurityGroupRuleDispatchResponse: StopSecurityGroupRuleDispatchResponse,
@@ -9564,7 +10123,7 @@ module.exports = {
     AddNatAcRuleResponse: AddNatAcRuleResponse,
     ModifyBlockIgnoreListResponse: ModifyBlockIgnoreListResponse,
     DescribeNatFwInstanceResponse: DescribeNatFwInstanceResponse,
-    DnsVpcSwitch: DnsVpcSwitch,
+    CreateRuleItem: CreateRuleItem,
     CreateAcRulesRequest: CreateAcRulesRequest,
     ModifyEnterpriseSecurityDispatchStatusRequest: ModifyEnterpriseSecurityDispatchStatusRequest,
     DescribeBlockIgnoreListResponse: DescribeBlockIgnoreListResponse,

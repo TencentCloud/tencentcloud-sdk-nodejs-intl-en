@@ -2369,7 +2369,9 @@ class DescribeOnlineRecordResponse extends  AbstractModel {
         this.VideoInfos = null;
 
         /**
-         * 
+         * Playback URL, must be used with a signaling player. This field is only applicable to video generation mode
+Note: This field may return null, indicating that no valid value can be retrieved.
+Example value: http://replayurl
          * @type {string || null}
          */
         this.ReplayUrl = null;

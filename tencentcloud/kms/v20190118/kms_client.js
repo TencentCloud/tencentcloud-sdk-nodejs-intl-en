@@ -117,6 +117,7 @@ const ListDataKeysRequest = models.ListDataKeysRequest;
 const DeleteWhiteBoxKeyResponse = models.DeleteWhiteBoxKeyResponse;
 const ListDataKeyDetailRequest = models.ListDataKeyDetailRequest;
 const CancelDataKeyDeletionResponse = models.CancelDataKeyDeletionResponse;
+const RotateKeyResponse = models.RotateKeyResponse;
 const ListKeysRequest = models.ListKeysRequest;
 const DescribeWhiteBoxDecryptKeyRequest = models.DescribeWhiteBoxDecryptKeyRequest;
 const DataKey = models.DataKey;
@@ -158,6 +159,7 @@ const PostQuantumCryptoVerifyResponse = models.PostQuantumCryptoVerifyResponse;
 const DescribeWhiteBoxDecryptKeyResponse = models.DescribeWhiteBoxDecryptKeyResponse;
 const DescribeWhiteBoxDeviceFingerprintsResponse = models.DescribeWhiteBoxDeviceFingerprintsResponse;
 const PostQuantumCryptoDecryptResponse = models.PostQuantumCryptoDecryptResponse;
+const RotateKeyRequest = models.RotateKeyRequest;
 const DisableDataKeysRequest = models.DisableDataKeysRequest;
 const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
 const UnbindCloudResourceResponse = models.UnbindCloudResourceResponse;
@@ -683,6 +685,17 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     DisableKeyRotation(req, cb) {
         let resp = new DisableKeyRotationResponse();
         this.request("DisableKeyRotation", req, resp, cb);
+    }
+
+    /**
+     * Rotate the designated customer master key immediately. You can call DescribeKey to return the last rotation time and the next rotation time, and determine whether the rotation is successful.
+     * @param {RotateKeyRequest} req
+     * @param {function(string, RotateKeyResponse):void} cb
+     * @public
+     */
+    RotateKey(req, cb) {
+        let resp = new RotateKeyResponse();
+        this.request("RotateKey", req, resp, cb);
     }
 
     /**

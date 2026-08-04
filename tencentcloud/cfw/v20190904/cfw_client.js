@@ -38,6 +38,7 @@ const IPDefendStatus = models.IPDefendStatus;
 const BlockIgnoreRule = models.BlockIgnoreRule;
 const ModifyNatFwVpcDnsSwitchRequest = models.ModifyNatFwVpcDnsSwitchRequest;
 const UnHandleEvent = models.UnHandleEvent;
+const SearchLogResponse = models.SearchLogResponse;
 const DescribeCfwStatusMonitorResponse = models.DescribeCfwStatusMonitorResponse;
 const DeleteAllAccessControlRuleRequest = models.DeleteAllAccessControlRuleRequest;
 const ModifyBlockIgnoreListRequest = models.ModifyBlockIgnoreListRequest;
@@ -77,24 +78,26 @@ const AddAclRuleResponse = models.AddAclRuleResponse;
 const SetNatFwEipRequest = models.SetNatFwEipRequest;
 const SetNatFwEipResponse = models.SetNatFwEipResponse;
 const AcListsData = models.AcListsData;
-const ModifyPublicIPSwitchStatusRequest = models.ModifyPublicIPSwitchStatusRequest;
+const LogItems = models.LogItems;
 const CreateNatRuleItem = models.CreateNatRuleItem;
 const ModifySecurityGroupItemRuleStatusRequest = models.ModifySecurityGroupItemRuleStatusRequest;
 const DescribeSourceAssetRequest = models.DescribeSourceAssetRequest;
 const SecurityGroupOrderIndexData = models.SecurityGroupOrderIndexData;
 const DescribeSourceAssetResponse = models.DescribeSourceAssetResponse;
 const DescribeTLogInfoRequest = models.DescribeTLogInfoRequest;
+const LogItem = models.LogItem;
 const DescribeSecurityGroupListResponse = models.DescribeSecurityGroupListResponse;
 const AssetZone = models.AssetZone;
 const DescribeTLogIpListRequest = models.DescribeTLogIpListRequest;
 const CommonFilter = models.CommonFilter;
 const DescribeNatFwInstancesInfoRequest = models.DescribeNatFwInstancesInfoRequest;
 const ModifyNatSequenceRulesResponse = models.ModifyNatSequenceRulesResponse;
+const StopSecurityGroupRuleDispatchResponse = models.StopSecurityGroupRuleDispatchResponse;
 const DescribeTableStatusRequest = models.DescribeTableStatusRequest;
 const DescribeSecurityGroupListRequest = models.DescribeSecurityGroupListRequest;
 const ModifyResourceGroupRequest = models.ModifyResourceGroupRequest;
 const CreateNatFwInstanceResponse = models.CreateNatFwInstanceResponse;
-const NewModeItems = models.NewModeItems;
+const LogInfo = models.LogInfo;
 const DescribeNatFwInfoCountResponse = models.DescribeNatFwInfoCountResponse;
 const DescribeDefenseSwitchRequest = models.DescribeDefenseSwitchRequest;
 const ModifyEnterpriseSecurityDispatchStatusResponse = models.ModifyEnterpriseSecurityDispatchStatusResponse;
@@ -105,7 +108,9 @@ const RemoveAcRuleRequest = models.RemoveAcRuleRequest;
 const BetaInfoByACL = models.BetaInfoByACL;
 const RemoveNatAcRuleRequest = models.RemoveNatAcRuleRequest;
 const ModifyAllRuleStatusRequest = models.ModifyAllRuleStatusRequest;
+const SearchLogTopics = models.SearchLogTopics;
 const RuleInfoData = models.RuleInfoData;
+const ModifyPublicIPSwitchStatusRequest = models.ModifyPublicIPSwitchStatusRequest;
 const DescribeAcListsResponse = models.DescribeAcListsResponse;
 const ModifyAllPublicIPSwitchStatusRequest = models.ModifyAllPublicIPSwitchStatusRequest;
 const DescribeBlockStaticListResponse = models.DescribeBlockStaticListResponse;
@@ -127,6 +132,7 @@ const DescribeBlockByIpTimesListRequest = models.DescribeBlockByIpTimesListReque
 const RemoveEnterpriseSecurityGroupRuleResponse = models.RemoveEnterpriseSecurityGroupRuleResponse;
 const ModifyEnterpriseSecurityGroupRuleRequest = models.ModifyEnterpriseSecurityGroupRuleRequest;
 const ModifySequenceRulesResponse = models.ModifySequenceRulesResponse;
+const NewModeItems = models.NewModeItems;
 const DescribeResourceGroupNewResponse = models.DescribeResourceGroupNewResponse;
 const DescribeNatFwInstanceWithRegionResponse = models.DescribeNatFwInstanceWithRegionResponse;
 const DescribeResourceGroupNewRequest = models.DescribeResourceGroupNewRequest;
@@ -137,6 +143,7 @@ const InstanceInfo = models.InstanceInfo;
 const DescribeIPStatusListRequest = models.DescribeIPStatusListRequest;
 const ModifyNatFwSwitchResponse = models.ModifyNatFwSwitchResponse;
 const DescribeBlockByIpTimesListResponse = models.DescribeBlockByIpTimesListResponse;
+const SearchLogErrors = models.SearchLogErrors;
 const SetNatFwDnatRuleResponse = models.SetNatFwDnatRuleResponse;
 const DescribeRuleOverviewRequest = models.DescribeRuleOverviewRequest;
 const DescribeDefenseSwitchResponse = models.DescribeDefenseSwitchResponse;
@@ -149,7 +156,7 @@ const ModifyNatFwSwitchRequest = models.ModifyNatFwSwitchRequest;
 const DescribeCfwLogsRequest = models.DescribeCfwLogsRequest;
 const NatInstanceInfo = models.NatInstanceInfo;
 const DescribeTLogIpListResponse = models.DescribeTLogIpListResponse;
-const StopSecurityGroupRuleDispatchResponse = models.StopSecurityGroupRuleDispatchResponse;
+const MultiTopicSearchInformation = models.MultiTopicSearchInformation;
 const DescribeNatFwInfoCountRequest = models.DescribeNatFwInfoCountRequest;
 const AddAcRuleResponse = models.AddAcRuleResponse;
 const ModifyNatFwReSelectRequest = models.ModifyNatFwReSelectRequest;
@@ -160,6 +167,7 @@ const ModifyAllRuleStatusResponse = models.ModifyAllRuleStatusResponse;
 const StopSecurityGroupRuleDispatchRequest = models.StopSecurityGroupRuleDispatchRequest;
 const DescribeBlockIgnoreListRequest = models.DescribeBlockIgnoreListRequest;
 const ModifyBlockTopResponse = models.ModifyBlockTopResponse;
+const SearchLogInfos = models.SearchLogInfos;
 const ModifyStorageSettingRequest = models.ModifyStorageSettingRequest;
 const DescribeNatFwVpcDnsLstResponse = models.DescribeNatFwVpcDnsLstResponse;
 const DescAcItem = models.DescAcItem;
@@ -171,9 +179,11 @@ const CreateSecurityGroupRulesRequest = models.CreateSecurityGroupRulesRequest;
 const DeleteVpcInstanceRequest = models.DeleteVpcInstanceRequest;
 const SwitchListsData = models.SwitchListsData;
 const CreateNatFwInstanceWithDomainRequest = models.CreateNatFwInstanceWithDomainRequest;
+const Column = models.Column;
 const DescribeSwitchListsResponse = models.DescribeSwitchListsResponse;
 const ModifyResourceGroupResponse = models.ModifyResourceGroupResponse;
 const DeleteResourceGroupResponse = models.DeleteResourceGroupResponse;
+const SearchLogRequest = models.SearchLogRequest;
 const DescribeSwitchListsRequest = models.DescribeSwitchListsRequest;
 const DescribeBlockStaticListRequest = models.DescribeBlockStaticListRequest;
 const FwVpcCidr = models.FwVpcCidr;
@@ -793,6 +803,20 @@ Modify events related with the IPs/domains in the blocked/allowed list
     AddAclRule(req, cb) {
         let resp = new AddAclRuleResponse();
         this.request("AddAclRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to retrieve and analyze logs. Please note the following matters when using this API.
+1. Besides being subject to the default API request rate limit, for a single log topic, the number of concurrent queries must not exceed 15.
+2. For search syntax, it's recommended to use the dedicated CQL syntax rule for log service. Please use the SyntaxRule parameter and set its value to 1. The console uses this syntax rule by default.
+3. The API's return data packet maximum is 49MB. It is recommended to enable gzip compression (HTTP Request Header Accept-Encoding: gzip).
+     * @param {SearchLogRequest} req
+     * @param {function(string, SearchLogResponse):void} cb
+     * @public
+     */
+    SearchLog(req, cb) {
+        let resp = new SearchLogResponse();
+        this.request("SearchLog", req, resp, cb);
     }
 
     /**

@@ -2615,148 +2615,154 @@ class DataKeyMetadata extends  AbstractModel {
         super();
 
         /**
-         * DataKey globally unique id.
+         * <p>Globally unique ID of the DataKey</p>
          * @type {string || null}
          */
         this.DataKeyId = null;
 
         /**
-         * Globally unique id of the CMK.
+         * <p>Globally unique ID of the CMK.</p>
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * CMK name.
+         * <p>CMK name</p>
          * @type {string || null}
          */
         this.KeyName = null;
 
         /**
-         * Key name as a more recognizable and understandable data key.
+         * <p>Data key name that is easier to identify and understand as a key</p>
          * @type {string || null}
          */
         this.DataKeyName = null;
 
         /**
-         * Specifies the length of the data key in bytes.
+         * <p>Length of the data key, in bytes</p>
          * @type {number || null}
          */
         this.NumberOfBytes = null;
 
         /**
-         * Key key creation time.
+         * <p>Key creation time</p>
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * DataKey description.
+         * <p>Description of DataKey</p>
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * DataKey status. valid values: Enabled, Disabled, PendingDelete.
+         * <p>DataKey state, value: Enabled | Disabled | PendingDelete</p>
          * @type {string || null}
          */
         this.KeyState = null;
 
         /**
-         * Creator.
+         * <p>Creator.</p>
          * @type {number || null}
          */
         this.CreatorUin = null;
 
         /**
-         * Specifies the creator of the data key. valid values: user (user-created) or product name (auto-created by authorized cloud services).
+         * <p>Creator of the data key. For user-created keys, it is user; for keys automatically created by authorized cloud services, it is the corresponding product name.</p>
          * @type {string || null}
          */
         this.Owner = null;
 
         /**
-         * The time when schedule deletion.
+         * <p>Schedule deletion time</p>
          * @type {number || null}
          */
         this.DeletionDate = null;
 
         /**
-         * Specifies the key material type of DataKey. valid values: TENCENT_KMS (created by KMS), EXTERNAL (user import).
+         * <p>DataKey key material type. For keys created by KMS: TENCENT_KMS. For keys of user import type: EXTERNAL.</p>
          * @type {string || null}
          */
         this.Origin = null;
 
         /**
-         * HSM cluster ID (only applicable to KMS exclusive/managed service instance).
+         * <p>HSM Cluster ID (only applicable to KMS exclusive edition/managed version service instances)</p>
          * @type {string || null}
          */
         this.HsmClusterId = null;
 
         /**
-         * Resource ID in the format of `creatorUin/$creatorUin/$dataKeyId`.
+         * <p>Resource ID, format: creatorUin/$creatorUin/$dataKeyId</p>
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * Whether the key is a primary replica. valid values: `0` (primary), `1` (synced replica).
+         * <p>Whether the key is a primary replica. 0: primary replica, 1: synced replica.</p>
          * @type {number || null}
          */
         this.IsSyncReplica = null;
 
         /**
-         * Synchronous original region.
+         * <p>Synchronous original region</p>
          * @type {string || null}
          */
         this.SourceRegion = null;
 
         /**
-         * The state of key synchronization. valid values: 0 (unsynced), 1 (synchronization successful), 2 (synchronization failed), 3 (synchronizing).
+         * <p>Key synchronization status. 0: unsynced, 1: synchronization successful, 2: synchronization failure, 3: syncing.</p>
          * @type {number || null}
          */
         this.SyncStatus = null;
 
         /**
-         * Sresult description}.
+         * <p>Synchronous result description</p>
          * @type {string || null}
          */
         this.SyncMessages = null;
 
         /**
-         * Start time of synchronization.
+         * <p>Start time of synchronization</p>
          * @type {number || null}
          */
         this.SyncStartTime = null;
 
         /**
-         * Specifies the synchronous end time.
+         * <p>Synchronous end time</p>
          * @type {number || null}
          */
         this.SyncEndTime = null;
 
         /**
-         * Synchronous original cluster. if empty, it is a public cloud public cluster.
+         * <p>Synchronous primitive cluster. If empty, it is a public cloud public cluster.</p>
          * @type {string || null}
          */
         this.SourceHsmClusterId = null;
 
         /**
-         * Member account appId.
+         * <p>Member account appId</p>
          * @type {number || null}
          */
         this.AccountAppId = null;
 
         /**
-         * Member account UIN
+         * <p>member account uin</p>
          * @type {number || null}
          */
         this.AccountUin = null;
 
         /**
-         * Member account name.
+         * <p>Enter the member account name.</p>
          * @type {string || null}
          */
         this.AccountName = null;
+
+        /**
+         * <p>Creator UIN</p>
+         * @type {string || null}
+         */
+        this.CreatorUinString = null;
 
     }
 
@@ -2791,6 +2797,7 @@ class DataKeyMetadata extends  AbstractModel {
         this.AccountAppId = 'AccountAppId' in params ? params.AccountAppId : null;
         this.AccountUin = 'AccountUin' in params ? params.AccountUin : null;
         this.AccountName = 'AccountName' in params ? params.AccountName : null;
+        this.CreatorUinString = 'CreatorUinString' in params ? params.CreatorUinString : null;
 
     }
 }
@@ -4200,6 +4207,18 @@ class GetServiceStatusResponse extends  AbstractModel {
         this.RegionsQps = null;
 
         /**
+         * <p>Regional information of the resource</p>
+         * @type {number || null}
+         */
+        this.ResourceZone = null;
+
+        /**
+         * <p>Regional availability zone info of the resource</p>
+         * @type {number || null}
+         */
+        this.ResourceRegion = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -4259,6 +4278,8 @@ class GetServiceStatusResponse extends  AbstractModel {
                 this.RegionsQps.push(obj);
             }
         }
+        this.ResourceZone = 'ResourceZone' in params ? params.ResourceZone : null;
+        this.ResourceRegion = 'ResourceRegion' in params ? params.ResourceRegion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4645,6 +4666,41 @@ class CancelDataKeyDeletionResponse extends  AbstractModel {
 }
 
 /**
+ * RotateKey response structure.
+ * @class
+ */
+class RotateKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Task ID used to identify this rotation. You can call DescribeKey to return the last rotation time and next rotation time, and determine whether the rotation is successful.</p>
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListKeys request structure.
  * @class
  */
@@ -4925,6 +4981,12 @@ class KeyMetadata extends  AbstractModel {
          */
         this.AccountName = null;
 
+        /**
+         * <p>Creator UIN</p>
+         * @type {string || null}
+         */
+        this.CreatorUinString = null;
+
     }
 
     /**
@@ -4962,6 +5024,7 @@ class KeyMetadata extends  AbstractModel {
         this.AccountAppId = 'AccountAppId' in params ? params.AccountAppId : null;
         this.AccountUin = 'AccountUin' in params ? params.AccountUin : null;
         this.AccountName = 'AccountName' in params ? params.AccountName : null;
+        this.CreatorUinString = 'CreatorUinString' in params ? params.CreatorUinString : null;
 
     }
 }
@@ -6333,6 +6396,46 @@ If `EncryptionPublicKey` is passed in, this field contains the Base64-encoded ci
 }
 
 /**
+ * RotateKey request structure.
+ * @class
+ */
+class RotateKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Globally unique ID of the CMK.</p>
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * <p>Member account information for multi-account scenarios</p>
+         * @type {MemberAccount || null}
+         */
+        this.MemberAccount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+        if (params.MemberAccount) {
+            let obj = new MemberAccount();
+            obj.deserialize(params.MemberAccount)
+            this.MemberAccount = obj;
+        }
+
+    }
+}
+
+/**
  * DisableDataKeys request structure.
  * @class
  */
@@ -6704,6 +6807,7 @@ module.exports = {
     DeleteWhiteBoxKeyResponse: DeleteWhiteBoxKeyResponse,
     ListDataKeyDetailRequest: ListDataKeyDetailRequest,
     CancelDataKeyDeletionResponse: CancelDataKeyDeletionResponse,
+    RotateKeyResponse: RotateKeyResponse,
     ListKeysRequest: ListKeysRequest,
     DescribeWhiteBoxDecryptKeyRequest: DescribeWhiteBoxDecryptKeyRequest,
     DataKey: DataKey,
@@ -6745,6 +6849,7 @@ module.exports = {
     DescribeWhiteBoxDecryptKeyResponse: DescribeWhiteBoxDecryptKeyResponse,
     DescribeWhiteBoxDeviceFingerprintsResponse: DescribeWhiteBoxDeviceFingerprintsResponse,
     PostQuantumCryptoDecryptResponse: PostQuantumCryptoDecryptResponse,
+    RotateKeyRequest: RotateKeyRequest,
     DisableDataKeysRequest: DisableDataKeysRequest,
     UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,
     UnbindCloudResourceResponse: UnbindCloudResourceResponse,

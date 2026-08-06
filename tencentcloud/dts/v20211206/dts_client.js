@@ -218,6 +218,7 @@ const IsolateSubscribeRequest = models.IsolateSubscribeRequest;
 const DescribeSubscribeReturnableResponse = models.DescribeSubscribeReturnableResponse;
 const TagItem = models.TagItem;
 const RecoverMigrateJobRequest = models.RecoverMigrateJobRequest;
+const OnlineDDL = models.OnlineDDL;
 const DescribeSubscribeJobsResponse = models.DescribeSubscribeJobsResponse;
 const ResetSubscribeRequest = models.ResetSubscribeRequest;
 const DatabaseTableObject = models.DatabaseTableObject;

@@ -6674,6 +6674,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.NewSchemaName = null;
 
         /**
+         * Table selection mode, which is required if `DBMode` is `Partial` for postgresql or sqlserver. Valid values: `All`, `Partial`. To sync an entire schema, set this parameter to `All`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SchemaMode = null;
+
+        /**
          * Table selection mode, which is required if `DBMode` is `Partial`. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -6730,7 +6737,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Procedures = null;
 
         /**
-         * Trigger sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`. Currently, the advanced object “trigger” is not supported for data sync.
+         * Trigger sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`. Currently, the advanced object "trigger" is not supported for data sync.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -6744,7 +6751,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Triggers = null;
 
         /**
-         * Event sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`. Currently, the advanced object “event” is not supported for data sync.
+         * Event sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`. Currently, the advanced object "event" is not supported for data sync.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -6771,6 +6778,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DbMode = 'DbMode' in params ? params.DbMode : null;
         this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
         this.NewSchemaName = 'NewSchemaName' in params ? params.NewSchemaName : null;
+        this.SchemaMode = 'SchemaMode' in params ? params.SchemaMode : null;
         this.TableMode = 'TableMode' in params ? params.TableMode : null;
 
         if (params.Tables) {
@@ -9663,6 +9671,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.AdvancedObjects = null;
 
+        /**
+         * A redundant field that specifies the online DDL type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {OnlineDDL || null}
+         */
+        this.OnlineDDL = null;
+
     }
 
     /**
@@ -9683,6 +9698,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.AdvancedObjects = 'AdvancedObjects' in params ? params.AdvancedObjects : null;
+
+        if (params.OnlineDDL) {
+            let obj = new OnlineDDL();
+            obj.deserialize(params.OnlineDDL)
+            this.OnlineDDL = obj;
+        }
 
     }
 }
@@ -11504,6 +11525,35 @@ class RecoverMigrateJobRequest extends  AbstractModel {
 }
 
 /**
+ * Online DDL type
+ * @class
+ */
+class OnlineDDL extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * DescribeSubscribeJobs response structure.
  * @class
  */
@@ -12250,6 +12300,7 @@ module.exports = {
     DescribeSubscribeReturnableResponse: DescribeSubscribeReturnableResponse,
     TagItem: TagItem,
     RecoverMigrateJobRequest: RecoverMigrateJobRequest,
+    OnlineDDL: OnlineDDL,
     DescribeSubscribeJobsResponse: DescribeSubscribeJobsResponse,
     ResetSubscribeRequest: ResetSubscribeRequest,
     DatabaseTableObject: DatabaseTableObject,

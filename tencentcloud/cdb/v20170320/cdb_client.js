@@ -123,6 +123,7 @@ const ModifyAuditRuleTemplatesRequest = models.ModifyAuditRuleTemplatesRequest;
 const StopDBImportJobRequest = models.StopDBImportJobRequest;
 const ModifyRemoteBackupConfigResponse = models.ModifyRemoteBackupConfigResponse;
 const DescribeDBInstanceInfoResponse = models.DescribeDBInstanceInfoResponse;
+const UpgradeRoGroupResponse = models.UpgradeRoGroupResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeInstanceUpgradeCheckJobRequest = models.DescribeInstanceUpgradeCheckJobRequest;
 const DescribeDBFeaturesResponse = models.DescribeDBFeaturesResponse;
@@ -223,6 +224,7 @@ const DeleteAccountsRequest = models.DeleteAccountsRequest;
 const DeleteRotationPasswordResponse = models.DeleteRotationPasswordResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackTimeRange = models.RollbackTimeRange;
+const UpgradeRoGroupRequest = models.UpgradeRoGroupRequest;
 const ModifyProtectModeRequest = models.ModifyProtectModeRequest;
 const DescribeAuditRuleTemplateModifyHistoryResponse = models.DescribeAuditRuleTemplateModifyHistoryResponse;
 const DescribeAuditLogFilesRequest = models.DescribeAuditLogFilesRequest;
@@ -1333,6 +1335,17 @@ Description: The parameter template is a common component, effective across all 
     DescribeProxyCustomConf(req, cb) {
         let resp = new DescribeProxyCustomConfResponse();
         this.request("DescribeProxyCustomConf", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade a read-only group to a pure network forwarding mode.
+     * @param {UpgradeRoGroupRequest} req
+     * @param {function(string, UpgradeRoGroupResponse):void} cb
+     * @public
+     */
+    UpgradeRoGroup(req, cb) {
+        let resp = new UpgradeRoGroupResponse();
+        this.request("UpgradeRoGroup", req, resp, cb);
     }
 
     /**

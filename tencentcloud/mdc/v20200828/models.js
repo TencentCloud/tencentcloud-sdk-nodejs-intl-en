@@ -1154,6 +1154,18 @@ class ModifyOutputInfo extends  AbstractModel {
         this.Protocol = null;
 
         /**
+         * Output Type: Internet/Tencent CSS/StreamLive
+         * @type {string || null}
+         */
+        this.OutputType = null;
+
+        /**
+         * Output module types include Pinpoint (single-point output, supporting up to four concurrent outputs) and MultiMesh (multi-output, supporting concurrent outputs exceeding four, currently capable of reaching 200 channels). The default type is Pinpoint output. For a single Flow, only one MultiMesh output can be assigned per region.
+         * @type {string || null}
+         */
+        this.OutputKind = null;
+
+        /**
          * The SRT relay configuration.
          * @type {CreateOutputSrtSettings || null}
          */
@@ -1189,6 +1201,30 @@ class ModifyOutputInfo extends  AbstractModel {
          */
         this.SecurityGroupIds = null;
 
+        /**
+         * Availability Zone
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
+        /**
+         * Transfer the configuration of RIST.
+         * @type {CreateOutputRistSettings || null}
+         */
+        this.RISTSettings = null;
+
+        /**
+         * For streams containing multiple audio/video tracks, you can specify the tracks that need to be used
+         * @type {PidSelector || null}
+         */
+        this.PidSelector = null;
+
+        /**
+         * For streams containing multiple audio/video tracks, you can specify the tracks that need to be used
+         * @type {StreamSelector || null}
+         */
+        this.StreamSelector = null;
+
     }
 
     /**
@@ -1202,6 +1238,8 @@ class ModifyOutputInfo extends  AbstractModel {
         this.OutputName = 'OutputName' in params ? params.OutputName : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.OutputType = 'OutputType' in params ? params.OutputType : null;
+        this.OutputKind = 'OutputKind' in params ? params.OutputKind : null;
 
         if (params.SRTSettings) {
             let obj = new CreateOutputSrtSettings();
@@ -1223,6 +1261,60 @@ class ModifyOutputInfo extends  AbstractModel {
         this.AllowIpList = 'AllowIpList' in params ? params.AllowIpList : null;
         this.MaxConcurrent = 'MaxConcurrent' in params ? params.MaxConcurrent : null;
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
+
+        if (params.RISTSettings) {
+            let obj = new CreateOutputRistSettings();
+            obj.deserialize(params.RISTSettings)
+            this.RISTSettings = obj;
+        }
+
+        if (params.PidSelector) {
+            let obj = new PidSelector();
+            obj.deserialize(params.PidSelector)
+            this.PidSelector = obj;
+        }
+
+        if (params.StreamSelector) {
+            let obj = new StreamSelector();
+            obj.deserialize(params.StreamSelector)
+            this.StreamSelector = obj;
+        }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class TrackSelector extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<number> || null}
+         */
+        this.VideoIndex = null;
+
+        /**
+         * 
+         * @type {Array.<number> || null}
+         */
+        this.AudioIndex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VideoIndex = 'VideoIndex' in params ? params.VideoIndex : null;
+        this.AudioIndex = 'AudioIndex' in params ? params.AudioIndex : null;
 
     }
 }
@@ -3179,6 +3271,58 @@ class DescribeOutputHLSPullServerUrl extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class StreamSelector extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SelectorType = null;
+
+        /**
+         * 
+         * @type {PidSelector || null}
+         */
+        this.PidSelector = null;
+
+        /**
+         * 
+         * @type {TrackSelector || null}
+         */
+        this.TrackSelector = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SelectorType = 'SelectorType' in params ? params.SelectorType : null;
+
+        if (params.PidSelector) {
+            let obj = new PidSelector();
+            obj.deserialize(params.PidSelector)
+            this.PidSelector = obj;
+        }
+
+        if (params.TrackSelector) {
+            let obj = new TrackSelector();
+            obj.deserialize(params.TrackSelector)
+            this.TrackSelector = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeStreamLinkFlowSRTStatistics request structure.
  * @class
  */
@@ -4670,6 +4814,41 @@ class CreateOutputRTMPSettings extends  AbstractModel {
  * 
  * @class
  */
+class PidSelector extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<number> || null}
+         */
+        this.AudioPID = null;
+
+        /**
+         * 
+         * @type {Array.<number> || null}
+         */
+        this.VideoPID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AudioPID = 'AudioPID' in params ? params.AudioPID : null;
+        this.VideoPID = 'VideoPID' in params ? params.VideoPID : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
 class HLSPullSourceAddress extends  AbstractModel {
     constructor(){
         super();
@@ -5268,6 +5447,48 @@ class StreamLinkRegionInfo extends  AbstractModel {
     }
 }
 
+/**
+ * 
+ * @class
+ */
+class CreateOutputRistSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Profile = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Buffer = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
+        this.Buffer = 'Buffer' in params ? params.Buffer : null;
+
+    }
+}
+
 module.exports = {
     OutputAddress: OutputAddress,
     DescribeOutputRTMPPullServerUrl: DescribeOutputRTMPPullServerUrl,
@@ -5289,6 +5510,7 @@ module.exports = {
     DescribeOutputRTMPPullSettings: DescribeOutputRTMPPullSettings,
     DescribeStreamLinkFlowSRTStatisticsResponse: DescribeStreamLinkFlowSRTStatisticsResponse,
     ModifyOutputInfo: ModifyOutputInfo,
+    TrackSelector: TrackSelector,
     CreateInputRTPSettings: CreateInputRTPSettings,
     CreateStreamLinkOutputInfoResponse: CreateStreamLinkOutputInfoResponse,
     RTPAddressDestination: RTPAddressDestination,
@@ -5326,6 +5548,7 @@ module.exports = {
     FlowAudio: FlowAudio,
     FlowMediaVideo: FlowMediaVideo,
     DescribeOutputHLSPullServerUrl: DescribeOutputHLSPullServerUrl,
+    StreamSelector: StreamSelector,
     DescribeStreamLinkFlowSRTStatisticsRequest: DescribeStreamLinkFlowSRTStatisticsRequest,
     DescribeStreamLinkFlowRequest: DescribeStreamLinkFlowRequest,
     DescribeOutputHLSPullSettings: DescribeOutputHLSPullSettings,
@@ -5355,6 +5578,7 @@ module.exports = {
     StopStreamLinkFlowRequest: StopStreamLinkFlowRequest,
     CreateInput: CreateInput,
     CreateOutputRTMPSettings: CreateOutputRTMPSettings,
+    PidSelector: PidSelector,
     HLSPullSourceAddress: HLSPullSourceAddress,
     CreateOutputRtmpSettingsDestinations: CreateOutputRtmpSettingsDestinations,
     FlowLogInfo: FlowLogInfo,
@@ -5369,5 +5593,6 @@ module.exports = {
     CreateInputSRTSettings: CreateInputSRTSettings,
     RTMPPullSourceAddress: RTMPPullSourceAddress,
     StreamLinkRegionInfo: StreamLinkRegionInfo,
+    CreateOutputRistSettings: CreateOutputRistSettings,
 
 }

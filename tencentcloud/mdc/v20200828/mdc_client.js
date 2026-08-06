@@ -36,6 +36,7 @@ const DescribeRTMPPullSourceAddress = models.DescribeRTMPPullSourceAddress;
 const DescribeOutputRTMPPullSettings = models.DescribeOutputRTMPPullSettings;
 const DescribeStreamLinkFlowSRTStatisticsResponse = models.DescribeStreamLinkFlowSRTStatisticsResponse;
 const ModifyOutputInfo = models.ModifyOutputInfo;
+const TrackSelector = models.TrackSelector;
 const CreateInputRTPSettings = models.CreateInputRTPSettings;
 const CreateStreamLinkOutputInfoResponse = models.CreateStreamLinkOutputInfoResponse;
 const RTPAddressDestination = models.RTPAddressDestination;
@@ -73,6 +74,7 @@ const DescribeStreamLinkFlowRealtimeStatusRequest = models.DescribeStreamLinkFlo
 const FlowAudio = models.FlowAudio;
 const FlowMediaVideo = models.FlowMediaVideo;
 const DescribeOutputHLSPullServerUrl = models.DescribeOutputHLSPullServerUrl;
+const StreamSelector = models.StreamSelector;
 const DescribeStreamLinkFlowSRTStatisticsRequest = models.DescribeStreamLinkFlowSRTStatisticsRequest;
 const DescribeStreamLinkFlowRequest = models.DescribeStreamLinkFlowRequest;
 const DescribeOutputHLSPullSettings = models.DescribeOutputHLSPullSettings;
@@ -102,6 +104,7 @@ const FlowRealtimeStatusRTMP = models.FlowRealtimeStatusRTMP;
 const StopStreamLinkFlowRequest = models.StopStreamLinkFlowRequest;
 const CreateInput = models.CreateInput;
 const CreateOutputRTMPSettings = models.CreateOutputRTMPSettings;
+const PidSelector = models.PidSelector;
 const HLSPullSourceAddress = models.HLSPullSourceAddress;
 const CreateOutputRtmpSettingsDestinations = models.CreateOutputRtmpSettingsDestinations;
 const FlowLogInfo = models.FlowLogInfo;
@@ -116,6 +119,7 @@ const DescribeInputRTMPPullSettings = models.DescribeInputRTMPPullSettings;
 const CreateInputSRTSettings = models.CreateInputSRTSettings;
 const RTMPPullSourceAddress = models.RTMPPullSourceAddress;
 const StreamLinkRegionInfo = models.StreamLinkRegionInfo;
+const CreateOutputRistSettings = models.CreateOutputRistSettings;
 
 
 /**

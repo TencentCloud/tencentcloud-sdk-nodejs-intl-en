@@ -16,8 +16,12 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const TextTranslateResponse = models.TextTranslateResponse;
-const TextTranslateRequest = models.TextTranslateRequest;
+const ImageTranslateLLMRequest = models.ImageTranslateLLMRequest;
+const ImageTranslateLLMResponse = models.ImageTranslateLLMResponse;
+const Coord = models.Coord;
+const TransDetail = models.TransDetail;
+const BoundingBox = models.BoundingBox;
+const RotateParagraphRect = models.RotateParagraphRect;
 
 
 /**
@@ -31,15 +35,19 @@ class TmtClient extends AbstractClient {
     }
     
     /**
-     * This API is used to translate text in multiple language pairs, such as Chinese-English.<br />
-Note: We recommend that you simplify your development with the SDK integration mode. For how to use the SDK, see Section 5 "Developer Resources".
-     * @param {TextTranslateRequest} req
-     * @param {function(string, TextTranslateResponse):void} cb
+     * This API is used to provide translation service for images in 18 languages. It can automatically recognize text content in images and translate it into the target language. The recognized text is translated line by line, and a version that supports paragraph translation will be offered subsequently.
+
+-Input image format: png, jpg, jpeg and other common image formats. gif animation is not supported.
+-Output image format: jpg.
+
+Notification: For general developers, we recommend prioritizing SDK integration to simplify development. For SDK usage introduction, directly view the 5. Developer Resources part.
+     * @param {ImageTranslateLLMRequest} req
+     * @param {function(string, ImageTranslateLLMResponse):void} cb
      * @public
      */
-    TextTranslate(req, cb) {
-        let resp = new TextTranslateResponse();
-        this.request("TextTranslate", req, resp, cb);
+    ImageTranslateLLM(req, cb) {
+        let resp = new ImageTranslateLLMResponse();
+        this.request("ImageTranslateLLM", req, resp, cb);
     }
 
 

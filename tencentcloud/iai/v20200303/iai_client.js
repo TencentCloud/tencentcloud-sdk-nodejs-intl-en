@@ -19,10 +19,10 @@ const AbstractClient = require('../../common/abstract_client')
 const GetPersonGroupInfoResponse = models.GetPersonGroupInfoResponse;
 const Eye = models.Eye;
 const Candidate = models.Candidate;
-const ModifyGroupResponse = models.ModifyGroupResponse;
+const SearchFacesReturnsByGroupRequest = models.SearchFacesReturnsByGroupRequest;
 const GetGroupInfoResponse = models.GetGroupInfoResponse;
 const DeletePersonRequest = models.DeletePersonRequest;
-const DetectLiveFaceResponse = models.DetectLiveFaceResponse;
+const ModifyGroupResponse = models.ModifyGroupResponse;
 const SearchPersonsReturnsByGroupResponse = models.SearchPersonsReturnsByGroupResponse;
 const DeleteFaceRequest = models.DeleteFaceRequest;
 const HeadPose = models.HeadPose;
@@ -46,7 +46,7 @@ const SearchPersonsResponse = models.SearchPersonsResponse;
 const DetectLiveFaceAccurateRequest = models.DetectLiveFaceAccurateRequest;
 const CompareFaceResponse = models.CompareFaceResponse;
 const PersonExDescriptionInfo = models.PersonExDescriptionInfo;
-const DetectLiveFaceRequest = models.DetectLiveFaceRequest;
+const SearchFacesReturnsByGroupResponse = models.SearchFacesReturnsByGroupResponse;
 const VerifyFaceResponse = models.VerifyFaceResponse;
 const GetPersonBaseInfoResponse = models.GetPersonBaseInfoResponse;
 const ResultsReturnsByGroup = models.ResultsReturnsByGroup;
@@ -56,11 +56,10 @@ const CreateGroupRequest = models.CreateGroupRequest;
 const PersonGroupInfo = models.PersonGroupInfo;
 const GetPersonGroupInfoRequest = models.GetPersonGroupInfoRequest;
 const Result = models.Result;
-const SearchFacesReturnsByGroupResponse = models.SearchFacesReturnsByGroupResponse;
+const VerifyPersonRequest = models.VerifyPersonRequest;
 const FaceInfo = models.FaceInfo;
 const DeleteGroupResponse = models.DeleteGroupResponse;
 const SearchPersonsRequest = models.SearchPersonsRequest;
-const SearchFacesReturnsByGroupRequest = models.SearchFacesReturnsByGroupRequest;
 const FaceQualityInfo = models.FaceQualityInfo;
 const CompareFaceRequest = models.CompareFaceRequest;
 const PersonInfo = models.PersonInfo;
@@ -77,7 +76,6 @@ const AnalyzeFaceResponse = models.AnalyzeFaceResponse;
 const GetGroupInfoRequest = models.GetGroupInfoRequest;
 const FaceDetailInfo = models.FaceDetailInfo;
 const FaceHairAttributesInfo = models.FaceHairAttributesInfo;
-const VerifyPersonRequest = models.VerifyPersonRequest;
 const DetectLiveFaceAccurateResponse = models.DetectLiveFaceAccurateResponse;
 const AnalyzeFaceRequest = models.AnalyzeFaceRequest;
 const Point = models.Point;
@@ -174,28 +172,6 @@ The maximum number of faces that can be included in one group varies by algorith
     GetPersonBaseInfo(req, cb) {
         let resp = new GetPersonBaseInfoResponse();
         this.request("GetPersonBaseInfo", req, resp, cb);
-    }
-
-    /**
-     * This API is used to detect the liveness of a face in a static image uploaded by a user. Compared with dynamic liveness detection, static liveness detection does not require moving lips, shaking head, or blinking for recognition.
-
-Image-based liveness detection is suitable for scenarios where the image is a selfie or the requirement for attack defense is not high. If you have a higher security requirement for liveness detection, please use [FaceID](https://intl.cloud.tencent.com/product/faceid?from_cn_redirect=1).
-
->     
-- The aspect ratio of the image should be close to 3:4 (width:height); otherwise, the score returned for the image will be meaningless. This API is suitable for selfie scenarios, and the score returned in other scenarios will be meaningless.
-
->
-- During the process, please directly face the camera and keep a suitable distance to completely display your face in the recognition frame. During the recognition, keep your device still and fully show your face. You are advised to perform the detection in an environment with appropriate light and without filters.
-
->     
-- Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the parameter `SignatureMethod` to `TC3-HMAC-SHA256`.
-     * @param {DetectLiveFaceRequest} req
-     * @param {function(string, DetectLiveFaceResponse):void} cb
-     * @public
-     */
-    DetectLiveFace(req, cb) {
-        let resp = new DetectLiveFaceResponse();
-        this.request("DetectLiveFace", req, resp, cb);
     }
 
     /**
@@ -352,8 +328,12 @@ This API recognizes each face image of a person as an independent one. By contra
     }
 
     /**
-     * Compare the faces in the two pictures for similarity and return the face similarity score. If you need to determine "whether this person is someone", that is, to verify whether the person in a picture is someone with a known identity, such as a common face login scenario, it is recommended to use [VerifyFace](`https://www.tencentcloud.com/zh/document/product/1059/36972`) or [VerifyPerson](`https://www.tencentcloud.com/zh/document/product/1059/36971`) inferface. 
-Please use the V3 version for the signature method in the public parameters, that is, configure the SignatureMethod parameter to TC3-HMAC-SHA256
+     * This API is used to perform similarity comparison between human faces in two images and return the facial similarity score.
+
+If you need to judge whether a person is a specific individual, that is, to verify whether a person in an image is a known identity, for example in common log in scenarios such as face verification, we recommend using the face verification (https://www.tencentcloud.com/document/product/867/44983?from_cn_redirect=1) or person verification (https://www.tencentcloud.com/document/product/867/44982?from_cn_redirect=1) api.
+
+>     
+- Please use the V3 version for the signature method in the public parameters. In other words, set the SignatureMethod parameter to TC3-HMAC-SHA256.
      * @param {DetectFaceSimilarityRequest} req
      * @param {function(string, DetectFaceSimilarityResponse):void} cb
      * @public

@@ -238,6 +238,12 @@ class DataScore extends  AbstractModel {
          */
         this.RiskLabels = null;
 
+        /**
+         * <p>Comprehensive risk score.</p><p>Value ranges from 1 to 1000.</p><p>The larger the value, the larger the risk.</p>
+         * @type {number || null}
+         */
+        this.RiskScore = null;
+
     }
 
     /**
@@ -257,6 +263,7 @@ class DataScore extends  AbstractModel {
                 this.RiskLabels.push(obj);
             }
         }
+        this.RiskScore = 'RiskScore' in params ? params.RiskScore : null;
 
     }
 }
@@ -281,6 +288,12 @@ class AssessDeviceRiskRsp extends  AbstractModel {
          */
         this.Device = null;
 
+        /**
+         * <p>Basic IP environment information</p>
+         * @type {Environment || null}
+         */
+        this.Environment = null;
+
     }
 
     /**
@@ -301,6 +314,12 @@ class AssessDeviceRiskRsp extends  AbstractModel {
             let obj = new Device();
             obj.deserialize(params.Device)
             this.Device = obj;
+        }
+
+        if (params.Environment) {
+            let obj = new Environment();
+            obj.deserialize(params.Environment)
+            this.Environment = obj;
         }
 
     }
@@ -401,7 +420,7 @@ class AssessDeviceRiskProRequest extends  AbstractModel {
         this.DeviceToken = null;
 
         /**
-         * <p>User client IP address(IPv4 or IPv6)</p>
+         * <p>User client IP address (IPv4 or IPv6)</p>
          * @type {string || null}
          */
         this.UserIp = null;
@@ -436,7 +455,7 @@ class AssessDeviceRiskPremiumProRequest extends  AbstractModel {
         this.DeviceToken = null;
 
         /**
-         * <p>User client IP address(IPv4 or IPv6)</p>
+         * <p>User client IP address (IPv4 or IPv6)</p>
          * @type {string || null}
          */
         this.UserIp = null;
@@ -664,7 +683,6 @@ class AssessDeviceRiskPremiumRsp extends  AbstractModel {
 
         /**
          * <p>Basic IP environment information</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Environment || null}
          */
         this.Environment = null;
@@ -802,6 +820,18 @@ class Device extends  AbstractModel {
          */
         this.SdkBuildVersion = null;
 
+        /**
+         * <p>Signature verification token. Please contact us to enable signature verification</p>
+         * @type {string || null}
+         */
+        this.SignToken = null;
+
+        /**
+         * <p>Token generation timestamp, in milliseconds</p>
+         * @type {string || null}
+         */
+        this.TokenTime = null;
+
     }
 
     /**
@@ -821,6 +851,8 @@ class Device extends  AbstractModel {
         this.Platform = 'Platform' in params ? params.Platform : null;
         this.SystemVersion = 'SystemVersion' in params ? params.SystemVersion : null;
         this.SdkBuildVersion = 'SdkBuildVersion' in params ? params.SdkBuildVersion : null;
+        this.SignToken = 'SignToken' in params ? params.SignToken : null;
+        this.TokenTime = 'TokenTime' in params ? params.TokenTime : null;
 
     }
 }
@@ -839,6 +871,12 @@ class Decision extends  AbstractModel {
          */
         this.DecisionResult = null;
 
+        /**
+         * <p>Decision action when a strategy is matched. Configurable in the console.</p>
+         * @type {string || null}
+         */
+        this.Disposition = null;
+
     }
 
     /**
@@ -849,6 +887,7 @@ class Decision extends  AbstractModel {
             return;
         }
         this.DecisionResult = 'DecisionResult' in params ? params.DecisionResult : null;
+        this.Disposition = 'Disposition' in params ? params.Disposition : null;
 
     }
 }

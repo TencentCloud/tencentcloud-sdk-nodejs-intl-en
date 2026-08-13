@@ -750,7 +750,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.Cpu = null;
 
         /**
-         * Database memory in GB.
+         * Database memory in GB
          * @type {number || null}
          */
         this.Memory = null;
@@ -1366,7 +1366,7 @@ class DescribeAuditInstanceListResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * List of detailed information about the audit instance.
+         * Audit the instance detail list.
          * @type {Array.<InstanceAuditStatus> || null}
          */
         this.Items = null;
@@ -1500,8 +1500,7 @@ class DescribeProxiesResponse extends  AbstractModel {
         this.ProxyGroupInfos = null;
 
         /**
-         * <p>database proxy node</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Database proxy node</p>
          * @type {Array.<ProxyNodeInfo> || null}
          */
         this.ProxyNodeInfos = null;
@@ -1797,8 +1796,7 @@ class CreateClustersResponse extends  AbstractModel {
         this.ClusterIds = null;
 
         /**
-         * <p>Large Order ID</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Large order number</p>
          * @type {Array.<string> || null}
          */
         this.BigDealIds = null;
@@ -1928,21 +1926,18 @@ class CynosdbInstanceGrp extends  AbstractModel {
 
         /**
          * VPC ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UniqVpcId = null;
 
         /**
-         * Subnet ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Subnet ID.
          * @type {string || null}
          */
         this.UniqSubnetId = null;
 
         /**
-         * Information of the old IP
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Recycling IP information
          * @type {OldAddrInfo || null}
          */
         this.OldAddrInfo = null;
@@ -2381,7 +2376,7 @@ class DescribeClustersRequest extends  AbstractModel {
         super();
 
         /**
-         * Engine type. Currently, `MYSQL` is supported.
+         * Engine type: Currently supports "MYSQL", "POSTGRESQL".
          * @type {string || null}
          */
         this.DbType = null;
@@ -2540,8 +2535,7 @@ class SearchClusterDatabasesResponse extends  AbstractModel {
         super();
 
         /**
-         * Database List
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Database list.
          * @type {Array.<string> || null}
          */
         this.Databases = null;
@@ -2724,7 +2718,7 @@ class DescribeClusterDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * <p>Cluster Id.</p>
          * @type {string || null}
          */
         this.ClusterId = null;
@@ -3231,8 +3225,7 @@ class DescribeLibraDBInstanceSpecsResponse extends  AbstractModel {
         super();
 
         /**
-         * Instance specifications list in this region
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance specifications list for this region
          * @type {Array.<RegionInstanceSpecInfo> || null}
          */
         this.InstanceSpecSet = null;
@@ -3492,7 +3485,7 @@ class CynosdbInstance extends  AbstractModel {
         this.Region = null;
 
         /**
-         * <p>AZ.</p>
+         * <p>Primary availability zone of the cluster</p>
          * @type {string || null}
          */
         this.Zone = null;
@@ -3727,20 +3720,18 @@ class CynosdbInstance extends  AbstractModel {
 
         /**
          * <p>Resource tag</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Tag> || null}
          */
         this.ResourceTags = null;
 
         /**
-         * <p>Primary AZ</p>
+         * <p>Current instance availability zone for read-write</p>
          * @type {string || null}
          */
         this.MasterZone = null;
 
         /**
          * <p>Standby availability zone</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.SlaveZones = null;
@@ -3752,8 +3743,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InstanceNetInfo = null;
 
         /**
-         * <p>Instance bind resource package info (only return compute resource package, packageType=CCU)</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Instance binding resource package information (only return compute resource package here, for example, packageType=CCU)</p>
          * @type {Array.<ResourcePackage> || null}
          */
         this.ResourcePackages = null;
@@ -3799,6 +3789,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.GdnId = null;
+
+        /**
+         * <p>Current instance availability zone</p>
+         * @type {string || null}
+         */
+        this.RealZone = null;
 
     }
 
@@ -3905,6 +3901,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CynosVersionTag = 'CynosVersionTag' in params ? params.CynosVersionTag : null;
         this.NodeList = 'NodeList' in params ? params.NodeList : null;
         this.GdnId = 'GdnId' in params ? params.GdnId : null;
+        this.RealZone = 'RealZone' in params ? params.RealZone : null;
 
     }
 }
@@ -4887,8 +4884,7 @@ class ProxyGroupInfo extends  AbstractModel {
         this.ProxyGroupRwInfo = null;
 
         /**
-         * Node information of the database proxy
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Database proxy node info
          * @type {Array.<ProxyNodeInfo> || null}
          */
         this.ProxyNodes = null;
@@ -4900,8 +4896,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ConnectionPool = null;
 
         /**
-         * Network information for database proxy
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Database proxy network info
          * @type {Array.<NetAddr> || null}
          */
         this.NetAddrInfos = null;
@@ -5198,28 +5193,24 @@ class AddLibraDBInstancesResponse extends  AbstractModel {
 
         /**
          * Large order number.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.BigDealIds = null;
 
         /**
          * Freeze transaction. One frozen flow is activated at a time.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TranId = null;
 
         /**
          * Post-paid order number.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
 
         /**
          * Delivery resource id list.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
@@ -7940,14 +7931,12 @@ class MigrateObject extends  AbstractModel {
 
         /**
          * Database migration mode
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MigrateDBMode = null;
 
         /**
          * Database information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MigrateDBItem> || null}
          */
         this.Databases = null;
@@ -8607,15 +8596,13 @@ class SparseBackupConfigRsp extends  AbstractModel {
         super();
 
         /**
-         * <p>Sparse backup switch: ON/OFF</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Backup switch: ON/OFF</p>
          * @type {string || null}
          */
         this.SparseBackupSwitch = null;
 
         /**
          * <p>Sparse backup policy list (1-3)</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<SparseBackupConfigInfo> || null}
          */
         this.SparseBackupConfigInfos = null;
@@ -9171,8 +9158,7 @@ class ManualBackupData extends  AbstractModel {
         this.SnapshotTime = null;
 
         /**
-         * Detailed information of cross-region backup items.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Detailed information of cross-region backup items
          * @type {Array.<CrossRegionBackupItem> || null}
          */
         this.CrossRegionBackupInfos = null;
@@ -9657,218 +9643,187 @@ class DescribeLibraDBInstanceDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>root account</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Root account</p>
          * @type {string || null}
          */
         this.Uin = null;
 
         /**
          * <p>Account unique ID</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
          * <p>Cluster ID.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
          * <p>Cluster name.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ClusterName = null;
 
         /**
          * <p>Instance ID.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
          * <p>Instance name.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * <p>Project ID.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Project ID</p>
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * <p>Region</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Region.</p>
          * @type {string || null}
          */
         this.Region = null;
 
         /**
          * <p>AZ.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * <p>Instance status.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Instance status</p>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
          * <p>Status description</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StatusDesc = null;
 
         /**
          * <p>Libra analysis engine version</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LibraDBVersion = null;
 
         /**
-         * <p>cpu cores</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>cpu cores.</p>
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * <p>Memory size</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Memory size.</p>
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
          * <p>Storage size</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Storage = null;
 
         /**
          * <p>Storage type</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StorageType = null;
 
         /**
-         * <p>Instance type</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Instance type.</p>
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
          * <p>Instance role</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceRole = null;
 
         /**
          * <p>Update time.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
          * <p>Creation time.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
          * <p>Selling mode</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.PayMode = null;
 
         /**
          * <p>Start time</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PeriodStartTime = null;
 
         /**
-         * <p>End time of sale</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Termination time</p>
          * @type {string || null}
          */
         this.PeriodEndTime = null;
 
         /**
          * <p>Renewal flag</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RenewFlag = null;
 
         /**
          * <p>Network type</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.NetType = null;
 
         /**
          * <p>VPC ID</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
          * <p>Subnet ID.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
          * <p>Virtual IP</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
          * <p>Port</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Vport = null;
 
         /**
-         * <p>Instance network information</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Instance network info</p>
          * @type {InstanceNetInfo || null}
          */
         this.InstanceNetInfo = null;
 
         /**
          * <p>Instance tag information</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Tag> || null}
          */
         this.ResourceTags = null;
@@ -9886,8 +9841,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.NodeCount = null;
 
         /**
-         * <p>Analyze the information after instance upgrade version</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Analyze the information after the instance upgrade version</p>
          * @type {UpgradeAnalysisInstanceVersionInfo || null}
          */
         this.AnalysisUpgradeVersionInfo = null;
@@ -10413,14 +10367,12 @@ class ForwardInstanceInfo extends  AbstractModel {
 
         /**
          * Forward the instance id
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Forward instance region
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Forward the instance region
          * @type {string || null}
          */
         this.Region = null;
@@ -10572,7 +10524,6 @@ class ParamTemplateListInfo extends  AbstractModel {
 
         /**
          * Parameter template details
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<TemplateParamInfo> || null}
          */
         this.ParamInfoSet = null;
@@ -10993,8 +10944,7 @@ class IsolateInstanceResponse extends  AbstractModel {
         this.FlowId = null;
 
         /**
-         * Order ID for isolated instance (prepaid instance)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Order ID of the isolated instance (prepaid instance)
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
@@ -11170,49 +11120,42 @@ class GoodsSpec extends  AbstractModel {
 
         /**
          * Number of products
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * Number of CPU cores. required for PREPAID and POSTPAID instance types.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of CPU cores. Required for PREPAID and POSTPAID instance types.
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * Memory size in gb. required for PREPAID and POSTPAID instance types.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Memory size, unit G, required for PREPAID and POSTPAID instance types
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * Ccu size. required for serverless type.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Ccu size, required for serverless type
          * @type {number || null}
          */
         this.Ccu = null;
 
         /**
-         * Storage size. required for PREPAID storage type.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Storage size, required for PREPAID storage type
          * @type {number || null}
          */
         this.StorageLimit = null;
 
         /**
-         * Purchase duration.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Purchase period
          * @type {number || null}
          */
         this.TimeSpan = null;
 
         /**
          * Duration unit.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TimeUnit = null;
@@ -11404,8 +11347,7 @@ class ServerlessSpec extends  AbstractModel {
         this.StockCount = null;
 
         /**
-         * <p>Availability zone inventory information</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>AZ inventory information</p>
          * @type {Array.<ServerlessZoneStockInfo> || null}
          */
         this.ZoneStockInfos = null;
@@ -12358,13 +12300,13 @@ class RollbackData extends  AbstractModel {
         this.SnapShotId = null;
 
         /**
-         * Rollback database.
+         * Rollback database
          * @type {Array.<RollbackDatabase> || null}
          */
         this.RollbackDatabases = null;
 
         /**
-         * Rollback data table.
+         * Rollback data table
          * @type {Array.<RollbackTable> || null}
          */
         this.RollbackTables = null;
@@ -13370,8 +13312,7 @@ class DescribeBackupConfigResponse extends  AbstractModel {
         this.LogicBackupConfig = null;
 
         /**
-         * <p>Second-level snapshot backup configuration information</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Secondary snapshot backup configuration information</p>
          * @type {BackupConfigInfo || null}
          */
         this.SnapshotSecondaryBackupConfig = null;
@@ -13620,28 +13561,24 @@ class CheckItem extends  AbstractModel {
 
         /**
          * Check item name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Item = null;
 
         /**
          * Verification result of this item
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Result = null;
 
         /**
-         * Detailed explanation of validation failure and modification suggestions
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Details of validation failed and modification suggestions
          * @type {string || null}
          */
         this.CurrentValue = null;
 
         /**
-         * Details of validation failure and modification suggestions
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Detailed explanation of validation failure and modification suggestions
          * @type {string || null}
          */
         this.ExpectedValue = null;
@@ -14346,7 +14283,6 @@ class MigrateTableItem extends  AbstractModel {
 
         /**
          * Data table name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TableName = null;
@@ -14423,8 +14359,7 @@ class DescribeSQLExecutionPlanResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Execution plan details</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Plan details</p>
          * @type {ExecutionPlanDetail || null}
          */
         this.PlanDetail = null;
@@ -14769,21 +14704,18 @@ class MigrateDBItem extends  AbstractModel {
 
         /**
          * Database name.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DbName = null;
 
         /**
          * Data table migration mode
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MigrateTableMode = null;
 
         /**
          * Data table information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MigrateTableItem> || null}
          */
         this.Tables = null;
@@ -14822,70 +14754,60 @@ class RegionInstanceSpecInfo extends  AbstractModel {
 
         /**
          * Number of CPU cores
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
          * Memory size.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
          * Minimum storage size
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MinStorageSize = null;
 
         /**
          * Maximum storage size
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MaxStorageSize = null;
 
         /**
          * Whether there is inventory
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.HasStock = null;
 
         /**
          * Instance type
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
          * Storage type
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StorageType = null;
 
         /**
-         * minimum replica count
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Minimum replica count
          * @type {number || null}
          */
         this.MinReplicaNum = null;
 
         /**
          * Maximum number of replicas
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MaxReplicaNum = null;
 
         /**
          * Availability zone inventory information list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ZoneStockInfo4Libra> || null}
          */
         this.ZoneStockInfos = null;
@@ -15518,7 +15440,6 @@ class RestartLibraDBInstanceResponse extends  AbstractModel {
 
         /**
          * Asynchronous task ID.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.FlowId = null;
@@ -15665,8 +15586,7 @@ class DescribeBackupDownloadUserRestrictionResponse extends  AbstractModel {
         super();
 
         /**
-         * Cluster backup download limit information.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Backup download limit info for cluster
          * @type {Array.<BackupLimitClusterRestriction> || null}
          */
         this.BackupLimitClusterRestrictions = null;
@@ -16636,13 +16556,13 @@ class AddInstancesRequest extends  AbstractModel {
         this.Cpu = null;
 
         /**
-         * Memory in GB
+         * <p>Memory in GB</p>
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * Number of added read-only instances. Value range: (0,16].
+         * <p>Number of newly-added read-only instances, value range (0,15]</p>
          * @type {number || null}
          */
         this.ReadOnlyCount = null;
@@ -16672,13 +16592,13 @@ class AddInstancesRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * The port used when adding an RO group. Value range: [0,65535).
+         * <p>Port used when adding new RO groups, value range [0,65535)</p>
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Instance name. String length range: [0,64).
+         * <p>Instance name, string length range [0,64), value range uppercase and lowercase letters, digits 0-9, '_', '-', '.'</p>
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -17295,7 +17215,6 @@ class LibraDBClusterDetail extends  AbstractModel {
 
         /**
          * <p>Grayscale information for version upgrade</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {UpgradeAnalysisInstanceVersionInfo || null}
          */
         this.AnalysisUpgradeVersionInfo = null;
@@ -18387,8 +18306,7 @@ class OfflineLibraDBInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * task flow id
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task flow id
          * @type {number || null}
          */
         this.FlowId = null;
@@ -19443,6 +19361,12 @@ class CreateAccountsResponse extends  AbstractModel {
         super();
 
         /**
+         * <p>Task ID.</p>
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -19457,6 +19381,7 @@ class CreateAccountsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -19973,22 +19898,19 @@ class GoodsPrice extends  AbstractModel {
         super();
 
         /**
-         * Specifies the instance price.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance price
          * @type {TradePrice || null}
          */
         this.InstancePrice = null;
 
         /**
-         * Specifies the storage price.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Storage price
          * @type {TradePrice || null}
          */
         this.StoragePrice = null;
 
         /**
-         * Specifies the product specification.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Product specification
          * @type {GoodsSpec || null}
          */
         this.GoodsSpec = null;
@@ -21535,7 +21457,6 @@ class BizTaskInfo extends  AbstractModel {
 
         /**
          * <p>Modify parameter task information</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ModifyParamsData> || null}
          */
         this.ModifyParamsData = null;
@@ -21560,7 +21481,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * <p>Manual backup task information</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {ManualBackupData || null}
          */
         this.ManualBackupData = null;
@@ -21579,14 +21499,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * <p>Convert cluster logs</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SwitchClusterLogBin || null}
          */
         this.SwitchClusterLogBin = null;
 
         /**
          * <p>Modify instance parameter data</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {BizTaskModifyParamsData || null}
          */
         this.ModifyInstanceParamsData = null;
@@ -22170,8 +22088,7 @@ class DescribeAuditRuleWithInstanceIdsResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Audit rule information of the instance
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance audit rule information.
          * @type {Array.<InstanceAuditRule> || null}
          */
         this.Items = null;
@@ -22323,35 +22240,30 @@ class ReplicationObject extends  AbstractModel {
 
         /**
          * Source instance type
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SrcInstanceType = null;
 
         /**
-         * Source Cluster Id
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Source cluster Id
          * @type {string || null}
          */
         this.SrcClusterId = null;
 
         /**
          * Source instance ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SrcInstanceId = null;
 
         /**
          * Copy task ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ReplicationJobId = null;
 
         /**
-         * sync object details
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Synchronization object details
          * @type {MigrateOpt || null}
          */
         this.MigrateObjects = null;
@@ -22413,8 +22325,6 @@ class CreateIntegrateClusterResponse extends  AbstractModel {
 
         /**
          * Large order number.
-
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.BigDealIds = null;
@@ -23807,7 +23717,6 @@ class DescribeLibraDBClusterAccountPrivilegesResponse extends  AbstractModel {
 
         /**
          * Permission list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Privileges = null;
@@ -25133,7 +25042,6 @@ class DescribeLibraDBDataSourceResponse extends  AbstractModel {
 
         /**
          * Source information list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DataSourceItem> || null}
          */
         this.DataSourceList = null;
@@ -26018,7 +25926,6 @@ class Objects extends  AbstractModel {
 
         /**
          * Database table information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MigrateObject || null}
          */
         this.DatabaseTables = null;
@@ -26115,7 +26022,6 @@ class DescribeLibraDBForwardConfigResponse extends  AbstractModel {
 
         /**
          * Forwarding list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ForwardInstanceInfo> || null}
          */
         this.ForwardList = null;
@@ -26160,14 +26066,12 @@ class ZoneStockInfo4Libra extends  AbstractModel {
 
         /**
          * Availability zone
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * whether there is inventory
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether there is inventory
          * @type {boolean || null}
          */
         this.HasStock = null;
@@ -26242,7 +26146,7 @@ class CynosdbClusterDetail extends  AbstractModel {
         this.Region = null;
 
         /**
-         * <p>AZ.</p>
+         * <p>Primary availability zone of the cluster</p>
          * @type {string || null}
          */
         this.Zone = null;
@@ -26422,7 +26326,7 @@ class CynosdbClusterDetail extends  AbstractModel {
         this.Tasks = null;
 
         /**
-         * <p>Primary AZ</p>
+         * <p>Current instance located availability zone for read-write</p>
          * @type {string || null}
          */
         this.MasterZone = null;
@@ -26571,6 +26475,12 @@ class CynosdbClusterDetail extends  AbstractModel {
          */
         this.IsOpenTDE = null;
 
+        /**
+         * <p>Current instance availability zone</p>
+         * @type {string || null}
+         */
+        this.RealZone = null;
+
     }
 
     /**
@@ -26691,6 +26601,7 @@ class CynosdbClusterDetail extends  AbstractModel {
         this.ArchiveProgress = 'ArchiveProgress' in params ? params.ArchiveProgress : null;
         this.ClusterLevel = 'ClusterLevel' in params ? params.ClusterLevel : null;
         this.IsOpenTDE = 'IsOpenTDE' in params ? params.IsOpenTDE : null;
+        this.RealZone = 'RealZone' in params ? params.RealZone : null;
 
     }
 }
@@ -26704,8 +26615,7 @@ class ActivateLibraDBInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * task flow id
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task flow id
          * @type {number || null}
          */
         this.FlowId = null;
@@ -26942,8 +26852,7 @@ class BinlogConfigInfo extends  AbstractModel {
         this.BinlogCrossRegionsEnable = null;
 
         /**
-         * <p>binlog cross-region</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Cross-region binlog</p>
          * @type {Array.<string> || null}
          */
         this.BinlogCrossRegions = null;
@@ -27180,7 +27089,7 @@ class DescribeClusterDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Cluster details
+         * <p>Cluster detail</p>
          * @type {CynosdbClusterDetail || null}
          */
         this.Detail = null;
@@ -27376,28 +27285,24 @@ class DescribeLibraDBClusterAccountAllPrivilegesResponse extends  AbstractModel 
 
         /**
          * Permission statement
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.PrivilegeStatements = null;
 
         /**
          * Global permission
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.GlobalPrivileges = null;
 
         /**
          * Database permission
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DatabasePrivileges> || null}
          */
         this.DatabasePrivileges = null;
 
         /**
          * Table permission
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<TablePrivileges> || null}
          */
         this.TablePrivileges = null;
@@ -27802,15 +27707,13 @@ class IsolateLibraDBInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * task flow id
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task flow id
          * @type {number || null}
          */
         this.FlowId = null;
 
         /**
          * Order ID list
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
@@ -28469,14 +28372,12 @@ class CreateBackupVaultItem extends  AbstractModel {
 
         /**
          * Safe id
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VaultId = null;
 
         /**
          * Safe region
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VaultRegion = null;
@@ -28511,7 +28412,7 @@ class ClusterSlaveData extends  AbstractModel {
         this.OldMasterZone = null;
 
         /**
-         * Old slave availability zone.
+         * Secondary availability zone
          * @type {Array.<string> || null}
          */
         this.OldSlaveZone = null;
@@ -28523,7 +28424,7 @@ class ClusterSlaveData extends  AbstractModel {
         this.NewMasterZone = null;
 
         /**
-         * New slave availability zone.
+         * Secondary AZ
          * @type {Array.<string> || null}
          */
         this.NewSlaveZone = null;
@@ -29856,14 +29757,12 @@ class CheckCreateLibraDBInstanceResponse extends  AbstractModel {
 
         /**
          * Overall verification status
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
          * Check item
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<CheckItem> || null}
          */
         this.CheckItem = null;
@@ -29907,29 +29806,25 @@ class AddServerlessRoInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Freeze transaction. One frozen flow is activated at a time.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Freeze transaction, one frozen flow is activated at a time</p>
          * @type {string || null}
          */
         this.TranId = null;
 
         /**
-         * <p>Post-paid order number</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Post-paid Order Number</p>
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
 
         /**
-         * <p>Delivery resource id list.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Delivery resource id list</p>
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
 
         /**
          * <p>Large order number</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.BigDealIds = null;
@@ -31425,8 +31320,7 @@ class IsolateClusterResponse extends  AbstractModel {
         this.FlowId = null;
 
         /**
-         * Refund order number (returned for prepaid resources. if necessary, synchronize the order status by using the billing product's DescribeDealsByCond to synchronize the order status).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Refund order number (returned for prepaid resources. If you need to synchronize the order status, please use the billing product's DescribeDealsByCond to synchronize the order status.)
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
@@ -31593,8 +31487,7 @@ class BackupConfigInfo extends  AbstractModel {
         this.BackupTimeEnd = null;
 
         /**
-         * <p>This parameter currently does not support modification and is not required. Backup frequency is an array of length 7, corresponding to the backup method from Sunday to Saturday, full-full backup, increment-incremental backup.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Currently this parameter cannot be modified and no need to specify. Backup frequency is an array of length 7, corresponding to the backup method from Sunday to Saturday, full-full backup, increment-incremental backup.</p>
          * @type {Array.<string> || null}
          */
         this.BackupWeekDays = null;
@@ -31619,7 +31512,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * <p>Cross-regional backup region</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.CrossRegions = null;
@@ -31730,13 +31622,13 @@ class RollbackProcessInfo extends  AbstractModel {
         this.VipSwitchableTime = null;
 
         /**
-         * Swap instance list.
+         * Exchange instance list
          * @type {Array.<ExchangeInstanceInfo> || null}
          */
         this.ExchangeInstanceInfoList = null;
 
         /**
-         * Swap RO group list.
+         * Exchange RO group list
          * @type {Array.<ExchangeRoGroupInfo> || null}
          */
         this.ExchangeRoGroupInfoList = null;
@@ -32557,15 +32449,13 @@ class BackupLimitRestriction extends  AbstractModel {
         this.IpComparisonSymbol = null;
 
         /**
-         * Specifies the vpc setting for download restrictions.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Limit download vpc settings
          * @type {Array.<BackupLimitVpcItem> || null}
          */
         this.LimitVpcs = null;
 
         /**
-         * Specifies the ip settings for limiting downloads.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Limit download ip settings
          * @type {Array.<string> || null}
          */
         this.LimitIps = null;
@@ -33058,7 +32948,6 @@ class RollbackToNewClusterResponse extends  AbstractModel {
 
         /**
          * <p>Large order number</p>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.BigDealIds = null;
@@ -33548,8 +33437,7 @@ class DescribeBackupDownloadRestrictionResponse extends  AbstractModel {
         super();
 
         /**
-         * Cluster backup download limit.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Backup download limit for clusters
          * @type {Array.<BackupLimitClusterRestriction> || null}
          */
         this.BackupLimitClusterRestrictions = null;
@@ -34954,8 +34842,7 @@ class LogicBackupConfigInfo extends  AbstractModel {
         this.LogicCrossRegionsEnable = null;
 
         /**
-         * <p>Cross-regional logic backup</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Cross-regional logical backup</p>
          * @type {Array.<string> || null}
          */
         this.LogicCrossRegions = null;

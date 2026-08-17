@@ -25,8 +25,7 @@ class AiAnalysisTaskHorizontalToVerticalInput extends  AbstractModel {
         super();
 
         /**
-         * <p>ID of the horizontal-to-vertical video transformation template.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.Definition = null;
@@ -134,97 +133,31 @@ class ContainerDiagnoseResultItem extends  AbstractModel {
         super();
 
         /**
-         * Diagnosed exception category. Valid values:
-DecodeParamException: decoding parameter exception.
-TimeStampException: timestamp exception.
-FrameException: frame rate exception.
-StreamStatusException: stream status exception.
-StreamInfo: stream information exception.
-StreamAbnormalCharacteristics: stream characteristics exception.
-DecodeException: decoding exception.
-HLSRequirements: HLS format exception.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Category = null;
 
         /**
-         * Diagnosed specific exception type. Valid values:
-
-VideoResolutionChanged: video resolution change.
-AudioSampleRateChanged: audio sample rate change.
-AudioChannelsChanged: audio channel quantity change.
-ParameterSetsChanged: stream parameter set information change.
-DarOrSarInvalid: video aspect ratio exception.
-TimestampFallback: DTS timestamp rollback.
-DtsJitter: DTS jitter too high.
-PtsJitter: PTS jitter too high.
-AACDurationDeviation: improper AAC frame timestamp interval.
-AudioDroppingFrames: audio frame dropping.
-VideoDroppingFrames: video frame dropping.
-AVTimestampInterleave: improper audio-video interleaving.
-PtsLessThanDts: PTS less than DTS for media streams.
-ReceiveFpsJitter: significant jitter in the network receive frame rate.
-ReceiveFpsTooSmall: network receive video frame rate too low.
-FpsJitter: significant jitter in the stream frame rate calculated via PTS.
-StreamOpenFailed: stream open failure.
-StreamEnd: stream end.
-StreamParseFailed: stream parsing failure.
-VideoFirstFrameNotIdr: first frame not an IDR frame.
-StreamNALUError: NALU start code error.
-TsStreamNoAud: no AUD NALU in the H26x stream of MPEG-TS.
-AudioStreamLack: no audio stream.
-VideoStreamLack: no video stream.
-LackAudioRecover: missing audio stream recovery.
-LackVideoRecover: missing video stream recovery.
-VideoBitrateOutofRange: video stream bitrate (kbps) out of range.
-AudioBitrateOutofRange: audio stream bitrate (kbps) out of range.
-VideoDecodeFailed: video decoding error.
-AudioDecodeFailed: audio decoding error.
-AudioOutOfPhase: opposite phase in dual-channel audio.
-VideoDuplicatedFrame: duplicate frames in video streams.
-AudioDuplicatedFrame: duplicate frames in audio streams.
-VideoRotation: video rotation.
-TsMultiPrograms: multiple programs in MPEG2-TS streams
-Mp4InvalidCodecFourcc: codec FourCC in MP4 not meeting Apple HLS requirements.
-HLSBadM3u8Format: invalid M3U8 file.
-HLSInvalidMasterM3u8: invalid main M3U8 file.
-HLSInvalidMediaM3u8: invalid media M3U8 file.
-HLSMasterM3u8Recommended: parameters recommended by standards missing in main M3U8.
-HLSMediaM3u8Recommended: parameters recommended by standards missing in media M3U8.
-HLSMediaM3u8DiscontinuityExist: EXT-X-DISCONTINUITY in media M3U8.
-HLSMediaSegmentsStreamNumChange: changed number of streams in segments.
-HLSMediaSegmentsPTSJitterDeviation: PTS jumps between segments without EXT-X-DISCONTINUITY.
-HLSMediaSegmentsDTSJitterDeviation: DTS jumps between segments without EXT-X-DISCONTINUITY.
-TimecodeTrackExist: TMCD track in MP4.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Diagnosed exception level. Valid values:
-Fatal: affecting subsequent playback and parsing.
-Error: may affect playback.
-Warning: potential risk, which may not necessarily affect playback.
-Notice: important stream information.
-Info: general stream information.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.SeverityLevel = null;
 
         /**
-         * Timestamp of warning, in the format of 2022-12-25T13:14:16Z.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<string> || null}
          */
         this.DateTimeSet = null;
 
         /**
-         * Timestamp.
-
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<number> || null}
          */
         this.TimestampSet = null;
@@ -355,7 +288,7 @@ class ModifyWatermarkTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Full speech recognition segment.
+ * Segment undergone full speech recognition.
  * @class
  */
 class AiRecognitionTaskAsrFullTextSegmentItem extends  AbstractModel {
@@ -647,7 +580,7 @@ class AiAnalysisTaskVideoComprehensionResult extends  AbstractModel {
         this.ErrCode = null;
 
         /**
-         * Error message.
+         * Error message
          * @type {string || null}
          */
         this.Message = null;
@@ -659,8 +592,7 @@ class AiAnalysisTaskVideoComprehensionResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * Output file for video (audio) recognition.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskVideoComprehensionOutput || null}
          */
         this.Output = null;
@@ -853,7 +785,7 @@ class OverrideTranscodeParameter extends  AbstractModel {
 }
 
 /**
- * Input type of intelligent categorization task
+ * Intelligent classification task input type.
  * @class
  */
 class AiAnalysisTaskClassificationInput extends  AbstractModel {
@@ -939,7 +871,7 @@ Default value: 0 px.
 }
 
 /**
- * Smart subtitle task result for live stream.
+ * Live stream smart subtitle result
  * @class
  */
 class LiveStreamAiSmartSubtitleResultInfo extends  AbstractModel {
@@ -947,7 +879,7 @@ class LiveStreamAiSmartSubtitleResultInfo extends  AbstractModel {
         super();
 
         /**
-         * Live stream smart subtitling task result list.
+         * Live stream smart subtitle task result list.
          * @type {Array.<LiveSmartSubtitleResult> || null}
          */
         this.SmartSubtitleResult = null;
@@ -1129,8 +1061,7 @@ class LiveStreamAiQualityControlResultInfo extends  AbstractModel {
         super();
 
         /**
-         * Content quality inspection result list.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<QualityControlResult> || null}
          */
         this.QualityControlResults = null;
@@ -1142,15 +1073,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DiagnoseResults = null;
 
         /**
-         * Content quality inspection result list.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<QualityControlResult> || null}
          */
         this.QualityControlResultSet = null;
 
         /**
-         * Format diagnostic result list.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<DiagnoseResult> || null}
          */
         this.DiagnoseResultSet = null;
@@ -1205,7 +1134,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * The information of intelligently generated highlight segments.
+ * Intelligent highlight info
  * @class
  */
 class MediaAiAnalysisHighlightItem extends  AbstractModel {
@@ -1213,45 +1142,43 @@ class MediaAiAnalysisHighlightItem extends  AbstractModel {
         super();
 
         /**
-         * The URL of the highlight segments.
+         * Intelligent highlight address.
          * @type {string || null}
          */
         this.HighlightPath = null;
 
         /**
-         * The URL of the thumbnail.
+         * Intelligent highlight cover address.
          * @type {string || null}
          */
         this.CovImgPath = null;
 
         /**
-         * The confidence score. Value range: 0-100.
+         * Reliability of the intelligent highlights, with a value range from 0 to 100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * The duration of the highlights.
+         * Intelligent highlight duration.
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
-         * A list of the highlight segments.
+         * Intelligent highlight sub-clip list.
          * @type {Array.<HighlightSegmentItem> || null}
          */
         this.SegmentSet = null;
 
         /**
-         * Intelligent highlight address.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.HighlightUrl = null;
 
         /**
-         * Intelligent highlight cover address.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.CovImgUrl = null;
@@ -1371,7 +1298,7 @@ class DescribeAnimatedGraphicsTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * Extract video digital watermark task information.
+ * Extract video digital watermark task information
  * @class
  */
 class ExtractBlindWatermarkTask extends  AbstractModel {
@@ -1385,16 +1312,16 @@ class ExtractBlindWatermarkTask extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * Task flow status. valid values:.
-<Li>WAITING: waiting.</li>.
-<Li>PROCESSING: processing.</li>.
+         * Task flow status. Valid values:
+<li>WAITING: waiting.</li>
+<li>PROCESSING: Processing;</li>
 <li>FINISH: completed</li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. `0` indicates success. other values indicate failure.
+         * Error code. `0` indicates success. Other values indicate failure.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1406,31 +1333,31 @@ class ExtractBlindWatermarkTask extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Target file information for media processing.
+         * Target file info of Media Processing Service.
          * @type {MediaInputInfo || null}
          */
         this.InputInfo = null;
 
         /**
-         * Specifies the digital watermark type. valid values: <li>blind-basic: basic version copyright digital watermark;</li> <li>blind-ab: ab copyright digital watermark.</li>.
+         * Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-ab: ab copyright digital watermark.</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Indicates whether a watermark is detected. if this parameter is true, the Result field will return the watermark extraction Result. if this parameter is false, the Result field will not return.
+         * Tag whether a watermark is detected. If this parameter is true, the Result field will return the watermark extraction Result. If this parameter is false, the Result field will not return it.
          * @type {boolean || null}
          */
         this.IsDetected = null;
 
         /**
-         * Fetched watermark content. this field will not be returned when no detection.
+         * Watermark content fetched. Field will not be returned if no digital watermark is detected.
          * @type {string || null}
          */
         this.Result = null;
 
         /**
-         * Extracts the digital watermark configuration.
+         * Extract digital watermark configuration.
          * @type {ExtractBlindWatermarkTaskConfig || null}
          */
         this.ExtractBlindWatermarkConfig = null;
@@ -1468,7 +1395,7 @@ class ExtractBlindWatermarkTask extends  AbstractModel {
 }
 
 /**
- * Result type of ASR-based prohibited information detection in speech task in content audit
+ * Content review Asr text prohibited content detection task result type
  * @class
  */
 class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
@@ -1476,22 +1403,19 @@ class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1503,13 +1427,13 @@ class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of ASR-based prohibited information detection in speech task in content audit
+         * Content review Asr text prohibited task input.
          * @type {AiReviewProhibitedAsrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of ASR-based prohibited information detection in speech task in content audit
+         * 
          * @type {AiReviewProhibitedAsrTaskOutput || null}
          */
         this.Output = null;
@@ -1674,7 +1598,7 @@ Note: The HLS segment format for adaptive bitrate streaming is based on this fie
 }
 
 /**
- * Result type of an image sprite generating task
+ * Result type of image sprite
  * @class
  */
 class MediaProcessTaskImageSpriteResult extends  AbstractModel {
@@ -1682,19 +1606,19 @@ class MediaProcessTaskImageSpriteResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://www.tencentcloud.com/document/api/1041/33691).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1706,26 +1630,25 @@ class MediaProcessTaskImageSpriteResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input for an image sprite generating task.
+         * Input of the image sprite task for videos.
          * @type {ImageSpriteTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of the image sprite task for videos.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {MediaImageSpriteItem || null}
          */
         this.Output = null;
 
         /**
-         * Task execution start time in ISO date and time format.
+         * Task execution start time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * Task execution completion time in ISO date and time format.
+         * Task execution completion time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -1797,7 +1720,7 @@ class CustomVariable extends  AbstractModel {
 }
 
 /**
- * AI narration and video re-creation result info.
+ * AI narration and video re-creation result information
  * @class
  */
 class AiAnalysisTaskReelOutput extends  AbstractModel {
@@ -1805,30 +1728,30 @@ class AiAnalysisTaskReelOutput extends  AbstractModel {
         super();
 
         /**
-         * Path of the output video.
+         * Path of the commentated video.
          * @type {string || null}
          */
         this.VideoPath = null;
 
         /**
-         * Path list of the output videos.
+         * Path list of the commentated video.
 
-**Note**:.
-1. when returning a file, `VideoPath` returns a file path, and `VideoPaths` likewise populates an element with the same path.
-2. when multiple files are returned, `VideoPath` returns an empty string, and `VideoPaths` returns the file path list.
+**Note**:
+1. When returning a file, `VideoPath` returns a file path, and `VideoPaths` is likewise populated with an element of the same path.
+2. When multiple files are returned, `VideoPath` returns an empty string, and `VideoPaths` returns a file path list.
          * @type {Array.<string> || null}
          */
         this.VideoPaths = null;
 
         /**
-         * Script file path.
+         * Script file path
 
          * @type {string || null}
          */
         this.ScriptPath = null;
 
         /**
-         * Storage location of the output video.
+         * Storage location of the commentated video.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -1960,7 +1883,7 @@ class DeleteAnimatedGraphicsTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Result type of OCR-based prohibited information detection in text task in content audit
+ * Content review Ocr text prohibited content detection task result type
  * @class
  */
 class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
@@ -1968,22 +1891,19 @@ class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1995,13 +1915,13 @@ class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of OCR-based prohibited information detection in text task in content audit
+         * Content review Ocr text prohibited task input.
          * @type {AiReviewProhibitedOcrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of OCR-based prohibited information detection in text task in content audit
+         * 
          * @type {AiReviewProhibitedOcrTaskOutput || null}
          */
         this.Output = null;
@@ -2100,19 +2020,19 @@ class AiRecognitionTaskAsrFullTextResultOutput extends  AbstractModel {
         super();
 
         /**
-         * List of full speech recognition segments.
+         * Full speech recognition segment list.
          * @type {Array.<AiRecognitionTaskAsrFullTextSegmentItem> || null}
          */
         this.SegmentSet = null;
 
         /**
-         * Subtitles file address.
+         * Subtitle file path.
          * @type {string || null}
          */
         this.SubtitlePath = null;
 
         /**
-         * Subtitles file storage location.
+         * Storage location of the subtitle file.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -2541,7 +2461,7 @@ class SubtitleArea extends  AbstractModel {
 }
 
 /**
- * Information of the time point screenshots in a VOD file
+ * Screenshot information at the specified time point for on-demand files
  * @class
  */
 class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
@@ -2549,19 +2469,19 @@ class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
         super();
 
         /**
-         * Specification of a time point screenshot template. 
+         * Specification for SnapshotByTimeOffset, please refer to the [SnapshotByTimeOffset parameter template](https://www.tencentcloud.com/document/product/266/33480?from_cn_redirect=1#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Information set of screenshots of the same specification. Each element represents a screenshot.
+         * A screenshot information set of the same specification, each element represents a screenshot.
          * @type {Array.<MediaSnapshotByTimePicInfoItem> || null}
          */
         this.PicInfoSet = null;
 
         /**
-         * Location of a time point screenshot file.
+         * Storage location of the SnapshotByTimeOffset file.
          * @type {TaskOutputStorage || null}
          */
         this.Storage = null;
@@ -2748,7 +2668,7 @@ Default value: black.
 }
 
 /**
- * The input parameters for OCR-based detection of politically sensitive information.
+ * Content review Ocr text sensitivity task input parameter type
  * @class
  */
 class AiReviewPoliticalOcrTaskInput extends  AbstractModel {
@@ -2756,7 +2676,7 @@ class AiReviewPoliticalOcrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * The template ID.
+         * Template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -2784,13 +2704,13 @@ class SmartSubtitleTaskTransTextResult extends  AbstractModel {
         super();
 
         /**
-         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -2808,22 +2728,19 @@ class SmartSubtitleTaskTransTextResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Translation task input information.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {SmartSubtitleTaskResultInput || null}
          */
         this.Input = null;
 
         /**
-         * Translation task output information.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {SmartSubtitleTaskTransTextResultOutput || null}
          */
         this.Output = null;
 
         /**
-         * Task progress.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {number || null}
          */
         this.Progress = null;
@@ -3135,7 +3052,7 @@ class ParseLiveStreamProcessNotificationRequest extends  AbstractModel {
         super();
 
         /**
-         * Live stream event notification obtained from CMQ.
+         * Event notification content for live streams obtained from CMQ.
          * @type {string || null}
          */
         this.Content = null;
@@ -3155,7 +3072,7 @@ class ParseLiveStreamProcessNotificationRequest extends  AbstractModel {
 }
 
 /**
- * Text keyword recognition control parameter.
+ * Text keyword recognition control parameters.
  * @class
  */
 class OcrWordsConfigureInfo extends  AbstractModel {
@@ -3163,16 +3080,16 @@ class OcrWordsConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of a text keyword recognition task. Valid values:
-<li>ON: Enables a text keyword recognition task;</li>
-<li>OFF: Disables a text keyword recognition task.</li>
+         * Task switch for text keyword recognition, available values:
+<li>ON: Enable text keyword recognition task;</li>
+<li>OFF: Disables the text keyword recognition task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty, all results will be returned.
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * Keyword-based filtering tag, specify the tag of the keyword to return. If left blank or empty, all results are returned.
+The number of tags is up to 10, and each tag can have up to 16 characters.
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -3360,7 +3277,7 @@ class AiAnalysisTaskCutoutOutput extends  AbstractModel {
 }
 
 /**
- * 
+ * Diagnosis result item.
  * @class
  */
 class DiagnoseResult extends  AbstractModel {
@@ -3368,63 +3285,13 @@ class DiagnoseResult extends  AbstractModel {
         super();
 
         /**
-         * Diagnosed exception category. Valid values:
-DecodeParamException: decoding parameter exception.
-TimeStampException: timestamp exception.
-FrameException: frame rate exception.
-StreamStatusException: stream status exception.
-StreamInfo: stream information exception.
-StreamAbnormalCharacteristics: stream characteristics exception.
-DecodeException: decoding exception.
-HLSRequirements: HLS format exception.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Category = null;
 
         /**
-         * Diagnosed specific exception type. Valid values:
-
-VideoResolutionChanged: video resolution change.
-AudioSampleRateChanged: audio sample rate change.
-AudioChannelsChanged: audio channel quantity change.ParameterSetsChanged: stream parameter set information change.
-DarOrSarInvalid: video aspect ratio exception.
-TimestampFallback: DTS timestamp rollback.DtsJitter: DTS jitter too high.
-PtsJitter: PTS jitter too high.
-AACDurationDeviation: improper AAC frame timestamp interval.
-AudioDroppingFrames: audio frame dropping.
-VideoDroppingFrames: video frame dropping.
-AVTimestampInterleave: improper audio-video interleaving.
-PtsLessThanDts: PTS less than DTS for media streams.
-ReceiveFpsJitter: significant jitter in the network receive frame rate.ReceiveFpsTooSmall: network receive video frame rate too low.FpsJitter: significant jitter in the stream frame rate calculated via PTS.StreamOpenFailed: stream open failure.
-StreamEnd: stream end.
-StreamParseFailed: stream parsing failure.
-VideoFirstFrameNotIdr: first frame not an IDR frame.
-StreamNALUError: NALU start code error.
-TsStreamNoAud: no AUD NALU in the H26x stream of MPEG-TS.AudioStreamLack: no audio stream.
-VideoStreamLack: no video stream.
-LackAudioRecover: missing audio stream recovery.
-LackVideoRecover: missing video stream recovery.
-VideoBitrateOutofRange: video stream bitrate (kbps) out of range.
-AudioBitrateOutofRange: audio stream bitrate (kbps) out of range.
-VideoDecodeFailed: video decoding error.
-AudioDecodeFailed: audio decoding error.
-AudioOutOfPhase: opposite phase in dual-channel audio.
-VideoDuplicatedFrame: duplicate frames in video streams.
-AudioDuplicatedFrame: duplicate frames in audio streams.
-VideoRotation: video rotation.
-TsMultiPrograms: multiple programs in MPEG2-TS streams.Mp4InvalidCodecFourcc: codec FourCC in MP4 not meeting Apple HLS requirements.
-HLSBadM3u8Format: invalid M3U8 file.
-HLSInvalidMasterM3u8: invalid main M3U8 file.
-HLSInvalidMediaM3u8: invalid media M3U8 file.
-HLSMasterM3u8Recommended: parameters recommended by standards missing in main M3U8.
-HLSMediaM3u8Recommended: parameters recommended by standards missing in media M3U8.
-HLSMediaM3u8DiscontinuityExist: EXT-X-DISCONTINUITY in media M3U8.
-HLSMediaSegmentsStreamNumChange: changed number of streams in segments.
-HLSMediaSegmentsPTSJitterDeviation: PTS jumps between segments without EXT-X-DISCONTINUITY.
-HLSMediaSegmentsDTSJitterDeviation: DTS jumps between segments without EXT-X-DISCONTINUITY.
-TimecodeTrackExist: TMCD track in MP4.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Type = null;
@@ -3448,13 +3315,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DateTime = null;
 
         /**
-         * Diagnosed exception level. Valid values:
-Fatal: affecting subsequent playback and parsing.
-Error: may affect playback.
-Warning: potential risk, which may not necessarily affect playback.
-Notice: important stream information.
-Info: general stream information.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.SeverityLevel = null;
@@ -3479,7 +3340,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Smart erasure task.
+ * Intelligent erasure task
  * @class
  */
 class SmartEraseTaskInput extends  AbstractModel {
@@ -3487,14 +3348,13 @@ class SmartEraseTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Smart erasure template id.
+         * Smart erasing template id.
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Intelligent erasure custom parameter. valid when Definition is 0. this parameter is used for highly custom scenarios. we recommend you prioritize using Definition to specify intelligent erasure parameters.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {RawSmartEraseParameter || null}
          */
         this.RawParameter = null;
@@ -3506,23 +3366,21 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.OverrideParameter = null;
 
         /**
-         * Specifies the target storage for files. if left blank, it inherits the upper-level OutputStorage value.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
          * Output path of the file, which can be a relative or absolute path.
-Specifies the output path must end with `.{format}`. variable names, please refer to [filename variable explanation](https://www.tencentcloud.com/document/product/1041/33495?has_map=1).
-**Relative path example**:
-<Li>Filename_{Variable name}.{format}</li>
+To define the output path, the path must end with `.{format}`. For variable names, please refer to the Filename Variable Explanation (https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1).
+Relative path example:
+<li>Filename_{Variable name}.{format}</li>
 <li>Filename.{format}</li>
+Absolute path example:
+<li>/Custom path/Filename_{Variable name}.{format}</li>
 
-**Absolute path example**:
-<Li>/Custom path/filename_{variable name}.{format}</li>
-
-**Note**: currently does not support the `BatchProcessMedia` api.
+**Note**: Currently does not support the `BatchProcessMedia` API.
          * @type {string || null}
          */
         this.OutputObjectPath = null;
@@ -3589,7 +3447,7 @@ class EnableWorkflowRequest extends  AbstractModel {
 }
 
 /**
- * The result of OCR-based detection of politically sensitive information.
+ * Content review Ocr text sensitive task result type
  * @class
  */
 class AiReviewTaskPoliticalOcrResult extends  AbstractModel {
@@ -3597,39 +3455,37 @@ class AiReviewTaskPoliticalOcrResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status, including PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * Error message.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * The input parameter for OCR-based detection of politically sensitive information.
+         * Content review Ocr text sensitivity task input.
          * @type {AiReviewPoliticalOcrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * The output of OCR-based detection of politically sensitive information.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewPoliticalOcrTaskOutput || null}
          */
         this.Output = null;
@@ -3673,8 +3529,8 @@ class SmartSubtitlesResult extends  AbstractModel {
 
         /**
          * Task type. Valid values:
-- AsrFullTextRecognition: full speech recognition.
-- TransTextRecognition: speech translation.
+- AsrFullTextRecognition: full speech recognition
+- TransTextRecognition: speech translation
 - PureSubtitleTrans: pure subtitle translation.
 - OcrFullTextRecognition: text-based subtitle extraction.
          * @type {string || null}
@@ -3682,33 +3538,25 @@ class SmartSubtitlesResult extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Full speech recognition result. When Type is
- set to AsrFullTextRecognition, this parameter takes effect.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {SmartSubtitleTaskAsrFullTextResult || null}
          */
         this.AsrFullTextTask = null;
 
         /**
-         * Translation result. When Type is
-
- set to TransTextRecognition, this parameter takes effect.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {SmartSubtitleTaskTransTextResult || null}
          */
         this.TransTextTask = null;
 
         /**
-         * The translation result of the pure subtitle file is returned when the translation type is PureSubtitleTrans.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {PureSubtitleTransResult || null}
          */
         this.PureSubtitleTransTask = null;
 
         /**
-         * Text-based subtitle extraction result. This field is valid when the value of Type is
-OcrFullTextRecognition.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {SmartSubtitleTaskFullTextResult || null}
          */
         this.OcrFullTextTask = null;
@@ -3988,7 +3836,7 @@ class AigcAudioReferenceAudioInfo extends  AbstractModel {
 }
 
 /**
- * Intelligent erasure template privacy protection configuration.
+ * Privacy protection configuration for the smart erasing template.
  * @class
  */
 class SmartErasePrivacyConfig extends  AbstractModel {
@@ -3996,17 +3844,17 @@ class SmartErasePrivacyConfig extends  AbstractModel {
         super();
 
         /**
-         * Specifies the privacy protection removal method.
--Blur: specifies the blur detection.
--Specifies the mosaic.
+         * Privacy protection removal method.
+- Blur: blur detection
+- mosaic
          * @type {string || null}
          */
         this.PrivacyModel = null;
 
         /**
-         * Privacy protection objective. no need to import an array when in use on API Explorer. just add the corresponding item and fill in the value.
--Human face.
--License plate.
+         * Privacy protection target. (When API Explorer is used, no need to specify an array. Just add the corresponding items and fill in the value.)
+-Human face
+- plate: license plate.
          * @type {Array.<string> || null}
          */
         this.PrivacyTargets = null;
@@ -4027,7 +3875,7 @@ class SmartErasePrivacyConfig extends  AbstractModel {
 }
 
 /**
- * Information of a time point screenshot
+ * Screenshot information at the specified time point
  * @class
  */
 class MediaSnapshotByTimePicInfoItem extends  AbstractModel {
@@ -4035,19 +3883,19 @@ class MediaSnapshotByTimePicInfoItem extends  AbstractModel {
         super();
 
         /**
-         * The timestamp (seconds) of the screenshot.
+         * The screenshot corresponds to the time offset in the video file, expressed in seconds.
          * @type {number || null}
          */
         this.TimeOffset = null;
 
         /**
-         * Path to the screenshot.
+         * Path of the screenshot.
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * List of watermarking template IDs if the screenshots are watermarked.
+         * If a screenshot is watermarked, list of template IDs used for watermarking.
          * @type {Array.<number> || null}
          */
         this.WaterMarkDefinition = null;
@@ -4159,20 +4007,7 @@ class SyncDubbingRequest extends  AbstractModel {
         this.ResourceId = null;
 
         /**
-         * <p>Extended parameters in the format of a JSON string.</p>
-<p>
-
-- <strong>synExt</strong>    Object;    Extended text to speech parameter.<br>
-- <strong>duration</strong>    Float;    Synthesized audio duration, in seconds. Example: 5.2.<br>
-- <strong>sampleRate</strong>    Integer;    Synthesized audio sample rate. Default value: 16000. Valid values: [8000, 16000, 22050, 24000, 32000, 44100].<br>
-- <strong>pitch</strong>    Integer;    Pitch. Default value: 0 (original voice output). Valid values: [-12, 12].<br>
-- <strong>cloneExt</strong>    Object;    Extended voice cloning parameter.<br>
-- <strong>timeRanges</strong>    Float;    Specifies the time ranges for audio cloning. The default value is the first 20 seconds of the audio. Example: [[5.2, 10], [45, 59.8]].
-
-</p>
-
-
-
+         * <p>Extended parameters in the format of a JSON string.</p><p><strong>synExt</strong>    Object    Extended text to speech parameter.<br>  <strong>duration</strong>    Float    Synthesized audio duration, in seconds. Example: 5.2.<br>  <strong>sampleRate</strong>    Integer    Synthesized audio sample rate. Default value: 16000. Valid values: [8000, 16000, 22050, 24000, 32000, 44100].<br>  <strong>pitch</strong>    Integer    Pitch. Default value: 0 (original voice output). Valid values: [-12, 12].<br><strong>cloneExt</strong>    Object    Extended voice cloning parameter.<br>  <strong>timeRanges</strong>    Float[][]    Specifies the time ranges for audio cloning. The default value is the first 20 seconds of the audio. Example: [[5.2, 10], [45, 59.8]].</p>
          * @type {string || null}
          */
         this.ExtParam = null;
@@ -4708,7 +4543,7 @@ class SubtitleResult extends  AbstractModel {
 }
 
 /**
- * The input parameters for the detection of politically sensitive information.
+ * Content review sensitive task input parameter type
  * @class
  */
 class AiReviewPoliticalTaskInput extends  AbstractModel {
@@ -4716,7 +4551,7 @@ class AiReviewPoliticalTaskInput extends  AbstractModel {
         super();
 
         /**
-         * The template ID.
+         * Template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -4991,7 +4826,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of intelligent categorization task
+ * Intelligent Classification Task Control Parameters
  * @class
  */
 class ClassificationConfigureInfo extends  AbstractModel {
@@ -4999,9 +4834,9 @@ class ClassificationConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of intelligent categorization task. Valid values:
-<li>ON: enables intelligent categorization task;</li>
-<li>OFF: disables intelligent categorization task.</li>
+         * Intelligent classification task switch.
+<li>ON: Turn on intelligent classification.</li>
+<li>OFF: Disables the intelligent classification task.</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -5021,7 +4856,7 @@ class ClassificationConfigureInfo extends  AbstractModel {
 }
 
 /**
- * Intelligent categorization result
+ * Intelligent classification result
  * @class
  */
 class MediaAiAnalysisClassificationItem extends  AbstractModel {
@@ -5029,13 +4864,13 @@ class MediaAiAnalysisClassificationItem extends  AbstractModel {
         super();
 
         /**
-         * Name of intelligently generated category.
+         * Category name for intelligent classification.
          * @type {string || null}
          */
         this.Classification = null;
 
         /**
-         * Confidence of intelligently generated category between 0 and 100.
+         * Reliability of intelligent classification, with a value range from 0 to 100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -5148,28 +4983,30 @@ class UpdateSmartEraseWatermarkConfig extends  AbstractModel {
         super();
 
         /**
-         * Watermark erasing method.
-**Automatic erasing: ** Video watermarks are automatically recognized using an AI model and are erased to generate a new video. It applies to dynamic watermarks.
-When automatic erasing is used, if AutoAreas is not specified, the full-screen video image area will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
- **Specified area erasing: ** For static watermarks in fixed positions, you are recommended to specify the erasing area directly.When you choose specified area erasing, specify at least one area.
-- auto: automatic erasing.
+         * Watermark removal method.
+**Automatic erasing:** Video watermarks are automatically recognized using an AI model and are erased to generate a new video. It applies to dynamic watermarks.
+When using automatic erasing, if AutoAreas is not specified, the full-screen video image area will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
+**Specified area erasure:** For static watermarks with a relatively fixed position, we recommend you directly specify the area for erasure.
+When you choose specified area erasure, import at least a specified region.
+
+- auto: automatic erasing
 - custom: specified area erasing.
          * @type {string || null}
          */
         this.WatermarkEraseMethod = null;
 
         /**
-         * Watermark erasing model.
-Basic Edition: provide average effects and high cost performance. It applies to animations or videos with clean backgrounds.
-Advanced Edition: provide better effects. It applies to reality-style videos, such as short dramas.
-- basic: Basic Edition.
+         * Watermark removal model.
+Basic Edition: Provides average effects and high cost performance. Suitable for animations or videos with clean backgrounds.
+Advanced edition: Better effectiveness, suitable for reality style videos such as mini-drama.
+-.
 - advanced: Advanced Edition.
          * @type {string || null}
          */
         this.WatermarkModel = null;
 
         /**
-         * Custom area for automatic erasing.
+         * Automatic removal of custom region.
 For the specified area, AI models are used to automatically detect and erase the target objects.
 Note: When the erasing method is set to custom, this parameter is invalid. Input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
          * @type {Array.<EraseArea> || null}
@@ -5177,7 +5014,7 @@ Note: When the erasing method is set to custom, this parameter is invalid. Input
         this.AutoAreas = null;
 
         /**
-         * Custom area for specified area erasing.
+         * Specify a custom region for erasing.
 For the specified area, erase the target objects directly without detection and recognition within a selected time period.
 Note: Input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
          * @type {Array.<EraseTimeArea> || null}
@@ -5430,7 +5267,7 @@ class DeleteProjectResponse extends  AbstractModel {
 }
 
 /**
- * Speech recognition segment.
+ * ASR segment.
  * @class
  */
 class AiRecognitionTaskAsrWordsSegmentItem extends  AbstractModel {
@@ -5438,19 +5275,19 @@ class AiRecognitionTaskAsrWordsSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * Start time offset of a recognition segment in seconds.
+         * Start time offset of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of a recognition segment in seconds.
+         * End time offset of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * Confidence of a recognition segment. Value range: 0-100.
+         * Confidence of a recognized segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -5480,83 +5317,80 @@ class ParseLiveStreamProcessNotificationResponse extends  AbstractModel {
         super();
 
         /**
-         * Live stream processing result type, including:.
-<Li>AiReviewResult: content moderation result;</li>.
-<Li>AiRecognitionResult: content recognition result;</li>.
-<Li>LiveRecordResult: live streaming result;</li>.
-<Li>AiQualityControlResult: media quality inspection result.</li>.
-<Li>AiAnalysisResult: content analysis result.</li>.
-<Li>AiSmartSubtitleResult: smart subtitle result.</li>.
+         * Live stream processing result type, including:
+<li>AiReviewResult: content moderation result;</li>
+<li>AiRecognitionResult: content recognition result;</li>
+<li>LiveRecordResult: live streaming result;</li>
+<li>AiQualityControlResult: media quality inspection result.</li>
+<li>AiAnalysisResult: content analysis result.</li>
+<li>AiSmartSubtitleResult: smart subtitle result;</li>
 <li>ProcessEof: end of live stream processing.</li>
          * @type {string || null}
          */
         this.NotificationType = null;
 
         /**
-         * Video processing task ID.
+         * Task ID for video processing.
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * Information of a live stream processing error, which is valid when `NotificationType` is `ProcessEof`.
-Note: when this field return null, means no valid values can be obtained.
+         * 
          * @type {LiveStreamProcessErrorInfo || null}
          */
         this.ProcessEofInfo = null;
 
         /**
-         * Content audit result, which is valid when `NotificationType` is `AiReviewResult`.
-Note: when this field return null, means no valid values can be obtained.
+         * 
          * @type {LiveStreamAiReviewResultInfo || null}
          */
         this.AiReviewResultInfo = null;
 
         /**
-         * Content recognition result, which is valid if `NotificationType` is `AiRecognitionResult`.
+         * 
          * @type {LiveStreamAiRecognitionResultInfo || null}
          */
         this.AiRecognitionResultInfo = null;
 
         /**
-         * Content analysis result, which is valid if `NotificationType` is `AiAnalysisResult`.
+         * 
          * @type {LiveStreamAiAnalysisResultInfo || null}
          */
         this.AiAnalysisResultInfo = null;
 
         /**
-         * Media quality inspection result, which is valid if `NotificationType` is `AiQualityControlResult`.
+         * 
          * @type {LiveStreamAiQualityControlResultInfo || null}
          */
         this.AiQualityControlResultInfo = null;
 
         /**
-         * Live recording result is valid when NotificationType is LiveRecordResult.
-Note: when this field return null, means no valid values can be obtained.
+         * 
          * @type {LiveStreamRecordResultInfo || null}
          */
         this.LiveRecordResultInfo = null;
 
         /**
-         * Smart subtitle result. valid when NotificationType is AiSmartSubtitleResult.
+         * Smart subtitle result, valid when NotificationType is AiSmartSubtitleResult.
          * @type {LiveStreamAiSmartSubtitleResultInfo || null}
          */
         this.AiSmartSubtitleResultInfo = null;
 
         /**
-         * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+         * An identifier for deduplication. If there has been a request with the same identifier within the past seven days, an error will be returned for the current request. The maximum length is 50 characters. Leaving it blank or using a null string indicates no deduplication is required.
          * @type {string || null}
          */
         this.SessionId = null;
 
         /**
-         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+         * Source context, which is used to pass through user request information. The callback for task flow status changes will return the value of this field. The maximum length is 1,000 characters.
          * @type {string || null}
          */
         this.SessionContext = null;
 
         /**
-         * - expiration time, event notification signature expiration in UNIX Timestamp format. - notifications from media processing default to an expiration time of 10 minutes. if the time specified by the Timestamp value in a message notification has expired, the notification can be deemed invalid, furthermore preventing network replay attacks. - the Timestamp format is decimal UNIX Timestamp, seconds elapsed since midnight (UTC/GMT) on january 1, 1970.
+         * -Expiration time, the UNIX timestamp for event notification signature expiration. Notifications from Media Processing Service (MPS) have a default expiration time of 10 minutes. If the time specified by the Timestamp value in a notification has expired, the notification can be deemed invalid, which helps prevent network replay attacks. The Timestamp format is a decimal UNIX timestamp, representing the seconds elapsed since midnight on January 1, 1970 (UTC/GMT).
          * @type {number || null}
          */
         this.Timestamp = null;
@@ -5664,14 +5498,14 @@ class SubtitleShadowConfig extends  AbstractModel {
         this.ShadowWidthUnit = null;
 
         /**
-         * Shadow color. 6-digit base 16 RGB. Black by default if left blank (has set shadow in the current situation).
+         * Shadow color. 6-digit base 16 RGB. Black by default if left blank (when shadow is set).
 
          * @type {string || null}
          */
         this.ShadowColor = null;
 
         /**
-         * Shadow transparency. The value should be a positive floating-point number in the range of (0, 1]. If this is not specified, the default value is 1, which means completely opaque (with shadow configured).
+         * Shadow transparency. A positive floating-point number in the range of (0, 1]. By default if left blank, the value is 1, which means completely opaque (with shadow configured).
 
          * @type {number || null}
          */
@@ -5696,7 +5530,7 @@ class SubtitleShadowConfig extends  AbstractModel {
 }
 
 /**
- * Smart erasure task result.
+ * Intelligent erasure task result
  * @class
  */
 class SmartEraseTaskResult extends  AbstractModel {
@@ -5704,7 +5538,7 @@ class SmartEraseTaskResult extends  AbstractModel {
         super();
 
         /**
-         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
@@ -5722,33 +5556,31 @@ class SmartEraseTaskResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of the smart erasure task.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {SmartEraseTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of the smart erasure task.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {AiAnalysisTaskDelLogoOutput || null}
          */
         this.Output = null;
 
         /**
-         * Task progress.		
+         * Task progress.	
          * @type {number || null}
          */
         this.Progress = null;
 
         /**
-         * Task execution start time in ISO datetime format.
+         * Starting time of task execution, in ISO date and time format.
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * Task execution completion time in ISO datetime format.
+         * Task completion time, in ISO date and time format.
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -5958,29 +5790,25 @@ class SmartSubtitleTaskTextResultOutput extends  AbstractModel {
         super();
 
         /**
-         * <p>List of segments for smart subtitle recognition.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<SmartSubtitleTaskFullTextSegmentItem> || null}
          */
         this.SegmentSet = null;
 
         /**
-         * <p>Subtitle recognition result</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<SubtitleResult> || null}
          */
         this.RecognizeSubtitleResult = null;
 
         /**
-         * <p>Translated subtitles</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<SubtitleResult> || null}
          */
         this.TransSubtitleResult = null;
 
         /**
-         * <p>Storage location of the subtitle file</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -6032,7 +5860,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Result type of intelligent frame-specific tagging
+ * Intelligent frame tagging result type
  * @class
  */
 class AiAnalysisTaskFrameTagResult extends  AbstractModel {
@@ -6040,19 +5868,19 @@ class AiAnalysisTaskFrameTagResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -6064,13 +5892,13 @@ class AiAnalysisTaskFrameTagResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of intelligent frame-specific tagging task.
+         * Intelligent frame tagging task input.
          * @type {AiAnalysisTaskFrameTagInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of intelligent frame-specific tagging task.
+         * 
          * @type {AiAnalysisTaskFrameTagOutput || null}
          */
         this.Output = null;
@@ -6391,7 +6219,7 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
- * Control parameter of intelligent cover generating task
+ * Intelligent Cover Task Control Parameters
  * @class
  */
 class CoverConfigureInfo extends  AbstractModel {
@@ -6399,9 +6227,9 @@ class CoverConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of intelligent cover generating task. Valid values:
-<li>ON: enables intelligent cover generating task;</li>
-<li>OFF: disables intelligent cover generating task.</li>
+         * Intelligent Cover Task Switch. Valid values:
+<li>ON: Enable intelligent thumbnail generation.</li>
+<li>OFF: Disables the intelligent thumbnail generation task.</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -6622,7 +6450,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * Input parameter type of an ASR-based porn information detection in text task during content audit
+ * Content review Asr text porn detection task input parameter type
  * @class
  */
 class AiReviewPornAsrTaskInput extends  AbstractModel {
@@ -6630,7 +6458,7 @@ class AiReviewPornAsrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * ID of a porn information detection template.
+         * Pornography detection template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -6650,7 +6478,7 @@ class AiReviewPornAsrTaskInput extends  AbstractModel {
 }
 
 /**
- * Face recognition result.
+ * Face Recognition result.
  * @class
  */
 class AiRecognitionTaskFaceResult extends  AbstractModel {
@@ -6658,19 +6486,19 @@ class AiRecognitionTaskFaceResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -6682,14 +6510,13 @@ class AiRecognitionTaskFaceResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input information of a face recognition task.
+         * Face Recognition task input.
          * @type {AiRecognitionTaskFaceResultInput || null}
          */
         this.Input = null;
 
         /**
-         * Output information of a face recognition task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskFaceResultOutput || null}
          */
         this.Output = null;
@@ -7360,8 +7187,8 @@ class TimeSpotCheck extends  AbstractModel {
         /**
          * Duration of each loop detection, in seconds. Value range:
 
- - Minimum value: 10.
- - Maximum value: 86400.
+- Minimum value: 10.
+- Maximum value: 86400.
 
          * @type {number || null}
          */
@@ -7369,24 +7196,24 @@ class TimeSpotCheck extends  AbstractModel {
 
         /**
          * Detection interval, in seconds. It indicates the duration after a detection is completed and before the next detection is conducted. Value range:
- - Minimum value: 10.
- - Maximum value: 3600.
+- Minimum value: 10.
+- Maximum value: 3600.
          * @type {number || null}
          */
         this.CheckInterval = null;
 
         /**
          * Skipped opening duration, in seconds. Value range:
- - Minimum value: 1.
- - Maximum value: 1800.
+- Minimum value: 1.
+- Maximum value: 1800.
          * @type {number || null}
          */
         this.SkipDuration = null;
 
         /**
          * Number of loops. Value range:
- - Minimum value: 0.
- - Maximum value: 1000.
+- Minimum value: 0.
+- Maximum value: 1000.
 
 If the value is 0 or not specified, it indicates that loops are executed until the video ends.
          * @type {number || null}
@@ -7534,7 +7361,7 @@ class SubtitleTransResultItem extends  AbstractModel {
 }
 
 /**
- * The input parameter for OCR-based detection of sensitive information.
+ * Content review Ocr text sensitivity task input parameter type
  * @class
  */
 class AiReviewTerrorismOcrTaskInput extends  AbstractModel {
@@ -7542,7 +7369,7 @@ class AiReviewTerrorismOcrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * The template ID.
+         * Template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -7616,7 +7443,7 @@ class AddOnAudio extends  AbstractModel {
 }
 
 /**
- * Input for text keyword recognition.
+ * Text keyword recognition input.
  * @class
  */
 class AiRecognitionTaskOcrWordsResultInput extends  AbstractModel {
@@ -7754,7 +7581,7 @@ class DetectVideoWatermarkRequest extends  AbstractModel {
 }
 
 /**
- * The issues detected by quality control.
+ * Quality inspection exception item.
  * @class
  */
 class QualityControlResult extends  AbstractModel {
@@ -7762,31 +7589,31 @@ class QualityControlResult extends  AbstractModel {
         super();
 
         /**
-         * Exception type. valid values:.
+         * Exception type. Valid values:
 Jitter: jitter.
-Blur: specifies the blur effect.
-LowLighting: specifies low light.
+Blur: blurry.
+LowLighting: low light.
 HighLighting: overexposure.
-CrashScreen: specifies screen glitch.
-BlackWhiteEdge: specifies the black and white edges.
-SolidColorScreen: specifies the solid color screen.
-Noise: specifies the noise.
-Mosaic: mosaic.
-QRCode: specifies the qr code.
-AppletCode: specifies the mini program code.
-BarCode: specifies the barcode.
-LowVoice: specifies the bass.
-HighVoice: specifies high voice detection.
-NoVoice: specifies mute.
-LowEvaluation: specifies the video no-reference score (MOS) is below the threshold.
-AudioEvaluation: specifies the audio no-reference scoring (MOS) is below the threshold.
-AudioNoise: specifies the audio noise.
+CrashScreen: screen glitch.
+BlackWhiteEdge: Black and white edges
+SolidColorScreen: solid color screen.
+Noise: noise.
+Mosaic: Mosaic
+QRCode: QR code.
+AppletCode: Mini program code.
+BarCode: barcode.
+LowVoice: bass.
+HighVoice: high voice detection.
+NoVoice: mute.
+LowEvaluation: The video no-reference score (MOS) is below the threshold.
+AudioEvaluation: The audio no-reference scoring (MOS) is below the threshold.
+AudioNoise: Audio noise.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * The information of a checked segment in quality control.
+         * Quality inspection result item.
          * @type {Array.<QualityControlItem> || null}
          */
         this.QualityControlItems = null;
@@ -7815,7 +7642,7 @@ AudioNoise: specifies the audio noise.
 }
 
 /**
- * Input parameter type of a porn information detection task during content audit
+ * Content review porn detection task input parameter type
  * @class
  */
 class AiReviewPornTaskInput extends  AbstractModel {
@@ -7823,8 +7650,7 @@ class AiReviewPornTaskInput extends  AbstractModel {
         super();
 
         /**
-         * The ID of a porn detection template.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.Definition = null;
@@ -7968,15 +7794,13 @@ class MediaAiAnalysisDescriptionItem extends  AbstractModel {
         this.Keywords = null;
 
         /**
-         * Segmentation result.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<AiParagraphInfo> || null}
          */
         this.Paragraphs = null;
 
         /**
-         * Address of the mind map of a summary task.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.MindMapUrl = null;
@@ -8035,7 +7859,7 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
- * The information of a scheme.
+ * Orchestration task info
  * @class
  */
 class ScheduleTask extends  AbstractModel {
@@ -8043,48 +7867,45 @@ class ScheduleTask extends  AbstractModel {
         super();
 
         /**
-         * The scheme ID.
+         * Orchestration task ID.
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * The scheme status. Valid values:
-<li>PROCESSING</li>
-<li>FINISH</li>
+         * Task flow status. Valid values:
+<li>PROCESSING: Processing;</li>
+<li>FINISH: completed</li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * If the value returned is not 0, there was a source error. If 0 is returned, refer to the error codes of the corresponding task type.
+         * An error code other than 0 is returned in case of a source exception. Use the error code of the specific task when a value of 0 is returned.
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * If there was a source error, this parameter is the error message. For other errors, refer to the error messages of the corresponding task type.
+         * The corresponding exception message is returned in case of a source exception. If no source exception occurs, use the message of each specific task.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * The information of the file processed.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaInputInfo || null}
          */
         this.InputInfo = null;
 
         /**
-         * The metadata of the source video.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaMetaData || null}
          */
         this.MetaData = null;
 
         /**
-         * The output of the scheme.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<ActivityResult> || null}
          */
         this.ActivityResultSet = null;
@@ -8363,20 +8184,108 @@ class RecognizeAudioRequest extends  AbstractModel {
         this.AudioData = null;
 
         /**
-         * Target language for recognition. If this is not specified, the language is automatically identified (auto).Note: If the automatic identification provides unsatisfactory results, you can specify the language to improve the accuracy.Supported languages:auto: automatic identification.zh: Simplified Chinese.en: English.ja: Japanese.ko: Korean.vi: Vietnamese.ms: Malay.id: Indonesian.fil: Filipino.th: Thai.pt: Portuguese.tr: Turkish.ar: Arabic.es: Spanish.hi: Hindi.fr: French.de: German.it: Italian.yue: Cantonese.ru: Russian.af: Afrikaans.sq: Albanian.am: Amharic.hy: Armenian.az: Azerbaijani.eu: Basque.bn: Bengali.bs: Bosnian.bg: Bulgarian.my: Burmese.ca: Catalan.hr: Croatian.cs: Czech.da: Danish.nl: Dutch.et: Estonian.fi: Finnish.gl: Galician.ka: Georgian.el: Greek.gu: Gujarati.iw: Hebrew.hu: Hungarian.is: Icelandic.jv: Javanese.kn: Kannada.kk: Kazakh.km: Khmer.rw: Kinyarwanda.lo: Lao.lv: Latvian.lt: Lithuanian.mk: Macedonian.ml: Malayalam.mr: Marathi.mn: Mongolian.ne: Nepali.no: Norwegian Bokmal.fa: Persian.pl: Polish.ro: Romanian.sr: Serbian.si: Sinhala.sk: Slovak.sl: Slovenian.st: Southern Sotho.su: Sundanese.sw: Swahili.sv: Swedish.ta: Tamil.te: Telugu.ts: Tsonga.uk: Ukrainian.ur: Urdu.uz: Uzbek.ve: Vendaxh: Xhosa.zu: Zulu.
+         * Identify the target language. If left empty, the default is auto for automatic language identification.
+Note: If the automatic language recognition performance is poor, you can specify the language to improve accuracy.
+
+Currently supported languages:
+auto-identification
+Simplified Chinese
+en: English
+Japanese
+ko: Korean
+vi: Vietnamese
+ms: Malay
+id: Indonesian
+fil: Filipino
+th: Thai
+pt: Portuguese
+tr:
+ar: Arabic
+es: Spanish
+hi: Hindi
+French
+de: German
+Italian
+Cantonese
+ru: Russian
+af: Afrikaans
+sq: Albanian
+am: Amharic
+hy: Armenian
+az: Azerbaijani
+eu: Basque
+bn: Bengali
+bs: Bosnian
+bg: Bulgarian
+my: Burmese
+ca: Catalan
+hr: Croatian
+cs: Czech
+da: Danish
+nl: Dutch
+et: Estonian
+fi: Finnish
+gl: Galician
+ka: Georgian
+el: Greek
+gu: Gujarati
+iw: Hebrew
+hu: Hungarian
+is: Icelandic
+jv: Javanese
+kn: Kannada
+kk: Kazakh
+km: Khmer
+RPC
+lo: Lao
+lv: Latvian
+lt: Lithuanian
+mk: Macedonian
+ml: Malayalam
+mr: Marathi
+mn: Mongolian
+ne: Nepali
+Norwegian Bokmål
+fa: Persian
+pl: Polish
+ro: Romanian
+sr: Serbian
+si: Sinhalese
+sk: Slovak
+sl: Slovenian
+Southern Sotho
+su: Sundanese
+sw: Swahili
+sv: Swedish
+ta: Tamil
+te: Telugu
+`ts`: Tsonga.
+uk: Ukrainian
+ur: Urdu
+uz: Uzbek
+ve: Venda
+xh: isiXhosa
+zu: Zulu
 
          * @type {string || null}
          */
         this.Source = null;
 
         /**
-         * Audio data format. Default value: pcm.Supported formats:pcm (mono 16-bit PCM data with a sample rate of 16000).ogg-opus (mono Opus-encoded Ogg data with sample rates of 16000, 24000, or 48000).
+         * Audio data format, default is pcm
+
+Supported formats:
+pcm (mono 16-bit sampling pcm data with a 16000 sampling rate)
+ogg-opus (mono Opus-encoded Ogg data with sample rates of 16000, 24000, or 48000).
          * @type {string || null}
          */
         this.AudioFormat = null;
 
         /**
-         * Audio sample rate.Supported sample rates:pcm 16000
+         * Audio sampling rate
+
+Supported sampling rates:
+pcm 16000
 ogg-opus 16000 / 24000 / 48000
          * @type {number || null}
          */
@@ -8407,7 +8316,7 @@ ogg-opus 16000 / 24000 / 48000
 }
 
 /**
- * Information of intelligently generated cover
+ * Intelligent cover information
  * @class
  */
 class MediaAiAnalysisCoverItem extends  AbstractModel {
@@ -8415,13 +8324,13 @@ class MediaAiAnalysisCoverItem extends  AbstractModel {
         super();
 
         /**
-         * Storage path of intelligently generated cover.
+         * Intelligent cover storage path.
          * @type {string || null}
          */
         this.CoverPath = null;
 
         /**
-         * Confidence of intelligently generated cover between 0 and 100.
+         * Reliability of the intelligent cover, with a value range from 0 to -100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -8492,7 +8401,7 @@ class CreateScheduleResponse extends  AbstractModel {
         super();
 
         /**
-         * The scheme ID.
+         * Orchestration ID.
          * @type {number || null}
          */
         this.ScheduleId = null;
@@ -8519,7 +8428,7 @@ class CreateScheduleResponse extends  AbstractModel {
 }
 
 /**
- * Control parameter of intelligent tagging task
+ * Intelligent Tag Task Control Parameters
  * @class
  */
 class TagConfigureInfo extends  AbstractModel {
@@ -8527,9 +8436,9 @@ class TagConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of intelligent tagging task. Valid values:
-<li>ON: enables intelligent tagging task;</li>
-<li>OFF: disables intelligent tagging task.</li>
+         * Intelligent tag task switch, available values:
+<li>ON: Enable intelligent tag task.</li>
+<li>OFF: Disables the intelligent tag task.</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -8549,7 +8458,7 @@ class TagConfigureInfo extends  AbstractModel {
 }
 
 /**
- * Output of text keyword recognition.
+ * Text keyword recognition output.
  * @class
  */
 class AiRecognitionTaskOcrWordsResultOutput extends  AbstractModel {
@@ -8621,8 +8530,7 @@ class AiParagraphInfo extends  AbstractModel {
         super();
 
         /**
-         * Segment summary.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Summary = null;
@@ -8634,21 +8542,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Title = null;
 
         /**
-         * Segment keywords.
+         * Segment keyword.
          * @type {Array.<string> || null}
          */
         this.Keywords = null;
 
         /**
-         * Segmentation start time point, in seconds.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * Segmentation end time point, in seconds.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -8731,7 +8637,7 @@ class DeleteAIRecognitionTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a video content recognition template.
+         * Unique identifier of a video content recognition template.
          * @type {number || null}
          */
         this.Definition = null;
@@ -8833,7 +8739,7 @@ class UpdateVoiceRequest extends  AbstractModel {
 }
 
 /**
- * Result type of intelligent cover generating task
+ * Intelligent cover result type
  * @class
  */
 class AiAnalysisTaskCoverResult extends  AbstractModel {
@@ -8841,19 +8747,19 @@ class AiAnalysisTaskCoverResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -8865,13 +8771,13 @@ class AiAnalysisTaskCoverResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of intelligent cover generating task.
+         * Input of the intelligent cover task.
          * @type {AiAnalysisTaskCoverInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of intelligent cover generating task.
+         * 
          * @type {AiAnalysisTaskCoverOutput || null}
          */
         this.Output = null;
@@ -9094,7 +9000,7 @@ class AigcImageExtraParam extends  AbstractModel {
 }
 
 /**
- * Result information of intelligent categorization
+ * Intelligent classification results info
  * @class
  */
 class AiAnalysisTaskClassificationOutput extends  AbstractModel {
@@ -9102,7 +9008,7 @@ class AiAnalysisTaskClassificationOutput extends  AbstractModel {
         super();
 
         /**
-         * List of intelligently generated video categories.
+         * Video intelligent classification list.
          * @type {Array.<MediaAiAnalysisClassificationItem> || null}
          */
         this.ClassificationSet = null;
@@ -9130,7 +9036,7 @@ class AiAnalysisTaskClassificationOutput extends  AbstractModel {
 }
 
 /**
- * OCR-detected prohibited information in text
+ * Ocr (Optical Character Recognition) text contains prohibited information
  * @class
  */
 class AiReviewProhibitedOcrTaskOutput extends  AbstractModel {
@@ -9138,13 +9044,13 @@ class AiReviewProhibitedOcrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of OCR-detected prohibited information in text between 0 and 100.
+         * Ocr text involves prohibited content scoring, with a score ranging from 0 to 100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for OCR-detected prohibited information in text. Valid values:
+         * Ocr text prohibited content result suggestion, value ranges from...to...
 <li>pass.</li>
 <li>review.</li>
 <li>block.</li>
@@ -9153,7 +9059,7 @@ class AiReviewProhibitedOcrTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain the OCR-detected prohibited information in text.
+         * Video segment list with Ocr text suspected of prohibition violations.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -9183,7 +9089,7 @@ class AiReviewProhibitedOcrTaskOutput extends  AbstractModel {
 }
 
 /**
- * Output of full text recognition.
+ * Full text recognition output.
  * @class
  */
 class AiRecognitionTaskOcrFullTextResultOutput extends  AbstractModel {
@@ -9219,7 +9125,7 @@ class AiRecognitionTaskOcrFullTextResultOutput extends  AbstractModel {
 }
 
 /**
- * The result of an intelligent highlight generation task.
+ * Result type of the intelligent highlight
  * @class
  */
 class AiAnalysisTaskHighlightResult extends  AbstractModel {
@@ -9227,32 +9133,31 @@ class AiAnalysisTaskHighlightResult extends  AbstractModel {
         super();
 
         /**
-         * The task status. Valid values: `PROCESSING`, `SUCCESS`, `FAIL`.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. `0`: The task succeeded; other values: The task failed.
+         * Error code. 0: Task successful. Other values: Task failed.
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * The error message.
+         * Error message.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * The input of the intelligent highlight generation task.
+         * Input of the intelligent highlight task.
          * @type {AiAnalysisTaskHighlightInput || null}
          */
         this.Input = null;
 
         /**
-         * The output of the intelligent highlight generation task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskHighlightOutput || null}
          */
         this.Output = null;
@@ -9514,7 +9419,7 @@ class AiSampleFaceInfo extends  AbstractModel {
 }
 
 /**
- * Transcoding information
+ * Transcoding info
  * @class
  */
 class MediaTranscodeItem extends  AbstractModel {
@@ -9522,93 +9427,79 @@ class MediaTranscodeItem extends  AbstractModel {
         super();
 
         /**
-         * Target bucket of an output file.
+         * Target storage of the transcoded file.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Path to an output video file.
+         * Video file path after transcoding.
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://intl.cloud.tencent.com/document/product/266/33478?from_cn_redirect=1#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+         * Transcoding specification ID. Please refer to the transcoding parameter template (https://www.tencentcloud.com/document/product/862/37042?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Sum of the average bitrate of a video stream and that of an audio stream in bps.
+         * Sum of the average video stream bitrate and the average audio stream bit rate. Measurement unit: bps.
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
-         * Maximum value of the height of a video stream in px.
+         * Maximum value of video stream height, measurement unit: px.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Maximum value of the width of a video stream in px.
+         * Maximum value of the video stream width in px.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Total size of a media file in bytes (which is the sum of size of m3u8 and ts files if the video is in HLS format).
+         * Total size of media files (when the video is HLS, the size is the sum of m3u8 and ts file sizes), measurement unit: byte.
          * @type {number || null}
          */
         this.Size = null;
 
         /**
-         * Video duration in seconds.
+         * Video duration, in seconds.
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
-         * Container, such as m4a and mp4.
+         * Container type, such as m4a and mp4.
          * @type {string || null}
          */
         this.Container = null;
 
         /**
-         * MD5 value of a video.
+         * md5 value of the video.
          * @type {string || null}
          */
         this.Md5 = null;
 
         /**
          * Audio stream information.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MediaAudioStreamItem> || null}
          */
         this.AudioStreamSet = null;
 
         /**
          * Video stream information.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MediaVideoStreamItem> || null}
          */
         this.VideoStreamSet = null;
 
         /**
-         * Enhancement items used for video transcoding. Descriptions of enhancement items:
-<li>hdr: HDR configuration</li>
-<li>wd_fps: configuration of frame interpolation for higher frame rate</li>
-<li>video_super_resolution: 	super-resolution configuration</li>
-<li>repair: comprehensive enhancement configuration</li>
-<li>denoise: video denoising configuration</li>
-<Li>color_enhance: color enhancement configuration</li>
-<Li>scratch: scratch removal configuration</li>
-<li>artifact: artifact (glitch) removal configuration</li>
-<li>sharp: detail enhancement configuration</li>
-<Li>low_light: low-light enhancement configuration</li>
-<Li>face_enhance: face enhancement configuration</li>
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.CallBackExtInfo = null;
@@ -9763,8 +9654,7 @@ class SmartSubtitleTaskTransTextResultOutput extends  AbstractModel {
         super();
 
         /**
-         * <p>List of segments for translation.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<SmartSubtitleTaskTransTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -9833,7 +9723,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Result type of adaptive bitrate streaming task
+ * Result type for the video to adaptive streaming task
  * @class
  */
 class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
@@ -9841,19 +9731,19 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -9865,17 +9755,28 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of an adaptive bitrate streaming task.
+         * Input for the video to adaptive streaming task.
          * @type {AdaptiveDynamicStreamingTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of an adaptive bitrate streaming task.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AdaptiveDynamicStreamingInfoItem || null}
          */
         this.Output = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
 
     }
 
@@ -9902,12 +9803,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
 
 /**
- * Text keyword recognition control parameter.
+ * Text keyword recognition control parameters.
  * @class
  */
 class OcrWordsConfigureInfoForUpdate extends  AbstractModel {
@@ -9915,16 +9818,16 @@ class OcrWordsConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of a text keyword recognition task. Valid values:
-<li>ON: Enables a text keyword recognition task;</li>
-<li>OFF: Disables a text keyword recognition task.</li>
+         * Task switch for text keyword recognition, available values:
+<li>ON: Enable text keyword recognition task;</li>
+<li>OFF: Disables the text keyword recognition task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty, all results will be returned.
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * Keyword-based filtering tag, specify the tag of the keyword that needs to be returned. If left blank or empty, all results are returned.
+The number of tags is up to 10, and each tag can have up to 16 characters.
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -10673,7 +10576,7 @@ class PornAsrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * Live recording template details
+ * Live recording template description
  * @class
  */
 class LiveRecordTemplate extends  AbstractModel {
@@ -10681,7 +10584,7 @@ class LiveRecordTemplate extends  AbstractModel {
         super();
 
         /**
-         * Specifies the recording template unique identifier.
+         * Unique identifier of the recording template.
          * @type {number || null}
          */
         this.Definition = null;
@@ -10705,28 +10608,27 @@ class LiveRecordTemplate extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Template description.
-
+         * Template description information.
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
          * Template type. Valid values:
-<li>Preset: system-preset template;</li>
-<li>Custom: Custom template.</li>
+<li>Preset: system preset template;</li>
+<li>Custom: user-defined template.</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Template creation time in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Last modification time of the template in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -10828,7 +10730,7 @@ class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * The result of a content recognition task of a scheme.
+ * Orchestrate the result type of a video recognition task
  * @class
  */
 class ScheduleRecognitionTaskResult extends  AbstractModel {
@@ -10836,49 +10738,49 @@ class ScheduleRecognitionTaskResult extends  AbstractModel {
         super();
 
         /**
-         * The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task has failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * The error code. 0 indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * The error message.
+         * Error message.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * The input of the content recognition task.
+         * Recognition task input.
          * @type {AiRecognitionTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of the identification task.
+         * Recognition task output.
          * @type {Array.<AiRecognitionResult> || null}
          */
         this.Output = null;
 
         /**
-         * Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Task execution start time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Task execution completion time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -10918,7 +10820,7 @@ class ScheduleRecognitionTaskResult extends  AbstractModel {
 }
 
 /**
- * Video shot understanding result.
+ * Video shot recognition result
  * @class
  */
 class VideoComprehensionResultItem extends  AbstractModel {
@@ -10926,32 +10828,32 @@ class VideoComprehensionResultItem extends  AbstractModel {
         super();
 
         /**
-         * Segment start time (unit: seconds).
+         * Segment start time (unit: seconds)
 
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * Segment end time (unit: s).
+         * Segment end time (unit: seconds)
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * Video clip title.
+         * Storyboard clip title
          * @type {string || null}
          */
         this.Title = null;
 
         /**
-         * Storyboard clip information description.
+         * Segment information description
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * Scene clip keywords.
+         * Storyboard clip keywords
          * @type {Array.<string> || null}
          */
         this.Keywords = null;
@@ -11116,15 +11018,13 @@ class ImageProcessTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * <p>Path of the output file.</p>
-Attention: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * <p>Storage location of the output file.</p>
-Attention: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -11247,18 +11147,18 @@ class TaskStatData extends  AbstractModel {
          * Task type.
 <li>Transcode: transcoding.</li>
 <li>Enhance: enhancement.</li>
-<li>AIAnalysis: intelligent analysis.</li>
-<li>AIRecognition: intelligent recognition.</li>
-<li>AIReview: content moderation.</li>
+<li>AIAnalysis: intelligent analysis</li>
+<li>AIRecognition: intelligent recognition</li>
+<li>AIReview: content moderation</li>
 <li>Snapshot: screenshot.</li>
-<li>AnimatedGraphics: conversion to GIF.</li>
+<li>AnimatedGraphics: Animated image</li>
 <li>ImageProcess: image processing.</li>
          * @type {string || null}
          */
         this.TaskType = null;
 
         /**
-         * Statistical data overview of the number of tasks.
+         * Statistics overview of the number of tasks.
 <li>Transcode: The unit of usage is seconds.</li>
 <li>Enhance: The unit of usage is seconds.</li>
 <li>AIAnalysis: The unit of usage is seconds.</li>
@@ -11272,18 +11172,19 @@ class TaskStatData extends  AbstractModel {
         this.Summary = null;
 
         /**
-         * Statistical data details for tasks of various specifications.
+         * Task statistics data for varying specifications.
+
 1. Transcoding specification:
 <li>Audio: audio-only.</li>
 <li>Remuxing: conversion to muxing.</li>
-<li>Other transcoding specifications: {TYPE}.{CODEC}.{SPECIFICATION}.</li> Specifically, valid values for TYPE:
-    Standard: standard transcoding.
+<li>Other transcoding specifications: {TYPE}.{CODEC}.{SPECIFICATION}.</li> Among them, valid values for TYPE:
+    Standard: standard transcoding
     TESHD-10: TSC transcoding for videos.
-    TESHD-20: TSC transcoding for audios.
-    TESHD-30: TSC transcoding for audios/videos.
+    TESHD-20: TSC transcoding for audio.
+    TESHD-30: TSC transcoding for audio and video.
     TESHD-30-SDK: duration-based billing of TSC transcoding SDK for audios/videos.
-    TESHD-30-SDKCores: core number-based billing of TSC transcoding SDK for audios/videos.
-    Edit: video editing.
+    TESHD-30-SDKCores: Top Speed Codec (TSC) transcoding SDK for audio and video is billed based on core count.
+    Edit: video editing
   Specifically, valid values for CODEC:
     H264: H. 264 encoding.
     H265: H.265 encoding.
@@ -11293,24 +11194,25 @@ class TaskStatData extends  AbstractModel {
     SD: standard definition.
     HD: high definition.
     FHD: full HD.
-    2K: 2K.
-    4K: 4K.
-For example, TESHD-10.H265.HD indicates TSC transcoding using the H.265 encoding method.
-2. Enhancement specification: video enhancement format: {TYPE}.{CODEC}.{SPECIFICATION}.{FPS}, where valid values for CODEC and SPECIFICATION follow the transcoding descriptions mentioned above, and FPS is valid only when the atomic enhancement type is used; audio enhancement format: {TYPE}.
+    2K:2K
+    4K:4K
+For example, TESHD-10.H265.HD means H.265 encoding type high-definition TSC transcoding.
+
+2. Enhancement specification: video enhancement format: {TYPE}.{CODEC}.{SPECIFICATION}.{FPS}, where CODEC and SPECIFICATION follow the transcoding specifications, and FPS is valid only for atomic types; audio enhancement format: {TYPE}.
 Valid values for enhancement TYPE:
-<li>Enhance: common enhancement type, which might be any atomic enhancement type.</li>
+<li>Enhance: Common enhancement type, which might be any atomic enhancement type.</li>
 <li>Atomic enhancement type</li>. Valid values for video atomic enhancement type:
-    Sdr2hdr: SDR2HDR.
-    SuperResolution: super resolution.
+    Sdr2hdr:SDR2HDR
+    SuperResolution: Super-resolution
     InsertFrame: frame interpolation.
     ComprehensiveEnhancement: comprehensive enhancement.
-    NoiseReduction: video noise reduction.
-    ColorEnhancement: color enhancement.
-    RemoveScratches: scratch removal.
-    Deburr:  artifacts removal.
+    NoiseReduction: video noise
+    ColorEnhancement: Color enhancement
+    RemoveScratches: scratch removal
+    Deburr: artifacts removal.
     DetailEnhancement: detail enhancement.
     LightEnhancement: low-light enhancement.
-    FaceEnhancement: face enhancement.
+    FaceEnhancement: face enhancement
   Valid value for audio atomic enhancement type.
     AudioNoiseReduction
     VolumeBalance
@@ -11318,18 +11220,18 @@ Valid values for enhancement TYPE:
     AudioSeparation
 
 3. Screenshot specification:
-<li>ImageSprite: sprite.</li>
+<li>ImageSprite: sprite sheet</li>
 <li>SampleSnapshot: sampled screenshot.</li>
 <li>SnapshotByTime: time point screenshot.</li>
 4. Image processing specification: {TYPE}.{CODEC}.{SPECIFICATION}.
-<li> ImageCompression: image encoding.</li>
-<li> ImageSuperResolution: image super resolution.</li>
+<li>ImageCompression: image encoding.</li>
+<li> ImageSuperResolution: image super-resolution.</li>
 <li>EnhanceImageColor: image color enhancement.</li>
 5. Intelligent analysis specification:
-<li>AIAnalysis: major category for analysis.</li>
+<li>AIAnalysis: Analytical major category</li>
 <li>VideoTag: video tag.</li>
-<li>VideoClassification: video category.</li>
-<li>SmartCover: smart cover.</li>
+<li>VideoClassification: video classification.</li>
+<li>SmartCover: intelligent cover.</li>
 <li>FrameLabel: frame tag.</li>
 <li>VideoSplit: video splitting.</li>
 <li>Highlights: highlights.</li>
@@ -11396,10 +11298,10 @@ class SubtitleBoardConfig extends  AbstractModel {
          * Subtitle background base plate x-axis coordinate position; Supports pixel and percentage format:
 
 - Pixel: Npx. Value range of N: [-4096,4096].
--Percentage: N%, N range: [-100,100]. For example, 10% means the X-coordinate of the subtitle background base plate is 10% of the source video width.
+- Percentage: N%, N range: [-100,100]. For example, 10% means the X-coordinate of the subtitle background base plate is 10% of the source video width.
 
 Default value: 0px.
-Note: The origin of the coordinate axes is at the bottom of the central axis of the source video, and the reference position of the subtitle base plate is at the bottom of the central axis, as shown in the figure below.
+Note: The origin point of the coordinate axis is located at the bottom of the central axis of the source video, and the benchmark of the subtitle base plate is at the bottom of its central axis, refer to the figure below.
 ![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png)
 
          * @type {number || null}
@@ -11413,13 +11315,13 @@ Note: The origin of the coordinate axes is at the bottom of the central axis of 
         this.BoardXUnit = null;
 
         /**
-         * Subtitle background base plate y-axis coordinate position; Supports pixel and percentage format:
+         * y-axis coordinate position of the subtitle background base plate; supports pixel and percentage format.
 
-- Pixel: Npx. Value range of N: [0,4096].
--Percentage: N%, where N ranges from [0,100]. For example, 10% means the y-coordinate of the subtitle background base plate equals 10% of the video height.
+-.
+-Percentage: N%, N range: [0,100]; for example, 10% means the y-coordinate of the subtitle background base plate = 10% * video height.
 
 If this parameter is not specified, the subtitle background is disabled.
-Note: The origin point of the coordinate axis is located at the bottom of the central axis of the source video, and the benchmark of the subtitle background base plate is at the bottom of its central axis. See the following diagram.
+Note: The origin of the coordinate axes is at the bottom of the central axis of the source video, and the benchmark of the subtitle background base plate is at the bottom of its central axis. See the following diagram:
 ![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png)
 
          * @type {number || null}
@@ -11436,7 +11338,7 @@ Note: The origin point of the coordinate axis is located at the bottom of the ce
          * Background width. The value should be a positive integer.
 - Value range for pixels: [0,4096].
 - Value range for percentages: [0, 100].
-If the base plate is enabled and this parameter is not specified, the default width is 90% of the source video width.
+If background is enabled and this parameter is not specified, the default width is 90% of the source video width.
 
          * @type {number || null}
          */
@@ -11453,7 +11355,7 @@ If the base plate is enabled and this parameter is not specified, the default wi
          * Background height. The value should be a positive integer.
 - Value range for pixels: [0,4096].
 - Value range for percentages: [0, 100].
-If the base plate is enabled and this parameter is not specified, the default height is 15% of the source video height.
+If background is enabled and this parameter is not specified, the default height is 15% of the source video height.
 
          * @type {number || null}
          */
@@ -11615,38 +11517,31 @@ class AiAnalysisTaskHorizontalToVerticalResult extends  AbstractModel {
         super();
 
         /**
-         * Task status, including PROCESSING, SUCCESS, and FAIL.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. 0: Task successful. Other values: Task failed.
-
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * Error message
-
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * Intelligent landscape-to-portrait task input.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskHorizontalToVerticalInput || null}
          */
         this.Input = null;
 
         /**
-         * Intelligent landscape-to-portrait task output.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskHorizontalToVerticalOutput || null}
          */
         this.Output = null;
@@ -11715,7 +11610,7 @@ class CosOutputStorage extends  AbstractModel {
 }
 
 /**
- * Result type of an animated image generating task
+ * Result type of the rotating image task
  * @class
  */
 class MediaProcessTaskAnimatedGraphicResult extends  AbstractModel {
@@ -11723,19 +11618,19 @@ class MediaProcessTaskAnimatedGraphicResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -11747,17 +11642,28 @@ class MediaProcessTaskAnimatedGraphicResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input for an animated image generating task.
+         * Input of the animated image task.
          * @type {AnimatedGraphicTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of an animated image generating task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaAnimatedGraphicsItem || null}
          */
         this.Output = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
 
     }
 
@@ -11784,6 +11690,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -11918,7 +11826,7 @@ class ParseNotificationRequest extends  AbstractModel {
         super();
 
         /**
-         * Event notification obtained from CMQ.
+         * Event notification content obtained from CMQ.
          * @type {string || null}
          */
         this.Content = null;
@@ -12022,7 +11930,7 @@ class CreateWordSamplesRequest extends  AbstractModel {
 }
 
 /**
- * smart erasure template watermark configuration.
+ * Watermark removal configuration for the smart erasing template.
  * @class
  */
 class SmartEraseWatermarkConfig extends  AbstractModel {
@@ -12030,41 +11938,40 @@ class SmartEraseWatermarkConfig extends  AbstractModel {
         super();
 
         /**
-         * Specifies the watermark removal method.
-**Auto-Removal:** automatically identifies watermarks in the video using model a and generates a new video after removal. suitable for dynamic watermarks.
-When using automated removal, if you do not specify AutoAreas, the full-screen video will be erased automatically. if AutoAreas is specified, it will change to erase the designated areas.
-**Specified area erasure:** for static watermarks with fixed locations, we recommend you directly specify the erasure area.
-When you choose specified area erasure, import at least one specified region.
+         * Watermark removal method.
+**Automatic erasing:** Video watermarks are automatically recognized using an AI model and are erased to generate a new video. It applies to dynamic watermarks.
+When using automatic erasing, if AutoAreas is not specified, the full-screen video image area will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
+**Specified area erasure:** For static watermarks with a relatively fixed position, we recommend you directly specify the area to erase.
+When you choose specified area erasure, import at least a specified region.
 
--Automated removal.
--Specifies the custom specified area erasure.
+-. auto: automatic removal
+- custom: specified area erasing.
          * @type {string || null}
          */
         this.WatermarkEraseMethod = null;
 
         /**
-         * Specifies the watermark removal model.
-Basic version: average effect, cost-effective, suitable for videos with clean backgrounds or animations.
-Advanced edition: better effectiveness, suitable for mini-drama and reality style video.
-**Supported values**:
-- basic
-- advanced
+         * Watermark removal model.
+Basic Edition: Provides average effects and high cost performance. Suitable for animations or videos with clean backgrounds.
+Advanced edition: Better effectiveness, suitable for reality style videos such as short drama.
+-.
+- advanced: Advanced Edition.
          * @type {string || null}
          */
         this.WatermarkModel = null;
 
         /**
-         * Automatically erase the custom region.
-Automatically detects and erases the targeted removal in the specified region using the AI model.
-Note that this parameter will not take effect when the removal method is custom. to modify the template, input [] for the clean-up region. if not provided, the template region information remains unchanged.
+         * Custom area for automatic erasing.
+For the specified area, AI models are used to automatically detect and erase the target objects.
+Note: When the erasing method is set to custom, this parameter is invalid. When a template is modified, input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
          * @type {Array.<EraseArea> || null}
          */
         this.AutoAreas = null;
 
         /**
-         * Specifies the removal of a custom region.
-Specifies to directly perform removal without detection and recognition within a selected time range for the specified region.
-Note: when modifying the template, pass [] to clear the region. the template region information remains unchanged if not passed.
+         * Specify the custom region for erasing.
+For the specified area, erase the target objects directly without detection and recognition within a selected time period.
+Note: When a template is modified, input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
          * @type {Array.<EraseTimeArea> || null}
          */
         this.CustomAreas = null;
@@ -12174,7 +12081,7 @@ class Speakers extends  AbstractModel {
 }
 
 /**
- * Control parameter of a face recognition task
+ * Face Recognition task control parameter
  * @class
  */
 class FaceConfigureInfo extends  AbstractModel {
@@ -12182,41 +12089,41 @@ class FaceConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of a face recognition task. Valid values:
-<li>ON: Enables an intelligent face recognition task;</li>
-<li>OFF: Disables an intelligent face recognition task.</li>
+         * Face Recognition task switch. Valid values:
+<li>ON: Enable intelligent face recognition task.</li>
+<li>OFF: Disables the intelligent face recognition task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0-100. Default value: 95.
+         * Face recognition filter score. Returns recognition result when the recognition result reaches or exceeds this score. Default is 95. Value ranges from 0 to 100.
          * @type {number || null}
          */
         this.Score = null;
 
         /**
-         * The default face filter labels, which specify the types of faces to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
-<li>entertainment (people in the entertainment industry)</li>
-<li>sport (sports celebrities)</li>
-<li>politician</li>
+         * Default character filter tag. Specify the tag of the default character to be returned. If left blank or empty, all default character results will be returned. Tag value range:
+<li>entertainment: entertainment star;</li>
+<li>Sport: sports celebrity;</li>
+<li>politician: sensitive person.</li>
          * @type {Array.<string> || null}
          */
         this.DefaultLibraryLabelSet = null;
 
         /**
-         * Custom face tags for filter, which specify the face recognition results to return. If this parameter is not specified or left empty, the recognition results for all custom face tags are returned.
-Up to 100 tags are allowed, each containing no more than 16 characters.
+         * User-defined character filter tag. Specify the tag of the user-defined character to be returned. If left blank or empty, all customized figure results will be returned.
+The number of tags is up to 100, and each tag can have up to 16 characters.
          * @type {Array.<string> || null}
          */
         this.UserDefineLibraryLabelSet = null;
 
         /**
-         * Figure library. Valid values:
-<li>Default: Default figure library;</li>
-<li>UserDefine: Custom figure library.</li>
-<li>All: Both default and custom figure libraries will be used.</li>
-Default value: All (both default and custom figure libraries will be used.)
+         * Figure library selection. Available values:
+<li>Default: Use default character library;</li>
+<li>UserDefine: Use a user-defined character library.</li>
+<li>All: Use default character library and user-defined character library simultaneously.</li>
+Default value: All, using the default figure library and user-defined character library.
          * @type {string || null}
          */
         this.FaceLibrary = null;
@@ -12502,7 +12409,7 @@ Default value: 0px.
 }
 
 /**
- * The result of OCR-based detection of terrorism content.
+ * Content review Ocr text sensitive task result type
  * @class
  */
 class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
@@ -12510,22 +12417,19 @@ class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -12537,14 +12441,13 @@ class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * The input parameter for OCR-based detection of terrorism content.
+         * Content review Ocr text sensitivity task input.
          * @type {AiReviewTerrorismOcrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * The output of OCR-based detection of terrorism content.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewTerrorismOcrTaskOutput || null}
          */
         this.Output = null;
@@ -12651,15 +12554,13 @@ class Rules extends  AbstractModel {
         super();
 
         /**
-         * Judgment condition ID.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Judgment condition configuration.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {Array.<RuleConditionItem> || null}
          */
         this.Conditions = null;
@@ -12667,15 +12568,14 @@ Note: This field may return null, indicating that no valid value can be obtained
         /**
          * Logical operator for the list of conditions. Valid values:
 
- - &&: logical AND
- - ||: logical OR
+- &&: logical AND
+- ||: logical OR
          * @type {string || null}
          */
         this.Linker = null;
 
         /**
-         * Indexes of the nodes to execute if the judgment conditions are met.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {Array.<number> || null}
          */
         this.RearDriveIndexs = null;
@@ -12714,19 +12614,19 @@ class AiRecognitionTaskOcrWordsResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -12738,14 +12638,13 @@ class AiRecognitionTaskOcrWordsResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input information of a text keyword recognition task.
+         * Text keyword recognition task input.
          * @type {AiRecognitionTaskOcrWordsResultInput || null}
          */
         this.Input = null;
 
         /**
-         * Output information of a text keyword recognition task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskOcrWordsResultOutput || null}
          */
         this.Output = null;
@@ -12954,7 +12853,7 @@ If not set, the service will automatically adopt a suitable bitrate based on the
 }
 
 /**
- * Smart subtitle task result for live stream.
+ * Live stream smart subtitle result
  * @class
  */
 class LiveSmartSubtitleResult extends  AbstractModel {
@@ -12968,13 +12867,13 @@ class LiveSmartSubtitleResult extends  AbstractModel {
         this.Text = null;
 
         /**
-         * Translate the starting PTS time of a segment, in seconds.
+         * Start PTS time of a translated recording clip, in seconds.
          * @type {number || null}
          */
         this.StartPTSTime = null;
 
         /**
-         * End PTS time of a translated segment, in seconds.
+         * End PTS time of a translated recording clip, in seconds.
          * @type {number || null}
          */
         this.EndPTSTime = null;
@@ -12986,29 +12885,25 @@ class LiveSmartSubtitleResult extends  AbstractModel {
         this.Trans = null;
 
         /**
-         * Translation started at UTC time.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Translation ends at UTC time.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Steady-State tag.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {boolean || null}
          */
         this.SteadyState = null;
 
         /**
-         * websocket and trtc real-time translation UserId.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.UserId = null;
@@ -13248,7 +13143,7 @@ class DeleteAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of an adaptive bitrate streaming template.
+         * Unique identifier of the adaptive transcoding template.
          * @type {number || null}
          */
         this.Definition = null;
@@ -13268,7 +13163,7 @@ class DeleteAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Full text recognition segment.
+ * Full text recognition recording clip.
  * @class
  */
 class AiRecognitionTaskOcrFullTextSegmentItem extends  AbstractModel {
@@ -13276,13 +13171,13 @@ class AiRecognitionTaskOcrFullTextSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * Start time offset of a recognition segment in seconds.
+         * Start time offset of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of a recognition segment in seconds.
+         * End time offset of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -13366,25 +13261,25 @@ class ScheduleQualityControlTaskResult extends  AbstractModel {
         super();
 
         /**
-         * The task status. Valid values: `PROCESSING`, `SUCCESS`, `FAIL`.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value indicates the task has failed. For details, see [Error Codes](https://www.tencentcloud.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * The error code. `0` indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * The error message.
+         * Error message.
          * @type {string || null}
          */
         this.Message = null;
@@ -13396,7 +13291,7 @@ class ScheduleQualityControlTaskResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * Media quality inspection task output.Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {QualityControlData || null}
          */
         this.Output = null;
@@ -13446,20 +13341,13 @@ class AiQualityControlTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Media quality inspection template ID.
-You can directly use a preset template or customize a template in the console. The preset templates are as follows:
-- 10: Enable all quality inspection items.
-- 20: Only enable quality inspection items corresponding to format diagnosis.
-- 30: Only enable quality inspection items corresponding to no-reference scoring.
-- 40: Only enable quality inspection items corresponding to screen quality.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * The channel extension parameter, which is a serialized JSON string.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.ChannelExtPara = null;
@@ -13515,7 +13403,7 @@ class AiAnalysisTaskSegmentInput extends  AbstractModel {
 }
 
 /**
- * ASR-detected porn information in text
+ * Asr text pornographic information
  * @class
  */
 class AiReviewPornAsrTaskOutput extends  AbstractModel {
@@ -13523,13 +13411,13 @@ class AiReviewPornAsrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of the ASR-detected porn information in text from 0 to 100.
+         * Asr text porn score, ranging from 0 to 100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for the ASR-detected porn information in text. Valid values:
+         * Asr text pornographic result suggestion, value ranges from...to...
 <li>pass.</li>
 <li>review.</li>
 <li>block.</li>
@@ -13538,7 +13426,7 @@ class AiReviewPornAsrTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain the ASR-detected porn information in text.
+         * Video segment list with suspect Asr text pornographic information.
          * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -13867,8 +13755,7 @@ class PureSubtitleTransResultOutput extends  AbstractModel {
         super();
 
         /**
-         * Storage location of the subtitle file.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -14155,7 +14042,7 @@ class DescribeAsrHotwordsListRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Paging offset. Default value: 0.
+         * Pagination offset. Default value: 0.
          * @type {number || null}
          */
         this.Offset = null;
@@ -14167,7 +14054,7 @@ class DescribeAsrHotwordsListRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Hotword lexicon sorting order.
+         * Hotword lexicon sort order
 
 0: ascending (default)
 1: descending
@@ -14176,13 +14063,13 @@ class DescribeAsrHotwordsListRequest extends  AbstractModel {
         this.OrderType = null;
 
         /**
-         * Sorts hotword lexicons by a specific field. By default, hotword lexicons are sorted by creation time. If an invalid field is used for sorting, the default sorting field applies.
+         * Sorts by a certain field. By default, sorts by creation time. Using an illegal field is deemed as the default.
 
- - CreateTime: sort by creation time
- - UpdateTime: sort by update time
- - Name: sort by hotword lexicon name
- - WordCount: sort by the number of hotwords
- - HotwordsId: sort by hotword lexicon ID
+- CreateTime: sort by creation time
+-UpdateTime: Update time sorting
+-Name: Sort by hotword lexicon name.
+- WordCount: sort by the number of hotwords
+- HotwordsId: sort by hotword lexicon ID
          * @type {string || null}
          */
         this.OrderBy = null;
@@ -14363,7 +14250,7 @@ class DescribeAdaptiveDynamicStreamingTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Suspected segment identified during OCR-based text audit during content audit
+ * Content review Ocr text audit suspected segment
  * @class
  */
 class MediaContentReviewOcrTextSegmentItem extends  AbstractModel {
@@ -14371,25 +14258,25 @@ class MediaContentReviewOcrTextSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * Start time offset of a suspected segment in seconds.
+         * Start time offset of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of a suspected segment in seconds.
+         * End time offset of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * Confidence of a suspected segment.
+         * Confidence degree of the suspected segment.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for suspected segment audit. Valid values:
+         * Result Suggestions for suspected segment review, value ranges from...to...
 <li>pass.</li>
 <li>review.</li>
 <li>block.</li>
@@ -14398,26 +14285,26 @@ class MediaContentReviewOcrTextSegmentItem extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * List of suspected keywords.
+         * Suspicious keyword list.
          * @type {Array.<string> || null}
          */
         this.KeywordSet = null;
 
         /**
-         * Zone coordinates (at the pixel level) of suspected text: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
+         * Area coordinates of suspected text occurrence (pixel-level), [x1, y1, x2, y2], i.e., coordinates of the top-left corner and bottom-right corner.
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
 
         /**
-         * URL of a suspected image (which will not be permanently stored
-and will be deleted after `PicUrlExpireTime`).
+         * Suspected image URL (Images are not retained permanently, reaching
+The image will be deleted after the PicUrlExpireTime time point.
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Expiration time of the suspected image URL, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -14444,7 +14331,7 @@ and will be deleted after `PicUrlExpireTime`).
 }
 
 /**
- * The output of an intelligent highlight generation task.
+ * Intelligent highlight result.
  * @class
  */
 class AiAnalysisTaskHighlightOutput extends  AbstractModel {
@@ -14452,14 +14339,13 @@ class AiAnalysisTaskHighlightOutput extends  AbstractModel {
         super();
 
         /**
-         * A list of the highlight segments generated.
+         * Intelligent video highlight list.
          * @type {Array.<MediaAiAnalysisHighlightItem> || null}
          */
         this.HighlightSet = null;
 
         /**
-         * The storage location of the highlight segments.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -14535,8 +14421,7 @@ class SmartSubtitleTaskResultInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * <p>Custom smart subtitle parameter. It takes effect when Definition is set to 0.<br>This parameter is used in highly customized scenarios. We recommend that you use Definition to specify smart subtitle parameters.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {RawSmartSubtitleParameter || null}
          */
         this.RawParameter = null;
@@ -14825,7 +14710,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of a full speech recognition task.
+ * Task control parameter for speech full-text recognition
  * @class
  */
 class AsrFullTextConfigureInfoForUpdate extends  AbstractModel {
@@ -14833,19 +14718,25 @@ class AsrFullTextConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of a full speech recognition task. Valid values:
-<li>ON: Enables an intelligent full speech recognition task;</li>
-<li>OFF: Disables an intelligent full speech recognition task.</li>
+         * Voice full-text recognition task switch, available values:
+<li>ON: Enable intelligent voice full-text recognition task.</li>
+<li>OFF: Disables the intelligent voice full-text recognition task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Format of the generated subtitles file. If an empty string is entered, no subtitles files will be generated. Valid value:
-<li>vtt: Generates a WebVTT subtitles file.</li>
+         * Generated subtitle file format. Leaving it as an empty string means no subtitle file will be generated. Available values:
+<li>vtt: Generate a WebVTT subtitle file.</li>
          * @type {string || null}
          */
         this.SubtitleFormat = null;
+
+        /**
+         * Video source language.
+         * @type {string || null}
+         */
+        this.SourceLanguage = null;
 
     }
 
@@ -14858,12 +14749,13 @@ class AsrFullTextConfigureInfoForUpdate extends  AbstractModel {
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
+        this.SourceLanguage = 'SourceLanguage' in params ? params.SourceLanguage : null;
 
     }
 }
 
 /**
- * The information of a live recording file.
+ * Live streaming Recording output file information
  * @class
  */
 class LiveRecordFile extends  AbstractModel {
@@ -14871,36 +14763,31 @@ class LiveRecordFile extends  AbstractModel {
         super();
 
         /**
-         * The URL of the recording file.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * The size of the recording file.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.Size = null;
 
         /**
-         * The duration of the recording file.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
-         * The recording start time in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * The recording end time in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.EndTime = null;
@@ -15290,7 +15177,7 @@ class DescribeLiveRecordTemplatesResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of records that meet filter conditions.
+         * Total number of records that meet the filtering conditions.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -15475,7 +15362,7 @@ Default value: 0.
 }
 
 /**
- * Event notification configuration of a task.
+ * Event notification configuration for task processing.
  * @class
  */
 class LiveStreamTaskNotifyConfig extends  AbstractModel {
@@ -15484,15 +15371,16 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
 
         /**
          * Notification type:
-TDMQ-CMQ: message queue.
-"URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/product/862/39229?from_cn_redirect=1).
+TDMQ-CMQ: Message Queue
+"URL": When a URL is specified, the HTTP callback is pushed to the address specified by NotifyUrl. The callback protocol is http+json. The content of the packet body is the same as the output parameters of the [ParseLiveStreamProcessNotification API](https://www.tencentcloud.com/document/product/862/39229?from_cn_redirect=1).
+
 <Font color="red"> Note: if it is unspecified or left blank, no callback will be sent. To send a callback, fill in the corresponding type value. </font>
          * @type {string || null}
          */
         this.NotifyType = null;
 
         /**
-         * HTTP callback URL, required if `NotifyType` is set to `URL`
+         * HTTP callback URL. This is required if NotifyType is URL.
          * @type {string || null}
          */
         this.NotifyUrl = null;
@@ -15522,8 +15410,7 @@ TDMQ-CMQ: message queue.
         this.TopicName = null;
 
         /**
-         * Key used to generate a callback signature.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.NotifyKey = null;
@@ -16007,8 +15894,7 @@ class LiveAiAnalysisDescriptionItem extends  AbstractModel {
         super();
 
         /**
-         * Segmentation result.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<LiveAiParagraphInfo> || null}
          */
         this.Paragraphs = null;
@@ -16080,7 +15966,7 @@ class PornOcrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * Result type of an OCR-based porn information detection in text task during content audit
+ * Content review Ocr text pornography detection task result type
  * @class
  */
 class AiReviewTaskPornOcrResult extends  AbstractModel {
@@ -16088,19 +15974,19 @@ class AiReviewTaskPornOcrResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -16112,14 +15998,13 @@ class AiReviewTaskPornOcrResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input for an OCR-based porn information detection in text task during content audit.
+         * Content review Ocr text pornography detection task input.
          * @type {AiReviewPornOcrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of an OCR-based porn information detection in text task during content audit.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewPornOcrTaskOutput || null}
          */
         this.Output = null;
@@ -16162,13 +16047,13 @@ class DescribeLiveRecordTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Specifies the recording template unique identifier filter condition, with an array length limit of 100.
+         * Filter condition for the unique identifier of the recording template. The array can contain up to 100 unique identifiers.
          * @type {Array.<number> || null}
          */
         this.Definitions = null;
 
         /**
-         * Paging offset. Default value: 0.
+         * Pagination offset. Default value: 0.
          * @type {number || null}
          */
         this.Offset = null;
@@ -16180,15 +16065,15 @@ class DescribeLiveRecordTemplatesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Indicates the template type filter condition. If left empty, all templates are returned. Valid values:
-* Preset: System preset template;
-* Custom
+         * Condition for filtering templates by type. If this field is not specified, all templates are returned. Available values:
+* Preset: system preset template
+* Custom: user-defined template.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Specifies the recording template identifier filter condition, with a length limit of 64 characters.
+         * Filter condition for recording template identifiers, with a length limit of 64 characters.
          * @type {string || null}
          */
         this.Name = null;
@@ -16498,6 +16383,12 @@ class VoiceInfo extends  AbstractModel {
          */
         this.Scenes = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Engine = null;
+
     }
 
     /**
@@ -16517,6 +16408,7 @@ class VoiceInfo extends  AbstractModel {
         this.AudioUrl = 'AudioUrl' in params ? params.AudioUrl : null;
         this.Labels = 'Labels' in params ? params.Labels : null;
         this.Scenes = 'Scenes' in params ? params.Scenes : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
 
     }
 }
@@ -16830,7 +16722,7 @@ class ComposeAudioItem extends  AbstractModel {
 }
 
 /**
- * Input parameter type of an OCR-based porn information detection in text task during content audit
+ * Content review Ocr text porn detection task input parameter type
  * @class
  */
 class AiReviewPornOcrTaskInput extends  AbstractModel {
@@ -16838,7 +16730,7 @@ class AiReviewPornOcrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * ID of a porn information detection template.
+         * Template ID for porn detection.
          * @type {number || null}
          */
         this.Definition = null;
@@ -16932,7 +16824,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Result information of intelligent frame-specific tagging
+ * Intelligent frame tagging result information
  * @class
  */
 class AiAnalysisTaskFrameTagOutput extends  AbstractModel {
@@ -16940,7 +16832,7 @@ class AiAnalysisTaskFrameTagOutput extends  AbstractModel {
         super();
 
         /**
-         * List of frame-specific video tags.
+         * Video frame tagging list.
          * @type {Array.<MediaAiAnalysisFrameTagSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -16968,7 +16860,7 @@ class AiAnalysisTaskFrameTagOutput extends  AbstractModel {
 }
 
 /**
- * Intelligent translation result information.
+ * Intelligent translation result information
  * @class
  */
 class AiAnalysisTaskDubbingOutput extends  AbstractModel {
@@ -17157,7 +17049,7 @@ This value only distinguishes template types. The task uses the values of Remove
 }
 
 /**
- * Result information of an animated image generating task
+ * Video motion graphic result information
  * @class
  */
 class MediaAnimatedGraphicsItem extends  AbstractModel {
@@ -17165,67 +17057,67 @@ class MediaAnimatedGraphicsItem extends  AbstractModel {
         super();
 
         /**
-         * Storage location of a generated animated image file.
+         * Storage location of the animated image file.
          * @type {TaskOutputStorage || null}
          */
         this.Storage = null;
 
         /**
-         * Path to a generated animated image file.
+         * File path of the animated image.
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * Specifies the rotating image template ID. see [rotating image template](https://intl.cloud.tencent.com/document/product/862/77168?from_cn_redirect=1#.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF.5B.5D(ID.3Amove)).
+         * Rotating image template ID. Please refer to the [Rotating Image Template](https://www.tencentcloud.com/document/product/862/77168?from_cn_redirect=1#.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF.5B.5D(id.3Amove)).
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Animated image format, such as gif.
+         * Animated image file format, for example gif.
          * @type {string || null}
          */
         this.Container = null;
 
         /**
-         * Height of an animated image in px.
+         * Height of the animated image, measurement unit: px.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Width of an animated image in px.
+         * Width of the animated image, measurement unit: px.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Bitrate of an animated image in bps.
+         * Animated image bitrate. Measurement unit: bps.
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
-         * Size of an animated image in bytes.
+         * Animated image size, unit: byte.
          * @type {number || null}
          */
         this.Size = null;
 
         /**
-         * MD5 value of an animated image.
+         * md5 value of the animated image.
          * @type {string || null}
          */
         this.Md5 = null;
 
         /**
-         * Start time offset of an animated image in the video in seconds.
+         * Start time offset of the GIF in the video, in seconds.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of an animated image in the video in seconds.
+         * End time offset of the GIF in the video, in seconds.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -17374,7 +17266,7 @@ class ModifyWordSampleRequest extends  AbstractModel {
 }
 
 /**
- * Video editing task information
+ * Edit video task info
  * @class
  */
 class EditMediaTask extends  AbstractModel {
@@ -17389,16 +17281,16 @@ class EditMediaTask extends  AbstractModel {
 
         /**
          * Task status. Valid values:
-<li>PROCESSING: processing;</li>
-<li>FINISH: completed.</li>
+<li>PROCESSING: Processing;</li>
+<li>FINISH: completed</li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code
-<li>0: success;</li>
-<li>Other values: failure.</li>
+         * Error code.
+<li>0: Success;</li>
+<li>Additional values: fail.</li>
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -17410,13 +17302,13 @@ class EditMediaTask extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of video editing task.
+         * Input for video editing tasks.
          * @type {EditMediaTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of video editing task.
+         * 
          * @type {EditMediaTaskOutput || null}
          */
         this.Output = null;
@@ -17451,7 +17343,7 @@ class EditMediaTask extends  AbstractModel {
 }
 
 /**
- * Face recognition result segment
+ * Face Recognition result fragment
  * @class
  */
 class AiRecognitionTaskFaceSegmentItem extends  AbstractModel {
@@ -17459,25 +17351,25 @@ class AiRecognitionTaskFaceSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * Start time offset of a recognition segment in seconds.
+         * Start time offset of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of a recognition segment in seconds.
+         * End time offset of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * Confidence of a recognition segment. Value range: 0-100.
+         * Confidence of a recognized segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+         * Zone coordinates of the recognition result. An array contains four elements: [x1, y1, x2, y2], representing the horizontal and vertical coordinates of the top-left and bottom-right corners, respectively.
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
@@ -17528,7 +17420,7 @@ class ModifySnapshotByTimeOffsetTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Result type of intelligent tagging task
+ * Intelligent tag result type
  * @class
  */
 class AiAnalysisTaskTagResult extends  AbstractModel {
@@ -17536,19 +17428,19 @@ class AiAnalysisTaskTagResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -17560,13 +17452,13 @@ class AiAnalysisTaskTagResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of intelligent tagging task.
+         * Intelligent tag task input.
          * @type {AiAnalysisTaskTagInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of intelligent tagging task.
+         * 
          * @type {AiAnalysisTaskTagOutput || null}
          */
         this.Output = null;
@@ -17717,15 +17609,13 @@ class SmartSubtitleTaskBatchOutput extends  AbstractModel {
         this.Message = null;
 
         /**
-         * <p>Translation task output information.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {SmartSubtitleTaskTransTextResultOutput || null}
          */
         this.TransTextTask = null;
 
         /**
-         * <p>Full speech recognition task output information.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {SmartSubtitleTaskAsrFullTextResultOutput || null}
          */
         this.AsrFullTextTask = null;
@@ -17768,7 +17658,7 @@ class PureSubtitleTransResult extends  AbstractModel {
         super();
 
         /**
-         * Task status (the three valid values are as follows):
+         * Task status (the three valid values are as follows): 
 - PROCESSING
 - SUCCESS 
 - FAIL
@@ -17801,8 +17691,7 @@ class PureSubtitleTransResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * Translation output result of pure subtitle files.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {PureSubtitleTransResultOutput || null}
          */
         this.Output = null;
@@ -17844,7 +17733,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Result information of intelligent tagging
+ * Intelligent tag result information
  * @class
  */
 class AiAnalysisTaskTagOutput extends  AbstractModel {
@@ -17852,7 +17741,7 @@ class AiAnalysisTaskTagOutput extends  AbstractModel {
         super();
 
         /**
-         * List of intelligently generated video tags.
+         * Video intelligent tag list.
          * @type {Array.<MediaAiAnalysisTagItem> || null}
          */
         this.TagSet = null;
@@ -17951,112 +17840,101 @@ class QualityControlItemConfig extends  AbstractModel {
         super();
 
         /**
-         * Quality inspection item name. valid values:.
-<li>LowEvaluation: specifies the no-reference MOS score of the video.</li>.
-<li>AudioEvaluation: specifies the no-reference MOS score of the audio.</li>.
-<Li>Mosaic: mosaic detection.</li>.
-<Li>CrashScreen: specifies screen glitch detection.</li>.
-<Li>Blur: specifies blur detection.</li>.
-<Li>Jitter: jitter detection.</li>.
-<Li>Noise: noise detection.</li>.
-<Li>QRCode: qr code detection.</li>.
-<Li>BarCode: specifies barcode detection.</li>.
-<Li>AppletCode: specifies mini program code detection.</li>.
-<Li>BlackWhiteEdge: specifies black and white edge detection.</li>.
-<Li>SolidColorScreen: specifies solid color screen detection.</li>.
-<Li>LowLighting: specifies low light.</li>.
-<Li>HighLighting: overexposure.</li>.
-<Li>NoVoice: specifies silence detection.</li>.
-<Li>LowVoice: specifies bass detection.</li>.
-<Li>HighVoice: explosion noise detection.</li>.
-<Li>AudioNoise: specifies audio noise detection.</li>.
-<Li>VideoResolutionChanged: specifies the video resolution change.</li>.
-<Li>AudioSampleRateChanged: specifies the audio sample rate change.</li>.
-<Li>AudioChannelsChanged: indicates the audio channel quantity change.</li>.
-<Li>ParameterSetsChanged: indicates the stream parameter set information has changed.</li>.
-<Li>DarOrSarInvalid: indicates an abnormal video aspect ratio.</li>.
-<li>TimestampFallback: specifies DTS timestamp rollback.</li>.
-<li>DtsJitter: specifies excessive DTS jitter.</li>.
-<li>PtsJitter: indicates excessive PTS jitter.</li>.
-<Li>AACDurationDeviation: specifies an improper aac frame timestamp interval.</li>.
-<Li>AudioDroppingFrames: indicates audio frame dropping.</li>.
-<Li>VideoDroppingFrames: specifies video frame dropping.</li>.
-<Li>AVTimestampInterleave: improper audio-video interleaving.</li>.
-<Li>PtsLessThanDts: specifies that the pts of the media stream is less than the dts.</li>.
-<Li>ReceiveFpsJitter: specifies excessive jitter in the network received frame rate.</li>.
-<Li>ReceiveFpsTooSmall: indicates the network received video frame rate is too low.</li>.
-<li>FpsJitter: specifies excessive jitter in the stream frame rate calculated via PTS.</li>.
-<Li>StreamOpenFailed: indicates the stream open failure.</li>.
-<Li>StreamEnd: specifies the stream end.</li>.
-<Li>StreamParseFailed: specifies the stream parsing failure.</li>.
-<li>VideoFirstFrameNotIdr: first frame not an IDR frame.</li>.
-<Li>StreamNALUError: indicates an nalu start code error.</li>.
-<li>TsStreamNoAud: specifies whether the mpegts H26x stream misses AUD NALU.</li>.
-<Li>AudioStreamLack: no audio stream.</li>.
-<Li>VideoStreamLack: no video stream.</li>.
-<Li>LackAudioRecover: specifies missing audio stream recovery.</li>.
-<Li>LackVideoRecover: missing video stream recovery.</li>.
-<Li>VideoBitrateOutofRange: video stream bitrate (kbps) out of range.</li>.
-<Li>AudioBitrateOutofRange: audio stream bitrate (kbps) out of range.</li>.
-<Li>VideoDecodeFailed: indicates a video decoding error.</li>.
-<Li>AudioDecodeFailed: audio decoding error.</li>.
-<Li>AudioOutOfPhase: specifies opposite phase in dual-channel audio.</li>.
-<Li>VideoDuplicatedFrame: indicates duplicate frames in video streams.</li>.
-<Li>AudioDuplicatedFrame: indicates duplicate frames in audio streams.</li>.
-<Li>VideoRotation: specifies video rotation.</li>.
-<li>TsMultiPrograms: specifies multiple programs in MPEG2-TS streams.</li>.
-<li>Mp4InvalidCodecFourcc: specifies the codec fourcc in Mp4 does not meet Apple HLS requirements.</li>.
-<Li>HLSBadM3u8Format: invalid m3u8 file.</li>.
-<Li>HLSInvalidMasterM3u8: invalid main m3u8 file.</li>.
-<Li>HLSInvalidMediaM3u8: invalid media m3u8 file.</li>.
-<Li>HLSMasterM3u8Recommended: parameters recommended by standards missing in main m3u8.</li>.
-<Li>HLSMediaM3u8Recommended: parameters recommended by standards missing in media m3u8.</li>.
-<li>HLSMediaM3u8DiscontinuityExist: indicates the existence of EXT-X-DISCONTINUITY in media m3u8.</li>.
-<Li>HLSMediaSegmentsStreamNumChange: indicates the number of streams in segments changes.</li>.
-<li>HLSMediaSegmentsPTSJitterDeviation: indicates PTS jumps between segments without EXT-X-DISCONTINUITY.</li>.
-<li>HLSMediaSegmentsDTSJitterDeviation: indicates DTS jumps between segments without EXT-X-DISCONTINUITY.</li>.
+         * Quality inspection item name. Valid values:
+<li>LowEvaluation: Video no-reference scoring (MOS).</li>
+<li>AudioEvaluation: Audio no-reference scoring (MOS).</li>
+<li>Mosaic: mosaic detection.</li>
+<li>CrashScreen: screen glitch detection.</li>
+<li>Blur: blur detection.</li>
+<li>Jitter: jitter detection.</li>
+<li>Noise: noise detection.</li>
+<li>QRCode: QR code detection.</li>
+<li>BarCode: barcode detection.</li>
+<li>AppletCode: mini program code detection.</li>
+<li>BlackWhiteEdge: black and white edge detection.</li>
+<li>SolidColorScreen: solid color screen detection.</li>
+<li>LowLighting: low light.</li>
+<li>HighLighting: overexposure.</li>
+<li>NoVoice: silence detection.</li>
+<li>LowVoice: bass detection.</li>
+<li>HighVoice: explosion noise detection</li>
+<li>AudioNoise: audio noise detection.</li>
+<li>VideoResolutionChanged: video resolution change.</li>
+<li>AudioSampleRateChanged: audio sampling rate change.</li>
+<li>AudioChannelsChanged: audio channels changed.</li>
+<li>ParameterSetsChanged: stream parameter set information has changed.</li>
+<li>DarOrSarInvalid: abnormal video aspect ratio.</li>
+<li>TimestampFallback: DTS timestamp rollback.</li>
+<li>DtsJitter: DTS jitter too high.</li>
+<li>PtsJitter: PTS jitter too high.</li>
+<li>AACDurationDeviation: improper AAC frame timestamp interval.</li>
+<li>AudioDroppingFrames: audio frame dropping.</li>
+<li>VideoDroppingFrames: video frame dropping.</li>
+<li>AVTimestampInterleave: improper audio-video interleaving.</li>
+<li>PtsLessThanDts: The pts of the media stream is less than the dts.</li>
+<li>ReceiveFpsJitter: excessive network received frame rate jitter</li>
+<li>ReceiveFpsTooSmall: network receive video frame rate too low.</li>
+<li>FpsJitter: excessive stream frame rate jitter calculated by PTS</li>
+<li>StreamOpenFailed: stream open failure.</li>
+<li>StreamEnd: stream end.</li>
+<li>StreamParseFailed: stream parsing failure.</li>
+<li>VideoFirstFrameNotIdr: first frame not an IDR frame.</li>
+<li>StreamNALUError: NALU start code error.</li>
+<li>TsStreamNoAud: The H26x stream of mpegts misses AUD NALU.</li>
+<li>AudioStreamLack: no audio stream.</li>
+<li>VideoStreamLack: no video stream.</li>
+<li>LackAudioRecover: missing audio stream recovery.</li>
+<li>LackVideoRecover: missing video stream recovery.</li>
+<li>VideoBitrateOutofRange: video stream bitrate (kbps) out of range.</li>
+<li>AudioBitrateOutofRange: audio stream bitrate (kbps) out of range.</li>
+<li>VideoDecodeFailed: video decoding error.</li>
+<li>AudioDecodeFailed: audio decoding error.</li>
+<li>AudioOutOfPhase: opposite phase in dual-channel audio.</li>
+<li>VideoDuplicatedFrame: duplicate frames in video streams.</li>
+<li>AudioDuplicatedFrame: duplicate frames in audio streams.</li>
+<li>VideoRotation: video rotation.</li>
+<li>TsMultiPrograms: multiple programs in MPEG2-TS streams.</li>
+<li>Mp4InvalidCodecFourcc: The codec fourcc in MP4 does not meet Apple HLS requirements.</li>
+<li>HLSBadM3u8Format: invalid M3U8 file.</li>
+<li>HLSInvalidMasterM3u8: invalid main M3U8 file.</li>
+<li>HLSInvalidMediaM3u8: invalid media M3U8 file.</li>
+<li>HLSMasterM3u8Recommended: parameters recommended by standards missing in main M3U8.</li>
+<li>HLSMediaM3u8Recommended: parameters recommended by standards missing in media M3U8.</li>
+<li>HLSMediaM3u8DiscontinuityExist: EXT-X-DISCONTINUITY in media M3U8.</li>
+<li>HLSMediaSegmentsStreamNumChange: Number of streams in segments changes.</li>
+<li>HLSMediaSegmentsPTSJitterDeviation: PTS jumps between segments without EXT-X-DISCONTINUITY.</li>
+<li>HLSMediaSegmentsDTSJitterDeviation: DTS jumps between segments without EXT-X-DISCONTINUITY.</li>
 <li>TimecodeTrackExist: TMCD track in MP4.</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Capability configuration switch. Valid values:
-<li>ON: enabled;</li>
-<li>OFF: disabled.</li>
-
-Default value: ON.
-
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Sampling method, Valid value:
-- Time: sampling based on time interval.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Sampling = null;
 
         /**
-         * Sampling interval time, in ms.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.IntervalTime = null;
 
         /**
-         * Duration of abnormality, in ms.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
-         * Threshold of a detection item. Different detection items have different thresholds.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Threshold = null;
@@ -18597,19 +18475,19 @@ class AiRecognitionTaskOcrFullTextResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -18621,14 +18499,13 @@ class AiRecognitionTaskOcrFullTextResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input information of a full text recognition task.
+         * Input information on the full text recognition task.
          * @type {AiRecognitionTaskOcrFullTextResultInput || null}
          */
         this.Input = null;
 
         /**
-         * Output information of a full text recognition task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskOcrFullTextResultOutput || null}
          */
         this.Output = null;
@@ -18677,8 +18554,7 @@ class AiAnalysisTaskSegmentOutput extends  AbstractModel {
         this.SegmentSet = null;
 
         /**
-         * Video abstract, used for offline scenarios.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.Abstract = null;
@@ -18856,7 +18732,7 @@ If one or both parameters are empty or set to `0`:
 }
 
 /**
- * OCR-based full live stream recognition
+ * Live stream recognition Ocr full text recognition
  * @class
  */
 class LiveStreamOcrFullTextRecognitionResult extends  AbstractModel {
@@ -18864,31 +18740,31 @@ class LiveStreamOcrFullTextRecognitionResult extends  AbstractModel {
         super();
 
         /**
-         * Speech text.
+         * Speech and text.
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * Start PTS time of recognized segment in seconds.
+         * Start PTS time of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.StartPtsTime = null;
 
         /**
-         * End PTS time of recognized segment in seconds.
+         * End PTS time of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.EndPtsTime = null;
 
         /**
-         * Confidence of recognized segment. Value range: 0–100.
+         * Confidence of a recognized segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+         * Zone coordinates of the recognition result. An array contains four elements: [x1, y1, x2, y2], representing the horizontal and vertical coordinates of the top-left and bottom-right corners, respectively.
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
@@ -18961,7 +18837,7 @@ class VODOutputStorage extends  AbstractModel {
 }
 
 /**
- * Result type of a time point screenshot task
+ * Task result type for screenshot taking at specified time points
  * @class
  */
 class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
@@ -18969,19 +18845,19 @@ class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -18993,26 +18869,25 @@ class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input for a time point screenshot task.
+         * Task input for screenshot taking at specified time points.
          * @type {SnapshotByTimeOffsetTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of the time point screenshot task for videos.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {MediaSnapshotByTimeOffsetItem || null}
          */
         this.Output = null;
 
         /**
-         * Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Task execution start time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Task execution completion time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -19216,7 +19091,7 @@ class CreateAigcVideoTaskRequest extends  AbstractModel {
 }
 
 /**
- * The translation input.
+ * Translate the input.
  * @class
  */
 class AiRecognitionTaskTransTextResultInput extends  AbstractModel {
@@ -19224,7 +19099,7 @@ class AiRecognitionTaskTransTextResultInput extends  AbstractModel {
         super();
 
         /**
-         * The translation template ID.
+         * Translation template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -19336,7 +19211,7 @@ Default value: weak.
 }
 
 /**
- * Video deduplication result information.
+ * Video deduplication result info
  * @class
  */
 class AiAnalysisTaskVideoRemakeOutput extends  AbstractModel {
@@ -19344,13 +19219,13 @@ class AiAnalysisTaskVideoRemakeOutput extends  AbstractModel {
         super();
 
         /**
-         * Specifies the file path for intelligent video deduplication.
+         * File path for intelligent video deduplication
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * Specifies the storage location for intelligent video deduplication.
+         * Storage location of intelligent video deduplication
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -19424,13 +19299,13 @@ class AiAnalysisTaskSegmentResult extends  AbstractModel {
         super();
 
         /**
-         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. `0`: Task successful. Other values: Task failed.
+         * Error code. 0: Task successful. Other values: Task failed.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -19448,7 +19323,7 @@ class AiAnalysisTaskSegmentResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * Splitting task output.Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskSegmentOutput || null}
          */
         this.Output = null;
@@ -19490,7 +19365,7 @@ class RawSmartSubtitleParameter extends  AbstractModel {
         super();
 
         /**
-         * <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
+         * <p>Smart subtitle language type.<br>0: source language.<br>1: target language.<br>2: source language and target language.<br>Only 0 is supported when TranslateSwitch is OFF.<br>Only 1 or 2 is supported when TranslateSwitch is ON.</p>
          * @type {number || null}
          */
         this.SubtitleType = null;
@@ -19502,29 +19377,25 @@ class RawSmartSubtitleParameter extends  AbstractModel {
         this.VideoSrcLanguage = null;
 
         /**
-         * <p>Intelligent subtitle file format:</p><ul><li>For ASR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li><li>Blank or fill in the blank: no subtitle file generated</li></ul></li><li>For pure caption translation processing type:<ul><li>original: consistent with the source file</li><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li><li>For OCR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li></ul><p><strong>Note</strong>:</p><ul><li>For ASR recognition method, passing blank or unspecified is not allowed when translating at least 2 languages.</li><li>For pure caption translation and OCR recognition translation methods, passing blank or unspecified is not allowed.</li><li>For OCR type tasks, passing blank or unspecified is allowed when suppression is enabled.</li></ul>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.SubtitleFormat = null;
 
         /**
-         * <p>Subtitle translation switch<br><code>ON</code>: Enable translation<br><code>OFF</code>: Disable translation</p><p><strong>Note</strong>: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to <code>OFF</code>.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.TranslateSwitch = null;
 
         /**
-         * <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: GaLanguage<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method.<code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.TranslateDstLanguage = null;
 
         /**
-         * <p>ASR hot word lexicon parameter</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AsrHotWordsConfigure || null}
          */
         this.AsrHotWordsConfigure = null;
@@ -19542,8 +19413,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ProcessType = null;
 
         /**
-         * <p>Area configurations for the subtitle OCR extraction box</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {SelectingSubtitleAreasConfig || null}
          */
         this.SelectingSubtitleAreasConfig = null;
@@ -19610,7 +19480,7 @@ class AiRecognitionTaskAsrFullTextResultInput extends  AbstractModel {
         super();
 
         /**
-         * Full speech recognition template ID.
+         * Full speech identification template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -19697,22 +19567,19 @@ class BatchSubTaskResult extends  AbstractModel {
         super();
 
         /**
-         * Input information for a batch task.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {Array.<MediaInputInfo> || null}
          */
         this.InputInfos = null;
 
         /**
-         * Metadata of the original video.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {Array.<MediaMetaData> || null}
          */
         this.Metadatas = null;
 
         /**
-         * Execution result of the smart subtitle task.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {BatchSmartSubtitlesResult || null}
          */
         this.SmartSubtitlesTaskResult = null;
@@ -19755,7 +19622,7 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
- * AI-based OCR-based live streaming keyword recognition result
+ * Live streaming AI Ocr word recognition result
  * @class
  */
 class LiveStreamOcrWordsRecognitionResult extends  AbstractModel {
@@ -19769,25 +19636,25 @@ class LiveStreamOcrWordsRecognitionResult extends  AbstractModel {
         this.Word = null;
 
         /**
-         * Start PTS time of recognized segment in seconds.
+         * Start PTS time of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.StartPtsTime = null;
 
         /**
-         * End PTS time of recognized segment in seconds.
+         * End PTS time of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.EndPtsTime = null;
 
         /**
-         * Confidence of recognized segment. Value range: 0–100.
+         * Confidence of a recognized segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+         * Zone coordinates of the recognition result. An array contains four elements: [x1, y1, x2, y2], representing the horizontal and vertical coordinates of the top-left and bottom-right corners, respectively.
          * @type {Array.<number> || null}
          */
         this.AreaCoords = null;
@@ -19811,7 +19678,7 @@ class LiveStreamOcrWordsRecognitionResult extends  AbstractModel {
 }
 
 /**
- * Information of a live stream processing error
+ * Live stream processing error information
  * @class
  */
 class LiveStreamProcessErrorInfo extends  AbstractModel {
@@ -19819,9 +19686,9 @@ class LiveStreamProcessErrorInfo extends  AbstractModel {
         super();
 
         /**
-         * Error code:
-<li>0: No error;</li>
-<li>If this parameter is not 0, an error has occurred. Please see the error message (`Message`).</li>
+         * Error code.
+<li>0 means no error.</li>
+<li>Non-zero means error. Refer to the error information in Message.</li>
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -19876,7 +19743,7 @@ class ModifyAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Result type of a transcoding task
+ * Transcoding task result type
  * @class
  */
 class MediaProcessTaskTranscodeResult extends  AbstractModel {
@@ -19884,19 +19751,19 @@ class MediaProcessTaskTranscodeResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -19908,14 +19775,13 @@ class MediaProcessTaskTranscodeResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input for a transcoding task.
+         * Input of the transcoding task.
          * @type {TranscodeTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of a transcoding task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaTranscodeItem || null}
          */
         this.Output = null;
@@ -20139,8 +20005,10 @@ class AigcImageInfo extends  AbstractModel {
         this.ImageUrl = null;
 
         /**
-         * Reference type.
-Note:1. When the model uses Vidu's q2 multi-reference image generation, this can also be used to specify the subject ID.2. If the GV model is used, this serves as the reference method. Valid values are asset and style.
+         * Reference Type.
+Note:
+1. When the model uses Vidu's q2 multi-reference image generation, it can also be used to specify the subject ID.
+2. If the GV model is used, this serves as the reference method. Valid values are asset and style.
          * @type {string || null}
          */
         this.ReferenceType = null;
@@ -20391,7 +20259,7 @@ class ModifyQualityControlTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Speech keyword recognition control parameter.
+ * Voice keyword recognition control parameters.
  * @class
  */
 class AsrWordsConfigureInfo extends  AbstractModel {
@@ -20399,16 +20267,16 @@ class AsrWordsConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of a speech keyword recognition task. Valid values:
-<li>ON: Enables a speech keyword recognition task;</li>
-<li>OFF: Disables a speech keyword recognition task.</li>
+         * Speech keyword recognition task switch, available values:
+<li>ON: Enable speech keyword recognition task.</li>
+<li>OFF: Disables the speech keyword recognition task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty, all results will be returned.
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * Keyword-based filtering tag, specify the tag of the keyword to return. If left blank or empty, all results are returned.
+The number of tags is up to 10, and each tag can have up to 16 characters.
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -20429,7 +20297,7 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
- * Video deduplication task input type.
+ * Video deduplication task input type
  * @class
  */
 class AiAnalysisTaskVideoRemakeInput extends  AbstractModel {
@@ -20464,7 +20332,7 @@ class AiAnalysisTaskVideoRemakeInput extends  AbstractModel {
 }
 
 /**
- * AI-based ASR-based live streaming keyword recognition result
+ * Live streaming AI Asr word recognition result
  * @class
  */
 class LiveStreamAsrWordsRecognitionResult extends  AbstractModel {
@@ -20478,19 +20346,19 @@ class LiveStreamAsrWordsRecognitionResult extends  AbstractModel {
         this.Word = null;
 
         /**
-         * Start PTS time of recognized segment in seconds.
+         * Start PTS time of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.StartPtsTime = null;
 
         /**
-         * End PTS time of recognized segment in seconds.
+         * End PTS time of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.EndPtsTime = null;
 
         /**
-         * Confidence of recognized segment. Value range: 0–100.
+         * Confidence of a recognized segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -20656,13 +20524,13 @@ class SmartSubtitleTaskAsrFullTextResult extends  AbstractModel {
         super();
 
         /**
-         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -20680,22 +20548,19 @@ class SmartSubtitleTaskAsrFullTextResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input information on the full speech recognition task.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {SmartSubtitleTaskResultInput || null}
          */
         this.Input = null;
 
         /**
-         * Output information on the full speech recognition task.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {SmartSubtitleTaskAsrFullTextResultOutput || null}
          */
         this.Output = null;
 
         /**
-         * Task progress.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {number || null}
          */
         this.Progress = null;
@@ -20739,15 +20604,13 @@ class BatchSmartSubtitlesResult extends  AbstractModel {
         super();
 
         /**
-         * Input information for smart subtitle tasks.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {SmartSubtitleTaskResultInput || null}
          */
         this.Input = null;
 
         /**
-         * Output information for smart subtitle tasks.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {Array.<SmartSubtitleTaskBatchOutput> || null}
          */
         this.Outputs = null;
@@ -20851,8 +20714,7 @@ class DescribeAigcTaskStatusResponse extends  AbstractModel {
         this.TaskStatus = null;
 
         /**
-         * <p>Output url</p>
-Attention: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.OutputUrl = null;
@@ -21161,7 +21023,7 @@ class DescribeWorkflowsResponse extends  AbstractModel {
 }
 
 /**
- * Speech keyword recognition control parameter.
+ * Voice keyword recognition control parameters.
  * @class
  */
 class AsrWordsConfigureInfoForUpdate extends  AbstractModel {
@@ -21169,16 +21031,16 @@ class AsrWordsConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of a speech keyword recognition task. Valid values:
-<li>ON: Enables a speech keyword recognition task;</li>
-<li>OFF: Disables a speech keyword recognition task.</li>
+         * Speech keyword recognition task switch, available values:
+<li>ON: Enable speech keyword recognition task.</li>
+<li>OFF: Disables the speech keyword recognition task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty, all results will be returned.
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * Keyword-based filtering tag. Specify the tag of the keyword that needs to be returned. If it is not filled or is empty, all results are returned.
+The number of tags is up to 10, and each tag can have up to 16 characters.
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -21207,13 +21069,13 @@ class ScheduleSmartSubtitleTaskResult extends  AbstractModel {
         super();
 
         /**
-         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -21231,25 +21093,25 @@ class ScheduleSmartSubtitleTaskResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of the recognition task.
+         * Recognition task input.
          * @type {SmartSubtitlesTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of the identification task.
+         * Recognition task output.
          * @type {Array.<SmartSubtitlesResult> || null}
          */
         this.Output = null;
 
         /**
-         * Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Task execution start time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Task execution completion time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -21367,15 +21229,15 @@ class DescribeContentReviewTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Smart erasure. coordinate configuration of the removal area.
-The region is defined by the coordinates of the upper left corner and the bottom-right corner.
-The coordinate origin is the top-left corner of the frame and the coordinate points can be specified using pixel values or percentage units.
-**For the Automatic Erasing Area:**
-When the unit is %, the coordinate range is [0,1].
-When unit is px, X value range is [0, video image width]. Y value range is [0, video image height].
-**For the Specified area erasing:**
-Specifies the coordinate range as [0,1) when the unit is %.
-When unit: px, X value range [0, video image width], Y value range [0, video image height].
+ * Smart erasing, coordinate configuration for the removal area.
+The region is determined by the coordinates of the upper left corner and the bottom-right corner.
+The coordinate origin is the top-left corner of the image. Coordinate points can be specified using pixel values or a percentage unit.
+For the auto erase area:
+When unit: %, coordinate range is [0,1].
+When the unit is px, the X range is [0, video image width], and the Y range is [0, video image height].
+For the designated erase area:
+When unit: %, coordinate range is [0,1).
+When the unit is px, the X value range is [0, video image width], and the Y value range is [0, video image height].
  * @class
  */
 class EraseArea extends  AbstractModel {
@@ -21383,37 +21245,37 @@ class EraseArea extends  AbstractModel {
         super();
 
         /**
-         * X-Axis coordinate of the upper left corner.
-When Unit is set to 1 (percentage Unit), 0.05 indicates the horizontal distance from the upper left corner of the region to the top-left corner of the entire frame is 5% of the frame width.
+         * X-axis coordinate of the upper left corner of the region.
+For example, when Unit is set to 1, which means using the percentage unit, 0.05 indicates that the horizontal distance from the top-left corner of the region to the top-left corner of the entire frame is 5% of the frame width.
          * @type {number || null}
          */
         this.LeftTopX = null;
 
         /**
-         * Y-Axis coordinate of the upper left corner.
-When Unit is set to 1 (using percentage Unit), 0.1 indicates the vertical distance from the top-left corner of the area to the top-left corner of the entire frame is 10% of the screen height.
+         * Y-axis coordinate of the upper left corner.
+For example, when Unit is set to 1, which means using the percentage unit, 0.1 indicates that the vertical distance from the top-left corner of the region to the top-left corner of the entire frame is 10% of the frame height.
          * @type {number || null}
          */
         this.LeftTopY = null;
 
         /**
-         * X-Axis coordinate of the bottom-right corner.
-When Unit is set to 1 (percentage Unit), 0.75 indicates the horizontal distance from the bottom-right corner of the region to the top-left corner of the entire frame is 75% of the frame width.
+         * X-axis coordinate of the bottom-right corner of the region.
+For example, when Unit is set to 1, which means using the percentage unit, 0.75 indicates that the horizontal distance from the bottom-right corner of the region to the top-left corner of the entire frame is 75% of the frame width.
          * @type {number || null}
          */
         this.RightBottomX = null;
 
         /**
-         * Y-Axis coordinate of the bottom-right corner.
-When Unit is set to 1 (using percentage Unit), 0.9 indicates the vertical distance from the bottom-right corner of the area to the top-left corner of the entire frame is 90% of the screen height.
+         * Y-axis coordinate of the bottom-right corner of the region.
+For example, when Unit is set to 1, which means using the percentage unit, 0.9 indicates that the vertical distance from the bottom-right corner of the region to the top-left corner of the entire frame is 90% of the frame height.
          * @type {number || null}
          */
         this.RightBottomY = null;
 
         /**
-         * Specifies the coordinate unit.
--Percentage.
--2 pixel values.
+         * Coordinate unit
+-Percentage
+- 2 pixel values
          * @type {number || null}
          */
         this.Unit = null;
@@ -22082,7 +21944,7 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * A subtask of a scheme.
+ * Orchestrate atomic tasks
  * @class
  */
 class ActivityPara extends  AbstractModel {
@@ -22090,83 +21952,79 @@ class ActivityPara extends  AbstractModel {
         super();
 
         /**
-         * A transcoding task.
+         * 
          * @type {TranscodeTaskInput || null}
          */
         this.TranscodeTask = null;
 
         /**
-         * An animated screenshot generation task.
+         * 
          * @type {AnimatedGraphicTaskInput || null}
          */
         this.AnimatedGraphicTask = null;
 
         /**
-         * A time point screenshot task.
+         * 
          * @type {SnapshotByTimeOffsetTaskInput || null}
          */
         this.SnapshotByTimeOffsetTask = null;
 
         /**
-         * A sampled screenshot task.
+         * 
          * @type {SampleSnapshotTaskInput || null}
          */
         this.SampleSnapshotTask = null;
 
         /**
-         * An image sprite screenshot task.
+         * 
          * @type {ImageSpriteTaskInput || null}
          */
         this.ImageSpriteTask = null;
 
         /**
-         * An adaptive bitrate streaming task.
+         * 
          * @type {AdaptiveDynamicStreamingTaskInput || null}
          */
         this.AdaptiveDynamicStreamingTask = null;
 
         /**
-         * A content moderation task.
+         * 
          * @type {AiContentReviewTaskInput || null}
          */
         this.AiContentReviewTask = null;
 
         /**
-         * A content analysis task.
+         * 
          * @type {AiAnalysisTaskInput || null}
          */
         this.AiAnalysisTask = null;
 
         /**
-         * A content recognition task.
+         * 
          * @type {AiRecognitionTaskInput || null}
          */
         this.AiRecognitionTask = null;
 
         /**
-         * Media quality inspection task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiQualityControlTaskInput || null}
          */
         this.QualityControlTask = null;
 
         /**
-         * Conditional judgment of the task.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {ExecRulesTask || null}
          */
         this.ExecRulesTask = null;
 
         /**
-         * Smart subtitle task.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {SmartSubtitlesTaskInput || null}
          */
         this.SmartSubtitlesTask = null;
 
         /**
-         * Smart erasure task.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {SmartEraseTaskInput || null}
          */
         this.SmartEraseTask = null;
@@ -22441,7 +22299,7 @@ class ModifyImageSpriteTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Suspected segment identified during ASR-based text audit during content audit
+ * Content review Asr text audit suspected segment
  * @class
  */
 class MediaContentReviewAsrTextSegmentItem extends  AbstractModel {
@@ -22449,25 +22307,25 @@ class MediaContentReviewAsrTextSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * Start time offset of a suspected segment in seconds.
+         * Start time offset of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of a suspected segment in seconds.
+         * End time offset of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * Confidence of a suspected segment.
+         * Confidence degree of the suspected segment.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for suspected segment audit. Valid values:
+         * Review result suggestion for suspected segment, value ranges from...to...
 <li>pass.</li>
 <li>review.</li>
 <li>block.</li>
@@ -22476,7 +22334,7 @@ class MediaContentReviewAsrTextSegmentItem extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * List of suspected keywords.
+         * Suspicious keyword list.
          * @type {Array.<string> || null}
          */
         this.KeywordSet = null;
@@ -22613,7 +22471,7 @@ Default value: 0 px.
 }
 
 /**
- * The result of a content analysis task of a scheme.
+ * Orchestrate the task result type of video analysis
  * @class
  */
 class ScheduleAnalysisTaskResult extends  AbstractModel {
@@ -22621,31 +22479,31 @@ class ScheduleAnalysisTaskResult extends  AbstractModel {
         super();
 
         /**
-         * The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task has failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * The error code. 0 indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * The error message.
+         * Error message.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * The input of the content analysis task.
+         * Analyze the input of the task.
          * @type {AiAnalysisTaskInput || null}
          */
         this.Input = null;
@@ -22657,13 +22515,13 @@ class ScheduleAnalysisTaskResult extends  AbstractModel {
         this.Output = null;
 
         /**
-         * Task execution start time in ISO date and time format.
+         * Task execution start time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * Task execution completion time in ISO date and time format.
+         * Task execution completion time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -23197,38 +23055,38 @@ class CreateScheduleRequest extends  AbstractModel {
         super();
 
         /**
-         * The scheme name (max 128 characters). This name should be unique across your account.
+         * Orchestration name, up to 128 characters. The name is unique for the same user.
          * @type {string || null}
          */
         this.ScheduleName = null;
 
         /**
-         * The trigger of the scheme. If a file is uploaded to the specified bucket, the scheme will be triggered.
+         * Orchestrate the bound trigger rule. The orchestration is triggered when an uploaded video hits the rule for the object.
          * @type {WorkflowTrigger || null}
          */
         this.Trigger = null;
 
         /**
-         * The subtasks of the scheme.
+         * Orchestration task list.
          * @type {Array.<Activity> || null}
          */
         this.Activities = null;
 
         /**
-         * The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
+         * Media Processing Service output storage location. If left blank, it inherits the storage location from Trigger.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.
-If you do not specify this, the file will be saved to the trigger directory.
+         * Storage directory for the output file. It should start and end with a slash (/), such as `/movie/201907/`.
+If left empty, it is the same as the directory of the trigger file.
          * @type {string || null}
          */
         this.OutputDir = null;
 
         /**
-         * The notification configuration. If you do not specify this parameter, notifications will not be sent.
+         * Event notification configuration of the task. If left blank, it indicates that no event notification will be obtained.
          * @type {TaskNotifyConfig || null}
          */
         this.TaskNotifyConfig = null;
@@ -23283,7 +23141,7 @@ If you do not specify this, the file will be saved to the trigger directory.
 }
 
 /**
- * 
+ * Live streaming AI timestamp recognition result
  * @class
  */
 class LiveStreamTagRecognitionResult extends  AbstractModel {
@@ -23291,25 +23149,25 @@ class LiveStreamTagRecognitionResult extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Timestamp events.
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * 
+         * Start PTS time of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.StartPtsTime = null;
 
         /**
-         * 
+         * End PTS time of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.EndPtsTime = null;
 
         /**
-         * 
+         * Confidence of a recognized segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -23484,7 +23342,7 @@ class AnimatedGraphicTaskInput extends  AbstractModel {
 }
 
 /**
- * Live stream smart subtitle input struct.
+ * Live stream smart subtitle input struct
  * @class
  */
 class LiveSmartSubtitlesTaskInput extends  AbstractModel {
@@ -23538,6 +23396,12 @@ class CreateDocToVideoTaskRequest extends  AbstractModel {
          */
         this.CosInfo = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
     }
 
     /**
@@ -23559,6 +23423,7 @@ class CreateDocToVideoTaskRequest extends  AbstractModel {
             obj.deserialize(params.CosInfo)
             this.CosInfo = obj;
         }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }
@@ -23850,7 +23715,7 @@ class ComposeMediaConfig extends  AbstractModel {
 }
 
 /**
- * The result of detecting sensitive information in live streaming videos.
+ * Live stream AI content review image sensitive result
  * @class
  */
 class LiveStreamAiReviewImagePoliticalResult extends  AbstractModel {
@@ -23858,25 +23723,25 @@ class LiveStreamAiReviewImagePoliticalResult extends  AbstractModel {
         super();
 
         /**
-         * Start PTS time of a suspected segment in seconds.
+         * Start PTS time of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.StartPtsTime = null;
 
         /**
-         * End PTS time of a suspected segment in seconds.
+         * End PTS time of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.EndPtsTime = null;
 
         /**
-         * The confidence score for the detected sensitive segments.
+         * Sensitive score of the suspected segment.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for porn information detection of a suspected segment. Valid values:
+         * Result suggestion for suspected segment porn detection, permissible range:
 <li>pass</li>
 <li>review</li>
 <li>block</li>
@@ -23885,34 +23750,34 @@ class LiveStreamAiReviewImagePoliticalResult extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * The labels for the detected sensitive information. Valid values:
-<li>politician</li>
-<li>violation_photo (banned icons)</li>
+         * Video sensitive result tag, value ranges from...to...
+<li>politician: sensitive person.</li>
+<li>violation_photo: violation icon.</li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * The name of a sensitive person or banned icon.
+         * Sensitive person, violative icon name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * The pixel coordinates of the detected sensitive people or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
+         * Area coordinates (pixel-level) where sensitive persons or violation icons appear. Format: [x1, y1, x2, y2], which indicates the coordinates of the top-left corner and the bottom-right corner.
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
 
         /**
-         * URL of a suspected image (which will not be permanently stored
-and will be deleted after `PicUrlExpireTime`).
+         * Suspected image URL (Images are not retained permanently upon arrival)
+The image will be deleted after the PicUrlExpireTime time point.
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Expiration time of the suspected image URL, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -24200,7 +24065,7 @@ class AiSampleTagOperation extends  AbstractModel {
 }
 
 /**
- * Smart erasure custom parameter.
+ * Custom parameters for smart erasing.
  * @class
  */
 class RawSmartEraseParameter extends  AbstractModel {
@@ -24214,22 +24079,19 @@ class RawSmartEraseParameter extends  AbstractModel {
         this.EraseType = null;
 
         /**
-         * <p>Subtitle erasing configuration;<br>This field is required when the value of EraseType is set to subtitle.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {SmartEraseSubtitleConfig || null}
          */
         this.EraseSubtitleConfig = null;
 
         /**
-         * <p>Watermark erasing configuration.<br>This field is required when the value of EraseType is set to watermark.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {SmartEraseWatermarkConfig || null}
          */
         this.EraseWatermarkConfig = null;
 
         /**
-         * <p>Privacy protection configuration.<br>This field is required when the value of EraseType is privacy.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {SmartErasePrivacyConfig || null}
          */
         this.ErasePrivacyConfig = null;
@@ -24288,7 +24150,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Result type of the media quality inspection task.
+ * Media quality inspection task result type.
  * @class
  */
 class ScheduleExecRuleTaskResult extends  AbstractModel {
@@ -24296,13 +24158,13 @@ class ScheduleExecRuleTaskResult extends  AbstractModel {
         super();
 
         /**
-         * Task status, which can be PROCESSING, SUCCESS, or FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -24320,8 +24182,7 @@ class ScheduleExecRuleTaskResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * Output of the conditional judgment task.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {ExecRuleTaskData || null}
          */
         this.Output = null;
@@ -24363,7 +24224,7 @@ class CreateAIRecognitionTemplateResponse extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a video content recognition template.
+         * Unique identifier of a video content recognition template.
          * @type {number || null}
          */
         this.Definition = null;
@@ -24426,7 +24287,7 @@ class DeleteTranscodeTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a transcoding template.
+         * Unique identifier of the transcoding template.
          * @type {number || null}
          */
         this.Definition = null;
@@ -24446,7 +24307,7 @@ class DeleteTranscodeTemplateRequest extends  AbstractModel {
 }
 
 /**
- * The information about the sensitive content detected.
+ * Sensitive information
  * @class
  */
 class AiReviewTerrorismTaskOutput extends  AbstractModel {
@@ -24454,37 +24315,37 @@ class AiReviewTerrorismTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * The confidence score for the detection of sensitive information. Value range: 0-100.
+         * Video sensitive content score, ranging from 0 to 100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * The suggestion for handling the sensitive information detected. Valid values:
-<li>pass</li>
-<li>review</li>
-<li>block</li>
+         * Result Suggestions for sensitive content, value ranges from...to...
+<li>pass.</li>
+<li>review.</li>
+<li>block.</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * The labels for the detected sensitive content. Valid values:
-<li>guns</li>
-<li>crowd</li>
-<li>police</li>
-<li>bloody</li>
-<li>banners (sensitive flags)</li>
-<li>militant</li>
-<li>explosion</li>
-<li>terrorists</li>
-<li>scenario (sensitive scenes) </li>
+         * Video sensitive content detection result tag, permissible range:
+<li>guns: weapons and firearms.</li>
+<li>crowd: crowd gathering.</li>
+<li>police: police force.</li>
+<li>bloody: graphic violence.</li>
+<li>banners: sensitive flags.</li>
+<li>militant: militant.</li>
+<li>explosion: explosions and fires.</li>
+<li>terrorists: sensitive persons.</li>
+<li>scenario: Sensitive content.</li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * The video segments that contain sensitive information.
+         * List of video segments suspected of containing sensitive content.
          * @type {Array.<MediaContentReviewSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -24731,7 +24592,7 @@ class CreateProcessImageTemplateRequest extends  AbstractModel {
 }
 
 /**
- * The information about the sensitive content detected based on OCR.
+ * Ocr text sensitive information
  * @class
  */
 class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
@@ -24739,22 +24600,22 @@ class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * The confidence score for the OCR-based detection of sensitive information. Value range: 1-100.
+         * Ocr text sensitive content score, ranging from 0 to III.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * The suggestion for handling the sensitive information detected based on OCR. Valid values:
-<li>pass</li>
-<li>review</li>
-<li>block</li>
+         * Ocr text sensitive result suggestion, value ranges from...to...
+<li>pass.</li>
+<li>review.</li>
+<li>block.</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * The video segments that contain sensitive information detected based on OCR.
+         * List of video segments suspected of containing sensitive content in Ocr text.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -24798,7 +24659,7 @@ class DescribeAsrHotwordsListResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Paging offset. Default value: 0.
+         * Pagination offset. Default value: 0.
          * @type {number || null}
          */
         this.Offset = null;
@@ -24848,7 +24709,7 @@ class DescribeAsrHotwordsListResponse extends  AbstractModel {
 }
 
 /**
- * Intelligent analysis results
+ * Intelligent analysis result
  * @class
  */
 class AiAnalysisResult extends  AbstractModel {
@@ -24856,109 +24717,109 @@ class AiAnalysisResult extends  AbstractModel {
         super();
 
         /**
-         * Task type. Valid values:<li>Classification: intelligent classification.</li><li>Cover: intelligent cover.</li><li>Tag: intelligent tagging.</li><li>FrameTag: intelligent frame-level tagging.</li><li>Highlight: intelligent highlights.</li><li>DeLogo: intelligent removal.</li><li>Description: LLM summarization.</li><li>Dubbing: intelligent dubbing.</li><li>VideoRemake: video recreation.</li><li>VideoComprehension: video (audio) recognition.</li>
-<li>Cutout: video matting.</li><li>Reel: intelligent video editing.</li>
+         * Task type. Valid values:
+<li>Classification: intelligent classification.</li>
+<li>Cover: intelligent cover</li>
+<li>Tag: intelligent tagging.</li>
+<li>FrameTag: intelligent frame tagging.</li>
+<li>Highlight: Intelligent Highlights</li>
+<li>DeLogo: intelligent removal.</li>
+<li>Description: large model summarization.</li>
+<li>Dubbing: Intelligent Dubbing</li>
+<li>VideoRemake: Video deduplication</li>
+<li>VideoComprehension: video (audio) recognition.</li>
+<li>Cutout: Video matting</li>
+<li>Reel: intelligent video editing.</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Query result of intelligent categorization task in video content analysis, which is valid if task type is `Classification`.
+         * 
          * @type {AiAnalysisTaskClassificationResult || null}
          */
         this.ClassificationTask = null;
 
         /**
-         * Query result of intelligent cover generating task in video content analysis, which is valid if task type is `Cover`.
+         * 
          * @type {AiAnalysisTaskCoverResult || null}
          */
         this.CoverTask = null;
 
         /**
-         * Query result of intelligent tagging task in video content analysis, which is valid if task type is `Tag`.
+         * 
          * @type {AiAnalysisTaskTagResult || null}
          */
         this.TagTask = null;
 
         /**
-         * Query result of intelligent frame-specific tagging task in video content analysis, which is valid if task type is `FrameTag`.
+         * 
          * @type {AiAnalysisTaskFrameTagResult || null}
          */
         this.FrameTagTask = null;
 
         /**
-         * The result of a highlight generation task. This parameter is valid if `Type` is `Highlight`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskHighlightResult || null}
          */
         this.HighlightTask = null;
 
         /**
-         * The query result of an intelligent removal task for video analysis, which is valid when the task type is DeLogo.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskDelLogoResult || null}
          */
         this.DeLogoTask = null;
 
         /**
-         * The query result of a splitting task for video analysis, which is valid when the task type is SegmentRecognition.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskSegmentResult || null}
          */
         this.SegmentTask = null;
 
         /**
-         * The query result of an opening and closing segments recognition task for video analysis, which is valid when the task type is HeadTailRecognition.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskHeadTailResult || null}
          */
         this.HeadTailTask = null;
 
         /**
-         * The query result of a video analysis summarization task, which is valid when the task type is Description.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskDescriptionResult || null}
          */
         this.DescriptionTask = null;
 
         /**
-         * The query result of a landscape-to-portrait task for video analysis, which is valid when the task type is HorizontalToVertical.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskHorizontalToVerticalResult || null}
          */
         this.HorizontalToVerticalTask = null;
 
         /**
-         * The query result of a Dubbing task for video content analysis, which is valid when the task type is Dubbing.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {AiAnalysisTaskDubbingResult || null}
          */
         this.DubbingTask = null;
 
         /**
-         * The query result of a video content deduplication task, which is valid when the task type is VideoRemake.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {AiAnalysisTaskVideoRemakeResult || null}
          */
         this.VideoRemakeTask = null;
 
         /**
-         * Query result of the video (audio) recognition task. This parameter is valid when the task type is VideoComprehension.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskVideoComprehensionResult || null}
          */
         this.VideoComprehensionTask = null;
 
         /**
-         * Query result of video content analysis intelligent image masking task. valid when task type is Cutout.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskCutoutResult || null}
          */
         this.CutoutTask = null;
 
         /**
-         * Query result of the video content analysis AI narration and video re-creation task. valid when the task type is Reel.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskReelResult || null}
          */
         this.ReelTask = null;
@@ -25068,7 +24929,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * The information about the sensitive content detected based on OCR.
+ * Ocr text sensitive information
  * @class
  */
 class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
@@ -25076,22 +24937,22 @@ class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * The confidence score for the OCR-based detection of sensitive information. Value range: 0-100.
+         * Ocr text sensitivity score, ranging from 0 to 100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * The suggestion for handling the sensitive information detected based on OCR. Valid values:
-<li>pass</li>
-<li>review</li>
-<li>block</li>
+         * Ocr text sensitive result recommendation, value ranges from...to...
+<li>pass.</li>
+<li>review.</li>
+<li>block.</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * The video segments that contain sensitive information detected based on OCR.
+         * Video segment list with suspect Ocr text sensitivity.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -25306,7 +25167,7 @@ class TextToSpeechAsyncResponse extends  AbstractModel {
 }
 
 /**
- * Output of speech keyword recognition.
+ * Speech keyword recognition output.
  * @class
  */
 class AiRecognitionTaskAsrWordsResultOutput extends  AbstractModel {
@@ -25342,7 +25203,7 @@ class AiRecognitionTaskAsrWordsResultOutput extends  AbstractModel {
 }
 
 /**
- * The information about the detected pornographic/sensitive segments.
+ * Content review suspected pornographic/sensitive segment
  * @class
  */
 class MediaContentReviewSegmentItem extends  AbstractModel {
@@ -25350,31 +25211,31 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * Start time offset of a suspected segment in seconds.
+         * Start time offset of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of a suspected segment in seconds.
+         * End time offset of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * Score of a suspected porn segment.
+         * Suspected segment porn score.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Tag of porn information detection result of a suspected segment.
+         * Tag of the pornographic result for the suspected segment.
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * Suggestion for porn information detection of a suspected segment. Valid values:
+         * Pornographic result suggestion for suspected segment, value ranges from...to...
 <li>pass.</li>
 <li>review.</li>
 <li>block.</li>
@@ -25383,14 +25244,14 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * URL of a suspected image (which will not be permanently stored
- and will be deleted after `PicUrlExpireTime`).
+         * Suspected image URL (Images are not retained permanently upon arrival)
+The image will be deleted after the PicUrlExpireTime time point.
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Expiration time of the suspected image URL, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -25436,7 +25297,9 @@ class AigcStoreCosParam extends  AbstractModel {
         this.CosBucketRegion = null;
 
         /**
-         * Path of the COS bucket to store to.Optional.Example value: my_file.
+         * Store to the bucket path of cos.
+Option.
+Example value: my_file.
          * @type {string || null}
          */
         this.CosBucketPath = null;
@@ -25466,7 +25329,7 @@ class DescribeAigcTaskStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Task ID.</p>
+         * 
          * @type {string || null}
          */
         this.TaskId = null;
@@ -25512,8 +25375,7 @@ class DescribeDesignTaskResponse extends  AbstractModel {
         this.Status = null;
 
         /**
-         * <p>Voice ID.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.VoiceId = null;
@@ -25525,8 +25387,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AudioUrl = null;
 
         /**
-         * <p>Extended information.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.ExtInfo = null;
@@ -25637,7 +25498,7 @@ class AiRecognitionTaskOcrWordsResultItem extends  AbstractModel {
         this.Word = null;
 
         /**
-         * List of segments that contain a text keyword.
+         * List of segments where the key text appears.
          * @type {Array.<AiRecognitionTaskOcrWordsSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -25666,7 +25527,7 @@ class AiRecognitionTaskOcrWordsResultItem extends  AbstractModel {
 }
 
 /**
- * AI narration and video re-creation result type.
+ * AI narration and video re-creation result type
  * @class
  */
 class AiAnalysisTaskReelResult extends  AbstractModel {
@@ -25698,34 +25559,31 @@ class AiAnalysisTaskReelResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * AI narration and video re-creation task output.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskReelOutput || null}
          */
         this.Output = null;
 
         /**
-         * Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of MPS error codes.Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Task progress.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.Progress = null;
 
         /**
-         * Task start time, in ISO date and time format.Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * Task completion time, in ISO date and time format.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -25789,16 +25647,14 @@ class ProcessImageRequest extends  AbstractModel {
         this.OutputDir = null;
 
         /**
-         * Output path, which can be a relative or an absolute path.
-The path must end with `.{format}`. For details, please refer to the [Filename Variable](https://www.tencentcloud.com/document/product/1041/33495).
-**Relative path example:**
-<Li>`Filename_{Variablename}.{format}`.</li>
-<Li>`Filename.{format}`.</li>
-
-**Absolute path example:**
-<Li>`/Path/Filename_{Variablename}.{format}`.</li>
-
-If not filled in, default relative path: `{inputName}.{format}`.
+         * Output path, which can be a relative or absolute path.
+To define the output path, the path must end with `.{format}`. For variable names, please refer to the Filename Variable Explanation (https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1).
+Relative path example:
+<li>Filename_{Variable name}.{format}</li>
+<li>Filename.{format}</li>
+Absolute path example:
+<li>/Custom path/Filename_{Variable name}.{format}</li>
+If not filled in, default relative path: {inputName}.{format}.
          * @type {string || null}
          */
         this.OutputPath = null;
@@ -25893,7 +25749,7 @@ class DeleteSampleSnapshotTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Input type of intelligent tagging task
+ * Intelligent tag task input type
  * @class
  */
 class AiAnalysisTaskTagInput extends  AbstractModel {
@@ -25936,13 +25792,13 @@ class AiAnalysisTaskDescriptionResult extends  AbstractModel {
         super();
 
         /**
-         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. `0`: Task successful. Other values: Task failed.
+         * Error code. 0: Task successful. Other values: Task failed.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -25960,8 +25816,7 @@ class AiAnalysisTaskDescriptionResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * Intelligent description task output.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskDescriptionOutput || null}
          */
         this.Output = null;
@@ -26213,7 +26068,7 @@ class AiRecognitionTaskObjectResultInput extends  AbstractModel {
 }
 
 /**
- * The result of sensitive information detection.
+ * Content review sensitive task result type
  * @class
  */
 class AiReviewTaskTerrorismResult extends  AbstractModel {
@@ -26221,19 +26076,19 @@ class AiReviewTaskTerrorismResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -26245,14 +26100,13 @@ class AiReviewTaskTerrorismResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * The input parameter for sensitive information detection.
+         * Content review sensitive task input.
          * @type {AiReviewTerrorismTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * The output of sensitive information detection.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewTerrorismTaskOutput || null}
          */
         this.Output = null;
@@ -26287,7 +26141,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Result of porn information detection in speech in AI-based live stream content audit
+ * Live stream AI content review sound pornographic result
  * @class
  */
 class LiveStreamAiReviewVoicePornResult extends  AbstractModel {
@@ -26295,25 +26149,25 @@ class LiveStreamAiReviewVoicePornResult extends  AbstractModel {
         super();
 
         /**
-         * Start PTS time of a suspected segment in seconds.
+         * Start PTS time of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.StartPtsTime = null;
 
         /**
-         * End PTS time of a suspected segment in seconds.
+         * End PTS time of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.EndPtsTime = null;
 
         /**
-         * Score of a suspected porn segment.
+         * Suspected segment porn score.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for porn information detection of a suspected segment. Valid values:
+         * Pornographic result suggestion for suspected segment, value ranges from...to...
 <li>pass</li>
 <li>review</li>
 <li>block</li>
@@ -26322,8 +26176,8 @@ class LiveStreamAiReviewVoicePornResult extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * Tag of the detected porn information in video. Valid values:
-<li>sexual_moan: Sexual moans.</li>
+         * Video porn detection result tag, value ranges from...to...
+<li>sexual_moan: Moan.</li>
          * @type {string || null}
          */
         this.Label = null;
@@ -26403,7 +26257,7 @@ class DeleteSmartEraseTemplateRequest extends  AbstractModel {
 }
 
 /**
- * The information about the sensitive segments detected.
+ * Content review suspected segment
  * @class
  */
 class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
@@ -26411,82 +26265,82 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * Start time offset of a suspected segment in seconds.
+         * Start time offset of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of a suspected segment in seconds.
+         * End time offset of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * The confidence score for the detected sensitive segments.
+         * Suspected segment sensitivity score.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * The suggestion for handling the sensitive segments. Valid values:
-<li>pass</li>
-<li>review</li>
-<li>block</li>
+         * Suspected segment sensitive result suggestion, value ranges from...to...
+<li>pass.</li>
+<li>review.</li>
+<li>block.</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * The name of a sensitive person or banned icon.
+         * Sensitive person, violative icon name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * The labels for the detected sensitive segments. The relationship between the values of this parameter and those of the `LabelSet` parameter in [PoliticalImgReviewTemplateInfo](https://intl.cloud.tencent.com/document/api/862/37615?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) is as follows:
+         * Suspected segment sensitive result Tag. The mapping between the LabelSet parameter in the content moderation template [visual sensitive task control parameter](https://www.tencentcloud.com/document/api/862/37615?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and the parameter value range of this parameter:
 violation_photo:
-<li>violation_photo (banned icons)</li>
+<li>violation_photo: violation icon.</li>
 politician:
-<li>nation_politician (state leader)</li>
-<li>province_politician (provincial officials)</li>
-<li>bureau_politician (bureau-level officials)</li>
-<li>county_politician (county-level officials)</li>
-<li>rural_politician (township-level officials)</li>
-<li>sensitive_politician (sensitive people)</li>
-<li>foreign_politician (state leaders of other countries)</li>
+<li>nation_politician: State leaders;</li>
+<li>province_politician: provincial and ministerial leaders;</li>
+<li>bureau_politician: bureau-level official;</li>
+<li>county_politician: county-level official;</li>
+<li>rural_politician: township-level official;</li>
+<li>sensitive_politician: sensitive person.</li>
+<li>foreign_politician: state leaders of other countries.</li>
 entertainment:
-<li>sensitive_entertainment (sensitive people in the entertainment industry</li>
+<li>sensitive_entertainment: sensitive entertainment figure.</li>
 sport:
-<li>sensitive_sport (sensitive sports celebrities)</li>
+<li>Sensitive_sport: sensitive sports celebrity.</li>
 entrepreneur:
-<li>sensitive_entrepreneur</li>
+<li>sensitive_entrepreneur: sensitive entrepreneur.</li>
 scholar:
-<li>sensitive_scholar</li>
+<li>sensitive_scholar: Sensitive educational scholars.</li>
 celebrity:
-<li>sensitive_celebrity</li>
-<li>historical_celebrity (sensitive historical figures)</li>
+<li>sensitive_celebrity: sensitive celebrity.</li>
+<li>historical_celebrity: historical celebrity.</li>
 military:
-<li>sensitive_military (sensitive people in military)</li>
+<li>sensitive_military: sensitive military figure.</li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * URL of a suspected image (which will not be permanently stored
- and will be deleted after `PicUrlExpireTime`).
+         * Suspected image URL (Images are not retained permanently upon arrival)
+The image will be deleted after the PicUrlExpireTime time point.
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * The pixel coordinates of the detected sensitive people or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
+         * Area coordinates of sensitive person and violation icon occurrence (pixel-level), [x1, y1, x2, y2], i.e., coordinates of the top-left corner and coordinate of the bottom-right corner.
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
 
         /**
-         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Expiration time of the suspected image URL, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -26710,7 +26564,7 @@ Note: this parameter is not supported yet.
 }
 
 /**
- * AI-based live stream recognition result
+ * Live stream AI recognition result
  * @class
  */
 class LiveStreamAiRecognitionResultItem extends  AbstractModel {
@@ -26724,51 +26578,50 @@ class LiveStreamAiRecognitionResultItem extends  AbstractModel {
 <li>OcrWordsRecognition: text keyword recognition.</li>
 <li>AsrFullTextRecognition: full speech recognition.</li>
 <li>OcrFullTextRecognition: full text recognition.</li>
-<li>TransTextRecognition: speech translation.</li>
-
-<li>ObjectRecognition: object recognition.</li>
+<li>TransTextRecognition: speech translation</li>
+<li>ObjectRecognition: object detection.</li>
 <li>TagRecognition: highlights marking.</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Face recognition result, which is valid when `Type` is
-`FaceRecognition`.
+         * Face recognition result, which is valid when Type is
+FaceRecognition is valid at that time.
          * @type {Array.<LiveStreamFaceRecognitionResult> || null}
          */
         this.FaceRecognitionResultSet = null;
 
         /**
-         * Speech keyword recognition result, which is valid when `Type` is
-`AsrWordsRecognition`.
+         * Speech keyword recognition result. When Type is
+AsrWordsRecognition.
          * @type {Array.<LiveStreamAsrWordsRecognitionResult> || null}
          */
         this.AsrWordsRecognitionResultSet = null;
 
         /**
-         * Text keyword recognition result, which is valid when `Type` is
-`OcrWordsRecognition`.
+         * Text keyword recognition result. When Type is
+OcrWordsRecognition.
          * @type {Array.<LiveStreamOcrWordsRecognitionResult> || null}
          */
         this.OcrWordsRecognitionResultSet = null;
 
         /**
-         * Full speech recognition result, which is valid when `Type` is
-`AsrFullTextRecognition`.
+         * Full speech recognition result. When Type is
+AsrFullTextRecognition.
          * @type {Array.<LiveStreamAsrFullTextRecognitionResult> || null}
          */
         this.AsrFullTextRecognitionResultSet = null;
 
         /**
-         * Full text recognition result, which is valid when `Type` is
-`OcrFullTextRecognition`.
+         * Full text recognition result, when Type is
+OcrFullTextRecognition.
          * @type {Array.<LiveStreamOcrFullTextRecognitionResult> || null}
          */
         this.OcrFullTextRecognitionResultSet = null;
 
         /**
-         * The translation result. This parameter is valid only if `Type` is `TransTextRecognition`.
+         * Translation result. Valid when Type is TransTextRecognition.
          * @type {Array.<LiveStreamTransTextRecognitionResult> || null}
          */
         this.TransTextRecognitionResultSet = null;
@@ -26872,7 +26725,7 @@ class LiveStreamAiRecognitionResultItem extends  AbstractModel {
 }
 
 /**
- * Result information of intelligent cover generating
+ * Intelligent cover result information
  * @class
  */
 class AiAnalysisTaskCoverOutput extends  AbstractModel {
@@ -26880,13 +26733,13 @@ class AiAnalysisTaskCoverOutput extends  AbstractModel {
         super();
 
         /**
-         * List of intelligently generated covers.
+         * Intelligent cover list.
          * @type {Array.<MediaAiAnalysisCoverItem> || null}
          */
         this.CoverSet = null;
 
         /**
-         * Storage location of intelligently generated cover.
+         * Intelligent cover storage location.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -27267,7 +27120,7 @@ Default value: black.
 }
 
 /**
- * Full text recognition segment.
+ * Full text recognition fragment.
  * @class
  */
 class AiRecognitionTaskOcrFullTextSegmentTextItem extends  AbstractModel {
@@ -27459,8 +27312,7 @@ class SmartSubtitleTaskAsrFullTextSegmentItem extends  AbstractModel {
         this.Text = null;
 
         /**
-         * <p>Word timestamp information.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<WordResult> || null}
          */
         this.Wordlist = null;
@@ -27499,7 +27351,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * The information of a checked segment in quality control.
+ * Quality inspection result item
  * @class
  */
 class QualityControlItem extends  AbstractModel {
@@ -27507,27 +27359,25 @@ class QualityControlItem extends  AbstractModel {
         super();
 
         /**
-         * The confidence score. Value range: 0-100.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * The start timestamp (second) of the segment.
+         * Start time of occurrence, in seconds.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * The end timestamp (second) of the segment.
+         * End timestamp of the occurrence, in seconds.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * The coordinates (px) of the top left and bottom right corner.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
@@ -27558,7 +27408,7 @@ class TaskStatDataItem extends  AbstractModel {
         super();
 
         /**
-         * The start time of the time interval where the data resides, using the ISO date format. for example, when the time granularity is day, 2018-12-01T00:00:00+08:00 indicates the interval from december 1, 2018 (inclusive) to december 2, 2018 (exclusive).
+         * Start time of the time interval where the data resides, using ISO date format. For example, when the time granularity is day, 2018-12-01T00:00:00+08:00 indicates the interval from December 1, 2018 (inclusive) to December III, 2018 (exclusive).
          * @type {string || null}
          */
         this.Time = null;
@@ -27592,7 +27442,7 @@ class TaskStatDataItem extends  AbstractModel {
 }
 
 /**
- * ASR-based full live stream recognition
+ * Live stream recognition Asr full text recognition
  * @class
  */
 class LiveStreamAsrFullTextRecognitionResult extends  AbstractModel {
@@ -27606,19 +27456,19 @@ class LiveStreamAsrFullTextRecognitionResult extends  AbstractModel {
         this.Text = null;
 
         /**
-         * Start PTS time of recognized segment in seconds.
+         * Start PTS time of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.StartPtsTime = null;
 
         /**
-         * End PTS time of recognized segment in seconds.
+         * End PTS time of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.EndPtsTime = null;
 
         /**
-         * Confidence of recognized segment. Value range: 0–100.
+         * Confidence of a recognized segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -27642,7 +27492,7 @@ class LiveStreamAsrFullTextRecognitionResult extends  AbstractModel {
         this.SteadyState = null;
 
         /**
-         * User ID in the result of recognition via WebSocket and TRTC.Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.UserId = null;
@@ -27669,7 +27519,7 @@ class LiveStreamAsrFullTextRecognitionResult extends  AbstractModel {
 }
 
 /**
- * OCR-detected porn information in text
+ * Ocr text pornographic information
  * @class
  */
 class AiReviewPornOcrTaskOutput extends  AbstractModel {
@@ -27677,13 +27527,13 @@ class AiReviewPornOcrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of the OCR-detected porn information in text from 0 to 100.
+         * Ocr text involves pornographic content scoring, with a score ranging from 0 to 100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for the OCR-detected porn information in text. Valid values:
+         * Result Suggestions for Ocr text pornographic content, value ranges from...to...
 <li>pass.</li>
 <li>review.</li>
 <li>block.</li>
@@ -27692,7 +27542,7 @@ class AiReviewPornOcrTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain the OCR-detected porn information in text.
+         * Video segment list with suspect Ocr text pornographic information.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -27780,7 +27630,7 @@ class CreateAsrHotwordsRequest extends  AbstractModel {
 }
 
 /**
- * The input of an intelligent highlight generation task.
+ * Intelligent highlight task input type
  * @class
  */
 class AiAnalysisTaskHighlightInput extends  AbstractModel {
@@ -27859,7 +27709,7 @@ class ProhibitedAsrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Intelligent video splitting recording clip.
  * @class
  */
 class SegmentRecognitionItem extends  AbstractModel {
@@ -27867,31 +27717,31 @@ class SegmentRecognitionItem extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Confidence degree.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 
+         * Start time offset of a recording clip.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * 
+         * End time offset of the recording clip.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * Specifies the split segment URL.
+         * Split segment URL.
          * @type {string || null}
          */
         this.SegmentUrl = null;
 
         /**
-         * Specifies the segment cover.
+         * Segment cover.
          * @type {string || null}
          */
         this.CovImgUrl = null;
@@ -27903,7 +27753,7 @@ class SegmentRecognitionItem extends  AbstractModel {
         this.Title = null;
 
         /**
-         * Specifies the segment summary.
+         * Segment summary.
          * @type {string || null}
          */
         this.Summary = null;
@@ -27915,19 +27765,19 @@ class SegmentRecognitionItem extends  AbstractModel {
         this.Keywords = null;
 
         /**
-         * Specifies the start time of a live streaming segment in the ISO date format.
+         * The start time of a live streaming segment, in the ISO date format.
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * Specifies the end time of a live streaming segment in the ISO date format.
+         * The end time of a live streaming segment, in the ISO date format.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Specifies the character ID.
+         * Specify the figure ID.
          * @type {string || null}
          */
         this.PersonId = null;
@@ -28007,7 +27857,7 @@ class DescribeSubtitleEmbedTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * The input parameters for ASR-based detection of politically sensitive information.
+ * Content review Asr text sensitivity task input parameter type
  * @class
  */
 class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
@@ -28015,7 +27865,7 @@ class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * The template ID.
+         * Template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -28035,7 +27885,7 @@ class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
 }
 
 /**
- * 
+ * Live stream analysis result
  * @class
  */
 class LiveStreamAiAnalysisResultInfo extends  AbstractModel {
@@ -28043,11 +27893,7 @@ class LiveStreamAiAnalysisResultInfo extends  AbstractModel {
         super();
 
         /**
-         * Live streaming analysis subtask result. Valid values:
-<li>Live streaming video splitting.</li>
-<li>Live streaming highlight.</li>
-<li>Live streaming summary.</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<LiveStreamAiAnalysisResultItem> || null}
          */
         this.ResultSet = null;
@@ -28195,7 +28041,7 @@ class DescribeStreamLinkSecurityGroupResponse extends  AbstractModel {
 }
 
 /**
- * Result information of intelligent tagging
+ * Intelligent tag result information
  * @class
  */
 class MediaAiAnalysisTagItem extends  AbstractModel {
@@ -28209,7 +28055,7 @@ class MediaAiAnalysisTagItem extends  AbstractModel {
         this.Tag = null;
 
         /**
-         * Confidence of tag between 0 and 100.
+         * Reliability of the tag, with a value range from 0 to -100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -28398,7 +28244,7 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
- * Control parameter of a full speech recognition task.
+ * Speech Translation Task Control Parameter
  * @class
  */
 class TranslateConfigureInfo extends  AbstractModel {
@@ -28406,30 +28252,27 @@ class TranslateConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of a full speech recognition task. Valid values:
-<li>ON: Enables an intelligent full speech recognition task;</li>
-<li>OFF: Disables an intelligent full speech recognition task.</li>
+         * Voice translation task switch, available values:
+<li>ON: Enable Intelligent Voice Translation task.</li>
+<li>OFF: Disables the Intelligent Voice Translation task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Video source language.
          * @type {string || null}
          */
         this.SourceLanguage = null;
 
         /**
-         * 
+         * Target language.
          * @type {string || null}
          */
         this.DestinationLanguage = null;
 
         /**
-         * Generated subtitle file format. Leaving it as an empty string means no subtitle file will be generated. Valid value:
-<li>vtt: Generate a WebVTT subtitle file.</li>
-
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.SubtitleFormat = null;
@@ -28594,7 +28437,7 @@ class PornOcrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * The result of ASR-based detection of politically sensitive information.
+ * Content review Asr text sensitivity task result type
  * @class
  */
 class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
@@ -28602,19 +28445,19 @@ class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -28626,14 +28469,13 @@ class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * The input parameter for ASR-based detection of politically sensitive information.
+         * Content review Asr text sensitivity task input.
          * @type {AiReviewPoliticalAsrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * The output of ASR-based detection of politically sensitive information.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewPoliticalAsrTaskOutput || null}
          */
         this.Output = null;
@@ -28676,7 +28518,7 @@ class QualityControlStrategy extends  AbstractModel {
         super();
 
         /**
-         * Policy type. Valid values:
+         * Policy type. Value:
 - TimeSpotCheck
          * @type {string || null}
          */
@@ -29087,7 +28929,7 @@ class LiveStreamProcessTask extends  AbstractModel {
 }
 
 /**
- * Input parameter type of ASR-based prohibited information detection in speech task in content audit
+ * Content review Asr text prohibited information recognition task input parameter type
  * @class
  */
 class AiReviewProhibitedAsrTaskInput extends  AbstractModel {
@@ -29095,7 +28937,7 @@ class AiReviewProhibitedAsrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Prohibited information detection template ID.
+         * Prohibited information recognition template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -29163,8 +29005,7 @@ class SmartSubtitleTaskAsrFullTextResultOutput extends  AbstractModel {
         super();
 
         /**
-         * <p>List of segments for full speech recognition.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<SmartSubtitleTaskAsrFullTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -29417,7 +29258,7 @@ class RecognizeAudioSentence extends  AbstractModel {
 }
 
 /**
- * Input of video editing task.
+ * Input for the video editing task.
  * @class
  */
 class EditMediaTaskInput extends  AbstractModel {
@@ -29425,7 +29266,7 @@ class EditMediaTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Information of input video file.
+         * Input video file information.
          * @type {Array.<EditMediaFileInfo> || null}
          */
         this.FileInfoSet = null;
@@ -29527,7 +29368,7 @@ class ImageEncodeConfig extends  AbstractModel {
 }
 
 /**
- * Result type of a porn information detection task during content audit
+ * Content review porn detection task result type
  * @class
  */
 class AiReviewTaskPornResult extends  AbstractModel {
@@ -29535,39 +29376,37 @@ class AiReviewTaskPornResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * Error message.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * Input for a porn information detection task during content audit.
+         * Content review porn task input.
          * @type {AiReviewPornTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of a porn information detection task during content audit.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewPornTaskOutput || null}
          */
         this.Output = null;
@@ -29670,22 +29509,19 @@ class AiAnalysisTaskDelLogoOutput extends  AbstractModel {
         this.TranslateSubtitlePath = null;
 
         /**
-         * <p>Subtitle position after removal. <strong>Note</strong>: only applicable to subtitle extraction when return of subtitle position is enabled.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {SubtitlePosition || null}
          */
         this.SubtitlePos = null;
 
         /**
-         * <p>File URL of the video after voice type cloning</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.VoiceClonedVideo = null;
 
         /**
-         * <p>File address of the voice type clone annotation</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.VoiceClonedMarkFile = null;
@@ -29827,7 +29663,7 @@ class DescribeUsageDataResponse extends  AbstractModel {
 }
 
 /**
- * ASR-detected prohibited information in speech
+ * Asr text contains prohibited information
  * @class
  */
 class AiReviewProhibitedAsrTaskOutput extends  AbstractModel {
@@ -29835,13 +29671,13 @@ class AiReviewProhibitedAsrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of ASR-detected prohibited information in speech between 0 and 100.
+         * Asr text involves prohibited content scoring, with a score ranging from 0 to 100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for ASR-detected prohibited information in speech. Valid values:
+         * Asr text prohibited result suggestion, value ranges from...to...
 <li>pass.</li>
 <li>review.</li>
 <li>block.</li>
@@ -29850,7 +29686,7 @@ class AiReviewProhibitedAsrTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain the ASR-detected prohibited information in speech.
+         * Video segment list with Asr text suspected of prohibition violations.
          * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -29880,7 +29716,7 @@ class AiReviewProhibitedAsrTaskOutput extends  AbstractModel {
 }
 
 /**
- * AI-based live streaming face recognition result
+ * Live streaming AI face recognition result.
  * @class
  */
 class LiveStreamFaceRecognitionResult extends  AbstractModel {
@@ -29888,7 +29724,7 @@ class LiveStreamFaceRecognitionResult extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of figure.
+         * Unique identification ID of a figure.
          * @type {string || null}
          */
         this.Id = null;
@@ -29900,32 +29736,32 @@ class LiveStreamFaceRecognitionResult extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Figure library type, indicating to which figure library the recognized figure belongs:
-<li>Default: default figure library</li><li>UserDefine: custom figure library</li>
+         * Figure library type, which indicates which figure library the recognized figure comes from.
+<li>Default: Default figure library;</li><li>UserDefine: User-defined character library.</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Start PTS time of recognized segment in seconds.
+         * Start PTS time of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.StartPtsTime = null;
 
         /**
-         * End PTS time of recognized segment in seconds.
+         * End PTS time of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.EndPtsTime = null;
 
         /**
-         * Confidence of recognized segment. Value range: 0–100.
+         * Confidence of a recognized segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+         * Zone coordinates of the recognition result. An array contains four elements: [x1, y1, x2, y2], representing the horizontal and vertical coordinates of the top-left and bottom-right corners, respectively.
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
@@ -29951,7 +29787,7 @@ class LiveStreamFaceRecognitionResult extends  AbstractModel {
 }
 
 /**
- * Result of AI-based live stream audit
+ * Live stream AI review result
  * @class
  */
 class LiveStreamAiReviewResultInfo extends  AbstractModel {
@@ -29959,7 +29795,7 @@ class LiveStreamAiReviewResultInfo extends  AbstractModel {
         super();
 
         /**
-         * List of content audit results.
+         * Content moderation result list.
          * @type {Array.<LiveStreamAiReviewResultItem> || null}
          */
         this.ResultSet = null;
@@ -30111,35 +29947,31 @@ class ImageProcessTaskResult extends  AbstractModel {
         super();
 
         /**
-         * Task status, including PROCESSING, SUCCESS, and FAIL.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrMsg = null;
 
         /**
-         * Error message.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * Transcoding task output.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {ImageProcessTaskOutput || null}
          */
         this.Output = null;
 
         /**
-         * Transcoding progress, with a value range of [0-100].
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {number || null}
          */
         this.Progress = null;
@@ -30168,7 +30000,7 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
- * Result type of intelligent categorization task
+ * Intelligent classification task result type
  * @class
  */
 class AiAnalysisTaskClassificationResult extends  AbstractModel {
@@ -30176,19 +30008,19 @@ class AiAnalysisTaskClassificationResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -30200,13 +30032,13 @@ class AiAnalysisTaskClassificationResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of intelligent categorization task.
+         * Intelligent classification task input.
          * @type {AiAnalysisTaskClassificationInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of intelligent categorization task.
+         * 
          * @type {AiAnalysisTaskClassificationOutput || null}
          */
         this.Output = null;
@@ -30489,13 +30321,13 @@ class SmartSubtitleTaskFullTextResult extends  AbstractModel {
         super();
 
         /**
-         * Task status, which can be PROCESSING, SUCCESS, or FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -30513,21 +30345,19 @@ class SmartSubtitleTaskFullTextResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input information for smart subtitle tasks.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {SmartSubtitleTaskResultInput || null}
          */
         this.Input = null;
 
         /**
-         * Output information for smart subtitle tasks.Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {SmartSubtitleTaskTextResultOutput || null}
          */
         this.Output = null;
 
         /**
-         * Task progress.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.Progress = null;
@@ -30946,52 +30776,58 @@ class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a video content recognition template.
+         * Unique identifier of a video content recognition template.
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Name of a video content recognition template. Length limit: 64 characters.
+         * Video content recognition template name, length limited to 64 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Description of a video content recognition template. Length limit: 256 characters.
+         * Video Content Recognition template description, length limited to 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Face recognition control parameter.
+         * Face Recognition Control Parameter.
          * @type {FaceConfigureInfoForUpdate || null}
          */
         this.FaceConfigure = null;
 
         /**
-         * Full text recognition control parameter.
+         * Text Full-text Recognition Control Parameters.
          * @type {OcrFullTextConfigureInfoForUpdate || null}
          */
         this.OcrFullTextConfigure = null;
 
         /**
-         * Text keyword recognition control parameter.
+         * Text keyword recognition control parameters.
          * @type {OcrWordsConfigureInfoForUpdate || null}
          */
         this.OcrWordsConfigure = null;
 
         /**
-         * Full speech recognition control parameter.
+         * Voice full-text recognition control parameters.
          * @type {AsrFullTextConfigureInfoForUpdate || null}
          */
         this.AsrFullTextConfigure = null;
 
         /**
-         * Speech keyword recognition control parameter.
+         * Voice keyword recognition control parameters.
          * @type {AsrWordsConfigureInfoForUpdate || null}
          */
         this.AsrWordsConfigure = null;
+
+        /**
+         * Voice translation control parameters.
+         * @type {TranslateConfigureInfoForUpdate || null}
+         */
+        this.TranslateConfigure = null;
 
     }
 
@@ -31036,11 +30872,17 @@ class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
             this.AsrWordsConfigure = obj;
         }
 
+        if (params.TranslateConfigure) {
+            let obj = new TranslateConfigureInfoForUpdate();
+            obj.deserialize(params.TranslateConfigure)
+            this.TranslateConfigure = obj;
+        }
+
     }
 }
 
 /**
- * AIGC document‑to‑video input
+ * 
  * @class
  */
 class DocToVideoInput extends  AbstractModel {
@@ -31048,55 +30890,55 @@ class DocToVideoInput extends  AbstractModel {
         super();
 
         /**
-         * <p>Document link for video generation.</p><p>Supported document types: pdf, pptx, docx, png, jpg<br>Document count limit: 3<br>Document size limit: 10MB<br>Document page limit: 100</p>
+         * 
          * @type {Array.<string> || null}
          */
         this.FileUrl = null;
 
         /**
-         * <p>Prompt information for video generation.</p><p>Prompt length limit: 2,000 characters.</p>
+         * 
          * @type {string || null}
          */
         this.Prompt = null;
 
         /**
-         * <p>Document-to-video model name</p><p>Default value: Wand</p>
+         * 
          * @type {string || null}
          */
         this.ModelName = null;
 
         /**
-         * <p>Document-to-video model version number</p><p>Default value: 1.0</p>
+         * 
          * @type {string || null}
          */
         this.ModelVersion = null;
 
         /**
-         * <p>Aspect ratio of the generated video.</p><p>Enumeration values: </p><ul><li>16:9: 16:9</li><li>9:16: 9:16</li><li>1:1: 1:1</li></ul><p>Default value: 16:9</p>
+         * 
          * @type {string || null}
          */
         this.Ratio = null;
 
         /**
-         * <p>Language of the generated video.</p><p>Enumeration values: </p><ul><li>zh: Chinese</li><li>en: English</li><li>ja: Japanese</li><li>ko: Korean</li><li>ru: Russian</li><li>fr: French</li><li>es: Spanish</li><li>de: German</li></ul><p>Default value: zh</p>
+         * 
          * @type {string || null}
          */
         this.Language = null;
 
         /**
-         * <p>Video duration for reference.</p><p>This is not an exact duration; it serves as a reference for the LLM only.</p><p>Range: [15, 1200]</p><p>Unit: second</p>
+         * 
          * @type {number || null}
          */
         this.ReferenceDuration = null;
 
         /**
-         * <p>Whether the AI dubbing feature is enabled.</p><p>Default value: false</p>
+         * 
          * @type {boolean || null}
          */
         this.EnableTTS = null;
 
         /**
-         * <p>Voice ID. Valid only when AI dubbing feature is enabled.</p>
+         * 
          * @type {string || null}
          */
         this.VoiceId = null;
@@ -31132,51 +30974,48 @@ class ParseNotificationResponse extends  AbstractModel {
         super();
 
         /**
-         * The event type. Valid values:
-<li>WorkflowTask</li>
-<li>EditMediaTask</li>
-<li>ScheduleTask (scheme)</li>
+         * Supported event types. Currently, the valid values include:
+<li>WorkflowTask: video workflow processing task.</li>
+<li>EditMediaTask: video editing task.</li>
+<li>ScheduleTask: Orchestration task.</li>
          * @type {string || null}
          */
         this.EventType = null;
 
         /**
-         * The information of a video processing task. Information will be returned only if `EventType` is `WorkflowTask`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {WorkflowTask || null}
          */
         this.WorkflowTaskEvent = null;
 
         /**
-         * The information of a video editing task. Information will be returned only if `EventType` is `EditMediaTask`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {EditMediaTask || null}
          */
         this.EditMediaTaskEvent = null;
 
         /**
-         * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+         * An identifier for deduplication. If there has been a request with the same identifier within the past seven days, an error will be returned for the current request. The maximum length is 50 characters. Leaving it blank or using a null string indicates no deduplication is required.
          * @type {string || null}
          */
         this.SessionId = null;
 
         /**
-         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+         * Source context, which is used to pass through user request information. The callback for task flow status changes will return the value of this field. The maximum length is 1,000 characters.
          * @type {string || null}
          */
         this.SessionContext = null;
 
         /**
-         * The information of a scheme. Information will be returned only if `EventType` is `ScheduleTask`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ScheduleTask || null}
          */
         this.ScheduleTaskEvent = null;
 
         /**
-         * - The expiration time (Unix timestamp) of the notification's signature.
-- By default, notifications sent by MPS expire after 10 minutes. If the expiration time specified has elapsed, a notification will be considered invalid. This can prevent replay attacks.
-- The format of this parameter is a decimal Unix timestamp, i.e., the number of seconds that have elapsed since 00:00 (UTC/GMT time) on January 1, 1970.
+         * -Expiration time, event notification signature expiration UNIX timestamp.
+-The default expiration time for notifications from Media Processing Service (MPS) is 10 minutes. If the time specified by the Timestamp value in a message notification has expired, the notification can be deemed invalid, which helps prevent network replay attacks.
+-Timestamp is in decimal UNIX Timestamp format, which is the seconds elapsed since midnight (UTC/GMT) on January 1, 1970.
 
          * @type {number || null}
          */
@@ -31189,15 +31028,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Sign = null;
 
         /**
-         * Batch processing task information. this field has a value only when EventType is BatchTask.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {BatchSubTaskResult || null}
          */
         this.BatchTaskEvent = null;
 
         /**
-         * Information about the digital watermark extraction task. This field has a value only when EventType is ExtractBlindWatermark.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ExtractBlindWatermarkTask || null}
          */
         this.ExtractBlindWatermarkTask = null;
@@ -31452,7 +31289,7 @@ class VideoRedrawTaskInfo extends  AbstractModel {
 }
 
 /**
- * The execution result of a scheme.
+ * Orchestration task output
  * @class
  */
 class ActivityResult extends  AbstractModel {
@@ -31461,26 +31298,24 @@ class ActivityResult extends  AbstractModel {
 
         /**
          * Atomic task type.
-<Li>Transcode: transcoding.</li>.
-<Li>SampleSnapshot: specifies sampled screenshot taking.</li>.
-<Li>AnimatedGraphics: specifies the animated image.</li>.
-<Li>SnapshotByTimeOffset: specifies time point screenshot taking.</li>.
-<Li>ImageSprites: specifies the sprite sheet.</li>.
-<Li>AdaptiveDynamicStreaming: adaptive bitrate streaming.</li>.
-<Li>AiContentReview: specifies content moderation.</li>.
-<Li>AIRecognition: intelligent identification.</li>.
-<Li>AIAnalysis: specifies ai analysis.</li>.
+<li>Transcode: transcoding.</li>
+<li>SampleSnapshot: sampled screenshot taking.</li>
+<li>AnimatedGraphics: Animated image.</li>
+<li>SnapshotByTimeOffset: time point screenshot taking.</li>
+<li>ImageSprites: sprite sheet.</li>
+<li>AdaptiveDynamicStreaming: adaptive bitrate streaming.</li>
+<li>AiContentReview: content moderation.</li>
+<li>AIRecognition: intelligent recognition.</li>
+<li>AIAnalysis: AI analysis.</li>
 <li>AiQualityControl: media quality inspection</li>
-
 <Li>SmartSubtitles: smart subtitle</li>
-
-<Li>SmartErase: smart erasure.</li>.
+<li>SmartErase: intelligent removal.</li>
          * @type {string || null}
          */
         this.ActivityType = null;
 
         /**
-         * The execution results of the subtasks of the scheme.
+         * Atomic task output.
          * @type {ActivityResItem || null}
          */
         this.ActivityResItem = null;
@@ -31715,7 +31550,7 @@ class CreateSubtitleEmbedTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Task overview for image processing.
+ * 
  * @class
  */
 class ImageTaskInfo extends  AbstractModel {
@@ -31723,43 +31558,43 @@ class ImageTaskInfo extends  AbstractModel {
         super();
 
         /**
-         * <p>TaskId of the image processing task.</p>
+         * 
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * <p>Task status.</p><p>Enumeration values: </p><ul><li>FINISH: Task completion</li><li>PROCESSING: Task processing</li></ul>
+         * 
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * <p>Input file.</p>
+         * 
          * @type {string || null}
          */
         this.Input = null;
 
         /**
-         * <p>Creation time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
+         * 
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * <p>Processing start time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
+         * 
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * <p>End time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
+         * 
          * @type {string || null}
          */
         this.FinishTime = null;
 
         /**
-         * <p>Subtask failure identifier.</p>
+         * 
          * @type {boolean || null}
          */
         this.SubTaskHasFailed = null;
@@ -31868,7 +31703,7 @@ class CreateAIAnalysisTemplateResponse extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of video content analysis template.
+         * Unique identifier of a video analysis template.
          * @type {number || null}
          */
         this.Definition = null;
@@ -31930,7 +31765,7 @@ class CreateSmartEraseTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Result type of a sampled screenshot task
+ * Result type of the sampling screenshot task for a video
  * @class
  */
 class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
@@ -31938,51 +31773,49 @@ class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * Error message.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * Input for a sampled screenshot task.
+         * Input for the sampling screenshot task on a video.
          * @type {SampleSnapshotTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of the sampled screenshot task for videos.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {MediaSampleSnapshotItem || null}
          */
         this.Output = null;
 
         /**
-         * Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Task execution start time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * Task execution completion time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -32084,7 +31917,7 @@ class CreateDocToVideoTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Task ID.</p>
+         * 
          * @type {string || null}
          */
         this.TaskId = null;
@@ -32306,7 +32139,7 @@ class CosFileUploadTrigger extends  AbstractModel {
 }
 
 /**
- * The information about the sensitive content detected based on ASR.
+ * Asr text contains sensitive information
  * @class
  */
 class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
@@ -32314,22 +32147,22 @@ class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * The confidence score for the ASR-based detection of sensitive information. Value range: 0-100.
+         * Asr text sensitivity scoring, with a score ranging from 0 to -100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * The suggestion for handling the sensitive information detected based on ASR. Valid values:
-<li>pass</li>
-<li>review</li>
-<li>block</li>
+         * Asr text sensitive result recommendation, value ranges from...to...
+<li>pass.</li>
+<li>review.</li>
+<li>block.</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * The video segments that contain sensitive information detected based on ASR.
+         * Video segment list with Asr text suspected of sensitivity.
          * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -32524,7 +32357,7 @@ class AigcVideoReferenceVideoInfo extends  AbstractModel {
         super();
 
         /**
-         * Reference video URL, which must be accessible from the public network.
+         * Reference video url. Must be external network accessible.
 This can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.
 The ReferType parameter specifies the reference video type: feature indicates feature reference video, and base indicates video for editing.
 If the reference video is a video for editing, the first and last frames cannot be defined.
@@ -32561,7 +32394,7 @@ If the reference video is a video for editing, the first and last frames cannot 
 }
 
 /**
- * Control parameter of a full speech recognition task.
+ * Speech Full-text Recognition Task Control Parameter
  * @class
  */
 class AsrFullTextConfigureInfo extends  AbstractModel {
@@ -32569,19 +32402,25 @@ class AsrFullTextConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of a full speech recognition task. Valid values:
-<li>ON: Enables an intelligent full speech recognition task;</li>
-<li>OFF: Disables an intelligent full speech recognition task.</li>
+         * Voice full-text recognition task switch, available values:
+<li>ON: Enable intelligent voice full-text recognition task.</li>
+<li>OFF: Disables the intelligent voice full-text recognition task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Format of the generated subtitles file. If this parameter is left empty or an empty string is entered, no subtitles files will be generated. Valid value:
-<li>vtt: Generates a WebVTT subtitles file.</li>
+         * Generated subtitle file format. Leaving it as an empty string or not filling it in means no subtitle file will be generated. Available values:
+<li>vtt: Generate a WebVTT subtitle file.</li>
          * @type {string || null}
          */
         this.SubtitleFormat = null;
+
+        /**
+         * Video source language.
+         * @type {string || null}
+         */
+        this.SourceLanguage = null;
 
     }
 
@@ -32594,12 +32433,13 @@ class AsrFullTextConfigureInfo extends  AbstractModel {
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
+        this.SourceLanguage = 'SourceLanguage' in params ? params.SourceLanguage : null;
 
     }
 }
 
 /**
- * Video deduplication result data structure.
+ * Data structure of the video deduplication result.
  * @class
  */
 class AiAnalysisTaskVideoRemakeResult extends  AbstractModel {
@@ -32607,32 +32447,31 @@ class AiAnalysisTaskVideoRemakeResult extends  AbstractModel {
         super();
 
         /**
-         * Specifies the task status. valid values: `PROCESSING`, `SUCCESS`, and `FAIL`.
+         * Task status. Valid values are `PROCESSING`, `SUCCESS`, and `FAIL`.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. 0: success. other values: failure.
+         * Error code. 0: successful; other values: failed.
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * Error message.
+         * Error message
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * Deduplication task input.
+         * Task input for deduplication
          * @type {AiAnalysisTaskVideoRemakeInput || null}
          */
         this.Input = null;
 
         /**
-         * Task output.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {AiAnalysisTaskVideoRemakeOutput || null}
          */
         this.Output = null;
@@ -32743,46 +32582,52 @@ class CreateAIRecognitionTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Name of a video content recognition template. Length limit: 64 characters.
+         * Video content recognition template name, length limited to 64 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Description of a video content recognition template. Length limit: 256 characters.
+         * Video Content Recognition template description, length limited to 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Face recognition control parameter.
+         * Face Recognition Control Parameter.
          * @type {FaceConfigureInfo || null}
          */
         this.FaceConfigure = null;
 
         /**
-         * Full text recognition control parameter.
+         * Full Text Recognition Control Parameter.
          * @type {OcrFullTextConfigureInfo || null}
          */
         this.OcrFullTextConfigure = null;
 
         /**
-         * Text keyword recognition control parameter.
+         * Text keyword recognition control.
          * @type {OcrWordsConfigureInfo || null}
          */
         this.OcrWordsConfigure = null;
 
         /**
-         * Full speech recognition control parameter.
+         * Speech Full-text Recognition Control Parameter.
          * @type {AsrFullTextConfigureInfo || null}
          */
         this.AsrFullTextConfigure = null;
 
         /**
-         * Speech keyword recognition control parameter.
+         * Voice keyword recognition control parameters.
          * @type {AsrWordsConfigureInfo || null}
          */
         this.AsrWordsConfigure = null;
+
+        /**
+         * Voice translation control parameters.
+         * @type {TranslateConfigureInfo || null}
+         */
+        this.TranslateConfigure = null;
 
     }
 
@@ -32826,6 +32671,12 @@ class CreateAIRecognitionTemplateRequest extends  AbstractModel {
             this.AsrWordsConfigure = obj;
         }
 
+        if (params.TranslateConfigure) {
+            let obj = new TranslateConfigureInfo();
+            obj.deserialize(params.TranslateConfigure)
+            this.TranslateConfigure = obj;
+        }
+
     }
 }
 
@@ -32858,7 +32709,7 @@ class DescribeTaskDetailRequest extends  AbstractModel {
 }
 
 /**
- * Intelligent translation task input type.
+ * Input type of the intelligent dubbing task.
  * @class
  */
 class AiAnalysisTaskDubbingInput extends  AbstractModel {
@@ -32938,7 +32789,7 @@ The default value is `0`, which means that the canvas is as high as the first vi
 }
 
 /**
- * Porn information detection result
+ * Pornographic result info
  * @class
  */
 class AiReviewPornTaskOutput extends  AbstractModel {
@@ -32946,13 +32797,13 @@ class AiReviewPornTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of the detected porn information in video from 0 to 100.
+         * Video porn detection score, ranging from 0 to 100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for the detected porn information. Valid values:
+         * Pornographic result recommendation, value ranges from...to...
 <li>pass.</li>
 <li>review.</li>
 <li>block.</li>
@@ -32961,17 +32812,17 @@ class AiReviewPornTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * Tag of the detected porn information in video. Valid values:
-<li>porn: Porn.</li>
-<li>sexy: Sexiness.</li>
-<li>vulgar: Vulgarity.</li>
-<li>intimacy: Intimacy.</li>
+         * Video pornographic result tag, value ranges from...to...
+<li>porn: pornography.</li>
+<li>sexy: sexy.</li>
+<li>vulgar: vulgarity.</li>
+<li>intimacy: intimate behavior.</li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * List of video segments that contain the detected porn information.
+         * List of video segments suspected of containing pornographic content.
          * @type {Array.<MediaContentReviewSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -33051,13 +32902,13 @@ class AiAnalysisTaskVideoComprehensionOutput extends  AbstractModel {
         this.VideoComprehensionAnalysisResult = null;
 
         /**
-         * Video (audio) extended information.
+         * Video (Audio) understanding extended information
          * @type {string || null}
          */
         this.VideoComprehensionExtInfo = null;
 
         /**
-         * Video shot understanding result.
+         * Video shot understanding result
          * @type {Array.<VideoComprehensionResultItem> || null}
          */
         this.VideoComprehensionResultList = null;
@@ -33095,19 +32946,19 @@ class AiRecognitionTaskAsrFullTextResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -33119,21 +32970,19 @@ class AiRecognitionTaskAsrFullTextResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input information of a full speech recognition task.
+         * Input information on the full speech recognition task.
          * @type {AiRecognitionTaskAsrFullTextResultInput || null}
          */
         this.Input = null;
 
         /**
-         * Output information of a full speech recognition task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskAsrFullTextResultOutput || null}
          */
         this.Output = null;
 
         /**
-         * Task progress.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.Progress = null;
@@ -33264,8 +33113,7 @@ class ExecRulesTask extends  AbstractModel {
         super();
 
         /**
-         * Conditional judgment information.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {Array.<Rules> || null}
          */
         this.Rules = null;
@@ -33447,7 +33295,7 @@ Default value: open.
 }
 
 /**
- * Information of a sampled screenshot
+ * Sampling screenshot information
  * @class
  */
 class MediaSampleSnapshotItem extends  AbstractModel {
@@ -33455,41 +33303,41 @@ class MediaSampleSnapshotItem extends  AbstractModel {
         super();
 
         /**
-         * Sampled screenshot specification ID. For more information, please see [Sampled Screenshot Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * Sampled screenshot specification ID. Please refer to the sampling screenshot parameter template (https://www.tencentcloud.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Sample type. Valid values:
-<li>Percent: Samples at the specified percentage interval.</li>
-<li>Time: Samples at the specified time interval.</li>
+         * Sampling method, Valid value:
+<li>Percent: interval sampling based on percentage.</li>
+<li>Time: sampling based on time interval.</li>
          * @type {string || null}
          */
         this.SampleType = null;
 
         /**
          * Sampling interval
-<li>If `SampleType` is `Percent`, this value means taking a screenshot at an interval of the specified percentage.</li>
-<li>If `SampleType` is `Time`, this value means taking a screenshot at an interval of the specified time (in seconds). The first screenshot is always the first video frame.</li>
+<li>When SampleType is Percent, this value indicates how many percentage points per image.</li>
+<li>When SampleType is Time, this value indicates how many time intervals per image, in seconds. The first image is the first video frame.</li>
          * @type {number || null}
          */
         this.Interval = null;
 
         /**
-         * Storage location of a generated screenshot file.
+         * Storage location of a file after screenshot.
          * @type {TaskOutputStorage || null}
          */
         this.Storage = null;
 
         /**
-         * List of paths to generated screenshots.
+         * List of generated screenshot paths.
          * @type {Array.<string> || null}
          */
         this.ImagePathSet = null;
 
         /**
-         * List of watermarking template IDs if the screenshots are watermarked.
+         * If a screenshot is watermarked, the watermark template ID list.
          * @type {Array.<number> || null}
          */
         this.WaterMarkDefinition = null;
@@ -33527,25 +33375,25 @@ class AiRecognitionTaskOcrWordsSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * Start time offset of a recognition segment in seconds.
+         * Start time offset of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of a recognition segment in seconds.
+         * End time offset of a recognized segment, in seconds.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * Confidence of a recognition segment. Value range: 0-100.
+         * Confidence of a recognized segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+         * Zone coordinates of the recognition result. An array contains four elements: [x1, y1, x2, y2], representing the horizontal and vertical coordinates of the top-left and bottom-right corners, respectively.
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
@@ -33682,7 +33530,7 @@ class BatchProcessMediaRequest extends  AbstractModel {
 }
 
 /**
- * Query result type of a task
+ * Task query result type
  * @class
  */
 class MediaProcessTaskResult extends  AbstractModel {
@@ -33691,55 +33539,49 @@ class MediaProcessTaskResult extends  AbstractModel {
 
         /**
          * Task type. Valid values:
-<li>Transcode: Transcoding</li>
-<li>AnimatedGraphics: Animated image generating</li>
-<li>SnapshotByTimeOffset: Time point screenshot</li>
-<li>SampleSnapshot: Sampled screenshot</li>
-<li>ImageSprites: Image sprite screenshot</li>
-<li>CoverBySnapshot: Screenshot for cover image</li>
-<li>AdaptiveDynamicStreaming: Adaptive bitrate streaming</li>
+<li>Transcode: Transcode</li>
+<li>AnimatedGraphics: Animated image</li>
+<li>SnapshotByTimeOffset: time point screenshot.</li>
+<li>SampleSnapshot: sampled screenshot.</li>
+<li>ImageSprites: sprite sheet</li>
+<li>CoverBySnapshot: screencapturing for cover image.</li>
+<li>AdaptiveDynamicStreaming: adaptive bitrate streaming.</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Query result of a transcoding task, which is valid when task type is `Transcode`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaProcessTaskTranscodeResult || null}
          */
         this.TranscodeTask = null;
 
         /**
-         * Query result of an animated image generating task, which is valid when task type is `AnimatedGraphics`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaProcessTaskAnimatedGraphicResult || null}
          */
         this.AnimatedGraphicTask = null;
 
         /**
-         * Query result of a time point screenshot task, which is valid when task type is `SnapshotByTimeOffset`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaProcessTaskSnapshotByTimeOffsetResult || null}
          */
         this.SnapshotByTimeOffsetTask = null;
 
         /**
-         * Query result of a sampled screenshot task, which is valid when task type is `SampleSnapshot`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaProcessTaskSampleSnapshotResult || null}
          */
         this.SampleSnapshotTask = null;
 
         /**
-         * Query result of an image sprite screenshot task, which is valid when task type is `ImageSprite`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaProcessTaskImageSpriteResult || null}
          */
         this.ImageSpriteTask = null;
 
         /**
-         * Query result of an adaptive bitrate streaming task, which is valid if the task type is `AdaptiveDynamicStreaming`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaProcessTaskAdaptiveDynamicStreamingResult || null}
          */
         this.AdaptiveDynamicStreamingTask = null;
@@ -33880,7 +33722,7 @@ class DescribeImageTasksResponse extends  AbstractModel {
 }
 
 /**
- * The live stream translation result.
+ * Live stream real-time translation result
  * @class
  */
 class LiveStreamTransTextRecognitionResult extends  AbstractModel {
@@ -33888,31 +33730,31 @@ class LiveStreamTransTextRecognitionResult extends  AbstractModel {
         super();
 
         /**
-         * The text transcript.
+         * Recognized text.
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * The PTS (seconds) of the start of a segment.
+         * Start PTS time of a translated fragment, in seconds.
          * @type {number || null}
          */
         this.StartPtsTime = null;
 
         /**
-         * The PTS (seconds) of the end of a segment.
+         * End PTS time of a translated segment, in seconds.
          * @type {number || null}
          */
         this.EndPtsTime = null;
 
         /**
-         * The confidence score for a segment. Value range: 0-100.
+         * Confidence of a translated segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * The translation.
+         * Translated text.
          * @type {string || null}
          */
         this.Trans = null;
@@ -33936,8 +33778,7 @@ class LiveStreamTransTextRecognitionResult extends  AbstractModel {
         this.SteadyState = null;
 
         /**
-         * User ID in the result of real-time translation via WebSocket and TRTC.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.UserId = null;
@@ -34192,7 +34033,7 @@ class EnableWorkflowResponse extends  AbstractModel {
 }
 
 /**
- * A subtask of a scheme.
+ * Orchestrate atomic tasks
  * @class
  */
 class Activity extends  AbstractModel {
@@ -34201,21 +34042,21 @@ class Activity extends  AbstractModel {
 
         /**
          * Atomic task type.
-<li>input: starting node.</li>.
-<li>output: termination node.</li>.
-<li>action-trans: specifies transcoding.</li>.
-<li>action-samplesnapshot: specifies sampled screenshot taking.</li>.
-<li>action-AIAnalysis: analysis.</li>.
-<li>action-AIRecognition: recognition.</li>.
-<li>action-aiReview: specifies the review action.</li>.
-<li>action-animated-graphics: specifies the animated image.</li>.
-<li>action-image-sprite: specifies the sprite sheet.</li>.
-<li>action-snapshotByTimeOffset: specifies time point screenshot taking.</li>.
-<li>action-adaptive-substream: specifies the adaptive bitrate stream.</li>.
-<li>action-AIQualityControl: media quality inspection.</li>.
-<li>action-SmartSubtitles: smart subtitling.</li>.
-<li>action-exec-rules: judgment rule.</li>.
-<li>action-SmartErase: smart erasure.</li>.
+<li>input: start node.</li>
+<li>output: termination node.</li>
+<li>action-trans: transcoding.</li>
+<li>action-samplesnapshot: sampled screenshot taking.</li>
+<li>action-AIAnalysis: analysis</li>
+<li>action-AIRecognition: recognition.</li>
+<li>action-aiReview: review</li>
+<li>action-animated-graphics: animated image</li>
+<li>action-image-sprite: sprite sheet</li>
+<li>action-snapshotByTimeOffset: time point screenshot taking</li>
+<li>action-adaptive-substream: adaptive bitrate streaming.</li>
+<li>action-AIQualityControl: media quality inspection.</li>
+<li>action-SmartSubtitles: smart subtitle</li>
+<li>action-exec-rules: judgment rule</li>
+<li>action-SmartErase: intelligent removal.</li>
 
 
 
@@ -34224,14 +34065,13 @@ class Activity extends  AbstractModel {
         this.ActivityType = null;
 
         /**
-         * Rear node index array.
+         * Rear drive node index array
          * @type {Array.<number> || null}
          */
         this.ReardriveIndex = null;
 
         /**
-         * The parameters of a subtask.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ActivityPara || null}
          */
         this.ActivityPara = null;
@@ -34295,7 +34135,7 @@ class AiSampleWordInfo extends  AbstractModel {
 }
 
 /**
- * Adaptive bitrate streaming information
+ * Adaptive Bitrate Streaming information
  * @class
  */
 class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
@@ -34309,19 +34149,19 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * Container format. Valid values: HLS, MPEG-DASH.
+         * Packaging format, which may be two kinds: HLS and MPEG-DASH.
          * @type {string || null}
          */
         this.Package = null;
 
         /**
-         * Playback address.
+         * Playback path.
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * Storage location of adaptive bitrate streaming files.
+         * Storage location of the adaptive bitrate stream file.
          * @type {TaskOutputStorage || null}
          */
         this.Storage = null;
@@ -34626,7 +34466,7 @@ class Project extends  AbstractModel {
 }
 
 /**
- * The result of a content moderation task of a scheme.
+ * Orchestrate the moderation job result type
  * @class
  */
 class ScheduleReviewTaskResult extends  AbstractModel {
@@ -34634,41 +34474,52 @@ class ScheduleReviewTaskResult extends  AbstractModel {
         super();
 
         /**
-         * The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task has failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * The error code. 0 indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * The error message.
+         * Error message.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * The input of the content moderation task.
+         * Review task input.
          * @type {AiContentReviewTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * The output of the content moderation task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<AiContentReviewResult> || null}
          */
         this.Output = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
 
     }
 
@@ -34698,6 +34549,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.Output.push(obj);
             }
         }
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -34793,18 +34646,13 @@ class LiveStreamRecordResultInfo extends  AbstractModel {
         super();
 
         /**
-         * Whether recording ends.
-0: Recording does not end, returning a single file.
-1: Recording ends, returning all recording files.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.RecordOver = null;
 
         /**
-         * File list.
-
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<LiveRecordFile> || null}
          */
         this.FileResults = null;
@@ -35577,7 +35425,7 @@ Default: 0.0.
 }
 
 /**
- * Result of porn information detection in image in AI-based live stream content audit
+ * Live stream AI content review image pornographic result
  * @class
  */
 class LiveStreamAiReviewImagePornResult extends  AbstractModel {
@@ -35585,25 +35433,25 @@ class LiveStreamAiReviewImagePornResult extends  AbstractModel {
         super();
 
         /**
-         * Start PTS time of a suspected segment in seconds.
+         * Start PTS time of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.StartPtsTime = null;
 
         /**
-         * End PTS time of a suspected segment in seconds.
+         * End PTS time of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.EndPtsTime = null;
 
         /**
-         * Score of a suspected porn segment.
+         * Suspected segment porn score.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for porn information detection of a suspected segment. Valid values:
+         * Pornographic result suggestion for suspected segment, value ranges from...to...
 <li>pass</li>
 <li>review</li>
 <li>block</li>
@@ -35612,24 +35460,24 @@ class LiveStreamAiReviewImagePornResult extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * Tag of the detected porn information in video. Valid values:
-<li>porn: Porn.</li>
-<li>sexy: Sexiness.</li>
-<li>vulgar: Vulgarity.</li>
-<li>intimacy: Intimacy.</li>
+         * Pornographic result tag for video, value ranges from...to...
+<li>porn: pornography.</li>
+<li>sexy: sexy.</li>
+<li>vulgar: vulgarity.</li>
+<li>intimacy: intimate behavior.</li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * URL of a suspected image (which will not be permanently stored
-and will be deleted after `PicUrlExpireTime`).
+         * Suspected image URL (Images are not retained permanently upon arrival)
+The image will be deleted after the PicUrlExpireTime time point.
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Expiration time of the suspected image URL, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -35683,7 +35531,7 @@ class DeleteProjectRequest extends  AbstractModel {
 }
 
 /**
- * Input type of intelligent frame-specific tagging task
+ * Intelligent frame tagging task input type
  * @class
  */
 class AiAnalysisTaskFrameTagInput extends  AbstractModel {
@@ -35718,7 +35566,7 @@ class AiAnalysisTaskFrameTagInput extends  AbstractModel {
 }
 
 /**
- * List of frame-specific tag segments
+ * Frame tagging segments
  * @class
  */
 class MediaAiAnalysisFrameTagSegmentItem extends  AbstractModel {
@@ -35726,19 +35574,19 @@ class MediaAiAnalysisFrameTagSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * Start time offset of frame-specific tag.
+         * Offset time starting from frame tagging.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of frame-specific tag.
+         * Offset time for frame tagging completion.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * List of tags in time period.
+         * Tag list within the time segment.
          * @type {Array.<MediaAiAnalysisFrameTagItem> || null}
          */
         this.TagSet = null;
@@ -35782,7 +35630,7 @@ class AiRecognitionTaskAsrWordsResultItem extends  AbstractModel {
         this.Word = null;
 
         /**
-         * List of time segments that contain the speech keyword.
+         * List of segments for the time when speech keywords occur.
          * @type {Array.<AiRecognitionTaskAsrWordsSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -36130,7 +35978,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Intelligent translation result type.
+ * Intelligent translation result type
  * @class
  */
 class AiAnalysisTaskDubbingResult extends  AbstractModel {
@@ -36138,13 +35986,13 @@ class AiAnalysisTaskDubbingResult extends  AbstractModel {
         super();
 
         /**
-         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. `0`: Task successful. Other values: Task failed.
+         * Error code. 0: Task successful. Other values: Task failed.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -36156,14 +36004,13 @@ class AiAnalysisTaskDubbingResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Describes the task input for intelligent translation.
+         * Intelligent dubbing task input.
          * @type {AiAnalysisTaskDubbingInput || null}
          */
         this.Input = null;
 
         /**
-         * Describes the task output of intelligent translation.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {AiAnalysisTaskDubbingOutput || null}
          */
         this.Output = null;
@@ -36464,7 +36311,7 @@ class CloneViralPersona extends  AbstractModel {
 }
 
 /**
- * Reference audio information.
+ * 
  * @class
  */
 class AigcVideoReferenceAudioInfo extends  AbstractModel {
@@ -36472,7 +36319,7 @@ class AigcVideoReferenceAudioInfo extends  AbstractModel {
         super();
 
         /**
-         * <p>Reference audio URL, which must be accessible from the public network.</p>
+         * 
          * @type {string || null}
          */
         this.AudioUrl = null;
@@ -36576,7 +36423,7 @@ class QueryTaskFilter extends  AbstractModel {
 }
 
 /**
- * Control parameter of a full text recognition task
+ * Full Text Recognition Task Control Parameter
  * @class
  */
 class OcrFullTextConfigureInfoForUpdate extends  AbstractModel {
@@ -36584,9 +36431,9 @@ class OcrFullTextConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of a full text recognition task. Valid values:
-<li>ON: Enables an intelligent full text recognition task;</li>
-<li>OFF: Disables an intelligent full text recognition task.</li>
+         * Task switch for full text recognition, available values:
+<li>ON: Enable intelligent full text recognition task;</li>
+<li>OFF: Disables the intelligent full text recognition task.</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -36621,15 +36468,15 @@ class SubtitleLayoutConfig extends  AbstractModel {
 
         /**
          * Line spacing. The value should be a positive integer.
--Value range for pixels: [0, 1000].
-- Value range for percentages: [0, 100]. If this is not specified, the default value is 0.
+- Value range for pixels: [0, 1000].
+- Value range for percentages: [0, 100]. If left blank, the default is 0.
 
          * @type {number || null}
          */
         this.LineSpacing = null;
 
         /**
-         * LineSpacing unit, 0 pixel, 1 percentage, defaults to 0, pixel
+         * LineSpacing measurement unit, 0 pixel, 1 percentage, defaults to 0, pixel
 
          * @type {number || null}
          */
@@ -36734,7 +36581,7 @@ Default value: 0 px.
 }
 
 /**
- * Input for full text recognition.
+ * Full text recognition user-submitted input.
  * @class
  */
 class AiRecognitionTaskOcrFullTextResultInput extends  AbstractModel {
@@ -37103,7 +36950,7 @@ class AiRecognitionTaskFaceResultInput extends  AbstractModel {
         super();
 
         /**
-         * Face recognition template ID.
+         * Face Recognition template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -37164,7 +37011,7 @@ Default value: loudNorm.
 }
 
 /**
- * The sensitive information detected.
+ * Sensitive information
  * @class
  */
 class AiReviewPoliticalTaskOutput extends  AbstractModel {
@@ -37172,32 +37019,32 @@ class AiReviewPoliticalTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * The confidence score for the detection of sensitive information. Value range: 0-100.
+         * Video sensitive content score, ranging from 0 to 100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * The suggestion for handling the sensitive information detected. Valid values:
-<li>pass</li>
-<li>review</li>
-<li>block</li>
+         * Result Suggestions for sensitive content, value ranges from...to...
+<li>pass.</li>
+<li>review.</li>
+<li>block.</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * The labels for the detected sensitive content. The relationship between the values of this parameter and those of the `LabelSet` parameter in [PoliticalImgReviewTemplateInfo](https://intl.cloud.tencent.com/document/api/862/37615?from_cn_redirect=1#AiReviewPoliticalTaskOutput) is as follows:
+         * Video sensitive content result tag. The mapping between the LabelSet parameter in the content moderation template's visual sensitive content task control parameter (https://www.tencentcloud.com/document/api/862/37615?from_cn_redirect=1#AiReviewPoliticalTaskOutput) and the parameter value range of this parameter:
 violation_photo:
-<li>violation_photo (banned icons)</li>
-Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
-<li>politician</li>
+<li>violation_photo: violation icon.</li>
+Other (i.e., politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
+<li>politician: sensitive person.</li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * The video segments that contain sensitive information.
+         * List of video segments suspected of containing sensitive content.
          * @type {Array.<MediaContentReviewPoliticalSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -37228,7 +37075,7 @@ Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/mili
 }
 
 /**
- * The result of sensitive information detection.
+ * Content review sensitive task result type
  * @class
  */
 class AiReviewTaskPoliticalResult extends  AbstractModel {
@@ -37236,19 +37083,19 @@ class AiReviewTaskPoliticalResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -37260,14 +37107,13 @@ class AiReviewTaskPoliticalResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * The input parameter for sensitive information detection.
+         * Content review sensitive task input.
          * @type {AiReviewPoliticalTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * The output of sensitive information detection.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewPoliticalTaskOutput || null}
          */
         this.Output = null;
@@ -37310,7 +37156,8 @@ class SelectingSubtitleAreasConfig extends  AbstractModel {
         super();
 
         /**
-         * Automatically selects custom areas.For the selected areas, the AI model is used to automatically detect and extract the target content.
+         * Automatically select a custom region.
+For the selected areas, the AI model is used to automatically detect and extract the target content.
          * @type {Array.<EraseArea> || null}
          */
         this.AutoAreas = null;
@@ -37352,7 +37199,7 @@ class SelectingSubtitleAreasConfig extends  AbstractModel {
 }
 
 /**
- * The translation result.
+ * Translation result.
  * @class
  */
 class AiRecognitionTaskTransTextResultOutput extends  AbstractModel {
@@ -37360,13 +37207,13 @@ class AiRecognitionTaskTransTextResultOutput extends  AbstractModel {
         super();
 
         /**
-         * The translated segments.
+         * Translate segments.
          * @type {Array.<AiRecognitionTaskTransTextSegmentItem> || null}
          */
         this.SegmentSet = null;
 
         /**
-         * The subtitle URL.
+         * Subtitle file path.
          * @type {string || null}
          */
         this.SubtitlePath = null;
@@ -37661,8 +37508,7 @@ class SyncDubbingResponse extends  AbstractModel {
         this.Msg = null;
 
         /**
-         * <p>Synthetic audio in Base64 encoding and WAV format.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.AudioData = null;
@@ -37674,8 +37520,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AudioUrl = null;
 
         /**
-         * <p>Cloned voice ID.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.VoiceId = null;
@@ -37801,15 +37646,13 @@ class AsrHotWordsConfigure extends  AbstractModel {
         super();
 
         /**
-         * Hotword switch.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Hotword lexicon ID.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.LibraryId = null;
@@ -37885,7 +37728,7 @@ For example, [101, 85, 111, —].
 }
 
 /**
- * Result of AI-based live stream audit
+ * Live stream AI review result
  * @class
  */
 class LiveStreamAiReviewResultItem extends  AbstractModel {
@@ -37893,35 +37736,35 @@ class LiveStreamAiReviewResultItem extends  AbstractModel {
         super();
 
         /**
-         * The type of moderation result. Valid values:
-<li>ImagePorn</li>
-<li>ImageTerrorism</li>
-<li>ImagePolitical</li>
-<li>VoicePorn</li>
+         * Review result type. Valid values:
+<li>ImagePorn: image porn detection.</li>
+<li>ImageTerrorism: image terrorism.</li>
+<li>ImagePolitical: image political sensitivity.</li>
+<li>VoicePorn: sound rule violation.</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Result of porn information detection in image, which is valid when `Type` is `ImagePorn`.
+         * Image porn detection result, valid when Type is ImagePorn.
          * @type {Array.<LiveStreamAiReviewImagePornResult> || null}
          */
         this.ImagePornResultSet = null;
 
         /**
-         * The result of detecting sensitive information in images, which is valid if `Type` is `ImageTerrorism`.
+         * Result of image terrorism detection, valid when Type is ImageTerrorism.
          * @type {Array.<LiveStreamAiReviewImageTerrorismResult> || null}
          */
         this.ImageTerrorismResultSet = null;
 
         /**
-         * The result of detecting sensitive information in images, which is valid if `Type` is `ImagePolitical`.
+         * The result of image sensitivity, valid when Type is ImagePolitical.
          * @type {Array.<LiveStreamAiReviewImagePoliticalResult> || null}
          */
         this.ImagePoliticalResultSet = null;
 
         /**
-         * The result for moderation of pornographic content in audio. This parameter is valid if `Type` is `VoicePorn`.
+         * Result of sound rule violation, valid when Type is VoicePorn.
          * @type {Array.<LiveStreamAiReviewVoicePornResult> || null}
          */
         this.VoicePornResultSet = null;
@@ -37977,7 +37820,7 @@ class LiveStreamAiReviewResultItem extends  AbstractModel {
 }
 
 /**
- * Intelligent erasure template subtitle configuration.
+ * Subtitle removal configuration for the smart erasing template.
  * @class
  */
 class SmartEraseSubtitleConfig extends  AbstractModel {
@@ -38572,7 +38415,7 @@ class DescribeTasksRequest extends  AbstractModel {
 }
 
 /**
- * Control parameter of a face recognition task
+ * Face Recognition Task Control Parameter
  * @class
  */
 class FaceConfigureInfoForUpdate extends  AbstractModel {
@@ -38580,40 +38423,40 @@ class FaceConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of a face recognition task. Valid values:
-<li>ON: Enables an intelligent face recognition task;</li>
-<li>OFF: Disables an intelligent face recognition task.</li>
+         * Face Recognition task switch. Valid values:
+<li>ON: Enable intelligent face recognition task.</li>
+<li>OFF: Disables the intelligent face recognition task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0-100.
+         * Face recognition filter score. Returns the recognition result when the recognition result reaches this score or higher. Value ranges from 0 to 100.
          * @type {number || null}
          */
         this.Score = null;
 
         /**
-         * The default face filter labels, which specify the types of faces to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
-<li>entertainment (people in the entertainment industry)</li>
-<li>sport (sports celebrities)</li>
-<li>politician</li>
+         * Default character filter tag. Specify the tag of the default character to be returned. If left blank or empty, all default character results will be returned. Tag value range:
+<li>entertainment: entertainment star;</li>
+<li>Sport: sports celebrity;</li>
+<li>politician: sensitive person.</li>
          * @type {Array.<string> || null}
          */
         this.DefaultLibraryLabelSet = null;
 
         /**
-         * Custom face tags for filter, which specify the face recognition results to return. If this parameter is not specified or left empty, the recognition results for all custom face tags are returned.
-Up to 100 tags are allowed, each containing no more than 16 characters.
+         * User-defined character filter tag. Specify the tag of the user-defined character to return. If left blank or empty, all custom character results are returned.
+The number of tags is up to 100, and each tag can have up to 16 characters.
          * @type {Array.<string> || null}
          */
         this.UserDefineLibraryLabelSet = null;
 
         /**
-         * Figure library. Valid values:
-<li>Default: Default figure library;</li>
-<li>UserDefine: Custom figure library.</li>
-<li>All: Both default and custom figure libraries will be used.</li>
+         * Figure library selection. Available values:
+<li>Default: Use default character library;</li>
+<li>UserDefine: Use the user-defined character library.</li>
+<li>All: Use default character library and user-defined character library simultaneously.</li>
          * @type {string || null}
          */
         this.FaceLibrary = null;
@@ -38672,7 +38515,7 @@ class CreateTranscodeTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Input for speech keyword recognition.
+ * Speech keyword recognition input.
  * @class
  */
 class AiRecognitionTaskAsrWordsResultInput extends  AbstractModel {
@@ -38708,37 +38551,37 @@ class CreateAIAnalysisTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Video content analysis template name. Length limit: 64 characters.
+         * Name of the video analysis template, length limited to 64 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Video content analysis template description. Length limit: 256 characters.
+         * Description of the video analysis template, length limited to 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Control parameter of intelligent categorization task.
+         * Intelligent Classification Task Control Parameters.
          * @type {ClassificationConfigureInfo || null}
          */
         this.ClassificationConfigure = null;
 
         /**
-         * Control parameter of intelligent tagging task.
+         * Intelligent tag task control parameter.
          * @type {TagConfigureInfo || null}
          */
         this.TagConfigure = null;
 
         /**
-         * Control parameter of intelligent cover generating task.
+         * Intelligent Cover Task Control Parameters.
          * @type {CoverConfigureInfo || null}
          */
         this.CoverConfigure = null;
 
         /**
-         * Control parameter of intelligent frame-specific tagging task.
+         * Intelligent frame-specific tagging task control parameter.
          * @type {FrameTagConfigureInfo || null}
          */
         this.FrameTagConfigure = null;
@@ -38783,7 +38626,7 @@ class CreateAIAnalysisTemplateRequest extends  AbstractModel {
 }
 
 /**
- * The input parameter for the detection of sensitive information.
+ * Content review sensitive task input parameter type
  * @class
  */
 class AiReviewTerrorismTaskInput extends  AbstractModel {
@@ -38791,7 +38634,7 @@ class AiReviewTerrorismTaskInput extends  AbstractModel {
         super();
 
         /**
-         * The template ID.
+         * Template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -38991,7 +38834,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * The result of detecting sensitive information in live streaming videos.
+ * Live stream AI content review image sensitive result
  * @class
  */
 class LiveStreamAiReviewImageTerrorismResult extends  AbstractModel {
@@ -38999,25 +38842,25 @@ class LiveStreamAiReviewImageTerrorismResult extends  AbstractModel {
         super();
 
         /**
-         * Start PTS time of a suspected segment in seconds.
+         * Start PTS time of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.StartPtsTime = null;
 
         /**
-         * End PTS time of a suspected segment in seconds.
+         * End PTS time of a suspected segment, in seconds.
          * @type {number || null}
          */
         this.EndPtsTime = null;
 
         /**
-         * The confidence score for the detected sensitive segments.
+         * Suspected segment sensitivity score.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * The suggestion for handling the sensitive segments. Valid values:
+         * Suspected segment sensitive result suggestion, permissible range:
 <li>pass</li>
 <li>review</li>
 <li>block</li>
@@ -39026,28 +38869,28 @@ class LiveStreamAiReviewImageTerrorismResult extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * The labels for the detected sensitive content. Valid values:
-<li>guns</li>
-<li>crowd</li>
-<li>police</li>
-<li>bloody</li>
-<li>banners (sensitive flags)</li>
-<li>militant</li>
-<li>explosion</li>
-<li>terrorists</li>
+         * Video sensitive content result tag, value ranges from...to...
+<li>guns: weapons and firearms.</li>
+<li>crowd: crowd gathering.</li>
+<li>police: police force.</li>
+<li>bloody: graphic violence.</li>
+<li>banners: sensitive flags.</li>
+<li>militant: militant.</li>
+<li>explosion: explosions and fires.</li>
+<li>terrorists: sensitive persons.</li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * URL of a suspected image (which will not be permanently stored
-and will be deleted after `PicUrlExpireTime`).
+         * Suspected image URL (Images are not retained permanently upon arrival)
+The image will be deleted after the PicUrlExpireTime time point.
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Expiration time of the suspected image URL, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -39081,7 +38924,7 @@ class ProcessLiveStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports LEB live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
+         * <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
          * @type {string || null}
          */
         this.Url = null;
@@ -39228,23 +39071,19 @@ class AiAnalysisTaskHorizontalToVerticalOutput extends  AbstractModel {
         super();
 
         /**
-         * Intelligent landscape-to-portrait video list.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * Storage location of intelligent landscape-to-portrait videos.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Confidence.	
-	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.Confidence = null;
@@ -39321,7 +39160,7 @@ class DescribeSmartEraseTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Input parameter type of OCR-based prohibited information detection in text task in content audit
+ * Content review Ocr text prohibited information recognition task input parameter type
  * @class
  */
 class AiReviewProhibitedOcrTaskInput extends  AbstractModel {
@@ -39329,7 +39168,7 @@ class AiReviewProhibitedOcrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Prohibited information detection template ID.
+         * Prohibited information recognition template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -39488,7 +39327,7 @@ You can select multiple elements, which are connected by OR logic. If a usage co
 }
 
 /**
- * cos information. Stores user‑provided cos information for saving results
+ * 
  * @class
  */
 class DocToVideoCosInfo extends  AbstractModel {
@@ -39496,19 +39335,19 @@ class DocToVideoCosInfo extends  AbstractModel {
         super();
 
         /**
-         * <p>cos bucket region</p>
+         * 
          * @type {string || null}
          */
         this.CosBucketRegion = null;
 
         /**
-         * <p>cos bucket name</p>
+         * 
          * @type {string || null}
          */
         this.CosBucketName = null;
 
         /**
-         * <p>cos bucket path</p>
+         * 
          * @type {string || null}
          */
         this.CosBucketPath = null;
@@ -39716,7 +39555,7 @@ class CreateSmartSubtitleTemplateRequest extends  AbstractModel {
         this.VideoSrcLanguage = null;
 
         /**
-         * <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
+         * <p>Smart subtitle language type.<br>0: source language.<br>1: target language.<br>2: source language and target language.<br>Only 0 is supported when TranslateSwitch is OFF.<br>Only 1 or 2 is supported when TranslateSwitch is ON.</p>
          * @type {number || null}
          */
         this.SubtitleType = null;
@@ -40150,7 +39989,7 @@ class CloneViralResponse extends  AbstractModel {
 }
 
 /**
- * Live stream AI recognition results
+ * Live streaming AI recognition result
  * @class
  */
 class LiveStreamAiRecognitionResultInfo extends  AbstractModel {
@@ -40672,7 +40511,7 @@ class EmbeddingResultItem extends  AbstractModel {
 }
 
 /**
- * Content audit result
+ * Content moderation result
  * @class
  */
 class AiContentReviewResult extends  AbstractModel {
@@ -40681,96 +40520,88 @@ class AiContentReviewResult extends  AbstractModel {
 
         /**
          * Task type. Valid values:
-<li>Porn (in images)</li>
-<li>Terrorism (in images)</li>
-<li>Political (in images)</li>
-<li>Porn.Asr</li>
-<li>Porn.Ocr</li>
-<li>Political.Asr</li>
-<li>Political.Ocr</li>
-<li>Terrorism.Ocr</li>
-<li>Prohibited.Asr</li>
-<li>Prohibited.Ocr</li>
+<li>Porn: porn detection.</li>
+<li>Terrorism: sensitive image.</li>
+<li>Political: sensitive image.</li>
+<li>Porn.Asr: Pornography detection in ASR text</li>
+<li>Porn.Ocr: Pornography detection in OCR text</li>
+<li>Political.Asr: ASR text sensitivity</li>
+<li>Political.Ocr: OCR text sensitivity</li>
+<li>Terrorism.Ocr: OCR text sensitivity</li>
+<li>Prohibited.Asr: ASR text prohibited information recognition</li>
+<li>Prohibited.Ocr: OCR text prohibited information recognition</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Sample rate, which indicates the number of video frames captured per second for audit
+         * Sampling frequency, i.e., the number of frames captured per second for video review.
          * @type {number || null}
          */
         this.SampleRate = null;
 
         /**
-         * Audited video duration in seconds.
+         * Video duration for review, in seconds.
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
-         * Query result of an intelligent porn information detection in image task in video content audit, which is valid when task type is `Porn`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewTaskPornResult || null}
          */
         this.PornTask = null;
 
         /**
-         * The result of detecting terrorism content in images, which is valid when the task type is `Terrorism`.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewTaskTerrorismResult || null}
          */
         this.TerrorismTask = null;
 
         /**
-         * The result of detecting politically sensitive information in images, which is valid when the task type is `Political`.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewTaskPoliticalResult || null}
          */
         this.PoliticalTask = null;
 
         /**
-         * Query result of an ASR-based porn information detection in text task in video content audit, which is valid when task type is `Porn.Asr`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewTaskPornAsrResult || null}
          */
         this.PornAsrTask = null;
 
         /**
-         * Query result of an OCR-based porn information detection in text task in video content audit, which is valid when task type is `Porn.Ocr`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewTaskPornOcrResult || null}
          */
         this.PornOcrTask = null;
 
         /**
-         * The result of detecting politically sensitive information based on ASR, which is valid when the task type is `Political.Asr`.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewTaskPoliticalAsrResult || null}
          */
         this.PoliticalAsrTask = null;
 
         /**
-         * The result of detecting politically sensitive information based on OCR, which is valid when the task type is `Political.Ocr`.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewTaskPoliticalOcrResult || null}
          */
         this.PoliticalOcrTask = null;
 
         /**
-         * The result of detecting terrorism content based on OCR, which is valid when task type is `Terrorism.Ocr`.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewTaskTerrorismOcrResult || null}
          */
         this.TerrorismOcrTask = null;
 
         /**
-         * Query result of ASR-based prohibited information detection in speech task in video content audit, which is valid if task type is `Prohibited.Asr`.
+         * 
          * @type {AiReviewTaskProhibitedAsrResult || null}
          */
         this.ProhibitedAsrTask = null;
 
         /**
-         * Query result of OCR-based prohibited information detection in text task in video content audit, which is valid if task type is `Prohibited.Ocr`.
+         * 
          * @type {AiReviewTaskProhibitedOcrResult || null}
          */
         this.ProhibitedOcrTask = null;
@@ -40903,13 +40734,13 @@ class CreateAigcImageTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Model name.<br>Supported models:<br>Hunyuan.<br>Qwen.<br>Vidu.<br>Kling.<br>MJ.</p>
+         * 
          * @type {string || null}
          */
         this.ModelName = null;
 
         /**
-         * <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hunyuan: [3.0].</li><li>Vidu: [q2].</li><li>Kling: [2.1, O1, 3.0, and 3.0-Omni].</li><li>Qwen: [0925].</li><li>MJ: [v7].</li></ol>
+         * 
          * @type {string || null}
          */
         this.ModelVersion = null;
@@ -40939,7 +40770,7 @@ class CreateAigcImageTaskRequest extends  AbstractModel {
         this.EnhancePrompt = null;
 
         /**
-         * <p>Reference resource images. By default, one image can be specified.</p><p>Models supporting multiple images:</p><ol><li>Kling 2.1 supports up to 4 images as resource image input.</li><li>Kling 3.0-Omni supports up to 10 images as resource image input.</li><li>Kling O1 supports up to 10 images as resource image input.</li><li>Vidu q2 supports up to 7 images as resource image input.</li><li>Hunyuan 3.0 supports up to 3 images as resource image input.</li><li>MJ v7 supports up to 3 images as resource image input.</li></ol><p>Note:</p><ol><li>The recommended image size is less than 7 MB. Different models have different limits.</li><li>Supported image formats: JPEG, PNG, and WebP.</li></ol>
+         * 
          * @type {Array.<AigcImageInfo> || null}
          */
         this.ImageInfos = null;
@@ -41113,60 +40944,49 @@ class AsrHotwordsSet extends  AbstractModel {
         super();
 
         /**
-         * Hotword lexicon ID.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.HotwordsId = null;
 
         /**
-         * Current hotword lexicon status. The value indicates the number of smart subtitle templates bound to this hotword lexicon.
-If the value of Status is 0, it indicates that the hotword lexicon is not referenced by any smart subtitle template and that it can be deleted.
-If the value of Status is not 0, it indicates that the hotword lexicon cannot be deleted.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Hotword lexicon name.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Number of hotwords in the hotword lexicon.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {number || null}
          */
         this.WordCount = null;
 
         /**
-         * Name of the uploaded hotword file.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.FileName = null;
 
         /**
-         * Creation time of the hotword lexicon in ISO datetime format (UTC time). For example, 2006-01-02T15:04:05Z.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Creation time of the hotword lexicon in ISO datetime format (UTC time). For example, 2006-01-02T15:04:05Z.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * 0: temporary hotword lexicon
-1: file-based hotword lexicon
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {number || null}
          */
         this.Type = null;
@@ -42030,7 +41850,7 @@ Default value: open.
 }
 
 /**
- * Control parameter of intelligent frame-specific tagging task
+ * Intelligent Frame Tagging Task Control Parameter
  * @class
  */
 class FrameTagConfigureInfo extends  AbstractModel {
@@ -42038,9 +41858,9 @@ class FrameTagConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of intelligent frame-specific tagging task. Valid values:
-<li>ON: enables intelligent frame-specific tagging task;</li>
-<li>OFF: disables intelligent frame-specific tagging task.</li>
+         * Intelligent frame tagging task switch. Valid values:
+<li>ON: Enable intelligent frame-specific tagging task.</li>
+<li>OFF: Disables the intelligent frame-specific tagging task.</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -42131,15 +41951,13 @@ class AiAnalysisTaskHeadTailOutput extends  AbstractModel {
         super();
 
         /**
-         * Opening segment PTS.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.HeadTimeOffset = null;
 
         /**
-         * Closing segment PTS.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.TailTimeOffset = null;
@@ -42186,8 +42004,7 @@ class DescribeVoicesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * <p>Available voice list.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<VoiceInfo> || null}
          */
         this.Voices = null;
@@ -42346,8 +42163,7 @@ class LiveStreamObjectRecognitionResult extends  AbstractModel {
         this.AreaCoordSet = null;
 
         /**
-         * Screenshot link.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Url = null;
@@ -42380,15 +42196,13 @@ class DescribeImageTaskDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Task type. Valid value: </p><li>WorkflowTask: Workflow processing task.</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.TaskType = null;
 
         /**
-         * <p>Task status. Valid values: </p><li>WAITING: Waiting; </li><li>PROCESSING: Processing; </li><li>FINISH: Completed.</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Status = null;
@@ -42412,22 +42226,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Message = null;
 
         /**
-         * <p>Execution status and result of the image processing task.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<ImageProcessTaskResult> || null}
          */
         this.ImageProcessTaskResultSet = null;
 
         /**
-         * <p>Task creation time, in <a href="https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52">ISO date and time format</a>.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * <p>Task completion time, in <a href="https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52">ISO date and time format</a>.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -42805,13 +42616,13 @@ class AiRecognitionTaskObjectResult extends  AbstractModel {
         super();
 
         /**
-         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. `0`: Task successful. Other values: Task failed.
+         * Error code. 0: Task successful. Other values: Task failed.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -42829,7 +42640,7 @@ class AiRecognitionTaskObjectResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * Object recognition task output.Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskObjectResultOutput || null}
          */
         this.Output = null;
@@ -43071,19 +42882,19 @@ class AiRecognitionTaskAsrWordsResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -43095,14 +42906,13 @@ class AiRecognitionTaskAsrWordsResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input information of a speech keyword recognition task.
+         * Input for the speech keyword recognition task.
          * @type {AiRecognitionTaskAsrWordsResultInput || null}
          */
         this.Input = null;
 
         /**
-         * Output information of a speech keyword recognition task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskAsrWordsResultOutput || null}
          */
         this.Output = null;
@@ -43173,13 +42983,13 @@ class AiAnalysisTaskHeadTailResult extends  AbstractModel {
         super();
 
         /**
-         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. `0`: Task successful. Other values: Task failed.
+         * Error code. 0: Task successful. Other values: Task failed.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -43197,7 +43007,7 @@ class AiAnalysisTaskHeadTailResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * Opening and closing segments recognition task output.Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskHeadTailOutput || null}
          */
         this.Output = null;
@@ -43327,7 +43137,7 @@ Default value: black.
 }
 
 /**
- * The information of the media processing task.
+ * Media Processing Service task information
  * @class
  */
 class WorkflowTask extends  AbstractModel {
@@ -43335,7 +43145,7 @@ class WorkflowTask extends  AbstractModel {
         super();
 
         /**
-         * The media processing task ID.
+         * Media processing task ID.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -43343,78 +43153,73 @@ class WorkflowTask extends  AbstractModel {
         /**
          * Task flow status. Valid values:
 <li>PROCESSING: Processing;</li>
-<li>FINISH: Completed.</li>
+<li>FINISH: completed</li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * If the value returned is not 0, there was a source error. If 0 is returned, refer to the error codes of the corresponding task type.
+         * An error code other than 0 is returned in case of a source exception. Use the error code of the specific task when a value of 0 is returned.
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * Except those for source errors, error messages vary with task type.
+         * The corresponding exception message is returned in case of a source exception. If no source exception occurs, use the message of each specific task.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * The information of the file processed.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {MediaInputInfo || null}
          */
         this.InputInfo = null;
 
         /**
-         * Metadata of a source video.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaMetaData || null}
          */
         this.MetaData = null;
 
         /**
-         * The execution status and result of the media processing task.
+         * Execution status and results of a Media Processing Service task.
          * @type {Array.<MediaProcessTaskResult> || null}
          */
         this.MediaProcessResultSet = null;
 
         /**
-         * Execution status and result of a video content audit task.
+         * Execution status and results of a video content review task.
          * @type {Array.<AiContentReviewResult> || null}
          */
         this.AiContentReviewResultSet = null;
 
         /**
-         * Execution status and result of video content analysis task.
+         * Execution status and results of a video content analysis task.
          * @type {Array.<AiAnalysisResult> || null}
          */
         this.AiAnalysisResultSet = null;
 
         /**
-         * Execution status and result of a video content recognition task.
+         * Task execution status and results of the video content recognition task.
          * @type {Array.<AiRecognitionResult> || null}
          */
         this.AiRecognitionResultSet = null;
 
         /**
-         * Execution status and results of a media quality inspection task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ScheduleQualityControlTaskResult || null}
          */
         this.AiQualityControlTaskResult = null;
 
         /**
-         * Execution result of the smart subtitle task.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {Array.<SmartSubtitlesResult> || null}
          */
         this.SmartSubtitlesTaskResult = null;
 
         /**
-         * Execution result of the smart erasure task.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {SmartEraseTaskResult || null}
          */
         this.SmartEraseTaskResult = null;
@@ -43590,7 +43395,7 @@ class DeleteSmartEraseTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Result type of an ASR-based porn information detection in text task during content audit
+ * Content review Asr text porn detection task result kind
  * @class
  */
 class AiReviewTaskPornAsrResult extends  AbstractModel {
@@ -43598,19 +43403,19 @@ class AiReviewTaskPornAsrResult extends  AbstractModel {
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -43622,14 +43427,13 @@ class AiReviewTaskPornAsrResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input for an ASR-based porn information detection in text task during content audit.
+         * Content review Asr text pornography detection task input.
          * @type {AiReviewPornAsrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of an ASR-based porn information detection in text task during content audit.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiReviewPornAsrTaskOutput || null}
          */
         this.Output = null;
@@ -43664,7 +43468,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * VOD video file editing information
+ * Edit on-demand video file information
  * @class
  */
 class EditMediaFileInfo extends  AbstractModel {
@@ -43672,28 +43476,25 @@ class EditMediaFileInfo extends  AbstractModel {
         super();
 
         /**
-         * Video input information.
+         * Input video information.
          * @type {MediaInputInfo || null}
          */
         this.InputInfo = null;
 
         /**
-         * The start offset (seconds) for video clipping. This parameter is valid for video clipping tasks.
+         * [Edit] task takes effect, video editing start time offset, measurement unit: second.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * The end offset (seconds) for video clipping. This parameter is valid for video clipping tasks.
+         * [Edit] task takes effect, video editing end time offset, measurement unit: second.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * The ID of the material associated with an element. This parameter is required for video compositing tasks.
-
-Note: The ID can be up to 32 characters long and can contain letters, digits, and special characters -_
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Id = null;
@@ -43837,19 +43638,19 @@ class SmartSubtitleTaskTransTextSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * <p>Confidence of a recognized segment. Value range: 0-100.</p>
+         * <p>Confidence of the recognized segment. Value range: 0–100.</p>
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * <p>Start time offset of a recognized segment, in seconds.</p>
+         * <p>Start time offset of the recognized segment, in seconds.</p>
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * <p>End time offset of a recognized segment, in seconds.</p>
+         * <p>End time offset of the recognized segment, in seconds.</p>
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -43867,14 +43668,13 @@ class SmartSubtitleTaskTransTextSegmentItem extends  AbstractModel {
         this.Trans = null;
 
         /**
-         * <p>Word timestamp information.</p>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<WordResult> || null}
          */
         this.Wordlist = null;
 
         /**
-         * <p>Speaker ID (if speaker recognition is enabled)</p>
+         * <p>Speaker ID (if speaker recognition is enabled).</p>
          * @type {string || null}
          */
         this.SpeakerId = null;
@@ -44038,13 +43838,13 @@ class LiveAiParagraphInfo extends  AbstractModel {
         this.EndTimeOffset = null;
 
         /**
-         * Starting time point of the live streaming segment in ISO date and time format.	
+         * The start time of a live streaming segment, in the ISO date format.	
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * End time point of the live streaming segment in ISO date and time format.	
+         * The end time of a live streaming segment, in the ISO date format.	
          * @type {string || null}
          */
         this.EndTime = null;
@@ -44070,7 +43870,7 @@ class LiveAiParagraphInfo extends  AbstractModel {
 }
 
 /**
- * Output of intelligent face recognition.
+ * Intelligent Face Recognition output.
  * @class
  */
 class AiRecognitionTaskFaceResultOutput extends  AbstractModel {
@@ -44308,7 +44108,7 @@ class DeleteVoiceResponse extends  AbstractModel {
 }
 
 /**
- * Control parameter of a full text recognition task
+ * Task control parameter for full text recognition
  * @class
  */
 class OcrFullTextConfigureInfo extends  AbstractModel {
@@ -44316,9 +44116,9 @@ class OcrFullTextConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of a full text recognition task. Valid values:
-<li>ON: Enables an intelligent full text recognition task;</li>
-<li>OFF: Disables an intelligent full text recognition task.</li>
+         * Task switch for full text recognition, available values:
+<li>ON: Enable intelligent full text recognition task;</li>
+<li>OFF: Disables the intelligent full text recognition task.</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -44346,16 +44146,16 @@ class UpdateSmartErasePrivacyConfig extends  AbstractModel {
         super();
 
         /**
-         * Erasing method of privacy protection.
-- blur
+         * Privacy protection removal method.
+- Blur: blur detection
 - mosaic
          * @type {string || null}
          */
         this.PrivacyModel = null;
 
         /**
-         * Privacy protection target. (When API Explorer is used, it is not required to specify an array. Add the corresponding items and enter the corresponding values.)
-- face: human face.
+         * Privacy protection target. (When API Explorer is used, no need to specify an array. Add the corresponding items and fill in the value.)
+- face: human face
 - plate: license plate.
          * @type {Array.<string> || null}
          */
@@ -44543,7 +44343,7 @@ class ModifySmartSubtitleTemplateRequest extends  AbstractModel {
         this.SubtitleFormat = null;
 
         /**
-         * <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
+         * <p>Smart subtitle language type.<br>0: source language.<br>1: target language.<br>2: source language and target language.<br>Only 0 is supported when TranslateSwitch is OFF.<br>Only 1 or 2 is supported when TranslateSwitch is ON.</p>
          * @type {number || null}
          */
         this.SubtitleType = null;
@@ -44555,7 +44355,7 @@ class ModifySmartSubtitleTemplateRequest extends  AbstractModel {
         this.AsrHotWordsConfigure = null;
 
         /**
-         * <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: GaLanguage<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method.<code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
+         * <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: Ga Language<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method. <code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
          * @type {string || null}
          */
         this.TranslateDstLanguage = null;
@@ -44774,7 +44574,7 @@ class DescribeAnimatedGraphicsTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Result information of intelligent frame-specific tagging
+ * Intelligent frame tagging result information
  * @class
  */
 class MediaAiAnalysisFrameTagItem extends  AbstractModel {
@@ -44782,19 +44582,20 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
         super();
 
         /**
-         * Frame-specific tag name.
+         * Tag name by frame.
          * @type {string || null}
          */
         this.Tag = null;
 
         /**
-         * 
+         * Classification list by frame tag name. CategorySet.N indicates the (N+1)th level classification.
+For example, when the Tag is "tower", CategorySet contains two elements: CategorySet.0 is "scenario" and CategorySet.1 is "building", which means the frame Tag is "tower", the first-level category is "scenario", and the second-level category is "building".
          * @type {Array.<string> || null}
          */
         this.CategorySet = null;
 
         /**
-         * Confidence of intelligently generated frame-specific tag between 0 and 100.
+         * Reliability of frame tagging, with a value range from 0 to -100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -44861,7 +44662,7 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * The execution results of the subtasks of a scheme.
+ * Orchestration subtask output
  * @class
  */
 class ActivityResItem extends  AbstractModel {
@@ -44869,92 +44670,79 @@ class ActivityResItem extends  AbstractModel {
         super();
 
         /**
-         * The result of a transcoding task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaProcessTaskTranscodeResult || null}
          */
         this.TranscodeTask = null;
 
         /**
-         * The result of an animated image generating task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaProcessTaskAnimatedGraphicResult || null}
          */
         this.AnimatedGraphicTask = null;
 
         /**
-         * The result of a time point screenshot task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaProcessTaskSnapshotByTimeOffsetResult || null}
          */
         this.SnapshotByTimeOffsetTask = null;
 
         /**
-         * The result of a sampled screenshot task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaProcessTaskSampleSnapshotResult || null}
          */
         this.SampleSnapshotTask = null;
 
         /**
-         * The result of an image sprite task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaProcessTaskImageSpriteResult || null}
          */
         this.ImageSpriteTask = null;
 
         /**
-         * The result of an adaptive bitrate streaming task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaProcessTaskAdaptiveDynamicStreamingResult || null}
          */
         this.AdaptiveDynamicStreamingTask = null;
 
         /**
-         * The result of a content recognition task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ScheduleRecognitionTaskResult || null}
          */
         this.RecognitionTask = null;
 
         /**
-         * The result of a content moderation task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ScheduleReviewTaskResult || null}
          */
         this.ReviewTask = null;
 
         /**
-         * The result of a content analysis task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ScheduleAnalysisTaskResult || null}
          */
         this.AnalysisTask = null;
 
         /**
-         * Media quality inspection task output.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ScheduleQualityControlTaskResult || null}
          */
         this.QualityControlTask = null;
 
         /**
-         * Conditional judgment task output.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {ScheduleExecRuleTaskResult || null}
          */
         this.ExecRuleTask = null;
 
         /**
-         * Smart subtitle task output.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {ScheduleSmartSubtitleTaskResult || null}
          */
         this.SmartSubtitlesTask = null;
 
         /**
-         * Smart erase task output.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {SmartEraseTaskResult || null}
          */
         this.SmartEraseTask = null;
@@ -45108,10 +44896,10 @@ class UpdateSmartEraseSubtitleConfig extends  AbstractModel {
         /**
          * Subtitle erasing method.
 **Automatic erasing:** Video subtitles are automatically recognized using an AI model and are erased without traces to generate a new video. However, missed or incorrect erasing may occur due to image interference and special subtitle styles. In this case, you can specify the erasing area.
-When automatic erasing is used, if AutoAreas is not specified, the default area (lower middle part of the image) will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
+When using automatic erasing, if AutoAreas is not specified, the default area (lower middle part of the image) will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
 **Specified area erasing:** If the subtitle position is relatively fixed, you are recommended to specify the erasing area directly to minimize missed erasing.
 When you choose specified area erasing, specify at least one area for CustomAreas.
-- auto: automatic erasing.
+-auto erasing
 - custom: specified area erasing.
 
          * @type {string || null}
@@ -45120,7 +44908,7 @@ When you choose specified area erasing, specify at least one area for CustomArea
 
         /**
          * Subtitle erasing model.
-**Standard edition (recommended):** For standard subtitle styles, you are recommended to select this edition to ensure better traceless effects in the details.
+**Standard edition (recommended):** For standard subtitle styles, it is usually recommended to select this version for better traceless effects in the details.
 **Area edition:** If the subtitles have special styles, such as calligraphy, shadow, or motion effects, you are recommended to select this edition to ensure a larger erasing area. However, the erasing effect in the details is not as good as the standard edition.
 - standard: standard edition.
 - area: area edition.
@@ -45130,60 +44918,61 @@ When you choose specified area erasing, specify at least one area for CustomArea
 
         /**
          * Whether to enable OCR subtitle extraction. The default value is OFF.
-OCR subtitle extraction is supported if and only if SubtitleEraseMethod is set to auto. When OCR subtitle extraction is enabled, it identifies the text region that appears most persistently and stably within the automatic erasing area as the subtitle area. The text within the subtitle area is extracted and erased.
-- ON: enabled.
+OCR subtitle extraction is supported only when SubtitleEraseMethod is set to auto. Once enabled, it identifies the text region that appears longest and most stably within the automated erasing area as the subtitle area. The text in the subtitle area is extracted and erased.
+-ON
 -OFF: disabled.
          * @type {string || null}
          */
         this.OcrSwitch = null;
 
         /**
-         * Subtitle language, which is used to guide OCR recognition. The default value is zh_en. This parameter is valid only when OcrSwitch is set to ON.
-- zh_en: Chinese and English.
-- multi: others.
+         * Subtitle language, used for guiding OCR recognition, default value zh_en; this parameter is valid only when OcrSwitch is "ON".
+- zh_en: Chinese and English
+- multi: others
 The following are other languages supported for recognition:
-Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, Hindi, Arabic, India-Bengali, India-Gujarati, India-Kannada, India-Malayalam, India-Tamil, India-Telugu, Slovenian, Polish, Catalan, Bosnian, Czech, Estonian, Croatian, Punjabi, Marathi, Azerbaijani, Indonesian, Luxembourgish, Lithuanian, Latvian, Maltese, Slovak, Turkish, Kazakh, Greek, Irish, Belarusian, Khmer, Tagalog, Pashto, Persian, and Tajik.
+Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, Hindi, Arabic, Indian Bengali, Indian Gujarati, Indian Kannada, Indian Malayalam, Indian Tamil, Indian Telugu, Slovenian, Polish, Catalonia, Bosnia, Czech, Estonian, Croatian, Punjabi, Marathi, Azerbaijan, Indonesian, Luxembourg, Lithuanian, Latvian, Malta, Slovak, Turkish, Kazakh, Greek, Irish, Belarus, Khmer, Tagalog, Pashto, Persian, Tajikistan
+
 
          * @type {string || null}
          */
         this.SubtitleLang = null;
 
         /**
-         * Subtitle file format. The default value is vtt. This parameter is valid only when OcrSwitch is set to ON.
-- srt: SRT format.
+         * Subtitle file format, default value vtt; this parameter is valid only when OcrSwitch is "ON".
+- srt: SRT format
 - vtt: WebVTT format.
          * @type {string || null}
          */
         this.SubtitleFormat = null;
 
         /**
-         * Whether to enable subtitle translation. The default value is OFF. This parameter is valid only when OcrSwitch is set to ON.
-- ON: enabled.
-- OFF: disabled.
+         * Whether to enable subtitle translation, default value is OFF. This parameter is valid only when OcrSwitch is "ON".
+-ON
+-OFF: disabled.
          * @type {string || null}
          */
         this.TransSwitch = null;
 
         /**
-         * Target language for Subtitle translation. The default value is en. This parameter is valid only when TransSwitch is set to ON.
-Currently, the following languages are supported:
-zh: Simplified Chinese.
-en: English.
-ja: Japanese.
-ko: Korean.
-fr: French.
-es: Spanish.
-it: Italian.
-de: German.
-tr: Turkish.
-ru: Russian.
-pt: Portuguese.
-vi: Vietnamese.
-id: Indonesian.
-ms: Malay.
-th: Thai.
-ar: Arabic.
-hi: Hindi.
+         * Subtitle target language, default value en; this parameter is valid only when TransSwitch is "ON".
+Supported languages:
+zh: Simplified Chinese
+en: English
+ja: Japanese
+ko: Korean
+fr: French
+es: Spanish
+it: Italian
+de: German
+tr: Turkish
+ru: Russian
+pt: Portuguese
+vi: Vietnamese
+id: Indonesian
+ms: Malay
+th: Thai
+ar: Arabic
+hi: Hindi
          * @type {string || null}
          */
         this.TransDstLang = null;
@@ -45197,7 +44986,7 @@ Note: When the erasing method is set to custom, this parameter is invalid. When 
         this.AutoAreas = null;
 
         /**
-         * Custom area for specified area erasing.
+         * Specify the custom region for erasing.
 For the specified area, erase the target objects directly without detection and recognition within a selected time period.
 Note: When a template is modified, input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
          * @type {Array.<EraseTimeArea> || null}
@@ -45290,9 +45079,9 @@ class CreateSubtitleEmbedTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Smart Erase, specifies the region configuration.
-Erase the designated region directly within a specified period.
-When both BeginMs and EndMs are set to 0, directly perform removal of the designated region in the entire video.
+ * Intelligent erasure, specify the region configuration.
+Directly perform removal in the designated region within a specified period.
+When both BeginMs and EndMs are set to 0, directly erase the designated region in the entire video.
  * @class
  */
 class EraseTimeArea extends  AbstractModel {
@@ -45300,19 +45089,19 @@ class EraseTimeArea extends  AbstractModel {
         super();
 
         /**
-         * Start time, in ms.
+         * Start time, unit: ms
          * @type {number || null}
          */
         this.BeginMs = null;
 
         /**
-         * End time, unit: ms.
+         * End time, unit: ms
          * @type {number || null}
          */
         this.EndMs = null;
 
         /**
-         * Erases the domain list within the period.
+         * Erase domain list during the period
          * @type {Array.<EraseArea> || null}
          */
         this.Areas = null;
@@ -45421,13 +45210,13 @@ class AiAnalysisTaskDelLogoResult extends  AbstractModel {
         super();
 
         /**
-         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error code. `0`: Task successful. Other values: Task failed.
+         * Error code. 0: Task successful. Other values: Task failed.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -45445,7 +45234,7 @@ class AiAnalysisTaskDelLogoResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * Intelligent removal task output.Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskDelLogoOutput || null}
          */
         this.Output = null;
@@ -45800,30 +45589,27 @@ class SmartSubtitlesTaskInput extends  AbstractModel {
         this.UserExtPara = null;
 
         /**
-         * Custom smart subtitle parameter. It takes effect when Definition is set to 0. This parameter is used in high customization scenarios. It is recommended that you preferentially use Definition to specify smart subtitle parameters.	
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {RawSmartSubtitleParameter || null}
          */
         this.RawParameter = null;
 
         /**
-         * Bucket that stores the output file. If it is left unspecified, the storage location in InputInfo will be inherited.
-**Note**: This parameter is required when InputInfo.Type is set to URL.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
          * Output path of the generated subtitle file, which can be a relative or absolute path.
-To define the output path, end the path with .{format}. For variable names, see the description of file name variables at https://www.tencentcloud.com/document/product/862/37039.?from_cn_redirect=1
+To define the output path, the path must end with `.{format}`. For variable names, please refer to the Filename Variable Explanation (https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1).
 
 Relative path example:
- - File name_{variable name}.{format}.
- - File name.{format}.
+- File name_{variable name}.{format}
+-File name.{format}
 
 Absolute path example:
- -/Custom path/File name_{variable name}.{format}.
+-/Custom path/Filename_{variable name}.{format}
 
 If this field is left unspecified, the default value is the relative path in the following format: {inputName}_smartsubtitle_{definition}.{format}.
          * @type {string || null}
@@ -45889,6 +45675,58 @@ class CreateAnimatedGraphicsTemplateResponse extends  AbstractModel {
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Task control parameter for voice translation
+ * @class
+ */
+class TranslateConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Voice translation task switch, available values:
+<li>ON: Enable Intelligent Voice Translation task.</li>
+<li>OFF: Disables the intelligent voice translation task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Video source language.
+         * @type {string || null}
+         */
+        this.SourceLanguage = null;
+
+        /**
+         * Target language.
+         * @type {string || null}
+         */
+        this.DestinationLanguage = null;
+
+        /**
+         * Generated subtitle file format. Leaving it as an empty string means no subtitle file will be generated. Available values:
+<li>vtt: Generate a WebVTT subtitle file.</li>
+         * @type {string || null}
+         */
+        this.SubtitleFormat = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.SourceLanguage = 'SourceLanguage' in params ? params.SourceLanguage : null;
+        this.DestinationLanguage = 'DestinationLanguage' in params ? params.DestinationLanguage : null;
+        this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
 
     }
 }
@@ -46040,24 +45878,19 @@ class SubtitleEmbedTemplateItem extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * Subtitle suppression template name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Subtitle suppression template description
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Template type. Valid values:
-* Preset: system preset template
-* Custom: user-defined template.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.Type = null;
@@ -46087,8 +45920,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SubtitleEmbedConfig = null;
 
         /**
-         * Subtitle suppression template English name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.AliasName = null;
@@ -46121,7 +45953,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Image sprite information
+ * Sprite image information
  * @class
  */
 class MediaImageSpriteItem extends  AbstractModel {
@@ -46129,43 +45961,43 @@ class MediaImageSpriteItem extends  AbstractModel {
         super();
 
         /**
-         * Image sprite specification. For more information, please see [Image Sprite Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * Sprite sheet specification, please refer to the [Sprite Sheet Parameter Template](https://www.tencentcloud.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Subimage height of an image sprite.
+         * Height of small images in sprite sheet.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Subimage width of an image sprite.
+         * Width of small images in sprite sheet.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Total number of subimages in each image sprite.
+         * Number of small images in each sprite sheet.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Path to each image sprite.
+         * Path of each sprite sheet.
          * @type {Array.<string> || null}
          */
         this.ImagePathSet = null;
 
         /**
-         * Path to a WebVtt file for the position-time relationship among subimages in an image sprite. The WebVtt file indicates the corresponding time points of each subimage and their coordinates in the image sprite, which is typically used by the player for implementing preview.
+         * 
          * @type {string || null}
          */
         this.WebVttPath = null;
 
         /**
-         * Storage location of an image sprite file.
+         * Storage location of the sprite sheet file.
          * @type {TaskOutputStorage || null}
          */
         this.Storage = null;
@@ -46358,7 +46190,7 @@ class AudioEnhanceConfig extends  AbstractModel {
 }
 
 /**
- * Face recognition result
+ * Face Recognition result
  * @class
  */
 class AiRecognitionTaskFaceResultItem extends  AbstractModel {
@@ -46366,87 +46198,87 @@ class AiRecognitionTaskFaceResultItem extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a figure.
+         * Unique identification ID of the figure.
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Figure library type, indicating to which figure library the recognized figure belongs:
-<li>Default: Default figure library;</li>
-<li>UserDefine: Custom figure library.</li>
+         * Figure library type, indicates which figure library the recognized figure comes from.
+<li>Default: default figure library;</li>
+<li>UserDefine: user-defined character library.</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Name of a figure.
+         * Figure name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Result set of segments that contain a figure.
+         * Result set of segments that contain people.
          * @type {Array.<AiRecognitionTaskFaceSegmentItem> || null}
          */
         this.SegmentSet = null;
 
         /**
-         * Gender of the person.
-<Li>Male: man.</li>.
-<Li>Female: specifies the woman.</li>.
+         * Gender
+<li>Male: man</li>
+<li>Female: woman.</li>
          * @type {string || null}
          */
         this.Gender = null;
 
         /**
-         * Date of birth.
+         * Date of birth of a person.
          * @type {string || null}
          */
         this.Birthday = null;
 
         /**
-         * Occupation or position of a person.
+         * Occupation or position.
          * @type {string || null}
          */
         this.Profession = null;
 
         /**
-         * Specifies the graduation institution of the person.
+         * Graduation institution of the person.
          * @type {string || null}
          */
         this.SchoolOfGraduation = null;
 
         /**
-         * Description of the person.
+         * Figure description.
          * @type {string || null}
          */
         this.Abstract = null;
 
         /**
-         * Specifies the birthplace or place of origin.
+         * Birthplace or place of origin of a person.
          * @type {string || null}
          */
         this.PlaceOfBirth = null;
 
         /**
-         * Person type.
-<Li>Politician: specifies the official.</li>.
-<Li>Artist: specifies the artist.</li>.
+         * Person type:
+<li>Politician: official.</li>
+<li>Artist: artist.</li>
          * @type {string || null}
          */
         this.PersonType = null;
 
         /**
-         * Sensitivity labeling.
-<Li>Normal: specifies the scaling group is normal.</li>.
-<Li>Sensitive: specifies sensitivity.</li>.
+         * Sensitivity labeling:
+<li>NORMAL: Normal;</li>
+<li>Sensitive: sensitive.</li>
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Specifies the screenshot link.
+         * Screenshot link
          * @type {string || null}
          */
         this.Url = null;
@@ -46521,7 +46353,7 @@ class AiAnalysisTaskDescriptionInput extends  AbstractModel {
 }
 
 /**
- * Input type of intelligent categorization task
+ * Intelligent classification task input type.
  * @class
  */
 class AiAnalysisTaskCoverInput extends  AbstractModel {
@@ -46631,7 +46463,7 @@ class CreateSmartSubtitleTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Live streaming AI analysis result
  * @class
  */
 class LiveStreamAiAnalysisResultItem extends  AbstractModel {
@@ -46654,8 +46486,7 @@ class LiveStreamAiAnalysisResultItem extends  AbstractModel {
         this.SegmentResultSet = null;
 
         /**
-         * Highlight result. This field is valid when Type is set to Highlight.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<MediaAiAnalysisHighlightItem> || null}
          */
         this.HighlightResultSet = null;
@@ -46705,7 +46536,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * The translation result.
+ * Translation result.
  * @class
  */
 class AiRecognitionTaskTransTextResult extends  AbstractModel {
@@ -46713,45 +46544,43 @@ class AiRecognitionTaskTransTextResult extends  AbstractModel {
         super();
 
         /**
-         * The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The error code. An empty string indicates the task is successful; any other value indicates the task has failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * The error code. `0` indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * The error message.
+         * Error message.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * The input of the translation task.
+         * Translation task input information.
          * @type {AiRecognitionTaskTransTextResultInput || null}
          */
         this.Input = null;
 
         /**
-         * The output of the translation task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskTransTextResultOutput || null}
          */
         this.Output = null;
 
         /**
-         * Task progress.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.Progress = null;
@@ -46787,7 +46616,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Output of video editing task
+ * Output of the video editing task
  * @class
  */
 class EditMediaTaskOutput extends  AbstractModel {
@@ -46795,16 +46624,22 @@ class EditMediaTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Target storage of edited file.
+         * Target storage for the edited file.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Path of edited video file.
+         * Path of the edited video file.
          * @type {string || null}
          */
         this.Path = null;
+
+        /**
+         * 
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
 
     }
 
@@ -46822,6 +46657,12 @@ class EditMediaTaskOutput extends  AbstractModel {
             this.OutputStorage = obj;
         }
         this.Path = 'Path' in params ? params.Path : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
 
     }
 }
@@ -46902,7 +46743,7 @@ class ProcessImageTemplate extends  AbstractModel {
 }
 
 /**
- * The information of a highlight segment.
+ * Intelligent highlight collection segments.
  * @class
  */
 class HighlightSegmentItem extends  AbstractModel {
@@ -46910,38 +46751,37 @@ class HighlightSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * The confidence score.
+         * Confidence degree.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * The start time offset of the segment.
+         * Segment start time offset.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * The end time offset of the segment.
+         * End time offset of the recording clip.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * Segment tag.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {Array.<string> || null}
          */
         this.SegmentTags = null;
 
         /**
-         * Start time of the live streaming segment in ISO date and time format.	
+         * The start time of a live streaming segment, in the ISO date format.	
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * End time of the live streaming segment in ISO date and time format.	
+         * The end time of a live streaming segment, in the ISO date format.	
          * @type {string || null}
          */
         this.EndTime = null;
@@ -47027,7 +46867,7 @@ class DescribeAigcTaskListRequest extends  AbstractModel {
 }
 
 /**
- * Data structure of the video intelligent image masking result.
+ * Data structure of the video intelligence matting result.
  * @class
  */
 class AiAnalysisTaskCutoutResult extends  AbstractModel {
@@ -47041,13 +46881,13 @@ class AiAnalysisTaskCutoutResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error message.
+         * Error message
          * @type {string || null}
          */
         this.Message = null;
@@ -47059,19 +46899,19 @@ class AiAnalysisTaskCutoutResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * Output of the video matting task.Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiAnalysisTaskCutoutOutput || null}
          */
         this.Output = null;
 
         /**
-         * Task progress.
+         * Task progress
          * @type {number || null}
          */
         this.Progress = null;
 
         /**
-         * Task start time, in ISO date and time format.
+         * Starting time of task execution, in ISO date and time format.
          * @type {string || null}
          */
         this.BeginProcessTime = null;
@@ -47510,8 +47350,9 @@ class AigcVideoReferenceImageInfo extends  AbstractModel {
         this.ImageUrl = null;
 
         /**
-         * Reference type.
-Note:1. If the GV model is used, this serves as the reference method. Valid values are asset and style.
+         * Reference Type.
+Note:
+1. If the GV model is used, this serves as the reference method. Valid values are asset and style.
          * @type {string || null}
          */
         this.ReferenceType = null;
@@ -47655,7 +47496,7 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * The translated segments.
+ * Translated segment.
  * @class
  */
 class AiRecognitionTaskTransTextSegmentItem extends  AbstractModel {
@@ -47734,70 +47575,55 @@ class AiRecognitionResult extends  AbstractModel {
         super();
 
         /**
-         * The task type. Valid values:
-<li>FaceRecognition: Face recognition</li>
-<li>AsrWordsRecognition: Speech keyword recognition</li>
-<li>OcrWordsRecognition: Text keyword recognition</li>
-<li>AsrFullTextRecognition: Full speech recognition</li>
-<li>OcrFullTextRecognition: Full text recognition</li>
-<li>TransTextRecognition: Speech translation</li>
+         * Task type. Valid values:
+<li>FaceRecognition: face recognition.</li>
+<li>AsrWordsRecognition: speech keyword recognition.</li>
+<li>OcrWordsRecognition: text keyword recognition.</li>
+<li>AsrFullTextRecognition: full speech recognition.</li>
+<li>OcrFullTextRecognition: full text recognition.</li>
+<li>TransTextRecognition: speech translation</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Face recognition result, which is valid when `Type` is 
- `FaceRecognition`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskFaceResult || null}
          */
         this.FaceTask = null;
 
         /**
-         * Speech keyword recognition result, which is valid when `Type` is
- `AsrWordsRecognition`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskAsrWordsResult || null}
          */
         this.AsrWordsTask = null;
 
         /**
-         * Full speech recognition result, which is valid when `Type` is
- `AsrFullTextRecognition`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskAsrFullTextResult || null}
          */
         this.AsrFullTextTask = null;
 
         /**
-         * Text keyword recognition result, which is valid when `Type` is
- `OcrWordsRecognition`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskOcrWordsResult || null}
          */
         this.OcrWordsTask = null;
 
         /**
-         * Full text recognition result, which is valid when `Type` is
- `OcrFullTextRecognition`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskOcrFullTextResult || null}
          */
         this.OcrFullTextTask = null;
 
         /**
-         * The translation result. This parameter is valid only if `Type` is
- `TransTextRecognition`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskTransTextResult || null}
          */
         this.TransTextTask = null;
 
         /**
-         * Object recognition result, which is valid when Type is
-
-ObjectRecognition.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskObjectResult || null}
          */
         this.ObjectTask = null;
@@ -48692,6 +48518,7 @@ module.exports = {
     DeleteProcessImageTemplateRequest: DeleteProcessImageTemplateRequest,
     SmartSubtitlesTaskInput: SmartSubtitlesTaskInput,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
+    TranslateConfigureInfoForUpdate: TranslateConfigureInfoForUpdate,
     SampleSnapshotTemplate: SampleSnapshotTemplate,
     SubtitleEmbedTemplateItem: SubtitleEmbedTemplateItem,
     MediaImageSpriteItem: MediaImageSpriteItem,

@@ -2486,7 +2486,7 @@ Optional alarm codes are: -9101 (occlusion or incomplete border), -9102 (photoco
 
         /**
          * BASIC: Basic version (Default).
-ENHANCE: Enhance version, enable additional output of device risk level field.
+ENHANCED: Enhance version, enable additional output of device risk level field.
 PRO: Pro version, enable additional output of attack type fields.
 PLUS: Plus version, enable additional output of device risk level and attack type fields.
 Please contact us to access enhance version & plus version.	
@@ -3395,7 +3395,11 @@ class GetFaceIdTokenIntlRequest extends  AbstractModel {
         this.ActionList = null;
 
         /**
-         * <p>PLUS: PLUS version, PRO: PRO version, ENHANCED: enhanced, BASIC: basic (default)</p>
+         * BASIC: Basic version (Default).
+ENHANCED: Enhance version, enable additional output of device risk level field.
+PRO: Pro version, enable additional output of attack type fields.
+PLUS: Plus version, enable additional output of device risk level and attack type fields.
+Please contact us to access enhance version & plus version.	
          * @type {string || null}
          */
         this.SdkVersion = null;

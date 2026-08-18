@@ -37,6 +37,7 @@ const DescribePartitionsRequest = models.DescribePartitionsRequest;
 const CheckFunctionResponse = models.CheckFunctionResponse;
 const ModifyAlarmResponse = models.ModifyAlarmResponse;
 const PreviewKafkaRechargeRequest = models.PreviewKafkaRechargeRequest;
+const TopicIdAndRegion = models.TopicIdAndRegion;
 const DeliverConfig = models.DeliverConfig;
 const DescribeClusterBaseMetricConfigsRequest = models.DescribeClusterBaseMetricConfigsRequest;
 const DeleteMetricSubscribeRequest = models.DeleteMetricSubscribeRequest;
@@ -88,6 +89,7 @@ const DescribeClusterMetricConfigsRequest = models.DescribeClusterMetricConfigsR
 const DescribeConfigsRequest = models.DescribeConfigsRequest;
 const DlcPartitionExtra = models.DlcPartitionExtra;
 const DescribeKafkaConsumerTopicsResponse = models.DescribeKafkaConsumerTopicsResponse;
+const DashboardTopicInfo = models.DashboardTopicInfo;
 const QueryMetricRequest = models.QueryMetricRequest;
 const CloudProductLogTaskInfo = models.CloudProductLogTaskInfo;
 const Instance = models.Instance;
@@ -100,6 +102,7 @@ const CreateHostMetricConfigResponse = models.CreateHostMetricConfigResponse;
 const ModifyConsumerGroupRequest = models.ModifyConsumerGroupRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
 const DeleteAlarmResponse = models.DeleteAlarmResponse;
+const PreviewLogStatistic = models.PreviewLogStatistic;
 const DescribeDlcDeliversResponse = models.DescribeDlcDeliversResponse;
 const ModifyIndexRequest = models.ModifyIndexRequest;
 const MachineInfo = models.MachineInfo;
@@ -116,7 +119,7 @@ const ModifyShipperRequest = models.ModifyShipperRequest;
 const MonitorNoticeRule = models.MonitorNoticeRule;
 const DescribeKafkaConsumerPreviewRequest = models.DescribeKafkaConsumerPreviewRequest;
 const CreateDeliverCloudFunctionResponse = models.CreateDeliverCloudFunctionResponse;
-const PreviewLogStatistic = models.PreviewLogStatistic;
+const DescribeDashboardsResponse = models.DescribeDashboardsResponse;
 const CompressInfo = models.CompressInfo;
 const ModifyRemoteWriteTaskResponse = models.ModifyRemoteWriteTaskResponse;
 const CreateConfigResponse = models.CreateConfigResponse;
@@ -256,6 +259,7 @@ const CreateConsumerRequest = models.CreateConsumerRequest;
 const DeleteHostMetricConfigRequest = models.DeleteHostMetricConfigRequest;
 const DeleteMetricConfigResponse = models.DeleteMetricConfigResponse;
 const DescribeRemoteWriteTasksRequest = models.DescribeRemoteWriteTasksRequest;
+const DashboardInfo = models.DashboardInfo;
 const DataTransformTaskInfo = models.DataTransformTaskInfo;
 const NoticeRule = models.NoticeRule;
 const ContentInfo = models.ContentInfo;
@@ -305,6 +309,7 @@ const DeleteMetricConfigRequest = models.DeleteMetricConfigRequest;
 const CreateEsRechargeRequest = models.CreateEsRechargeRequest;
 const ConsumerGroup = models.ConsumerGroup;
 const DlcFailTableInfo = models.DlcFailTableInfo;
+const DescribeDashboardsRequest = models.DescribeDashboardsRequest;
 const DeleteNoticeContentResponse = models.DeleteNoticeContentResponse;
 const MetricYamlSpec = models.MetricYamlSpec;
 const DeleteCloudProductLogCollectionRequest = models.DeleteCloudProductLogCollectionRequest;
@@ -2384,6 +2389,17 @@ Note: Modifying the interface will directly overwrite historical data and change
     DescribeKafkaConsumerGroupDetail(req, cb) {
         let resp = new DescribeKafkaConsumerGroupDetailResponse();
         this.request("DescribeKafkaConsumerGroupDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the dashboard.
+     * @param {DescribeDashboardsRequest} req
+     * @param {function(string, DescribeDashboardsResponse):void} cb
+     * @public
+     */
+    DescribeDashboards(req, cb) {
+        let resp = new DescribeDashboardsResponse();
+        this.request("DescribeDashboards", req, resp, cb);
     }
 
     /**

@@ -1335,6 +1335,62 @@ When KafkaType is 1 and IsEncryptionAddr is true, Protocol is required.
 }
 
 /**
+ * Dashboard topic and region information
+ * @class
+ */
+class TopicIdAndRegion extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log topic id
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * The ID of the region where the log topic ID is located.
+
+id, region, abbreviation information follows:
+- 1: Guangzhou, ap-guangzhou
+- 4: Shanghai, ap-shanghai
+-5, Hong Kong (China), ap-hongkong
+- 7: Shanghai Finance, ap-shanghai-fsi
+-8, Beijing, ap-beijing
+- 9, Singapore, ap-singapore
+- 11: Shenzhen Finance, ap-shenzhen-fsi
+-15, Silicon Valley, na-siliconvalley
+-16, Chengdu, ap-chengdu
+-17, Frankfurt, eu-frankfurt
+- 18, Seoul, ap-seoul
+- 19: Chongqing, ap-chongqing
+- 22, Virginia, na-ashburn
+- 23, Bangkok, ap-bangkok
+-25, Tokyo, ap-tokyo
+- 33, Nanjing, ap-nanjing
+-46, Beijing Finance, ap-beijing-fsi
+- 72, Jakarta, ap-jakarta
+-74, São Paulo, sa-saopaulo
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+
+    }
+}
+
+/**
  * Shipping configuration input parameter.
  * @class
  */
@@ -1761,7 +1817,7 @@ class DeleteMachineGroupResponse extends  AbstractModel {
 }
 
 /**
- * Description of the tag pair bound to a resource instance when it is created
+ * Description of tag pairs bound at the time of resource instance creation
  * @class
  */
 class Tag extends  AbstractModel {
@@ -2479,7 +2535,7 @@ class DescribeDashboardSubscribesRequest extends  AbstractModel {
         /**
          * dashboardId: Filter by [dashboard id]. Type: String. Required: No.
 
--Dashboard id. Obtain DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) api.
+- Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
 -Input parameter example: dashboard-522a5609-1f41-4b11-8086-5afd1d7574f5
 
 Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
@@ -4334,6 +4390,63 @@ class DescribeKafkaConsumerTopicsResponse extends  AbstractModel {
 }
 
 /**
+ * Dashboard associated topic information
+ * @class
+ */
+class DashboardTopicInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Region of the topic.
+- 1: Guangzhou
+-4: Shanghai
+- 5: Hong Kong (China)
+- 7: Shanghai Finance
+-8: Beijing
+-9: Singapore
+- 11: Shenzhen Finance
+- 15: Silicon Valley
+-16: Chengdu
+-17: Frankfurt
+- 18: Seoul
+- 19: Chongqing
+- 22: Virginia
+- 23: Bangkok
+- 25: Tokyo
+- 33: Nanjing
+- 36: Tianjin
+-39: Taipei (China)
+- 46: Beijing Finance
+-72: Jakarta
+-74: São Paulo
+-78: Shanghai Autonomous Driving Cloud
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
  * QueryMetric request structure.
  * @class
  */
@@ -4883,6 +4996,74 @@ class DeleteAlarmResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Preview data details
+ * @class
+ */
+class PreviewLogStatistic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log content
+         * @type {string || null}
+         */
+        this.LogContent = null;
+
+        /**
+         * Line number. Starts from 0.
+         * @type {number || null}
+         */
+        this.LineNum = null;
+
+        /**
+         * target log topic ID
+-Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.DstTopicId = null;
+
+        /**
+         * Error message for failure. A null string "" indicates normal.
+         * @type {string || null}
+         */
+        this.FailReason = null;
+
+        /**
+         * Log time, format: `2024-05-07 17:13:17.105`
+
+-Invalid input parameter
+-Valid at that time, the time format in logs
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * Target topic name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DstTopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogContent = 'LogContent' in params ? params.LogContent : null;
+        this.LineNum = 'LineNum' in params ? params.LineNum : null;
+        this.DstTopicId = 'DstTopicId' in params ? params.DstTopicId : null;
+        this.FailReason = 'FailReason' in params ? params.FailReason : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.DstTopicName = 'DstTopicName' in params ? params.DstTopicName : null;
 
     }
 }
@@ -6001,53 +6182,30 @@ class CreateDeliverCloudFunctionResponse extends  AbstractModel {
 }
 
 /**
- * Preview data details
+ * DescribeDashboards response structure.
  * @class
  */
-class PreviewLogStatistic extends  AbstractModel {
+class DescribeDashboardsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Log content
-         * @type {string || null}
-         */
-        this.LogContent = null;
-
-        /**
-         * Line number. Starts from 0.
+         * Number of dashboards
          * @type {number || null}
          */
-        this.LineNum = null;
+        this.TotalCount = null;
 
         /**
-         * target log topic ID
--Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
-         * @type {string || null}
+         * Dashboard details
+         * @type {Array.<DashboardInfo> || null}
          */
-        this.DstTopicId = null;
+        this.DashboardInfos = null;
 
         /**
-         * Error message for failure. A null string "" indicates normal.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.FailReason = null;
-
-        /**
-         * Log time, format: `2024-05-07 17:13:17.105`
-
--Invalid input parameter
--Valid at that time, the time format in logs
-         * @type {string || null}
-         */
-        this.Time = null;
-
-        /**
-         * Target topic name
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DstTopicName = null;
+        this.RequestId = null;
 
     }
 
@@ -6058,12 +6216,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.LogContent = 'LogContent' in params ? params.LogContent : null;
-        this.LineNum = 'LineNum' in params ? params.LineNum : null;
-        this.DstTopicId = 'DstTopicId' in params ? params.DstTopicId : null;
-        this.FailReason = 'FailReason' in params ? params.FailReason : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.DstTopicName = 'DstTopicName' in params ? params.DstTopicName : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DashboardInfos) {
+            this.DashboardInfos = new Array();
+            for (let z in params.DashboardInfos) {
+                let obj = new DashboardInfo();
+                obj.deserialize(params.DashboardInfos[z]);
+                this.DashboardInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6729,7 +6892,7 @@ class CreateDashboardRequest extends  AbstractModel {
         super();
 
         /**
-         * dashboard name
+         * Dashboard name
          * @type {string || null}
          */
         this.DashboardName = null;
@@ -10609,7 +10772,7 @@ class SearchDashboardSubscribeRequest extends  AbstractModel {
         super();
 
         /**
-         * Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
+         * Dashboard id. Obtain the DashboardId through the [search for a dashboard.](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.DashboardId = null;
@@ -10621,13 +10784,13 @@ class SearchDashboardSubscribeRequest extends  AbstractModel {
         this.SubscribeData = null;
 
         /**
-         * Dashboard subscription Id. Obtain through the api [Dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1).
+         * Dashboard subscription Id. Obtain the Id through the [dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) api.
          * @type {number || null}
          */
         this.Id = null;
 
         /**
-         * Dashboard subscription Name. Obtain through the api [Dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1).
+         * Dashboard subscription name. Obtain the Name through the [dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.Name = null;
@@ -14039,6 +14202,120 @@ Each request can have up to 10 Filters. The maximum of Filter.Values is 10.
 }
 
 /**
+ * Dashboard information
+ * @class
+ */
+class DashboardInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Dashboard ID
+         * @type {string || null}
+         */
+        this.DashboardId = null;
+
+        /**
+         * Dashboard name
+         * @type {string || null}
+         */
+        this.DashboardName = null;
+
+        /**
+         * Dashboard data
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * Time when the dashboard was created. Format: YYYY-MM-DD HH:MM:SS
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * If AssumerUin is not empty, it indicates the UIN of the service party that created the log topic.
+         * @type {number || null}
+         */
+        this.AssumerUin = null;
+
+        /**
+         * If RoleName is not empty, it indicates the role of the service provider creating the log set.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * If AssumerName is not empty, it indicates the name of the service provider creating the log topic.
+         * @type {string || null}
+         */
+        this.AssumerName = null;
+
+        /**
+         * Information of tag bound to log topic
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Dashboard region: For compatibility with old regions.
+         * @type {string || null}
+         */
+        this.DashboardRegion = null;
+
+        /**
+         * Modify dashboard time. Format: YYYY-MM-DD HH:MM:SS
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Topic-related information corresponding to the dashboard
+         * @type {Array.<DashboardTopicInfo> || null}
+         */
+        this.DashboardTopicInfos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DashboardId = 'DashboardId' in params ? params.DashboardId : null;
+        this.DashboardName = 'DashboardName' in params ? params.DashboardName : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.AssumerUin = 'AssumerUin' in params ? params.AssumerUin : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.AssumerName = 'AssumerName' in params ? params.AssumerName : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.DashboardRegion = 'DashboardRegion' in params ? params.DashboardRegion : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.DashboardTopicInfos) {
+            this.DashboardTopicInfos = new Array();
+            for (let z in params.DashboardTopicInfos) {
+                let obj = new DashboardTopicInfo();
+                obj.deserialize(params.DashboardTopicInfos[z]);
+                this.DashboardTopicInfos.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Basic information of a data processing task
  * @class
  */
@@ -14925,7 +15202,7 @@ class MultiCondition extends  AbstractModel {
 }
 
 /**
- * Filter
+ * Filters
  * @class
  */
 class Filter extends  AbstractModel {
@@ -14933,13 +15210,13 @@ class Filter extends  AbstractModel {
         super();
 
         /**
-         * Field to be filtered
+         * Fields that need to be filtered.
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Value to be filtered
+         * Values to be filtered
          * @type {Array.<string> || null}
          */
         this.Values = null;
@@ -16407,13 +16684,13 @@ class ModifyDashboardRequest extends  AbstractModel {
         super();
 
         /**
-         * Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
+         * Dashboard id. Obtain DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.DashboardId = null;
 
         /**
-         * dashboard name
+         * Dashboard name
          * @type {string || null}
          */
         this.DashboardName = null;
@@ -16843,6 +17120,131 @@ class DlcFailTableInfo extends  AbstractModel {
         }
         this.TableName = 'TableName' in params ? params.TableName : null;
         this.FieldName = 'FieldName' in params ? params.FieldName : null;
+
+    }
+}
+
+/**
+ * DescribeDashboards request structure.
+ * @class
+ */
+class DescribeDashboardsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Page offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum number of entries per page. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * -dashboardId filter by [dashboard id], type: String, required: No.
+-Example value: dashboard-522a5609-1f41-4b11-8086-5afd1d7574f5
+-dashboardName: Filter by fuzzy search as dashboard name. Type: String. Required: No.
+-Example value: Business dashboard
+-dashboardRegion filter by dashboard region (compatible with legacy dashboards). This property for dashboards created via cloud API, type: String, required: No.
+-See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/614/18940?from_cn_redirect=1)
+-Example: ap-guangzhou
+- tagKey - String - Required: No - Filter by the tag key.
+-Example value:
+    ```
+    "Filters":[
+        {
+            "Key": "tagKey",
+            "Values": [
+                "tag-key-test"
+            ]
+        }
+    ]
+    ```
+
+-tag:tagKey Filter by [tag key-value pair]. Replace tagKey with a specific tag key. Type: String. Required: No.
+-Refer to [Example 1](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1#4.-.E7.A4.BA.E4.BE.8B) for usage.
+    ```
+    "Filters": [
+        {
+            "Key": "tag:tag-key-test",
+            "Values": [
+                "12"
+            ]
+        }
+    ]
+    ```
+
+Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Filter is performed by topicId and regionId.
+-topicId: Log topic id.
+- Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+-Example value: 439a5304-08f9-484b-9c4d-46ff57133816
+- regionId
+- 1: Guangzhou
+-4: Shanghai
+-5: Hong Kong (China)
+- 7: Shanghai Finance
+- 8: Beijing
+-9: Singapore
+- 11: Shenzhen Finance
+- 15: Silicon Valley
+- 16: Chengdu
+- 17: Frankfurt
+- 18: Seoul
+- 19: Chongqing
+- 22: Virginia
+- 23: Bangkok
+- 25: Tokyo
+- 33: Nanjing
+- 36: Tianjin
+-39: Taipei (China)
+- 46: Beijing Finance
+-72: Jakarta
+-74: São Paulo
+-78: Shanghai Autonomous Driving Cloud
+
+         * @type {Array.<TopicIdAndRegion> || null}
+         */
+        this.TopicIdRegionFilter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+        if (params.TopicIdRegionFilter) {
+            this.TopicIdRegionFilter = new Array();
+            for (let z in params.TopicIdRegionFilter) {
+                let obj = new TopicIdAndRegion();
+                obj.deserialize(params.TopicIdRegionFilter[z]);
+                this.TopicIdRegionFilter.push(obj);
+            }
+        }
 
     }
 }
@@ -17649,19 +18051,19 @@ class DashboardNoticeMode extends  AbstractModel {
 -Group: Tencent Cloud user group
 -WeCom: wecom callback
 -Email: Custom email
--DingTalk
+- DingTalk: DingTalk
 -Lark
          * @type {string || null}
          */
         this.ReceiverType = null;
 
         /**
-         * Value of the known method.
+         * Method corresponding value.
 -When ReceiverType is `WeCom`, `DingTalk`, or `Lark`, Values must be empty and the Url field is required.
--When ReceiverType is `Uin`, `Group`, or `Email`, the Values field is required and the Url field must be empty.
--When ReceiverType is `Uin`, Values is the user id. Obtain the sub-user UID by [querying sub-users](https://www.tencentcloud.com/document/product/598/34587?from_cn_redirect=1).
--When ReceiverType is `Group`, Values is the user Group id. Obtain user Group id by querying the user Group list (https://www.tencentcloud.com/document/product/598/34589?from_cn_redirect=1).
--When ReceiverType is `Email`, Values is the user email info.
+-When ReceiverType is `Uin`, `Group`, or `Email`, the Values field is required, and the Url field must be empty.
+-When ReceiverType is `Uin`, Values is the user id. Obtain the sub-user UID by pulling sub-users (https://www.tencentcloud.com/document/product/598/34587?from_cn_redirect=1).
+-When ReceiverType is `Group`, Values is the user Group id. Query the user Group list (https://www.tencentcloud.com/document/product/598/34589?from_cn_redirect=1) to obtain the user Group id.
+-When ReceiverType is `Email`, Values is the user email.
          * @type {Array.<string> || null}
          */
         this.Values = null;
@@ -17670,18 +18072,17 @@ class DashboardNoticeMode extends  AbstractModel {
          * Dashboard notification channel.
 
 -Support: ["Email","Sms","WeChat","Phone"].
--When ReceiverType is `Email` or `WeCom`, ReceiverChannels is invalid.
-Note: This field may return null, indicating that no valid values can be obtained.
+-   When ReceiverType is `Email` or `WeCom`, ReceiverChannels is unavailable.
          * @type {Array.<string> || null}
          */
         this.ReceiverChannels = null;
 
         /**
          * Subscription method - Callback URL.
--When ReceiverType is `WeCom`, `DingTalk`, or `Lark`, the Url field is required as the callback URL of each channel.
--When the value is `WeCom`, the Url is the enterprise wechat callback address.
--When the value is `DingTalk`, Url is the chatbot Webhook address.
--When `Lark`, Url is the chatbot Webhook address.
+-When ReceiverType is `WeCom`, `DingTalk`, or `Lark`, the Url field is required as the callback URL for each channel.
+-When it is `WeCom`, the Url is the enterprise wechat callback address.
+-For `DingTalk`, the Url is the chatbot Webhook address.
+-When it is `Lark`, the Url is the chatbot Webhook address.
 -When ReceiverType is `Uin`, `Group`, or `Email`, the Url field must be empty.
          * @type {string || null}
          */
@@ -18352,13 +18753,13 @@ class ModifyDashboardSubscribeRequest extends  AbstractModel {
         super();
 
         /**
-         * Dashboard subscription id. Obtain the id through the [Get Dashboard Subscription List](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) api.
+         * Dashboard subscription id. Obtain the Id through the [dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) API.
          * @type {number || null}
          */
         this.Id = null;
 
         /**
-         * Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) api.
+         * Dashboard id. Obtain DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.DashboardId = null;
@@ -18499,28 +18900,28 @@ class CreateDashboardSubscribeRequest extends  AbstractModel {
         /**
          * Dashboard subscription name.
 Input limit:
--Cannot be empty
--Length cannot exceed 128 bytes
--Cannot contain character '|'
+-cannot be empty
+-Length cannot exceed 128 bytes.
+-Cannot contain the character '|'
          * @type {string || null}
          */
         this.Name = null;
 
         /**
          * Dashboard Id.
--Get the dashboard Id by [searching for the dashboard](https://www.tencentcloud.com/document/product/614/95636?from_cn_redirect=1).
+-Get the dashboard Id by [searching for a dashboard](https://www.tencentcloud.com/document/product/614/95636?from_cn_redirect=1).
          * @type {string || null}
          */
         this.DashboardId = null;
 
         /**
          * Subscription time cron expression, in format {seconds} {minutes} {hours} {date} {month} {weekday}; (valid data: {minutes} {hours} {date} {month} {weekday})
--{seconds} Value ranges from 0 to 59. 
+-{seconds} value ranges from 0 to 59. 
 -{Minutes} Value ranges from 0 to 59. 
 -Hour. Value ranges from 0 to 23. 
--{Date} value ranges from 1 to 31 AND (last day of month: L) 
+-{Date} value ranges from 1 to 31 AND (dayOfMonth last day: L) 
 -{Month} value ranges from 1 to 12. 
--Week value ranges from 0 to 6 [0:Sunday, 6:Saturday]
+-Week value ranges from 0 to 6 [0:Sunday, 6:Saturday].
          * @type {string || null}
          */
         this.Cron = null;
@@ -21552,13 +21953,13 @@ class DashboardSubscribeInfo extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * Dashboard subscription record update time. Format: `YYYY-MM-DD HH:MM:SS`
+         * Dashboard subscription record update time. Format: YYYY-MM-DD HH:MM:SS
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Time sent successfully of dashboard subscription record. Format: `YYYY-MM-DD HH:MM:SS`
+         * Last time for successful sending of dashboard subscription record. Format: `YYYY-MM-DD HH:MM:SS`
          * @type {string || null}
          */
         this.LastTime = null;
@@ -26627,14 +27028,12 @@ class DashboardSubscribeData extends  AbstractModel {
 
         /**
          * Dashboard subscription time. If this field is empty, the dashboard default time is used.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.DashboardTime = null;
 
         /**
          * Dashboard subscription template variable.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DashboardTemplateVariable> || null}
          */
         this.TemplateVariables = null;
@@ -31730,6 +32129,7 @@ module.exports = {
     CheckFunctionResponse: CheckFunctionResponse,
     ModifyAlarmResponse: ModifyAlarmResponse,
     PreviewKafkaRechargeRequest: PreviewKafkaRechargeRequest,
+    TopicIdAndRegion: TopicIdAndRegion,
     DeliverConfig: DeliverConfig,
     DescribeClusterBaseMetricConfigsRequest: DescribeClusterBaseMetricConfigsRequest,
     DeleteMetricSubscribeRequest: DeleteMetricSubscribeRequest,
@@ -31781,6 +32181,7 @@ module.exports = {
     DescribeConfigsRequest: DescribeConfigsRequest,
     DlcPartitionExtra: DlcPartitionExtra,
     DescribeKafkaConsumerTopicsResponse: DescribeKafkaConsumerTopicsResponse,
+    DashboardTopicInfo: DashboardTopicInfo,
     QueryMetricRequest: QueryMetricRequest,
     CloudProductLogTaskInfo: CloudProductLogTaskInfo,
     Instance: Instance,
@@ -31793,6 +32194,7 @@ module.exports = {
     ModifyConsumerGroupRequest: ModifyConsumerGroupRequest,
     CreateTopicResponse: CreateTopicResponse,
     DeleteAlarmResponse: DeleteAlarmResponse,
+    PreviewLogStatistic: PreviewLogStatistic,
     DescribeDlcDeliversResponse: DescribeDlcDeliversResponse,
     ModifyIndexRequest: ModifyIndexRequest,
     MachineInfo: MachineInfo,
@@ -31809,7 +32211,7 @@ module.exports = {
     MonitorNoticeRule: MonitorNoticeRule,
     DescribeKafkaConsumerPreviewRequest: DescribeKafkaConsumerPreviewRequest,
     CreateDeliverCloudFunctionResponse: CreateDeliverCloudFunctionResponse,
-    PreviewLogStatistic: PreviewLogStatistic,
+    DescribeDashboardsResponse: DescribeDashboardsResponse,
     CompressInfo: CompressInfo,
     ModifyRemoteWriteTaskResponse: ModifyRemoteWriteTaskResponse,
     CreateConfigResponse: CreateConfigResponse,
@@ -31949,6 +32351,7 @@ module.exports = {
     DeleteHostMetricConfigRequest: DeleteHostMetricConfigRequest,
     DeleteMetricConfigResponse: DeleteMetricConfigResponse,
     DescribeRemoteWriteTasksRequest: DescribeRemoteWriteTasksRequest,
+    DashboardInfo: DashboardInfo,
     DataTransformTaskInfo: DataTransformTaskInfo,
     NoticeRule: NoticeRule,
     ContentInfo: ContentInfo,
@@ -31998,6 +32401,7 @@ module.exports = {
     CreateEsRechargeRequest: CreateEsRechargeRequest,
     ConsumerGroup: ConsumerGroup,
     DlcFailTableInfo: DlcFailTableInfo,
+    DescribeDashboardsRequest: DescribeDashboardsRequest,
     DeleteNoticeContentResponse: DeleteNoticeContentResponse,
     MetricYamlSpec: MetricYamlSpec,
     DeleteCloudProductLogCollectionRequest: DeleteCloudProductLogCollectionRequest,

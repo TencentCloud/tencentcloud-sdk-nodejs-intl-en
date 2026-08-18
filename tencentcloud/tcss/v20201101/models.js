@@ -3144,19 +3144,19 @@ class DescribeAssetImageRegistryRegistryDetailResponse extends  AbstractModel {
         this.Url = null;
 
         /**
-         * Repository type, which can be `harbor`.
+         * Repository type, which can be `harbor`
          * @type {string || null}
          */
         this.RegistryType = null;
 
         /**
-         * warehouse version
+         * Registry version
          * @type {string || null}
          */
         this.RegistryVersion = null;
 
         /**
-         * Network type, which can be `public` (public network).
+         * Network type, which can be `public` (public network)
          * @type {string || null}
          */
         this.NetType = null;
@@ -3168,7 +3168,7 @@ class DescribeAssetImageRegistryRegistryDetailResponse extends  AbstractModel {
         this.RegistryRegion = null;
 
         /**
-         * rate limiting
+         * Rate limiting
          * @type {number || null}
          */
         this.SpeedLimit = null;
@@ -3180,37 +3180,37 @@ class DescribeAssetImageRegistryRegistryDetailResponse extends  AbstractModel {
         this.Insecure = null;
 
         /**
-         * 
+         * Connectivity test results
          * @type {Array.<RegistryConnDetectResult> || null}
          */
         this.ConnDetectDetail = null;
 
         /**
-         * 
+         * TCR Instance ID
          * @type {string || null}
          */
         this.InstanceID = null;
 
         /**
-         * Synchronization method. 0: full synchronization; 1: incremental synchronization.
+         * Synchronization method. 0: full synchronization; 1: incremental synchronization
          * @type {number || null}
          */
         this.SyncMode = null;
 
         /**
-         * Whether authorization and scanning are performed automatically. For full synchronization, only images of the latest version are involved. For incremental synchronization, all new images are involved.
+         * Whether authorization and scanning are performed automatically. For full synchronization, only images of the latest version are involved. For incremental synchronization, all new images are involved
          * @type {boolean || null}
          */
         this.NeedScan = null;
 
         /**
-         * Webhook access address.
+         * Webhook access address
          * @type {string || null}
          */
         this.WebhookUrl = null;
 
         /**
-         * Webhook access token.	
+         * Webhook access token.
          * @type {string || null}
          */
         this.WebhookToken = null;

@@ -1484,7 +1484,7 @@ class SendMultiStatus extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * SMS request error code. For specific meanings, see [Error Codes](https://intl.cloud.tencent.com/zh/document/product/382/40536#6.-error-code). `Ok` will be returned for successful delivery.
+         * SMS request error code. For specific meanings, see [Error Codes](https://www.tencentcloud.com/zh/document/product/382/79029#6.-Error-Code). `Ok` will be returned for successful delivery.
          * @type {string || null}
          */
         this.Code = null;
@@ -1496,7 +1496,7 @@ class SendMultiStatus extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Country/Region code, such as US and MY. For unrecognized country/region codes, `DEF` is returned by default. For the specific list of supported values, please see [Global SMS Price Overview](https://intl.cloud.tencent.com/document/product/382/18051?from_cn_redirect=1).
+         * Country/Region code, such as US and MY. For unrecognized country/region codes, `DEF` is returned by default. For the specific list of supported values, please see [Global SMS Price Overview](https://www.tencentcloud.com/zh/document/product/382/8414).
          * @type {string || null}
          */
         this.IsoCode = null;
@@ -2630,7 +2630,7 @@ class SendStatus extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * SMS request error code. For specific meanings, see [Error Codes](https://intl.cloud.tencent.com/zh/document/product/382/40536#6.-error-code). `Ok` will be returned for successful delivery.
+         * SMS request error code. For specific meanings, see [Error Codes](https://www.tencentcloud.com/zh/document/product/382/40536#6.-Error-Code). `Ok` will be returned for successful delivery.
          * @type {string || null}
          */
         this.Code = null;
@@ -2642,7 +2642,7 @@ class SendStatus extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Country/Region code, such as US and MY. For unrecognized country/region codes, `DEF` is returned by default. For the specific list of supported values, please see [Global SMS Price Overview](https://intl.cloud.tencent.com/document/product/382/18051?from_cn_redirect=1).
+         * Country/Region code, such as US and MY. For unrecognized country/region codes, `DEF` is returned by default. For the specific list of supported values, please see [Global SMS Price Overview](https://www.tencentcloud.com/zh/document/product/382/8414).
          * @type {string || null}
          */
         this.IsoCode = null;

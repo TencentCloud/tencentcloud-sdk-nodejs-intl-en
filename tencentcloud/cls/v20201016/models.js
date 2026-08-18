@@ -16684,7 +16684,7 @@ class ModifyDashboardRequest extends  AbstractModel {
         super();
 
         /**
-         * Dashboard id. Obtain DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
+         * Dashboard id.
          * @type {string || null}
          */
         this.DashboardId = null;
@@ -17186,7 +17186,7 @@ Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
         /**
          * Filter is performed by topicId and regionId.
 -topicId: Log topic id.
-- Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+- Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/api/614/42783).
 -Example value: 439a5304-08f9-484b-9c4d-46ff57133816
 - regionId
 - 1: Guangzhou
@@ -17209,7 +17209,7 @@ Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
 -39: Taipei (China)
 - 46: Beijing Finance
 -72: Jakarta
--74: São Paulo
+-74: Sao Paulo
 -78: Shanghai Autonomous Driving Cloud
 
          * @type {Array.<TopicIdAndRegion> || null}

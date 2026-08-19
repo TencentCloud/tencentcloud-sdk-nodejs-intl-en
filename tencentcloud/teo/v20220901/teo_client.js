@@ -26,6 +26,7 @@ const RequestFieldsForException = models.RequestFieldsForException;
 const DeleteL4ProxyRulesRequest = models.DeleteL4ProxyRulesRequest;
 const DescribeOriginGroupResponse = models.DescribeOriginGroupResponse;
 const ModifySecurityJSInjectionRuleRequest = models.ModifySecurityJSInjectionRuleRequest;
+const CreateLogAnalysisDownloadTaskResponse = models.CreateLogAnalysisDownloadTaskResponse;
 const DescribeSecurityIPGroupInfoResponse = models.DescribeSecurityIPGroupInfoResponse;
 const AdaptiveFrequencyControl = models.AdaptiveFrequencyControl;
 const RenewFlag = models.RenewFlag;
@@ -593,6 +594,7 @@ const DescribeSecurityJSInjectionRuleRequest = models.DescribeSecurityJSInjectio
 const DropPageConfig = models.DropPageConfig;
 const DescribeSecurityIPGroupInfoRequest = models.DescribeSecurityIPGroupInfoRequest;
 const ExceptUserRuleScope = models.ExceptUserRuleScope;
+const CreateLogAnalysisDownloadTaskRequest = models.CreateLogAnalysisDownloadTaskRequest;
 const PartialModule = models.PartialModule;
 const DescribeZoneConfigImportResultRequest = models.DescribeZoneConfigImportResultRequest;
 const ModifyApplicationProxyRuleStatusRequest = models.ModifyApplicationProxyRuleStatusRequest;
@@ -1918,6 +1920,17 @@ This API is used to return post-protection traffic request data by default. User
     }
 
     /**
+     * This API is used to query API services under a site.
+     * @param {DescribeSecurityAPIServiceRequest} req
+     * @param {function(string, DescribeSecurityAPIServiceResponse):void} cb
+     * @public
+     */
+    DescribeSecurityAPIService(req, cb) {
+        let resp = new DescribeSecurityAPIServiceResponse();
+        this.request("DescribeSecurityAPIService", req, resp, cb);
+    }
+
+    /**
      * You can use this API to batch delete DNS records.
      * @param {DeleteDnsRecordsRequest} req
      * @param {function(string, DeleteDnsRecordsResponse):void} cb
@@ -3195,18 +3208,22 @@ This API is used to query the configuration information of an IP group, includin
     }
 
     /**
-     * This API is used to query API services under a site.
-     * @param {DescribeSecurityAPIServiceRequest} req
-     * @param {function(string, DescribeSecurityAPIServiceResponse):void} cb
+     * This API is used to create a log analysis download task. After creation, you can query the download task via the DescribeLogAnalysisDownloadTasks API.
+Note:
+1. Supports up to 50 million log entries per download.
+2. Log files are reserved for 3 days.
+3. When multiple tasks exist at the same time, they are processed sequentially based on task creation time.
+     * @param {CreateLogAnalysisDownloadTaskRequest} req
+     * @param {function(string, CreateLogAnalysisDownloadTaskResponse):void} cb
      * @public
      */
-    DescribeSecurityAPIService(req, cb) {
-        let resp = new DescribeSecurityAPIServiceResponse();
-        this.request("DescribeSecurityAPIService", req, resp, cb);
+    CreateLogAnalysisDownloadTask(req, cb) {
+        let resp = new CreateLogAnalysisDownloadTaskResponse();
+        this.request("CreateLogAnalysisDownloadTask", req, resp, cb);
     }
 
     /**
-     * This API is used to quickly import site configuration files. After the import is initiated, the API will return the corresponding task ID (TaskId). Users need to use the site configuration import result query API (DescribeZoneConfigImportResult) to obtain the results of this import task. This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
+     * This API is used to quickly import site configuration files. After the import is initiated, the API will return the corresponding task ID. Users need to use the site configuration import result query API to obtain the execution result of this import task.
      * @param {ImportZoneConfigRequest} req
      * @param {function(string, ImportZoneConfigResponse):void} cb
      * @public

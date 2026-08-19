@@ -6032,7 +6032,7 @@ class PODAuditAIResponse extends  AbstractModel {
         this.AuditorDecision = null;
 
         /**
-         * <p>Reason code for non-compliance. If there are multiple, return a list of multiple codes.</p><p>Enumeration value:</p><ul><li>100: Wrong delivery address</li><li>101: No house number</li><li>104: Single question</li><li>200: No package</li><li>202: Privacy leakage</li></ul>
+         * <p>Non-compliance reason code. If there are multiple, return a list of multiple codes</p><p>Enumeration values:</p><ul><li>-2: Not supported currently or internal logic error</li><li>100: Delivered to the wrong address</li><li>104: No shipping label</li><li>105: Shipping label number not the same as the system</li><li>200: Package delivery location unclear</li><li>202: Acknowledgment contains personal privacy</li></ul>
          * @type {Array.<string> || null}
          */
         this.FailCode = null;
@@ -6814,6 +6814,12 @@ class PODAuditAIRequest extends  AbstractModel {
          */
         this.SignType = null;
 
+        /**
+         * <p>Shipping address of the waybill in the business system</p>
+         * @type {string || null}
+         */
+        this.ShipToAddress = null;
+
     }
 
     /**
@@ -6827,6 +6833,7 @@ class PODAuditAIRequest extends  AbstractModel {
         this.ImageUrlList = 'ImageUrlList' in params ? params.ImageUrlList : null;
         this.WaybillNumber = 'WaybillNumber' in params ? params.WaybillNumber : null;
         this.SignType = 'SignType' in params ? params.SignType : null;
+        this.ShipToAddress = 'ShipToAddress' in params ? params.ShipToAddress : null;
 
     }
 }

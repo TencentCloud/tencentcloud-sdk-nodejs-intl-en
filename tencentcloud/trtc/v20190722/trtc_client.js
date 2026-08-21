@@ -64,11 +64,13 @@ const DescribeUserInfoRequest = models.DescribeUserInfoRequest;
 const DeleteCloudModerationResponse = models.DeleteCloudModerationResponse;
 const DescribeRelayUsageRequest = models.DescribeRelayUsageRequest;
 const DismissRoomResponse = models.DismissRoomResponse;
+const MessageInfo = models.MessageInfo;
 const CloudStorage = models.CloudStorage;
 const VoicePrint = models.VoicePrint;
 const DescribeTrtcUsageResponse = models.DescribeTrtcUsageResponse;
 const TimeValue = models.TimeValue;
 const CreateCloudRecordingResponse = models.CreateCloudRecordingResponse;
+const QueryAIMessageListResponse = models.QueryAIMessageListResponse;
 const DescribeWebRecordRequest = models.DescribeWebRecordRequest;
 const DescribeTRTCRealTimeScaleDataResponse = models.DescribeTRTCRealTimeScaleDataResponse;
 const DescribeRoomInfoRequest = models.DescribeRoomInfoRequest;
@@ -190,6 +192,7 @@ const UpdateStreamIngestRequest = models.UpdateStreamIngestRequest;
 const TextToSpeechSSERequest = models.TextToSpeechSSERequest;
 const StopWebRecordResponse = models.StopWebRecordResponse;
 const TermPair = models.TermPair;
+const QueryAIMessageListRequest = models.QueryAIMessageListRequest;
 const STTConfig = models.STTConfig;
 const StopWebRecordRequest = models.StopWebRecordRequest;
 const McuSeiParams = models.McuSeiParams;
@@ -574,6 +577,17 @@ Note:
     ModifyCloudModeration(req, cb) {
         let resp = new ModifyCloudModerationResponse();
         this.request("ModifyCloudModeration", req, resp, cb);
+    }
+
+    /**
+     * input a task ID to query the list of AI conversation context information.
+     * @param {QueryAIMessageListRequest} req
+     * @param {function(string, QueryAIMessageListResponse):void} cb
+     * @public
+     */
+    QueryAIMessageList(req, cb) {
+        let resp = new QueryAIMessageListResponse();
+        this.request("QueryAIMessageList", req, resp, cb);
     }
 
     /**

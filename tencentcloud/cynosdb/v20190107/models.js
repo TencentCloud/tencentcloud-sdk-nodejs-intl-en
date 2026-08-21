@@ -26481,6 +26481,18 @@ class CynosdbClusterDetail extends  AbstractModel {
          */
         this.RealZone = null;
 
+        /**
+         * <p>Exceed limit enabled status</p><p>Enumeration value:</p><ul><li>yes: Exceed limit enabled</li><li>no: Exceed limit disabled</li></ul><p>Default value: no</p>
+         * @type {string || null}
+         */
+        this.StorageOverUse = null;
+
+        /**
+         * <p>Auto-scaling enabled status</p><p>Enumeration value:</p><ul><li>yes: On</li><li>no: Off</li></ul><p>Default value: no</p>
+         * @type {string || null}
+         */
+        this.StorageAutoExpand = null;
+
     }
 
     /**
@@ -26602,6 +26614,8 @@ class CynosdbClusterDetail extends  AbstractModel {
         this.ClusterLevel = 'ClusterLevel' in params ? params.ClusterLevel : null;
         this.IsOpenTDE = 'IsOpenTDE' in params ? params.IsOpenTDE : null;
         this.RealZone = 'RealZone' in params ? params.RealZone : null;
+        this.StorageOverUse = 'StorageOverUse' in params ? params.StorageOverUse : null;
+        this.StorageAutoExpand = 'StorageAutoExpand' in params ? params.StorageAutoExpand : null;
 
     }
 }

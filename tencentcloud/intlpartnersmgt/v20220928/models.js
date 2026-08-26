@@ -861,73 +861,43 @@ class DescribeCustomerBillDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Sub-account UIN.
+         * <p>Sub-customer uin</p>
          * @type {number || null}
          */
         this.CustomerUin = null;
 
         /**
-         * Inquiry month, in the format of YYYY-MM, such as 2023-01.
+         * <p>Inquiry month, in the format of YYYY-MM, such as 2023-01</p>
          * @type {string || null}
          */
         this.Month = null;
 
         /**
-         * Page parameter: number of entries per page. Value range: [1, 200]
+         * <p>Pagination parameter: entries per page. Value range: [1, 200]</p>
          * @type {number || null}
          */
         this.PageSize = null;
 
         /**
-         * Page parameter: current page number. The minimum value is 1.
+         * <p>Pagination parameter: current page number. The minimum value is 1.</p>
          * @type {number || null}
          */
         this.Page = null;
 
         /**
-         * Billing mode. Valid values:
-prePay (Monthly subscription)
-postPay (Pay-As-You-Go resources)
+         * <p>Billing mode</p><p>Enumeration values:</p><ul><li>prePay: yearly/monthly subscription</li><li>postPay: Pay-As-You-Go resources</li></ul>
          * @type {string || null}
          */
         this.PayMode = null;
 
         /**
-         * Transaction type. Valid values:
-prepay_purchase (Purchase)
-prepay_renew (Renewal)
-prepay_modify (Upgrade/Downgrade)
-prepay_return ( Monthly subscription refund)
-postpay_deduct (Pay-as-you-go)
-postpay_deduct_h (Hourly settlement)
-postpay_deduct_d (Daily settlement)
-postpay_deduct_m (Monthly settlement)
-offline_deduct (Offline project deduction)
-online_deduct (Offline product deduction)
-recon_deduct (Adjustment - deduction)
-recon_increase (Adjustment - compensation)
-ripay_purchase (One-off RI Fee)
-postpay_deduct_s (Spot)
-ri_hour_pay (Hourly RI fee)
-prePurchase (New monthly subscription)
-preRenew (Monthly subscription renewal)
-preUpgrade (Upgrade/Downgrade)
-preDowngrade (Upgrade/Downgrade)
-svp_hour_pay (Hourly Savings Plan fee)
-recon_guarantee (Minimum spend deduction)
-pre_purchase (New monthly subscription)
-pre_renew (Monthly subscription renewal)
-pre_upgrade (Upgrade/Downgrade)
-pre_downgrade (Upgrade/Downgrade)
+         * <p>Transaction type</p><p>Enumeration values:</p><ul><li>prepay_purchase: Purchase</li><li>prepay_renew: Renewal</li><li>prepay_modify: Upgrade/Downgrade</li><li>prepay_return: yearly/monthly subscription refund</li><li>postpay_deduct: Pay-as-you-go</li><li>postpay_deduct_h: Hourly settlement</li><li>postpay_deduct_d: Daily settlement</li><li>postpay_deduct_m: Monthly settlement</li><li>offline_deduct: Offline project deduction</li><li>online_deduct: Offline product deduction</li><li>recon_deduct: Adjustment - deduction</li><li>recon_increase: Adjustment - compensation</li><li>ripay_purchase: One-off RI Fee</li><li>postpay_deduct_s: Spot</li><li>ri_hour_pay: Hourly RI fee</li><li>prePurchase: New yearly/monthly subscription</li><li>preRenew: yearly/monthly subscription renewal</li><li>preUpgrade: Upgrade/Downgrade</li><li>preDowngrade: Upgrade/Downgrade</li><li>svp_hour_pay: Hourly Savings Plan fee</li><li>recon_guarantee: Minimum spend deduction</li><li>pre_purchase: New yearly/monthly subscription</li><li>pre_renew: yearly/monthly subscription renewal</li><li>pre_upgrade: Upgrade/Downgrade</li><li>pre_downgrade: Upgrade/Downgrade</li></ul>
          * @type {string || null}
          */
         this.ActionType = null;
 
         /**
-         * Payment status
-0: not distinguished
-1: paid
-2: unpaid
+         * <p>Payment Status<br>0: case-insensitive<br>1: paid<br>2: unpaid</p>
          * @type {string || null}
          */
         this.IsConfirmed = null;
@@ -1896,61 +1866,31 @@ class DescribeCustomerBillSummaryRequest extends  AbstractModel {
         super();
 
         /**
-         * Customer UIN
+         * <p>Sub-customer uin</p>
          * @type {number || null}
          */
         this.CustomerUin = null;
 
         /**
-         * The queried month in "YYYY-MM" format, such as 2023-01.
+         * <p>Inquiry month, in the format of YYYY-MM, such as 2023-01</p>
          * @type {string || null}
          */
         this.Month = null;
 
         /**
-         * Billing mode. Valid values:
-`prePay` (Monthly subscription)
-`postPay` (Pay-as-you-go)
+         * <p>Billing mode</p><p>Enumeration values:</p><ul><li>prePay: yearly/monthly subscription</li><li>postPay: Pay-As-You-Go resources</li></ul>
          * @type {string || null}
          */
         this.PayMode = null;
 
         /**
-         * Transaction type. Valid values:
-`prepay_purchase` (Purchase)
-`prepay_renew` (Renewal)
-`prepay_modify` (Upgrade/Downgrade)
-`prepay_return` (Monthly subscription refund)
-`postpay_deduct` (Pay-as-you-go)
-`postpay_deduct_h` (Hourly settlement)
-`postpay_deduct_d` (Daily settlement)
-`postpay_deduct_m` (Monthly settlement)
-`offline_deduct` (Offline project deduction)
-`online_deduct` (Offline product deduction)
-`recon_deduct` (Adjustment - deduction)
-`recon_increase` (Adjustment - compensation)
-`ripay_purchase` (One-off RI Fee)
-`postpay_deduct_s` (Spot)
-`ri_hour_pay` (Hourly RI fee)
-`prePurchase` (New monthly subscription)
-`preRenew` (Monthly subscription renewal)
-`preUpgrade` (Upgrade/Downgrade)
-`preDowngrade` (Upgrade/Downgrade)
-`svp_hour_pay` (Hourly Savings Plan fee)
-`recon_guarantee` (Minimum spend deduction)
-`pre_purchase` (New monthly subscription)
-`pre_renew` (Monthly subscription renewal)
-`pre_upgrade` (Upgrade/Downgrade)
-`pre_downgrade` (Upgrade/Downgrade)
+         * <p>Transaction type</p><p>Enumeration values:</p><ul><li>prepay_purchase: Purchase</li><li>prepay_renew: Renewal</li><li>prepay_modify: Upgrade/Downgrade</li><li>prepay_return: yearly/monthly subscription refund</li><li>postpay_deduct: Pay-as-you-go</li><li>postpay_deduct_h: Hourly settlement</li><li>postpay_deduct_d: Daily settlement</li><li>postpay_deduct_m: Monthly settlement</li><li>offline_deduct: Offline project deduction</li><li>online_deduct: Offline product deduction</li><li>recon_deduct: Adjustment - deduction</li><li>ripay_purchase: One-off RI Fee</li><li>postpay_deduct_s: Spot</li><li>ri_hour_pay: Hourly RI fee</li><li>prePurchase: New yearly/monthly subscription</li><li>preRenew: yearly/monthly subscription renewal</li><li>preUpgrade: Upgrade/Downgrade</li></ul>
          * @type {string || null}
          */
         this.ActionType = null;
 
         /**
-         * Payment status
-`0`: N/A
-`1`: Paid
-`2`: Unpaid
+         * <p>Payment Status<br>0: case-insensitive<br>1: paid<br>2: unpaid</p>
          * @type {string || null}
          */
         this.IsConfirmed = null;
@@ -2743,7 +2683,7 @@ class DescribeCustomerBillSummaryResponse extends  AbstractModel {
         super();
 
         /**
-         * Total amount
+         * <p>Total amount</p>
          * @type {number || null}
          */
         this.TotalCost = null;
@@ -3158,13 +3098,13 @@ class DescribeBillDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data details.
+         * <p>Data details</p>
          * @type {Array.<CustomerBillDetailData> || null}
          */
         this.DetailSet = null;
 
         /**
-         * Total number of entries.
+         * <p>Total quantity.</p>
          * @type {number || null}
          */
         this.Total = null;
@@ -5359,13 +5299,13 @@ class DescribeCustomerBillDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of data entries
+         * <p>total number of records</p>
          * @type {number || null}
          */
         this.Total = null;
 
         /**
-         * Data detailsNote: This field may return null, indicating that no valid values can be obtained.
+         * <p>Data details</p>
          * @type {Array.<BillDetailData> || null}
          */
         this.DetailSet = null;
@@ -5537,31 +5477,31 @@ class DescribeBillDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Inquiry month, in the format of YYYY-MM, such as 2023-01
+         * <p>Query month, in the format of YYYY-MM, such as 2023-01</p>
          * @type {string || null}
          */
         this.Month = null;
 
         /**
-         * Page parameter: number of entries per page. Value range: [1, 200]
+         * <p>Page parameter: number of entries per page. Value range: [1, 200]</p>
          * @type {number || null}
          */
         this.PageSize = null;
 
         /**
-         * Page parameter: current page number. The minimum value is 1.
+         * <p>Page parameter: current page number. The minimum value is 1.</p>
          * @type {number || null}
          */
         this.Page = null;
 
         /**
-         * Billing mode. Valid values: prePay (Monthly subscription) and postPay (Pay-As-You-Go resources)
+         * <p>Billing mode</p><p>Enumeration values:</p><ul><li>prePay: yearly/monthly subscription</li><li>postPay: Pay-As-You-Go resources</li></ul>
          * @type {string || null}
          */
         this.PayMode = null;
 
         /**
-         * Transaction type. Valid values: prepay_purchase (Purchase), prepay_renew (Renewal), prepay_modify (Upgrade/Downgrade), prepay_return ( Monthly subscription refund), postpay_deduct (Pay-as-you-go), postpay_deduct_h (Hourly settlement), postpay_deduct_d (Daily settlement), postpay_deduct_m (Monthly settlement), offline_deduct (Offline project deduction), online_deduct (Offline product deduction), recon_deduct (Adjustment - deduction), recon_increase (Adjustment - compensation), ripay_purchase (One-off RI Fee), postpay_deduct_s (Spot), ri_hour_pay (Hourly RI fee), prePurchase (New monthly subscription), preRenew (Monthly subscription renewal), preUpgrade (Upgrade/Downgrade), preDowngrade (Upgrade/Downgrade), svp_hour_pay (Hourly Savings Plan fee), recon_guarantee (Minimum spend deduction), pre_purchase (New monthly subscription), pre_renew (Monthly subscription renewal), pre_upgrade (Upgrade/Downgrade), pre_downgrade (Upgrade/Downgrade)
+         * <p>Transaction type</p><p>Enumeration values:</p><ul><li>prepay_purchase: Purchase</li><li>prepay_renew:  Renewal</li><li>prepay_modify: Upgrade/Downgrade</li><li>prepay_return: yearly/monthly subscription refund</li><li>postpay_deduct: Pay-as-you-go</li><li>postpay_deduct_h: Hourly settlement</li><li>postpay_deduct_d: Daily settlement</li><li>postpay_deduct_m: Monthly settlement</li><li>offline_deduct: Offline project deduction</li><li>online_deduct: Offline product deduction</li><li>recon_deduct: Adjustment - deduction</li><li>recon_increase: Adjustment - compensation</li><li>ripay_purchase: One-off RI Fee</li><li>postpay_deduct_s: Spot</li><li>ri_hour_pay: Hourly RI fee</li><li>prePurchase: New yearly/monthly subscription</li><li>preRenew: yearly/monthly subscription renewal</li><li>preUpgrade: Upgrade/Downgrade</li><li>preDowngrade: Upgrade/Downgrade</li><li>svp_hour_pay: Hourly Savings Plan fee</li><li>recon_guarantee: Minimum spend deduction</li><li>pre_purchase: New yearly/monthly subscription</li><li>pre_renew: yearly/monthly subscription renewal</li><li>pre_upgrade: Upgrade/Downgrade</li><li>pre_downgrade: Upgrade/Downgrade</li></ul>
          * @type {string || null}
          */
         this.ActionType = null;
@@ -5717,7 +5657,7 @@ class CustomerBillDetailData extends  AbstractModel {
         /**
          * Billing mode
 .
-Monthly subscription.
+yearly/monthly subscription.
 Pay-As-You-Go resources.
 Standard ri reserved instances.
          * @type {string || null}
@@ -5874,6 +5814,30 @@ Original cost = component list price * component usage * usage duration.
          */
         this.Tags = null;
 
+        /**
+         * Product code
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * Subproduct code
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * Component type code
+         * @type {string || null}
+         */
+        this.ComponentCode = null;
+
+        /**
+         * Component code
+         * @type {string || null}
+         */
+        this.ItemCode = null;
+
     }
 
     /**
@@ -5920,6 +5884,10 @@ Original cost = component list price * component usage * usage duration.
                 this.Tags.push(obj);
             }
         }
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.ComponentCode = 'ComponentCode' in params ? params.ComponentCode : null;
+        this.ItemCode = 'ItemCode' in params ? params.ItemCode : null;
 
     }
 }
@@ -6484,7 +6452,7 @@ Please note: Historical daily bill dated before "2025-06-01",cannot be queried.
 }
 
 /**
- * Customer bill details
+ * Customer Bill Details
  * @class
  */
 class BillDetailData extends  AbstractModel {
@@ -6492,205 +6460,220 @@ class BillDetailData extends  AbstractModel {
         super();
 
         /**
-         * reseller account.
+         * <p> Distributor account</p>
          * @type {number || null}
          */
         this.PayerAccountId = null;
 
         /**
-         * Subaccount.
+         * <p>Sub-Customer account</p>
          * @type {number || null}
          */
         this.OwnerAccountId = null;
 
         /**
-         * Operator account.
+         * <p>Operator account</p>
          * @type {number || null}
          */
         this.OperatorAccountId = null;
 
         /**
-         * Product name.
+         * <p>Product name.</p>
          * @type {string || null}
          */
         this.ProductName = null;
 
         /**
-         * Billing mode
-.
-Monthly subscription (annual and monthly).
-Pay-As-You-Go resources.
-Standard ri reserved instance.
+         * <p>Billing mode</p><p>Enumeration values:</p><ul><li>yearly/monthly subscription</li><li>Pay-As-You-Go resources</li></ul>
          * @type {string || null}
          */
         this.BillingMode = null;
 
         /**
-         * Project name.
-
+         * <p>Project name.</p>
          * @type {string || null}
          */
         this.ProjectName = null;
 
         /**
-         * Resource region.
+         * <p>Associated region of the resource</p>
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * Resource available zone.
+         * <p>Availability zone of resource</p>
          * @type {string || null}
          */
         this.AvailabilityZone = null;
 
         /**
-         * Instance id.
+         * <p>Instance ID.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Instance name.
+         * <p>Instance name.</p>
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Sub-Product name
-.
-
+         * <p>Sub-product name</p>
          * @type {string || null}
          */
         this.SubProductName = null;
 
         /**
-         * Settlement type.
+         * <p>Settlement type</p>
          * @type {string || null}
          */
         this.TransactionType = null;
 
         /**
-         * <Transaction id>.
+         * <p>Transaction log ID</p>
          * @type {string || null}
          */
         this.TransactionId = null;
 
         /**
-         * Settlement time.
-
+         * <p>Time of settlement</p>
          * @type {string || null}
          */
         this.TransactionTime = null;
 
         /**
-         * <Resource start time>.
+         * <p>Resource usage start time</p>
          * @type {string || null}
          */
         this.UsageStartTime = null;
 
         /**
-         * <Resource end usage time>.
+         * <p>Resource usage end time</p>
          * @type {string || null}
          */
         this.UsageEndTime = null;
 
         /**
-         * Component.
+         * <p>Component</p>
          * @type {string || null}
          */
         this.ComponentType = null;
 
         /**
-         * Component name.
+         * <p>Component name</p>
          * @type {string || null}
          */
         this.ComponentName = null;
 
         /**
-         * Component list price.
+         * <p>Component list price</p>
          * @type {string || null}
          */
         this.ComponentListPrice = null;
 
         /**
-         * Price unit.
+         * <p>Price unit</p>
          * @type {string || null}
          */
         this.ComponentPriceMeasurementUnit = null;
 
         /**
-         * Component usage.
+         * <p>Component usage</p>
          * @type {string || null}
          */
         this.ComponentUsage = null;
 
         /**
-         * Component usage unit.
+         * <p>Component usage unit</p>
          * @type {string || null}
          */
         this.ComponentUsageUnit = null;
 
         /**
-         * Resource usage duration.
+         * <p>Resource usage duration</p>
          * @type {string || null}
          */
         this.UsageDuration = null;
 
         /**
-         * duration unit.
+         * <p>Duration unit</p>
          * @type {string || null}
          */
         this.DurationUnit = null;
 
         /**
-         * Total original price.
-Original cost = component list price * component usage * usage duration.
+         * <p>Original total price<br>Original Cost = Component List Price * Component Usage * Usage Duration</p>
          * @type {string || null}
          */
         this.OriginalCost = null;
 
         /**
-         * Discount (default is 1) - abandoned.
+         * <p>Discount (default: 1) - abandoned</p>
          * @type {string || null}
          */
         this.DiscountRate = null;
 
         /**
-         * Currency.
+         * <p>Currency.</p>
          * @type {string || null}
          */
         this.Currency = null;
 
         /**
-         * Total cost after discount.
+         * <p>Total cost after discount</p>
          * @type {string || null}
          */
         this.TotalAmountAfterDiscount = null;
 
         /**
-         * Voucher deduction amount.
+         * <p>Voucher deducted amount</p>
          * @type {string || null}
          */
         this.VoucherDeduction = null;
 
         /**
-         * = Total Amount After Discount - Voucher Deduction
+         * <p>= Total Amount After Discount - Voucher Deduction</p>
          * @type {string || null}
          */
         this.TotalCost = null;
 
         /**
-         * Identifier (id).
+         * <p>id</p>
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * customer discount rate. The discount rate applied to the reseller's customer, which set by reseller, default value equal to 1.
+         * <p>customer discount rate. The discount rate for customers of resellers, set by the reseller. The default value is 1.</p>
          * @type {string || null}
          */
         this.CustomerDiscountRate = null;
+
+        /**
+         * <p>Product code</p>
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * <p>Sub-product code</p>
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * <p>Component type code</p>
+         * @type {string || null}
+         */
+        this.ComponentCode = null;
+
+        /**
+         * <p>Component code</p>
+         * @type {string || null}
+         */
+        this.ItemCode = null;
 
     }
 
@@ -6733,6 +6716,10 @@ Original cost = component list price * component usage * usage duration.
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
         this.Id = 'Id' in params ? params.Id : null;
         this.CustomerDiscountRate = 'CustomerDiscountRate' in params ? params.CustomerDiscountRate : null;
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.ComponentCode = 'ComponentCode' in params ? params.ComponentCode : null;
+        this.ItemCode = 'ItemCode' in params ? params.ItemCode : null;
 
     }
 }

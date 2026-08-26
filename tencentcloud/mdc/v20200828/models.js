@@ -1624,27 +1624,25 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.RTMPPullSettings = null;
 
         /**
-         * CIDR allowlist
-This parameter is valid if `Protocol` is set to `RTMP_PULL`. If this parameter is left empty, there is no restriction on clients’ IP addresses.
-Note: This field may return `null`, indicating that no valid value was found.
+         * CIDR Whitelist List. Effective when Protocol is RTMP_PULL. Empty means no restriction on client IP.
          * @type {Array.<string> || null}
          */
         this.AllowIpList = null;
 
         /**
-         * 
+         * The output RTSP streaming configuration information.
          * @type {DescribeOutputRTSPPullSettings || null}
          */
         this.RTSPPullSettings = null;
 
         /**
-         * 
+         * Output the HLS streaming configuration information.
          * @type {DescribeOutputHLSPullSettings || null}
          */
         this.HLSPullSettings = null;
 
         /**
-         * 
+         * The maximum number of concurrent streams is 4, with a default of 4.
          * @type {number || null}
          */
         this.MaxConcurrent = null;
@@ -1654,6 +1652,42 @@ Note: This field may return `null`, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
+
+        /**
+         * The available zone currently only supports a maximum of one output.
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
+        /**
+         * Output RIST configuration information.
+         * @type {DescribeOutputRISTSettings || null}
+         */
+        this.RISTSettings = null;
+
+        /**
+         * For streams containing multiple audio/video tracks, you can specify the tracks that need to be used
+         * @type {PidSelector || null}
+         */
+        this.PidSelector = null;
+
+        /**
+         * Output module types, including Pinpoint (single point output, supporting up to four concurrent outputs); MultiMesh (Multi output, supports concurrent outputs greater than four, currently up to 200). The default type is Pinpoint output. For a single Flow, a region can only have a maximum of one MultiMesh output.
+         * @type {string || null}
+         */
+        this.OutputKind = null;
+
+        /**
+         * Output module configuration, relevant URLs, including provided streaming addresses or configured output to third-party forwarding addresses
+         * @type {Array.<StreamUrlDetail> || null}
+         */
+        this.StreamUrls = null;
+
+        /**
+         * For streams containing multiple audio/video tracks, you can specify the tracks that need to be used
+         * @type {StreamSelector || null}
+         */
+        this.StreamSelector = null;
 
     }
 
@@ -1718,6 +1752,35 @@ Note: This field may return `null`, indicating that no valid value was found.
         }
         this.MaxConcurrent = 'MaxConcurrent' in params ? params.MaxConcurrent : null;
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
+
+        if (params.RISTSettings) {
+            let obj = new DescribeOutputRISTSettings();
+            obj.deserialize(params.RISTSettings)
+            this.RISTSettings = obj;
+        }
+
+        if (params.PidSelector) {
+            let obj = new PidSelector();
+            obj.deserialize(params.PidSelector)
+            this.PidSelector = obj;
+        }
+        this.OutputKind = 'OutputKind' in params ? params.OutputKind : null;
+
+        if (params.StreamUrls) {
+            this.StreamUrls = new Array();
+            for (let z in params.StreamUrls) {
+                let obj = new StreamUrlDetail();
+                obj.deserialize(params.StreamUrls[z]);
+                this.StreamUrls.push(obj);
+            }
+        }
+
+        if (params.StreamSelector) {
+            let obj = new StreamSelector();
+            obj.deserialize(params.StreamSelector)
+            this.StreamSelector = obj;
+        }
 
     }
 }
@@ -1958,6 +2021,63 @@ class StartStreamLinkFlowResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class DescribeOutputRISTSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Profile = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Buffer = null;
+
+        /**
+         * 
+         * @type {Array.<OutputRISTSourceAddressResp> || null}
+         */
+        this.SourceAddresses = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
+        this.Buffer = 'Buffer' in params ? params.Buffer : null;
+
+        if (params.SourceAddresses) {
+            this.SourceAddresses = new Array();
+            for (let z in params.SourceAddresses) {
+                let obj = new OutputRISTSourceAddressResp();
+                obj.deserialize(params.SourceAddresses[z]);
+                this.SourceAddresses.push(obj);
+            }
+        }
 
     }
 }
@@ -4062,6 +4182,41 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
+ * 
+ * @class
+ */
+class OutputRISTSourceAddressResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
  * ModifyStreamLinkOutputInfo request structure.
  * @class
  */
@@ -5680,6 +5835,7 @@ module.exports = {
     ModifyStreamLinkFlowResponse: ModifyStreamLinkFlowResponse,
     StartStreamLinkFlowRequest: StartStreamLinkFlowRequest,
     StartStreamLinkFlowResponse: StartStreamLinkFlowResponse,
+    DescribeOutputRISTSettings: DescribeOutputRISTSettings,
     CreateOutputRTPSettingsDestinations: CreateOutputRTPSettingsDestinations,
     CreateOutputInfo: CreateOutputInfo,
     DescribeStreamLinkFlowRealtimeStatusResponse: DescribeStreamLinkFlowRealtimeStatusResponse,
@@ -5721,6 +5877,7 @@ module.exports = {
     SRTAddressDestination: SRTAddressDestination,
     DescribeStreamLinkFlowsRequest: DescribeStreamLinkFlowsRequest,
     FlowRealtimeStatusItem: FlowRealtimeStatusItem,
+    OutputRISTSourceAddressResp: OutputRISTSourceAddressResp,
     ModifyStreamLinkOutputInfoRequest: ModifyStreamLinkOutputInfoRequest,
     CreateInputRTSPPullSettings: CreateInputRTSPPullSettings,
     FlowRealtimeStatusSRT: FlowRealtimeStatusSRT,

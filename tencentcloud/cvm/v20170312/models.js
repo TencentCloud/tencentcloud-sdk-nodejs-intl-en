@@ -4317,6 +4317,12 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
          */
         this.LaunchTemplate = null;
 
+        /**
+         * Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).
+         * @type {Array.<NetworkInterfaces> || null}
+         */
+        this.NetworkInterfaces = null;
+
     }
 
     /**
@@ -4418,6 +4424,15 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
             let obj = new LaunchTemplate();
             obj.deserialize(params.LaunchTemplate)
             this.LaunchTemplate = obj;
+        }
+
+        if (params.NetworkInterfaces) {
+            this.NetworkInterfaces = new Array();
+            for (let z in params.NetworkInterfaces) {
+                let obj = new NetworkInterfaces();
+                obj.deserialize(params.NetworkInterfaces[z]);
+                this.NetworkInterfaces.push(obj);
+            }
         }
 
     }
@@ -6594,6 +6609,12 @@ Note: this field is in beta test.
          */
         this.TemplateDataModifyAction = null;
 
+        /**
+         * Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).
+         * @type {Array.<NetworkInterfaces> || null}
+         */
+        this.NetworkInterfaces = null;
+
     }
 
     /**
@@ -6700,6 +6721,15 @@ Note: this field is in beta test.
             this.Metadata = obj;
         }
         this.TemplateDataModifyAction = 'TemplateDataModifyAction' in params ? params.TemplateDataModifyAction : null;
+
+        if (params.NetworkInterfaces) {
+            this.NetworkInterfaces = new Array();
+            for (let z in params.NetworkInterfaces) {
+                let obj = new NetworkInterfaces();
+                obj.deserialize(params.NetworkInterfaces[z]);
+                this.NetworkInterfaces.push(obj);
+            }
+        }
 
     }
 }
@@ -7376,6 +7406,12 @@ Note: this field is in beta test.
          */
         this.TemplateDataModifyAction = null;
 
+        /**
+         * Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).
+         * @type {Array.<NetworkInterfaces> || null}
+         */
+        this.NetworkInterfaces = null;
+
     }
 
     /**
@@ -7490,6 +7526,15 @@ Note: this field is in beta test.
             this.Metadata = obj;
         }
         this.TemplateDataModifyAction = 'TemplateDataModifyAction' in params ? params.TemplateDataModifyAction : null;
+
+        if (params.NetworkInterfaces) {
+            this.NetworkInterfaces = new Array();
+            for (let z in params.NetworkInterfaces) {
+                let obj = new NetworkInterfaces();
+                obj.deserialize(params.NetworkInterfaces[z]);
+                this.NetworkInterfaces.push(obj);
+            }
+        }
 
     }
 }
@@ -8115,6 +8160,76 @@ class CreateLaunchTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).
+ * @class
+ */
+class NetworkInterfaces extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies whether the network interface is primary or secondary. Valid values must be uppercase. The `NetworkInterfaces` array must contain exactly one `PRIMARY` network interface and can contain multiple `SECONDARY` network interfaces. Valid values:<li>`PRIMARY`: Primary network interface.</li><li>`SECONDARY`: Secondary network interface.</li>
+         * @type {string || null}
+         */
+        this.InterfaceType = null;
+
+        /**
+         * VPC ID in the format of `vpc-xxx`. You can obtain a valid VPC ID from the [VPC console](https://console.tencentcloud.com/vpc/vpc?rid=1) or from the `VpcId` field returned by the [DescribeVpcs](https://www.tencentcloud.com/document/product/215/15778) API. If both `VpcId` and `SubnetId` are set to `DEFAULT` when creating an instance, the default VPC is used.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC subnet ID in the format of `subnet-xxx`. You can obtain a valid subnet ID from the [subnet console](https://console.tencentcloud.com/vpc/subnet) or from the `SubnetId` field returned by the [DescribeSubnets](https://www.tencentcloud.com/document/product/215/15784) API. If both `SubnetId` and `VpcId` are set to `DEFAULT` when creating an instance, the default VPC is used.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Required. Specifies the number of private IPv4 addresses automatically assigned to each network interface. Manually specifying IP addresses and automatically assigning IP addresses at the same time is not supported. Valid range: [1, 50].
+         * @type {number || null}
+         */
+        this.PrivateIpv4AddressCount = null;
+
+        /**
+         * ID of an existing elastic network interface (ENI) to be attached. This parameter applies only to secondary network interfaces. The primary network interface is created automatically through the existing process and cannot be specified using this parameter. When an existing ENI is specified, `InstanceCount` must be set to 1.
+         * @type {string || null}
+         */
+        this.NetworkInterfaceId = null;
+
+        /**
+         * Security groups associated with the instance. You can obtain the security group IDs from the `SecurityGroupId` field returned by the [DescribeSecurityGroups](https://www.tencentcloud.com/document/api/215/15808) API. If this parameter is not specified, the default security group of the specified project is associated. If no default security group exists, one is automatically created. Each user can configure up to 50 security groups per project in each region.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Specifies whether the associated elastic network interface (ENI) is deleted when the CVM instance is terminated. This parameter applies only to secondary network interfaces. By default, secondary network interfaces are retained to preserve the existing behavior. This parameter does not apply to the primary network interface, which is always deleted when the instance is terminated. Default value: `false`.
+         * @type {boolean || null}
+         */
+        this.DeleteWithInstance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InterfaceType = 'InterfaceType' in params ? params.InterfaceType : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.PrivateIpv4AddressCount = 'PrivateIpv4AddressCount' in params ? params.PrivateIpv4AddressCount : null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
+
+    }
+}
+
+/**
  * CreateKeyPair request structure.
  * @class
  */
@@ -8664,6 +8779,12 @@ If the dry run succeeds, the RequestId will be returned.
         this.ChcIds = null;
 
         /**
+         * Partition number of the partition placement group. Valid values depend on the number of partitions in the selected placement group. If the selected placement group is a partition placement group and this parameter is not specified, a partition is randomly assigned. This feature is in beta test.
+         * @type {number || null}
+         */
+        this.PartitionNumber = null;
+
+        /**
          * Instance termination protection flag, indicating whether an instance is allowed to be deleted through an API. Valid values:<br><li>true: Instance protection is enabled, and the instance is not allowed to be deleted through the API.</li><br><li>false: Instance protection is disabled, and the instance is allowed to be deleted through the API.</li><br><br>Default value: false.
          * @type {boolean || null}
          */
@@ -8674,6 +8795,12 @@ If the dry run succeeds, the RequestId will be returned.
          * @type {boolean || null}
          */
         this.EnableJumboFrame = null;
+
+        /**
+         * Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).
+         * @type {Array.<NetworkInterfaces> || null}
+         */
+        this.NetworkInterfaces = null;
 
     }
 
@@ -8790,8 +8917,18 @@ If the dry run succeeds, the RequestId will be returned.
         }
         this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
         this.ChcIds = 'ChcIds' in params ? params.ChcIds : null;
+        this.PartitionNumber = 'PartitionNumber' in params ? params.PartitionNumber : null;
         this.DisableApiTermination = 'DisableApiTermination' in params ? params.DisableApiTermination : null;
         this.EnableJumboFrame = 'EnableJumboFrame' in params ? params.EnableJumboFrame : null;
+
+        if (params.NetworkInterfaces) {
+            this.NetworkInterfaces = new Array();
+            for (let z in params.NetworkInterfaces) {
+                let obj = new NetworkInterfaces();
+                obj.deserialize(params.NetworkInterfaces[z]);
+                this.NetworkInterfaces.push(obj);
+            }
+        }
 
     }
 }
@@ -13118,6 +13255,7 @@ module.exports = {
     ConfigureChcAssistVpcRequest: ConfigureChcAssistVpcRequest,
     DescribeImportImageOsRequest: DescribeImportImageOsRequest,
     CreateLaunchTemplateResponse: CreateLaunchTemplateResponse,
+    NetworkInterfaces: NetworkInterfaces,
     CreateKeyPairRequest: CreateKeyPairRequest,
     InstanceStatus: InstanceStatus,
     InquiryPriceRenewInstancesResponse: InquiryPriceRenewInstancesResponse,

@@ -6340,6 +6340,12 @@ class CreateStreamPackageHarvestJobRequest extends  AbstractModel {
          */
         this.Manifest = null;
 
+        /**
+         * Callback address after recording completion
+         * @type {string || null}
+         */
+        this.CallbackURL = null;
+
     }
 
     /**
@@ -6357,6 +6363,7 @@ class CreateStreamPackageHarvestJobRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Destination = 'Destination' in params ? params.Destination : null;
         this.Manifest = 'Manifest' in params ? params.Manifest : null;
+        this.CallbackURL = 'CallbackURL' in params ? params.CallbackURL : null;
 
     }
 }

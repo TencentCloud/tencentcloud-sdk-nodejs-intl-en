@@ -153,6 +153,7 @@ const SpotMarketOptions = models.SpotMarketOptions;
 const ConfigureChcAssistVpcRequest = models.ConfigureChcAssistVpcRequest;
 const DescribeImportImageOsRequest = models.DescribeImportImageOsRequest;
 const CreateLaunchTemplateResponse = models.CreateLaunchTemplateResponse;
+const NetworkInterfaces = models.NetworkInterfaces;
 const CreateKeyPairRequest = models.CreateKeyPairRequest;
 const InstanceStatus = models.InstanceStatus;
 const InquiryPriceRenewInstancesResponse = models.InquiryPriceRenewInstancesResponse;

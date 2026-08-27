@@ -929,6 +929,73 @@ class RenewTokenPlanTeamOrderResponse extends  AbstractModel {
 }
 
 /**
+ * Usage item of an individual object in the ranking list, including the object identifier, statistical values within a time period (Stats), and a list of time series points within a time period (Series, returned only when ShowAll=false).
+ * @class
+ */
+class UsageRankItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Global ranking (starting from 1). In pagination scenarios, this is still the position in the full sorting order, not the serial number within the page.
+         * @type {number || null}
+         */
+        this.Rank = null;
+
+        /**
+         * Object identifier. The apikey dimension is the APIKey ID; the endpoint dimension is the access point; the model dimension is the model name.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Display name of the object. In the apikey dimension, return the APIKey name (deleted APIKeys retain their original names);
+Key whose endpoint and model dimensions are equal.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Statistical value within a time period
+         * @type {UsageStats || null}
+         */
+        this.Stats = null;
+
+        /**
+         * List of time series points within a time period
+         * @type {UsageSeries || null}
+         */
+        this.Series = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Rank = 'Rank' in params ? params.Rank : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Stats) {
+            let obj = new UsageStats();
+            obj.deserialize(params.Stats)
+            this.Stats = obj;
+        }
+
+        if (params.Series) {
+            let obj = new UsageSeries();
+            obj.deserialize(params.Series)
+            this.Series = obj;
+        }
+
+    }
+}
+
+/**
  * Token Plan API Key details
  * @class
  */
@@ -1192,6 +1259,69 @@ class DescribeApiKeyListRequest extends  AbstractModel {
                 this.Sorts.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * List of time series points within the usage time period (indexed by metric key). It is a JSON array in string form. The array length matches the response Timestamps, and null is used where there is no data point. The specific keys included are determined by the response MetricKeys.
+ * @class
+ */
+class UsageSeries extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Amount of total tokens used within a time period in JSON string form, for example, <code>&quot;[12,null,15]&quot;</code>.</p>
+         * @type {string || null}
+         */
+        this.TotalToken = null;
+
+        /**
+         * <p>Amount of input tokens used within a time period in JSON string form, for example, <code>&quot;[7,null,9]&quot;</code>.</p>
+         * @type {string || null}
+         */
+        this.InputTotalToken = null;
+
+        /**
+         * <p>Amount of output tokens used within a time period in JSON string form, for example, <code>&quot;[5,null,6]&quot;</code>.</p>
+         * @type {string || null}
+         */
+        this.OutputTotalToken = null;
+
+        /**
+         * <p>Read cache token count usage of the tokens family in JSON string form within a time period, for example, <code>&quot;[5,null,6]&quot;</code>.</p>
+         * @type {string || null}
+         */
+        this.CacheTotalToken = null;
+
+        /**
+         * <p>Usage of search requests in JSON string form within a time period, for example, <code>&quot;[5,null,6]&quot;</code>.</p>
+         * @type {string || null}
+         */
+        this.SearchRequestCount = null;
+
+        /**
+         * <p>Usage of search engine call count in JSON string form within a time period, for example, <code>&quot;[5,null,6]&quot;</code>.</p>
+         * @type {string || null}
+         */
+        this.SearchCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalToken = 'TotalToken' in params ? params.TotalToken : null;
+        this.InputTotalToken = 'InputTotalToken' in params ? params.InputTotalToken : null;
+        this.OutputTotalToken = 'OutputTotalToken' in params ? params.OutputTotalToken : null;
+        this.CacheTotalToken = 'CacheTotalToken' in params ? params.CacheTotalToken : null;
+        this.SearchRequestCount = 'SearchRequestCount' in params ? params.SearchRequestCount : null;
+        this.SearchCount = 'SearchCount' in params ? params.SearchCount : null;
 
     }
 }
@@ -1738,24 +1868,12 @@ class ModifyTokenPlanApiKeyRequest extends  AbstractModel {
 }
 
 /**
- * Billing item for Token aggregation
+ * ModifyApiKeyStatus request structure.
  * @class
  */
-class TokenSummaryBillingItem extends  AbstractModel {
+class ModifyApiKeyStatusRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Billing item. Values: input (input Token), output (output Token), cache (cache Token), call_count (call count).
-         * @type {string || null}
-         */
-        this.BillingItem = null;
-
-        /**
-         * Aggregated raw usage of this billing item during a period. Unit: tokens.
-         * @type {number || null}
-         */
-        this.TotalQty = null;
 
     }
 
@@ -1766,8 +1884,6 @@ class TokenSummaryBillingItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BillingItem = 'BillingItem' in params ? params.BillingItem : null;
-        this.TotalQty = 'TotalQty' in params ? params.TotalQty : null;
 
     }
 }
@@ -2292,6 +2408,41 @@ class DescribeTokenPlanApiKeyUsageDetailRequest extends  AbstractModel {
 }
 
 /**
+ * Billing item for Token aggregation
+ * @class
+ */
+class TokenSummaryBillingItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Billing item. Values: input (input Token), output (output Token), cache (cache Token), call_count (call count).
+         * @type {string || null}
+         */
+        this.BillingItem = null;
+
+        /**
+         * Aggregated raw usage of this billing item during a period. Unit: tokens.
+         * @type {number || null}
+         */
+        this.TotalQty = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BillingItem = 'BillingItem' in params ? params.BillingItem : null;
+        this.TotalQty = 'TotalQty' in params ? params.TotalQty : null;
+
+    }
+}
+
+/**
  * UpgradeTokenPlanTeamOrder request structure.
  * @class
  */
@@ -2327,12 +2478,60 @@ class UpgradeTokenPlanTeamOrderRequest extends  AbstractModel {
 }
 
 /**
- * ModifyApiKeyStatus request structure.
+ * DescribeUsageRankList request structure.
  * @class
  */
-class ModifyApiKeyStatusRequest extends  AbstractModel {
+class DescribeUsageRankListRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * <p>Statistical dimension. Values: apikey (statistics by APIKey), endpoint (statistics by access point), model (statistics by model).</p>
+         * @type {string || null}
+         */
+        this.Dimension = null;
+
+        /**
+         * <p>Start time (inclusive interval), in RFC3339 format.</p>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * <p>End time (open interval) in RFC3339 format. The maximum span from StartTime is 90 days.</p>
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * <p>Metric family switch field.</p><ul><li>tokens (default): Token consumption chart (statistics=sum), supports Dimension = apikey/endpoint/model</li><li>search [to be launched]: Online search call count (statistics=sum), only supports Dimension = model</li><li>Other values return InvalidParameter.</li></ul><p>Enum values:</p><ul><li>tokens: tokens</li></ul>
+         * @type {string || null}
+         */
+        this.MetricType = null;
+
+        /**
+         * <p>Dimension filtering value. An empty string indicates querying all objects; a non-empty string indicates querying only the specified single object (for example, a designated APIKey ID). Maximum 256 characters.</p>
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * <p>Statistical granularity (seconds). Value: 60, 300, 3600, 86400. Must not be less than the lower limit corresponding to the span: span ≤ 1 day → 60; 1–5 days → 300; 5–10 days → 3600; &gt; 10 days → 86400. Used only when ShowAll=false.</p>
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * <p>Pagination starting point, starting from 0, default 0. Ignore timing when ShowAll=true. Page size fixed as 10.</p>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * <p>Whether to return full result.</p><ul><li>false (default): Return TopList in pages by Offset (10 items per page). Each object contains <br>Series time series points for drawing curves.</li><li>true: Ignore Offset and return the full object list without Series (CSV export scenario).</li></ul>
+         * @type {boolean || null}
+         */
+        this.ShowAll = null;
 
     }
 
@@ -2343,6 +2542,14 @@ class ModifyApiKeyStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Dimension = 'Dimension' in params ? params.Dimension : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MetricType = 'MetricType' in params ? params.MetricType : null;
+        this.Target = 'Target' in params ? params.Target : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.ShowAll = 'ShowAll' in params ? params.ShowAll : null;
 
     }
 }
@@ -3420,6 +3627,213 @@ class CreateTokenPlanApiKeysRequest extends  AbstractModel {
 }
 
 /**
+ * Statistical aggregate values within a time period (indexed by metric key). Declares that both the tokens and search field families are in this schema, with values obtained based on the actual MetricKeys returned. See the top-level `MetricKeys` field in the response.
+ * @class
+ */
+class UsageStats extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Total tokens accumulated within a time period.</p>
+         * @type {number || null}
+         */
+        this.TotalToken = null;
+
+        /**
+         * <p>[tokens family] Total input tokens within a time period.</p>
+         * @type {number || null}
+         */
+        this.InputTotalToken = null;
+
+        /**
+         * <p>[tokens family] Total output tokens within a time period.</p>
+         * @type {number || null}
+         */
+        this.OutputTotalToken = null;
+
+        /**
+         * <p>[token family] Cumulative number of tokens read from the cache within a time period (cache hit part)</p>
+         * @type {number || null}
+         */
+        this.CacheTotalToken = null;
+
+        /**
+         * <p>Total online search requests in the [search group]</p>
+         * @type {number || null}
+         */
+        this.SearchRequestCount = null;
+
+        /**
+         * <p>[search family] Total search engine calls</p>
+         * @type {number || null}
+         */
+        this.SearchCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalToken = 'TotalToken' in params ? params.TotalToken : null;
+        this.InputTotalToken = 'InputTotalToken' in params ? params.InputTotalToken : null;
+        this.OutputTotalToken = 'OutputTotalToken' in params ? params.OutputTotalToken : null;
+        this.CacheTotalToken = 'CacheTotalToken' in params ? params.CacheTotalToken : null;
+        this.SearchRequestCount = 'SearchRequestCount' in params ? params.SearchRequestCount : null;
+        this.SearchCount = 'SearchCount' in params ? params.SearchCount : null;
+
+    }
+}
+
+/**
+ * DescribeUsageRankList response structure.
+ * @class
+ */
+class DescribeUsageRankListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Statistical dimension of the backfill request.</p>
+         * @type {string || null}
+         */
+        this.Dimension = null;
+
+        /**
+         * <p>Metrics family of the backfill request: tokens / search.</p>
+         * @type {string || null}
+         */
+        this.MetricType = null;
+
+        /**
+         * <p>List of metric keys actually included in Stats / Series / PageStats / TotalStats in this response, case-sensitive by MetricType: tokens=[Total,Input,Output,Cache], search=[SearchRequestCount,SearchCount]</p>
+         * @type {Array.<string> || null}
+         */
+        this.MetricKeys = null;
+
+        /**
+         * <p>View (data source)</p>
+         * @type {string || null}
+         */
+        this.ViewName = null;
+
+        /**
+         * <p>Statistical granularity (in seconds) of the backfill request. It is 0 when ShowAll=true.</p>
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * <p>Backfill the start time of the request.</p>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * <p>End time of the backfill request.</p>
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * <p>Total number of objects.</p>
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * <p>Backfill the pagination starting point of the request. It is 0 when ShowAll=true.</p>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * <p>Page size. It is always 10. When ShowAll=true, it is Total.</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <p>Timestamp sequence corresponding to the Series array (Unix seconds). Empty array when ShowAll=true.</p>
+         * @type {Array.<number> || null}
+         */
+        this.Timestamps = null;
+
+        /**
+         * <p>Object ranking list, sorted by <code>MetricKeys[0]</code> in descending order. When ShowAll=false, it is the 10 objects on the current page (including Series); when ShowAll=true, it is all objects (excluding Series, used for CSV export).</p>
+         * @type {Array.<UsageRankItem> || null}
+         */
+        this.TopList = null;
+
+        /**
+         * <p>Pagination statistics result</p>
+         * @type {UsageStats || null}
+         */
+        this.PageStats = null;
+
+        /**
+         * <p>Total statistics result</p>
+         * @type {UsageStats || null}
+         */
+        this.TotalStats = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Dimension = 'Dimension' in params ? params.Dimension : null;
+        this.MetricType = 'MetricType' in params ? params.MetricType : null;
+        this.MetricKeys = 'MetricKeys' in params ? params.MetricKeys : null;
+        this.ViewName = 'ViewName' in params ? params.ViewName : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Timestamps = 'Timestamps' in params ? params.Timestamps : null;
+
+        if (params.TopList) {
+            this.TopList = new Array();
+            for (let z in params.TopList) {
+                let obj = new UsageRankItem();
+                obj.deserialize(params.TopList[z]);
+                this.TopList.push(obj);
+            }
+        }
+
+        if (params.PageStats) {
+            let obj = new UsageStats();
+            obj.deserialize(params.PageStats)
+            this.PageStats = obj;
+        }
+
+        if (params.TotalStats) {
+            let obj = new UsageStats();
+            obj.deserialize(params.TotalStats)
+            this.TotalStats = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteTokenPlanApiKey request structure.
  * @class
  */
@@ -3758,10 +4172,12 @@ module.exports = {
     DeleteGlossaryEntriesResponse: DeleteGlossaryEntriesResponse,
     DescribeApiKeyListResponse: DescribeApiKeyListResponse,
     RenewTokenPlanTeamOrderResponse: RenewTokenPlanTeamOrderResponse,
+    UsageRankItem: UsageRankItem,
     TokenPlanApiKeyInfo: TokenPlanApiKeyInfo,
     ModifyApiKeyInfoResponse: ModifyApiKeyInfoResponse,
     ModifyTokenPlanApiKeyResponse: ModifyTokenPlanApiKeyResponse,
     DescribeApiKeyListRequest: DescribeApiKeyListRequest,
+    UsageSeries: UsageSeries,
     CreateGlossaryRequest: CreateGlossaryRequest,
     DescribeGlossaryEntriesResponse: DescribeGlossaryEntriesResponse,
     DeleteGlossaryRequest: DeleteGlossaryRequest,
@@ -3774,7 +4190,7 @@ module.exports = {
     DeleteApiKeyResponse: DeleteApiKeyResponse,
     ModifyGlossaryEntryInput: ModifyGlossaryEntryInput,
     ModifyTokenPlanApiKeyRequest: ModifyTokenPlanApiKeyRequest,
-    TokenSummaryBillingItem: TokenSummaryBillingItem,
+    ModifyApiKeyStatusRequest: ModifyApiKeyStatusRequest,
     DescribeTokenPlanApiKeyUsageDetailResponse: DescribeTokenPlanApiKeyUsageDetailResponse,
     RequestSort: RequestSort,
     ModifyApiKeyInfoRequest: ModifyApiKeyInfoRequest,
@@ -3786,8 +4202,9 @@ module.exports = {
     DescribeGlossariesRequest: DescribeGlossariesRequest,
     DeleteTokenPlanApiKeyResponse: DeleteTokenPlanApiKeyResponse,
     DescribeTokenPlanApiKeyUsageDetailRequest: DescribeTokenPlanApiKeyUsageDetailRequest,
+    TokenSummaryBillingItem: TokenSummaryBillingItem,
     UpgradeTokenPlanTeamOrderRequest: UpgradeTokenPlanTeamOrderRequest,
-    ModifyApiKeyStatusRequest: ModifyApiKeyStatusRequest,
+    DescribeUsageRankListRequest: DescribeUsageRankListRequest,
     QuotaInfo: QuotaInfo,
     CreateGlossaryEntriesRequest: CreateGlossaryEntriesRequest,
     ApiKeyDetail: ApiKeyDetail,
@@ -3805,6 +4222,8 @@ module.exports = {
     ModifyGlossaryEntriesResponse: ModifyGlossaryEntriesResponse,
     DescribeTokenPlanResponse: DescribeTokenPlanResponse,
     CreateTokenPlanApiKeysRequest: CreateTokenPlanApiKeysRequest,
+    UsageStats: UsageStats,
+    DescribeUsageRankListResponse: DescribeUsageRankListResponse,
     DeleteTokenPlanApiKeyRequest: DeleteTokenPlanApiKeyRequest,
     DescribeApiKeyResponse: DescribeApiKeyResponse,
     DescribeTokenPlanApiKeyListRequest: DescribeTokenPlanApiKeyListRequest,

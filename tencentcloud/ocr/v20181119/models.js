@@ -4488,43 +4488,43 @@ class MLIDPassportOCRResponse extends  AbstractModel {
         super();
 
         /**
-         * Passport ID
+         * Parsed passport ID extracted from the MRZ (Machine-Readable Zone) of passport
          * @type {string || null}
          */
         this.ID = null;
 
         /**
-         * Name
+         * Parsed full name extracted from the MRZ (Machine-Readable Zone) of passport
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Date of birth
+         * Parsed date of birth extracted from the MRZ (Machine-Readable Zone) of passport
          * @type {string || null}
          */
         this.DateOfBirth = null;
 
         /**
-         * Gender (F: female, M: male)
+         * Parsed gender extracted from the MRZ (Machine-Readable Zone) of passport
          * @type {string || null}
          */
         this.Sex = null;
 
         /**
-         * Expiration date
+         * Parsed expiry date extracted from the MRZ (Machine-Readable Zone) of passport
          * @type {string || null}
          */
         this.DateOfExpiration = null;
 
         /**
-         * Issuing country
+         * Parsed issuing country extracted from the MRZ (Machine-Readable Zone) of passport
          * @type {string || null}
          */
         this.IssuingCountry = null;
 
         /**
-         * Nationality code (MRZ field)
+         * Parsed country-region code extracted from the MRZ (Machine-Readable Zone) of passport
          * @type {string || null}
          */
         this.Nationality = null;
@@ -4548,33 +4548,31 @@ class MLIDPassportOCRResponse extends  AbstractModel {
         this.AdvancedInfo = null;
 
         /**
-         * The first row of the machine-readable zone (MRZ) at the bottom
+         * Parsed MRZ line 1 raw sequence extracted from the MRZ (Machine-Readable Zone) of passport
          * @type {string || null}
          */
         this.CodeSet = null;
 
         /**
-         * The second row of the MRZ at the bottom
+         * Parsed MRZ line 2 raw sequence extracted from the MRZ (Machine-Readable Zone) of passport
          * @type {string || null}
          */
         this.CodeCrc = null;
 
         /**
-         * The surname.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Parsed surname extracted from the MRZ (Machine-Readable Zone) of passport
          * @type {string || null}
          */
         this.Surname = null;
 
         /**
-         * The given name.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Parsed given name extracted from the MRZ (Machine-Readable Zone) of passport
          * @type {string || null}
          */
         this.GivenName = null;
 
         /**
-         * Type (in Machine Readable Zone)
+         * Parsed document type extracted from the MRZ (Machine-Readable Zone) of passport
          * @type {string || null}
          */
         this.Type = null;
@@ -4591,7 +4589,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 -9101 Alarm for covered certificate
 -9102 Alarm for photocopied certificate
 -9103 Alarm for photographed certificate
--9104 Alarm for tamper certificate
+-9104 Alarm for PS certificate
 -9107 Alarm for reflective certificate
 -9108 Alarm for blurry certificate 
 -9109 This capability is not enabled. Please contact customer support to activate the alert service.

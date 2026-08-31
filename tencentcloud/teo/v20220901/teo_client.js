@@ -191,6 +191,7 @@ const DeleteZoneRequest = models.DeleteZoneRequest;
 const RangeOriginPullParameters = models.RangeOriginPullParameters;
 const ApplyFreeCertificateResponse = models.ApplyFreeCertificateResponse;
 const CurrentOriginACL = models.CurrentOriginACL;
+const DescribeIPGroupReferencesResponse = models.DescribeIPGroupReferencesResponse;
 const CreateEdgeKVNamespaceRequest = models.CreateEdgeKVNamespaceRequest;
 const SecurityConfig = models.SecurityConfig;
 const CreateSecurityIPGroupRequest = models.CreateSecurityIPGroupRequest;
@@ -558,7 +559,7 @@ const CreateL4ProxyRequest = models.CreateL4ProxyRequest;
 const InferenceEnvironmentVariable = models.InferenceEnvironmentVariable;
 const CreatePlanResponse = models.CreatePlanResponse;
 const DescribeApplicationProxiesRequest = models.DescribeApplicationProxiesRequest;
-const DescribeContentQuotaRequest = models.DescribeContentQuotaRequest;
+const DescribeIPGroupReferencesRequest = models.DescribeIPGroupReferencesRequest;
 const AllowActionParameters = models.AllowActionParameters;
 const InferenceResourceConfigForModify = models.InferenceResourceConfigForModify;
 const Hsts = models.Hsts;
@@ -731,6 +732,7 @@ const ModifyMultiPathGatewaySecretKeyResponse = models.ModifyMultiPathGatewaySec
 const DescribeMultiPathGatewaySecretKeyRequest = models.DescribeMultiPathGatewaySecretKeyRequest;
 const DDoSBlockData = models.DDoSBlockData;
 const IPSSLSetting = models.IPSSLSetting;
+const DescribeContentQuotaRequest = models.DescribeContentQuotaRequest;
 const ModifyFunctionReplicaRequest = models.ModifyFunctionReplicaRequest;
 const DescribeMultiPathGatewaysRequest = models.DescribeMultiPathGatewaysRequest;
 const BotPortraitRule = models.BotPortraitRule;
@@ -801,6 +803,7 @@ const ModifyMultiPathGatewayLineResponse = models.ModifyMultiPathGatewayLineResp
 const DescribeDefaultCertificatesResponse = models.DescribeDefaultCertificatesResponse;
 const CreateOriginGroupResponse = models.CreateOriginGroupResponse;
 const CreateMultiPathGatewayLineRequest = models.CreateMultiPathGatewayLineRequest;
+const IPGroupReference = models.IPGroupReference;
 const CreateContentIdentifierResponse = models.CreateContentIdentifierResponse;
 const HostHeaderParameters = models.HostHeaderParameters;
 const DescribeConfigGroupVersionsRequest = models.DescribeConfigGroupVersionsRequest;
@@ -1276,6 +1279,17 @@ You can obtain the designated CNAME domain name assigned by EdgeOne for the inte
     CheckCnameStatus(req, cb) {
         let resp = new CheckCnameStatusResponse();
         this.request("CheckCnameStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query policy configurations that reference a specified IP group.
+     * @param {DescribeIPGroupReferencesRequest} req
+     * @param {function(string, DescribeIPGroupReferencesResponse):void} cb
+     * @public
+     */
+    DescribeIPGroupReferences(req, cb) {
+        let resp = new DescribeIPGroupReferencesResponse();
+        this.request("DescribeIPGroupReferences", req, resp, cb);
     }
 
     /**

@@ -21,7 +21,7 @@ const DescribeInstanceTypesResponse = models.DescribeInstanceTypesResponse;
 const DescribePrivateNetworkInstancesRequest = models.DescribePrivateNetworkInstancesRequest;
 const DescribePublicNetworkInstancesResponse = models.DescribePublicNetworkInstancesResponse;
 const DeletePublicNetworkInstanceRequest = models.DeletePublicNetworkInstanceRequest;
-const TerminateInstancesResponse = models.TerminateInstancesResponse;
+const CreateEdgeNodeServiceResponse = models.CreateEdgeNodeServiceResponse;
 const CreateInstancesRequest = models.CreateInstancesRequest;
 const DescribeInstanceTypesRequest = models.DescribeInstanceTypesRequest;
 const PrivateNetworkInstanceInfo = models.PrivateNetworkInstanceInfo;
@@ -36,6 +36,7 @@ const InstanceTypeQuota = models.InstanceTypeQuota;
 const ModifyPublicNetworkInstanceRequest = models.ModifyPublicNetworkInstanceRequest;
 const ReleasePublicIpRequest = models.ReleasePublicIpRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const CreateEdgeNodeServiceRequest = models.CreateEdgeNodeServiceRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const PublicNetworkSegment = models.PublicNetworkSegment;
 const ReleasePublicIpResponse = models.ReleasePublicIpResponse;
@@ -43,6 +44,7 @@ const DescribeZoneDataResponse = models.DescribeZoneDataResponse;
 const DeletePrivateNetworkInstanceRequest = models.DeletePrivateNetworkInstanceRequest;
 const DescribePrivateNetworkInstancesResponse = models.DescribePrivateNetworkInstancesResponse;
 const CreatePrivateNetworkInstanceResponse = models.CreatePrivateNetworkInstanceResponse;
+const TerminateInstancesResponse = models.TerminateInstancesResponse;
 const ModifyInstanceAttributeRequest = models.ModifyInstanceAttributeRequest;
 const ApplyPublicIpsRequest = models.ApplyPublicIpsRequest;
 const DescribePublicIpsResponse = models.DescribePublicIpsResponse;
@@ -93,6 +95,17 @@ class EdgezoneClient extends AbstractClient {
     DescribeInstances(req, cb) {
         let resp = new DescribeInstancesResponse();
         this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * Enable the billing service for edge nodes.
+     * @param {CreateEdgeNodeServiceRequest} req
+     * @param {function(string, CreateEdgeNodeServiceResponse):void} cb
+     * @public
+     */
+    CreateEdgeNodeService(req, cb) {
+        let resp = new CreateEdgeNodeServiceResponse();
+        this.request("CreateEdgeNodeService", req, resp, cb);
     }
 
     /**

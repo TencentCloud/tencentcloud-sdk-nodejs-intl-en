@@ -16,407 +16,1935 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const AccountBriefInfo = models.AccountBriefInfo;
-const DescribeRiskRulesResponse = models.DescribeRiskRulesResponse;
-const DeleteRiskScanTaskRequest = models.DeleteRiskScanTaskRequest;
-const DescribeHostVulRiskListResponse = models.DescribeHostVulRiskListResponse;
-const CsipRiskCenterStatistics = models.CsipRiskCenterStatistics;
-const CreateVulReScanRequest = models.CreateVulReScanRequest;
-const SkillCapabilityTag = models.SkillCapabilityTag;
-const ReportItemKey = models.ReportItemKey;
+const StopBaselineScanTaskResponse = models.StopBaselineScanTaskResponse;
+const DescribeSandboxACLAlertListRequest = models.DescribeSandboxACLAlertListRequest;
+const ExposeRiskItem = models.ExposeRiskItem;
+const DescribeUserCSPMInfoListRequest = models.DescribeUserCSPMInfoListRequest;
+const DescribeLoginWhiteHostListRequest = models.DescribeLoginWhiteHostListRequest;
+const AbTestUserItem = models.AbTestUserItem;
+const StopEDRScanTaskRequest = models.StopEDRScanTaskRequest;
+const AuditLogInfo = models.AuditLogInfo;
 const CreateAccessKeySyncTaskRequest = models.CreateAccessKeySyncTaskRequest;
-const DescribeSkillScanPayInfoRequest = models.DescribeSkillScanPayInfoRequest;
-const KeyValue = models.KeyValue;
+const DescribeLicenseStatusResponse = models.DescribeLicenseStatusResponse;
+const ModifyBruteAttackBanStatusRequest = models.ModifyBruteAttackBanStatusRequest;
+const DescribeExposeRulesRequest = models.DescribeExposeRulesRequest;
+const CreateImageVulSummaryListExportJobResponse = models.CreateImageVulSummaryListExportJobResponse;
 const OrganizationUserInfo = models.OrganizationUserInfo;
 const AssetTag = models.AssetTag;
-const DescribeCheckViewRisksResponse = models.DescribeCheckViewRisksResponse;
-const DeleteIaCFileResponse = models.DeleteIaCFileResponse;
-const CreateVulFixedExportJobRequest = models.CreateVulFixedExportJobRequest;
-const DescribeRiskCenterWebsiteRiskListResponse = models.DescribeRiskCenterWebsiteRiskListResponse;
-const Tag = models.Tag;
+const DescribeAssetComponentListResponse = models.DescribeAssetComponentListResponse;
+const DescribeDspmRiskStrategyResponse = models.DescribeDspmRiskStrategyResponse;
+const LogHighLightItem = models.LogHighLightItem;
+const DeleteImageSensitiveWhitelistRequest = models.DeleteImageSensitiveWhitelistRequest;
+const DescribeCWPScanIpInfoResponse = models.DescribeCWPScanIpInfoResponse;
+const CreateImageRegistryConnectivityTaskResponse = models.CreateImageRegistryConnectivityTaskResponse;
+const CreateDspmAssetsExportJobResponse = models.CreateDspmAssetsExportJobResponse;
 const DescribeRiskCenterCFGViewCFGRiskListRequest = models.DescribeRiskCenterCFGViewCFGRiskListRequest;
 const DescribeCSIPRiskStatisticsResponse = models.DescribeCSIPRiskStatisticsResponse;
-const VULViewVULRiskData = models.VULViewVULRiskData;
-const DescribeIaCTokenListResponse = models.DescribeIaCTokenListResponse;
-const DescribeScanTaskListRequest = models.DescribeScanTaskListRequest;
-const CreateAccessKeyCheckTaskResponse = models.CreateAccessKeyCheckTaskResponse;
-const DescribeOrganizationInfoRequest = models.DescribeOrganizationInfoRequest;
-const DescribeVulFixableMachineListResponse = models.DescribeVulFixableMachineListResponse;
-const UserCallRecord = models.UserCallRecord;
-const DescribeHostVulRiskListRequest = models.DescribeHostVulRiskListRequest;
-const DescribeKeySandboxCredentialRequest = models.DescribeKeySandboxCredentialRequest;
-const CheckViewRiskItem = models.CheckViewRiskItem;
+const ModifyShareUserCSPMResponse = models.ModifyShareUserCSPMResponse;
+const ModifyEdrAlertStatusRequest = models.ModifyEdrAlertStatusRequest;
+const DescribeMachineClearHistoryResponse = models.DescribeMachineClearHistoryResponse;
+const DescribeAIAgentCredentialLocationListRequest = models.DescribeAIAgentCredentialLocationListRequest;
+const NotifySetting = models.NotifySetting;
+const ExportTasksRequest = models.ExportTasksRequest;
+const ModifyCSIPRaspLicenseUnBindsRequest = models.ModifyCSIPRaspLicenseUnBindsRequest;
+const DescribeDspmRiskTendencyRequest = models.DescribeDspmRiskTendencyRequest;
 const AddNewBindRoleUserRequest = models.AddNewBindRoleUserRequest;
-const OrganizationInfo = models.OrganizationInfo;
-const TagCount = models.TagCount;
-const CreateRiskCenterScanTaskResponse = models.CreateRiskCenterScanTaskResponse;
-const StopRiskCenterTaskResponse = models.StopRiskCenterTaskResponse;
-const DescribeVpcAssetsRequest = models.DescribeVpcAssetsRequest;
-const DescribeExposePathRequest = models.DescribeExposePathRequest;
-const DescribeKeySandboxCredentialListResponse = models.DescribeKeySandboxCredentialListResponse;
-const AttributeOptionSet = models.AttributeOptionSet;
-const VulVendorProduct = models.VulVendorProduct;
-const VulFixTaskInfo = models.VulFixTaskInfo;
-const SubUserInfo = models.SubUserInfo;
-const CloudCountDesc = models.CloudCountDesc;
-const DescribeOtherCloudAssetsResponse = models.DescribeOtherCloudAssetsResponse;
+const ModifyDspmAssetLogDeliverySwitchResponse = models.ModifyDspmAssetLogDeliverySwitchResponse;
+const ExportEDRRulesResponse = models.ExportEDRRulesResponse;
+const ModifyAgentRunPolicyRequest = models.ModifyAgentRunPolicyRequest;
+const DescribeDspmAssetsRequest = models.DescribeDspmAssetsRequest;
+const BatchModifyImageSensitiveWhitelistRequest = models.BatchModifyImageSensitiveWhitelistRequest;
+const ComplianceStandardRuleCount = models.ComplianceStandardRuleCount;
+const DescribeImageRegistryScanSubTaskListRequest = models.DescribeImageRegistryScanSubTaskListRequest;
+const ModifyWebhookPolicyResponse = models.ModifyWebhookPolicyResponse;
+const WhereFilter = models.WhereFilter;
+const ModifySecurityScoreRuleRequest = models.ModifySecurityScoreRuleRequest;
+const DeleteImageRegistryRequest = models.DeleteImageRegistryRequest;
 const DescribeVulItemListResponse = models.DescribeVulItemListResponse;
-const DescribeRiskCenterAssetViewCFGRiskListResponse = models.DescribeRiskCenterAssetViewCFGRiskListResponse;
-const UpdateAlertStatusListRequest = models.UpdateAlertStatusListRequest;
-const DescribeVulItemListRequest = models.DescribeVulItemListRequest;
+const ClusterCustomParameters = models.ClusterCustomParameters;
+const DeleteWebhookPoliciesRequest = models.DeleteWebhookPoliciesRequest;
+const DescribeNotifySettingAkRequest = models.DescribeNotifySettingAkRequest;
+const DeleteImageRegistryScanTaskRequest = models.DeleteImageRegistryScanTaskRequest;
+const ComplianceCheckItemsOverview = models.ComplianceCheckItemsOverview;
+const DspmIdentifyAssetStatistic = models.DspmIdentifyAssetStatistic;
+const ImageAssociatedAssetCount = models.ImageAssociatedAssetCount;
+const DescribeCustomRiskRuleDetailRequest = models.DescribeCustomRiskRuleDetailRequest;
+const ImageComponent = models.ImageComponent;
 const DescribeSkillScanPayInfoResponse = models.DescribeSkillScanPayInfoResponse;
-const CreateVulScanManualRequest = models.CreateVulScanManualRequest;
-const DescribePublicIpAssetsResponse = models.DescribePublicIpAssetsResponse;
-const DescribeVulViewVulRiskListRequest = models.DescribeVulViewVulRiskListRequest;
-const VulHostBriefInfo = models.VulHostBriefInfo;
+const DescribeBaselineOverviewRequest = models.DescribeBaselineOverviewRequest;
+const DspmIdentifyRuleItem = models.DspmIdentifyRuleItem;
 const DescribeRiskRulesRequest = models.DescribeRiskRulesRequest;
-const DescribeSourceIPAssetRequest = models.DescribeSourceIPAssetRequest;
+const DescribeAssetComponentRelatedImageListResponse = models.DescribeAssetComponentRelatedImageListResponse;
+const DescribeCWPExposuresResponse = models.DescribeCWPExposuresResponse;
+const ModifyOrganizationAccountStatusResponse = models.ModifyOrganizationAccountStatusResponse;
 const CreateVulFixRetryTaskRequest = models.CreateVulFixRetryTaskRequest;
 const DescribeDbAssetInfoRequest = models.DescribeDbAssetInfoRequest;
-const DescribeUserCallRecordResponse = models.DescribeUserCallRecordResponse;
-const VulRiskItem = models.VulRiskItem;
-const RepositoryImageVO = models.RepositoryImageVO;
+const ImageVirusWhitelist = models.ImageVirusWhitelist;
+const DescribeSkillScanAlertListRequest = models.DescribeSkillScanAlertListRequest;
+const ModifyCSIPLicenseBindsRequest = models.ModifyCSIPLicenseBindsRequest;
 const DescribeAccessKeyAlarmResponse = models.DescribeAccessKeyAlarmResponse;
-const DescribeGatewayAssetsResponse = models.DescribeGatewayAssetsResponse;
-const DescribeRiskRuleDetailResponse = models.DescribeRiskRuleDetailResponse;
-const DeleteDomainAndIpResponse = models.DeleteDomainAndIpResponse;
-const CreateDomainAndIpRequest = models.CreateDomainAndIpRequest;
-const RelatedEvent = models.RelatedEvent;
+const ModifyDspmIdentifyLevelItemRequest = models.ModifyDspmIdentifyLevelItemRequest;
+const DspmRiskTendency = models.DspmRiskTendency;
+const VulFixSummaryItem = models.VulFixSummaryItem;
+const CSIPTag = models.CSIPTag;
+const DescribeCloudAssetsRequest = models.DescribeCloudAssetsRequest;
+const DescribeCWPOrderListRequest = models.DescribeCWPOrderListRequest;
 const DescribeVulComponentRelateHostResponse = models.DescribeVulComponentRelateHostResponse;
-const DescribeScanStatisticResponse = models.DescribeScanStatisticResponse;
-const DescribeAccessKeyAlarmRequest = models.DescribeAccessKeyAlarmRequest;
-const DescribeExposuresRequest = models.DescribeExposuresRequest;
-const DescribeHighBaseLineRiskListResponse = models.DescribeHighBaseLineRiskListResponse;
+const RuleContentProcessInfo = models.RuleContentProcessInfo;
+const DeleteDspmIdentifyLevelGroupResponse = models.DeleteDspmIdentifyLevelGroupResponse;
+const AccessAIAnalysisSMTPRequest = models.AccessAIAnalysisSMTPRequest;
+const TrafficSandboxDLPSystemRuleItem = models.TrafficSandboxDLPSystemRuleItem;
+const SCFAliasInfo = models.SCFAliasInfo;
 const DescribeExposeAssetCategoryResponse = models.DescribeExposeAssetCategoryResponse;
-const DescribeHostVulItemVPRInfoResponse = models.DescribeHostVulItemVPRInfoResponse;
-const IpAssetListVO = models.IpAssetListVO;
+const DescribeAssetRiskDetailRequest = models.DescribeAssetRiskDetailRequest;
+const CreateImageRegistryListExportJobRequest = models.CreateImageRegistryListExportJobRequest;
+const ModifyCSIPLicenseBindsResponse = models.ModifyCSIPLicenseBindsResponse;
+const BehaviorSummary = models.BehaviorSummary;
+const CreateImageVirusWhitelistRequest = models.CreateImageVirusWhitelistRequest;
+const HostDesc = models.HostDesc;
 const IaCFileRisk = models.IaCFileRisk;
-const DescribeRiskCenterServerRiskListResponse = models.DescribeRiskCenterServerRiskListResponse;
-const VulScanTask = models.VulScanTask;
-const DescribeVulComponentRelateHostRequest = models.DescribeVulComponentRelateHostRequest;
+const CreateClusterNamespaceListExportJobRequest = models.CreateClusterNamespaceListExportJobRequest;
+const ModifyNFSScanHostResponse = models.ModifyNFSScanHostResponse;
+const DeleteDspmRestoreLogListRequest = models.DeleteDspmRestoreLogListRequest;
+const CreateImageSensitiveWhitelistResponse = models.CreateImageSensitiveWhitelistResponse;
+const CreateDspmPersonalIdentifyResponse = models.CreateDspmPersonalIdentifyResponse;
+const CreateImageSensitiveWhitelistRequest = models.CreateImageSensitiveWhitelistRequest;
+const DescribeCWPOrderListResponse = models.DescribeCWPOrderListResponse;
 const DescribeVulRiskRelateHostRequest = models.DescribeVulRiskRelateHostRequest;
-const AccessKeyAsset = models.AccessKeyAsset;
-const DescribeRiskCallRecordRequest = models.DescribeRiskCallRecordRequest;
-const ModifyRiskCenterRiskStatusResponse = models.ModifyRiskCenterRiskStatusResponse;
+const DescribeBaselineSyncConfResponse = models.DescribeBaselineSyncConfResponse;
+const DescribeCFGRiskStatisticsResponse = models.DescribeCFGRiskStatisticsResponse;
+const DescribeImageVirusWhitelistDetailRequest = models.DescribeImageVirusWhitelistDetailRequest;
+const UebaUserSummaryElement = models.UebaUserSummaryElement;
 const DescribeExposuresResponse = models.DescribeExposuresResponse;
-const DescribeVulScanPeriodicResponse = models.DescribeVulScanPeriodicResponse;
-const VPRRatingInfo = models.VPRRatingInfo;
-const DescribeOrganizationUserInfoRequest = models.DescribeOrganizationUserInfoRequest;
-const ModifyUebaRuleSwitchResponse = models.ModifyUebaRuleSwitchResponse;
-const FilterDataObject = models.FilterDataObject;
-const CreateHostVulExportJobRequest = models.CreateHostVulExportJobRequest;
-const UpdateAccessKeyRemarkResponse = models.UpdateAccessKeyRemarkResponse;
-const VulFixItem = models.VulFixItem;
-const CreateVulFixTaskRequest = models.CreateVulFixTaskRequest;
-const CreateIaCFileExportJobRequest = models.CreateIaCFileExportJobRequest;
-const AlertInfo = models.AlertInfo;
-const Vpc = models.Vpc;
-const STSCredentialOutput = models.STSCredentialOutput;
-const PortRiskAdvanceCFGParamItem = models.PortRiskAdvanceCFGParamItem;
-const CreateIaCAccessTokenRequest = models.CreateIaCAccessTokenRequest;
+const DescribeCustomRiskRuleDetailResponse = models.DescribeCustomRiskRuleDetailResponse;
+const DescribeAgentConfigSettingRequest = models.DescribeAgentConfigSettingRequest;
+const DescribeAssetDetailRequest = models.DescribeAssetDetailRequest;
+const ModifyNetAttackSettingRequest = models.ModifyNetAttackSettingRequest;
+const Place = models.Place;
+const ModifyRiskScanCronConfigResponse = models.ModifyRiskScanCronConfigResponse;
+const DescribeImageAssetDetailResponse = models.DescribeImageAssetDetailResponse;
+const ModifyDspmAssetLogDeliverySwitchRequest = models.ModifyDspmAssetLogDeliverySwitchRequest;
+const DescribePortScanTaskCountResponse = models.DescribePortScanTaskCountResponse;
+const DeleteImageRegistryTimedScanTaskConfigRequest = models.DeleteImageRegistryTimedScanTaskConfigRequest;
+const CreateRiskCenterScanTaskRequest = models.CreateRiskCenterScanTaskRequest;
+const ModifyEDRRuleStatusResponse = models.ModifyEDRRuleStatusResponse;
+const DescribeBanStatusResponse = models.DescribeBanStatusResponse;
+const DescribeDynamicAssetsResponse = models.DescribeDynamicAssetsResponse;
 const VulDetailInfo = models.VulDetailInfo;
-const DescribeRepositoryImageAssetsResponse = models.DescribeRepositoryImageAssetsResponse;
-const DescribeIaCFileListResponse = models.DescribeIaCFileListResponse;
-const UebaCustomRule = models.UebaCustomRule;
+const DescribeBaselineCategoryItemListResponse = models.DescribeBaselineCategoryItemListResponse;
+const VulBriefInfo = models.VulBriefInfo;
+const ModifyNotifySettingResponse = models.ModifyNotifySettingResponse;
+const CreateDspmApproveHistoryExportJobResponse = models.CreateDspmApproveHistoryExportJobResponse;
+const CustomTag = models.CustomTag;
+const ModifyLoginTypeFailInfo = models.ModifyLoginTypeFailInfo;
+const ModifyEDRRulesActionResponse = models.ModifyEDRRulesActionResponse;
+const DeleteDspmIdentifyLevelGroupRequest = models.DeleteDspmIdentifyLevelGroupRequest;
 const DescribeTopAttackInfoResponse = models.DescribeTopAttackInfoResponse;
-const CreateIaCAccessTokenResponse = models.CreateIaCAccessTokenResponse;
-const DescribeVULRiskAdvanceCFGListRequest = models.DescribeVULRiskAdvanceCFGListRequest;
-const ComponentDetailItem = models.ComponentDetailItem;
+const CreatePublicAssetsExportJobRequest = models.CreatePublicAssetsExportJobRequest;
+const DescribeAssetInfoRequest = models.DescribeAssetInfoRequest;
 const DescribeVulScanTaskListResponse = models.DescribeVulScanTaskListResponse;
-const CreateSkillScanResponse = models.CreateSkillScanResponse;
-const DescribeIaCFileReportRequest = models.DescribeIaCFileReportRequest;
-const ModifyVulWhitelistConfigRequest = models.ModifyVulWhitelistConfigRequest;
-const CICDToken = models.CICDToken;
-const DescribeSkillScanResultRequest = models.DescribeSkillScanResultRequest;
-const GateWayAsset = models.GateWayAsset;
-const CreateVulFixTaskResponse = models.CreateVulFixTaskResponse;
-const DescribeSourceIPAssetResponse = models.DescribeSourceIPAssetResponse;
-const CreateIaCFileExportJobResponse = models.CreateIaCFileExportJobResponse;
-const DescribeVulIgnoreRuleListRequest = models.DescribeVulIgnoreRuleListRequest;
-const AssetViewVULRiskData = models.AssetViewVULRiskData;
-const NICAsset = models.NICAsset;
+const DescribeSecurityScoreRuleResponse = models.DescribeSecurityScoreRuleResponse;
+const PortDetectInfo = models.PortDetectInfo;
+const ModifyImageRegistryTimedScanTaskConfigRequest = models.ModifyImageRegistryTimedScanTaskConfigRequest;
+const DescribeModifyMachinesLoginTypeTasksRequest = models.DescribeModifyMachinesLoginTypeTasksRequest;
+const ModifyDspmAssetAccountPrivilegesResponse = models.ModifyDspmAssetAccountPrivilegesResponse;
+const DeleteDspmIdentifyComplianceCategoryRelationRequest = models.DeleteDspmIdentifyComplianceCategoryRelationRequest;
+const DescribeUebaRuleResponse = models.DescribeUebaRuleResponse;
+const DescribeAssetTreeResponse = models.DescribeAssetTreeResponse;
+const ModifyBaselineSyncConfRequest = models.ModifyBaselineSyncConfRequest;
+const CreateSandboxLLMAuditRuleRequest = models.CreateSandboxLLMAuditRuleRequest;
+const EdrAlertCategoryCount = models.EdrAlertCategoryCount;
+const DescribeEdrAlertThreatTagsResponse = models.DescribeEdrAlertThreatTagsResponse;
+const DeleteDspmAssetAccountResponse = models.DeleteDspmAssetAccountResponse;
+const ModifyDspmCkafkaStopResponse = models.ModifyDspmCkafkaStopResponse;
+const DescribeEdrLogCollectPathsRequest = models.DescribeEdrLogCollectPathsRequest;
+const CreateCFGRiskPDFReportExportJobResponse = models.CreateCFGRiskPDFReportExportJobResponse;
+const DescribeAssetLastSyncTimeResponse = models.DescribeAssetLastSyncTimeResponse;
+const CreateAssetViewRisksExportJobResponse = models.CreateAssetViewRisksExportJobResponse;
+const DescribePublicCloudAssetsRequest = models.DescribePublicCloudAssetsRequest;
 const DescribeAccessKeyAssetResponse = models.DescribeAccessKeyAssetResponse;
-const DescribeAccessKeyRiskDetailResponse = models.DescribeAccessKeyRiskDetailResponse;
 const DescribeSubnetAssetsResponse = models.DescribeSubnetAssetsResponse;
 const DescribeRiskCenterAssetViewPortRiskListRequest = models.DescribeRiskCenterAssetViewPortRiskListRequest;
-const DescribeOrganizationInfoResponse = models.DescribeOrganizationInfoResponse;
+const AssetViewFilter = models.AssetViewFilter;
+const DescribeCWPLicenseBindScheduleRequest = models.DescribeCWPLicenseBindScheduleRequest;
+const DescribeCFGRiskReportStatisticsResponse = models.DescribeCFGRiskReportStatisticsResponse;
+const ModifyDspmRestoreLogTaskRequest = models.ModifyDspmRestoreLogTaskRequest;
 const DescribeAccessKeyRiskRequest = models.DescribeAccessKeyRiskRequest;
 const PublicIpDomainListKey = models.PublicIpDomainListKey;
-const CreateRiskCenterScanTaskRequest = models.CreateRiskCenterScanTaskRequest;
-const UpdateAlertStatusListResponse = models.UpdateAlertStatusListResponse;
-const DescribeScanReportListRequest = models.DescribeScanReportListRequest;
-const DescribeAccessKeyAssetRequest = models.DescribeAccessKeyAssetRequest;
-const DescribeHostVulItemVPRInfoRequest = models.DescribeHostVulItemVPRInfoRequest;
-const DescribeScanTaskListResponse = models.DescribeScanTaskListResponse;
-const AssetInstanceTypeMap = models.AssetInstanceTypeMap;
+const DspmAssetDatabaseInfo = models.DspmAssetDatabaseInfo;
+const DescribeEdrAlertCountForAssetRequest = models.DescribeEdrAlertCountForAssetRequest;
+const CreateDspmAssetAccessTopologyExportJobResponse = models.CreateDspmAssetAccessTopologyExportJobResponse;
+const DescribeAIAnalysisRobotInfoResponse = models.DescribeAIAnalysisRobotInfoResponse;
 const ModifyVulScanPeriodicRequest = models.ModifyVulScanPeriodicRequest;
+const DeleteDspmBackupLogListResponse = models.DeleteDspmBackupLogListResponse;
+const CreateImageAssetListExportJobRequest = models.CreateImageAssetListExportJobRequest;
+const DspmAssetAccountIdentify = models.DspmAssetAccountIdentify;
+const ModifyDspmWhitelistStrategyRequest = models.ModifyDspmWhitelistStrategyRequest;
+const ContainerWebServiceItem = models.ContainerWebServiceItem;
+const AssetInstanceTypeMap = models.AssetInstanceTypeMap;
 const HostVulOverview = models.HostVulOverview;
+const DescribeDspmIdentifyIdListRequest = models.DescribeDspmIdentifyIdListRequest;
 const DescribeCVMAssetInfoResponse = models.DescribeCVMAssetInfoResponse;
-const DescribeGatewayAssetsRequest = models.DescribeGatewayAssetsRequest;
-const DescribeAIAgentAssetListResponse = models.DescribeAIAgentAssetListResponse;
-const AlertExtraInfo = models.AlertExtraInfo;
+const ModifyDspmIdentifyCategoryResponse = models.ModifyDspmIdentifyCategoryResponse;
+const CreateDspmIdentifyLevelGroupResponse = models.CreateDspmIdentifyLevelGroupResponse;
+const DspmSensitiveScanTaskConfig = models.DspmSensitiveScanTaskConfig;
+const EdrContainerAlertCountItem = models.EdrContainerAlertCountItem;
+const ModifyImageVulWhitelistResponse = models.ModifyImageVulWhitelistResponse;
 const SourceIPVpcInfo = models.SourceIPVpcInfo;
-const DescribeUebaRuleRequest = models.DescribeUebaRuleRequest;
-const DescribeRiskCenterWebsiteRiskListRequest = models.DescribeRiskCenterWebsiteRiskListRequest;
-const DescribeCallRecordRequest = models.DescribeCallRecordRequest;
+const DspmRiskStrategy = models.DspmRiskStrategy;
+const DescribeClusterInstallCommandResponse = models.DescribeClusterInstallCommandResponse;
+const ImageLayer = models.ImageLayer;
+const CreateDspmAuditFilterStrategyRequest = models.CreateDspmAuditFilterStrategyRequest;
+const UserCSPMInfo = models.UserCSPMInfo;
+const DescribeAssetTagsResponse = models.DescribeAssetTagsResponse;
+const UninstallKeySandboxSkillResponse = models.UninstallKeySandboxSkillResponse;
 const DescribeVulScanTaskDetailResponse = models.DescribeVulScanTaskDetailResponse;
 const AssetViewVULRisk = models.AssetViewVULRisk;
-const DescribeClusterPodAssetsResponse = models.DescribeClusterPodAssetsResponse;
-const DescribeCFWAssetStatisticsResponse = models.DescribeCFWAssetStatisticsResponse;
-const HostVulComponent = models.HostVulComponent;
-const AssetViewPortRisk = models.AssetViewPortRisk;
-const DescribeRiskCenterAssetViewCFGRiskListRequest = models.DescribeRiskCenterAssetViewCFGRiskListRequest;
-const ReportTaskIdList = models.ReportTaskIdList;
-const AddNewBindRoleUserResponse = models.AddNewBindRoleUserResponse;
-const DescribeExposePathResponse = models.DescribeExposePathResponse;
-const TaskLogInfo = models.TaskLogInfo;
-const DescribeTaskLogURLResponse = models.DescribeTaskLogURLResponse;
-const UebaRule = models.UebaRule;
-const DescribeSearchBugInfoResponse = models.DescribeSearchBugInfoResponse;
-const DescribeAccessKeyRiskDetailRequest = models.DescribeAccessKeyRiskDetailRequest;
+const HostInfo = models.HostInfo;
+const ModifyNFSScanConfRequest = models.ModifyNFSScanConfRequest;
+const DeleteImageVirusWhitelistRequest = models.DeleteImageVirusWhitelistRequest;
+const ModifyMachineRemarkResponse = models.ModifyMachineRemarkResponse;
+const CreateDspmIdentifyComplianceCategoryRelationRequest = models.CreateDspmIdentifyComplianceCategoryRelationRequest;
+const CreateDomainAndIpResponse = models.CreateDomainAndIpResponse;
+const DspmFrequency = models.DspmFrequency;
+const DescribeImageRegistryAssetOverviewRequest = models.DescribeImageRegistryAssetOverviewRequest;
+const DeleteDspmIdentifyComplianceGroupResponse = models.DeleteDspmIdentifyComplianceGroupResponse;
+const DescribeComplianceRiskListResponse = models.DescribeComplianceRiskListResponse;
+const ScanEDRTaskAgainResponse = models.ScanEDRTaskAgainResponse;
+const OperateRiskResponse = models.OperateRiskResponse;
+const AssetTagTreeNode = models.AssetTagTreeNode;
+const TrafficSandboxDLPRuleContentItem = models.TrafficSandboxDLPRuleContentItem;
+const FieldStyle = models.FieldStyle;
+const CreateCloudFunctionExportJobRequest = models.CreateCloudFunctionExportJobRequest;
 const ModifyOrganizationAccountStatusRequest = models.ModifyOrganizationAccountStatusRequest;
-const DescribeVULListResponse = models.DescribeVULListResponse;
-const DescribeExposeAssetCategoryRequest = models.DescribeExposeAssetCategoryRequest;
-const DescribeAbnormalCallRecordResponse = models.DescribeAbnormalCallRecordResponse;
-const DescribeVulFixTaskDetailResponse = models.DescribeVulFixTaskDetailResponse;
-const DescribeRiskCenterAssetViewVULRiskListResponse = models.DescribeRiskCenterAssetViewVULRiskListResponse;
-const UpdateAccessKeyAlarmStatusRequest = models.UpdateAccessKeyAlarmStatusRequest;
-const RiskCallRecord = models.RiskCallRecord;
-const AssetProcessItem = models.AssetProcessItem;
-const ModifyUebaRuleSwitchRequest = models.ModifyUebaRuleSwitchRequest;
+const DescribeAIScheduleStatsResponse = models.DescribeAIScheduleStatsResponse;
+const DescribeDspmAccessTopologyAssetsResponse = models.DescribeDspmAccessTopologyAssetsResponse;
+const DeleteEDRRulesResponse = models.DeleteEDRRulesResponse;
+const ModifyDspmCkafkaStartRequest = models.ModifyDspmCkafkaStartRequest;
+const DescribeTCRInstanceListResponse = models.DescribeTCRInstanceListResponse;
+const DescribeUebaRuleRequest = models.DescribeUebaRuleRequest;
+const DescribeDspmAssetFieldSamplesResponse = models.DescribeDspmAssetFieldSamplesResponse;
+const AssetItem = models.AssetItem;
+const AssetComponent = models.AssetComponent;
+const CustomAgentRunModePolicy = models.CustomAgentRunModePolicy;
 const RiskDetailItem = models.RiskDetailItem;
-const Filter = models.Filter;
-const AssetCluster = models.AssetCluster;
+const DescribeClbListenerListResponse = models.DescribeClbListenerListResponse;
+const DescribeSandboxDLPRuleListResponse = models.DescribeSandboxDLPRuleListResponse;
+const DescribeNatRulesRequest = models.DescribeNatRulesRequest;
+const DescribeLighthouseFirewallRulesRequest = models.DescribeLighthouseFirewallRulesRequest;
+const SCFNamespaceInfo = models.SCFNamespaceInfo;
+const ClusterServiceListItem = models.ClusterServiceListItem;
+const ModifyAIScheduleRequest = models.ModifyAIScheduleRequest;
+const UserConfSyncStatus = models.UserConfSyncStatus;
+const CreateClusterContainerListExportJobResponse = models.CreateClusterContainerListExportJobResponse;
+const DescribeComplianceRiskListRequest = models.DescribeComplianceRiskListRequest;
 const UpdateAccessKeyRemarkRequest = models.UpdateAccessKeyRemarkRequest;
-const SkillScanRuleHit = models.SkillScanRuleHit;
-const DescribeRiskCenterAssetViewWeakPasswordRiskListResponse = models.DescribeRiskCenterAssetViewWeakPasswordRiskListResponse;
-const DescribeVULRiskAdvanceCFGListResponse = models.DescribeVULRiskAdvanceCFGListResponse;
-const StandardItem = models.StandardItem;
-const VULRiskAdvanceCFGList = models.VULRiskAdvanceCFGList;
-const DescribeAssetViewVulRiskListResponse = models.DescribeAssetViewVulRiskListResponse;
-const DescribeRepositoryImageAssetsRequest = models.DescribeRepositoryImageAssetsRequest;
+const DescribeImageRegistryTimedScanTaskConfigRequest = models.DescribeImageRegistryTimedScanTaskConfigRequest;
+const AddDspmAssetManagerRequest = models.AddDspmAssetManagerRequest;
+const DescribeImageVulListRequest = models.DescribeImageVulListRequest;
+const RouteInfo = models.RouteInfo;
+const DescribeImageRegistryScanTaskListResponse = models.DescribeImageRegistryScanTaskListResponse;
+const DspmUinUser = models.DspmUinUser;
+const AssetFilters = models.AssetFilters;
+const ModifyDspmRiskStrategyResponse = models.ModifyDspmRiskStrategyResponse;
+const CreateSandboxFileRuleResponse = models.CreateSandboxFileRuleResponse;
+const ModifyEdrAlertIsolationRequest = models.ModifyEdrAlertIsolationRequest;
 const HostVulRisk = models.HostVulRisk;
-const UpdateAccessKeyAlarmStatusResponse = models.UpdateAccessKeyAlarmStatusResponse;
-const VulImpactComponentInfo = models.VulImpactComponentInfo;
-const CVMAssetVO = models.CVMAssetVO;
-const VULBaseInfo = models.VULBaseInfo;
 const DescribeCallRecordResponse = models.DescribeCallRecordResponse;
-const AssetViewCFGRisk = models.AssetViewCFGRisk;
 const DescribeIaCFileListRequest = models.DescribeIaCFileListRequest;
-const KeyValueInt = models.KeyValueInt;
-const DataSearchBug = models.DataSearchBug;
-const CommandPluginState = models.CommandPluginState;
-const DescribeIaCFileOverviewResponse = models.DescribeIaCFileOverviewResponse;
-const VulFixableMachineItem = models.VulFixableMachineItem;
-const CreateIaCFileReScanTaskResponse = models.CreateIaCFileReScanTaskResponse;
-const DescribeClusterAssetsRequest = models.DescribeClusterAssetsRequest;
-const TaskCenterWeakPwdRiskInputParam = models.TaskCenterWeakPwdRiskInputParam;
-const DescribeDomainAssetsRequest = models.DescribeDomainAssetsRequest;
-const DescribeNICAssetsRequest = models.DescribeNICAssetsRequest;
-const DescribeIaCFileReportResponse = models.DescribeIaCFileReportResponse;
-const DescribeAssetProcessListRequest = models.DescribeAssetProcessListRequest;
-const DescribeAssetProcessListResponse = models.DescribeAssetProcessListResponse;
-const DescribeAccessKeyUserListRequest = models.DescribeAccessKeyUserListRequest;
+const DescribeDspmIdentifyComplianceGroupDetailRequest = models.DescribeDspmIdentifyComplianceGroupDetailRequest;
+const AIAgentSkillInfo = models.AIAgentSkillInfo;
+const ClusterNodeListItem = models.ClusterNodeListItem;
+const DescribeDspmAssetDatabasesRequest = models.DescribeDspmAssetDatabasesRequest;
+const DescribeLoginWhiteHostListResponse = models.DescribeLoginWhiteHostListResponse;
+const DescribeClbTargetsResponse = models.DescribeClbTargetsResponse;
+const DescribeDspmAssetAccountPresetPrivilegesResponse = models.DescribeDspmAssetAccountPresetPrivilegesResponse;
+const CreateBaselineAggregatedItemExportJobRequest = models.CreateBaselineAggregatedItemExportJobRequest;
+const DescribeRiskCenterAssetViewCFGRiskListRequest = models.DescribeRiskCenterAssetViewCFGRiskListRequest;
+const CreateAssetComponentListExportJobResponse = models.CreateAssetComponentListExportJobResponse;
+const DescribeImageVulSummaryListResponse = models.DescribeImageVulSummaryListResponse;
+const DeleteDspmShareUserDataResponse = models.DeleteDspmShareUserDataResponse;
+const DeleteWebhookPoliciesResponse = models.DeleteWebhookPoliciesResponse;
+const AiScheduleInfo = models.AiScheduleInfo;
+const DescribeBackendScanEngineRegionListRequest = models.DescribeBackendScanEngineRegionListRequest;
+const TaskInfo = models.TaskInfo;
 const KeySandboxCredential = models.KeySandboxCredential;
 const DeleteDomainAndIpRequest = models.DeleteDomainAndIpRequest;
-const DescribeRiskRuleDetailRequest = models.DescribeRiskRuleDetailRequest;
-const DescribeVulHostRelateComponentRequest = models.DescribeVulHostRelateComponentRequest;
+const ModifyDspmApplyingIdentifyComplianceGroupRequest = models.ModifyDspmApplyingIdentifyComplianceGroupRequest;
+const DescribeComplianceStandardTermTreeResponse = models.DescribeComplianceStandardTermTreeResponse;
+const ImageScanAssetTarget = models.ImageScanAssetTarget;
 const TaskIdListKey = models.TaskIdListKey;
 const DeleteIaCAccessTokenResponse = models.DeleteIaCAccessTokenResponse;
-const MiniTagItem = models.MiniTagItem;
-const UebaEventContent = models.UebaEventContent;
-const CreateAccessKeySyncTaskResponse = models.CreateAccessKeySyncTaskResponse;
-const ModifyIaCTokenPeriodResponse = models.ModifyIaCTokenPeriodResponse;
-const ModifyVulWhitelistSwitchRequest = models.ModifyVulWhitelistSwitchRequest;
-const DescribeVulFixableMachineListRequest = models.DescribeVulFixableMachineListRequest;
-const DescribeSearchBugInfoRequest = models.DescribeSearchBugInfoRequest;
-const TaskLogURL = models.TaskLogURL;
-const DescribeVulLabelListResponse = models.DescribeVulLabelListResponse;
-const DescribeOrganizationUserInfoResponse = models.DescribeOrganizationUserInfoResponse;
+const DescribeCheckConnectivityHostListResponse = models.DescribeCheckConnectivityHostListResponse;
+const InstallKeySandboxSkillResponse = models.InstallKeySandboxSkillResponse;
+const ModifyNFSScanConfResponse = models.ModifyNFSScanConfResponse;
 const AccessKeyRisk = models.AccessKeyRisk;
-const VulSpreadTrend = models.VulSpreadTrend;
 const DBAssetVO = models.DBAssetVO;
-const StandardTerm = models.StandardTerm;
-const DescribeHostVulOverviewRequest = models.DescribeHostVulOverviewRequest;
-const DescribeIaCTokenListRequest = models.DescribeIaCTokenListRequest;
-const SkillScanEngineResult = models.SkillScanEngineResult;
-const ModifyRiskCenterRiskStatusRequest = models.ModifyRiskCenterRiskStatusRequest;
-const ServerRisk = models.ServerRisk;
+const DescribeCheckConnectivityHostListRequest = models.DescribeCheckConnectivityHostListRequest;
+const ExposeTrendItem = models.ExposeTrendItem;
+const ModifyAgentRunModeRequest = models.ModifyAgentRunModeRequest;
+const ExportEDRRulesRequest = models.ExportEDRRulesRequest;
+const ModifyMalwareTimingScanSettingsResponse = models.ModifyMalwareTimingScanSettingsResponse;
 const DescribeRiskCenterAssetViewWeakPasswordRiskListRequest = models.DescribeRiskCenterAssetViewWeakPasswordRiskListRequest;
-const VULViewVULRisk = models.VULViewVULRisk;
-const DescribeUserCallRecordRequest = models.DescribeUserCallRecordRequest;
-const DescribeTopAttackInfoRequest = models.DescribeTopAttackInfoRequest;
-const CreateVulFixedExportJobResponse = models.CreateVulFixedExportJobResponse;
-const DescribePublicIpAssetsRequest = models.DescribePublicIpAssetsRequest;
-const DescribeVulLabelListRequest = models.DescribeVulLabelListRequest;
-const DescribeCVMAssetInfoRequest = models.DescribeCVMAssetInfoRequest;
-const WebsiteRisk = models.WebsiteRisk;
-const ServiceSupport = models.ServiceSupport;
+const CancelEdrAlertIgnoreRequest = models.CancelEdrAlertIgnoreRequest;
+const DescribeClusterPodListResponse = models.DescribeClusterPodListResponse;
+const ModifyLoginWhiteRecordResponse = models.ModifyLoginWhiteRecordResponse;
+const DescribeSecurityGroupPolicyResponse = models.DescribeSecurityGroupPolicyResponse;
+const AutoTagRuleItem = models.AutoTagRuleItem;
+const ModifySandboxACLRuleRequest = models.ModifySandboxACLRuleRequest;
 const DescribeAssetRiskListResponse = models.DescribeAssetRiskListResponse;
+const CreateDspmIdentifyCategoryResponse = models.CreateDspmIdentifyCategoryResponse;
 const AccessCredentialOutput = models.AccessCredentialOutput;
-const TaskCenterVulRiskInputParam = models.TaskCenterVulRiskInputParam;
+const DescribeEdrLogCollectPathsResponse = models.DescribeEdrLogCollectPathsResponse;
+const DescribeMalwareTimingScanSettingRequest = models.DescribeMalwareTimingScanSettingRequest;
 const ScanTaskInfo = models.ScanTaskInfo;
-const ModifyVulWhitelistSwitchResponse = models.ModifyVulWhitelistSwitchResponse;
-const DescribeVulIgnoreRuleListResponse = models.DescribeVulIgnoreRuleListResponse;
+const TrafficPluginState = models.TrafficPluginState;
+const DescribeCWPExposuresRequest = models.DescribeCWPExposuresRequest;
 const DescribeAccessKeyAlarmDetailRequest = models.DescribeAccessKeyAlarmDetailRequest;
-const Tags = models.Tags;
-const PortViewPortRisk = models.PortViewPortRisk;
-const DescribeConfigCheckRulesResponse = models.DescribeConfigCheckRulesResponse;
-const DescribeVpcAssetsResponse = models.DescribeVpcAssetsResponse;
-const VPRLabel = models.VPRLabel;
+const ModifyDspmRiskInfoRequest = models.ModifyDspmRiskInfoRequest;
+const DescribeDspmAccessTopologyAccountsResponse = models.DescribeDspmAccessTopologyAccountsResponse;
+const CreateDspmIdentifyComplianceRuleRelationResponse = models.CreateDspmIdentifyComplianceRuleRelationResponse;
+const CreateCSIPManualMalwareScanResponse = models.CreateCSIPManualMalwareScanResponse;
 const DescribeAssetRiskListRequest = models.DescribeAssetRiskListRequest;
-const VulFixTaskItem = models.VulFixTaskItem;
-const VulTrend = models.VulTrend;
-const SkillState = models.SkillState;
-const DescribeAccessKeyRiskResponse = models.DescribeAccessKeyRiskResponse;
-const DescribeCVMAssetsResponse = models.DescribeCVMAssetsResponse;
-const CreateAccessKeyCheckTaskRequest = models.CreateAccessKeyCheckTaskRequest;
-const DescribeVulFixedListResponse = models.DescribeVulFixedListResponse;
-const AssetBaseInfoResponse = models.AssetBaseInfoResponse;
-const DescribeRiskCallRecordResponse = models.DescribeRiskCallRecordResponse;
-const DescribeRiskCenterPortViewPortRiskListRequest = models.DescribeRiskCenterPortViewPortRiskListRequest;
-const DescribeAccessKeyUserDetailRequest = models.DescribeAccessKeyUserDetailRequest;
-const StopRiskCenterTaskRequest = models.StopRiskCenterTaskRequest;
-const ExposesItem = models.ExposesItem;
-const AKInfo = models.AKInfo;
-const WhereFilter = models.WhereFilter;
-const DescribeAlertListResponse = models.DescribeAlertListResponse;
-const ScanTaskInfoList = models.ScanTaskInfoList;
-const DescribeRiskCenterAssetViewVULRiskListRequest = models.DescribeRiskCenterAssetViewVULRiskListRequest;
-const DeleteIaCFileRequest = models.DeleteIaCFileRequest;
-const DescribeVulRiskRelateComponentRequest = models.DescribeVulRiskRelateComponentRequest;
+const DescribeSCFFunctionVersionListRequest = models.DescribeSCFFunctionVersionListRequest;
+const DescribeModifyMachinesLoginTypeTasksResponse = models.DescribeModifyMachinesLoginTypeTasksResponse;
+const DescribeSandboxLLMAuditRuleListResponse = models.DescribeSandboxLLMAuditRuleListResponse;
+const DescribeDspmAssetAccountsRequest = models.DescribeDspmAssetAccountsRequest;
+const EDRScanTaskHostItem = models.EDRScanTaskHostItem;
+const NotPassItemStatistic = models.NotPassItemStatistic;
+const DescribeAIAnalysisSMTPResponse = models.DescribeAIAnalysisSMTPResponse;
+const DeleteWebhookReceiversResponse = models.DeleteWebhookReceiversResponse;
+const CreateDspmIdentifyRuleRequest = models.CreateDspmIdentifyRuleRequest;
+const DeleteDspmIdentifyCategoryResponse = models.DeleteDspmIdentifyCategoryResponse;
+const LoginWhiteCombinedInfo = models.LoginWhiteCombinedInfo;
+const DescribeDspmAssetAccountsResponse = models.DescribeDspmAssetAccountsResponse;
+const CreatePublicAssetsExportJobResponse = models.CreatePublicAssetsExportJobResponse;
+const ModifyNotifyAssetConfigRequest = models.ModifyNotifyAssetConfigRequest;
+const DeleteCSIPMalwareScanTaskRequest = models.DeleteCSIPMalwareScanTaskRequest;
+const ModifyDspmAssetSecurityAnalysisSwitchResponse = models.ModifyDspmAssetSecurityAnalysisSwitchResponse;
+const BaselineAggregatedItem = models.BaselineAggregatedItem;
+const ImageVulWhitelist = models.ImageVulWhitelist;
+const DescribeEdrAlertListResponse = models.DescribeEdrAlertListResponse;
+const RiskTrendItem = models.RiskTrendItem;
+const ModifyDspmCkafkaStopRequest = models.ModifyDspmCkafkaStopRequest;
+const ModifyDspmAssetAccountResponse = models.ModifyDspmAssetAccountResponse;
+const CreateAllAssetsExportJobRequest = models.CreateAllAssetsExportJobRequest;
+const LogKeyValueInfo = models.LogKeyValueInfo;
 const SourceIPAsset = models.SourceIPAsset;
-const VulFixSummaryItem = models.VulFixSummaryItem;
-const DomainAssetVO = models.DomainAssetVO;
-const DescribeAccessKeyUserDetailResponse = models.DescribeAccessKeyUserDetailResponse;
+const ImageScanScheduleConfig = models.ImageScanScheduleConfig;
+const CreateDspmIdentifyComplianceGroupRequest = models.CreateDspmIdentifyComplianceGroupRequest;
+const ModifyDspmIdentifyRuleResponse = models.ModifyDspmIdentifyRuleResponse;
 const CreateHostVulExportJobResponse = models.CreateHostVulExportJobResponse;
-const CredentialEffectScope = models.CredentialEffectScope;
-const DescribeTaskLogListResponse = models.DescribeTaskLogListResponse;
-const HighBaseLineRiskItem = models.HighBaseLineRiskItem;
-const DescribeCVMAssetsRequest = models.DescribeCVMAssetsRequest;
-const DescribeRiskCenterServerRiskListRequest = models.DescribeRiskCenterServerRiskListRequest;
+const RevertDspmAssetAccountResponse = models.RevertDspmAssetAccountResponse;
+const ModifyDspmPersonalIdentifyResponse = models.ModifyDspmPersonalIdentifyResponse;
+const DescribeDspmRiskTendencyResponse = models.DescribeDspmRiskTendencyResponse;
+const DescribeRiskCenterRiskTrendAnalysisResponse = models.DescribeRiskCenterRiskTrendAnalysisResponse;
+const ModifyBaselineUserOtherConfRequest = models.ModifyBaselineUserOtherConfRequest;
 const DescribeAccessKeyAlarmDetailResponse = models.DescribeAccessKeyAlarmDetailResponse;
-const DescribeOtherCloudAssetsRequest = models.DescribeOtherCloudAssetsRequest;
+const RuleContentProcessNetwork = models.RuleContentProcessNetwork;
+const ModifyDspmApproveStatusResponse = models.ModifyDspmApproveStatusResponse;
+const DescribeImageAssociatedAssetCountResponse = models.DescribeImageAssociatedAssetCountResponse;
+const DeleteSandboxACLRuleRequest = models.DeleteSandboxACLRuleRequest;
+const DescribeAIAnalysisHistoryResponse = models.DescribeAIAnalysisHistoryResponse;
+const ModifyAILinkSettingResponse = models.ModifyAILinkSettingResponse;
+const TrafficSandboxACLRuleContentItem = models.TrafficSandboxACLRuleContentItem;
+const ModifyEdrAlertPermanentIgnoreResponse = models.ModifyEdrAlertPermanentIgnoreResponse;
+const ModifyDspmIdentifyInfoRequest = models.ModifyDspmIdentifyInfoRequest;
+const DescribeBanStatusRequest = models.DescribeBanStatusRequest;
 const DescribeAIAgentAssetListRequest = models.DescribeAIAgentAssetListRequest;
-const CreateDomainAndIpResponse = models.CreateDomainAndIpResponse;
-const DescribeSubUserInfoRequest = models.DescribeSubUserInfoRequest;
-const DescribeHighBaseLineRiskListRequest = models.DescribeHighBaseLineRiskListRequest;
-const DescribeTaskLogURLRequest = models.DescribeTaskLogURLRequest;
-const AddVulWhitelistResponse = models.AddVulWhitelistResponse;
-const DescribeVulRiskRelateHostResponse = models.DescribeVulRiskRelateHostResponse;
-const DescribeDbAssetInfoResponse = models.DescribeDbAssetInfoResponse;
-const BugInfoDetail = models.BugInfoDetail;
-const AccessKeyAlarmInfo = models.AccessKeyAlarmInfo;
-const VulFixTaskDetailItem = models.VulFixTaskDetailItem;
-const ModifyVulWhitelistConfigResponse = models.ModifyVulWhitelistConfigResponse;
-const DescribeVulFixTaskDetailRequest = models.DescribeVulFixTaskDetailRequest;
-const DescribeVulRiskRelateComponentResponse = models.DescribeVulRiskRelateComponentResponse;
-const DescribeAKAnalysisDetailResponse = models.DescribeAKAnalysisDetailResponse;
-const VulComponentSummary = models.VulComponentSummary;
-const DescribeCheckViewRisksRequest = models.DescribeCheckViewRisksRequest;
-const DescribeHostVulOverviewResponse = models.DescribeHostVulOverviewResponse;
-const StatisticalFilter = models.StatisticalFilter;
-const DescribeVULRiskDetailRequest = models.DescribeVULRiskDetailRequest;
-const DescribeVulFixedHostDetailRequest = models.DescribeVulFixedHostDetailRequest;
-const DescribeSkillScanResultResponse = models.DescribeSkillScanResultResponse;
-const DescribeConfigCheckRulesRequest = models.DescribeConfigCheckRulesRequest;
 const NewAlertKey = models.NewAlertKey;
-const DescribeVULRiskDetailResponse = models.DescribeVULRiskDetailResponse;
-const VulWhitelist = models.VulWhitelist;
-const ModifyRiskCenterScanTaskResponse = models.ModifyRiskCenterScanTaskResponse;
+const DescribeAssetFilterViewsRequest = models.DescribeAssetFilterViewsRequest;
+const CreateScanStatisticExportJobResponse = models.CreateScanStatisticExportJobResponse;
+const AccessAIAnalysisSMTPResponse = models.AccessAIAnalysisSMTPResponse;
+const DescribeHighBaseLineRiskListRequest = models.DescribeHighBaseLineRiskListRequest;
+const DescribeBaselinePolicyListRequest = models.DescribeBaselinePolicyListRequest;
+const CreateCFGRisksExportJobResponse = models.CreateCFGRisksExportJobResponse;
+const AddVulWhitelistResponse = models.AddVulWhitelistResponse;
+const FieldConfig = models.FieldConfig;
+const BatchModifyImageVirusWhitelistResponse = models.BatchModifyImageVirusWhitelistResponse;
+const DescribeCustomRiskRulesResponse = models.DescribeCustomRiskRulesResponse;
+const DescribeBaselineSystemCategoryListRequest = models.DescribeBaselineSystemCategoryListRequest;
+const DescribeVulFixTaskDetailRequest = models.DescribeVulFixTaskDetailRequest;
+const ImageAssetInfo = models.ImageAssetInfo;
+const DescribeEdrAlertCountForContainerRequest = models.DescribeEdrAlertCountForContainerRequest;
+const StopBaselineScanTaskRequest = models.StopBaselineScanTaskRequest;
+const ImageAssociatedContainer = models.ImageAssociatedContainer;
+const DescribeDspmSessionListRequest = models.DescribeDspmSessionListRequest;
+const DeleteSandboxLLMAuditRuleResponse = models.DeleteSandboxLLMAuditRuleResponse;
+const StatisticalFilter = models.StatisticalFilter;
+const DspmIdentifyCategoryItem = models.DspmIdentifyCategoryItem;
+const DescribeSandboxDLPRuleListRequest = models.DescribeSandboxDLPRuleListRequest;
+const DescribeRiskCenterAssetViewVULRiskListResponse = models.DescribeRiskCenterAssetViewVULRiskListResponse;
+const OsName = models.OsName;
+const ModifyRiskCenterRiskStatusRequest = models.ModifyRiskCenterRiskStatusRequest;
+const DescribeAccessKeyWhiteListResponse = models.DescribeAccessKeyWhiteListResponse;
+const DescribeLoginTypeGlobalConfResponse = models.DescribeLoginTypeGlobalConfResponse;
+const DescribeDspmAssetLoginCredentialResponse = models.DescribeDspmAssetLoginCredentialResponse;
+const CreateExposuresExportJobResponse = models.CreateExposuresExportJobResponse;
+const DescribeExportJobManageListResponse = models.DescribeExportJobManageListResponse;
+const DescribeDspmAuditFilterStrategyResponse = models.DescribeDspmAuditFilterStrategyResponse;
 const DeleteVulWhitelistRequest = models.DeleteVulWhitelistRequest;
-const TrafficRuleState = models.TrafficRuleState;
-const AccessKeyAlarmCount = models.AccessKeyAlarmCount;
-const RiskRuleItem = models.RiskRuleItem;
+const ScoreRuleItem = models.ScoreRuleItem;
 const DescribeAbnormalCallRecordRequest = models.DescribeAbnormalCallRecordRequest;
-const AssetRiskItem = models.AssetRiskItem;
-const DescribeRiskDetailListRequest = models.DescribeRiskDetailListRequest;
-const VulFixStatusItem = models.VulFixStatusItem;
-const RoleInfo = models.RoleInfo;
-const DescribeScanReportListResponse = models.DescribeScanReportListResponse;
-const RiskRuleInfo = models.RiskRuleInfo;
-const DescribeListenerListResponse = models.DescribeListenerListResponse;
-const HostBriefInfo = models.HostBriefInfo;
-const VulFixedItem = models.VulFixedItem;
-const AssetInfoDetail = models.AssetInfoDetail;
-const SubnetAsset = models.SubnetAsset;
+const DescribeExposureTrendResponse = models.DescribeExposureTrendResponse;
+const ModifyCosAuditBucketMonitorStatusRequest = models.ModifyCosAuditBucketMonitorStatusRequest;
+const CreateClusterAssetSyncTaskRequest = models.CreateClusterAssetSyncTaskRequest;
+const ModifyDspmIdentifyComplianceRuleLevelInfoResponse = models.ModifyDspmIdentifyComplianceRuleLevelInfoResponse;
+const AssetHeaderItem = models.AssetHeaderItem;
+const CreateSandboxLLMAuditRuleResponse = models.CreateSandboxLLMAuditRuleResponse;
+const ImageRegistryExportJobInfo = models.ImageRegistryExportJobInfo;
+const InquireInfo = models.InquireInfo;
+const DescribeBruteAttackRulesResponse = models.DescribeBruteAttackRulesResponse;
+const CheckImageRegistryInstanceNameDuplicateRequest = models.CheckImageRegistryInstanceNameDuplicateRequest;
+const LogDeliveryCkafkaConfig = models.LogDeliveryCkafkaConfig;
+const DescribeClusterSuperNodeInfoResponse = models.DescribeClusterSuperNodeInfoResponse;
+const DescribeComplianceOverviewResponse = models.DescribeComplianceOverviewResponse;
+const DescribeClusterServiceListRequest = models.DescribeClusterServiceListRequest;
+const DescribePodContainerListRequest = models.DescribePodContainerListRequest;
+const DescribeSkillScanPayInfoRequest = models.DescribeSkillScanPayInfoRequest;
+const DescribeAgentRunPolicyResponse = models.DescribeAgentRunPolicyResponse;
+const ModifyAssetTagResponse = models.ModifyAssetTagResponse;
+const ContainerMountItem = models.ContainerMountItem;
 const RiskCenterStatusKey = models.RiskCenterStatusKey;
 const TaskAssetObject = models.TaskAssetObject;
-const DbAssetInfo = models.DbAssetInfo;
-const TrafficPluginState = models.TrafficPluginState;
 const IaCFile = models.IaCFile;
-const DescribeVulHostRelateComponentResponse = models.DescribeVulHostRelateComponentResponse;
-const AccessKeyUser = models.AccessKeyUser;
+const UltimateAppItem = models.UltimateAppItem;
 const CreateVulFixRetryTaskResponse = models.CreateVulFixRetryTaskResponse;
-const AccessKeyAlarm = models.AccessKeyAlarm;
-const AssetClusterPod = models.AssetClusterPod;
+const SyncDspmUsersRequest = models.SyncDspmUsersRequest;
+const ModifyBaselinePolicyEnableRequest = models.ModifyBaselinePolicyEnableRequest;
 const DescribeKeySandboxCredentialResponse = models.DescribeKeySandboxCredentialResponse;
 const SkillScanItem = models.SkillScanItem;
 const DescribeVULListRequest = models.DescribeVULListRequest;
-const AssetViewWeakPassRisk = models.AssetViewWeakPassRisk;
-const DescribeVulFixedListRequest = models.DescribeVulFixedListRequest;
-const DescribeVulFixTaskListResponse = models.DescribeVulFixTaskListResponse;
+const ModifyNotifyMemberResponse = models.ModifyNotifyMemberResponse;
+const DspmAssetCount = models.DspmAssetCount;
 const CFGViewCFGRisk = models.CFGViewCFGRisk;
-const CreateIaCFileReScanTaskRequest = models.CreateIaCFileReScanTaskRequest;
-const DescribeRiskCenterPortViewPortRiskListResponse = models.DescribeRiskCenterPortViewPortRiskListResponse;
-const DescribeRiskCenterVULViewVULRiskListResponse = models.DescribeRiskCenterVULViewVULRiskListResponse;
-const DescribeClusterPodAssetsRequest = models.DescribeClusterPodAssetsRequest;
+const DescribeCWPMachinesResponse = models.DescribeCWPMachinesResponse;
+const ModifyAssetTagsByAssetInfoResponse = models.ModifyAssetTagsByAssetInfoResponse;
+const CreateIaCFileExportJobRequest = models.CreateIaCFileExportJobRequest;
+const LicenseBindFilter = models.LicenseBindFilter;
+const SensitiveDetail = models.SensitiveDetail;
+const CreateDspmIdentifyComplianceGroupCopyResponse = models.CreateDspmIdentifyComplianceGroupCopyResponse;
+const DescribeClbListenerRulesResponse = models.DescribeClbListenerRulesResponse;
+const CreateDspmIdentifyComplianceGroupCopyRequest = models.CreateDspmIdentifyComplianceGroupCopyRequest;
 const SkillRuleCatalogItem = models.SkillRuleCatalogItem;
-const DescribeRiskCenterVULViewVULRiskListRequest = models.DescribeRiskCenterVULViewVULRiskListRequest;
-const ModifyVulScanPeriodicResponse = models.ModifyVulScanPeriodicResponse;
-const AddVulWhitelistRequest = models.AddVulWhitelistRequest;
-const TaskAdvanceCFG = models.TaskAdvanceCFG;
+const SkillScanAlertItem = models.SkillScanAlertItem;
+const DeleteMachineClearHistoryRequest = models.DeleteMachineClearHistoryRequest;
+const DescribeAssetTagTreeRequest = models.DescribeAssetTagTreeRequest;
 const CreateVulReScanResponse = models.CreateVulReScanResponse;
-const VULRiskInfo = models.VULRiskInfo;
-const DescribeScanStatisticRequest = models.DescribeScanStatisticRequest;
-const CreateSkillScanRequest = models.CreateSkillScanRequest;
+const ScanBaselineRiskListResponse = models.ScanBaselineRiskListResponse;
+const CreateDspmApplyOrderRequest = models.CreateDspmApplyOrderRequest;
+const CreateAssetComponentListExportJobRequest = models.CreateAssetComponentListExportJobRequest;
+const DescribeDspmAssetDatabaseListResponse = models.DescribeDspmAssetDatabaseListResponse;
+const TrafficSandboxLLMAuditRuleRef = models.TrafficSandboxLLMAuditRuleRef;
+const DspmAccessRecordId = models.DspmAccessRecordId;
+const DescribeAssetTagTreeResponse = models.DescribeAssetTagTreeResponse;
+const DescribeVulViewVulRiskListRequest = models.DescribeVulViewVulRiskListRequest;
 const DescribeVulRiskListRequest = models.DescribeVulRiskListRequest;
+const DescribeVULListResponse = models.DescribeVULListResponse;
+const ImageRegistryDetectionHostParam = models.ImageRegistryDetectionHostParam;
+const ModifyExposureTagResponse = models.ModifyExposureTagResponse;
+const DeleteDspmExportTaskRequest = models.DeleteDspmExportTaskRequest;
+const AIAgentAsset = models.AIAgentAsset;
+const DspmSecurityAnalyseStatusCount = models.DspmSecurityAnalyseStatusCount;
+const DescribeSubnetAssetsRequest = models.DescribeSubnetAssetsRequest;
+const OperateRiskRequest = models.OperateRiskRequest;
+const UninstallClusterAgentRequest = models.UninstallClusterAgentRequest;
+const ModifySandboxFileRuleResponse = models.ModifySandboxFileRuleResponse;
+const CreateAIScheduleResponse = models.CreateAIScheduleResponse;
+const CreateVulScanManualResponse = models.CreateVulScanManualResponse;
+const ModifyNotifySettingAlertRequest = models.ModifyNotifySettingAlertRequest;
+const StandardModeConfig = models.StandardModeConfig;
+const ModifyDspmAuditFilterStrategyResponse = models.ModifyDspmAuditFilterStrategyResponse;
+const DescribeRiskDetailListResponse = models.DescribeRiskDetailListResponse;
+const DescribeUebaUserSummaryResponse = models.DescribeUebaUserSummaryResponse;
+const DescribeRiskCenterCFGViewCFGRiskListResponse = models.DescribeRiskCenterCFGViewCFGRiskListResponse;
+const DescribeComplianceStatisticsRequest = models.DescribeComplianceStatisticsRequest;
+const DescribeDspmIdentifyRuleTestResultResponse = models.DescribeDspmIdentifyRuleTestResultResponse;
+const InstallKeySandboxSkillRequest = models.InstallKeySandboxSkillRequest;
+const VPRRatingStage = models.VPRRatingStage;
+const CreateSandboxFileRuleRequest = models.CreateSandboxFileRuleRequest;
+const RegionInfo = models.RegionInfo;
+const DeleteVulWhitelistResponse = models.DeleteVulWhitelistResponse;
+const ModifyRiskCenterScanTaskRequest = models.ModifyRiskCenterScanTaskRequest;
+const DescribeImageVulWhitelistRequest = models.DescribeImageVulWhitelistRequest;
+const WebhookPolicy = models.WebhookPolicy;
+const DescribeCSIPMalwareScanTaskProgressRequest = models.DescribeCSIPMalwareScanTaskProgressRequest;
+const ModifyDspmCkafkaSaveResponse = models.ModifyDspmCkafkaSaveResponse;
+const DescribeBaselinePolicyCategoryListRequest = models.DescribeBaselinePolicyCategoryListRequest;
+const DescribeVulViewVulRiskListResponse = models.DescribeVulViewVulRiskListResponse;
+const CreateHostImageListExportJobRequest = models.CreateHostImageListExportJobRequest;
+const DeleteImageVulWhitelistRequest = models.DeleteImageVulWhitelistRequest;
+const ModifySandboxDLPRuleResponse = models.ModifySandboxDLPRuleResponse;
+const EdrAlertTargetForIgnore = models.EdrAlertTargetForIgnore;
+const DescribeTaskLogListRequest = models.DescribeTaskLogListRequest;
+const DspmAssetAccessTopologyItem = models.DspmAssetAccessTopologyItem;
+const Filters = models.Filters;
+const DescribeDspmIdentifyCategoryListRequest = models.DescribeDspmIdentifyCategoryListRequest;
+const ExposeRuleItem = models.ExposeRuleItem;
+const ClusterWithAppIdItem = models.ClusterWithAppIdItem;
+const ModifyAgentRunPolicyResponse = models.ModifyAgentRunPolicyResponse;
+const ImageScanAutoMatchConfig = models.ImageScanAutoMatchConfig;
+const ModifyNotifyMemberRequest = models.ModifyNotifyMemberRequest;
+const ModifyPayConfigResponse = models.ModifyPayConfigResponse;
+const DescribeDspmSupportedAssetTypeRequest = models.DescribeDspmSupportedAssetTypeRequest;
+const DescribeBaselineFixRecordListResponse = models.DescribeBaselineFixRecordListResponse;
+const ClusterContainerListItem = models.ClusterContainerListItem;
+const TaskAdvanceCFG = models.TaskAdvanceCFG;
+const KBUpdateMachineItem = models.KBUpdateMachineItem;
+const CycleScanConf = models.CycleScanConf;
+const ImageVul = models.ImageVul;
+const ModifyAIScheduleResponse = models.ModifyAIScheduleResponse;
+const DescribePreventUninstallHostResponse = models.DescribePreventUninstallHostResponse;
+const DescribeClusterContainerWebServiceListRequest = models.DescribeClusterContainerWebServiceListRequest;
+const AIAgentCredential = models.AIAgentCredential;
+const DescribeImageAssetListResponse = models.DescribeImageAssetListResponse;
+const DescribeAIAnalysisRecommendQuestionsRequest = models.DescribeAIAnalysisRecommendQuestionsRequest;
+const CheckCWPExposePathPermissionRequest = models.CheckCWPExposePathPermissionRequest;
+const DescribeDspmIdentifyComplianceGroupDetailResponse = models.DescribeDspmIdentifyComplianceGroupDetailResponse;
+const CreateVulFixedExportJobRequest = models.CreateVulFixedExportJobRequest;
+const DeleteDspmPersonalIdentifyRequest = models.DeleteDspmPersonalIdentifyRequest;
+const DescribeSkillScanAlertDetailRequest = models.DescribeSkillScanAlertDetailRequest;
+const DescribeDspmSyncAssetsStatusRequest = models.DescribeDspmSyncAssetsStatusRequest;
+const DspmApplyOrder = models.DspmApplyOrder;
+const DescribeBaselineUserOtherConfResponse = models.DescribeBaselineUserOtherConfResponse;
+const DspmApproverOrder = models.DspmApproverOrder;
+const CategoryNode = models.CategoryNode;
+const ModifyDspmAssetAccountRequest = models.ModifyDspmAssetAccountRequest;
+const DescribeAssetOverviewResponse = models.DescribeAssetOverviewResponse;
+const TrafficSandboxACLURLRule = models.TrafficSandboxACLURLRule;
+const CreateAccessKeyCheckTaskResponse = models.CreateAccessKeyCheckTaskResponse;
+const DeleteDspmCkafkaConfigRequest = models.DeleteDspmCkafkaConfigRequest;
+const DescribeRaspLicenseListRequest = models.DescribeRaspLicenseListRequest;
+const EdrAlertTarget = models.EdrAlertTarget;
+const DescribeDspmRiskResponse = models.DescribeDspmRiskResponse;
+const DescribeHostVulRiskListRequest = models.DescribeHostVulRiskListRequest;
+const DescribeLastScanTaskInfoRequest = models.DescribeLastScanTaskInfoRequest;
+const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
+const ContainerPortItem = models.ContainerPortItem;
+const OrganizationInfo = models.OrganizationInfo;
+const CreateClusterNodeListExportJobResponse = models.CreateClusterNodeListExportJobResponse;
+const CreateImageSensitiveInfoListExportJobResponse = models.CreateImageSensitiveInfoListExportJobResponse;
+const ScanBaselinePolicyListRequest = models.ScanBaselinePolicyListRequest;
+const CreateDspmAssetIdentifyInfoExportJobRequest = models.CreateDspmAssetIdentifyInfoExportJobRequest;
+const ModifyCSIPLicenseUnBindsResponse = models.ModifyCSIPLicenseUnBindsResponse;
+const ScanCSIPTaskAgainResponse = models.ScanCSIPTaskAgainResponse;
+const DescribeVulIgnoreRuleListResponse = models.DescribeVulIgnoreRuleListResponse;
+const DescribeImageAssociatedContainerListRequest = models.DescribeImageAssociatedContainerListRequest;
+const DescribeAIScheduleListRequest = models.DescribeAIScheduleListRequest;
+const VulVendorProduct = models.VulVendorProduct;
+const VulFixTaskInfo = models.VulFixTaskInfo;
+const EDRRuleTagItem = models.EDRRuleTagItem;
+const DiskPartitionInfo = models.DiskPartitionInfo;
+const DescribeRegistryOverviewRequest = models.DescribeRegistryOverviewRequest;
+const DescribeEdrAlertSummaryRequest = models.DescribeEdrAlertSummaryRequest;
+const ModifyDspmIdentifyComplianceGroupResponse = models.ModifyDspmIdentifyComplianceGroupResponse;
+const DescribeExposureAutoTagRulesRequest = models.DescribeExposureAutoTagRulesRequest;
+const DescribeClusterNamespaceListResponse = models.DescribeClusterNamespaceListResponse;
+const DescribeAIAgentCredentialListRequest = models.DescribeAIAgentCredentialListRequest;
+const DescribeImageSensitiveInfoListRequest = models.DescribeImageSensitiveInfoListRequest;
+const ImageAssociatedHostAsset = models.ImageAssociatedHostAsset;
+const DescribeImageLayerVulListResponse = models.DescribeImageLayerVulListResponse;
+const TrafficSandboxACLAlertInfo = models.TrafficSandboxACLAlertInfo;
+const DescribeBaselineOverviewResponse = models.DescribeBaselineOverviewResponse;
+const DescribeDspmApproveHistoryResponse = models.DescribeDspmApproveHistoryResponse;
+const DescribeNetAttackSettingRequest = models.DescribeNetAttackSettingRequest;
+const DescribeBaselineMainTaskListResponse = models.DescribeBaselineMainTaskListResponse;
+const DescribeConfigCheckRulesResponse = models.DescribeConfigCheckRulesResponse;
+const ResetDspmAssetAccountPasswordRequest = models.ResetDspmAssetAccountPasswordRequest;
+const DescribeBackendScanEngineRegionListResponse = models.DescribeBackendScanEngineRegionListResponse;
+const DescribeHostKBRiskListResponse = models.DescribeHostKBRiskListResponse;
+const CreateEdrLessAlertExportJobRequest = models.CreateEdrLessAlertExportJobRequest;
+const DescribeAssetTreeRequest = models.DescribeAssetTreeRequest;
+const DescribeCWPTaskDurationResponse = models.DescribeCWPTaskDurationResponse;
+const ModifyBaselinePolicyRequest = models.ModifyBaselinePolicyRequest;
+const VulRiskItem = models.VulRiskItem;
+const ModifyDspmBackupSettingRequest = models.ModifyDspmBackupSettingRequest;
+const AssetTagModifyAssetItem = models.AssetTagModifyAssetItem;
+const DescribeGatewayAssetsResponse = models.DescribeGatewayAssetsResponse;
+const DescribeDspmApproveOrderListRequest = models.DescribeDspmApproveOrderListRequest;
+const StopCSIPManualMalwareScanResponse = models.StopCSIPManualMalwareScanResponse;
+const CreateImageRegistryScanTaskRequest = models.CreateImageRegistryScanTaskRequest;
+const SkillScanRuleHit = models.SkillScanRuleHit;
+const ModifyImageVirusWhitelistRequest = models.ModifyImageVirusWhitelistRequest;
+const CreateCloudFunctionExportJobResponse = models.CreateCloudFunctionExportJobResponse;
+const VerifyDspmAssetLoginCodeResponse = models.VerifyDspmAssetLoginCodeResponse;
+const ExpiringProduct = models.ExpiringProduct;
+const DescribeAccessKeyAlarmRequest = models.DescribeAccessKeyAlarmRequest;
+const DescribeHighBaseLineRiskListResponse = models.DescribeHighBaseLineRiskListResponse;
+const DescribeDspmRiskDetailRequest = models.DescribeDspmRiskDetailRequest;
+const DescribeEdrAlertThreatTagsRequest = models.DescribeEdrAlertThreatTagsRequest;
+const AssetTagItem = models.AssetTagItem;
+const DeleteImageSensitiveWhitelistResponse = models.DeleteImageSensitiveWhitelistResponse;
+const DescribeCSCPayInfoRequest = models.DescribeCSCPayInfoRequest;
+const DescribeHostVulItemVPRInfoResponse = models.DescribeHostVulItemVPRInfoResponse;
+const NetworkSegment = models.NetworkSegment;
+const CreateSandboxDLPRuleResponse = models.CreateSandboxDLPRuleResponse;
+const DescribePreventUninstallHostRequest = models.DescribePreventUninstallHostRequest;
+const CreateDspmAccessExportJobRequest = models.CreateDspmAccessExportJobRequest;
+const CreateClusterAssetSyncTaskResponse = models.CreateClusterAssetSyncTaskResponse;
+const CWPOrderExtraParam = models.CWPOrderExtraParam;
+const DescribeEDRScanTaskDetailResponse = models.DescribeEDRScanTaskDetailResponse;
+const DescribeCWPScanIpInfoRequest = models.DescribeCWPScanIpInfoRequest;
+const CreateExposureAutoTagRuleRequest = models.CreateExposureAutoTagRuleRequest;
+const StopCSIPManualMalwareScanRequest = models.StopCSIPManualMalwareScanRequest;
+const DescribeRiskCenterServerRiskListResponse = models.DescribeRiskCenterServerRiskListResponse;
+const DescribeCSCPayInfoResponse = models.DescribeCSCPayInfoResponse;
+const TrafficSandboxDLPUserRuleInfo = models.TrafficSandboxDLPUserRuleInfo;
+const TrafficSandboxAssetScope = models.TrafficSandboxAssetScope;
+const DescribeVulComponentRelateHostRequest = models.DescribeVulComponentRelateHostRequest;
+const DescribeSandboxACLSystemRuleListResponse = models.DescribeSandboxACLSystemRuleListResponse;
+const AccessKeyAsset = models.AccessKeyAsset;
+const DspmAssetFieldInfo = models.DspmAssetFieldInfo;
+const DescribeAIAnalysisRecommendQuestionsResponse = models.DescribeAIAnalysisRecommendQuestionsResponse;
+const CreatePodContainerListExportJobRequest = models.CreatePodContainerListExportJobRequest;
+const CreateDspmRiskExportJobResponse = models.CreateDspmRiskExportJobResponse;
+const DescribeUebaBehaviorSummaryResponse = models.DescribeUebaBehaviorSummaryResponse;
+const CreateRiskDetailExportJobResponse = models.CreateRiskDetailExportJobResponse;
+const InstallClusterAgentResponse = models.InstallClusterAgentResponse;
+const DescribeImageRegistryConnectivityTaskResultResponse = models.DescribeImageRegistryConnectivityTaskResultResponse;
+const DescribeCustomAssetTagCountResponse = models.DescribeCustomAssetTagCountResponse;
+const DspmPersonUser = models.DspmPersonUser;
+const ModifyEDRRuleResponse = models.ModifyEDRRuleResponse;
+const ModifyAgentConfigSettingResponse = models.ModifyAgentConfigSettingResponse;
+const IpAssetListVO = models.IpAssetListVO;
+const HostAutoScaleConfig = models.HostAutoScaleConfig;
+const CreateBaselineFixRecordExportJobRequest = models.CreateBaselineFixRecordExportJobRequest;
+const ExportClientSettingHostListResponse = models.ExportClientSettingHostListResponse;
+const DeleteSandboxDLPRuleRequest = models.DeleteSandboxDLPRuleRequest;
+const DescribeBaselineAggregatedItemListRequest = models.DescribeBaselineAggregatedItemListRequest;
+const STSCredentialOutput = models.STSCredentialOutput;
+const DescribeDspmExportTaskResponse = models.DescribeDspmExportTaskResponse;
+const DescribeRepositoryImageAssetsResponse = models.DescribeRepositoryImageAssetsResponse;
+const DeleteClusterRequest = models.DeleteClusterRequest;
+const DescribeBaselineSubTaskListResponse = models.DescribeBaselineSubTaskListResponse;
+const DescribeDspmRiskStrategyGroupRequest = models.DescribeDspmRiskStrategyGroupRequest;
+const CreateDspmIdentifyComplianceGroupResponse = models.CreateDspmIdentifyComplianceGroupResponse;
+const HitRules = models.HitRules;
+const DescribeVULRiskAdvanceCFGListRequest = models.DescribeVULRiskAdvanceCFGListRequest;
+const DescribeImageExportJobListRequest = models.DescribeImageExportJobListRequest;
+const TopicInfo = models.TopicInfo;
+const ModifyCspmShardConfigResponse = models.ModifyCspmShardConfigResponse;
+const CreateSkillScanResponse = models.CreateSkillScanResponse;
+const DescribeDspmPayInfoRequest = models.DescribeDspmPayInfoRequest;
+const CreateHighBaseLineRisksExportJobResponse = models.CreateHighBaseLineRisksExportJobResponse;
+const ModifyAssetFilterViewRequest = models.ModifyAssetFilterViewRequest;
+const DescribeEDRScanTaskDetailRequest = models.DescribeEDRScanTaskDetailRequest;
+const ClbTargetItem = models.ClbTargetItem;
+const DescribeBaselineItemRiskListRequest = models.DescribeBaselineItemRiskListRequest;
+const TagCount = models.TagCount;
+const DescribeSkillScanResultRequest = models.DescribeSkillScanResultRequest;
+const GateWayAsset = models.GateWayAsset;
+const CreateVulFixTaskResponse = models.CreateVulFixTaskResponse;
+const DescribeImageSensitiveInfoListResponse = models.DescribeImageSensitiveInfoListResponse;
+const DescribeVulIgnoreRuleListRequest = models.DescribeVulIgnoreRuleListRequest;
+const DspmIp = models.DspmIp;
+const DescribeCLSLogListV3Response = models.DescribeCLSLogListV3Response;
+const ModifyAgentRunModeResponse = models.ModifyAgentRunModeResponse;
+const BaselineItemRiskRecord = models.BaselineItemRiskRecord;
+const DescribeAssetTagAttributesResponse = models.DescribeAssetTagAttributesResponse;
+const StopPreventUninstallRequest = models.StopPreventUninstallRequest;
+const ModifyMachineAutoClearConfigRequest = models.ModifyMachineAutoClearConfigRequest;
+const LicenseBindScheduleItem = models.LicenseBindScheduleItem;
+const ModifyEDRRuleStatusRequest = models.ModifyEDRRuleStatusRequest;
+const DescribeScfCustomDomainEndpointsResponse = models.DescribeScfCustomDomainEndpointsResponse;
+const CreateCFGRiskPDFReportExportJobRequest = models.CreateCFGRiskPDFReportExportJobRequest;
+const ModifyDspmIdentifyInfoResponse = models.ModifyDspmIdentifyInfoResponse;
+const ModifyDspmIdentifyComplianceGroupRequest = models.ModifyDspmIdentifyComplianceGroupRequest;
+const DescribePodContainerListResponse = models.DescribePodContainerListResponse;
+const DescribeDspmIdentifyIdListResponse = models.DescribeDspmIdentifyIdListResponse;
+const AIRecommendAction = models.AIRecommendAction;
+const VulScanTask = models.VulScanTask;
+const DescribeScanReportListRequest = models.DescribeScanReportListRequest;
+const DescribeAccessKeyAssetRequest = models.DescribeAccessKeyAssetRequest;
+const ModifySkillScanAlertStatusResponse = models.ModifySkillScanAlertStatusResponse;
+const AddImageRegistryResponse = models.AddImageRegistryResponse;
+const ModifyEdrAlertStatusResponse = models.ModifyEdrAlertStatusResponse;
+const DescribeDspmIdentifyComplianceCategoryRuleListRequest = models.DescribeDspmIdentifyComplianceCategoryRuleListRequest;
+const DspmAssetAccount = models.DspmAssetAccount;
+const DeleteAIScheduleRequest = models.DeleteAIScheduleRequest;
+const SendDspmCkafkaTestResponse = models.SendDspmCkafkaTestResponse;
+const ConnectivityDetectConfig = models.ConnectivityDetectConfig;
+const DspmRisk = models.DspmRisk;
+const ModifyRiskScanCronConfigRequest = models.ModifyRiskScanCronConfigRequest;
+const DescribeUserDspmInfoListResponse = models.DescribeUserDspmInfoListResponse;
+const AlertExtraInfo = models.AlertExtraInfo;
+const CreateEdrAlertExportJobResponse = models.CreateEdrAlertExportJobResponse;
+const ModifyEdrAlertPermanentIgnoreRequest = models.ModifyEdrAlertPermanentIgnoreRequest;
+const EdrAlertCountItem = models.EdrAlertCountItem;
+const BaselineHostAsset = models.BaselineHostAsset;
+const DescribeCallRecordRequest = models.DescribeCallRecordRequest;
+const DescribeClusterPodAssetsResponse = models.DescribeClusterPodAssetsResponse;
+const HostVulComponent = models.HostVulComponent;
+const DescribeSecurityScoreRuleRequest = models.DescribeSecurityScoreRuleRequest;
+const DescribeRiskScanCronConfigRequest = models.DescribeRiskScanCronConfigRequest;
+const CreateExposureAutoTagRuleResponse = models.CreateExposureAutoTagRuleResponse;
+const EDRScanRecordItem = models.EDRScanRecordItem;
+const InstanceIDWithAppIdItem = models.InstanceIDWithAppIdItem;
+const AddNewBindRoleUserResponse = models.AddNewBindRoleUserResponse;
+const BatchModifyImageVulWhitelistRequest = models.BatchModifyImageVulWhitelistRequest;
+const DescribeDspmIdentifyLevelGroupListResponse = models.DescribeDspmIdentifyLevelGroupListResponse;
+const DescribeDspmIdentifyInfoResponse = models.DescribeDspmIdentifyInfoResponse;
+const DescribeDspmPayInfoResponse = models.DescribeDspmPayInfoResponse;
+const DeleteDspmIdentifyComplianceCategoryRelationResponse = models.DeleteDspmIdentifyComplianceCategoryRelationResponse;
+const ModifyDspmIpInfoRequest = models.ModifyDspmIpInfoRequest;
+const DescribeLicenseStatusRequest = models.DescribeLicenseStatusRequest;
+const VulFixTaskItem = models.VulFixTaskItem;
+const ModifyNotifyAgentOfflineDurationRequest = models.ModifyNotifyAgentOfflineDurationRequest;
+const DescribePreventUninstallGlobalConfRequest = models.DescribePreventUninstallGlobalConfRequest;
+const DescribeBaselineUserWeakPasswordConfResponse = models.DescribeBaselineUserWeakPasswordConfResponse;
+const DspmTablePrivilege = models.DspmTablePrivilege;
+const DescribeSearchBugInfoResponse = models.DescribeSearchBugInfoResponse;
+const EdrAlertTagItem = models.EdrAlertTagItem;
+const DescribeSecurityScoreOverviewResponse = models.DescribeSecurityScoreOverviewResponse;
+const DescribeExposeAssetCategoryRequest = models.DescribeExposeAssetCategoryRequest;
+const BaselinePolicy = models.BaselinePolicy;
+const DescribeImageRegistryNamespaceListResponse = models.DescribeImageRegistryNamespaceListResponse;
+const AssetDetailItem = models.AssetDetailItem;
+const DescribeVulFixTaskDetailResponse = models.DescribeVulFixTaskDetailResponse;
+const DeleteImageRegistryTimedScanTaskConfigResponse = models.DeleteImageRegistryTimedScanTaskConfigResponse;
+const CreateClusterListExportJobResponse = models.CreateClusterListExportJobResponse;
+const CFGRiskStatisticsItem = models.CFGRiskStatisticsItem;
+const UpdateAccessKeyAlarmStatusRequest = models.UpdateAccessKeyAlarmStatusRequest;
+const DescribeUserCSPMInfoListResponse = models.DescribeUserCSPMInfoListResponse;
+const DescribeClusterSummaryRequest = models.DescribeClusterSummaryRequest;
+const RiskCallRecord = models.RiskCallRecord;
+const ModifyAgentConfigSettingRequest = models.ModifyAgentConfigSettingRequest;
+const ModifyBruteAttackRulesRequest = models.ModifyBruteAttackRulesRequest;
+const DspmIdentifyLevelItem = models.DspmIdentifyLevelItem;
+const ModifyDspmAuditFilterStrategyRequest = models.ModifyDspmAuditFilterStrategyRequest;
+const DescribeVulFixTaskListRequest = models.DescribeVulFixTaskListRequest;
+const ModifyCSIPRaspLicenseUnBindsResponse = models.ModifyCSIPRaspLicenseUnBindsResponse;
+const DescribeDspmUserCkafkaInstanceListResponse = models.DescribeDspmUserCkafkaInstanceListResponse;
+const AssetCluster = models.AssetCluster;
+const ExportTask = models.ExportTask;
+const CheckIsUltimateVersionResponse = models.CheckIsUltimateVersionResponse;
+const MachineClearHistory = models.MachineClearHistory;
+const CreateDspmPersonalIdentifyRequest = models.CreateDspmPersonalIdentifyRequest;
+const StandardItem = models.StandardItem;
+const DescribeSandboxLLMAuditSystemRuleListResponse = models.DescribeSandboxLLMAuditSystemRuleListResponse;
+const DescribeVulFixableMachineListResponse = models.DescribeVulFixableMachineListResponse;
+const DescribeAssetLastSyncTimeRequest = models.DescribeAssetLastSyncTimeRequest;
+const DescribeImageSensitiveWhitelistResponse = models.DescribeImageSensitiveWhitelistResponse;
+const UpdateAccessKeyAlarmStatusResponse = models.UpdateAccessKeyAlarmStatusResponse;
+const CategoryItem = models.CategoryItem;
+const ScanTaskRecordItem = models.ScanTaskRecordItem;
+const DspmAddIdentifyLevelItem = models.DspmAddIdentifyLevelItem;
+const CreateBaselineFixRecordExportJobResponse = models.CreateBaselineFixRecordExportJobResponse;
+const DspmIdentifyComplianceCategoryRelation = models.DspmIdentifyComplianceCategoryRelation;
+const KeyValueInt = models.KeyValueInt;
+const DescribeRegistryRegionListResponse = models.DescribeRegistryRegionListResponse;
+const SCFFunctionVersionInfo = models.SCFFunctionVersionInfo;
+const DescribeImageComponentListResponse = models.DescribeImageComponentListResponse;
+const DescribeIaCFileOverviewResponse = models.DescribeIaCFileOverviewResponse;
+const KBFixSummaryItem = models.KBFixSummaryItem;
+const ModifyReverseShellSystemPolicyConfigRequest = models.ModifyReverseShellSystemPolicyConfigRequest;
+const ComplianceChapterItem = models.ComplianceChapterItem;
+const VulFixableMachineItem = models.VulFixableMachineItem;
+const DescribeClusterAssetsRequest = models.DescribeClusterAssetsRequest;
+const DescribeAIScheduleListResponse = models.DescribeAIScheduleListResponse;
+const DescribeCSIPLicenseBindScheduleRequest = models.DescribeCSIPLicenseBindScheduleRequest;
+const DescribeProcessDaemonHostResponse = models.DescribeProcessDaemonHostResponse;
+const ModifySandboxDLPRuleStatusRequest = models.ModifySandboxDLPRuleStatusRequest;
+const ModifyDspmIdentifyComplianceGroupStatusResponse = models.ModifyDspmIdentifyComplianceGroupStatusResponse;
+const TrafficSandboxACLRuleInfo = models.TrafficSandboxACLRuleInfo;
+const DescribeAssetProcessListRequest = models.DescribeAssetProcessListRequest;
+const ModifyClusterDefendStatusRequest = models.ModifyClusterDefendStatusRequest;
+const DescribeDspmAssetAccountPresetPrivilegesRequest = models.DescribeDspmAssetAccountPresetPrivilegesRequest;
+const ModifyDspmIdentifyCategoryRequest = models.ModifyDspmIdentifyCategoryRequest;
+const DescribeVdbAndPocInfoRequest = models.DescribeVdbAndPocInfoRequest;
+const DescribeAbTestUserResponse = models.DescribeAbTestUserResponse;
+const DspmIdentifyCategoryRuleRelateDetailItem = models.DspmIdentifyCategoryRuleRelateDetailItem;
+const ModifyImageSensitiveWhitelistRequest = models.ModifyImageSensitiveWhitelistRequest;
+const ModifyVulWhitelistSwitchRequest = models.ModifyVulWhitelistSwitchRequest;
+const DescribeDspmSyncUsersStatusResponse = models.DescribeDspmSyncUsersStatusResponse;
+const DescribeSearchBugInfoRequest = models.DescribeSearchBugInfoRequest;
+const DescribeBaselinePolicyNameExistAppidListResponse = models.DescribeBaselinePolicyNameExistAppidListResponse;
+const DescribeOrganizationUserInfoResponse = models.DescribeOrganizationUserInfoResponse;
+const DspmIdentifyRuleDetail = models.DspmIdentifyRuleDetail;
+const VulSpreadTrend = models.VulSpreadTrend;
+const CreateBaselineAggregatedItemExportJobResponse = models.CreateBaselineAggregatedItemExportJobResponse;
+const ModifyExposureAutoTagRuleRequest = models.ModifyExposureAutoTagRuleRequest;
+const ModifyUebaRuleSwitchResponse = models.ModifyUebaRuleSwitchResponse;
+const AssetFilterConfig = models.AssetFilterConfig;
+const DescribeHostVulOverviewRequest = models.DescribeHostVulOverviewRequest;
+const DescribeSecurityGroupPolicyRequest = models.DescribeSecurityGroupPolicyRequest;
+const CopyBaselinePolicyRequest = models.CopyBaselinePolicyRequest;
+const ScanEDRTaskAgainRequest = models.ScanEDRTaskAgainRequest;
+const LogValueInfo = models.LogValueInfo;
+const DescribeDspmAccessTopologyIpsRequest = models.DescribeDspmAccessTopologyIpsRequest;
+const DescribeDspmAssetLoginCredentialRequest = models.DescribeDspmAssetLoginCredentialRequest;
+const DescribeCLSLogListV3Request = models.DescribeCLSLogListV3Request;
+const CreateExposuresExportJobRequest = models.CreateExposuresExportJobRequest;
+const DescribeDspmIdentifyRuleListRequest = models.DescribeDspmIdentifyRuleListRequest;
+const DescribeExposeRiskStatisticsResponse = models.DescribeExposeRiskStatisticsResponse;
+const StartOrModifyProcessDaemonResponse = models.StartOrModifyProcessDaemonResponse;
+const BaselineFixRecord = models.BaselineFixRecord;
+const DescribeUserAKInfoListResponse = models.DescribeUserAKInfoListResponse;
+const DescribeEdrExcludeNetworkSegmentsResponse = models.DescribeEdrExcludeNetworkSegmentsResponse;
+const DescribeCVMAssetInfoRequest = models.DescribeCVMAssetInfoRequest;
+const CreateImageLayerVulListExportJobRequest = models.CreateImageLayerVulListExportJobRequest;
+const WebsiteRisk = models.WebsiteRisk;
+const DspmRiskCount = models.DspmRiskCount;
+const DescribeClusterContainerProcessListRequest = models.DescribeClusterContainerProcessListRequest;
+const DescribeDspmAssetAccountRecycledPrivilegesResponse = models.DescribeDspmAssetAccountRecycledPrivilegesResponse;
+const DescribeAIAgentCredentialListResponse = models.DescribeAIAgentCredentialListResponse;
+const ModifyBaselinePolicyResponse = models.ModifyBaselinePolicyResponse;
+const DescribeDspmCkafkaTopicListResponse = models.DescribeDspmCkafkaTopicListResponse;
+const CreateAssetFilterViewRequest = models.CreateAssetFilterViewRequest;
+const DescribeClusterPodAssetsRequest = models.DescribeClusterPodAssetsRequest;
+const ModifyBaselineUserWeakPasswordConfRequest = models.ModifyBaselineUserWeakPasswordConfRequest;
+const ModifyShareUserCSPMRequest = models.ModifyShareUserCSPMRequest;
+const VPRLabel = models.VPRLabel;
+const DescribeTopAttackInfoRequest = models.DescribeTopAttackInfoRequest;
+const VulTrend = models.VulTrend;
+const SkillState = models.SkillState;
+const DescribeDspmIdentifyInfoListResponse = models.DescribeDspmIdentifyInfoListResponse;
+const CheckConnectivityHostInfo = models.CheckConnectivityHostInfo;
+const DeleteImageRegistryScanTaskResponse = models.DeleteImageRegistryScanTaskResponse;
+const DescribeClusterContainerDetailResponse = models.DescribeClusterContainerDetailResponse;
+const Vpc = models.Vpc;
+const ModifyDspmIpInfoResponse = models.ModifyDspmIpInfoResponse;
+const DescribeVulRiskListResponse = models.DescribeVulRiskListResponse;
+const TcrRegistry = models.TcrRegistry;
+const DescribeEdrExportJobDownloadURLResponse = models.DescribeEdrExportJobDownloadURLResponse;
+const CheckImageRegistryInstanceNameDuplicateResponse = models.CheckImageRegistryInstanceNameDuplicateResponse;
+const SyncDspmUsersResponse = models.SyncDspmUsersResponse;
+const DescribeCLSLogIndexV3Response = models.DescribeCLSLogIndexV3Response;
+const PortRiskAdvanceCFGParamItem = models.PortRiskAdvanceCFGParamItem;
+const DescribeBaselineSubTaskListRequest = models.DescribeBaselineSubTaskListRequest;
+const CreateImageVulWhitelistResponse = models.CreateImageVulWhitelistResponse;
+const AssetBaseInfoResponse = models.AssetBaseInfoResponse;
+const BaselineCustomItemConf = models.BaselineCustomItemConf;
+const DescribeRiskCallRecordResponse = models.DescribeRiskCallRecordResponse;
+const DescribeReverseShellSystemPolicyConfigResponse = models.DescribeReverseShellSystemPolicyConfigResponse;
+const ModifyAssetTagsByAssetInfoRequest = models.ModifyAssetTagsByAssetInfoRequest;
+const DeleteDspmIdentifyComplianceRuleRelationResponse = models.DeleteDspmIdentifyComplianceRuleRelationResponse;
+const DescribeDspmIdentifyRuleTestResultRequest = models.DescribeDspmIdentifyRuleTestResultRequest;
+const AKInfo = models.AKInfo;
+const ExportJobItem = models.ExportJobItem;
+const DescribeAlertListResponse = models.DescribeAlertListResponse;
+const UpdateAlertStatusListRequest = models.UpdateAlertStatusListRequest;
+const DescribeLoginWhiteCombinedListRequest = models.DescribeLoginWhiteCombinedListRequest;
+const DescribeVulRiskRelateComponentRequest = models.DescribeVulRiskRelateComponentRequest;
+const CreateCSIPManualMalwareScanRequest = models.CreateCSIPManualMalwareScanRequest;
+const DescribeDspmSyncUsersStatusRequest = models.DescribeDspmSyncUsersStatusRequest;
+const DescribeLighthouseFirewallRulesResponse = models.DescribeLighthouseFirewallRulesResponse;
+const NotifyAssetConfigItem = models.NotifyAssetConfigItem;
+const CredentialEffectScope = models.CredentialEffectScope;
+const AIAgentCredentialLocation = models.AIAgentCredentialLocation;
+const DescribeTaskLogListResponse = models.DescribeTaskLogListResponse;
+const CreateDspmIdentifyRuleResponse = models.CreateDspmIdentifyRuleResponse;
+const HighBaseLineRiskItem = models.HighBaseLineRiskItem;
+const DescribeCustomRiskRulesRequest = models.DescribeCustomRiskRulesRequest;
+const DescribeNotifySettingAlertResponse = models.DescribeNotifySettingAlertResponse;
+const DescribeDspmDictionaryListResponse = models.DescribeDspmDictionaryListResponse;
+const DescribeMalwareTimingScanSettingResponse = models.DescribeMalwareTimingScanSettingResponse;
+const Tag = models.Tag;
+const DescribeCSIPMalwareScanTaskDetailResponse = models.DescribeCSIPMalwareScanTaskDetailResponse;
+const DescribeDspmAuditFilterStrategy = models.DescribeDspmAuditFilterStrategy;
+const DescribeCFGRiskStatisticsRequest = models.DescribeCFGRiskStatisticsRequest;
+const DescribeDspmAssetSecurityAnalyseStatusResponse = models.DescribeDspmAssetSecurityAnalyseStatusResponse;
+const ModifySandboxFileRuleRequest = models.ModifySandboxFileRuleRequest;
+const ImageIDWithAppIdItem = models.ImageIDWithAppIdItem;
+const MultiAttackStageItem = models.MultiAttackStageItem;
+const DescribeDspmLogTypeConfigListResponse = models.DescribeDspmLogTypeConfigListResponse;
+const ImageVirus = models.ImageVirus;
+const DescribeImageVulWhitelistResponse = models.DescribeImageVulWhitelistResponse;
+const DescribeBaselineAggregatedItemListResponse = models.DescribeBaselineAggregatedItemListResponse;
+const DescribeDspmAssetDatabasesResponse = models.DescribeDspmAssetDatabasesResponse;
+const DescribeAssetDetailResponse = models.DescribeAssetDetailResponse;
+const DescribeTaskLogURLRequest = models.DescribeTaskLogURLRequest;
+const DescribeKBUpdatableMachineListResponse = models.DescribeKBUpdatableMachineListResponse;
+const DescribeCustomAssetTagCountRequest = models.DescribeCustomAssetTagCountRequest;
+const MachineLoginType = models.MachineLoginType;
+const ImageRegistryScanTaskInfo = models.ImageRegistryScanTaskInfo;
+const DescribeBanModeResponse = models.DescribeBanModeResponse;
+const AccessKeyAlarmInfo = models.AccessKeyAlarmInfo;
+const ModifyBaselineUserOtherConfResponse = models.ModifyBaselineUserOtherConfResponse;
+const ModifyWebhookPolicyStatusRequest = models.ModifyWebhookPolicyStatusRequest;
+const DownloadDspmExportLogResponse = models.DownloadDspmExportLogResponse;
+const DescribeSourceIPDetailResponse = models.DescribeSourceIPDetailResponse;
+const DescribeBaselineAggregatedPolicyListRequest = models.DescribeBaselineAggregatedPolicyListRequest;
+const DescribeCheckViewRisksRequest = models.DescribeCheckViewRisksRequest;
+const DescribeDspmAssetFieldListRequest = models.DescribeDspmAssetFieldListRequest;
+const BaselineSubCategory = models.BaselineSubCategory;
+const DescribeExposureAutoTagRulesResponse = models.DescribeExposureAutoTagRulesResponse;
+const DescribeNotifyAgentOfflineDurationRequest = models.DescribeNotifyAgentOfflineDurationRequest;
+const CreateVulRisksExportJobRequest = models.CreateVulRisksExportJobRequest;
+const CreateAssetProcessExportJobResponse = models.CreateAssetProcessExportJobResponse;
+const ProjectInfo = models.ProjectInfo;
+const DescribeClusterContainerDetailRequest = models.DescribeClusterContainerDetailRequest;
+const DescribeSecurityRiskTrendResponse = models.DescribeSecurityRiskTrendResponse;
+const DescribeVULRiskDetailResponse = models.DescribeVULRiskDetailResponse;
+const ModifyRiskCenterScanTaskResponse = models.ModifyRiskCenterScanTaskResponse;
+const DescribeImageRegistryNamespaceListRequest = models.DescribeImageRegistryNamespaceListRequest;
+const DescribeCWPTaskDurationRequest = models.DescribeCWPTaskDurationRequest;
+const RiskRuleItem = models.RiskRuleItem;
+const DescribeDspmLogTypeConfigListRequest = models.DescribeDspmLogTypeConfigListRequest;
+const EDRExportJobItem = models.EDRExportJobItem;
+const DescribeEdrExportJobListResponse = models.DescribeEdrExportJobListResponse;
+const DescribeUserAKInfoListRequest = models.DescribeUserAKInfoListRequest;
+const DspmAssetIdentifyInfo = models.DspmAssetIdentifyInfo;
+const ModifyBanModeResponse = models.ModifyBanModeResponse;
+const DescribeSandboxLLMAuditRuleListRequest = models.DescribeSandboxLLMAuditRuleListRequest;
+const DescribeDspmAssetAccountIdentifyRequest = models.DescribeDspmAssetAccountIdentifyRequest;
+const CreateDspmAuditFilterStrategyResponse = models.CreateDspmAuditFilterStrategyResponse;
+const RiskRuleInfo = models.RiskRuleInfo;
+const DeleteMachineClearHistoryResponse = models.DeleteMachineClearHistoryResponse;
+const DescribeDspmApplyHistoryRequest = models.DescribeDspmApplyHistoryRequest;
+const CreateAssetSyncTaskResponse = models.CreateAssetSyncTaskResponse;
+const DescribeDspmCkafkaRouteListRequest = models.DescribeDspmCkafkaRouteListRequest;
+const LogFullTextInfo = models.LogFullTextInfo;
+const AssetInfoDetail = models.AssetInfoDetail;
+const CSIPMachineExtraInfo = models.CSIPMachineExtraInfo;
+const ImageAssetDetail = models.ImageAssetDetail;
+const ModifyMalwareTimingScanSettingsRequest = models.ModifyMalwareTimingScanSettingsRequest;
+const CreateDspmIdentifyComplianceCategoryRelationResponse = models.CreateDspmIdentifyComplianceCategoryRelationResponse;
+const DescribeRaspLicenseListResponse = models.DescribeRaspLicenseListResponse;
+const OperateRiskRulePolicyResponse = models.OperateRiskRulePolicyResponse;
+const DescribeClusterNodeListRequest = models.DescribeClusterNodeListRequest;
+const DbAssetInfo = models.DbAssetInfo;
+const DescribeAIScheduleStatsRequest = models.DescribeAIScheduleStatsRequest;
+const DescribeTaskPredictCostQuotaRequest = models.DescribeTaskPredictCostQuotaRequest;
+const DescribeVulHostRelateComponentResponse = models.DescribeVulHostRelateComponentResponse;
+const CreateImageSensitiveInfoListExportJobRequest = models.CreateImageSensitiveInfoListExportJobRequest;
+const Location = models.Location;
+const DeleteDspmIdentifyComplianceGroupRequest = models.DeleteDspmIdentifyComplianceGroupRequest;
+const TimedScanTaskPreviewInfo = models.TimedScanTaskPreviewInfo;
+const AssetClusterPod = models.AssetClusterPod;
+const StopEDRScanTaskResponse = models.StopEDRScanTaskResponse;
+const DescribeRiskScanCronConfigResponse = models.DescribeRiskScanCronConfigResponse;
+const DescribeSecurityScoreOverviewRequest = models.DescribeSecurityScoreOverviewRequest;
+const AssetViewWeakPassRisk = models.AssetViewWeakPassRisk;
+const ClusterIDWithAppIdItem = models.ClusterIDWithAppIdItem;
+const ModifyBanModeRequest = models.ModifyBanModeRequest;
+const CreateIaCFileReScanTaskRequest = models.CreateIaCFileReScanTaskRequest;
+const DeleteImageRegistryResponse = models.DeleteImageRegistryResponse;
+const DescribeRiskCenterPortViewPortRiskListResponse = models.DescribeRiskCenterPortViewPortRiskListResponse;
+const DescribeDspmPersonApplyHistoryRequest = models.DescribeDspmPersonApplyHistoryRequest;
+const AssetTypeStatisticsInfo = models.AssetTypeStatisticsInfo;
+const CreateScanTaskResponse = models.CreateScanTaskResponse;
+const DescribeRiskCenterVULViewVULRiskListRequest = models.DescribeRiskCenterVULViewVULRiskListRequest;
+const DisableAIScheduleResponse = models.DisableAIScheduleResponse;
+const DescribeExposeRisksResponse = models.DescribeExposeRisksResponse;
+const DimensionTrendData = models.DimensionTrendData;
+const DescribeDefaultSecurityScoreRuleResponse = models.DescribeDefaultSecurityScoreRuleResponse;
+const DescribeBaselineItemRiskListResponse = models.DescribeBaselineItemRiskListResponse;
+const ModifyMachinesLoginTypeResponse = models.ModifyMachinesLoginTypeResponse;
+const CreateImageRegistryTimedScanTaskConfigResponse = models.CreateImageRegistryTimedScanTaskConfigResponse;
+const DescribeClusterContainerPortListResponse = models.DescribeClusterContainerPortListResponse;
+const DescribeCloudFunctionListResponse = models.DescribeCloudFunctionListResponse;
+const ModifyNotifySettingRequest = models.ModifyNotifySettingRequest;
+const CreateAssetProcessExportJobRequest = models.CreateAssetProcessExportJobRequest;
+const CreateSkillScanRequest = models.CreateSkillScanRequest;
+const SCFFunctionInfo = models.SCFFunctionInfo;
 const DescribeVulScanTaskDetailRequest = models.DescribeVulScanTaskDetailRequest;
 const ModifyIaCTokenPeriodRequest = models.ModifyIaCTokenPeriodRequest;
-const DescribeAssetViewVulRiskListRequest = models.DescribeAssetViewVulRiskListRequest;
-const DescribeCFWAssetStatisticsRequest = models.DescribeCFWAssetStatisticsRequest;
-const DescribeVulFixTaskListRequest = models.DescribeVulFixTaskListRequest;
-const AIAgentAsset = models.AIAgentAsset;
-const ServerRiskSuggestion = models.ServerRiskSuggestion;
-const DescribeSubnetAssetsRequest = models.DescribeSubnetAssetsRequest;
-const DescribeVulScanTaskListRequest = models.DescribeVulScanTaskListRequest;
-const CallRecord = models.CallRecord;
-const DescribeKeySandboxCredentialListRequest = models.DescribeKeySandboxCredentialListRequest;
-const CreateVulScanManualResponse = models.CreateVulScanManualResponse;
-const ModifyOrganizationAccountStatusResponse = models.ModifyOrganizationAccountStatusResponse;
-const DescribeRiskDetailListResponse = models.DescribeRiskDetailListResponse;
+const DescribeCspmShardConfigRequest = models.DescribeCspmShardConfigRequest;
+const DescribeDspmRiskRequest = models.DescribeDspmRiskRequest;
+const EDRRule = models.EDRRule;
+const ModifySandboxLLMAuditRuleStatusResponse = models.ModifySandboxLLMAuditRuleStatusResponse;
+const DescribeDspmLogDeliveryTypeResponse = models.DescribeDspmLogDeliveryTypeResponse;
+const ModifyExposureAutoTagRuleStatusResponse = models.ModifyExposureAutoTagRuleStatusResponse;
+const ModifyAssetTagRequest = models.ModifyAssetTagRequest;
+const DspmDatabasePrivilege = models.DspmDatabasePrivilege;
+const ImageRegistryScanSubTaskInfo = models.ImageRegistryScanSubTaskInfo;
+const DeleteSandboxFileRuleResponse = models.DeleteSandboxFileRuleResponse;
+const DescribeScanTaskRecordListResponse = models.DescribeScanTaskRecordListResponse;
+const CreateRiskDetailExportJobRequest = models.CreateRiskDetailExportJobRequest;
+const DescribeClusterPodDetailRequest = models.DescribeClusterPodDetailRequest;
+const UninstallKeySandboxSkillRequest = models.UninstallKeySandboxSkillRequest;
+const DescribeDspmPersonalIdentifyListRequest = models.DescribeDspmPersonalIdentifyListRequest;
+const ModifyShareUserDspmResponse = models.ModifyShareUserDspmResponse;
 const VulScanTaskDetail = models.VulScanTaskDetail;
+const DescribeDspmIdentifyDistributionStatisticsRequest = models.DescribeDspmIdentifyDistributionStatisticsRequest;
+const DescribeImageLayerVulListRequest = models.DescribeImageLayerVulListRequest;
 const DescribeDbAssetsRequest = models.DescribeDbAssetsRequest;
-const DescribeVulFixedHostDetailResponse = models.DescribeVulFixedHostDetailResponse;
-const DescribeAlertListRequest = models.DescribeAlertListRequest;
-const DescribeRiskCenterCFGViewCFGRiskListResponse = models.DescribeRiskCenterCFGViewCFGRiskListResponse;
-const TaskCenterCFGRiskInputParam = models.TaskCenterCFGRiskInputParam;
-const DescribeVulScanPeriodicRequest = models.DescribeVulScanPeriodicRequest;
-const DescribeClusterAssetsResponse = models.DescribeClusterAssetsResponse;
-const VPRRatingStage = models.VPRRatingStage;
+const AddLoginWhiteListsResponse = models.AddLoginWhiteListsResponse;
+const LogContextInfo = models.LogContextInfo;
+const AddLoginWhiteListsRequest = models.AddLoginWhiteListsRequest;
+const ModifyProtectionSettingResponse = models.ModifyProtectionSettingResponse;
+const CreateClusterContainerListExportJobRequest = models.CreateClusterContainerListExportJobRequest;
 const DescribeAKAnalysisDetailRequest = models.DescribeAKAnalysisDetailRequest;
-const DescribeSubUserInfoResponse = models.DescribeSubUserInfoResponse;
-const DescribeVulRiskListResponse = models.DescribeVulRiskListResponse;
-const DescribeCSIPRiskStatisticsRequest = models.DescribeCSIPRiskStatisticsRequest;
-const DescribeUebaRuleResponse = models.DescribeUebaRuleResponse;
-const DescribeDomainAssetsResponse = models.DescribeDomainAssetsResponse;
-const DescribeDbAssetsResponse = models.DescribeDbAssetsResponse;
-const DescribeNICAssetsResponse = models.DescribeNICAssetsResponse;
-const DeleteVulWhitelistResponse = models.DeleteVulWhitelistResponse;
-const DescribeRiskCenterAssetViewPortRiskListResponse = models.DescribeRiskCenterAssetViewPortRiskListResponse;
-const ModifyRiskCenterScanTaskRequest = models.ModifyRiskCenterScanTaskRequest;
+const DescribeDspmStatisticsResponse = models.DescribeDspmStatisticsResponse;
+const CreateClusterListExportJobRequest = models.CreateClusterListExportJobRequest;
+const CICDToken = models.CICDToken;
+const DescribeImageRegistryTimedScanTaskPreviewResponse = models.DescribeImageRegistryTimedScanTaskPreviewResponse;
+const NetworkCardInfo = models.NetworkCardInfo;
+const CloudFromCnt = models.CloudFromCnt;
+const BatchModifyImageRegistryTimedScanTaskConfigResponse = models.BatchModifyImageRegistryTimedScanTaskConfigResponse;
+const DspmDbAccountPrivilege = models.DspmDbAccountPrivilege;
+const UserItem = models.UserItem;
 const ClbListenerListInfo = models.ClbListenerListInfo;
 const Element = models.Element;
 const ProductSupport = models.ProductSupport;
+const ScanBaselineItemListResponse = models.ScanBaselineItemListResponse;
+const DescribeSCFFunctionListResponse = models.DescribeSCFFunctionListResponse;
+const WebhookCustomField = models.WebhookCustomField;
+const ExposeAssetTypeItem = models.ExposeAssetTypeItem;
+const DescribeNotifySettingAkResponse = models.DescribeNotifySettingAkResponse;
+const DescribeDbAssetsResponse = models.DescribeDbAssetsResponse;
+const ScanBaselineAssetItemListRequest = models.ScanBaselineAssetItemListRequest;
+const LogSearchResult = models.LogSearchResult;
+const CsipRiskCenterStatistics = models.CsipRiskCenterStatistics;
+const DescribeCWPMachineDetailRequest = models.DescribeCWPMachineDetailRequest;
+const DeleteClusterResponse = models.DeleteClusterResponse;
+const ModifyBruteAttackBanStatusResponse = models.ModifyBruteAttackBanStatusResponse;
+const ScanBaselineAssetItemListResponse = models.ScanBaselineAssetItemListResponse;
+const ModifyNotifyAgentOfflineDurationResponse = models.ModifyNotifyAgentOfflineDurationResponse;
+const DeleteExposureAutoTagRuleResponse = models.DeleteExposureAutoTagRuleResponse;
+const CustomRiskRuleDetailItem = models.CustomRiskRuleDetailItem;
+const ReportItemKey = models.ReportItemKey;
+const HostLoginWhiteObj = models.HostLoginWhiteObj;
+const ImageVirusWhitelistDetail = models.ImageVirusWhitelistDetail;
+const DescribePortDetectListResponse = models.DescribePortDetectListResponse;
+const TrafficSandboxDLPRuleInfo = models.TrafficSandboxDLPRuleInfo;
+const KeyValue = models.KeyValue;
+const ModifyAssetCoreAttributeRequest = models.ModifyAssetCoreAttributeRequest;
+const OperateRiskRulePolicyRequest = models.OperateRiskRulePolicyRequest;
+const DescribeExposureAutoTagAttributeRequest = models.DescribeExposureAutoTagAttributeRequest;
+const DescribeCheckViewRisksResponse = models.DescribeCheckViewRisksResponse;
+const ScanCSIPTaskAgainRequest = models.ScanCSIPTaskAgainRequest;
+const DescribeEdrExportJobDownloadURLRequest = models.DescribeEdrExportJobDownloadURLRequest;
+const DeleteIaCFileResponse = models.DeleteIaCFileResponse;
+const DeleteEDRRulesRequest = models.DeleteEDRRulesRequest;
+const LighthouseFirewallRule = models.LighthouseFirewallRule;
+const ModifyEdrExcludeNetworkSegmentsResponse = models.ModifyEdrExcludeNetworkSegmentsResponse;
+const ModifyDspmPersonalIdentifyRequest = models.ModifyDspmPersonalIdentifyRequest;
+const LogRuleKeyValueInfo = models.LogRuleKeyValueInfo;
+const DspmAssetIdentifyTaskStatus = models.DspmAssetIdentifyTaskStatus;
+const ModifyDspmApproveStatusRequest = models.ModifyDspmApproveStatusRequest;
+const BaselineAggregatedCategory = models.BaselineAggregatedCategory;
+const DeleteDspmRiskStrategyResponse = models.DeleteDspmRiskStrategyResponse;
+const DescribeMachineClearHistoryRequest = models.DescribeMachineClearHistoryRequest;
+const DescribeRiskRulesResponse = models.DescribeRiskRulesResponse;
+const DescribeTaskPredictCostQuotaResponse = models.DescribeTaskPredictCostQuotaResponse;
+const DescribeScanTaskListRequest = models.DescribeScanTaskListRequest;
+const ModifyDspmCkafkaStartResponse = models.ModifyDspmCkafkaStartResponse;
+const NodeInfo = models.NodeInfo;
+const DescribeScfCustomDomainEndpointsRequest = models.DescribeScfCustomDomainEndpointsRequest;
+const DescribeOrganizationInfoRequest = models.DescribeOrganizationInfoRequest;
+const DescribeDspmBackupLogListRequest = models.DescribeDspmBackupLogListRequest;
+const UserCallRecord = models.UserCallRecord;
+const DeleteLoginWhiteListRequest = models.DeleteLoginWhiteListRequest;
+const LogItems = models.LogItems;
+const ModifyDspmWhitelistStrategyResponse = models.ModifyDspmWhitelistStrategyResponse;
+const DescribeKeySandboxCredentialRequest = models.DescribeKeySandboxCredentialRequest;
+const DspmApproverStep = models.DspmApproverStep;
+const DeleteSandboxFileRuleRequest = models.DeleteSandboxFileRuleRequest;
+const CreateImageRegistryConnectivityTaskRequest = models.CreateImageRegistryConnectivityTaskRequest;
+const CreateAssetTagResponse = models.CreateAssetTagResponse;
+const TrafficSandboxLLMAuditRuleInfo = models.TrafficSandboxLLMAuditRuleInfo;
+const ModifyExposureAutoTagRuleResponse = models.ModifyExposureAutoTagRuleResponse;
+const DescribeSCFAliasListResponse = models.DescribeSCFAliasListResponse;
+const DescribeCloudFunctionListRequest = models.DescribeCloudFunctionListRequest;
+const DescribeKeySandboxCredentialListResponse = models.DescribeKeySandboxCredentialListResponse;
+const DescribeNFSScanHostResponse = models.DescribeNFSScanHostResponse;
+const AttributeOptionSet = models.AttributeOptionSet;
+const DeleteDspmApplyOrderRequest = models.DeleteDspmApplyOrderRequest;
+const SubUserInfo = models.SubUserInfo;
+const CloudCountDesc = models.CloudCountDesc;
+const DescribeClusterAssetSyncTaskStatusResponse = models.DescribeClusterAssetSyncTaskStatusResponse;
+const ModifyNFSScanHostRequest = models.ModifyNFSScanHostRequest;
+const DescribeAssetSyncTaskStatusResponse = models.DescribeAssetSyncTaskStatusResponse;
+const CreateImageVirusListExportJobResponse = models.CreateImageVirusListExportJobResponse;
+const DescribeAgentConfigSettingResponse = models.DescribeAgentConfigSettingResponse;
+const BaselineItem = models.BaselineItem;
+const ModifyDspmCkafkaSaveRequest = models.ModifyDspmCkafkaSaveRequest;
+const ClusterPodListItem = models.ClusterPodListItem;
+const DescribeDspmIdentifyRuleListResponse = models.DescribeDspmIdentifyRuleListResponse;
+const DescribeImageAssetListRequest = models.DescribeImageAssetListRequest;
+const DescribeSandboxDLPAlertListRequest = models.DescribeSandboxDLPAlertListRequest;
+const RegionConfig = models.RegionConfig;
+const ModifySandboxLLMAuditRuleResponse = models.ModifySandboxLLMAuditRuleResponse;
+const DescribeUserDspmInfoListRequest = models.DescribeUserDspmInfoListRequest;
+const DescribeVulItemListRequest = models.DescribeVulItemListRequest;
+const DescribeClusterNamespaceListRequest = models.DescribeClusterNamespaceListRequest;
+const DescribeAIAgentCredentialLocationListResponse = models.DescribeAIAgentCredentialLocationListResponse;
+const DescribeBaselineCalculatingStatisticsPolicyIDListRequest = models.DescribeBaselineCalculatingStatisticsPolicyIDListRequest;
+const DescribeDspmRiskStrategyRequest = models.DescribeDspmRiskStrategyRequest;
+const StopProcessDaemonRequest = models.StopProcessDaemonRequest;
+const AssetTypeNode = models.AssetTypeNode;
+const DescribeBanModeRequest = models.DescribeBanModeRequest;
+const DescribeDspmIdentifyInfoRequest = models.DescribeDspmIdentifyInfoRequest;
+const DescribeUserCallRecordResponse = models.DescribeUserCallRecordResponse;
+const DescribeDspmIdentifyInfoListRequest = models.DescribeDspmIdentifyInfoListRequest;
+const ClbListenerRuleItem = models.ClbListenerRuleItem;
+const ModifyCosAuditBucketMonitorStatusResponse = models.ModifyCosAuditBucketMonitorStatusResponse;
+const DspmDictionary = models.DspmDictionary;
+const DescribeMandatoryVulSetResponse = models.DescribeMandatoryVulSetResponse;
+const DescribeBaselinePolicyItemListRequest = models.DescribeBaselinePolicyItemListRequest;
+const VulHostBriefInfo = models.VulHostBriefInfo;
+const DescribeDspmAssetTableListRequest = models.DescribeDspmAssetTableListRequest;
+const ModifyAssetTagsRequest = models.ModifyAssetTagsRequest;
+const CreateDspmIdentifyComplianceRuleRelationRequest = models.CreateDspmIdentifyComplianceRuleRelationRequest;
+const LogDeliveryType = models.LogDeliveryType;
+const DescribeSandboxDLPSystemRuleListRequest = models.DescribeSandboxDLPSystemRuleListRequest;
+const LevelOption = models.LevelOption;
+const CSIPMalwareScanUuidDetailItem = models.CSIPMalwareScanUuidDetailItem;
+const DescribeEdrAlertSummaryResponse = models.DescribeEdrAlertSummaryResponse;
+const CreateDspmAccessExportJobResponse = models.CreateDspmAccessExportJobResponse;
+const DescribeAssetTagAttributesRequest = models.DescribeAssetTagAttributesRequest;
+const DspmIpCount = models.DspmIpCount;
+const DescribeClusterPodDetailResponse = models.DescribeClusterPodDetailResponse;
+const DescribeCSPMPayInfoResponse = models.DescribeCSPMPayInfoResponse;
+const UserAKInfo = models.UserAKInfo;
+const MachineDetail = models.MachineDetail;
+const DescribeProcessDaemonHostRequest = models.DescribeProcessDaemonHostRequest;
+const ModifyNetAttackSettingResponse = models.ModifyNetAttackSettingResponse;
+const AttackStageCount = models.AttackStageCount;
+const BaselinePolicySubCategoryConf = models.BaselinePolicySubCategoryConf;
+const ImageLayerVul = models.ImageLayerVul;
+const DescribeBaselinePolicyCategoryListResponse = models.DescribeBaselinePolicyCategoryListResponse;
+const DescribeClusterContainerComponentListResponse = models.DescribeClusterContainerComponentListResponse;
+const StartOrModifyPreventUninstallResponse = models.StartOrModifyPreventUninstallResponse;
+const CreateEdrAlertExportJobRequest = models.CreateEdrAlertExportJobRequest;
+const RaspLicenseList = models.RaspLicenseList;
+const BaselineCategory = models.BaselineCategory;
+const DescribeEdrAlertCountForContainerResponse = models.DescribeEdrAlertCountForContainerResponse;
+const DescribeDspmIdentifyLevelGroupListRequest = models.DescribeDspmIdentifyLevelGroupListRequest;
+const CreateHostVulExportJobRequest = models.CreateHostVulExportJobRequest;
+const DescribeAssetTagsRequest = models.DescribeAssetTagsRequest;
+const DescribeBaselinePolicyListResponse = models.DescribeBaselinePolicyListResponse;
+const ModifyRaspLicenseBindsResponse = models.ModifyRaspLicenseBindsResponse;
+const DescribeEDRScanRecordListResponse = models.DescribeEDRScanRecordListResponse;
+const BaselineOverviewStatistic = models.BaselineOverviewStatistic;
+const CreateDspmIdentifyInfoListExportJobRequest = models.CreateDspmIdentifyInfoListExportJobRequest;
+const CreateVulFixTaskRequest = models.CreateVulFixTaskRequest;
+const BaselineAggregatedPolicy = models.BaselineAggregatedPolicy;
+const BruteAttackRuleList = models.BruteAttackRuleList;
+const ModifyDspmLogDeliveryTypeResponse = models.ModifyDspmLogDeliveryTypeResponse;
+const CreateIaCAccessTokenRequest = models.CreateIaCAccessTokenRequest;
+const SyncImageRegistryResponse = models.SyncImageRegistryResponse;
+const ModifyMachinesLoginTypeRequest = models.ModifyMachinesLoginTypeRequest;
+const ModifySandboxLLMAuditRuleStatusRequest = models.ModifySandboxLLMAuditRuleStatusRequest;
+const DomainInfo = models.DomainInfo;
+const DescribeAgentRunPolicyRequest = models.DescribeAgentRunPolicyRequest;
+const DescribeIaCFileListResponse = models.DescribeIaCFileListResponse;
+const DescribeBaselineAggregatedPolicyListResponse = models.DescribeBaselineAggregatedPolicyListResponse;
+const DescribeAccessKeyWhiteListRequest = models.DescribeAccessKeyWhiteListRequest;
+const DescribeLoginTypeGlobalConfRequest = models.DescribeLoginTypeGlobalConfRequest;
+const ComponentDetailItem = models.ComponentDetailItem;
+const DescribeCLSLogIndexV3Request = models.DescribeCLSLogIndexV3Request;
+const DescribeUserInfoRequest = models.DescribeUserInfoRequest;
+const EDRScanTaskContainerItem = models.EDRScanTaskContainerItem;
+const DescribeImageVirusWhitelistDetailResponse = models.DescribeImageVirusWhitelistDetailResponse;
+const AiScheduleTaskInfo = models.AiScheduleTaskInfo;
+const DescribeProcessDaemonGlobalConfRequest = models.DescribeProcessDaemonGlobalConfRequest;
+const CheckRiskRequest = models.CheckRiskRequest;
+const DescribeRiskRuleDetailResponse = models.DescribeRiskRuleDetailResponse;
+const DescribeDspmBackupSettingResponse = models.DescribeDspmBackupSettingResponse;
+const DescribeCWPMachineOsListRequest = models.DescribeCWPMachineOsListRequest;
+const ModifyMachineRemarkRequest = models.ModifyMachineRemarkRequest;
+const ModifyEdrLogCollectPathResponse = models.ModifyEdrLogCollectPathResponse;
+const DescribeTagRuleAssetsResponse = models.DescribeTagRuleAssetsResponse;
+const DescribeImageSensitiveWhitelistRequest = models.DescribeImageSensitiveWhitelistRequest;
+const DescribeSourceIPAssetResponse = models.DescribeSourceIPAssetResponse;
+const ModifyWebhookReceiverRequest = models.ModifyWebhookReceiverRequest;
+const CreateIaCFileExportJobResponse = models.CreateIaCFileExportJobResponse;
+const AccountBriefInfo = models.AccountBriefInfo;
+const DescribeDspmApplyOrderListResponse = models.DescribeDspmApplyOrderListResponse;
+const AssetViewVULRiskData = models.AssetViewVULRiskData;
+const DescribeAssetFilterViewsResponse = models.DescribeAssetFilterViewsResponse;
+const ModifyMachinesLoginTypeTask = models.ModifyMachinesLoginTypeTask;
+const NICAsset = models.NICAsset;
+const ModifyLoginWhiteRecordRequest = models.ModifyLoginWhiteRecordRequest;
+const DescribeAccessKeyRiskDetailResponse = models.DescribeAccessKeyRiskDetailResponse;
+const DescribeAIAnalysisFileDownloadURLRequest = models.DescribeAIAnalysisFileDownloadURLRequest;
+const DspmIdentifyComplianceItem = models.DspmIdentifyComplianceItem;
+const DescribeOrganizationInfoResponse = models.DescribeOrganizationInfoResponse;
+const DescribeMultiCloudAssetCountResponse = models.DescribeMultiCloudAssetCountResponse;
+const DescribeAISchedulePlanListResponse = models.DescribeAISchedulePlanListResponse;
+const BruteAttackRule = models.BruteAttackRule;
+const DeleteEdrLogCollectPathsRequest = models.DeleteEdrLogCollectPathsRequest;
+const UserDspmInfo = models.UserDspmInfo;
+const DescribeSandboxACLAlertListResponse = models.DescribeSandboxACLAlertListResponse;
+const WebhookReceiver = models.WebhookReceiver;
+const RuleContentCmdLine = models.RuleContentCmdLine;
+const DescribeKBDetailResponse = models.DescribeKBDetailResponse;
+const DspmColumnPrivilege = models.DspmColumnPrivilege;
+const CreateHighBaseLineRisksExportJobRequest = models.CreateHighBaseLineRisksExportJobRequest;
+const DescribeExposeRulesResponse = models.DescribeExposeRulesResponse;
+const DescribeProcessDaemonGlobalConfResponse = models.DescribeProcessDaemonGlobalConfResponse;
+const DescribeSandboxACLRuleListResponse = models.DescribeSandboxACLRuleListResponse;
+const DescribeSkillScanAlertListResponse = models.DescribeSkillScanAlertListResponse;
+const DescribeMachineGeneralRequest = models.DescribeMachineGeneralRequest;
+const DescribeHostVulItemVPRInfoRequest = models.DescribeHostVulItemVPRInfoRequest;
+const LicenseBindTaskDetail = models.LicenseBindTaskDetail;
+const StopProcessDaemonResponse = models.StopProcessDaemonResponse;
+const BatchModifyImageVulWhitelistResponse = models.BatchModifyImageVulWhitelistResponse;
+const DescribeCWPMachinesRequest = models.DescribeCWPMachinesRequest;
+const CreateImageVulListExportJobRequest = models.CreateImageVulListExportJobRequest;
+const DspmIdentifyComplianceRuleRelation = models.DspmIdentifyComplianceRuleRelation;
+const OrderQuotaInfo = models.OrderQuotaInfo;
+const LogSearchInfos = models.LogSearchInfos;
+const CreateAssetViewRisksExportJobRequest = models.CreateAssetViewRisksExportJobRequest;
+const DescribeSandboxFileRuleListRequest = models.DescribeSandboxFileRuleListRequest;
+const DescribeWebhookReceiverListResponse = models.DescribeWebhookReceiverListResponse;
+const DescribeDspmUserCkafkaInstanceListRequest = models.DescribeDspmUserCkafkaInstanceListRequest;
+const DescribeDspmAssetAccessTopologyRequest = models.DescribeDspmAssetAccessTopologyRequest;
+const ModifyBaselinePolicyEnableResponse = models.ModifyBaselinePolicyEnableResponse;
+const ContainerProcessItem = models.ContainerProcessItem;
+const AssetViewPortRisk = models.AssetViewPortRisk;
+const DspmArea = models.DspmArea;
+const DescribeDspmRiskStrategyGroupResponse = models.DescribeDspmRiskStrategyGroupResponse;
+const DspmIdentifyRefComplianceInfo = models.DspmIdentifyRefComplianceInfo;
+const DescribeSCFFunctionVersionListResponse = models.DescribeSCFFunctionVersionListResponse;
+const ReportTaskIdList = models.ReportTaskIdList;
+const DescribeRepositoryImageAssetsRequest = models.DescribeRepositoryImageAssetsRequest;
+const DescribeAssetRiskDetailResponse = models.DescribeAssetRiskDetailResponse;
+const ModifyDspmIdentifyComplianceRuleLevelInfoRequest = models.ModifyDspmIdentifyComplianceRuleLevelInfoRequest;
+const HostKBRisk = models.HostKBRisk;
+const AiSchedulePlanInfo = models.AiSchedulePlanInfo;
+const DescribeDspmIdentifyCategoryListResponse = models.DescribeDspmIdentifyCategoryListResponse;
+const UebaRule = models.UebaRule;
+const DescribeAccessKeyRiskDetailRequest = models.DescribeAccessKeyRiskDetailRequest;
+const AddImageRegistryRequest = models.AddImageRegistryRequest;
+const DescribeEdrExcludeNetworkSegmentsRequest = models.DescribeEdrExcludeNetworkSegmentsRequest;
+const DeleteSandboxACLRuleResponse = models.DeleteSandboxACLRuleResponse;
+const DeleteDspmShareUserDataRequest = models.DeleteDspmShareUserDataRequest;
+const DescribeImageAssetDetailRequest = models.DescribeImageAssetDetailRequest;
+const CreatePodServiceListExportJobRequest = models.CreatePodServiceListExportJobRequest;
+const DescribeImageRegistryListRequest = models.DescribeImageRegistryListRequest;
+const CreatePodServiceListExportJobResponse = models.CreatePodServiceListExportJobResponse;
+const BaselinePolicySystemCategoryConf = models.BaselinePolicySystemCategoryConf;
+const ModifyDspmIdentifyRuleStatusRequest = models.ModifyDspmIdentifyRuleStatusRequest;
+const CkafkaInstance = models.CkafkaInstance;
+const CreateComplianceRiskExportJobRequest = models.CreateComplianceRiskExportJobRequest;
+const VulInfoListItem = models.VulInfoListItem;
+const DescribeImageVirusListResponse = models.DescribeImageVirusListResponse;
+const DescribeSCFAliasListRequest = models.DescribeSCFAliasListRequest;
+const ImageScanRegistryFilter = models.ImageScanRegistryFilter;
+const ComplianceCheckTypeItem = models.ComplianceCheckTypeItem;
+const DeleteImageVulWhitelistResponse = models.DeleteImageVulWhitelistResponse;
+const CreateImageAssociatedContainerListExportJobResponse = models.CreateImageAssociatedContainerListExportJobResponse;
+const AddDspmAssetManagerResponse = models.AddDspmAssetManagerResponse;
+const DescribeClusterContainerProcessListResponse = models.DescribeClusterContainerProcessListResponse;
+const DescribeNFSScanHostRequest = models.DescribeNFSScanHostRequest;
+const DeleteAIScheduleResponse = models.DeleteAIScheduleResponse;
+const DescribeVULRiskAdvanceCFGListResponse = models.DescribeVULRiskAdvanceCFGListResponse;
+const DescribeWebhookPolicyListResponse = models.DescribeWebhookPolicyListResponse;
+const DescribeImageRegistryTimedScanTaskConfigResponse = models.DescribeImageRegistryTimedScanTaskConfigResponse;
+const CreateDspmAssetAccessTopologyExportJobRequest = models.CreateDspmAssetAccessTopologyExportJobRequest;
+const EDRFilter = models.EDRFilter;
+const DescribeCSIPMalwareScanTaskProgressResponse = models.DescribeCSIPMalwareScanTaskProgressResponse;
+const PublicAssetInfo = models.PublicAssetInfo;
+const DescribeDspmIdentifyComplianceGroupListResponse = models.DescribeDspmIdentifyComplianceGroupListResponse;
+const DescribeExposureTrendRequest = models.DescribeExposureTrendRequest;
+const AssetViewCFGRisk = models.AssetViewCFGRisk;
+const CreateScanTaskRequest = models.CreateScanTaskRequest;
+const RuleStatisticsItem = models.RuleStatisticsItem;
+const BehaviorInfo = models.BehaviorInfo;
+const DspmAssetSecurityAnalyseStatus = models.DspmAssetSecurityAnalyseStatus;
+const ComplianceTermItem = models.ComplianceTermItem;
+const BackupLog = models.BackupLog;
+const CreateEdrLessAlertExportJobResponse = models.CreateEdrLessAlertExportJobResponse;
+const BaselineSystemCategory = models.BaselineSystemCategory;
+const DeleteEdrLogCollectPathsResponse = models.DeleteEdrLogCollectPathsResponse;
+const DspmAuditSessionInfo = models.DspmAuditSessionInfo;
+const DescribeDspmAssetSupportedPrivilegesResponse = models.DescribeDspmAssetSupportedPrivilegesResponse;
+const CreateDspmResourceRequest = models.CreateDspmResourceRequest;
+const DescribeDomainAssetsRequest = models.DescribeDomainAssetsRequest;
+const BatchModifyImageSensitiveWhitelistResponse = models.BatchModifyImageSensitiveWhitelistResponse;
+const DescribeNICAssetsRequest = models.DescribeNICAssetsRequest;
+const DescribeDspmAssetFieldListResponse = models.DescribeDspmAssetFieldListResponse;
+const ModifyWebhookPolicyRequest = models.ModifyWebhookPolicyRequest;
+const DescribeImageAssociatedContainerListResponse = models.DescribeImageAssociatedContainerListResponse;
+const ModifyImageRegistryTimedScanTaskConfigResponse = models.ModifyImageRegistryTimedScanTaskConfigResponse;
+const DescribeAccessKeyUserListRequest = models.DescribeAccessKeyUserListRequest;
+const UpdateAlertStatusListResponse = models.UpdateAlertStatusListResponse;
+const TrendDataPoint = models.TrendDataPoint;
+const DescribeRiskRuleDetailRequest = models.DescribeRiskRuleDetailRequest;
+const DescribeDspmPersonalIdentifyListResponse = models.DescribeDspmPersonalIdentifyListResponse;
+const UebaEventContent = models.UebaEventContent;
+const DescribeAIAnalysisSMTPRequest = models.DescribeAIAnalysisSMTPRequest;
+const CreateAccessKeySyncTaskResponse = models.CreateAccessKeySyncTaskResponse;
+const ModifyIaCTokenPeriodResponse = models.ModifyIaCTokenPeriodResponse;
+const EdrAlertItem = models.EdrAlertItem;
+const DescribeVulFixableMachineListRequest = models.DescribeVulFixableMachineListRequest;
+const DescribeEdrAlertInfoRequest = models.DescribeEdrAlertInfoRequest;
+const DescribeImageComponentListRequest = models.DescribeImageComponentListRequest;
+const TaskLogURL = models.TaskLogURL;
+const DescribeVulLabelListResponse = models.DescribeVulLabelListResponse;
+const DeleteDspmIdentifyComplianceRuleRelationRequest = models.DeleteDspmIdentifyComplianceRuleRelationRequest;
+const LogItem = models.LogItem;
+const TrafficSandboxLLMAuditSystemRuleItem = models.TrafficSandboxLLMAuditSystemRuleItem;
+const CreateDspmWhitelistStrategyRequest = models.CreateDspmWhitelistStrategyRequest;
+const TrafficSandboxDLPTrafficRuleItem = models.TrafficSandboxDLPTrafficRuleItem;
+const DescribeExportJobDownloadURLRequest = models.DescribeExportJobDownloadURLRequest;
+const DescribeDspmAssetDatabaseListRequest = models.DescribeDspmAssetDatabaseListRequest;
+const DescribeIaCTokenListRequest = models.DescribeIaCTokenListRequest;
+const ModifyProtectionSettingRequest = models.ModifyProtectionSettingRequest;
+const ServerRisk = models.ServerRisk;
+const DeleteImageVirusWhitelistResponse = models.DeleteImageVirusWhitelistResponse;
+const CheckRiskResponse = models.CheckRiskResponse;
+const DescribeDspmAssetAccountIdentifyResponse = models.DescribeDspmAssetAccountIdentifyResponse;
+const CreateVulFixedExportJobResponse = models.CreateVulFixedExportJobResponse;
+const DescribeDspmResourceRequest = models.DescribeDspmResourceRequest;
+const LogIndexRuleInfo = models.LogIndexRuleInfo;
+const DescribeDspmIdentifyDistributionStatisticsResponse = models.DescribeDspmIdentifyDistributionStatisticsResponse;
+const DescribePublicIpAssetsRequest = models.DescribePublicIpAssetsRequest;
+const DescribeImageLayerListRequest = models.DescribeImageLayerListRequest;
+const DescribeVulLabelListRequest = models.DescribeVulLabelListRequest;
+const DescribeDspmSyncAssetsStatusResponse = models.DescribeDspmSyncAssetsStatusResponse;
+const DuplicateHosts = models.DuplicateHosts;
+const DescribeImageVirusListRequest = models.DescribeImageVirusListRequest;
+const AIAnalysisSession = models.AIAnalysisSession;
+const DeleteDspmRestoreLogListResponse = models.DeleteDspmRestoreLogListResponse;
+const CreateHostImageListExportJobResponse = models.CreateHostImageListExportJobResponse;
+const DspmAssetInstance = models.DspmAssetInstance;
+const CreateDspmIdentifyInfoListExportJobResponse = models.CreateDspmIdentifyInfoListExportJobResponse;
+const TaskCenterVulRiskInputParam = models.TaskCenterVulRiskInputParam;
+const ModifyImageSensitiveWhitelistResponse = models.ModifyImageSensitiveWhitelistResponse;
+const CreateEDRManualScanRequest = models.CreateEDRManualScanRequest;
+const ModifyExposureAutoTagRuleStatusRequest = models.ModifyExposureAutoTagRuleStatusRequest;
+const DescribeUserInfoResponse = models.DescribeUserInfoResponse;
+const Tags = models.Tags;
+const DescribeAssetComponentListRequest = models.DescribeAssetComponentListRequest;
+const ModifyShareUserAKRequest = models.ModifyShareUserAKRequest;
+const DescribeAbTestUserRequest = models.DescribeAbTestUserRequest;
+const ProtectionConfigItem = models.ProtectionConfigItem;
+const DescribeAccessKeyRiskResponse = models.DescribeAccessKeyRiskResponse;
+const LogDynamicIndex = models.LogDynamicIndex;
+const DescribeDspmApplyHistoryResponse = models.DescribeDspmApplyHistoryResponse;
+const CreateAccessKeyCheckTaskRequest = models.CreateAccessKeyCheckTaskRequest;
+const ExportCSIPMalwareScanTaskDetailResponse = models.ExportCSIPMalwareScanTaskDetailResponse;
+const ClusterNamespaceListItem = models.ClusterNamespaceListItem;
+const DescribeVulFixedListResponse = models.DescribeVulFixedListResponse;
+const TestWebhookReceiverRequest = models.TestWebhookReceiverRequest;
+const DescribeVULRiskDetailRequest = models.DescribeVULRiskDetailRequest;
+const DynamicTab = models.DynamicTab;
+const ModifyDspmRestoreLogTaskResponse = models.ModifyDspmRestoreLogTaskResponse;
+const DescribeClusterContainerAppListResponse = models.DescribeClusterContainerAppListResponse;
+const ConditionMatch = models.ConditionMatch;
+const DspmStatisticsItem = models.DspmStatisticsItem;
+const ModifyProtectionSetting = models.ModifyProtectionSetting;
+const DeleteIaCFileRequest = models.DeleteIaCFileRequest;
+const DeleteDspmExportTaskResponse = models.DeleteDspmExportTaskResponse;
+const DomainAssetVO = models.DomainAssetVO;
+const DescribeAccessKeyUserDetailResponse = models.DescribeAccessKeyUserDetailResponse;
+const DescribeComplianceOverviewRequest = models.DescribeComplianceOverviewRequest;
+const AssetTagPreviewAssetItem = models.AssetTagPreviewAssetItem;
+const DescribeImageVulListResponse = models.DescribeImageVulListResponse;
+const DescribeExposureAutoTagAttributeResponse = models.DescribeExposureAutoTagAttributeResponse;
+const DspmIdentifyRuleStructuredTestItem = models.DspmIdentifyRuleStructuredTestItem;
+const CreateImageComponentListExportJobRequest = models.CreateImageComponentListExportJobRequest;
+const DeleteAssetFilterViewRequest = models.DeleteAssetFilterViewRequest;
+const DescribeScanTaskRecordListRequest = models.DescribeScanTaskRecordListRequest;
+const DescribePreventUninstallGlobalConfResponse = models.DescribePreventUninstallGlobalConfResponse;
+const DescribeRiskCenterServerRiskListRequest = models.DescribeRiskCenterServerRiskListRequest;
+const ImageSensitiveWhitelist = models.ImageSensitiveWhitelist;
+const TrafficSandboxACLDstRule = models.TrafficSandboxACLDstRule;
+const DeleteSandboxLLMAuditRuleRequest = models.DeleteSandboxLLMAuditRuleRequest;
+const DescribeKBDetailRequest = models.DescribeKBDetailRequest;
+const ModifyNotifyAssetConfigResponse = models.ModifyNotifyAssetConfigResponse;
+const DescribeDspmBackupLogListResponse = models.DescribeDspmBackupLogListResponse;
+const EdrContainerGlobalCount = models.EdrContainerGlobalCount;
+const DescribeImageRegistryConnectivityTaskResultRequest = models.DescribeImageRegistryConnectivityTaskResultRequest;
+const DescribeAssetComponentRelatedImageListRequest = models.DescribeAssetComponentRelatedImageListRequest;
+const DescribeAbnormalCallRecordResponse = models.DescribeAbnormalCallRecordResponse;
+const DeleteDspmAuditFilterStrategyRequest = models.DeleteDspmAuditFilterStrategyRequest;
+const DescribeAISchedulePlanListRequest = models.DescribeAISchedulePlanListRequest;
+const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
+const DescribeSubUserInfoRequest = models.DescribeSubUserInfoRequest;
+const ModifyImageRegistryRequest = models.ModifyImageRegistryRequest;
+const SendDspmAssetLoginSmsCodeRequest = models.SendDspmAssetLoginSmsCodeRequest;
+const InstallClusterAgentRequest = models.InstallClusterAgentRequest;
+const CreateEDRManualScanResponse = models.CreateEDRManualScanResponse;
+const DescribeVulRiskRelateHostResponse = models.DescribeVulRiskRelateHostResponse;
+const DescribePortScanTaskCountRequest = models.DescribePortScanTaskCountRequest;
+const CreateDspmRiskExportJobRequest = models.CreateDspmRiskExportJobRequest;
+const DspmAssetDataScanDetail = models.DspmAssetDataScanDetail;
+const DescribeExportJobManageListRequest = models.DescribeExportJobManageListRequest;
+const DescribeDspmAssetAccountRecycledPrivilegesRequest = models.DescribeDspmAssetAccountRecycledPrivilegesRequest;
+const DescribeOtherCloudAssetsResponse = models.DescribeOtherCloudAssetsResponse;
+const CreateCheckViewRisksExportJobRequest = models.CreateCheckViewRisksExportJobRequest;
+const DetectTypeCount = models.DetectTypeCount;
+const DescribeVulRiskRelateComponentResponse = models.DescribeVulRiskRelateComponentResponse;
+const CloudFunctionItem = models.CloudFunctionItem;
+const VulComponentSummary = models.VulComponentSummary;
+const DeleteDspmAuditFilterStrategyResponse = models.DeleteDspmAuditFilterStrategyResponse;
+const DeleteDspmPersonalIdentifyResponse = models.DeleteDspmPersonalIdentifyResponse;
+const DescribeHostVulOverviewResponse = models.DescribeHostVulOverviewResponse;
+const DescribeVulFixedHostDetailRequest = models.DescribeVulFixedHostDetailRequest;
+const ModifyExposureTagRequest = models.ModifyExposureTagRequest;
+const DescribeConfigCheckRulesRequest = models.DescribeConfigCheckRulesRequest;
+const CreateBaselineMainTaskExportJobRequest = models.CreateBaselineMainTaskExportJobRequest;
+const KBDetail = models.KBDetail;
+const DescribeDspmSessionListResponse = models.DescribeDspmSessionListResponse;
+const VulWhitelist = models.VulWhitelist;
+const AccessKeyAlarmCount = models.AccessKeyAlarmCount;
+const ModifyPayConfigRequest = models.ModifyPayConfigRequest;
+const ModifySandboxACLRuleResponse = models.ModifySandboxACLRuleResponse;
+const TableField = models.TableField;
+const AgentRunModePolicy = models.AgentRunModePolicy;
+const RoleInfo = models.RoleInfo;
+const DescribeBaselineCategoryItemListRequest = models.DescribeBaselineCategoryItemListRequest;
+const ModifyWebhookReceiverResponse = models.ModifyWebhookReceiverResponse;
+const DescribeDspmWhitelistStrategyResponse = models.DescribeDspmWhitelistStrategyResponse;
+const CreatedTaskItem = models.CreatedTaskItem;
+const DescribeDspmSupportedAssetTypeResponse = models.DescribeDspmSupportedAssetTypeResponse;
+const AssetTypeCount = models.AssetTypeCount;
+const DescribeCspmShardConfigResponse = models.DescribeCspmShardConfigResponse;
+const DspmIdentifyInfoItem = models.DspmIdentifyInfoItem;
+const DescribeDspmCkafkaTopicListRequest = models.DescribeDspmCkafkaTopicListRequest;
+const AssetProcessItem = models.AssetProcessItem;
+const SubnetAsset = models.SubnetAsset;
+const ContainerEnvInfo = models.ContainerEnvInfo;
+const ModifySandboxAlertStatusRequest = models.ModifySandboxAlertStatusRequest;
+const ModifySandboxACLRuleStatusResponse = models.ModifySandboxACLRuleStatusResponse;
+const DescribeExportJobDownloadURLResponse = models.DescribeExportJobDownloadURLResponse;
+const VULRiskAdvanceCFGList = models.VULRiskAdvanceCFGList;
+const ContainerAppItem = models.ContainerAppItem;
+const DescribeBaselineMainTaskListRequest = models.DescribeBaselineMainTaskListRequest;
+const DeleteAIAnalysisSMTPAccessResponse = models.DeleteAIAnalysisSMTPAccessResponse;
+const DescribePublicCloudAssetsResponse = models.DescribePublicCloudAssetsResponse;
+const ModifyEdrAlertIsolationResponse = models.ModifyEdrAlertIsolationResponse;
+const DspmIdentifyCategoryDetail = models.DspmIdentifyCategoryDetail;
+const AccessKeyAlarm = models.AccessKeyAlarm;
+const CreateVulScanManualRequest = models.CreateVulScanManualRequest;
+const DescribeAIAnalysisFileDownloadURLResponse = models.DescribeAIAnalysisFileDownloadURLResponse;
+const DescribeVulFixedListRequest = models.DescribeVulFixedListRequest;
+const DescribeVulFixTaskListResponse = models.DescribeVulFixTaskListResponse;
+const ModifyClusterDefendStatusResponse = models.ModifyClusterDefendStatusResponse;
+const DescribeMachineLoginTypeResponse = models.DescribeMachineLoginTypeResponse;
+const AssetRiskItem = models.AssetRiskItem;
+const DeleteDspmAssetAccountRequest = models.DeleteDspmAssetAccountRequest;
+const UninstallClusterAgentResponse = models.UninstallClusterAgentResponse;
+const ModifyVulScanPeriodicResponse = models.ModifyVulScanPeriodicResponse;
+const SecurityGroupPolicyItem = models.SecurityGroupPolicyItem;
+const DescribeDspmAccessTopologyAssetsRequest = models.DescribeDspmAccessTopologyAssetsRequest;
+const DescribeExposeRiskStatisticsRequest = models.DescribeExposeRiskStatisticsRequest;
+const VULRiskInfo = models.VULRiskInfo;
+const ImageRegistryInfo = models.ImageRegistryInfo;
+const EnableAIScheduleRequest = models.EnableAIScheduleRequest;
+const DescribeEDRRuleListResponse = models.DescribeEDRRuleListResponse;
+const ModifyDspmAccessRecordResponse = models.ModifyDspmAccessRecordResponse;
+const DescribeDspmIdentifyRuleDetailRequest = models.DescribeDspmIdentifyRuleDetailRequest;
+const DescribeAssetViewVulRiskListRequest = models.DescribeAssetViewVulRiskListRequest;
+const DescribeDynamicAssetsRequest = models.DescribeDynamicAssetsRequest;
+const Filter = models.Filter;
+const DescribeNotifyAssetConfigRequest = models.DescribeNotifyAssetConfigRequest;
+const StopPreventUninstallResponse = models.StopPreventUninstallResponse;
+const ModifyDspmIdentifyLevelGroupRequest = models.ModifyDspmIdentifyLevelGroupRequest;
+const ModifyDspmApplyingIdentifyComplianceGroupResponse = models.ModifyDspmApplyingIdentifyComplianceGroupResponse;
+const DescribeDspmExportTaskRequest = models.DescribeDspmExportTaskRequest;
+const DescribeVulScanTaskListRequest = models.DescribeVulScanTaskListRequest;
+const DescribeKeySandboxCredentialListRequest = models.DescribeKeySandboxCredentialListRequest;
+const DescribeDspmAssetsResponse = models.DescribeDspmAssetsResponse;
+const DescribeDspmAccessTopologyAccountsRequest = models.DescribeDspmAccessTopologyAccountsRequest;
+const DescribeClusterSuperNodeInfoRequest = models.DescribeClusterSuperNodeInfoRequest;
+const DescribeDspmIdentifyComplianceGroupListRequest = models.DescribeDspmIdentifyComplianceGroupListRequest;
+const CloudAssetInfo = models.CloudAssetInfo;
+const DescribeAIAgentSkillListResponse = models.DescribeAIAgentSkillListResponse;
+const TaskCenterCFGRiskInputParam = models.TaskCenterCFGRiskInputParam;
+const DescribeDspmAssetSecurityAnalyseStatusRequest = models.DescribeDspmAssetSecurityAnalyseStatusRequest;
+const CreateAssetFilterViewResponse = models.CreateAssetFilterViewResponse;
+const DescribeVulScanPeriodicRequest = models.DescribeVulScanPeriodicRequest;
+const DescribeSubUserInfoResponse = models.DescribeSubUserInfoResponse;
+const DescribeDomainAssetsResponse = models.DescribeDomainAssetsResponse;
+const DescribeNICAssetsResponse = models.DescribeNICAssetsResponse;
+const DeleteDspmRiskStrategyRequest = models.DeleteDspmRiskStrategyRequest;
+const DeleteExposureAutoTagRuleRequest = models.DeleteExposureAutoTagRuleRequest;
+const DescribeDspmCkafkaRouteListResponse = models.DescribeDspmCkafkaRouteListResponse;
+const LogSearchErrors = models.LogSearchErrors;
+const ContainerComponentItem = models.ContainerComponentItem;
+const DescribeImageRegistryScanTaskListRequest = models.DescribeImageRegistryScanTaskListRequest;
+const SendDspmCkafkaTestRequest = models.SendDspmCkafkaTestRequest;
+const ModifyDspmIdentifyRuleStatusResponse = models.ModifyDspmIdentifyRuleStatusResponse;
 const DescribeListenerListRequest = models.DescribeListenerListRequest;
-const DescribeIaCFileOverviewRequest = models.DescribeIaCFileOverviewRequest;
+const DescribeRegistryRegionListRequest = models.DescribeRegistryRegionListRequest;
+const DescribeAIScheduleTaskDetailResponse = models.DescribeAIScheduleTaskDetailResponse;
 const DeleteIaCAccessTokenRequest = models.DeleteIaCAccessTokenRequest;
 const DeleteRiskScanTaskResponse = models.DeleteRiskScanTaskResponse;
-const DescribeVulViewVulRiskListResponse = models.DescribeVulViewVulRiskListResponse;
+const DescribeClusterAssetListRequest = models.DescribeClusterAssetListRequest;
+const TagItem = models.TagItem;
+const DescribeCSIPLicenseBindScheduleResponse = models.DescribeCSIPLicenseBindScheduleResponse;
+const BaselineRiskLevelStatistic = models.BaselineRiskLevelStatistic;
+const DescribeBaselineFixRecordListRequest = models.DescribeBaselineFixRecordListRequest;
+const DeleteRiskScanTaskRequest = models.DeleteRiskScanTaskRequest;
+const DescribeHostVulRiskListResponse = models.DescribeHostVulRiskListResponse;
+const CreatePodContainerListExportJobResponse = models.CreatePodContainerListExportJobResponse;
+const ScfCustomDomainEndpointItem = models.ScfCustomDomainEndpointItem;
+const CreateVulReScanRequest = models.CreateVulReScanRequest;
+const DescribeEdrExportJobListRequest = models.DescribeEdrExportJobListRequest;
+const ScanBaselineItemListRequest = models.ScanBaselineItemListRequest;
+const DescribeClbListenerRulesRequest = models.DescribeClbListenerRulesRequest;
+const BaselineClusterAsset = models.BaselineClusterAsset;
+const ModifyBaselineUserWeakPasswordConfResponse = models.ModifyBaselineUserWeakPasswordConfResponse;
+const ModifyRuleItem = models.ModifyRuleItem;
+const AssetStatisticsInfo = models.AssetStatisticsInfo;
+const CreateImageComponentListExportJobResponse = models.CreateImageComponentListExportJobResponse;
+const ModifyWebhookPolicyStatusResponse = models.ModifyWebhookPolicyStatusResponse;
+const CWPOrderList = models.CWPOrderList;
+const CommandSandboxFileRule = models.CommandSandboxFileRule;
+const DspmSupportedAssetType = models.DspmSupportedAssetType;
+const DescribeExposureStatisticsItem = models.DescribeExposureStatisticsItem;
+const DspmAccountCount = models.DspmAccountCount;
+const ModifyDspmRiskStrategyRequest = models.ModifyDspmRiskStrategyRequest;
+const CreateDspmAssetIdentifyInfoExportJobResponse = models.CreateDspmAssetIdentifyInfoExportJobResponse;
+const DescribeDspmAccessTopologyIpsResponse = models.DescribeDspmAccessTopologyIpsResponse;
+const DescribeEdrAlertListRequest = models.DescribeEdrAlertListRequest;
+const DescribeRiskCenterWebsiteRiskListResponse = models.DescribeRiskCenterWebsiteRiskListResponse;
+const DescribeSandboxFileRuleListResponse = models.DescribeSandboxFileRuleListResponse;
+const ImageVulBaseInfo = models.ImageVulBaseInfo;
+const SyncDspmAssetsResponse = models.SyncDspmAssetsResponse;
+const ModifyDspmIdentifyLevelGroupResponse = models.ModifyDspmIdentifyLevelGroupResponse;
+const DescribeBaselineUserOtherConfRequest = models.DescribeBaselineUserOtherConfRequest;
+const DescribeIaCTokenListResponse = models.DescribeIaCTokenListResponse;
+const BatchModifyImageRegistryTimedScanTaskConfigRequest = models.BatchModifyImageRegistryTimedScanTaskConfigRequest;
+const DescribeWebhookReceiverListRequest = models.DescribeWebhookReceiverListRequest;
+const CreateImageLayerVulListExportJobResponse = models.CreateImageLayerVulListExportJobResponse;
+const ClusterListItem = models.ClusterListItem;
+const DescribeNFSScanConfResponse = models.DescribeNFSScanConfResponse;
+const ModifyNotifySettingAkResponse = models.ModifyNotifySettingAkResponse;
+const MachineTag = models.MachineTag;
+const DescribeDspmDictionaryListRequest = models.DescribeDspmDictionaryListRequest;
+const CheckViewRiskItem = models.CheckViewRiskItem;
+const DescribeNetAttackSettingResponse = models.DescribeNetAttackSettingResponse;
+const ExportCSIPMalwareScanTaskDetailRequest = models.ExportCSIPMalwareScanTaskDetailRequest;
+const CreateImageVulWhitelistRequest = models.CreateImageVulWhitelistRequest;
+const EDRFilters = models.EDRFilters;
+const CreateRiskCenterScanTaskResponse = models.CreateRiskCenterScanTaskResponse;
+const DescribeCWPMachineDetailResponse = models.DescribeCWPMachineDetailResponse;
+const StopRiskCenterTaskResponse = models.StopRiskCenterTaskResponse;
+const DescribeVpcAssetsRequest = models.DescribeVpcAssetsRequest;
+const DescribeExposePathRequest = models.DescribeExposePathRequest;
+const RetryDspmExportLogResponse = models.RetryDspmExportLogResponse;
+const ImageSensitiveInfo = models.ImageSensitiveInfo;
+const DescribeDspmAssetIdentifyInfoListResponse = models.DescribeDspmAssetIdentifyInfoListResponse;
+const DescribeSandboxACLRuleListRequest = models.DescribeSandboxACLRuleListRequest;
+const ClientSettingHost = models.ClientSettingHost;
+const SendDspmAssetLoginSmsCodeResponse = models.SendDspmAssetLoginSmsCodeResponse;
+const DescribeRiskCenterAssetViewCFGRiskListResponse = models.DescribeRiskCenterAssetViewCFGRiskListResponse;
+const DeleteAssetTagRequest = models.DeleteAssetTagRequest;
+const DescribeDspmLogDeliveryTypeRequest = models.DescribeDspmLogDeliveryTypeRequest;
+const CreateImageRegistryListExportJobResponse = models.CreateImageRegistryListExportJobResponse;
+const DescribeBaselineMainTaskItemListResponse = models.DescribeBaselineMainTaskItemListResponse;
+const IPIntelInfo = models.IPIntelInfo;
+const ProviderNode = models.ProviderNode;
+const DescribeCWPMachineOsListResponse = models.DescribeCWPMachineOsListResponse;
+const InstallSandboxPluginResponse = models.InstallSandboxPluginResponse;
+const DescribePublicIpAssetsResponse = models.DescribePublicIpAssetsResponse;
+const DescribeClusterContainerListResponse = models.DescribeClusterContainerListResponse;
+const LogDeliveryInfo = models.LogDeliveryInfo;
+const ModifyDspmIdentifyRuleRequest = models.ModifyDspmIdentifyRuleRequest;
+const AssetRiskContent = models.AssetRiskContent;
+const CreateImageVulSummaryListExportJobRequest = models.CreateImageVulSummaryListExportJobRequest;
+const DescribeSourceIPAssetRequest = models.DescribeSourceIPAssetRequest;
+const TrafficSandboxACLSystemRuleItem = models.TrafficSandboxACLSystemRuleItem;
+const DescribeSandboxACLSystemRuleListRequest = models.DescribeSandboxACLSystemRuleListRequest;
+const DeleteLoginWhiteListResponse = models.DeleteLoginWhiteListResponse;
+const RepositoryImageVO = models.RepositoryImageVO;
+const UpdateClusterOwnerResponse = models.UpdateClusterOwnerResponse;
+const DeleteDomainAndIpResponse = models.DeleteDomainAndIpResponse;
+const DescribeSandboxDLPAlertListResponse = models.DescribeSandboxDLPAlertListResponse;
+const DataSearchBug = models.DataSearchBug;
+const TrafficSandboxDLPFileSizeRange = models.TrafficSandboxDLPFileSizeRange;
+const DescribeScanStatisticResponse = models.DescribeScanStatisticResponse;
+const DescribeExposuresRequest = models.DescribeExposuresRequest;
+const DescribeDspmApproveOrderListResponse = models.DescribeDspmApproveOrderListResponse;
+const CreateDomainAndIpRequest = models.CreateDomainAndIpRequest;
+const CreateDspmResourceResponse = models.CreateDspmResourceResponse;
+const LicenseBindFailedItem = models.LicenseBindFailedItem;
+const CustomRiskRuleItem = models.CustomRiskRuleItem;
+const DescribeDspmAssetSupportedPrivilegesRequest = models.DescribeDspmAssetSupportedPrivilegesRequest;
+const ModifySandboxDLPRuleStatusResponse = models.ModifySandboxDLPRuleStatusResponse;
+const TrafficSandboxDLPURLRuleItem = models.TrafficSandboxDLPURLRuleItem;
+const DescribeEdrAlertCountForAssetResponse = models.DescribeEdrAlertCountForAssetResponse;
+const ModifyImageRegistryResponse = models.ModifyImageRegistryResponse;
+const DescribeAIAnalysisHistoryRequest = models.DescribeAIAnalysisHistoryRequest;
+const ModifyAssetCoreAttributeResponse = models.ModifyAssetCoreAttributeResponse;
+const CreateDspmAssetsExportJobRequest = models.CreateDspmAssetsExportJobRequest;
+const ModifyDspmLogDeliveryTypeRequest = models.ModifyDspmLogDeliveryTypeRequest;
+const DescribeGatewayAssetsRequest = models.DescribeGatewayAssetsRequest;
+const DeleteAssetFilterViewResponse = models.DeleteAssetFilterViewResponse;
+const DescribeRiskCallRecordRequest = models.DescribeRiskCallRecordRequest;
+const SeverityItem = models.SeverityItem;
+const ModifyRiskCenterRiskStatusResponse = models.ModifyRiskCenterRiskStatusResponse;
+const DescribeBaselinePolicyNameExistAppidListRequest = models.DescribeBaselinePolicyNameExistAppidListRequest;
+const DescribeEdrAlertInfoResponse = models.DescribeEdrAlertInfoResponse;
+const ModifyRaspLicenseBindsRequest = models.ModifyRaspLicenseBindsRequest;
+const CreateDspmApproveHistoryExportJobRequest = models.CreateDspmApproveHistoryExportJobRequest;
+const VPRRatingInfo = models.VPRRatingInfo;
+const ModifyEdrExcludeNetworkSegmentsRequest = models.ModifyEdrExcludeNetworkSegmentsRequest;
+const AssetProviderDistributeInfo = models.AssetProviderDistributeInfo;
+const ImageRegistryTypeCountItem = models.ImageRegistryTypeCountItem;
+const ModifyDspmAssetSecurityAnalysisSwitchRequest = models.ModifyDspmAssetSecurityAnalysisSwitchRequest;
+const DescribeEDRScanRecordListRequest = models.DescribeEDRScanRecordListRequest;
+const DescribeOrganizationUserInfoRequest = models.DescribeOrganizationUserInfoRequest;
+const ModifyDspmAssetAccountPrivilegesRequest = models.ModifyDspmAssetAccountPrivilegesRequest;
+const DescribeLoginTypeHostResponse = models.DescribeLoginTypeHostResponse;
+const FilterDataObject = models.FilterDataObject;
+const UpdateAccessKeyRemarkResponse = models.UpdateAccessKeyRemarkResponse;
+const DescribeSandboxLLMAuditAlertListRequest = models.DescribeSandboxLLMAuditAlertListRequest;
+const DescribeNatRulesResponse = models.DescribeNatRulesResponse;
+const DescribeRiskCenterRiskTrendAnalysisRequest = models.DescribeRiskCenterRiskTrendAnalysisRequest;
+const ModifySandboxACLRuleStatusRequest = models.ModifySandboxACLRuleStatusRequest;
+const ResetDspmAssetAccountPasswordResponse = models.ResetDspmAssetAccountPasswordResponse;
+const WebhookReceiverBrief = models.WebhookReceiverBrief;
+const DescribeClusterInstallCommandRequest = models.DescribeClusterInstallCommandRequest;
+const DescribeVpcAssetsResponse = models.DescribeVpcAssetsResponse;
+const CreateSandboxACLRuleResponse = models.CreateSandboxACLRuleResponse;
+const DescribeClusterContainerWebServiceListResponse = models.DescribeClusterContainerWebServiceListResponse;
+const DescribeImageVirusWhitelistRequest = models.DescribeImageVirusWhitelistRequest;
+const ExportClientSettingHostListRequest = models.ExportClientSettingHostListRequest;
+const DescribeSourceIPDetailRequest = models.DescribeSourceIPDetailRequest;
+const ModifyCSIPRaspLicenseBindsRequest = models.ModifyCSIPRaspLicenseBindsRequest;
+const DescribeImageAssociatedHostListRequest = models.DescribeImageAssociatedHostListRequest;
+const LogAppCollectPath = models.LogAppCollectPath;
+const ModifyImageVulWhitelistRequest = models.ModifyImageVulWhitelistRequest;
+const RiskCronConfig = models.RiskCronConfig;
+const UebaCustomRule = models.UebaCustomRule;
+const DspmIdentifyCount = models.DspmIdentifyCount;
+const DescribeImageRegistryScanSubTaskListResponse = models.DescribeImageRegistryScanSubTaskListResponse;
+const CreateIaCAccessTokenResponse = models.CreateIaCAccessTokenResponse;
+const DspmAssetTypeCount = models.DspmAssetTypeCount;
+const DeleteWebhookReceiversRequest = models.DeleteWebhookReceiversRequest;
+const ModifySandboxAlertStatusResponse = models.ModifySandboxAlertStatusResponse;
+const DescribeLoginTypeHostRequest = models.DescribeLoginTypeHostRequest;
+const DescribeDspmApproveHistoryRequest = models.DescribeDspmApproveHistoryRequest;
+const DescribeClusterAssetListResponse = models.DescribeClusterAssetListResponse;
+const DescribeDspmAssetFieldSamplesRequest = models.DescribeDspmAssetFieldSamplesRequest;
+const DescribeAIScheduleTaskListRequest = models.DescribeAIScheduleTaskListRequest;
+const DspmPersonApplyHistoryItem = models.DspmPersonApplyHistoryItem;
+const CreateDspmRiskStrategyRequest = models.CreateDspmRiskStrategyRequest;
+const DescribeIaCFileReportRequest = models.DescribeIaCFileReportRequest;
+const DeleteAssetTagResponse = models.DeleteAssetTagResponse;
+const DescribeAIScheduleTaskListResponse = models.DescribeAIScheduleTaskListResponse;
+const ModifyVulWhitelistConfigRequest = models.ModifyVulWhitelistConfigRequest;
+const LicenseStatusItem = models.LicenseStatusItem;
+const TestWebhookReceiverResponse = models.TestWebhookReceiverResponse;
+const ModifyDspmAssetDataScanTaskResponse = models.ModifyDspmAssetDataScanTaskResponse;
+const DescribeMachineGeneralResponse = models.DescribeMachineGeneralResponse;
+const DescribeClusterSummaryResponse = models.DescribeClusterSummaryResponse;
+const WebhookNotifyItem = models.WebhookNotifyItem;
+const DescribeVdbAndPocInfoResponse = models.DescribeVdbAndPocInfoResponse;
+const TrafficSandboxEffectScope = models.TrafficSandboxEffectScope;
+const DescribeBaselineMainTaskItemListRequest = models.DescribeBaselineMainTaskItemListRequest;
+const DescribeSandboxLLMAuditAlertListResponse = models.DescribeSandboxLLMAuditAlertListResponse;
+const DescribeNotifySettingAlertRequest = models.DescribeNotifySettingAlertRequest;
+const DescribeDspmLogListRequest = models.DescribeDspmLogListRequest;
+const DescribeImageRegistryTimedScanTaskPreviewRequest = models.DescribeImageRegistryTimedScanTaskPreviewRequest;
+const DescribeDspmAccessRecordResponse = models.DescribeDspmAccessRecordResponse;
+const DescribeBaselineCalculatingStatisticsPolicyIDListResponse = models.DescribeBaselineCalculatingStatisticsPolicyIDListResponse;
+const DeleteDspmCkafkaConfigResponse = models.DeleteDspmCkafkaConfigResponse;
+const ModifyDspmIdentifyLevelItemResponse = models.ModifyDspmIdentifyLevelItemResponse;
+const DescribeImageExportJobListResponse = models.DescribeImageExportJobListResponse;
+const OrderDetail = models.OrderDetail;
+const CreateImageVirusWhitelistResponse = models.CreateImageVirusWhitelistResponse;
+const ScanBaselinePolicyListResponse = models.ScanBaselinePolicyListResponse;
+const UpdateClusterOwnerRequest = models.UpdateClusterOwnerRequest;
+const DescribeScanTaskListResponse = models.DescribeScanTaskListResponse;
+const LicenseUnbindFailedItem = models.LicenseUnbindFailedItem;
+const DeleteDspmApplyOrderResponse = models.DeleteDspmApplyOrderResponse;
+const RevertDspmAssetAccountRequest = models.RevertDspmAssetAccountRequest;
+const DescribeDspmAssetIdentifyInfoListRequest = models.DescribeDspmAssetIdentifyInfoListRequest;
+const CreateImageRegistryScanTaskResponse = models.CreateImageRegistryScanTaskResponse;
+const DescribeAILinkSettingRequest = models.DescribeAILinkSettingRequest;
+const ModifyAssetTagsResponse = models.ModifyAssetTagsResponse;
+const ModifyDspmBackupSettingResponse = models.ModifyDspmBackupSettingResponse;
+const DescribeAIAgentAssetListResponse = models.DescribeAIAgentAssetListResponse;
+const ModifyDspmIdentifyComplianceGroupStatusRequest = models.ModifyDspmIdentifyComplianceGroupStatusRequest;
+const ModifyDspmAssetDataScanTaskRequest = models.ModifyDspmAssetDataScanTaskRequest;
+const ModifyDspmAssetDataScanTaskStatusRequest = models.ModifyDspmAssetDataScanTaskStatusRequest;
+const CancelEdrAlertIgnoreResponse = models.CancelEdrAlertIgnoreResponse;
+const DspmAssetTableInfo = models.DspmAssetTableInfo;
+const CreateDspmApplyOrderResponse = models.CreateDspmApplyOrderResponse;
+const ModifyEDRRuleRequest = models.ModifyEDRRuleRequest;
+const DescribeRiskCenterWebsiteRiskListRequest = models.DescribeRiskCenterWebsiteRiskListRequest;
+const DescribeDspmStatisticsRequest = models.DescribeDspmStatisticsRequest;
+const DescribeCFWAssetStatisticsResponse = models.DescribeCFWAssetStatisticsResponse;
+const DescribeSCFFunctionListRequest = models.DescribeSCFFunctionListRequest;
+const DescribeKBUpdatableMachineListRequest = models.DescribeKBUpdatableMachineListRequest;
+const DspmRiskStrategyGroup = models.DspmRiskStrategyGroup;
+const DspmIdentifyCategoryRuleRelateItem = models.DspmIdentifyCategoryRuleRelateItem;
+const ImageRegistryNamespaceInfo = models.ImageRegistryNamespaceInfo;
+const NatDnatRuleItem = models.NatDnatRuleItem;
+const DescribeUebaBehaviorSummaryRequest = models.DescribeUebaBehaviorSummaryRequest;
+const DescribeExposePathResponse = models.DescribeExposePathResponse;
+const DeleteDspmWhitelistStrategyResponse = models.DeleteDspmWhitelistStrategyResponse;
+const TaskLogInfo = models.TaskLogInfo;
+const LogColumn = models.LogColumn;
+const DescribeTaskLogURLResponse = models.DescribeTaskLogURLResponse;
+const DeleteSandboxDLPRuleResponse = models.DeleteSandboxDLPRuleResponse;
+const StopImageRegistryScanTaskResponse = models.StopImageRegistryScanTaskResponse;
+const Machine = models.Machine;
+const DescribeDspmAssetIdsResponse = models.DescribeDspmAssetIdsResponse;
+const DeleteAIAnalysisSMTPAccessRequest = models.DeleteAIAnalysisSMTPAccessRequest;
+const ModifySandboxFileRuleStatusRequest = models.ModifySandboxFileRuleStatusRequest;
+const DescribeComplianceStandardTermTreeRequest = models.DescribeComplianceStandardTermTreeRequest;
+const CreateClusterNamespaceListExportJobResponse = models.CreateClusterNamespaceListExportJobResponse;
+const EdrAlertDetail = models.EdrAlertDetail;
+const DescribeSCFNamespaceListRequest = models.DescribeSCFNamespaceListRequest;
+const DescribeNFSScanConfRequest = models.DescribeNFSScanConfRequest;
+const DspmDbAsset = models.DspmDbAsset;
+const CreateDynamicAssetsExportJobRequest = models.CreateDynamicAssetsExportJobRequest;
+const DescribeAssetOverviewRequest = models.DescribeAssetOverviewRequest;
+const DescribeAssetInfoResponse = models.DescribeAssetInfoResponse;
+const CreateImageVulListExportJobResponse = models.CreateImageVulListExportJobResponse;
+const DescribeTagRuleAssetsRequest = models.DescribeTagRuleAssetsRequest;
+const DescribeBaselineSyncConfRequest = models.DescribeBaselineSyncConfRequest;
+const ModifyUebaRuleSwitchRequest = models.ModifyUebaRuleSwitchRequest;
+const CreateBaselineMainTaskExportJobResponse = models.CreateBaselineMainTaskExportJobResponse;
+const DescribeScanStatisticRequest = models.DescribeScanStatisticRequest;
+const DescribeCFGRiskReportStatisticsRequest = models.DescribeCFGRiskReportStatisticsRequest;
+const ModifyNotifySettingAlertResponse = models.ModifyNotifySettingAlertResponse;
+const SyncImageRegistryRequest = models.SyncImageRegistryRequest;
+const BaselineSubTask = models.BaselineSubTask;
+const StopVulScanTaskRequest = models.StopVulScanTaskRequest;
+const DescribeClbTargetsRequest = models.DescribeClbTargetsRequest;
+const RegistryConnDetectResult = models.RegistryConnDetectResult;
+const DescribeClbListenerListRequest = models.DescribeClbListenerListRequest;
+const SkillCapabilityTag = models.SkillCapabilityTag;
+const DescribeRiskCenterAssetViewWeakPasswordRiskListResponse = models.DescribeRiskCenterAssetViewWeakPasswordRiskListResponse;
+const CreateDspmWhitelistStrategyResponse = models.CreateDspmWhitelistStrategyResponse;
+const ModifyNotifySettingAkRequest = models.ModifyNotifySettingAkRequest;
+const DescribeCSIPMalwareScanTaskDetailRequest = models.DescribeCSIPMalwareScanTaskDetailRequest;
+const DescribeAssetViewVulRiskListResponse = models.DescribeAssetViewVulRiskListResponse;
+const TrafficSandboxLLMAuditAlertInfo = models.TrafficSandboxLLMAuditAlertInfo;
+const AssetRiskInfo = models.AssetRiskInfo;
+const VulImpactComponentInfo = models.VulImpactComponentInfo;
+const CVMAssetVO = models.CVMAssetVO;
+const VULBaseInfo = models.VULBaseInfo;
+const DescribeCSPMPayInfoRequest = models.DescribeCSPMPayInfoRequest;
+const ModifyEDRRulesActionRequest = models.ModifyEDRRulesActionRequest;
+const CreateImageAssetListExportJobResponse = models.CreateImageAssetListExportJobResponse;
+const NatSnatRuleItem = models.NatSnatRuleItem;
+const RelatedEvent = models.RelatedEvent;
+const CommandPluginState = models.CommandPluginState;
+const EnableAIScheduleResponse = models.EnableAIScheduleResponse;
+const ModifySkillScanAlertStatusRequest = models.ModifySkillScanAlertStatusRequest;
+const DescribeBaselineSystemCategoryListResponse = models.DescribeBaselineSystemCategoryListResponse;
+const ProtectionDetail = models.ProtectionDetail;
+const DescribeImageLayerListResponse = models.DescribeImageLayerListResponse;
+const CreateIaCFileReScanTaskResponse = models.CreateIaCFileReScanTaskResponse;
+const DescribeNotifyAssetConfigResponse = models.DescribeNotifyAssetConfigResponse;
+const VerifyDspmAssetLoginCodeRequest = models.VerifyDspmAssetLoginCodeRequest;
+const DescribeIaCFileReportResponse = models.DescribeIaCFileReportResponse;
+const CreateComplianceRiskExportJobResponse = models.CreateComplianceRiskExportJobResponse;
+const DescribeDefaultSecurityScoreRuleRequest = models.DescribeDefaultSecurityScoreRuleRequest;
+const DescribeDspmPersonApplyHistoryResponse = models.DescribeDspmPersonApplyHistoryResponse;
+const DescribeAssetProcessListResponse = models.DescribeAssetProcessListResponse;
+const CreateAIScheduleRequest = models.CreateAIScheduleRequest;
+const StandardTerm = models.StandardTerm;
+const DescribeVulHostRelateComponentRequest = models.DescribeVulHostRelateComponentRequest;
+const DimensionItem = models.DimensionItem;
+const ComplianceStandardOverview = models.ComplianceStandardOverview;
+const StopVulScanTaskResponse = models.StopVulScanTaskResponse;
+const MiniTagItem = models.MiniTagItem;
+const CheckCWPExposePathPermissionResponse = models.CheckCWPExposePathPermissionResponse;
+const ImageVulSummary = models.ImageVulSummary;
+const DescribeDspmRiskDetailResponse = models.DescribeDspmRiskDetailResponse;
+const DescribeEdrAlertMultiAttackStagesRequest = models.DescribeEdrAlertMultiAttackStagesRequest;
+const ModifySandboxFileRuleStatusResponse = models.ModifySandboxFileRuleStatusResponse;
+const SkillScanEngineResult = models.SkillScanEngineResult;
+const DescribeMultiCloudAssetCountRequest = models.DescribeMultiCloudAssetCountRequest;
+const ModifySandboxDLPRuleRequest = models.ModifySandboxDLPRuleRequest;
+const DescribeClusterServiceListResponse = models.DescribeClusterServiceListResponse;
+const RiskCenterOverviewTrendAnalysis = models.RiskCenterOverviewTrendAnalysis;
+const VULViewVULRisk = models.VULViewVULRisk;
+const DescribeCVMAssetsResponse = models.DescribeCVMAssetsResponse;
+const ModifyShareUserAKResponse = models.ModifyShareUserAKResponse;
+const CreateAllAssetsExportJobResponse = models.CreateAllAssetsExportJobResponse;
+const DescribeDspmBackupSettingRequest = models.DescribeDspmBackupSettingRequest;
+const BatchModifyImageVirusWhitelistRequest = models.BatchModifyImageVirusWhitelistRequest;
+const ServiceSupport = models.ServiceSupport;
+const RetryDspmExportLogRequest = models.RetryDspmExportLogRequest;
+const ModifyAILinkSettingRequest = models.ModifyAILinkSettingRequest;
+const VulFixItem = models.VulFixItem;
+const DescribeNotifySettingResponse = models.DescribeNotifySettingResponse;
+const CreateDspmExportTaskResponse = models.CreateDspmExportTaskResponse;
+const DescribeDspmAssetIdsRequest = models.DescribeDspmAssetIdsRequest;
+const PortViewPortRisk = models.PortViewPortRisk;
+const CreateDspmExportTaskRequest = models.CreateDspmExportTaskRequest;
+const DescribeUserCallRecordRequest = models.DescribeUserCallRecordRequest;
+const AlertInfo = models.AlertInfo;
+const DspmWhitelistStrategy = models.DspmWhitelistStrategy;
+const TrafficSandboxDLPAlertInfo = models.TrafficSandboxDLPAlertInfo;
+const CreateDspmIdentifyLevelGroupRequest = models.CreateDspmIdentifyLevelGroupRequest;
+const CreateVulRisksExportJobResponse = models.CreateVulRisksExportJobResponse;
+const TrafficRuleState = models.TrafficRuleState;
+const DescribePortDetectListRequest = models.DescribePortDetectListRequest;
+const DescribeEdrAlertMultiAttackStagesResponse = models.DescribeEdrAlertMultiAttackStagesResponse;
+const CopyBaselinePolicyResponse = models.CopyBaselinePolicyResponse;
+const ModifyReverseShellSystemPolicyConfigResponse = models.ModifyReverseShellSystemPolicyConfigResponse;
+const DescribeClusterAssetSyncTaskStatusRequest = models.DescribeClusterAssetSyncTaskStatusRequest;
+const DescribeSkillScanAlertDetailResponse = models.DescribeSkillScanAlertDetailResponse;
+const CommandSandboxFileRuleBase = models.CommandSandboxFileRuleBase;
+const DescribeRiskCenterPortViewPortRiskListRequest = models.DescribeRiskCenterPortViewPortRiskListRequest;
+const DescribeAccessKeyUserDetailRequest = models.DescribeAccessKeyUserDetailRequest;
+const DescribeTCRInstanceListRequest = models.DescribeTCRInstanceListRequest;
+const DescribeAlertListRequest = models.DescribeAlertListRequest;
+const CreateImageAssociatedHostListExportJobResponse = models.CreateImageAssociatedHostListExportJobResponse;
+const ExposesItem = models.ExposesItem;
+const CreateDynamicAssetsExportJobResponse = models.CreateDynamicAssetsExportJobResponse;
+const DescribeBruteAttackRulesRequest = models.DescribeBruteAttackRulesRequest;
+const DescribeDspmIdentifyRuleDetailResponse = models.DescribeDspmIdentifyRuleDetailResponse;
+const ModifyBruteAttackRulesResponse = models.ModifyBruteAttackRulesResponse;
+const DspmPersonIdentifyItem = models.DspmPersonIdentifyItem;
+const MachineExtraInfo = models.MachineExtraInfo;
+const ScanTaskInfoList = models.ScanTaskInfoList;
+const ModifyDspmAssetDataScanTaskStatusResponse = models.ModifyDspmAssetDataScanTaskStatusResponse;
+const ScanBaselineRiskListRequest = models.ScanBaselineRiskListRequest;
+const DescribeRiskCenterAssetViewVULRiskListRequest = models.DescribeRiskCenterAssetViewVULRiskListRequest;
+const DescribeImageAssociatedHostListResponse = models.DescribeImageAssociatedHostListResponse;
+const DspmScheduleConfig = models.DspmScheduleConfig;
+const DescribeCWPExposePathRequest = models.DescribeCWPExposePathRequest;
+const DeleteDspmBackupLogListRequest = models.DeleteDspmBackupLogListRequest;
+const CreateImageRegistryTimedScanTaskConfigRequest = models.CreateImageRegistryTimedScanTaskConfigRequest;
+const DescribeImageRegistryAssetOverviewResponse = models.DescribeImageRegistryAssetOverviewResponse;
+const DescribeCVMAssetsRequest = models.DescribeCVMAssetsRequest;
+const BaselineMainTask = models.BaselineMainTask;
+const VulAffectedComponent = models.VulAffectedComponent;
+const TrafficSandboxInactiveAsset = models.TrafficSandboxInactiveAsset;
+const DescribeOtherCloudAssetsRequest = models.DescribeOtherCloudAssetsRequest;
+const DescribeAILinkSettingResponse = models.DescribeAILinkSettingResponse;
+const DescribeSecurityRiskTrendRequest = models.DescribeSecurityRiskTrendRequest;
+const ModifySandboxLLMAuditRuleRequest = models.ModifySandboxLLMAuditRuleRequest;
+const DescribeClusterAssetsResponse = models.DescribeClusterAssetsResponse;
+const BatchModifyBaselinePolicyRequest = models.BatchModifyBaselinePolicyRequest;
+const CreateAssetComponentRelatedImageListExportJobResponse = models.CreateAssetComponentRelatedImageListExportJobResponse;
+const DescribeImageVirusWhitelistResponse = models.DescribeImageVirusWhitelistResponse;
+const DescribeDspmWhitelistStrategyRequest = models.DescribeDspmWhitelistStrategyRequest;
+const DescribeWebhookPolicyListRequest = models.DescribeWebhookPolicyListRequest;
+const DescribeClusterNodeListResponse = models.DescribeClusterNodeListResponse;
+const DescribeBaselineUserWeakPasswordConfRequest = models.DescribeBaselineUserWeakPasswordConfRequest;
+const DescribeNotifyAgentOfflineDurationResponse = models.DescribeNotifyAgentOfflineDurationResponse;
+const CreateImageVirusListExportJobRequest = models.CreateImageVirusListExportJobRequest;
+const DescribeExposeRisksRequest = models.DescribeExposeRisksRequest;
+const ExportTasksResponse = models.ExportTasksResponse;
+const DescribeVoucherEligibilityRequest = models.DescribeVoucherEligibilityRequest;
+const DescribeDbAssetInfoResponse = models.DescribeDbAssetInfoResponse;
+const BugInfoDetail = models.BugInfoDetail;
+const DescribeAIScheduleTaskDetailRequest = models.DescribeAIScheduleTaskDetailRequest;
+const CreateCFGRisksExportJobRequest = models.CreateCFGRisksExportJobRequest;
+const ClbListenerItem = models.ClbListenerItem;
+const DescribeSandboxLLMAuditSystemRuleListRequest = models.DescribeSandboxLLMAuditSystemRuleListRequest;
+const VulFixTaskDetailItem = models.VulFixTaskDetailItem;
+const ModifyVulWhitelistConfigResponse = models.ModifyVulWhitelistConfigResponse;
+const WebhookAssetScope = models.WebhookAssetScope;
+const DescribeAKAnalysisDetailResponse = models.DescribeAKAnalysisDetailResponse;
+const LogCLSFilter = models.LogCLSFilter;
+const DescribeImageVulSummaryListRequest = models.DescribeImageVulSummaryListRequest;
+const DeleteDspmIdentifyRuleRequest = models.DeleteDspmIdentifyRuleRequest;
+const DescribeCloudAssetsResponse = models.DescribeCloudAssetsResponse;
+const DescribeImageAssociatedAssetCountRequest = models.DescribeImageAssociatedAssetCountRequest;
+const StopRiskCenterTaskRequest = models.StopRiskCenterTaskRequest;
+const DescribeMandatoryVulSetRequest = models.DescribeMandatoryVulSetRequest;
+const CreateImageAssociatedContainerListExportJobRequest = models.CreateImageAssociatedContainerListExportJobRequest;
+const DescribeSkillScanResultResponse = models.DescribeSkillScanResultResponse;
+const DspmDbAssetId = models.DspmDbAssetId;
+const CreateCheckViewRisksExportJobResponse = models.CreateCheckViewRisksExportJobResponse;
+const ModifyDspmAccessRecordRequest = models.ModifyDspmAccessRecordRequest;
+const DescribeMachineLoginTypeRequest = models.DescribeMachineLoginTypeRequest;
+const CreateDspmRiskStrategyResponse = models.CreateDspmRiskStrategyResponse;
+const TaskCenterWeakPwdRiskInputParam = models.TaskCenterWeakPwdRiskInputParam;
+const DescribeVoucherEligibilityResponse = models.DescribeVoucherEligibilityResponse;
+const DescribeDspmResourceResponse = models.DescribeDspmResourceResponse;
+const DeleteEDRScanTaskRequest = models.DeleteEDRScanTaskRequest;
+const LogTopicIndexInfo = models.LogTopicIndexInfo;
+const DescribeRegistryOverviewResponse = models.DescribeRegistryOverviewResponse;
+const DescribeComplianceStatisticsResponse = models.DescribeComplianceStatisticsResponse;
+const ModifyMachineAutoClearConfigResponse = models.ModifyMachineAutoClearConfigResponse;
+const VulFixStatusItem = models.VulFixStatusItem;
+const ModifyShareUserDspmRequest = models.ModifyShareUserDspmRequest;
+const DescribeDspmIdentifyComplianceCategoryRuleListResponse = models.DescribeDspmIdentifyComplianceCategoryRuleListResponse;
+const DescribeRiskDetailListRequest = models.DescribeRiskDetailListRequest;
+const DescribeUebaUserSummaryRequest = models.DescribeUebaUserSummaryRequest;
+const DescribeNotifySettingRequest = models.DescribeNotifySettingRequest;
+const DescribeClusterContainerListRequest = models.DescribeClusterContainerListRequest;
+const ModifyEdrLogCollectPathRequest = models.ModifyEdrLogCollectPathRequest;
+const AiScheduleTriggerInfo = models.AiScheduleTriggerInfo;
+const ImageRegistryConnectivityTaskResult = models.ImageRegistryConnectivityTaskResult;
+const DescribeAgentRunModeResponse = models.DescribeAgentRunModeResponse;
+const DescribeClusterPodListRequest = models.DescribeClusterPodListRequest;
+const CreateImageAssociatedHostListExportJobRequest = models.CreateImageAssociatedHostListExportJobRequest;
+const SyncDspmAssetsRequest = models.SyncDspmAssetsRequest;
+const DescribeScanReportListResponse = models.DescribeScanReportListResponse;
+const DescribeDspmAssetAccessTopologyResponse = models.DescribeDspmAssetAccessTopologyResponse;
+const DescribeLoginWhiteCombinedListResponse = models.DescribeLoginWhiteCombinedListResponse;
+const StartOrModifyPreventUninstallRequest = models.StartOrModifyPreventUninstallRequest;
+const DescribeListenerListResponse = models.DescribeListenerListResponse;
+const HostBriefInfo = models.HostBriefInfo;
+const VulFixedItem = models.VulFixedItem;
+const ModifyCSIPLicenseUnBindsRequest = models.ModifyCSIPLicenseUnBindsRequest;
+const VULViewVULRiskData = models.VULViewVULRiskData;
+const CreateAssetSyncTaskRequest = models.CreateAssetSyncTaskRequest;
+const DescribeCWPExposePathResponse = models.DescribeCWPExposePathResponse;
+const LogSearchTopics = models.LogSearchTopics;
+const ModifyVulWhitelistSwitchResponse = models.ModifyVulWhitelistSwitchResponse;
+const AccessKeyUser = models.AccessKeyUser;
+const DescribeAIAnalysisRobotInfoRequest = models.DescribeAIAnalysisRobotInfoRequest;
+const StartOrModifyProcessDaemonRequest = models.StartOrModifyProcessDaemonRequest;
+const ModifyImageVirusWhitelistResponse = models.ModifyImageVirusWhitelistResponse;
+const DescribeSandboxDLPSystemRuleListResponse = models.DescribeSandboxDLPSystemRuleListResponse;
+const DescribeDspmAssetTableListResponse = models.DescribeDspmAssetTableListResponse;
+const DescribeEDRRuleListRequest = models.DescribeEDRRuleListRequest;
+const DescribeCWPLicenseBindScheduleResponse = models.DescribeCWPLicenseBindScheduleResponse;
+const DspmIdentifyIdItem = models.DspmIdentifyIdItem;
+const CreateDspmIdentifyCategoryRequest = models.CreateDspmIdentifyCategoryRequest;
+const DescribeDspmAccessRecordRequest = models.DescribeDspmAccessRecordRequest;
+const DescribeClusterContainerComponentListRequest = models.DescribeClusterContainerComponentListRequest;
+const InstallSandboxPluginRequest = models.InstallSandboxPluginRequest;
+const DescribeVulScanPeriodicResponse = models.DescribeVulScanPeriodicResponse;
+const DescribeAgentRunModeRequest = models.DescribeAgentRunModeRequest;
+const DescribeRiskCenterVULViewVULRiskListResponse = models.DescribeRiskCenterVULViewVULRiskListResponse;
+const DspmAccessRecord = models.DspmAccessRecord;
+const CheckIsUltimateVersionRequest = models.CheckIsUltimateVersionRequest;
+const AddVulWhitelistRequest = models.AddVulWhitelistRequest;
+const AIScheduleUserIdentity = models.AIScheduleUserIdentity;
+const CreateClusterNodeListExportJobRequest = models.CreateClusterNodeListExportJobRequest;
+const DeleteBaselineSelfDefinedPolicyListResponse = models.DeleteBaselineSelfDefinedPolicyListResponse;
+const DeleteEDRScanTaskResponse = models.DeleteEDRScanTaskResponse;
+const StopImageRegistryScanTaskRequest = models.StopImageRegistryScanTaskRequest;
+const DeleteBaselineSelfDefinedPolicyListRequest = models.DeleteBaselineSelfDefinedPolicyListRequest;
+const CreateSandboxACLRuleRequest = models.CreateSandboxACLRuleRequest;
+const DspmIdentifyLevelGroupItem = models.DspmIdentifyLevelGroupItem;
+const DeleteCSIPMalwareScanTaskResponse = models.DeleteCSIPMalwareScanTaskResponse;
+const ServerRiskSuggestion = models.ServerRiskSuggestion;
+const DescribeAssetSyncTaskStatusRequest = models.DescribeAssetSyncTaskStatusRequest;
+const ImageRegistryTimedScanTaskInfo = models.ImageRegistryTimedScanTaskInfo;
+const DescribeImageRegistryListResponse = models.DescribeImageRegistryListResponse;
+const DescribeDspmApplyOrderListRequest = models.DescribeDspmApplyOrderListRequest;
+const CallRecord = models.CallRecord;
+const UebaUserSummary = models.UebaUserSummary;
+const CreateAssetTagRequest = models.CreateAssetTagRequest;
+const DescribeClusterContainerAppListRequest = models.DescribeClusterContainerAppListRequest;
+const ModifyCspmShardConfigRequest = models.ModifyCspmShardConfigRequest;
+const CreateScanStatisticExportJobRequest = models.CreateScanStatisticExportJobRequest;
+const BaselineUserOtherConf = models.BaselineUserOtherConf;
+const DescribeVulFixedHostDetailResponse = models.DescribeVulFixedHostDetailResponse;
+const BaselineSyncConf = models.BaselineSyncConf;
+const DescribeHostKBRiskListRequest = models.DescribeHostKBRiskListRequest;
+const DescribeBaselinePolicyItemListResponse = models.DescribeBaselinePolicyItemListResponse;
+const AssetFilterOptions = models.AssetFilterOptions;
+const DescribeClusterContainerPortListRequest = models.DescribeClusterContainerPortListRequest;
+const DeleteDspmIdentifyRuleResponse = models.DeleteDspmIdentifyRuleResponse;
+const ModifyDspmRiskInfoResponse = models.ModifyDspmRiskInfoResponse;
+const DescribeDspmAuditFilterStrategyRequest = models.DescribeDspmAuditFilterStrategyRequest;
+const DownloadDspmExportLogRequest = models.DownloadDspmExportLogRequest;
+const DisableAIScheduleRequest = models.DisableAIScheduleRequest;
+const DescribeLastScanTaskInfoResponse = models.DescribeLastScanTaskInfoResponse;
+const DeleteDspmIdentifyCategoryRequest = models.DeleteDspmIdentifyCategoryRequest;
+const DescribeCSIPRiskStatisticsRequest = models.DescribeCSIPRiskStatisticsRequest;
+const ModifyAssetFilterViewResponse = models.ModifyAssetFilterViewResponse;
+const CreateSandboxDLPRuleRequest = models.CreateSandboxDLPRuleRequest;
+const DescribeReverseShellSystemPolicyConfigRequest = models.DescribeReverseShellSystemPolicyConfigRequest;
+const DescribeAIAgentSkillListRequest = models.DescribeAIAgentSkillListRequest;
+const AccessKeyWhiteList = models.AccessKeyWhiteList;
+const ModifySecurityScoreRuleResponse = models.ModifySecurityScoreRuleResponse;
+const DescribeIaCFileOverviewRequest = models.DescribeIaCFileOverviewRequest;
+const CreateAssetComponentRelatedImageListExportJobRequest = models.CreateAssetComponentRelatedImageListExportJobRequest;
+const DescribeCFWAssetStatisticsRequest = models.DescribeCFWAssetStatisticsRequest;
 const DescribeAccessKeyUserListResponse = models.DescribeAccessKeyUserListResponse;
-const ExposeAssetTypeItem = models.ExposeAssetTypeItem;
-const DescribeTaskLogListRequest = models.DescribeTaskLogListRequest;
-const Filters = models.Filters;
+const ModifyCSIPRaspLicenseBindsResponse = models.ModifyCSIPRaspLicenseBindsResponse;
+const DescribeDspmLogListResponse = models.DescribeDspmLogListResponse;
+const DescribeSCFNamespaceListResponse = models.DescribeSCFNamespaceListResponse;
+const DeleteDspmWhitelistStrategyRequest = models.DeleteDspmWhitelistStrategyRequest;
+const DescribeRiskCenterAssetViewPortRiskListResponse = models.DescribeRiskCenterAssetViewPortRiskListResponse;
+const BatchModifyBaselinePolicyResponse = models.BatchModifyBaselinePolicyResponse;
+const ModifyBaselineSyncConfResponse = models.ModifyBaselineSyncConfResponse;
 
 
 /**
@@ -430,40 +1958,29 @@ class CsipClient extends AbstractClient {
     }
     
     /**
-     * Delete IaC detection file
-     * @param {DeleteIaCFileRequest} req
-     * @param {function(string, DeleteIaCFileResponse):void} cb
+     * Query the security analysis status of Dspm assets.
+     * @param {DescribeDspmAssetSecurityAnalyseStatusRequest} req
+     * @param {function(string, DescribeDspmAssetSecurityAnalyseStatusResponse):void} cb
      * @public
      */
-    DeleteIaCFile(req, cb) {
-        let resp = new DeleteIaCFileResponse();
-        this.request("DeleteIaCFile", req, resp, cb);
+    DescribeDspmAssetSecurityAnalyseStatus(req, cb) {
+        let resp = new DescribeDspmAssetSecurityAnalyseStatusResponse();
+        this.request("DescribeDspmAssetSecurityAnalyseStatus", req, resp, cb);
     }
 
     /**
-     * This API is used to delete assets.
-     * @param {DeleteDomainAndIpRequest} req
-     * @param {function(string, DeleteDomainAndIpResponse):void} cb
+     * This API is used to create an EDR alert export task.
+     * @param {CreateEdrAlertExportJobRequest} req
+     * @param {function(string, CreateEdrAlertExportJobResponse):void} cb
      * @public
      */
-    DeleteDomainAndIp(req, cb) {
-        let resp = new DeleteDomainAndIpResponse();
-        this.request("DeleteDomainAndIp", req, resp, cb);
+    CreateEdrAlertExportJob(req, cb) {
+        let resp = new CreateEdrAlertExportJobResponse();
+        this.request("CreateEdrAlertExportJob", req, resp, cb);
     }
 
     /**
-     * Query risk rule details example
-     * @param {DescribeRiskRuleDetailRequest} req
-     * @param {function(string, DescribeRiskRuleDetailResponse):void} cb
-     * @public
-     */
-    DescribeRiskRuleDetail(req, cb) {
-        let resp = new DescribeRiskRuleDetailResponse();
-        this.request("DescribeRiskRuleDetail", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query details of a database asset. 
+     * DB Asset Details
      * @param {DescribeDbAssetInfoRequest} req
      * @param {function(string, DescribeDbAssetInfoResponse):void} cb
      * @public
@@ -474,40 +1991,62 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Obtain Network Interface Card List
-     * @param {DescribeNICAssetsRequest} req
-     * @param {function(string, DescribeNICAssetsResponse):void} cb
+     * Querying dspm data identification distribution statistics
+     * @param {DescribeDspmIdentifyDistributionStatisticsRequest} req
+     * @param {function(string, DescribeDspmIdentifyDistributionStatisticsResponse):void} cb
      * @public
      */
-    DescribeNICAssets(req, cb) {
-        let resp = new DescribeNICAssetsResponse();
-        this.request("DescribeNICAssets", req, resp, cb);
+    DescribeDspmIdentifyDistributionStatistics(req, cb) {
+        let resp = new DescribeDspmIdentifyDistributionStatisticsResponse();
+        this.request("DescribeDspmIdentifyDistributionStatistics", req, resp, cb);
     }
 
     /**
-     * This API is used to list domain assets. 
-     * @param {DescribeDomainAssetsRequest} req
-     * @param {function(string, DescribeDomainAssetsResponse):void} cb
+     * Cloud resource configuration inspection standard chapter clause tree
+     * @param {DescribeComplianceStandardTermTreeRequest} req
+     * @param {function(string, DescribeComplianceStandardTermTreeResponse):void} cb
      * @public
      */
-    DescribeDomainAssets(req, cb) {
-        let resp = new DescribeDomainAssetsResponse();
-        this.request("DescribeDomainAssets", req, resp, cb);
+    DescribeComplianceStandardTermTree(req, cb) {
+        let resp = new DescribeComplianceStandardTermTreeResponse();
+        this.request("DescribeComplianceStandardTermTree", req, resp, cb);
     }
 
     /**
-     * Retrieve the AI agent asset list
-     * @param {DescribeAIAgentAssetListRequest} req
-     * @param {function(string, DescribeAIAgentAssetListResponse):void} cb
+     * Edit a CSPM shared account
+     * @param {ModifyShareUserCSPMRequest} req
+     * @param {function(string, ModifyShareUserCSPMResponse):void} cb
      * @public
      */
-    DescribeAIAgentAssetList(req, cb) {
-        let resp = new DescribeAIAgentAssetListResponse();
-        this.request("DescribeAIAgentAssetList", req, resp, cb);
+    ModifyShareUserCSPM(req, cb) {
+        let resp = new ModifyShareUserCSPMResponse();
+        this.request("ModifyShareUserCSPM", req, resp, cb);
     }
 
     /**
-     * Query the account list of a user.
+     * This API is used to obtain the brute-force blocking mode.
+     * @param {DescribeBanModeRequest} req
+     * @param {function(string, DescribeBanModeResponse):void} cb
+     * @public
+     */
+    DescribeBanMode(req, cb) {
+        let resp = new DescribeBanModeResponse();
+        this.request("DescribeBanMode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query asset database information.
+     * @param {DescribeDspmAssetDatabaseListRequest} req
+     * @param {function(string, DescribeDspmAssetDatabaseListResponse):void} cb
+     * @public
+     */
+    DescribeDspmAssetDatabaseList(req, cb) {
+        let resp = new DescribeDspmAssetDatabaseListResponse();
+        this.request("DescribeDspmAssetDatabaseList", req, resp, cb);
+    }
+
+    /**
+     * Query user account list
      * @param {DescribeAccessKeyUserListRequest} req
      * @param {function(string, DescribeAccessKeyUserListResponse):void} cb
      * @public
@@ -518,333 +2057,36 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Cloud Resource Configuration Risk Rule List Example
-     * @param {DescribeConfigCheckRulesRequest} req
-     * @param {function(string, DescribeConfigCheckRulesResponse):void} cb
+     * Query the sensitive information list of an image
+     * @param {DescribeImageSensitiveInfoListRequest} req
+     * @param {function(string, DescribeImageSensitiveInfoListResponse):void} cb
      * @public
      */
-    DescribeConfigCheckRules(req, cb) {
-        let resp = new DescribeConfigCheckRulesResponse();
-        this.request("DescribeConfigCheckRules", req, resp, cb);
+    DescribeImageSensitiveInfoList(req, cb) {
+        let resp = new DescribeImageSensitiveInfoListResponse();
+        this.request("DescribeImageSensitiveInfoList", req, resp, cb);
     }
 
     /**
-     * This API is used to get the list of VPCs.
-     * @param {DescribeVpcAssetsRequest} req
-     * @param {function(string, DescribeVpcAssetsResponse):void} cb
+     * Modify an existing LLM audit user rule. Fields not passed retain their original values, and partial field update is supported.
+     * @param {ModifySandboxLLMAuditRuleRequest} req
+     * @param {function(string, ModifySandboxLLMAuditRuleResponse):void} cb
      * @public
      */
-    DescribeVpcAssets(req, cb) {
-        let resp = new DescribeVpcAssetsResponse();
-        this.request("DescribeVpcAssets", req, resp, cb);
+    ModifySandboxLLMAuditRule(req, cb) {
+        let resp = new ModifySandboxLLMAuditRuleResponse();
+        this.request("ModifySandboxLLMAuditRule", req, resp, cb);
     }
 
     /**
-     * Obtain Vulnerability Risk List from Asset's Perspective
-     * @param {DescribeAssetViewVulRiskListRequest} req
-     * @param {function(string, DescribeAssetViewVulRiskListResponse):void} cb
+     * This API is used to disable process guard.
+     * @param {ModifyNFSScanHostRequest} req
+     * @param {function(string, ModifyNFSScanHostResponse):void} cb
      * @public
      */
-    DescribeAssetViewVulRiskList(req, cb) {
-        let resp = new DescribeAssetViewVulRiskListResponse();
-        this.request("DescribeAssetViewVulRiskList", req, resp, cb);
-    }
-
-    /**
-     * Retrieve vulnerability details.
-     * @param {DescribeVULRiskDetailRequest} req
-     * @param {function(string, DescribeVULRiskDetailResponse):void} cb
-     * @public
-     */
-    DescribeVULRiskDetail(req, cb) {
-        let resp = new DescribeVULRiskDetailResponse();
-        this.request("DescribeVULRiskDetail", req, resp, cb);
-    }
-
-    /**
-     * Obtain Content Risk List
-     * @param {DescribeRiskCenterWebsiteRiskListRequest} req
-     * @param {function(string, DescribeRiskCenterWebsiteRiskListResponse):void} cb
-     * @public
-     */
-    DescribeRiskCenterWebsiteRiskList(req, cb) {
-        let resp = new DescribeRiskCenterWebsiteRiskListResponse();
-        this.request("DescribeRiskCenterWebsiteRiskList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to stop a scan task. 
-     * @param {StopRiskCenterTaskRequest} req
-     * @param {function(string, StopRiskCenterTaskResponse):void} cb
-     * @public
-     */
-    StopRiskCenterTask(req, cb) {
-        let resp = new StopRiskCenterTaskResponse();
-        this.request("StopRiskCenterTask", req, resp, cb);
-    }
-
-    /**
-     * Add a vulnerability allowlist
-     * @param {AddVulWhitelistRequest} req
-     * @param {function(string, AddVulWhitelistResponse):void} cb
-     * @public
-     */
-    AddVulWhitelist(req, cb) {
-        let resp = new AddVulWhitelistResponse();
-        this.request("AddVulWhitelist", req, resp, cb);
-    }
-
-    /**
-     * Trigger an AK asset sync task.
-     * @param {CreateAccessKeySyncTaskRequest} req
-     * @param {function(string, CreateAccessKeySyncTaskResponse):void} cb
-     * @public
-     */
-    CreateAccessKeySyncTask(req, cb) {
-        let resp = new CreateAccessKeySyncTaskResponse();
-        this.request("CreateAccessKeySyncTask", req, resp, cb);
-    }
-
-    /**
-     * Users manually submit vulnerability repair tasks, specify the vulnerabilities and target hosts that need to be repaired, and the system creates fixing tasks and dispatches execution. It supports options such as specifying the repair timeout period and whether to create a snapshot. The FixItems array is used to precisely control which hosts each vulnerability or KB patch repairs.
-     * @param {CreateVulFixTaskRequest} req
-     * @param {function(string, CreateVulFixTaskResponse):void} cb
-     * @public
-     */
-    CreateVulFixTask(req, cb) {
-        let resp = new CreateVulFixTaskResponse();
-        this.request("CreateVulFixTask", req, resp, cb);
-    }
-
-    /**
-     * Cloud resource configuration risk list from asset perspective
-     * @param {DescribeAssetRiskListRequest} req
-     * @param {function(string, DescribeAssetRiskListResponse):void} cb
-     * @public
-     */
-    DescribeAssetRiskList(req, cb) {
-        let resp = new DescribeAssetRiskListResponse();
-        this.request("DescribeAssetRiskList", req, resp, cb);
-    }
-
-    /**
-     * Create an IaC detection file rescan task
-     * @param {CreateIaCFileReScanTaskRequest} req
-     * @param {function(string, CreateIaCFileReScanTaskResponse):void} cb
-     * @public
-     */
-    CreateIaCFileReScanTask(req, cb) {
-        let resp = new CreateIaCFileReScanTaskResponse();
-        this.request("CreateIaCFileReScanTask", req, resp, cb);
-    }
-
-    /**
-     * Create an IaC detection file export task
-     * @param {CreateIaCFileExportJobRequest} req
-     * @param {function(string, CreateIaCFileExportJobResponse):void} cb
-     * @public
-     */
-    CreateIaCFileExportJob(req, cb) {
-        let resp = new CreateIaCFileExportJobResponse();
-        this.request("CreateIaCFileExportJob", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the list of scan tasks.
-     * @param {DescribeScanTaskListRequest} req
-     * @param {function(string, DescribeScanTaskListResponse):void} cb
-     * @public
-     */
-    DescribeScanTaskList(req, cb) {
-        let resp = new DescribeScanTaskListResponse();
-        this.request("DescribeScanTaskList", req, resp, cb);
-    }
-
-    /**
-     * Alarm Record Details for Access Key.
-     * @param {DescribeAccessKeyAlarmDetailRequest} req
-     * @param {function(string, DescribeAccessKeyAlarmDetailResponse):void} cb
-     * @public
-     */
-    DescribeAccessKeyAlarmDetail(req, cb) {
-        let resp = new DescribeAccessKeyAlarmDetailResponse();
-        this.request("DescribeAccessKeyAlarmDetail", req, resp, cb);
-    }
-
-    /**
-     * Query Group Account User List
-     * @param {DescribeOrganizationUserInfoRequest} req
-     * @param {function(string, DescribeOrganizationUserInfoResponse):void} cb
-     * @public
-     */
-    DescribeOrganizationUserInfo(req, cb) {
-        let resp = new DescribeOrganizationUserInfoResponse();
-        this.request("DescribeOrganizationUserInfo", req, resp, cb);
-    }
-
-    /**
-     * Detect AK async task.
-     * @param {CreateAccessKeyCheckTaskRequest} req
-     * @param {function(string, CreateAccessKeyCheckTaskResponse):void} cb
-     * @public
-     */
-    CreateAccessKeyCheckTask(req, cb) {
-        let resp = new CreateAccessKeyCheckTaskResponse();
-        this.request("CreateAccessKeyCheckTask", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the list of subnets.
-     * @param {DescribeSubnetAssetsRequest} req
-     * @param {function(string, DescribeSubnetAssetsResponse):void} cb
-     * @public
-     */
-    DescribeSubnetAssets(req, cb) {
-        let resp = new DescribeSubnetAssetsResponse();
-        this.request("DescribeSubnetAssets", req, resp, cb);
-    }
-
-    /**
-     * Obtain user access key asset list.
-     * @param {DescribeAccessKeyAssetRequest} req
-     * @param {function(string, DescribeAccessKeyAssetResponse):void} cb
-     * @public
-     */
-    DescribeAccessKeyAsset(req, cb) {
-        let resp = new DescribeAccessKeyAssetResponse();
-        this.request("DescribeAccessKeyAsset", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the billing information of Skill security detection, including order status, total quota, consumed quota, expiry time, and payment mode. It returns zero values (only TimeNow and BetaEndTime included) when no order exists. Trial orders can be claimed via ModifyTrialStatus(Module=9), and official orders are generated by the billing system.
-     * @param {DescribeSkillScanPayInfoRequest} req
-     * @param {function(string, DescribeSkillScanPayInfoResponse):void} cb
-     * @public
-     */
-    DescribeSkillScanPayInfo(req, cb) {
-        let resp = new DescribeSkillScanPayInfoResponse();
-        this.request("DescribeSkillScanPayInfo", req, resp, cb);
-    }
-
-    /**
-     * Retrieve the call record list.
-     * @param {DescribeAbnormalCallRecordRequest} req
-     * @param {function(string, DescribeAbnormalCallRecordResponse):void} cb
-     * @public
-     */
-    DescribeAbnormalCallRecord(req, cb) {
-        let resp = new DescribeAbnormalCallRecordResponse();
-        this.request("DescribeAbnormalCallRecord", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of vulnerabilities by vulnerabilities.
-     * @param {DescribeRiskCenterVULViewVULRiskListRequest} req
-     * @param {function(string, DescribeRiskCenterVULViewVULRiskListResponse):void} cb
-     * @public
-     */
-    DescribeRiskCenterVULViewVULRiskList(req, cb) {
-        let resp = new DescribeRiskCenterVULViewVULRiskListResponse();
-        this.request("DescribeRiskCenterVULViewVULRiskList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to add the CAM role of Cloud Security Center (CSC) to the current account. The name of the CAM role is "csip".
-     * @param {AddNewBindRoleUserRequest} req
-     * @param {function(string, AddNewBindRoleUserResponse):void} cb
-     * @public
-     */
-    AddNewBindRoleUser(req, cb) {
-        let resp = new AddNewBindRoleUserResponse();
-        this.request("AddNewBindRoleUser", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the vulnerability allowlist switch.
-     * @param {ModifyVulWhitelistSwitchRequest} req
-     * @param {function(string, ModifyVulWhitelistSwitchResponse):void} cb
-     * @public
-     */
-    ModifyVulWhitelistSwitch(req, cb) {
-        let resp = new ModifyVulWhitelistSwitchResponse();
-        this.request("ModifyVulWhitelistSwitch", req, resp, cb);
-    }
-
-    /**
-     * Query the voucher list
-     * @param {DescribeKeySandboxCredentialListRequest} req
-     * @param {function(string, DescribeKeySandboxCredentialListResponse):void} cb
-     * @public
-     */
-    DescribeKeySandboxCredentialList(req, cb) {
-        let resp = new DescribeKeySandboxCredentialListResponse();
-        this.request("DescribeKeySandboxCredentialList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the repair details of a certain fixed vulnerability on a specified host, including basic information about the vulnerability, repair host information, and a detailed list of associated components and paths (component name, version number hit, associated path, repair command).
-     * @param {DescribeVulFixedHostDetailRequest} req
-     * @param {function(string, DescribeVulFixedHostDetailResponse):void} cb
-     * @public
-     */
-    DescribeVulFixedHostDetail(req, cb) {
-        let resp = new DescribeVulFixedHostDetailResponse();
-        this.request("DescribeVulFixedHostDetail", req, resp, cb);
-    }
-
-    /**
-     * Retrieve the cvm list.
-     * @param {DescribeCVMAssetsRequest} req
-     * @param {function(string, DescribeCVMAssetsResponse):void} cb
-     * @public
-     */
-    DescribeCVMAssets(req, cb) {
-        let resp = new DescribeCVMAssetsResponse();
-        this.request("DescribeCVMAssets", req, resp, cb);
-    }
-
-    /**
-     * Query Group Account Details
-     * @param {DescribeOrganizationInfoRequest} req
-     * @param {function(string, DescribeOrganizationInfoResponse):void} cb
-     * @public
-     */
-    DescribeOrganizationInfo(req, cb) {
-        let resp = new DescribeOrganizationInfoResponse();
-        this.request("DescribeOrganizationInfo", req, resp, cb);
-    }
-
-    /**
-     * Obtain account call record list.
-     * @param {DescribeUserCallRecordRequest} req
-     * @param {function(string, DescribeUserCallRecordResponse):void} cb
-     * @public
-     */
-    DescribeUserCallRecord(req, cb) {
-        let resp = new DescribeUserCallRecordResponse();
-        this.request("DescribeUserCallRecord", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the vulnerability repair task record list with paging, support by conditional filtering such as remediation status and time range, and show summary information for each repair task.
-     * @param {DescribeVulFixTaskListRequest} req
-     * @param {function(string, DescribeVulFixTaskListResponse):void} cb
-     * @public
-     */
-    DescribeVulFixTaskList(req, cb) {
-        let resp = new DescribeVulFixTaskListResponse();
-        this.request("DescribeVulFixTaskList", req, resp, cb);
-    }
-
-    /**
-     * Create an export task for the list of fixed vulnerabilities. It supports the same filter criteria as DescribeVulFixedList. The export is implemented via an asynchronous task. After a JobID is returned, the frontend polls to query the export task status. The export fields include vulnerability ID, vulnerability name, vulnerability level, VPR rating, vulnerability type, CVE ID, host name, instance ID, associated component & path, and repair time.
-     * @param {CreateVulFixedExportJobRequest} req
-     * @param {function(string, CreateVulFixedExportJobResponse):void} cb
-     * @public
-     */
-    CreateVulFixedExportJob(req, cb) {
-        let resp = new CreateVulFixedExportJobResponse();
-        this.request("CreateVulFixedExportJob", req, resp, cb);
+    ModifyNFSScanHost(req, cb) {
+        let resp = new ModifyNFSScanHostResponse();
+        this.request("ModifyNFSScanHost", req, resp, cb);
     }
 
     /**
@@ -859,84 +2101,669 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Obtain Vulnerability Risk List from Vulnerability's Perspective
-     * @param {DescribeVulViewVulRiskListRequest} req
-     * @param {function(string, DescribeVulViewVulRiskListResponse):void} cb
+     * Query Dspm approval history
+     * @param {DescribeDspmApproveHistoryRequest} req
+     * @param {function(string, DescribeDspmApproveHistoryResponse):void} cb
      * @public
      */
-    DescribeVulViewVulRiskList(req, cb) {
-        let resp = new DescribeVulViewVulRiskListResponse();
-        this.request("DescribeVulViewVulRiskList", req, resp, cb);
+    DescribeDspmApproveHistory(req, cb) {
+        let resp = new DescribeDspmApproveHistoryResponse();
+        this.request("DescribeDspmApproveHistory", req, resp, cb);
     }
 
     /**
-     * Create an IaC detection integration Token
-     * @param {CreateIaCAccessTokenRequest} req
-     * @param {function(string, CreateIaCAccessTokenResponse):void} cb
+     * Manually unbind host authorization. Execute synchronously and return results directly. Only unbind host authorization (category=0, including Pro and Ultimate editions). In single order mode, appid can locate the order without the need to pass ResourceId. For RASP unbinding, use ModifyCSIPRaspLicenseUnBinds.
+     * @param {ModifyCSIPLicenseUnBindsRequest} req
+     * @param {function(string, ModifyCSIPLicenseUnBindsResponse):void} cb
      * @public
      */
-    CreateIaCAccessToken(req, cb) {
-        let resp = new CreateIaCAccessTokenResponse();
-        this.request("CreateIaCAccessToken", req, resp, cb);
+    ModifyCSIPLicenseUnBinds(req, cb) {
+        let resp = new ModifyCSIPLicenseUnBindsResponse();
+        this.request("ModifyCSIPLicenseUnBinds", req, resp, cb);
     }
 
     /**
-     * This API is used to create a vulnerability rescan
-     * @param {CreateVulReScanRequest} req
-     * @param {function(string, CreateVulReScanResponse):void} cb
+     * Batch modify the Trojan allowlist for images.
+     * @param {BatchModifyImageVirusWhitelistRequest} req
+     * @param {function(string, BatchModifyImageVirusWhitelistResponse):void} cb
      * @public
      */
-    CreateVulReScan(req, cb) {
-        let resp = new CreateVulReScanResponse();
-        this.request("CreateVulReScan", req, resp, cb);
+    BatchModifyImageVirusWhitelist(req, cb) {
+        let resp = new BatchModifyImageVirusWhitelistResponse();
+        this.request("BatchModifyImageVirusWhitelist", req, resp, cb);
     }
 
     /**
-     * This API is used to list all alarms in the alert center.
-     * @param {DescribeAlertListRequest} req
-     * @param {function(string, DescribeAlertListResponse):void} cb
+     * Stop vulnerability scanning (task scan).
+     * @param {StopVulScanTaskRequest} req
+     * @param {function(string, StopVulScanTaskResponse):void} cb
      * @public
      */
-    DescribeAlertList(req, cb) {
-        let resp = new DescribeAlertListResponse();
-        this.request("DescribeAlertList", req, resp, cb);
+    StopVulScanTask(req, cb) {
+        let resp = new StopVulScanTaskResponse();
+        this.request("StopVulScanTask", req, resp, cb);
     }
 
     /**
-     * Upload the Skill ZIP file to trigger asynchronous security detection. After a successful upload, use the returned ContentHash and EngineVersion to poll the DescribeSkillScanResult API to obtain the result. The upload API is idempotent, and uploading the same file with an identical hash will not create a repetition task. The detection result is reserved for 90 days. If overdue, reupload the file for detection.
-     * @param {CreateSkillScanRequest} req
-     * @param {function(string, CreateSkillScanResponse):void} cb
+     * This API is used to query the mirror repository namespace list.
+     * @param {DescribeImageRegistryNamespaceListRequest} req
+     * @param {function(string, DescribeImageRegistryNamespaceListResponse):void} cb
      * @public
      */
-    CreateSkillScan(req, cb) {
-        let resp = new CreateSkillScanResponse();
-        this.request("CreateSkillScan", req, resp, cb);
+    DescribeImageRegistryNamespaceList(req, cb) {
+        let resp = new DescribeImageRegistryNamespaceListResponse();
+        this.request("DescribeImageRegistryNamespaceList", req, resp, cb);
     }
 
     /**
-     * This API is used to retrieve the vulnerability ignore list.
-     * @param {DescribeVulIgnoreRuleListRequest} req
-     * @param {function(string, DescribeVulIgnoreRuleListResponse):void} cb
+     * Retrieve vulnerability details
+     * @param {DescribeVULRiskDetailRequest} req
+     * @param {function(string, DescribeVULRiskDetailResponse):void} cb
      * @public
      */
-    DescribeVulIgnoreRuleList(req, cb) {
-        let resp = new DescribeVulIgnoreRuleListResponse();
-        this.request("DescribeVulIgnoreRuleList", req, resp, cb);
+    DescribeVULRiskDetail(req, cb) {
+        let resp = new DescribeVULRiskDetailResponse();
+        this.request("DescribeVULRiskDetail", req, resp, cb);
     }
 
     /**
-     * Risk detail list example
-     * @param {DescribeRiskDetailListRequest} req
-     * @param {function(string, DescribeRiskDetailListResponse):void} cb
+     * Delete EDR log collection path configurations in batches.
+     * @param {DeleteEdrLogCollectPathsRequest} req
+     * @param {function(string, DeleteEdrLogCollectPathsResponse):void} cb
      * @public
      */
-    DescribeRiskDetailList(req, cb) {
-        let resp = new DescribeRiskDetailListResponse();
-        this.request("DescribeRiskDetailList", req, resp, cb);
+    DeleteEdrLogCollectPaths(req, cb) {
+        let resp = new DeleteEdrLogCollectPathsResponse();
+        this.request("DeleteEdrLogCollectPaths", req, resp, cb);
     }
 
     /**
-     * This API is used to query the list of port risks by assets.
+     * Retrieve the total number of assets integrated across multiple clouds (Tencent Cloud, Alibaba Cloud, AWS, Huawei Cloud, Azure, etc.) and the details of asset counts for each cloud service provider.
+     * @param {DescribeMultiCloudAssetCountRequest} req
+     * @param {function(string, DescribeMultiCloudAssetCountResponse):void} cb
+     * @public
+     */
+    DescribeMultiCloudAssetCount(req, cb) {
+        let resp = new DescribeMultiCloudAssetCountResponse();
+        this.request("DescribeMultiCloudAssetCount", req, resp, cb);
+    }
+
+    /**
+     * Query client offline duration
+     * @param {DescribeNotifyAgentOfflineDurationRequest} req
+     * @param {function(string, DescribeNotifyAgentOfflineDurationResponse):void} cb
+     * @public
+     */
+    DescribeNotifyAgentOfflineDuration(req, cb) {
+        let resp = new DescribeNotifyAgentOfflineDurationResponse();
+        this.request("DescribeNotifyAgentOfflineDuration", req, resp, cb);
+    }
+
+    /**
+     * Delete notification policies in batches.
+     * @param {DeleteWebhookPoliciesRequest} req
+     * @param {function(string, DeleteWebhookPoliciesResponse):void} cb
+     * @public
+     */
+    DeleteWebhookPolicies(req, cb) {
+        let resp = new DeleteWebhookPoliciesResponse();
+        this.request("DeleteWebhookPolicies", req, resp, cb);
+    }
+
+    /**
+     * Modify a dspm identification data item
+     * @param {ModifyDspmIdentifyRuleRequest} req
+     * @param {function(string, ModifyDspmIdentifyRuleResponse):void} cb
+     * @public
+     */
+    ModifyDspmIdentifyRule(req, cb) {
+        let resp = new ModifyDspmIdentifyRuleResponse();
+        this.request("ModifyDspmIdentifyRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify host login methods in batches.
+     * @param {ModifyMachinesLoginTypeRequest} req
+     * @param {function(string, ModifyMachinesLoginTypeResponse):void} cb
+     * @public
+     */
+    ModifyMachinesLoginType(req, cb) {
+        let resp = new ModifyMachinesLoginTypeResponse();
+        this.request("ModifyMachinesLoginType", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an SCF export task.
+     * @param {CreateCloudFunctionExportJobRequest} req
+     * @param {function(string, CreateCloudFunctionExportJobResponse):void} cb
+     * @public
+     */
+    CreateCloudFunctionExportJob(req, cb) {
+        let resp = new CreateCloudFunctionExportJobResponse();
+        this.request("CreateCloudFunctionExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain EDR alert details, including complete information such as alert content JSON, asset enrichment, and intelligence enrichment.
+     * @param {DescribeEdrAlertInfoRequest} req
+     * @param {function(string, DescribeEdrAlertInfoResponse):void} cb
+     * @public
+     */
+    DescribeEdrAlertInfo(req, cb) {
+        let resp = new DescribeEdrAlertInfoResponse();
+        this.request("DescribeEdrAlertInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain brute force cracking rules.
+     * @param {DescribeBruteAttackRulesRequest} req
+     * @param {function(string, DescribeBruteAttackRulesResponse):void} cb
+     * @public
+     */
+    DescribeBruteAttackRules(req, cb) {
+        let resp = new DescribeBruteAttackRulesResponse();
+        this.request("DescribeBruteAttackRules", req, resp, cb);
+    }
+
+    /**
+     * Modify Dspm asset account permissions
+     * @param {ModifyDspmAssetAccountPrivilegesRequest} req
+     * @param {function(string, ModifyDspmAssetAccountPrivilegesResponse):void} cb
+     * @public
+     */
+    ModifyDspmAssetAccountPrivileges(req, cb) {
+        let resp = new ModifyDspmAssetAccountPrivilegesResponse();
+        this.request("ModifyDspmAssetAccountPrivileges", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the security score overview and real-time compute point deductions in each dimension and sub-item.
+     * @param {DescribeSecurityScoreOverviewRequest} req
+     * @param {function(string, DescribeSecurityScoreOverviewResponse):void} cb
+     * @public
+     */
+    DescribeSecurityScoreOverview(req, cb) {
+        let resp = new DescribeSecurityScoreOverviewResponse();
+        this.request("DescribeSecurityScoreOverview", req, resp, cb);
+    }
+
+    /**
+     * Obtain Scan Task List
+     * @param {DescribeScanTaskListRequest} req
+     * @param {function(string, DescribeScanTaskListResponse):void} cb
+     * @public
+     */
+    DescribeScanTaskList(req, cb) {
+        let resp = new DescribeScanTaskListResponse();
+        this.request("DescribeScanTaskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the tenant CKafka instance list.
+     * @param {DescribeDspmUserCkafkaInstanceListRequest} req
+     * @param {function(string, DescribeDspmUserCkafkaInstanceListResponse):void} cb
+     * @public
+     */
+    DescribeDspmUserCkafkaInstanceList(req, cb) {
+        let resp = new DescribeDspmUserCkafkaInstanceListResponse();
+        this.request("DescribeDspmUserCkafkaInstanceList", req, resp, cb);
+    }
+
+    /**
+     * Query sample values of dspm asset fields
+     * @param {DescribeDspmAssetFieldSamplesRequest} req
+     * @param {function(string, DescribeDspmAssetFieldSamplesResponse):void} cb
+     * @public
+     */
+    DescribeDspmAssetFieldSamples(req, cb) {
+        let resp = new DescribeDspmAssetFieldSamplesResponse();
+        this.request("DescribeDspmAssetFieldSamples", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query export tasks.
+     * @param {DescribeDspmExportTaskRequest} req
+     * @param {function(string, DescribeDspmExportTaskResponse):void} cb
+     * @public
+     */
+    DescribeDspmExportTask(req, cb) {
+        let resp = new DescribeDspmExportTaskResponse();
+        this.request("DescribeDspmExportTask", req, resp, cb);
+    }
+
+    /**
+     * Last Synchronization Time of Assets
+     * @param {DescribeAssetLastSyncTimeRequest} req
+     * @param {function(string, DescribeAssetLastSyncTimeResponse):void} cb
+     * @public
+     */
+    DescribeAssetLastSyncTime(req, cb) {
+        let resp = new DescribeAssetLastSyncTimeResponse();
+        this.request("DescribeAssetLastSyncTime", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a cluster node list export task. The export fields include node ID, node name, public IP address, private IP address, node type, cores, client status, and running state. NodeType, ClientStatus, and RunStatus are internationalized. Filter filtering is supported, including ClientStatus memory filtering. Export is implemented through an async task. After JobId is returned, the frontend polls to query the export task status.
+     * @param {CreateClusterNodeListExportJobRequest} req
+     * @param {function(string, CreateClusterNodeListExportJobResponse):void} cb
+     * @public
+     */
+    CreateClusterNodeListExportJob(req, cb) {
+        let resp = new CreateClusterNodeListExportJobResponse();
+        this.request("CreateClusterNodeListExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a vulnerability risk export task.
+     * @param {CreateVulRisksExportJobRequest} req
+     * @param {function(string, CreateVulRisksExportJobResponse):void} cb
+     * @public
+     */
+    CreateVulRisksExportJob(req, cb) {
+        let resp = new CreateVulRisksExportJobResponse();
+        this.request("CreateVulRisksExportJob", req, resp, cb);
+    }
+
+    /**
+     * Enable or modify the anti-uninstall feature configuration.
+     * @param {StartOrModifyPreventUninstallRequest} req
+     * @param {function(string, StartOrModifyPreventUninstallResponse):void} cb
+     * @public
+     */
+    StartOrModifyPreventUninstall(req, cb) {
+        let resp = new StartOrModifyPreventUninstallResponse();
+        this.request("StartOrModifyPreventUninstall", req, resp, cb);
+    }
+
+    /**
+     * Query repository overview
+     * @param {DescribeRegistryOverviewRequest} req
+     * @param {function(string, DescribeRegistryOverviewResponse):void} cb
+     * @public
+     */
+    DescribeRegistryOverview(req, cb) {
+        let resp = new DescribeRegistryOverviewResponse();
+        this.request("DescribeRegistryOverview", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the CSPM auto quota shared configuration.
+     * @param {DescribeCspmShardConfigRequest} req
+     * @param {function(string, DescribeCspmShardConfigResponse):void} cb
+     * @public
+     */
+    DescribeCspmShardConfig(req, cb) {
+        let resp = new DescribeCspmShardConfigResponse();
+        this.request("DescribeCspmShardConfig", req, resp, cb);
+    }
+
+    /**
+     * Batch update traffic sandbox alarms (overwrite ACL, DLP, and LLM audit). Locate the alarm source by AlertType + BelongAssetType. Status supports HANDLED / IGNORE to modify status, as well as DELETE to delete. If any alarm ID does not exist or belongs to another tenant, an error is returned overall. Note: Whitelisting (PASS) is not handled by this interface. It is triggered by Create/Modify***Rule writing back through AlertID.
+     * @param {ModifySandboxAlertStatusRequest} req
+     * @param {function(string, ModifySandboxAlertStatusResponse):void} cb
+     * @public
+     */
+    ModifySandboxAlertStatus(req, cb) {
+        let resp = new ModifySandboxAlertStatusResponse();
+        this.request("ModifySandboxAlertStatus", req, resp, cb);
+    }
+
+    /**
+     * Queries the namespace list of SCF in the designated region for the current user.
+     * @param {DescribeSCFNamespaceListRequest} req
+     * @param {function(string, DescribeSCFNamespaceListResponse):void} cb
+     * @public
+     */
+    DescribeSCFNamespaceList(req, cb) {
+        let resp = new DescribeSCFNamespaceListResponse();
+        this.request("DescribeSCFNamespaceList", req, resp, cb);
+    }
+
+    /**
+     * Modify a security scoring rule. You need to pass in a complete rule set.
+     * @param {ModifySecurityScoreRuleRequest} req
+     * @param {function(string, ModifySecurityScoreRuleResponse):void} cb
+     * @public
+     */
+    ModifySecurityScoreRule(req, cb) {
+        let resp = new ModifySecurityScoreRuleResponse();
+        this.request("ModifySecurityScoreRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the CIDR block exclusion settings for log collection. IPs, IP ranges, and CIDR formats are supported, with up to 100 entries.
+     * @param {ModifyEdrExcludeNetworkSegmentsRequest} req
+     * @param {function(string, ModifyEdrExcludeNetworkSegmentsResponse):void} cb
+     * @public
+     */
+    ModifyEdrExcludeNetworkSegments(req, cb) {
+        let resp = new ModifyEdrExcludeNetworkSegmentsResponse();
+        this.request("ModifyEdrExcludeNetworkSegments", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a dspm data identification template.
+     * @param {CreateDspmIdentifyComplianceGroupRequest} req
+     * @param {function(string, CreateDspmIdentifyComplianceGroupResponse):void} cb
+     * @public
+     */
+    CreateDspmIdentifyComplianceGroup(req, cb) {
+        let resp = new CreateDspmIdentifyComplianceGroupResponse();
+        this.request("CreateDspmIdentifyComplianceGroup", req, resp, cb);
+    }
+
+    /**
+     * Query Dspm risk trends.
+     * @param {DescribeDspmRiskTendencyRequest} req
+     * @param {function(string, DescribeDspmRiskTendencyResponse):void} cb
+     * @public
+     */
+    DescribeDspmRiskTendency(req, cb) {
+        let resp = new DescribeDspmRiskTendencyResponse();
+        this.request("DescribeDspmRiskTendency", req, resp, cb);
+    }
+
+    /**
+     * Query Tencent Cloud scan IP information
+     * @param {DescribeCWPScanIpInfoRequest} req
+     * @param {function(string, DescribeCWPScanIpInfoResponse):void} cb
+     * @public
+     */
+    DescribeCWPScanIpInfo(req, cb) {
+        let resp = new DescribeCWPScanIpInfoResponse();
+        this.request("DescribeCWPScanIpInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the image Trojan allowlist.
+     * @param {DeleteImageVirusWhitelistRequest} req
+     * @param {function(string, DeleteImageVirusWhitelistResponse):void} cb
+     * @public
+     */
+    DeleteImageVirusWhitelist(req, cb) {
+        let resp = new DeleteImageVirusWhitelistResponse();
+        this.request("DeleteImageVirusWhitelist", req, resp, cb);
+    }
+
+    /**
+     * Query client running policies (policy groups). This is a standalone API split from DescribeAgentRunMode.
+     * @param {DescribeAgentRunPolicyRequest} req
+     * @param {function(string, DescribeAgentRunPolicyResponse):void} cb
+     * @public
+     */
+    DescribeAgentRunPolicy(req, cb) {
+        let resp = new DescribeAgentRunPolicyResponse();
+        this.request("DescribeAgentRunPolicy", req, resp, cb);
+    }
+
+    /**
+     * Query Internet exposure cycle count trend statistics.
+     * @param {DescribeExposureTrendRequest} req
+     * @param {function(string, DescribeExposureTrendResponse):void} cb
+     * @public
+     */
+    DescribeExposureTrend(req, cb) {
+        let resp = new DescribeExposureTrendResponse();
+        this.request("DescribeExposureTrend", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the repair details of a certain fixed vulnerability on a specified host, including basic information about the vulnerability, repair host information, and a detailed list of associated components and paths (component name, version number hit, associated path, repair command).
+     * @param {DescribeVulFixedHostDetailRequest} req
+     * @param {function(string, DescribeVulFixedHostDetailResponse):void} cb
+     * @public
+     */
+    DescribeVulFixedHostDetail(req, cb) {
+        let resp = new DescribeVulFixedHostDetailResponse();
+        this.request("DescribeVulFixedHostDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of Dspm asset databases.
+     * @param {DescribeDspmAssetDatabasesRequest} req
+     * @param {function(string, DescribeDspmAssetDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeDspmAssetDatabases(req, cb) {
+        let resp = new DescribeDspmAssetDatabasesResponse();
+        this.request("DescribeDspmAssetDatabases", req, resp, cb);
+    }
+
+    /**
+     * Creates a cluster container list export task
+     * @param {CreateClusterContainerListExportJobRequest} req
+     * @param {function(string, CreateClusterContainerListExportJobResponse):void} cb
+     * @public
+     */
+    CreateClusterContainerListExportJob(req, cb) {
+        let resp = new CreateClusterContainerListExportJobResponse();
+        this.request("CreateClusterContainerListExportJob", req, resp, cb);
+    }
+
+    /**
+     * Retrieves the scan list of AIAgent asset credentials
+     * @param {DescribeAIAgentCredentialListRequest} req
+     * @param {function(string, DescribeAIAgentCredentialListResponse):void} cb
+     * @public
+     */
+    DescribeAIAgentCredentialList(req, cb) {
+        let resp = new DescribeAIAgentCredentialListResponse();
+        this.request("DescribeAIAgentCredentialList", req, resp, cb);
+    }
+
+    /**
+     * Add or modify a notification policy. ID > 0 means modification; ID = 0 or not passed means adding new. When MemberAppIds is configured as empty, the policy only acts on current root account events; when not empty, it acts on the self account + listed member accounts at the same time.
+     * @param {ModifyWebhookPolicyRequest} req
+     * @param {function(string, ModifyWebhookPolicyResponse):void} cb
+     * @public
+     */
+    ModifyWebhookPolicy(req, cb) {
+        let resp = new ModifyWebhookPolicyResponse();
+        this.request("ModifyWebhookPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the vulnerability repair task record list with paging, support by conditional filtering such as remediation status and time range, and show summary information for each repair task.
+     * @param {DescribeVulFixTaskListRequest} req
+     * @param {function(string, DescribeVulFixTaskListResponse):void} cb
+     * @public
+     */
+    DescribeVulFixTaskList(req, cb) {
+        let resp = new DescribeVulFixTaskListResponse();
+        this.request("DescribeVulFixTaskList", req, resp, cb);
+    }
+
+    /**
+     * Obtain AK information of the account
+     * @param {DescribeUserAKInfoListRequest} req
+     * @param {function(string, DescribeUserAKInfoListResponse):void} cb
+     * @public
+     */
+    DescribeUserAKInfoList(req, cb) {
+        let resp = new DescribeUserAKInfoListResponse();
+        this.request("DescribeUserAKInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the log-in audit allowlist information. (The number of server lists needs to be less than 1,000.)
+     * @param {ModifyLoginWhiteRecordRequest} req
+     * @param {function(string, ModifyLoginWhiteRecordResponse):void} cb
+     * @public
+     */
+    ModifyLoginWhiteRecord(req, cb) {
+        let resp = new ModifyLoginWhiteRecordResponse();
+        this.request("ModifyLoginWhiteRecord", req, resp, cb);
+    }
+
+    /**
+     * Create an export task for the list of fixed vulnerabilities. It supports the same filter criteria as DescribeVulFixedList. The export is implemented via an asynchronous task. After a JobID is returned, the frontend polls to query the export task status. The export fields include vulnerability ID, vulnerability name, vulnerability level, VPR rating, vulnerability type, CVE ID, host name, instance ID, associated component & path, and repair time.
+     * @param {CreateVulFixedExportJobRequest} req
+     * @param {function(string, CreateVulFixedExportJobResponse):void} cb
+     * @public
+     */
+    CreateVulFixedExportJob(req, cb) {
+        let resp = new CreateVulFixedExportJobResponse();
+        this.request("CreateVulFixedExportJob", req, resp, cb);
+    }
+
+    /**
+     * Check whether the current user is eligible to claim vouchers for the designated promotion.
+     * @param {DescribeVoucherEligibilityRequest} req
+     * @param {function(string, DescribeVoucherEligibilityResponse):void} cb
+     * @public
+     */
+    DescribeVoucherEligibility(req, cb) {
+        let resp = new DescribeVoucherEligibilityResponse();
+        this.request("DescribeVoucherEligibility", req, resp, cb);
+    }
+
+    /**
+     * Delete dspm data identification data item
+     * @param {DeleteDspmIdentifyRuleRequest} req
+     * @param {function(string, DeleteDspmIdentifyRuleResponse):void} cb
+     * @public
+     */
+    DeleteDspmIdentifyRule(req, cb) {
+        let resp = new DeleteDspmIdentifyRuleResponse();
+        this.request("DeleteDspmIdentifyRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the global configuration for NFS scanning.
+     * @param {DescribeNFSScanConfRequest} req
+     * @param {function(string, DescribeNFSScanConfResponse):void} cb
+     * @public
+     */
+    DescribeNFSScanConf(req, cb) {
+        let resp = new DescribeNFSScanConfResponse();
+        this.request("DescribeNFSScanConf", req, resp, cb);
+    }
+
+    /**
+     * Example of a custom risk rule configuration detail list
+     * @param {DescribeCustomRiskRuleDetailRequest} req
+     * @param {function(string, DescribeCustomRiskRuleDetailResponse):void} cb
+     * @public
+     */
+    DescribeCustomRiskRuleDetail(req, cb) {
+        let resp = new DescribeCustomRiskRuleDetailResponse();
+        this.request("DescribeCustomRiskRuleDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the intranet alert and asset scope configuration for rebound Shell.
+     * @param {ModifyReverseShellSystemPolicyConfigRequest} req
+     * @param {function(string, ModifyReverseShellSystemPolicyConfigResponse):void} cb
+     * @public
+     */
+    ModifyReverseShellSystemPolicyConfig(req, cb) {
+        let resp = new ModifyReverseShellSystemPolicyConfigResponse();
+        this.request("ModifyReverseShellSystemPolicyConfig", req, resp, cb);
+    }
+
+    /**
+     * Public network asset
+     * @param {DescribePublicCloudAssetsRequest} req
+     * @param {function(string, DescribePublicCloudAssetsResponse):void} cb
+     * @public
+     */
+    DescribePublicCloudAssets(req, cb) {
+        let resp = new DescribePublicCloudAssetsResponse();
+        this.request("DescribePublicCloudAssets", req, resp, cb);
+    }
+
+    /**
+     * Synchronize the mirror repository
+     * @param {SyncImageRegistryRequest} req
+     * @param {function(string, SyncImageRegistryResponse):void} cb
+     * @public
+     */
+    SyncImageRegistry(req, cb) {
+        let resp = new SyncImageRegistryResponse();
+        this.request("SyncImageRegistry", req, resp, cb);
+    }
+
+    /**
+     * Query Dspm asset login credentials
+     * @param {DescribeDspmAssetLoginCredentialRequest} req
+     * @param {function(string, DescribeDspmAssetLoginCredentialResponse):void} cb
+     * @public
+     */
+    DescribeDspmAssetLoginCredential(req, cb) {
+        let resp = new DescribeDspmAssetLoginCredentialResponse();
+        this.request("DescribeDspmAssetLoginCredential", req, resp, cb);
+    }
+
+    /**
+     * Modify notification settings
+     * @param {ModifyNotifySettingAkRequest} req
+     * @param {function(string, ModifyNotifySettingAkResponse):void} cb
+     * @public
+     */
+    ModifyNotifySettingAk(req, cb) {
+        let resp = new ModifyNotifySettingAkResponse();
+        this.request("ModifyNotifySettingAk", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query asset database information.
+     * @param {ModifyImageVirusWhitelistRequest} req
+     * @param {function(string, ModifyImageVirusWhitelistResponse):void} cb
+     * @public
+     */
+    ModifyImageVirusWhitelist(req, cb) {
+        let resp = new ModifyImageVirusWhitelistResponse();
+        this.request("ModifyImageVirusWhitelist", req, resp, cb);
+    }
+
+    /**
+     * Query the list of AI scheduled tasks.
+
+Supports paging query and status filtering, and returns the scheduled task list and total number of entries.
+     * @param {DescribeAIScheduleListRequest} req
+     * @param {function(string, DescribeAIScheduleListResponse):void} cb
+     * @public
+     */
+    DescribeAIScheduleList(req, cb) {
+        let resp = new DescribeAIScheduleListResponse();
+        this.request("DescribeAIScheduleList", req, resp, cb);
+    }
+
+    /**
+     * Synchronize assets supported by dspm
+     * @param {SyncDspmAssetsRequest} req
+     * @param {function(string, SyncDspmAssetsResponse):void} cb
+     * @public
+     */
+    SyncDspmAssets(req, cb) {
+        let resp = new SyncDspmAssetsResponse();
+        this.request("SyncDspmAssets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the cross-region log-in allowlist rules.
+     * @param {DeleteLoginWhiteListRequest} req
+     * @param {function(string, DeleteLoginWhiteListResponse):void} cb
+     * @public
+     */
+    DeleteLoginWhiteList(req, cb) {
+        let resp = new DeleteLoginWhiteListResponse();
+        this.request("DeleteLoginWhiteList", req, resp, cb);
+    }
+
+    /**
+     * Batch Modify Sensitive Information Allowlist for Container Images
+     * @param {BatchModifyImageSensitiveWhitelistRequest} req
+     * @param {function(string, BatchModifyImageSensitiveWhitelistResponse):void} cb
+     * @public
+     */
+    BatchModifyImageSensitiveWhitelist(req, cb) {
+        let resp = new BatchModifyImageSensitiveWhitelistResponse();
+        this.request("BatchModifyImageSensitiveWhitelist", req, resp, cb);
+    }
+
+    /**
+     * Obtain Port Risk List from Asset's Perspective
      * @param {DescribeRiskCenterAssetViewPortRiskListRequest} req
      * @param {function(string, DescribeRiskCenterAssetViewPortRiskListResponse):void} cb
      * @public
@@ -947,7 +2774,18 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Cloud Boundary Analysis Asset List.
+     * Log analytics retrieval interface v3
+     * @param {DescribeCLSLogListV3Request} req
+     * @param {function(string, DescribeCLSLogListV3Response):void} cb
+     * @public
+     */
+    DescribeCLSLogListV3(req, cb) {
+        let resp = new DescribeCLSLogListV3Response();
+        this.request("DescribeCLSLogListV3", req, resp, cb);
+    }
+
+    /**
+     * Cloud boundary analysis asset list
      * @param {DescribeExposuresRequest} req
      * @param {function(string, DescribeExposuresResponse):void} cb
      * @public
@@ -955,6 +2793,1915 @@ class CsipClient extends AbstractClient {
     DescribeExposures(req, cb) {
         let resp = new DescribeExposuresResponse();
         this.request("DescribeExposures", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the switch status of EDR policies.
+     * @param {ModifyEDRRuleStatusRequest} req
+     * @param {function(string, ModifyEDRRuleStatusResponse):void} cb
+     * @public
+     */
+    ModifyEDRRuleStatus(req, cb) {
+        let resp = new ModifyEDRRuleStatusResponse();
+        this.request("ModifyEDRRuleStatus", req, resp, cb);
+    }
+
+    /**
+     * Creates a Dspm access record export task
+     * @param {CreateDspmAccessExportJobRequest} req
+     * @param {function(string, CreateDspmAccessExportJobResponse):void} cb
+     * @public
+     */
+    CreateDspmAccessExportJob(req, cb) {
+        let resp = new CreateDspmAccessExportJobResponse();
+        this.request("CreateDspmAccessExportJob", req, resp, cb);
+    }
+
+    /**
+     * Edit the remark of an access key/source IP.
+     * @param {UpdateAccessKeyRemarkRequest} req
+     * @param {function(string, UpdateAccessKeyRemarkResponse):void} cb
+     * @public
+     */
+    UpdateAccessKeyRemark(req, cb) {
+        let resp = new UpdateAccessKeyRemarkResponse();
+        this.request("UpdateAccessKeyRemark", req, resp, cb);
+    }
+
+    /**
+     * View the scheduled scan task configuration of a mirror repository
+     * @param {DescribeImageRegistryTimedScanTaskConfigRequest} req
+     * @param {function(string, DescribeImageRegistryTimedScanTaskConfigResponse):void} cb
+     * @public
+     */
+    DescribeImageRegistryTimedScanTaskConfig(req, cb) {
+        let resp = new DescribeImageRegistryTimedScanTaskConfigResponse();
+        this.request("DescribeImageRegistryTimedScanTaskConfig", req, resp, cb);
+    }
+
+    /**
+     * Retrieves EDR alarm statistics
+     * @param {DescribeEdrAlertSummaryRequest} req
+     * @param {function(string, DescribeEdrAlertSummaryResponse):void} cb
+     * @public
+     */
+    DescribeEdrAlertSummary(req, cb) {
+        let resp = new DescribeEdrAlertSummaryResponse();
+        this.request("DescribeEdrAlertSummary", req, resp, cb);
+    }
+
+    /**
+     * Get the scan subtask list to show the scan status and failure reason of each host or cluster in the "Asset dimension" section of the task details page.
+     * @param {DescribeBaselineSubTaskListRequest} req
+     * @param {function(string, DescribeBaselineSubTaskListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineSubTaskList(req, cb) {
+        let resp = new DescribeBaselineSubTaskListResponse();
+        this.request("DescribeBaselineSubTaskList", req, resp, cb);
+    }
+
+    /**
+     * Export Task for Exposed Assets
+     * @param {CreateExposuresExportJobRequest} req
+     * @param {function(string, CreateExposuresExportJobResponse):void} cb
+     * @public
+     */
+    CreateExposuresExportJob(req, cb) {
+        let resp = new CreateExposuresExportJobResponse();
+        this.request("CreateExposuresExportJob", req, resp, cb);
+    }
+
+    /**
+     * Queries Dspm instances
+     * @param {DescribeDspmResourceRequest} req
+     * @param {function(string, DescribeDspmResourceResponse):void} cb
+     * @public
+     */
+    DescribeDspmResource(req, cb) {
+        let resp = new DescribeDspmResourceResponse();
+        this.request("DescribeDspmResource", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the baseline synchronization configuration of the current account (admin). When AutoSync is true, TargetAppidList cannot be empty and its elements cannot be 0.
+     * @param {ModifyBaselineSyncConfRequest} req
+     * @param {function(string, ModifyBaselineSyncConfResponse):void} cb
+     * @public
+     */
+    ModifyBaselineSyncConf(req, cb) {
+        let resp = new ModifyBaselineSyncConfResponse();
+        this.request("ModifyBaselineSyncConf", req, resp, cb);
+    }
+
+    /**
+     * Modify the status of a Dspm Asset Data scan task
+     * @param {ModifyDspmAssetDataScanTaskStatusRequest} req
+     * @param {function(string, ModifyDspmAssetDataScanTaskStatusResponse):void} cb
+     * @public
+     */
+    ModifyDspmAssetDataScanTaskStatus(req, cb) {
+        let resp = new ModifyDspmAssetDataScanTaskStatusResponse();
+        this.request("ModifyDspmAssetDataScanTaskStatus", req, resp, cb);
+    }
+
+    /**
+     * Deletes the vulnerability allowlist of a container image
+     * @param {DeleteImageVulWhitelistRequest} req
+     * @param {function(string, DeleteImageVulWhitelistResponse):void} cb
+     * @public
+     */
+    DeleteImageVulWhitelist(req, cb) {
+        let resp = new DeleteImageVulWhitelistResponse();
+        this.request("DeleteImageVulWhitelist", req, resp, cb);
+    }
+
+    /**
+     * Tag an asset as core or not.
+     * @param {ModifyAssetCoreAttributeRequest} req
+     * @param {function(string, ModifyAssetCoreAttributeResponse):void} cb
+     * @public
+     */
+    ModifyAssetCoreAttribute(req, cb) {
+        let resp = new ModifyAssetCoreAttributeResponse();
+        this.request("ModifyAssetCoreAttribute", req, resp, cb);
+    }
+
+    /**
+     * Queries Dspm visitor application records.
+     * @param {DescribeDspmPersonApplyHistoryRequest} req
+     * @param {function(string, DescribeDspmPersonApplyHistoryResponse):void} cb
+     * @public
+     */
+    DescribeDspmPersonApplyHistory(req, cb) {
+        let resp = new DescribeDspmPersonApplyHistoryResponse();
+        this.request("DescribeDspmPersonApplyHistory", req, resp, cb);
+    }
+
+    /**
+     * Batch Modify Vulnerability Allowlist for Container Images
+     * @param {BatchModifyImageVulWhitelistRequest} req
+     * @param {function(string, BatchModifyImageVulWhitelistResponse):void} cb
+     * @public
+     */
+    BatchModifyImageVulWhitelist(req, cb) {
+        let resp = new BatchModifyImageVulWhitelistResponse();
+        this.request("BatchModifyImageVulWhitelist", req, resp, cb);
+    }
+
+    /**
+     * Query the Dspm allowlist policy.
+     * @param {DescribeDspmWhitelistStrategyRequest} req
+     * @param {function(string, DescribeDspmWhitelistStrategyResponse):void} cb
+     * @public
+     */
+    DescribeDspmWhitelistStrategy(req, cb) {
+        let resp = new DescribeDspmWhitelistStrategyResponse();
+        this.request("DescribeDspmWhitelistStrategy", req, resp, cb);
+    }
+
+    /**
+     * List of boundary rules
+     * @param {DescribeExposeRulesRequest} req
+     * @param {function(string, DescribeExposeRulesResponse):void} cb
+     * @public
+     */
+    DescribeExposeRules(req, cb) {
+        let resp = new DescribeExposeRulesResponse();
+        this.request("DescribeExposeRules", req, resp, cb);
+    }
+
+    /**
+     * number of user-customized tags
+     * @param {DescribeCustomAssetTagCountRequest} req
+     * @param {function(string, DescribeCustomAssetTagCountResponse):void} cb
+     * @public
+     */
+    DescribeCustomAssetTagCount(req, cb) {
+        let resp = new DescribeCustomAssetTagCountResponse();
+        this.request("DescribeCustomAssetTagCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query user access key asset list from source IP perspective.
+     * @param {DescribeSourceIPDetailRequest} req
+     * @param {function(string, DescribeSourceIPDetailResponse):void} cb
+     * @public
+     */
+    DescribeSourceIPDetail(req, cb) {
+        let resp = new DescribeSourceIPDetailResponse();
+        this.request("DescribeSourceIPDetail", req, resp, cb);
+    }
+
+    /**
+     * Query the number of port scanning tasks under the current account.
+     * @param {DescribePortScanTaskCountRequest} req
+     * @param {function(string, DescribePortScanTaskCountResponse):void} cb
+     * @public
+     */
+    DescribePortScanTaskCount(req, cb) {
+        let resp = new DescribePortScanTaskCountResponse();
+        this.request("DescribePortScanTaskCount", req, resp, cb);
+    }
+
+    /**
+     * Query the dspm data identification classification group list
+     * @param {DescribeDspmIdentifyLevelGroupListRequest} req
+     * @param {function(string, DescribeDspmIdentifyLevelGroupListResponse):void} cb
+     * @public
+     */
+    DescribeDspmIdentifyLevelGroupList(req, cb) {
+        let resp = new DescribeDspmIdentifyLevelGroupListResponse();
+        this.request("DescribeDspmIdentifyLevelGroupList", req, resp, cb);
+    }
+
+    /**
+     * Sample risk detail list
+     * @param {DescribeRiskDetailListRequest} req
+     * @param {function(string, DescribeRiskDetailListResponse):void} cb
+     * @public
+     */
+    DescribeRiskDetailList(req, cb) {
+        let resp = new DescribeRiskDetailListResponse();
+        this.request("DescribeRiskDetailList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to configure protection settings for the major event protection package.
+     * @param {ModifyProtectionSettingRequest} req
+     * @param {function(string, ModifyProtectionSettingResponse):void} cb
+     * @public
+     */
+    ModifyProtectionSetting(req, cb) {
+        let resp = new ModifyProtectionSettingResponse();
+        this.request("ModifyProtectionSetting", req, resp, cb);
+    }
+
+    /**
+     * Terminate an image scanning task in a mirror repository
+     * @param {StopImageRegistryScanTaskRequest} req
+     * @param {function(string, StopImageRegistryScanTaskResponse):void} cb
+     * @public
+     */
+    StopImageRegistryScanTask(req, cb) {
+        let resp = new StopImageRegistryScanTaskResponse();
+        this.request("StopImageRegistryScanTask", req, resp, cb);
+    }
+
+    /**
+     * Batch modify the processing status of Skill security detection alarms.
+     * @param {ModifySkillScanAlertStatusRequest} req
+     * @param {function(string, ModifySkillScanAlertStatusResponse):void} cb
+     * @public
+     */
+    ModifySkillScanAlertStatus(req, cb) {
+        let resp = new ModifySkillScanAlertStatusResponse();
+        this.request("ModifySkillScanAlertStatus", req, resp, cb);
+    }
+
+    /**
+     * Update the asset search view.
+     * @param {ModifyAssetFilterViewRequest} req
+     * @param {function(string, ModifyAssetFilterViewResponse):void} cb
+     * @public
+     */
+    ModifyAssetFilterView(req, cb) {
+        let resp = new ModifyAssetFilterViewResponse();
+        this.request("ModifyAssetFilterView", req, resp, cb);
+    }
+
+    /**
+     * Modify the Dspm allowlist policy
+     * @param {ModifyDspmWhitelistStrategyRequest} req
+     * @param {function(string, ModifyDspmWhitelistStrategyResponse):void} cb
+     * @public
+     */
+    ModifyDspmWhitelistStrategy(req, cb) {
+        let resp = new ModifyDspmWhitelistStrategyResponse();
+        this.request("ModifyDspmWhitelistStrategy", req, resp, cb);
+    }
+
+    /**
+     * Modifies dspm data identification classification groups
+     * @param {ModifyDspmIdentifyLevelGroupRequest} req
+     * @param {function(string, ModifyDspmIdentifyLevelGroupResponse):void} cb
+     * @public
+     */
+    ModifyDspmIdentifyLevelGroup(req, cb) {
+        let resp = new ModifyDspmIdentifyLevelGroupResponse();
+        this.request("ModifyDspmIdentifyLevelGroup", req, resp, cb);
+    }
+
+    /**
+     * Add asset administrator
+     * @param {AddDspmAssetManagerRequest} req
+     * @param {function(string, AddDspmAssetManagerResponse):void} cb
+     * @public
+     */
+    AddDspmAssetManager(req, cb) {
+        let resp = new AddDspmAssetManagerResponse();
+        this.request("AddDspmAssetManager", req, resp, cb);
+    }
+
+    /**
+     * Exported task for exposed surface scanning results
+     * @param {CreateScanStatisticExportJobRequest} req
+     * @param {function(string, CreateScanStatisticExportJobResponse):void} cb
+     * @public
+     */
+    CreateScanStatisticExportJob(req, cb) {
+        let resp = new CreateScanStatisticExportJobResponse();
+        this.request("CreateScanStatisticExportJob", req, resp, cb);
+    }
+
+    /**
+     * Query the container list of a cluster.
+     * @param {DescribeClusterContainerListRequest} req
+     * @param {function(string, DescribeClusterContainerListResponse):void} cb
+     * @public
+     */
+    DescribeClusterContainerList(req, cb) {
+        let resp = new DescribeClusterContainerListResponse();
+        this.request("DescribeClusterContainerList", req, resp, cb);
+    }
+
+    /**
+     * Add mirror repository information.
+     * @param {AddImageRegistryRequest} req
+     * @param {function(string, AddImageRegistryResponse):void} cb
+     * @public
+     */
+    AddImageRegistry(req, cb) {
+        let resp = new AddImageRegistryResponse();
+        this.request("AddImageRegistry", req, resp, cb);
+    }
+
+    /**
+     * Create command sandbox file access policy
+     * @param {CreateSandboxFileRuleRequest} req
+     * @param {function(string, CreateSandboxFileRuleResponse):void} cb
+     * @public
+     */
+    CreateSandboxFileRule(req, cb) {
+        let resp = new CreateSandboxFileRuleResponse();
+        this.request("CreateSandboxFileRule", req, resp, cb);
+    }
+
+    /**
+     * Search the skill list of an AI Agent
+     * @param {DescribeAIAgentSkillListRequest} req
+     * @param {function(string, DescribeAIAgentSkillListResponse):void} cb
+     * @public
+     */
+    DescribeAIAgentSkillList(req, cb) {
+        let resp = new DescribeAIAgentSkillListResponse();
+        this.request("DescribeAIAgentSkillList", req, resp, cb);
+    }
+
+    /**
+     * All assets
+     * @param {DescribeCloudAssetsRequest} req
+     * @param {function(string, DescribeCloudAssetsResponse):void} cb
+     * @public
+     */
+    DescribeCloudAssets(req, cb) {
+        let resp = new DescribeCloudAssetsResponse();
+        this.request("DescribeCloudAssets", req, resp, cb);
+    }
+
+    /**
+     * Retrieve header data of the baseline overview page, including the total count of failed detection items, the number of fixes in the past one year, the last scan time, and whether period scanning is currently enabled.
+     * @param {DescribeBaselineOverviewRequest} req
+     * @param {function(string, DescribeBaselineOverviewResponse):void} cb
+     * @public
+     */
+    DescribeBaselineOverview(req, cb) {
+        let resp = new DescribeBaselineOverviewResponse();
+        this.request("DescribeBaselineOverview", req, resp, cb);
+    }
+
+    /**
+     * Modify Risk Center Risk Status
+     * @param {ModifyRiskCenterRiskStatusRequest} req
+     * @param {function(string, ModifyRiskCenterRiskStatusResponse):void} cb
+     * @public
+     */
+    ModifyRiskCenterRiskStatus(req, cb) {
+        let resp = new ModifyRiskCenterRiskStatusResponse();
+        this.request("ModifyRiskCenterRiskStatus", req, resp, cb);
+    }
+
+    /**
+     * Query the Dspm access topology asset list
+     * @param {DescribeDspmAccessTopologyAssetsRequest} req
+     * @param {function(string, DescribeDspmAccessTopologyAssetsResponse):void} cb
+     * @public
+     */
+    DescribeDspmAccessTopologyAssets(req, cb) {
+        let resp = new DescribeDspmAccessTopologyAssetsResponse();
+        this.request("DescribeDspmAccessTopologyAssets", req, resp, cb);
+    }
+
+    /**
+     * Tag risks or alarms as processed or ignored.
+     * @param {UpdateAccessKeyAlarmStatusRequest} req
+     * @param {function(string, UpdateAccessKeyAlarmStatusResponse):void} cb
+     * @public
+     */
+    UpdateAccessKeyAlarmStatus(req, cb) {
+        let resp = new UpdateAccessKeyAlarmStatusResponse();
+        this.request("UpdateAccessKeyAlarmStatus", req, resp, cb);
+    }
+
+    /**
+     * Enable AI scheduled tasks.
+
+Set the status of the specified AI scheduled task to enabled. After it is enabled, the task will automatically execute based on the trigger configuration.
+     * @param {EnableAIScheduleRequest} req
+     * @param {function(string, EnableAIScheduleResponse):void} cb
+     * @public
+     */
+    EnableAISchedule(req, cb) {
+        let resp = new EnableAIScheduleResponse();
+        this.request("EnableAISchedule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to retrieve vulnerability scanning task detail
+     * @param {DescribeVulScanTaskDetailRequest} req
+     * @param {function(string, DescribeVulScanTaskDetailResponse):void} cb
+     * @public
+     */
+    DescribeVulScanTaskDetail(req, cb) {
+        let resp = new DescribeVulScanTaskDetailResponse();
+        this.request("DescribeVulScanTaskDetail", req, resp, cb);
+    }
+
+    /**
+     * Uninstall the key sandbox SKILL from designated machine instances. Support batch operations, allowing multiple instance IDs at once. After uninstallation, the AI Agent on the target machine will not be able to access credentials via the key sandbox proxy. Repeated calls on instances not installed will not trigger an error (idempotent), and are directly deemed successful.
+     * @param {UninstallKeySandboxSkillRequest} req
+     * @param {function(string, UninstallKeySandboxSkillResponse):void} cb
+     * @public
+     */
+    UninstallKeySandboxSkill(req, cb) {
+        let resp = new UninstallKeySandboxSkillResponse();
+        this.request("UninstallKeySandboxSkill", req, resp, cb);
+    }
+
+    /**
+     * Modify the network attack detection switch and asset scope configuration.
+     * @param {ModifyNetAttackSettingRequest} req
+     * @param {function(string, ModifyNetAttackSettingResponse):void} cb
+     * @public
+     */
+    ModifyNetAttackSetting(req, cb) {
+        let resp = new ModifyNetAttackSettingResponse();
+        this.request("ModifyNetAttackSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of existing users for a baseline policy name.
+     * @param {DescribeBaselinePolicyNameExistAppidListRequest} req
+     * @param {function(string, DescribeBaselinePolicyNameExistAppidListResponse):void} cb
+     * @public
+     */
+    DescribeBaselinePolicyNameExistAppidList(req, cb) {
+        let resp = new DescribeBaselinePolicyNameExistAppidListResponse();
+        this.request("DescribeBaselinePolicyNameExistAppidList", req, resp, cb);
+    }
+
+    /**
+     * Query Dspm risk group policies
+     * @param {DescribeDspmRiskStrategyGroupRequest} req
+     * @param {function(string, DescribeDspmRiskStrategyGroupResponse):void} cb
+     * @public
+     */
+    DescribeDspmRiskStrategyGroup(req, cb) {
+        let resp = new DescribeDspmRiskStrategyGroupResponse();
+        this.request("DescribeDspmRiskStrategyGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the TCR instance list.
+     * @param {DescribeTCRInstanceListRequest} req
+     * @param {function(string, DescribeTCRInstanceListResponse):void} cb
+     * @public
+     */
+    DescribeTCRInstanceList(req, cb) {
+        let resp = new DescribeTCRInstanceListResponse();
+        this.request("DescribeTCRInstanceList", req, resp, cb);
+    }
+
+    /**
+     * This example shows you how to obtain the cluster list.
+     * @param {DescribeClusterAssetsRequest} req
+     * @param {function(string, DescribeClusterAssetsResponse):void} cb
+     * @public
+     */
+    DescribeClusterAssets(req, cb) {
+        let resp = new DescribeClusterAssetsResponse();
+        this.request("DescribeClusterAssets", req, resp, cb);
+    }
+
+    /**
+     * Modify the Dspm asset log delivery switch.
+     * @param {ModifyDspmAssetLogDeliverySwitchRequest} req
+     * @param {function(string, ModifyDspmAssetLogDeliverySwitchResponse):void} cb
+     * @public
+     */
+    ModifyDspmAssetLogDeliverySwitch(req, cb) {
+        let resp = new ModifyDspmAssetLogDeliverySwitchResponse();
+        this.request("ModifyDspmAssetLogDeliverySwitch", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the image repository list.
+     * @param {DescribeImageRegistryListRequest} req
+     * @param {function(string, DescribeImageRegistryListResponse):void} cb
+     * @public
+     */
+    DescribeImageRegistryList(req, cb) {
+        let resp = new DescribeImageRegistryListResponse();
+        this.request("DescribeImageRegistryList", req, resp, cb);
+    }
+
+    /**
+     * Query the security group rules correspond to the specified security group ID.
+     * @param {DescribeSecurityGroupPolicyRequest} req
+     * @param {function(string, DescribeSecurityGroupPolicyResponse):void} cb
+     * @public
+     */
+    DescribeSecurityGroupPolicy(req, cb) {
+        let resp = new DescribeSecurityGroupPolicyResponse();
+        this.request("DescribeSecurityGroupPolicy", req, resp, cb);
+    }
+
+    /**
+     * Querying preset privileged information of Dspm asset accounts
+     * @param {DescribeDspmAssetAccountPresetPrivilegesRequest} req
+     * @param {function(string, DescribeDspmAssetAccountPresetPrivilegesResponse):void} cb
+     * @public
+     */
+    DescribeDspmAssetAccountPresetPrivileges(req, cb) {
+        let resp = new DescribeDspmAssetAccountPresetPrivilegesResponse();
+        this.request("DescribeDspmAssetAccountPresetPrivileges", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of EDR policies.
+     * @param {DescribeEDRRuleListRequest} req
+     * @param {function(string, DescribeEDRRuleListResponse):void} cb
+     * @public
+     */
+    DescribeEDRRuleList(req, cb) {
+        let resp = new DescribeEDRRuleListResponse();
+        this.request("DescribeEDRRuleList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query super node details in a cluster and return basic info (region, availability zone, last asset update time, node origin, subnet, and core count) and cluster information (cluster name, Cluster ID, cluster status, Kubernetes version, and Kubelet version).
+     * @param {DescribeClusterSuperNodeInfoRequest} req
+     * @param {function(string, DescribeClusterSuperNodeInfoResponse):void} cb
+     * @public
+     */
+    DescribeClusterSuperNodeInfo(req, cb) {
+        let resp = new DescribeClusterSuperNodeInfoResponse();
+        this.request("DescribeClusterSuperNodeInfo", req, resp, cb);
+    }
+
+    /**
+     * Creates a cluster namespace list export task. The export fields include namespace name, Labels, and creation time. Filter filtering is supported. Export is implemented through an async task. After JobId is returned, the frontend polls to query the export task status.
+     * @param {CreateClusterNamespaceListExportJobRequest} req
+     * @param {function(string, CreateClusterNamespaceListExportJobResponse):void} cb
+     * @public
+     */
+    CreateClusterNamespaceListExportJob(req, cb) {
+        let resp = new CreateClusterNamespaceListExportJobResponse();
+        this.request("CreateClusterNamespaceListExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the associated application list of a container. It retrieves associated application service information by container ID and supports pagination.
+     * @param {DescribeClusterContainerAppListRequest} req
+     * @param {function(string, DescribeClusterContainerAppListResponse):void} cb
+     * @public
+     */
+    DescribeClusterContainerAppList(req, cb) {
+        let resp = new DescribeClusterContainerAppListResponse();
+        this.request("DescribeClusterContainerAppList", req, resp, cb);
+    }
+
+    /**
+     * Vulnerability list in the risk center of the new security center
+     * @param {DescribeVULListRequest} req
+     * @param {function(string, DescribeVULListResponse):void} cb
+     * @public
+     */
+    DescribeVULList(req, cb) {
+        let resp = new DescribeVULListResponse();
+        this.request("DescribeVULList", req, resp, cb);
+    }
+
+    /**
+     * Modify dspm data identification grading information.
+     * @param {ModifyDspmIdentifyLevelItemRequest} req
+     * @param {function(string, ModifyDspmIdentifyLevelItemResponse):void} cb
+     * @public
+     */
+    ModifyDspmIdentifyLevelItem(req, cb) {
+        let resp = new ModifyDspmIdentifyLevelItemResponse();
+        this.request("ModifyDspmIdentifyLevelItem", req, resp, cb);
+    }
+
+    /**
+     * Queries the listener list corresponding to a specified Tencent Cloud CLB instance.
+     * @param {DescribeClbListenerListRequest} req
+     * @param {function(string, DescribeClbListenerListResponse):void} cb
+     * @public
+     */
+    DescribeClbListenerList(req, cb) {
+        let resp = new DescribeClbListenerListResponse();
+        this.request("DescribeClbListenerList", req, resp, cb);
+    }
+
+    /**
+     * Risk statistics for cloud resource configuration check reports
+     * @param {DescribeCFGRiskReportStatisticsRequest} req
+     * @param {function(string, DescribeCFGRiskReportStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeCFGRiskReportStatistics(req, cb) {
+        let resp = new DescribeCFGRiskReportStatisticsResponse();
+        this.request("DescribeCFGRiskReportStatistics", req, resp, cb);
+    }
+
+    /**
+     * List of specified asset types
+     * @param {DescribeDynamicAssetsRequest} req
+     * @param {function(string, DescribeDynamicAssetsResponse):void} cb
+     * @public
+     */
+    DescribeDynamicAssets(req, cb) {
+        let resp = new DescribeDynamicAssetsResponse();
+        this.request("DescribeDynamicAssets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an ACL user access control rule. You can refer to several system rules or define a custom rule. At least one of them must be provided.
+     * @param {CreateSandboxACLRuleRequest} req
+     * @param {function(string, CreateSandboxACLRuleResponse):void} cb
+     * @public
+     */
+    CreateSandboxACLRule(req, cb) {
+        let resp = new CreateSandboxACLRuleResponse();
+        this.request("CreateSandboxACLRule", req, resp, cb);
+    }
+
+    /**
+     * Delete the scheduled scan task configuration of an image repository.
+     * @param {DeleteImageRegistryTimedScanTaskConfigRequest} req
+     * @param {function(string, DeleteImageRegistryTimedScanTaskConfigResponse):void} cb
+     * @public
+     */
+    DeleteImageRegistryTimedScanTaskConfig(req, cb) {
+        let resp = new DeleteImageRegistryTimedScanTaskConfigResponse();
+        this.request("DeleteImageRegistryTimedScanTaskConfig", req, resp, cb);
+    }
+
+    /**
+     * Create a Dspm allowlist policy.
+     * @param {CreateDspmWhitelistStrategyRequest} req
+     * @param {function(string, CreateDspmWhitelistStrategyResponse):void} cb
+     * @public
+     */
+    CreateDspmWhitelistStrategy(req, cb) {
+        let resp = new CreateDspmWhitelistStrategyResponse();
+        this.request("CreateDspmWhitelistStrategy", req, resp, cb);
+    }
+
+    /**
+     * Sample code for creating a cloud resource configuration check risk details export task
+     * @param {CreateRiskDetailExportJobRequest} req
+     * @param {function(string, CreateRiskDetailExportJobResponse):void} cb
+     * @public
+     */
+    CreateRiskDetailExportJob(req, cb) {
+        let resp = new CreateRiskDetailExportJobResponse();
+        this.request("CreateRiskDetailExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain vulnerability scanning (period scanning).
+     * @param {DescribeVulScanPeriodicRequest} req
+     * @param {function(string, DescribeVulScanPeriodicResponse):void} cb
+     * @public
+     */
+    DescribeVulScanPeriodic(req, cb) {
+        let resp = new DescribeVulScanPeriodicResponse();
+        this.request("DescribeVulScanPeriodic", req, resp, cb);
+    }
+
+    /**
+     * Modifies notification settings
+     * @param {ModifyNotifySettingRequest} req
+     * @param {function(string, ModifyNotifySettingResponse):void} cb
+     * @public
+     */
+    ModifyNotifySetting(req, cb) {
+        let resp = new ModifyNotifySettingResponse();
+        this.request("ModifyNotifySetting", req, resp, cb);
+    }
+
+    /**
+     * Cloud resource configuration risk list from the asset perspective
+     * @param {DescribeAssetRiskListRequest} req
+     * @param {function(string, DescribeAssetRiskListResponse):void} cb
+     * @public
+     */
+    DescribeAssetRiskList(req, cb) {
+        let resp = new DescribeAssetRiskListResponse();
+        this.request("DescribeAssetRiskList", req, resp, cb);
+    }
+
+    /**
+     * Switch the enable status of the notification policy.
+     * @param {ModifyWebhookPolicyStatusRequest} req
+     * @param {function(string, ModifyWebhookPolicyStatusResponse):void} cb
+     * @public
+     */
+    ModifyWebhookPolicyStatus(req, cb) {
+        let resp = new ModifyWebhookPolicyStatusResponse();
+        this.request("ModifyWebhookPolicyStatus", req, resp, cb);
+    }
+
+    /**
+     * Queries the dspm data identification template list
+     * @param {DescribeDspmIdentifyComplianceGroupListRequest} req
+     * @param {function(string, DescribeDspmIdentifyComplianceGroupListResponse):void} cb
+     * @public
+     */
+    DescribeDspmIdentifyComplianceGroupList(req, cb) {
+        let resp = new DescribeDspmIdentifyComplianceGroupListResponse();
+        this.request("DescribeDspmIdentifyComplianceGroupList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to save the tenant CKafka configuration.
+     * @param {ModifyDspmCkafkaSaveRequest} req
+     * @param {function(string, ModifyDspmCkafkaSaveResponse):void} cb
+     * @public
+     */
+    ModifyDspmCkafkaSave(req, cb) {
+        let resp = new ModifyDspmCkafkaSaveResponse();
+        this.request("ModifyDspmCkafkaSave", req, resp, cb);
+    }
+
+    /**
+     * Port detection list
+     * @param {DescribePortDetectListRequest} req
+     * @param {function(string, DescribePortDetectListResponse):void} cb
+     * @public
+     */
+    DescribePortDetectList(req, cb) {
+        let resp = new DescribePortDetectListResponse();
+        this.request("DescribePortDetectList", req, resp, cb);
+    }
+
+    /**
+     * Queries the detailed information of the Trojan allowlist of an image.
+     * @param {DescribeImageVirusWhitelistDetailRequest} req
+     * @param {function(string, DescribeImageVirusWhitelistDetailResponse):void} cb
+     * @public
+     */
+    DescribeImageVirusWhitelistDetail(req, cb) {
+        let resp = new DescribeImageVirusWhitelistDetailResponse();
+        this.request("DescribeImageVirusWhitelistDetail", req, resp, cb);
+    }
+
+    /**
+     * Obtain Vulnerability Risk List from Asset's Perspective
+     * @param {DescribeRiskCenterAssetViewVULRiskListRequest} req
+     * @param {function(string, DescribeRiskCenterAssetViewVULRiskListResponse):void} cb
+     * @public
+     */
+    DescribeRiskCenterAssetViewVULRiskList(req, cb) {
+        let resp = new DescribeRiskCenterAssetViewVULRiskListResponse();
+        this.request("DescribeRiskCenterAssetViewVULRiskList", req, resp, cb);
+    }
+
+    /**
+     * Query the image layer information list
+     * @param {DescribeImageLayerListRequest} req
+     * @param {function(string, DescribeImageLayerListResponse):void} cb
+     * @public
+     */
+    DescribeImageLayerList(req, cb) {
+        let resp = new DescribeImageLayerListResponse();
+        this.request("DescribeImageLayerList", req, resp, cb);
+    }
+
+    /**
+     * Updates the CSPM automated quota manager shared switch.
+     * @param {ModifyCspmShardConfigRequest} req
+     * @param {function(string, ModifyCspmShardConfigResponse):void} cb
+     * @public
+     */
+    ModifyCspmShardConfig(req, cb) {
+        let resp = new ModifyCspmShardConfigResponse();
+        this.request("ModifyCspmShardConfig", req, resp, cb);
+    }
+
+    /**
+     * Get the detection item list of built-in baseline classifications (parent category -> subcategory -> built-in detection item ID list) for selecting baseline detection items on the policy editing page.
+     * @param {DescribeBaselineMainTaskItemListRequest} req
+     * @param {function(string, DescribeBaselineMainTaskItemListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineMainTaskItemList(req, cb) {
+        let resp = new DescribeBaselineMainTaskItemListResponse();
+        this.request("DescribeBaselineMainTaskItemList", req, resp, cb);
+    }
+
+    /**
+     * Paging query for the LLM audit alarm log list. Supports precise filtering of a single alarm by Filter.Name=ID for the details page scenario.
+     * @param {DescribeSandboxLLMAuditAlertListRequest} req
+     * @param {function(string, DescribeSandboxLLMAuditAlertListResponse):void} cb
+     * @public
+     */
+    DescribeSandboxLLMAuditAlertList(req, cb) {
+        let resp = new DescribeSandboxLLMAuditAlertListResponse();
+        this.request("DescribeSandboxLLMAuditAlertList", req, resp, cb);
+    }
+
+    /**
+     * Update the periodic scanning plan
+     * @param {ModifyRiskScanCronConfigRequest} req
+     * @param {function(string, ModifyRiskScanCronConfigResponse):void} cb
+     * @public
+     */
+    ModifyRiskScanCronConfig(req, cb) {
+        let resp = new ModifyRiskScanCronConfigResponse();
+        this.request("ModifyRiskScanCronConfig", req, resp, cb);
+    }
+
+    /**
+     * Obtain Port Risk List from Port's Perspective
+     * @param {DescribeRiskCenterPortViewPortRiskListRequest} req
+     * @param {function(string, DescribeRiskCenterPortViewPortRiskListResponse):void} cb
+     * @public
+     */
+    DescribeRiskCenterPortViewPortRiskList(req, cb) {
+        let resp = new DescribeRiskCenterPortViewPortRiskListResponse();
+        this.request("DescribeRiskCenterPortViewPortRiskList", req, resp, cb);
+    }
+
+    /**
+     * Delete a Dspm audit filter policy
+     * @param {DeleteDspmAuditFilterStrategyRequest} req
+     * @param {function(string, DeleteDspmAuditFilterStrategyResponse):void} cb
+     * @public
+     */
+    DeleteDspmAuditFilterStrategy(req, cb) {
+        let resp = new DeleteDspmAuditFilterStrategyResponse();
+        this.request("DeleteDspmAuditFilterStrategy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain purchased CSPM order information.
+     * @param {DescribeCSPMPayInfoRequest} req
+     * @param {function(string, DescribeCSPMPayInfoResponse):void} cb
+     * @public
+     */
+    DescribeCSPMPayInfo(req, cb) {
+        let resp = new DescribeCSPMPayInfoResponse();
+        this.request("DescribeCSPMPayInfo", req, resp, cb);
+    }
+
+    /**
+     * Create a Dspm personal identity id.
+     * @param {CreateDspmPersonalIdentifyRequest} req
+     * @param {function(string, CreateDspmPersonalIdentifyResponse):void} cb
+     * @public
+     */
+    CreateDspmPersonalIdentify(req, cb) {
+        let resp = new CreateDspmPersonalIdentifyResponse();
+        this.request("CreateDspmPersonalIdentify", req, resp, cb);
+    }
+
+    /**
+     * Queries the Dspm access topology account list
+     * @param {DescribeDspmAccessTopologyAccountsRequest} req
+     * @param {function(string, DescribeDspmAccessTopologyAccountsResponse):void} cb
+     * @public
+     */
+    DescribeDspmAccessTopologyAccounts(req, cb) {
+        let resp = new DescribeDspmAccessTopologyAccountsResponse();
+        this.request("DescribeDspmAccessTopologyAccounts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an asset sync task.
+     * @param {CreateAssetSyncTaskRequest} req
+     * @param {function(string, CreateAssetSyncTaskResponse):void} cb
+     * @public
+     */
+    CreateAssetSyncTask(req, cb) {
+        let resp = new CreateAssetSyncTaskResponse();
+        this.request("CreateAssetSyncTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the associated Web Service List of a container. It retrieves associated web service information by container ID and supports pagination.
+     * @param {DescribeClusterContainerWebServiceListRequest} req
+     * @param {function(string, DescribeClusterContainerWebServiceListResponse):void} cb
+     * @public
+     */
+    DescribeClusterContainerWebServiceList(req, cb) {
+        let resp = new DescribeClusterContainerWebServiceListResponse();
+        this.request("DescribeClusterContainerWebServiceList", req, resp, cb);
+    }
+
+    /**
+     * Host list
+     * @param {DescribeCWPMachinesRequest} req
+     * @param {function(string, DescribeCWPMachinesResponse):void} cb
+     * @public
+     */
+    DescribeCWPMachines(req, cb) {
+        let resp = new DescribeCWPMachinesResponse();
+        this.request("DescribeCWPMachines", req, resp, cb);
+    }
+
+    /**
+     * Modify a scheduled AI task.
+
+Partial update is supported. Only the passed-in optional fields are updated. Whether the trigger list is fully replaced is controlled by the UpdateTriggers flag.
+     * @param {ModifyAIScheduleRequest} req
+     * @param {function(string, ModifyAIScheduleResponse):void} cb
+     * @public
+     */
+    ModifyAISchedule(req, cb) {
+        let resp = new ModifyAIScheduleResponse();
+        this.request("ModifyAISchedule", req, resp, cb);
+    }
+
+    /**
+     * Retrieve the security scoring rules for the current account. If no custom rules exist, return the built-in default.
+     * @param {DescribeSecurityScoreRuleRequest} req
+     * @param {function(string, DescribeSecurityScoreRuleResponse):void} cb
+     * @public
+     */
+    DescribeSecurityScoreRule(req, cb) {
+        let resp = new DescribeSecurityScoreRuleResponse();
+        this.request("DescribeSecurityScoreRule", req, resp, cb);
+    }
+
+    /**
+     * Delete Domain and IP Request
+     * @param {DeleteDomainAndIpRequest} req
+     * @param {function(string, DeleteDomainAndIpResponse):void} cb
+     * @public
+     */
+    DeleteDomainAndIp(req, cb) {
+        let resp = new DeleteDomainAndIpResponse();
+        this.request("DeleteDomainAndIp", req, resp, cb);
+    }
+
+    /**
+     * Sample code for querying risk rule details
+     * @param {DescribeRiskRuleDetailRequest} req
+     * @param {function(string, DescribeRiskRuleDetailResponse):void} cb
+     * @public
+     */
+    DescribeRiskRuleDetail(req, cb) {
+        let resp = new DescribeRiskRuleDetailResponse();
+        this.request("DescribeRiskRuleDetail", req, resp, cb);
+    }
+
+    /**
+     * Obtain Network Interface Card List
+     * @param {DescribeNICAssetsRequest} req
+     * @param {function(string, DescribeNICAssetsResponse):void} cb
+     * @public
+     */
+    DescribeNICAssets(req, cb) {
+        let resp = new DescribeNICAssetsResponse();
+        this.request("DescribeNICAssets", req, resp, cb);
+    }
+
+    /**
+     * Domain name list
+     * @param {DescribeDomainAssetsRequest} req
+     * @param {function(string, DescribeDomainAssetsResponse):void} cb
+     * @public
+     */
+    DescribeDomainAssets(req, cb) {
+        let resp = new DescribeDomainAssetsResponse();
+        this.request("DescribeDomainAssets", req, resp, cb);
+    }
+
+    /**
+     * Modify the asset scope configuration for notifications
+     * @param {ModifyNotifyAssetConfigRequest} req
+     * @param {function(string, ModifyNotifyAssetConfigResponse):void} cb
+     * @public
+     */
+    ModifyNotifyAssetConfig(req, cb) {
+        let resp = new ModifyNotifyAssetConfigResponse();
+        this.request("ModifyNotifyAssetConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete AI scheduled tasks.
+
+This API is used to delete a scheduled task based on the specified AI scheduled task ID. Deletion is irreversible.
+     * @param {DeleteAIScheduleRequest} req
+     * @param {function(string, DeleteAIScheduleResponse):void} cb
+     * @public
+     */
+    DeleteAISchedule(req, cb) {
+        let resp = new DeleteAIScheduleResponse();
+        this.request("DeleteAISchedule", req, resp, cb);
+    }
+
+    /**
+     * Query the firewall rules of a lightweight application server
+     * @param {DescribeLighthouseFirewallRulesRequest} req
+     * @param {function(string, DescribeLighthouseFirewallRulesResponse):void} cb
+     * @public
+     */
+    DescribeLighthouseFirewallRules(req, cb) {
+        let resp = new DescribeLighthouseFirewallRulesResponse();
+        this.request("DescribeLighthouseFirewallRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable process guard.
+     * @param {StopProcessDaemonRequest} req
+     * @param {function(string, StopProcessDaemonResponse):void} cb
+     * @public
+     */
+    StopProcessDaemon(req, cb) {
+        let resp = new StopProcessDaemonResponse();
+        this.request("StopProcessDaemon", req, resp, cb);
+    }
+
+    /**
+     * Create an image asset list export task
+     * @param {CreateImageAssetListExportJobRequest} req
+     * @param {function(string, CreateImageAssetListExportJobResponse):void} cb
+     * @public
+     */
+    CreateImageAssetListExportJob(req, cb) {
+        let resp = new CreateImageAssetListExportJobResponse();
+        this.request("CreateImageAssetListExportJob", req, resp, cb);
+    }
+
+    /**
+     * Delete dspm data identification template
+     * @param {DeleteDspmIdentifyComplianceGroupRequest} req
+     * @param {function(string, DeleteDspmIdentifyComplianceGroupResponse):void} cb
+     * @public
+     */
+    DeleteDspmIdentifyComplianceGroup(req, cb) {
+        let resp = new DeleteDspmIdentifyComplianceGroupResponse();
+        this.request("DeleteDspmIdentifyComplianceGroup", req, resp, cb);
+    }
+
+    /**
+     * Handle the status of an EDR alert
+     * @param {ModifyEdrAlertStatusRequest} req
+     * @param {function(string, ModifyEdrAlertStatusResponse):void} cb
+     * @public
+     */
+    ModifyEdrAlertStatus(req, cb) {
+        let resp = new ModifyEdrAlertStatusResponse();
+        this.request("ModifyEdrAlertStatus", req, resp, cb);
+    }
+
+    /**
+     * Set the client running mode and configuration
+     * @param {ModifyAgentRunModeRequest} req
+     * @param {function(string, ModifyAgentRunModeResponse):void} cb
+     * @public
+     */
+    ModifyAgentRunMode(req, cb) {
+        let resp = new ModifyAgentRunModeResponse();
+        this.request("ModifyAgentRunMode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or update the global configuration for NFS scanning.
+     * @param {ModifyNFSScanConfRequest} req
+     * @param {function(string, ModifyNFSScanConfResponse):void} cb
+     * @public
+     */
+    ModifyNFSScanConf(req, cb) {
+        let resp = new ModifyNFSScanConfResponse();
+        this.request("ModifyNFSScanConf", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the log backup configuration.
+     * @param {DescribeDspmBackupSettingRequest} req
+     * @param {function(string, DescribeDspmBackupSettingResponse):void} cb
+     * @public
+     */
+    DescribeDspmBackupSetting(req, cb) {
+        let resp = new DescribeDspmBackupSettingResponse();
+        this.request("DescribeDspmBackupSetting", req, resp, cb);
+    }
+
+    /**
+     * Obtain Vulnerability Risk List from Asset's Perspective
+     * @param {DescribeAssetViewVulRiskListRequest} req
+     * @param {function(string, DescribeAssetViewVulRiskListResponse):void} cb
+     * @public
+     */
+    DescribeAssetViewVulRiskList(req, cb) {
+        let resp = new DescribeAssetViewVulRiskListResponse();
+        this.request("DescribeAssetViewVulRiskList", req, resp, cb);
+    }
+
+    /**
+     * Create a host process list export task
+     * @param {CreateAssetProcessExportJobRequest} req
+     * @param {function(string, CreateAssetProcessExportJobResponse):void} cb
+     * @public
+     */
+    CreateAssetProcessExportJob(req, cb) {
+        let resp = new CreateAssetProcessExportJobResponse();
+        this.request("CreateAssetProcessExportJob", req, resp, cb);
+    }
+
+    /**
+     * Queries cloud boundary analysis path nodes (dedicated for hosts)
+     * @param {DescribeCWPExposePathRequest} req
+     * @param {function(string, DescribeCWPExposePathResponse):void} cb
+     * @public
+     */
+    DescribeCWPExposePath(req, cb) {
+        let resp = new DescribeCWPExposePathResponse();
+        this.request("DescribeCWPExposePath", req, resp, cb);
+    }
+
+    /**
+     * Add a vulnerability allowlist
+     * @param {AddVulWhitelistRequest} req
+     * @param {function(string, AddVulWhitelistResponse):void} cb
+     * @public
+     */
+    AddVulWhitelist(req, cb) {
+        let resp = new AddVulWhitelistResponse();
+        this.request("AddVulWhitelist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the synchronization task status of cluster assets.
+     * @param {DescribeClusterAssetSyncTaskStatusRequest} req
+     * @param {function(string, DescribeClusterAssetSyncTaskStatusResponse):void} cb
+     * @public
+     */
+    DescribeClusterAssetSyncTaskStatus(req, cb) {
+        let resp = new DescribeClusterAssetSyncTaskStatusResponse();
+        this.request("DescribeClusterAssetSyncTaskStatus", req, resp, cb);
+    }
+
+    /**
+     * Batch enable or disable baseline policies. Once disabled, a policy will no longer be included in scans and statistics.
+     * @param {ModifyBaselinePolicyEnableRequest} req
+     * @param {function(string, ModifyBaselinePolicyEnableResponse):void} cb
+     * @public
+     */
+    ModifyBaselinePolicyEnable(req, cb) {
+        let resp = new ModifyBaselinePolicyEnableResponse();
+        this.request("ModifyBaselinePolicyEnable", req, resp, cb);
+    }
+
+    /**
+     * Modify alarm center notification advanced configuration
+     * @param {ModifyNotifySettingAlertRequest} req
+     * @param {function(string, ModifyNotifySettingAlertResponse):void} cb
+     * @public
+     */
+    ModifyNotifySettingAlert(req, cb) {
+        let resp = new ModifyNotifySettingAlertResponse();
+        this.request("ModifyNotifySettingAlert", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a cluster asset sync task.
+     * @param {CreateClusterAssetSyncTaskRequest} req
+     * @param {function(string, CreateClusterAssetSyncTaskResponse):void} cb
+     * @public
+     */
+    CreateClusterAssetSyncTask(req, cb) {
+        let resp = new CreateClusterAssetSyncTaskResponse();
+        this.request("CreateClusterAssetSyncTask", req, resp, cb);
+    }
+
+    /**
+     * Asset search view
+     * @param {DescribeAssetFilterViewsRequest} req
+     * @param {function(string, DescribeAssetFilterViewsResponse):void} cb
+     * @public
+     */
+    DescribeAssetFilterViews(req, cb) {
+        let resp = new DescribeAssetFilterViewsResponse();
+        this.request("DescribeAssetFilterViews", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a Dspm asset access topology export task.
+     * @param {CreateDspmAssetAccessTopologyExportJobRequest} req
+     * @param {function(string, CreateDspmAssetAccessTopologyExportJobResponse):void} cb
+     * @public
+     */
+    CreateDspmAssetAccessTopologyExportJob(req, cb) {
+        let resp = new CreateDspmAssetAccessTopologyExportJobResponse();
+        this.request("CreateDspmAssetAccessTopologyExportJob", req, resp, cb);
+    }
+
+    /**
+     * Create a Dspm instance
+     * @param {CreateDspmResourceRequest} req
+     * @param {function(string, CreateDspmResourceResponse):void} cb
+     * @public
+     */
+    CreateDspmResource(req, cb) {
+        let resp = new CreateDspmResourceResponse();
+        this.request("CreateDspmResource", req, resp, cb);
+    }
+
+    /**
+     * Create a mirror repository component associated image list export task.
+     * @param {CreateAssetComponentRelatedImageListExportJobRequest} req
+     * @param {function(string, CreateAssetComponentRelatedImageListExportJobResponse):void} cb
+     * @public
+     */
+    CreateAssetComponentRelatedImageListExportJob(req, cb) {
+        let resp = new CreateAssetComponentRelatedImageListExportJobResponse();
+        this.request("CreateAssetComponentRelatedImageListExportJob", req, resp, cb);
+    }
+
+    /**
+     * Risk verification example
+     * @param {CheckRiskRequest} req
+     * @param {function(string, CheckRiskResponse):void} cb
+     * @public
+     */
+    CheckRisk(req, cb) {
+        let resp = new CheckRiskResponse();
+        this.request("CheckRisk", req, resp, cb);
+    }
+
+    /**
+     * Creating a dspm Data Identification and Classification Group
+     * @param {CreateDspmIdentifyLevelGroupRequest} req
+     * @param {function(string, CreateDspmIdentifyLevelGroupResponse):void} cb
+     * @public
+     */
+    CreateDspmIdentifyLevelGroup(req, cb) {
+        let resp = new CreateDspmIdentifyLevelGroupResponse();
+        this.request("CreateDspmIdentifyLevelGroup", req, resp, cb);
+    }
+
+    /**
+     * Query client configuration settings (configuration group). This is a standalone API split from DescribeAgentRunMode.
+     * @param {DescribeAgentConfigSettingRequest} req
+     * @param {function(string, DescribeAgentConfigSettingResponse):void} cb
+     * @public
+     */
+    DescribeAgentConfigSetting(req, cb) {
+        let resp = new DescribeAgentConfigSettingResponse();
+        this.request("DescribeAgentConfigSetting", req, resp, cb);
+    }
+
+    /**
+     * Get the notification asset scope configuration.
+     * @param {DescribeNotifyAssetConfigRequest} req
+     * @param {function(string, DescribeNotifyAssetConfigResponse):void} cb
+     * @public
+     */
+    DescribeNotifyAssetConfig(req, cb) {
+        let resp = new DescribeNotifyAssetConfigResponse();
+        this.request("DescribeNotifyAssetConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the topic list of the instance.
+     * @param {DescribeDspmCkafkaTopicListRequest} req
+     * @param {function(string, DescribeDspmCkafkaTopicListResponse):void} cb
+     * @public
+     */
+    DescribeDspmCkafkaTopicList(req, cb) {
+        let resp = new DescribeDspmCkafkaTopicListResponse();
+        this.request("DescribeDspmCkafkaTopicList", req, resp, cb);
+    }
+
+    /**
+     * Get the Detection Item List configured in a policy.
+     * @param {DescribeBaselinePolicyItemListRequest} req
+     * @param {function(string, DescribeBaselinePolicyItemListResponse):void} cb
+     * @public
+     */
+    DescribeBaselinePolicyItemList(req, cb) {
+        let resp = new DescribeBaselinePolicyItemListResponse();
+        this.request("DescribeBaselinePolicyItemList", req, resp, cb);
+    }
+
+    /**
+     * Query the preview of a scheduled scan task in the mirror repository
+     * @param {DescribeImageRegistryTimedScanTaskPreviewRequest} req
+     * @param {function(string, DescribeImageRegistryTimedScanTaskPreviewResponse):void} cb
+     * @public
+     */
+    DescribeImageRegistryTimedScanTaskPreview(req, cb) {
+        let resp = new DescribeImageRegistryTimedScanTaskPreviewResponse();
+        this.request("DescribeImageRegistryTimedScanTaskPreview", req, resp, cb);
+    }
+
+    /**
+     * Query vulnerability information in the three-dimensional protection center.
+     * @param {DescribeSearchBugInfoRequest} req
+     * @param {function(string, DescribeSearchBugInfoResponse):void} cb
+     * @public
+     */
+    DescribeSearchBugInfo(req, cb) {
+        let resp = new DescribeSearchBugInfoResponse();
+        this.request("DescribeSearchBugInfo", req, resp, cb);
+    }
+
+    /**
+     * Triggered after you click start scanning. It supports multi-account and multiple asset types. When both hosts and container clusters are selected, it splits into two independent tasks (host + container).
+     * @param {CreateEDRManualScanRequest} req
+     * @param {function(string, CreateEDRManualScanResponse):void} cb
+     * @public
+     */
+    CreateEDRManualScan(req, cb) {
+        let resp = new CreateEDRManualScanResponse();
+        this.request("CreateEDRManualScan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an allowlist for sensitive information from a container image.
+     * @param {DeleteImageSensitiveWhitelistRequest} req
+     * @param {function(string, DeleteImageSensitiveWhitelistResponse):void} cb
+     * @public
+     */
+    DeleteImageSensitiveWhitelist(req, cb) {
+        let resp = new DeleteImageSensitiveWhitelistResponse();
+        this.request("DeleteImageSensitiveWhitelist", req, resp, cb);
+    }
+
+    /**
+     * Query the cluster node list.
+     * @param {DescribeClusterNodeListRequest} req
+     * @param {function(string, DescribeClusterNodeListResponse):void} cb
+     * @public
+     */
+    DescribeClusterNodeList(req, cb) {
+        let resp = new DescribeClusterNodeListResponse();
+        this.request("DescribeClusterNodeList", req, resp, cb);
+    }
+
+    /**
+     * Query the cluster installation command
+     * @param {DescribeClusterInstallCommandRequest} req
+     * @param {function(string, DescribeClusterInstallCommandResponse):void} cb
+     * @public
+     */
+    DescribeClusterInstallCommand(req, cb) {
+        let resp = new DescribeClusterInstallCommandResponse();
+        this.request("DescribeClusterInstallCommand", req, resp, cb);
+    }
+
+    /**
+     * Modify the Dspm asset log delivery switch
+     * @param {ModifyDspmAssetSecurityAnalysisSwitchRequest} req
+     * @param {function(string, ModifyDspmAssetSecurityAnalysisSwitchResponse):void} cb
+     * @public
+     */
+    ModifyDspmAssetSecurityAnalysisSwitch(req, cb) {
+        let resp = new ModifyDspmAssetSecurityAnalysisSwitchResponse();
+        this.request("ModifyDspmAssetSecurityAnalysisSwitch", req, resp, cb);
+    }
+
+    /**
+     * Query Group Account User List
+     * @param {DescribeOrganizationUserInfoRequest} req
+     * @param {function(string, DescribeOrganizationUserInfoResponse):void} cb
+     * @public
+     */
+    DescribeOrganizationUserInfo(req, cb) {
+        let resp = new DescribeOrganizationUserInfoResponse();
+        this.request("DescribeOrganizationUserInfo", req, resp, cb);
+    }
+
+    /**
+     * Detect async tasks of AK
+     * @param {CreateAccessKeyCheckTaskRequest} req
+     * @param {function(string, CreateAccessKeyCheckTaskResponse):void} cb
+     * @public
+     */
+    CreateAccessKeyCheckTask(req, cb) {
+        let resp = new CreateAccessKeyCheckTaskResponse();
+        this.request("CreateAccessKeyCheckTask", req, resp, cb);
+    }
+
+    /**
+     * Obtain Subnet List
+     * @param {DescribeSubnetAssetsRequest} req
+     * @param {function(string, DescribeSubnetAssetsResponse):void} cb
+     * @public
+     */
+    DescribeSubnetAssets(req, cb) {
+        let resp = new DescribeSubnetAssetsResponse();
+        this.request("DescribeSubnetAssets", req, resp, cb);
+    }
+
+    /**
+     * Queries Dspm risk records
+     * @param {DescribeDspmRiskRequest} req
+     * @param {function(string, DescribeDspmRiskResponse):void} cb
+     * @public
+     */
+    DescribeDspmRisk(req, cb) {
+        let resp = new DescribeDspmRiskResponse();
+        this.request("DescribeDspmRisk", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create or modify SMTP mailbox access requests.
+     * @param {AccessAIAnalysisSMTPRequest} req
+     * @param {function(string, AccessAIAnalysisSMTPResponse):void} cb
+     * @public
+     */
+    AccessAIAnalysisSMTP(req, cb) {
+        let resp = new AccessAIAnalysisSMTPResponse();
+        this.request("AccessAIAnalysisSMTP", req, resp, cb);
+    }
+
+    /**
+     * Create a baseline aggregation detection item export task. Use ExportType to select exporting statistics or risk details. You can limit the range by conditions such as policy and category. The task executes asynchronously in the backend. Once completed, you can download the result file from the export task list.
+     * @param {CreateBaselineAggregatedItemExportJobRequest} req
+     * @param {function(string, CreateBaselineAggregatedItemExportJobResponse):void} cb
+     * @public
+     */
+    CreateBaselineAggregatedItemExportJob(req, cb) {
+        let resp = new CreateBaselineAggregatedItemExportJobResponse();
+        this.request("CreateBaselineAggregatedItemExportJob", req, resp, cb);
+    }
+
+    /**
+     * Retrieve the user access key asset list
+     * @param {DescribeAccessKeyAssetRequest} req
+     * @param {function(string, DescribeAccessKeyAssetResponse):void} cb
+     * @public
+     */
+    DescribeAccessKeyAsset(req, cb) {
+        let resp = new DescribeAccessKeyAssetResponse();
+        this.request("DescribeAccessKeyAsset", req, resp, cb);
+    }
+
+    /**
+     * Queries the list of Policy IDs currently at the "statistical calculation" status, used for frontend polling to judge whether the scan results statistics are ready.
+     * @param {DescribeBaselineCalculatingStatisticsPolicyIDListRequest} req
+     * @param {function(string, DescribeBaselineCalculatingStatisticsPolicyIDListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineCalculatingStatisticsPolicyIDList(req, cb) {
+        let resp = new DescribeBaselineCalculatingStatisticsPolicyIDListResponse();
+        this.request("DescribeBaselineCalculatingStatisticsPolicyIDList", req, resp, cb);
+    }
+
+    /**
+     * Modify the cluster protection status.
+     * @param {ModifyClusterDefendStatusRequest} req
+     * @param {function(string, ModifyClusterDefendStatusResponse):void} cb
+     * @public
+     */
+    ModifyClusterDefendStatus(req, cb) {
+        let resp = new ModifyClusterDefendStatusResponse();
+        this.request("ModifyClusterDefendStatus", req, resp, cb);
+    }
+
+    /**
+     * Queries the dspm asset data recognition information list
+     * @param {DescribeDspmAssetIdentifyInfoListRequest} req
+     * @param {function(string, DescribeDspmAssetIdentifyInfoListResponse):void} cb
+     * @public
+     */
+    DescribeDspmAssetIdentifyInfoList(req, cb) {
+        let resp = new DescribeDspmAssetIdentifyInfoListResponse();
+        this.request("DescribeDspmAssetIdentifyInfoList", req, resp, cb);
+    }
+
+    /**
+     * Query the container list associated with a Pod
+     * @param {DescribePodContainerListRequest} req
+     * @param {function(string, DescribePodContainerListResponse):void} cb
+     * @public
+     */
+    DescribePodContainerList(req, cb) {
+        let resp = new DescribePodContainerListResponse();
+        this.request("DescribePodContainerList", req, resp, cb);
+    }
+
+    /**
+     * Query the EDR alarm list.
+     * @param {DescribeEdrAlertListRequest} req
+     * @param {function(string, DescribeEdrAlertListResponse):void} cb
+     * @public
+     */
+    DescribeEdrAlertList(req, cb) {
+        let resp = new DescribeEdrAlertListResponse();
+        this.request("DescribeEdrAlertList", req, resp, cb);
+    }
+
+    /**
+     * EDR alert multi-attack stage queries
+     * @param {DescribeEdrAlertMultiAttackStagesRequest} req
+     * @param {function(string, DescribeEdrAlertMultiAttackStagesResponse):void} cb
+     * @public
+     */
+    DescribeEdrAlertMultiAttackStages(req, cb) {
+        let resp = new DescribeEdrAlertMultiAttackStagesResponse();
+        this.request("DescribeEdrAlertMultiAttackStages", req, resp, cb);
+    }
+
+    /**
+     * Creates a Dspm asset list export task
+     * @param {CreateDspmAssetsExportJobRequest} req
+     * @param {function(string, CreateDspmAssetsExportJobResponse):void} cb
+     * @public
+     */
+    CreateDspmAssetsExportJob(req, cb) {
+        let resp = new CreateDspmAssetsExportJobResponse();
+        this.request("CreateDspmAssetsExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of receiving robots for the current tenant by page, corresponding to the table on the Receive Bot Management Tab in Notification Center - Robot Notification. Each tenant can have up to 50 robots.
+     * @param {DescribeWebhookReceiverListRequest} req
+     * @param {function(string, DescribeWebhookReceiverListResponse):void} cb
+     * @public
+     */
+    DescribeWebhookReceiverList(req, cb) {
+        let resp = new DescribeWebhookReceiverListResponse();
+        this.request("DescribeWebhookReceiverList", req, resp, cb);
+    }
+
+    /**
+     * Replicate a dspm data identification template.
+     * @param {CreateDspmIdentifyComplianceGroupCopyRequest} req
+     * @param {function(string, CreateDspmIdentifyComplianceGroupCopyResponse):void} cb
+     * @public
+     */
+    CreateDspmIdentifyComplianceGroupCopy(req, cb) {
+        let resp = new CreateDspmIdentifyComplianceGroupCopyResponse();
+        this.request("CreateDspmIdentifyComplianceGroupCopy", req, resp, cb);
+    }
+
+    /**
+     * Query the EDR export download link
+     * @param {DescribeEdrExportJobDownloadURLRequest} req
+     * @param {function(string, DescribeEdrExportJobDownloadURLResponse):void} cb
+     * @public
+     */
+    DescribeEdrExportJobDownloadURL(req, cb) {
+        let resp = new DescribeEdrExportJobDownloadURLResponse();
+        this.request("DescribeEdrExportJobDownloadURL", req, resp, cb);
+    }
+
+    /**
+     * Query the consolidated billing information of the current account, including order status, payment mode, quotas, and other detailed information.
+     * @param {DescribeCSCPayInfoRequest} req
+     * @param {function(string, DescribeCSCPayInfoResponse):void} cb
+     * @public
+     */
+    DescribeCSCPayInfo(req, cb) {
+        let resp = new DescribeCSCPayInfoResponse();
+        this.request("DescribeCSCPayInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an image repository list export task.
+     * @param {CreateImageRegistryListExportJobRequest} req
+     * @param {function(string, CreateImageRegistryListExportJobResponse):void} cb
+     * @public
+     */
+    CreateImageRegistryListExportJob(req, cb) {
+        let resp = new CreateImageRegistryListExportJobResponse();
+        this.request("CreateImageRegistryListExportJob", req, resp, cb);
+    }
+
+    /**
+     * CSIP Role Authorization Binding API
+     * @param {AddNewBindRoleUserRequest} req
+     * @param {function(string, AddNewBindRoleUserResponse):void} cb
+     * @public
+     */
+    AddNewBindRoleUser(req, cb) {
+        let resp = new AddNewBindRoleUserResponse();
+        this.request("AddNewBindRoleUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the log type for log shipping.
+     * @param {DescribeDspmLogDeliveryTypeRequest} req
+     * @param {function(string, DescribeDspmLogDeliveryTypeResponse):void} cb
+     * @public
+     */
+    DescribeDspmLogDeliveryType(req, cb) {
+        let resp = new DescribeDspmLogDeliveryTypeResponse();
+        this.request("DescribeDspmLogDeliveryType", req, resp, cb);
+    }
+
+    /**
+     * Query the list of connectivity detection hosts
+     * @param {DescribeCheckConnectivityHostListRequest} req
+     * @param {function(string, DescribeCheckConnectivityHostListResponse):void} cb
+     * @public
+     */
+    DescribeCheckConnectivityHostList(req, cb) {
+        let resp = new DescribeCheckConnectivityHostListResponse();
+        this.request("DescribeCheckConnectivityHostList", req, resp, cb);
+    }
+
+    /**
+     * Creates a Pod Association service list export task. The export fields include service name, type, Selector, namespace, and creation time. Filtering is supported. When PodUniqueID is input, the Pod Association matching logic of DescribeClusterServiceList is reused. Export is implemented through an async task, and after JobId is returned, the frontend polls to query the export task status.
+     * @param {CreatePodServiceListExportJobRequest} req
+     * @param {function(string, CreatePodServiceListExportJobResponse):void} cb
+     * @public
+     */
+    CreatePodServiceListExportJob(req, cb) {
+        let resp = new CreatePodServiceListExportJobResponse();
+        this.request("CreatePodServiceListExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain advanced configurations for alarm center notifications.
+     * @param {DescribeNotifySettingAlertRequest} req
+     * @param {function(string, DescribeNotifySettingAlertResponse):void} cb
+     * @public
+     */
+    DescribeNotifySettingAlert(req, cb) {
+        let resp = new DescribeNotifySettingAlertResponse();
+        this.request("DescribeNotifySettingAlert", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the vulnerability allowlist switch.
+     * @param {ModifyVulWhitelistSwitchRequest} req
+     * @param {function(string, ModifyVulWhitelistSwitchResponse):void} cb
+     * @public
+     */
+    ModifyVulWhitelistSwitch(req, cb) {
+        let resp = new ModifyVulWhitelistSwitchResponse();
+        this.request("ModifyVulWhitelistSwitch", req, resp, cb);
+    }
+
+    /**
+     * Obtains the vulnerability tag list
+     * @param {DescribeVulLabelListRequest} req
+     * @param {function(string, DescribeVulLabelListResponse):void} cb
+     * @public
+     */
+    DescribeVulLabelList(req, cb) {
+        let resp = new DescribeVulLabelListResponse();
+        this.request("DescribeVulLabelList", req, resp, cb);
+    }
+
+    /**
+     * Obtain the global configuration for process protection.
+     * @param {DescribeProcessDaemonGlobalConfRequest} req
+     * @param {function(string, DescribeProcessDaemonGlobalConfResponse):void} cb
+     * @public
+     */
+    DescribeProcessDaemonGlobalConf(req, cb) {
+        let resp = new DescribeProcessDaemonGlobalConfResponse();
+        this.request("DescribeProcessDaemonGlobalConf", req, resp, cb);
+    }
+
+    /**
+     * Modifies Dspm risk information
+     * @param {ModifyDspmRiskInfoRequest} req
+     * @param {function(string, ModifyDspmRiskInfoResponse):void} cb
+     * @public
+     */
+    ModifyDspmRiskInfo(req, cb) {
+        let resp = new ModifyDspmRiskInfoResponse();
+        this.request("ModifyDspmRiskInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the clearing history records of a machine.
+     * @param {DescribeMachineClearHistoryRequest} req
+     * @param {function(string, DescribeMachineClearHistoryResponse):void} cb
+     * @public
+     */
+    DescribeMachineClearHistory(req, cb) {
+        let resp = new DescribeMachineClearHistoryResponse();
+        this.request("DescribeMachineClearHistory", req, resp, cb);
+    }
+
+    /**
+     * Create rules for automatic cloud boundary tagging.
+     * @param {CreateExposureAutoTagRuleRequest} req
+     * @param {function(string, CreateExposureAutoTagRuleResponse):void} cb
+     * @public
+     */
+    CreateExposureAutoTagRule(req, cb) {
+        let resp = new CreateExposureAutoTagRuleResponse();
+        this.request("CreateExposureAutoTagRule", req, resp, cb);
+    }
+
+    /**
+     * Queries the image repository export task list
+     * @param {DescribeImageExportJobListRequest} req
+     * @param {function(string, DescribeImageExportJobListResponse):void} cb
+     * @public
+     */
+    DescribeImageExportJobList(req, cb) {
+        let resp = new DescribeImageExportJobListResponse();
+        this.request("DescribeImageExportJobList", req, resp, cb);
+    }
+
+    /**
+     * Query the Dspm identity ID list.
+     * @param {DescribeDspmIdentifyIdListRequest} req
+     * @param {function(string, DescribeDspmIdentifyIdListResponse):void} cb
+     * @public
+     */
+    DescribeDspmIdentifyIdList(req, cb) {
+        let resp = new DescribeDspmIdentifyIdListResponse();
+        this.request("DescribeDspmIdentifyIdList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain basic information of the Cloud Security AI Assistant.
+     * @param {DescribeAIAnalysisRobotInfoRequest} req
+     * @param {function(string, DescribeAIAnalysisRobotInfoResponse):void} cb
+     * @public
+     */
+    DescribeAIAnalysisRobotInfo(req, cb) {
+        let resp = new DescribeAIAnalysisRobotInfoResponse();
+        this.request("DescribeAIAnalysisRobotInfo", req, resp, cb);
+    }
+
+    /**
+     * Asset tag tree structured data
+     * @param {DescribeAssetTagTreeRequest} req
+     * @param {function(string, DescribeAssetTagTreeResponse):void} cb
+     * @public
+     */
+    DescribeAssetTagTree(req, cb) {
+        let resp = new DescribeAssetTagTreeResponse();
+        this.request("DescribeAssetTagTree", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the associated process list of a container. It obtains associated process information by container ID, supports time sorting and pagination. Filter.By supports StartTime; Filter.Order supports ASC/DESC.
+     * @param {DescribeClusterContainerProcessListRequest} req
+     * @param {function(string, DescribeClusterContainerProcessListResponse):void} cb
+     * @public
+     */
+    DescribeClusterContainerProcessList(req, cb) {
+        let resp = new DescribeClusterContainerProcessListResponse();
+        this.request("DescribeClusterContainerProcessList", req, resp, cb);
+    }
+
+    /**
+     * RetryExportLog
+     * @param {RetryDspmExportLogRequest} req
+     * @param {function(string, RetryDspmExportLogResponse):void} cb
+     * @public
+     */
+    RetryDspmExportLog(req, cb) {
+        let resp = new RetryDspmExportLogResponse();
+        this.request("RetryDspmExportLog", req, resp, cb);
+    }
+
+    /**
+     * Modifies a dspm data identification template
+     * @param {ModifyDspmIdentifyComplianceGroupRequest} req
+     * @param {function(string, ModifyDspmIdentifyComplianceGroupResponse):void} cb
+     * @public
+     */
+    ModifyDspmIdentifyComplianceGroup(req, cb) {
+        let resp = new ModifyDspmIdentifyComplianceGroupResponse();
+        this.request("ModifyDspmIdentifyComplianceGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query EDR alarm tags in batches.
+     * @param {DescribeEdrAlertThreatTagsRequest} req
+     * @param {function(string, DescribeEdrAlertThreatTagsResponse):void} cb
+     * @public
+     */
+    DescribeEdrAlertThreatTags(req, cb) {
+        let resp = new DescribeEdrAlertThreatTagsResponse();
+        this.request("DescribeEdrAlertThreatTags", req, resp, cb);
+    }
+
+    /**
+     * Upload a Skill ZIP file to trigger asynchronous security detection. After a successful upload, poll the DescribeSkillScanResult API using the returned ContentHash and EngineVersion to obtain the result. The upload API is idempotent. Re-uploading a file with the same Hash does not create a repetition task. Detection results are retained for 90 days. Re-upload for detection after the retention period expires.
+     * @param {CreateSkillScanRequest} req
+     * @param {function(string, CreateSkillScanResponse):void} cb
+     * @public
+     */
+    CreateSkillScan(req, cb) {
+        let resp = new CreateSkillScanResponse();
+        this.request("CreateSkillScan", req, resp, cb);
+    }
+
+    /**
+     * Asset risk details
+     * @param {DescribeAssetRiskDetailRequest} req
+     * @param {function(string, DescribeAssetRiskDetailResponse):void} cb
+     * @public
+     */
+    DescribeAssetRiskDetail(req, cb) {
+        let resp = new DescribeAssetRiskDetailResponse();
+        this.request("DescribeAssetRiskDetail", req, resp, cb);
+    }
+
+    /**
+     * Inquires the cluster pod list
+     * @param {DescribeClusterPodListRequest} req
+     * @param {function(string, DescribeClusterPodListResponse):void} cb
+     * @public
+     */
+    DescribeClusterPodList(req, cb) {
+        let resp = new DescribeClusterPodListResponse();
+        this.request("DescribeClusterPodList", req, resp, cb);
+    }
+
+    /**
+     * Query the cluster service list.
+     * @param {DescribeClusterServiceListRequest} req
+     * @param {function(string, DescribeClusterServiceListResponse):void} cb
+     * @public
+     */
+    DescribeClusterServiceList(req, cb) {
+        let resp = new DescribeClusterServiceListResponse();
+        this.request("DescribeClusterServiceList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the image vulnerability list.
+     * @param {DescribeImageVulListRequest} req
+     * @param {function(string, DescribeImageVulListResponse):void} cb
+     * @public
+     */
+    DescribeImageVulList(req, cb) {
+        let resp = new DescribeImageVulListResponse();
+        this.request("DescribeImageVulList", req, resp, cb);
+    }
+
+    /**
+     * Query Dspm asset account identity information
+     * @param {DescribeDspmAssetAccountIdentifyRequest} req
+     * @param {function(string, DescribeDspmAssetAccountIdentifyResponse):void} cb
+     * @public
+     */
+    DescribeDspmAssetAccountIdentify(req, cb) {
+        let resp = new DescribeDspmAssetAccountIdentifyResponse();
+        this.request("DescribeDspmAssetAccountIdentify", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a Dspm identity list export task.
+     * @param {CreateDspmIdentifyInfoListExportJobRequest} req
+     * @param {function(string, CreateDspmIdentifyInfoListExportJobResponse):void} cb
+     * @public
+     */
+    CreateDspmIdentifyInfoListExportJob(req, cb) {
+        let resp = new CreateDspmIdentifyInfoListExportJobResponse();
+        this.request("CreateDspmIdentifyInfoListExportJob", req, resp, cb);
+    }
+
+    /**
+     * Get purchased Dspm order information
+     * @param {DescribeDspmPayInfoRequest} req
+     * @param {function(string, DescribeDspmPayInfoResponse):void} cb
+     * @public
+     */
+    DescribeDspmPayInfo(req, cb) {
+        let resp = new DescribeDspmPayInfoResponse();
+        this.request("DescribeDspmPayInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a CSIP manual scan.
+     * @param {CreateCSIPManualMalwareScanRequest} req
+     * @param {function(string, CreateCSIPManualMalwareScanResponse):void} cb
+     * @public
+     */
+    CreateCSIPManualMalwareScan(req, cb) {
+        let resp = new CreateCSIPManualMalwareScanResponse();
+        this.request("CreateCSIPManualMalwareScan", req, resp, cb);
     }
 
     /**
@@ -969,17 +4716,6 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Edit access key/Source IP remark.
-     * @param {UpdateAccessKeyRemarkRequest} req
-     * @param {function(string, UpdateAccessKeyRemarkResponse):void} cb
-     * @public
-     */
-    UpdateAccessKeyRemark(req, cb) {
-        let resp = new UpdateAccessKeyRemarkResponse();
-        this.request("UpdateAccessKeyRemark", req, resp, cb);
-    }
-
-    /**
      * This API is used to modify the vulnerability allowlist configuration.
      * @param {ModifyVulWhitelistConfigRequest} req
      * @param {function(string, ModifyVulWhitelistConfigResponse):void} cb
@@ -991,7 +4727,1975 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Access key risk record list.
+     * Cancel a permanently ignored EDR multi-behavior alarm. Remove the corresponding host and rule record from the AI-Link permanent ignore allowlist and restore the alarm status to PENDING.
+     * @param {CancelEdrAlertIgnoreRequest} req
+     * @param {function(string, CancelEdrAlertIgnoreResponse):void} cb
+     * @public
+     */
+    CancelEdrAlertIgnore(req, cb) {
+        let resp = new CancelEdrAlertIgnoreResponse();
+        this.request("CancelEdrAlertIgnore", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete clearing records of a machine.
+     * @param {DeleteMachineClearHistoryRequest} req
+     * @param {function(string, DeleteMachineClearHistoryResponse):void} cb
+     * @public
+     */
+    DeleteMachineClearHistory(req, cb) {
+        let resp = new DeleteMachineClearHistoryResponse();
+        this.request("DeleteMachineClearHistory", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop a specified baseline scan main task. It only takes effect for tasks in the INIT, SUBTASK_CREATING, or SCANNING status.
+     * @param {StopBaselineScanTaskRequest} req
+     * @param {function(string, StopBaselineScanTaskResponse):void} cb
+     * @public
+     */
+    StopBaselineScanTask(req, cb) {
+        let resp = new StopBaselineScanTaskResponse();
+        this.request("StopBaselineScanTask", req, resp, cb);
+    }
+
+    /**
+     * Trigger installation of the traffic sandbox plugin to AI Agent assets in a specified range. Use BelongAssetType to distinguish host or container dimensions, and use EffectScope to specify the installation target (INCLUDE = install only to specified assets, EXCLUDE = all assets minus specified assets). This API only triggers the action and does not wait for completion.
+     * @param {InstallSandboxPluginRequest} req
+     * @param {function(string, InstallSandboxPluginResponse):void} cb
+     * @public
+     */
+    InstallSandboxPlugin(req, cb) {
+        let resp = new InstallSandboxPluginResponse();
+        this.request("InstallSandboxPlugin", req, resp, cb);
+    }
+
+    /**
+     * Sample code for obtaining risk trend analysis
+     * @param {DescribeRiskCenterRiskTrendAnalysisRequest} req
+     * @param {function(string, DescribeRiskCenterRiskTrendAnalysisResponse):void} cb
+     * @public
+     */
+    DescribeRiskCenterRiskTrendAnalysis(req, cb) {
+        let resp = new DescribeRiskCenterRiskTrendAnalysisResponse();
+        this.request("DescribeRiskCenterRiskTrendAnalysis", req, resp, cb);
+    }
+
+    /**
+     * Create or edit a baseline policy. Policy.ID 0 means create, non-zero means edit. Name is required when creating or editing. CheckAssetType and Type must comply with the CheckAssetType and PolicyType enums.
+     * @param {ModifyBaselinePolicyRequest} req
+     * @param {function(string, ModifyBaselinePolicyResponse):void} cb
+     * @public
+     */
+    ModifyBaselinePolicy(req, cb) {
+        let resp = new ModifyBaselinePolicyResponse();
+        this.request("ModifyBaselinePolicy", req, resp, cb);
+    }
+
+    /**
+     * Modifies Dspm risk policies
+     * @param {ModifyDspmRiskStrategyRequest} req
+     * @param {function(string, ModifyDspmRiskStrategyResponse):void} cb
+     * @public
+     */
+    ModifyDspmRiskStrategy(req, cb) {
+        let resp = new ModifyDspmRiskStrategyResponse();
+        this.request("ModifyDspmRiskStrategy", req, resp, cb);
+    }
+
+    /**
+     * Get the historical record list of baseline risk corrections, used to show fixed detection items and corresponding assets on the "Correction Record" page.
+     * @param {DescribeBaselineFixRecordListRequest} req
+     * @param {function(string, DescribeBaselineFixRecordListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineFixRecordList(req, cb) {
+        let resp = new DescribeBaselineFixRecordListResponse();
+        this.request("DescribeBaselineFixRecordList", req, resp, cb);
+    }
+
+    /**
+     * Create an asset tag.
+     * @param {CreateAssetTagRequest} req
+     * @param {function(string, CreateAssetTagResponse):void} cb
+     * @public
+     */
+    CreateAssetTag(req, cb) {
+        let resp = new CreateAssetTagResponse();
+        this.request("CreateAssetTag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a host vulnerability table export task.
+     * @param {CreateHostVulExportJobRequest} req
+     * @param {function(string, CreateHostVulExportJobResponse):void} cb
+     * @public
+     */
+    CreateHostVulExportJob(req, cb) {
+        let resp = new CreateHostVulExportJobResponse();
+        this.request("CreateHostVulExportJob", req, resp, cb);
+    }
+
+    /**
+     * Querying the dspm data identification classification list
+     * @param {DescribeDspmIdentifyCategoryListRequest} req
+     * @param {function(string, DescribeDspmIdentifyCategoryListResponse):void} cb
+     * @public
+     */
+    DescribeDspmIdentifyCategoryList(req, cb) {
+        let resp = new DescribeDspmIdentifyCategoryListResponse();
+        this.request("DescribeDspmIdentifyCategoryList", req, resp, cb);
+    }
+
+    /**
+     * Query the list of vulnerabilities on host nodes under the exposed path in cloud boundary analysis.
+     * @param {DescribeVulRiskListRequest} req
+     * @param {function(string, DescribeVulRiskListResponse):void} cb
+     * @public
+     */
+    DescribeVulRiskList(req, cb) {
+        let resp = new DescribeVulRiskListResponse();
+        this.request("DescribeVulRiskList", req, resp, cb);
+    }
+
+    /**
+     * Query subtask information of image repository scanning
+     * @param {DescribeImageRegistryScanSubTaskListRequest} req
+     * @param {function(string, DescribeImageRegistryScanSubTaskListResponse):void} cb
+     * @public
+     */
+    DescribeImageRegistryScanSubTaskList(req, cb) {
+        let resp = new DescribeImageRegistryScanSubTaskListResponse();
+        this.request("DescribeImageRegistryScanSubTaskList", req, resp, cb);
+    }
+
+    /**
+     * Install Agent for cluster container security (parallel container installation method).
+
+capi layer processing process:
+1. Query the DB cluster list by ClusterCaMD5List (only used for resolving the appid ownership of each cluster, not for existence/type verification)
+2. Group by appid and pass through to the access side ClusterInstall RPC
+
+Description (container asset revision 2026 H1): This API is a passthrough API. The capi layer does not verify the existence, data type, or format of ClusterCaMD5. ClusterCaMD5 values that miss in the DB are silently skipped with no error reported.
+     * @param {InstallClusterAgentRequest} req
+     * @param {function(string, InstallClusterAgentResponse):void} cb
+     * @public
+     */
+    InstallClusterAgent(req, cb) {
+        let resp = new InstallClusterAgentResponse();
+        this.request("InstallClusterAgent", req, resp, cb);
+    }
+
+    /**
+     * Create a local image list export task. The export fields include image ID, image name, mirror version, number of associated containers, number of associated hosts, creation time, account nickname, and risk fields such as scan status, vulnerability, Trojan, and sensitive information. Filtering is supported. Export is implemented through an async task. After JobId is returned, the frontend polls to query the export task status. In single account mode, the NickName field is automatically excluded.
+     * @param {CreateHostImageListExportJobRequest} req
+     * @param {function(string, CreateHostImageListExportJobResponse):void} cb
+     * @public
+     */
+    CreateHostImageListExportJob(req, cb) {
+        let resp = new CreateHostImageListExportJobResponse();
+        this.request("CreateHostImageListExportJob", req, resp, cb);
+    }
+
+    /**
+     * Retrieve the associated component of a vulnerability
+     * @param {DescribeVulRiskRelateComponentRequest} req
+     * @param {function(string, DescribeVulRiskRelateComponentResponse):void} cb
+     * @public
+     */
+    DescribeVulRiskRelateComponent(req, cb) {
+        let resp = new DescribeVulRiskRelateComponentResponse();
+        this.request("DescribeVulRiskRelateComponent", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an EDR alert ordinary export task.
+     * @param {CreateEdrLessAlertExportJobRequest} req
+     * @param {function(string, CreateEdrLessAlertExportJobResponse):void} cb
+     * @public
+     */
+    CreateEdrLessAlertExportJob(req, cb) {
+        let resp = new CreateEdrLessAlertExportJobResponse();
+        this.request("CreateEdrLessAlertExportJob", req, resp, cb);
+    }
+
+    /**
+     * Cluster Pod List
+     * @param {DescribeClusterPodAssetsRequest} req
+     * @param {function(string, DescribeClusterPodAssetsResponse):void} cb
+     * @public
+     */
+    DescribeClusterPodAssets(req, cb) {
+        let resp = new DescribeClusterPodAssetsResponse();
+        this.request("DescribeClusterPodAssets", req, resp, cb);
+    }
+
+    /**
+     * Delete dspm data identification template data item association
+     * @param {DeleteDspmIdentifyComplianceRuleRelationRequest} req
+     * @param {function(string, DeleteDspmIdentifyComplianceRuleRelationResponse):void} cb
+     * @public
+     */
+    DeleteDspmIdentifyComplianceRuleRelation(req, cb) {
+        let resp = new DeleteDspmIdentifyComplianceRuleRelationResponse();
+        this.request("DeleteDspmIdentifyComplianceRuleRelation", req, resp, cb);
+    }
+
+    /**
+     * Export the EDR task list.
+     * @param {DescribeEdrExportJobListRequest} req
+     * @param {function(string, DescribeEdrExportJobListResponse):void} cb
+     * @public
+     */
+    DescribeEdrExportJobList(req, cb) {
+        let resp = new DescribeEdrExportJobListResponse();
+        this.request("DescribeEdrExportJobList", req, resp, cb);
+    }
+
+    /**
+     * Delete a Dspm allowlist policy.
+     * @param {DeleteDspmWhitelistStrategyRequest} req
+     * @param {function(string, DeleteDspmWhitelistStrategyResponse):void} cb
+     * @public
+     */
+    DeleteDspmWhitelistStrategy(req, cb) {
+        let resp = new DeleteDspmWhitelistStrategyResponse();
+        this.request("DeleteDspmWhitelistStrategy", req, resp, cb);
+    }
+
+    /**
+     * Asset detail information
+     * @param {DescribeAssetDetailRequest} req
+     * @param {function(string, DescribeAssetDetailResponse):void} cb
+     * @public
+     */
+    DescribeAssetDetail(req, cb) {
+        let resp = new DescribeAssetDetailResponse();
+        this.request("DescribeAssetDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain EDR alarm quantity statistics for the asset module. It queries the EDR alarm table based on the passed-in MemberId and InstanceIDs and returns the number of alarm records. If InstanceIDs is empty, summarized statistics are returned. Otherwise, statistics are returned by InstanceID granularity.
+     * @param {DescribeEdrAlertCountForAssetRequest} req
+     * @param {function(string, DescribeEdrAlertCountForAssetResponse):void} cb
+     * @public
+     */
+    DescribeEdrAlertCountForAsset(req, cb) {
+        let resp = new DescribeEdrAlertCountForAssetResponse();
+        this.request("DescribeEdrAlertCountForAsset", req, resp, cb);
+    }
+
+    /**
+     * Search for hosts associated with vulnerabilities or KBs
+     * @param {DescribeVulRiskRelateHostRequest} req
+     * @param {function(string, DescribeVulRiskRelateHostResponse):void} cb
+     * @public
+     */
+    DescribeVulRiskRelateHost(req, cb) {
+        let resp = new DescribeVulRiskRelateHostResponse();
+        this.request("DescribeVulRiskRelateHost", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the aggregation scan result list by baseline policy dimension, for the "Baseline Scan Policy" module on the overview page to display pass/fail status by policy.
+     * @param {DescribeBaselineAggregatedPolicyListRequest} req
+     * @param {function(string, DescribeBaselineAggregatedPolicyListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineAggregatedPolicyList(req, cb) {
+        let resp = new DescribeBaselineAggregatedPolicyListResponse();
+        this.request("DescribeBaselineAggregatedPolicyList", req, resp, cb);
+    }
+
+    /**
+     * Rule attributes for automatic tagging at cloud boundaries
+     * @param {DescribeExposureAutoTagAttributeRequest} req
+     * @param {function(string, DescribeExposureAutoTagAttributeResponse):void} cb
+     * @public
+     */
+    DescribeExposureAutoTagAttribute(req, cb) {
+        let resp = new DescribeExposureAutoTagAttributeResponse();
+        this.request("DescribeExposureAutoTagAttribute", req, resp, cb);
+    }
+
+    /**
+     * Query the progress of the async binding task returned by ModifyCSIPLicenseBinds.
+     * @param {DescribeCSIPLicenseBindScheduleRequest} req
+     * @param {function(string, DescribeCSIPLicenseBindScheduleResponse):void} cb
+     * @public
+     */
+    DescribeCSIPLicenseBindSchedule(req, cb) {
+        let resp = new DescribeCSIPLicenseBindScheduleResponse();
+        this.request("DescribeCSIPLicenseBindSchedule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of cross-region log-in allowlists after merge.
+     * @param {DescribeLoginWhiteCombinedListRequest} req
+     * @param {function(string, DescribeLoginWhiteCombinedListResponse):void} cb
+     * @public
+     */
+    DescribeLoginWhiteCombinedList(req, cb) {
+        let resp = new DescribeLoginWhiteCombinedListResponse();
+        this.request("DescribeLoginWhiteCombinedList", req, resp, cb);
+    }
+
+    /**
+     * Get the temporary download link of an AI analysis file.
+
+The original address of the input file. Returns a signed temporary download link with a validity period of 2 hours.
+     * @param {DescribeAIAnalysisFileDownloadURLRequest} req
+     * @param {function(string, DescribeAIAnalysisFileDownloadURLResponse):void} cb
+     * @public
+     */
+    DescribeAIAnalysisFileDownloadURL(req, cb) {
+        let resp = new DescribeAIAnalysisFileDownloadURLResponse();
+        this.request("DescribeAIAnalysisFileDownloadURL", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a Pod associated container list export task. Export fields include container ID, container name, running state, node ID, node type, image ID, image name, and isolation status. Filtering is supported. Export is implemented through an async task. After JobId is returned, front-end polling is used to query the export task status.
+     * @param {CreatePodContainerListExportJobRequest} req
+     * @param {function(string, CreatePodContainerListExportJobResponse):void} cb
+     * @public
+     */
+    CreatePodContainerListExportJob(req, cb) {
+        let resp = new CreatePodContainerListExportJobResponse();
+        this.request("CreatePodContainerListExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete export tasks.
+     * @param {DeleteDspmExportTaskRequest} req
+     * @param {function(string, DeleteDspmExportTaskResponse):void} cb
+     * @public
+     */
+    DeleteDspmExportTask(req, cb) {
+        let resp = new DeleteDspmExportTaskResponse();
+        this.request("DeleteDspmExportTask", req, resp, cb);
+    }
+
+    /**
+     * Batch modify EDR policy actions.
+     * @param {ModifyEDRRulesActionRequest} req
+     * @param {function(string, ModifyEDRRulesActionResponse):void} cb
+     * @public
+     */
+    ModifyEDRRulesAction(req, cb) {
+        let resp = new ModifyEDRRulesActionResponse();
+        this.request("ModifyEDRRulesAction", req, resp, cb);
+    }
+
+    /**
+     * Search the host kb risk list.
+     * @param {DescribeHostKBRiskListRequest} req
+     * @param {function(string, DescribeHostKBRiskListResponse):void} cb
+     * @public
+     */
+    DescribeHostKBRiskList(req, cb) {
+        let resp = new DescribeHostKBRiskListResponse();
+        this.request("DescribeHostKBRiskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query asset table information.
+     * @param {DescribeDspmAssetTableListRequest} req
+     * @param {function(string, DescribeDspmAssetTableListResponse):void} cb
+     * @public
+     */
+    DescribeDspmAssetTableList(req, cb) {
+        let resp = new DescribeDspmAssetTableListResponse();
+        this.request("DescribeDspmAssetTableList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the scheduled scan configuration for file scan and removal.
+     * @param {DescribeMalwareTimingScanSettingRequest} req
+     * @param {function(string, DescribeMalwareTimingScanSettingResponse):void} cb
+     * @public
+     */
+    DescribeMalwareTimingScanSetting(req, cb) {
+        let resp = new DescribeMalwareTimingScanSettingResponse();
+        this.request("DescribeMalwareTimingScanSetting", req, resp, cb);
+    }
+
+    /**
+     * Determine whether the current user is on the flagship edition.
+     * @param {CheckIsUltimateVersionRequest} req
+     * @param {function(string, CheckIsUltimateVersionResponse):void} cb
+     * @public
+     */
+    CheckIsUltimateVersion(req, cb) {
+        let resp = new CheckIsUltimateVersionResponse();
+        this.request("CheckIsUltimateVersion", req, resp, cb);
+    }
+
+    /**
+     * Modify the scheduled scan task configuration of an image repository
+     * @param {ModifyImageRegistryTimedScanTaskConfigRequest} req
+     * @param {function(string, ModifyImageRegistryTimedScanTaskConfigResponse):void} cb
+     * @public
+     */
+    ModifyImageRegistryTimedScanTaskConfig(req, cb) {
+        let resp = new ModifyImageRegistryTimedScanTaskConfigResponse();
+        this.request("ModifyImageRegistryTimedScanTaskConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable or modify process guard feature configurations.
+     * @param {StartOrModifyProcessDaemonRequest} req
+     * @param {function(string, StartOrModifyProcessDaemonResponse):void} cb
+     * @public
+     */
+    StartOrModifyProcessDaemon(req, cb) {
+        let resp = new StartOrModifyProcessDaemonResponse();
+        this.request("StartOrModifyProcessDaemon", req, resp, cb);
+    }
+
+    /**
+     * Delete receiving robots in batches. Before deletion, the reference relationships are automatically removed from all policies that refer to these robots.
+     * @param {DeleteWebhookReceiversRequest} req
+     * @param {function(string, DeleteWebhookReceiversResponse):void} cb
+     * @public
+     */
+    DeleteWebhookReceivers(req, cb) {
+        let resp = new DeleteWebhookReceiversResponse();
+        this.request("DeleteWebhookReceivers", req, resp, cb);
+    }
+
+    /**
+     * Delete dspm data identification category
+     * @param {DeleteDspmIdentifyCategoryRequest} req
+     * @param {function(string, DeleteDspmIdentifyCategoryResponse):void} cb
+     * @public
+     */
+    DeleteDspmIdentifyCategory(req, cb) {
+        let resp = new DeleteDspmIdentifyCategoryResponse();
+        this.request("DeleteDspmIdentifyCategory", req, resp, cb);
+    }
+
+    /**
+     * Query the Dspm asset account list.
+     * @param {DescribeDspmAssetAccountsRequest} req
+     * @param {function(string, DescribeDspmAssetAccountsResponse):void} cb
+     * @public
+     */
+    DescribeDspmAssetAccounts(req, cb) {
+        let resp = new DescribeDspmAssetAccountsResponse();
+        this.request("DescribeDspmAssetAccounts", req, resp, cb);
+    }
+
+    /**
+     * Get log index information
+     * @param {DescribeCLSLogIndexV3Request} req
+     * @param {function(string, DescribeCLSLogIndexV3Response):void} cb
+     * @public
+     */
+    DescribeCLSLogIndexV3(req, cb) {
+        let resp = new DescribeCLSLogIndexV3Response();
+        this.request("DescribeCLSLogIndexV3", req, resp, cb);
+    }
+
+    /**
+     * Get notification settings
+     * @param {DescribeNotifySettingRequest} req
+     * @param {function(string, DescribeNotifySettingResponse):void} cb
+     * @public
+     */
+    DescribeNotifySetting(req, cb) {
+        let resp = new DescribeNotifySettingResponse();
+        this.request("DescribeNotifySetting", req, resp, cb);
+    }
+
+    /**
+     * Delete a Dspm personal identity id.
+     * @param {DeleteDspmPersonalIdentifyRequest} req
+     * @param {function(string, DeleteDspmPersonalIdentifyResponse):void} cb
+     * @public
+     */
+    DeleteDspmPersonalIdentify(req, cb) {
+        let resp = new DeleteDspmPersonalIdentifyResponse();
+        this.request("DeleteDspmPersonalIdentify", req, resp, cb);
+    }
+
+    /**
+     * Obtain the IaC detection file report.
+     * @param {DescribeIaCFileReportRequest} req
+     * @param {function(string, DescribeIaCFileReportResponse):void} cb
+     * @public
+     */
+    DescribeIaCFileReport(req, cb) {
+        let resp = new DescribeIaCFileReportResponse();
+        this.request("DescribeIaCFileReport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain CSPM information of an account.
+     * @param {DescribeUserCSPMInfoListRequest} req
+     * @param {function(string, DescribeUserCSPMInfoListResponse):void} cb
+     * @public
+     */
+    DescribeUserCSPMInfoList(req, cb) {
+        let resp = new DescribeUserCSPMInfoListResponse();
+        this.request("DescribeUserCSPMInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the exclusion network segment configurations for EDR log collection. TCP logs from network segments in the exclusion list will not be collected. If no user configuration exists, the system-recommended default network segments will be returned.
+     * @param {DescribeEdrExcludeNetworkSegmentsRequest} req
+     * @param {function(string, DescribeEdrExcludeNetworkSegmentsResponse):void} cb
+     * @public
+     */
+    DescribeEdrExcludeNetworkSegments(req, cb) {
+        let resp = new DescribeEdrExcludeNetworkSegmentsResponse();
+        this.request("DescribeEdrExcludeNetworkSegments", req, resp, cb);
+    }
+
+    /**
+     * Modifies the vulnerability allowlist of a container image.
+     * @param {ModifyImageVulWhitelistRequest} req
+     * @param {function(string, ModifyImageVulWhitelistResponse):void} cb
+     * @public
+     */
+    ModifyImageVulWhitelist(req, cb) {
+        let resp = new ModifyImageVulWhitelistResponse();
+        this.request("ModifyImageVulWhitelist", req, resp, cb);
+    }
+
+    /**
+     * Modify Group Account Status
+     * @param {ModifyOrganizationAccountStatusRequest} req
+     * @param {function(string, ModifyOrganizationAccountStatusResponse):void} cb
+     * @public
+     */
+    ModifyOrganizationAccountStatus(req, cb) {
+        let resp = new ModifyOrganizationAccountStatusResponse();
+        this.request("ModifyOrganizationAccountStatus", req, resp, cb);
+    }
+
+    /**
+     * Creates a dspm data identification template data item association
+     * @param {CreateDspmIdentifyComplianceRuleRelationRequest} req
+     * @param {function(string, CreateDspmIdentifyComplianceRuleRelationResponse):void} cb
+     * @public
+     */
+    CreateDspmIdentifyComplianceRuleRelation(req, cb) {
+        let resp = new CreateDspmIdentifyComplianceRuleRelationResponse();
+        this.request("CreateDspmIdentifyComplianceRuleRelation", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the log shipping configuration information.
+     * @param {ModifyDspmLogDeliveryTypeRequest} req
+     * @param {function(string, ModifyDspmLogDeliveryTypeResponse):void} cb
+     * @public
+     */
+    ModifyDspmLogDeliveryType(req, cb) {
+        let resp = new ModifyDspmLogDeliveryTypeResponse();
+        this.request("ModifyDspmLogDeliveryType", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the authorization list for application protection.
+     * @param {DescribeRaspLicenseListRequest} req
+     * @param {function(string, DescribeRaspLicenseListResponse):void} cb
+     * @public
+     */
+    DescribeRaspLicenseList(req, cb) {
+        let resp = new DescribeRaspLicenseListResponse();
+        this.request("DescribeRaspLicenseList", req, resp, cb);
+    }
+
+    /**
+     * Delete dspmg shared account data
+     * @param {DeleteDspmShareUserDataRequest} req
+     * @param {function(string, DeleteDspmShareUserDataResponse):void} cb
+     * @public
+     */
+    DeleteDspmShareUserData(req, cb) {
+        let resp = new DeleteDspmShareUserDataResponse();
+        this.request("DeleteDspmShareUserData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain security risk trends and return the daily number of risks grouped by dimension.
+     * @param {DescribeSecurityRiskTrendRequest} req
+     * @param {function(string, DescribeSecurityRiskTrendResponse):void} cb
+     * @public
+     */
+    DescribeSecurityRiskTrend(req, cb) {
+        let resp = new DescribeSecurityRiskTrendResponse();
+        this.request("DescribeSecurityRiskTrend", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query credential details and return credential metadata and masked credential data. The access type returns an Access array (original Key, masked Value), and the sts type returns an STS object (original System, masked SecretID and SecretKey).
+     * @param {DescribeKeySandboxCredentialRequest} req
+     * @param {function(string, DescribeKeySandboxCredentialResponse):void} cb
+     * @public
+     */
+    DescribeKeySandboxCredential(req, cb) {
+        let resp = new DescribeKeySandboxCredentialResponse();
+        this.request("DescribeKeySandboxCredential", req, resp, cb);
+    }
+
+    /**
+     * Modifies a Dspm Asset Data scan task
+     * @param {ModifyDspmAssetDataScanTaskRequest} req
+     * @param {function(string, ModifyDspmAssetDataScanTaskResponse):void} cb
+     * @public
+     */
+    ModifyDspmAssetDataScanTask(req, cb) {
+        let resp = new ModifyDspmAssetDataScanTaskResponse();
+        this.request("ModifyDspmAssetDataScanTask", req, resp, cb);
+    }
+
+    /**
+     * Install the key sandbox SKILL on specified machine instances. Batch operations are supported, allowing input of multiple instance IDs at once. After installation, the AI Agent on the target machine can access credentials through the key sandbox proxy without being exposed to plaintext keys. Duplicate invocations on installed instances will not trigger an error (idempotent) and are deemed successful.
+     * @param {InstallKeySandboxSkillRequest} req
+     * @param {function(string, InstallKeySandboxSkillResponse):void} cb
+     * @public
+     */
+    InstallKeySandboxSkill(req, cb) {
+        let resp = new InstallKeySandboxSkillResponse();
+        this.request("InstallKeySandboxSkill", req, resp, cb);
+    }
+
+    /**
+     * Create a sample risk list export task from the asset perspective
+     * @param {CreateAssetViewRisksExportJobRequest} req
+     * @param {function(string, CreateAssetViewRisksExportJobResponse):void} cb
+     * @public
+     */
+    CreateAssetViewRisksExportJob(req, cb) {
+        let resp = new CreateAssetViewRisksExportJobResponse();
+        this.request("CreateAssetViewRisksExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a dspm identification data item.
+     * @param {CreateDspmIdentifyRuleRequest} req
+     * @param {function(string, CreateDspmIdentifyRuleResponse):void} cb
+     * @public
+     */
+    CreateDspmIdentifyRule(req, cb) {
+        let resp = new CreateDspmIdentifyRuleResponse();
+        this.request("CreateDspmIdentifyRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the Trojan allowlist of an image.
+     * @param {DescribeImageVirusWhitelistRequest} req
+     * @param {function(string, DescribeImageVirusWhitelistResponse):void} cb
+     * @public
+     */
+    DescribeImageVirusWhitelist(req, cb) {
+        let resp = new DescribeImageVirusWhitelistResponse();
+        this.request("DescribeImageVirusWhitelist", req, resp, cb);
+    }
+
+    /**
+     * Access key alarm record AI analysis result details
+     * @param {DescribeAKAnalysisDetailRequest} req
+     * @param {function(string, DescribeAKAnalysisDetailResponse):void} cb
+     * @public
+     */
+    DescribeAKAnalysisDetail(req, cb) {
+        let resp = new DescribeAKAnalysisDetailResponse();
+        this.request("DescribeAKAnalysisDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query account details of a user.
+     * @param {DescribeAccessKeyUserDetailRequest} req
+     * @param {function(string, DescribeAccessKeyUserDetailResponse):void} cb
+     * @public
+     */
+    DescribeAccessKeyUserDetail(req, cb) {
+        let resp = new DescribeAccessKeyUserDetailResponse();
+        this.request("DescribeAccessKeyUserDetail", req, resp, cb);
+    }
+
+    /**
+     * Alarm quantity statistics in the container scenario.
+     * @param {DescribeEdrAlertCountForContainerRequest} req
+     * @param {function(string, DescribeEdrAlertCountForContainerResponse):void} cb
+     * @public
+     */
+    DescribeEdrAlertCountForContainer(req, cb) {
+        let resp = new DescribeEdrAlertCountForContainerResponse();
+        this.request("DescribeEdrAlertCountForContainer", req, resp, cb);
+    }
+
+    /**
+     * Obtain Weak Password Risk List from Asset's Perspective
+     * @param {DescribeRiskCenterAssetViewWeakPasswordRiskListRequest} req
+     * @param {function(string, DescribeRiskCenterAssetViewWeakPasswordRiskListResponse):void} cb
+     * @public
+     */
+    DescribeRiskCenterAssetViewWeakPasswordRiskList(req, cb) {
+        let resp = new DescribeRiskCenterAssetViewWeakPasswordRiskListResponse();
+        this.request("DescribeRiskCenterAssetViewWeakPasswordRiskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete CSIP manual scan tasks.
+     * @param {ScanCSIPTaskAgainRequest} req
+     * @param {function(string, ScanCSIPTaskAgainResponse):void} cb
+     * @public
+     */
+    ScanCSIPTaskAgain(req, cb) {
+        let resp = new ScanCSIPTaskAgainResponse();
+        this.request("ScanCSIPTaskAgain", req, resp, cb);
+    }
+
+    /**
+     * Create a cluster list export task
+     * @param {CreateClusterListExportJobRequest} req
+     * @param {function(string, CreateClusterListExportJobResponse):void} cb
+     * @public
+     */
+    CreateClusterListExportJob(req, cb) {
+        let resp = new CreateClusterListExportJobResponse();
+        this.request("CreateClusterListExportJob", req, resp, cb);
+    }
+
+    /**
+     * Modifies dspm data identification categorization
+     * @param {ModifyDspmIdentifyCategoryRequest} req
+     * @param {function(string, ModifyDspmIdentifyCategoryResponse):void} cb
+     * @public
+     */
+    ModifyDspmIdentifyCategory(req, cb) {
+        let resp = new ModifyDspmIdentifyCategoryResponse();
+        this.request("ModifyDspmIdentifyCategory", req, resp, cb);
+    }
+
+    /**
+     * Query the repository asset overview of images
+     * @param {DescribeImageRegistryAssetOverviewRequest} req
+     * @param {function(string, DescribeImageRegistryAssetOverviewResponse):void} cb
+     * @public
+     */
+    DescribeImageRegistryAssetOverview(req, cb) {
+        let resp = new DescribeImageRegistryAssetOverviewResponse();
+        this.request("DescribeImageRegistryAssetOverview", req, resp, cb);
+    }
+
+    /**
+     * Get the process daemon host list.
+     * @param {DescribeProcessDaemonHostRequest} req
+     * @param {function(string, DescribeProcessDaemonHostResponse):void} cb
+     * @public
+     */
+    DescribeProcessDaemonHost(req, cb) {
+        let resp = new DescribeProcessDaemonHostResponse();
+        this.request("DescribeProcessDaemonHost", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the aggregated scan result list by detection item, for showing the number of passed and failed assets by detection item on the "Detection Item" Tab of the policy details page.
+     * @param {DescribeBaselineAggregatedItemListRequest} req
+     * @param {function(string, DescribeBaselineAggregatedItemListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineAggregatedItemList(req, cb) {
+        let resp = new DescribeBaselineAggregatedItemListResponse();
+        this.request("DescribeBaselineAggregatedItemList", req, resp, cb);
+    }
+
+    /**
+     * Queries the LLM audit user rule list for the current tenant. LLM audit rules do not support user-defined content and can only refer to system rule composites. Import Filter.Name=RuleID for exact querying of an individual rule (for details page scenarios).
+     * @param {DescribeSandboxLLMAuditRuleListRequest} req
+     * @param {function(string, DescribeSandboxLLMAuditRuleListResponse):void} cb
+     * @public
+     */
+    DescribeSandboxLLMAuditRuleList(req, cb) {
+        let resp = new DescribeSandboxLLMAuditRuleListResponse();
+        this.request("DescribeSandboxLLMAuditRuleList", req, resp, cb);
+    }
+
+    /**
+     * Cloud resource configuration risk list from the check perspective
+     * @param {DescribeCheckViewRisksRequest} req
+     * @param {function(string, DescribeCheckViewRisksResponse):void} cb
+     * @public
+     */
+    DescribeCheckViewRisks(req, cb) {
+        let resp = new DescribeCheckViewRisksResponse();
+        this.request("DescribeCheckViewRisks", req, resp, cb);
+    }
+
+    /**
+     * Retrieve recommended questions for AI QA.
+     * @param {DescribeAIAnalysisRecommendQuestionsRequest} req
+     * @param {function(string, DescribeAIAnalysisRecommendQuestionsResponse):void} cb
+     * @public
+     */
+    DescribeAIAnalysisRecommendQuestions(req, cb) {
+        let resp = new DescribeAIAnalysisRecommendQuestionsResponse();
+        this.request("DescribeAIAnalysisRecommendQuestions", req, resp, cb);
+    }
+
+    /**
+     * Query the list of components associated with a container. Get associated component information by container ID. Pagination is supported.
+     * @param {DescribeClusterContainerComponentListRequest} req
+     * @param {function(string, DescribeClusterContainerComponentListResponse):void} cb
+     * @public
+     */
+    DescribeClusterContainerComponentList(req, cb) {
+        let resp = new DescribeClusterContainerComponentListResponse();
+        this.request("DescribeClusterContainerComponentList", req, resp, cb);
+    }
+
+    /**
+     * Obtain Content Risk List
+     * @param {DescribeRiskCenterWebsiteRiskListRequest} req
+     * @param {function(string, DescribeRiskCenterWebsiteRiskListResponse):void} cb
+     * @public
+     */
+    DescribeRiskCenterWebsiteRiskList(req, cb) {
+        let resp = new DescribeRiskCenterWebsiteRiskListResponse();
+        this.request("DescribeRiskCenterWebsiteRiskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query host-associated vulnerability components.
+     * @param {DescribeVulHostRelateComponentRequest} req
+     * @param {function(string, DescribeVulHostRelateComponentResponse):void} cb
+     * @public
+     */
+    DescribeVulHostRelateComponent(req, cb) {
+        let resp = new DescribeVulHostRelateComponentResponse();
+        this.request("DescribeVulHostRelateComponent", req, resp, cb);
+    }
+
+    /**
+     * Update the switch of a custom policy
+     * @param {ModifyUebaRuleSwitchRequest} req
+     * @param {function(string, ModifyUebaRuleSwitchResponse):void} cb
+     * @public
+     */
+    ModifyUebaRuleSwitch(req, cb) {
+        let resp = new ModifyUebaRuleSwitchResponse();
+        this.request("ModifyUebaRuleSwitch", req, resp, cb);
+    }
+
+    /**
+     * Database Asset List
+     * @param {DescribeDbAssetsRequest} req
+     * @param {function(string, DescribeDbAssetsResponse):void} cb
+     * @public
+     */
+    DescribeDbAssets(req, cb) {
+        let resp = new DescribeDbAssetsResponse();
+        this.request("DescribeDbAssets", req, resp, cb);
+    }
+
+    /**
+     * Query the connectivity check task result of an image repository.
+     * @param {DescribeImageRegistryConnectivityTaskResultRequest} req
+     * @param {function(string, DescribeImageRegistryConnectivityTaskResultResponse):void} cb
+     * @public
+     */
+    DescribeImageRegistryConnectivityTaskResult(req, cb) {
+        let resp = new DescribeImageRegistryConnectivityTaskResultResponse();
+        this.request("DescribeImageRegistryConnectivityTaskResult", req, resp, cb);
+    }
+
+    /**
+     * Create Image Layer Vulnerability List Export Task
+     * @param {CreateImageLayerVulListExportJobRequest} req
+     * @param {function(string, CreateImageLayerVulListExportJobResponse):void} cb
+     * @public
+     */
+    CreateImageLayerVulListExportJob(req, cb) {
+        let resp = new CreateImageLayerVulListExportJobResponse();
+        this.request("CreateImageLayerVulListExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the cleanup configuration of the machine.
+     * @param {ModifyMachineAutoClearConfigRequest} req
+     * @param {function(string, ModifyMachineAutoClearConfigResponse):void} cb
+     * @public
+     */
+    ModifyMachineAutoClearConfig(req, cb) {
+        let resp = new ModifyMachineAutoClearConfigResponse();
+        this.request("ModifyMachineAutoClearConfig", req, resp, cb);
+    }
+
+    /**
+     * Batch delete DLP user rules. If any ID does not exist or belongs to another tenant, an error is returned for the entire request.
+     * @param {DeleteSandboxDLPRuleRequest} req
+     * @param {function(string, DeleteSandboxDLPRuleResponse):void} cb
+     * @public
+     */
+    DeleteSandboxDLPRule(req, cb) {
+        let resp = new DeleteSandboxDLPRuleResponse();
+        this.request("DeleteSandboxDLPRule", req, resp, cb);
+    }
+
+    /**
+     * Obtain Vulnerability Risk List from Vulnerability's Perspective
+     * @param {DescribeVulViewVulRiskListRequest} req
+     * @param {function(string, DescribeVulViewVulRiskListResponse):void} cb
+     * @public
+     */
+    DescribeVulViewVulRiskList(req, cb) {
+        let resp = new DescribeVulViewVulRiskListResponse();
+        this.request("DescribeVulViewVulRiskList", req, resp, cb);
+    }
+
+    /**
+     * Queries the list of vulnerabilities in an image layer
+     * @param {DescribeImageLayerVulListRequest} req
+     * @param {function(string, DescribeImageLayerVulListResponse):void} cb
+     * @public
+     */
+    DescribeImageLayerVulList(req, cb) {
+        let resp = new DescribeImageLayerVulListResponse();
+        this.request("DescribeImageLayerVulList", req, resp, cb);
+    }
+
+    /**
+     * Create Domain and IP Information
+     * @param {CreateDomainAndIpRequest} req
+     * @param {function(string, CreateDomainAndIpResponse):void} cb
+     * @public
+     */
+    CreateDomainAndIp(req, cb) {
+        let resp = new CreateDomainAndIpResponse();
+        this.request("CreateDomainAndIp", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the vulnerability allowlist of a container image.
+     * @param {DescribeImageVulWhitelistRequest} req
+     * @param {function(string, DescribeImageVulWhitelistResponse):void} cb
+     * @public
+     */
+    DescribeImageVulWhitelist(req, cb) {
+        let resp = new DescribeImageVulWhitelistResponse();
+        this.request("DescribeImageVulWhitelist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to handle alarm status in batches.
+     * @param {UpdateAlertStatusListRequest} req
+     * @param {function(string, UpdateAlertStatusListResponse):void} cb
+     * @public
+     */
+    UpdateAlertStatusList(req, cb) {
+        let resp = new UpdateAlertStatusListResponse();
+        this.request("UpdateAlertStatusList", req, resp, cb);
+    }
+
+    /**
+     * Queries the image component list.
+     * @param {DescribeImageComponentListRequest} req
+     * @param {function(string, DescribeImageComponentListResponse):void} cb
+     * @public
+     */
+    DescribeImageComponentList(req, cb) {
+        let resp = new DescribeImageComponentListResponse();
+        this.request("DescribeImageComponentList", req, resp, cb);
+    }
+
+    /**
+     * Query the high-risk baseline risk list of host nodes under the cloud boundary analysis exposed path.
+     * @param {DescribeHighBaseLineRiskListRequest} req
+     * @param {function(string, DescribeHighBaseLineRiskListResponse):void} cb
+     * @public
+     */
+    DescribeHighBaseLineRiskList(req, cb) {
+        let resp = new DescribeHighBaseLineRiskListResponse();
+        this.request("DescribeHighBaseLineRiskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to edit or create an EDR policy.
+     * @param {ModifyEDRRuleRequest} req
+     * @param {function(string, ModifyEDRRuleResponse):void} cb
+     * @public
+     */
+    ModifyEDRRule(req, cb) {
+        let resp = new ModifyEDRRuleResponse();
+        this.request("ModifyEDRRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a vulnerability allowlist.
+     * @param {DeleteVulWhitelistRequest} req
+     * @param {function(string, DeleteVulWhitelistResponse):void} cb
+     * @public
+     */
+    DeleteVulWhitelist(req, cb) {
+        let resp = new DeleteVulWhitelistResponse();
+        this.request("DeleteVulWhitelist", req, resp, cb);
+    }
+
+    /**
+     * Query the voucher list.
+     * @param {DescribeKeySandboxCredentialListRequest} req
+     * @param {function(string, DescribeKeySandboxCredentialListResponse):void} cb
+     * @public
+     */
+    DescribeKeySandboxCredentialList(req, cb) {
+        let resp = new DescribeKeySandboxCredentialListResponse();
+        this.request("DescribeKeySandboxCredentialList", req, resp, cb);
+    }
+
+    /**
+     * Modifies the Sensitive Information Allowlist of a Container Image
+     * @param {ModifyImageSensitiveWhitelistRequest} req
+     * @param {function(string, ModifyImageSensitiveWhitelistResponse):void} cb
+     * @public
+     */
+    ModifyImageSensitiveWhitelist(req, cb) {
+        let resp = new ModifyImageSensitiveWhitelistResponse();
+        this.request("ModifyImageSensitiveWhitelist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to edit asset tags.
+     * @param {ModifyAssetTagRequest} req
+     * @param {function(string, ModifyAssetTagResponse):void} cb
+     * @public
+     */
+    ModifyAssetTag(req, cb) {
+        let resp = new ModifyAssetTagResponse();
+        this.request("ModifyAssetTag", req, resp, cb);
+    }
+
+    /**
+     * Modify the AI-Link engine configuration.
+     * @param {ModifyAILinkSettingRequest} req
+     * @param {function(string, ModifyAILinkSettingResponse):void} cb
+     * @public
+     */
+    ModifyAILinkSetting(req, cb) {
+        let resp = new ModifyAILinkSettingResponse();
+        this.request("ModifyAILinkSetting", req, resp, cb);
+    }
+
+    /**
+     * Queries the Dspm asset list.
+     * @param {DescribeDspmAssetsRequest} req
+     * @param {function(string, DescribeDspmAssetsResponse):void} cb
+     * @public
+     */
+    DescribeDspmAssets(req, cb) {
+        let resp = new DescribeDspmAssetsResponse();
+        this.request("DescribeDspmAssets", req, resp, cb);
+    }
+
+    /**
+     * Queries supported permissions for Dspm assets
+     * @param {DescribeDspmAssetSupportedPrivilegesRequest} req
+     * @param {function(string, DescribeDspmAssetSupportedPrivilegesResponse):void} cb
+     * @public
+     */
+    DescribeDspmAssetSupportedPrivileges(req, cb) {
+        let resp = new DescribeDspmAssetSupportedPrivilegesResponse();
+        this.request("DescribeDspmAssetSupportedPrivileges", req, resp, cb);
+    }
+
+    /**
+     * Obtain the IaC detection file overview.
+     * @param {DescribeIaCFileOverviewRequest} req
+     * @param {function(string, DescribeIaCFileOverviewResponse):void} cb
+     * @public
+     */
+    DescribeIaCFileOverview(req, cb) {
+        let resp = new DescribeIaCFileOverviewResponse();
+        this.request("DescribeIaCFileOverview", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query cluster container details. It retrieves basic container info, mirror information, mount information, network info, and associated node information by container ID.
+     * @param {DescribeClusterContainerDetailRequest} req
+     * @param {function(string, DescribeClusterContainerDetailResponse):void} cb
+     * @public
+     */
+    DescribeClusterContainerDetail(req, cb) {
+        let resp = new DescribeClusterContainerDetailResponse();
+        this.request("DescribeClusterContainerDetail", req, resp, cb);
+    }
+
+    /**
+     * Access key risk record details
+     * @param {DescribeAccessKeyRiskDetailRequest} req
+     * @param {function(string, DescribeAccessKeyRiskDetailResponse):void} cb
+     * @public
+     */
+    DescribeAccessKeyRiskDetail(req, cb) {
+        let resp = new DescribeAccessKeyRiskDetailResponse();
+        this.request("DescribeAccessKeyRiskDetail", req, resp, cb);
+    }
+
+    /**
+     * Delete a Dspm asset account
+     * @param {DeleteDspmAssetAccountRequest} req
+     * @param {function(string, DeleteDspmAssetAccountResponse):void} cb
+     * @public
+     */
+    DeleteDspmAssetAccount(req, cb) {
+        let resp = new DeleteDspmAssetAccountResponse();
+        this.request("DeleteDspmAssetAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain vulnerability list
+     * @param {DescribeVulItemListRequest} req
+     * @param {function(string, DescribeVulItemListResponse):void} cb
+     * @public
+     */
+    DescribeVulItemList(req, cb) {
+        let resp = new DescribeVulItemListResponse();
+        this.request("DescribeVulItemList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query Pod details in A cluster. It is A new Type A API for the container asset revision and serves as the main entrance to the Pod Asset Details Page. The input parameter is only UniqueID. The output parameters cover asset information, cluster, namespace, node, Workload, as well as the number of risk events and alarm events grouped by four risk levels.
+     * @param {DescribeClusterPodDetailRequest} req
+     * @param {function(string, DescribeClusterPodDetailResponse):void} cb
+     * @public
+     */
+    DescribeClusterPodDetail(req, cb) {
+        let resp = new DescribeClusterPodDetailResponse();
+        this.request("DescribeClusterPodDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query Skill security detection alarm details, including local alarm information and engine real-time detection data.
+     * @param {DescribeSkillScanAlertDetailRequest} req
+     * @param {function(string, DescribeSkillScanAlertDetailResponse):void} cb
+     * @public
+     */
+    DescribeSkillScanAlertDetail(req, cb) {
+        let resp = new DescribeSkillScanAlertDetailResponse();
+        this.request("DescribeSkillScanAlertDetail", req, resp, cb);
+    }
+
+    /**
+     * Delete a dspm data identification classification group
+     * @param {DeleteDspmIdentifyLevelGroupRequest} req
+     * @param {function(string, DeleteDspmIdentifyLevelGroupResponse):void} cb
+     * @public
+     */
+    DeleteDspmIdentifyLevelGroup(req, cb) {
+        let resp = new DeleteDspmIdentifyLevelGroupResponse();
+        this.request("DeleteDspmIdentifyLevelGroup", req, resp, cb);
+    }
+
+    /**
+     * Update the custom "user weak password" dictionary for the current account. The dictionary content is stored after server encryption. Input an empty string to clear it.
+     * @param {ModifyBaselineUserWeakPasswordConfRequest} req
+     * @param {function(string, ModifyBaselineUserWeakPasswordConfResponse):void} cb
+     * @public
+     */
+    ModifyBaselineUserWeakPasswordConf(req, cb) {
+        let resp = new ModifyBaselineUserWeakPasswordConfResponse();
+        this.request("ModifyBaselineUserWeakPasswordConf", req, resp, cb);
+    }
+
+    /**
+     * Get the host list for QR code log-in
+     * @param {DescribeLoginTypeHostRequest} req
+     * @param {function(string, DescribeLoginTypeHostResponse):void} cb
+     * @public
+     */
+    DescribeLoginTypeHost(req, cb) {
+        let resp = new DescribeLoginTypeHostResponse();
+        this.request("DescribeLoginTypeHost", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify client log collection settings exclusive to CSIP. It allows you to set the log collection type and asset scope for which the settings take effect.
+     * @param {ModifyAgentConfigSettingRequest} req
+     * @param {function(string, ModifyAgentConfigSettingResponse):void} cb
+     * @public
+     */
+    ModifyAgentConfigSetting(req, cb) {
+        let resp = new ModifyAgentConfigSettingResponse();
+        this.request("ModifyAgentConfigSetting", req, resp, cb);
+    }
+
+    /**
+     * All assets
+     * @param {DescribeAssetTagsRequest} req
+     * @param {function(string, DescribeAssetTagsResponse):void} cb
+     * @public
+     */
+    DescribeAssetTags(req, cb) {
+        let resp = new DescribeAssetTagsResponse();
+        this.request("DescribeAssetTags", req, resp, cb);
+    }
+
+    /**
+     * Search for AI agent asset list.
+     * @param {DescribeAIAgentAssetListRequest} req
+     * @param {function(string, DescribeAIAgentAssetListResponse):void} cb
+     * @public
+     */
+    DescribeAIAgentAssetList(req, cb) {
+        let resp = new DescribeAIAgentAssetListResponse();
+        this.request("DescribeAIAgentAssetList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get host details of a CSIP scan task.
+     * @param {DescribeCSIPMalwareScanTaskDetailRequest} req
+     * @param {function(string, DescribeCSIPMalwareScanTaskDetailResponse):void} cb
+     * @public
+     */
+    DescribeCSIPMalwareScanTaskDetail(req, cb) {
+        let resp = new DescribeCSIPMalwareScanTaskDetailResponse();
+        this.request("DescribeCSIPMalwareScanTaskDetail", req, resp, cb);
+    }
+
+    /**
+     * Automatic tagging of cloud boundaries - rule list
+     * @param {DescribeExposureAutoTagRulesRequest} req
+     * @param {function(string, DescribeExposureAutoTagRulesResponse):void} cb
+     * @public
+     */
+    DescribeExposureAutoTagRules(req, cb) {
+        let resp = new DescribeExposureAutoTagRulesResponse();
+        this.request("DescribeExposureAutoTagRules", req, resp, cb);
+    }
+
+    /**
+     * Query the list of dspm identification data items.
+     * @param {DescribeDspmIdentifyRuleListRequest} req
+     * @param {function(string, DescribeDspmIdentifyRuleListResponse):void} cb
+     * @public
+     */
+    DescribeDspmIdentifyRuleList(req, cb) {
+        let resp = new DescribeDspmIdentifyRuleListResponse();
+        this.request("DescribeDspmIdentifyRuleList", req, resp, cb);
+    }
+
+    /**
+     * Example of cloud resource configuration risk rule list
+     * @param {DescribeConfigCheckRulesRequest} req
+     * @param {function(string, DescribeConfigCheckRulesResponse):void} cb
+     * @public
+     */
+    DescribeConfigCheckRules(req, cb) {
+        let resp = new DescribeConfigCheckRulesResponse();
+        this.request("DescribeConfigCheckRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of allowlisted machines after merge.
+     * @param {DescribeLoginWhiteHostListRequest} req
+     * @param {function(string, DescribeLoginWhiteHostListResponse):void} cb
+     * @public
+     */
+    DescribeLoginWhiteHostList(req, cb) {
+        let resp = new DescribeLoginWhiteHostListResponse();
+        this.request("DescribeLoginWhiteHostList", req, resp, cb);
+    }
+
+    /**
+     * Obtain VPC List
+     * @param {DescribeVpcAssetsRequest} req
+     * @param {function(string, DescribeVpcAssetsResponse):void} cb
+     * @public
+     */
+    DescribeVpcAssets(req, cb) {
+        let resp = new DescribeVpcAssetsResponse();
+        this.request("DescribeVpcAssets", req, resp, cb);
+    }
+
+    /**
+     * Queries the container assets associated with an image.
+     * @param {DescribeImageAssociatedContainerListRequest} req
+     * @param {function(string, DescribeImageAssociatedContainerListResponse):void} cb
+     * @public
+     */
+    DescribeImageAssociatedContainerList(req, cb) {
+        let resp = new DescribeImageAssociatedContainerListResponse();
+        this.request("DescribeImageAssociatedContainerList", req, resp, cb);
+    }
+
+    /**
+     * Query scan task details. Filter.Filters supports Name: Status (asset scan status, OperatorType=7 IN match, Value: WAIT/SCANNING/FINISHED/FAILED).
+     * @param {DescribeEDRScanTaskDetailRequest} req
+     * @param {function(string, DescribeEDRScanTaskDetailResponse):void} cb
+     * @public
+     */
+    DescribeEDRScanTaskDetail(req, cb) {
+        let resp = new DescribeEDRScanTaskDetailResponse();
+        this.request("DescribeEDRScanTaskDetail", req, resp, cb);
+    }
+
+    /**
+     * EDR alert quarantine and recovery
+     * @param {ModifyEdrAlertIsolationRequest} req
+     * @param {function(string, ModifyEdrAlertIsolationResponse):void} cb
+     * @public
+     */
+    ModifyEdrAlertIsolation(req, cb) {
+        let resp = new ModifyEdrAlertIsolationResponse();
+        this.request("ModifyEdrAlertIsolation", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable the log type shipping.
+     * @param {ModifyDspmCkafkaStopRequest} req
+     * @param {function(string, ModifyDspmCkafkaStopResponse):void} cb
+     * @public
+     */
+    ModifyDspmCkafkaStop(req, cb) {
+        let resp = new ModifyDspmCkafkaStopResponse();
+        this.request("ModifyDspmCkafkaStop", req, resp, cb);
+    }
+
+    /**
+     * Create an IaC detection integration Token.
+     * @param {CreateIaCAccessTokenRequest} req
+     * @param {function(string, CreateIaCAccessTokenResponse):void} cb
+     * @public
+     */
+    CreateIaCAccessToken(req, cb) {
+        let resp = new CreateIaCAccessTokenResponse();
+        this.request("CreateIaCAccessToken", req, resp, cb);
+    }
+
+    /**
+     * Query the component list in an asset.
+     * @param {DescribeAssetComponentListRequest} req
+     * @param {function(string, DescribeAssetComponentListResponse):void} cb
+     * @public
+     */
+    DescribeAssetComponentList(req, cb) {
+        let resp = new DescribeAssetComponentListResponse();
+        this.request("DescribeAssetComponentList", req, resp, cb);
+    }
+
+    /**
+     * Queries Dspm risk policies
+     * @param {DescribeDspmRiskStrategyRequest} req
+     * @param {function(string, DescribeDspmRiskStrategyResponse):void} cb
+     * @public
+     */
+    DescribeDspmRiskStrategy(req, cb) {
+        let resp = new DescribeDspmRiskStrategyResponse();
+        this.request("DescribeDspmRiskStrategy", req, resp, cb);
+    }
+
+    /**
+     * Custom risk rule
+     * @param {OperateRiskRulePolicyRequest} req
+     * @param {function(string, OperateRiskRulePolicyResponse):void} cb
+     * @public
+     */
+    OperateRiskRulePolicy(req, cb) {
+        let resp = new OperateRiskRulePolicyResponse();
+        this.request("OperateRiskRulePolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the intranet alert and asset scope configuration for rebound Shell.
+     * @param {DescribeReverseShellSystemPolicyConfigRequest} req
+     * @param {function(string, DescribeReverseShellSystemPolicyConfigResponse):void} cb
+     * @public
+     */
+    DescribeReverseShellSystemPolicyConfig(req, cb) {
+        let resp = new DescribeReverseShellSystemPolicyConfigResponse();
+        this.request("DescribeReverseShellSystemPolicyConfig", req, resp, cb);
+    }
+
+    /**
+     * Illustrative example of the advanced configuration risk rule list
+     * @param {DescribeRiskRulesRequest} req
+     * @param {function(string, DescribeRiskRulesResponse):void} cb
+     * @public
+     */
+    DescribeRiskRules(req, cb) {
+        let resp = new DescribeRiskRulesResponse();
+        this.request("DescribeRiskRules", req, resp, cb);
+    }
+
+    /**
+     * Users manually submit vulnerability repair tasks, specify the vulnerabilities and target hosts that need to be repaired, and the system creates fixing tasks and dispatches execution. It supports options such as specifying the repair timeout period and whether to create a snapshot. The FixItems array is used to precisely control which hosts each vulnerability or KB patch repairs.
+     * @param {CreateVulFixTaskRequest} req
+     * @param {function(string, CreateVulFixTaskResponse):void} cb
+     * @public
+     */
+    CreateVulFixTask(req, cb) {
+        let resp = new CreateVulFixTaskResponse();
+        this.request("CreateVulFixTask", req, resp, cb);
+    }
+
+    /**
+     * Asset sync task status
+     * @param {DescribeAssetSyncTaskStatusRequest} req
+     * @param {function(string, DescribeAssetSyncTaskStatusResponse):void} cb
+     * @public
+     */
+    DescribeAssetSyncTaskStatus(req, cb) {
+        let resp = new DescribeAssetSyncTaskStatusResponse();
+        this.request("DescribeAssetSyncTaskStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add cross-region log-in allowlists in batches.
+     * @param {AddLoginWhiteListsRequest} req
+     * @param {function(string, AddLoginWhiteListsResponse):void} cb
+     * @public
+     */
+    AddLoginWhiteLists(req, cb) {
+        let resp = new AddLoginWhiteListsResponse();
+        this.request("AddLoginWhiteLists", req, resp, cb);
+    }
+
+    /**
+     * Querying Cluster Details
+     * @param {DescribeClusterDetailRequest} req
+     * @param {function(string, DescribeClusterDetailResponse):void} cb
+     * @public
+     */
+    DescribeClusterDetail(req, cb) {
+        let resp = new DescribeClusterDetailResponse();
+        this.request("DescribeClusterDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export log files with large data volumes asynchronously.
+     * @param {ExportTasksRequest} req
+     * @param {function(string, ExportTasksResponse):void} cb
+     * @public
+     */
+    ExportTasks(req, cb) {
+        let resp = new ExportTasksResponse();
+        this.request("ExportTasks", req, resp, cb);
+    }
+
+    /**
+     * Pending risks to be governed for cloud boundaries
+     * @param {DescribeExposeRiskStatisticsRequest} req
+     * @param {function(string, DescribeExposeRiskStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeExposeRiskStatistics(req, cb) {
+        let resp = new DescribeExposeRiskStatisticsResponse();
+        this.request("DescribeExposeRiskStatistics", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an LLM audit user rule. It must refer to at least one system rule and does not support user customization of rule content.
+     * @param {CreateSandboxLLMAuditRuleRequest} req
+     * @param {function(string, CreateSandboxLLMAuditRuleResponse):void} cb
+     * @public
+     */
+    CreateSandboxLLMAuditRule(req, cb) {
+        let resp = new CreateSandboxLLMAuditRuleResponse();
+        this.request("CreateSandboxLLMAuditRule", req, resp, cb);
+    }
+
+    /**
+     * Query the asset list of hosts associated with the image.
+     * @param {DescribeImageAssociatedHostListRequest} req
+     * @param {function(string, DescribeImageAssociatedHostListResponse):void} cb
+     * @public
+     */
+    DescribeImageAssociatedHostList(req, cb) {
+        let resp = new DescribeImageAssociatedHostListResponse();
+        this.request("DescribeImageAssociatedHostList", req, resp, cb);
+    }
+
+    /**
+     * Modify an existing DLP user rule. Fields not passed retain their original values, and partial field update is supported. BelongAssetType cannot be modified.
+     * @param {ModifySandboxDLPRuleRequest} req
+     * @param {function(string, ModifySandboxDLPRuleResponse):void} cb
+     * @public
+     */
+    ModifySandboxDLPRule(req, cb) {
+        let resp = new ModifySandboxDLPRuleResponse();
+        this.request("ModifySandboxDLPRule", req, resp, cb);
+    }
+
+    /**
+     * Queries information on asset types supported by Dspm.
+     * @param {DescribeDspmSupportedAssetTypeRequest} req
+     * @param {function(string, DescribeDspmSupportedAssetTypeResponse):void} cb
+     * @public
+     */
+    DescribeDspmSupportedAssetType(req, cb) {
+        let resp = new DescribeDspmSupportedAssetTypeResponse();
+        this.request("DescribeDspmSupportedAssetType", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a Dspm custom risk policy.
+     * @param {CreateDspmRiskStrategyRequest} req
+     * @param {function(string, CreateDspmRiskStrategyResponse):void} cb
+     * @public
+     */
+    CreateDspmRiskStrategy(req, cb) {
+        let resp = new CreateDspmRiskStrategyResponse();
+        this.request("CreateDspmRiskStrategy", req, resp, cb);
+    }
+
+    /**
+     * Get the dspm information list of an account
+     * @param {DescribeUserDspmInfoListRequest} req
+     * @param {function(string, DescribeUserDspmInfoListResponse):void} cb
+     * @public
+     */
+    DescribeUserDspmInfoList(req, cb) {
+        let resp = new DescribeUserDspmInfoListResponse();
+        this.request("DescribeUserDspmInfoList", req, resp, cb);
+    }
+
+    /**
+     * Queries AI scheduled task statistics information.
+
+Returns the total number of scheduled tasks and the number of running tasks for the current user.
+     * @param {DescribeAIScheduleStatsRequest} req
+     * @param {function(string, DescribeAIScheduleStatsResponse):void} cb
+     * @public
+     */
+    DescribeAIScheduleStats(req, cb) {
+        let resp = new DescribeAIScheduleStatsResponse();
+        this.request("DescribeAIScheduleStats", req, resp, cb);
+    }
+
+    /**
+     * Risk operation example
+     * @param {OperateRiskRequest} req
+     * @param {function(string, OperateRiskResponse):void} cb
+     * @public
+     */
+    OperateRisk(req, cb) {
+        let resp = new OperateRiskResponse();
+        this.request("OperateRisk", req, resp, cb);
+    }
+
+    /**
+     * Queries Dspm application history
+     * @param {DescribeDspmApplyHistoryRequest} req
+     * @param {function(string, DescribeDspmApplyHistoryResponse):void} cb
+     * @public
+     */
+    DescribeDspmApplyHistory(req, cb) {
+        let resp = new DescribeDspmApplyHistoryResponse();
+        this.request("DescribeDspmApplyHistory", req, resp, cb);
+    }
+
+    /**
+     * Query the AI-Link engine configuration
+     * @param {DescribeAILinkSettingRequest} req
+     * @param {function(string, DescribeAILinkSettingResponse):void} cb
+     * @public
+     */
+    DescribeAILinkSetting(req, cb) {
+        let resp = new DescribeAILinkSettingResponse();
+        this.request("DescribeAILinkSetting", req, resp, cb);
+    }
+
+    /**
+     * Create a baseline main task export task to export detection items and subtask data under the specified main task. The task executes asynchronously in the backend. Once completed, the result file can be downloaded in the export task list.
+     * @param {CreateBaselineMainTaskExportJobRequest} req
+     * @param {function(string, CreateBaselineMainTaskExportJobResponse):void} cb
+     * @public
+     */
+    CreateBaselineMainTaskExportJob(req, cb) {
+        let resp = new CreateBaselineMainTaskExportJobResponse();
+        this.request("CreateBaselineMainTaskExportJob", req, resp, cb);
+    }
+
+    /**
+     * Export the host list for client settings.
+     * @param {ExportClientSettingHostListRequest} req
+     * @param {function(string, ExportClientSettingHostListResponse):void} cb
+     * @public
+     */
+    ExportClientSettingHostList(req, cb) {
+        let resp = new ExportClientSettingHostListResponse();
+        this.request("ExportClientSettingHostList", req, resp, cb);
+    }
+
+    /**
+     * Retrieve the built-in default security scoring rules for resetting custom rules.
+     * @param {DescribeDefaultSecurityScoreRuleRequest} req
+     * @param {function(string, DescribeDefaultSecurityScoreRuleResponse):void} cb
+     * @public
+     */
+    DescribeDefaultSecurityScoreRule(req, cb) {
+        let resp = new DescribeDefaultSecurityScoreRuleResponse();
+        this.request("DescribeDefaultSecurityScoreRule", req, resp, cb);
+    }
+
+    /**
+     * Query the cyber attack detection switch and asset scope configuration
+     * @param {DescribeNetAttackSettingRequest} req
+     * @param {function(string, DescribeNetAttackSettingResponse):void} cb
+     * @public
+     */
+    DescribeNetAttackSetting(req, cb) {
+        let resp = new DescribeNetAttackSettingResponse();
+        this.request("DescribeNetAttackSetting", req, resp, cb);
+    }
+
+    /**
+     * Retrieve historical analysis records of the cloud security AI assistant.
+     * @param {DescribeAIAnalysisHistoryRequest} req
+     * @param {function(string, DescribeAIAnalysisHistoryResponse):void} cb
+     * @public
+     */
+    DescribeAIAnalysisHistory(req, cb) {
+        let resp = new DescribeAIAnalysisHistoryResponse();
+        this.request("DescribeAIAnalysisHistory", req, resp, cb);
+    }
+
+    /**
+     * This API is used to retrieve the risk record list of detection item dimensions.
+     * @param {DescribeBaselineItemRiskListRequest} req
+     * @param {function(string, DescribeBaselineItemRiskListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineItemRiskList(req, cb) {
+        let resp = new DescribeBaselineItemRiskListResponse();
+        this.request("DescribeBaselineItemRiskList", req, resp, cb);
+    }
+
+    /**
+     * Update automatic cloud boundary tagging rules
+     * @param {ModifyExposureAutoTagRuleRequest} req
+     * @param {function(string, ModifyExposureAutoTagRuleResponse):void} cb
+     * @public
+     */
+    ModifyExposureAutoTagRule(req, cb) {
+        let resp = new ModifyExposureAutoTagRuleResponse();
+        this.request("ModifyExposureAutoTagRule", req, resp, cb);
+    }
+
+    /**
+     * Manually unbind RASP authorization. Execute synchronously and return results directly. Only unbind RASP authorization (category=1), with no unbinding frequency limit. In single order mode, appid can locate the order without the need to pass ResourceId.
+     * @param {ModifyCSIPRaspLicenseUnBindsRequest} req
+     * @param {function(string, ModifyCSIPRaspLicenseUnBindsResponse):void} cb
+     * @public
+     */
+    ModifyCSIPRaspLicenseUnBinds(req, cb) {
+        let resp = new ModifyCSIPRaspLicenseUnBindsResponse();
+        this.request("ModifyCSIPRaspLicenseUnBinds", req, resp, cb);
+    }
+
+    /**
+     * Create a scan task based on the original task configuration. If AssetId is empty, get all asset info from TaskId. If AssetId is not empty, only the single asset is included.
+     * @param {ScanEDRTaskAgainRequest} req
+     * @param {function(string, ScanEDRTaskAgainResponse):void} cb
+     * @public
+     */
+    ScanEDRTaskAgain(req, cb) {
+        let resp = new ScanEDRTaskAgainResponse();
+        this.request("ScanEDRTaskAgain", req, resp, cb);
+    }
+
+    /**
+     * Replicate a custom baseline policy.
+     * @param {CopyBaselinePolicyRequest} req
+     * @param {function(string, CopyBaselinePolicyResponse):void} cb
+     * @public
+     */
+    CopyBaselinePolicy(req, cb) {
+        let resp = new CopyBaselinePolicyResponse();
+        this.request("CopyBaselinePolicy", req, resp, cb);
+    }
+
+    /**
+     * Delete ACL user rules in batches. After deletion, rules are no longer returned in list queries and no longer take effect on traffic. If any ID does not exist or belongs to another tenant, an error is returned overall.
+     * @param {DeleteSandboxACLRuleRequest} req
+     * @param {function(string, DeleteSandboxACLRuleResponse):void} cb
+     * @public
+     */
+    DeleteSandboxACLRule(req, cb) {
+        let resp = new DeleteSandboxACLRuleResponse();
+        this.request("DeleteSandboxACLRule", req, resp, cb);
+    }
+
+    /**
+     * Query the Dspm asset status synchronization.
+     * @param {DescribeDspmSyncAssetsStatusRequest} req
+     * @param {function(string, DescribeDspmSyncAssetsStatusResponse):void} cb
+     * @public
+     */
+    DescribeDspmSyncAssetsStatus(req, cb) {
+        let resp = new DescribeDspmSyncAssetsStatusResponse();
+        this.request("DescribeDspmSyncAssetsStatus", req, resp, cb);
+    }
+
+    /**
+     * Triggers a rescan for a batch of risk records. It is commonly used for rescanning after selecting multiple risks on the Risk List page.
+     * @param {ScanBaselineRiskListRequest} req
+     * @param {function(string, ScanBaselineRiskListResponse):void} cb
+     * @public
+     */
+    ScanBaselineRiskList(req, cb) {
+        let resp = new ScanBaselineRiskListResponse();
+        this.request("ScanBaselineRiskList", req, resp, cb);
+    }
+
+    /**
+     * Determine whether the user is a grayscale user
+     * @param {DescribeAbTestUserRequest} req
+     * @param {function(string, DescribeAbTestUserResponse):void} cb
+     * @public
+     */
+    DescribeAbTestUser(req, cb) {
+        let resp = new DescribeAbTestUserResponse();
+        this.request("DescribeAbTestUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the account call record list.
+     * @param {DescribeUserCallRecordRequest} req
+     * @param {function(string, DescribeUserCallRecordResponse):void} cb
+     * @public
+     */
+    DescribeUserCallRecord(req, cb) {
+        let resp = new DescribeUserCallRecordResponse();
+        this.request("DescribeUserCallRecord", req, resp, cb);
+    }
+
+    /**
+     * This API is used to retrieve the built-in baseline classification tree (parent category → subcategory → built-in detection item ID list) for policy details display.
+     * @param {DescribeBaselinePolicyCategoryListRequest} req
+     * @param {function(string, DescribeBaselinePolicyCategoryListResponse):void} cb
+     * @public
+     */
+    DescribeBaselinePolicyCategoryList(req, cb) {
+        let resp = new DescribeBaselinePolicyCategoryListResponse();
+        this.request("DescribeBaselinePolicyCategoryList", req, resp, cb);
+    }
+
+    /**
+     * Cloud boundary analysis asset list (suitable for host assets)
+     * @param {DescribeCWPExposuresRequest} req
+     * @param {function(string, DescribeCWPExposuresResponse):void} cb
+     * @public
+     */
+    DescribeCWPExposures(req, cb) {
+        let resp = new DescribeCWPExposuresResponse();
+        this.request("DescribeCWPExposures", req, resp, cb);
+    }
+
+    /**
+     * Paging query for the DLP data leakage alert log list. Supports precise filtering of a single alert by Filter.Name=ID for the details page scenario.
+     * @param {DescribeSandboxDLPAlertListRequest} req
+     * @param {function(string, DescribeSandboxDLPAlertListResponse):void} cb
+     * @public
+     */
+    DescribeSandboxDLPAlertList(req, cb) {
+        let resp = new DescribeSandboxDLPAlertListResponse();
+        this.request("DescribeSandboxDLPAlertList", req, resp, cb);
+    }
+
+    /**
+     * Modify image repository information.
+     * @param {ModifyImageRegistryRequest} req
+     * @param {function(string, ModifyImageRegistryResponse):void} cb
+     * @public
+     */
+    ModifyImageRegistry(req, cb) {
+        let resp = new ModifyImageRegistryResponse();
+        this.request("ModifyImageRegistry", req, resp, cb);
+    }
+
+    /**
+     * Create a sample risk list export task from the asset perspective
+     * @param {CreateCheckViewRisksExportJobRequest} req
+     * @param {function(string, CreateCheckViewRisksExportJobResponse):void} cb
+     * @public
+     */
+    CreateCheckViewRisksExportJob(req, cb) {
+        let resp = new CreateCheckViewRisksExportJobResponse();
+        this.request("CreateCheckViewRisksExportJob", req, resp, cb);
+    }
+
+    /**
+     * Create image associated host asset list export task
+     * @param {CreateImageAssociatedHostListExportJobRequest} req
+     * @param {function(string, CreateImageAssociatedHostListExportJobResponse):void} cb
+     * @public
+     */
+    CreateImageAssociatedHostListExportJob(req, cb) {
+        let resp = new CreateImageAssociatedHostListExportJobResponse();
+        this.request("CreateImageAssociatedHostListExportJob", req, resp, cb);
+    }
+
+    /**
+     * Create a DLP user rule. You can reference several system rules (SystemRuleIDList) or define a custom rule (UserRuleContent, name + regular). At least one of both is required. UserRuleInfo is a newly-added optional structured input parameter. When it is passed together with UserRuleContent, UserRuleInfo takes precedence.
+     * @param {CreateSandboxDLPRuleRequest} req
+     * @param {function(string, CreateSandboxDLPRuleResponse):void} cb
+     * @public
+     */
+    CreateSandboxDLPRule(req, cb) {
+        let resp = new CreateSandboxDLPRuleResponse();
+        this.request("CreateSandboxDLPRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a vulnerability rescan
+     * @param {CreateVulReScanRequest} req
+     * @param {function(string, CreateVulReScanResponse):void} cb
+     * @public
+     */
+    CreateVulReScan(req, cb) {
+        let resp = new CreateVulReScanResponse();
+        this.request("CreateVulReScan", req, resp, cb);
+    }
+
+    /**
+     * Alarm Center full alarm list API
+     * @param {DescribeAlertListRequest} req
+     * @param {function(string, DescribeAlertListResponse):void} cb
+     * @public
+     */
+    DescribeAlertList(req, cb) {
+        let resp = new DescribeAlertListResponse();
+        this.request("DescribeAlertList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the binding task progress of the authorization.
+     * @param {DescribeCWPLicenseBindScheduleRequest} req
+     * @param {function(string, DescribeCWPLicenseBindScheduleResponse):void} cb
+     * @public
+     */
+    DescribeCWPLicenseBindSchedule(req, cb) {
+        let resp = new DescribeCWPLicenseBindScheduleResponse();
+        this.request("DescribeCWPLicenseBindSchedule", req, resp, cb);
+    }
+
+    /**
+     * Queries the list of Layer 7 forwarding rules corresponding to a specified CLB instance.
+     * @param {DescribeClbListenerRulesRequest} req
+     * @param {function(string, DescribeClbListenerRulesResponse):void} cb
+     * @public
+     */
+    DescribeClbListenerRules(req, cb) {
+        let resp = new DescribeClbListenerRulesResponse();
+        this.request("DescribeClbListenerRules", req, resp, cb);
+    }
+
+    /**
+     * Modify Dspm asset account information.
+     * @param {ModifyDspmAssetAccountRequest} req
+     * @param {function(string, ModifyDspmAssetAccountResponse):void} cb
+     * @public
+     */
+    ModifyDspmAssetAccount(req, cb) {
+        let resp = new ModifyDspmAssetAccountResponse();
+        this.request("ModifyDspmAssetAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the collection path configuration.
+     * @param {DescribeEdrLogCollectPathsRequest} req
+     * @param {function(string, DescribeEdrLogCollectPathsResponse):void} cb
+     * @public
+     */
+    DescribeEdrLogCollectPaths(req, cb) {
+        let resp = new DescribeEdrLogCollectPathsResponse();
+        this.request("DescribeEdrLogCollectPaths", req, resp, cb);
+    }
+
+    /**
+     * Query SMTP mailbox access information of the AI assistant
+     * @param {DescribeAIAnalysisSMTPRequest} req
+     * @param {function(string, DescribeAIAnalysisSMTPResponse):void} cb
+     * @public
+     */
+    DescribeAIAnalysisSMTP(req, cb) {
+        let resp = new DescribeAIAnalysisSMTPResponse();
+        this.request("DescribeAIAnalysisSMTP", req, resp, cb);
+    }
+
+    /**
+     * Query dspm identification template details
+     * @param {DescribeDspmIdentifyComplianceGroupDetailRequest} req
+     * @param {function(string, DescribeDspmIdentifyComplianceGroupDetailResponse):void} cb
+     * @public
+     */
+    DescribeDspmIdentifyComplianceGroupDetail(req, cb) {
+        let resp = new DescribeDspmIdentifyComplianceGroupDetailResponse();
+        this.request("DescribeDspmIdentifyComplianceGroupDetail", req, resp, cb);
+    }
+
+    /**
+     * Get the client running mode and runtime configuration information
+     * @param {DescribeAgentRunModeRequest} req
+     * @param {function(string, DescribeAgentRunModeResponse):void} cb
+     * @public
+     */
+    DescribeAgentRunMode(req, cb) {
+        let resp = new DescribeAgentRunModeResponse();
+        this.request("DescribeAgentRunMode", req, resp, cb);
+    }
+
+    /**
+     * Edit the ak monitoring account.
+     * @param {ModifyShareUserAKRequest} req
+     * @param {function(string, ModifyShareUserAKResponse):void} cb
+     * @public
+     */
+    ModifyShareUserAK(req, cb) {
+        let resp = new ModifyShareUserAKResponse();
+        this.request("ModifyShareUserAK", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the associated server of a vulnerable component.
+     * @param {DescribeVulComponentRelateHostRequest} req
+     * @param {function(string, DescribeVulComponentRelateHostResponse):void} cb
+     * @public
+     */
+    DescribeVulComponentRelateHost(req, cb) {
+        let resp = new DescribeVulComponentRelateHostResponse();
+        this.request("DescribeVulComponentRelateHost", req, resp, cb);
+    }
+
+    /**
+     * Queries the Skill security detection alarm list with pagination, filtering, and sorting supported.
+     * @param {DescribeSkillScanAlertListRequest} req
+     * @param {function(string, DescribeSkillScanAlertListResponse):void} cb
+     * @public
+     */
+    DescribeSkillScanAlertList(req, cb) {
+        let resp = new DescribeSkillScanAlertListResponse();
+        this.request("DescribeSkillScanAlertList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify association level information of dspm data identification template data items.
+     * @param {ModifyDspmIdentifyComplianceRuleLevelInfoRequest} req
+     * @param {function(string, ModifyDspmIdentifyComplianceRuleLevelInfoResponse):void} cb
+     * @public
+     */
+    ModifyDspmIdentifyComplianceRuleLevelInfo(req, cb) {
+        let resp = new ModifyDspmIdentifyComplianceRuleLevelInfoResponse();
+        this.request("ModifyDspmIdentifyComplianceRuleLevelInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the access control rule list for ACL users under the current tenant. Import Filter.Name=RuleID to query an individual rule precisely.
+     * @param {DescribeSandboxACLRuleListRequest} req
+     * @param {function(string, DescribeSandboxACLRuleListResponse):void} cb
+     * @public
+     */
+    DescribeSandboxACLRuleList(req, cb) {
+        let resp = new DescribeSandboxACLRuleListResponse();
+        this.request("DescribeSandboxACLRuleList", req, resp, cb);
+    }
+
+    /**
+     * List of access key risk records
      * @param {DescribeAccessKeyRiskRequest} req
      * @param {function(string, DescribeAccessKeyRiskResponse):void} cb
      * @public
@@ -1013,18 +6717,40 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the host list where specified vulnerabilities can be repaired. Before a user submits a repair task, it is necessary to query which hosts support automatic fix, providing data support for users to select repair targets.
-     * @param {DescribeVulFixableMachineListRequest} req
-     * @param {function(string, DescribeVulFixableMachineListResponse):void} cb
+     * This API is used to modify the brute-force blocking mode.
+     * @param {ModifyBanModeRequest} req
+     * @param {function(string, ModifyBanModeResponse):void} cb
      * @public
      */
-    DescribeVulFixableMachineList(req, cb) {
-        let resp = new DescribeVulFixableMachineListResponse();
-        this.request("DescribeVulFixableMachineList", req, resp, cb);
+    ModifyBanMode(req, cb) {
+        let resp = new ModifyBanModeResponse();
+        this.request("ModifyBanMode", req, resp, cb);
     }
 
     /**
-     * This API is used to query details of CVM assets.
+     * Example of creating an export task for a cloud resource configuration detection PDF report.
+     * @param {CreateCFGRiskPDFReportExportJobRequest} req
+     * @param {function(string, CreateCFGRiskPDFReportExportJobResponse):void} cb
+     * @public
+     */
+    CreateCFGRiskPDFReportExportJob(req, cb) {
+        let resp = new CreateCFGRiskPDFReportExportJobResponse();
+        this.request("CreateCFGRiskPDFReportExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the progress of CSIP manual scan.
+     * @param {DescribeCSIPMalwareScanTaskProgressRequest} req
+     * @param {function(string, DescribeCSIPMalwareScanTaskProgressResponse):void} cb
+     * @public
+     */
+    DescribeCSIPMalwareScanTaskProgress(req, cb) {
+        let resp = new DescribeCSIPMalwareScanTaskProgressResponse();
+        this.request("DescribeCSIPMalwareScanTaskProgress", req, resp, cb);
+    }
+
+    /**
+     * CVM Details
      * @param {DescribeCVMAssetInfoRequest} req
      * @param {function(string, DescribeCVMAssetInfoResponse):void} cb
      * @public
@@ -1035,40 +6761,95 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of scan task reports.
-     * @param {DescribeTaskLogListRequest} req
-     * @param {function(string, DescribeTaskLogListResponse):void} cb
+     * Query the image asset list
+     * @param {DescribeImageAssetListRequest} req
+     * @param {function(string, DescribeImageAssetListResponse):void} cb
      * @public
      */
-    DescribeTaskLogList(req, cb) {
-        let resp = new DescribeTaskLogListResponse();
-        this.request("DescribeTaskLogList", req, resp, cb);
+    DescribeImageAssetList(req, cb) {
+        let resp = new DescribeImageAssetListResponse();
+        this.request("DescribeImageAssetList", req, resp, cb);
     }
 
     /**
-     * This API is used to query the list of repaired vulnerabilities, show vulnerability information with successful fixes and statistics on repair conditions, helping users understand the repair results.
-     * @param {DescribeVulFixedListRequest} req
-     * @param {function(string, DescribeVulFixedListResponse):void} cb
+     * Modifies the status of a dspm identification data item
+     * @param {ModifyDspmIdentifyRuleStatusRequest} req
+     * @param {function(string, ModifyDspmIdentifyRuleStatusResponse):void} cb
      * @public
      */
-    DescribeVulFixedList(req, cb) {
-        let resp = new DescribeVulFixedListResponse();
-        this.request("DescribeVulFixedList", req, resp, cb);
+    ModifyDspmIdentifyRuleStatus(req, cb) {
+        let resp = new ModifyDspmIdentifyRuleStatusResponse();
+        this.request("ModifyDspmIdentifyRuleStatus", req, resp, cb);
     }
 
     /**
-     * This API is used to create a host vulnerability table export task.
-     * @param {CreateHostVulExportJobRequest} req
-     * @param {function(string, CreateHostVulExportJobResponse):void} cb
+     * This API is used to create an immediate detection task.
+     * @param {CreateScanTaskRequest} req
+     * @param {function(string, CreateScanTaskResponse):void} cb
      * @public
      */
-    CreateHostVulExportJob(req, cb) {
-        let resp = new CreateHostVulExportJobResponse();
-        this.request("CreateHostVulExportJob", req, resp, cb);
+    CreateScanTask(req, cb) {
+        let resp = new CreateScanTaskResponse();
+        this.request("CreateScanTask", req, resp, cb);
     }
 
     /**
-     * Gets the list of other cloud assets
+     * Send a test message to the designated receiving robot to verify reachability and configuration. Use the "Test" button in the corresponding table row.
+     * @param {TestWebhookReceiverRequest} req
+     * @param {function(string, TestWebhookReceiverResponse):void} cb
+     * @public
+     */
+    TestWebhookReceiver(req, cb) {
+        let resp = new TestWebhookReceiverResponse();
+        this.request("TestWebhookReceiver", req, resp, cb);
+    }
+
+    /**
+     * Query the statistical information of scanning results.
+     * @param {DescribeCFGRiskStatisticsRequest} req
+     * @param {function(string, DescribeCFGRiskStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeCFGRiskStatistics(req, cb) {
+        let resp = new DescribeCFGRiskStatisticsResponse();
+        this.request("DescribeCFGRiskStatistics", req, resp, cb);
+    }
+
+    /**
+     * Create an image Trojan virus list export task
+     * @param {CreateImageVirusListExportJobRequest} req
+     * @param {function(string, CreateImageVirusListExportJobResponse):void} cb
+     * @public
+     */
+    CreateImageVirusListExportJob(req, cb) {
+        let resp = new CreateImageVirusListExportJobResponse();
+        this.request("CreateImageVirusListExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the scan task list. Filter.Filters supports Name: Keyword (blurry, OperatorType=9), ScanType (MANUAL/CYCLE), TaskType (HOST/CONTAINER), Status (WAIT/SCANNING/FINISHED/FAILED/CANCELED), AppId (account).
+     * @param {DescribeEDRScanRecordListRequest} req
+     * @param {function(string, DescribeEDRScanRecordListResponse):void} cb
+     * @public
+     */
+    DescribeEDRScanRecordList(req, cb) {
+        let resp = new DescribeEDRScanRecordListResponse();
+        this.request("DescribeEDRScanRecordList", req, resp, cb);
+    }
+
+    /**
+     * Sends the access verification code for a Dspm asset
+     * @param {SendDspmAssetLoginSmsCodeRequest} req
+     * @param {function(string, SendDspmAssetLoginSmsCodeResponse):void} cb
+     * @public
+     */
+    SendDspmAssetLoginSmsCode(req, cb) {
+        let resp = new SendDspmAssetLoginSmsCodeResponse();
+        this.request("SendDspmAssetLoginSmsCode", req, resp, cb);
+    }
+
+    /**
+     * Asset list
      * @param {DescribeOtherCloudAssetsRequest} req
      * @param {function(string, DescribeOtherCloudAssetsResponse):void} cb
      * @public
@@ -1079,18 +6860,7 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Query the list of vulnerabilities of host nodes under the exposed path in cloud boundary analysis.
-     * @param {DescribeVulRiskListRequest} req
-     * @param {function(string, DescribeVulRiskListResponse):void} cb
-     * @public
-     */
-    DescribeVulRiskList(req, cb) {
-        let resp = new DescribeVulRiskListResponse();
-        this.request("DescribeVulRiskList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of TCP listeners.
+     * Query CLB Listener List
      * @param {DescribeListenerListRequest} req
      * @param {function(string, DescribeListenerListResponse):void} cb
      * @public
@@ -1101,51 +6871,73 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Retry the vulnerability repair task that failed to fix, and redispatch the repair instruction only for the hosts of the original task that failed to fix. Retry is allowed only when the task status is partially or totally failed to fix.
-     * @param {CreateVulFixRetryTaskRequest} req
-     * @param {function(string, CreateVulFixRetryTaskResponse):void} cb
+     * This API is used to obtain the global configuration for anti-uninstallation.
+     * @param {DescribeLoginTypeGlobalConfRequest} req
+     * @param {function(string, DescribeLoginTypeGlobalConfResponse):void} cb
      * @public
      */
-    CreateVulFixRetryTask(req, cb) {
-        let resp = new CreateVulFixRetryTaskResponse();
-        this.request("CreateVulFixRetryTask", req, resp, cb);
+    DescribeLoginTypeGlobalConf(req, cb) {
+        let resp = new DescribeLoginTypeGlobalConfResponse();
+        this.request("DescribeLoginTypeGlobalConf", req, resp, cb);
     }
 
     /**
-     * Retrieve the associated component of a vulnerability
-     * @param {DescribeVulRiskRelateComponentRequest} req
-     * @param {function(string, DescribeVulRiskRelateComponentResponse):void} cb
+     * Access key alarm record list
+     * @param {DescribeAccessKeyWhiteListRequest} req
+     * @param {function(string, DescribeAccessKeyWhiteListResponse):void} cb
      * @public
      */
-    DescribeVulRiskRelateComponent(req, cb) {
-        let resp = new DescribeVulRiskRelateComponentResponse();
-        this.request("DescribeVulRiskRelateComponent", req, resp, cb);
+    DescribeAccessKeyWhiteList(req, cb) {
+        let resp = new DescribeAccessKeyWhiteListResponse();
+        this.request("DescribeAccessKeyWhiteList", req, resp, cb);
     }
 
     /**
-     * Delete an IaC detection integration Token
-     * @param {DeleteIaCAccessTokenRequest} req
-     * @param {function(string, DeleteIaCAccessTokenResponse):void} cb
+     * This API is used to create a public network asset export task.
+     * @param {CreatePublicAssetsExportJobRequest} req
+     * @param {function(string, CreatePublicAssetsExportJobResponse):void} cb
      * @public
      */
-    DeleteIaCAccessToken(req, cb) {
-        let resp = new DeleteIaCAccessTokenResponse();
-        this.request("DeleteIaCAccessToken", req, resp, cb);
+    CreatePublicAssetsExportJob(req, cb) {
+        let resp = new CreatePublicAssetsExportJobResponse();
+        this.request("CreatePublicAssetsExportJob", req, resp, cb);
     }
 
     /**
-     * This API is used to list cluster pods.
-     * @param {DescribeClusterPodAssetsRequest} req
-     * @param {function(string, DescribeClusterPodAssetsResponse):void} cb
+     * Host details
+     * @param {DescribeCWPMachineDetailRequest} req
+     * @param {function(string, DescribeCWPMachineDetailResponse):void} cb
      * @public
      */
-    DescribeClusterPodAssets(req, cb) {
-        let resp = new DescribeClusterPodAssetsResponse();
-        this.request("DescribeClusterPodAssets", req, resp, cb);
+    DescribeCWPMachineDetail(req, cb) {
+        let resp = new DescribeCWPMachineDetailResponse();
+        this.request("DescribeCWPMachineDetail", req, resp, cb);
     }
 
     /**
-     * This API is used to query the list of services in risk.
+     * This API is used to delete the backup logs.
+     * @param {DeleteDspmBackupLogListRequest} req
+     * @param {function(string, DeleteDspmBackupLogListResponse):void} cb
+     * @public
+     */
+    DeleteDspmBackupLogList(req, cb) {
+        let resp = new DeleteDspmBackupLogListResponse();
+        this.request("DeleteDspmBackupLogList", req, resp, cb);
+    }
+
+    /**
+     * Queries the dspm asset field information
+     * @param {DescribeDspmAssetFieldListRequest} req
+     * @param {function(string, DescribeDspmAssetFieldListResponse):void} cb
+     * @public
+     */
+    DescribeDspmAssetFieldList(req, cb) {
+        let resp = new DescribeDspmAssetFieldListResponse();
+        this.request("DescribeDspmAssetFieldList", req, resp, cb);
+    }
+
+    /**
+     * Obtain Risk Service List
      * @param {DescribeRiskCenterServerRiskListRequest} req
      * @param {function(string, DescribeRiskCenterServerRiskListResponse):void} cb
      * @public
@@ -1156,7 +6948,18 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Retrieve the call record list.
+     * This API is used to obtain virus database and POC updates.
+     * @param {DescribeVdbAndPocInfoRequest} req
+     * @param {function(string, DescribeVdbAndPocInfoResponse):void} cb
+     * @public
+     */
+    DescribeVdbAndPocInfo(req, cb) {
+        let resp = new DescribeVdbAndPocInfoResponse();
+        this.request("DescribeVdbAndPocInfo", req, resp, cb);
+    }
+
+    /**
+     * Query the call record list
      * @param {DescribeCallRecordRequest} req
      * @param {function(string, DescribeCallRecordResponse):void} cb
      * @public
@@ -1167,29 +6970,51 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Cloud Defense Asset Center Statistics
-     * @param {DescribeCFWAssetStatisticsRequest} req
-     * @param {function(string, DescribeCFWAssetStatisticsResponse):void} cb
+     * Asset Overview statistics
+     * @param {DescribeAssetOverviewRequest} req
+     * @param {function(string, DescribeAssetOverviewResponse):void} cb
      * @public
      */
-    DescribeCFWAssetStatistics(req, cb) {
-        let resp = new DescribeCFWAssetStatisticsResponse();
-        this.request("DescribeCFWAssetStatistics", req, resp, cb);
+    DescribeAssetOverview(req, cb) {
+        let resp = new DescribeAssetOverviewResponse();
+        this.request("DescribeAssetOverview", req, resp, cb);
     }
 
     /**
-     * Search for hosts associated with vulnerabilities or KBs
-     * @param {DescribeVulRiskRelateHostRequest} req
-     * @param {function(string, DescribeVulRiskRelateHostResponse):void} cb
+     * Batch switch the enable/disable status of ACL user rules. If any rule does not exist, belongs to another tenant, or has been deleted, an error is returned for the entirety.
+     * @param {ModifySandboxACLRuleStatusRequest} req
+     * @param {function(string, ModifySandboxACLRuleStatusResponse):void} cb
      * @public
      */
-    DescribeVulRiskRelateHost(req, cb) {
-        let resp = new DescribeVulRiskRelateHostResponse();
-        this.request("DescribeVulRiskRelateHost", req, resp, cb);
+    ModifySandboxACLRuleStatus(req, cb) {
+        let resp = new ModifySandboxACLRuleStatusResponse();
+        this.request("ModifySandboxACLRuleStatus", req, resp, cb);
     }
 
     /**
-     * Query the node of the cloud boundary analysis path.
+     * Bind and update a cluster owner
+     * @param {UpdateClusterOwnerRequest} req
+     * @param {function(string, UpdateClusterOwnerResponse):void} cb
+     * @public
+     */
+    UpdateClusterOwner(req, cb) {
+        let resp = new UpdateClusterOwnerResponse();
+        this.request("UpdateClusterOwner", req, resp, cb);
+    }
+
+    /**
+     * Query the Dspm access topology ip list
+     * @param {DescribeDspmAccessTopologyIpsRequest} req
+     * @param {function(string, DescribeDspmAccessTopologyIpsResponse):void} cb
+     * @public
+     */
+    DescribeDspmAccessTopologyIps(req, cb) {
+        let resp = new DescribeDspmAccessTopologyIpsResponse();
+        this.request("DescribeDspmAccessTopologyIps", req, resp, cb);
+    }
+
+    /**
+     * Query the cloud boundary analysis path node
      * @param {DescribeExposePathRequest} req
      * @param {function(string, DescribeExposePathResponse):void} cb
      * @public
@@ -1211,29 +7036,53 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify vulnerability scanning (period scanning).
-     * @param {ModifyVulScanPeriodicRequest} req
-     * @param {function(string, ModifyVulScanPeriodicResponse):void} cb
+     * Create an image associated container asset export task
+     * @param {CreateImageAssociatedContainerListExportJobRequest} req
+     * @param {function(string, CreateImageAssociatedContainerListExportJobResponse):void} cb
      * @public
      */
-    ModifyVulScanPeriodic(req, cb) {
-        let resp = new ModifyVulScanPeriodicResponse();
-        this.request("ModifyVulScanPeriodic", req, resp, cb);
+    CreateImageAssociatedContainerListExportJob(req, cb) {
+        let resp = new CreateImageAssociatedContainerListExportJobResponse();
+        this.request("CreateImageAssociatedContainerListExportJob", req, resp, cb);
     }
 
     /**
-     * This API is used to create a risk scan task. 
-     * @param {CreateRiskCenterScanTaskRequest} req
-     * @param {function(string, CreateRiskCenterScanTaskResponse):void} cb
+     * This API is used to create log export tasks.
+     * @param {CreateDspmExportTaskRequest} req
+     * @param {function(string, CreateDspmExportTaskResponse):void} cb
      * @public
      */
-    CreateRiskCenterScanTask(req, cb) {
-        let resp = new CreateRiskCenterScanTaskResponse();
-        this.request("CreateRiskCenterScanTask", req, resp, cb);
+    CreateDspmExportTask(req, cb) {
+        let resp = new CreateDspmExportTaskResponse();
+        this.request("CreateDspmExportTask", req, resp, cb);
     }
 
     /**
-     * List of alarm records for access keys.
+     * Disable scheduled AI tasks.
+
+Set the status of the specified AI scheduled task to disabled. After it is disabled, the task will suspend automatic execution.
+     * @param {DisableAIScheduleRequest} req
+     * @param {function(string, DisableAIScheduleResponse):void} cb
+     * @public
+     */
+    DisableAISchedule(req, cb) {
+        let resp = new DisableAIScheduleResponse();
+        this.request("DisableAISchedule", req, resp, cb);
+    }
+
+    /**
+     * List of pending risks in cloud boundaries
+     * @param {DescribeExposeRisksRequest} req
+     * @param {function(string, DescribeExposeRisksResponse):void} cb
+     * @public
+     */
+    DescribeExposeRisks(req, cb) {
+        let resp = new DescribeExposeRisksResponse();
+        this.request("DescribeExposeRisks", req, resp, cb);
+    }
+
+    /**
+     * List of access key alarm records
      * @param {DescribeAccessKeyAlarmRequest} req
      * @param {function(string, DescribeAccessKeyAlarmResponse):void} cb
      * @public
@@ -1244,7 +7093,18 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Query the security detection result of Skill. After successfully calling CreateSkillScan, use the returned ContentHash + EngineVersion to poll this interface and obtain the result. For the first time, poll 5 minutes after successful upload. If detection is not completed, poll every 1 minute afterward. The response distinguishes four types of status via the Status field: detection complete (SUCCESS), in-progress detection (SCANNING), no record (NOT_FOUND), and detection failed (FAILED). Note: The detection result is retained for 90 days. It will return NOT_FOUND when overdue.
+     * Cloud resource configuration risk list from the compliance standard aggregation perspective
+     * @param {DescribeComplianceRiskListRequest} req
+     * @param {function(string, DescribeComplianceRiskListResponse):void} cb
+     * @public
+     */
+    DescribeComplianceRiskList(req, cb) {
+        let resp = new DescribeComplianceRiskListResponse();
+        this.request("DescribeComplianceRiskList", req, resp, cb);
+    }
+
+    /**
+     * Queries the security detection result of a skill. After calling CreateSkillScan successfully, use the returned ContentHash + EngineVersion to poll this API to obtain the result. We recommend polling for the first time 5 minutes after a successful upload. If detection is not completed, poll once every 1 minute afterward. The response uses the Status field to distinguish four statuses: detection completed (SUCCESS), detecting (SCANNING), no record (NOT_FOUND), and detection failed (FAILED). Note: Detection results are retained for 90 days. NOT_FOUND will be returned after they expire.
      * @param {DescribeSkillScanResultRequest} req
      * @param {function(string, DescribeSkillScanResultResponse):void} cb
      * @public
@@ -1255,29 +7115,51 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Query the high-risk baseline risk list of host nodes under the exposed path in cloud boundary analysis.
-     * @param {DescribeHighBaseLineRiskListRequest} req
-     * @param {function(string, DescribeHighBaseLineRiskListResponse):void} cb
+     * Query the list of SCF functions in the specified namespace. Only functions of the Event trigger type are returned.
+     * @param {DescribeSCFFunctionListRequest} req
+     * @param {function(string, DescribeSCFFunctionListResponse):void} cb
      * @public
      */
-    DescribeHighBaseLineRiskList(req, cb) {
-        let resp = new DescribeHighBaseLineRiskListResponse();
-        this.request("DescribeHighBaseLineRiskList", req, resp, cb);
+    DescribeSCFFunctionList(req, cb) {
+        let resp = new DescribeSCFFunctionListResponse();
+        this.request("DescribeSCFFunctionList", req, resp, cb);
     }
 
     /**
-     * This API is used to modify the status of a risk. 
-     * @param {ModifyRiskCenterRiskStatusRequest} req
-     * @param {function(string, ModifyRiskCenterRiskStatusResponse):void} cb
+     * Queries image asset details.
+     * @param {DescribeImageAssetDetailRequest} req
+     * @param {function(string, DescribeImageAssetDetailResponse):void} cb
      * @public
      */
-    ModifyRiskCenterRiskStatus(req, cb) {
-        let resp = new ModifyRiskCenterRiskStatusResponse();
-        this.request("ModifyRiskCenterRiskStatus", req, resp, cb);
+    DescribeImageAssetDetail(req, cb) {
+        let resp = new DescribeImageAssetDetailResponse();
+        this.request("DescribeImageAssetDetail", req, resp, cb);
     }
 
     /**
-     * This API is used to query the list of public IP assets.
+     * CSPM quota information of a user
+     * @param {DescribeUserInfoRequest} req
+     * @param {function(string, DescribeUserInfoResponse):void} cb
+     * @public
+     */
+    DescribeUserInfo(req, cb) {
+        let resp = new DescribeUserInfoResponse();
+        this.request("DescribeUserInfo", req, resp, cb);
+    }
+
+    /**
+     * Query the number of related assets of an image.
+     * @param {DescribeImageAssociatedAssetCountRequest} req
+     * @param {function(string, DescribeImageAssociatedAssetCountResponse):void} cb
+     * @public
+     */
+    DescribeImageAssociatedAssetCount(req, cb) {
+        let resp = new DescribeImageAssociatedAssetCountResponse();
+        this.request("DescribeImageAssociatedAssetCount", req, resp, cb);
+    }
+
+    /**
+     * IP Public Network List
      * @param {DescribePublicIpAssetsRequest} req
      * @param {function(string, DescribePublicIpAssetsResponse):void} cb
      * @public
@@ -1288,29 +7170,29 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Cloud boundary analysis asset category.
-     * @param {DescribeExposeAssetCategoryRequest} req
-     * @param {function(string, DescribeExposeAssetCategoryResponse):void} cb
+     * Determine whether the current user is on the flagship edition for hosts.
+     * @param {CheckCWPExposePathPermissionRequest} req
+     * @param {function(string, CheckCWPExposePathPermissionResponse):void} cb
      * @public
      */
-    DescribeExposeAssetCategory(req, cb) {
-        let resp = new DescribeExposeAssetCategoryResponse();
-        this.request("DescribeExposeAssetCategory", req, resp, cb);
+    CheckCWPExposePathPermission(req, cb) {
+        let resp = new CheckCWPExposePathPermissionResponse();
+        this.request("CheckCWPExposePathPermission", req, resp, cb);
     }
 
     /**
-     * Retrieve the IaC detection integration Token list
-     * @param {DescribeIaCTokenListRequest} req
-     * @param {function(string, DescribeIaCTokenListResponse):void} cb
+     * Delete the search view of a user-created specified asset
+     * @param {DeleteAssetFilterViewRequest} req
+     * @param {function(string, DeleteAssetFilterViewResponse):void} cb
      * @public
      */
-    DescribeIaCTokenList(req, cb) {
-        let resp = new DescribeIaCTokenListResponse();
-        this.request("DescribeIaCTokenList", req, resp, cb);
+    DeleteAssetFilterView(req, cb) {
+        let resp = new DeleteAssetFilterViewResponse();
+        this.request("DeleteAssetFilterView", req, resp, cb);
     }
 
     /**
-     * Query the process list of host nodes under the exposed path in cloud boundary analysis.
+     * This API is used to query the process list of host nodes on exposed paths in cloud boundary analysis.
      * @param {DescribeAssetProcessListRequest} req
      * @param {function(string, DescribeAssetProcessListResponse):void} cb
      * @public
@@ -1321,47 +7203,82 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Advanced configuration risk rule list illustrative example
-     * @param {DescribeRiskRulesRequest} req
-     * @param {function(string, DescribeRiskRulesResponse):void} cb
+     * Create Risk Center Scan Task
+     * @param {CreateRiskCenterScanTaskRequest} req
+     * @param {function(string, CreateRiskCenterScanTaskResponse):void} cb
      * @public
      */
-    DescribeRiskRules(req, cb) {
-        let resp = new DescribeRiskRulesResponse();
-        this.request("DescribeRiskRules", req, resp, cb);
+    CreateRiskCenterScanTask(req, cb) {
+        let resp = new CreateRiskCenterScanTaskResponse();
+        this.request("CreateRiskCenterScanTask", req, resp, cb);
     }
 
     /**
-     * This API is used to retrieve vulnerability scanning task detail
-     * @param {DescribeVulScanTaskDetailRequest} req
-     * @param {function(string, DescribeVulScanTaskDetailResponse):void} cb
+     * Deletes classification association from a dspm identification template
+     * @param {DeleteDspmIdentifyComplianceCategoryRelationRequest} req
+     * @param {function(string, DeleteDspmIdentifyComplianceCategoryRelationResponse):void} cb
      * @public
      */
-    DescribeVulScanTaskDetail(req, cb) {
-        let resp = new DescribeVulScanTaskDetailResponse();
-        this.request("DescribeVulScanTaskDetail", req, resp, cb);
+    DeleteDspmIdentifyComplianceCategoryRelation(req, cb) {
+        let resp = new DeleteDspmIdentifyComplianceCategoryRelationResponse();
+        this.request("DeleteDspmIdentifyComplianceCategoryRelation", req, resp, cb);
     }
 
     /**
-     * This API is used to query the advanced configuration of vulnerability scan.
-     * @param {DescribeVULRiskAdvanceCFGListRequest} req
-     * @param {function(string, DescribeVULRiskAdvanceCFGListResponse):void} cb
+     * This API is used to query the scheduled AI task execution list.
+
+Queries the historical execution records of AI scheduled tasks. Supports pagination and filtering by scheduled task ID.
+     * @param {DescribeAIScheduleTaskListRequest} req
+     * @param {function(string, DescribeAIScheduleTaskListResponse):void} cb
      * @public
      */
-    DescribeVULRiskAdvanceCFGList(req, cb) {
-        let resp = new DescribeVULRiskAdvanceCFGListResponse();
-        this.request("DescribeVULRiskAdvanceCFGList", req, resp, cb);
+    DescribeAIScheduleTaskList(req, cb) {
+        let resp = new DescribeAIScheduleTaskListResponse();
+        this.request("DescribeAIScheduleTaskList", req, resp, cb);
     }
 
     /**
-     * Retrieve the IaC detection file report
-     * @param {DescribeIaCFileReportRequest} req
-     * @param {function(string, DescribeIaCFileReportResponse):void} cb
+     * This API is used to create a baseline fix record export task to export the records of fixed detection items, including detection item information, asset information, and repair time. The task executes asynchronously in the backend. Once completed, the result file can be downloaded from the export task list.
+     * @param {CreateBaselineFixRecordExportJobRequest} req
+     * @param {function(string, CreateBaselineFixRecordExportJobResponse):void} cb
      * @public
      */
-    DescribeIaCFileReport(req, cb) {
-        let resp = new DescribeIaCFileReportResponse();
-        this.request("DescribeIaCFileReport", req, resp, cb);
+    CreateBaselineFixRecordExportJob(req, cb) {
+        let resp = new CreateBaselineFixRecordExportJobResponse();
+        this.request("CreateBaselineFixRecordExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete terminated scan tasks by physically deleting the primary and detailed tables. Only tasks in the final state can be deleted, and only the creator can perform the deletion.
+     * @param {DeleteEDRScanTaskRequest} req
+     * @param {function(string, DeleteEDRScanTaskResponse):void} cb
+     * @public
+     */
+    DeleteEDRScanTask(req, cb) {
+        let resp = new DeleteEDRScanTaskResponse();
+        this.request("DeleteEDRScanTask", req, resp, cb);
+    }
+
+    /**
+     * Example of creating an asset perspective risk list export task
+     * @param {CreateCFGRisksExportJobRequest} req
+     * @param {function(string, CreateCFGRisksExportJobResponse):void} cb
+     * @public
+     */
+    CreateCFGRisksExportJob(req, cb) {
+        let resp = new CreateCFGRisksExportJobResponse();
+        this.request("CreateCFGRisksExportJob", req, resp, cb);
+    }
+
+    /**
+     * Batch switch the enable/disable status of DLP user rules. If any rule does not exist, belongs to another tenant, or has been deleted, an error is returned for the entirety.
+     * @param {ModifySandboxDLPRuleStatusRequest} req
+     * @param {function(string, ModifySandboxDLPRuleStatusResponse):void} cb
+     * @public
+     */
+    ModifySandboxDLPRuleStatus(req, cb) {
+        let resp = new ModifySandboxDLPRuleStatusResponse();
+        this.request("ModifySandboxDLPRuleStatus", req, resp, cb);
     }
 
     /**
@@ -1376,18 +7293,62 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * This example shows you how to obtain the cluster list.
-     * @param {DescribeClusterAssetsRequest} req
-     * @param {function(string, DescribeClusterAssetsResponse):void} cb
+     * Create an image scanning task configuration for an image repository
+     * @param {CreateImageRegistryTimedScanTaskConfigRequest} req
+     * @param {function(string, CreateImageRegistryTimedScanTaskConfigResponse):void} cb
      * @public
      */
-    DescribeClusterAssets(req, cb) {
-        let resp = new DescribeClusterAssetsResponse();
-        this.request("DescribeClusterAssets", req, resp, cb);
+    CreateImageRegistryTimedScanTaskConfig(req, cb) {
+        let resp = new CreateImageRegistryTimedScanTaskConfigResponse();
+        this.request("CreateImageRegistryTimedScanTaskConfig", req, resp, cb);
     }
 
     /**
-     * Query the user behavior analysis policy list
+     * Query the list of ports associated with a container. This API is used to obtain associated port information by container ID and supports pagination.
+     * @param {DescribeClusterContainerPortListRequest} req
+     * @param {function(string, DescribeClusterContainerPortListResponse):void} cb
+     * @public
+     */
+    DescribeClusterContainerPortList(req, cb) {
+        let resp = new DescribeClusterContainerPortListResponse();
+        this.request("DescribeClusterContainerPortList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain a list of batch tasks for modification of host login methods.
+     * @param {DescribeModifyMachinesLoginTypeTasksRequest} req
+     * @param {function(string, DescribeModifyMachinesLoginTypeTasksResponse):void} cb
+     * @public
+     */
+    DescribeModifyMachinesLoginTypeTasks(req, cb) {
+        let resp = new DescribeModifyMachinesLoginTypeTasksResponse();
+        this.request("DescribeModifyMachinesLoginTypeTasks", req, resp, cb);
+    }
+
+    /**
+     * Queries the region list of an image repository.
+     * @param {DescribeRegistryRegionListRequest} req
+     * @param {function(string, DescribeRegistryRegionListResponse):void} cb
+     * @public
+     */
+    DescribeRegistryRegionList(req, cb) {
+        let resp = new DescribeRegistryRegionListResponse();
+        this.request("DescribeRegistryRegionList", req, resp, cb);
+    }
+
+    /**
+     * Modifies the Dspm personal identity ID.
+     * @param {ModifyDspmPersonalIdentifyRequest} req
+     * @param {function(string, ModifyDspmPersonalIdentifyResponse):void} cb
+     * @public
+     */
+    ModifyDspmPersonalIdentify(req, cb) {
+        let resp = new ModifyDspmPersonalIdentifyResponse();
+        this.request("ModifyDspmPersonalIdentify", req, resp, cb);
+    }
+
+    /**
+     * Query the list of user behavior analysis policies
      * @param {DescribeUebaRuleRequest} req
      * @param {function(string, DescribeUebaRuleResponse):void} cb
      * @public
@@ -1398,29 +7359,71 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * This API is used to search vulnerability scanning task history
-     * @param {DescribeVulScanTaskListRequest} req
-     * @param {function(string, DescribeVulScanTaskListResponse):void} cb
+     * Query the nat policy corresponding to a Tencent Cloud nat gateway instance
+     * @param {DescribeNatRulesRequest} req
+     * @param {function(string, DescribeNatRulesResponse):void} cb
      * @public
      */
-    DescribeVulScanTaskList(req, cb) {
-        let resp = new DescribeVulScanTaskListResponse();
-        this.request("DescribeVulScanTaskList", req, resp, cb);
+    DescribeNatRules(req, cb) {
+        let resp = new DescribeNatRulesResponse();
+        this.request("DescribeNatRules", req, resp, cb);
     }
 
     /**
-     * Query credential details and return credential metadata and masked credential data. The access kind returns an Access array (original Key, masked Value), and the sts kind returns an STS object (original System, masked SecretID and SecretKey).
-     * @param {DescribeKeySandboxCredentialRequest} req
-     * @param {function(string, DescribeKeySandboxCredentialResponse):void} cb
+     * Create an image component list export task.
+     * @param {CreateImageComponentListExportJobRequest} req
+     * @param {function(string, CreateImageComponentListExportJobResponse):void} cb
      * @public
      */
-    DescribeKeySandboxCredential(req, cb) {
-        let resp = new DescribeKeySandboxCredentialResponse();
-        this.request("DescribeKeySandboxCredential", req, resp, cb);
+    CreateImageComponentListExportJob(req, cb) {
+        let resp = new CreateImageComponentListExportJobResponse();
+        this.request("CreateImageComponentListExportJob", req, resp, cb);
     }
 
     /**
-     * Query the statistical information of cloud boundary analysis scanning results.
+     * This API is used to download export logs.
+     * @param {DownloadDspmExportLogRequest} req
+     * @param {function(string, DownloadDspmExportLogResponse):void} cb
+     * @public
+     */
+    DownloadDspmExportLog(req, cb) {
+        let resp = new DownloadDspmExportLogResponse();
+        this.request("DownloadDspmExportLog", req, resp, cb);
+    }
+
+    /**
+     * Query the DLP user rule list of the current tenant. Input Filter.Name=RuleID to query an individual rule for the details page scenario.
+     * @param {DescribeSandboxDLPRuleListRequest} req
+     * @param {function(string, DescribeSandboxDLPRuleListResponse):void} cb
+     * @public
+     */
+    DescribeSandboxDLPRuleList(req, cb) {
+        let resp = new DescribeSandboxDLPRuleListResponse();
+        this.request("DescribeSandboxDLPRuleList", req, resp, cb);
+    }
+
+    /**
+     * Modify the auto-scaling configuration (multi-module and expandable; only the CWP module is available in the current period).
+
+Auto-scaling is an external user-oriented concept equivalent to automatic purchase (auto_repurchase) at the underlying layer: when an account has new assets, the desired authorization is automatically purchased.
+
+Supplemental description:
+1. In the current period, only the HostConfig module is implemented for host security. Subsequent scalability allows named module fields for container security and AI-Agent security. Configuration fields of each module can be heterogeneous.
+2. Partial update semantics: An empty module object indicates that the module is not modified, and an empty field in the module indicates that this field is not modified;
+3. HostConfig.Switch linkage map: auto_repurchase_switch; auto_bind_switch is always on and not modified by this API.
+4. Auto renewal (renew_flag) is not modified by this API; to query the limit/amount, call DescribeLicenseStatus.
+5. The top auto scaling global switch state is aggregated by the frontend based on each module switch. The backend does not store or return the global switch.
+     * @param {ModifyPayConfigRequest} req
+     * @param {function(string, ModifyPayConfigResponse):void} cb
+     * @public
+     */
+    ModifyPayConfig(req, cb) {
+        let resp = new ModifyPayConfigResponse();
+        this.request("ModifyPayConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query result statistics of cloud boundary analysis scans.
      * @param {DescribeScanStatisticRequest} req
      * @param {function(string, DescribeScanStatisticResponse):void} cb
      * @public
@@ -1431,40 +7434,84 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Security Center Risk Center - List of Vulnerabilities.
-     * @param {DescribeVULListRequest} req
-     * @param {function(string, DescribeVULListResponse):void} cb
+     * Modify the remark information of a host asset
+     * @param {ModifyMachineRemarkRequest} req
+     * @param {function(string, ModifyMachineRemarkResponse):void} cb
      * @public
      */
-    DescribeVULList(req, cb) {
-        let resp = new DescribeVULListResponse();
-        this.request("DescribeVULList", req, resp, cb);
+    ModifyMachineRemark(req, cb) {
+        let resp = new ModifyMachineRemarkResponse();
+        this.request("ModifyMachineRemark", req, resp, cb);
     }
 
     /**
-     * Access key alarm record AI analysis result details
-     * @param {DescribeAKAnalysisDetailRequest} req
-     * @param {function(string, DescribeAKAnalysisDetailResponse):void} cb
+     * This API is used to query the notification policy list for the current tenant by page, corresponding to the table on the Notification Policy Configuration Tab in Notification Center - Robot Notification. The returned fields are simplified info required for row display. Use DescribeWebhookPolicy for complete configuration in editing scenarios. Each tenant can have up to 100 notification policies.
+     * @param {DescribeWebhookPolicyListRequest} req
+     * @param {function(string, DescribeWebhookPolicyListResponse):void} cb
      * @public
      */
-    DescribeAKAnalysisDetail(req, cb) {
-        let resp = new DescribeAKAnalysisDetailResponse();
-        this.request("DescribeAKAnalysisDetail", req, resp, cb);
+    DescribeWebhookPolicyList(req, cb) {
+        let resp = new DescribeWebhookPolicyListResponse();
+        this.request("DescribeWebhookPolicyList", req, resp, cb);
     }
 
     /**
-     * Query the user's account details.
-     * @param {DescribeAccessKeyUserDetailRequest} req
-     * @param {function(string, DescribeAccessKeyUserDetailResponse):void} cb
+     * Query Dspm statistical information
+     * @param {DescribeDspmStatisticsRequest} req
+     * @param {function(string, DescribeDspmStatisticsResponse):void} cb
      * @public
      */
-    DescribeAccessKeyUserDetail(req, cb) {
-        let resp = new DescribeAccessKeyUserDetailResponse();
-        this.request("DescribeAccessKeyUserDetail", req, resp, cb);
+    DescribeDspmStatistics(req, cb) {
+        let resp = new DescribeDspmStatisticsResponse();
+        this.request("DescribeDspmStatistics", req, resp, cb);
     }
 
     /**
-     * This API is used to delete a risk scan task.
+     * Edit dspm monitored account
+     * @param {ModifyShareUserDspmRequest} req
+     * @param {function(string, ModifyShareUserDspmResponse):void} cb
+     * @public
+     */
+    ModifyShareUserDspm(req, cb) {
+        let resp = new ModifyShareUserDspmResponse();
+        this.request("ModifyShareUserDspm", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a vulnerability allowlist for container images.
+     * @param {CreateImageVulWhitelistRequest} req
+     * @param {function(string, CreateImageVulWhitelistResponse):void} cb
+     * @public
+     */
+    CreateImageVulWhitelist(req, cb) {
+        let resp = new CreateImageVulWhitelistResponse();
+        this.request("CreateImageVulWhitelist", req, resp, cb);
+    }
+
+    /**
+     * Result download URL of an export task
+     * @param {DescribeExportJobDownloadURLRequest} req
+     * @param {function(string, DescribeExportJobDownloadURLResponse):void} cb
+     * @public
+     */
+    DescribeExportJobDownloadURL(req, cb) {
+        let resp = new DescribeExportJobDownloadURLResponse();
+        this.request("DescribeExportJobDownloadURL", req, resp, cb);
+    }
+
+    /**
+     * Modify the scheduled scan configuration for malicious file scan, including scan cycle, detection mode, asset scope, engine selection, and quarantine configuration.
+     * @param {ModifyMalwareTimingScanSettingsRequest} req
+     * @param {function(string, ModifyMalwareTimingScanSettingsResponse):void} cb
+     * @public
+     */
+    ModifyMalwareTimingScanSettings(req, cb) {
+        let resp = new ModifyMalwareTimingScanSettingsResponse();
+        this.request("ModifyMalwareTimingScanSettings", req, resp, cb);
+    }
+
+    /**
+     * Delete Risk Center Scan Task
      * @param {DeleteRiskScanTaskRequest} req
      * @param {function(string, DeleteRiskScanTaskResponse):void} cb
      * @public
@@ -1475,36 +7522,47 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of weak passwords by assets.
-     * @param {DescribeRiskCenterAssetViewWeakPasswordRiskListRequest} req
-     * @param {function(string, DescribeRiskCenterAssetViewWeakPasswordRiskListResponse):void} cb
+     * Query the sub-account list of a group
+     * @param {DescribeSubUserInfoRequest} req
+     * @param {function(string, DescribeSubUserInfoResponse):void} cb
      * @public
      */
-    DescribeRiskCenterAssetViewWeakPasswordRiskList(req, cb) {
-        let resp = new DescribeRiskCenterAssetViewWeakPasswordRiskListResponse();
-        this.request("DescribeRiskCenterAssetViewWeakPasswordRiskList", req, resp, cb);
+    DescribeSubUserInfo(req, cb) {
+        let resp = new DescribeSubUserInfoResponse();
+        this.request("DescribeSubUserInfo", req, resp, cb);
     }
 
     /**
-     * This API is used to query the list of vulnerabilities by assets.
-     * @param {DescribeRiskCenterAssetViewVULRiskListRequest} req
-     * @param {function(string, DescribeRiskCenterAssetViewVULRiskListResponse):void} cb
+     * This API is used to query the backup log list.
+     * @param {DescribeDspmBackupLogListRequest} req
+     * @param {function(string, DescribeDspmBackupLogListResponse):void} cb
      * @public
      */
-    DescribeRiskCenterAssetViewVULRiskList(req, cb) {
-        let resp = new DescribeRiskCenterAssetViewVULRiskListResponse();
-        this.request("DescribeRiskCenterAssetViewVULRiskList", req, resp, cb);
+    DescribeDspmBackupLogList(req, cb) {
+        let resp = new DescribeDspmBackupLogListResponse();
+        this.request("DescribeDspmBackupLogList", req, resp, cb);
     }
 
     /**
-     * This API is used to query the list of configuration risks by assets.
-     * @param {DescribeRiskCenterAssetViewCFGRiskListRequest} req
-     * @param {function(string, DescribeRiskCenterAssetViewCFGRiskListResponse):void} cb
+     * Creates a task to export all assets.
+     * @param {CreateAllAssetsExportJobRequest} req
+     * @param {function(string, CreateAllAssetsExportJobResponse):void} cb
      * @public
      */
-    DescribeRiskCenterAssetViewCFGRiskList(req, cb) {
-        let resp = new DescribeRiskCenterAssetViewCFGRiskListResponse();
-        this.request("DescribeRiskCenterAssetViewCFGRiskList", req, resp, cb);
+    CreateAllAssetsExportJob(req, cb) {
+        let resp = new CreateAllAssetsExportJobResponse();
+        this.request("CreateAllAssetsExportJob", req, resp, cb);
+    }
+
+    /**
+     * Query the list of hosts that can update a specified KB patch. This API is used for Windows patch repair scenarios to query which hosts lack the patch and support auto-update before user-submitted KB patch update tasks.
+     * @param {DescribeKBUpdatableMachineListRequest} req
+     * @param {function(string, DescribeKBUpdatableMachineListResponse):void} cb
+     * @public
+     */
+    DescribeKBUpdatableMachineList(req, cb) {
+        let resp = new DescribeKBUpdatableMachineListResponse();
+        this.request("DescribeKBUpdatableMachineList", req, resp, cb);
     }
 
     /**
@@ -1519,29 +7577,29 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain vulnerability scanning (period scanning).
-     * @param {DescribeVulScanPeriodicRequest} req
-     * @param {function(string, DescribeVulScanPeriodicResponse):void} cb
+     * This API is used to test the tenant CKafka connectivity.
+     * @param {SendDspmCkafkaTestRequest} req
+     * @param {function(string, SendDspmCkafkaTestResponse):void} cb
      * @public
      */
-    DescribeVulScanPeriodic(req, cb) {
-        let resp = new DescribeVulScanPeriodicResponse();
-        this.request("DescribeVulScanPeriodic", req, resp, cb);
+    SendDspmCkafkaTest(req, cb) {
+        let resp = new SendDspmCkafkaTestResponse();
+        this.request("SendDspmCkafkaTest", req, resp, cb);
     }
 
     /**
-     * List of cloud resource configuration risks from a check perspective
-     * @param {DescribeCheckViewRisksRequest} req
-     * @param {function(string, DescribeCheckViewRisksResponse):void} cb
+     * Query the sensitive information allowlist for container images
+     * @param {DescribeImageSensitiveWhitelistRequest} req
+     * @param {function(string, DescribeImageSensitiveWhitelistResponse):void} cb
      * @public
      */
-    DescribeCheckViewRisks(req, cb) {
-        let resp = new DescribeCheckViewRisksResponse();
-        this.request("DescribeCheckViewRisks", req, resp, cb);
+    DescribeImageSensitiveWhitelist(req, cb) {
+        let resp = new DescribeImageSensitiveWhitelistResponse();
+        this.request("DescribeImageSensitiveWhitelist", req, resp, cb);
     }
 
     /**
-     * Retrieve the IaC detection file list
+     * Retrieve the IaC detection file list.
      * @param {DescribeIaCFileListRequest} req
      * @param {function(string, DescribeIaCFileListResponse):void} cb
      * @public
@@ -1552,58 +7610,102 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query host-associated vulnerability components.
-     * @param {DescribeVulHostRelateComponentRequest} req
-     * @param {function(string, DescribeVulHostRelateComponentResponse):void} cb
+     * This API is used to modify client offline duration.
+     * @param {ModifyNotifyAgentOfflineDurationRequest} req
+     * @param {function(string, ModifyNotifyAgentOfflineDurationResponse):void} cb
      * @public
      */
-    DescribeVulHostRelateComponent(req, cb) {
-        let resp = new DescribeVulHostRelateComponentResponse();
-        this.request("DescribeVulHostRelateComponent", req, resp, cb);
+    ModifyNotifyAgentOfflineDuration(req, cb) {
+        let resp = new ModifyNotifyAgentOfflineDurationResponse();
+        this.request("ModifyNotifyAgentOfflineDuration", req, resp, cb);
     }
 
     /**
-     * Refresh the custom policy switch
-     * @param {ModifyUebaRuleSwitchRequest} req
-     * @param {function(string, ModifyUebaRuleSwitchResponse):void} cb
+     * Retrieve user-level baseline configuration for the current account.
+     * @param {DescribeBaselineUserOtherConfRequest} req
+     * @param {function(string, DescribeBaselineUserOtherConfResponse):void} cb
      * @public
      */
-    ModifyUebaRuleSwitch(req, cb) {
-        let resp = new ModifyUebaRuleSwitchResponse();
-        this.request("ModifyUebaRuleSwitch", req, resp, cb);
+    DescribeBaselineUserOtherConf(req, cb) {
+        let resp = new DescribeBaselineUserOtherConfResponse();
+        this.request("DescribeBaselineUserOtherConf", req, resp, cb);
     }
 
     /**
-     * This API is used to list database assets.
-     * @param {DescribeDbAssetsRequest} req
-     * @param {function(string, DescribeDbAssetsResponse):void} cb
+     * Queries the asset list of a container cluster
+     * @param {DescribeClusterAssetListRequest} req
+     * @param {function(string, DescribeClusterAssetListResponse):void} cb
      * @public
      */
-    DescribeDbAssets(req, cb) {
-        let resp = new DescribeDbAssetsResponse();
-        this.request("DescribeDbAssets", req, resp, cb);
+    DescribeClusterAssetList(req, cb) {
+        let resp = new DescribeClusterAssetListResponse();
+        this.request("DescribeClusterAssetList", req, resp, cb);
     }
 
     /**
-     * This API is used to query information of a vulnerability.
-     * @param {DescribeSearchBugInfoRequest} req
-     * @param {function(string, DescribeSearchBugInfoResponse):void} cb
+     * This API is used to query the host list where specified vulnerabilities can be repaired. Before a user submits a repair task, it is necessary to query which hosts support automatic fix, providing data support for users to select repair targets.
+     * @param {DescribeVulFixableMachineListRequest} req
+     * @param {function(string, DescribeVulFixableMachineListResponse):void} cb
      * @public
      */
-    DescribeSearchBugInfo(req, cb) {
-        let resp = new DescribeSearchBugInfoResponse();
-        this.request("DescribeSearchBugInfo", req, resp, cb);
+    DescribeVulFixableMachineList(req, cb) {
+        let resp = new DescribeVulFixableMachineListResponse();
+        this.request("DescribeVulFixableMachineList", req, resp, cb);
     }
 
     /**
-     * Query the sub-account list of the group
-     * @param {DescribeSubUserInfoRequest} req
-     * @param {function(string, DescribeSubUserInfoResponse):void} cb
+     * Create an asset search view.
+     * @param {CreateAssetFilterViewRequest} req
+     * @param {function(string, CreateAssetFilterViewResponse):void} cb
      * @public
      */
-    DescribeSubUserInfo(req, cb) {
-        let resp = new DescribeSubUserInfoResponse();
-        this.request("DescribeSubUserInfo", req, resp, cb);
+    CreateAssetFilterView(req, cb) {
+        let resp = new CreateAssetFilterViewResponse();
+        this.request("CreateAssetFilterView", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a high-risk baseline risk export task.
+     * @param {CreateHighBaseLineRisksExportJobRequest} req
+     * @param {function(string, CreateHighBaseLineRisksExportJobResponse):void} cb
+     * @public
+     */
+    CreateHighBaseLineRisksExportJob(req, cb) {
+        let resp = new CreateHighBaseLineRisksExportJobResponse();
+        this.request("CreateHighBaseLineRisksExportJob", req, resp, cb);
+    }
+
+    /**
+     * Delete rules for automatic cloud boundary tagging.
+     * @param {DeleteExposureAutoTagRuleRequest} req
+     * @param {function(string, DeleteExposureAutoTagRuleResponse):void} cb
+     * @public
+     */
+    DeleteExposureAutoTagRule(req, cb) {
+        let resp = new DeleteExposureAutoTagRuleResponse();
+        this.request("DeleteExposureAutoTagRule", req, resp, cb);
+    }
+
+    /**
+     * Obtain Task Scan Report List
+     * @param {DescribeTaskLogListRequest} req
+     * @param {function(string, DescribeTaskLogListResponse):void} cb
+     * @public
+     */
+    DescribeTaskLogList(req, cb) {
+        let resp = new DescribeTaskLogListResponse();
+        this.request("DescribeTaskLogList", req, resp, cb);
+    }
+
+    /**
+     * Query the image repository scan task list
+     * @param {DescribeImageRegistryScanTaskListRequest} req
+     * @param {function(string, DescribeImageRegistryScanTaskListResponse):void} cb
+     * @public
+     */
+    DescribeImageRegistryScanTaskList(req, cb) {
+        let resp = new DescribeImageRegistryScanTaskListResponse();
+        this.request("DescribeImageRegistryScanTaskList", req, resp, cb);
     }
 
     /**
@@ -1618,40 +7720,51 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain host vulnerability VPR information.
-     * @param {DescribeHostVulItemVPRInfoRequest} req
-     * @param {function(string, DescribeHostVulItemVPRInfoResponse):void} cb
+     * Query dspm audit filter policies
+     * @param {DescribeDspmAuditFilterStrategyRequest} req
+     * @param {function(string, DescribeDspmAuditFilterStrategyResponse):void} cb
      * @public
      */
-    DescribeHostVulItemVPRInfo(req, cb) {
-        let resp = new DescribeHostVulItemVPRInfoResponse();
-        this.request("DescribeHostVulItemVPRInfo", req, resp, cb);
+    DescribeDspmAuditFilterStrategy(req, cb) {
+        let resp = new DescribeDspmAuditFilterStrategyResponse();
+        this.request("DescribeDspmAuditFilterStrategy", req, resp, cb);
     }
 
     /**
-     * This API is used to create an asset with the specific domain/IP.
-     * @param {CreateDomainAndIpRequest} req
-     * @param {function(string, CreateDomainAndIpResponse):void} cb
+     * This API is used to query verification results of dspm data identification data items.
+     * @param {DescribeDspmIdentifyRuleTestResultRequest} req
+     * @param {function(string, DescribeDspmIdentifyRuleTestResultResponse):void} cb
      * @public
      */
-    CreateDomainAndIp(req, cb) {
-        let resp = new CreateDomainAndIpResponse();
-        this.request("CreateDomainAndIp", req, resp, cb);
+    DescribeDspmIdentifyRuleTestResult(req, cb) {
+        let resp = new DescribeDspmIdentifyRuleTestResultResponse();
+        this.request("DescribeDspmIdentifyRuleTestResult", req, resp, cb);
     }
 
     /**
-     * Batch alarm status process API
-     * @param {UpdateAlertStatusListRequest} req
-     * @param {function(string, UpdateAlertStatusListResponse):void} cb
+     * Category statistics for cloud resource configuration detection specifications
+     * @param {DescribeComplianceStatisticsRequest} req
+     * @param {function(string, DescribeComplianceStatisticsResponse):void} cb
      * @public
      */
-    UpdateAlertStatusList(req, cb) {
-        let resp = new UpdateAlertStatusListResponse();
-        this.request("UpdateAlertStatusList", req, resp, cb);
+    DescribeComplianceStatistics(req, cb) {
+        let resp = new DescribeComplianceStatisticsResponse();
+        this.request("DescribeComplianceStatistics", req, resp, cb);
     }
 
     /**
-     * This API is used to obtain user access key asset list (source IP perspective).
+     * Asset tree structure
+     * @param {DescribeAssetTreeRequest} req
+     * @param {function(string, DescribeAssetTreeResponse):void} cb
+     * @public
+     */
+    DescribeAssetTree(req, cb) {
+        let resp = new DescribeAssetTreeResponse();
+        this.request("DescribeAssetTree", req, resp, cb);
+    }
+
+    /**
+     * Retrieve the user access key asset list from an IP perspective.
      * @param {DescribeSourceIPAssetRequest} req
      * @param {function(string, DescribeSourceIPAssetResponse):void} cb
      * @public
@@ -1662,47 +7775,36 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the storage cycle of the IaC detection integration Token.
-     * @param {ModifyIaCTokenPeriodRequest} req
-     * @param {function(string, ModifyIaCTokenPeriodResponse):void} cb
+     * This API is used to update user-level baseline configurations for the current account, including sync permission, offline risk clearing, and Agent scan timeout.
+     * @param {ModifyBaselineUserOtherConfRequest} req
+     * @param {function(string, ModifyBaselineUserOtherConfResponse):void} cb
      * @public
      */
-    ModifyIaCTokenPeriod(req, cb) {
-        let resp = new ModifyIaCTokenPeriodResponse();
-        this.request("ModifyIaCTokenPeriod", req, resp, cb);
+    ModifyBaselineUserOtherConf(req, cb) {
+        let resp = new ModifyBaselineUserOtherConfResponse();
+        this.request("ModifyBaselineUserOtherConf", req, resp, cb);
     }
 
     /**
-     * This API is used to query the list of port risks by ports.
-     * @param {DescribeRiskCenterPortViewPortRiskListRequest} req
-     * @param {function(string, DescribeRiskCenterPortViewPortRiskListResponse):void} cb
+     * Creates an IaC detection file export task
+     * @param {CreateIaCFileExportJobRequest} req
+     * @param {function(string, CreateIaCFileExportJobResponse):void} cb
      * @public
      */
-    DescribeRiskCenterPortViewPortRiskList(req, cb) {
-        let resp = new DescribeRiskCenterPortViewPortRiskListResponse();
-        this.request("DescribeRiskCenterPortViewPortRiskList", req, resp, cb);
+    CreateIaCFileExportJob(req, cb) {
+        let resp = new CreateIaCFileExportJobResponse();
+        this.request("CreateIaCFileExportJob", req, resp, cb);
     }
 
     /**
-     * This API is used to get the list of scan reports.
-     * @param {DescribeScanReportListRequest} req
-     * @param {function(string, DescribeScanReportListResponse):void} cb
+     * Query the command sandbox file rule list.
+     * @param {DescribeSandboxFileRuleListRequest} req
+     * @param {function(string, DescribeSandboxFileRuleListResponse):void} cb
      * @public
      */
-    DescribeScanReportList(req, cb) {
-        let resp = new DescribeScanReportListResponse();
-        this.request("DescribeScanReportList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a vulnerability allowlist.
-     * @param {DeleteVulWhitelistRequest} req
-     * @param {function(string, DeleteVulWhitelistResponse):void} cb
-     * @public
-     */
-    DeleteVulWhitelist(req, cb) {
-        let resp = new DeleteVulWhitelistResponse();
-        this.request("DeleteVulWhitelist", req, resp, cb);
+    DescribeSandboxFileRuleList(req, cb) {
+        let resp = new DescribeSandboxFileRuleListResponse();
+        this.request("DescribeSandboxFileRuleList", req, resp, cb);
     }
 
     /**
@@ -1717,51 +7819,40 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Obtains the vulnerability tag list
-     * @param {DescribeVulLabelListRequest} req
-     * @param {function(string, DescribeVulLabelListResponse):void} cb
+     * This API is used to obtain the global configuration for anti-uninstallation.
+     * @param {DescribePreventUninstallGlobalConfRequest} req
+     * @param {function(string, DescribePreventUninstallGlobalConfResponse):void} cb
      * @public
      */
-    DescribeVulLabelList(req, cb) {
-        let resp = new DescribeVulLabelListResponse();
-        this.request("DescribeVulLabelList", req, resp, cb);
+    DescribePreventUninstallGlobalConf(req, cb) {
+        let resp = new DescribePreventUninstallGlobalConfResponse();
+        this.request("DescribePreventUninstallGlobalConf", req, resp, cb);
     }
 
     /**
-     * Modify group account status
-     * @param {ModifyOrganizationAccountStatusRequest} req
-     * @param {function(string, ModifyOrganizationAccountStatusResponse):void} cb
+     * This API is used to query the ACL access control alarm log list by paging. It supports precise filtering of a single alarm by Filter.Name=ID for the details page scenario.
+     * @param {DescribeSandboxACLAlertListRequest} req
+     * @param {function(string, DescribeSandboxACLAlertListResponse):void} cb
      * @public
      */
-    ModifyOrganizationAccountStatus(req, cb) {
-        let resp = new ModifyOrganizationAccountStatusResponse();
-        this.request("ModifyOrganizationAccountStatus", req, resp, cb);
+    DescribeSandboxACLAlertList(req, cb) {
+        let resp = new DescribeSandboxACLAlertListResponse();
+        this.request("DescribeSandboxACLAlertList", req, resp, cb);
     }
 
     /**
-     * This API is used to query the associated server of a vulnerable component.
-     * @param {DescribeVulComponentRelateHostRequest} req
-     * @param {function(string, DescribeVulComponentRelateHostResponse):void} cb
+     * Modify a Dspm audit filter policy
+     * @param {ModifyDspmAuditFilterStrategyRequest} req
+     * @param {function(string, ModifyDspmAuditFilterStrategyResponse):void} cb
      * @public
      */
-    DescribeVulComponentRelateHost(req, cb) {
-        let resp = new DescribeVulComponentRelateHostResponse();
-        this.request("DescribeVulComponentRelateHost", req, resp, cb);
+    ModifyDspmAuditFilterStrategy(req, cb) {
+        let resp = new ModifyDspmAuditFilterStrategyResponse();
+        this.request("ModifyDspmAuditFilterStrategy", req, resp, cb);
     }
 
     /**
-     * Retrieve IaC detection file overview
-     * @param {DescribeIaCFileOverviewRequest} req
-     * @param {function(string, DescribeIaCFileOverviewResponse):void} cb
-     * @public
-     */
-    DescribeIaCFileOverview(req, cb) {
-        let resp = new DescribeIaCFileOverviewResponse();
-        this.request("DescribeIaCFileOverview", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the temp download link of a report. 
+     * Obtain the Temporary Link for Report Download
      * @param {DescribeTaskLogURLRequest} req
      * @param {function(string, DescribeTaskLogURLResponse):void} cb
      * @public
@@ -1772,7 +7863,1773 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Obtain risk center risk overview example.
+     * Obtain Task Distribution Duration
+     * @param {DescribeCWPTaskDurationRequest} req
+     * @param {function(string, DescribeCWPTaskDurationResponse):void} cb
+     * @public
+     */
+    DescribeCWPTaskDuration(req, cb) {
+        let resp = new DescribeCWPTaskDurationResponse();
+        this.request("DescribeCWPTaskDuration", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restore the backup logs.
+     * @param {ModifyDspmRestoreLogTaskRequest} req
+     * @param {function(string, ModifyDspmRestoreLogTaskResponse):void} cb
+     * @public
+     */
+    ModifyDspmRestoreLogTask(req, cb) {
+        let resp = new ModifyDspmRestoreLogTaskResponse();
+        this.request("ModifyDspmRestoreLogTask", req, resp, cb);
+    }
+
+    /**
+     * Create an asset list export task for Dspm.
+     * @param {CreateDspmAssetIdentifyInfoExportJobRequest} req
+     * @param {function(string, CreateDspmAssetIdentifyInfoExportJobResponse):void} cb
+     * @public
+     */
+    CreateDspmAssetIdentifyInfoExportJob(req, cb) {
+        let resp = new CreateDspmAssetIdentifyInfoExportJobResponse();
+        this.request("CreateDspmAssetIdentifyInfoExportJob", req, resp, cb);
+    }
+
+    /**
+     * Delete an IaC detection file
+     * @param {DeleteIaCFileRequest} req
+     * @param {function(string, DeleteIaCFileResponse):void} cb
+     * @public
+     */
+    DeleteIaCFile(req, cb) {
+        let resp = new DeleteIaCFileResponse();
+        this.request("DeleteIaCFile", req, resp, cb);
+    }
+
+    /**
+     * Query the CLB backend service list
+     * @param {DescribeClbTargetsRequest} req
+     * @param {function(string, DescribeClbTargetsResponse):void} cb
+     * @public
+     */
+    DescribeClbTargets(req, cb) {
+        let resp = new DescribeClbTargetsResponse();
+        this.request("DescribeClbTargets", req, resp, cb);
+    }
+
+    /**
+     * Trigger a holistic rescan for a batch of baseline policies via the one-click scan entry on the strategy list page. All assets within the policy hit scope will be rescanned.
+     * @param {ScanBaselinePolicyListRequest} req
+     * @param {function(string, ScanBaselinePolicyListResponse):void} cb
+     * @public
+     */
+    ScanBaselinePolicyList(req, cb) {
+        let resp = new ScanBaselinePolicyListResponse();
+        this.request("ScanBaselinePolicyList", req, resp, cb);
+    }
+
+    /**
+     * Query the Dspm identity information list
+     * @param {DescribeDspmIdentifyInfoListRequest} req
+     * @param {function(string, DescribeDspmIdentifyInfoListResponse):void} cb
+     * @public
+     */
+    DescribeDspmIdentifyInfoList(req, cb) {
+        let resp = new DescribeDspmIdentifyInfoListResponse();
+        this.request("DescribeDspmIdentifyInfoList", req, resp, cb);
+    }
+
+    /**
+     * Exports host details of a CSIP scan task to Excel files. This API is used to query the download link through DescribeExportMachines after asynchronous generation.
+     * @param {ExportCSIPMalwareScanTaskDetailRequest} req
+     * @param {function(string, ExportCSIPMalwareScanTaskDetailResponse):void} cb
+     * @public
+     */
+    ExportCSIPMalwareScanTaskDetail(req, cb) {
+        let resp = new ExportCSIPMalwareScanTaskDetailResponse();
+        this.request("ExportCSIPMalwareScanTaskDetail", req, resp, cb);
+    }
+
+    /**
+     * Modify Dspm access management information
+     * @param {ModifyDspmAccessRecordRequest} req
+     * @param {function(string, ModifyDspmAccessRecordResponse):void} cb
+     * @public
+     */
+    ModifyDspmAccessRecord(req, cb) {
+        let resp = new ModifyDspmAccessRecordResponse();
+        this.request("ModifyDspmAccessRecord", req, resp, cb);
+    }
+
+    /**
+     * Update custom tags for cloud boundaries
+     * @param {ModifyExposureTagRequest} req
+     * @param {function(string, ModifyExposureTagResponse):void} cb
+     * @public
+     */
+    ModifyExposureTag(req, cb) {
+        let resp = new ModifyExposureTagResponse();
+        this.request("ModifyExposureTag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the log shipping configuration of a tenant.
+     * @param {DescribeDspmLogTypeConfigListRequest} req
+     * @param {function(string, DescribeDspmLogTypeConfigListResponse):void} cb
+     * @public
+     */
+    DescribeDspmLogTypeConfigList(req, cb) {
+        let resp = new DescribeDspmLogTypeConfigListResponse();
+        this.request("DescribeDspmLogTypeConfigList", req, resp, cb);
+    }
+
+    /**
+     * CSIP manual scan task delete API
+     * @param {DeleteCSIPMalwareScanTaskRequest} req
+     * @param {function(string, DeleteCSIPMalwareScanTaskResponse):void} cb
+     * @public
+     */
+    DeleteCSIPMalwareScanTask(req, cb) {
+        let resp = new DeleteCSIPMalwareScanTaskResponse();
+        this.request("DeleteCSIPMalwareScanTask", req, resp, cb);
+    }
+
+    /**
+     * Batch switch the enable or disable status of LLM audit user rules. If any rule does not exist, belongs to another tenant, or has been deleted, an error is returned overall.
+     * @param {ModifySandboxLLMAuditRuleStatusRequest} req
+     * @param {function(string, ModifySandboxLLMAuditRuleStatusResponse):void} cb
+     * @public
+     */
+    ModifySandboxLLMAuditRuleStatus(req, cb) {
+        let resp = new ModifySandboxLLMAuditRuleStatusResponse();
+        this.request("ModifySandboxLLMAuditRuleStatus", req, resp, cb);
+    }
+
+    /**
+     * Add or modify a receiving robot. ID > 0 means modifying an existing record; ID = 0 or not passed means adding new. The robot type is determined by the Type field. When Type=WEBHOOK, WebhookAddr is required. When Type=SCF, SCFRegion/Namespace/FunctionName/FunctionVersion/Alias/MaxWaitSeconds are all required. Type is not allowed to be changed during modification.
+     * @param {ModifyWebhookReceiverRequest} req
+     * @param {function(string, ModifyWebhookReceiverResponse):void} cb
+     * @public
+     */
+    ModifyWebhookReceiver(req, cb) {
+        let resp = new ModifyWebhookReceiverResponse();
+        this.request("ModifyWebhookReceiver", req, resp, cb);
+    }
+
+    /**
+     * Deleting a cluster
+     * @param {DeleteClusterRequest} req
+     * @param {function(string, DeleteClusterResponse):void} cb
+     * @public
+     */
+    DeleteCluster(req, cb) {
+        let resp = new DeleteClusterResponse();
+        this.request("DeleteCluster", req, resp, cb);
+    }
+
+    /**
+     * Queries the list of Dspm asset IDs
+     * @param {DescribeDspmAssetIdsRequest} req
+     * @param {function(string, DescribeDspmAssetIdsResponse):void} cb
+     * @public
+     */
+    DescribeDspmAssetIds(req, cb) {
+        let resp = new DescribeDspmAssetIdsResponse();
+        this.request("DescribeDspmAssetIds", req, resp, cb);
+    }
+
+    /**
+     * Exports the task list
+     * @param {DescribeExportJobManageListRequest} req
+     * @param {function(string, DescribeExportJobManageListResponse):void} cb
+     * @public
+     */
+    DescribeExportJobManageList(req, cb) {
+        let resp = new DescribeExportJobManageListResponse();
+        this.request("DescribeExportJobManageList", req, resp, cb);
+    }
+
+    /**
+     * Queries Dspm risk details
+     * @param {DescribeDspmRiskDetailRequest} req
+     * @param {function(string, DescribeDspmRiskDetailResponse):void} cb
+     * @public
+     */
+    DescribeDspmRiskDetail(req, cb) {
+        let resp = new DescribeDspmRiskDetailResponse();
+        this.request("DescribeDspmRiskDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the audit session list information.
+     * @param {DescribeDspmSessionListRequest} req
+     * @param {function(string, DescribeDspmSessionListResponse):void} cb
+     * @public
+     */
+    DescribeDspmSessionList(req, cb) {
+        let resp = new DescribeDspmSessionListResponse();
+        this.request("DescribeDspmSessionList", req, resp, cb);
+    }
+
+    /**
+     * Queries the version list of a specified SCF function.
+     * @param {DescribeSCFFunctionVersionListRequest} req
+     * @param {function(string, DescribeSCFFunctionVersionListResponse):void} cb
+     * @public
+     */
+    DescribeSCFFunctionVersionList(req, cb) {
+        let resp = new DescribeSCFFunctionVersionListResponse();
+        this.request("DescribeSCFFunctionVersionList", req, resp, cb);
+    }
+
+    /**
+     * Query the cluster namespace list.
+     * @param {DescribeClusterNamespaceListRequest} req
+     * @param {function(string, DescribeClusterNamespaceListResponse):void} cb
+     * @public
+     */
+    DescribeClusterNamespaceList(req, cb) {
+        let resp = new DescribeClusterNamespaceListResponse();
+        this.request("DescribeClusterNamespaceList", req, resp, cb);
+    }
+
+    /**
+     * Create Image Sensitive Information List Export Task
+     * @param {CreateImageSensitiveInfoListExportJobRequest} req
+     * @param {function(string, CreateImageSensitiveInfoListExportJobResponse):void} cb
+     * @public
+     */
+    CreateImageSensitiveInfoListExportJob(req, cb) {
+        let resp = new CreateImageSensitiveInfoListExportJobResponse();
+        this.request("CreateImageSensitiveInfoListExportJob", req, resp, cb);
+    }
+
+    /**
+     * Stop Scanning Tasks of Risk Center
+     * @param {StopRiskCenterTaskRequest} req
+     * @param {function(string, StopRiskCenterTaskResponse):void} cb
+     * @public
+     */
+    StopRiskCenterTask(req, cb) {
+        let resp = new StopRiskCenterTaskResponse();
+        this.request("StopRiskCenterTask", req, resp, cb);
+    }
+
+    /**
+     * Trigger an AK asset sync task.
+     * @param {CreateAccessKeySyncTaskRequest} req
+     * @param {function(string, CreateAccessKeySyncTaskResponse):void} cb
+     * @public
+     */
+    CreateAccessKeySyncTask(req, cb) {
+        let resp = new CreateAccessKeySyncTaskResponse();
+        this.request("CreateAccessKeySyncTask", req, resp, cb);
+    }
+
+    /**
+     * Enable or disable automatic cloud boundary tagging rules.
+     * @param {ModifyExposureAutoTagRuleStatusRequest} req
+     * @param {function(string, ModifyExposureAutoTagRuleStatusResponse):void} cb
+     * @public
+     */
+    ModifyExposureAutoTagRuleStatus(req, cb) {
+        let resp = new ModifyExposureAutoTagRuleStatusResponse();
+        this.request("ModifyExposureAutoTagRuleStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of baseline policies for list page display of system and custom policies and their configuration status in scenarios such as cycle plan management.
+     * @param {DescribeBaselinePolicyListRequest} req
+     * @param {function(string, DescribeBaselinePolicyListResponse):void} cb
+     * @public
+     */
+    DescribeBaselinePolicyList(req, cb) {
+        let resp = new DescribeBaselinePolicyListResponse();
+        this.request("DescribeBaselinePolicyList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an image Trojan allowlist.
+     * @param {CreateImageVirusWhitelistRequest} req
+     * @param {function(string, CreateImageVirusWhitelistResponse):void} cb
+     * @public
+     */
+    CreateImageVirusWhitelist(req, cb) {
+        let resp = new CreateImageVirusWhitelistResponse();
+        this.request("CreateImageVirusWhitelist", req, resp, cb);
+    }
+
+    /**
+     * CSIP manual scan stop API
+     * @param {StopCSIPManualMalwareScanRequest} req
+     * @param {function(string, StopCSIPManualMalwareScanResponse):void} cb
+     * @public
+     */
+    StopCSIPManualMalwareScan(req, cb) {
+        let resp = new StopCSIPManualMalwareScanResponse();
+        this.request("StopCSIPManualMalwareScan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an IaC detection file rescan task.
+     * @param {CreateIaCFileReScanTaskRequest} req
+     * @param {function(string, CreateIaCFileReScanTaskResponse):void} cb
+     * @public
+     */
+    CreateIaCFileReScanTask(req, cb) {
+        let resp = new CreateIaCFileReScanTaskResponse();
+        this.request("CreateIaCFileReScanTask", req, resp, cb);
+    }
+
+    /**
+     * Lists the configuration of custom risk rules
+     * @param {DescribeCustomRiskRulesRequest} req
+     * @param {function(string, DescribeCustomRiskRulesResponse):void} cb
+     * @public
+     */
+    DescribeCustomRiskRules(req, cb) {
+        let resp = new DescribeCustomRiskRulesResponse();
+        this.request("DescribeCustomRiskRules", req, resp, cb);
+    }
+
+    /**
+     * Stop or cancel a scan task. For tasks in SCANNING status, call RPC to stop them. For tasks in WAIT status, update the database directly to cancel them. Only the task creator can perform these operations.
+     * @param {StopEDRScanTaskRequest} req
+     * @param {function(string, StopEDRScanTaskResponse):void} cb
+     * @public
+     */
+    StopEDRScanTask(req, cb) {
+        let resp = new StopEDRScanTaskResponse();
+        this.request("StopEDRScanTask", req, resp, cb);
+    }
+
+    /**
+     * Obtain Scan Report List
+     * @param {DescribeScanReportListRequest} req
+     * @param {function(string, DescribeScanReportListResponse):void} cb
+     * @public
+     */
+    DescribeScanReportList(req, cb) {
+        let resp = new DescribeScanReportListResponse();
+        this.request("DescribeScanReportList", req, resp, cb);
+    }
+
+    /**
+     * Modify the member account for notification.
+     * @param {ModifyNotifyMemberRequest} req
+     * @param {function(string, ModifyNotifyMemberResponse):void} cb
+     * @public
+     */
+    ModifyNotifyMember(req, cb) {
+        let resp = new ModifyNotifyMemberResponse();
+        this.request("ModifyNotifyMember", req, resp, cb);
+    }
+
+    /**
+     * Queries the dspm data identification data item details
+     * @param {DescribeDspmIdentifyRuleDetailRequest} req
+     * @param {function(string, DescribeDspmIdentifyRuleDetailResponse):void} cb
+     * @public
+     */
+    DescribeDspmIdentifyRuleDetail(req, cb) {
+        let resp = new DescribeDspmIdentifyRuleDetailResponse();
+        this.request("DescribeDspmIdentifyRuleDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a mirror repository connectivity check task.
+     * @param {CreateImageRegistryConnectivityTaskRequest} req
+     * @param {function(string, CreateImageRegistryConnectivityTaskResponse):void} cb
+     * @public
+     */
+    CreateImageRegistryConnectivityTask(req, cb) {
+        let resp = new CreateImageRegistryConnectivityTaskResponse();
+        this.request("CreateImageRegistryConnectivityTask", req, resp, cb);
+    }
+
+    /**
+     * Delete image repository information.
+     * @param {DeleteImageRegistryRequest} req
+     * @param {function(string, DeleteImageRegistryResponse):void} cb
+     * @public
+     */
+    DeleteImageRegistry(req, cb) {
+        let resp = new DeleteImageRegistryResponse();
+        this.request("DeleteImageRegistry", req, resp, cb);
+    }
+
+    /**
+     * Queries the Dspm application form list
+     * @param {DescribeDspmApplyOrderListRequest} req
+     * @param {function(string, DescribeDspmApplyOrderListResponse):void} cb
+     * @public
+     */
+    DescribeDspmApplyOrderList(req, cb) {
+        let resp = new DescribeDspmApplyOrderListResponse();
+        this.request("DescribeDspmApplyOrderList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of data items associated with dspm data recognition template classifications.
+     * @param {DescribeDspmIdentifyComplianceCategoryRuleListRequest} req
+     * @param {function(string, DescribeDspmIdentifyComplianceCategoryRuleListResponse):void} cb
+     * @public
+     */
+    DescribeDspmIdentifyComplianceCategoryRuleList(req, cb) {
+        let resp = new DescribeDspmIdentifyComplianceCategoryRuleListResponse();
+        this.request("DescribeDspmIdentifyComplianceCategoryRuleList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the scan task record list.
+     * @param {DescribeScanTaskRecordListRequest} req
+     * @param {function(string, DescribeScanTaskRecordListResponse):void} cb
+     * @public
+     */
+    DescribeScanTaskRecordList(req, cb) {
+        let resp = new DescribeScanTaskRecordListResponse();
+        this.request("DescribeScanTaskRecordList", req, resp, cb);
+    }
+
+    /**
+     * Query the list of custom domain name endpoints for Tencent Cloud SCF
+     * @param {DescribeScfCustomDomainEndpointsRequest} req
+     * @param {function(string, DescribeScfCustomDomainEndpointsResponse):void} cb
+     * @public
+     */
+    DescribeScfCustomDomainEndpoints(req, cb) {
+        let resp = new DescribeScfCustomDomainEndpointsResponse();
+        this.request("DescribeScfCustomDomainEndpoints", req, resp, cb);
+    }
+
+    /**
+     * Creating an Image Scanning Task
+     * @param {CreateImageRegistryScanTaskRequest} req
+     * @param {function(string, CreateImageRegistryScanTaskResponse):void} cb
+     * @public
+     */
+    CreateImageRegistryScanTask(req, cb) {
+        let resp = new CreateImageRegistryScanTaskResponse();
+        this.request("CreateImageRegistryScanTask", req, resp, cb);
+    }
+
+    /**
+     * Modifies the status of a dspm data identification template
+     * @param {ModifyDspmIdentifyComplianceGroupStatusRequest} req
+     * @param {function(string, ModifyDspmIdentifyComplianceGroupStatusResponse):void} cb
+     * @public
+     */
+    ModifyDspmIdentifyComplianceGroupStatus(req, cb) {
+        let resp = new ModifyDspmIdentifyComplianceGroupStatusResponse();
+        this.request("ModifyDspmIdentifyComplianceGroupStatus", req, resp, cb);
+    }
+
+    /**
+     * Access key alarm record details
+     * @param {DescribeAccessKeyAlarmDetailRequest} req
+     * @param {function(string, DescribeAccessKeyAlarmDetailResponse):void} cb
+     * @public
+     */
+    DescribeAccessKeyAlarmDetail(req, cb) {
+        let resp = new DescribeAccessKeyAlarmDetailResponse();
+        this.request("DescribeAccessKeyAlarmDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query Skill security detection billing information, including order status, total quota, consumed quota, expiration time, and payment mode. If no order exists, zero values are returned (only TimeNow and BetaEndTime). Trial orders are claimed through ModifyTrialStatus(Module=9), and official orders are created through the billing system.
+     * @param {DescribeSkillScanPayInfoRequest} req
+     * @param {function(string, DescribeSkillScanPayInfoResponse):void} cb
+     * @public
+     */
+    DescribeSkillScanPayInfo(req, cb) {
+        let resp = new DescribeSkillScanPayInfoResponse();
+        this.request("DescribeSkillScanPayInfo", req, resp, cb);
+    }
+
+    /**
+     * Get the call record list
+     * @param {DescribeAbnormalCallRecordRequest} req
+     * @param {function(string, DescribeAbnormalCallRecordResponse):void} cb
+     * @public
+     */
+    DescribeAbnormalCallRecord(req, cb) {
+        let resp = new DescribeAbnormalCallRecordResponse();
+        this.request("DescribeAbnormalCallRecord", req, resp, cb);
+    }
+
+    /**
+     * Create an AI scheduled task.
+
+Create an AI scheduled task by entering the task name, prompt content, and trigger configuration. The AI scheduled task ID will be returned after successful creation.
+     * @param {CreateAIScheduleRequest} req
+     * @param {function(string, CreateAIScheduleResponse):void} cb
+     * @public
+     */
+    CreateAISchedule(req, cb) {
+        let resp = new CreateAIScheduleResponse();
+        this.request("CreateAISchedule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the region list of the backend scanning engine.
+     * @param {DescribeBackendScanEngineRegionListRequest} req
+     * @param {function(string, DescribeBackendScanEngineRegionListResponse):void} cb
+     * @public
+     */
+    DescribeBackendScanEngineRegionList(req, cb) {
+        let resp = new DescribeBackendScanEngineRegionListResponse();
+        this.request("DescribeBackendScanEngineRegionList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the log list information.
+     * @param {DescribeDspmLogListRequest} req
+     * @param {function(string, DescribeDspmLogListResponse):void} cb
+     * @public
+     */
+    DescribeDspmLogList(req, cb) {
+        let resp = new DescribeDspmLogListResponse();
+        this.request("DescribeDspmLogList", req, resp, cb);
+    }
+
+    /**
+     * Obtain the system built-in baseline classification tree (parent category → subcategory → built-in detection item ID list), used for selecting baseline detection items on the policy editing page.
+     * @param {DescribeBaselineSystemCategoryListRequest} req
+     * @param {function(string, DescribeBaselineSystemCategoryListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineSystemCategoryList(req, cb) {
+        let resp = new DescribeBaselineSystemCategoryListResponse();
+        this.request("DescribeBaselineSystemCategoryList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a dspm data identification template category association.
+     * @param {CreateDspmIdentifyComplianceCategoryRelationRequest} req
+     * @param {function(string, CreateDspmIdentifyComplianceCategoryRelationResponse):void} cb
+     * @public
+     */
+    CreateDspmIdentifyComplianceCategoryRelation(req, cb) {
+        let resp = new CreateDspmIdentifyComplianceCategoryRelationResponse();
+        this.request("CreateDspmIdentifyComplianceCategoryRelation", req, resp, cb);
+    }
+
+    /**
+     * Synchronize the list of dspm users.
+     * @param {SyncDspmUsersRequest} req
+     * @param {function(string, SyncDspmUsersResponse):void} cb
+     * @public
+     */
+    SyncDspmUsers(req, cb) {
+        let resp = new SyncDspmUsersResponse();
+        this.request("SyncDspmUsers", req, resp, cb);
+    }
+
+    /**
+     * Queries the Trojan virus list of an image
+     * @param {DescribeImageVirusListRequest} req
+     * @param {function(string, DescribeImageVirusListResponse):void} cb
+     * @public
+     */
+    DescribeImageVirusList(req, cb) {
+        let resp = new DescribeImageVirusListResponse();
+        this.request("DescribeImageVirusList", req, resp, cb);
+    }
+
+    /**
+     * Bind an important period guarantee protection authorization package.
+     * @param {ModifyRaspLicenseBindsRequest} req
+     * @param {function(string, ModifyRaspLicenseBindsResponse):void} cb
+     * @public
+     */
+    ModifyRaspLicenseBinds(req, cb) {
+        let resp = new ModifyRaspLicenseBindsResponse();
+        this.request("ModifyRaspLicenseBinds", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable the anti-uninstallation feature.
+     * @param {StopPreventUninstallRequest} req
+     * @param {function(string, StopPreventUninstallResponse):void} cb
+     * @public
+     */
+    StopPreventUninstall(req, cb) {
+        let resp = new StopPreventUninstallResponse();
+        this.request("StopPreventUninstall", req, resp, cb);
+    }
+
+    /**
+     * Delete the SMTP mailbox access information of the AI assistant.
+     * @param {DeleteAIAnalysisSMTPAccessRequest} req
+     * @param {function(string, DeleteAIAnalysisSMTPAccessResponse):void} cb
+     * @public
+     */
+    DeleteAIAnalysisSMTPAccess(req, cb) {
+        let resp = new DeleteAIAnalysisSMTPAccessResponse();
+        this.request("DeleteAIAnalysisSMTPAccess", req, resp, cb);
+    }
+
+    /**
+     * Query the list of dspm dictionary information
+     * @param {DescribeDspmDictionaryListRequest} req
+     * @param {function(string, DescribeDspmDictionaryListResponse):void} cb
+     * @public
+     */
+    DescribeDspmDictionaryList(req, cb) {
+        let resp = new DescribeDspmDictionaryListResponse();
+        this.request("DescribeDspmDictionaryList", req, resp, cb);
+    }
+
+    /**
+     * Creates a component list export task for image assets.
+     * @param {CreateAssetComponentListExportJobRequest} req
+     * @param {function(string, CreateAssetComponentListExportJobResponse):void} cb
+     * @public
+     */
+    CreateAssetComponentListExportJob(req, cb) {
+        let resp = new CreateAssetComponentListExportJobResponse();
+        this.request("CreateAssetComponentListExportJob", req, resp, cb);
+    }
+
+    /**
+     * Get cvm list
+     * @param {DescribeCVMAssetsRequest} req
+     * @param {function(string, DescribeCVMAssetsResponse):void} cb
+     * @public
+     */
+    DescribeCVMAssets(req, cb) {
+        let resp = new DescribeCVMAssetsResponse();
+        this.request("DescribeCVMAssets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the host login method.
+     * @param {DescribeMachineLoginTypeRequest} req
+     * @param {function(string, DescribeMachineLoginTypeResponse):void} cb
+     * @public
+     */
+    DescribeMachineLoginType(req, cb) {
+        let resp = new DescribeMachineLoginTypeResponse();
+        this.request("DescribeMachineLoginType", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a Dspm application.
+     * @param {CreateDspmApplyOrderRequest} req
+     * @param {function(string, CreateDspmApplyOrderResponse):void} cb
+     * @public
+     */
+    CreateDspmApplyOrder(req, cb) {
+        let resp = new CreateDspmApplyOrderResponse();
+        this.request("CreateDspmApplyOrder", req, resp, cb);
+    }
+
+    /**
+     * Modify command sandbox file access rule
+     * @param {ModifySandboxFileRuleRequest} req
+     * @param {function(string, ModifySandboxFileRuleResponse):void} cb
+     * @public
+     */
+    ModifySandboxFileRule(req, cb) {
+        let resp = new ModifySandboxFileRuleResponse();
+        this.request("ModifySandboxFileRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task of exporting the image vulnerability list.
+     * @param {CreateImageVulListExportJobRequest} req
+     * @param {function(string, CreateImageVulListExportJobResponse):void} cb
+     * @public
+     */
+    CreateImageVulListExportJob(req, cb) {
+        let resp = new CreateImageVulListExportJobResponse();
+        this.request("CreateImageVulListExportJob", req, resp, cb);
+    }
+
+    /**
+     * Bind RASP or Flagship Edition Authorization to a specified order. Execute asynchronously and return TaskId to query progress. LicenseType=rasp binds RASP, LicenseType=enterprise_hp binds flagship host authorization. AssetType is case-sensitive for host/container node/EKS.
+     * @param {ModifyCSIPRaspLicenseBindsRequest} req
+     * @param {function(string, ModifyCSIPRaspLicenseBindsResponse):void} cb
+     * @public
+     */
+    ModifyCSIPRaspLicenseBinds(req, cb) {
+        let resp = new ModifyCSIPRaspLicenseBindsResponse();
+        this.request("ModifyCSIPRaspLicenseBinds", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the log backup settings.
+     * @param {ModifyDspmBackupSettingRequest} req
+     * @param {function(string, ModifyDspmBackupSettingResponse):void} cb
+     * @public
+     */
+    ModifyDspmBackupSetting(req, cb) {
+        let resp = new ModifyDspmBackupSettingResponse();
+        this.request("ModifyDspmBackupSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to search for the custom dictionary of weak passwords for users under the current account.
+     * @param {DescribeBaselineUserWeakPasswordConfRequest} req
+     * @param {function(string, DescribeBaselineUserWeakPasswordConfResponse):void} cb
+     * @public
+     */
+    DescribeBaselineUserWeakPasswordConf(req, cb) {
+        let resp = new DescribeBaselineUserWeakPasswordConfResponse();
+        this.request("DescribeBaselineUserWeakPasswordConf", req, resp, cb);
+    }
+
+    /**
+     * Uninstall the cluster container security Agent.
+     * @param {UninstallClusterAgentRequest} req
+     * @param {function(string, UninstallClusterAgentResponse):void} cb
+     * @public
+     */
+    UninstallClusterAgent(req, cb) {
+        let resp = new UninstallClusterAgentResponse();
+        this.request("UninstallClusterAgent", req, resp, cb);
+    }
+
+    /**
+     * Cloud resource configuration detection compliance overview
+     * @param {DescribeComplianceOverviewRequest} req
+     * @param {function(string, DescribeComplianceOverviewResponse):void} cb
+     * @public
+     */
+    DescribeComplianceOverview(req, cb) {
+        let resp = new DescribeComplianceOverviewResponse();
+        this.request("DescribeComplianceOverview", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of the host overview.
+     * @param {DescribeMachineGeneralRequest} req
+     * @param {function(string, DescribeMachineGeneralResponse):void} cb
+     * @public
+     */
+    DescribeMachineGeneral(req, cb) {
+        let resp = new DescribeMachineGeneralResponse();
+        this.request("DescribeMachineGeneral", req, resp, cb);
+    }
+
+    /**
+     * Queries the behavior overview of user behavior analysis.
+     * @param {DescribeUebaBehaviorSummaryRequest} req
+     * @param {function(string, DescribeUebaBehaviorSummaryResponse):void} cb
+     * @public
+     */
+    DescribeUebaBehaviorSummary(req, cb) {
+        let resp = new DescribeUebaBehaviorSummaryResponse();
+        this.request("DescribeUebaBehaviorSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the host list for QR code log-in.
+     * @param {DescribeNFSScanHostRequest} req
+     * @param {function(string, DescribeNFSScanHostResponse):void} cb
+     * @public
+     */
+    DescribeNFSScanHost(req, cb) {
+        let resp = new DescribeNFSScanHostResponse();
+        this.request("DescribeNFSScanHost", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the routing information of the CKafka instance.
+     * @param {DescribeDspmCkafkaRouteListRequest} req
+     * @param {function(string, DescribeDspmCkafkaRouteListResponse):void} cb
+     * @public
+     */
+    DescribeDspmCkafkaRouteList(req, cb) {
+        let resp = new DescribeDspmCkafkaRouteListResponse();
+        this.request("DescribeDspmCkafkaRouteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to retrieve the vulnerability ignore list.
+     * @param {DescribeVulIgnoreRuleListRequest} req
+     * @param {function(string, DescribeVulIgnoreRuleListResponse):void} cb
+     * @public
+     */
+    DescribeVulIgnoreRuleList(req, cb) {
+        let resp = new DescribeVulIgnoreRuleListResponse();
+        this.request("DescribeVulIgnoreRuleList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the user overview of the user behavior analysis module.
+     * @param {DescribeUebaUserSummaryRequest} req
+     * @param {function(string, DescribeUebaUserSummaryResponse):void} cb
+     * @public
+     */
+    DescribeUebaUserSummary(req, cb) {
+        let resp = new DescribeUebaUserSummaryResponse();
+        this.request("DescribeUebaUserSummary", req, resp, cb);
+    }
+
+    /**
+     * Get last check-now task info
+     * @param {DescribeLastScanTaskInfoRequest} req
+     * @param {function(string, DescribeLastScanTaskInfoResponse):void} cb
+     * @public
+     */
+    DescribeLastScanTaskInfo(req, cb) {
+        let resp = new DescribeLastScanTaskInfoResponse();
+        this.request("DescribeLastScanTaskInfo", req, resp, cb);
+    }
+
+    /**
+     * Get the scan main task list for the Task Record page to show the history and results of one-click scan, period scanning, and disperse scan.
+     * @param {DescribeBaselineMainTaskListRequest} req
+     * @param {function(string, DescribeBaselineMainTaskListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineMainTaskList(req, cb) {
+        let resp = new DescribeBaselineMainTaskListResponse();
+        this.request("DescribeBaselineMainTaskList", req, resp, cb);
+    }
+
+    /**
+     * Creates a Dspm approval history export task
+     * @param {CreateDspmApproveHistoryExportJobRequest} req
+     * @param {function(string, CreateDspmApproveHistoryExportJobResponse):void} cb
+     * @public
+     */
+    CreateDspmApproveHistoryExportJob(req, cb) {
+        let resp = new CreateDspmApproveHistoryExportJobResponse();
+        this.request("CreateDspmApproveHistoryExportJob", req, resp, cb);
+    }
+
+    /**
+     * Queries the image vulnerability overview list
+     * @param {DescribeImageVulSummaryListRequest} req
+     * @param {function(string, DescribeImageVulSummaryListResponse):void} cb
+     * @public
+     */
+    DescribeImageVulSummaryList(req, cb) {
+        let resp = new DescribeImageVulSummaryListResponse();
+        this.request("DescribeImageVulSummaryList", req, resp, cb);
+    }
+
+    /**
+     * Gets notification settings for risk governance.
+     * @param {DescribeNotifySettingAkRequest} req
+     * @param {function(string, DescribeNotifySettingAkResponse):void} cb
+     * @public
+     */
+    DescribeNotifySettingAk(req, cb) {
+        let resp = new DescribeNotifySettingAkResponse();
+        this.request("DescribeNotifySettingAk", req, resp, cb);
+    }
+
+    /**
+     * Obtain the pre-consumed quota for scans.
+     * @param {DescribeTaskPredictCostQuotaRequest} req
+     * @param {function(string, DescribeTaskPredictCostQuotaResponse):void} cb
+     * @public
+     */
+    DescribeTaskPredictCostQuota(req, cb) {
+        let resp = new DescribeTaskPredictCostQuotaResponse();
+        this.request("DescribeTaskPredictCostQuota", req, resp, cb);
+    }
+
+    /**
+     * Get the periodic schedule for risk scans
+     * @param {DescribeRiskScanCronConfigRequest} req
+     * @param {function(string, DescribeRiskScanCronConfigResponse):void} cb
+     * @public
+     */
+    DescribeRiskScanCronConfig(req, cb) {
+        let resp = new DescribeRiskScanCronConfigResponse();
+        this.request("DescribeRiskScanCronConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a dspm data identification category.
+     * @param {CreateDspmIdentifyCategoryRequest} req
+     * @param {function(string, CreateDspmIdentifyCategoryResponse):void} cb
+     * @public
+     */
+    CreateDspmIdentifyCategory(req, cb) {
+        let resp = new CreateDspmIdentifyCategoryResponse();
+        this.request("CreateDspmIdentifyCategory", req, resp, cb);
+    }
+
+    /**
+     * Queries the overall status of all valid authorizations under the current account, returns total count, used, remaining, and expiry time grouped by billing item, and also returns the auto-purchase switch status and merged remaining unbind count. The output sequence is fixed as: flagship edition → pro edition → RASP → other.
+     * @param {DescribeLicenseStatusRequest} req
+     * @param {function(string, DescribeLicenseStatusResponse):void} cb
+     * @public
+     */
+    DescribeLicenseStatus(req, cb) {
+        let resp = new DescribeLicenseStatusResponse();
+        this.request("DescribeLicenseStatus", req, resp, cb);
+    }
+
+    /**
+     * Queries the list of associated images of image repository components.
+     * @param {DescribeAssetComponentRelatedImageListRequest} req
+     * @param {function(string, DescribeAssetComponentRelatedImageListResponse):void} cb
+     * @public
+     */
+    DescribeAssetComponentRelatedImageList(req, cb) {
+        let resp = new DescribeAssetComponentRelatedImageListResponse();
+        this.request("DescribeAssetComponentRelatedImageList", req, resp, cb);
+    }
+
+    /**
+     * Delete custom baseline policies in batches. Only support deletion of policies with PolicyType=SELF. After deletion, historical risk records are retained, but no new results are generated.
+     * @param {DeleteBaselineSelfDefinedPolicyListRequest} req
+     * @param {function(string, DeleteBaselineSelfDefinedPolicyListResponse):void} cb
+     * @public
+     */
+    DeleteBaselineSelfDefinedPolicyList(req, cb) {
+        let resp = new DeleteBaselineSelfDefinedPolicyListResponse();
+        this.request("DeleteBaselineSelfDefinedPolicyList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of repaired vulnerabilities, show vulnerability information with successful fixes and statistics on repair conditions, helping users understand the repair results.
+     * @param {DescribeVulFixedListRequest} req
+     * @param {function(string, DescribeVulFixedListResponse):void} cb
+     * @public
+     */
+    DescribeVulFixedList(req, cb) {
+        let resp = new DescribeVulFixedListResponse();
+        this.request("DescribeVulFixedList", req, resp, cb);
+    }
+
+    /**
+     * Modify an existing ACL user rule. Fields not passed retain their original values, and partial field update is supported.
+     * @param {ModifySandboxACLRuleRequest} req
+     * @param {function(string, ModifySandboxACLRuleResponse):void} cb
+     * @public
+     */
+    ModifySandboxACLRule(req, cb) {
+        let resp = new ModifySandboxACLRuleResponse();
+        this.request("ModifySandboxACLRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an allowlist for sensitive information in container images.
+     * @param {CreateImageSensitiveWhitelistRequest} req
+     * @param {function(string, CreateImageSensitiveWhitelistResponse):void} cb
+     * @public
+     */
+    CreateImageSensitiveWhitelist(req, cb) {
+        let resp = new CreateImageSensitiveWhitelistResponse();
+        this.request("CreateImageSensitiveWhitelist", req, resp, cb);
+    }
+
+    /**
+     * Retrieves asset tag attributes
+     * @param {DescribeAssetTagAttributesRequest} req
+     * @param {function(string, DescribeAssetTagAttributesResponse):void} cb
+     * @public
+     */
+    DescribeAssetTagAttributes(req, cb) {
+        let resp = new DescribeAssetTagAttributesResponse();
+        this.request("DescribeAssetTagAttributes", req, resp, cb);
+    }
+
+    /**
+     * Modifies the data identification template of the current dspm application
+     * @param {ModifyDspmApplyingIdentifyComplianceGroupRequest} req
+     * @param {function(string, ModifyDspmApplyingIdentifyComplianceGroupResponse):void} cb
+     * @public
+     */
+    ModifyDspmApplyingIdentifyComplianceGroup(req, cb) {
+        let resp = new ModifyDspmApplyingIdentifyComplianceGroupResponse();
+        this.request("ModifyDspmApplyingIdentifyComplianceGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the baseline synchronization configuration of the current admin account. Only the Group Administrator can call this API. For ordinary member accounts, please use DescribeBaselineUserOtherConf.
+     * @param {DescribeBaselineSyncConfRequest} req
+     * @param {function(string, DescribeBaselineSyncConfResponse):void} cb
+     * @public
+     */
+    DescribeBaselineSyncConf(req, cb) {
+        let resp = new DescribeBaselineSyncConfResponse();
+        this.request("DescribeBaselineSyncConf", req, resp, cb);
+    }
+
+    /**
+     * Bind host authorization or RASP authorization to a specified order. Execute asynchronously and return TaskId to query progress. Specify the authorized version by LicenseType.
+     * @param {ModifyCSIPLicenseBindsRequest} req
+     * @param {function(string, ModifyCSIPLicenseBindsResponse):void} cb
+     * @public
+     */
+    ModifyCSIPLicenseBinds(req, cb) {
+        let resp = new ModifyCSIPLicenseBindsResponse();
+        this.request("ModifyCSIPLicenseBinds", req, resp, cb);
+    }
+
+    /**
+     * Query Group Account Details
+     * @param {DescribeOrganizationInfoRequest} req
+     * @param {function(string, DescribeOrganizationInfoResponse):void} cb
+     * @public
+     */
+    DescribeOrganizationInfo(req, cb) {
+        let resp = new DescribeOrganizationInfoResponse();
+        this.request("DescribeOrganizationInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable the log shipping.
+     * @param {ModifyDspmCkafkaStartRequest} req
+     * @param {function(string, ModifyDspmCkafkaStartResponse):void} cb
+     * @public
+     */
+    ModifyDspmCkafkaStart(req, cb) {
+        let resp = new ModifyDspmCkafkaStartResponse();
+        this.request("ModifyDspmCkafkaStart", req, resp, cb);
+    }
+
+    /**
+     * Retry the vulnerability repair task that failed to fix, and redispatch the repair instruction only for the hosts of the original task that failed to fix. Retry is allowed only when the task status is partially or totally failed to fix.
+     * @param {CreateVulFixRetryTaskRequest} req
+     * @param {function(string, CreateVulFixRetryTaskResponse):void} cb
+     * @public
+     */
+    CreateVulFixRetryTask(req, cb) {
+        let resp = new CreateVulFixRetryTaskResponse();
+        this.request("CreateVulFixRetryTask", req, resp, cb);
+    }
+
+    /**
+     * Query cluster overview data
+     * @param {DescribeClusterSummaryRequest} req
+     * @param {function(string, DescribeClusterSummaryResponse):void} cb
+     * @public
+     */
+    DescribeClusterSummary(req, cb) {
+        let resp = new DescribeClusterSummaryResponse();
+        this.request("DescribeClusterSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set the status of brute force attack blocking.
+     * @param {ModifyBruteAttackBanStatusRequest} req
+     * @param {function(string, ModifyBruteAttackBanStatusResponse):void} cb
+     * @public
+     */
+    ModifyBruteAttackBanStatus(req, cb) {
+        let resp = new ModifyBruteAttackBanStatusResponse();
+        this.request("ModifyBruteAttackBanStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to trigger a rescan of some detection items for a single asset.
+     * @param {ScanBaselineAssetItemListRequest} req
+     * @param {function(string, ScanBaselineAssetItemListResponse):void} cb
+     * @public
+     */
+    ScanBaselineAssetItemList(req, cb) {
+        let resp = new ScanBaselineAssetItemListResponse();
+        this.request("ScanBaselineAssetItemList", req, resp, cb);
+    }
+
+    /**
+     * Delete an IaC detection integration Token
+     * @param {DeleteIaCAccessTokenRequest} req
+     * @param {function(string, DeleteIaCAccessTokenResponse):void} cb
+     * @public
+     */
+    DeleteIaCAccessToken(req, cb) {
+        let resp = new DeleteIaCAccessTokenResponse();
+        this.request("DeleteIaCAccessToken", req, resp, cb);
+    }
+
+    /**
+     * Batch enable or disable command sandbox file access rules.
+     * @param {ModifySandboxFileRuleStatusRequest} req
+     * @param {function(string, ModifySandboxFileRuleStatusResponse):void} cb
+     * @public
+     */
+    ModifySandboxFileRuleStatus(req, cb) {
+        let resp = new ModifySandboxFileRuleStatusResponse();
+        this.request("ModifySandboxFileRuleStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete EDR policies.
+     * @param {DeleteEDRRulesRequest} req
+     * @param {function(string, DeleteEDRRulesResponse):void} cb
+     * @public
+     */
+    DeleteEDRRules(req, cb) {
+        let resp = new DeleteEDRRulesResponse();
+        this.request("DeleteEDRRules", req, resp, cb);
+    }
+
+    /**
+     * Example of creating a risk list export task from a compliance standard aggregation perspective
+     * @param {CreateComplianceRiskExportJobRequest} req
+     * @param {function(string, CreateComplianceRiskExportJobResponse):void} cb
+     * @public
+     */
+    CreateComplianceRiskExportJob(req, cb) {
+        let resp = new CreateComplianceRiskExportJobResponse();
+        this.request("CreateComplianceRiskExportJob", req, resp, cb);
+    }
+
+    /**
+     * Delete restore logs
+     * @param {DeleteDspmRestoreLogListRequest} req
+     * @param {function(string, DeleteDspmRestoreLogListResponse):void} cb
+     * @public
+     */
+    DeleteDspmRestoreLogList(req, cb) {
+        let resp = new DeleteDspmRestoreLogListResponse();
+        this.request("DeleteDspmRestoreLogList", req, resp, cb);
+    }
+
+    /**
+     * Cloud Defense Asset Center Statistics
+     * @param {DescribeCFWAssetStatisticsRequest} req
+     * @param {function(string, DescribeCFWAssetStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeCFWAssetStatistics(req, cb) {
+        let resp = new DescribeCFWAssetStatisticsResponse();
+        this.request("DescribeCFWAssetStatistics", req, resp, cb);
+    }
+
+    /**
+     * Create a Dspm risk export task
+     * @param {CreateDspmRiskExportJobRequest} req
+     * @param {function(string, CreateDspmRiskExportJobResponse):void} cb
+     * @public
+     */
+    CreateDspmRiskExportJob(req, cb) {
+        let resp = new CreateDspmRiskExportJobResponse();
+        this.request("CreateDspmRiskExportJob", req, resp, cb);
+    }
+
+    /**
+     * Restore a Dspm asset account.
+     * @param {RevertDspmAssetAccountRequest} req
+     * @param {function(string, RevertDspmAssetAccountResponse):void} cb
+     * @public
+     */
+    RevertDspmAssetAccount(req, cb) {
+        let resp = new RevertDspmAssetAccountResponse();
+        this.request("RevertDspmAssetAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the block button status.
+     * @param {DescribeBanStatusRequest} req
+     * @param {function(string, DescribeBanStatusResponse):void} cb
+     * @public
+     */
+    DescribeBanStatus(req, cb) {
+        let resp = new DescribeBanStatusResponse();
+        this.request("DescribeBanStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify vulnerability scanning (period scanning).
+     * @param {ModifyVulScanPeriodicRequest} req
+     * @param {function(string, ModifyVulScanPeriodicResponse):void} cb
+     * @public
+     */
+    ModifyVulScanPeriodic(req, cb) {
+        let resp = new ModifyVulScanPeriodicResponse();
+        this.request("ModifyVulScanPeriodic", req, resp, cb);
+    }
+
+    /**
+     * Obtain Vulnerability Risk List from Vulnerability's Perspective
+     * @param {DescribeRiskCenterVULViewVULRiskListRequest} req
+     * @param {function(string, DescribeRiskCenterVULViewVULRiskListResponse):void} cb
+     * @public
+     */
+    DescribeRiskCenterVULViewVULRiskList(req, cb) {
+        let resp = new DescribeRiskCenterVULViewVULRiskListResponse();
+        this.request("DescribeRiskCenterVULViewVULRiskList", req, resp, cb);
+    }
+
+    /**
+     * Creates a public network asset export task
+     * @param {CreateDynamicAssetsExportJobRequest} req
+     * @param {function(string, CreateDynamicAssetsExportJobResponse):void} cb
+     * @public
+     */
+    CreateDynamicAssetsExportJob(req, cb) {
+        let resp = new CreateDynamicAssetsExportJobResponse();
+        this.request("CreateDynamicAssetsExportJob", req, resp, cb);
+    }
+
+    /**
+     * Modify DspmIp information.
+     * @param {ModifyDspmIpInfoRequest} req
+     * @param {function(string, ModifyDspmIpInfoResponse):void} cb
+     * @public
+     */
+    ModifyDspmIpInfo(req, cb) {
+        let resp = new ModifyDspmIpInfoResponse();
+        this.request("ModifyDspmIpInfo", req, resp, cb);
+    }
+
+    /**
+     * Query the resource order list.
+     * @param {DescribeCWPOrderListRequest} req
+     * @param {function(string, DescribeCWPOrderListResponse):void} cb
+     * @public
+     */
+    DescribeCWPOrderList(req, cb) {
+        let resp = new DescribeCWPOrderListResponse();
+        this.request("DescribeCWPOrderList", req, resp, cb);
+    }
+
+    /**
+     * Creates an export task for the vulnerability overview list of an image.
+     * @param {CreateImageVulSummaryListExportJobRequest} req
+     * @param {function(string, CreateImageVulSummaryListExportJobResponse):void} cb
+     * @public
+     */
+    CreateImageVulSummaryListExportJob(req, cb) {
+        let resp = new CreateImageVulSummaryListExportJobResponse();
+        this.request("CreateImageVulSummaryListExportJob", req, resp, cb);
+    }
+
+    /**
+     * Tagging policy enforcement asset list
+     * @param {DescribeTagRuleAssetsRequest} req
+     * @param {function(string, DescribeTagRuleAssetsResponse):void} cb
+     * @public
+     */
+    DescribeTagRuleAssets(req, cb) {
+        let resp = new DescribeTagRuleAssetsResponse();
+        this.request("DescribeTagRuleAssets", req, resp, cb);
+    }
+
+    /**
+     * Cloud boundary analysis asset category
+     * @param {DescribeExposeAssetCategoryRequest} req
+     * @param {function(string, DescribeExposeAssetCategoryResponse):void} cb
+     * @public
+     */
+    DescribeExposeAssetCategory(req, cb) {
+        let resp = new DescribeExposeAssetCategoryResponse();
+        this.request("DescribeExposeAssetCategory", req, resp, cb);
+    }
+
+    /**
+     * This API is used to search the IaC detection integration Token list.
+     * @param {DescribeIaCTokenListRequest} req
+     * @param {function(string, DescribeIaCTokenListResponse):void} cb
+     * @public
+     */
+    DescribeIaCTokenList(req, cb) {
+        let resp = new DescribeIaCTokenListResponse();
+        this.request("DescribeIaCTokenList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to rescan detection items under a specified policy.
+     * @param {ScanBaselineItemListRequest} req
+     * @param {function(string, ScanBaselineItemListResponse):void} cb
+     * @public
+     */
+    ScanBaselineItemList(req, cb) {
+        let resp = new ScanBaselineItemListResponse();
+        this.request("ScanBaselineItemList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to cancel the log shipping configuration.
+     * @param {DeleteDspmCkafkaConfigRequest} req
+     * @param {function(string, DeleteDspmCkafkaConfigResponse):void} cb
+     * @public
+     */
+    DeleteDspmCkafkaConfig(req, cb) {
+        let resp = new DeleteDspmCkafkaConfigResponse();
+        this.request("DeleteDspmCkafkaConfig", req, resp, cb);
+    }
+
+    /**
+     * Query Vulnerability Risk Advanced Configuration
+     * @param {DescribeVULRiskAdvanceCFGListRequest} req
+     * @param {function(string, DescribeVULRiskAdvanceCFGListResponse):void} cb
+     * @public
+     */
+    DescribeVULRiskAdvanceCFGList(req, cb) {
+        let resp = new DescribeVULRiskAdvanceCFGListResponse();
+        this.request("DescribeVULRiskAdvanceCFGList", req, resp, cb);
+    }
+
+    /**
+     * Queries AI scheduled task trigger plans.
+
+This API is used to query the future trigger plan list of a specified AI scheduled task within a given time window.
+     * @param {DescribeAISchedulePlanListRequest} req
+     * @param {function(string, DescribeAISchedulePlanListResponse):void} cb
+     * @public
+     */
+    DescribeAISchedulePlanList(req, cb) {
+        let resp = new DescribeAISchedulePlanListResponse();
+        this.request("DescribeAISchedulePlanList", req, resp, cb);
+    }
+
+    /**
+     * Create command sandbox file access policy
+     * @param {DeleteSandboxFileRuleRequest} req
+     * @param {function(string, DeleteSandboxFileRuleResponse):void} cb
+     * @public
+     */
+    DeleteSandboxFileRule(req, cb) {
+        let resp = new DeleteSandboxFileRuleResponse();
+        this.request("DeleteSandboxFileRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify path configurations for application log collection.
+     * @param {ModifyEdrLogCollectPathRequest} req
+     * @param {function(string, ModifyEdrLogCollectPathResponse):void} cb
+     * @public
+     */
+    ModifyEdrLogCollectPath(req, cb) {
+        let resp = new ModifyEdrLogCollectPathResponse();
+        this.request("ModifyEdrLogCollectPath", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the machine operating system list.
+     * @param {DescribeCWPMachineOsListRequest} req
+     * @param {function(string, DescribeCWPMachineOsListResponse):void} cb
+     * @public
+     */
+    DescribeCWPMachineOsList(req, cb) {
+        let resp = new DescribeCWPMachineOsListResponse();
+        this.request("DescribeCWPMachineOsList", req, resp, cb);
+    }
+
+    /**
+     * Query the details of a single Windows KB patch based on the user's input KB internal ID, and return the basic KB info, release time, whether restart is required, as well as the list of vulnerabilities associated with the KB.
+     * @param {DescribeKBDetailRequest} req
+     * @param {function(string, DescribeKBDetailResponse):void} cb
+     * @public
+     */
+    DescribeKBDetail(req, cb) {
+        let resp = new DescribeKBDetailResponse();
+        this.request("DescribeKBDetail", req, resp, cb);
+    }
+
+    /**
+     * Retrieve the host list for uninstallation prevention.
+     * @param {DescribePreventUninstallHostRequest} req
+     * @param {function(string, DescribePreventUninstallHostResponse):void} cb
+     * @public
+     */
+    DescribePreventUninstallHost(req, cb) {
+        let resp = new DescribePreventUninstallHostResponse();
+        this.request("DescribePreventUninstallHost", req, resp, cb);
+    }
+
+    /**
+     * Query Dspm access records
+     * @param {DescribeDspmAccessRecordRequest} req
+     * @param {function(string, DescribeDspmAccessRecordResponse):void} cb
+     * @public
+     */
+    DescribeDspmAccessRecord(req, cb) {
+        let resp = new DescribeDspmAccessRecordResponse();
+        this.request("DescribeDspmAccessRecord", req, resp, cb);
+    }
+
+    /**
+     * Queries the traffic sandbox access control (ACL) system rule list. System rules are built into the CSIP platform and can be referenced by user rules.
+     * @param {DescribeSandboxACLSystemRuleListRequest} req
+     * @param {function(string, DescribeSandboxACLSystemRuleListResponse):void} cb
+     * @public
+     */
+    DescribeSandboxACLSystemRuleList(req, cb) {
+        let resp = new DescribeSandboxACLSystemRuleListResponse();
+        this.request("DescribeSandboxACLSystemRuleList", req, resp, cb);
+    }
+
+    /**
+     * Batch delete LLM audit user rules. If any ID does not exist or belongs to another tenant, an error is returned overall.
+     * @param {DeleteSandboxLLMAuditRuleRequest} req
+     * @param {function(string, DeleteSandboxLLMAuditRuleResponse):void} cb
+     * @public
+     */
+    DeleteSandboxLLMAuditRule(req, cb) {
+        let resp = new DeleteSandboxLLMAuditRuleResponse();
+        this.request("DeleteSandboxLLMAuditRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to search vulnerability scanning task history
+     * @param {DescribeVulScanTaskListRequest} req
+     * @param {function(string, DescribeVulScanTaskListResponse):void} cb
+     * @public
+     */
+    DescribeVulScanTaskList(req, cb) {
+        let resp = new DescribeVulScanTaskListResponse();
+        this.request("DescribeVulScanTaskList", req, resp, cb);
+    }
+
+    /**
+     * Delete asset tag
+     * @param {DeleteAssetTagRequest} req
+     * @param {function(string, DeleteAssetTagResponse):void} cb
+     * @public
+     */
+    DeleteAssetTag(req, cb) {
+        let resp = new DeleteAssetTagResponse();
+        this.request("DeleteAssetTag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the EDR policy list.
+     * @param {ExportEDRRulesRequest} req
+     * @param {function(string, ExportEDRRulesResponse):void} cb
+     * @public
+     */
+    ExportEDRRules(req, cb) {
+        let resp = new ExportEDRRulesResponse();
+        this.request("ExportEDRRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the rule list of the LLM audit system. System rules are built into the CSIP platform and originate from the LLM audit system rule base. They are split into two flat rule arrays by LLM reasoning protection and ToolCall protection and can be referenced by user rules.
+     * @param {DescribeSandboxLLMAuditSystemRuleListRequest} req
+     * @param {function(string, DescribeSandboxLLMAuditSystemRuleListResponse):void} cb
+     * @public
+     */
+    DescribeSandboxLLMAuditSystemRuleList(req, cb) {
+        let resp = new DescribeSandboxLLMAuditSystemRuleListResponse();
+        this.request("DescribeSandboxLLMAuditSystemRuleList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a DSPM custom risk policy. It only supports deletion of custom policies with rule_source=custom. Built-in policies are non-deletable. Disable them by setting IsEnabled in ModifyDspmRiskStrategy.
+     * @param {DeleteDspmRiskStrategyRequest} req
+     * @param {function(string, DeleteDspmRiskStrategyResponse):void} cb
+     * @public
+     */
+    DeleteDspmRiskStrategy(req, cb) {
+        let resp = new DeleteDspmRiskStrategyResponse();
+        this.request("DeleteDspmRiskStrategy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify brute force cracking rules.
+     * @param {ModifyBruteAttackRulesRequest} req
+     * @param {function(string, ModifyBruteAttackRulesResponse):void} cb
+     * @public
+     */
+    ModifyBruteAttackRules(req, cb) {
+        let resp = new ModifyBruteAttackRulesResponse();
+        this.request("ModifyBruteAttackRules", req, resp, cb);
+    }
+
+    /**
+     * Query the Dspm user synchronization status.
+     * @param {DescribeDspmSyncUsersStatusRequest} req
+     * @param {function(string, DescribeDspmSyncUsersStatusResponse):void} cb
+     * @public
+     */
+    DescribeDspmSyncUsersStatus(req, cb) {
+        let resp = new DescribeDspmSyncUsersStatusResponse();
+        this.request("DescribeDspmSyncUsersStatus", req, resp, cb);
+    }
+
+    /**
+     * Reset the Dspm asset account password.
+     * @param {ResetDspmAssetAccountPasswordRequest} req
+     * @param {function(string, ResetDspmAssetAccountPasswordResponse):void} cb
+     * @public
+     */
+    ResetDspmAssetAccountPassword(req, cb) {
+        let resp = new ResetDspmAssetAccountPasswordResponse();
+        this.request("ResetDspmAssetAccountPassword", req, resp, cb);
+    }
+
+    /**
+     * Queries the Dspm identity information.
+     * @param {DescribeDspmIdentifyInfoRequest} req
+     * @param {function(string, DescribeDspmIdentifyInfoResponse):void} cb
+     * @public
+     */
+    DescribeDspmIdentifyInfo(req, cb) {
+        let resp = new DescribeDspmIdentifyInfoResponse();
+        this.request("DescribeDspmIdentifyInfo", req, resp, cb);
+    }
+
+    /**
+     * Check whether the image repository instance name is duplicate.
+     * @param {CheckImageRegistryInstanceNameDuplicateRequest} req
+     * @param {function(string, CheckImageRegistryInstanceNameDuplicateResponse):void} cb
+     * @public
+     */
+    CheckImageRegistryInstanceNameDuplicate(req, cb) {
+        let resp = new CheckImageRegistryInstanceNameDuplicateResponse();
+        this.request("CheckImageRegistryInstanceNameDuplicate", req, resp, cb);
+    }
+
+    /**
+     * Queries the alias list of a specified SCF function.
+     * @param {DescribeSCFAliasListRequest} req
+     * @param {function(string, DescribeSCFAliasListResponse):void} cb
+     * @public
+     */
+    DescribeSCFAliasList(req, cb) {
+        let resp = new DescribeSCFAliasListResponse();
+        this.request("DescribeSCFAliasList", req, resp, cb);
+    }
+
+    /**
+     * Deletes a Dspm application form.
+     * @param {DeleteDspmApplyOrderRequest} req
+     * @param {function(string, DeleteDspmApplyOrderResponse):void} cb
+     * @public
+     */
+    DeleteDspmApplyOrder(req, cb) {
+        let resp = new DeleteDspmApplyOrderResponse();
+        this.request("DeleteDspmApplyOrder", req, resp, cb);
+    }
+
+    /**
+     * Queries Dspm approval form list
+     * @param {DescribeDspmApproveOrderListRequest} req
+     * @param {function(string, DescribeDspmApproveOrderListResponse):void} cb
+     * @public
+     */
+    DescribeDspmApproveOrderList(req, cb) {
+        let resp = new DescribeDspmApproveOrderListResponse();
+        this.request("DescribeDspmApproveOrderList", req, resp, cb);
+    }
+
+    /**
+     * Queries the traffic sandbox data leakage protection (DLP) system rule list. System rules are built into the CSIP platform and can be referenced by user rules.
+     * @param {DescribeSandboxDLPSystemRuleListRequest} req
+     * @param {function(string, DescribeSandboxDLPSystemRuleListResponse):void} cb
+     * @public
+     */
+    DescribeSandboxDLPSystemRuleList(req, cb) {
+        let resp = new DescribeSandboxDLPSystemRuleListResponse();
+        this.request("DescribeSandboxDLPSystemRuleList", req, resp, cb);
+    }
+
+    /**
+     * Obtain Configuration Risk List from Asset's Perspective
+     * @param {DescribeRiskCenterAssetViewCFGRiskListRequest} req
+     * @param {function(string, DescribeRiskCenterAssetViewCFGRiskListResponse):void} cb
+     * @public
+     */
+    DescribeRiskCenterAssetViewCFGRiskList(req, cb) {
+        let resp = new DescribeRiskCenterAssetViewCFGRiskListResponse();
+        this.request("DescribeRiskCenterAssetViewCFGRiskList", req, resp, cb);
+    }
+
+    /**
+     * Deletes an image repository scanning task.
+     * @param {DeleteImageRegistryScanTaskRequest} req
+     * @param {function(string, DeleteImageRegistryScanTaskResponse):void} cb
+     * @public
+     */
+    DeleteImageRegistryScanTask(req, cb) {
+        let resp = new DeleteImageRegistryScanTaskResponse();
+        this.request("DeleteImageRegistryScanTask", req, resp, cb);
+    }
+
+    /**
+     * Verify the login verification code for a Dspm asset.
+     * @param {VerifyDspmAssetLoginCodeRequest} req
+     * @param {function(string, VerifyDspmAssetLoginCodeResponse):void} cb
+     * @public
+     */
+    VerifyDspmAssetLoginCode(req, cb) {
+        let resp = new VerifyDspmAssetLoginCodeResponse();
+        this.request("VerifyDspmAssetLoginCode", req, resp, cb);
+    }
+
+    /**
+     * Operate assets and edit tags.
+     * @param {ModifyAssetTagsByAssetInfoRequest} req
+     * @param {function(string, ModifyAssetTagsByAssetInfoResponse):void} cb
+     * @public
+     */
+    ModifyAssetTagsByAssetInfo(req, cb) {
+        let resp = new ModifyAssetTagsByAssetInfoResponse();
+        this.request("ModifyAssetTagsByAssetInfo", req, resp, cb);
+    }
+
+    /**
+     * Batch modify the "periodic scan configuration / automatic synchronization of newly-added detection items / detection item hit configuration / customized detection items" settings in the baseline policy. Only fields passed in the request are modified.
+     * @param {BatchModifyBaselinePolicyRequest} req
+     * @param {function(string, BatchModifyBaselinePolicyResponse):void} cb
+     * @public
+     */
+    BatchModifyBaselinePolicy(req, cb) {
+        let resp = new BatchModifyBaselinePolicyResponse();
+        this.request("BatchModifyBaselinePolicy", req, resp, cb);
+    }
+
+    /**
+     * Modifies the Dspm approval form status.
+     * @param {ModifyDspmApproveStatusRequest} req
+     * @param {function(string, ModifyDspmApproveStatusResponse):void} cb
+     * @public
+     */
+    ModifyDspmApproveStatus(req, cb) {
+        let resp = new ModifyDspmApproveStatusResponse();
+        this.request("ModifyDspmApproveStatus", req, resp, cb);
+    }
+
+    /**
+     * Function list
+     * @param {DescribeCloudFunctionListRequest} req
+     * @param {function(string, DescribeCloudFunctionListResponse):void} cb
+     * @public
+     */
+    DescribeCloudFunctionList(req, cb) {
+        let resp = new DescribeCloudFunctionListResponse();
+        this.request("DescribeCloudFunctionList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain host vulnerability VPR information.
+     * @param {DescribeHostVulItemVPRInfoRequest} req
+     * @param {function(string, DescribeHostVulItemVPRInfoResponse):void} cb
+     * @public
+     */
+    DescribeHostVulItemVPRInfo(req, cb) {
+        let resp = new DescribeHostVulItemVPRInfoResponse();
+        this.request("DescribeHostVulItemVPRInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the detection item list of a category.
+     * @param {DescribeBaselineCategoryItemListRequest} req
+     * @param {function(string, DescribeBaselineCategoryItemListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineCategoryItemList(req, cb) {
+        let resp = new DescribeBaselineCategoryItemListResponse();
+        this.request("DescribeBaselineCategoryItemList", req, resp, cb);
+    }
+
+    /**
+     * Operate assets to edit tags.
+     * @param {ModifyAssetTagsRequest} req
+     * @param {function(string, ModifyAssetTagsResponse):void} cb
+     * @public
+     */
+    ModifyAssetTags(req, cb) {
+        let resp = new ModifyAssetTagsResponse();
+        this.request("ModifyAssetTags", req, resp, cb);
+    }
+
+    /**
+     * Modify the storage cycle of IaC detection integration tokens.
+     * @param {ModifyIaCTokenPeriodRequest} req
+     * @param {function(string, ModifyIaCTokenPeriodResponse):void} cb
+     * @public
+     */
+    ModifyIaCTokenPeriod(req, cb) {
+        let resp = new ModifyIaCTokenPeriodResponse();
+        this.request("ModifyIaCTokenPeriod", req, resp, cb);
+    }
+
+    /**
+     * Asset information
+     * @param {DescribeAssetInfoRequest} req
+     * @param {function(string, DescribeAssetInfoResponse):void} cb
+     * @public
+     */
+    DescribeAssetInfo(req, cb) {
+        let resp = new DescribeAssetInfoResponse();
+        this.request("DescribeAssetInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the risk call record list.
+     * @param {DescribeRiskCallRecordRequest} req
+     * @param {function(string, DescribeRiskCallRecordResponse):void} cb
+     * @public
+     */
+    DescribeRiskCallRecord(req, cb) {
+        let resp = new DescribeRiskCallRecordResponse();
+        this.request("DescribeRiskCallRecord", req, resp, cb);
+    }
+
+    /**
+     * Modify Dspm identity information.
+     * @param {ModifyDspmIdentifyInfoRequest} req
+     * @param {function(string, ModifyDspmIdentifyInfoResponse):void} cb
+     * @public
+     */
+    ModifyDspmIdentifyInfo(req, cb) {
+        let resp = new ModifyDspmIdentifyInfoResponse();
+        this.request("ModifyDspmIdentifyInfo", req, resp, cb);
+    }
+
+    /**
+     * Query the list of Dspm personal identification information.
+     * @param {DescribeDspmPersonalIdentifyListRequest} req
+     * @param {function(string, DescribeDspmPersonalIdentifyListResponse):void} cb
+     * @public
+     */
+    DescribeDspmPersonalIdentifyList(req, cb) {
+        let resp = new DescribeDspmPersonalIdentifyListResponse();
+        this.request("DescribeDspmPersonalIdentifyList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the leaked location list of one credential by credential group row ID in pages. It is used with the DescribeAIAgentCredentialList interface in the split and unfold scenario to avoid performance issues caused by pulling hundreds of thousands of locations at once in data skew scenarios.
+     * @param {DescribeAIAgentCredentialLocationListRequest} req
+     * @param {function(string, DescribeAIAgentCredentialLocationListResponse):void} cb
+     * @public
+     */
+    DescribeAIAgentCredentialLocationList(req, cb) {
+        let resp = new DescribeAIAgentCredentialLocationListResponse();
+        this.request("DescribeAIAgentCredentialLocationList", req, resp, cb);
+    }
+
+    /**
+     * Queries the details of AI scheduled task executions.
+
+This API is used to query the detailed information of a specified task execution by task ID, including the execution status and results.
+     * @param {DescribeAIScheduleTaskDetailRequest} req
+     * @param {function(string, DescribeAIScheduleTaskDetailResponse):void} cb
+     * @public
+     */
+    DescribeAIScheduleTaskDetail(req, cb) {
+        let resp = new DescribeAIScheduleTaskDetailResponse();
+        this.request("DescribeAIScheduleTaskDetail", req, resp, cb);
+    }
+
+    /**
+     * Querying privileged information of Dspm asset accounts after recycling
+     * @param {DescribeDspmAssetAccountRecycledPrivilegesRequest} req
+     * @param {function(string, DescribeDspmAssetAccountRecycledPrivilegesResponse):void} cb
+     * @public
+     */
+    DescribeDspmAssetAccountRecycledPrivileges(req, cb) {
+        let resp = new DescribeDspmAssetAccountRecycledPrivilegesResponse();
+        this.request("DescribeDspmAssetAccountRecycledPrivileges", req, resp, cb);
+    }
+
+    /**
+     * Modify the bucket monitoring status.
+     * @param {ModifyCosAuditBucketMonitorStatusRequest} req
+     * @param {function(string, ModifyCosAuditBucketMonitorStatusResponse):void} cb
+     * @public
+     */
+    ModifyCosAuditBucketMonitorStatus(req, cb) {
+        let resp = new ModifyCosAuditBucketMonitorStatusResponse();
+        this.request("ModifyCosAuditBucketMonitorStatus", req, resp, cb);
+    }
+
+    /**
+     * Obtain risk center risk overview sample code
      * @param {DescribeCSIPRiskStatisticsRequest} req
      * @param {function(string, DescribeCSIPRiskStatisticsResponse):void} cb
      * @public
@@ -1783,36 +9640,58 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Access Key Risk Record Details.
-     * @param {DescribeAccessKeyRiskDetailRequest} req
-     * @param {function(string, DescribeAccessKeyRiskDetailResponse):void} cb
+     * Modify the client running policy group. This API is used to set custom policies and associate machine lists.
+     * @param {ModifyAgentRunPolicyRequest} req
+     * @param {function(string, ModifyAgentRunPolicyResponse):void} cb
      * @public
      */
-    DescribeAccessKeyRiskDetail(req, cb) {
-        let resp = new DescribeAccessKeyRiskDetailResponse();
-        this.request("DescribeAccessKeyRiskDetail", req, resp, cb);
+    ModifyAgentRunPolicy(req, cb) {
+        let resp = new ModifyAgentRunPolicyResponse();
+        this.request("ModifyAgentRunPolicy", req, resp, cb);
     }
 
     /**
-     * This API is used to obtain vulnerability list
-     * @param {DescribeVulItemListRequest} req
-     * @param {function(string, DescribeVulItemListResponse):void} cb
+     * Show mandatory vulnerability intelligence for businesses.
+     * @param {DescribeMandatoryVulSetRequest} req
+     * @param {function(string, DescribeMandatoryVulSetResponse):void} cb
      * @public
      */
-    DescribeVulItemList(req, cb) {
-        let resp = new DescribeVulItemListResponse();
-        this.request("DescribeVulItemList", req, resp, cb);
+    DescribeMandatoryVulSet(req, cb) {
+        let resp = new DescribeMandatoryVulSetResponse();
+        this.request("DescribeMandatoryVulSet", req, resp, cb);
     }
 
     /**
-     * Retrieve risk call record list.
-     * @param {DescribeRiskCallRecordRequest} req
-     * @param {function(string, DescribeRiskCallRecordResponse):void} cb
+     * Query the Dspm asset access topology
+     * @param {DescribeDspmAssetAccessTopologyRequest} req
+     * @param {function(string, DescribeDspmAssetAccessTopologyResponse):void} cb
      * @public
      */
-    DescribeRiskCallRecord(req, cb) {
-        let resp = new DescribeRiskCallRecordResponse();
-        this.request("DescribeRiskCallRecord", req, resp, cb);
+    DescribeDspmAssetAccessTopology(req, cb) {
+        let resp = new DescribeDspmAssetAccessTopologyResponse();
+        this.request("DescribeDspmAssetAccessTopology", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a Dspm audit filter policy.
+     * @param {CreateDspmAuditFilterStrategyRequest} req
+     * @param {function(string, CreateDspmAuditFilterStrategyResponse):void} cb
+     * @public
+     */
+    CreateDspmAuditFilterStrategy(req, cb) {
+        let resp = new CreateDspmAuditFilterStrategyResponse();
+        this.request("CreateDspmAuditFilterStrategy", req, resp, cb);
+    }
+
+    /**
+     * Batch modify the scheduled scan task configurations of image repositories.
+     * @param {BatchModifyImageRegistryTimedScanTaskConfigRequest} req
+     * @param {function(string, BatchModifyImageRegistryTimedScanTaskConfigResponse):void} cb
+     * @public
+     */
+    BatchModifyImageRegistryTimedScanTaskConfig(req, cb) {
+        let resp = new BatchModifyImageRegistryTimedScanTaskConfigResponse();
+        this.request("BatchModifyImageRegistryTimedScanTaskConfig", req, resp, cb);
     }
 
     /**
@@ -1827,14 +9706,14 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Tag the risk or Alarm as processed/ignored.
-     * @param {UpdateAccessKeyAlarmStatusRequest} req
-     * @param {function(string, UpdateAccessKeyAlarmStatusResponse):void} cb
+     * Permanently ignore EDR multi-behavior alarms. Add the host and rule corresponding to the alarm to the AI-Link permanent ignore allowlist. Subsequently, alarms of the same type will be automatically discarded.
+     * @param {ModifyEdrAlertPermanentIgnoreRequest} req
+     * @param {function(string, ModifyEdrAlertPermanentIgnoreResponse):void} cb
      * @public
      */
-    UpdateAccessKeyAlarmStatus(req, cb) {
-        let resp = new UpdateAccessKeyAlarmStatusResponse();
-        this.request("UpdateAccessKeyAlarmStatus", req, resp, cb);
+    ModifyEdrAlertPermanentIgnore(req, cb) {
+        let resp = new ModifyEdrAlertPermanentIgnoreResponse();
+        this.request("ModifyEdrAlertPermanentIgnore", req, resp, cb);
     }
 
 

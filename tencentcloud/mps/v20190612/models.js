@@ -4701,6 +4701,112 @@ Note: If this parameter is left empty, the current `OutputDir` value will be inv
 }
 
 /**
+ * SubmitHunyuan3DTask request structure.
+ * @class
+ */
+class SubmitHunyuan3DTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Prompt for text-to-3D</p><p>Input limit: up to 1024 utf-8 characters</p>
+         * @type {string || null}
+         */
+        this.Prompt = null;
+
+        /**
+         * <p>Image URL (http/https) for image-to-3D</p>
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * <p>Generate 3D from multi-perspective images. At least 2 images are required, and a front view must be included.</p>
+         * @type {Array.<ViewImage> || null}
+         */
+        this.MultiViewImages = null;
+
+        /**
+         * <p>Generation Type</p><p>Enumeration values:</p><ul><li>Normal: Generate a complete 3D asset (geometry + texture)</li><li>Geometry: Generate only the geometry (no texture, faster output speed)</li><li>Texture: Generate only the texture (MeshUrl is required)</li></ul><p>Default value: Normal</p>
+         * @type {string || null}
+         */
+        this.GenerateType = null;
+
+        /**
+         * <p>URL of the existing 3D model (only .glb / .obj supported). If MeshUrl is passed, GenerateType=Texture is mandatory (texture scenario)</p>
+         * @type {string || null}
+         */
+        this.MeshUrl = null;
+
+        /**
+         * <p>Whether to output the PBR material</p><p>Default value: false</p>
+         * @type {boolean || null}
+         */
+        this.EnablePBR = null;
+
+        /**
+         * <p>Patch count in the range of [3000, 1500000]. This parameter takes effect only for the Normal/Geometry branch.</p><p>Parameter value range: [3000, 1500000]</p><p>Default value: 500000</p>
+         * @type {number || null}
+         */
+        this.FaceCount = null;
+
+        /**
+         * <p>Reserve UV unfolding or not</p><p>Default value: false</p>
+         * @type {boolean || null}
+         */
+        this.KeepUV = null;
+
+        /**
+         * <p>A format attached to the output in addition to the default obj + glb. Currently only support FBX</p>
+         * @type {string || null}
+         */
+        this.ResultFormat = null;
+
+        /**
+         * <p>Random Seed. The result can be reproduced with identical Seed input.</p>
+         * @type {number || null}
+         */
+        this.Seed = null;
+
+        /**
+         * <p>Style control words</p>
+         * @type {string || null}
+         */
+        this.Style = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Prompt = 'Prompt' in params ? params.Prompt : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+        if (params.MultiViewImages) {
+            this.MultiViewImages = new Array();
+            for (let z in params.MultiViewImages) {
+                let obj = new ViewImage();
+                obj.deserialize(params.MultiViewImages[z]);
+                this.MultiViewImages.push(obj);
+            }
+        }
+        this.GenerateType = 'GenerateType' in params ? params.GenerateType : null;
+        this.MeshUrl = 'MeshUrl' in params ? params.MeshUrl : null;
+        this.EnablePBR = 'EnablePBR' in params ? params.EnablePBR : null;
+        this.FaceCount = 'FaceCount' in params ? params.FaceCount : null;
+        this.KeepUV = 'KeepUV' in params ? params.KeepUV : null;
+        this.ResultFormat = 'ResultFormat' in params ? params.ResultFormat : null;
+        this.Seed = 'Seed' in params ? params.Seed : null;
+        this.Style = 'Style' in params ? params.Style : null;
+
+    }
+}
+
+/**
  * Metadata of a VOD media file
  * @class
  */
@@ -7025,6 +7131,41 @@ class CloneViralAIGC extends  AbstractModel {
         this.AspectRatio = 'AspectRatio' in params ? params.AspectRatio : null;
         this.Resolution = 'Resolution' in params ? params.Resolution : null;
         this.ModelTier = 'ModelTier' in params ? params.ModelTier : null;
+
+    }
+}
+
+/**
+ * One viewing angle in the MultiViewImages array in the multi-perspective image-to-3D scenario.
+ * @class
+ */
+class ViewImage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>View type</p><p>Enumeration values:</p><ul><li>front: Front view (required)</li><li>back: Back view</li><li>left: Left view</li><li>right: Right view</li><li>top: Top view</li><li>bottom: Bottom view</li><li>left_front: Left front 45°</li><li>right_front: Right front 45°</li></ul><p>MultiViewImages array length ≥ 2; must contain the front view; the same ViewType cannot be duplicated; each item must provide ViewImageUrl</p>
+         * @type {string || null}
+         */
+        this.ViewType = null;
+
+        /**
+         * <p>Image URL (http/https)</p>
+         * @type {string || null}
+         */
+        this.ViewImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ViewType = 'ViewType' in params ? params.ViewType : null;
+        this.ViewImageUrl = 'ViewImageUrl' in params ? params.ViewImageUrl : null;
 
     }
 }
@@ -18385,6 +18526,34 @@ class ProcessImageResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryHunyuan3DTask request structure.
+ * @class
+ */
+class QueryHunyuan3DTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Task ID.</p>
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -31648,6 +31817,77 @@ class ResetWorkflowResponse extends  AbstractModel {
 }
 
 /**
+ * QueryHunyuan3DTask response structure.
+ * @class
+ */
+class QueryHunyuan3DTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Task status</p><p>Enumeration values: </p><ul><li>WAIT: Queued, waiting to execute</li><li>RUN: In progress</li><li>DONE: Successfully completed, ResultFile3Ds has a value</li><li>FAIL: Failed, ErrorCode / ErrorMessage has a value</li></ul>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Progress percentage, 0-100. 0 if unknown; should be 100 when DONE; retains the last known value on FAIL</p>
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * <p>Only available when Status=FAIL. String error code (for example, InternalError.ModelInference)</p>
+         * @type {string || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * <p>Only has a value when Status=FAIL, detailed copywriting</p>
+         * @type {string || null}
+         */
+        this.ErrorMessage = null;
+
+        /**
+         * <p>Only has a value when Status=DONE. List of output files</p>
+         * @type {Array.<File3D> || null}
+         */
+        this.ResultFile3Ds = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+
+        if (params.ResultFile3Ds) {
+            this.ResultFile3Ds = new Array();
+            for (let z in params.ResultFile3Ds) {
+                let obj = new File3D();
+                obj.deserialize(params.ResultFile3Ds[z]);
+                this.ResultFile3Ds.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * HLS configuration parameters
  * @class
  */
@@ -36257,6 +36497,48 @@ There can be up to 10 tags, each with a length limit of 16 characters.
         this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * Query returns each output file
+ * @class
+ */
+class File3D extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>File type: OBJ / GLB / FBX / STL / USDZ</p><p>Enumeration values:</p><ul><li>OBJ: common 3D exchange format</li><li>GLB: glTF 2.0 binary ("the JPEG of the 3D world")</li><li>FBX: Autodesk film/gaming industry standard</li><li>STL: 3D print/CAD triangle mesh</li><li>USDZ: Pixar/Apple packaged scenario description</li></ul>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>File download URL (temporary signature, general TTL 24h)</p>
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * <p>Preview image URL (if it exists)</p>
+         * @type {string || null}
+         */
+        this.PreviewImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.PreviewImageUrl = 'PreviewImageUrl' in params ? params.PreviewImageUrl : null;
 
     }
 }
@@ -45541,6 +45823,41 @@ class PoliticalAsrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
+ * SubmitHunyuan3DTask response structure.
+ * @class
+ */
+class SubmitHunyuan3DTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Task ID.</p>
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteProcessImageTemplate request structure.
  * @class
  */
@@ -47841,6 +48158,7 @@ module.exports = {
     AiReviewPoliticalTaskInput: AiReviewPoliticalTaskInput,
     ModifyContentReviewTemplateResponse: ModifyContentReviewTemplateResponse,
     ModifyScheduleRequest: ModifyScheduleRequest,
+    SubmitHunyuan3DTaskRequest: SubmitHunyuan3DTaskRequest,
     MediaMetaData: MediaMetaData,
     ClassificationConfigureInfo: ClassificationConfigureInfo,
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
@@ -47876,6 +48194,7 @@ module.exports = {
     TerrorismImgReviewTemplateInfoForUpdate: TerrorismImgReviewTemplateInfoForUpdate,
     ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
     CloneViralAIGC: CloneViralAIGC,
+    ViewImage: ViewImage,
     DescribeImageSpriteTemplatesRequest: DescribeImageSpriteTemplatesRequest,
     FissionTaskInfo: FissionTaskInfo,
     TimeSpotCheck: TimeSpotCheck,
@@ -48073,6 +48392,7 @@ module.exports = {
     ProcessMediaRequest: ProcessMediaRequest,
     PatternConfig: PatternConfig,
     ProcessImageResponse: ProcessImageResponse,
+    QueryHunyuan3DTaskRequest: QueryHunyuan3DTaskRequest,
     VideoDramaCosInfo: VideoDramaCosInfo,
     CreateBlindWatermarkTemplateResponse: CreateBlindWatermarkTemplateResponse,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
@@ -48287,6 +48607,7 @@ module.exports = {
     CreateSubtitleEmbedTemplateResponse: CreateSubtitleEmbedTemplateResponse,
     ImageTaskInfo: ImageTaskInfo,
     ResetWorkflowResponse: ResetWorkflowResponse,
+    QueryHunyuan3DTaskResponse: QueryHunyuan3DTaskResponse,
     HLSConfigureInfo: HLSConfigureInfo,
     CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
     CreateSmartEraseTemplateResponse: CreateSmartEraseTemplateResponse,
@@ -48365,6 +48686,7 @@ module.exports = {
     LiveScheduleLiveRecordTaskResult: LiveScheduleLiveRecordTaskResult,
     AiSampleFailFaceInfo: AiSampleFailFaceInfo,
     UserDefineFaceReviewTemplateInfoForUpdate: UserDefineFaceReviewTemplateInfoForUpdate,
+    File3D: File3D,
     CloneViralPersona: CloneViralPersona,
     AigcVideoReferenceAudioInfo: AigcVideoReferenceAudioInfo,
     DeleteProcessImageTemplateResponse: DeleteProcessImageTemplateResponse,
@@ -48515,6 +48837,7 @@ module.exports = {
     QualityControlTemplate: QualityControlTemplate,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
+    SubmitHunyuan3DTaskResponse: SubmitHunyuan3DTaskResponse,
     DeleteProcessImageTemplateRequest: DeleteProcessImageTemplateRequest,
     SmartSubtitlesTaskInput: SmartSubtitlesTaskInput,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,

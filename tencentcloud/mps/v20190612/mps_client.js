@@ -95,6 +95,7 @@ const SubtitleResult = models.SubtitleResult;
 const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
 const ModifyContentReviewTemplateResponse = models.ModifyContentReviewTemplateResponse;
 const ModifyScheduleRequest = models.ModifyScheduleRequest;
+const SubmitHunyuan3DTaskRequest = models.SubmitHunyuan3DTaskRequest;
 const MediaMetaData = models.MediaMetaData;
 const ClassificationConfigureInfo = models.ClassificationConfigureInfo;
 const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
@@ -130,6 +131,7 @@ const CreateProcessImageTemplateResponse = models.CreateProcessImageTemplateResp
 const TerrorismImgReviewTemplateInfoForUpdate = models.TerrorismImgReviewTemplateInfoForUpdate;
 const ModifyTranscodeTemplateRequest = models.ModifyTranscodeTemplateRequest;
 const CloneViralAIGC = models.CloneViralAIGC;
+const ViewImage = models.ViewImage;
 const DescribeImageSpriteTemplatesRequest = models.DescribeImageSpriteTemplatesRequest;
 const FissionTaskInfo = models.FissionTaskInfo;
 const TimeSpotCheck = models.TimeSpotCheck;
@@ -327,6 +329,7 @@ const DescribeProcessImageTemplatesResponse = models.DescribeProcessImageTemplat
 const ProcessMediaRequest = models.ProcessMediaRequest;
 const PatternConfig = models.PatternConfig;
 const ProcessImageResponse = models.ProcessImageResponse;
+const QueryHunyuan3DTaskRequest = models.QueryHunyuan3DTaskRequest;
 const VideoDramaCosInfo = models.VideoDramaCosInfo;
 const CreateBlindWatermarkTemplateResponse = models.CreateBlindWatermarkTemplateResponse;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
@@ -541,6 +544,7 @@ const TextToSpeechAsyncRequest = models.TextToSpeechAsyncRequest;
 const CreateSubtitleEmbedTemplateResponse = models.CreateSubtitleEmbedTemplateResponse;
 const ImageTaskInfo = models.ImageTaskInfo;
 const ResetWorkflowResponse = models.ResetWorkflowResponse;
+const QueryHunyuan3DTaskResponse = models.QueryHunyuan3DTaskResponse;
 const HLSConfigureInfo = models.HLSConfigureInfo;
 const CreateAIAnalysisTemplateResponse = models.CreateAIAnalysisTemplateResponse;
 const CreateSmartEraseTemplateResponse = models.CreateSmartEraseTemplateResponse;
@@ -619,6 +623,7 @@ const DeleteScheduleRequest = models.DeleteScheduleRequest;
 const LiveScheduleLiveRecordTaskResult = models.LiveScheduleLiveRecordTaskResult;
 const AiSampleFailFaceInfo = models.AiSampleFailFaceInfo;
 const UserDefineFaceReviewTemplateInfoForUpdate = models.UserDefineFaceReviewTemplateInfoForUpdate;
+const File3D = models.File3D;
 const CloneViralPersona = models.CloneViralPersona;
 const AigcVideoReferenceAudioInfo = models.AigcVideoReferenceAudioInfo;
 const DeleteProcessImageTemplateResponse = models.DeleteProcessImageTemplateResponse;
@@ -769,6 +774,7 @@ const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
 const QualityControlTemplate = models.QualityControlTemplate;
 const TerrorismConfigureInfo = models.TerrorismConfigureInfo;
 const PoliticalAsrReviewTemplateInfo = models.PoliticalAsrReviewTemplateInfo;
+const SubmitHunyuan3DTaskResponse = models.SubmitHunyuan3DTaskResponse;
 const DeleteProcessImageTemplateRequest = models.DeleteProcessImageTemplateRequest;
 const SmartSubtitlesTaskInput = models.SmartSubtitlesTaskInput;
 const CreateAnimatedGraphicsTemplateResponse = models.CreateAnimatedGraphicsTemplateResponse;
@@ -1591,6 +1597,17 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
+     * Submit creation of a Hunyuan 3D task.
+     * @param {SubmitHunyuan3DTaskRequest} req
+     * @param {function(string, SubmitHunyuan3DTaskResponse):void} cb
+     * @public
+     */
+    SubmitHunyuan3DTask(req, cb) {
+        let resp = new SubmitHunyuan3DTaskResponse();
+        this.request("SubmitHunyuan3DTask", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify image samples by image ID. You can use it to modify the name and description of an image sample and add/delete/reset facial features or tags. There must be at least one image left after the deletion of facial features; otherwise, please reset instead of delete the facial features.
      * @param {ModifyPersonSampleRequest} req
      * @param {function(string, ModifyPersonSampleResponse):void} cb
@@ -2340,6 +2357,17 @@ Live stream processing event notification supports HTTP callbacks and also suppo
     TextTranslation(req, cb) {
         let resp = new TextTranslationResponse();
         this.request("TextTranslation", req, resp, cb);
+    }
+
+    /**
+     * Query the result corresponding to a Hunyuan3D task.
+     * @param {QueryHunyuan3DTaskRequest} req
+     * @param {function(string, QueryHunyuan3DTaskResponse):void} cb
+     * @public
+     */
+    QueryHunyuan3DTask(req, cb) {
+        let resp = new QueryHunyuan3DTaskResponse();
+        this.request("QueryHunyuan3DTask", req, resp, cb);
     }
 
     /**

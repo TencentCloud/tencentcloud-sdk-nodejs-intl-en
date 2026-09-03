@@ -638,6 +638,221 @@ class HorizontalPodAutoscaler extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class ResourceSupplyAttribute extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SupplyType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SupplyType = 'SupplyType' in params ? params.SupplyType : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+
+    }
+}
+
+/**
+ * AuthToken basic information.
+ * @class
+ */
+class AuthTokenBase extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Token value.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * Token alias.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Token description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Token creation time.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Token status.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * Resource configuration.
+ * @class
+ */
+class ResourceConfigInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Role. For example, PS, WORKER, DRIVER, and EXECUTOR.
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * Number of CPU cores, which is required to be configured when resource groups are used. Unit: 1/1000, where 1000 represents 1 core.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Memory size, in MB. This parameter needs to be configured when resource groups are used.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * GPU card type, which is required to be configured when resource groups are used.
+         * @type {string || null}
+         */
+        this.GpuType = null;
+
+        /**
+         * Number of GPU cards, which is required to be configured when resource groups are used. Unit: 1/100, where 100 represents 1 card.
+         * @type {number || null}
+         */
+        this.Gpu = null;
+
+        /**
+         * CVM instance specification ID.
+CVM instance specification (for postpaid billing). Valid values:
+TI.S.LARGE.POST: 4C8G 
+TI.S.2XLARGE16.POST:  8C16G 
+TI.S.2XLARGE32.POST:  8C32G 
+TI.S.4XLARGE32.POST:  16C32G
+TI.S.4XLARGE64.POST:  16C64G
+TI.S.6XLARGE48.POST:  24C48G
+TI.S.6XLARGE96.POST:  24C96G
+TI.S.8XLARGE64.POST:  32C64G
+TI.S.8XLARGE128.POST : 32C128G
+TI.GN10.2XLARGE40.POST: 8C40G V100*1 
+TI.GN10.5XLARGE80.POST:  18C80G V100*2 
+TI.GN10.10XLARGE160.POST :  32C160G V100*4
+TI.GN10.20XLARGE320.POST :  72C320G V100*8
+TI.GN7.8XLARGE128.POST: 32C128G T4*1 
+TI.GN7.10XLARGE160.POST: 40C160G T4*2 
+TI.GN7.20XLARGE320.POST: 80C32
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Number of compute nodes.
+         * @type {number || null}
+         */
+        this.InstanceNum = null;
+
+        /**
+         * CVM instance specification name.
+CVM instance specification (for postpaid billing). Valid values:
+4C8G 
+8C16G 
+8C32G 
+16C32G
+6C64G
+24C48G
+24C96G
+32C64G
+32C128G
+8C40G V100*1 
+8C80G V100*2 
+32C160G V100*4
+72C320G V100*8
+32C128G T4*1 
+40C160G T4*2 
+80C32
+         * @type {string || null}
+         */
+        this.InstanceTypeAlias = null;
+
+        /**
+         * RDMA configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RDMAConfig || null}
+         */
+        this.RDMAConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Role = 'Role' in params ? params.Role : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.GpuType = 'GpuType' in params ? params.GpuType : null;
+        this.Gpu = 'Gpu' in params ? params.Gpu : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceNum = 'InstanceNum' in params ? params.InstanceNum : null;
+        this.InstanceTypeAlias = 'InstanceTypeAlias' in params ? params.InstanceTypeAlias : null;
+
+        if (params.RDMAConfig) {
+            let obj = new RDMAConfig();
+            obj.deserialize(params.RDMAConfig)
+            this.RDMAConfig = obj;
+        }
+
+    }
+}
+
+/**
  * Public cloud data source structure.
  * @class
  */
@@ -668,6 +883,55 @@ class PublicDataSourceFS extends  AbstractModel {
         }
         this.DataSourceId = 'DataSourceId' in params ? params.DataSourceId : null;
         this.SubPath = 'SubPath' in params ? params.SubPath : null;
+
+    }
+}
+
+/**
+ * Exposed port information.
+ * @class
+ */
+class ExposePortConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ClbId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ClbHost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.ClbId = 'ClbId' in params ? params.ClbId : null;
+        this.ClbHost = 'ClbHost' in params ? params.ClbHost : null;
 
     }
 }
@@ -716,6 +980,48 @@ class AuthToken extends  AbstractModel {
                 this.Limits.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class TrainToolConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.EnableHangMonitor = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.HangMonitorNodes = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.LogHangTimeoutInMinute = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnableHangMonitor = 'EnableHangMonitor' in params ? params.EnableHangMonitor : null;
+        this.HangMonitorNodes = 'HangMonitorNodes' in params ? params.HangMonitorNodes : null;
+        this.LogHangTimeoutInMinute = 'LogHangTimeoutInMinute' in params ? params.LogHangTimeoutInMinute : null;
 
     }
 }
@@ -778,24 +1084,18 @@ class HealthProbe extends  AbstractModel {
 }
 
 /**
- * Key-value pair.
+ * Encoded startup command information.
  * @class
  */
-class Option extends  AbstractModel {
+class EncodedStartCmdInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Metric name.
+         * Startup command of the task, which is input in base64 format. Note that the complete input of {"StartCmd":"","PsStartCmd":"","WorkerStartCmd":""} is required for conversion.
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * Metric value.
-         * @type {number || null}
-         */
-        this.Value = null;
+        this.StartCmdInfo = null;
 
     }
 
@@ -806,8 +1106,7 @@ class Option extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.StartCmdInfo = 'StartCmdInfo' in params ? params.StartCmdInfo : null;
 
     }
 }
@@ -848,42 +1147,54 @@ class CrossTenantENIInfo extends  AbstractModel {
 }
 
 /**
- * AuthToken basic information.
+ * Notebook SSH port configuration.
  * @class
  */
-class AuthTokenBase extends  AbstractModel {
+class SSHConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Token value.
-         * @type {string || null}
+         * Whether to enable SSH.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
          */
-        this.Value = null;
+        this.Enable = null;
 
         /**
-         * Token alias.
+         * Public key information.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Name = null;
+        this.PublicKey = null;
 
         /**
-         * Token description.
-         * @type {string || null}
+         * Port number.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.Description = null;
+        this.Port = null;
 
         /**
-         * Token creation time.
+         * Login command.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.LoginCommand = null;
 
         /**
-         * Token status.
-         * @type {string || null}
+         * Whether to change the login address.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
          */
-        this.Status = null;
+        this.IsAddressChanged = null;
+
+        /**
+         * Pod access information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {PodSSHInfo || null}
+         */
+        this.PodSSHInfo = null;
 
     }
 
@@ -894,11 +1205,90 @@ class AuthTokenBase extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Value = 'Value' in params ? params.Value : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.LoginCommand = 'LoginCommand' in params ? params.LoginCommand : null;
+        this.IsAddressChanged = 'IsAddressChanged' in params ? params.IsAddressChanged : null;
+
+        if (params.PodSSHInfo) {
+            let obj = new PodSSHInfo();
+            obj.deserialize(params.PodSSHInfo)
+            this.PodSSHInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class ExposeNetworkConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {SSHConfig || null}
+         */
+        this.SSHConfig = null;
+
+        /**
+         * 
+         * @type {ExposePortConfig || null}
+         */
+        this.ExposePortConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SSHConfig) {
+            let obj = new SSHConfig();
+            obj.deserialize(params.SSHConfig)
+            this.SSHConfig = obj;
+        }
+
+        if (params.ExposePortConfig) {
+            let obj = new ExposePortConfig();
+            obj.deserialize(params.ExposePortConfig)
+            this.ExposePortConfig = obj;
+        }
+
+    }
+}
+
+/**
+ * Service scheduling policy configurations.
+ * @class
+ */
+class SchedulingPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable cross-resource-group scheduling.
+         * @type {boolean || null}
+         */
+        this.CrossResourceGroupScheduling = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CrossResourceGroupScheduling = 'CrossResourceGroupScheduling' in params ? params.CrossResourceGroupScheduling : null;
 
     }
 }
@@ -927,6 +1317,78 @@ class TCPSocketAction extends  AbstractModel {
             return;
         }
         this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
+ * Local disk information.
+ * @class
+ */
+class LocalDisk extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Local path.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LocalPath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LocalPath = 'LocalPath' in params ? params.LocalPath : null;
+
+    }
+}
+
+/**
+ * GooseFSx configurations.
+ * @class
+ */
+class GooseFSx extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * GooseFSx instance ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Path to mount the GooseFSx instance.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Path = 'Path' in params ? params.Path : null;
 
     }
 }
@@ -975,6 +1437,25 @@ class ResourceInfo extends  AbstractModel {
          */
         this.RealGpuDetailSet = null;
 
+        /**
+         * Indicates whether to enable RDMA.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.EnableRDMA = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.RootDisk = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.DataDisk = null;
+
     }
 
     /**
@@ -998,41 +1479,9 @@ class ResourceInfo extends  AbstractModel {
                 this.RealGpuDetailSet.push(obj);
             }
         }
-
-    }
-}
-
-/**
- * GooseFSx configurations.
- * @class
- */
-class GooseFSx extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * GooseFSx instance ID.
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * Path to mount the GooseFSx instance.
-         * @type {string || null}
-         */
-        this.Path = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Path = 'Path' in params ? params.Path : null;
+        this.EnableRDMA = 'EnableRDMA' in params ? params.EnableRDMA : null;
+        this.RootDisk = 'RootDisk' in params ? params.RootDisk : null;
+        this.DataDisk = 'DataDisk' in params ? params.DataDisk : null;
 
     }
 }
@@ -1080,6 +1529,34 @@ class VolumeMount extends  AbstractModel {
         }
         this.VolumeSourceType = 'VolumeSourceType' in params ? params.VolumeSourceType : null;
         this.MountPath = 'MountPath' in params ? params.MountPath : null;
+
+    }
+}
+
+/**
+ * Data set structure.
+ * @class
+ */
+class DataSetConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Data set ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -1165,6 +1642,35 @@ class DescribeModelServiceGroupsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RDMA configuration.
+ * @class
+ */
+class RDMAConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable RDMA.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enable = 'Enable' in params ? params.Enable : null;
 
     }
 }
@@ -1647,18 +2153,101 @@ Corresponding number of instances for postpaid instances in the manual scaling m
 }
 
 /**
- * Service scheduling policy configurations.
+ * Data configuration.
  * @class
  */
-class SchedulingPolicy extends  AbstractModel {
+class DataConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable cross-resource-group scheduling.
-         * @type {boolean || null}
+         * Mapping path.
+         * @type {string || null}
          */
-        this.CrossResourceGroupScheduling = null;
+        this.MappingPath = null;
+
+        /**
+         * Storage purpose.
+Valid values: BUILTIN_CODE, BUILTIN_DATA, BUILTIN_MODEL, USER_DATA, USER_CODE, USER_MODEL, OUTPUT, and OTHER.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DataSourceUsage = null;
+
+        /**
+         * DATASET, COS, CFS, CFSTurbo, GooseFSx, HDFS, and WEDATA_HDFS
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DataSourceType = null;
+
+        /**
+         * Data from the data set.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {DataSetConfig || null}
+         */
+        this.DataSetSource = null;
+
+        /**
+         * Data from COS.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {CosPathInfo || null}
+         */
+        this.COSSource = null;
+
+        /**
+         * Data from CFS.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {CFSConfig || null}
+         */
+        this.CFSSource = null;
+
+        /**
+         * Data from HDFS.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {HDFSConfig || null}
+         */
+        this.HDFSSource = null;
+
+        /**
+         * GooseFS data.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {GooseFS || null}
+         */
+        this.GooseFSSource = null;
+
+        /**
+         * TurboFS data.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {CFSTurbo || null}
+         */
+        this.CFSTurboSource = null;
+
+        /**
+         * Information from local disks.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {LocalDisk || null}
+         */
+        this.LocalDiskSource = null;
+
+        /**
+         * CBS configuration information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {CBSConfig || null}
+         */
+        this.CBSSource = null;
+
+        /**
+         * Host path information.
+         * @type {HostPath || null}
+         */
+        this.HostPathSource = null;
+
+        /**
+         * 
+         * @type {PublicDataSourceFS || null}
+         */
+        this.PublicDataSource = null;
 
     }
 
@@ -1669,7 +2258,69 @@ class SchedulingPolicy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CrossResourceGroupScheduling = 'CrossResourceGroupScheduling' in params ? params.CrossResourceGroupScheduling : null;
+        this.MappingPath = 'MappingPath' in params ? params.MappingPath : null;
+        this.DataSourceUsage = 'DataSourceUsage' in params ? params.DataSourceUsage : null;
+        this.DataSourceType = 'DataSourceType' in params ? params.DataSourceType : null;
+
+        if (params.DataSetSource) {
+            let obj = new DataSetConfig();
+            obj.deserialize(params.DataSetSource)
+            this.DataSetSource = obj;
+        }
+
+        if (params.COSSource) {
+            let obj = new CosPathInfo();
+            obj.deserialize(params.COSSource)
+            this.COSSource = obj;
+        }
+
+        if (params.CFSSource) {
+            let obj = new CFSConfig();
+            obj.deserialize(params.CFSSource)
+            this.CFSSource = obj;
+        }
+
+        if (params.HDFSSource) {
+            let obj = new HDFSConfig();
+            obj.deserialize(params.HDFSSource)
+            this.HDFSSource = obj;
+        }
+
+        if (params.GooseFSSource) {
+            let obj = new GooseFS();
+            obj.deserialize(params.GooseFSSource)
+            this.GooseFSSource = obj;
+        }
+
+        if (params.CFSTurboSource) {
+            let obj = new CFSTurbo();
+            obj.deserialize(params.CFSTurboSource)
+            this.CFSTurboSource = obj;
+        }
+
+        if (params.LocalDiskSource) {
+            let obj = new LocalDisk();
+            obj.deserialize(params.LocalDiskSource)
+            this.LocalDiskSource = obj;
+        }
+
+        if (params.CBSSource) {
+            let obj = new CBSConfig();
+            obj.deserialize(params.CBSSource)
+            this.CBSSource = obj;
+        }
+
+        if (params.HostPathSource) {
+            let obj = new HostPath();
+            obj.deserialize(params.HostPathSource)
+            this.HostPathSource = obj;
+        }
+
+        if (params.PublicDataSource) {
+            let obj = new PublicDataSourceFS();
+            obj.deserialize(params.PublicDataSource)
+            this.PublicDataSource = obj;
+        }
 
     }
 }
@@ -1705,6 +2356,96 @@ class GpuDetail extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * Parameters for configuring CFSTurbo.
+ * @class
+ */
+class CFSTurbo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CFSTurbo instance ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * CFSTurbo path.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Path = 'Path' in params ? params.Path : null;
+
+    }
+}
+
+/**
+ * GooseFS configuration parameters.
+ * @class
+ */
+class GooseFS extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * GooseFS instance ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * GooseFS type, including GooseFS and GooseFSx.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Path to mount the GooseFSx instance.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * GooseFS namespace.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NameSpace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.NameSpace = 'NameSpace' in params ? params.NameSpace : null;
 
     }
 }
@@ -1817,6 +2558,76 @@ class Filter extends  AbstractModel {
         this.Values = 'Values' in params ? params.Values : null;
         this.Negative = 'Negative' in params ? params.Negative : null;
         this.Fuzzy = 'Fuzzy' in params ? params.Fuzzy : null;
+
+    }
+}
+
+/**
+ * Key-value pair.
+ * @class
+ */
+class Option extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Metric name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Metric value.
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * Tencent Cloud tag description.
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -1979,7 +2790,8 @@ class ModelInfo extends  AbstractModel {
         this.CosPathInfo = null;
 
         /**
-         * GooseFSx configurations, and is valid when ModelSource is GooseFSx.
+         * GooseFSx configuration. This parameter takes effect if ModelSource is GooseFSx.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {GooseFSx || null}
          */
         this.GooseFSx = null;
@@ -2062,6 +2874,35 @@ class ModelInfo extends  AbstractModel {
 }
 
 /**
+ * CBS storage configuration.
+ * @class
+ */
+class CBSConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage size.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VolumeSizeInGB = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VolumeSizeInGB = 'VolumeSizeInGB' in params ? params.VolumeSizeInGB : null;
+
+    }
+}
+
+/**
  * Percentage or quantity.
  * @class
  */
@@ -2097,24 +2938,24 @@ class NumOrPercent extends  AbstractModel {
 }
 
 /**
- * Tag filtering parameters.
+ * Code repository configuration.
  * @class
  */
-class TagFilter extends  AbstractModel {
+class CodeRepoConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag key.
+         * Code repository ID.
          * @type {string || null}
          */
-        this.TagKey = null;
+        this.Id = null;
 
         /**
-         * Multiple tag values.
-         * @type {Array.<string> || null}
+         * Target address for the code repository download.
+         * @type {string || null}
          */
-        this.TagValues = null;
+        this.TargetPath = null;
 
     }
 
@@ -2125,8 +2966,50 @@ class TagFilter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValues = 'TagValues' in params ? params.TagValues : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TargetPath = 'TargetPath' in params ? params.TargetPath : null;
+
+    }
+}
+
+/**
+ * Information about Pod access over SSH.
+ * @class
+ */
+class PodSSHInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP address of the Pod.
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * SSH port of the Pod.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * SSH access command.
+         * @type {string || null}
+         */
+        this.LoginCommand = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Host = 'Host' in params ? params.Host : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.LoginCommand = 'LoginCommand' in params ? params.LoginCommand : null;
 
     }
 }
@@ -2748,6 +3631,12 @@ class ImageInfo extends  AbstractModel {
          */
         this.SupportDataPipeline = null;
 
+        /**
+         * 
+         * @type {ImageSecret || null}
+         */
+        this.ImageSecret = null;
+
     }
 
     /**
@@ -2764,6 +3653,12 @@ class ImageInfo extends  AbstractModel {
         this.AllowSaveAllContent = 'AllowSaveAllContent' in params ? params.AllowSaveAllContent : null;
         this.ImageName = 'ImageName' in params ? params.ImageName : null;
         this.SupportDataPipeline = 'SupportDataPipeline' in params ? params.SupportDataPipeline : null;
+
+        if (params.ImageSecret) {
+            let obj = new ImageSecret();
+            obj.deserialize(params.ImageSecret)
+            this.ImageSecret = obj;
+        }
 
     }
 }
@@ -2872,24 +3767,136 @@ class AuthTokenLimit extends  AbstractModel {
 }
 
 /**
- * Tencent Cloud tag description.
+ * CreateTrainingTask response structure.
  * @class
  */
-class Tag extends  AbstractModel {
+class CreateTrainingTaskResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag key.Note: This field may return null, indicating that no valid values can be obtained.
+         * Training task ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class ImageSecret extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Username = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SecretId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.SecretId = 'SecretId' in params ? params.SecretId : null;
+
+    }
+}
+
+/**
+ * Host path mounting configuration.
+ * @class
+ */
+class HostPath extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Host path to be mounted.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Path = 'Path' in params ? params.Path : null;
+
+    }
+}
+
+/**
+ * Tag filtering parameters.
+ * @class
+ */
+class TagFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key.
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * Tag value.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Multiple tag values.
+         * @type {Array.<string> || null}
          */
-        this.TagValue = null;
+        this.TagValues = null;
 
     }
 
@@ -2901,140 +3908,7 @@ class Tag extends  AbstractModel {
             return;
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
-
-    }
-}
-
-/**
- * Environment variables.
- * @class
- */
-class EnvVar extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Environment variable key.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Environment variable value.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
- * Instance status.
- * @class
- */
-class StatefulSetCondition extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Information.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * Reason.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Reason = null;
-
-        /**
-         * Status of the condition, True, False or Unknown.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Type.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Last update time.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LastTransitionTime = null;
-
-        /**
-         * Last update time.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LastUpdateTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Message = 'Message' in params ? params.Message : null;
-        this.Reason = 'Reason' in params ? params.Reason : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.LastTransitionTime = 'LastTransitionTime' in params ? params.LastTransitionTime : null;
-        this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
-
-    }
-}
-
-/**
- * Log configurations.
- * @class
- */
-class LogConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Logs should be shipped to a Cloud Log Service (CLS) log set.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LogsetId = null;
-
-        /**
-         * Logs should be shipped to a CLS topic.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.TagValues = 'TagValues' in params ? params.TagValues : null;
 
     }
 }
@@ -3139,6 +4013,533 @@ class WorkloadStatus extends  AbstractModel {
     }
 }
 
+/**
+ * CreateTrainingTask request structure.
+ * @class
+ */
+class CreateTrainingTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Training task name. The name cannot exceed 60 characters in length, and can contain only Chinese characters, letters, digits, underscores (_), and hyphens (-). It must start with a Chinese character, letter, or digit.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Billing mode. For example, PREPAID indicates yearly/monthly subscription (resource group).
+POSTPAID_BY_HOUR indicates pay-as-you-go mode.
+         * @type {string || null}
+         */
+        this.ChargeType = null;
+
+        /**
+         * Resource configuration. Specify the CVM instance specification ID and number of nodes. The API for querying the CVM instance specification ID is DescribeBillingSpecsPrice. For example, [{"Role":"WORKER", "InstanceType": "TI.S.MEDIUM.POST", "InstanceNum": 1}].
+         * @type {Array.<ResourceConfigInfo> || null}
+         */
+        this.ResourceConfigInfos = null;
+
+        /**
+         * TI Workspace ID. Used solely for the "Workspace" allowlist feature. To use this feature, please contact a TI administrator to enable allowlisting.
+         * @type {string || null}
+         */
+        this.TiProjectId = null;
+
+        /**
+         * Training framework name, which can be queried via the DescribeTrainingFrameworks API. For example, SPARK, PYSPARK, TENSORFLOW, and PYTORCH.
+         * @type {string || null}
+         */
+        this.FrameworkName = null;
+
+        /**
+         * Training framework version, which can be queried via the DescribeTrainingFrameworks API. For example, 1.15 and 1.9.
+         * @type {string || null}
+         */
+        this.FrameworkVersion = null;
+
+        /**
+         * Training framework environment, which can be queried via the DescribeTrainingFrameworks API. For example, tf1.15-py3.7-cpu and torch1.9-py3.8-cuda11.1-gpu.
+         * @type {string || null}
+         */
+        this.FrameworkEnvironment = null;
+
+        /**
+         * ID of the prepaid dedicated resource group, which can be queried via the DescribeBillingResourceGroups API.
+         * @type {string || null}
+         */
+        this.ResourceGroupId = null;
+
+        /**
+         * Tag configuration.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Custom image information.
+         * @type {ImageInfo || null}
+         */
+        this.ImageInfo = null;
+
+        /**
+         * COS code package path.
+         * @type {CosPathInfo || null}
+         */
+        this.CodePackagePath = null;
+
+        /**
+         * Task startup command. Specify this parameter based on the task training mode. If the configuration fails due to special characters, use the EncodedStartCmdInfo parameter instead.
+         * @type {StartCmdInfo || null}
+         */
+        this.StartCmdInfo = null;
+
+        /**
+         * Training mode, which can be queried via the DescribeTrainingFrameworks API. For example, PS_WORKER, DDP, MPI, and HOROVOD.
+         * @type {string || null}
+         */
+        this.TrainingMode = null;
+
+        /**
+         * Data configurations. This parameter depends on the DataSource field. The maximum number of configurations is 10.
+         * @type {Array.<DataConfig> || null}
+         */
+        this.DataConfigs = null;
+
+        /**
+         * VPC Id
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * COS training output path.
+         * @type {CosPathInfo || null}
+         */
+        this.Output = null;
+
+        /**
+         * CLS logging configuration.
+         * @type {LogConfig || null}
+         */
+        this.LogConfig = null;
+
+        /**
+         * Tuning parameters. The value of this parameter cannot exceed 2048 characters in length.
+         * @type {string || null}
+         */
+        this.TuningParameters = null;
+
+        /**
+         * Indicates whether to report logs.
+         * @type {boolean || null}
+         */
+        this.LogEnable = null;
+
+        /**
+         * Remarks. The value of this parameter cannot exceed 1024 characters.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Data source. For example, DATASET, COS, CFS, CFSTurbo, HDFS, and GooseFSx.
+         * @type {string || null}
+         */
+        this.DataSource = null;
+
+        /**
+         * Callback URL. This parameter is used for the asynchronous callback to create, start, or stop training tasks. For the callback format and content, see [[TI-ONE API Callback Description]](https://www.tencentcloud.com/document/product/851/84292?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.CallbackUrl = null;
+
+        /**
+         * Encoded task startup command. If StartCmdInfo is also configured, only this parameter takes effect.
+         * @type {EncodedStartCmdInfo || null}
+         */
+        this.EncodedStartCmdInfo = null;
+
+        /**
+         * Code repository configuration.
+         * @type {Array.<CodeRepoConfig> || null}
+         */
+        this.CodeRepos = null;
+
+        /**
+         * Network exposure configuration.
+         * @type {ExposeNetworkConfig || null}
+         */
+        this.ExposeNetworkConfig = null;
+
+        /**
+         * Environment Variables.
+         * @type {Array.<EnvVar> || null}
+         */
+        this.Envs = null;
+
+        /**
+         * Train tool configuration.
+         * @type {TrainToolConfig || null}
+         */
+        this.TrainToolConfig = null;
+
+        /**
+         * Training Diagnostic Tool Configuration.
+         * @type {ResourceSupplyAttribute || null}
+         */
+        this.ResourceSupplyAttribute = null;
+
+        /**
+         * Queue ID.
+         * @type {Array.<string> || null}
+         */
+        this.Queues = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+
+        if (params.ResourceConfigInfos) {
+            this.ResourceConfigInfos = new Array();
+            for (let z in params.ResourceConfigInfos) {
+                let obj = new ResourceConfigInfo();
+                obj.deserialize(params.ResourceConfigInfos[z]);
+                this.ResourceConfigInfos.push(obj);
+            }
+        }
+        this.TiProjectId = 'TiProjectId' in params ? params.TiProjectId : null;
+        this.FrameworkName = 'FrameworkName' in params ? params.FrameworkName : null;
+        this.FrameworkVersion = 'FrameworkVersion' in params ? params.FrameworkVersion : null;
+        this.FrameworkEnvironment = 'FrameworkEnvironment' in params ? params.FrameworkEnvironment : null;
+        this.ResourceGroupId = 'ResourceGroupId' in params ? params.ResourceGroupId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.ImageInfo) {
+            let obj = new ImageInfo();
+            obj.deserialize(params.ImageInfo)
+            this.ImageInfo = obj;
+        }
+
+        if (params.CodePackagePath) {
+            let obj = new CosPathInfo();
+            obj.deserialize(params.CodePackagePath)
+            this.CodePackagePath = obj;
+        }
+
+        if (params.StartCmdInfo) {
+            let obj = new StartCmdInfo();
+            obj.deserialize(params.StartCmdInfo)
+            this.StartCmdInfo = obj;
+        }
+        this.TrainingMode = 'TrainingMode' in params ? params.TrainingMode : null;
+
+        if (params.DataConfigs) {
+            this.DataConfigs = new Array();
+            for (let z in params.DataConfigs) {
+                let obj = new DataConfig();
+                obj.deserialize(params.DataConfigs[z]);
+                this.DataConfigs.push(obj);
+            }
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+        if (params.Output) {
+            let obj = new CosPathInfo();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+        if (params.LogConfig) {
+            let obj = new LogConfig();
+            obj.deserialize(params.LogConfig)
+            this.LogConfig = obj;
+        }
+        this.TuningParameters = 'TuningParameters' in params ? params.TuningParameters : null;
+        this.LogEnable = 'LogEnable' in params ? params.LogEnable : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.DataSource = 'DataSource' in params ? params.DataSource : null;
+        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
+
+        if (params.EncodedStartCmdInfo) {
+            let obj = new EncodedStartCmdInfo();
+            obj.deserialize(params.EncodedStartCmdInfo)
+            this.EncodedStartCmdInfo = obj;
+        }
+
+        if (params.CodeRepos) {
+            this.CodeRepos = new Array();
+            for (let z in params.CodeRepos) {
+                let obj = new CodeRepoConfig();
+                obj.deserialize(params.CodeRepos[z]);
+                this.CodeRepos.push(obj);
+            }
+        }
+
+        if (params.ExposeNetworkConfig) {
+            let obj = new ExposeNetworkConfig();
+            obj.deserialize(params.ExposeNetworkConfig)
+            this.ExposeNetworkConfig = obj;
+        }
+
+        if (params.Envs) {
+            this.Envs = new Array();
+            for (let z in params.Envs) {
+                let obj = new EnvVar();
+                obj.deserialize(params.Envs[z]);
+                this.Envs.push(obj);
+            }
+        }
+
+        if (params.TrainToolConfig) {
+            let obj = new TrainToolConfig();
+            obj.deserialize(params.TrainToolConfig)
+            this.TrainToolConfig = obj;
+        }
+
+        if (params.ResourceSupplyAttribute) {
+            let obj = new ResourceSupplyAttribute();
+            obj.deserialize(params.ResourceSupplyAttribute)
+            this.ResourceSupplyAttribute = obj;
+        }
+        this.Queues = 'Queues' in params ? params.Queues : null;
+
+    }
+}
+
+/**
+ * Environment variables.
+ * @class
+ */
+class EnvVar extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment variable key.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Environment variable value.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * Instance status.
+ * @class
+ */
+class StatefulSetCondition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Reason.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * Status of the condition, True, False or Unknown.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Type.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Last update time.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastTransitionTime = null;
+
+        /**
+         * Last update time.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastUpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.LastTransitionTime = 'LastTransitionTime' in params ? params.LastTransitionTime : null;
+        this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
+
+    }
+}
+
+/**
+ * Startup command information.
+ * @class
+ */
+class StartCmdInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Startup command.
+         * @type {string || null}
+         */
+        this.StartCmd = null;
+
+        /**
+         * Startup command for ps nodes.
+         * @type {string || null}
+         */
+        this.PsStartCmd = null;
+
+        /**
+         * Startup command for Worker nodes.
+         * @type {string || null}
+         */
+        this.WorkerStartCmd = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartCmd = 'StartCmd' in params ? params.StartCmd : null;
+        this.PsStartCmd = 'PsStartCmd' in params ? params.PsStartCmd : null;
+        this.WorkerStartCmd = 'WorkerStartCmd' in params ? params.WorkerStartCmd : null;
+
+    }
+}
+
+/**
+ * Log configurations.
+ * @class
+ */
+class LogConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Logs should be shipped to a Cloud Log Service (CLS) log set.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * Logs should be shipped to a CLS topic.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+    }
+}
+
+/**
+ * HDFS parameter configuration.
+ * @class
+ */
+class HDFSConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster instance ID, such as emr-xxxxxxxx.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Path.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Path = 'Path' in params ? params.Path : null;
+
+    }
+}
+
 module.exports = {
     Container: Container,
     Service: Service,
@@ -3148,30 +4549,46 @@ module.exports = {
     ResourceGroupInfo: ResourceGroupInfo,
     ExecAction: ExecAction,
     HorizontalPodAutoscaler: HorizontalPodAutoscaler,
-    PublicDataSourceFS: PublicDataSourceFS,
-    AuthToken: AuthToken,
-    HealthProbe: HealthProbe,
-    Option: Option,
-    CrossTenantENIInfo: CrossTenantENIInfo,
+    ResourceSupplyAttribute: ResourceSupplyAttribute,
     AuthTokenBase: AuthTokenBase,
+    ResourceConfigInfo: ResourceConfigInfo,
+    PublicDataSourceFS: PublicDataSourceFS,
+    ExposePortConfig: ExposePortConfig,
+    AuthToken: AuthToken,
+    TrainToolConfig: TrainToolConfig,
+    HealthProbe: HealthProbe,
+    EncodedStartCmdInfo: EncodedStartCmdInfo,
+    CrossTenantENIInfo: CrossTenantENIInfo,
+    SSHConfig: SSHConfig,
+    ExposeNetworkConfig: ExposeNetworkConfig,
+    SchedulingPolicy: SchedulingPolicy,
     TCPSocketAction: TCPSocketAction,
-    ResourceInfo: ResourceInfo,
+    LocalDisk: LocalDisk,
     GooseFSx: GooseFSx,
+    ResourceInfo: ResourceInfo,
     VolumeMount: VolumeMount,
+    DataSetConfig: DataSetConfig,
     ScheduledAction: ScheduledAction,
     DescribeModelServiceGroupsResponse: DescribeModelServiceGroupsResponse,
+    RDMAConfig: RDMAConfig,
     InferCodeInfo: InferCodeInfo,
     CosPathInfo: CosPathInfo,
     ServiceInfo: ServiceInfo,
-    SchedulingPolicy: SchedulingPolicy,
+    DataConfig: DataConfig,
     GpuDetail: GpuDetail,
+    CFSTurbo: CFSTurbo,
+    GooseFS: GooseFS,
     CronScaleJob: CronScaleJob,
     Filter: Filter,
+    Option: Option,
+    Tag: Tag,
     ProbeAction: ProbeAction,
     CFSConfig: CFSConfig,
     ModelInfo: ModelInfo,
+    CBSConfig: CBSConfig,
     NumOrPercent: NumOrPercent,
-    TagFilter: TagFilter,
+    CodeRepoConfig: CodeRepoConfig,
+    PodSSHInfo: PodSSHInfo,
     Pod: Pod,
     DescribeModelServiceGroupsRequest: DescribeModelServiceGroupsRequest,
     ServiceGroup: ServiceGroup,
@@ -3180,10 +4597,16 @@ module.exports = {
     ImageInfo: ImageInfo,
     Probe: Probe,
     AuthTokenLimit: AuthTokenLimit,
-    Tag: Tag,
+    CreateTrainingTaskResponse: CreateTrainingTaskResponse,
+    ImageSecret: ImageSecret,
+    HostPath: HostPath,
+    TagFilter: TagFilter,
+    WorkloadStatus: WorkloadStatus,
+    CreateTrainingTaskRequest: CreateTrainingTaskRequest,
     EnvVar: EnvVar,
     StatefulSetCondition: StatefulSetCondition,
+    StartCmdInfo: StartCmdInfo,
     LogConfig: LogConfig,
-    WorkloadStatus: WorkloadStatus,
+    HDFSConfig: HDFSConfig,
 
 }

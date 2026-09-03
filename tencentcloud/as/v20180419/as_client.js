@@ -97,6 +97,7 @@ const InstanceTag = models.InstanceTag;
 const ModifyLifecycleHookResponse = models.ModifyLifecycleHookResponse;
 const LifecycleCommand = models.LifecycleCommand;
 const DescribeAutoScalingAdvicesResponse = models.DescribeAutoScalingAdvicesResponse;
+const SpotMixedAllocationPolicy = models.SpotMixedAllocationPolicy;
 const CreateAutoScalingGroupRequest = models.CreateAutoScalingGroupRequest;
 const DeleteScheduledActionResponse = models.DeleteScheduledActionResponse;
 const UpgradeLaunchConfigurationRequest = models.UpgradeLaunchConfigurationRequest;
@@ -165,7 +166,7 @@ const StartAutoScalingInstancesRequest = models.StartAutoScalingInstancesRequest
 const AttachInstancesRequest = models.AttachInstancesRequest;
 const StopInstanceRefreshResponse = models.StopInstanceRefreshResponse;
 const AttachLoadBalancersRequest = models.AttachLoadBalancersRequest;
-const SpotMixedAllocationPolicy = models.SpotMixedAllocationPolicy;
+const NetworkInterface = models.NetworkInterface;
 const HostNameIndexSettings = models.HostNameIndexSettings;
 const ResumeInstanceRefreshResponse = models.ResumeInstanceRefreshResponse;
 const DescribeScalingPoliciesResponse = models.DescribeScalingPoliciesResponse;
@@ -618,11 +619,11 @@ When scale-in protection is enabled, the instance will not be removed in scale-i
     }
 
     /**
-     * This interface (CreateLaunchConfiguration) is used to create new launch configuration.
+     * This API is used to create a new launch configuration.
 
-* To modify a launch configuration, use [ModifyLaunchConfigurationAttributes](https://intl.cloud.tencent.com/document/api/377/31298?from_cn_redirect=1) to partially modify fields. If needed, create a new launch configuration.
+* Launch configuration can be partially modified through [ModifyLaunchConfigurationAttributes](https://www.tencentcloud.com/document/api/377/31298?from_cn_redirect=1). If a new launch configuration is needed, it is advisable to create a new one.
 
-By default, 50 launch configurations can be created per region. For details, see [Usage Limits](https://intl.cloud.tencent.com/document/product/377/3120?from_cn_redirect=1).
+* A maximum of 50 launch configurations can be created per region by default. For details, see usage limits (https://www.tencentcloud.com/document/product/377/3120?from_cn_redirect=1).
      * @param {CreateLaunchConfigurationRequest} req
      * @param {function(string, CreateLaunchConfigurationResponse):void} cb
      * @public

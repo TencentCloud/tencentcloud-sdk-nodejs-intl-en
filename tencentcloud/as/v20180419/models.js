@@ -53,188 +53,166 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * Launch configuration ID. obtain the launch configuration ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/config) or calling the api [DescribeLaunchConfigurations](https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the return information.
+         * <p>Launch configuration ID. You can obtain it by logging in to the <a href="https://console.cloud.tencent.com/autoscaling/config">console</a> or calling the <a href="https://www.tencentcloud.com/document/api/377/20445?from_cn_redirect=1">DescribeLaunchConfigurations</a> API, and retrieving LaunchConfigurationId from the returned information.</p>
          * @type {string || null}
          */
         this.LaunchConfigurationId = null;
 
         /**
-         * [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><br/>You can obtain the image IDs in the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE).</li><li>You can also use the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
+         * <p>Specify a valid <a href="https://www.tencentcloud.com/document/product/213/4940?from_cn_redirect=1">image</a> ID, such as <code>img-8toqc6s3</code>. There are four image types:<br><li>Public image</li><li>Custom image</li><li>Shared image</li><li>Service market image</li><br>You can obtain an available image ID in the following ways:<br><li>For <code>public images</code>, <code>custom images</code>, and <code>shared images</code>, query the image ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/image?rid=1&amp;imageType=PUBLIC_IMAGE">console</a>. For <code>service market images</code>, query the image ID in the <a href="https://market.cloud.tencent.com/list">cloud market</a>.</li><li>Call the <a href="https://www.tencentcloud.com/document/api/213/15715?from_cn_redirect=1">DescribeImages</a> API and take the <code>ImageId</code> field from the returned information.</li></p>
          * @type {string || null}
          */
         this.ImageId = null;
 
         /**
-         * Types of cvm instances. different instance models specify different resource specifications. supports up to 10 instance models.
-The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. specifying the `InstanceTypes` field will invalidate the original `InstanceType`. specific values can be obtained by calling the api [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/product/213/33254) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
+         * <p>Types of CVM instances. Different instance models specify different resource specifications, and a maximum of 10 instance models are supported.<br>InstanceType specifies a single instance type. By setting InstanceTypes, you can specify multiple instance types and invalidate the original InstanceType. Specific values can be obtained by calling the API <a href="https://www.tencentcloud.com/document/api/213/15749?from_cn_redirect=1">DescribeInstanceTypeConfigs</a> to obtain the latest specification table or see <a href="https://www.tencentcloud.com/document/product/213/11518?from_cn_redirect=1">Instance Specifications</a>.</p>
          * @type {Array.<string> || null}
          */
         this.InstanceTypes = null;
 
         /**
-         * InstanceType verification policy, which is effective when actual modification is made to InstanceTypes. Valid values include ALL and ANY and the default value is ANY.
-<li>ALL: Verification passes if all InstanceTypes are available; otherwise, a verification error will be reported.</li>
-<li>ANY: Verification passes if any InstanceType is available; otherwise, a verification error will be reported.</li>
-Common reasons for unavailable InstanceTypes include the InstanceType being sold out, and the corresponding cloud disk being sold out.
-If a model in InstanceTypes does not exist or has been abolished, a verification error will be reported regardless of the valid values set for InstanceTypesCheckPolicy.
+         * <p>Instance type validation policy, effective during actual modification of InstanceTypes. Valid values include ALL and ANY, default value: ANY.</p><li>ALL: Verification passes if all InstanceTypes are available; otherwise, a verification error will be reported.</li> <li>ANY: Verification passes if any InstanceType is available; otherwise, a verification error will be reported.</li> Common causes of InstanceTypes unavailable include InstanceType sold out, corresponding cloud disk sold out. If a model in InstanceTypes does not exist or has been removed, a verification error will be reported regardless of the value of InstanceTypesCheckPolicy.
          * @type {string || null}
          */
         this.InstanceTypesCheckPolicy = null;
 
         /**
-         * Display name of the launch configuration, which can contain Chinese characters, letters, numbers, underscores, separators ("-"), and decimal points with a maximum length of 60 bytes.
+         * <p>Display name of the launch configuration. The name only supports Chinese, English, numbers, underscores, separator "-", and decimal points. The maximum length cannot exceed 60 bytes.</p>
          * @type {string || null}
          */
         this.LaunchConfigurationName = null;
 
         /**
-         * Base64-encoded custom data of up to 16 KB. If you want to clear `UserData`, set it to an empty string.
+         * <p>The custom data after Base64 encoding should not exceed 16 KB. To clear UserData, assign it an empty string.</p>
          * @type {string || null}
          */
         this.UserData = null;
 
         /**
-         * Security group to which the instance belongs. This parameter can be obtained from the `SecurityGroupId` field in the response of the [`DescribeSecurityGroups`](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API.
-At least one security group is required for this parameter. The security group specified is sequential.
+         * <p>Security group to which the instance belongs. You can obtain this parameter by calling the <a href="https://www.tencentcloud.com/document/api/215/15808?from_cn_redirect=1">DescribeSecurityGroups</a> API and getting the <code>SecurityGroupId</code> field in the return value.<br>If you specify this parameter, provide at least one security group, and the list order is sequential.</p>
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
 
         /**
-         * Information of the public network bandwidth configuration.
-When the public outbound network bandwidth is 0 Mbps, assigning a public IP is not allowed. Accordingly, if a public IP is assigned, the new public network outbound bandwidth must be greater than 0 Mbps.
+         * <p>Public network bandwidth-related information settings.<br>When the public network outbound bandwidth cap is 0 Mbps, it cannot be modified to enable assigning public IP. Accordingly, when assigning public IP is currently enabled, the modified public network outbound bandwidth cap must be greater than 0 Mbps.</p>
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
 
         /**
-         * Instance billing mode. Valid values:
-<li>POSTPAID_BY_HOUR: pay-as-you-go hourly</li>
-<li>SPOTPAID: spot instance</li>
-<li> CDCPAID: dedicated cluster</li>
+         * <p>Instance billing type. Valid values:</p><li>POSTPAID_BY_HOUR: hourly postpaid</li><li>SPOTPAID: spot payment</li><li>PREPAID: prepaid, which is a Monthly Subscription</li><li>CDCPAID: dedicated cluster payment</li>
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
-         * Parameter setting for the prepaid mode (monthly subscription mode). This parameter can specify the renewal period, whether to set the auto-renewal, and other attributes of the monthly-subscribed instances.
-This parameter is required when changing the instance billing mode to monthly subscription. It will be automatically discarded after you choose another billing mode.
-This field requires passing in the `Period` field. Other fields that are not passed in will use their default values.
-This field can be modified only when the current billing mode is monthly subscription.
+         * <p>Prepaid mode, that is, parameter settings related to monthly/annual subscription. By specifying this parameter, you can set attributes such as the duration of instance purchase and whether to enable auto-renewal.<br>If you change the payment mode of an instance to prepaid, this parameter is required. When changing from prepaid to other payment modes, the original info in this field is automatically discarded.<br>When adding this field, you must specify the duration of instance purchase. Other fields not specified will be set to default values.<br>When modifying this field, the current payment mode must be prepaid.</p>
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
 
         /**
-         * Market-related options for instances, such as parameters related to spot instances.
-This parameter is required when changing the instance billing mode to spot instance. It will be automatically discarded after you choose another instance billing mode.
-This field requires passing in the `MaxPrice` field under the `SpotOptions`. Other fields that are not passed in will use their default values.
-This field can be modified only when the current billing mode is spot instance.
+         * <p>Market-related options of the instance, such as bidding instance parameters.<br>If you change the payment mode of the instance to spot payment, this parameter is required. When changing from spot payment to other payment modes, the original info in this field is automatically discarded.<br>When adding this field, you must transmit the bid price under relevant spot options. Other fields not transmitted will be set as default.<br>When modifying this field, the current payment mode must be spot payment.</p>
          * @type {InstanceMarketOptionsRequest || null}
          */
         this.InstanceMarketOptions = null;
 
         /**
-         * Cloud disk type selection policy. Valid values:
-<li>ORIGINAL: Use the set cloud disk type.</li>
-<li>AUTOMATIC: Automatically select the currently available cloud disk type.</li>
+         * <p>Cloud disk type selection policy. Value range:</p><li>ORIGINAL: use the set cloud disk type.</li><li>AUTOMATIC: automatically select the currently available cloud disk type.</li>
          * @type {string || null}
          */
         this.DiskTypePolicy = null;
 
         /**
-         * Instance system disk configurations
+         * <p>Instance system disk configuration information.</p>
          * @type {SystemDisk || null}
          */
         this.SystemDisk = null;
 
         /**
-         * Configuration information of instance data disks.
-Up to 11 data disks can be specified and will be collectively modified. Please provide all the new values for the modification.
-The default data disk should be the same as the system disk.
+         * <p>Instance data disk configuration information.<br>Supports up to 11 data disks. Apply the modification as a whole, so provide all values after modification.<br>The data disk type is consistent with the system disk type by default.</p>
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
 
         /**
-         * Specifies the related settings for the cloud virtual machine HostName (HostName).
-windows instances do not support setting hostname.
-When adding new attributes, the cloud virtual machine hostname must be transmitted. other fields not transmitted will be set as default.
-Validates whether the host name (with suffix added if it exists) exceeds the maximum of 46 characters.
+         * <p>Settings for the CVM host name.<br>Configuring the host name for windows instances is not supported.<br>When adding this attribute, you must transmit the CVM host name. Other fields not transmitted will be set to default values.<br>The host name (with the suffix added if it exists) is verified to check whether it exceeds the maximum length of 46 characters.</p>
          * @type {HostNameSettings || null}
          */
         this.HostNameSettings = null;
 
         /**
-         * Specifies the related settings of the cloud virtual machine (cvm) instance name. 
-If the user sets this field in the launch configuration, the instance name of the instance created by the scaling group will be set according to this field and passed to CVM. if the user does not set this field in the launch configuration, the instance name of the instance created by the scaling group will be set as "as-{{ scaling group AutoScalingGroupName }}" and passed to CVM.
-Specifies the instance name of the cloud virtual machine when adding this attribute. other fields not transmitted will be set as default.
-Verifies whether the instance name (add the suffix if it exists) exceeds the maximum of 108 characters.
+         * <p>Settings related to the CVM instance name (InstanceName).<br>If the user sets this field in the launch configuration, the InstanceName of instances created by the scaling group will be set according to this field and transmitted to CVM. If the user does not set this field in the launch configuration, the InstanceName of instances created by the scaling group will be set as "as-{{ AutoScalingGroupName }}" and transmitted to CVM.<br>When adding this attribute, the CVM instance name must be transmitted. Other fields not transmitted will be set to default values.<br>It will verify whether the instance name (with the suffix added if it exists) exceeds the maximum length of 108 characters.</p>
          * @type {InstanceNameSettings || null}
          */
         this.InstanceNameSettings = null;
 
         /**
-         * Specifies whether to enable additional services, such as security services and monitoring service.
+         * <p>Enhanced service. This parameter can be used to specify whether to enable services such as cloud security and Cloud Monitor.</p>
          * @type {EnhancedService || null}
          */
         this.EnhancedService = null;
 
         /**
-         * Role name of the CAM role. can be obtained from roleName in the return value from the [DescribeRoleList API](https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1).
+         * <p>CAM role name, which can be obtained from the roleName in the return value from the <a href="https://www.tencentcloud.com/document/product/598/36223?from_cn_redirect=1">DescribeRoleList</a> API.</p>
          * @type {string || null}
          */
         this.CamRoleName = null;
 
         /**
-         * High-Performance computing cluster ID. See [Tencent Cloud HPC Documentation](https://www.tencentcloud.com/zh/document/product/1236) for more details.
-Note: this field is empty by default.
+         * <p>Hyper Computing Cluster ID. You can obtain this parameter by calling the <a href="https://www.tencentcloud.com/document/product/213/83220?from_cn_redirect=1">DescribeHpcClusters</a> API.<br>Note: This field is empty by default.</p>
          * @type {string || null}
          */
         this.HpcClusterId = null;
 
         /**
-         * IPv6 public network bandwidth configuration. If the IPv6 address is available in the new instance, public network bandwidth can be allocated to the IPv6 address. This parameter is invalid if `Ipv6AddressCount` of the scaling group associated with the launch configuration is 0.
+         * <p>IPv6 public network bandwidth-related information settings. If the new instance includes an IPv6 address, this parameter can allocate public network bandwidth for the IPv6 address of the new instance. When the Ipv6AddressCount parameter of the scaling group associated with the launch configuration is 0, this parameter will not take effect.</p>
          * @type {IPv6InternetAccessible || null}
          */
         this.IPv6InternetAccessible = null;
 
         /**
-         * Placement group id. only one can be specified. obtain through the API [DescribeDisasterRecoverGroups](https://intl.cloud.tencent.com/document/product/213/17810?from_cn_redirect=1).
+         * <p>Placement Group id. Only one can be specified. You can obtain this parameter by calling the <a href="https://www.tencentcloud.com/document/product/213/17810?from_cn_redirect=1">DescribeDisasterRecoverGroups</a> API.</p>
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;
 
         /**
-         * Instance login settings, which include passwords, keys, or the original login settings inherited from the image. <br>Please note that specifying new login settings will overwrite the existing ones. For instance, if you previously used a password for login and then use this parameter to switch the login settings to a key, the original password will be removed.
+         * <p>Instance login settings, including passwords, keys, or maintaining the image's original login settings.<br>Please note that specifying new login settings overwrites existing login settings. For example, if you previously used a password to login, use this parameter to change login settings to a key, and the original password is removed.</p>
          * @type {LoginSettings || null}
          */
         this.LoginSettings = null;
 
         /**
-         * Instance tag list. By specifying this parameter, the instances added through scale-out can be bound to the tag. Up to 10 Tags can be specified.
-This parameter will overwrite the original instance tag list. To add new tags, you need to pass the new tags along with the original tags.
+         * <p>Instance tag list. By specifying this parameter, the instances added through scale-out can be bound to the tag. Up to 10 Tags can be specified.<br>This parameter overrides the original instance tag list. To add a tag, import both the new tag and the original tags.</p>
          * @type {Array.<InstanceTag> || null}
          */
         this.InstanceTags = null;
 
         /**
-         * Image family name. this parameter can be obtained by calling the [DescribeImages](https://intl.cloud.tencent.com/document/product/213/15715?from_cn_redirect=1) api.
+         * <p>Image family name. You can obtain this parameter by calling the <a href="https://www.tencentcloud.com/document/product/213/15715?from_cn_redirect=1">DescribeImages</a> API.</p>
          * @type {string || null}
          */
         this.ImageFamily = null;
 
         /**
-         * Cloud Dedicated Cluster (CDC) ID.
+         * <p>Local exclusive cluster ID.</p>
          * @type {string || null}
          */
         this.DedicatedClusterId = null;
 
         /**
-         * Custom metadata.
+         * <p>Custom metadata.</p>
          * @type {Metadata || null}
          */
         this.Metadata = null;
+
+        /**
+         * <p>Replace the ENI configuration in the launch configuration.</p><p>Input limits: up to 17 items; must explicitly include and can only contain one PRIMARY. AS does not auto-complete the primary ENI. An explicit empty array is illegal.</p><p>Field rules match CreateLaunchConfiguration. To clean up, call ClearLaunchConfigurationAttributes with ClearNetworkInterfaces=true.</p>
+         * @type {Array.<NetworkInterface> || null}
+         */
+        this.NetworkInterfaces = null;
 
     }
 
@@ -336,6 +314,15 @@ This parameter will overwrite the original instance tag list. To add new tags, y
             let obj = new Metadata();
             obj.deserialize(params.Metadata)
             this.Metadata = obj;
+        }
+
+        if (params.NetworkInterfaces) {
+            this.NetworkInterfaces = new Array();
+            for (let z in params.NetworkInterfaces) {
+                let obj = new NetworkInterface();
+                obj.deserialize(params.NetworkInterfaces[z]);
+                this.NetworkInterfaces.push(obj);
+            }
         }
 
     }
@@ -462,7 +449,7 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         this.LaunchConfigurationId = null;
 
         /**
-         * <P>Maximum number of instances. value range: [0,2000]. to meet the requirement, the maximum value must be equal to or greater than the expected value, and the expected value must be equal to or greater than the minimum value.</p>.
+         * <p>Maximum instance count, value range: [0, 2000]. The maximum value must be greater than or equal to the expected value, and the expected value must be greater than or equal to the minimum value.</p><p>Value range: [0, 2000]</p>
          * @type {number || null}
          */
         this.MaxSize = null;
@@ -923,209 +910,208 @@ class LaunchConfiguration extends  AbstractModel {
         super();
 
         /**
-         * Project ID of the instance.
+         * <p>Project ID of the instance.</p>
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * Launch configuration ID
+         * <p>Launch configuration ID.</p>
          * @type {string || null}
          */
         this.LaunchConfigurationId = null;
 
         /**
-         * Launch configuration name.
+         * <p>Startup configuration name.</p>
          * @type {string || null}
          */
         this.LaunchConfigurationName = null;
 
         /**
-         * Instance model.
+         * <p>Instance model.</p>
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * Information of the instance's system disk configuration.
+         * <p>Instance system disk configuration information.</p>
          * @type {SystemDisk || null}
          */
         this.SystemDisk = null;
 
         /**
-         * Information of the instance's data disk configuration.
+         * <p>Instance data disk configuration information.</p>
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
 
         /**
-         * Instance login settings.
+         * <p>Instance login settings.</p>
          * @type {LimitedLoginSettings || null}
          */
         this.LoginSettings = null;
 
         /**
-         * Information of the public network bandwidth configuration.
+         * <p>Public network bandwidth-related information settings.</p>
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
 
         /**
-         * Security group of the instance.
+         * <p>Security group to which an instance belongs.</p>
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
 
         /**
-         * Auto scaling group associated with the launch configuration.
+         * <p>The scaling group bound to the launch configuration.</p>
          * @type {Array.<AutoScalingGroupAbstract> || null}
          */
         this.AutoScalingGroupAbstractSet = null;
 
         /**
-         * Custom data.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Custom data.</p>
          * @type {string || null}
          */
         this.UserData = null;
 
         /**
-         * Specifies the startup configuration creation time. uses UTC standard time.
+         * <p>Launch configuration creation time, in standard <code>UTC</code> time.</p>
          * @type {string || null}
          */
         this.CreatedTime = null;
 
         /**
-         * Conditions of enhancement services for the instance and their settings.
+         * <p>Enhanced services enabling situation of the instance and its settings.</p>
          * @type {EnhancedService || null}
          */
         this.EnhancedService = null;
 
         /**
-         * Image ID.
+         * <p>Image ID.</p>
          * @type {string || null}
          */
         this.ImageId = null;
 
         /**
-         * Current status of the launch configuration. Valid values: <li>NORMAL: Normal.</li> <li>IMAGE_ABNORMAL: Image exception in the launch configuration.</li> <li>CBS_SNAP_ABNORMAL: Exception with data disk snapshot in the launch configuration.</li> <li>SECURITY_GROUP_ABNORMAL: Security group exception in the launch configuration.</li>
+         * <p>Current status of the launch configuration. Value range: <li>NORMAL: Normal</li><li>IMAGE_ABNORMAL: The launch configuration image is exceptional</li><li>CBS_SNAP_ABNORMAL: The launch configuration data disk snapshot is exceptional</li><li>SECURITY_GROUP_ABNORMAL: The launch configuration security group is exceptional</li></p>
          * @type {string || null}
          */
         this.LaunchConfigurationStatus = null;
 
         /**
-         * Instance billing type. valid values:.
-<Li>POSTPAID_BY_HOUR: pay-as-you-go hourly</li>.
-<Li>SPOTPAID: spot payment</li>.
-<Li>PREPAID: prepaid, i.e., monthly subscription</li>.
-<Li>CDCPAID: dedicated cluster payment</li>.
+         * <p>Instance billing type. The value range is as follows:</p><li>POSTPAID_BY_HOUR: hourly postpaid</li><li>SPOTPAID: spot payment</li><li>PREPAID: prepaid, i.e. monthly subscription</li><li>CDCPAID: dedicated cluster payment</li>
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
-         * Market options of the instance, such as parameters related to spot instances. This parameter is required for spot instances.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Market-related options of the instance, such as spot instance parameters. If the payment mode of the specified instance is spot payment, this parameter is required.</p>
          * @type {InstanceMarketOptionsRequest || null}
          */
         this.InstanceMarketOptions = null;
 
         /**
-         * List of instance models.
+         * <p>Instance model list.</p>
          * @type {Array.<string> || null}
          */
         this.InstanceTypes = null;
 
         /**
-         * List of instance tags, which will be added to instances created by the scale-out activity. Up to 10 tags allowed.
+         * <p>Instance tag list. Instances scaled out will automatically come with tags, supporting up to 10 tags.</p>
          * @type {Array.<InstanceTag> || null}
          */
         this.InstanceTags = null;
 
         /**
-         * Tag list. this parameter specifies tags only used for binding the launch configuration and will not be passed to CVM instances scaled out based on it.
+         * <p>Tag list. The tags in this parameter are only used to bind launch configurations and will not be passed to CVM instances scaled out based on the launch configuration.</p>
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
 
         /**
-         * Version
+         * <p>Version number.</p>
          * @type {number || null}
          */
         this.VersionNumber = null;
 
         /**
-         * Last update time is in standard UTC time.
+         * <p>Update time in standard <code>UTC</code> format.</p>
          * @type {string || null}
          */
         this.UpdatedTime = null;
 
         /**
-         * Role name of the CAM role. can be obtained from roleName in the return value from the [DescribeRoleList API](https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1).
+         * <p>CAM role name, which can be obtained from the roleName in the return value from the <a href="https://www.tencentcloud.com/document/product/598/36223?from_cn_redirect=1">DescribeRoleList</a> API.</p>
          * @type {string || null}
          */
         this.CamRoleName = null;
 
         /**
-         * Value of InstanceTypesCheckPolicy upon the last operation.
+         * <p>The value of InstanceTypesCheckPolicy last time when operating.</p>
          * @type {string || null}
          */
         this.LastOperationInstanceTypesCheckPolicy = null;
 
         /**
-         * CVM hostname settings.
+         * <p>Related settings for the CVM host name (HostName).</p>
          * @type {HostNameSettings || null}
          */
         this.HostNameSettings = null;
 
         /**
-         * Settings of CVM instance names
+         * <p>Related settings for the cloud server instance name (InstanceName).</p>
          * @type {InstanceNameSettings || null}
          */
         this.InstanceNameSettings = null;
 
         /**
-         * Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
+         * <p>Prepaid mode, i.e., parameter settings related to monthly/annual subscription. By specifying this parameter, you can specify the purchase duration of annual and monthly subscription instances, whether to enable auto-renewal, and other attributes. This parameter is required if the billing mode for the specified instance is prepaid.</p>
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
 
         /**
-         * Cloud disk type selection policy. Valid values: <li>ORIGINAL: Use the set cloud disk type.</li> <li>AUTOMATIC: Automatically select available cloud disk types in the current availability zone.</li>
+         * <p>Cloud disk type selection policy. Parameter value range: <li>ORIGINAL: use the set cloud disk type</li><li>AUTOMATIC: automatically select available cloud disk types in the current AZ</li></p>
          * @type {string || null}
          */
         this.DiskTypePolicy = null;
 
         /**
-         * HPC ID<br>
-Note: This field is default to empty
+         * <p>Hyper Computing Cluster ID.<br><br>Note: This field is empty by default.</p>
          * @type {string || null}
          */
         this.HpcClusterId = null;
 
         /**
-         * IPv6 public network bandwidth configuration.
+         * <p>IPv6 public network bandwidth-related information settings.</p>
          * @type {IPv6InternetAccessible || null}
          */
         this.IPv6InternetAccessible = null;
 
         /**
-         * Placement group ID, supporting specification of only one.
+         * <p>Placement Group id. Only one can be specified.</p>
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;
 
         /**
-         * Image family name.
+         * <p>Image family name.</p>
          * @type {string || null}
          */
         this.ImageFamily = null;
 
         /**
-         * CDC ID.
+         * <p>Local dedicated cluster ID.</p>
          * @type {string || null}
          */
         this.DedicatedClusterId = null;
+
+        /**
+         * <p>ENI configuration of the launch configuration.</p>
+         * @type {Array.<NetworkInterface> || null}
+         */
+        this.NetworkInterfaces = null;
 
     }
 
@@ -1247,6 +1233,15 @@ Note: This field is default to empty
         this.ImageFamily = 'ImageFamily' in params ? params.ImageFamily : null;
         this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
 
+        if (params.NetworkInterfaces) {
+            this.NetworkInterfaces = new Array();
+            for (let z in params.NetworkInterfaces) {
+                let obj = new NetworkInterface();
+                obj.deserialize(params.NetworkInterfaces[z]);
+                this.NetworkInterfaces.push(obj);
+            }
+        }
+
     }
 }
 
@@ -1351,7 +1346,7 @@ class CreateLaunchConfigurationResponse extends  AbstractModel {
         super();
 
         /**
-         * This parameter is returned when a launch configuration is created through this API, indicating the launch configuration ID.
+         * <p>When creating a launch configuration through this interface, this parameter will be returned, indicating the launch configuration ID.</p>
          * @type {string || null}
          */
         this.LaunchConfigurationId = null;
@@ -1759,25 +1754,28 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * System disk type. for restrictions on the system disk type, see [cloud block storage types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1). valid values:.
-<Li>LOCAL_BASIC: local hard disk.</li>.
-<Li>LOCAL_SSD: local ssd.</li>.
-<Li>CLOUD_BASIC: general cloud disk.</li>.
-<Li>CLOUD_PREMIUM: high-performance cloud block storage</li>.
-<Li>CLOUD_SSD: cloud ssd</li>.
-<Li>CLOUD_BSSD: universal ssd cloud disk</li>.
-<Li>CLOUD_HSSD: enhanced ssd cloud disk</li>.
-<Li>CLOUD_TSSD: ultra ssd.</li>.
-<li>Default value: CLOUD_PREMIUM.</li>
+         * <p>System disk type. For restrictions on system disk types, see <a href="https://www.tencentcloud.com/document/product/362/2353?from_cn_redirect=1">Cloud Disk Types</a>. Value range:</p><li>LOCAL_BASIC: local hard disk</li><li>LOCAL_SSD: local SSD</li><li>CLOUD_BASIC: basic cloud disk</li><li>CLOUD_PREMIUM: high-performance cloud block storage</li><li>CLOUD_SSD: SSD cloud disk</li><li>CLOUD_BSSD: universal SSD cloud disk</li><li>CLOUD_HSSD: enhanced SSD cloud disk</li><li>CLOUD_TSSD: ultra-fast SSD CBS</li><li>Default value: CLOUD_PREMIUM.</li>
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
-         * System disk size, in GB. Default value: 50.
+         * <p>System disk size (GB). Default value: 50</p>
          * @type {number || null}
          */
         this.DiskSize = null;
+
+        /**
+         * <p>Whether to encrypt the system disk. TRUE means encrypted, FALSE means not encrypted. The specific disk type, region, and KMS rules are validated by CVM.</p>
+         * @type {boolean || null}
+         */
+        this.Encrypt = null;
+
+        /**
+         * <p>KMS Key ID used for system disk encryption. The key validity, permission, as well as adaptability to disk type and region are validated by CVM.</p>
+         * @type {string || null}
+         */
+        this.KmsKeyId = null;
 
     }
 
@@ -1790,6 +1788,8 @@ class SystemDisk extends  AbstractModel {
         }
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
+        this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
 
     }
 }
@@ -1952,8 +1952,7 @@ class InstanceNameSettings extends  AbstractModel {
         this.InstanceNameStyle = null;
 
         /**
-         * CVM instance name suffix. The suffix for a CVM instance name must be 1 to 105 characters in length. Additionally, the combined character count of the base instance name and the suffix must not exceed 107 characters.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Name suffix of a CVM instance. The suffix length must be 1 to 105 characters, and the total length of the InstanceName value plus the suffix cannot exceed 107 characters.
          * @type {string || null}
          */
         this.InstanceNameSuffix = null;
@@ -2572,19 +2571,19 @@ class Tag extends  AbstractModel {
         super();
 
         /**
-         * Tag key
+         * Tag key.
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Tag value
+         * Tag value.
          * @type {string || null}
          */
         this.Value = null;
 
         /**
-         * Specifies the resource type bound to the tag. type currently supported: "auto-scaling-group", "launch-configuration". valid values: scaling group resources and launch configuration resources respectively.
+         * Resource type bound to the tag. Type currently supported: "auto-scaling-group", "launch-configuration". They respectively represent scaling group resources and launch configuration resources.
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -3070,192 +3069,178 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
         super();
 
         /**
-         * Display name of the launch configuration, which can contain letters, digits, underscores and hyphens (-), and dots. Up to of 60 bytes allowed..
+         * <p>Display name of the launch configuration. The name only supports Chinese, English, numbers, underscores, the separator "-", and decimal points. The maximum length cannot exceed 60 bytes.</p>
          * @type {string || null}
          */
         this.LaunchConfigurationName = null;
 
         /**
-         * [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><br/>You can obtain the image IDs in the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE).</li><li>You can also use the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
+         * <p>Specify a valid <a href="https://www.tencentcloud.com/document/product/213/4940?from_cn_redirect=1">image</a> ID, such as <code>img-8toqc6s3</code>. One and only one of image ID and image family name must be filled in. There are four image types:<br><li>Public image</li><li>Custom image</li><li>Shared image</li><li>Service market image</li><br>You can get available image IDs in the following ways:<br><li>You can query the image IDs of <code>public images</code>, <code>custom images</code>, and <code>shared images</code> by logging in to the <a href="https://console.cloud.tencent.com/cvm/image?rid=1&amp;imageType=PUBLIC_IMAGE">console</a>; query the image IDs in the <code>service image market</code> in <a href="https://market.cloud.tencent.com/list">Marketplace</a>.</li><li>Call the <a href="https://www.tencentcloud.com/document/api/213/15715?from_cn_redirect=1">DescribeImages</a> API and get the <code>ImageId</code> field in the returned information.</li></p>
          * @type {string || null}
          */
         this.ImageId = null;
 
         /**
-         * Project ID of the launch configuration. default value is 0, indicating usage of the default project. obtain this parameter by calling the projectId field in the return value of [DescribeProject](https://intl.cloud.tencent.com/document/api/651/78725?from_cn_redirect=1).
-Note: the instance's project ID within the scaling group takes the project ID of the scaling group, which is irrelevant here.
+         * <p>The project ID of the launch configuration. Default value: 0, indicating the default project. Obtain this parameter by calling <a href="https://www.tencentcloud.com/document/api/651/78725?from_cn_redirect=1">DescribeProject</a> and using the projectId field in the return value.<br>Note: The project ID of instances within the scaling group is the scaling group project ID, irrelevant to the value here.</p>
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * Instance model. Different instance models specify different resource specifications. The specific value can be obtained by calling the [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/product/213/33254) API to get the latest specification table or referring to the descriptions in [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
-`InstanceType` and `InstanceTypes` are mutually exclusive, and one and only one of them must be entered.
+         * <p>Instance model. Different instance models specify different resource specifications. The specific values can be obtained by calling the <a href="https://www.tencentcloud.com/document/api/213/15749?from_cn_redirect=1">DescribeInstanceTypeConfigs</a> API to get the latest specification table or refer to the <a href="https://www.tencentcloud.com/document/product/213/11518?from_cn_redirect=1">instance type</a> description.<br>The <code>InstanceType</code> and <code>InstanceTypes</code> parameters are mutually exclusive, and one and only one must be filled in.</p>
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * System disk configuration of the instance. If this parameter is not specified, the default value will be used.
+         * <p>Instance system disk configuration information. If not specified, it will be allocated based on system default values.</p>
          * @type {SystemDisk || null}
          */
         this.SystemDisk = null;
 
         /**
-         * Information of the instance's data disk configuration. If this parameter is not specified, no data disk is purchased by default. Up to 11 data disks can be supported.
+         * <p>Instance data disk configuration information. If not specified, no data disks are purchased by default, and a maximum of 11 data disks can be specified.</p>
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
 
         /**
-         * Configuration of public network bandwidth. If this parameter is not specified, 0 Mbps will be used by default.
+         * <p>Public network bandwidth-related information settings. If not specified, the public network bandwidth defaults to 0 Mbps.</p>
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
 
         /**
-         * Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
+         * <p>Instance login settings. Through this parameter, you can set the instance's login method to password, key, or maintain the image's original login settings. By default, a password will be randomly generated, and the user will be notified through an internal message.</p>
          * @type {LoginSettings || null}
          */
         this.LoginSettings = null;
 
         /**
-         * The security group to which the instance belongs. This parameter can be obtained by calling the `SecurityGroupId` field in the returned value of [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1). If this parameter is not specified, no security group will be bound by default.
+         * <p>Security group to which an instance belongs. The value of this parameter can be obtained from the returned <code>SecurityGroupId</code> field of the <a href="https://www.tencentcloud.com/document/api/215/15808?from_cn_redirect=1">DescribeSecurityGroups</a> API. If this parameter is not specified, no security groups are associated by default.</p>
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
 
         /**
-         * Enhanced services. You can use this parameter to specify whether to enable services such as Cloud Security and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Cloud Security will be enabled by default.
+         * <p>Enhancement services. This parameter can be used to specify whether to enable services such as Cloud Monitor and cloud security. If not specified, cloud monitoring and cloud security services are enabled by default.</p>
          * @type {EnhancedService || null}
          */
         this.EnhancedService = null;
 
         /**
-         * Base64-encoded custom data of up to 16 KB.
+         * <p>Custom data after Base64 encoding should not exceed 16KB.</p>
          * @type {string || null}
          */
         this.UserData = null;
 
         /**
-         * Instance billing mode. CVM instances take `POSTPAID_BY_HOUR` by default. Valid values:
-<li>POSTPAID_BY_HOUR: pay-as-you-go hourly</li>
-<li>SPOTPAID: spot instance</li>
-<li> CDCPAID: dedicated cluster</li>
+         * <p>Instance billing type. The default value of CVM is handled as POSTPAID_BY_HOUR.</p><li>POSTPAID_BY_HOUR: hourly postpaid</li><li>SPOTPAID: spot payment</li><li>PREPAID: prepayment, which is monthly subscription</li><li>CDCPAID: dedicated cluster payment</li>
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
-         * Market options of the instance, such as parameters related to spot instances. This parameter is required for spot instances.
+         * <p>Market options of the instance, such as spot instance parameters. This parameter is required if the payment mode of the specified instance is spot payment.</p>
          * @type {InstanceMarketOptionsRequest || null}
          */
         this.InstanceMarketOptions = null;
 
         /**
-         * Instance model list. different instance models specify different resource specifications. supports up to 10 instance models.
-The `InstanceType` and `InstanceTypes` parameters are mutually exclusive. one and only one must be filled in. specific values can be obtained by calling the api [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
+         * <p>Instance model list. Different instance models specify different resource specifications, and a maximum of 10 instance models are supported.<br>The <code>InstanceType</code> and <code>InstanceTypes</code> parameters are mutually exclusive. One and only one of them must be filled in. To obtain the specific values, call the API <a href="https://www.tencentcloud.com/document/api/213/15749?from_cn_redirect=1">DescribeInstanceTypeConfigs</a> to get the latest specification table or see <a href="https://www.tencentcloud.com/document/product/213/11518?from_cn_redirect=1">Instance Specifications</a>.</p>
          * @type {Array.<string> || null}
          */
         this.InstanceTypes = null;
 
         /**
-         * CAM role name. you can obtain it from the roleName in the return value from the API [DescribeRoleList](https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1).
+         * <p>CAM role name, which can be obtained from the roleName in the return value from the <a href="https://www.tencentcloud.com/document/product/598/36223?from_cn_redirect=1">DescribeRoleList</a> API.</p>
          * @type {string || null}
          */
         this.CamRoleName = null;
 
         /**
-         * Instance type validation policy. valid values include ALL and ANY. default value: ANY. this parameter is valid only when the InstanceTypes parameter contains multiple instance types.
-<li>ALL: verification passes if ALL instancetypes are available; otherwise, a verification error will be reported.</li>.
-<li>ANY: verification passes if ANY InstanceType is available; otherwise, a verification error will be reported.</li>.
-
-Common reasons for unavailable instancetypes include the instancetype being sold out and the corresponding cloud disk being sold out.
-If a model in InstanceTypes does not exist or has been abolished, a verification error will be reported regardless of the valid values set for InstanceTypesCheckPolicy.
+         * <p>Instance type validation policy. Valid values include ALL and ANY. Default value: ANY. This parameter is valid only when InstanceTypes contains multiple models.</p><li>ALL: Verification passes if all InstanceTypes are available; otherwise, a verification error will be reported.</li><li>ANY: Verification passes if any InstanceType is available; otherwise, a verification error will be reported.</li><p>Common causes of InstanceTypes unavailable include the instance type sold out and the corresponding cloud disk sold out.<br>If a model in InstanceTypes does not exist or has been removed, a verification error will be reported regardless of the value of InstanceTypesCheckPolicy.</p>
          * @type {string || null}
          */
         this.InstanceTypesCheckPolicy = null;
 
         /**
-         * List of tags. This parameter is used to bind up to 10 tags to newly added instances.
+         * <p>Tag list. By specifying this parameter, the instances added through scale-out can be bound to the tag. A maximum of 10 tags can be specified.</p>
          * @type {Array.<InstanceTag> || null}
          */
         this.InstanceTags = null;
 
         /**
-         * List of tags. You can specify tags that you want to bind to the launch configuration. Each launch configuration can have up to 30 tags.
+         * <p>Tag description list. By specifying this parameter, you can bind tags to a launch configuration. Each launch configuration supports up to 30 tags.</p>
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
 
         /**
-         * Specifies the related settings for the cloud virtual machine HostName (HostName).
-windows instances do not support setting hostname. 
-When adding new attributes, the cloud virtual machine hostname must be transmitted. other fields not transmitted will be set as default.
-Validates whether the host name (with suffix added if it exists) exceeds the maximum of 46 characters.
+         * <p>Related settings of the CVM host name (HostName).<br>Setting the host name for windows instances is unsupported.<br>When adding this attribute, you must pass the CVM host name. Other unspecified fields will be set to default values.<br>The host name (with the suffix added if it exists) is verified against a maximum length of 46 characters.</p>
          * @type {HostNameSettings || null}
          */
         this.HostNameSettings = null;
 
         /**
-         * Specifies the related settings of the cloud server instance name (InstanceName).
-If the user sets this field in the launch configuration, the instance name of the instance created by the scaling group will be set according to this field and passed to CVM. if the user does not set this field in the launch configuration, the instance name of the instance created by the scaling group will be set as "as-{{ scaling group AutoScalingGroupName }}" and passed to CVM.
-Specifies the instance name of the cloud virtual machine when adding this attribute. other fields not transmitted will be set as default.
-Verifies whether the instance name (add the suffix if it exists) exceeds the maximum of 108 characters.
+         * <p>Related settings of CVM instance name (InstanceName).<br>If the user sets this field in the launch configuration, the InstanceName of instances created by the scaling group is set according to this field and transmitted to CVM. If the user does not set this field in the launch configuration, the InstanceName of instances created by the scaling group is set as "as-{{ scaling group AutoScalingGroupName }}" and transmitted to CVM.<br>When adding new this attribute, the instance name of the CVM must be transmitted. Other fields not transmitted will be set as default values.<br>It will verify whether the instance name (plus the suffix if it exists) exceeds the maximum length of 108 characters.</p>
          * @type {InstanceNameSettings || null}
          */
         this.InstanceNameSettings = null;
 
         /**
-         * Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
+         * <p>Prepaid mode, that is, parameter settings related to monthly/annual subscription. By specifying this parameter, you can specify the purchase duration of annual and monthly subscription instances, whether to enable auto-renewal, and other attributes. If the billing mode of the specified instance is prepaid, this parameter must be passed.</p>
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
 
         /**
-         * Cloud disk type selection policy, whose default value is ORIGINAL. Valid values:
-<li>ORIGINAL: Use the set cloud disk type.</li>
-<li>AUTOMATIC: Automatically select the currently available cloud disk type.</li>
+         * <p>Cloud disk type selection policy. Default value: ORIGINAL. Value range:</p><li>ORIGINAL: use the set cloud disk type</li><li>AUTOMATIC: automatically select the currently available cloud disk type</li>
          * @type {string || null}
          */
         this.DiskTypePolicy = null;
 
         /**
-         * High-Performance computing cluster ID. This parameter is not currently supported for the international site.
-Note: this field is empty by default.
+         * <p>Hyper Computing Cluster ID. You can obtain this parameter by calling the <a href="https://www.tencentcloud.com/document/product/213/83220?from_cn_redirect=1">DescribeHpcClusters</a> API.<br>Note: This field is empty by default.</p>
          * @type {string || null}
          */
         this.HpcClusterId = null;
 
         /**
-         * IPv6 public network bandwidth configuration. If the IPv6 address is available in the new instance, public network bandwidth can be allocated to the IPv6 address. This parameter is invalid if `Ipv6AddressCount` of the scaling group associated with the launch configuration is 0.
+         * <p>Public network bandwidth-related information settings for IPv6. If the new instance contains an IPv6 address, this parameter can allocate public network bandwidth to the IPv6 address of the new instance. When the Ipv6AddressCount parameter of the scaling group associated with the launch configuration is 0, this parameter will not take effect.</p>
          * @type {IPv6InternetAccessible || null}
          */
         this.IPv6InternetAccessible = null;
 
         /**
-         * Placement group ID. Only one is allowed.
+         * <p>Placement Group id. Only one can be specified.</p>
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;
 
         /**
-         * Image family name. one and only one must be filled in between image Id and image family name. this parameter can be obtained by calling the [DescribeImages](https://intl.cloud.tencent.com/document/product/213/15715?from_cn_redirect=1) api.
+         * <p>Image family name. Either image Id or image family name must be specified, and one and only one must be filled in. This parameter can be obtained through the <a href="https://www.tencentcloud.com/document/product/213/15715?from_cn_redirect=1">DescribeImages</a> API.</p>
          * @type {string || null}
          */
         this.ImageFamily = null;
 
         /**
-         * Local exclusive cluster ID. this parameter can be obtained through the [DescribeDedicatedClusters](https://intl.cloud.tencent.com/document/product/1346/73758?from_cn_redirect=1) api.
+         * <p>CDC ID. Obtain this parameter through the <a href="https://www.tencentcloud.com/document/product/1346/73758?from_cn_redirect=1">DescribeDedicatedClusters</a> API.</p>
          * @type {string || null}
          */
         this.DedicatedClusterId = null;
 
         /**
-         * Custom metadata.
+         * <p>Custom metadata.</p>
          * @type {Metadata || null}
          */
         this.Metadata = null;
+
+        /**
+         * <p>Configure the elastic network interface for scale-out instances.</p><p>Input limits: up to 17 items. When configuring this parameter, you must explicitly include and can only include one PRIMARY. AS does not auto-complete the primary ENI. An explicitly empty array is illegal. Spot instances do not support this parameter.</p><p>The VPC and subnet are automatically injected by the scaling group based on the current candidate subnets. If not configured, they are not transmitted to CVM. The SecurityGroupIds parameter in the launch configuration is retained.</p>
+         * @type {Array.<NetworkInterface> || null}
+         */
+        this.NetworkInterfaces = null;
 
     }
 
@@ -3367,6 +3352,15 @@ Note: this field is empty by default.
             let obj = new Metadata();
             obj.deserialize(params.Metadata)
             this.Metadata = obj;
+        }
+
+        if (params.NetworkInterfaces) {
+            this.NetworkInterfaces = new Array();
+            for (let z in params.NetworkInterfaces) {
+                let obj = new NetworkInterface();
+                obj.deserialize(params.NetworkInterfaces[z]);
+                this.NetworkInterfaces.push(obj);
+            }
         }
 
     }
@@ -4086,30 +4080,27 @@ class HostNameSettings extends  AbstractModel {
         super();
 
         /**
-         * Specifies the cvm hostname.
-<li>Dots (.) and hyphens (-) cannot be used as the first or last character of HostName, and cannot be used consecutively.</li>. 
-<Li>Windows instances are not supported.</li>. 
-<li>Instances of other types (such as Linux): specifies the character length should be within the range of [2, 42]. multiple dots (.) are allowed. each segment between dots can consist of letters (case-insensitive), digits, and hyphens (-). using only digits is not allowed.</li>. 
-Note: This field may return null, indicating that no valid values can be obtained.
+         * CVM HostName.
+<li>Dots (.) and hyphens (-) cannot be used as the first or last character of HostName, and cannot be used consecutively.</li> 
+<li>Windows instances are not supported.</li> 
+<li>Instances of other types (e.g., Linux): The length of the character should be within the range of [2, 42]. Multiple dots (.) are allowed. Each segment between dot marks can consist of letters (case-insensitive), digits, and hyphens (-). Using only digits is not allowed.</li>
          * @type {string || null}
          */
         this.HostName = null;
 
         /**
-         * The style of the CVM HostName. Valid values include ORIGINAL and UNIQUE, and the default value is ORIGINAL.
-<li>ORIGINAL: AS passes HostName filled in the input parameters to CVM. CVM may append serial numbers to HostName, which can result in conflicts with HostName of instances in the scaling group.</li>
+         * The style of the CVM host name. Valid values include ORIGINAL and UNIQUE, and the default value is ORIGINAL.
+<li>ORIGINAL: AS passes HostName filled in the input parameters to CVM. CVM may append serial numbers to HostName, which can result in conflicts with HostName of instances in the scaling group.</li> 
 <li> UNIQUE: HostName filled in the input parameters acts as a prefix for the HostName. AS and CVM will expand this prefix to ensure that HostName of the instance in the scaling group is unique.</li>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostNameStyle = null;
 
         /**
-         * Specifies the hostname suffix for cvm.
-<li>Dots (.) and hyphens (-) cannot be used as the last character of HostNameSuffix, and cannot be used consecutively.</li>
-<Li>Windows instances are not supported.</li>
-<li>Instances of other types (such as Linux): The character length should be within the range of [1, 39], and the combined length with HostName cannot exceed 41. Multiple dots (.) are allowed. each segment between dots can consist of letters (case-insensitive), digits, and hyphens (-).</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Hostname suffix of a CVM instance.
+<li>Dots (.) and hyphens (-) cannot be used as the last character of HostNameSuffix, and cannot be used consecutively.</li> 
+<li>Windows instances are not supported.</li> 
+<li>Instances of other types (e.g., Linux): The length of the character should be within the range of [1, 39], and the combined length with HostName should not exceed 41. Multiple dots (.) are allowed. Each segment between dots can consist of letters (case-insensitive), digits, and hyphens (-).</li>
          * @type {string || null}
          */
         this.HostNameSuffix = null;
@@ -4974,6 +4965,66 @@ class DescribeAutoScalingAdvicesResponse extends  AbstractModel {
 }
 
 /**
+ * Specifies how to assign pay-as-you-go instances and spot instances in a mixed instance mode.
+ * @class
+ */
+class SpotMixedAllocationPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The minimum number of the scaling group’s capacity that must be fulfilled by pay-as-you-go instances. It defaults to 0 if not specified. Its value cannot exceed the max capacity of the scaling group.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.BaseCapacity = null;
+
+        /**
+         * Controls the percentage of pay-as-you-go instances for the additional capacity beyond `BaseCapacity`. Valid range: 0-100. The value 0 indicates that only spot instances are provisioned, while the value 100 indicates that only pay-as-you-go instances are provisioned. It defaults to 70 if not specified. The number of pay-as-you-go instances calculated on the percentage should be rounded up.
+For example, if the desired capacity is 3, the `BaseCapacity` is set to 1, and the `OnDemandPercentageAboveBaseCapacity` is set to 1, the scaling group will have 2 pay-as-you-go instance (one comes from the base capacity, and the other comes from the rounded up value of the proportion), and 1 spot instance.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.OnDemandPercentageAboveBaseCapacity = null;
+
+        /**
+         * Specifies how to assign spot instances in a mixed instance mode. Valid values: `COST_OPTIMIZED` and `CAPACITY_OPTIMIZED`; default value: `COST_OPTIMIZED`.
+<br><li>`COST_OPTIMIZED`: the lowest cost policy. For each model in the launch configuration, AS tries to purchase it based on the lowest unit price per core in each availability zone. If the purchase failed, try the second-lowest unit price.
+<br><li>`CAPACITY_OPTIMIZED`: the optimal capacity policy. For each model in the launch configuration, AS tries to purchase it based on the largest stock in each availability zone, minimizing the automatic repossession probability of spot instances.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SpotAllocationStrategy = null;
+
+        /**
+         * Whether to replace with pay-as-you go instances. Valid values:
+<br><li>`TRUE`: yes. After the purchase of spot instances failed due to insufficient stock and other reasons, purchase pay-as-you-go instances.
+<br><li>`FALSE`: no. The scaling group only tries the configured model of spot instances when it needs to add spot instances.
+
+Default value: `TRUE`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.CompensateWithBaseInstance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BaseCapacity = 'BaseCapacity' in params ? params.BaseCapacity : null;
+        this.OnDemandPercentageAboveBaseCapacity = 'OnDemandPercentageAboveBaseCapacity' in params ? params.OnDemandPercentageAboveBaseCapacity : null;
+        this.SpotAllocationStrategy = 'SpotAllocationStrategy' in params ? params.SpotAllocationStrategy : null;
+        this.CompensateWithBaseInstance = 'CompensateWithBaseInstance' in params ? params.CompensateWithBaseInstance : null;
+
+    }
+}
+
+/**
  * CreateAutoScalingGroup request structure.
  * @class
  */
@@ -5633,66 +5684,52 @@ class DataDisk extends  AbstractModel {
         super();
 
         /**
-         * Data disk type. for restrictions on data disk types, see [cloud block storage types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1). valid values:.
-<Li>LOCAL_BASIC: local hard disk.</li>.
-<Li>LOCAL_SSD: local ssd.</li>.
-<Li>CLOUD_BASIC: general cloud disk.</li>.
-<Li>CLOUD_PREMIUM: high-performance cloud block storage</li>.
-<Li>CLOUD_SSD: cloud ssd</li>.
-<Li>CLOUD_HSSD: enhanced ssd cloud disk</li>.
-<Li>CLOUD_TSSD: ultra ssd.</li>.
-<Li>CLOUD_BSSD: universal ssd cloud disk</li>.
-The default value is consistent with the system disk type (SystemDisk.DiskType).
+         * <p>Data disk type. For detailed restrictions on data disk types, see <a href="https://www.tencentcloud.com/document/product/362/2353?from_cn_redirect=1">Cloud Disk Types</a>. Value range:</p><li>LOCAL_BASIC: local hard disk</li><li>LOCAL_SSD: local SSD</li><li>CLOUD_BASIC: basic cloud disk</li><li>CLOUD_PREMIUM: high-performance cloud block storage</li><li>CLOUD_SSD: SSD cloud disk</li><li>CLOUD_HSSD: enhanced SSD cloud disk</li><li>CLOUD_TSSD: ultra-fast SSD CBS</li><li>CLOUD_BSSD: universal SSD cloud disk</li>The default value is consistent with the system disk type (SystemDisk.DiskType).
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
-         * Data disk size, in GB. the value range varies according to the data disk type. for specific restrictions, see [CVM instance configuration](https://intl.cloud.tencent.com/document/product/213/2177?from_cn_redirect=1). default value: 0, which means no data disk is purchased. for more restrictions, see the [product documentation](https://intl.cloud.tencent.com/document/product/362/5145?from_cn_redirect=1).
+         * <p>Data disk size, in GB. The value range varies according to the data disk type. For specific restrictions, see <a href="https://www.tencentcloud.com/document/product/213/2177?from_cn_redirect=1">CVM instance configuration</a>. Default value: 0, which means that no data disk is purchased. For more restrictions, see the <a href="https://www.tencentcloud.com/document/product/362/5145?from_cn_redirect=1">product documentation</a>.</p>
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * The data disk snapshot ID can be obtained through the [DescribeSnapshots](https://intl.cloud.tencent.com/document/product/362/15647?from_cn_redirect=1) api.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Data disk snapshot ID, obtain this parameter through the <a href="https://www.tencentcloud.com/document/product/362/15647?from_cn_redirect=1">DescribeSnapshots</a> API.</p>
          * @type {string || null}
          */
         this.SnapshotId = null;
 
         /**
-         * Whether the data disk is terminated along with the instance. Valid values:
-<li>TRUE: When the instance is terminated, the data disk is also terminated. This option is only supported for hourly postpaid cloud disks.</li>
-<li>FALSE: When the instance is terminated, the data disk is retained.</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Whether the data disk is destroyed with the instance. Value ranges from:</p><li>TRUE: When the instance is terminated, destroy the data disk. Only hourly postpaid cloud disks are supported.</li><li>FALSE: When the instance is terminated, retain the data disk.</li>
          * @type {boolean || null}
          */
         this.DeleteWithInstance = null;
 
         /**
-         * Whether the data disk is encrypted. Valid values:
-<li>TRUE: Encrypted.</li>
-<li>FALSE: Not encrypted.</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Whether to encrypt the data disk. TRUE means encrypted, FALSE means not encrypted; the specific disk type, region, and KMS rules are validated by CVM.</p>
          * @type {boolean || null}
          */
         this.Encrypt = null;
 
         /**
-         * Cloud disk performance (MB/s). This parameter is used to purchase extra performance for the cloud disk. For details on the feature and limits, see [Enhanced SSD Performance](https://intl.cloud.tencent.com/zh/document/product/362/39611).
-This feature is only available to enhanced SSD (`CLOUD_HSSD`) and tremendous SSD (`CLOUD_TSSD`) disks with a capacity greater than 460 GB.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * <p>Cloud disk performance, unit: MB/s. Using this parameter can purchase additional performance for cloud disks. For feature introduction and type limitations, see: <a href="https://www.tencentcloud.com/document/product/362/51896?from_cn_redirect=1#.E5.A2.9E.E5.BC.BA.E5.9E.8B-ssd-.E4.BA.91.E7.A1.AC.E7.9B.98.E9.A2.9D.E5.A4.96.E6.80.A7.E8.83.BD">enhanced SSD cloud disk additional performance note</a>.<br>Currently only supports Extreme CBS (CLOUD_TSSD) and enhanced SSD cloud disks (CLOUD_HSSD) with capacity &gt; 460 GB.</p>
          * @type {number || null}
          */
         this.ThroughputPerformance = null;
 
         /**
-         * Burst performance. specifies whether to enable burst performance. default value is false. this parameter only supports ultra-fast CLOUD disk (CLOUD_TSSD) and enhanced SSD CLOUD disk (CLOUD_HSSD) with capacity > 460GB.
-Note: this feature is in beta test and requires a ticket to be submitted for usage.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Burst performance. Whether to enable burst performance. The default value is false. Currently, this parameter only supports Extreme CBS (CLOUD_TSSD) and enhanced SSD CLOUD disk (CLOUD_HSSD) with capacity greater than 460 GB.<br>Note: In beta test. Requires ticket submission before usage.</p>
          * @type {boolean || null}
          */
         this.BurstPerformance = null;
+
+        /**
+         * <p>KMS Key ID used for data disk encryption. The key validity, permission, as well as adaptability to disk type and region are validated by CVM.</p>
+         * @type {string || null}
+         */
+        this.KmsKeyId = null;
 
     }
 
@@ -5710,6 +5747,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
         this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
         this.BurstPerformance = 'BurstPerformance' in params ? params.BurstPerformance : null;
+        this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
 
     }
 }
@@ -6181,8 +6219,7 @@ class RunAutomationServiceEnabled extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable [TencentCloud Automation Tools](https://intl.cloud.tencent.com/document/product/1340?from_cn_redirect=1). Valid values:<br><li>`TRUE`: Enable<br><li>`FALSE`: Not enable.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Enable [Tencent Cloud Automation Tools](https://www.tencentcloud.com/document/product/1340?from_cn_redirect=1) service or not. Valid values: <br><li>TRUE: enables the TAT service <br><li>FALSE: disables the TAT service
          * @type {boolean || null}
          */
         this.Enabled = null;
@@ -6238,24 +6275,21 @@ class IPv6InternetAccessible extends  AbstractModel {
         super();
 
         /**
-         * Network billing mode. Valid values: TRAFFIC_POSTPAID_BY_HOUR, BANDWIDTH_PACKAGE. Default value: TRAFFIC_POSTPAID_BY_HOUR. For the current account type, see [Account Type Description](https://intl.cloud.tencent.com/document/product/684/15246?from_cn_redirect=1#judge).
-<br><li> IPv6 supports `TRAFFIC_POSTPAID_BY_HOUR` under a bill-by-IP account.
-<br><li> IPv6 supports `BANDWIDTH_PACKAGE` under a bill-by-CVM account.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Network billing mode. Values include TRAFFIC_POSTPAID_BY_HOUR and BANDWIDTH_PACKAGE. Default value: TRAFFIC_POSTPAID_BY_HOUR. To view the current account type, see Account Type Description (https://www.tencentcloud.com/document/product/1199/49090?from_cn_redirect=1#judge).
+<br><li> IPv6 supports TRAFFIC_POSTPAID_BY_HOUR for standard account type.
+<br><li> IPv6 supports BANDWIDTH_PACKAGE for classic account type.
          * @type {string || null}
          */
         this.InternetChargeType = null;
 
         /**
-         * Outbound bandwidth cap of the public network (in Mbps). <br>It defaults to `0`, which indicates no public network bandwidth is allocated to IPv6. The value range of bandwidth caps varies with the model, availability zone and billing mode. For more information, see [Public Network Bandwidth Cap](https://intl.cloud.tencent.com/document/product/213/12523?from_cn_redirect=1).
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Public network outbound bandwidth cap, unit: Mbps.<br>Default value: 0. At this point, no public network bandwidth is allocated to IPv6. The bandwidth cap range varies by model, availability zone, and billing mode. For specific limitations, see [Public Network Bandwidth Limit](https://www.tencentcloud.com/document/product/213/12523?from_cn_redirect=1).
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
 
         /**
-         * Bandwidth package ID. You can obtain the ID from the `BandwidthPackageId` field in the response of the [DescribeBandwidthPackages](https://intl.cloud.tencent.com/document/api/215/19209?from_cn_redirect=1) API.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Bandwidth package ID, which can be obtained from the `BandwidthPackageId` in the return value from the [DescribeBandwidthPackages](https://www.tencentcloud.com/document/api/215/19209?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
@@ -8701,53 +8735,52 @@ class ClearLaunchConfigurationAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * Launch configuration ID. obtain in the following ways:.
-<li>Queries the launch configuration ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/config).</li>.
-<li>Get the launch configuration ID by calling the api [DescribeLaunchConfigurations](https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the returned information.</li>.
+         * <p>Launch configuration ID. Obtain it in the following ways:</p><li>Log in to the [console](https://console.cloud.tencent.com/autoscaling/config) and query the launch configuration ID.</li><li>Call the API [DescribeLaunchConfigurations](https://www.tencentcloud.com/document/api/377/20445?from_cn_redirect=1) and obtain the launch configuration ID from the `LaunchConfigurationId` in the returned information.</li>
          * @type {string || null}
          */
         this.LaunchConfigurationId = null;
 
         /**
-         * Whether to clear data disk information. This parameter is optional and the default value is `false`.
-Setting it to `true` will clear data disks, which means that CVM newly created on this launch configuration will have no data disk.
+         * <p>Whether to clear data disk information. This parameter is optional and defaults to false.<br>Enter true to clear "data disk" information. After clearing, newly created CVMs will not contain any data disk.</p>
          * @type {boolean || null}
          */
         this.ClearDataDisks = null;
 
         /**
-         * Whether to clear the CVM hostname settings. This parameter is optional and the default value is `false`.
-Setting it to `true` will clear the hostname settings, which means that CVM newly created on this launch configuration will have no hostname.
+         * <p>Whether to clear the MachineName-related settings of the CVM. Optional. It is false by default.<br>Set to true to clear the host name settings. After clearing, newly created CVMs will not have a host name configured.</p>
          * @type {boolean || null}
          */
         this.ClearHostNameSettings = null;
 
         /**
-         * Whether to clear the CVM instance name settings. This parameter is optional and the default value is `false`.
-Setting it to `true` will clear the instance name settings, which means that CVM newly created on this launch configuration will be named in the as-{{AutoScalingGroupName}} format.
+         * <p>Whether to clear the CVM instance name related settings. This parameter is optional and is false by default.<br>If set to true, the host name setting information is cleared. After clearing, newly created CVMs will be configured based on "as-{{ scaling group AutoScalingGroupName }}".</p>
          * @type {boolean || null}
          */
         this.ClearInstanceNameSettings = null;
 
         /**
-         * Whether to clear placement group information. This parameter is optional. Default value: `false`.
-`True` means clearing placement group information. After that, no placement groups are specified for CVMs created based on the information.
+         * <p>Whether to clear the placement group information. This parameter is optional and defaults to false.<br>Set it to true to clear the placement group information. After clearing, newly created hosts will not be assigned to any placement group.</p>
          * @type {boolean || null}
          */
         this.ClearDisasterRecoverGroupIds = null;
 
         /**
-         * Whether to clear the instance tag list. This parameter is optional, and its default value is false.
-If true is filled in, it indicates that the instance tag list should be cleared. After the list is cleared, the CVMs created based on this will not be bound to the tags in the list.
+         * <p>Whether to clear the instance tag list. This parameter is optional and is false by default.<br>If true is filled in, it indicates that the instance tag list should be cleared. After the list is cleared, the CVMs created based on this will not be bound to the tags in the list.</p>
          * @type {boolean || null}
          */
         this.ClearInstanceTags = null;
 
         /**
-         * Whether to clear metadata, optional, defaults to false. Setting it to true will clear metadata, the CVMs created based on this will not be associated with custom metadata.
+         * <p>Whether to clear MetaData. This parameter is optional and defaults to false. Enter true to clear MetaData. After clearing, newly created CVMs will not associate custom Metadata.</p>
          * @type {boolean || null}
          */
         this.ClearMetadata = null;
+
+        /**
+         * <p>Whether to clear the NetworkInterfaces in the launch configuration. If the value is TRUE, clear it; if not passed or FALSE, this field will not be processed.</p>
+         * @type {boolean || null}
+         */
+        this.ClearNetworkInterfaces = null;
 
     }
 
@@ -8765,6 +8798,7 @@ If true is filled in, it indicates that the instance tag list should be cleared.
         this.ClearDisasterRecoverGroupIds = 'ClearDisasterRecoverGroupIds' in params ? params.ClearDisasterRecoverGroupIds : null;
         this.ClearInstanceTags = 'ClearInstanceTags' in params ? params.ClearInstanceTags : null;
         this.ClearMetadata = 'ClearMetadata' in params ? params.ClearMetadata : null;
+        this.ClearNetworkInterfaces = 'ClearNetworkInterfaces' in params ? params.ClearNetworkInterfaces : null;
 
     }
 }
@@ -9051,47 +9085,36 @@ class AttachLoadBalancersRequest extends  AbstractModel {
 }
 
 /**
- * Specifies how to assign pay-as-you-go instances and spot instances in a mixed instance mode.
+ * Elastic Network Interface configuration in the launch configuration.
  * @class
  */
-class SpotMixedAllocationPolicy extends  AbstractModel {
+class NetworkInterface extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The minimum number of the scaling group’s capacity that must be fulfilled by pay-as-you-go instances. It defaults to 0 if not specified. Its value cannot exceed the max capacity of the scaling group.
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.BaseCapacity = null;
-
-        /**
-         * Controls the percentage of pay-as-you-go instances for the additional capacity beyond `BaseCapacity`. Valid range: 0-100. The value 0 indicates that only spot instances are provisioned, while the value 100 indicates that only pay-as-you-go instances are provisioned. It defaults to 70 if not specified. The number of pay-as-you-go instances calculated on the percentage should be rounded up.
-For example, if the desired capacity is 3, the `BaseCapacity` is set to 1, and the `OnDemandPercentageAboveBaseCapacity` is set to 1, the scaling group will have 2 pay-as-you-go instance (one comes from the base capacity, and the other comes from the rounded up value of the proportion), and 1 spot instance.
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.OnDemandPercentageAboveBaseCapacity = null;
-
-        /**
-         * Specifies how to assign spot instances in a mixed instance mode. Valid values: `COST_OPTIMIZED` and `CAPACITY_OPTIMIZED`; default value: `COST_OPTIMIZED`.
-<br><li>`COST_OPTIMIZED`: the lowest cost policy. For each model in the launch configuration, AS tries to purchase it based on the lowest unit price per core in each availability zone. If the purchase failed, try the second-lowest unit price.
-<br><li>`CAPACITY_OPTIMIZED`: the optimal capacity policy. For each model in the launch configuration, AS tries to purchase it based on the largest stock in each availability zone, minimizing the automatic repossession probability of spot instances.
-Note: this field may return `null`, indicating that no valid value can be obtained.
+         * <p>Network interface card type. This field is required in the request for each network interface.</p><p>Enumeration values:</p><ul><li>PRIMARY: Primary network interface</li><li>SECONDARY: Auxiliary network interface</li></ul><p>When configuring upper-level NetworkInterfaces, the array must explicitly contain and can only contain one PRIMARY. AS does not auto-complete the primary network interface.</p>
          * @type {string || null}
          */
-        this.SpotAllocationStrategy = null;
+        this.InterfaceType = null;
 
         /**
-         * Whether to replace with pay-as-you go instances. Valid values:
-<br><li>`TRUE`: yes. After the purchase of spot instances failed due to insufficient stock and other reasons, purchase pay-as-you-go instances.
-<br><li>`FALSE`: no. The scaling group only tries the configured model of spot instances when it needs to add spot instances.
+         * <p>Total number of private IPv4 addresses requested for the network interface card, including the primary IP.</p><p>Value range: [1, 40]</p><p>Required for SECONDARY network interface card requests; optional for PRIMARY network interface card requests. If left empty, it is processed as 1 only when constructing a CVM request copy during actual scaling, and is not written back to the launch configuration. The explicitly passed in value is passed through to CVM by AS, and finally validated by CVM/VPC.</p>
+         * @type {number || null}
+         */
+        this.PrivateIpv4AddressCount = null;
 
-Default value: `TRUE`.
-Note: this field may return `null`, indicating that no valid value can be obtained.
+        /**
+         * <p>List of security group IDs bound to the ENI.</p><p>Input limit: up to 10.</p><p>For PRIMARY, a non-empty list explicitly configured in the network interface takes precedence over the SecurityGroupIds parameter in the launch configuration; if not configured in the network interface, the SecurityGroupIds parameter in the launch configuration is used. If neither is configured, AS does not specify security groups and proceeds with the CVM default rule. For SECONDARY, only the non-empty list explicitly configured in the network interface is passed through, and the SecurityGroupIds parameter in the launch configuration is not inherited.</p>
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * <p>Whether to reserve the auxiliary network interface when instance is terminated. Only applicable to SECONDARY.</p><p>Enumeration values:</p><ul><li>false: Do not retain the auxiliary network interface. It will destroy with the instance.</li><li>true: Retain the auxiliary network interface.</li></ul><p>Default value: false</p><p>PRIMARY does not allow configuration of true.</p>
          * @type {boolean || null}
          */
-        this.CompensateWithBaseInstance = null;
+        this.IsKeepENI = null;
 
     }
 
@@ -9102,10 +9125,10 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.BaseCapacity = 'BaseCapacity' in params ? params.BaseCapacity : null;
-        this.OnDemandPercentageAboveBaseCapacity = 'OnDemandPercentageAboveBaseCapacity' in params ? params.OnDemandPercentageAboveBaseCapacity : null;
-        this.SpotAllocationStrategy = 'SpotAllocationStrategy' in params ? params.SpotAllocationStrategy : null;
-        this.CompensateWithBaseInstance = 'CompensateWithBaseInstance' in params ? params.CompensateWithBaseInstance : null;
+        this.InterfaceType = 'InterfaceType' in params ? params.InterfaceType : null;
+        this.PrivateIpv4AddressCount = 'PrivateIpv4AddressCount' in params ? params.PrivateIpv4AddressCount : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.IsKeepENI = 'IsKeepENI' in params ? params.IsKeepENI : null;
 
     }
 }
@@ -9698,28 +9721,24 @@ class InternetAccessible extends  AbstractModel {
 
         /**
          * Network billing type. Valid values: <li>BANDWIDTH_PREPAID: prepaid by bandwidth;</li> <li>TRAFFIC_POSTPAID_BY_HOUR: postpaid by traffic per hour;</li> <li>BANDWIDTH_POSTPAID_BY_HOUR: postpaid by bandwidth per hour;</li> <li>BANDWIDTH_PACKAGE: bandwidth package users.</li> Default value: TRAFFIC_POSTPAID_BY_HOUR.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InternetChargeType = null;
 
         /**
-         * The maximum outbound bandwidth in Mbps of the public network. The default value is 0 Mbps. The upper limit of bandwidth varies by model. For more information, see [Purchase Network Bandwidth](https://intl.cloud.tencent.com/document/product/213/509?from_cn_redirect=1).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Public network outbound bandwidth cap. Unit: Mbps. Default value: 0 Mbps. Bandwidth cap range varies by model. For specific limitations, see [Purchase Network Bandwidth](https://www.tencentcloud.com/document/product/213/509?from_cn_redirect=1).
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
 
         /**
-         * Whether to assign a public IP address. Valid values: <li>TRUE: Allocate a public IP address.</li> <li>FALSE: Do not allocate a public IP address.</li> When the public network bandwidth is greater than 0 Mbps, you can choose whether to enable this feature based on your needs. By default, this feature is enabled. When the public network bandwidth is 0, public IP address assignment is not allowed.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether to assign a public IP address. Valid values: <li>TRUE: Allocate a public IP address.</li><li>FALSE: Do not allocate a public IP address.</li>When the public network bandwidth is greater than 0 Mbps, you can choose whether to enable this feature. By default, a public IP address is assigned. When the public network bandwidth is 0, assigning a public IP address is not allowed.
          * @type {boolean || null}
          */
         this.PublicIpAssigned = null;
 
         /**
-         * Bandwidth package ID. You can obtain the ID from the `BandwidthPackageId` field in the response of the [DescribeBandwidthPackages](https://intl.cloud.tencent.com/document/api/215/19209?from_cn_redirect=1) API.
-Note: this field may return null, indicating that no valid value was found.
+         * Bandwidth package ID, which can be obtained from the `BandwidthPackageId` in the return value from the [DescribeBandwidthPackages](https://www.tencentcloud.com/document/api/215/19209?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
@@ -10034,6 +10053,7 @@ module.exports = {
     ModifyLifecycleHookResponse: ModifyLifecycleHookResponse,
     LifecycleCommand: LifecycleCommand,
     DescribeAutoScalingAdvicesResponse: DescribeAutoScalingAdvicesResponse,
+    SpotMixedAllocationPolicy: SpotMixedAllocationPolicy,
     CreateAutoScalingGroupRequest: CreateAutoScalingGroupRequest,
     DeleteScheduledActionResponse: DeleteScheduledActionResponse,
     UpgradeLaunchConfigurationRequest: UpgradeLaunchConfigurationRequest,
@@ -10102,7 +10122,7 @@ module.exports = {
     AttachInstancesRequest: AttachInstancesRequest,
     StopInstanceRefreshResponse: StopInstanceRefreshResponse,
     AttachLoadBalancersRequest: AttachLoadBalancersRequest,
-    SpotMixedAllocationPolicy: SpotMixedAllocationPolicy,
+    NetworkInterface: NetworkInterface,
     HostNameIndexSettings: HostNameIndexSettings,
     ResumeInstanceRefreshResponse: ResumeInstanceRefreshResponse,
     DescribeScalingPoliciesResponse: DescribeScalingPoliciesResponse,

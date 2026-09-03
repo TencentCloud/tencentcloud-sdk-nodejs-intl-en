@@ -25,6 +25,7 @@ const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const ModifyInstanceNetworkResponse = models.ModifyInstanceNetworkResponse;
 const ModifyInstanceSSLStatusResponse = models.ModifyInstanceSSLStatusResponse;
+const DescribeDBEnginesRequest = models.DescribeDBEnginesRequest;
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const ModifyInstanceNameRequest = models.ModifyInstanceNameRequest;
@@ -41,7 +42,6 @@ const DescribeDBSBackupStatisticsDetailRequest = models.DescribeDBSBackupStatist
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const StorageNodeSpec = models.StorageNodeSpec;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
-const ResetUserPasswordResponse = models.ResetUserPasswordResponse;
 const DescribeInstanceSSLStatusResponse = models.DescribeInstanceSSLStatusResponse;
 const DeleteDBSBackupSetsResponse = models.DeleteDBSBackupSetsResponse;
 const DescribeFlowResponse = models.DescribeFlowResponse;
@@ -56,8 +56,9 @@ const DatabasePrivileges = models.DatabasePrivileges;
 const NodeInfo = models.NodeInfo;
 const DescribeSpecsResponse = models.DescribeSpecsResponse;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
-const CreateCloneInstanceResponse = models.CreateCloneInstanceResponse;
+const DescribeDBSArchiveLogsResponse = models.DescribeDBSArchiveLogsResponse;
 const ModifyUserPrivilegesResponse = models.ModifyUserPrivilegesResponse;
+const DBEngineInfo = models.DBEngineInfo;
 const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const CreateDBSBackupResponse = models.CreateDBSBackupResponse;
 const BackupSetsReqFilter = models.BackupSetsReqFilter;
@@ -97,7 +98,7 @@ const DescribeInstanceSSLStatusRequest = models.DescribeInstanceSSLStatusRequest
 const SecurityGroup = models.SecurityGroup;
 const DeleteUsersRequest = models.DeleteUsersRequest;
 const ModifyUserPrivilegesRequest = models.ModifyUserPrivilegesRequest;
-const DescribeDBSArchiveLogsResponse = models.DescribeDBSArchiveLogsResponse;
+const CreateCloneInstanceResponse = models.CreateCloneInstanceResponse;
 const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
 const DescribeMaintenanceWindowResponse = models.DescribeMaintenanceWindowResponse;
 const InstanceNode = models.InstanceNode;
@@ -132,6 +133,7 @@ const DescribeFlowRequest = models.DescribeFlowRequest;
 const ModifyDBSBackupSetCommentResponse = models.ModifyDBSBackupSetCommentResponse;
 const AutoScalingConfig = models.AutoScalingConfig;
 const DatabaseProcedure = models.DatabaseProcedure;
+const DescribeDBEnginesResponse = models.DescribeDBEnginesResponse;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
 const ResetUsersPasswordResponse = models.ResetUsersPasswordResponse;
 const CreateDBSBackupRequest = models.CreateDBSBackupRequest;
@@ -145,7 +147,6 @@ const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const ConstraintRange = models.ConstraintRange;
 const UserInfo = models.UserInfo;
 const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
-const ResetUserPasswordRequest = models.ResetUserPasswordRequest;
 const DescribeDBSAvailableRecoveryTimeResponse = models.DescribeDBSAvailableRecoveryTimeResponse;
 const TablePrivileges = models.TablePrivileges;
 const DescribeUserPrivilegesRequest = models.DescribeUserPrivilegesRequest;
@@ -268,6 +269,17 @@ class TdmysqlClient extends AbstractClient {
     }
 
     /**
+     * This API is used to obtain the DB engine version list.
+     * @param {DescribeDBEnginesRequest} req
+     * @param {function(string, DescribeDBEnginesResponse):void} cb
+     * @public
+     */
+    DescribeDBEngines(req, cb) {
+        let resp = new DescribeDBEnginesResponse();
+        this.request("DescribeDBEngines", req, resp, cb);
+    }
+
+    /**
      * This API is used to query user list.
      * @param {DescribeUsersRequest} req
      * @param {function(string, DescribeUsersResponse):void} cb
@@ -309,17 +321,6 @@ class TdmysqlClient extends AbstractClient {
     IsolateDBInstance(req, cb) {
         let resp = new IsolateDBInstanceResponse();
         this.request("IsolateDBInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to reset user password.
-     * @param {ResetUserPasswordRequest} req
-     * @param {function(string, ResetUserPasswordResponse):void} cb
-     * @public
-     */
-    ResetUserPassword(req, cb) {
-        let resp = new ResetUserPasswordResponse();
-        this.request("ResetUserPassword", req, resp, cb);
     }
 
     /**

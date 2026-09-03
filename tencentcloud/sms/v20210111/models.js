@@ -1942,14 +1942,14 @@ class SendStatusStatisticsRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time in the format of `yyyymmddhh` accurate to the hour, such as 2021050113 (13:00 on May 1, 2021).
+         * Start time in the format of `yyyymmddhh` accurate to the hour, such as 2021050113 (13:00 on May 1, 2021).Note: the statistical range includes the current hour.
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
          * End time in the format of `yyyymmddhh` accurate to the hour, such as 2021050118 (18:00 on May 1, 2021).
-Note: `EndTime` must be after `BeginTime`.
+Note: `EndTime` must be after `BeginTime`, and the statistical range includes the current hour.
          * @type {string || null}
          */
         this.EndTime = null;

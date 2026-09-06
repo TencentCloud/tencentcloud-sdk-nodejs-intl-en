@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
 const ModifyDBInstanceVPortRequest = models.ModifyDBInstanceVPortRequest;
 const ExpandInstanceResponse = models.ExpandInstanceResponse;
+const DescribeStandbyDBInstanceRelationDetailResponse = models.DescribeStandbyDBInstanceRelationDetailResponse;
 const DescribeSaleZonesInfo = models.DescribeSaleZonesInfo;
 const BackupMethodStatisticsOutPut = models.BackupMethodStatisticsOutPut;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
@@ -31,21 +32,26 @@ const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const ModifyInstanceNameRequest = models.ModifyInstanceNameRequest;
 const DescribeUserPrivilegesResponse = models.DescribeUserPrivilegesResponse;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const DescribeInstanceDataReservedSpaceRequest = models.DescribeInstanceDataReservedSpaceRequest;
 const InstanceFilter = models.InstanceFilter;
 const Explain = models.Explain;
 const BackupStatisticsModel = models.BackupStatisticsModel;
 const ResetUsersPasswordRequest = models.ResetUsersPasswordRequest;
 const BackupPolicyModelOutPut = models.BackupPolicyModelOutPut;
+const ModifyInstanceDataReservedSpaceResponse = models.ModifyInstanceDataReservedSpaceResponse;
 const ModifyInstanceSSLStatusRequest = models.ModifyInstanceSSLStatusRequest;
+const ResetDbaAdminPrivilegesResponse = models.ResetDbaAdminPrivilegesResponse;
 const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
 const DescribeDBSBackupStatisticsDetailRequest = models.DescribeDBSBackupStatisticsDetailRequest;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const StorageNodeSpec = models.StorageNodeSpec;
+const DescribeDBCharsetsResponse = models.DescribeDBCharsetsResponse;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const DescribeInstanceSSLStatusResponse = models.DescribeInstanceSSLStatusResponse;
 const DeleteDBSBackupSetsResponse = models.DeleteDBSBackupSetsResponse;
 const DescribeFlowResponse = models.DescribeFlowResponse;
 const MaintenanceWindowInfo = models.MaintenanceWindowInfo;
+const DescribeStandbyDBInstanceRelationDetailRequest = models.DescribeStandbyDBInstanceRelationDetailRequest;
 const DescribeDBSBackupStatisticsDetailResponse = models.DescribeDBSBackupStatisticsDetailResponse;
 const ModifyDBSBackupSetCommentRequest = models.ModifyDBSBackupSetCommentRequest;
 const ParamConstraint = models.ParamConstraint;
@@ -59,6 +65,7 @@ const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGr
 const DescribeDBSArchiveLogsResponse = models.DescribeDBSArchiveLogsResponse;
 const ModifyUserPrivilegesResponse = models.ModifyUserPrivilegesResponse;
 const DBEngineInfo = models.DBEngineInfo;
+const DescribeFlowTypesResponse = models.DescribeFlowTypesResponse;
 const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const CreateDBSBackupResponse = models.CreateDBSBackupResponse;
 const BackupSetsReqFilter = models.BackupSetsReqFilter;
@@ -76,14 +83,16 @@ const ModifyDBSBackupPolicyRequest = models.ModifyDBSBackupPolicyRequest;
 const DescribeDBInstanceDetailResponse = models.DescribeDBInstanceDetailResponse;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
 const ModifyMaintenanceWindowRequest = models.ModifyMaintenanceWindowRequest;
+const ModifyInstanceDataReservedSpaceRequest = models.ModifyInstanceDataReservedSpaceRequest;
 const DestroyInstancesResponse = models.DestroyInstancesResponse;
+const UserInfo = models.UserInfo;
 const DescribeSaleInfoResponse = models.DescribeSaleInfoResponse;
 const ResetUserPasswordInfo = models.ResetUserPasswordInfo;
 const DeleteUsersResponse = models.DeleteUsersResponse;
 const DatabaseTable = models.DatabaseTable;
 const DescribeDBInstanceDetailRequest = models.DescribeDBInstanceDetailRequest;
 const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
-const DescribeUsersRequest = models.DescribeUsersRequest;
+const CancelIsolateDBInstancesResponse = models.CancelIsolateDBInstancesResponse;
 const DatabaseView = models.DatabaseView;
 const DataBackupStatisticsModel = models.DataBackupStatisticsModel;
 const LogFilter = models.LogFilter;
@@ -101,6 +110,8 @@ const ModifyUserPrivilegesRequest = models.ModifyUserPrivilegesRequest;
 const CreateCloneInstanceResponse = models.CreateCloneInstanceResponse;
 const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
 const DescribeMaintenanceWindowResponse = models.DescribeMaintenanceWindowResponse;
+const DescribeFlowTypesRequest = models.DescribeFlowTypesRequest;
+const DescribeDBCharsetsRequest = models.DescribeDBCharsetsRequest;
 const InstanceNode = models.InstanceNode;
 const SecurityGroupBound = models.SecurityGroupBound;
 const DescribeDBSBackupStatisticsResponse = models.DescribeDBSBackupStatisticsResponse;
@@ -116,7 +127,7 @@ const DescribeSaleZonesGroup = models.DescribeSaleZonesGroup;
 const DescribeDBSBackupStatisticsRequest = models.DescribeDBSBackupStatisticsRequest;
 const DescribeUsersResponse = models.DescribeUsersResponse;
 const LogBackupStatisticsModel = models.LogBackupStatisticsModel;
-const CancelIsolateDBInstancesResponse = models.CancelIsolateDBInstancesResponse;
+const DescribeUsersRequest = models.DescribeUsersRequest;
 const BackupMethodStatisticsModel = models.BackupMethodStatisticsModel;
 const DescribeDBSBackupPolicyRequest = models.DescribeDBSBackupPolicyRequest;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
@@ -128,6 +139,7 @@ const ArchiveLogModel = models.ArchiveLogModel;
 const AnalysisRelationInfo = models.AnalysisRelationInfo;
 const ResourceTag = models.ResourceTag;
 const ModifyMaintenanceWindowResponse = models.ModifyMaintenanceWindowResponse;
+const ServerlessNodeNumSpec = models.ServerlessNodeNumSpec;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const DescribeFlowRequest = models.DescribeFlowRequest;
 const ModifyDBSBackupSetCommentResponse = models.ModifyDBSBackupSetCommentResponse;
@@ -141,17 +153,24 @@ const DestroyInstancesRequest = models.DestroyInstancesRequest;
 const DescribeMaintenanceWindowRequest = models.DescribeMaintenanceWindowRequest;
 const DescribeSpecsRequest = models.DescribeSpecsRequest;
 const ParamDesc = models.ParamDesc;
+const CreateStandbyDBInstanceResponse = models.CreateStandbyDBInstanceResponse;
 const ModifyInstanceNetworkRequest = models.ModifyInstanceNetworkRequest;
 const BackupPolicyModelInput = models.BackupPolicyModelInput;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const ConstraintRange = models.ConstraintRange;
-const UserInfo = models.UserInfo;
+const BreakStandbyDBInstanceRelationRequest = models.BreakStandbyDBInstanceRelationRequest;
+const CreateStandbyDBInstanceRequest = models.CreateStandbyDBInstanceRequest;
 const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
 const DescribeDBSAvailableRecoveryTimeResponse = models.DescribeDBSAvailableRecoveryTimeResponse;
 const TablePrivileges = models.TablePrivileges;
 const DescribeUserPrivilegesRequest = models.DescribeUserPrivilegesRequest;
+const StandbyDBInstanceRelation = models.StandbyDBInstanceRelation;
+const FlowType = models.FlowType;
 const DescribeDBSAvailableRecoveryTimeRequest = models.DescribeDBSAvailableRecoveryTimeRequest;
 const ModifyDBInstanceVPortResponse = models.ModifyDBInstanceVPortResponse;
+const ResetDbaAdminPrivilegesRequest = models.ResetDbaAdminPrivilegesRequest;
+const BreakStandbyDBInstanceRelationResponse = models.BreakStandbyDBInstanceRelationResponse;
+const DescribeInstanceDataReservedSpaceResponse = models.DescribeInstanceDataReservedSpaceResponse;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const BackupSetModel = models.BackupSetModel;
 const InstanceParam = models.InstanceParam;
@@ -225,25 +244,25 @@ class TdmysqlClient extends AbstractClient {
     }
 
     /**
-     * Add new or modify instance maintenance time window configurations
-     * @param {ModifyMaintenanceWindowRequest} req
-     * @param {function(string, ModifyMaintenanceWindowResponse):void} cb
+     * This API is used to query supported character sets.
+     * @param {DescribeDBCharsetsRequest} req
+     * @param {function(string, DescribeDBCharsetsResponse):void} cb
      * @public
      */
-    ModifyMaintenanceWindow(req, cb) {
-        let resp = new ModifyMaintenanceWindowResponse();
-        this.request("ModifyMaintenanceWindow", req, resp, cb);
+    DescribeDBCharsets(req, cb) {
+        let resp = new DescribeDBCharsetsResponse();
+        this.request("DescribeDBCharsets", req, resp, cb);
     }
 
     /**
-     * This API is used to lift isolation for instances in batch.
-     * @param {CancelIsolateDBInstancesRequest} req
-     * @param {function(string, CancelIsolateDBInstancesResponse):void} cb
+     * This API is used to terminate the replication between the primary instance and the disaster recovery instance.
+     * @param {BreakStandbyDBInstanceRelationRequest} req
+     * @param {function(string, BreakStandbyDBInstanceRelationResponse):void} cb
      * @public
      */
-    CancelIsolateDBInstances(req, cb) {
-        let resp = new CancelIsolateDBInstancesResponse();
-        this.request("CancelIsolateDBInstances", req, resp, cb);
+    BreakStandbyDBInstanceRelation(req, cb) {
+        let resp = new BreakStandbyDBInstanceRelationResponse();
+        this.request("BreakStandbyDBInstanceRelation", req, resp, cb);
     }
 
     /**
@@ -354,6 +373,50 @@ class TdmysqlClient extends AbstractClient {
     DescribeDBParameters(req, cb) {
         let resp = new DescribeDBParametersResponse();
         this.request("DescribeDBParameters", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify backup notes of an instance.
+     * @param {ModifyDBSBackupSetCommentRequest} req
+     * @param {function(string, ModifyDBSBackupSetCommentResponse):void} cb
+     * @public
+     */
+    ModifyDBSBackupSetComment(req, cb) {
+        let resp = new ModifyDBSBackupSetCommentResponse();
+        this.request("ModifyDBSBackupSetComment", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the data retention space of an instance.
+     * @param {DescribeInstanceDataReservedSpaceRequest} req
+     * @param {function(string, DescribeInstanceDataReservedSpaceResponse):void} cb
+     * @public
+     */
+    DescribeInstanceDataReservedSpace(req, cb) {
+        let resp = new DescribeInstanceDataReservedSpaceResponse();
+        this.request("DescribeInstanceDataReservedSpace", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the reserved space for instance data.
+     * @param {ModifyInstanceDataReservedSpaceRequest} req
+     * @param {function(string, ModifyInstanceDataReservedSpaceResponse):void} cb
+     * @public
+     */
+    ModifyInstanceDataReservedSpace(req, cb) {
+        let resp = new ModifyInstanceDataReservedSpaceResponse();
+        this.request("ModifyInstanceDataReservedSpace", req, resp, cb);
+    }
+
+    /**
+     * Reset the permissions of the dbaadmin account.
+     * @param {ResetDbaAdminPrivilegesRequest} req
+     * @param {function(string, ResetDbaAdminPrivilegesResponse):void} cb
+     * @public
+     */
+    ResetDbaAdminPrivileges(req, cb) {
+        let resp = new ResetDbaAdminPrivilegesResponse();
+        this.request("ResetDbaAdminPrivileges", req, resp, cb);
     }
 
     /**
@@ -478,6 +541,28 @@ class TdmysqlClient extends AbstractClient {
     }
 
     /**
+     * Add new or modify instance maintenance time window configurations
+     * @param {ModifyMaintenanceWindowRequest} req
+     * @param {function(string, ModifyMaintenanceWindowResponse):void} cb
+     * @public
+     */
+    ModifyMaintenanceWindow(req, cb) {
+        let resp = new ModifyMaintenanceWindowResponse();
+        this.request("ModifyMaintenanceWindow", req, resp, cb);
+    }
+
+    /**
+     * This API is used to lift isolation for instances in batch.
+     * @param {CancelIsolateDBInstancesRequest} req
+     * @param {function(string, CancelIsolateDBInstancesResponse):void} cb
+     * @public
+     */
+    CancelIsolateDBInstances(req, cb) {
+        let resp = new CancelIsolateDBInstancesResponse();
+        this.request("CancelIsolateDBInstances", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify cloud database security groups.
      * @param {ModifyDBInstanceSecurityGroupsRequest} req
      * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
@@ -489,14 +574,14 @@ class TdmysqlClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create users in batches.
-     * @param {CreateUsersRequest} req
-     * @param {function(string, CreateUsersResponse):void} cb
+     * This API is used to obtain the recoverable time.
+     * @param {DescribeDBSAvailableRecoveryTimeRequest} req
+     * @param {function(string, DescribeDBSAvailableRecoveryTimeResponse):void} cb
      * @public
      */
-    CreateUsers(req, cb) {
-        let resp = new CreateUsersResponse();
-        this.request("CreateUsers", req, resp, cb);
+    DescribeDBSAvailableRecoveryTime(req, cb) {
+        let resp = new DescribeDBSAvailableRecoveryTimeResponse();
+        this.request("DescribeDBSAvailableRecoveryTime", req, resp, cb);
     }
 
     /**
@@ -533,14 +618,14 @@ class TdmysqlClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain the recoverable time.
-     * @param {DescribeDBSAvailableRecoveryTimeRequest} req
-     * @param {function(string, DescribeDBSAvailableRecoveryTimeResponse):void} cb
+     * This API is used to create disaster recovery instances in batches.
+     * @param {CreateStandbyDBInstanceRequest} req
+     * @param {function(string, CreateStandbyDBInstanceResponse):void} cb
      * @public
      */
-    DescribeDBSAvailableRecoveryTime(req, cb) {
-        let resp = new DescribeDBSAvailableRecoveryTimeResponse();
-        this.request("DescribeDBSAvailableRecoveryTime", req, resp, cb);
+    CreateStandbyDBInstance(req, cb) {
+        let resp = new CreateStandbyDBInstanceResponse();
+        this.request("CreateStandbyDBInstance", req, resp, cb);
     }
 
     /**
@@ -555,6 +640,17 @@ class TdmysqlClient extends AbstractClient {
     }
 
     /**
+     * This API is used to create users in batches.
+     * @param {CreateUsersRequest} req
+     * @param {function(string, CreateUsersResponse):void} cb
+     * @public
+     */
+    CreateUsers(req, cb) {
+        let resp = new CreateUsersResponse();
+        this.request("CreateUsers", req, resp, cb);
+    }
+
+    /**
      * This API is used to scale up a TDSQL Boundless instance, which can be a primary instance or a disaster recovery instance.
      * @param {UpgradeInstanceRequest} req
      * @param {function(string, UpgradeInstanceResponse):void} cb
@@ -566,7 +662,7 @@ class TdmysqlClient extends AbstractClient {
     }
 
     /**
-     * This API is used to list available component specifications.
+     * This API is used to query sales specifications.
      * @param {DescribeSpecsRequest} req
      * @param {function(string, DescribeSpecsResponse):void} cb
      * @public
@@ -596,6 +692,17 @@ class TdmysqlClient extends AbstractClient {
     DescribeDatabases(req, cb) {
         let resp = new DescribeDatabasesResponse();
         this.request("DescribeDatabases", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query disaster recovery connection relationships of an instance.
+     * @param {DescribeStandbyDBInstanceRelationDetailRequest} req
+     * @param {function(string, DescribeStandbyDBInstanceRelationDetailResponse):void} cb
+     * @public
+     */
+    DescribeStandbyDBInstanceRelationDetail(req, cb) {
+        let resp = new DescribeStandbyDBInstanceRelationDetailResponse();
+        this.request("DescribeStandbyDBInstanceRelationDetail", req, resp, cb);
     }
 
     /**
@@ -643,14 +750,14 @@ class TdmysqlClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify backup notes of an instance.
-     * @param {ModifyDBSBackupSetCommentRequest} req
-     * @param {function(string, ModifyDBSBackupSetCommentResponse):void} cb
+     * This API is used to obtain all task types.
+     * @param {DescribeFlowTypesRequest} req
+     * @param {function(string, DescribeFlowTypesResponse):void} cb
      * @public
      */
-    ModifyDBSBackupSetComment(req, cb) {
-        let resp = new ModifyDBSBackupSetCommentResponse();
-        this.request("ModifyDBSBackupSetComment", req, resp, cb);
+    DescribeFlowTypes(req, cb) {
+        let resp = new DescribeFlowTypesResponse();
+        this.request("DescribeFlowTypes", req, resp, cb);
     }
 
     /**

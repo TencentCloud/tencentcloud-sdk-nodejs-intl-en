@@ -69,6 +69,7 @@ const ModifySampleSnapshotTemplateRequest = models.ModifySampleSnapshotTemplateR
 const AiReviewPoliticalOcrTaskInput = models.AiReviewPoliticalOcrTaskInput;
 const ModifyJustInTimeTranscodeTemplateRequest = models.ModifyJustInTimeTranscodeTemplateRequest;
 const ManageTaskRequest = models.ManageTaskRequest;
+const DescribeAigcApiTokensResponse = models.DescribeAigcApiTokensResponse;
 const EnhanceConfig = models.EnhanceConfig;
 const MediaInputInfo = models.MediaInputInfo;
 const CreateImageSpriteTask2017 = models.CreateImageSpriteTask2017;
@@ -110,7 +111,7 @@ const ResetProcedureTemplateRequest = models.ResetProcedureTemplateRequest;
 const ContentReviewOcrResult = models.ContentReviewOcrResult;
 const ComposeMediaResponse = models.ComposeMediaResponse;
 const RoundPlayInfo = models.RoundPlayInfo;
-const DescribeLicenseUsageDataResponse = models.DescribeLicenseUsageDataResponse;
+const CloneVoiceSyncRequest = models.CloneVoiceSyncRequest;
 const AigcFaceIdentityInfo = models.AigcFaceIdentityInfo;
 const DeleteMPSTemplateRequest = models.DeleteMPSTemplateRequest;
 const DrmStreamingsInfoForUpdate = models.DrmStreamingsInfoForUpdate;
@@ -131,6 +132,7 @@ const QualityEvaluationConfigureInfoForUpdate = models.QualityEvaluationConfigur
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const CreateCDNDomainRequest = models.CreateCDNDomainRequest;
 const VideoConfigureInfoForUpdate = models.VideoConfigureInfoForUpdate;
+const VoiceUpdateFields = models.VoiceUpdateFields;
 const AudioTemplateInfo = models.AudioTemplateInfo;
 const DeleteAigcAdvancedCustomElementRequest = models.DeleteAigcAdvancedCustomElementRequest;
 const CoverConfigureInfo = models.CoverConfigureInfo;
@@ -243,6 +245,7 @@ const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTempl
 const MPSAIAnalysisTemplate = models.MPSAIAnalysisTemplate;
 const AwsPrivateAccess = models.AwsPrivateAccess;
 const EditMediaResponse = models.EditMediaResponse;
+const TextToSpeechAsyncOutputOption = models.TextToSpeechAsyncOutputOption;
 const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplateInfoForUpdate;
 const TaskOutputMediaInfo = models.TaskOutputMediaInfo;
 const ProcessMediaByUrlRequest = models.ProcessMediaByUrlRequest;
@@ -277,6 +280,7 @@ const SuperResolutionInfo = models.SuperResolutionInfo;
 const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
 const EnhanceMediaQualityRequest = models.EnhanceMediaQualityRequest;
 const ExtractBlindWatermarkTask = models.ExtractBlindWatermarkTask;
+const UpdateAigcApiTokenRequest = models.UpdateAigcApiTokenRequest;
 const DescribeImageProcessingTemplatesRequest = models.DescribeImageProcessingTemplatesRequest;
 const AiRecognitionTaskFaceSegmentItem = models.AiRecognitionTaskFaceSegmentItem;
 const ProcessMediaResponse = models.ProcessMediaResponse;
@@ -290,6 +294,7 @@ const DeleteVodDomainRequest = models.DeleteVodDomainRequest;
 const BlurConfigureInfo = models.BlurConfigureInfo;
 const MPSSmartSubtitleTemplateForUpdate = models.MPSSmartSubtitleTemplateForUpdate;
 const ForbidMediaDistributionResponse = models.ForbidMediaDistributionResponse;
+const UpdateVoiceResponse = models.UpdateVoiceResponse;
 const PoliticalAsrReviewTemplateInfoForUpdate = models.PoliticalAsrReviewTemplateInfoForUpdate;
 const WechatMiniProgramPublishTaskInput = models.WechatMiniProgramPublishTaskInput;
 const LLMComprehendTemplateItem = models.LLMComprehendTemplateItem;
@@ -312,6 +317,7 @@ const ModifyAnimatedGraphicsTemplateResponse = models.ModifyAnimatedGraphicsTemp
 const CreateSceneAigcImageTaskResponse = models.CreateSceneAigcImageTaskResponse;
 const AiRecognitionTaskAsrTranslateSegmentItem = models.AiRecognitionTaskAsrTranslateSegmentItem;
 const DeleteCLSTopicResponse = models.DeleteCLSTopicResponse;
+const SceneAigcVideoOutputConfig = models.SceneAigcVideoOutputConfig;
 const LiveRealTimeClipRequest = models.LiveRealTimeClipRequest;
 const DeleteAdaptiveDynamicStreamingTemplateRequest = models.DeleteAdaptiveDynamicStreamingTemplateRequest;
 const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullTextSegmentItem;
@@ -445,6 +451,7 @@ const MediaSubtitleInput = models.MediaSubtitleInput;
 const FileVerifyInfo = models.FileVerifyInfo;
 const DeleteCDNDomainResponse = models.DeleteCDNDomainResponse;
 const PornImageResult = models.PornImageResult;
+const TextToSpeechSyncRequest = models.TextToSpeechSyncRequest;
 const MPSEraseArea = models.MPSEraseArea;
 const ComplexAdaptiveDynamicStreamingTask = models.ComplexAdaptiveDynamicStreamingTask;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
@@ -455,7 +462,7 @@ const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextRe
 const DescribeCLSTopicsResponse = models.DescribeCLSTopicsResponse;
 const ProhibitedOcrReviewTemplateInfo = models.ProhibitedOcrReviewTemplateInfo;
 const MPSSubTaskResult = models.MPSSubTaskResult;
-const HeadTailTemplate = models.HeadTailTemplate;
+const CloneVoiceSyncResponse = models.CloneVoiceSyncResponse;
 const ImportMediaKnowledgeResponse = models.ImportMediaKnowledgeResponse;
 const RestoreMediaResponse = models.RestoreMediaResponse;
 const ImageUnderstandingItem = models.ImageUnderstandingItem;
@@ -484,12 +491,13 @@ const ProcessMediaByUrlResponse = models.ProcessMediaByUrlResponse;
 const EditMediaVideoStream = models.EditMediaVideoStream;
 const ExtractTraceWatermarkTask = models.ExtractTraceWatermarkTask;
 const AiRecognitionTaskSegmentResultOutput = models.AiRecognitionTaskSegmentResultOutput;
+const TextToSpeechSyncResponse = models.TextToSpeechSyncResponse;
 const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
 const MPSSmartSubtitlesTaskInput = models.MPSSmartSubtitlesTaskInput;
 const DeleteContentReviewTemplateResponse = models.DeleteContentReviewTemplateResponse;
 const DescribeReviewTemplatesRequest = models.DescribeReviewTemplatesRequest;
 const CreateSuperPlayerConfigRequest = models.CreateSuperPlayerConfigRequest;
-const MPSAIAnalysisTemplateForUpdate = models.MPSAIAnalysisTemplateForUpdate;
+const DesignVoiceAsyncRequest = models.DesignVoiceAsyncRequest;
 const ImageWatermarkTemplate = models.ImageWatermarkTemplate;
 const AdvancedElementInfo = models.AdvancedElementInfo;
 const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
@@ -502,6 +510,7 @@ const MediaDeleteItem = models.MediaDeleteItem;
 const EnhanceConfigForUpdate = models.EnhanceConfigForUpdate;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
 const PoliticalImageResult = models.PoliticalImageResult;
+const TimeRange = models.TimeRange;
 const AiSamplePerson = models.AiSamplePerson;
 const MediaAdaptiveDynamicStreamingInfo = models.MediaAdaptiveDynamicStreamingInfo;
 const CustomVoiceInfo = models.CustomVoiceInfo;
@@ -552,8 +561,10 @@ const IpFilterPathRule = models.IpFilterPathRule;
 const ComposeMediaTask = models.ComposeMediaTask;
 const HeadTailConfigureInfoForUpdate = models.HeadTailConfigureInfoForUpdate;
 const ImageScale = models.ImageScale;
+const ModifyEventConfigRequest = models.ModifyEventConfigRequest;
 const ModifyJustInTimeTranscodeTemplateResponse = models.ModifyJustInTimeTranscodeTemplateResponse;
 const BeautyEffectItem = models.BeautyEffectItem;
+const TextToSpeechSyncOutputOption = models.TextToSpeechSyncOutputOption;
 const MediaVideoStreamItem = models.MediaVideoStreamItem;
 const ExecuteFunctionResponse = models.ExecuteFunctionResponse;
 const TranscodePlayInfo2017 = models.TranscodePlayInfo2017;
@@ -561,7 +572,7 @@ const SplitMediaTask = models.SplitMediaTask;
 const OthersPrivateAccess = models.OthersPrivateAccess;
 const ComposeMediaTaskInput = models.ComposeMediaTaskInput;
 const ModifyQualityInspectTemplateRequest = models.ModifyQualityInspectTemplateRequest;
-const SceneAigcVideoOutputConfig = models.SceneAigcVideoOutputConfig;
+const DesignVoiceAsyncResponse = models.DesignVoiceAsyncResponse;
 const Authentication = models.Authentication;
 const SceneAigcVideoTask = models.SceneAigcVideoTask;
 const ProcessImageAsyncInputExtendedParameter = models.ProcessImageAsyncInputExtendedParameter;
@@ -605,10 +616,11 @@ const AiReviewTerrorismOcrTaskOutput = models.AiReviewTerrorismOcrTaskOutput;
 const AigcAudioCloneInputFileInfo = models.AigcAudioCloneInputFileInfo;
 const AiAnalysisResult = models.AiAnalysisResult;
 const ReduceMediaBitrateAdaptiveDynamicStreamingResult = models.ReduceMediaBitrateAdaptiveDynamicStreamingResult;
-const ModifyEventConfigRequest = models.ModifyEventConfigRequest;
+const DeleteVoiceResponse = models.DeleteVoiceResponse;
 const BlindWatermarkInput = models.BlindWatermarkInput;
 const DescribeBlindWatermarkTemplatesResponse = models.DescribeBlindWatermarkTemplatesResponse;
 const AttachMediaSubtitlesResponse = models.AttachMediaSubtitlesResponse;
+const TextToSpeechAsyncResponse = models.TextToSpeechAsyncResponse;
 const CreateDomainVerifyRecordResponse = models.CreateDomainVerifyRecordResponse;
 const ExtractCopyRightWatermarkResponse = models.ExtractCopyRightWatermarkResponse;
 const MediaTranscodeInfo = models.MediaTranscodeInfo;
@@ -621,7 +633,7 @@ const ParseStreamingManifestRequest = models.ParseStreamingManifestRequest;
 const ReviewImageResult = models.ReviewImageResult;
 const DeleteSampleSnapshotTemplateResponse = models.DeleteSampleSnapshotTemplateResponse;
 const AiAnalysisTaskTagInput = models.AiAnalysisTaskTagInput;
-const DeleteAigcApiTokenResponse = models.DeleteAigcApiTokenResponse;
+const CloneVoiceAsyncRequest = models.CloneVoiceAsyncRequest;
 const DescribeStorageDetailsResponse = models.DescribeStorageDetailsResponse;
 const PullEventsResponse = models.PullEventsResponse;
 const MediaProcessTaskTranscodeResult = models.MediaProcessTaskTranscodeResult;
@@ -630,6 +642,7 @@ const CreateCLSLogsetResponse = models.CreateCLSLogsetResponse;
 const MediaProcessTaskInput = models.MediaProcessTaskInput;
 const OutputVideoStream = models.OutputVideoStream;
 const ProcedureTemplate = models.ProcedureTemplate;
+const DescribeLicenseUsageDataResponse = models.DescribeLicenseUsageDataResponse;
 const DomainDetailInfo = models.DomainDetailInfo;
 const CreateAigcSubjectOutput = models.CreateAigcSubjectOutput;
 const SemanticsSearchResult = models.SemanticsSearchResult;
@@ -687,6 +700,7 @@ const ProcessMediaByProcedureRequest = models.ProcessMediaByProcedureRequest;
 const RebuildMediaTargetVideoStream = models.RebuildMediaTargetVideoStream;
 const VoiceConfigureInfo = models.VoiceConfigureInfo;
 const MediaTrackItem = models.MediaTrackItem;
+const MPSAIAnalysisTemplateForUpdate = models.MPSAIAnalysisTemplateForUpdate;
 const ClipTask2017 = models.ClipTask2017;
 const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
 const TranscodeTemplate = models.TranscodeTemplate;
@@ -727,6 +741,7 @@ const UserDefineOcrTextReviewTemplateInfo = models.UserDefineOcrTextReviewTempla
 const DescribeVodDomainsResponse = models.DescribeVodDomainsResponse;
 const AdaptiveStreamTemplate = models.AdaptiveStreamTemplate;
 const DeleteAigcAdvancedCustomElementResponse = models.DeleteAigcAdvancedCustomElementResponse;
+const VoiceSettings = models.VoiceSettings;
 const AigcVideoRedrawOutputConfig = models.AigcVideoRedrawOutputConfig;
 const TranscodeTaskInput = models.TranscodeTaskInput;
 const DescribeClientUploadAccelerationUsageDataRequest = models.DescribeClientUploadAccelerationUsageDataRequest;
@@ -848,6 +863,7 @@ const AiRecognitionTaskAsrWordsResultItem = models.AiRecognitionTaskAsrWordsResu
 const CreateQualityInspectTemplateResponse = models.CreateQualityInspectTemplateResponse;
 const RebuildMediaTaskOutput = models.RebuildMediaTaskOutput;
 const EnhanceMediaQualityOutputConfig = models.EnhanceMediaQualityOutputConfig;
+const UpdateVoiceRequest = models.UpdateVoiceRequest;
 const Https = models.Https;
 const AiRecognitionTaskAsrFullTextResultOutputSubtitleItem = models.AiRecognitionTaskAsrFullTextResultOutputSubtitleItem;
 const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
@@ -898,7 +914,8 @@ const CreateProcessImageAsyncTemplateRequest = models.CreateProcessImageAsyncTem
 const CreateCLSLogsetRequest = models.CreateCLSLogsetRequest;
 const ExtractTraceWatermarkRequest = models.ExtractTraceWatermarkRequest;
 const CDNDomainConfig = models.CDNDomainConfig;
-const DescribeAigcApiTokensResponse = models.DescribeAigcApiTokensResponse;
+const DeleteVoiceRequest = models.DeleteVoiceRequest;
+const DeleteAigcApiTokenResponse = models.DeleteAigcApiTokenResponse;
 const ReviewAudioVideoTask = models.ReviewAudioVideoTask;
 const DescribeSnapshotByTimeOffsetTemplatesResponse = models.DescribeSnapshotByTimeOffsetTemplatesResponse;
 const DeleteAigcApiTokenRequest = models.DeleteAigcApiTokenRequest;
@@ -937,6 +954,7 @@ const EditMediaStreamInfo = models.EditMediaStreamInfo;
 const HeuristicCacheConfig = models.HeuristicCacheConfig;
 const DescribeWordSamplesRequest = models.DescribeWordSamplesRequest;
 const ImageCenterCut = models.ImageCenterCut;
+const VoiceInfo = models.VoiceInfo;
 const ModifyAIAnalysisTemplateRequest = models.ModifyAIAnalysisTemplateRequest;
 const CommitUploadResponse = models.CommitUploadResponse;
 const MaxAgeRule = models.MaxAgeRule;
@@ -968,12 +986,13 @@ const DescribeCDNDomainsResponse = models.DescribeCDNDomainsResponse;
 const DomainQUICConfig = models.DomainQUICConfig;
 const MPSSmartErasePrivacyConfig = models.MPSSmartErasePrivacyConfig;
 const CreateRebuildMediaTemplateRequest = models.CreateRebuildMediaTemplateRequest;
+const CloneVoiceAsyncResponse = models.CloneVoiceAsyncResponse;
 const ImageOperation = models.ImageOperation;
 const MediaSubStreamInfoItem = models.MediaSubStreamInfoItem;
 const MosaicConfigureInfoForUpdate = models.MosaicConfigureInfoForUpdate;
 const DescribeWatermarkTemplatesResponse = models.DescribeWatermarkTemplatesResponse;
 const DescribeRoundPlaysResponse = models.DescribeRoundPlaysResponse;
-const UpdateAigcApiTokenRequest = models.UpdateAigcApiTokenRequest;
+const FaceConfigureInfo = models.FaceConfigureInfo;
 const ImageTransform = models.ImageTransform;
 const CreateAnimatedGraphicsTemplateRequest = models.CreateAnimatedGraphicsTemplateRequest;
 const AigcVideoRedrawTaskOutput = models.AigcVideoRedrawTaskOutput;
@@ -983,7 +1002,7 @@ const SPEKEDrm = models.SPEKEDrm;
 const ExecuteFunctionRequest = models.ExecuteFunctionRequest;
 const ModifyAigcQuotaRequest = models.ModifyAigcQuotaRequest;
 const RebuildMediaTask = models.RebuildMediaTask;
-const TimeRange = models.TimeRange;
+const DescribeVoicesResponse = models.DescribeVoicesResponse;
 const ConfirmEventsResponse = models.ConfirmEventsResponse;
 const CreateAigcApiTokenResponse = models.CreateAigcApiTokenResponse;
 const VideoTrackItem = models.VideoTrackItem;
@@ -1028,7 +1047,7 @@ const ImageWatermarkInputForUpdate = models.ImageWatermarkInputForUpdate;
 const ProcessMediaByProcedureResponse = models.ProcessMediaByProcedureResponse;
 const PullUploadResponse = models.PullUploadResponse;
 const RemoveWaterMarkTaskInput = models.RemoveWaterMarkTaskInput;
-const FaceConfigureInfo = models.FaceConfigureInfo;
+const DescribeVoicesRequest = models.DescribeVoicesRequest;
 const AiRecognitionTaskFaceResultOutput = models.AiRecognitionTaskFaceResultOutput;
 const AigcVideoRedrawTaskInputFileInfo = models.AigcVideoRedrawTaskInputFileInfo;
 const PornImgReviewTemplateInfoForUpdate = models.PornImgReviewTemplateInfoForUpdate;
@@ -1082,6 +1101,7 @@ const EnhanceMediaQualityResponse = models.EnhanceMediaQualityResponse;
 const SubtitleFormatsOperation = models.SubtitleFormatsOperation;
 const ThirdPartyDrmInfo = models.ThirdPartyDrmInfo;
 const AiRecognitionTaskSegmentResultInput = models.AiRecognitionTaskSegmentResultInput;
+const TextToSpeechAsyncRequest = models.TextToSpeechAsyncRequest;
 const MediaTrack = models.MediaTrack;
 const FastEditMediaFileInfo = models.FastEditMediaFileInfo;
 const StorageStatData = models.StorageStatData;
@@ -1091,6 +1111,7 @@ const AigcVideoSceneInfo = models.AigcVideoSceneInfo;
 const SceneAigcVideoTaskOutput = models.SceneAigcVideoTaskOutput;
 const QualityInspectResultItem = models.QualityInspectResultItem;
 const MediaOutputInfo = models.MediaOutputInfo;
+const HeadTailTemplate = models.HeadTailTemplate;
 const EditMediaTaskOutput = models.EditMediaTaskOutput;
 const HighlightSegmentItem = models.HighlightSegmentItem;
 const CreateReviewTemplateResponse = models.CreateReviewTemplateResponse;
@@ -1156,14 +1177,14 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set the default storage region. A file will be stored in the default region if no region is specified for file upload.
-     * @param {ModifyDefaultStorageRegionRequest} req
-     * @param {function(string, ModifyDefaultStorageRegionResponse):void} cb
+     * This API is used to initiate a voice cloning task. It generates an exclusive voice based on reference audio. The generated voice can be used for subsequent text to speech. Voice cloning is an asynchronous task. The voice ID and audio audition are generated after task completion.
+     * @param {CloneVoiceAsyncRequest} req
+     * @param {function(string, CloneVoiceAsyncResponse):void} cb
      * @public
      */
-    ModifyDefaultStorageRegion(req, cb) {
-        let resp = new ModifyDefaultStorageRegionResponse();
-        this.request("ModifyDefaultStorageRegion", req, resp, cb);
+    CloneVoiceAsync(req, cb) {
+        let resp = new CloneVoiceAsyncResponse();
+        this.request("CloneVoiceAsync", req, resp, cb);
     }
 
     /**
@@ -1175,6 +1196,19 @@ class VodClient extends AbstractClient {
     ExtractTraceWatermark(req, cb) {
         let resp = new ExtractTraceWatermarkResponse();
         this.request("ExtractTraceWatermark", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a specified voice by voice ID. Deletion is irreversible and the voice cannot be used for subsequent APIs. It only supports deletion of voices for this account. System preset voices cannot be deleted.
+
+Note: Newly designed or cloned voice types cannot be deleted before activation (not found means non-operational). They are activated only after the newly created voice type is used for TTS once.
+     * @param {DeleteVoiceRequest} req
+     * @param {function(string, DeleteVoiceResponse):void} cb
+     * @public
+     */
+    DeleteVoice(req, cb) {
+        let resp = new DeleteVoiceResponse();
+        this.request("DeleteVoice", req, resp, cb);
     }
 
     /**
@@ -1562,6 +1596,17 @@ If the quota is re-enabled after deletion, the amount will be cleared and recalc
     }
 
     /**
+     * Initiate a speech synthesis task to convert text into speech, oriented towards long text scenarios (maximum 200,000 characters), supporting specified timbre and synthesis parameters such as speaking rate, volume, pitch, sampling rate, and output format. Speech synthesis is an asynchronous task, and audio results are generated upon completion.
+     * @param {TextToSpeechAsyncRequest} req
+     * @param {function(string, TextToSpeechAsyncResponse):void} cb
+     * @public
+     */
+    TextToSpeechAsync(req, cb) {
+        let resp = new TextToSpeechAsyncResponse();
+        this.request("TextToSpeechAsync", req, resp, cb);
+    }
+
+    /**
      * Modify the parsing template of a large model
      * @param {ModifyLLMComprehendTemplateRequest} req
      * @param {function(string, ModifyLLMComprehendTemplateResponse):void} cb
@@ -1711,6 +1756,21 @@ Playback statistics only target VOD domains (EdgeOne domain name distribution is
     DescribeCDNStatDetails(req, cb) {
         let resp = new DescribeCDNStatDetailsResponse();
         this.request("DescribeCDNStatDetails", req, resp, cb);
+    }
+
+    /**
+     * Use the media processing capability of the media processing service to trigger media processing for on-demand video.
+
+Video processing tasks initiated by this method:
+Querying the status of tasks and results is still done on the VOD platform. Use [DescribeTaskDetail](https://www.tencentcloud.com/document/product/266/33431?from_cn_redirect=1) or [DescribeTasks](https://www.tencentcloud.com/document/product/266/33430?from_cn_redirect=1) to query tasks.
+2. The amount and bills of related features will be provided on the MPS platform. Before using this feature, start by enabling the Media Processing Service (MPS) in the console. For the activation method, refer to the preliminary operations in the integration guide.
+     * @param {ProcessMediaByMPSRequest} req
+     * @param {function(string, ProcessMediaByMPSResponse):void} cb
+     * @public
+     */
+    ProcessMediaByMPS(req, cb) {
+        let resp = new ProcessMediaByMPSResponse();
+        this.request("ProcessMediaByMPS", req, resp, cb);
     }
 
     /**
@@ -1966,6 +2026,19 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
+     * Query the available timbre list under the current account. It supports filtering by optional conditions such as voice ID, kind, name, gender, age, language, tag, and scenario.
+
+Note: Newly designed or cloned voice types cannot be queried before activation. They are activated only after the newly created voice type is used for TTS once.
+     * @param {DescribeVoicesRequest} req
+     * @param {function(string, DescribeVoicesResponse):void} cb
+     * @public
+     */
+    DescribeVoices(req, cb) {
+        let resp = new DescribeVoicesResponse();
+        this.request("DescribeVoices", req, resp, cb);
+    }
+
+    /**
      * This API is used to query DRM key information.
      * @param {DescribeDrmKeyProviderInfoRequest} req
      * @param {function(string, DescribeDrmKeyProviderInfoResponse):void} cb
@@ -2058,14 +2131,14 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     }
 
     /**
-     * This API is used to modify a custom sampled screencapturing template.
-     * @param {ModifySampleSnapshotTemplateRequest} req
-     * @param {function(string, ModifySampleSnapshotTemplateResponse):void} cb
+     * This API is used to set the default storage region. A file will be stored in the default region if no region is specified for file upload.
+     * @param {ModifyDefaultStorageRegionRequest} req
+     * @param {function(string, ModifyDefaultStorageRegionResponse):void} cb
      * @public
      */
-    ModifySampleSnapshotTemplate(req, cb) {
-        let resp = new ModifySampleSnapshotTemplateResponse();
-        this.request("ModifySampleSnapshotTemplate", req, resp, cb);
+    ModifyDefaultStorageRegion(req, cb) {
+        let resp = new ModifyDefaultStorageRegionResponse();
+        this.request("ModifyDefaultStorageRegion", req, resp, cb);
     }
 
     /**
@@ -2331,6 +2404,17 @@ This API is used to create a player configuration. Up to 100 configurations can 
     }
 
     /**
+     * This API is used to initiate a voice cloning task to clone an exclusive voice based on reference audio. The generated voice can be used for subsequent text to speech.
+     * @param {CloneVoiceSyncRequest} req
+     * @param {function(string, CloneVoiceSyncResponse):void} cb
+     * @public
+     */
+    CloneVoiceSync(req, cb) {
+        let resp = new CloneVoiceSyncResponse();
+        this.request("CloneVoiceSync", req, resp, cb);
+    }
+
+    /**
      * Query current playlist of the round play.
      * @param {DescribeCurrentPlaylistRequest} req
      * @param {function(string, DescribeCurrentPlaylistResponse):void} cb
@@ -2577,18 +2661,14 @@ This API is used to delete a custom audio/video moderation template.
     }
 
     /**
-     * Use the media processing capability of the media processing service to trigger media processing for on-demand video.
-
-Video processing tasks initiated by this method:
-Querying the status of tasks and results is still done on the VOD platform. Use [DescribeTaskDetail](https://www.tencentcloud.com/document/product/266/33431?from_cn_redirect=1) or [DescribeTasks](https://www.tencentcloud.com/document/product/266/33430?from_cn_redirect=1) to query tasks.
-2. The amount and bills of related features will be provided on the MPS platform. Before using this feature, start by enabling the Media Processing Service (MPS) in the console. For the activation method, refer to the preliminary operations in the integration guide.
-     * @param {ProcessMediaByMPSRequest} req
-     * @param {function(string, ProcessMediaByMPSResponse):void} cb
+     * This API is used to initiate a voice design task. It generates a custom voice based on a natural language description. You can also specify a voice profile, such as name, gender, age, language, tag, and scenario. If trial text is attached upon submission, an audio audition is generated after task completion. Voice design is an asynchronous task, and the voice ID is generated after task completion.
+     * @param {DesignVoiceAsyncRequest} req
+     * @param {function(string, DesignVoiceAsyncResponse):void} cb
      * @public
      */
-    ProcessMediaByMPS(req, cb) {
-        let resp = new ProcessMediaByMPSResponse();
-        this.request("ProcessMediaByMPS", req, resp, cb);
+    DesignVoiceAsync(req, cb) {
+        let resp = new DesignVoiceAsyncResponse();
+        this.request("DesignVoiceAsync", req, resp, cb);
     }
 
     /**
@@ -3349,6 +3429,19 @@ Playback key, used to calculate player signature.
     }
 
     /**
+     * This API is used to update the profile of a voice by voice ID, including its name, description, gender, age, language, tags, and scenarios, and returns the complete voice information after the update. Only voices under this account can be updated. System preset voices do not support update.
+
+Note: Newly designed or cloned voice types cannot be updated before activation. They are activated only after the newly created voice type is used for TTS once.
+     * @param {UpdateVoiceRequest} req
+     * @param {function(string, UpdateVoiceResponse):void} cb
+     * @public
+     */
+    UpdateVoice(req, cb) {
+        let resp = new UpdateVoiceResponse();
+        this.request("UpdateVoice", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a user-defined MPS task template.
      * @param {DeleteMPSTemplateRequest} req
      * @param {function(string, DeleteMPSTemplateResponse):void} cb
@@ -3380,6 +3473,28 @@ Playback key, used to calculate player signature.
     CommitUpload(req, cb) {
         let resp = new CommitUploadResponse();
         this.request("CommitUpload", req, resp, cb);
+    }
+
+    /**
+     * Initiate a speech synthesis task to convert text into speech.
+     * @param {TextToSpeechSyncRequest} req
+     * @param {function(string, TextToSpeechSyncResponse):void} cb
+     * @public
+     */
+    TextToSpeechSync(req, cb) {
+        let resp = new TextToSpeechSyncResponse();
+        this.request("TextToSpeechSync", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restore files from ARCHIVE or DEEP ARCHIVE. Files stored in ARCHIVE or DEEP ARCHIVE must be restored before they can be accessed. Restored files are available for a limited period of time.
+     * @param {RestoreMediaRequest} req
+     * @param {function(string, RestoreMediaResponse):void} cb
+     * @public
+     */
+    RestoreMedia(req, cb) {
+        let resp = new RestoreMediaResponse();
+        this.request("RestoreMedia", req, resp, cb);
     }
 
     /**
@@ -3878,14 +3993,14 @@ Playback statistics only target VOD domains (EdgeOne domain name distribution is
     }
 
     /**
-     * This API is used to restore files from ARCHIVE or DEEP ARCHIVE. Files stored in ARCHIVE or DEEP ARCHIVE must be restored before they can be accessed. Restored files are available for a limited period of time.
-     * @param {RestoreMediaRequest} req
-     * @param {function(string, RestoreMediaResponse):void} cb
+     * This API is used to modify a custom sampled screencapturing template.
+     * @param {ModifySampleSnapshotTemplateRequest} req
+     * @param {function(string, ModifySampleSnapshotTemplateResponse):void} cb
      * @public
      */
-    RestoreMedia(req, cb) {
-        let resp = new RestoreMediaResponse();
-        this.request("RestoreMedia", req, resp, cb);
+    ModifySampleSnapshotTemplate(req, cb) {
+        let resp = new ModifySampleSnapshotTemplateResponse();
+        this.request("ModifySampleSnapshotTemplate", req, resp, cb);
     }
 
 

@@ -261,8 +261,10 @@ const MigrateTableItem = models.MigrateTableItem;
 const CreateProxyEndPointResponse = models.CreateProxyEndPointResponse;
 const DescribeSQLExecutionPlanResponse = models.DescribeSQLExecutionPlanResponse;
 const NetAddr = models.NetAddr;
+const DescribeClusterStorageAutoExpandRequest = models.DescribeClusterStorageAutoExpandRequest;
 const DescribeBackupOverviewResponse = models.DescribeBackupOverviewResponse;
 const ReplayInstanceAuditLogRequest = models.ReplayInstanceAuditLogRequest;
+const ModifyClusterLevelRequest = models.ModifyClusterLevelRequest;
 const MigrateDBItem = models.MigrateDBItem;
 const RegionInstanceSpecInfo = models.RegionInstanceSpecInfo;
 const TransferClusterPrepayToPostpayRequest = models.TransferClusterPrepayToPostpayRequest;
@@ -367,7 +369,7 @@ const DescribeLibraDBDataSourceRequest = models.DescribeLibraDBDataSourceRequest
 const ActivateInstanceRequest = models.ActivateInstanceRequest;
 const ExecutionPlanDetail = models.ExecutionPlanDetail;
 const DescribeLibraDBClusterTableMappingResponse = models.DescribeLibraDBClusterTableMappingResponse;
-const DescribeInstanceCLSLogDeliveryRequest = models.DescribeInstanceCLSLogDeliveryRequest;
+const DescribeLibraDBForwardConfigRequest = models.DescribeLibraDBForwardConfigRequest;
 const CynosdbErrorLogItem = models.CynosdbErrorLogItem;
 const ModifyVipVportRequest = models.ModifyVipVportRequest;
 const InstanceAbility = models.InstanceAbility;
@@ -430,6 +432,7 @@ const TradePrice = models.TradePrice;
 const DescribeBinlogConfigRequest = models.DescribeBinlogConfigRequest;
 const IsolateLibraDBClusterRequest = models.IsolateLibraDBClusterRequest;
 const CreateAuditRuleTemplateRequest = models.CreateAuditRuleTemplateRequest;
+const ModifyClusterLevelResponse = models.ModifyClusterLevelResponse;
 const PauseServerlessRequest = models.PauseServerlessRequest;
 const DescribeBinlogListByVaultResponse = models.DescribeBinlogListByVaultResponse;
 const CynosdbCluster = models.CynosdbCluster;
@@ -584,10 +587,11 @@ const LibraDBClusterSet = models.LibraDBClusterSet;
 const DeleteClusterSaveBackupRequest = models.DeleteClusterSaveBackupRequest;
 const DescribeSlaveZonesRequest = models.DescribeSlaveZonesRequest;
 const RenewLibraDBClustersResponse = models.RenewLibraDBClustersResponse;
+const ReplayInstanceAuditLogResponse = models.ReplayInstanceAuditLogResponse;
 const BillingResourceInfo = models.BillingResourceInfo;
 const InstanceNameWeight = models.InstanceNameWeight;
 const DescribeBackupDownloadRestrictionResponse = models.DescribeBackupDownloadRestrictionResponse;
-const DescribeLibraDBForwardConfigRequest = models.DescribeLibraDBForwardConfigRequest;
+const DescribeInstanceCLSLogDeliveryRequest = models.DescribeInstanceCLSLogDeliveryRequest;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const IsolateLibraDBClusterResponse = models.IsolateLibraDBClusterResponse;
 const CreateAuditRuleTemplateResponse = models.CreateAuditRuleTemplateResponse;
@@ -617,7 +621,7 @@ const ModifiableInfo = models.ModifiableInfo;
 const TaskMaintainInfo = models.TaskMaintainInfo;
 const DescribeServerlessStrategyRequest = models.DescribeServerlessStrategyRequest;
 const TablePrivileges = models.TablePrivileges;
-const ReplayInstanceAuditLogResponse = models.ReplayInstanceAuditLogResponse;
+const DescribeClusterStorageAutoExpandResponse = models.DescribeClusterStorageAutoExpandResponse;
 const DescribeBinlogSaveDaysResponse = models.DescribeBinlogSaveDaysResponse;
 const ModifyLibraDBClusterProjectRequest = models.ModifyLibraDBClusterProjectRequest;
 const DeleteBackupRequest = models.DeleteBackupRequest;
@@ -2065,6 +2069,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * Modify cluster
+     * @param {ModifyClusterLevelRequest} req
+     * @param {function(string, ModifyClusterLevelResponse):void} cb
+     * @public
+     */
+    ModifyClusterLevel(req, cb) {
+        let resp = new ModifyClusterLevelResponse();
+        this.request("ModifyClusterLevel", req, resp, cb);
+    }
+
+    /**
      * This API is used to bind resource packages to a cluster.
      * @param {BindClusterResourcePackagesRequest} req
      * @param {function(string, BindClusterResourcePackagesResponse):void} cb
@@ -2359,6 +2374,17 @@ class CynosdbClient extends AbstractClient {
     SetRenewFlag(req, cb) {
         let resp = new SetRenewFlagResponse();
         this.request("SetRenewFlag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the automated storage expansion configuration.
+     * @param {DescribeClusterStorageAutoExpandRequest} req
+     * @param {function(string, DescribeClusterStorageAutoExpandResponse):void} cb
+     * @public
+     */
+    DescribeClusterStorageAutoExpand(req, cb) {
+        let resp = new DescribeClusterStorageAutoExpandResponse();
+        this.request("DescribeClusterStorageAutoExpand", req, resp, cb);
     }
 
     /**

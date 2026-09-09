@@ -25905,7 +25905,7 @@ class TextToSpeechSyncRequest extends  AbstractModel {
         this.LanguageBoost = null;
 
         /**
-         * <p>Output parameters.</p><p>Specifies the output format, etc. The default output audio format is base64.</p>
+         * <p>Output parameters.</p><p>Specifies the output format, etc. The default output audio format is URL.</p>
          * @type {TextToSpeechSyncOutputOption || null}
          */
         this.Output = null;

@@ -48,6 +48,7 @@ const DeleteCloudSliceTaskRequest = models.DeleteCloudSliceTaskRequest;
 const ScaleInfomation = models.ScaleInfomation;
 const AgentParams = models.AgentParams;
 const ControlAIConversationResponse = models.ControlAIConversationResponse;
+const TransparentData = models.TransparentData;
 const StopAITranscriptionRequest = models.StopAITranscriptionRequest;
 const VideoEncodeParams = models.VideoEncodeParams;
 const UpdateAIConversationResponse = models.UpdateAIConversationResponse;

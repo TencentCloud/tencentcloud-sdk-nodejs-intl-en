@@ -593,9 +593,10 @@ Input rule: when the Audio field is provided, the system will not accept user-su
 
         /**
          * Defaults to 0. valid at that time only when Interrupt is false.
--0 means drop messages with Interrupt set to false during the occurrence of interaction.
--1 indicates that during the occurrence of an interaction, messages with Interrupt as false will not be dropped but cached, waiting to be processed when finished.
-
+<ul>
+<li>0 means drop messages with Interrupt set to false during the occurrence of interaction.</li>
+<li>1 indicates that during the occurrence of an interaction, messages with Interrupt as false will not be dropped but cached, waiting to be processed when finished.</li>
+</ul>
 Note: if DropMode is 1, multiple messages can be cached. if an interruption occurs subsequently, the cache of messages will be cleared.
          * @type {number || null}
          */
@@ -605,9 +606,10 @@ Note: if DropMode is 1, multiple messages can be cached. if an interruption occu
          * The message priority of ServerPushText. 0 means interruptible, 1 means not interruptible. currently only support 0. if you need to input 1, submit a ticket to contact us to grant permission.
 Note: after receiving a message with Priority=1, any other messages will be ignored (including messages with Priority=1) until the message processing of Priority=1 is complete. this field can be used together with the Interrupt and DropMode fields.
 Example:.
--Priority=1, Interrupt=true, interrupts existing interaction and broadcasts immediately. the broadcast will not be interrupted during the process.
--Priority=1, Interrupt=false, DropMode=1. wait for the current interaction to complete before broadcasting. the broadcast will not be interrupted during the process.
-
+<ul>
+<li>Priority=1, Interrupt=true, interrupts existing interaction and broadcasts immediately. the broadcast will not be interrupted during the process.</li>
+<li>Priority=1, Interrupt=false, DropMode=1. wait for the current interaction to complete before broadcasting. the broadcast will not be interrupted during the process.</li>
+</ul>
          * @type {number || null}
          */
         this.Priority = null;
@@ -1914,6 +1916,34 @@ class ControlAIConversationResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Information passed through to the client
+ * @class
+ */
+class TransparentData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information passed through to the client
+         * @type {string || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
 
     }
 }
@@ -8293,6 +8323,12 @@ class ControlAIConversationRequest extends  AbstractModel {
          */
         this.InvokeLLM = null;
 
+        /**
+         * Information passed through to the client
+         * @type {TransparentData || null}
+         */
+        this.TransparentData = null;
+
     }
 
     /**
@@ -8315,6 +8351,12 @@ class ControlAIConversationRequest extends  AbstractModel {
             let obj = new InvokeLLM();
             obj.deserialize(params.InvokeLLM)
             this.InvokeLLM = obj;
+        }
+
+        if (params.TransparentData) {
+            let obj = new TransparentData();
+            obj.deserialize(params.TransparentData)
+            this.TransparentData = obj;
         }
 
     }
@@ -11168,6 +11210,7 @@ module.exports = {
     ScaleInfomation: ScaleInfomation,
     AgentParams: AgentParams,
     ControlAIConversationResponse: ControlAIConversationResponse,
+    TransparentData: TransparentData,
     StopAITranscriptionRequest: StopAITranscriptionRequest,
     VideoEncodeParams: VideoEncodeParams,
     UpdateAIConversationResponse: UpdateAIConversationResponse,

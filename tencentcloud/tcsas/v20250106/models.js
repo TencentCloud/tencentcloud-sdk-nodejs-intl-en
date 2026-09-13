@@ -331,7 +331,7 @@ class DescribeMNPRetentionDataResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RetentionData> || null}
          */
@@ -456,7 +456,7 @@ class ModifyTeamResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data.
+         * <p>Response data.</p>
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -558,6 +558,169 @@ class ConfigureMNPPreviewResponse extends  AbstractModel {
             this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Mini game approval information
+ * @class
+ */
+class DescribeMNGVersionAuditInfoResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Approval number.</p>
+         * @type {string || null}
+         */
+        this.AuditNo = null;
+
+        /**
+         * <p>Mini program appid.</p>
+         * @type {string || null}
+         */
+        this.MNPId = null;
+
+        /**
+         * <p>Mini program name.</p>
+         * @type {string || null}
+         */
+        this.MNPName = null;
+
+        /**
+         * <p>Mini program icon.</p>
+         * @type {string || null}
+         */
+        this.MNPIcon = null;
+
+        /**
+         * <p>Mini program category.</p>
+         * @type {string || null}
+         */
+        this.MNPType = null;
+
+        /**
+         * <p>Introduction.</p>
+         * @type {string || null}
+         */
+        this.MNPIntro = null;
+
+        /**
+         * <p>Mini program version.</p>
+         * @type {string || null}
+         */
+        this.MNPVersion = null;
+
+        /**
+         * <p>Version description.</p>
+         * @type {string || null}
+         */
+        this.MNPVersionIntro = null;
+
+        /**
+         * <p>Applicant.</p>
+         * @type {string || null}
+         */
+        this.ApplyUser = null;
+
+        /**
+         * <p>Application time.</p>
+         * @type {string || null}
+         */
+        this.ApplyTime = null;
+
+        /**
+         * <p>Approver.</p>
+         * @type {string || null}
+         */
+        this.AuditUser = null;
+
+        /**
+         * <p>Approval time.</p>
+         * @type {string || null}
+         */
+        this.AuditTime = null;
+
+        /**
+         * <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
+         * @type {number || null}
+         */
+        this.AuditStatus = null;
+
+        /**
+         * <p>Number of associated superapps.</p>
+         * @type {number || null}
+         */
+        this.MNPRelAppCount = null;
+
+        /**
+         * <p>Age rating information.</p>
+         * @type {Array.<AgeRatingItem> || null}
+         */
+        this.AgeRatings = null;
+
+        /**
+         * <p>Superapp approval information.</p>
+         * @type {Array.<DescribeMNGAuditListAppInfoResp> || null}
+         */
+        this.AuditAppList = null;
+
+        /**
+         * <p>Mini program version ID.</p>
+         * @type {number || null}
+         */
+        this.MNPVersionId = null;
+
+        /**
+         * <p>Whether it is an auto approval. Valid values: 0 (No), 1 (Yes).</p>
+         * @type {number || null}
+         */
+        this.IsAutoAudit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuditNo = 'AuditNo' in params ? params.AuditNo : null;
+        this.MNPId = 'MNPId' in params ? params.MNPId : null;
+        this.MNPName = 'MNPName' in params ? params.MNPName : null;
+        this.MNPIcon = 'MNPIcon' in params ? params.MNPIcon : null;
+        this.MNPType = 'MNPType' in params ? params.MNPType : null;
+        this.MNPIntro = 'MNPIntro' in params ? params.MNPIntro : null;
+        this.MNPVersion = 'MNPVersion' in params ? params.MNPVersion : null;
+        this.MNPVersionIntro = 'MNPVersionIntro' in params ? params.MNPVersionIntro : null;
+        this.ApplyUser = 'ApplyUser' in params ? params.ApplyUser : null;
+        this.ApplyTime = 'ApplyTime' in params ? params.ApplyTime : null;
+        this.AuditUser = 'AuditUser' in params ? params.AuditUser : null;
+        this.AuditTime = 'AuditTime' in params ? params.AuditTime : null;
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.MNPRelAppCount = 'MNPRelAppCount' in params ? params.MNPRelAppCount : null;
+
+        if (params.AgeRatings) {
+            this.AgeRatings = new Array();
+            for (let z in params.AgeRatings) {
+                let obj = new AgeRatingItem();
+                obj.deserialize(params.AgeRatings[z]);
+                this.AgeRatings.push(obj);
+            }
+        }
+
+        if (params.AuditAppList) {
+            this.AuditAppList = new Array();
+            for (let z in params.AuditAppList) {
+                let obj = new DescribeMNGAuditListAppInfoResp();
+                obj.deserialize(params.AuditAppList[z]);
+                this.AuditAppList.push(obj);
+            }
+        }
+        this.MNPVersionId = 'MNPVersionId' in params ? params.MNPVersionId : null;
+        this.IsAutoAudit = 'IsAutoAudit' in params ? params.IsAutoAudit : null;
 
     }
 }
@@ -1238,7 +1401,7 @@ class DescribeGlobalOverviewReportDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -2112,6 +2275,48 @@ class ModifyMNGDomainRequest extends  AbstractModel {
 }
 
 /**
+ * Superapp approval information
+ * @class
+ */
+class DescribeMNGAuditListAppInfoResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Superapp ID.</p>
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * <p>Superapp icon</p>
+         * @type {string || null}
+         */
+        this.ApplicationIcon = null;
+
+        /**
+         * <p>Superapp name.</p>
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationIcon = 'ApplicationIcon' in params ? params.ApplicationIcon : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+
+    }
+}
+
+/**
  * CreateGlobalDomainACL response structure.
  * @class
  */
@@ -2828,6 +3033,46 @@ class DescribeMNGAllStageVersionsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeMNGVersionAuditDetail response structure.
+ * @class
+ */
+class DescribeMNGVersionAuditDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Response data.</p>
+         * @type {DescribeMNGVersionAuditDetailResp || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new DescribeMNGVersionAuditDetailResp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Response for querying the list of callable sensitive APIs of a mini program.
  * @class
  */
@@ -3036,84 +3281,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * List data for querying callable sensitive APIs of a mini game.
+ * Request parameters for creating a domain.
  * @class
  */
-class DescribeMNGSensitiveAPIPermissionListData extends  AbstractModel {
+class CreateDomainParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>API ID.</p>
-         * @type {string || null}
+         * Array of domain URLs.
+         * @type {Array.<string> || null}
          */
-        this.APIId = null;
+        this.DomainUrlList = null;
 
         /**
-         * <p>API name.</p>
-         * @type {string || null}
-         */
-        this.APIName = null;
-
-        /**
-         * <p>API method.</p>
-         * @type {string || null}
-         */
-        this.APIMethod = null;
-
-        /**
-         * <p>API status.</p>
+         * Domain type. Valid values: 1: Request domain; 2: Business domain; 3: Socket domain; 4: File upload; 5: File download. 
          * @type {number || null}
          */
-        this.APIStatus = null;
-
-        /**
-         * <p>API request status.</p>
-         * @type {number || null}
-         */
-        this.APIApplyStatus = null;
-
-        /**
-         * <p>Reason for rejection.</p>
-         * @type {string || null}
-         */
-        this.RejectReason = null;
-
-        /**
-         * <p>Approval number.</p>
-         * @type {string || null}
-         */
-        this.ApprovalNo = null;
-
-        /**
-         * <p>Superapp ID.</p>
-         * @type {string || null}
-         */
-        this.ApplicationId = null;
-
-        /**
-         * <p>Superapp icon.</p>
-         * @type {string || null}
-         */
-        this.ApplicationIcon = null;
-
-        /**
-         * <p>Superapp name.</p>
-         * @type {string || null}
-         */
-        this.ApplicationName = null;
-
-        /**
-         * <p>API type. Valid values: 1: System; 2: Custom.</p>
-         * @type {number || null}
-         */
-        this.APIType = null;
-
-        /**
-         * <p>API feature description.</p>
-         * @type {string || null}
-         */
-        this.APIDesc = null;
+        this.DomainType = null;
 
     }
 
@@ -3124,18 +3309,8 @@ class DescribeMNGSensitiveAPIPermissionListData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.APIId = 'APIId' in params ? params.APIId : null;
-        this.APIName = 'APIName' in params ? params.APIName : null;
-        this.APIMethod = 'APIMethod' in params ? params.APIMethod : null;
-        this.APIStatus = 'APIStatus' in params ? params.APIStatus : null;
-        this.APIApplyStatus = 'APIApplyStatus' in params ? params.APIApplyStatus : null;
-        this.RejectReason = 'RejectReason' in params ? params.RejectReason : null;
-        this.ApprovalNo = 'ApprovalNo' in params ? params.ApprovalNo : null;
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.ApplicationIcon = 'ApplicationIcon' in params ? params.ApplicationIcon : null;
-        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
-        this.APIType = 'APIType' in params ? params.APIType : null;
-        this.APIDesc = 'APIDesc' in params ? params.APIDesc : null;
+        this.DomainUrlList = 'DomainUrlList' in params ? params.DomainUrlList : null;
+        this.DomainType = 'DomainType' in params ? params.DomainType : null;
 
     }
 }
@@ -3149,7 +3324,7 @@ class DescribeMNPAdvertisingDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MAUDetailData> || null}
          */
@@ -3434,13 +3609,13 @@ class DescribeTeamRequest extends  AbstractModel {
         super();
 
         /**
-         * Team ID.
+         * Team ID
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Platform ID.
+         * Platform ID
          * @type {string || null}
          */
         this.PlatformId = null;
@@ -3562,6 +3737,41 @@ class DescribeMNGOfflinePackageURLRequest extends  AbstractModel {
         }
         this.MNPId = 'MNPId' in params ? params.MNPId : null;
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
+
+    }
+}
+
+/**
+ * DescribeMNGVersionAuditDetail request structure.
+ * @class
+ */
+class DescribeMNGVersionAuditDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Platform ID.</p>
+         * @type {string || null}
+         */
+        this.PlatformId = null;
+
+        /**
+         * <p>Approval number.</p>
+         * @type {string || null}
+         */
+        this.AuditNo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
+        this.AuditNo = 'AuditNo' in params ? params.AuditNo : null;
 
     }
 }
@@ -3932,7 +4142,7 @@ class DescribePaymentDataDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<PaymentDetail> || null}
          */
@@ -3968,24 +4178,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Request parameters for creating a domain.
+ * Paginated mini program approval list.
  * @class
  */
-class CreateDomainParam extends  AbstractModel {
+class DescribeMNPApprovalListResp extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Array of domain URLs.
-         * @type {Array.<string> || null}
-         */
-        this.DomainUrlList = null;
-
-        /**
-         * Domain type. Valid values: 1: Request domain; 2: Business domain; 3: Socket domain; 4: File upload; 5: File download. 
+         * Total number of entries.
          * @type {number || null}
          */
-        this.DomainType = null;
+        this.TotalCount = null;
+
+        /**
+         * List data.
+         * @type {Array.<DescribeMNPApprovalListData> || null}
+         */
+        this.DataList = null;
 
     }
 
@@ -3996,8 +4206,16 @@ class CreateDomainParam extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainUrlList = 'DomainUrlList' in params ? params.DomainUrlList : null;
-        this.DomainType = 'DomainType' in params ? params.DomainType : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DataList) {
+            this.DataList = new Array();
+            for (let z in params.DataList) {
+                let obj = new DescribeMNPApprovalListData();
+                obj.deserialize(params.DataList[z]);
+                this.DataList.push(obj);
+            }
+        }
 
     }
 }
@@ -4011,7 +4229,7 @@ class DescribeMNPAccessAnalysisOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AccessAnalysisOverview || null}
          */
@@ -4551,6 +4769,48 @@ class CreateMNPApprovalResp extends  AbstractModel {
 }
 
 /**
+ * DescribeMNGVersion request structure.
+ * @class
+ */
+class DescribeMNGVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Task ID returned by the CreateMNPVersion API.</p>
+         * @type {string || null}
+         */
+        this.BusinessId = null;
+
+        /**
+         * <p>Platform ID.</p>
+         * @type {string || null}
+         */
+        this.PlatformId = null;
+
+        /**
+         * <p>CICD ID</p>
+         * @type {string || null}
+         */
+        this.PipelineId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BusinessId = 'BusinessId' in params ? params.BusinessId : null;
+        this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
+        this.PipelineId = 'PipelineId' in params ? params.PipelineId : null;
+
+    }
+}
+
+/**
  * Response for querying superapp configuration information.
  * @class
  */
@@ -4812,7 +5072,7 @@ class DescribeMNGMAULineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MNGMAULineChartData> || null}
          */
@@ -5110,7 +5370,7 @@ class DescribeMNGMAUDataDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MAUDetail> || null}
          */
@@ -5229,6 +5489,55 @@ class DescribeTeamMemberListPageResp extends  AbstractModel {
 }
 
 /**
+ * DescribeMNGVersionAuditList request structure.
+ * @class
+ */
+class DescribeMNGVersionAuditListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Pagination offset.</p>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * <p>Pagination count</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <p>Platform ID.</p>
+         * @type {string || null}
+         */
+        this.PlatformId = null;
+
+        /**
+         * <p>Mini game appid.</p>
+         * @type {string || null}
+         */
+        this.MNPId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
+        this.MNPId = 'MNPId' in params ? params.MNPId : null;
+
+    }
+}
+
+/**
  * DescribePaymentDataOverview response structure.
  * @class
  */
@@ -5237,7 +5546,7 @@ class DescribePaymentDataOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MNPPaymentOverview || null}
          */
@@ -5418,7 +5727,7 @@ class DescribeMNGAdvertisingOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AnalysisAdvertOverview || null}
          */
@@ -6600,7 +6909,7 @@ class DescribeMNGMAUMonthlyComparisonMetricCardResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page.
+         * Response data.
          * @type {MAUIndicatorCard || null}
          */
         this.Data = null;
@@ -6681,7 +6990,7 @@ class DescribeGlobalOverviewDataSummaryResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AccessAnalysisOverview || null}
          */
@@ -7074,7 +7383,7 @@ class DescribeTeamListResponse extends  AbstractModel {
         super();
 
         /**
-         * Response data.
+         * <p>Response data.</p>
          * @type {DescribeTeamPageResp || null}
          */
         this.Data = null;
@@ -7467,7 +7776,7 @@ class DescribeMNGAccessAnalysisOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AccessAnalysisOverview || null}
          */
@@ -8469,7 +8778,7 @@ class DescribeMNPReportDataLineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -8610,30 +8919,30 @@ class DescribeMNPSensitiveAPIPermissionListData extends  AbstractModel {
 }
 
 /**
- * DescribeMNGVersion request structure.
+ * Team admin information.
  * @class
  */
-class DescribeMNGVersionRequest extends  AbstractModel {
+class TeamAdminUserInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Task ID returned by the CreateMNPVersion API.</p>
+         * <p>Admin user ID.</p>
          * @type {string || null}
          */
-        this.BusinessId = null;
+        this.AdminUserId = null;
 
         /**
-         * <p>Platform ID.</p>
+         * <p>Admin user account.</p>
          * @type {string || null}
          */
-        this.PlatformId = null;
+        this.AdminUserAccount = null;
 
         /**
-         * <p>CICD ID</p>
+         * <p>Admin username.</p>
          * @type {string || null}
          */
-        this.PipelineId = null;
+        this.AdminUserName = null;
 
     }
 
@@ -8644,9 +8953,52 @@ class DescribeMNGVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BusinessId = 'BusinessId' in params ? params.BusinessId : null;
-        this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
-        this.PipelineId = 'PipelineId' in params ? params.PipelineId : null;
+        this.AdminUserId = 'AdminUserId' in params ? params.AdminUserId : null;
+        this.AdminUserAccount = 'AdminUserAccount' in params ? params.AdminUserAccount : null;
+        this.AdminUserName = 'AdminUserName' in params ? params.AdminUserName : null;
+
+    }
+}
+
+/**
+ * Mini game approval information
+ * @class
+ */
+class DescribeMNGVersionAuditListResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Total number of entries.</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * <p>List data.</p>
+         * @type {Array.<DescribeMNGVersionAuditInfoResp> || null}
+         */
+        this.DataList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DataList) {
+            this.DataList = new Array();
+            for (let z in params.DataList) {
+                let obj = new DescribeMNGVersionAuditInfoResp();
+                obj.deserialize(params.DataList[z]);
+                this.DataList.push(obj);
+            }
+        }
 
     }
 }
@@ -9133,7 +9485,7 @@ class DescribeMNGAccessAnalysisDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AccessAnalysisDetail> || null}
          */
@@ -9220,6 +9572,176 @@ class QueryMNGOnlineVersionResp extends  AbstractModel {
         this.MNPVersionId = 'MNPVersionId' in params ? params.MNPVersionId : null;
         this.MNPVersionNote = 'MNPVersionNote' in params ? params.MNPVersionNote : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * Mini game approval application details
+ * @class
+ */
+class DescribeMNGVersionAuditDetailResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Approval number.</p>
+         * @type {string || null}
+         */
+        this.AuditNo = null;
+
+        /**
+         * <p>Mini program or mini game appid.</p>
+         * @type {string || null}
+         */
+        this.MNPId = null;
+
+        /**
+         * <p>Mini program or mini game name.</p>
+         * @type {string || null}
+         */
+        this.MNPName = null;
+
+        /**
+         * <p>Mini program icon.</p>
+         * @type {string || null}
+         */
+        this.MNPIcon = null;
+
+        /**
+         * <p>Mini program category.</p>
+         * @type {string || null}
+         */
+        this.MNPType = null;
+
+        /**
+         * <p>Mini program introduction.</p>
+         * @type {string || null}
+         */
+        this.MNPIntro = null;
+
+        /**
+         * <p>Mini program version.</p>
+         * @type {string || null}
+         */
+        this.MNPVersion = null;
+
+        /**
+         * <p>Mini program version introduction.</p>
+         * @type {string || null}
+         */
+        this.MNPVersionIntro = null;
+
+        /**
+         * <p>Applicant.</p>
+         * @type {string || null}
+         */
+        this.ApplyUser = null;
+
+        /**
+         * <p>Application time.</p>
+         * @type {string || null}
+         */
+        this.ApplyTime = null;
+
+        /**
+         * <p>Approver.</p>
+         * @type {string || null}
+         */
+        this.AuditUser = null;
+
+        /**
+         * <p>Creation time.</p>
+         * @type {string || null}
+         */
+        this.AuditTime = null;
+
+        /**
+         * <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
+         * @type {number || null}
+         */
+        this.AuditStatus = null;
+
+        /**
+         * <p>Number of associated superapps.</p>
+         * @type {number || null}
+         */
+        this.MNPRelAppCount = null;
+
+        /**
+         * <p>Information encoded in the mini program QR code.</p>
+         * @type {string || null}
+         */
+        this.QRCodeContent = null;
+
+        /**
+         * <p>Approval note.</p>
+         * @type {string || null}
+         */
+        this.AuditNote = null;
+
+        /**
+         * <p>Mini program version ID.</p>
+         * @type {number || null}
+         */
+        this.MNPVersionId = null;
+
+        /**
+         * <p>Age rating information.</p>
+         * @type {Array.<AgeRatingItem> || null}
+         */
+        this.AgeRatings = null;
+
+        /**
+         * <p>Superapp approval information.</p>
+         * @type {Array.<DescribeMNGAuditDetailAppAuditInfo> || null}
+         */
+        this.AppAuditList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuditNo = 'AuditNo' in params ? params.AuditNo : null;
+        this.MNPId = 'MNPId' in params ? params.MNPId : null;
+        this.MNPName = 'MNPName' in params ? params.MNPName : null;
+        this.MNPIcon = 'MNPIcon' in params ? params.MNPIcon : null;
+        this.MNPType = 'MNPType' in params ? params.MNPType : null;
+        this.MNPIntro = 'MNPIntro' in params ? params.MNPIntro : null;
+        this.MNPVersion = 'MNPVersion' in params ? params.MNPVersion : null;
+        this.MNPVersionIntro = 'MNPVersionIntro' in params ? params.MNPVersionIntro : null;
+        this.ApplyUser = 'ApplyUser' in params ? params.ApplyUser : null;
+        this.ApplyTime = 'ApplyTime' in params ? params.ApplyTime : null;
+        this.AuditUser = 'AuditUser' in params ? params.AuditUser : null;
+        this.AuditTime = 'AuditTime' in params ? params.AuditTime : null;
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.MNPRelAppCount = 'MNPRelAppCount' in params ? params.MNPRelAppCount : null;
+        this.QRCodeContent = 'QRCodeContent' in params ? params.QRCodeContent : null;
+        this.AuditNote = 'AuditNote' in params ? params.AuditNote : null;
+        this.MNPVersionId = 'MNPVersionId' in params ? params.MNPVersionId : null;
+
+        if (params.AgeRatings) {
+            this.AgeRatings = new Array();
+            for (let z in params.AgeRatings) {
+                let obj = new AgeRatingItem();
+                obj.deserialize(params.AgeRatings[z]);
+                this.AgeRatings.push(obj);
+            }
+        }
+
+        if (params.AppAuditList) {
+            this.AppAuditList = new Array();
+            for (let z in params.AppAuditList) {
+                let obj = new DescribeMNGAuditDetailAppAuditInfo();
+                obj.deserialize(params.AppAuditList[z]);
+                this.AppAuditList.push(obj);
+            }
+        }
 
     }
 }
@@ -9365,7 +9887,7 @@ class DescribeMNGAccessAnalysisLineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -9547,7 +10069,7 @@ class DescribeMNGPaymentRetentionAnalysisResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<PaymentActiveRetention> || null}
          */
@@ -9803,48 +10325,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeUserList request structure.
+ * DescribeMNPPaymentApprovalInfo response structure.
  * @class
  */
-class DescribeUserListRequest extends  AbstractModel {
+class DescribeMNPPaymentApprovalInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Pagination offset. 
-         * @type {number || null}
+         * <p>Queries the approval status of mini program payment activation.</p>
+         * @type {ApplyPaymentOpenDetailRes || null}
          */
-        this.Offset = null;
+        this.Data = null;
 
         /**
-         * Number of entries per page.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Platform ID.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.PlatformId = null;
-
-        /**
-         * Search keyword (username or account).
-         * @type {string || null}
-         */
-        this.Keyword = null;
-
-        /**
-         * User account type. Valid values: 1: Super admin; 2: Platform admin; 3: Regular member. If left empty, all types are returned. 
-         * @type {number || null}
-         */
-        this.AccountType = null;
-
-        /**
-         * Team ID. If left empty, all teams are returned.
-         * @type {string || null}
-         */
-        this.TeamId = null;
+        this.RequestId = null;
 
     }
 
@@ -9855,12 +10353,55 @@ class DescribeUserListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Data) {
+            let obj = new ApplyPaymentOpenDetailRes();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UnbindMNPPaymentMerchant request structure.
+ * @class
+ */
+class UnbindMNPPaymentMerchantRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Platform ID.</p>
+         * @type {string || null}
+         */
+        this.PlatformId = null;
+
+        /**
+         * <p>Mini program team ID.</p>
+         * @type {string || null}
+         */
+        this.TeamId = null;
+
+        /**
+         * <p>Primary key ID, obtained from the API response of approving the merchant binding of a mini program team.</p>
+         * @type {string || null}
+         */
+        this.ID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
-        this.Keyword = 'Keyword' in params ? params.Keyword : null;
-        this.AccountType = 'AccountType' in params ? params.AccountType : null;
         this.TeamId = 'TeamId' in params ? params.TeamId : null;
+        this.ID = 'ID' in params ? params.ID : null;
 
     }
 }
@@ -10074,7 +10615,7 @@ class DescribeMNPMAUDataDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MAUDetail> || null}
          */
@@ -10256,7 +10797,7 @@ class DescribeMNGPaymentReportDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MNGPaymentOverview> || null}
          */
@@ -10287,6 +10828,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Superapp approval information
+ * @class
+ */
+class DescribeMNPAuditListAppInfoResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Superapp ID.</p>
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * <p>Superapp icon</p>
+         * @type {string || null}
+         */
+        this.ApplicationIcon = null;
+
+        /**
+         * <p>Superapp name.</p>
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationIcon = 'ApplicationIcon' in params ? params.ApplicationIcon : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
 
     }
 }
@@ -10880,7 +11463,7 @@ class DescribeMNPMAUMetricCardResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page.
+         * Response data.
          * @type {MAUIndicatorCard || null}
          */
         this.Data = null;
@@ -11011,7 +11594,7 @@ class DescribeAPPDataOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {APPOverview || null}
          */
@@ -11039,6 +11622,55 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMNPVersionAuditList request structure.
+ * @class
+ */
+class DescribeMNPVersionAuditListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Pagination offset.</p>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * <p>Pagination count</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <p>Platform ID.</p>
+         * @type {string || null}
+         */
+        this.PlatformId = null;
+
+        /**
+         * <p>Mini program appid.</p>
+         * @type {string || null}
+         */
+        this.MNPId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
+        this.MNPId = 'MNPId' in params ? params.MNPId : null;
 
     }
 }
@@ -11084,7 +11716,47 @@ class CreateMNGSensitiveAPIPermissionApprovalResponse extends  AbstractModel {
 }
 
 /**
- * MAU line chart data.
+ * DescribeMNPVersionAuditDetail response structure.
+ * @class
+ */
+class DescribeMNPVersionAuditDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Response data.</p>
+         * @type {DescribeMNPVersionAuditDetailResp || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new DescribeMNPVersionAuditDetailResp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Time-series MAU data.
  * @class
  */
 class MAUChartData extends  AbstractModel {
@@ -11197,6 +11869,46 @@ class CreateApplicationResponse extends  AbstractModel {
 
         if (params.Data) {
             let obj = new ResourceIdStringInfo();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMNPVersionAuditList response structure.
+ * @class
+ */
+class DescribeMNPVersionAuditListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Response data.</p>
+         * @type {DescribeMNPVersionAuditListResp || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new DescribeMNPVersionAuditListResp();
             obj.deserialize(params.Data)
             this.Data = obj;
         }
@@ -11597,7 +12309,7 @@ class DescribePaymentDataLineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -12735,7 +13447,7 @@ class DescribeAPPDataDetailLineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -12854,7 +13566,7 @@ class DescribeRoleListResp extends  AbstractModel {
 }
 
 /**
- * Team list information.
+ * Information of teams.
  * @class
  */
 class DescribeTeamListInfoResp extends  AbstractModel {
@@ -12862,70 +13574,76 @@ class DescribeTeamListInfoResp extends  AbstractModel {
         super();
 
         /**
-         * Team ID.
+         * <p>Team ID.</p>
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Team name.
+         * <p>Team name.</p>
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Admin user ID.
+         * <p>Admin user ID.</p>
          * @type {string || null}
          */
         this.AdminUserId = null;
 
         /**
-         * Admin account.
+         * <p>Admin account.</p>
          * @type {string || null}
          */
         this.AdminUserAccount = null;
 
         /**
-         * Admin username.
+         * <p>Admin username.</p>
          * @type {string || null}
          */
         this.AdminUserName = null;
 
         /**
-         * Number of team members.
+         * <p>Number of team members.</p>
          * @type {number || null}
          */
         this.MemberCount = null;
 
         /**
-         * Team registration link.
+         * <p>Team registration link.</p>
          * @type {string || null}
          */
         this.RegisterLink = null;
 
         /**
-         * Team role types. 
+         * <p>Team role types.</p>
          * @type {Array.<number> || null}
          */
         this.TeamRoleTypeList = null;
 
         /**
-         * Associated team ID.
+         * <p>Associated team ID.</p>
          * @type {number || null}
          */
         this.RelatedTeamId = null;
 
         /**
-         * Team expiration time. 0 indicates no expiration.
+         * <p>Team expiration time. 0 indicates no expiration.</p>
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * Team status. Valid values: 1: Active; 2: Disabled; 3: Expired. 
+         * <p>Team status. Valid values: 1: Active; 2: Disabled; 3: Expired.</p>
          * @type {number || null}
          */
         this.Status = null;
+
+        /**
+         * <p>Information of multiple team admin users.</p>
+         * @type {Array.<TeamAdminUserInfo> || null}
+         */
+        this.AdminUsers = null;
 
     }
 
@@ -12947,6 +13665,15 @@ class DescribeTeamListInfoResp extends  AbstractModel {
         this.RelatedTeamId = 'RelatedTeamId' in params ? params.RelatedTeamId : null;
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.AdminUsers) {
+            this.AdminUsers = new Array();
+            for (let z in params.AdminUsers) {
+                let obj = new TeamAdminUserInfo();
+                obj.deserialize(params.AdminUsers[z]);
+                this.AdminUsers.push(obj);
+            }
+        }
 
     }
 }
@@ -13131,48 +13858,24 @@ class QueryOnlineVersionResp extends  AbstractModel {
 }
 
 /**
- * Mini program category information.
+ * Mini program approval information
  * @class
  */
-class MNPTypeDefine extends  AbstractModel {
+class DescribeMNPVersionAuditListResp extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Mini program category name.
-         * @type {string || null}
-         */
-        this.TypeName = null;
-
-        /**
-         * Mini program category values.
-         * @type {Array.<string> || null}
-         */
-        this.TypeValue = null;
-
-        /**
-         * Category ID.
+         * <p>Total number of entries.</p>
          * @type {number || null}
          */
-        this.TypeId = null;
+        this.TotalCount = null;
 
         /**
-         * Creation time.
-         * @type {number || null}
+         * <p>List data.</p>
+         * @type {Array.<DescribeMNPVersionAuditInfoResp> || null}
          */
-        this.CreateTime = null;
-
-        /**
-         * Creator.
-         * @type {string || null}
-         */
-        this.CreateUser = null;
-
-        /**
-         * Whether it is a system category.
-         * @type {boolean || null}
-         */
-        this.IsSystem = null;
+        this.DataList = null;
 
     }
 
@@ -13183,12 +13886,16 @@ class MNPTypeDefine extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TypeName = 'TypeName' in params ? params.TypeName : null;
-        this.TypeValue = 'TypeValue' in params ? params.TypeValue : null;
-        this.TypeId = 'TypeId' in params ? params.TypeId : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.CreateUser = 'CreateUser' in params ? params.CreateUser : null;
-        this.IsSystem = 'IsSystem' in params ? params.IsSystem : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DataList) {
+            this.DataList = new Array();
+            for (let z in params.DataList) {
+                let obj = new DescribeMNPVersionAuditInfoResp();
+                obj.deserialize(params.DataList[z]);
+                this.DataList.push(obj);
+            }
+        }
 
     }
 }
@@ -13535,24 +14242,48 @@ class RemoveMNGResponse extends  AbstractModel {
 }
 
 /**
- * DescribeMNPPaymentApprovalInfo response structure.
+ * DescribeUserList request structure.
  * @class
  */
-class DescribeMNPPaymentApprovalInfoResponse extends  AbstractModel {
+class DescribeUserListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Queries the approval status of mini program payment activation.</p>
-         * @type {ApplyPaymentOpenDetailRes || null}
+         * Pagination offset. 
+         * @type {number || null}
          */
-        this.Data = null;
+        this.Offset = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Number of entries per page.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Platform ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.PlatformId = null;
+
+        /**
+         * Search keyword (username or account).
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * User account type. Valid values: 1: Super admin; 2: Platform admin; 3: Regular member. If left empty, all types are returned. 
+         * @type {number || null}
+         */
+        this.AccountType = null;
+
+        /**
+         * Team ID. If left empty, all teams are returned.
+         * @type {string || null}
+         */
+        this.TeamId = null;
 
     }
 
@@ -13563,13 +14294,12 @@ class DescribeMNPPaymentApprovalInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            let obj = new ApplyPaymentOpenDetailRes();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
+        this.TeamId = 'TeamId' in params ? params.TeamId : null;
 
     }
 }
@@ -13935,7 +14665,7 @@ class DescribeMNGRetentionDataResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RetentionData> || null}
          */
@@ -13979,7 +14709,7 @@ class DescribeMNGPaymentLineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -14113,24 +14843,126 @@ class DescribeMNGAccessAnalysisOverviewRequest extends  AbstractModel {
 }
 
 /**
- * DescribeUser response structure.
+ * Mini program approval details
  * @class
  */
-class DescribeUserResponse extends  AbstractModel {
+class DescribeMNPVersionAuditDetailResp extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Response data.
-         * @type {DescribeUserDetailResp || null}
-         */
-        this.Data = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * <p>Approval number.</p>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AuditNo = null;
+
+        /**
+         * <p>Mini program or mini game appid.</p>
+         * @type {string || null}
+         */
+        this.MNPId = null;
+
+        /**
+         * <p>Mini program or mini game name.</p>
+         * @type {string || null}
+         */
+        this.MNPName = null;
+
+        /**
+         * <p>Mini program icon.</p>
+         * @type {string || null}
+         */
+        this.MNPIcon = null;
+
+        /**
+         * <p>Mini program category.</p>
+         * @type {string || null}
+         */
+        this.MNPType = null;
+
+        /**
+         * <p>Mini program introduction.</p>
+         * @type {string || null}
+         */
+        this.MNPIntro = null;
+
+        /**
+         * <p>Mini program version.</p>
+         * @type {string || null}
+         */
+        this.MNPVersion = null;
+
+        /**
+         * <p>Mini program version introduction.</p>
+         * @type {string || null}
+         */
+        this.MNPVersionIntro = null;
+
+        /**
+         * <p>Applicant.</p>
+         * @type {string || null}
+         */
+        this.ApplyUser = null;
+
+        /**
+         * <p>Application time.</p>
+         * @type {string || null}
+         */
+        this.ApplyTime = null;
+
+        /**
+         * <p>Approver.</p>
+         * @type {string || null}
+         */
+        this.AuditUser = null;
+
+        /**
+         * <p>Approval time.</p>
+         * @type {string || null}
+         */
+        this.AuditTime = null;
+
+        /**
+         * <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
+         * @type {number || null}
+         */
+        this.AuditStatus = null;
+
+        /**
+         * <p>Number of associated superapps.</p>
+         * @type {number || null}
+         */
+        this.MNPRelAppCount = null;
+
+        /**
+         * <p>Information encoded in the mini program QR code.</p>
+         * @type {string || null}
+         */
+        this.QRCodeContent = null;
+
+        /**
+         * <p>Approval note.</p>
+         * @type {string || null}
+         */
+        this.AuditNote = null;
+
+        /**
+         * <p>Mini program version ID.</p>
+         * @type {number || null}
+         */
+        this.MNPVersionId = null;
+
+        /**
+         * <p>Age rating information.</p>
+         * @type {Array.<AgeRatingItem> || null}
+         */
+        this.AgeRatings = null;
+
+        /**
+         * <p>Superapp approval information.</p>
+         * @type {Array.<DescribeMNPAuditDetailAppAuditInfo> || null}
+         */
+        this.AppAuditList = null;
 
     }
 
@@ -14141,13 +14973,41 @@ class DescribeUserResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.AuditNo = 'AuditNo' in params ? params.AuditNo : null;
+        this.MNPId = 'MNPId' in params ? params.MNPId : null;
+        this.MNPName = 'MNPName' in params ? params.MNPName : null;
+        this.MNPIcon = 'MNPIcon' in params ? params.MNPIcon : null;
+        this.MNPType = 'MNPType' in params ? params.MNPType : null;
+        this.MNPIntro = 'MNPIntro' in params ? params.MNPIntro : null;
+        this.MNPVersion = 'MNPVersion' in params ? params.MNPVersion : null;
+        this.MNPVersionIntro = 'MNPVersionIntro' in params ? params.MNPVersionIntro : null;
+        this.ApplyUser = 'ApplyUser' in params ? params.ApplyUser : null;
+        this.ApplyTime = 'ApplyTime' in params ? params.ApplyTime : null;
+        this.AuditUser = 'AuditUser' in params ? params.AuditUser : null;
+        this.AuditTime = 'AuditTime' in params ? params.AuditTime : null;
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.MNPRelAppCount = 'MNPRelAppCount' in params ? params.MNPRelAppCount : null;
+        this.QRCodeContent = 'QRCodeContent' in params ? params.QRCodeContent : null;
+        this.AuditNote = 'AuditNote' in params ? params.AuditNote : null;
+        this.MNPVersionId = 'MNPVersionId' in params ? params.MNPVersionId : null;
 
-        if (params.Data) {
-            let obj = new DescribeUserDetailResp();
-            obj.deserialize(params.Data)
-            this.Data = obj;
+        if (params.AgeRatings) {
+            this.AgeRatings = new Array();
+            for (let z in params.AgeRatings) {
+                let obj = new AgeRatingItem();
+                obj.deserialize(params.AgeRatings[z]);
+                this.AgeRatings.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.AppAuditList) {
+            this.AppAuditList = new Array();
+            for (let z in params.AppAuditList) {
+                let obj = new DescribeMNPAuditDetailAppAuditInfo();
+                obj.deserialize(params.AppAuditList[z]);
+                this.AppAuditList.push(obj);
+            }
+        }
 
     }
 }
@@ -14231,7 +15091,7 @@ class DescribeAdvertisingLineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AdTrendChart || null}
          */
@@ -14349,28 +15209,34 @@ class ModifyTeamRequest extends  AbstractModel {
         super();
 
         /**
-         * Team ID.
+         * <p>Team ID.</p>
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Team name.
+         * <p>Team name.</p>
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Platform ID.
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Team administrator.
+         * <p>Team admin.</p>
          * @type {string || null}
          */
         this.AdminUserId = null;
+
+        /**
+         * <p>Team admin user IDs.</p>
+         * @type {Array.<string> || null}
+         */
+        this.AdminUserIds = null;
 
     }
 
@@ -14385,6 +15251,7 @@ class ModifyTeamRequest extends  AbstractModel {
         this.TeamName = 'TeamName' in params ? params.TeamName : null;
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
         this.AdminUserId = 'AdminUserId' in params ? params.AdminUserId : null;
+        this.AdminUserIds = 'AdminUserIds' in params ? params.AdminUserIds : null;
 
     }
 }
@@ -14448,40 +15315,52 @@ class CreateTeamRequest extends  AbstractModel {
         super();
 
         /**
-         * Team name.
+         * <p>Team name.</p>
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Admin name.
+         * <p>Administrator name.</p>
          * @type {string || null}
          */
         this.AdminUserId = null;
 
         /**
-         * Team role type. Valid values: 1: Mini program; 2: Superapp (only one type is currently supported).
+         * <p>Team role type. Valid values: 1: Mini program; 2: Superapp (only one type is currently supported).</p>
          * @type {Array.<number> || null}
          */
         this.TeamRoleTypeList = null;
 
         /**
-         * Remark.
+         * <p>Remarks.</p>
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Platform ID, required for API call.
+         * <p>Platform ID, required for API call.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Associated team ID.
+         * <p>Associated team ID.</p>
          * @type {string || null}
          */
         this.RelatedTeamId = null;
+
+        /**
+         * <p>Team expiration time as a Unix timestamp in seconds. 0 indicates no expiration. This parameter takes effect only when creating a mini program team.</p>
+         * @type {number || null}
+         */
+        this.ExpiryTime = null;
+
+        /**
+         * <p>Administrator user IDs.</p>
+         * @type {Array.<string> || null}
+         */
+        this.AdminUserIds = null;
 
     }
 
@@ -14498,6 +15377,8 @@ class CreateTeamRequest extends  AbstractModel {
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
         this.RelatedTeamId = 'RelatedTeamId' in params ? params.RelatedTeamId : null;
+        this.ExpiryTime = 'ExpiryTime' in params ? params.ExpiryTime : null;
+        this.AdminUserIds = 'AdminUserIds' in params ? params.AdminUserIds : null;
 
     }
 }
@@ -15211,6 +16092,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeMNPVersionAuditDetail request structure.
+ * @class
+ */
+class DescribeMNPVersionAuditDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Platform ID.</p>
+         * @type {string || null}
+         */
+        this.PlatformId = null;
+
+        /**
+         * <p>Approval number.</p>
+         * @type {string || null}
+         */
+        this.AuditNo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
+        this.AuditNo = 'AuditNo' in params ? params.AuditNo : null;
+
+    }
+}
+
+/**
  * ApprovePaymentMerchantBinding response structure.
  * @class
  */
@@ -15259,7 +16175,7 @@ class DescribeMNGActiveUserRealTimeStatisticsResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -15419,24 +16335,24 @@ class CreateMNPVersionResponse extends  AbstractModel {
 }
 
 /**
- * Paginated mini program approval list.
+ * DescribeMNGVersionAuditList response structure.
  * @class
  */
-class DescribeMNPApprovalListResp extends  AbstractModel {
+class DescribeMNGVersionAuditListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of entries.
-         * @type {number || null}
+         * <p>Response data.</p>
+         * @type {DescribeMNGVersionAuditListResp || null}
          */
-        this.TotalCount = null;
+        this.Data = null;
 
         /**
-         * List data.
-         * @type {Array.<DescribeMNPApprovalListData> || null}
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.DataList = null;
+        this.RequestId = null;
 
     }
 
@@ -15447,16 +16363,104 @@ class DescribeMNPApprovalListResp extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.DataList) {
-            this.DataList = new Array();
-            for (let z in params.DataList) {
-                let obj = new DescribeMNPApprovalListData();
-                obj.deserialize(params.DataList[z]);
-                this.DataList.push(obj);
-            }
+        if (params.Data) {
+            let obj = new DescribeMNGVersionAuditListResp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Superapp approval information
+ * @class
+ */
+class DescribeMNPAuditDetailAppAuditInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Approval number.</p>
+         * @type {string || null}
+         */
+        this.AuditNo = null;
+
+        /**
+         * <p>Superapp ID.</p>
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * <p>Superapp name.</p>
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+        /**
+         * <p>Superapp icon.</p>
+         * @type {string || null}
+         */
+        this.ApplicationLogo = null;
+
+        /**
+         * <p>Approver.</p>
+         * @type {string || null}
+         */
+        this.AuditUser = null;
+
+        /**
+         * <p>Creation time.</p>
+         * @type {string || null}
+         */
+        this.AuditTime = null;
+
+        /**
+         * <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
+         * @type {number || null}
+         */
+        this.AuditStatus = null;
+
+        /**
+         * <p>Approval note.</p>
+         * @type {string || null}
+         */
+        this.AuditNote = null;
+
+        /**
+         * <p>Team ID.</p>
+         * @type {string || null}
+         */
+        this.TeamId = null;
+
+        /**
+         * <p>Team name.</p>
+         * @type {string || null}
+         */
+        this.TeamName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuditNo = 'AuditNo' in params ? params.AuditNo : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.ApplicationLogo = 'ApplicationLogo' in params ? params.ApplicationLogo : null;
+        this.AuditUser = 'AuditUser' in params ? params.AuditUser : null;
+        this.AuditTime = 'AuditTime' in params ? params.AuditTime : null;
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.AuditNote = 'AuditNote' in params ? params.AuditNote : null;
+        this.TeamId = 'TeamId' in params ? params.TeamId : null;
+        this.TeamName = 'TeamName' in params ? params.TeamName : null;
 
     }
 }
@@ -15505,7 +16509,7 @@ class DescribeMNPActiveUserRealTimeStatisticsResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReportDataResult> || null}
          */
@@ -15589,7 +16593,7 @@ class DescribeMNPPageAnalysisDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VisitData> || null}
          */
@@ -15625,7 +16629,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Paginated team list.
+ * Paged information of teams
  * @class
  */
 class DescribeTeamPageResp extends  AbstractModel {
@@ -15703,7 +16707,7 @@ class DescribeMNGAppSecretResp extends  AbstractModel {
 }
 
 /**
- * Used for Data object when no data is returned after a successful action.
+ * Used for Data object when no data is returned after the a successful action.
  * @class
  */
 class BooleanInfo extends  AbstractModel {
@@ -15711,8 +16715,7 @@ class BooleanInfo extends  AbstractModel {
         super();
 
         /**
-         * The Boolean response object. 
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The Boolean response object.
          * @type {boolean || null}
          */
         this.Result = null;
@@ -15740,25 +16743,25 @@ class DescribeTeamListRequest extends  AbstractModel {
         super();
 
         /**
-         * Pagination offset.
+         * <p>Pagination offset.</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of entries per page.
+         * <p>Pagination count.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Platform ID.
+         * <p>Platform ID.</p>
          * @type {string || null}
          */
         this.PlatformId = null;
 
         /**
-         * Search keyword (team name).
+         * <p>Team name.</p>
          * @type {string || null}
          */
         this.Keyword = null;
@@ -16252,6 +17255,46 @@ class DescribeMNGPaymentOverviewRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeUser response structure.
+ * @class
+ */
+class DescribeUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Response data.
+         * @type {DescribeUserDetailResp || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new DescribeUserDetailResp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Superapp sensitive API list data.
  * @class
  */
@@ -16534,7 +17577,7 @@ class DescribeMNGAdvertisingDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<OverviewDetail> || null}
          */
@@ -16864,7 +17907,7 @@ class DescribeAdvertisingOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MNPAdvertisingOverview || null}
          */
@@ -16905,7 +17948,7 @@ class RequestPaymentMerchantBindingResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Response parameters structure for the application of a mini program team to bind a merchant ID.</p>
+         * <p>Response parameters structure for requesting payment merchant binding by a mini program team.</p>
          * @type {MerchantBindApprovalResp || null}
          */
         this.Data = null;
@@ -17762,7 +18805,7 @@ class DescribeMNPReportDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display at the top of the page.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AccessAnalysisDetail> || null}
          */
@@ -18157,6 +19200,97 @@ class DescribeApplicationListData extends  AbstractModel {
         this.TeamName = 'TeamName' in params ? params.TeamName : null;
         this.SensitiveApiCount = 'SensitiveApiCount' in params ? params.SensitiveApiCount : null;
         this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+
+    }
+}
+
+/**
+ * Superapp approval information
+ * @class
+ */
+class DescribeMNGAuditDetailAppAuditInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Approval number.</p>
+         * @type {string || null}
+         */
+        this.AuditNo = null;
+
+        /**
+         * <p>Superapp ID.</p>
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * <p>Superapp name.</p>
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+        /**
+         * <p>Superapp icon.</p>
+         * @type {string || null}
+         */
+        this.ApplicationLogo = null;
+
+        /**
+         * <p>Approver.</p>
+         * @type {string || null}
+         */
+        this.AuditUser = null;
+
+        /**
+         * <p>Approval time.</p>
+         * @type {string || null}
+         */
+        this.AuditTime = null;
+
+        /**
+         * <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
+         * @type {number || null}
+         */
+        this.AuditStatus = null;
+
+        /**
+         * <p>Approval note.</p>
+         * @type {string || null}
+         */
+        this.AuditNote = null;
+
+        /**
+         * <p>Team ID.</p>
+         * @type {string || null}
+         */
+        this.TeamId = null;
+
+        /**
+         * <p>Team name.</p>
+         * @type {string || null}
+         */
+        this.TeamName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuditNo = 'AuditNo' in params ? params.AuditNo : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.ApplicationLogo = 'ApplicationLogo' in params ? params.ApplicationLogo : null;
+        this.AuditUser = 'AuditUser' in params ? params.AuditUser : null;
+        this.AuditTime = 'AuditTime' in params ? params.AuditTime : null;
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.AuditNote = 'AuditNote' in params ? params.AuditNote : null;
+        this.TeamId = 'TeamId' in params ? params.TeamId : null;
+        this.TeamName = 'TeamName' in params ? params.TeamName : null;
 
     }
 }
@@ -18960,7 +20094,7 @@ class DescribeMNGAdvertisingLineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AdTrendChart || null}
          */
@@ -20251,6 +21385,69 @@ class ModifyMNPRequest extends  AbstractModel {
 }
 
 /**
+ * Mini program category information.
+ * @class
+ */
+class MNPTypeDefine extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Mini program category name.
+         * @type {string || null}
+         */
+        this.TypeName = null;
+
+        /**
+         * Mini program category values.
+         * @type {Array.<string> || null}
+         */
+        this.TypeValue = null;
+
+        /**
+         * Category ID.
+         * @type {number || null}
+         */
+        this.TypeId = null;
+
+        /**
+         * Creation time.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Creator.
+         * @type {string || null}
+         */
+        this.CreateUser = null;
+
+        /**
+         * Whether it is a system category.
+         * @type {boolean || null}
+         */
+        this.IsSystem = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TypeName = 'TypeName' in params ? params.TypeName : null;
+        this.TypeValue = 'TypeValue' in params ? params.TypeValue : null;
+        this.TypeId = 'TypeId' in params ? params.TypeId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.CreateUser = 'CreateUser' in params ? params.CreateUser : null;
+        this.IsSystem = 'IsSystem' in params ? params.IsSystem : null;
+
+    }
+}
+
+/**
  * MAU metric comparison response data.
  * @class
  */
@@ -21142,30 +22339,84 @@ class DescribeTempSecret4UploadFile2CosRequest extends  AbstractModel {
 }
 
 /**
- * UnbindMNPPaymentMerchant request structure.
+ * List data for querying callable sensitive APIs of a mini game.
  * @class
  */
-class UnbindMNPPaymentMerchantRequest extends  AbstractModel {
+class DescribeMNGSensitiveAPIPermissionListData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Platform ID.</p>
+         * <p>API ID.</p>
          * @type {string || null}
          */
-        this.PlatformId = null;
+        this.APIId = null;
 
         /**
-         * <p>Mini program team ID.</p>
+         * <p>API name.</p>
          * @type {string || null}
          */
-        this.TeamId = null;
+        this.APIName = null;
 
         /**
-         * <p>Primary key ID, obtained from the API response of approving the merchant binding of a mini program team.</p>
+         * <p>API method.</p>
          * @type {string || null}
          */
-        this.ID = null;
+        this.APIMethod = null;
+
+        /**
+         * <p>API status.</p>
+         * @type {number || null}
+         */
+        this.APIStatus = null;
+
+        /**
+         * <p>API request status.</p>
+         * @type {number || null}
+         */
+        this.APIApplyStatus = null;
+
+        /**
+         * <p>Reason for rejection.</p>
+         * @type {string || null}
+         */
+        this.RejectReason = null;
+
+        /**
+         * <p>Approval number.</p>
+         * @type {string || null}
+         */
+        this.ApprovalNo = null;
+
+        /**
+         * <p>Superapp ID.</p>
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * <p>Superapp icon.</p>
+         * @type {string || null}
+         */
+        this.ApplicationIcon = null;
+
+        /**
+         * <p>Superapp name.</p>
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+        /**
+         * <p>API type. Valid values: 1: System; 2: Custom.</p>
+         * @type {number || null}
+         */
+        this.APIType = null;
+
+        /**
+         * <p>API feature description.</p>
+         * @type {string || null}
+         */
+        this.APIDesc = null;
 
     }
 
@@ -21176,9 +22427,18 @@ class UnbindMNPPaymentMerchantRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
-        this.TeamId = 'TeamId' in params ? params.TeamId : null;
-        this.ID = 'ID' in params ? params.ID : null;
+        this.APIId = 'APIId' in params ? params.APIId : null;
+        this.APIName = 'APIName' in params ? params.APIName : null;
+        this.APIMethod = 'APIMethod' in params ? params.APIMethod : null;
+        this.APIStatus = 'APIStatus' in params ? params.APIStatus : null;
+        this.APIApplyStatus = 'APIApplyStatus' in params ? params.APIApplyStatus : null;
+        this.RejectReason = 'RejectReason' in params ? params.RejectReason : null;
+        this.ApprovalNo = 'ApprovalNo' in params ? params.ApprovalNo : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationIcon = 'ApplicationIcon' in params ? params.ApplicationIcon : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.APIType = 'APIType' in params ? params.APIType : null;
+        this.APIDesc = 'APIDesc' in params ? params.APIDesc : null;
 
     }
 }
@@ -21544,7 +22804,7 @@ class DescribeMNPMAULineChartResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MAUChartData> || null}
          */
@@ -21726,7 +22986,170 @@ class StringData extends  AbstractModel {
 }
 
 /**
- * Line chart data.
+ * Mini program approval information
+ * @class
+ */
+class DescribeMNPVersionAuditInfoResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Approval number.</p>
+         * @type {string || null}
+         */
+        this.AuditNo = null;
+
+        /**
+         * <p>Mini program appid.</p>
+         * @type {string || null}
+         */
+        this.MNPId = null;
+
+        /**
+         * <p>Mini program name.</p>
+         * @type {string || null}
+         */
+        this.MNPName = null;
+
+        /**
+         * <p>Mini program icon.</p>
+         * @type {string || null}
+         */
+        this.MNPIcon = null;
+
+        /**
+         * <p>Mini program category.</p>
+         * @type {string || null}
+         */
+        this.MNPType = null;
+
+        /**
+         * <p>Introduction.</p>
+         * @type {string || null}
+         */
+        this.MNPIntro = null;
+
+        /**
+         * <p>Mini program version.</p>
+         * @type {string || null}
+         */
+        this.MNPVersion = null;
+
+        /**
+         * <p>Version description.</p>
+         * @type {string || null}
+         */
+        this.MNPVersionIntro = null;
+
+        /**
+         * <p>Applicant.</p>
+         * @type {string || null}
+         */
+        this.ApplyUser = null;
+
+        /**
+         * <p>Application time.</p>
+         * @type {string || null}
+         */
+        this.ApplyTime = null;
+
+        /**
+         * <p>Approver.</p>
+         * @type {string || null}
+         */
+        this.AuditUser = null;
+
+        /**
+         * <p>Approval time.</p>
+         * @type {string || null}
+         */
+        this.AuditTime = null;
+
+        /**
+         * <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
+         * @type {number || null}
+         */
+        this.AuditStatus = null;
+
+        /**
+         * <p>Number of associated superapps.</p>
+         * @type {number || null}
+         */
+        this.MNPRelAppCount = null;
+
+        /**
+         * <p>Age rating information.</p>
+         * @type {Array.<AgeRatingItem> || null}
+         */
+        this.AgeRatings = null;
+
+        /**
+         * <p>Superapp approval information.</p>
+         * @type {Array.<DescribeMNPAuditListAppInfoResp> || null}
+         */
+        this.AuditAppList = null;
+
+        /**
+         * <p>Mini program version ID.</p>
+         * @type {number || null}
+         */
+        this.MNPVersionId = null;
+
+        /**
+         * <p>Whether it is an auto approval. Valid values: 0 (No), 1 (Yes).</p>
+         * @type {number || null}
+         */
+        this.IsAutoAudit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuditNo = 'AuditNo' in params ? params.AuditNo : null;
+        this.MNPId = 'MNPId' in params ? params.MNPId : null;
+        this.MNPName = 'MNPName' in params ? params.MNPName : null;
+        this.MNPIcon = 'MNPIcon' in params ? params.MNPIcon : null;
+        this.MNPType = 'MNPType' in params ? params.MNPType : null;
+        this.MNPIntro = 'MNPIntro' in params ? params.MNPIntro : null;
+        this.MNPVersion = 'MNPVersion' in params ? params.MNPVersion : null;
+        this.MNPVersionIntro = 'MNPVersionIntro' in params ? params.MNPVersionIntro : null;
+        this.ApplyUser = 'ApplyUser' in params ? params.ApplyUser : null;
+        this.ApplyTime = 'ApplyTime' in params ? params.ApplyTime : null;
+        this.AuditUser = 'AuditUser' in params ? params.AuditUser : null;
+        this.AuditTime = 'AuditTime' in params ? params.AuditTime : null;
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.MNPRelAppCount = 'MNPRelAppCount' in params ? params.MNPRelAppCount : null;
+
+        if (params.AgeRatings) {
+            this.AgeRatings = new Array();
+            for (let z in params.AgeRatings) {
+                let obj = new AgeRatingItem();
+                obj.deserialize(params.AgeRatings[z]);
+                this.AgeRatings.push(obj);
+            }
+        }
+
+        if (params.AuditAppList) {
+            this.AuditAppList = new Array();
+            for (let z in params.AuditAppList) {
+                let obj = new DescribeMNPAuditListAppInfoResp();
+                obj.deserialize(params.AuditAppList[z]);
+                this.AuditAppList.push(obj);
+            }
+        }
+        this.MNPVersionId = 'MNPVersionId' in params ? params.MNPVersionId : null;
+        this.IsAutoAudit = 'IsAutoAudit' in params ? params.IsAutoAudit : null;
+
+    }
+}
+
+/**
+ * Time-series data.
  * @class
  */
 class MAULineChartData extends  AbstractModel {
@@ -22247,76 +23670,82 @@ class DescribeTeamDetailResp extends  AbstractModel {
         super();
 
         /**
-         * Team name.
+         * <p>Team name.</p>
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Team role type. Valid values: 1: Mini program team; 2: Superapp team.
+         * <p>Team role type. Valid values: 1: Mini program team; 2: Superapp team.</p>
          * @type {number || null}
          */
         this.TeamRoleType = null;
 
         /**
-         * Admin account.
+         * <p>Administrator account.</p>
          * @type {string || null}
          */
         this.AdminUserAccount = null;
 
         /**
-         * Creator.
+         * <p>Creator.</p>
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * Creation time.
+         * <p>Creation time.</p>
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Number of team members.
+         * <p>Number of team members.</p>
          * @type {number || null}
          */
         this.MemberCount = null;
 
         /**
-         * Number of bound mini program teams.
+         * <p>Number of bound mini program teams.</p>
          * @type {number || null}
          */
         this.BindMiniTeamCount = null;
 
         /**
-         * Name of the bound team.
+         * <p>Team name.</p>
          * @type {string || null}
          */
         this.BindTeamName = null;
 
         /**
-         * Team registration link.
+         * <p>Team registration link.</p>
          * @type {string || null}
          */
         this.RegisterLink = null;
 
         /**
-         * Superapp name. Only returned for mini program teams.
+         * <p>Superapp name. Only returned for querying details of mini program teams.</p>
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * Team expiration time. 0 indicates no expiration. 
+         * <p>Team expiration time. 0 indicates no expiration.</p>
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * Team status. Valid values: 1: Active; 2: Disabled; 3: Expired. 
+         * <p>Team status. Valid values: 1: Active; 2: Disabled; 3: Expired.</p>
          * @type {number || null}
          */
         this.Status = null;
+
+        /**
+         * <p>Administrator name.</p>
+         * @type {string || null}
+         */
+        this.AdminUserName = null;
 
     }
 
@@ -22339,6 +23768,7 @@ class DescribeTeamDetailResp extends  AbstractModel {
         this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.AdminUserName = 'AdminUserName' in params ? params.AdminUserName : null;
 
     }
 }
@@ -22648,7 +24078,7 @@ class DeleteGlobalDomainResponse extends  AbstractModel {
 }
 
 /**
- * Mini game MAU line chart data.
+ * Time-series MAU data of a mini game.
  * @class
  */
 class MNGMAULineChartData extends  AbstractModel {
@@ -22700,7 +24130,7 @@ class DescribeMNGPaymentOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Data display.
+         * Response data.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MNGPaymentOverview || null}
          */
@@ -22787,6 +24217,7 @@ module.exports = {
     ModifyTeamResponse: ModifyTeamResponse,
     DescribeMNPSensitiveAPIPermissionApprovalRequest: DescribeMNPSensitiveAPIPermissionApprovalRequest,
     ConfigureMNPPreviewResponse: ConfigureMNPPreviewResponse,
+    DescribeMNGVersionAuditInfoResp: DescribeMNGVersionAuditInfoResp,
     DescribeMNGAppSecretRequest: DescribeMNGAppSecretRequest,
     DescribeMNPSensitiveAPIPermissionApprovalResponse: DescribeMNPSensitiveAPIPermissionApprovalResponse,
     UnbindMNPPaymentMerchantResponse: UnbindMNPPaymentMerchantResponse,
@@ -22815,6 +24246,7 @@ module.exports = {
     DescribeApplicationMNPListResponse: DescribeApplicationMNPListResponse,
     MNGTypeDefine: MNGTypeDefine,
     ModifyMNGDomainRequest: ModifyMNGDomainRequest,
+    DescribeMNGAuditListAppInfoResp: DescribeMNGAuditListAppInfoResp,
     CreateGlobalDomainACLResponse: CreateGlobalDomainACLResponse,
     RollbackMNPVersionRequest: RollbackMNPVersionRequest,
     ProcessMNPSensitiveAPIPermissionApprovalRequest: ProcessMNPSensitiveAPIPermissionApprovalRequest,
@@ -22830,12 +24262,13 @@ module.exports = {
     DescribeApplicationMNPListRequest: DescribeApplicationMNPListRequest,
     DescribeMNGReleasedVersionHistoryResponse: DescribeMNGReleasedVersionHistoryResponse,
     DescribeMNGAllStageVersionsRequest: DescribeMNGAllStageVersionsRequest,
+    DescribeMNGVersionAuditDetailResponse: DescribeMNGVersionAuditDetailResponse,
     DescribeMNPSensitiveAPIPermissionListResp: DescribeMNPSensitiveAPIPermissionListResp,
     ChangePaymentBoundMerchantResponse: ChangePaymentBoundMerchantResponse,
     DescribeMNPSubscribeMessageTemplateListResp: DescribeMNPSubscribeMessageTemplateListResp,
     DescribeMNGVersionResponse: DescribeMNGVersionResponse,
     DescribeMNGSubscribeMessageTemplateLibraryListResponse: DescribeMNGSubscribeMessageTemplateLibraryListResponse,
-    DescribeMNGSensitiveAPIPermissionListData: DescribeMNGSensitiveAPIPermissionListData,
+    CreateDomainParam: CreateDomainParam,
     DescribeMNPAdvertisingDetailResponse: DescribeMNPAdvertisingDetailResponse,
     CreateMNPSecretKeyRequest: CreateMNPSecretKeyRequest,
     ConfigureMNPPreviewRequest: ConfigureMNPPreviewRequest,
@@ -22845,6 +24278,7 @@ module.exports = {
     DescribeMNGSensitiveAPIPermissionApprovalRequest: DescribeMNGSensitiveAPIPermissionApprovalRequest,
     CreateMNGApprovalResp: CreateMNGApprovalResp,
     DescribeMNGOfflinePackageURLRequest: DescribeMNGOfflinePackageURLRequest,
+    DescribeMNGVersionAuditDetailRequest: DescribeMNGVersionAuditDetailRequest,
     CreateMNPApprovalResponse: CreateMNPApprovalResponse,
     DescribeUserListData: DescribeUserListData,
     MNPSubscribeMessageTemplateDetailResp: MNPSubscribeMessageTemplateDetailResp,
@@ -22852,7 +24286,7 @@ module.exports = {
     MNPI18NSyncDto: MNPI18NSyncDto,
     DescribeMNPSensitiveAPIPermissionListResponse: DescribeMNPSensitiveAPIPermissionListResponse,
     DescribePaymentDataDetailResponse: DescribePaymentDataDetailResponse,
-    CreateDomainParam: CreateDomainParam,
+    DescribeMNPApprovalListResp: DescribeMNPApprovalListResp,
     DescribeMNPAccessAnalysisOverviewResponse: DescribeMNPAccessAnalysisOverviewResponse,
     ProcessMNPSensitiveAPIPermissionApprovalResponse: ProcessMNPSensitiveAPIPermissionApprovalResponse,
     CreateMNPAppSecretResp: CreateMNPAppSecretResp,
@@ -22863,6 +24297,7 @@ module.exports = {
     DeleteMNGSubscribeMessageTemplateResponse: DeleteMNGSubscribeMessageTemplateResponse,
     DescribeMNGAllStageVersionsResp: DescribeMNGAllStageVersionsResp,
     CreateMNPApprovalResp: CreateMNPApprovalResp,
+    DescribeMNGVersionRequest: DescribeMNGVersionRequest,
     DescribeApplicationConfigInfo: DescribeApplicationConfigInfo,
     DescribeMNGSubscribeMessageTemplateListResponse: DescribeMNGSubscribeMessageTemplateListResponse,
     AccessAnalysisDetail: AccessAnalysisDetail,
@@ -22876,6 +24311,7 @@ module.exports = {
     DescribeMNGMAUDataDetailResponse: DescribeMNGMAUDataDetailResponse,
     CreateApplicationConfigResponse: CreateApplicationConfigResponse,
     DescribeTeamMemberListPageResp: DescribeTeamMemberListPageResp,
+    DescribeMNGVersionAuditListRequest: DescribeMNGVersionAuditListRequest,
     DescribePaymentDataOverviewResponse: DescribePaymentDataOverviewResponse,
     DescribeApplicationResp: DescribeApplicationResp,
     DescribeMNGAdvertisingOverviewResponse: DescribeMNGAdvertisingOverviewResponse,
@@ -22936,7 +24372,8 @@ module.exports = {
     ResetMNPAppSecretRequest: ResetMNPAppSecretRequest,
     DescribeMNPReportDataLineChartResponse: DescribeMNPReportDataLineChartResponse,
     DescribeMNPSensitiveAPIPermissionListData: DescribeMNPSensitiveAPIPermissionListData,
-    DescribeMNGVersionRequest: DescribeMNGVersionRequest,
+    TeamAdminUserInfo: TeamAdminUserInfo,
+    DescribeMNGVersionAuditListResp: DescribeMNGVersionAuditListResp,
     DescribeTempSecret4UploadFile2CosResponse: DescribeTempSecret4UploadFile2CosResponse,
     ApproveMNPPaymentEnableResponse: ApproveMNPPaymentEnableResponse,
     DescribeUserDetailResp: DescribeUserDetailResp,
@@ -22949,6 +24386,7 @@ module.exports = {
     DescribeRevertOnlineVersionPageResp: DescribeRevertOnlineVersionPageResp,
     DescribeMNGAccessAnalysisDetailResponse: DescribeMNGAccessAnalysisDetailResponse,
     QueryMNGOnlineVersionResp: QueryMNGOnlineVersionResp,
+    DescribeMNGVersionAuditDetailResp: DescribeMNGVersionAuditDetailResp,
     DescribeGlobalOverviewReportDetailRequest: DescribeGlobalOverviewReportDetailRequest,
     DescribeApplicationListResp: DescribeApplicationListResp,
     ReleaseMNPVersionResponse: ReleaseMNPVersionResponse,
@@ -22959,7 +24397,8 @@ module.exports = {
     DescribeMNGPaymentRetentionAnalysisResponse: DescribeMNGPaymentRetentionAnalysisResponse,
     DescribeGlobalDomainsListData: DescribeGlobalDomainsListData,
     DescribeMNPManagerDetailData: DescribeMNPManagerDetailData,
-    DescribeUserListRequest: DescribeUserListRequest,
+    DescribeMNPPaymentApprovalInfoResponse: DescribeMNPPaymentApprovalInfoResponse,
+    UnbindMNPPaymentMerchantRequest: UnbindMNPPaymentMerchantRequest,
     DescribeApplicationMNPListResp: DescribeApplicationMNPListResp,
     DescribeMNGRevertOnlineVersionPageResp: DescribeMNGRevertOnlineVersionPageResp,
     DescribeMNPSubscribeMessageTemplateInfoResp: DescribeMNPSubscribeMessageTemplateInfoResp,
@@ -22968,6 +24407,7 @@ module.exports = {
     QueryMNPMerchantInfoRequest: QueryMNPMerchantInfoRequest,
     ModifyMNGDomainResponse: ModifyMNGDomainResponse,
     DescribeMNGPaymentReportDetailResponse: DescribeMNGPaymentReportDetailResponse,
+    DescribeMNPAuditListAppInfoResp: DescribeMNPAuditListAppInfoResp,
     DescribeApplicationConfigFileResponse: DescribeApplicationConfigFileResponse,
     DescribeMNGSubscribeMessageTemplateRequest: DescribeMNGSubscribeMessageTemplateRequest,
     CreateMNPDomainACLResponse: CreateMNPDomainACLResponse,
@@ -22983,10 +24423,13 @@ module.exports = {
     DeleteMNGRequest: DeleteMNGRequest,
     ModifyApplicationConfigRequest: ModifyApplicationConfigRequest,
     DescribeAPPDataOverviewResponse: DescribeAPPDataOverviewResponse,
+    DescribeMNPVersionAuditListRequest: DescribeMNPVersionAuditListRequest,
     CreateMNGSensitiveAPIPermissionApprovalResponse: CreateMNGSensitiveAPIPermissionApprovalResponse,
+    DescribeMNPVersionAuditDetailResponse: DescribeMNPVersionAuditDetailResponse,
     MAUChartData: MAUChartData,
     DescribeGlobalDomainACLResponse: DescribeGlobalDomainACLResponse,
     CreateApplicationResponse: CreateApplicationResponse,
+    DescribeMNPVersionAuditListResponse: DescribeMNPVersionAuditListResponse,
     DeleteGlobalDomainRequest: DeleteGlobalDomainRequest,
     DescribeMNGSubscribeMessageTemplateLibraryResp: DescribeMNGSubscribeMessageTemplateLibraryResp,
     CreateGlobalDomainACLRequest: CreateGlobalDomainACLRequest,
@@ -23021,7 +24464,7 @@ module.exports = {
     DescribeMNPAllStageVersionsResponse: DescribeMNPAllStageVersionsResponse,
     DescribeUserListResp: DescribeUserListResp,
     QueryOnlineVersionResp: QueryOnlineVersionResp,
-    MNPTypeDefine: MNPTypeDefine,
+    DescribeMNPVersionAuditListResp: DescribeMNPVersionAuditListResp,
     DescribeMNGCategoryRequest: DescribeMNGCategoryRequest,
     DescribeSubscribeMessageTemplateLibraryResp: DescribeSubscribeMessageTemplateLibraryResp,
     DescribeApplicationConfigInfosRequest: DescribeApplicationConfigInfosRequest,
@@ -23030,7 +24473,7 @@ module.exports = {
     CreateUserResponse: CreateUserResponse,
     CreateMNPSecretKeyResponse: CreateMNPSecretKeyResponse,
     RemoveMNGResponse: RemoveMNGResponse,
-    DescribeMNPPaymentApprovalInfoResponse: DescribeMNPPaymentApprovalInfoResponse,
+    DescribeUserListRequest: DescribeUserListRequest,
     CategoryItem: CategoryItem,
     DeleteMNPSubscribeMessageTemplateRequest: DeleteMNPSubscribeMessageTemplateRequest,
     RequestPaymentEnableRequest: RequestPaymentEnableRequest,
@@ -23043,7 +24486,7 @@ module.exports = {
     DescribeMNGPaymentLineChartResponse: DescribeMNGPaymentLineChartResponse,
     MerchantBindApprovalResp: MerchantBindApprovalResp,
     DescribeMNGAccessAnalysisOverviewRequest: DescribeMNGAccessAnalysisOverviewRequest,
-    DescribeUserResponse: DescribeUserResponse,
+    DescribeMNPVersionAuditDetailResp: DescribeMNPVersionAuditDetailResp,
     DisableApplicationSensitiveAPIRequest: DisableApplicationSensitiveAPIRequest,
     DeleteApplicationRequest: DeleteApplicationRequest,
     DescribeAdvertisingLineChartResponse: DescribeAdvertisingLineChartResponse,
@@ -23065,12 +24508,14 @@ module.exports = {
     CreateMNGDomainACLResponse: CreateMNGDomainACLResponse,
     AnalysisAdvertOverview: AnalysisAdvertOverview,
     AdTrendChart: AdTrendChart,
+    DescribeMNPVersionAuditDetailRequest: DescribeMNPVersionAuditDetailRequest,
     ApprovePaymentMerchantBindingResponse: ApprovePaymentMerchantBindingResponse,
     DescribeMNGActiveUserRealTimeStatisticsResponse: DescribeMNGActiveUserRealTimeStatisticsResponse,
     ResetMNGAppSecretResponse: ResetMNGAppSecretResponse,
     DescribeMNGSubscribeMessageTemplateLibraryListResp: DescribeMNGSubscribeMessageTemplateLibraryListResp,
     CreateMNPVersionResponse: CreateMNPVersionResponse,
-    DescribeMNPApprovalListResp: DescribeMNPApprovalListResp,
+    DescribeMNGVersionAuditListResponse: DescribeMNGVersionAuditListResponse,
+    DescribeMNPAuditDetailAppAuditInfo: DescribeMNPAuditDetailAppAuditInfo,
     ApproveMNPPaymentOpenRes: ApproveMNPPaymentOpenRes,
     DescribeMNPActiveUserRealTimeStatisticsResponse: DescribeMNPActiveUserRealTimeStatisticsResponse,
     ModifyMNPResponse: ModifyMNPResponse,
@@ -23088,6 +24533,7 @@ module.exports = {
     DescribeMNGCategoryResponse: DescribeMNGCategoryResponse,
     MNPAdOverview: MNPAdOverview,
     DescribeMNGPaymentOverviewRequest: DescribeMNGPaymentOverviewRequest,
+    DescribeUserResponse: DescribeUserResponse,
     DescribeApplicationSensitiveAPIListData: DescribeApplicationSensitiveAPIListData,
     DescribeGlobalOverviewDataSummaryRequest: DescribeGlobalOverviewDataSummaryRequest,
     SubscribeMessageTemplateLibraryKeywordI18nInfoResp: SubscribeMessageTemplateLibraryKeywordI18nInfoResp,
@@ -23122,6 +24568,7 @@ module.exports = {
     Overview: Overview,
     DeleteMNGSubscribeMessageTemplateRequest: DeleteMNGSubscribeMessageTemplateRequest,
     DescribeApplicationListData: DescribeApplicationListData,
+    DescribeMNGAuditDetailAppAuditInfo: DescribeMNGAuditDetailAppAuditInfo,
     DescribeApplicationMNPInfoResp: DescribeApplicationMNPInfoResp,
     MNPPaymentOverview: MNPPaymentOverview,
     DescribeMNPActiveUserRealTimeStatisticsRequest: DescribeMNPActiveUserRealTimeStatisticsRequest,
@@ -23158,6 +24605,7 @@ module.exports = {
     DescribeMNPMAUMetricCardRequest: DescribeMNPMAUMetricCardRequest,
     MNPDetailI18nVO: MNPDetailI18nVO,
     ModifyMNPRequest: ModifyMNPRequest,
+    MNPTypeDefine: MNPTypeDefine,
     MAUIndicatorCard: MAUIndicatorCard,
     DescribeMNGDomainACLRequest: DescribeMNGDomainACLRequest,
     CreateApplicationSensitiveAPIRequest: CreateApplicationSensitiveAPIRequest,
@@ -23176,7 +24624,7 @@ module.exports = {
     DescribeMNPSubscribeMessageTemplateDetailResp: DescribeMNPSubscribeMessageTemplateDetailResp,
     CreateMNGRequest: CreateMNGRequest,
     DescribeTempSecret4UploadFile2CosRequest: DescribeTempSecret4UploadFile2CosRequest,
-    UnbindMNPPaymentMerchantRequest: UnbindMNPPaymentMerchantRequest,
+    DescribeMNGSensitiveAPIPermissionListData: DescribeMNGSensitiveAPIPermissionListData,
     CreateMNGSubscribeMessageTemplateResponse: CreateMNGSubscribeMessageTemplateResponse,
     DescribeApplicationRequest: DescribeApplicationRequest,
     DescribeMNPDomainACLResponse: DescribeMNPDomainACLResponse,
@@ -23189,6 +24637,7 @@ module.exports = {
     ResetMNGAppSecretResp: ResetMNGAppSecretResp,
     DescribeMNPAppSecretResponse: DescribeMNPAppSecretResponse,
     StringData: StringData,
+    DescribeMNPVersionAuditInfoResp: DescribeMNPVersionAuditInfoResp,
     MAULineChartData: MAULineChartData,
     AgeRatingItemReq: AgeRatingItemReq,
     DescribeMNPReleasedVersionHistoryResponse: DescribeMNPReleasedVersionHistoryResponse,

@@ -59,6 +59,7 @@ module.exports = {
     es: require("./es"),
     facefusion: require("./facefusion"),
     faceid: require("./faceid"),
+    ga2: require("./ga2"),
     gaap: require("./gaap"),
     gme: require("./gme"),
     gpm: require("./gpm"),

@@ -25,7 +25,6 @@ const WordItem = models.WordItem;
 const MLIDPassportOCRRequest = models.MLIDPassportOCRRequest;
 const ItemInfo = models.ItemInfo;
 const SmartStructuralOCRV2Request = models.SmartStructuralOCRV2Request;
-const RecognizeThaiIDCardOCRResponse = models.RecognizeThaiIDCardOCRResponse;
 const RecognizeBrazilCommonOCRResponse = models.RecognizeBrazilCommonOCRResponse;
 const RecognizeMacaoIDCardOCRResponse = models.RecognizeMacaoIDCardOCRResponse;
 const GetCardVerificationExternalResultResponse = models.GetCardVerificationExternalResultResponse;
@@ -48,8 +47,10 @@ const DetectedWords = models.DetectedWords;
 const LineInfo = models.LineInfo;
 const BrazilDriverLicenseInfo = models.BrazilDriverLicenseInfo;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
+const HmtResidentPermitOCRRequest = models.HmtResidentPermitOCRRequest;
+const PortraitImageInfo = models.PortraitImageInfo;
 const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
-const VinOCRRequest = models.VinOCRRequest;
+const RecognizeThaiIDCardOCRResponse = models.RecognizeThaiIDCardOCRResponse;
 const RecognizePhilippinesUMIDOCRRequest = models.RecognizePhilippinesUMIDOCRRequest;
 const RecognizePhilippinesSssIDOCRRequest = models.RecognizePhilippinesSssIDOCRRequest;
 const Key = models.Key;
@@ -88,6 +89,8 @@ const RecognizeSingaporeIDCardOCRResponse = models.RecognizeSingaporeIDCardOCRRe
 const SmartStructuralOCRV2Response = models.SmartStructuralOCRV2Response;
 const RecognizeMainlandIDCardOCRResponse = models.RecognizeMainlandIDCardOCRResponse;
 const MainlandPermitOCRResponse = models.MainlandPermitOCRResponse;
+const HmtResidentPermitOCRResponse = models.HmtResidentPermitOCRResponse;
+const ImageCoordinates = models.ImageCoordinates;
 const RecognizeMexicoVTIDRequest = models.RecognizeMexicoVTIDRequest;
 const PODAuditAIResponse = models.PODAuditAIResponse;
 const MainlandTravelPermitBackInfos = models.MainlandTravelPermitBackInfos;
@@ -96,6 +99,7 @@ const RecognizeBrazilDriverLicenseOCRResponse = models.RecognizeBrazilDriverLice
 const BrazilCardInfo = models.BrazilCardInfo;
 const RecognizeIndonesiaIDCardOCRRequest = models.RecognizeIndonesiaIDCardOCRRequest;
 const AnalyzedLog = models.AnalyzedLog;
+const VinOCRRequest = models.VinOCRRequest;
 const BrazilRNEInfo = models.BrazilRNEInfo;
 const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
 const RecognizePhilippinesTinIDOCRRequest = models.RecognizePhilippinesTinIDOCRRequest;
@@ -327,6 +331,19 @@ This API is used to set the default request rate limit to 5 requests/second.
     RecognizeBrazilCommonOCR(req, cb) {
         let resp = new RecognizeBrazilCommonOCRResponse();
         this.request("RecognizeBrazilCommonOCR", req, resp, cb);
+    }
+
+    /**
+     * This API recognizes the Residence Permit for Hong Kong, Macao, and Taiwan, China Residents. Its OCR feature supports content detection and recognition of all fields on both sides, including name, sex, date of birth, address, identity card number, issuing authority, validity period, number of issuances, and travel permit number (a key field). It can be applied to information recognition scenarios for Residence Permit for Hong Kong, Macao, and Taiwan, China Residents, such as bank account opening and user registration. 
+
+Default API request rate limit: 20 requests/second.
+     * @param {HmtResidentPermitOCRRequest} req
+     * @param {function(string, HmtResidentPermitOCRResponse):void} cb
+     * @public
+     */
+    HmtResidentPermitOCR(req, cb) {
+        let resp = new HmtResidentPermitOCRResponse();
+        this.request("HmtResidentPermitOCR", req, resp, cb);
     }
 
     /**

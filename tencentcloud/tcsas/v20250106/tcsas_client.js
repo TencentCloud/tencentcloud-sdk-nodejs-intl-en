@@ -29,6 +29,7 @@ const DescribeMNPSubscribeMessageTemplateResponse = models.DescribeMNPSubscribeM
 const ModifyTeamResponse = models.ModifyTeamResponse;
 const DescribeMNPSensitiveAPIPermissionApprovalRequest = models.DescribeMNPSensitiveAPIPermissionApprovalRequest;
 const ConfigureMNPPreviewResponse = models.ConfigureMNPPreviewResponse;
+const DescribeMNGVersionAuditInfoResp = models.DescribeMNGVersionAuditInfoResp;
 const DescribeMNGAppSecretRequest = models.DescribeMNGAppSecretRequest;
 const DescribeMNPSensitiveAPIPermissionApprovalResponse = models.DescribeMNPSensitiveAPIPermissionApprovalResponse;
 const UnbindMNPPaymentMerchantResponse = models.UnbindMNPPaymentMerchantResponse;
@@ -57,6 +58,7 @@ const DescribeMNPApprovalListData = models.DescribeMNPApprovalListData;
 const DescribeApplicationMNPListResponse = models.DescribeApplicationMNPListResponse;
 const MNGTypeDefine = models.MNGTypeDefine;
 const ModifyMNGDomainRequest = models.ModifyMNGDomainRequest;
+const DescribeMNGAuditListAppInfoResp = models.DescribeMNGAuditListAppInfoResp;
 const CreateGlobalDomainACLResponse = models.CreateGlobalDomainACLResponse;
 const RollbackMNPVersionRequest = models.RollbackMNPVersionRequest;
 const ProcessMNPSensitiveAPIPermissionApprovalRequest = models.ProcessMNPSensitiveAPIPermissionApprovalRequest;
@@ -72,12 +74,13 @@ const DescribeMNPTeamMerchantInfoRes = models.DescribeMNPTeamMerchantInfoRes;
 const DescribeApplicationMNPListRequest = models.DescribeApplicationMNPListRequest;
 const DescribeMNGReleasedVersionHistoryResponse = models.DescribeMNGReleasedVersionHistoryResponse;
 const DescribeMNGAllStageVersionsRequest = models.DescribeMNGAllStageVersionsRequest;
+const DescribeMNGVersionAuditDetailResponse = models.DescribeMNGVersionAuditDetailResponse;
 const DescribeMNPSensitiveAPIPermissionListResp = models.DescribeMNPSensitiveAPIPermissionListResp;
 const ChangePaymentBoundMerchantResponse = models.ChangePaymentBoundMerchantResponse;
 const DescribeMNPSubscribeMessageTemplateListResp = models.DescribeMNPSubscribeMessageTemplateListResp;
 const DescribeMNGVersionResponse = models.DescribeMNGVersionResponse;
 const DescribeMNGSubscribeMessageTemplateLibraryListResponse = models.DescribeMNGSubscribeMessageTemplateLibraryListResponse;
-const DescribeMNGSensitiveAPIPermissionListData = models.DescribeMNGSensitiveAPIPermissionListData;
+const CreateDomainParam = models.CreateDomainParam;
 const DescribeMNPAdvertisingDetailResponse = models.DescribeMNPAdvertisingDetailResponse;
 const CreateMNPSecretKeyRequest = models.CreateMNPSecretKeyRequest;
 const ConfigureMNPPreviewRequest = models.ConfigureMNPPreviewRequest;
@@ -87,6 +90,7 @@ const DescribeTeamRequest = models.DescribeTeamRequest;
 const DescribeMNGSensitiveAPIPermissionApprovalRequest = models.DescribeMNGSensitiveAPIPermissionApprovalRequest;
 const CreateMNGApprovalResp = models.CreateMNGApprovalResp;
 const DescribeMNGOfflinePackageURLRequest = models.DescribeMNGOfflinePackageURLRequest;
+const DescribeMNGVersionAuditDetailRequest = models.DescribeMNGVersionAuditDetailRequest;
 const CreateMNPApprovalResponse = models.CreateMNPApprovalResponse;
 const DescribeUserListData = models.DescribeUserListData;
 const MNPSubscribeMessageTemplateDetailResp = models.MNPSubscribeMessageTemplateDetailResp;
@@ -94,7 +98,7 @@ const DescribePaymentDataLineChartRequest = models.DescribePaymentDataLineChartR
 const MNPI18NSyncDto = models.MNPI18NSyncDto;
 const DescribeMNPSensitiveAPIPermissionListResponse = models.DescribeMNPSensitiveAPIPermissionListResponse;
 const DescribePaymentDataDetailResponse = models.DescribePaymentDataDetailResponse;
-const CreateDomainParam = models.CreateDomainParam;
+const DescribeMNPApprovalListResp = models.DescribeMNPApprovalListResp;
 const DescribeMNPAccessAnalysisOverviewResponse = models.DescribeMNPAccessAnalysisOverviewResponse;
 const ProcessMNPSensitiveAPIPermissionApprovalResponse = models.ProcessMNPSensitiveAPIPermissionApprovalResponse;
 const CreateMNPAppSecretResp = models.CreateMNPAppSecretResp;
@@ -105,6 +109,7 @@ const DescribeMNGSensitiveAPIPermissionListResp = models.DescribeMNGSensitiveAPI
 const DeleteMNGSubscribeMessageTemplateResponse = models.DeleteMNGSubscribeMessageTemplateResponse;
 const DescribeMNGAllStageVersionsResp = models.DescribeMNGAllStageVersionsResp;
 const CreateMNPApprovalResp = models.CreateMNPApprovalResp;
+const DescribeMNGVersionRequest = models.DescribeMNGVersionRequest;
 const DescribeApplicationConfigInfo = models.DescribeApplicationConfigInfo;
 const DescribeMNGSubscribeMessageTemplateListResponse = models.DescribeMNGSubscribeMessageTemplateListResponse;
 const AccessAnalysisDetail = models.AccessAnalysisDetail;
@@ -118,6 +123,7 @@ const DescribeMNPPreviewRequest = models.DescribeMNPPreviewRequest;
 const DescribeMNGMAUDataDetailResponse = models.DescribeMNGMAUDataDetailResponse;
 const CreateApplicationConfigResponse = models.CreateApplicationConfigResponse;
 const DescribeTeamMemberListPageResp = models.DescribeTeamMemberListPageResp;
+const DescribeMNGVersionAuditListRequest = models.DescribeMNGVersionAuditListRequest;
 const DescribePaymentDataOverviewResponse = models.DescribePaymentDataOverviewResponse;
 const DescribeApplicationResp = models.DescribeApplicationResp;
 const DescribeMNGAdvertisingOverviewResponse = models.DescribeMNGAdvertisingOverviewResponse;
@@ -178,7 +184,8 @@ const RetentionData = models.RetentionData;
 const ResetMNPAppSecretRequest = models.ResetMNPAppSecretRequest;
 const DescribeMNPReportDataLineChartResponse = models.DescribeMNPReportDataLineChartResponse;
 const DescribeMNPSensitiveAPIPermissionListData = models.DescribeMNPSensitiveAPIPermissionListData;
-const DescribeMNGVersionRequest = models.DescribeMNGVersionRequest;
+const TeamAdminUserInfo = models.TeamAdminUserInfo;
+const DescribeMNGVersionAuditListResp = models.DescribeMNGVersionAuditListResp;
 const DescribeTempSecret4UploadFile2CosResponse = models.DescribeTempSecret4UploadFile2CosResponse;
 const ApproveMNPPaymentEnableResponse = models.ApproveMNPPaymentEnableResponse;
 const DescribeUserDetailResp = models.DescribeUserDetailResp;
@@ -191,6 +198,7 @@ const DescribeSubscribeMessageTemplateLibraryKeywordData = models.DescribeSubscr
 const DescribeRevertOnlineVersionPageResp = models.DescribeRevertOnlineVersionPageResp;
 const DescribeMNGAccessAnalysisDetailResponse = models.DescribeMNGAccessAnalysisDetailResponse;
 const QueryMNGOnlineVersionResp = models.QueryMNGOnlineVersionResp;
+const DescribeMNGVersionAuditDetailResp = models.DescribeMNGVersionAuditDetailResp;
 const DescribeGlobalOverviewReportDetailRequest = models.DescribeGlobalOverviewReportDetailRequest;
 const DescribeApplicationListResp = models.DescribeApplicationListResp;
 const ReleaseMNPVersionResponse = models.ReleaseMNPVersionResponse;
@@ -201,7 +209,8 @@ const DescribeMNPApprovalListRequest = models.DescribeMNPApprovalListRequest;
 const DescribeMNGPaymentRetentionAnalysisResponse = models.DescribeMNGPaymentRetentionAnalysisResponse;
 const DescribeGlobalDomainsListData = models.DescribeGlobalDomainsListData;
 const DescribeMNPManagerDetailData = models.DescribeMNPManagerDetailData;
-const DescribeUserListRequest = models.DescribeUserListRequest;
+const DescribeMNPPaymentApprovalInfoResponse = models.DescribeMNPPaymentApprovalInfoResponse;
+const UnbindMNPPaymentMerchantRequest = models.UnbindMNPPaymentMerchantRequest;
 const DescribeApplicationMNPListResp = models.DescribeApplicationMNPListResp;
 const DescribeMNGRevertOnlineVersionPageResp = models.DescribeMNGRevertOnlineVersionPageResp;
 const DescribeMNPSubscribeMessageTemplateInfoResp = models.DescribeMNPSubscribeMessageTemplateInfoResp;
@@ -210,6 +219,7 @@ const DescribeMNPReportDetailRequest = models.DescribeMNPReportDetailRequest;
 const QueryMNPMerchantInfoRequest = models.QueryMNPMerchantInfoRequest;
 const ModifyMNGDomainResponse = models.ModifyMNGDomainResponse;
 const DescribeMNGPaymentReportDetailResponse = models.DescribeMNGPaymentReportDetailResponse;
+const DescribeMNPAuditListAppInfoResp = models.DescribeMNPAuditListAppInfoResp;
 const DescribeApplicationConfigFileResponse = models.DescribeApplicationConfigFileResponse;
 const DescribeMNGSubscribeMessageTemplateRequest = models.DescribeMNGSubscribeMessageTemplateRequest;
 const CreateMNPDomainACLResponse = models.CreateMNPDomainACLResponse;
@@ -225,10 +235,13 @@ const DescribeMNPMAUMetricCardResponse = models.DescribeMNPMAUMetricCardResponse
 const DeleteMNGRequest = models.DeleteMNGRequest;
 const ModifyApplicationConfigRequest = models.ModifyApplicationConfigRequest;
 const DescribeAPPDataOverviewResponse = models.DescribeAPPDataOverviewResponse;
+const DescribeMNPVersionAuditListRequest = models.DescribeMNPVersionAuditListRequest;
 const CreateMNGSensitiveAPIPermissionApprovalResponse = models.CreateMNGSensitiveAPIPermissionApprovalResponse;
+const DescribeMNPVersionAuditDetailResponse = models.DescribeMNPVersionAuditDetailResponse;
 const MAUChartData = models.MAUChartData;
 const DescribeGlobalDomainACLResponse = models.DescribeGlobalDomainACLResponse;
 const CreateApplicationResponse = models.CreateApplicationResponse;
+const DescribeMNPVersionAuditListResponse = models.DescribeMNPVersionAuditListResponse;
 const DeleteGlobalDomainRequest = models.DeleteGlobalDomainRequest;
 const DescribeMNGSubscribeMessageTemplateLibraryResp = models.DescribeMNGSubscribeMessageTemplateLibraryResp;
 const CreateGlobalDomainACLRequest = models.CreateGlobalDomainACLRequest;
@@ -263,7 +276,7 @@ const DeleteMNPRequest = models.DeleteMNPRequest;
 const DescribeMNPAllStageVersionsResponse = models.DescribeMNPAllStageVersionsResponse;
 const DescribeUserListResp = models.DescribeUserListResp;
 const QueryOnlineVersionResp = models.QueryOnlineVersionResp;
-const MNPTypeDefine = models.MNPTypeDefine;
+const DescribeMNPVersionAuditListResp = models.DescribeMNPVersionAuditListResp;
 const DescribeMNGCategoryRequest = models.DescribeMNGCategoryRequest;
 const DescribeSubscribeMessageTemplateLibraryResp = models.DescribeSubscribeMessageTemplateLibraryResp;
 const DescribeApplicationConfigInfosRequest = models.DescribeApplicationConfigInfosRequest;
@@ -272,7 +285,7 @@ const DownloadApplicationConfigResp = models.DownloadApplicationConfigResp;
 const CreateUserResponse = models.CreateUserResponse;
 const CreateMNPSecretKeyResponse = models.CreateMNPSecretKeyResponse;
 const RemoveMNGResponse = models.RemoveMNGResponse;
-const DescribeMNPPaymentApprovalInfoResponse = models.DescribeMNPPaymentApprovalInfoResponse;
+const DescribeUserListRequest = models.DescribeUserListRequest;
 const CategoryItem = models.CategoryItem;
 const DeleteMNPSubscribeMessageTemplateRequest = models.DeleteMNPSubscribeMessageTemplateRequest;
 const RequestPaymentEnableRequest = models.RequestPaymentEnableRequest;
@@ -285,7 +298,7 @@ const DescribeMNGRetentionDataResponse = models.DescribeMNGRetentionDataResponse
 const DescribeMNGPaymentLineChartResponse = models.DescribeMNGPaymentLineChartResponse;
 const MerchantBindApprovalResp = models.MerchantBindApprovalResp;
 const DescribeMNGAccessAnalysisOverviewRequest = models.DescribeMNGAccessAnalysisOverviewRequest;
-const DescribeUserResponse = models.DescribeUserResponse;
+const DescribeMNPVersionAuditDetailResp = models.DescribeMNPVersionAuditDetailResp;
 const DisableApplicationSensitiveAPIRequest = models.DisableApplicationSensitiveAPIRequest;
 const DeleteApplicationRequest = models.DeleteApplicationRequest;
 const DescribeAdvertisingLineChartResponse = models.DescribeAdvertisingLineChartResponse;
@@ -307,12 +320,14 @@ const DescribeMNGSubscribeMessageTemplateDetailResp = models.DescribeMNGSubscrib
 const CreateMNGDomainACLResponse = models.CreateMNGDomainACLResponse;
 const AnalysisAdvertOverview = models.AnalysisAdvertOverview;
 const AdTrendChart = models.AdTrendChart;
+const DescribeMNPVersionAuditDetailRequest = models.DescribeMNPVersionAuditDetailRequest;
 const ApprovePaymentMerchantBindingResponse = models.ApprovePaymentMerchantBindingResponse;
 const DescribeMNGActiveUserRealTimeStatisticsResponse = models.DescribeMNGActiveUserRealTimeStatisticsResponse;
 const ResetMNGAppSecretResponse = models.ResetMNGAppSecretResponse;
 const DescribeMNGSubscribeMessageTemplateLibraryListResp = models.DescribeMNGSubscribeMessageTemplateLibraryListResp;
 const CreateMNPVersionResponse = models.CreateMNPVersionResponse;
-const DescribeMNPApprovalListResp = models.DescribeMNPApprovalListResp;
+const DescribeMNGVersionAuditListResponse = models.DescribeMNGVersionAuditListResponse;
+const DescribeMNPAuditDetailAppAuditInfo = models.DescribeMNPAuditDetailAppAuditInfo;
 const ApproveMNPPaymentOpenRes = models.ApproveMNPPaymentOpenRes;
 const DescribeMNPActiveUserRealTimeStatisticsResponse = models.DescribeMNPActiveUserRealTimeStatisticsResponse;
 const ModifyMNPResponse = models.ModifyMNPResponse;
@@ -330,6 +345,7 @@ const CreateMNPAppSecretRequest = models.CreateMNPAppSecretRequest;
 const DescribeMNGCategoryResponse = models.DescribeMNGCategoryResponse;
 const MNPAdOverview = models.MNPAdOverview;
 const DescribeMNGPaymentOverviewRequest = models.DescribeMNGPaymentOverviewRequest;
+const DescribeUserResponse = models.DescribeUserResponse;
 const DescribeApplicationSensitiveAPIListData = models.DescribeApplicationSensitiveAPIListData;
 const DescribeGlobalOverviewDataSummaryRequest = models.DescribeGlobalOverviewDataSummaryRequest;
 const SubscribeMessageTemplateLibraryKeywordI18nInfoResp = models.SubscribeMessageTemplateLibraryKeywordI18nInfoResp;
@@ -364,6 +380,7 @@ const CreateMNPSensitiveAPIPermissionApprovalRequest = models.CreateMNPSensitive
 const Overview = models.Overview;
 const DeleteMNGSubscribeMessageTemplateRequest = models.DeleteMNGSubscribeMessageTemplateRequest;
 const DescribeApplicationListData = models.DescribeApplicationListData;
+const DescribeMNGAuditDetailAppAuditInfo = models.DescribeMNGAuditDetailAppAuditInfo;
 const DescribeApplicationMNPInfoResp = models.DescribeApplicationMNPInfoResp;
 const MNPPaymentOverview = models.MNPPaymentOverview;
 const DescribeMNPActiveUserRealTimeStatisticsRequest = models.DescribeMNPActiveUserRealTimeStatisticsRequest;
@@ -400,6 +417,7 @@ const AddTeamMemberResponse = models.AddTeamMemberResponse;
 const DescribeMNPMAUMetricCardRequest = models.DescribeMNPMAUMetricCardRequest;
 const MNPDetailI18nVO = models.MNPDetailI18nVO;
 const ModifyMNPRequest = models.ModifyMNPRequest;
+const MNPTypeDefine = models.MNPTypeDefine;
 const MAUIndicatorCard = models.MAUIndicatorCard;
 const DescribeMNGDomainACLRequest = models.DescribeMNGDomainACLRequest;
 const CreateApplicationSensitiveAPIRequest = models.CreateApplicationSensitiveAPIRequest;
@@ -418,7 +436,7 @@ const ModifyApplicationRequest = models.ModifyApplicationRequest;
 const DescribeMNPSubscribeMessageTemplateDetailResp = models.DescribeMNPSubscribeMessageTemplateDetailResp;
 const CreateMNGRequest = models.CreateMNGRequest;
 const DescribeTempSecret4UploadFile2CosRequest = models.DescribeTempSecret4UploadFile2CosRequest;
-const UnbindMNPPaymentMerchantRequest = models.UnbindMNPPaymentMerchantRequest;
+const DescribeMNGSensitiveAPIPermissionListData = models.DescribeMNGSensitiveAPIPermissionListData;
 const CreateMNGSubscribeMessageTemplateResponse = models.CreateMNGSubscribeMessageTemplateResponse;
 const DescribeApplicationRequest = models.DescribeApplicationRequest;
 const DescribeMNPDomainACLResponse = models.DescribeMNPDomainACLResponse;
@@ -431,6 +449,7 @@ const RollbackMNGVersionRequest = models.RollbackMNGVersionRequest;
 const ResetMNGAppSecretResp = models.ResetMNGAppSecretResp;
 const DescribeMNPAppSecretResponse = models.DescribeMNPAppSecretResponse;
 const StringData = models.StringData;
+const DescribeMNPVersionAuditInfoResp = models.DescribeMNPVersionAuditInfoResp;
 const MAULineChartData = models.MAULineChartData;
 const AgeRatingItemReq = models.AgeRatingItemReq;
 const DescribeMNPReleasedVersionHistoryResponse = models.DescribeMNPReleasedVersionHistoryResponse;
@@ -665,7 +684,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the line chart data for selected superapp metrics.
+     * This API is used to query the time-series data for selected superapp metrics.
      * @param {DescribeAPPDataDetailLineChartRequest} req
      * @param {function(string, DescribeAPPDataDetailLineChartResponse):void} cb
      * @public
@@ -728,6 +747,17 @@ class TcsasClient extends AbstractClient {
     ModifyMNPDomain(req, cb) {
         let resp = new ModifyMNPDomainResponse();
         this.request("ModifyMNPDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query mini game version approval records.
+     * @param {DescribeMNGVersionAuditListRequest} req
+     * @param {function(string, DescribeMNGVersionAuditListResponse):void} cb
+     * @public
+     */
+    DescribeMNGVersionAuditList(req, cb) {
+        let resp = new DescribeMNGVersionAuditListResponse();
+        this.request("DescribeMNGVersionAuditList", req, resp, cb);
     }
 
     /**
@@ -863,7 +893,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to generate a mini game secret key.
+     * This API is used to create a mini game secret key.
      * @param {CreateMNGAppSecretRequest} req
      * @param {function(string, CreateMNGAppSecretResponse):void} cb
      * @public
@@ -896,7 +926,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query a list of teams.
+     * This API is used to query the teams.
      * @param {DescribeTeamListRequest} req
      * @param {function(string, DescribeTeamListResponse):void} cb
      * @public
@@ -918,7 +948,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the mini game visit analysis line chart.
+     * This API is used to query the time-series visit data of a mini game.
      * @param {DescribeMNGAccessAnalysisLineChartRequest} req
      * @param {function(string, DescribeMNGAccessAnalysisLineChartResponse):void} cb
      * @public
@@ -1116,7 +1146,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the mini program visit analysis line chart within a given date range.
+     * This API is used to query the time-series visit data of a mini program within a given date range.
      * @param {DescribeMNPReportDataLineChartRequest} req
      * @param {function(string, DescribeMNPReportDataLineChartResponse):void} cb
      * @public
@@ -1138,7 +1168,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the mini program payment line chart within a specified date range.
+     * This API is used to query the time-series payment data of a mini program.
      * @param {DescribePaymentDataLineChartRequest} req
      * @param {function(string, DescribePaymentDataLineChartResponse):void} cb
      * @public
@@ -1226,7 +1256,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the advertising line chart data for a mini program within a specified date range.
+     * This API is used to query the time-series advertising data for a mini program within a specified date range.
      * @param {DescribeAdvertisingLineChartRequest} req
      * @param {function(string, DescribeAdvertisingLineChartResponse):void} cb
      * @public
@@ -1303,6 +1333,17 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query mini program version approval records.
+     * @param {DescribeMNPVersionAuditListRequest} req
+     * @param {function(string, DescribeMNPVersionAuditListResponse):void} cb
+     * @public
+     */
+    DescribeMNPVersionAuditList(req, cb) {
+        let resp = new DescribeMNPVersionAuditListResponse();
+        this.request("DescribeMNPVersionAuditList", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a mini program subscription message template.
      * @param {CreateMNPSubscribeMessageTemplateRequest} req
      * @param {function(string, CreateMNPSubscribeMessageTemplateResponse):void} cb
@@ -1369,7 +1410,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the mini game advertising data in a line chart format.
+     * This API is used to query the time-series advertising data of a mini game.
      * @param {DescribeMNGAdvertisingLineChartRequest} req
      * @param {function(string, DescribeMNGAdvertisingLineChartResponse):void} cb
      * @public
@@ -1765,7 +1806,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the mini game payment line chart.
+     * This API is used to query the time-series payment data of a mini game.
      * @param {DescribeMNGPaymentLineChartRequest} req
      * @param {function(string, DescribeMNGPaymentLineChartResponse):void} cb
      * @public
@@ -1787,7 +1828,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the mini game MAU line chart.
+     * This API is used to query the time-series MAU data of a mini game.
      * @param {DescribeMNGMAULineChartRequest} req
      * @param {function(string, DescribeMNGMAULineChartResponse):void} cb
      * @public
@@ -1795,6 +1836,17 @@ class TcsasClient extends AbstractClient {
     DescribeMNGMAULineChart(req, cb) {
         let resp = new DescribeMNGMAULineChartResponse();
         this.request("DescribeMNGMAULineChart", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query mini game version approval details.
+     * @param {DescribeMNGVersionAuditDetailRequest} req
+     * @param {function(string, DescribeMNGVersionAuditDetailResponse):void} cb
+     * @public
+     */
+    DescribeMNGVersionAuditDetail(req, cb) {
+        let resp = new DescribeMNGVersionAuditDetailResponse();
+        this.request("DescribeMNGVersionAuditDetail", req, resp, cb);
     }
 
     /**
@@ -1908,6 +1960,17 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query mini program version approval details.
+     * @param {DescribeMNPVersionAuditDetailRequest} req
+     * @param {function(string, DescribeMNPVersionAuditDetailResponse):void} cb
+     * @public
+     */
+    DescribeMNPVersionAuditDetail(req, cb) {
+        let resp = new DescribeMNPVersionAuditDetailResponse();
+        this.request("DescribeMNPVersionAuditDetail", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a mini game approval request.
      * @param {CreateMNGApprovalRequest} req
      * @param {function(string, CreateMNGApprovalResponse):void} cb
@@ -1941,7 +2004,7 @@ class TcsasClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the mini program monthly active user data in a line chart format.
+     * This API is used to query the time-series MAU data of a mini program.
      * @param {DescribeMNPMAULineChartRequest} req
      * @param {function(string, DescribeMNPMAULineChartResponse):void} cb
      * @public

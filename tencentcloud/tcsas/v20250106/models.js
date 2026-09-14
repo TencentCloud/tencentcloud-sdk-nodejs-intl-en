@@ -2856,6 +2856,12 @@ class DescribeMNPTeamMerchantInfoRes extends  AbstractModel {
          */
         this.MerchantName = null;
 
+        /**
+         * <p>Payment currency.</p>
+         * @type {string || null}
+         */
+        this.Currency = null;
+
     }
 
     /**
@@ -2869,6 +2875,7 @@ class DescribeMNPTeamMerchantInfoRes extends  AbstractModel {
         this.ApprovalStatus = 'ApprovalStatus' in params ? params.ApprovalStatus : null;
         this.ID = 'ID' in params ? params.ID : null;
         this.MerchantName = 'MerchantName' in params ? params.MerchantName : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
 
     }
 }

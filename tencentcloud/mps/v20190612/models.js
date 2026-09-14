@@ -52,7 +52,7 @@ class AiAnalysisTaskHorizontalToVerticalInput extends  AbstractModel {
 }
 
 /**
- * Audio/Video enhancement configuration.
+ * Audio/video enhancement configuration
  * @class
  */
 class EnhanceConfig extends  AbstractModel {
@@ -60,13 +60,13 @@ class EnhanceConfig extends  AbstractModel {
         super();
 
         /**
-         * Video enhancement configuration.
+         * 
          * @type {VideoEnhanceConfig || null}
          */
         this.VideoEnhance = null;
 
         /**
-         * Audio enhancement configuration.
+         * 
          * @type {AudioEnhanceConfig || null}
          */
         this.AudioEnhance = null;
@@ -404,7 +404,7 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
- * Frame interpolation configuration.
+ * Frame interpolation frame rate configuration
  * @class
  */
 class FrameRateConfig extends  AbstractModel {
@@ -412,18 +412,16 @@ class FrameRateConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the feature. Valid values:
-<li>ON</li>
-<li>OFF</li>
+         * Capability configuration switch. Valid values:
+<li>ON: enabled</li>
+<li>OFF: disabled.</li>
 Default value: ON.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Frame rate. Value ranges from 0 to 100. Measurement unit: Hz.
-Default value: 0.
-Note: For transcode, this parameter overrides the internal Fps in VideoTemplate.
+         * 
          * @type {number || null}
          */
         this.Fps = null;
@@ -654,7 +652,7 @@ class AiAnalysisTaskVideoComprehensionResult extends  AbstractModel {
 }
 
 /**
- * Custom specification parameters for video processing, which are used to override corresponding parameters in templates.
+ * Specification parameters for custom transcoding. Used to overwrite the corresponding parameter values in the template.
  * @class
  */
 class OverrideTranscodeParameter extends  AbstractModel {
@@ -662,59 +660,59 @@ class OverrideTranscodeParameter extends  AbstractModel {
         super();
 
         /**
-         * Container format. Valid values: mp4, flv, hls, mp3, flac, ogg, and m4a; mp3, flac, ogg, and m4a are formats of audio files.
+         * Muxing format. Available values: mp4, flv, hls, mp3, flac, ogg, and m4a. Among them, mp3, flac, ogg, and m4a are for audio-only files.
          * @type {string || null}
          */
         this.Container = null;
 
         /**
-         * Whether to remove video data. Valid values:
-<li>0: retain</li>
-<li>1: remove</li>
+         * Indicates whether to remove video data. Parameter value:
+<li>`0`: retention;</li>
+<li>1: Remove.</li>
          * @type {number || null}
          */
         this.RemoveVideo = null;
 
         /**
-         * Whether to remove audio data. Valid values:
-<li>0: retain</li>
-<li>1: remove</li>
+         * Indicates whether to remove audio data. Parameter value:
+<li>`0`: retention;</li>
+<li>1: Remove.</li>
          * @type {number || null}
          */
         this.RemoveAudio = null;
 
         /**
-         * Video stream configuration parameter.
+         * Video stream configuration parameters.
          * @type {VideoTemplateInfoForUpdate || null}
          */
         this.VideoTemplate = null;
 
         /**
-         * Audio stream configuration parameter.
+         * Audio stream configuration parameters.
          * @type {AudioTemplateInfoForUpdate || null}
          */
         this.AudioTemplate = null;
 
         /**
-         * Top Speed Codec transcoding parameter.
+         * 
          * @type {TEHDConfigForUpdate || null}
          */
         this.TEHDConfig = null;
 
         /**
-         * Subtitle stream configuration parameter.
+         * Subtitle stream configuration parameters.
          * @type {SubtitleTemplate || null}
          */
         this.SubtitleTemplate = null;
 
         /**
-         * Specifies the external audio track parameter.
+         * External audio track parameter.
          * @type {Array.<MediaInputInfo> || null}
          */
         this.AddonAudioStream = null;
 
         /**
-         * Extension field for transcoding.
+         * Transcoding extension field.
          * @type {string || null}
          */
         this.StdExtInfo = null;
@@ -1026,7 +1024,7 @@ class ProcessLiveStreamResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Task ID.</p>
+         * 
          * @type {string || null}
          */
         this.TaskId = null;
@@ -2109,7 +2107,7 @@ class AsrHotwordsSetItem extends  AbstractModel {
 }
 
 /**
- * LLM repair
+ * 
  * @class
  */
 class AiRestorationConfig extends  AbstractModel {
@@ -2123,7 +2121,7 @@ class AiRestorationConfig extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * <p>Strength type</p><p>Enumeration values:</p><ul><li>weak: Weak</li><li>normal: Medium</li><li>strong: Strong</li></ul><p>Default value: normal</p>
+         * 
          * @type {string || null}
          */
         this.Type = null;
@@ -2386,6 +2384,55 @@ Note: The queue and bucket need to be in the same region.
 }
 
 /**
+ * Word information.
+ * @class
+ */
+class WordResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Word text.
+         * @type {string || null}
+         */
+        this.Word = null;
+
+        /**
+         * Word start timestamp, in seconds.
+         * @type {number || null}
+         */
+        this.Start = null;
+
+        /**
+         * Word end timestamp, in seconds.
+         * @type {number || null}
+         */
+        this.End = null;
+
+        /**
+         * Text after translation.
+         * @type {string || null}
+         */
+        this.Trans = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Word = 'Word' in params ? params.Word : null;
+        this.Start = 'Start' in params ? params.Start : null;
+        this.End = 'End' in params ? params.End : null;
+        this.Trans = 'Trans' in params ? params.Trans : null;
+
+    }
+}
+
+/**
  * CreateAiFissionTask response structure.
  * @class
  */
@@ -2516,7 +2563,7 @@ class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
 }
 
 /**
- * Rule of the `{number}` variable in the output file name.
+ * Rules for the `{number}` variable in the output filename.
  * @class
  */
 class NumberFormat extends  AbstractModel {
@@ -2524,25 +2571,25 @@ class NumberFormat extends  AbstractModel {
         super();
 
         /**
-         * Start value of the `{number}` variable. Default value: 0.
+         * The starting value of the `{number}` variable. Default value: 0.
          * @type {number || null}
          */
         this.InitialValue = null;
 
         /**
-         * Increment of the `{number}` variable. Default value: 1.
+         * The growth step length of the `{number}` variable, with a default value of 1.
          * @type {number || null}
          */
         this.Increment = null;
 
         /**
-         * Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+         * Minimum length of the `{number}` variable. Placeholder is used if the length is not sufficient. Default value: 1.
          * @type {number || null}
          */
         this.MinLength = null;
 
         /**
-         * Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+         * Placeholder to add when the length of the `{number}` variable is not sufficient. Default value: "0".
          * @type {string || null}
          */
         this.PlaceHolder = null;
@@ -3188,26 +3235,19 @@ class AudioTrackChannelInfo extends  AbstractModel {
         super();
 
         /**
-         * Whether audio mixing is enabled. Value range:
-0: Disable audio mixing
-1: Enable audio mixing
-Default value: 0
+         * 
          * @type {number || null}
          */
         this.ChannelsRemix = null;
 
         /**
-         * Merge audio track input type, available values:
-track: Indicates usage of the audio track id.
-track_channel: Indicates usage of audio track id and sound channel id.
-Default: track.
-Note: If the original video is multichannel, recommend using track_channel.
+         * 
          * @type {string || null}
          */
         this.SelectType = null;
 
         /**
-         * Audio track info
+         * 
          * @type {Array.<TrackInfo> || null}
          */
         this.InputTrackInfo = null;
@@ -3340,7 +3380,7 @@ class DiagnoseResult extends  AbstractModel {
 }
 
 /**
- * Intelligent erasure task
+ * 
  * @class
  */
 class SmartEraseTaskInput extends  AbstractModel {
@@ -3348,7 +3388,7 @@ class SmartEraseTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Smart erasing template id.
+         * 
          * @type {number || null}
          */
         this.Definition = null;
@@ -3360,7 +3400,7 @@ class SmartEraseTaskInput extends  AbstractModel {
         this.RawParameter = null;
 
         /**
-         * Custom parameters for smart erasing. When the value of Definition is not 0, this parameter is valid. When certain erasing parameters in this structure are specified, the specified parameters will be used to overwrite those in the smart erasing template. This parameter is used in highly customized scenarios. It is recommended to use only Definition to specify smart erasing parameters.
+         * 
          * @type {OverrideEraseParameter || null}
          */
         this.OverrideParameter = null;
@@ -3372,15 +3412,7 @@ class SmartEraseTaskInput extends  AbstractModel {
         this.OutputStorage = null;
 
         /**
-         * Output path of the file, which can be a relative or absolute path.
-To define the output path, the path must end with `.{format}`. For variable names, please refer to the Filename Variable Explanation (https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1).
-Relative path example:
-<li>Filename_{Variable name}.{format}</li>
-<li>Filename.{format}</li>
-Absolute path example:
-<li>/Custom path/Filename_{Variable name}.{format}</li>
-
-**Note**: Currently does not support the `BatchProcessMedia` API.
+         * 
          * @type {string || null}
          */
         this.OutputObjectPath = null;
@@ -3808,7 +3840,7 @@ Default value: black.
 }
 
 /**
- * Reference audio information.
+ * 
  * @class
  */
 class AigcAudioReferenceAudioInfo extends  AbstractModel {
@@ -3816,7 +3848,7 @@ class AigcAudioReferenceAudioInfo extends  AbstractModel {
         super();
 
         /**
-         * <p>Reference audio URL, which must be accessible from the public network.</p>
+         * 
          * @type {string || null}
          */
         this.AudioUrl = null;
@@ -3836,7 +3868,7 @@ class AigcAudioReferenceAudioInfo extends  AbstractModel {
 }
 
 /**
- * Privacy protection configuration for the smart erasing template.
+ * 
  * @class
  */
 class SmartErasePrivacyConfig extends  AbstractModel {
@@ -3844,17 +3876,13 @@ class SmartErasePrivacyConfig extends  AbstractModel {
         super();
 
         /**
-         * Privacy protection removal method.
-- Blur: blur detection
-- mosaic
+         * 
          * @type {string || null}
          */
         this.PrivacyModel = null;
 
         /**
-         * Privacy protection target. (When API Explorer is used, no need to specify an array. Just add the corresponding items and fill in the value.)
--Human face
-- plate: license plate.
+         * 
          * @type {Array.<string> || null}
          */
         this.PrivacyTargets = null;
@@ -4098,6 +4126,62 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
+ * ChangeVoice response structure.
+ * @class
+ */
+class ChangeVoiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Error code. 0 is returned if the request is successful.</p>
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * <p>Error message. success is returned if the request is successful.</p>
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * <p>base64-encoded result audio, default mp3 format</p>
+         * @type {string || null}
+         */
+        this.AudioData = null;
+
+        /**
+         * <p>Result audio url, valid for 24 hours</p>
+         * @type {string || null}
+         */
+        this.AudioUrl = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.AudioData = 'AudioData' in params ? params.AudioData : null;
+        this.AudioUrl = 'AudioUrl' in params ? params.AudioUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Details of a content audit template
  * @class
  */
@@ -4287,7 +4371,7 @@ class DeleteAIRecognitionTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Video enhancement configuration.
+ * Video enhancement configuration
  * @class
  */
 class VideoEnhanceConfig extends  AbstractModel {
@@ -4295,79 +4379,79 @@ class VideoEnhanceConfig extends  AbstractModel {
         super();
 
         /**
-         * <p>Frame rate configuration (old) for the frame interpolation. New users are recommended to use FrameRateWithDen for configuring the frame rate of frame interpolation, which supports fractions and provides better results. Note that FrameRate and FrameRateWithDen are mutually exclusive; configuring both simultaneously may cause task failures. The configuration does not take effect if the source frame rate is greater than or equal to the target frame rate.</p>
+         * 
          * @type {FrameRateConfig || null}
          */
         this.FrameRate = null;
 
         /**
-         * <p>Super-resolution configuration. The video is not processed when the source resolution is higher than the target resolution. Note that it cannot be enabled simultaneously with LLM enhancement.</p>
+         * 
          * @type {SuperResolutionConfig || null}
          */
         this.SuperResolution = null;
 
         /**
-         * <p>HDR configuration.</p>
+         * 
          * @type {HdrConfig || null}
          */
         this.Hdr = null;
 
         /**
-         * <p>Video noise reduction configuration. Note that it cannot be enabled simultaneously with LLM enhancement.</p>
+         * 
          * @type {VideoDenoiseConfig || null}
          */
         this.Denoise = null;
 
         /**
-         * <p>Comprehensive enhancement configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured.</p>
+         * 
          * @type {ImageQualityEnhanceConfig || null}
          */
         this.ImageQualityEnhance = null;
 
         /**
-         * <p>Color enhancement configuration.</p>
+         * 
          * @type {ColorEnhanceConfig || null}
          */
         this.ColorEnhance = null;
 
         /**
-         * <p>Low-light enhancement configuration.</p>
+         * 
          * @type {LowLightEnhanceConfig || null}
          */
         this.LowLightEnhance = null;
 
         /**
-         * <p>Scratches removal configuration.</p>
+         * 
          * @type {ScratchRepairConfig || null}
          */
         this.ScratchRepair = null;
 
         /**
-         * <p>Artifacts removal configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured.</p>
+         * 
          * @type {ArtifactRepairConfig || null}
          */
         this.ArtifactRepair = null;
 
         /**
-         * <p>Enhanced scenario configuration, available values:</p><li>common (General), general enhancement parameter, suitable for various video types, foundation optimization parameters, enhance overall video quality.</li><li>AIGC, overall resolution enhancement, use AI technology to enhance video overall resolution, improve image definition.</li><li>short_play (Mini-drama & AI simulation drama), enhance face and subtitle details, highlight facial expression details and subtitle clarity, improve viewing experience.</li><li>AI_comic (AI comic drama), enhance comic style image detail.</li><li>short_video (short video), optimize complex and diverse image quality issues, target complex scenarios in short videos, optimize video quality, address multiple visual issues.</li><li>game (Gaming video), restore motion blur, enhance details, focus on enhancing the clarity of game details, restore motion blur areas, make the game screen content clearer and more various.</li><li>HD_movie_series (Ultra-high-definition TV shows and movies), obtain ultra-high-definition smooth effect, target the demand for broadcasting/OTT ultra-high-definition video, generate 4K 60fps HDR Ultra-High-Definition Standard video. Support broadcasting scenario format standards.</li><li>LQ_material (Low-quality material/Classic film restoration), overall resolution enhancement, target old video with insufficient resolution, blur distortion, scratch damage and color temperature issues due to older shooting era for specialized optimization.</li><li>lecture (Showroom/E-commerce/Conference/lecture), beautify and enhance face effect, target scenarios where people explain in showroom/e-commerce/conference/lecture, perform specialized optimization for face region, noise reduction, burr processing.</li><li>Fill-in string represents non-use of enhanced scenario.</li>
+         * 
          * @type {string || null}
          */
         this.EnhanceSceneType = null;
 
         /**
-         * <p>LLM enhancement configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured. It cannot intersect with super-resolution and noise reduction.</p>
+         * 
          * @type {DiffusionEnhanceConfig || null}
          */
         this.DiffusionEnhance = null;
 
         /**
-         * <p>The new frame interpolation frame rate configuration supports fractions. Note that you must choose between this and FrameRate. The capacity will not take effect when the source frame rate is equal to or greater than the target frame rate.</p>
+         * 
          * @type {FrameRateWithDenConfig || null}
          */
         this.FrameRateWithDen = null;
 
         /**
-         * <p>Large model repair configuration. Note that you can configure at most one of large model, comprehensive enhancement, and artifacts removal. It cannot intersect with super-resolution and noise reduction.</p>
+         * 
          * @type {AiRestorationConfig || null}
          */
         this.AiRestoration = null;
@@ -4807,7 +4891,7 @@ class SubmitHunyuan3DTaskRequest extends  AbstractModel {
 }
 
 /**
- * Metadata of a VOD media file
+ * Meta-information of on-demand media files
  * @class
  */
 class MediaMetaData extends  AbstractModel {
@@ -4815,78 +4899,67 @@ class MediaMetaData extends  AbstractModel {
         super();
 
         /**
-         * Size of an uploaded media file in bytes (which is the sum of size of m3u8 and ts files if the video is in HLS format).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Size of the uploaded media file (for HLS videos, the size is the total of the m3u8 and ts file sizes), unit: byte.
          * @type {number || null}
          */
         this.Size = null;
 
         /**
-         * Container, such as m4a and mp4.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Container type, for example, m4a and mp4.
          * @type {string || null}
          */
         this.Container = null;
 
         /**
-         * Sum of the average bitrate of a video stream and that of an audio stream in bps.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Sum of the average video stream bitrate and average audio stream bitrate. Unit: bps.
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
-         * Maximum value of the height of a video stream in px.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Maximum height of a video stream. Unit: px.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Maximum value of the width of a video stream in px.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Maximum video stream width in px.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Video duration in seconds.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Video duration, unit: seconds.
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
-         * Selected angle during video recording in degrees.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Selection angle during video shooting. Unit: degree.
          * @type {number || null}
          */
         this.Rotate = null;
 
         /**
          * Video stream information.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MediaVideoStreamItem> || null}
          */
         this.VideoStreamSet = null;
 
         /**
          * Audio stream information.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MediaAudioStreamItem> || null}
          */
         this.AudioStreamSet = null;
 
         /**
-         * Video duration in seconds.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Video duration, unit: seconds.
          * @type {number || null}
          */
         this.VideoDuration = null;
 
         /**
-         * Audio duration in seconds.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Audio duration, in seconds.
          * @type {number || null}
          */
         this.AudioDuration = null;
@@ -4927,6 +5000,62 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.VideoDuration = 'VideoDuration' in params ? params.VideoDuration : null;
         this.AudioDuration = 'AudioDuration' in params ? params.AudioDuration : null;
+
+    }
+}
+
+/**
+ * dubbing task configuration
+ * @class
+ */
+class DubbingConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Dubbing type. Available values: FullAutoEmotionClone: fully automated high-emotion clone dubbing; RoleBasedSmartDubbing: intelligent dubbing by role; SingleVoice: specify a single voice type;</p>
+         * @type {string || null}
+         */
+        this.DubbingMode = null;
+
+        /**
+         * <p>Background sound volume, range: 0-100</p><p>Default value: 80</p>
+         * @type {number || null}
+         */
+        this.BackgroundVolume = null;
+
+        /**
+         * <p>Secondary fine-tuning switch. Available values: <br>ON: enable secondary fine-tuning; <br>OFF: disable secondary fine-tuning;</p><p>Default value: OFF</p><p>It can be set to ON only for RoleBasedSmartDubbing.</p>
+         * @type {string || null}
+         */
+        this.SecondaryTuning = null;
+
+        /**
+         * <p>Specify voice tone</p><p>Valid only for SingleVoice and required for Create</p>
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
+         * <p>Dubbing version. Available values: v1, v2</p><p>Default value: v2</p><p>Only takes effect in FullAutoEmotionClone (fully automated high-emotion clone dubbing) mode</p>
+         * @type {string || null}
+         */
+        this.DubbingVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DubbingMode = 'DubbingMode' in params ? params.DubbingMode : null;
+        this.BackgroundVolume = 'BackgroundVolume' in params ? params.BackgroundVolume : null;
+        this.SecondaryTuning = 'SecondaryTuning' in params ? params.SecondaryTuning : null;
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.DubbingVersion = 'DubbingVersion' in params ? params.DubbingVersion : null;
 
     }
 }
@@ -5025,7 +5154,7 @@ class ModifyWordSampleResponse extends  AbstractModel {
 }
 
 /**
- * Audio stream configuration parameter
+ * Audio stream configuration parameters
  * @class
  */
 class AudioTemplateInfoForUpdate extends  AbstractModel {
@@ -5033,31 +5162,31 @@ class AudioTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * <p>Audio stream encoding format.<br>When audio transcoding is not needed, the valid value is:</p><li>copy.</li>When the outer parameter Container is mp3, the valid value is:<li>mp3.</li>When the outer parameter Container is ogg or flac, the valid value is:<li>flac.</li>When the outer parameter Container is m4a, the valid values are:<li>aac;</li><li>ac3.</li>When the outer parameter Container is mp4 or flv, the valid values are:<li>aac: suitable for mp4.</li><li>mp3: suitable for flv.</li><li>mp2.</li>When the outer parameter Container is hls, the valid values are:<li>aac.</li><li>mp3.</li>When the outer parameter Container is wav, the valid values are:<li>pcm16 and pcm24.</li>
+         * 
          * @type {string || null}
          */
         this.Codec = null;
 
         /**
-         * <p>Audio stream bitrate, in kbps. Value range: 0 and [26, 256]. When the value is 0, it means the audio bitrate remains consistent with that of the original audio.</p>
+         * 
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
-         * <p>Audio stream sampling rate. Different sampling rate options are provided for different encoding standards. Enter 0 to use the source audio sampling rate.<br>For details, see <a href="https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53">Audio Sampling Rate Range</a>.<br>Unit: Hz.<br>Note: Ensure the source audio stream sampling rate is within the supported range. Otherwise, transcoding may fail.</p>
+         * 
          * @type {number || null}
          */
         this.SampleRate = null;
 
         /**
-         * <p>Audio channel mode. Valid values:</p><li>0: The number of audio channels follows that of the source.</li><li>1: Single channel.</li><li>2: Two channels.</li><li>6: 5.1 channels.</li>When the media container format is an audio format (mp3), the number of audio channels cannot be set to 5.1.<p>Default value: 2.<br>Note: If you set the audio channel to follow that of the source and the audio encoding format does not support the current audio channel, the transcoding task may fail.</p>
+         * 
          * @type {number || null}
          */
         this.AudioChannel = null;
 
         /**
-         * <p>Specifies the retained audio tracks for output. All source tracks are retained by default.</p>
+         * 
          * @type {Array.<number> || null}
          */
         this.StreamSelects = null;
@@ -5081,7 +5210,7 @@ class AudioTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * Watermark removal configuration for the smart erasing template.
+ * 
  * @class
  */
 class UpdateSmartEraseWatermarkConfig extends  AbstractModel {
@@ -5089,40 +5218,25 @@ class UpdateSmartEraseWatermarkConfig extends  AbstractModel {
         super();
 
         /**
-         * Watermark removal method.
-**Automatic erasing:** Video watermarks are automatically recognized using an AI model and are erased to generate a new video. It applies to dynamic watermarks.
-When using automatic erasing, if AutoAreas is not specified, the full-screen video image area will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
-**Specified area erasure:** For static watermarks with a relatively fixed position, we recommend you directly specify the area for erasure.
-When you choose specified area erasure, import at least a specified region.
-
-- auto: automatic erasing
-- custom: specified area erasing.
+         * 
          * @type {string || null}
          */
         this.WatermarkEraseMethod = null;
 
         /**
-         * Watermark removal model.
-Basic Edition: Provides average effects and high cost performance. Suitable for animations or videos with clean backgrounds.
-Advanced edition: Better effectiveness, suitable for reality style videos such as mini-drama.
--.
-- advanced: Advanced Edition.
+         * 
          * @type {string || null}
          */
         this.WatermarkModel = null;
 
         /**
-         * Automatic removal of custom region.
-For the specified area, AI models are used to automatically detect and erase the target objects.
-Note: When the erasing method is set to custom, this parameter is invalid. Input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
+         * 
          * @type {Array.<EraseArea> || null}
          */
         this.AutoAreas = null;
 
         /**
-         * Specify a custom region for erasing.
-For the specified area, erase the target objects directly without detection and recognition within a selected time period.
-Note: Input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
+         * 
          * @type {Array.<EraseTimeArea> || null}
          */
         this.CustomAreas = null;
@@ -5250,7 +5364,7 @@ class ModifyProcessImageTemplateRequest extends  AbstractModel {
 }
 
 /**
- * The information of the media processing output object.
+ * Media processing output object information.
  * @class
  */
 class TaskOutputStorage extends  AbstractModel {
@@ -5258,28 +5372,28 @@ class TaskOutputStorage extends  AbstractModel {
         super();
 
         /**
-         * Specifies the type of storage location for the media processing service output object. valid values:.
-<Li>COS: cos storage.</li>.
-<Li>AWS-S3: aws storage, suitable for aws tasks only and requires the same region.</li>.
-<Li>VOD: video-on-demand (vod) pro edition</li>.
+         * Type of the media processing output object storage location. Supported values:
+<li>COS: COS storage</li>
+<li>AWS-S3: AWS storage, suitable for AWS tasks only and requires the same region</li>
+<li> VOD: VOD Pro Edition </li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Valid when Type is COS. This item is required and indicates the Media Processing Service COS output location.
+         * 
          * @type {CosOutputStorage || null}
          */
         this.CosOutputStorage = null;
 
         /**
-         * Valid when Type is AWS-S3. This item is required and indicates the AWS S3 output location for media processing.
+         * 
          * @type {S3OutputStorage || null}
          */
         this.S3OutputStorage = null;
 
         /**
-         * Valid at that time when Type is VOD. This item is required and represents the Media Processing Service (MPS) video-on-demand (VOD) pro edition output location.
+         * 
          * @type {VODOutputStorage || null}
          */
         this.VODOutputStorage = null;
@@ -5853,7 +5967,7 @@ class DescribeSmartSubtitleTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * Input parameter type of video content recognition
+ * Input parameter type for video content recognition
  * @class
  */
 class AiRecognitionTaskInput extends  AbstractModel {
@@ -5861,7 +5975,7 @@ class AiRecognitionTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Intelligent video recognition template ID.
+         * Intelligent video identification template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -6116,7 +6230,7 @@ class VoiceUpdateFields extends  AbstractModel {
 }
 
 /**
- * Audio stream configuration parameter
+ * Audio stream configuration parameters.
  * @class
  */
 class AudioTemplateInfo extends  AbstractModel {
@@ -6148,7 +6262,7 @@ class AudioTemplateInfo extends  AbstractModel {
         this.AudioChannel = null;
 
         /**
-         * <p>Audio track merging information.<br>Note: This field only takes effect for adaptive transcoding.</p>
+         * 
          * @type {AudioTrackChannelInfo || null}
          */
         this.TrackChannelInfo = null;
@@ -6882,24 +6996,42 @@ class LLMDetectionResultItem extends  AbstractModel {
 }
 
 /**
- * CreateProcessImageTemplate response structure.
+ * ChangeVoice request structure.
  * @class
  */
-class CreateProcessImageTemplateResponse extends  AbstractModel {
+class ChangeVoiceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique identifier of the image processing template.
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * <p>base64-encoded audio to be converted.</p>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AudioData = null;
+
+        /**
+         * <p>Audio Url to be switched. Valid when AudioData is empty.</p>
+         * @type {string || null}
+         */
+        this.AudioUrl = null;
+
+        /**
+         * <p>Voice ID.</p>
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
+         * <p>Output parameters.</p>
+         * @type {SyncDubbingOutputOption || null}
+         */
+        this.Output = null;
+
+        /**
+         * <p>Extended parameters in the format of a JSON string.</p>
+         * @type {string || null}
+         */
+        this.ExtParam = null;
 
     }
 
@@ -6910,8 +7042,16 @@ class CreateProcessImageTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.AudioData = 'AudioData' in params ? params.AudioData : null;
+        this.AudioUrl = 'AudioUrl' in params ? params.AudioUrl : null;
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+
+        if (params.Output) {
+            let obj = new SyncDubbingOutputOption();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.ExtParam = 'ExtParam' in params ? params.ExtParam : null;
 
     }
 }
@@ -7811,7 +7951,7 @@ class AiReviewPornTaskInput extends  AbstractModel {
 }
 
 /**
- * HDR configuration.
+ * HDR configuration
  * @class
  */
 class HdrConfig extends  AbstractModel {
@@ -7819,21 +7959,16 @@ class HdrConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the feature. Valid values:
-<li>ON</li>
-<li>OFF</li>
+         * Capability configuration switch. Valid values:
+<li>ON: enabled;</li>
+<li>OFF: disabled</li>
 Default value: ON.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Type, available values:
-<li>HDR10</li>
-<li>HLG</li>
-Default Value: HDR10.
-Note: The video encoding method should be h264 or h265.
-Note: The video encoding bit depth is 10.
+         * 
          * @type {string || null}
          */
         this.Type = null;
@@ -8090,30 +8225,36 @@ class ScheduleTask extends  AbstractModel {
 }
 
 /**
- * token usage
+ * dubbing task translation configuration
  * @class
  */
-class TokensUsage extends  AbstractModel {
+class DubbingSubtitleConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Input token count</p>
-         * @type {number || null}
+         * <p>Subtitle source.</p><p>Enumeration values:</p><ul><li>OCR: OCR text recognition, recognizes text in video frames.</li><li>ASR: ASR speech recognition, recognizes voice dialogue in videos.</li><li>External: External subtitle file, provide the URL of the original/translated subtitles.</li></ul>
+         * @type {string || null}
          */
-        this.InputTokens = null;
+        this.SubtitleSource = null;
 
         /**
-         * <p>Output token count</p>
-         * @type {number || null}
+         * <p>Use ASR to assist OCR.</p><p>Enumeration values:</p><ul><li>ON: Enable the use of ASR to assist OCR.</li><li>OFF: Disable the use of ASR to assist OCR.</li></ul><p>Default value: OFF</p><p>Can be set to ON only when SubtitleSource=OCR</p>
+         * @type {string || null}
          */
-        this.OutputTokens = null;
+        this.AsrAssistOcr = null;
 
         /**
-         * <p>Total token count, generally input + output</p>
-         * @type {number || null}
+         * <p>Erase the original subtitle.</p><p>Enumeration values:</p><ul><li>ON: Erase the original subtitle.</li><li>OFF: Retain the original subtitle.</li></ul><p>Default value: OFF</p><p>Cannot be set to ON when SubtitleSource=External</p>
+         * @type {string || null}
          */
-        this.TotalTokens = null;
+        this.EraseOriginalSubtitle = null;
+
+        /**
+         * <p>Subtitle location information.</p>
+         * @type {SelectingSubtitleAreasConfig || null}
+         */
+        this.SelectingSubtitleAreasConfig = null;
 
     }
 
@@ -8124,9 +8265,15 @@ class TokensUsage extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InputTokens = 'InputTokens' in params ? params.InputTokens : null;
-        this.OutputTokens = 'OutputTokens' in params ? params.OutputTokens : null;
-        this.TotalTokens = 'TotalTokens' in params ? params.TotalTokens : null;
+        this.SubtitleSource = 'SubtitleSource' in params ? params.SubtitleSource : null;
+        this.AsrAssistOcr = 'AsrAssistOcr' in params ? params.AsrAssistOcr : null;
+        this.EraseOriginalSubtitle = 'EraseOriginalSubtitle' in params ? params.EraseOriginalSubtitle : null;
+
+        if (params.SelectingSubtitleAreasConfig) {
+            let obj = new SelectingSubtitleAreasConfig();
+            obj.deserialize(params.SelectingSubtitleAreasConfig)
+            this.SelectingSubtitleAreasConfig = obj;
+        }
 
     }
 }
@@ -8492,7 +8639,7 @@ class MediaAiAnalysisCoverItem extends  AbstractModel {
 }
 
 /**
- * The information of the COS object to process.
+ * Media processing COS object information.
  * @class
  */
 class CosInputInfo extends  AbstractModel {
@@ -8500,19 +8647,19 @@ class CosInputInfo extends  AbstractModel {
         super();
 
         /**
-         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         * Name of the COS Bucket where the media processing object file resides, for example, TopRankVideo-125xxx88.
          * @type {string || null}
          */
         this.Bucket = null;
 
         /**
-         * The region of the COS bucket, such as `ap-chongqing`.
+         * Region of the COS Bucket where the media processing object file resides, for example, ap-chongqing.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         * Input path of the media processing object file, for example `/movie/201907/WildAnimal.mov`.
          * @type {string || null}
          */
         this.Object = null;
@@ -8719,7 +8866,7 @@ class AiParagraphInfo extends  AbstractModel {
 }
 
 /**
- * The audio separation configuration.
+ * Audio separation configuration
  * @class
  */
 class AudioSeparateConfig extends  AbstractModel {
@@ -8727,28 +8874,22 @@ class AudioSeparateConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the feature. Valid values:
-<li>`ON`</li>
-<li>`OFF` </li>
-Default value: `ON`.
+         * Capability configuration switch. Available values:
+<li>ON: enabled;</li>
+<li>OFF: disabled</li>
+Default value: ON.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Scenario type. Valid values:
-<li>normal: Voice background audio scenario</li>
-<li>music: Singing accompaniment scenario</li>
-Default value: normal.
+         * 
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Output audio track. Available values:
-<li>vocal: output voice.</li>
-<li>Background: Output background audio when the application scenario is normal, and output accompaniment when the application scenario is music.</li>
-Default value: vocal.
+         * 
          * @type {string || null}
          */
         this.Track = null;
@@ -8953,7 +9094,7 @@ class AiAnalysisTaskCoverResult extends  AbstractModel {
 }
 
 /**
- * The audio improvement configuration.
+ * Volume beautification configuration
  * @class
  */
 class AudioBeautifyConfig extends  AbstractModel {
@@ -8961,19 +9102,13 @@ class AudioBeautifyConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the feature. Valid values:
-<li>`ON`</li>
-<li>`OFF` </li>
-Default value: `ON`.
+         * <p>Capability configuration switch. Available values: </p><li>ON: Enable;</li><li>OFF: Disable.</li>Default value: ON.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Type. Multiple selections allowed. Valid values:
-<li>declick: noise removal</li>
-<li>deesser: Dental Click Suppression</li>
-Default value: declick.
+         * <p>Type. Multiple selections allowed. Available values:</p><li>declick: noise removal</li><li>deesser: de-ess</li>Default value: declick.
          * @type {Array.<string> || null}
          */
         this.Types = null;
@@ -9407,7 +9542,7 @@ class CreateAigcVideoTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Returned task ID after the task is created successfully.<br>The task progress and generation results can be obtained by calling the query API.</p>
+         * 
          * @type {string || null}
          */
         this.TaskId = null;
@@ -9760,7 +9895,7 @@ class CreateAigcAudioTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Returned task ID after the task is created successfully.<br>The task progress and generation results can be obtained by calling the query API.</p>
+         * 
          * @type {string || null}
          */
         this.TaskId = null;
@@ -10038,7 +10173,7 @@ class AiDramaInput extends  AbstractModel {
 }
 
 /**
- * Custom parameters for smart erasing.
+ * 
  * @class
  */
 class OverrideEraseParameter extends  AbstractModel {
@@ -10046,31 +10181,31 @@ class OverrideEraseParameter extends  AbstractModel {
         super();
 
         /**
-         * <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
+         * 
          * @type {string || null}
          */
         this.EraseType = null;
 
         /**
-         * <p>Subtitle erasing configuration;<br>This field is required when the value of EraseType is set to subtitle.</p>
+         * 
          * @type {UpdateSmartEraseSubtitleConfig || null}
          */
         this.EraseSubtitleConfig = null;
 
         /**
-         * <p>Watermark erasing configuration.<br>This field is required when the value of EraseType is set to watermark.</p>
+         * 
          * @type {UpdateSmartEraseWatermarkConfig || null}
          */
         this.EraseWatermarkConfig = null;
 
         /**
-         * <p>Privacy protection configuration.<br>This field is required when the value of EraseType is privacy.</p>
+         * 
          * @type {UpdateSmartErasePrivacyConfig || null}
          */
         this.ErasePrivacyConfig = null;
 
         /**
-         * <p>id of the subtitle removal suppression template.</p>
+         * 
          * @type {number || null}
          */
         this.SubtitleEmbedId = null;
@@ -10372,7 +10507,7 @@ class DescribeAIRecognitionTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Banding removal configuration.
+ * Remove scratch configuration
  * @class
  */
 class ScratchRepairConfig extends  AbstractModel {
@@ -10380,17 +10515,16 @@ class ScratchRepairConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the feature. Valid values:
-<li>ON</li>
-<li>OFF</li>
+         * Capability configuration switch. Valid values:
+<li>ON: enabled</li>
+<li>OFF: disabled</li>
 Default value: ON.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Intensity, value ranges from 0.0 to 1.0.
-Default value: 0.0.
+         * 
          * @type {number || null}
          */
         this.Intensity = null;
@@ -10518,6 +10652,75 @@ class PoliticalOcrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * Custom parameters for AI Dubbing
+ * @class
+ */
+class OverrideAIDubbingParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Translation configuration message.</p>
+         * @type {DubbingTranslateConfig || null}
+         */
+        this.TranslateConfig = null;
+
+        /**
+         * <p>Subtitle configuration message.</p>
+         * @type {DubbingSubtitleConfig || null}
+         */
+        this.SubtitleConfig = null;
+
+        /**
+         * <p>Dubbing configuration message.</p>
+         * @type {DubbingConfig || null}
+         */
+        this.DubbingConfig = null;
+
+        /**
+         * <p>Output configuration information.</p>
+         * @type {DubbingOutputConfig || null}
+         */
+        this.OutputConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TranslateConfig) {
+            let obj = new DubbingTranslateConfig();
+            obj.deserialize(params.TranslateConfig)
+            this.TranslateConfig = obj;
+        }
+
+        if (params.SubtitleConfig) {
+            let obj = new DubbingSubtitleConfig();
+            obj.deserialize(params.SubtitleConfig)
+            this.SubtitleConfig = obj;
+        }
+
+        if (params.DubbingConfig) {
+            let obj = new DubbingConfig();
+            obj.deserialize(params.DubbingConfig)
+            this.DubbingConfig = obj;
+        }
+
+        if (params.OutputConfig) {
+            let obj = new DubbingOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
+
+    }
+}
+
+/**
  * ExtractBlindWatermark response structure.
  * @class
  */
@@ -10553,7 +10756,7 @@ class ExtractBlindWatermarkResponse extends  AbstractModel {
 }
 
 /**
- * The noise reduction configuration.
+ * Audio noise reduction configuration
  * @class
  */
 class AudioDenoiseConfig extends  AbstractModel {
@@ -10561,10 +10764,10 @@ class AudioDenoiseConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the feature. Valid values:
-<li>`ON`</li>
-<li>`OFF` </li>
-Default value: `ON`.
+         * Capability configuration switch. Valid values:
+<li>ON: enabled;</li>
+<li>OFF: disabled.</li>
+Default value: ON.
          * @type {string || null}
          */
         this.Switch = null;
@@ -11277,6 +11480,41 @@ class ComposeTargetInfo extends  AbstractModel {
 }
 
 /**
+ * Watermark image information for AIGC document-to-video generation
+ * @class
+ */
+class DocToVideoWatermarkInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Watermark image URL for video generation.</p>
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * <p>Watermark image location.</p><p>Enumeration values:</p><ul><li>top-left: top-left corner</li><li>top-right: top-right corner</li><li>bottom-left: bottom-left corner</li><li>bottom-right: bottom-right corner</li></ul>
+         * @type {string || null}
+         */
+        this.Position = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.Position = 'Position' in params ? params.Position : null;
+
+    }
+}
+
+/**
  * Statistical data of the task.
  * @class
  */
@@ -11716,7 +11954,7 @@ class AiAnalysisTaskHorizontalToVerticalResult extends  AbstractModel {
 }
 
 /**
- * The information of the output COS object after media processing.
+ * Media processing COS output object information.
  * @class
  */
 class CosOutputStorage extends  AbstractModel {
@@ -11724,13 +11962,13 @@ class CosOutputStorage extends  AbstractModel {
         super();
 
         /**
-         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         * Target Bucket name for the output files generated by media processing, for example, TopRankVideo-125xxx88. If left empty, the upper-level Bucket is inherited.
          * @type {string || null}
          */
         this.Bucket = null;
 
         /**
-         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         * Park of the target Bucket for outputting media processing generated files, for example, ap-chongqing. If left empty, it is inheritable from the upper layer.
          * @type {string || null}
          */
         this.Region = null;
@@ -11846,7 +12084,7 @@ class ProcessMediaResponse extends  AbstractModel {
         super();
 
         /**
-         * Task ID.
+         * <p>Task ID.</p>
          * @type {string || null}
          */
         this.TaskId = null;
@@ -11959,18 +12197,30 @@ class DeleteAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
 }
 
 /**
- * ParseNotification request structure.
+ * dubbing task translation configuration
  * @class
  */
-class ParseNotificationRequest extends  AbstractModel {
+class DubbingTranslateConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Event notification content obtained from CMQ.
+         * <p>Source language.</p>
          * @type {string || null}
          */
-        this.Content = null;
+        this.VideoSrcLanguage = null;
+
+        /**
+         * <p>Target language of the translation.</p>
+         * @type {string || null}
+         */
+        this.TranslateDstLanguage = null;
+
+        /**
+         * <p>Intelligent translation simplification.</p><p>Enumeration values: </p><ul><li>ON: Turn on intelligent translation simplification.</li><li>OFF: Turn off intelligent translation simplification.</li></ul><p>Default value: OFF</p>
+         * @type {string || null}
+         */
+        this.SimplifyTranslation = null;
 
     }
 
@@ -11981,7 +12231,9 @@ class ParseNotificationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Content = 'Content' in params ? params.Content : null;
+        this.VideoSrcLanguage = 'VideoSrcLanguage' in params ? params.VideoSrcLanguage : null;
+        this.TranslateDstLanguage = 'TranslateDstLanguage' in params ? params.TranslateDstLanguage : null;
+        this.SimplifyTranslation = 'SimplifyTranslation' in params ? params.SimplifyTranslation : null;
 
     }
 }
@@ -12071,7 +12323,7 @@ class CreateWordSamplesRequest extends  AbstractModel {
 }
 
 /**
- * Watermark removal configuration for the smart erasing template.
+ * 
  * @class
  */
 class SmartEraseWatermarkConfig extends  AbstractModel {
@@ -12079,40 +12331,25 @@ class SmartEraseWatermarkConfig extends  AbstractModel {
         super();
 
         /**
-         * Watermark removal method.
-**Automatic erasing:** Video watermarks are automatically recognized using an AI model and are erased to generate a new video. It applies to dynamic watermarks.
-When using automatic erasing, if AutoAreas is not specified, the full-screen video image area will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
-**Specified area erasure:** For static watermarks with a relatively fixed position, we recommend you directly specify the area to erase.
-When you choose specified area erasure, import at least a specified region.
-
--. auto: automatic removal
-- custom: specified area erasing.
+         * 
          * @type {string || null}
          */
         this.WatermarkEraseMethod = null;
 
         /**
-         * Watermark removal model.
-Basic Edition: Provides average effects and high cost performance. Suitable for animations or videos with clean backgrounds.
-Advanced edition: Better effectiveness, suitable for reality style videos such as short drama.
--.
-- advanced: Advanced Edition.
+         * 
          * @type {string || null}
          */
         this.WatermarkModel = null;
 
         /**
-         * Custom area for automatic erasing.
-For the specified area, AI models are used to automatically detect and erase the target objects.
-Note: When the erasing method is set to custom, this parameter is invalid. When a template is modified, input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
+         * 
          * @type {Array.<EraseArea> || null}
          */
         this.AutoAreas = null;
 
         /**
-         * Specify the custom region for erasing.
-For the specified area, erase the target objects directly without detection and recognition within a selected time period.
-Note: When a template is modified, input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
+         * 
          * @type {Array.<EraseTimeArea> || null}
          */
         this.CustomAreas = null;
@@ -12687,7 +12924,7 @@ class DescribeAigcTaskListResponse extends  AbstractModel {
 }
 
 /**
- * Task judgment conditions.
+ * 
  * @class
  */
 class Rules extends  AbstractModel {
@@ -12707,10 +12944,7 @@ class Rules extends  AbstractModel {
         this.Conditions = null;
 
         /**
-         * Logical operator for the list of conditions. Valid values:
-
-- &&: logical AND
-- ||: logical OR
+         * 
          * @type {string || null}
          */
         this.Linker = null;
@@ -13474,7 +13708,7 @@ class ScheduleQualityControlTaskResult extends  AbstractModel {
 }
 
 /**
- * Input parameter type for media quality inspection.
+ * 
  * @class
  */
 class AiQualityControlTaskInput extends  AbstractModel {
@@ -13999,7 +14233,7 @@ class DeleteAsrHotwordsRequest extends  AbstractModel {
 }
 
 /**
- * The AWS S3 storage information of a source file.
+ * AWS S3 storage input
  * @class
  */
 class S3InputInfo extends  AbstractModel {
@@ -14007,34 +14241,31 @@ class S3InputInfo extends  AbstractModel {
         super();
 
         /**
-         * S3 bucket.
+         * S3 bucket。
          * @type {string || null}
          */
         this.S3Bucket = null;
 
         /**
-         * Region of the S3 bucket. Currently supports:  
-us-east-1  
-eu-west-3
-
+         * 
          * @type {string || null}
          */
         this.S3Region = null;
 
         /**
-         * Resource path of the media in the S3 bucket.
+         * 
          * @type {string || null}
          */
         this.S3Object = null;
 
         /**
-         * AWS private network access media resource secret key id.
+         * 
          * @type {string || null}
          */
         this.S3SecretId = null;
 
         /**
-         * AWS private network access media content key.
+         * 
          * @type {string || null}
          */
         this.S3SecretKey = null;
@@ -14286,34 +14517,40 @@ class CloneVoiceResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Error code. 0 is returned if the request is successful.</p>
+         * 
          * @type {number || null}
          */
         this.ErrorCode = null;
 
         /**
-         * <p>Error message. success is returned if the request is successful.</p>
+         * 
          * @type {string || null}
          */
         this.Msg = null;
 
         /**
-         * <p>Voice ID generated by cloning</p>
+         * 
          * @type {string || null}
          */
         this.VoiceId = null;
 
         /**
-         * <p>base64 code of the synthetic audio</p>
+         * 
          * @type {string || null}
          */
         this.AudioData = null;
 
         /**
-         * <p>Synthetic audio Url, valid period 24 hours</p>
+         * 
          * @type {string || null}
          */
         this.AudioUrl = null;
+
+        /**
+         * <p>Extended information, json string</p>
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -14335,6 +14572,7 @@ class CloneVoiceResponse extends  AbstractModel {
         this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
         this.AudioData = 'AudioData' in params ? params.AudioData : null;
         this.AudioUrl = 'AudioUrl' in params ? params.AudioUrl : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -14520,7 +14758,119 @@ class AiAnalysisTaskHighlightOutput extends  AbstractModel {
 }
 
 /**
- * The URL of the object to process.
+ * AI dubbing task
+ * @class
+ */
+class AIDubbingTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>AI Dubbing template id.</p>
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * <p>Custom AI dubbing parameter. It takes effect when Definition is set to 0. This parameter is used in highly customized scenarios. We recommend that you use Definition to specify dubbing parameters.</p>
+         * @type {RawAIDubbingParameter || null}
+         */
+        this.RawParameter = null;
+
+        /**
+         * <p>AI Dubbing custom parameters. Valid when Definition is not filled with 0. When some dubbing parameters in this structure are filled in, the filled parameters will be used to override the parameters in the AI Dubbing template. This parameter is used for highly customized scenarios. We recommend you use only Definition to specify dubbing parameters.</p>
+         * @type {OverrideAIDubbingParameter || null}
+         */
+        this.OverrideParameter = null;
+
+        /**
+         * <p>Target storage for the file. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * <p>External source subtitle file information.</p>
+         * @type {MediaInputInfo || null}
+         */
+        this.SrcSubtitleInfo = null;
+
+        /**
+         * <p>External subtitle file information, translated subtitles.</p>
+         * @type {Array.<DstSubtitleInput> || null}
+         */
+        this.DstSubtitleInfos = null;
+
+        /**
+         * <p>Output path of the file, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">File Name Variable Description</a>.<br>Relative path example:</p><li>File name_{variable name}.{format}</li><li>File name.{format}</li>Absolute path example:<li>/custom path/file name_{variable name}.{format}</li><p><strong>Note</strong>: The <code>BatchProcessMedia</code> API is currently not supported.</p>
+         * @type {string || null}
+         */
+        this.OutputObjectPath = null;
+
+        /**
+         * <p>Additional parameters for AI Dubbing, serialized json string.</p>
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
+
+        /**
+         * <p>ID of the associated drama series.<br>Note: This value takes effect when dubbing mode is intelligent dubbing by role.</p>
+         * @type {string || null}
+         */
+        this.DramaId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.RawParameter) {
+            let obj = new RawAIDubbingParameter();
+            obj.deserialize(params.RawParameter)
+            this.RawParameter = obj;
+        }
+
+        if (params.OverrideParameter) {
+            let obj = new OverrideAIDubbingParameter();
+            obj.deserialize(params.OverrideParameter)
+            this.OverrideParameter = obj;
+        }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+
+        if (params.SrcSubtitleInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.SrcSubtitleInfo)
+            this.SrcSubtitleInfo = obj;
+        }
+
+        if (params.DstSubtitleInfos) {
+            this.DstSubtitleInfos = new Array();
+            for (let z in params.DstSubtitleInfos) {
+                let obj = new DstSubtitleInput();
+                obj.deserialize(params.DstSubtitleInfos[z]);
+                this.DstSubtitleInfos.push(obj);
+            }
+        }
+        this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
+        this.DramaId = 'DramaId' in params ? params.DramaId : null;
+
+    }
+}
+
+/**
+ * Media processing URL object information.
  * @class
  */
 class UrlInputInfo extends  AbstractModel {
@@ -14528,7 +14878,7 @@ class UrlInputInfo extends  AbstractModel {
         super();
 
         /**
-         * URL of a video.
+         * Video URL.
          * @type {string || null}
          */
         this.Url = null;
@@ -14721,7 +15071,7 @@ Default value: 0px, which means that `Height` will be proportionally scaled acco
 }
 
 /**
- * Audio track info.
+ * Audio track information.
  * @class
  */
 class TrackInfo extends  AbstractModel {
@@ -14729,23 +15079,13 @@ class TrackInfo extends  AbstractModel {
         super();
 
         /**
-         * Audio track and number of sound channels. Description:
-When SelectType is track, this value is an integer, for example: 1.
-When SelectType is track_channel, this value is of decimal type, for example: 1.0;
-Default value: 1.0.
-Note: The integer part represents the audio track serial number, and the decimal part represents the sound channel. The audio track serial number is the stream index of the audio track, supporting input of 0 and positive integers. The decimal part supports up to 2 decimal places and is only allowed from 0 to 63. However, if the Codec is aac, eac3, or ac3, the decimal part only supports 0 to 15. For example, for an audio track with stream index 1, 1.0 represents the first sound channel of this audio track, and 1.1 represents the second sound channel of this audio track.
+         * 
          * @type {string || null}
          */
         this.TrackNum = null;
 
         /**
-         * Sound channel volume, description:
-When AudioChannel is set to 1, the array length is 1, for example: [6].
-When AudioChannel is set to 2, the array length is 2, for example: [0,6];
-When the value of AudioChannel is 6, the length of this array is greater than 2 and less than 16, for example: [-60,0,0,6].
-The value array ranges from -60 to 6. Among them, -60 means mute, 0 means keep the original volume, and 6 means double the original volume. The default value is -60.
-Note: Supports 3 decimal places.
-
+         * 
          * @type {Array.<number> || null}
          */
         this.ChannelVolume = null;
@@ -15388,7 +15728,42 @@ class EnableScheduleRequest extends  AbstractModel {
 }
 
 /**
- * Specifications for custom transcoding
+ * ModifyDocToVideoTaskStatus response structure.
+ * @class
+ */
+class ModifyDocToVideoTaskStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Task ID.</p>
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Specification parameters of custom transcoding.
  * @class
  */
 class RawTranscodeParameter extends  AbstractModel {
@@ -15396,43 +15771,43 @@ class RawTranscodeParameter extends  AbstractModel {
         super();
 
         /**
-         * Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+         * Muxing format. Available values: mp4, flv, hls, mp3, flac, ogg, and m4a. Among them, mp3, flac, ogg, and m4a are for audio-only files.
          * @type {string || null}
          */
         this.Container = null;
 
         /**
-         * Whether to remove video data. Valid values:
-<li>0: retain;</li>
-<li>1: remove.</li>
+         * Indicates whether to remove video data. Parameter value:
+<li>`0`: retention;</li>
+<li>1: Remove.</li>
 Default value: 0.
          * @type {number || null}
          */
         this.RemoveVideo = null;
 
         /**
-         * Whether to remove audio data. Valid values:
-<li>0: retain;</li>
-<li>1: remove.</li>
+         * Whether to remove audio data. Parameter Value:
+<li>`0`: retention;</li>
+<li>1: Remove.</li>
 Default value: 0.
          * @type {number || null}
          */
         this.RemoveAudio = null;
 
         /**
-         * Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
+         * Video stream configuration parameters. This field is required when RemoveVideo is 0.
          * @type {VideoTemplateInfo || null}
          */
         this.VideoTemplate = null;
 
         /**
-         * Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
+         * Audio stream configuration parameters. This field is required when RemoveAudio is 0.
          * @type {AudioTemplateInfo || null}
          */
         this.AudioTemplate = null;
 
         /**
-         * TESHD transcoding parameter.
+         * TSC transcoding parameters.
          * @type {TEHDConfig || null}
          */
         this.TEHDConfig = null;
@@ -15444,13 +15819,13 @@ Default value: 0.
         this.StdExtInfo = null;
 
         /**
-         * Audio/Video enhancement configuration
+         * 
          * @type {EnhanceConfig || null}
          */
         this.EnhanceConfig = null;
 
         /**
-         * Subtitle parameter
+         * 
          * @type {SubtitleTemplate || null}
          */
         this.SubtitleTemplate = null;
@@ -15503,7 +15878,7 @@ Default value: 0.
 }
 
 /**
- * Event notification configuration for task processing.
+ * 
  * @class
  */
 class LiveStreamTaskNotifyConfig extends  AbstractModel {
@@ -15511,41 +15886,37 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
         super();
 
         /**
-         * Notification type:
-TDMQ-CMQ: Message Queue
-"URL": When a URL is specified, the HTTP callback is pushed to the address specified by NotifyUrl. The callback protocol is http+json. The content of the packet body is the same as the output parameters of the [ParseLiveStreamProcessNotification API](https://www.tencentcloud.com/document/product/862/39229?from_cn_redirect=1).
-
-<Font color="red"> Note: if it is unspecified or left blank, no callback will be sent. To send a callback, fill in the corresponding type value. </font>
+         * 
          * @type {string || null}
          */
         this.NotifyType = null;
 
         /**
-         * HTTP callback URL. This is required if NotifyType is URL.
+         * 
          * @type {string || null}
          */
         this.NotifyUrl = null;
 
         /**
-         * Queue and Topic models are provided.
+         * 
          * @type {string || null}
          */
         this.CmqModel = null;
 
         /**
-         * Region when NotifyType is set to TDMQ-CMQ. For example, sh or bj.
+         * 
          * @type {string || null}
          */
         this.CmqRegion = null;
 
         /**
-         * This field is valid when the model is Queue. It indicates the name of the TDMQ for CMQ queue for receiving event notifications.
+         * 
          * @type {string || null}
          */
         this.QueueName = null;
 
         /**
-         * This field is valid when the model is Topic. It indicates the name of the TDMQ for CMQ topic for receiving event notifications.
+         * 
          * @type {string || null}
          */
         this.TopicName = null;
@@ -15577,7 +15948,7 @@ TDMQ-CMQ: Message Queue
 }
 
 /**
- * Video stream configuration parameter
+ * Video stream configuration parameters
  * @class
  */
 class VideoTemplateInfo extends  AbstractModel {
@@ -15585,20 +15956,21 @@ class VideoTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Encoding format of video streams. Valid values:
+         * Encoding format for video streams. Optional values:
 <li>h264: H.264 encoding.</li>
 <li>h265: H.265 encoding.</li>
 <li>h266: H.266 encoding.</li>
-<li>av1: AOMedia Video 1 encoding.</li>
+<li>av1: AOMedia Video 1 encoding</li>
 <li>vp8: VP8 encoding.</li>
 <li>vp9: VP9 encoding.</li>
 <li>mpeg2: MPEG2 encoding.</li>
 <li>dnxhd: DNxHD encoding.</li>
 <li>mv-hevc: MV-HEVC encoding.</li>
-Note: The av1 codec currently only supports mp4, webm, and mkv.
-Note: The H.266 codec currently only supports mp4, hls, ts, and mov.
-Note: The VP8 and VP9 codecs currently only support webm and mkv.
-Note: The MPEG2 and dnxhd codecs currently only support mxf.
+
+Note: av1 encoding container currently only supports mp4, webm, and mkv.
+Note: H.266 encoding containers currently only support mp4, hls, ts, and mov.
+Note: VP8 and VP9 encoding containers currently only support webm and mkv.
+Note: MPEG2 and dnxhd encoding containers currently only support mxf.
 Note: The MV-HEVC codec currently only supports mp4, hls, and mov. Among them, the HLS format only supports the MP4 segmented format and requires the input source to be a panoramic video (with multiple views).
          * @type {string || null}
          */
@@ -15614,17 +15986,18 @@ If the value is 0, the frame rate will be the same as that of the source video.
         this.Fps = null;
 
         /**
-         * Bitrate of a video stream, in kbps. Value range: 0 and [128, 100000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+         * Bitrate of the video stream. Value range: 0 and [128, 100000]. Unit: kbps.
+If the value is 0, the bitrate of the video will be the same as that of the source video.
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
-         * Resolution adaption. Valid values:
-<li>open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side.</li>
-<li>close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.</li>
+         * Resolution adaptation, available values:
+<li>open: turn on. At this point, Width represents the long side of the video, and Height indicates the short side of the video;</li>
+<li>close: close. At this point, Width represents the width of the video, and Height indicates the height of the video.</li>
 Default value: open.
-Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
+Note: In self-adaptation mode, Width cannot be less than Height.
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
@@ -15642,7 +16015,7 @@ Note: If Codec is set to MV-HEVC, the maximum value can be 7680.
         this.Width = null;
 
         /**
-         * Maximum value of the video stream height (or short edge) in px. Value range: 0 and [128, 4,096].
+         * Maximum value of the video stream height (or short side). Value range: 0 and [128, 4096]. Unit: px.
 <li>If both Width and Height are 0, the resolution is the same as the source.</li>
 <li>If Width is 0 but Height is not 0, the width will be proportionally scaled.</li>
 <li>If Width is not 0 but Height is 0, the height will be proportionally scaled.</li>
@@ -15661,187 +16034,127 @@ If this parameter is 0 or left blank, the system will automatically set the GOP 
         this.Gop = null;
 
         /**
-         * Gop value unit, value range:
-frame: indicates frame
-second: indicates second
-Default value: frame
+         * 
          * @type {string || null}
          */
         this.GopUnit = null;
 
         /**
-         * Padding method. When the video stream configuration width and height parameters are inconsistent with the aspect ratio of the original video, the transcoding processing method is "padding". Optional filling method:
-<li> stretch: Stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
-<li>black: Fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
-<li>white: Fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
-<li>gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.</li>
-
-<li>smarttailor: Video images are smartly selected to ensure proportional image cropping.</li>
+         * Filling method, when video stream configuration width and height parameters are inconsistent with the aspect ratio of the original video, the processing method for transcoding is "padding". Optional filling modes:
+<li> stretch: stretches each frame to fill the entire screen, possibly causing the transcoded video to be "squashed" or "stretched";</li>
+<li>black: Keep black, maintain video aspect ratio, edges filled with black.</li>
+<li>White: Leave blank, maintain video aspect ratio, edge remainder filled with white.</li>
+<li>gauss: Gaussian blur, maintain video aspect ratio, and use Gaussian blur filling for the rest of the edges.</li>
+<li>smarttailor: intelligent cropping: smartly select video images to ensure proportional image cropping.</li>
 Default value: black.
          * @type {string || null}
          */
         this.FillType = null;
 
         /**
-         * Control factor for constant video bitrate. Value range: [0, 51]. If this parameter is not specified, it means "auto". If there are no special requirements, it is advisable not to specify this parameter.
-When the Mode parameter is set to VBR, if the Vcrf value is configured concurrently, MPS will process video in VBR mode, with consideration of both Vcrf and Bitrate parameter settings to balance video quality, bitrate, transcoding efficiency, and file size.
-When the Mode parameter is set to CRF, the Bitrate setting will become invalid, and encoding is performed based on the Vcrf value.
-When the Mode parameter is set to ABR or CBR, the Vcrf value does not need to be configured.
+         * 
          * @type {number || null}
          */
         this.Vcrf = null;
 
         /**
-         * Average shard duration. Range: (0-10], unit: second
-Leave it blank to auto, which automatically chooses the appropriate segment duration based on the video's GOP and other features.
+         * 
          * @type {number || null}
          */
         this.HlsTime = null;
 
         /**
-         * hls fragment type, value range:
-<li>0: HLS+TS segment.</li>
-<li>2:HLS+TS byte range</li>
-<li>7: HLS+MP4 segment.</li>
-<li>5:HLS+MP4 byte range</li>
-Default value: 0
-Note: This field is used for ordinary/TSC transcoding settings and does not take effect for adaptive bitrate streams. If you need to configure the sharding type for an adaptive bitrate stream, you can use the outer field.
+         * 
          * @type {number || null}
          */
         this.SegmentType = null;
 
         /**
-         * Denominator of the frame rate
-Note: The value must be greater than 0.
+         * 
          * @type {number || null}
          */
         this.FpsDenominator = null;
 
         /**
-         * 3D video splicing mode, only mv-hevc, 3D video takes effect, available values:
-<li>side_by_side: side-by-side layout of the original video content.</li>
-<li>top_bottom: top-bottom layout arrangement of the original video content.</li>
-Billing is based on the segmented resolution dimension for reporting usage and cost.
-Default value: side_by_side
+         * 
          * @type {string || null}
          */
         this.Stereo3dType = null;
 
         /**
-         * Profile, suitable for different scenarios.
-baseline: It only supports I/P-frames and non-interlaced scenarios, and is suitable for scenarios such as video calls and mobile videos.
-Mainstream Profile, providing I-frames, P-frames, and B-frames, and supporting both interlaced and non-interlaced modes. It is primarily used in mainstream audio and video consumption products such as video players and streaming media transmission devices.
-high: The highest encoding level, adding 8X8  prediction to the Main Profile and supporting custom quantification. Widely used in Blu-ray storage and HDTV scenarios.
-default: automatic filling along with the original video.    
-
-This configuration appears only when the encoding standard is set to H264. baseline/main/high is supported. Default value: default
+         * 
          * @type {string || null}
          */
         this.VideoProfile = null;
 
         /**
-         * Encoder level. Default value: auto ("")
-If the encoding standard is set to H264, the following options are supported: "", 1, 1.1, 1.2, 1.3, 2, -2.1, 2.2, 3, 3.1, 3.2, 4, 4.1, 4.2, 5, and 5.1.
-If the encoding standard is set to H265, the following options are supported: "", 1, 2, 2.1, 3, 3.1, 4, 4.1, 5, 5.1, 5.2, 6, 6.1, 6.2, and 8.5.
+         * 
          * @type {string || null}
          */
         this.VideoLevel = null;
 
         /**
-         * Number of B-frames between reference frames. The default is auto, and a range of 0 - 16 is supported.
-Note: Leave it blank to indicate usage of auto.
+         * 
          * @type {number || null}
          */
         this.Bframes = null;
 
         /**
-         * Bitrate control mode. Optional values:
-VBR (Variable Bit Rate): Dynamic bitrate (VBR) adjusts the output bitrate based on the complexity of the video image to ensure higher image quality. It is suitable for storage scenarios and applications with high image quality requirements.
-ABR (Average Bit Rate): Average bitrate. It aims to keep the average bitrate of the output video stable while allowing short-term bitrate fluctuation. This is suitable for scenarios where overall bitrate needs to be minimized while maintaining a certain image quality.
-CBR (Constant Bit Rate): Constant bitrate. In video encoding, it maintains a constant output bitrate regardless of image complexity changes. It is suitable for scenarios with strict network bandwidth requirements, such as live streaming.
-VCRF (Constant Rate Factor): Constant quality factor. It controls video quality by setting a Quality Factor, enabling constant quality encoding of videos. Bitrate adjustment is based on content complexity. This method is suitable for scenarios where maintaining a certain quality is desired.
-VBR is selected by default.
+         * 
          * @type {string || null}
          */
         this.Mode = null;
 
         /**
-         * Display aspect ratio. Optional values: [1:1, 2:1, default]
-Default value: default
+         * 
          * @type {string || null}
          */
         this.Sar = null;
 
         /**
-         * Adaptive I-frame decision. Once enabled, Media Processing Service automatically identifies transition points between different scenarios in the video (usually visually distinct frames, such as switching from one shot to another) and adaptively inserts keyframes (I-frames) at these points to improve random accessibility and encoding efficiency. Optional values:
-0: Disable adaptive I-frame decision. 
-1: Enable the adaptive I-frame decision
-Default value: 0
+         * 
          * @type {number || null}
          */
         this.NoScenecut = null;
 
         /**
-         * Bit: 8/10 is supported. Default value: 8
+         * 
          * @type {number || null}
          */
         this.BitDepth = null;
 
         /**
-         * Preserve original timestamp. Optional values:
-0: Disabled
-1: Enabled
-Default value: Disabled
+         * 
          * @type {number || null}
          */
         this.RawPts = null;
 
         /**
-         * Proportional compression bitrate. When enabled, the output video's bitrate is adjusted according to the specified ratio. After the compression ratio is entered, the system automatically calculates the target output bitrate based on the video source bitrate. Compression ratio range: 0-100.
-Leaving this value blank means it is not enabled by default.
+         * 
          * @type {number || null}
          */
         this.Compress = null;
 
         /**
-         * Segment Duration at Startup
+         * 
          * @type {SegmentSpecificInfo || null}
          */
         this.SegmentSpecificInfo = null;
 
         /**
-         * Whether to enable scenario-based settings for the template 
-0: disable 
-1: enable 
-Default value: 0	
-Note: SceneType and CompressType field values are effective only when this field value is 1.
+         * 
          * @type {number || null}
          */
         this.ScenarioBased = null;
 
         /**
-         * Video scenario. Optional values: 
-normal: General transcoding scenario: General transcoding and compression scenario.
-pgc: PGC HD TV shows and movies: At the time of compression, focus is placed on the viewing experience of TV shows and movies and ROI encoding is performed according to their characteristics, while high-quality video and audio content is retained. 
-materials_video: HD materials: Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
-ugc: UGC content: It is suitable for a wide range of UGC/short video scenarios, with an optimized encoding bitrate for short video characteristics, improved image quality, and enhanced business QOS/QOE metrics. 
-e-commerce_video: Fashion show/e-commerce: During compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
-educational_video: Education: Compression emphasizes clarity and readability of text and images to help students better understand content and ensure clear conveyance of teaching content. 
-Default value: normal
-Note: To use this value, ScenarioBased must be 1, otherwise it does not take effect.
+         * 
          * @type {string || null}
          */
         this.SceneType = null;
 
         /**
-         * Transcoding policy. Optional values: 
-ultra_compress: Ultimate compression: Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, greatly saving bandwidth and storage costs. 
-standard_compress: Comprehensively optimal: The compression ratio and image quality are balanced, and files are compressed as much as possible without a noticeable reduction in subjective image quality. Only audio and video TSC transcoding fees are charged for this policy. 
-high_compress: Bitrate priority: Priority is given to reducing file size, which may result in certain image quality loss. Only audio and video TSC transcoding fees are charged for this policy. 
-low_compress: Image quality priority: Priority is given to ensuring image quality, and the size of the compressed file may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
-Default value: standard_compress. 
-Note: To watch videos on TV, the ultra_compress policy is not recommended. The billing standard for the ultra_compress policy is Top Speed Codec (TSC) transcoding + audio/video enhancement - artifacts removal.
-Note: To use this value, ScenarioBased must be 1, otherwise it does not take effect.
+         * 
          * @type {string || null}
          */
         this.CompressType = null;
@@ -16107,6 +16420,39 @@ class PornOcrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * AI Dubbing external translation subtitle information
+ * @class
+ */
+class DstSubtitleInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>External translation subtitle information.</p>
+         * @type {MediaInputInfo || null}
+         */
+        this.DstSubtitleInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DstSubtitleInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.DstSubtitleInfo)
+            this.DstSubtitleInfo = obj;
+        }
+
+    }
+}
+
+/**
  * Content review Ocr text pornography detection task result type
  * @class
  */
@@ -16341,67 +16687,61 @@ class CreateAigcAudioTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Model name. Supported models for music generation: GL and MiniMaxMusic.</p>
+         * <p>Model name. Supported models for music generation: GL, MiniMaxMusic, EL, and Mureka.</p>
          * @type {string || null}
          */
         this.ModelName = null;
 
         /**
-         * <p>Specifies the model version. By default, the system uses the supported stable version of the model.<br>Supported versions for GL: 3.0-clip and 3.0-pro.<br>Supported versions for MiniMaxMusic: 2.0, 2.5, and 2.6.</p>
+         * <p>Specifies the model version. By default, the system uses the supported stable version of the model. Supported versions for GL: 3.0-clip and 3.0-pro. Supported versions for MiniMaxMusic: 2.0, 2.5, 2.6, and 3.0. Supported versions for EL: compose_v2 and sound_t2s_v2. Supported versions for Mureka: song_8, song_9, song_9.5, instrumental_8, instrumental_9, and instrumental_9.5.</p>
          * @type {string || null}
          */
         this.ModelVersion = null;
 
         /**
-         * <p>Specifies the scenario for audio generation. Music: music.</p>
+         * 
          * @type {string || null}
          */
         this.SceneType = null;
 
         /**
-         * <p>Description of the generated video. (Note: A maximum of 2000 characters is supported.) This parameter is required when no reference image is specified.</p>
+         * <p>Description of the generated music. (Note: supports up to 2,000 characters).</p>
          * @type {string || null}
          */
         this.Prompt = null;
 
         /**
-         * <p>Reference video information, which is supported by some models.</p>
+         * <p>Reference video information. Only partially supported by some models.</p><ol><li>Kling generates sound effects for videos.</li><li>EL adds background music to videos.</li></ol>
          * @type {Array.<AigcAudioReferenceVideoInfo> || null}
          */
         this.VideoInfos = null;
 
         /**
-         * <p>Specify the reference audio information.</p><p>For example, this is required for music generation.</p>
+         * <p>Specify the reference audio information.</p><ol><li>Use of the cover feature in MiniMaxMusic.</li></ol><p>For example, this is required for music generation.</p>
          * @type {Array.<AigcAudioReferenceAudioInfo> || null}
          */
         this.AudioInfos = null;
 
         /**
-         * <p>Output audio format. By default, this is not specified. Valid values: mp3 and wav.</p>
-         * @type {string || null}
-         */
-        this.OutputAudioFormat = null;
-
-        /**
-         * <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
+         * 
          * @type {AigcStoreCosParam || null}
          */
         this.StoreCosParam = null;
 
         /**
-         * <p>Additional parameters required.</p>
+         * 
          * @type {AigcAudioExtraParam || null}
          */
         this.ExtraParameters = null;
 
         /**
-         * <p>This is used to specify special scenario parameters required by the model, in the format of a serialized JSON string.<br>Example to specify lyrics for the MinimaxMusic model:<br>{"lyric":{"The pony is running with joy. The flowers are blooming."}}</p><ol><li>Example for MiniMaxMusic instrumental music: &quot;AdditionalParameters&quot;:&quot;{"is_instrumental":true}&quot;</li></ol>
+         * <p>Used to pass in some special scene parameters required by the model, serialized into strings in Json format. <br>Example MinimaxMusic model When lyrics are passed in:<br> {"lyric":{"ponies are running happily, flowers are blooming"}}</p><ol><li>MiniMaxMusic raw pure music parameters use example:&quot; AdditionalParameters&quot;:&quot; {"is_instrumental":true}&quot;. <br>Supported transparent transmission parameters are: lyrics, is_instrumental, aigc_watermark, sample_rate, bitrate. </li><li>EL Health Music supports transparent transmission parameters:<br> PromptInfluence, WithTimestamps, CompositionPlan, ForceInstrumental and other parameters. </li></ol>
          * @type {string || null}
          */
         this.AdditionalParameters = null;
 
         /**
-         * <p>API operator name.</p>
+         * 
          * @type {string || null}
          */
         this.Operator = null;
@@ -16437,7 +16777,6 @@ class CreateAigcAudioTaskRequest extends  AbstractModel {
                 this.AudioInfos.push(obj);
             }
         }
-        this.OutputAudioFormat = 'OutputAudioFormat' in params ? params.OutputAudioFormat : null;
 
         if (params.StoreCosParam) {
             let obj = new AigcStoreCosParam();
@@ -16761,7 +17100,7 @@ class DeleteQualityControlTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Color enhancement configuration.
+ * Color enhancement configuration
  * @class
  */
 class ColorEnhanceConfig extends  AbstractModel {
@@ -16769,20 +17108,16 @@ class ColorEnhanceConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the feature. Valid values:
-<li>ON</li>
-<li>OFF</li>
+         * Capability configuration switch. Available values:
+<li>ON: enabled;</li>
+<li>OFF: disabled</li>
 Default value: ON.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Type, available values:
-<li>weak</li>
-<li>normal</li>
-<li>strong</li>
-Default value: weak.
+         * 
          * @type {string || null}
          */
         this.Type = null;
@@ -18236,124 +18571,121 @@ class ProcessMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * The information of the file to process.
+         * <p>Input information of the media processing file.</p>
          * @type {MediaInputInfo || null}
          */
         this.InputInfo = null;
 
         /**
-         * Target storage for Media Processing Service output files. If left blank, it inherits the storage location in InputInfo.
-
-Note: When InputInfo.Type is URL, this parameter is required.
+         * <p>Target storage for media processing output files. If left empty, it inherits the storage location in InputInfo.<br>Note: When InputInfo.Type is URL, this parameter is required.</p>
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.
-If you do not specify this parameter, the file will be saved to the directory specified in `InputInfo`.
+         * <p>Target directory for output files generated by media processing. Must start and end with a slash (/), such as <code>/movie/201907/</code>.<br>If left empty, the directory is the same as the directory of the file in InputInfo.</p>
          * @type {string || null}
          */
         this.OutputDir = null;
 
         /**
-         * Orchestration ID.
-Note 1: For parameters OutputStorage and OutputDir:
-<li>When a sub-task node in service orchestration has OutputStorage and OutputDir configured, the output configured in this sub-task node is used as the output of the sub-task.</li>
-<li>When a sub-task node in service orchestration does not have OutputStorage and OutputDir configured, if the task creation API (ProcessMedia) has specified an output, it will override the default output of the original orchestration.</li>
-<li>The priority of output settings is: Orchestration sub-task node > Output specified by the task API > Corresponding configuration within an orchestration.</li>
-Note 2: For the TaskNotifyConfig parameter, if the task creation API (ProcessMedia) has set this parameter, it will override the default callback of the original orchestration.
-
-Note 3: The trigger configured for an orchestration is for automatically starting the orchestration. It stops working when you manually call this API to start an orchestration.
+         * <p>Orchestration ID.<br>Note 1: For the OutputStorage and OutputDir parameters:</p><li>If OutputStorage and OutputDir are configured in the subtask node of service orchestration, the output configured in the subtask node serves as the subtask output.</li><li>If OutputStorage and OutputDir are not configured in the subtask node of service orchestration and the task creation API (ProcessMedia) has specified output, the default output of the original orchestration is overridden.</li><li>Output settings priority: orchestration subtask node &gt; task API specification &gt; corresponding configuration within orchestration</li>Note 2: For the TaskNotifyConfig parameter, if it has been configured in the task creation API (ProcessMedia), the default callback of the original orchestration is overridden.<p>Note 3: The Trigger configured for orchestration is only used to automatically Trigger scenarios. In a manual request, the configured Trigger is meaningless.</p>
          * @type {number || null}
          */
         this.ScheduleId = null;
 
         /**
-         * The media processing parameters to use.
+         * <p>Media processing task parameter.</p>
          * @type {MediaProcessTaskInput || null}
          */
         this.MediaProcessTask = null;
 
         /**
-         * Type parameter of a video content audit task.
+         * <p>Parameters for the video content review task.</p>
          * @type {AiContentReviewTaskInput || null}
          */
         this.AiContentReviewTask = null;
 
         /**
-         * Video content analysis task parameter.
+         * <p>Parameters for the video content analysis task.</p>
          * @type {AiAnalysisTaskInput || null}
          */
         this.AiAnalysisTask = null;
 
         /**
-         * Type parameter of a video content recognition task.
+         * <p>Parameters for the video content recognition task.</p>
          * @type {AiRecognitionTaskInput || null}
          */
         this.AiRecognitionTask = null;
 
         /**
-         * Media quality inspection type task parameters.
+         * <p>Parameters for the media quality inspection task.</p>
          * @type {AiQualityControlTaskInput || null}
          */
         this.AiQualityControlTask = null;
 
         /**
-         * Smart subtitle task.
+         * <p>Smart subtitle.</p>
          * @type {SmartSubtitlesTaskInput || null}
          */
         this.SmartSubtitlesTask = null;
 
         /**
-         * Smart erase task parameter.
+         * <p>Intelligent erasure type task parameter</p>
          * @type {SmartEraseTaskInput || null}
          */
         this.SmartEraseTask = null;
 
         /**
-         * Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
+         * <p>Parameters for the AI Dubbing task.</p>
+         * @type {AIDubbingTaskInput || null}
+         */
+        this.AIDubbingTask = null;
+
+        /**
+         * <p>Event notification information of the task. If this is not specified, no event notification is obtained.</p>
          * @type {TaskNotifyConfig || null}
          */
         this.TaskNotifyConfig = null;
 
         /**
-         * Task flow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+         * <p>Priority of the task flow. The higher the value, the higher the priority. The value range is from -10 to 10. If this is not specified, the default value is 0.</p>
          * @type {number || null}
          */
         this.TasksPriority = null;
 
         /**
-         * Identification code for deduplication, up to 50 characters. If a request with the same identification code was made within the past 3 days, an error will be returned for the current request. If this parameter is not provided or is an empty string, deduplication will not be performed for this request.
+         * <p>Identification code for deduplication. If there was a request with the same identification code within the past 3 days, an error will be returned for the current request. It can contain up to 50 characters. If this parameter is not passed or is an empty string, deduplication will not be performed for this request.</p>
          * @type {string || null}
          */
         this.SessionId = null;
 
         /**
-         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+         * <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
          * @type {string || null}
          */
         this.SessionContext = null;
 
         /**
-         * The task type.
-<li> `Online` (default): A task that is executed immediately.</li>
-<li> `Offline`: A task that is executed when the system is idle (within three days by default).</li>
+         * <p>Task type. Default: Online</p><li> Online: real-time task</li><li> Offline: idle task. Timeliness is not guaranteed. Processing ends within 3 days by default</li>
          * @type {string || null}
          */
         this.TaskType = null;
 
         /**
-         * Resource ID. Ensure that the corresponding resource is enabled. The default value is the primary resource ID of the account.
+         * <p>Resource ID. The resource needs to be enabled. The default value is the account's primary resource ID.</p>
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * Whether to skip metadata acquisition. Valid values:
-0: do not skip
-1: skip
-Default value: 0		
+         * <p>Media orchestration task group<br>Note: If you fill in this parameter, the ScheduleId field will become invalid. Activities have a higher priority than ScheduleId.</p>
+         * @type {Array.<Activity> || null}
+         */
+        this.Activities = null;
+
+        /**
+         * <p>Whether to skip metadata acquisition. Valid values:<br>0: Do not skip,<br>1: Skip,<br>Default value: 0.</p>
          * @type {number || null}
          */
         this.SkipMateData = null;
@@ -18424,6 +18756,12 @@ Default value: 0
             this.SmartEraseTask = obj;
         }
 
+        if (params.AIDubbingTask) {
+            let obj = new AIDubbingTaskInput();
+            obj.deserialize(params.AIDubbingTask)
+            this.AIDubbingTask = obj;
+        }
+
         if (params.TaskNotifyConfig) {
             let obj = new TaskNotifyConfig();
             obj.deserialize(params.TaskNotifyConfig)
@@ -18434,6 +18772,15 @@ Default value: 0
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.TaskType = 'TaskType' in params ? params.TaskType : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+
+        if (params.Activities) {
+            this.Activities = new Array();
+            for (let z in params.Activities) {
+                let obj = new Activity();
+                obj.deserialize(params.Activities[z]);
+                this.Activities.push(obj);
+            }
+        }
         this.SkipMateData = 'SkipMateData' in params ? params.SkipMateData : null;
 
     }
@@ -18957,7 +19304,7 @@ class LiveStreamOcrFullTextRecognitionResult extends  AbstractModel {
 }
 
 /**
- * Media processing VOD output object information.
+ * 
  * @class
  */
 class VODOutputStorage extends  AbstractModel {
@@ -18965,25 +19312,25 @@ class VODOutputStorage extends  AbstractModel {
         super();
 
         /**
-         * <p>Target <em>Bucket ID</em> for the output file generated by media processing</p>
+         * 
          * @type {string || null}
          */
         this.Bucket = null;
 
         /**
-         * <p>Region of the target Bucket for the output file generated by media processing</p>
+         * 
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * <p>VOD application ID</p>
+         * 
          * @type {number || null}
          */
         this.SubAppId = null;
 
         /**
-         * <p>Whether to use VOD Standard Edition.<br>Attention: If left empty, VOD Pro Edition is used.</p><p>Enumeration values: </p><ul><li>0: Do not use VOD Standard Edition</li><li>1: Use VOD Standard Edition</li></ul>
+         * 
          * @type {number || null}
          */
         this.VodBasic = null;
@@ -19101,97 +19448,103 @@ class CreateAigcVideoTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>PixVerse.<br>Mingmou.<br>H2.</p>
+         * 
          * @type {string || null}
          */
         this.ModelName = null;
 
         /**
-         * <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hunyuan: [1.5].</li><li>Hailuo: [02, 2.3, and 2.3-fast].</li><li>Kling: [1.6, 2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, q3-turbo, q3, and q3-mix].</li><li>PixVerse: [v5.6, v6, and c1].</li><li>H2: [1.0].</li></ol>
+         * 
          * @type {string || null}
          */
         this.ModelVersion = null;
 
         /**
-         * <p>Scenario for the generated video.<br>Note: Not all models support scenarios.</p><ol><li>Kling supports: motion control (motion_control), digital human (avatar_i2v), and lip sync (lip_sync).</li><li>Mingmou supports: landscape-to-portrait conversion (land2port).</li><li>Vidu supports: effect templates (template_effect).</li><li>Hunyuan supports: 3D world model (3d_scene). The returned file is not a video.</li></ol>
+         * 
          * @type {string || null}
          */
         this.SceneType = null;
 
         /**
-         * <p>Description of the generated video. This parameter is required when no image is specified.</p>
+         * 
          * @type {string || null}
          */
         this.Prompt = null;
 
         /**
-         * <p>Specifies the content you want to prevent the model from generating.<br>Note: Not all models support this.<br>For example:<br>Top lighting and bright colors.<br>People and animals.<br>Multiple vehicles and wind.</p>
+         * 
          * @type {string || null}
          */
         this.NegativePrompt = null;
 
         /**
-         * <p>The default value is False, meaning the model follows instructions strictly.<br>For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
+         * 
          * @type {boolean || null}
          */
         this.EnhancePrompt = null;
 
         /**
-         * <p>Image URL used for video generation. The URL must be accessible from the public network.<br>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different size limits. See the model website for a more complete description.</li><li>Supported image formats: JPEG and PNG.</li></ol>
+         * 
          * @type {string || null}
          */
         this.ImageUrl = null;
 
         /**
-         * <p>The model will generate a video using the image of this parameter as the ending frame.<br>Models that support this parameter:</p><ol><li>Kling 2.0, O1, 3.0, and 3.0-Omni support starting and ending frames.</li><li>Kling 1.6, 2.1, 2.5, and 2.6 support starting and ending frames with Resolution:1080p.</li><li>Vidu q2-pro, q2-turbo, q3-pro, and q3-turbo support starting and ending frames.</li><li>PixVerse v5.6, v6, and c1 support starting and ending frames.</li><li>Hailuo 02 supports starting and ending frames.</li></ol><p>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different limits.</li><li>Supported image formats: JPEG and PNG.</li></ol>
+         * 
          * @type {string || null}
          */
         this.LastImageUrl = null;
 
         /**
-         * <p>List of multiple asset resource images used to describe the resource images used by the model for video generation.</p><p>Models that support multiple images:</p><ol><li>Vidu q2, q2-pro, q3-turbo, q3, and q3-mix support video generation with multiple reference images. One to 7 images can be uploaded. The ReferenceType in ImageInfos can be used to specify the subject ID for the input.</li><li>Kling O1, 3.0-Omni, and 1.6 support video generation with multiple reference images.<ol><li>Kling 1.6 allows uploading 1 to 4 images.</li><li>Kling O1 and 3.0-Omni allow uploading 1 to 7 images. If a reference video is present, 0 to 4 images can be uploaded.</li></ol></li><li>PixVerse, v5.6, v6, and c1 support video generation with multiple reference images. One to 7 images can be uploaded, and image names need to be specified via the Text field in ImageInfos.</li><li>H2 1.0 supports video generation with multiple image parameters. One to 9 images can be uploaded. If a reference video is present, 0 to 5 images can be uploaded.</li></ol><p>Note:</p><ol><li>The image size cannot exceed 10 MB.</li><li>Supported image formats: JPEG and PNG.</li></ol>
+         * 
          * @type {Array.<AigcVideoReferenceImageInfo> || null}
          */
         this.ImageInfos = null;
 
         /**
-         * <p>Only Kling O1, Kling 3.0-Omni, Vidu q2-pro, and H2 1.0 support reference video information.</p><ol><li>For Kling O1 and 3.0-Omni, the reference video can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.</li><li>Vidu q2-pro supports video reference.</li><li>H2 1.0 supports video reference.</li></ol>
+         * 
          * @type {Array.<AigcVideoReferenceVideoInfo> || null}
          */
         this.VideoInfos = null;
 
         /**
-         * <p>Some models support reference audio input via URL.</p>
+         * 
          * @type {Array.<AigcVideoReferenceAudioInfo> || null}
          */
         this.AudioInfos = null;
 
         /**
-         * <p>Duration of the generated video.<br>Note:</p><ol><li>Kling: default value: 5 seconds.<ul><li>O1 supports 3 to 10 seconds.</li><li>3.0-Omni supports 3 to 15 seconds, or 3 to 10 seconds when a video reference is used.</li><li>3.0 supports 3 to 15 seconds.</li><li>Other versions support 5 and 10 seconds.</li></ul></li><li>The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.</li><li>Vidu: default value: 5 seconds.<ul><li>q3-pro, q3-turbo, q3, and q3-mix support 3 to 16 seconds.</li><li>q2-pro, q2-turbo, and q2 support 1 to 10 seconds.</li></ul></li><li>PixVerse: default value: 5 seconds.<ul><li>v5.6 supports 5, 8, and 10 seconds.</li><li>v6 and c1 support 1 to 15 seconds.</li></ul></li><li>H2 supports 3 to 15 seconds. Default value: 5 seconds.</li></ol>
+         * <p>Entity information.</p>
+         * @type {Array.<AigcVideoReferenceSubjectInfo> || null}
+         */
+        this.SubjectInfos = null;
+
+        /**
+         * 
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
-         * <p>Additional parameters required.</p>
+         * 
          * @type {AigcVideoExtraParam || null}
          */
         this.ExtraParameters = null;
 
         /**
-         * <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
+         * 
          * @type {AigcStoreCosParam || null}
          */
         this.StoreCosParam = null;
 
         /**
-         * <p>Special scenario parameters or storyboard prompts required by the model, formatted as a JSON serialized string.<br>Example:<br>{"camera_control":{"type":"simple"}}.</p>
+         * 
          * @type {string || null}
          */
         this.AdditionalParameters = null;
 
         /**
-         * <p>API operator name.</p>
+         * 
          * @type {string || null}
          */
         this.Operator = null;
@@ -19238,6 +19591,15 @@ class CreateAigcVideoTaskRequest extends  AbstractModel {
                 let obj = new AigcVideoReferenceAudioInfo();
                 obj.deserialize(params.AudioInfos[z]);
                 this.AudioInfos.push(obj);
+            }
+        }
+
+        if (params.SubjectInfos) {
+            this.SubjectInfos = new Array();
+            for (let z in params.SubjectInfos) {
+                let obj = new AigcVideoReferenceSubjectInfo();
+                obj.deserialize(params.SubjectInfos[z]);
+                this.SubjectInfos.push(obj);
             }
         }
         this.Duration = 'Duration' in params ? params.Duration : null;
@@ -19338,7 +19700,7 @@ class DescribeSchedulesResponse extends  AbstractModel {
 }
 
 /**
- * Overall enhancement configuration.
+ * Comprehensive enhancement configuration
  * @class
  */
 class ImageQualityEnhanceConfig extends  AbstractModel {
@@ -19346,20 +19708,16 @@ class ImageQualityEnhanceConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the feature. Valid values:
-<li>ON</li>
-<li>OFF</li>
+         * Capability configuration switch. Available values:
+<li>ON: enabled;</li>
+<li>OFF: disabled</li>
 Default value: ON.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Type, available values:
-<li>weak</li>
-<li>normal</li>
-<li>strong</li>
-Default value: weak.
+         * 
          * @type {string || null}
          */
         this.Type = null;
@@ -19526,7 +19884,7 @@ class AiAnalysisTaskSegmentResult extends  AbstractModel {
 }
 
 /**
- * Custom smart subtitle parameter.
+ * 
  * @class
  */
 class RawSmartSubtitleParameter extends  AbstractModel {
@@ -19534,13 +19892,13 @@ class RawSmartSubtitleParameter extends  AbstractModel {
         super();
 
         /**
-         * <p>Smart subtitle language type.<br>0: source language.<br>1: target language.<br>2: source language and target language.<br>Only 0 is supported when TranslateSwitch is OFF.<br>Only 1 or 2 is supported when TranslateSwitch is ON.</p>
+         * 
          * @type {number || null}
          */
         this.SubtitleType = null;
 
         /**
-         * <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br>ASR recognition and pure caption translation currently support the following languages:<br><code>auto</code>: Auto-identification<br><code>zh</code>: Simplified Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>zh-PY</code>: Chinese-English-Cantonese<br><code>zh_medical</code>: Chinese health care<br><code>vi</code>: Vietnamese<br><code>ms</code>: Malay<br><code>id</code>: Indonesian<br><code>fil</code>: Filipino<br><code>th</code>: Thai<br><code>pt</code>: Portuguese<br><code>tr</code>: Turkish<br><code>ar</code>: Arabic<br><code>es</code>: Spanish<br><code>hi</code>: Hindi<br><code>fr</code>: French<br><code>de</code>: German<br><code>it</code>: Italian<br><code>zh_dialect</code>: Chinese dialect<br><code>zh_en</code>: Chinese-English<br><code>yue</code>: Cantonese<br><code>ru</code>: Russian<br><code>prime_zh</code>: Chinese-English dialect<br><code>af-ZA</code>: Afrikaans (South Africa)<br><code>sq-AL</code>: Albanian (Albania)<br><code>am-ET</code>: Amharic (Ethiopia)<br><code>ar-DZ</code>: Arabic (Algeria)<br><code>ar-BH</code>: Arabic (Bahrain)<br><code>ar-EG</code>: Arabic (Egypt)<br><code>ar-IQ</code>: Arabic (Iraq)<br><code>ar-IL</code>: Arabic (Israel)<br><code>ar-JO</code>: Arabic (Jordan)<br><code>ar-KW</code>: Arabic (Kuwait)<br><code>ar-LB</code>: Arabic (Lebanon)<br><code>ar-MR</code>: Arabic (Mauritania)<br><code>ar-MA</code>: Arabic (Morocco)<br><code>ar-OM</code>: Arabic (Oman)<br><code>ar-QA</code>: Arabic (Qatar)<br><code>ar-SA</code>: Arabic (Saudi Arabia)<br><code>ar-PS</code>: Arabic (State of Palestine)<br><code>ar-SY</code>: Arabic (Syria)<br><code>ar-TN</code>: Arabic (Tunisia)<br><code>ar-AE</code>: Arabic (United Arab Emirates)<br><code>ar-YE</code>: Arabic (Yemen)<br><code>hy-AM</code>: Armenian (Armenia)<br><code>az-AZ</code>: Azerbaijani (Azerbaijan)<br><code>eu-ES</code>: Basque (Spain)<br><code>bn-BD</code>: Bengali (Bangladesh)<br><code>bn-IN</code>: Bengali (India)<br><code>bs-BA</code>: Bosnian (Bosnia and Herzegovina)<br><code>bg-BG</code>: Bulgarian (Bulgaria)<br><code>my-MM</code>: Burmese (Myanmar)<br><code>ca-ES</code>: Catalan (Spain)<br><code>hr-HR</code>: Croatian (Croatia)<br><code>cs-CZ</code>: Czech (Czech Republic)<br><code>da-DK</code>: Danish (Denmark)<br><code>nl-BE</code>: Dutch (Belgium)<br><code>nl-NL</code>: Dutch (Netherlands)<br><code>en-AU</code>: English (Australia)<br><code>en-CA</code>: English (Canada)<br><code>en-GH</code>: English (Ghana)<br><code>en-HK</code>: English (Hong Kong (China))<br><code>en-IN</code>: English (India)<br><code>en-IE</code>: English (Ireland)<br><code>en-KE</code>: English (Kenya)<br><code>en-NZ</code>: English (New Zealand)<br><code>en-NG</code>: English (Nigeria)<br><code>en-PK</code>: English (Pakistan)<br><code>en-PH</code>: English (Philippines)<br><code>en-SG</code>: English (Singapore)<br><code>en-ZA</code>: English (South Africa)<br><code>en-TZ</code>: English (Tanzania)<br><code>en-GB</code>: English (UK)<br><code>en-US</code>: English (United States)<br><code>et-EE</code>: Estonian (Estonia)<br><code>fil-PH</code>: Filipino (Philippines)<br><code>fi-FI</code>: Finnish (Finland)<br><code>fr-BE</code>: French (Belgium)<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fr-CH</code>: French (Switzerland)<br><code>gl-ES</code>: Galician (Spain)<br><code>ka-GE</code>: Georgian (Georgia)<br><code>el-GR</code>: Greek (Greece)<br><code>gu-IN</code>: Gujarati (India)<br><code>iw-IL</code>: Hebrew (Israel)<br><code>hi-IN</code>: Hindi (India)<br><code>hu-HU</code>: Hungarian (Hungary)<br><code>is-IS</code>: Icelandic (Iceland)<br><code>id-ID</code>: Indonesian (Indonesia)<br><code>it-IT</code>: Italian (Italy)<br><code>it-CH</code>: Italian (Switzerland)<br><code>ja-JP</code>: Japanese (Japan)<br><code>jv-ID</code>: Javanese (Indonesia)<br><code>kn-IN</code>: Kannada (India)<br><code>kk-KZ</code>: Kazakh (Kazakhstan)<br><code>km-KH</code>: Khmer (Cambodia)<br><code>rw-RW</code>: Kinyarwanda (Rwanda)<br><code>ko-KR</code>: Korean (South Korea)<br><code>lo-LA</code>: Lao (Laos)<br><code>lv-LV</code>: Latvian (Latvia)<br><code>lt-LT</code>: Lithuanian (Lithuania)<br><code>mk-MK</code>: Macedonian (North Macedonia)<br><code>ms-MY</code>: Malay (Malaysia)<br><code>ml-IN</code>: Malayalam (India)<br><code>mr-IN</code>: Marathi (India)<br><code>mn-MN</code>: Mongolian (Mongolia)<br><code>ne-NP</code>: Nepali (Nepal)<br><code>no-NO</code>: Norwegian Bokmål (Norway)<br><code>fa-IR</code>: Persian (Iran)<br><code>pl-PL</code>: Polish (Poland)<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>ro-RO</code>: Romanian (Romania)<br><code>ru-RU</code>: Russian (Russia)<br><code>sr-RS</code>: Serbian (Serbia)<br><code>si-LK</code>: Sinhalese (Sri Lanka)<br><code>sk-SK</code>: Slovak (Slovakia)<br><code>sl-SI</code>: Slovenian (Slovenia)<br><code>st-ZA</code>: Southern Sotho (South Africa)<br><code>es-AR</code>: Spanish (Argentina)<br><code>es-BO</code>: Spanish (Bolivia)<br><code>es-CL</code>: Spanish (Chile)<br><code>es-CO</code>: Spanish (Colombia)<br><code>es-CR</code>: Spanish (Costa Rica)<br><code>es-DO</code>: Spanish (Dominican Republic)<br><code>es-EC</code>: Spanish (Ecuador)<br><code>es-SV</code>: Spanish (El Salvador)<br><code>es-GT</code>: Spanish (Guatemala)<br><code>es-HN</code>: Spanish (Honduras)<br><code>es-MX</code>: Spanish (Mexico)<br><code>es-NI</code>: Spanish (Nicaragua)<br><code>es-PA</code>: Spanish (Panama)<br><code>es-PY</code>: Spanish (Paraguay)<br><code>es-PE</code>: Spanish (Peru)<br><code>es-PR</code>: Spanish (Puerto Rico)<br><code>es-ES</code>: Spanish (Spain)<br><code>es-US</code>: Spanish (United States)<br><code>es-UY</code>: Spanish (Uruguay)<br><code>es-VE</code>: Spanish (Venezuela)<br><code>su-ID</code>: Sundanese (Indonesia)<br><code>sw-KE</code>: Swahili (Kenya)<br><code>sw-TZ</code>: Swahili (Tanzania)<br><code>sv-SE</code>: Swedish (Sweden)<br><code>ta-IN</code>: Tamil (India)<br><code>ta-MY</code>: Tamil (Malaysia)<br><code>ta-SG</code>: Tamil (Singapore)<br><code>ta-LK</code>: Tamil (Sri Lanka)<br><code>te-IN</code>: Telugu (India)<br><code>th-TH</code>: Thai (Thailand)<br><code>ts-ZA</code>: Tsonga (South Africa)<br><code>tr-TR</code>: Turkish (Türkiye)<br><code>uk-UA</code>: Ukrainian (Ukraine)<br><code>ur-IN</code>: Urdu (India)<br><code>ur-PK</code>: Urdu (Pakistan)<br><code>uz-UZ</code>: Uzbek (Uzbekistan)<br><code>ve-ZA</code>: Venda (South Africa)<code>vi-VN</code>: Vietnamese (Vietnam)<br><code>xh-ZA</code>: Xhosa (South Africa)<br><code>zu-ZA</code>: Zulu (South Africa)</p>
+         * 
          * @type {string || null}
          */
         this.VideoSrcLanguage = null;
@@ -19570,13 +19928,13 @@ class RawSmartSubtitleParameter extends  AbstractModel {
         this.AsrHotWordsConfigure = null;
 
         /**
-         * <p>Custom parameter</p>
+         * 
          * @type {string || null}
          */
         this.ExtInfo = null;
 
         /**
-         * <p>Subtitle processing type:</p><ul><li>0: ASR recognition subtitle</li><li>1: Pure caption translation</li><li>2: OCR recognition subtitle</li></ul><p><strong>Note</strong>: The default type is ASR recognition subtitle if the field is unspecified.</p>
+         * 
          * @type {number || null}
          */
         this.ProcessType = null;
@@ -19588,19 +19946,19 @@ class RawSmartSubtitleParameter extends  AbstractModel {
         this.SelectingSubtitleAreasConfig = null;
 
         /**
-         * <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR).</p>
+         * 
          * @type {number || null}
          */
         this.SubtitleEmbedId = null;
 
         /**
-         * <p>Speaker identification mode. Valid values:<br>0: Speaker identification is disabled.<br>1: Speaker identification is enabled.<br>Default value: 0.</p>
+         * 
          * @type {number || null}
          */
         this.SpeakerMode = null;
 
         /**
-         * <p>Indicates whether to output the identified speaker to the subtitle file. Valid values:<br>0: The speaker is not output to the subtitle file.<br>1: The speaker is output to the VTT subtitle file.<br>Note: To use this parameter, the value of SpeakerMode cannot be 0.<br>Default value: 0.</p>
+         * 
          * @type {number || null}
          */
         this.SpeakerLabel = null;
@@ -19992,7 +20350,7 @@ class MediaProcessTaskTranscodeResult extends  AbstractModel {
 }
 
 /**
- * Input parameter type of a time point screenshot task
+ * Screenshot taking at specified time points task input parameter type
  * @class
  */
 class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
@@ -20024,7 +20382,7 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
         this.WatermarkSet = null;
 
         /**
-         * <p>Target storage for the file after time point screenshot taking. If not specified, it inherits the upper-level OutputStorage value.</p>
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -20036,7 +20394,7 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
         this.OutputObjectPath = null;
 
         /**
-         * <p>Rule of the <code>{number}</code> variable in the output path after time point screenshot taking.</p>
+         * 
          * @type {NumberFormat || null}
          */
         this.ObjectNumberFormat = null;
@@ -20087,7 +20445,7 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
 }
 
 /**
- * Input parameter type of an image sprite generating task
+ * Sprite sheet capturing task input parameter type
  * @class
  */
 class ImageSpriteTaskInput extends  AbstractModel {
@@ -20101,7 +20459,7 @@ class ImageSpriteTaskInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * <p>Target storage for the file after the sprite screenshot is taken. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -20119,7 +20477,7 @@ class ImageSpriteTaskInput extends  AbstractModel {
         this.WebVttObjectName = null;
 
         /**
-         * <p>Rule of the <code>{number}</code> variable in the output path after the sprite screenshot is taken.</p>
+         * 
          * @type {NumberFormat || null}
          */
         this.ObjectNumberFormat = null;
@@ -20226,7 +20584,7 @@ class DeleteContentReviewTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Media processing VOD object information.
+ * 
  * @class
  */
 class VODInputInfo extends  AbstractModel {
@@ -20234,37 +20592,37 @@ class VODInputInfo extends  AbstractModel {
         super();
 
         /**
-         * <p><em>Bucket ID</em> where the media processing object file resides</p>
+         * 
          * @type {string || null}
          */
         this.Bucket = null;
 
         /**
-         * <p>Region of the Bucket where the media processing object file resides</p>
+         * 
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * <p>Input path of the media processing object file</p>
+         * 
          * @type {string || null}
          */
         this.Object = null;
 
         /**
-         * <p>VOD application ID.</p>
+         * 
          * @type {number || null}
          */
         this.SubAppId = null;
 
         /**
-         * <p>Whether to use VOD Standard Edition.<br>Attention: If left empty, VOD Pro Edition is used.</p><p>Enumeration values: </p><ul><li>Use VOD Pro Edition</li><li>Use VOD Standard Edition, allowing tasks to be initiated with FileId</li></ul><p>Default value: 0</p>
+         * 
          * @type {number || null}
          */
         this.VodBasic = null;
 
         /**
-         * <p>VOD Standard Edition FileId</p>
+         * 
          * @type {string || null}
          */
         this.FileId = null;
@@ -20871,13 +21229,13 @@ class DescribeAigcTaskStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Task ID.</p>
+         * 
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * <p>Task status description</p><p>Enumeration values: </p><ul><li>PENDING: Task waiting for scheduling</li><li>RUNNING: Task running</li><li>FINISHED: Task executed successfully</li><li>STOP: Task termination</li><li>FAILED: Task failure</li><li>TIMEOUT: Task timeout</li></ul>
+         * 
          * @type {string || null}
          */
         this.TaskStatus = null;
@@ -20889,46 +21247,58 @@ class DescribeAigcTaskStatusResponse extends  AbstractModel {
         this.OutputUrl = null;
 
         /**
-         * <p>Task creation time</p>
+         * 
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * <p>Task scheduling time</p>
+         * 
          * @type {string || null}
          */
         this.ScheduledTime = null;
 
         /**
-         * <p>Task completion time</p>
+         * 
          * @type {string || null}
          */
         this.FinishedTime = null;
 
         /**
-         * <p>Task error code</p>
+         * 
          * @type {number || null}
          */
         this.TaskResultCode = null;
 
         /**
-         * <p>Task returned error message</p>
+         * 
          * @type {string || null}
          */
         this.TaskResultMsg = null;
 
         /**
-         * <p>Request structure</p>
+         * 
          * @type {string || null}
          */
         this.RequestBody = null;
 
         /**
-         * <p>Task type</p>
+         * 
          * @type {string || null}
          */
         this.TaskType = null;
+
+        /**
+         * <p>Other job information</p>
+         * @type {string || null}
+         */
+        this.TaskInfo = null;
+
+        /**
+         * <p>Task sub-status</p>
+         * @type {string || null}
+         */
+        this.Stage = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -20955,13 +21325,15 @@ class DescribeAigcTaskStatusResponse extends  AbstractModel {
         this.TaskResultMsg = 'TaskResultMsg' in params ? params.TaskResultMsg : null;
         this.RequestBody = 'RequestBody' in params ? params.RequestBody : null;
         this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.TaskInfo = 'TaskInfo' in params ? params.TaskInfo : null;
+        this.Stage = 'Stage' in params ? params.Stage : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * The type of media processing task.
+ * Media processing task type
  * @class
  */
 class MediaProcessTaskInput extends  AbstractModel {
@@ -20969,31 +21341,31 @@ class MediaProcessTaskInput extends  AbstractModel {
         super();
 
         /**
-         * List of transcoding tasks.
+         * Video transcoding task list.
          * @type {Array.<TranscodeTaskInput> || null}
          */
         this.TranscodeTaskSet = null;
 
         /**
-         * List of animated image screenshot tasks.
+         * List of video-to-GIF tasks.
          * @type {Array.<AnimatedGraphicTaskInput> || null}
          */
         this.AnimatedGraphicTaskSet = null;
 
         /**
-         * List of time point screenshot tasks.
+         * List of time point screenshot tasks for videos.
          * @type {Array.<SnapshotByTimeOffsetTaskInput> || null}
          */
         this.SnapshotByTimeOffsetTaskSet = null;
 
         /**
-         * List of sampled screenshot tasks.
+         * List of sampled screenshot tasks for videos.
          * @type {Array.<SampleSnapshotTaskInput> || null}
          */
         this.SampleSnapshotTaskSet = null;
 
         /**
-         * List of image sprite screenshot tasks.
+         * List of image sprite tasks for videos.
          * @type {Array.<ImageSpriteTaskInput> || null}
          */
         this.ImageSpriteTaskSet = null;
@@ -21080,7 +21452,7 @@ class DescribeDesignTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Task ID.</p>
+         * 
          * @type {string || null}
          */
         this.TaskId = null;
@@ -21100,7 +21472,7 @@ class DescribeDesignTaskRequest extends  AbstractModel {
 }
 
 /**
- * The AES-128 encryption details.
+ * SimpleAes encryption information.
  * @class
  */
 class SimpleAesDrm extends  AbstractModel {
@@ -21108,19 +21480,19 @@ class SimpleAesDrm extends  AbstractModel {
         super();
 
         /**
-         * Request decryption key uri address.
+         * 
          * @type {string || null}
          */
         this.Uri = null;
 
         /**
-         * Encryption key (32-byte hexadecimal string).
+         * 
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Encryption initialization vector (32-byte hexadecimal string).
+         * 
          * @type {string || null}
          */
         this.Vector = null;
@@ -21398,15 +21770,7 @@ class DescribeContentReviewTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Smart erasing, coordinate configuration for the removal area.
-The region is determined by the coordinates of the upper left corner and the bottom-right corner.
-The coordinate origin is the top-left corner of the image. Coordinate points can be specified using pixel values or a percentage unit.
-For the auto erase area:
-When unit: %, coordinate range is [0,1].
-When the unit is px, the X range is [0, video image width], and the Y range is [0, video image height].
-For the designated erase area:
-When unit: %, coordinate range is [0,1).
-When the unit is px, the X value range is [0, video image width], and the Y value range is [0, video image height].
+ * 
  * @class
  */
 class EraseArea extends  AbstractModel {
@@ -21414,37 +21778,31 @@ class EraseArea extends  AbstractModel {
         super();
 
         /**
-         * X-axis coordinate of the upper left corner of the region.
-For example, when Unit is set to 1, which means using the percentage unit, 0.05 indicates that the horizontal distance from the top-left corner of the region to the top-left corner of the entire frame is 5% of the frame width.
+         * <p>Top-left X-axis coordinate of the area.<br>For example, when Unit is 1, meaning percentage is used, 0.05 indicates the horizontal distance from the top-left corner of the area to the top-left corner of the entire frame is 5% of the frame width.</p>
          * @type {number || null}
          */
         this.LeftTopX = null;
 
         /**
-         * Y-axis coordinate of the upper left corner.
-For example, when Unit is set to 1, which means using the percentage unit, 0.1 indicates that the vertical distance from the top-left corner of the region to the top-left corner of the entire frame is 10% of the frame height.
+         * <p>Y-coordinate of the upper left corner of the region.<br>For example, when Unit is 1, meaning usage percentage, 0.1 indicates the vertical distance from the upper left corner of the region to the upper left corner of the entire frame is 10% of the screen height.</p>
          * @type {number || null}
          */
         this.LeftTopY = null;
 
         /**
-         * X-axis coordinate of the bottom-right corner of the region.
-For example, when Unit is set to 1, which means using the percentage unit, 0.75 indicates that the horizontal distance from the bottom-right corner of the region to the top-left corner of the entire frame is 75% of the frame width.
+         * <p>X-coordinate of the bottom-right corner of the region.<br>For example, when Unit is 1, meaning percentage is used, 0.75 indicates the horizontal distance from the bottom-right corner of the region to the top-left corner of the entire frame is 75% of the frame width.</p>
          * @type {number || null}
          */
         this.RightBottomX = null;
 
         /**
-         * Y-axis coordinate of the bottom-right corner of the region.
-For example, when Unit is set to 1, which means using the percentage unit, 0.9 indicates that the vertical distance from the bottom-right corner of the region to the top-left corner of the entire frame is 90% of the frame height.
+         * <p>Y-coordinate of the region's bottom-right corner.<br>For example, when Unit is 1 (percentage), 0.9 means the vertical distance from the bottom-right corner of the region to the top-left corner of the entire frame is 90% of the screen height.</p>
          * @type {number || null}
          */
         this.RightBottomY = null;
 
         /**
-         * Coordinate unit
--Percentage
-- 2 pixel values
+         * <p>Coordinate unit</p><ul><li>1 Percentage</li><li>2 Pixel value</li></ul>
          * @type {number || null}
          */
         this.Unit = null;
@@ -21468,7 +21826,7 @@ For example, when Unit is set to 1, which means using the percentage unit, 0.9 i
 }
 
 /**
- * TESHD parameter configuration.
+ * TSC parameter configuration.
  * @class
  */
 class TEHDConfig extends  AbstractModel {
@@ -21476,16 +21834,17 @@ class TEHDConfig extends  AbstractModel {
         super();
 
         /**
-         * TESHD type. Valid values:
-<li>TEHD-100: TESHD-100.</li>
-If this parameter is left empty, TESHD will not be enabled.
+         * Top speed Codec type. Available values:
+<li>TEHD-100: top speed codec-100 (video top speed codec).</li>
+<li>TEHD-200: top speed codec-200 (audio top speed codec).</li>
+If not specified, top speed Codec is not enabled.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Maximum bitrate, which is valid when `Type` is `TESHD`.
-If this parameter is left empty or 0 is entered, there will be no upper limit for bitrate.
+         * Maximum video bitrate. Valid when Type is set to top speed Codec.
+If this is not specified or is set to 0, no upper limit is set for the video bitrate.
          * @type {number || null}
          */
         this.MaxVideoBitrate = null;
@@ -21506,7 +21865,7 @@ If this parameter is left empty or 0 is entered, there will be no upper limit fo
 }
 
 /**
- * Video stream configuration parameter
+ * Video stream configuration parameters
  * @class
  */
 class VideoTemplateInfoForUpdate extends  AbstractModel {
@@ -21514,269 +21873,169 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Encoding format for video streams. Optional values:
-<li>h264: H.264 encoding.</li>
-<li>h265: H.265 encoding.</li>
-<li>h266: H.266 encoding.</li>
-<li>av1: AOMedia Video 1 encoding</li>
-<li>vp8: VP8 encoding.</li>
-<li>vp9: VP9 encoding.</li>
-<li>mpeg2: MPEG2 encoding.</li>
-<li>dnxhd: DNxHD encoding.</li>
-<li>mv-hevc: MV-HEVC encoding.</li>
-
-Note: The av1 encoding container currently only supports mp4, webm, and mkv.
-Note: H.266 encoding containers only support mp4, hls, ts, and mov.
-Note: VP8 and VP9 encoding containers currently only support webm and mkv.
-Note: MPEG2 and dnxhd encoding containers currently only support mxf.
-Note: The MV-HEVC codec currently only supports mp4, hls, and mov. Among them, the HLS format only supports the MP4 segmented format and requires the input source to be a panoramic video (with multiple views).
+         * 
          * @type {string || null}
          */
         this.Codec = null;
 
         /**
-         * Video frame rate. Value range:
-When FpsDenominator is empty, the range is [0, 120], in Hz.
-When FpsDenominator is not empty, the Fps/FpsDenominator range is [0, 120].
-If the value is 0, the frame rate will be the same as that of the source video.
+         * 
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
-         * Bitrate of video stream, value ranges from 0 to [128, 100000], measurement unit: kbps.
-If the value is 0, the bitrate of the video will be the same as that of the source video.
+         * 
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
-         * Resolution adaptation, available values:
-<li>open: Turn on. At this point, Width represents the long side of the video, and Height indicates the short side of the video;</li>
-<li>close: Close. At this point, Width represents the video width, and Height indicates the video height.</li>
-Note: In self-adaptation mode, Width cannot be less than Height.
+         * 
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
 
         /**
-         * Maximum value of the video stream width (or long edge) in px. Value range: 0 and [128, 4096].
-<li>If both Width and Height are 0, the resolution is the same as the source.</li>
-<li>If Width is 0 but Height is not 0, the width will be proportionally scaled.</li>
-<li>If Width is not 0 but Height is 0, the height will be proportionally scaled.</li>
-<li>If both Width and Height are not 0, the resolution is as specified by the user.</li>
-Note: If Codec is set to MV-HEVC, the maximum value can be 7680.
+         * 
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Maximum value of video stream height (or short side). Value ranges from 0 to [128, 4096]. Measurement unit: px.
-Note: If Codec is set to MV-HEVC, the maximum value can be 7680.
+         * 
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Interval between I-frames, customizable by frame or second. GOP length value ranges from 0 to [1, 100000].
-When set to 0, the system will automatically set the gop length.
+         * 
          * @type {number || null}
          */
         this.Gop = null;
 
         /**
-         * Gop value unit, value range: 
-frame: indicates frame 
-second: indicates second
-Default value: frame
+         * 
          * @type {string || null}
          */
         this.GopUnit = null;
 
         /**
-         * Filling method, when video stream configuration width and height parameters are inconsistent with the aspect ratio of the original video, the processing method for transcoding is "padding". Optional filling mode:
-<li> stretch: Stretch, stretch each frame to fill the entire screen, possibly causing the transcoded video to be "squashed" or "stretched";</li>
-<li>black: Keep black, maintain video aspect ratio, edges filled with black.</li>
-<li>White: Leave blank, maintain video aspect ratio, edge remainder filled with white.</li>
-<li>gauss: Gaussian blur, maintain video aspect ratio, Gaussian blur filling for the rest of the edges.</li>
-<li>smarttailor: intelligent cropping. It smartly selects video images to ensure proportional image cropping.</li>
-Default value: black.
+         * 
          * @type {string || null}
          */
         this.FillType = null;
 
         /**
-         * Control factor for constant video bitrate. Value range: [0, 51]. If this parameter is not specified, it means "auto". If there are no special requirements, it is advisable not to specify this parameter.
-When the Mode parameter is set to VBR, if the Vcrf value is configured at the same time, MPS processes video in VBR mode with consideration of both Vcrf and Bitrate parameter settings to balance video quality, bitrate, transcoding efficiency, and file size.
-When the Mode parameter is set to CRF, the Bitrate setting will become invalid, and encoding is performed based on the Vcrf value.
-When the Mode parameter is set to ABR or CBR, the Vcrf value requires no configuration.
-Note: When you need to set it to auto, fill in 100.
-
+         * 
          * @type {number || null}
          */
         this.Vcrf = null;
 
         /**
-         * Adaptive coding. Available values:
-<li>0: Not enabled</li>
-<li>1: Turn on</li>
-Default value: 0. When this parameter is enabled, multiple streams with different resolutions and bitrates will be self-adaptively generated. Among them, the width and height in VideoTemplate are the maximum resolution among the multiple streams, the bitrate in VideoTemplate is the highest bitrate among the multiple streams, and the vcrf in VideoTemplate is the highest quality among the multiple streams. When resolution, bitrate, and vcrf are not set, the highest resolution generated by the ContentAdaptStream parameter is the resolution of the video source, and the video quality is close to vmaf95. To enable this parameter or learn about billing details, contact your Tencent Cloud business.
+         * 
          * @type {number || null}
          */
         this.ContentAdaptStream = null;
 
         /**
-         * Average shard duration. Value range: (0-10], unit: second
-Default value: 10
-Note: It is used only in the HLS format.
+         * 
          * @type {number || null}
          */
         this.HlsTime = null;
 
         /**
-         * hls fragment type, available values:
-<li>0: HLS+TS segment.</li>
-<li>2:HLS+TS byte range</li>
-<li>7: HLS+MP4 segment.</li>
-<li>5:HLS+MP4 byte range</li>
-Default value: 0
-Note: This field is used for ordinary/TSC transcoding settings and does not take effect for adaptive bitrate streams. If needed, you can use the outer field to configure the shard type for adaptive bitrate streams.
+         * 
          * @type {number || null}
          */
         this.SegmentType = null;
 
         /**
-         * Denominator of the frame rate
-Note: The value must be greater than 0.
+         * 
          * @type {number || null}
          */
         this.FpsDenominator = null;
 
         /**
-         * 3D video splicing mode, only mv-hevc, takes effect for 3D video, available values:
-<li>side_by_side: side-by-side layout of the original video content.</li>
-<li>top_bottom: top-bottom layout arrangement of the original video content.</li>
-Billing is based on the segmented resolution dimension to report usage amount and cost.
-Default value: side_by_side
+         * 
          * @type {string || null}
          */
         this.Stereo3dType = null;
 
         /**
-         * Profile, suitable for different scenarios. 
-baseline: It only supports I/P-frames and non-interlaced scenarios, and is suitable for scenarios such as video calls and mobile videos. 
-Mainstream Profile, providing I-frames, P-frames, and B-frames, and supporting both interlaced and non-interlaced modes. It is primarily used in mainstream audio and video consumption products such as video players and streaming media transmission devices. 
-high: The highest encoding level, adding 8X8 prediction to the Main Profile and supporting custom quantification. Widely used in Blu-ray storage and HDTV scenarios.
-default: automatic filling along with the original video
-
-This configuration appears only when the encoding standard is set to H264. Default: default
+         * 
          * @type {string || null}
          */
         this.VideoProfile = null;
 
         /**
-         * Encoder level. Default value: auto ("")
-If the encoding standard is set to H264, the following options are supported: "", 1, 1.1, -1.2, 1.3, 2, 2.1, 2.2, 3, 3.1, 3.2, 4, 4.1, 4.2, 5, and 5.1. 
-If the encoding standard is set to H265, the following options are supported: "", 1, 2, 2.1, 3, 3.1, 4, 4.1, -5, 5.1, 5.2, 6, 6.1, 6.2, and 8.5.
+         * 
          * @type {string || null}
          */
         this.VideoLevel = null;
 
         /**
-         * Maximum number of consecutive B-frames. The default is auto, and 0 - 16 and -1 are supported.
-Note:
--1 indicates auto.	
+         * 
          * @type {number || null}
          */
         this.Bframes = null;
 
         /**
-         * Bitrate control mode. Optional values: 
-VBR (Variable Bit Rate): Dynamic bitrate adjusts the output bitrate based on the complexity of the video image to ensure higher image quality. It is suitable for storage scenarios and applications with high image quality requirements. 
-ABR (Average Bit Rate): Average bitrate. It aims to keep the average bitrate of the output video stable as much as possible, but allows short-term bitrate fluctuation. It is suitable for scenarios where you need to minimize overall bitrate while maintaining a certain image quality. 
-CBR (Constant Bit Rate): Constant bit rate. In video encoding, it maintains a constant output bitrate regardless of image complexity changes. It is suitable for scenarios with strict network bandwidth requirements, such as live streaming. 
-VCRF (Constant Rate Factor): Constant quality factor. It controls video quality by setting a quality factor to achieve constant quality encoding of videos. Bitrate adjustment based on content complexity. Suitable for scenarios where maintaining a certain quality is desired. 
-VBR is selected by default.
+         * 
          * @type {string || null}
          */
         this.Mode = null;
 
         /**
-         * Display aspect ratio. Optional values: [1:1, 2:1, default]
-Default value: default
+         * 
          * @type {string || null}
          */
         this.Sar = null;
 
         /**
-         * Adaptive I-frame decision. When enabled, Media Processing Service automatically identifies transition points between different scenarios in the video (usually visually distinct frames, such as those of switching from one shot to another) and adaptively inserts keyframes (I-frames) at these points to improve the video's random accessibility and encoding efficiency. Optional values: 
-0: Disable adaptive I-frame decision 
-1: Enable the adaptive I-frame decision 
-Default value: 0	
+         * 
          * @type {number || null}
          */
         this.NoScenecut = null;
 
         /**
-         * Bit: 8/10 is supported. Default value: -	
+         * 
          * @type {number || null}
          */
         this.BitDepth = null;
 
         /**
-         * Preserve original timestamp. Optional values: 
-0: Disabled 
-1: Enabled 
-Default value: Disabled	
+         * 
          * @type {number || null}
          */
         this.RawPts = null;
 
         /**
-         * Proportional compression bitrate. When enabled, the output video's bitrate is adjusted according to the specified ratio. After the compression ratio is entered, the system automatically calculates the target output bitrate based on the video source bitrate. Compression ratio range: 0-100, optional values: [0-100] and -1. 
-Note: -1 indicates auto.	
+         * 
          * @type {number || null}
          */
         this.Compress = null;
 
         /**
-         * Segment Duration at Startup
+         * 
          * @type {SegmentSpecificInfo || null}
          */
         this.SegmentSpecificInfo = null;
 
         /**
-         * Whether to enable scenario-based settings for the template 
-0: disable 
-1: enable 
-Default value: 0	
-Note: SceneType and CompressType field values are effective only when this field value is 1.
+         * 
          * @type {number || null}
          */
         this.ScenarioBased = null;
 
         /**
-         * Video scenario. Optional values: 
-normal: General transcoding scenario: General transcoding and compression scenario. pgc: PGC HD TV shows and movies: At the time of compression, focus is placed on the viewing experience of TV shows and movies and ROI encoding is performed according to their characteristics, while high-quality contents of videos and audio are retained. 
-materials_video: HD materials: Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
-ugc: UGC content: Suitable for a wide range of UGC/short video scenarios, with optimized encoding bitrate for short video characteristics, image quality improvement, and enhanced business QOS/QOE metrics. 
-e-commerce_video: Fashion show/e-commerce: During compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
-educational_video: Education: Compression emphasizes clarity and readability of text and images to help students better understand content and ensure clear conveyance of teaching content.
-Default value: normal.
-Note: To use this value, ScenarioBased must be 1, otherwise it does not take effect.
+         * 
          * @type {string || null}
          */
         this.SceneType = null;
 
         /**
-         * Transcoding policy. Optional values: 
-ultra_compress: Extreme compression: Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, thus greatly saving bandwidth and storage costs. 
-standard_compress: Comprehensively optimal: The compression ratio and image quality are balanced, and files are compressed as much as possible without a noticeable reduction in subjective image quality. Only audio and video TSC transcoding fees are charged for the policy. 
-high_compress: Bitrate priority: Priority is given to reducing file size, which may result in certain image quality loss. Only audio and video TSC transcoding fees are charged for this policy. 
-low_compress: Image quality priority: Priority is given to ensuring image quality, and the size of the compressed file may be relatively large. Only audio and video Top Speed Codec transcoding fees are charged for this policy. 
-Default value: standard_compress. 
-Note: To watch videos on TV, the ultra_compress policy is not recommended. The billing standard for the ultra_compress policy is TSC transcoding + audio/video enhancement - artifacts removal.
-Note: To use this value, ScenarioBased must be 1, otherwise it does not take effect.
+         * 
          * @type {string || null}
          */
         this.CompressType = null;
@@ -22113,7 +22372,7 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * Orchestrate atomic tasks
+ * 
  * @class
  */
 class ActivityPara extends  AbstractModel {
@@ -22121,82 +22380,88 @@ class ActivityPara extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Video transcoding task</p>
          * @type {TranscodeTaskInput || null}
          */
         this.TranscodeTask = null;
 
         /**
-         * 
+         * <p>Video-to-GIF task</p>
          * @type {AnimatedGraphicTaskInput || null}
          */
         this.AnimatedGraphicTask = null;
 
         /**
-         * 
+         * <p>Video time point screenshot task</p>
          * @type {SnapshotByTimeOffsetTaskInput || null}
          */
         this.SnapshotByTimeOffsetTask = null;
 
         /**
-         * 
+         * <p>Video sampling screenshot task</p>
          * @type {SampleSnapshotTaskInput || null}
          */
         this.SampleSnapshotTask = null;
 
         /**
-         * 
+         * <p>Video image sprite task</p>
          * @type {ImageSpriteTaskInput || null}
          */
         this.ImageSpriteTask = null;
 
         /**
-         * 
+         * <p>Adaptive bitrate streaming task</p>
          * @type {AdaptiveDynamicStreamingTaskInput || null}
          */
         this.AdaptiveDynamicStreamingTask = null;
 
         /**
-         * 
+         * <p>Video content review task</p>
          * @type {AiContentReviewTaskInput || null}
          */
         this.AiContentReviewTask = null;
 
         /**
-         * 
+         * <p>Video content analysis task</p>
          * @type {AiAnalysisTaskInput || null}
          */
         this.AiAnalysisTask = null;
 
         /**
-         * 
+         * <p>Video content recognition task</p>
          * @type {AiRecognitionTaskInput || null}
          */
         this.AiRecognitionTask = null;
 
         /**
-         * 
+         * <p>Media quality inspection task</p>
          * @type {AiQualityControlTaskInput || null}
          */
         this.QualityControlTask = null;
 
         /**
-         * 
+         * <p>Conditional judgment of the task.</p>
          * @type {ExecRulesTask || null}
          */
         this.ExecRulesTask = null;
 
         /**
-         * 
+         * <p>Smart subtitle task.</p>
          * @type {SmartSubtitlesTaskInput || null}
          */
         this.SmartSubtitlesTask = null;
 
         /**
-         * 
+         * <p>Intelligent erasure task</p>
          * @type {SmartEraseTaskInput || null}
          */
         this.SmartEraseTask = null;
+
+        /**
+         * <p>AI Dubbing task.</p>
+         * @type {AIDubbingTaskInput || null}
+         */
+        this.AIDubbingTask = null;
 
     }
 
@@ -22284,6 +22549,12 @@ class ActivityPara extends  AbstractModel {
             let obj = new SmartEraseTaskInput();
             obj.deserialize(params.SmartEraseTask)
             this.SmartEraseTask = obj;
+        }
+
+        if (params.AIDubbingTask) {
+            let obj = new AIDubbingTaskInput();
+            obj.deserialize(params.AIDubbingTask)
+            this.AIDubbingTask = obj;
         }
 
     }
@@ -23443,7 +23714,35 @@ class DesignVoiceAsyncResponse extends  AbstractModel {
 }
 
 /**
- * Type of an animated image generating task.
+ * ParseNotification request structure.
+ * @class
+ */
+class ParseNotificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Event notification content obtained from CMQ.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * Type of rotating image tasks.
  * @class
  */
 class AnimatedGraphicTaskInput extends  AbstractModel {
@@ -23469,7 +23768,7 @@ class AnimatedGraphicTaskInput extends  AbstractModel {
         this.EndTimeOffset = null;
 
         /**
-         * <p>Target storage for the file after animated image conversion. If left blank, it inherits the upper-level OutputStorage value.</p>
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -23511,7 +23810,7 @@ class AnimatedGraphicTaskInput extends  AbstractModel {
 }
 
 /**
- * Live stream smart subtitle input struct
+ * 
  * @class
  */
 class LiveSmartSubtitlesTaskInput extends  AbstractModel {
@@ -23519,13 +23818,13 @@ class LiveSmartSubtitlesTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Smart subtitle template ID.	
+         * 
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * User extension field, which does not need to be filled in for general scenarios.
+         * 
          * @type {string || null}
          */
         this.UserExtPara = null;
@@ -23566,7 +23865,7 @@ class CreateDocToVideoTaskRequest extends  AbstractModel {
         this.CosInfo = null;
 
         /**
-         * 
+         * <p>Resource ID. The resource needs to be enabled. The default value is the account's primary resource ID.</p>
          * @type {string || null}
          */
         this.ResourceId = null;
@@ -23974,7 +24273,7 @@ The image will be deleted after the PicUrlExpireTime time point.
 }
 
 /**
- * Input parameter of image watermark template
+ * Image watermark template input parameters.
  * @class
  */
 class RawImageWatermarkInput extends  AbstractModel {
@@ -23982,34 +24281,34 @@ class RawImageWatermarkInput extends  AbstractModel {
         super();
 
         /**
-         * Input content of watermark image. JPEG and PNG images are supported.
+         * Input content of the watermark image. jpeg and png image formats are supported.
          * @type {MediaInputInfo || null}
          */
         this.ImageContent = null;
 
         /**
-         * Watermark width. % and px formats are supported:
-<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
-<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
+         * Width of a watermark, supporting two formats: % and px.
+<li>If a string ends with %, it indicates that the `Width` of a watermark is a percentage of a video's width. For example, `10%` means that `Width` is 10% of a video's width.</li>
+<li>If a string ends with px, it means the watermark Width is in pixels. For example, 100px means the Width is 100 pixels.</li>
 Default value: 10%.
          * @type {string || null}
          */
         this.Width = null;
 
         /**
-         * Watermark height. % and px formats are supported:
-<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.</li>
-Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+         * Height of a watermark. Supports two formats: % and px.
+<li>If a string ends with %, it indicates that the `Height` of a watermark is a percentage of a video's height. For example, `10%` means that `Height` is 10% of a video's height.</li>
+<li>If a string ends with px, it means the watermark Height is in pixels. For example, 100px means the Height is 100 pixels.</li>
+Default value: 0px, which means Height is scaled according to the aspect ratio of the raw watermark image.
          * @type {string || null}
          */
         this.Height = null;
 
         /**
-         * Repeat type of an animated watermark. Valid values:
-<li>`once`: no longer appears after watermark playback ends.</li>
-<li>`repeat_last_frame`: stays on the last frame after watermark playback ends.</li>
-<li>`repeat` (default): repeats the playback until the video ends.</li>
+         * Watermark repeat type. Usage scenario: the watermark is a dynamic image. Value range:
+<li>once: The dynamic watermark will no longer appear after it has finished playing;</li>
+<li>repeat_last_frame: Stay on the last frame after the watermark finished playing;</li>
+<li>repeat: Watermark loops until the video ends (default value).</li>
          * @type {string || null}
          */
         this.RepeatType = null;
@@ -24060,6 +24359,67 @@ class DeleteAIAnalysisTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * dubbing task output configuration
+ * @class
+ */
+class DubbingOutputConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Output method</p><p>Enumeration values:</p><ul><li>FinalVideoOnly: default, final video only</li><li>AudioAndSubtitle: translation audio + translation subtitle</li><li>Custom: customization</li></ul><p>Default value: FinalVideoOnly</p><p>No translation audio and subtitle are returned when using external subtitles</p>
+         * @type {string || null}
+         */
+        this.OutputMode = null;
+
+        /**
+         * <p>Output video switch</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: ON</p><p>Only takes effect in Custom mode</p>
+         * @type {string || null}
+         */
+        this.OutputFinalVideo = null;
+
+        /**
+         * <p>Switch to output subtitle files (contains both original voice subtitles and target language subtitles)</p><p>Enumeration values:</p><ul><li>ON: enable</li><li>OFF: disable</li></ul><p>Default value: OFF</p>
+         * @type {string || null}
+         */
+        this.OutputSubtitle = null;
+
+        /**
+         * <p>Audio switch for output translation dubbing</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p><p>Only takes effect in Custom mode</p>
+         * @type {string || null}
+         */
+        this.OutputDstAudio = null;
+
+        /**
+         * <p>Subtitle suppression configuration message.</p>
+         * @type {DubbingEmbedSubtitleConfig || null}
+         */
+        this.EmbedSubtitleConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OutputMode = 'OutputMode' in params ? params.OutputMode : null;
+        this.OutputFinalVideo = 'OutputFinalVideo' in params ? params.OutputFinalVideo : null;
+        this.OutputSubtitle = 'OutputSubtitle' in params ? params.OutputSubtitle : null;
+        this.OutputDstAudio = 'OutputDstAudio' in params ? params.OutputDstAudio : null;
+
+        if (params.EmbedSubtitleConfig) {
+            let obj = new DubbingEmbedSubtitleConfig();
+            obj.deserialize(params.EmbedSubtitleConfig)
+            this.EmbedSubtitleConfig = obj;
+        }
 
     }
 }
@@ -24171,7 +24531,7 @@ class EmbeddingData extends  AbstractModel {
 }
 
 /**
- * Extended parameters for AIGC audio generation.
+ * 
  * @class
  */
 class AigcAudioExtraParam extends  AbstractModel {
@@ -24179,7 +24539,7 @@ class AigcAudioExtraParam extends  AbstractModel {
         super();
 
         /**
-         * <p>Resource ID. Specify this based on your needs.</p>
+         * 
          * @type {string || null}
          */
         this.ResourceId = null;
@@ -24234,7 +24594,7 @@ class AiSampleTagOperation extends  AbstractModel {
 }
 
 /**
- * Custom parameters for smart erasing.
+ * 
  * @class
  */
 class RawSmartEraseParameter extends  AbstractModel {
@@ -24242,7 +24602,7 @@ class RawSmartEraseParameter extends  AbstractModel {
         super();
 
         /**
-         * <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
+         * 
          * @type {string || null}
          */
         this.EraseType = null;
@@ -24266,19 +24626,19 @@ class RawSmartEraseParameter extends  AbstractModel {
         this.ErasePrivacyConfig = null;
 
         /**
-         * <p>id of the subtitle removal suppression template.</p>
+         * 
          * @type {number || null}
          */
         this.SubtitleEmbedId = null;
 
         /**
-         * <p>Suppression configuration, enabled by default, moves subtitles back to the original subtitle position.</p>
+         * 
          * @type {number || null}
          */
         this.UseOriginalPos = null;
 
         /**
-         * <p>Suppression configuration, enabled by default. When enabled, use the original subtitle font size.</p>
+         * 
          * @type {number || null}
          */
         this.UseOriginalSize = null;
@@ -25446,7 +25806,7 @@ The image will be deleted after the PicUrlExpireTime time point.
 }
 
 /**
- * Information required for uploading AIGC result files to COS. The MPS_QcsRole role needs to be created and authorized.
+ * 
  * @class
  */
 class AigcStoreCosParam extends  AbstractModel {
@@ -25454,21 +25814,19 @@ class AigcStoreCosParam extends  AbstractModel {
         super();
 
         /**
-         * Name of the COS bucket to store to. This value is required if you need to store the results in COS. Example value: bucket.
+         * 
          * @type {string || null}
          */
         this.CosBucketName = null;
 
         /**
-         * Region of the COS bucket to store to. This is required if you need to upload the results to COS. Example value: ap-guangzhou.
+         * 
          * @type {string || null}
          */
         this.CosBucketRegion = null;
 
         /**
-         * Store to the bucket path of cos.
-Option.
-Example value: my_file.
+         * 
          * @type {string || null}
          */
         this.CosBucketPath = null;
@@ -25526,19 +25884,19 @@ class DescribeDesignTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Error code. 0 is returned if the request is successful.</p>
+         * <p>Error code. 0 is returned if the request is successful, and 100 is returned if it is being processed.</p>
          * @type {number || null}
          */
         this.ErrorCode = null;
 
         /**
-         * <p>Error message. success is returned if the request is successful.</p>
+         * 
          * @type {string || null}
          */
         this.Msg = null;
 
         /**
-         * <p>Task status.</p><p>Enumeration values: </p><ul><li>success: Success, </li><li>fail: Failure, </li><li>processing: Processing.</li></ul>
+         * 
          * @type {string || null}
          */
         this.Status = null;
@@ -25550,7 +25908,7 @@ class DescribeDesignTaskResponse extends  AbstractModel {
         this.VoiceId = null;
 
         /**
-         * <p>Audition audio URL.</p>
+         * 
          * @type {string || null}
          */
         this.AudioUrl = null;
@@ -26942,7 +27300,7 @@ class AiAnalysisTaskCoverOutput extends  AbstractModel {
 }
 
 /**
- * Task type of intelligent content audit
+ * Task type for intelligent content moderation
  * @class
  */
 class AiContentReviewTaskInput extends  AbstractModel {
@@ -26950,7 +27308,7 @@ class AiContentReviewTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Video content audit template ID.
+         * Video content review template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -27331,7 +27689,7 @@ class AiRecognitionTaskOcrFullTextSegmentTextItem extends  AbstractModel {
 }
 
 /**
- * The mosaic effect parameters to use in a media processing task.
+ * Mosaic parameter type in a media processing task
  * @class
  */
 class MosaicInput extends  AbstractModel {
@@ -27339,63 +27697,43 @@ class MosaicInput extends  AbstractModel {
         super();
 
         /**
-         * Origin position, which currently can only be:
-<li>TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text.</li>
-Default value: TopLeft.
+         * <p>Origin position. Currently, only the following is supported:</p><li>TopLeft: indicates that the coordinate origin is at the top left corner of the video image and the mosaic origin is at the top left corner of the image or text.</li>Default value: TopLeft.
          * @type {string || null}
          */
         this.CoordinateOrigin = null;
 
         /**
-         * The horizontal position of the origin of the blur relative to the origin of coordinates of the video. % and px formats are supported:
-<li>If the string ends in %, the `XPos` of the blur will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;</li>
-<li>If the string ends in px, the `XPos` of the blur will be the specified px; for example, `100px` means that `XPos` is 100 px.</li>
-Default value: 0 px.
+         * <p>Horizontal position of the mosaic origin relative to the origin of coordinates of the video image. Supports two formats: % and px:</p><li>If a string ends with %, the mosaic XPos is a specified percentage of the video width. For example, 10% means XPos is 10% of the video width;</li><li>If a string ends with px, the mosaic XPos is a specified pixel. For example, 100px means XPos is 100 pixels.</li>Default value: 0px.
          * @type {string || null}
          */
         this.XPos = null;
 
         /**
-         * Vertical position of the origin of blur relative to the origin of coordinates of video. % and px formats are supported:
-<li>If the string ends in %, the `YPos` of the blur will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;</li>
-<li>If the string ends in px, the `YPos` of the blur will be the specified px; for example, `100px` means that `YPos` is 100 px.</li>
-Default value: 0 px.
+         * <p>Vertical position of the mosaic origin relative to the origin of coordinates of the video image. Supports two formats: % and px:</p><li>If a string ends with %, the mosaic YPos is the specified percentage of the video height. For example, 10% means YPos is 10% of the video height.</li><li>If a string ends with px, the mosaic YPos is the specified pixel. For example, 100px means YPos is 100 pixels.</li>Default value: 0px.
          * @type {string || null}
          */
         this.YPos = null;
 
         /**
-         * Blur width. % and px formats are supported:
-<li>If the string ends in %, the `Width` of the blur will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
-<li>If the string ends in px, the `Width` of the blur will be in px; for example, `100px` means that `Width` is 100 px.</li>
-Default value: 10%.
+         * <p>Mosaic width. Supports two formats: % and px:</p><li>If a string ends with %, it indicates that the mosaic `Width` is a percentage of a video's width. For example, `10%` means that `Width` is 10% of a video's width.</li><li>If a string ends with px, it indicates that the mosaic `Width` is in pixels. For example, `100px` means that `Width` is 100 pixels.</li>Default value: 10%.
          * @type {string || null}
          */
         this.Width = null;
 
         /**
-         * Blur height. % and px formats are supported:
-<li>If the string ends in %, the `Height` of the blur will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in px, the `Height` of the blur will be in px; for example, `100px` means that `Height` is 100 px.</li>
-Default value: 10%.
+         * <p>Height of a mosaic. Two formats are supported: % and px.</p><li>If a string ends with %, it indicates that the `Height` of a mosaic is a percentage of a video's height. For example, `10%` means that `Height` is 10% of a video's height.</li><li>If a string ends with px, it indicates that the `Height` of a mosaic is in pixels. For example, `100px` means that `Height` is 100 pixels.</li>Default value: 10%.
          * @type {string || null}
          */
         this.Height = null;
 
         /**
-         * Start time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame.
-<li>If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame;</li>
-<li>If this value is greater than 0 (e.g., n), the blur will appear at second n after the first video frame;</li>
-<li>If this value is smaller than 0 (e.g., -n), the blur will appear at second n before the last video frame.</li>
+         * <p>Start time offset of mosaic, in seconds. If not specified or set to 0, the mosaic appears when the frame appears.</p><li>If not specified or set to 0, the mosaic appears from the start of the frame;</li><li>If the value is greater than 0 (assuming n), the mosaic appears at the nth second from the start of the frame;</li><li>If the value is less than 0 (assuming -n), the mosaic appears n seconds before the end of the frame.</li>
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of blur in seconds.
-<li>If this parameter is left empty or 0 is entered, the blur will exist till the last video frame;</li>
-<li>If this value is greater than 0 (e.g., n), the blur will exist till second n;</li>
-<li>If this value is smaller than 0 (e.g., -n), the blur will exist till second n before the last video frame.</li>
+         * <p>End time offset of mosaic, in seconds.</p><li>If not specified or set to 0, the mosaic lasts until the end of a video;</li><li>If the value is greater than 0 (assuming n), the mosaic disappears at second n;</li><li>If the value is less than 0 (assuming -n), the mosaic disappears n seconds before the end of a video.</li>
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -27834,6 +28172,60 @@ class AiAnalysisTaskHighlightInput extends  AbstractModel {
 }
 
 /**
+ * Modify the status input of an AIGC document‑to‑video task
+ * @class
+ */
+class ModifyDocToVideoTaskStatusInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Modification action type.</p><p>Enumeration values:</p><ul><li>confirm: Confirm completion of the stage and advance to the next stage</li><li>regenerate: Regenerate the specified stage</li></ul>
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * <p>Modify the target stage.</p><p>Enumeration values:</p><ul><li>STAGE_1:<br>When Action=confirm: confirm the outline, continue generating subsequent dubbing, animation effects, and subtitles;<br>When Action=regenerate: regenerate the outline.</li></ul><ul><li>STAGE_2:<br>When Action=confirm: confirm the generated dubbing, animation effects, and subtitles, and generate the final video;<br>When Action=regenerate: regenerate the dubbing, animation effects, and subtitles.</li></ul>
+         * @type {string || null}
+         */
+        this.Stage = null;
+
+        /**
+         * <p>ID of the target task that needs to be modified.</p>
+         * @type {string || null}
+         */
+        this.SourceTaskId = null;
+
+        /**
+         * <p>Regenerate the parameter.</p><p>Required only when Action=regenerate.</p>
+         * @type {DocToVideoRegenerateInput || null}
+         */
+        this.Regenerate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Action = 'Action' in params ? params.Action : null;
+        this.Stage = 'Stage' in params ? params.Stage : null;
+        this.SourceTaskId = 'SourceTaskId' in params ? params.SourceTaskId : null;
+
+        if (params.Regenerate) {
+            let obj = new DocToVideoRegenerateInput();
+            obj.deserialize(params.Regenerate)
+            this.Regenerate = obj;
+        }
+
+    }
+}
+
+/**
  * Control parameter of prohibited information detection in speech task
  * @class
  */
@@ -28098,22 +28490,19 @@ class SegmentSpecificInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch for segment duration at startup. Optional values:
-on: Turn on
-off: Turn off the switch
-Default value: off
+         * 
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Segment duration at startup. Unit: second
+         * 
          * @type {number || null}
          */
         this.FragmentTime = null;
 
         /**
-         * Number of effective segments, indicating the first FragmentEndNum segments with FragmentTime. Value range: >=1
+         * 
          * @type {number || null}
          */
         this.FragmentEndNum = null;
@@ -28720,7 +29109,7 @@ class QualityControlStrategy extends  AbstractModel {
 }
 
 /**
- * The subtitle settings.
+ * Subtitle stream configuration parameters.
  * @class
  */
 class SubtitleTemplate extends  AbstractModel {
@@ -28728,164 +29117,86 @@ class SubtitleTemplate extends  AbstractModel {
         super();
 
         /**
-         * Subtitle file URL to be suppressed in the video.
+         * 
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * Specifies the subtitle track for embedding subtitles into the video. The Streamindex value starts from 0, where 0 indicates usage of the first subtitle track in the source video. If Path is specified, use Path preferentially. Specify at least one of Path or Streamindex.
-
--Note: StreamIndex must be consistent with the subtitle track index in the source file. For example, if the subtitle track in the source file is stream#0:3, StreamIndex should be 3. Otherwise, task processing may fail.
-
-
+         * 
          * @type {number || null}
          */
         this.StreamIndex = null;
 
         /**
-         * Input information on the subtitle file to be embedded in the video. Currently, only subtitle files stored in COS are supported.
+         * 
          * @type {MediaInputInfo || null}
          */
         this.SubtitleFileInput = null;
 
         /**
-         * Input information of the font file of the burned-in subtitle. URL and COS are supported. If both are specified, the URL information is used. If FontFileInput is specified, FontFileInput takes precedence over FontType.
+         * Input information for the subtitle font file to be suppressed. Currently only support url and cos. If both are filled, url takes precedence over cos. If FontFileInput is filled, FontFileInput takes precedence over FontType.
 
          * @type {MediaInputInfo || null}
          */
         this.FontFileInput = null;
 
         /**
-         * Font type. Valid values:
-<li>hei.ttf: SimHei</li>
-<li>song.ttf: Song Typeface.</li>
-<li>kai.ttf (recommend) or simkai.ttf: KaiTi.</li>
-<li>msyh.ttf: Microsoft YaHei.</li>
-<li>msyhbd.ttf: Microsoft YaHei Bold.</li>
-<li>hkjgt.ttf: DynaFont King Gothic.</li>
-<li>dhttx.ttf: DianHei Extra Light.</li>
-<li>xqgdzt.ttf: XiQue GuZiDian.</li>
-<li>qpcyt.ttf: Smart Splice Super Round Body</li>
-<li>arial.ttf: English only.</li>
-<li>dinalternate.ttf:DIN Alternate Bold</li>
-<li>helveticalt.ttf:Helvetica</li>
-<li>helveticains.ttf:Helvetica Inserat</li>
-<li>trajanpro.ttf:TrajanPro-Bold</li>
-<li>korean.ttf: Korean.</li>
-<li>japanese.ttf: Japanese.</li>
-<li>thai.ttf: Thai.</li>
-<li>roboto.ttf:Roboto</li>
-<li>notosans.ttf:NotoSans</li>
-<li>notosansthai.ttf: Thai NotoSansThai</li>
-<li>sarabun.ttf: Thai Sarabun</li>
-<li>kanit.ttf: Thai Kanit</li>
-<li>charmonman.ttf: Thai Charmonman.</li>
-<li>notonaskharabic.ttf: Arabic NotoNaskhArabic.</li>
-<li>notosansdevanagari.ttf: NotoSansDevanagari for India.</li>
-<li>notosanstc.ttf: Cantonese Source Han Sans NotoSansTC</li>
-<li>notosanskr.ttf: Korean NotoSansKR.</li>
-<li>gothica1.ttf: Korean GothicA1.</li>
-<li>nanummyeongjo.ttf: Korean NanumMyeongjo.</li>
-<li>notosansjp.ttf: Japanese NotoSansJP.</li>
-<li>notoserifjp.ttf: Japanese NotoSerifJP.</li>
-<li>shipporimincho.ttf: Japanese ShipporiMincho.</li>
-Default value: hei.ttf.
-<br>Note:
-<li>kai.ttf is recommended for SimKai.</li>
-<li>FontFileInput takes precedence when specified.</li>
-
+         * 
          * @type {string || null}
          */
         this.FontType = null;
 
         /**
-         * Font size. If not specified, the font size of the subtitle file applies. Pixel and percentage formats are supported.
-
--.
-- Percentage: N%. Value range of N: (0,100]. For example, 10% means the subtitle font size is 10% of the source video height.
-
-The default size is 5% of the source video height if this parameter is not specified or the font size is not configured in the subtitle file.
-
+         * 
          * @type {string || null}
          */
         this.FontSize = null;
 
         /**
-         * Font color. Format: 0xRRGGBB. Default value: 0xFFFFFF (white).
+         * 
          * @type {string || null}
          */
         this.FontColor = null;
 
         /**
-         * Text opacity, value ranges from 0 to 1.
-<li>0: completely transparent.</li>
-<li>1: completely opaque.</li>
-Default value: 1.
+         * 
          * @type {number || null}
          */
         this.FontAlpha = null;
 
         /**
-         * Subtitle y-axis coordinate position. Specify this parameter to ignore the built-in coordinates of the subtitle file. Support pixel and percentage format.
-
--.
--Percentage: N%, N range: [0,100]; for example, 10% means subtitle y-coordinate = 10% * source video height.
-
-By default, the position is 4% of the source video height.
-Note: The origin of the coordinate axes is at the bottom of the central axis of the source video, and the subtitle reference position is at the bottom of the central axis of the subtitles, see the following diagram.
-![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png)
-
+         * 
          * @type {string || null}
          */
         this.YPos = null;
 
         /**
-         * y-axis coordinate position of the subtitle background base plate; Support pixel and percentage format:
-
--.
--Percentage: N%, N range: [0,100]; for example, 10% means the y-coordinate of the subtitle background base plate = 10% * video height.
-
-If this parameter is not specified, the subtitle background is disabled.
-Note: The origin of the coordinate axes is at the bottom of the central axis of the source video, and the reference point of the subtitle background base plate is at the bottom of its central axis. Refer to the figure below.
-![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png)
-
+         * 
          * @type {string || null}
          */
         this.BoardY = null;
 
         /**
-         * Background width. The value should be a positive integer.
-- Value range for pixels: [0,4096].
-- Value range for percentages: [0, 100].
-If background is enabled and this parameter is not specified, the default width is 90% of the source video width.
-
+         * 
          * @type {number || null}
          */
         this.BoardWidth = null;
 
         /**
-         * Background height. The value should be a positive integer.
-- Value range for pixels: [0,4096].
-- Value range for percentages: [0, 100].
-If background is enabled and this parameter is not specified, the default height is 15% of the source video height.
-
+         * 
          * @type {number || null}
          */
         this.BoardHeight = null;
 
         /**
-         * Board color. Format: 0xRRGGBB.
-Default value: 0x000000 (black).
+         * 
          * @type {string || null}
          */
         this.BoardColor = null;
 
         /**
-         * Subtitle background transparency. Value range: [0, 1].
-<li>0: completely transparent.</li>
-<li>1: completely opaque.</li>
-Default value: 0.8.
+         * 
          * @type {number || null}
          */
         this.BoardAlpha = null;
@@ -28894,14 +29205,14 @@ Default value: 0.8.
          * Stroke width. The value should be a floating-point number.
 - Value range for pixels: [0, 1000].
 - Value range for percentages: [0, 100].
-If this is not specified, the default width is 0.3% of the source video height.
+0.3% of the source video height by default if left blank.
 
          * @type {number || null}
          */
         this.OutlineWidth = null;
 
         /**
-         * Stroke color. The value should be a 6-digit hexadecimal RGB value. If this is not specified, the default color is black.
+         * Border color. 6-digit hexadecimal RGB. Black by default if left blank.
 
          * @type {string || null}
          */
@@ -28915,17 +29226,17 @@ If this is not specified, the default width is 0.3% of the source video height.
         this.OutlineAlpha = null;
 
         /**
-         * Shadow width. The value should be a floating-point number.
+         * Shadow width. Floating-point number.
 - Value range for pixels: [0, 1000].
 - Value range for percentages: [0, 100].
-If this is not specified, no shadow is applied by default.
+No shading by default if left blank.
 
          * @type {number || null}
          */
         this.ShadowWidth = null;
 
         /**
-         * Shadow color. The value should be a 6-digit hexadecimal RGB value. If this is not specified, the default color is black (with shadow configured).
+         * Shadow color. 6-bit base RGB. Black by default if left blank (when shadow has set).
 
          * @type {string || null}
          */
@@ -28983,7 +29294,7 @@ If this is not specified, no shadow is applied by default.
         this.ShadowWidthUnit = null;
 
         /**
-         * Default value is 0. If this is set to 1, the value of LineSpacing is a percentage based on the video height.
+         * Default value: 0. If this is set to 1, the value of LineSpacing is a percentage based on the video height.
 
          * @type {number || null}
          */
@@ -29134,7 +29445,7 @@ class DescribeMediaMetaDataResponse extends  AbstractModel {
         super();
 
         /**
-         * Media metadata.
+         * <p>Media metadata.</p>
          * @type {MediaMetaData || null}
          */
         this.MetaData = null;
@@ -29502,24 +29813,30 @@ Default: 0.0.
 }
 
 /**
- * Image encoding format parameters
+ * Subtitle suppression configuration for a dubbing task
  * @class
  */
-class ImageEncodeConfig extends  AbstractModel {
+class DubbingEmbedSubtitleConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Image format. Valid values: JPEG, PNG, BMP, and WebP. If it is not specified, the original image format is used. Animations are not supported.
-         * @type {string || null}
-         */
-        this.Format = null;
-
-        /**
-         * Relative image quality. Valid range: 1 - 100. The value is based on the original image quality, and the default is the original image quality.
+         * <p>id of the suppressed subtitles.</p>
          * @type {number || null}
          */
-        this.Quality = null;
+        this.SubtitleEmbedId = null;
+
+        /**
+         * <p>Continue to use the original subtitle position.</p><p>Default value: 1</p>
+         * @type {number || null}
+         */
+        this.UseOriginalPos = null;
+
+        /**
+         * <p>Continue to use the original subtitle font size.</p><p>Default value: 1</p>
+         * @type {number || null}
+         */
+        this.UseOriginalSize = null;
 
     }
 
@@ -29530,8 +29847,9 @@ class ImageEncodeConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Format = 'Format' in params ? params.Format : null;
-        this.Quality = 'Quality' in params ? params.Quality : null;
+        this.SubtitleEmbedId = 'SubtitleEmbedId' in params ? params.SubtitleEmbedId : null;
+        this.UseOriginalPos = 'UseOriginalPos' in params ? params.UseOriginalPos : null;
+        this.UseOriginalSize = 'UseOriginalSize' in params ? params.UseOriginalSize : null;
 
     }
 }
@@ -30403,7 +30721,7 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
- * Adaptive bitrate streaming parameter template
+ * Adaptive transcoding stream parameter template
  * @class
  */
 class AdaptiveStreamTemplate extends  AbstractModel {
@@ -30423,24 +30741,23 @@ class AdaptiveStreamTemplate extends  AbstractModel {
         this.Video = null;
 
         /**
-         * Whether to remove audio stream. Valid values:
-<li>0: no,</li>
+         * Whether to remove the audio stream. Value range:
+<li>`0`: no,</li>
 <li>1: yes.</li>
          * @type {number || null}
          */
         this.RemoveAudio = null;
 
         /**
-         * Whether to remove video stream. Valid values:
-<li>0: no,</li>
+         * Whether to remove the video stream. Value range:
+<li>`0`: no,</li>
 <li>1: yes.</li>
          * @type {number || null}
          */
         this.RemoveVideo = null;
 
         /**
-         * Audio parameter information list.
-Note: This parameter is used when self-adaptive transcoding uses audio track merging for multiple audio tracks. The maximum length of the parameter array is 64.
+         * 
          * @type {Array.<AudioTemplateInfo> || null}
          */
         this.AudioList = null;
@@ -30562,7 +30879,7 @@ class SmartSubtitleTaskFullTextResult extends  AbstractModel {
 }
 
 /**
- * Input parameter type of a transcoding task
+ * Transcode task input parameter type
  * @class
  */
 class TranscodeTaskInput extends  AbstractModel {
@@ -30570,22 +30887,20 @@ class TranscodeTaskInput extends  AbstractModel {
         super();
 
         /**
-         * ID of a video transcoding template.
+         * Video transcoding template ID.
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Custom video transcoding parameter. valid when Definition is set to 0.
-This parameter is used in high customization scenarios. it is recommended that you preferentially use Definition to specify transcoding parameters.
+         * Custom video transcoding parameter. It takes effect when Definition is set to 0.
+This parameter is used in high customization scenarios. It is recommended that you preferentially use Definition to specify transcoding parameters.
          * @type {RawTranscodeParameter || null}
          */
         this.RawParameter = null;
 
         /**
-         * Custom video transcoding parameter. It takes effect when Definition is not set to 0.
-When you fill in some transcoding parameters in this structure, the filled parameters will be used to override the parameters in the transcoding template.
-This parameter is used in high customization scenarios. It is recommended that you use only Definition to specify transcoding parameters.
+         * 
          * @type {OverrideTranscodeParameter || null}
          */
         this.OverrideParameter = null;
@@ -30597,67 +30912,69 @@ This parameter is used in high customization scenarios. It is recommended that y
         this.WatermarkSet = null;
 
         /**
-         * Digital watermark parameters.
+         * 
          * @type {BlindWatermarkInput || null}
          */
         this.BlindWatermark = null;
 
         /**
-         * List of blurs. Up to 10 ones can be supported.
+         * Mosaic list. A maximum of 10 images is supported.
          * @type {Array.<MosaicInput> || null}
          */
         this.MosaicSet = null;
 
         /**
-         * Start time offset of a transcoded video, in seconds.
-<li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
-<li>If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.</li>
-<li>If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.</li>
+         * Start time offset of the transcoded video, in seconds.
+<li>If this parameter is not specified or is set to 0, the transcoded video starts from the start position of the original video;</li>
+<li>When the value is greater than 0 (assuming n), it means the transcoded video starts from the nth second of the original video;</li>
+<li>When the value is less than 0 (assuming -n), it means the transcoded video starts n seconds before the end of the original video.</li>
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of a transcoded video, in seconds.
-<li>If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.</li>
-<li>If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.</li>
-<li>If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.</li>
+         * End time offset of the transcoded video, in seconds.
+<li>If not set or set to 0, the transcoded video will last until the end of the original video.</li>
+<li>When the value is greater than 0 (assuming n), it means the transcoded video ends at the nth second of the original video.</li>
+<li>When the value is less than 0 (assuming -n), it means the transcoded video lasts until n seconds before the end of the original video.</li>
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
-         * Target storage for the transcoded file. If left blank, it inherits the upper-level OutputStorage value.
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
          * Output path of the main file after transcoding, which can be a relative or absolute path.
-If you need to define an output path, the path must end with `.{format}`. For variable names, refer to [Filename Variable](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1).Relative path example:
-<li>Filename_{Variable name}.{format}.</li>
+To define the output path, the path must end with `.{format}`. For variable names, please refer to [Filename Variable Explanation](https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1).
+Relative path example:
+<li>Filename_{Variable name}.{format}</li>
 <li>Filename.{format}.</li>
 Absolute path example:
-<li>/Custom path/Filename_{Variable name}.{format}.</li>
-If left empty, a relative path is used by default: `{inputName}_transcode_{definition}.{format}`.
+<li>/Custom path/Filename_{Variable name}.{format}</li>
+If left empty, the default relative path is `{inputName}_transcode_{definition}.{format}`.
+
          * @type {string || null}
          */
         this.OutputObjectPath = null;
 
         /**
-         * Path to an output file part (the path to ts during transcoding to HLS), which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}_{number}.{format}`.
+         * Output path for segment files after transcoding (the path of TS files when transcoding to HLS), which can only be a relative path. If left empty, it defaults to `{inputName}_transcode_{definition}_{number}.{format}`.
          * @type {string || null}
          */
         this.SegmentObjectName = null;
 
         /**
-         * Rule of the `{number}` variable in the output path after transcoding.
+         * 
          * @type {NumberFormat || null}
          */
         this.ObjectNumberFormat = null;
 
         /**
-         * Video opening/closing credits parameter.
+         * 
          * @type {HeadTailParameter || null}
          */
         this.HeadTailParameter = null;
@@ -31051,7 +31368,7 @@ class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * AIGC document-to-video input
  * @class
  */
 class DocToVideoInput extends  AbstractModel {
@@ -31059,58 +31376,88 @@ class DocToVideoInput extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Document link for video generation.</p><p>Supported document types: pdf, pptx, docx, png, jpg<br>Document count limit: 3<br>Document size limit: 10MB<br>Document page limit: 100</p>
          * @type {Array.<string> || null}
          */
         this.FileUrl = null;
 
         /**
-         * 
+         * <p>Prompt information for video generation.</p><p>Prompt length limit: 2,000 characters.</p>
          * @type {string || null}
          */
         this.Prompt = null;
 
         /**
-         * 
+         * <p>Document-to-video model name</p><p>Default value: Wand</p>
          * @type {string || null}
          */
         this.ModelName = null;
 
         /**
-         * 
+         * <p>Document-to-video model version number</p><p>Default value: 1.0</p>
          * @type {string || null}
          */
         this.ModelVersion = null;
 
         /**
-         * 
+         * <p>Aspect ratio of the generated video.</p><p>Enumeration values: </p><ul><li>16:9: 16:9</li><li>9:16: 9:16</li><li>1:1: 1:1</li></ul><p>Default value: 16:9</p>
          * @type {string || null}
          */
         this.Ratio = null;
 
         /**
-         * 
+         * <p>Language of the generated video.</p><p>Enumeration values: </p><ul><li>zh: Chinese</li><li>en: English</li><li>ja: Japanese</li><li>ko: Korean</li><li>ru: Russian</li><li>fr: French</li><li>es: Spanish</li><li>de: German</li></ul><p>Default value: zh</p>
          * @type {string || null}
          */
         this.Language = null;
 
         /**
-         * 
+         * <p>Video duration for reference.</p><p>This is not an exact duration; it serves as a reference for the LLM only.</p><p>Range: [15, 1200]</p><p>Unit: second</p>
          * @type {number || null}
          */
         this.ReferenceDuration = null;
 
         /**
-         * 
+         * <p>Whether the AI dubbing feature is enabled.</p><p>Default value: false</p>
          * @type {boolean || null}
          */
         this.EnableTTS = null;
 
         /**
-         * 
+         * <p>Voice ID. Valid only when AI dubbing feature is enabled.</p>
          * @type {string || null}
          */
         this.VoiceId = null;
+
+        /**
+         * <p>Whether PPTX high-fidelity clone mode is enabled.</p><p>When enabled, the content of the input PPTX document will be cloned as much as possible, but perfect cloning is not possible.<br>Animated effects cannot be cloned temporarily.</p><p>When enabled, ensure the input document contains at least one PPTX document.<br>If there are multiple PPTX documents, only the first document will be cloned with high fidelity.</p><p>Default value: false</p>
+         * @type {boolean || null}
+         */
+        this.PPTXFidelity = null;
+
+        /**
+         * <p>Video generation mode.</p><p>Enumeration values:</p><ul><li>stage: Generation mode upon confirmation</li><li>auto: End-to-end direct generation mode</li></ul>
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * <p>Background image information used to generate the video.</p><p>It only takes effect when PreserveLayout is false.</p>
+         * @type {DocToVideoBackgroundInfo || null}
+         */
+        this.Background = null;
+
+        /**
+         * <p>Watermark image information for video generation.</p><p>It only takes effect when PreserveLayout is false.</p>
+         * @type {DocToVideoWatermarkInfo || null}
+         */
+        this.Watermark = null;
+
+        /**
+         * <p>Whether subtitle generation is enabled.</p><p>Default value: false</p>
+         * @type {boolean || null}
+         */
+        this.EnableCaption = null;
 
     }
 
@@ -31130,6 +31477,21 @@ class DocToVideoInput extends  AbstractModel {
         this.ReferenceDuration = 'ReferenceDuration' in params ? params.ReferenceDuration : null;
         this.EnableTTS = 'EnableTTS' in params ? params.EnableTTS : null;
         this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.PPTXFidelity = 'PPTXFidelity' in params ? params.PPTXFidelity : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+
+        if (params.Background) {
+            let obj = new DocToVideoBackgroundInfo();
+            obj.deserialize(params.Background)
+            this.Background = obj;
+        }
+
+        if (params.Watermark) {
+            let obj = new DocToVideoWatermarkInfo();
+            obj.deserialize(params.Watermark)
+            this.Watermark = obj;
+        }
+        this.EnableCaption = 'EnableCaption' in params ? params.EnableCaption : null;
 
     }
 }
@@ -31345,7 +31707,7 @@ class CreateSampleSnapshotTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Super resolution configuration.
+ * Super-resolution configuration.
  * @class
  */
 class SuperResolutionConfig extends  AbstractModel {
@@ -31353,27 +31715,22 @@ class SuperResolutionConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the feature. Valid values:
-<li>ON</li>
-<li>OFF</li>
+         * Capability configuration switch. Available values:
+<li>ON: enabled;</li>
+<li>OFF: disabled</li>
 Default value: ON.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Type, available values:
-<li>lq: Super-resolution for low-resolution videos with considerable noise;</li>
-<li>hq: Targeting high-resolution video super-resolution.</li>
-Default value: lq.
+         * 
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Super-resolution multiple, optional value:
-<li>2: Currently only support 2x super resolution.</li>
-Default value: 2.
+         * 
          * @type {number || null}
          */
         this.Size = null;
@@ -32157,7 +32514,7 @@ class CreateDocToVideoTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Task ID.</p>
          * @type {string || null}
          */
         this.TaskId = null;
@@ -32269,7 +32626,7 @@ class CreateVideoRedrawTaskRequest extends  AbstractModel {
 }
 
 /**
- * The AWS S3 storage information of an output file.
+ * AWS S3 output location
  * @class
  */
 class S3OutputStorage extends  AbstractModel {
@@ -32277,25 +32634,25 @@ class S3OutputStorage extends  AbstractModel {
         super();
 
         /**
-         * S3 bucket.
+         * S3 bucket。
          * @type {string || null}
          */
         this.S3Bucket = null;
 
         /**
-         * Region of the S3 bucket.
+         * 
          * @type {string || null}
          */
         this.S3Region = null;
 
         /**
-         * Secret key id for uploading media content to the AWS private network.
+         * 
          * @type {string || null}
          */
         this.S3SecretId = null;
 
         /**
-         * Upload the secret key for media content on the AWS private network.
+         * 
          * @type {string || null}
          */
         this.S3SecretKey = null;
@@ -32475,7 +32832,7 @@ class SpecificationDataItem extends  AbstractModel {
 }
 
 /**
- * TESHD parameter configuration.
+ * TSC parameter configuration.
  * @class
  */
 class TEHDConfigForUpdate extends  AbstractModel {
@@ -32483,16 +32840,13 @@ class TEHDConfigForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Top Speed Codec type. Available values:
-<li>TEHD-100: Top Speed Codec-100 (video top speed codec).</li>
-<li>TEHD-200: Top Speed Codec-200 (TSC audio).</li>
-Leave it blank to keep it unchanged.
+         * 
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Upper limit of video bitrate. Leave blank to keep unchanged.
+         * 
          * @type {number || null}
          */
         this.MaxVideoBitrate = null;
@@ -32589,7 +32943,7 @@ class ModifyPersonSampleRequest extends  AbstractModel {
 }
 
 /**
- * Reference video asset for AIGC video generation.
+ * 
  * @class
  */
 class AigcVideoReferenceVideoInfo extends  AbstractModel {
@@ -32597,22 +32951,19 @@ class AigcVideoReferenceVideoInfo extends  AbstractModel {
         super();
 
         /**
-         * Reference video url. Must be external network accessible.
-This can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.
-The ReferType parameter specifies the reference video type: feature indicates feature reference video, and base indicates video for editing.
-If the reference video is a video for editing, the first and last frames cannot be defined.
+         * <p>url of the reference video. It must be accessible from the external network.<br>It can be used as a feature reference video or a video for editing. By default, it is a video for editing. You can selectively retain the original sound of the video.<br>The ReferType parameter specifies the reference video type: feature indicates feature reference video, and base indicates video for editing.<br>When the reference video is a video for editing, you cannot define the first and last frame of the video.</p>
          * @type {string || null}
          */
         this.VideoUrl = null;
 
         /**
-         * The ReferType parameter specifies the reference video type: feature indicates feature reference video, and base indicates video for editing.
+         * <p>The ReferType parameter specifies the reference video type: feature indicates feature reference video, and base indicates video for editing.</p>
          * @type {string || null}
          */
         this.ReferType = null;
 
         /**
-         * The KeepOriginalSound parameter specifies whether to keep the original sound of the video. Valid values: yes (keep the original sound); no (remove the original sound). This parameter also applies to feature reference videos (feature).
+         * <p>The KeepOriginalSound parameter specifies whether to keep the original sound of the video. Valid values: yes (keep the original sound); no (remove the original sound). This parameter also applies to feature reference videos (feature).</p>
          * @type {string || null}
          */
         this.KeepOriginalSound = null;
@@ -32629,6 +32980,68 @@ If the reference video is a video for editing, the first and last frames cannot 
         this.VideoUrl = 'VideoUrl' in params ? params.VideoUrl : null;
         this.ReferType = 'ReferType' in params ? params.ReferType : null;
         this.KeepOriginalSound = 'KeepOriginalSound' in params ? params.KeepOriginalSound : null;
+
+    }
+}
+
+/**
+ * Reference entity information.
+For the Vidu model:
+Id -> server_id. Principal ID obtained through the principal creation API.
+Principal ID, subsequently used in the format of @Principal ID.
+
+For the Kling model:
+element id, obtained through the principal creation API.
+ * @class
+ */
+class AigcVideoReferenceSubjectInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>ID of the reference subject.</p>
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * <p>Subject name.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Main voice ID.</p>
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
+         * <p>Main image list.</p>
+         * @type {Array.<string> || null}
+         */
+        this.ImageUrls = null;
+
+        /**
+         * <p>Main video list.</p>
+         * @type {Array.<string> || null}
+         */
+        this.VideoUrls = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.ImageUrls = 'ImageUrls' in params ? params.ImageUrls : null;
+        this.VideoUrls = 'VideoUrls' in params ? params.VideoUrls : null;
 
     }
 }
@@ -32745,7 +33158,7 @@ class AiAnalysisTaskVideoRemakeResult extends  AbstractModel {
 }
 
 /**
- * Artifact removal (smoothing) configuration.
+ * Artifact (burr) removal configuration
  * @class
  */
 class ArtifactRepairConfig extends  AbstractModel {
@@ -32753,19 +33166,16 @@ class ArtifactRepairConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the feature. Valid values:
-<li>ON</li>
-<li>OFF</li>
+         * Capability configuration switch. Valid values:
+<li>ON: enabled;</li>
+<li>OFF: disabled.</li>
 Default value: ON.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Type, available values:
-<li>weak</li>
-<li>strong</li>
-Default value: weak.
+         * 
          * @type {string || null}
          */
         this.Type = null;
@@ -32786,7 +33196,7 @@ Default value: weak.
 }
 
 /**
- * Output parameter setting for synchronous dubbing.
+ * 
  * @class
  */
 class SyncDubbingOutputOption extends  AbstractModel {
@@ -32794,7 +33204,7 @@ class SyncDubbingOutputOption extends  AbstractModel {
         super();
 
         /**
-         * <p>Output type of the synthesis result. </p><p>Enumeration values: </p><ul><li>data: Audio base64 encoding, </li><li>url: Audio URL, valid for 24 hours.</li></ul>
+         * 
          * @type {string || null}
          */
         this.Type = null;
@@ -33345,7 +33755,7 @@ class PoliticalImgReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * Task judgment conditions.
+ * 
  * @class
  */
 class ExecRulesTask extends  AbstractModel {
@@ -33913,19 +34323,19 @@ class DescribeImageTasksResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Total number of records that meet filter conditions.</p><p>Unit: entries</p>
+         * 
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * <p>Scrolling identifier. If a request does not return all the data entries, this field indicates the ID of the next entry. If this field is an empty string, there is no more data.</p>
+         * 
          * @type {string || null}
          */
         this.ScrollToken = null;
 
         /**
-         * <p>Image task summary list.</p>
+         * 
          * @type {Array.<ImageTaskInfo> || null}
          */
         this.TaskSet = null;
@@ -34163,7 +34573,7 @@ class ImageEnhanceConfig extends  AbstractModel {
 }
 
 /**
- * The watermark parameters to use in a media processing task.
+ * Watermark parameter type in the media processing task.
  * @class
  */
 class WatermarkInput extends  AbstractModel {
@@ -34171,51 +34581,37 @@ class WatermarkInput extends  AbstractModel {
         super();
 
         /**
-         * ID of a watermarking template.
+         * <p>Watermark template ID.</p>
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Custom watermark parameter, which is valid if `Definition` is 0.
-This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.
-Custom watermark parameter is not available for screenshot.
+         * <p>Watermark custom parameter, valid when Definition is set to 0.<br>This parameter is used for highly customized scenarios. We recommend you prioritize using Definition to specify watermark parameters.<br>Watermark custom parameters are not supported for screenshot watermarking.</p>
          * @type {RawWatermarkParameter || null}
          */
         this.RawParameter = null;
 
         /**
-         * Text content of up to 100 characters. This field is required only when the watermark type is text.
-Text watermark is not available for screenshot.
+         * <p>Text content, length not exceeding 100 characters. Fill in only when the watermark type is text watermark.<br>Text watermark does not support screenshot watermarking.</p>
          * @type {string || null}
          */
         this.TextContent = null;
 
         /**
-         * SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.
-SVG watermark is not available for screenshot.
+         * <p>SVG content. Length not exceeding 2000000 characters. Fill in only when the watermark type is SVG watermark.<br>SVG watermark does not support screenshot watermarking.</p>
          * @type {string || null}
          */
         this.SvgContent = null;
 
         /**
-         * Start time offset of a watermark, in seconds. If not set or set to 0, a watermark starts appearing when a video starts.
-<li>If not set or set to 0, a watermark starts appearing when a video starts.</li>
-<li>If the value is greater than 0 (for example, n), a watermark will appear at second n of a video.</li>
-<li>If the value is less than 0 (for example, -n), a watermark will appear n seconds before the end of a video.</li>
-
-Note: It is only used for video scenarios. Screenshots are not supported.
+         * <p>Start time offset of a watermark, in seconds. If not set or set to 0, a watermark starts appearing when a video starts.</p><li>If not set or set to 0, a watermark starts appearing when a video starts;</li><li>If the value is greater than 0 (assuming n), the watermark appears at second n after the video starts;</li><li>If the value is less than 0 (assuming -n), the watermark appears n seconds before the end of the video.</li>Note: Only used for video scenes. Screenshots do not support it.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of a watermark, in seconds.
-<li>If not set or set to 0, a watermark will last until the end of a video.</li>
-<li>If the value is greater than 0 (for example, n), a watermark will disappear at second n.</li>
-<li>If the value is less than 0 (for example, -n), a watermark will disappear n seconds before the end of a video.</li>
-
-Note: It is only used for video scenarios. Screenshots are not supported.
+         * <p>End time offset of a watermark, in seconds.</p><li>Leave empty or set to 0: the watermark lasts until the end of the video.</li><li>Value greater than 0 (assuming n): the watermark disappears at second n.</li><li>Value smaller than 0 (assuming -n): the watermark disappears n seconds before the end of the video.</li>Note: Only used for video scenes. Screenshot is not supported.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -34273,7 +34669,7 @@ class EnableWorkflowResponse extends  AbstractModel {
 }
 
 /**
- * Orchestrate atomic tasks
+ * 
  * @class
  */
 class Activity extends  AbstractModel {
@@ -34281,37 +34677,25 @@ class Activity extends  AbstractModel {
         super();
 
         /**
-         * Atomic task type.
-<li>input: start node.</li>
-<li>output: termination node.</li>
-<li>action-trans: transcoding.</li>
-<li>action-samplesnapshot: sampled screenshot taking.</li>
-<li>action-AIAnalysis: analysis</li>
-<li>action-AIRecognition: recognition.</li>
-<li>action-aiReview: review</li>
-<li>action-animated-graphics: animated image</li>
-<li>action-image-sprite: sprite sheet</li>
-<li>action-snapshotByTimeOffset: time point screenshot taking</li>
-<li>action-adaptive-substream: adaptive bitrate streaming.</li>
-<li>action-AIQualityControl: media quality inspection.</li>
-<li>action-SmartSubtitles: smart subtitle</li>
-<li>action-exec-rules: judgment rule</li>
-<li>action-SmartErase: intelligent removal.</li>
-
-
-
+         * <p>Atomic task type:</p><li>input: starting node</li><li>output: termination node</li><li>action-trans: transcode</li><li>action-samplesnapshot: sampled screenshot</li><li>action-AIAnalysis: analysis</li><li>action-AIRecognition: recognition</li><li>action-aiReview: review</li><li>action-animated-graphics: animated image</li><li>action-image-sprite: sprite sheet</li><li>action-snapshotByTimeOffset: time point screenshot</li><li>action-adaptive-substream: adaptive bitrate stream</li><li>action-AIQualityControl: media quality inspection</li><li>action-SmartSubtitles: smart subtitling</li><li>action-exec-rules: judgment rule</li><li>action-SmartErase: intelligent erasure</li>
          * @type {string || null}
          */
         this.ActivityType = null;
 
         /**
-         * Rear drive node index array
+         * <p>Index array of predecessor nodes.<br>Note: This parameter is invalid when creating or modifying an orchestration. It is automatically generated by the server.</p>
+         * @type {Array.<number> || null}
+         */
+        this.PredriveIndex = null;
+
+        /**
+         * <p>Array of successor node indexes</p>
          * @type {Array.<number> || null}
          */
         this.ReardriveIndex = null;
 
         /**
-         * 
+         * <p>Atomic task parameter</p>
          * @type {ActivityPara || null}
          */
         this.ActivityPara = null;
@@ -34326,6 +34710,7 @@ class Activity extends  AbstractModel {
             return;
         }
         this.ActivityType = 'ActivityType' in params ? params.ActivityType : null;
+        this.PredriveIndex = 'PredriveIndex' in params ? params.PredriveIndex : null;
         this.ReardriveIndex = 'ReardriveIndex' in params ? params.ReardriveIndex : null;
 
         if (params.ActivityPara) {
@@ -34921,7 +35306,7 @@ class LiveStreamRecordResultInfo extends  AbstractModel {
 }
 
 /**
- * Rule condition configuration.
+ * 
  * @class
  */
 class RuleConditionItem extends  AbstractModel {
@@ -34929,13 +35314,13 @@ class RuleConditionItem extends  AbstractModel {
         super();
 
         /**
-         * Key of the quality inspection item condition.
+         * 
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Value corresponding to the condition.
+         * 
          * @type {string || null}
          */
         this.Value = null;
@@ -35204,7 +35589,7 @@ class CreateVideoRedrawTaskResponse extends  AbstractModel {
 }
 
 /**
- * Input parameter type of adaptive bitrate streaming
+ * Input parameter type for video to adaptive bitrate stream
  * @class
  */
 class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
@@ -35224,13 +35609,13 @@ class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
         this.WatermarkSet = null;
 
         /**
-         * <p>Digital watermark parameter.</p>
+         * 
          * @type {BlindWatermarkInput || null}
          */
         this.BlindWatermark = null;
 
         /**
-         * <p>Target storage for files after adaptive bitrate streaming. If left blank, it inherits the upper-level OutputStorage value.</p>
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -35254,13 +35639,13 @@ class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
         this.SegmentObjectName = null;
 
         /**
-         * <p>External subtitle feature. Specifies the subtitle file to be inserted.</p>
+         * 
          * @type {Array.<AddOnSubtitle> || null}
          */
         this.AddOnSubtitles = null;
 
         /**
-         * <p>Drm information.</p>
+         * 
          * @type {DrmInfo || null}
          */
         this.DrmInfo = null;
@@ -35272,7 +35657,7 @@ class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
         this.DefinitionType = null;
 
         /**
-         * <p>Hard subtitle (burned-in subtitle) feature. Specifies the subtitle source, font size, location, and other subtitle parameters.</p>
+         * 
          * @type {SubtitleTemplate || null}
          */
         this.SubtitleTemplate = null;
@@ -35284,7 +35669,7 @@ class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
         this.StdExtInfo = null;
 
         /**
-         * <p>Set the frame at the specified pts time as a key frame and segment it. Unit: milliseconds (relative deviation <=1ms is allowed). When both gop and segment duration are specified simultaneously, they function together. Note that RawPts must be enabled, keep the frame rate following the source, and ensure the passed-in pts time corresponds to a frame in the source.</p>
+         * 
          * @type {Array.<number> || null}
          */
         this.KeyPTSList = null;
@@ -35509,7 +35894,7 @@ class DescribeImageSpriteTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Event notification configuration of a task.
+ * Event notification configuration of the task.
  * @class
  */
 class TaskNotifyConfig extends  AbstractModel {
@@ -35559,7 +35944,7 @@ class TaskNotifyConfig extends  AbstractModel {
         this.QueueName = null;
 
         /**
-         * <p>AWS SQS callback. This is required if NotifyType is AWS-SQS.</p>
+         * 
          * @type {AwsSQS || null}
          */
         this.AwsSQS = null;
@@ -35984,7 +36369,7 @@ class ModifySmartEraseTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Opening and closing credits parameters
+ * Opening and ending segments parameter.
  * @class
  */
 class HeadTailParameter extends  AbstractModel {
@@ -35992,13 +36377,13 @@ class HeadTailParameter extends  AbstractModel {
         super();
 
         /**
-         * Opening scene list.
+         * 
          * @type {Array.<MediaInputInfo> || null}
          */
         this.HeadSet = null;
 
         /**
-         * Ending list.
+         * 
          * @type {Array.<MediaInputInfo> || null}
          */
         this.TailSet = null;
@@ -36502,6 +36887,41 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
+ * CreateProcessImageTemplate response structure.
+ * @class
+ */
+class CreateProcessImageTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique identifier of the image processing template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Query returns each output file
  * @class
  */
@@ -36789,7 +37209,7 @@ class SubtitleLayoutConfig extends  AbstractModel {
 }
 
 /**
- * Custom watermark specifications.
+ * Customize watermark specification parameters.
  * @class
  */
 class RawWatermarkParameter extends  AbstractModel {
@@ -36804,37 +37224,36 @@ class RawWatermarkParameter extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Origin position. valid values:.
-<Li>TopLeft: indicates that the coordinate origin is at the top left corner of the video image and the watermark origin is at the top left corner of the image or text.</li>.
-<Li>TopRight: indicates that the coordinate origin is at the top right corner of the video image and the watermark origin is at the top right corner of the image or text.</li>.
-<Li>BottomLeft: indicates that the coordinate origin is at the bottom-left corner of the video image and the watermark origin is at the bottom-left corner of the image or text.</li>.
+         * Origin position. Valid values:
+<li>TopLeft: indicates that the coordinate origin is at the top left corner of the video image and the watermark origin is at the top left corner of the image or text.</li>
+<li>TopRight: indicates that the coordinate origin is at the top right corner of the video image and the watermark origin is at the top right corner of the image or text.</li>
+<li>BottomLeft: indicates that the coordinate origin is at the bottom-left corner of the video image and the watermark origin is at the bottom-left corner of the image or text.</li>
 <li>BottomRight: indicates that the coordinate origin is at the bottom right corner of the video image and the watermark origin is at the bottom right corner of the image or text.</li>
-
 Default value: TopLeft.
          * @type {string || null}
          */
         this.CoordinateOrigin = null;
 
         /**
-         * The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:
-<li>If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;</li>
-<li>If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.</li>
-Default value: 0 px.
+         * Horizontal position of the watermark origin from the origin of coordinates of the video image. Supports % and px formats.
+<li>If a string ends with %, it indicates that the `XPos` of a watermark is a specified percentage of a video's width. For example, `10%` means that `XPos` is 10% of a video's width.</li>
+<li>If a string ends with px, it means the watermark XPos is specified in pixels. For example, 100px means XPos is 100 pixels.</li>
+Default value: 0px.
          * @type {string || null}
          */
         this.XPos = null;
 
         /**
-         * The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:
-<li>If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;</li>
-<li>If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.</li>
-Default value: 0 px.
+         * Vertical position of the watermark origin relative to the origin of coordinates of the video image. Supports two formats: % and px.
+<li>If a string ends with %, it indicates that the `YPos` of a watermark is a specified percentage of a video's height. For example, `10%` means that `YPos` is 10% of a video's height.</li>
+<li>If a string ends with px, it means the watermark YPos is specified in pixels. For example, 100px means YPos is 100 pixels.</li>
+Default value: 0px.
          * @type {string || null}
          */
         this.YPos = null;
 
         /**
-         * Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+         * Image watermark template. This field is required when Type is image, and invalid when Type is text.
          * @type {RawImageWatermarkInput || null}
          */
         this.ImageTemplate = null;
@@ -36891,7 +37310,7 @@ class AiRecognitionTaskOcrFullTextResultInput extends  AbstractModel {
 }
 
 /**
- * Voice attribute.
+ * 
  * @class
  */
 class VoiceProfile extends  AbstractModel {
@@ -36899,43 +37318,43 @@ class VoiceProfile extends  AbstractModel {
         super();
 
         /**
-         * <p>Voice name.</p>
+         * 
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * <p>Voice description.</p>
+         * 
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * <p>Gender.</p><p>Enumeration values:</p><ul><li>male: male</li><li>female: female</li><li>unknown: unknown</li></ul>
+         * 
          * @type {string || null}
          */
         this.Gender = null;
 
         /**
-         * <p>Age.</p><p>Enumeration values:</p><ul><li>child: child</li><li>teenager: teenager</li><li>youth: youth</li><li>middle_aged: middle-aged</li><li>senior: senior</li><li>unknown: unknown</li></ul>
+         * 
          * @type {string || null}
          */
         this.Age = null;
 
         /**
-         * <p>Language. Supported languages:<br>zh Chinese<br>en English<br>ja Japanese<br>de German<br>fr French<br>ko Korean<br>ru Russian<br>uk Ukrainian<br>pt Portuguese<br>it Italian<br>es Spanish<br>id Indonesian<br>nl Dutch<br>tr Turkish<br>fil Filipino<br>ms Malay<br>el Greek<br>fi Finnish<br>hr Croatian<br>sk Slovak<br>pl Polish<br>sv Swedish<br>hi Hindi<br>bg Bulgarian<br>ro Romanian<br>ar Arabic<br>cs Czech<br>da Danish<br>ta Tamil<br>hun Hungarian<br>vi Vietnamese<br>no Norwegian<br>yue Cantonese<br>th Thai<br>he Hebrew<br>ca Catalan<br>nn Nynorsk<br>af Afrikaans<br>fa Persian<br>sl Slovenian</p>
+         * 
          * @type {Array.<string> || null}
          */
         this.Languages = null;
 
         /**
-         * <p>Tag.</p>
+         * 
          * @type {Array.<string> || null}
          */
         this.Labels = null;
 
         /**
-         * <p>Scenario.</p>
+         * 
          * @type {Array.<string> || null}
          */
         this.Scenes = null;
@@ -37252,7 +37671,7 @@ class AiRecognitionTaskFaceResultInput extends  AbstractModel {
 }
 
 /**
- * The volume equalization configuration.
+ * Volume equalization configuration
  * @class
  */
 class VolumeBalanceConfig extends  AbstractModel {
@@ -37260,19 +37679,16 @@ class VolumeBalanceConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the feature. Valid values:
-<li>`ON`</li>
-<li>`OFF` </li>
-Default value: `ON`.
+         * Capability configuration switch. Valid values:
+<li>ON: enabled</li>
+<li>OFF: disabled</li>
+Default value: ON.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Type, available values:
-<li>loudNorm: Loudness normalization</li>
-<li>gainControl: Reduce abrupt change</li>
-Default value: loudNorm.
+         * 
          * @type {string || null}
          */
         this.Type = null;
@@ -37430,7 +37846,7 @@ class AiReviewTaskPoliticalResult extends  AbstractModel {
 }
 
 /**
- * Area configurations for the subtitle OCR extraction box.
+ * 
  * @class
  */
 class SelectingSubtitleAreasConfig extends  AbstractModel {
@@ -37438,20 +37854,19 @@ class SelectingSubtitleAreasConfig extends  AbstractModel {
         super();
 
         /**
-         * Automatically select a custom region.
-For the selected areas, the AI model is used to automatically detect and extract the target content.
+         * 
          * @type {Array.<EraseArea> || null}
          */
         this.AutoAreas = null;
 
         /**
-         * Width of the sample video or image, in pixels.
+         * 
          * @type {number || null}
          */
         this.SampleWidth = null;
 
         /**
-         * Height of the sample video or image, in pixels.
+         * 
          * @type {number || null}
          */
         this.SampleHeight = null;
@@ -37840,7 +38255,7 @@ class SyncDubbingResponse extends  AbstractModel {
 }
 
 /**
- * The information of the object to process.
+ * Input object information for media processing.
  * @class
  */
 class MediaInputInfo extends  AbstractModel {
@@ -37848,35 +38263,35 @@ class MediaInputInfo extends  AbstractModel {
         super();
 
         /**
-         * Type of input source object. valid values:.
-<Li>COS: specifies the cos origin.</li>
-<Li>URL: the url source.</li>
-<Li>AWS-S3: aws source. currently only supports transcoding tasks.</li>
-<Li>VOD: video-on-demand pro edition (VOD Pro). </li>
+         * Type of the input source object. Supported values:
+<li>COS: COS origin</li>
+<li> URL: URL source</li>
+<li> AWS-S3: AWS source, currently only support transcoding task </li>
+<li> VOD: VOD Pro Edition </li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         * Required when `Type` is `COS`. It represents the COS object information for media processing.
          * @type {CosInputInfo || null}
          */
         this.CosInputInfo = null;
 
         /**
-         * Valid when Type is URL. This item is required and indicates the media processing URL object information.
+         * 
          * @type {UrlInputInfo || null}
          */
         this.UrlInputInfo = null;
 
         /**
-         * Valid when Type is AWS-S3. This item is required and represents the AWS S3 object information for media processing.
+         * 
          * @type {S3InputInfo || null}
          */
         this.S3InputInfo = null;
 
         /**
-         * Valid at that time when Type is VOD. This item is required and represents the Media Processing Service (MPS) video-on-demand (VOD) pro edition object information.
+         * 
          * @type {VODInputInfo || null}
          */
         this.VODInputInfo = null;
@@ -37920,7 +38335,7 @@ class MediaInputInfo extends  AbstractModel {
 }
 
 /**
- * Smart subtitle hotword parameter.
+ * 
  * @class
  */
 class AsrHotWordsConfigure extends  AbstractModel {
@@ -38005,6 +38420,34 @@ For example, [101, 85, 111, —].
         this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
         this.BoundingBox = 'BoundingBox' in params ? params.BoundingBox : null;
         this.BoundingBoxUnitType = 'BoundingBoxUnitType' in params ? params.BoundingBoxUnitType : null;
+
+    }
+}
+
+/**
+ * Background image information for AIGC document-to-video generation
+ * @class
+ */
+class DocToVideoBackgroundInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Background image URL for video generation.</p>
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
 
     }
 }
@@ -38102,7 +38545,7 @@ class LiveStreamAiReviewResultItem extends  AbstractModel {
 }
 
 /**
- * Subtitle removal configuration for the smart erasing template.
+ * 
  * @class
  */
 class SmartEraseSubtitleConfig extends  AbstractModel {
@@ -38110,73 +38553,73 @@ class SmartEraseSubtitleConfig extends  AbstractModel {
         super();
 
         /**
-         * <p>Subtitle erasure method.<br><strong>Automatic erasing:</strong> Video subtitles are automatically recognized using an AI model and are erased without traces to generate a new video. However, missed or incorrect erasing may occur due to image interference and special subtitle styles. In this case, you can specify the erasing area.<br>When using automatic erasing, if you do not specify AutoAreas, the default region (lower middle part of the frame) will be erased automatically. If AutoAreas is specified, the designated region will be erased instead.<br><strong>Specified area erasure:</strong> If your subtitle position is fixed, it is recommended to directly specify the erasure area to minimize missed erasures.<br>When choosing specified area erasure, please input at least one designated region in CustomAreas.</p><ul><li>auto: Automatic erasing</li><li>custom: Specified area erasure</li></ul>
+         * 
          * @type {string || null}
          */
         this.SubtitleEraseMethod = null;
 
         /**
-         * <p>Subtitle erasure model.<br><strong>Standard version (recommended):</strong> If your subtitles have a standard style, it is usually recommended to select this version for better effectiveness in seamless detail removal.<br><strong>Area edition:</strong> If the subtitles have special styles, such as calligraphy, shadow, or motion effects, you are recommended to select this edition to ensure a larger erasing area. However, the erasing effect in the details is not as good as the standard edition.</p><ul><li>standard Standard model</li><li>area Regional model</li></ul>
+         * 
          * @type {string || null}
          */
         this.SubtitleModel = null;
 
         /**
-         * <p>Whether OCR subtitle extraction is enabled. The default value is OFF.<br>OCR subtitle extraction is supported if and only if SubtitleEraseMethod is set to auto. When enabled, it identifies the text region that appears most persistently and stably within the automatic erasing area as the subtitle area. The text within the subtitle area is extracted and erased.</p><ul><li>ON Enable</li><li>OFF Disable</li></ul>
+         * 
          * @type {string || null}
          */
         this.OcrSwitch = null;
 
         /**
-         * <p>Subtitle language, used to guide OCR recognition, default value is zh_en. This parameter is valid only when OcrSwitch is "ON".</p><ul><li>zh_en Chinese and English</li><li>multi other<br>The following languages are supported for recognition:<br>Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, Hindi, Arabic, Bengali, Gujarati, Kannada, Malayalam, Tamil, Telugu, Slovenian, Polish, Catalan, Bosnia, Czech, Estonian, Croatian, Punjabi, Marathi, Azerbaijan, Indonesian, Luxembourg, Lithuanian, Latvian, Malta, Slovak, Turkish, Kazakh, Greek, Irish, Belarus, Khmer, Tagalog, Pashto, Persian, Tajikistan</li></ul>
+         * 
          * @type {string || null}
          */
         this.SubtitleLang = null;
 
         /**
-         * <p>Subtitle file format. Default value is vtt. This parameter is valid only when OcrSwitch takes value "ON".</p><ul><li>srt srt format</li><li>vtt WebVTT format</li><li>When SubtitleEmbedId is filled, it can take value empty string, which means no subtitle file is output.</li></ul>
+         * 
          * @type {string || null}
          */
         this.SubtitleFormat = null;
 
         /**
-         * <p>Whether to enable subtitle translation. The default value is OFF. This parameter is valid only when OcrSwitch is set to "ON".</p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul>
+         * 
          * @type {string || null}
          */
         this.TransSwitch = null;
 
         /**
-         * <p>The target language for subtitle translation defaults to en. This parameter is valid only when TransSwitch is set to "ON".<br>The following languages are currently supported:<br>zh: Simplified Chinese<br>en: English<br>ja: Japanese<br>ko: Korean<br>fr: French<br>es: Spanish<br>it: Italian<br>de: German<br>tr: Turkish<br>ru: Russian<br>pt: Portuguese<br>vi: Vietnamese<br>id: Indonesian<br>ms: Malay<br>th: Thai<br>ar: Arabic<br>hi: Hindi</p>
+         * 
          * @type {string || null}
          */
         this.TransDstLang = null;
 
         /**
-         * <p>Automatically erase custom regions.<br>For selected regions, use the AI model to automatically detect and erase existing targets.<br>Note: When the erase method is set to custom, this parameter will not take effect. To modify the template, input [] for region cleanup. If not provided, the template region information remains unchanged.</p>
+         * 
          * @type {Array.<EraseArea> || null}
          */
         this.AutoAreas = null;
 
         /**
-         * <p>Designate the removal of custom regions.<br>For specified regions, directly perform erasure without detection and recognition within a selected time range.<br>Note: When modifying the template, import [] to clear regions. The template region information remains unchanged if not imported.</p>
+         * 
          * @type {Array.<EraseTimeArea> || null}
          */
         this.CustomAreas = null;
 
         /**
-         * <p>Subtitle suppression template id. Only allowed to fill in when OCR translation is enabled.</p>
+         * 
          * @type {number || null}
          */
         this.SubtitleEmbedId = null;
 
         /**
-         * <p>Suppression configuration, enabled by default, compresses subtitles back to their original position. It can be filled only when OCR translation is turned on. A value of 0 indicates disabled suppression.</p>
+         * 
          * @type {number || null}
          */
         this.UseOriginalPos = null;
 
         /**
-         * <p>Suppression configuration, enabled by default. After being turned on, the original subtitle font size is used. It can only be filled when OCR translation is enabled. Setting it to 0 means non-use of the original font size.</p>
+         * 
          * @type {number || null}
          */
         this.UseOriginalSize = null;
@@ -38329,7 +38772,7 @@ class DescribeSnapshotByTimeOffsetTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Information of the video stream in a VOD file
+ * Video stream information of VOD files
  * @class
  */
 class MediaVideoStreamItem extends  AbstractModel {
@@ -38337,78 +38780,73 @@ class MediaVideoStreamItem extends  AbstractModel {
         super();
 
         /**
-         * Bitrate of a video stream in bps.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Bitrate of the video stream. Unit: bps.
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
-         * Height of a video stream in px.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Height of a video stream. Unit: px.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Width of a video stream in px.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Video stream width in px.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Video stream codec, such as h264.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Video stream encoding format, for example, h264.
          * @type {string || null}
          */
         this.Codec = null;
 
         /**
-         * Frame rate in Hz.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Frame rate. Measurement unit: hz.
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
-         * Colorspace.
+         * 
          * @type {string || null}
          */
         this.ColorPrimaries = null;
 
         /**
-         * Colorspace.
+         * 
          * @type {string || null}
          */
         this.ColorSpace = null;
 
         /**
-         * Colorspace.
+         * 
          * @type {string || null}
          */
         this.ColorTransfer = null;
 
         /**
-         * HDR type.
+         * 
          * @type {string || null}
          */
         this.HdrType = null;
 
         /**
-         * Video Codecs.
+         * 
          * @type {string || null}
          */
         this.Codecs = null;
 
         /**
-         * Numerator of the frame rate
+         * 
          * @type {number || null}
          */
         this.FpsNumerator = null;
 
         /**
-         * Denominator of the frame rate
+         * 
          * @type {number || null}
          */
         this.FpsDenominator = null;
@@ -39050,7 +39488,7 @@ If you do not specify this parameter, all schemes will be returned regardless of
 }
 
 /**
- * Information of the audio stream in a VOD file
+ * Audio stream information of VOD files
  * @class
  */
 class MediaAudioStreamItem extends  AbstractModel {
@@ -39058,40 +39496,37 @@ class MediaAudioStreamItem extends  AbstractModel {
         super();
 
         /**
-         * Bitrate of an audio stream in bps.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Bitrate of the audio stream. Unit: bps.
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
-         * Sample rate of an audio stream in Hz.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Sampling rate of the audio stream. Unit: hz.
          * @type {number || null}
          */
         this.SamplingRate = null;
 
         /**
-         * Audio stream codec, such as aac.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Audio stream encoding format, for example, aac.
          * @type {string || null}
          */
         this.Codec = null;
 
         /**
-         * Number of audio channels, for example 2.
+         * 
          * @type {number || null}
          */
         this.Channel = null;
 
         /**
-         * Audio Codecs.
+         * 
          * @type {string || null}
          */
         this.Codecs = null;
 
         /**
-         * Audio loudness.
+         * 
          * @type {number || null}
          */
         this.Loudness = null;
@@ -39206,79 +39641,79 @@ class ProcessLiveStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
+         * <p>Live stream URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room number ID<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID<br><code>&lt;userid&gt;</code> is the user ID for the service to enter the room, which can distinguish who is the robot<br><code>&lt;usersig&gt;</code> is the TRTC user signature</p><p>webrtc supports LEB live streams. For address retrieval, please <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">refer</a></p><p>For srt supported addresses, please <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a></p>
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * <p>Event notification information of the task. This is used to specify the live stream processing result.</p>
+         * 
          * @type {LiveStreamTaskNotifyConfig || null}
          */
         this.TaskNotifyConfig = null;
 
         /**
-         * <p>Target storage for the output file of the live stream processing task. This parameter is required if the processing task has an output file.</p>
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * <p>Target output directory for the file generated by the live stream processing task, such as <code>/movie/201909/</code>. If this is not specified, the default directory is <code>/</code>.</p>
+         * 
          * @type {string || null}
          */
         this.OutputDir = null;
 
         /**
-         * <p>Parameters for the video content review task.</p>
+         * 
          * @type {AiContentReviewTaskInput || null}
          */
         this.AiContentReviewTask = null;
 
         /**
-         * <p>Parameters for the video content recognition task.</p>
+         * 
          * @type {AiRecognitionTaskInput || null}
          */
         this.AiRecognitionTask = null;
 
         /**
-         * <p>Parameters for the video content analysis task.</p>
+         * 
          * @type {AiAnalysisTaskInput || null}
          */
         this.AiAnalysisTask = null;
 
         /**
-         * <p>Parameters for the media quality inspection task.</p>
+         * 
          * @type {AiQualityControlTaskInput || null}
          */
         this.AiQualityControlTask = null;
 
         /**
-         * <p>Parameters for the smart subtitle task.</p>
+         * 
          * @type {LiveSmartSubtitlesTaskInput || null}
          */
         this.SmartSubtitlesTask = null;
 
         /**
-         * <p>Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
+         * 
          * @type {string || null}
          */
         this.SessionId = null;
 
         /**
-         * <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
+         * 
          * @type {string || null}
          */
         this.SessionContext = null;
 
         /**
-         * <p>Live streaming orchestration ID.<br>Note 1: For the OutputStorage and OutputDir parameters:</p><li>If OutputStorage and OutputDir are configured in the subtask node of service orchestration, the output configured in the subtask node serves as the subtask output.</li><li>If OutputStorage and OutputDir are not configured in the subtask node of service orchestration and ProcessLiveStream has output, the default output of the original orchestration is overridden.</li>Note 2: For the TaskNotifyConfig parameter, if it has been configured in the task creation API (ProcessLiveStream), the default callback of the original orchestration is overridden.
+         * 
          * @type {number || null}
          */
         this.ScheduleId = null;
 
         /**
-         * <p>Resource ID. The resource needs to be enabled. The default value is the account's primary resource ID.</p>
+         * 
          * @type {string || null}
          */
         this.ResourceId = null;
@@ -39609,7 +40044,7 @@ You can select multiple elements, which are connected by OR logic. If a usage co
 }
 
 /**
- * 
+ * cos information. Stores user-provided cos information for saving results
  * @class
  */
 class DocToVideoCosInfo extends  AbstractModel {
@@ -39617,19 +40052,19 @@ class DocToVideoCosInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>cos bucket region</p>
          * @type {string || null}
          */
         this.CosBucketRegion = null;
 
         /**
-         * 
+         * <p>cos bucket name</p>
          * @type {string || null}
          */
         this.CosBucketName = null;
 
         /**
-         * 
+         * <p>cos bucket path</p>
          * @type {string || null}
          */
         this.CosBucketPath = null;
@@ -39651,7 +40086,7 @@ class DocToVideoCosInfo extends  AbstractModel {
 }
 
 /**
- * The information of the subtitles to add.
+ * External subtitle.
  * @class
  */
 class AddOnSubtitle extends  AbstractModel {
@@ -39659,19 +40094,19 @@ class AddOnSubtitle extends  AbstractModel {
         super();
 
         /**
-         * <p>Insertion method. Valid values:</p><li>subtitle-stream: Inserts a subtitle track.</li><li>close-caption-708: Encodes CEA-708 subtitles into SEI frames.</li><li>close-caption-608: Encodes CEA-608 subtitles into SEI frames.</li>
+         * 
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * <p>Subtitle file.</p>
+         * 
          * @type {MediaInputInfo || null}
          */
         this.Subtitle = null;
 
         /**
-         * <p>Subtitle name.<br>Note: Only Chinese characters, letters, digits, spaces, underscores (_), hyphens (-), periods (.), and brackets are supported. The length cannot exceed 64 characters.</p>
+         * 
          * @type {string || null}
          */
         this.SubtitleName = null;
@@ -39719,7 +40154,7 @@ class AddOnSubtitle extends  AbstractModel {
 }
 
 /**
- * The information of an AWS SQS queue.
+ * Aws SQS queue information
  * @class
  */
 class AwsSQS extends  AbstractModel {
@@ -39727,25 +40162,25 @@ class AwsSQS extends  AbstractModel {
         super();
 
         /**
-         * SQS queue area.
+         * 
          * @type {string || null}
          */
         this.SQSRegion = null;
 
         /**
-         * SQS queue name.
+         * 
          * @type {string || null}
          */
         this.SQSQueueName = null;
 
         /**
-         * Secret id for read-write SQS.
+         * 
          * @type {string || null}
          */
         this.S3SecretId = null;
 
         /**
-         * Read-write SQS secret key.
+         * 
          * @type {string || null}
          */
         this.S3SecretKey = null;
@@ -39768,36 +40203,30 @@ class AwsSQS extends  AbstractModel {
 }
 
 /**
- * Word information.
+ * Input information for regenerating an AIGC document-to-video task
  * @class
  */
-class WordResult extends  AbstractModel {
+class DocToVideoRegenerateInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Word text.
+         * <p>Regeneration scope.</p><p>Enumeration values:</p><ul><li>full: Full regeneration at this stage (for example, modifying the overall number of scenarios)</li><li>scenes: Partial regeneration by scenario (for example, modifying the specific content of a scenario)</li></ul>
          * @type {string || null}
          */
-        this.Word = null;
+        this.Scope = null;
 
         /**
-         * Word start timestamp, in seconds.
-         * @type {number || null}
-         */
-        this.Start = null;
-
-        /**
-         * Word end timestamp, in seconds.
-         * @type {number || null}
-         */
-        this.End = null;
-
-        /**
-         * Text after translation.
+         * <p>Prompt content for regeneration.</p>
          * @type {string || null}
          */
-        this.Trans = null;
+        this.Prompt = null;
+
+        /**
+         * <p>Target page ID array for partial regeneration by page. Required only when Scope=scenes. Not repeatable. Up to 5 pages can be regenerated at a time.</p>
+         * @type {Array.<string> || null}
+         */
+        this.SceneIds = null;
 
     }
 
@@ -39808,10 +40237,9 @@ class WordResult extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Word = 'Word' in params ? params.Word : null;
-        this.Start = 'Start' in params ? params.Start : null;
-        this.End = 'End' in params ? params.End : null;
-        this.Trans = 'Trans' in params ? params.Trans : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.Prompt = 'Prompt' in params ? params.Prompt : null;
+        this.SceneIds = 'SceneIds' in params ? params.SceneIds : null;
 
     }
 }
@@ -40094,7 +40522,7 @@ class QualityControlData extends  AbstractModel {
 }
 
 /**
- * The DRM encryption details.
+ * Drm encryption information.
  * @class
  */
 class DrmInfo extends  AbstractModel {
@@ -40105,37 +40533,37 @@ class DrmInfo extends  AbstractModel {
          * Encryption type.
 
 - simpleaes
-Can only be used for HLS. format support: ts and mp4.
-Only can be used in slice mode. cannot be used in singlefile mode.
+Can only be used for HLS. Format support: ts and mp4.
+Only slice mode can be used. singlefile mode cannot be used.
 
 - fairplay:
-Can only be used for HLS. the segment format can only be mp4.
-Supports slice mode or singlefile mode.
+Can only be used for HLS. The segment format can only be mp4.
+Slice mode or singlefile mode can be used.
 
 - widevine:
-Can be used for HLS and DASH. the slice format can only be mp4.
-Output HLS: specifies the slicing or singlefile mode can be used.
-OutputOutput DASH]: can only be in singlefile mode.
+Can be used for HLS and DASH. The segment format can only be mp4.
+Output HLS: The slicing or singlefile mode can be used.
+Output DASH: can only be in singlefile mode
 
 - playready:
-Can be used for HLS and DASH. the slice format can only be mp4.
-Output HLS: specifies the slicing or singlefile mode can be used.
-Output DASH: can only be in singlefile mode.
+Can be used for HLS and DASH. The segment format can only be mp4.
+Output HLS: The slicing or singlefile mode can be used.
+Output DASH: can only be in singlefile mode
 
 - widevine+fairplay,playready+fairplay,widevine+playready+fairplay:
-Can only be used for HLS. valid values: mp4.
-Supports slice mode or single file mode.
+Can only be used for HLS. The segment format can only be mp4.
+Slice mode or singlefile mode can be used.
 
 - widevine+playready:
-Applicable to HLS and MPEG-DASH. the format can only be mp4.
-HLS format can use slice mode or single file mode.
-Specifies that only singlefile mode can be used for MPEG-DASH.
+Applicable to HLS and MPEG-DASH. The segment format can only be mp4.
+For HLS format, you can use the slicing mode or singlefile mode.
+For MPEG-DASH, only singlefile mode can be used.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * SimpleAes encrypted information.
+         * 
          * @type {SimpleAesDrm || null}
          */
         this.SimpleAesDrm = null;
@@ -41828,21 +42256,21 @@ class FrameRateWithDenConfig extends  AbstractModel {
 
         /**
          * Capability configuration switch. Valid values:
-<li>ON: enabled.</li>
-<li>OFF: disabled.</li>
+<li>ON: enabled</li>
+<li>OFF: disabled</li>
 Default value: ON.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Frame rate numerator. Value range: non-negative number, less than 120 when divided by the denominator, in Hz. Default value is 0. Note: For transcoding, this parameter overrides the Fps in the VideoTemplate.
+         * 
          * @type {number || null}
          */
         this.FpsNum = null;
 
         /**
-         * Frame rate denominator. Value range: numbers equal to or greater than 1. The default value is 1. Note: For transcoding, this parameter will override the FpsDenominator in the VideoTemplate.
+         * 
          * @type {number || null}
          */
         this.FpsDen = null;
@@ -41930,6 +42358,7 @@ class DiffusionEnhanceConfig extends  AbstractModel {
 
         /**
          * Capability configuration switch. Valid values:
+
 ON: enabled.
 OFF: disabled.
 Default value: OFF.
@@ -41938,12 +42367,7 @@ Default value: OFF.
         this.Switch = null;
 
         /**
-         * Strength type, available values:
-
-weak
-normal
-strong
-Default value: normal.
+         * 
          * @type {string || null}
          */
         this.Type = null;
@@ -42379,6 +42803,75 @@ class ModifyPersonSampleResponse extends  AbstractModel {
 }
 
 /**
+ * Custom parameters for AI Dubbing
+ * @class
+ */
+class RawAIDubbingParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Translation configuration message.</p>
+         * @type {DubbingTranslateConfig || null}
+         */
+        this.TranslateConfig = null;
+
+        /**
+         * <p>Subtitle configuration information.</p>
+         * @type {DubbingSubtitleConfig || null}
+         */
+        this.SubtitleConfig = null;
+
+        /**
+         * <p>Dubbing configuration message.</p>
+         * @type {DubbingConfig || null}
+         */
+        this.DubbingConfig = null;
+
+        /**
+         * <p>Output configuration message.</p>
+         * @type {DubbingOutputConfig || null}
+         */
+        this.OutputConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TranslateConfig) {
+            let obj = new DubbingTranslateConfig();
+            obj.deserialize(params.TranslateConfig)
+            this.TranslateConfig = obj;
+        }
+
+        if (params.SubtitleConfig) {
+            let obj = new DubbingSubtitleConfig();
+            obj.deserialize(params.SubtitleConfig)
+            this.SubtitleConfig = obj;
+        }
+
+        if (params.DubbingConfig) {
+            let obj = new DubbingConfig();
+            obj.deserialize(params.DubbingConfig)
+            this.DubbingConfig = obj;
+        }
+
+        if (params.OutputConfig) {
+            let obj = new DubbingOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
+
+    }
+}
+
+/**
  * DeleteTranscodeTemplate response structure.
  * @class
  */
@@ -42402,6 +42895,41 @@ class DeleteTranscodeTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Image encoding format parameters
+ * @class
+ */
+class ImageEncodeConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image format. Valid values: JPEG, PNG, BMP, and WebP. If it is not specified, the original image format is used. Animations are not supported.
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Relative image quality. Valid range: 1 - 100. The value is based on the original image quality, and the default is the original image quality.
+         * @type {number || null}
+         */
+        this.Quality = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Format = 'Format' in params ? params.Format : null;
+        this.Quality = 'Quality' in params ? params.Quality : null;
 
     }
 }
@@ -42643,7 +43171,7 @@ class DescribePersonSamplesResponse extends  AbstractModel {
 }
 
 /**
- * Reference video asset for AIGC video generation.
+ * 
  * @class
  */
 class AigcAudioReferenceVideoInfo extends  AbstractModel {
@@ -42651,7 +43179,7 @@ class AigcAudioReferenceVideoInfo extends  AbstractModel {
         super();
 
         /**
-         * <p>Reference video URL, which must be accessible from the public network.</p>
+         * 
          * @type {string || null}
          */
         this.VideoUrl = null;
@@ -42849,7 +43377,7 @@ Default value: weak.
 }
 
 /**
- * Image noise removal configuration.
+ * Video noise reduction configuration
  * @class
  */
 class VideoDenoiseConfig extends  AbstractModel {
@@ -42857,19 +43385,16 @@ class VideoDenoiseConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the feature. Valid values:
-<li>ON</li>
-<li>OFF</li>
+         * Capability configuration switch. Valid values:
+<li>ON: enabled;</li>
+<li>OFF: disabled</li>
 Default value: ON.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Type, available values:
-<li>weak</li>
-<li>strong</li>
-Default value: weak.
+         * 
          * @type {string || null}
          */
         this.Type = null;
@@ -43006,7 +43531,7 @@ class DescribeAIAnalysisTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Extended parameters used for AIGC video generation.
+ * 
  * @class
  */
 class AigcVideoExtraParam extends  AbstractModel {
@@ -43014,37 +43539,37 @@ class AigcVideoExtraParam extends  AbstractModel {
         super();
 
         /**
-         * <p>Resolution of the generated video. The resolution is related to the selected model and set video duration.</p><p>Supported resolution options for different models:</p><ol><li>Kling: 720P (default) and 1080P. Kling 3.0 and Kling 3.0-Omni support 4K.</li><li>Hailuo: 768P (default) and 1080P.</li><li>Vidu: 540P, 720P (default), and 1080P.</li><li>PixVerse: 540P, 720P (default), and 1080P.</li><li>H2: 720P and 1080P (default).</li></ol><p>Note: In addition to the resolution supported by the model, 2K and 4K resolutions are also available.</p>
+         * 
          * @type {string || null}
          */
         this.Resolution = null;
 
         /**
-         * <p>Aspect ratio of the generated video.</p><p>Support for this parameter by different models:</p><ol><li>Kling only supports this parameter for text-to-video, with aspect ratios of 16:9 (default), 9:16, and 1:1.</li><li>Hailuo does not support this parameter.</li><li>Vidu supports [16:9, 9:16, 4:3, 3:4, 1:1] for text-to-video and reference image-to-video only. Only q2 supports 4:3 and 3:4.</li><li>PixVerse supports [16:9, 9:16, 4:3, 3:4, 1:1, 2:3, 3:2, 21:9] for text-to-video and reference image-to-video only. Only v6 and c1 support 2:3, 3:2, and 21:9.</li><li>H2 supports [16:9, 9:16, 4:3, 3:4, 4:5, 5:4, 1:1, 21:9, 9:21] for text-to-video and reference image-to-video only.</li></ol><p>Note: For more information about the supported aspect ratios of specific models, see the model website.</p>
+         * 
          * @type {string || null}
          */
         this.AspectRatio = null;
 
         /**
-         * <p>Indicates whether to add a logo watermark.</p><ol><li>Hailuo supports this parameter.</li><li>Kling supports this parameter.</li><li>Vidu supports this parameter.</li><li>H2 supports this parameter.</li></ol>
+         * 
          * @type {number || null}
          */
         this.LogoAdd = null;
 
         /**
-         * <p>Indicates whether to generate audio for the video. Valid values: true or false.</p><p>Models that support this parameter:</p><ol><li>Vidu. Only q3 series models support this parameter. Default value: false.</li><li>PixVerse. Default value: false.</li><li>Kling. Default value: false.</li></ol>
+         * 
          * @type {boolean || null}
          */
         this.EnableAudio = null;
 
         /**
-         * <p>Indicates whether to use the off-peak scheduling mode. Only Vidu supports this parameter.<br>Tasks submitted in off-peak mode will be processed within 48 hours. Uncompleted tasks will be canceled.</p>
+         * 
          * @type {boolean || null}
          */
         this.OffPeak = null;
 
         /**
-         * <p>Indicates whether to add background music to the generated video. Default value: false. Valid values: true or false.<br>Note: Only some model versions support this.</p>
+         * 
          * @type {boolean || null}
          */
         this.EnableBgm = null;
@@ -43077,49 +43602,49 @@ class CloneVoiceRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Clone audio base64 encoding</p>
+         * 
          * @type {string || null}
          */
         this.AudioData = null;
 
         /**
-         * <p>Cloning audio URL. Valid when AudioData is empty.</p>
+         * 
          * @type {string || null}
          */
         this.AudioUrl = null;
 
         /**
-         * <p>Cloning audio language. The default language is Chinese. Currently supported languages are the same as those for Text To Speech (TTS) TextLang.</p>
+         * 
          * @type {string || null}
          */
         this.AudioLang = null;
 
         /**
-         * <p>Voice attribute. Voice type querying and match usage.</p>
+         * 
          * @type {VoiceProfile || null}
          */
         this.VoiceProfile = null;
 
         /**
-         * <p>Audition text</p>
+         * 
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * <p>Language of the audition text, by default if left blank, auto-detection. Current supported languages are the same as Text To Speech.</p>
+         * 
          * @type {string || null}
          */
         this.TextLang = null;
 
         /**
-         * <p>Output parameters. Specifies the output audio format, etc. The default output audio format is base64.</p>
+         * 
          * @type {SyncDubbingOutputOption || null}
          */
         this.Output = null;
 
         /**
-         * <p>Extended parameters in the format of a JSON string.</p>
+         * 
          * @type {string || null}
          */
         this.ExtParam = null;
@@ -44420,7 +44945,7 @@ class OcrFullTextConfigureInfo extends  AbstractModel {
 }
 
 /**
- * Privacy protection configuration for the smart erasing template.
+ * 
  * @class
  */
 class UpdateSmartErasePrivacyConfig extends  AbstractModel {
@@ -44428,17 +44953,13 @@ class UpdateSmartErasePrivacyConfig extends  AbstractModel {
         super();
 
         /**
-         * Privacy protection removal method.
-- Blur: blur detection
-- mosaic
+         * 
          * @type {string || null}
          */
         this.PrivacyModel = null;
 
         /**
-         * Privacy protection target. (When API Explorer is used, no need to specify an array. Add the corresponding items and fill in the value.)
-- face: human face
-- plate: license plate.
+         * 
          * @type {Array.<string> || null}
          */
         this.PrivacyTargets = null;
@@ -44710,7 +45231,7 @@ class ModifySmartSubtitleTemplateRequest extends  AbstractModel {
 }
 
 /**
- * AI video intelligent analysis input parameter types
+ * Input parameter type for AI smart video analysis
  * @class
  */
 class AiAnalysisTaskInput extends  AbstractModel {
@@ -44724,12 +45245,7 @@ class AiAnalysisTaskInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * Additional parameters, whose value is a serialized json string.
-Note: This parameter is used to meet customization requirements. See the following:
-[Smart Erase Tutorial](https://www.tencentcloud.com/document/product/862/101530?from_cn_redirect=1)
-[Video Splitting (Long Videos to Short Videos) Tutorial](https://www.tencentcloud.com/document/product/862/112098?from_cn_redirect=1)
-[Intelligent Highlights Tutorial](https://www.tencentcloud.com/document/product/862/107280?from_cn_redirect=1)
-[Horizontal-to-Video Transformation](https://www.tencentcloud.com/document/product/862/112112?from_cn_redirect=1)
+         * 
          * @type {string || null}
          */
         this.ExtendedParameter = null;
@@ -45168,7 +45684,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Subtitle removal configuration for the smart erasing template.
+ * 
  * @class
  */
 class UpdateSmartEraseSubtitleConfig extends  AbstractModel {
@@ -45176,101 +45692,55 @@ class UpdateSmartEraseSubtitleConfig extends  AbstractModel {
         super();
 
         /**
-         * Subtitle erasing method.
-**Automatic erasing:** Video subtitles are automatically recognized using an AI model and are erased without traces to generate a new video. However, missed or incorrect erasing may occur due to image interference and special subtitle styles. In this case, you can specify the erasing area.
-When using automatic erasing, if AutoAreas is not specified, the default area (lower middle part of the image) will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
-**Specified area erasing:** If the subtitle position is relatively fixed, you are recommended to specify the erasing area directly to minimize missed erasing.
-When you choose specified area erasing, specify at least one area for CustomAreas.
--auto erasing
-- custom: specified area erasing.
-
+         * 
          * @type {string || null}
          */
         this.SubtitleEraseMethod = null;
 
         /**
-         * Subtitle erasing model.
-**Standard edition (recommended):** For standard subtitle styles, it is usually recommended to select this version for better traceless effects in the details.
-**Area edition:** If the subtitles have special styles, such as calligraphy, shadow, or motion effects, you are recommended to select this edition to ensure a larger erasing area. However, the erasing effect in the details is not as good as the standard edition.
-- standard: standard edition.
-- area: area edition.
+         * 
          * @type {string || null}
          */
         this.SubtitleModel = null;
 
         /**
-         * Whether to enable OCR subtitle extraction. The default value is OFF.
-OCR subtitle extraction is supported only when SubtitleEraseMethod is set to auto. Once enabled, it identifies the text region that appears longest and most stably within the automated erasing area as the subtitle area. The text in the subtitle area is extracted and erased.
--ON
--OFF: disabled.
+         * 
          * @type {string || null}
          */
         this.OcrSwitch = null;
 
         /**
-         * Subtitle language, used for guiding OCR recognition, default value zh_en; this parameter is valid only when OcrSwitch is "ON".
-- zh_en: Chinese and English
-- multi: others
-The following are other languages supported for recognition:
-Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, Hindi, Arabic, Indian Bengali, Indian Gujarati, Indian Kannada, Indian Malayalam, Indian Tamil, Indian Telugu, Slovenian, Polish, Catalonia, Bosnia, Czech, Estonian, Croatian, Punjabi, Marathi, Azerbaijan, Indonesian, Luxembourg, Lithuanian, Latvian, Malta, Slovak, Turkish, Kazakh, Greek, Irish, Belarus, Khmer, Tagalog, Pashto, Persian, Tajikistan
-
-
+         * 
          * @type {string || null}
          */
         this.SubtitleLang = null;
 
         /**
-         * Subtitle file format, default value vtt; this parameter is valid only when OcrSwitch is "ON".
-- srt: SRT format
-- vtt: WebVTT format.
+         * 
          * @type {string || null}
          */
         this.SubtitleFormat = null;
 
         /**
-         * Whether to enable subtitle translation, default value is OFF. This parameter is valid only when OcrSwitch is "ON".
--ON
--OFF: disabled.
+         * 
          * @type {string || null}
          */
         this.TransSwitch = null;
 
         /**
-         * Subtitle target language, default value en; this parameter is valid only when TransSwitch is "ON".
-Supported languages:
-zh: Simplified Chinese
-en: English
-ja: Japanese
-ko: Korean
-fr: French
-es: Spanish
-it: Italian
-de: German
-tr: Turkish
-ru: Russian
-pt: Portuguese
-vi: Vietnamese
-id: Indonesian
-ms: Malay
-th: Thai
-ar: Arabic
-hi: Hindi
+         * 
          * @type {string || null}
          */
         this.TransDstLang = null;
 
         /**
-         * Custom area for automatic erasing.
-For the specified area, AI models are used to automatically detect and erase the target objects.
-Note: When the erasing method is set to custom, this parameter is invalid. When a template is modified, input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
+         * 
          * @type {Array.<EraseArea> || null}
          */
         this.AutoAreas = null;
 
         /**
-         * Specify the custom region for erasing.
-For the specified area, erase the target objects directly without detection and recognition within a selected time period.
-Note: When a template is modified, input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
+         * 
          * @type {Array.<EraseTimeArea> || null}
          */
         this.CustomAreas = null;
@@ -45361,9 +45831,7 @@ class CreateSubtitleEmbedTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Intelligent erasure, specify the region configuration.
-Directly perform removal in the designated region within a specified period.
-When both BeginMs and EndMs are set to 0, directly erase the designated region in the entire video.
+ * 
  * @class
  */
 class EraseTimeArea extends  AbstractModel {
@@ -45371,19 +45839,19 @@ class EraseTimeArea extends  AbstractModel {
         super();
 
         /**
-         * Start time, unit: ms
+         * 
          * @type {number || null}
          */
         this.BeginMs = null;
 
         /**
-         * End time, unit: ms
+         * 
          * @type {number || null}
          */
         this.EndMs = null;
 
         /**
-         * Erase domain list during the period
+         * 
          * @type {Array.<EraseArea> || null}
          */
         this.Areas = null;
@@ -45413,6 +45881,48 @@ class EraseTimeArea extends  AbstractModel {
 }
 
 /**
+ * token usage
+ * @class
+ */
+class TokensUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Input token count</p>
+         * @type {number || null}
+         */
+        this.InputTokens = null;
+
+        /**
+         * <p>Output token count</p>
+         * @type {number || null}
+         */
+        this.OutputTokens = null;
+
+        /**
+         * <p>Total token count, generally input + output</p>
+         * @type {number || null}
+         */
+        this.TotalTokens = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InputTokens = 'InputTokens' in params ? params.InputTokens : null;
+        this.OutputTokens = 'OutputTokens' in params ? params.OutputTokens : null;
+        this.TotalTokens = 'TotalTokens' in params ? params.TotalTokens : null;
+
+    }
+}
+
+/**
  * FairPlay, WideVine, PlayReady, and other DRM encryption technologies.
  * @class
  */
@@ -45421,8 +45931,8 @@ class SpekeDrm extends  AbstractModel {
         super();
 
         /**
-         * Resource ID. The field content is user-defined.
-It supports 1 to 128 characters consisting of digits, letters, underscores (_), and hyphens (-).
+         * Resource tagging. The field content is user-customized;
+Supports 1 to 128 characters consisting of digits, letters, underscores (_), and hyphens (-).
 This field corresponds to the cid field in the Speke request.
 Note: Different DRM vendors have different restrictions on this field (for example, SDMC Technology Co., Ltd. does not support this field containing underscores). For specific rules, check with the vendors.
          * @type {string || null}
@@ -45430,27 +45940,28 @@ Note: Different DRM vendors have different restrictions on this field (for examp
         this.ResourceId = null;
 
         /**
-         * DRM manufacturer access address. the field content is obtained from the drm manufacturer.
+         * DRM manufacturer access address. This field content is obtained from the DRM manufacturer.
 
-Note: different DRM manufacturers have different limitations on the number of substreams. for example, PallyCon limits the number of substreams to no more than 5, and DRMtoday only supports encryption of up to 9 substreams.
+Note: Different DRM manufacturers have different limits on the number of substreams. For example, PallyCon limits the number to 5 substreams, while DRMtoday supports stream encryption for a maximum of 9 substreams.
          * @type {string || null}
          */
         this.KeyServerUrl = null;
 
         /**
-         * Initialization vector for encryption (32-byte hexadecimal string). the field content is user-customized.
+         * Encryption initialization vector (32-byte hexadecimal string). This field content is user-customized.
          * @type {string || null}
          */
         this.Vector = null;
 
         /**
          * Encryption method. Valid values:
-cbcs: supported by PlayReady, Widevine, FairPlay, Widevine+FairPlay, Widevine+PlayReady, PlayReady+FairPlay, and Widevine+PlayReady+FairPlay.
-cenc: supported by PlayReady, Widevine, and Widevine+PlayReady.
+cbcs: PlayReady, Widevine, FairPlay, WideVine+FairPlay, Widevine+Playready, Playready+Fairplay, Widevine+Playready+Fairplay are supported.
+cenc: PlayReady, Widevine, and Widevine+PlayReady are supported.
+
 If it is left unspecified:
 Use cbcs for FairPlay by default.
 Use cenc for PlayReady and Widevine by default.
-Use cbcs for Widevine+FairPlay, PlayReady+FairPlay, and Widevine+PlayReady+FairPlay by default.
+WideVine+FairPlay, Playready+Fairplay, Widevine+Playready+Fairplay default to cbcs.
 Use cenc for Widevine+PlayReady by default.
          * @type {string || null}
          */
@@ -45458,7 +45969,7 @@ Use cenc for Widevine+PlayReady by default.
 
         /**
          * Substream encryption rule. Default value: preset0.
-preset 0: use the same key to encrypt all substreams
+preset 0: use the same key to encrypt all substreams;
 preset1: use different keys for each substream
 
          * @type {string || null}
@@ -45550,7 +46061,7 @@ class AiAnalysisTaskDelLogoResult extends  AbstractModel {
 }
 
 /**
- * Input parameter type of a sampled screenshot task.
+ * Sampled screenshot taking task input parameter type.
  * @class
  */
 class SampleSnapshotTaskInput extends  AbstractModel {
@@ -45570,7 +46081,7 @@ class SampleSnapshotTaskInput extends  AbstractModel {
         this.WatermarkSet = null;
 
         /**
-         * <p>Target storage for the file after the sampled screenshot is taken. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -45582,7 +46093,7 @@ class SampleSnapshotTaskInput extends  AbstractModel {
         this.OutputObjectPath = null;
 
         /**
-         * <p>Rule of the <code>{number}</code> variable in the output path after sampling screenshot taking.</p>
+         * 
          * @type {NumberFormat || null}
          */
         this.ObjectNumberFormat = null;
@@ -45779,6 +46290,39 @@ class TerrorismConfigureInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyDocToVideoTaskStatus request structure.
+ * @class
+ */
+class ModifyDocToVideoTaskStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Input for modifying the status of an AIGC document-to-video task</p>
+         * @type {ModifyDocToVideoTaskStatusInput || null}
+         */
+        this.Input = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Input) {
+            let obj = new ModifyDocToVideoTaskStatusInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+    }
+}
+
+/**
  * The parameters for detecting sensitive information based on ASR.
  * @class
  */
@@ -45886,7 +46430,7 @@ class DeleteProcessImageTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Smart subtitle input struct.
+ * 
  * @class
  */
 class SmartSubtitlesTaskInput extends  AbstractModel {
@@ -45894,13 +46438,13 @@ class SmartSubtitlesTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Smart subtitle template ID.	
+         * 
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * User extension field, which does not need to be filled in for general scenarios.
+         * 
          * @type {string || null}
          */
         this.UserExtPara = null;
@@ -45918,17 +46462,7 @@ class SmartSubtitlesTaskInput extends  AbstractModel {
         this.OutputStorage = null;
 
         /**
-         * Output path of the generated subtitle file, which can be a relative or absolute path.
-To define the output path, the path must end with `.{format}`. For variable names, please refer to the Filename Variable Explanation (https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1).
-
-Relative path example:
-- File name_{variable name}.{format}
--File name.{format}
-
-Absolute path example:
--/Custom path/Filename_{variable name}.{format}
-
-If this field is left unspecified, the default value is the relative path in the following format: {inputName}_smartsubtitle_{definition}.{format}.
+         * 
          * @type {string || null}
          */
         this.OutputObjectPath = null;
@@ -46438,7 +46972,7 @@ class AiPosterSuiteConfig extends  AbstractModel {
 }
 
 /**
- * The audio enhancement configuration.
+ * Audio enhancement configuration
  * @class
  */
 class AudioEnhanceConfig extends  AbstractModel {
@@ -46446,25 +46980,25 @@ class AudioEnhanceConfig extends  AbstractModel {
         super();
 
         /**
-         * Audio noise reduction configuration.
+         * 
          * @type {AudioDenoiseConfig || null}
          */
         this.Denoise = null;
 
         /**
-         * Audio separation configuration.
+         * 
          * @type {AudioSeparateConfig || null}
          */
         this.Separate = null;
 
         /**
-         * Volume equalization configuration.
+         * 
          * @type {VolumeBalanceConfig || null}
          */
         this.VolumeBalance = null;
 
         /**
-         * Audio beautification configuration.
+         * 
          * @type {AudioBeautifyConfig || null}
          */
         this.Beautify = null;
@@ -47517,7 +48051,7 @@ class EmbeddingDataResponse extends  AbstractModel {
 }
 
 /**
- * Low-light enhancement configuration.
+ * Low-light enhancement configuration
  * @class
  */
 class LowLightEnhanceConfig extends  AbstractModel {
@@ -47525,18 +48059,16 @@ class LowLightEnhanceConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the feature. Valid values:
-<li>ON</li>
-<li>OFF</li>
+         * Capability configuration switch. Valid values:
+<li>ON: enabled</li>
+<li>OFF: disabled</li>
 Default value: ON.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Type. Valid values:
-<li>normal</li>
-Default value: normal.
+         * 
          * @type {string || null}
          */
         this.Type = null;
@@ -47565,10 +48097,16 @@ class DescribeMediaMetaDataRequest extends  AbstractModel {
         super();
 
         /**
-         * Input information of the file that needs to get meta information.
+         * <p>Input information of the file that needs to get meta information.</p>
          * @type {MediaInputInfo || null}
          */
         this.InputInfo = null;
+
+        /**
+         * <p>When set to slow, expand the API timeout duration</p><p>Enumeration values:</p><ul><li>slow: expand the API timeout duration</li></ul>
+         * @type {string || null}
+         */
+        this.Mode = null;
 
     }
 
@@ -47585,6 +48123,7 @@ class DescribeMediaMetaDataRequest extends  AbstractModel {
             obj.deserialize(params.InputInfo)
             this.InputInfo = obj;
         }
+        this.Mode = 'Mode' in params ? params.Mode : null;
 
     }
 }
@@ -47598,37 +48137,37 @@ class DescribeImageTasksRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Task status filter condition.</p>
+         * 
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * <p>Number of returned records.</p>
+         * 
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * <p>Scrolling identifier which is used for pulling in batches. If a single request cannot pull all the data entries, the API will return `ScrollToken`, and if the next request carries it, the next pull will start from the next entry.</p>
+         * 
          * @type {string || null}
          */
         this.ScrollToken = null;
 
         /**
-         * <p>Task start time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
+         * 
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * <p>Task end time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
+         * 
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * <p>Filter subtask status.</p>
+         * 
          * @type {boolean || null}
          */
         this.SubTaskHasFailed = null;
@@ -47653,7 +48192,7 @@ class DescribeImageTasksRequest extends  AbstractModel {
 }
 
 /**
- * Reference image information for AIGC video generation.
+ * 
  * @class
  */
 class AigcVideoReferenceImageInfo extends  AbstractModel {
@@ -47661,15 +48200,13 @@ class AigcVideoReferenceImageInfo extends  AbstractModel {
         super();
 
         /**
-         * Image URL for video generation. The URL must be accessible from the public network and must be accessible to crawlers.
+         * 
          * @type {string || null}
          */
         this.ImageUrl = null;
 
         /**
-         * Reference Type.
-Note:
-1. If the GV model is used, this serves as the reference method. Valid values are asset and style.
+         * 
          * @type {string || null}
          */
         this.ReferenceType = null;
@@ -48119,6 +48656,7 @@ module.exports = {
     ManageTaskResponse: ManageTaskResponse,
     DeleteWorkflowRequest: DeleteWorkflowRequest,
     AwsS3FileUploadTrigger: AwsS3FileUploadTrigger,
+    WordResult: WordResult,
     CreateAiFissionTaskResponse: CreateAiFissionTaskResponse,
     SubtitleArea: SubtitleArea,
     MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
@@ -48149,6 +48687,7 @@ module.exports = {
     DescribeAigcImageTaskRequest: DescribeAigcImageTaskRequest,
     SyncDubbingRequest: SyncDubbingRequest,
     UserDefineFaceReviewTemplateInfo: UserDefineFaceReviewTemplateInfo,
+    ChangeVoiceResponse: ChangeVoiceResponse,
     ContentReviewTemplateItem: ContentReviewTemplateItem,
     ModifySmartEraseTemplateResponse: ModifySmartEraseTemplateResponse,
     DeleteAIRecognitionTemplateResponse: DeleteAIRecognitionTemplateResponse,
@@ -48160,6 +48699,7 @@ module.exports = {
     ModifyScheduleRequest: ModifyScheduleRequest,
     SubmitHunyuan3DTaskRequest: SubmitHunyuan3DTaskRequest,
     MediaMetaData: MediaMetaData,
+    DubbingConfig: DubbingConfig,
     ClassificationConfigureInfo: ClassificationConfigureInfo,
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
     ModifyWordSampleResponse: ModifyWordSampleResponse,
@@ -48190,7 +48730,7 @@ module.exports = {
     CustomModel: CustomModel,
     CreateAdaptiveDynamicStreamingTemplateRequest: CreateAdaptiveDynamicStreamingTemplateRequest,
     LLMDetectionResultItem: LLMDetectionResultItem,
-    CreateProcessImageTemplateResponse: CreateProcessImageTemplateResponse,
+    ChangeVoiceRequest: ChangeVoiceRequest,
     TerrorismImgReviewTemplateInfoForUpdate: TerrorismImgReviewTemplateInfoForUpdate,
     ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
     CloneViralAIGC: CloneViralAIGC,
@@ -48212,7 +48752,7 @@ module.exports = {
     AiExpansionConfig: AiExpansionConfig,
     MediaAiAnalysisDescriptionItem: MediaAiAnalysisDescriptionItem,
     ScheduleTask: ScheduleTask,
-    TokensUsage: TokensUsage,
+    DubbingSubtitleConfig: DubbingSubtitleConfig,
     CreatePersonSampleRequest: CreatePersonSampleRequest,
     ImageTaskInput: ImageTaskInput,
     RecognizeAudioRequest: RecognizeAudioRequest,
@@ -48258,6 +48798,7 @@ module.exports = {
     DescribeImageTaskDetailRequest: DescribeImageTaskDetailRequest,
     EditMediaResponse: EditMediaResponse,
     PoliticalOcrReviewTemplateInfoForUpdate: PoliticalOcrReviewTemplateInfoForUpdate,
+    OverrideAIDubbingParameter: OverrideAIDubbingParameter,
     ExtractBlindWatermarkResponse: ExtractBlindWatermarkResponse,
     AudioDenoiseConfig: AudioDenoiseConfig,
     MP4ConfigureInfo: MP4ConfigureInfo,
@@ -48270,6 +48811,7 @@ module.exports = {
     WatermarkTemplate: WatermarkTemplate,
     ImageProcessTaskOutput: ImageProcessTaskOutput,
     ComposeTargetInfo: ComposeTargetInfo,
+    DocToVideoWatermarkInfo: DocToVideoWatermarkInfo,
     TaskStatData: TaskStatData,
     SubtitleBoardConfig: SubtitleBoardConfig,
     DescribeAigcAudioTaskResponse: DescribeAigcAudioTaskResponse,
@@ -48281,7 +48823,7 @@ module.exports = {
     CreateWordSamplesResponse: CreateWordSamplesResponse,
     ClassificationConfigureInfoForUpdate: ClassificationConfigureInfoForUpdate,
     DeleteAdaptiveDynamicStreamingTemplateResponse: DeleteAdaptiveDynamicStreamingTemplateResponse,
-    ParseNotificationRequest: ParseNotificationRequest,
+    DubbingTranslateConfig: DubbingTranslateConfig,
     ImageEraseConfig: ImageEraseConfig,
     CreateWordSamplesRequest: CreateWordSamplesRequest,
     SmartEraseWatermarkConfig: SmartEraseWatermarkConfig,
@@ -48329,6 +48871,7 @@ module.exports = {
     DescribeAdaptiveDynamicStreamingTemplatesResponse: DescribeAdaptiveDynamicStreamingTemplatesResponse,
     MediaContentReviewOcrTextSegmentItem: MediaContentReviewOcrTextSegmentItem,
     AiAnalysisTaskHighlightOutput: AiAnalysisTaskHighlightOutput,
+    AIDubbingTaskInput: AIDubbingTaskInput,
     UrlInputInfo: UrlInputInfo,
     SmartSubtitleTaskResultInput: SmartSubtitleTaskResultInput,
     DescribeAdaptiveDynamicStreamingTemplatesRequest: DescribeAdaptiveDynamicStreamingTemplatesRequest,
@@ -48349,12 +48892,14 @@ module.exports = {
     DeleteWordSamplesRequest: DeleteWordSamplesRequest,
     DescribeLiveRecordTemplatesResponse: DescribeLiveRecordTemplatesResponse,
     EnableScheduleRequest: EnableScheduleRequest,
+    ModifyDocToVideoTaskStatusResponse: ModifyDocToVideoTaskStatusResponse,
     RawTranscodeParameter: RawTranscodeParameter,
     LiveStreamTaskNotifyConfig: LiveStreamTaskNotifyConfig,
     VideoTemplateInfo: VideoTemplateInfo,
     ComposeSubtitleStyle: ComposeSubtitleStyle,
     LiveAiAnalysisDescriptionItem: LiveAiAnalysisDescriptionItem,
     PornOcrReviewTemplateInfoForUpdate: PornOcrReviewTemplateInfoForUpdate,
+    DstSubtitleInput: DstSubtitleInput,
     AiReviewTaskPornOcrResult: AiReviewTaskPornOcrResult,
     DescribeLiveRecordTemplatesRequest: DescribeLiveRecordTemplatesRequest,
     DescribeWatermarkTemplatesRequest: DescribeWatermarkTemplatesRequest,
@@ -48468,6 +49013,7 @@ module.exports = {
     LiveStreamTagRecognitionResult: LiveStreamTagRecognitionResult,
     ExecuteFunctionResponse: ExecuteFunctionResponse,
     DesignVoiceAsyncResponse: DesignVoiceAsyncResponse,
+    ParseNotificationRequest: ParseNotificationRequest,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
     LiveSmartSubtitlesTaskInput: LiveSmartSubtitlesTaskInput,
     CreateDocToVideoTaskRequest: CreateDocToVideoTaskRequest,
@@ -48478,6 +49024,7 @@ module.exports = {
     LiveStreamAiReviewImagePoliticalResult: LiveStreamAiReviewImagePoliticalResult,
     RawImageWatermarkInput: RawImageWatermarkInput,
     DeleteAIAnalysisTemplateResponse: DeleteAIAnalysisTemplateResponse,
+    DubbingOutputConfig: DubbingOutputConfig,
     CreateQualityControlTemplateRequest: CreateQualityControlTemplateRequest,
     EmbeddingData: EmbeddingData,
     AigcAudioExtraParam: AigcAudioExtraParam,
@@ -48544,6 +49091,7 @@ module.exports = {
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
     CreateAsrHotwordsRequest: CreateAsrHotwordsRequest,
     AiAnalysisTaskHighlightInput: AiAnalysisTaskHighlightInput,
+    ModifyDocToVideoTaskStatusInput: ModifyDocToVideoTaskStatusInput,
     ProhibitedAsrReviewTemplateInfo: ProhibitedAsrReviewTemplateInfo,
     SegmentRecognitionItem: SegmentRecognitionItem,
     DescribeSubtitleEmbedTemplatesResponse: DescribeSubtitleEmbedTemplatesResponse,
@@ -48571,7 +49119,7 @@ module.exports = {
     RecognizeAudioSentence: RecognizeAudioSentence,
     EditMediaTaskInput: EditMediaTaskInput,
     SharpEnhanceConfig: SharpEnhanceConfig,
-    ImageEncodeConfig: ImageEncodeConfig,
+    DubbingEmbedSubtitleConfig: DubbingEmbedSubtitleConfig,
     AiReviewTaskPornResult: AiReviewTaskPornResult,
     AiRecognitionTaskObjectResultOutput: AiRecognitionTaskObjectResultOutput,
     AiAnalysisTaskDelLogoOutput: AiAnalysisTaskDelLogoOutput,
@@ -48623,6 +49171,7 @@ module.exports = {
     TEHDConfigForUpdate: TEHDConfigForUpdate,
     ModifyPersonSampleRequest: ModifyPersonSampleRequest,
     AigcVideoReferenceVideoInfo: AigcVideoReferenceVideoInfo,
+    AigcVideoReferenceSubjectInfo: AigcVideoReferenceSubjectInfo,
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
     AiAnalysisTaskVideoRemakeResult: AiAnalysisTaskVideoRemakeResult,
     ArtifactRepairConfig: ArtifactRepairConfig,
@@ -48686,6 +49235,7 @@ module.exports = {
     LiveScheduleLiveRecordTaskResult: LiveScheduleLiveRecordTaskResult,
     AiSampleFailFaceInfo: AiSampleFailFaceInfo,
     UserDefineFaceReviewTemplateInfoForUpdate: UserDefineFaceReviewTemplateInfoForUpdate,
+    CreateProcessImageTemplateResponse: CreateProcessImageTemplateResponse,
     File3D: File3D,
     CloneViralPersona: CloneViralPersona,
     AigcVideoReferenceAudioInfo: AigcVideoReferenceAudioInfo,
@@ -48712,6 +49262,7 @@ module.exports = {
     MediaInputInfo: MediaInputInfo,
     AsrHotWordsConfigure: AsrHotWordsConfigure,
     ImageAreaBoxInfo: ImageAreaBoxInfo,
+    DocToVideoBackgroundInfo: DocToVideoBackgroundInfo,
     LiveStreamAiReviewResultItem: LiveStreamAiReviewResultItem,
     SmartEraseSubtitleConfig: SmartEraseSubtitleConfig,
     DeleteLiveRecordTemplateResponse: DeleteLiveRecordTemplateResponse,
@@ -48741,7 +49292,7 @@ module.exports = {
     DocToVideoCosInfo: DocToVideoCosInfo,
     AddOnSubtitle: AddOnSubtitle,
     AwsSQS: AwsSQS,
-    WordResult: WordResult,
+    DocToVideoRegenerateInput: DocToVideoRegenerateInput,
     CreateSmartSubtitleTemplateRequest: CreateSmartSubtitleTemplateRequest,
     PornConfigureInfoForUpdate: PornConfigureInfoForUpdate,
     QualityControlData: QualityControlData,
@@ -48781,7 +49332,9 @@ module.exports = {
     AiAnalysisTaskHeadTailOutput: AiAnalysisTaskHeadTailOutput,
     DescribeVoicesResponse: DescribeVoicesResponse,
     ModifyPersonSampleResponse: ModifyPersonSampleResponse,
+    RawAIDubbingParameter: RawAIDubbingParameter,
     DeleteTranscodeTemplateResponse: DeleteTranscodeTemplateResponse,
+    ImageEncodeConfig: ImageEncodeConfig,
     LiveStreamObjectRecognitionResult: LiveStreamObjectRecognitionResult,
     DescribeImageTaskDetailResponse: DescribeImageTaskDetailResponse,
     DescribePersonSamplesResponse: DescribePersonSamplesResponse,
@@ -48831,11 +49384,13 @@ module.exports = {
     UpdateSmartEraseSubtitleConfig: UpdateSmartEraseSubtitleConfig,
     CreateSubtitleEmbedTemplateRequest: CreateSubtitleEmbedTemplateRequest,
     EraseTimeArea: EraseTimeArea,
+    TokensUsage: TokensUsage,
     SpekeDrm: SpekeDrm,
     AiAnalysisTaskDelLogoResult: AiAnalysisTaskDelLogoResult,
     SampleSnapshotTaskInput: SampleSnapshotTaskInput,
     QualityControlTemplate: QualityControlTemplate,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
+    ModifyDocToVideoTaskStatusRequest: ModifyDocToVideoTaskStatusRequest,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
     SubmitHunyuan3DTaskResponse: SubmitHunyuan3DTaskResponse,
     DeleteProcessImageTemplateRequest: DeleteProcessImageTemplateRequest,

@@ -23,10 +23,12 @@ const Decision = models.Decision;
 const Person = models.Person;
 const Environment = models.Environment;
 const Wallet = models.Wallet;
+const Score = models.Score;
 const ClaimRedPacketEvent = models.ClaimRedPacketEvent;
 const PromotionCode = models.PromotionCode;
 const ChargeBackEvent = models.ChargeBackEvent;
 const ReportEventRequest = models.ReportEventRequest;
+const WithdrawEvent = models.WithdrawEvent;
 const Merchant = models.Merchant;
 const Delivery = models.Delivery;
 const Cust = models.Cust;
@@ -55,6 +57,7 @@ const CreditPoint = models.CreditPoint;
 const Item = models.Item;
 const Amount = models.Amount;
 const SMSEvent = models.SMSEvent;
+const AssessRiskResponse = models.AssessRiskResponse;
 const AssessEnvironmentRiskRequest = models.AssessEnvironmentRiskRequest;
 const AddPromotionEvent = models.AddPromotionEvent;
 const Promotion = models.Promotion;
@@ -64,6 +67,7 @@ const LogoutEvent = models.LogoutEvent;
 const Browser = models.Browser;
 const PaymentResult = models.PaymentResult;
 const TransactionEvent = models.TransactionEvent;
+const AssessRiskRsp = models.AssessRiskRsp;
 const ModifyPasswordEvent = models.ModifyPasswordEvent;
 const AssessDeviceRiskRsp = models.AssessDeviceRiskRsp;
 const Coupon = models.Coupon;
@@ -76,7 +80,7 @@ const SecurityVerificationEvent = models.SecurityVerificationEvent;
 const AssessDeviceRiskPremiumRsp = models.AssessDeviceRiskPremiumRsp;
 const RedeemEvent = models.RedeemEvent;
 const InvitationEvent = models.InvitationEvent;
-const WithdrawEvent = models.WithdrawEvent;
+const AssessRiskRequest = models.AssessRiskRequest;
 const ScanCodeEvent = models.ScanCodeEvent;
 
 
@@ -113,6 +117,17 @@ class RceClient extends AbstractClient {
     }
 
     /**
+     * Used to report events that do not require real-time decision-making in your business. Our engine will perform computations and apply machine learning to mine risk features from these events, which are then used to support real-time event risk assessment.
+     * @param {ReportEventRequest} req
+     * @param {function(string, ReportEventResponse):void} cb
+     * @public
+     */
+    ReportEvent(req, cb) {
+        let resp = new ReportEventResponse();
+        this.request("ReportEvent", req, resp, cb);
+    }
+
+    /**
      * Environment Risk Assessment
      * @param {AssessEnvironmentRiskRequest} req
      * @param {function(string, AssessEnvironmentRiskResponse):void} cb
@@ -124,14 +139,14 @@ class RceClient extends AbstractClient {
     }
 
     /**
-     * Used to report events that do not require real-time decision-making in your business. Our engine will perform computations and apply machine learning to mine risk features from these events, which are then used to support real-time event risk assessment.
-     * @param {ReportEventRequest} req
-     * @param {function(string, ReportEventResponse):void} cb
+     * Used to obtain real-time risk information for events. It evaluates and returns risk decision results, risk scores, and risk tags based on device risk, environmental risk, account risk, behavioral risk, and historical reported event data for critical events in your business.
+     * @param {AssessRiskRequest} req
+     * @param {function(string, AssessRiskResponse):void} cb
      * @public
      */
-    ReportEvent(req, cb) {
-        let resp = new ReportEventResponse();
-        this.request("ReportEvent", req, resp, cb);
+    AssessRisk(req, cb) {
+        let resp = new AssessRiskResponse();
+        this.request("AssessRisk", req, resp, cb);
     }
 
 

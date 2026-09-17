@@ -60,10 +60,11 @@ const FlowLog = models.FlowLog;
 const ModifyDirectConnectGatewayAttributeRequest = models.ModifyDirectConnectGatewayAttributeRequest;
 const NatDirectConnectGatewayRoute = models.NatDirectConnectGatewayRoute;
 const IpField = models.IpField;
-const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
+const DescribeReserveIpAddressesRequest = models.DescribeReserveIpAddressesRequest;
 const AddBandwidthPackageResourcesRequest = models.AddBandwidthPackageResourcesRequest;
 const ReplaceRoutePolicyEntriesRequest = models.ReplaceRoutePolicyEntriesRequest;
 const AssignIpv6SubnetCidrBlockRequest = models.AssignIpv6SubnetCidrBlockRequest;
+const DescribeNatGatewayZonesRequest = models.DescribeNatGatewayZonesRequest;
 const ReplaceRoutePolicyAssociationsRequest = models.ReplaceRoutePolicyAssociationsRequest;
 const CreateVpcResponse = models.CreateVpcResponse;
 const AssistantCidr = models.AssistantCidr;
@@ -92,7 +93,7 @@ const UnassignIpv6SubnetCidrBlockResponse = models.UnassignIpv6SubnetCidrBlockRe
 const ModifyVpcEndPointServiceAttributeRequest = models.ModifyVpcEndPointServiceAttributeRequest;
 const DescribeIpGeolocationInfosResponse = models.DescribeIpGeolocationInfosResponse;
 const DescribeVpcTaskResultRequest = models.DescribeVpcTaskResultRequest;
-const AssociateNetworkAclSubnetsResponse = models.AssociateNetworkAclSubnetsResponse;
+const CheckGatewayFlowMonitorRequest = models.CheckGatewayFlowMonitorRequest;
 const DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest = models.DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest;
 const ResetRoutesRequest = models.ResetRoutesRequest;
 const CheckNetDetectStateRequest = models.CheckNetDetectStateRequest;
@@ -114,6 +115,7 @@ const ReferredSecurityGroup = models.ReferredSecurityGroup;
 const InstanceJumbo = models.InstanceJumbo;
 const ModifyFlowLogAttributeResponse = models.ModifyFlowLogAttributeResponse;
 const DescribeBandwidthPackagesResponse = models.DescribeBandwidthPackagesResponse;
+const NetDetectIpState = models.NetDetectIpState;
 const ReplaceSecurityGroupPoliciesResponse = models.ReplaceSecurityGroupPoliciesResponse;
 const DescribeDirectConnectGatewaysRequest = models.DescribeDirectConnectGatewaysRequest;
 const DisassociateVpcEndPointSecurityGroupsRequest = models.DisassociateVpcEndPointSecurityGroupsRequest;
@@ -313,7 +315,8 @@ const ModifyRouteTableAttributeRequest = models.ModifyRouteTableAttributeRequest
 const ModifyDirectConnectGatewayAttributeResponse = models.ModifyDirectConnectGatewayAttributeResponse;
 const DescribeVpnGatewaysRequest = models.DescribeVpnGatewaysRequest;
 const DescribeInstanceJumboRequest = models.DescribeInstanceJumboRequest;
-const NetDetectIpState = models.NetDetectIpState;
+const NatGatewayFlowMonitorDetail = models.NatGatewayFlowMonitorDetail;
+const CheckGatewayFlowMonitorResponse = models.CheckGatewayFlowMonitorResponse;
 const InternetPrice = models.InternetPrice;
 const ModifyIp6AddressesBandwidthResponse = models.ModifyIp6AddressesBandwidthResponse;
 const CreateSubnetsRequest = models.CreateSubnetsRequest;
@@ -375,7 +378,7 @@ const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
 const DeleteDirectConnectGatewayRequest = models.DeleteDirectConnectGatewayRequest;
 const CreateNatGatewaySourceIpTranslationNatRuleResponse = models.CreateNatGatewaySourceIpTranslationNatRuleResponse;
 const DeleteNatGatewaySourceIpTranslationNatRuleResponse = models.DeleteNatGatewaySourceIpTranslationNatRuleResponse;
-const CcnAttachedInstance = models.CcnAttachedInstance;
+const AssociateNetworkAclSubnetsResponse = models.AssociateNetworkAclSubnetsResponse;
 const SecurityPolicyDatabase = models.SecurityPolicyDatabase;
 const InquiryPriceModifyAddressesBandwidthRequest = models.InquiryPriceModifyAddressesBandwidthRequest;
 const CreateVpcEndPointServiceRequest = models.CreateVpcEndPointServiceRequest;
@@ -403,6 +406,7 @@ const SetCcnRegionBandwidthLimitsResponse = models.SetCcnRegionBandwidthLimitsRe
 const ModifySnapshotPoliciesResponse = models.ModifySnapshotPoliciesResponse;
 const ResetRoutePolicyEntriesRequest = models.ResetRoutePolicyEntriesRequest;
 const InquiryPriceRenewAddressesResponse = models.InquiryPriceRenewAddressesResponse;
+const DescribeNatGatewayZonesResponse = models.DescribeNatGatewayZonesResponse;
 const DeleteRoutePolicyAssociationsResponse = models.DeleteRoutePolicyAssociationsResponse;
 const CreateRoutePolicyAssociationsRequest = models.CreateRoutePolicyAssociationsRequest;
 const RoutePolicy = models.RoutePolicy;
@@ -421,7 +425,9 @@ const CreateReserveIpAddressesResponse = models.CreateReserveIpAddressesResponse
 const CheckTrafficMirrorRequest = models.CheckTrafficMirrorRequest;
 const ResetTrafficMirrorSrcsRequest = models.ResetTrafficMirrorSrcsRequest;
 const ModifyTrafficMirrorAttributeResponse = models.ModifyTrafficMirrorAttributeResponse;
+const DescribeNatGatewayFlowMonitorDetailRequest = models.DescribeNatGatewayFlowMonitorDetailRequest;
 const ModifyGatewayFlowQosResponse = models.ModifyGatewayFlowQosResponse;
+const DescribeNatGatewayFlowMonitorDetailResponse = models.DescribeNatGatewayFlowMonitorDetailResponse;
 const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttributeResponse;
 const AssociateDirectConnectGatewayNatGatewayRequest = models.AssociateDirectConnectGatewayNatGatewayRequest;
 const AddressTemplateItem = models.AddressTemplateItem;
@@ -497,7 +503,7 @@ const DisableRoutesRequest = models.DisableRoutesRequest;
 const DisassociateDirectConnectGatewayNatGatewayRequest = models.DisassociateDirectConnectGatewayNatGatewayRequest;
 const ReleaseIPv6AddressesRequest = models.ReleaseIPv6AddressesRequest;
 const DisassociateIPv6AddressResponse = models.DisassociateIPv6AddressResponse;
-const DescribeAddressTemplateGroupsResponse = models.DescribeAddressTemplateGroupsResponse;
+const DescribeAddressTemplatesResponse = models.DescribeAddressTemplatesResponse;
 const ReleaseAddressesRequest = models.ReleaseAddressesRequest;
 const CreateDirectConnectGatewayCcnRoutesRequest = models.CreateDirectConnectGatewayCcnRoutesRequest;
 const StopTrafficMirrorRequest = models.StopTrafficMirrorRequest;
@@ -635,7 +641,7 @@ const ModifyHaVipAttributeResponse = models.ModifyHaVipAttributeResponse;
 const CcnBandwidthInfo = models.CcnBandwidthInfo;
 const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
 const UpdateTrafficMirrorDirectionRequest = models.UpdateTrafficMirrorDirectionRequest;
-const DescribeReserveIpAddressesRequest = models.DescribeReserveIpAddressesRequest;
+const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
 const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
 const BatchModifySnapshotPolicy = models.BatchModifySnapshotPolicy;
 const AssignIpv6AddressesResponse = models.AssignIpv6AddressesResponse;
@@ -713,6 +719,7 @@ const DeleteNetworkInterfaceResponse = models.DeleteNetworkInterfaceResponse;
 const DisableCcnRoutesResponse = models.DisableCcnRoutesResponse;
 const DescribeCcnRegionBandwidthLimitsRequest = models.DescribeCcnRegionBandwidthLimitsRequest;
 const ModifyReserveIpAddressResponse = models.ModifyReserveIpAddressResponse;
+const CcnAttachedInstance = models.CcnAttachedInstance;
 const CreateAssistantCidrResponse = models.CreateAssistantCidrResponse;
 const CustomerGatewayVendor = models.CustomerGatewayVendor;
 const DescribeAddressTemplatesRequest = models.DescribeAddressTemplatesRequest;
@@ -720,7 +727,7 @@ const ConflictSource = models.ConflictSource;
 const EnableRoutesRequest = models.EnableRoutesRequest;
 const DeleteTrafficPackagesResponse = models.DeleteTrafficPackagesResponse;
 const DeleteCustomerGatewayRequest = models.DeleteCustomerGatewayRequest;
-const DescribeAddressTemplatesResponse = models.DescribeAddressTemplatesResponse;
+const DescribeAddressTemplateGroupsResponse = models.DescribeAddressTemplateGroupsResponse;
 const Quota = models.Quota;
 const WithdrawNotifyRoutesResponse = models.WithdrawNotifyRoutesResponse;
 const DeleteTrafficMirrorRequest = models.DeleteTrafficMirrorRequest;
@@ -739,6 +746,7 @@ const ModifySubnetAttributeRequest = models.ModifySubnetAttributeRequest;
 const DescribeBandwidthPackageQuotaRequest = models.DescribeBandwidthPackageQuotaRequest;
 const DeleteVpcResponse = models.DeleteVpcResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
+const NatZoneInfo = models.NatZoneInfo;
 const CreateRoutePolicyAssociationsResponse = models.CreateRoutePolicyAssociationsResponse;
 const AddTemplateMemberRequest = models.AddTemplateMemberRequest;
 const ModifyNetworkInterfaceAttributeResponse = models.ModifyNetworkInterfaceAttributeResponse;
@@ -1287,6 +1295,17 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
+     * This API is used to query whether the gateway traffic monitoring is enabled.
+     * @param {CheckGatewayFlowMonitorRequest} req
+     * @param {function(string, CheckGatewayFlowMonitorResponse):void} cb
+     * @public
+     */
+    CheckGatewayFlowMonitor(req, cb) {
+        let resp = new CheckGatewayFlowMonitorResponse();
+        this.request("CheckGatewayFlowMonitor", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the execution result of a VPC task.
      * @param {DescribeVpcTaskResultRequest} req
      * @param {function(string, DescribeVpcTaskResultResponse):void} cb
@@ -1353,6 +1372,17 @@ After unbinding the network instance, the corresponding routing policy will also
     AssociateNatGatewayAddress(req, cb) {
         let resp = new AssociateNatGatewayAddressResponse();
         this.request("AssociateNatGatewayAddress", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of saleable availability zones (AZs) for NAT gateways.
+     * @param {DescribeNatGatewayZonesRequest} req
+     * @param {function(string, DescribeNatGatewayZonesResponse):void} cb
+     * @public
+     */
+    DescribeNatGatewayZones(req, cb) {
+        let resp = new DescribeNatGatewayZonesResponse();
+        this.request("DescribeNatGatewayZones", req, resp, cb);
     }
 
     /**
@@ -1516,7 +1546,7 @@ Policies to modify must be in the same direction. `PolicyIndex` must be specifie
     }
 
     /**
-     * This API is used to refresh the route between a NAT gateway and  Direct Connect and update the associated route table.
+     * This API is used to refresh the route between a NAT gateway and Direct Connect and update the associated route table.
      * @param {RefreshDirectConnectGatewayRouteToNatGatewayRequest} req
      * @param {function(string, RefreshDirectConnectGatewayRouteToNatGatewayResponse):void} cb
      * @public
@@ -1873,6 +1903,19 @@ This API is used to check the jumbo frame status before and after instance migra
     InquiryPriceRenewAddresses(req, cb) {
         let resp = new InquiryPriceRenewAddressesResponse();
         this.request("InquiryPriceRenewAddresses", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the traffic monitoring details of a NAT gateway.
+
+- You can only use this API to query a single gateway instance. The input parameter `NatGatewayId` supports at most one value, and it must be passed.- If the gateway has traffic, but no data is returned when this API is called, please check whether gateway traffic monitoring is enabled in the corresponding gateway details page in the console.
+     * @param {DescribeNatGatewayFlowMonitorDetailRequest} req
+     * @param {function(string, DescribeNatGatewayFlowMonitorDetailResponse):void} cb
+     * @public
+     */
+    DescribeNatGatewayFlowMonitorDetail(req, cb) {
+        let resp = new DescribeNatGatewayFlowMonitorDetailResponse();
+        this.request("DescribeNatGatewayFlowMonitorDetail", req, resp, cb);
     }
 
     /**
@@ -2589,7 +2632,7 @@ This API is completed asynchronously. If you need to query the execution result 
 
     /**
      * This API is used to delete a NAT gateway.
-When a NAT gateway is deleted, all routes containing this gateway are deleted automatically, and the elastic IP is unbound.
+When a NAT gateway is deleted, all routes containing this gateway are deleted automatically, and associated EIPs are unbound.When deleting a NAT gateway, you need to unbind the associated EIPs. Therefore, the caller must have CAM permissions for vpc:DisassociateAddress and vpc:ModifyAddressesBandwidth.
      * @param {DeleteNatGatewayRequest} req
      * @param {function(string, DeleteNatGatewayResponse):void} cb
      * @public

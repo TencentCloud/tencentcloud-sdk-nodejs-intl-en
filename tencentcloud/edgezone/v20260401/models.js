@@ -25,7 +25,7 @@ class TerminateInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID list. Maximum number of IDs: 100.
+         * <p>Instance ID list. Maximum number of IDs: 100.</p>
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -265,55 +265,67 @@ class CreateInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Availability zone code, such as ap-guangzhou-1.
+         * <p>Availability zone code, such as ap-guangzhou-1.</p>
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * Model specifications, such as BMS5.MEDIUM8.
+         * <p>Model specifications, such as BMS5.MEDIUM8.</p>
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * Instance name.
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Private network instance ID in the format of net-xxx.
+         * <p>Private network instance ID in the format of net-xxx.</p>
          * @type {string || null}
          */
         this.PrivateNetworkId = null;
 
         /**
-         * Public network instance ID, in the format of net-xxx.
+         * <p>Public network instance ID, in the format of net-xxx.</p>
          * @type {string || null}
          */
         this.PublicNetworkId = null;
 
         /**
-         * Image ID, for example img-centos-7.9.
+         * <p>Instance name.</p>
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * <p>Image ID, for example img-centos-7.9.</p>
          * @type {string || null}
          */
         this.ImageId = null;
 
         /**
-         * Specify the quantity. Default is 1. Maximum is 50.
+         * <p>Specify the quantity. Default is 1. Maximum is 50.</p>
          * @type {number || null}
          */
         this.InstanceCount = null;
 
         /**
-         * Image version number. Only public images have the concept of version.
+         * <p>Login password. Either it or SSHKey is required.</p>
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * <p>Public key string of the SSH key. Either this parameter or Password must be specified.</p>
+         * @type {string || null}
+         */
+        this.SSHKey = null;
+
+        /**
+         * <p>Image version number. Only public images have the concept of version.</p>
          * @type {string || null}
          */
         this.VersionNumber = null;
 
         /**
-         * Whether to enable public IPv6, default false. Enabled, the system will allocate an additional IPv6 address after assigning an IPv4 address.
+         * <p>Whether to enable public IPv6, default false. Enabled, the system will allocate an additional IPv6 address after assigning an IPv4 address.</p>
          * @type {boolean || null}
          */
         this.EnableIpv6 = null;
@@ -329,11 +341,13 @@ class CreateInstancesRequest extends  AbstractModel {
         }
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.PrivateNetworkId = 'PrivateNetworkId' in params ? params.PrivateNetworkId : null;
         this.PublicNetworkId = 'PublicNetworkId' in params ? params.PublicNetworkId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.ImageId = 'ImageId' in params ? params.ImageId : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.SSHKey = 'SSHKey' in params ? params.SSHKey : null;
         this.VersionNumber = 'VersionNumber' in params ? params.VersionNumber : null;
         this.EnableIpv6 = 'EnableIpv6' in params ? params.EnableIpv6 : null;
 
@@ -354,6 +368,18 @@ class DescribeInstanceTypesRequest extends  AbstractModel {
          */
         this.Zone = null;
 
+        /**
+         * Pagination offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Pagination size. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
     }
 
     /**
@@ -364,6 +390,8 @@ class DescribeInstanceTypesRequest extends  AbstractModel {
             return;
         }
         this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -766,6 +794,12 @@ class InstanceTypeQuota extends  AbstractModel {
         this.InstanceFamily = null;
 
         /**
+         * Model family name
+         * @type {string || null}
+         */
+        this.InstanceFamilyName = null;
+
+        /**
          * Number of CPU cores.
          * @type {number || null}
          */
@@ -820,6 +854,24 @@ class InstanceTypeQuota extends  AbstractModel {
         this.DataDiskCount = null;
 
         /**
+         * Second set of data disk types
+         * @type {string || null}
+         */
+        this.SecondaryDataDiskType = null;
+
+        /**
+         * Data disk size of the second group (GB)
+         * @type {number || null}
+         */
+        this.SecondaryDataDiskSize = null;
+
+        /**
+         * Number of data disks in the second set
+         * @type {number || null}
+         */
+        this.SecondaryDataDiskCount = null;
+
+        /**
          * Disk description string (backward compatibility).
          * @type {string || null}
          */
@@ -838,7 +890,7 @@ class InstanceTypeQuota extends  AbstractModel {
         this.GpuType = null;
 
         /**
-         * Quota quantity. 0 indicates no restriction.
+         * Quota quantity
          * @type {number || null}
          */
         this.Quota = null;
@@ -855,6 +907,7 @@ class InstanceTypeQuota extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
+        this.InstanceFamilyName = 'InstanceFamilyName' in params ? params.InstanceFamilyName : null;
         this.CpuCores = 'CpuCores' in params ? params.CpuCores : null;
         this.CpuType = 'CpuType' in params ? params.CpuType : null;
         this.MemoryGb = 'MemoryGb' in params ? params.MemoryGb : null;
@@ -864,6 +917,9 @@ class InstanceTypeQuota extends  AbstractModel {
         this.DataDiskType = 'DataDiskType' in params ? params.DataDiskType : null;
         this.DataDiskSize = 'DataDiskSize' in params ? params.DataDiskSize : null;
         this.DataDiskCount = 'DataDiskCount' in params ? params.DataDiskCount : null;
+        this.SecondaryDataDiskType = 'SecondaryDataDiskType' in params ? params.SecondaryDataDiskType : null;
+        this.SecondaryDataDiskSize = 'SecondaryDataDiskSize' in params ? params.SecondaryDataDiskSize : null;
+        this.SecondaryDataDiskCount = 'SecondaryDataDiskCount' in params ? params.SecondaryDataDiskCount : null;
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.NetworkInterfaceType = 'NetworkInterfaceType' in params ? params.NetworkInterfaceType : null;
         this.GpuType = 'GpuType' in params ? params.GpuType : null;
@@ -958,13 +1014,13 @@ class DescribeInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Instance detail list
+         * <p>Instance detail list</p>
          * @type {Array.<Instance> || null}
          */
         this.InstanceSet = null;
 
         /**
-         * Number of Eligible Instances
+         * <p>Number of eligible instances.</p>
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -1036,43 +1092,55 @@ class DescribeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID list for filtering by instance ID
+         * <p>Instance ID list for filtering by instance ID</p>
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Instance name, supports fuzzy matching
+         * <p>Instance name, supports fuzzy matching.</p>
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Availability zone code for filtering instances in the specified availability zone
+         * <p>Availability zone code for filtering instances in the specified availability zone</p>
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * Instance status list for status filtering. Available values: allocating, running, isolating, isolated, terminating, error.
+         * <p>Instance status list for status filtering. Available values: allocating, running, isolating, isolated, terminating, error.</p>
          * @type {Array.<string> || null}
          */
         this.InstanceStatus = null;
 
         /**
-         * Public IPv4 address list, used for filtering instances by public IP address
+         * <p>Public network ID.</p>
+         * @type {string || null}
+         */
+        this.PublicNetworkId = null;
+
+        /**
+         * <p>VPC ID.</p>
+         * @type {string || null}
+         */
+        this.PrivateNetworkId = null;
+
+        /**
+         * <p>Public IPv4 address list, used for filtering instances by public IP address</p>
          * @type {Array.<string> || null}
          */
         this.PublicIps = null;
 
         /**
-         * Offset. Default value: 0
+         * <p>Offset. Default value: 0.</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of returned results. Default 20. Maximum 100.
+         * <p>Number of returned results. Default 20. Maximum 100.</p>
          * @type {number || null}
          */
         this.Limit = null;
@@ -1090,6 +1158,8 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+        this.PublicNetworkId = 'PublicNetworkId' in params ? params.PublicNetworkId : null;
+        this.PrivateNetworkId = 'PrivateNetworkId' in params ? params.PrivateNetworkId : null;
         this.PublicIps = 'PublicIps' in params ? params.PublicIps : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
@@ -1325,14 +1395,13 @@ class TerminateInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * List of instance IDs successfully terminated.
+         * <p>List of instance IDs successfully terminated.</p>
          * @type {Array.<string> || null}
          */
         this.InstanceIdSet = null;
 
         /**
-         * List of instances with termination failed (returned when partially successful).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>List of instances with termination failed (returned when partially successful).</p>
          * @type {Array.<FailedInstance> || null}
          */
         this.FailedInstanceSet = null;
@@ -1643,13 +1712,13 @@ class CreateInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * List of successfully created instance IDs.
+         * <p>List of successfully created instance IDs.</p>
          * @type {Array.<string> || null}
          */
         this.InstanceIdSet = null;
 
         /**
-         * Count of failed instances. This field is returned only when partially failed, not returned when all successful.
+         * <p>Count of failed instances. This field is returned only when partially failed, not returned when all successful.</p>
          * @type {number || null}
          */
         this.FailedCount = null;
@@ -1685,100 +1754,136 @@ class Instance extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * <p>Instance ID.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Instance name.
+         * <p>Instance name.</p>
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Bound Physical Machine ID
+         * <p>Bound Physical Machine ID</p>
          * @type {string || null}
          */
         this.MachineId = null;
 
         /**
-         * Model specifications
+         * <p>Model specifications</p>
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * Availability zone code
+         * <p>Availability zone code</p>
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * Image ID
+         * <p>Image ID.</p>
          * @type {string || null}
          */
         this.ImageId = null;
 
         /**
-         * Image version number
+         * <p>Image version number</p>
          * @type {string || null}
          */
         this.VersionNumber = null;
 
         /**
-         * Instance status, value range: allocating, running, isolating, isolated, terminating, error.
+         * <p>Instance status, value range: allocating, running, isolating, isolated, terminating, error.</p>
          * @type {string || null}
          */
         this.InstanceStatus = null;
 
         /**
-         * Operation status: normal, starting, stopping, stopped, rebooting.
+         * <p>Operation status: normal, starting, stopping, stopped, rebooting.</p>
          * @type {string || null}
          */
         this.OperateStatus = null;
 
         /**
-         * VPC ID
+         * <p>VPC ID.</p>
          * @type {string || null}
          */
         this.PrivateNetworkId = null;
 
         /**
-         * private IPv4 address
+         * <p>Private IPv4 address</p>
          * @type {string || null}
          */
         this.PrivateIp = null;
 
         /**
-         * private IPv6 address
+         * <p>Private IPv6 address</p>
          * @type {string || null}
          */
         this.PrivateIpV6 = null;
 
         /**
-         * Public network ID
+         * <p>Public network ID.</p>
          * @type {string || null}
          */
         this.PublicNetworkId = null;
 
         /**
-         * Public IPv4 address
+         * <p>Public IPv4 address</p>
          * @type {string || null}
          */
         this.PublicIp = null;
 
         /**
-         * Public IPv6 address
+         * <p>Public IPv6 address</p>
          * @type {string || null}
          */
         this.PublicIpV6 = null;
 
         /**
-         * Creation time, expressed according to the ISO8601 standard and using the UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+         * <p>File System Type</p>
+         * @type {string || null}
+         */
+        this.FileSystemType = null;
+
+        /**
+         * <p>Creation time, in the ISO 8601 standard format, using UTC time. Format: YYYY-MM-DDThh:mm:ssZ.</p>
          * @type {string || null}
          */
         this.CreatedTime = null;
+
+        /**
+         * <p>Instance family flag</p>
+         * @type {string || null}
+         */
+        this.InstanceFamily = null;
+
+        /**
+         * <p>Model Family Name</p>
+         * @type {string || null}
+         */
+        this.InstanceFamilyName = null;
+
+        /**
+         * <p>CPU Model</p>
+         * @type {string || null}
+         */
+        this.CpuType = null;
+
+        /**
+         * <p>CPU cores.</p>
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * <p>Memory size.</p>
+         * @type {number || null}
+         */
+        this.Memory = null;
 
     }
 
@@ -1804,7 +1909,13 @@ class Instance extends  AbstractModel {
         this.PublicNetworkId = 'PublicNetworkId' in params ? params.PublicNetworkId : null;
         this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
         this.PublicIpV6 = 'PublicIpV6' in params ? params.PublicIpV6 : null;
+        this.FileSystemType = 'FileSystemType' in params ? params.FileSystemType : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
+        this.InstanceFamilyName = 'InstanceFamilyName' in params ? params.InstanceFamilyName : null;
+        this.CpuType = 'CpuType' in params ? params.CpuType : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
 
     }
 }
@@ -1848,13 +1959,13 @@ class ZoneInfo extends  AbstractModel {
         this.Region = null;
 
         /**
-         * Area code
+         * Area code.
          * @type {string || null}
          */
         this.Location = null;
 
         /**
-         * Zone Name
+         * Region name.
          * @type {string || null}
          */
         this.LocationName = null;
@@ -1916,13 +2027,13 @@ class DescribeZonesResponse extends  AbstractModel {
         super();
 
         /**
-         * Availability zone list of all regions.
+         * <p>AZ list of all regions.</p>
          * @type {Array.<ZoneInfo> || null}
          */
         this.ZoneSet = null;
 
         /**
-         * Total number of availability zones.
+         * <p>Total number of availability zones.</p>
          * @type {number || null}
          */
         this.TotalCount = null;

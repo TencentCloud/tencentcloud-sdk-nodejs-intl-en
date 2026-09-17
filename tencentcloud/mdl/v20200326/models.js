@@ -195,7 +195,7 @@ class CreateStreamLiveInputSecurityGroupResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Picture in Picture Settings
  * @class
  */
 class PipSetting extends  AbstractModel {
@@ -203,31 +203,31 @@ class PipSetting extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Audio selection: LIVE_SOURCE or AD_SOURCE
          * @type {string || null}
          */
         this.AudioSelection = null;
 
         /**
-         * 
+         * Live streaming source layout configuration
          * @type {SourceLayout || null}
          */
         this.LiveSourceLayout = null;
 
         /**
-         * 
+         * Advertisement source layout configuration
          * @type {SourceLayout || null}
          */
         this.AdSourceLayout = null;
 
         /**
-         * 
+         * Background image URL, starting with http/https and ending in jpg/jpeg/png (only required for UPLOAD_CREATIVES)
          * @type {string || null}
          */
         this.BackgroundImgUrl = null;
 
         /**
-         * 
+         * Advertisement video URL, starting with http/https and ending in mp4 (only required for UPLOAD_CREATIVES)
          * @type {string || null}
          */
         this.AdSourceUrl = null;
@@ -1840,19 +1840,19 @@ class SourceLayout extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Left margin offset percentage, picture in picture range 0-99, left offset+right offset<100; Return range 0-50, left offset+right offset<100
          * @type {number || null}
          */
         this.LeftOffset = null;
 
         /**
-         * 
+         * The offset percentage of the right margin, picture in picture range 0-99, left offset+right offset<100; Return range 0-50, left offset+right offset<100
          * @type {number || null}
          */
         this.RightOffset = null;
 
         /**
-         * 
+         * Offset percentage of bottom margin, range 0-50
          * @type {number || null}
          */
         this.BottomOffset = null;
@@ -3724,7 +3724,7 @@ class ModifyStreamLiveWatermarkRequest extends  AbstractModel {
         this.TextSettings = null;
 
         /**
-         * 
+         * AB watermark configuration.
          * @type {AbWatermarkSettingsReq || null}
          */
         this.AbWatermarkSettings = null;
@@ -6245,13 +6245,13 @@ class AdBreakSetting extends  AbstractModel {
         this.LSqueezeSetting = null;
 
         /**
-         * 
+         * Picture in picture configuration
          * @type {PipSetting || null}
          */
         this.PipSetting = null;
 
         /**
-         * 
+         * Circular setting
          * @type {BorderFrameSetting || null}
          */
         this.BorderFrameSetting = null;
@@ -7738,7 +7738,7 @@ class DeleteStreamLiveInputResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Dynamic graphic information.
  * @class
  */
 class MotionGraphicsActivateSetting extends  AbstractModel {
@@ -7962,7 +7962,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Compression Recovery Configuration
  * @class
  */
 class LSqueezeSetting extends  AbstractModel {
@@ -9541,13 +9541,13 @@ class BorderFrameSetting extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Live streaming source layout configuration
          * @type {SourceLayout || null}
          */
         this.LiveSourceLayout = null;
 
         /**
-         * 
+         * Background image URL, starting with http/https and ending in jpg/jpeg/png, (only required for UPLOAD_CREATIVES)
          * @type {string || null}
          */
         this.BackgroundImgUrl = null;

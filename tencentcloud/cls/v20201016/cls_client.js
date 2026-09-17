@@ -24,6 +24,7 @@ const DeleteShipperRequest = models.DeleteShipperRequest;
 const DeleteConsoleResponse = models.DeleteConsoleResponse;
 const DynamicIndex = models.DynamicIndex;
 const CreateRebuildIndexTaskResponse = models.CreateRebuildIndexTaskResponse;
+const DeleteCLSDeliverTaskRequest = models.DeleteCLSDeliverTaskRequest;
 const CreateSearchViewRequest = models.CreateSearchViewRequest;
 const CheckFunctionRequest = models.CheckFunctionRequest;
 const ModifyNetworkApplicationResponse = models.ModifyNetworkApplicationResponse;
@@ -73,7 +74,7 @@ const MachineGroupInfo = models.MachineGroupInfo;
 const DeleteAlarmShieldResponse = models.DeleteAlarmShieldResponse;
 const TopicExtendInfo = models.TopicExtendInfo;
 const CreateIndexRequest = models.CreateIndexRequest;
-const CreateConsoleResponse = models.CreateConsoleResponse;
+const EsImportInfo = models.EsImportInfo;
 const CreateTopicRequest = models.CreateTopicRequest;
 const ModifyDataTransformRequest = models.ModifyDataTransformRequest;
 const CreateDlcDeliverRequest = models.CreateDlcDeliverRequest;
@@ -85,8 +86,9 @@ const ModifyDlcDeliverResponse = models.ModifyDlcDeliverResponse;
 const ModifyDashboardResponse = models.ModifyDashboardResponse;
 const DescribeMetricSubscribesResponse = models.DescribeMetricSubscribesResponse;
 const CreateWebCallbackRequest = models.CreateWebCallbackRequest;
+const DeleteCLSDeliverTaskResponse = models.DeleteCLSDeliverTaskResponse;
 const DescribeClusterMetricConfigsRequest = models.DescribeClusterMetricConfigsRequest;
-const DescribeConfigsRequest = models.DescribeConfigsRequest;
+const DescribeCLSDeliverTasksRequest = models.DescribeCLSDeliverTasksRequest;
 const DlcPartitionExtra = models.DlcPartitionExtra;
 const DescribeKafkaConsumerTopicsResponse = models.DescribeKafkaConsumerTopicsResponse;
 const DashboardTopicInfo = models.DashboardTopicInfo;
@@ -98,6 +100,7 @@ const DeleteDataTransformRequest = models.DeleteDataTransformRequest;
 const DescribeRemoteWriteTasksResponse = models.DescribeRemoteWriteTasksResponse;
 const AddMachineGroupInfoRequest = models.AddMachineGroupInfoRequest;
 const DescribeKafkaConsumerGroupListResponse = models.DescribeKafkaConsumerGroupListResponse;
+const DescribeCLSDeliverTasksResponse = models.DescribeCLSDeliverTasksResponse;
 const CreateHostMetricConfigResponse = models.CreateHostMetricConfigResponse;
 const ModifyConsumerGroupRequest = models.ModifyConsumerGroupRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
@@ -220,6 +223,7 @@ const DeleteDashboardSubscribeResponse = models.DeleteDashboardSubscribeResponse
 const DescribeLogHistogramResponse = models.DescribeLogHistogramResponse;
 const DescribeConsumerGroupsRequest = models.DescribeConsumerGroupsRequest;
 const ConsoleAccount = models.ConsoleAccount;
+const DlcTableInfo = models.DlcTableInfo;
 const CreateWebCallbackResponse = models.CreateWebCallbackResponse;
 const DeleteConsumerGroupRequest = models.DeleteConsumerGroupRequest;
 const OpenKafkaConsumerRequest = models.OpenKafkaConsumerRequest;
@@ -232,6 +236,7 @@ const DescribeConsumerResponse = models.DescribeConsumerResponse;
 const EstimateRebuildIndexTaskRequest = models.EstimateRebuildIndexTaskRequest;
 const EsTimeInfo = models.EsTimeInfo;
 const DescribeClusterBaseMetricConfigsResponse = models.DescribeClusterBaseMetricConfigsResponse;
+const TargetTopicConfig = models.TargetTopicConfig;
 const ModifyKafkaRechargeRequest = models.ModifyKafkaRechargeRequest;
 const CreateIndexResponse = models.CreateIndexResponse;
 const ModifyDashboardSubscribeResponse = models.ModifyDashboardSubscribeResponse;
@@ -254,6 +259,7 @@ const ModifyRecordingRuleYamlTaskRequest = models.ModifyRecordingRuleYamlTaskReq
 const DescribeConsumerGroupsResponse = models.DescribeConsumerGroupsResponse;
 const NoticeContent = models.NoticeContent;
 const CreateDataTransformResponse = models.CreateDataTransformResponse;
+const SourceTopicConfig = models.SourceTopicConfig;
 const DescribeKafkaConsumerTopicsRequest = models.DescribeKafkaConsumerTopicsRequest;
 const CreateConsumerRequest = models.CreateConsumerRequest;
 const DeleteHostMetricConfigRequest = models.DeleteHostMetricConfigRequest;
@@ -266,6 +272,7 @@ const ContentInfo = models.ContentInfo;
 const ApplyConfigToMachineGroupResponse = models.ApplyConfigToMachineGroupResponse;
 const AlertHistoryNotice = models.AlertHistoryNotice;
 const DeleteAlarmRequest = models.DeleteAlarmRequest;
+const CLSDeliverTaskInfo = models.CLSDeliverTaskInfo;
 const DescribeLogContextResponse = models.DescribeLogContextResponse;
 const EstimateRebuildIndexTaskResponse = models.EstimateRebuildIndexTaskResponse;
 const DeleteDashboardRequest = models.DeleteDashboardRequest;
@@ -346,6 +353,7 @@ const EsRechargeInfo = models.EsRechargeInfo;
 const CreateMetricSubscribeRequest = models.CreateMetricSubscribeRequest;
 const NoticeContentTemplate = models.NoticeContentTemplate;
 const LogItem = models.LogItem;
+const DeliverRule = models.DeliverRule;
 const DescribeConfigMachineGroupsRequest = models.DescribeConfigMachineGroupsRequest;
 const DescribeMetricSubscribePreviewRequest = models.DescribeMetricSubscribePreviewRequest;
 const DeleteConsumerResponse = models.DeleteConsumerResponse;
@@ -370,6 +378,7 @@ const CreateExportRequest = models.CreateExportRequest;
 const DashboardTemplateVariable = models.DashboardTemplateVariable;
 const CancelRebuildIndexTaskRequest = models.CancelRebuildIndexTaskRequest;
 const DescribeLogsetsResponse = models.DescribeLogsetsResponse;
+const ModifyCLSDeliverTaskResponse = models.ModifyCLSDeliverTaskResponse;
 const DescribeKafkaConsumerPreviewResponse = models.DescribeKafkaConsumerPreviewResponse;
 const RemoteWriteAuthInfo = models.RemoteWriteAuthInfo;
 const NetworkApplicationInfo = models.NetworkApplicationInfo;
@@ -394,7 +403,7 @@ const ModifyKafkaConsumerGroupOffsetRequest = models.ModifyKafkaConsumerGroupOff
 const ModifyRemoteWriteTaskRequest = models.ModifyRemoteWriteTaskRequest;
 const DescribeConsolesRequest = models.DescribeConsolesRequest;
 const AlarmShieldInfo = models.AlarmShieldInfo;
-const EsImportInfo = models.EsImportInfo;
+const CreateConsoleResponse = models.CreateConsoleResponse;
 const ModifyConfigResponse = models.ModifyConfigResponse;
 const MetricConfig = models.MetricConfig;
 const ModifyConsoleRequest = models.ModifyConsoleRequest;
@@ -404,6 +413,7 @@ const DescribeConsumerOffsetsResponse = models.DescribeConsumerOffsetsResponse;
 const SearchLogInfos = models.SearchLogInfos;
 const EnvInfo = models.EnvInfo;
 const ModifyKafkaConsumerResponse = models.ModifyKafkaConsumerResponse;
+const CreateCLSDeliverTaskRequest = models.CreateCLSDeliverTaskRequest;
 const MachineGroupTypeInfo = models.MachineGroupTypeInfo;
 const ShipperInfo = models.ShipperInfo;
 const DescribeAlertRecordHistoryResponse = models.DescribeAlertRecordHistoryResponse;
@@ -491,10 +501,11 @@ const AnalysisDimensional = models.AnalysisDimensional;
 const DeleteWebCallbackRequest = models.DeleteWebCallbackRequest;
 const LogRechargeRuleInfo = models.LogRechargeRuleInfo;
 const CloseKafkaConsumerRequest = models.CloseKafkaConsumerRequest;
+const SourceTopicInfo = models.SourceTopicInfo;
 const ModifyAlarmShieldRequest = models.ModifyAlarmShieldRequest;
 const AlarmNoticeDeliverConfig = models.AlarmNoticeDeliverConfig;
 const DescribeConsumersResponse = models.DescribeConsumersResponse;
-const DlcTableInfo = models.DlcTableInfo;
+const CreateCLSDeliverTaskResponse = models.CreateCLSDeliverTaskResponse;
 const DeleteRemoteWriteTaskRequest = models.DeleteRemoteWriteTaskRequest;
 const ModifyKafkaConsumerGroupOffsetResponse = models.ModifyKafkaConsumerGroupOffsetResponse;
 const CreateShipperRequest = models.CreateShipperRequest;
@@ -518,6 +529,7 @@ const CreateKafkaRechargeRequest = models.CreateKafkaRechargeRequest;
 const DeleteKafkaRechargeRequest = models.DeleteKafkaRechargeRequest;
 const DlcInfo = models.DlcInfo;
 const ModifyDataTransformResponse = models.ModifyDataTransformResponse;
+const DescribeConfigsRequest = models.DescribeConfigsRequest;
 const AlertHistoryRecord = models.AlertHistoryRecord;
 const MultiTopicSearchInformation = models.MultiTopicSearchInformation;
 const AlarmNotice = models.AlarmNotice;
@@ -553,6 +565,7 @@ const ModifyRecordingRuleTaskResponse = models.ModifyRecordingRuleTaskResponse;
 const DescribeConsolesResponse = models.DescribeConsolesResponse;
 const SendConsumerHeartbeatRequest = models.SendConsumerHeartbeatRequest;
 const CommitConsumerOffsetsResponse = models.CommitConsumerOffsetsResponse;
+const ModifyCLSDeliverTaskRequest = models.ModifyCLSDeliverTaskRequest;
 const DescribeSplunkPreviewResponse = models.DescribeSplunkPreviewResponse;
 
 
@@ -1172,6 +1185,17 @@ This API is used to enable CLS in all regions by filling any region for Region, 
     ModifyEsRecharge(req, cb) {
         let resp = new ModifyEsRechargeResponse();
         this.request("ModifyEsRecharge", req, resp, cb);
+    }
+
+    /**
+     * Modify a CLS shipping task
+     * @param {ModifyCLSDeliverTaskRequest} req
+     * @param {function(string, ModifyCLSDeliverTaskResponse):void} cb
+     * @public
+     */
+    ModifyCLSDeliverTask(req, cb) {
+        let resp = new ModifyCLSDeliverTaskResponse();
+        this.request("ModifyCLSDeliverTask", req, resp, cb);
     }
 
     /**
@@ -1842,6 +1866,17 @@ This API is used to enable CLS in all regions by filling any region for Region, 
     }
 
     /**
+     * Delete a CLS shipping task
+     * @param {DeleteCLSDeliverTaskRequest} req
+     * @param {function(string, DeleteCLSDeliverTaskResponse):void} cb
+     * @public
+     */
+    DeleteCLSDeliverTask(req, cb) {
+        let resp = new DeleteCLSDeliverTaskResponse();
+        this.request("DeleteCLSDeliverTask", req, resp, cb);
+    }
+
+    /**
      * This API is used to creates rebuild index tasks.
 Note:
 -A single log topic allows only one index reconstruction task at a time and can have up to 10 rebuild index task records. Delete task records that are no longer needed before creating an index task.
@@ -1990,6 +2025,17 @@ Note:
     CheckFunction(req, cb) {
         let resp = new CheckFunctionResponse();
         this.request("CheckFunction", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the index configuration of a log topic. After deleting, you cannot retrieve or query the collected logs.
+     * @param {DeleteIndexRequest} req
+     * @param {function(string, DeleteIndexResponse):void} cb
+     * @public
+     */
+    DeleteIndex(req, cb) {
+        let resp = new DeleteIndexResponse();
+        this.request("DeleteIndex", req, resp, cb);
     }
 
     /**
@@ -2710,14 +2756,14 @@ Import the generated cls.pb.h header file into the code and call the interface t
     }
 
     /**
-     * This API is used to delete the index configuration of a log topic. After deleting, you cannot retrieve or query the collected logs.
-     * @param {DeleteIndexRequest} req
-     * @param {function(string, DeleteIndexResponse):void} cb
+     * This API is used to get the CLS delivery task list.
+     * @param {DescribeCLSDeliverTasksRequest} req
+     * @param {function(string, DescribeCLSDeliverTasksResponse):void} cb
      * @public
      */
-    DeleteIndex(req, cb) {
-        let resp = new DeleteIndexResponse();
-        this.request("DeleteIndex", req, resp, cb);
+    DescribeCLSDeliverTasks(req, cb) {
+        let resp = new DescribeCLSDeliverTasksResponse();
+        this.request("DescribeCLSDeliverTasks", req, resp, cb);
     }
 
     /**
@@ -2795,6 +2841,17 @@ Import the generated cls.pb.h header file into the code and call the interface t
     ModifyRemoteWriteTask(req, cb) {
         let resp = new ModifyRemoteWriteTaskResponse();
         this.request("ModifyRemoteWriteTask", req, resp, cb);
+    }
+
+    /**
+     * Create a CLS shipping task
+     * @param {CreateCLSDeliverTaskRequest} req
+     * @param {function(string, CreateCLSDeliverTaskResponse):void} cb
+     * @public
+     */
+    CreateCLSDeliverTask(req, cb) {
+        let resp = new CreateCLSDeliverTaskResponse();
+        this.request("CreateCLSDeliverTask", req, resp, cb);
     }
 
 

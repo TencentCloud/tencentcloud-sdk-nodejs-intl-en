@@ -2486,7 +2486,7 @@ Note: The output parameter's default maximum value for the number of groups is 2
 }
 
 /**
- * Output format for real-time log delivery. You can directly use the specified predefined log output format (JSON Lines / csv) through the FormatType parameter, or define a variant output format through additional parameters based on the predefined log output format.
+ * Output format for real-time log delivery. You can directly use the specified predefined log output format (JSON Lines / csv) through the FormatType parameter, or define a variant output format through additional parameters based on the predefined log output format. For usage details, see Custom Log Output Format (https://www.tencentcloud.com/document/product/1552/110448?from_cn_redirect=1).
  * @class
  */
 class LogFormat extends  AbstractModel {
@@ -2494,51 +2494,49 @@ class LogFormat extends  AbstractModel {
         super();
 
         /**
-         * Predefined output format for log shipping. Valid values:
-<li>json: Use JSON Lines as the predefined log output format. In each log entry, fields are displayed as key-value pairs.</li>
-<li>csv: Use the predefined log output format csv, where each log entry only is presented as field values only, excluding field names. </li>
+         * <p>Log output format. Valid values:</p><ul><li>json: Use the predefined log output format JSON Lines, where each log entry is presented as key-value pairs;</li><li>csv: Use the predefined log output format CSV, where each log entry presents only field values, not field names.</li><li>template: Use a user-customized output template. Each log entry supports custom layout and concatenation based on the custom template, in conjunction with the RecordTemplate field.</li></ul>
          * @type {string || null}
          */
         this.FormatType = null;
 
         /**
-         * A string added before each log delivery batch. Each log delivery batch may contain multiple log records.
+         * <p>A string added before each log delivery batch. Each log delivery batch may contain multiple log records.</p>
          * @type {string || null}
          */
         this.BatchPrefix = null;
 
         /**
-         * A string appended after each log delivery batch.
+         * <p>A string appended after each log delivery batch.</p>
          * @type {string || null}
          */
         this.BatchSuffix = null;
 
         /**
-         * A string added before each log record.
+         * <p>Log prefix, a string added before each log record.</p>
          * @type {string || null}
          */
         this.RecordPrefix = null;
 
         /**
-         * A string appended after each log record.
+         * <p>Single-line log suffix, a string appended after each log record.</p>
          * @type {string || null}
          */
         this.RecordSuffix = null;
 
         /**
-         * A string inserted between log records as a separator. Valid values:
-<li>\n: line break;</li>
-<li>\t: tab character;</li>
-<li>,: Half-width comma. </li>
+         * <p>Log separator, a string inserted between log records as a separator. Valid values:</p><ul><li>\n: line break;</li><li>\t: tab character;</li><li>,: half-width comma.</li></ul>
          * @type {string || null}
          */
         this.RecordDelimiter = null;
 
         /**
-         * A string inserted between fields as a separator within a single log record. Valid values:
-<li>\t: tab character;</li>
-<li>,: half-width comma;</li>
-<li>;: Half-width semicolon. </li>
+         * <p>Log template, output template for a single log, length limited to 4KB, takes effect only when FormatType = template. Supports custom layout and concatenation of configured push fields according to the template.</p>
+         * @type {string || null}
+         */
+        this.RecordTemplate = null;
+
+        /**
+         * <p>Field separator, a string inserted between fields within a single log record as a separator. It takes effect only when FormatType = csv. Valid values:</p><ul><li>\t: tab character;</li><li>,: half-width comma;</li><li>;: half-width semicolon.</li></ul>
          * @type {string || null}
          */
         this.FieldDelimiter = null;
@@ -2558,6 +2556,7 @@ class LogFormat extends  AbstractModel {
         this.RecordPrefix = 'RecordPrefix' in params ? params.RecordPrefix : null;
         this.RecordSuffix = 'RecordSuffix' in params ? params.RecordSuffix : null;
         this.RecordDelimiter = 'RecordDelimiter' in params ? params.RecordDelimiter : null;
+        this.RecordTemplate = 'RecordTemplate' in params ? params.RecordTemplate : null;
         this.FieldDelimiter = 'FieldDelimiter' in params ? params.FieldDelimiter : null;
 
     }
@@ -3055,85 +3054,91 @@ class CreateRealtimeLogDeliveryTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * Zone ID.
+         * <p>Site ID.</p>
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * Data shipping area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding the Chinese mainland).</li></ul>
+         * <p>Data shipping area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding the Chinese mainland).</li></ul></p>
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * Data delivery type. Available values: <ul><li>domain: site acceleration log;</li><li>application: four-layer proxy logs;</li><li>function: edge function logs;</li><li>web-rateLiming: rate limit and CC attack defense log;</li><li>web-attack: managed rule log;</li><li>web-rule: custom rule logs;</li><li>web-bot: bot management log.</li></ul>
+         * <p>Data delivery type. Available values:</p><ul><li>l7-access-logs: Layer 7 Access Logs;</li><li>application: Layer 4 Proxy Logs;</li><li>function: Function Logs;</li><li>web-attack: Managed Rule Logs.</li></ul><p>The following types of logs are merged into l7-access-logs and no longer support adding:</p><ul><li>domain: Site Acceleration Logs;</li><li>web-rateLiming: Rate Limit and CC Attack Defense Logs;</li><li>web-rule: Custom Rule Logs;</li><li>web-bot: Bot Management Logs.</li></ul>
          * @type {string || null}
          */
         this.LogType = null;
 
         /**
-         * Name of a real-time log delivery task, which can contain up to 200 characters, including digits, English letters, hyphens (-) and underscores (_).
+         * <p>Name of a real-time log delivery task, which can contain up to 200 characters, including digits, English letters, hyphens (-) and underscores (_).</p>
          * @type {string || null}
          */
         this.TaskName = null;
 
         /**
-         * Type of a real-time log shipping task. Valid values:<ul><li>cls: push to Tencent Cloud CLS;</li><li>custom_endpoint: push to a custom HTTP(S) address;</li><li>s3: push to an AWS S3-compatible bucket address;</li><li>log_analysis: push to EdgeOne log analytics. Only supported when LogType = domain or web-attack.</li></ul>
+         * <p>Type of a real-time log shipping task. Valid values:<ul><li>cls: push to Tencent Cloud CLS;</li><li>custom_endpoint: push to a custom HTTP(S) address;</li><li>s3: push to an AWS S3-compatible bucket address;</li><li>log_analysis: push to EdgeOne log analytics. This is supported only when LogType = l7-access-logs or web-attack.</li></ul></p>
          * @type {string || null}
          */
         this.TaskType = null;
 
         /**
-         * List of entities corresponding to the real-time log delivery task. Example values are as follows: <ul><li>Layer 7 domain: domain.example.com</li><li>L4 proxy instance: sid-2s69eb5wcms7</li><li>Cloud function instance: test-zone-2mxigizoh9l9-1257626257</li></ul>
+         * <p>List of entities corresponding to real-time log delivery tasks. Example values:</p><ul><li>Layer 7 domain: domain.example.com</li><li>Layer 4 proxy instance: sid-2s69eb5wcms7</li><li>Edge function instance: test-zone-2mxigizoh9l9-1257626257</li></ul><p>For reference: <a href="https://www.tencentcloud.com/document/api/1552/103413?from_cn_redirect=1">DescribeL4Proxy</a></p>
          * @type {Array.<string> || null}
          */
         this.EntityList = null;
 
         /**
-         * Predefined fields for delivery. Value reference: <ul><li>[Site acceleration log (Layer 7 Access Logs)](https://www.tencentcloud.com/document/product/1552/105791?from_cn_redirect=1)</li><li>[Four-layer proxy logs](https://www.tencentcloud.com/document/product/1552/105792?from_cn_redirect=1)</li><li>[Edge Function logs](https://www.tencentcloud.com/document/product/1552/115585?from_cn_redirect=1)</li></ul>
+         * <p>Predefined fields for delivery. For reference: <ul><li><a href="https://www.tencentcloud.com/document/product/1552/105791?from_cn_redirect=1">Layer 7 Access Logs (site acceleration log)</a></li><li><a href="https://www.tencentcloud.com/document/product/1552/105792?from_cn_redirect=1">four-layer proxy logs</a></li><li><a href="https://www.tencentcloud.com/document/product/1552/115585?from_cn_redirect=1">edge function logs</a></li></ul></p><p>For reference: DescribeLogFields</p>
          * @type {Array.<string> || null}
          */
         this.Fields = null;
 
         /**
-         * The list of custom fields for log delivery, which supports extracting specified content from HTTP request headers, response headers, cookies, and request bodies. Custom field names must be unique. The number of custom fields cannot exceed a maximum of 200. A single real-time log delivery task can configure up to 5 custom fields of the request body type. Currently, only site acceleration logs (`LogType`=`domain`) support custom fields.
+         * <p>Custom fields for delivery support extracting specified content from HTTP request headers, response headers, cookies, and request bodies.<br>Custom field name must be unique. Only Layer 7 access logs (LogType= l7-access-logs or domain) support adding custom fields.<br>The count of custom fields allowed to be configured has a quota limit. If the quota is insufficient, please contact us (https://www.tencentcloud.com/contact-us).</p>
          * @type {Array.<CustomField> || null}
          */
         this.CustomFields = null;
 
         /**
-         * Filter criteria of log delivery. If this parameter is not specified, all logs will be delivered.
+         * <p>The list of custom expression fields for submission can be used to implement personalized real-time log content push through custom log push field names and value expressions. For usage details, refer to [Custom Log Field Expressions]().<br>Only Layer 7 Access Logs (LogType= l7-access-logs or domain) support  adding custom fields.<br>There is a quota limit on the count of custom fields that can be configured. If the quota is insufficient, please [contact us](https://www.tencentcloud.com/contact-us).<br>**Note**: If a field named in CustomExpressionFields has the same name as a field in Fields and CustomFields, the value in CustomExpressionFields takes precedence.</p>
+         * @type {Array.<CustomExpressionField> || null}
+         */
+        this.CustomExpressionFields = null;
+
+        /**
+         * <p>Filter criteria of log shipping. If this parameter is not input, all logs will be shipped.</p>
          * @type {Array.<DeliveryCondition> || null}
          */
         this.DeliveryConditions = null;
 
         /**
-         * Sampling ratio in permille. Value range: 1-1000. For example, 605 indicates a sampling ratio of 60.5%. If this parameter is not specified, the sampling ratio is 100%.
+         * <p>Sampling ratio in permille. Value range: 1-1000. For example, 605 indicates a sampling ratio of 60.5%. If this parameter is not input, the sampling ratio is 100%.</p>
          * @type {number || null}
          */
         this.Sample = null;
 
         /**
-         * Output format for log delivery. If left empty, the default format is used. The default format logic is as follows:<ul><li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, each JSON object represents a log entry;</li><li>When TaskType is 's3', the default format is JSON Lines;</li></ul>Particularly, when TaskType is 'cls' or 'log_analysis', the only allowed value for LogFormat.FormatType is 'json', and other parameters in LogFormat will be ignored. It is recommended not to transfer LogFormat.
+         * <p>Output format for log delivery. For usage details, see <a href="https://www.tencentcloud.com/document/product/1552/110448?from_cn_redirect=1">Custom Log Output Format</a>. If left blank, the default format applies. The default format logic is as follows:<ul><li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, each JSON object represents a log entry;</li><li>When TaskType is 's3', the default format is JSON Lines;</li></ul>Particularly, when TaskType is 'cls' or 'log_analysis', the only allowed value for LogFormat.FormatType is 'json', and other parameters in LogFormat will be ignored. It is recommended not to transfer LogFormat.</p>
          * @type {LogFormat || null}
          */
         this.LogFormat = null;
 
         /**
-         * Configuration information of CLS. This parameter is required when `TaskType` is `cls`.
+         * <p>Configuration information of CLS. This parameter is required when TaskType is cls.</p>
          * @type {CLSTopic || null}
          */
         this.CLS = null;
 
         /**
-         * Configuration information of the custom HTTP endpoint. This parameter is required when `TaskType` is `custom_endpoint`.
+         * <p>Configuration information of the custom HTTP service. This parameter is required when TaskType is custom_endpoint.</p>
          * @type {CustomEndpoint || null}
          */
         this.CustomEndpoint = null;
 
         /**
-         * Configuration information of the AWS S3-compatible bucket. This parameter is required when `TaskType` is `s3`.
+         * <p>Configuration information of the AWS S3-compatible bucket. This parameter is required when TaskType is s3.</p>
          * @type {S3 || null}
          */
         this.S3 = null;
@@ -3161,6 +3166,15 @@ class CreateRealtimeLogDeliveryTaskRequest extends  AbstractModel {
                 let obj = new CustomField();
                 obj.deserialize(params.CustomFields[z]);
                 this.CustomFields.push(obj);
+            }
+        }
+
+        if (params.CustomExpressionFields) {
+            this.CustomExpressionFields = new Array();
+            for (let z in params.CustomExpressionFields) {
+                let obj = new CustomExpressionField();
+                obj.deserialize(params.CustomExpressionFields[z]);
+                this.CustomExpressionFields.push(obj);
             }
         }
 
@@ -11818,18 +11832,30 @@ class LoadBalancer extends  AbstractModel {
 }
 
 /**
- * EdgeKVDelete response structure.
+ * Custom log fields in a real-time log delivery task are customizable and support value expression configurations. For usage details, see [Custom Log Field Expression]().
  * @class
  */
-class EdgeKVDeleteResponse extends  AbstractModel {
+class CustomExpressionField extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * <p>Custom log field name. Enter 1-100 characters. Allowed characters are letters, digits, and _. It must start with a letter. This name must be unique.</p>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * <p>The value expression of a custom log field. The maximum length of the expression is 4KB. For syntax explanation, see <a href="">Custom Log Field Expression</a>.</p>
+         * @type {string || null}
+         */
+        this.Expression = null;
+
+        /**
+         * <p>Whether to deliver this field. If left blank, it means not to deliver this field.</p>
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
 
     }
 
@@ -11840,7 +11866,9 @@ class EdgeKVDeleteResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Expression = 'Expression' in params ? params.Expression : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -26601,7 +26629,7 @@ class CreateRealtimeLogDeliveryTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * ID of the successfully created task.
+         * <p>ID of the successfully created task.</p>
          * @type {string || null}
          */
         this.TaskId = null;
@@ -33542,6 +33570,98 @@ class ModifyFunctionComponentBindingsRequest extends  AbstractModel {
 }
 
 /**
+ * NS access type site parameter description.
+ * @class
+ */
+class NSDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies whether CNAME acceleration is enabled. valid values:.
+<Li>Enabled: specifies whether the feature is enabled.</li>.
+<li>disabled: specifies that the feature is turned off.</li>.
+         * @type {string || null}
+         */
+        this.CnameSpeedUp = null;
+
+        /**
+         * Existence of a site with the same name. valid values:.
+<Li>0: no site with the same name exists.</li>.
+<Li>Specifies the name already exists.</li>.
+         * @type {number || null}
+         */
+        this.IsFake = null;
+
+        /**
+         * Ownership verification information. for sites with NS access type, switching the current NS server to the designated NS server of tencent cloud EdgeOne is deemed as passing the ownership verification. for details, refer to [site/domain ownership verification](https://www.tencentcloud.com/document/product/1552/70789?from_cn_redirect=1).
+         * @type {OwnershipVerification || null}
+         */
+        this.OwnershipVerification = null;
+
+        /**
+         * Lists the NS servers currently in use by the selected site detected by EdgeOne.
+         * @type {Array.<string> || null}
+         */
+        this.OriginalNameServers = null;
+
+        /**
+         * Lists the NS servers allocated by tencent cloud EdgeOne. requires pointing the current site's NS servers to this address for the changes to take effect.
+         * @type {Array.<string> || null}
+         */
+        this.NameServers = null;
+
+        /**
+         * Specifies the user-customized NS server domain name information. if enabled, the NS needs to be pointed to this address in the registered vendor of the domains.
+         * @type {VanityNameServers || null}
+         */
+        this.VanityNameServers = null;
+
+        /**
+         * Describes the IP address information of the user-customized NS server.
+         * @type {Array.<VanityNameServersIps> || null}
+         */
+        this.VanityNameServersIps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CnameSpeedUp = 'CnameSpeedUp' in params ? params.CnameSpeedUp : null;
+        this.IsFake = 'IsFake' in params ? params.IsFake : null;
+
+        if (params.OwnershipVerification) {
+            let obj = new OwnershipVerification();
+            obj.deserialize(params.OwnershipVerification)
+            this.OwnershipVerification = obj;
+        }
+        this.OriginalNameServers = 'OriginalNameServers' in params ? params.OriginalNameServers : null;
+        this.NameServers = 'NameServers' in params ? params.NameServers : null;
+
+        if (params.VanityNameServers) {
+            let obj = new VanityNameServers();
+            obj.deserialize(params.VanityNameServers)
+            this.VanityNameServers = obj;
+        }
+
+        if (params.VanityNameServersIps) {
+            this.VanityNameServersIps = new Array();
+            for (let z in params.VanityNameServersIps) {
+                let obj = new VanityNameServersIps();
+                obj.deserialize(params.VanityNameServersIps[z]);
+                this.VanityNameServersIps.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * EnableOriginACL request structure.
  * @class
  */
@@ -35350,58 +35470,18 @@ class IPReputationGroup extends  AbstractModel {
 }
 
 /**
- * NS access type site parameter description.
+ * EdgeKVDelete response structure.
  * @class
  */
-class NSDetail extends  AbstractModel {
+class EdgeKVDeleteResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Specifies whether CNAME acceleration is enabled. valid values:.
-<Li>Enabled: specifies whether the feature is enabled.</li>.
-<li>disabled: specifies that the feature is turned off.</li>.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.CnameSpeedUp = null;
-
-        /**
-         * Existence of a site with the same name. valid values:.
-<Li>0: no site with the same name exists.</li>.
-<Li>Specifies the name already exists.</li>.
-         * @type {number || null}
-         */
-        this.IsFake = null;
-
-        /**
-         * Ownership verification information. for sites with NS access type, switching the current NS server to the designated NS server of tencent cloud EdgeOne is deemed as passing the ownership verification. for details, refer to [site/domain ownership verification](https://www.tencentcloud.com/document/product/1552/70789?from_cn_redirect=1).
-         * @type {OwnershipVerification || null}
-         */
-        this.OwnershipVerification = null;
-
-        /**
-         * Lists the NS servers currently in use by the selected site detected by EdgeOne.
-         * @type {Array.<string> || null}
-         */
-        this.OriginalNameServers = null;
-
-        /**
-         * Lists the NS servers allocated by tencent cloud EdgeOne. requires pointing the current site's NS servers to this address for the changes to take effect.
-         * @type {Array.<string> || null}
-         */
-        this.NameServers = null;
-
-        /**
-         * Specifies the user-customized NS server domain name information. if enabled, the NS needs to be pointed to this address in the registered vendor of the domains.
-         * @type {VanityNameServers || null}
-         */
-        this.VanityNameServers = null;
-
-        /**
-         * Describes the IP address information of the user-customized NS server.
-         * @type {Array.<VanityNameServersIps> || null}
-         */
-        this.VanityNameServersIps = null;
+        this.RequestId = null;
 
     }
 
@@ -35412,31 +35492,7 @@ class NSDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CnameSpeedUp = 'CnameSpeedUp' in params ? params.CnameSpeedUp : null;
-        this.IsFake = 'IsFake' in params ? params.IsFake : null;
-
-        if (params.OwnershipVerification) {
-            let obj = new OwnershipVerification();
-            obj.deserialize(params.OwnershipVerification)
-            this.OwnershipVerification = obj;
-        }
-        this.OriginalNameServers = 'OriginalNameServers' in params ? params.OriginalNameServers : null;
-        this.NameServers = 'NameServers' in params ? params.NameServers : null;
-
-        if (params.VanityNameServers) {
-            let obj = new VanityNameServers();
-            obj.deserialize(params.VanityNameServers)
-            this.VanityNameServers = obj;
-        }
-
-        if (params.VanityNameServersIps) {
-            this.VanityNameServersIps = new Array();
-            for (let z in params.VanityNameServersIps) {
-                let obj = new VanityNameServersIps();
-                obj.deserialize(params.VanityNameServersIps[z]);
-                this.VanityNameServersIps.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -44617,7 +44673,7 @@ module.exports = {
     ModifyPrefetchOriginLimitResponse: ModifyPrefetchOriginLimitResponse,
     ModifyMultiPathGatewayRequest: ModifyMultiPathGatewayRequest,
     LoadBalancer: LoadBalancer,
-    EdgeKVDeleteResponse: EdgeKVDeleteResponse,
+    CustomExpressionField: CustomExpressionField,
     DescribeFunctionReplicasResponse: DescribeFunctionReplicasResponse,
     CreateSecurityAPIServiceResponse: CreateSecurityAPIServiceResponse,
     HostName: HostName,
@@ -45021,6 +45077,7 @@ module.exports = {
     DeleteSecurityJSInjectionRuleRequest: DeleteSecurityJSInjectionRuleRequest,
     BotConfig: BotConfig,
     ModifyFunctionComponentBindingsRequest: ModifyFunctionComponentBindingsRequest,
+    NSDetail: NSDetail,
     EnableOriginACLRequest: EnableOriginACLRequest,
     CreateEdgeKVNamespaceResponse: CreateEdgeKVNamespaceResponse,
     ModifyZoneResponse: ModifyZoneResponse,
@@ -45057,7 +45114,7 @@ module.exports = {
     DescribeAvailablePlansRequest: DescribeAvailablePlansRequest,
     ModifyMultiPathGatewayStatusResponse: ModifyMultiPathGatewayStatusResponse,
     IPReputationGroup: IPReputationGroup,
-    NSDetail: NSDetail,
+    EdgeKVDeleteResponse: EdgeKVDeleteResponse,
     DnsVerification: DnsVerification,
     AlgDetectSession: AlgDetectSession,
     ModifyZoneStatusResponse: ModifyZoneStatusResponse,

@@ -295,6 +295,18 @@ When set to en, the added key is english.
          */
         this.OutputLanguage = null;
 
+        /**
+         * Custom extraction field configuration, specify the custom extracted field name, field type and field prompt.
+         * @type {Array.<ItemNames> || null}
+         */
+        this.NewItemNames = null;
+
+        /**
+         * The algorithm model version used by the multimodal document extraction recognition service. Valid values are '1.0' and '2.0'. Starting from July 20, 2026, the default is '2.0'. Accounts using this interface before that date default to '1.0' when the parameter is omitted. Accounts activated after July 20, 2026 only support '2.0'. Different versions adopt different extraction algorithms; the new version delivers better overall recognition result, and '2.0' is recommended.
+         * @type {string || null}
+         */
+        this.MultiModelVersion = null;
+
     }
 
     /**
@@ -320,6 +332,16 @@ When set to en, the added key is english.
             this.ConfigAdvanced = obj;
         }
         this.OutputLanguage = 'OutputLanguage' in params ? params.OutputLanguage : null;
+
+        if (params.NewItemNames) {
+            this.NewItemNames = new Array();
+            for (let z in params.NewItemNames) {
+                let obj = new ItemNames();
+                obj.deserialize(params.NewItemNames[z]);
+                this.NewItemNames.push(obj);
+            }
+        }
+        this.MultiModelVersion = 'MultiModelVersion' in params ? params.MultiModelVersion : null;
 
     }
 }
@@ -2665,141 +2687,30 @@ class GeneralBasicOCRResponse extends  AbstractModel {
 }
 
 /**
- * RecognizeThaiIDCardOCR response structure.
+ * PermitOCR request structure.
  * @class
  */
-class RecognizeThaiIDCardOCRResponse extends  AbstractModel {
+class PermitOCRRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID card number
+         * The Base64-encoded value of the image. Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported. Supported image size: The downloaded image after Base64 encoding cannot exceed 7 MB. The download time of the image cannot exceed 3 seconds. Either ImageUrl or ImageBase64 of the image must be provided. If both are provided, only ImageUrl is used.
          * @type {string || null}
          */
-        this.ID = null;
+        this.ImageBase64 = null;
 
         /**
-         * Name in Thai
+         * The URL of the image. Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported. Supported image size: The downloaded image after Base64 encoding cannot exceed 7 MB. The download time of the image cannot exceed 3 seconds. We recommend that you store the image in Tencent Cloud for higher download speed and stability. The download speed and stability of images stored outside Tencent Cloud may be compromised.
          * @type {string || null}
          */
-        this.ThaiName = null;
+        this.ImageUrl = null;
 
         /**
-         * First name in English
-         * @type {string || null}
-         */
-        this.EnFirstName = null;
-
-        /**
-         * Last name in English
-         * @type {string || null}
-         */
-        this.EnLastName = null;
-
-        /**
-         * Date of issue in Thai
-         * @type {string || null}
-         */
-        this.IssueDate = null;
-
-        /**
-         * Expiration date in Thai
-         * @type {string || null}
-         */
-        this.ExpirationDate = null;
-
-        /**
-         * Date of issue in English
-         * @type {string || null}
-         */
-        this.EnIssueDate = null;
-
-        /**
-         * Expiration date in English
-         * @type {string || null}
-         */
-        this.EnExpirationDate = null;
-
-        /**
-         * Date of birth in Thai
-         * @type {string || null}
-         */
-        this.Birthday = null;
-
-        /**
-         * Date of birth in English
-         * @type {string || null}
-         */
-        this.EnBirthday = null;
-
-        /**
-         * Religion
-         * @type {string || null}
-         */
-        this.Religion = null;
-
-        /**
-         * Serial number
-         * @type {string || null}
-         */
-        this.SerialNumber = null;
-
-        /**
-         * Address
-         * @type {string || null}
-         */
-        this.Address = null;
-
-        /**
-         * Laser ID on the back of the card.
-         * @type {string || null}
-         */
-        this.LaserID = null;
-
-        /**
-         * Identity photo
-         * @type {string || null}
-         */
-        this.PortraitImage = null;
-
-        /**
-         * Card Warning Information
-
--9101 Alarm for covered certificate
--9102 Alarm for photocopied certificate
--9103 Alarm for photographed certificate
--9104 Alarm for tamper certificate
--9107 Alarm for reflective certificate
--9108 Alarm for blurry certificate 
--9109 This capability is not enabled. Please contact customer support to activate the alert service
-         * @type {Array.<number> || null}
-         */
-        this.WarnCardInfos = null;
-
-        /**
-         * This field is deprecated and will always return "1". Usage is not recommended.
-         * @type {string || null}
-         */
-        this.AdvancedInfo = null;
-
-        /**
-         * The number of cards detected in the input image provided via ImageBase64 parameter.(Currently supported only in ap-bangkok region)
-         * @type {number || null}
-         */
-        this.CardCount = null;
-
-        /**
-         * The card information field complete or not
-true: complete; false: incomplete
+         * Whether to return the ID photo. The default value is false.
          * @type {boolean || null}
          */
-        this.IsComplete = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.CropPortrait = null;
 
     }
 
@@ -2810,26 +2721,9 @@ true: complete; false: incomplete
         if (!params) {
             return;
         }
-        this.ID = 'ID' in params ? params.ID : null;
-        this.ThaiName = 'ThaiName' in params ? params.ThaiName : null;
-        this.EnFirstName = 'EnFirstName' in params ? params.EnFirstName : null;
-        this.EnLastName = 'EnLastName' in params ? params.EnLastName : null;
-        this.IssueDate = 'IssueDate' in params ? params.IssueDate : null;
-        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
-        this.EnIssueDate = 'EnIssueDate' in params ? params.EnIssueDate : null;
-        this.EnExpirationDate = 'EnExpirationDate' in params ? params.EnExpirationDate : null;
-        this.Birthday = 'Birthday' in params ? params.Birthday : null;
-        this.EnBirthday = 'EnBirthday' in params ? params.EnBirthday : null;
-        this.Religion = 'Religion' in params ? params.Religion : null;
-        this.SerialNumber = 'SerialNumber' in params ? params.SerialNumber : null;
-        this.Address = 'Address' in params ? params.Address : null;
-        this.LaserID = 'LaserID' in params ? params.LaserID : null;
-        this.PortraitImage = 'PortraitImage' in params ? params.PortraitImage : null;
-        this.WarnCardInfos = 'WarnCardInfos' in params ? params.WarnCardInfos : null;
-        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
-        this.CardCount = 'CardCount' in params ? params.CardCount : null;
-        this.IsComplete = 'IsComplete' in params ? params.IsComplete : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.CropPortrait = 'CropPortrait' in params ? params.CropPortrait : null;
 
     }
 }
@@ -3288,30 +3182,141 @@ class GroupInfo extends  AbstractModel {
 }
 
 /**
- * PermitOCR request structure.
+ * RecognizeThaiIDCardOCR response structure.
  * @class
  */
-class PermitOCRRequest extends  AbstractModel {
+class RecognizeThaiIDCardOCRResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The Base64-encoded value of the image. Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported. Supported image size: The downloaded image after Base64 encoding cannot exceed 7 MB. The download time of the image cannot exceed 3 seconds. Either ImageUrl or ImageBase64 of the image must be provided. If both are provided, only ImageUrl is used.
+         * ID card number
          * @type {string || null}
          */
-        this.ImageBase64 = null;
+        this.ID = null;
 
         /**
-         * The URL of the image. Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported. Supported image size: The downloaded image after Base64 encoding cannot exceed 7 MB. The download time of the image cannot exceed 3 seconds. We recommend that you store the image in Tencent Cloud for higher download speed and stability. The download speed and stability of images stored outside Tencent Cloud may be compromised.
+         * Name in Thai
          * @type {string || null}
          */
-        this.ImageUrl = null;
+        this.ThaiName = null;
 
         /**
-         * Whether to return the ID photo. The default value is false.
+         * First name in English
+         * @type {string || null}
+         */
+        this.EnFirstName = null;
+
+        /**
+         * Last name in English
+         * @type {string || null}
+         */
+        this.EnLastName = null;
+
+        /**
+         * Date of issue in Thai
+         * @type {string || null}
+         */
+        this.IssueDate = null;
+
+        /**
+         * Expiration date in Thai
+         * @type {string || null}
+         */
+        this.ExpirationDate = null;
+
+        /**
+         * Date of issue in English
+         * @type {string || null}
+         */
+        this.EnIssueDate = null;
+
+        /**
+         * Expiration date in English
+         * @type {string || null}
+         */
+        this.EnExpirationDate = null;
+
+        /**
+         * Date of birth in Thai
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Date of birth in English
+         * @type {string || null}
+         */
+        this.EnBirthday = null;
+
+        /**
+         * Religion
+         * @type {string || null}
+         */
+        this.Religion = null;
+
+        /**
+         * Serial number
+         * @type {string || null}
+         */
+        this.SerialNumber = null;
+
+        /**
+         * Address
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * Laser ID on the back of the card.
+         * @type {string || null}
+         */
+        this.LaserID = null;
+
+        /**
+         * Identity photo
+         * @type {string || null}
+         */
+        this.PortraitImage = null;
+
+        /**
+         * Card Warning Information
+
+-9101 Alarm for covered certificate
+-9102 Alarm for photocopied certificate
+-9103 Alarm for photographed certificate
+-9104 Alarm for tamper certificate
+-9107 Alarm for reflective certificate
+-9108 Alarm for blurry certificate 
+-9109 This capability is not enabled. Please contact customer support to activate the alert service
+         * @type {Array.<number> || null}
+         */
+        this.WarnCardInfos = null;
+
+        /**
+         * This field is deprecated and will always return "1". Usage is not recommended.
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+        /**
+         * The number of cards detected in the input image provided via ImageBase64 parameter.(Currently supported only in ap-bangkok region)
+         * @type {number || null}
+         */
+        this.CardCount = null;
+
+        /**
+         * The card information field complete or not
+true: complete; false: incomplete
          * @type {boolean || null}
          */
-        this.CropPortrait = null;
+        this.IsComplete = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -3322,9 +3327,26 @@ class PermitOCRRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.CropPortrait = 'CropPortrait' in params ? params.CropPortrait : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ThaiName = 'ThaiName' in params ? params.ThaiName : null;
+        this.EnFirstName = 'EnFirstName' in params ? params.EnFirstName : null;
+        this.EnLastName = 'EnLastName' in params ? params.EnLastName : null;
+        this.IssueDate = 'IssueDate' in params ? params.IssueDate : null;
+        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
+        this.EnIssueDate = 'EnIssueDate' in params ? params.EnIssueDate : null;
+        this.EnExpirationDate = 'EnExpirationDate' in params ? params.EnExpirationDate : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.EnBirthday = 'EnBirthday' in params ? params.EnBirthday : null;
+        this.Religion = 'Religion' in params ? params.Religion : null;
+        this.SerialNumber = 'SerialNumber' in params ? params.SerialNumber : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.LaserID = 'LaserID' in params ? params.LaserID : null;
+        this.PortraitImage = 'PortraitImage' in params ? params.PortraitImage : null;
+        this.WarnCardInfos = 'WarnCardInfos' in params ? params.WarnCardInfos : null;
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+        this.CardCount = 'CardCount' in params ? params.CardCount : null;
+        this.IsComplete = 'IsComplete' in params ? params.IsComplete : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5164,6 +5186,62 @@ class RecognizeIndonesiaIDCardOCRResponse extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class ItemNames extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.KeyName = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.KeyType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.KeyPrompt = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.KeyExpectedValue = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.KeyAuditPrompt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyName = 'KeyName' in params ? params.KeyName : null;
+        this.KeyType = 'KeyType' in params ? params.KeyType : null;
+        this.KeyPrompt = 'KeyPrompt' in params ? params.KeyPrompt : null;
+        this.KeyExpectedValue = 'KeyExpectedValue' in params ? params.KeyExpectedValue : null;
+        this.KeyAuditPrompt = 'KeyAuditPrompt' in params ? params.KeyAuditPrompt : null;
+
+    }
+}
+
+/**
  * VinOCR response structure.
  * @class
  */
@@ -6714,7 +6792,7 @@ class VinOCRRequest extends  AbstractModel {
         /**
          * The Base64-encoded value of the image.
 Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
-Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+Supported image size: The downloaded image after Base64 encoding can be up to 10 MB. The download time of the image cannot exceed 3s.
 Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
          * @type {string || null}
          */
@@ -6723,7 +6801,7 @@ Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are pr
         /**
          * The URL of the image.
 Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
-Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+Supported image size: The downloaded image after Base64 encoding can be up to 10 MB. The download time of the image cannot exceed 3s.
 We recommend that you store the image in Tencent Cloud for higher download speed and stability.
 The download speed and stability of non-Tencent Cloud URLs may be low.
          * @type {string || null}
@@ -7626,14 +7704,14 @@ module.exports = {
     HmtResidentPermitOCRRequest: HmtResidentPermitOCRRequest,
     PortraitImageInfo: PortraitImageInfo,
     GeneralBasicOCRResponse: GeneralBasicOCRResponse,
-    RecognizeThaiIDCardOCRResponse: RecognizeThaiIDCardOCRResponse,
+    PermitOCRRequest: PermitOCRRequest,
     RecognizePhilippinesUMIDOCRRequest: RecognizePhilippinesUMIDOCRRequest,
     RecognizePhilippinesSssIDOCRRequest: RecognizePhilippinesSssIDOCRRequest,
     Key: Key,
     BrazilIDCardInfo: BrazilIDCardInfo,
     HKIDCardOCRResponse: HKIDCardOCRResponse,
     GroupInfo: GroupInfo,
-    PermitOCRRequest: PermitOCRRequest,
+    RecognizeThaiIDCardOCRResponse: RecognizeThaiIDCardOCRResponse,
     ExtractDocMultiResponse: ExtractDocMultiResponse,
     RecognizePhilippinesSssIDOCRResponse: RecognizePhilippinesSssIDOCRResponse,
     RecognizePhilippinesUMIDOCRResponse: RecognizePhilippinesUMIDOCRResponse,
@@ -7654,6 +7732,7 @@ module.exports = {
     Coord: Coord,
     RecognizeBrazilRNEOCRResponse: RecognizeBrazilRNEOCRResponse,
     RecognizeIndonesiaIDCardOCRResponse: RecognizeIndonesiaIDCardOCRResponse,
+    ItemNames: ItemNames,
     VinOCRResponse: VinOCRResponse,
     ConfigAdvanced: ConfigAdvanced,
     RecognizePhilippinesVoteIDOCRResponse: RecognizePhilippinesVoteIDOCRResponse,

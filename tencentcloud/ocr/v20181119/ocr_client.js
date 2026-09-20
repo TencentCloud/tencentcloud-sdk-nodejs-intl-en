@@ -50,14 +50,14 @@ const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
 const HmtResidentPermitOCRRequest = models.HmtResidentPermitOCRRequest;
 const PortraitImageInfo = models.PortraitImageInfo;
 const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
-const RecognizeThaiIDCardOCRResponse = models.RecognizeThaiIDCardOCRResponse;
+const PermitOCRRequest = models.PermitOCRRequest;
 const RecognizePhilippinesUMIDOCRRequest = models.RecognizePhilippinesUMIDOCRRequest;
 const RecognizePhilippinesSssIDOCRRequest = models.RecognizePhilippinesSssIDOCRRequest;
 const Key = models.Key;
 const BrazilIDCardInfo = models.BrazilIDCardInfo;
 const HKIDCardOCRResponse = models.HKIDCardOCRResponse;
 const GroupInfo = models.GroupInfo;
-const PermitOCRRequest = models.PermitOCRRequest;
+const RecognizeThaiIDCardOCRResponse = models.RecognizeThaiIDCardOCRResponse;
 const ExtractDocMultiResponse = models.ExtractDocMultiResponse;
 const RecognizePhilippinesSssIDOCRResponse = models.RecognizePhilippinesSssIDOCRResponse;
 const RecognizePhilippinesUMIDOCRResponse = models.RecognizePhilippinesUMIDOCRResponse;
@@ -78,6 +78,7 @@ const GetCardVerificationExternalResultRequest = models.GetCardVerificationExter
 const Coord = models.Coord;
 const RecognizeBrazilRNEOCRResponse = models.RecognizeBrazilRNEOCRResponse;
 const RecognizeIndonesiaIDCardOCRResponse = models.RecognizeIndonesiaIDCardOCRResponse;
+const ItemNames = models.ItemNames;
 const VinOCRResponse = models.VinOCRResponse;
 const ConfigAdvanced = models.ConfigAdvanced;
 const RecognizePhilippinesVoteIDOCRResponse = models.RecognizePhilippinesVoteIDOCRResponse;
@@ -500,7 +501,6 @@ Default API request rate limit: 5 requests/second.
 
     /**
      * This API supports identifying and extracting field information in structured scenarios such as complex scenarios and multiple formats. Key scenarios include: finance, health care, transportation, travel, insurance. Click [experience now](https://ocrdemo.cloud.tencent.com/).
-
 This API is used to set the alias SmartStructuralPro.
 
 The default API request rate limit is 5 requests per second.

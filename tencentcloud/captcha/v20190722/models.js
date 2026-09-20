@@ -1213,67 +1213,67 @@ class DescribeCaptchaResultRequest extends  AbstractModel {
         super();
 
         /**
-         * Fill with fixed value: 9.
+         * <p>Fixed value: 9.</p>
          * @type {number || null}
          */
         this.CaptchaType = null;
 
         /**
-         * The user verification ticket returned by the frontend callback function.
+         * <p>User verification ticket returned by the frontend callback function</p>
          * @type {string || null}
          */
         this.Ticket = null;
 
         /**
-         * The user public IP obtained from the customer backend server.
+         * <p>Public network IP of the verification</p>
          * @type {string || null}
          */
         this.UserIp = null;
 
         /**
-         * A random string returned by the frontend callback function
+         * <p>Random string returned by the frontend callback function</p>
          * @type {string || null}
          */
         this.Randstr = null;
 
         /**
-         * CAPTCHA's app ID. Log in to the [Captcha console](https://console.cloud.tencent.com/captcha/graphical) and you can view the CaptchaAppId in the "Key" column of the CAPTCHA list.
+         * <p>Captcha appId. Log in to the <a href="https://console.cloud.tencent.com/captcha/graphical">verification code console</a>. In the [Key] column of the verification list, you can see CaptchaAppId.</p>
          * @type {number || null}
          */
         this.CaptchaAppId = null;
 
         /**
-         * CAPTCHA's app key. Log in to the [Captcha console](https://console.cloud.tencent.com/captcha/graphical) and you can view the AppSecretKey in the "Key" column of the CAPTCHA list. AppSecretKey is the key for CAPTCHA ticket verification performed by the server. Please keep it confidential and do not disclose it to any third parties.
+         * <p>Captcha application key. Log in to the <a href="https://console.cloud.tencent.com/captcha/graphical">verification code console</a>, and view AppSecretKey in the [Key] column of the verification list. AppSecretKey is a key for server-side verification of verification code tickets. Keep it confidential and do not leak it to third parties.</p>
          * @type {string || null}
          */
         this.AppSecretKey = null;
 
         /**
-         * Reserved field.
+         * <p>Reserved field</p>
          * @type {number || null}
          */
         this.BusinessId = null;
 
         /**
-         * Reserved field.
+         * <p>Reserved field</p>
          * @type {number || null}
          */
         this.SceneId = null;
 
         /**
-         * MAC address or unique identifier of a device
+         * <p>mac address or unique device identifier</p>
          * @type {string || null}
          */
         this.MacAddress = null;
 
         /**
-         * Mobile equipment identity number
+         * <p>Mobile device number</p>
          * @type {string || null}
          */
         this.Imei = null;
 
         /**
-         * Indicates whether to return the time when the frontend obtains the CAPTCHA. Valid values: 1 (return the time) and others.
+         * <p>Whether to return the time when the frontend obtains the verification code. Value: 1: need to return</p>
          * @type {number || null}
          */
         this.NeedGetCaptchaTime = null;
@@ -1311,63 +1311,49 @@ class DescribeCaptchaResultResponse extends  AbstractModel {
         super();
 
         /**
-         * OK indicates verification passed.
-7 captcha no match. the passed in Randstr is invalid. please check if the Randstr is consistent with the Randstr returned by the frontend.
-The passed-in ticket has expired (the valid period of the ticket is 5 minutes). generate the ticket and Randstr again for validation.
-The passed-in ticket is reused. generate the ticket and Randstr again for verification.
-15 decrypt fail. the passed-in Ticket is invalid. please check if the Ticket is consistent with the Ticket returned by the frontend.
-16 appid-ticket mismatch. the passed in CaptchaAppId is incorrect. please check if the CaptchaAppId is consistent with the CaptchaAppId passed in by the frontend, and ensure that the CaptchaAppId is obtained from the verification code console [verification management] -> [basic configuration].
-21 diff invoice verification exception. possible reasons: (1) if the Ticket contains the trerror prefix, generally because the user has a poor network connection, resulting in the frontend's automatic disaster recovery and generation of a disaster recovery Ticket. the business side may skip or post-process as needed. (2) if the Ticket does not include the trerror prefix, it is because the security risk of the request was detected by the CAPTCHA-intl risk control system. the business side may intercept as needed.
-100 appid-secretkey-ticket mismatch. parameter validation error. (1) please check whether the CaptchaAppId and AppSecretKey are correct. the CaptchaAppId and AppSecretKey need to be obtained from verification code console > verification management > basic configuration. (2) please check whether the passed-in ticket is generated by the passed-in CaptchaAppId.
+         * <p>1 OK verification passed<br>7 captcha no match The passed-in Randstr is invalid. Please check whether Randstr is consistent with the frontend Randstr.<br>8 ticket expired The passed-in ticket has expired (ticket valid period is 5 minutes). Please generate a new ticket and Randstr for verification.<br>9 ticket reused The passed-in ticket has been reused. Please generate a new ticket and Randstr for verification.<br>15 decrypt fail The passed-in ticket is invalid. Please check whether ticket is consistent with the frontend ticket.<br>16 appid-ticket mismatch The passed-in CaptchaAppId is incorrect. Please check whether CaptchaAppId is consistent with the frontend CaptchaAppId, and ensure that CaptchaAppId is obtained from [Verification Management] -> [Basic Configuration] in the verification code console.<br>21 diff Bill verification exception. Possible reasons: (1) If the ticket contains the trerror prefix, it is generally because the user has a poor network connection, which causes frontend automatic disaster recovery and generates a disaster recovery ticket. The business side can skip or post-process it based on needs. (2) If the ticket does not contain the trerror prefix, it is because the verification code risk control system has detected a security risk in the request. The business side can block it based on needs.<br>100 appid-secretkey-ticket mismatch Parameter validation error. (1) Please check whether CaptchaAppId and AppSecretKey are correct. CaptchaAppId and AppSecretKey need to be obtained from [Verification Management] > [Basic Configuration] in the verification code console. (2) Please check whether the passed-in ticket is generated by the passed-in CaptchaAppId.</p>
          * @type {number || null}
          */
         this.CaptchaCode = null;
 
         /**
-         * Status description and verification error message.
+         * <p>Description and error message</p>
          * @type {string || null}
          */
         this.CaptchaMsg = null;
 
         /**
-         * In invisible verification mode, this parameter returns the verification result.
-EvilLevel=0 indicates that the request is not malicious.
-The parameter EvilLevel = 100 indicates that the request is malicious.
+         * <p>In non-perception mode, this parameter returns the verification result:<br>EvilLevel=0: The request is not malicious<br>EvilLevel=100: The request is malicious</p>
          * @type {number || null}
          */
         this.EvilLevel = null;
 
         /**
-         * Frontend retrieval time of the captcha-intl, timestamp format.
+         * <p>Frontend verification code retrieval time, Timestamp Format</p>
          * @type {number || null}
          */
         this.GetCaptchaTime = null;
 
         /**
-         * Blocking type
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Interception type</p>
          * @type {number || null}
          */
         this.EvilBitmap = null;
 
         /**
-         * The time when the CAPTCHA is submitted.
+         * <p>Time of submitting the verification code</p>
          * @type {number || null}
          */
         this.SubmitCaptchaTime = null;
 
         /**
-         * Device risk category.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Device risk category</p>
          * @type {string || null}
          */
         this.DeviceRiskCategory = null;
 
         /**
-         * CAPTCHA-Intl score.
-Note:The score ranges from 0 to 100 (e.g., 20, 70, 90).
-A higher score indicates a greater probability that the interaction was initiated by a bot or represents a bot attack.
-A lower score indicates a greater probability that the interaction was performed by a real human user.
+         * <p>Verification code score</p><p>Value range: 0-100. Higher scores indicate higher risk</p>
          * @type {number || null}
          */
         this.Score = null;

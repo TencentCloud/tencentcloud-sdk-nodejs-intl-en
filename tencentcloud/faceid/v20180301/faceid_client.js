@@ -23,14 +23,19 @@ const CheckIdNameDateResponse = models.CheckIdNameDateResponse;
 const IdCardVerificationRequest = models.IdCardVerificationRequest;
 const ImageRecognitionV2Response = models.ImageRecognitionV2Response;
 const GetWebVerificationResultIntlResponse = models.GetWebVerificationResultIntlResponse;
+const UpdateAMLOngoingScreeningStatusResponse = models.UpdateAMLOngoingScreeningStatusResponse;
+const GetAMLScreeningResultResponse = models.GetAMLScreeningResultResponse;
+const Company = models.Company;
 const MobileStatusRequest = models.MobileStatusRequest;
 const OCRResult = models.OCRResult;
+const ListEKYCWebhooksResponse = models.ListEKYCWebhooksResponse;
 const BangladeshIDCard = models.BangladeshIDCard;
 const LivenessCompareResponse = models.LivenessCompareResponse;
-const GenerateReflectSequenceResponse = models.GenerateReflectSequenceResponse;
+const PhilippinesSSSID = models.PhilippinesSSSID;
 const DetectAIFakeFacesRequest = models.DetectAIFakeFacesRequest;
 const IndonesiaIDCard = models.IndonesiaIDCard;
 const SingaporeIDCard = models.SingaporeIDCard;
+const CreateEKYCWebhookResponse = models.CreateEKYCWebhookResponse;
 const MacaoIDCard = models.MacaoIDCard;
 const GeneralCard = models.GeneralCard;
 const PhilippinesUMID = models.PhilippinesUMID;
@@ -48,9 +53,11 @@ const NormalCardInfo = models.NormalCardInfo;
 const ApplySdkVerificationTokenRequest = models.ApplySdkVerificationTokenRequest;
 const CardVerifyResult = models.CardVerifyResult;
 const CheckIdNameDateRequest = models.CheckIdNameDateRequest;
+const WebhookList = models.WebhookList;
 const ApplyLivenessTokenResponse = models.ApplyLivenessTokenResponse;
 const CardInfo = models.CardInfo;
 const PhilippinesVoteID = models.PhilippinesVoteID;
+const DeleteEKYCWebhookResponse = models.DeleteEKYCWebhookResponse;
 const ApplySdkVerificationTokenResponse = models.ApplySdkVerificationTokenResponse;
 const GetFaceIdTokenIntlRequest = models.GetFaceIdTokenIntlRequest;
 const PakistanDrivingLicense = models.PakistanDrivingLicense;
@@ -60,59 +67,71 @@ const NormalIndonesiaIDCard = models.NormalIndonesiaIDCard;
 const HMTPermit = models.HMTPermit;
 const PhilippinesTinID = models.PhilippinesTinID;
 const DetectAIFakeFacesResponse = models.DetectAIFakeFacesResponse;
+const DeleteEKYCWebhookRequest = models.DeleteEKYCWebhookRequest;
 const LivenessCompareRequest = models.LivenessCompareRequest;
 const MLIDCard = models.MLIDCard;
 const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
 const CheckBankCardInformationRequest = models.CheckBankCardInformationRequest;
+const ListEKYCWebhooksRequest = models.ListEKYCWebhooksRequest;
 const BankCardVerificationRequest = models.BankCardVerificationRequest;
 const ThailandIDCard = models.ThailandIDCard;
 const CheckIdCardInformationResponse = models.CheckIdCardInformationResponse;
 const PhoneVerificationResponse = models.PhoneVerificationResponse;
 const IdCardOCRVerificationRequest = models.IdCardOCRVerificationRequest;
+const UpdateEKYCWebhookResponse = models.UpdateEKYCWebhookResponse;
 const BankCard4EVerificationResponse = models.BankCard4EVerificationResponse;
 const GenerateReflectSequenceRequest = models.GenerateReflectSequenceRequest;
 const EditDetail = models.EditDetail;
 const PakistanIDCard = models.PakistanIDCard;
 const Encryption = models.Encryption;
-const GetNFCResultResponse = models.GetNFCResultResponse;
+const MobileNetworkTimeVerificationRequest = models.MobileNetworkTimeVerificationRequest;
+const GetAMLScreeningResultRequest = models.GetAMLScreeningResultRequest;
 const GetLivenessResultRequest = models.GetLivenessResultRequest;
 const CheckIdCardInformationRequest = models.CheckIdCardInformationRequest;
 const IdCardOCRVerificationResponse = models.IdCardOCRVerificationResponse;
 const NigeriaIDCard = models.NigeriaIDCard;
 const CompareFaceLivenessResponse = models.CompareFaceLivenessResponse;
 const BankCardVerificationResponse = models.BankCardVerificationResponse;
-const MobileNetworkTimeVerificationRequest = models.MobileNetworkTimeVerificationRequest;
+const Person = models.Person;
+const UpdateAMLCustomerProfileRequest = models.UpdateAMLCustomerProfileRequest;
+const GetNFCResultResponse = models.GetNFCResultResponse;
 const ApplyWebVerificationBizTokenIntlRequest = models.ApplyWebVerificationBizTokenIntlRequest;
 const FileInfo = models.FileInfo;
 const PhilippinesDrivingLicense = models.PhilippinesDrivingLicense;
-const PhilippinesSSSID = models.PhilippinesSSSID;
+const GenerateReflectSequenceResponse = models.GenerateReflectSequenceResponse;
 const IdCardVerificationResponse = models.IdCardVerificationResponse;
 const WebVerificationConfigIntl = models.WebVerificationConfigIntl;
 const CompareResult = models.CompareResult;
+const RunAMLNameScreeningResponse = models.RunAMLNameScreeningResponse;
 const InternationalIDPassport = models.InternationalIDPassport;
 const MobileNetworkTimeVerificationResponse = models.MobileNetworkTimeVerificationResponse;
 const CreateUploadUrlResponse = models.CreateUploadUrlResponse;
 const JapanIDCard = models.JapanIDCard;
 const NigeriaDrivingLicense = models.NigeriaDrivingLicense;
+const CreateEKYCWebhookRequest = models.CreateEKYCWebhookRequest;
 const HKIDCard = models.HKIDCard;
 const PhoneVerificationRequest = models.PhoneVerificationRequest;
 const IndonesiaDrivingLicense = models.IndonesiaDrivingLicense;
 const VerificationDetail = models.VerificationDetail;
 const DetectReflectLivenessAndCompareResponse = models.DetectReflectLivenessAndCompareResponse;
 const VideoLivenessCompareResponse = models.VideoLivenessCompareResponse;
+const UpdateAMLCustomerProfileResponse = models.UpdateAMLCustomerProfileResponse;
 const BankCard2EVerificationRequest = models.BankCard2EVerificationRequest;
 const Address = models.Address;
 const RetrievalLivenessExtraInfo = models.RetrievalLivenessExtraInfo;
 const ImageRecognitionV2Request = models.ImageRecognitionV2Request;
 const MainlandIDCard = models.MainlandIDCard;
 const NormalMLIDCard = models.NormalMLIDCard;
+const UpdateEKYCWebhookRequest = models.UpdateEKYCWebhookRequest;
 const BankCard4EVerificationRequest = models.BankCard4EVerificationRequest;
 const CreateUploadUrlRequest = models.CreateUploadUrlRequest;
 const GetNFCTokenResponse = models.GetNFCTokenResponse;
 const NormalHKIDCard = models.NormalHKIDCard;
 const GetSdkVerificationResultRequest = models.GetSdkVerificationResultRequest;
+const RunAMLNameScreeningRequest = models.RunAMLNameScreeningRequest;
 const ApplyLivenessTokenRequest = models.ApplyLivenessTokenRequest;
 const GetNFCTokenRequest = models.GetNFCTokenRequest;
+const UpdateAMLOngoingScreeningStatusRequest = models.UpdateAMLOngoingScreeningStatusRequest;
 const TaiWanIDCard = models.TaiWanIDCard;
 const GetWebVerificationResultIntlRequest = models.GetWebVerificationResultIntlRequest;
 
@@ -161,6 +180,17 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
+     * AML name list screening
+     * @param {RunAMLNameScreeningRequest} req
+     * @param {function(string, RunAMLNameScreeningResponse):void} cb
+     * @public
+     */
+    RunAMLNameScreening(req, cb) {
+        let resp = new RunAMLNameScreeningResponse();
+        this.request("RunAMLNameScreening", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain a BizToken before each call to the Web verification service. Save the BizToken to initiate the verification process and retrieve the result upon completion. The BizToken is valid for 10 minutes.
      * @param {ApplyWebVerificationBizTokenIntlRequest} req
      * @param {function(string, ApplyWebVerificationBizTokenIntlResponse):void} cb
@@ -183,12 +213,12 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * This API verifies NFC data. Pass in the NFCToken returned by the SDK, the document fields to be verified, and the portrait photo. The service automatically compares the information to verify with the decrypted document NFC data and outputs the verification result. The NFCToken generated by the SDK is valid for 1 hour. The service is billed per query. 
-The service currently supports NFC recognition and verification of the following fields and portrait photos on Chinese mainland second-generation resident identity cards, exit-entry permits for travelling to and from Hong Kong, China and Macao, China, and Chinese resident passports: 
+     * This API verifies NFC data. Pass in the NFCToken returned by the SDK, along with the document fields and portrait photo to be verified.The service automatically compares the information to verify with the decrypted document NFC data and outputs the verification result. The NFCToken generated by the SDK is valid for 10 minutes. The service is billed per query. 
+The service currently supports NFC recognition and verification of the following fields and portrait photos on Chinese mainland second-generation resident identity cards, exit-entry permits for traveling to and from Hong Kong and Macao, and international passports with an NFC chip: 
 
 -Chinese mainland second-generation resident identity card: identity card number, name, sex, ethnicity, date of birth, address, issuing authority, validity start time, validity end time, portrait photo 
--Exit-Entry Permit for Travelling to and from Hong Kong, China and Macao, China: ID number, name, sex, English name, issuing place, issuing authority, validity end time, date of birth, portrait photo, machine-readable code 
--Chinese resident passport: passport number, Chinese name, English name, nationality, sex, country or region code, validity start time, validity end time, date of birth, birth place, issuing place, issuing authority, portrait photo, machine-readable code
+-Exit-Entry Permit for Traveling to and from Hong Kong and Macao: ID number, name, sex, English name, issuing place, issuing authority, validity end time, date of birth, portrait photo, machine-readable code 
+-International passports with an NFC chip: passport number, name, nationality, sex, country or region code, validity start time, validity end time, date of birth, birth place, issuing place, issuing authority, portrait photo, machine-readable code
      * @param {GetNFCResultRequest} req
      * @param {function(string, GetNFCResultResponse):void} cb
      * @public
@@ -334,6 +364,17 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     }
 
     /**
+     * Changes the status of continuous name list screening.
+     * @param {UpdateAMLOngoingScreeningStatusRequest} req
+     * @param {function(string, UpdateAMLOngoingScreeningStatusResponse):void} cb
+     * @public
+     */
+    UpdateAMLOngoingScreeningStatus(req, cb) {
+        let resp = new UpdateAMLOngoingScreeningStatusResponse();
+        this.request("UpdateAMLOngoingScreeningStatus", req, resp, cb);
+    }
+
+    /**
      * Based on the multimodal AI large model algorithm, it provides anti-attack detection capabilities for facial images and videos. It can effectively identify highly simulated AIGC face-changing, high-definition remakes, batch black market attacks, watermarks and other attack traces, and enhance the anti-counterfeiting security capabilities of images and videos.
      * @param {DetectAIFakeFacesRequest} req
      * @param {function(string, DetectAIFakeFacesResponse):void} cb
@@ -356,7 +397,11 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     }
 
     /**
-     * NFC verification service, obtain Token information for the NFC identify request.This API supports NFC recognition and verification of ID cards (second-generation resident identity card, Residence Permit for Hong Kong (China) and Macao (China), Residence Permit for Taiwan (China), Permanent Residence Permit for Foreigners) as well as travel documents (exit-entry permit for travelling to and from Hong Kong (China) and Macao (China), Taiwan travel permit, Mainland Travel Permit for Taiwan Residents, Return Home Permit).
+     * NFC verification service: obtain Token information (valid for 10 minutes) for the NFC identify request. This API supports NFC recognition and verification of the following documents:
+
+-Chinese mainland second-generation resident identity card
+-Exit-Entry Permit for Traveling to and from Hong Kong and Macao
+-International passports with an NFC chip
      * @param {GetNFCTokenRequest} req
      * @param {function(string, GetNFCTokenResponse):void} cb
      * @public
@@ -364,6 +409,17 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     GetNFCToken(req, cb) {
         let resp = new GetNFCTokenResponse();
         this.request("GetNFCToken", req, resp, cb);
+    }
+
+    /**
+     * This API updates the Webhook configuration.
+     * @param {UpdateEKYCWebhookRequest} req
+     * @param {function(string, UpdateEKYCWebhookResponse):void} cb
+     * @public
+     */
+    UpdateEKYCWebhook(req, cb) {
+        let resp = new UpdateEKYCWebhookResponse();
+        this.request("UpdateEKYCWebhook", req, resp, cb);
     }
 
     /**
@@ -379,6 +435,28 @@ The image and the data generated with the SDK must be stored in COS, and the reg
     }
 
     /**
+     * AML name list screening
+     * @param {UpdateAMLCustomerProfileRequest} req
+     * @param {function(string, UpdateAMLCustomerProfileResponse):void} cb
+     * @public
+     */
+    UpdateAMLCustomerProfile(req, cb) {
+        let resp = new UpdateAMLCustomerProfileResponse();
+        this.request("UpdateAMLCustomerProfile", req, resp, cb);
+    }
+
+    /**
+     * Queries the AML name list screening result.
+     * @param {GetAMLScreeningResultRequest} req
+     * @param {function(string, GetAMLScreeningResultResponse):void} cb
+     * @public
+     */
+    GetAMLScreeningResult(req, cb) {
+        let resp = new GetAMLScreeningResultResponse();
+        this.request("GetAMLScreeningResult", req, resp, cb);
+    }
+
+    /**
      * This API is used to validate the authenticity and consistency of the name and identity card number.
      * @param {IdCardVerificationRequest} req
      * @param {function(string, IdCardVerificationResponse):void} cb
@@ -390,7 +468,7 @@ The image and the data generated with the SDK must be stored in COS, and the reg
     }
 
     /**
-     * This API is used to get the verification result with the corresponding BizToken after the web-based verification is completed. The token is valid for three days (259,200s) after issuance and can be called multiple times.
+     * After completing the Web verification process, call this API with the verification token (BizToken) to query the verification result info. The BizToken is valid within three days (259,200 seconds) after application and can be called multiple times.
      * @param {GetWebVerificationResultIntlRequest} req
      * @param {function(string, GetWebVerificationResultIntlResponse):void} cb
      * @public
@@ -398,6 +476,17 @@ The image and the data generated with the SDK must be stored in COS, and the reg
     GetWebVerificationResultIntl(req, cb) {
         let resp = new GetWebVerificationResultIntlResponse();
         this.request("GetWebVerificationResultIntl", req, resp, cb);
+    }
+
+    /**
+     * This API queries the list of Webhook configurations.
+     * @param {ListEKYCWebhooksRequest} req
+     * @param {function(string, ListEKYCWebhooksResponse):void} cb
+     * @public
+     */
+    ListEKYCWebhooks(req, cb) {
+        let resp = new ListEKYCWebhooksResponse();
+        this.request("ListEKYCWebhooks", req, resp, cb);
     }
 
     /**
@@ -409,6 +498,17 @@ The image and the data generated with the SDK must be stored in COS, and the reg
     CheckIdNameDate(req, cb) {
         let resp = new CheckIdNameDateResponse();
         this.request("CheckIdNameDate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an EKYC Webhook configuration.
+     * @param {CreateEKYCWebhookRequest} req
+     * @param {function(string, CreateEKYCWebhookResponse):void} cb
+     * @public
+     */
+    CreateEKYCWebhook(req, cb) {
+        let resp = new CreateEKYCWebhookResponse();
+        this.request("CreateEKYCWebhook", req, resp, cb);
     }
 
     /**
@@ -442,6 +542,17 @@ The image and the data generated with the SDK must be stored in COS, and the reg
     BankCard2EVerification(req, cb) {
         let resp = new BankCard2EVerificationResponse();
         this.request("BankCard2EVerification", req, resp, cb);
+    }
+
+    /**
+     * This API deletes the Webhook configuration.
+     * @param {DeleteEKYCWebhookRequest} req
+     * @param {function(string, DeleteEKYCWebhookResponse):void} cb
+     * @public
+     */
+    DeleteEKYCWebhook(req, cb) {
+        let resp = new DeleteEKYCWebhookResponse();
+        this.request("DeleteEKYCWebhook", req, resp, cb);
     }
 
     /**

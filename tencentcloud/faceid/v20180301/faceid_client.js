@@ -364,7 +364,7 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     }
 
     /**
-     * Changes the status of continuous name list screening.
+     * Continuous name list screening status change
      * @param {UpdateAMLOngoingScreeningStatusRequest} req
      * @param {function(string, UpdateAMLOngoingScreeningStatusResponse):void} cb
      * @public

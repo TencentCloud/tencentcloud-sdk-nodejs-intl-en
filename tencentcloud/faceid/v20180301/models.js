@@ -413,13 +413,13 @@ class UpdateAMLOngoingScreeningStatusResponse extends  AbstractModel {
         this.UniqueCustomerID = null;
 
         /**
-         * Whether continuous monitoring screening is enabled
+         * <p>Whether continuous monitoring screening is enabled</p>
          * @type {boolean || null}
          */
         this.EnableOngoingScreening = null;
 
         /**
-         * <p>Description of results returned</p>
+         * <p>Return result description</p>
          * @type {string || null}
          */
         this.Description = null;
@@ -971,7 +971,7 @@ class DetectAIFakeFacesRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Import the face image or facial video to be detected (currently only single face detection is supported) in base64 encoding. If your scenario involves both video and image, we recommend using video for detection. For better detection results, please note the following input data limits and suggestions:</p><ul><li><p>base64 value of the image:<br>Recommend an overall image resolution of 480x640, with the face size no less than 100x100, captured by the mobile front camera.<br>The size of the base64-encoded image data should not exceed 3M, with a maximum of 10M. Only jpg and png formats are supported.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li><li><p>base64 value of the video:<br>The size after base64 encoding should be within 8M, with a maximum of 10M. Supported formats include mp4, avi, and flv, captured by the mobile front camera.<br>Video duration is recommended to be 2–5s, with a maximum of 20s.<br>Video resolution is recommended at 480x640 (maximum support for 720p), with a frame rate between 25fps and 30fps.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li></ul><p>If you do not use Encryption for secure transmission, this field is a required parameter.</p>
+         * <p>Import the face image or facial video to be detected (currently only single face detection is supported) in base64 encoding. If your scenario involves both video and image, we recommend using video for detection. For better detection results, please note the following input data limits and suggestions:</p><ul><li><p>base64 value of the image:<br>Recommend an overall image resolution of 480x640, with the face size no less than 100x100, captured by the mobile front camera.<br>The size of the base64-encoded image data is recommended not to exceed 3M, with a maximum of 10M. Only jpg and png formats are supported.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li><li><p>base64 value of the video:<br>The size after base64 encoding is recommended to be within 8M, with a maximum of 10M. Supported formats include mp4, avi,flv,and mov, captured by the mobile front camera.<br>Video duration is recommended to be 2-5s, with a maximum of 20s.<br>Video resolution is recommended at 480x640 (maximum support for 720p), with a frame rate between 25fps and 30fps.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li></ul><p>If you do not use Encryption for secure transmission, this field is a required parameter.</p>
          * @type {string || null}
          */
         this.FaceInput = null;
@@ -8720,14 +8720,13 @@ class UpdateAMLOngoingScreeningStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * End user's unique identifier in the customer system, up to 256 characters.
+         * <p>Unique identifier of the end user in the customer system, up to 256 characters.</p>
          * @type {string || null}
          */
         this.UniqueCustomerID = null;
 
         /**
-         * Whether continuous monitoring screening is enabled. 
-Default value: false.
+         * <p>Whether to enable continuous monitoring and screening. Default value: false</p><p>Default value: false</p>
          * @type {boolean || null}
          */
         this.EnableOngoingScreening = null;

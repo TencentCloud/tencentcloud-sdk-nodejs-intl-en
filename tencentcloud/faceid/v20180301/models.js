@@ -1310,13 +1310,13 @@ class CreateEKYCWebhookResponse extends  AbstractModel {
         this.WebhookId = null;
 
         /**
-         * Whether to add a secret key. Default value: false.
+         * <p>Whether to add a callback signature key</p><p>Default value: false</p>
          * @type {boolean || null}
          */
         this.HasSignatureKey = null;
 
         /**
-         * <p>Callback secret key</p>
+         * <p>Callback signature key</p>
          * @type {string || null}
          */
         this.SignatureKey = null;
@@ -3102,7 +3102,7 @@ class WebhookList extends  AbstractModel {
         this.WebhookId = null;
 
         /**
-         * <p>Callback URL name</p>
+         * <p>Callback address name</p>
          * @type {string || null}
          */
         this.WebhookName = null;
@@ -3132,13 +3132,13 @@ class WebhookList extends  AbstractModel {
         this.ModTime = null;
 
         /**
-         * <p>Callback request key</p>
+         * <p>Callback signature key, up to 128 characters.</p>
          * @type {string || null}
          */
         this.SignatureKey = null;
 
         /**
-         * <p>Existence of callback API key</p>
+         * <p>Existence of callback signature key</p>
          * @type {boolean || null}
          */
         this.HasSignatureKey = null;
@@ -5101,13 +5101,13 @@ class UpdateEKYCWebhookResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>ID of the updated Webhook configuration</p>
+         * <p>ID of the Webhook configuration to be updated</p>
          * @type {number || null}
          */
         this.WebhookId = null;
 
         /**
-         * <p>Modification time after update, format YYYY-MM-DD HH:mm:ss</p>
+         * <p>Modification time after the update, in the format YYYY-MM-DD HH:mm:ss</p>
          * @type {string || null}
          */
         this.ModTime = null;
@@ -7346,6 +7346,18 @@ class CreateEKYCWebhookRequest extends  AbstractModel {
          */
         this.WebhookURL = null;
 
+        /**
+         * <p>Business scenario. Default if not passed: AML_SCREENING_RESULT_CHANGE. For parameter values, see the enumeration below.</p><p>Enumeration values:</p><ul><li>AML_SCREENING_RESULT_CHANGE: AML anti-money laundering screening result change notification (default value)    </li><li>NONDOC_VERIFICATION_RESULT: Non-document (NonDoc) verification result notification</li></ul>
+         * @type {string || null}
+         */
+        this.Scene = null;
+
+        /**
+         * <p>Callback signature key, up to 128 characters. Used for HMAC-SHA256 signature verification of subsequent callback messages. If not passed, signature is not enabled. We recommend using OpenSSL random bytes to generate the key. Recommended command: openssl rand -base64 32</p><blockquote><p>Our side uses your configured <code>SignatureKey</code> to calculate an HMAC-SHA256 signature over "timestamp (<code>X-Webhook-Timestamp</code>) + <code>.</code> + request body", and puts the hexadecimal result in the request header <code>X-Webhook-Signature</code>. The message itself is unencrypted and transmitted over HTTPS. Use the same key to recalculate and compare the signature by the same rule to confirm that the notification source is trustworthy and the content has not been tampered with.</p></blockquote>
+         * @type {string || null}
+         */
+        this.SignatureKey = null;
+
     }
 
     /**
@@ -7357,6 +7369,8 @@ class CreateEKYCWebhookRequest extends  AbstractModel {
         }
         this.WebhookName = 'WebhookName' in params ? params.WebhookName : null;
         this.WebhookURL = 'WebhookURL' in params ? params.WebhookURL : null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.SignatureKey = 'SignatureKey' in params ? params.SignatureKey : null;
 
     }
 }
@@ -8307,10 +8321,16 @@ class UpdateEKYCWebhookRequest extends  AbstractModel {
         this.WebhookName = null;
 
         /**
-         * New callback URL, which must use the HTTPS protocol.
+         * <p>New callback URL, must be HTTPS protocol</p>
          * @type {string || null}
          */
         this.WebhookURL = null;
+
+        /**
+         * <p>Callback signature key, up to 128 characters. Used for HMAC-SHA256 signature verification of subsequent callback messages. If not provided, signature is not enabled. We recommend using OpenSSL random bytes to generate the key. Recommended command: openssl rand -base64 32    </p><blockquote><p>Our side uses your configured <code>SignatureKey</code> to calculate the HMAC-SHA256 signature over "timestamp (<code>X-Webhook-Timestamp</code>) + <code>.</code> + request body", and puts the hexadecimal result in the request header <code>X-Webhook-Signature</code>. The message itself is unencrypted and transmitted over HTTPS. Use the same key to recalculate and compare the signature following the same rule to confirm that the notification source is trustworthy and the content has not been tampered with.</p></blockquote>
+         * @type {string || null}
+         */
+        this.SignatureKey = null;
 
     }
 
@@ -8324,6 +8344,7 @@ class UpdateEKYCWebhookRequest extends  AbstractModel {
         this.WebhookId = 'WebhookId' in params ? params.WebhookId : null;
         this.WebhookName = 'WebhookName' in params ? params.WebhookName : null;
         this.WebhookURL = 'WebhookURL' in params ? params.WebhookURL : null;
+        this.SignatureKey = 'SignatureKey' in params ? params.SignatureKey : null;
 
     }
 }

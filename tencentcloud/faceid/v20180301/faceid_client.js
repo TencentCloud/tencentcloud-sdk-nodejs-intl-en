@@ -412,7 +412,7 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     }
 
     /**
-     * This API updates the Webhook configuration.
+     * This API is used to update Webhook configurations.
      * @param {UpdateEKYCWebhookRequest} req
      * @param {function(string, UpdateEKYCWebhookResponse):void} cb
      * @public

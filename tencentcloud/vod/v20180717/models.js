@@ -13966,19 +13966,19 @@ class ModifyVodDomainAccelerateConfigRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * <p>Region. Available values:</p><li>Chinese Mainland: within the Chinese mainland (excluding Hong Kong (China), Macao (China), and Taiwan (China)).</li><li>Outside Chinese Mainland: outside the Chinese mainland.</li><li>Global: global.</li>
+         * <p>Region. Available values:</p><li>Chinese Mainland: within the Chinese mainland (excluding Hong Kong (China), Macao (China), and Taiwan (China)).</li><li>Outside Chinese Mainland: outside the Chinese mainland.</li><li>Global: around the world.</li>
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * <p>Enable or disable domain name acceleration for the selected region. Available values:</p><li>Enabled: Enable.</li><li>Disabled: Disable.</li>To enable acceleration for domains within the Chinese mainland, you must first [register the domain name](https://www.tencentcloud.com/document/product/243/18905?from_cn_redirect=1).
+         * <p>Enable or disable domain name acceleration for the selected region. Available values:</p><li>Enabled: Enable.</li><li>Disabled: Disable.</li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services from December 25, 2023, if they access resources in VOD applications (whether the default application or a newly created application), they must fill in this field with the application ID.</b></p>
+         * <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be filled in as the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -16713,7 +16713,7 @@ class CreateVodDomainRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * <b>ID of the on-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1). For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b>
+         * <b>VOD [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD from December 25, 2023, this field must be filled in with the app ID when accessing resources in VOD applications (whether the default application or a newly created application).</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -16723,13 +16723,13 @@ class CreateVodDomainRequest extends  AbstractModel {
 <li>Chinese Mainland: within the Chinese mainland (excluding Hong Kong (China), Macao (China), and Taiwan (China)).</li>
 <li>Outside Chinese Mainland: outside the Chinese mainland.</li>
 <li>Global: around the world.</li>
-If AccelerateArea is not set, VOD will automatically activate CDN acceleration within or outside the Chinese mainland based on the user's regional information in Tencent Cloud Settings. To enable CDN acceleration within the Chinese mainland, the domain must be [ICP filed](https://www.tencentcloud.com/document/product/243/18905?from_cn_redirect=1) first.
+If AccelerateArea is not set, VOD will automatically activate CDN acceleration within or outside the Chinese mainland based on the regional information configured by the user in Tencent Cloud Settings. 
          * @type {string || null}
          */
         this.AccelerateArea = null;
 
         /**
-         * Domain type. Valid values: <li>VOD: domain name used to distribute VOD products</li> <li>EdgeOne: domain name used to distribute EdgeOne products</li> If not specified, the default value is VOD.
+         * Domain type. Valid values: <li>VOD: domain name for distribution using the VOD product.</li> <li>EdgeOne: domain name for distribution using the EdgeOne product.</li> If not specified, the default value is VOD.
          * @type {string || null}
          */
         this.Type = null;
@@ -18443,7 +18443,7 @@ class DescribeProcessImageAsyncTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * Output media file configuration for the AIGC image generation task.
+ * Output media file configuration for an AIGC image generation task.
  * @class
  */
 class AigcImageOutputConfig extends  AbstractModel {
@@ -18451,25 +18451,25 @@ class AigcImageOutputConfig extends  AbstractModel {
         super();
 
         /**
-         * <p>Storage mode</p><p>Enumeration values:</p><ul><li>Temporary: temporary storage. The generated video file will not be stored in VOD. You can obtain a temporary access URL in the event notification, valid for 7 days.</li><li>Permanent: permanent storage. The generated video file will be stored in VOD. You can obtain the FileId in the event notification.</li></ul><p>Default value: Temporary</p>
+         * <p>Storage mode</p><p>Enumeration values:</p><ul><li>Temporary: temporary storage. The generated video file will not be stored in VOD. A temporary access URL can be obtained in the event notification, with a valid period of 7 days.</li><li>Permanent: retained permanently. The generated video file will be stored in VOD. The FileId can be obtained in the event notification.</li></ul><p>Default value: Temporary</p>
          * @type {string || null}
          */
         this.StorageMode = null;
 
         /**
-         * <p>Output filename, up to 64 characters. By default, the system generates the filename.</p>
+         * <p>Output filename, up to 64 characters. By default, the system assigns the generated filename.</p>
          * @type {string || null}
          */
         this.MediaName = null;
 
         /**
-         * <p>Category ID, used to categorize and manage media. You can create a category through the <a href="https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1">Create Category</a> API to obtain the category ID.</p><li>Default value: 0, indicating other categories.</li>
+         * <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID through the <a href="https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1">Create Category</a> API.</p><li>Default value: 0, indicating other categories.</li>
          * @type {number || null}
          */
         this.ClassId = null;
 
         /**
-         * <p>Expiry date of the output file. The file will be deleted after this time. It never expires by default. Format according to the ISO 8601 standard. For details, see <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
+         * <p>Expiry date of the output file. The file will be deleted after this time. It never expires by default. The format follows the ISO 8601 standard. For details, see <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -18481,25 +18481,25 @@ class AigcImageOutputConfig extends  AbstractModel {
         this.Resolution = null;
 
         /**
-         * <p>Specify the aspect ratio of the generated image.</p><ul><li>OG: 1:1, 3:2, 2:3, 3:4, 4:3, 16:9, 9:16, 21:9, 9:21;</li><li>GG 2.5: 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9;</li><li>GG 3.0: 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9;</li><li>GG 3.1: 1:1, 1:4, 1:8, 2:3, 3:2, 3:4, 4:1, 4:3, 4:5, 5:4, 8:1, 9:16, 16:9, 21:9;</li><li>Kling 2.1: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9;</li><li>Kling 3.0: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9;</li><li>Kling 3.0-Omni: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto;</li><li>Kling O1: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto;</li><li>Vidu q2: 16:9, 9:16, 1:1, 3:4, 4:3, 21:9, 2:3, 3:2;</li><li>SI 4.0: <strong>does not support</strong> this parameter. You can specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9 via prompt;</li><li>SI 4.5: <strong>does not support</strong> this parameter. You can specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9 via prompt;</li><li>SI 5.0-lite: <strong>does not support</strong> this parameter. You can specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9 via prompt;</li><li>Hunyuan 3.0: not supported;</li><li>Qwen 2.0: not supported;</li><li>Qwen 0925: not supported;</li></ul>
+         * <p>Specify the aspect ratio of the generated image.</p><ul><li>OG: 1:1, 3:2, 2:3, 3:4, 4:3, 16:9, 9:16, 21:9, 9:21;</li><li>GG 2.5: 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9;</li><li>GG 3.0: 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9;</li><li>GG 3.1: 1:1, 1:4, 1:8, 2:3, 3:2, 3:4, 4:1, 4:3, 4:5, 5:4, 8:1, 9:16, 16:9, 21:9;</li><li>Kling 2.1: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9;</li><li>Kling 3.0: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9;</li><li>Kling 3.0-Omni: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto;</li><li>Kling O1: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto;</li><li>Vidu q2: 16:9, 9:16, 1:1, 3:4, 4:3, 21:9, 2:3, 3:2;</li><li>SI 4.0: <strong>does not support</strong> this parameter. You can specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9 via prompt;</li><li>SI 4.5: <strong>does not support</strong> this parameter. You can specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9 via prompt;</li><li>SI 5.0-lite: <strong>does not support</strong> this parameter. You can specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9 via prompt;</li><li>Hunyuan 3.0: unsupported;</li><li>Qwen 2.0: unsupported;</li><li>Qwen 0925: unsupported;</li></ul>
          * @type {string || null}
          */
         this.AspectRatio = null;
 
         /**
-         * <p>Whether to allow generation of people or human faces. Valid values: <li>AllowAdult: Allow generation of adults;</li> <li>Disallowed: Forbid people or human faces in images;</li></p>
+         * <p>Whether to allow generation of people or human faces. Valid values: <li>AllowAdult: allow generation of adults;</li> <li>Disallowed: forbid people or human faces in images;</li></p>
          * @type {string || null}
          */
         this.PersonGeneration = null;
 
         /**
-         * <p>Whether compliance check is enabled for the input content. Valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li></p>
+         * <p>Whether to enable compliance check on the input content. Valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li></p>
          * @type {string || null}
          */
         this.InputComplianceCheck = null;
 
         /**
-         * <p>Whether compliance check is enabled for output content. Valid values: <li>Enabled: enabled;</li> <li>Disabled: disabled;</li></p>
+         * <p>Whether to enable compliance check on output content. Valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li></p>
          * @type {string || null}
          */
         this.OutputComplianceCheck = null;
@@ -19537,19 +19537,19 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services on or after December 25, 2023, when accessing resources in VOD applications (whether the default application or a newly created application), this field must be filled in with the application ID.</b></p>
+         * <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services from December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
          * @type {number || null}
          */
         this.SubAppId = null;
 
         /**
-         * <p>Whether solidified. 0: non-permanent, 1: solidified. Default: non-permanent.</p>
+         * <p>Whether solidified. 0: non-permanent, 1: solidified. Default non-permanent.</p>
          * @type {number || null}
          */
         this.IsPersistence = null;
 
         /**
-         * <p>Video storage expiry time after editing solidification. Format reference: <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>. Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding results, sprites, etc.) will be permanently deleted. Valid only when IsPersistence is 1. By default, videos solidified by editing never expire.</p>
+         * <p>Video storage expiry time after editing solidification. Format reference: <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>. Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding results, sprites, etc.) will be permanently deleted. Valid only when IsPersistence is 1. By default, videos solidified through editing never expire.</p>
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -19561,7 +19561,7 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.Procedure = null;
 
         /**
-         * <p>Category ID, used to categorize and manage media. You can call the <a href="https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1">create category</a> API to create a category and obtain the category ID.</p><li>Default value: 0, indicating other categories.</li>Valid only when IsPersistence is 1.
+         * <p>Category ID, used to categorize and manage media. You can create a category via the <a href="https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1">Create Category</a> API to obtain the category ID.</p><li>Default value: 0, indicating other categories.</li>Valid only when IsPersistence is 1.
          * @type {number || null}
          */
         this.ClassId = null;
@@ -19585,7 +19585,7 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.MetaDataRequired = null;
 
         /**
-         * <p>The domain name added in VOD for time shift playback must already be <a href="https://www.tencentcloud.com/document/product/266/52220?from_cn_redirect=1#.E6.AD.A5.E9.AA.A43.EF.BC.9A.E5.85.B3.E8.81.94.E5.BD.95.E5.88.B6.E6.A8.A1.E6.9D.BF.3Ca-id.3D.22step3.22.3E.3C.2Fa.3E">associated with a recording template and enabled for time-shift service</a> in Cloud Streaming Services. <strong>If the first call of this interface is after 2021-01-01T00:00:00Z, this field is required.</strong></p>
+         * <p>The domain name added in VOD for time shift playback must be <a href="https://www.tencentcloud.com/document/product/266/52220?from_cn_redirect=1#.E6.AD.A5.E9.AA.A43.EF.BC.9A.E5.85.B3.E8.81.94.E5.BD.95.E5.88.B6.E6.A8.A1.E6.9D.BF.3Ca-id.3D.22step3.22.3E.3C.2Fa.3E">bound to a recording template and enabled for time-shift service</a> in cloud streaming. <strong>If the first call of this interface is after 2021-01-01T00:00:00Z, this field is required.</strong></p>
          * @type {string || null}
          */
         this.Host = null;
@@ -31950,7 +31950,7 @@ class LiveRealTimeClipMediaSegmentInfo extends  AbstractModel {
         super();
 
         /**
-         * Segment start time. For the format, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+         * Segment start time. See [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I) for the format.
          * @type {string || null}
          */
         this.StartTime = null;
@@ -34600,19 +34600,19 @@ class MediaVideoStreamItem extends  AbstractModel {
         this.Bitrate = null;
 
         /**
-         * Height of the video stream. Unit: px.
+         * Height of the video stream in px.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Video stream width. Unit: px.
+         * Video stream width in px.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Video stream encoding format, for example h264.
+         * Video stream encoding format, for example, h264.
          * @type {string || null}
          */
         this.Codec = null;
@@ -34624,13 +34624,13 @@ class MediaVideoStreamItem extends  AbstractModel {
         this.Fps = null;
 
         /**
-         * Encoding tag, valid only when Codec is hevc.
+         * Encoding tag. Valid only when Codec is hevc.
          * @type {string || null}
          */
         this.CodecTag = null;
 
         /**
-         * Dynamic range information of the frame.
+         * Visual dynamic range information.
 <li><font color=red>Note</font>: This field is valid for transcoded files processed after 2023-01-10T00:00:00Z.</li>
          * @type {DynamicRangeInfo || null}
          */
@@ -41430,7 +41430,7 @@ class ApplyUploadRequest extends  AbstractModel {
         this.MediaType = null;
 
         /**
-         * <p><b>Video-on-Demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services on or after December 25, 2023, this field must be set to the application ID when accessing resources in VOD applications, whether the default application or a newly created application.</b></p>
+         * <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services after December 25, 2023, this field must be filled in with the app ID when accessing resources in VOD applications (whether the default application or a newly created application).</b></p>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -41448,7 +41448,7 @@ class ApplyUploadRequest extends  AbstractModel {
         this.CoverType = null;
 
         /**
-         * <p>Subsequent media task processing operations, i.e., automatic task initiation after media upload is completed. The parameter value is the task flow template name. VOD supports <a href="https://www.tencentcloud.com/document/product/266/33819?from_cn_redirect=1">creating a task flow template</a> and naming the template.</p>
+         * <p>Subsequent media task processing operations, which can automatically initiate task flow operations after media upload is completed. The parameter value is the task flow template name. VOD supports <a href="https://www.tencentcloud.com/document/product/266/33819?from_cn_redirect=1">creating a task flow template</a> and naming the template.</p>
          * @type {string || null}
          */
         this.Procedure = null;
@@ -41460,13 +41460,13 @@ class ApplyUploadRequest extends  AbstractModel {
         this.ExpireTime = null;
 
         /**
-         * <p>Specify the upload park. This is applicable only to the user with special requirements for the upload target region.</p>
+         * <p>Designated upload park, applicable only to users with special requirements for the upload target region.</p>
          * @type {string || null}
          */
         this.StorageRegion = null;
 
         /**
-         * <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID through the <a href="https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1">Create Category</a> API.</p><li>Default value: 0, indicating other categories.</li>
+         * <p>Category ID, used to categorize and manage media. You can create a category through the <a href="https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1">Create Category</a> API to obtain the category ID.</p><li>Default value: 0, indicating other categories.</li>
          * @type {number || null}
          */
         this.ClassId = null;
@@ -44785,7 +44785,7 @@ class PoliticalImgReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * AIGC image generation task input file information.
+ * AIGC image generation task input file information
  * @class
  */
 class AigcImageTaskInputFileInfo extends  AbstractModel {
@@ -44793,13 +44793,13 @@ class AigcImageTaskInputFileInfo extends  AbstractModel {
         super();
 
         /**
-         * <p>Input file type. Valid values: <li>File: on-demand media file;</li> <li>Url: accessible URL;</li> <li>Base64: Base64 string of an image or transcoded video;</li></p>
+         * <p>Input file type. Valid values: <li>File: on-demand media file;</li> <li>Url: accessible URL;</li> <li>Base64: Base64 string of an image or video for transcoding;</li></p>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * <p>Media file ID of the image file, which is the globally unique identifier of the file in VOD, assigned by the VOD backend after successful upload. You can obtain this field in the <a href="https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when Type is File.<br>Description:</p><ol><li>Images less than 7M are recommended.</li><li>Image format values: jpeg, jpg, png, webp.</li></ol>
+         * <p>Media file ID of the image file, which is the globally unique identifier of the file on VOD, assigned by the VOD backend after successful upload. You can obtain this field in the <a href="https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when Type is File.<br>Description:</p><ol><li>Images less than 7M are recommended.</li><li>Image format values: jpeg, jpg, png, webp.</li></ol>
          * @type {string || null}
          */
         this.FileId = null;
@@ -44811,7 +44811,7 @@ class AigcImageTaskInputFileInfo extends  AbstractModel {
         this.Url = null;
 
         /**
-         * <p>Accessible file Base64. This parameter is valid when Type is Base64. Details:</p><ol><li>The total size of all files must not exceed 7 MB to avoid exceeding the 10 MB upper limit of message size for cloud APIs after conversion to Base64;</li><li>Image formats should be: jpeg, jpg, png, webp;</li><li>Do not include prefixes such as data:image/jpeg;base64,.</li></ol>
+         * <p>Accessible file Base64. This parameter is valid when Type is Base64. Details:</p><ol><li>The total size of all files must not exceed 7 MB to avoid exceeding the 10 MB upper limit of message size for cloud APIs after conversion to Base64;</li><li>Image format should be: jpeg, jpg, png, webp;</li><li>Do not include prefixes such as data:image/jpeg;base64,.</li></ol>
          * @type {string || null}
          */
         this.Base64 = null;
@@ -48812,7 +48812,7 @@ class ExtractTraceWatermarkResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Task ID.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -50745,7 +50745,7 @@ class CreateMPSTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Live streaming Instant Editing stream information
+ * Live streaming Instant Editing stream info
  * @class
  */
 class LiveRealTimeClipStreamInfo extends  AbstractModel {
@@ -50940,37 +50940,37 @@ class MediaMetaData extends  AbstractModel {
         this.Size = null;
 
         /**
-         * Container type, for example, m4a and mp4.
+         * Container type, such as m4a, mp4.
          * @type {string || null}
          */
         this.Container = null;
 
         /**
-         * Sum of the mean video stream bitrate and mean audio stream bitrate, in bps.
+         * Sum of the average video stream bitrate and average audio stream bitrate, in bps.
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
-         * Maximum height of the video stream. Unit: px.
+         * Maximum value of the video stream height in px.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Maximum video stream width in px.
+         * Maximum value of the video stream width in px.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Video duration, in seconds.
+         * Video duration, unit: seconds.
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
-         * Selection angle during video shooting. Measurement unit: degree.
+         * Selection angle during video shooting. Unit: degree.
          * @type {number || null}
          */
         this.Rotate = null;
@@ -50988,13 +50988,13 @@ class MediaMetaData extends  AbstractModel {
         this.AudioStreamSet = null;
 
         /**
-         * Video duration, in seconds.
+         * Video duration, unit: seconds.
          * @type {number || null}
          */
         this.VideoDuration = null;
 
         /**
-         * Audio duration in seconds.
+         * Audio duration, in seconds.
          * @type {number || null}
          */
         this.AudioDuration = null;
@@ -55823,43 +55823,44 @@ class ExtractTraceWatermarkRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * URL of the media requiring watermark extraction.
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 
+         * Media file ID. Original media file ID corresponding to the Url.
+<li><font color=red>Note</font>: This field is required.</li>
          * @type {string || null}
          */
         this.FileId = null;
 
         /**
-         * 
+         * <b>ID of the on-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1). For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b>
          * @type {number || null}
          */
         this.SubAppId = null;
 
         /**
-         * 
+         * Source context identifier, used to pass through user request information. This field will be returned in the ExtractTraceWatermarkComplete callback and task flow status change callback. It can contain up to 1000 characters.
          * @type {string || null}
          */
         this.SessionContext = null;
 
         /**
-         * 
+         * Identification Code for Task Deduplication. If there has been a request with the same identification code within the past 3 days, an error will be returned for the current request. The maximum length is 50 characters. Leaving it blank or using an empty string indicates no deduplication.
          * @type {string || null}
          */
         this.SessionId = null;
 
         /**
-         * 
+         * Task Priority. The higher the value, the higher the priority. The value range is from -10 to 10. If left blank, the default value is 0.
          * @type {number || null}
          */
         this.TasksPriority = null;
 
         /**
-         * 
+         * Reserved field, used for special purposes.
          * @type {string || null}
          */
         this.ExtInfo = null;
@@ -57326,13 +57327,13 @@ class MediaAudioStreamItem extends  AbstractModel {
         super();
 
         /**
-         * <p>Bitrate of the audio stream. Unit: bps.</p>
+         * <p>Audio stream bitrate, in bps.</p>
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
-         * <p>Sampling rate of the audio stream. Unit: hz.</p>
+         * <p>Sampling rate of the audio stream, unit: hz.</p>
          * @type {number || null}
          */
         this.SamplingRate = null;
@@ -59419,13 +59420,13 @@ class CreateAigcImageTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * <p><b>On-demand <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications, whether in the default application or a newly created application.</b></p>
+         * <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services from December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
          * @type {number || null}
          */
         this.SubAppId = null;
 
         /**
-         * <p>Model name. Parameter values:</p><li>OG</li><li>GG</li><li>Hunyuan</li><li>Vidu</li><li>Kling</li>
+         * <p>Model name. Parameter Value:</p><li>OG</li><li>GG</li><li>Hunyuan</li><li>Vidu</li><li>Kling</li>
          * @type {string || null}
          */
         this.ModelName = null;
@@ -59461,7 +59462,7 @@ class CreateAigcImageTaskRequest extends  AbstractModel {
         this.EnhancePrompt = null;
 
         /**
-         * <p>Configuration of the output media file of the image generation task.</p>
+         * <p>Output media file configuration for an image generation task.</p>
          * @type {AigcImageOutputConfig || null}
          */
         this.OutputConfig = null;
@@ -59491,7 +59492,7 @@ class CreateAigcImageTaskRequest extends  AbstractModel {
         this.SessionId = null;
 
         /**
-         * <p>Source context. This is used to pass user request information. The audio and video quality revival complete callback returns the value of this field. The maximum length is 1000 characters.</p>
+         * <p>Source context. This is used to pass user request information. The audio and video quality revival completion callback returns the value of this field. The maximum length is 1000 characters.</p>
          * @type {string || null}
          */
         this.SessionContext = null;
@@ -59503,7 +59504,7 @@ class CreateAigcImageTaskRequest extends  AbstractModel {
         this.TasksPriority = null;
 
         /**
-         * <p>Reserved field for special usage.</p><ul><li><p>Hunyuan 3.0</p><ul><li>Supports free resolution width and height settings. Both width and height are within the pixel range of [512, 2048], and the product of width and height must be ≤ 1024x1024 pixels. Example: <code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}</code></li></ul></li><li><p>OG</p><ul><li>Supports free resolution width and height settings:<ul><li>The calculated pixel size must be divisible by 16.</li><li>The total pixel count must be at least 655,360 and should not exceed 8,294,400.</li><li>Example: <code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}</code></li></ul></li><li>Supports setting a transparent layer:<ul><li>Example: <code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;background\&quot;:\&quot;transparent\&quot;}&quot;}</code></li></ul></li></ul></li><li><p>Kling</p><ul><li>Supports setting image expansion parameters. Example: <code>{&quot;AdditionalParameters&quot;:&quot;{\&quot;down_expansion_ratio\&quot;:0.2,\&quot;left_expansion_ratio\&quot;:0.3,\&quot;right_expansion_ratio\&quot;:0.4,\&quot;up_expansion_ratio\&quot;:0.1}}</code><ul><li>Common constraints:<ul><li>Value range: [0, 2];</li><li>The overall area of the new image should not exceed 3 times that of the original image;</li><li>Forward prompt content can be imported through the <code>Prompt</code> field.</li><li>Example description:<ul><li>up_expansion_ratio: The upward expansion range, calculated as a multiple of the original image height. If the original image height is 20 and the parameter value is 0.1, the distance from the top edge of the original image to the top edge of the new image is 20 × 0.1 = 2. This region is the expansion range.</li><li>down_expansion_ratio: The downward expansion range, calculated as a multiple of the original image height. If the original image height is 20 and the parameter value is 0.2, the distance from the bottom edge of the original image to the bottom edge of the new image is 20 × 0.2 = 4. This region is the expansion range.</li><li>left_expansion_ratio: The leftward expansion range, calculated as a multiple of the original image width. If the original image width is 30 and the parameter value is 0.3, the distance from the left edge of the original image to the left edge of the new image is 30 × 0.3 = 9. This region is the expansion range.</li><li>right_expansion_ratio: The rightward expansion range, calculated as a multiple of the original image width. If the original image width is 30 and the parameter value is 0.4, the distance from the right edge of the original image to the right edge of the new image is 30 × 0.4 = 12. This region is the expansion range.</li></ul></li></ul></li></ul></li></ul></li></ul>
+         * <p>Reserved field for special usage.</p><ul><li><p>Hunyuan 3.0</p><ul><li>Support setting resolution width and height freely. Both width and height are in the range of [512, 2048] pixels, and the product of width and height <= 1024x1024 pixels. Example: <code>{"AdditionalParameters": "{\"size\":\"728x1024\"}"}</code></li></ul></li><li><p>OG</p><ul><li>Support setting resolution width and height freely:<ul><li>Calculate the pixel size, which must be divisible by 16</li><li>The total pixels must be at least 655,360 and should not exceed 8,294,400</li><li>Example: <code>{"AdditionalParameters": "{\"size\":\"728x1024\"}"}</code></li></ul></li><li>Support setting a transparent layer:<ul><li>Example: <code>{"AdditionalParameters": "{\"background\":\"transparent\"}"}</code></li></ul></li></ul></li><li><p>Kling</p><ul><li>Support setting expansion parameters. Example: <code>{"AdditionalParameters":"{\"down_expansion_ratio\":0.2,\"left_expansion_ratio\":0.3,\"right_expansion_ratio\":0.4,\"up_expansion_ratio\":0.1}}</code><ul><li>Common constraints:<ul><li>Value range: [0, 2];</li><li>The overall area of the new image should not exceed 3 times that of the original image;</li><li>Forward Prompt content can be input through the <code>Prompt</code> field.</li><li>Example description:<ul><li>up_expansion_ratio: expand upward, calculated based on a multiple of the original image height. If the original image height is 20 and the parameter value is 0.1, the distance from the top edge of the original image to the top edge of the new image is 20 x 0.1 = 2. This region is the expansion range.</li><li>down_expansion_ratio: expand downward, calculated based on a multiple of the original image height. If the original image height is 20 and the parameter value is 0.2, the distance from the bottom edge of the original image to the bottom edge of the new image is 20 x 0.2 = 4. This region is the expansion range.</li><li>left_expansion_ratio: expand to the left, calculated based on a multiple of the original image width. If the original image width is 30 and the parameter value is 0.3, the distance from the left edge of the original image to the left edge of the new image is 30 x 0.3 = 9. This region is the expansion range.</li><li>right_expansion_ratio: expand to the right, calculated based on a multiple of the original image width. If the original image width is 30 and the parameter value is 0.4, the distance from the right edge of the original image to the right edge of the new image is 30 x 0.4 = 12. This region is the expansion range.</li></ul></li></ul></li></ul></li></ul></li></ul>
          * @type {string || null}
          */
         this.ExtInfo = null;
@@ -59666,7 +59667,7 @@ class ApplyUploadResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Bucket, used as the bucket_name for uploading API URL.</p>
+         * <p>Bucket, the bucket_name for uploading API URL.</p>
          * @type {string || null}
          */
         this.StorageBucket = null;
@@ -59678,13 +59679,13 @@ class ApplyUploadResponse extends  AbstractModel {
         this.StorageRegion = null;
 
         /**
-         * <p>VOD session, used for confirmation of the upload API parameter VodSessionKey.</p>
+         * <p>VOD session, used for the VodSessionKey parameter of the confirm upload API.</p>
          * @type {string || null}
          */
         this.VodSessionKey = null;
 
         /**
-         * <p>Media storage path, the object Key for uploading and storing media through the API.</p>
+         * <p>Media storage path, the object Key for uploading and storing media via the API.</p>
          * @type {string || null}
          */
         this.MediaStoragePath = null;
@@ -63642,15 +63643,15 @@ class DynamicRangeInfo extends  AbstractModel {
         super();
 
         /**
-         * Dynamic range info of the frame. Valid values:
-<li>SDR: Standard Dynamic Range</li>
+         * Frame dynamic range information. Valid values:
+<li>SDR: Standard Dynamic Range;</li>
 <li>HDR: High Dynamic Range.</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * High dynamic range type. Valid when Type is HDR. Currently supported valid values:
+         * High dynamic range type. Valid when Type is HDR. Currently supports the following valid values:
 <li>hdr10: refers to the hdr10 standard;</li>
 <li>hlg: refers to the hlg standard.</li>
          * @type {string || null}

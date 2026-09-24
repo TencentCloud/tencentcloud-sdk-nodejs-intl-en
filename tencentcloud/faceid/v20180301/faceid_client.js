@@ -180,7 +180,7 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * AML name list screening
+     * AML list screening
      * @param {RunAMLNameScreeningRequest} req
      * @param {function(string, RunAMLNameScreeningResponse):void} cb
      * @public
@@ -435,7 +435,7 @@ The image and the data generated with the SDK must be stored in COS, and the reg
     }
 
     /**
-     * AML name list screening
+     * AML list screening
      * @param {UpdateAMLCustomerProfileRequest} req
      * @param {function(string, UpdateAMLCustomerProfileResponse):void} cb
      * @public
@@ -446,7 +446,7 @@ The image and the data generated with the SDK must be stored in COS, and the reg
     }
 
     /**
-     * Queries the AML name list screening result.
+     * Status change of continuous name list screening
      * @param {GetAMLScreeningResultRequest} req
      * @param {function(string, GetAMLScreeningResultResponse):void} cb
      * @public

@@ -2,6 +2,7 @@ module.exports = {
     advisor: require("./advisor"),
     ai3d: require("./ai3d"),
     aiart: require("./aiart"),
+    alb: require("./alb"),
     ams: require("./ams"),
     antiddos: require("./antiddos"),
     apigateway: require("./apigateway"),

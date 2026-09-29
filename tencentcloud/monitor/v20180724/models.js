@@ -993,48 +993,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * SendCustomAlarmMsg request structure.
- * @class
- */
-class SendCustomAlarmMsgRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * API component name. The value for the current API is monitor.
-         * @type {string || null}
-         */
-        this.Module = null;
-
-        /**
-         * Message policy ID, which is configured on the custom message page.
-         * @type {string || null}
-         */
-        this.PolicyId = null;
-
-        /**
-         * Custom message content that a user wants to send.
-         * @type {string || null}
-         */
-        this.Msg = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Module = 'Module' in params ? params.Module : null;
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.Msg = 'Msg' in params ? params.Msg : null;
-
-    }
-}
-
-/**
  * UnBindingPolicyObject request structure.
  * @class
  */
@@ -6243,34 +6201,6 @@ class UnBindingAllPolicyObjectRequest extends  AbstractModel {
 }
 
 /**
- * SendCustomAlarmMsg response structure.
- * @class
- */
-class SendCustomAlarmMsgResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Metric trigger condition of alarm policy
  * @class
  */
@@ -7083,50 +7013,6 @@ class DescribeAlarmEventsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeServiceDiscovery response structure.
- * @class
- */
-class DescribeServiceDiscoveryResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of returned scrape configurations
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ServiceDiscoveryItem> || null}
-         */
-        this.ServiceDiscoverySet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.ServiceDiscoverySet) {
-            this.ServiceDiscoverySet = new Array();
-            for (let z in params.ServiceDiscoverySet) {
-                let obj = new ServiceDiscoveryItem();
-                obj.deserialize(params.ServiceDiscoverySet[z]);
-                this.ServiceDiscoverySet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ExportPrometheusReadOnlyDynamicAPI request structure.
  * @class
  */
@@ -7362,46 +7248,6 @@ class BindingPolicyObjectRequest extends  AbstractModel {
         }
         this.EbSubject = 'EbSubject' in params ? params.EbSubject : null;
         this.EbEventFlag = 'EbEventFlag' in params ? params.EbEventFlag : null;
-
-    }
-}
-
-/**
- * CreateServiceDiscovery response structure.
- * @class
- */
-class CreateServiceDiscoveryResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The scrape configuration information returned after successful creation
-         * @type {ServiceDiscoveryItem || null}
-         */
-        this.ServiceDiscovery = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.ServiceDiscovery) {
-            let obj = new ServiceDiscoveryItem();
-            obj.deserialize(params.ServiceDiscovery)
-            this.ServiceDiscovery = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7938,77 +7784,6 @@ class PrometheusZoneItem extends  AbstractModel {
         this.ZoneState = 'ZoneState' in params ? params.ZoneState : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
-
-    }
-}
-
-/**
- * Prometheus Alert custom notification template.
- * @class
- */
-class PrometheusAlertCustomReceiver extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Notification customization type.
-Alertmanager - self-built alertmanager in vpc.
-webhook - webhook address in the vpc.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * alertmanager/webhook url (ip in the same vpc as the prometheus instance).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Specifies the time range for allowing Alert sending.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<PrometheusAlertAllowTimeRange> || null}
-         */
-        this.AllowedTimeRanges = null;
-
-        /**
-         * alertmanager intranet cluster ID.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * alertmanager resides in the private network cluster type (tke/eks/tdcc).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ClusterType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Url = 'Url' in params ? params.Url : null;
-
-        if (params.AllowedTimeRanges) {
-            this.AllowedTimeRanges = new Array();
-            for (let z in params.AllowedTimeRanges) {
-                let obj = new PrometheusAlertAllowTimeRange();
-                obj.deserialize(params.AllowedTimeRanges[z]);
-                this.AllowedTimeRanges.push(obj);
-            }
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
 
     }
 }
@@ -8786,18 +8561,24 @@ class DescribeMonitorTypesRequest extends  AbstractModel {
 }
 
 /**
- * Dimension information
+ * ExportPrometheusReadOnlyDynamicAPI response structure.
  * @class
  */
-class DimensionsDesc extends  AbstractModel {
+class ExportPrometheusReadOnlyDynamicAPIResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Array of dimension names
-         * @type {Array.<string> || null}
+         * <p>HTTP response data</p>
+         * @type {PrometheusDynamicAPIResponseHTTP || null}
          */
-        this.Dimensions = null;
+        this.HTTP = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -8808,7 +8589,13 @@ class DimensionsDesc extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
+
+        if (params.HTTP) {
+            let obj = new PrometheusDynamicAPIResponseHTTP();
+            obj.deserialize(params.HTTP)
+            this.HTTP = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8851,79 +8638,6 @@ class DeletePrometheusAlertPolicyRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.AlertIds = 'AlertIds' in params ? params.AlertIds : null;
         this.Names = 'Names' in params ? params.Names : null;
-
-    }
-}
-
-/**
- * Prometheus scrape configuration information
- * @class
- */
-class ServiceDiscoveryItem extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Scrape configuration name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Namespace of the scrape configuration
-         * @type {string || null}
-         */
-        this.Namespace = null;
-
-        /**
-         * Scrape configuration type: ServiceMonitor/PodMonitor
-         * @type {string || null}
-         */
-        this.Kind = null;
-
-        /**
-         * Namespace selection method
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NamespaceSelector = null;
-
-        /**
-         * Label selection method
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Selector = null;
-
-        /**
-         * `Endpoints` information (PodMonitor does not have this parameter)
-         * @type {string || null}
-         */
-        this.Endpoints = null;
-
-        /**
-         * Scrape configuration information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Yaml = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.Kind = 'Kind' in params ? params.Kind : null;
-        this.NamespaceSelector = 'NamespaceSelector' in params ? params.NamespaceSelector : null;
-        this.Selector = 'Selector' in params ? params.Selector : null;
-        this.Endpoints = 'Endpoints' in params ? params.Endpoints : null;
-        this.Yaml = 'Yaml' in params ? params.Yaml : null;
 
     }
 }
@@ -10538,65 +10252,6 @@ class DescribeAlarmMetricsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribePrometheusRecordRuleYaml request structure.
- * @class
- */
-class DescribePrometheusRecordRuleYamlRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Page offset
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of results per page
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Filter. Valid values:
-`Name`: Name
-`Values`: List of target names
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
 
     }
 }
@@ -13564,46 +13219,6 @@ class MetricDataPoint extends  AbstractModel {
 }
 
 /**
- * ExportPrometheusReadOnlyDynamicAPI response structure.
- * @class
- */
-class ExportPrometheusReadOnlyDynamicAPIResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * <p>HTTP response data</p>
-         * @type {PrometheusDynamicAPIResponseHTTP || null}
-         */
-        this.HTTP = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.HTTP) {
-            let obj = new PrometheusDynamicAPIResponseHTTP();
-            obj.deserialize(params.HTTP)
-            this.HTTP = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * GetMonitorData request structure.
  * @class
  */
@@ -14163,46 +13778,18 @@ You can filter by `RawJob`, `Job`, `ServiceMonitor`, `PodMonitor`, or `Health`.
 }
 
 /**
- * CreateServiceDiscovery request structure.
+ * UnbindPrometheusManagedGrafana response structure.
  * @class
  */
-class CreateServiceDiscoveryRequest extends  AbstractModel {
+class UnbindPrometheusManagedGrafanaResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Prometheus instance ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * <li>TKE: ID of the integrated TKE cluster</li>
-         * @type {string || null}
-         */
-        this.KubeClusterId = null;
-
-        /**
-         * Kubernetes cluster type:
-<li> 1 = TKE </li>
-         * @type {number || null}
-         */
-        this.KubeType = null;
-
-        /**
-         * Scrape configuration type. Valid values:
-<li> 1 = ServiceMonitor</li>
-<li> 2 = PodMonitor</li>
-<li> 3 = JobMonitor</li>
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * Scrape configuration information
-         * @type {string || null}
-         */
-        this.Yaml = null;
+        this.RequestId = null;
 
     }
 
@@ -14213,11 +13800,7 @@ class CreateServiceDiscoveryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.KubeClusterId = 'KubeClusterId' in params ? params.KubeClusterId : null;
-        this.KubeType = 'KubeType' in params ? params.KubeType : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Yaml = 'Yaml' in params ? params.Yaml : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15123,18 +14706,48 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DescribePrometheusRecordRuleYaml response structure.
+ * Instance authorization information
  * @class
  */
-class DescribePrometheusRecordRuleYamlResponse extends  AbstractModel {
+class PrometheusInstanceGrantInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Whether there is permission to operate on the billing information. Valid values: 1 (yes), 2 (no).
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.HasChargeOperation = null;
+
+        /**
+         * Whether there is permission to display the VPC information. Valid values: 1 (yes), 2 (no).
+         * @type {number || null}
+         */
+        this.HasVpcDisplay = null;
+
+        /**
+         * Whether there is permission to change the Grafana status. Valid values: 1 (yes), 2 (no).
+         * @type {number || null}
+         */
+        this.HasGrafanaStatusChange = null;
+
+        /**
+         * Whether there is permission to manage agents. Valid values: 1 (yes), 2 (no).
+         * @type {number || null}
+         */
+        this.HasAgentManage = null;
+
+        /**
+         * Whether there is permission to manage TKE integrations. Valid values: 1 (yes), 2 (no).
+         * @type {number || null}
+         */
+        this.HasTkeManage = null;
+
+        /**
+         * Whether there is permission to display the API information. Valid values: 1 (yes), 2 (no).
+         * @type {number || null}
+         */
+        this.HasApiOperation = null;
 
     }
 
@@ -15145,7 +14758,12 @@ class DescribePrometheusRecordRuleYamlResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.HasChargeOperation = 'HasChargeOperation' in params ? params.HasChargeOperation : null;
+        this.HasVpcDisplay = 'HasVpcDisplay' in params ? params.HasVpcDisplay : null;
+        this.HasGrafanaStatusChange = 'HasGrafanaStatusChange' in params ? params.HasGrafanaStatusChange : null;
+        this.HasAgentManage = 'HasAgentManage' in params ? params.HasAgentManage : null;
+        this.HasTkeManage = 'HasTkeManage' in params ? params.HasTkeManage : null;
+        this.HasApiOperation = 'HasApiOperation' in params ? params.HasApiOperation : null;
 
     }
 }
@@ -15805,10 +15423,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * UnbindPrometheusManagedGrafana response structure.
+ * CleanGrafanaInstance response structure.
  * @class
  */
-class UnbindPrometheusManagedGrafanaResponse extends  AbstractModel {
+class CleanGrafanaInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -16413,69 +16031,6 @@ class DescribeAlarmHistoriesRequest extends  AbstractModel {
         this.ReceiverUids = 'ReceiverUids' in params ? params.ReceiverUids : null;
         this.ReceiverGroups = 'ReceiverGroups' in params ? params.ReceiverGroups : null;
         this.PolicyIds = 'PolicyIds' in params ? params.PolicyIds : null;
-
-    }
-}
-
-/**
- * Instance authorization information
- * @class
- */
-class PrometheusInstanceGrantInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether there is permission to operate on the billing information. Valid values: 1 (yes), 2 (no).
-         * @type {number || null}
-         */
-        this.HasChargeOperation = null;
-
-        /**
-         * Whether there is permission to display the VPC information. Valid values: 1 (yes), 2 (no).
-         * @type {number || null}
-         */
-        this.HasVpcDisplay = null;
-
-        /**
-         * Whether there is permission to change the Grafana status. Valid values: 1 (yes), 2 (no).
-         * @type {number || null}
-         */
-        this.HasGrafanaStatusChange = null;
-
-        /**
-         * Whether there is permission to manage agents. Valid values: 1 (yes), 2 (no).
-         * @type {number || null}
-         */
-        this.HasAgentManage = null;
-
-        /**
-         * Whether there is permission to manage TKE integrations. Valid values: 1 (yes), 2 (no).
-         * @type {number || null}
-         */
-        this.HasTkeManage = null;
-
-        /**
-         * Whether there is permission to display the API information. Valid values: 1 (yes), 2 (no).
-         * @type {number || null}
-         */
-        this.HasApiOperation = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.HasChargeOperation = 'HasChargeOperation' in params ? params.HasChargeOperation : null;
-        this.HasVpcDisplay = 'HasVpcDisplay' in params ? params.HasVpcDisplay : null;
-        this.HasGrafanaStatusChange = 'HasGrafanaStatusChange' in params ? params.HasGrafanaStatusChange : null;
-        this.HasAgentManage = 'HasAgentManage' in params ? params.HasAgentManage : null;
-        this.HasTkeManage = 'HasTkeManage' in params ? params.HasTkeManage : null;
-        this.HasApiOperation = 'HasApiOperation' in params ? params.HasApiOperation : null;
 
     }
 }
@@ -19043,12 +18598,49 @@ class UpdateExporterIntegrationRequest extends  AbstractModel {
 }
 
 /**
- * CheckIsPrometheusNewUser request structure.
+ * Prometheus Alert custom notification template.
  * @class
  */
-class CheckIsPrometheusNewUserRequest extends  AbstractModel {
+class PrometheusAlertCustomReceiver extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Notification customization type.
+Alertmanager - self-built alertmanager in vpc.
+webhook - webhook address in the vpc.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * alertmanager/webhook url (ip in the same vpc as the prometheus instance).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Specifies the time range for allowing Alert sending.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PrometheusAlertAllowTimeRange> || null}
+         */
+        this.AllowedTimeRanges = null;
+
+        /**
+         * alertmanager intranet cluster ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * alertmanager resides in the private network cluster type (tke/eks/tdcc).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterType = null;
 
     }
 
@@ -19059,6 +18651,19 @@ class CheckIsPrometheusNewUserRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+        if (params.AllowedTimeRanges) {
+            this.AllowedTimeRanges = new Array();
+            for (let z in params.AllowedTimeRanges) {
+                let obj = new PrometheusAlertAllowTimeRange();
+                obj.deserialize(params.AllowedTimeRanges[z]);
+                this.AllowedTimeRanges.push(obj);
+            }
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
 
     }
 }
@@ -19646,25 +19251,25 @@ class ModifyPrometheusInstanceAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * <p>Instance ID</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Instance name
+         * <p>Instance name.</p>
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Storage period. Valid values: 15, 30, 45. This parameter is not applicable to yearly/monthly subscribed instances.
+         * <p>Data retention period (in days). The limit value is one of 15, 30, 45, 90, 180, 365, 730</p>
          * @type {number || null}
          */
         this.DataRetentionTime = null;
 
         /**
-         * 
+         * <p>Flag for special attributes of a prom instance</p><p>Archive storage duration (days):<br>key: LongTermStorageRetentionTime<br>value: 60-730</p>
          * @type {Array.<PrometheusRuleKV> || null}
          */
         this.InstanceAttributes = null;
@@ -20236,34 +19841,6 @@ class DescribeGrafanaInstancesResponse extends  AbstractModel {
                 obj.deserialize(params.Instances[z]);
                 this.Instances.push(obj);
             }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CheckIsPrometheusNewUser response structure.
- * @class
- */
-class CheckIsPrometheusNewUserResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -21090,49 +20667,6 @@ class Operator extends  AbstractModel {
 }
 
 /**
- * DescribeServiceDiscovery request structure.
- * @class
- */
-class DescribeServiceDiscoveryRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Prometheus instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * <li>TKE: ID of the integrated TKE cluster</li>
-         * @type {string || null}
-         */
-        this.KubeClusterId = null;
-
-        /**
-         * Kubernetes cluster type:
-<li> 1 = TKE </li>
-         * @type {number || null}
-         */
-        this.KubeType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.KubeClusterId = 'KubeClusterId' in params ? params.KubeClusterId : null;
-        this.KubeType = 'KubeType' in params ? params.KubeType : null;
-
-    }
-}
-
-/**
  * Task step information
  * @class
  */
@@ -21659,13 +21193,13 @@ class PrometheusRuleKV extends  AbstractModel {
         super();
 
         /**
-         * Key
+         * <p>Key</p>
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Value
+         * <p>Value.</p>
          * @type {string || null}
          */
         this.Value = null;
@@ -24117,18 +23651,18 @@ class ModifyPrometheusGlobalNotificationResponse extends  AbstractModel {
 }
 
 /**
- * CleanGrafanaInstance response structure.
+ * Dimension information
  * @class
  */
-class CleanGrafanaInstanceResponse extends  AbstractModel {
+class DimensionsDesc extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Array of dimension names
+         * @type {Array.<string> || null}
          */
-        this.RequestId = null;
+        this.Dimensions = null;
 
     }
 
@@ -24139,7 +23673,7 @@ class CleanGrafanaInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
 
     }
 }
@@ -25174,7 +24708,6 @@ module.exports = {
     CreatePrometheusMultiTenantInstancePostPayModeRequest: CreatePrometheusMultiTenantInstancePostPayModeRequest,
     DescribePolicyConditionListResponseDeprecatingInfo: DescribePolicyConditionListResponseDeprecatingInfo,
     PrometheusTempModify: PrometheusTempModify,
-    SendCustomAlarmMsgRequest: SendCustomAlarmMsgRequest,
     UnBindingPolicyObjectRequest: UnBindingPolicyObjectRequest,
     CommonNamespaceNew: CommonNamespaceNew,
     Tag: Tag,
@@ -25264,7 +24797,6 @@ module.exports = {
     UpdateGrafanaNotificationChannelResponse: UpdateGrafanaNotificationChannelResponse,
     CreatePrometheusTempResponse: CreatePrometheusTempResponse,
     UnBindingAllPolicyObjectRequest: UnBindingAllPolicyObjectRequest,
-    SendCustomAlarmMsgResponse: SendCustomAlarmMsgResponse,
     AlarmPolicyCondition: AlarmPolicyCondition,
     ModifyPolicyGroupCondition: ModifyPolicyGroupCondition,
     DescribePolicyGroupListRequest: DescribePolicyGroupListRequest,
@@ -25277,12 +24809,10 @@ module.exports = {
     DescribePolicyConditionListConfigManual: DescribePolicyConditionListConfigManual,
     InstallPluginsRequest: InstallPluginsRequest,
     DescribeAlarmEventsResponse: DescribeAlarmEventsResponse,
-    DescribeServiceDiscoveryResponse: DescribeServiceDiscoveryResponse,
     ExportPrometheusReadOnlyDynamicAPIRequest: ExportPrometheusReadOnlyDynamicAPIRequest,
     PrometheusTag: PrometheusTag,
     DescribePolicyConditionListMetric: DescribePolicyConditionListMetric,
     BindingPolicyObjectRequest: BindingPolicyObjectRequest,
-    CreateServiceDiscoveryResponse: CreateServiceDiscoveryResponse,
     DescribeClusterAgentCreatingProgressRequest: DescribeClusterAgentCreatingProgressRequest,
     UpdatePrometheusAlertGroupRequest: UpdatePrometheusAlertGroupRequest,
     EnableSSOCamCheckResponse: EnableSSOCamCheckResponse,
@@ -25290,7 +24820,6 @@ module.exports = {
     CreatePrometheusScrapeJobResponse: CreatePrometheusScrapeJobResponse,
     CreateAlarmPolicyRequest: CreateAlarmPolicyRequest,
     PrometheusZoneItem: PrometheusZoneItem,
-    PrometheusAlertCustomReceiver: PrometheusAlertCustomReceiver,
     ModifyPrometheusAlertPolicyRequest: ModifyPrometheusAlertPolicyRequest,
     ModifyPrometheusInstanceAttributesResponse: ModifyPrometheusInstanceAttributesResponse,
     UpdateOnCallFormResponse: UpdateOnCallFormResponse,
@@ -25307,9 +24836,8 @@ module.exports = {
     DescribePrometheusGlobalNotificationResponse: DescribePrometheusGlobalNotificationResponse,
     PrometheusAlertGroupRuleSet: PrometheusAlertGroupRuleSet,
     DescribeMonitorTypesRequest: DescribeMonitorTypesRequest,
-    DimensionsDesc: DimensionsDesc,
+    ExportPrometheusReadOnlyDynamicAPIResponse: ExportPrometheusReadOnlyDynamicAPIResponse,
     DeletePrometheusAlertPolicyRequest: DeletePrometheusAlertPolicyRequest,
-    ServiceDiscoveryItem: ServiceDiscoveryItem,
     ModifyPrometheusAgentExternalLabelsResponse: ModifyPrometheusAgentExternalLabelsResponse,
     ModifyAlarmNoticeRequest: ModifyAlarmNoticeRequest,
     DescribeGrafanaWhiteListResponse: DescribeGrafanaWhiteListResponse,
@@ -25341,7 +24869,6 @@ module.exports = {
     CreatePrometheusAgentResponse: CreatePrometheusAgentResponse,
     DescribePrometheusAlertPolicyRequest: DescribePrometheusAlertPolicyRequest,
     DescribeAlarmMetricsResponse: DescribeAlarmMetricsResponse,
-    DescribePrometheusRecordRuleYamlRequest: DescribePrometheusRecordRuleYamlRequest,
     DescribeGrafanaWhiteListRequest: DescribeGrafanaWhiteListRequest,
     DescribePrometheusConfigRequest: DescribePrometheusConfigRequest,
     CreateGrafanaInstanceResponse: CreateGrafanaInstanceResponse,
@@ -25396,7 +24923,6 @@ module.exports = {
     DescribeConditionsTemplateListRequest: DescribeConditionsTemplateListRequest,
     DeletePrometheusRecordRuleYamlResponse: DeletePrometheusRecordRuleYamlResponse,
     MetricDataPoint: MetricDataPoint,
-    ExportPrometheusReadOnlyDynamicAPIResponse: ExportPrometheusReadOnlyDynamicAPIResponse,
     GetMonitorDataRequest: GetMonitorDataRequest,
     CreateRecordingRuleRequest: CreateRecordingRuleRequest,
     ModifyPrometheusConfigRequest: ModifyPrometheusConfigRequest,
@@ -25409,7 +24935,7 @@ module.exports = {
     DeleteGrafanaIntegrationRequest: DeleteGrafanaIntegrationRequest,
     ModifyPrometheusAlertPolicyResponse: ModifyPrometheusAlertPolicyResponse,
     DescribePrometheusTargetsTMPRequest: DescribePrometheusTargetsTMPRequest,
-    CreateServiceDiscoveryRequest: CreateServiceDiscoveryRequest,
+    UnbindPrometheusManagedGrafanaResponse: UnbindPrometheusManagedGrafanaResponse,
     PeriodsSt: PeriodsSt,
     ModifyAlarmReceiversResponse: ModifyAlarmReceiversResponse,
     RoutePrometheusDynamicAPIResponse: RoutePrometheusDynamicAPIResponse,
@@ -25425,7 +24951,7 @@ module.exports = {
     ModifyAlarmPolicyConditionResponse: ModifyAlarmPolicyConditionResponse,
     DescribePrometheusInstancesOverviewResponse: DescribePrometheusInstancesOverviewResponse,
     MetricSet: MetricSet,
-    DescribePrometheusRecordRuleYamlResponse: DescribePrometheusRecordRuleYamlResponse,
+    PrometheusInstanceGrantInfo: PrometheusInstanceGrantInfo,
     RoutePrometheusDynamicAPIRequest: RoutePrometheusDynamicAPIRequest,
     TemplateGroup: TemplateGroup,
     DescribeBindingPolicyObjectListInstance: DescribeBindingPolicyObjectListInstance,
@@ -25438,7 +24964,7 @@ module.exports = {
     NoticeSendGroup: NoticeSendGroup,
     PrometheusDynamicAPIResponseHTTP: PrometheusDynamicAPIResponseHTTP,
     PrometheusAlertRule: PrometheusAlertRule,
-    UnbindPrometheusManagedGrafanaResponse: UnbindPrometheusManagedGrafanaResponse,
+    CleanGrafanaInstanceResponse: CleanGrafanaInstanceResponse,
     DescribeGrafanaChannelsResponse: DescribeGrafanaChannelsResponse,
     DescribeAlarmPolicyResponse: DescribeAlarmPolicyResponse,
     PrometheusNotificationItem: PrometheusNotificationItem,
@@ -25447,7 +24973,6 @@ module.exports = {
     DescribeAccidentEventListAlarms: DescribeAccidentEventListAlarms,
     CreatePrometheusGlobalNotificationResponse: CreatePrometheusGlobalNotificationResponse,
     DescribeAlarmHistoriesRequest: DescribeAlarmHistoriesRequest,
-    PrometheusInstanceGrantInfo: PrometheusInstanceGrantInfo,
     DeletePolicyGroupRequest: DeletePolicyGroupRequest,
     EnableSSOCamCheckRequest: EnableSSOCamCheckRequest,
     DeleteGrafanaIntegrationResponse: DeleteGrafanaIntegrationResponse,
@@ -25492,7 +25017,7 @@ module.exports = {
     DescribeAlarmNoticesRequest: DescribeAlarmNoticesRequest,
     RunPrometheusInstanceResponse: RunPrometheusInstanceResponse,
     UpdateExporterIntegrationRequest: UpdateExporterIntegrationRequest,
-    CheckIsPrometheusNewUserRequest: CheckIsPrometheusNewUserRequest,
+    PrometheusAlertCustomReceiver: PrometheusAlertCustomReceiver,
     DescribeAlarmNoticeResponse: DescribeAlarmNoticeResponse,
     DeleteAlertRulesRequest: DeleteAlertRulesRequest,
     SyncPrometheusTempRequest: SyncPrometheusTempRequest,
@@ -25515,7 +25040,6 @@ module.exports = {
     UpdateGrafanaWhiteListRequest: UpdateGrafanaWhiteListRequest,
     UpdatePrometheusAgentStatusRequest: UpdatePrometheusAgentStatusRequest,
     DescribeGrafanaInstancesResponse: DescribeGrafanaInstancesResponse,
-    CheckIsPrometheusNewUserResponse: CheckIsPrometheusNewUserResponse,
     DescribePolicyGroupInfoRequest: DescribePolicyGroupInfoRequest,
     UpdateAlertRuleStateResponse: UpdateAlertRuleStateResponse,
     ModifyPrometheusRecordRuleYamlRequest: ModifyPrometheusRecordRuleYamlRequest,
@@ -25535,7 +25059,6 @@ module.exports = {
     ModifyAlarmPolicyStatusRequest: ModifyAlarmPolicyStatusRequest,
     ConditionsTemp: ConditionsTemp,
     Operator: Operator,
-    DescribeServiceDiscoveryRequest: DescribeServiceDiscoveryRequest,
     TaskStepInfo: TaskStepInfo,
     DescribePrometheusTempResponse: DescribePrometheusTempResponse,
     DescribeGrafanaConfigResponse: DescribeGrafanaConfigResponse,
@@ -25585,7 +25108,7 @@ module.exports = {
     IntegrationConfiguration: IntegrationConfiguration,
     DescribePrometheusAgentsResponse: DescribePrometheusAgentsResponse,
     ModifyPrometheusGlobalNotificationResponse: ModifyPrometheusGlobalNotificationResponse,
-    CleanGrafanaInstanceResponse: CleanGrafanaInstanceResponse,
+    DimensionsDesc: DimensionsDesc,
     CreateAlertRuleRequest: CreateAlertRuleRequest,
     ModifyPrometheusRecordRuleYamlResponse: ModifyPrometheusRecordRuleYamlResponse,
     DeletePrometheusScrapeJobsResponse: DeletePrometheusScrapeJobsResponse,

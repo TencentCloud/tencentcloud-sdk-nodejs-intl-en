@@ -33,7 +33,6 @@ const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
 const CreatePrometheusMultiTenantInstancePostPayModeRequest = models.CreatePrometheusMultiTenantInstancePostPayModeRequest;
 const DescribePolicyConditionListResponseDeprecatingInfo = models.DescribePolicyConditionListResponseDeprecatingInfo;
 const PrometheusTempModify = models.PrometheusTempModify;
-const SendCustomAlarmMsgRequest = models.SendCustomAlarmMsgRequest;
 const UnBindingPolicyObjectRequest = models.UnBindingPolicyObjectRequest;
 const CommonNamespaceNew = models.CommonNamespaceNew;
 const Tag = models.Tag;
@@ -123,7 +122,6 @@ const InstanceGroups = models.InstanceGroups;
 const UpdateGrafanaNotificationChannelResponse = models.UpdateGrafanaNotificationChannelResponse;
 const CreatePrometheusTempResponse = models.CreatePrometheusTempResponse;
 const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
-const SendCustomAlarmMsgResponse = models.SendCustomAlarmMsgResponse;
 const AlarmPolicyCondition = models.AlarmPolicyCondition;
 const ModifyPolicyGroupCondition = models.ModifyPolicyGroupCondition;
 const DescribePolicyGroupListRequest = models.DescribePolicyGroupListRequest;
@@ -136,12 +134,10 @@ const TagInstance = models.TagInstance;
 const DescribePolicyConditionListConfigManual = models.DescribePolicyConditionListConfigManual;
 const InstallPluginsRequest = models.InstallPluginsRequest;
 const DescribeAlarmEventsResponse = models.DescribeAlarmEventsResponse;
-const DescribeServiceDiscoveryResponse = models.DescribeServiceDiscoveryResponse;
 const ExportPrometheusReadOnlyDynamicAPIRequest = models.ExportPrometheusReadOnlyDynamicAPIRequest;
 const PrometheusTag = models.PrometheusTag;
 const DescribePolicyConditionListMetric = models.DescribePolicyConditionListMetric;
 const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
-const CreateServiceDiscoveryResponse = models.CreateServiceDiscoveryResponse;
 const DescribeClusterAgentCreatingProgressRequest = models.DescribeClusterAgentCreatingProgressRequest;
 const UpdatePrometheusAlertGroupRequest = models.UpdatePrometheusAlertGroupRequest;
 const EnableSSOCamCheckResponse = models.EnableSSOCamCheckResponse;
@@ -149,7 +145,6 @@ const DescribeAccidentEventListRequest = models.DescribeAccidentEventListRequest
 const CreatePrometheusScrapeJobResponse = models.CreatePrometheusScrapeJobResponse;
 const CreateAlarmPolicyRequest = models.CreateAlarmPolicyRequest;
 const PrometheusZoneItem = models.PrometheusZoneItem;
-const PrometheusAlertCustomReceiver = models.PrometheusAlertCustomReceiver;
 const ModifyPrometheusAlertPolicyRequest = models.ModifyPrometheusAlertPolicyRequest;
 const ModifyPrometheusInstanceAttributesResponse = models.ModifyPrometheusInstanceAttributesResponse;
 const UpdateOnCallFormResponse = models.UpdateOnCallFormResponse;
@@ -166,9 +161,8 @@ const DescribePrometheusRecordRulesResponse = models.DescribePrometheusRecordRul
 const DescribePrometheusGlobalNotificationResponse = models.DescribePrometheusGlobalNotificationResponse;
 const PrometheusAlertGroupRuleSet = models.PrometheusAlertGroupRuleSet;
 const DescribeMonitorTypesRequest = models.DescribeMonitorTypesRequest;
-const DimensionsDesc = models.DimensionsDesc;
+const ExportPrometheusReadOnlyDynamicAPIResponse = models.ExportPrometheusReadOnlyDynamicAPIResponse;
 const DeletePrometheusAlertPolicyRequest = models.DeletePrometheusAlertPolicyRequest;
-const ServiceDiscoveryItem = models.ServiceDiscoveryItem;
 const ModifyPrometheusAgentExternalLabelsResponse = models.ModifyPrometheusAgentExternalLabelsResponse;
 const ModifyAlarmNoticeRequest = models.ModifyAlarmNoticeRequest;
 const DescribeGrafanaWhiteListResponse = models.DescribeGrafanaWhiteListResponse;
@@ -200,7 +194,6 @@ const OneOnCallForm = models.OneOnCallForm;
 const CreatePrometheusAgentResponse = models.CreatePrometheusAgentResponse;
 const DescribePrometheusAlertPolicyRequest = models.DescribePrometheusAlertPolicyRequest;
 const DescribeAlarmMetricsResponse = models.DescribeAlarmMetricsResponse;
-const DescribePrometheusRecordRuleYamlRequest = models.DescribePrometheusRecordRuleYamlRequest;
 const DescribeGrafanaWhiteListRequest = models.DescribeGrafanaWhiteListRequest;
 const DescribePrometheusConfigRequest = models.DescribePrometheusConfigRequest;
 const CreateGrafanaInstanceResponse = models.CreateGrafanaInstanceResponse;
@@ -255,7 +248,6 @@ const PrometheusInstancesItem = models.PrometheusInstancesItem;
 const DescribeConditionsTemplateListRequest = models.DescribeConditionsTemplateListRequest;
 const DeletePrometheusRecordRuleYamlResponse = models.DeletePrometheusRecordRuleYamlResponse;
 const MetricDataPoint = models.MetricDataPoint;
-const ExportPrometheusReadOnlyDynamicAPIResponse = models.ExportPrometheusReadOnlyDynamicAPIResponse;
 const GetMonitorDataRequest = models.GetMonitorDataRequest;
 const CreateRecordingRuleRequest = models.CreateRecordingRuleRequest;
 const ModifyPrometheusConfigRequest = models.ModifyPrometheusConfigRequest;
@@ -268,7 +260,7 @@ const GrafanaIntegrationConfig = models.GrafanaIntegrationConfig;
 const DeleteGrafanaIntegrationRequest = models.DeleteGrafanaIntegrationRequest;
 const ModifyPrometheusAlertPolicyResponse = models.ModifyPrometheusAlertPolicyResponse;
 const DescribePrometheusTargetsTMPRequest = models.DescribePrometheusTargetsTMPRequest;
-const CreateServiceDiscoveryRequest = models.CreateServiceDiscoveryRequest;
+const UnbindPrometheusManagedGrafanaResponse = models.UnbindPrometheusManagedGrafanaResponse;
 const PeriodsSt = models.PeriodsSt;
 const ModifyAlarmReceiversResponse = models.ModifyAlarmReceiversResponse;
 const RoutePrometheusDynamicAPIResponse = models.RoutePrometheusDynamicAPIResponse;
@@ -284,7 +276,7 @@ const CreatePrometheusClusterAgentRequest = models.CreatePrometheusClusterAgentR
 const ModifyAlarmPolicyConditionResponse = models.ModifyAlarmPolicyConditionResponse;
 const DescribePrometheusInstancesOverviewResponse = models.DescribePrometheusInstancesOverviewResponse;
 const MetricSet = models.MetricSet;
-const DescribePrometheusRecordRuleYamlResponse = models.DescribePrometheusRecordRuleYamlResponse;
+const PrometheusInstanceGrantInfo = models.PrometheusInstanceGrantInfo;
 const RoutePrometheusDynamicAPIRequest = models.RoutePrometheusDynamicAPIRequest;
 const TemplateGroup = models.TemplateGroup;
 const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
@@ -297,7 +289,7 @@ const ModifyAlarmPolicyNoticeResponse = models.ModifyAlarmPolicyNoticeResponse;
 const NoticeSendGroup = models.NoticeSendGroup;
 const PrometheusDynamicAPIResponseHTTP = models.PrometheusDynamicAPIResponseHTTP;
 const PrometheusAlertRule = models.PrometheusAlertRule;
-const UnbindPrometheusManagedGrafanaResponse = models.UnbindPrometheusManagedGrafanaResponse;
+const CleanGrafanaInstanceResponse = models.CleanGrafanaInstanceResponse;
 const DescribeGrafanaChannelsResponse = models.DescribeGrafanaChannelsResponse;
 const DescribeAlarmPolicyResponse = models.DescribeAlarmPolicyResponse;
 const PrometheusNotificationItem = models.PrometheusNotificationItem;
@@ -306,7 +298,6 @@ const UpgradeGrafanaInstanceRequest = models.UpgradeGrafanaInstanceRequest;
 const DescribeAccidentEventListAlarms = models.DescribeAccidentEventListAlarms;
 const CreatePrometheusGlobalNotificationResponse = models.CreatePrometheusGlobalNotificationResponse;
 const DescribeAlarmHistoriesRequest = models.DescribeAlarmHistoriesRequest;
-const PrometheusInstanceGrantInfo = models.PrometheusInstanceGrantInfo;
 const DeletePolicyGroupRequest = models.DeletePolicyGroupRequest;
 const EnableSSOCamCheckRequest = models.EnableSSOCamCheckRequest;
 const DeleteGrafanaIntegrationResponse = models.DeleteGrafanaIntegrationResponse;
@@ -351,7 +342,7 @@ const UnBindingAllPolicyObjectResponse = models.UnBindingAllPolicyObjectResponse
 const DescribeAlarmNoticesRequest = models.DescribeAlarmNoticesRequest;
 const RunPrometheusInstanceResponse = models.RunPrometheusInstanceResponse;
 const UpdateExporterIntegrationRequest = models.UpdateExporterIntegrationRequest;
-const CheckIsPrometheusNewUserRequest = models.CheckIsPrometheusNewUserRequest;
+const PrometheusAlertCustomReceiver = models.PrometheusAlertCustomReceiver;
 const DescribeAlarmNoticeResponse = models.DescribeAlarmNoticeResponse;
 const DeleteAlertRulesRequest = models.DeleteAlertRulesRequest;
 const SyncPrometheusTempRequest = models.SyncPrometheusTempRequest;
@@ -374,7 +365,6 @@ const DeleteRecordingRulesResponse = models.DeleteRecordingRulesResponse;
 const UpdateGrafanaWhiteListRequest = models.UpdateGrafanaWhiteListRequest;
 const UpdatePrometheusAgentStatusRequest = models.UpdatePrometheusAgentStatusRequest;
 const DescribeGrafanaInstancesResponse = models.DescribeGrafanaInstancesResponse;
-const CheckIsPrometheusNewUserResponse = models.CheckIsPrometheusNewUserResponse;
 const DescribePolicyGroupInfoRequest = models.DescribePolicyGroupInfoRequest;
 const UpdateAlertRuleStateResponse = models.UpdateAlertRuleStateResponse;
 const ModifyPrometheusRecordRuleYamlRequest = models.ModifyPrometheusRecordRuleYamlRequest;
@@ -394,7 +384,6 @@ const DeletePrometheusScrapeJobsRequest = models.DeletePrometheusScrapeJobsReque
 const ModifyAlarmPolicyStatusRequest = models.ModifyAlarmPolicyStatusRequest;
 const ConditionsTemp = models.ConditionsTemp;
 const Operator = models.Operator;
-const DescribeServiceDiscoveryRequest = models.DescribeServiceDiscoveryRequest;
 const TaskStepInfo = models.TaskStepInfo;
 const DescribePrometheusTempResponse = models.DescribePrometheusTempResponse;
 const DescribeGrafanaConfigResponse = models.DescribeGrafanaConfigResponse;
@@ -444,7 +433,7 @@ const DescribePolicyConditionListConfigManualStatType = models.DescribePolicyCon
 const IntegrationConfiguration = models.IntegrationConfiguration;
 const DescribePrometheusAgentsResponse = models.DescribePrometheusAgentsResponse;
 const ModifyPrometheusGlobalNotificationResponse = models.ModifyPrometheusGlobalNotificationResponse;
-const CleanGrafanaInstanceResponse = models.CleanGrafanaInstanceResponse;
+const DimensionsDesc = models.DimensionsDesc;
 const CreateAlertRuleRequest = models.CreateAlertRuleRequest;
 const ModifyPrometheusRecordRuleYamlResponse = models.ModifyPrometheusRecordRuleYamlResponse;
 const DeletePrometheusScrapeJobsResponse = models.DeletePrometheusScrapeJobsResponse;
@@ -651,17 +640,6 @@ support the following APIs:
     }
 
     /**
-     * This API is used to update the exporter integration configuration.
-     * @param {UpdateExporterIntegrationRequest} req
-     * @param {function(string, UpdateExporterIntegrationResponse):void} cb
-     * @public
-     */
-    UpdateExporterIntegration(req, cb) {
-        let resp = new UpdateExporterIntegrationResponse();
-        this.request("UpdateExporterIntegration", req, resp, cb);
-    }
-
-    /**
      * This API is used to get the list of recording rules, including those created by CRD resources in the associated cluster.
      * @param {DescribePrometheusRecordRulesRequest} req
      * @param {function(string, DescribePrometheusRecordRulesResponse):void} cb
@@ -695,14 +673,14 @@ support the following APIs:
     }
 
     /**
-     * This API is used to determine whether the user is new to TMP, that is, whether the user has never created a TMP instance in any region.
-     * @param {CheckIsPrometheusNewUserRequest} req
-     * @param {function(string, CheckIsPrometheusNewUserResponse):void} cb
+     * This API is used to list the AZs of Tencent Managed Service for Prometheus (TMP).
+     * @param {DescribePrometheusZonesRequest} req
+     * @param {function(string, DescribePrometheusZonesResponse):void} cb
      * @public
      */
-    CheckIsPrometheusNewUser(req, cb) {
-        let resp = new CheckIsPrometheusNewUserResponse();
-        this.request("CheckIsPrometheusNewUser", req, resp, cb);
+    DescribePrometheusZones(req, cb) {
+        let resp = new DescribePrometheusZonesResponse();
+        this.request("DescribePrometheusZones", req, resp, cb);
     }
 
     /**
@@ -1330,17 +1308,6 @@ Alarm policies in the same type under the project will be set as non-default.
     }
 
     /**
-     * This API is used to send a custom alarm notification.
-     * @param {SendCustomAlarmMsgRequest} req
-     * @param {function(string, SendCustomAlarmMsgResponse):void} cb
-     * @public
-     */
-    SendCustomAlarmMsg(req, cb) {
-        let resp = new SendCustomAlarmMsgResponse();
-        this.request("SendCustomAlarmMsg", req, resp, cb);
-    }
-
-    /**
      * Creates an on-call schedule.
      * @param {CreateOnCallFormRequest} req
      * @param {function(string, CreateOnCallFormResponse):void} cb
@@ -1744,17 +1711,6 @@ This API is used to enable individually creating enabled/disabled alert rules un
     }
 
     /**
-     * This API is used to list the AZs of Tencent Managed Service for Prometheus (TMP).
-     * @param {DescribePrometheusZonesRequest} req
-     * @param {function(string, DescribePrometheusZonesResponse):void} cb
-     * @public
-     */
-    DescribePrometheusZones(req, cb) {
-        let resp = new DescribePrometheusZonesResponse();
-        this.request("DescribePrometheusZones", req, resp, cb);
-    }
-
-    /**
      * Describes On-Call Schedule Details.
      * @param {DescribeOnCallFormRequest} req
      * @param {function(string, DescribeOnCallFormResponse):void} cb
@@ -2012,19 +1968,6 @@ If you need to call a large number of APIs to pull metrics or objects at a time,
     }
 
     /**
-     * This API is used to list Prometheus scrape configurations in TKE.
-<p>Note: The prerequisite is that the corresponding TKE service has been integrated through the Prometheus console. For more information, see
-<a href="https://intl.cloud.tencent.com/document/product/248/48859?from_cn_redirect=1" target="_blank">Agent Management</a>.</p>
-     * @param {DescribeServiceDiscoveryRequest} req
-     * @param {function(string, DescribeServiceDiscoveryResponse):void} cb
-     * @public
-     */
-    DescribeServiceDiscovery(req, cb) {
-        let resp = new DescribeServiceDiscoveryResponse();
-        this.request("DescribeServiceDiscovery", req, resp, cb);
-    }
-
-    /**
      * This API is used to list installed Grafana integrations.
      * @param {DescribeGrafanaIntegrationsRequest} req
      * @param {function(string, DescribeGrafanaIntegrationsResponse):void} cb
@@ -2058,14 +2001,14 @@ If you need to call a large number of APIs to pull metrics or objects at a time,
     }
 
     /**
-     * This API is used to get the YAML list of Prometheus recording rules.
-     * @param {DescribePrometheusRecordRuleYamlRequest} req
-     * @param {function(string, DescribePrometheusRecordRuleYamlResponse):void} cb
+     * This API is used to update the exporter integration configuration.
+     * @param {UpdateExporterIntegrationRequest} req
+     * @param {function(string, UpdateExporterIntegrationResponse):void} cb
      * @public
      */
-    DescribePrometheusRecordRuleYaml(req, cb) {
-        let resp = new DescribePrometheusRecordRuleYamlResponse();
-        this.request("DescribePrometheusRecordRuleYaml", req, resp, cb);
+    UpdateExporterIntegration(req, cb) {
+        let resp = new UpdateExporterIntegrationResponse();
+        this.request("UpdateExporterIntegration", req, resp, cb);
     }
 
     /**
@@ -2077,19 +2020,6 @@ If you need to call a large number of APIs to pull metrics or objects at a time,
     DescribeAllNamespaces(req, cb) {
         let resp = new DescribeAllNamespacesResponse();
         this.request("DescribeAllNamespaces", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a Prometheus scrape configuration in TKE.
-<p>Note: The prerequisite is that the corresponding TKE service has been integrated through the Prometheus console. For more information, see
-<a href="https://intl.cloud.tencent.com/document/product/248/48859?from_cn_redirect=1" target="_blank">Agent Management</a>.</p>
-     * @param {CreateServiceDiscoveryRequest} req
-     * @param {function(string, CreateServiceDiscoveryResponse):void} cb
-     * @public
-     */
-    CreateServiceDiscovery(req, cb) {
-        let resp = new CreateServiceDiscoveryResponse();
-        this.request("CreateServiceDiscovery", req, resp, cb);
     }
 
     /**

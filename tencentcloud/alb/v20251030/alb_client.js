@@ -246,7 +246,7 @@ During unbinding, input parameters need to pass in all security groups bound to 
     }
 
     /**
-     * The **DeleteLoadBalancers** API is an async API. The system returns a request ID, but the application CLB instance is not yet deleted successfully. The deletion task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/api/1822/133711) to query the deletion status of the application CLB instance.
+     * The **DeleteLoadBalancers** API is an async API. The system returns a request ID, but the application CLB instance is not yet deleted successfully. The deletion task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/product/1311/84267) to query the deletion status of the application CLB instance.
 - When an application CLB instance is in the **Deleting** status, it means the application CLB instance is being deleted.
 -If the specified application CLB instance cannot be queried, the application CLB instance has been deleted successfully.
      * @param {DeleteLoadBalancersRequest} req
@@ -292,7 +292,7 @@ During unbinding, input parameters need to pass in all security groups bound to 
     }
 
     /**
-     * The **ModifyLoadBalancerAttributes** API is an async API. It returns a request ID, but the application CLB instance attribute has not been modified yet. The modifying task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/api/1822/133711) to query the modification status of the application CLB instance attribute.
+     * The **ModifyLoadBalancerAttributes** API is an async API. It returns a request ID, but the application CLB instance attribute has not been modified yet. The modifying task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/product/1311/84267) to query the modification status of the application CLB instance attribute.
 -When the application CLB instance attribute is in the **Configuring** status, it means the application CLB instance attribute is being modified.
 - When the application CLB instance attribute is in the **Active** status, it means the application CLB instance attribute was modified successfully.
      * @param {ModifyLoadBalancerAttributesRequest} req
@@ -683,7 +683,7 @@ If CertificateType is set to CA, the default CA certificate info is returned.
     }
 
     /**
-     * **CreateLoadBalancer** is an async API. The system returns an instance ID, but the application CLB instance is not created successfully yet, and the creation task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/api/1822/133711) to query the creation status of the application CLB instance.
+     * **CreateLoadBalancer** is an async API. The system returns an instance ID, but the application CLB instance is not created successfully yet, and the creation task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/product/1311/84267) to query the creation status of the application CLB instance.
 - When an application CLB instance is in the **Provisioning** status, it means the application CLB instance is being created.
 -When an application CLB instance is in the **Active** status, the application CLB instance is successfully created.
      * @param {CreateLoadBalancerRequest} req

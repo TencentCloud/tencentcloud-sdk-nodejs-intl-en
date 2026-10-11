@@ -2754,11 +2754,32 @@ false : Expired HKID is rejected and cannot enter the liveness process.
         this.AllowUploadPhoto = null;
 
         /**
-         * <p>Whether to enable Bank of Thailand-specific background detection.<br>This parameter requires whitelist activation; please contact us to request access before it can take effect.</p><p>Default value: false</p>
+         * <p>Whether to enable Bank of Thailand-specific background detection.<br>This parameter requires whitelist activation; please contact us to request access before it can take effect.</p><p>Default value: false
 
          * @type {boolean || null}
          */
         this.EnableBotBgDetection = null;
+
+        /**
+         * OCR Auto Capture Mode Timeout (ms)
+Value Range: [5000, 180000]
+Default Value: 20000
+Values less than 5000 will be clamped to 5000; values greater than 180000 will be clamped to 180000
+         * @type {number || null}
+         */
+        this.OcrAutoDetectTimeout = null;
+
+        /**
+         * OCR Capture Mode
+Enum Values:
+<li>OCR_DETECT_MANUAL: Manual capture mode. Recognition starts after the user taps to take a photo.</li>
+<li>OCR_DETECT_AUTO_MANUAL: Auto recognition mode. The system performs automatic recognition; fallback to manual photo capture is available upon recognition timeout.</li>
+<li>OCR_DETECT_AUTO: Auto-only recognition mode. The system performs automatic recognition; no fallback to manual photo capture upon recognition timeout.</li>
+<li>OCR_DETECT_AUTO_MULTI: Multi-shot auto-only recognition mode. The system automatically captures multiple document images with flash enabled.
+Default Value: OCR_DETECT_AUTO_MANUAL
+         * @type {string || null}
+         */
+        this.OcrModeType = null;
 
     }
 
@@ -2791,6 +2812,8 @@ false : Expired HKID is rejected and cannot enter the liveness process.
         this.HideProgressBar = 'HideProgressBar' in params ? params.HideProgressBar : null;
         this.AllowUploadPhoto = 'AllowUploadPhoto' in params ? params.AllowUploadPhoto : null;
         this.EnableBotBgDetection = 'EnableBotBgDetection' in params ? params.EnableBotBgDetection : null;
+        this.OcrAutoDetectTimeout = 'OcrAutoDetectTimeout' in params ? params.OcrAutoDetectTimeout : null;
+        this.OcrModeType = 'OcrModeType' in params ? params.OcrModeType : null;
 
     }
 }

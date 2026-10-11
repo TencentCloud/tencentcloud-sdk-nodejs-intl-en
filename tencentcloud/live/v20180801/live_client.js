@@ -121,7 +121,6 @@ const CancelCommonMixStreamResponse = models.CancelCommonMixStreamResponse;
 const DescribeLiveDomainCertBindingsResponse = models.DescribeLiveDomainCertBindingsResponse;
 const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
 const DescribeLiveTimeShiftBillInfoListRequest = models.DescribeLiveTimeShiftBillInfoListRequest;
-const RecordTask = models.RecordTask;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
 const CommonMixInputParam = models.CommonMixInputParam;
 const WatermarkInfo = models.WatermarkInfo;
@@ -132,6 +131,7 @@ const DescribeLiveCertRequest = models.DescribeLiveCertRequest;
 const DescribeLiveCallbackTemplatesResponse = models.DescribeLiveCallbackTemplatesResponse;
 const ModifyLivePlayAuthKeyResponse = models.ModifyLivePlayAuthKeyResponse;
 const CreateLiveCallbackTemplateRequest = models.CreateLiveCallbackTemplateRequest;
+const DescribeOriginWhiteIpListResponse = models.DescribeOriginWhiteIpListResponse;
 const DescribeTopClientIpSumInfoListResponse = models.DescribeTopClientIpSumInfoListResponse;
 const DropLiveStreamResponse = models.DropLiveStreamResponse;
 const DescribeLiveStreamStateResponse = models.DescribeLiveStreamStateResponse;
@@ -147,7 +147,6 @@ const DropLiveStreamRequest = models.DropLiveStreamRequest;
 const DeleteLiveTimeShiftRuleResponse = models.DeleteLiveTimeShiftRuleResponse;
 const PullPushWatermarkInfo = models.PullPushWatermarkInfo;
 const UnBindLiveDomainCertRequest = models.UnBindLiveDomainCertRequest;
-const DescribeProvinceIspPlayInfoListResponse = models.DescribeProvinceIspPlayInfoListResponse;
 const CreateCommonMixStreamRequest = models.CreateCommonMixStreamRequest;
 const RefererAuthConfig = models.RefererAuthConfig;
 const DescribeTimeShiftRecordDetailRequest = models.DescribeTimeShiftRecordDetailRequest;
@@ -177,7 +176,6 @@ const TimeShiftStreamInfo = models.TimeShiftStreamInfo;
 const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
 const DeleteLivePullStreamTaskResponse = models.DeleteLivePullStreamTaskResponse;
 const AuthenticateDomainOwnerRequest = models.AuthenticateDomainOwnerRequest;
-const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
 const CreateLivePadRuleResponse = models.CreateLivePadRuleResponse;
 const DeleteLiveTimeShiftTemplateResponse = models.DeleteLiveTimeShiftTemplateResponse;
 const ModifyLivePushAuthKeyResponse = models.ModifyLivePushAuthKeyResponse;
@@ -191,7 +189,7 @@ const DescribeLiveStreamPushInfoListRequest = models.DescribeLiveStreamPushInfoL
 const StopLiveRecordResponse = models.StopLiveRecordResponse;
 const DescribeLiveWatermarksResponse = models.DescribeLiveWatermarksResponse;
 const TimeShiftBillData = models.TimeShiftBillData;
-const DescribeLiveForbidStreamListRequest = models.DescribeLiveForbidStreamListRequest;
+const DescribeProvinceIspPlayInfoListResponse = models.DescribeProvinceIspPlayInfoListResponse;
 const DescribeTopClientIpSumInfoListRequest = models.DescribeTopClientIpSumInfoListRequest;
 const CreateLiveCallbackRuleRequest = models.CreateLiveCallbackRuleRequest;
 const DeleteLiveWatermarkRuleResponse = models.DeleteLiveWatermarkRuleResponse;
@@ -299,6 +297,7 @@ const DescribeAllStreamPlayInfoListRequest = models.DescribeAllStreamPlayInfoLis
 const DescribeLiveDomainResponse = models.DescribeLiveDomainResponse;
 const DeleteRecordTaskRequest = models.DeleteRecordTaskRequest;
 const PullStreamTaskInfo = models.PullStreamTaskInfo;
+const DescribeOriginWhiteIpListRequest = models.DescribeOriginWhiteIpListRequest;
 const CreateLiveTimeShiftTemplateResponse = models.CreateLiveTimeShiftTemplateResponse;
 const DescribeStreamDayPlayInfoListResponse = models.DescribeStreamDayPlayInfoListResponse;
 const RecordTemplateInfo = models.RecordTemplateInfo;
@@ -311,7 +310,7 @@ const DescribeTranscodeTaskNumRequest = models.DescribeTranscodeTaskNumRequest;
 const DescribeLiveCallbackRulesResponse = models.DescribeLiveCallbackRulesResponse;
 const DescribeLiveTranscodeTotalInfoRequest = models.DescribeLiveTranscodeTotalInfoRequest;
 const CreateRecordTaskResponse = models.CreateRecordTaskResponse;
-const ForbidStreamInfo = models.ForbidStreamInfo;
+const RecordTask = models.RecordTask;
 const DescribeTimeShiftRecordDetailResponse = models.DescribeTimeShiftRecordDetailResponse;
 const DescribeLiveDomainCertBindingsRequest = models.DescribeLiveDomainCertBindingsRequest;
 const DeleteLiveDomainResponse = models.DeleteLiveDomainResponse;
@@ -898,19 +897,6 @@ Notes:
     }
 
     /**
-     * This API is used to get the list of disabled streams.
-
-Note: this API is used for query only and should not be relied too much upon in important business scenarios.
-     * @param {DescribeLiveForbidStreamListRequest} req
-     * @param {function(string, DescribeLiveForbidStreamListResponse):void} cb
-     * @public
-     */
-    DescribeLiveForbidStreamList(req, cb) {
-        let resp = new DescribeLiveForbidStreamListResponse();
-        this.request("DescribeLiveForbidStreamList", req, resp, cb);
-    }
-
-    /**
      * This API is used to create a task to pull streams from video files or an external live streaming source and publish them to a specified destination URL.
 Notes:
 1. By default, you can have at most 20 stream pulling tasks at a time. You can submit a ticket to raise the limit.
@@ -986,6 +972,17 @@ Note: You need to specify at least one callback URL.
     CreateLiveCallbackTemplate(req, cb) {
         let resp = new CreateLiveCallbackTemplateResponse();
         this.request("CreateLiveCallbackTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the pull stream IP whitelist list of the origin server.
+     * @param {DescribeOriginWhiteIpListRequest} req
+     * @param {function(string, DescribeOriginWhiteIpListResponse):void} cb
+     * @public
+     */
+    DescribeOriginWhiteIpList(req, cb) {
+        let resp = new DescribeOriginWhiteIpListResponse();
+        this.request("DescribeOriginWhiteIpList", req, resp, cb);
     }
 
     /**

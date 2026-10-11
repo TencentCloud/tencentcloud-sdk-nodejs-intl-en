@@ -41,6 +41,7 @@ module.exports = {
     cvm: require("./cvm"),
     cwp: require("./cwp"),
     cynosdb: require("./cynosdb"),
+    databuddy: require("./databuddy"),
     dataintegration: require("./dataintegration"),
     dayu: require("./dayu"),
     dbbrain: require("./dbbrain"),

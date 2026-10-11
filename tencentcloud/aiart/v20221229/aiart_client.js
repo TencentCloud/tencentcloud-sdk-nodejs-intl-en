@@ -16,13 +16,10 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ImageToImageResponse = models.ImageToImageResponse;
-const LogoParam = models.LogoParam;
-const ImageToImageRequest = models.ImageToImageRequest;
-const LogoRect = models.LogoRect;
-const ChangeClothesRequest = models.ChangeClothesRequest;
 const ChangeClothesResponse = models.ChangeClothesResponse;
-const ResultConfig = models.ResultConfig;
+const LogoRect = models.LogoRect;
+const LogoParam = models.LogoParam;
+const ChangeClothesRequest = models.ChangeClothesRequest;
 
 
 /**
@@ -45,18 +42,6 @@ It supports 1 concurrency by default, which means that up to 1 submitted task ca
     ChangeClothes(req, cb) {
         let resp = new ChangeClothesResponse();
         this.request("ChangeClothes", req, resp, cb);
-    }
-
-    /**
-     * This API is used to transfer the image style based on the image to image technology. Images with small figures, complex gestures or too many figures are not recommended.
-It supports 3 concurrency by default, which means that up to 3 submitted tasks can be processed simultaneously. Subsequent tasks can be processed only after ongoing ones are completed.
-     * @param {ImageToImageRequest} req
-     * @param {function(string, ImageToImageResponse):void} cb
-     * @public
-     */
-    ImageToImage(req, cb) {
-        let resp = new ImageToImageResponse();
-        this.request("ImageToImage", req, resp, cb);
     }
 
 

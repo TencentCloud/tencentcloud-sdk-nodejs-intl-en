@@ -1847,7 +1847,7 @@ Create a YAML network policy and distribute tasks for the container network.
     }
 
     /**
-     * This API is used to query the details of a server.
+     * This example shows you how to query host details.
      * @param {DescribeAssetHostDetailRequest} req
      * @param {function(string, DescribeAssetHostDetailResponse):void} cb
      * @public
@@ -2106,7 +2106,7 @@ Create an auto-discovery task according to the container network and cluster net
     }
 
     /**
-     * This API is used to create a quick image scan task for an image repository.
+     * Creating a Task to Scan Images in an Image Repository with One Click
      * @param {CreateAssetImageRegistryScanTaskOneKeyRequest} req
      * @param {function(string, CreateAssetImageRegistryScanTaskOneKeyResponse):void} cb
      * @public
@@ -3043,7 +3043,7 @@ Update the YAML network policy task for the container network.
     }
 
     /**
-     * This API is used to update a scheduled task for an image repository.
+     * Update scheduled tasks in the mirror repository
      * @param {UpdateImageRegistryTimingScanTaskRequest} req
      * @param {function(string, UpdateImageRegistryTimingScanTaskResponse):void} cb
      * @public
@@ -3098,7 +3098,7 @@ Update the YAML network policy task for the container network.
     }
 
     /**
-     * This API is used to query an automatic licensing rule for local images.
+     * Query local image auto-authorization rules.
      * @param {DescribeImageAutoAuthorizedRuleRequest} req
      * @param {function(string, DescribeImageAutoAuthorizedRuleResponse):void} cb
      * @public
@@ -3677,7 +3677,7 @@ Create a network policy and confirm tasks for the container network.
     }
 
     /**
-     * This API is used to query the image statistics of an image repository.
+     * Querying the Image Statistics of an Image Repository
      * @param {DescribeAssetImageRegistrySummaryRequest} req
      * @param {function(string, DescribeAssetImageRegistrySummaryResponse):void} cb
      * @public
@@ -4059,7 +4059,7 @@ View YAML network policy details of clusters for the container network.
     }
 
     /**
-     * This API is used to check whether TCSS is purchased.
+     * This API is used to query the purchase information on the container security service.
      * @param {DescribePurchaseStateInfoRequest} req
      * @param {function(string, DescribePurchaseStateInfoResponse):void} cb
      * @public
@@ -4404,7 +4404,7 @@ Create a YAML network policy and add tasks for the container network.
     }
 
     /**
-     * This API is used to add the details of an image repository.
+     * This example shows you how to add details for an image repository.
      * @param {AddAssetImageRegistryRegistryDetailRequest} req
      * @param {function(string, AddAssetImageRegistryRegistryDetailResponse):void} cb
      * @public
@@ -4551,7 +4551,7 @@ View policy details of clusters for the container network.
     }
 
     /**
-     * This API is used to query the last asset sync time.
+     * Query the latest time for asset synchronization.
      * @param {DescribeAssetSyncLastTimeRequest} req
      * @param {function(string, DescribeAssetSyncLastTimeResponse):void} cb
      * @public
@@ -4705,7 +4705,7 @@ View policy details of clusters for the container network.
     }
 
     /**
-     * This API is used to query the image licensing information.
+     * This API is used to query image authorization info.
      * @param {DescribeImageAuthorizedInfoRequest} req
      * @param {function(string, DescribeImageAuthorizedInfoResponse):void} cb
      * @public

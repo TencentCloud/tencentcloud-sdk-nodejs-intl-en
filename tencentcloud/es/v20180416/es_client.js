@@ -16,87 +16,93 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const WebNodeTypeInfo = models.WebNodeTypeInfo;
-const InstanceLog = models.InstanceLog;
-const LocalDiskInfo = models.LocalDiskInfo;
-const ModifyAutoBackUpStrategyRequest = models.ModifyAutoBackUpStrategyRequest;
-const IndexPolicyField = models.IndexPolicyField;
-const NodeInfo = models.NodeInfo;
+const TaskDetail = models.TaskDetail;
+const OtherConfig = models.OtherConfig;
+const DescribeInstanceOperationsRequest = models.DescribeInstanceOperationsRequest;
+const OperationDetail = models.OperationDetail;
+const EsPublicAcl = models.EsPublicAcl;
+const DictInfo = models.DictInfo;
+const CreateInstanceResponse = models.CreateInstanceResponse;
+const DescribeInstanceLogsRequest = models.DescribeInstanceLogsRequest;
+const ModifyAutoBackUpCommonInfoRequest = models.ModifyAutoBackUpCommonInfoRequest;
+const KeyValue = models.KeyValue;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const DescribeInstanceLogsResponse = models.DescribeInstanceLogsResponse;
 const UpdateIndexResponse = models.UpdateIndexResponse;
+const DescribeInstanceOperationsResponse = models.DescribeInstanceOperationsResponse;
+const AutoScaleDiskInfo = models.AutoScaleDiskInfo;
+const UpdateRequestTargetNodeTypesResponse = models.UpdateRequestTargetNodeTypesResponse;
+const IndexOptionsField = models.IndexOptionsField;
+const SubTaskDetail = models.SubTaskDetail;
+const GpuInfo = models.GpuInfo;
+const EsConfigSetInfo = models.EsConfigSetInfo;
+const GetRequestTargetNodeTypesResponse = models.GetRequestTargetNodeTypesResponse;
+const Operation = models.Operation;
+const InstanceLog = models.InstanceLog;
+const NodeInfo = models.NodeInfo;
 const DescribeAutoBackUpStrategyRequest = models.DescribeAutoBackUpStrategyRequest;
 const DescribeIndexMetaResponse = models.DescribeIndexMetaResponse;
+const ModifyAutoBackUpStrategyRequest = models.ModifyAutoBackUpStrategyRequest;
+const KibanaView = models.KibanaView;
+const IndexSettingsField = models.IndexSettingsField;
+const UpdateRequestTargetNodeTypesRequest = models.UpdateRequestTargetNodeTypesRequest;
+const CreateAutoBackUpStrategyRequest = models.CreateAutoBackUpStrategyRequest;
+const DeleteInstanceResponse = models.DeleteInstanceResponse;
+const CreateIndexRequest = models.CreateIndexRequest;
+const UpdatePluginsRequest = models.UpdatePluginsRequest;
+const UpgradeLicenseRequest = models.UpgradeLicenseRequest;
 const UpdateInstanceResponse = models.UpdateInstanceResponse;
-const OperationDetail = models.OperationDetail;
+const DeleteIndexRequest = models.DeleteIndexRequest;
+const DescribeViewsRequest = models.DescribeViewsRequest;
+const ModifyAutoBackUpStrategyResponse = models.ModifyAutoBackUpStrategyResponse;
+const DescribeIndexListResponse = models.DescribeIndexListResponse;
 const ClusterView = models.ClusterView;
-const TagInfo = models.TagInfo;
 const CreateIndexResponse = models.CreateIndexResponse;
 const DeleteAutoBackUpStrategyRequest = models.DeleteAutoBackUpStrategyRequest;
-const KibanaView = models.KibanaView;
-const EsPublicAcl = models.EsPublicAcl;
-const BackingIndexMetaField = models.BackingIndexMetaField;
-const DictInfo = models.DictInfo;
-const RestartInstanceResponse = models.RestartInstanceResponse;
-const KeyValue = models.KeyValue;
-const RestartKibanaRequest = models.RestartKibanaRequest;
-const CreateInstanceResponse = models.CreateInstanceResponse;
-const IndexSettingsField = models.IndexSettingsField;
-const DescribeAutoBackUpStrategyResponse = models.DescribeAutoBackUpStrategyResponse;
-const DescribeInstanceLogsRequest = models.DescribeInstanceLogsRequest;
-const UpdateDictionariesRequest = models.UpdateDictionariesRequest;
-const UpdateRequestTargetNodeTypesRequest = models.UpdateRequestTargetNodeTypesRequest;
-const ZoneDetail = models.ZoneDetail;
-const ModifyAutoBackUpCommonInfoRequest = models.ModifyAutoBackUpCommonInfoRequest;
-const OperationDuration = models.OperationDuration;
-const NodeView = models.NodeView;
-const DescribeIndexListRequest = models.DescribeIndexListRequest;
-const CosBackup = models.CosBackup;
-const ModifyAutoBackUpStrategyResponse = models.ModifyAutoBackUpStrategyResponse;
-const CreateAutoBackUpStrategyRequest = models.CreateAutoBackUpStrategyRequest;
-const CreateAutoBackUpStrategyResponse = models.CreateAutoBackUpStrategyResponse;
-const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
-const UpdateDictionariesResponse = models.UpdateDictionariesResponse;
-const InstanceInfo = models.InstanceInfo;
-const DeleteInstanceResponse = models.DeleteInstanceResponse;
-const DeleteIndexResponse = models.DeleteIndexResponse;
-const DescribeInstanceLogsResponse = models.DescribeInstanceLogsResponse;
-const CreateInstanceRequest = models.CreateInstanceRequest;
-const UpdatePluginsResponse = models.UpdatePluginsResponse;
-const RestartInstanceRequest = models.RestartInstanceRequest;
-const RestartKibanaResponse = models.RestartKibanaResponse;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
-const CreateIndexRequest = models.CreateIndexRequest;
-const UpdateInstanceRequest = models.UpdateInstanceRequest;
-const EsDictionaryInfo = models.EsDictionaryInfo;
-const DescribeInstanceOperationsResponse = models.DescribeInstanceOperationsResponse;
-const RestartNodesRequest = models.RestartNodesRequest;
-const UpdatePluginsRequest = models.UpdatePluginsRequest;
-const GetRequestTargetNodeTypesRequest = models.GetRequestTargetNodeTypesRequest;
-const KibanaNodeInfo = models.KibanaNodeInfo;
-const OperationDurationUpdated = models.OperationDurationUpdated;
 const UpgradeLicenseResponse = models.UpgradeLicenseResponse;
-const EsAcl = models.EsAcl;
-const UpdateRequestTargetNodeTypesResponse = models.UpdateRequestTargetNodeTypesResponse;
-const UpdateIndexRequest = models.UpdateIndexRequest;
+const RestartKibanaRequest = models.RestartKibanaRequest;
+const DescribeAutoBackUpStrategyResponse = models.DescribeAutoBackUpStrategyResponse;
+const UpdateDictionariesRequest = models.UpdateDictionariesRequest;
+const CosBackup = models.CosBackup;
+const DescribeIndexListRequest = models.DescribeIndexListRequest;
+const OperationDuration = models.OperationDuration;
+const OperationDurationUpdated = models.OperationDurationUpdated;
+const CreateInstanceRequest = models.CreateInstanceRequest;
+const UpdateDictionariesResponse = models.UpdateDictionariesResponse;
+const ProcessDetail = models.ProcessDetail;
+const DeleteIndexResponse = models.DeleteIndexResponse;
+const UpdatePluginsResponse = models.UpdatePluginsResponse;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const EsDictionaryInfo = models.EsDictionaryInfo;
+const OutboundPublicAcl = models.OutboundPublicAcl;
+const GetRequestTargetNodeTypesRequest = models.GetRequestTargetNodeTypesRequest;
+const InstanceInfo = models.InstanceInfo;
 const MasterNodeInfo = models.MasterNodeInfo;
-const DescribeInstanceOperationsRequest = models.DescribeInstanceOperationsRequest;
-const IndexOptionsField = models.IndexOptionsField;
-const TaskDetail = models.TaskDetail;
 const DeleteInstanceRequest = models.DeleteInstanceRequest;
-const DescribeViewsResponse = models.DescribeViewsResponse;
-const RestartNodesResponse = models.RestartNodesResponse;
-const SubTaskDetail = models.SubTaskDetail;
+const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const DeleteAutoBackUpStrategyResponse = models.DeleteAutoBackUpStrategyResponse;
 const DescribeIndexMetaRequest = models.DescribeIndexMetaRequest;
-const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
-const DescribeInstancesResponse = models.DescribeInstancesResponse;
-const DeleteIndexRequest = models.DeleteIndexRequest;
-const EsConfigSetInfo = models.EsConfigSetInfo;
-const DescribeViewsRequest = models.DescribeViewsRequest;
-const GetRequestTargetNodeTypesResponse = models.GetRequestTargetNodeTypesResponse;
-const DescribeIndexListResponse = models.DescribeIndexListResponse;
-const Operation = models.Operation;
+const RestartKibanaResponse = models.RestartKibanaResponse;
+const UpdateIndexRequest = models.UpdateIndexRequest;
 const IndexMetaField = models.IndexMetaField;
-const UpgradeLicenseRequest = models.UpgradeLicenseRequest;
+const WebNodeTypeInfo = models.WebNodeTypeInfo;
+const LocalDiskInfo = models.LocalDiskInfo;
+const IndexPolicyField = models.IndexPolicyField;
+const EnableScheduleOperationDuration = models.EnableScheduleOperationDuration;
+const RestartInstanceResponse = models.RestartInstanceResponse;
+const BackingIndexMetaField = models.BackingIndexMetaField;
+const NodeView = models.NodeView;
+const TagInfo = models.TagInfo;
+const UpdateInstanceRequest = models.UpdateInstanceRequest;
+const CreateAutoBackUpStrategyResponse = models.CreateAutoBackUpStrategyResponse;
+const RestartInstanceRequest = models.RestartInstanceRequest;
+const ZoneDetail = models.ZoneDetail;
+const KibanaNodeInfo = models.KibanaNodeInfo;
+const EsAcl = models.EsAcl;
+const RestartNodesRequest = models.RestartNodesRequest;
+const RestartNodesResponse = models.RestartNodesResponse;
+const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
+const DescribeViewsResponse = models.DescribeViewsResponse;
 const ModifyAutoBackUpCommonInfoResponse = models.ModifyAutoBackUpCommonInfoResponse;
 const OptionalWebServiceInfo = models.OptionalWebServiceInfo;
 
@@ -112,7 +118,7 @@ class EsClient extends AbstractClient {
     }
     
     /**
-     * This API is used to get the node types used to receive client requests.
+     * Get the node type that receives client requests.
      * @param {GetRequestTargetNodeTypesRequest} req
      * @param {function(string, GetRequestTargetNodeTypesResponse):void} cb
      * @public
@@ -145,7 +151,7 @@ class EsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to terminate a cluster instance. 
+     * Terminate cluster instances
      * @param {DeleteInstanceRequest} req
      * @param {function(string, DeleteInstanceResponse):void} cb
      * @public
@@ -156,7 +162,7 @@ class EsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create indices.
+     * Create an index
      * @param {CreateIndexRequest} req
      * @param {function(string, CreateIndexResponse):void} cb
      * @public
@@ -167,7 +173,7 @@ class EsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query all eligible instances in the current region under the current account.
+     * Query all instances meeting conditions for the user in that region
      * @param {DescribeInstancesRequest} req
      * @param {function(string, DescribeInstancesResponse):void} cb
      * @public
@@ -189,7 +195,7 @@ class EsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to change the list of plugins.
+     * Update the plug-in list
      * @param {UpdatePluginsRequest} req
      * @param {function(string, UpdatePluginsResponse):void} cb
      * @public
@@ -200,14 +206,14 @@ class EsClient extends AbstractClient {
     }
 
     /**
-     * This API is used for operations such as modifying node specification, renaming an instance, modifying configuration, resetting password, and setting Kibana blocklist/allowlist. `InstanceId` is required, while `ForceRestart` is optional. Other parameters or parameter combinations and their meanings are as follows:
-- InstanceName: renames an instance (only for instance identification)
-- NodeInfoList: modifies node configuration (horizontally scaling nodes, vertically scaling nodes, adding primary nodes, adding cold nodes, etc.)
-- EsConfig: modifies cluster configuration
-- Password: changes the password of the default user "elastic"
-- EsAcl: modifies the ACL
-- CosBackUp: sets auto-backup to COS for a cluster
-Only one of the parameters or parameter combinations above can be passed in at a time, while passing fewer or more ones will cause the request to fail.
+     * Perform operations on the cluster, such as node specification change, instance name modification, configuration modification, password resetting, and Kibana blocklist/allowlist addition. InstanceId is a required parameter, while ForceRestart is optional. The remaining parameter combinations and their meanings are as follows:
+- InstanceName: Modify the instance name (only used to identify the instance)
+-NodeInfoList: Modify node configuration (horizontally scale nodes, vertically scale nodes, add primary nodes, add cold nodes, etc.)
+-EsConfig: modify cluster configuration
+-Password: Modify the password of the default user elastic
+-EsAcl: Modify an ACL
+-CosBackUp: Set cluster COS auto backup information
+Only one of the above parameters can be passed. Passing more or fewer will cause request failure.
      * @param {UpdateInstanceRequest} req
      * @param {function(string, UpdateInstanceResponse):void} cb
      * @public
@@ -218,7 +224,7 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to restart an ES cluster instance (for operations such as system update). 
+     * Restart ES cluster instances for system version update.
      * @param {RestartInstanceRequest} req
      * @param {function(string, RestartInstanceResponse):void} cb
      * @public
@@ -251,7 +257,7 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to query the eligible ES cluster logs in the current region.
+     * Query the logs of eligible ES clusters in that region for the user.
      * @param {DescribeInstanceLogsRequest} req
      * @param {function(string, DescribeInstanceLogsResponse):void} cb
      * @public
@@ -262,7 +268,7 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to restart Kibana. 
+     * Restart Kibana
      * @param {RestartKibanaRequest} req
      * @param {function(string, RestartKibanaResponse):void} cb
      * @public
@@ -273,7 +279,7 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to update ES cluster dictionaries.
+     * Update the ES cluster dictionary
      * @param {UpdateDictionariesRequest} req
      * @param {function(string, UpdateDictionariesResponse):void} cb
      * @public
@@ -284,7 +290,7 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to update the node types used to receive client requests.
+     * This API is used to update the node type that receives client requests.
      * @param {UpdateRequestTargetNodeTypesRequest} req
      * @param {function(string, UpdateRequestTargetNodeTypesResponse):void} cb
      * @public
@@ -295,7 +301,7 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to query the operation history of an instance by specified criteria.
+     * Query the operation records of an instance under specified conditions.
      * @param {DescribeInstanceOperationsRequest} req
      * @param {function(string, DescribeInstanceOperationsResponse):void} cb
      * @public
@@ -306,7 +312,7 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to query view data from three dimensions: cluster, node, and Kibana.
+     * Query view data of a cluster, including cluster-level, node, and Kibana dimensions.
      * @param {DescribeViewsRequest} req
      * @param {function(string, DescribeViewsResponse):void} cb
      * @public
@@ -317,7 +323,7 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to create an ES cluster instance with the specified specification.
+     * Create an ES cluster instance with the specified specification.
      * @param {CreateInstanceRequest} req
      * @param {function(string, CreateInstanceResponse):void} cb
      * @public
@@ -328,7 +334,7 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to update indices.
+     * Updates an index
      * @param {UpdateIndexRequest} req
      * @param {function(string, UpdateIndexResponse):void} cb
      * @public
@@ -339,7 +345,7 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to restart cluster nodes.
+     * Used to restart cluster nodes.
      * @param {RestartNodesRequest} req
      * @param {function(string, RestartNodesResponse):void} cb
      * @public
@@ -350,7 +356,7 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to delete indices.
+     * Delete an index
      * @param {DeleteIndexRequest} req
      * @param {function(string, DeleteIndexResponse):void} cb
      * @public
@@ -361,7 +367,7 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to upgrade ES cluster version
+     * Upgrades the edition of an ES cluster
      * @param {UpgradeInstanceRequest} req
      * @param {function(string, UpgradeInstanceResponse):void} cb
      * @public
@@ -372,7 +378,7 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to upgrade ES X-Pack.
+     * Upgrade ES commercial features
      * @param {UpgradeLicenseRequest} req
      * @param {function(string, UpgradeLicenseResponse):void} cb
      * @public
@@ -394,7 +400,7 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to obtain index metadata.
+     * This API is used to retrieve index metadata.
      * @param {DescribeIndexMetaRequest} req
      * @param {function(string, DescribeIndexMetaResponse):void} cb
      * @public

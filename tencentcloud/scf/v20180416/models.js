@@ -93,7 +93,7 @@ class Trigger extends  AbstractModel {
         super();
 
         /**
-         * Latest modification time of the trigger
+         * Last modification time of the trigger
          * @type {string || null}
          */
         this.ModTime = null;
@@ -105,31 +105,31 @@ class Trigger extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Detailed trigger configuration
+         * Trigger detailed configuration
          * @type {string || null}
          */
         this.TriggerDesc = null;
 
         /**
-         * Trigger name
+         * Trigger name.
          * @type {string || null}
          */
         this.TriggerName = null;
 
         /**
-         * Creation time of the trigger
+         * Trigger creation time
          * @type {string || null}
          */
         this.AddTime = null;
 
         /**
-         * Enabling switch
+         * Enable switch
          * @type {number || null}
          */
         this.Enable = null;
 
         /**
-         * Custom parameter
+         * Customer custom parameter
          * @type {string || null}
          */
         this.CustomArgument = null;
@@ -141,31 +141,31 @@ class Trigger extends  AbstractModel {
         this.AvailableStatus = null;
 
         /**
-         * Minimum resource ID of trigger
+         * Minimum resource ID of the trigger
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * Trigger-Function binding status
+         * Binding status of the trigger and SCF
          * @type {string || null}
          */
         this.BindStatus = null;
 
         /**
-         * Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console
+         * Trigger type. Two-way means both the left and right consoles can operate. One-way means only the SCF console can create.
          * @type {string || null}
          */
         this.TriggerAttribute = null;
 
         /**
-         * The alias or version bound with the trigger
+         * Alias name or version bound to the trigger
          * @type {string || null}
          */
         this.Qualifier = null;
 
         /**
-         * Trigger description
+         * Trigger description.
          * @type {string || null}
          */
         this.Description = null;
@@ -318,6 +318,76 @@ class DeleteLayerVersionResponse extends  AbstractModel {
 }
 
 /**
+ * Session parameter
+ * @class
+ */
+class SessionConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * session source. Valid values: 'HEADER', 'COOKIE', 'QUERY_STRING'
+         * @type {string || null}
+         */
+        this.SessionSource = null;
+
+        /**
+         * session name. It must start with a letter. Other characters can consist of digits, letters, underscores, and hyphens. Length: 5-40 characters.
+         * @type {string || null}
+         */
+        this.SessionName = null;
+
+        /**
+         * Maximum concurrent sessions
+         * @type {number || null}
+         */
+        this.MaximumConcurrencySessionPerInstance = null;
+
+        /**
+         * Lifecycle
+         * @type {number || null}
+         */
+        this.MaximumTTLInSeconds = null;
+
+        /**
+         * Idle duration
+         * @type {number || null}
+         */
+        this.MaximumIdleTimeInSeconds = null;
+
+        /**
+         * Path information corresponding to the session
+         * @type {string || null}
+         */
+        this.SessionPath = null;
+
+        /**
+         * Automatically destroy FATAL and auto-pause PAUSE. This only occurs when security isolation is started.
+         * @type {string || null}
+         */
+        this.IdleTimeoutStrategy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionSource = 'SessionSource' in params ? params.SessionSource : null;
+        this.SessionName = 'SessionName' in params ? params.SessionName : null;
+        this.MaximumConcurrencySessionPerInstance = 'MaximumConcurrencySessionPerInstance' in params ? params.MaximumConcurrencySessionPerInstance : null;
+        this.MaximumTTLInSeconds = 'MaximumTTLInSeconds' in params ? params.MaximumTTLInSeconds : null;
+        this.MaximumIdleTimeInSeconds = 'MaximumIdleTimeInSeconds' in params ? params.MaximumIdleTimeInSeconds : null;
+        this.SessionPath = 'SessionPath' in params ? params.SessionPath : null;
+        this.IdleTimeoutStrategy = 'IdleTimeoutStrategy' in params ? params.IdleTimeoutStrategy : null;
+
+    }
+}
+
+/**
  * GetReservedConcurrencyConfig response structure.
  * @class
  */
@@ -354,7 +424,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Parameters of the protocol
+ * Parameters for HTTP function support of other access protocols
  * @class
  */
 class ProtocolParams extends  AbstractModel {
@@ -362,8 +432,7 @@ class ProtocolParams extends  AbstractModel {
         super();
 
         /**
-         * Parameters of WebSockets protocol
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Supported parameters of the WebSockets protocol
          * @type {WSParams || null}
          */
         this.WSParams = null;
@@ -773,7 +842,7 @@ class UsageInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Resource pool options based on TKE
  * @class
  */
 class NamespaceResourceEnvTKE extends  AbstractModel {
@@ -781,49 +850,52 @@ class NamespaceResourceEnvTKE extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Cluster ID
          * @type {string || null}
          */
         this.ClusterID = null;
 
         /**
-         * 
+         * Subnet ID.
          * @type {string || null}
          */
         this.SubnetID = null;
 
         /**
-         * 
+         * Namespace
          * @type {string || null}
          */
         this.Namespace = null;
 
         /**
-         * 
+         * Data storage address
          * @type {string || null}
          */
         this.DataPath = null;
 
         /**
-         * 
+         * node selector
          * @type {Array.<K8SLabel> || null}
          */
         this.NodeSelector = null;
 
         /**
-         * 
+         * Taint and toleration
          * @type {Array.<K8SToleration> || null}
          */
         this.Tolerations = null;
 
         /**
-         * 
+         * Starting node port number occupied by the scf component
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * 
+         * pod patch content in yaml format, for example
+metadata:
+  labels:
+    key: value
          * @type {string || null}
          */
         this.PodTemplatePatch = null;
@@ -874,13 +946,13 @@ class PublicNetConfigIn extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable public network access. Valid values: ['DISABLE', 'ENABLE']
+         * Whether to enable public network access. Valid values: DISABLE, ENABLE.
          * @type {string || null}
          */
         this.PublicNetStatus = null;
 
         /**
-         * EIP configuration
+         * Eip configuration
          * @type {EipConfigIn || null}
          */
         this.EipConfig = null;
@@ -1163,44 +1235,44 @@ class GetFunctionLogsRequest extends  AbstractModel {
 
         /**
          * Function name.
-- To ensure the compatibility of the [`GetFunctionLogs`](https://intl.cloud.tencent.com/document/product/583/18583) API, the input parameter `FunctionName` is optional, but we recommend you enter it; otherwise, log acquisition may fail.
-- After the function is connected to CLS, we recommend you use the [related CLS API](https://intl.cloud.tencent.com/document/product/614/16875) to get the best log retrieval experience.
+-To ensure compatibility of the [retrieve function execution log](https://www.tencentcloud.com/document/product/583/18583?from_cn_redirect=1) API `GetFunctionLogs`, the input parameter `FunctionName` remains an optional field, but it is recommended to fill in this parameter. Otherwise, log acquisition failure may occur.
+- After associating a function with CLS, it is recommended to use the relevant CLS APIs (https://www.tencentcloud.com/document/product/614/16875?from_cn_redirect=1) to get the best log retrieval experience.
          * @type {string || null}
          */
         this.FunctionName = null;
 
         /**
-         * Data offset. The addition of `Offset` and `Limit` cannot exceed 10,000.
+         * Offset of the data. Offset + Limit cannot be greater than 10000.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Length of the return data. The addition of `Offset` and `Limit` cannot exceed 10,000.
+         * Length of the returned data. Offset + Limit cannot be greater than 10000.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * It specifies whether to sort the logs in an ascending or descending order. The value is `desc` or `asc`.
+         * Whether to sort logs in descending or ascending order. Available values: `desc` and `asc`.
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * It specifies the sorting order of the logs based on a specified field, such as `function_name`, `duration`, `mem_usage`, and `start_time`.
+         * Sort logs by a certain field. The following fields are supported: function_name, duration, mem_usage, start_time
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
-         * Log filter used to identify whether to return logs of successful or failed requests. `filter.RetCode=not0` indicates that only the logs of failed requests will be returned. `filter.RetCode=is0` indicates that only the logs of successful requests will be returned. If this parameter is left blank, all logs will be returned. 
+         * Log filter criteria. It can be used to distinguish correct and error logs. filter.RetCode=not0 means only return error logs, filter.RetCode=is0 means only return correct logs. If not passed, all logs are returned.
          * @type {LogFilter || null}
          */
         this.Filter = null;
 
         /**
-         * Function namespace
+         * Namespace of the function
          * @type {string || null}
          */
         this.Namespace = null;
@@ -1212,25 +1284,25 @@ class GetFunctionLogsRequest extends  AbstractModel {
         this.Qualifier = null;
 
         /**
-         * RequestId corresponding to the executed function
+         * Request ID for executing the function
          * @type {string || null}
          */
         this.FunctionRequestId = null;
 
         /**
-         * Query date, for example, 2017-05-16 20:00:00. The date must be within one day of the end time.
+         * Specific date of the query, for example: 2017-05-16 20:00:00. It must differ from endtime by no more than one day.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Query date, for example, 2017-05-16 20:59:59. The date must be within one day of the start time.
+         * Specific date of the query, for example: 2017-05-16 20:59:59. It must differ from startTime by no more than one day.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * This field is disused.
+         * This field is offline.
          * @type {LogSearchContext || null}
          */
         this.SearchContext = null;
@@ -1397,7 +1469,7 @@ class GetRequestStatusRequest extends  AbstractModel {
 }
 
 /**
- * Log filtering criteria, which is for distinguishing between logs of successful and failed execution
+ * Log filter criteria, used to distinguish between correct and error logs
  * @class
  */
 class LogFilter extends  AbstractModel {
@@ -1405,13 +1477,13 @@ class LogFilter extends  AbstractModel {
         super();
 
         /**
-         * Values of `filter.RetCode` include:
-not0, indicating that only logs of failed execution will be returned.
-is0, indicating that only logs of successful execution will be returned.
-TimeLimitExceeded, indicating that logs of function invocations which timed out will be returned.
-ResourceLimitExceeded, indicating that logs of function invocations during which resources exceeded the upper limit will be returned.
-UserCodeException, indicating that logs of function invocations during which a user code error occurred will be returned.
-Blank, indicating that all logs will be returned.
+         * Valid values of filter.RetCode:
+not0 means only error logs are returned.
+is0 means only return correct logs.
+TimeLimitExceeded returns the logs of function call timed out.
+ResourceLimitExceeded returns the logs of resource limit exceeded during function calls.
+UserCodeException returns the logs of user code errors in function calls.
+If there is no input, all logs are returned.
          * @type {string || null}
          */
         this.RetCode = null;
@@ -1431,7 +1503,7 @@ Blank, indicating that all logs will be returned.
 }
 
 /**
- * Fixed IP configuration for public network access
+ * Public network access fixed ip configuration
  * @class
  */
 class EipConfigIn extends  AbstractModel {
@@ -1439,7 +1511,7 @@ class EipConfigIn extends  AbstractModel {
         super();
 
         /**
-         * Status of the EIP. Values: ['ENABLE','DISABLE']
+         * Eip status. Valid values: `ENABLE` and `DISABLE`
          * @type {string || null}
          */
         this.EipStatus = null;
@@ -1875,7 +1947,7 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * Parameters of the specified protocol
+ * Parameters for accessing an HTTP function over the WebSockets protocol
  * @class
  */
 class WSParams extends  AbstractModel {
@@ -1883,8 +1955,7 @@ class WSParams extends  AbstractModel {
         super();
 
         /**
-         * Idle timeout period in seconds. Default: 15; range: 1 to 1800
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Idle timeout in seconds. Default value: 15s. Configurable range: 1-1800s.
          * @type {number || null}
          */
         this.IdleTimeOut = null;
@@ -2092,97 +2163,98 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         super();
 
         /**
-         * Name of the function to be modified
+         * The function name to be modified
          * @type {string || null}
          */
         this.FunctionName = null;
 
         /**
-         * Function description. It can contain up to 1,000 characters, including letters, digits, spaces, commas (,), periods (.), and Chinese characters.
+         * Function description. Supports up to 1,000 English letters, digits, spaces, commas, and periods. Chinese is supported.
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128-3,072 MB in increments of 128 MB.
+         * Memory size of the function runtime. Default value: 128 MB. Selectable range: 64 MB, or 128 MB to 3072 MB in 128 MB increments.
          * @type {number || null}
          */
         this.MemorySize = null;
 
         /**
-         * Maximum execution duration of function in seconds. Value range: 1-900 seconds. Default value: 3 seconds
+         * Maximum execution time of the function, in seconds. Value range: 1-900 seconds. Default value: 3 seconds.
          * @type {number || null}
          */
         this.Timeout = null;
 
         /**
-         * Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Go1, Java8, CustomRuntime
+         * Runtime environment. It is specified upon creation and currently does not support modification.
          * @type {string || null}
          */
         this.Runtime = null;
 
         /**
-         * Function environment variable
+         * Environment variable of the function
          * @type {Environment || null}
          */
         this.Environment = null;
 
         /**
-         * Function namespace
+         * Namespace of the function
+Default value: default
          * @type {string || null}
          */
         this.Namespace = null;
 
         /**
-         * Function VPC configuration
+         * VPC configuration of the function
          * @type {VpcConfig || null}
          */
         this.VpcConfig = null;
 
         /**
-         * Role bound to the function
+         * Role bound to a function
          * @type {string || null}
          */
         this.Role = null;
 
         /**
-         * Specifies whether to [install dependency online](https://intl.cloud.tencent.com/document/product/583/37920?from_cn_redirect=1). `TRUE`: yes. Default to `FALSE`. It is only available for Node.js functions.
+         * [Install dependency online](https://www.tencentcloud.com/document/product/583/37920?from_cn_redirect=1). TRUE indicates installation. Default value: FALSE. Only supported for Node.js functions.
          * @type {string || null}
          */
         this.InstallDependency = null;
 
         /**
-         * CLS logset ID to which logs are shipped
+         * ID of the cls Log Set for log delivery
          * @type {string || null}
          */
         this.ClsLogsetId = null;
 
         /**
-         * CLS Topic ID to which logs are shipped
+         * cls Topic ID for log delivery
          * @type {string || null}
          */
         this.ClsTopicId = null;
 
         /**
-         * It specifies whether to synchronously publish a new version during the update. The default value is `FALSE`, indicating not to publish a new version
+         * Whether to release a new version synchronously when updating. Default value: FALSE, which means no new version is released.
          * @type {string || null}
          */
         this.Publish = null;
 
         /**
-         * Whether to enable L5 access. TRUE: enable; FALSE: not enable
+         * Whether L5 access capability is enabled. TRUE to enable, FALSE to shutdown.
          * @type {string || null}
          */
         this.L5Enable = null;
 
         /**
-         * List of layer versions that bound with the function. Files with the same name will be overridden by the bound layer versions according to the ascending order in the list. 
+         * List of layer versions to associate with the function. The layer versions overwrite each other sequentially in the order in the list.
          * @type {Array.<LayerVersionSimple> || null}
          */
         this.Layers = null;
 
         /**
-         * Information of a dead letter queue associated with a function
+         * Dead letter queue information associated with the function
          * @type {DeadLetterConfig || null}
          */
         this.DeadLetterConfig = null;
@@ -2194,22 +2266,46 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.PublicNetConfig = null;
 
         /**
-         * File system configuration input parameter, which is used for the function to bind the CFS file system
+         * File system configuration parameters for binding a CFS file system in SCF
          * @type {CfsConfig || null}
          */
         this.CfsConfig = null;
 
         /**
-         * The function initialization timeout period
+         * Function initialization timeout period
          * @type {number || null}
          */
         this.InitTimeout = null;
 
         /**
-         * Parameters of the specified protocol
+         * Configure ProtocolType access protocol for an HTTP function. Parameters configurable for the current protocol.
          * @type {ProtocolParams || null}
          */
         this.ProtocolParams = null;
+
+        /**
+         * Single-instance multi-concurrency configuration. Supports only Web functions.
+         * @type {InstanceConcurrencyConfig || null}
+         */
+        this.InstanceConcurrencyConfig = null;
+
+        /**
+         * Whether the Dns caching capability is enabled. Supports only the EVENT function. Defaults to FALSE. TRUE to enable, FALSE to shutdown.
+         * @type {string || null}
+         */
+        this.DnsCache = null;
+
+        /**
+         * Private network access configuration
+         * @type {IntranetConfigIn || null}
+         */
+        this.IntranetConfig = null;
+
+        /**
+         * Ignorable system log reporting
+         * @type {boolean || null}
+         */
+        this.IgnoreSysLog = null;
 
     }
 
@@ -2278,6 +2374,20 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
             obj.deserialize(params.ProtocolParams)
             this.ProtocolParams = obj;
         }
+
+        if (params.InstanceConcurrencyConfig) {
+            let obj = new InstanceConcurrencyConfig();
+            obj.deserialize(params.InstanceConcurrencyConfig)
+            this.InstanceConcurrencyConfig = obj;
+        }
+        this.DnsCache = 'DnsCache' in params ? params.DnsCache : null;
+
+        if (params.IntranetConfig) {
+            let obj = new IntranetConfigIn();
+            obj.deserialize(params.IntranetConfig)
+            this.IntranetConfig = obj;
+        }
+        this.IgnoreSysLog = 'IgnoreSysLog' in params ? params.IgnoreSysLog : null;
 
     }
 }
@@ -2616,7 +2726,7 @@ class DeleteNamespaceResponse extends  AbstractModel {
 }
 
 /**
- * Specifies a layer version
+ * Specify a Layer version
  * @class
  */
 class LayerVersionSimple extends  AbstractModel {
@@ -2624,13 +2734,13 @@ class LayerVersionSimple extends  AbstractModel {
         super();
 
         /**
-         * Name of the layer to bind. Leave it blank if you want to unbind layers
+         * Name of the bound layer. Pass an empty string to unbind the layer.
          * @type {string || null}
          */
         this.LayerName = null;
 
         /**
-         * Version ID f the layer to bind/unbind. If the layer version to unbind is the only layer version of the function version, enter `0`.
+         * Bind or unbind a layer version. To unbind the last layer version associated with a function version, set LayerVersion to 0.
          * @type {number || null}
          */
         this.LayerVersion = null;
@@ -2854,7 +2964,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * File system (CFS) configuration description
+ * Configuration description of the file system (cfs)
  * @class
  */
 class CfsConfig extends  AbstractModel {
@@ -2862,7 +2972,7 @@ class CfsConfig extends  AbstractModel {
         super();
 
         /**
-         * File system information list
+         * List of file system information
          * @type {Array.<CfsInsInfo> || null}
          */
         this.CfsInsList = null;
@@ -2986,57 +3096,55 @@ class CreateTriggerRequest extends  AbstractModel {
         super();
 
         /**
-         * Name of the function bound to the new trigger
+         * Function name bound to the created trigger
          * @type {string || null}
          */
         this.FunctionName = null;
 
         /**
-         * Name of a new trigger. For a timer trigger, the name can contain up to 100 letters, digits, dashes, and underscores; for a COS trigger, it should be an access domain name of the corresponding COS bucket applicable to the XML API (e.g., 5401-5ff414-12345.cos.ap-shanghai.myqcloud.com); for other triggers, please see the descriptions of parameters bound to the specific trigger.
+         * Name of the trigger to create. If it is a scheduled trigger, the name supports English letters, digits, hyphens, and underscores, up to 100 characters. If it is a COS trigger, it must be the access domain of the corresponding COS storage bucket suitable for the XML API (for example, 5401-5ff414-12345.cos.ap-shanghai.myqcloud.com). For other triggers, see the parameter description of the specific trigger binding.
          * @type {string || null}
          */
         this.TriggerName = null;
 
         /**
-         * Type of trigger. Values: `cos`, `cmq`, `timer`, `ckafka`, `http`. 
-To create Function URL please refer to [Creating a Function URL](https://www.tencentcloud.com/document/product/583/69492?lang=en&pg=)
-To create a CLS trigger, please refer to [Create Deliver CloudFunction (SCF)](https://www.tencentcloud.com/zh/document/product/614/59903).
+         * Trigger type. Currently supports cos, cls, timer, ckafka, and http types. To create a function URL, please use the http type. See [Creating a Function URL](https://www.tencentcloud.com/document/product/583/100227?from_cn_redirect=1#33bbbda4-9131-48a6-ac37-ac62ffe01424). To create a cls trigger, see CLS Creating Delivery SCF Task.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * For parameters of triggers, see [Trigger Description](https://intl.cloud.tencent.com/document/product/583/39901?from_cn_redirect=1)
+         * Parameters corresponding to the trigger. For details, see [Trigger Description](https://www.tencentcloud.com/document/product/583/39901?from_cn_redirect=1).
          * @type {string || null}
          */
         this.TriggerDesc = null;
 
         /**
-         * Function namespace
+         * Namespace of the function
          * @type {string || null}
          */
         this.Namespace = null;
 
         /**
-         * Function version. It defaults to `$LATEST`. It's recommended to use [$DEFAULT](https://www.tencentcloud.com/document/product/583/37458?lang=en&pg=) for canary release.
+         * Version or alias that the trigger takes effect on. It is recommended to fill in $DEFAULT for future grayscale release. Default value: $LATEST.
          * @type {string || null}
          */
         this.Qualifier = null;
 
         /**
-         * Initial enabling status of the trigger. `OPEN` indicates enabled, and `CLOSE` indicates disabled.
+         * Initial status of the trigger. OPEN means enabling, and CLOSE means disabling.
          * @type {string || null}
          */
         this.Enable = null;
 
         /**
-         * Custom argument, supporting only the timer trigger.
+         * User-defined parameter. Only timer triggers are supported.
          * @type {string || null}
          */
         this.CustomArgument = null;
 
         /**
-         * Trigger description
+         * Trigger description.
          * @type {string || null}
          */
         this.Description = null;
@@ -3059,6 +3167,41 @@ To create a CLS trigger, please refer to [Create Deliver CloudFunction (SCF)](ht
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.CustomArgument = 'CustomArgument' in params ? params.CustomArgument : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * Dynamic concurrency configuration
+ * @class
+ */
+class MixNodeConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * GPU model name
+         * @type {string || null}
+         */
+        this.NodeSpec = null;
+
+        /**
+         * Number of concurrencies
+         * @type {number || null}
+         */
+        this.Num = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeSpec = 'NodeSpec' in params ? params.NodeSpec : null;
+        this.Num = 'Num' in params ? params.Num : null;
 
     }
 }
@@ -3389,7 +3532,7 @@ class LogSearchContext extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Log record number
+         * Number of logs.
          * @type {number || null}
          */
         this.Limit = null;
@@ -3401,7 +3544,7 @@ class LogSearchContext extends  AbstractModel {
         this.Keyword = null;
 
         /**
-         * Log type. The value is `Application` (default) or `Platform`.
+         * Log type. Valid values: `Application`, `Platform`. Default value: `Application`.
          * @type {string || null}
          */
         this.Type = null;
@@ -3615,7 +3758,8 @@ class RequestStatus extends  AbstractModel {
 }
 
 /**
- * 
+ * Kubernetes taint and toleration. Please note the supported fields for your Kubernetes version during use.
+See https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
  * @class
  */
 class K8SToleration extends  AbstractModel {
@@ -3623,31 +3767,31 @@ class K8SToleration extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Matched taint name
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * 
+         * Match mode. Default value: Equal.
          * @type {string || null}
          */
         this.Operator = null;
 
         /**
-         * 
+         * Execution policy
          * @type {string || null}
          */
         this.Effect = null;
 
         /**
-         * 
+         * Taint value to match. Required when Operator is Equal.
          * @type {string || null}
          */
         this.Value = null;
 
         /**
-         * 
+         * How long a Pod can still run on a node when the taint is not tolerated
          * @type {number || null}
          */
         this.TolerationSeconds = null;
@@ -3924,7 +4068,7 @@ class AsyncEvent extends  AbstractModel {
 }
 
 /**
- * Environment variable parameter of the function
+ * Environment variable parameters of the function
  * @class
  */
 class Environment extends  AbstractModel {
@@ -4377,7 +4521,7 @@ class CreateTriggerResponse extends  AbstractModel {
         super();
 
         /**
-         * Trigger information
+         * Trigger information.
          * @type {Trigger || null}
          */
         this.TriggerInfo = null;
@@ -4490,7 +4634,7 @@ class CreateNamespaceRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 
+         * Resource pool configuration
          * @type {NamespaceResourceEnv || null}
          */
         this.ResourceEnv = null;
@@ -4667,7 +4811,7 @@ When `Name` is `Runtime`, `CustomImage` refers to the image type function
 }
 
 /**
- * Variable parameter
+ * Variable parameters
  * @class
  */
 class Variable extends  AbstractModel {
@@ -4675,13 +4819,13 @@ class Variable extends  AbstractModel {
         super();
 
         /**
-         * Variable name
+         * Variable name. Cannot be empty.
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Variable value
+         * Variable value. Cannot be empty.
          * @type {string || null}
          */
         this.Value = null;
@@ -4710,13 +4854,13 @@ class K8SLabel extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Name of the label
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * 
+         * Value of the label
          * @type {string || null}
          */
         this.Value = null;
@@ -5201,67 +5345,67 @@ class FunctionLog extends  AbstractModel {
         super();
 
         /**
-         * Function name
+         * Function name.
          * @type {string || null}
          */
         this.FunctionName = null;
 
         /**
-         * Return value after the function is executed
+         * Returned value after function execution
          * @type {string || null}
          */
         this.RetMsg = null;
 
         /**
-         * RequestId corresponding to the executed function
+         * requestId for executing the function
          * @type {string || null}
          */
         this.RequestId = null;
 
         /**
-         * Start time of the function execution
+         * Time point when the function starts execution
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Function execution result. `0` indicates successful execution and other values indicate failure.
+         * Function execution result. 0 indicates successful execution, 2 indicates the function is running, 3 indicates an execution interrupt, and other values indicate failure.
          * @type {number || null}
          */
         this.RetCode = null;
 
         /**
-         * It specifies whether the function invocation is finished. `1` indicates execution completion and other values indicate that exceptions occurred during the invocation.
+         * Whether the function call ends. If so, 1 means execution ended, and additional values indicate a call exception.
          * @type {number || null}
          */
         this.InvokeFinished = null;
 
         /**
-         * Duration of the function execution. The unit is millisecond (ms).
+         * Function execution duration in milliseconds.
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
-         * Function billing duration. The unit is millisecond (ms). The value is rounded up to a multiple of 100 ms.
+         * Billing duration of a function. It is rounded up to the nearest 100 ms based on the duration, in ms.
          * @type {number || null}
          */
         this.BillDuration = null;
 
         /**
-         * Actual memory size used during the function execution. The unit is byte.
+         * Memory size actually consumed during function execution, in bytes.
          * @type {number || null}
          */
         this.MemUsage = null;
 
         /**
-         * Function execution logs
+         * Log output during function execution
          * @type {string || null}
          */
         this.Log = null;
 
         /**
-         * Log level
+         * Log level.
          * @type {string || null}
          */
         this.Level = null;
@@ -5273,7 +5417,7 @@ class FunctionLog extends  AbstractModel {
         this.Source = null;
 
         /**
-         * Number of retries
+         * Number of retries.
          * @type {number || null}
          */
         this.RetryNum = null;
@@ -5438,7 +5582,7 @@ class GetFunctionAddressResponse extends  AbstractModel {
 }
 
 /**
- * Configuration information of the CFS instance associated with function
+ * cfs configuration message associated with the SCF
  * @class
  */
 class CfsInsInfo extends  AbstractModel {
@@ -5452,52 +5596,52 @@ class CfsInsInfo extends  AbstractModel {
         this.UserId = null;
 
         /**
-         * User group ID
+         * User group id.
          * @type {string || null}
          */
         this.UserGroupId = null;
 
         /**
-         * CFS instance ID
+         * File system instance id
          * @type {string || null}
          */
         this.CfsId = null;
 
         /**
-         * File system mount target ID
+         * File system mount point id
          * @type {string || null}
          */
         this.MountInsId = null;
 
         /**
-         * Local mount target
+         * Local mount point
          * @type {string || null}
          */
         this.LocalMountDir = null;
 
         /**
-         * Remote mount target
+         * Remote mount point.
          * @type {string || null}
          */
         this.RemoteMountDir = null;
 
         /**
-         * File system IP, which is not required when you configure CFS.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * File system ip. No need to specify when configuring cfs.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IpAddress = null;
 
         /**
-         * VPC ID of file system, which is not required when you configure CFS.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * VPC id where the file system is located. Not required when configuring cfs.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MountVpcId = null;
 
         /**
-         * VPC subnet ID of file system, which is not required when you configure CFS.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Subnet id of the private network where the file system resides. Not required when configuring cfs.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MountSubnetId = null;
@@ -5520,6 +5664,82 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
         this.MountVpcId = 'MountVpcId' in params ? params.MountVpcId : null;
         this.MountSubnetId = 'MountSubnetId' in params ? params.MountSubnetId : null;
+
+    }
+}
+
+/**
+ * Configuration description for multiple concurrent executions
+ * @class
+ */
+class InstanceConcurrencyConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether intelligent dynamic concurrency is enabled. If set to `FALSE`, static concurrency is used. If set to `''`, the multi-concurrency configuration is canceled.
+         * @type {string || null}
+         */
+        this.DynamicEnabled = null;
+
+        /**
+         * Maximum number of concurrent requests per instance. Value range: [1,100]
+         * @type {number || null}
+         */
+        this.MaxConcurrency = null;
+
+        /**
+         * Safety isolation switch
+         * @type {string || null}
+         */
+        this.InstanceIsolationEnabled = null;
+
+        /**
+         * Session-Based or Request-Based. Choose one.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Dynamic concurrency parameter
+         * @type {Array.<MixNodeConfig> || null}
+         */
+        this.MixNodeConfig = null;
+
+        /**
+         * Session configuration parameters
+         * @type {SessionConfig || null}
+         */
+        this.SessionConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DynamicEnabled = 'DynamicEnabled' in params ? params.DynamicEnabled : null;
+        this.MaxConcurrency = 'MaxConcurrency' in params ? params.MaxConcurrency : null;
+        this.InstanceIsolationEnabled = 'InstanceIsolationEnabled' in params ? params.InstanceIsolationEnabled : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.MixNodeConfig) {
+            this.MixNodeConfig = new Array();
+            for (let z in params.MixNodeConfig) {
+                let obj = new MixNodeConfig();
+                obj.deserialize(params.MixNodeConfig[z]);
+                this.MixNodeConfig.push(obj);
+            }
+        }
+
+        if (params.SessionConfig) {
+            let obj = new SessionConfig();
+            obj.deserialize(params.SessionConfig)
+            this.SessionConfig = obj;
+        }
 
     }
 }
@@ -5864,7 +6084,7 @@ class DeadLetterConfig extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Tag form of a dead letter queue topic mode
+         * Tag format of the DLQ topic model
          * @type {string || null}
          */
         this.FilterType = null;
@@ -6697,7 +6917,7 @@ class GetFunctionLogsResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * This field is disused.
+         * This field is offline.
          * @type {LogSearchContext || null}
          */
         this.SearchContext = null;
@@ -6734,6 +6954,37 @@ class GetFunctionLogsResponse extends  AbstractModel {
             this.SearchContext = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Private network configuration
+ * @class
+ */
+class IntranetConfigIn extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether a fixed private IP address is enabled
+ENABLE: enable
+DISABLE means not enabled.
+
+         * @type {string || null}
+         */
+        this.IpFixed = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IpFixed = 'IpFixed' in params ? params.IpFixed : null;
 
     }
 }
@@ -6902,31 +7153,31 @@ class DeleteTriggerRequest extends  AbstractModel {
         this.FunctionName = null;
 
         /**
-         * Name of the trigger to be deleted
+         * Trigger name to delete
          * @type {string || null}
          */
         this.TriggerName = null;
 
         /**
-         * Type of the trigger to be deleted. Currently, COS, CMQ, timer, and ckafka triggers are supported.
+         * Trigger type to delete. Currently only `timer`, `ckafka`, `apigw`, `cls`, `cos`, `cmq`, and `http` are supported.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Function namespace
+         * Namespace of the function
          * @type {string || null}
          */
         this.Namespace = null;
 
         /**
-         * This field is required if a COS trigger is to be deleted. It stores the data {"event":"cos:ObjectCreated:*"} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+         * If the trigger type to delete is COS trigger, this field must be specified, storing data in JSON format {"event":"cos:ObjectCreated:*"}. The data content is in the same format as this field in the SetTrigger API. If the trigger type to delete is scheduled trigger or CMQ trigger, this field can be unspecified.
          * @type {string || null}
          */
         this.TriggerDesc = null;
 
         /**
-         * Function version. It defaults to `$LATEST`. It's recommended to use `[$DEFAULT](https://www.tencentcloud.com/document/product/583/37458#glossary)` for canary release.
+         * The version or alias that the trigger to be deleted actually points to. Default value: $LATEST.
          * @type {string || null}
          */
         this.Qualifier = null;
@@ -6951,7 +7202,7 @@ class DeleteTriggerRequest extends  AbstractModel {
 }
 
 /**
- * VPC parameter configuration
+ * Private network parameter configuration
  * @class
  */
 class VpcConfig extends  AbstractModel {
@@ -6959,13 +7210,13 @@ class VpcConfig extends  AbstractModel {
         super();
 
         /**
-         * VPC ID
+         * Id of the private network
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Subnet ID
+         * Subnet Id
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -7136,7 +7387,7 @@ class ListNamespacesResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Namespace resource pool configuration
  * @class
  */
 class NamespaceResourceEnv extends  AbstractModel {
@@ -7144,13 +7395,13 @@ class NamespaceResourceEnv extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Resource pool based on a TKE cluster
          * @type {NamespaceResourceEnvTKE || null}
          */
         this.TKE = null;
 
         /**
-         * 
+         * Namespace of the near-offline computing type
          * @type {boolean || null}
          */
         this.OFFLINE = null;
@@ -7209,6 +7460,7 @@ module.exports = {
     GetProvisionedConcurrencyConfigRequest: GetProvisionedConcurrencyConfigRequest,
     ListAliasesResponse: ListAliasesResponse,
     DeleteLayerVersionResponse: DeleteLayerVersionResponse,
+    SessionConfig: SessionConfig,
     GetReservedConcurrencyConfigResponse: GetReservedConcurrencyConfigResponse,
     ProtocolParams: ProtocolParams,
     RoutingConfig: RoutingConfig,
@@ -7260,6 +7512,7 @@ module.exports = {
     CfsConfig: CfsConfig,
     ListFunctionsRequest: ListFunctionsRequest,
     CreateTriggerRequest: CreateTriggerRequest,
+    MixNodeConfig: MixNodeConfig,
     UpdateNamespaceResponse: UpdateNamespaceResponse,
     GetLayerVersionRequest: GetLayerVersionRequest,
     DeleteFunctionResponse: DeleteFunctionResponse,
@@ -7308,6 +7561,7 @@ module.exports = {
     RetryConfig: RetryConfig,
     GetFunctionAddressResponse: GetFunctionAddressResponse,
     CfsInsInfo: CfsInsInfo,
+    InstanceConcurrencyConfig: InstanceConcurrencyConfig,
     UpdateTriggerStatusRequest: UpdateTriggerStatusRequest,
     TriggerAction: TriggerAction,
     LimitsInfo: LimitsInfo,
@@ -7328,6 +7582,7 @@ module.exports = {
     Alias: Alias,
     GetAccountResponse: GetAccountResponse,
     GetFunctionLogsResponse: GetFunctionLogsResponse,
+    IntranetConfigIn: IntranetConfigIn,
     ImageConfig: ImageConfig,
     DeleteTriggerResponse: DeleteTriggerResponse,
     SearchKey: SearchKey,

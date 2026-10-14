@@ -16,8 +16,8 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const ModifyStreamLinkFlowResponse = models.ModifyStreamLinkFlowResponse;
 const OutputAddress = models.OutputAddress;
-const DescribeOutputRTMPPullServerUrl = models.DescribeOutputRTMPPullServerUrl;
 const DescribeInputRTPSettings = models.DescribeInputRTPSettings;
 const FlowRealtimeStatusRTP = models.FlowRealtimeStatusRTP;
 const DescribeStreamLinkRegionsRequest = models.DescribeStreamLinkRegionsRequest;
@@ -41,15 +41,17 @@ const CreateInputRTPSettings = models.CreateInputRTPSettings;
 const CreateStreamLinkOutputInfoResponse = models.CreateStreamLinkOutputInfoResponse;
 const RTPAddressDestination = models.RTPAddressDestination;
 const DescribeStreamLinkFlowLogsResponse = models.DescribeStreamLinkFlowLogsResponse;
+const SRTFECSimpleOptions = models.SRTFECSimpleOptions;
 const DescribeOutput = models.DescribeOutput;
 const CreateInputHLSPullSettings = models.CreateInputHLSPullSettings;
 const FailOverOption = models.FailOverOption;
 const CreateOutputSrtSettings = models.CreateOutputSrtSettings;
-const ModifyStreamLinkFlowResponse = models.ModifyStreamLinkFlowResponse;
+const DescribeOutputRTMPPullServerUrl = models.DescribeOutputRTMPPullServerUrl;
 const StartStreamLinkFlowRequest = models.StartStreamLinkFlowRequest;
 const StartStreamLinkFlowResponse = models.StartStreamLinkFlowResponse;
 const DescribeOutputRISTSettings = models.DescribeOutputRISTSettings;
 const CreateOutputRTPSettingsDestinations = models.CreateOutputRTPSettingsDestinations;
+const SRTFECFullOptions = models.SRTFECFullOptions;
 const CreateOutputInfo = models.CreateOutputInfo;
 const DescribeStreamLinkFlowRealtimeStatusResponse = models.DescribeStreamLinkFlowRealtimeStatusResponse;
 const DescribeStreamLinkFlowsResponse = models.DescribeStreamLinkFlowsResponse;
@@ -80,11 +82,13 @@ const StreamSelector = models.StreamSelector;
 const DescribeStreamLinkFlowSRTStatisticsRequest = models.DescribeStreamLinkFlowSRTStatisticsRequest;
 const DescribeStreamLinkFlowRequest = models.DescribeStreamLinkFlowRequest;
 const DescribeOutputHLSPullSettings = models.DescribeOutputHLSPullSettings;
+const CreateStreamLinkSecurityGroupResponse = models.CreateStreamLinkSecurityGroupResponse;
 const FlowStatisticsArray = models.FlowStatisticsArray;
 const DescribeStreamLinkRegionsResponse = models.DescribeStreamLinkRegionsResponse;
 const StreamUrlDetail = models.StreamUrlDetail;
 const DescribeInputSRTSettings = models.DescribeInputSRTSettings;
 const DescribeStreamLinkFlowStatisticsResponse = models.DescribeStreamLinkFlowStatisticsResponse;
+const CreateStreamLinkSecurityGroupRequest = models.CreateStreamLinkSecurityGroupRequest;
 const CreateStreamLinkFlowResponse = models.CreateStreamLinkFlowResponse;
 const DescribeInputHLSPullSettings = models.DescribeInputHLSPullSettings;
 const SRTAddressDestination = models.SRTAddressDestination;
@@ -114,6 +118,7 @@ const HLSPullSourceAddress = models.HLSPullSourceAddress;
 const CreateOutputRtmpSettingsDestinations = models.CreateOutputRtmpSettingsDestinations;
 const FlowLogInfo = models.FlowLogInfo;
 const DeleteStreamLinkOutputResponse = models.DeleteStreamLinkOutputResponse;
+const CreateInputRISTSettings = models.CreateInputRISTSettings;
 const CreateStreamLinkOutputInfoRequest = models.CreateStreamLinkOutputInfoRequest;
 const ModifyStreamLinkInputRequest = models.ModifyStreamLinkInputRequest;
 const ResilientStreamConf = models.ResilientStreamConf;
@@ -149,14 +154,14 @@ class MdcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to stop a StreamLink flow.
-     * @param {StopStreamLinkFlowRequest} req
-     * @param {function(string, StopStreamLinkFlowResponse):void} cb
+     * Create security group.
+     * @param {CreateStreamLinkSecurityGroupRequest} req
+     * @param {function(string, CreateStreamLinkSecurityGroupResponse):void} cb
      * @public
      */
-    StopStreamLinkFlow(req, cb) {
-        let resp = new StopStreamLinkFlowResponse();
-        this.request("StopStreamLinkFlow", req, resp, cb);
+    CreateStreamLinkSecurityGroup(req, cb) {
+        let resp = new CreateStreamLinkSecurityGroupResponse();
+        this.request("CreateStreamLinkSecurityGroup", req, resp, cb);
     }
 
     /**
@@ -223,6 +228,17 @@ class MdcClient extends AbstractClient {
     CreateStreamLinkOutputInfo(req, cb) {
         let resp = new CreateStreamLinkOutputInfoResponse();
         this.request("CreateStreamLinkOutputInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop a StreamLink flow.
+     * @param {StopStreamLinkFlowRequest} req
+     * @param {function(string, StopStreamLinkFlowResponse):void} cb
+     * @public
+     */
+    StopStreamLinkFlow(req, cb) {
+        let resp = new StopStreamLinkFlowResponse();
+        this.request("StopStreamLinkFlow", req, resp, cb);
     }
 
     /**

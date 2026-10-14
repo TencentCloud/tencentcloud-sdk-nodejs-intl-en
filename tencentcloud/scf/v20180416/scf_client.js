@@ -21,6 +21,7 @@ const Trigger = models.Trigger;
 const GetProvisionedConcurrencyConfigRequest = models.GetProvisionedConcurrencyConfigRequest;
 const ListAliasesResponse = models.ListAliasesResponse;
 const DeleteLayerVersionResponse = models.DeleteLayerVersionResponse;
+const SessionConfig = models.SessionConfig;
 const GetReservedConcurrencyConfigResponse = models.GetReservedConcurrencyConfigResponse;
 const ProtocolParams = models.ProtocolParams;
 const RoutingConfig = models.RoutingConfig;
@@ -72,6 +73,7 @@ const NamespaceLimit = models.NamespaceLimit;
 const CfsConfig = models.CfsConfig;
 const ListFunctionsRequest = models.ListFunctionsRequest;
 const CreateTriggerRequest = models.CreateTriggerRequest;
+const MixNodeConfig = models.MixNodeConfig;
 const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
 const GetLayerVersionRequest = models.GetLayerVersionRequest;
 const DeleteFunctionResponse = models.DeleteFunctionResponse;
@@ -120,6 +122,7 @@ const InvokeFunctionRequest = models.InvokeFunctionRequest;
 const RetryConfig = models.RetryConfig;
 const GetFunctionAddressResponse = models.GetFunctionAddressResponse;
 const CfsInsInfo = models.CfsInsInfo;
+const InstanceConcurrencyConfig = models.InstanceConcurrencyConfig;
 const UpdateTriggerStatusRequest = models.UpdateTriggerStatusRequest;
 const TriggerAction = models.TriggerAction;
 const LimitsInfo = models.LimitsInfo;
@@ -140,6 +143,7 @@ const ListAliasesRequest = models.ListAliasesRequest;
 const Alias = models.Alias;
 const GetAccountResponse = models.GetAccountResponse;
 const GetFunctionLogsResponse = models.GetFunctionLogsResponse;
+const IntranetConfigIn = models.IntranetConfigIn;
 const ImageConfig = models.ImageConfig;
 const DeleteTriggerResponse = models.DeleteTriggerResponse;
 const SearchKey = models.SearchKey;
@@ -251,7 +255,7 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a trigger based on the input parameters.
+     * This API is used to set up alarms for the new trigger mode based on parameters.
      * @param {CreateTriggerRequest} req
      * @param {function(string, CreateTriggerResponse):void} cb
      * @public
@@ -262,7 +266,7 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a namespace based on the input parameters.
+     * This API is used to create a namespace based on the passed parameters.
      * @param {CreateNamespaceRequest} req
      * @param {function(string, CreateNamespaceResponse):void} cb
      * @public
@@ -290,7 +294,7 @@ You can manually configure the function after replication as required.
     }
 
     /**
-     * This API returns function running logs according to the specified conditions. Note that this API has been disused. You can use [GetRequestStatus](https://intl.cloud.tencent.com/document/product/583/65348?from_cn_redirect=1) instead. See also [Retrieving Logs](https://intl.cloud.tencent.com/document/product/583/52637?from_cn_redirect=1).
+     * This API returns function running logs based on the specified log query conditions. This API is offline. To query the returned information of function request running, please use [GetRequestStatus](https://www.tencentcloud.com/document/product/583/65348?from_cn_redirect=1). To query function running logs, see [Log Search Guide](https://www.tencentcloud.com/document/product/583/52637?from_cn_redirect=1).
      * @param {GetFunctionLogsRequest} req
      * @param {function(string, GetFunctionLogsResponse):void} cb
      * @public
@@ -312,7 +316,7 @@ You can manually configure the function after replication as required.
     }
 
     /**
-     * This API is used to delete an existing trigger based on the input parameters.
+     * This API is used to delete existing trigger modes based on parameters.
      * @param {DeleteTriggerRequest} req
      * @param {function(string, DeleteTriggerResponse):void} cb
      * @public
@@ -522,7 +526,7 @@ An alias must point to a master version and can point to an additional version a
     }
 
     /**
-     * This API is used to update the function configuration based on the input parameters.
+     * This API is used to update function configurations based on input parameters.
      * @param {UpdateFunctionConfigurationRequest} req
      * @param {function(string, UpdateFunctionConfigurationResponse):void} cb
      * @public

@@ -199,19 +199,19 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.SQLMode = null;
 
         /**
-         * 
+         * <p>ccu configuration change of the SVLS instance</p><p>Input limit: This parameter no longer takes effect when AutoScaleConfigs is also input</p>
          * @type {AutoScalingConfig || null}
          */
         this.AutoScaleConfig = null;
 
         /**
-         * <p>Security group binding list</p>
+         * <p>List of bound security groups</p>
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
 
         /**
-         * <p>root userName. It defaults to dbaadmin in the current version, and the passed value will be reset to dbaadmin</p>
+         * <p>root userName. The current version defaults to dbaadmin, and the passed value will reset to dbaadmin.</p>
          * @type {string || null}
          */
         this.UserName = null;
@@ -223,13 +223,13 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.Password = null;
 
         /**
-         * <p>Whether transparent encryption is enabled. 0: not enabled. 1: enabled</p>
+         * <p>Whether to enable transparent encryption. 0: disable, 1: enable</p>
          * @type {number || null}
          */
         this.EncryptionEnable = null;
 
         /**
-         * 
+         * <p>Relevant restrictions on automatic configuration adjustment for SVLS instances</p><p>Input parameter restriction: The AutoScaleConfig parameter will no longer take effect when passed in</p>
          * @type {Array.<AutoScalingConfig> || null}
          */
         this.AutoScaleConfigs = null;
@@ -1596,7 +1596,7 @@ class StorageNodeSpec extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Specification code</p>
          * @type {string || null}
          */
         this.SpecCode = null;
@@ -1638,13 +1638,13 @@ class StorageNodeSpec extends  AbstractModel {
         this.StorageNodeMinDisk = null;
 
         /**
-         * 
+         * <p>Disk Type, CLOUD_HSSD enhanced SSD, CLOUD_TCS local SSD disk</p>
          * @type {string || null}
          */
         this.StorageType = null;
 
         /**
-         * 
+         * <p>Default disk size of storage node for frontend display</p>
          * @type {number || null}
          */
         this.StorageNodeDefaultDisk = null;
@@ -2270,37 +2270,37 @@ class NodeInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Node IP information</p>
          * @type {string || null}
          */
         this.IP = null;
 
         /**
-         * 
+         * <p>Node types, such as sqlengine, tdstore, mc</p>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * <p>Unique identifier of the node</p>
          * @type {string || null}
          */
         this.NodeId = null;
 
         /**
-         * 
+         * <p>Node port information</p>
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * 
+         * <p>Availability zone of the node</p>
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 
+         * <p>Machine ip of the node</p>
          * @type {string || null}
          */
         this.Host = null;
@@ -2369,7 +2369,7 @@ class DescribeSpecsResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Purchasable specification list of peer nodes</p>
          * @type {Array.<StorageNodeSpec> || null}
          */
         this.HybridNodeSpecs = null;
@@ -2381,7 +2381,7 @@ class DescribeSpecsResponse extends  AbstractModel {
         this.ServerlessCcuSpec = null;
 
         /**
-         * 
+         * <p>serverless node quantity configuration</p>
          * @type {ServerlessNodeNumSpec || null}
          */
         this.ServerlessNodeNumSpec = null;
@@ -3147,13 +3147,13 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.EngineType = null;
 
         /**
-         * 
+         * <p>Query By Field, supporting StorageNodeNum/CreateTime/CreateVersion</p>
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
-         * 
+         * <p>Sorting order</p><p>Enumeration values:</p><ul><li>ASC: ascending</li><li>DESC: descending</li></ul><p>Default value: DESC</p>
          * @type {string || null}
          */
         this.OrderDirection = null;
@@ -3702,25 +3702,25 @@ class DescribeDBInstanceDetailResponse extends  AbstractModel {
         this.PayMode = null;
 
         /**
-         * 
+         * <p>Expiration time.</p>
          * @type {string || null}
          */
         this.ExpireAt = null;
 
         /**
-         * 
+         * <p>Isolation time</p>
          * @type {string || null}
          */
         this.IsolatedAt = null;
 
         /**
-         * 
+         * <p>Instance Architecture Type, separate: decoupled architecture; hybrid: peer-to-peer architecture</p>
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * 
+         * <p>Disk Type, CLOUD_HSSD enhanced SSD, CLOUD_TCS local SSD disk</p>
          * @type {string || null}
          */
         this.StorageType = null;
@@ -3732,7 +3732,7 @@ class DescribeDBInstanceDetailResponse extends  AbstractModel {
         this.Zones = null;
 
         /**
-         * 
+         * <p>Disk usage of the largest node</p>
          * @type {number || null}
          */
         this.DiskUsage = null;
@@ -3906,13 +3906,13 @@ class DescribeDBInstanceDetailResponse extends  AbstractModel {
         this.EncryptionEnable = null;
 
         /**
-         * <p>Real use kms region for subsequent call to kms service</p>
+         * <p>Real use kms region for subsequent calls to the kms service</p>
          * @type {string || null}
          */
         this.EncryptionKmsRegion = null;
 
         /**
-         * 
+         * <p>serverless automatic configuration adjustment configuration</p>
          * @type {Array.<AutoScalingConfig> || null}
          */
         this.AutoScaleConfigs = null;
@@ -5619,13 +5619,13 @@ class InstanceNode extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Primary key
          * @type {number || null}
          */
         this.ID = null;
 
         /**
-         * 
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5637,139 +5637,139 @@ class InstanceNode extends  AbstractModel {
         this.NodeId = null;
 
         /**
-         * 
+         * Instance Ip
          * @type {string || null}
          */
         this.Ip = null;
 
         /**
-         * 
+         * Instance EniIp
          * @type {string || null}
          */
         this.EniIp = null;
 
         /**
-         * 
+         * Instance Port
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * 
+         * Instance SpecCode
          * @type {string || null}
          */
         this.SpecCode = null;
 
         /**
-         * 
+         * Instance NodeName
          * @type {string || null}
          */
         this.NodeName = null;
 
         /**
-         * 
+         * Instance Cpu
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * 
+         * Instance memory
          * @type {number || null}
          */
         this.Mem = null;
 
         /**
-         * 
+         * Instance Disk
          * @type {number || null}
          */
         this.Disk = null;
 
         /**
-         * 
+         * Instance type
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * Instance status
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Instance version
          * @type {string || null}
          */
         this.Version = null;
 
         /**
-         * 
+         * Instance region
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 
+         * Instance LocalDNS
          * @type {string || null}
          */
         this.LocalDNS = null;
 
         /**
-         * 
+         * Instance Region
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 
+         * Instance log disk
          * @type {number || null}
          */
         this.LogDisk = null;
 
         /**
-         * 
+         * Instance data disk
          * @type {number || null}
          */
         this.DataDisk = null;
 
         /**
-         * 
+         * Instance Zone ID
          * @type {string || null}
          */
         this.ZoneID = null;
 
         /**
-         * 
+         * Instance SpecName
          * @type {string || null}
          */
         this.SpecName = null;
 
         /**
-         * 
+         * Instance Replicas
          * @type {number || null}
          */
         this.Replicas = null;
 
         /**
-         * 
+         * Instance Shards
          * @type {number || null}
          */
         this.Shards = null;
 
         /**
-         * 
+         * Instance data replica
          * @type {number || null}
          */
         this.DataReplicas = null;
 
         /**
-         * 
+         * Instance initialization parameter
          * @type {string || null}
          */
         this.Params = null;
 
         /**
-         * 
+         * Storage medium, CLOUD_PREMIUM: Premium Cloud Disk, CLOUD_SSD: SSD cloud disk, CLOUD_HSSD: HSSD cloud disk
          * @type {string || null}
          */
         this.StorageType = null;
@@ -6051,13 +6051,13 @@ class InstanceInfo extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 
+         * <p>Create an instance version</p>
          * @type {string || null}
          */
         this.CreateVersion = null;
 
         /**
-         * 
+         * <p>Initialize instance parameters</p>
          * @type {Array.<InstanceParam> || null}
          */
         this.InitParams = null;
@@ -6081,13 +6081,13 @@ class InstanceInfo extends  AbstractModel {
         this.StorageNodeNum = null;
 
         /**
-         * 
+         * <p>Instance tag information.</p>
          * @type {Array.<ResourceTag> || null}
          */
         this.ResourceTags = null;
 
         /**
-         * 
+         * <p>Instance name</p>
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -6153,49 +6153,49 @@ class InstanceInfo extends  AbstractModel {
         this.StatusDesc = null;
 
         /**
-         * 
+         * <p>CPU cores of the control node</p>
          * @type {number || null}
          */
         this.MCCpu = null;
 
         /**
-         * 
+         * <p>CPU size of the control node</p>
          * @type {number || null}
          */
         this.MCMem = null;
 
         /**
-         * 
+         * <p>CPU cores of the computing node</p>
          * @type {number || null}
          */
         this.ComputerNodeCpu = null;
 
         /**
-         * 
+         * <p>Compute node memory size</p>
          * @type {number || null}
          */
         this.ComputerNodeMem = null;
 
         /**
-         * 
+         * <p>CPU cores of the storage node</p>
          * @type {number || null}
          */
         this.StorageNodeCpu = null;
 
         /**
-         * 
+         * <p>Storage node memory size</p>
          * @type {number || null}
          */
         this.StorageNodeMem = null;
 
         /**
-         * 
+         * <p>Number of control nodes</p>
          * @type {number || null}
          */
         this.MCNum = null;
 
         /**
-         * 
+         * <p>Renewal flag</p>
          * @type {number || null}
          */
         this.RenewFlag = null;
@@ -6207,19 +6207,19 @@ class InstanceInfo extends  AbstractModel {
         this.PayMode = null;
 
         /**
-         * 
+         * <p>User tag, inner: internal user; external: external user</p>
          * @type {string || null}
          */
         this.AccountTag = null;
 
         /**
-         * 
+         * <p>Instance Architecture Type, separate: decoupled architecture; hyper: peer-to-peer architecture</p>
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * 
+         * <p>Disk Type, CLOUD_HSSD enhanced SSD, CLOUD_TCS local SSD disk</p>
          * @type {string || null}
          */
         this.StorageType = null;
@@ -6261,31 +6261,31 @@ class InstanceInfo extends  AbstractModel {
         this.FullReplications = null;
 
         /**
-         * 
+         * <p>Account information</p>
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * 
+         * <p>Account information</p>
          * @type {string || null}
          */
         this.SubAccountUin = null;
 
         /**
-         * 
+         * <p>Account information</p>
          * @type {string || null}
          */
         this.Uin = null;
 
         /**
-         * 
+         * <p>AZ information</p>
          * @type {Array.<string> || null}
          */
         this.Zones = null;
 
         /**
-         * 
+         * <p>Instance node</p>
          * @type {Array.<InstanceNode> || null}
          */
         this.Nodes = null;
@@ -6315,19 +6315,19 @@ class InstanceInfo extends  AbstractModel {
         this.CdcNodeNum = null;
 
         /**
-         * 
+         * <p>az mode. 1: Single az 2: Multi-az non-primary az mode 3: Multi-az primary az mode</p>
          * @type {number || null}
          */
         this.AZMode = null;
 
         /**
-         * 
+         * <p>Disaster recovery flag. 1: No disaster recovery relationship; 2: Primary instance for disaster recovery; 3: Disaster Recovery Standby Instance</p>
          * @type {number || null}
          */
         this.StandbyFlag = null;
 
         /**
-         * 
+         * <p>Number of connected standby instances (Valid only when StandbyFlag == 2)</p>
          * @type {number || null}
          */
         this.StandbySecondaryNum = null;
@@ -6417,7 +6417,7 @@ class InstanceInfo extends  AbstractModel {
         this.AnalysisInstanceInfo = null;
 
         /**
-         * 
+         * <p>Multiple automatic configuration adjustment configurations of the instance, including ccu and nodecount values</p>
          * @type {Array.<AutoScalingConfig> || null}
          */
         this.AutoScaleConfigs = null;
@@ -7645,7 +7645,7 @@ class ModifyMaintenanceWindowResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Upper and lower limit of the hybrid node quantity allowed for adjustment for a Serverless instance
  * @class
  */
 class ServerlessNodeNumSpec extends  AbstractModel {
@@ -7653,13 +7653,13 @@ class ServerlessNodeNumSpec extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Minimum number of nodes.</p>
          * @type {number || null}
          */
         this.MinNodeNum = null;
 
         /**
-         * 
+         * <p>Maximum number of nodes.</p>
          * @type {number || null}
          */
         this.MaxNodeNum = null;
@@ -7771,7 +7771,14 @@ class ModifyDBSBackupSetCommentResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Scope of resources for instance configuration adjustment
+When ResourceType is cpu, it means ccu.
+When the value is nodecount, it indicates the range of the number of nodes.
+For disk, it indicates the disk capacity range (unit: GB).
+Whether ScaleUpEnabled enables scale-up
+Whether ScaleDownEnabled is enabled
+ThresholdPercent is the trigger threshold (%).
+Step is the step length for configuration change
  * @class
  */
 class AutoScalingConfig extends  AbstractModel {
@@ -7779,22 +7786,46 @@ class AutoScalingConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Minimum value</p>
          * @type {number || null}
          */
         this.RangeMin = null;
 
         /**
-         * 
+         * <p>Maximum value</p>
          * @type {number || null}
          */
         this.RangeMax = null;
 
         /**
-         * 
+         * <p>Resource type corresponding to the returned range parameter</p><p>Enumeration values:</p><ul><li>cpu: Returns the CPU adjustment return limit. When no mem limit exists, it represents ccu.</li><li>nodecount: Returns the limit range of the number of nodes for horizontal scaling.</li><li>datadisk: Returns the capacity limit range for disk scale-out.</li></ul>
          * @type {string || null}
          */
         this.ResourceType = null;
+
+        /**
+         * <p>Whether upgrade is allowed</p>
+         * @type {boolean || null}
+         */
+        this.ScaleUpEnabled = null;
+
+        /**
+         * <p>Whether to allow downgrade</p>
+         * @type {boolean || null}
+         */
+        this.ScaleDownEnabled = null;
+
+        /**
+         * <p>Trigger threshold (%)</p>
+         * @type {number || null}
+         */
+        this.ThresholdPercent = null;
+
+        /**
+         * <p>Configuration change step length</p>
+         * @type {number || null}
+         */
+        this.Step = null;
 
     }
 
@@ -7808,6 +7839,10 @@ class AutoScalingConfig extends  AbstractModel {
         this.RangeMin = 'RangeMin' in params ? params.RangeMin : null;
         this.RangeMax = 'RangeMax' in params ? params.RangeMax : null;
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.ScaleUpEnabled = 'ScaleUpEnabled' in params ? params.ScaleUpEnabled : null;
+        this.ScaleDownEnabled = 'ScaleDownEnabled' in params ? params.ScaleDownEnabled : null;
+        this.ThresholdPercent = 'ThresholdPercent' in params ? params.ThresholdPercent : null;
+        this.Step = 'Step' in params ? params.Step : null;
 
     }
 }
@@ -8085,6 +8120,12 @@ class DescribeSpecsRequest extends  AbstractModel {
          */
         this.IsExclusiveInstance = null;
 
+        /**
+         * <p>Availability zone combination list</p>
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
     }
 
     /**
@@ -8096,6 +8137,7 @@ class DescribeSpecsRequest extends  AbstractModel {
         }
         this.FullReplications = 'FullReplications' in params ? params.FullReplications : null;
         this.IsExclusiveInstance = 'IsExclusiveInstance' in params ? params.IsExclusiveInstance : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
 
     }
 }
@@ -8389,7 +8431,7 @@ class DescribeDBInstancesResponse extends  AbstractModel {
         this.Instances = null;
 
         /**
-         * <p>Total number of items that meet the conditions.</p>
+         * <p>Total number of items that meet the conditions</p>
          * @type {number || null}
          */
         this.TotalCount = null;

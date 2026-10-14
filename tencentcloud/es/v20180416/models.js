@@ -17,24 +17,48 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * Visual node configuration
+ * Process task information in the instance operation record
  * @class
  */
-class WebNodeTypeInfo extends  AbstractModel {
+class TaskDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of visual nodes. The value is always `1`.
-         * @type {number || null}
-         */
-        this.NodeNum = null;
-
-        /**
-         * Visual node specification
+         * Task Name
          * @type {string || null}
          */
-        this.NodeType = null;
+        this.Name = null;
+
+        /**
+         * Task progress
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Task completion time
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+        /**
+         * Subtask
+         * @type {Array.<SubTaskDetail> || null}
+         */
+        this.SubTasks = null;
+
+        /**
+         * Time taken by the task
+         * @type {number || null}
+         */
+        this.ElapsedTime = null;
+
+        /**
+         * Task progress details
+         * @type {ProcessDetail || null}
+         */
+        this.ProcessInfo = null;
 
     }
 
@@ -45,8 +69,1120 @@ class WebNodeTypeInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+
+        if (params.SubTasks) {
+            this.SubTasks = new Array();
+            for (let z in params.SubTasks) {
+                let obj = new SubTaskDetail();
+                obj.deserialize(params.SubTasks[z]);
+                this.SubTasks.push(obj);
+            }
+        }
+        this.ElapsedTime = 'ElapsedTime' in params ? params.ElapsedTime : null;
+
+        if (params.ProcessInfo) {
+            let obj = new ProcessDetail();
+            obj.deserialize(params.ProcessInfo)
+            this.ProcessInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * Additional EsConfig and JvmHeapConfig used by updateInstance
+ * @class
+ */
+class OtherConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Additional yml configuration for es
+         * @type {string || null}
+         */
+        this.EsConfig = null;
+
+        /**
+         * jvm heap configuration of es
+         * @type {string || null}
+         */
+        this.JvmHeapConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EsConfig = 'EsConfig' in params ? params.EsConfig : null;
+        this.JvmHeapConfig = 'JvmHeapConfig' in params ? params.JvmHeapConfig : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceOperations request structure.
+ * @class
+ */
+class DescribeInstanceOperationsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Start time, e.g., "2019-03-07 16:30:39"
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time, e.g., "2019-03-30 20:18:03"
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Paging Starting Value
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Pagination size.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * Operation details.
+ * @class
+ */
+class OperationDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Original configuration message of the instance
+         * @type {Array.<KeyValue> || null}
+         */
+        this.OldInfo = null;
+
+        /**
+         * Configuration message after the instance update
+         * @type {Array.<KeyValue> || null}
+         */
+        this.NewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.OldInfo) {
+            this.OldInfo = new Array();
+            for (let z in params.OldInfo) {
+                let obj = new KeyValue();
+                obj.deserialize(params.OldInfo[z]);
+                this.OldInfo.push(obj);
+            }
+        }
+
+        if (params.NewInfo) {
+            this.NewInfo = new Array();
+            for (let z in params.NewInfo) {
+                let obj = new KeyValue();
+                obj.deserialize(params.NewInfo[z]);
+                this.NewInfo.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * ES public network access control information
+ * @class
+ */
+class EsPublicAcl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Access the blocklist
+         * @type {Array.<string> || null}
+         */
+        this.BlackIpList = null;
+
+        /**
+         * Access allowlist
+         * @type {Array.<string> || null}
+         */
+        this.WhiteIpList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BlackIpList = 'BlackIpList' in params ? params.BlackIpList : null;
+        this.WhiteIpList = 'WhiteIpList' in params ? params.WhiteIpList : null;
+
+    }
+}
+
+/**
+ * ik plug-in dictionary information
+ * @class
+ */
+class DictInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Dictionary key-value
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Dictionary name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Dictionary size. Unit: B.
+         * @type {number || null}
+         */
+        this.Size = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Size = 'Size' in params ? params.Size : null;
+
+    }
+}
+
+/**
+ * CreateInstance response structure.
+ * @class
+ */
+class CreateInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance ID.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Order ID.</p>
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceLogs request structure.
+ * @class
+ */
+class DescribeInstanceLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Log type. Default value: 1.
+<li>1, master log</li>
+<li>2. Search slow logs</li>
+<li>3. Index slow log</li>
+<li>4. GC log</li>
+         * @type {number || null}
+         */
+        this.LogType = null;
+
+        /**
+         * Search term. LUCENE grammar is supported, for example, level:WARN, ip:1.1.1.1, message:test-index
+         * @type {string || null}
+         */
+        this.SearchKey = null;
+
+        /**
+         * Log start time in the format of YYYY-MM-DD HH:MM:SS, for example, 2019-01-22 20:15:53
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Log end time in the format of YYYY-MM-DD HH:MM:SS, for example, 2019-01-22 20:15:53
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Pagination starting value. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Pagination size. Default value: 100. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Time sort method. Default value: 0.
+<li>0: descending order</li>
+<li>1, ascending</li>
+         * @type {number || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * Log level
+         * @type {Array.<string> || null}
+         */
+        this.LogLevels = null;
+
+        /**
+         * Node ID.
+         * @type {Array.<string> || null}
+         */
+        this.NodeIds = null;
+
+        /**
+         * Slow log index name
+         * @type {string || null}
+         */
+        this.IndexName = null;
+
+        /**
+         * Slow log index shards
+         * @type {string || null}
+         */
+        this.ShardId = null;
+
+        /**
+         * Slow log query time
+         * @type {number || null}
+         */
+        this.QueryCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.LogLevels = 'LogLevels' in params ? params.LogLevels : null;
+        this.NodeIds = 'NodeIds' in params ? params.NodeIds : null;
+        this.IndexName = 'IndexName' in params ? params.IndexName : null;
+        this.ShardId = 'ShardId' in params ? params.ShardId : null;
+        this.QueryCost = 'QueryCost' in params ? params.QueryCost : null;
+
+    }
+}
+
+/**
+ * ModifyAutoBackUpCommonInfo request structure.
+ * @class
+ */
+class ModifyAutoBackUpCommonInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * OperationDetail uses an array of this structure to describe the old and new configuration
+ * @class
+ */
+class KeyValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Value.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeInstances response structure.
+ * @class
+ */
+class DescribeInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Number of returned instances</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * <p>Instance detail list</p>
+         * @type {Array.<InstanceInfo> || null}
+         */
+        this.InstanceList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new InstanceInfo();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceLogs response structure.
+ * @class
+ */
+class DescribeInstanceLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of returned log entries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of log details
+         * @type {Array.<InstanceLog> || null}
+         */
+        this.InstanceLogList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceLogList) {
+            this.InstanceLogList = new Array();
+            for (let z in params.InstanceLogList) {
+                let obj = new InstanceLog();
+                obj.deserialize(params.InstanceLogList[z]);
+                this.InstanceLogList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateIndex response structure.
+ * @class
+ */
+class UpdateIndexResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceOperations response structure.
+ * @class
+ */
+class DescribeInstanceOperationsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of operation records
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Operation record
+         * @type {Array.<Operation> || null}
+         */
+        this.Operations = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Operations) {
+            this.Operations = new Array();
+            for (let z in params.Operations) {
+                let obj = new Operation();
+                obj.deserialize(params.Operations[z]);
+                this.Operations.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Auto capacity expansion parameter for cvm
+ * @class
+ */
+class AutoScaleDiskInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node type. Valid values: `hotData`, `warmData`.
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * 0: Percentage-based scale-out; 1: Absolute value-based scale-out
+         * @type {number || null}
+         */
+        this.ScaleType = null;
+
+        /**
+         * Trigger threshold. Unit: %. For example, 80%.
+         * @type {number || null}
+         */
+        this.Threshold = null;
+
+        /**
+         * Trigger duration in minutes, for example, 60
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Expansion ratio per time, unit: %, for example, 20%
+         * @type {number || null}
+         */
+        this.PercentSize = null;
+
+        /**
+         * Absolute value-based scale-out, in GB, for example, 100 GB
+         * @type {number || null}
+         */
+        this.FixSize = null;
+
+        /**
+         * Capacity limit for scale-out, in GB, for example, 500 GB
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.ScaleType = 'ScaleType' in params ? params.ScaleType : null;
+        this.Threshold = 'Threshold' in params ? params.Threshold : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.PercentSize = 'PercentSize' in params ? params.PercentSize : null;
+        this.FixSize = 'FixSize' in params ? params.FixSize : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+
+    }
+}
+
+/**
+ * UpdateRequestTargetNodeTypes response structure.
+ * @class
+ */
+class UpdateRequestTargetNodeTypesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Index autonomous field
+ * @class
+ */
+class IndexOptionsField extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Expiration time.</p>
+         * @type {string || null}
+         */
+        this.ExpireMaxAge = null;
+
+        /**
+         * <p>Expiration size</p>
+         * @type {string || null}
+         */
+        this.ExpireMaxSize = null;
+
+        /**
+         * <p>Rollover period</p>
+         * @type {string || null}
+         */
+        this.RolloverMaxAge = null;
+
+        /**
+         * <p>Whether to enable dynamic scrolling</p>
+         * @type {string || null}
+         */
+        this.RolloverDynamic = null;
+
+        /**
+         * <p>Whether to enable dynamic sharding</p>
+         * @type {string || null}
+         */
+        this.ShardNumDynamic = null;
+
+        /**
+         * <p>Time partition field</p>
+         * @type {string || null}
+         */
+        this.TimestampField = null;
+
+        /**
+         * <p>Write mode</p>
+         * @type {string || null}
+         */
+        this.WriteMode = null;
+
+        /**
+         * <p>Whether to enable complete uninstallation</p><p>Enumeration values:</p><ul><li>true: enable complete uninstallation</li><li>false: disable complete uninstallation</li></ul>
+         * @type {string || null}
+         */
+        this.FullOffloadedEnable = null;
+
+        /**
+         * <p>Full uninstall lifecycle</p>
+         * @type {string || null}
+         */
+        this.FullOffloadedMaxAge = null;
+
+        /**
+         * <p>Completely uninstall the lifecycle after backup index retrieval</p>
+         * @type {string || null}
+         */
+        this.FullOffloadedRetrieveMaxAge = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExpireMaxAge = 'ExpireMaxAge' in params ? params.ExpireMaxAge : null;
+        this.ExpireMaxSize = 'ExpireMaxSize' in params ? params.ExpireMaxSize : null;
+        this.RolloverMaxAge = 'RolloverMaxAge' in params ? params.RolloverMaxAge : null;
+        this.RolloverDynamic = 'RolloverDynamic' in params ? params.RolloverDynamic : null;
+        this.ShardNumDynamic = 'ShardNumDynamic' in params ? params.ShardNumDynamic : null;
+        this.TimestampField = 'TimestampField' in params ? params.TimestampField : null;
+        this.WriteMode = 'WriteMode' in params ? params.WriteMode : null;
+        this.FullOffloadedEnable = 'FullOffloadedEnable' in params ? params.FullOffloadedEnable : null;
+        this.FullOffloadedMaxAge = 'FullOffloadedMaxAge' in params ? params.FullOffloadedMaxAge : null;
+        this.FullOffloadedRetrieveMaxAge = 'FullOffloadedRetrieveMaxAge' in params ? params.FullOffloadedRetrieveMaxAge : null;
+
+    }
+}
+
+/**
+ * Subtask information in the process task of the instance operation record (for example, each check item in the upgrade check task)
+ * @class
+ */
+class SubTaskDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Subtask name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Subtask result
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * Subtask error message
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+        /**
+         * Subtask type
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Subtask status. 0: processing, 1: success, -1: failure
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Index name that failed the upgrade check
+         * @type {Array.<string> || null}
+         */
+        this.FailedIndices = null;
+
+        /**
+         * Subtask end time
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+        /**
+         * Subtask level. 1: warning; 2: failure
+         * @type {number || null}
+         */
+        this.Level = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FailedIndices = 'FailedIndices' in params ? params.FailedIndices : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+        this.Level = 'Level' in params ? params.Level : null;
+
+    }
+}
+
+/**
+ * Gpu information of the node
+ * @class
+ */
+class GpuInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of Gpu blocks
+         * @type {number || null}
+         */
+        this.GpuCount = null;
+
+        /**
+         * GPU type.
+         * @type {string || null}
+         */
+        this.GpuType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GpuCount = 'GpuCount' in params ? params.GpuCount : null;
+        this.GpuType = 'GpuType' in params ? params.GpuType : null;
+
+    }
+}
+
+/**
+ * Configuration group information
+ * @class
+ */
+class EsConfigSetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configuration group type, for example, ldap and ad
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * "{\"order\":0,\"url\":\"ldap://10.0.1.72:389\",\"bind_dn\":\"cn=admin,dc=tencent,dc=com\",\"user_search.base_dn\":\"dc=tencent,dc=com\",\"user_search.filter\":\"(cn={0})\",\"group_search.base_dn\":\"dc=tencent,dc=com\"}"
+         * @type {string || null}
+         */
+        this.EsConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.EsConfig = 'EsConfig' in params ? params.EsConfig : null;
+
+    }
+}
+
+/**
+ * GetRequestTargetNodeTypes response structure.
+ * @class
+ */
+class GetRequestTargetNodeTypesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of target node types that receive requests
+         * @type {Array.<string> || null}
+         */
+        this.TargetNodeTypes = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetNodeTypes = 'TargetNodeTypes' in params ? params.TargetNodeTypes : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Detailed ES cluster operation information
+ * @class
+ */
+class Operation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Unique id of the operation</p>
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * <p>Operation start time.</p>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * <p>Operation type.</p>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Operation details.</p>
+         * @type {OperationDetail || null}
+         */
+        this.Detail = null;
+
+        /**
+         * <p>Operation result.</p>
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * <p>Process task info</p>
+         * @type {Array.<TaskDetail> || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * <p>Operation progress.</p>
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * <p>Rollback tag. 0: not rolled back, 1: rolling back, 2: rolled back</p>
+         * @type {number || null}
+         */
+        this.RollbackTag = null;
+
+        /**
+         * <p>Operator Uin</p>
+         * @type {string || null}
+         */
+        this.SubAccountUin = null;
+
+        /**
+         * <p>Auto scaling flag. Valid values: 0 (non-auto) and 1 (auto).</p>
+         * @type {number || null}
+         */
+        this.AutoScaleTag = null;
+
+        /**
+         * <p>Process exception cause</p>
+         * @type {string || null}
+         */
+        this.SuspendedReason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.Detail) {
+            let obj = new OperationDetail();
+            obj.deserialize(params.Detail)
+            this.Detail = obj;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new TaskDetail();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.RollbackTag = 'RollbackTag' in params ? params.RollbackTag : null;
+        this.SubAccountUin = 'SubAccountUin' in params ? params.SubAccountUin : null;
+        this.AutoScaleTag = 'AutoScaleTag' in params ? params.AutoScaleTag : null;
+        this.SuspendedReason = 'SuspendedReason' in params ? params.SuspendedReason : null;
 
     }
 }
@@ -72,7 +1208,7 @@ class InstanceLog extends  AbstractModel {
         this.Level = null;
 
         /**
-         * Cluster node IP
+         * Cluster node IP address.
          * @type {string || null}
          */
         this.Ip = null;
@@ -82,6 +1218,30 @@ class InstanceLog extends  AbstractModel {
          * @type {string || null}
          */
         this.Message = null;
+
+        /**
+         * Cluster node ID.
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * Slow log index name
+         * @type {string || null}
+         */
+        this.IndexName = null;
+
+        /**
+         * Slow log index shards
+         * @type {string || null}
+         */
+        this.Shard = null;
+
+        /**
+         * Slow log index query time
+         * @type {string || null}
+         */
+        this.QueryCost = null;
 
     }
 
@@ -96,35 +1256,105 @@ class InstanceLog extends  AbstractModel {
         this.Level = 'Level' in params ? params.Level : null;
         this.Ip = 'Ip' in params ? params.Ip : null;
         this.Message = 'Message' in params ? params.Message : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.IndexName = 'IndexName' in params ? params.IndexName : null;
+        this.Shard = 'Shard' in params ? params.Shard : null;
+        this.QueryCost = 'QueryCost' in params ? params.QueryCost : null;
 
     }
 }
 
 /**
- * Local disk information of node
+ * Specification description information of a node type in the cluster (such as hot data node, cold data node, dedicated master node), including node type, number of nodes, node specification, disk type, and disk size. If Type is not specified, it defaults to hot data node. If the node is a master node, the DiskType and DiskSize parameters will be ignored (the primary node has no data disk).
  * @class
  */
-class LocalDiskInfo extends  AbstractModel {
+class NodeInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Local disk type <li>LOCAL_SATA: big data </li><li>NVME_SSD: high IO</li>
+         * <p>Number of nodes.</p>
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * <p>Node specification<li>ES.S1.SMALL2: 1-core 2G</li><li>ES.S1.MEDIUM4: 2-core 4G</li><li>ES.S1.MEDIUM8: 2-core 8G</li><li>ES.S1.LARGE16: 4-core 16G</li><li>ES.S1.2XLARGE32: 8-core 32G</li><li>ES.S1.4XLARGE32: 16-core 32G</li><li>ES.S1.4XLARGE64: 16-core 64G</li></p>
          * @type {string || null}
          */
-        this.LocalDiskType = null;
+        this.NodeType = null;
 
         /**
-         * Size of a single local disk
-         * @type {number || null}
+         * <p>Node type</p><p>Enumeration values:</p><ul><li>hotData: hot data node</li><li>warmData: cold data node</li><li>dedicatedMaster: dedicated master node</li><li>dedicatedCoordinating: dedicated coordinator node</li><li>dedicatedMl: dedicated Machine Learning node</li></ul>
+         * @type {string || null}
          */
-        this.LocalDiskSize = null;
+        this.Type = null;
 
         /**
-         * Number of local disks
+         * <p>Node disk type<li>CLOUD_SSD: ssd cloud disk</li><li>CLOUD_PREMIUM: high-performance cloud disk</li>Default value: CLOUD_SSD</p>
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * <p>Node disk capacity (GB)</p>
          * @type {number || null}
          */
-        this.LocalDiskCount = null;
+        this.DiskSize = null;
+
+        /**
+         * <p>Node local disk information.</p>
+         * @type {LocalDiskInfo || null}
+         */
+        this.LocalDiskInfo = null;
+
+        /**
+         * <p>Number of node disk blocks</p>
+         * @type {number || null}
+         */
+        this.DiskCount = null;
+
+        /**
+         * <p>Whether the node disk is encrypted. 0: no encryption; 1: encryption; not encrypted by default</p>
+         * @type {number || null}
+         */
+        this.DiskEncrypt = null;
+
+        /**
+         * <p>Custom encryption key id</p>
+         * @type {string || null}
+         */
+        this.KmsKeyId = null;
+
+        /**
+         * <p>Custom encryption key name</p>
+         * @type {string || null}
+         */
+        this.KmsKeyName = null;
+
+        /**
+         * <p>Number of CPUs</p>
+         * @type {number || null}
+         */
+        this.CpuNum = null;
+
+        /**
+         * <p>Memory size, in GB.</p>
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * <p>Additional hard disk performance</p>
+         * @type {number || null}
+         */
+        this.DiskEnhance = null;
+
+        /**
+         * <p>Gpu information of the node</p>
+         * @type {GpuInfo || null}
+         */
+        this.GpuInfo = null;
 
     }
 
@@ -135,9 +1365,98 @@ class LocalDiskInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LocalDiskType = 'LocalDiskType' in params ? params.LocalDiskType : null;
-        this.LocalDiskSize = 'LocalDiskSize' in params ? params.LocalDiskSize : null;
-        this.LocalDiskCount = 'LocalDiskCount' in params ? params.LocalDiskCount : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+
+        if (params.LocalDiskInfo) {
+            let obj = new LocalDiskInfo();
+            obj.deserialize(params.LocalDiskInfo)
+            this.LocalDiskInfo = obj;
+        }
+        this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
+        this.DiskEncrypt = 'DiskEncrypt' in params ? params.DiskEncrypt : null;
+        this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
+        this.KmsKeyName = 'KmsKeyName' in params ? params.KmsKeyName : null;
+        this.CpuNum = 'CpuNum' in params ? params.CpuNum : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.DiskEnhance = 'DiskEnhance' in params ? params.DiskEnhance : null;
+
+        if (params.GpuInfo) {
+            let obj = new GpuInfo();
+            obj.deserialize(params.GpuInfo)
+            this.GpuInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeAutoBackUpStrategy request structure.
+ * @class
+ */
+class DescribeAutoBackUpStrategyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance name.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeIndexMeta response structure.
+ * @class
+ */
+class DescribeIndexMetaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Index metadata field
+         * @type {IndexMetaField || null}
+         */
+        this.IndexMetaField = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.IndexMetaField) {
+            let obj = new IndexMetaField();
+            obj.deserialize(params.IndexMetaField)
+            this.IndexMetaField = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -190,162 +1509,72 @@ class ModifyAutoBackUpStrategyRequest extends  AbstractModel {
 }
 
 /**
- * Index lifecycle policy field
+ * Kibana view data
  * @class
  */
-class IndexPolicyField extends  AbstractModel {
+class KibanaView extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable the warm phase
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * <p>Kibana node IP</p>
          * @type {string || null}
          */
-        this.WarmEnable = null;
+        this.Ip = null;
 
         /**
-         * Min age before data transitions to the warm phase
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.WarmMinAge = null;
-
-        /**
-         * Whether to enable the cold phase
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.ColdEnable = null;
-
-        /**
-         * Min age before data transitions to the cold phase
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.ColdMinAge = null;
-
-        /**
-         * Whether to enable the frozen phase
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.FrozenEnable = null;
-
-        /**
-         * Min age before data transitions to the frozen phase
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.FrozenMinAge = null;
-
-        /**
-         * /
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.ColdAction = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.WarmEnable = 'WarmEnable' in params ? params.WarmEnable : null;
-        this.WarmMinAge = 'WarmMinAge' in params ? params.WarmMinAge : null;
-        this.ColdEnable = 'ColdEnable' in params ? params.ColdEnable : null;
-        this.ColdMinAge = 'ColdMinAge' in params ? params.ColdMinAge : null;
-        this.FrozenEnable = 'FrozenEnable' in params ? params.FrozenEnable : null;
-        this.FrozenMinAge = 'FrozenMinAge' in params ? params.FrozenMinAge : null;
-        this.ColdAction = 'ColdAction' in params ? params.ColdAction : null;
-
-    }
-}
-
-/**
- * Specification information of a node type in the cluster (such as hot data node, warm data node, or dedicated primary node), including node type, number of nodes, node specification, disk type, and disk size. If `Type` is not specified, it will be a hot data node by default; if the node is a primary node, then the `DiskType` and `DiskSize` parameters will be ignored (as a primary node has no data disks)
- * @class
- */
-class NodeInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of nodes
-         * @type {number || null}
-         */
-        this.NodeNum = null;
-
-        /**
-         * Node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
-         * @type {string || null}
-         */
-        this.NodeType = null;
-
-        /**
-         * Node type<li>`hotData`: hot data node</li>
-<li>`warmData`: warm data node</li>
-<li>`dedicatedMaster`: dedicated master node</li>
-Default value: `hotData`
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Node disk type <li>CLOUD_SSD: SSD cloud storage </li><li>CLOUD_PREMIUM: Premium cloud disk </li>Default value: CLOUD_SSD
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * Node disk size in GB
+         * <p>Total node disk size</p>
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * Local disk information
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {LocalDiskInfo || null}
-         */
-        this.LocalDiskInfo = null;
-
-        /**
-         * Number of node disks
+         * <p>Disk utilization rate</p>
          * @type {number || null}
          */
-        this.DiskCount = null;
+        this.DiskUsage = null;
 
         /**
-         * Whether to encrypt node disk. 0: no (default); 1: yes.
-         * @type {number || null}
-         */
-        this.DiskEncrypt = null;
-
-        /**
-         * CPU number
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.CpuNum = null;
-
-        /**
-         * Memory size in GB
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Node memory size</p>
          * @type {number || null}
          */
         this.MemSize = null;
 
         /**
-         * /
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Memory usage rate</p>
          * @type {number || null}
          */
-        this.DiskEnhance = null;
+        this.MemUsage = null;
+
+        /**
+         * <p>Number of CPUs on the node</p>
+         * @type {number || null}
+         */
+        this.CpuNum = null;
+
+        /**
+         * <p>cpu utilization</p>
+         * @type {number || null}
+         */
+        this.CpuUsage = null;
+
+        /**
+         * <p>AZ.</p>
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * <p>ts-0noqayxu-az6-hot-03222010-0</p>
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * <p>Client-side Ip info</p>
+         * @type {string || null}
+         */
+        this.UserIp = null;
 
     }
 
@@ -356,39 +1585,45 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
-        this.NodeType = 'NodeType' in params ? params.NodeType : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-
-        if (params.LocalDiskInfo) {
-            let obj = new LocalDiskInfo();
-            obj.deserialize(params.LocalDiskInfo)
-            this.LocalDiskInfo = obj;
-        }
-        this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
-        this.DiskEncrypt = 'DiskEncrypt' in params ? params.DiskEncrypt : null;
-        this.CpuNum = 'CpuNum' in params ? params.CpuNum : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
         this.MemSize = 'MemSize' in params ? params.MemSize : null;
-        this.DiskEnhance = 'DiskEnhance' in params ? params.DiskEnhance : null;
+        this.MemUsage = 'MemUsage' in params ? params.MemUsage : null;
+        this.CpuNum = 'CpuNum' in params ? params.CpuNum : null;
+        this.CpuUsage = 'CpuUsage' in params ? params.CpuUsage : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.UserIp = 'UserIp' in params ? params.UserIp : null;
 
     }
 }
 
 /**
- * UpdateIndex response structure.
+ * Index configuration field
  * @class
  */
-class UpdateIndexResponse extends  AbstractModel {
+class IndexSettingsField extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Number of index primary shards
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.NumberOfShards = null;
+
+        /**
+         * Replica shard count of an index
+         * @type {string || null}
+         */
+        this.NumberOfReplicas = null;
+
+        /**
+         * Index refresh frequency
+         * @type {string || null}
+         */
+        this.RefreshInterval = null;
 
     }
 
@@ -399,16 +1634,53 @@ class UpdateIndexResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.NumberOfShards = 'NumberOfShards' in params ? params.NumberOfShards : null;
+        this.NumberOfReplicas = 'NumberOfReplicas' in params ? params.NumberOfReplicas : null;
+        this.RefreshInterval = 'RefreshInterval' in params ? params.RefreshInterval : null;
 
     }
 }
 
 /**
- * DescribeAutoBackUpStrategy request structure.
+ * UpdateRequestTargetNodeTypes request structure.
  * @class
  */
-class DescribeAutoBackUpStrategyRequest extends  AbstractModel {
+class UpdateRequestTargetNodeTypesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * List of target node types that receive requests
+         * @type {Array.<string> || null}
+         */
+        this.TargetNodeTypes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TargetNodeTypes = 'TargetNodeTypes' in params ? params.TargetNodeTypes : null;
+
+    }
+}
+
+/**
+ * CreateAutoBackUpStrategy request structure.
+ * @class
+ */
+class CreateAutoBackUpStrategyRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -417,6 +1689,12 @@ class DescribeAutoBackUpStrategyRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * Policy information.
+         * @type {CosBackup || null}
+         */
+        this.CosBackup = null;
 
     }
 
@@ -429,23 +1707,22 @@ class DescribeAutoBackUpStrategyRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
+        if (params.CosBackup) {
+            let obj = new CosBackup();
+            obj.deserialize(params.CosBackup)
+            this.CosBackup = obj;
+        }
+
     }
 }
 
 /**
- * DescribeIndexMeta response structure.
+ * DeleteInstance response structure.
  * @class
  */
-class DescribeIndexMetaResponse extends  AbstractModel {
+class DeleteInstanceResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Index metadata field
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {IndexMetaField || null}
-         */
-        this.IndexMetaField = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -462,13 +1739,196 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-
-        if (params.IndexMetaField) {
-            let obj = new IndexMetaField();
-            obj.deserialize(params.IndexMetaField)
-            this.IndexMetaField = obj;
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateIndex request structure.
+ * @class
+ */
+class CreateIndexRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ES cluster ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Index type of the created index. auto: autonomous index; normal: general index
+         * @type {string || null}
+         */
+        this.IndexType = null;
+
+        /**
+         * Index name of the created index
+         * @type {string || null}
+         */
+        this.IndexName = null;
+
+        /**
+         * [Required] JSON-formatted index metadata created, such as mappings and settings
+         * @type {string || null}
+         */
+        this.IndexMetaJson = null;
+
+        /**
+         * Cluster access username.
+         * @type {string || null}
+         */
+        this.Username = null;
+
+        /**
+         * Cluster access password
+         * @type {string || null}
+         */
+        this.Password = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.IndexType = 'IndexType' in params ? params.IndexType : null;
+        this.IndexName = 'IndexName' in params ? params.IndexName : null;
+        this.IndexMetaJson = 'IndexMetaJson' in params ? params.IndexMetaJson : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
+ * UpdatePlugins request structure.
+ * @class
+ */
+class UpdatePluginsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Name list of plug-ins that needs to be installed
+         * @type {Array.<string> || null}
+         */
+        this.InstallPluginList = null;
+
+        /**
+         * List of plug-in names to uninstall
+         * @type {Array.<string> || null}
+         */
+        this.RemovePluginList = null;
+
+        /**
+         * Whether to force restart. Default value: false
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
+        /**
+         * Whether to reinstall. Default value: false
+         * @type {boolean || null}
+         */
+        this.ForceUpdate = null;
+
+        /**
+         * 0: System plugin
+         * @type {number || null}
+         */
+        this.PluginType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstallPluginList = 'InstallPluginList' in params ? params.InstallPluginList : null;
+        this.RemovePluginList = 'RemovePluginList' in params ? params.RemovePluginList : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
+        this.ForceUpdate = 'ForceUpdate' in params ? params.ForceUpdate : null;
+        this.PluginType = 'PluginType' in params ? params.PluginType : null;
+
+    }
+}
+
+/**
+ * UpgradeLicense request structure.
+ * @class
+ */
+class UpgradeLicenseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * License type<li>oss: open source edition</li><li>basic: basic version</li><li>platinum: platinum version</li>Default value: platinum
+         * @type {string || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * Indicates whether to use vouchers automatically<li>0: Do not use automatically.</li><li>1: Use automatically.</li>Default value: 0.
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Voucher ID list. Only one voucher can be specified.
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * Whether xpack security authentication is enabled for basic version 6.8 (and above versions)<li>1: not enabled</li><li>2: enabled</li><li>If no parameter is passed, the original status is maintained by default. When passing a parameter, note that it can only change from not enabled to enabled, and cannot change from enabled to not enabled</li>
+         * @type {number || null}
+         */
+        this.BasicSecurityType = null;
+
+        /**
+         * Whether to force restart <li>true: force restart</li><li>false: do not force restart</li> Default value: false
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
 
     }
 }
@@ -483,7 +1943,6 @@ class UpdateInstanceResponse extends  AbstractModel {
 
         /**
          * Order ID
-Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.DealName = null;
@@ -510,24 +1969,163 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * Operation details
+ * DeleteIndex request structure.
  * @class
  */
-class OperationDetail extends  AbstractModel {
+class DeleteIndexRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Original instance configuration information
-         * @type {Array.<KeyValue> || null}
+         * <p>ES cluster ID</p>
+         * @type {string || null}
          */
-        this.OldInfo = null;
+        this.InstanceId = null;
 
         /**
-         * Updated instance configuration information
-         * @type {Array.<KeyValue> || null}
+         * <p>Deleted index type. auto: autonomous index; normal: general index</p>
+         * @type {string || null}
          */
-        this.NewInfo = null;
+        this.IndexType = null;
+
+        /**
+         * <p>Name of the deleted index</p>
+         * @type {string || null}
+         */
+        this.IndexName = null;
+
+        /**
+         * <p>Cluster access username.</p>
+         * @type {string || null}
+         */
+        this.Username = null;
+
+        /**
+         * <p>Cluster access password</p>
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * <p>Backing index name</p>
+         * @type {string || null}
+         */
+        this.BackingIndexName = null;
+
+        /**
+         * <p>Index life cycle</p>
+         * @type {string || null}
+         */
+        this.IndexPhrase = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.IndexType = 'IndexType' in params ? params.IndexType : null;
+        this.IndexName = 'IndexName' in params ? params.IndexName : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.BackingIndexName = 'BackingIndexName' in params ? params.BackingIndexName : null;
+        this.IndexPhrase = 'IndexPhrase' in params ? params.IndexPhrase : null;
+
+    }
+}
+
+/**
+ * DescribeViews request structure.
+ * @class
+ */
+class DescribeViewsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * ModifyAutoBackUpStrategy response structure.
+ * @class
+ */
+class ModifyAutoBackUpStrategyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Valid values: true (success) and false (failure).
+         * @type {boolean || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeIndexList response structure.
+ * @class
+ */
+class DescribeIndexListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Index metadata field
+         * @type {Array.<IndexMetaField> || null}
+         */
+        this.IndexMetaFields = null;
+
+        /**
+         * Total query count
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -539,29 +2137,22 @@ class OperationDetail extends  AbstractModel {
             return;
         }
 
-        if (params.OldInfo) {
-            this.OldInfo = new Array();
-            for (let z in params.OldInfo) {
-                let obj = new KeyValue();
-                obj.deserialize(params.OldInfo[z]);
-                this.OldInfo.push(obj);
+        if (params.IndexMetaFields) {
+            this.IndexMetaFields = new Array();
+            for (let z in params.IndexMetaFields) {
+                let obj = new IndexMetaField();
+                obj.deserialize(params.IndexMetaFields[z]);
+                this.IndexMetaFields.push(obj);
             }
         }
-
-        if (params.NewInfo) {
-            this.NewInfo = new Array();
-            for (let z in params.NewInfo) {
-                let obj = new KeyValue();
-                obj.deserialize(params.NewInfo[z]);
-                this.NewInfo.push(obj);
-            }
-        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * Cluster view data
+ * Cluster dimension view data
  * @class
  */
 class ClusterView extends  AbstractModel {
@@ -581,37 +2172,37 @@ class ClusterView extends  AbstractModel {
         this.Visible = null;
 
         /**
-         * Whether the cluster encounters circuit breaking
+         * Whether to fuse the cluster
          * @type {number || null}
          */
         this.Break = null;
 
         /**
-         * Average disk usage
+         * Average Disk Usage
          * @type {number || null}
          */
         this.AvgDiskUsage = null;
 
         /**
-         * Average memory usage
+         * Average memory utilization
          * @type {number || null}
          */
         this.AvgMemUsage = null;
 
         /**
-         * Average CPU usage
+         * Average CPU Usage
          * @type {number || null}
          */
         this.AvgCpuUsage = null;
 
         /**
-         * Total disk size of the cluster
+         * Total storage size of a cluster.
          * @type {number || null}
          */
         this.TotalDiskSize = null;
 
         /**
-         * Types of nodes to receive client requests
+         * Client request node
          * @type {Array.<string> || null}
          */
         this.TargetNodeTypes = null;
@@ -629,13 +2220,13 @@ class ClusterView extends  AbstractModel {
         this.TotalNodeNum = null;
 
         /**
-         * Number of data nodes
+         * Number of Data Nodes
          * @type {number || null}
          */
         this.DataNodeNum = null;
 
         /**
-         * Number of indices
+         * Index count
          * @type {number || null}
          */
         this.IndexNum = null;
@@ -647,7 +2238,7 @@ class ClusterView extends  AbstractModel {
         this.DocNum = null;
 
         /**
-         * Used disk size (in bytes)
+         * Used bytes of the disk
          * @type {number || null}
          */
         this.DiskUsedInBytes = null;
@@ -665,13 +2256,13 @@ class ClusterView extends  AbstractModel {
         this.PrimaryShardNum = null;
 
         /**
-         * Number of relocating shards
+         * Number of migrating shards
          * @type {number || null}
          */
         this.RelocatingShardNum = null;
 
         /**
-         * Number of initializing shards
+         * Number of initializing shards.
          * @type {number || null}
          */
         this.InitializingShardNum = null;
@@ -683,21 +2274,19 @@ class ClusterView extends  AbstractModel {
         this.UnassignedShardNum = null;
 
         /**
-         * Total COS storage of an enterprise cluster, in GB
+         * Enterprise Edition COS storage capacity size in GB
          * @type {number || null}
          */
         this.TotalCosStorage = null;
 
         /**
-         * Name of the COS bucket that stores searchable snapshots of an enterprise cluster
-Note: This field may return `null`, indicating that no valid value was found.
+         * bucket name for storing cos searchable snapshots in the Enterprise Edition cluster
          * @type {string || null}
          */
         this.SearchableSnapshotCosBucket = null;
 
         /**
-         * COS app ID of the searchable snapshots of an enterprise cluster
-Note: This field may return `null`, indicating that no valid value was found.
+         * App ID of the cos bucket for searchable snapshots in the Enterprise Edition cluster
          * @type {string || null}
          */
         this.SearchableSnapshotCosAppId = null;
@@ -733,41 +2322,6 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.TotalCosStorage = 'TotalCosStorage' in params ? params.TotalCosStorage : null;
         this.SearchableSnapshotCosBucket = 'SearchableSnapshotCosBucket' in params ? params.SearchableSnapshotCosBucket : null;
         this.SearchableSnapshotCosAppId = 'SearchableSnapshotCosAppId' in params ? params.SearchableSnapshotCosAppId : null;
-
-    }
-}
-
-/**
- * Instance tag information
- * @class
- */
-class TagInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Tag key
-         * @type {string || null}
-         */
-        this.TagKey = null;
-
-        /**
-         * Tag value
-         * @type {string || null}
-         */
-        this.TagValue = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -836,328 +2390,15 @@ class DeleteAutoBackUpStrategyRequest extends  AbstractModel {
 }
 
 /**
- * Kibana view data
+ * UpgradeLicense response structure.
  * @class
  */
-class KibanaView extends  AbstractModel {
+class UpgradeLicenseResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Kibana node IP
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * Node disk size
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * Disk usage
-         * @type {number || null}
-         */
-        this.DiskUsage = null;
-
-        /**
-         * Node memory size
-         * @type {number || null}
-         */
-        this.MemSize = null;
-
-        /**
-         * Memory usage
-         * @type {number || null}
-         */
-        this.MemUsage = null;
-
-        /**
-         * Number of node CPUs
-         * @type {number || null}
-         */
-        this.CpuNum = null;
-
-        /**
-         * CPU usage
-         * @type {number || null}
-         */
-        this.CpuUsage = null;
-
-        /**
-         * Availability zone
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
-        this.MemSize = 'MemSize' in params ? params.MemSize : null;
-        this.MemUsage = 'MemUsage' in params ? params.MemUsage : null;
-        this.CpuNum = 'CpuNum' in params ? params.CpuNum : null;
-        this.CpuUsage = 'CpuUsage' in params ? params.CpuUsage : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-
-    }
-}
-
-/**
- * Public network ACL information of ES
- * @class
- */
-class EsPublicAcl extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Access blocklist
-         * @type {Array.<string> || null}
-         */
-        this.BlackIpList = null;
-
-        /**
-         * Access allowlist
-         * @type {Array.<string> || null}
-         */
-        this.WhiteIpList = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BlackIpList = 'BlackIpList' in params ? params.BlackIpList : null;
-        this.WhiteIpList = 'WhiteIpList' in params ? params.WhiteIpList : null;
-
-    }
-}
-
-/**
- * Backing index metadata fields
- * @class
- */
-class BackingIndexMetaField extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Backing index name
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.IndexName = null;
-
-        /**
-         * Backing index status
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.IndexStatus = null;
-
-        /**
-         * Backing index size
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.IndexStorage = null;
-
-        /**
-         * Current lifecycle phase of backing index
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.IndexPhrase = null;
-
-        /**
-         * Backing index creation time
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.IndexCreateTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IndexName = 'IndexName' in params ? params.IndexName : null;
-        this.IndexStatus = 'IndexStatus' in params ? params.IndexStatus : null;
-        this.IndexStorage = 'IndexStorage' in params ? params.IndexStorage : null;
-        this.IndexPhrase = 'IndexPhrase' in params ? params.IndexPhrase : null;
-        this.IndexCreateTime = 'IndexCreateTime' in params ? params.IndexCreateTime : null;
-
-    }
-}
-
-/**
- * Information of the IK plugin dictionary
- * @class
- */
-class DictInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Dictionary key value
-         * @type {string || null}
-         */
-        this.Key = null;
-
-        /**
-         * Dictionary name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Dictionary size in B
-         * @type {number || null}
-         */
-        this.Size = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Size = 'Size' in params ? params.Size : null;
-
-    }
-}
-
-/**
- * RestartInstance response structure.
- * @class
- */
-class RestartInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * `OperationDetail` uses an array of this structure to describe the old and new configuration information
- * @class
- */
-class KeyValue extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Key
-         * @type {string || null}
-         */
-        this.Key = null;
-
-        /**
-         * Value
-         * @type {string || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
- * RestartKibana request structure.
- * @class
- */
-class RestartKibanaRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ES instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-    }
-}
-
-/**
- * CreateInstance response structure.
- * @class
- */
-class CreateInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
 
         /**
          * Order ID
-Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.DealName = null;
@@ -1177,7 +2418,6 @@ Note: This field may return `null`, indicating that no valid value was found.
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.DealName = 'DealName' in params ? params.DealName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1185,33 +2425,18 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * Index configuration fields
+ * RestartKibana request structure.
  * @class
  */
-class IndexSettingsField extends  AbstractModel {
+class RestartKibanaRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of primary shards
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * ES instance ID.
          * @type {string || null}
          */
-        this.NumberOfShards = null;
-
-        /**
-         * Number of replica shards
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.NumberOfReplicas = null;
-
-        /**
-         * Index refresh interval
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.RefreshInterval = null;
+        this.InstanceId = null;
 
     }
 
@@ -1222,9 +2447,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.NumberOfShards = 'NumberOfShards' in params ? params.NumberOfShards : null;
-        this.NumberOfReplicas = 'NumberOfReplicas' in params ? params.NumberOfReplicas : null;
-        this.RefreshInterval = 'RefreshInterval' in params ? params.RefreshInterval : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -1273,89 +2496,6 @@ class DescribeAutoBackUpStrategyResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceLogs request structure.
- * @class
- */
-class DescribeInstanceLogsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Log type. Default value: 1
-<li>1: primary log</li>
-<li>2: search slow log</li>
-<li>3: index slow log</li>
-<li>4: GC log</li>
-         * @type {number || null}
-         */
-        this.LogType = null;
-
-        /**
-         * Search keyword, which supports LUCENE syntax, such as `level:WARN`, `ip:1.1.1.1`, and `message:test-index`
-         * @type {string || null}
-         */
-        this.SearchKey = null;
-
-        /**
-         * Log start time in the format of YYYY-MM-DD HH:MM:SS, such as 2019-01-22 20:15:53
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Log end time in the format of YYYY-MM-DD HH:MM:SS, such as 2019-01-22 20:15:53
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Pagination start value. Default value: 0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of entries per page. Default value: 100. Maximum value: 100
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Time sorting order. Default value: 0
-<li>0: descending</li>
-<li>1: ascending</li>
-         * @type {number || null}
-         */
-        this.OrderByType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.LogType = 'LogType' in params ? params.LogType : null;
-        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
-
-    }
-}
-
-/**
  * UpdateDictionaries request structure.
  * @class
  */
@@ -1364,43 +2504,43 @@ class UpdateDictionariesRequest extends  AbstractModel {
         super();
 
         /**
-         * ES instance ID
+         * ES instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * COS address of the main dictionary for the IK analyzer
+         * Address of the COS main dictionary for IK word segmentation entered during installation, and the dictionary name such as test.dic entered during deletion.
          * @type {Array.<string> || null}
          */
         this.IkMainDicts = null;
 
         /**
-         * COS address of the stopword dictionary for the IK analyzer
+         * Address of the COS stopword dictionary for IK word segmentation during installation. When deleting, enter the dictionary name, for example, test.dic.
          * @type {Array.<string> || null}
          */
         this.IkStopwords = null;
 
         /**
-         * COS address of the synonym dictionary
+         * Address of the synonym dictionary COS during installation, and the dictionary name such as test.dic when deleting.
          * @type {Array.<string> || null}
          */
         this.Synonym = null;
 
         /**
-         * COS address of the QQ dictionary
+         * Address of the COS QQ tokenizer dictionary during installation, and the dictionary name such as test.dic during deletion.
          * @type {Array.<string> || null}
          */
         this.QQDict = null;
 
         /**
-         * `0` (default): Install, `1`: Delete
+         * 0: installation; 1: deletion. Default value: 0
          * @type {number || null}
          */
         this.UpdateType = null;
 
         /**
-         * Whether to force restart the cluster. The default value is `false`.
+         * Whether to force restart the cluster. Default value: false
          * @type {boolean || null}
          */
         this.ForceRestart = null;
@@ -1426,25 +2566,139 @@ class UpdateDictionariesRequest extends  AbstractModel {
 }
 
 /**
- * UpdateRequestTargetNodeTypes request structure.
+ * ES cos auto backup information
  * @class
  */
-class UpdateRequestTargetNodeTypesRequest extends  AbstractModel {
+class CosBackup extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID.
+         * <p>Whether to enable cos automatic backup</p>
+         * @type {boolean || null}
+         */
+        this.IsAutoBackup = null;
+
+        /**
+         * <p>Automatic backup execution time (accurate to the hour), e.g. "22:00"</p>
+         * @type {string || null}
+         */
+        this.BackupTime = null;
+
+        /**
+         * <p>Backup snapshot prefix</p>
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
+
+        /**
+         * <p>0 (Tencent Cloud repository); 1 (customer repository)</p>
+         * @type {number || null}
+         */
+        this.EsRepositoryType = null;
+
+        /**
+         * <p>Managed snapshot repository name.</p>
+         * @type {string || null}
+         */
+        this.PaasEsRepository = null;
+
+        /**
+         * <p>Customer snapshot repository name</p>
+         * @type {string || null}
+         */
+        this.UserEsRepository = null;
+
+        /**
+         * <p>cos storage folder directory</p>
+         * @type {string || null}
+         */
+        this.CosBasePath = null;
+
+        /**
+         * <p>Snapshot storage cycle in days</p>
+         * @type {number || null}
+         */
+        this.StorageDuration = null;
+
+        /**
+         * <p>Auto backup frequency in hours.</p>
+         * @type {number || null}
+         */
+        this.AutoBackupInterval = null;
+
+        /**
+         * <p>Backup lock. Valid values: 0 (not locked) and 1 (locked).</p>
+         * @type {number || null}
+         */
+        this.CosRetention = null;
+
+        /**
+         * <p>Lock expiration date, such as 2022-12-10T08:34:48.000Z.</p>
+         * @type {string || null}
+         */
+        this.RetainUntilDate = null;
+
+        /**
+         * <p>Lock grace period</p>
+         * @type {number || null}
+         */
+        this.RetentionGraceTime = null;
+
+        /**
+         * <p>Cross-region backup. Valid values: 0 (disabled) and 1 (enabled).</p>
+         * @type {number || null}
+         */
+        this.RemoteCos = null;
+
+        /**
+         * <p>Region name for cross-regional backup, such as ap-guangzhou.</p>
+         * @type {string || null}
+         */
+        this.RemoteCosRegion = null;
+
+        /**
+         * <p>Policy name.</p>
+         * @type {string || null}
+         */
+        this.StrategyName = null;
+
+        /**
+         * <p>Backup index list. If left empty, it means to back up all indexes.</p>
+         * @type {string || null}
+         */
+        this.Indices = null;
+
+        /**
+         * <p>cos multi-AZ backup. 0: single AZ; 1: multi-AZ</p>
+         * @type {number || null}
+         */
+        this.MultiAz = null;
+
+        /**
+         * <p>Maximum speed of write to the repository per node max_snapshot_bytes_per_sec, default 40m</p>
+         * @type {string || null}
+         */
+        this.MaxSnapshotPerSec = null;
+
+        /**
+         * <p>Maximum speed of reading the repository per node max_restore_bytes_per_sec. Default is 40m before 710, and default unlimited from 710 onwards</p>
+         * @type {string || null}
+         */
+        this.MaxRestorePerSec = null;
+
+        /**
+         * <p>Policy creation time</p>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * <p>Instance ID.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
-        /**
-         * A list of node types used to receive requests.
-         * @type {Array.<string> || null}
-         */
-        this.TargetNodeTypes = null;
-
     }
 
     /**
@@ -1454,254 +2708,27 @@ class UpdateRequestTargetNodeTypesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.IsAutoBackup = 'IsAutoBackup' in params ? params.IsAutoBackup : null;
+        this.BackupTime = 'BackupTime' in params ? params.BackupTime : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+        this.EsRepositoryType = 'EsRepositoryType' in params ? params.EsRepositoryType : null;
+        this.PaasEsRepository = 'PaasEsRepository' in params ? params.PaasEsRepository : null;
+        this.UserEsRepository = 'UserEsRepository' in params ? params.UserEsRepository : null;
+        this.CosBasePath = 'CosBasePath' in params ? params.CosBasePath : null;
+        this.StorageDuration = 'StorageDuration' in params ? params.StorageDuration : null;
+        this.AutoBackupInterval = 'AutoBackupInterval' in params ? params.AutoBackupInterval : null;
+        this.CosRetention = 'CosRetention' in params ? params.CosRetention : null;
+        this.RetainUntilDate = 'RetainUntilDate' in params ? params.RetainUntilDate : null;
+        this.RetentionGraceTime = 'RetentionGraceTime' in params ? params.RetentionGraceTime : null;
+        this.RemoteCos = 'RemoteCos' in params ? params.RemoteCos : null;
+        this.RemoteCosRegion = 'RemoteCosRegion' in params ? params.RemoteCosRegion : null;
+        this.StrategyName = 'StrategyName' in params ? params.StrategyName : null;
+        this.Indices = 'Indices' in params ? params.Indices : null;
+        this.MultiAz = 'MultiAz' in params ? params.MultiAz : null;
+        this.MaxSnapshotPerSec = 'MaxSnapshotPerSec' in params ? params.MaxSnapshotPerSec : null;
+        this.MaxRestorePerSec = 'MaxRestorePerSec' in params ? params.MaxRestorePerSec : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.TargetNodeTypes = 'TargetNodeTypes' in params ? params.TargetNodeTypes : null;
-
-    }
-}
-
-/**
- * Details of AZs in multi-AZ deployment mode
- * @class
- */
-class ZoneDetail extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * AZ
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * Subnet ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-
-    }
-}
-
-/**
- * ModifyAutoBackUpCommonInfo request structure.
- * @class
- */
-class ModifyAutoBackUpCommonInfoRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-    }
-}
-
-/**
- * The maintenance time slot of the cluster
- * @class
- */
-class OperationDuration extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Maintenance period, which can be one or more days from Monday to Sunday. Valid values: [0, 6].
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<number> || null}
-         */
-        this.Periods = null;
-
-        /**
-         * The maintenance start time
-         * @type {string || null}
-         */
-        this.TimeStart = null;
-
-        /**
-         * The maintenance end time
-         * @type {string || null}
-         */
-        this.TimeEnd = null;
-
-        /**
-         * The time zone expressed in UTC.
-         * @type {string || null}
-         */
-        this.TimeZone = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Periods = 'Periods' in params ? params.Periods : null;
-        this.TimeStart = 'TimeStart' in params ? params.TimeStart : null;
-        this.TimeEnd = 'TimeEnd' in params ? params.TimeEnd : null;
-        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
-
-    }
-}
-
-/**
- * Node view data
- * @class
- */
-class NodeView extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Node ID
-         * @type {string || null}
-         */
-        this.NodeId = null;
-
-        /**
-         * Node IP
-         * @type {string || null}
-         */
-        this.NodeIp = null;
-
-        /**
-         * Whether the node is visible
-         * @type {number || null}
-         */
-        this.Visible = null;
-
-        /**
-         * Whether the node encounters circuit breaking
-         * @type {number || null}
-         */
-        this.Break = null;
-
-        /**
-         * Node disk size
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * Disk usage
-         * @type {number || null}
-         */
-        this.DiskUsage = null;
-
-        /**
-         * Node memory size (in GB)
-         * @type {number || null}
-         */
-        this.MemSize = null;
-
-        /**
-         * Memory usage
-         * @type {number || null}
-         */
-        this.MemUsage = null;
-
-        /**
-         * Number of node CPUs
-         * @type {number || null}
-         */
-        this.CpuNum = null;
-
-        /**
-         * CPU usage
-         * @type {number || null}
-         */
-        this.CpuUsage = null;
-
-        /**
-         * Availability zone
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * Node role
-         * @type {string || null}
-         */
-        this.NodeRole = null;
-
-        /**
-         * Node HTTP IP
-         * @type {string || null}
-         */
-        this.NodeHttpIp = null;
-
-        /**
-         * JVM memory usage
-         * @type {number || null}
-         */
-        this.JvmMemUsage = null;
-
-        /**
-         * Number of node shards
-         * @type {number || null}
-         */
-        this.ShardNum = null;
-
-        /**
-         * ID list of node disks
-         * @type {Array.<string> || null}
-         */
-        this.DiskIds = null;
-
-        /**
-         * Whether a hidden availability zone
-         * @type {boolean || null}
-         */
-        this.Hidden = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.NodeId = 'NodeId' in params ? params.NodeId : null;
-        this.NodeIp = 'NodeIp' in params ? params.NodeIp : null;
-        this.Visible = 'Visible' in params ? params.Visible : null;
-        this.Break = 'Break' in params ? params.Break : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
-        this.MemSize = 'MemSize' in params ? params.MemSize : null;
-        this.MemUsage = 'MemUsage' in params ? params.MemUsage : null;
-        this.CpuNum = 'CpuNum' in params ? params.CpuNum : null;
-        this.CpuUsage = 'CpuUsage' in params ? params.CpuUsage : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
-        this.NodeHttpIp = 'NodeHttpIp' in params ? params.NodeHttpIp : null;
-        this.JvmMemUsage = 'JvmMemUsage' in params ? params.JvmMemUsage : null;
-        this.ShardNum = 'ShardNum' in params ? params.ShardNum : null;
-        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
-        this.Hidden = 'Hidden' in params ? params.Hidden : null;
 
     }
 }
@@ -1715,7 +2742,7 @@ class DescribeIndexListRequest extends  AbstractModel {
         super();
 
         /**
-         * Index type. `auto`: Automated; `normal`: General.
+         * Index type. auto: autonomous index; normal: general index
          * @type {string || null}
          */
         this.IndexType = null;
@@ -1727,49 +2754,49 @@ class DescribeIndexListRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Index name. `null` indicates that all indexes are requested.
+         * Index name. If this parameter is left empty, all indexes are obtained.
          * @type {string || null}
          */
         this.IndexName = null;
 
         /**
-         * Username for cluster access
+         * Cluster access username.
          * @type {string || null}
          */
         this.Username = null;
 
         /**
-         * Password for cluster access
+         * Cluster access password
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * The starting position of paging
+         * Paging start position
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * The number of results per page
+         * Number of items displayed per page
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Sorting condition field, which can be `IndexName`, `IndexStorage`, or `IndexCreateTime`.
+         * Sorting fields, which support the following index names: IndexName, IndexStorage, and IndexCreateTime.
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
-         * Filtering by index status
+         * Filter by index status
          * @type {Array.<string> || null}
          */
         this.IndexStatusList = null;
 
         /**
-         * Sorting mode, which can be `asc` and `desc`.
+         * Sort order. Supports asc and desc. Defaults to desc. Data format: "asc", "desc"
          * @type {string || null}
          */
         this.Order = null;
@@ -1798,246 +2825,381 @@ class DescribeIndexListRequest extends  AbstractModel {
 }
 
 /**
- * Auto-backup to COS for ES
+ * Cluster maintainability time
  * @class
  */
-class CosBackup extends  AbstractModel {
+class OperationDuration extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable auto-backup to COS
+         * Maintenance period, which refers to Monday to Sunday. Valid values: [0, 6].
+         * @type {Array.<number> || null}
+         */
+        this.Periods = null;
+
+        /**
+         * Maintenance start time
+         * @type {string || null}
+         */
+        this.TimeStart = null;
+
+        /**
+         * Maintenance end time.
+         * @type {string || null}
+         */
+        this.TimeEnd = null;
+
+        /**
+         * Time zone in UTC format
+         * @type {string || null}
+         */
+        this.TimeZone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Periods = 'Periods' in params ? params.Periods : null;
+        this.TimeStart = 'TimeStart' in params ? params.TimeStart : null;
+        this.TimeEnd = 'TimeEnd' in params ? params.TimeEnd : null;
+        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
+
+    }
+}
+
+/**
+ * Cluster maintainability time
+ * @class
+ */
+class OperationDurationUpdated extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Maintenance period, which refers to Monday to Sunday. Valid values: [0, 6].
+         * @type {Array.<number> || null}
+         */
+        this.Periods = null;
+
+        /**
+         * Maintenance start time
+         * @type {string || null}
+         */
+        this.TimeStart = null;
+
+        /**
+         * Maintenance end time.
+         * @type {string || null}
+         */
+        this.TimeEnd = null;
+
+        /**
+         * Time zone in UTC format
+         * @type {string || null}
+         */
+        this.TimeZone = null;
+
+        /**
+         * ES cluster ID array
+         * @type {Array.<string> || null}
+         */
+        this.MoreInstances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Periods = 'Periods' in params ? params.Periods : null;
+        this.TimeStart = 'TimeStart' in params ? params.TimeStart : null;
+        this.TimeEnd = 'TimeEnd' in params ? params.TimeEnd : null;
+        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
+        this.MoreInstances = 'MoreInstances' in params ? params.MoreInstances : null;
+
+    }
+}
+
+/**
+ * CreateInstance request structure.
+ * @class
+ */
+class CreateInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>AZ.</p>
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * <p>Instance version (supported: "5.6.4", "6.4.3", "6.8.2", "7.5.1", "7.10.1")</p>
+         * @type {string || null}
+         */
+        this.EsVersion = null;
+
+        /**
+         * <p>VPC ID</p>
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * <p>Subnet ID.</p>
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * <p>Access password (8-16 characters, including at least two of the following: [a-z,A-Z], [0-9], and special characters in [-!@#$%&amp;^*+=_:;,.?])</p>
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * <p>Instance name (1-50 English letters, Chinese characters, digits, hyphens -, or underscores _)</p>
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * <p>Abandoned. Please use NodeInfoList<br>Node quantity (2-50)</p>
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * <p>Billing type<li>PREPAID: prepaid, i.e., monthly subscription</li><li>POSTPAID_BY_HOUR: pay-as-you-go by hour</li>Default value: POSTPAID_BY_HOUR</p>
+         * @type {string || null}
+         */
+        this.ChargeType = null;
+
+        /**
+         * <p>Annual and monthly subscription duration (unit determined by the TimeUnit parameter)</p>
+         * @type {number || null}
+         */
+        this.ChargePeriod = null;
+
+        /**
+         * <p>Auto-renewal flag<li>RENEW_FLAG_AUTO: auto renewal</li><li>RENEW_FLAG_MANUAL: no auto-renewal, user renews manually</li>This needs to be set when ChargeType is PREPAID. If this parameter is not passed, no automatic renewal by default for general users, and auto renewal for SVIP users</p>
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * <p>Abandoned. Please use NodeInfoList<br>Node specification<li>ES.S1.SMALL2: 1-core 2G</li><li>ES.S1.MEDIUM4: 2-core 4G</li><li>ES.S1.MEDIUM8: 2-core 8G</li><li>ES.S1.LARGE16: 4-core 16G</li><li>ES.S1.2XLARGE32: 8-core 32G</li><li>ES.S1.4XLARGE32: 16-core 32G</li><li>ES.S1.4XLARGE64: 16-core 64G</li></p>
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * <p>Abandoned. Please use NodeInfoList<br>Node disk type<li>CLOUD_SSD: ssd cloud disk</li><li>CLOUD_PREMIUM: high-performance cloud block storage</li><li>CLOUD_HSSD: enhanced SSD cloud disk</li><li>CLOUD_BSSD: universal type SSD cloud disk</li>Default value: CLOUD_SSD</p>
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * <p>Abandoned. Please use NodeInfoList<br>Node disk capacity (unit: GB)</p>
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * <p>Billing duration unit (needs to be set when ChargeType is PREPAID. Default value: "m", which means month. Currently only support "m")</p>
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * <p>Indicates whether to use vouchers automatically<li>0: Do not use automatically.</li><li>1: Use automatically.</li>Default value: 0.</p>
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * <p>Voucher ID list. Only one voucher can be specified.</p>
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * <p>Abandoned. Please use NodeInfoList<br>Whether to create a dedicated master node<li>true: enable a dedicated master node</li><li>false: disable a dedicated master node</li>Default value: false</p>
          * @type {boolean || null}
          */
-        this.IsAutoBackup = null;
+        this.EnableDedicatedMaster = null;
 
         /**
-         * Auto-backup time (accurate down to the hour), such as "22:00"
-         * @type {string || null}
-         */
-        this.BackupTime = null;
-
-        /**
-         * Backup snapshot prefix.
-         * @type {string || null}
-         */
-        this.SnapshotName = null;
-
-        /**
-         * Valid values: 0 (Tencent Cloud repository) and 1 (customer repository).
+         * <p>Abandoned. Please use NodeInfoList<br>Number of dedicated primary nodes (supports only 3 or 5. Required if EnableDedicatedMaster is true)</p>
          * @type {number || null}
          */
-        this.EsRepositoryType = null;
+        this.MasterNodeNum = null;
 
         /**
-         * Managed snapshot repository name.
+         * <p>Abandoned. Please use NodeInfoList<br>Dedicated primary node type (required if EnableDedicatedMaster is true)<li>ES.S1.SMALL2: 1-core 2G</li><li>ES.S1.MEDIUM4: 2-core 4G</li><li>ES.S1.MEDIUM8: 2-core 8G</li><li>ES.S1.LARGE16: 4-core 16G</li><li>ES.S1.2XLARGE32: 8-core 32G</li><li>ES.S1.4XLARGE32: 16-core 32G</li><li>ES.S1.4XLARGE64: 16-core 64G</li></p>
          * @type {string || null}
          */
-        this.PaasEsRepository = null;
+        this.MasterNodeType = null;
 
         /**
-         * Customer snapshot repository name.
-         * @type {string || null}
-         */
-        this.UserEsRepository = null;
-
-        /**
-         * COS storage folder directory.
-         * @type {string || null}
-         */
-        this.CosBasePath = null;
-
-        /**
-         * Snapshot storage cycle in days.
+         * <p>Abandoned. Please use NodeInfoList<br>Dedicated primary node disk size (in GB, optional; if transmitted, it must be 50. Customization is not supported temporarily)</p>
          * @type {number || null}
          */
-        this.StorageDuration = null;
+        this.MasterNodeDiskSize = null;
 
         /**
-         * Auto backup frequency in hours.
-         * @type {number || null}
-         */
-        this.AutoBackupInterval = null;
-
-        /**
-         * Backup lock. Valid values: 0 (not locked) and 1 (locked).
-         * @type {number || null}
-         */
-        this.CosRetention = null;
-
-        /**
-         * Lock expiration date, such as 2022-12-10T08:34:48.000Z.
+         * <p>ClusterName in the cluster configuration file (system default configuration is the instance ID, customization is not supported temporarily)</p>
          * @type {string || null}
          */
-        this.RetainUntilDate = null;
+        this.ClusterNameInConf = null;
 
         /**
-         * Lock grace period.
+         * <p>Cluster deployment method<li>0: single-AZ deployment</li><li>1: multi-AZ deployment, Beijing, Shanghai, Shanghai Finance, Guangzhou, Nanjing, Hong Kong, Singapore, Frankfurt (allowlist control)</li>Default value: 0</p>
          * @type {number || null}
          */
-        this.RetentionGraceTime = null;
+        this.DeployMode = null;
 
         /**
-         * Cross-region backup. Valid values: 0 (disabled) and 1 (enabled).
+         * <p>Detailed information of availability zones in multi-AZ deployment (required when DeployMode is 1)</p>
+         * @type {Array.<ZoneDetail> || null}
+         */
+        this.MultiZoneInfo = null;
+
+        /**
+         * <p>License type<li>oss: open source edition</li><li>basic: basic version</li><li>platinum: platinum version</li>Default value: platinum</p>
+         * @type {string || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * <p>Node information list, for description of the specification information of various types of nodes in the cluster, such as node type, number of nodes, node specification, disk type, and disk size</p>
+         * @type {Array.<NodeInfo> || null}
+         */
+        this.NodeInfoList = null;
+
+        /**
+         * <p>Node tag information list</p>
+         * @type {Array.<TagInfo> || null}
+         */
+        this.TagList = null;
+
+        /**
+         * <p>Whether xpack security authentication is enabled for basic version 6.8 (and above versions)<li>1: not enabled</li><li>2: enabled</li></p>
          * @type {number || null}
          */
-        this.RemoteCos = null;
+        this.BasicSecurityType = null;
 
         /**
-         * Region name for cross-region backup, such as ap-guangzhou.
-         * @type {string || null}
-         */
-        this.RemoteCosRegion = null;
-
-        /**
-         * Policy name.
-         * @type {string || null}
-         */
-        this.StrategyName = null;
-
-        /**
-         * Backup index list. If left empty, it means to back up all indexes.
-         * @type {string || null}
-         */
-        this.Indices = null;
-
-        /**
-         * 
+         * <p>Scenario template type 0: disabled 1: common 2: log 3: search</p>
          * @type {number || null}
          */
-        this.MultiAz = null;
+        this.SceneType = null;
 
         /**
-         * Policy creation time.
+         * <p>Visualize node configuration</p>
+         * @type {WebNodeTypeInfo || null}
+         */
+        this.WebNodeTypeInfo = null;
+
+        /**
+         * <p>Create an https cluster. http is selected by default.</p>
          * @type {string || null}
          */
-        this.CreateTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IsAutoBackup = 'IsAutoBackup' in params ? params.IsAutoBackup : null;
-        this.BackupTime = 'BackupTime' in params ? params.BackupTime : null;
-        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
-        this.EsRepositoryType = 'EsRepositoryType' in params ? params.EsRepositoryType : null;
-        this.PaasEsRepository = 'PaasEsRepository' in params ? params.PaasEsRepository : null;
-        this.UserEsRepository = 'UserEsRepository' in params ? params.UserEsRepository : null;
-        this.CosBasePath = 'CosBasePath' in params ? params.CosBasePath : null;
-        this.StorageDuration = 'StorageDuration' in params ? params.StorageDuration : null;
-        this.AutoBackupInterval = 'AutoBackupInterval' in params ? params.AutoBackupInterval : null;
-        this.CosRetention = 'CosRetention' in params ? params.CosRetention : null;
-        this.RetainUntilDate = 'RetainUntilDate' in params ? params.RetainUntilDate : null;
-        this.RetentionGraceTime = 'RetentionGraceTime' in params ? params.RetentionGraceTime : null;
-        this.RemoteCos = 'RemoteCos' in params ? params.RemoteCos : null;
-        this.RemoteCosRegion = 'RemoteCosRegion' in params ? params.RemoteCosRegion : null;
-        this.StrategyName = 'StrategyName' in params ? params.StrategyName : null;
-        this.Indices = 'Indices' in params ? params.Indices : null;
-        this.MultiAz = 'MultiAz' in params ? params.MultiAz : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-
-    }
-}
-
-/**
- * ModifyAutoBackUpStrategy response structure.
- * @class
- */
-class ModifyAutoBackUpStrategyResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.Protocol = null;
 
         /**
-         * Valid values: true (success) and false (failure).
+         * <p>Maintenance time slot</p>
+         * @type {OperationDuration || null}
+         */
+        this.OperationDuration = null;
+
+        /**
+         * <p>Whether storage-compute separation is enabled</p>
          * @type {boolean || null}
          */
-        this.Status = null;
+        this.EnableHybridStorage = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
+         * <p>Additional hard disk performance</p>
+         * @type {number || null}
          */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateAutoBackUpStrategy request structure.
- * @class
- */
-class CreateAutoBackUpStrategyRequest extends  AbstractModel {
-    constructor(){
-        super();
+        this.DiskEnhance = null;
 
         /**
-         * Instance name.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Policy information.
-         * @type {CosBackup || null}
-         */
-        this.CosBackup = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-        if (params.CosBackup) {
-            let obj = new CosBackup();
-            obj.deserialize(params.CosBackup)
-            this.CosBackup = obj;
-        }
-
-    }
-}
-
-/**
- * CreateAutoBackUpStrategy response structure.
- * @class
- */
-class CreateAutoBackUpStrategyResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Valid values: true (success) and false (failure).
+         * <p>Whether intelligent check is enabled</p>
          * @type {boolean || null}
          */
-        this.Status = null;
+        this.EnableDiagnose = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * <p>Whether to enable automatic backup</p>
+         * @type {boolean || null}
+         */
+        this.EnableCosBackup = null;
+
+        /**
+         * <p>cdcId, pass it when using a CDC subnet</p>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CdcId = null;
+
+        /**
+         * <p>Placement group affinity. Value range: [0,10]. 0 indicates disabled.</p>
+         * @type {number || null}
+         */
+        this.DisasterRecoverGroupAffinity = null;
+
+        /**
+         * <p>Enumeration values of sub-product ID: open source edition: "sp_es_io2", basic version: "sp_es_basic", platinum version: "sp_es_platinum", enterprise edition: "sp_es_enterprise", CDC platinum version: "sp_es_CDC_platinum", Log Enhancement Edition: "sp_es_enlogging", tsearch: "sp_tsearch_io2", logstash: "sp_es_logstash". It can be empty. When it is empty, the backend maps this field based on LicenseType.</p>
+         * @type {string || null}
+         */
+        this.SubProductCode = null;
+
+        /**
+         * <p>Read-write separation mode: 0: not enabled; 1: local read/write separation; 2: remote read/write separation.</p>
+         * @type {number || null}
+         */
+        this.ReadWriteMode = null;
+
+        /**
+         * <p>Whether the placement group has asynchronous tasks enabled</p>
+         * @type {boolean || null}
+         */
+        this.EnableScheduleRecoverGroup = null;
+
+        /**
+         * <p>Maintenance time slot for enabling async tasks in a placement group</p>
+         * @type {EnableScheduleOperationDuration || null}
+         */
+        this.EnableScheduleOperationDuration = null;
+
+        /**
+         * <p>Auto capacity expansion parameter list</p>
+         * @type {Array.<AutoScaleDiskInfo> || null}
+         */
+        this.AutoScaleDiskInfoList = null;
+
+        /**
+         * <p>Whether to enable public network access to kibana. Enabled by default if not passed</p>
+         * @type {string || null}
+         */
+        this.EnableKibanaPublicAccess = null;
+
+        /**
+         * <p>Existing cloud monitoring and alarm policy ID</p>
+         * @type {Array.<string> || null}
+         */
+        this.AlarmPolicyIds = null;
 
     }
 
@@ -2048,36 +3210,97 @@ class CreateAutoBackUpStrategyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.EsVersion = 'EsVersion' in params ? params.EsVersion : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+        this.ChargePeriod = 'ChargePeriod' in params ? params.ChargePeriod : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.EnableDedicatedMaster = 'EnableDedicatedMaster' in params ? params.EnableDedicatedMaster : null;
+        this.MasterNodeNum = 'MasterNodeNum' in params ? params.MasterNodeNum : null;
+        this.MasterNodeType = 'MasterNodeType' in params ? params.MasterNodeType : null;
+        this.MasterNodeDiskSize = 'MasterNodeDiskSize' in params ? params.MasterNodeDiskSize : null;
+        this.ClusterNameInConf = 'ClusterNameInConf' in params ? params.ClusterNameInConf : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
 
-    }
-}
-
-/**
- * UpgradeInstance response structure.
- * @class
- */
-class UpgradeInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.MultiZoneInfo) {
+            this.MultiZoneInfo = new Array();
+            for (let z in params.MultiZoneInfo) {
+                let obj = new ZoneDetail();
+                obj.deserialize(params.MultiZoneInfo[z]);
+                this.MultiZoneInfo.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+
+        if (params.NodeInfoList) {
+            this.NodeInfoList = new Array();
+            for (let z in params.NodeInfoList) {
+                let obj = new NodeInfo();
+                obj.deserialize(params.NodeInfoList[z]);
+                this.NodeInfoList.push(obj);
+            }
+        }
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new TagInfo();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
+
+        if (params.WebNodeTypeInfo) {
+            let obj = new WebNodeTypeInfo();
+            obj.deserialize(params.WebNodeTypeInfo)
+            this.WebNodeTypeInfo = obj;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+        if (params.OperationDuration) {
+            let obj = new OperationDuration();
+            obj.deserialize(params.OperationDuration)
+            this.OperationDuration = obj;
+        }
+        this.EnableHybridStorage = 'EnableHybridStorage' in params ? params.EnableHybridStorage : null;
+        this.DiskEnhance = 'DiskEnhance' in params ? params.DiskEnhance : null;
+        this.EnableDiagnose = 'EnableDiagnose' in params ? params.EnableDiagnose : null;
+        this.EnableCosBackup = 'EnableCosBackup' in params ? params.EnableCosBackup : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
+        this.DisasterRecoverGroupAffinity = 'DisasterRecoverGroupAffinity' in params ? params.DisasterRecoverGroupAffinity : null;
+        this.SubProductCode = 'SubProductCode' in params ? params.SubProductCode : null;
+        this.ReadWriteMode = 'ReadWriteMode' in params ? params.ReadWriteMode : null;
+        this.EnableScheduleRecoverGroup = 'EnableScheduleRecoverGroup' in params ? params.EnableScheduleRecoverGroup : null;
+
+        if (params.EnableScheduleOperationDuration) {
+            let obj = new EnableScheduleOperationDuration();
+            obj.deserialize(params.EnableScheduleOperationDuration)
+            this.EnableScheduleOperationDuration = obj;
+        }
+
+        if (params.AutoScaleDiskInfoList) {
+            this.AutoScaleDiskInfoList = new Array();
+            for (let z in params.AutoScaleDiskInfoList) {
+                let obj = new AutoScaleDiskInfo();
+                obj.deserialize(params.AutoScaleDiskInfoList[z]);
+                this.AutoScaleDiskInfoList.push(obj);
+            }
+        }
+        this.EnableKibanaPublicAccess = 'EnableKibanaPublicAccess' in params ? params.EnableKibanaPublicAccess : null;
+        this.AlarmPolicyIds = 'AlarmPolicyIds' in params ? params.AlarmPolicyIds : null;
 
     }
 }
@@ -2111,10 +3334,432 @@ class UpdateDictionariesResponse extends  AbstractModel {
 }
 
 /**
- * Instance details
+ * Task progress details
  * @class
  */
-class InstanceInfo extends  AbstractModel {
+class ProcessDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Number of completed</p>
+         * @type {number || null}
+         */
+        this.Completed = null;
+
+        /**
+         * <p>Remaining quantity</p>
+         * @type {number || null}
+         */
+        this.Remain = null;
+
+        /**
+         * <p>Total quantity.</p>
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * <p>Task type:<br>60: Restart task<br>70: Shard migration task<br>80: Node configuration modification task</p>
+         * @type {number || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * <p>Estimated remaining time</p><p>Unit: seconds</p>
+         * @type {number || null}
+         */
+        this.EstimatedTimeRemaining = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Completed = 'Completed' in params ? params.Completed : null;
+        this.Remain = 'Remain' in params ? params.Remain : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.EstimatedTimeRemaining = 'EstimatedTimeRemaining' in params ? params.EstimatedTimeRemaining : null;
+
+    }
+}
+
+/**
+ * DeleteIndex response structure.
+ * @class
+ */
+class DeleteIndexResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdatePlugins response structure.
+ * @class
+ */
+class UpdatePluginsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstances request structure.
+ * @class
+ */
+class DescribeInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>AZ to which the cluster instance belongs. All AZs are selected by default if this parameter is not specified.</p>
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * <p>Cluster instance ID list</p>
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * <p>Cluster instance name list.</p>
+         * @type {Array.<string> || null}
+         */
+        this.InstanceNames = null;
+
+        /**
+         * <p>Pagination starting value. Default value: 0</p>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * <p>Page size. Default value: 20</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <p>Sorting field<li>1: Instance ID</li><li>2: Instance name</li><li>3: Availability zone</li><li>4: Creation time</li>If orderByKey is not transmitted, sort by creation time in descending order</p>
+         * @type {number || null}
+         */
+        this.OrderByKey = null;
+
+        /**
+         * <p>Sorting method<li>0: ascending</li><li>1: descending</li>If orderByKey is passed but orderByType is not, ascending by default</p>
+         * @type {number || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * <p>Node tag information list</p>
+         * @type {Array.<TagInfo> || null}
+         */
+        this.TagList = null;
+
+        /**
+         * <p>Private network vip list</p>
+         * @type {Array.<string> || null}
+         */
+        this.IpList = null;
+
+        /**
+         * <p>IP list of cluster nodes</p>
+         * @type {Array.<string> || null}
+         */
+        this.NodeIps = null;
+
+        /**
+         * <p>Availability zone list</p>
+         * @type {Array.<string> || null}
+         */
+        this.ZoneList = null;
+
+        /**
+         * <p>Health status filter list: 0 represents green, 1 represents yellow, 2 represents red, -1 represents unknown</p>
+         * @type {Array.<number> || null}
+         */
+        this.HealthStatus = null;
+
+        /**
+         * <p>Vpc list filter item</p>
+         * @type {Array.<string> || null}
+         */
+        this.VpcIds = null;
+
+        /**
+         * <p>cdc cluster id</p>
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceNames = 'InstanceNames' in params ? params.InstanceNames : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderByKey = 'OrderByKey' in params ? params.OrderByKey : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new TagInfo();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+        this.IpList = 'IpList' in params ? params.IpList : null;
+        this.NodeIps = 'NodeIps' in params ? params.NodeIps : null;
+        this.ZoneList = 'ZoneList' in params ? params.ZoneList : null;
+        this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
+        this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
+
+    }
+}
+
+/**
+ * ES library information
+ * @class
+ */
+class EsDictionaryInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of enabled word dictionaries
+         * @type {Array.<DictInfo> || null}
+         */
+        this.MainDict = null;
+
+        /**
+         * List of stopword dictionaries
+         * @type {Array.<DictInfo> || null}
+         */
+        this.Stopwords = null;
+
+        /**
+         * List of QQ word segmentation dictionaries
+         * @type {Array.<DictInfo> || null}
+         */
+        this.QQDict = null;
+
+        /**
+         * List of synonym dictionaries
+         * @type {Array.<DictInfo> || null}
+         */
+        this.Synonym = null;
+
+        /**
+         * Update the dictionary type
+         * @type {string || null}
+         */
+        this.UpdateType = null;
+
+        /**
+         * List of ansj enabled word dictionaries
+         * @type {Array.<DictInfo> || null}
+         */
+        this.AnsjMain = null;
+
+        /**
+         * List of ansj stopword dictionaries
+         * @type {Array.<DictInfo> || null}
+         */
+        this.AnsjStop = null;
+
+        /**
+         * List of ansj ambiguity lexicons
+         * @type {Array.<DictInfo> || null}
+         */
+        this.AnsjAmbiguity = null;
+
+        /**
+         * List of ansj synonym dictionaries
+         * @type {Array.<DictInfo> || null}
+         */
+        this.AnsjSynonyms = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MainDict) {
+            this.MainDict = new Array();
+            for (let z in params.MainDict) {
+                let obj = new DictInfo();
+                obj.deserialize(params.MainDict[z]);
+                this.MainDict.push(obj);
+            }
+        }
+
+        if (params.Stopwords) {
+            this.Stopwords = new Array();
+            for (let z in params.Stopwords) {
+                let obj = new DictInfo();
+                obj.deserialize(params.Stopwords[z]);
+                this.Stopwords.push(obj);
+            }
+        }
+
+        if (params.QQDict) {
+            this.QQDict = new Array();
+            for (let z in params.QQDict) {
+                let obj = new DictInfo();
+                obj.deserialize(params.QQDict[z]);
+                this.QQDict.push(obj);
+            }
+        }
+
+        if (params.Synonym) {
+            this.Synonym = new Array();
+            for (let z in params.Synonym) {
+                let obj = new DictInfo();
+                obj.deserialize(params.Synonym[z]);
+                this.Synonym.push(obj);
+            }
+        }
+        this.UpdateType = 'UpdateType' in params ? params.UpdateType : null;
+
+        if (params.AnsjMain) {
+            this.AnsjMain = new Array();
+            for (let z in params.AnsjMain) {
+                let obj = new DictInfo();
+                obj.deserialize(params.AnsjMain[z]);
+                this.AnsjMain.push(obj);
+            }
+        }
+
+        if (params.AnsjStop) {
+            this.AnsjStop = new Array();
+            for (let z in params.AnsjStop) {
+                let obj = new DictInfo();
+                obj.deserialize(params.AnsjStop[z]);
+                this.AnsjStop.push(obj);
+            }
+        }
+
+        if (params.AnsjAmbiguity) {
+            this.AnsjAmbiguity = new Array();
+            for (let z in params.AnsjAmbiguity) {
+                let obj = new DictInfo();
+                obj.deserialize(params.AnsjAmbiguity[z]);
+                this.AnsjAmbiguity.push(obj);
+            }
+        }
+
+        if (params.AnsjSynonyms) {
+            this.AnsjSynonyms = new Array();
+            for (let z in params.AnsjSynonyms) {
+                let obj = new DictInfo();
+                obj.deserialize(params.AnsjSynonyms[z]);
+                this.AnsjSynonyms.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Node outbound access information
+ * @class
+ */
+class OutboundPublicAcl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node types with permission for node outbound access
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Allowlist for outbound access from nodes
+         * @type {Array.<string> || null}
+         */
+        this.WhiteHostList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.WhiteHostList = 'WhiteHostList' in params ? params.WhiteHostList : null;
+
+    }
+}
+
+/**
+ * GetRequestTargetNodeTypes request structure.
+ * @class
+ */
+class GetRequestTargetNodeTypesRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -2124,530 +3769,675 @@ class InstanceInfo extends  AbstractModel {
          */
         this.InstanceId = null;
 
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * Instance details
+ * @class
+ */
+class InstanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
         /**
-         * Instance name
+         * <p>Instance ID.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Instance name.</p>
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Region
+         * <p>Region.</p>
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * Availability Zone
+         * <p>AZ.</p>
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * User ID
+         * <p>uid</p>
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * User UIN
+         * <p>User UIN.</p>
          * @type {string || null}
          */
         this.Uin = null;
 
         /**
-         * UID of the VPC where the instance resides
+         * <p>UID of the VPC to which the instance belongs</p>
          * @type {string || null}
          */
         this.VpcUid = null;
 
         /**
-         * UID of the subnet where the instance resides
+         * <p>UID of the subnet to which the instance belongs</p>
          * @type {string || null}
          */
         this.SubnetUid = null;
 
         /**
-         * Instance status. `0`: Processing; `1`: Normal; `-1`: `Stopped`; `-2`: Being terminated; `-3`: Terminated; `2`: Initializing during the cluster creation.
+         * <p>Instance status. 0: processing, 1: normal, -1: stopped, -2: being destroyed, -3: terminated, -4: isolated, 2: initializing when creating a cluster</p>
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * This parameter is not used on the global website
+         * <p>Auto-renewal flag. Value range: <br>RENEW_FLAG_AUTO: auto renewal<br>RENEW_FLAG_MANUAL: no auto-renewal<br>Default value: <br>RENEW_FLAG_DEFAULT: no auto-renewal<br>If this parameter is set to RENEW_FLAG_AUTO, the instance will automatically renew on a monthly basis after expiration if the account balance is sufficient.</p>
          * @type {string || null}
          */
         this.RenewFlag = null;
 
         /**
-         * Instance billing method. Valid values: POSTPAID_BY_HOUR (pay-as-you-go hourly); CDHPAID (billed based on CDH, i.e., only CDH is billed but not the instances on CDH)
+         * <p>Instance billing mode. Value ranges: PREPAID: prepaid mode, i.e., monthly subscription. POSTPAID_BY_HOUR: postpaid, i.e., pay-as-you-go. CDHPAID: CDH-paid mode, i.e., only charges for CDH, without charging for instances on CDH.</p>
          * @type {string || null}
          */
         this.ChargeType = null;
 
         /**
-         * This parameter is not used on the global website
+         * <p>Annual and monthly subscription duration, unit: month</p>
          * @type {number || null}
          */
         this.ChargePeriod = null;
 
         /**
-         * Node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
+         * <p>Node specification<li>ES.S1.SMALL2: 1-core 2G</li><li>ES.S1.MEDIUM4: 2-core 4G</li><li>ES.S1.MEDIUM8: 2-core 8G</li><li>ES.S1.LARGE16: 4-core 16G</li><li>ES.S1.2XLARGE32: 8-core 32G</li><li>ES.S1.4XLARGE32: 16-core 32G</li><li>ES.S1.4XLARGE64: 16-core 64G</li></p>
          * @type {string || null}
          */
         this.NodeType = null;
 
         /**
-         * Number of nodes
+         * <p>Number of nodes</p>
          * @type {number || null}
          */
         this.NodeNum = null;
 
         /**
-         * Number of CPU cores of the node
+         * <p>Number of node CPU cores.</p>
          * @type {number || null}
          */
         this.CpuNum = null;
 
         /**
-         * Node memory size in GB
+         * <p>Node memory size (GB).</p>
          * @type {number || null}
          */
         this.MemSize = null;
 
         /**
-         * Node disk type
+         * <p>Node disk type</p>
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
-         * Node disk size in GB
+         * <p>Node disk size (GB).</p>
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * ES domain name
+         * <p>ES domain name</p>
          * @type {string || null}
          */
         this.EsDomain = null;
 
         /**
-         * ES VIP
+         * <p>ES VIP</p>
          * @type {string || null}
          */
         this.EsVip = null;
 
         /**
-         * ES port
+         * <p>ES port</p>
          * @type {number || null}
          */
         this.EsPort = null;
 
         /**
-         * Kibana access URL
+         * <p>Kibana access url</p>
          * @type {string || null}
          */
         this.KibanaUrl = null;
 
         /**
-         * ES version number
+         * <p>ES version number</p>
          * @type {string || null}
          */
         this.EsVersion = null;
 
         /**
-         * ES configuration item
+         * <p>ES configuration item</p>
          * @type {string || null}
          */
         this.EsConfig = null;
 
         /**
-         * Kibana access control configuration
+         * <p>Kibana Access Control Configuration</p>
          * @type {EsAcl || null}
          */
         this.EsAcl = null;
 
         /**
-         * Instance creation time
+         * <p>Instance creation time</p>
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of the instance
+         * <p>Last modification time of the instance</p>
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * This parameter is not used on the global website
+         * <p>Instance expiration time</p>
          * @type {string || null}
          */
         this.Deadline = null;
 
         /**
-         * Instance type (instance type identifier, which can be only 1 or 2 currently)
+         * <p>Instance type (instance type flag, currently only 1 and 2)</p>
          * @type {number || null}
          */
         this.InstanceType = null;
 
         /**
-         * IK analyzer configuration
+         * <p>Ik analyzer configuration</p>
          * @type {EsDictionaryInfo || null}
          */
         this.IkConfig = null;
 
         /**
-         * Dedicated primary node configuration
+         * <p>Dedicated master node configuration</p>
          * @type {MasterNodeInfo || null}
          */
         this.MasterNodeInfo = null;
 
         /**
-         * Auto-backup to COS configuration
+         * <p>cos automatic backup configuration</p>
          * @type {CosBackup || null}
          */
         this.CosBackup = null;
 
         /**
-         * Whether to allow auto-backup to COS
+         * <p>Whether cos automatic backup is allowed</p>
          * @type {boolean || null}
          */
         this.AllowCosBackup = null;
 
         /**
-         * List of tags owned by the instance
+         * <p>Tag list of the instance</p>
          * @type {Array.<TagInfo> || null}
          */
         this.TagList = null;
 
         /**
-         * License type <li>oss: Open Source Edition </li><li>basic: Basic Edition </li><li>platinum: Platinum Edition </li>Default value: Platinum
+         * <p>License type<li>oss: open source edition</li><li>basic: basic version</li><li>platinum: platinum version</li>Default value: platinum</p>
          * @type {string || null}
          */
         this.LicenseType = null;
 
         /**
-         * Whether it is a hot/warm cluster <li>true: yes </li><li>false: no</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>License type<li>oss: open source edition</li><li>basic: basic version</li><li>platinum: platinum version</li><li>enterprise: enterprise edition</li>Default value: platinum</p>
+         * @type {string || null}
+         */
+        this.RealLicenseType = null;
+
+        /**
+         * <p>Whether it is a hot-cold cluster<li>true: Hot-cold cluster</li><li>false: Non-hot-cold cluster</li></p>
          * @type {boolean || null}
          */
         this.EnableHotWarmMode = null;
 
         /**
-         * Warm node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Warm node specification<li>ES.S1.SMALL2: 1-core 2G</li><li>ES.S1.MEDIUM4: 2-core 4G</li><li>ES.S1.MEDIUM8: 2-core 8G</li><li>ES.S1.LARGE16: 4-core 16G</li><li>ES.S1.2XLARGE32: 8-core 32G</li><li>ES.S1.4XLARGE32: 16-core 32G</li><li>ES.S1.4XLARGE64: 16-core 64G</li></p>
          * @type {string || null}
          */
         this.WarmNodeType = null;
 
         /**
-         * Number of warm nodes
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Number of warm nodes</p>
          * @type {number || null}
          */
         this.WarmNodeNum = null;
 
         /**
-         * Number of warm node CPU cores
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Warm node CPU cores</p>
          * @type {number || null}
          */
         this.WarmCpuNum = null;
 
         /**
-         * Warm node memory size (in GB)
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Warm node memory size (GB).</p>
          * @type {number || null}
          */
         this.WarmMemSize = null;
 
         /**
-         * Warm node disk type
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Warm node disk type</p>
          * @type {string || null}
          */
         this.WarmDiskType = null;
 
         /**
-         * Warm node disk size (in GB)
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Warm node disk size (GB).</p>
          * @type {number || null}
          */
         this.WarmDiskSize = null;
 
         /**
-         * Cluster node information list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Cluster node information list</p>
          * @type {Array.<NodeInfo> || null}
          */
         this.NodeInfoList = null;
 
         /**
-         * ES public IP address
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Es public network address</p>
          * @type {string || null}
          */
         this.EsPublicUrl = null;
 
         /**
-         * Multi-AZ network information
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Multi-AZ network info</p>
          * @type {Array.<ZoneDetail> || null}
          */
         this.MultiZoneInfo = null;
 
         /**
-         * Deployment mode <li>0: single-AZ </li><li>1: multi-AZ</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Deployment mode<li>0: single availability zone</li><li>1: multi-availability zone, Beijing, Shanghai, Shanghai Finance, Guangzhou, Nanjing, Hong Kong, Singapore, Frankfurt (allowlist control)</li></p>
          * @type {number || null}
          */
         this.DeployMode = null;
 
         /**
-         * ES public access status <li>OPEN: enabled </li><li>CLOSE: disabled
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>ES public access status<li>OPEN: enable</li><li>CLOSE: disable</li></p>
          * @type {string || null}
          */
         this.PublicAccess = null;
 
         /**
-         * ES public access control configuration
+         * <p>ES public network access control configuration</p>
          * @type {EsAcl || null}
          */
         this.EsPublicAcl = null;
 
         /**
-         * Kibana private IP address
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Kibana private network address</p>
          * @type {string || null}
          */
         this.KibanaPrivateUrl = null;
 
         /**
-         * Kibana public access status <li>OPEN: enabled </li><li>CLOSE: disabled
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Kibana public access status<li>OPEN: enabled</li><li>CLOSE: disabled</li></p>
          * @type {string || null}
          */
         this.KibanaPublicAccess = null;
 
         /**
-         * Kibana private access status <li>OPEN: enabled </li><li>CLOSE: disabled
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Kibana internal access status<li>OPEN: enable</li><li>CLOSE: disable</li></p>
          * @type {string || null}
          */
         this.KibanaPrivateAccess = null;
 
         /**
-         * Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Whether xpack security authentication is enabled for basic version 6.8 (and above versions)<li>1: not enabled</li><li>2: enabled</li></p>
          * @type {number || null}
          */
         this.SecurityType = null;
 
         /**
-         * Scenario template type. 0: not enabled; 1: general scenario; 2: log scenario; 3: search scenario
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <p>Scenario template type: 0, not enabled; 1, common scenarios; 2, log scenario; 3, search scenario</p>
          * @type {number || null}
          */
         this.SceneType = null;
 
         /**
-         * Kibana configuration item.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * <p>Kibana configuration item</p>
          * @type {string || null}
          */
         this.KibanaConfig = null;
 
         /**
-         * Kibana node information
-Note: this field may return `null`, indicating that no valid value can be obtained.
+         * <p>Kibana node information</p>
          * @type {KibanaNodeInfo || null}
          */
         this.KibanaNodeInfo = null;
 
         /**
-         * Visual node configuration
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * <p>Visualize node configuration</p>
          * @type {WebNodeTypeInfo || null}
          */
         this.WebNodeTypeInfo = null;
 
         /**
-         * JDK type. Valid values: `oracle`, `kona`
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * <p>JDK type. Valid values: oracle, kona</p>
          * @type {string || null}
          */
         this.Jdk = null;
 
         /**
-         * Cluster network communication protocol
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * <p>Cluster network communication protocol</p>
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * Security group ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * <p>Security group id</p>
          * @type {Array.<string> || null}
          */
         this.SecurityGroups = null;
 
         /**
-         * Cold node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Cold node specification<li>ES.S1.SMALL2: 1-core 2G</li><li>ES.S1.MEDIUM4: 2-core 4G</li><li>ES.S1.MEDIUM8: 2-core 8G</li><li>ES.S1.LARGE16: 4-core 16G</li><li>ES.S1.2XLARGE32: 8-core 32G</li><li>ES.S1.4XLARGE32: 16-core 32G</li><li>ES.S1.4XLARGE64: 16-core 64G</li></p>
          * @type {string || null}
          */
         this.ColdNodeType = null;
 
         /**
-         * Number of cold nodes
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Number of cold nodes</p>
          * @type {number || null}
          */
         this.ColdNodeNum = null;
 
         /**
-         * Number of cold node CPU cores
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Cold node CPU cores</p>
          * @type {number || null}
          */
         this.ColdCpuNum = null;
 
         /**
-         * Cold node memory size (in GB)
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Cold node memory size (GB).</p>
          * @type {number || null}
          */
         this.ColdMemSize = null;
 
         /**
-         * Cold node disk type
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Cold node disk type</p>
          * @type {string || null}
          */
         this.ColdDiskType = null;
 
         /**
-         * Cold node disk size (in GB)
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Cold node disk size (GB).</p>
          * @type {number || null}
          */
         this.ColdDiskSize = null;
 
         /**
-         * Frozen node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Frozen node specification<li>ES.S1.SMALL2: 1-core 2GB</li><li>ES.S1.MEDIUM4: 2-core 4GB</li><li>ES.S1.MEDIUM8: 2-core 8GB</li><li>ES.S1.LARGE16: 4-core 16GB</li><li>ES.S1.2XLARGE32: 8-core 32GB</li><li>ES.S1.4XLARGE32: 16-core 32GB</li><li>ES.S1.4XLARGE64: 16-core 64GB</li></p>
          * @type {string || null}
          */
         this.FrozenNodeType = null;
 
         /**
-         * Number of frozen nodes
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Number of frozen nodes</p>
          * @type {number || null}
          */
         this.FrozenNodeNum = null;
 
         /**
-         * Number of frozen node CPU cores
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Frozen node CPU cores</p>
          * @type {number || null}
          */
         this.FrozenCpuNum = null;
 
         /**
-         * Frozen node memory size (GB)
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Frozen node memory size (GB).</p>
          * @type {number || null}
          */
         this.FrozenMemSize = null;
 
         /**
-         * Frozen node disk type
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Frozen node disk type</p>
          * @type {string || null}
          */
         this.FrozenDiskType = null;
 
         /**
-         * Frozen node disk size (in GB)
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Frozen node disk size (GB).</p>
          * @type {number || null}
          */
         this.FrozenDiskSize = null;
 
         /**
-         * Cluster health status. `-1`: Unknown; `0`: Green; `1`: Yellow; `2`: Red
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Cluster health status: -1 unknown; 0 Green; 1 Yellow; 2 Red</p>
          * @type {number || null}
          */
         this.HealthStatus = null;
 
         /**
-         * Private URL of the HTTPS cluster
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>Intracluster network url for https.</p>
          * @type {string || null}
          */
         this.EsPrivateUrl = null;
 
         /**
-         * Private domain of the HTTPS cluster
-Note: This field may return `null`, indicating that no valid value was found.
+         * <p>https cluster private network domain name</p>
          * @type {string || null}
          */
         this.EsPrivateDomain = null;
 
         /**
-         * Configuration set info of the cluster.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Cluster configuration group information.</p>
          * @type {Array.<EsConfigSetInfo> || null}
          */
         this.EsConfigSets = null;
 
         /**
-         * The maintenance time slot of the cluster
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Cluster maintenance time slot</p>
          * @type {OperationDuration || null}
          */
         this.OperationDuration = null;
 
         /**
-         * Web node list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>web node list</p>
          * @type {Array.<OptionalWebServiceInfo> || null}
          */
         this.OptionalWebServiceInfos = null;
 
         /**
-         * Autonomous index option
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Autonomous index switch</p>
          * @type {boolean || null}
          */
         this.AutoIndexEnabled = null;
 
         /**
-         * Whether the storage-computing separation feature is enabled.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Whether storage and computation separation is supported.</p>
          * @type {boolean || null}
          */
         this.EnableHybridStorage = null;
 
         /**
-         * The process progress
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Process progress.</p>
          * @type {number || null}
          */
         this.ProcessPercent = null;
 
         /**
-         * The alerting policy of Kibana over the public network. <li>`OPEN`: Enable the policy;</li><li>`CLOSE`: Disable the policy.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Kibana alerting public network alert policy<li>OPEN: enable</li><li>CLOSE: disable</li></p>
          * @type {string || null}
          */
         this.KibanaAlteringPublicAccess = null;
+
+        /**
+         * <p>Whether there is a kernel update this month: false (no) and true (yes).</p>
+         * @type {boolean || null}
+         */
+        this.HasKernelUpgrade = null;
+
+        /**
+         * <p>cdcId, pass it when using a CDC subnet</p>
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
+        /**
+         * <p>kibana intranet vip</p>
+         * @type {string || null}
+         */
+        this.KibanaPrivateVip = null;
+
+        /**
+         * <p>Customize the private network url of kibana</p>
+         * @type {string || null}
+         */
+        this.CustomKibanaPrivateUrl = null;
+
+        /**
+         * <p>Node outbound access detailed information.</p>
+         * @type {Array.<OutboundPublicAcl> || null}
+         */
+        this.OutboundPublicAcls = null;
+
+        /**
+         * <p>Network connection solution</p>
+         * @type {string || null}
+         */
+        this.NetConnectScheme = null;
+
+        /**
+         * <p>Placement group related parameters</p>
+         * @type {number || null}
+         */
+        this.DisasterRecoverGroupAffinity = null;
+
+        /**
+         * <p>Sub-product ID enumeration values: open source edition: "sp_es_io2", basic version: "sp_es_basic", platinum version: "sp_es_platinum", AI Search Enhancement Edition: "sp_es_aisearch", enterprise edition: "sp_es_enterprise", CDC platinum version: "sp_es_CDC_platinum", Log Enhancement Edition: "sp_es_enlogging", tsearch: "sp_tsearch_io2", logstash: "sp_es_logstash". It can be empty. When it is empty, the backend maps this field based on LicenseType.</p>
+         * @type {string || null}
+         */
+        this.SubProductCode = null;
+
+        /**
+         * <p>Storage-compute separation cos usage, Unit: M</p>
+         * @type {number || null}
+         */
+        this.CosBucketStorageSize = null;
+
+        /**
+         * <p>Read-write separation mode: 0: not enabled; 1: local read/write separation; 2: remote read/write separation.</p>
+         * @type {number || null}
+         */
+        this.ReadWriteMode = null;
+
+        /**
+         * <p>Whether there is an asynchronous task scheduling for placement groups</p>
+         * @type {boolean || null}
+         */
+        this.EnableScheduleRecoverGroup = null;
+
+        /**
+         * <p>The time when an asynchronous task is scheduled</p>
+         * @type {EnableScheduleOperationDuration || null}
+         */
+        this.EnableScheduleOperationDuration = null;
+
+        /**
+         * <p>Cluster protection: OPEN: enable, CLOSE: disable</p>
+         * @type {string || null}
+         */
+        this.EnableDestroyProtection = null;
+
+        /**
+         * <p>kibana intranet access address</p>
+         * @type {string || null}
+         */
+        this.ShowKibanaIpPort = null;
+
+        /**
+         * <p>Whether it is a CDZLite availability zone</p>
+         * @type {boolean || null}
+         */
+        this.IsCdzLite = null;
+
+        /**
+         * <p>Cluster private network tcp address</p>
+         * @type {string || null}
+         */
+        this.EsPrivateTcpUrl = null;
+
+        /**
+         * <p>Whether it is in the recycle bin</p><p>Default value: false</p>
+         * @type {boolean || null}
+         */
+        this.IsInRecycleBin = null;
+
+        /**
+         * <p>Is locked in the recycle bin</p><p>Default value: false</p>
+         * @type {boolean || null}
+         */
+        this.RecycleLockEnabled = null;
+
+        /**
+         * <p>The time when termination is expected</p><p>Parameter format: YYYY-MM-DD hh:mm:ss</p>
+         * @type {string || null}
+         */
+        this.MayDestroyPoint = null;
+
+        /**
+         * <p>The time when termination is delayed</p><p>Unit: day</p>
+         * @type {number || null}
+         */
+        this.DelayDestroyInterval = null;
+
+        /**
+         * <p>Enable automatic replacement of unhealthy nodes. 0: disable, 1: enable</p>
+         * @type {number || null}
+         */
+        this.EnableAutoReplace = null;
+
+        /**
+         * <p>Enable mtls. 0: disable, 1: enable</p>
+         * @type {number || null}
+         */
+        this.OpenMTLS = null;
+
+        /**
+         * <p>Certificate type</p>
+         * @type {string || null}
+         */
+        this.ServerCertSource = null;
+
+        /**
+         * <p>VIP pending migration for the cluster</p>
+         * @type {string || null}
+         */
+        this.OldEsVip = null;
+
+        /**
+         * <p>Cluster TCP address to be migrated</p>
+         * @type {string || null}
+         */
+        this.OldEsPrivateTcpUrl = null;
+
+        /**
+         * <p>Whether to take old nodes offline from the VIP</p>
+         * @type {boolean || null}
+         */
+        this.NeedOfflineOldNodesNotify = null;
 
     }
 
@@ -2721,6 +4511,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.RealLicenseType = 'RealLicenseType' in params ? params.RealLicenseType : null;
         this.EnableHotWarmMode = 'EnableHotWarmMode' in params ? params.EnableHotWarmMode : null;
         this.WarmNodeType = 'WarmNodeType' in params ? params.WarmNodeType : null;
         this.WarmNodeNum = 'WarmNodeNum' in params ? params.WarmNodeNum : null;
@@ -2819,335 +4610,98 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EnableHybridStorage = 'EnableHybridStorage' in params ? params.EnableHybridStorage : null;
         this.ProcessPercent = 'ProcessPercent' in params ? params.ProcessPercent : null;
         this.KibanaAlteringPublicAccess = 'KibanaAlteringPublicAccess' in params ? params.KibanaAlteringPublicAccess : null;
+        this.HasKernelUpgrade = 'HasKernelUpgrade' in params ? params.HasKernelUpgrade : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
+        this.KibanaPrivateVip = 'KibanaPrivateVip' in params ? params.KibanaPrivateVip : null;
+        this.CustomKibanaPrivateUrl = 'CustomKibanaPrivateUrl' in params ? params.CustomKibanaPrivateUrl : null;
 
-    }
-}
-
-/**
- * DeleteInstance response structure.
- * @class
- */
-class DeleteInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteIndex response structure.
- * @class
- */
-class DeleteIndexResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeInstanceLogs response structure.
- * @class
- */
-class DescribeInstanceLogsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of returned logs
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Log details list
-         * @type {Array.<InstanceLog> || null}
-         */
-        this.InstanceLogList = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.InstanceLogList) {
-            this.InstanceLogList = new Array();
-            for (let z in params.InstanceLogList) {
-                let obj = new InstanceLog();
-                obj.deserialize(params.InstanceLogList[z]);
-                this.InstanceLogList.push(obj);
+        if (params.OutboundPublicAcls) {
+            this.OutboundPublicAcls = new Array();
+            for (let z in params.OutboundPublicAcls) {
+                let obj = new OutboundPublicAcl();
+                obj.deserialize(params.OutboundPublicAcls[z]);
+                this.OutboundPublicAcls.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.NetConnectScheme = 'NetConnectScheme' in params ? params.NetConnectScheme : null;
+        this.DisasterRecoverGroupAffinity = 'DisasterRecoverGroupAffinity' in params ? params.DisasterRecoverGroupAffinity : null;
+        this.SubProductCode = 'SubProductCode' in params ? params.SubProductCode : null;
+        this.CosBucketStorageSize = 'CosBucketStorageSize' in params ? params.CosBucketStorageSize : null;
+        this.ReadWriteMode = 'ReadWriteMode' in params ? params.ReadWriteMode : null;
+        this.EnableScheduleRecoverGroup = 'EnableScheduleRecoverGroup' in params ? params.EnableScheduleRecoverGroup : null;
+
+        if (params.EnableScheduleOperationDuration) {
+            let obj = new EnableScheduleOperationDuration();
+            obj.deserialize(params.EnableScheduleOperationDuration)
+            this.EnableScheduleOperationDuration = obj;
+        }
+        this.EnableDestroyProtection = 'EnableDestroyProtection' in params ? params.EnableDestroyProtection : null;
+        this.ShowKibanaIpPort = 'ShowKibanaIpPort' in params ? params.ShowKibanaIpPort : null;
+        this.IsCdzLite = 'IsCdzLite' in params ? params.IsCdzLite : null;
+        this.EsPrivateTcpUrl = 'EsPrivateTcpUrl' in params ? params.EsPrivateTcpUrl : null;
+        this.IsInRecycleBin = 'IsInRecycleBin' in params ? params.IsInRecycleBin : null;
+        this.RecycleLockEnabled = 'RecycleLockEnabled' in params ? params.RecycleLockEnabled : null;
+        this.MayDestroyPoint = 'MayDestroyPoint' in params ? params.MayDestroyPoint : null;
+        this.DelayDestroyInterval = 'DelayDestroyInterval' in params ? params.DelayDestroyInterval : null;
+        this.EnableAutoReplace = 'EnableAutoReplace' in params ? params.EnableAutoReplace : null;
+        this.OpenMTLS = 'OpenMTLS' in params ? params.OpenMTLS : null;
+        this.ServerCertSource = 'ServerCertSource' in params ? params.ServerCertSource : null;
+        this.OldEsVip = 'OldEsVip' in params ? params.OldEsVip : null;
+        this.OldEsPrivateTcpUrl = 'OldEsPrivateTcpUrl' in params ? params.OldEsPrivateTcpUrl : null;
+        this.NeedOfflineOldNodesNotify = 'NeedOfflineOldNodesNotify' in params ? params.NeedOfflineOldNodesNotify : null;
 
     }
 }
 
 /**
- * CreateInstance request structure.
+ * Instance-dedicated primary node-related information
  * @class
  */
-class CreateInstanceRequest extends  AbstractModel {
+class MasterNodeInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Availability Zone
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * Instance version. Valid values: `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1`, `7.10.1`
-         * @type {string || null}
-         */
-        this.EsVersion = null;
-
-        /**
-         * VPC ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Subnet ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * Access password, which must contain 8 to 16 characters, and include at least two of the following three types of characters: [a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?]
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * Instance name, which can contain 1 to 50 English letters, Chinese characters, digits, dashes (-), or underscores (_)
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Number of nodes (2-50)
-         * @type {number || null}
-         */
-        this.NodeNum = null;
-
-        /**
-         * Billing mode <li>POSTPAID_BY_HOUR: Pay-as-you-go hourly </li>Default value: POSTPAID_BY_HOUR
-         * @type {string || null}
-         */
-        this.ChargeType = null;
-
-        /**
-         * This parameter is not used on the global website
-         * @type {number || null}
-         */
-        this.ChargePeriod = null;
-
-        /**
-         * This parameter is not used on the global website
-         * @type {string || null}
-         */
-        this.RenewFlag = null;
-
-        /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
-         * @type {string || null}
-         */
-        this.NodeType = null;
-
-        /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Node storage type <li>CLOUD_SSD: SSD cloud storage </li><li>CLOUD_PREMIUM: premium cloud storage </li>Default value: CLOUD_SSD
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Node disk size in GB
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * This parameter is not used on the global website
-         * @type {string || null}
-         */
-        this.TimeUnit = null;
-
-        /**
-         * Whether to automatically use vouchers <li>0: No </li><li>1: Yes </li>Default value: 0
-         * @type {number || null}
-         */
-        this.AutoVoucher = null;
-
-        /**
-         * List of voucher IDs (only one voucher can be specified at a time currently)
-         * @type {Array.<string> || null}
-         */
-        this.VoucherIds = null;
-
-        /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Whether to create a dedicated primary node <li>true: yes </li><li>false: no </li>Default value: false
+         * Whether the dedicated master node is enabled or not
          * @type {boolean || null}
          */
         this.EnableDedicatedMaster = null;
 
         /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Number of dedicated primary nodes (only 3 and 5 are supported. This value must be passed in if `EnableDedicatedMaster` is `true`)
-         * @type {number || null}
-         */
-        this.MasterNodeNum = null;
-
-        /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Dedicated primary node type, which must be passed in if `EnableDedicatedMaster` is `true` <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+         * Dedicated primary node specification<li>ES.S1.SMALL2: 1-core 2G</li><li>ES.S1.MEDIUM4: 2-core 4G</li><li>ES.S1.MEDIUM8: 2-core 8G</li><li>ES.S1.LARGE16: 4-core 16G</li><li>ES.S1.2XLARGE32: 8-core 32G</li><li>ES.S1.4XLARGE32: 16-core 32G</li><li>ES.S1.4XLARGE64: 16-core 64G</li>
          * @type {string || null}
          */
         this.MasterNodeType = null;
 
         /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Dedicated primary node disk size in GB, which is optional. If passed in, it can only be 50 and cannot be customized currently
+         * Number of dedicated primary nodes
+         * @type {number || null}
+         */
+        this.MasterNodeNum = null;
+
+        /**
+         * Number of CPU cores of the dedicated master node
+         * @type {number || null}
+         */
+        this.MasterNodeCpuNum = null;
+
+        /**
+         * Dedicated primary node memory size, in GB.
+         * @type {number || null}
+         */
+        this.MasterNodeMemSize = null;
+
+        /**
+         * Dedicated primary node disk size in GB
          * @type {number || null}
          */
         this.MasterNodeDiskSize = null;
 
         /**
-         * ClusterName in the cluster configuration file, which is the instance ID by default and currently cannot be customized
+         * Dedicated primary node disk type
          * @type {string || null}
          */
-        this.ClusterNameInConf = null;
-
-        /**
-         * Cluster deployment mode <li>0: single-AZ deployment </li><li>1: multi-AZ deployment </li>Default value: 0
-         * @type {number || null}
-         */
-        this.DeployMode = null;
-
-        /**
-         * Details of AZs in multi-AZ deployment mode (which is required when DeployMode is 1)
-         * @type {Array.<ZoneDetail> || null}
-         */
-        this.MultiZoneInfo = null;
-
-        /**
-         * License type <li>oss: Open Source Edition </li><li>basic: Basic Edition </li><li>platinum: Platinum Edition </li>Default value: Platinum
-         * @type {string || null}
-         */
-        this.LicenseType = null;
-
-        /**
-         * Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size
-         * @type {Array.<NodeInfo> || null}
-         */
-        this.NodeInfoList = null;
-
-        /**
-         * Node tag information list
-         * @type {Array.<TagInfo> || null}
-         */
-        this.TagList = null;
-
-        /**
-         * Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
-         * @type {number || null}
-         */
-        this.BasicSecurityType = null;
-
-        /**
-         * Scenario template type. 0: not enabled; 1: general; 2: log; 3: search
-         * @type {number || null}
-         */
-        this.SceneType = null;
-
-        /**
-         * Visual node configuration
-         * @type {WebNodeTypeInfo || null}
-         */
-        this.WebNodeTypeInfo = null;
-
-        /**
-         * Valid values: `https`, `http` (default)
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * The maintenance time slot
-         * @type {OperationDuration || null}
-         */
-        this.OperationDuration = null;
-
-        /**
-         * Whether to enable the storage-computing separation feature.
-         * @type {boolean || null}
-         */
-        this.EnableHybridStorage = null;
-
-        /**
-         * Whether to enable enhanced SSD
-         * @type {number || null}
-         */
-        this.DiskEnhance = null;
-
-        /**
-         * Whether to enable smart inspection.
-         * @type {boolean || null}
-         */
-        this.EnableDiagnose = null;
+        this.MasterNodeDiskType = null;
 
     }
 
@@ -3158,131 +4712,42 @@ Dedicated primary node disk size in GB, which is optional. If passed in, it can 
         if (!params) {
             return;
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.EsVersion = 'EsVersion' in params ? params.EsVersion : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.Password = 'Password' in params ? params.Password : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
-        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
-        this.ChargePeriod = 'ChargePeriod' in params ? params.ChargePeriod : null;
-        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
-        this.NodeType = 'NodeType' in params ? params.NodeType : null;
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
-        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
         this.EnableDedicatedMaster = 'EnableDedicatedMaster' in params ? params.EnableDedicatedMaster : null;
-        this.MasterNodeNum = 'MasterNodeNum' in params ? params.MasterNodeNum : null;
         this.MasterNodeType = 'MasterNodeType' in params ? params.MasterNodeType : null;
+        this.MasterNodeNum = 'MasterNodeNum' in params ? params.MasterNodeNum : null;
+        this.MasterNodeCpuNum = 'MasterNodeCpuNum' in params ? params.MasterNodeCpuNum : null;
+        this.MasterNodeMemSize = 'MasterNodeMemSize' in params ? params.MasterNodeMemSize : null;
         this.MasterNodeDiskSize = 'MasterNodeDiskSize' in params ? params.MasterNodeDiskSize : null;
-        this.ClusterNameInConf = 'ClusterNameInConf' in params ? params.ClusterNameInConf : null;
-        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
-
-        if (params.MultiZoneInfo) {
-            this.MultiZoneInfo = new Array();
-            for (let z in params.MultiZoneInfo) {
-                let obj = new ZoneDetail();
-                obj.deserialize(params.MultiZoneInfo[z]);
-                this.MultiZoneInfo.push(obj);
-            }
-        }
-        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
-
-        if (params.NodeInfoList) {
-            this.NodeInfoList = new Array();
-            for (let z in params.NodeInfoList) {
-                let obj = new NodeInfo();
-                obj.deserialize(params.NodeInfoList[z]);
-                this.NodeInfoList.push(obj);
-            }
-        }
-
-        if (params.TagList) {
-            this.TagList = new Array();
-            for (let z in params.TagList) {
-                let obj = new TagInfo();
-                obj.deserialize(params.TagList[z]);
-                this.TagList.push(obj);
-            }
-        }
-        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
-        this.SceneType = 'SceneType' in params ? params.SceneType : null;
-
-        if (params.WebNodeTypeInfo) {
-            let obj = new WebNodeTypeInfo();
-            obj.deserialize(params.WebNodeTypeInfo)
-            this.WebNodeTypeInfo = obj;
-        }
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-
-        if (params.OperationDuration) {
-            let obj = new OperationDuration();
-            obj.deserialize(params.OperationDuration)
-            this.OperationDuration = obj;
-        }
-        this.EnableHybridStorage = 'EnableHybridStorage' in params ? params.EnableHybridStorage : null;
-        this.DiskEnhance = 'DiskEnhance' in params ? params.DiskEnhance : null;
-        this.EnableDiagnose = 'EnableDiagnose' in params ? params.EnableDiagnose : null;
+        this.MasterNodeDiskType = 'MasterNodeDiskType' in params ? params.MasterNodeDiskType : null;
 
     }
 }
 
 /**
- * UpdatePlugins response structure.
+ * DeleteInstance request structure.
  * @class
  */
-class UpdatePluginsResponse extends  AbstractModel {
+class DeleteInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * RestartInstance request structure.
- * @class
- */
-class RestartInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
+         * <p>Instance ID.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Whether to force restart <li>true: Yes </li><li>false: No </li>Default value: false
+         * <p>Recycle bin lock settings. If true, it cannot be manually terminated and will be automatically destroyed after the preset time.</p><p>Default value: false</p>
          * @type {boolean || null}
          */
-        this.ForceRestart = null;
+        this.LockEnabled = null;
 
         /**
-         * Restart mode. `0`: rolling restart; `1`: full restart
+         * <p>Lock time after being put into the recycle bin</p><p>Value range: [1, 7]</p><p>Unit: day</p><p>Default value: 1</p>
          * @type {number || null}
          */
-        this.RestartMode = null;
+        this.LockDuration = null;
 
     }
 
@@ -3294,8 +4759,127 @@ class RestartInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
-        this.RestartMode = 'RestartMode' in params ? params.RestartMode : null;
+        this.LockEnabled = 'LockEnabled' in params ? params.LockEnabled : null;
+        this.LockDuration = 'LockDuration' in params ? params.LockDuration : null;
+
+    }
+}
+
+/**
+ * UpgradeInstance response structure.
+ * @class
+ */
+class UpgradeInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAutoBackUpStrategy response structure.
+ * @class
+ */
+class DeleteAutoBackUpStrategyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Valid values: true (success) and false (failure).
+         * @type {boolean || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeIndexMeta request structure.
+ * @class
+ */
+class DescribeIndexMetaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ES cluster ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Index type. auto: autonomous index; normal: general index
+         * @type {string || null}
+         */
+        this.IndexType = null;
+
+        /**
+         * Index name. If this parameter is left empty, all indexes are obtained.
+         * @type {string || null}
+         */
+        this.IndexName = null;
+
+        /**
+         * Cluster access username.
+         * @type {string || null}
+         */
+        this.Username = null;
+
+        /**
+         * Cluster access password
+         * @type {string || null}
+         */
+        this.Password = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.IndexType = 'IndexType' in params ? params.IndexType : null;
+        this.IndexName = 'IndexName' in params ? params.IndexName : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }
@@ -3329,161 +4913,72 @@ class RestartKibanaResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstances request structure.
+ * UpdateIndex request structure.
  * @class
  */
-class DescribeInstancesRequest extends  AbstractModel {
+class UpdateIndexRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * AZ of the cluster instance. If this is not passed in, all AZs are used by default
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * List of cluster instance IDs
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-        /**
-         * List of cluster instance names
-         * @type {Array.<string> || null}
-         */
-        this.InstanceNames = null;
-
-        /**
-         * Pagination start value. Default value: 0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of entries per page. Default value: 20
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * The sorting field. <li>1: Instance ID </li><li>2: Instance name </li><li>3: AZ </li><li>4: Creation time </li>If `OrderByKey` is not passed in, sorting is performed by creation time in descending order.
-         * @type {number || null}
-         */
-        this.OrderByKey = null;
-
-        /**
-         * Sorting order <li>0: ascending </li><li>1: descending </li>If orderByKey is passed in but orderByType is not, ascending order is used by default
-         * @type {number || null}
-         */
-        this.OrderByType = null;
-
-        /**
-         * Node tag information list
-         * @type {Array.<TagInfo> || null}
-         */
-        this.TagList = null;
-
-        /**
-         * VPC VIP list
-         * @type {Array.<string> || null}
-         */
-        this.IpList = null;
-
-        /**
-         * List of availability zones
-         * @type {Array.<string> || null}
-         */
-        this.ZoneList = null;
-
-        /**
-         * The health status filter. Valid values: `0` (green), `1` (yellow), `2` (red), `-1` (unknown).
-         * @type {Array.<number> || null}
-         */
-        this.HealthStatus = null;
-
-        /**
-         * VPC IDs
-         * @type {Array.<string> || null}
-         */
-        this.VpcIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.InstanceNames = 'InstanceNames' in params ? params.InstanceNames : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.OrderByKey = 'OrderByKey' in params ? params.OrderByKey : null;
-        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
-
-        if (params.TagList) {
-            this.TagList = new Array();
-            for (let z in params.TagList) {
-                let obj = new TagInfo();
-                obj.deserialize(params.TagList[z]);
-                this.TagList.push(obj);
-            }
-        }
-        this.IpList = 'IpList' in params ? params.IpList : null;
-        this.ZoneList = 'ZoneList' in params ? params.ZoneList : null;
-        this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
-        this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
-
-    }
-}
-
-/**
- * CreateIndex request structure.
- * @class
- */
-class CreateIndexRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ES cluster ID
+         * <p>ES cluster ID</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Type of the index to create. `auto`: Automated; `normal`: General.
+         * <p>Updated index type. auto: autonomous index; normal: general index</p>
          * @type {string || null}
          */
         this.IndexType = null;
 
         /**
-         * Name of the index to create
+         * <p>Updated index name</p>
          * @type {string || null}
          */
         this.IndexName = null;
 
         /**
-         * JSON-formatted index metadata to create, such as `mappings` and `settings`
+         * <p>Updated JSON-formatted index metadata, such as mappings and settings</p>
          * @type {string || null}
          */
-        this.IndexMetaJson = null;
+        this.UpdateMetaJson = null;
 
         /**
-         * Username for cluster access
+         * <p>Cluster access username.</p>
          * @type {string || null}
          */
         this.Username = null;
 
         /**
-         * Password for cluster access
+         * <p>Cluster access password</p>
          * @type {string || null}
          */
         this.Password = null;
+
+        /**
+         * <p>Whether to scroll the backup index</p>
+         * @type {boolean || null}
+         */
+        this.RolloverBackingIndex = null;
+
+        /**
+         * <p>Whether to retrieve the full uninstall index</p>
+         * @type {boolean || null}
+         */
+        this.MountIndex = null;
+
+        /**
+         * <p>Index Uuid</p>
+         * @type {string || null}
+         */
+        this.IndexUuid = null;
+
+        /**
+         * <p>Backing index name</p>
+         * @type {string || null}
+         */
+        this.BackingIndexName = null;
 
     }
 
@@ -3497,9 +4992,659 @@ class CreateIndexRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.IndexType = 'IndexType' in params ? params.IndexType : null;
         this.IndexName = 'IndexName' in params ? params.IndexName : null;
-        this.IndexMetaJson = 'IndexMetaJson' in params ? params.IndexMetaJson : null;
+        this.UpdateMetaJson = 'UpdateMetaJson' in params ? params.UpdateMetaJson : null;
         this.Username = 'Username' in params ? params.Username : null;
         this.Password = 'Password' in params ? params.Password : null;
+        this.RolloverBackingIndex = 'RolloverBackingIndex' in params ? params.RolloverBackingIndex : null;
+        this.MountIndex = 'MountIndex' in params ? params.MountIndex : null;
+        this.IndexUuid = 'IndexUuid' in params ? params.IndexUuid : null;
+        this.BackingIndexName = 'BackingIndexName' in params ? params.BackingIndexName : null;
+
+    }
+}
+
+/**
+ * Index metadata field
+ * @class
+ */
+class IndexMetaField extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Index type
+         * @type {string || null}
+         */
+        this.IndexType = null;
+
+        /**
+         * Index name
+         * @type {string || null}
+         */
+        this.IndexName = null;
+
+        /**
+         * JSON-formatted index metadata
+         * @type {string || null}
+         */
+        this.IndexMetaJson = null;
+
+        /**
+         * Index status
+         * @type {string || null}
+         */
+        this.IndexStatus = null;
+
+        /**
+         * Index storage size in bytes
+         * @type {number || null}
+         */
+        this.IndexStorage = null;
+
+        /**
+         * Index creation time
+         * @type {string || null}
+         */
+        this.IndexCreateTime = null;
+
+        /**
+         * Backup index
+         * @type {Array.<BackingIndexMetaField> || null}
+         */
+        this.BackingIndices = null;
+
+        /**
+         * Cluster ID of the index
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Cluster name of the index
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Version number of the cluster to which the index belongs
+         * @type {string || null}
+         */
+        this.ClusterVersion = null;
+
+        /**
+         * Index lifecycle field
+         * @type {IndexPolicyField || null}
+         */
+        this.IndexPolicyField = null;
+
+        /**
+         * Index autonomous field
+         * @type {IndexOptionsField || null}
+         */
+        this.IndexOptionsField = null;
+
+        /**
+         * Index configuration field
+         * @type {IndexSettingsField || null}
+         */
+        this.IndexSettingsField = null;
+
+        /**
+         * Index alias field
+         * @type {Array.<string> || null}
+         */
+        this.IndexAliasesField = null;
+
+        /**
+         * APP ID of the cluster to which the index belongs
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Number of indexed documents
+         * @type {number || null}
+         */
+        this.IndexDocs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IndexType = 'IndexType' in params ? params.IndexType : null;
+        this.IndexName = 'IndexName' in params ? params.IndexName : null;
+        this.IndexMetaJson = 'IndexMetaJson' in params ? params.IndexMetaJson : null;
+        this.IndexStatus = 'IndexStatus' in params ? params.IndexStatus : null;
+        this.IndexStorage = 'IndexStorage' in params ? params.IndexStorage : null;
+        this.IndexCreateTime = 'IndexCreateTime' in params ? params.IndexCreateTime : null;
+
+        if (params.BackingIndices) {
+            this.BackingIndices = new Array();
+            for (let z in params.BackingIndices) {
+                let obj = new BackingIndexMetaField();
+                obj.deserialize(params.BackingIndices[z]);
+                this.BackingIndices.push(obj);
+            }
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterVersion = 'ClusterVersion' in params ? params.ClusterVersion : null;
+
+        if (params.IndexPolicyField) {
+            let obj = new IndexPolicyField();
+            obj.deserialize(params.IndexPolicyField)
+            this.IndexPolicyField = obj;
+        }
+
+        if (params.IndexOptionsField) {
+            let obj = new IndexOptionsField();
+            obj.deserialize(params.IndexOptionsField)
+            this.IndexOptionsField = obj;
+        }
+
+        if (params.IndexSettingsField) {
+            let obj = new IndexSettingsField();
+            obj.deserialize(params.IndexSettingsField)
+            this.IndexSettingsField = obj;
+        }
+        this.IndexAliasesField = 'IndexAliasesField' in params ? params.IndexAliasesField : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.IndexDocs = 'IndexDocs' in params ? params.IndexDocs : null;
+
+    }
+}
+
+/**
+ * Visualize node configuration
+ * @class
+ */
+class WebNodeTypeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of nodes to visualize, fixed as 1
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * Visualize node specifications
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+
+    }
+}
+
+/**
+ * Local disk information of the node
+ * @class
+ */
+class LocalDiskInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Local disk type<li>LOCAL_SATA: big data type</li><li>NVME_SSD: high IO type</li>
+         * @type {string || null}
+         */
+        this.LocalDiskType = null;
+
+        /**
+         * Single local disk size
+         * @type {number || null}
+         */
+        this.LocalDiskSize = null;
+
+        /**
+         * Number of local disk blocks
+         * @type {number || null}
+         */
+        this.LocalDiskCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocalDiskType = 'LocalDiskType' in params ? params.LocalDiskType : null;
+        this.LocalDiskSize = 'LocalDiskSize' in params ? params.LocalDiskSize : null;
+        this.LocalDiskCount = 'LocalDiskCount' in params ? params.LocalDiskCount : null;
+
+    }
+}
+
+/**
+ * Index lifecycle field
+ * @class
+ */
+class IndexPolicyField extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the warm phase is enabled
+         * @type {string || null}
+         */
+        this.WarmEnable = null;
+
+        /**
+         * Transfer time to the warm phase
+         * @type {string || null}
+         */
+        this.WarmMinAge = null;
+
+        /**
+         * Whether the cold phase is enabled
+         * @type {string || null}
+         */
+        this.ColdEnable = null;
+
+        /**
+         * Transfer time to the cold phase
+         * @type {string || null}
+         */
+        this.ColdMinAge = null;
+
+        /**
+         * Whether the frozen phase is enabled
+         * @type {string || null}
+         */
+        this.FrozenEnable = null;
+
+        /**
+         * Time of transfer to the frozen stage
+         * @type {string || null}
+         */
+        this.FrozenMinAge = null;
+
+        /**
+         * /
+         * @type {string || null}
+         */
+        this.ColdAction = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WarmEnable = 'WarmEnable' in params ? params.WarmEnable : null;
+        this.WarmMinAge = 'WarmMinAge' in params ? params.WarmMinAge : null;
+        this.ColdEnable = 'ColdEnable' in params ? params.ColdEnable : null;
+        this.ColdMinAge = 'ColdMinAge' in params ? params.ColdMinAge : null;
+        this.FrozenEnable = 'FrozenEnable' in params ? params.FrozenEnable : null;
+        this.FrozenMinAge = 'FrozenMinAge' in params ? params.FrozenMinAge : null;
+        this.ColdAction = 'ColdAction' in params ? params.ColdAction : null;
+
+    }
+}
+
+/**
+ * Placement group async task maintenance time period
+ * @class
+ */
+class EnableScheduleOperationDuration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Date when enabling an asynchronous task is supported
+         * @type {Array.<string> || null}
+         */
+        this.Periods = null;
+
+        /**
+         * Enable async start time
+         * @type {string || null}
+         */
+        this.TimeStart = null;
+
+        /**
+         * Supports enabling asynchronous termination time
+         * @type {string || null}
+         */
+        this.TimeEnd = null;
+
+        /**
+         * Enable async time zone
+         * @type {string || null}
+         */
+        this.TimeZone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Periods = 'Periods' in params ? params.Periods : null;
+        this.TimeStart = 'TimeStart' in params ? params.TimeStart : null;
+        this.TimeEnd = 'TimeEnd' in params ? params.TimeEnd : null;
+        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
+
+    }
+}
+
+/**
+ * RestartInstance response structure.
+ * @class
+ */
+class RestartInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Backup index metadata field
+ * @class
+ */
+class BackingIndexMetaField extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Backing index name</p>
+         * @type {string || null}
+         */
+        this.IndexName = null;
+
+        /**
+         * <p>Backup index status</p>
+         * @type {string || null}
+         */
+        this.IndexStatus = null;
+
+        /**
+         * <p>Backup index storage size</p>
+         * @type {number || null}
+         */
+        this.IndexStorage = null;
+
+        /**
+         * <p>Backup index current lifecycle</p>
+         * @type {string || null}
+         */
+        this.IndexPhrase = null;
+
+        /**
+         * <p>Backup index creation time</p>
+         * @type {string || null}
+         */
+        this.IndexCreateTime = null;
+
+        /**
+         * <p>Index Uuid</p>
+         * @type {string || null}
+         */
+        this.IndexUuid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IndexName = 'IndexName' in params ? params.IndexName : null;
+        this.IndexStatus = 'IndexStatus' in params ? params.IndexStatus : null;
+        this.IndexStorage = 'IndexStorage' in params ? params.IndexStorage : null;
+        this.IndexPhrase = 'IndexPhrase' in params ? params.IndexPhrase : null;
+        this.IndexCreateTime = 'IndexCreateTime' in params ? params.IndexCreateTime : null;
+        this.IndexUuid = 'IndexUuid' in params ? params.IndexUuid : null;
+
+    }
+}
+
+/**
+ * Node dimension view data
+ * @class
+ */
+class NodeView extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID.
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Node IP
+         * @type {string || null}
+         */
+        this.NodeIp = null;
+
+        /**
+         * Whether the node is visible
+         * @type {number || null}
+         */
+        this.Visible = null;
+
+        /**
+         * Whether to fuse
+         * @type {number || null}
+         */
+        this.Break = null;
+
+        /**
+         * Total node disk size
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Disk utilization rate
+         * @type {number || null}
+         */
+        this.DiskUsage = null;
+
+        /**
+         * Node memory size (unit: GB)
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * Memory usage rate
+         * @type {number || null}
+         */
+        this.MemUsage = null;
+
+        /**
+         * Number of CPUs on the node
+         * @type {number || null}
+         */
+        this.CpuNum = null;
+
+        /**
+         * CPU utilization
+         * @type {number || null}
+         */
+        this.CpuUsage = null;
+
+        /**
+         * AZ.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Node role
+         * @type {string || null}
+         */
+        this.NodeRole = null;
+
+        /**
+         * Node HTTP IP
+         * @type {string || null}
+         */
+        this.NodeHttpIp = null;
+
+        /**
+         * JVM memory usage rate
+         * @type {number || null}
+         */
+        this.JvmMemUsage = null;
+
+        /**
+         * Number of shards per node
+         * @type {number || null}
+         */
+        this.ShardNum = null;
+
+        /**
+         * Disk ID list on node
+         * @type {Array.<string> || null}
+         */
+        this.DiskIds = null;
+
+        /**
+         * Whether it is a hidden AZ
+         * @type {boolean || null}
+         */
+        this.Hidden = null;
+
+        /**
+         * Whether to act as the coordination node role
+         * @type {boolean || null}
+         */
+        this.IsCoordinationNode = null;
+
+        /**
+         * CVM running state
+         * @type {string || null}
+         */
+        this.CVMStatus = null;
+
+        /**
+         * id of the placement group bound to the cvm
+         * @type {string || null}
+         */
+        this.CVMDisasterRecoverGroupId = null;
+
+        /**
+         * Status of the placement group bound to the cvm. 2: Bound; 1: Binding; 0: Not enabled
+         * @type {number || null}
+         */
+        this.CVMDisasterRecoverGroupStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeIp = 'NodeIp' in params ? params.NodeIp : null;
+        this.Visible = 'Visible' in params ? params.Visible : null;
+        this.Break = 'Break' in params ? params.Break : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.MemUsage = 'MemUsage' in params ? params.MemUsage : null;
+        this.CpuNum = 'CpuNum' in params ? params.CpuNum : null;
+        this.CpuUsage = 'CpuUsage' in params ? params.CpuUsage : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+        this.NodeHttpIp = 'NodeHttpIp' in params ? params.NodeHttpIp : null;
+        this.JvmMemUsage = 'JvmMemUsage' in params ? params.JvmMemUsage : null;
+        this.ShardNum = 'ShardNum' in params ? params.ShardNum : null;
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+        this.Hidden = 'Hidden' in params ? params.Hidden : null;
+        this.IsCoordinationNode = 'IsCoordinationNode' in params ? params.IsCoordinationNode : null;
+        this.CVMStatus = 'CVMStatus' in params ? params.CVMStatus : null;
+        this.CVMDisasterRecoverGroupId = 'CVMDisasterRecoverGroupId' in params ? params.CVMDisasterRecoverGroupId : null;
+        this.CVMDisasterRecoverGroupStatus = 'CVMDisasterRecoverGroupStatus' in params ? params.CVMDisasterRecoverGroupStatus : null;
+
+    }
+}
+
+/**
+ * Instance tag information.
+ * @class
+ */
+class TagInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key.
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value.
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -3519,133 +5664,133 @@ class UpdateInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Instance name, which can contain 1 to 50 English letters, Chinese characters, digits, dashes (-), or underscores (_)
+         * Instance name (1-50 English letters, Chinese characters, digits, hyphens -, or underscores _)
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Number of nodes (2-50)
+         * Abandoned. Please use NodeInfoList.
+Number of nodes (2-50).
          * @type {number || null}
          */
         this.NodeNum = null;
 
         /**
-         * ES configuration item (JSON string)
+         * ES configuration item (JSON format string)
          * @type {string || null}
          */
         this.EsConfig = null;
 
         /**
-         * Password of the default user 'elastic', which must contain 8 to 16 characters, including at least two of the following three types of characters: [a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?]
+         * Password of the default user elastic (8–16 characters, including at least two of the following: [a-z,A-Z], [0-9], and special characters [-!@#$%&^*+=_:;,.?])
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * The policy for visual component (Kibana and Cerebro) access over public network.
+         * Public access policy for visualization components (Kibana and Cerebro)
          * @type {EsAcl || null}
          */
         this.EsAcl = null;
 
         /**
-         * This parameter has been disused. Please use `NodeInfoList`
+         * Abandoned. Please use NodeInfoList.
 Disk size in GB
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
+         * Abandoned. Please use NodeInfoList.
+Node specification<li>ES.S1.SMALL2: 1-core 2G</li><li>ES.S1.MEDIUM4: 2-core 4G</li><li>ES.S1.MEDIUM8: 2-core 8G</li><li>ES.S1.LARGE16: 4-core 16G</li><li>ES.S1.2XLARGE32: 8-core 32G</li><li>ES.S1.4XLARGE32: 16-core 32G</li><li>ES.S1.4XLARGE64: 16-core 64G</li>
          * @type {string || null}
          */
         this.NodeType = null;
 
         /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Number of dedicated primary nodes (only 3 and 5 are supported)
+         * Abandoned. Please use NodeInfoList.
+Number of dedicated primary nodes (supports only 3 or 5)
          * @type {number || null}
          */
         this.MasterNodeNum = null;
 
         /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Dedicated primary node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+         * Abandoned. Please use NodeInfoList.
+Dedicated primary node specification<li>ES.S1.SMALL2: 1-core 2GB</li><li>ES.S1.MEDIUM4: 2-core 4GB</li><li>ES.S1.MEDIUM8: 2-core 8GB</li><li>ES.S1.LARGE16: 4-core 16GB</li><li>ES.S1.2XLARGE32: 8-core 32GB</li><li>ES.S1.4XLARGE32: 16-core 32GB</li><li>ES.S1.4XLARGE64: 16-core 64GB</li>
          * @type {string || null}
          */
         this.MasterNodeType = null;
 
         /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Dedicated primary node disk size in GB. This is 50 GB by default and currently cannot be customized
+         * Abandoned. Please use NodeInfoList.
+Dedicated primary node disk size (in GB. The system default configuration is 50 GB. Customization is temporarily not supported.)
          * @type {number || null}
          */
         this.MasterNodeDiskSize = null;
 
         /**
-         * Whether to force restart during configuration update <li>true: Yes </li><li>false: No </li>This needs to be set only for EsConfig. Default value: false
+         * Whether to force restart when updating the configuration <li>true: force restart</li><li>false: do not force restart</li>Currently, this needs to be set only when updating EsConfig. The default value is false.
          * @type {boolean || null}
          */
         this.ForceRestart = null;
 
         /**
-         * Auto-backup to COS
+         * COS auto backup information
          * @type {CosBackup || null}
          */
         this.CosBackup = null;
 
         /**
-         * Node information list. You can pass in only the nodes to be updated and their corresponding specification information. Supported operations include: <li>modifying the number of nodes in the same type </li><li>modifying the specification and disk size of nodes in the same type </li><li>adding a node type (you must also specify the node type, quantity, specification, disk, etc.) </li>The above operations can only be performed one at a time, and the disk type cannot be modified
+         * Node information list. You can transmit only the node to be updated and its corresponding specification information. Supported operations include <li>modifying the count of a node type</li><li>modifying the node specification and disk size of a node type</li><li>adding a node type (you need to simultaneously specify the node type, count, specification, disk, and other information)</li>. You can perform only one of the above operations at a time, and the disk type cannot be modified.
          * @type {Array.<NodeInfo> || null}
          */
         this.NodeInfoList = null;
 
         /**
-         * The status of ES cluster access over public network.
-`OPEN`: Enabled.
-`CLOSE`: Disabled.
+         * Public access status of the ES cluster
+OPEN: enabled.
+-CLOSE: disabled.
          * @type {string || null}
          */
         this.PublicAccess = null;
 
         /**
-         * Public network ACL
+         * Public network access control list
          * @type {EsPublicAcl || null}
          */
         this.EsPublicAcl = null;
 
         /**
-         * The status of Kibana access over public network.
-`OPEN`: Enabled.
-`CLOSE`: Disabled.
+         * Kibana public access status
+OPEN: enabled.
+-CLOSE: disabled.
          * @type {string || null}
          */
         this.KibanaPublicAccess = null;
 
         /**
-         * The status of Kibana access over private network.
-`OPEN`: Enabled.
-`CLOSE`: Disabled.
+         * Kibana internal access status
+OPEN: enabled.
+-CLOSE: disabled.
          * @type {string || null}
          */
         this.KibanaPrivateAccess = null;
 
         /**
-         * Enables or disables user authentication for ES Basic Edition v6.8 and above
+         * Turn on or off user authentication for the basic version of ES 6.8 and above
          * @type {number || null}
          */
         this.BasicSecurityType = null;
 
         /**
-         * Kibana private port
+         * Kibana private network port
          * @type {number || null}
          */
         this.KibanaPrivatePort = null;
 
         /**
-         * 0: scaling in blue/green deployment mode without cluster restart (default); 1: scaling by unmounting disk with rolling cluster restart
+         * 0: Scale out via blue-green change without restarting the cluster (default) 1: Scale out by unmounting disks with a cluster rolling restart
          * @type {number || null}
          */
         this.ScaleType = null;
@@ -3657,70 +5802,163 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
         this.MultiZoneInfo = null;
 
         /**
-         * Scenario template type. -1: not enabled; 1: general; 2: log; 3: search
+         * Scenario template type. -1: not enabled. 1: common. 2: log. 3: search
          * @type {number || null}
          */
         this.SceneType = null;
 
         /**
-         * Kibana configuration item (JSON string)
+         * Kibana configuration item (JSON format string)
          * @type {string || null}
          */
         this.KibanaConfig = null;
 
         /**
-         * Visual node configuration
+         * Visualize node configuration
          * @type {WebNodeTypeInfo || null}
          */
         this.WebNodeTypeInfo = null;
 
         /**
-         * Whether to switch to the new network architecture
+         * Switch to the new network architecture
          * @type {string || null}
          */
         this.SwitchPrivateLink = null;
 
         /**
-         * Whether to enable Cerebro
+         * Enable Cerebro
          * @type {boolean || null}
          */
         this.EnableCerebro = null;
 
         /**
-         * The status of Cerebro access over public network.
-`OPEN`: Enabled.
-`CLOSE`: Disabled.
+         * Cerebro public access status
+OPEN: enabled.
+-CLOSE: disabled.
          * @type {string || null}
          */
         this.CerebroPublicAccess = null;
 
         /**
-         * The status of Cerebro access over private network.
-`OPEN`: Enabled.
-`CLOSE`: Disabled.
+         * Cerebro private network access status
+OPEN: enabled.
+-CLOSE: disabled.
          * @type {string || null}
          */
         this.CerebroPrivateAccess = null;
 
         /**
-         * Added or modified configuration set information
+         * Newly-added or modified configuration group information
          * @type {EsConfigSetInfo || null}
          */
         this.EsConfigSet = null;
 
         /**
-         * The maintenance time slot
+         * Maintenance time slot.
          * @type {OperationDurationUpdated || null}
          */
         this.OperationDuration = null;
 
         /**
-         * Whether to enable the option for sending alerting messages over the public network.
-`OPEN`: Enabled.
-`CLOSE`: Disabled.
+         * Whether Alerting public network alert output is enabled:
+OPEN: enabled.
+-CLOSE: disabled.
          * @type {string || null}
          */
         this.KibanaAlteringPublicAccess = null;
+
+        /**
+         * Custom domain name of kibana on the private network
+         * @type {string || null}
+         */
+        this.KibanaPrivateDomain = null;
+
+        /**
+         * Custom domain name of cerebro on the private network
+         * @type {string || null}
+         */
+        this.CerebroPrivateDomain = null;
+
+        /**
+         * Change to an https cluster. http is selected by default.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Outbound access details of the node
+
+         * @type {Array.<OutboundPublicAcl> || null}
+         */
+        this.OutboundPublicAcls = null;
+
+        /**
+         * Outbound access operations of the node
+OPEN
+-CLOSE: disabled.
+         * @type {string || null}
+         */
+        this.OutboundPublicAccess = null;
+
+        /**
+         * Parameter for delayed cvm launch
+         * @type {number || null}
+         */
+        this.CvmDelayOnlineTime = null;
+
+        /**
+         * Number of concurrent shard migrations
+         * @type {number || null}
+         */
+        this.ShardAllocationConcurrents = null;
+
+        /**
+         * Shard migration concurrency speed
+         * @type {number || null}
+         */
+        this.ShardAllocationBytes = null;
+
+        /**
+         * Read-write separation mode: -1: not enabled; 1: local read/write separation; 2: remote read/write separation.
+         * @type {number || null}
+         */
+        this.ReadWriteMode = null;
+
+        /**
+         * Whether to enable the placement group async task
+         * @type {boolean || null}
+         */
+        this.EnableScheduleRecoverGroup = null;
+
+        /**
+         * Placement group async task maintenance time slot
+         * @type {EnableScheduleOperationDuration || null}
+         */
+        this.EnableScheduleOperationDuration = null;
+
+        /**
+         * Cluster protection: OPEN: enable, CLOSE: disable
+         * @type {string || null}
+         */
+        this.EnableDestroyProtection = null;
+
+        /**
+         * Auto capacity expansion parameter
+         * @type {Array.<AutoScaleDiskInfo> || null}
+         */
+        this.AutoScaleDiskInfoList = null;
+
+        /**
+         * Auto-expansion delete parameter
+         * @type {Array.<string> || null}
+         */
+        this.AutoScaleDiskDeleteNodeTypeList = null;
+
+        /**
+         * Other additional configuration, jvm or yml.
+         * @type {OtherConfig || null}
+         */
+        this.OtherConfig = null;
 
     }
 
@@ -3809,117 +6047,64 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
             this.OperationDuration = obj;
         }
         this.KibanaAlteringPublicAccess = 'KibanaAlteringPublicAccess' in params ? params.KibanaAlteringPublicAccess : null;
+        this.KibanaPrivateDomain = 'KibanaPrivateDomain' in params ? params.KibanaPrivateDomain : null;
+        this.CerebroPrivateDomain = 'CerebroPrivateDomain' in params ? params.CerebroPrivateDomain : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+        if (params.OutboundPublicAcls) {
+            this.OutboundPublicAcls = new Array();
+            for (let z in params.OutboundPublicAcls) {
+                let obj = new OutboundPublicAcl();
+                obj.deserialize(params.OutboundPublicAcls[z]);
+                this.OutboundPublicAcls.push(obj);
+            }
+        }
+        this.OutboundPublicAccess = 'OutboundPublicAccess' in params ? params.OutboundPublicAccess : null;
+        this.CvmDelayOnlineTime = 'CvmDelayOnlineTime' in params ? params.CvmDelayOnlineTime : null;
+        this.ShardAllocationConcurrents = 'ShardAllocationConcurrents' in params ? params.ShardAllocationConcurrents : null;
+        this.ShardAllocationBytes = 'ShardAllocationBytes' in params ? params.ShardAllocationBytes : null;
+        this.ReadWriteMode = 'ReadWriteMode' in params ? params.ReadWriteMode : null;
+        this.EnableScheduleRecoverGroup = 'EnableScheduleRecoverGroup' in params ? params.EnableScheduleRecoverGroup : null;
+
+        if (params.EnableScheduleOperationDuration) {
+            let obj = new EnableScheduleOperationDuration();
+            obj.deserialize(params.EnableScheduleOperationDuration)
+            this.EnableScheduleOperationDuration = obj;
+        }
+        this.EnableDestroyProtection = 'EnableDestroyProtection' in params ? params.EnableDestroyProtection : null;
+
+        if (params.AutoScaleDiskInfoList) {
+            this.AutoScaleDiskInfoList = new Array();
+            for (let z in params.AutoScaleDiskInfoList) {
+                let obj = new AutoScaleDiskInfo();
+                obj.deserialize(params.AutoScaleDiskInfoList[z]);
+                this.AutoScaleDiskInfoList.push(obj);
+            }
+        }
+        this.AutoScaleDiskDeleteNodeTypeList = 'AutoScaleDiskDeleteNodeTypeList' in params ? params.AutoScaleDiskDeleteNodeTypeList : null;
+
+        if (params.OtherConfig) {
+            let obj = new OtherConfig();
+            obj.deserialize(params.OtherConfig)
+            this.OtherConfig = obj;
+        }
 
     }
 }
 
 /**
- * ES dictionary information
+ * CreateAutoBackUpStrategy response structure.
  * @class
  */
-class EsDictionaryInfo extends  AbstractModel {
+class CreateAutoBackUpStrategyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of non-stop words
-         * @type {Array.<DictInfo> || null}
+         * Valid values: true (success) and false (failure).
+         * @type {boolean || null}
          */
-        this.MainDict = null;
-
-        /**
-         * List of stop words
-         * @type {Array.<DictInfo> || null}
-         */
-        this.Stopwords = null;
-
-        /**
-         * QQ dictionary list
-         * @type {Array.<DictInfo> || null}
-         */
-        this.QQDict = null;
-
-        /**
-         * Synonym dictionary list
-         * @type {Array.<DictInfo> || null}
-         */
-        this.Synonym = null;
-
-        /**
-         * Update dictionary type
-         * @type {string || null}
-         */
-        this.UpdateType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.MainDict) {
-            this.MainDict = new Array();
-            for (let z in params.MainDict) {
-                let obj = new DictInfo();
-                obj.deserialize(params.MainDict[z]);
-                this.MainDict.push(obj);
-            }
-        }
-
-        if (params.Stopwords) {
-            this.Stopwords = new Array();
-            for (let z in params.Stopwords) {
-                let obj = new DictInfo();
-                obj.deserialize(params.Stopwords[z]);
-                this.Stopwords.push(obj);
-            }
-        }
-
-        if (params.QQDict) {
-            this.QQDict = new Array();
-            for (let z in params.QQDict) {
-                let obj = new DictInfo();
-                obj.deserialize(params.QQDict[z]);
-                this.QQDict.push(obj);
-            }
-        }
-
-        if (params.Synonym) {
-            this.Synonym = new Array();
-            for (let z in params.Synonym) {
-                let obj = new DictInfo();
-                obj.deserialize(params.Synonym[z]);
-                this.Synonym.push(obj);
-            }
-        }
-        this.UpdateType = 'UpdateType' in params ? params.UpdateType : null;
-
-    }
-}
-
-/**
- * DescribeInstanceOperations response structure.
- * @class
- */
-class DescribeInstanceOperationsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number of operation records
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Operation history
-         * @type {Array.<Operation> || null}
-         */
-        this.Operations = null;
+        this.Status = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3936,58 +6121,43 @@ class DescribeInstanceOperationsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Operations) {
-            this.Operations = new Array();
-            for (let z in params.Operations) {
-                let obj = new Operation();
-                obj.deserialize(params.Operations[z]);
-                this.Operations.push(obj);
-            }
-        }
+        this.Status = 'Status' in params ? params.Status : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * RestartNodes request structure.
+ * RestartInstance request structure.
  * @class
  */
-class RestartNodesRequest extends  AbstractModel {
+class RestartInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster instance ID
+         * <p>Instance ID.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Node name list
-         * @type {Array.<string> || null}
-         */
-        this.NodeNames = null;
-
-        /**
-         * Whether to force restart
+         * <p>Whether to force restart<li>true: force restart</li><li>false: do not force restart</li>Default value: false</p>
          * @type {boolean || null}
          */
         this.ForceRestart = null;
 
         /**
-         * The restart mode. Valid values: `in-place` (default), `blue-green`.
-         * @type {string || null}
+         * <p>Restart mode: 0 rolling restart; 1 full restart</p>
+         * @type {number || null}
          */
         this.RestartMode = null;
 
         /**
-         * The node status, applicable in the blue/green mode. The blue/green restart is risky if the node is offline.
+         * <p>Select whether to upgrade the kernel patch version upon restart</p>
          * @type {boolean || null}
          */
-        this.IsOffline = null;
+        this.UpgradeKernel = null;
 
     }
 
@@ -3999,57 +6169,38 @@ class RestartNodesRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.NodeNames = 'NodeNames' in params ? params.NodeNames : null;
         this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
         this.RestartMode = 'RestartMode' in params ? params.RestartMode : null;
-        this.IsOffline = 'IsOffline' in params ? params.IsOffline : null;
+        this.UpgradeKernel = 'UpgradeKernel' in params ? params.UpgradeKernel : null;
 
     }
 }
 
 /**
- * UpdatePlugins request structure.
+ * Detailed information of availability zones in multi-AZ deployment
  * @class
  */
-class UpdatePluginsRequest extends  AbstractModel {
+class ZoneDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * AZ.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Zone = null;
 
         /**
-         * List of names of the plugins to be installed
-         * @type {Array.<string> || null}
+         * Subnet ID.
+         * @type {string || null}
          */
-        this.InstallPluginList = null;
+        this.SubnetId = null;
 
         /**
-         * List of names of the plugins to be uninstalled
-         * @type {Array.<string> || null}
-         */
-        this.RemovePluginList = null;
-
-        /**
-         * Whether to force restart the cluster. The default value is `false`.
+         * Whether it is a hidden AZ
          * @type {boolean || null}
          */
-        this.ForceRestart = null;
-
-        /**
-         * Whether to reinstall the cluster. The default value is `false`.
-         * @type {boolean || null}
-         */
-        this.ForceUpdate = null;
-
-        /**
-         * 0: system plugin
-         * @type {number || null}
-         */
-        this.PluginType = null;
+        this.Hidden = null;
 
     }
 
@@ -4060,46 +6211,15 @@ class UpdatePluginsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstallPluginList = 'InstallPluginList' in params ? params.InstallPluginList : null;
-        this.RemovePluginList = 'RemovePluginList' in params ? params.RemovePluginList : null;
-        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
-        this.ForceUpdate = 'ForceUpdate' in params ? params.ForceUpdate : null;
-        this.PluginType = 'PluginType' in params ? params.PluginType : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Hidden = 'Hidden' in params ? params.Hidden : null;
 
     }
 }
 
 /**
- * GetRequestTargetNodeTypes request structure.
- * @class
- */
-class GetRequestTargetNodeTypesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-    }
-}
-
-/**
- * Kibana node information
+ * Kibana node-related information of the instance
  * @class
  */
 class KibanaNodeInfo extends  AbstractModel {
@@ -4119,25 +6239,25 @@ class KibanaNodeInfo extends  AbstractModel {
         this.KibanaNodeNum = null;
 
         /**
-         * Number of Kibana node's CPUs
+         * Number of CPUs of the Kibana node
          * @type {number || null}
          */
         this.KibanaNodeCpuNum = null;
 
         /**
-         * Kibana node's memory in GB
+         * Kibana node memory in GB
          * @type {number || null}
          */
         this.KibanaNodeMemSize = null;
 
         /**
-         * Kibana node's disk type
+         * Kibana node disk type
          * @type {string || null}
          */
         this.KibanaNodeDiskType = null;
 
         /**
-         * Kibana node's disk size
+         * Kibana node disk size
          * @type {number || null}
          */
         this.KibanaNodeDiskSize = null;
@@ -4162,98 +6282,6 @@ class KibanaNodeInfo extends  AbstractModel {
 }
 
 /**
- * The maintenance time slot of the cluster
- * @class
- */
-class OperationDurationUpdated extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Maintenance period, which can be one or more days from Monday to Sunday. Valid values: [0, 6].
-         * @type {Array.<number> || null}
-         */
-        this.Periods = null;
-
-        /**
-         * The maintenance start time
-         * @type {string || null}
-         */
-        this.TimeStart = null;
-
-        /**
-         * The maintenance end time
-         * @type {string || null}
-         */
-        this.TimeEnd = null;
-
-        /**
-         * The time zone expressed in UTC.
-         * @type {string || null}
-         */
-        this.TimeZone = null;
-
-        /**
-         * The array of ES cluster IDs
-         * @type {Array.<string> || null}
-         */
-        this.MoreInstances = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Periods = 'Periods' in params ? params.Periods : null;
-        this.TimeStart = 'TimeStart' in params ? params.TimeStart : null;
-        this.TimeEnd = 'TimeEnd' in params ? params.TimeEnd : null;
-        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
-        this.MoreInstances = 'MoreInstances' in params ? params.MoreInstances : null;
-
-    }
-}
-
-/**
- * UpgradeLicense response structure.
- * @class
- */
-class UpgradeLicenseResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Order ID
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.DealName = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DealName = 'DealName' in params ? params.DealName : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ES cluster configuration item
  * @class
  */
@@ -4262,13 +6290,13 @@ class EsAcl extends  AbstractModel {
         super();
 
         /**
-         * Kibana access blocklist
+         * kibana access blocklist
          * @type {Array.<string> || null}
          */
         this.BlackIpList = null;
 
         /**
-         * Kibana access allowlist
+         * kibana access allowlist
          * @type {Array.<string> || null}
          */
         this.WhiteIpList = null;
@@ -4289,10 +6317,113 @@ class EsAcl extends  AbstractModel {
 }
 
 /**
- * UpdateRequestTargetNodeTypes response structure.
+ * RestartNodes request structure.
  * @class
  */
-class UpdateRequestTargetNodeTypesResponse extends  AbstractModel {
+class RestartNodesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Node name list
+         * @type {Array.<string> || null}
+         */
+        this.NodeNames = null;
+
+        /**
+         * Whether to perform forced reboot.
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
+        /**
+         * Optional restart mode. `in-place`: restart; `blue-green`: blue-green restart. Default value: `in-place`.
+         * @type {string || null}
+         */
+        this.RestartMode = null;
+
+        /**
+         * Node status, for use in blue-green mode; offline node blue/green at risk
+         * @type {boolean || null}
+         */
+        this.IsOffline = null;
+
+        /**
+         * cvm delay listing time
+         * @type {number || null}
+         */
+        this.CvmDelayOnlineTime = null;
+
+        /**
+         * Number of concurrent shard migrations
+         * @type {number || null}
+         */
+        this.ShardAllocationConcurrents = null;
+
+        /**
+         * Shard migration concurrency speed
+         * @type {number || null}
+         */
+        this.ShardAllocationBytes = null;
+
+        /**
+         * Whether to enable the placement group asynchronous task
+         * @type {boolean || null}
+         */
+        this.EnableScheduleRecoverGroup = null;
+
+        /**
+         * Time period of the async task for the placement group
+         * @type {EnableScheduleOperationDuration || null}
+         */
+        this.EnableScheduleOperationDuration = null;
+
+        /**
+         * Event ID list.
+         * @type {Array.<string> || null}
+         */
+        this.EventTypeIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.NodeNames = 'NodeNames' in params ? params.NodeNames : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
+        this.RestartMode = 'RestartMode' in params ? params.RestartMode : null;
+        this.IsOffline = 'IsOffline' in params ? params.IsOffline : null;
+        this.CvmDelayOnlineTime = 'CvmDelayOnlineTime' in params ? params.CvmDelayOnlineTime : null;
+        this.ShardAllocationConcurrents = 'ShardAllocationConcurrents' in params ? params.ShardAllocationConcurrents : null;
+        this.ShardAllocationBytes = 'ShardAllocationBytes' in params ? params.ShardAllocationBytes : null;
+        this.EnableScheduleRecoverGroup = 'EnableScheduleRecoverGroup' in params ? params.EnableScheduleRecoverGroup : null;
+
+        if (params.EnableScheduleOperationDuration) {
+            let obj = new EnableScheduleOperationDuration();
+            obj.deserialize(params.EnableScheduleOperationDuration)
+            this.EnableScheduleOperationDuration = obj;
+        }
+        this.EventTypeIds = 'EventTypeIds' in params ? params.EventTypeIds : null;
+
+    }
+}
+
+/**
+ * RestartNodes response structure.
+ * @class
+ */
+class RestartNodesResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4317,369 +6448,10 @@ class UpdateRequestTargetNodeTypesResponse extends  AbstractModel {
 }
 
 /**
- * UpdateIndex request structure.
+ * UpgradeInstance request structure.
  * @class
  */
-class UpdateIndexRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ES cluster ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Type of the index to update. `auto`: Automated; `normal`: General.
-         * @type {string || null}
-         */
-        this.IndexType = null;
-
-        /**
-         * Name of the index to update
-         * @type {string || null}
-         */
-        this.IndexName = null;
-
-        /**
-         * JSON-formatted index metadata to update, such as `mappings` and `settings`.
-         * @type {string || null}
-         */
-        this.UpdateMetaJson = null;
-
-        /**
-         * Username for cluster access
-         * @type {string || null}
-         */
-        this.Username = null;
-
-        /**
-         * Password for cluster access
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * Whether to roll over the backup index
-         * @type {boolean || null}
-         */
-        this.RolloverBackingIndex = null;
-
-        /**
-         * 
-         * @type {boolean || null}
-         */
-        this.MountIndex = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.IndexUuid = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.BackingIndexName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.IndexType = 'IndexType' in params ? params.IndexType : null;
-        this.IndexName = 'IndexName' in params ? params.IndexName : null;
-        this.UpdateMetaJson = 'UpdateMetaJson' in params ? params.UpdateMetaJson : null;
-        this.Username = 'Username' in params ? params.Username : null;
-        this.Password = 'Password' in params ? params.Password : null;
-        this.RolloverBackingIndex = 'RolloverBackingIndex' in params ? params.RolloverBackingIndex : null;
-        this.MountIndex = 'MountIndex' in params ? params.MountIndex : null;
-        this.IndexUuid = 'IndexUuid' in params ? params.IndexUuid : null;
-        this.BackingIndexName = 'BackingIndexName' in params ? params.BackingIndexName : null;
-
-    }
-}
-
-/**
- * Information of the dedicated primary node in an instance
- * @class
- */
-class MasterNodeInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether to enable the dedicated primary node
-         * @type {boolean || null}
-         */
-        this.EnableDedicatedMaster = null;
-
-        /**
-         * Dedicated primary node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
-         * @type {string || null}
-         */
-        this.MasterNodeType = null;
-
-        /**
-         * Number of dedicated primary nodes
-         * @type {number || null}
-         */
-        this.MasterNodeNum = null;
-
-        /**
-         * Number of CPU cores of the dedicated primary node
-         * @type {number || null}
-         */
-        this.MasterNodeCpuNum = null;
-
-        /**
-         * Memory size of the dedicated primary node in GB
-         * @type {number || null}
-         */
-        this.MasterNodeMemSize = null;
-
-        /**
-         * Disk size of the dedicated primary node in GB
-         * @type {number || null}
-         */
-        this.MasterNodeDiskSize = null;
-
-        /**
-         * Disk type of the dedicated primary node
-         * @type {string || null}
-         */
-        this.MasterNodeDiskType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnableDedicatedMaster = 'EnableDedicatedMaster' in params ? params.EnableDedicatedMaster : null;
-        this.MasterNodeType = 'MasterNodeType' in params ? params.MasterNodeType : null;
-        this.MasterNodeNum = 'MasterNodeNum' in params ? params.MasterNodeNum : null;
-        this.MasterNodeCpuNum = 'MasterNodeCpuNum' in params ? params.MasterNodeCpuNum : null;
-        this.MasterNodeMemSize = 'MasterNodeMemSize' in params ? params.MasterNodeMemSize : null;
-        this.MasterNodeDiskSize = 'MasterNodeDiskSize' in params ? params.MasterNodeDiskSize : null;
-        this.MasterNodeDiskType = 'MasterNodeDiskType' in params ? params.MasterNodeDiskType : null;
-
-    }
-}
-
-/**
- * DescribeInstanceOperations request structure.
- * @class
- */
-class DescribeInstanceOperationsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Start time, such as "2019-03-07 16:30:39"
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time, such as "2019-03-30 20:18:03"
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Pagination start value
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of entries per page
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
- * Index automation field
- * @class
- */
-class IndexOptionsField extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Max age for expiry purpose
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.ExpireMaxAge = null;
-
-        /**
-         * Max size for expiry purpose
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.ExpireMaxSize = null;
-
-        /**
-         * Rollover cycle
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.RolloverMaxAge = null;
-
-        /**
-         * Whether to enable the dynamic rollover
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.RolloverDynamic = null;
-
-        /**
-         * Whether to enable dynamic sharding
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.ShardNumDynamic = null;
-
-        /**
-         * Timestamp field
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.TimestampField = null;
-
-        /**
-         * Write mode
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.WriteMode = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ExpireMaxAge = 'ExpireMaxAge' in params ? params.ExpireMaxAge : null;
-        this.ExpireMaxSize = 'ExpireMaxSize' in params ? params.ExpireMaxSize : null;
-        this.RolloverMaxAge = 'RolloverMaxAge' in params ? params.RolloverMaxAge : null;
-        this.RolloverDynamic = 'RolloverDynamic' in params ? params.RolloverDynamic : null;
-        this.ShardNumDynamic = 'ShardNumDynamic' in params ? params.ShardNumDynamic : null;
-        this.TimestampField = 'TimestampField' in params ? params.TimestampField : null;
-        this.WriteMode = 'WriteMode' in params ? params.WriteMode : null;
-
-    }
-}
-
-/**
- * Information of workflow task in instance operation history
- * @class
- */
-class TaskDetail extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Task name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Task progress
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-        /**
-         * Task completion time
-         * @type {string || null}
-         */
-        this.FinishTime = null;
-
-        /**
-         * Subtask
-         * @type {Array.<SubTaskDetail> || null}
-         */
-        this.SubTasks = null;
-
-        /**
-         * The task time.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ElapsedTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Progress = 'Progress' in params ? params.Progress : null;
-        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
-
-        if (params.SubTasks) {
-            this.SubTasks = new Array();
-            for (let z in params.SubTasks) {
-                let obj = new SubTaskDetail();
-                obj.deserialize(params.SubTasks[z]);
-                this.SubTasks.push(obj);
-            }
-        }
-        this.ElapsedTime = 'ElapsedTime' in params ? params.ElapsedTime : null;
-
-    }
-}
-
-/**
- * DeleteInstance request structure.
- * @class
- */
-class DeleteInstanceRequest extends  AbstractModel {
+class UpgradeInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -4689,6 +6461,78 @@ class DeleteInstanceRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * Target ES version. Valid values: "6.4.3", "6.8.2", "7.5.1", "7.10.1", and "7.14.2".
+         * @type {string || null}
+         */
+        this.EsVersion = null;
+
+        /**
+         * Whether to perform an upgrade check only. Default value: false.
+         * @type {boolean || null}
+         */
+        this.CheckOnly = null;
+
+        /**
+         * Target business feature version: <li>oss open source edition</li><li>basic edition</li>Currently used only when upgrading from 5.6.4 to 6.x. Default value: basic
+         * @type {string || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * Whether xpack security authentication is enabled for basic version 6.8 (and above versions)<li>1: not enabled</li><li>2: enabled</li>
+         * @type {number || null}
+         */
+        this.BasicSecurityType = null;
+
+        /**
+         * Upgrade method: <li>scale blue-green change</li><li>restart rolling restart</li>Default value: scale
+         * @type {string || null}
+         */
+        this.UpgradeMode = null;
+
+        /**
+         * Whether to back up the cluster before upgrading the version. By default, no backup is performed.
+         * @type {boolean || null}
+         */
+        this.CosBackup = null;
+
+        /**
+         * In rolling mode, whether to skip the check and perform a forced reboot. Default value: false
+         * @type {boolean || null}
+         */
+        this.SkipCheckForceRestart = null;
+
+        /**
+         * Parameter for delayed cvm launch
+         * @type {number || null}
+         */
+        this.CvmDelayOnlineTime = null;
+
+        /**
+         * Number of concurrent shard migrations
+         * @type {number || null}
+         */
+        this.ShardAllocationConcurrents = null;
+
+        /**
+         * Shard migration concurrency speed
+         * @type {number || null}
+         */
+        this.ShardAllocationBytes = null;
+
+        /**
+         * Whether to enable the placement group asynchronous task
+         * @type {boolean || null}
+         */
+        this.EnableScheduleRecoverGroup = null;
+
+        /**
+         * Time period of the async task for the placement group
+         * @type {EnableScheduleOperationDuration || null}
+         */
+        this.EnableScheduleOperationDuration = null;
+
     }
 
     /**
@@ -4699,6 +6543,23 @@ class DeleteInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.EsVersion = 'EsVersion' in params ? params.EsVersion : null;
+        this.CheckOnly = 'CheckOnly' in params ? params.CheckOnly : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
+        this.UpgradeMode = 'UpgradeMode' in params ? params.UpgradeMode : null;
+        this.CosBackup = 'CosBackup' in params ? params.CosBackup : null;
+        this.SkipCheckForceRestart = 'SkipCheckForceRestart' in params ? params.SkipCheckForceRestart : null;
+        this.CvmDelayOnlineTime = 'CvmDelayOnlineTime' in params ? params.CvmDelayOnlineTime : null;
+        this.ShardAllocationConcurrents = 'ShardAllocationConcurrents' in params ? params.ShardAllocationConcurrents : null;
+        this.ShardAllocationBytes = 'ShardAllocationBytes' in params ? params.ShardAllocationBytes : null;
+        this.EnableScheduleRecoverGroup = 'EnableScheduleRecoverGroup' in params ? params.EnableScheduleRecoverGroup : null;
+
+        if (params.EnableScheduleOperationDuration) {
+            let obj = new EnableScheduleOperationDuration();
+            obj.deserialize(params.EnableScheduleOperationDuration)
+            this.EnableScheduleOperationDuration = obj;
+        }
 
     }
 }
@@ -4712,22 +6573,19 @@ class DescribeViewsResponse extends  AbstractModel {
         super();
 
         /**
-         * Cluster view
-Note: This field may return `null`, indicating that no valid value was found.
+         * Cluster dimension view
          * @type {ClusterView || null}
          */
         this.ClusterView = null;
 
         /**
-         * Node view
-Note: This field may return `null`, indicating that no valid value was found.
+         * Node dimension view
          * @type {Array.<NodeView> || null}
          */
         this.NodesView = null;
 
         /**
-         * Kibana view
-Note: This field may return `null`, indicating that no valid value was found.
+         * Kibana dimensional view
          * @type {Array.<KibanaView> || null}
          */
         this.KibanasView = null;
@@ -4777,851 +6635,6 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * RestartNodes response structure.
- * @class
- */
-class RestartNodesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Information of subtask in workflow task in the instance operation history (such as each check item in a upgrade check task)
- * @class
- */
-class SubTaskDetail extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Subtask name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Subtask result
-         * @type {boolean || null}
-         */
-        this.Result = null;
-
-        /**
-         * Subtask error message
-         * @type {string || null}
-         */
-        this.ErrMsg = null;
-
-        /**
-         * Subtask type
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Subtask status. 0: processing, 1: succeeded, -1: failed
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Name of the index for which the check for upgrade failed
-         * @type {Array.<string> || null}
-         */
-        this.FailedIndices = null;
-
-        /**
-         * Subtask end time
-         * @type {string || null}
-         */
-        this.FinishTime = null;
-
-        /**
-         * Subtask level. 1: warning, 2: failed
-         * @type {number || null}
-         */
-        this.Level = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Result = 'Result' in params ? params.Result : null;
-        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.FailedIndices = 'FailedIndices' in params ? params.FailedIndices : null;
-        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
-        this.Level = 'Level' in params ? params.Level : null;
-
-    }
-}
-
-/**
- * DeleteAutoBackUpStrategy response structure.
- * @class
- */
-class DeleteAutoBackUpStrategyResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Valid values: true (success) and false (failure).
-         * @type {boolean || null}
-         */
-        this.Status = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeIndexMeta request structure.
- * @class
- */
-class DescribeIndexMetaRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ES cluster ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Index type. `auto`: Automated; `normal`: General.
-         * @type {string || null}
-         */
-        this.IndexType = null;
-
-        /**
-         * Index name. `null` indicates that all indexes are requested.
-         * @type {string || null}
-         */
-        this.IndexName = null;
-
-        /**
-         * Username for cluster access
-         * @type {string || null}
-         */
-        this.Username = null;
-
-        /**
-         * Password for cluster access
-         * @type {string || null}
-         */
-        this.Password = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.IndexType = 'IndexType' in params ? params.IndexType : null;
-        this.IndexName = 'IndexName' in params ? params.IndexName : null;
-        this.Username = 'Username' in params ? params.Username : null;
-        this.Password = 'Password' in params ? params.Password : null;
-
-    }
-}
-
-/**
- * UpgradeInstance request structure.
- * @class
- */
-class UpgradeInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Target ES version. Valid values: 6.4.3, 6.8.2, 7.5.1
-         * @type {string || null}
-         */
-        this.EsVersion = null;
-
-        /**
-         * Whether to check for upgrade only. Default value: false
-         * @type {boolean || null}
-         */
-        this.CheckOnly = null;
-
-        /**
-         * Target X-Pack edition: <li>OSS: Open-source Edition </li><li>basic: Basic Edition </li>Currently only used for v5.6.4 to v6.x upgrade. Default value: basic
-         * @type {string || null}
-         */
-        this.LicenseType = null;
-
-        /**
-         * Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
-         * @type {number || null}
-         */
-        this.BasicSecurityType = null;
-
-        /**
-         * Upgrade mode. <li>scale: blue/green deployment</li><li>restart: rolling restart</li>Default value: scale
-         * @type {string || null}
-         */
-        this.UpgradeMode = null;
-
-        /**
-         * Whether to back up the cluster before version upgrade (no backup by default)
-         * @type {boolean || null}
-         */
-        this.CosBackup = null;
-
-        /**
-         * Whether to skip the check and perform a force restart in the rolling mode. Default value: `false`.
-         * @type {boolean || null}
-         */
-        this.SkipCheckForceRestart = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.EsVersion = 'EsVersion' in params ? params.EsVersion : null;
-        this.CheckOnly = 'CheckOnly' in params ? params.CheckOnly : null;
-        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
-        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
-        this.UpgradeMode = 'UpgradeMode' in params ? params.UpgradeMode : null;
-        this.CosBackup = 'CosBackup' in params ? params.CosBackup : null;
-        this.SkipCheckForceRestart = 'SkipCheckForceRestart' in params ? params.SkipCheckForceRestart : null;
-
-    }
-}
-
-/**
- * DescribeInstances response structure.
- * @class
- */
-class DescribeInstancesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of returned instances
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of instance details
-         * @type {Array.<InstanceInfo> || null}
-         */
-        this.InstanceList = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.InstanceList) {
-            this.InstanceList = new Array();
-            for (let z in params.InstanceList) {
-                let obj = new InstanceInfo();
-                obj.deserialize(params.InstanceList[z]);
-                this.InstanceList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteIndex request structure.
- * @class
- */
-class DeleteIndexRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ES cluster ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Type of the index to delete. `auto`: Automated; `normal`: General.
-         * @type {string || null}
-         */
-        this.IndexType = null;
-
-        /**
-         * Name of the index to delete
-         * @type {string || null}
-         */
-        this.IndexName = null;
-
-        /**
-         * Username for cluster access
-         * @type {string || null}
-         */
-        this.Username = null;
-
-        /**
-         * Password for cluster access
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * Backing index name
-         * @type {string || null}
-         */
-        this.BackingIndexName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.IndexType = 'IndexType' in params ? params.IndexType : null;
-        this.IndexName = 'IndexName' in params ? params.IndexName : null;
-        this.Username = 'Username' in params ? params.Username : null;
-        this.Password = 'Password' in params ? params.Password : null;
-        this.BackingIndexName = 'BackingIndexName' in params ? params.BackingIndexName : null;
-
-    }
-}
-
-/**
- * Configuration set information
- * @class
- */
-class EsConfigSetInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Configuration set type, such as `LDAP` and `AD`.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * "{\"order\":0,\"url\":\"ldap://10.0.1.72:389\",\"bind_dn\":\"cn=admin,dc=tencent,dc=com\",\"user_search.base_dn\":\"dc=tencent,dc=com\",\"user_search.filter\":\"(cn={0})\",\"group_search.base_dn\":\"dc=tencent,dc=com\"}"
-         * @type {string || null}
-         */
-        this.EsConfig = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.EsConfig = 'EsConfig' in params ? params.EsConfig : null;
-
-    }
-}
-
-/**
- * DescribeViews request structure.
- * @class
- */
-class DescribeViewsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-    }
-}
-
-/**
- * GetRequestTargetNodeTypes response structure.
- * @class
- */
-class GetRequestTargetNodeTypesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * A list of node types used to receive requests.
-         * @type {Array.<string> || null}
-         */
-        this.TargetNodeTypes = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TargetNodeTypes = 'TargetNodeTypes' in params ? params.TargetNodeTypes : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeIndexList response structure.
- * @class
- */
-class DescribeIndexListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Index metadata field
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<IndexMetaField> || null}
-         */
-        this.IndexMetaFields = null;
-
-        /**
-         * Total number of results
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.IndexMetaFields) {
-            this.IndexMetaFields = new Array();
-            for (let z in params.IndexMetaFields) {
-                let obj = new IndexMetaField();
-                obj.deserialize(params.IndexMetaFields[z]);
-                this.IndexMetaFields.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ES cluster operation details
- * @class
- */
-class Operation extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique operation ID
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * Operation start time
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Operation type
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Operation details
-         * @type {OperationDetail || null}
-         */
-        this.Detail = null;
-
-        /**
-         * Operation result
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * Workflow task information
-         * @type {Array.<TaskDetail> || null}
-         */
-        this.Tasks = null;
-
-        /**
-         * Operation progress
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.Type = 'Type' in params ? params.Type : null;
-
-        if (params.Detail) {
-            let obj = new OperationDetail();
-            obj.deserialize(params.Detail)
-            this.Detail = obj;
-        }
-        this.Result = 'Result' in params ? params.Result : null;
-
-        if (params.Tasks) {
-            this.Tasks = new Array();
-            for (let z in params.Tasks) {
-                let obj = new TaskDetail();
-                obj.deserialize(params.Tasks[z]);
-                this.Tasks.push(obj);
-            }
-        }
-        this.Progress = 'Progress' in params ? params.Progress : null;
-
-    }
-}
-
-/**
- * Index metadata field
- * @class
- */
-class IndexMetaField extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Index type
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.IndexType = null;
-
-        /**
-         * Index name
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.IndexName = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.IndexMetaJson = null;
-
-        /**
-         * Index status
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.IndexStatus = null;
-
-        /**
-         * Index size (in byte)
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.IndexStorage = null;
-
-        /**
-         * Index creation time
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.IndexCreateTime = null;
-
-        /**
-         * Backing index
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<BackingIndexMetaField> || null}
-         */
-        this.BackingIndices = null;
-
-        /**
-         * Cluster ID
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Cluster name
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.ClusterName = null;
-
-        /**
-         * Cluster version
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.ClusterVersion = null;
-
-        /**
-         * Index lifecycle policy field
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {IndexPolicyField || null}
-         */
-        this.IndexPolicyField = null;
-
-        /**
-         * Index automation field
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {IndexOptionsField || null}
-         */
-        this.IndexOptionsField = null;
-
-        /**
-         * Index setting field
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {IndexSettingsField || null}
-         */
-        this.IndexSettingsField = null;
-
-        /**
-         * Cluster APP ID
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.AppId = null;
-
-        /**
-         * The number of index docs.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IndexDocs = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IndexType = 'IndexType' in params ? params.IndexType : null;
-        this.IndexName = 'IndexName' in params ? params.IndexName : null;
-        this.IndexMetaJson = 'IndexMetaJson' in params ? params.IndexMetaJson : null;
-        this.IndexStatus = 'IndexStatus' in params ? params.IndexStatus : null;
-        this.IndexStorage = 'IndexStorage' in params ? params.IndexStorage : null;
-        this.IndexCreateTime = 'IndexCreateTime' in params ? params.IndexCreateTime : null;
-
-        if (params.BackingIndices) {
-            this.BackingIndices = new Array();
-            for (let z in params.BackingIndices) {
-                let obj = new BackingIndexMetaField();
-                obj.deserialize(params.BackingIndices[z]);
-                this.BackingIndices.push(obj);
-            }
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.ClusterVersion = 'ClusterVersion' in params ? params.ClusterVersion : null;
-
-        if (params.IndexPolicyField) {
-            let obj = new IndexPolicyField();
-            obj.deserialize(params.IndexPolicyField)
-            this.IndexPolicyField = obj;
-        }
-
-        if (params.IndexOptionsField) {
-            let obj = new IndexOptionsField();
-            obj.deserialize(params.IndexOptionsField)
-            this.IndexOptionsField = obj;
-        }
-
-        if (params.IndexSettingsField) {
-            let obj = new IndexSettingsField();
-            obj.deserialize(params.IndexSettingsField)
-            this.IndexSettingsField = obj;
-        }
-        this.AppId = 'AppId' in params ? params.AppId : null;
-        this.IndexDocs = 'IndexDocs' in params ? params.IndexDocs : null;
-
-    }
-}
-
-/**
- * UpgradeLicense request structure.
- * @class
- */
-class UpgradeLicenseRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * License type <li>oss: Open Source Edition </li><li>basic: Basic Edition </li><li>platinum: Platinum Edition </li>Default value: Platinum
-         * @type {string || null}
-         */
-        this.LicenseType = null;
-
-        /**
-         * Whether to automatically use vouchers <li>0: No </li><li>1: Yes </li>Default value: 0
-         * @type {number || null}
-         */
-        this.AutoVoucher = null;
-
-        /**
-         * List of voucher IDs (only one voucher can be specified at a time currently)
-         * @type {Array.<string> || null}
-         */
-        this.VoucherIds = null;
-
-        /**
-         * Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
-         * @type {number || null}
-         */
-        this.BasicSecurityType = null;
-
-        /**
-         * Whether to force restart <li>true: yes </li><li>false: no </li>Default value: false
-         * @type {boolean || null}
-         */
-        this.ForceRestart = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
-        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
-        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
-        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
-        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
-
-    }
-}
-
-/**
  * ModifyAutoBackUpCommonInfo response structure.
  * @class
  */
@@ -5650,7 +6663,7 @@ class ModifyAutoBackUpCommonInfoResponse extends  AbstractModel {
 }
 
 /**
- * The information of optional web components
+ * Optional web component information
  * @class
  */
 class OptionalWebServiceInfo extends  AbstractModel {
@@ -5658,53 +6671,58 @@ class OptionalWebServiceInfo extends  AbstractModel {
         super();
 
         /**
-         * Type
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Type.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Status
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Status.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Public URL
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Public url
          * @type {string || null}
          */
         this.PublicUrl = null;
 
         /**
-         * Private URL
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Private network url
          * @type {string || null}
          */
         this.PrivateUrl = null;
 
         /**
-         * Public network access
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Public access permissions
          * @type {string || null}
          */
         this.PublicAccess = null;
 
         /**
-         * Private network access
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Private network access permission
          * @type {string || null}
          */
         this.PrivateAccess = null;
 
         /**
          * Version
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Version = null;
+
+        /**
+         * Intranet vip of the web service
+         * @type {string || null}
+         */
+        this.PrivateVip = null;
+
+        /**
+         * Custom url of cerebro on the private network
+         * @type {string || null}
+         */
+        this.CustomPrivateUrl = null;
 
     }
 
@@ -5722,92 +6740,100 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PublicAccess = 'PublicAccess' in params ? params.PublicAccess : null;
         this.PrivateAccess = 'PrivateAccess' in params ? params.PrivateAccess : null;
         this.Version = 'Version' in params ? params.Version : null;
+        this.PrivateVip = 'PrivateVip' in params ? params.PrivateVip : null;
+        this.CustomPrivateUrl = 'CustomPrivateUrl' in params ? params.CustomPrivateUrl : null;
 
     }
 }
 
 module.exports = {
-    WebNodeTypeInfo: WebNodeTypeInfo,
-    InstanceLog: InstanceLog,
-    LocalDiskInfo: LocalDiskInfo,
-    ModifyAutoBackUpStrategyRequest: ModifyAutoBackUpStrategyRequest,
-    IndexPolicyField: IndexPolicyField,
-    NodeInfo: NodeInfo,
+    TaskDetail: TaskDetail,
+    OtherConfig: OtherConfig,
+    DescribeInstanceOperationsRequest: DescribeInstanceOperationsRequest,
+    OperationDetail: OperationDetail,
+    EsPublicAcl: EsPublicAcl,
+    DictInfo: DictInfo,
+    CreateInstanceResponse: CreateInstanceResponse,
+    DescribeInstanceLogsRequest: DescribeInstanceLogsRequest,
+    ModifyAutoBackUpCommonInfoRequest: ModifyAutoBackUpCommonInfoRequest,
+    KeyValue: KeyValue,
+    DescribeInstancesResponse: DescribeInstancesResponse,
+    DescribeInstanceLogsResponse: DescribeInstanceLogsResponse,
     UpdateIndexResponse: UpdateIndexResponse,
+    DescribeInstanceOperationsResponse: DescribeInstanceOperationsResponse,
+    AutoScaleDiskInfo: AutoScaleDiskInfo,
+    UpdateRequestTargetNodeTypesResponse: UpdateRequestTargetNodeTypesResponse,
+    IndexOptionsField: IndexOptionsField,
+    SubTaskDetail: SubTaskDetail,
+    GpuInfo: GpuInfo,
+    EsConfigSetInfo: EsConfigSetInfo,
+    GetRequestTargetNodeTypesResponse: GetRequestTargetNodeTypesResponse,
+    Operation: Operation,
+    InstanceLog: InstanceLog,
+    NodeInfo: NodeInfo,
     DescribeAutoBackUpStrategyRequest: DescribeAutoBackUpStrategyRequest,
     DescribeIndexMetaResponse: DescribeIndexMetaResponse,
+    ModifyAutoBackUpStrategyRequest: ModifyAutoBackUpStrategyRequest,
+    KibanaView: KibanaView,
+    IndexSettingsField: IndexSettingsField,
+    UpdateRequestTargetNodeTypesRequest: UpdateRequestTargetNodeTypesRequest,
+    CreateAutoBackUpStrategyRequest: CreateAutoBackUpStrategyRequest,
+    DeleteInstanceResponse: DeleteInstanceResponse,
+    CreateIndexRequest: CreateIndexRequest,
+    UpdatePluginsRequest: UpdatePluginsRequest,
+    UpgradeLicenseRequest: UpgradeLicenseRequest,
     UpdateInstanceResponse: UpdateInstanceResponse,
-    OperationDetail: OperationDetail,
+    DeleteIndexRequest: DeleteIndexRequest,
+    DescribeViewsRequest: DescribeViewsRequest,
+    ModifyAutoBackUpStrategyResponse: ModifyAutoBackUpStrategyResponse,
+    DescribeIndexListResponse: DescribeIndexListResponse,
     ClusterView: ClusterView,
-    TagInfo: TagInfo,
     CreateIndexResponse: CreateIndexResponse,
     DeleteAutoBackUpStrategyRequest: DeleteAutoBackUpStrategyRequest,
-    KibanaView: KibanaView,
-    EsPublicAcl: EsPublicAcl,
-    BackingIndexMetaField: BackingIndexMetaField,
-    DictInfo: DictInfo,
-    RestartInstanceResponse: RestartInstanceResponse,
-    KeyValue: KeyValue,
-    RestartKibanaRequest: RestartKibanaRequest,
-    CreateInstanceResponse: CreateInstanceResponse,
-    IndexSettingsField: IndexSettingsField,
-    DescribeAutoBackUpStrategyResponse: DescribeAutoBackUpStrategyResponse,
-    DescribeInstanceLogsRequest: DescribeInstanceLogsRequest,
-    UpdateDictionariesRequest: UpdateDictionariesRequest,
-    UpdateRequestTargetNodeTypesRequest: UpdateRequestTargetNodeTypesRequest,
-    ZoneDetail: ZoneDetail,
-    ModifyAutoBackUpCommonInfoRequest: ModifyAutoBackUpCommonInfoRequest,
-    OperationDuration: OperationDuration,
-    NodeView: NodeView,
-    DescribeIndexListRequest: DescribeIndexListRequest,
-    CosBackup: CosBackup,
-    ModifyAutoBackUpStrategyResponse: ModifyAutoBackUpStrategyResponse,
-    CreateAutoBackUpStrategyRequest: CreateAutoBackUpStrategyRequest,
-    CreateAutoBackUpStrategyResponse: CreateAutoBackUpStrategyResponse,
-    UpgradeInstanceResponse: UpgradeInstanceResponse,
-    UpdateDictionariesResponse: UpdateDictionariesResponse,
-    InstanceInfo: InstanceInfo,
-    DeleteInstanceResponse: DeleteInstanceResponse,
-    DeleteIndexResponse: DeleteIndexResponse,
-    DescribeInstanceLogsResponse: DescribeInstanceLogsResponse,
-    CreateInstanceRequest: CreateInstanceRequest,
-    UpdatePluginsResponse: UpdatePluginsResponse,
-    RestartInstanceRequest: RestartInstanceRequest,
-    RestartKibanaResponse: RestartKibanaResponse,
-    DescribeInstancesRequest: DescribeInstancesRequest,
-    CreateIndexRequest: CreateIndexRequest,
-    UpdateInstanceRequest: UpdateInstanceRequest,
-    EsDictionaryInfo: EsDictionaryInfo,
-    DescribeInstanceOperationsResponse: DescribeInstanceOperationsResponse,
-    RestartNodesRequest: RestartNodesRequest,
-    UpdatePluginsRequest: UpdatePluginsRequest,
-    GetRequestTargetNodeTypesRequest: GetRequestTargetNodeTypesRequest,
-    KibanaNodeInfo: KibanaNodeInfo,
-    OperationDurationUpdated: OperationDurationUpdated,
     UpgradeLicenseResponse: UpgradeLicenseResponse,
-    EsAcl: EsAcl,
-    UpdateRequestTargetNodeTypesResponse: UpdateRequestTargetNodeTypesResponse,
-    UpdateIndexRequest: UpdateIndexRequest,
+    RestartKibanaRequest: RestartKibanaRequest,
+    DescribeAutoBackUpStrategyResponse: DescribeAutoBackUpStrategyResponse,
+    UpdateDictionariesRequest: UpdateDictionariesRequest,
+    CosBackup: CosBackup,
+    DescribeIndexListRequest: DescribeIndexListRequest,
+    OperationDuration: OperationDuration,
+    OperationDurationUpdated: OperationDurationUpdated,
+    CreateInstanceRequest: CreateInstanceRequest,
+    UpdateDictionariesResponse: UpdateDictionariesResponse,
+    ProcessDetail: ProcessDetail,
+    DeleteIndexResponse: DeleteIndexResponse,
+    UpdatePluginsResponse: UpdatePluginsResponse,
+    DescribeInstancesRequest: DescribeInstancesRequest,
+    EsDictionaryInfo: EsDictionaryInfo,
+    OutboundPublicAcl: OutboundPublicAcl,
+    GetRequestTargetNodeTypesRequest: GetRequestTargetNodeTypesRequest,
+    InstanceInfo: InstanceInfo,
     MasterNodeInfo: MasterNodeInfo,
-    DescribeInstanceOperationsRequest: DescribeInstanceOperationsRequest,
-    IndexOptionsField: IndexOptionsField,
-    TaskDetail: TaskDetail,
     DeleteInstanceRequest: DeleteInstanceRequest,
-    DescribeViewsResponse: DescribeViewsResponse,
-    RestartNodesResponse: RestartNodesResponse,
-    SubTaskDetail: SubTaskDetail,
+    UpgradeInstanceResponse: UpgradeInstanceResponse,
     DeleteAutoBackUpStrategyResponse: DeleteAutoBackUpStrategyResponse,
     DescribeIndexMetaRequest: DescribeIndexMetaRequest,
-    UpgradeInstanceRequest: UpgradeInstanceRequest,
-    DescribeInstancesResponse: DescribeInstancesResponse,
-    DeleteIndexRequest: DeleteIndexRequest,
-    EsConfigSetInfo: EsConfigSetInfo,
-    DescribeViewsRequest: DescribeViewsRequest,
-    GetRequestTargetNodeTypesResponse: GetRequestTargetNodeTypesResponse,
-    DescribeIndexListResponse: DescribeIndexListResponse,
-    Operation: Operation,
+    RestartKibanaResponse: RestartKibanaResponse,
+    UpdateIndexRequest: UpdateIndexRequest,
     IndexMetaField: IndexMetaField,
-    UpgradeLicenseRequest: UpgradeLicenseRequest,
+    WebNodeTypeInfo: WebNodeTypeInfo,
+    LocalDiskInfo: LocalDiskInfo,
+    IndexPolicyField: IndexPolicyField,
+    EnableScheduleOperationDuration: EnableScheduleOperationDuration,
+    RestartInstanceResponse: RestartInstanceResponse,
+    BackingIndexMetaField: BackingIndexMetaField,
+    NodeView: NodeView,
+    TagInfo: TagInfo,
+    UpdateInstanceRequest: UpdateInstanceRequest,
+    CreateAutoBackUpStrategyResponse: CreateAutoBackUpStrategyResponse,
+    RestartInstanceRequest: RestartInstanceRequest,
+    ZoneDetail: ZoneDetail,
+    KibanaNodeInfo: KibanaNodeInfo,
+    EsAcl: EsAcl,
+    RestartNodesRequest: RestartNodesRequest,
+    RestartNodesResponse: RestartNodesResponse,
+    UpgradeInstanceRequest: UpgradeInstanceRequest,
+    DescribeViewsResponse: DescribeViewsResponse,
     ModifyAutoBackUpCommonInfoResponse: ModifyAutoBackUpCommonInfoResponse,
     OptionalWebServiceInfo: OptionalWebServiceInfo,
 

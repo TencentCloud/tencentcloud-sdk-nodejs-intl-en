@@ -602,7 +602,7 @@ class DescribeQAResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Extension Information
  * @class
  */
 class ExtraInfo extends  AbstractModel {
@@ -610,7 +610,7 @@ class ExtraInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * ECharts information
          * @type {Array.<string> || null}
          */
         this.EChartsInfo = null;
@@ -945,7 +945,7 @@ class RunNodeInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Agent debugging information
  * @class
  */
 class AgentDebugInfo extends  AbstractModel {
@@ -953,19 +953,19 @@ class AgentDebugInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Input information of the tool and large model, json
          * @type {string || null}
          */
         this.Input = null;
 
         /**
-         * 
+         * Output information of tools and large models, in json format
          * @type {string || null}
          */
         this.Output = null;
 
         /**
-         * 
+         * Model name.
          * @type {string || null}
          */
         this.ModelName = null;
@@ -1465,7 +1465,7 @@ class KnowledgeCapacityPieGraphDetail extends  AbstractModel {
 }
 
 /**
- * 
+ * Workflow information.
  * @class
  */
 class WorkflowInfo extends  AbstractModel {
@@ -1473,49 +1473,49 @@ class WorkflowInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Workflow ID</p>
          * @type {string || null}
          */
         this.WorkflowId = null;
 
         /**
-         * 
+         * <p>Workflow name.</p>
          * @type {string || null}
          */
         this.WorkflowName = null;
 
         /**
-         * 
+         * <p>Workflow run ID</p>
          * @type {string || null}
          */
         this.WorkflowRunId = null;
 
         /**
-         * 
+         * <p>Tab</p>
          * @type {Array.<string> || null}
          */
         this.OptionCards = null;
 
         /**
-         * 
+         * <p>Output result of multiple bubbles</p>
          * @type {Array.<string> || null}
          */
         this.Outputs = null;
 
         /**
-         * 
+         * <p>Workflow release time, unix timestamp.</p>
          * @type {string || null}
          */
         this.WorkflowReleaseTime = null;
 
         /**
-         * 
+         * <p>Workflow multi-bubble output</p>
          * @type {Array.<Content> || null}
          */
         this.Contents = null;
 
         /**
-         * 
+         * <p>Flag indicating whether the tab is single-selection or dual-selection</p><p>Enumeration values:</p><ul><li>0: single selection</li><li>1: multiple selection</li></ul>
          * @type {number || null}
          */
         this.OptionMode = null;
@@ -1550,7 +1550,7 @@ class WorkflowInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Documentation reference source info
  * @class
  */
 class DocReference extends  AbstractModel {
@@ -1558,37 +1558,37 @@ class DocReference extends  AbstractModel {
         super();
 
         /**
-         * 
-         * @type {number || null}
+         * <p>Document business ID</p>
+         * @type {string || null}
          */
         this.DocBizId = null;
 
         /**
-         * 
-         * @type {number || null}
+         * <p>Document fragment reference ID</p>
+         * @type {string || null}
          */
         this.ReferBizId = null;
 
         /**
-         * 
+         * <p>Document name</p>
          * @type {string || null}
          */
         this.DocName = null;
 
         /**
-         * 
-         * @type {number || null}
+         * <p>Business ID of the knowledge base where the document resides</p>
+         * @type {string || null}
          */
         this.KnowledgeBizId = null;
 
         /**
-         * 
+         * <p>Name of the knowledge base where the document resides</p>
          * @type {string || null}
          */
         this.KnowledgeName = null;
 
         /**
-         * 
+         * <p>Document Access Address</p>
          * @type {string || null}
          */
         this.Url = null;
@@ -2426,7 +2426,7 @@ class ReleaseDoc extends  AbstractModel {
 }
 
 /**
- * 
+ * Sandbox information content
  * @class
  */
 class SandboxContent extends  AbstractModel {
@@ -2434,19 +2434,19 @@ class SandboxContent extends  AbstractModel {
         super();
 
         /**
-         * 
+         * URL address of the sandbox
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 
+         * URL address for opening the sandbox through a browser
          * @type {string || null}
          */
         this.DisplayUrl = null;
 
         /**
-         * 
+         * Sandbox output content
          * @type {string || null}
          */
         this.Content = null;
@@ -2706,7 +2706,7 @@ class DescribeKnowledgeUsageResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Answer to the questionnaire question
  * @class
  */
 class QuestionnaireQuestionAnswer extends  AbstractModel {
@@ -2714,13 +2714,13 @@ class QuestionnaireQuestionAnswer extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Issue.</p>
          * @type {string || null}
          */
         this.Question = null;
 
         /**
-         * 
+         * <p>Selected answer tag.</p>
          * @type {Array.<string> || null}
          */
         this.SelectedLabels = null;
@@ -4303,7 +4303,7 @@ class DescribeRobotBizIDByAppKeyResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Widget action submission structure for the dialogue side
  * @class
  */
 class WidgetAction extends  AbstractModel {
@@ -4311,25 +4311,25 @@ class WidgetAction extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Widget configuration ID
          * @type {string || null}
          */
         this.WidgetId = null;
 
         /**
-         * 
+         * Widget instance ID
          * @type {string || null}
          */
         this.WidgetRunId = null;
 
         /**
-         * 
+         * Widget action
          * @type {string || null}
          */
         this.ActionType = null;
 
         /**
-         * 
+         * Data submitted by the Widget action
          * @type {string || null}
          */
         this.Payload = null;
@@ -4923,6 +4923,58 @@ class ModifyRejectedQuestionRequest extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class ConversationResourceArtifact extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {ConversationAppArtifact || null}
+         */
+        this.App = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 
+         * @type {ConversationWorkflowArtifact || null}
+         */
+        this.Workflow = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.App) {
+            let obj = new ConversationAppArtifact();
+            obj.deserialize(params.App)
+            this.App = obj;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.Workflow) {
+            let obj = new ConversationWorkflowArtifact();
+            obj.deserialize(params.Workflow)
+            this.Workflow = obj;
+        }
+
+    }
+}
+
+/**
  * Data of custom variable and label relationship.
  * @class
  */
@@ -5156,7 +5208,7 @@ class CheckAttributeLabelReferRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Intelligent Agent task information
  * @class
  */
 class AgentTask extends  AbstractModel {
@@ -5164,19 +5216,19 @@ class AgentTask extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Task serial number</p>
          * @type {number || null}
          */
         this.Index = null;
 
         /**
-         * 
+         * <p>Task content</p>
          * @type {string || null}
          */
         this.Content = null;
 
         /**
-         * 
+         * <p>Task status.</p>
          * @type {string || null}
          */
         this.Status = null;
@@ -5680,7 +5732,7 @@ class ModelParameter extends  AbstractModel {
 }
 
 /**
- * 
+ * File information content
  * @class
  */
 class FileInfoContent extends  AbstractModel {
@@ -5688,46 +5740,58 @@ class FileInfoContent extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>DocBizId returned by the real-time document parsing API</p>
          * @type {string || null}
          */
         this.DocBizId = null;
 
         /**
-         * 
+         * <p>File name.</p>
          * @type {string || null}
          */
         this.FileName = null;
 
         /**
-         * 
+         * <p>File type</p>
          * @type {string || null}
          */
         this.FileType = null;
 
         /**
-         * 
+         * <p>File size in bytes</p>
          * @type {string || null}
          */
         this.FileSize = null;
 
         /**
-         * 
+         * <p>File URL</p>
          * @type {string || null}
          */
         this.FileUrl = null;
 
         /**
-         * 
+         * <p>doc_id returned by the real-time document parsing API.</p>
          * @type {string || null}
          */
         this.DocId = null;
 
         /**
-         * 
+         * <p>File creation time</p>
          * @type {string || null}
          */
         this.CreateTime = null;
+
+        /**
+         * <p>Local path of the file in the sandbox</p>
+         * @type {string || null}
+         */
+        this.LocalPath = null;
+
+        /**
+         * <p>File moderation status</p><p>Enumeration values:</p><ul><li>1: under review</li><li>2: pass review</li><li>3: fail review</li></ul>
+         * @type {number || null}
+         */
+        this.AuditStatus = null;
 
     }
 
@@ -5745,6 +5809,8 @@ class FileInfoContent extends  AbstractModel {
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
         this.DocId = 'DocId' in params ? params.DocId : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.LocalPath = 'LocalPath' in params ? params.LocalPath : null;
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
 
     }
 }
@@ -6358,6 +6424,90 @@ class DescribeTokenUsageGraphRequest extends  AbstractModel {
 }
 
 /**
+ * Details of release list.
+ * @class
+ */
+class ListReleaseItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Version ID.
+         * @type {string || null}
+         */
+        this.ReleaseBizId = null;
+
+        /**
+         * Releaser.
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * Release description.
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+        /**
+         * Update time.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Release status.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Release status description.
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * Reason for failure.
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * Number of successful releases.
+         * @type {number || null}
+         */
+        this.SuccessCount = null;
+
+        /**
+         * Number of failed releases.
+         * @type {number || null}
+         */
+        this.FailCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReleaseBizId = 'ReleaseBizId' in params ? params.ReleaseBizId : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
+        this.FailCount = 'FailCount' in params ? params.FailCount : null;
+
+    }
+}
+
+/**
  * RetryDocAudit request structure.
  * @class
  */
@@ -6393,7 +6543,7 @@ class RetryDocAuditRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Timbre parameters
  * @class
  */
 class VoiceConfig extends  AbstractModel {
@@ -6401,19 +6551,19 @@ class VoiceConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Public cloud timbre id
          * @type {number || null}
          */
         this.VoiceType = null;
 
         /**
-         * 
+         * Timbre key
          * @type {string || null}
          */
         this.TimbreKey = null;
 
         /**
-         * 
+         * Timbre name.
          * @type {string || null}
          */
         this.VoiceName = null;
@@ -6435,7 +6585,7 @@ class VoiceConfig extends  AbstractModel {
 }
 
 /**
- * 
+ * Widget structure of the dialogue side
  * @class
  */
 class Widget extends  AbstractModel {
@@ -6443,43 +6593,44 @@ class Widget extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Widget configuration ID
+
          * @type {string || null}
          */
         this.WidgetId = null;
 
         /**
-         * 
+         * Widget instance ID
          * @type {string || null}
          */
         this.WidgetRunId = null;
 
         /**
-         * 
+         * Widget display data
          * @type {string || null}
          */
         this.View = null;
 
         /**
-         * 
+         * Widget status information
          * @type {string || null}
          */
         this.State = null;
 
         /**
-         * 
+         * Widget position
          * @type {number || null}
          */
         this.Position = null;
 
         /**
-         * 
+         * Base64-encoded Widget information.
          * @type {string || null}
          */
         this.EncodedWidget = null;
 
         /**
-         * 
+         * payload of the user's last submission
          * @type {string || null}
          */
         this.Payload = null;
@@ -7203,7 +7354,7 @@ class ExportUnsatisfiedReplyRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * File collection information
  * @class
  */
 class FileCollection extends  AbstractModel {
@@ -7211,13 +7362,13 @@ class FileCollection extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Maximum number of files to be uploaded
          * @type {number || null}
          */
         this.MaxFileCount = null;
 
         /**
-         * 
+         * Supported upload file types
          * @type {Array.<string> || null}
          */
         this.SupportedFileTypes = null;
@@ -7552,7 +7703,7 @@ class ReleaseQA extends  AbstractModel {
 }
 
 /**
- * 
+ * Session content reference information
  * @class
  */
 class ContentReference extends  AbstractModel {
@@ -7560,37 +7711,40 @@ class ContentReference extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Source index ID
          * @type {number || null}
          */
         this.Index = null;
 
         /**
-         * 
+         * Reference source name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Reference source type
+1: QA
+2: Document fragment
+4: Online retrieved content
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * Document fragment reference
          * @type {DocReference || null}
          */
         this.DocRefer = null;
 
         /**
-         * 
+         * QA reference
          * @type {QaReference || null}
          */
         this.QaRefer = null;
 
         /**
-         * 
+         * Reference information for online retrieval content
          * @type {WebSearchReference || null}
          */
         this.WebSearchRefer = null;
@@ -7819,7 +7973,7 @@ class CallDetail extends  AbstractModel {
 }
 
 /**
- * 
+ * Filter flag bit for the document list
  * @class
  */
 class DocFilterFlag extends  AbstractModel {
@@ -7827,13 +7981,13 @@ class DocFilterFlag extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Identifier bit
          * @type {string || null}
          */
         this.Flag = null;
 
         /**
-         * 
+         * Identifier value
          * @type {boolean || null}
          */
         this.Value = null;
@@ -8291,7 +8445,7 @@ class ModifyDocAttrRangeRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Digital human configuration
  * @class
  */
 class DigitalHumanConfig extends  AbstractModel {
@@ -8299,25 +8453,25 @@ class DigitalHumanConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Digital human asset key
          * @type {string || null}
          */
         this.AssetKey = null;
 
         /**
-         * 
+         * Digital human name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * image
          * @type {string || null}
          */
         this.Avatar = null;
 
         /**
-         * 
+         * Preview image
          * @type {string || null}
          */
         this.PreviewUrl = null;
@@ -8869,7 +9023,7 @@ class GroupQARequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Update time policy
  * @class
  */
 class UpdatePeriodInfo extends  AbstractModel {
@@ -8877,7 +9031,7 @@ class UpdatePeriodInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Document update frequency type: 0 does not update. -H 1-hour granularity. Currently only support 24 (1 day), 72 (3 days), and 168 (7 days). Only valid for the Tencent document type when source=2.
          * @type {number || null}
          */
         this.UpdatePeriodH = null;
@@ -9101,7 +9255,7 @@ class DescribeAppRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Question of the questionnaire
  * @class
  */
 class QuestionnaireQuestion extends  AbstractModel {
@@ -9109,31 +9263,31 @@ class QuestionnaireQuestion extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Serial number of the issue</p>
          * @type {number || null}
          */
         this.Index = null;
 
         /**
-         * 
+         * <p>Content of the issue</p>
          * @type {string || null}
          */
         this.Question = null;
 
         /**
-         * 
+         * <p>Problem type</p>
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * <p>Required or optional</p>
          * @type {boolean || null}
          */
         this.Required = null;
 
         /**
-         * 
+         * <p>Options for the question</p>
          * @type {Array.<QuestionOption> || null}
          */
         this.Options = null;
@@ -9369,7 +9523,7 @@ class DescribeReleaseResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Reference information of the Q&A pair
  * @class
  */
 class QaReference extends  AbstractModel {
@@ -9377,25 +9531,25 @@ class QaReference extends  AbstractModel {
         super();
 
         /**
-         * 
-         * @type {number || null}
+         * <p>QA business ID</p>
+         * @type {string || null}
          */
         this.QaBizId = null;
 
         /**
-         * 
-         * @type {number || null}
+         * <p>Document fragment reference ID</p>
+         * @type {string || null}
          */
         this.ReferBizId = null;
 
         /**
-         * 
-         * @type {number || null}
+         * <p>Business ID of the knowledge base where the QA resides</p>
+         * @type {string || null}
          */
         this.KnowledgeBizId = null;
 
         /**
-         * 
+         * <p>Name of the knowledge base where the QA resides</p>
          * @type {string || null}
          */
         this.KnowledgeName = null;
@@ -10116,7 +10270,7 @@ class ClassifyLabel extends  AbstractModel {
 }
 
 /**
- * 
+ * Web page search content
  * @class
  */
 class WebSearchContent extends  AbstractModel {
@@ -10124,7 +10278,7 @@ class WebSearchContent extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Web search result, a string in json format
          * @type {string || null}
          */
         this.Content = null;
@@ -10578,48 +10732,36 @@ class RejectedQuestion extends  AbstractModel {
 }
 
 /**
- * GetLikeDataCount request structure.
+ * 
  * @class
  */
-class GetLikeDataCountRequest extends  AbstractModel {
+class ConversationMcpApp extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start date.
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End date.
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Application ID.
-         * @type {Array.<string> || null}
-         */
-        this.AppBizId = null;
-
-        /**
-         * Message source (1. shared from user end, 2. chat api).
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * Login to user's root account (required in integrator mode).
+         * 
          * @type {string || null}
          */
-        this.LoginUin = null;
+        this.PluginId = null;
 
         /**
-         * Login to user's sub-account (required in integrator mode).	
+         * 
          * @type {string || null}
          */
-        this.LoginSubAccountUin = null;
+        this.ResourceUri = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ThreadId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ToolResult = null;
 
     }
 
@@ -10630,12 +10772,10 @@ class GetLikeDataCountRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.AppBizId = 'AppBizId' in params ? params.AppBizId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
-        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+        this.ResourceUri = 'ResourceUri' in params ? params.ResourceUri : null;
+        this.ThreadId = 'ThreadId' in params ? params.ThreadId : null;
+        this.ToolResult = 'ToolResult' in params ? params.ToolResult : null;
 
     }
 }
@@ -11537,7 +11677,7 @@ class MsgRecordReference extends  AbstractModel {
 }
 
 /**
- * 
+ * Intelligent call
  * @class
  */
 class AICallConfig extends  AbstractModel {
@@ -11545,31 +11685,31 @@ class AICallConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Enable the voice interaction feature
          * @type {boolean || null}
          */
         this.EnableVoiceInteract = null;
 
         /**
-         * 
+         * Enable voice call
          * @type {boolean || null}
          */
         this.EnableVoiceCall = null;
 
         /**
-         * 
+         * Enable digital human
          * @type {boolean || null}
          */
         this.EnableDigitalHuman = null;
 
         /**
-         * 
+         * Voice type configuration
          * @type {VoiceConfig || null}
          */
         this.Voice = null;
 
         /**
-         * 
+         * Digital human configuration
          * @type {DigitalHumanConfig || null}
          */
         this.DigitalHuman = null;
@@ -12040,7 +12180,7 @@ class FileInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Online retrieval content reference details
  * @class
  */
 class WebSearchReference extends  AbstractModel {
@@ -12048,7 +12188,7 @@ class WebSearchReference extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Webpage URL
          * @type {string || null}
          */
         this.Url = null;
@@ -12705,7 +12845,7 @@ class KnowledgeQaPlugin extends  AbstractModel {
 }
 
 /**
- * 
+ * Method to attain the intent
  * @class
  */
 class IntentAchievement extends  AbstractModel {
@@ -12713,13 +12853,13 @@ class IntentAchievement extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Intent attainment method. `qa`: QA reply, `doc`: document reply, `workflow`: workflow reply, `llm`: large model reply.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Description of the method to attain the intent
          * @type {string || null}
          */
         this.Desc = null;
@@ -12905,7 +13045,7 @@ How to Obtain It:</br>
 }
 
 /**
- * 
+ * Filter criteria.
  * @class
  */
 class FilterItem extends  AbstractModel {
@@ -12913,13 +13053,18 @@ class FilterItem extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Filter the content.
+For example, you can use "AuditStatus" to filter by review status.
          * @type {string || null}
          */
         this.FilterKey = null;
 
         /**
-         * 
+         * Filtering criteria.
+For example, for the filter content "AuditStatus", use the following filtering conditions:
+"ContentFailed": "Content review failed"
+"PictureFailed": "Image review failed",
+"ContentAndPictureFailed": "Image and content review failed",
          * @type {Array.<string> || null}
          */
         this.FilterValue = null;
@@ -12975,7 +13120,7 @@ class ModifyAttributeLabelResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Questionnaire information
  * @class
  */
 class Questionnaire extends  AbstractModel {
@@ -12983,19 +13128,19 @@ class Questionnaire extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Questionnaire title</p>
          * @type {string || null}
          */
         this.Title = null;
 
         /**
-         * 
+         * <p>Question list of the questionnaire</p>
          * @type {Array.<QuestionnaireQuestion> || null}
          */
         this.Questions = null;
 
         /**
-         * 
+         * <p>List of answers to the questionnaire</p>
          * @type {Array.<QuestionnaireQuestionAnswer> || null}
          */
         this.Answers = null;
@@ -13869,7 +14014,7 @@ class UploadAttributeLabelRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Dialogue record content details
  * @class
  */
 class Content extends  AbstractModel {
@@ -13877,106 +14022,118 @@ class Content extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Message content type<br>text: text<br>image: image<br>file: file<br>option_cards: tabs<br>custom_params: custom business parameters<br>sandbox: cloud desktop<br>custom_variables: custom input parameters<br>web_search: web search content<br>file_collection: file collection information<br>widget: widget info<br>widget_action: client-side widget action information</p>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * <p>Text content</p>
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * 
+         * <p>Reference info.</p>
          * @type {Array.<QuoteInfo> || null}
          */
         this.QuoteInfos = null;
 
         /**
-         * 
+         * <p>Reference information</p>
          * @type {Array.<ContentReference> || null}
          */
         this.References = null;
 
         /**
-         * 
+         * <p>Image information.</p>
          * @type {ImageInfoContent || null}
          */
         this.Image = null;
 
         /**
-         * 
+         * <p>File information</p>
          * @type {FileInfoContent || null}
          */
         this.File = null;
 
         /**
-         * 
+         * <p>Tab info.</p>
          * @type {Array.<string> || null}
          */
         this.OptionCards = null;
 
         /**
-         * 
+         * <p>User-customized business parameter information.</p>
          * @type {Array.<string> || null}
          */
         this.CustomParams = null;
 
         /**
-         * 
+         * <p>Custom Variable</p>
          * @type {Array.<string> || null}
          */
         this.CustomVariables = null;
 
         /**
-         * 
+         * <p>Sandbox information</p>
          * @type {SandboxContent || null}
          */
         this.Sandbox = null;
 
         /**
-         * 
+         * <p>Web page search content</p>
          * @type {WebSearchContent || null}
          */
         this.WebSearch = null;
 
         /**
-         * 
+         * <p>File information collection</p>
          * @type {FileCollection || null}
          */
         this.FileCollection = null;
 
         /**
-         * 
+         * <p>Widget information.</p>
          * @type {Widget || null}
          */
         this.Widget = null;
 
         /**
-         * 
+         * <p>Widget action information</p>
          * @type {WidgetAction || null}
          */
         this.WidgetAction = null;
 
         /**
-         * 
+         * <p>Task List</p>
          * @type {Array.<AgentTask> || null}
          */
         this.Tasks = null;
 
         /**
-         * 
+         * <p>Questionnaire information</p>
          * @type {Questionnaire || null}
          */
         this.Questionnaire = null;
 
         /**
-         * 
+         * <p>Tab mode</p>
          * @type {number || null}
          */
         this.OptionMode = null;
+
+        /**
+         * <p>MCP APP information returned</p>
+         * @type {ConversationMcpApp || null}
+         */
+        this.McpApp = null;
+
+        /**
+         * <p>Application or workflow resource product</p>
+         * @type {ConversationResourceArtifact || null}
+         */
+        this.Resource = null;
 
     }
 
@@ -14068,6 +14225,18 @@ class Content extends  AbstractModel {
             this.Questionnaire = obj;
         }
         this.OptionMode = 'OptionMode' in params ? params.OptionMode : null;
+
+        if (params.McpApp) {
+            let obj = new ConversationMcpApp();
+            obj.deserialize(params.McpApp)
+            this.McpApp = obj;
+        }
+
+        if (params.Resource) {
+            let obj = new ConversationResourceArtifact();
+            obj.deserialize(params.Resource)
+            this.Resource = obj;
+        }
 
     }
 }
@@ -14344,7 +14513,7 @@ class CreateAttributeLabelResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Processing method for duplicate documents
  * @class
  */
 class DuplicateFileHandle extends  AbstractModel {
@@ -14352,13 +14521,13 @@ class DuplicateFileHandle extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Document repetition judgment method. 1: Judge whether to repeat by document content, that is, the cos_hash field.
          * @type {number || null}
          */
         this.CheckType = null;
 
         /**
-         * 
+         * Duplicate document processing method. 1: return an error. 2: skip and return the business ID of the duplicate document.
          * @type {number || null}
          */
         this.HandleType = null;
@@ -14930,6 +15099,55 @@ class WorkFlowSummary extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class ConversationWorkflowArtifact extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.WorkflowId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+        this.WorkflowId = 'WorkflowId' in params ? params.WorkflowId : null;
+
+    }
+}
+
+/**
  * Task parameter.
  * @class
  */
@@ -15235,66 +15453,42 @@ class ListAttributeLabelResponse extends  AbstractModel {
 }
 
 /**
- * Details of release list.
+ * 
  * @class
  */
-class ListReleaseItem extends  AbstractModel {
+class ConversationAppArtifact extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Version ID.
+         * 
          * @type {string || null}
          */
-        this.ReleaseBizId = null;
+        this.AppAvatar = null;
 
         /**
-         * Releaser.
+         * 
          * @type {string || null}
          */
-        this.Operator = null;
+        this.AppId = null;
 
         /**
-         * Release description.
-         * @type {string || null}
-         */
-        this.Desc = null;
-
-        /**
-         * Update time.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * Release status.
+         * 
          * @type {number || null}
          */
-        this.Status = null;
+        this.AppPattern = null;
 
         /**
-         * Release status description.
+         * 
          * @type {string || null}
          */
-        this.StatusDesc = null;
+        this.Name = null;
 
         /**
-         * Reason for failure.
+         * 
          * @type {string || null}
          */
-        this.Reason = null;
-
-        /**
-         * Number of successful releases.
-         * @type {number || null}
-         */
-        this.SuccessCount = null;
-
-        /**
-         * Number of failed releases.
-         * @type {number || null}
-         */
-        this.FailCount = null;
+        this.SpaceId = null;
 
     }
 
@@ -15305,15 +15499,74 @@ class ListReleaseItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReleaseBizId = 'ReleaseBizId' in params ? params.ReleaseBizId : null;
-        this.Operator = 'Operator' in params ? params.Operator : null;
-        this.Desc = 'Desc' in params ? params.Desc : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
-        this.Reason = 'Reason' in params ? params.Reason : null;
-        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
-        this.FailCount = 'FailCount' in params ? params.FailCount : null;
+        this.AppAvatar = 'AppAvatar' in params ? params.AppAvatar : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AppPattern = 'AppPattern' in params ? params.AppPattern : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+
+    }
+}
+
+/**
+ * GetLikeDataCount request structure.
+ * @class
+ */
+class GetLikeDataCountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start date.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End date.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Application ID.
+         * @type {Array.<string> || null}
+         */
+        this.AppBizId = null;
+
+        /**
+         * Message source (1. shared from user end, 2. chat api).
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Login to user's root account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * Login to user's sub-account (required in integrator mode).	
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.AppBizId = 'AppBizId' in params ? params.AppBizId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
 
     }
 }
@@ -15626,7 +15879,7 @@ class CheckAttributeLabelExistResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Optional issue
  * @class
  */
 class QuestionOption extends  AbstractModel {
@@ -15634,13 +15887,13 @@ class QuestionOption extends  AbstractModel {
         super();
 
         /**
-         * 
+         * <p>Tag of the option</p>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 
+         * <p>Description of the option.</p>
          * @type {string || null}
          */
         this.Description = null;
@@ -16699,6 +16952,7 @@ module.exports = {
     AgentProcedure: AgentProcedure,
     KnowledgeQaOutput: KnowledgeQaOutput,
     ModifyRejectedQuestionRequest: ModifyRejectedQuestionRequest,
+    ConversationResourceArtifact: ConversationResourceArtifact,
     ApiVarAttrInfo: ApiVarAttrInfo,
     AgentThought: AgentThought,
     GroupDocRequest: GroupDocRequest,
@@ -16725,6 +16979,7 @@ module.exports = {
     DescribeDocRequest: DescribeDocRequest,
     AgentProcedureDebugging: AgentProcedureDebugging,
     DescribeTokenUsageGraphRequest: DescribeTokenUsageGraphRequest,
+    ListReleaseItem: ListReleaseItem,
     RetryDocAuditRequest: RetryDocAuditRequest,
     VoiceConfig: VoiceConfig,
     Widget: Widget,
@@ -16791,7 +17046,7 @@ module.exports = {
     RetryDocAuditResponse: RetryDocAuditResponse,
     ModifyDocCateRequest: ModifyDocCateRequest,
     RejectedQuestion: RejectedQuestion,
-    GetLikeDataCountRequest: GetLikeDataCountRequest,
+    ConversationMcpApp: ConversationMcpApp,
     DeleteRejectedQuestionResponse: DeleteRejectedQuestionResponse,
     Credentials: Credentials,
     MsgFileInfo: MsgFileInfo,
@@ -16863,6 +17118,7 @@ module.exports = {
     DeleteAppRequest: DeleteAppRequest,
     ModifyRejectedQuestionResponse: ModifyRejectedQuestionResponse,
     WorkFlowSummary: WorkFlowSummary,
+    ConversationWorkflowArtifact: ConversationWorkflowArtifact,
     TaskParams: TaskParams,
     DescribeStorageCredentialRequest: DescribeStorageCredentialRequest,
     QAList: QAList,
@@ -16870,7 +17126,8 @@ module.exports = {
     ListReleaseResponse: ListReleaseResponse,
     ListModelResponse: ListModelResponse,
     ListAttributeLabelResponse: ListAttributeLabelResponse,
-    ListReleaseItem: ListReleaseItem,
+    ConversationAppArtifact: ConversationAppArtifact,
+    GetLikeDataCountRequest: GetLikeDataCountRequest,
     ModifyQAResponse: ModifyQAResponse,
     DeleteQAResponse: DeleteQAResponse,
     DescribeCallStatsGraphResponse: DescribeCallStatsGraphResponse,

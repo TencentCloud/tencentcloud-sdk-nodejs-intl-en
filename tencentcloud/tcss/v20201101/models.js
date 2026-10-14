@@ -1670,13 +1670,13 @@ class AddAssetImageRegistryRegistryDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Connection error message
+         * Connection error information
          * @type {string || null}
          */
         this.HealthCheckErr = null;
 
         /**
-         * Error message of the name
+         * Incorrect name message
          * @type {string || null}
          */
         this.NameRepeatErr = null;
@@ -1894,25 +1894,25 @@ class AddAssetImageRegistryRegistryDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Repository name
+         * Repository Name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Username
+         * Username.
          * @type {string || null}
          */
         this.Username = null;
 
         /**
-         * Password
+         * Password.
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * Repository URL
+         * Warehouse url
          * @type {string || null}
          */
         this.Url = null;
@@ -1924,19 +1924,19 @@ class AddAssetImageRegistryRegistryDetailRequest extends  AbstractModel {
         this.RegistryType = null;
 
         /**
-         * Network type, which can be `public` (public network).
+         * Network type. List: public
          * @type {string || null}
          */
         this.NetType = null;
 
         /**
-         * Repository version
+         * Warehouse version
          * @type {string || null}
          */
         this.RegistryVersion = null;
 
         /**
-         * Region. Default value: `default`.
+         * Region, list: default.
          * @type {string || null}
          */
         this.RegistryRegion = null;
@@ -1948,13 +1948,13 @@ class AddAssetImageRegistryRegistryDetailRequest extends  AbstractModel {
         this.SpeedLimit = null;
 
         /**
-         * Valid values: `0` (secure mode with certificate verification, which is the default value); `1` (unsecure mode that skips certificate verification).
+         * 0: Secure Mode (Certificate Verification) (Default); 1: Insecure Mode (Skip Certificate Verification)
          * @type {number || null}
          */
         this.Insecure = null;
 
         /**
-         * 
+         * Record ID of Connectivity Check
          * @type {Array.<ConnDetectConfig> || null}
          */
         this.ConnDetectConfig = null;
@@ -2859,131 +2859,136 @@ class DescribePurchaseStateInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * Valid values: `0` (available for trial and purchase); `1` (available for purchase only after failed trial review or trial expiration); `2` (trial effective); `3` (Pro Edition effective); `4` (Pro Edition expired).
+         * <p>0: available for trial application and purchase; 1: purchase only (including failed trial review and expired trial); 2: trial active; 3: Pro Edition active; 4: Pro Edition expired</p>
          * @type {number || null}
          */
         this.State = null;
 
         /**
-         * 
+         * <p>Total resource cores = total protected cores + unprotected cores</p>
          * @type {number || null}
          */
         this.AllCoresCnt = null;
 
         /**
-         * Total number of protected cores. It is the sum of the number of purchased cores, the number of free trial cores, and the number of elastic billing cores.
+         * <p>Total protected cores = purchased cores + trial granted cores + elastic billing cores</p>
          * @type {number || null}
          */
         this.CoresCnt = null;
 
         /**
-         * 
+         * <p>Unprotected cores (number of resource cores with protection not enabled)</p>
          * @type {number || null}
          */
         this.UndefendCoresCnt = null;
 
         /**
-         * Number of purchased cores
+         * <p>Number of purchased cores</p>
          * @type {number || null}
          */
         this.AuthorizedCoresCnt = null;
 
         /**
-         * Number of free trial cores for Pro Edition.
+         * <p>Trial giveaway of Pro Edition cores</p>
          * @type {number || null}
          */
         this.GivenAuthorizedCoresCnt = null;
 
         /**
-         * 
+         * <p>Current number of elastic billing cores</p>
          * @type {number || null}
          */
         this.CurrentFlexibleCoresCnt = null;
 
         /**
-         * Image count
+         * <p>Number of images.</p>
          * @type {number || null}
          */
         this.ImageCnt = null;
 
         /**
-         * Number of licensed images
+         * <p>Number of licensed images</p>
          * @type {number || null}
          */
         this.AuthorizedImageCnt = null;
 
         /**
-         * Expiration time
+         * <p>Expiration time.</p>
          * @type {string || null}
          */
         this.ExpirationTime = null;
 
         /**
-         * Number of purchased image licenses
+         * <p>Number of purchased image licenses</p>
          * @type {number || null}
          */
         this.PurchasedAuthorizedCnt = null;
 
         /**
-         * 0 indicates the default status (it has not been set by the user, namely the initial status); 1 indicates automatic renewal; 2 indicates explicit non-automatic renewal (it has been set by the user).
+         * <p>0 indicates the default state (not set by the user, i.e., the initial state), 1 indicates auto-renewal, and 2 indicates explicitly no auto-renewal (set by the user).</p>
          * @type {number || null}
          */
         this.AutomaticRenewal = null;
 
         /**
-         * Complimentary image licenses during the trial period may expire.
+         * <p>Complimentary image licenses during the trial period may expire.</p>
          * @type {number || null}
          */
         this.GivenAuthorizedCnt = null;
 
         /**
-         * Start time.
+         * <p>Start time</p>
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * Substatus (specific meaning depending on the State field)
-Valid values when State is 4: ISOLATE, TERMINATED.
+         * <p>Sub-status (specific meaning depending on the State field)<br>When State is 4, valid values: ISOLATE (isolated) DESTROED (terminated)</p>
          * @type {string || null}
          */
         this.SubState = null;
 
         /**
-         * Billing key.
+         * <p>Billing key</p>
          * @type {string || null}
          */
         this.InquireKey = null;
 
         /**
-         * 
+         * <p>Protection policy</p>
          * @type {string || null}
          */
         this.DefendPolicy = null;
 
         /**
-         * 
+         * <p>Upper limit of elastic billing cores</p>
          * @type {number || null}
          */
         this.FlexibleCoresLimit = null;
 
         /**
-         * 
+         * <p>Number of cores in the protected cluster</p>
          * @type {number || null}
          */
         this.DefendClusterCoresCnt = null;
 
         /**
-         * 
+         * <p>Protected host cores</p>
          * @type {number || null}
          */
         this.DefendHostCoresCnt = null;
 
         /**
-         * Number of trial cores for Pro Edition.
+         * <p>Number of cores of the Pro Edition for trial use</p>
          * @type {number || null}
          */
         this.TrialCoresCnt = null;
+
+        /**
+         * <p>Number of machines with zero protection containers.</p>
+         * @type {number || null}
+         */
+        this.NoContainerCoresCnt = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3021,6 +3026,7 @@ Valid values when State is 4: ISOLATE, TERMINATED.
         this.DefendClusterCoresCnt = 'DefendClusterCoresCnt' in params ? params.DefendClusterCoresCnt : null;
         this.DefendHostCoresCnt = 'DefendHostCoresCnt' in params ? params.DefendHostCoresCnt : null;
         this.TrialCoresCnt = 'TrialCoresCnt' in params ? params.TrialCoresCnt : null;
+        this.NoContainerCoresCnt = 'NoContainerCoresCnt' in params ? params.NoContainerCoresCnt : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7349,7 +7355,7 @@ class ProcessInfo extends  AbstractModel {
 }
 
 /**
- * Basic image information
+ * Basic mirror information
  * @class
  */
 class ImageInfo extends  AbstractModel {
@@ -7357,7 +7363,7 @@ class ImageInfo extends  AbstractModel {
         super();
 
         /**
-         * Instance name
+         * Instance name.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -7369,7 +7375,7 @@ class ImageInfo extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * Image name
+         * Image name.
          * @type {string || null}
          */
         this.ImageName = null;
@@ -7381,13 +7387,13 @@ class ImageInfo extends  AbstractModel {
         this.ImageTag = null;
 
         /**
-         * Forced scan
+         * Force scan
          * @type {string || null}
          */
         this.Force = null;
 
         /**
-         * Image ID
+         * Image id
          * @type {string || null}
          */
         this.ImageDigest = null;
@@ -7405,7 +7411,7 @@ class ImageInfo extends  AbstractModel {
         this.ImageRepoAddress = null;
 
         /**
-         * Instance ID
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -9725,19 +9731,22 @@ class DescribeAssetSyncLastTimeResponse extends  AbstractModel {
         super();
 
         /**
-         * Last asset sync time
+         * Last Synchronization Time of Assets
          * @type {string || null}
          */
         this.AssetSyncLastTime = null;
 
         /**
-         * 
+         * Task status.
+PENDING: pending.
+PROCESSING: Processing
+PROCESSED: Completed
          * @type {string || null}
          */
         this.TaskStatus = null;
 
         /**
-         * 
+         * Task Progress (Percentage)
          * @type {number || null}
          */
         this.TaskProcess = null;
@@ -13262,25 +13271,25 @@ class CreateAssetImageRegistryScanTaskOneKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * Whether to scan all images
+         * Scan All Images (Deprecated)
          * @type {boolean || null}
          */
         this.All = null;
 
         /**
-         * List of scanned images
+         * Scanned Image List
          * @type {Array.<ImageInfo> || null}
          */
         this.Images = null;
 
         /**
-         * Array of scan types
+         * Type Array for scanning
          * @type {Array.<string> || null}
          */
         this.ScanType = null;
 
         /**
-         * List of IDs of scanned images
+         * Scanned Image List ID
          * @type {Array.<number> || null}
          */
         this.Id = null;
@@ -13292,37 +13301,37 @@ class CreateAssetImageRegistryScanTaskOneKeyRequest extends  AbstractModel {
         this.ExcludeIDs = null;
 
         /**
-         * 
+         * Whether the Latest Image
          * @type {boolean || null}
          */
         this.IsLatest = null;
 
         /**
-         * 
+         * Scan Scope. 0: All Images; 1: Custom Images; 2: Recommended Scan Images
          * @type {number || null}
          */
         this.ScanScope = null;
 
         /**
-         * 
+         * Repository type
          * @type {Array.<string> || null}
          */
         this.RegistryType = null;
 
         /**
-         * 
+         * Namespace
          * @type {Array.<string> || null}
          */
         this.Namespace = null;
 
         /**
-         * 
+         * Whether There Are Running Containers
          * @type {boolean || null}
          */
         this.ContainerRunning = null;
 
         /**
-         * 
+         * Task Timeout Duration Unit (s)
          * @type {number || null}
          */
         this.Timeout = null;
@@ -13798,7 +13807,7 @@ class DescribeNetworkFirewallPolicyStatusResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Connectivity Check Configuration
  * @class
  */
 class ConnDetectConfig extends  AbstractModel {
@@ -13806,13 +13815,13 @@ class ConnDetectConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Host QUUID
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
-         * 
+         * Host UUID
          * @type {string || null}
          */
         this.Uuid = null;
@@ -14299,61 +14308,61 @@ class DescribeImageAuthorizedInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of valid image licenses
+         * Total number of effective image licenses.
          * @type {number || null}
          */
         this.TotalAuthorizedCnt = null;
 
         /**
-         * Number of used image licenses
+         * Used image licenses
          * @type {number || null}
          */
         this.UsedAuthorizedCnt = null;
 
         /**
-         * Number of images with scan enabled
+         * Scan image count enabled
          * @type {number || null}
          */
         this.ScannedImageCnt = null;
 
         /**
-         * Number of images with scan not enabled
+         * Scan image count when not enabled
          * @type {number || null}
          */
         this.NotScannedImageCnt = null;
 
         /**
-         * Number of local images with scan not enabled
+         * Number of Local Images with Scans Not Enabled
          * @type {number || null}
          */
         this.NotScannedLocalImageCnt = null;
 
         /**
-         * 
+         * Number of licensed trial images.
          * @type {number || null}
          */
         this.TrialAuthorizedCnt = null;
 
         /**
-         * 
+         * Number of licensed trial images that have been used.
          * @type {number || null}
          */
         this.UsedTrialAuthorizedCnt = null;
 
         /**
-         * 
+         * Number of purchased image authorizations
          * @type {number || null}
          */
         this.PurchasedAuthorizedCnt = null;
 
         /**
-         * 
+         * Number of purchased licensed images that have been used.
          * @type {number || null}
          */
         this.UsedPurchasedAuthorizedCnt = null;
 
         /**
-         * 
+         * Whether the free image licenses can be collected.
          * @type {boolean || null}
          */
         this.CanApplyFreeImageAuthorize = null;
@@ -20718,7 +20727,7 @@ class CreateAssetImageRegistryScanTaskOneKeyResponse extends  AbstractModel {
         super();
 
         /**
-         * The task id 
+         * Scan Task ID
          * @type {number || null}
          */
         this.TaskID = null;
@@ -21986,7 +21995,7 @@ class DescribeAssetImageRegistrySummaryRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Filter fields
          * @type {Array.<AssetFilters> || null}
          */
         this.Filters = null;
@@ -23992,7 +24001,7 @@ class VulAffectedImageInfo extends  AbstractModel {
 }
 
 /**
- * Host tag information
+ * Host Tag Information
  * @class
  */
 class TagInfo extends  AbstractModel {
@@ -24000,13 +24009,13 @@ class TagInfo extends  AbstractModel {
         super();
 
         /**
-         * Tag key
+         * Tag key.
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * Tag value
+         * Tag value.
          * @type {string || null}
          */
         this.TagValue = null;
@@ -24163,37 +24172,37 @@ class DescribeAssetHostDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * TCSS UUID
+         * Container Security UUID
          * @type {string || null}
          */
         this.UUID = null;
 
         /**
-         * Update time
+         * Update time.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Server name
+         * Host name
          * @type {string || null}
          */
         this.HostName = null;
 
         /**
-         * Server group
+         * Host grouping
          * @type {string || null}
          */
         this.Group = null;
 
         /**
-         * Server IP
+         * Host IP address
          * @type {string || null}
          */
         this.HostIP = null;
 
         /**
-         * OS
+         * Operating system.
          * @type {string || null}
          */
         this.OsName = null;
@@ -24211,37 +24220,37 @@ class DescribeAssetHostDetailResponse extends  AbstractModel {
         this.KernelVersion = null;
 
         /**
-         * Docker version
+         * docker version
          * @type {string || null}
          */
         this.DockerVersion = null;
 
         /**
-         * Docker API version
+         * docker api version
          * @type {string || null}
          */
         this.DockerAPIVersion = null;
 
         /**
-         * Docker version for Go
+         * docker go version
          * @type {string || null}
          */
         this.DockerGoVersion = null;
 
         /**
-         * Docker file system type
+         * docker file system type
          * @type {string || null}
          */
         this.DockerFileSystemDriver = null;
 
         /**
-         * Docker root directory
+         * docker root directory
          * @type {string || null}
          */
         this.DockerRootDir = null;
 
         /**
-         * Number of images
+         * Image count
          * @type {number || null}
          */
         this.ImageCnt = null;
@@ -24253,13 +24262,13 @@ class DescribeAssetHostDetailResponse extends  AbstractModel {
         this.ContainerCnt = null;
 
         /**
-         * K8s IP
+         * k8s IP
          * @type {string || null}
          */
         this.K8sMasterIP = null;
 
         /**
-         * K8s version
+         * k8s version
          * @type {string || null}
          */
         this.K8sVersion = null;
@@ -24271,67 +24280,67 @@ class DescribeAssetHostDetailResponse extends  AbstractModel {
         this.KubeProxyVersion = null;
 
         /**
-         * Valid values: `UNINSTALL` (not installed); `OFFLINE` (offline); `ONLINE` (defended).
+         * "UNINSTALL": Not Installed; "OFFLINE": Offline; "ONLINE": Protected
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Whether it is Containerd
+         * Is Containerd
          * @type {boolean || null}
          */
         this.IsContainerd = null;
 
         /**
-         * Server source. Valid values: `TENCENTCLOUD` (Tencent Cloud instance); `OTHERCLOUD` (non-Tencent Cloud instance).
+         * Host Source. "TENCENTCLOUD": "Tencent Cloud Servers"; "OTHERCLOUD": "Non-Tencent Cloud Servers"
          * @type {string || null}
          */
         this.MachineType = null;
 
         /**
-         * Public IP
+         * Public IP address
          * @type {string || null}
          */
         this.PublicIp = null;
 
         /**
-         * Server instance ID
+         * Host instance ID
          * @type {string || null}
          */
         this.InstanceID = null;
 
         /**
-         * Region ID
+         * Region ID.
          * @type {number || null}
          */
         this.RegionID = null;
 
         /**
-         * Project
+         * Associated project
          * @type {ProjectInfo || null}
          */
         this.Project = null;
 
         /**
-         * Tags
+         * Tag.
          * @type {Array.<TagInfo> || null}
          */
         this.Tags = null;
 
         /**
-         * 
+         * Cluster ID
          * @type {string || null}
          */
         this.ClusterID = null;
 
         /**
-         * 
+         * Cluster name.
          * @type {string || null}
          */
         this.ClusterName = null;
 
         /**
-         * 
+         * Cluster Access Status
          * @type {string || null}
          */
         this.ClusterAccessedStatus = null;
@@ -25092,19 +25101,19 @@ class UpdateImageRegistryTimingScanTaskRequest extends  AbstractModel {
         this.Enable = null;
 
         /**
-         * Scheduled scan time
+         * The time for scheduled scan
          * @type {string || null}
          */
         this.ScanTime = null;
 
         /**
-         * Array of the scanned trojan types
+         * Array of Trojan horse types to scan
          * @type {Array.<string> || null}
          */
         this.ScanType = null;
 
         /**
-         * Scanned image
+         * Scan image
          * @type {Array.<ImageInfo> || null}
          */
         this.Images = null;
@@ -25116,46 +25125,52 @@ class UpdateImageRegistryTimingScanTaskRequest extends  AbstractModel {
         this.All = null;
 
         /**
-         * ID of the image to be scanned
+         * Scan Image ID
          * @type {Array.<number> || null}
          */
         this.Id = null;
 
         /**
-         * Whether to scan for the latest version
+         * Whether to Scan the Latest Version
          * @type {boolean || null}
          */
         this.Latest = null;
 
         /**
-         * 
+         * Whether There Are Running Containers
          * @type {boolean || null}
          */
         this.ContainerRunning = null;
 
         /**
-         * 
+         * Scan end time
          * @type {string || null}
          */
         this.ScanEndTime = null;
 
         /**
-         * 
+         * Scan Scope. 0: All Images; 1: Custom Images; 2: Recommended Scan Images
          * @type {number || null}
          */
         this.ScanScope = null;
 
         /**
-         * 
+         * Repository Type: tcr, ccr, harbor
          * @type {Array.<string> || null}
          */
         this.RegistryType = null;
 
         /**
-         * 
+         * Namespace
          * @type {Array.<string> || null}
          */
         this.Namespace = null;
+
+        /**
+         * IDs of excluded image assets.
+         * @type {Array.<number> || null}
+         */
+        this.ExcludeImageAssetIds = null;
 
     }
 
@@ -25187,6 +25202,7 @@ class UpdateImageRegistryTimingScanTaskRequest extends  AbstractModel {
         this.ScanScope = 'ScanScope' in params ? params.ScanScope : null;
         this.RegistryType = 'RegistryType' in params ? params.RegistryType : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.ExcludeImageAssetIds = 'ExcludeImageAssetIds' in params ? params.ExcludeImageAssetIds : null;
 
     }
 }
@@ -26426,10 +26442,10 @@ class DescribeAbnormalProcessLevelSummaryRequest extends  AbstractModel {
 }
 
 /**
- * TCSS
-Key-value pair filter for conditional filtering queries, such as filter ID, name, and status
-If more than one filter exists, the logical relationship between these filters is `AND`.
-If multiple values exist in one filter, the logical relationship between these values is `OR`.
+ * Container security
+Description key-value pair filter, which is used for conditional filtering queries. For example, filter by ID, name, and status.
+If there are multiple Filters, the logical relationship between them is AND.
+If there are multiple Values in the same Filter, the logical relationship between the Values under the same Filter is OR.
  * @class
  */
 class AssetFilters extends  AbstractModel {
@@ -26437,7 +26453,7 @@ class AssetFilters extends  AbstractModel {
         super();
 
         /**
-         * Filter name
+         * Name of the filter key
          * @type {string || null}
          */
         this.Name = null;
@@ -38075,7 +38091,7 @@ class CreateImageExportJobResponse extends  AbstractModel {
 }
 
 /**
- * The project to which the host belongs
+ * Host Project Ownership
  * @class
  */
 class ProjectInfo extends  AbstractModel {
@@ -38083,13 +38099,13 @@ class ProjectInfo extends  AbstractModel {
         super();
 
         /**
-         * Project name
+         * Project name.
          * @type {string || null}
          */
         this.ProjectName = null;
 
         /**
-         * Project ID
+         * Project ID.
          * @type {number || null}
          */
         this.ProjectID = null;
@@ -46214,7 +46230,7 @@ class DescribeImageAutoAuthorizedRuleResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether the rule takes effect. Valid values: `0` (no); `1` (yes).
+         * Whether the Rule Is Effective. 0: Not Effective; 1: Effective
          * @type {number || null}
          */
         this.IsEnabled = null;
@@ -46244,13 +46260,13 @@ class DescribeImageAutoAuthorizedRuleResponse extends  AbstractModel {
         this.RuleId = null;
 
         /**
-         * 
+         * Auto-Scan Switch. 0: Off; 1: On
          * @type {number || null}
          */
         this.AutoScanEnabled = null;
 
         /**
-         * 
+         * Auto-Scan Range
          * @type {Array.<string> || null}
          */
         this.ScanType = null;
@@ -48807,13 +48823,13 @@ class ImageScanInquireInfo extends  AbstractModel {
         super();
 
         /**
-         * Billing item
+         * Billing item.
          * @type {string || null}
          */
         this.InquireKey = null;
 
         /**
-         * Total Capacity
+         * Total capacity
          * @type {number || null}
          */
         this.Capcity = null;
@@ -48831,15 +48847,15 @@ class ImageScanInquireInfo extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * End time
+         * End time.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
          * Billing status
-Pending purchase
-Normal: Normal.
+Pending: To be purchased
+Normal: normal.
 Isolate
          * @type {string || null}
          */
@@ -51127,7 +51143,7 @@ class DescribeAssetHostDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Server ID
+         * Host ID
          * @type {string || null}
          */
         this.HostId = null;

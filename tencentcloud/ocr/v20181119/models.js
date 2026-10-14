@@ -17,6 +17,34 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * GetOcrVerificationResult request structure.
+ * @class
+ */
+class GetOcrVerificationResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Token that identifies an SDK verification process. It is valid for 10 minutes. After the process completes, use this token to obtain the verification result information.
+         * @type {string || null}
+         */
+        this.SdkToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkToken = 'SdkToken' in params ? params.SdkToken : null;
+
+    }
+}
+
+/**
  * RecognizeMexicoVTID response structure.
  * @class
  */
@@ -1424,7 +1452,7 @@ class RecognizePhilippinesVoteIDOCRRequest extends  AbstractModel {
         super();
 
         /**
-         * Whether to return the identity photo.
+         * Whether to return the portrait photo.
          * @type {boolean || null}
          */
         this.ReturnHeadImage = null;
@@ -1734,7 +1762,7 @@ class RecognizeDetectCardCoordsRequest extends  AbstractModel {
 }
 
 /**
- * General card certificate information.
+ * General card certificate information
  * @class
  */
 class GeneralCard extends  AbstractModel {
@@ -1742,263 +1770,223 @@ class GeneralCard extends  AbstractModel {
         super();
 
         /**
-         * ID number.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>ID number</p>
          * @type {string || null}
          */
         this.LicenseNumber = null;
 
         /**
-         * Personal number. 
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Personal number, returned when the identity document type is passport</p>
          * @type {string || null}
          */
         this.PersonalNumber = null;
 
         /**
-         * Full name on the document.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Name</p>
          * @type {string || null}
          */
         this.FullName = null;
 
         /**
-         * Full name in local language.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Localized name</p>
          * @type {string || null}
          */
         this.FullNameLocal = null;
 
         /**
-         * First name or given name.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Name</p>
          * @type {string || null}
          */
         this.FirstName = null;
 
         /**
-         * First name in local language.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Localized name</p>
          * @type {string || null}
          */
         this.FirstNameLocal = null;
 
         /**
-         * Middle name.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Middle name</p>
          * @type {string || null}
          */
         this.MiddleName = null;
 
         /**
-         * Middle name in local language.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Localized middle name</p>
          * @type {string || null}
          */
         this.MiddleNameLocal = null;
 
         /**
-         * Last name or surname.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Last name</p>
          * @type {string || null}
          */
         this.LastName = null;
 
         /**
-         * Last name in local language.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Localized last name</p>
          * @type {string || null}
          */
         this.LastNameLocal = null;
 
         /**
-         * Gender on the document.
-- M: man.
-- F: woman.
-- X: other gender identity.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Gender on the document</p><ul><li>M: man</li><li>F: woman</li><li>X: other gender identity</li></ul>
          * @type {string || null}
          */
         this.Sex = null;
 
         /**
-         * Date of birth.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Date of birth</p>
          * @type {string || null}
          */
         this.Birthday = null;
 
         /**
-         * Birth place.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Birth place</p>
          * @type {string || null}
          */
         this.BirthPlace = null;
 
         /**
-         * Issue date.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Issue date, in YYYY-MM-DD format</p>
          * @type {string || null}
          */
         this.IssuedDate = null;
 
         /**
-         * Issuing authority.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Issuing authority</p>
          * @type {string || null}
          */
         this.IssuedAuthority = null;
 
         /**
-         * Place of issue.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Place where the specified file is issued</p>
          * @type {string || null}
          */
         this.IssuedPlace = null;
 
         /**
-         * Issuing country.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Issuing country</p>
          * @type {string || null}
          */
         this.IssuedCountry = null;
 
         /**
-         * Country code of issue, ISO Alpha-3 format.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Country code of the country that issued the file, ISO ALPHA-3 country/region code</p>
          * @type {string || null}
          */
         this.IssuedCountryCode = null;
 
         /**
-         * Expiry date.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Expiration date, in YYYY-MM-DD format</p>
          * @type {string || null}
          */
         this.ExpirationDate = null;
 
         /**
-         * First line of the Machine Readable Zone (MRZ).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Content of the single-line machine-readable zone (MRZ) on the document. The number represents the order in which the line appears in the MRZ</p>
          * @type {string || null}
          */
         this.MRZLine1 = null;
 
         /**
-         * Second line of the Machine Readable Zone (MRZ).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Content of the single-line machine-readable zone (MRZ) on the document. The number represents the line count in the order of the MRZ</p>
          * @type {string || null}
          */
         this.MRZLine2 = null;
 
         /**
-         * Document nationality, following ISO 3166 country coding specification.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Document nationality, returned following the ISO 3166 country coding specification</p>
          * @type {string || null}
          */
         this.Nationality = null;
 
         /**
-         * Address information on the document.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Address information on the document</p>
          * @type {AddressInfo || null}
          */
         this.Address = null;
 
         /**
-         * Religion (if displayed on the document).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Religious belief</p>
          * @type {string || null}
          */
         this.Religion = null;
 
         /**
-         * Type of document.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Document type</p>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Blood type.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Blood type</p>
          * @type {string || null}
          */
         this.BloodType = null;
 
         /**
-         * Height.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Height</p>
          * @type {string || null}
          */
         this.Height = null;
 
         /**
-         * Weight.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Weight</p>
          * @type {string || null}
          */
         this.Weight = null;
 
         /**
-         * Vehicle class authorized on the driver license (e.g., A, B, C).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Driver's license vehicle type (for example, A/B/C)</p>
          * @type {string || null}
          */
         this.VehicleClass = null;
 
         /**
-         * Restrictions on the driver license.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Driver's license restriction condition</p>
          * @type {string || null}
          */
         this.Restrictions = null;
 
         /**
-         * Endorsements or additional records on the driver license.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Driver's license extra records</p>
          * @type {string || null}
          */
         this.Endorsement = null;
 
         /**
-         * Supplementary fields (varies by document type).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Additional field</p>
          * @type {string || null}
          */
         this.Others = null;
 
         /**
-         * First line of the passport MRZ (Machine Readable Zone).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>MRZ line 1 of the passport</p>
          * @type {string || null}
          */
         this.PassportCodeFirst = null;
 
         /**
-         * Second line of the passport MRZ (Machine Readable Zone).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>MRZ line 2 of the passport</p>
          * @type {string || null}
          */
         this.PassportCodeSecond = null;
 
         /**
-         * Expiry date.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Validity date, in YYYY-MM-DD format</p>
          * @type {string || null}
          */
         this.DueDate = null;
 
         /**
-         * Age. 0 means no valid info.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Age. 0 means no valid info is obtained</p>
          * @type {string || null}
          */
         this.Age = null;
 
         /**
-         * Registration number.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Registration number</p>
          * @type {string || null}
          */
         this.RegistrationNumber = null;
@@ -2181,7 +2169,7 @@ class RecognizePhilippinesTinIDOCRResponse extends  AbstractModel {
         super();
 
         /**
-         * The Base64-encoded identity photo.
+         * Base64 encoded result of portrait photo.
          * @type {TextDetectionResult || null}
          */
         this.HeadPortrait = null;
@@ -2193,7 +2181,7 @@ class RecognizePhilippinesTinIDOCRResponse extends  AbstractModel {
         this.LicenseNumber = null;
 
         /**
-         * The full name.
+         * Full name of the taxpayer.
          * @type {TextDetectionResult || null}
          */
         this.FullName = null;
@@ -2215,6 +2203,30 @@ class RecognizePhilippinesTinIDOCRResponse extends  AbstractModel {
          * @type {TextDetectionResult || null}
          */
         this.IssueDate = null;
+
+        /**
+         * Given name of the taxpayer.
+         * @type {TextDetectionResult || null}
+         */
+        this.GivenName = null;
+
+        /**
+         * Last name of the taxpayer.
+         * @type {TextDetectionResult || null}
+         */
+        this.LastName = null;
+
+        /**
+         * Middle name of the taxpayer.
+         * @type {TextDetectionResult || null}
+         */
+        this.MiddleName = null;
+
+        /**
+         * Revenue district office where the taxpayer is registered.
+         * @type {TextDetectionResult || null}
+         */
+        this.RDO = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2266,6 +2278,30 @@ class RecognizePhilippinesTinIDOCRResponse extends  AbstractModel {
             let obj = new TextDetectionResult();
             obj.deserialize(params.IssueDate)
             this.IssueDate = obj;
+        }
+
+        if (params.GivenName) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.GivenName)
+            this.GivenName = obj;
+        }
+
+        if (params.LastName) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.LastName)
+            this.LastName = obj;
+        }
+
+        if (params.MiddleName) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.MiddleName)
+            this.MiddleName = obj;
+        }
+
+        if (params.RDO) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.RDO)
+            this.RDO = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2616,6 +2652,48 @@ class PortraitImageInfo extends  AbstractModel {
 }
 
 /**
+ * ApplyOcrToken response structure.
+ * @class
+ */
+class ApplyOcrTokenResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Token that identifies an SDK verification process. It is valid for 10 minutes. After the process completes, use this token to obtain the verification result information.
+         * @type {string || null}
+         */
+        this.SdkToken = null;
+
+        /**
+         * Encryption configuration generated on the server side.
+         * @type {string || null}
+         */
+        this.EncryptedConfig = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkToken = 'SdkToken' in params ? params.SdkToken : null;
+        this.EncryptedConfig = 'EncryptedConfig' in params ? params.EncryptedConfig : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GeneralBasicOCR response structure.
  * @class
  */
@@ -2786,7 +2864,7 @@ class RecognizePhilippinesSssIDOCRRequest extends  AbstractModel {
         super();
 
         /**
-         * Whether to return the identity photo.
+         * Whether to return the portrait photo.
          * @type {boolean || null}
          */
         this.ReturnHeadImage = null;
@@ -3268,7 +3346,7 @@ class RecognizeThaiIDCardOCRResponse extends  AbstractModel {
         this.Address = null;
 
         /**
-         * Laser ID on the back of the card.
+         * Laser ID on the back of the card
          * @type {string || null}
          */
         this.LaserID = null;
@@ -3287,14 +3365,14 @@ class RecognizeThaiIDCardOCRResponse extends  AbstractModel {
 -9103 Alarm for photographed certificate
 -9104 Alarm for tamper certificate
 -9107 Alarm for reflective certificate
--9108 Alarm for blurry certificate 
+-9108 Alarm for blurry certificate
 -9109 This capability is not enabled. Please contact customer support to activate the alert service
          * @type {Array.<number> || null}
          */
         this.WarnCardInfos = null;
 
         /**
-         * This field is deprecated and will always return "1". Usage is not recommended.
+         * <p>This field is deprecated and will always return "1". It is not recommended for use.</p>
          * @type {string || null}
          */
         this.AdvancedInfo = null;
@@ -3311,6 +3389,18 @@ true: complete; false: incomplete
          * @type {boolean || null}
          */
         this.IsComplete = null;
+
+        /**
+         * First name in Thai
+         * @type {string || null}
+         */
+        this.ThaiFirstName = null;
+
+        /**
+         * Last name in Thai
+         * @type {string || null}
+         */
+        this.ThaiLastName = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3346,6 +3436,8 @@ true: complete; false: incomplete
         this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
         this.CardCount = 'CardCount' in params ? params.CardCount : null;
         this.IsComplete = 'IsComplete' in params ? params.IsComplete : null;
+        this.ThaiFirstName = 'ThaiFirstName' in params ? params.ThaiFirstName : null;
+        this.ThaiLastName = 'ThaiLastName' in params ? params.ThaiLastName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3432,7 +3524,7 @@ class RecognizePhilippinesSssIDOCRResponse extends  AbstractModel {
         super();
 
         /**
-         * The Base64-encoded identity photo.
+         * Base64 encoded result of portrait photo.
          * @type {TextDetectionResult || null}
          */
         this.HeadPortrait = null;
@@ -3454,6 +3546,24 @@ class RecognizePhilippinesSssIDOCRResponse extends  AbstractModel {
          * @type {TextDetectionResult || null}
          */
         this.Birthday = null;
+
+        /**
+         * First name (given name) of the cardholder.
+         * @type {TextDetectionResult || null}
+         */
+        this.GivenName = null;
+
+        /**
+         * Family name (surname) of the cardholder.
+         * @type {TextDetectionResult || null}
+         */
+        this.Surname = null;
+
+        /**
+         * Middle name of the cardholder.
+         * @type {TextDetectionResult || null}
+         */
+        this.MiddleName = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3494,7 +3604,130 @@ class RecognizePhilippinesSssIDOCRResponse extends  AbstractModel {
             obj.deserialize(params.Birthday)
             this.Birthday = obj;
         }
+
+        if (params.GivenName) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.GivenName)
+            this.GivenName = obj;
+        }
+
+        if (params.Surname) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Surname)
+            this.Surname = obj;
+        }
+
+        if (params.MiddleName) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.MiddleName)
+            this.MiddleName = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ApplyOcrToken request structure.
+ * @class
+ */
+class ApplyOcrTokenRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Country code. ISO 3166-1 Alpha-3 country/region code standard.
+         * @type {string || null}
+         */
+        this.Nationality = null;
+
+        /**
+         * Supported countries/regions and document types:
+
+Mainland China: ID_CARD, PERMIT
+Hong Kong: ID_CARD
+Macao: ID_CARD
+Hong Kong/Macao/Taiwan: MAINLAND_PERMIT, HMT_RESIDENT_PERMIT
+Thailand: ID_CARD, THA_PINK_CARD
+Indonesia: ID_CARD
+Malaysia: ID_CARD
+Singapore: ID_CARD
+Philippines: PHL_UMID, PHL_VOTE_ID, PHL_TIN_ID, PHL_SSS_ID, DRIVING_LICENSE
+Any country/region: PASSPORT
+         * @type {string || null}
+         */
+        this.CardType = null;
+
+        /**
+         * SDK-generated device-related encryption configuration information.
+         * @type {string || null}
+         */
+        this.EncryptedConfig = null;
+
+        /**
+         * <p>Whether to extract the portrait image from the document. false by default</p><p>Default value: false</p>
+         * @type {boolean || null}
+         */
+        this.ReturnHeadImage = null;
+
+        /**
+         * <p>Maximum number of token retries</p><p>Value range: [1, 5]</p><p>Default value: 3</p>
+         * @type {number || null}
+         */
+        this.RetryLimit = null;
+
+        /**
+         * <p>SDK capture mode</p><p>Enumeration values:</p><ul><li>OCR_DETECT_MANUAL: Photo recognition mode. The system performs recognition after you tap to take a photo.</li><li>OCR_DETECT_AUTO_MANUAL: Automatic recognition mode. The system recognizes automatically, and you can switch to photo recognition after a recognition timeout.</li><li>OCR_DETECT_AUTO: Pure automatic recognition mode. The system recognizes automatically, and you cannot switch to photo recognition after a recognition timeout.</li><li>OCR_DETECT_AUTO_MULTI: Pure automatic recognition mode (multiple images). The system turns on the flash and automatically collects multiple document photos.</li></ul><p>Default value: OCR_DETECT_AUTO_MANUAL</p>
+         * @type {string || null}
+         */
+        this.OcrModeType = null;
+
+        /**
+         * <p>Whether to allow uploading gallery images for recognition.</p><p>Default value: true</p>
+         * @type {boolean || null}
+         */
+        this.AllowUploadPhoto = null;
+
+        /**
+         * <p>Whether to enable ID card photo cropping (remove extra edges outside the document and automatically correct the shooting angle). It is false by default and only applicable to Mainland ID cards.</p><p>Default value: false</p>
+         * @type {boolean || null}
+         */
+        this.CropIdCard = null;
+
+        /**
+         * <p>SDK-supported recognition version mode</p><p>Enumeration values:</p><ul><li>BASIC: Basic version</li><li>ENHANCED: Enhanced version</li></ul><p>Default value: BASIC</p>
+         * @type {string || null}
+         */
+        this.SdkVersion = null;
+
+        /**
+         * OCR automatic capture mode timeout (ms).
+Value range: [5000, 180000].
+Default value: 20000.
+If the value is below 5000, it is set to 5000; if above 180000, it is set to 180000.
+         * @type {number || null}
+         */
+        this.OcrAutoDetectTimeout = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Nationality = 'Nationality' in params ? params.Nationality : null;
+        this.CardType = 'CardType' in params ? params.CardType : null;
+        this.EncryptedConfig = 'EncryptedConfig' in params ? params.EncryptedConfig : null;
+        this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
+        this.RetryLimit = 'RetryLimit' in params ? params.RetryLimit : null;
+        this.OcrModeType = 'OcrModeType' in params ? params.OcrModeType : null;
+        this.AllowUploadPhoto = 'AllowUploadPhoto' in params ? params.AllowUploadPhoto : null;
+        this.CropIdCard = 'CropIdCard' in params ? params.CropIdCard : null;
+        this.SdkVersion = 'SdkVersion' in params ? params.SdkVersion : null;
+        this.OcrAutoDetectTimeout = 'OcrAutoDetectTimeout' in params ? params.OcrAutoDetectTimeout : null;
 
     }
 }
@@ -3633,7 +3866,7 @@ class RecognizeThaiIDCardOCRRequest extends  AbstractModel {
 
         /**
          * The Base64-encoded value of an image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
-Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, `ImageUrl` is used.
+Either ImageUrl or ImageBase64 of the image must be provided. If both are provided, ImageUrl is used.
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -3658,8 +3891,8 @@ We recommend that you store the image in Tencent Cloud for higher download speed
         this.BackImageUrl = null;
 
         /**
-         * Whether to crop the profile photo. The default value is `false`, meaning not to return the Base64-encoded value of the profile photo on the Thai identity card.
-When this parameter is set to `true`, the Base64-encoded value of the profile photo on the Thai identity card after rotation correction is returned.
+         * Whether to crop the profile photo. The default value is false, meaning not to return the Base64-encoded value of the profile photo on the Thai identity card.
+When this parameter is set to true, the Base64-encoded value of the profile photo on the Thai identity card after rotation correction is returned.
          * @type {boolean || null}
          */
         this.CropPortrait = null;
@@ -5313,7 +5546,7 @@ class RecognizePhilippinesVoteIDOCRResponse extends  AbstractModel {
         super();
 
         /**
-         * The Base64-encoded identity photo.
+         * Base64 encoded result of portrait photo.
          * @type {TextDetectionResult || null}
          */
         this.HeadPortrait = null;
@@ -5337,7 +5570,7 @@ class RecognizePhilippinesVoteIDOCRResponse extends  AbstractModel {
         this.FirstName = null;
 
         /**
-         * 
+         * The middle name.
          * @type {TextDetectionResult || null}
          */
         this.MiddleName = null;
@@ -6376,6 +6609,132 @@ class PODAuditAIResponse extends  AbstractModel {
 }
 
 /**
+ * GetOcrVerificationResult response structure.
+ * @class
+ */
+class GetOcrVerificationResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Indicates the completion status of an SDK verification process.</p><p>Enumeration values: </p><ul><li>PROCESSING: PROCESSING.</li><li>COMPLETE: Completed.</li></ul>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Front image of the card.
+         * @type {string || null}
+         */
+        this.CardImage = null;
+
+        /**
+         * Back image of the card.
+         * @type {string || null}
+         */
+        this.CardImageBack = null;
+
+        /**
+         * Portrait image on the front of the card.
+         * @type {string || null}
+         */
+        this.HeadImage = null;
+
+        /**
+         * Result code of this verification.
+         * @type {string || null}
+         */
+        this.ResultCode = null;
+
+        /**
+         * Indicates the risk level of the device from which the current request is sent. There are four levels:
+1 - Safe.
+2 - Low risk.
+3 - Medium risk.
+4 - High risk.
+Empty - The risk level is not obtained.
+Returned only in the enhanced version. Empty by default.
+         * @type {string || null}
+         */
+        this.DeviceInfoLevel = null;
+
+        /**
+         * Card recognition result. The latest result is taken as the valid one.
+         * @type {GeneralCard || null}
+         */
+        this.CardInfo = null;
+
+        /**
+         * Recognition result on the back of the card.
+         * @type {GeneralCard || null}
+         */
+        this.BackCardInfo = null;
+
+        /**
+         * Authenticity check. Valid values:
+0: Unable to determine (caused by blur, incompleteness, glare, or low brightness).
+1: Fake.
+2: Genuine.
+Only effective for Hong Kong, China ID card recognition. This field is gradually being phased out.
+         * @type {number || null}
+         */
+        this.FakeDetectResult = null;
+
+        /**
+         * Card Warning Information
+
+-9101 Alarm for covered certificate
+-9102 Alarm for photocopied certificate
+-9103 Alarm for photographed certificate
+-9104 Alarm for tamper certificate
+-9107 Alarm for reflective certificate
+-9108 Alarm for blurry certificate 
+-9109 This capability is not enabled. Please contact customer support to activate the alert service.
+         * @type {Array.<number> || null}
+         */
+        this.WarnCardInfos = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CardImage = 'CardImage' in params ? params.CardImage : null;
+        this.CardImageBack = 'CardImageBack' in params ? params.CardImageBack : null;
+        this.HeadImage = 'HeadImage' in params ? params.HeadImage : null;
+        this.ResultCode = 'ResultCode' in params ? params.ResultCode : null;
+        this.DeviceInfoLevel = 'DeviceInfoLevel' in params ? params.DeviceInfoLevel : null;
+
+        if (params.CardInfo) {
+            let obj = new GeneralCard();
+            obj.deserialize(params.CardInfo)
+            this.CardInfo = obj;
+        }
+
+        if (params.BackCardInfo) {
+            let obj = new GeneralCard();
+            obj.deserialize(params.BackCardInfo)
+            this.BackCardInfo = obj;
+        }
+        this.FakeDetectResult = 'FakeDetectResult' in params ? params.FakeDetectResult : null;
+        this.WarnCardInfos = 'WarnCardInfos' in params ? params.WarnCardInfos : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 
  * @class
  */
@@ -7389,7 +7748,7 @@ class RecognizePhilippinesDrivingLicenseOCRResponse extends  AbstractModel {
         super();
 
         /**
-         * The Base64-encoded identity photo.
+         * Base64 encoded result of portrait photo.
          * @type {TextDetectionResult || null}
          */
         this.HeadPortrait = null;
@@ -7425,7 +7784,7 @@ class RecognizePhilippinesDrivingLicenseOCRResponse extends  AbstractModel {
         this.Nationality = null;
 
         /**
-         * Gender
+         * Gender.
          * @type {TextDetectionResult || null}
          */
         this.Sex = null;
@@ -7459,6 +7818,48 @@ class RecognizePhilippinesDrivingLicenseOCRResponse extends  AbstractModel {
          * @type {TextDetectionResult || null}
          */
         this.Birthday = null;
+
+        /**
+         * Blood type of the  license holder.
+         * @type {TextDetectionResult || null}
+         */
+        this.BloodType = null;
+
+        /**
+         * Height of the license holder, in metres as printed on the card (e.g. 1.69).
+         * @type {TextDetectionResult || null}
+         */
+        this.Height = null;
+
+        /**
+         * Weight of the license holder, in kilograms (e.g. 65).
+         * @type {TextDetectionResult || null}
+         */
+        this.Weight = null;
+
+        /**
+         * Eye color of the license holder (e.g. BLACK).
+         * @type {TextDetectionResult || null}
+         */
+        this.EyeColor = null;
+
+        /**
+         * Driver's license codes indicating the vehicle categories the license holder is authorized to operate (e.g. A, A1, B, B1, B2, C, D, BE, CE).
+         * @type {TextDetectionResult || null}
+         */
+        this.DLCodes = null;
+
+        /**
+         * Restrictions that limit the license holder's driving privileges, such as transmission type (AT / MT) or vehicle-class limits.
+         * @type {TextDetectionResult || null}
+         */
+        this.Restrictions = null;
+
+        /**
+         * Driving conditions of the license holder (e.g. A = must wear glasses, D = daytime driving only).
+         * @type {TextDetectionResult || null}
+         */
+        this.Conditions = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -7547,13 +7948,55 @@ class RecognizePhilippinesDrivingLicenseOCRResponse extends  AbstractModel {
             obj.deserialize(params.Birthday)
             this.Birthday = obj;
         }
+
+        if (params.BloodType) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.BloodType)
+            this.BloodType = obj;
+        }
+
+        if (params.Height) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Height)
+            this.Height = obj;
+        }
+
+        if (params.Weight) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Weight)
+            this.Weight = obj;
+        }
+
+        if (params.EyeColor) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.EyeColor)
+            this.EyeColor = obj;
+        }
+
+        if (params.DLCodes) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.DLCodes)
+            this.DLCodes = obj;
+        }
+
+        if (params.Restrictions) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Restrictions)
+            this.Restrictions = obj;
+        }
+
+        if (params.Conditions) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Conditions)
+            this.Conditions = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * Overseas document recognition address information.
+ * Overseas document recognition address information
  * @class
  */
 class AddressInfo extends  AbstractModel {
@@ -7561,85 +8004,73 @@ class AddressInfo extends  AbstractModel {
         super();
 
         /**
-         * Country.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Country</p>
          * @type {string || null}
          */
         this.Country = null;
 
         /**
-         * Postal code.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Postal code</p>
          * @type {string || null}
          */
         this.PostalCode = null;
 
         /**
-         * Sub-region or state/province.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Sub-region</p>
          * @type {string || null}
          */
         this.Subdivision = null;
 
         /**
-         * District or county.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>District</p>
          * @type {string || null}
          */
         this.District = null;
 
         /**
-         * City name.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>City</p>
          * @type {string || null}
          */
         this.City = null;
 
         /**
-         * Subdistrict or township.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Sub-district office</p>
          * @type {string || null}
          */
         this.Subdistrict = null;
 
         /**
-         * Formatted complete address.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Complete address</p>
          * @type {string || null}
          */
         this.FormattedAddress = null;
 
         /**
-         * First line of the address bar.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>First line of the address bar</p>
          * @type {string || null}
          */
         this.LineOne = null;
 
         /**
-         * Second line of the address bar.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Second line of the address bar</p>
          * @type {string || null}
          */
         this.LineTwo = null;
 
         /**
-         * Specifies the third line of the address bar.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Third line of the address bar</p>
          * @type {string || null}
          */
         this.LineThree = null;
 
         /**
-         * Specifies the fourth line of the address bar.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Fourth line of the address bar</p>
          * @type {string || null}
          */
         this.LineFour = null;
 
         /**
-         * Specifies the fifth line of the address bar.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Fifth line of the address bar</p>
          * @type {string || null}
          */
         this.LineFive = null;
@@ -7670,6 +8101,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 module.exports = {
+    GetOcrVerificationResultRequest: GetOcrVerificationResultRequest,
     RecognizeMexicoVTIDResponse: RecognizeMexicoVTIDResponse,
     HKIDCardOCRRequest: HKIDCardOCRRequest,
     ExtractDocMultiRequest: ExtractDocMultiRequest,
@@ -7703,6 +8135,7 @@ module.exports = {
     GeneralAccurateOCRResponse: GeneralAccurateOCRResponse,
     HmtResidentPermitOCRRequest: HmtResidentPermitOCRRequest,
     PortraitImageInfo: PortraitImageInfo,
+    ApplyOcrTokenResponse: ApplyOcrTokenResponse,
     GeneralBasicOCRResponse: GeneralBasicOCRResponse,
     PermitOCRRequest: PermitOCRRequest,
     RecognizePhilippinesUMIDOCRRequest: RecognizePhilippinesUMIDOCRRequest,
@@ -7714,6 +8147,7 @@ module.exports = {
     RecognizeThaiIDCardOCRResponse: RecognizeThaiIDCardOCRResponse,
     ExtractDocMultiResponse: ExtractDocMultiResponse,
     RecognizePhilippinesSssIDOCRResponse: RecognizePhilippinesSssIDOCRResponse,
+    ApplyOcrTokenRequest: ApplyOcrTokenRequest,
     RecognizePhilippinesUMIDOCRResponse: RecognizePhilippinesUMIDOCRResponse,
     RecognizeThaiIDCardOCRRequest: RecognizeThaiIDCardOCRRequest,
     PassportRecognizeInfos: PassportRecognizeInfos,
@@ -7748,6 +8182,7 @@ module.exports = {
     ImageCoordinates: ImageCoordinates,
     RecognizeMexicoVTIDRequest: RecognizeMexicoVTIDRequest,
     PODAuditAIResponse: PODAuditAIResponse,
+    GetOcrVerificationResultResponse: GetOcrVerificationResultResponse,
     MainlandTravelPermitBackInfos: MainlandTravelPermitBackInfos,
     DetectedWordCoordPoint: DetectedWordCoordPoint,
     RecognizeBrazilDriverLicenseOCRResponse: RecognizeBrazilDriverLicenseOCRResponse,

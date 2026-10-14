@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const GetOcrVerificationResultRequest = models.GetOcrVerificationResultRequest;
 const RecognizeMexicoVTIDResponse = models.RecognizeMexicoVTIDResponse;
 const HKIDCardOCRRequest = models.HKIDCardOCRRequest;
 const ExtractDocMultiRequest = models.ExtractDocMultiRequest;
@@ -49,6 +50,7 @@ const BrazilDriverLicenseInfo = models.BrazilDriverLicenseInfo;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
 const HmtResidentPermitOCRRequest = models.HmtResidentPermitOCRRequest;
 const PortraitImageInfo = models.PortraitImageInfo;
+const ApplyOcrTokenResponse = models.ApplyOcrTokenResponse;
 const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
 const PermitOCRRequest = models.PermitOCRRequest;
 const RecognizePhilippinesUMIDOCRRequest = models.RecognizePhilippinesUMIDOCRRequest;
@@ -60,6 +62,7 @@ const GroupInfo = models.GroupInfo;
 const RecognizeThaiIDCardOCRResponse = models.RecognizeThaiIDCardOCRResponse;
 const ExtractDocMultiResponse = models.ExtractDocMultiResponse;
 const RecognizePhilippinesSssIDOCRResponse = models.RecognizePhilippinesSssIDOCRResponse;
+const ApplyOcrTokenRequest = models.ApplyOcrTokenRequest;
 const RecognizePhilippinesUMIDOCRResponse = models.RecognizePhilippinesUMIDOCRResponse;
 const RecognizeThaiIDCardOCRRequest = models.RecognizeThaiIDCardOCRRequest;
 const PassportRecognizeInfos = models.PassportRecognizeInfos;
@@ -94,6 +97,7 @@ const HmtResidentPermitOCRResponse = models.HmtResidentPermitOCRResponse;
 const ImageCoordinates = models.ImageCoordinates;
 const RecognizeMexicoVTIDRequest = models.RecognizeMexicoVTIDRequest;
 const PODAuditAIResponse = models.PODAuditAIResponse;
+const GetOcrVerificationResultResponse = models.GetOcrVerificationResultResponse;
 const MainlandTravelPermitBackInfos = models.MainlandTravelPermitBackInfos;
 const DetectedWordCoordPoint = models.DetectedWordCoordPoint;
 const RecognizeBrazilDriverLicenseOCRResponse = models.RecognizeBrazilDriverLicenseOCRResponse;
@@ -257,6 +261,17 @@ This interface supports regional scope: countries with machine-readable passport
     }
 
     /**
+     * This API retrieves the SDK verification result.
+     * @param {GetOcrVerificationResultRequest} req
+     * @param {function(string, GetOcrVerificationResultResponse):void} cb
+     * @public
+     */
+    GetOcrVerificationResult(req, cb) {
+        let resp = new GetOcrVerificationResultResponse();
+        this.request("GetOcrVerificationResult", req, resp, cb);
+    }
+
+    /**
      * This API is used to detect and recognize characters in an image in the following 20 languages: Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, and Arabic. Mixed characters in English and each supported language can be recognized together.
 
 It can recognize printed text in paper documents, online images, ads, signboards, menus, video titles, profile photos, etc.
@@ -287,7 +302,9 @@ A maximum of 10 requests can be initiated per second for this API.
     }
 
     /**
-     * This API is used to recognize the fields on a Thai identity card, including name in Thai, name in English, address, date of birth, identification number, date of issue, and date of expiry.
+     * Domain name for API request: ocr.intl.tencentcloudapi.com.
+
+This API is used to recognize the fields on a Thai identity card, including name in Thai, name in English, address, date of birth, identification number, date of issue, and date of expiry.
 
 A maximum of 10 requests can be initiated per second for this API.
      * @param {RecognizeThaiIDCardOCRRequest} req
@@ -359,16 +376,17 @@ Default API request rate limit: 20 requests/second.
     }
 
     /**
-     * This interface recognizes all fields on both sides of the Mainland China Resident Identity Card (second-generation), including name, gender, ethnicity, date of birth, address, ID number, issuing authority, and validity period, with an accuracy of over 99%.
+     * This API supports identifying and extracting field information in structured scenarios such as complex scenarios and multiple formats. Key scenarios include: finance, health care, transportation, travel, insurance. Click [experience now](https://ocrdemo.cloud.tencent.com/).
+This API is used to set the alias SmartStructuralPro.
 
-In addition, the interface provides additional features for various scenarios, such as ID card and portrait photo cropping, along with five alarm detections (see table below).<table style="width:650px"> <thead> <tr> <th width="150">Value-added ability</th> <th width="500">Ability items</th> </tr> </thead> <tbody> <tr> <td rowspan="9">Alarm function</td> </tr> <tr> <td>ID card photocopy warning</td> </tr> <tr> <td>ID card on-screen display warning</td> </tr> <tr> <td>Alarm for occlusion in the ID card frame</td> </tr> <tr> <td>ID card reflective warning</td> </tr> <tr> <td>Blurry picture warning</td> </tr> </tbody> </table> Default rate limit: 20 requests/second.
-     * @param {RecognizeMainlandIDCardOCRRequest} req
-     * @param {function(string, RecognizeMainlandIDCardOCRResponse):void} cb
+The default API request rate limit is 5 requests per second.
+     * @param {ExtractDocMultiRequest} req
+     * @param {function(string, ExtractDocMultiResponse):void} cb
      * @public
      */
-    RecognizeMainlandIDCardOCR(req, cb) {
-        let resp = new RecognizeMainlandIDCardOCRResponse();
-        this.request("RecognizeMainlandIDCardOCR", req, resp, cb);
+    ExtractDocMulti(req, cb) {
+        let resp = new ExtractDocMultiResponse();
+        this.request("ExtractDocMulti", req, resp, cb);
     }
 
     /**
@@ -404,6 +422,17 @@ The API request rate is limited to 20 requests/sec by default.
     RecognizePhilippinesUMIDOCR(req, cb) {
         let resp = new RecognizePhilippinesUMIDOCRResponse();
         this.request("RecognizePhilippinesUMIDOCR", req, resp, cb);
+    }
+
+    /**
+     * This API retrieves a token before each call to the OCR SDK verification service. Save the token to initiate the verification process and retrieve the verification result after the process completes.
+     * @param {ApplyOcrTokenRequest} req
+     * @param {function(string, ApplyOcrTokenResponse):void} cb
+     * @public
+     */
+    ApplyOcrToken(req, cb) {
+        let resp = new ApplyOcrTokenResponse();
+        this.request("ApplyOcrToken", req, resp, cb);
     }
 
     /**
@@ -500,17 +529,16 @@ Default API request rate limit: 5 requests/second.
     }
 
     /**
-     * This API supports identifying and extracting field information in structured scenarios such as complex scenarios and multiple formats. Key scenarios include: finance, health care, transportation, travel, insurance. Click [experience now](https://ocrdemo.cloud.tencent.com/).
-This API is used to set the alias SmartStructuralPro.
+     * This interface recognizes all fields on both sides of the Mainland China Resident Identity Card (second-generation), including name, gender, ethnicity, date of birth, address, ID number, issuing authority, and validity period, with an accuracy of over 99%.
 
-The default API request rate limit is 5 requests per second.
-     * @param {ExtractDocMultiRequest} req
-     * @param {function(string, ExtractDocMultiResponse):void} cb
+In addition, the interface provides additional features for various scenarios, such as ID card and portrait photo cropping, along with five alarm detections (see table below).<table style="width:650px"> <thead> <tr> <th width="150">Value-added ability</th> <th width="500">Ability items</th> </tr> </thead> <tbody> <tr> <td rowspan="9">Alarm function</td> </tr> <tr> <td>ID card photocopy warning</td> </tr> <tr> <td>ID card on-screen display warning</td> </tr> <tr> <td>Alarm for occlusion in the ID card frame</td> </tr> <tr> <td>ID card reflective warning</td> </tr> <tr> <td>Blurry picture warning</td> </tr> </tbody> </table> Default rate limit: 20 requests/second.
+     * @param {RecognizeMainlandIDCardOCRRequest} req
+     * @param {function(string, RecognizeMainlandIDCardOCRResponse):void} cb
      * @public
      */
-    ExtractDocMulti(req, cb) {
-        let resp = new ExtractDocMultiResponse();
-        this.request("ExtractDocMulti", req, resp, cb);
+    RecognizeMainlandIDCardOCR(req, cb) {
+        let resp = new RecognizeMainlandIDCardOCRResponse();
+        this.request("RecognizeMainlandIDCardOCR", req, resp, cb);
     }
 
 

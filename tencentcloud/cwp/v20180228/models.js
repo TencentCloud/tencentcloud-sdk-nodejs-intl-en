@@ -34091,7 +34091,7 @@ class ModifyWebPageProtectDirRequest extends  AbstractModel {
         this.ProtectDirAddr = null;
 
         /**
-         * Website protection directory name
+         * Name of the website protection directory
          * @type {string || null}
          */
         this.ProtectDirName = null;
@@ -51605,7 +51605,7 @@ class DescribeVulHostCountScanTimeRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Machine protection information
  * @class
  */
 class ProtectHostConfig extends  AbstractModel {
@@ -51613,19 +51613,19 @@ class ProtectHostConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Unique host ID.
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
-         * 
+         * Protection switch: 0 - off; 1 - on
          * @type {number || null}
          */
         this.ProtectSwitch = null;
 
         /**
-         * 
+         * Auto recovery switch. 0: disabled. 1: enabled.
          * @type {number || null}
          */
         this.AutoRecovery = null;

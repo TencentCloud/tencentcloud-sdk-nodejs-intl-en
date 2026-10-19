@@ -51,7 +51,7 @@ const DescribeTaskListResponse = models.DescribeTaskListResponse;
 const ModifyInstancePasswordResponse = models.ModifyInstancePasswordResponse;
 const DescribeSecondLevelBackupInfoResponse = models.DescribeSecondLevelBackupInfoResponse;
 const RenewInstanceResponse = models.RenewInstanceResponse;
-const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
+const DescribeInstancePasswordPolicyResponse = models.DescribeInstancePasswordPolicyResponse;
 const DescribeCommonDBInstancesRequest = models.DescribeCommonDBInstancesRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
@@ -67,7 +67,7 @@ const InstanceProxySlowlogDetail = models.InstanceProxySlowlogDetail;
 const SecurityGroupsInboundAndOutbound = models.SecurityGroupsInboundAndOutbound;
 const ModifyLogRequest = models.ModifyLogRequest;
 const ClearInstanceRequest = models.ClearInstanceRequest;
-const UpgradeInstanceVersionRequest = models.UpgradeInstanceVersionRequest;
+const DescribeInstancePasswordPolicyRequest = models.DescribeInstancePasswordPolicyRequest;
 const RegionConf = models.RegionConf;
 const BigKeyInfo = models.BigKeyInfo;
 const DescribeBandwidthRangeResponse = models.DescribeBandwidthRangeResponse;
@@ -105,9 +105,10 @@ const DestroyPostpaidInstanceResponse = models.DestroyPostpaidInstanceResponse;
 const SwitchInstanceVipRequest = models.SwitchInstanceVipRequest;
 const ChangeReplicaToMasterRequest = models.ChangeReplicaToMasterRequest;
 const ProxyNodes = models.ProxyNodes;
-const ModifyInstanceResponse = models.ModifyInstanceResponse;
+const DescribeBackupEncryptConfigResponse = models.DescribeBackupEncryptConfigResponse;
 const RedisCommonInstanceList = models.RedisCommonInstanceList;
 const SourceInfo = models.SourceInfo;
+const ModifyInstancePasswordPolicyResponse = models.ModifyInstancePasswordPolicyResponse;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const ChangeMasterInstanceRequest = models.ChangeMasterInstanceRequest;
 const DescribeInstanceDTSInfoRequest = models.DescribeInstanceDTSInfoRequest;
@@ -117,6 +118,7 @@ const DescribeTendisSlowLogResponse = models.DescribeTendisSlowLogResponse;
 const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
 const ModifyInstanceAccountRequest = models.ModifyInstanceAccountRequest;
 const ModifyMaintenanceWindowRequest = models.ModifyMaintenanceWindowRequest;
+const SecondLevelBackupMissingTimestamps = models.SecondLevelBackupMissingTimestamps;
 const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
 const DescribeBackupUrlResponse = models.DescribeBackupUrlResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
@@ -146,6 +148,7 @@ const DeleteReplicationInstanceRequest = models.DeleteReplicationInstanceRequest
 const SwitchAccessNewInstanceRequest = models.SwitchAccessNewInstanceRequest;
 const RemoveReplicationGroupResponse = models.RemoveReplicationGroupResponse;
 const KillMasterGroupRequest = models.KillMasterGroupRequest;
+const UpgradeInstanceProductVersionResponse = models.UpgradeInstanceProductVersionResponse;
 const SwitchAccessNewInstanceResponse = models.SwitchAccessNewInstanceResponse;
 const CloneInstancesResponse = models.CloneInstancesResponse;
 const DescribeBackupDownloadRestrictionResponse = models.DescribeBackupDownloadRestrictionResponse;
@@ -160,7 +163,7 @@ const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsR
 const DescribeTaskListRequest = models.DescribeTaskListRequest;
 const ChangeMasterInstanceResponse = models.ChangeMasterInstanceResponse;
 const ModifyInstanceEventRequest = models.ModifyInstanceEventRequest;
-const SecondLevelBackupMissingTimestamps = models.SecondLevelBackupMissingTimestamps;
+const ModifyBackupEncryptResponse = models.ModifyBackupEncryptResponse;
 const DescribeBackupDetailResponse = models.DescribeBackupDetailResponse;
 const ChangeReplicaToMasterResponse = models.ChangeReplicaToMasterResponse;
 const CreateInstancesResponse = models.CreateInstancesResponse;
@@ -209,7 +212,7 @@ const TradeDealDetail = models.TradeDealDetail;
 const ResourceTag = models.ResourceTag;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const LogDeliveryInfo = models.LogDeliveryInfo;
-const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
+const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
 const DescribeInstanceMonitorBigKeyTypeDistResponse = models.DescribeInstanceMonitorBigKeyTypeDistResponse;
 const DeleteReplicationInstanceResponse = models.DeleteReplicationInstanceResponse;
 const CleanUpInstanceRequest = models.CleanUpInstanceRequest;
@@ -223,7 +226,7 @@ const DescribeSlowLogRequest = models.DescribeSlowLogRequest;
 const Filter = models.Filter;
 const ModifyInstancePasswordRequest = models.ModifyInstancePasswordRequest;
 const ModifyReplicationGroupResponse = models.ModifyReplicationGroupResponse;
-const InstanceInfo = models.InstanceInfo;
+const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
 const ReleaseWanAddressResponse = models.ReleaseWanAddressResponse;
 const DescribeAutoBackupConfigRequest = models.DescribeAutoBackupConfigRequest;
 const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
@@ -233,13 +236,17 @@ const CloseLogResponse = models.CloseLogResponse;
 const DeleteInstanceAccountRequest = models.DeleteInstanceAccountRequest;
 const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKeyRequest;
 const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
+const ModifyInstanceResponse = models.ModifyInstanceResponse;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const ResourceBundle = models.ResourceBundle;
 const ManualBackupInstanceRequest = models.ManualBackupInstanceRequest;
 const DescribeReplicationGroupResponse = models.DescribeReplicationGroupResponse;
+const ModifyInstancePasswordPolicyRequest = models.ModifyInstancePasswordPolicyRequest;
+const DescribeBackupEncryptConfigRequest = models.DescribeBackupEncryptConfigRequest;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
 const AvailableRegion = models.AvailableRegion;
 const FailedInstance = models.FailedInstance;
+const UpgradeInstanceProductVersionRequest = models.UpgradeInstanceProductVersionRequest;
 const ReleaseWanAddressRequest = models.ReleaseWanAddressRequest;
 const CloseSSLResponse = models.CloseSSLResponse;
 const ModifyMaintenanceWindowResponse = models.ModifyMaintenanceWindowResponse;
@@ -296,6 +303,7 @@ const DescribeInstanceBackupsRequest = models.DescribeInstanceBackupsRequest;
 const PasswordPolicy = models.PasswordPolicy;
 const DescribeSecondLevelBackupInfoRequest = models.DescribeSecondLevelBackupInfoRequest;
 const SecurityGroupDetail = models.SecurityGroupDetail;
+const InstanceInfo = models.InstanceInfo;
 const InquiryPriceUpgradeInstanceResponse = models.InquiryPriceUpgradeInstanceResponse;
 const DeleteInstanceAccountResponse = models.DeleteInstanceAccountResponse;
 const DescribeInstanceMonitorSIPRequest = models.DescribeInstanceMonitorSIPRequest;
@@ -304,8 +312,10 @@ const OpenSSLResponse = models.OpenSSLResponse;
 const ModifyInstanceLogDeliveryRequest = models.ModifyInstanceLogDeliveryRequest;
 const ChangeInstanceRoleResponse = models.ChangeInstanceRoleResponse;
 const DescribeGlobalReplicationAreaResponse = models.DescribeGlobalReplicationAreaResponse;
+const ModifyBackupEncryptRequest = models.ModifyBackupEncryptRequest;
 const ZoneCapacityConf = models.ZoneCapacityConf;
 const ModifyInstanceEventResponse = models.ModifyInstanceEventResponse;
+const UpgradeInstanceVersionRequest = models.UpgradeInstanceVersionRequest;
 const TendisSlowLogDetail = models.TendisSlowLogDetail;
 const DescribeInstanceNodeInfoResponse = models.DescribeInstanceNodeInfoResponse;
 const DescribeProjectSecurityGroupResponse = models.DescribeProjectSecurityGroupResponse;
@@ -538,14 +548,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the parameter configuration of a Redis instance.
-     * @param {ModifyInstanceParamsRequest} req
-     * @param {function(string, ModifyInstanceParamsResponse):void} cb
+     * This API is used to query information related to backup encryption for an instance, including the enabled status and encryption keys.
+     * @param {DescribeBackupEncryptConfigRequest} req
+     * @param {function(string, DescribeBackupEncryptConfigResponse):void} cb
      * @public
      */
-    ModifyInstanceParams(req, cb) {
-        let resp = new ModifyInstanceParamsResponse();
-        this.request("ModifyInstanceParams", req, resp, cb);
+    DescribeBackupEncryptConfig(req, cb) {
+        let resp = new DescribeBackupEncryptConfigResponse();
+        this.request("DescribeBackupEncryptConfig", req, resp, cb);
     }
 
     /**
@@ -571,6 +581,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the password complexity of an instance.
+     * @param {ModifyInstancePasswordPolicyRequest} req
+     * @param {function(string, ModifyInstancePasswordPolicyResponse):void} cb
+     * @public
+     */
+    ModifyInstancePasswordPolicy(req, cb) {
+        let resp = new ModifyInstancePasswordPolicyResponse();
+        this.request("ModifyInstancePasswordPolicy", req, resp, cb);
+    }
+
+    /**
      * This API is used to query second-level backup information for the instance.
      * @param {DescribeSecondLevelBackupInfoRequest} req
      * @param {function(string, DescribeSecondLevelBackupInfoResponse):void} cb
@@ -582,14 +603,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the connection configuration of an instance, including the bandwidth and maximum number of connections.
-     * @param {ModifyConnectionConfigRequest} req
-     * @param {function(string, ModifyConnectionConfigResponse):void} cb
+     * This API is used to unbind security groups from instances in batches.
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
      * @public
      */
-    ModifyConnectionConfig(req, cb) {
-        let resp = new ModifyConnectionConfigResponse();
-        this.request("ModifyConnectionConfig", req, resp, cb);
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -835,6 +856,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the parameter configuration of a Redis instance.
+     * @param {ModifyInstanceParamsRequest} req
+     * @param {function(string, ModifyInstanceParamsResponse):void} cb
+     * @public
+     */
+    ModifyInstanceParams(req, cb) {
+        let resp = new ModifyInstanceParamsResponse();
+        this.request("ModifyInstanceParams", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the parameter template.
      * @param {ModifyParamTemplateRequest} req
      * @param {function(string, ModifyParamTemplateResponse):void} cb
@@ -923,14 +955,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to unbind security groups from instances in batches.
-     * @param {DisassociateSecurityGroupsRequest} req
-     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * This API is used to modify the connection configuration of an instance, including the bandwidth and maximum number of connections.
+     * @param {ModifyConnectionConfigRequest} req
+     * @param {function(string, ModifyConnectionConfigResponse):void} cb
      * @public
      */
-    DisassociateSecurityGroups(req, cb) {
-        let resp = new DisassociateSecurityGroupsResponse();
-        this.request("DisassociateSecurityGroups", req, resp, cb);
+    ModifyConnectionConfig(req, cb) {
+        let resp = new ModifyConnectionConfigResponse();
+        this.request("ModifyConnectionConfig", req, resp, cb);
     }
 
     /**
@@ -953,6 +985,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceSpecBandwidth(req, cb) {
         let resp = new DescribeInstanceSpecBandwidthResponse();
         this.request("DescribeInstanceSpecBandwidth", req, resp, cb);
+    }
+
+    /**
+     * This API is used to turn on or disable backup encryption and modify backup key functionality.
+     * @param {ModifyBackupEncryptRequest} req
+     * @param {function(string, ModifyBackupEncryptResponse):void} cb
+     * @public
+     */
+    ModifyBackupEncrypt(req, cb) {
+        let resp = new ModifyBackupEncryptResponse();
+        this.request("ModifyBackupEncrypt", req, resp, cb);
     }
 
     /**
@@ -1275,6 +1318,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to upgrade the instance type from common I to common II.
+     * @param {UpgradeInstanceProductVersionRequest} req
+     * @param {function(string, UpgradeInstanceProductVersionResponse):void} cb
+     * @public
+     */
+    UpgradeInstanceProductVersion(req, cb) {
+        let resp = new UpgradeInstanceProductVersionResponse();
+        this.request("UpgradeInstanceProductVersion", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the records of slow query.
      * @param {DescribeSlowLogRequest} req
      * @param {function(string, DescribeSlowLogResponse):void} cb
@@ -1514,6 +1568,17 @@ class RedisClient extends AbstractClient {
     DescribeProxySlowLog(req, cb) {
         let resp = new DescribeProxySlowLogResponse();
         this.request("DescribeProxySlowLog", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the current password complexity configuration of a specified instance.
+     * @param {DescribeInstancePasswordPolicyRequest} req
+     * @param {function(string, DescribeInstancePasswordPolicyResponse):void} cb
+     * @public
+     */
+    DescribeInstancePasswordPolicy(req, cb) {
+        let resp = new DescribeInstancePasswordPolicyResponse();
+        this.request("DescribeInstancePasswordPolicy", req, resp, cb);
     }
 
     /**

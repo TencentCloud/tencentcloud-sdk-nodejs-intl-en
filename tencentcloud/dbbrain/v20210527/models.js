@@ -1273,6 +1273,265 @@ class SlowLogTopSqlItem extends  AbstractModel {
 }
 
 /**
+ * A single audit log detail at the proxy layer. The fields are output by DruidCommonUtil#changeLogsTdsqlProxy and BusinessCodeUtils.
+ * @class
+ */
+class AuditProxyLogItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Time point of SQL execution (format string, yyyy-MM-dd HH:mm:ss).</p>
+         * @type {string || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * <p>Cluster ID (dcdb/mariadb cluster identifier, same as InstanceId).</p>
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * <p>Number of affected rows.</p>
+         * @type {number || null}
+         */
+        this.AffectRows = null;
+
+        /**
+         * <p>Whether to autocommit. 1 means enabling, and 0 means disabling.</p>
+         * @type {string || null}
+         */
+        this.Autocommit = null;
+
+        /**
+         * <p>MySQL network protocol command types (such as COM_QUERY and COM_CONNECT).</p>
+         * @type {string || null}
+         */
+        this.ComType = null;
+
+        /**
+         * <p>Duration of creating a connection.</p>
+         * @type {number || null}
+         */
+        this.ConnTc = null;
+
+        /**
+         * <p>Backend DB instance address (multiple entries are separated by commas).</p>
+         * @type {string || null}
+         */
+        this.DBHost = null;
+
+        /**
+         * <p>Database name where the SQL is executed.</p>
+         * @type {string || null}
+         */
+        this.DBName = null;
+
+        /**
+         * <p>Error code returned by SQL execution. 0 indicates success.</p>
+         * @type {string || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * <p>Error message.</p>
+         * @type {string || null}
+         */
+        this.ErrInfo = null;
+
+        /**
+         * <p>SQL execution time (µs).</p>
+         * @type {number || null}
+         */
+        this.ExecTime = null;
+
+        /**
+         * <p>Number of connections still occupied after request ends (typically 0 for non-transaction requests).</p>
+         * @type {string || null}
+         */
+        this.HoldConns = null;
+
+        /**
+         * <p>Client source IP.</p>
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * <p>Whether to enable global consistency read (0: no, 1: yes).</p>
+         * @type {string || null}
+         */
+        this.Mc = null;
+
+        /**
+         * <p>SQL start time (microsecond portion in microsecond precision).</p>
+         * @type {number || null}
+         */
+        this.SqlStartTimeUs = null;
+
+        /**
+         * <p>Number of connections created in the current request.</p>
+         * @type {number || null}
+         */
+        this.NewConnNum = null;
+
+        /**
+         * <p>Proxy node address.</p>
+         * @type {string || null}
+         */
+        this.ProxyHost = null;
+
+        /**
+         * <p>Proxy ID.</p>
+         * @type {string || null}
+         */
+        this.ProxyId = null;
+
+        /**
+         * <p>Query ID (used for join queries).</p>
+         * @type {string || null}
+         */
+        this.QueryId = null;
+
+        /**
+         * <p>Number of rows returned (rows in the scanning result set).</p>
+         * @type {number || null}
+         */
+        this.SentRows = null;
+
+        /**
+         * <p>Whether it is a query rewritten by Proxy: 0 original query, 1 rewritten query.</p>
+         * @type {number || null}
+         */
+        this.Splited = null;
+
+        /**
+         * <p>Original executed SQL statement.</p>
+         * @type {string || null}
+         */
+        this.Sql = null;
+
+        /**
+         * <p>SQL template.</p>
+         * @type {string || null}
+         */
+        this.SqlTemplate = null;
+
+        /**
+         * <p>SQL Template ID.</p>
+         * @type {string || null}
+         */
+        this.SqlTemplateId = null;
+
+        /**
+         * <p>SQL type (for example, Select, Insert, Create, Login, Set).</p>
+         * @type {string || null}
+         */
+        this.SqlType = null;
+
+        /**
+         * <p>Tables involved (separated by commas for multiple tables).</p>
+         * @type {string || null}
+         */
+        this.Tables = null;
+
+        /**
+         * <p>Thread ID.</p>
+         * @type {string || null}
+         */
+        this.ThreadId = null;
+
+        /**
+         * <p>SQL start time (millisecond-level timestamp).</p>
+         * @type {number || null}
+         */
+        this.SqlStartTime = null;
+
+        /**
+         * <p>Database username that executes the SQL.</p>
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * <p>HostPort of the client connection.</p>
+         * @type {string || null}
+         */
+        this.HostPort = null;
+
+        /**
+         * <p>Proxy Node processing thread ID.</p>
+         * @type {string || null}
+         */
+        this.ProxyThread = null;
+
+        /**
+         * <p>Number of backend DB hosts.</p>
+         * @type {string || null}
+         */
+        this.DbHostNum = null;
+
+        /**
+         * <p>Business code (extracted from i/o/p and other KV in business-side SQL annotations).</p>
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * <p>Business tag (completed post based on the business code).</p>
+         * @type {string || null}
+         */
+        this.BusinessTag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AffectRows = 'AffectRows' in params ? params.AffectRows : null;
+        this.Autocommit = 'Autocommit' in params ? params.Autocommit : null;
+        this.ComType = 'ComType' in params ? params.ComType : null;
+        this.ConnTc = 'ConnTc' in params ? params.ConnTc : null;
+        this.DBHost = 'DBHost' in params ? params.DBHost : null;
+        this.DBName = 'DBName' in params ? params.DBName : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.ErrInfo = 'ErrInfo' in params ? params.ErrInfo : null;
+        this.ExecTime = 'ExecTime' in params ? params.ExecTime : null;
+        this.HoldConns = 'HoldConns' in params ? params.HoldConns : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.Mc = 'Mc' in params ? params.Mc : null;
+        this.SqlStartTimeUs = 'SqlStartTimeUs' in params ? params.SqlStartTimeUs : null;
+        this.NewConnNum = 'NewConnNum' in params ? params.NewConnNum : null;
+        this.ProxyHost = 'ProxyHost' in params ? params.ProxyHost : null;
+        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.QueryId = 'QueryId' in params ? params.QueryId : null;
+        this.SentRows = 'SentRows' in params ? params.SentRows : null;
+        this.Splited = 'Splited' in params ? params.Splited : null;
+        this.Sql = 'Sql' in params ? params.Sql : null;
+        this.SqlTemplate = 'SqlTemplate' in params ? params.SqlTemplate : null;
+        this.SqlTemplateId = 'SqlTemplateId' in params ? params.SqlTemplateId : null;
+        this.SqlType = 'SqlType' in params ? params.SqlType : null;
+        this.Tables = 'Tables' in params ? params.Tables : null;
+        this.ThreadId = 'ThreadId' in params ? params.ThreadId : null;
+        this.SqlStartTime = 'SqlStartTime' in params ? params.SqlStartTime : null;
+        this.User = 'User' in params ? params.User : null;
+        this.HostPort = 'HostPort' in params ? params.HostPort : null;
+        this.ProxyThread = 'ProxyThread' in params ? params.ProxyThread : null;
+        this.DbHostNum = 'DbHostNum' in params ? params.DbHostNum : null;
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.BusinessTag = 'BusinessTag' in params ? params.BusinessTag : null;
+
+    }
+}
+
+/**
  * DescribeAuditInstanceList response structure.
  * @class
  */
@@ -1554,6 +1813,116 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.ScoreDetails.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeDBAuditLogs request structure.
+ * @class
+ */
+class DescribeDBAuditLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Service product type. Currently, Cloud API only supports: dcdb, mariadb (cdb and cynosdb have been migrated to the central platform).</p>
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * <p>Start time, format yyyy-MM-dd HH:mm:ss.</p>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * <p>End time, format: yyyy-MM-dd HH:mm:ss.</p>
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * <p>Instance ID, required. In dcdb and mariadb scenarios, query audit logs by instance dimension.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Log type: Proxy log, DB database log, All.</p>
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * <p>Sorting field. Default: Timestamp.</p>
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+        /**
+         * <p>Sorting method: ASC for ascending order, DESC for descending order. Default: DESC.</p>
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * <p>Offset. Default value: 0.</p>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * <p>Number of returned results. Default: 20. Maximum: 100.</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <p>SQL start time (millisecond-level timestamp), used when performing a join query by QueryId.</p>
+         * @type {number || null}
+         */
+        this.SqlStartTime = null;
+
+        /**
+         * <p>A collection of query filter criteria for audit logs.</p>
+         * @type {AuditLogQueryFilter || null}
+         */
+        this.Filter = null;
+
+        /**
+         * <p>Cluster ID. Query audit logs for the dcdb product at the cluster level</p>
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SqlStartTime = 'SqlStartTime' in params ? params.SqlStartTime : null;
+
+        if (params.Filter) {
+            let obj = new AuditLogQueryFilter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -2076,30 +2445,126 @@ class DescribeSlowLogsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeSecurityAuditLogDownloadUrls request structure.
+ * Collection of query filter criteria for audit logs. All fields are selectable. Note: MultiSql and ExcludeMultiSql carry a two-dimensional array as a JSON string (the cloud API platform does not support two-dimensional arrays). For example, [[a,b]] means (a OR b).
  * @class
  */
-class DescribeSecurityAuditLogDownloadUrlsRequest extends  AbstractModel {
+class AuditLogQueryFilter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Security audit group ID.
-         * @type {string || null}
+         * <p>SQL type list, with values such as SELECT, INSERT, UPDATE, and DELETE.</p>
+         * @type {Array.<string> || null}
          */
-        this.SecAuditGroupId = null;
+        this.SqlType = null;
 
         /**
-         * Async task Id.
-         * @type {number || null}
+         * <p>Execution duration range (ms), an array of length 2: [minimum value, maximum value].</p>
+         * @type {Array.<number> || null}
          */
-        this.AsyncRequestId = null;
+        this.ExecTime = null;
 
         /**
-         * Service type. Valid value: `mysql` (TencentDB for MySQL).
+         * <p>IO waiting duration range (ms), an array with a length of 2.</p>
+         * @type {Array.<number> || null}
+         */
+        this.IoWaitTime = null;
+
+        /**
+         * <p>CPU duration range (ms), an array of length 2.</p>
+         * @type {Array.<number> || null}
+         */
+        this.CpuTime = null;
+
+        /**
+         * <p>Lock wait time range (ms), an array with a length of 2.</p>
+         * @type {Array.<number> || null}
+         */
+        this.LockWaitTime = null;
+
+        /**
+         * <p>SQL execution error code. For example, 0 indicates success.</p>
          * @type {string || null}
          */
-        this.Product = null;
+        this.ErrCode = null;
+
+        /**
+         * <p>Error message.</p>
+         * @type {string || null}
+         */
+        this.ErrInfo = null;
+
+        /**
+         * <p>Database name list.</p>
+         * @type {Array.<string> || null}
+         */
+        this.DBName = null;
+
+        /**
+         * <p>Username list.</p>
+         * @type {Array.<string> || null}
+         */
+        this.User = null;
+
+        /**
+         * <p>Source IP list.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Host = null;
+
+        /**
+         * <p>List of thread IDs.</p>
+         * @type {Array.<string> || null}
+         */
+        this.ThreadId = null;
+
+        /**
+         * <p>List of proxy node hosts.</p>
+         * @type {Array.<string> || null}
+         */
+        this.ProxyHostList = null;
+
+        /**
+         * <p>Backend Set Host list.</p>
+         * @type {Array.<string> || null}
+         */
+        this.SetHostList = null;
+
+        /**
+         * <p>Backend Set ID list.</p>
+         * @type {Array.<string> || null}
+         */
+        this.SetIdList = null;
+
+        /**
+         * <p>Multiple SQL keyword conditions, JSON string, internally a two-dimensional array: level 1 is AND, the second level is OR. Note that the cloud API platform does not support two-dimensional arrays. Here, a string is used to carry it, and the server automatically parses it.</p>
+         * @type {string || null}
+         */
+        this.MultiSql = null;
+
+        /**
+         * <p>Excluded multiple SQL keyword conditions, JSON string, with the same structure as MultiSql.</p>
+         * @type {string || null}
+         */
+        this.ExcludeMultiSql = null;
+
+        /**
+         * <p>SQL Template ID.</p>
+         * @type {string || null}
+         */
+        this.SqlTemplateId = null;
+
+        /**
+         * <p>SQL start time, for example: 2026-10-10 11:05:06.002211</p><p>Parameter format: YYYY-MM-DD hh:mm:ss.SSSSSS</p>
+         * @type {string || null}
+         */
+        this.SqlStartTime = null;
+
+        /**
+         * <p>Query ID, used for join queries (required when LogType=All).</p>
+         * @type {string || null}
+         */
+        this.QueryId = null;
 
     }
 
@@ -2110,9 +2575,25 @@ class DescribeSecurityAuditLogDownloadUrlsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecAuditGroupId = 'SecAuditGroupId' in params ? params.SecAuditGroupId : null;
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.Product = 'Product' in params ? params.Product : null;
+        this.SqlType = 'SqlType' in params ? params.SqlType : null;
+        this.ExecTime = 'ExecTime' in params ? params.ExecTime : null;
+        this.IoWaitTime = 'IoWaitTime' in params ? params.IoWaitTime : null;
+        this.CpuTime = 'CpuTime' in params ? params.CpuTime : null;
+        this.LockWaitTime = 'LockWaitTime' in params ? params.LockWaitTime : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.ErrInfo = 'ErrInfo' in params ? params.ErrInfo : null;
+        this.DBName = 'DBName' in params ? params.DBName : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.ThreadId = 'ThreadId' in params ? params.ThreadId : null;
+        this.ProxyHostList = 'ProxyHostList' in params ? params.ProxyHostList : null;
+        this.SetHostList = 'SetHostList' in params ? params.SetHostList : null;
+        this.SetIdList = 'SetIdList' in params ? params.SetIdList : null;
+        this.MultiSql = 'MultiSql' in params ? params.MultiSql : null;
+        this.ExcludeMultiSql = 'ExcludeMultiSql' in params ? params.ExcludeMultiSql : null;
+        this.SqlTemplateId = 'SqlTemplateId' in params ? params.SqlTemplateId : null;
+        this.SqlStartTime = 'SqlStartTime' in params ? params.SqlStartTime : null;
+        this.QueryId = 'QueryId' in params ? params.QueryId : null;
 
     }
 }
@@ -2227,6 +2708,48 @@ class CreateMailProfileResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Describes the group information.
+ * @class
+ */
+class GroupItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group ID.
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Group name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Number of group members.
+         * @type {number || null}
+         */
+        this.MemberCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.MemberCount = 'MemberCount' in params ? params.MemberCount : null;
 
     }
 }
@@ -4333,6 +4856,78 @@ class InstanceBasicInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeDBAuditLogs response structure.
+ * @class
+ */
+class DescribeDBAuditLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Total number of eligible entries.</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * <p>Number of records after filtering.</p>
+         * @type {number || null}
+         */
+        this.FilteredRecords = null;
+
+        /**
+         * <p>Proxy layer audit log list. Returned when LogType=Proxy or All. For field structure, see AuditProxyLogItem.</p>
+         * @type {Array.<AuditProxyLogItem> || null}
+         */
+        this.ProxyLogs = null;
+
+        /**
+         * <p>DB layer audit log list. Returned when LogType is DB or All. For the field structure, see AuditDBLogItem.</p>
+         * @type {Array.<AuditDBLogItem> || null}
+         */
+        this.DBLogs = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.FilteredRecords = 'FilteredRecords' in params ? params.FilteredRecords : null;
+
+        if (params.ProxyLogs) {
+            this.ProxyLogs = new Array();
+            for (let z in params.ProxyLogs) {
+                let obj = new AuditProxyLogItem();
+                obj.deserialize(params.ProxyLogs[z]);
+                this.ProxyLogs.push(obj);
+            }
+        }
+
+        if (params.DBLogs) {
+            this.DBLogs = new Array();
+            for (let z in params.DBLogs) {
+                let obj = new AuditDBLogItem();
+                obj.deserialize(params.DBLogs[z]);
+                this.DBLogs.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Database space statistics.
  * @class
  */
@@ -5660,6 +6255,230 @@ class CreateProxySessionKillTaskResponse extends  AbstractModel {
 }
 
 /**
+ * A single audit log detail at the DB layer. The fields are output by DruidCommonUtil#changeLogsTdsqlDB and BusinessCodeUtils. When LogType=All, FlowTime is added.
+ * @class
+ */
+class AuditDBLogItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Time point of SQL execution (format string, yyyy-MM-dd HH:mm:ss).</p>
+         * @type {string || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * <p>Cluster ID.</p>
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * <p>Number of affected rows.</p>
+         * @type {number || null}
+         */
+        this.AffectRows = null;
+
+        /**
+         * <p>Number of scanned rows.</p>
+         * @type {number || null}
+         */
+        this.CheckRows = null;
+
+        /**
+         * <p>CPU time (µs).</p>
+         * @type {number || null}
+         */
+        this.CpuTime = null;
+
+        /**
+         * <p>Backend Set Host (source field dbHost).</p>
+         * @type {string || null}
+         */
+        this.SetHost = null;
+
+        /**
+         * <p>Database name where the SQL is executed.</p>
+         * @type {string || null}
+         */
+        this.DBName = null;
+
+        /**
+         * <p>Error code returned by SQL execution. 0 indicates success.</p>
+         * @type {string || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * <p>SQL execution time (µs).</p>
+         * @type {number || null}
+         */
+        this.ExecTime = null;
+
+        /**
+         * <p>Client source IP.</p>
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * <p>Set Name (source field instanceId).</p>
+         * @type {string || null}
+         */
+        this.SetName = null;
+
+        /**
+         * <p>IO wait time (µs).</p>
+         * @type {number || null}
+         */
+        this.IoWaitTime = null;
+
+        /**
+         * <p>Lock waiting time (µs).</p>
+         * @type {number || null}
+         */
+        this.LockWaitTime = null;
+
+        /**
+         * <p>SQL start time (nanosecond timestamp).</p>
+         * @type {number || null}
+         */
+        this.SqlStartTimeNs = null;
+
+        /**
+         * <p>Query ID (used for join queries).</p>
+         * @type {string || null}
+         */
+        this.QueryId = null;
+
+        /**
+         * <p>Serial number for queries (serial number of SQL in the same transaction).</p>
+         * @type {number || null}
+         */
+        this.QueryNo = null;
+
+        /**
+         * <p>Number of rows returned (rows in the scanning result set).</p>
+         * @type {number || null}
+         */
+        this.SentRows = null;
+
+        /**
+         * <p>Original executed SQL statement.</p>
+         * @type {string || null}
+         */
+        this.Sql = null;
+
+        /**
+         * <p>SQL Template ID.</p>
+         * @type {string || null}
+         */
+        this.SqlTemplateId = null;
+
+        /**
+         * <p>SQL type (for example, Select, Insert, Update, Delete).</p>
+         * @type {string || null}
+         */
+        this.SqlType = null;
+
+        /**
+         * <p>Tables involved.</p>
+         * @type {string || null}
+         */
+        this.Tables = null;
+
+        /**
+         * <p>Thread ID.</p>
+         * @type {string || null}
+         */
+        this.ThreadId = null;
+
+        /**
+         * <p>SQL start time (millisecond-level timestamp).</p>
+         * @type {number || null}
+         */
+        this.SqlStartTime = null;
+
+        /**
+         * <p>Transaction time to live (µs).</p>
+         * @type {number || null}
+         */
+        this.TrxLivingTime = null;
+
+        /**
+         * <p>Database username that executes the SQL.</p>
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * <p>Transaction ID.</p>
+         * @type {string || null}
+         */
+        this.TrxId = null;
+
+        /**
+         * <p>Internal XID.</p>
+         * @type {string || null}
+         */
+        this.InternalXId = null;
+
+        /**
+         * <p>Business code (extracted from i/o/p and other KV in business-side SQL annotations).</p>
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * <p>Gateway circulation duration (ms). It is returned only when LogType=All after gateway log association. When LogType=DB, this field is not delivered.</p>
+         * @type {number || null}
+         */
+        this.FlowTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AffectRows = 'AffectRows' in params ? params.AffectRows : null;
+        this.CheckRows = 'CheckRows' in params ? params.CheckRows : null;
+        this.CpuTime = 'CpuTime' in params ? params.CpuTime : null;
+        this.SetHost = 'SetHost' in params ? params.SetHost : null;
+        this.DBName = 'DBName' in params ? params.DBName : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.ExecTime = 'ExecTime' in params ? params.ExecTime : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.SetName = 'SetName' in params ? params.SetName : null;
+        this.IoWaitTime = 'IoWaitTime' in params ? params.IoWaitTime : null;
+        this.LockWaitTime = 'LockWaitTime' in params ? params.LockWaitTime : null;
+        this.SqlStartTimeNs = 'SqlStartTimeNs' in params ? params.SqlStartTimeNs : null;
+        this.QueryId = 'QueryId' in params ? params.QueryId : null;
+        this.QueryNo = 'QueryNo' in params ? params.QueryNo : null;
+        this.SentRows = 'SentRows' in params ? params.SentRows : null;
+        this.Sql = 'Sql' in params ? params.Sql : null;
+        this.SqlTemplateId = 'SqlTemplateId' in params ? params.SqlTemplateId : null;
+        this.SqlType = 'SqlType' in params ? params.SqlType : null;
+        this.Tables = 'Tables' in params ? params.Tables : null;
+        this.ThreadId = 'ThreadId' in params ? params.ThreadId : null;
+        this.SqlStartTime = 'SqlStartTime' in params ? params.SqlStartTime : null;
+        this.TrxLivingTime = 'TrxLivingTime' in params ? params.TrxLivingTime : null;
+        this.User = 'User' in params ? params.User : null;
+        this.TrxId = 'TrxId' in params ? params.TrxId : null;
+        this.InternalXId = 'InternalXId' in params ? params.InternalXId : null;
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.FlowTime = 'FlowTime' in params ? params.FlowTime : null;
+
+    }
+}
+
+/**
  * DescribeSlowLogTimeSeriesStats response structure.
  * @class
  */
@@ -6069,30 +6888,30 @@ class DescribeDBSpaceStatusResponse extends  AbstractModel {
 }
 
 /**
- * Describes the group information.
+ * DescribeSecurityAuditLogDownloadUrls request structure.
  * @class
  */
-class GroupItem extends  AbstractModel {
+class DescribeSecurityAuditLogDownloadUrlsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Group ID.
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * Group name.
+         * Security audit group ID.
          * @type {string || null}
          */
-        this.Name = null;
+        this.SecAuditGroupId = null;
 
         /**
-         * Number of group members.
+         * Async task Id.
          * @type {number || null}
          */
-        this.MemberCount = null;
+        this.AsyncRequestId = null;
+
+        /**
+         * Service type. Valid value: `mysql` (TencentDB for MySQL).
+         * @type {string || null}
+         */
+        this.Product = null;
 
     }
 
@@ -6103,9 +6922,9 @@ class GroupItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.MemberCount = 'MemberCount' in params ? params.MemberCount : null;
+        this.SecAuditGroupId = 'SecAuditGroupId' in params ? params.SecAuditGroupId : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -7011,12 +7830,14 @@ module.exports = {
     ModifyDiagDBInstanceConfResponse: ModifyDiagDBInstanceConfResponse,
     DescribeTopSpaceSchemaTimeSeriesResponse: DescribeTopSpaceSchemaTimeSeriesResponse,
     SlowLogTopSqlItem: SlowLogTopSqlItem,
+    AuditProxyLogItem: AuditProxyLogItem,
     DescribeAuditInstanceListResponse: DescribeAuditInstanceListResponse,
     DescribeProxySessionKillTasksRequest: DescribeProxySessionKillTasksRequest,
     CreateRedisBigKeyAnalysisTaskRequest: CreateRedisBigKeyAnalysisTaskRequest,
     DescribeMySqlProcessListResponse: DescribeMySqlProcessListResponse,
     SessionItem: SessionItem,
     HealthStatus: HealthStatus,
+    DescribeDBAuditLogsRequest: DescribeDBAuditLogsRequest,
     DescribeTopSpaceTablesResponse: DescribeTopSpaceTablesResponse,
     TaskInfo: TaskInfo,
     KillMySqlThreadsResponse: KillMySqlThreadsResponse,
@@ -7027,10 +7848,11 @@ module.exports = {
     DeleteDBDiagReportTasksRequest: DeleteDBDiagReportTasksRequest,
     ModifyDiagDBInstanceConfRequest: ModifyDiagDBInstanceConfRequest,
     DescribeSlowLogsResponse: DescribeSlowLogsResponse,
-    DescribeSecurityAuditLogDownloadUrlsRequest: DescribeSecurityAuditLogDownloadUrlsRequest,
+    AuditLogQueryFilter: AuditLogQueryFilter,
     CreateDBDiagReportTaskResponse: CreateDBDiagReportTaskResponse,
     ProcessStatistic: ProcessStatistic,
     CreateMailProfileResponse: CreateMailProfileResponse,
+    GroupItem: GroupItem,
     DescribeSlowLogTimeSeriesStatsRequest: DescribeSlowLogTimeSeriesStatsRequest,
     DiagHistoryEventItem: DiagHistoryEventItem,
     MySqlProcess: MySqlProcess,
@@ -7069,6 +7891,7 @@ module.exports = {
     UserProfile: UserProfile,
     AddUserContactRequest: AddUserContactRequest,
     InstanceBasicInfo: InstanceBasicInfo,
+    DescribeDBAuditLogsResponse: DescribeDBAuditLogsResponse,
     SchemaSpaceData: SchemaSpaceData,
     DescribeAllUserContactRequest: DescribeAllUserContactRequest,
     DescribeDiagDBInstancesRequest: DescribeDiagDBInstancesRequest,
@@ -7091,6 +7914,7 @@ module.exports = {
     DescribeSlowLogUserHostStatsRequest: DescribeSlowLogUserHostStatsRequest,
     DescribeTopSpaceSchemasResponse: DescribeTopSpaceSchemasResponse,
     CreateProxySessionKillTaskResponse: CreateProxySessionKillTaskResponse,
+    AuditDBLogItem: AuditDBLogItem,
     DescribeSlowLogTimeSeriesStatsResponse: DescribeSlowLogTimeSeriesStatsResponse,
     DescribeProxyProcessStatisticsRequest: DescribeProxyProcessStatisticsRequest,
     MonitorFloatMetric: MonitorFloatMetric,
@@ -7098,7 +7922,7 @@ module.exports = {
     DescribeAllUserGroupResponse: DescribeAllUserGroupResponse,
     DescribeUserSqlAdviceResponse: DescribeUserSqlAdviceResponse,
     DescribeDBSpaceStatusResponse: DescribeDBSpaceStatusResponse,
-    GroupItem: GroupItem,
+    DescribeSecurityAuditLogDownloadUrlsRequest: DescribeSecurityAuditLogDownloadUrlsRequest,
     RedisPreKeySpaceData: RedisPreKeySpaceData,
     DescribeTopSpaceTableTimeSeriesRequest: DescribeTopSpaceTableTimeSeriesRequest,
     DescribeDBDiagReportTasksRequest: DescribeDBDiagReportTasksRequest,

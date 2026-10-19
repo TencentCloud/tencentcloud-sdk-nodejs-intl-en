@@ -26,6 +26,7 @@ const UpdateL3ConnResponse = models.UpdateL3ConnResponse;
 const UpdateHardwareResponse = models.UpdateHardwareResponse;
 const UpdateNetInfo = models.UpdateNetInfo;
 const UpdateL3SwitchRequest = models.UpdateL3SwitchRequest;
+const AccessPointInfo = models.AccessPointInfo;
 const AddL3ConnRequest = models.AddL3ConnRequest;
 const OrderPerLicenseResponse = models.OrderPerLicenseResponse;
 const GetFlowPackagesRequest = models.GetFlowPackagesRequest;
@@ -52,6 +53,7 @@ const GroupDeleteDeviceResponse = models.GroupDeleteDeviceResponse;
 const GroupAddDeviceRequest = models.GroupAddDeviceRequest;
 const GetStatisticDataResponse = models.GetStatisticDataResponse;
 const UpdateApplicationInfoRequest = models.UpdateApplicationInfoRequest;
+const DescribeAccessPointListRequest = models.DescribeAccessPointListRequest;
 const GetPublicKeyRequest = models.GetPublicKeyRequest;
 const GetHardwareInfoRequest = models.GetHardwareInfoRequest;
 const GetFlowStatisticByGroupResponse = models.GetFlowStatisticByGroupResponse;
@@ -93,6 +95,7 @@ const ActivateHardware = models.ActivateHardware;
 const DownloadActiveDeviceCountResponse = models.DownloadActiveDeviceCountResponse;
 const GetHardwareListRequest = models.GetHardwareListRequest;
 const GetFlowStatisticByNameRequest = models.GetFlowStatisticByNameRequest;
+const DescribeAccessPointListResponse = models.DescribeAccessPointListResponse;
 const DeviceDetails = models.DeviceDetails;
 const GroupDeleteDeviceRequest = models.GroupDeleteDeviceRequest;
 const GetHardwareInfoResponse = models.GetHardwareInfoResponse;
@@ -400,6 +403,17 @@ class MnaClient extends AbstractClient {
     }
 
     /**
+     * Users report custom order information, and the Multiple Network Acceleration service saves the information related to.
+     * @param {ReportOrderRequest} req
+     * @param {function(string, ReportOrderResponse):void} cb
+     * @public
+     */
+    ReportOrder(req, cb) {
+        let resp = new ReportOrderResponse();
+        this.request("ReportOrder", req, resp, cb);
+    }
+
+    /**
      * Number of active devices statistics
      * @param {GetActiveDeviceCountRequest} req
      * @param {function(string, GetActiveDeviceCountResponse):void} cb
@@ -444,14 +458,14 @@ class MnaClient extends AbstractClient {
     }
 
     /**
-     * Purchase a single-use License
-     * @param {OrderPerLicenseRequest} req
-     * @param {function(string, OrderPerLicenseResponse):void} cb
+     * Retrieve traffic usage data for a specified device Id at a specified time point.
+     * @param {GetFlowStatisticByNameRequest} req
+     * @param {function(string, GetFlowStatisticByNameResponse):void} cb
      * @public
      */
-    OrderPerLicense(req, cb) {
-        let resp = new OrderPerLicenseResponse();
-        this.request("OrderPerLicense", req, resp, cb);
+    GetFlowStatisticByName(req, cb) {
+        let resp = new GetFlowStatisticByNameResponse();
+        this.request("GetFlowStatisticByName", req, resp, cb);
     }
 
     /**
@@ -499,14 +513,14 @@ class MnaClient extends AbstractClient {
     }
 
     /**
-     * Retrieve traffic usage data for a specified device Id at a specified time point.
-     * @param {GetFlowStatisticByNameRequest} req
-     * @param {function(string, GetFlowStatisticByNameResponse):void} cb
+     * This API is used to query the access point list.
+     * @param {DescribeAccessPointListRequest} req
+     * @param {function(string, DescribeAccessPointListResponse):void} cb
      * @public
      */
-    GetFlowStatisticByName(req, cb) {
-        let resp = new GetFlowStatisticByNameResponse();
-        this.request("GetFlowStatisticByName", req, resp, cb);
+    DescribeAccessPointList(req, cb) {
+        let resp = new DescribeAccessPointListResponse();
+        this.request("DescribeAccessPointList", req, resp, cb);
     }
 
     /**
@@ -576,14 +590,14 @@ class MnaClient extends AbstractClient {
     }
 
     /**
-     * Users report custom order information, and the Multiple Network Acceleration service saves the information related to.
-     * @param {ReportOrderRequest} req
-     * @param {function(string, ReportOrderResponse):void} cb
+     * Purchase a single-use License
+     * @param {OrderPerLicenseRequest} req
+     * @param {function(string, OrderPerLicenseResponse):void} cb
      * @public
      */
-    ReportOrder(req, cb) {
-        let resp = new ReportOrderResponse();
-        this.request("ReportOrder", req, resp, cb);
+    OrderPerLicense(req, cb) {
+        let resp = new OrderPerLicenseResponse();
+        this.request("OrderPerLicense", req, resp, cb);
     }
 
     /**

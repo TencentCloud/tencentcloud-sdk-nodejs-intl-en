@@ -633,49 +633,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyPublicIPSwitchStatus response structure.
- * @class
- */
-class ModifyPublicIPSwitchStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Return message
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.ReturnMsg = null;
-
-        /**
-         * Error code. 0: success; non-0: failed
-         * @type {number || null}
-         */
-        this.ReturnCode = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ReturnMsg = 'ReturnMsg' in params ? params.ReturnMsg : null;
-        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * AddAclRule request structure.
  * @class
  */
@@ -884,134 +841,25 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * AddAcRule request structure.
+ * DescribeNatFwInstanceWithRegion response structure.
  * @class
  */
-class AddAcRuleRequest extends  AbstractModel {
+class DescribeNatFwInstanceWithRegionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * -1: lowest priority; 1: highest priority
-         * @type {string || null}
+         * Instance array
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<NatFwInstance> || null}
          */
-        this.OrderIndex = null;
+        this.NatinsLst = null;
 
         /**
-         * The action that Cloud Firewall performs on the traffic. Valid values:
-accept: allow
-drop: deny
-log: observe
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.RuleAction = null;
-
-        /**
-         * The traffic direction for access control rules. Valid values:
-in: incoming traffic access control
-out: outgoing traffic access control
-         * @type {string || null}
-         */
-        this.Direction = null;
-
-        /**
-         * The description of access control rules.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * The type of source address in access control rules. Valid values:
-net: source IP or range (IP or CIDR)
-location: source region
-template: CFW address template
-instance: instance ID
-vendor: Cloud vendor
-         * @type {string || null}
-         */
-        this.SourceType = null;
-
-        /**
-         * The source address in the access control policy. 
-When `SourceType` is `net`, `SourceContent` is the source IP or CIDR block.
-For example: 1.1.1.0/24
-
-When `SourceType` is `template`, `SourceContent` must be the source address template ID.
-
-When `SourceType` is `location`, `SourceContent` is the source region. 
-For example, ["BJ11", "ZB"]
-
-When `SourceType` is `instance`, `SourceContent` is the public IP of the instance.
-For example, ins-xxxxx
-
-When `SourceType` is `vendor`, `SourceContent` is the cloud service provider.
-Values: `aws`, `huawei`, `tencent`, `aliyun`, `azure` and `all`. 
-         * @type {string || null}
-         */
-        this.SourceContent = null;
-
-        /**
-         * The type of destination address in access control rules. Valid values:
-net: destination IP or range (IP or CIDR)
-location: source region
-template: CFW address template
-instance: instance ID
-vendor: Cloud vendor
-domain: Domain name or IP.
-         * @type {string || null}
-         */
-        this.DestType = null;
-
-        /**
-         * The destination address in the access control policy. 
-When `DestType` is `net`, `DestContent` is the destination IP or CIDR block.
-For example: 1.1.1.0/24
-
-When `DestType` is `template`, `DestContent` is the destination address template ID.
-
-When `DestType` is `location`, `DestContent` is the destination region. 
-For example, ["BJ11", "ZB"]
-
-When `DestType` is `instance`, `DestContent` is the public IP of the instance.
-For example, ins-xxxxx
-
-When `DestType` is `domain`, `DestContent` is the domain name associated with the instance.
-For example, *.qq.com
-
-When `DestType`, `DestContent` is the selected cloud service provider.
-Values: `aws`, `huawei`, `tencent`, `aliyun`, `azure` and `all`. 
-         * @type {string || null}
-         */
-        this.DestContent = null;
-
-        /**
-         * The port to apply access control rules. Valid values:
--1/-1: all ports
-80,443: 80 or 443
-         * @type {string || null}
-         */
-        this.Port = null;
-
-        /**
-         * The protocol type of traffic in access control rules. Valid value: TCP. Only TCP is supported for edge firewall rules. If this parameter is not specified, it defaults to TCP.
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * The Layer 7 protocol. Valid values:
-HTTP/HTTPS
-TLS/SSL
-         * @type {string || null}
-         */
-        this.ApplicationName = null;
-
-        /**
-         * Indicates whether to enable the rules. Default: enable. Valid values:
-true: enable; false: disable
-         * @type {string || null}
-         */
-        this.Enable = null;
+        this.RequestId = null;
 
     }
 
@@ -1022,18 +870,16 @@ true: enable; false: disable
         if (!params) {
             return;
         }
-        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
-        this.RuleAction = 'RuleAction' in params ? params.RuleAction : null;
-        this.Direction = 'Direction' in params ? params.Direction : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.SourceType = 'SourceType' in params ? params.SourceType : null;
-        this.SourceContent = 'SourceContent' in params ? params.SourceContent : null;
-        this.DestType = 'DestType' in params ? params.DestType : null;
-        this.DestContent = 'DestContent' in params ? params.DestContent : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
+
+        if (params.NatinsLst) {
+            this.NatinsLst = new Array();
+            for (let z in params.NatinsLst) {
+                let obj = new NatFwInstance();
+                obj.deserialize(params.NatinsLst[z]);
+                this.NatinsLst.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1493,140 +1339,6 @@ class DescribeCfwStatusMonitorResponse extends  AbstractModel {
             return;
         }
         this.Data = 'Data' in params ? params.Data : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteAllAccessControlRule request structure.
- * @class
- */
-class DeleteAllAccessControlRuleRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Direction. 0: outbound; 1: inbound. 0 by default
-         * @type {number || null}
-         */
-        this.Direction = null;
-
-        /**
-         * Deletes all the access control rules for inter-VPC firewall toggles associated with the EdgeId. It is empty by default. Enter either EdgeId or Area.
-         * @type {string || null}
-         */
-        this.EdgeId = null;
-
-        /**
-         * Deletes all the access control rules for NAT firewalls of this region. It is empty by default. Enter either EdgeId or Area.
-         * @type {string || null}
-         */
-        this.Area = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Direction = 'Direction' in params ? params.Direction : null;
-        this.EdgeId = 'EdgeId' in params ? params.EdgeId : null;
-        this.Area = 'Area' in params ? params.Area : null;
-
-    }
-}
-
-/**
- * ModifyBlockIgnoreList request structure.
- * @class
- */
-class ModifyBlockIgnoreListRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Type of the rule. Values: `1` (Blocklist); `2` (Allowlist)
-         * @type {number || null}
-         */
-        this.RuleType = null;
-
-        /**
-         * Either IP or Domain is required
-         * @type {Array.<IocListData> || null}
-         */
-        this.IOC = null;
-
-        /**
-         * Optional values: delete, edit, and add
-         * @type {string || null}
-         */
-        this.IocAction = null;
-
-        /**
-         * Time format: yyyy-MM-dd HH:mm:ss. Required when IocAction is edit or add
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time of the period in the format of yyyy-MM-dd HH:mm:ss. It must be later than both the start time and the current time. It’s required when `IocAction` is `edit` or `add`. 
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RuleType = 'RuleType' in params ? params.RuleType : null;
-
-        if (params.IOC) {
-            this.IOC = new Array();
-            for (let z in params.IOC) {
-                let obj = new IocListData();
-                obj.deserialize(params.IOC[z]);
-                this.IOC.push(obj);
-            }
-        }
-        this.IocAction = 'IocAction' in params ? params.IocAction : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-
-    }
-}
-
-/**
- * ModifyAllVPCSwitchStatus response structure.
- * @class
- */
-class ModifyAllVPCSwitchStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2208,34 +1920,6 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * DeleteVpcInstance response structure.
- * @class
- */
-class DeleteVpcInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ModifyAssetScan request structure.
  * @class
  */
@@ -2299,24 +1983,42 @@ class ModifyAssetScanRequest extends  AbstractModel {
 }
 
 /**
- * Sets the VPC DNS toggle of the NAT firewall 
+ * ModifyBlockIgnoreList request structure.
  * @class
  */
-class DnsVpcSwitch extends  AbstractModel {
+class ModifyBlockIgnoreListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * VPC ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * 0: off; 1: on
+         * Type of the rule. Values: `1` (Blocklist); `2` (Allowlist)
          * @type {number || null}
          */
-        this.Status = null;
+        this.RuleType = null;
+
+        /**
+         * Either IP or Domain is required
+         * @type {Array.<IocListData> || null}
+         */
+        this.IOC = null;
+
+        /**
+         * Optional values: delete, edit, and add
+         * @type {string || null}
+         */
+        this.IocAction = null;
+
+        /**
+         * Time format: yyyy-MM-dd HH:mm:ss. Required when IocAction is edit or add
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the period in the format of yyyy-MM-dd HH:mm:ss. It must be later than both the start time and the current time. It’s required when `IocAction` is `edit` or `add`. 
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -2327,8 +2029,19 @@ class DnsVpcSwitch extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+
+        if (params.IOC) {
+            this.IOC = new Array();
+            for (let z in params.IOC) {
+                let obj = new IocListData();
+                obj.deserialize(params.IOC[z]);
+                this.IOC.push(obj);
+            }
+        }
+        this.IocAction = 'IocAction' in params ? params.IocAction : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -4346,44 +4059,34 @@ class CommonFilter extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Search values.
-         * @type {Array.<string> || null}
-         */
-        this.Values = null;
-
-        /**
-         * Enum of integers that represent relations between Name and Values.
+         * Enumeration type, representing the matching relationship between Name and Values.
 enum FilterOperatorType {
-    // Invalid
-    FILTER_OPERATOR_TYPE_INVALID = 0;
-    // Equal to
+equal
     FILTER_OPERATOR_TYPE_EQUAL = 1;
-    // Greater than
+Above
     FILTER_OPERATOR_TYPE_GREATER = 2;
-    // Less than
+less than
     FILTER_OPERATOR_TYPE_LESS = 3;
-    // Greater than or equal to
+>=
     FILTER_OPERATOR_TYPE_GREATER_EQ = 4;
-    // Less than or equal to
+<=
     FILTER_OPERATOR_TYPE_LESS_EQ = 5;
-    // Not equal to
+neq
     FILTER_OPERATOR_TYPE_NO_EQ = 6;
-    // In (contained in the array)
-    FILTER_OPERATOR_TYPE_IN = 7;
-    // Not in
+    //not in
     FILTER_OPERATOR_TYPE_NOT_IN = 8;
-    // Fuzzily matched
+Fuzzy matching
     FILTER_OPERATOR_TYPE_FUZZINESS = 9;
-    // Existing
-    FILTER_OPERATOR_TYPE_EXIST = 10;
-    // Not existing
-    FILTER_OPERATOR_TYPE_NOT_EXIST = 11;
-    // Regular
-    FILTER_OPERATOR_TYPE_REGULAR = 12;
 }
          * @type {number || null}
          */
         this.OperatorType = null;
+
+        /**
+         * Search values, with an OR relationship between each search value.
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
 
     }
 
@@ -4395,8 +4098,8 @@ enum FilterOperatorType {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
-        this.Values = 'Values' in params ? params.Values : null;
         this.OperatorType = 'OperatorType' in params ? params.OperatorType : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -5557,41 +5260,6 @@ class RuleInfoData extends  AbstractModel {
 }
 
 /**
- * ModifyPublicIPSwitchStatus request structure.
- * @class
- */
-class ModifyPublicIPSwitchStatusRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Public IP
-         * @type {string || null}
-         */
-        this.FireWallPublicIP = null;
-
-        /**
-         * Status value. 0: off; 1: on
-         * @type {number || null}
-         */
-        this.Status = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FireWallPublicIP = 'FireWallPublicIP' in params ? params.FireWallPublicIP : null;
-        this.Status = 'Status' in params ? params.Status : null;
-
-    }
-}
-
-/**
  * DescribeAcLists response structure.
  * @class
  */
@@ -6033,6 +5701,67 @@ class NatFwFilter extends  AbstractModel {
 }
 
 /**
+ * ModifyNatFwReSelect request structure.
+ * @class
+ */
+class ModifyNatFwReSelectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Mode. 1: use existing; 0: create new
+         * @type {number || null}
+         */
+        this.Mode = null;
+
+        /**
+         * Firewall instance ID
+         * @type {string || null}
+         */
+        this.CfwInstance = null;
+
+        /**
+         * List of NAT gateways reconnected for the Using Existing mode. Only one of NatGwList and VpcList can be passed.
+         * @type {Array.<string> || null}
+         */
+        this.NatGwList = null;
+
+        /**
+         * List of VPCs reconnected for the Create New mode. Only one of NatGwList and VpcList can be passed.
+         * @type {Array.<string> || null}
+         */
+        this.VpcList = null;
+
+        /**
+         * IP range of the firewall
+         * @type {FwCidrInfo || null}
+         */
+        this.FwCidrInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.CfwInstance = 'CfwInstance' in params ? params.CfwInstance : null;
+        this.NatGwList = 'NatGwList' in params ? params.NatGwList : null;
+        this.VpcList = 'VpcList' in params ? params.VpcList : null;
+
+        if (params.FwCidrInfo) {
+            let obj = new FwCidrInfo();
+            obj.deserialize(params.FwCidrInfo)
+            this.FwCidrInfo = obj;
+        }
+
+    }
+}
+
+/**
  * ModifyRunSyncAsset response structure.
  * @class
  */
@@ -6145,30 +5874,30 @@ class ModifySecurityGroupSequenceRulesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeVpcAcRule response structure.
+ * DescribeResourceGroupNew request structure.
  * @class
  */
-class DescribeVpcAcRuleResponse extends  AbstractModel {
+class DescribeResourceGroupNewRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total Data
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * Data list
-         * @type {Array.<VpcRuleItem> || null}
-         */
-        this.Data = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Query type. Network–VPC; business recognition–resource; resource tag–tag
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.QueryType = null;
+
+        /**
+         * Asset group ID, 0: all asset group IDs
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * all: all, including subgroups; own: my asset groups only
+         * @type {string || null}
+         */
+        this.ShowType = null;
 
     }
 
@@ -6179,17 +5908,9 @@ class DescribeVpcAcRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new VpcRuleItem();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.QueryType = 'QueryType' in params ? params.QueryType : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.ShowType = 'ShowType' in params ? params.ShowType : null;
 
     }
 }
@@ -6636,22 +6357,55 @@ class DescribeResourceGroupNewResponse extends  AbstractModel {
 }
 
 /**
- * DescribeNatFwInstanceWithRegion response structure.
+ * ModifyRunSyncAsset request structure.
  * @class
  */
-class DescribeNatFwInstanceWithRegionResponse extends  AbstractModel {
+class ModifyRunSyncAssetRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance array
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {Array.<NatFwInstance> || null}
+         * 0: edge firewall toggle; 1: VPC firewall toggle
+         * @type {number || null}
          */
-        this.NatinsLst = null;
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * DescribeVpcAcRule response structure.
+ * @class
+ */
+class DescribeVpcAcRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Total Data
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Data list
+         * @type {Array.<VpcRuleItem> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -6665,58 +6419,17 @@ Note: This field may return `null`, indicating that no valid value was found.
         if (!params) {
             return;
         }
+        this.Total = 'Total' in params ? params.Total : null;
 
-        if (params.NatinsLst) {
-            this.NatinsLst = new Array();
-            for (let z in params.NatinsLst) {
-                let obj = new NatFwInstance();
-                obj.deserialize(params.NatinsLst[z]);
-                this.NatinsLst.push(obj);
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new VpcRuleItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeResourceGroupNew request structure.
- * @class
- */
-class DescribeResourceGroupNewRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Query type. Network–VPC; business recognition–resource; resource tag–tag
-         * @type {string || null}
-         */
-        this.QueryType = null;
-
-        /**
-         * Asset group ID, 0: all asset group IDs
-         * @type {string || null}
-         */
-        this.GroupId = null;
-
-        /**
-         * all: all, including subgroups; own: my asset groups only
-         * @type {string || null}
-         */
-        this.ShowType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.QueryType = 'QueryType' in params ? params.QueryType : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.ShowType = 'ShowType' in params ? params.ShowType : null;
 
     }
 }
@@ -6794,6 +6507,63 @@ Note: This field may return `null`, indicating that no valid value was found.
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.Info = 'Info' in params ? params.Info : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVpcFwIpStat response structure.
+ * @class
+ */
+class DescribeVpcFwIpStatResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Peak bandwidth statistics list for a single cvm</p>
+         * @type {Array.<FwGroupIpFlowStat> || null}
+         */
+        this.Data = null;
+
+        /**
+         * <p>Total number of lines</p>
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * <p>Asynchronously query status. 1 indicates query execution in progress, and 0 indicates query stopped.</p>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new FwGroupIpFlowStat();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Status = 'Status' in params ? params.Status : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7497,49 +7267,6 @@ class DeleteAcRuleRequest extends  AbstractModel {
 }
 
 /**
- * DeleteAllAccessControlRule response structure.
- * @class
- */
-class DeleteAllAccessControlRuleResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Status of the task. `0`: Modified successfully; Others: Modification failed
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Number of access control rules deleted.
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {number || null}
-         */
-        this.Info = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Info = 'Info' in params ? params.Info : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ModifyNatFwSwitch request structure.
  * @class
  */
@@ -7844,24 +7571,72 @@ class DescribeTLogIpListResponse extends  AbstractModel {
 }
 
 /**
- * Multi-log topic retrieval related information
+ * DescribeVpcFwIpStat request structure.
  * @class
  */
-class MultiTopicSearchInformation extends  AbstractModel {
+class DescribeVpcFwIpStatRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the log topic to be searched and analyzed
-         * @type {string || null}
+         * <p>Entries per page</p>
+         * @type {number || null}
          */
-        this.TopicId = null;
+        this.Limit = null;
 
         /**
-         * Pass the Context value returned by the last API call to retrieve more subsequent logs. A total of up to 10,000 raw logs can be obtained, with a validity period of 1 hour.
+         * <p>Offset value</p>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * <p>Firewall group ID</p>
          * @type {string || null}
          */
-        this.Context = null;
+        this.FwGroupId = null;
+
+        /**
+         * <p>Instance id of the firewall</p>
+         * @type {string || null}
+         */
+        this.FwInsId = null;
+
+        /**
+         * <p>Selected time interval 1: within an hour, 2: 24 hours, 3: 7 days, 4: 1 month</p>
+         * @type {number || null}
+         */
+        this.TimeType = null;
+
+        /**
+         * <p>Filter condition composite</p>
+         * @type {Array.<CommonFilter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * <p>Start time of retrieval. Can be omitted.</p>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * <p>End time of retrieval. Can be omitted.</p>
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * <p>desc: descending order; asc: ascending order. Sort by the value of the By field. If any parameters are loaded, by must have a value.</p>
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * <p>Fields used for sorting</p>
+         * @type {string || null}
+         */
+        this.By = null;
 
     }
 
@@ -7872,8 +7647,24 @@ class MultiTopicSearchInformation extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.Context = 'Context' in params ? params.Context : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.FwGroupId = 'FwGroupId' in params ? params.FwGroupId : null;
+        this.FwInsId = 'FwInsId' in params ? params.FwInsId : null;
+        this.TimeType = 'TimeType' in params ? params.TimeType : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new CommonFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -7900,36 +7691,72 @@ class DescribeNatFwInfoCountRequest extends  AbstractModel {
 }
 
 /**
- * AddAcRule response structure.
+ * VPC firewall status monitoring diagram
  * @class
  */
-class AddAcRuleResponse extends  AbstractModel {
+class FwGroupIpFlowStat extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * UUID of the new rule
-         * @type {number || null}
-         */
-        this.RuleUuid = null;
-
-        /**
-         * 0: operation successful; -1: operation failed
-         * @type {number || null}
-         */
-        this.ReturnCode = null;
-
-        /**
-         * success: operation successful; failed: operation failed
+         * IP
          * @type {string || null}
          */
-        this.ReturnMsg = null;
+        this.Ip = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Instance name.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * VPCID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC name
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * Peak traffic
+         * @type {number || null}
+         */
+        this.FlowMax = null;
+
+        /**
+         * Average bandwidth
+         * @type {number || null}
+         */
+        this.FlowAvg = null;
+
+        /**
+         * Rate limiting status
+         * @type {number || null}
+         */
+        this.TcRuleStatus = null;
+
+        /**
+         * Firewall ID.
+         * @type {string || null}
+         */
+        this.FwInsId = null;
+
+        /**
+         * 0 IPV4 , 1 IPV6
+         * @type {number || null}
+         */
+        this.IpVersion = null;
 
     }
 
@@ -7940,71 +7767,16 @@ class AddAcRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RuleUuid = 'RuleUuid' in params ? params.RuleUuid : null;
-        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
-        this.ReturnMsg = 'ReturnMsg' in params ? params.ReturnMsg : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyNatFwReSelect request structure.
- * @class
- */
-class ModifyNatFwReSelectRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Mode. 1: use existing; 0: create new
-         * @type {number || null}
-         */
-        this.Mode = null;
-
-        /**
-         * Firewall instance ID
-         * @type {string || null}
-         */
-        this.CfwInstance = null;
-
-        /**
-         * List of NAT gateways reconnected for the Using Existing mode. Only one of NatGwList and VpcList can be passed.
-         * @type {Array.<string> || null}
-         */
-        this.NatGwList = null;
-
-        /**
-         * List of VPCs reconnected for the Create New mode. Only one of NatGwList and VpcList can be passed.
-         * @type {Array.<string> || null}
-         */
-        this.VpcList = null;
-
-        /**
-         * IP range of the firewall
-         * @type {FwCidrInfo || null}
-         */
-        this.FwCidrInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Mode = 'Mode' in params ? params.Mode : null;
-        this.CfwInstance = 'CfwInstance' in params ? params.CfwInstance : null;
-        this.NatGwList = 'NatGwList' in params ? params.NatGwList : null;
-        this.VpcList = 'VpcList' in params ? params.VpcList : null;
-
-        if (params.FwCidrInfo) {
-            let obj = new FwCidrInfo();
-            obj.deserialize(params.FwCidrInfo)
-            this.FwCidrInfo = obj;
-        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.FlowMax = 'FlowMax' in params ? params.FlowMax : null;
+        this.FlowAvg = 'FlowAvg' in params ? params.FlowAvg : null;
+        this.TcRuleStatus = 'TcRuleStatus' in params ? params.TcRuleStatus : null;
+        this.FwInsId = 'FwInsId' in params ? params.FwInsId : null;
+        this.IpVersion = 'IpVersion' in params ? params.IpVersion : null;
 
     }
 }
@@ -8086,41 +7858,6 @@ class SetNatFwDnatRuleRequest extends  AbstractModel {
             obj.deserialize(params.NewDnat)
             this.NewDnat = obj;
         }
-
-    }
-}
-
-/**
- * ModifyAllVPCSwitchStatus request structure.
- * @class
- */
-class ModifyAllVPCSwitchStatusRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Status. 0: off; 1: on
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * ID of the selected firewall toggle
-         * @type {Array.<string> || null}
-         */
-        this.FireWallVpcIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.FireWallVpcIds = 'FireWallVpcIds' in params ? params.FireWallVpcIds : null;
 
     }
 }
@@ -9103,12 +8840,24 @@ class CreateSecurityGroupRulesRequest extends  AbstractModel {
 }
 
 /**
- * DeleteVpcInstance request structure.
+ * Sets the VPC DNS toggle of the NAT firewall 
  * @class
  */
-class DeleteVpcInstanceRequest extends  AbstractModel {
+class DnsVpcSwitch extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 0: off; 1: on
+         * @type {number || null}
+         */
+        this.Status = null;
 
     }
 
@@ -9119,6 +8868,8 @@ class DeleteVpcInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -9799,18 +9550,24 @@ class FwVpcCidr extends  AbstractModel {
 }
 
 /**
- * ModifyRunSyncAsset request structure.
+ * Multi-log topic retrieval related information
  * @class
  */
-class ModifyRunSyncAssetRequest extends  AbstractModel {
+class MultiTopicSearchInformation extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 0: edge firewall toggle; 1: VPC firewall toggle
-         * @type {number || null}
+         * ID of the log topic to be searched and analyzed
+         * @type {string || null}
          */
-        this.Type = null;
+        this.TopicId = null;
+
+        /**
+         * Pass the Context value returned by the last API call to retrieve more subsequent logs. A total of up to 10,000 raw logs can be obtained, with a validity period of 1 hour.
+         * @type {string || null}
+         */
+        this.Context = null;
 
     }
 
@@ -9821,7 +9578,8 @@ class ModifyRunSyncAssetRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Context = 'Context' in params ? params.Context : null;
 
     }
 }
@@ -10596,22 +10354,18 @@ module.exports = {
     FwCidrInfo: FwCidrInfo,
     StaticInfo: StaticInfo,
     DescribeNatAcRuleResponse: DescribeNatAcRuleResponse,
-    ModifyPublicIPSwitchStatusResponse: ModifyPublicIPSwitchStatusResponse,
     AddAclRuleRequest: AddAclRuleRequest,
     ModifyNatAcRuleRequest: ModifyNatAcRuleRequest,
     ModifyAcRuleResponse: ModifyAcRuleResponse,
     ModifyNatSequenceRulesRequest: ModifyNatSequenceRulesRequest,
     DescribeTableStatusResponse: DescribeTableStatusResponse,
-    AddAcRuleRequest: AddAcRuleRequest,
+    DescribeNatFwInstanceWithRegionResponse: DescribeNatFwInstanceWithRegionResponse,
     IPDefendStatus: IPDefendStatus,
     BlockIgnoreRule: BlockIgnoreRule,
     ModifyNatFwVpcDnsSwitchRequest: ModifyNatFwVpcDnsSwitchRequest,
     UnHandleEvent: UnHandleEvent,
     SearchLogResponse: SearchLogResponse,
     DescribeCfwStatusMonitorResponse: DescribeCfwStatusMonitorResponse,
-    DeleteAllAccessControlRuleRequest: DeleteAllAccessControlRuleRequest,
-    ModifyBlockIgnoreListRequest: ModifyBlockIgnoreListRequest,
-    ModifyAllVPCSwitchStatusResponse: ModifyAllVPCSwitchStatusResponse,
     CreateSecurityGroupRulesResponse: CreateSecurityGroupRulesResponse,
     DescribeNatFwVpcDnsLstRequest: DescribeNatFwVpcDnsLstRequest,
     DescribeTLogInfoResponse: DescribeTLogInfoResponse,
@@ -10624,9 +10378,8 @@ module.exports = {
     DescribeCfwLogsResponse: DescribeCfwLogsResponse,
     ExpandCfwVerticalRequest: ExpandCfwVerticalRequest,
     ModifyAllPublicIPSwitchStatusResponse: ModifyAllPublicIPSwitchStatusResponse,
-    DeleteVpcInstanceResponse: DeleteVpcInstanceResponse,
     ModifyAssetScanRequest: ModifyAssetScanRequest,
-    DnsVpcSwitch: DnsVpcSwitch,
+    ModifyBlockIgnoreListRequest: ModifyBlockIgnoreListRequest,
     AddEnterpriseSecurityGroupRulesRequest: AddEnterpriseSecurityGroupRulesRequest,
     DescribeIPStatusListResponse: DescribeIPStatusListResponse,
     SecurityGroupRule: SecurityGroupRule,
@@ -10679,7 +10432,6 @@ module.exports = {
     ModifyAllRuleStatusRequest: ModifyAllRuleStatusRequest,
     SearchLogTopics: SearchLogTopics,
     RuleInfoData: RuleInfoData,
-    ModifyPublicIPSwitchStatusRequest: ModifyPublicIPSwitchStatusRequest,
     DescribeAcListsResponse: DescribeAcListsResponse,
     ModifyAllPublicIPSwitchStatusRequest: ModifyAllPublicIPSwitchStatusRequest,
     DescribeBlockStaticListResponse: DescribeBlockStaticListResponse,
@@ -10689,10 +10441,11 @@ module.exports = {
     ScanInfo: ScanInfo,
     DescribeUnHandleEventTabListResponse: DescribeUnHandleEventTabListResponse,
     NatFwFilter: NatFwFilter,
+    ModifyNatFwReSelectRequest: ModifyNatFwReSelectRequest,
     ModifyRunSyncAssetResponse: ModifyRunSyncAssetResponse,
     ModifyEnterpriseSecurityGroupRuleResponse: ModifyEnterpriseSecurityGroupRuleResponse,
     ModifySecurityGroupSequenceRulesResponse: ModifySecurityGroupSequenceRulesResponse,
-    DescribeVpcAcRuleResponse: DescribeVpcAcRuleResponse,
+    DescribeResourceGroupNewRequest: DescribeResourceGroupNewRequest,
     AddEnterpriseSecurityGroupRulesResponse: AddEnterpriseSecurityGroupRulesResponse,
     UnHandleEventDetail: UnHandleEventDetail,
     RemoveEnterpriseSecurityGroupRuleRequest: RemoveEnterpriseSecurityGroupRuleRequest,
@@ -10703,10 +10456,11 @@ module.exports = {
     ModifySequenceRulesResponse: ModifySequenceRulesResponse,
     NewModeItems: NewModeItems,
     DescribeResourceGroupNewResponse: DescribeResourceGroupNewResponse,
-    DescribeNatFwInstanceWithRegionResponse: DescribeNatFwInstanceWithRegionResponse,
-    DescribeResourceGroupNewRequest: DescribeResourceGroupNewRequest,
+    ModifyRunSyncAssetRequest: ModifyRunSyncAssetRequest,
+    DescribeVpcAcRuleResponse: DescribeVpcAcRuleResponse,
     ModifyBlockTopRequest: ModifyBlockTopRequest,
     DeleteAcRuleResponse: DeleteAcRuleResponse,
+    DescribeVpcFwIpStatResponse: DescribeVpcFwIpStatResponse,
     IocListData: IocListData,
     InstanceInfo: InstanceInfo,
     DescribeIPStatusListRequest: DescribeIPStatusListRequest,
@@ -10720,17 +10474,14 @@ module.exports = {
     DescribeGuideScanInfoRequest: DescribeGuideScanInfoRequest,
     DescribeAssociatedInstanceListRequest: DescribeAssociatedInstanceListRequest,
     DeleteAcRuleRequest: DeleteAcRuleRequest,
-    DeleteAllAccessControlRuleResponse: DeleteAllAccessControlRuleResponse,
     ModifyNatFwSwitchRequest: ModifyNatFwSwitchRequest,
     DescribeCfwLogsRequest: DescribeCfwLogsRequest,
     NatInstanceInfo: NatInstanceInfo,
     DescribeTLogIpListResponse: DescribeTLogIpListResponse,
-    MultiTopicSearchInformation: MultiTopicSearchInformation,
+    DescribeVpcFwIpStatRequest: DescribeVpcFwIpStatRequest,
     DescribeNatFwInfoCountRequest: DescribeNatFwInfoCountRequest,
-    AddAcRuleResponse: AddAcRuleResponse,
-    ModifyNatFwReSelectRequest: ModifyNatFwReSelectRequest,
+    FwGroupIpFlowStat: FwGroupIpFlowStat,
     SetNatFwDnatRuleRequest: SetNatFwDnatRuleRequest,
-    ModifyAllVPCSwitchStatusRequest: ModifyAllVPCSwitchStatusRequest,
     SecurityGroupBothWayInfo: SecurityGroupBothWayInfo,
     ModifyAllRuleStatusResponse: ModifyAllRuleStatusResponse,
     StopSecurityGroupRuleDispatchRequest: StopSecurityGroupRuleDispatchRequest,
@@ -10745,7 +10496,7 @@ module.exports = {
     DescribeNatAcRuleRequest: DescribeNatAcRuleRequest,
     TLogInfo: TLogInfo,
     CreateSecurityGroupRulesRequest: CreateSecurityGroupRulesRequest,
-    DeleteVpcInstanceRequest: DeleteVpcInstanceRequest,
+    DnsVpcSwitch: DnsVpcSwitch,
     SwitchListsData: SwitchListsData,
     CreateNatFwInstanceWithDomainRequest: CreateNatFwInstanceWithDomainRequest,
     Column: Column,
@@ -10756,7 +10507,7 @@ module.exports = {
     DescribeSwitchListsRequest: DescribeSwitchListsRequest,
     DescribeBlockStaticListRequest: DescribeBlockStaticListRequest,
     FwVpcCidr: FwVpcCidr,
-    ModifyRunSyncAssetRequest: ModifyRunSyncAssetRequest,
+    MultiTopicSearchInformation: MultiTopicSearchInformation,
     CreateAcRulesResponse: CreateAcRulesResponse,
     ModifyAssetScanResponse: ModifyAssetScanResponse,
     ModifyAcRuleRequest: ModifyAcRuleRequest,

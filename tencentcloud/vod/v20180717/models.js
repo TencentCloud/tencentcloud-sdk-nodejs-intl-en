@@ -3894,7 +3894,7 @@ class MPSEmbedSubtitleTemplate extends  AbstractModel {
 }
 
 /**
- * Video image sprite task. This structure is only used for tasks initiated by the 2017 [capture CSS sprites](https://www.tencentcloud.com/document/product/266/8101?from_cn_redirect=1) API.
+ * Video image sprite task. This structure is only used for tasks initiated by the 2017 capture CSS sprites API.
  * @class
  */
 class CreateImageSpriteTask2017 extends  AbstractModel {
@@ -6120,7 +6120,7 @@ class AudioTransform extends  AbstractModel {
 }
 
 /**
- * Video transcoding task information. This structure is only used for tasks initiated via the 2017 [video transcoding](https://www.tencentcloud.com/document/product/266/7822?from_cn_redirect=1) API.
+ * Video transcoding task information. This structure is only used for tasks initiated via the 2017 video transcoding API.
  * @class
  */
 class TranscodeTask2017 extends  AbstractModel {
@@ -11844,7 +11844,7 @@ class RefreshUrlCacheResponse extends  AbstractModel {
 }
 
 /**
- * Video splicing task information. This structure is only used for tasks initiated via the 2017 [video splicing](https://www.tencentcloud.com/document/product/266/7821?from_cn_redirect=1) API.
+ * Video splicing task information. This structure is only used for tasks initiated via the 2017 video splicing API.
  * @class
  */
 class ConcatTask2017 extends  AbstractModel {

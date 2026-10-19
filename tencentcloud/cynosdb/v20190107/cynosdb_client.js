@@ -51,6 +51,7 @@ const DescribeLibraDBClustersResponse = models.DescribeLibraDBClustersResponse;
 const InquirePriceMultiSpecRequest = models.InquirePriceMultiSpecRequest;
 const RollbackRoGroupInfo = models.RollbackRoGroupInfo;
 const CreateClustersResponse = models.CreateClustersResponse;
+const ProxyConfigInfo = models.ProxyConfigInfo;
 const CynosdbInstanceGrp = models.CynosdbInstanceGrp;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const ModifyInstanceUpgradeLimitDaysResponse = models.ModifyInstanceUpgradeLimitDaysResponse;
@@ -127,6 +128,7 @@ const DescribeChangedParamsAfterUpgradeResponse = models.DescribeChangedParamsAf
 const ModifyServerlessStrategyResponse = models.ModifyServerlessStrategyResponse;
 const ProxyGroupRwInfo = models.ProxyGroupRwInfo;
 const DescribeProxyNodesRequest = models.DescribeProxyNodesRequest;
+const DescribeAuditLogsRequest = models.DescribeAuditLogsRequest;
 const InquirePriceCreateResponse = models.InquirePriceCreateResponse;
 const DescribeClusterReadOnlyRequest = models.DescribeClusterReadOnlyRequest;
 const DescribeIntegrateTaskResponse = models.DescribeIntegrateTaskResponse;
@@ -167,6 +169,7 @@ const DescribeServerlessInstanceSpecsResponse = models.DescribeServerlessInstanc
 const ManualBackupData = models.ManualBackupData;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
 const InquirePriceModifyResponse = models.InquirePriceModifyResponse;
+const InstanceAuditLogFilter = models.InstanceAuditLogFilter;
 const ModifyLibraDBClusterReplicationObjectResponse = models.ModifyLibraDBClusterReplicationObjectResponse;
 const UpgradeProxyVersionRequest = models.UpgradeProxyVersionRequest;
 const SlaveZoneStockInfo = models.SlaveZoneStockInfo;
@@ -273,7 +276,6 @@ const InquirePriceCreateRequest = models.InquirePriceCreateRequest;
 const ModifyLibraDBClusterAccountDescriptionRequest = models.ModifyLibraDBClusterAccountDescriptionRequest;
 const ModifyAuditServiceRequest = models.ModifyAuditServiceRequest;
 const DescribeLibraDBClusterDetailResponse = models.DescribeLibraDBClusterDetailResponse;
-const GdnTaskInfo = models.GdnTaskInfo;
 const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
 const CrossRegionBackupItem = models.CrossRegionBackupItem;
 const ExportInstanceSlowQueriesRequest = models.ExportInstanceSlowQueriesRequest;
@@ -315,9 +317,10 @@ const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackTimeRange = models.RollbackTimeRange;
 const CreateClusterDatabaseRequest = models.CreateClusterDatabaseRequest;
 const OfflineInstanceRequest = models.OfflineInstanceRequest;
+const AuditLog = models.AuditLog;
 const CreateProxyResponse = models.CreateProxyResponse;
 const BizTaskModifyParamsData = models.BizTaskModifyParamsData;
-const OfflineLibraDBClusterResponse = models.OfflineLibraDBClusterResponse;
+const InstanceInitInfo = models.InstanceInitInfo;
 const Module = models.Module;
 const OpenClusterTransparentEncryptResponse = models.OpenClusterTransparentEncryptResponse;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
@@ -351,12 +354,13 @@ const CreateAccountsResponse = models.CreateAccountsResponse;
 const ModifyClusterGlobalEncryptionResponse = models.ModifyClusterGlobalEncryptionResponse;
 const CheckTransferClusterZoneRequest = models.CheckTransferClusterZoneRequest;
 const CloseWanResponse = models.CloseWanResponse;
+const ModifyProxyRwSplitResponse = models.ModifyProxyRwSplitResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const SalePackageSpec = models.SalePackageSpec;
 const Account = models.Account;
 const ModifyResourcePackagesDeductionPriorityResponse = models.ModifyResourcePackagesDeductionPriorityResponse;
 const CloseWanRequest = models.CloseWanRequest;
-const ModifyProxyRwSplitResponse = models.ModifyProxyRwSplitResponse;
+const AuditLogFilter = models.AuditLogFilter;
 const TableMappingObject = models.TableMappingObject;
 const GoodsPrice = models.GoodsPrice;
 const ModifyResourcePackageClustersRequest = models.ModifyResourcePackageClustersRequest;
@@ -382,7 +386,7 @@ const ExportInstanceSlowQueriesResponse = models.ExportInstanceSlowQueriesRespon
 const SwitchClusterZoneRequest = models.SwitchClusterZoneRequest;
 const DescribeLibraDBClusterAutoMapRuleResponse = models.DescribeLibraDBClusterAutoMapRuleResponse;
 const Ability = models.Ability;
-const InstanceInitInfo = models.InstanceInitInfo;
+const GdnTaskInfo = models.GdnTaskInfo;
 const InquirePriceModifyRequest = models.InquirePriceModifyRequest;
 const BizTaskInfo = models.BizTaskInfo;
 const RemoveClusterSlaveZoneResponse = models.RemoveClusterSlaveZoneResponse;
@@ -412,6 +416,7 @@ const SparsePeriodTime = models.SparsePeriodTime;
 const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
 const ActivateLibraDBClusterResponse = models.ActivateLibraDBClusterResponse;
 const BindClusterResourcePackagesResponse = models.BindClusterResourcePackagesResponse;
+const LogRuleTemplateInfo = models.LogRuleTemplateInfo;
 const StartCLSDeliveryRequest = models.StartCLSDeliveryRequest;
 const LibraClusterSet = models.LibraClusterSet;
 const CreateProxyRequest = models.CreateProxyRequest;
@@ -424,7 +429,7 @@ const DescribeResourcesByDealNameRequest = models.DescribeResourcesByDealNameReq
 const DescribeLibraDBClusterAccountPrivilegesResponse = models.DescribeLibraDBClusterAccountPrivilegesResponse;
 const DescribeAuditInstanceListRequest = models.DescribeAuditInstanceListRequest;
 const DescribeInstanceSlowQueriesResponse = models.DescribeInstanceSlowQueriesResponse;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const CopyBackupToVaultRequest = models.CopyBackupToVaultRequest;
 const CloseClusterPasswordComplexityResponse = models.CloseClusterPasswordComplexityResponse;
 const DescribeBackupDownloadUrlResponse = models.DescribeBackupDownloadUrlResponse;
@@ -481,7 +486,7 @@ const InputAccount = models.InputAccount;
 const DescribeSaveBackupClustersRequest = models.DescribeSaveBackupClustersRequest;
 const DescribeLibraDBClusterAccountAllPrivilegesResponse = models.DescribeLibraDBClusterAccountAllPrivilegesResponse;
 const RollBackClusterRequest = models.RollBackClusterRequest;
-const ProxyConfigInfo = models.ProxyConfigInfo;
+const ModifyClusterBinlogRedoLogAutoCopyVaultResponse = models.ModifyClusterBinlogRedoLogAutoCopyVaultResponse;
 const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
 const InstanceAuditRule = models.InstanceAuditRule;
 const DescribeLibraDBClusterDetailRequest = models.DescribeLibraDBClusterDetailRequest;
@@ -502,7 +507,7 @@ const ClusterSlaveData = models.ClusterSlaveData;
 const OldAddrInfo = models.OldAddrInfo;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const OpenClusterPasswordComplexityRequest = models.OpenClusterPasswordComplexityRequest;
-const ModifyClusterBinlogRedoLogAutoCopyVaultResponse = models.ModifyClusterBinlogRedoLogAutoCopyVaultResponse;
+const DescribeAuditLogsResponse = models.DescribeAuditLogsResponse;
 const PackagePriority = models.PackagePriority;
 const DescribeInstancesWithinSameClusterRequest = models.DescribeInstancesWithinSameClusterRequest;
 const AddLibraDBInstancesRequest = models.AddLibraDBInstancesRequest;
@@ -598,6 +603,7 @@ const CreateAuditRuleTemplateResponse = models.CreateAuditRuleTemplateResponse;
 const DescribeResourcePackageListRequest = models.DescribeResourcePackageListRequest;
 const TransferClusterZoneRequest = models.TransferClusterZoneRequest;
 const CloseSSLResponse = models.CloseSSLResponse;
+const OfflineLibraDBClusterResponse = models.OfflineLibraDBClusterResponse;
 const OpenClusterPasswordComplexityResponse = models.OpenClusterPasswordComplexityResponse;
 const DescribeBackupListByVaultResponse = models.DescribeBackupListByVaultResponse;
 const DescribeAuditRuleTemplatesRequest = models.DescribeAuditRuleTemplatesRequest;
@@ -612,7 +618,7 @@ const CalculateBackupSaveSecExpiresResponse = models.CalculateBackupSaveSecExpir
 const ProxyVersionInfo = models.ProxyVersionInfo;
 const DescribeInstanceSlowQueriesRequest = models.DescribeInstanceSlowQueriesRequest;
 const DescribeIsolatedInstancesResponse = models.DescribeIsolatedInstancesResponse;
-const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const LogicBackupConfigInfo = models.LogicBackupConfigInfo;
 const CynosdbInstanceGroup = models.CynosdbInstanceGroup;
 const ActivateLibraDBInstanceRequest = models.ActivateLibraDBInstanceRequest;
@@ -2099,6 +2105,17 @@ class CynosdbClient extends AbstractClient {
     DescribeServerlessInstanceSpecs(req, cb) {
         let resp = new DescribeServerlessInstanceSpecsResponse();
         this.request("DescribeServerlessInstanceSpecs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query database audit logs.
+     * @param {DescribeAuditLogsRequest} req
+     * @param {function(string, DescribeAuditLogsResponse):void} cb
+     * @public
+     */
+    DescribeAuditLogs(req, cb) {
+        let resp = new DescribeAuditLogsResponse();
+        this.request("DescribeAuditLogs", req, resp, cb);
     }
 
     /**

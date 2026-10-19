@@ -36,12 +36,14 @@ const AuditInstanceInfo = models.AuditInstanceInfo;
 const ModifyDiagDBInstanceConfResponse = models.ModifyDiagDBInstanceConfResponse;
 const DescribeTopSpaceSchemaTimeSeriesResponse = models.DescribeTopSpaceSchemaTimeSeriesResponse;
 const SlowLogTopSqlItem = models.SlowLogTopSqlItem;
+const AuditProxyLogItem = models.AuditProxyLogItem;
 const DescribeAuditInstanceListResponse = models.DescribeAuditInstanceListResponse;
 const DescribeProxySessionKillTasksRequest = models.DescribeProxySessionKillTasksRequest;
 const CreateRedisBigKeyAnalysisTaskRequest = models.CreateRedisBigKeyAnalysisTaskRequest;
 const DescribeMySqlProcessListResponse = models.DescribeMySqlProcessListResponse;
 const SessionItem = models.SessionItem;
 const HealthStatus = models.HealthStatus;
+const DescribeDBAuditLogsRequest = models.DescribeDBAuditLogsRequest;
 const DescribeTopSpaceTablesResponse = models.DescribeTopSpaceTablesResponse;
 const TaskInfo = models.TaskInfo;
 const KillMySqlThreadsResponse = models.KillMySqlThreadsResponse;
@@ -52,10 +54,11 @@ const TimeSlice = models.TimeSlice;
 const DeleteDBDiagReportTasksRequest = models.DeleteDBDiagReportTasksRequest;
 const ModifyDiagDBInstanceConfRequest = models.ModifyDiagDBInstanceConfRequest;
 const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
-const DescribeSecurityAuditLogDownloadUrlsRequest = models.DescribeSecurityAuditLogDownloadUrlsRequest;
+const AuditLogQueryFilter = models.AuditLogQueryFilter;
 const CreateDBDiagReportTaskResponse = models.CreateDBDiagReportTaskResponse;
 const ProcessStatistic = models.ProcessStatistic;
 const CreateMailProfileResponse = models.CreateMailProfileResponse;
+const GroupItem = models.GroupItem;
 const DescribeSlowLogTimeSeriesStatsRequest = models.DescribeSlowLogTimeSeriesStatsRequest;
 const DiagHistoryEventItem = models.DiagHistoryEventItem;
 const MySqlProcess = models.MySqlProcess;
@@ -94,6 +97,7 @@ const ProfileInfo = models.ProfileInfo;
 const UserProfile = models.UserProfile;
 const AddUserContactRequest = models.AddUserContactRequest;
 const InstanceBasicInfo = models.InstanceBasicInfo;
+const DescribeDBAuditLogsResponse = models.DescribeDBAuditLogsResponse;
 const SchemaSpaceData = models.SchemaSpaceData;
 const DescribeAllUserContactRequest = models.DescribeAllUserContactRequest;
 const DescribeDiagDBInstancesRequest = models.DescribeDiagDBInstancesRequest;
@@ -116,6 +120,7 @@ const SchemaItem = models.SchemaItem;
 const DescribeSlowLogUserHostStatsRequest = models.DescribeSlowLogUserHostStatsRequest;
 const DescribeTopSpaceSchemasResponse = models.DescribeTopSpaceSchemasResponse;
 const CreateProxySessionKillTaskResponse = models.CreateProxySessionKillTaskResponse;
+const AuditDBLogItem = models.AuditDBLogItem;
 const DescribeSlowLogTimeSeriesStatsResponse = models.DescribeSlowLogTimeSeriesStatsResponse;
 const DescribeProxyProcessStatisticsRequest = models.DescribeProxyProcessStatisticsRequest;
 const MonitorFloatMetric = models.MonitorFloatMetric;
@@ -123,7 +128,7 @@ const DescribeRedisTopKeyPrefixListResponse = models.DescribeRedisTopKeyPrefixLi
 const DescribeAllUserGroupResponse = models.DescribeAllUserGroupResponse;
 const DescribeUserSqlAdviceResponse = models.DescribeUserSqlAdviceResponse;
 const DescribeDBSpaceStatusResponse = models.DescribeDBSpaceStatusResponse;
-const GroupItem = models.GroupItem;
+const DescribeSecurityAuditLogDownloadUrlsRequest = models.DescribeSecurityAuditLogDownloadUrlsRequest;
 const RedisPreKeySpaceData = models.RedisPreKeySpaceData;
 const DescribeTopSpaceTableTimeSeriesRequest = models.DescribeTopSpaceTableTimeSeriesRequest;
 const DescribeDBDiagReportTasksRequest = models.DescribeDBDiagReportTasksRequest;
@@ -336,6 +341,17 @@ class DbbrainClient extends AbstractClient {
     DescribeDBSpaceStatus(req, cb) {
         let resp = new DescribeDBSpaceStatusResponse();
         this.request("DescribeDBSpaceStatus", req, resp, cb);
+    }
+
+    /**
+     * Queries the audit log details of a specified instance within a time window, support by SQL type, execution time, error code, keyword, and other multi-condition filtering. Currently only support dcdb and mariadb products (cdb and cynosdb have been migrated to the central platform). Note that Filter.MultiSql and Filter.ExcludeMultiSql need to be transmitted as a JSON string in the form of a two-dimensional array, for example, [["a","b"]] means (a OR b), and the server will automatically parse it.
+     * @param {DescribeDBAuditLogsRequest} req
+     * @param {function(string, DescribeDBAuditLogsResponse):void} cb
+     * @public
+     */
+    DescribeDBAuditLogs(req, cb) {
+        let resp = new DescribeDBAuditLogsResponse();
+        this.request("DescribeDBAuditLogs", req, resp, cb);
     }
 
     /**

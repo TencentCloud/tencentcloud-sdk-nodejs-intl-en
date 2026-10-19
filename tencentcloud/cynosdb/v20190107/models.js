@@ -1827,6 +1827,70 @@ class CreateClustersResponse extends  AbstractModel {
 }
 
 /**
+ * Access proxy configuration.
+ * @class
+ */
+class ProxyConfigInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of database proxy group nodes. this parameter is no longer recommended. recommend using ProxyZones.
+         * @type {number || null}
+         */
+        this.ProxyCount = null;
+
+        /**
+         * Number of CPU cores
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Specifies the memory.
+         * @type {number || null}
+         */
+        this.Mem = null;
+
+        /**
+         * Description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Database node information (this parameter is used in combination with ProxyCount, either one must be manually input).
+         * @type {Array.<ProxyZone> || null}
+         */
+        this.ProxyZones = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProxyCount = 'ProxyCount' in params ? params.ProxyCount : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.ProxyZones) {
+            this.ProxyZones = new Array();
+            for (let z in params.ProxyZones) {
+                let obj = new ProxyZone();
+                obj.deserialize(params.ProxyZones[z]);
+                this.ProxyZones.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Instance group information
  * @class
  */
@@ -6751,6 +6815,107 @@ class DescribeProxyNodesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAuditLogs request structure.
+ * @class
+ */
+class DescribeAuditLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Start time in the format of "2017-07-12 10:29:20".
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time in the format: "2017-07-12 10:29:20".
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Sort order. Supported values: "ASC" - Ascending order, "DESC" - Descending order.
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sorting field. Supported values include:
+timestamp
+"affectRows" - Number of affected rows
+"execTime" - Execution time.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Deprecated.
+         * @type {AuditLogFilter || null}
+         */
+        this.Filter = null;
+
+        /**
+         * Pagination parameter. Number of data entries returned per request. Default value: 100. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Pagination offset.
+Description: The sum of Limit and Offset must be less than or equal to 65536.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter criteria. Multiple values have an AND relationship.
+         * @type {Array.<InstanceAuditLogFilter> || null}
+         */
+        this.LogFilter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+
+        if (params.Filter) {
+            let obj = new AuditLogFilter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.LogFilter) {
+            this.LogFilter = new Array();
+            for (let z in params.LogFilter) {
+                let obj = new InstanceAuditLogFilter();
+                obj.deserialize(params.LogFilter[z]);
+                this.LogFilter.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * InquirePriceCreate response structure.
  * @class
  */
@@ -9314,6 +9479,63 @@ class InquirePriceModifyResponse extends  AbstractModel {
             this.StoragePrice = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Audit log search criteria
+ * @class
+ */
+class InstanceAuditLogFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter item. Currently supports the following search criteria:
+
+Includes, excludes, includes (segment dimension), excludes (segment dimension): sql - SQL detail; alarmLevel - alarm level; ruleTemplateId - rule template id
+
+Equal to, not equal to, contains, does not contain: host - client IP address; user - userName; dbName - database name;
+
+Equal, not equal to: sqlType - SQL type; errCode - error code; threadId - thread ID.
+
+Range search (time type is unified to µs): execTime - execution time; lockWaitTime - execution time; ioWaitTime - IO wait time; trxLivingTime - transaction duration; cpuTime - CPU time; checkRows - scanned rows; affectRows - number of affected rows; sentRows - rows returned.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Filter criteria. The following conditions are supported:
+WINC-Contains (segment dimension)
+WEXC - Excluding (segment dimension)
+INC - included
+EXC - Excluding
+EQS - equal to
+NEQ - not equal to
+RA - Range.
+         * @type {string || null}
+         */
+        this.Compare = null;
+
+        /**
+         * Filtered value. In reverse query, multiple values have an AND relationship. In forward query, multiple values have an OR relationship.
+         * @type {Array.<string> || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Compare = 'Compare' in params ? params.Compare : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -15299,104 +15521,6 @@ class DescribeLibraDBClusterDetailResponse extends  AbstractModel {
 }
 
 /**
- * Global database task info
- * @class
- */
-class GdnTaskInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique ID of the global database
-         * @type {string || null}
-         */
-        this.GdnId = null;
-
-        /**
-         * unique alias of the global database
-         * @type {string || null}
-         */
-        this.GdnName = null;
-
-        /**
-         * Primary Cluster ID
-         * @type {string || null}
-         */
-        this.PrimaryClusterId = null;
-
-        /**
-         * Master cluster region
-         * @type {string || null}
-         */
-        this.PrimaryClusterRegion = null;
-
-        /**
-         * from the cluster region
-         * @type {string || null}
-         */
-        this.StandbyClusterRegion = null;
-
-        /**
-         * Slave cluster ID
-         * @type {string || null}
-         */
-        this.StandbyClusterId = null;
-
-        /**
-         * From the cluster name
-         * @type {string || null}
-         */
-        this.StandbyClusterName = null;
-
-        /**
-         * Whether forced switchover is performed
-         * @type {string || null}
-         */
-        this.ForceSwitchGdn = null;
-
-        /**
-         * Return code
-         * @type {number || null}
-         */
-        this.Code = null;
-
-        /**
-         * prompt message
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * Whether forced switchover is supported
-         * @type {string || null}
-         */
-        this.IsSupportForce = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.GdnId = 'GdnId' in params ? params.GdnId : null;
-        this.GdnName = 'GdnName' in params ? params.GdnName : null;
-        this.PrimaryClusterId = 'PrimaryClusterId' in params ? params.PrimaryClusterId : null;
-        this.PrimaryClusterRegion = 'PrimaryClusterRegion' in params ? params.PrimaryClusterRegion : null;
-        this.StandbyClusterRegion = 'StandbyClusterRegion' in params ? params.StandbyClusterRegion : null;
-        this.StandbyClusterId = 'StandbyClusterId' in params ? params.StandbyClusterId : null;
-        this.StandbyClusterName = 'StandbyClusterName' in params ? params.StandbyClusterName : null;
-        this.ForceSwitchGdn = 'ForceSwitchGdn' in params ? params.ForceSwitchGdn : null;
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Message = 'Message' in params ? params.Message : null;
-        this.IsSupportForce = 'IsSupportForce' in params ? params.IsSupportForce : null;
-
-    }
-}
-
-/**
  * ModifyClusterName response structure.
  * @class
  */
@@ -18071,6 +18195,196 @@ class OfflineInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * Audit log details
+ * @class
+ */
+class AuditLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of affected rows.
+         * @type {number || null}
+         */
+        this.AffectRows = null;
+
+        /**
+         * Error code.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * SQL type.
+         * @type {string || null}
+         */
+        this.SqlType = null;
+
+        /**
+         * Table name.
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * Instance name.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Audit policy name.
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * Database name.
+         * @type {string || null}
+         */
+        this.DBName = null;
+
+        /**
+         * SQL statement.
+         * @type {string || null}
+         */
+        this.Sql = null;
+
+        /**
+         * Client address.
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * Username.
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Execution time, in microseconds.
+         * @type {number || null}
+         */
+        this.ExecTime = null;
+
+        /**
+         * Time.
+         * @type {string || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Number of rows returned.
+         * @type {number || null}
+         */
+        this.SentRows = null;
+
+        /**
+         * Execution thread ID.
+         * @type {number || null}
+         */
+        this.ThreadId = null;
+
+        /**
+         * Number of scanned rows.
+         * @type {number || null}
+         */
+        this.CheckRows = null;
+
+        /**
+         * cpu execution time, in microseconds.
+         * @type {number || null}
+         */
+        this.CpuTime = null;
+
+        /**
+         * IO wait time, in microseconds.
+         * @type {number || null}
+         */
+        this.IoWaitTime = null;
+
+        /**
+         * Lock waiting time in microseconds.
+         * @type {number || null}
+         */
+        this.LockWaitTime = null;
+
+        /**
+         * Transaction continuous waiting time, in µs.
+         * @type {number || null}
+         */
+        this.TrxLivingTime = null;
+
+        /**
+         * Start time. Together with timestamp, it forms a nanosecond-precision time.
+         * @type {number || null}
+         */
+        this.NsTime = null;
+
+        /**
+         * Basic information of the log hit rule template
+         * @type {Array.<LogRuleTemplateInfo> || null}
+         */
+        this.TemplateInfo = null;
+
+        /**
+         * Transaction ID
+         * @type {number || null}
+         */
+        this.TrxId = null;
+
+        /**
+         * Client port.
+         * @type {number || null}
+         */
+        this.ClientPort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AffectRows = 'AffectRows' in params ? params.AffectRows : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.SqlType = 'SqlType' in params ? params.SqlType : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.DBName = 'DBName' in params ? params.DBName : null;
+        this.Sql = 'Sql' in params ? params.Sql : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.User = 'User' in params ? params.User : null;
+        this.ExecTime = 'ExecTime' in params ? params.ExecTime : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.SentRows = 'SentRows' in params ? params.SentRows : null;
+        this.ThreadId = 'ThreadId' in params ? params.ThreadId : null;
+        this.CheckRows = 'CheckRows' in params ? params.CheckRows : null;
+        this.CpuTime = 'CpuTime' in params ? params.CpuTime : null;
+        this.IoWaitTime = 'IoWaitTime' in params ? params.IoWaitTime : null;
+        this.LockWaitTime = 'LockWaitTime' in params ? params.LockWaitTime : null;
+        this.TrxLivingTime = 'TrxLivingTime' in params ? params.TrxLivingTime : null;
+        this.NsTime = 'NsTime' in params ? params.NsTime : null;
+
+        if (params.TemplateInfo) {
+            this.TemplateInfo = new Array();
+            for (let z in params.TemplateInfo) {
+                let obj = new LogRuleTemplateInfo();
+                obj.deserialize(params.TemplateInfo[z]);
+                this.TemplateInfo.push(obj);
+            }
+        }
+        this.TrxId = 'TrxId' in params ? params.TrxId : null;
+        this.ClientPort = 'ClientPort' in params ? params.ClientPort : null;
+
+    }
+}
+
+/**
  * CreateProxy response structure.
  * @class
  */
@@ -18178,24 +18492,66 @@ class BizTaskModifyParamsData extends  AbstractModel {
 }
 
 /**
- * OfflineLibraDBCluster response structure.
+ * Instance initialization configuration information
  * @class
  */
-class OfflineLibraDBClusterResponse extends  AbstractModel {
+class InstanceInitInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * flow id
+         * <p>Instance cpu</p>
          * @type {number || null}
          */
-        this.FlowId = null;
+        this.Cpu = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * <p>Instance memory</p>
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * <p>Instance type rw/ro</p>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceType = null;
+
+        /**
+         * <p>Number of instances, range [1,15]</p>
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * <p>Minimum count of Serverless instance, range [1,15]</p>
+         * @type {number || null}
+         */
+        this.MinRoCount = null;
+
+        /**
+         * <p>Maximum count of Serverless instances, range [1,15]</p>
+         * @type {number || null}
+         */
+        this.MaxRoCount = null;
+
+        /**
+         * <p>Minimum specification of Serverless instance</p>
+         * @type {number || null}
+         */
+        this.MinRoCpu = null;
+
+        /**
+         * <p>Maximum specification of Serverless instance</p>
+         * @type {number || null}
+         */
+        this.MaxRoCpu = null;
+
+        /**
+         * <p>Instance Machine Type</p><ol><li>common, universal type.</li><li>exclusive, dedicated.</li></ol>
+         * @type {string || null}
+         */
+        this.DeviceType = null;
 
     }
 
@@ -18206,8 +18562,15 @@ class OfflineLibraDBClusterResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.MinRoCount = 'MinRoCount' in params ? params.MinRoCount : null;
+        this.MaxRoCount = 'MaxRoCount' in params ? params.MaxRoCount : null;
+        this.MinRoCpu = 'MinRoCpu' in params ? params.MinRoCpu : null;
+        this.MaxRoCpu = 'MaxRoCpu' in params ? params.MaxRoCpu : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
 
     }
 }
@@ -19671,6 +20034,48 @@ class CloseWanResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyProxyRwSplit response structure.
+ * @class
+ */
+class ModifyProxyRwSplitResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Async FlowId</p>
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * <p>Asynchronous task ID.</p>
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstances response structure.
  * @class
  */
@@ -19913,30 +20318,90 @@ class CloseWanRequest extends  AbstractModel {
 }
 
 /**
- * ModifyProxyRwSplit response structure.
+ * Audit log filter criteria. When querying audit logs, filter the returned audit logs by user.
  * @class
  */
-class ModifyProxyRwSplitResponse extends  AbstractModel {
+class AuditLogFilter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Async FlowId</p>
-         * @type {number || null}
+         * Client address.
+         * @type {Array.<string> || null}
          */
-        this.FlowId = null;
+        this.Host = null;
 
         /**
-         * <p>Asynchronous task ID.</p>
-         * @type {number || null}
+         * Username.
+         * @type {Array.<string> || null}
          */
-        this.TaskId = null;
+        this.User = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Database name.
+         * @type {Array.<string> || null}
+         */
+        this.DBName = null;
+
+        /**
+         * Table name.
+         * @type {Array.<string> || null}
+         */
+        this.TableName = null;
+
+        /**
+         * Audit policy name.
+         * @type {Array.<string> || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * SQL statement. Fuzzy matching supported.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Sql = null;
+
+        /**
+         * SQL type. Currently supports: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "ALTER", "SET", "REPLACE", "EXECUTE".
+         * @type {string || null}
+         */
+        this.SqlType = null;
+
+        /**
+         * Execution time. Unit: ms. Filter audit logs with an execution time more than this value.
+         * @type {number || null}
+         */
+        this.ExecTime = null;
+
+        /**
+         * Number of affected rows. Filter audit logs where the number of affected rows is more than this value.
+         * @type {number || null}
+         */
+        this.AffectRows = null;
+
+        /**
+         * SQL type. Supports simultaneous query of multiple types. Currently supports: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "ALTER", "SET", "REPLACE", "EXECUTE".
+         * @type {Array.<string> || null}
+         */
+        this.SqlTypes = null;
+
+        /**
+         * SQL statement. Supports transmission of multiple sql statements.
+         * @type {Array.<string> || null}
+         */
+        this.Sqls = null;
+
+        /**
+         * Number of rows returned.
+         * @type {number || null}
+         */
+        this.SentRows = null;
+
+        /**
+         * Thread ID.
+         * @type {Array.<string> || null}
+         */
+        this.ThreadId = null;
 
     }
 
@@ -19947,9 +20412,19 @@ class ModifyProxyRwSplitResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.User = 'User' in params ? params.User : null;
+        this.DBName = 'DBName' in params ? params.DBName : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.Sql = 'Sql' in params ? params.Sql : null;
+        this.SqlType = 'SqlType' in params ? params.SqlType : null;
+        this.ExecTime = 'ExecTime' in params ? params.ExecTime : null;
+        this.AffectRows = 'AffectRows' in params ? params.AffectRows : null;
+        this.SqlTypes = 'SqlTypes' in params ? params.SqlTypes : null;
+        this.Sqls = 'Sqls' in params ? params.Sqls : null;
+        this.SentRows = 'SentRows' in params ? params.SentRows : null;
+        this.ThreadId = 'ThreadId' in params ? params.ThreadId : null;
 
     }
 }
@@ -21300,66 +21775,78 @@ class Ability extends  AbstractModel {
 }
 
 /**
- * Instance initialization configuration information
+ * Global database task info
  * @class
  */
-class InstanceInitInfo extends  AbstractModel {
+class GdnTaskInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Instance cpu</p>
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * <p>Instance memory</p>
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * <p>Instance type rw/ro</p>
+         * Unique ID of the global database
          * @type {string || null}
          */
-        this.InstanceType = null;
+        this.GdnId = null;
 
         /**
-         * <p>Number of instances, range [1,15]</p>
-         * @type {number || null}
-         */
-        this.InstanceCount = null;
-
-        /**
-         * <p>Minimum count of Serverless instance, range [1,15]</p>
-         * @type {number || null}
-         */
-        this.MinRoCount = null;
-
-        /**
-         * <p>Maximum count of Serverless instances, range [1,15]</p>
-         * @type {number || null}
-         */
-        this.MaxRoCount = null;
-
-        /**
-         * <p>Minimum specification of Serverless instance</p>
-         * @type {number || null}
-         */
-        this.MinRoCpu = null;
-
-        /**
-         * <p>Maximum specification of Serverless instance</p>
-         * @type {number || null}
-         */
-        this.MaxRoCpu = null;
-
-        /**
-         * <p>Instance Machine Type</p><ol><li>common, universal type.</li><li>exclusive, dedicated.</li></ol>
+         * unique alias of the global database
          * @type {string || null}
          */
-        this.DeviceType = null;
+        this.GdnName = null;
+
+        /**
+         * Primary Cluster ID
+         * @type {string || null}
+         */
+        this.PrimaryClusterId = null;
+
+        /**
+         * Master cluster region
+         * @type {string || null}
+         */
+        this.PrimaryClusterRegion = null;
+
+        /**
+         * from the cluster region
+         * @type {string || null}
+         */
+        this.StandbyClusterRegion = null;
+
+        /**
+         * Slave cluster ID
+         * @type {string || null}
+         */
+        this.StandbyClusterId = null;
+
+        /**
+         * From the cluster name
+         * @type {string || null}
+         */
+        this.StandbyClusterName = null;
+
+        /**
+         * Whether forced switchover is performed
+         * @type {string || null}
+         */
+        this.ForceSwitchGdn = null;
+
+        /**
+         * Return code
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * prompt message
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Whether forced switchover is supported
+         * @type {string || null}
+         */
+        this.IsSupportForce = null;
 
     }
 
@@ -21370,15 +21857,17 @@ class InstanceInitInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
-        this.MinRoCount = 'MinRoCount' in params ? params.MinRoCount : null;
-        this.MaxRoCount = 'MaxRoCount' in params ? params.MaxRoCount : null;
-        this.MinRoCpu = 'MinRoCpu' in params ? params.MinRoCpu : null;
-        this.MaxRoCpu = 'MaxRoCpu' in params ? params.MaxRoCpu : null;
-        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.GdnId = 'GdnId' in params ? params.GdnId : null;
+        this.GdnName = 'GdnName' in params ? params.GdnName : null;
+        this.PrimaryClusterId = 'PrimaryClusterId' in params ? params.PrimaryClusterId : null;
+        this.PrimaryClusterRegion = 'PrimaryClusterRegion' in params ? params.PrimaryClusterRegion : null;
+        this.StandbyClusterRegion = 'StandbyClusterRegion' in params ? params.StandbyClusterRegion : null;
+        this.StandbyClusterId = 'StandbyClusterId' in params ? params.StandbyClusterId : null;
+        this.StandbyClusterName = 'StandbyClusterName' in params ? params.StandbyClusterName : null;
+        this.ForceSwitchGdn = 'ForceSwitchGdn' in params ? params.ForceSwitchGdn : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.IsSupportForce = 'IsSupportForce' in params ? params.IsSupportForce : null;
 
     }
 }
@@ -23303,6 +23792,55 @@ class BindClusterResourcePackagesResponse extends  AbstractModel {
 }
 
 /**
+ * Basic information of the audit log hit rule template
+ * @class
+ */
+class LogRuleTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template ID.
+         * @type {string || null}
+         */
+        this.RuleTemplateId = null;
+
+        /**
+         * Rule template name.
+         * @type {string || null}
+         */
+        this.RuleTemplateName = null;
+
+        /**
+         * Alarm level. Valid values: 1 - Low risk, 2 - Medium risk, 3 - High risk.
+         * @type {string || null}
+         */
+        this.AlarmLevel = null;
+
+        /**
+         * Rule template change status. Valid values: 0 - unchanged, 1 - changed, 2 - deleted.
+         * @type {number || null}
+         */
+        this.RuleTemplateStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleTemplateId = 'RuleTemplateId' in params ? params.RuleTemplateId : null;
+        this.RuleTemplateName = 'RuleTemplateName' in params ? params.RuleTemplateName : null;
+        this.AlarmLevel = 'AlarmLevel' in params ? params.AlarmLevel : null;
+        this.RuleTemplateStatus = 'RuleTemplateStatus' in params ? params.RuleTemplateStatus : null;
+
+    }
+}
+
+/**
  * StartCLSDelivery request structure.
  * @class
  */
@@ -24020,77 +24558,18 @@ class DescribeInstanceSlowQueriesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstances request structure.
+ * GrantAccountPrivileges response structure.
  * @class
  */
-class DescribeInstancesRequest extends  AbstractModel {
+class GrantAccountPrivilegesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of returned results. Default value: 20. Maximum value: 100
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Record offset. Default value: 0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Sort by field. Valid values:
-<li> CREATETIME: creation time</li>
-<li> PERIODENDTIME: expiration time</li>
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.OrderBy = null;
-
-        /**
-         * Sorting order. Valid values:
-<li> ASC: ascending</li>
-<li> DESC: descending</li>
-         * @type {string || null}
-         */
-        this.OrderByType = null;
-
-        /**
-         * Filter. If more than one filter exists, the logical relationship between these filters is `AND`.
-         * @type {Array.<QueryFilter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Engine type. Currently, `MYSQL` is supported.
-         * @type {string || null}
-         */
-        this.DbType = null;
-
-        /**
-         * Instance status. Valid values:
-creating
-running
-isolating
-isolated
-activating: Removing the instance from isolation
-offlining: Eliminating the instance
-offlined: Instance eliminated
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Instance ID list
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-        /**
-         * Cluster type, value ranges from <li>CYNOSDB: transactional cluster</li><li>LIBRADB: analysis cluster</li><li>ALL: all</li>, default to ALL.
-         * @type {string || null}
-         */
-        this.ClusterType = null;
+        this.RequestId = null;
 
     }
 
@@ -24101,23 +24580,7 @@ offlined: Instance eliminated
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new QueryFilter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.DbType = 'DbType' in params ? params.DbType : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -27660,42 +28123,24 @@ class RollBackClusterRequest extends  AbstractModel {
 }
 
 /**
- * Access proxy configuration.
+ * ModifyClusterBinlogRedoLogAutoCopyVault response structure.
  * @class
  */
-class ProxyConfigInfo extends  AbstractModel {
+class ModifyClusterBinlogRedoLogAutoCopyVaultResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of database proxy group nodes. this parameter is no longer recommended. recommend using ProxyZones.
+         * Task ID.
          * @type {number || null}
          */
-        this.ProxyCount = null;
+        this.TaskId = null;
 
         /**
-         * Number of CPU cores
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * Specifies the memory.
-         * @type {number || null}
-         */
-        this.Mem = null;
-
-        /**
-         * Description.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Description = null;
-
-        /**
-         * Database node information (this parameter is used in combination with ProxyCount, either one must be manually input).
-         * @type {Array.<ProxyZone> || null}
-         */
-        this.ProxyZones = null;
+        this.RequestId = null;
 
     }
 
@@ -27706,19 +28151,8 @@ class ProxyConfigInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProxyCount = 'ProxyCount' in params ? params.ProxyCount : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.Mem = 'Mem' in params ? params.Mem : null;
-        this.Description = 'Description' in params ? params.Description : null;
-
-        if (params.ProxyZones) {
-            this.ProxyZones = new Array();
-            for (let z in params.ProxyZones) {
-                let obj = new ProxyZone();
-                obj.deserialize(params.ProxyZones[z]);
-                this.ProxyZones.push(obj);
-            }
-        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -28851,18 +29285,24 @@ class OpenClusterPasswordComplexityRequest extends  AbstractModel {
 }
 
 /**
- * ModifyClusterBinlogRedoLogAutoCopyVault response structure.
+ * DescribeAuditLogs response structure.
  * @class
  */
-class ModifyClusterBinlogRedoLogAutoCopyVaultResponse extends  AbstractModel {
+class DescribeAuditLogsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID.
+         * Number of eligible audit log entries.
          * @type {number || null}
          */
-        this.TaskId = null;
+        this.TotalCount = null;
+
+        /**
+         * Audit log details.
+         * @type {Array.<AuditLog> || null}
+         */
+        this.Items = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -28879,7 +29319,16 @@ class ModifyClusterBinlogRedoLogAutoCopyVaultResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new AuditLog();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -34113,6 +34562,41 @@ class CloseSSLResponse extends  AbstractModel {
 }
 
 /**
+ * OfflineLibraDBCluster response structure.
+ * @class
+ */
+class OfflineLibraDBClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * flow id
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * OpenClusterPasswordComplexity response structure.
  * @class
  */
@@ -35065,18 +35549,77 @@ class DescribeIsolatedInstancesResponse extends  AbstractModel {
 }
 
 /**
- * GrantAccountPrivileges response structure.
+ * DescribeInstances request structure.
  * @class
  */
-class GrantAccountPrivilegesResponse extends  AbstractModel {
+class DescribeInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Number of returned results. Default value: 20. Maximum value: 100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Record offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sort by field. Valid values:
+<li> CREATETIME: creation time</li>
+<li> PERIODENDTIME: expiration time</li>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values:
+<li> ASC: ascending</li>
+<li> DESC: descending</li>
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * Filter. If more than one filter exists, the logical relationship between these filters is `AND`.
+         * @type {Array.<QueryFilter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Engine type. Currently, `MYSQL` is supported.
+         * @type {string || null}
+         */
+        this.DbType = null;
+
+        /**
+         * Instance status. Valid values:
+creating
+running
+isolating
+isolated
+activating: Removing the instance from isolation
+offlining: Eliminating the instance
+offlined: Instance eliminated
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Instance ID list
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Cluster type, value ranges from <li>CYNOSDB: transactional cluster</li><li>LIBRADB: analysis cluster</li><li>ALL: all</li>, default to ALL.
+         * @type {string || null}
+         */
+        this.ClusterType = null;
 
     }
 
@@ -35087,7 +35630,23 @@ class GrantAccountPrivilegesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new QueryFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.DbType = 'DbType' in params ? params.DbType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
 
     }
 }
@@ -36399,6 +36958,7 @@ module.exports = {
     InquirePriceMultiSpecRequest: InquirePriceMultiSpecRequest,
     RollbackRoGroupInfo: RollbackRoGroupInfo,
     CreateClustersResponse: CreateClustersResponse,
+    ProxyConfigInfo: ProxyConfigInfo,
     CynosdbInstanceGrp: CynosdbInstanceGrp,
     ModifyInstanceParamRequest: ModifyInstanceParamRequest,
     ModifyInstanceUpgradeLimitDaysResponse: ModifyInstanceUpgradeLimitDaysResponse,
@@ -36475,6 +37035,7 @@ module.exports = {
     ModifyServerlessStrategyResponse: ModifyServerlessStrategyResponse,
     ProxyGroupRwInfo: ProxyGroupRwInfo,
     DescribeProxyNodesRequest: DescribeProxyNodesRequest,
+    DescribeAuditLogsRequest: DescribeAuditLogsRequest,
     InquirePriceCreateResponse: InquirePriceCreateResponse,
     DescribeClusterReadOnlyRequest: DescribeClusterReadOnlyRequest,
     DescribeIntegrateTaskResponse: DescribeIntegrateTaskResponse,
@@ -36515,6 +37076,7 @@ module.exports = {
     ManualBackupData: ManualBackupData,
     DescribeBinlogsRequest: DescribeBinlogsRequest,
     InquirePriceModifyResponse: InquirePriceModifyResponse,
+    InstanceAuditLogFilter: InstanceAuditLogFilter,
     ModifyLibraDBClusterReplicationObjectResponse: ModifyLibraDBClusterReplicationObjectResponse,
     UpgradeProxyVersionRequest: UpgradeProxyVersionRequest,
     SlaveZoneStockInfo: SlaveZoneStockInfo,
@@ -36621,7 +37183,6 @@ module.exports = {
     ModifyLibraDBClusterAccountDescriptionRequest: ModifyLibraDBClusterAccountDescriptionRequest,
     ModifyAuditServiceRequest: ModifyAuditServiceRequest,
     DescribeLibraDBClusterDetailResponse: DescribeLibraDBClusterDetailResponse,
-    GdnTaskInfo: GdnTaskInfo,
     ModifyClusterNameResponse: ModifyClusterNameResponse,
     CrossRegionBackupItem: CrossRegionBackupItem,
     ExportInstanceSlowQueriesRequest: ExportInstanceSlowQueriesRequest,
@@ -36663,9 +37224,10 @@ module.exports = {
     RollbackTimeRange: RollbackTimeRange,
     CreateClusterDatabaseRequest: CreateClusterDatabaseRequest,
     OfflineInstanceRequest: OfflineInstanceRequest,
+    AuditLog: AuditLog,
     CreateProxyResponse: CreateProxyResponse,
     BizTaskModifyParamsData: BizTaskModifyParamsData,
-    OfflineLibraDBClusterResponse: OfflineLibraDBClusterResponse,
+    InstanceInitInfo: InstanceInitInfo,
     Module: Module,
     OpenClusterTransparentEncryptResponse: OpenClusterTransparentEncryptResponse,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
@@ -36699,12 +37261,13 @@ module.exports = {
     ModifyClusterGlobalEncryptionResponse: ModifyClusterGlobalEncryptionResponse,
     CheckTransferClusterZoneRequest: CheckTransferClusterZoneRequest,
     CloseWanResponse: CloseWanResponse,
+    ModifyProxyRwSplitResponse: ModifyProxyRwSplitResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,
     SalePackageSpec: SalePackageSpec,
     Account: Account,
     ModifyResourcePackagesDeductionPriorityResponse: ModifyResourcePackagesDeductionPriorityResponse,
     CloseWanRequest: CloseWanRequest,
-    ModifyProxyRwSplitResponse: ModifyProxyRwSplitResponse,
+    AuditLogFilter: AuditLogFilter,
     TableMappingObject: TableMappingObject,
     GoodsPrice: GoodsPrice,
     ModifyResourcePackageClustersRequest: ModifyResourcePackageClustersRequest,
@@ -36730,7 +37293,7 @@ module.exports = {
     SwitchClusterZoneRequest: SwitchClusterZoneRequest,
     DescribeLibraDBClusterAutoMapRuleResponse: DescribeLibraDBClusterAutoMapRuleResponse,
     Ability: Ability,
-    InstanceInitInfo: InstanceInitInfo,
+    GdnTaskInfo: GdnTaskInfo,
     InquirePriceModifyRequest: InquirePriceModifyRequest,
     BizTaskInfo: BizTaskInfo,
     RemoveClusterSlaveZoneResponse: RemoveClusterSlaveZoneResponse,
@@ -36760,6 +37323,7 @@ module.exports = {
     ModifyParamTemplateResponse: ModifyParamTemplateResponse,
     ActivateLibraDBClusterResponse: ActivateLibraDBClusterResponse,
     BindClusterResourcePackagesResponse: BindClusterResourcePackagesResponse,
+    LogRuleTemplateInfo: LogRuleTemplateInfo,
     StartCLSDeliveryRequest: StartCLSDeliveryRequest,
     LibraClusterSet: LibraClusterSet,
     CreateProxyRequest: CreateProxyRequest,
@@ -36772,7 +37336,7 @@ module.exports = {
     DescribeLibraDBClusterAccountPrivilegesResponse: DescribeLibraDBClusterAccountPrivilegesResponse,
     DescribeAuditInstanceListRequest: DescribeAuditInstanceListRequest,
     DescribeInstanceSlowQueriesResponse: DescribeInstanceSlowQueriesResponse,
-    DescribeInstancesRequest: DescribeInstancesRequest,
+    GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
     CopyBackupToVaultRequest: CopyBackupToVaultRequest,
     CloseClusterPasswordComplexityResponse: CloseClusterPasswordComplexityResponse,
     DescribeBackupDownloadUrlResponse: DescribeBackupDownloadUrlResponse,
@@ -36829,7 +37393,7 @@ module.exports = {
     DescribeSaveBackupClustersRequest: DescribeSaveBackupClustersRequest,
     DescribeLibraDBClusterAccountAllPrivilegesResponse: DescribeLibraDBClusterAccountAllPrivilegesResponse,
     RollBackClusterRequest: RollBackClusterRequest,
-    ProxyConfigInfo: ProxyConfigInfo,
+    ModifyClusterBinlogRedoLogAutoCopyVaultResponse: ModifyClusterBinlogRedoLogAutoCopyVaultResponse,
     ModifyClusterNameRequest: ModifyClusterNameRequest,
     InstanceAuditRule: InstanceAuditRule,
     DescribeLibraDBClusterDetailRequest: DescribeLibraDBClusterDetailRequest,
@@ -36850,7 +37414,7 @@ module.exports = {
     OldAddrInfo: OldAddrInfo,
     DescribeTasksResponse: DescribeTasksResponse,
     OpenClusterPasswordComplexityRequest: OpenClusterPasswordComplexityRequest,
-    ModifyClusterBinlogRedoLogAutoCopyVaultResponse: ModifyClusterBinlogRedoLogAutoCopyVaultResponse,
+    DescribeAuditLogsResponse: DescribeAuditLogsResponse,
     PackagePriority: PackagePriority,
     DescribeInstancesWithinSameClusterRequest: DescribeInstancesWithinSameClusterRequest,
     AddLibraDBInstancesRequest: AddLibraDBInstancesRequest,
@@ -36946,6 +37510,7 @@ module.exports = {
     DescribeResourcePackageListRequest: DescribeResourcePackageListRequest,
     TransferClusterZoneRequest: TransferClusterZoneRequest,
     CloseSSLResponse: CloseSSLResponse,
+    OfflineLibraDBClusterResponse: OfflineLibraDBClusterResponse,
     OpenClusterPasswordComplexityResponse: OpenClusterPasswordComplexityResponse,
     DescribeBackupListByVaultResponse: DescribeBackupListByVaultResponse,
     DescribeAuditRuleTemplatesRequest: DescribeAuditRuleTemplatesRequest,
@@ -36960,7 +37525,7 @@ module.exports = {
     ProxyVersionInfo: ProxyVersionInfo,
     DescribeInstanceSlowQueriesRequest: DescribeInstanceSlowQueriesRequest,
     DescribeIsolatedInstancesResponse: DescribeIsolatedInstancesResponse,
-    GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
+    DescribeInstancesRequest: DescribeInstancesRequest,
     LogicBackupConfigInfo: LogicBackupConfigInfo,
     CynosdbInstanceGroup: CynosdbInstanceGroup,
     ActivateLibraDBInstanceRequest: ActivateLibraDBInstanceRequest,

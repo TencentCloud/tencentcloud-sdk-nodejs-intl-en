@@ -1700,31 +1700,19 @@ class DetectLiveFaceAccurateRequest extends  AbstractModel {
         super();
 
         /**
-         * Specifies the base64 code of the image.
--base64-Encoded size cannot exceed 5M.
--The long side pixel of a jpg image must not exceed 4000. the long side pixel of another format image cannot exceed 2000. 
--Specifies the image aspect ratio should be close to 3:4. mobile phone shooting proportion is best.
--Specifies the human face dimension is greater than 100X100 pixels.
--Supported image formats include PNG, JPG, JPEG, and BMP. GIF is not supported.
+         * <p>base64 data of the image.</p><ul><li>The size after base64 encoding must not exceed 5M.</li><li>For jpg format, the long side pixel must not exceed 4000. For other formats, the long side pixel must not exceed 2000.</li><li>The aspect ratio of the image should be close to 3:4. The ratio from mobile phone shooting is best.</li><li>The human face size must be greater than 100X100 pixels.</li><li>Format support: PNG, jpg, JPEG, and BMP. GIF images are not supported.</li></ul>
          * @type {string || null}
          */
         this.Image = null;
 
         /**
-         * Specifies the Url of the image.
--Specifies the maximum size of the corresponding image after base64 encoding is 5M.
--The long side pixel of a jpg image must not exceed 4000. the long side pixel of another format image must not exceed 2000.
--Url or Image must be provided. if both are provided, only use Url. 
--Specifies the image aspect ratio should be close to 3:4. mobile phone shooting proportion is best.
--Specifies the human face dimension is greater than 100X100 pixels.
--Image storage Url on tencent cloud guarantees higher download speed and stability. it is recommended to store images on tencent cloud. non-tencent cloud storage urls may be impacted in speed and stability.
--Supported image formats include PNG, JPG, JPEG, and BMP. GIF is not supported.
+         * <p>The Url of the Image.</p><ul><li>The size of the corresponding Image after base64 encoding must not exceed 5M.</li><li>For jpg format, the long side pixel must not exceed 4000. For other formats, the long side pixel must not exceed 2000.</li><li>Either Url or Image must be provided. If both are provided, only use Url.</li><li>The aspect ratio of the Image should be close to 3:4, which is the best ratio for mobile phone shooting.</li><li>The human face size must be greater than 100X100 pixels.</li><li>An Image stored in Tencent Cloud via Url can guarantee higher download speed and stability. It is recommended to store images in Tencent Cloud. The speed and stability of URLs not stored in Tencent Cloud may be affected.</li><li>Supported Image formats include PNG, jpg, JPEG, and BMP. GIF images are not supported.</li></ul>
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * Algorithm model version used for face recognition. Valid value: `3.0`.
+         * <p>Algorithm model version used by the face recognition service. Currently, the input parameter supports "3.0".</p>
          * @type {string || null}
          */
         this.FaceModelVersion = null;
@@ -3648,16 +3636,13 @@ class DetectLiveFaceAccurateResponse extends  AbstractModel {
         super();
 
         /**
-         * Liveness scoring.
--Value range: [0,100].
--Determines whether it is a rephotograph based on the liveness score and threshold range.
--Current threshold can be divided into [5,10,40,70,90]. among them, the recommended threshold is  40.
+         * <p>Liveness authenticity score.</p><ul><li>Value range: [0,100].</li><li>Determine whether it is a rephotograph based on the threshold range corresponding to the liveness score.</li><li>Currently, the threshold can be divided into [5,10,40,70,90], with a recommended threshold of 40.</li><li>The higher the score, the closer to a real person and the lower the rephotograph risk.</li></ul>
          * @type {number || null}
          */
         this.Score = null;
 
         /**
-         * Algorithm model version used for face recognition.
+         * <p>Algorithm model version used for face recognition.</p>
          * @type {string || null}
          */
         this.FaceModelVersion = null;

@@ -4992,11 +4992,11 @@ class PhoneVerificationResponse extends  AbstractModel {
 
         /**
          * Verification result code.
--Fee result code
-Three-element information consistency.
+Fee result code
+-0:Three-element information consistency.
 -4: Three-element information inconsistency.
 
--No charge result code
+No charge result code
 -6: Invalid phone number.
 -7: Identity number error.
 -8: Name verification failed.

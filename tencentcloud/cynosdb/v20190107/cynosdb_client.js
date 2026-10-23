@@ -234,6 +234,7 @@ const RuleTemplateInfo = models.RuleTemplateInfo;
 const StopCLSDeliveryResponse = models.StopCLSDeliveryResponse;
 const PauseServerlessResponse = models.PauseServerlessResponse;
 const DescribeInstanceDetailResponse = models.DescribeInstanceDetailResponse;
+const ProxyZoneStockInfo = models.ProxyZoneStockInfo;
 const RestartLibraDBInstanceRequest = models.RestartLibraDBInstanceRequest;
 const DeleteAccountsResponse = models.DeleteAccountsResponse;
 const RenewLibraDBClustersRequest = models.RenewLibraDBClustersRequest;
@@ -257,6 +258,7 @@ const ServerlessZoneStockInfo = models.ServerlessZoneStockInfo;
 const DbInfo = models.DbInfo;
 const DescribeBackupDownloadUrlRequest = models.DescribeBackupDownloadUrlRequest;
 const InstanceAuditStatus = models.InstanceAuditStatus;
+const CancelTaskRequest = models.CancelTaskRequest;
 const CopyClusterPasswordComplexityRequest = models.CopyClusterPasswordComplexityRequest;
 const DescribeClusterInstanceGroupsResponse = models.DescribeClusterInstanceGroupsResponse;
 const CreateLibraDBClusterAccountsResponse = models.CreateLibraDBClusterAccountsResponse;
@@ -276,6 +278,8 @@ const InquirePriceCreateRequest = models.InquirePriceCreateRequest;
 const ModifyLibraDBClusterAccountDescriptionRequest = models.ModifyLibraDBClusterAccountDescriptionRequest;
 const ModifyAuditServiceRequest = models.ModifyAuditServiceRequest;
 const DescribeLibraDBClusterDetailResponse = models.DescribeLibraDBClusterDetailResponse;
+const CancelTaskResponse = models.CancelTaskResponse;
+const DescribeProxyZoneStocksResponse = models.DescribeProxyZoneStocksResponse;
 const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
 const CrossRegionBackupItem = models.CrossRegionBackupItem;
 const ExportInstanceSlowQueriesRequest = models.ExportInstanceSlowQueriesRequest;
@@ -498,6 +502,7 @@ const DescribeBinlogDownloadUrlRequest = models.DescribeBinlogDownloadUrlRequest
 const ModifyInstanceNameRequest = models.ModifyInstanceNameRequest;
 const RollbackInstanceInfo = models.RollbackInstanceInfo;
 const ModifyLibraDBClusterAccountPrivilegeRequest = models.ModifyLibraDBClusterAccountPrivilegeRequest;
+const DescribeProxyZoneStocksRequest = models.DescribeProxyZoneStocksRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
 const DownloadLibraDBClusterListRequest = models.DownloadLibraDBClusterListRequest;
@@ -656,7 +661,7 @@ class CynosdbClient extends AbstractClient {
     }
     
     /**
-     * This API is used to create a newly purchased cluster.
+     * This API is used to purchase a new cluster.
      * @param {CreateIntegrateClusterRequest} req
      * @param {function(string, CreateIntegrateClusterResponse):void} cb
      * @public
@@ -678,7 +683,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (DescribeInstanceSpecs) is used to query the instance specifications available for purchase on the query purchase page.
+     * This API is used to query the instance specifications available for purchase on the purchase page.
      * @param {DescribeInstanceSpecsRequest} req
      * @param {function(string, DescribeInstanceSpecsResponse):void} cb
      * @public
@@ -689,7 +694,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to replay instance audit logs.
+     * Replay instance audit logs
      * @param {ReplayInstanceAuditLogRequest} req
      * @param {function(string, ReplayInstanceAuditLogResponse):void} cb
      * @public
@@ -700,7 +705,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify Binlog configuration.
+     * This API is used to modify the Binlog configuration.
      * @param {ModifyBinlogConfigRequest} req
      * @param {function(string, ModifyBinlogConfigResponse):void} cb
      * @public
@@ -733,7 +738,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to search cluster database lists.
+     * This API is used to search the cluster database list.
      * @param {SearchClusterDatabasesRequest} req
      * @param {function(string, SearchClusterDatabasesResponse):void} cb
      * @public
@@ -744,7 +749,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create audit rule templates.
+     * This API is used to create an audit rule template.
      * @param {CreateAuditRuleTemplateRequest} req
      * @param {function(string, CreateAuditRuleTemplateResponse):void} cb
      * @public
@@ -755,7 +760,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the automatic forwarding parameter of a read-only analysis instance.
+     * This API is used to modify the automatic forwarding parameters of a read-only analysis instance.
      * @param {ModifyLibraDBForwardConfigRequest} req
      * @param {function(string, ModifyLibraDBForwardConfigResponse):void} cb
      * @public
@@ -766,7 +771,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Query binlog backups in the insurance box
+     * Queries binlog backups in a vault
      * @param {DescribeBinlogListByVaultRequest} req
      * @param {function(string, DescribeBinlogListByVaultResponse):void} cb
      * @public
@@ -777,7 +782,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Query the cluster information list associated with the backup safe
+     * This API is used to query the cluster information list associated with a backup safe.
      * @param {DescribeVaultBackupClusterInfoRequest} req
      * @param {function(string, DescribeVaultBackupClusterInfoResponse):void} cb
      * @public
@@ -832,7 +837,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to close the database audit service for TDSQL-C MySQL instances.
+     * This API is used to close the database audit service for a TDSQL-C MySQL instance.
      * @param {CloseAuditServiceRequest} req
      * @param {function(string, CloseAuditServiceResponse):void} cb
      * @public
@@ -843,7 +848,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Query backup safe list, support page, filter and sort.
+     * Queries the backup vault list, supporting pagination, filtering, and sorting.
      * @param {DescribeVaultsRequest} req
      * @param {function(string, DescribeVaultsResponse):void} cb
      * @public
@@ -854,7 +859,18 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to start the optimizer switch of an instance.
+     * Cancel to be executed tasks
+     * @param {CancelTaskRequest} req
+     * @param {function(string, CancelTaskResponse):void} cb
+     * @public
+     */
+    CancelTask(req, cb) {
+        let resp = new CancelTaskResponse();
+        this.request("CancelTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable the AI optimizer switch for an instance.
      * @param {OpenAIOptimizerRequest} req
      * @param {function(string, OpenAIOptimizerResponse):void} cb
      * @public
@@ -876,7 +892,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Modify backup safe configuration, including the name, description, retention duration, encryption key, lock time.
+     * Modify the configuration of a backup safe, including the name, description, retention duration, encryption key, and lock time.
      * @param {ModifyVaultRequest} req
      * @param {function(string, ModifyVaultResponse):void} cb
      * @public
@@ -887,7 +903,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Query the analysis cluster list
+     * This API is used to query the list of analysis clusters.
      * @param {DescribeLibraDBClustersRequest} req
      * @param {function(string, DescribeLibraDBClustersResponse):void} cb
      * @public
@@ -898,7 +914,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify cluster configuration to automatically copy Binlog and RedoLog to safe.
+     * Modify the configuration for automatically copying cluster Binlog and RedoLog to the safe.
      * @param {ModifyClusterBinlogRedoLogAutoCopyVaultRequest} req
      * @param {function(string, ModifyClusterBinlogRedoLogAutoCopyVaultResponse):void} cb
      * @public
@@ -909,7 +925,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query from availability zones.
+     * Query the secondary AZ
      * @param {DescribeSlaveZonesRequest} req
      * @param {function(string, DescribeSlaveZonesResponse):void} cb
      * @public
@@ -931,7 +947,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to close the database proxy service of a cluster.
+     * This API is used to shut down the database proxy service of a cluster.
      * @param {CloseProxyRequest} req
      * @param {function(string, CloseProxyResponse):void} cb
      * @public
@@ -942,7 +958,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (OfflineCluster) is used to terminate clusters.
+     * This API is used to terminate clusters.
      * @param {OfflineClusterRequest} req
      * @param {function(string, OfflineClusterResponse):void} cb
      * @public
@@ -964,7 +980,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the price for modifying the specifications of a prepaid cluster.
+     * Inquires about the price of changing the configuration of a prepaid cluster
      * @param {InquirePriceModifyRequest} req
      * @param {function(string, InquirePriceModifyResponse):void} cb
      * @public
@@ -975,7 +991,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to replace the vpc of the database proxy.
+     * This API is used to replace the vpc of a database proxy.
      * @param {SwitchProxyVpcRequest} req
      * @param {function(string, SwitchProxyVpcResponse):void} cb
      * @public
@@ -997,7 +1013,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query task lists.
+     * This API is used to query the task list.
      * @param {DescribeTasksRequest} req
      * @param {function(string, DescribeTasksResponse):void} cb
      * @public
@@ -1008,7 +1024,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain the backup configuration information of a specified cluster, including the full backup time period and the backup file retention time.
+     * This API is used to obtain the backup configuration information of a specified cluster, including the full backup time period and backup file retention time.
      * @param {DescribeBackupConfigRequest} req
      * @param {function(string, DescribeBackupConfigResponse):void} cb
      * @public
@@ -1019,7 +1035,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the download address of Binlog.
+     * This API is used to query the download URL of a Binlog.
      * @param {DescribeBinlogDownloadUrlRequest} req
      * @param {function(string, DescribeBinlogDownloadUrlResponse):void} cb
      * @public
@@ -1052,7 +1068,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Add a read-only instance to the serverless cluster
+     * Add a read-only instance to a serverless cluster
      * @param {AddServerlessRoInstancesRequest} req
      * @param {function(string, AddServerlessRoInstancesResponse):void} cb
      * @public
@@ -1085,7 +1101,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (ActivateInstance) restores access to isolated instances.
+     * This API is used to restore access to isolated instances.
      * @param {ActivateInstanceRequest} req
      * @param {function(string, ActivateInstanceResponse):void} cb
      * @public
@@ -1096,7 +1112,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of proxy nodes.
+     * This API is used to query the proxy node list.
      * @param {DescribeProxyNodesRequest} req
      * @param {function(string, DescribeProxyNodesResponse):void} cb
      * @public
@@ -1107,7 +1123,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to renew the cluster.
+     * Renew a cluster
      * @param {RenewClustersRequest} req
      * @param {function(string, RenewClustersResponse):void} cb
      * @public
@@ -1118,7 +1134,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to trigger cross-AZ migration.
+     * This API is used to initiate cross-AZ migration.
      * @param {TransferClusterZoneRequest} req
      * @param {function(string, TransferClusterZoneResponse):void} cb
      * @public
@@ -1129,7 +1145,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Isolating a TDSQL-C Analysis Cluster
+     * Isolate a TDSQL-C analysis cluster
      * @param {IsolateLibraDBClusterRequest} req
      * @param {function(string, IsolateLibraDBClusterResponse):void} cb
      * @public
@@ -1151,7 +1167,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query cluster transparent encryption information.
+     * Queries cluster transparent encryption information
      * @param {DescribeClusterTransparentEncryptInfoRequest} req
      * @param {function(string, DescribeClusterTransparentEncryptInfoResponse):void} cb
      * @public
@@ -1162,7 +1178,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to export instance slow logs.
+     * This API is used to export slow logs of an instance.
      * @param {ExportInstanceSlowQueriesRequest} req
      * @param {function(string, ExportInstanceSlowQueriesResponse):void} cb
      * @public
@@ -1184,7 +1200,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * this interface is used for querying parameter comparison after specification adjustment.
+     * This API is used to query the parameter comparison for scaling.
      * @param {DescribeChangedParamsAfterUpgradeRequest} req
      * @param {function(string, DescribeChangedParamsAfterUpgradeResponse):void} cb
      * @public
@@ -1195,7 +1211,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query account privileges.
+     * This API is used to query the permissions of an account.
      * @param {DescribeAccountPrivilegesRequest} req
      * @param {function(string, DescribeAccountPrivilegesResponse):void} cb
      * @public
@@ -1217,7 +1233,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to close cluster password complexity.
+     * This API is used to disable password complexity for a cluster.
      * @param {CloseClusterPasswordComplexityRequest} req
      * @param {function(string, CloseClusterPasswordComplexityResponse):void} cb
      * @public
@@ -1228,7 +1244,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to perform cluster rollback.
+     * This API is used to roll back a cluster.
      * @param {RollBackClusterRequest} req
      * @param {function(string, RollBackClusterResponse):void} cb
      * @public
@@ -1239,7 +1255,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Decommission an analysis cluster
+     * This API is used to decommission an analysis cluster.
      * @param {OfflineLibraDBClusterRequest} req
      * @param {function(string, OfflineLibraDBClusterResponse):void} cb
      * @public
@@ -1250,7 +1266,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the binlog retention period of a cluster in days.
+     * This API is used to query the Binlog retention days of a cluster.
      * @param {DescribeBinlogSaveDaysRequest} req
      * @param {function(string, DescribeBinlogSaveDaysResponse):void} cb
      * @public
@@ -1261,7 +1277,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to search cluster data table lists.
+     * This API is used to search the cluster data table list.
      * @param {SearchClusterTablesRequest} req
      * @param {function(string, SearchClusterTablesResponse):void} cb
      * @public
@@ -1272,7 +1288,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query instance groups.
+     * This API is used to query instance group information. This API is deprecated. DescribeClusterInstanceGroups is recommended.
      * @param {DescribeClusterInstanceGrpsRequest} req
      * @param {function(string, DescribeClusterInstanceGrpsResponse):void} cb
      * @public
@@ -1283,7 +1299,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface is used for querying the recycle bin instance list.
+     * This API is used to query the recycle bin instance list.
      * @param {DescribeIsolatedInstancesRequest} req
      * @param {function(string, DescribeIsolatedInstancesResponse):void} cb
      * @public
@@ -1294,7 +1310,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the sync object of an analysis cluster.
+     * This API is used to modify the sync objects of an analysis cluster.
      * @param {ModifyLibraDBClusterReplicationObjectRequest} req
      * @param {function(string, ModifyLibraDBClusterReplicationObjectResponse):void} cb
      * @public
@@ -1316,7 +1332,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the name of an analysis cluster.
+     * Modify the analytical cluster name
      * @param {ModifyLibraDBClusterNameRequest} req
      * @param {function(string, ModifyLibraDBClusterNameResponse):void} cb
      * @public
@@ -1338,7 +1354,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Renew an analysis cluster
+     * Renews an analysis cluster
      * @param {RenewLibraDBClustersRequest} req
      * @param {function(string, RenewLibraDBClustersResponse):void} cb
      * @public
@@ -1349,7 +1365,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to view the advanced mapping rule of the analysis cluster.
+     * This API is used to view advanced mapping rules for an analysis cluster.
      * @param {DescribeLibraDBClusterAutoMapRuleRequest} req
      * @param {function(string, DescribeLibraDBClusterAutoMapRuleResponse):void} cb
      * @public
@@ -1371,7 +1387,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a parameter template.
+     * This API is used to delete a user-created parameter template.
      * @param {DeleteParamTemplateRequest} req
      * @param {function(string, DeleteParamTemplateResponse):void} cb
      * @public
@@ -1393,7 +1409,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create parameter templates.
+     * This API is used to create a parameter template.
      * @param {CreateParamTemplateRequest} req
      * @param {function(string, CreateParamTemplateResponse):void} cb
      * @public
@@ -1404,7 +1420,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the slave availability zone of a cluster.
+     * This API is used to modify the replica AZ of a cluster.
      * @param {ModifyClusterSlaveZoneRequest} req
      * @param {function(string, ModifyClusterSlaveZoneResponse):void} cb
      * @public
@@ -1415,7 +1431,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the binding relationship between resource packages and clusters.
+     * This API is used to modify the binding relationship between a resource package and clusters.
      * @param {ModifyResourcePackageClustersRequest} req
      * @param {function(string, ModifyResourcePackageClustersResponse):void} cb
      * @public
@@ -1437,7 +1453,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Set whether to renew the TDSQL-C analysis cluster
+     * Set whether to renew a TDSQL-C analysis cluster
      * @param {SetLibraDBClusterRenewFlagRequest} req
      * @param {function(string, SetLibraDBClusterRenewFlagResponse):void} cb
      * @public
@@ -1459,7 +1475,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (OfflineInstance) is used to terminate an instance.
+     * This API is used to destroy an instance.
      * @param {OfflineInstanceRequest} req
      * @param {function(string, OfflineInstanceResponse):void} cb
      * @public
@@ -1470,7 +1486,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (IsolateCluster) is used to isolate a cluster.
+     * This API is used to isolate a cluster.
      * @param {IsolateClusterRequest} req
      * @param {function(string, IsolateClusterResponse):void} cb
      * @public
@@ -1503,7 +1519,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upgrade database proxy configuration.
+     * This API is used to upgrade the database proxy configuration.
      * @param {UpgradeProxyRequest} req
      * @param {function(string, UpgradeProxyResponse):void} cb
      * @public
@@ -1514,7 +1530,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Query the list of supported versions for the read-only analysis engine
+     * This API is used to query the list of supported versions for the read-only analysis engine.
      * @param {DescribeLibraDBVersionRequest} req
      * @param {function(string, DescribeLibraDBVersionResponse):void} cb
      * @public
@@ -1536,7 +1552,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to stop the log delivery feature.
+     * This API is used to disable the log delivery feature.
      * @param {StopCLSDeliveryRequest} req
      * @param {function(string, StopCLSDeliveryResponse):void} cb
      * @public
@@ -1547,7 +1563,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (CloseWan) is used to disable public network.
+     * This API is used to disable public network.
      * @param {CloseWanRequest} req
      * @param {function(string, CloseWanResponse):void} cb
      * @public
@@ -1569,7 +1585,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify account authorization of a database.
+     * This API is used to modify account authorization for a database.
      * @param {ModifyClusterDatabaseRequest} req
      * @param {function(string, ModifyClusterDatabaseResponse):void} cb
      * @public
@@ -1580,7 +1596,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify audit rule templates.
+     * This API is used to modify an audit rule template.
      * @param {ModifyAuditRuleTemplatesRequest} req
      * @param {function(string, ModifyAuditRuleTemplatesResponse):void} cb
      * @public
@@ -1591,7 +1607,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the default backup download access restrictions of user-level settings in the current region.
+     * This API is used to query the default backup download access restrictions for user-level settings in the current region.
      * @param {DescribeBackupDownloadUserRestrictionRequest} req
      * @param {function(string, DescribeBackupDownloadUserRestrictionResponse):void} cb
      * @public
@@ -1602,7 +1618,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify a parameter template.
+     * This API is used to modify user parameter templates.
      * @param {ModifyParamTemplateRequest} req
      * @param {function(string, ModifyParamTemplateResponse):void} cb
      * @public
@@ -1613,7 +1629,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (DescribeResourcesByDealName) is used to query order-associated instances.
+     * This API is used to query order associated instances.
      * @param {DescribeResourcesByDealNameRequest} req
      * @param {function(string, DescribeResourcesByDealNameResponse):void} cb
      * @public
@@ -1624,7 +1640,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the deduction priority of the bound resource package.
+     * Modify the deduction priority of bound resource packages.
      * @param {ModifyResourcePackagesDeductionPriorityRequest} req
      * @param {function(string, ModifyResourcePackagesDeductionPriorityResponse):void} cb
      * @public
@@ -1646,7 +1662,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the description of a cluster account.
+     * This API is used to modify the account description of an analysis cluster.
      * @param {ModifyLibraDBClusterAccountDescriptionRequest} req
      * @param {function(string, ModifyLibraDBClusterAccountDescriptionResponse):void} cb
      * @public
@@ -1668,6 +1684,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query regional inventory for database proxy.
+     * @param {DescribeProxyZoneStocksRequest} req
+     * @param {function(string, DescribeProxyZoneStocksResponse):void} cb
+     * @public
+     */
+    DescribeProxyZoneStocks(req, cb) {
+        let resp = new DescribeProxyZoneStocksResponse();
+        this.request("DescribeProxyZoneStocks", req, resp, cb);
+    }
+
+    /**
      * This API is used to query user parameter template details.
      * @param {DescribeParamTemplateDetailRequest} req
      * @param {function(string, DescribeParamTemplateDetailResponse):void} cb
@@ -1679,7 +1706,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain cluster database list.
+     * This API is used to obtain the cluster database list.
      * @param {DescribeClusterDatabasesRequest} req
      * @param {function(string, DescribeClusterDatabasesResponse):void} cb
      * @public
@@ -1701,7 +1728,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to purchase new clusters.
+     * This API is used to create a cluster.
      * @param {CreateClustersRequest} req
      * @param {function(string, CreateClustersResponse):void} cb
      * @public
@@ -1712,7 +1739,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the download source restrictions for backup files in the user's current region. It can be configured to allow downloads from both private and public networks, only from a private network, or from a designated vpc or ip within the private network.
+     * This API is used to modify the download source limits for backup files of a user in the current region. It can be set to allow downloads from both private and public networks, only from a private network, or from designated VPCs and IPs within a private network.
      * @param {ModifyBackupDownloadUserRestrictionRequest} req
      * @param {function(string, ModifyBackupDownloadUserRestrictionResponse):void} cb
      * @public
@@ -1734,7 +1761,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to convert a Prepaid Cluster to a postpaid cluster.
+     * This API is used to convert a prepaid cluster to a postpaid cluster.
      * @param {TransferClusterPrepayToPostpayRequest} req
      * @param {function(string, TransferClusterPrepayToPostpayResponse):void} cb
      * @public
@@ -1745,7 +1772,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to purchase new resource packets.
+     * This API is used to create a resource package.
      * @param {CreateResourcePackageRequest} req
      * @param {function(string, CreateResourcePackageResponse):void} cb
      * @public
@@ -1767,7 +1794,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface is used to delete a database.
+     * This API is used to delete a database.
      * @param {DeleteClusterDatabaseRequest} req
      * @param {function(string, DeleteClusterDatabaseResponse):void} cb
      * @public
@@ -1800,7 +1827,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify maintenance time configuration.
+     * This API is used to modify the maintenance time configuration.
      * @param {ModifyMaintainPeriodConfigRequest} req
      * @param {function(string, ModifyMaintainPeriodConfigResponse):void} cb
      * @public
@@ -1811,7 +1838,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to isolate read-only analysis engine instances.
+     * This API is used to isolate a read-only analysis engine instance.
      * @param {IsolateLibraDBInstanceRequest} req
      * @param {function(string, IsolateLibraDBInstanceResponse):void} cb
      * @public
@@ -1833,7 +1860,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to restore a serverless cluster.
+     * This API is used to resume a serverless cluster.
      * @param {ResumeServerlessRequest} req
      * @param {function(string, ResumeServerlessResponse):void} cb
      * @public
@@ -1844,7 +1871,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the time limit for upgrading the kernel minor version of an instance.
+     * This API is used to modify the upgrade time limit for the kernel minor version of an instance.
      * @param {ModifyInstanceUpgradeLimitDaysRequest} req
      * @param {function(string, ModifyInstanceUpgradeLimitDaysResponse):void} cb
      * @public
@@ -1866,7 +1893,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the permission of a cluster account for analytics.
+     * This API is used to modify account permissions of an analysis cluster.
      * @param {ModifyLibraDBClusterAccountPrivilegeRequest} req
      * @param {function(string, ModifyLibraDBClusterAccountPrivilegeResponse):void} cb
      * @public
@@ -1877,7 +1904,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Query instance specifications based on operation type
+     * Query instance specifications according to the operation type.
      * @param {DescribeInstanceSpecsByOperationTypeRequest} req
      * @param {function(string, DescribeInstanceSpecsByOperationTypeResponse):void} cb
      * @public
@@ -1888,7 +1915,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Enable transparent data encryption for the cluster.
+     * Enable transparent encryption for the cluster.
      * @param {OpenClusterTransparentEncryptRequest} req
      * @param {function(string, OpenClusterTransparentEncryptResponse):void} cb
      * @public
@@ -1899,7 +1926,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the project ID of an analysis cluster.
+     * Modifies the project ID of an analysis cluster
      * @param {ModifyLibraDBClusterProjectRequest} req
      * @param {function(string, ModifyLibraDBClusterProjectResponse):void} cb
      * @public
@@ -1910,7 +1937,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query all parameter template information under the user-specified product.
+     * This API is used to query all parameter template information under a user-specified product.
      * @param {DescribeParamTemplatesRequest} req
      * @param {function(string, DescribeParamTemplatesResponse):void} cb
      * @public
@@ -1921,7 +1948,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete manual backups for a cluster. Automatic backups cannot be deleted.
+     * This API is used to delete a manual backup for a cluster. Auto-backups cannot be deleted.
      * @param {DeleteBackupRequest} req
      * @param {function(string, DeleteBackupResponse):void} cb
      * @public
@@ -1954,7 +1981,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query serverless policies.
+     * Queries a serverless policy.
      * @param {DescribeServerlessStrategyRequest} req
      * @param {function(string, DescribeServerlessStrategyResponse):void} cb
      * @public
@@ -1976,7 +2003,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify account hosts.
+     * This API is used to modify the account host.
      * @param {ModifyAccountHostRequest} req
      * @param {function(string, ModifyAccountHostResponse):void} cb
      * @public
@@ -1987,7 +2014,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the database account password.
+     * This API is used to modify database account passwords.
      * @param {ResetAccountPasswordRequest} req
      * @param {function(string, ResetAccountPasswordResponse):void} cb
      * @public
@@ -2020,7 +2047,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to grant permissions to authorized accounts in batch.
+     * This API is used to grant account permissions in batches.
      * @param {GrantAccountPrivilegesRequest} req
      * @param {function(string, GrantAccountPrivilegesResponse):void} cb
      * @public
@@ -2053,7 +2080,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the instance parameters.
+     * This API is used to modify instance parameters.
      * @param {ModifyInstanceParamRequest} req
      * @param {function(string, ModifyInstanceParamResponse):void} cb
      * @public
@@ -2097,7 +2124,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query available specifications of Serverless instances.
+     * Query the available specifications of a Serverless instance
      * @param {DescribeServerlessInstanceSpecsRequest} req
      * @param {function(string, DescribeServerlessInstanceSpecsResponse):void} cb
      * @public
@@ -2130,7 +2157,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete residual backups for cluster deletion.
+     * This API is used to delete residual backups for a cluster.
      * @param {DeleteClusterSaveBackupRequest} req
      * @param {function(string, DeleteClusterSaveBackupResponse):void} cb
      * @public
@@ -2152,7 +2179,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query agent list.
+     * This API is used to query the database proxy list.
      * @param {DescribeProxiesRequest} req
      * @param {function(string, DescribeProxiesResponse):void} cb
      * @public
@@ -2163,7 +2190,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the snapshot backup cross-region configuration of a specified cluster.
+     * This API is used to modify the cross-region configuration for snapshot backup of a specified cluster.
      * @param {ModifySnapBackupCrossRegionConfigRequest} req
      * @param {function(string, ModifySnapBackupCrossRegionConfigResponse):void} cb
      * @public
@@ -2185,7 +2212,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (OpenWan) is used to enable external network.
+     * This API is used to enable public network access.
      * @param {OpenWanRequest} req
      * @param {function(string, OpenWanResponse):void} cb
      * @public
@@ -2218,7 +2245,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the log in to the host information of a cluster account.
+     * This API is used to modify the login host info of an analysis cluster account.
      * @param {ModifyLibraDBClusterAccountHostRequest} req
      * @param {function(string, ModifyLibraDBClusterAccountHostResponse):void} cb
      * @public
@@ -2240,7 +2267,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (InquirePriceCreate) is used for price inquiry of newly purchased clusters.
+     * This API is used to query the price of a newly purchased cluster.
      * @param {InquirePriceCreateRequest} req
      * @param {function(string, InquirePriceCreateResponse):void} cb
      * @public
@@ -2262,7 +2289,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the specification list of the read-only analysis engine supported in the region.
+     * This API is used to query the specification information list supported for read-only analysis engines in the region.
      * @param {DescribeLibraDBInstanceSpecsRequest} req
      * @param {function(string, DescribeLibraDBInstanceSpecsResponse):void} cb
      * @public
@@ -2295,7 +2322,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify account database and table permissions.
+     * This API is used to modify account database/table permissions.
      * @param {ModifyAccountPrivilegesRequest} req
      * @param {function(string, ModifyAccountPrivilegesResponse):void} cb
      * @public
@@ -2306,7 +2333,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the analysis engine forwarding parameters.
+     * This API is used to query the forwarding parameters of the analysis engine.
      * @param {DescribeLibraDBForwardConfigRequest} req
      * @param {function(string, DescribeLibraDBForwardConfigResponse):void} cb
      * @public
@@ -2317,7 +2344,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain the audit rules of the instance.
+     * This API is used to obtain audit rules of the instance.
      * @param {DescribeAuditRuleWithInstanceIdsRequest} req
      * @param {function(string, DescribeAuditRuleWithInstanceIdsResponse):void} cb
      * @public
@@ -2328,7 +2355,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to export the error logs of an instance.
+     * This API is used to export instance error logs.
      * @param {ExportInstanceErrorLogsRequest} req
      * @param {function(string, ExportInstanceErrorLogsResponse):void} cb
      * @public
@@ -2339,7 +2366,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (AddClusterSlaveZone) is used to enable multi-az deployment for a cluster.
+     * This API is used to enable multi-AZ deployment for a cluster.
      * @param {AddClusterSlaveZoneRequest} req
      * @param {function(string, AddClusterSlaveZoneResponse):void} cb
      * @public
@@ -2350,7 +2377,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to rename a backup file.
+     * This API is used to modify the backup file remark name.
      * @param {ModifyBackupNameRequest} req
      * @param {function(string, ModifyBackupNameResponse):void} cb
      * @public
@@ -2427,7 +2454,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (StartCLSDelivery) is used to enable log delivery functionality.
+     * This API is used to enable log delivery.
      * @param {StartCLSDeliveryRequest} req
      * @param {function(string, StartCLSDeliveryResponse):void} cb
      * @public
@@ -2438,7 +2465,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to reload the database proxy of Cloud Load Balancer.
+     * This API is used to load balance database proxy.
      * @param {ReloadBalanceProxyNodeRequest} req
      * @param {function(string, ReloadBalanceProxyNodeResponse):void} cb
      * @public
@@ -2449,7 +2476,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Create a backup safe
+     * This API is used to create a backup vault.
      * @param {CreateVaultRequest} req
      * @param {function(string, CreateVaultResponse):void} cb
      * @public
@@ -2460,7 +2487,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the execution plan details.
+     * This API is used to query the details of a query execution plan.
      * @param {DescribeSQLExecutionPlanRequest} req
      * @param {function(string, DescribeSQLExecutionPlanResponse):void} cb
      * @public
@@ -2471,7 +2498,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to view the database/table mapping relationship of an analysis cluster.
+     * This API is used to view the mapping relationship between databases and tables in an analysis cluster.
      * @param {DescribeLibraDBClusterTableMappingRequest} req
      * @param {function(string, DescribeLibraDBClusterTableMappingResponse):void} cb
      * @public
@@ -2482,7 +2509,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the download source limit of the default backup configured by the user in the current region.
+     * This API is used to query the default backup download access restrictions configured by the user in the current region.
      * @param {DescribeBackupDownloadRestrictionRequest} req
      * @param {function(string, DescribeBackupDownloadRestrictionResponse):void} cb
      * @public
@@ -2493,7 +2520,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the source instance information of an analysis cluster.
+     * This API is used to query source instance information of the analysis cluster.
      * @param {DescribeLibraDBDataSourceRequest} req
      * @param {function(string, DescribeLibraDBDataSourceResponse):void} cb
      * @public
@@ -2504,7 +2531,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to access the table list.
+     * Access the table list.
      * @param {DescribeClusterDatabaseTablesRequest} req
      * @param {function(string, DescribeClusterDatabaseTablesResponse):void} cb
      * @public
@@ -2526,7 +2553,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Calculate the backup file list that will expire and be deleted after modifying the backup retention period
+     * Calculate the backup file list that will expire and be deleted after the backup retention period is modified.
      * @param {CalculateBackupSaveSecExpiresRequest} req
      * @param {function(string, CalculateBackupSaveSecExpiresResponse):void} cb
      * @public
@@ -2537,7 +2564,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Enable global encryption
+     * Toggle global encryption
      * @param {ModifyClusterGlobalEncryptionRequest} req
      * @param {function(string, ModifyClusterGlobalEncryptionResponse):void} cb
      * @public
@@ -2548,7 +2575,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query slow SQL details in the read-only analysis engine.
+     * This API is used to query slow SQL details of the read-only analysis engine.
      * @param {DescribeLibraDBSlowLogsRequest} req
      * @param {function(string, DescribeLibraDBSlowLogsResponse):void} cb
      * @public
@@ -2581,7 +2608,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the descriptions of a database account.
+     * This API is used to modify database account description information.
      * @param {ModifyAccountDescriptionRequest} req
      * @param {function(string, ModifyAccountDescriptionResponse):void} cb
      * @public
@@ -2592,7 +2619,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the serverless policy.
+     * Modify a serverless policy
      * @param {ModifyServerlessStrategyRequest} req
      * @param {function(string, ModifyServerlessStrategyResponse):void} cb
      * @public
@@ -2614,7 +2641,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable database audit service for an instance.
+     * This API is used to enable the database audit service for an instance.
      * @param {OpenAuditServiceRequest} req
      * @param {function(string, OpenAuditServiceResponse):void} cb
      * @public
@@ -2625,7 +2652,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Copy backup files to the designated safe
+     * Copy the backup file to the designated backup safe.
      * @param {CopyBackupToVaultRequest} req
      * @param {function(string, CopyBackupToVaultResponse):void} cb
      * @public
@@ -2647,7 +2674,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Query TDSQL-C analysis cluster information
+     * Queries TDSQL-C analysis cluster information
      * @param {DescribeLibraDBClusterDetailRequest} req
      * @param {function(string, DescribeLibraDBClusterDetailResponse):void} cb
      * @public
@@ -2658,7 +2685,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query audit rule template information.
+     * This API is used to query the information of audit rule templates.
      * @param {DescribeAuditRuleTemplatesRequest} req
      * @param {function(string, DescribeAuditRuleTemplatesResponse):void} cb
      * @public
@@ -2691,7 +2718,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the TDSQL-C analytical cluster data source.
+     * This API is used to modify the data source of a TDSQL-C analytical cluster.
      * @param {ModifyLibraDBClusterDataSourceRequest} req
      * @param {function(string, ModifyLibraDBClusterDataSourceResponse):void} cb
      * @public
@@ -2713,7 +2740,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of instances.
+     * This API is used to query the instance list.
      * @param {DescribeInstancesRequest} req
      * @param {function(string, DescribeInstancesResponse):void} cb
      * @public
@@ -2724,7 +2751,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query binlog configurations.
+     * This API is used to query the binlog configuration.
      * @param {DescribeBinlogConfigRequest} req
      * @param {function(string, DescribeBinlogConfigResponse):void} cb
      * @public
@@ -2735,7 +2762,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Delete specified backup files from the safe
+     * Delete the specified backup file from the backup safe.
      * @param {DeleteBackupVaultRequest} req
      * @param {function(string, DeleteBackupVaultResponse):void} cb
      * @public
@@ -2746,7 +2773,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to inquire prices in batch.
+     * This API is used to batch inquire prices.
      * @param {InquirePriceMultiSpecRequest} req
      * @param {function(string, InquirePriceMultiSpecResponse):void} cb
      * @public
@@ -2757,7 +2784,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (UpgradeClusterVersion) is used to update the kernel minor version.
+     * This API is used to update the kernel minor version.
      * @param {UpgradeClusterVersionRequest} req
      * @param {function(string, UpgradeClusterVersionResponse):void} cb
      * @public
@@ -2768,7 +2795,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query resource package list.
+     * This API is used to query the resource package list.
      * @param {DescribeResourcePackageListRequest} req
      * @param {function(string, DescribeResourcePackageListResponse):void} cb
      * @public
@@ -2790,7 +2817,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * Modify the cluster account password for analytics
+     * Modifies the account password of an analysis cluster
      * @param {ResetLibraDBClusterAccountPasswordRequest} req
      * @param {function(string, ResetLibraDBClusterAccountPasswordResponse):void} cb
      * @public
@@ -2823,7 +2850,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (DescribeMaintainPeriod) is used to query the instance maintenance window.
+     * This API is used to query instance maintenance window.
      * @param {DescribeMaintainPeriodRequest} req
      * @param {function(string, DescribeMaintainPeriodResponse):void} cb
      * @public
@@ -2834,7 +2861,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to export the usage details of a resource package.
+     * Export resource package usage details
      * @param {ExportResourcePackageDeductDetailsRequest} req
      * @param {function(string, ExportResourcePackageDeductDetailsResponse):void} cb
      * @public
@@ -2845,7 +2872,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query database list.
+     * This API is used to query the database list.
      * @param {DescribeClusterDetailDatabasesRequest} req
      * @param {function(string, DescribeClusterDetailDatabasesResponse):void} cb
      * @public
@@ -2856,7 +2883,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the audit configurations of an instance, such as audit log retention period and audit rule.
+     * This API is used to modify the audit log retention period, audit rules, and other service settings of CDB.
      * @param {ModifyAuditServiceRequest} req
      * @param {function(string, ModifyAuditServiceResponse):void} cb
      * @public
@@ -2867,7 +2894,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to check if it is possible to trigger cross-AZ migration.
+     * This API is used to check whether cross-AZ migration can be initiated.
      * @param {CheckTransferClusterZoneRequest} req
      * @param {function(string, CheckTransferClusterZoneResponse):void} cb
      * @public
@@ -2878,7 +2905,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query marketable regional availability zone information.
+     * This API is used to query the information of marketable regional availability zones.
      * @param {DescribeZonesRequest} req
      * @param {function(string, DescribeZonesResponse):void} cb
      * @public
@@ -2889,7 +2916,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the download link of cluster backup files.
+     * This API is used to query the download URL of cluster backup files.
      * @param {DescribeBackupDownloadUrlRequest} req
      * @param {function(string, DescribeBackupDownloadUrlResponse):void} cb
      * @public
@@ -2922,7 +2949,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable the database proxy of a cluster.
+     * This API is used to enable the database proxy for a cluster.
      * @param {CreateProxyRequest} req
      * @param {function(string, CreateProxyResponse):void} cb
      * @public
@@ -2933,7 +2960,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the download source limit of the backup file for the user in the current region. It can be configured to allow downloads from both private and public networks, only the private network, or a designated vpc or ip within the private network.
+     * This API is used to modify the backup file download access restrictions for users in the current region. It can be set to allow downloads from both private and public networks, only private networks, or designated VPCs and IPs within the private network.
      * @param {ModifyBackupDownloadRestrictionRequest} req
      * @param {function(string, ModifyBackupDownloadRestrictionResponse):void} cb
      * @public
@@ -2955,7 +2982,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the binlog retention period in days.
+     * This API is used to modify the retention days of cluster binlogs.
      * @param {ModifyBinlogSaveDaysRequest} req
      * @param {function(string, ModifyBinlogSaveDaysResponse):void} cb
      * @public
@@ -2966,7 +2993,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (OpenReadOnlyInstanceExclusiveAccess) is used to enable the dedicated access access group for a read-only instance.
+     * This API is used to enable dedicated access groups for read-only instances.
      * @param {OpenReadOnlyInstanceExclusiveAccessRequest} req
      * @param {function(string, OpenReadOnlyInstanceExclusiveAccessResponse):void} cb
      * @public
@@ -2977,7 +3004,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to view the cluster password complexity details.
+     * This API is used to view the password complexity details of a cluster.
      * @param {DescribeClusterPasswordComplexityRequest} req
      * @param {function(string, DescribeClusterPasswordComplexityResponse):void} cb
      * @public
@@ -3010,7 +3037,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (UpgradeInstance) is used to upgrade instances.
+     * This API is used to upgrade or downgrade the configuration of an instance.
      * @param {UpgradeInstanceRequest} req
      * @param {function(string, UpgradeInstanceResponse):void} cb
      * @public
@@ -3021,7 +3048,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This interface (DescribeBinlogs) queries the cluster binlog list.
+     * This API is used to query the Binlog list of a cluster.
      * @param {DescribeBinlogsRequest} req
      * @param {function(string, DescribeBinlogsResponse):void} cb
      * @public
@@ -3043,7 +3070,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query instance group info.
+     * This API is used to query instance group information.
      * @param {DescribeClusterInstanceGroupsRequest} req
      * @param {function(string, DescribeClusterInstanceGroupsResponse):void} cb
      * @public
@@ -3098,7 +3125,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to disable SSL encryption.
+     * Disable SSL encryption
      * @param {CloseSSLRequest} req
      * @param {function(string, CloseSSLResponse):void} cb
      * @public

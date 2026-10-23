@@ -29,6 +29,7 @@ const ModifySecurityJSInjectionRuleRequest = models.ModifySecurityJSInjectionRul
 const CreateLogAnalysisDownloadTaskResponse = models.CreateLogAnalysisDownloadTaskResponse;
 const DescribeSecurityIPGroupInfoResponse = models.DescribeSecurityIPGroupInfoResponse;
 const AdaptiveFrequencyControl = models.AdaptiveFrequencyControl;
+const DescribeAvailableCustomActionsForRuleEngineRequest = models.DescribeAvailableCustomActionsForRuleEngineRequest;
 const RenewFlag = models.RenewFlag;
 const DescribeWebSecurityTemplatesRequest = models.DescribeWebSecurityTemplatesRequest;
 const SecurityAction = models.SecurityAction;
@@ -43,6 +44,7 @@ const DescribeConfigGroupVersionDetailResponse = models.DescribeConfigGroupVersi
 const OriginDetail = models.OriginDetail;
 const InferenceHardwareSpecification = models.InferenceHardwareSpecification;
 const DescribeSecurityClientAttesterResponse = models.DescribeSecurityClientAttesterResponse;
+const CustomVariable = models.CustomVariable;
 const MultiPathGatewayOriginACLInfo = models.MultiPathGatewayOriginACLInfo;
 const HeaderAction = models.HeaderAction;
 const ModifyEdgeKVNamespaceRequest = models.ModifyEdgeKVNamespaceRequest;
@@ -265,6 +267,7 @@ const ManagedRuleDetail = models.ManagedRuleDetail;
 const NextOriginACL = models.NextOriginACL;
 const DescribeMultiPathGatewayRegionsRequest = models.DescribeMultiPathGatewayRegionsRequest;
 const DescribeZoneSettingRequest = models.DescribeZoneSettingRequest;
+const AdvancedOriginRoutingParameters = models.AdvancedOriginRoutingParameters;
 const ModifyL4ProxyStatusResponse = models.ModifyL4ProxyStatusResponse;
 const FileVerification = models.FileVerification;
 const ModifyWebSecurityTemplateResponse = models.ModifyWebSecurityTemplateResponse;
@@ -276,6 +279,7 @@ const SmartRouting = models.SmartRouting;
 const CreateApplicationProxyResponse = models.CreateApplicationProxyResponse;
 const BotUserRule = models.BotUserRule;
 const Task = models.Task;
+const CreateZoneRequest = models.CreateZoneRequest;
 const CreateInferenceAPITokenRequest = models.CreateInferenceAPITokenRequest;
 const DescribeSecurityIPGroupRequest = models.DescribeSecurityIPGroupRequest;
 const ZoneConfig = models.ZoneConfig;
@@ -287,6 +291,7 @@ const ModifyDnsRecordsStatusRequest = models.ModifyDnsRecordsStatusRequest;
 const ManagedRuleAutoUpdate = models.ManagedRuleAutoUpdate;
 const CustomRule = models.CustomRule;
 const BotExtendAction = models.BotExtendAction;
+const CustomAction = models.CustomAction;
 const CreatePurgeTaskResponse = models.CreatePurgeTaskResponse;
 const DeleteApplicationProxyRuleResponse = models.DeleteApplicationProxyRuleResponse;
 const URLPath = models.URLPath;
@@ -317,6 +322,7 @@ const DescribeConfigGroupVersionDetailRequest = models.DescribeConfigGroupVersio
 const ModifyPlanResponse = models.ModifyPlanResponse;
 const DropPageDetail = models.DropPageDetail;
 const CnameStatus = models.CnameStatus;
+const DescribeLogAnalysisDownloadTasksResponse = models.DescribeLogAnalysisDownloadTasksResponse;
 const WafConfig = models.WafConfig;
 const BandwidthAbuseDefense = models.BandwidthAbuseDefense;
 const ServerCertInfo = models.ServerCertInfo;
@@ -337,6 +343,7 @@ const CreatePlanRequest = models.CreatePlanRequest;
 const DetectLengthLimitConfig = models.DetectLengthLimitConfig;
 const DescribeFunctionRuntimeEnvironmentRequest = models.DescribeFunctionRuntimeEnvironmentRequest;
 const IPGroup = models.IPGroup;
+const CustomActionParameter = models.CustomActionParameter;
 const DescribeDnsRecordsRequest = models.DescribeDnsRecordsRequest;
 const CreatePrefetchTaskResponse = models.CreatePrefetchTaskResponse;
 const CreateSecurityJSInjectionRuleRequest = models.CreateSecurityJSInjectionRuleRequest;
@@ -344,8 +351,10 @@ const DescribeMultiPathGatewaysResponse = models.DescribeMultiPathGatewaysRespon
 const MaxAgeParameters = models.MaxAgeParameters;
 const ModifyApplicationProxyRuleResponse = models.ModifyApplicationProxyRuleResponse;
 const DeleteFunctionReplicaRequest = models.DeleteFunctionReplicaRequest;
+const LogAnalysisDownloadTask = models.LogAnalysisDownloadTask;
 const DDoS = models.DDoS;
 const ModifyL7AccRulePriorityResponse = models.ModifyL7AccRulePriorityResponse;
+const DescribeZoneCustomVariablesResponse = models.DescribeZoneCustomVariablesResponse;
 const APIService = models.APIService;
 const CreateConfigGroupVersionResponse = models.CreateConfigGroupVersionResponse;
 const ConfirmOriginACLUpdateRequest = models.ConfirmOriginACLUpdateRequest;
@@ -354,6 +363,7 @@ const DownloadL7LogsRequest = models.DownloadL7LogsRequest;
 const DNSPodDetail = models.DNSPodDetail;
 const RuleCodeActionParams = models.RuleCodeActionParams;
 const DescribeSecurityClientAttesterRequest = models.DescribeSecurityClientAttesterRequest;
+const DescribeLogAnalysisDetailRequest = models.DescribeLogAnalysisDetailRequest;
 const WebSocketParameters = models.WebSocketParameters;
 const RuleItem = models.RuleItem;
 const SlowRateConfig = models.SlowRateConfig;
@@ -384,6 +394,7 @@ const ConfirmMultiPathGatewayOriginACLResponse = models.ConfirmMultiPathGatewayO
 const CreateJustInTimeTranscodeTemplateRequest = models.CreateJustInTimeTranscodeTemplateRequest;
 const FunctionReplica = models.FunctionReplica;
 const TimingDataItem = models.TimingDataItem;
+const DescribeZoneCustomVariablesRequest = models.DescribeZoneCustomVariablesRequest;
 const ModifyCustomErrorPageRequest = models.ModifyCustomErrorPageRequest;
 const ModifyFunctionRuleResponse = models.ModifyFunctionRuleResponse;
 const ModifyFunctionReplicaResponse = models.ModifyFunctionReplicaResponse;
@@ -416,7 +427,7 @@ const CreateMultiPathGatewayResponse = models.CreateMultiPathGatewayResponse;
 const DeleteJustInTimeTranscodeTemplatesResponse = models.DeleteJustInTimeTranscodeTemplatesResponse;
 const DeleteRulesResponse = models.DeleteRulesResponse;
 const ModifyDnsRecordsRequest = models.ModifyDnsRecordsRequest;
-const IdentifyZoneRequest = models.IdentifyZoneRequest;
+const DescribeLogAnalysisDetailResponse = models.DescribeLogAnalysisDetailResponse;
 const CacheConfig = models.CacheConfig;
 const ClientAttestationRules = models.ClientAttestationRules;
 const DescribeL7AccSettingRequest = models.DescribeL7AccSettingRequest;
@@ -509,6 +520,7 @@ const RulesSettingAction = models.RulesSettingAction;
 const ForceRedirectHTTPSParameters = models.ForceRedirectHTTPSParameters;
 const MutualTLS = models.MutualTLS;
 const ClientBehaviorDetection = models.ClientBehaviorDetection;
+const DescribeLogAnalysisDownloadTasksRequest = models.DescribeLogAnalysisDownloadTasksRequest;
 const ModifyApplicationProxyRuleRequest = models.ModifyApplicationProxyRuleRequest;
 const InferenceManualInstanceConfig = models.InferenceManualInstanceConfig;
 const CreateFunctionResponse = models.CreateFunctionResponse;
@@ -518,6 +530,7 @@ const SubRuleItem = models.SubRuleItem;
 const DescribeL7AccRulesResponse = models.DescribeL7AccRulesResponse;
 const DeleteSecurityIPGroupRequest = models.DeleteSecurityIPGroupRequest;
 const OriginHealthStatus = models.OriginHealthStatus;
+const CustomVariableOperationRuleBranch = models.CustomVariableOperationRuleBranch;
 const Grpc = models.Grpc;
 const CreateAliasDomainResponse = models.CreateAliasDomainResponse;
 const ClientIpCountry = models.ClientIpCountry;
@@ -525,18 +538,21 @@ const DeleteSecurityClientAttesterRequest = models.DeleteSecurityClientAttesterR
 const DeleteApplicationProxyRuleRequest = models.DeleteApplicationProxyRuleRequest;
 const ManagedRuleAction = models.ManagedRuleAction;
 const ModifyL7AccRuleResponse = models.ModifyL7AccRuleResponse;
+const CustomVariableOperationRuleAction = models.CustomVariableOperationRuleAction;
 const FileAscriptionInfo = models.FileAscriptionInfo;
 const CreateRealtimeLogDeliveryTaskResponse = models.CreateRealtimeLogDeliveryTaskResponse;
 const DescribeTopL7CacheDataResponse = models.DescribeTopL7CacheDataResponse;
 const DescribeFunctionRuntimeEnvironmentResponse = models.DescribeFunctionRuntimeEnvironmentResponse;
 const DescribeInferenceServiceDeploymentLogsRequest = models.DescribeInferenceServiceDeploymentLogsRequest;
 const GrpcParameters = models.GrpcParameters;
+const SetParameters = models.SetParameters;
 const BotManagementCustomRules = models.BotManagementCustomRules;
 const MultiPathGatewayNextOriginACL = models.MultiPathGatewayNextOriginACL;
 const RuleChoicePropertiesItem = models.RuleChoicePropertiesItem;
 const DescribeSecurityTemplateBindingsResponse = models.DescribeSecurityTemplateBindingsResponse;
 const SetContentIdentifierParameters = models.SetContentIdentifierParameters;
 const ModifyAliasDomainStatusResponse = models.ModifyAliasDomainStatusResponse;
+const CustomVariableOperationSubRule = models.CustomVariableOperationSubRule;
 const DeleteFunctionRulesRequest = models.DeleteFunctionRulesRequest;
 const DescribeTimingL7AnalysisDataRequest = models.DescribeTimingL7AnalysisDataRequest;
 const NoCache = models.NoCache;
@@ -561,6 +577,7 @@ const CreatePlanResponse = models.CreatePlanResponse;
 const DescribeApplicationProxiesRequest = models.DescribeApplicationProxiesRequest;
 const DescribeIPGroupReferencesRequest = models.DescribeIPGroupReferencesRequest;
 const AllowActionParameters = models.AllowActionParameters;
+const LogItem = models.LogItem;
 const InferenceResourceConfigForModify = models.InferenceResourceConfigForModify;
 const Hsts = models.Hsts;
 const OwnershipVerification = models.OwnershipVerification;
@@ -581,6 +598,7 @@ const ModifyL4ProxyRulesStatusRequest = models.ModifyL4ProxyRulesStatusRequest;
 const DescribeCustomErrorPagesRequest = models.DescribeCustomErrorPagesRequest;
 const GatewayRegion = models.GatewayRegion;
 const CachePrefreshParameters = models.CachePrefreshParameters;
+const RuleEngineCustomAction = models.RuleEngineCustomAction;
 const Action = models.Action;
 const JSInjectionRule = models.JSInjectionRule;
 const UpstreamFollowRedirectParameters = models.UpstreamFollowRedirectParameters;
@@ -617,8 +635,9 @@ const ClientIPHeaderParameters = models.ClientIPHeaderParameters;
 const L4OfflineLog = models.L4OfflineLog;
 const ModifyAliasDomainResponse = models.ModifyAliasDomainResponse;
 const DeleteDnsRecordsRequest = models.DeleteDnsRecordsRequest;
+const DescribeAvailableCustomActionsForRuleEngineResponse = models.DescribeAvailableCustomActionsForRuleEngineResponse;
 const OfflineCacheParameters = models.OfflineCacheParameters;
-const CreateZoneRequest = models.CreateZoneRequest;
+const CustomActionParameters = models.CustomActionParameters;
 const DeleteAliasDomainRequest = models.DeleteAliasDomainRequest;
 const DeleteFunctionRulesResponse = models.DeleteFunctionRulesResponse;
 const DescribeTopL7AnalysisDataResponse = models.DescribeTopL7AnalysisDataResponse;
@@ -634,6 +653,8 @@ const DescribeDDoSAttackEventRequest = models.DescribeDDoSAttackEventRequest;
 const OriginGroup = models.OriginGroup;
 const ModifySecurityIPGroupRequest = models.ModifySecurityIPGroupRequest;
 const DescribeFunctionReplicasRequest = models.DescribeFunctionReplicasRequest;
+const IdentifyZoneRequest = models.IdentifyZoneRequest;
+const ModifyZoneCustomVariablesResponse = models.ModifyZoneCustomVariablesResponse;
 const VaryParameters = models.VaryParameters;
 const L4Proxy = models.L4Proxy;
 const SkipCondition = models.SkipCondition;
@@ -679,6 +700,7 @@ const ClientIPCountryParameters = models.ClientIPCountryParameters;
 const IncreasePlanQuotaResponse = models.IncreasePlanQuotaResponse;
 const DescribeIPRegionResponse = models.DescribeIPRegionResponse;
 const DescribeAvailablePlansRequest = models.DescribeAvailablePlansRequest;
+const CustomVariableOperation = models.CustomVariableOperation;
 const ModifyMultiPathGatewayStatusResponse = models.ModifyMultiPathGatewayStatusResponse;
 const IPReputationGroup = models.IPReputationGroup;
 const EdgeKVDeleteResponse = models.EdgeKVDeleteResponse;
@@ -733,6 +755,7 @@ const ModifyMultiPathGatewaySecretKeyResponse = models.ModifyMultiPathGatewaySec
 const DescribeMultiPathGatewaySecretKeyRequest = models.DescribeMultiPathGatewaySecretKeyRequest;
 const DDoSBlockData = models.DDoSBlockData;
 const IPSSLSetting = models.IPSSLSetting;
+const ModifyZoneCustomVariablesRequest = models.ModifyZoneCustomVariablesRequest;
 const DescribeContentQuotaRequest = models.DescribeContentQuotaRequest;
 const ModifyFunctionReplicaRequest = models.ModifyFunctionReplicaRequest;
 const DescribeMultiPathGatewaysRequest = models.DescribeMultiPathGatewaysRequest;
@@ -742,6 +765,7 @@ const ModifyMultiPathGatewaySecretKeyRequest = models.ModifyMultiPathGatewaySecr
 const DnsRecord = models.DnsRecord;
 const InferenceContainerConfig = models.InferenceContainerConfig;
 const OriginPrivateParameters = models.OriginPrivateParameters;
+const RuleEngineCustomActionParameterSchema = models.RuleEngineCustomActionParameterSchema;
 const ModifyZoneWorkModeResponse = models.ModifyZoneWorkModeResponse;
 const HSTSParameters = models.HSTSParameters;
 const Tag = models.Tag;
@@ -1106,6 +1130,17 @@ A site can be deleted by using the [Delete Site](https://intl.cloud.tencent.com/
     }
 
     /**
+     * This API is used to query the log download task list for log analysis. Note: Only download task records from the last three days are retained.
+     * @param {DescribeLogAnalysisDownloadTasksRequest} req
+     * @param {function(string, DescribeLogAnalysisDownloadTasksResponse):void} cb
+     * @public
+     */
+    DescribeLogAnalysisDownloadTasks(req, cb) {
+        let resp = new DescribeLogAnalysisDownloadTasksResponse();
+        this.request("DescribeLogAnalysisDownloadTasks", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify rules in the [rule engine](https://intl.cloud.tencent.com/document/product/1552/70901?from_cn_redirect=1), supporting only one rule modification per request.
      * @param {ModifyL7AccRuleRequest} req
      * @param {function(string, ModifyL7AccRuleResponse):void} cb
@@ -1280,6 +1315,17 @@ You can obtain the designated CNAME domain name assigned by EdgeOne for the inte
     CheckCnameStatus(req, cb) {
         let resp = new CheckCnameStatusResponse();
         this.request("CheckCnameStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the log analysis details. The data comes from the log data of the real-time log push task with the destination "log_analysis" under the site.
+     * @param {DescribeLogAnalysisDetailRequest} req
+     * @param {function(string, DescribeLogAnalysisDetailResponse):void} cb
+     * @public
+     */
+    DescribeLogAnalysisDetail(req, cb) {
+        let resp = new DescribeLogAnalysisDetailResponse();
+        this.request("DescribeLogAnalysisDetail", req, resp, cb);
     }
 
     /**
@@ -2225,7 +2271,7 @@ Notes:
     }
 
     /**
-     * This API is used to create a new version for the specified configuration group in version management mode. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
+     * In version management mode, this API is used to create a new version of the specified configuration group.
      * @param {CreateConfigGroupVersionRequest} req
      * @param {function(string, CreateConfigGroupVersionResponse):void} cb
      * @public
@@ -2346,6 +2392,19 @@ If there are already EdgeOne plans under the current account, it is recommended 
     CreateSecurityClientAttester(req, cb) {
         let resp = new CreateSecurityClientAttesterResponse();
         this.request("CreateSecurityClientAttester", req, resp, cb);
+    }
+
+    /**
+     * This API is used to manage site-level custom variables, supporting the creation, modification, and deletion of variable definitions and variable operations. The submitted list will override the corresponding existing configuration. To clear the configuration, pass in an empty list. Configuration items not passed in remain unchanged. The default values for variable definitions and variable operations are both empty.
+
+For operations related to rule-level custom variables, call the CreateL7AccRules or ModifyL7AccRule API.
+     * @param {ModifyZoneCustomVariablesRequest} req
+     * @param {function(string, ModifyZoneCustomVariablesResponse):void} cb
+     * @public
+     */
+    ModifyZoneCustomVariables(req, cb) {
+        let resp = new ModifyZoneCustomVariablesResponse();
+        this.request("ModifyZoneCustomVariables", req, resp, cb);
     }
 
     /**
@@ -2807,6 +2866,17 @@ Note:
     }
 
     /**
+     * This API is used to query the list of available custom configurations for rule engine operations on a site.
+     * @param {DescribeAvailableCustomActionsForRuleEngineRequest} req
+     * @param {function(string, DescribeAvailableCustomActionsForRuleEngineResponse):void} cb
+     * @public
+     */
+    DescribeAvailableCustomActionsForRuleEngine(req, cb) {
+        let resp = new DescribeAvailableCustomActionsForRuleEngineResponse();
+        this.request("DescribeAvailableCustomActionsForRuleEngine", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the global configuration of [Site Acceleration](https://intl.cloud.tencent.com/document/product/1552/96193?from_cn_redirect=1).
      * @param {DescribeL7AccSettingRequest} req
      * @param {function(string, DescribeL7AccSettingResponse):void} cb
@@ -2949,6 +3019,19 @@ This API is used to learn about the detailed capacity of JIT transcoding. EdgeOn
     ModifyRealtimeLogDeliveryTask(req, cb) {
         let resp = new ModifyRealtimeLogDeliveryTaskResponse();
         this.request("ModifyRealtimeLogDeliveryTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query site-level custom variable configurations, including variable definitions and variable operations. If not configured, both variable definitions and variable operations return empty lists.
+
+If needed, call the DescribeL7AccRules API to query rule-level custom variables.
+     * @param {DescribeZoneCustomVariablesRequest} req
+     * @param {function(string, DescribeZoneCustomVariablesResponse):void} cb
+     * @public
+     */
+    DescribeZoneCustomVariables(req, cb) {
+        let resp = new DescribeZoneCustomVariablesResponse();
+        this.request("DescribeZoneCustomVariables", req, resp, cb);
     }
 
     /**

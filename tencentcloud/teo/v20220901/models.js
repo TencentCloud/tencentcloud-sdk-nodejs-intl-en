@@ -621,6 +621,77 @@ class AdaptiveFrequencyControl extends  AbstractModel {
 }
 
 /**
+ * DescribeAvailableCustomActionsForRuleEngine request structure.
+ * @class
+ */
+class DescribeAvailableCustomActionsForRuleEngineRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Zone ID.</p>
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * <p>Filter criteria. Multiple conditions have an AND relationship. The maximum number of Filters.Values is 20. If this parameter is left empty, return all available rule engine custom configurations under the current site. Detailed filter criteria:</p><li>action-id: Filter by the unique identification ID of the custom configuration.</li><li>name: Filter by the name of the custom configuration.</a></li>Fuzzy query only supports filtering fields named <code>name</code>.<p></p>
+         * @type {Array.<AdvancedFilter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * <p>Paginated query limit.</p><p>Value ranges from 0 to 1000.</p><p>Default value: 20.</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <p>Paging offset.</p><p>Default value: 0.</p>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * <p>Sorting field. Valid values:</p><li>action-id: Sort by custom configuration unique identification ID.</li><li>create-time: Sort by custom configuration creation time.</li>Default value: <code>action-id</code>.<p></p>
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+        /**
+         * <p>Sorting method. Valid values:</p><li>asc: ascending sort;</li><li>desc: sort in descending order.</li>Default value: desc.<p></p>
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AdvancedFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+
+    }
+}
+
+/**
  * Auto-renewal configuration item in a prepaid plan.
  * @class
  */
@@ -687,54 +758,43 @@ class SecurityAction extends  AbstractModel {
         super();
 
         /**
-         * Specifies the specific actions for safe execution. valid values:.
-<Li>Deny. specifies to block requests from accessing site resources.</li>.
-<Li>Monitor: observation, only record logs.</li>.
-<li>Redirect: Redirect to URL.</li>.
-<Li>Disabled: specifies that the rule is not enabled.</li>.
-<Li>Allow: specifies whether to allow access with delayed processing of requests.</li>.
-<Li>Challenge: specifies the challenge content to respond to.</li>.
-<Li>Trans: pass and allow requests to directly access site resources.</li>.
-<Li>BlockIP: to be deprecated. ip block.</li>.
-<Li>ReturnCustomPage: to be deprecated. use specified page for interception.</li>.
-<li>JSChallenge: to be deprecated, JavaScript challenge;</li>.
-<Li>ManagedChallenge: to be deprecated. managed challenge.</li>.
+         * <p>Specific actions for safe execution. Valid values:</p><ul><li>Deny: block, prevent requests from accessing site resources;</li><li>Monitor: observe, only record logs;</li><li>Redirect: redirect to URL;</li><li>Disabled: not enabled, do not enable the specified rule;</li><li>Allow: pass, skip the remaining rules of the current security module. Delay response when the AllowActionParameters parameter is configured;</li><li>Challenge: challenge, respond with challenge content;</li><li>BlockIP: to be deprecated, IP blocking;</li><li>ReturnCustomPage: to be deprecated, use a specified page for interception;</li><li>JSChallenge: to be deprecated, JavaScript challenge;</li><li>ManagedChallenge: to be deprecated, managed challenge.</li></ul>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Additional parameters when Name is Deny.
+         * <p>Additional parameter when Name is Deny.</p>
          * @type {DenyActionParameters || null}
          */
         this.DenyActionParameters = null;
 
         /**
-         * Additional parameter when Name is Redirect.
+         * <p>Additional parameter when Name is Redirect.</p>
          * @type {RedirectActionParameters || null}
          */
         this.RedirectActionParameters = null;
 
         /**
-         * Additional parameters when Name is Allow.
+         * <p>Additional parameter when Name is Allow.</p>
          * @type {AllowActionParameters || null}
          */
         this.AllowActionParameters = null;
 
         /**
-         * Additional parameter when Name is Challenge.
+         * <p>Additional parameter when Name is Challenge.</p>
          * @type {ChallengeActionParameters || null}
          */
         this.ChallengeActionParameters = null;
 
         /**
-         * To be deprecated, additional parameter when Name is BlockIP.
+         * <p>To be deprecated. Additional parameter when Name is BlockIP.</p>
          * @type {BlockIPActionParameters || null}
          */
         this.BlockIPActionParameters = null;
 
         /**
-         * To be deprecated, additional parameter when Name is ReturnCustomPage.
+         * <p>To be deprecated. An additional parameter when Name is ReturnCustomPage.</p>
          * @type {ReturnCustomPageActionParameters || null}
          */
         this.ReturnCustomPageActionParameters = null;
@@ -1379,6 +1439,48 @@ class DescribeSecurityClientAttesterResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Custom Variable details.
+ * @class
+ */
+class CustomVariable extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Variable name. You need to fill in the complete prefix: user.zone.* refers to a site-level custom variable, and user.rule.* refers to a rule-level custom variable. The custom part after the prefix supports only uppercase and lowercase letters, digits, and underscores. Variable names are case-sensitive and cannot exceed 50 characters in length. Once a variable is created successfully, its name cannot be modified.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Initial value of the variable. Supports the use of constant strings, variables, and formulas. Length cannot exceed 255 characters.</p>
+         * @type {string || null}
+         */
+        this.InitialValue = null;
+
+        /**
+         * <p>Variable description. Length limited to no more than 60 characters.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.InitialValue = 'InitialValue' in params ? params.InitialValue : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -2377,10 +2479,16 @@ class TCEOCaptchaOption extends  AbstractModel {
         super();
 
         /**
-         * EdgeOne human-machine verification mode. Valid values:<li>Invisible: invisible verification;</li><li>Adaptive: self adaptive interactive verification.</li>
+         * <p>Browser-side WebView human-machine verification interaction mode.</p><p>Enumeration values:</p><ul><li>Invisible: invisible verification</li><li>Adaptive: self adaptive interactive verification</li></ul><p>Default value: Invisible</p>
          * @type {string || null}
          */
         this.CaptchaMode = null;
+
+        /**
+         * <p>Human-machine verification interaction mode for native apps on mobile terminals.</p><p>Enumeration values:</p><ul><li>Invisible: Invisible verification</li><li>Visible: interactive verification</li></ul><p>Default value: Invisible</p>
+         * @type {string || null}
+         */
+        this.MobileCaptchaMode = null;
 
     }
 
@@ -2392,6 +2500,7 @@ class TCEOCaptchaOption extends  AbstractModel {
             return;
         }
         this.CaptchaMode = 'CaptchaMode' in params ? params.CaptchaMode : null;
+        this.MobileCaptchaMode = 'MobileCaptchaMode' in params ? params.MobileCaptchaMode : null;
 
     }
 }
@@ -7590,46 +7699,49 @@ class ConfigGroupVersionInfo extends  AbstractModel {
         super();
 
         /**
-         * Version ID.
+         * <p>Configuration group version ID, a unique resource ID allocated by EdgeOne when creating a configuration group version.</p><p>Parameter format: ver-2kplomhisdcb</p><p>For reference:</p><ul><li><a href="https://www.tencentcloud.com/document/api/1552/101867?from_cn_redirect=1">CreateConfigGroupVersion</a> return value <code>VersionId</code></li><li><a href="https://www.tencentcloud.com/document/api/1552/101864?from_cn_redirect=1">DescribeConfigGroupVersions</a> return value <code>ConfigGroupVersionInfos</code></li></ul>
          * @type {string || null}
          */
         this.VersionId = null;
 
         /**
-         * Version No.
+         * <p>Configuration group version number. This parameter only shows the version. Each time a new version of the configuration group is created, the version number increments by one. The initial version number is "0".</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/1552/101864?from_cn_redirect=1">DescribeConfigGroupVersions</a> return value <code>ConfigGroupVersionInfos</code></p>
          * @type {string || null}
          */
         this.VersionNumber = null;
 
         /**
-         * Configuraration group ID.
+         * <p>Version ID of the source version on which the configuration group version is based. When creating a configuration group version, designate the source version ID. The new version will be created as a derivative based on the configuration of that source version.</p><p>Parameter format: ver-2kplomhisdcb</p><p>Value for reference:</p><ul><li><a href="https://www.tencentcloud.com/document/api/1552/101867?from_cn_redirect=1">CreateConfigGroupVersion</a> return value <code>VersionId</code></li><li><a href="https://www.tencentcloud.com/document/api/1552/101864?from_cn_redirect=1">DescribeConfigGroupVersions</a> return value <code>ConfigGroupVersionInfos</code></li></ul>
          * @type {string || null}
          */
-        this.GroupId = null;
+        this.SourceVersion = null;
 
         /**
-         * Configuration group type. Optional options are as follows: <li>l7_acceleration: layer-7 acceleration configuration group;</li><li>edge_functions: edge function configuration group;</li><li>web_security: web protection configuration group.</li>
+         * <p>Configuration group type to which the version belongs.</p><p>Enumeration value:</p><ul><li>l7_acceleration: Layer-7 acceleration configuration group</li><li>edge_functions: Edge function configuration group</li><li>web_security: Web protection configuration group</li></ul>
          * @type {string || null}
          */
         this.GroupType = null;
 
         /**
-         * Version description.
+         * <p>Configuration group ID for version ownership.</p><p>Parameter format: cg-2kplomhisdcb</p>
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * <p>Version description.</p>
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * Version status. Valid values: 
-<li>creating: Being created.</li>
-<li>inactive: Not effective.</li>
-<li>active: Effective. </li>
+         * <p>Version effective status.</p><p>Enumeration value:</p><ul><li>creating: Version creation in progress</li><li>inactive: Version not in effect</li><li>active: Version in effect</li></ul>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+         * <p>Version creation time, which adopts Coordinated Universal Time (UTC) and follows the date and time format of the ISO 8601 standard.</p>
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -7645,8 +7757,9 @@ class ConfigGroupVersionInfo extends  AbstractModel {
         }
         this.VersionId = 'VersionId' in params ? params.VersionId : null;
         this.VersionNumber = 'VersionNumber' in params ? params.VersionNumber : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.SourceVersion = 'SourceVersion' in params ? params.SourceVersion : null;
         this.GroupType = 'GroupType' in params ? params.GroupType : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
@@ -10264,7 +10377,7 @@ class HTTPUpstreamTimeoutParameters extends  AbstractModel {
         super();
 
         /**
-         * HTTP response timeout in seconds. value range: 5–600.
+         * <p>HTTP response timeout.</p><p>Value range: [5, 600]</p><p>Unit: seconds</p><p>Default value: 15</p>
          * @type {number || null}
          */
         this.ResponseTimeout = null;
@@ -13063,6 +13176,34 @@ class DescribeZoneSettingRequest extends  AbstractModel {
 }
 
 /**
+ * Advanced origin optimization config.
+ * @class
+ */
+class AdvancedOriginRoutingParameters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Origin optimization direction. Valid values:</p><li>MainlandChinaAndGlobalAdaptive: Self adaptive. The domain name must enable "smart acceleration" simultaneously to take effect. EdgeOne will automatically match the optimal origin-pull optimization direction based on the actual geographic location of the client and origin server, without the need to manually specify. For example, if www.example.com enables "advanced origin optimization" but "smart acceleration" is turned off or only partial match conditions are enabled, "advanced origin optimization" will not be effective.</li>
+         * @type {string || null}
+         */
+        this.Direction = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Direction = 'Direction' in params ? params.Direction : null;
+
+    }
+}
+
+/**
  * ModifyL4ProxyStatus response structure.
  * @class
  */
@@ -13655,6 +13796,104 @@ class Task extends  AbstractModel {
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.FailType = 'FailType' in params ? params.FailType : null;
         this.FailMessage = 'FailMessage' in params ? params.FailMessage : null;
+
+    }
+}
+
+/**
+ * CreateZone request structure.
+ * @class
+ */
+class CreateZoneRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Site access type. if this parameter is not input, the default value `partial` is used. valid values of this parameter are as follows:.
+<li>partial: CNAME access;</li>.
+<li>full: NS access;</li>.
+<li>noDomainAccess: access with no domain name.</li>.
+<li>dnsPodAccess: DNSPod hosted access. to use this access mode, your domain name should have been hosted on DNSPod.</li>.
+<li>ai: edge reasoning integration.</li>.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Site name. For sites connected via CNAME/NS, pass in the secondary domain name (example.com). Leave it blank if the site is connected without a domain name. 
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * The acceleration area of the L7 domain name when `Type` is `partial` or `full`. When Type is `noDomainAccess`, please leave it blank.
+<li>`global`: Global AZs</li>
+<li>`mainland`: AZs in the Chinese mainland</li>
+<li>`overseas`: (Default) AZs outside the Chinese mainland </li>
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Target package ID to bind. when a package already exists under your account, you can fill in this parameter to directly bind the site to the package. if there are currently no bindable packages, you can purchase a package via [CreatePlan](https://intl.cloud.tencent.com/document/product/1552/105771?from_cn_redirect=1).
+Note: if this parameter is not specified, a site in "init" status will be created. the site is inactive and will not be displayed in the console. you can bind a package and activate the site through [BindZoneToPlan](https://intl.cloud.tencent.com/document/product/1552/83042?from_cn_redirect=1). after activation, the site can provide service properly.
+
+
+         * @type {string || null}
+         */
+        this.PlanId = null;
+
+        /**
+         * Identical site identifier. limits input to numbers, english letters, ".", "-", and "_", with a character limit of 200 characters. for details, see identical site identifier (https://intl.cloud.tencent.com/document/product/1552/70202?from_cn_redirect=1). leave this field blank if this usage scenario does not apply.
+         * @type {string || null}
+         */
+        this.AliasZoneName = null;
+
+        /**
+         * Tags of the site. To create tags, go to the [Tag Console](https://console.cloud.tencent.com/tag/taglist).
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Whether to allow duplicate sites. Values:
+<li>`true`: Duplicate sites are allowed.</li>
+<li>`false`: Duplicate sites are not allowed.</li>If it is left empty, the default value `false` is used.
+         * @type {boolean || null}
+         */
+        this.AllowDuplicates = null;
+
+        /**
+         * Whether to skip scanning the existing DNS records of the site. Default value: false.
+         * @type {boolean || null}
+         */
+        this.JumpStart = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
+        this.AliasZoneName = 'AliasZoneName' in params ? params.AliasZoneName : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.AllowDuplicates = 'AllowDuplicates' in params ? params.AllowDuplicates : null;
+        this.JumpStart = 'JumpStart' in params ? params.JumpStart : null;
 
     }
 }
@@ -14355,43 +14594,43 @@ class CustomRule extends  AbstractModel {
         super();
 
         /**
-         * The custom rule name.
+         * <p>Custom rule name.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * The specific content of custom rules must comply with expression grammar. For detailed specifications, please refer to the product document (https://www.tencentcloud.com/document/product/1552/125343?from_cn_redirect=1).
+         * <p>The specific content of a custom rule must comply with the expression syntax. For detailed specifications, refer to the <a href="https://www.tencentcloud.com/document/product/1552/125343?from_cn_redirect=1">product document</a>.</p>
          * @type {string || null}
          */
         this.Condition = null;
 
         /**
-         * The handling action of custom rules. The value range of SecurityAction.Name is as follows:<ul><li>Deny: blocking;</li><li>Monitor: observation;</li><li>ReturnCustomPage: use specified page to block;</li><li>Redirect: redirect to URL;</li><li>BlockIP: IP blocking;</li><li>JSChallenge: JavaScript challenge;</li><li>ManagedChallenge: managed challenge;</li><li>Allow: allowing.</li></ul>
+         * <p>Handling action of the custom rule. SecurityAction.Name value range is as follows:</p><ul><li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li><li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li><li>Monitor: observe;</li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li><li>Redirect: redirect to a URL.</li></ul>
          * @type {SecurityAction || null}
          */
         this.Action = null;
 
         /**
-         * Whether the custom rule is enabled. Valid values: <ul><li>on: enable</li><li>off: disable</li></ul>
+         * <p>Whether the custom rule is enabled. Valid values: <ul><li>on: enabled;</li><li>off: disabled.</li></ul></p>
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * ID of the custom rule. Different rule configuration operations are supported by rule ID:<ul><li>Add a new rule: The ID is empty or the ID parameter is not specified.</li><li>Modify an existing rule: Specify the rule ID that needs to be updated or modified.</li><li>Delete an existing rule: Existing rules not included in the Rules list in the CustomRules parameter will be deleted.</li></ul>
+         * <p>ID of the custom rule. The rule ID supports different rule configuration operations: <ul><li>Add a new rule: leave the ID empty or do not specify the ID parameter;</li><li>Modify an existing rule: specify the rule ID that needs to be updated/modified;</li><li>Delete an existing rule: existing rules not included in the Rules list in the CustomRules parameter will be deleted.</li></ul></p>
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Type of custom rule. Valid values: <ul><li>BasicAccessRule: basic access control;</li><li>PreciseMatchRule: exact matching rule;</li><li>ManagedAccessRule: expert customized rule, only supported in output parameters.</li></ul>Description: When RuleType is not specified, it defaults to `PreciseMatchRule`.
+         * <p>Type of the custom rule. Valid values: <ul><li>BasicAccessRule: basic access control;</li><li>PreciseMatchRule: exact matching rule;</li><li>ManagedAccessRule: expert customized rule, supported only for output parameters.</li></ul>Note: If RuleType is not specified, it defaults to <code>PreciseMatchRule</code>.</p>
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * Priority of custom rules, ranging from 0 to 100, defaults to 0, and only supports exact matching rules (`PreciseMatchRule`).
+         * <p>Priority of custom rules. Value range: 0-100. Default value: 0. Only exact matching rules (<code>PreciseMatchRule</code>) are supported.</p>
          * @type {number || null}
          */
         this.Priority = null;
@@ -14459,6 +14698,49 @@ class BotExtendAction extends  AbstractModel {
         }
         this.Action = 'Action' in params ? params.Action : null;
         this.Percent = 'Percent' in params ? params.Percent : null;
+
+    }
+}
+
+/**
+ * Custom configuration
+ * @class
+ */
+class CustomAction extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>ID of the custom configuration item.</p><p>You can obtain it through the returned value CustomActionSet[].ActionId of the DescribeAvailableCustomActionsForRuleEngine API.</p>
+         * @type {string || null}
+         */
+        this.ActionId = null;
+
+        /**
+         * <p>Parameter values of each parameter field under this custom configuration.</p><p>You can obtain them through the API return value CustomActionSet[].Parameters of DescribeAvailableCustomActionsForRuleEngine.</p>
+         * @type {Array.<CustomActionParameter> || null}
+         */
+        this.Parameters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActionId = 'ActionId' in params ? params.ActionId : null;
+
+        if (params.Parameters) {
+            this.Parameters = new Array();
+            for (let z in params.Parameters) {
+                let obj = new CustomActionParameter();
+                obj.deserialize(params.Parameters[z]);
+                this.Parameters.push(obj);
+            }
+        }
 
     }
 }
@@ -14697,7 +14979,12 @@ class ExceptConfig extends  AbstractModel {
 }
 
 /**
- * Additional parameter for SecurityAction `Redirect`.
+ * Additional parameter for safe execution when the action is set to redirect.
+
+This parameter is used to specify the extra handling action taken by the system when a security rule is hit and a redirection action is executed.
+Different disposal actions are configured with different fixed parameter combinations. The system will determine the actually effective disposal action type according to the configured parameter combination.
+During the same redirection execution, only one handling action can be configured and made effective. Parameter combinations for multiple disposal actions cannot appear at the same time. Otherwise, it is deemed as an invalid configuration.
+RedirectActionParameters supports the following extra handling actions: <li>Redirect: redirect client requests to the specified destination URL. Corresponding parameter: URL.</li>
  * @class
  */
 class RedirectActionParameters extends  AbstractModel {
@@ -15636,7 +15923,6 @@ class ErrorPageParameters extends  AbstractModel {
 
         /**
          * Custom error page configuration list.
-Note: this field may return null, which indicates a failure to obtain a valid value.
          * @type {Array.<ErrorPage> || null}
          */
         this.ErrorPageParams = null;
@@ -16155,6 +16441,56 @@ class CnameStatus extends  AbstractModel {
         this.RecordName = 'RecordName' in params ? params.RecordName : null;
         this.Cname = 'Cname' in params ? params.Cname : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeLogAnalysisDownloadTasks response structure.
+ * @class
+ */
+class DescribeLogAnalysisDownloadTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Total number of entries for the log analysis download task that meets the match condition.</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * <p>Download task list for log analysis that meets the log match condition.</p>
+         * @type {Array.<LogAnalysisDownloadTask> || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new LogAnalysisDownloadTask();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -17235,6 +17571,90 @@ class IPGroup extends  AbstractModel {
 }
 
 /**
+ * Parameter content of a single field in custom configuration.
+ * @class
+ */
+class CustomActionParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Field Name of each parameter under custom configuration.</p><p>You can get it through the API return value CustomActionSet[].Parameters[].Name of DescribeAvailableCustomActionsForRuleEngine, such as "Seconds", "Ports", "StatusCode".</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Data type of each parameter field value under custom configuration.</p><p>Enumeration value:</p><ul><li>String: string type.</li><li>Integer: integer type.</li><li>Float: floating-point type.</li><li>Boolean: boolean type.</li><li>ArrayOfString: string array type.</li><li>ArrayOfInteger: integer array type.</li><li>ArrayOfFloat: floating-point number array type.</li></ul><p>It can be obtained through the API return value CustomActionSet[].Parameters[].Type of DescribeAvailableCustomActionsForRuleEngine.</p>
+         * @type {string || null}
+         */
+        this.ValueType = null;
+
+        /**
+         * <p>Parameter value of string type. This parameter is required when ValueType is String.</p><p>You can get the default value, measurement unit, limit and other details of the parameter value through the CustomActionSet[].Parameters in the API return value of DescribeAvailableCustomActionsForRuleEngine.</p>
+         * @type {string || null}
+         */
+        this.StringValue = null;
+
+        /**
+         * <p>Integer type parameter value. This parameter is required when ValueType is Integer.</p><p>You can get the default value, measurement unit, limit, and other details of the parameter value through the CustomActionSet[].Parameters field in the API return value of DescribeAvailableCustomActionsForRuleEngine.</p>
+         * @type {number || null}
+         */
+        this.IntegerValue = null;
+
+        /**
+         * <p>Floating-point type parameter value. This parameter is required when ValueType is Float.</p><p>You can get the default value, measurement unit, limitation, and other details of the parameter value through the CustomActionSet[].Parameters field in the API return value of DescribeAvailableCustomActionsForRuleEngine.</p>
+         * @type {number || null}
+         */
+        this.FloatValue = null;
+
+        /**
+         * <p>Boolean type parameter value. This parameter is required when ValueType is Boolean.</p><p>You can get the default value, measurement unit, limitation, and other details of the parameter value through the CustomActionSet[].Parameters in the API return value of DescribeAvailableCustomActionsForRuleEngine.</p>
+         * @type {boolean || null}
+         */
+        this.BooleanValue = null;
+
+        /**
+         * <p>String array type parameter value. This parameter is required when ValueType is ArrayOfString.</p><p>You can get the default value, measurement unit, and limitation of the parameter value through the API return value CustomActionSet[].Parameters of the DescribeAvailableCustomActionsForRuleEngine API.</p>
+         * @type {Array.<string> || null}
+         */
+        this.StringArrayValue = null;
+
+        /**
+         * <p>Array type parameter value of integer. This parameter is required when ValueType is ArrayOfInteger.</p><p>You can get the default value, measurement unit, limit, and other details of the parameter value through the API return value CustomActionSet[].Parameters of the DescribeAvailableCustomActionsForRuleEngine API.</p>
+         * @type {Array.<number> || null}
+         */
+        this.IntegerArrayValue = null;
+
+        /**
+         * <p>Floating-point number array type parameter value. This parameter is required when ValueType is ArrayOfFloat.</p><p>You can get the default value, measurement unit, limitation, and other descriptions of the parameter value through the CustomActionSet[].Parameters field in the API return value of DescribeAvailableCustomActionsForRuleEngine.</p>
+         * @type {Array.<number> || null}
+         */
+        this.FloatArrayValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ValueType = 'ValueType' in params ? params.ValueType : null;
+        this.StringValue = 'StringValue' in params ? params.StringValue : null;
+        this.IntegerValue = 'IntegerValue' in params ? params.IntegerValue : null;
+        this.FloatValue = 'FloatValue' in params ? params.FloatValue : null;
+        this.BooleanValue = 'BooleanValue' in params ? params.BooleanValue : null;
+        this.StringArrayValue = 'StringArrayValue' in params ? params.StringArrayValue : null;
+        this.IntegerArrayValue = 'IntegerArrayValue' in params ? params.IntegerArrayValue : null;
+        this.FloatArrayValue = 'FloatArrayValue' in params ? params.FloatArrayValue : null;
+
+    }
+}
+
+/**
  * DescribeDnsRecords request structure.
  * @class
  */
@@ -17564,6 +17984,118 @@ class DeleteFunctionReplicaRequest extends  AbstractModel {
 }
 
 /**
+ * Log analytics log download task.
+ * @class
+ */
+class LogAnalysisDownloadTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Task ID.</p>
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * <p>Site ID.</p>
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * <p>Data ownership region. Valid values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding the Chinese mainland).</li></ul></p>
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * <p>Start time, example value: 2020-04-29T00:00:00Z.</p>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * <p>End time. Example value: 2020-04-30T00:00:00Z.</p>
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * <p>Log type. Valid values: <ul><li> l7-access-logs: Layer 7 Access Logs;</li><li>web-attack: Managed rule log.</li></ul></p>
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * <p><a href="https://www.tencentcloud.com/document/product/1552/124662?from_cn_redirect=1">Log match condition</a>. Maximum length 12KB.</p>
+         * @type {string || null}
+         */
+        this.Condition = null;
+
+        /**
+         * <p>File format, valid values:</p><ul><li>csv.</li></ul>
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * <p>Whether raw logs are returned in time sequence. Valid values: <ul><li>asc: ascending order;</li><li>desc: descending order.</li></ul></p>
+         * @type {string || null}
+         */
+        this.Sort = null;
+
+        /**
+         * <p>Task status, valid values: <ul><li>loading: being processed, waiting to generate download link;</li><li> failed: processing failure, current task cannot be downloaded;</li><li>completed: packaging completed, ready for download.</li></ul></p>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Task creation time. After successful task creation, the retention period is 3 days.</p>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * <p>Download link, only returned when Status = completed.</p>
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * <p>Task expiration time. After expiry, the download address will be unavailable. Please obtain a new download address through this API.</p>
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.Condition = 'Condition' in params ? params.Condition : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.Sort = 'Sort' in params ? params.Sort : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+
+    }
+}
+
+/**
  * DDoS mitigation configuration
  * @class
  */
@@ -17622,6 +18154,64 @@ class ModifyL7AccRulePriorityResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeZoneCustomVariables response structure.
+ * @class
+ */
+class DescribeZoneCustomVariablesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>List of site-level custom variables.</p>
+         * @type {Array.<CustomVariable> || null}
+         */
+        this.CustomVariables = null;
+
+        /**
+         * <p>Site-level custom variable calculation rules.</p>
+         * @type {Array.<CustomVariableOperation> || null}
+         */
+        this.CustomVariableOperations = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CustomVariables) {
+            this.CustomVariables = new Array();
+            for (let z in params.CustomVariables) {
+                let obj = new CustomVariable();
+                obj.deserialize(params.CustomVariables[z]);
+                this.CustomVariables.push(obj);
+            }
+        }
+
+        if (params.CustomVariableOperations) {
+            this.CustomVariableOperations = new Array();
+            for (let z in params.CustomVariableOperations) {
+                let obj = new CustomVariableOperation();
+                obj.deserialize(params.CustomVariableOperations[z]);
+                this.CustomVariableOperations.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * API service configuration.
  * @class
  */
@@ -17672,7 +18262,7 @@ class CreateConfigGroupVersionResponse extends  AbstractModel {
         super();
 
         /**
-         * Version ID.
+         * <p>Version ID.</p>
          * @type {string || null}
          */
         this.VersionId = null;
@@ -17935,6 +18525,90 @@ class DescribeSecurityClientAttesterRequest extends  AbstractModel {
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeLogAnalysisDetail request structure.
+ * @class
+ */
+class DescribeLogAnalysisDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Site ID.</p>
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * <p>Data service area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding Mainland China).</li></ul>Note: If the site service area is "global availability zone", you need to query the data of mainland and overseas separately to obtain all data.</p>
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * <p>Start time, example value: 2020-04 29T00:00:00Z. The maximum span supported for query start time to this day varies by package version. For more details, see <a href="https://www.tencentcloud.com/document/product/1552/94165?from_cn_redirect=1#45435466-9103-4ff6-be22-e31717044fb2">Package Selection Comparison</a>.</p>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * <p>End time, example value: 2020-04-30T00:00:00Z. The maximum duration from the start time to the end time per request is 31 days.</p>
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * <p>Log type. Available values: <ul><li> l7-access-logs: Layer 7 Access Logs;</li><li>web-attack: Managed Rule Logs.</li></ul>Defaults to l7-access-logs.</p>
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * <p><a href="https://www.tencentcloud.com/document/product/1552/124662?from_cn_redirect=1">Log match condition</a>. Maximum length 12KB.</p>
+         * @type {string || null}
+         */
+        this.Condition = null;
+
+        /**
+         * <p>Paginated query limit. Default value: 20, maximum value: 100.</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <p>Paginated query offset, defaults to 0.</p>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * <p>Whether raw logs are returned in time sequence. Available values: <ul><li>asc: ascending order;</li><li>desc: descending order.</li></ul> Default is desc.</p>
+         * @type {string || null}
+         */
+        this.Sort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.Condition = 'Condition' in params ? params.Condition : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Sort = 'Sort' in params ? params.Sort : null;
 
     }
 }
@@ -19038,22 +19712,19 @@ class CacheParameters extends  AbstractModel {
         super();
 
         /**
-         * Cache follows origin server. if not specified, this configuration is not set. only one of followorigin, nocache, or customtime can have switch set to on.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * Cache follows the origin site. Leave unset means this configuration is not set. FollowOrigin, NoCache, and CustomTime can only be configured with one Switch set to on.
          * @type {FollowOrigin || null}
          */
         this.FollowOrigin = null;
 
         /**
-         * No cache. if not specified, this configuration is not set. only one of followorigin, nocache, or customtime can have switch set to on.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * No cache. Leave unset means not setting this configuration. Only one Switch among FollowOrigin, NoCache, and CustomTime can be configured as on.
          * @type {NoCache || null}
          */
         this.NoCache = null;
 
         /**
-         * Custom cache time. if not specified, this configuration is not set. only one of followorigin, nocache, or customtime can have switch set to on.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * Custom cache time. Leave unset means this configuration is not set. Only one of FollowOrigin, NoCache, and CustomTime can be configured with the Switch set to on.
          * @type {CustomTime || null}
          */
         this.CustomTime = null;
@@ -19721,6 +20392,34 @@ class TimingDataItem extends  AbstractModel {
 }
 
 /**
+ * DescribeZoneCustomVariables request structure.
+ * @class
+ */
+class DescribeZoneCustomVariablesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Site ID.</p>
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+
+    }
+}
+
+/**
  * ModifyCustomErrorPage request structure.
  * @class
  */
@@ -20359,8 +21058,7 @@ class ModifyOriginParameters extends  AbstractModel {
         this.PrivateAccess = null;
 
         /**
-         * Private authentication parameter. this parameter is valid only when origintype = awss3 and privateaccess = on.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * Private authentication parameter. This parameter is valid only when OriginType = AWSS3 and PrivateAccess = on.
          * @type {OriginPrivateParameters || null}
          */
         this.PrivateParameters = null;
@@ -20907,7 +21605,12 @@ class NormalAction extends  AbstractModel {
 }
 
 /**
- * Safe execution action specifies additional parameters for the ban.
+ * Additional parameter when the executed action is interception.
+
+This parameter is used for specifying the extra handling action taken by the system when a security rule is hit and an intercept action is executed.
+Different disposal actions are configured with different fixed parameter combinations. The system will determine the actually effective disposal action type according to the configured parameter combination.
+During the same interception execution, only one handling action can be configured and made effective. Parameters for multiple handling actions cannot appear at the same time. Otherwise, it is deemed an invalid configuration. If empty, the default block handling action is used.
+DenyActionParameters supports the following additional handling actions: <li>Default: When DenyActionParameters is empty or no additional handling action is enabled, the system will perform the default block, responding with an interception page.</li><li>IP block: Continuously block the client source IP that triggers the rule. Corresponding parameters: BlockIp, BlockIpDuration.</li><li>Custom page interception: Use the designated custom page content to respond to requests. Corresponding parameters: ReturnCustomPage, ResponseCode, ErrorPageId.</li><li>Silence: Accept client requests but do not return. Corresponding parameter: Stall.</li>
  * @class
  */
 class DenyActionParameters extends  AbstractModel {
@@ -21277,25 +21980,30 @@ class ModifyDnsRecordsRequest extends  AbstractModel {
 }
 
 /**
- * IdentifyZone request structure.
+ * DescribeLogAnalysisDetail response structure.
  * @class
  */
-class IdentifyZoneRequest extends  AbstractModel {
+class DescribeLogAnalysisDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The site name.
-         * @type {string || null}
+         * <p>Log details list that meets the log match condition.</p>
+         * @type {Array.<LogItem> || null}
          */
-        this.ZoneName = null;
+        this.LogDetail = null;
 
         /**
-         * A subdomain name under the site. Specify this field if you want to verify the ownership of a subdomain name. Otherwise you can leave it blank.
+         * <p>Total number of logs that meet the match condition.</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Domain = null;
+        this.RequestId = null;
 
     }
 
@@ -21306,8 +22014,17 @@ class IdentifyZoneRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.LogDetail) {
+            this.LogDetail = new Array();
+            for (let z in params.LogDetail) {
+                let obj = new LogItem();
+                obj.deserialize(params.LogDetail[z]);
+                this.LogDetail.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -21731,28 +22448,34 @@ class CreateConfigGroupVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * Zone ID.
+         * <p>Site ID.</p>
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * GroupId of the version to be created.
+         * <p>Configuration group ID for the new version. You can obtain the complete environment information through the DescribeEnvironments interface. The environment information contains the configuration group ID for each configuration group type.</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/1552/101862?from_cn_redirect=1">DescribeEnvironments</a> return value <code>EnvInfos</code></p>
          * @type {string || null}
          */
         this.GroupId = null;
 
         /**
-         * Configuration content to be imported. It is required to be in JSON format and encoded in UTF-8. Please refer to the example below for the configuration file content.
+         * <p>Configuration content to be imported. Use JSON format and encode in UTF-8 mode. Refer to the example below and the <a href="https://www.tencentcloud.com/document/product/1552/125342?from_cn_redirect=1">configuration group syntax explanation</a> for the configuration file content.</p>
          * @type {string || null}
          */
         this.Content = null;
 
         /**
-         * Version description. The maximum length allowed is 50 characters. This field can be used to provide details about the application scenarios of this version.
+         * <p>Version description, enter a maximum length of 50 characters, can be used to fill in the usage scenario of this version.</p>
          * @type {string || null}
          */
         this.Description = null;
+
+        /**
+         * <p>Source version ID on which the new version is based. The new version will be created as a derivative based on the configuration of this source version. This field is optional. If not provided, it defaults to the version currently taking effect in the production environment as the source version.</p><p>For reference:</p><ul><li><a href="https://www.tencentcloud.com/document/api/1552/101867?from_cn_redirect=1">CreateConfigGroupVersion</a> return value <code>VersionId</code></li><li><a href="https://www.tencentcloud.com/document/api/1552/101864?from_cn_redirect=1">DescribeConfigGroupVersions</a> return value <code>ConfigGroupVersionInfos</code></li></ul>
+         * @type {string || null}
+         */
+        this.SourceVersion = null;
 
     }
 
@@ -21767,6 +22490,7 @@ class CreateConfigGroupVersionRequest extends  AbstractModel {
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.Content = 'Content' in params ? params.Content : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.SourceVersion = 'SourceVersion' in params ? params.SourceVersion : null;
 
     }
 }
@@ -22081,37 +22805,31 @@ class AccessURLRedirectParameters extends  AbstractModel {
         super();
 
         /**
-         * Status code. valid values: 301, 302, 303, 307, 308.
+         * <p>Status code, value is one of 301, 302, 303, 307, 308.</p>
          * @type {number || null}
          */
         this.StatusCode = null;
 
         /**
-         * Target request protocol. valid values:.
-<Li>Http: target request protocol http;</li>.
-<Li>Https: target request protocol https;</li>.
-<Li>Follow: follow the request.</li>.
+         * <p>Target request protocol.</p><p>Enumeration values:</p><ul><li>http: The target request protocol is HTTP.</li><li>https: The target request protocol is HTTPS.</li><li>follow: Follow request.</li></ul>
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * Target hostname.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Target HostName.</p>
          * @type {HostName || null}
          */
         this.HostName = null;
 
         /**
-         * Target path.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Target path.</p>
          * @type {URLPath || null}
          */
         this.URLPath = null;
 
         /**
-         * Carry query parameters.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Query string.</p>
          * @type {AccessURLRedirectQueryString || null}
          */
         this.QueryString = null;
@@ -22400,8 +23118,7 @@ class CacheKeyParameters extends  AbstractModel {
         this.FullURLCache = null;
 
         /**
-         * Configuration parameter for retaining the query string. this field and fullurlcache must be set simultaneously, but cannot both be on.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * Query string retention configuration parameter. This field and FullURLCache must be set both at the same time, but cannot both be on.
          * @type {CacheKeyQueryString || null}
          */
         this.QueryString = null;
@@ -22416,8 +23133,7 @@ Note: this field may return null, which indicates a failure to obtain a valid va
         this.IgnoreCase = null;
 
         /**
-         * HTTP request header configuration parameters. at least one of the following configurations must be set: fullurlcache, ignorecase, header, scheme, cookie.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * HTTP request header configuration parameter. Set at least one configuration among FullURLCache, IgnoreCase, Header, Scheme, and Cookie.
          * @type {CacheKeyHeader || null}
          */
         this.Header = null;
@@ -22432,8 +23148,7 @@ Note: this field may return null, which indicates a failure to obtain a valid va
         this.Scheme = null;
 
         /**
-         * Cookie configuration parameters. at least one of the following configurations must be set: fullurlcache, ignorecase, header, scheme, cookie.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * Cookie configuration parameters. Set at least one configuration among FullURLCache, IgnoreCase, Header, Scheme, and Cookie.
          * @type {CacheKeyCookie || null}
          */
         this.Cookie = null;
@@ -22874,60 +23589,61 @@ class ClientAttester extends  AbstractModel {
         super();
 
         /**
-         * Authentication option ID.
+         * <p>Option ID for certification.</p>
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Specifies the authentication option name.
+         * <p>Option name for authentication.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Authentication rule type. only returned in the response. valid values:.
-<li>PRESET: system PRESET rule. only AttesterDuration can be modified.</li>.
-<Li>CUSTOM: user-defined rules.</li>.
+         * <p>Authentication rule type. Returned only in the response. Valid values:</p><li>PRESET: System preset rule. Only AttesterDuration can be modified.</li><li>CUSTOM: User-defined rule.</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Authentication method. Valid values:
-<li>TC-RCE: Authentication with RCE risk identification;</li>
-<li>TC-CAPTCHA: Authentication using Tianyu verification code;</li>
-<li>TC-EO-CAPTCHA: Use EdgeOne CAPTCHA for authentication.</li>
+         * <p>Authentication method. Valid values:</p><li>TC-RCE: Use risk identification RCE for authentication;</li><li>TC-CAPTCHA: Use Tianyu verification code for authentication;</li><li>TC-EO-CAPTCHA: Use EdgeOne human-machine verification for authentication.</li>
          * @type {string || null}
          */
         this.AttesterSource = null;
 
         /**
-         * Validity time of the authentication. defaults to 60s. supported measurement units:.
-<Li>S: specifies seconds. value range: 60–43200.</li>.
-<Li>M: specifies minutes. value range: 1–720.</li>.
-<Li>H. specifies the hour. value range: 1–12.</li>.
+         * <p>Authentication validity time. Default value is 60s. Supported measurement units:</p><li>s: second, value ranges from 60 to 43200.</li><li>m: minute, value ranges from 1 to 720.</li><li>h: hour, value ranges from 1 to 12.</li>
          * @type {string || null}
          */
         this.AttesterDuration = null;
 
         /**
-         * TC-RCE authentication configuration message.
-<li>Specifies the required field when the AttesterSource parameter value is TC-RCE.</li>.
+         * <p>Whether to enable the usage limit for attestation results. </p><p>Valid values:</p><ul><li>on: Enabled</li><li>off: Disabled</li></ul><p>Default value: off</p>
+         * @type {string || null}
+         */
+        this.UsageLimit = null;
+
+        /**
+         * <p>Whether to enable the usage limit for attestation results. </p><p>Valid values:</p><ul><li>on: Enabled</li><li>off: Disabled</li></ul><p>Default value: off</p>
+         * @type {number || null}
+         */
+        this.MaxUsageCount = null;
+
+        /**
+         * <p>Configuration message for TC-RCE certification.</p><li>This field is required when the AttesterSource parameter value is TC-RCE.</li>
          * @type {TCRCEOption || null}
          */
         this.TCRCEOption = null;
 
         /**
-         * Specifies the configuration message for TC-CAPTCHA certification.
-<li>Specifies the required field when the AttesterSource parameter value is TC-CAPTCHA.</li>.
+         * <p>Configuration message for TC-CAPTCHA certification.</p><li>This field is required when the AttesterSource parameter value is TC-CAPTCHA.</li>
          * @type {TCCaptchaOption || null}
          */
         this.TCCaptchaOption = null;
 
         /**
-         * Configuration message of TC-EO-CAPTCHA authentication.
-<li>This field is required when the AttesterSource parameter value is TC-EO-CAPTCHA.</li>
+         * <p>Configuration message for TC-EO-CAPTCHA certification.</p><li>This field is required when the AttesterSource parameter value is TC-EO-CAPTCHA.</li>
          * @type {TCEOCaptchaOption || null}
          */
         this.TCEOCaptchaOption = null;
@@ -22946,6 +23662,8 @@ class ClientAttester extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.AttesterSource = 'AttesterSource' in params ? params.AttesterSource : null;
         this.AttesterDuration = 'AttesterDuration' in params ? params.AttesterDuration : null;
+        this.UsageLimit = 'UsageLimit' in params ? params.UsageLimit : null;
+        this.MaxUsageCount = 'MaxUsageCount' in params ? params.MaxUsageCount : null;
 
         if (params.TCRCEOption) {
             let obj = new TCRCEOption();
@@ -25867,6 +26585,77 @@ class ClientBehaviorDetection extends  AbstractModel {
 }
 
 /**
+ * DescribeLogAnalysisDownloadTasks request structure.
+ * @class
+ */
+class DescribeLogAnalysisDownloadTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Site ID.</p>
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * <p>Data service area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding Mainland China).</li></ul> Note: If the site service area is "global availability zone", you need to query the data of mainland and overseas separately to obtain all data.</p>
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * <p>Log type. Available values: <ul><li> l7-access-logs: Layer 7 Access Logs;</li><li>web-attack: Managed Rule Logs.</li></ul>Defaults to l7-access-logs.</p>
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * <p>Filtering Conditions. The maximum number of Filters.Values is 20. Detailed filter criteria are as follows:<ul><li>task-id: Filter by log download task id. For optional Values, refer to the TaskId returned by the CreateLogAnalysisDownloadTask api.</li></ul></p><p>For reference: CreateLogAnalysisDownloadTask</p>
+         * @type {Array.<AdvancedFilter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * <p>Paginated query limit. Default value: 20, maximum value: 100.</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <p>Paginated query offset, defaults to 0.</p>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AdvancedFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * ModifyApplicationProxyRule request structure.
  * @class
  */
@@ -26345,6 +27134,64 @@ class OriginHealthStatus extends  AbstractModel {
 }
 
 /**
+ * Custom Variable operation sub-rule branch.
+ * @class
+ */
+class CustomVariableOperationRuleBranch extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p><a href="https://www.tencentcloud.com/document/product/1552/90438?from_cn_redirect=1#33f65828-c6c6-4b66-a011-25a20b548d5d">Match condition</a>.</p>
+         * @type {string || null}
+         */
+        this.Condition = null;
+
+        /**
+         * <p><a href="https://www.tencentcloud.com/document/product/1552/90438?from_cn_redirect=1#c7bd7e02-9247-4a72-b0e4-11c27cadb198">Operate</a>.<br>Note: Actions and SubRules cannot be empty at the same time.</p>
+         * @type {Array.<CustomVariableOperationRuleAction> || null}
+         */
+        this.Actions = null;
+
+        /**
+         * <p>Sub-rule list. If there are multiple rules in the list, they are executed in order from top to bottom.<br>Note: SubRules and Actions cannot be empty at the same time. Currently only support filling one level of SubRules.</p>
+         * @type {Array.<CustomVariableOperationSubRule> || null}
+         */
+        this.SubRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Condition = 'Condition' in params ? params.Condition : null;
+
+        if (params.Actions) {
+            this.Actions = new Array();
+            for (let z in params.Actions) {
+                let obj = new CustomVariableOperationRuleAction();
+                obj.deserialize(params.Actions[z]);
+                this.Actions.push(obj);
+            }
+        }
+
+        if (params.SubRules) {
+            this.SubRules = new Array();
+            for (let z in params.SubRules) {
+                let obj = new CustomVariableOperationSubRule();
+                obj.deserialize(params.SubRules[z]);
+                this.SubRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Configuration of gRPC support
  * @class
  */
@@ -26581,6 +27428,46 @@ class ModifyL7AccRuleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Custom Variable rule operation.
+ * @class
+ */
+class CustomVariableOperationRuleAction extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Operation name. The name should correspond to the parameter structure. For example, if Name=Set, SetParameters is required. Currently only support filling in Set.</p><li>Set: custom variable settings;</li>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Custom Variable parameter settings. If there are multiple operations in this parameter, they are executed in sequence according to the array order. When the value of Name is Set, this parameter is required.</p>
+         * @type {SetParameters || null}
+         */
+        this.SetParameters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.SetParameters) {
+            let obj = new SetParameters();
+            obj.deserialize(params.SetParameters)
+            this.SetParameters = obj;
+        }
 
     }
 }
@@ -26860,6 +27747,41 @@ class GrpcParameters extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * Custom Variable parameter settings.
+ * @class
+ */
+class SetParameters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Specify the custom variable name. A custom variable must be defined before it can be used in operations.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Assign value to a Custom Variable. Supports the use of constant strings, variables, and formulas. Chinese characters are not allowed. Length cannot exceed 1000 characters.</p>
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -27167,6 +28089,49 @@ class ModifyAliasDomainStatusResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Custom Variable operation sub-rule.
+ * @class
+ */
+class CustomVariableOperationSubRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Sub-rule branch</p>
+         * @type {Array.<CustomVariableOperationRuleBranch> || null}
+         */
+        this.Branches = null;
+
+        /**
+         * <p>Rule note.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Branches) {
+            this.Branches = new Array();
+            for (let z in params.Branches) {
+                let obj = new CustomVariableOperationRuleBranch();
+                obj.deserialize(params.Branches[z]);
+                this.Branches.push(obj);
+            }
+        }
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -28497,7 +29462,12 @@ class DescribeIPGroupReferencesRequest extends  AbstractModel {
 }
 
 /**
- * Additional parameter for Web security Allow.
+ * Additional parameter when the safe execution action is Allow.
+
+This parameter is used to specify the extra handling action taken by the system when a security rule is hit and an Allow action is executed.
+Different handling actions are configured with different fixed parameter combinations. The system will determine the actually effective handling action type according to the configured parameter combination.
+During the same release execution, only one handling action can be configured and made effective. Parameter composites for multiple handling actions cannot appear simultaneously; otherwise, it is deemed an invalid configuration. If empty, the default release handling action is used.
+AllowActionParameters supports the following additional handling actions: <li>Default: When AllowActionParameters is empty, skip the remaining rules of the current security module immediately and continue matching subsequent security modules.</li><li>Delayed pass: Add response delay to the request and continue matching the remaining rules of the current module. Corresponding parameters: MinDelayTime, MaxDelayTime.</li>
  * @class
  */
 class AllowActionParameters extends  AbstractModel {
@@ -28527,6 +29497,41 @@ class AllowActionParameters extends  AbstractModel {
         }
         this.MinDelayTime = 'MinDelayTime' in params ? params.MinDelayTime : null;
         this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
+
+    }
+}
+
+/**
+ * Log information for log analysis
+ * @class
+ */
+class LogItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log generation time point, using unix millisecond-level timestamp.
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Specific contents of the log, using JSON String Format.
+         * @type {string || null}
+         */
+        this.LogJson = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.LogJson = 'LogJson' in params ? params.LogJson : null;
 
     }
 }
@@ -29853,6 +30858,70 @@ class CachePrefreshParameters extends  AbstractModel {
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.CacheTimePercent = 'CacheTimePercent' in params ? params.CacheTimePercent : null;
+
+    }
+}
+
+/**
+ * Rule engine manipulates custom configuration.
+ * @class
+ */
+class RuleEngineCustomAction extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Unique ID of the custom configuration.</p>
+         * @type {string || null}
+         */
+        this.ActionId = null;
+
+        /**
+         * <p>Custom configuration name.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Custom configuration description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Custom configuration parameter definition list.</p>
+         * @type {Array.<RuleEngineCustomActionParameterSchema> || null}
+         */
+        this.Parameters = null;
+
+        /**
+         * <p>Match conditions supported by custom configuration.</p><p>For supported match conditions, refer to the official documentation <a href="https://www.tencentcloud.com/document/product/1552/125344?from_cn_redirect=1">General Reference - Configuration Syntax - Variables</a>.</p>
+         * @type {Array.<string> || null}
+         */
+        this.SupportedConditions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActionId = 'ActionId' in params ? params.ActionId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.Parameters) {
+            this.Parameters = new Array();
+            for (let z in params.Parameters) {
+                let obj = new RuleEngineCustomActionParameterSchema();
+                obj.deserialize(params.Parameters[z]);
+                this.Parameters.push(obj);
+            }
+        }
+        this.SupportedConditions = 'SupportedConditions' in params ? params.SupportedConditions : null;
 
     }
 }
@@ -31978,6 +33047,56 @@ class DeleteDnsRecordsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAvailableCustomActionsForRuleEngine response structure.
+ * @class
+ */
+class DescribeAvailableCustomActionsForRuleEngineResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Total number of eligible rule engine custom configurations.</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * <p>List of eligible rule engine custom configurations.</p>
+         * @type {Array.<RuleEngineCustomAction> || null}
+         */
+        this.CustomActionSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.CustomActionSet) {
+            this.CustomActionSet = new Array();
+            for (let z in params.CustomActionSet) {
+                let obj = new RuleEngineCustomAction();
+                obj.deserialize(params.CustomActionSet[z]);
+                this.CustomActionSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Offline cache feature status switch.
  * @class
  */
@@ -32009,73 +33128,18 @@ class OfflineCacheParameters extends  AbstractModel {
 }
 
 /**
- * CreateZone request structure.
+ * Custom configuration operation parameter.
  * @class
  */
-class CreateZoneRequest extends  AbstractModel {
+class CustomActionParameters extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Site access type. if this parameter is not input, the default value `partial` is used. valid values of this parameter are as follows:.
-<li>partial: CNAME access;</li>.
-<li>full: NS access;</li>.
-<li>noDomainAccess: access with no domain name.</li>.
-<li>dnsPodAccess: DNSPod hosted access. to use this access mode, your domain name should have been hosted on DNSPod.</li>.
-<li>ai: edge reasoning integration.</li>.
-         * @type {string || null}
+         * <p>Custom configuration list that needs to be configured.</p>
+         * @type {Array.<CustomAction> || null}
          */
-        this.Type = null;
-
-        /**
-         * Site name. For sites connected via CNAME/NS, pass in the secondary domain name (example.com). Leave it blank if the site is connected without a domain name. 
-         * @type {string || null}
-         */
-        this.ZoneName = null;
-
-        /**
-         * The acceleration area of the L7 domain name when `Type` is `partial` or `full`. When Type is `noDomainAccess`, please leave it blank.
-<li>`global`: Global AZs</li>
-<li>`mainland`: AZs in the Chinese mainland</li>
-<li>`overseas`: (Default) AZs outside the Chinese mainland </li>
-         * @type {string || null}
-         */
-        this.Area = null;
-
-        /**
-         * Target package ID to bind. when a package already exists under your account, you can fill in this parameter to directly bind the site to the package. if there are currently no bindable packages, you can purchase a package via [CreatePlan](https://intl.cloud.tencent.com/document/product/1552/105771?from_cn_redirect=1).
-Note: if this parameter is not specified, a site in "init" status will be created. the site is inactive and will not be displayed in the console. you can bind a package and activate the site through [BindZoneToPlan](https://intl.cloud.tencent.com/document/product/1552/83042?from_cn_redirect=1). after activation, the site can provide service properly.
-
-
-         * @type {string || null}
-         */
-        this.PlanId = null;
-
-        /**
-         * Identical site identifier. limits input to numbers, english letters, ".", "-", and "_", with a character limit of 200 characters. for details, see identical site identifier (https://intl.cloud.tencent.com/document/product/1552/70202?from_cn_redirect=1). leave this field blank if this usage scenario does not apply.
-         * @type {string || null}
-         */
-        this.AliasZoneName = null;
-
-        /**
-         * Tags of the site. To create tags, go to the [Tag Console](https://console.cloud.tencent.com/tag/taglist).
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Whether to allow duplicate sites. Values:
-<li>`true`: Duplicate sites are allowed.</li>
-<li>`false`: Duplicate sites are not allowed.</li>If it is left empty, the default value `false` is used.
-         * @type {boolean || null}
-         */
-        this.AllowDuplicates = null;
-
-        /**
-         * Whether to skip scanning the existing DNS records of the site. Default value: false.
-         * @type {boolean || null}
-         */
-        this.JumpStart = null;
+        this.CustomActions = null;
 
     }
 
@@ -32086,22 +33150,15 @@ Note: if this parameter is not specified, a site in "init" status will be create
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
-        this.Area = 'Area' in params ? params.Area : null;
-        this.PlanId = 'PlanId' in params ? params.PlanId : null;
-        this.AliasZoneName = 'AliasZoneName' in params ? params.AliasZoneName : null;
 
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
+        if (params.CustomActions) {
+            this.CustomActions = new Array();
+            for (let z in params.CustomActions) {
+                let obj = new CustomAction();
+                obj.deserialize(params.CustomActions[z]);
+                this.CustomActions.push(obj);
             }
         }
-        this.AllowDuplicates = 'AllowDuplicates' in params ? params.AllowDuplicates : null;
-        this.JumpStart = 'JumpStart' in params ? params.JumpStart : null;
 
     }
 }
@@ -32504,8 +33561,7 @@ class ModifyResponseHeaderParameters extends  AbstractModel {
         super();
 
         /**
-         * HTTP origin-pull header rules list.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * HTTP origin header rule list.
          * @type {Array.<HeaderAction> || null}
          */
         this.HeaderActions = null;
@@ -32990,6 +34046,70 @@ class DescribeFunctionReplicasRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * IdentifyZone request structure.
+ * @class
+ */
+class IdentifyZoneRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The site name.
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * A subdomain name under the site. Specify this field if you want to verify the ownership of a subdomain name. Otherwise you can leave it blank.
+
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+    }
+}
+
+/**
+ * ModifyZoneCustomVariables response structure.
+ * @class
+ */
+class ModifyZoneCustomVariablesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -35394,6 +36514,49 @@ class DescribeAvailablePlansRequest extends  AbstractModel {
 }
 
 /**
+ * Custom Variable operation details.
+ * @class
+ */
+class CustomVariableOperation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Sub-rule branch. This list currently only supports filling in one rule; additional entries are invalid.</p>
+         * @type {Array.<CustomVariableOperationRuleBranch> || null}
+         */
+        this.Branches = null;
+
+        /**
+         * <p>Rule note. Multiple notes can be filled.</p>
+         * @type {Array.<string> || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Branches) {
+            this.Branches = new Array();
+            for (let z in params.Branches) {
+                let obj = new CustomVariableOperationRuleBranch();
+                obj.deserialize(params.Branches[z]);
+                this.Branches.push(obj);
+            }
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * ModifyMultiPathGatewayStatus response structure.
  * @class
  */
@@ -37613,8 +38776,7 @@ class StatusCodeCacheParameters extends  AbstractModel {
         super();
 
         /**
-         * Status code cache ttl.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * Status code cache TTL.
          * @type {Array.<StatusCodeCacheParam> || null}
          */
         this.StatusCodeCacheParams = null;
@@ -38249,6 +39411,64 @@ class IPSSLSetting extends  AbstractModel {
 }
 
 /**
+ * ModifyZoneCustomVariables request structure.
+ * @class
+ */
+class ModifyZoneCustomVariablesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Site ID.</p>
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * <p>List of site-level custom variables. CustomVariable.Name must use user.zone. as a prefix. Variables are initialized sequentially in array order. InitialValue can only reference variables before the current variable. It does not support referencing the current variable itself or variables after it.</p>
+         * @type {Array.<CustomVariable> || null}
+         */
+        this.CustomVariables = null;
+
+        /**
+         * <p>Site-level custom variable calculation rules. The calculation supports references to defined site-level custom variables. This list currently only supports filling in one rule; additional entries are invalid.</p>
+         * @type {Array.<CustomVariableOperation> || null}
+         */
+        this.CustomVariableOperations = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+
+        if (params.CustomVariables) {
+            this.CustomVariables = new Array();
+            for (let z in params.CustomVariables) {
+                let obj = new CustomVariable();
+                obj.deserialize(params.CustomVariables[z]);
+                this.CustomVariables.push(obj);
+            }
+        }
+
+        if (params.CustomVariableOperations) {
+            this.CustomVariableOperations = new Array();
+            for (let z in params.CustomVariableOperations) {
+                let obj = new CustomVariableOperation();
+                obj.deserialize(params.CustomVariableOperations[z]);
+                this.CustomVariableOperations.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeContentQuota request structure.
  * @class
  */
@@ -38742,6 +39962,139 @@ class OriginPrivateParameters extends  AbstractModel {
         this.SecretAccessKey = 'SecretAccessKey' in params ? params.SecretAccessKey : null;
         this.SignatureVersion = 'SignatureVersion' in params ? params.SignatureVersion : null;
         this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
+ * Rule engine operation custom configuration parameter structure definition.
+ * @class
+ */
+class RuleEngineCustomActionParameterSchema extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Parameter field name.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Parameter field data type. Valid values: <li>Boolean: boolean;</li><li>Integer: integer;</li><li>Float: floating-point;</li><li>String: string;</li><li>ArrayOfInteger: integer array;</li><li>ArrayOfFloat: floating-point array;</li><li>ArrayOfString: array of strings.</li></p>
+         * @type {string || null}
+         */
+        this.ValueType = null;
+
+        /**
+         * <p>Parameter field description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Field default value of the parameter.</p>
+         * @type {string || null}
+         */
+        this.Default = null;
+
+        /**
+         * <p>Parameter field unit.</p>
+         * @type {string || null}
+         */
+        this.Unit = null;
+
+        /**
+         * <p>Whether the parameter field is required or not.</p><p>Default value: false</p><p>If filled, it is applicable to ALL parameter field type verification; if left blank, no verification.</p>
+         * @type {boolean || null}
+         */
+        this.Required = null;
+
+        /**
+         * <p>Minimum value of the parameter field.</p><p>If filled, it is used to validate the value for integer, floating-point number, integer array, and floating-point number array type parameters; if left blank, there is no verification.</p>
+         * @type {number || null}
+         */
+        this.MinValue = null;
+
+        /**
+         * <p>Maximum value of the parameter field.</p><p>If filled, it is used for value verification of type parameters for integers, floating-point numbers, integer arrays, and floating-point number arrays. If left blank, there is no verification.</p>
+         * @type {number || null}
+         */
+        this.MaxValue = null;
+
+        /**
+         * <p>Minimum length of the parameter field.</p><p>If filled, it is used for value verification of string and string array type parameters. If not filled, there is no verification.</p>
+         * @type {number || null}
+         */
+        this.MinLength = null;
+
+        /**
+         * <p>Maximum length of the parameter field.</p><p>If filled, it is used for value verification for strings and array of strings type parameters; if left blank, no verification.</p>
+         * @type {number || null}
+         */
+        this.MaxLength = null;
+
+        /**
+         * <p>Minimum item count of the parameter field.</p><p>If filled, it is applicable to value verification for various array type parameters; if left blank, there is no verification.</p>
+         * @type {number || null}
+         */
+        this.MinItems = null;
+
+        /**
+         * <p>Maximum item count of the parameter field.</p><p>If filled, it is applicable to value verification for various array type parameters. If left blank, there is no verification.</p>
+         * @type {number || null}
+         */
+        this.MaxItems = null;
+
+        /**
+         * <p>Whether the parameter field item is unique.</p><p>Default value: false</p><p>If filled, it is applicable to various array type parameter value verification; if left blank, no verification.</p>
+         * @type {boolean || null}
+         */
+        this.UniqueItems = null;
+
+        /**
+         * <p>Allowed format of the parameter field.</p><p>If filled, verification of string or string array content is required. If not filled, there is no verification.</p>
+         * @type {string || null}
+         */
+        this.AllowedPattern = null;
+
+        /**
+         * <p>Allowed values of the parameter field. If empty, there is no verification.</p><p>If this parameter is filled, it indicates that the corresponding parameter is an enum and only allows values from this parameter array; if left blank, there is no verification.</p>
+         * @type {Array.<string> || null}
+         */
+        this.AllowedValues = null;
+
+        /**
+         * <p>Minimum step size of the parameter field.</p><p>If filled, it is suitable for value verification of floating-point and floating-point array type parameters. If not filled, there is no verification.</p>
+         * @type {string || null}
+         */
+        this.MultipleOf = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ValueType = 'ValueType' in params ? params.ValueType : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Default = 'Default' in params ? params.Default : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
+        this.Required = 'Required' in params ? params.Required : null;
+        this.MinValue = 'MinValue' in params ? params.MinValue : null;
+        this.MaxValue = 'MaxValue' in params ? params.MaxValue : null;
+        this.MinLength = 'MinLength' in params ? params.MinLength : null;
+        this.MaxLength = 'MaxLength' in params ? params.MaxLength : null;
+        this.MinItems = 'MinItems' in params ? params.MinItems : null;
+        this.MaxItems = 'MaxItems' in params ? params.MaxItems : null;
+        this.UniqueItems = 'UniqueItems' in params ? params.UniqueItems : null;
+        this.AllowedPattern = 'AllowedPattern' in params ? params.AllowedPattern : null;
+        this.AllowedValues = 'AllowedValues' in params ? params.AllowedValues : null;
+        this.MultipleOf = 'MultipleOf' in params ? params.MultipleOf : null;
 
     }
 }
@@ -39694,15 +41047,13 @@ class UpstreamRequestParameters extends  AbstractModel {
         super();
 
         /**
-         * Query string configuration. optional. if not provided, it will not be configured.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * Query string configuration. Optional configuration, leave blank for no configuration.
          * @type {UpstreamRequestQueryString || null}
          */
         this.QueryString = null;
 
         /**
-         * Cookie configuration. optional. if not provided, it will not be configured.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * Cookie configuration. Optional configuration. Leave it blank for no configuration.
          * @type {UpstreamRequestCookie || null}
          */
         this.Cookie = null;
@@ -39896,7 +41247,11 @@ class AccelerateMainland extends  AbstractModel {
 }
 
 /**
- * Web security Challenge additional parameter.
+ * Additional parameter for the security executed action when it is a challenge.
+
+This parameter is used for specifying the extra handling action taken by the system when a security rule is hit and a challenge action is executed.
+Challenge disposal actions are segmented by ChallengeOption. Different challenge types correspond to different interaction forms and parameter requirements. The system will apply the corresponding parameter configuration according to the selected challenge type.
+ChallengeActionParameters supports the following challenge disposition types: <li>Interstitial challenge: responds with a new page and runs the authentication mechanism on the new page. Corresponds to the ChallengeOption value InterstitialChallenge.</li><li>Inline challenge: responds with an SDK challenge. Corresponds to the ChallengeOption value InlineChallenge.</li><li>JavaScript challenge: invisible browser verification. The browser automatically performs verification and shows the requested resource. Corresponds to the ChallengeOption value JSChallenge.</li><li>Managed challenge: responds with a redirect page containing a JavaScript program, used for verifying the browser runtime environment. Corresponds to the ChallengeOption value ManagedChallenge.</li>
  * @class
  */
 class ChallengeActionParameters extends  AbstractModel {
@@ -39904,20 +41259,19 @@ class ChallengeActionParameters extends  AbstractModel {
         super();
 
         /**
-         * Safe execution challenge actions. valid values: <li> InterstitialChallenge: interstitial challenge;</li> <li> InlineChallenge: embedded challenge;</li> <li> JSChallenge: JavaScript challenge;</li> <li> ManagedChallenge: managed challenge.</li>.
+         * <p>Specific challenge action for safe execution.</p><p>Enumeration values:</p><ul><li>InterstitialChallenge: interstitial challenge;</li><li>InlineChallenge: embedded challenge (SDK challenge);</li><li>ManagedChallenge: managed challenge. Applicable only to HTML web pages directly accessed by users through a browser. Verification cannot be completed in scenarios such as API interfaces, XHR/AJAX async requests within web pages, mobile apps, and command line tools. Do not configure it;</li><li>JSChallenge: JavaScript challenge. Applicable only to HTML web pages directly accessed by users through a browser. Verification cannot be completed in scenarios such as API interfaces, XHR/AJAX async requests within web pages, mobile apps, and command line tools. Do not configure it.</li></ul>
          * @type {string || null}
          */
         this.ChallengeOption = null;
 
         /**
-         * Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: <li>s: second, value ranges from 1 to 60;</li><li>m: minute, value ranges from 1 to 60;</li><li>h: hour, value ranges from 1 to 24.</li>.
-
+         * <p>Time interval for repeating the challenge. This field is required when ChallengeOption is InterstitialChallenge/InlineChallenge. Default value: 300s. Supported units: <li>s: second, value ranges from 1 to 60;</li><li>m: minute, value ranges from 1 to 60;</li><li>h: hour, value ranges from 1 to 24.</li></p>
          * @type {string || null}
          */
         this.Interval = null;
 
         /**
-         * Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+         * <p>Client authentication method ID. This field is required when Name is InterstitialChallenge/InlineChallenge.</p>
          * @type {string || null}
          */
         this.AttesterId = null;
@@ -42604,8 +43958,7 @@ class ModifyRequestHeaderParameters extends  AbstractModel {
         super();
 
         /**
-         * List of http header setting rules.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * HTTP header setting rule list.
          * @type {Array.<HeaderAction> || null}
          */
         this.HeaderActions = null;
@@ -43836,328 +45189,262 @@ class RuleEngineAction extends  AbstractModel {
         super();
 
         /**
-         * Operation name. The name must correspond to the parameter structure. For example, if Name=Cache, CacheParameters is required.
-<li>Cache: Node caching TTL;</li>
-<li>CacheKey: custom Cache Key;</li>
-<li>CachePrefresh: cache pre-refresh;</li>
-<li>AccessURLRedirect: URL redirection;</li>
-<li>UpstreamURLRewrite: origin-pull URL rewrite;</li>
-<li>QUIC:QUIC;</li>
-<li>WebSocket:WebSocket;</li>
-<li>Authentication: Token authentication;</li>
-<li>MaxAge: Browser cache TTL;</li>
-<li>StatusCodeCache: Status code cache TTL;</li>
-<li>OfflineCache: Offline cache;</li>
-<li>SmartRouting: Smart acceleration;</li>
-<li>RangeOriginPull: Range-based origin pull;</li>
-<li>UpstreamHTTP2: HTTP/2 origin pull;</li>
-<li>HostHeader: Host header rewrite;</li>
-<li>ForceRedirectHTTPS: Forced HTTPS redirect configuration for access protocol.</li>
-<li>HTTPS origin pull (OriginPullProtocol);</li>
-<li>Compression: Intelligent compression configuration;</li>
-<li>HSTS:HSTS;</li>
-<li>ClientIPHeader: Header information configuration that stores the client request IP.</li>
-<li>OCSPStapling: OCSP stapling;</li>
-<li>HTTP2: HTTP/2 integration;</li>
-<li>PostMaxSize: Maximum limit for file streaming transmission in POST requests.</li>
-<li>ClientIPCountry: Carry regional information of the client IP during origin pull.</li>
-<li>UpstreamFollowRedirect: Parameter configuration for redirection during origin pull;</li>
-<li>UpstreamRequest: Origin-pull request parameter;</li>
-<li>Shield: Origin server uninstallation.</li>
-<li>TLSConfig: SSL/TLS security;</li>
-<li>ModifyOrigin: Modify origin server;</li>
-<li>SiteFailover: origin server failure failover;</li>
-<li>HTTPUpstreamTimeout: Layer-7 origin-pull timeout configuration.</li>
-<li>HTTP response: HTTP response;</li>
-<li>ErrorPage: Custom error page;</li>
-<li>ModifyResponseHeader: Modify the HTTP node response header;</li>
-<li>ModifyRequestHeader: Modify the request header of an HTTP node;</li>
-<li>ResponseSpeedLimit: Download speed limit for a single connection;</li>
-<li>SetContentIdentifier: Set the content identifier.</li>
-<li>Vary: Vary feature configuration;</li>
-<li>ContentCompression: Content compression configuration;</li>
-<li>OriginAuthentication: Origin authentication configuration.</li>
+         * <p>Operation name. The name must correspond to the parameters structure. For example, if Name=Cache, then CacheParameters is required.<li>Cache: Node cache TTL;</li><li>CacheKey: Custom Cache Key;</li><li>CachePrefresh: Cache pre-refresh;</li><li>AccessURLRedirect: Access URL redirection;</li><li>UpstreamURLRewrite: Origin-pull URL rewrite;</li><li>QUIC: QUIC;</li><li>WebSocket: WebSocket;</li><li>Authentication: Token authentication;</li><li>MaxAge: Browser cache TTL;</li><li>StatusCodeCache: Status code cache TTL;</li><li>OfflineCache: Offline cache;</li><li>SmartRouting: Smart acceleration;</li><li>AdvancedOriginRouting: Advanced origin optimization;</li><li>RangeOriginPull: Range-based origin pull;</li><li>UpstreamHTTP2: HTTP2 origin-pull;</li><li>HostHeader: Host header rewrite;</li><li>ForceRedirectHTTPS: Forced HTTPS redirect configuration;</li><li>OriginPullProtocol: Origin-pull HTTPS;</li><li>Compression: Intelligent compression configuration;</li><li>HSTS: HSTS;</li><li>ClientIPHeader: Configuration for storing client IP address in the header;</li><li>OCSPStapling: OCSP stapling;</li><li>HTTP2: HTTP2 integration;</li><li>PostMaxSize: Maximum limit configuration for POST request upload file streaming transmission;</li><li>ClientIPCountry: Carrying regional information of the client IP during origin-pull;</li><li>UpstreamFollowRedirect: Upstream follow redirect parameter configuration;</li><li>UpstreamRequest: Origin-pull request parameters;</li><li>Shield: Origin server uninstallation configuration;</li><li>TLSConfig: SSL/TLS security;</li><li>ModifyOrigin: Modify origin server;</li><li>SiteFailover: Origin server fault migration;</li><li>HTTPUpstreamTimeout: Layer-7 origin-pull timeout configuration;</li><li>HttpResponse: HTTP response;</li><li>ErrorPage: Custom error page;</li><li>ModifyResponseHeader: Modify HTTP node response header;</li><li>ModifyRequestHeader: Modify HTTP node request header;</li><li>ResponseSpeedLimit: Single connection download speed limit;</li><li>SetContentIdentifier: Set content identifier;</li><li>Vary: Vary feature configuration;</li><li>ContentCompression: Content compression configuration;</li><li>OriginAuthentication: Origin-pull authentication configuration;</li><li>CustomAction: Custom configuration.</li></p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Node cache ttl configuration parameter. when name is cache, this parameter is required.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Node cache TTL configuration parameter. This parameter is required when the Name value is Cache.</p>
          * @type {CacheParameters || null}
          */
         this.CacheParameters = null;
 
         /**
-         * Custom cache key configuration parameter. when name is cachekey, this parameter is required.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Custom Cache Key configuration parameter. When Name value is CacheKey, this parameter is required.
          * @type {CacheKeyParameters || null}
          */
         this.CacheKeyParameters = null;
 
         /**
-         * The cache prefresh configuration parameter. this parameter is required when `name` is `cacheprefresh`.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Cache pre-refresh configuration parameter. This parameter is required when the Name value is CachePrefresh.</p>
          * @type {CachePrefreshParameters || null}
          */
         this.CachePrefreshParameters = null;
 
         /**
-         * The access url redirection configuration parameter. this parameter is required when `name` is `accessurlredirect`.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Access URL redirection configuration parameter. This parameter is required when the Name value is AccessURLRedirect.</p>
          * @type {AccessURLRedirectParameters || null}
          */
         this.AccessURLRedirectParameters = null;
 
         /**
-         * The origin-pull url rewrite configuration parameter. this parameter is required when `name` is `upstreamurlrewrite`.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Origin-pull URL rewrite configuration parameter. This parameter is required when the value of Name is UpstreamURLRewrite.</p>
          * @type {UpstreamURLRewriteParameters || null}
          */
         this.UpstreamURLRewriteParameters = null;
 
         /**
-         * The quic configuration parameter. this parameter is required when `name` is `quic`.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>QUIC configuration parameter. This parameter is required when the Name value is QUIC.</p>
          * @type {QUICParameters || null}
          */
         this.QUICParameters = null;
 
         /**
-         * The websocket configuration parameter. this parameter is required when `name` is `websocket`.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>WebSocket configuration parameter. This parameter is required when the Name value is WebSocket.</p>
          * @type {WebSocketParameters || null}
          */
         this.WebSocketParameters = null;
 
         /**
-         * Token authentication configuration parameter. this parameter is required when `name` is `authentication`.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Token authentication configuration parameter. This parameter is required when the Name value is Authentication.</p>
          * @type {AuthenticationParameters || null}
          */
         this.AuthenticationParameters = null;
 
         /**
-         * Browser cache ttl configuration parameter. this parameter is required when `name` is `maxage`.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Browser cache TTL configuration parameter. This parameter is required when the value of Name is MaxAge.</p>
          * @type {MaxAgeParameters || null}
          */
         this.MaxAgeParameters = null;
 
         /**
-         * Status code cache ttl configuration parameter. this parameter is required when `name` is `statuscodecache`.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Status code cache TTL configuration parameter. This parameter is required when the Name value is StatusCodeCache.</p>
          * @type {StatusCodeCacheParameters || null}
          */
         this.StatusCodeCacheParameters = null;
 
         /**
-         * Offline cache configuration parameter. this parameter is required when `name` is `offlinecache`.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Offline cache configuration parameter. This parameter is required when the Name value is OfflineCache.</p>
          * @type {OfflineCacheParameters || null}
          */
         this.OfflineCacheParameters = null;
 
         /**
-         * Smart acceleration configuration parameter. this parameter is required when `name` is `smartrouting`.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Smart acceleration configuration parameter. This parameter is required when the Name value is SmartRouting.</p>
          * @type {SmartRoutingParameters || null}
          */
         this.SmartRoutingParameters = null;
 
         /**
-         * Shard source retrieval configuration parameter. this parameter is required when name is set to rangeoriginpull.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Advanced origin optimization configuration parameter. This parameter is required when the Name value is AdvancedOriginRouting.</p>
+         * @type {AdvancedOriginRoutingParameters || null}
+         */
+        this.AdvancedOriginRoutingParameters = null;
+
+        /**
+         * <p>Configuration parameter for range-based origin pull. This parameter is required when the value of Name is RangeOriginPull.</p>
          * @type {RangeOriginPullParameters || null}
          */
         this.RangeOriginPullParameters = null;
 
         /**
-         * HTTP2 origin-pull configuration parameter. this parameter is required when name is set to upstreamhttp2.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>HTTP2 origin configuration parameter. This parameter is required when the Name value is UpstreamHTTP2.</p>
          * @type {UpstreamHTTP2Parameters || null}
          */
         this.UpstreamHTTP2Parameters = null;
 
         /**
-         * Host header rewrite configuration parameter. this parameter is required when name is set to hostheader.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Host header rewrite configuration parameter. When the Name value is HostHeader, this parameter is required.</p>
          * @type {HostHeaderParameters || null}
          */
         this.HostHeaderParameters = null;
 
         /**
-         * Force https redirect configuration parameter. this parameter is required when the name is set to forceredirecthttps.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Forced HTTPS redirect configuration for the access protocol. This parameter is required when the Name value is ForceRedirectHTTPS.</p>
          * @type {ForceRedirectHTTPSParameters || null}
          */
         this.ForceRedirectHTTPSParameters = null;
 
         /**
-         * HTTPS configuration for origin-pull. this parameter is required when the Name value is OriginPullProtocol.
-Note: This field may return null, which indicates a failure to obtain a valid value.
+         * <p>Origin HTTPS configuration parameter. This parameter is required when the Name value is OriginPullProtocol.</p>
          * @type {OriginPullProtocolParameters || null}
          */
         this.OriginPullProtocolParameters = null;
 
         /**
-         * Intelligent compression configuration. this parameter is required when name is set to compression.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Intelligent compression configuration. This parameter is required when the Name value is Compression.</p>
          * @type {CompressionParameters || null}
          */
         this.CompressionParameters = null;
 
         /**
-         * HSTS configuration parameter. this parameter is required when name is hsts.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>HSTS configuration parameter. When the Name value is HSTS, this parameter is required.</p>
          * @type {HSTSParameters || null}
          */
         this.HSTSParameters = null;
 
         /**
-         * Client ip header configuration for storing client request ip information. this parameter is required when name is clientipheader.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Configuration header information for storing client request IP. When the Name value is ClientIPHeader, this parameter is required.</p>
          * @type {ClientIPHeaderParameters || null}
          */
         this.ClientIPHeaderParameters = null;
 
         /**
-         * OCSP stapling configuration parameter. this parameter is required when the name is set to ocspstapling.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>OCSP stapling configuration parameter. This parameter is required when Name value is OCSPStapling.</p>
          * @type {OCSPStaplingParameters || null}
          */
         this.OCSPStaplingParameters = null;
 
         /**
-         * HTTP2 access configuration parameter. this parameter is required when name is http2.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>HTTP2 integration configuration parameter. This parameter is required when the Name value is HTTP2.</p>
          * @type {HTTP2Parameters || null}
          */
         this.HTTP2Parameters = null;
 
         /**
-         * Maximum size configuration for file streaming upload via a post request. this parameter is required when name is postmaxsize.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Maximum limit configuration for file streaming transmission in POST request upload. When the Name value is PostMaxSize, this parameter is required.</p>
          * @type {PostMaxSizeParameters || null}
          */
         this.PostMaxSizeParameters = null;
 
         /**
-         * Configuration parameter for carrying the region information of the client ip during origin-pull. this parameter is required when the name is set to clientipcountry.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Configuration parameter for carrying client IP regional information during origin pull. When the Name value is ClientIPCountry, this parameter is required.</p>
          * @type {ClientIPCountryParameters || null}
          */
         this.ClientIPCountryParameters = null;
 
         /**
-         * Configuration parameter for following redirects during origin-pull. this parameter is required when the name is set to upstreamfollowredirect.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Origin-pull follow redirect parameter configuration. This parameter is required when the Name value is UpstreamFollowRedirect.</p>
          * @type {UpstreamFollowRedirectParameters || null}
          */
         this.UpstreamFollowRedirectParameters = null;
 
         /**
-         * Configuration parameter for origin-pull request. this parameter is required when the name is set to upstreamrequest.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Origin-pull request parameter configuration parameter. This parameter is required when the Name value is UpstreamRequest.</p>
          * @type {UpstreamRequestParameters || null}
          */
         this.UpstreamRequestParameters = null;
 
         /**
-         * Origin server uninstallation config. When the Name value is Shield, this parameter is required.
-Note: This field may return null, which indicates a failure to obtain a valid value.
+         * <p>Origin server uninstallation configuration parameter. This parameter is required when the Name value is Shield.</p>
          * @type {ShieldParameters || null}
          */
         this.ShieldParameters = null;
 
         /**
-         * SSL/TLS security configuration parameter. this parameter is required when the name is set to tlsconfig.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>SSL/TLS security configuration parameter. This parameter is required when the Name value is TLSConfig.</p>
          * @type {TLSConfigParameters || null}
          */
         this.TLSConfigParameters = null;
 
         /**
-         * Configuration parameter for modifying the origin server. this parameter is required when the name is set to modifyorigin.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Modify origin server configuration parameter. When the Name value is ModifyOrigin, this parameter is required.</p>
          * @type {ModifyOriginParameters || null}
          */
         this.ModifyOriginParameters = null;
 
         /**
-         * Origin server failure failover configuration parameter. This parameter is required when the Name value is SiteFailover.
-Note: This field may return null, which indicates a failure to obtain a valid value.
+         * <p>Source site fault migration config. When the Name value is SiteFailover, this parameter is required.</p>
          * @type {SiteFailoverParameters || null}
          */
         this.SiteFailoverParameters = null;
 
         /**
-         * Configuration of layer 7 origin timeout. this parameter is required when name is httpupstreamtimeout.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Layer 7 origin pull timeout configuration. This parameter is required when the Name value is HTTPUpstreamTimeout.</p>
          * @type {HTTPUpstreamTimeoutParameters || null}
          */
         this.HTTPUpstreamTimeoutParameters = null;
 
         /**
-         * HTTP response configuration parameters. this parameter is required when name is httpresponse.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>HTTP response configuration parameter. This parameter is required when the Name value is HttpResponse.</p>
          * @type {HTTPResponseParameters || null}
          */
         this.HttpResponseParameters = null;
 
         /**
-         * Custom error page configuration parameters. this parameter is required when name is errorpage.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Custom error page configuration parameter. This parameter is required when the value of Name is ErrorPage.</p>
          * @type {ErrorPageParameters || null}
          */
         this.ErrorPageParameters = null;
 
         /**
-         * Modify http node response header configuration parameters. this parameter is required when name is modifyresponseheader.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Modify the HTTP node response header configuration parameter. This parameter is required when the Name value is ModifyResponseHeader.</p>
          * @type {ModifyResponseHeaderParameters || null}
          */
         this.ModifyResponseHeaderParameters = null;
 
         /**
-         * Modify http node request header configuration parameters. this parameter is required when name is modifyrequestheader.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Modify the request header configuration parameter of the HTTP node. This parameter is required when the Name value is ModifyRequestHeader.</p>
          * @type {ModifyRequestHeaderParameters || null}
          */
         this.ModifyRequestHeaderParameters = null;
 
         /**
-         * Single connection download speed limit configuration parameter. this parameter is required when name is responsespeedlimit.
-Note: this field may return null, which indicates a failure to obtain a valid value.
+         * <p>Single connection download speed limit configuration parameter. This parameter is required when the Name value is ResponseSpeedLimit.</p>
          * @type {ResponseSpeedLimitParameters || null}
          */
         this.ResponseSpeedLimitParameters = null;
 
         /**
-         * Specifies the content identification configuration parameter. this parameter is required when the Name value is SetContentIdentifier.
-
-Note: This field may return null, which indicates a failure to obtain a valid value.
+         * <p>Content identification configuration parameter. This parameter is required when the Name value is SetContentIdentifier.</p>
          * @type {SetContentIdentifierParameters || null}
          */
         this.SetContentIdentifierParameters = null;
 
         /**
-         * Vary feature configuration parameter. when Name value is Vary, this parameter is required.
+         * <p>Vary feature configuration parameter. This parameter is required when the Name value is Vary.</p>
          * @type {VaryParameters || null}
          */
         this.VaryParameters = null;
 
         /**
-         * The content compression configuration parameter is required when Name value is ContentCompression. this parameter is an allowlist feature. if needed, contact tencent cloud engineers.
+         * <p>Content compression configuration parameter. When the Name value is ContentCompression, this parameter is required. This parameter is an allowlist feature. If needed, contact Tencent Cloud Engineers.</p>
          * @type {ContentCompressionParameters || null}
          */
         this.ContentCompressionParameters = null;
 
         /**
-         * The origin authentication configuration parameter. this parameter is required when the Name value is OriginAuthentication. this parameter is the allowlist feature. if needed, contact tencent cloud engineers.
+         * <p>Origin authentication configuration parameter. This parameter is required when Name value is OriginAuthentication. This parameter is an allowlist feature. If needed, contact Tencent Cloud Engineers.</p>
          * @type {OriginAuthenticationParameters || null}
          */
         this.OriginAuthenticationParameters = null;
+
+        /**
+         * <p>Custom configuration operation parameter. This parameter is required when the Name value is CustomAction.</p><p>You can obtain the list of currently supported custom configuration items through the CustomActionSet returned value of the DescribeAvailableCustomActionsForRuleEngine API.</p>
+         * @type {CustomActionParameters || null}
+         */
+        this.CustomActionParameters = null;
 
     }
 
@@ -44240,6 +45527,12 @@ Note: This field may return null, which indicates a failure to obtain a valid va
             let obj = new SmartRoutingParameters();
             obj.deserialize(params.SmartRoutingParameters)
             this.SmartRoutingParameters = obj;
+        }
+
+        if (params.AdvancedOriginRoutingParameters) {
+            let obj = new AdvancedOriginRoutingParameters();
+            obj.deserialize(params.AdvancedOriginRoutingParameters)
+            this.AdvancedOriginRoutingParameters = obj;
         }
 
         if (params.RangeOriginPullParameters) {
@@ -44410,6 +45703,12 @@ Note: This field may return null, which indicates a failure to obtain a valid va
             this.OriginAuthenticationParameters = obj;
         }
 
+        if (params.CustomActionParameters) {
+            let obj = new CustomActionParameters();
+            obj.deserialize(params.CustomActionParameters)
+            this.CustomActionParameters = obj;
+        }
+
     }
 }
 
@@ -44462,6 +45761,7 @@ module.exports = {
     CreateLogAnalysisDownloadTaskResponse: CreateLogAnalysisDownloadTaskResponse,
     DescribeSecurityIPGroupInfoResponse: DescribeSecurityIPGroupInfoResponse,
     AdaptiveFrequencyControl: AdaptiveFrequencyControl,
+    DescribeAvailableCustomActionsForRuleEngineRequest: DescribeAvailableCustomActionsForRuleEngineRequest,
     RenewFlag: RenewFlag,
     DescribeWebSecurityTemplatesRequest: DescribeWebSecurityTemplatesRequest,
     SecurityAction: SecurityAction,
@@ -44476,6 +45776,7 @@ module.exports = {
     OriginDetail: OriginDetail,
     InferenceHardwareSpecification: InferenceHardwareSpecification,
     DescribeSecurityClientAttesterResponse: DescribeSecurityClientAttesterResponse,
+    CustomVariable: CustomVariable,
     MultiPathGatewayOriginACLInfo: MultiPathGatewayOriginACLInfo,
     HeaderAction: HeaderAction,
     ModifyEdgeKVNamespaceRequest: ModifyEdgeKVNamespaceRequest,
@@ -44698,6 +45999,7 @@ module.exports = {
     NextOriginACL: NextOriginACL,
     DescribeMultiPathGatewayRegionsRequest: DescribeMultiPathGatewayRegionsRequest,
     DescribeZoneSettingRequest: DescribeZoneSettingRequest,
+    AdvancedOriginRoutingParameters: AdvancedOriginRoutingParameters,
     ModifyL4ProxyStatusResponse: ModifyL4ProxyStatusResponse,
     FileVerification: FileVerification,
     ModifyWebSecurityTemplateResponse: ModifyWebSecurityTemplateResponse,
@@ -44709,6 +46011,7 @@ module.exports = {
     CreateApplicationProxyResponse: CreateApplicationProxyResponse,
     BotUserRule: BotUserRule,
     Task: Task,
+    CreateZoneRequest: CreateZoneRequest,
     CreateInferenceAPITokenRequest: CreateInferenceAPITokenRequest,
     DescribeSecurityIPGroupRequest: DescribeSecurityIPGroupRequest,
     ZoneConfig: ZoneConfig,
@@ -44720,6 +46023,7 @@ module.exports = {
     ManagedRuleAutoUpdate: ManagedRuleAutoUpdate,
     CustomRule: CustomRule,
     BotExtendAction: BotExtendAction,
+    CustomAction: CustomAction,
     CreatePurgeTaskResponse: CreatePurgeTaskResponse,
     DeleteApplicationProxyRuleResponse: DeleteApplicationProxyRuleResponse,
     URLPath: URLPath,
@@ -44750,6 +46054,7 @@ module.exports = {
     ModifyPlanResponse: ModifyPlanResponse,
     DropPageDetail: DropPageDetail,
     CnameStatus: CnameStatus,
+    DescribeLogAnalysisDownloadTasksResponse: DescribeLogAnalysisDownloadTasksResponse,
     WafConfig: WafConfig,
     BandwidthAbuseDefense: BandwidthAbuseDefense,
     ServerCertInfo: ServerCertInfo,
@@ -44770,6 +46075,7 @@ module.exports = {
     DetectLengthLimitConfig: DetectLengthLimitConfig,
     DescribeFunctionRuntimeEnvironmentRequest: DescribeFunctionRuntimeEnvironmentRequest,
     IPGroup: IPGroup,
+    CustomActionParameter: CustomActionParameter,
     DescribeDnsRecordsRequest: DescribeDnsRecordsRequest,
     CreatePrefetchTaskResponse: CreatePrefetchTaskResponse,
     CreateSecurityJSInjectionRuleRequest: CreateSecurityJSInjectionRuleRequest,
@@ -44777,8 +46083,10 @@ module.exports = {
     MaxAgeParameters: MaxAgeParameters,
     ModifyApplicationProxyRuleResponse: ModifyApplicationProxyRuleResponse,
     DeleteFunctionReplicaRequest: DeleteFunctionReplicaRequest,
+    LogAnalysisDownloadTask: LogAnalysisDownloadTask,
     DDoS: DDoS,
     ModifyL7AccRulePriorityResponse: ModifyL7AccRulePriorityResponse,
+    DescribeZoneCustomVariablesResponse: DescribeZoneCustomVariablesResponse,
     APIService: APIService,
     CreateConfigGroupVersionResponse: CreateConfigGroupVersionResponse,
     ConfirmOriginACLUpdateRequest: ConfirmOriginACLUpdateRequest,
@@ -44787,6 +46095,7 @@ module.exports = {
     DNSPodDetail: DNSPodDetail,
     RuleCodeActionParams: RuleCodeActionParams,
     DescribeSecurityClientAttesterRequest: DescribeSecurityClientAttesterRequest,
+    DescribeLogAnalysisDetailRequest: DescribeLogAnalysisDetailRequest,
     WebSocketParameters: WebSocketParameters,
     RuleItem: RuleItem,
     SlowRateConfig: SlowRateConfig,
@@ -44817,6 +46126,7 @@ module.exports = {
     CreateJustInTimeTranscodeTemplateRequest: CreateJustInTimeTranscodeTemplateRequest,
     FunctionReplica: FunctionReplica,
     TimingDataItem: TimingDataItem,
+    DescribeZoneCustomVariablesRequest: DescribeZoneCustomVariablesRequest,
     ModifyCustomErrorPageRequest: ModifyCustomErrorPageRequest,
     ModifyFunctionRuleResponse: ModifyFunctionRuleResponse,
     ModifyFunctionReplicaResponse: ModifyFunctionReplicaResponse,
@@ -44849,7 +46159,7 @@ module.exports = {
     DeleteJustInTimeTranscodeTemplatesResponse: DeleteJustInTimeTranscodeTemplatesResponse,
     DeleteRulesResponse: DeleteRulesResponse,
     ModifyDnsRecordsRequest: ModifyDnsRecordsRequest,
-    IdentifyZoneRequest: IdentifyZoneRequest,
+    DescribeLogAnalysisDetailResponse: DescribeLogAnalysisDetailResponse,
     CacheConfig: CacheConfig,
     ClientAttestationRules: ClientAttestationRules,
     DescribeL7AccSettingRequest: DescribeL7AccSettingRequest,
@@ -44942,6 +46252,7 @@ module.exports = {
     ForceRedirectHTTPSParameters: ForceRedirectHTTPSParameters,
     MutualTLS: MutualTLS,
     ClientBehaviorDetection: ClientBehaviorDetection,
+    DescribeLogAnalysisDownloadTasksRequest: DescribeLogAnalysisDownloadTasksRequest,
     ModifyApplicationProxyRuleRequest: ModifyApplicationProxyRuleRequest,
     InferenceManualInstanceConfig: InferenceManualInstanceConfig,
     CreateFunctionResponse: CreateFunctionResponse,
@@ -44951,6 +46262,7 @@ module.exports = {
     DescribeL7AccRulesResponse: DescribeL7AccRulesResponse,
     DeleteSecurityIPGroupRequest: DeleteSecurityIPGroupRequest,
     OriginHealthStatus: OriginHealthStatus,
+    CustomVariableOperationRuleBranch: CustomVariableOperationRuleBranch,
     Grpc: Grpc,
     CreateAliasDomainResponse: CreateAliasDomainResponse,
     ClientIpCountry: ClientIpCountry,
@@ -44958,18 +46270,21 @@ module.exports = {
     DeleteApplicationProxyRuleRequest: DeleteApplicationProxyRuleRequest,
     ManagedRuleAction: ManagedRuleAction,
     ModifyL7AccRuleResponse: ModifyL7AccRuleResponse,
+    CustomVariableOperationRuleAction: CustomVariableOperationRuleAction,
     FileAscriptionInfo: FileAscriptionInfo,
     CreateRealtimeLogDeliveryTaskResponse: CreateRealtimeLogDeliveryTaskResponse,
     DescribeTopL7CacheDataResponse: DescribeTopL7CacheDataResponse,
     DescribeFunctionRuntimeEnvironmentResponse: DescribeFunctionRuntimeEnvironmentResponse,
     DescribeInferenceServiceDeploymentLogsRequest: DescribeInferenceServiceDeploymentLogsRequest,
     GrpcParameters: GrpcParameters,
+    SetParameters: SetParameters,
     BotManagementCustomRules: BotManagementCustomRules,
     MultiPathGatewayNextOriginACL: MultiPathGatewayNextOriginACL,
     RuleChoicePropertiesItem: RuleChoicePropertiesItem,
     DescribeSecurityTemplateBindingsResponse: DescribeSecurityTemplateBindingsResponse,
     SetContentIdentifierParameters: SetContentIdentifierParameters,
     ModifyAliasDomainStatusResponse: ModifyAliasDomainStatusResponse,
+    CustomVariableOperationSubRule: CustomVariableOperationSubRule,
     DeleteFunctionRulesRequest: DeleteFunctionRulesRequest,
     DescribeTimingL7AnalysisDataRequest: DescribeTimingL7AnalysisDataRequest,
     NoCache: NoCache,
@@ -44994,6 +46309,7 @@ module.exports = {
     DescribeApplicationProxiesRequest: DescribeApplicationProxiesRequest,
     DescribeIPGroupReferencesRequest: DescribeIPGroupReferencesRequest,
     AllowActionParameters: AllowActionParameters,
+    LogItem: LogItem,
     InferenceResourceConfigForModify: InferenceResourceConfigForModify,
     Hsts: Hsts,
     OwnershipVerification: OwnershipVerification,
@@ -45014,6 +46330,7 @@ module.exports = {
     DescribeCustomErrorPagesRequest: DescribeCustomErrorPagesRequest,
     GatewayRegion: GatewayRegion,
     CachePrefreshParameters: CachePrefreshParameters,
+    RuleEngineCustomAction: RuleEngineCustomAction,
     Action: Action,
     JSInjectionRule: JSInjectionRule,
     UpstreamFollowRedirectParameters: UpstreamFollowRedirectParameters,
@@ -45050,8 +46367,9 @@ module.exports = {
     L4OfflineLog: L4OfflineLog,
     ModifyAliasDomainResponse: ModifyAliasDomainResponse,
     DeleteDnsRecordsRequest: DeleteDnsRecordsRequest,
+    DescribeAvailableCustomActionsForRuleEngineResponse: DescribeAvailableCustomActionsForRuleEngineResponse,
     OfflineCacheParameters: OfflineCacheParameters,
-    CreateZoneRequest: CreateZoneRequest,
+    CustomActionParameters: CustomActionParameters,
     DeleteAliasDomainRequest: DeleteAliasDomainRequest,
     DeleteFunctionRulesResponse: DeleteFunctionRulesResponse,
     DescribeTopL7AnalysisDataResponse: DescribeTopL7AnalysisDataResponse,
@@ -45067,6 +46385,8 @@ module.exports = {
     OriginGroup: OriginGroup,
     ModifySecurityIPGroupRequest: ModifySecurityIPGroupRequest,
     DescribeFunctionReplicasRequest: DescribeFunctionReplicasRequest,
+    IdentifyZoneRequest: IdentifyZoneRequest,
+    ModifyZoneCustomVariablesResponse: ModifyZoneCustomVariablesResponse,
     VaryParameters: VaryParameters,
     L4Proxy: L4Proxy,
     SkipCondition: SkipCondition,
@@ -45112,6 +46432,7 @@ module.exports = {
     IncreasePlanQuotaResponse: IncreasePlanQuotaResponse,
     DescribeIPRegionResponse: DescribeIPRegionResponse,
     DescribeAvailablePlansRequest: DescribeAvailablePlansRequest,
+    CustomVariableOperation: CustomVariableOperation,
     ModifyMultiPathGatewayStatusResponse: ModifyMultiPathGatewayStatusResponse,
     IPReputationGroup: IPReputationGroup,
     EdgeKVDeleteResponse: EdgeKVDeleteResponse,
@@ -45166,6 +46487,7 @@ module.exports = {
     DescribeMultiPathGatewaySecretKeyRequest: DescribeMultiPathGatewaySecretKeyRequest,
     DDoSBlockData: DDoSBlockData,
     IPSSLSetting: IPSSLSetting,
+    ModifyZoneCustomVariablesRequest: ModifyZoneCustomVariablesRequest,
     DescribeContentQuotaRequest: DescribeContentQuotaRequest,
     ModifyFunctionReplicaRequest: ModifyFunctionReplicaRequest,
     DescribeMultiPathGatewaysRequest: DescribeMultiPathGatewaysRequest,
@@ -45175,6 +46497,7 @@ module.exports = {
     DnsRecord: DnsRecord,
     InferenceContainerConfig: InferenceContainerConfig,
     OriginPrivateParameters: OriginPrivateParameters,
+    RuleEngineCustomActionParameterSchema: RuleEngineCustomActionParameterSchema,
     ModifyZoneWorkModeResponse: ModifyZoneWorkModeResponse,
     HSTSParameters: HSTSParameters,
     Tag: Tag,

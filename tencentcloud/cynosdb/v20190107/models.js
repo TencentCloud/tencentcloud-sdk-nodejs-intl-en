@@ -4491,7 +4491,7 @@ class AddInstancesResponse extends  AbstractModel {
         this.TranId = null;
 
         /**
-         * <p>Order number of the payment. Description: We recommend you use the <a href="https://www.tencentcloud.com/document/product/1003/52131?from_cn_redirect=1">DescribeResourcesByDealName</a> API to query order associated instances.</p>
+         * <p>Order number of the payment. Description: We recommend you use the <a href="https://www.tencentcloud.com/document/product/1003/52131?from_cn_redirect=1">DescribeResourcesByDealName</a> API to query the instances associated with the order.</p>
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
@@ -5484,7 +5484,7 @@ class OpenReadOnlyInstanceExclusiveAccessRequest extends  AbstractModel {
         super();
 
         /**
-         * Please use [cluster information description](https://www.tencentcloud.com/document/api/1003/48086?from_cn_redirect=1) to get the clusterId.
+         * Please use [Cluster information description](https://www.tencentcloud.com/document/api/1003/48086?from_cn_redirect=1) to get the clusterId.
          * @type {string || null}
          */
         this.ClusterId = null;
@@ -5496,13 +5496,13 @@ class OpenReadOnlyInstanceExclusiveAccessRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Specified vpc ID. Please use [query the vpc list](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1) to get the vpc ID.
+         * Designated vpc ID. Please use [query the vpc list](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1) to get the vpc ID.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Designated subnet ID. If vpc ID is set up, SubnetId is required. Please use [query subnet list](https://www.tencentcloud.com/document/api/215/15784?from_cn_redirect=1) to get SubnetId.
+         * Designated subnet ID. If vpc ID is set up, SubnetId is required. Please use query subnet list (https://www.tencentcloud.com/document/api/215/15784?from_cn_redirect=1) to get SubnetId.
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -8692,7 +8692,7 @@ class DisassociateSecurityGroupsRequest extends  AbstractModel {
 
         /**
          * Array of instance group IDs, starting with the cynosdbmysql-grp- prefix or cluster ID.
-Description: To get the instance group ID of a cluster, perform [Query Cluster Instance Group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
+Description: To get the instance group ID of a cluster, perform [Query cluster instance group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -9758,7 +9758,7 @@ class ModifyProxyRwSplitRequest extends  AbstractModel {
         this.ConsistencyType = null;
 
         /**
-         * <p>Consistency timeout.<br>Value range: 0–1000000 (µs). Setting it to 0 means that if a read-only instance has a delay, causing the consistency policy to fail, the request will wait indefinitely.</p>
+         * <p>Consistency timeout. Value range: 0–1000000 (ms). If set to 0, requests will wait indefinitely when a read-only instance has a delay that causes the consistency policy to fail.</p>
          * @type {string || null}
          */
         this.ConsistencyTimeOut = null;
@@ -10759,8 +10759,8 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * Array of instance group IDs, starting with the cynosdbmysql-grp- prefix or the TKE cluster ID.
-Description: To get the instance group ID of a cluster, perform [Query cluster instance group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
+         * Array of instance group IDs, starting with the cynosdbmysql-grp- prefix or cluster ID.
+Description: To get the instance group ID of a cluster, call [Query cluster instance group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;

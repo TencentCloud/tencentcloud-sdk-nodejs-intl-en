@@ -2384,7 +2384,8 @@ class AwsS3FileUploadTrigger extends  AbstractModel {
         this.S3Bucket = null;
 
         /**
-         * The region of the AWS S3 bucket.
+         * The region of the AWS S3 bucket.  us-east-1  
+eu-west-3
          * @type {string || null}
          */
         this.S3Region = null;
@@ -4599,7 +4600,7 @@ class VideoEnhanceConfig extends  AbstractModel {
         this.AiRestoration = null;
 
         /**
-         * <p>Configuration of the large model enhancement pro edition. Note that at most one of the large model, comprehensive enhancement, and artifacts removal can be configured. It cannot intersect with super resolution and noise reduction.</p>
+         * <p>LLM enhancement professional edition configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured. It cannot be enabled simultaneously with super-resolution and noise reduction.</p>
          * @type {DiffusionEnhanceV2Config || null}
          */
         this.DiffusionEnhanceV2 = null;
@@ -5052,6 +5053,12 @@ class SubmitHunyuan3DTaskRequest extends  AbstractModel {
          */
         this.Style = null;
 
+        /**
+         * <p>COS bucket that the customer applies to create</p>
+         * @type {AigcStoreCosParam || null}
+         */
+        this.StoreCosParam = null;
+
     }
 
     /**
@@ -5080,6 +5087,12 @@ class SubmitHunyuan3DTaskRequest extends  AbstractModel {
         this.ResultFormat = 'ResultFormat' in params ? params.ResultFormat : null;
         this.Seed = 'Seed' in params ? params.Seed : null;
         this.Style = 'Style' in params ? params.Style : null;
+
+        if (params.StoreCosParam) {
+            let obj = new AigcStoreCosParam();
+            obj.deserialize(params.StoreCosParam)
+            this.StoreCosParam = obj;
+        }
 
     }
 }
@@ -16278,7 +16291,7 @@ class DeleteWordSamplesRequest extends  AbstractModel {
         super();
 
         /**
-         * Keyword, array length limit: 100 words.
+         * <p>Keyword. Array length limit: 100 words.</p>
          * @type {Array.<string> || null}
          */
         this.Keywords = null;
@@ -16955,13 +16968,13 @@ class AudioEnhanceEditConfig extends  AbstractModel {
         super();
 
         /**
-         * <p>Capability configuration switch</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p>
+         * <p>Capability configuration switch</p><p>Enumeration values:</p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * <p>Audio editing type</p><p>Enumeration values:</p><ul><li>restore: Repair</li></ul><p>When enabled, you must explicitly specify the enumeration value</p>
+         * <p>Types of audio editing</p><p>Enumeration values:</p><ul><li>restore: Repair</li></ul><p>When enabled, you must explicitly specify an enumeration value</p>
          * @type {string || null}
          */
         this.Type = null;
@@ -17299,7 +17312,7 @@ class CreateAigcAudioTaskRequest extends  AbstractModel {
         this.ModelName = null;
 
         /**
-         * <p>Specifies the model version. By default, the system uses the supported stable version of the model. Supported versions for GL: 3.0-clip and 3.0-pro. Supported versions for MiniMaxMusic: 2.0, 2.5, 2.6, and 3.0. Supported versions for EL: compose_v2 and sound_t2s_v2. Supported versions for Mureka: song_8, song_9, song_9.5, instrumental_8, instrumental_9, and instrumental_9.5.</p>
+         * <p>Specifies the model version. By default, the system uses the supported stable version of the model.<br>Supported versions for GL: 3.0-clip and 3.0-pro.<br>Supported versions for MiniMaxMusic: 2.0, 2.5, 2.6, and 3.0.<br>Supported versions for EL: compose_v2 and sound_t2s_v2.<br>Supported versions for Mureka: song_8, song_9, song_9.5, instrumental_8, instrumental_9, and instrumental_9.5.</p>
          * @type {string || null}
          */
         this.ModelVersion = null;
@@ -17341,7 +17354,7 @@ class CreateAigcAudioTaskRequest extends  AbstractModel {
         this.ExtraParameters = null;
 
         /**
-         * <p>Used to pass in some special scene parameters required by the model, serialized into strings in Json format. <br>Example MinimaxMusic model When lyrics are passed in:<br> {"lyric":{"ponies are running happily, flowers are blooming"}}</p><ol><li>MiniMaxMusic raw pure music parameters use example:&quot; AdditionalParameters&quot;:&quot; {"is_instrumental":true}&quot;. <br>Supported transparent transmission parameters are: lyrics, is_instrumental, aigc_watermark, sample_rate, bitrate. </li><li>EL Health Music supports transparent transmission parameters:<br> PromptInfluence, WithTimestamps, CompositionPlan, ForceInstrumental and other parameters. </li></ol>
+         * <p>This is used to specify special scenario parameters required by the model, in the format of a serialized JSON string.<br>Example to specify lyrics for the MinimaxMusic model:<br>{"lyric":{"The pony is running with joy. The flowers are blooming."}}</p><ol><li>Example for MiniMaxMusic instrumental music: &quot;AdditionalParameters&quot;:&quot;{"is_instrumental":true}&quot;。<br>Supported pass-through parameters: lyrics, is_instrumental, aigc_watermark, sample_rate, bitrate.</li><li>Pass-through parameters supported for EL music generation:<br>PromptInfluence, WithTimestamps, CompositionPlan, ForceInstrumental and other parameters.</li><li>Pass-through parameters supported by the Mureka model:<br>n: Specifies the number of output audio files.<br>Non-instrumental version supports: lyrics, gender, reference_id, melody_id.<br>Instrumental version supports: instrumental_id.</li></ol>
          * @type {string || null}
          */
         this.AdditionalParameters = null;
@@ -21591,7 +21604,7 @@ class LiveStreamAsrWordsRecognitionResult extends  AbstractModel {
 }
 
 /**
- * LLM enhancement - Professional Edition
+ * LLM enhancement - Professional edition
  * @class
  */
 class DiffusionEnhanceV2Config extends  AbstractModel {
@@ -21599,13 +21612,13 @@ class DiffusionEnhanceV2Config extends  AbstractModel {
         super();
 
         /**
-         * <p>Capability configuration switch</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p>
+         * <p>Capability configuration switch</p><p>Enumeration values:</p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * <p>Strength type</p><p>Enumeration values: </p><ul><li>weak: Weak</li><li>normal: Medium</li><li>strong: Strong</li></ul>
+         * <p>Strength type</p><p>Enumeration values:</p><ul><li>weak: Weak</li><li>normal: Medium</li><li>strong: Strong</li></ul>
          * @type {string || null}
          */
         this.Type = null;
@@ -22240,13 +22253,13 @@ class DescribeWorkflowsResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of eligible entries.
+         * <p>Total number of records that meet filter conditions.</p>
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Workflow information array.
+         * <p>Workflow information array.</p>
          * @type {Array.<WorkflowInfo> || null}
          */
         this.WorkflowInfoSet = null;
@@ -25475,6 +25488,12 @@ class AigcAudioExtraParam extends  AbstractModel {
          */
         this.ResourceId = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OutputAudioFormat = null;
+
     }
 
     /**
@@ -25485,6 +25504,7 @@ class AigcAudioExtraParam extends  AbstractModel {
             return;
         }
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.OutputAudioFormat = 'OutputAudioFormat' in params ? params.OutputAudioFormat : null;
 
     }
 }
@@ -32409,16 +32429,16 @@ class DocToVideoInput extends  AbstractModel {
         this.Prompt = null;
 
         /**
-         * <p>Document-to-video model name</p><p>Default value: Wand</p>
-         * @type {string || null}
-         */
-        this.ModelName = null;
-
-        /**
-         * <p>Document-to-video model version number</p><p>Default value: 1.0</p>
+         * <p>Document-to-video model version number</p><p>Enumeration values:</p><ul><li>1.0: 1.0</li><li>1.0-lite: 1.0-lite</li></ul><p>Default value: 1.0</p>
          * @type {string || null}
          */
         this.ModelVersion = null;
+
+        /**
+         * <p>Documentation generation video model name</p><p>Enumeration values:</p><ul><li>WAND: WAND</li></ul><p>Default value: WAND</p>
+         * @type {string || null}
+         */
+        this.ModelName = null;
 
         /**
          * <p>Aspect ratio of the generated video.</p><p>Enumeration values: </p><ul><li>16:9: 16:9</li><li>9:16: 9:16</li><li>1:1: 1:1</li></ul><p>Default value: 16:9</p>
@@ -32491,8 +32511,8 @@ class DocToVideoInput extends  AbstractModel {
         }
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
         this.Prompt = 'Prompt' in params ? params.Prompt : null;
-        this.ModelName = 'ModelName' in params ? params.ModelName : null;
         this.ModelVersion = 'ModelVersion' in params ? params.ModelVersion : null;
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
         this.Ratio = 'Ratio' in params ? params.Ratio : null;
         this.Language = 'Language' in params ? params.Language : null;
         this.ReferenceDuration = 'ReferenceDuration' in params ? params.ReferenceDuration : null;
@@ -33226,6 +33246,66 @@ class QueryHunyuan3DTaskResponse extends  AbstractModel {
         this.ResultFile3Ds = null;
 
         /**
+         * <p>Task ID</p>
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * <p>Task type</p><p>Enumeration values:</p><ul><li>text_to_3d: Text to 3D</li><li>image_to_3d: Image to 3D</li><li>multiview_to_3d: Multi-view to 3D</li><li>mesh_to_texture: Mesh to texture</li><li>mesh_to_geometry: Mesh to geometry</li></ul>
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * <p>Input prompt</p>
+         * @type {string || null}
+         */
+        this.Prompt = null;
+
+        /**
+         * <p>Image URL input in image-to-3D scenarios</p>
+         * @type {string || null}
+         */
+        this.RefImage = null;
+
+        /**
+         * <p>Image information input in multi-image to 3D scenarios</p>
+         * @type {Array.<ViewImage> || null}
+         */
+        this.MultiViewImages = null;
+
+        /**
+         * <p>Task creation time</p>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * <p>Task update time</p>
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * <p>The target face count for the submitted task</p>
+         * @type {number || null}
+         */
+        this.FaceCount = null;
+
+        /**
+         * <p>Generation type</p><p>Enumeration values:</p><ul><li>Normal: Generate a complete 3D asset (geometry + texture)</li><li>Geometry: Generate only geometry (no texture, faster output speed)</li><li>Texture: Generate only texture (MeshUrl is required)</li></ul><p>Default value: Normal</p>
+         * @type {string || null}
+         */
+        this.GenerateType = null;
+
+        /**
+         * <p>Task position in the queue; the smaller the value, the higher the priority.</p>
+         * @type {number || null}
+         */
+        this.QueuePosition = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -33253,6 +33333,24 @@ class QueryHunyuan3DTaskResponse extends  AbstractModel {
                 this.ResultFile3Ds.push(obj);
             }
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.Prompt = 'Prompt' in params ? params.Prompt : null;
+        this.RefImage = 'RefImage' in params ? params.RefImage : null;
+
+        if (params.MultiViewImages) {
+            this.MultiViewImages = new Array();
+            for (let z in params.MultiViewImages) {
+                let obj = new ViewImage();
+                obj.deserialize(params.MultiViewImages[z]);
+                this.MultiViewImages.push(obj);
+            }
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FaceCount = 'FaceCount' in params ? params.FaceCount : null;
+        this.GenerateType = 'GenerateType' in params ? params.GenerateType : null;
+        this.QueuePosition = 'QueuePosition' in params ? params.QueuePosition : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -33697,7 +33795,7 @@ class CosFileUploadTrigger extends  AbstractModel {
         super();
 
         /**
-         * Name of the COS bucket bound to a workflow, such as `TopRankVideo-125xxx88`.
+         * Name of the COS Bucket bound to the workflow, for example, TopRankVideo-125xxx88.
          * @type {string || null}
          */
         this.Bucket = null;
@@ -33709,22 +33807,24 @@ class CosFileUploadTrigger extends  AbstractModel {
         this.Region = null;
 
         /**
-         * Input path directory bound to a workflow, such as `/movie/201907/`. If this parameter is left empty, the `/` root directory will be used.
+         * The bucket directory bound to a workflow. It must be an absolute path that starts and ends with `/`, such as `/movie/201907/`. If you do not specify this, the root directory will be bound.
          * @type {string || null}
          */
         this.Dir = null;
 
         /**
          * All supported formats are as follows:
+
 - Video file extension. The following 15 options are supported:
-`.mp4`, `.avi`, `.mov`, `.wmv`, `.flv`, `.mkv`, `.mpg`, `.mpeg`, `.rm`, `.rmvb`, `.asf`, `.3gp`, `.webm`, `.ts`, and `.m4v`.
+`.mp4`, `.avi`, `.mov`, `.wmv`, `.flv`, `.mkv`, `.mpg`, `.mpeg`, `.rm`, `.rmvb`, `.asf`, `.3gp`, `.webm`, `.ts`, `.m4v`
+
 - Audio file extension. The following 7 options are supported:
-`.mp3`, `.wav`, `.aac`, `.flac`, `.ogg`, `.m4a`, and `.amr`.
+`.mp3`, `.wav`, `.aac`, `.flac`, `.ogg`, `.m4a`, `.amr`
+
 - Subtitle file extension. The following 2 options are supported:
-`.vtt` and `.srt`.
-- `*`: any file format is supported.
-- Unspecified or input an empty list: the system supports the following preset file formats: video (`.mp4`, `.ts`, `.flv`, `.wmv`, `.asf`, `.rm`, `.rmvb`, `.mpg`, `.mpeg`, `.3gp`, `.mov`, `.webm`, `.mkv`, `.avi`, and `.m4v`); audio (`.mp3`, `.m4a`, `.flac`, `.ogg`, `.wav`, `.amr`, and `.aac`); subtitle (`.vtt` and `.srt`).
-**Note**:
+`.vtt`, `.srt`
+
+- `*`: any file format is supported.- Unspecified or input an empty list: the system supports the following preset file formats: video (`.mp4`, `.ts`, `.flv`, `.wmv`, `.asf`, `.rm`, `.rmvb`, `.mpg`, `.mpeg`, `.3gp`, `.mov`, `.webm`, `.mkv`, `.avi`, and `.m4v`); audio (`.mp3`, `.m4a`, `.flac`, `.ogg`, `.wav`, `.amr`, and `.aac`); subtitle (`.vtt` and `.srt`).**Note**:
 1. If the input format list includes `*`, it indicates that any file format is supported.
 2. File extensions can be provided with or without `.`, such as `.mp4` or `mp4`, both are supported.
 3. Custom file extensions should consist of digits, letters, and characters, and have a length between 1 and 64 characters.
@@ -39077,7 +39177,7 @@ Default value: black.
 }
 
 /**
- * Workflow information details.
+ * Workflow information description.
  * @class
  */
 class WorkflowInfo extends  AbstractModel {
@@ -39098,79 +39198,74 @@ class WorkflowInfo extends  AbstractModel {
 
         /**
          * Workflow status. Valid values:
-<li>Enabled: Enabled,</li>
+<li>Enabled: on</li>
 <li>Disabled: Disabled.</li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Input rule bound to a workflow. If an uploaded video hits the rule for the object, the workflow will be triggered.
+         * The input rule bound to the workflow triggers the workflow when an uploaded video hits the rule for the object.
          * @type {WorkflowTrigger || null}
          */
         this.Trigger = null;
 
         /**
-         * The location to save the media processing output file.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * The media processing parameters to use.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {MediaProcessTaskInput || null}
          */
         this.MediaProcessTask = null;
 
         /**
-         * Type parameter of a video content audit task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiContentReviewTaskInput || null}
          */
         this.AiContentReviewTask = null;
 
         /**
-         * Video content analysis task parameter.
+         * 
          * @type {AiAnalysisTaskInput || null}
          */
         this.AiAnalysisTask = null;
 
         /**
-         * Type parameter of a video content recognition task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AiRecognitionTaskInput || null}
          */
         this.AiRecognitionTask = null;
 
         /**
-         * Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {TaskNotifyConfig || null}
          */
         this.TaskNotifyConfig = null;
 
         /**
-         * Task flow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+         * Priority of the task flow. The higher the value, the higher the priority. The value range is from -10 to 10. If left blank, the default value is 0.
          * @type {number || null}
          */
         this.TaskPriority = null;
 
         /**
-         * The directory to save the media processing output file, such as `/movie/201907/`.
+         * Storage directory for the output file, such as `/movie/201907/`.
          * @type {string || null}
          */
         this.OutputDir = null;
 
         /**
-         * Creation time of a workflow in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Workflow creation time, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of a workflow in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Last modification time of the workflow, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -40435,28 +40530,25 @@ class DescribeWorkflowsRequest extends  AbstractModel {
         super();
 
         /**
-         * Workflow ID filter. Array length limit: 100.
+         * <p>Workflow ID filter condition, with an array length limit of 100.</p>
          * @type {Array.<number> || null}
          */
         this.WorkflowIds = null;
 
         /**
-         * Workflow status. Valid values:
-<li>Enabled: Enabled,</li>
-<li>Disabled: Disabled.</li>
-If this parameter is left empty, the workflow status will not be distinguished.
+         * <p>Workflow status. Value range:</p><li>Enabled: on,</li><li>Disabled: off.</li>If this parameter is not specified, workflow status is not distinguished.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Paging offset. Default value: 0.
+         * <p>Paging offset. Default value: 0.</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of returned entries. Default value: 10. Maximum value: 100.
+         * <p>Number of returned entries. Default value: 10. Maximum value: 100.</p>
          * @type {number || null}
          */
         this.Limit = null;
@@ -45682,6 +45774,18 @@ class DescribeVoicesRequest extends  AbstractModel {
         this.Scenes = null;
 
         /**
+         * <p>Pagination query page number. Value range: starts from 1. Default value: 1.</p>
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * <p>Page size. If left blank, all data meeting conditions will be returned by default.</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
          * <p>Extended parameters in the format of a JSON string. </p><p>Other filter criteria:
 voiceName (String): Voice name, fuzzy matching. labels (Array of String): Tags. Matches voices that contain these tags.</p>
          * @type {string || null}
@@ -45706,6 +45810,8 @@ voiceName (String): Voice name, fuzzy matching. labels (Array of String): Tags. 
         this.Languages = 'Languages' in params ? params.Languages : null;
         this.Labels = 'Labels' in params ? params.Labels : null;
         this.Scenes = 'Scenes' in params ? params.Scenes : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.ExtParam = 'ExtParam' in params ? params.ExtParam : null;
 
     }
@@ -48237,7 +48343,7 @@ class AudioEnhanceConfig extends  AbstractModel {
         this.VolumeBalance = null;
 
         /**
-         * <p>Audio beautification configurations.</p>
+         * <p>Audio improvement configuration.</p>
          * @type {AudioBeautifyConfig || null}
          */
         this.Beautify = null;

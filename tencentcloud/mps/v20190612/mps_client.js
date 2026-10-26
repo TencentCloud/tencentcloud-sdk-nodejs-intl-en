@@ -1807,7 +1807,7 @@ Contains two actions: confirm and regenerate.
     }
 
     /**
-     * This API is used to get the list of workflow details by workflow ID.
+     * Based on the workflow ID, get the workflow details list.
      * @param {DescribeWorkflowsRequest} req
      * @param {function(string, DescribeWorkflowsResponse):void} cb
      * @public

@@ -74,6 +74,7 @@ module.exports = {
     intlpartnersmgt: require("./intlpartnersmgt"),
     iotcloud: require("./iotcloud"),
     ip: require("./ip"),
+    iss: require("./iss"),
     kms: require("./kms"),
     lcic: require("./lcic"),
     lighthouse: require("./lighthouse"),

@@ -6600,7 +6600,7 @@ class WebVerificationConfigIntl extends  AbstractModel {
         this.CheckMode = null;
 
         /**
-         * <p>Identity document type used for authentication. Currently supported:<br>1.HKIDCard: Hong Kong (China) identity card<br>2.MLIDCard: Malaysian identity card<br>3.IndonesiaIDCard: Indonesian Identity Card<br>4.PhilippinesVoteID: Philippines voter card<br>5.PhilippinesDrivingLicense: Philippines driving license<br>6.PhilippinesTinID: Philippines TinID<br>7.PhilippinesSSSID: Philippines SSSID<br>8.PhilippinesUMID: Philippines UMID<br>9.InternationalIDPassport: Passport for Hong Kong (China), Macao (China), and Taiwan (China) as well as overseas passport<br>10.ThailandIDCard: Thai Identity Card<br>11.SingaporeIDCard: Singapore ID card<br>12.MainlandIDCard: Mainland ID card</p>
+         * <p>Identity document type used for authentication. Currently supported:<br>1.HKIDCard: Hong Kong (China) identity card<br>2.MLIDCard: Malaysian identity card<br>3.IndonesiaIDCard: Indonesian Identity Card<br>4.PhilippinesVoteID: Philippines voter card<br>5.PhilippinesDrivingLicense: Philippines driving license<br>6.PhilippinesTinID: Philippines TinID<br>7.PhilippinesSSSID: Philippines SSSID<br>8.PhilippinesUMID: Philippines UMID<br>9.InternationalIDPassport: Passport for Hong Kong (China), Macao (China), and Taiwan (China) as well as overseas passport<br>10.ThailandIDCard: Thai Identity Card<br>11.SingaporeIDCard: Singapore ID card<br>12.MainlandIDCard: Mainland ID card</p>13.VietnamIDCard: Vietnam ID card</p>
          * @type {string || null}
          */
         this.IDCardType = null;
@@ -6683,6 +6683,22 @@ class WebVerificationConfigIntl extends  AbstractModel {
          */
         this.Version = null;
 
+        /**
+         * When CheckMode = 1, this defines the waiting policy for OCR recognition results.
+Enumeration values:
+required: Wait for OCR result after document capture.
+skip: Wait for OCR result confirmation before entering liveness check.
+Default value: required.
+         * @type {string || null}
+         */
+        this.OcrWaitPolicy = null;
+
+        /**
+         * When CheckMode = 1, verification status callback URL. If configured, the service will actively push notifications to this address upon process completion. Leave it blank to disable callbacks. As callbacks cannot guarantee 100% delivery, it is recommended to use a polling mechanism to retrieve the final status.
+         * @type {string || null}
+         */
+        this.WebhookUrl = null;
+
     }
 
     /**
@@ -6709,6 +6725,8 @@ class WebVerificationConfigIntl extends  AbstractModel {
         this.SelectedWarningCodes = 'SelectedWarningCodes' in params ? params.SelectedWarningCodes : null;
         this.AllowExpiredDocument = 'AllowExpiredDocument' in params ? params.AllowExpiredDocument : null;
         this.Version = 'Version' in params ? params.Version : null;
+        this.OcrWaitPolicy = 'OcrWaitPolicy' in params ? params.OcrWaitPolicy : null;
+        this.WebhookUrl = 'WebhookUrl' in params ? params.WebhookUrl : null;
 
     }
 }

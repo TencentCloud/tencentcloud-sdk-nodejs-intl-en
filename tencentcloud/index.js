@@ -1,4 +1,5 @@
 module.exports = {
+    adp: require("./adp"),
     advisor: require("./advisor"),
     ai3d: require("./ai3d"),
     aiart: require("./aiart"),

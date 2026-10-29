@@ -256,6 +256,7 @@ const DeleteApplicationProxyResponse = models.DeleteApplicationProxyResponse;
 const AlgDetectRule = models.AlgDetectRule;
 const SecEntryValue = models.SecEntryValue;
 const DescribeSecurityAPIResourceRequest = models.DescribeSecurityAPIResourceRequest;
+const OriginACLFamilyInfo = models.OriginACLFamilyInfo;
 const DiffIPWhitelist = models.DiffIPWhitelist;
 const DeleteSecurityIPGroupResponse = models.DeleteSecurityIPGroupResponse;
 const ModifyRuleRequest = models.ModifyRuleRequest;
@@ -320,7 +321,7 @@ const DDoSAttackEvent = models.DDoSAttackEvent;
 const ClientIpHeader = models.ClientIpHeader;
 const DescribeConfigGroupVersionDetailRequest = models.DescribeConfigGroupVersionDetailRequest;
 const ModifyPlanResponse = models.ModifyPlanResponse;
-const DropPageDetail = models.DropPageDetail;
+const DescribeAvailableOriginACLFamilyResponse = models.DescribeAvailableOriginACLFamilyResponse;
 const CnameStatus = models.CnameStatus;
 const DescribeLogAnalysisDownloadTasksResponse = models.DescribeLogAnalysisDownloadTasksResponse;
 const WafConfig = models.WafConfig;
@@ -758,6 +759,7 @@ const DDoSBlockData = models.DDoSBlockData;
 const IPSSLSetting = models.IPSSLSetting;
 const ModifyZoneCustomVariablesRequest = models.ModifyZoneCustomVariablesRequest;
 const DescribeContentQuotaRequest = models.DescribeContentQuotaRequest;
+const DescribeAvailableOriginACLFamilyRequest = models.DescribeAvailableOriginACLFamilyRequest;
 const ModifyFunctionReplicaRequest = models.ModifyFunctionReplicaRequest;
 const DescribeMultiPathGatewaysRequest = models.DescribeMultiPathGatewaysRequest;
 const BotPortraitRule = models.BotPortraitRule;
@@ -838,6 +840,7 @@ const OperateInferenceServiceResponse = models.OperateInferenceServiceResponse;
 const DescribeL4ProxyRulesRequest = models.DescribeL4ProxyRulesRequest;
 const AiRule = models.AiRule;
 const Function = models.Function;
+const DropPageDetail = models.DropPageDetail;
 const DescribeWebSecurityTemplatesResponse = models.DescribeWebSecurityTemplatesResponse;
 const KVNamespaceParameters = models.KVNamespaceParameters;
 const DescribePrefetchOriginLimitResponse = models.DescribePrefetchOriginLimitResponse;
@@ -2706,15 +2709,30 @@ After the environment variables are set, they can be used in the function code. 
     }
 
     /**
-     * This API is used to configure the certificate of a site. You can use your own certificate or [apply for a free certificate](https://intl.cloud.tencent.com/document/product/1552/90437?from_cn_redirect=1).
-To use an external certificate, upload the certificate to [SSL Certificates Console](https://console.cloud.tencent.com/certoview) first, and then input the certificate ID in this API. For details, see [Deploying Own Certificates to EdgeOne Domains](https://intl.cloud.tencent.com/document/product/1552/88874?from_cn_redirect=1).
-     * @param {ModifyHostsCertificateRequest} req
-     * @param {function(string, ModifyHostsCertificateResponse):void} cb
+     * This API is used to query detailed information about the origin protection IP range control domain, including the version number and specific IP range information.
+The main difference between standard control domain and streamlined control domain is the number of IP ranges provided. The latter has fewer IP ranges, but has some usage restrictions. For specific restrictions, consult the product. The format description is as follows:
+Standard control domain:
+<li>gaz: standard global control domain;</li>
+<li>mlc: Standard China control domain;</li>
+<li>emc: standard overseas (worldwide excluding China) control domain;</li>
+Streamline the control domain.
+<li>plat-gaz: simplified global control domain;</li>
+<li>plat-mlc: Simplified China control domain;</li>
+<li>plat-emc: Simplified overseas (global excluding China) control domain;</li>
+<li>plat-specific-gaz: custom edition global availability zone control domain;</li>
+<li>plat-specific-mlc: custom edition for controlling the Chinese mainland availability zone control domain;</li>
+<li>plat-specific-emc: custom edition control domain for availability zones worldwide (excluding Chinese mainland);</li>
+Abbreviation description:
+<li>gaz:Global AZ Availability Zone;</li>
+<li>mlc:mainlandChina;</li>
+<li>emc:Exclude mainlandChina.</li>
+     * @param {DescribeAvailableOriginACLFamilyRequest} req
+     * @param {function(string, DescribeAvailableOriginACLFamilyResponse):void} cb
      * @public
      */
-    ModifyHostsCertificate(req, cb) {
-        let resp = new ModifyHostsCertificateResponse();
-        this.request("ModifyHostsCertificate", req, resp, cb);
+    DescribeAvailableOriginACLFamily(req, cb) {
+        let resp = new DescribeAvailableOriginACLFamilyResponse();
+        this.request("DescribeAvailableOriginACLFamily", req, resp, cb);
     }
 
     /**
@@ -3084,6 +3102,18 @@ Note: Starting from June 27, 2025, the legacy version APIs will stop updating. N
     ModifyL4ProxyRulesStatus(req, cb) {
         let resp = new ModifyL4ProxyRulesStatusResponse();
         this.request("ModifyL4ProxyRulesStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to configure the certificate of a site. You can use your own certificate or [apply for a free certificate](https://intl.cloud.tencent.com/document/product/1552/90437?from_cn_redirect=1).
+To use an external certificate, upload the certificate to [SSL Certificates Console](https://console.cloud.tencent.com/certoview) first, and then input the certificate ID in this API. For details, see [Deploying Own Certificates to EdgeOne Domains](https://intl.cloud.tencent.com/document/product/1552/88874?from_cn_redirect=1).
+     * @param {ModifyHostsCertificateRequest} req
+     * @param {function(string, ModifyHostsCertificateResponse):void} cb
+     * @public
+     */
+    ModifyHostsCertificate(req, cb) {
+        let resp = new ModifyHostsCertificateResponse();
+        this.request("ModifyHostsCertificate", req, resp, cb);
     }
 
     /**

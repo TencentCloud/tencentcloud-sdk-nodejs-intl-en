@@ -702,6 +702,15 @@ class OCRResult extends  AbstractModel {
          */
         this.CardBackImageBase64 = null;
 
+        /**
+         * Card verification status:
+PROCESSING: Verification is in progress.
+COMPLETED: Verification completed with no alerts.
+ABNORMAL: Verification completed with alerts raised.
+         * @type {string || null}
+         */
+        this.CardResultStatus = null;
+
     }
 
     /**
@@ -732,6 +741,7 @@ class OCRResult extends  AbstractModel {
         this.OriginalCardInfo = 'OriginalCardInfo' in params ? params.OriginalCardInfo : null;
         this.HeadImageBase64 = 'HeadImageBase64' in params ? params.HeadImageBase64 : null;
         this.CardBackImageBase64 = 'CardBackImageBase64' in params ? params.CardBackImageBase64 : null;
+        this.CardResultStatus = 'CardResultStatus' in params ? params.CardResultStatus : null;
 
     }
 }

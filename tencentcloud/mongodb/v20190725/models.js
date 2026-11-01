@@ -576,6 +576,41 @@ class DBInstancePrice extends  AbstractModel {
 }
 
 /**
+ * Role
+ * @class
+ */
+class Role extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>role name</p>
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * <p>Role belongs to db</p>
+         * @type {string || null}
+         */
+        this.Database = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Database = 'Database' in params ? params.Database : null;
+
+    }
+}
+
+/**
  * DescribePasswordRotation response structure.
  * @class
  */
@@ -968,6 +1003,46 @@ class DescribeCurrentOpResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Role permission
+ * @class
+ */
+class RolePrivilege extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Resource</p>
+         * @type {RoleResource || null}
+         */
+        this.Resource = null;
+
+        /**
+         * <p>Action</p>
+         * @type {Array.<string> || null}
+         */
+        this.Actions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Resource) {
+            let obj = new RoleResource();
+            obj.deserialize(params.Resource)
+            this.Resource = obj;
+        }
+        this.Actions = 'Actions' in params ? params.Actions : null;
 
     }
 }
@@ -1634,6 +1709,69 @@ class AssignProjectResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceAz request structure.
+ * @class
+ */
+class ModifyInstanceAzRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance ID, such as cmgo-p8vn****. Log in to the <a href="https://console.cloud.tencent.com/mongodb">MongoDB console</a> and copy the instance ID from the instance list.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Availability zone ID where the primary node is located. For the method for obtaining, please see <a href="https://www.tencentcloud.com/document/product/240/3637?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
+         * @type {string || null}
+         */
+        this.PrimaryNodeZone = null;
+
+        /**
+         * <p>ID list of the availability zone where the secondary node resides.<br><strong>Note</strong>: It cannot contain the availability zones where the primary node and Hidden nodes reside.</p>
+         * @type {Array.<string> || null}
+         */
+        this.SecondaryNodeZone = null;
+
+        /**
+         * <p>If the current instance has no configuration for Hidden nodes, this parameter is not required.</p>
+         * @type {string || null}
+         */
+        this.HiddenNodeZone = null;
+
+        /**
+         * <p>List of AZ IDs where read-only nodes reside.<br><strong>Note</strong>: If the current instance contains read-only nodes, this parameter is required.</p>
+         * @type {Array.<string> || null}
+         */
+        this.ReadonlyNodeZone = null;
+
+        /**
+         * <p>Specify the time policy for executing the availability zone switch.</p><ul><li>0: Execute the switch immediately.</li><li>1: Execute the switch within the set maintenance window. For details, please refer to <a href="https://www.tencentcloud.com/document/product/240/19910?from_cn_redirect=1">setting instance maintenance time</a>.</li></ul>
+         * @type {number || null}
+         */
+        this.InMaintenance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.PrimaryNodeZone = 'PrimaryNodeZone' in params ? params.PrimaryNodeZone : null;
+        this.SecondaryNodeZone = 'SecondaryNodeZone' in params ? params.SecondaryNodeZone : null;
+        this.HiddenNodeZone = 'HiddenNodeZone' in params ? params.HiddenNodeZone : null;
+        this.ReadonlyNodeZone = 'ReadonlyNodeZone' in params ? params.ReadonlyNodeZone : null;
+        this.InMaintenance = 'InMaintenance' in params ? params.InMaintenance : null;
+
+    }
+}
+
+/**
  * Audit log filter criteria
  * @class
  */
@@ -2200,12 +2338,24 @@ class AddNodeList extends  AbstractModel {
 }
 
 /**
- * EnablePasswordRotation response structure.
+ * DescribeInstanceRoles response structure.
  * @class
  */
-class EnablePasswordRotationResponse extends  AbstractModel {
+class DescribeInstanceRolesResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * <p>Total.</p>
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * <p>List of characters.</p>
+         * @type {Array.<RoleInfo> || null}
+         */
+        this.Roles = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2221,6 +2371,16 @@ class EnablePasswordRotationResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Roles) {
+            this.Roles = new Array();
+            for (let z in params.Roles) {
+                let obj = new RoleInfo();
+                obj.deserialize(params.Roles[z]);
+                this.Roles.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2298,18 +2458,12 @@ class ParamType extends  AbstractModel {
 }
 
 /**
- * SetAccountUserPrivilege response structure.
+ * EnablePasswordRotation response structure.
  * @class
  */
-class SetAccountUserPrivilegeResponse extends  AbstractModel {
+class EnablePasswordRotationResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Task ID.
-         * @type {number || null}
-         */
-        this.FlowId = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2326,7 +2480,6 @@ class SetAccountUserPrivilegeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3015,18 +3168,18 @@ class DescribeDetailedSlowLogsRequest extends  AbstractModel {
 }
 
 /**
- * ModifyInstanceAz response structure.
+ * CreateInstanceUser response structure.
  * @class
  */
-class ModifyInstanceAzResponse extends  AbstractModel {
+class CreateInstanceUserResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Order ID for availability zone adjustment.</p>
-         * @type {string || null}
+         * <p>Asynchronous task ID.</p>
+         * @type {number || null}
          */
-        this.DealId = null;
+        this.FlowId = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3043,7 +3196,7 @@ class ModifyInstanceAzResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3101,24 +3254,66 @@ class UpgradeDbInstanceVersionRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceNetworkAddress response structure.
+ * Account information
  * @class
  */
-class ModifyDBInstanceNetworkAddressResponse extends  AbstractModel {
+class InstanceUserInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the asynchronous process task for modifying the network information.
-         * @type {number || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * <p>Username.</p>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.UserName = null;
+
+        /**
+         * <p>Authentication database</p>
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * <p>Get role list (new method)</p>
+         * @type {Array.<Role> || null}
+         */
+        this.Roles = null;
+
+        /**
+         * <p>Permission list (old method)</p>
+         * @type {Array.<Auth> || null}
+         */
+        this.AuthRole = null;
+
+        /**
+         * <p>Creation time.</p>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * <p>Update time.</p>
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * <p>Console password last update time</p>
+         * @type {string || null}
+         */
+        this.ConsolePassUpdateTime = null;
+
+        /**
+         * <p>Whether to enable password rotation</p>
+         * @type {number || null}
+         */
+        this.EnablePasswordRotation = null;
+
+        /**
+         * <p>Custom description</p>
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -3129,8 +3324,31 @@ class ModifyDBInstanceNetworkAddressResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Database = 'Database' in params ? params.Database : null;
+
+        if (params.Roles) {
+            this.Roles = new Array();
+            for (let z in params.Roles) {
+                let obj = new Role();
+                obj.deserialize(params.Roles[z]);
+                this.Roles.push(obj);
+            }
+        }
+
+        if (params.AuthRole) {
+            this.AuthRole = new Array();
+            for (let z in params.AuthRole) {
+                let obj = new Auth();
+                obj.deserialize(params.AuthRole[z]);
+                this.AuthRole.push(obj);
+            }
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ConsolePassUpdateTime = 'ConsolePassUpdateTime' in params ? params.ConsolePassUpdateTime : null;
+        this.EnablePasswordRotation = 'EnablePasswordRotation' in params ? params.EnablePasswordRotation : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -3629,41 +3847,24 @@ class DescribeDBInstancesRequest extends  AbstractModel {
 }
 
 /**
- * InstanceEnableSSL response structure.
+ * DescribeInstanceUsers response structure.
  * @class
  */
-class InstanceEnableSSLResponse extends  AbstractModel {
+class DescribeInstanceUsersResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * SSL enabling status.
-- 0: disabled.
-- 1: enabled.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * <p>Account list</p>
+         * @type {Array.<InstanceUserInfo> || null}
+         */
+        this.Users = null;
+
+        /**
+         * <p>Total.</p>
          * @type {number || null}
          */
-        this.Status = null;
-
-        /**
-         * Certificate file expiration time, in the format of 2023-05-01 12:00:00.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ExpiredTime = null;
-
-        /**
-         * Download URL of the certificate file.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CertUrl = null;
-
-        /**
-         * Process ID.
-         * @type {number || null}
-         */
-        this.FlowId = null;
+        this.Total = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3680,10 +3881,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
-        this.CertUrl = 'CertUrl' in params ? params.CertUrl : null;
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+        if (params.Users) {
+            this.Users = new Array();
+            for (let z in params.Users) {
+                let obj = new InstanceUserInfo();
+                obj.deserialize(params.Users[z]);
+                this.Users.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3980,7 +4187,6 @@ class Auth extends  AbstractModel {
 - 0: no permissions.
 - 1: read-only.
 - 3: read-write.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Mask = null;
@@ -3989,7 +4195,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * Specifies the name of the database that has the current account permissions.
 - \*: indicates all databases.
 - db.name: indicates the database with a specific name.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.NameSpace = null;
@@ -4049,6 +4254,48 @@ class ResetDBInstancePasswordRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.UserName = 'UserName' in params ? params.UserName : null;
         this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
+ * DeleteInstanceRole request structure.
+ * @class
+ */
+class DeleteInstanceRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance id</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Role name</p>
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * <p>Database of the character.</p>
+         * @type {string || null}
+         */
+        this.Database = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Database = 'Database' in params ? params.Database : null;
 
     }
 }
@@ -4149,48 +4396,66 @@ class InstanceIntegerParam extends  AbstractModel {
 }
 
 /**
- * ModifyInstanceAz request structure.
+ * CreateInstanceUser request structure.
  * @class
  */
-class ModifyInstanceAzRequest extends  AbstractModel {
+class CreateInstanceUserRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Instance ID, such as cmgo-p8vn****. Log in to the <a href="https://console.cloud.tencent.com/mongodb">MongoDB console</a> and copy the instance ID from the instance list.</p>
+         * <p>Instance id</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * <p>Availability zone ID where the primary node is located. For the method for obtaining, please see <a href="https://www.tencentcloud.com/document/product/240/3637?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
+         * <p>Username.</p>
          * @type {string || null}
          */
-        this.PrimaryNodeZone = null;
+        this.UserName = null;
 
         /**
-         * <p>ID list of the availability zone where the secondary node resides.<br><strong>Note</strong>: It cannot contain the availability zones where the primary node and Hidden nodes reside.</p>
-         * @type {Array.<string> || null}
-         */
-        this.SecondaryNodeZone = null;
-
-        /**
-         * <p>If the current instance has no configuration for Hidden nodes, this parameter is not required.</p>
+         * <p>Password</p>
          * @type {string || null}
          */
-        this.HiddenNodeZone = null;
+        this.Password = null;
 
         /**
-         * <p>List of AZ IDs where read-only nodes reside.<br><strong>Note</strong>: If the current instance contains read-only nodes, this parameter is required.</p>
-         * @type {Array.<string> || null}
+         * <p>Encrypted password (choose either this or Password)</p>
+         * @type {string || null}
          */
-        this.ReadonlyNodeZone = null;
+        this.EncryptedPassword = null;
 
         /**
-         * <p>Specify the time policy for executing the availability zone switch.</p><ul><li>0: Execute the switch immediately.</li><li>1: Execute the switch within the set maintenance window. For details, please refer to <a href="https://www.tencentcloud.com/document/product/240/19910?from_cn_redirect=1">setting instance maintenance time</a>.</li></ul>
+         * <p>Authentication database (Belonging Database of the user).</p>
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * <p>Get role list (new method, can include built-in role and custom role)</p>
+         * @type {Array.<Role> || null}
+         */
+        this.Roles = null;
+
+        /**
+         * <p>Permission list (old method)</p>
+         * @type {Array.<Auth> || null}
+         */
+        this.AuthRole = null;
+
+        /**
+         * <p>Custom description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Whether password rotation is enabled (0: not enabled, 1: enabled)</p>
          * @type {number || null}
          */
-        this.InMaintenance = null;
+        this.EnablePasswordRotation = null;
 
     }
 
@@ -4202,11 +4467,30 @@ class ModifyInstanceAzRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.PrimaryNodeZone = 'PrimaryNodeZone' in params ? params.PrimaryNodeZone : null;
-        this.SecondaryNodeZone = 'SecondaryNodeZone' in params ? params.SecondaryNodeZone : null;
-        this.HiddenNodeZone = 'HiddenNodeZone' in params ? params.HiddenNodeZone : null;
-        this.ReadonlyNodeZone = 'ReadonlyNodeZone' in params ? params.ReadonlyNodeZone : null;
-        this.InMaintenance = 'InMaintenance' in params ? params.InMaintenance : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.EncryptedPassword = 'EncryptedPassword' in params ? params.EncryptedPassword : null;
+        this.Database = 'Database' in params ? params.Database : null;
+
+        if (params.Roles) {
+            this.Roles = new Array();
+            for (let z in params.Roles) {
+                let obj = new Role();
+                obj.deserialize(params.Roles[z]);
+                this.Roles.push(obj);
+            }
+        }
+
+        if (params.AuthRole) {
+            this.AuthRole = new Array();
+            for (let z in params.AuthRole) {
+                let obj = new Auth();
+                obj.deserialize(params.AuthRole[z]);
+                this.AuthRole.push(obj);
+            }
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.EnablePasswordRotation = 'EnablePasswordRotation' in params ? params.EnablePasswordRotation : null;
 
     }
 }
@@ -4367,6 +4651,41 @@ class CreateDBInstanceResponse extends  AbstractModel {
         }
         this.DealId = 'DealId' in params ? params.DealId : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteInstanceRole response structure.
+ * @class
+ */
+class DeleteInstanceRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Task ID.</p>
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4646,25 +4965,47 @@ class InstanceTextParam extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceSecurityGroup request structure.
+ * InstanceEnableSSL response structure.
  * @class
  */
-class ModifyDBInstanceSecurityGroupRequest extends  AbstractModel {
+class InstanceEnableSSLResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
-         * @type {string || null}
+         * SSL enabling status.
+- 0: disabled.
+- 1: enabled.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.Status = null;
 
         /**
-         * Target security group ID. Log in to the [security group console](https://console.cloud.tencent.com/vpc/security-group) page to copy the target security group ID.
-**Note**: This input parameter performs a full replacement on all existing collections but not an incremental update. To modify it, import the expected full collections.
-         * @type {Array.<string> || null}
+         * Certificate file expiration time, in the format of 2023-05-01 12:00:00.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.SecurityGroupIds = null;
+        this.ExpiredTime = null;
+
+        /**
+         * Download URL of the certificate file.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CertUrl = null;
+
+        /**
+         * Process ID.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4675,8 +5016,11 @@ class ModifyDBInstanceSecurityGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.CertUrl = 'CertUrl' in params ? params.CertUrl : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4847,6 +5191,42 @@ class DescribeBackupDownloadTaskRequest extends  AbstractModel {
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstanceSecurityGroup request structure.
+ * @class
+ */
+class ModifyDBInstanceSecurityGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Target security group ID. Log in to the [security group console](https://console.cloud.tencent.com/vpc/security-group) page to copy the target security group ID.
+**Note**: This input parameter performs a full replacement on all existing collections but not an incremental update. To modify it, import the expected full collections.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -5288,6 +5668,41 @@ class CloseAuditServiceRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteInstanceUser response structure.
+ * @class
+ */
+class DeleteInstanceUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Process ID</p>
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeSecurityGroup response structure.
  * @class
  */
@@ -5326,6 +5741,99 @@ class DescribeSecurityGroupResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateInstanceUser request structure.
+ * @class
+ */
+class UpdateInstanceUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance ID.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Username.</p>
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * <p>Authentication database</p>
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * <p>New password (Optional. If left empty, the password will not be changed)</p>
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * <p>Encrypted password (Optional, choose either this or Password)</p>
+         * @type {string || null}
+         */
+        this.EncryptedPassword = null;
+
+        /**
+         * <p>New role list (Optional. Leave it empty to not modify the role).</p>
+         * @type {Array.<Role> || null}
+         */
+        this.Roles = null;
+
+        /**
+         * <p>New permission list (Optional. If left empty, no permission will be modified)</p>
+         * @type {Array.<Auth> || null}
+         */
+        this.AuthRole = null;
+
+        /**
+         * <p>User description (Optional, leave it empty to not modify description)</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.EncryptedPassword = 'EncryptedPassword' in params ? params.EncryptedPassword : null;
+
+        if (params.Roles) {
+            this.Roles = new Array();
+            for (let z in params.Roles) {
+                let obj = new Role();
+                obj.deserialize(params.Roles[z]);
+                this.Roles.push(obj);
+            }
+        }
+
+        if (params.AuthRole) {
+            this.AuthRole = new Array();
+            for (let z in params.AuthRole) {
+                let obj = new Auth();
+                obj.deserialize(params.AuthRole[z]);
+                this.AuthRole.push(obj);
+            }
+        }
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -5696,6 +6204,48 @@ class DescribeAsyncRequestInfoRequest extends  AbstractModel {
             return;
         }
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+
+    }
+}
+
+/**
+ * DeleteInstanceUser request structure.
+ * @class
+ */
+class DeleteInstanceUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance ID.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Username.</p>
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * <p>Authentication database.</p>
+         * @type {string || null}
+         */
+        this.Database = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Database = 'Database' in params ? params.Database : null;
 
     }
 }
@@ -6664,6 +7214,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyDBInstanceNetworkAddress response structure.
+ * @class
+ */
+class ModifyDBInstanceNetworkAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the asynchronous process task for modifying the network information.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeCurrentOp request structure.
  * @class
  */
@@ -6983,12 +7568,18 @@ class DescribeClientConnectionsRequest extends  AbstractModel {
 }
 
 /**
- * SetDBInstanceDeletionProtection response structure.
+ * SetAccountUserPrivilege response structure.
  * @class
  */
-class SetDBInstanceDeletionProtectionResponse extends  AbstractModel {
+class SetAccountUserPrivilegeResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Task ID.
+         * @type {number || null}
+         */
+        this.FlowId = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -7005,6 +7596,7 @@ class SetDBInstanceDeletionProtectionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7478,6 +8070,76 @@ class RestoreDatabases extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceUsers request structure.
+ * @class
+ */
+class DescribeInstanceUsersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance ID.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>userName. If left empty, query all users</p>
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * <p>Database name. If left empty, query all database accounts.</p>
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * <p>Sorting field, available values: UserName; by default, sort by UserName if not passed.</p>
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * <p>Sorting method. Value range: asc (in ascending order), desc (in descending order). Default: asc.</p>
+         * @type {string || null}
+         */
+        this.OrderType = null;
+
+        /**
+         * <p>Pagination offset, defaults to 0</p>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * <p>Number of items per page, defaults to 20, maximum 100.</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * SetAccountUserPrivilege request structure.
  * @class
  */
@@ -7749,6 +8411,41 @@ class IsolateDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateInstanceRole response structure.
+ * @class
+ */
+class UpdateInstanceRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Task ID.</p>
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribePasswordRotation request structure.
  * @class
  */
@@ -7876,6 +8573,48 @@ class EnableTransparentDataEncryptionResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Role resource
+ * @class
+ */
+class RoleResource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether cluster-level resource</p>
+         * @type {boolean || null}
+         */
+        this.Cluster = null;
+
+        /**
+         * <p>Database name.</p>
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * <p>collection name.</p>
+         * @type {string || null}
+         */
+        this.Collection = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Collection = 'Collection' in params ? params.Collection : null;
 
     }
 }
@@ -8740,6 +9479,76 @@ class OfflineIsolatedDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceAz response structure.
+ * @class
+ */
+class ModifyInstanceAzResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Order ID for availability zone adjustment.</p>
+         * @type {string || null}
+         */
+        this.DealId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateInstanceRole response structure.
+ * @class
+ */
+class CreateInstanceRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Task ID.</p>
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * InquirePriceCreateDBInstances request structure.
  * @class
  */
@@ -8889,6 +9698,41 @@ class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
         this.ConfigServerVolume = 'ConfigServerVolume' in params ? params.ConfigServerVolume : null;
         this.ReadonlyNodeNum = 'ReadonlyNodeNum' in params ? params.ReadonlyNodeNum : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
+
+    }
+}
+
+/**
+ * UpdateInstanceUser response structure.
+ * @class
+ */
+class UpdateInstanceUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Process ID</p>
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9081,6 +9925,162 @@ class DescribeDBInstanceParamTplResponse extends  AbstractModel {
 }
 
 /**
+ * Role detailed information
+ * @class
+ */
+class RoleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Role name.</p>
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * <p>Character's Belonging Database</p>
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * <p>Role type: builtin_database - built-in database role, builtin_cluster - built-in cluster role, custom - custom role</p>
+         * @type {string || null}
+         */
+        this.RoleType = null;
+
+        /**
+         * <p>Grant permission</p>
+         * @type {Array.<RolePrivilege> || null}
+         */
+        this.Privileges = null;
+
+        /**
+         * <p>Inheritable role.</p>
+         * @type {Array.<Role> || null}
+         */
+        this.InheritedRoles = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.RoleType = 'RoleType' in params ? params.RoleType : null;
+
+        if (params.Privileges) {
+            this.Privileges = new Array();
+            for (let z in params.Privileges) {
+                let obj = new RolePrivilege();
+                obj.deserialize(params.Privileges[z]);
+                this.Privileges.push(obj);
+            }
+        }
+
+        if (params.InheritedRoles) {
+            this.InheritedRoles = new Array();
+            for (let z in params.InheritedRoles) {
+                let obj = new Role();
+                obj.deserialize(params.InheritedRoles[z]);
+                this.InheritedRoles.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeInstanceRoles request structure.
+ * @class
+ */
+class DescribeInstanceRolesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance id</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Database name. If it is empty, query the role of all databases.</p>
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * <p>Role type: builtin_database - built-in database role, builtin_cluster - built-in cluster role, custom - custom role. Query all if left empty.</p>
+         * @type {Array.<string> || null}
+         */
+        this.RoleType = null;
+
+        /**
+         * <p>Role name. Query all roles if left empty.</p>
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * <p>Common search keywords, fuzzy match inheritable roles and permissions relevant database name, role name, Action name, etc.</p>
+         * @type {string || null}
+         */
+        this.SearchKey = null;
+
+        /**
+         * <p>Sorting field, supports: RoleName, defaults to RoleName</p>
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * <p>Sorting method: asc-ascending, desc-descending, defaults to asc</p>
+         * @type {string || null}
+         */
+        this.OrderType = null;
+
+        /**
+         * <p>Pagination offset, defaults to 0</p>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * <p>Number of items per page. Default: 20. Maximum: 100.</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.RoleType = 'RoleType' in params ? params.RoleType : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * Audit log
  * @class
  */
@@ -9258,6 +10258,150 @@ class SlowLogItem extends  AbstractModel {
 }
 
 /**
+ * UpdateInstanceRole request structure.
+ * @class
+ */
+class UpdateInstanceRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance ID.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Role name.</p>
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * <p>Belonging Database of the character.</p>
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * <p>Role permission list. If not passed, no modification will be made.</p>
+         * @type {Array.<RolePrivilege> || null}
+         */
+        this.Privileges = null;
+
+        /**
+         * <p>Get role list. If not passed, no modification is made.</p>
+         * @type {Array.<Role> || null}
+         */
+        this.InheritedRoles = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Database = 'Database' in params ? params.Database : null;
+
+        if (params.Privileges) {
+            this.Privileges = new Array();
+            for (let z in params.Privileges) {
+                let obj = new RolePrivilege();
+                obj.deserialize(params.Privileges[z]);
+                this.Privileges.push(obj);
+            }
+        }
+
+        if (params.InheritedRoles) {
+            this.InheritedRoles = new Array();
+            for (let z in params.InheritedRoles) {
+                let obj = new Role();
+                obj.deserialize(params.InheritedRoles[z]);
+                this.InheritedRoles.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateInstanceRole request structure.
+ * @class
+ */
+class CreateInstanceRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance id</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>role name</p>
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * <p>Role-based db</p>
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * <p>Permission</p>
+         * @type {Array.<RolePrivilege> || null}
+         */
+        this.Privileges = null;
+
+        /**
+         * <p>Inheritable role</p>
+         * @type {Array.<Role> || null}
+         */
+        this.InheritedRoles = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Database = 'Database' in params ? params.Database : null;
+
+        if (params.Privileges) {
+            this.Privileges = new Array();
+            for (let z in params.Privileges) {
+                let obj = new RolePrivilege();
+                obj.deserialize(params.Privileges[z]);
+                this.Privileges.push(obj);
+            }
+        }
+
+        if (params.InheritedRoles) {
+            this.InheritedRoles = new Array();
+            for (let z in params.InheritedRoles) {
+                let obj = new Role();
+                obj.deserialize(params.InheritedRoles[z]);
+                this.InheritedRoles.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Modifies the request parameters of a TencentDB for MongoDB instance.
  * @class
  */
@@ -9333,6 +10477,34 @@ class SetInstanceMaintenanceRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.MaintenanceStart = 'MaintenanceStart' in params ? params.MaintenanceStart : null;
         this.MaintenanceEnd = 'MaintenanceEnd' in params ? params.MaintenanceEnd : null;
+
+    }
+}
+
+/**
+ * SetDBInstanceDeletionProtection response structure.
+ * @class
+ */
+class SetDBInstanceDeletionProtectionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10066,6 +11238,7 @@ module.exports = {
     CreateBackupDBInstanceResponse: CreateBackupDBInstanceResponse,
     DescribeAuditLogsRequest: DescribeAuditLogsRequest,
     DBInstancePrice: DBInstancePrice,
+    Role: Role,
     DescribePasswordRotationResponse: DescribePasswordRotationResponse,
     KillOpsRequest: KillOpsRequest,
     EnablePasswordRotationRequest: EnablePasswordRotationRequest,
@@ -10076,6 +11249,7 @@ module.exports = {
     DescribeSlowLogsRequest: DescribeSlowLogsRequest,
     FlushInstanceRouterConfigResponse: FlushInstanceRouterConfigResponse,
     DescribeCurrentOpResponse: DescribeCurrentOpResponse,
+    RolePrivilege: RolePrivilege,
     SetDBInstanceDeletionProtectionRequest: SetDBInstanceDeletionProtectionRequest,
     InstanceMultiParam: InstanceMultiParam,
     DescribeSRVConnectionDomainResponse: DescribeSRVConnectionDomainResponse,
@@ -10089,6 +11263,7 @@ module.exports = {
     Task: Task,
     ModifySRVConnectionUrlResponse: ModifySRVConnectionUrlResponse,
     AssignProjectResponse: AssignProjectResponse,
+    ModifyInstanceAzRequest: ModifyInstanceAzRequest,
     AuditLogFilter: AuditLogFilter,
     DescribeDBInstanceDealResponse: DescribeDBInstanceDealResponse,
     DescribeAuditLogsResponse: DescribeAuditLogsResponse,
@@ -10101,10 +11276,10 @@ module.exports = {
     DescribeBackupRulesRequest: DescribeBackupRulesRequest,
     DescribeBackupDownloadTaskResponse: DescribeBackupDownloadTaskResponse,
     AddNodeList: AddNodeList,
-    EnablePasswordRotationResponse: EnablePasswordRotationResponse,
+    DescribeInstanceRolesResponse: DescribeInstanceRolesResponse,
     DBInstanceInfo: DBInstanceInfo,
     ParamType: ParamType,
-    SetAccountUserPrivilegeResponse: SetAccountUserPrivilegeResponse,
+    EnablePasswordRotationResponse: EnablePasswordRotationResponse,
     ModifyDBInstanceNetworkAddressRequest: ModifyDBInstanceNetworkAddressRequest,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     InstanceEnableSSLRequest: InstanceEnableSSLRequest,
@@ -10114,9 +11289,9 @@ module.exports = {
     DeleteAccountUserRequest: DeleteAccountUserRequest,
     SpecItem: SpecItem,
     DescribeDetailedSlowLogsRequest: DescribeDetailedSlowLogsRequest,
-    ModifyInstanceAzResponse: ModifyInstanceAzResponse,
+    CreateInstanceUserResponse: CreateInstanceUserResponse,
     UpgradeDbInstanceVersionRequest: UpgradeDbInstanceVersionRequest,
-    ModifyDBInstanceNetworkAddressResponse: ModifyDBInstanceNetworkAddressResponse,
+    InstanceUserInfo: InstanceUserInfo,
     CreateAccountUserResponse: CreateAccountUserResponse,
     DescribeSlowLogPatternsResponse: DescribeSlowLogPatternsResponse,
     BackupDownloadTaskStatus: BackupDownloadTaskStatus,
@@ -10124,26 +11299,29 @@ module.exports = {
     InquirePriceModifyDBInstanceSpecRequest: InquirePriceModifyDBInstanceSpecRequest,
     BackupInfo: BackupInfo,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
-    InstanceEnableSSLResponse: InstanceEnableSSLResponse,
+    DescribeInstanceUsersResponse: DescribeInstanceUsersResponse,
     CurrentOp: CurrentOp,
     ModifyDBInstanceSpecRequest: ModifyDBInstanceSpecRequest,
     DescribeLogDownloadTasksRequest: DescribeLogDownloadTasksRequest,
     Auth: Auth,
     ResetDBInstancePasswordRequest: ResetDBInstancePasswordRequest,
+    DeleteInstanceRoleRequest: DeleteInstanceRoleRequest,
     InstanceIntegerParam: InstanceIntegerParam,
-    ModifyInstanceAzRequest: ModifyInstanceAzRequest,
+    CreateInstanceUserRequest: CreateInstanceUserRequest,
     ModifyNetworkAddress: ModifyNetworkAddress,
     EnableSRVConnectionUrlResponse: EnableSRVConnectionUrlResponse,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
+    DeleteInstanceRoleResponse: DeleteInstanceRoleResponse,
     CreateLogDownloadTaskRequest: CreateLogDownloadTaskRequest,
     WanServiceNodeList: WanServiceNodeList,
     CreateAccountUserRequest: CreateAccountUserRequest,
     InstanceTextParam: InstanceTextParam,
-    ModifyDBInstanceSecurityGroupRequest: ModifyDBInstanceSecurityGroupRequest,
+    InstanceEnableSSLResponse: InstanceEnableSSLResponse,
     DeleteDBBackupsRequest: DeleteDBBackupsRequest,
     DescribeDBInstanceNamespaceResponse: DescribeDBInstanceNamespaceResponse,
     DescribeBackupDownloadTaskRequest: DescribeBackupDownloadTaskRequest,
+    ModifyDBInstanceSecurityGroupRequest: ModifyDBInstanceSecurityGroupRequest,
     ModifySRVConnectionUrlRequest: ModifySRVConnectionUrlRequest,
     DescribeClientConnectionsResponse: DescribeClientConnectionsResponse,
     DescribeAccountUsersResponse: DescribeAccountUsersResponse,
@@ -10155,7 +11333,9 @@ module.exports = {
     NodeTag: NodeTag,
     InquirePriceCreateDBInstancesResponse: InquirePriceCreateDBInstancesResponse,
     CloseAuditServiceRequest: CloseAuditServiceRequest,
+    DeleteInstanceUserResponse: DeleteInstanceUserResponse,
     DescribeSecurityGroupResponse: DescribeSecurityGroupResponse,
+    UpdateInstanceUserRequest: UpdateInstanceUserRequest,
     SecurityGroup: SecurityGroup,
     EnableWanServiceRequest: EnableWanServiceRequest,
     ReplicaSetInfo: ReplicaSetInfo,
@@ -10165,6 +11345,7 @@ module.exports = {
     DescribeDBInstanceDealRequest: DescribeDBInstanceDealRequest,
     UpgradeDBInstanceKernelVersionResponse: UpgradeDBInstanceKernelVersionResponse,
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
+    DeleteInstanceUserRequest: DeleteInstanceUserRequest,
     CreateBackupDownloadTaskRequest: CreateBackupDownloadTaskRequest,
     TerminateDBInstancesRequest: TerminateDBInstancesRequest,
     ParamTpl: ParamTpl,
@@ -10180,11 +11361,12 @@ module.exports = {
     DescribeMongodbLogsResponse: DescribeMongodbLogsResponse,
     ModifyBackupExpireTimeRequest: ModifyBackupExpireTimeRequest,
     DescribeInstanceSSLResponse: DescribeInstanceSSLResponse,
+    ModifyDBInstanceNetworkAddressResponse: ModifyDBInstanceNetworkAddressResponse,
     DescribeCurrentOpRequest: DescribeCurrentOpRequest,
     BackupDownloadTask: BackupDownloadTask,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     DescribeClientConnectionsRequest: DescribeClientConnectionsRequest,
-    SetDBInstanceDeletionProtectionResponse: SetDBInstanceDeletionProtectionResponse,
+    SetAccountUserPrivilegeResponse: SetAccountUserPrivilegeResponse,
     DescribeDetailedSlowLogsResponse: DescribeDetailedSlowLogsResponse,
     ShardInfo: ShardInfo,
     TerminateDBInstancesResponse: TerminateDBInstancesResponse,
@@ -10196,14 +11378,17 @@ module.exports = {
     DescribeAuditConfigRequest: DescribeAuditConfigRequest,
     CreateBackupDBInstanceRequest: CreateBackupDBInstanceRequest,
     RestoreDatabases: RestoreDatabases,
+    DescribeInstanceUsersRequest: DescribeInstanceUsersRequest,
     SetAccountUserPrivilegeRequest: SetAccountUserPrivilegeRequest,
     UpgradeDbInstanceVersionResponse: UpgradeDbInstanceVersionResponse,
     NodeProperty: NodeProperty,
     KillOpsResponse: KillOpsResponse,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
+    UpdateInstanceRoleResponse: UpdateInstanceRoleResponse,
     DescribePasswordRotationRequest: DescribePasswordRotationRequest,
     AuditLogFile: AuditLogFile,
     EnableTransparentDataEncryptionResponse: EnableTransparentDataEncryptionResponse,
+    RoleResource: RoleResource,
     DescribeAuditLogFilesRequest: DescribeAuditLogFilesRequest,
     AssignProjectRequest: AssignProjectRequest,
     DescribeMongodbLogsRequest: DescribeMongodbLogsRequest,
@@ -10221,15 +11406,23 @@ module.exports = {
     DeleteAccountUserResponse: DeleteAccountUserResponse,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     OfflineIsolatedDBInstanceRequest: OfflineIsolatedDBInstanceRequest,
+    ModifyInstanceAzResponse: ModifyInstanceAzResponse,
+    CreateInstanceRoleResponse: CreateInstanceRoleResponse,
     InquirePriceCreateDBInstancesRequest: InquirePriceCreateDBInstancesRequest,
+    UpdateInstanceUserResponse: UpdateInstanceUserResponse,
     Operation: Operation,
     DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
     DescribeDBInstanceParamTplResponse: DescribeDBInstanceParamTplResponse,
+    RoleInfo: RoleInfo,
+    DescribeInstanceRolesRequest: DescribeInstanceRolesRequest,
     AuditLog: AuditLog,
     DescribeLogDownloadTasksResponse: DescribeLogDownloadTasksResponse,
     SlowLogItem: SlowLogItem,
+    UpdateInstanceRoleRequest: UpdateInstanceRoleRequest,
+    CreateInstanceRoleRequest: CreateInstanceRoleRequest,
     ModifyMongoDBParamType: ModifyMongoDBParamType,
     SetInstanceMaintenanceRequest: SetInstanceMaintenanceRequest,
+    SetDBInstanceDeletionProtectionResponse: SetDBInstanceDeletionProtectionResponse,
     DescribeDBInstanceParamTplDetailRequest: DescribeDBInstanceParamTplDetailRequest,
     InstanceDetail: InstanceDetail,
     ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,

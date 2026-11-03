@@ -8192,7 +8192,7 @@ Supplemental description:
     }
 
     /**
-     * This API is used to query verification results of dspm data identification data items.
+     * Queries the verification result of a dspm data identification data item
      * @param {DescribeDspmIdentifyRuleTestResultRequest} req
      * @param {function(string, DescribeDspmIdentifyRuleTestResultResponse):void} cb
      * @public

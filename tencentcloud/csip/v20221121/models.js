@@ -14623,7 +14623,7 @@ class AiScheduleInfo extends  AbstractModel {
         super();
 
         /**
-         * <p>ID of the AI scheduled task.</p>
+         * <p>AI scheduled task ID.</p>
          * @type {string || null}
          */
         this.ScheduleId = null;
@@ -14641,7 +14641,7 @@ class AiScheduleInfo extends  AbstractModel {
         this.Prompts = null;
 
         /**
-         * <p>Status. Parameter Value: 1 (enabled), 2 (disabled).</p>
+         * <p>Status. Value: 1 (enabled), 2 (disabled).</p>
          * @type {number || null}
          */
         this.Status = null;
@@ -26867,7 +26867,7 @@ class DescribeDspmIdentifyRuleTestResultResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Whether matched successfully</p><p>Enumeration values:</p><ul><li>true: match successful</li><li>false: fail to match</li></ul>
+         * <p>Whether the match is successful</p><p>Enumeration values:</p><ul><li>true: match successful</li><li>false: fail to match</li></ul>
          * @type {boolean || null}
          */
         this.IsMatch = null;
@@ -31481,7 +31481,7 @@ class DescribeAIScheduleListRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * <p>Scheduled task ID, optional. If empty, a full query is performed.</p>
+         * <p>Scheduled task ID. It is optional. If it is empty, a full query is performed.</p>
          * @type {string || null}
          */
         this.ScheduleId = null;
@@ -120858,7 +120858,7 @@ class DescribeCosAssetSyncTaskRequest extends  AbstractModel {
 }
 
 /**
- * User identity information of the AI assistant
+ * User identity information for the AI assistant
  * @class
  */
 class AIScheduleUserIdentity extends  AbstractModel {
@@ -120872,7 +120872,7 @@ class AIScheduleUserIdentity extends  AbstractModel {
         this.AppId = null;
 
         /**
-         * <p>Account Uin</p>
+         * <p>Account UIN.</p>
          * @type {string || null}
          */
         this.Uin = null;
@@ -120902,7 +120902,7 @@ class AIScheduleUserIdentity extends  AbstractModel {
         this.ChatId = null;
 
         /**
-         * <p>Channel identifier, for example, wecom / qq / wx / feishu / dingtalk / cloud</p>
+         * <p>Channel identifier, such as wecom / qq / wx / feishu / dingtalk / cloud</p>
          * @type {string || null}
          */
         this.Channel = null;

@@ -185,13 +185,13 @@ const DescribeZonesResponse = models.DescribeZonesResponse;
 const DeleteMultiPathGatewayRequest = models.DeleteMultiPathGatewayRequest;
 const DeleteCustomErrorPageRequest = models.DeleteCustomErrorPageRequest;
 const CustomField = models.CustomField;
-const BotManagedRule = models.BotManagedRule;
+const ApplyFreeCertificateResponse = models.ApplyFreeCertificateResponse;
 const FloatTimingTypeValue = models.FloatTimingTypeValue;
 const BrowserImpersonationDetectionAction = models.BrowserImpersonationDetectionAction;
 const CacheKeyHeader = models.CacheKeyHeader;
 const DeleteZoneRequest = models.DeleteZoneRequest;
 const RangeOriginPullParameters = models.RangeOriginPullParameters;
-const ApplyFreeCertificateResponse = models.ApplyFreeCertificateResponse;
+const BotManagedRule = models.BotManagedRule;
 const CurrentOriginACL = models.CurrentOriginACL;
 const DescribeIPGroupReferencesResponse = models.DescribeIPGroupReferencesResponse;
 const CreateEdgeKVNamespaceRequest = models.CreateEdgeKVNamespaceRequest;
@@ -426,6 +426,7 @@ const KVNamespace = models.KVNamespace;
 const DescribeZoneSettingResponse = models.DescribeZoneSettingResponse;
 const CreateMultiPathGatewayResponse = models.CreateMultiPathGatewayResponse;
 const DeleteJustInTimeTranscodeTemplatesResponse = models.DeleteJustInTimeTranscodeTemplatesResponse;
+const SecurityHeadersToOrigin = models.SecurityHeadersToOrigin;
 const DeleteRulesResponse = models.DeleteRulesResponse;
 const ModifyDnsRecordsRequest = models.ModifyDnsRecordsRequest;
 const DescribeLogAnalysisDetailResponse = models.DescribeLogAnalysisDetailResponse;
@@ -468,6 +469,7 @@ const ModifyWebSecurityTemplateRequest = models.ModifyWebSecurityTemplateRequest
 const DescribeWebSecurityTemplateRequest = models.DescribeWebSecurityTemplateRequest;
 const ClientAttestationRule = models.ClientAttestationRule;
 const CustomEndpoint = models.CustomEndpoint;
+const AccountProtectionSettings = models.AccountProtectionSettings;
 const ModifyOriginACLResponse = models.ModifyOriginACLResponse;
 const VerifyOwnershipRequest = models.VerifyOwnershipRequest;
 const InferenceContainerConfigForModify = models.InferenceContainerConfigForModify;
@@ -721,6 +723,7 @@ const AliasDomain = models.AliasDomain;
 const ImportZoneConfigRequest = models.ImportZoneConfigRequest;
 const IpTableRule = models.IpTableRule;
 const DDosProtectionConfig = models.DDosProtectionConfig;
+const UserRiskProfile = models.UserRiskProfile;
 const ModifyFunctionRuleRequest = models.ModifyFunctionRuleRequest;
 const DescribeSecurityIPGroupResponse = models.DescribeSecurityIPGroupResponse;
 const IncreasePlanQuotaRequest = models.IncreasePlanQuotaRequest;
@@ -829,6 +832,7 @@ const CreateSecurityClientAttesterResponse = models.CreateSecurityClientAttester
 const SecurityWeightedAction = models.SecurityWeightedAction;
 const ModifyMultiPathGatewayLineResponse = models.ModifyMultiPathGatewayLineResponse;
 const DescribeDefaultCertificatesResponse = models.DescribeDefaultCertificatesResponse;
+const SemanticAnalysisRules = models.SemanticAnalysisRules;
 const CreateOriginGroupResponse = models.CreateOriginGroupResponse;
 const CreateMultiPathGatewayLineRequest = models.CreateMultiPathGatewayLineRequest;
 const IPGroupReference = models.IPGroupReference;
@@ -3217,7 +3221,7 @@ To use an external certificate, upload the certificate to [SSL Certificates Cons
     }
 
     /**
-     * This API is used to query keys for integrating multi-channel security acceleration gateways. Customers access multi-channel security acceleration gateways based on key signature.
+     * This API is used to query the key for integrating a multi-channel security acceleration gateway. Customers sign with the integration key to access the multi-channel security acceleration gateway.
      * @param {DescribeMultiPathGatewaySecretKeyRequest} req
      * @param {function(string, DescribeMultiPathGatewaySecretKeyResponse):void} cb
      * @public

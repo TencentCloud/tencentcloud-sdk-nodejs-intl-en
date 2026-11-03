@@ -291,7 +291,7 @@ class DescribeFunctionsResponse extends  AbstractModel {
 }
 
 /**
- * Skipped fields configuration in exception rules.
+ * Skipped field configuration in the exception rule
  * @class
  */
 class RequestFieldsForException extends  AbstractModel {
@@ -299,33 +299,33 @@ class RequestFieldsForException extends  AbstractModel {
         super();
 
         /**
-         * Skip specific field. supported values:.
-<li>body.json: parameter content in json requests. at this point, Condition supports key and value, TargetField supports key and value, for example { "Scope": "body.json", "Condition": "", "TargetField": "key" }, which means all parameters in json requests skip WAF scan.</li>.
-<li style="margin-top:5px">cookie: cookie; at this point Condition supports key, value, TargetField supports key, value, for example { "Scope": "cookie", "Condition": "${key} in ['account-id'] and ${value} like ['prefix-*']", "TargetField": "value" }, which means the cookie parameter name equals account-id and the parameter value wildcard matches prefix-* to skip WAF scan;</li>.
-<li style="margin-top:5px">header: HTTP header parameters. at this point, Condition supports key and value, TargetField supports key and value, for example { "Scope": "header", "Condition": "${key} like ['x-auth-*']", "TargetField": "value" }, which means header parameter name wildcard match x-auth-* skips WAF scan.</li>.
-<li style="margin-top:5px">uri.query: URL encoding content/query parameter. at this point, Condition supports key and value, TargetField supports key and value. example: { "Scope": "uri.query", "Condition": "${key} in ['action'] and ${value} in ['upload', 'delete']", "TargetField": "value" }. indicates URL encoding content/query parameter name equal to action and parameter value equal to upload or delete skips WAF scan.</li>.
-<li style="margin-top:5px">uri: specifies the request path uri. at this point, Condition must be empty. TargetField supports query, path, fullpath, such as {"Scope": "uri", "Condition": "", "TargetField": "query"}, indicates the request path uri skips WAF scan for query parameters.</li>.
-<li style="margin-top:5px">body: request body content. at this point Condition must be empty, TargetField supports fullbody, multipart, such as { "Scope": "body", "Condition": "", "TargetField": "fullbody" }, which means the request body content skips WAF scan as a full request.</li>.
+         * Specific fields to skip. Supported values: <br/>
+<li>body.json: parameter content in JSON requests. At this point, Condition supports key and value, and TargetField supports key and value. For example, { "Scope": "body.json", "Condition": "", "TargetField": "key" } means ALL parameters in the JSON request content skip WAF scan.</li>
+<li style="margin-top:5px">cookie: Cookie; at this point, Condition supports key and value, and TargetField supports key and value, for example { "Scope": "cookie", "Condition": "${key} in ['account-id'] and ${value} like ['prefix-*']", "TargetField": "value" }, which means the cookie parameter name equals account-id and the parameter value wildcard matches prefix-* to skip WAF scan;</li>
+<li style="margin-top:5px">header: HTTP header parameters. At this point, Condition supports key and value, and TargetField supports key and value. For example, { "Scope": "header", "Condition": "${key} like ['x-auth-*']", "TargetField": "value" } means the header parameter name wildcard match x-auth-* skips WAF scan.</li>
+<li style="margin-top:5px">uri.query: URL-encoded content/query parameters. At this point, Condition supports key and value, and TargetField supports key and value. For example, { "Scope": "uri.query", "Condition": "${key} in ['action'] and ${value} in ['upload', 'delete']", "TargetField": "value" } means the parameter name of the URL-encoded content/query parameters is equal to action and the parameter value is equal to upload or delete, skip WAF scan;</li>
+<li style="margin-top:5px">uri: request path URI. At this point, Condition must be empty, and TargetField supports query, path, and fullpath. For example, { "Scope": "uri", "Condition": "", "TargetField": "query" } means only query parameters in the request path URI skip WAF scan.</li>
+<li style="margin-top:5px">body: request body content. At this point, Condition must be empty, and TargetField supports fullbody and multipart, for example { "Scope": "body",  "Condition": "", "TargetField": "fullbody" }, which means the request body content is the complete request body and skips WAF scan;</li>
          * @type {string || null}
          */
         this.Scope = null;
 
         /**
-         * Skip specific field expression must comply with expression grammar.
-Condition supports expression configuration syntax: <li> write according to the matching conditional expression syntax of rules, with support for referencing key and value.</li> <li> supports in, like operators, and logical combination with and.</li>.
-For example: <li>${key} in ['x-trace-id']: the parameter name equals x-trace-id.</li> <li>${key} in ['x-trace-id'] and ${value} like ['Bearer *']: the parameter name equals x-trace-id and the parameter value wildcard matches Bearer *.</li>.
+         * Expression of the specific field to skip, which must comply with the expression grammar.<br />
+Condition supports expression configuration syntax: <li> Write the filter condition expression syntax based on the rule, with support for referencing key and value.</li><li> Support in and like operators, and logical combination with and.</li>
+For example: <li>${key} in ['x-trace-id']: The parameter name is equal to x-trace-id.</li><li>${key} in ['x-trace-id'] and ${value} like ['Bearer *']: The parameter name is equal to x-trace-id and the parameter value wildcard matches Bearer *.</li>
          * @type {string || null}
          */
         this.Condition = null;
 
         /**
-         * The Scope parameter takes different values. the TargetField expression supports the following values:.
-<Li> body.json: supports key, value.</li>.
-<li>cookie: supports key and value.</li>.
-<li>header: supports key, value</li>.
-<Li> uri.query: supports key and value</li>.
-<li>uri. specifies path, query, or fullpath.</li>.
-<Li>Body: supports fullbody and multipart.</li>.
+         * When the Scope parameter takes different values, the supported values in the TargetField expression are as follows:
+<li> body.json: supports key and value</li>
+<li> cookie: supports key and value</li>
+<li> header: supports key and value</li>
+<li> uri.query: supports key and value</li>
+<li> uri: supports path, query, and fullpath</li>
+<li> body: supports fullbody and multipart</li>
          * @type {string || null}
          */
         this.TargetField = null;
@@ -567,7 +567,7 @@ class DescribeSecurityIPGroupInfoResponse extends  AbstractModel {
 }
 
 /**
- * Adaptive frequency control.
+ * Adaptive frequency control
  * @class
  */
 class AdaptiveFrequencyControl extends  AbstractModel {
@@ -575,25 +575,25 @@ class AdaptiveFrequencyControl extends  AbstractModel {
         super();
 
         /**
-         * Whether adaptive frequency control is enabled. valid values: <li>on: enable;</li> <li>off: disable.</li>.
+         * Whether adaptive frequency control is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li>
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * Rule ID of adaptive frequency control, returned as an output parameter.
+         * Rule ID of adaptive frequency control, returned only as an output parameter.
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * The restriction level of adaptive frequency control. required when Enabled is on. valid values: <li>Loose: Loose</li><li>Moderate: Moderate</li><li>Strict: Strict</li>.
+         * The limitation level of adaptive frequency control. This field is required when Enabled is on. Valid values: <li>Loose: loose;</li><li>Moderate: moderate;</li><li>Strict: strict.</li>
          * @type {string || null}
          */
         this.Sensitivity = null;
 
         /**
-         * The handling method of adaptive frequency control. this field is required when Enabled is on. valid values for SecurityAction Name: <li>Monitor: observation;</li> <li>Deny: block;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>.
+         * Handling method of adaptive frequency control. This field is required when Enabled is on. Supported values for SecurityAction Name: <li>Monitor: monitor;</li><li>Deny: block;</li><li>Challenge: challenge. ChallengeActionParameters.Name only supports JSChallenge.</li>
          * @type {SecurityAction || null}
          */
         this.Action = null;
@@ -750,7 +750,7 @@ class DescribeWebSecurityTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * Action for security operation.
+ * Safe execution action
  * @class
  */
 class SecurityAction extends  AbstractModel {
@@ -758,7 +758,7 @@ class SecurityAction extends  AbstractModel {
         super();
 
         /**
-         * <p>Specific actions for safe execution. Valid values:</p><ul><li>Deny: block, prevent requests from accessing site resources;</li><li>Monitor: observe, only record logs;</li><li>Redirect: redirect to URL;</li><li>Disabled: not enabled, do not enable the specified rule;</li><li>Allow: pass, skip the remaining rules of the current security module. Delay response when the AllowActionParameters parameter is configured;</li><li>Challenge: challenge, respond with challenge content;</li><li>BlockIP: to be deprecated, IP blocking;</li><li>ReturnCustomPage: to be deprecated, use a specified page for interception;</li><li>JSChallenge: to be deprecated, JavaScript challenge;</li><li>ManagedChallenge: to be deprecated, managed challenge.</li></ul>
+         * <p>Specific actions for safe execution. Valid values:</p><ul><li>Deny: block, prevent requests from accessing site resources;</li><li>Monitor: observe, only record logs;</li><li>Redirect: redirect to URL;</li><li>Disabled: not enabled, disable the specified rule;</li><li>Allow: allow, skip the remaining rules of the current security module. Delay response when the AllowActionParameters parameter is configured;</li><li>Challenge: challenge, respond with challenge content;</li><li>BlockIP: to be deprecated, IP block;</li><li>ReturnCustomPage: to be deprecated, use a specified page for interception;</li><li>JSChallenge: to be deprecated, JavaScript challenge;</li><li>ManagedChallenge: to be deprecated, managed challenge.</li></ul>
          * @type {string || null}
          */
         this.Name = null;
@@ -788,7 +788,7 @@ class SecurityAction extends  AbstractModel {
         this.ChallengeActionParameters = null;
 
         /**
-         * <p>To be deprecated. Additional parameter when Name is BlockIP.</p>
+         * <p>To be deprecated. An additional parameter when Name is BlockIP.</p>
          * @type {BlockIPActionParameters || null}
          */
         this.BlockIPActionParameters = null;
@@ -850,7 +850,7 @@ class SecurityAction extends  AbstractModel {
 }
 
 /**
- * IP intelligence library (formerly client profile analysis) configuration.
+ * IP Intelligence Library (formerly client profile analysis) configuration.
  * @class
  */
 class IPReputation extends  AbstractModel {
@@ -858,13 +858,13 @@ class IPReputation extends  AbstractModel {
         super();
 
         /**
-         * IP intelligence library (formerly client profile analysis). valid values: <li>on: enable;</li> <li>off: disable.</li>.
+         * IP Intelligence Library (formerly client profile analysis). Valid values: <li>on: enable;</li><li>off: disable.</li>
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * IP intelligence library (formerly client profile analysis) configuration content.
+         * Specific configuration content of the IP Intelligence Library (formerly client profile analysis).
          * @type {IPReputationGroup || null}
          */
         this.IPReputationGroup = null;
@@ -933,7 +933,7 @@ class CreateSecurityAPIServiceRequest extends  AbstractModel {
 }
 
 /**
- * Precision rate limiting configuration.
+ * Configuration of precise rate limiting
  * @class
  */
 class RateLimitingRules extends  AbstractModel {
@@ -941,7 +941,7 @@ class RateLimitingRules extends  AbstractModel {
         super();
 
         /**
-         * Definition list of precise rate limiting. when using ModifySecurityPolicy to modify the Web protection configuration: <br> <li> if the Rules parameter is not specified or its length is zero: clear all precision rate limiting configurations.</li> <li> if the RateLimitingRules parameter value is unspecified in the SecurityPolicy parameter: retain the existing custom rule configuration without modification.</li>.
+         * Definition list of precise rate limiting. When using ModifySecurityPolicy to modify Web protection configuration: <br> <li> If the Rules parameter is not specified or its length is zero: clear all precise rate limiting configurations.</li> <li> If the RateLimitingRules parameter value is not specified in the SecurityPolicy parameter: keep the existing custom rule configuration without modification.</li>
          * @type {Array.<RateLimitingRule> || null}
          */
         this.Rules = null;
@@ -1059,7 +1059,7 @@ class OriginACLEntity extends  AbstractModel {
 }
 
 /**
- * Specifies the specific content of IDC rule configuration.
+ * Specific content of the IDC rule configuration.
  * @class
  */
 class SourceIDC extends  AbstractModel {
@@ -1067,13 +1067,13 @@ class SourceIDC extends  AbstractModel {
         super();
 
         /**
-         * Handling method for requests from the specified IDC. valid values for SecurityAction Name: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Disabled: not enabled, disable specified rule;</li> <li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li> <li>Allow: pass (to be deprecated).</li>.
+         * Handling method for requests from a specified IDC. Supported values of the Name parameter of SecurityAction: <li>Deny: block;</li><li>Monitor: observe;</li><li>Disabled: not enabled, which disables the specified rule;</li><li>Challenge: challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li><li>Allow: allow (to be deprecated).</li>
          * @type {SecurityAction || null}
          */
         this.BaseAction = null;
 
         /**
-         * Specifies the handling method for the specified id request.
+         * Handling method for the request from the specified IDC.
          * @type {Array.<BotManagementActionOverrides> || null}
          */
         this.BotManagementActionOverrides = null;
@@ -1658,7 +1658,7 @@ If this field is not specified, the default value 'off' will be used. When auto-
 }
 
 /**
- * Minimum minimum body transfer rate threshold configuration.
+ * Configuration of the minimum body transfer rate threshold.
  * @class
  */
 class MinimalRequestBodyTransferRate extends  AbstractModel {
@@ -1666,19 +1666,19 @@ class MinimalRequestBodyTransferRate extends  AbstractModel {
         super();
 
         /**
-         * Minimum body transfer rate threshold, the measurement unit is only supported in bps.
+         * Minimum body transfer rate threshold. The measurement unit only supports bps.
          * @type {string || null}
          */
         this.MinimalAvgTransferRateThreshold = null;
 
         /**
-         * Minimum body transfer rate statistical time range, valid values: <li>10s: 10 seconds;</li> <li>30s: 30 seconds;</li> <li>60s: 60 seconds;</li> <li>120s: 120 seconds.</li>.
+         * Statistical time range for minimum body transfer rate. Valid values: <li>10s: 10 seconds;</li><li>30s: 30 seconds;</li><li>60s: 60 seconds;</li><li>120s: 120 seconds.</li>
          * @type {string || null}
          */
         this.CountingPeriod = null;
 
         /**
-         * Specifies whether the minimum body transfer rate threshold is enabled. valid values: <li>on: enable;</li> <li>off: disable.</li>.
+         * Whether the minimum body transfer rate threshold is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li>
          * @type {string || null}
          */
         this.Enabled = null;
@@ -1738,31 +1738,31 @@ class BrowserImpersonationDetectionRule extends  AbstractModel {
         super();
 
         /**
-         * Browser spoofing identification rule ID. rule ID supports different rule configuration operations: <li> <b>add</b> a new rule: ID is empty or without specifying the ID parameter;</li> <li> <b>modify</b> an existing rule: specify the rule ID that needs to be updated/modified;</li> <li> <b>delete</b> an existing rule: existing Rules not included in the Rules list of the BrowserImpersonationDetection parameter will be deleted.</li>.
+         * ID of the browser spoofing identification rule.<br>You can perform different rule configuration operations by rule ID:<br> <li> <b>Add</b> a new rule: leave the ID empty or unspecified;</li><li><b>Modify</b> an existing rule: specify the rule ID that needs to be updated/modified;</li><li><b>Delete</b> an existing rule: existing rules not included in the Rules list in the BrowserImpersonationDetection parameter will be deleted.</li>
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Specifies the name of the browser spoofing identification rule.
+         * Name of the browser spoofing identification rule.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Whether browser spoofing detection is enabled. valid values: <li>on: enabled;</li><li>off: disabled.</li>.
+         * Whether to enable the browser forgery identification rule. Valid values: <li>on: enable;</li><li>off: disable.</li>
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * Specifies the specific content of browser spoofing identification rules, which only support configuration of request Method (Method), request Path (Path), and request URL, and must comply with expression grammar. for detailed specifications, please refer to the product document.
+         * Specific content of the browser spoofing identification rule. It only supports the configuration of request Method, request Path, and request URL, which must comply with expression syntax. For detailed specifications, see the product document.
          * @type {string || null}
          */
         this.Condition = null;
 
         /**
-         * Describes the handling method for browser spoofing identification rules, including Cookie verification, session tracking configuration, and client behavior validation configuration.
+         * Handling method for browser spoofing identification rules, including Cookie verification, session tracking configuration, and client behavior validation configuration.
          * @type {BrowserImpersonationDetectionAction || null}
          */
         this.Action = null;
@@ -2971,7 +2971,7 @@ class QUICParameters extends  AbstractModel {
 }
 
 /**
- * Managed rule group meta information.
+ * Managed rule group information
  * @class
  */
 class ManagedRuleGroupMeta extends  AbstractModel {
@@ -2979,19 +2979,19 @@ class ManagedRuleGroupMeta extends  AbstractModel {
         super();
 
         /**
-         * ManagedRuleGroup detailed information, output parameter only.
+         * Managed rule group description. For output usage only.
          * @type {string || null}
          */
         this.GroupDetail = null;
 
         /**
-         * ManagedRuleGroup name, output parameter only.
+         * Managed rule group name. Output parameter only.
          * @type {string || null}
          */
         this.GroupName = null;
 
         /**
-         * All sub-rules information under current ManagedRuleGroup, output parameter only.
+         * Rule information of all sub-rules in the current managed rule group. Output parameter only.
          * @type {Array.<ManagedRuleDetail> || null}
          */
         this.RuleDetails = null;
@@ -8326,7 +8326,7 @@ class EdgeKVGetResponse extends  AbstractModel {
 }
 
 /**
- * Human-Machine verification page configuration.
+ * Specific configuration of the CAPTCHA page.
  * @class
  */
 class CAPTCHAPageChallenge extends  AbstractModel {
@@ -8334,7 +8334,7 @@ class CAPTCHAPageChallenge extends  AbstractModel {
         super();
 
         /**
-         * Whether the human-machine verification page is enabled. valid values: <li>on: enabled;</li> <li>off: disabled.</li>.
+         * Whether human-machine verification is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li>
          * @type {string || null}
          */
         this.Enabled = null;
@@ -9205,58 +9205,30 @@ class CustomField extends  AbstractModel {
 }
 
 /**
- * Bot managed rules. The rule IDs can be obtained from the output of DescribeBotManagedRules.
+ * ApplyFreeCertificate response structure.
  * @class
  */
-class BotManagedRule extends  AbstractModel {
+class ApplyFreeCertificateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The rule action. Values:
-<li>`drop`: Block</li>
-<li>`trans`: Allow</li>
-<li>`alg`: JavaScript challenge</li>
-<li>`monitor`: Observe</li>
+         * Specifies the verification information for free certificate application when VerificationMethod is dns_challenge.
+         * @type {DnsVerification || null}
+         */
+        this.DnsVerification = null;
+
+        /**
+         * Specifies the verification information related to the free certificate application for the domain name when VerificationMethod is http_challenge.
+         * @type {FileVerification || null}
+         */
+        this.FileVerification = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Action = null;
-
-        /**
-         * The rule ID, which is only used as an output parameter.
-         * @type {number || null}
-         */
-        this.RuleID = null;
-
-        /**
-         * Rule ID to allow. defaults to no rules configured for allowance.
-         * @type {Array.<number> || null}
-         */
-        this.TransManagedIds = null;
-
-        /**
-         * Rule ID of the JS challenge. default is all rules without configuring the JS challenge.
-         * @type {Array.<number> || null}
-         */
-        this.AlgManagedIds = null;
-
-        /**
-         * The rule ID for digit verification code. by default, all rules do not configure digit verification code.
-         * @type {Array.<number> || null}
-         */
-        this.CapManagedIds = null;
-
-        /**
-         * Rule ID for observation. by default, observation is not configured for all rules.
-         * @type {Array.<number> || null}
-         */
-        this.MonManagedIds = null;
-
-        /**
-         * Rule ID for interception. by default, all rules have no configuration interception.
-         * @type {Array.<number> || null}
-         */
-        this.DropManagedIds = null;
+        this.RequestId = null;
 
     }
 
@@ -9267,13 +9239,19 @@ class BotManagedRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Action = 'Action' in params ? params.Action : null;
-        this.RuleID = 'RuleID' in params ? params.RuleID : null;
-        this.TransManagedIds = 'TransManagedIds' in params ? params.TransManagedIds : null;
-        this.AlgManagedIds = 'AlgManagedIds' in params ? params.AlgManagedIds : null;
-        this.CapManagedIds = 'CapManagedIds' in params ? params.CapManagedIds : null;
-        this.MonManagedIds = 'MonManagedIds' in params ? params.MonManagedIds : null;
-        this.DropManagedIds = 'DropManagedIds' in params ? params.DropManagedIds : null;
+
+        if (params.DnsVerification) {
+            let obj = new DnsVerification();
+            obj.deserialize(params.DnsVerification)
+            this.DnsVerification = obj;
+        }
+
+        if (params.FileVerification) {
+            let obj = new FileVerification();
+            obj.deserialize(params.FileVerification)
+            this.FileVerification = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9343,7 +9321,7 @@ class FloatTimingTypeValue extends  AbstractModel {
 }
 
 /**
- * Specifies the Action of the Bot browser verification rule (formerly active feature detection rule).
+ * Action of the Bot browser verification rule (formerly active feature detection rule).
  * @class
  */
 class BrowserImpersonationDetectionAction extends  AbstractModel {
@@ -9351,13 +9329,13 @@ class BrowserImpersonationDetectionAction extends  AbstractModel {
         super();
 
         /**
-         * Configures Cookie verification and session tracking.
+         * Cookie verification and session tracking configuration.
          * @type {BotSessionValidation || null}
          */
         this.BotSessionValidation = null;
 
         /**
-         * Configures client behavior validation.
+         * Client behavior validation configuration.
          * @type {ClientBehaviorDetection || null}
          */
         this.ClientBehaviorDetection = null;
@@ -9485,30 +9463,58 @@ class RangeOriginPullParameters extends  AbstractModel {
 }
 
 /**
- * ApplyFreeCertificate response structure.
+ * Bot managed rules. The rule IDs can be obtained from the output of DescribeBotManagedRules.
  * @class
  */
-class ApplyFreeCertificateResponse extends  AbstractModel {
+class BotManagedRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Specifies the verification information for free certificate application when VerificationMethod is dns_challenge.
-         * @type {DnsVerification || null}
-         */
-        this.DnsVerification = null;
-
-        /**
-         * Specifies the verification information related to the free certificate application for the domain name when VerificationMethod is http_challenge.
-         * @type {FileVerification || null}
-         */
-        this.FileVerification = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * The rule action. Values:
+<li>`drop`: Block</li>
+<li>`trans`: Allow</li>
+<li>`alg`: JavaScript challenge</li>
+<li>`monitor`: Observe</li>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Action = null;
+
+        /**
+         * The rule ID, which is only used as an output parameter.
+         * @type {number || null}
+         */
+        this.RuleID = null;
+
+        /**
+         * Rule ID to allow. defaults to no rules configured for allowance.
+         * @type {Array.<number> || null}
+         */
+        this.TransManagedIds = null;
+
+        /**
+         * Rule ID of the JS challenge. default is all rules without configuring the JS challenge.
+         * @type {Array.<number> || null}
+         */
+        this.AlgManagedIds = null;
+
+        /**
+         * The rule ID for digit verification code. by default, all rules do not configure digit verification code.
+         * @type {Array.<number> || null}
+         */
+        this.CapManagedIds = null;
+
+        /**
+         * Rule ID for observation. by default, observation is not configured for all rules.
+         * @type {Array.<number> || null}
+         */
+        this.MonManagedIds = null;
+
+        /**
+         * Rule ID for interception. by default, all rules have no configuration interception.
+         * @type {Array.<number> || null}
+         */
+        this.DropManagedIds = null;
 
     }
 
@@ -9519,19 +9525,13 @@ class ApplyFreeCertificateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.DnsVerification) {
-            let obj = new DnsVerification();
-            obj.deserialize(params.DnsVerification)
-            this.DnsVerification = obj;
-        }
-
-        if (params.FileVerification) {
-            let obj = new FileVerification();
-            obj.deserialize(params.FileVerification)
-            this.FileVerification = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.RuleID = 'RuleID' in params ? params.RuleID : null;
+        this.TransManagedIds = 'TransManagedIds' in params ? params.TransManagedIds : null;
+        this.AlgManagedIds = 'AlgManagedIds' in params ? params.AlgManagedIds : null;
+        this.CapManagedIds = 'CapManagedIds' in params ? params.CapManagedIds : null;
+        this.MonManagedIds = 'MonManagedIds' in params ? params.MonManagedIds : null;
+        this.DropManagedIds = 'DropManagedIds' in params ? params.DropManagedIds : null;
 
     }
 }
@@ -10040,9 +10040,9 @@ class SharedCNAMEInfo extends  AbstractModel {
 }
 
 /**
- * Default interception action configuration. When security rules are hit and trigger intercept handling actions, if SecurityAction only specifies Name as Deny and DenyActionParameters is not specified, match by feature module dimension and use the default parameter configuration defined here:
-<li>Default disposition action configuration for managed rules in ManagedRules.</li>
-<li>OtherModules Security protection rules (custom rule, rate limit, and Bot management function) except managed rules have default block disposition action configuration.</li>
+ * Default block action configuration. When a security rule is hit and triggers a block action, if SecurityAction specifies only Name as Deny and DenyActionParameters is not specified, the default parameter configuration defined here is matched by feature module dimension and used:
+<li>Default interception disposition action configuration for ManagedRules.</li>
+<li>OtherModules: default block disposition action configuration for security protection rules other than managed rules (custom rules, rate limit, and Bot management function).</li>
  * @class
  */
 class DefaultDenySecurityActionParameters extends  AbstractModel {
@@ -10050,13 +10050,13 @@ class DefaultDenySecurityActionParameters extends  AbstractModel {
         super();
 
         /**
-         * The managed rule uses the default disposition action configuration. DenyActionParameters supported configuration parameters: <li>ReturnCustomPage: Whether to use a custom page.</li><li>ResponseCode: Status code of the custom page.</li><li>ErrorPageId: PageId of the custom page.</li>
+         * Default interception disposition action configuration for managed rules. Supported configuration parameters of DenyActionParameters: <li>ReturnCustomPage: whether to use a custom page.</li><li>ResponseCode: status code of the custom page.</li><li>ErrorPageId: PageId of the custom page.</li>
          * @type {DenyActionParameters || null}
          */
         this.ManagedRules = null;
 
         /**
-         * Security protection rules other than managed rules (custom rule, rate limit, and Bot management function) default to disposition action configuration. DenyActionParameters supported configuration parameters: <li>ReturnCustomPage: Whether to use custom page.</li> <li>ResponseCode: Status code of custom pages.</li> <li>ErrorPageId: PageId of custom pages.</li>
+         * Security protection rules other than managed rules (custom rules, rate limit, and Bot management function) default interception disposition action configuration. Configuration parameters supported by DenyActionParameters: <li>ReturnCustomPage: whether to use a custom page.</li><li>ResponseCode: status code of the custom page.</li><li>ErrorPageId: PageId of the custom page.</li>
          * @type {DenyActionParameters || null}
          */
         this.OtherModules = null;
@@ -10555,7 +10555,7 @@ class CacheKeyConfigParameters extends  AbstractModel {
 }
 
 /**
- * Trigger threshold for verification in Bot management.
+ * Trigger threshold of verification in Bot management.
  * @class
  */
 class MaxNewSessionTriggerConfig extends  AbstractModel {
@@ -10563,13 +10563,13 @@ class MaxNewSessionTriggerConfig extends  AbstractModel {
         super();
 
         /**
-         * Time window for trigger threshold statistics. valid values: <li>5s: within 5 seconds;</li><li>10s: within 10 seconds;</li><li>15s: within 15 seconds;</li><li>30s: within 30 seconds;</li><li>60s: within 60 seconds;</li><li>5m: within 5 minutes;</li><li>10m: within 10 minutes;</li><li>30m: within 30 minutes;</li><li>60m: within 60 minutes.</li>.
+         * Time window for trigger threshold statistics. Valid values: <li>5s: within 5 seconds;</li><li>10s: within 10 seconds;</li><li>15s: within 15 seconds;</li><li>30s: within 30 seconds;</li><li>60s: within 60 seconds;</li><li>5m: within 5 minutes;</li><li>10m: within 10 minutes;</li><li>30m: within 30 minutes;</li><li>60m: within 60 minutes.</li>
          * @type {string || null}
          */
         this.MaxNewSessionCountInterval = null;
 
         /**
-         * Trigger threshold cumulative count. value range: 1-100000000.
+         * Cumulative count of trigger threshold statistics. Value range: 1-100000000.
          * @type {number || null}
          */
         this.MaxNewSessionCountThreshold = null;
@@ -13087,7 +13087,7 @@ Note: This field may return null, which indicates a failure to obtain a valid va
 }
 
 /**
- * Managed rule detail.
+ * Details of managed rules
  * @class
  */
 class ManagedRuleDetail extends  AbstractModel {
@@ -13101,7 +13101,7 @@ class ManagedRuleDetail extends  AbstractModel {
         this.RuleId = null;
 
         /**
-         * Protection level of managed rules. Values: <li>`low`: low risk, this rule has a relatively low risk and is applicable to very strict access scenarios, this level of rule may generate considerable false alarms.</li> <li>`medium`: medium risk, this means the risk of this rule is normal and is suitable for protection scenarios with stricter requirements.</li> <li>`high`: high risk, this indicates that the risk of this rule is relatively high and will not generate false alarms in most scenarios.</li> <li>`extreme`: ultra-high risk. this represents that the risk of this rule is extremely high and will not generate false alarms basically.</li>.
+         * Protection level of the managed rule. Valid values: <li>low: low risk. This rule has lower risk and is suitable for access scenarios in very strict control environments. Rules at this level may cause considerable false alarms;</li><li>medium: medium-risk. This rule has normal risk and is suitable for strict protection scenarios;</li><li>high: high-risk. This rule has relatively high risk and will not generate false alarms in most scenarios;</li><li>extreme: ultra-high risk. This rule has extremely high risk and basically will not generate false alarms;</li>
          * @type {string || null}
          */
         this.RiskLevel = null;
@@ -14657,7 +14657,7 @@ class ModifyDnsRecordsStatusRequest extends  AbstractModel {
 }
 
 /**
- * Managed rule automatic update option.
+ * Automatic update options for managed rules
  * @class
  */
 class ManagedRuleAutoUpdate extends  AbstractModel {
@@ -14665,13 +14665,13 @@ class ManagedRuleAutoUpdate extends  AbstractModel {
         super();
 
         /**
-         * Enable automatic update to the latest version or not. Values: <li>`on`: enabled</li> <li>`off`: disabled</li>.
+         * Whether automatic update to the latest version is enabled. Valid values: <li>on: enabled</li><li>off: disabled</li>
          * @type {string || null}
          */
         this.AutoUpdateToLatestVersion = null;
 
         /**
-         * Current version, compliant with ISO 8601 standard format, such as 2023-12-21T12:00:32Z, empty by default, output parameter only.
+         * Currently used version in ISO 8601 format, for example, 2023-12-21T12:00:32Z. Empty by default. Output only.
          * @type {string || null}
          */
         this.RulesetVersion = null;
@@ -14692,7 +14692,7 @@ class ManagedRuleAutoUpdate extends  AbstractModel {
 }
 
 /**
- * Custom rule under Web protection feature.
+ * Custom rule under the Web protection feature.
  * @class
  */
 class CustomRule extends  AbstractModel {
@@ -14700,31 +14700,31 @@ class CustomRule extends  AbstractModel {
         super();
 
         /**
-         * <p>Custom rule name.</p>
+         * <p>Name of the custom rule.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * <p>The specific content of a custom rule must comply with the expression syntax. For detailed specifications, refer to the <a href="https://www.tencentcloud.com/document/product/1552/125343?from_cn_redirect=1">product document</a>.</p>
+         * <p>The specific content of the custom rule must comply with the expression grammar. For detailed specifications, see the <a href="https://www.tencentcloud.com/document/product/1552/125343?from_cn_redirect=1">product document</a>.</p>
          * @type {string || null}
          */
         this.Condition = null;
 
         /**
-         * <p>Handling action of the custom rule. SecurityAction.Name value range is as follows:</p><ul><li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li><li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li><li>Monitor: observe;</li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li><li>Redirect: redirect to a URL.</li></ul>
+         * <p>Handling action of the custom rule. SecurityAction.Name values are as follows:</p><ul><li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li><li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li><li>Monitor: observe;</li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li><li>Redirect: redirect to a URL.</li></ul>
          * @type {SecurityAction || null}
          */
         this.Action = null;
 
         /**
-         * <p>Whether the custom rule is enabled. Valid values: <ul><li>on: enabled;</li><li>off: disabled.</li></ul></p>
+         * <p>Whether the custom rule is enabled. Valid values: <ul><li>on: Enable;</li><li>off: Disable.</li></ul></p>
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * <p>ID of the custom rule. The rule ID supports different rule configuration operations: <ul><li>Add a new rule: leave the ID empty or do not specify the ID parameter;</li><li>Modify an existing rule: specify the rule ID that needs to be updated/modified;</li><li>Delete an existing rule: existing rules not included in the Rules list in the CustomRules parameter will be deleted.</li></ul></p>
+         * <p>ID of the custom rule. You can perform different rule configuration operations by rule ID: <ul><li>Add a new rule: leave the ID empty or do not specify the ID parameter;</li><li>Modify an existing rule: specify the rule ID that needs to be updated/modified;</li><li>Delete an existing rule: existing rules not included in the Rules list in the CustomRules parameter will be deleted.</li></ul></p>
          * @type {string || null}
          */
         this.Id = null;
@@ -14736,7 +14736,7 @@ class CustomRule extends  AbstractModel {
         this.RuleType = null;
 
         /**
-         * <p>Priority of custom rules. Value range: 0-100. Default value: 0. Only exact matching rules (<code>PreciseMatchRule</code>) are supported.</p>
+         * <p>Priority of custom rules, ranging from 0 to 100, with a default value of 0. Only exact matching rules (<code>PreciseMatchRule</code>) are supported.</p>
          * @type {number || null}
          */
         this.Priority = null;
@@ -15004,7 +15004,7 @@ class DeleteAccelerationDomainsResponse extends  AbstractModel {
 }
 
 /**
- * Web security exception rules.
+ * Exception rule for Web security
  * @class
  */
 class ExceptionRules extends  AbstractModel {
@@ -15012,7 +15012,7 @@ class ExceptionRules extends  AbstractModel {
         super();
 
         /**
-         * Definition list of exception Rules. when using ModifySecurityPolicy to modify Web protection configuration: <li>if the Rules parameter is not specified or the parameter length is zero: clear all exception rule configurations.</li><li>if the ExceptionRules parameter value is not specified in SecurityPolicy: keep existing exception rule configurations without modification.</li>.
+         * Definition list of exception Rules. When using ModifySecurityPolicy to modify Web protection configuration: <li>If the Rules parameter is not specified or its length is zero: clear all exception rule configurations.</li><li>If the ExceptionRules parameter value is not specified in the SecurityPolicy parameter: keep existing exception rule configurations without modification.</li>
          * @type {Array.<ExceptionRule> || null}
          */
         this.Rules = null;
@@ -15088,8 +15088,8 @@ class ExceptConfig extends  AbstractModel {
  * Additional parameter for safe execution when the action is set to redirect.
 
 This parameter is used to specify the extra handling action taken by the system when a security rule is hit and a redirection action is executed.
-Different disposal actions are configured with different fixed parameter combinations. The system will determine the actually effective disposal action type according to the configured parameter combination.
-During the same redirection execution, only one handling action can be configured and made effective. Parameter combinations for multiple disposal actions cannot appear at the same time. Otherwise, it is deemed as an invalid configuration.
+Different handling actions are configured with different fixed parameter combinations. The system will determine the effective handling action type according to the configured parameter combination.
+Only one handling action can be configured and made effective during the same redirection. Parameter composites corresponding to multiple handling actions cannot appear at the same time. Otherwise, it is deemed as an invalid configuration.
 RedirectActionParameters supports the following extra handling actions: <li>Redirect: redirect client requests to the specified destination URL. Corresponding parameter: URL.</li>
  * @class
  */
@@ -15389,7 +15389,7 @@ class Identification extends  AbstractModel {
 }
 
 /**
- * Body transfer timeout duration configuration.
+ * Specific configuration of the body transfer timeout duration.
  * @class
  */
 class RequestBodyTransferTimeout extends  AbstractModel {
@@ -15397,13 +15397,13 @@ class RequestBodyTransferTimeout extends  AbstractModel {
         super();
 
         /**
-         * Body transfer timeout duration. valid values: 5-120. measurement unit: seconds (s) only.
+         * Body transfer timeout duration. Value range: 5–120. Unit: seconds (s) only.
          * @type {string || null}
          */
         this.IdleTimeout = null;
 
         /**
-         * Whether body transfer timeout is enabled. valid values: <li>`on`: enable</li> <li>`off`: disable</li>.
+         * Whether body transfer timeout duration is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li>
          * @type {string || null}
          */
         this.Enabled = null;
@@ -16127,7 +16127,7 @@ class BindSecurityTemplateToEntityResponse extends  AbstractModel {
 }
 
 /**
- * Bot management basic configuration takes effect for all domains with policy association. CustomRules can be used to customize.
+ * Basic configuration of Bot management, which takes effect for all domain names associated with the policy. Fine-grained customization can be done through CustomRules.
  * @class
  */
 class BasicBotSettings extends  AbstractModel {
@@ -16135,31 +16135,31 @@ class BasicBotSettings extends  AbstractModel {
         super();
 
         /**
-         * Client IP source IDC configuration, used for handling access requests from client ips in idcs (data centers). such source requests are not directly accessed by mobile terminals or browser-side.
+         * Source IDC configuration of the client IP, used for handling access requests from client IPs in IDCs (data centers). This type of source request is not directly accessed from a mobile terminal or browser side.
          * @type {SourceIDC || null}
          */
         this.SourceIDC = null;
 
         /**
-         * Search engine crawler configuration, used to handle requests from search engine crawlers. the IP, User-Agent, or rDNS results of such requests match known search engine crawlers.
+         * Search engine crawler configuration, used for handling requests from search engine crawlers. The IP, User-Agent, or rDNS results of such requests match known search engine crawlers.
          * @type {SearchEngineBots || null}
          */
         this.SearchEngineBots = null;
 
         /**
-         * Commercial or open-source tool UA feature configuration (original UA feature rule), used to handle access requests from known commercial or open-source tools. the User-Agent header of such requests complies with known commercial or open-source tool features.
+         * UA feature configuration for commercial or open-source tools (formerly UA feature rules), used for handling access requests from known commercial or open-source tools. The User-Agent header of such requests matches the features of known commercial or open-source tools.
          * @type {KnownBotCategories || null}
          */
         this.KnownBotCategories = null;
 
         /**
-         * Threat intelligence database (originally client profile analysis) configuration, used for handling client ips with specific risk characteristics in recent access behavior.
+         * IP threat intelligence database (formerly client profile analysis) configuration, used for handling client IP addresses with specific risk characteristics in recent access behavior.
          * @type {IPReputation || null}
          */
         this.IPReputation = null;
 
         /**
-         * Specifies the configuration for Bot intelligent analysis.
+         * Specific configuration for Bot intelligent analysis.
          * @type {BotIntelligence || null}
          */
         this.BotIntelligence = null;
@@ -16668,7 +16668,7 @@ class WafConfig extends  AbstractModel {
 }
 
 /**
- * Bandwidth abuse protection configuration (chinese mainland only).
+ * Bandwidth abuse protection configuration (only applicable to the Chinese mainland).
  * @class
  */
 class BandwidthAbuseDefense extends  AbstractModel {
@@ -16676,19 +16676,19 @@ class BandwidthAbuseDefense extends  AbstractModel {
         super();
 
         /**
-         * Whether bandwidth abuse protection (applicable to chinese mainland only) is enabled. valid values: <li>on: enabled;</li> <li>off: disabled.</li>.
+         * Whether bandwidth abuse protection (only applicable to the Chinese mainland) is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li>
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * Rule ID of traffic anti-fraud, returned as an output parameter.
+         * Rule ID for bandwidth abuse protection. Returned as an output parameter only.
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Bandwidth abuse protection (applicable to chinese mainland) handling method. required when Enabled is on. valid values for SecurityAction Name: <li>Monitor: observe;</li> <li>Deny: block;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>.
+         * Handling method for bandwidth abuse protection (applicable to Chinese mainland only). This field is required when Enabled is on. Supported values for SecurityAction Name: <li>Monitor: monitor;</li><li>Deny: block;</li><li>Challenge: challenge. ChallengeActionParameters.Name only supports JSChallenge.</li>
          * @type {SecurityAction || null}
          */
         this.Action = null;
@@ -17098,7 +17098,7 @@ class DeleteSharedCNAMERequest extends  AbstractModel {
 }
 
 /**
- * Custom rules configuration.
+ * Custom rule structure for Web security
  * @class
  */
 class CustomRules extends  AbstractModel {
@@ -17106,7 +17106,7 @@ class CustomRules extends  AbstractModel {
         super();
 
         /**
-         * The custom rule. <br>when modifying the Web protection configuration using ModifySecurityPolicy: <br> - if the Rules parameter is not specified or the parameter length of Rules is zero: clear all custom rule configurations. <br> - if the Rules parameter is not specified: keep the existing custom rule configuration without modification.
+         * Definition list of custom rules.<br>When using ModifySecurityPolicy to modify Web protection configuration: <br> - If the Rules parameter is not specified, or the parameter length of Rules is zero: clear ALL custom rule configurations.<br> - If the CustomRules parameter value is not specified in the SecurityPolicy parameter: keep the existing custom rule configuration and do not modify it.
          * @type {Array.<CustomRule> || null}
          */
         this.Rules = null;
@@ -17470,7 +17470,7 @@ class DestroyPlanRequest extends  AbstractModel {
 }
 
 /**
- * Additional parameter for SecurityAction `BlockIP`.
+ * Additional parameter for IP blocking in Web Security
  * @class
  */
 class BlockIPActionParameters extends  AbstractModel {
@@ -17478,7 +17478,7 @@ class BlockIPActionParameters extends  AbstractModel {
         super();
 
         /**
-         * Penalty duration for `BlockIP`. Units: <li>`s`: second, value range 1-120;</li> <li>`m`: minute, value range 1-120;</li> <li>`h`: hour, value range 1-48.</li>.
+         * Penalty duration for blocked IPs. Supported units: <li>s: second, value ranges from 1 to 120;</li><li>m: minute, value ranges from 1 to 120;</li><li>h: hour, value ranges from 1 to 48.</li>
          * @type {string || null}
          */
         this.Duration = null;
@@ -20234,7 +20234,7 @@ class CreatePlanForZoneRequest extends  AbstractModel {
 }
 
 /**
- * Describes the client device configuration.
+ * Client device configuration
  * @class
  */
 class DeviceProfile extends  AbstractModel {
@@ -20242,31 +20242,31 @@ class DeviceProfile extends  AbstractModel {
         super();
 
         /**
-         * Client device type. Valid values: <li>iOS;</li> <li>Android;</li> <li>WebView;</li> <li>WeChatMiniProgram.</li>
+         * <p>Client device type. Valid values: <li>iOS;</li><li>Android;</li><li>WebView;</li><li>WeChatMiniProgram.</li></p>
          * @type {string || null}
          */
         this.ClientType = null;
 
         /**
-         * The minimum value to determine a request as high-risk ranges from 1–99. the larger the value, the higher the request risk, and the closer it resembles a request initiated by a Bot client. the default value is 50, corresponding to high-risk for values 51–100.
+         * <p>Minimum risk score for high-risk requests. A request is considered high-risk when its score is equal to or greater than this value.</p><p>Value range: [2, 99]</p><p>Default value: 50</p>
          * @type {number || null}
          */
         this.HighRiskMinScore = null;
 
         /**
-         * Handling method for high-risk requests. valid values for SecurityAction Name: <li>Deny: block;</li> <li>Monitor: observation;</li> <li>Redirect: redirection;</li> <li>Challenge: Challenge.</li> default value: Monitor.
+         * <p>Handling method for high-risk requests. Supported values for the Name parameter of SecurityAction: <li>Deny: Block;</li><li>Monitor: Observe;</li><li>Redirect: Redirection;</li><li>Challenge: Challenge.</li>Default value: Monitor.</p>
          * @type {SecurityAction || null}
          */
         this.HighRiskRequestAction = null;
 
         /**
-         * Specifies the minimum value to determine a request as medium-risk. value range: 1–99. the larger the value, the higher the request risk, resembling requests initiated by a Bot client. default value: 15, corresponding to medium-risk for values 16–50.
+         * <p>The minimum risk score for a medium-risk request. When the score is equal to or greater than this value and less than HighRiskMinScore, it is determined as medium-risk. When it is below this value, it is determined as low risk.</p><p>Value range: [1, 98]</p><p>Default value: 15</p>
          * @type {number || null}
          */
         this.MediumRiskMinScore = null;
 
         /**
-         * Handling method for medium-risk requests. SecurityAction Name parameter supports: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Redirect: Redirect;</li> <li>Challenge: Challenge.</li> default value is Monitor.
+         * <p>Handling method for medium risk requests. Supported values for the Name of SecurityAction: <li>Deny: block;</li><li>Monitor: monitor;</li><li>Redirect: redirect;</li><li>Challenge: challenge.</li>Default value: Monitor.</p>
          * @type {SecurityAction || null}
          */
         this.MediumRiskRequestAction = null;
@@ -21570,7 +21570,7 @@ Note: shared CNAME is currently in beta test. if you need to use it, contact us 
 }
 
 /**
- * Based on client and request features, the request source is divided into human request, valid Bot request, suspected Bot request, and high-risk Bot request, with request handling options provided.
+ * Based on client and request features, request sources are divided into human requests, legal Bot requests, suspected Bot requests, and high-risk Bot requests, with request handling options provided.
  * @class
  */
 class BotRatings extends  AbstractModel {
@@ -21578,25 +21578,25 @@ class BotRatings extends  AbstractModel {
         super();
 
         /**
-         * Execution action for malicious Bot requests. valid values for the Name parameter in SecurityAction: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Allow: pass;</li> <li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>.
+         * Execution action for malicious Bot requests. Supported values for the Name parameter of SecurityAction: <li>Deny: Block;</li><li>Monitor: Observe;</li><li>Allow: Allow;</li><li>Challenge: Challenge. Among them, ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>
          * @type {SecurityAction || null}
          */
         this.HighRiskBotRequestsAction = null;
 
         /**
-         * The execution action for suspected Bot requests. valid values for the Name parameter in SecurityAction: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Allow: pass;</li> <li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>.
+         * Execution action for suspected Bot requests. Supported values for the Name parameter of SecurityAction: <li>Deny: Block;</li><li>Monitor: Observe;</li><li>Allow: Allow;</li><li>Challenge: Challenge. The ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>
          * @type {SecurityAction || null}
          */
         this.LikelyBotRequestsAction = null;
 
         /**
-         * Execution action for friendly Bot request. SecurityAction Name parameter supports: <li>Deny: block;</li><li>Monitor: observe;</li><li>Allow: pass;</li><li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>.
+         * Execution action of friendly Bot requests. The Name parameter of SecurityAction supports the following values: <li>Deny: block;</li><li>Monitor: observe;</li><li>Allow: Allow;</li><li>Challenge: Challenge. The ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>
          * @type {SecurityAction || null}
          */
         this.VerifiedBotRequestsAction = null;
 
         /**
-         * Execution action for a normal Bot request. valid values for the Name parameter in SecurityAction: <li>Allow: pass.</li>.
+         * Execution action for normal Bot requests. Valid values of SecurityAction Name: <li>Allow: Allow.</li>
          * @type {SecurityAction || null}
          */
         this.HumanRequestsAction = null;
@@ -21725,12 +21725,12 @@ class NormalAction extends  AbstractModel {
 }
 
 /**
- * Additional parameter when the executed action is interception.
+ * Additional parameter for the safe execution action when it is interception.
 
-This parameter is used for specifying the extra handling action taken by the system when a security rule is hit and an intercept action is executed.
-Different disposal actions are configured with different fixed parameter combinations. The system will determine the actually effective disposal action type according to the configured parameter combination.
-During the same interception execution, only one handling action can be configured and made effective. Parameters for multiple handling actions cannot appear at the same time. Otherwise, it is deemed an invalid configuration. If empty, the default block handling action is used.
-DenyActionParameters supports the following additional handling actions: <li>Default: When DenyActionParameters is empty or no additional handling action is enabled, the system will perform the default block, responding with an interception page.</li><li>IP block: Continuously block the client source IP that triggers the rule. Corresponding parameters: BlockIp, BlockIpDuration.</li><li>Custom page interception: Use the designated custom page content to respond to requests. Corresponding parameters: ReturnCustomPage, ResponseCode, ErrorPageId.</li><li>Silence: Accept client requests but do not return. Corresponding parameter: Stall.</li>
+This parameter is used to specify the extra handling action taken by the system when a security rule is hit and an intercept action is executed.
+Different handling actions are configured with different fixed parameter combinations. The system will determine the actually effective handling action type according to the configured parameter combination.
+Only one handling action can be configured and made effective during the same block execution. Parameters corresponding to multiple handling actions cannot appear simultaneously, otherwise the configuration is deemed invalid. If empty, the default block handling action is used.
+DenyActionParameters supports the following extra handling actions: <li>Default: When DenyActionParameters is empty or no extra handling action is enabled, the system will perform the default block, responding with an interception page.</li><li>IP blocking: Continuously block the client source IP that triggers the rule. Corresponding parameters: BlockIp, BlockIpDuration.</li><li>Custom page interception: Use the specified custom page content to respond to requests. Corresponding parameters: ReturnCustomPage, ResponseCode, ErrorPageId.</li><li>Silence: Accept client requests but do not return. Corresponding parameter: Stall.</li>
  * @class
  */
 class DenyActionParameters extends  AbstractModel {
@@ -21738,31 +21738,27 @@ class DenyActionParameters extends  AbstractModel {
         super();
 
         /**
-         * Specifies whether to extend the ban on the source IP. valid values.
+         * Whether to extend the block on the source IP. Valid values:
 <li>`on`: Enable;</li>
-
 <li>off: Disable.</li>
-
-After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated.
-Note: this option cannot intersect with ReturnCustomPage or Stall.
+After enabled, the client IP that triggers the rule will be continuously blocked. When this option is enabled, the BlockIpDuration parameter must be specified simultaneously.
+Note: This option cannot intersect with ReturnCustomPage or Stall.
          * @type {string || null}
          */
         this.BlockIp = null;
 
         /**
-         * The ban duration when BlockIP is on.
+         * IP ban duration when BlockIP is on.
          * @type {string || null}
          */
         this.BlockIpDuration = null;
 
         /**
-         * Specifies whether to use a custom page. valid values:.
+         * Whether to use custom pages. Valid values:
 <li>`on`: Enable;</li>
-
 <li>off: Disable.</li>
-
-Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously.
-Note: this option cannot intersect with the BlockIp or Stall option.
+Enabled. Use custom page content to intercept (respond to) requests. When this option is enabled, you must specify the ResponseCode and ErrorPageId parameters simultaneously.
+Note: This option cannot intersect with BlockIp or Stall.
 
          * @type {string || null}
          */
@@ -21775,19 +21771,17 @@ Note: this option cannot intersect with the BlockIp or Stall option.
         this.ResponseCode = null;
 
         /**
-         * Specifies the page id of the custom page.
+         * PageId of the custom page.
          * @type {string || null}
          */
         this.ErrorPageId = null;
 
         /**
-         * Specifies whether to suspend the request source without processing. valid values:.
+         * Whether to suspend requests from the request source without processing. Valid values:
 <li>`on`: Enable;</li>
-
 <li>off: Disable.</li>
-
-Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources.
-Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+Enabled. It no longer responds to requests in the current connection session and does not actively disconnect. When used for crawler counteraction, it consumes client connection resources.
+Note: This option cannot intersect with BlockIp or ReturnCustomPage.
          * @type {string || null}
          */
         this.Stall = null;
@@ -22029,6 +22023,48 @@ class DeleteJustInTimeTranscodeTemplatesResponse extends  AbstractModel {
 }
 
 /**
+ * Security headers to include in requests to the origin. After the configuration takes effect, request headers with the corresponding `keyname` will be sent to the origin.
+ * @class
+ */
+class SecurityHeadersToOrigin extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Configuration of origin request headers for Bot identification information. Valid values:<ul><li>`EO-Bot-Botnet-ID`: Identifier generated based on Bot request characteristics.</li></ul></p>
+         * @type {Array.<string> || null}
+         */
+        this.BotIdentificationHeaders = null;
+
+        /**
+         * <p>Configuration of origin request headers for identification results from the Advanced Bot Management module. Valid values:<ul><li>`EO-Bot-Client-Attestation`: Advanced Bot Management - Authentication ticket verification result from the Client Attestation module;</li><li>`EO-Bot-Client-Risk`: Advanced Bot Management - Device risk assessment result from the Client Attestation module;</li><li>`EO-Bot-Intelligence`: Advanced Bot Management - Identification result from the Bot Intelligence Analysis module;</li><li>`EO-Bot-IP-Reputation`: Advanced Bot Management - Identification result from Client Reputation module;</li><li>`EO-Bot-Known-Tool`: Advanced Bot Management - Basic Feature Management - Identification result from the UA Feature Rule module;</li><li>`EO-Bot-Search-Engine`: Advanced Bot Management - Basic Feature Management - Identification result from the Search Engine Rule module;</li><li>`EO-Bot-Source-IDC`: Advanced Bot Management - Basic Feature Management - Identification result from the IDC Rule module;</li><li>`EO-Bot-User-Risk`: Advanced Bot Management - Account risk assessment result from the Client Attestation module.</li></ul></p>
+         * @type {Array.<string> || null}
+         */
+        this.BotManagementHeaders = null;
+
+        /**
+         * <p>Configuration of origin request headers for client fingerprint information. Valid values:<ul><li>`EO-Bot-Fingerprint`: Client fingerprint information.</li></ul></p>
+         * @type {Array.<string> || null}
+         */
+        this.ClientFingerprintHeaders = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotIdentificationHeaders = 'BotIdentificationHeaders' in params ? params.BotIdentificationHeaders : null;
+        this.BotManagementHeaders = 'BotManagementHeaders' in params ? params.BotManagementHeaders : null;
+        this.ClientFingerprintHeaders = 'ClientFingerprintHeaders' in params ? params.ClientFingerprintHeaders : null;
+
+    }
+}
+
+/**
  * DeleteRules response structure.
  * @class
  */
@@ -22210,7 +22246,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Describes the client authentication configuration.
+ * Client authentication configuration.
  * @class
  */
 class ClientAttestationRules extends  AbstractModel {
@@ -22218,7 +22254,7 @@ class ClientAttestationRules extends  AbstractModel {
         super();
 
         /**
-         * List of client authentication. when using ModifySecurityPolicy to modify Web protection configuration: <li> if Rules in SecurityPolicy.BotManagement.ClientAttestationRules is not specified or the parameter length of Rules is zero: clear all client authentication rule configuration. </li> <li> if ClientAttestationRules in SecurityPolicy.BotManagement parameters is unspecified: keep existing client authentication rule configuration and do not modify. </li>.
+         * List of client authentication. When using ModifySecurityPolicy to modify Web protection configuration: <li> If the Rules parameter in SecurityPolicy.BotManagement.ClientAttestationRules is not specified, or the Rules parameter length is zero: clear all client authentication rule configurations.</li> <li> If the ClientAttestationRules parameter value is not specified in the SecurityPolicy.BotManagement parameter: keep the existing client authentication rule configuration without modification.</li>
          * @type {Array.<ClientAttestationRule> || null}
          */
         this.Rules = null;
@@ -23430,7 +23466,7 @@ class DescribeOriginGroupRequest extends  AbstractModel {
 }
 
 /**
- * Commercial or open-source tool UA feature configuration (formerly UA feature rule).
+ * UA feature configuration for commercial or open-source tools (formerly UA feature rule).
  * @class
  */
 class KnownBotCategories extends  AbstractModel {
@@ -23438,13 +23474,13 @@ class KnownBotCategories extends  AbstractModel {
         super();
 
         /**
-         * Handling method for access requests from known commercial tools or open-source tools. specifies the Name parameter value of SecurityAction: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Disabled: not enabled, disable specified rule;</li> <li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li> <li>Allow: pass (to be deprecated).</li>.
+         * Handling method for access requests from known commercial or open-source tools. Supported values of SecurityAction Name: <li>Deny: Block;</li><li>Monitor: Observe;</li><li>Disabled: Not enabled, disable the specified rule;</li><li>Challenge: Challenge. Among them, ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li><li>Allow: Release (to be deprecated).</li>
          * @type {SecurityAction || null}
          */
         this.BaseAction = null;
 
         /**
-         * Specifies the handling method for access requests from known commercial tools or open-source tools.
+         * Specify the handling method for access requests from known commercial or open-source tools.
          * @type {Array.<BotManagementActionOverrides> || null}
          */
         this.BotManagementActionOverrides = null;
@@ -24031,7 +24067,7 @@ class DescribeWebSecurityTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Client authentication rule.
+ * Client authentication rules
  * @class
  */
 class ClientAttestationRule extends  AbstractModel {
@@ -24039,52 +24075,58 @@ class ClientAttestationRule extends  AbstractModel {
         super();
 
         /**
-         * Client authentication rule ID. supported rule configuration operations by rule ID: <li> <b>add</b> a new rule: leave the ID empty or do not specify the ID parameter.</li> <li> <b>modify</b> an existing rule: specify the rule ID that needs to be updated/modified.</li> <li> <b>delete</b> an existing rule: existing rules not included in the ClientAttestationRule list under BotManagement parameters will be deleted.</li>.
+         * <p>ID of the client authentication rule.<br>Different rule configuration operations are supported by rule ID:<br> <li> <b>Add</b> a new rule: leave ID empty or do not specify the ID parameter;</li><li> <b>Modify</b> an existing rule: specify the rule ID to be updated/modified;</li><li> <b>Delete</b> an existing rule: existing rules not included in the ClientAttestationRule list in the BotManagement parameter will be deleted.</li></p>
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Specifies the name of the client authentication rule.
+         * <p>Name of the client authentication rule.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Whether the rule is enabled. valid values: <li>`on`: enable</li> <li>`off`: disable</li>.
+         * <p>Whether the rule is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li></p>
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * Priority of rules. a smaller value indicates higher priority execution. value range: 0-100. default value: 0.
+         * <p>Priority of rules. A smaller value indicates higher priority. Value range: 0-100. Default value: 0.</p>
          * @type {number || null}
          */
         this.Priority = null;
 
         /**
-         * The rule content must comply with expression grammar. for details, see the product document.
+         * <p>The specific content of the rule must comply with the expression syntax. For detailed specifications, see the product document.</p>
          * @type {string || null}
          */
         this.Condition = null;
 
         /**
-         * Specifies the client authentication option ID.
+         * <p>Client authentication option ID.</p>
          * @type {string || null}
          */
         this.AttesterId = null;
 
         /**
-         * Client device configuration. if the DeviceProfiles parameter value is not specified in the ClientAttestationRules parameter, keep the existing client device configuration and do not modify it.
+         * <p>Handling method when client authentication fails. SecurityAction.Name values are as follows:</p><ul><li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li><li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li><li>Monitor: observe;</li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge, ManagedChallenge, InterstitialChallenge, and InlineChallenge;</li><li>Redirect: redirect to a URL.</li></ul>
+         * @type {SecurityAction || null}
+         */
+        this.InvalidAttestationAction = null;
+
+        /**
+         * <p>Client device configuration. If the DeviceProfiles parameter value is not specified in the ClientAttestationRules parameter: keep the existing client device configuration without modification.</p>
          * @type {Array.<DeviceProfile> || null}
          */
         this.DeviceProfiles = null;
 
         /**
-         * Handling method for failed client authentication. valid values for SecurityAction Name: <li>Deny: block;</li> <li>Monitor: observation;</li> <li>Redirect: redirection;</li> <li>Challenge: Challenge.</li> default value: Monitor.
-         * @type {SecurityAction || null}
+         * <p>Account protection configuration.</p>
+         * @type {AccountProtectionSettings || null}
          */
-        this.InvalidAttestationAction = null;
+        this.AccountProtectionSettings = null;
 
     }
 
@@ -24102,6 +24144,12 @@ class ClientAttestationRule extends  AbstractModel {
         this.Condition = 'Condition' in params ? params.Condition : null;
         this.AttesterId = 'AttesterId' in params ? params.AttesterId : null;
 
+        if (params.InvalidAttestationAction) {
+            let obj = new SecurityAction();
+            obj.deserialize(params.InvalidAttestationAction)
+            this.InvalidAttestationAction = obj;
+        }
+
         if (params.DeviceProfiles) {
             this.DeviceProfiles = new Array();
             for (let z in params.DeviceProfiles) {
@@ -24111,10 +24159,10 @@ class ClientAttestationRule extends  AbstractModel {
             }
         }
 
-        if (params.InvalidAttestationAction) {
-            let obj = new SecurityAction();
-            obj.deserialize(params.InvalidAttestationAction)
-            this.InvalidAttestationAction = obj;
+        if (params.AccountProtectionSettings) {
+            let obj = new AccountProtectionSettings();
+            obj.deserialize(params.AccountProtectionSettings)
+            this.AccountProtectionSettings = obj;
         }
 
     }
@@ -24188,6 +24236,60 @@ class CustomEndpoint extends  AbstractModel {
                 obj.deserialize(params.Headers[z]);
                 this.Headers.push(obj);
             }
+        }
+
+    }
+}
+
+/**
+ * Account protection configuration.
+ * @class
+ */
+class AccountProtectionSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Account protection feature switch.</p><p>Enumeration values: </p><ul><li>on: Enable;</li><li>off: Disable.</li></ul><p>Default value: off.</p>
+         * @type {string || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * <p>Request target. Used to identify the business operation scenario the request belongs to.</p> <p>Enumeration values:</p> <ul> <li>ACCOUNT.CHANGE_PASSWORD: request to change the password when the original password is known;</li> <li>ACCOUNT.CHANGE_SECURITY_QUESTION: request to modify the account security question;</li> <li>ACCOUNT.CHECK_EXISTENCE: request to verify whether the account exists, commonly used for pre-verification after entering an email or phone number on the login or registration page;</li> <li>ACCOUNT.LOGIN: request to log in to an account;</li> <li>ACCOUNT.REGISTER: request to sign up for a new account;</li> <li>ACCOUNT.RESET_PASSWORD: request to reset the password, usually by verifying identity through email or SMS and then setting a new password;</li> <li>ACCOUNT.UPDATE: request to modify account association information, such as phone number, email, payment card number, shipping address, etc.;</li> <li>ASSET.CHECK_GIFTCARD_BALANCE: request to query the gift card balance by card number and other information;</li> <li>ASSET.CHECK_LOYALTY_POINTS: request to query the account point balance;</li> <li>ASSET.REDEEM_CODE: request to exchange rights and interests using a redemption code;</li> <li>BROWSE.QUERY: request for in-site search of products or services;</li> <li>PAYMENT.ADD_TO_CART: request to add merchandise to the shopping cart;</li> <li>PAYMENT.GET_METHODS: request to obtain the list of payment methods bound to the account;</li> <li>PAYMENT.MAKE_PAYMENT: request to submit a payment, settlement, or fund transfer.</li> </ul>
+         * @type {string || null}
+         */
+        this.RequestPurpose = null;
+
+        /**
+         * <p>The location of the user identity in the request source, where key is replaced with the actual parameter name.</p><p>Valid values:</p><ul><li>http.request.cookies["key"]: Obtain the Cookie value named key from the Cookie;</li><li>http.request.headers["key"]: Obtain the header value named key from the request header;</li><li>http.request.uri.args["key"]: Obtain the parameter value named key from the URL query parameter.</li></ul>
+         * @type {string || null}
+         */
+        this.UserIDSource = null;
+
+        /**
+         * <p>User Risk Level configuration.</p>
+         * @type {UserRiskProfile || null}
+         */
+        this.UserRiskProfile = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.RequestPurpose = 'RequestPurpose' in params ? params.RequestPurpose : null;
+        this.UserIDSource = 'UserIDSource' in params ? params.UserIDSource : null;
+
+        if (params.UserRiskProfile) {
+            let obj = new UserRiskProfile();
+            obj.deserialize(params.UserRiskProfile)
+            this.UserRiskProfile = obj;
         }
 
     }
@@ -24390,7 +24492,7 @@ class ModifyMultiPathGatewayResponse extends  AbstractModel {
 }
 
 /**
- * Web security BOT managed rules architecture.
+ * BOT rule structure for Web security.
  * @class
  */
 class BotManagement extends  AbstractModel {
@@ -24398,31 +24500,31 @@ class BotManagement extends  AbstractModel {
         super();
 
         /**
-         * Whether Bot management is enabled. valid values: <li>on: enabled;</li><li>off: disabled.</li>.
+         * Whether Bot management is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li>
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * Bot management custom rule combines various crawlers and request behavior characteristics to accurately define bots and configure customized handling methods.
+         * Custom rule for Bot management combines various types of crawlers and request behavior characteristics to precisely define bots and configure customized handling methods.
          * @type {BotManagementCustomRules || null}
          */
         this.CustomRules = null;
 
         /**
-         * Bot management basic configuration. takes effect on all domains associated with the policy. can be customized through CustomRules.
+         * Basic configuration of Bot management, which takes effect on all domains associated with the policy. It can be customized through CustomRules.
          * @type {BasicBotSettings || null}
          */
         this.BasicBotSettings = null;
 
         /**
-         * Definition list of client authentication rules. this feature is in beta test. submit a ticket if you need to use it.
+         * Definition list of client authentication rules. This feature is in beta test. If needed, submit a ticket.
          * @type {ClientAttestationRules || null}
          */
         this.ClientAttestationRules = null;
 
         /**
-         * Configures browser spoofing identification rules (formerly active feature detection rule). sets the response page range for JavaScript injection, browser check options, and handling method for non-browser clients.
+         * Configure browser spoofing identification rules (formerly active feature detection rules). Set the response page range for JavaScript injection, browser check options, and handling method for non-browser clients.
          * @type {BrowserImpersonationDetection || null}
          */
         this.BrowserImpersonationDetection = null;
@@ -25631,7 +25733,7 @@ class DeleteSecurityJSInjectionRuleResponse extends  AbstractModel {
 }
 
 /**
- * Additional parameter for SecurityAction `ReturnCustomPage`.
+ * Additional parameter of the custom page for Web security
  * @class
  */
 class ReturnCustomPageActionParameters extends  AbstractModel {
@@ -25639,13 +25741,13 @@ class ReturnCustomPageActionParameters extends  AbstractModel {
         super();
 
         /**
-         * Response custom status code.
+         * status code.
          * @type {string || null}
          */
         this.ResponseCode = null;
 
         /**
-         * Response custom page ID.
+         * ID of the custom page in the response.
          * @type {string || null}
          */
         this.ErrorPageId = null;
@@ -26161,7 +26263,7 @@ class WafRule extends  AbstractModel {
 }
 
 /**
- * Browser spoofing identification rule (formerly active feature detection rule) configuration.
+ * Configuration of browser spoofing identification rules (formerly active feature detection rules).
  * @class
  */
 class BrowserImpersonationDetection extends  AbstractModel {
@@ -26169,7 +26271,7 @@ class BrowserImpersonationDetection extends  AbstractModel {
         super();
 
         /**
-         * List of browser spoofing identification Rules. when using ModifySecurityPolicy to modify Web protection configuration: <br> <li>if Rules parameter in SecurityPolicy.BotManagement.BrowserImpersonationDetection is not specified or parameter length is zero: clear all browser spoofing identification rule configurations.</li> <li>if BrowserImpersonationDetection parameter value is unspecified in SecurityPolicy.BotManagement parameters: keep existing browser spoofing identification rule configurations without modification.</li>.
+         * List of browser spoofing identification rules. When using ModifySecurityPolicy to modify Web protection configuration: <br> <li> If the Rules parameter in SecurityPolicy.BotManagement.BrowserImpersonationDetection is not specified, or the parameter length is zero: clear all browser spoofing identification rule configurations.</li> <li> If the BrowserImpersonationDetection parameter value is not specified in the SecurityPolicy.BotManagement parameter: keep the existing browser spoofing identification rule configuration without modification.</li>
          * @type {Array.<BrowserImpersonationDetectionRule> || null}
          */
         this.Rules = null;
@@ -26620,7 +26722,7 @@ Note: When using MutualTLS as an input parameter in ModifyHostsCertificate, you 
 }
 
 /**
- * Client behavior validation.
+ * Client behavior validation
  * @class
  */
 class ClientBehaviorDetection extends  AbstractModel {
@@ -26628,43 +26730,43 @@ class ClientBehaviorDetection extends  AbstractModel {
         super();
 
         /**
-         * Specifies the proof-of-work strength. valid values: <li>low: low;</li><li>medium: medium;</li><li>high: high.</li>.
+         * Proof-of-work strength. Valid values: <li>low: Low;</li><li>medium: Medium;</li><li>high: High.</li>
          * @type {string || null}
          */
         this.CryptoChallengeIntensity = null;
 
         /**
-         * Specifies the execution mode for client behavior verification. valid values: <li>0ms: immediate execution;</li> <li>100ms: delay 100ms execution;</li> <li>200ms: delay 200ms execution;</li> <li>300ms: delay 300ms execution;</li> <li>400ms: delay 400ms execution;</li> <li>500ms: delay 500ms execution;</li> <li>600ms: delay 600ms execution;</li> <li>700ms: delay 700ms execution;</li> <li>800ms: delay 800ms execution;</li> <li>900ms: delay 900ms execution;</li> <li>1000ms: delay 1000ms execution.</li>.
+         * Execution mode of client behavior validation. Valid values: <li>0ms: immediately execute;</li><li>100ms: execute after a 100ms delay;</li><li>200ms: execute after a 200ms delay;</li><li>300ms: execute after a 300ms delay;</li><li>400ms: execute after a 400ms delay;</li><li>500ms: execute after a 500ms delay;</li><li>600ms: execute after a 600ms delay;</li><li>700ms: execute after a 700ms delay;</li><li>800ms: execute after an 800ms delay;</li><li>900ms: execute after a 900ms delay;</li><li>1000ms: execute after a 1000ms delay.</li>
          * @type {string || null}
          */
         this.CryptoChallengeDelayBefore = null;
 
         /**
-         * Time window for trigger threshold statistics. valid values: <li>5s: within 5 seconds;</li><li>10s: within 10 seconds;</li><li>15s: within 15 seconds;</li><li>30s: within 30 seconds;</li><li>60s: within 60 seconds;</li><li>5m: within 5 minutes;</li><li>10m: within 10 minutes;</li><li>30m: within 30 minutes;</li><li>60m: within 60 minutes.</li>.
+         * Time window for trigger threshold statistics. Valid values: <li>5s: within 5 seconds;</li><li>10s: within 10 seconds;</li><li>15s: within 15 seconds;</li><li>30s: within 30 seconds;</li><li>60s: within 60 seconds;</li><li>5m: within 5 minutes;</li><li>10m: within 10 minutes;</li><li>30m: within 30 minutes;</li><li>60m: within 60 minutes.</li>
          * @type {string || null}
          */
         this.MaxChallengeCountInterval = null;
 
         /**
-         * Trigger threshold cumulative count. value range: 1-100000000.
+         * Cumulative count of trigger threshold statistics. Value range: 1-100000000.
          * @type {number || null}
          */
         this.MaxChallengeCountThreshold = null;
 
         /**
-         * Execution action when client-side javascript is not enabled (test not completed). valid values for SecurityAction Name: <li>Deny: block, where Stall configuration is supported in DenyActionParameters;</li><li>Monitor: observe;</li><li>Allow: respond after waiting, where MinDelayTime and MaxDelayTime configuration is required in AllowActionParameters.</li>.
+         * Execution action when client-side JavaScript is not enabled (test not completed). Supported values for SecurityAction Name: <li>Deny: block. DenyActionParameters supports Stall configuration;</li><li>Monitor: observe;</li><li>Allow: respond after waiting. AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>
          * @type {SecurityAction || null}
          */
         this.ChallengeNotFinishedAction = null;
 
         /**
-         * The execution action for client-side detection timeout. valid values for the Name parameter in SecurityAction: <li>Deny: block, where Stall can be configured in DenyActionParameters;</li> <li>Monitor: observe;</li> <li>Allow: respond after wait, where MinDelayTime and MaxDelayTime must be configured in AllowActionParameters.</li>.
+         * Execution action for client-side detection timeout. Supported values of SecurityAction Name: <li>Deny: block, where DenyActionParameters supports Stall configuration;</li><li>Monitor: observe;</li><li>Allow: respond after waiting, where AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>
          * @type {SecurityAction || null}
          */
         this.ChallengeTimeoutAction = null;
 
         /**
-         * The execution action of the Bot client. valid values for the Name parameter in SecurityAction: <li>Deny: block, where the Stall configuration is supported in DenyActionParameters;</li><li>Monitor: observation;</li><li>Allow: respond after wait, where MinDelayTime and MaxDelayTime configurations are required in AllowActionParameters.</li>.
+         * Execution action of the Bot client. Supported values of Name in SecurityAction: <li>Deny: block, where Stall configuration is supported in DenyActionParameters;</li><li>Monitor: observe;</li><li>Allow: respond after waiting, where MinDelayTime and MaxDelayTime configuration is required in AllowActionParameters.</li>
          * @type {SecurityAction || null}
          */
         this.BotClientAction = null;
@@ -27485,7 +27587,7 @@ class DeleteApplicationProxyRuleRequest extends  AbstractModel {
 }
 
 /**
- * Action for specific RuleId.
+ * Item configuration of a managed rule
  * @class
  */
 class ManagedRuleAction extends  AbstractModel {
@@ -27493,13 +27595,13 @@ class ManagedRuleAction extends  AbstractModel {
         super();
 
         /**
-         * Specific items under ManagedRuleGroup, used to rewrite the configuration of this individual rule item, refer to product documentation for details.	
+         * Specific item under the managed rule group, used for rewriting the configuration content of this individual rule. For details, refer to the product documentation.	
          * @type {string || null}
          */
         this.RuleId = null;
 
         /**
-         * Action for the managed rule item specified by RuleId, the SecurityAction Name parameter supports: <li>`Deny`: block and respond with an block page;</li> <li>`Monitor`: observe, do not process the request and record the security event in logs;</li> <li>`Disabled`: disabled, do not scan the request and skip this rule.</li>.
+         * Specifies the handling action for the managed rule item in RuleId. Supported values for SecurityAction Name: <li>Deny: Block. Responds with an interception page.</li><li>Monitor: Observe. Does not process the request but records security events in logs.</li><li>Disabled: Not enabled. Skips the rule without scanning requests.</li>
          * @type {SecurityAction || null}
          */
         this.Action = null;
@@ -27907,7 +28009,7 @@ class SetParameters extends  AbstractModel {
 }
 
 /**
- * Configuration of Bot custom rule.
+ * Configuration of the Bot custom rule.
  * @class
  */
 class BotManagementCustomRules extends  AbstractModel {
@@ -27915,7 +28017,7 @@ class BotManagementCustomRules extends  AbstractModel {
         super();
 
         /**
-         * List of Bot custom Rules. when using ModifySecurityPolicy to modify Web protection configuration: <br> <li> if Rules in SecurityPolicy.BotManagement.CustomRules is not specified or parameter length of Rules is zero: clear all Bot custom rule configurations.</li> <li> if CustomRules in SecurityPolicy.BotManagement parameters is unspecified: keep existing Bot custom rule configurations and do not modify them.</li>.
+         * List of Bot custom Rules. When using ModifySecurityPolicy to modify the Web protection configuration: <br> <li> If the Rules parameter in SecurityPolicy.BotManagement.CustomRules is not specified, or the Rules parameter length is zero: clear all Bot custom rule configurations.</li> <li> If the CustomRules parameter value is not specified in the SecurityPolicy.BotManagement parameters: keep the existing Bot custom rule configuration without modification.</li>
          * @type {Array.<BotManagementCustomRule> || null}
          */
         this.Rules = null;
@@ -28457,31 +28559,31 @@ class ManagedRuleGroup extends  AbstractModel {
         super();
 
         /**
-         * Name of the managed rule group, if the configuration for the rule group is not specified, it will be processed by default, refer to product documentation for the specific value of GroupId.
+         * Group name of the managed rule. If no rule group is specified, the default configuration is used. For the specific value of GroupId, refer to the product documentation.
          * @type {string || null}
          */
         this.GroupId = null;
 
         /**
-         * Protection level of the managed rule group. Values: <li>`loose`: lenient, only contain ultra-high risk rules, at this point, Action parameter needs configured instead of RuleActions parameter;</li> <li>`normal`: normal, contain ultra-high risk and high-risk rules, at this point,Action parameter needs configured instead of RuleActions parameter;</li> <li>`strict`: strict, contains ultra-high risk, high-risk and medium-risk rules, at this point, Action parameter needs configured instead of RuleActions parameter;</li> <li>`extreme`: super strict, contains ultra-high risk, high-risk, medium-risk and low-risk rules, at this point, Action parameter needs configured instead of RuleActions parameter;</li> <li>`custom`: custom, refined strategy, configure the RuleActions parameter for each individual rule, at this point, the Action field is invalid, use RuleActions to configure the refined strategy for each individual rule.</li>.
+         * Protection level of the managed rule group. Valid values: <li>loose: Loose. It only contains ultra-high risk rules. At this point, Action is required and RuleActions is invalid.</li><li>normal: Normal. It contains ultra-high risk and high-risk rules. At this point, Action is required and RuleActions is invalid.</li><li>strict: Strict. It contains ultra-high risk, high-risk, and medium-risk rules. At this point, Action is required and RuleActions is invalid.</li><li>extreme: Ultra-strict. It contains ultra-high risk, high-risk, medium-risk, and low-risk rules. At this point, Action is required and RuleActions is invalid.</li><li>custom: Custom. Refined strategy. Configure the disposal method for each individual rule. At this point, the Action field is invalid. Use RuleActions to configure the refined strategy for individual rules.</li>	
          * @type {string || null}
          */
         this.SensitivityLevel = null;
 
         /**
-         * Action for ManagedRuleGroup. the Name parameter value of SecurityAction supports: <li>`Deny`: block and respond with a block page;</li> <li>`Monitor`: observe, do not process requests and record security events in logs;</li> <li>`Disabled`: not enabled, do not scan requests and skip this rule.</li>.
+         * Handling action of the managed rule group. Supported values for SecurityAction Name: <li>Deny: Block. Respond with an interception page;</li><li>Monitor: Observe. Do not process requests, log security events in logs;</li><li>Disabled: Not activated. Do not scan requests, skip this rule.</li>
          * @type {SecurityAction || null}
          */
         this.Action = null;
 
         /**
-         * Specific configuration of rule items under the managed rule group, valid only when SensitivityLevel is custom.
+         * Specific configuration of rule items in the managed rule group. This configuration is effective only when SensitivityLevel is custom.
          * @type {Array.<ManagedRuleAction> || null}
          */
         this.RuleActions = null;
 
         /**
-         * ManagedRuleGroup detailed information, output parameter only.
+         * Managed rule group information. This is an output-only parameter.	
          * @type {ManagedRuleGroupMeta || null}
          */
         this.MetaData = null;
@@ -28523,7 +28625,7 @@ class ManagedRuleGroup extends  AbstractModel {
 }
 
 /**
- * Specifies the configuration for Cookie verification and session tracking behavior.
+ * Cookie verification and session tracking behavior configuration.
  * @class
  */
 class BotSessionValidation extends  AbstractModel {
@@ -28531,31 +28633,31 @@ class BotSessionValidation extends  AbstractModel {
         super();
 
         /**
-         * Whether to update Cookie and validate. valid values: <li>on: update Cookie and validate;</li> <li>off: verify only.</li>.
+         * Whether to update the Cookie and verify. Valid values: <li>on: update the Cookie and verify;</li><li>off: verify only.</li>
          * @type {string || null}
          */
         this.IssueNewBotSessionCookie = null;
 
         /**
-         * Specifies the trigger threshold for updating and validating cookies. valid only when IssueNewBotSessionCookie is set to on.
+         * Update threshold for cookie update and validation. Valid only when IssueNewBotSessionCookie is on.
          * @type {MaxNewSessionTriggerConfig || null}
          */
         this.MaxNewSessionTriggerConfig = null;
 
         /**
-         * Execution action when no Cookie is carried or the Cookie expired. valid values for the Name parameter in SecurityAction: <li>Deny: block, where Stall can be configured in DenyActionParameters;</li><li>Monitor: observe;</li><li>Allow: respond after wait, where MinDelayTime and MaxDelayTime must be configured in AllowActionParameters.</li>.
+         * Execution action without a Cookie or with an expired Cookie. Supported Name values for SecurityAction: <li>Deny: block. DenyActionParameters supports Stall configuration.</li><li>Monitor: observe.</li><li>Allow: respond after waiting. AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>
          * @type {SecurityAction || null}
          */
         this.SessionExpiredAction = null;
 
         /**
-         * Execution action for invalid Cookie. valid values for the Name parameter in SecurityAction: <li>Deny: block, where the DenyActionParameters supports Stall configuration;</li><li>Monitor: observe;</li><li>Allow: respond after wait, where AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>.
+         * Execution action for invalid Cookie. The Name parameter of SecurityAction supports the following values: <li>Deny: block. DenyActionParameters supports the Stall configuration.</li><li>Monitor: observe.</li><li>Allow: respond after waiting. AllowActionParameters requires the MinDelayTime and MaxDelayTime configurations.</li>
          * @type {SecurityAction || null}
          */
         this.SessionInvalidAction = null;
 
         /**
-         * Specifies the session rate and periodic feature verification configuration.
+         * Specific configuration for session rate and periodic feature verification.
          * @type {SessionRateControl || null}
          */
         this.SessionRateControl = null;
@@ -28599,7 +28701,7 @@ class BotSessionValidation extends  AbstractModel {
 }
 
 /**
- * Web security policy.
+ * Security policy configuration.
  * @class
  */
 class SecurityPolicy extends  AbstractModel {
@@ -28607,54 +28709,58 @@ class SecurityPolicy extends  AbstractModel {
         super();
 
         /**
-         * Custom rules. If the parameter is null or not filled, the configuration last set will be used by default.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Custom rule configuration.</p>
          * @type {CustomRules || null}
          */
         this.CustomRules = null;
 
         /**
-         * Managed. If the parameter is null or not filled, the configuration last set will be used by default.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * <p>Managed rule configuration.</p>
          * @type {ManagedRules || null}
          */
         this.ManagedRules = null;
 
         /**
-         * HTTP DDOS protection configuration.
+         * <p>HTTP DDoS protection configuration.</p>
          * @type {HttpDDoSProtection || null}
          */
         this.HttpDDoSProtection = null;
 
         /**
-         * Configures the rate limiting rule.
+         * <p>Rate limiting rule configuration.</p>
          * @type {RateLimitingRules || null}
          */
         this.RateLimitingRules = null;
 
         /**
-         * Exception rule configuration.
+         * <p>Exception rule configuration.</p>
          * @type {ExceptionRules || null}
          */
         this.ExceptionRules = null;
 
         /**
-         * Bot management configuration.
+         * <p>Bot management configuration.</p>
          * @type {BotManagement || null}
          */
         this.BotManagement = null;
 
         /**
-         * Basic Bot management configuration.
+         * <p>Basic Bot management configuration.</p>
          * @type {BotManagementLite || null}
          */
         this.BotManagementLite = null;
 
         /**
-         * Default intercept action configuration.
+         * <p>Default block action configuration.</p>
          * @type {DefaultDenySecurityActionParameters || null}
          */
         this.DefaultDenySecurityActionParameters = null;
+
+        /**
+         * <p>Security headers to include in requests to the origin. After the configuration takes effect, request headers with the corresponding `keyname` will be sent to the origin.</p>
+         * @type {SecurityHeadersToOrigin || null}
+         */
+        this.SecurityHeadersToOrigin = null;
 
     }
 
@@ -28712,6 +28818,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new DefaultDenySecurityActionParameters();
             obj.deserialize(params.DefaultDenySecurityActionParameters)
             this.DefaultDenySecurityActionParameters = obj;
+        }
+
+        if (params.SecurityHeadersToOrigin) {
+            let obj = new SecurityHeadersToOrigin();
+            obj.deserialize(params.SecurityHeadersToOrigin)
+            this.SecurityHeadersToOrigin = obj;
         }
 
     }
@@ -29582,12 +29694,12 @@ class DescribeIPGroupReferencesRequest extends  AbstractModel {
 }
 
 /**
- * Additional parameter when the safe execution action is Allow.
+ * Additional parameter when the executed action is allow.
 
-This parameter is used to specify the extra handling action taken by the system when a security rule is hit and an Allow action is executed.
+This parameter is used to specify the extra handling action taken by the system when a security rule is hit and the Allow action is executed.
 Different handling actions are configured with different fixed parameter combinations. The system will determine the actually effective handling action type according to the configured parameter combination.
-During the same release execution, only one handling action can be configured and made effective. Parameter composites for multiple handling actions cannot appear simultaneously; otherwise, it is deemed an invalid configuration. If empty, the default release handling action is used.
-AllowActionParameters supports the following additional handling actions: <li>Default: When AllowActionParameters is empty, skip the remaining rules of the current security module immediately and continue matching subsequent security modules.</li><li>Delayed pass: Add response delay to the request and continue matching the remaining rules of the current module. Corresponding parameters: MinDelayTime, MaxDelayTime.</li>
+During the same release execution, only one handling action can be configured and made effective. Parameters for multiple handling actions cannot appear at the same time. Otherwise, it is deemed as an invalid configuration. If empty, the default release action is used.
+AllowActionParameters supports the following additional handling actions: <li>Default: When AllowActionParameters is empty, immediately skip the remaining rules of the current security module and continue matching subsequent security modules.</li><li>Delayed release: Add response delay to the request and continue matching the remaining rules of the current module. Corresponding parameters: MinDelayTime, MaxDelayTime.</li>
  * @class
  */
 class AllowActionParameters extends  AbstractModel {
@@ -29595,13 +29707,13 @@ class AllowActionParameters extends  AbstractModel {
         super();
 
         /**
-         * Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: <li>s: seconds, value ranges from 0 to 5.</li>.
+         * Minimum delayed response time. When configured as 0s, it means no delay and direct response. Supported units: <li>s: second, value ranges from 0 to 5.</li>
          * @type {string || null}
          */
         this.MinDelayTime = null;
 
         /**
-         * Maximum delayed response time. supported units: <li>s: seconds, value ranges from 5 to 10.</li>.
+         * Maximum delayed response time. Supported units: <li>s: seconds, value range: 5–10.</li>
          * @type {string || null}
          */
         this.MaxDelayTime = null;
@@ -30351,7 +30463,7 @@ Note: This field may return null, which indicates a failure to obtain a valid va
 }
 
 /**
- * Specifies the rate limit configuration.
+ * Specific configuration of the rate limit.
  * @class
  */
 class RateLimitingRule extends  AbstractModel {
@@ -30359,67 +30471,67 @@ class RateLimitingRule extends  AbstractModel {
         super();
 
         /**
-         * The ID of precise rate limiting. rule ID supports different rule configuration operations: <li><b>add</b> a new rule: leave the ID empty or do not specify the ID parameter.</li> <li><b>modify</b> an existing rule: specify the rule ID that needs to be updated/modified.</li> <li><b>delete</b> an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.</li>.
+         * <p>ID of the precise rate limiting rule.<br>Different rule configuration operations can be performed by rule ID:<br> <li> <b>Add</b> a new rule: leave ID empty or unspecified;</li><li><b>Modify</b> an existing rule: specify the rule ID that needs to be updated/modified;</li><li><b>Delete</b> an existing rule: existing rules not included in the Rules list in the RateLimitingRules parameter will be deleted.</li></p>
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Specifies the name of the precise rate limit.
+         * <p>Name of the precise rate limit.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * The specific content of precise rate limiting must comply with expression grammar. for detailed requirements, please refer to [the product document](https://www.tencentcloud.com/document/product/1552/125343?from_cn_redirect=1) .
+         * <p>The specific content of precise rate limiting must comply with expression syntax. For detailed specifications, see <a href="https://www.tencentcloud.com/document/product/1552/125343?from_cn_redirect=1">product document</a>.</p>
          * @type {string || null}
          */
         this.Condition = null;
 
         /**
-         * Speed limit mode. Within the statistical time window CountingPeriod, the following speed limit modes can be configured for requests that meet the feature CountBy:<li>Block: Block access source. When the count exceeds the threshold MaxRequestThreshold, execute Action disposal for ALL subsequent requests that meet the feature within the ActionDuration. </li><li>Throttle: Only dispose excess requests. When the count exceeds the threshold MaxRequestThreshold, only execute Action disposal for requests that exceed the threshold, and stop disposal when the window ends. At this point, the ActionDuration parameter will be ignored.</li><br />Default value is Block.
+         * <p>Bandwidth limit mode. Within the statistical time window CountingPeriod, for requests that meet the CountBy feature, the following bandwidth limit modes can be configured: <li>Block: Block the access source. When the count exceeds the MaxRequestThreshold, execute the Action on all subsequent requests that meet the feature within the ActionDuration;</li><li>Throttle: Only handle excess requests. When the count exceeds the MaxRequestThreshold, execute the Action only on requests that exceed the threshold, and stop when the window ends. At this point, the ActionDuration parameter will be ignored.</li><br>Default value: Block.</p>
          * @type {string || null}
          */
         this.Mode = null;
 
         /**
-         * The match mode of the rate threshold request feature. this field is required when Enabled is on.<br /><br />when there are multiple conditions, composite conditions are used to collect statistics. the maximum number of conditions cannot exceed 5. valid values:<br/><li><b>http.request.ip</b>: client ip;</li><li><b>http.request.xff_header_ip</b>: client ip (priority match xff header);</li><li><b>http.request.uri.path</b>: access path of the request;</li><li><b>http.request.cookies['session']</b>: Cookie named session, where session can be replaced with your own parameter;</li><li><b>http.request.headers['user-agent']</b>: http header named user-agent, where user-agent can be replaced with your own parameter;</li><li><b>http.request.ja3</b>: ja3 fingerprint of the request;</li><li><b>http.request.ja4</b>: ja4 fingerprint of the request;</li><li><b>http.request.uri.query['test']</b>: URL query parameter named test, where test can be replaced with your own parameter.</li>.
+         * <p>Match mode of the rate threshold request feature. Required when Enabled is on.<br><br>When there are multiple conditions, they will be combined for statistics and calculation. A maximum of 5 conditions is allowed. Valid values:<br><li><b>http.request.ip</b>: client IP;</li><li><b>http.request.xff_header_ip</b>: client IP (priority match XFF header);</li><li><b>http.request.uri.path</b>: access path of the request;</li><li><b>http.request.cookies[&#39;session&#39;]</b>: Cookie named session, where session can be replaced with your own parameter;</li><li><b>http.request.headers[&#39;user-agent&#39;]</b>: HTTP header named user-agent, where user-agent can be replaced with your own parameter;</li><li><b>http.request.ja3</b>: JA3 fingerprint of the request;</li><li><b>http.request.ja4</b>: JA4 fingerprint of the request;</li><li><b>http.request.uri.query[&#39;test&#39;]</b>: URL query parameter named test, where test can be replaced with your own parameter.</li></p>
          * @type {Array.<string> || null}
          */
         this.CountBy = null;
 
         /**
-         * Precision rate limiting specifies the cumulative number of interceptions within the time range. value ranges from 1 to 100000.
+         * <p>Cumulative number of interceptions by precise rate limiting within the time range, with a value range of 1 to 100000.</p>
          * @type {number || null}
          */
         this.MaxRequestThreshold = null;
 
         /**
-         * Specifies the time window for statistics. valid values: <li>1s: 1 second;</li><li>5s: 5 seconds;</li><li>10s: 10 seconds;</li><li>20s: 20 seconds;</li><li>30s: 30 seconds;</li><li>40s: 40 seconds;</li><li>50s: 50 seconds;</li><li>1m: 1 minute;</li><li>2m: 2 minutes;</li><li>5m: 5 minutes;</li><li>10m: 10 minutes;</li><li>1h: 1 hour.</li>.
+         * <p>Time window for statistics. Valid values: <li>1s: 1 second;</li><li>5s: 5 seconds;</li><li>10s: 10 seconds;</li><li>20s: 20 seconds;</li><li>30s: 30 seconds;</li><li>40s: 40 seconds;</li><li>50s: 50 seconds;</li><li>1m: 1 minute;</li><li>2m: 2 minutes;</li><li>5m: 5 minutes;</li><li>10m: 10 minutes;</li><li>1h: 1 hour.</li></p>
          * @type {string || null}
          */
         this.CountingPeriod = null;
 
         /**
-         * Duration of the Action. Only the following units are supported: <li>s: second, value range 1-120;</li><li>m: minute, value range 1-120;</li><li>h: hour, value range 1-48;</li><li>d: day, value range 1-30.</li><br />This parameter will be ignored and will not take effect when Mode is Throttle.
+         * <p>Duration of the Action. Supported units: <li>s: seconds, value range: 1-120;</li><li>m: minutes, value range: 1-120;</li><li>h: hours, value range: 1-48;</li><li>d: days, value range: 1-30.</li><br>When Mode is Throttle, this parameter will be ignored and will not take effect.</p>
          * @type {string || null}
          */
         this.ActionDuration = null;
 
         /**
-         * Precision rate limiting handling methods. valid values: <li>Monitor: Monitor;</li> <li>Deny: block, where DenyActionParameters.Name supports Deny and ReturnCustomPage;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge;</li> <li>Redirect: Redirect to URL;</li>.
+         * <p>Handling method for precise rate limiting. SecurityAction.Name value range is as follows:</p><ul><li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration;</li><li>Monitor: observe;</li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li><li>Redirect: redirect to a URL.</li></ul>
          * @type {SecurityAction || null}
          */
         this.Action = null;
 
         /**
-         * Precision rate limiting specifies the priority. value range is 0 to 100. default is 0.
+         * <p>Priority of precise rate limiting, ranging from 0 to 100, with a default value of 0.</p>
          * @type {number || null}
          */
         this.Priority = null;
 
         /**
-         * Whether the precise rate limiting rule is enabled. valid values: <li>on: enabled;</li> <li>off: disabled.</li>.
+         * <p>Whether the precise rate limiting rule is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li></p>
          * @type {string || null}
          */
         this.Enabled = null;
@@ -32459,7 +32571,7 @@ class InferenceAPIToken extends  AbstractModel {
 }
 
 /**
- * Web security exception rule.
+ * Exception rule for Web security
  * @class
  */
 class ExceptionRule extends  AbstractModel {
@@ -32467,61 +32579,67 @@ class ExceptionRule extends  AbstractModel {
         super();
 
         /**
-         * The ID of the exception rule. different rule configuration operations are supported by rule ID: <li> <b>add</b> a new rule: leave the ID empty or do not specify the ID parameter.</li> <li> <b>modify</b> an existing rule: specify the rule ID that needs to be updated/modified.</li> <li> <b>delete</b> an existing rule: existing Rules not included in the Rules list under the ExceptionRules parameter will be deleted.</li>.
+         * ID of the exception rule.<br>Different rule configuration operations can be performed by rule ID:<br> <li> <b>Add</b> a new rule: leave the ID empty or do not specify the ID parameter;</li><li> <b>Modify</b> an existing rule: specify the rule ID to be updated/modified;</li><li> <b>Delete</b> an existing rule: existing rules not included in the Rules list in the ExceptionRules parameter will be deleted.</li>
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * The name of the exception rule.
+         * Name of the exception rule.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Describes the specific content of the exception rule, which must comply with the expression grammar. for details, please refer to the product document.
+         * Specific content of the exception rule must comply with the expression grammar. For detailed specifications, please refer to the product document.
          * @type {string || null}
          */
         this.Condition = null;
 
         /**
-         * Exception rule execution options, valid values: <li>WebSecurityModules: designate the security protection module for the exception rule.</li> <li>ManagedRules: designate the managed rule.</li>.
+         * Exception rule execution options. Valid values: <li>WebSecurityModules: assigns the security protection module for the exception rule. Use in conjunction with WebSecurityModulesForException.</li><li>WebSecuritySubmodules: assigns the security protection submodule for the exception rule. Use in conjunction with WebSecuritySubmodulesForException.</li><li>ManagedRules: assigns the specific managed rule for the exception rule. Use in conjunction with ManagedRulesForException.</li><li>ManagedRuleGroups: assigns the managed rule group for the exception rule. Use in conjunction with ManagedRuleGroupsForException.</li>
          * @type {string || null}
          */
         this.SkipScope = null;
 
         /**
-         * Skip the specific type of request. valid values: <li>SkipOnAllRequestFields: skip all requests;</li> <li>SkipOnSpecifiedRequestFields: skip specified request fields.</li> valid only when SkipScope is ManagedRules.
+         * Skip the specific type of request. Valid values: <li>SkipOnAllRequestFields: skip all requests;</li><li>SkipOnSpecifiedRequestFields: skip specified request fields.</li>Valid only when SkipScope is ManagedRules or ManagedRuleGroups.
          * @type {string || null}
          */
         this.SkipOption = null;
 
         /**
-         * Specifies the security protection module for exception rules. valid only when SkipScope is WebSecurityModules. valid values: <li>websec-mod-managed-rules: managed rule.</li><li>websec-mod-rate-limiting: rate limit.</li><li>websec-mod-custom-rules: custom rule.</li><li>websec-mod-adaptive-control: adaptive frequency control, intelligent client filtering, slow attack protection, traffic theft protection.</li><li>websec-mod-bot: bot management.</li>.
+         * Security protection module for the exception rule. Valid only when SkipScope is WebSecurityModules. Valid values: <li>websec-mod-managed-rules: managed rule</li><li>websec-mod-rate-limiting: rate limit</li><li>websec-mod-custom-rules: custom rule</li><li>websec-mod-adaptive-control: adaptive frequency control, intelligent client filtering, slow attack protection, traffic theft protection</li><li>websec-mod-bot: bot management</li>
          * @type {Array.<string> || null}
          */
         this.WebSecurityModulesForException = null;
 
         /**
-         * Specifies the managed rule for the exception rule. valid only when SkipScope is ManagedRules. cannot specify ManagedRuleGroupsForException at this time.
+         * Specifies the security protection submodule for the exception rule. Valid only when SkipScope is WebSecuritySubmodules. Valid values: <ul><li>ManagedRules module features: <ul><li>websec-mod-managed-rules/managed-rule-groups: rule set;</li><li>websec-mod-managed-rules/frequent-scanning-protection: high frequency scan protection;</li></ul></li><li>RateLimitingRules module features: <ul><li>websec-mod-rate-limiting-rules: rate limiting rule;</li></ul></li><li>CustomRules module features: <ul><li>websec-mod-custom-rules: custom rule;</li></ul></li><li>HttpDDoSProtection module features: <ul><li>websec-mod-HTTP-DDoS-protection/adaptive-frequency-control: adaptive frequency control;</li><li>websec-mod-HTTP-DDoS-protection/client-filtering: intelligent client filtering;</li><li>websec-mod-HTTP-DDoS-protection/bandwidth-abuse-defense: traffic fraud protection;</li></ul></li><li>BotManagement module features: <ul><li>websec-mod-Bot-management/basic-feature: basic feature management;</li><li>websec-mod-Bot-management/ip-reputation: client profile analysis;</li><li>websec-mod-Bot-management/Bot-intelligence: intelligent Bot analysis;</li><li>websec-mod-Bot-management/custom-rules: custom rule;</li><li>websec-mod-Bot-management/browser-impersonation-detection: proactive feature recognition;</li><li>websec-mod-Bot-management/client-attestation-rules: client authentication;</li></ul></li><li>BotManagementLite module features: <ul><li>websec-mod-Bot-management-lite/ai-crawler-detection: ai crawler disposal;</li><li>websec-mod-Bot-management-lite/captcha-page-challenge: captcha page challenge.</li></ul></li></ul>
+         * @type {Array.<string> || null}
+         */
+        this.WebSecuritySubmodulesForException = null;
+
+        /**
+         * Specify the specific managed rule for the exception rule. This parameter is valid only when SkipScope is ManagedRules.
          * @type {Array.<string> || null}
          */
         this.ManagedRulesForException = null;
 
         /**
-         * A managed rule group with designated exception rules is valid only when SkipScope is ManagedRules, and at this point you cannot specify ManagedRulesForException.
+         * Managed rule group with specified exception rules. This parameter is valid only when SkipScope is ManagedRuleGroups.
          * @type {Array.<string> || null}
          */
         this.ManagedRuleGroupsForException = null;
 
         /**
-         * Specify exception rules to skip request fields. valid only when SkipScope is ManagedRules and SkipOption is SkipOnSpecifiedRequestFields.
+         * Configuration for specifying exception rules to skip specified request fields. This is valid only when SkipScope is ManagedRules or ManagedRuleGroups and SkipOption is SkipOnSpecifiedRequestFields.
          * @type {Array.<RequestFieldsForException> || null}
          */
         this.RequestFieldsForException = null;
 
         /**
-         * Whether the exception rule is enabled. valid values: <li>`on`: enable</li> <li>`off`: disable</li>.
+         * Whether the exception rule is enabled. Valid values: <li>on: enabled</li><li>off: disabled</li>
          * @type {string || null}
          */
         this.Enabled = null;
@@ -32541,6 +32659,7 @@ class ExceptionRule extends  AbstractModel {
         this.SkipScope = 'SkipScope' in params ? params.SkipScope : null;
         this.SkipOption = 'SkipOption' in params ? params.SkipOption : null;
         this.WebSecurityModulesForException = 'WebSecurityModulesForException' in params ? params.WebSecurityModulesForException : null;
+        this.WebSecuritySubmodulesForException = 'WebSecuritySubmodulesForException' in params ? params.WebSecuritySubmodulesForException : null;
         this.ManagedRulesForException = 'ManagedRulesForException' in params ? params.ManagedRulesForException : null;
         this.ManagedRuleGroupsForException = 'ManagedRuleGroupsForException' in params ? params.ManagedRuleGroupsForException : null;
 
@@ -35112,7 +35231,7 @@ class DeleteMultiPathGatewayLineResponse extends  AbstractModel {
 }
 
 /**
- * Intelligent client filtering.
+ * Intelligent client filtering
  * @class
  */
 class ClientFiltering extends  AbstractModel {
@@ -35120,19 +35239,19 @@ class ClientFiltering extends  AbstractModel {
         super();
 
         /**
-         * Whether intelligent client filtering is enabled. valid values: <li>on: enable;</li> <li>off: disable.</li>.
+         * Whether intelligent client filtering is enabled. Valid values: <li>on: Enable;</li><li>off: Disable.</li>
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * Rule ID of intelligent client filtering, returned as an output parameter.
+         * Rule ID of intelligent client filtering. Output only.
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * The handling method of intelligent client filtering. when Enabled is on, this field is required. the Name parameter of SecurityAction supports: <li>Monitor: observation;</li> <li>Deny: block;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>.
+         * Handling method for intelligent client filtering. This field is required when Enabled is on. Supported values for SecurityAction Name: <li>Monitor: observe;</li><li>Deny: block;</li><li>Challenge: challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>
          * @type {SecurityAction || null}
          */
         this.Action = null;
@@ -35371,25 +35490,25 @@ class SessionRateControl extends  AbstractModel {
         super();
 
         /**
-         * Specifies whether session rate and periodic feature verification are enabled. valid values: <li>on: enable</li><li>off: disable</li>.
+         * Whether session rate and periodic feature verification are enabled. Valid values: <li>on: enable</li><li>off: disable</li>
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * Session rate and periodic feature verification high-risk execution actions. SecurityAction Name valid values: <li>Deny: block, where Stall configuration is supported in DenyActionParameters;</li> <li>Monitor: observation;</li> <li>Allow: respond after wait, where MinDelayTime and MaxDelayTime configuration is required in AllowActionParameters.</li>.
+         * Session rate and periodic feature verification for high-risk executed actions. The Name parameter of SecurityAction supports the following values: <li>Deny: block, with Stall configuration supported in DenyActionParameters;</li><li>Monitor: observe;</li><li>Allow: respond after waiting, where AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>
          * @type {SecurityAction || null}
          */
         this.HighRateSessionAction = null;
 
         /**
-         * Session rate and periodic feature verification medium-risk execution action. SecurityAction Name parameter supports: <li>Deny: block, where DenyActionParameters supports Stall configuration;</li><li>Monitor: observe;</li><li>Allow: respond after wait, where AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>.
+         * Execution action for medium-risk session rate and periodic feature verification. Supported values of SecurityAction Name: <li>Deny: block, where DenyActionParameters supports Stall configuration;</li><li>Monitor: observe;</li><li>Allow: respond after waiting, where AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>
          * @type {SecurityAction || null}
          */
         this.MidRateSessionAction = null;
 
         /**
-         * Session rate and periodic feature verification low risk execution action. SecurityAction Name parameter supports: <li>Deny: block, where DenyActionParameters supports Stall configuration;</li><li>Monitor: observe;</li><li>Allow: respond after wait, where AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>.
+         * Session rate and periodic feature verification are low-risk execution actions. The Name parameter of SecurityAction supports: <li>Deny: block, where DenyActionParameters supports Stall configuration;</li><li>Monitor: observe;</li><li>Allow: wait then respond, where AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>
          * @type {SecurityAction || null}
          */
         this.LowRateSessionAction = null;
@@ -36240,7 +36359,7 @@ class TemplateConfig extends  AbstractModel {
 }
 
 /**
- * Bot rules specific configuration, used to override the upper layer default configuration.
+ * Configuration of a Bot rule item, used to overwrite the upper-layer default configuration.
  * @class
  */
 class BotManagementActionOverrides extends  AbstractModel {
@@ -36248,13 +36367,13 @@ class BotManagementActionOverrides extends  AbstractModel {
         super();
 
         /**
-         * Specific item under Bot rules used to rewrite the configuration content of this single rule. refer to the returned message from the DescribeBotManagedRules API for detailed information corresponding to Ids.
+         * Specific item under the Bot rule group, used to rewrite the configuration content of this individual rule item. For detailed information corresponding to the Ids, see the returned message of the DescribeBotManagedRules API.
          * @type {Array.<string> || null}
          */
         this.Ids = null;
 
         /**
-         * Specifies the handling action for Bot rule items in Ids. valid values for the Name parameter in SecurityAction: <li>Deny: block;</li><li>Monitor: observe;</li><li>Disabled: Disabled, disable the specified rule;</li><li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li><li>Allow: pass (only for Bot basic feature management).</li>.
+         * Handling action for the Bot rule item specified in Ids. Supported values for SecurityAction Name: <li>Deny: block;</li><li>Monitor: observe;</li><li>Disabled: not enabled, disable the specified rule;</li><li>Challenge: challenge. ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li><li>Allow: allow (only for basic feature management of Bot).</li>
 
          * @type {SecurityAction || null}
          */
@@ -36359,7 +36478,7 @@ class DescribeIdentificationsResponse extends  AbstractModel {
 }
 
 /**
- * Web security Bot custom rule.
+ * Custom Bot rules for Web security.
  * @class
  */
 class BotManagementCustomRule extends  AbstractModel {
@@ -36367,37 +36486,37 @@ class BotManagementCustomRule extends  AbstractModel {
         super();
 
         /**
-         * The ID of a Bot custom rule. different rule configuration operations are supported by rule ID: <li><b>add</b> a new rule: leave the ID empty or do not specify the ID parameter.</li> <li><b>modify</b> an existing rule: specify the rule ID that needs to be updated/modified.</li> <li><b>delete</b> an existing rule: existing Rules not included in the Rules list under the BotManagementCustomRules parameter will be deleted.</li>.
+         * <p>ID of the bot custom rule.<br>Different rule configuration operations are supported via the rule ID:<br> <li> <b>Add</b> a new rule: leave the ID empty or do not specify the ID parameter;</li><li><b>Modify</b> an existing rule: specify the rule ID that needs to be updated/modified;</li><li><b>Delete</b> an existing rule: existing rules not included in the Rules list in the BotManagementCustomRules parameter will be deleted.</li></p>
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Specifies the name of the Bot custom rule.
+         * <p>Name of the Bot custom rule.</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Whether the custom Bot rule is enabled. valid values: <li>on: enabled;</li><li>off: disabled.</li>.
+         * <p>Whether the custom Bot rule is enabled. Valid values: <li>on: enable;</li><li>off: disable.</li></p>
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * Priority of custom Bot rules. value range: 1–100. default value is 50.
+         * <p>Priority of Bot custom rules, ranging from 1 to 100, with a default value of 50.</p>
          * @type {number || null}
          */
         this.Priority = null;
 
         /**
-         * Specifies the specific content of the Bot custom rule, which must comply with expression grammar. for detailed specifications, refer to the product document.
+         * <p>For specific content of the Bot custom rule, it must comply with the expression grammar. For detailed specifications, see the product document.</p>
          * @type {string || null}
          */
         this.Condition = null;
 
         /**
-         * The handling method for Bot custom rules. valid values: <li>Monitor: observation;</li><li>Deny: block, where DenyActionParameters.Name supports Deny and ReturnCustomPage;</li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge;</li><li>Redirect: Redirect to URL.</li>.
+         * <p>List of safe execution actions by weight assignment.</p>
          * @type {Array.<SecurityWeightedAction> || null}
          */
         this.Action = null;
@@ -36757,7 +36876,7 @@ class ModifyMultiPathGatewayStatusResponse extends  AbstractModel {
 }
 
 /**
- * IP intelligence library (formerly client profile analysis) specific configuration.
+ * Specific configuration of IP Intelligence Library (formerly client profile analysis).
  * @class
  */
 class IPReputationGroup extends  AbstractModel {
@@ -36765,13 +36884,13 @@ class IPReputationGroup extends  AbstractModel {
         super();
 
         /**
-         * Execution action of the IP intelligence library (formerly client profile analysis). SecurityAction Name parameter supports: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Disabled: not enabled, disable specified rule;</li> <li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>.
+         * Execution action of the IP Intelligence Library (formerly client profile analysis). Supported values for SecurityAction Name: <li>Deny: block;</li><li>Monitor: observe;</li><li>Disabled: not enabled, disable the specified rule;</li><li>Challenge: challenge. ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>
          * @type {SecurityAction || null}
          */
         this.BaseAction = null;
 
         /**
-         * The specific configuration of the IP intelligence library (originally client profile analysis), used to override the default configuration in BaseAction. among them, the Ids in BotManagementActionOverrides can be filled with: <li>IPREP_WEB_AND_DDOS_ATTACKERS_LOW: network attack - general confidence;</li> <li>IPREP_WEB_AND_DDOS_ATTACKERS_MID: network attack - medium confidence;</li> <li>IPREP_WEB_AND_DDOS_ATTACKERS_HIGH: network attack - HIGH confidence;</li> <li>IPREP_PROXIES_AND_ANONYMIZERS_LOW: network proxy - general confidence;</li> <li>IPREP_PROXIES_AND_ANONYMIZERS_MID: network proxy - medium confidence;</li> <li>IPREP_PROXIES_AND_ANONYMIZERS_HIGH: network proxy - HIGH confidence;</li> <li>IPREP_SCANNING_TOOLS_LOW: scanner - general confidence;</li> <li>IPREP_SCANNING_TOOLS_MID: scanner - medium confidence;</li> <li>IPREP_SCANNING_TOOLS_HIGH: scanner - HIGH confidence;</li> <li>IPREP_ATO_ATTACKERS_LOW: account takeover attack - general confidence;</li> <li>IPREP_ATO_ATTACKERS_MID: account takeover attack - medium confidence;</li> <li>IPREP_ATO_ATTACKERS_HIGH: account takeover attack - HIGH confidence;</li> <li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_LOW: malicious BOT - general confidence;</li> <li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_MID: malicious BOT - medium confidence;</li> <li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_HIGH: malicious BOT - HIGH confidence.</li>.
+         * Specific configuration of the IP Intelligence Library (formerly client profile analysis), used to override the default configuration in BaseAction. The Ids of BotManagementActionOverrides can be filled with: <li>IPREP_WEB_AND_DDOS_ATTACKERS_LOW: network attack - general confidence;</li><li>IPREP_WEB_AND_DDOS_ATTACKERS_MID: network attack - medium confidence;</li><li>IPREP_WEB_AND_DDOS_ATTACKERS_HIGH: network attack - high confidence;</li><li>IPREP_PROXIES_AND_ANONYMIZERS_LOW: network proxy - general confidence;</li><li>IPREP_PROXIES_AND_ANONYMIZERS_MID: network proxy - medium confidence;</li><li>IPREP_PROXIES_AND_ANONYMIZERS_HIGH: network proxy - high confidence;</li><li>IPREP_SCANNING_TOOLS_LOW: scanner - general confidence;</li><li>IPREP_SCANNING_TOOLS_MID: scanner - medium confidence;</li><li>IPREP_SCANNING_TOOLS_HIGH: scanner - high confidence;</li><li>IPREP_ATO_ATTACKERS_LOW: account takeover attack - general confidence;</li><li>IPREP_ATO_ATTACKERS_MID: account takeover attack - medium confidence;</li><li>IPREP_ATO_ATTACKERS_HIGH: account takeover attack - high confidence;</li><li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_LOW: malicious bot - general confidence;</li><li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_MID: malicious bot - medium confidence;</li><li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_HIGH: malicious bot - high confidence.</li>
          * @type {Array.<BotManagementActionOverrides> || null}
          */
         this.BotManagementActionOverrides = null;
@@ -37602,6 +37721,65 @@ class DDosProtectionConfig extends  AbstractModel {
 }
 
 /**
+ * User Risk Level configuration. The risk score range is 0–100. The higher the score, the higher the risk.
+ * @class
+ */
+class UserRiskProfile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Minimum risk score for high-risk requests. A request is considered high-risk when its score is equal to or greater than this value.</p><p>Value range: [2, 99]</p><p>Default value: 50</p>
+         * @type {number || null}
+         */
+        this.HighRiskMinScore = null;
+
+        /**
+         * <p>Handling method for high-risk requests. Supported values for SecurityAction Name: <li>Deny: block;</li><li>Monitor: observe;</li><li>Redirect: redirect;</li><li>Challenge: challenge.</li>Default value: Monitor</p>
+         * @type {SecurityAction || null}
+         */
+        this.HighRiskRequestAction = null;
+
+        /**
+         * <p>Minimum risk score for a medium-risk request. A score equal to or greater than this value and less than HighRiskMinScore is considered medium-risk; a score lower than this value is considered low risk.</p><p>Value range: [1, 98]</p><p>Default value: 15</p>
+         * @type {number || null}
+         */
+        this.MediumRiskMinScore = null;
+
+        /**
+         * <p>Handling method for medium-risk requests. Supported values for the Name parameter of SecurityAction: <li>Deny: block;</li><li>Monitor: observe;</li><li>Redirect: redirect;</li><li>Challenge: challenge.</li>Default value: Monitor</p>
+         * @type {SecurityAction || null}
+         */
+        this.MediumRiskRequestAction = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HighRiskMinScore = 'HighRiskMinScore' in params ? params.HighRiskMinScore : null;
+
+        if (params.HighRiskRequestAction) {
+            let obj = new SecurityAction();
+            obj.deserialize(params.HighRiskRequestAction)
+            this.HighRiskRequestAction = obj;
+        }
+        this.MediumRiskMinScore = 'MediumRiskMinScore' in params ? params.MediumRiskMinScore : null;
+
+        if (params.MediumRiskRequestAction) {
+            let obj = new SecurityAction();
+            obj.deserialize(params.MediumRiskRequestAction)
+            this.MediumRiskRequestAction = obj;
+        }
+
+    }
+}
+
+/**
  * ModifyFunctionRule request structure.
  * @class
  */
@@ -38255,7 +38433,7 @@ class DescribeDDoSAttackDataRequest extends  AbstractModel {
 }
 
 /**
- * Slow attack protection configuration.
+ * Specific configuration for slow attack protection.
  * @class
  */
 class SlowAttackDefense extends  AbstractModel {
@@ -38263,31 +38441,31 @@ class SlowAttackDefense extends  AbstractModel {
         super();
 
         /**
-         * Whether slow attack protection is enabled. valid values: <li>on: enabled;</li> <li>off: disabled.</li>.
+         * Whether slow attack protection is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li>
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * Rule ID of slow attack protection, returned as an output parameter.
+         * Rule ID of slow attack protection, returned only as an output parameter.
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Slow attack protection handling method. required when Enabled is on. valid values for SecurityAction Name: <li>Monitor: observation;</li> <li>Deny: block;</li>.
+         * Handling method for slow attack protection. This field is required when Enabled is on. Supported values for SecurityAction Name: <li>Monitor: observe;</li><li>Deny: block;</li>
          * @type {SecurityAction || null}
          */
         this.Action = null;
 
         /**
-         * The specific configuration of the minimum body transfer rate threshold is required when Enabled is on.
+         * Specific configuration of the minimum body transfer rate threshold. Required when Enabled is on.
          * @type {MinimalRequestBodyTransferRate || null}
          */
         this.MinimalRequestBodyTransferRate = null;
 
         /**
-         * Specifies the specific configuration of body transfer timeout duration. required when Enabled is on.
+         * Specific configuration of the body transfer timeout duration. Required if Enabled is on.
          * @type {RequestBodyTransferTimeout || null}
          */
         this.RequestBodyTransferTimeout = null;
@@ -39084,7 +39262,7 @@ class AICrawlerDetection extends  AbstractModel {
          * Execution action of AI crawler detection. Required if Enabled is on. Name of SecurityAction only supports:
 <li>Deny: block;</li>
 <li>Monitor: observation;</li>
-<li>Allow: allow;</li>
+<li>Allow: Allow access;</li>
 <li>Challenge: Among them, ChallengeOption in ChallengeActionParameters only supports JSChallenge and ManagedChallenge.</li>
          * @type {SecurityAction || null}
          */
@@ -39486,7 +39664,7 @@ class DescribeMultiPathGatewaySecretKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * Zone ID.
+         * <p>Site ID.</p>
          * @type {string || null}
          */
         this.ZoneId = null;
@@ -40541,7 +40719,7 @@ class DeleteFunctionResponse extends  AbstractModel {
 }
 
 /**
- * Foundation of Web security BOT rule architecture.
+ * Structure of BOT rules for Web security.
  * @class
  */
 class BotManagementLite extends  AbstractModel {
@@ -40549,13 +40727,13 @@ class BotManagementLite extends  AbstractModel {
         super();
 
         /**
-         * Configuration of the human-machine verification page.
+         * Configuration of the CAPTCHA page.
          * @type {CAPTCHAPageChallenge || null}
          */
         this.CAPTCHAPageChallenge = null;
 
         /**
-         * AI crawler detection configuration.
+         * Specific configuration for AI crawler detection.
          * @type {AICrawlerDetection || null}
          */
         this.AICrawlerDetection = null;
@@ -41476,11 +41654,11 @@ class AccelerateMainland extends  AbstractModel {
 }
 
 /**
- * Additional parameter for the security executed action when it is a challenge.
+ * Additional parameter for the safe execution action when it is a challenge.
 
-This parameter is used for specifying the extra handling action taken by the system when a security rule is hit and a challenge action is executed.
-Challenge disposal actions are segmented by ChallengeOption. Different challenge types correspond to different interaction forms and parameter requirements. The system will apply the corresponding parameter configuration according to the selected challenge type.
-ChallengeActionParameters supports the following challenge disposition types: <li>Interstitial challenge: responds with a new page and runs the authentication mechanism on the new page. Corresponds to the ChallengeOption value InterstitialChallenge.</li><li>Inline challenge: responds with an SDK challenge. Corresponds to the ChallengeOption value InlineChallenge.</li><li>JavaScript challenge: invisible browser verification. The browser automatically performs verification and shows the requested resource. Corresponds to the ChallengeOption value JSChallenge.</li><li>Managed challenge: responds with a redirect page containing a JavaScript program, used for verifying the browser runtime environment. Corresponds to the ChallengeOption value ManagedChallenge.</li>
+This parameter is used to specify the extra handling action taken by the system when a security rule is hit and a challenge action is executed.
+Challenge disposal actions are segmented through ChallengeOption. Different challenge types correspond to different interaction forms and parameter requirements. The system will bring the corresponding parameter configuration into effect according to the selected challenge type.
+ChallengeActionParameters supports the following challenge disposition types: <li>Interstitial challenge: responds with a new page and runs the authentication mechanism within the new page. The corresponding ChallengeOption value is InterstitialChallenge.</li><li>Inline challenge: responds with an SDK challenge. The corresponding ChallengeOption value is InlineChallenge.</li><li>JavaScript challenge: invisible verification in the browser. The browser automatically performs verification and shows the requested resource. The corresponding ChallengeOption value is JSChallenge.</li><li>Managed challenge: responds with a redirect page containing a JavaScript program, used for verification of the browser runtime environment. The corresponding ChallengeOption value is ManagedChallenge.</li>
  * @class
  */
 class ChallengeActionParameters extends  AbstractModel {
@@ -41488,7 +41666,7 @@ class ChallengeActionParameters extends  AbstractModel {
         super();
 
         /**
-         * <p>Specific challenge action for safe execution.</p><p>Enumeration values:</p><ul><li>InterstitialChallenge: interstitial challenge;</li><li>InlineChallenge: embedded challenge (SDK challenge);</li><li>ManagedChallenge: managed challenge. Applicable only to HTML web pages directly accessed by users through a browser. Verification cannot be completed in scenarios such as API interfaces, XHR/AJAX async requests within web pages, mobile apps, and command line tools. Do not configure it;</li><li>JSChallenge: JavaScript challenge. Applicable only to HTML web pages directly accessed by users through a browser. Verification cannot be completed in scenarios such as API interfaces, XHR/AJAX async requests within web pages, mobile apps, and command line tools. Do not configure it.</li></ul>
+         * <p>Specific challenge action for safe execution.</p><p>Enumeration values:</p><ul><li>InterstitialChallenge: Interstitial challenge;</li><li>InlineChallenge: Embedded challenge (SDK challenge);</li><li>ManagedChallenge: Managed challenge. Applicable only to HTML web pages directly accessed by users through a browser. API interfaces, XHR/AJAX asynchronous requests within web pages, mobile apps, command line tools, and other scenarios cannot complete the verification. Do not configure;</li><li>JSChallenge: JavaScript challenge. Applicable only to HTML web pages directly accessed by users through a browser. API interfaces, XHR/AJAX asynchronous requests within web pages, mobile apps, command line tools, and other scenarios cannot complete the verification. Do not configure.</li></ul>
          * @type {string || null}
          */
         this.ChallengeOption = null;
@@ -42540,7 +42718,7 @@ class CacheConfigCustomTime extends  AbstractModel {
 }
 
 /**
- * Managed rules configuration.
+ * Managed rules for Web security
  * @class
  */
 class ManagedRules extends  AbstractModel {
@@ -42548,37 +42726,43 @@ class ManagedRules extends  AbstractModel {
         super();
 
         /**
-         * The managed rule status. Values: <li>`on`: enabled, all managed rules take effect as configured;</li> <li>`off`: disabled, all managed rules do not take effect.</li>.
+         * <p>Whether managed rules are enabled. Valid values: <li>on: enabled. All managed rules take effect as configured.</li><li>off: disabled. No managed rules take effect.</li></p>
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * Evaluation mode is enabled or not, it is valid only when the `Enabled` parameter is set to `on`. Values: <li>`on`: enabled, all managed rules take effect in `observe` mode.</li> <li>off: disabled, all managed rules take effect according to the specified configuration.</li>.
+         * <p>Whether evaluation mode is enabled. This parameter is valid only when the `Enabled` parameter is set to `on`. Valid values: <li>on: enabled. All managed rules take effect in observation mode.</li><li>off: disabled. All managed rules take effect as configured.</li></p>
          * @type {string || null}
          */
         this.DetectionOnly = null;
 
         /**
-         * Managed rule semantic analysis is enabled or not, it is valid only when the `Enabled` parameter is `on`. Values: <li>`on`: enabled, perform semantic analysis  before processing requests;</li> <li>`off`: disabled, process requests directly without semantic analysis.</li> <br/>The default value is `off`.
+         * <p>Whether the deep analysis option for managed rules is enabled. This parameter is valid only when the `Enabled` parameter is set to `on`. Valid values: <li>on: enabled. Requests are processed after deep analysis.</li><li>off: disabled. Requests are processed directly without deep analysis.</li> <br>This parameter is to be deprecated. The switch for deep analysis rules is migrated to the `SemanticAnalysisRules.Enabled` parameter.</p>
          * @type {string || null}
          */
         this.SemanticAnalysis = null;
 
         /**
-         * Managed rule automatic update option.
+         * <p>Deep analysis configuration option. Identifies malicious behaviors in requests (such as SQL injection and XSS attacks), and logs and blocks malicious requests.</p>
+         * @type {SemanticAnalysisRules || null}
+         */
+        this.SemanticAnalysisRules = null;
+
+        /**
+         * <p>Auto-update option for managed rules.</p>
          * @type {ManagedRuleAutoUpdate || null}
          */
         this.AutoUpdate = null;
 
         /**
-         * Configuration of the managed rule group. If this structure is passed as an empty array or the GroupId is not included in the array, it will be processed based by default.
+         * <p>Configuration of managed rule groups. If an empty array is passed for this structure or `GroupId` is not included in the list, the default processing method is used.</p>
          * @type {Array.<ManagedRuleGroup> || null}
          */
         this.ManagedRuleGroups = null;
 
         /**
-         * High-Frequency scan protection configuration option. when a visitor's frequent requests hit the managed rule configured as block within a period of time, all requests from that visitor are blocked.
+         * <p>High-frequency scan protection configuration option. When a visitor's requests frequently trigger managed rules configured as block, all requests from this visitor are blocked for a period of time.</p>
          * @type {FrequentScanningProtection || null}
          */
         this.FrequentScanningProtection = null;
@@ -42595,6 +42779,12 @@ class ManagedRules extends  AbstractModel {
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
         this.DetectionOnly = 'DetectionOnly' in params ? params.DetectionOnly : null;
         this.SemanticAnalysis = 'SemanticAnalysis' in params ? params.SemanticAnalysis : null;
+
+        if (params.SemanticAnalysisRules) {
+            let obj = new SemanticAnalysisRules();
+            obj.deserialize(params.SemanticAnalysisRules)
+            this.SemanticAnalysisRules = obj;
+        }
 
         if (params.AutoUpdate) {
             let obj = new ManagedRuleAutoUpdate();
@@ -42672,7 +42862,7 @@ class DescribeMultiPathGatewaySecretKeyResponse extends  AbstractModel {
         super();
 
         /**
-         * Access key.
+         * <p>Access key.</p>
          * @type {string || null}
          */
         this.SecretKey = null;
@@ -42828,7 +43018,7 @@ class CreateSecurityClientAttesterResponse extends  AbstractModel {
 }
 
 /**
- * Specifies the SecurityAction with weight allocation.
+ * SecurityAction with weight assignment.
  * @class
  */
 class SecurityWeightedAction extends  AbstractModel {
@@ -42836,13 +43026,13 @@ class SecurityWeightedAction extends  AbstractModel {
         super();
 
         /**
-         * The handling method of the Bot custom rule. valid values: <li>Allow: pass, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li> <li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li> <li>Monitor: observation;</li> <li>Challenge: Challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li> <li>Redirect: Redirect to URL.</li>.
+         * Handling method of the Bot custom rule. Valid values: <li>Allow: Allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li><li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li><li>Monitor: Monitor;</li><li>Challenge: Challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li><li>Redirect: Redirect to a URL.</li>
          * @type {SecurityAction || null}
          */
         this.SecurityAction = null;
 
         /**
-         * The Weight of the current SecurityAction, only supported between 10 and 100 and must be a multiple of 10. the total of all Weight parameters must equal 100.
+         * Weight of the current SecurityAction. Only multiples of 10 from 10 to 100 are supported. The sum of all Weight parameters must equal 100.
          * @type {number || null}
          */
         this.Weight = null;
@@ -42941,6 +43131,61 @@ class DescribeDefaultCertificatesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class SemanticAnalysisRules extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * 
+         * @type {Array.<ManagedRuleAction> || null}
+         */
+        this.RuleActions = null;
+
+        /**
+         * 
+         * @type {ManagedRuleGroupMeta || null}
+         */
+        this.MetaData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+        if (params.RuleActions) {
+            this.RuleActions = new Array();
+            for (let z in params.RuleActions) {
+                let obj = new ManagedRuleAction();
+                obj.deserialize(params.RuleActions[z]);
+                this.RuleActions.push(obj);
+            }
+        }
+
+        if (params.MetaData) {
+            let obj = new ManagedRuleGroupMeta();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
 
     }
 }
@@ -44356,7 +44601,7 @@ class CreateWebSecurityTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Bot intelligent analysis configuration.
+ * Specific configuration for Bot intelligent analysis.
  * @class
  */
 class BotIntelligence extends  AbstractModel {
@@ -44364,22 +44609,22 @@ class BotIntelligence extends  AbstractModel {
         super();
 
         /**
-         * Specifies the switch for Bot intelligent analysis configuration. valid values:.
+         * Specific configuration switch for Bot intelligent analysis. Valid values:
 
-on: enabled.
-off: disabled.
+on: enable;
+off: Disable.
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * Rule ID of Bot intelligent analysis, returned as an output parameter.
+         * Rule ID of Bot intelligent analysis, returned only as an output parameter.
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
+         * Based on the client and request features, divide the request source into human requests, valid Bot requests, suspected Bot requests, and high-risk Bot requests, and provide request handling options.
          * @type {BotRatings || null}
          */
         this.BotRatings = null;
@@ -44451,7 +44696,7 @@ OriginCertificateVerify specifies CertId of the corresponding certificate as an 
 }
 
 /**
- * Configures rules for the search engine.
+ * Search engine rule configuration.
  * @class
  */
 class SearchEngineBots extends  AbstractModel {
@@ -44459,13 +44704,13 @@ class SearchEngineBots extends  AbstractModel {
         super();
 
         /**
-         * Specifies the action for requests from search engine crawlers. valid values for SecurityAction Name: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Disabled: not enabled, disable specified rule;</li> <li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li> <li>Allow: pass (to be deprecated).</li>.
+         * Execution action for requests from search engine crawlers. Supported values of SecurityAction Name: <li>Deny: block;</li><li>Monitor: observe;</li><li>Disabled: not enabled, disable the specified rule;</li><li>Challenge: challenge. ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li><li>Allow: allow (to be deprecated).</li>
          * @type {SecurityAction || null}
          */
         this.BaseAction = null;
 
         /**
-         * Specifies the handling method for search engine crawler requests.
+         * Specify the handling method for search engine crawler requests.
          * @type {Array.<BotManagementActionOverrides> || null}
          */
         this.BotManagementActionOverrides = null;
@@ -44557,25 +44802,25 @@ class HttpDDoSProtection extends  AbstractModel {
         super();
 
         /**
-         * Specifies the specific configuration of adaptive frequency control.
+         * Specific configuration of adaptive frequency control.
          * @type {AdaptiveFrequencyControl || null}
          */
         this.AdaptiveFrequencyControl = null;
 
         /**
-         * Specifies the intelligent client filter configuration.
+         * Specific configuration for intelligent client filtering.
          * @type {ClientFiltering || null}
          */
         this.ClientFiltering = null;
 
         /**
-         * Specifies the specific configuration for bandwidth abuse protection.
+         * Bandwidth abuse protection configuration.
          * @type {BandwidthAbuseDefense || null}
          */
         this.BandwidthAbuseDefense = null;
 
         /**
-         * Specifies the configuration of slow attack protection.
+         * Specific configuration of slow attack protection.
          * @type {SlowAttackDefense || null}
          */
         this.SlowAttackDefense = null;
@@ -44671,7 +44916,7 @@ class CheckRegionHealthStatus extends  AbstractModel {
 }
 
 /**
- * High frequency scan protection configuration option. when a visitor's frequent requests hit the managed rule configured as block, ban all requests from that visitor within a period of time.
+ * High frequency scan protection configuration options. When a visitor's requests frequently hit managed rules configured as block, all requests from the visitor are blocked within a period of time.
  * @class
  */
 class FrequentScanningProtection extends  AbstractModel {
@@ -44679,43 +44924,43 @@ class FrequentScanningProtection extends  AbstractModel {
         super();
 
         /**
-         * Whether the high-frequency scan protection rule is enabled. valid values: <li>on: enable. the high-frequency scan protection rule takes effect.</li><li>off: disable. the high-frequency scan protection rule does not take effect.</li>.	
+         * Whether high-frequency scan protection is enabled. Valid values: <li>on: enabled, the high-frequency scan protection rule takes effect;</li><li>off: disabled, the high-frequency scan protection rule does not take effect.</li>	
          * @type {string || null}
          */
         this.Enabled = null;
 
         /**
-         * Rule ID of high frequency scan protection, returned as an output parameter.
+         * Rule ID of high-frequency scan protection, returned only as an output parameter.
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * The handling action for high-frequency scan protection. required when Enabled is on. valid values for SecurityAction Name: <li>Deny: block and respond with an interception page;</li> <li>Monitor: observe without processing requests, log security events in logs;</li> <li>JSChallenge: respond with a JavaScript challenge page.</li>.
+         * Handling action for high frequency scan protection. When Enabled is on, this field is required. The Name parameter of SecurityAction supports: <li>Deny: block and respond with an Interception page;</li><li>Monitor: observe, do not process request records, and log security events;</li><li>JSChallenge: javascript challenge and respond with a JavaScript challenge page.</li>
          * @type {SecurityAction || null}
          */
         this.Action = null;
 
         /**
-         * The match mode for request statistics. required when Enabled is on. valid values: <li>http.request.xff_header_ip: client ip (priority match xff header);</li><li>http.request.ip: client ip.</li>.
+         * Match mode for request statistics. This field is required when Enabled is on. Valid values: <li>http.request.xff_header_ip: client ip (priority match xff header);</li><li>http.request.ip: client ip.</li>
          * @type {string || null}
          */
         this.CountBy = null;
 
         /**
-         * This parameter specifies the threshold for high-frequency scan protection, which is the intercept count of managed rules set to interception within the time range set by CountingPeriod. value range: 1 to 4294967294, for example 100. when exceeding this statistical value, subsequent requests will trigger the handling Action set by Action. required when Enabled is on.
+         * This parameter specifies the threshold for high-frequency scan protection, which is the total interception count when managed rules configured for interception are hit within the time range set by CountingPeriod. The value ranges from 1 to 4294967294, for example, 100. When this statistical value is exceeded, subsequent requests trigger the handling action set by Action. This field is required when Enabled is on.
          * @type {number || null}
          */
         this.BlockThreshold = null;
 
         /**
-         * This parameter specifies the statistical time window for high-frequency scan protection, which is the time window for counting requests that hit managed rules configured as block. valid values: 5-1800. measurement unit: seconds (s) only, such as 5s. this field is required when Enabled is on.
+         * This parameter specifies the time window for high-frequency scan protection statistics, that is, the statistical time window for requests that hit managed rules configured for interception. Value range: 5-1800. The unit only supports seconds (s), for example, 5s. Required when Enabled is on.
          * @type {string || null}
          */
         this.CountingPeriod = null;
 
         /**
-         * This parameter specifies the duration of the handling Action set by the high frequency scan protection Action parameter. value range: 60 to 86400. measurement unit: seconds (s) only, for example 60s. this field is required when Enabled is on.
+         * This parameter specifies the duration of the handling Action set by the high frequency scan protection Action parameter. The value ranges from 60 to 86400. The unit only supports seconds (s), for example, 60s. This field is required when Enabled is on.
          * @type {string || null}
          */
         this.ActionDuration = null;
@@ -46205,13 +46450,13 @@ module.exports = {
     DeleteMultiPathGatewayRequest: DeleteMultiPathGatewayRequest,
     DeleteCustomErrorPageRequest: DeleteCustomErrorPageRequest,
     CustomField: CustomField,
-    BotManagedRule: BotManagedRule,
+    ApplyFreeCertificateResponse: ApplyFreeCertificateResponse,
     FloatTimingTypeValue: FloatTimingTypeValue,
     BrowserImpersonationDetectionAction: BrowserImpersonationDetectionAction,
     CacheKeyHeader: CacheKeyHeader,
     DeleteZoneRequest: DeleteZoneRequest,
     RangeOriginPullParameters: RangeOriginPullParameters,
-    ApplyFreeCertificateResponse: ApplyFreeCertificateResponse,
+    BotManagedRule: BotManagedRule,
     CurrentOriginACL: CurrentOriginACL,
     DescribeIPGroupReferencesResponse: DescribeIPGroupReferencesResponse,
     CreateEdgeKVNamespaceRequest: CreateEdgeKVNamespaceRequest,
@@ -46446,6 +46691,7 @@ module.exports = {
     DescribeZoneSettingResponse: DescribeZoneSettingResponse,
     CreateMultiPathGatewayResponse: CreateMultiPathGatewayResponse,
     DeleteJustInTimeTranscodeTemplatesResponse: DeleteJustInTimeTranscodeTemplatesResponse,
+    SecurityHeadersToOrigin: SecurityHeadersToOrigin,
     DeleteRulesResponse: DeleteRulesResponse,
     ModifyDnsRecordsRequest: ModifyDnsRecordsRequest,
     DescribeLogAnalysisDetailResponse: DescribeLogAnalysisDetailResponse,
@@ -46488,6 +46734,7 @@ module.exports = {
     DescribeWebSecurityTemplateRequest: DescribeWebSecurityTemplateRequest,
     ClientAttestationRule: ClientAttestationRule,
     CustomEndpoint: CustomEndpoint,
+    AccountProtectionSettings: AccountProtectionSettings,
     ModifyOriginACLResponse: ModifyOriginACLResponse,
     VerifyOwnershipRequest: VerifyOwnershipRequest,
     InferenceContainerConfigForModify: InferenceContainerConfigForModify,
@@ -46741,6 +46988,7 @@ module.exports = {
     ImportZoneConfigRequest: ImportZoneConfigRequest,
     IpTableRule: IpTableRule,
     DDosProtectionConfig: DDosProtectionConfig,
+    UserRiskProfile: UserRiskProfile,
     ModifyFunctionRuleRequest: ModifyFunctionRuleRequest,
     DescribeSecurityIPGroupResponse: DescribeSecurityIPGroupResponse,
     IncreasePlanQuotaRequest: IncreasePlanQuotaRequest,
@@ -46849,6 +47097,7 @@ module.exports = {
     SecurityWeightedAction: SecurityWeightedAction,
     ModifyMultiPathGatewayLineResponse: ModifyMultiPathGatewayLineResponse,
     DescribeDefaultCertificatesResponse: DescribeDefaultCertificatesResponse,
+    SemanticAnalysisRules: SemanticAnalysisRules,
     CreateOriginGroupResponse: CreateOriginGroupResponse,
     CreateMultiPathGatewayLineRequest: CreateMultiPathGatewayLineRequest,
     IPGroupReference: IPGroupReference,
